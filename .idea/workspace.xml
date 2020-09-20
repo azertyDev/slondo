@@ -19,13 +19,12 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="123198c1-9c10-42a0-93d9-d72f99b049b4" name="Default Changelist" comment="Next js setup" />
+    <list default="true" id="123198c1-9c10-42a0-93d9-d72f99b049b4" name="Default Changelist" comment="test" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="ChangesViewManager" show_ignored="true" />
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
@@ -50,7 +49,7 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/.." />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="ts.external.directory.path" value="C:\Users\abror\Documents\projects\slondo\node_modules\typescript\lib" />
   </component>
@@ -73,7 +72,7 @@
       <workItem from="1600404005951" duration="1767000" />
       <workItem from="1600406896148" duration="2384000" />
       <workItem from="1600421459240" duration="486000" />
-      <workItem from="1600421947402" duration="53459000" />
+      <workItem from="1600421947402" duration="54066000" />
     </task>
     <task id="LOCAL-00001" summary="setup Next js">
       <created>1600421794729</created>
@@ -110,7 +109,28 @@
       <option name="project" value="LOCAL" />
       <updated>1600600990364</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="test">
+      <created>1600602475330</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1600602475330</updated>
+    </task>
+    <task id="LOCAL-00007" summary="test">
+      <created>1600602581657</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1600602581657</updated>
+    </task>
+    <task id="LOCAL-00008" summary="test">
+      <created>1600602621103</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1600602621103</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -135,7 +155,8 @@
     <MESSAGE value="setup Next js" />
     <MESSAGE value=".idea gitignore" />
     <MESSAGE value="Next js setup" />
-    <option name="LAST_COMMIT_MESSAGE" value="Next js setup" />
+    <MESSAGE value="test" />
+    <option name="LAST_COMMIT_MESSAGE" value="test" />
   </component>
   <component name="WindowStateProjectService">
     <state x="345" y="140" width="814" height="728" key="#Intentions" timestamp="1600586614271">
@@ -146,10 +167,10 @@
       <screen x="0" y="0" width="1504" height="963" />
     </state>
     <state x="528" y="284" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1504.963@0.0.1504.963" timestamp="1600505676979" />
-    <state x="533" y="237" key="FileChooserDialogImpl" timestamp="1600535594918">
+    <state x="533" y="237" key="FileChooserDialogImpl" timestamp="1600610534735">
       <screen x="0" y="0" width="1504" height="963" />
     </state>
-    <state x="533" y="237" key="FileChooserDialogImpl/0.0.1504.963@0.0.1504.963" timestamp="1600535594918" />
+    <state x="533" y="237" key="FileChooserDialogImpl/0.0.1504.963@0.0.1504.963" timestamp="1600610534735" />
     <state x="642" y="350" width="386" height="263" key="MultipleFileMergeDialog" timestamp="1600421843281">
       <screen x="0" y="0" width="1504" height="963" />
     </state>
