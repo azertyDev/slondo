@@ -19,31 +19,8 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="123198c1-9c10-42a0-93d9-d72f99b049b4" name="Default Changelist" comment=".idea gitignore">
-      <change afterPath="$PROJECT_DIR$/.env" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/apollo/client.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/apollo/resolvers.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/apollo/schema.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/apollo/type-defs.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/interfaces/User.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/pages/_app.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/pages/_document.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/pages/api/graphql.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/pages/index.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/server.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/home/Home.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/theme.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    <list default="true" id="123198c1-9c10-42a0-93d9-d72f99b049b4" name="Default Changelist" comment="Next js setup">
       <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/_app.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/api/hello.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/index.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/vercel.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/styles/Home.module.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/styles/globals.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/yarn.lock" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -97,7 +74,7 @@
       <workItem from="1600404005951" duration="1767000" />
       <workItem from="1600406896148" duration="2384000" />
       <workItem from="1600421459240" duration="486000" />
-      <workItem from="1600421947402" duration="51665000" />
+      <workItem from="1600421947402" duration="52236000" />
     </task>
     <task id="LOCAL-00001" summary="setup Next js">
       <created>1600421794729</created>
@@ -113,7 +90,14 @@
       <option name="project" value="LOCAL" />
       <updated>1600422934212</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="Next js setup">
+      <created>1600600429155</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1600600429155</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -137,7 +121,8 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="setup Next js" />
     <MESSAGE value=".idea gitignore" />
-    <option name="LAST_COMMIT_MESSAGE" value=".idea gitignore" />
+    <MESSAGE value="Next js setup" />
+    <option name="LAST_COMMIT_MESSAGE" value="Next js setup" />
   </component>
   <component name="WindowStateProjectService">
     <state x="345" y="140" width="814" height="728" key="#Intentions" timestamp="1600586614271">
