@@ -1,27 +1,22 @@
 import React from 'react'
 import {GetStaticProps} from 'next'
-import {useQuery} from "@apollo/client"
-import {initializeApollo} from '../apollo/client'
-import {Home, query} from '../src/components/home/Home'
+import {Home} from '../src/components/home/Home'
+import {wrapper} from "../src/redux/store";
+import {fetchMainSliderImgs} from "../src/redux/actions/mainSliderActions";
 
 
-const Index = () => {
-    const {data} = useQuery(query);
+const Index = (props) => {
     return (
-        <Home data={data}/>
+        <Home {...props} />
     )
 }
 
-export const getStaticProps: GetStaticProps = async () => {
-    const apolloClient = initializeApollo()
-
-    await apolloClient.query({query})
-
-    return {
-        props: {
-            initialApolloState: apolloClient.cache.extract(),
-        },
-    }
-};
+// export const getStaticProps: GetStaticProps = wrapper.getStaticProps(async ({store}) => {
+//     store.dispatch(await fetchMainSliderImgs());
+//     const {mainSlider} = store.getState();
+//     return {
+//         props: {images: mainSlider.images},
+//     }
+// });
 
 export default Index;

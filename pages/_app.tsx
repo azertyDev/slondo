@@ -1,14 +1,13 @@
-import React from 'react'
+import React, {FC} from 'react'
+import {ThemeProvider, CssBaseline} from '@material-ui/core'
 import Head from 'next/head'
 import {AppProps} from 'next/app'
-import {ThemeProvider, CssBaseline} from '@material-ui/core'
-import {ApolloProvider} from '@apollo/client'
-import {useApollo} from '../apollo/client'
 import theme from '../src/theme'
 
+import {wrapper} from '../src/redux/store'
 
-export default function MyApp({Component, pageProps}: AppProps) {
-
+const MyApp: FC<AppProps> = (props) => {
+    const {Component} = props;
     React.useEffect(() => {
         // Remove the server-side injected CSS.
         const jssStyles = document.querySelector('#jss-server-side');
@@ -17,19 +16,18 @@ export default function MyApp({Component, pageProps}: AppProps) {
         }
     }, []);
 
-    const client = useApollo(pageProps.initialApolloState);
-
     return (
         <>
             <Head>
                 <title>My page</title>
             </Head>
-            <ApolloProvider client={client}>
-                <ThemeProvider theme={theme}>
-                    <CssBaseline/>
-                    <Component {...pageProps} />
-                </ThemeProvider>
-            </ApolloProvider>
+            <ThemeProvider theme={theme}>
+                <CssBaseline/>
+                <Component {...props.pageProps} />
+            </ThemeProvider>
         </>
     );
 }
+
+//withRedux wrapper that passes the store to the App Component
+export default wrapper.withRedux(MyApp)

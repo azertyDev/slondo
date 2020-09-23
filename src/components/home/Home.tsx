@@ -1,27 +1,13 @@
 import React from "react"
-import {gql} from "@apollo/client"
-import {Typography} from "@material-ui/core"
 import {useStyle} from './useStyle'
+import {Typography} from "@material-ui/core";
 
 
-export const Home = ({data}) => {
-    const {name} = data.viewer;
-
+export const Home = () => {
     const classes = useStyle();
-
     return (
         <div className={classes.root}>
-            <Typography>{name}</Typography>
+            <Typography>Home page</Typography>
         </div>
     )
 };
-
-export const query = gql`
-query ViewerQuery {
-    viewer {
-      id
-      name
-      status
-    }
-  }
-`;
