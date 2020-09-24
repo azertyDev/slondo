@@ -1,4 +1,3 @@
-import React from 'react'
 import {GetStaticProps} from 'next'
 import {Home} from '../src/components/home/Home'
 import {wrapper} from "../src/redux/store";

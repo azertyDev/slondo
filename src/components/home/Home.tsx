@@ -1,13 +1,18 @@
-import React from "react"
-import {useStyle} from './useStyle'
-import {Typography} from "@material-ui/core";
-
+import React from 'react'
+import {Header} from './header/Header'
+import MainSlider from './header/sliders/mainSlider/MainSlider'
+import CategorySlider from './header/sliders/categorySlider/CategorySlider'
+import {MainContent} from './mainContent/MainContent'
+import {Footer} from './footer/Footer'
 
 export const Home = () => {
-    const classes = useStyle();
     return (
-        <div className={classes.root}>
-            <Typography>Home page</Typography>
-        </div>
+        <>
+            <Header/>
+            <MainSlider/>
+            <CategorySlider/>
+            <MainContent/>
+            <Footer/>
+        </>
     )
-};
+}

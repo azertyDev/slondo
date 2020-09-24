@@ -5,6 +5,9 @@ import {AppProps} from 'next/app'
 import theme from '../src/theme'
 
 import {wrapper} from '../src/redux/store'
+// Import css files
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 
 const MyApp: FC<AppProps> = (props) => {
     const {Component} = props;
