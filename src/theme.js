@@ -47,12 +47,23 @@ const theme = createMuiTheme({
     overrides: {
         MuiCssBaseline: {
             '@global': {
+                'backgroundColor': '#fafafa',
                 '@font-face': [calibri],
                 ':focus': {
                     outline: 0
                 }
             },
         },
+        MuiPaper: {
+            root: {
+                backgroundColor: '#fafafa'
+            }
+        },
+        MuiOutlinedInput: {
+            root: {
+                borderRadius: '6px'
+            }
+        }
     }
 });
 
