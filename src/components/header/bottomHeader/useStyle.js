@@ -40,36 +40,6 @@ export const useStyles = makeStyles((theme) => ({
         '& span.MuiButton-label': {
             textTransform: 'none',
         },
-        '& div.search-block > div form': {
-            position: 'relative',
-            display: 'flex',
-            width: '100%',
-        },
-        '& img.search-icon': {
-            position: 'absolute',
-            height: '20px',
-            top: 'calc(50% - 10px)',
-            left: '10px'
-        },
-        '& input.search-input': {
-            padding: '8px 55px 8px 40px',
-            width: '100%',
-            borderRadius: '7px',
-            border: '1px solid #ccc',
-            fontSize: '0.87rem',
-        },
-        '& button.search-button': {
-            width: '70px',
-            marginLeft: '-70px',
-            color: '#000',
-            borderBottomRightRadius: '7px',
-            borderTopRightRadius: '7px',
-            borderBottomLeftRadius: '0',
-            borderTopLeftRadius: '0',
-            borderStyle: 'none',
-            backgroundColor: '#97aaa5',
-            lineHeight: '1.65',
-        },
         '& div.select-menu > div': {
             width: '100%',
             '& div.MuiSelect-selectMenu': {
@@ -85,7 +55,7 @@ export const useStyles = makeStyles((theme) => ({
         },
         '& button.bottom-sign-button': {
             color: '#000',
-            backgroundColor: '#fafafa',
+            backgroundColor: '#E9E9E9',
             border: '1px solid #C0C0C0',
             '& > img': {
                 width: '20px',
@@ -100,8 +70,8 @@ export const useStyles = makeStyles((theme) => ({
                     height: '42px',
                 },
                 [theme.breakpoints.up('lg')]: {
-                    width: '135px',
-                    height: '45px',
+                    width: '140px',
+                    height: '47px',
                 }
             }
         },
@@ -116,16 +86,7 @@ export const useStyles = makeStyles((theme) => ({
             }
         },
         '& div.select-local': {
-            position: 'relative',
-            display: 'flex',
-            '& > img': {
-                position: 'absolute',
-                top: 'calc(50% - 16px)',
-                left: '5px',
-                width: '33px',
-                height: '33px',
-            },
-            '& > div': {
+            '& > form': {
                 width: '100%',
                 '& > div': {
                     padding: '8px 36px',

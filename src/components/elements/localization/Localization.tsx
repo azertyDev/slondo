@@ -1,5 +1,5 @@
 import React from "react";
-import {useStyles} from './useStyle'
+import {useStyles} from './useStyles'
 import {Typography} from "@material-ui/core";
 
 

@@ -43,17 +43,21 @@ export const useStyles = makeStyles((theme) => ({
         },
         '& div.multiple-content > a > img': {
             textDecoration: 'none',
-            height: '15px',
-            marginRight: '10px',
+            height: '20px',
+            marginRight: '10px'
         },
         // ------------> adaptive <--------------- //
         '& div.top-header-logo > a > img': {
             height: '50px',
-            width: '140px'
+            width: '145px'
         },
-        '& div.avatar-icon > img': {
-            height: '35px',
-            width: '35px'
+        '& div.burger-menu': {
+            width: '35px',
+            '& > div': {
+                height: '4px',
+                backgroundColor: '#675EAA',
+                margin: '4px 0'
+            }
         }
     }
 }))

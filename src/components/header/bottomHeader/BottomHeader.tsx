@@ -1,15 +1,14 @@
 import React, {useState} from "react"
-import {AppBar, Container, Grid, Hidden, MenuItem, Select, Typography} from "@material-ui/core";
-import {ButtonComponent} from "../../elements/button/Button";
+import {AppBar, Container, Grid, Hidden, MenuItem, Select, Typography} from "@material-ui/core"
+import {ButtonComponent} from "../../elements/button/Button"
+import {SearchForm} from "../../elements/search_form/SearchForm"
 import {
     Logo,
     CategoryIcon,
-    SearchIcon,
     SignIcon,
     AddIcon,
-    PlIcon
-} from '../../elements/icons/index'
-import {withScrollThreshold} from "../../hoc/withScrollThreshold";
+} from '../../elements/icons'
+import {withScrollThreshold} from "../../hoc/withScrollThreshold"
 import {useStyles} from "./useStyle"
 
 
@@ -53,24 +52,7 @@ const BottomHeader = (props) => {
                                 className="search-block"
                             >
                                 <Grid item md={9}>
-                                    <div>
-                                        <form>
-                                            <img
-                                                src={SearchIcon}
-                                                className="search-icon"
-                                            />
-                                            <input
-                                                type="text"
-                                                className="search-input"
-                                                placeholder="Поиск по объявлениям"
-                                            />
-                                            <ButtonComponent className="search-button">
-                                                <Typography variant="subtitle2">
-                                                    Найти
-                                                </Typography>
-                                            </ButtonComponent>
-                                        </form>
-                                    </div>
+                                    <SearchForm/>
                                 </Grid>
                                 <Grid className='select-menu' item md={3}>
                                     <Select
@@ -111,10 +93,7 @@ const BottomHeader = (props) => {
                             <Grid item container alignItems="center" xs={1}>
                                 <ButtonComponent className='bottom-sign-button'>
                                     <Typography variant="subtitle2">Войти</Typography>
-                                    <img
-                                        src={SignIcon}
-                                        alt="Sign in"
-                                    />
+                                    <img src={SignIcon} alt="Sign in"/>
                                 </ButtonComponent>
                             </Grid>
                         </Grid>
@@ -124,26 +103,7 @@ const BottomHeader = (props) => {
             {/*      Adaptive       */}
             <Hidden mdUp={true}>
                 <div className='select-local'>
-                    <img src={PlIcon} alt="location"/>
-                    <Select
-                        variant={'outlined'}
-                        value={adType}
-                        onChange={handleChange}
-                        displayEmpty
-                    >
-                        <MenuItem value="">
-                            <Typography variant='subtitle2'>г. Ташкент, Мирзо-Улугбекский р_н</Typography>
-                        </MenuItem>
-                        <MenuItem value={10}>
-                            <Typography variant='subtitle2'>test</Typography>
-                        </MenuItem>
-                        <MenuItem value={20}>
-                            <Typography variant='subtitle2'>test2</Typography>
-                        </MenuItem>
-                        <MenuItem value={30}>
-                            <Typography variant='subtitle2'>test3</Typography>
-                        </MenuItem>
-                    </Select>
+                    <SearchForm/>
                 </div>
             </Hidden>
         </div>
