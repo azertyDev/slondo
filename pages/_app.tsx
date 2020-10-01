@@ -3,8 +3,9 @@ import {ThemeProvider, CssBaseline} from '@material-ui/core'
 import Head from 'next/head'
 import {AppProps} from 'next/app'
 import theme from '../src/theme'
-
 import {wrapper} from '../src/redux/store'
+import {Header} from '../src/components/header/Header'
+
 // Import css files
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
@@ -26,6 +27,7 @@ const MyApp: FC<AppProps> = (props) => {
             </Head>
             <ThemeProvider theme={theme}>
                 <CssBaseline/>
+                <Header/>
                 <Component {...props.pageProps} />
             </ThemeProvider>
         </>

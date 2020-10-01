@@ -2,7 +2,6 @@ import { makeStyles } from '@material-ui/core/styles'
 
 export const useStyle = makeStyles((theme) => ({
     root: {
-        paddingBottom: '100px',
         '& input.MuiOutlinedInput-input, div.MuiOutlinedInput-input': {
             padding: '10px 15px',
         },
@@ -58,7 +57,7 @@ export const useStyle = makeStyles((theme) => ({
         display: 'flex',
         alignItems: 'center',
         flexFlow: 'row',
-        justifyContent: 'space-between',
+        // justifyContent: 'space-between',
         '& a': {
             textDecoration: 'none',
         },
@@ -79,6 +78,32 @@ export const useStyle = makeStyles((theme) => ({
         },
         '& span.safe-auction-rules': {
             color: '#9a64d0;',
+        },
+    },
+    description: {
+        maxWidth: '100%',
+        minWidth: '100%',
+        maxHeight: '230px',
+        minHeight: '230px',
+        padding: '10px',
+    },
+    phoneButton: {
+        textTransform: 'initial',
+        color: '#9b66d2',
+        '& button.MuiButton-text': {
+            padding: '0',
+        },
+    },
+    nextButtonBlock: {
+        marginTop: '20px',
+    },
+    nextButton: {
+        width: '250px',
+        [theme.breakpoints.down('md')]: {
+            width: '200px',
+        },
+        [theme.breakpoints.down('sm')]: {
+            width: '150px',
         },
     },
 }))

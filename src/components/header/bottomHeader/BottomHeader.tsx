@@ -1,0 +1,153 @@
+import React, {useState} from "react"
+import {AppBar, Container, Grid, Hidden, MenuItem, Select, Typography} from "@material-ui/core";
+import {ButtonComponent} from "../../elements/button/Button";
+import {
+    Logo,
+    CategoryIcon,
+    SearchIcon,
+    SignIcon,
+    AddIcon,
+    PlIcon
+} from '../../elements/icons/index'
+import {withScrollThreshold} from "../../hoc/withScrollThreshold";
+import {useStyles} from "./useStyle"
+
+
+const BottomHeader = (props) => {
+    const {isScrollBreak} = props;
+    const [adType, setAdType] = useState('');
+    const handleChange = (e) => {
+        setAdType(e.target.value);
+    };
+
+    const classes = useStyles(props);
+
+    return (
+        <div className={classes.root}>
+            <Hidden smDown={true}>
+                <AppBar position={isScrollBreak ? "fixed" : "absolute"} color={"inherit"} elevation={0}>
+                    <Container maxWidth='lg'>
+                        <Grid container justify="space-between" alignItems="center" spacing={1}>
+                            <Grid container item xs={3} alignItems="center">
+                                <Grid container item md={7} lg={6} className="bottom-logo">
+                                    <a href="#">
+                                        <img src={Logo} alt="Slondo logo"/>
+                                    </a>
+                                </Grid>
+                                <Grid item container md={5} lg={6} justify="center" className="category-menu">
+                                    <ButtonComponent>
+                                        <Typography variant="subtitle2">Категории</Typography>
+                                        <img
+                                            src={CategoryIcon}
+                                            alt="Category icon"
+                                        />
+                                    </ButtonComponent>
+                                </Grid>
+                            </Grid>
+                            <Grid
+                                item
+                                container
+                                md={6}
+                                spacing={1}
+                                alignItems="center"
+                                className="search-block"
+                            >
+                                <Grid item md={9}>
+                                    <div>
+                                        <form>
+                                            <img
+                                                src={SearchIcon}
+                                                className="search-icon"
+                                            />
+                                            <input
+                                                type="text"
+                                                className="search-input"
+                                                placeholder="Поиск по объявлениям"
+                                            />
+                                            <ButtonComponent className="search-button">
+                                                <Typography variant="subtitle2">
+                                                    Найти
+                                                </Typography>
+                                            </ButtonComponent>
+                                        </form>
+                                    </div>
+                                </Grid>
+                                <Grid className='select-menu' item md={3}>
+                                    <Select
+                                        variant={'outlined'}
+                                        value={adType}
+                                        onChange={handleChange}
+                                        displayEmpty
+                                    >
+                                        <MenuItem value="">
+                                            <Typography variant='subtitle2'>Тип объявления</Typography>
+                                        </MenuItem>
+                                        <MenuItem value={10}>
+                                            <Typography variant='subtitle2'>test</Typography>
+                                        </MenuItem>
+                                        <MenuItem value={20}>
+                                            <Typography variant='subtitle2'>test2</Typography>
+                                        </MenuItem>
+                                        <MenuItem value={30}>
+                                            <Typography variant='subtitle2'>test3</Typography>
+                                        </MenuItem>
+                                    </Select>
+                                </Grid>
+                            </Grid>
+                            <Grid item md={2} className='create-ad'>
+                                <ButtonComponent>
+                                    <Typography variant="subtitle2">
+                                        Создать объявление
+                                    </Typography>
+                                    <img
+                                        src={AddIcon}
+                                        style={{
+                                            marginLeft: '10px',
+                                            height: '20px',
+                                        }}
+                                    />
+                                </ButtonComponent>
+                            </Grid>
+                            <Grid item container alignItems="center" xs={1}>
+                                <ButtonComponent className='bottom-sign-button'>
+                                    <Typography variant="subtitle2">Войти</Typography>
+                                    <img
+                                        src={SignIcon}
+                                        alt="Sign in"
+                                    />
+                                </ButtonComponent>
+                            </Grid>
+                        </Grid>
+                    </Container>
+                </AppBar>
+            </Hidden>
+            {/*      Adaptive       */}
+            <Hidden mdUp={true}>
+                <div className='select-local'>
+                    <img src={PlIcon} alt="location"/>
+                    <Select
+                        variant={'outlined'}
+                        value={adType}
+                        onChange={handleChange}
+                        displayEmpty
+                    >
+                        <MenuItem value="">
+                            <Typography variant='subtitle2'>г. Ташкент, Мирзо-Улугбекский р_н</Typography>
+                        </MenuItem>
+                        <MenuItem value={10}>
+                            <Typography variant='subtitle2'>test</Typography>
+                        </MenuItem>
+                        <MenuItem value={20}>
+                            <Typography variant='subtitle2'>test2</Typography>
+                        </MenuItem>
+                        <MenuItem value={30}>
+                            <Typography variant='subtitle2'>test3</Typography>
+                        </MenuItem>
+                    </Select>
+                </div>
+            </Hidden>
+        </div>
+    )
+};
+
+export default withScrollThreshold(BottomHeader);

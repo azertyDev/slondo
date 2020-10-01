@@ -1,13 +1,11 @@
-import {makeStyles} from '@material-ui/core/styles'
+import { makeStyles } from '@material-ui/core/styles'
 
 export const useStyles = makeStyles(() => ({
     root: {
-        background: '#ccc',
-        marginTop: '15px',
+        background: '#999',
         borderRadius: '7px',
-        marginLeft: '15px',
         '&:firstChild': {
-            marginTop: 0
-        }
-    }
+            marginTop: 0,
+        },
+    },
 }))
