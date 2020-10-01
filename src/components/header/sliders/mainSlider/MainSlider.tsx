@@ -1,15 +1,17 @@
 import React, {useRef} from 'react'
+import {Container, IconButton} from '@material-ui/core'
 import SlickSlider from 'react-slick'
-import {IconButton} from '@material-ui/core'
-import {ArrowLeft, ArrowRight} from '@material-ui/icons'
-import {useStyles} from './useStyle'
 import {settings} from './sliderSettings'
+import {RightArrow} from '../../../elements/icons'
+import {useStyles} from './useStyle'
 
 
-const MainSlider = () => {
+export const MainSlider = () => {
     const slider = useRef({
-        slickNext() {},
-        slickPrev() {}
+        slickNext() {
+        },
+        slickPrev() {
+        }
     });
 
     const next = () => slider.current.slickNext();
@@ -48,22 +50,16 @@ const MainSlider = () => {
                     <img src={`img/slider-img.jpg`}/>
                 </div>
             </SlickSlider>
-            <IconButton
-                size="small"
-                onClick={previous}
-                className="left-button"
-            >
-                <ArrowLeft/>
-            </IconButton>
-            <IconButton
-                size="small"
-                onClick={next}
-                className="right-button"
-            >
-                <ArrowRight/>
-            </IconButton>
+            <div className='slider-arrows-container'>
+                <Container maxWidth='lg'>
+                    <IconButton className='left-arrow' onClick={previous}>
+                        <img src={RightArrow}/>
+                    </IconButton>
+                    <IconButton className='right-arrow' onClick={next}>
+                        <img src={RightArrow}/>
+                    </IconButton>
+                </Container>
+            </div>
         </div>
     )
-}
-
-export default MainSlider;
+};

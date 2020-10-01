@@ -26,6 +26,8 @@ const UslugiOptom = `icons/uslugi_optim_fin.svg`
 const OtdixOptom = `icons/otdih_optim_fin.svg`
 const DownArrowIcon = `icons/down-arrow.svg`
 const Avatar = `icons/avatar.svg`
+const FilterIcon = `icons/filter_icon.svg`
+const RightArrow = `icons/right_arrow.svg`
 
 
 export {
@@ -57,4 +59,6 @@ export {
     UslugiOptom,
     OtdixOptom,
     DownArrowIcon,
+    FilterIcon,
+    RightArrow
 }

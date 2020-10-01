@@ -1,7 +1,6 @@
-import React from "react"
-import {Grid, Hidden, Typography, AppBar, Toolbar} from "@material-ui/core"
+import React, {useState} from "react"
+import {Grid, Hidden, Typography, AppBar, Toolbar, IconButton} from "@material-ui/core"
 import {
-    Avatar,
     Logo,
     Facebook,
     Instagram,
@@ -13,13 +12,14 @@ import {
     StoreIcon,
     BusinessIcon,
     PlIcon
-} from '../../elements/icons/index'
+} from '../../elements/icons'
+import {Localization} from "../../elements/localization/Localization"
+import {LeftDrawer} from "./drawer/Drawer";
 import {useStyles} from "./useStyle"
-import {Localization} from "../../elements/localization/Localization";
 
 
 export const TopHeader = () => {
-
+    const [isOpen, setIsOpen] = useState(false);
     const classes = useStyles();
     return (
         <div className={classes.root}>
@@ -110,22 +110,26 @@ export const TopHeader = () => {
                             alignItems="center"
                         >
                             <Grid>
-                                <Localization/>
+                                <IconButton size='small' onClick={() => setIsOpen(true)}>
+                                    <div className='burger-menu'>
+                                        <div/>
+                                        <div/>
+                                        <div/>
+                                    </div>
+                                </IconButton>
                             </Grid>
                             <Grid className='top-header-logo'>
                                 <a href="#">
                                     <img src={Logo} alt="Slondo logo"/>
                                 </a>
                             </Grid>
-                            <Grid className='avatar-icon'>
-                                <img
-                                    src={Avatar}
-                                    alt="Sign in"
-                                />
+                            <Grid>
+                                <Localization/>
                             </Grid>
                         </Grid>
                     </Toolbar>
                 </AppBar>
+                <LeftDrawer isOpen={isOpen} setIsOpen={setIsOpen}/>
             </Hidden>
         </div>
     )
