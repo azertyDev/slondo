@@ -6,15 +6,7 @@ export const useStyles = makeStyles((theme) => ({
         '& div.location': {
             display: 'flex',
             alignItems: 'center',
-            fontSize: '14px',
-            '& h6': {
-                [theme.breakpoints.down('lg')]: {
-                    fontSize: '.85rem',
-                },
-                [theme.breakpoints.up('lg')]: {
-                    fontSize: '1rem',
-                }
-            }
+            fontSize: '14px'
         },
         '& img.pl-icon': {
             width: '32px',
@@ -39,7 +31,20 @@ export const useStyles = makeStyles((theme) => ({
                 textDecoration: 'none',
                 alignItems: 'center',
                 color: '#000',
-            }
+                '& > img': {
+                    [theme.breakpoints.down('lg')]: {
+                        width: '15px'
+                    },
+                }
+            },
+            '& h6': {
+                [theme.breakpoints.down('lg')]: {
+                    fontSize: '.85rem',
+                },
+                [theme.breakpoints.up('lg')]: {
+                    fontSize: '1rem',
+                }
+            },
         },
         '& div.multiple-content > a > img': {
             textDecoration: 'none',

@@ -2,7 +2,6 @@ import React from 'react'
 import {MainSlider} from '../header/sliders/mainSlider/MainSlider'
 import {CategorySlider} from '../header/sliders/categorySlider/CategorySlider'
 import {MainContent} from './mainContent/MainContent'
-import {Footer} from '../footer/Footer'
 import {Container} from "@material-ui/core";
 
 export const Home = () => {
@@ -13,7 +12,6 @@ export const Home = () => {
                 <CategorySlider/>
                 <MainContent/>
             </Container>
-            <Footer/>
         </>
     )
 }

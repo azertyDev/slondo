@@ -1,9 +1,10 @@
-import React from "react";
-import {Typography} from "@material-ui/core";
+import React from 'react'
+import { Typography } from '@material-ui/core'
 
+// Styles
+import { useStyles } from './useStyle'
 
 export const LoginPage = () => {
-  return (
-      <Typography>Login page</Typography>
-  )
-};
+    const classes = useStyles()
+    return <Typography>Login page</Typography>
+}

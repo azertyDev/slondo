@@ -1,5 +1,12 @@
-import React, {useState} from "react"
-import {Grid, Hidden, Typography, AppBar, Toolbar, IconButton} from "@material-ui/core"
+import React, { useState } from 'react'
+import {
+    Grid,
+    Hidden,
+    Typography,
+    AppBar,
+    Toolbar,
+    IconButton,
+} from '@material-ui/core'
 import {
     Logo,
     Facebook,
@@ -11,83 +18,92 @@ import {
     HelpIcon,
     StoreIcon,
     BusinessIcon,
-    PlIcon
+    PlIcon,
 } from '../../elements/icons'
-import {Localization} from "../../elements/localization/Localization"
-import {LeftDrawer} from "./drawer/Drawer";
-import {useStyles} from "./useStyle"
-
+import { Localization } from '../../elements/localization/Localization'
+import { LeftDrawer } from './drawer/Drawer'
+import { useStyles } from './useStyle'
 
 export const TopHeader = () => {
-    const [isOpen, setIsOpen] = useState(false);
-    const classes = useStyles();
+    const [isOpen, setIsOpen] = useState(false)
+    const classes = useStyles()
     return (
         <div className={classes.root}>
-            <Grid
-                container
-                justify='space-between'
-                alignItems="center"
-            >
+            <Grid container justify="space-between" alignItems="center">
                 <Hidden smDown={true}>
-                    <Grid item md={3}>
+                    <Grid item md={4}>
                         <div className="location">
                             <Typography variant="subtitle1">
                                 Местоположение:
                             </Typography>
-                            <img src={PlIcon} className="pl-icon"/>
-                            <Typography variant="subtitle1" className="select-region">
+                            <img src={PlIcon} className="pl-icon" />
+                            <Typography
+                                variant="subtitle1"
+                                className="select-region"
+                            >
                                 Выберите регион
                             </Typography>
                         </div>
                     </Grid>
-                    <Grid item container justify='center' alignItems='center' md={4} className="social-icons">
+                    <Grid
+                        item
+                        container
+                        justify="center"
+                        alignItems="center"
+                        md={4}
+                        className="social-icons"
+                    >
                         <a href="#">
-                            <img src={Facebook}/>
+                            <img src={Facebook} />
                         </a>
                         <a href="#">
-                            <img src={Instagram}/>
+                            <img src={Instagram} />
                         </a>
                         <a href="#">
-                            <img src={Youtube}/>
+                            <img src={Youtube} />
                         </a>
                         <a href="#">
-                            <img src={Twitter}/>
+                            <img src={Twitter} />
                         </a>
                         <a href="#">
-                            <img src={Whatsapp}/>
+                            <img src={Whatsapp} />
                         </a>
                         <a href="#">
-                            <img src={Telegram}/>
+                            <img src={Telegram} />
                         </a>
                     </Grid>
                     <Grid
                         item
                         container
-                        justify='space-between'
+                        justify="space-between"
                         alignItems="center"
                         className="multiple"
-                        md={5}
+                        md={4}
                     >
                         <Grid item>
                             <div className="multiple-content">
                                 <a href="#">
-                                    <img src={HelpIcon}/>
-                                    <Typography variant="subtitle1">Помощь</Typography>
+                                    <img src={HelpIcon} />
+                                    <Typography variant="subtitle1">
+                                        Помощь
+                                    </Typography>
                                 </a>
                             </div>
                         </Grid>
                         <Grid item>
                             <div className="multiple-content">
                                 <a href="#">
-                                    <img src={StoreIcon}/>
-                                    <Typography variant="subtitle1">Магазины</Typography>
+                                    <img src={StoreIcon} />
+                                    <Typography variant="subtitle1">
+                                        Магазины
+                                    </Typography>
                                 </a>
                             </div>
                         </Grid>
                         <Grid item>
                             <div className="multiple-content">
                                 <a href="#">
-                                    <img src={BusinessIcon}/>
+                                    <img src={BusinessIcon} />
                                     <Typography variant="subtitle1">
                                         Для бизнеса
                                     </Typography>
@@ -95,42 +111,45 @@ export const TopHeader = () => {
                             </div>
                         </Grid>
                         <Grid item>
-                            <Localization/>
+                            <Localization />
                         </Grid>
                     </Grid>
                 </Hidden>
             </Grid>
             {/*    Adaptive   */}
             <Hidden mdUp={true}>
-                <AppBar position={"fixed"} color={"inherit"} elevation={0}>
+                <AppBar position={'fixed'} color={'inherit'} elevation={0}>
                     <Toolbar>
                         <Grid
                             container
-                            justify='space-between'
+                            justify="space-between"
                             alignItems="center"
                         >
                             <Grid>
-                                <IconButton size='small' onClick={() => setIsOpen(true)}>
-                                    <div className='burger-menu'>
-                                        <div/>
-                                        <div/>
-                                        <div/>
+                                <IconButton
+                                    size="small"
+                                    onClick={() => setIsOpen(true)}
+                                >
+                                    <div className="burger-menu">
+                                        <div />
+                                        <div />
+                                        <div />
                                     </div>
                                 </IconButton>
                             </Grid>
-                            <Grid className='top-header-logo'>
+                            <Grid className="top-header-logo">
                                 <a href="#">
-                                    <img src={Logo} alt="Slondo logo"/>
+                                    <img src={Logo} alt="Slondo logo" />
                                 </a>
                             </Grid>
                             <Grid>
-                                <Localization/>
+                                <Localization />
                             </Grid>
                         </Grid>
                     </Toolbar>
                 </AppBar>
-                <LeftDrawer isOpen={isOpen} setIsOpen={setIsOpen}/>
+                <LeftDrawer isOpen={isOpen} setIsOpen={setIsOpen} />
             </Hidden>
         </div>
     )
-};
+}
