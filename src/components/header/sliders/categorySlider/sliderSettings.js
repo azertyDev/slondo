@@ -28,25 +28,25 @@ export const settings = {
             }
         },
         {
-            breakpoint: 1080,
+            breakpoint: 1000,
             settings: {
                 slidesToShow: 5,
             }
         },
         {
-            breakpoint: 850,
+            breakpoint: 800,
             settings: {
                 slidesToShow: 4,
             }
         },
         {
-            breakpoint: 700,
+            breakpoint: 650,
             settings: {
                 slidesToShow: 3,
             }
         },
         {
-            breakpoint: 520,
+            breakpoint: 450,
             settings: {
                 slidesToShow: 2,
             }

@@ -2,7 +2,6 @@ import {makeStyles} from "@material-ui/core/styles";
 
 export const useStyles = makeStyles((theme) => ({
     root: {
-        marginTop: '30px',
         '& h4.MuiTypography-h4': {
             [theme.breakpoints.down('sm')]: {
                 fontSize: '1.83rem'
@@ -10,6 +9,7 @@ export const useStyles = makeStyles((theme) => ({
         },
         '& div.category-slider': {
             position: 'relative',
+            marginTop: '10px',
             '& > div.slick-slider': {
                 '& > div.slick-prev, & > div.slick-next': {
                     width: '40px',
@@ -30,27 +30,18 @@ export const useStyles = makeStyles((theme) => ({
                 display: 'none'
             }
         },
-        '& div.slick-slide div a': {
-            textDecoration: 'none',
-            color: '#000',
-            '& > img': {
-                margin: 'auto'
-            },
-            '& > p': {
-                textAlign: 'center'
-            }
-        },
-        '& div.slider-arrows-container': {
-            position: 'absolute',
-            top: 0,
-            display: 'flex',
-            alignItems: 'center',
-            width: '100%',
-            height: '100%',
-            '& > div.arrows-wrapper': {
-                display: 'flex',
-                justifyContent: 'space-between',
-                width: '100%'
+        '& div.slick-slide div': {
+            width: '140px',
+            margin: 'auto',
+            '& > a': {
+                color: '#000',
+                textDecoration: 'none',
+                '& > img': {
+                    width: '140px',
+                },
+                '& > p': {
+                    textAlign: 'center'
+                }
             }
         }
     }

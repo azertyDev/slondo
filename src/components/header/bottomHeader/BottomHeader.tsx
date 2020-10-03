@@ -23,7 +23,7 @@ const BottomHeader = (props) => {
 
     return (
         <div className={classes.root}>
-            <Hidden smDown={true}>
+            <Hidden smDown>
                 <AppBar position={isScrollBreak ? "fixed" : "absolute"} color={"inherit"} elevation={0}>
                     <Container maxWidth='lg'>
                         <Grid container justify="space-between" alignItems="center" spacing={1}>
@@ -101,7 +101,7 @@ const BottomHeader = (props) => {
                 </AppBar>
             </Hidden>
             {/*      Adaptive       */}
-            <Hidden mdUp={true}>
+            <Hidden mdUp>
                 <div className='select-local'>
                     <SearchForm/>
                 </div>

@@ -8,10 +8,8 @@ import {useStyles} from './useStyles'
 
 export const MainSlider = () => {
     const slider = useRef({
-        slickNext() {
-        },
-        slickPrev() {
-        }
+        slickNext() {},
+        slickPrev() {}
     });
 
     const next = () => slider.current.slickNext();

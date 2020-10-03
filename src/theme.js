@@ -1,5 +1,5 @@
-import { createMuiTheme } from '@material-ui/core/styles'
-import { SERVER_URL } from './constants'
+import {createMuiTheme} from '@material-ui/core/styles'
+import {SERVER_URL} from './constants'
 
 const calibri = {
     fontFamily: 'Calibri',
@@ -14,21 +14,17 @@ const calibri = {
 }
 
 const colors = {
-    pantone521: '#9773af',
-    pantone663: '#e4e1e6',
-    pantoneCoolGray: '#979799',
-    pantoneBlack: '#101112',
-    pantone7447: '#5a4974',
-    pantone2975: '#a3cfe6',
-    pantone486: '#cf7e79',
-    pantone409: '#817874',
-}
+    main: '#9773af',
+    white: '#fafafa',
+    adBgColor: '#88CAEC',
+    lotBgColor: '#AD66D5'
+};
 
 // Create a theme instance.
 const theme = createMuiTheme({
     palette: {
         primary: {
-            main: colors.pantone521,
+            main: colors.main
         },
     },
     breakpoints: {
@@ -49,7 +45,7 @@ const theme = createMuiTheme({
     overrides: {
         MuiCssBaseline: {
             '@global': {
-                backgroundColor: '#fafafa',
+                backgroundColor: colors.white,
                 '@font-face': [calibri],
                 ':focus': {
                     outline: 0,
@@ -58,7 +54,7 @@ const theme = createMuiTheme({
         },
         MuiPaper: {
             root: {
-                backgroundColor: '#fafafa',
+                backgroundColor: colors.white,
             },
         },
         MuiOutlinedInput: {

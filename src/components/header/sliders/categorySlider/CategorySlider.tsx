@@ -21,31 +21,35 @@ export const CategorySlider = () => {
                     </a>
                     <a href="#">
                         <img src={CarIcon}/>
-                        <Typography>Легковые автомобили</Typography>
+                        <Typography>Электроника</Typography>
                     </a>
                     <a href="#">
                         <img src={CarIcon}/>
-                        <Typography>Легковые автомобили</Typography>
+                        <Typography>Красота и здоровье</Typography>
                     </a>
                     <a href="#">
                         <img src={CarIcon}/>
-                        <Typography>Легковые автомобили</Typography>
+                        <Typography>Все для дома</Typography>
                     </a>
                     <a href="#">
                         <img src={CarIcon}/>
-                        <Typography>Легковые автомобили</Typography>
+                        <Typography>Телефоны и планшеты</Typography>
                     </a>
                     <a href="#">
                         <img src={CarIcon}/>
-                        <Typography>Легковые автомобили</Typography>
+                        <Typography>Компьютерная техника</Typography>
                     </a>
                     <a href="#">
                         <img src={CarIcon}/>
-                        <Typography>Легковые автомобили</Typography>
+                        <Typography>Женский гардероб</Typography>
                     </a>
                     <a href="#">
                         <img src={CarIcon}/>
-                        <Typography>Легковые автомобили</Typography>
+                        <Typography>Услуги</Typography>
+                    </a>
+                    <a href="#">
+                        <img src={CarIcon}/>
+                        <Typography>Отдых и спорт</Typography>
                     </a>
                 </SlickSlider>
             </div>

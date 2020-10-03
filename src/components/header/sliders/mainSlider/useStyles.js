@@ -2,7 +2,6 @@ import {makeStyles} from '@material-ui/core/styles'
 
 export const useStyles = makeStyles(() => ({
     root: {
-        marginTop: '20px',
         position: 'relative',
         '& div.slick-slider': {
             zIndex: 10,

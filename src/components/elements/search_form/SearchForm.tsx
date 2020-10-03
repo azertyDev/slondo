@@ -19,14 +19,14 @@ export const SearchForm: FunctionComponent = () => {
                 className="search-input"
                 placeholder="Что будем искать?"
             />
-            <Hidden smDown={true}>
+            <Hidden smDown>
                 <ButtonComponent className="search-button">
                     <Typography variant="subtitle2">
                         Найти
                     </Typography>
                 </ButtonComponent>
             </Hidden>
-            <Hidden mdUp={true}>
+            <Hidden mdUp>
                 <img
                     src={FilterIcon}
                     alt="filter icon"

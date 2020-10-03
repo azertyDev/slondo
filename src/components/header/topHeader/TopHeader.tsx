@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, {useState} from 'react'
 import {
     Grid,
     Hidden,
@@ -20,9 +20,9 @@ import {
     BusinessIcon,
     PlIcon,
 } from '../../elements/icons'
-import { Localization } from '../../elements/localization/Localization'
-import { LeftDrawer } from './drawer/Drawer'
-import { useStyles } from './useStyle'
+import {Localization} from '../../elements/localization/Localization'
+import {LeftDrawer} from './drawer/Drawer'
+import {useStyles} from './useStyle'
 
 export const TopHeader = () => {
     const [isOpen, setIsOpen] = useState(false)
@@ -30,13 +30,13 @@ export const TopHeader = () => {
     return (
         <div className={classes.root}>
             <Grid container justify="space-between" alignItems="center">
-                <Hidden smDown={true}>
+                <Hidden smDown>
                     <Grid item md={4}>
                         <div className="location">
                             <Typography variant="subtitle1">
                                 Местоположение:
                             </Typography>
-                            <img src={PlIcon} className="pl-icon" />
+                            <img src={PlIcon} className="pl-icon"/>
                             <Typography
                                 variant="subtitle1"
                                 className="select-region"
@@ -54,22 +54,22 @@ export const TopHeader = () => {
                         className="social-icons"
                     >
                         <a href="#">
-                            <img src={Facebook} />
+                            <img src={Facebook}/>
                         </a>
                         <a href="#">
-                            <img src={Instagram} />
+                            <img src={Instagram}/>
                         </a>
                         <a href="#">
-                            <img src={Youtube} />
+                            <img src={Youtube}/>
                         </a>
                         <a href="#">
-                            <img src={Twitter} />
+                            <img src={Twitter}/>
                         </a>
                         <a href="#">
-                            <img src={Whatsapp} />
+                            <img src={Whatsapp}/>
                         </a>
                         <a href="#">
-                            <img src={Telegram} />
+                            <img src={Telegram}/>
                         </a>
                     </Grid>
                     <Grid
@@ -83,7 +83,7 @@ export const TopHeader = () => {
                         <Grid item>
                             <div className="multiple-content">
                                 <a href="#">
-                                    <img src={HelpIcon} />
+                                    <img src={HelpIcon}/>
                                     <Typography variant="subtitle1">
                                         Помощь
                                     </Typography>
@@ -93,7 +93,7 @@ export const TopHeader = () => {
                         <Grid item>
                             <div className="multiple-content">
                                 <a href="#">
-                                    <img src={StoreIcon} />
+                                    <img src={StoreIcon}/>
                                     <Typography variant="subtitle1">
                                         Магазины
                                     </Typography>
@@ -103,7 +103,7 @@ export const TopHeader = () => {
                         <Grid item>
                             <div className="multiple-content">
                                 <a href="#">
-                                    <img src={BusinessIcon} />
+                                    <img src={BusinessIcon}/>
                                     <Typography variant="subtitle1">
                                         Для бизнеса
                                     </Typography>
@@ -111,13 +111,13 @@ export const TopHeader = () => {
                             </div>
                         </Grid>
                         <Grid item>
-                            <Localization />
+                            <Localization/>
                         </Grid>
                     </Grid>
                 </Hidden>
             </Grid>
             {/*    Adaptive   */}
-            <Hidden mdUp={true}>
+            <Hidden mdUp>
                 <AppBar position={'fixed'} color={'inherit'} elevation={0}>
                     <Toolbar>
                         <Grid
@@ -131,24 +131,24 @@ export const TopHeader = () => {
                                     onClick={() => setIsOpen(true)}
                                 >
                                     <div className="burger-menu">
-                                        <div />
-                                        <div />
-                                        <div />
+                                        <div/>
+                                        <div/>
+                                        <div/>
                                     </div>
                                 </IconButton>
                             </Grid>
                             <Grid className="top-header-logo">
                                 <a href="#">
-                                    <img src={Logo} alt="Slondo logo" />
+                                    <img src={Logo} alt="Slondo logo"/>
                                 </a>
                             </Grid>
                             <Grid>
-                                <Localization />
+                                <Localization/>
                             </Grid>
                         </Grid>
                     </Toolbar>
                 </AppBar>
-                <LeftDrawer isOpen={isOpen} setIsOpen={setIsOpen} />
+                <LeftDrawer isOpen={isOpen} setIsOpen={setIsOpen}/>
             </Hidden>
         </div>
     )
