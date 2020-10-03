@@ -1,9 +1,9 @@
 import React, {useRef} from 'react'
-import {Container, IconButton} from '@material-ui/core'
+import {Container} from '@material-ui/core'
 import SlickSlider from 'react-slick'
 import {settings} from './sliderSettings'
-import {RightArrow} from '../../../elements/icons'
-import {useStyles} from './useStyle'
+import {SliderArrow} from "../../../elements/slider_arrow/SliderArrow";
+import {useStyles} from './useStyles'
 
 
 export const MainSlider = () => {
@@ -52,12 +52,8 @@ export const MainSlider = () => {
             </SlickSlider>
             <div className='slider-arrows-container'>
                 <Container maxWidth='lg'>
-                    <IconButton className='left-arrow' onClick={previous}>
-                        <img src={RightArrow}/>
-                    </IconButton>
-                    <IconButton className='right-arrow' onClick={next}>
-                        <img src={RightArrow}/>
-                    </IconButton>
+                    <SliderArrow direction='left' clickHandler={previous}/>
+                    <SliderArrow clickHandler={next}/>
                 </Container>
             </div>
         </div>

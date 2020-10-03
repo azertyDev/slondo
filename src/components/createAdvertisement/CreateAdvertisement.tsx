@@ -684,7 +684,6 @@ const CreateAdvertisement = () => {
                     </Hidden>
                 </Grid>
             </Container>
-            <Footer />
         </div>
     )
 }

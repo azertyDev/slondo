@@ -103,19 +103,14 @@ export const useStyle = makeStyles((theme) => ({
         },
     },
     nextButton: {
-        width: '250px',
-        [theme.breakpoints.down('md')]: {
-            width: '200px',
-        },
-        [theme.breakpoints.down('sm')]: {
-            width: '150px',
-        },
+        padding: '10px 80px',
+        [theme.breakpoints.down('sm')]: { padding: '10px 50px' },
     },
     required: {
         color: 'red ',
     },
     spacingNone: {
-        padding: '0 8px 0 0 !important',
+        padding: '4px !important',
         [theme.breakpoints.down('sm')]: {
             padding: '8px 8px 0 0 !important',
         },

@@ -5,6 +5,7 @@ import {AppProps} from 'next/app'
 import theme from '../src/theme'
 import {wrapper} from '../src/redux/store'
 import {Header} from '../src/components/header/Header'
+import {Footer} from "../src/components/footer/Footer";
 
 // Import css files
 import "slick-carousel/slick/slick.css";
@@ -29,6 +30,7 @@ const MyApp: FC<AppProps> = (props) => {
                 <CssBaseline/>
                 <Header/>
                 <Component {...props.pageProps} />
+                <Footer/>
             </ThemeProvider>
         </>
     );
