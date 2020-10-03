@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, {useState} from 'react'
 import {
     Container,
     Grid,
@@ -11,17 +11,14 @@ import {
     Checkbox,
     InputAdornment,
     TextareaAutosize,
-    Button,
     Hidden,
 } from '@material-ui/core'
-import { AdvertisementSelect } from './advertisementSelect/AdvertisementSelect'
-import { Advertisement } from '../elements/advertisement/Advertisement'
-import { ButtonComponent } from '../elements/button/Button'
-import { Footer } from '../footer/Footer'
-import { Help, Search } from '@material-ui/icons'
+import {AdvertisementSelect} from './advertisementSelect/AdvertisementSelect'
+import {ButtonComponent} from '../elements/button/Button'
+import {Help, Search} from '@material-ui/icons'
 
 // Styles
-import { useStyle } from './useStyle'
+import {useStyle} from './useStyle'
 
 const CreateAdvertisement = () => {
     const classes = useStyle()
@@ -82,7 +79,7 @@ const CreateAdvertisement = () => {
                                     </strong>
                                 </Typography>
                             </Grid>
-                            <AdvertisementSelect />
+                            <AdvertisementSelect/>
 
                             <Grid
                                 item
@@ -148,7 +145,7 @@ const CreateAdvertisement = () => {
                                 </Typography>
                             </Grid>
 
-                            <AdvertisementSelect />
+                            <AdvertisementSelect/>
 
                             <Grid
                                 item
@@ -164,7 +161,7 @@ const CreateAdvertisement = () => {
                                     Операционная система
                                 </Typography>
                             </Grid>
-                            <AdvertisementSelect />
+                            <AdvertisementSelect/>
                         </Grid>
 
                         <Grid
@@ -182,7 +179,7 @@ const CreateAdvertisement = () => {
                                 </Typography>
                             </Grid>
 
-                            <AdvertisementSelect />
+                            <AdvertisementSelect/>
 
                             <Grid item xs={12} sm={6} md={3} lg={3} xl={3}>
                                 <Typography variant="subtitle1">
@@ -190,7 +187,7 @@ const CreateAdvertisement = () => {
                                 </Typography>
                             </Grid>
 
-                            <AdvertisementSelect />
+                            <AdvertisementSelect/>
                         </Grid>
                         <Grid
                             container
@@ -207,7 +204,7 @@ const CreateAdvertisement = () => {
                                 </Typography>
                             </Grid>
 
-                            <AdvertisementSelect />
+                            <AdvertisementSelect/>
 
                             <Grid item xs={12} sm={6} md={3} lg={3} xl={3}>
                                 <Typography variant="subtitle1">
@@ -215,7 +212,7 @@ const CreateAdvertisement = () => {
                                 </Typography>
                             </Grid>
 
-                            <AdvertisementSelect />
+                            <AdvertisementSelect/>
                         </Grid>
                         <Grid
                             container
@@ -232,13 +229,13 @@ const CreateAdvertisement = () => {
                                 </Typography>
                             </Grid>
 
-                            <AdvertisementSelect />
+                            <AdvertisementSelect/>
 
                             <Grid item xs={12} sm={6} md={3} lg={3} xl={3}>
                                 <Typography variant="subtitle1">GPS</Typography>
                             </Grid>
 
-                            <AdvertisementSelect />
+                            <AdvertisementSelect/>
                         </Grid>
                         <Grid
                             container
@@ -255,7 +252,7 @@ const CreateAdvertisement = () => {
                                 </Typography>
                             </Grid>
 
-                            <AdvertisementSelect />
+                            <AdvertisementSelect/>
 
                             <Grid item xs={12} sm={6} md={3} lg={3} xl={3}>
                                 <Typography variant="subtitle1">
@@ -263,7 +260,7 @@ const CreateAdvertisement = () => {
                                 </Typography>
                             </Grid>
 
-                            <AdvertisementSelect />
+                            <AdvertisementSelect/>
                         </Grid>
                         <Grid
                             container
@@ -280,7 +277,7 @@ const CreateAdvertisement = () => {
                                 </Typography>
                             </Grid>
 
-                            <AdvertisementSelect />
+                            <AdvertisementSelect/>
 
                             <Grid item xs={12} sm={6} md={3} lg={3} xl={3}>
                                 <Typography variant="subtitle1">
@@ -288,7 +285,7 @@ const CreateAdvertisement = () => {
                                 </Typography>
                             </Grid>
 
-                            <AdvertisementSelect />
+                            <AdvertisementSelect/>
                         </Grid>
                         <Grid
                             container
@@ -396,7 +393,7 @@ const CreateAdvertisement = () => {
                                 </Typography>
                             </Grid>
 
-                            <AdvertisementSelect />
+                            <AdvertisementSelect/>
                         </Grid>
                         <Grid item xs={12}>
                             <Typography variant="h5" color="initial">
@@ -427,7 +424,7 @@ const CreateAdvertisement = () => {
                                     onChange={handleCheckboxChange}
                                     color="primary"
                                 />
-                                <Help className="question-mark" />
+                                <Help className="question-mark"/>
                                 <Typography variant="subtitle2">
                                     Примечание: Вы подключили услугу «Безопасный
                                     торг». Ваша сделка защищена. Стоимость
@@ -465,7 +462,7 @@ const CreateAdvertisement = () => {
                                     onChange={handleCheckboxChange}
                                     color="primary"
                                 />
-                                <Help className="question-mark" />
+                                <Help className="question-mark"/>
                                 <Typography variant="subtitle2">
                                     Примечание: Вы будете выделены специальным
                                     стикером доставка. Доставка осуществляется
@@ -507,11 +504,11 @@ const CreateAdvertisement = () => {
                                         'aria-label': 'secondary checkbox',
                                     }}
                                 />
-                                <Help className="question-mark" />
+                                <Help className="question-mark"/>
                                 <Typography variant="subtitle2">
                                     Примечание: Вы принимаете предложения от
                                     других пользователей на обмен. Вы будете
-                                    выделены специальным <br />
+                                    выделены специальным <br/>
                                     стикером «Возможен обмен»
                                 </Typography>
                             </Grid>
@@ -539,7 +536,7 @@ const CreateAdvertisement = () => {
                                     InputProps={{
                                         startAdornment: (
                                             <InputAdornment position="start">
-                                                <Search />
+                                                <Search/>
                                             </InputAdornment>
                                         ),
                                     }}
@@ -554,11 +551,8 @@ const CreateAdvertisement = () => {
                                 justify="flex-end"
                                 spacing={2}
                             >
-                                <Grid item xs={9}>
-                                    <Advertisement
-                                        height="300px"
-                                        width="100%"
-                                    />
+                                <Grid item xs={9} className={classes.adBanner}>
+                                    <div className='right-banner'/>
                                 </Grid>
                             </Grid>
                         </Hidden>
@@ -678,8 +672,8 @@ const CreateAdvertisement = () => {
 
                     {/* Adaptive  */}
                     <Hidden smDown>
-                        <Grid container item xs={3}>
-                            <Advertisement height="480px" width="100%" />
+                        <Grid container item xs={3} className={classes.adBanner}>
+                            <div className='bottom-banner'/>
                         </Grid>
                     </Hidden>
                 </Grid>

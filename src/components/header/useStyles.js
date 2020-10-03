@@ -1,10 +1,12 @@
 import {makeStyles} from '@material-ui/core/styles'
 
-export const useStyles = makeStyles(() => ({
+export const useStyles = makeStyles((theme) => ({
     root: {
         marginTop: '10px',
     },
     bottomHeaderWrapper: {
-        marginTop: '60px'
+        [theme.breakpoints.down('sm')]: {
+            marginTop: '60px'
+        }
     }
 }))

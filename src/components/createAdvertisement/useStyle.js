@@ -1,4 +1,4 @@
-import { makeStyles } from '@material-ui/core/styles'
+import {makeStyles} from '@material-ui/core/styles'
 
 export const useStyle = makeStyles((theme) => ({
     root: {
@@ -104,7 +104,7 @@ export const useStyle = makeStyles((theme) => ({
     },
     nextButton: {
         padding: '10px 80px',
-        [theme.breakpoints.down('sm')]: { padding: '10px 50px' },
+        [theme.breakpoints.down('sm')]: {padding: '10px 50px'},
     },
     required: {
         color: 'red ',
@@ -115,4 +115,17 @@ export const useStyle = makeStyles((theme) => ({
             padding: '8px 8px 0 0 !important',
         },
     },
+    adBanner: {
+        '& > div': {
+            width: '100%',
+            borderRadius: '7px',
+            backgroundColor: '#C0C0C0',
+        },
+        '& > div.right-banner': {
+            height: '300px'
+        },
+        '& > div.bottom-banner': {
+            height: '480px'
+        }
+    }
 }))
