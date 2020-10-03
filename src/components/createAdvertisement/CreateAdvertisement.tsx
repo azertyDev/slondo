@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, { useState } from 'react'
 import {
     Container,
     Grid,
@@ -14,12 +14,14 @@ import {
     Button,
     Hidden,
 } from '@material-ui/core'
-import {AdvertisementSelect} from './advertisementSelect/AdvertisementSelect'
-import {Advertisement} from '../elements/advertisement/Advertisement'
-import {Help, Search} from '@material-ui/icons'
+import { AdvertisementSelect } from './advertisementSelect/AdvertisementSelect'
+import { Advertisement } from '../elements/advertisement/Advertisement'
+import { ButtonComponent } from '../elements/button/Button'
+import { Footer } from '../footer/Footer'
+import { Help, Search } from '@material-ui/icons'
 
 // Styles
-import {useStyle} from './useStyle'
+import { useStyle } from './useStyle'
 
 const CreateAdvertisement = () => {
     const classes = useStyle()
@@ -32,41 +34,81 @@ const CreateAdvertisement = () => {
     const handleCheckboxChange = (event) => {
         setChecked(event.target.checked)
     }
+
     return (
         <div className={classes.root}>
             <Container maxWidth="lg">
                 <Grid container>
                     <Typography variant="h4" className={classes.title}>
-                        Новое объявление - <span>Электроника</span>
+                        Новое объявление - <span>Электроника </span>
                     </Typography>
-                    <Grid container spacing={1} item xs={9}>
+                    <Grid
+                        container
+                        spacing={1}
+                        item
+                        sm={12}
+                        xl={9}
+                        lg={9}
+                        md={9}
+                    >
                         <Grid
                             container
                             item
                             xs={12}
+                            sm={12}
+                            md={12}
+                            lg={12}
+                            xl={12}
                             direction="row"
                             justify="space-between"
                             spacing={2}
-                            className={classes.typeAndCategoryBlock}
                         >
-                            <Grid item xs={3} container alignItems="center">
+                            <Grid
+                                item
+                                xs={12}
+                                sm={6}
+                                md={3}
+                                lg={3}
+                                xl={3}
+                                container
+                                alignItems="center"
+                            >
                                 <Typography variant="subtitle1">
-                                    <strong>Тип объявления *</strong>
+                                    <strong>
+                                        Тип объявления{' '}
+                                        <span className={classes.required}>
+                                            *
+                                        </span>
+                                    </strong>
                                 </Typography>
                             </Grid>
-                            <AdvertisementSelect/>
+                            <AdvertisementSelect />
 
-                            <Grid item xs={3} container alignItems="center">
+                            <Grid
+                                item
+                                xs={12}
+                                sm={6}
+                                md={3}
+                                lg={3}
+                                xl={3}
+                                container
+                                alignItems="center"
+                            >
                                 <Typography variant="subtitle1">
-                                    <strong>Категория *</strong>
+                                    <strong>
+                                        Категория{' '}
+                                        <span className={classes.required}>
+                                            *
+                                        </span>
+                                    </strong>
                                 </Typography>
                             </Grid>
-                            <Grid item xs={3}>
+                            <Grid item xs={12} sm={6} md={3} lg={3}>
                                 <FormControl fullWidth>
                                     <InputBase
                                         className={classes.categoryNameInput}
                                         id="demo-customized-textbox"
-                                        value="Электроника-Телефоны и план..."
+                                        value="Электроника-Телефоны и планшеты"
                                     />
                                 </FormControl>
                             </Grid>
@@ -91,20 +133,38 @@ const CreateAdvertisement = () => {
                             justify="space-between"
                             spacing={2}
                         >
-                            <Grid item xs={3} container alignItems="center">
+                            <Grid
+                                item
+                                xs={12}
+                                sm={6}
+                                md={3}
+                                xl={3}
+                                lg={3}
+                                container
+                                alignItems="center"
+                            >
                                 <Typography variant="subtitle1">
                                     Марка
                                 </Typography>
                             </Grid>
 
-                            <AdvertisementSelect/>
+                            <AdvertisementSelect />
 
-                            <Grid item xs={3} container alignItems="center">
+                            <Grid
+                                item
+                                xs={12}
+                                sm={6}
+                                md={3}
+                                lg={3}
+                                xl={3}
+                                container
+                                alignItems="center"
+                            >
                                 <Typography variant="subtitle1">
                                     Операционная система
                                 </Typography>
                             </Grid>
-                            <AdvertisementSelect/>
+                            <AdvertisementSelect />
                         </Grid>
 
                         <Grid
@@ -116,21 +176,21 @@ const CreateAdvertisement = () => {
                             justify="space-between"
                             spacing={2}
                         >
-                            <Grid item xs={3}>
+                            <Grid item xs={12} sm={6} md={3} lg={3} xl={3}>
                                 <Typography variant="subtitle1">
                                     Диагональ экрана
                                 </Typography>
                             </Grid>
 
-                            <AdvertisementSelect/>
+                            <AdvertisementSelect />
 
-                            <Grid item xs={3}>
+                            <Grid item xs={12} sm={6} md={3} lg={3} xl={3}>
                                 <Typography variant="subtitle1">
                                     4G,LTE
                                 </Typography>
                             </Grid>
 
-                            <AdvertisementSelect/>
+                            <AdvertisementSelect />
                         </Grid>
                         <Grid
                             container
@@ -141,21 +201,21 @@ const CreateAdvertisement = () => {
                             justify="space-between"
                             spacing={2}
                         >
-                            <Grid item xs={3}>
+                            <Grid item xs={12} sm={6} md={3} lg={3} xl={3}>
                                 <Typography variant="subtitle1">
                                     Встроенная память
                                 </Typography>
                             </Grid>
 
-                            <AdvertisementSelect/>
+                            <AdvertisementSelect />
 
-                            <Grid item xs={3}>
+                            <Grid item xs={12} sm={6} md={3} lg={3} xl={3}>
                                 <Typography variant="subtitle1">
                                     Кол-во SIM-карт
                                 </Typography>
                             </Grid>
 
-                            <AdvertisementSelect/>
+                            <AdvertisementSelect />
                         </Grid>
                         <Grid
                             container
@@ -166,19 +226,19 @@ const CreateAdvertisement = () => {
                             justify="space-between"
                             spacing={2}
                         >
-                            <Grid item xs={3}>
+                            <Grid item xs={12} sm={6} md={3} lg={3} xl={3}>
                                 <Typography variant="subtitle1">
                                     Слот для карт памяти
                                 </Typography>
                             </Grid>
 
-                            <AdvertisementSelect/>
+                            <AdvertisementSelect />
 
-                            <Grid item xs={3}>
+                            <Grid item xs={12} sm={6} md={3} lg={3} xl={3}>
                                 <Typography variant="subtitle1">GPS</Typography>
                             </Grid>
 
-                            <AdvertisementSelect/>
+                            <AdvertisementSelect />
                         </Grid>
                         <Grid
                             container
@@ -189,21 +249,21 @@ const CreateAdvertisement = () => {
                             justify="space-between"
                             spacing={2}
                         >
-                            <Grid item xs={3}>
+                            <Grid item xs={12} sm={6} md={3} lg={3} xl={3}>
                                 <Typography variant="subtitle1">
                                     Основная камера
                                 </Typography>
                             </Grid>
 
-                            <AdvertisementSelect/>
+                            <AdvertisementSelect />
 
-                            <Grid item xs={3}>
+                            <Grid item xs={12} sm={6} md={3} lg={3} xl={3}>
                                 <Typography variant="subtitle1">
                                     NFC модуль
                                 </Typography>
                             </Grid>
 
-                            <AdvertisementSelect/>
+                            <AdvertisementSelect />
                         </Grid>
                         <Grid
                             container
@@ -214,21 +274,21 @@ const CreateAdvertisement = () => {
                             justify="space-between"
                             spacing={2}
                         >
-                            <Grid item xs={3}>
+                            <Grid item xs={12} sm={6} md={3} lg={3} xl={3}>
                                 <Typography variant="subtitle1">
                                     Фронтальная камера
                                 </Typography>
                             </Grid>
 
-                            <AdvertisementSelect/>
+                            <AdvertisementSelect />
 
-                            <Grid item xs={3}>
+                            <Grid item xs={12} sm={6} md={3} lg={3} xl={3}>
                                 <Typography variant="subtitle1">
                                     Срок использования
                                 </Typography>
                             </Grid>
 
-                            <AdvertisementSelect/>
+                            <AdvertisementSelect />
                         </Grid>
                         <Grid
                             container
@@ -239,13 +299,18 @@ const CreateAdvertisement = () => {
                             spacing={2}
                             className={classes.advertisementName}
                         >
-                            <Grid item xs={3}>
+                            <Grid item xs={12} sm={6} md={3} lg={3} xl={3}>
                                 <Typography variant="subtitle1">
-                                    <strong>Название объявления *</strong>
+                                    <strong>
+                                        Название объявления{' '}
+                                        <span className={classes.required}>
+                                            *
+                                        </span>
+                                    </strong>
                                 </Typography>
                             </Grid>
 
-                            <Grid item xs={9}>
+                            <Grid item xs={12} sm={6} md={9} lg={9} xl={9}>
                                 <TextField
                                     fullWidth
                                     id="advertisementName"
@@ -265,26 +330,37 @@ const CreateAdvertisement = () => {
                             justify="space-between"
                             spacing={2}
                         >
-                            <Grid item xs={3}>
+                            <Grid item xs={4} sm={6} md={3} lg={3} xl={3}>
                                 <Typography variant="subtitle1">
-                                    <strong>Цена *</strong>
+                                    <strong>
+                                        Цена{' '}
+                                        <span className={classes.required}>
+                                            *
+                                        </span>
+                                    </strong>
                                 </Typography>
                             </Grid>
 
                             <Grid
                                 item
-                                xs={3}
+                                xs={8}
+                                sm={6}
+                                md={3}
+                                lg={3}
+                                xl={3}
                                 container
                                 direction="row"
                                 spacing={1}
+                                className={classes.spacingNone}
                             >
-                                <Grid item xs={8}>
+                                <Grid item xs={8} sm={8} md={8} lg={8} xl={8}>
                                     <TextField
                                         variant="outlined"
                                         // onChange={}
+                                        fullWidth
                                     />
                                 </Grid>
-                                <Grid item xs={4}>
+                                <Grid item xs={4} sm={4} md={4} lg={4} xl={4}>
                                     <FormControl fullWidth variant="outlined">
                                         <Select
                                             value={value}
@@ -298,7 +374,9 @@ const CreateAdvertisement = () => {
                                             >
                                                 Выберите...
                                             </MenuItem>
-                                            <MenuItem value={10}>UZS</MenuItem>
+                                            <MenuItem value={10} selected>
+                                                UZS
+                                            </MenuItem>
                                             <MenuItem value={10}>USD</MenuItem>
                                             <MenuItem value={20}>EUR</MenuItem>
                                             <MenuItem value={30}>RUB</MenuItem>
@@ -306,13 +384,19 @@ const CreateAdvertisement = () => {
                                     </FormControl>
                                 </Grid>
                             </Grid>
-                            <Grid item xs={3}>
+
+                            <Grid item xs={12} sm={6} md={3} lg={3} xl={3}>
                                 <Typography variant="subtitle1">
-                                    <strong>Состояние *</strong>
+                                    <strong>
+                                        Состояние{' '}
+                                        <span className={classes.required}>
+                                            *
+                                        </span>
+                                    </strong>
                                 </Typography>
                             </Grid>
 
-                            <AdvertisementSelect/>
+                            <AdvertisementSelect />
                         </Grid>
                         <Grid item xs={12}>
                             <Typography variant="h5" color="initial">
@@ -343,7 +427,7 @@ const CreateAdvertisement = () => {
                                     onChange={handleCheckboxChange}
                                     color="primary"
                                 />
-                                <Help className="question-mark"/>
+                                <Help className="question-mark" />
                                 <Typography variant="subtitle2">
                                     Примечание: Вы подключили услугу «Безопасный
                                     торг». Ваша сделка защищена. Стоимость
@@ -381,7 +465,7 @@ const CreateAdvertisement = () => {
                                     onChange={handleCheckboxChange}
                                     color="primary"
                                 />
-                                <Help className="question-mark"/>
+                                <Help className="question-mark" />
                                 <Typography variant="subtitle2">
                                     Примечание: Вы будете выделены специальным
                                     стикером доставка. Доставка осуществляется
@@ -423,11 +507,11 @@ const CreateAdvertisement = () => {
                                         'aria-label': 'secondary checkbox',
                                     }}
                                 />
-                                <Help className="question-mark"/>
+                                <Help className="question-mark" />
                                 <Typography variant="subtitle2">
                                     Примечание: Вы принимаете предложения от
                                     других пользователей на обмен. Вы будете
-                                    выделены специальным <br/>
+                                    выделены специальным <br />
                                     стикером «Возможен обмен»
                                 </Typography>
                             </Grid>
@@ -441,13 +525,13 @@ const CreateAdvertisement = () => {
                             spacing={2}
                             className={classes.advertisementName}
                         >
-                            <Grid item xs={3}>
+                            <Grid item xs={12} sm={3} md={3} lg={3} xl={3}>
                                 <Typography variant="subtitle1">
                                     Местоположение
                                 </Typography>
                             </Grid>
 
-                            <Grid item xs={9}>
+                            <Grid item xs={12} sm={9} md={9} lg={9} xl={9}>
                                 <TextField
                                     fullWidth
                                     variant="outlined"
@@ -455,7 +539,7 @@ const CreateAdvertisement = () => {
                                     InputProps={{
                                         startAdornment: (
                                             <InputAdornment position="start">
-                                                <Search/>
+                                                <Search />
                                             </InputAdornment>
                                         ),
                                     }}
@@ -488,9 +572,14 @@ const CreateAdvertisement = () => {
                             alignItems="center"
                             justify="space-between"
                         >
-                            <Grid item xs={3}>
+                            <Grid item xs={12} sm={4} md={3} lg={3} xl={3}>
                                 <Typography variant="subtitle1">
-                                    <strong>Фотографии *</strong>
+                                    <strong>
+                                        Фотографии{' '}
+                                        <span className={classes.required}>
+                                            *
+                                        </span>
+                                    </strong>
                                 </Typography>
                             </Grid>
                         </Grid>
@@ -504,12 +593,17 @@ const CreateAdvertisement = () => {
                             justify="space-between"
                             spacing={2}
                         >
-                            <Grid item xs={3}>
+                            <Grid item xs={12} sm={3} md={3} lg={3} xl={3}>
                                 <Typography variant="subtitle1">
-                                    <strong>Описание *</strong>
+                                    <strong>
+                                        Описание{' '}
+                                        <span className={classes.required}>
+                                            *
+                                        </span>
+                                    </strong>
                                 </Typography>
                             </Grid>
-                            <Grid item xs={9}>
+                            <Grid item xs={12} sm={9} md={9} lg={9} xl={9}>
                                 <TextareaAutosize
                                     className={classes.description}
                                     aria-label="Phone"
@@ -525,12 +619,17 @@ const CreateAdvertisement = () => {
                             alignItems="center"
                             spacing={2}
                         >
-                            <Grid item xs={3}>
+                            <Grid item xs={12} sm={3} md={3} lg={3} xl={3}>
                                 <Typography variant="subtitle1">
-                                    <strong>Телефон *</strong>
+                                    <strong>
+                                        Телефон{' '}
+                                        <span className={classes.required}>
+                                            *
+                                        </span>
+                                    </strong>
                                 </Typography>
                             </Grid>
-                            <Grid item xs={3}>
+                            <Grid item xs={12} sm={4} md={3} lg={3} xl={3}>
                                 <TextField
                                     variant="outlined"
                                     id="phone"
@@ -541,18 +640,21 @@ const CreateAdvertisement = () => {
                             </Grid>
                             <Grid
                                 item
-                                xs={6}
+                                xs={12}
+                                sm={5}
+                                md={6}
+                                lg={6}
+                                xl={6}
                                 container
                                 alignItems="center"
-                                justify="center"
+                                justify="space-around"
                             >
-                                <Button
-                                    variant="text"
-                                    color="default"
-                                    className={classes.phoneButton}
-                                >
+                                <Typography variant="subtitle2">
+                                    Время звонков
+                                </Typography>
+                                <a href="#" className={classes.getSettings}>
                                     Перейти к настройкам
-                                </Button>
+                                </a>
                             </Grid>
                         </Grid>
                         <Grid
@@ -563,13 +665,13 @@ const CreateAdvertisement = () => {
                             className={classes.nextButtonBlock}
                         >
                             <Grid item>
-                                <Button
+                                <ButtonComponent
                                     variant="contained"
                                     color="primary"
                                     className={classes.nextButton}
                                 >
                                     Далее
-                                </Button>
+                                </ButtonComponent>
                             </Grid>
                         </Grid>
                     </Grid>
@@ -577,7 +679,7 @@ const CreateAdvertisement = () => {
                     {/* Adaptive  */}
                     <Hidden smDown>
                         <Grid container item xs={3}>
-                            <Advertisement height="480px" width="100%"/>
+                            <Advertisement height="480px" width="100%" />
                         </Grid>
                     </Hidden>
                 </Grid>
