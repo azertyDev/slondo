@@ -10,17 +10,17 @@ export const useStyle = makeStyles((theme) => ({
         },
     },
     title: {
-        marginTop: '50px',
-        marginBottom: '50px',
+        margin: '50px 0',
         '& span': {
             color: '#9c65d5',
         },
-    },
-    typeAndCategoryBlock: {
-        marginBottom: '30px',
+        [theme.breakpoints.down('sm')]: {
+            fontSize: '2rem',
+            margin: '30px 0',
+        },
     },
     advertisementSettings: {
-        marginBottom: '25px',
+        margin: '30px 0',
     },
     advertisementType: {
         display: 'flex',
@@ -34,6 +34,7 @@ export const useStyle = makeStyles((theme) => ({
         position: 'relative',
         border: '1px solid #ced4da',
         fontSize: '0.9rem',
+        textOverflow: 'ellipsis',
         transition: theme.transitions.create(['border-color', 'box-shadow']),
         '& input.MuiInputBase-input': {
             padding: '0',
@@ -87,15 +88,19 @@ export const useStyle = makeStyles((theme) => ({
         minHeight: '230px',
         padding: '10px',
     },
-    phoneButton: {
+    getSettings: {
         textTransform: 'initial',
+        textDecoration: 'none',
         color: '#9b66d2',
-        '& button.MuiButton-text': {
-            padding: '0',
-        },
     },
     nextButtonBlock: {
-        marginTop: '20px',
+        marginTop: '50px',
+        [theme.breakpoints.down('md')]: {
+            marginTop: '30px',
+        },
+        [theme.breakpoints.down('sm')]: {
+            marginTop: '25px',
+        },
     },
     nextButton: {
         width: '250px',
@@ -104,6 +109,15 @@ export const useStyle = makeStyles((theme) => ({
         },
         [theme.breakpoints.down('sm')]: {
             width: '150px',
+        },
+    },
+    required: {
+        color: 'red ',
+    },
+    spacingNone: {
+        padding: '0 8px 0 0 !important',
+        [theme.breakpoints.down('sm')]: {
+            padding: '8px 8px 0 0 !important',
         },
     },
 }))
