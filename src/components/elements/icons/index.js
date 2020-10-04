@@ -28,7 +28,11 @@ const DownArrowIcon = `icons/down-arrow.svg`
 const Avatar = `icons/avatar.svg`
 const FilterIcon = `icons/filter_icon.svg`
 const RightArrow = `icons/right_arrow.svg`
-
+const BonusIcon = `icons/bonus_icon.svg`
+const BezopasniyTorgIcon = `icons/bezopasniy_torg.svg`
+const AdvertisementIcon = `icons/obyavleniya_icon.svg`
+const TorgIcon = `icons/torg_icon.svg`
+const RatingIcon = `icons/rating_icon.svg`
 
 export {
     Avatar,
@@ -60,5 +64,10 @@ export {
     OtdixOptom,
     DownArrowIcon,
     FilterIcon,
-    RightArrow
+    RightArrow,
+    BonusIcon,
+    BezopasniyTorgIcon,
+    AdvertisementIcon,
+    TorgIcon,
+    RatingIcon,
 }

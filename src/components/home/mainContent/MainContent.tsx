@@ -8,8 +8,9 @@ import {
     Button,
 } from '@material-ui/core'
 import {ArrowDropDownOutlined} from '@material-ui/icons'
-
 import {CardItem} from '../../elements/card/Card'
+
+// styles
 import {useStyles} from './useStyles'
 
 
@@ -44,7 +45,7 @@ export const MainContent = () => {
                         indicatorColor="primary"
                         className="tabs"
                     >
-                        <Tab label={<Typography>Все объявления</Typography>} id={0}/>
+                        <Tab label={<Typography>Все объявления</Typography>} id={0} selected={true}/>
                         <Tab label={<Typography>Все аукционы</Typography>} id={1}/>
                     </Tabs>
                 </Grid>

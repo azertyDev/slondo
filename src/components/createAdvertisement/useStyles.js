@@ -1,6 +1,6 @@
-import {makeStyles} from '@material-ui/core/styles'
+import { makeStyles } from '@material-ui/core/styles'
 
-export const useStyle = makeStyles((theme) => ({
+export const useStyles = makeStyles((theme) => ({
     root: {
         '& input.MuiOutlinedInput-input, div.MuiOutlinedInput-input': {
             padding: '10px 15px',
@@ -14,7 +14,7 @@ export const useStyle = makeStyles((theme) => ({
         '& span': {
             color: '#9c65d5',
         },
-        [theme.breakpoints.down('sm')]: {
+        [theme.breakpoints.down('md')]: {
             fontSize: '2rem',
             margin: '30px 0',
         },
@@ -104,7 +104,7 @@ export const useStyle = makeStyles((theme) => ({
     },
     nextButton: {
         padding: '10px 80px',
-        [theme.breakpoints.down('sm')]: {padding: '10px 50px'},
+        [theme.breakpoints.down('sm')]: { padding: '10px 50px' },
     },
     required: {
         color: 'red ',
@@ -122,10 +122,10 @@ export const useStyle = makeStyles((theme) => ({
             backgroundColor: '#C0C0C0',
         },
         '& > div.right-banner': {
-            height: '300px'
+            height: '300px',
         },
         '& > div.bottom-banner': {
-            height: '480px'
-        }
-    }
+            height: '480px',
+        },
+    },
 }))

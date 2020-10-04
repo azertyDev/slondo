@@ -1,9 +1,9 @@
 import React, { useState } from 'react'
 import { FormControl, Grid, MenuItem, Select } from '@material-ui/core'
-import { useStyle } from './useStyle'
+import { useStyles } from './useStyles'
 
 export const AdvertisementSelect = (props) => {
-    const classes = useStyle()
+    const classes = useStyles()
     const [value, setValue] = useState('')
 
     const handleChange = (event) => {
@@ -17,9 +17,14 @@ export const AdvertisementSelect = (props) => {
                         <MenuItem value="" disabled>
                             <em>Выберите...</em>
                         </MenuItem>
-                        <MenuItem value={10}>Test Test TestTestTest</MenuItem>
-                        <MenuItem value={20}>Twenty</MenuItem>
-                        <MenuItem value={30}>Thirty</MenuItem>
+                        <MenuItem value={0}>
+                            Электроника-Телефоны и планшеты
+                        </MenuItem>
+                        <MenuItem value={1}>
+                            Test Test TestTestTestasdasdadasd
+                        </MenuItem>
+                        <MenuItem value={2}>Twenty</MenuItem>
+                        <MenuItem value={3}>Thirty</MenuItem>
                     </Select>
                 </FormControl>
             </div>

@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, { useState } from 'react'
 import {
     Container,
     Grid,
@@ -13,15 +13,15 @@ import {
     TextareaAutosize,
     Hidden,
 } from '@material-ui/core'
-import {AdvertisementSelect} from './advertisementSelect/AdvertisementSelect'
-import {ButtonComponent} from '../elements/button/Button'
-import {Help, Search} from '@material-ui/icons'
+import { AdvertisementSelect } from './advertisementSelect/AdvertisementSelect'
+import { ButtonComponent } from '../elements/button/Button'
+import { Help, Search } from '@material-ui/icons'
 
 // Styles
-import {useStyle} from './useStyle'
+import { useStyles } from './useStyles'
 
 const CreateAdvertisement = () => {
-    const classes = useStyle()
+    const classes = useStyles()
     const [value, setValue] = useState('')
     const [checked, setChecked] = useState(false)
 
@@ -43,6 +43,7 @@ const CreateAdvertisement = () => {
                         container
                         spacing={1}
                         item
+                        xs={12}
                         sm={12}
                         xl={9}
                         lg={9}
@@ -79,7 +80,7 @@ const CreateAdvertisement = () => {
                                     </strong>
                                 </Typography>
                             </Grid>
-                            <AdvertisementSelect/>
+                            <AdvertisementSelect />
 
                             <Grid
                                 item
@@ -100,15 +101,8 @@ const CreateAdvertisement = () => {
                                     </strong>
                                 </Typography>
                             </Grid>
-                            <Grid item xs={12} sm={6} md={3} lg={3}>
-                                <FormControl fullWidth>
-                                    <InputBase
-                                        className={classes.categoryNameInput}
-                                        id="demo-customized-textbox"
-                                        value="Электроника-Телефоны и планшеты"
-                                    />
-                                </FormControl>
-                            </Grid>
+
+                            <AdvertisementSelect />
                         </Grid>
 
                         <Grid
@@ -145,7 +139,7 @@ const CreateAdvertisement = () => {
                                 </Typography>
                             </Grid>
 
-                            <AdvertisementSelect/>
+                            <AdvertisementSelect />
 
                             <Grid
                                 item
@@ -161,7 +155,7 @@ const CreateAdvertisement = () => {
                                     Операционная система
                                 </Typography>
                             </Grid>
-                            <AdvertisementSelect/>
+                            <AdvertisementSelect />
                         </Grid>
 
                         <Grid
@@ -179,7 +173,7 @@ const CreateAdvertisement = () => {
                                 </Typography>
                             </Grid>
 
-                            <AdvertisementSelect/>
+                            <AdvertisementSelect />
 
                             <Grid item xs={12} sm={6} md={3} lg={3} xl={3}>
                                 <Typography variant="subtitle1">
@@ -187,7 +181,7 @@ const CreateAdvertisement = () => {
                                 </Typography>
                             </Grid>
 
-                            <AdvertisementSelect/>
+                            <AdvertisementSelect />
                         </Grid>
                         <Grid
                             container
@@ -204,7 +198,7 @@ const CreateAdvertisement = () => {
                                 </Typography>
                             </Grid>
 
-                            <AdvertisementSelect/>
+                            <AdvertisementSelect />
 
                             <Grid item xs={12} sm={6} md={3} lg={3} xl={3}>
                                 <Typography variant="subtitle1">
@@ -212,7 +206,7 @@ const CreateAdvertisement = () => {
                                 </Typography>
                             </Grid>
 
-                            <AdvertisementSelect/>
+                            <AdvertisementSelect />
                         </Grid>
                         <Grid
                             container
@@ -229,13 +223,13 @@ const CreateAdvertisement = () => {
                                 </Typography>
                             </Grid>
 
-                            <AdvertisementSelect/>
+                            <AdvertisementSelect />
 
                             <Grid item xs={12} sm={6} md={3} lg={3} xl={3}>
                                 <Typography variant="subtitle1">GPS</Typography>
                             </Grid>
 
-                            <AdvertisementSelect/>
+                            <AdvertisementSelect />
                         </Grid>
                         <Grid
                             container
@@ -252,7 +246,7 @@ const CreateAdvertisement = () => {
                                 </Typography>
                             </Grid>
 
-                            <AdvertisementSelect/>
+                            <AdvertisementSelect />
 
                             <Grid item xs={12} sm={6} md={3} lg={3} xl={3}>
                                 <Typography variant="subtitle1">
@@ -260,7 +254,7 @@ const CreateAdvertisement = () => {
                                 </Typography>
                             </Grid>
 
-                            <AdvertisementSelect/>
+                            <AdvertisementSelect />
                         </Grid>
                         <Grid
                             container
@@ -277,7 +271,7 @@ const CreateAdvertisement = () => {
                                 </Typography>
                             </Grid>
 
-                            <AdvertisementSelect/>
+                            <AdvertisementSelect />
 
                             <Grid item xs={12} sm={6} md={3} lg={3} xl={3}>
                                 <Typography variant="subtitle1">
@@ -285,7 +279,7 @@ const CreateAdvertisement = () => {
                                 </Typography>
                             </Grid>
 
-                            <AdvertisementSelect/>
+                            <AdvertisementSelect />
                         </Grid>
                         <Grid
                             container
@@ -393,7 +387,7 @@ const CreateAdvertisement = () => {
                                 </Typography>
                             </Grid>
 
-                            <AdvertisementSelect/>
+                            <AdvertisementSelect />
                         </Grid>
                         <Grid item xs={12}>
                             <Typography variant="h5" color="initial">
@@ -424,7 +418,7 @@ const CreateAdvertisement = () => {
                                     onChange={handleCheckboxChange}
                                     color="primary"
                                 />
-                                <Help className="question-mark"/>
+                                <Help className="question-mark" />
                                 <Typography variant="subtitle2">
                                     Примечание: Вы подключили услугу «Безопасный
                                     торг». Ваша сделка защищена. Стоимость
@@ -462,7 +456,7 @@ const CreateAdvertisement = () => {
                                     onChange={handleCheckboxChange}
                                     color="primary"
                                 />
-                                <Help className="question-mark"/>
+                                <Help className="question-mark" />
                                 <Typography variant="subtitle2">
                                     Примечание: Вы будете выделены специальным
                                     стикером доставка. Доставка осуществляется
@@ -504,11 +498,11 @@ const CreateAdvertisement = () => {
                                         'aria-label': 'secondary checkbox',
                                     }}
                                 />
-                                <Help className="question-mark"/>
+                                <Help className="question-mark" />
                                 <Typography variant="subtitle2">
                                     Примечание: Вы принимаете предложения от
                                     других пользователей на обмен. Вы будете
-                                    выделены специальным <br/>
+                                    выделены специальным <br />
                                     стикером «Возможен обмен»
                                 </Typography>
                             </Grid>
@@ -536,7 +530,7 @@ const CreateAdvertisement = () => {
                                     InputProps={{
                                         startAdornment: (
                                             <InputAdornment position="start">
-                                                <Search/>
+                                                <Search />
                                             </InputAdornment>
                                         ),
                                     }}
@@ -552,7 +546,7 @@ const CreateAdvertisement = () => {
                                 spacing={2}
                             >
                                 <Grid item xs={9} className={classes.adBanner}>
-                                    <div className='right-banner'/>
+                                    <div className="right-banner" />
                                 </Grid>
                             </Grid>
                         </Hidden>
@@ -672,8 +666,13 @@ const CreateAdvertisement = () => {
 
                     {/* Adaptive  */}
                     <Hidden smDown>
-                        <Grid container item xs={3} className={classes.adBanner}>
-                            <div className='bottom-banner'/>
+                        <Grid
+                            container
+                            item
+                            xs={3}
+                            className={classes.adBanner}
+                        >
+                            <div className="bottom-banner" />
                         </Grid>
                     </Hidden>
                 </Grid>
