@@ -42,9 +42,15 @@ export const ModalComponent = (props) => {
     const body = (
         <div className={classes.body}>
             <Grid container>
-                <Grid item xs={4} className={classes.modalBodyInfo}>
+                <Grid item xs={5} className={classes.modalBodyInfo}>
                     <Grid item xs={12} container className={classes.infoBlock}>
-                        <Grid item xs={3}>
+                        <Grid
+                            item
+                            xs={3}
+                            container
+                            alignItems="center"
+                            justify="center"
+                        >
                             <img src={BonusIcon} alt="bonus-icon" />
                         </Grid>
                         <Grid item xs={9} container alignItems="center">
@@ -55,7 +61,13 @@ export const ModalComponent = (props) => {
                         </Grid>
                     </Grid>
                     <Grid item xs={12} container className={classes.infoBlock}>
-                        <Grid item xs={3}>
+                        <Grid
+                            item
+                            xs={3}
+                            container
+                            alignItems="center"
+                            justify="center"
+                        >
                             <img
                                 src={BezopasniyTorgIcon}
                                 alt="safeAuction-icon"
@@ -69,7 +81,13 @@ export const ModalComponent = (props) => {
                         </Grid>
                     </Grid>
                     <Grid item xs={12} container className={classes.infoBlock}>
-                        <Grid item xs={3}>
+                        <Grid
+                            item
+                            xs={3}
+                            container
+                            alignItems="center"
+                            justify="center"
+                        >
                             <img
                                 src={AdvertisementIcon}
                                 alt="advertisement-icon"
@@ -83,7 +101,13 @@ export const ModalComponent = (props) => {
                         </Grid>
                     </Grid>
                     <Grid item xs={12} container className={classes.infoBlock}>
-                        <Grid item xs={3}>
+                        <Grid
+                            item
+                            xs={3}
+                            container
+                            alignItems="center"
+                            justify="center"
+                        >
                             <img src={TorgIcon} alt="torg-icon" />
                         </Grid>
                         <Grid item xs={9} container alignItems="center">
@@ -94,7 +118,13 @@ export const ModalComponent = (props) => {
                         </Grid>
                     </Grid>
                     <Grid item xs={12} container className={classes.infoBlock}>
-                        <Grid item xs={3}>
+                        <Grid
+                            item
+                            xs={3}
+                            container
+                            alignItems="center"
+                            justify="center"
+                        >
                             <img src={RatingIcon} alt="rating-icon" />
                         </Grid>
                         <Grid item xs={9} container alignItems="center">
@@ -105,7 +135,7 @@ export const ModalComponent = (props) => {
                         </Grid>
                     </Grid>
                 </Grid>
-                <Grid item xs={8}>
+                <Grid item xs={7}>
                     <Container>
                         <Grid item xs={12} className={classes.welcome}>
                             <Typography variant="subtitle1" color="initial">
@@ -114,7 +144,8 @@ export const ModalComponent = (props) => {
                         </Grid>
                         <Grid item xs={8}>
                             <Typography variant="subtitle2" color="initial">
-                                Авторизуйтесь что бы воспользоваться всеми функциями сайта.
+                                Авторизуйтесь что бы воспользоваться всеми
+                                функциями сайта.
                             </Typography>
                         </Grid>
                         <Grid xs={12} item className={classes.tabsContainer}>
@@ -134,6 +165,7 @@ export const ModalComponent = (props) => {
                                         id={0}
                                         selected
                                         disableFocusRipple
+                                        disableRipple
                                     />
                                     <Tab
                                         label={
@@ -143,6 +175,7 @@ export const ModalComponent = (props) => {
                                         }
                                         id={1}
                                         disableFocusRipple
+                                        disableRipple
                                     />
                                 </Tabs>
                             </Grid>
@@ -221,7 +254,7 @@ export const ModalComponent = (props) => {
                                         container
                                         justify="center"
                                     >
-                                        <Grid item xs={8}>
+                                        <Grid item xs={10}>
                                             <Typography
                                                 variant="body2"
                                                 color="initial"

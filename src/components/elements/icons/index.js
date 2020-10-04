@@ -33,6 +33,8 @@ const BezopasniyTorgIcon = `icons/bezopasniy_torg.svg`
 const AdvertisementIcon = `icons/obyavleniya_icon.svg`
 const TorgIcon = `icons/torg_icon.svg`
 const RatingIcon = `icons/rating_icon.svg`
+const BackSpaceArrow = `icons/back_space_arrow.svg`
+
 
 export {
     Avatar,
@@ -70,4 +72,5 @@ export {
     AdvertisementIcon,
     TorgIcon,
     RatingIcon,
+    BackSpaceArrow
 }

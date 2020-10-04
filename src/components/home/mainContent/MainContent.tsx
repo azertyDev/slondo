@@ -5,12 +5,10 @@ import {
     Hidden,
     Tab,
     Tabs,
-    Button,
 } from '@material-ui/core'
-import {ArrowDropDownOutlined} from '@material-ui/icons'
+import {BackSpaceArrow} from '../../elements/icons'
 import {CardItem} from '../../elements/card/Card'
-
-// styles
+import {ButtonComponent} from '../../elements/button/Button'
 import {useStyles} from './useStyles'
 
 
@@ -55,6 +53,36 @@ export const MainContent = () => {
                     <TabPanel value={value} index={0}>
                         <div className="ads-wrapper">
                             <Grid item container spacing={1}>
+                                <Grid xs={6} sm={4} lg={3} item>
+                                    <CardItem
+                                        title="Объявление"
+                                        className="card-item"
+                                        alt="adv"
+                                        image={`img/card-image.jpg`}
+                                        price="180 000 сум"
+                                        description="Продам сумку в хорошем соcтоянии"
+                                    />
+                                </Grid>
+                                <Grid xs={6} sm={4} lg={3} item>
+                                    <CardItem
+                                        title="Объявление"
+                                        className="card-item"
+                                        alt="adv"
+                                        image={`img/card-image.jpg`}
+                                        price="180 000 сум"
+                                        description="Продам сумку в хорошем соcтоянии"
+                                    />
+                                </Grid>
+                                <Grid xs={6} sm={4} lg={3} item>
+                                    <CardItem
+                                        title="Объявление"
+                                        className="card-item"
+                                        alt="adv"
+                                        image={`img/card-image.jpg`}
+                                        price="180 000 сум"
+                                        description="Продам сумку в хорошем соcтоянии"
+                                    />
+                                </Grid>
                                 <Grid xs={6} sm={4} lg={3} item>
                                     <CardItem
                                         title="Объявление"
@@ -161,6 +189,36 @@ export const MainContent = () => {
                                         description="Продам сумку в хорошем соcтоянии"
                                     />
                                 </Grid>
+                                <Grid xs={6} sm={4} lg={3} item>
+                                    <CardItem
+                                        title="Лот"
+                                        className="card-item"
+                                        alt="adv"
+                                        image={`img/card-image.jpg`}
+                                        price="180 000 сум"
+                                        description="Продам сумку в хорошем соcтоянии"
+                                    />
+                                </Grid>
+                                <Grid xs={6} sm={4} lg={3} item>
+                                    <CardItem
+                                        title="Лот"
+                                        className="card-item"
+                                        alt="adv"
+                                        image={`img/card-image.jpg`}
+                                        price="180 000 сум"
+                                        description="Продам сумку в хорошем соcтоянии"
+                                    />
+                                </Grid>
+                                <Grid xs={6} sm={4} lg={3} item>
+                                    <CardItem
+                                        title="Лот"
+                                        className="card-item"
+                                        alt="adv"
+                                        image={`img/card-image.jpg`}
+                                        price="180 000 сум"
+                                        description="Продам сумку в хорошем соcтоянии"
+                                    />
+                                </Grid>
                             </Grid>
                         </div>
                     </TabPanel>
@@ -179,16 +237,13 @@ export const MainContent = () => {
                     </Grid>
                 </Hidden>
             </Grid>
-            <Grid container>
-                <Grid item xs={12} md={9}>
-                    <div className="show-more-button">
-                        <Button
-                            variant="contained"
-                            endIcon={<ArrowDropDownOutlined/>}
-                        >
-                            Показать еще
-                        </Button>
-                    </div>
+            <Grid container className={classes.showMoreContainer}>
+                <Grid item xs={12} md={9} className='show-more-block'>
+                    <ButtonComponent>
+                        Показать еще
+                        <img src={BackSpaceArrow} alt='back_space_arrow'/>
+                    </ButtonComponent>
+                    <div className='show-more-line'/>
                 </Grid>
             </Grid>
         </div>

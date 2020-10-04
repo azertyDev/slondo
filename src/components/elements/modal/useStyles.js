@@ -9,7 +9,8 @@ export const useStyles = makeStyles((theme) => ({
     },
     body: { backgroundColor: 'white', width: '725px' },
     modalBodyInfo: {
-        padding: '20px 10px 115px 10px',
+        paddingTop: '20px',
+        paddingBottom: '110px',
         backgroundImage:
             'linear-gradient(rgba(0,0,0,.6), rgba(0,0,0,.6)), url("./img/modal-image.jpg")',
         backgroundSize: 'cover',
@@ -21,7 +22,13 @@ export const useStyles = makeStyles((theme) => ({
         },
     },
     infoBlock: {
-        marginBottom: '30px',
+        marginBottom: '50px',
+        '&:last-child': {
+            margin: '0'
+        },
+        '& h6.MuiTypography-subtitle2': { 
+            lineHeight: '16px',
+        },
     },
     welcome: {
         margin: '10px 0 0 0',
@@ -63,7 +70,8 @@ export const useStyles = makeStyles((theme) => ({
     expression: {
         textAlign: 'center',
         fontSize: '12px',
-        color: '#000 !important'
+        color: '#000 !important',
+        letterSpacing: '0.4px',
     },
     coloredText: {
         color: '#675EAA'

@@ -19,10 +19,12 @@ import {
     StoreIcon,
     BusinessIcon,
     PlIcon,
+    Avatar
 } from '../../elements/icons'
 import {Localization} from '../../elements/localization/Localization'
 import {LeftDrawer} from './drawer/Drawer'
 import {useStyles} from './useStyle'
+
 
 export const TopHeader = () => {
     const [isOpen, setIsOpen] = useState(false)
@@ -142,8 +144,8 @@ export const TopHeader = () => {
                                     <img src={Logo} alt="Slondo logo"/>
                                 </a>
                             </Grid>
-                            <Grid>
-                                <Localization/>
+                            <Grid className={classes.avatarBlock}>
+                                <img src={Avatar} alt='avatar'/>
                             </Grid>
                         </Grid>
                     </Toolbar>

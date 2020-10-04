@@ -64,5 +64,10 @@ export const useStyles = makeStyles((theme) => ({
                 margin: '4px 0'
             }
         }
+    },
+    avatarBlock: {
+        '& > img': {
+            width: '40px'
+        }
     }
 }))
