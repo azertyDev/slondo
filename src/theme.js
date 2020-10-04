@@ -16,15 +16,18 @@ const calibri = {
 const colors = {
     main: '#9773af',
     white: '#fafafa',
+    gray: '#C0C0C0',
     adBgColor: '#88CAEC',
-    lotBgColor: '#AD66D5'
+    lotBgColor: '#AD66D5',
 };
 
 // Create a theme instance.
 const theme = createMuiTheme({
     palette: {
         primary: {
-            main: colors.main
+            main: colors.main,
+            white: colors.white,
+            gray: colors.gray
         },
     },
     breakpoints: {

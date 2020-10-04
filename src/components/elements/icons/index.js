@@ -28,6 +28,7 @@ const DownArrowIcon = `icons/down-arrow.svg`
 const Avatar = `icons/avatar.svg`
 const FilterIcon = `icons/filter_icon.svg`
 const RightArrow = `icons/right_arrow.svg`
+const BackSpaceArrow = `icons/back_space_arrow.svg`
 
 
 export {
@@ -60,5 +61,6 @@ export {
     OtdixOptom,
     DownArrowIcon,
     FilterIcon,
-    RightArrow
+    RightArrow,
+    BackSpaceArrow
 }
