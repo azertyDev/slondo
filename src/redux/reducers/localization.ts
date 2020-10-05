@@ -1,19 +1,7 @@
 import {localizationActionTypes} from '../actions/localizationActions';
 import {AnyAction} from "redux";
 import {HYDRATE} from "next-redux-wrapper";
-
-interface State {
-    lang: string,
-    header: {
-        topHeader: {
-            location: string,
-            region: string,
-            help: string,
-            shops: string,
-            forBusiness: string
-        }
-    }
-}
+import {ILocalizationState} from "../../../interfaces/ILocalizationState";
 
 const initialState = {
     lang: 'ru',
@@ -33,7 +21,7 @@ const initialState = {
     footer: {}
 };
 
-export const localization = (state: State = initialState, action: AnyAction): State => {
+export const localization = (state: ILocalizationState = initialState, action: AnyAction): ILocalizationState => {
     switch (action.type) {
         case HYDRATE:
             return {

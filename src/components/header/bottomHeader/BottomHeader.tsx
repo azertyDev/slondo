@@ -13,13 +13,14 @@ import {useStyles} from "./useStyle"
 
 
 const BottomHeader = (props) => {
+    const classes = useStyles(props);
     const {isScrollBreak} = props;
     const [adType, setAdType] = useState('');
+
     const handleChange = (e) => {
         setAdType(e.target.value);
     };
 
-    const classes = useStyles(props);
 
     return (
         <div className={classes.root}>
@@ -91,7 +92,7 @@ const BottomHeader = (props) => {
                                 </ButtonComponent>
                             </Grid>
                             <Grid item container alignItems="center" xs={1}>
-                                <ButtonComponent className='bottom-sign-button'>
+                                <ButtonComponent className='bottom-sign-button' onClick={props.handleOpenModal}>
                                     <Typography variant="subtitle2">Войти</Typography>
                                     <img src={SignIcon} alt="Sign in"/>
                                 </ButtonComponent>

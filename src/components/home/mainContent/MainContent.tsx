@@ -43,7 +43,7 @@ export const MainContent = () => {
                         indicatorColor="primary"
                         className="tabs"
                     >
-                        <Tab label={<Typography>Все объявления</Typography>} id={0}/>
+                        <Tab label={<Typography>Все объявления</Typography>} id={0} selected={true}/>
                         <Tab label={<Typography>Все аукционы</Typography>} id={1}/>
                     </Tabs>
                 </Grid>

@@ -18,10 +18,10 @@ import {ButtonComponent} from '../elements/button/Button'
 import {Help, Search} from '@material-ui/icons'
 
 // Styles
-import {useStyle} from './useStyle'
+import {useStyles} from './useStyles'
 
 const CreateAdvertisement = () => {
-    const classes = useStyle()
+    const classes = useStyles()
     const [value, setValue] = useState('')
     const [checked, setChecked] = useState(false)
 
@@ -43,7 +43,7 @@ const CreateAdvertisement = () => {
                         container
                         item
                         spacing={1}
-                        sm={12}
+                        xs={12}
                         md={9}
                     >
                         <Grid
@@ -94,15 +94,8 @@ const CreateAdvertisement = () => {
                                     </strong>
                                 </Typography>
                             </Grid>
-                            <Grid item xs={12} sm={6} md={3} lg={3}>
-                                <FormControl fullWidth>
-                                    <InputBase
-                                        className={classes.categoryNameInput}
-                                        id="demo-customized-textbox"
-                                        value="Электроника-Телефоны и планшеты"
-                                    />
-                                </FormControl>
-                            </Grid>
+
+                            <AdvertisementSelect/>
                         </Grid>
 
                         <Grid

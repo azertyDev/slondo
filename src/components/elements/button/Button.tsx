@@ -1,6 +1,6 @@
 import React, {PropsWithChildren} from 'react'
 import {ButtonBase} from '@material-ui/core'
-import {useStyles} from "./useStyle"
+import {useStyles} from "./useStyles"
 
 type ButtonProps = {
     children?: PropsWithChildren<any>,
