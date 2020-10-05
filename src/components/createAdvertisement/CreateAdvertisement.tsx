@@ -35,27 +35,21 @@ const CreateAdvertisement = () => {
     return (
         <div className={classes.root}>
             <Container maxWidth="lg">
-                <Grid container>
-                    <Typography variant="h4" className={classes.title}>
-                        Новое объявление - <span>Электроника </span>
-                    </Typography>
+                <Typography variant="h4" className={classes.title}>
+                    Новое объявление - <span>Электроника </span>
+                </Typography>
+                <Grid container justify='space-between'>
                     <Grid
                         container
-                        spacing={1}
                         item
+                        spacing={1}
                         sm={12}
-                        xl={9}
-                        lg={9}
                         md={9}
                     >
                         <Grid
                             container
                             item
                             xs={12}
-                            sm={12}
-                            md={12}
-                            lg={12}
-                            xl={12}
                             direction="row"
                             justify="space-between"
                             spacing={2}
@@ -135,8 +129,6 @@ const CreateAdvertisement = () => {
                                 xs={12}
                                 sm={6}
                                 md={3}
-                                xl={3}
-                                lg={3}
                                 container
                                 alignItems="center"
                             >
@@ -152,8 +144,6 @@ const CreateAdvertisement = () => {
                                 xs={12}
                                 sm={6}
                                 md={3}
-                                lg={3}
-                                xl={3}
                                 container
                                 alignItems="center"
                             >
@@ -312,9 +302,8 @@ const CreateAdvertisement = () => {
                                     fullWidth
                                     id="advertisementName"
                                     variant="outlined"
-                                    helperText="Название не должно  превышать 50 символов"
+                                    helperText="Название не должно превышать 50 символов"
                                     placeholder="Пример: Samsung S9 black 64 Gb"
-                                    // onChange={}
                                 />
                             </Grid>
                         </Grid>
@@ -343,8 +332,6 @@ const CreateAdvertisement = () => {
                                 xs={8}
                                 sm={6}
                                 md={3}
-                                lg={3}
-                                xl={3}
                                 container
                                 direction="row"
                                 spacing={1}
@@ -382,7 +369,7 @@ const CreateAdvertisement = () => {
                                 </Grid>
                             </Grid>
 
-                            <Grid item xs={12} sm={6} md={3} lg={3} xl={3}>
+                            <Grid item xs={12} sm={6} md={3}>
                                 <Typography variant="subtitle1">
                                     <strong>
                                         Состояние{' '}
@@ -528,45 +515,38 @@ const CreateAdvertisement = () => {
                                 </Typography>
                             </Grid>
 
-                            <Grid item xs={12} sm={9} md={9} lg={9} xl={9}>
+                            <Grid item xs={12} sm={9}>
                                 <TextField
                                     fullWidth
                                     variant="outlined"
-                                    // onChange={}
                                     InputProps={{
                                         startAdornment: (
                                             <InputAdornment position="start">
                                                 <Search/>
                                             </InputAdornment>
-                                        ),
+                                        )
                                     }}
                                 />
                             </Grid>
-                        </Grid>
-                        <Hidden smDown>
-                            <Grid
-                                item
-                                xs={12}
-                                container
-                                justify="flex-end"
-                                spacing={2}
-                            >
-                                <Grid item xs={9} className={classes.adBanner}>
-                                    <div className='right-banner'/>
-                                </Grid>
+                            <Hidden xsDown>
+                                <Grid item sm={3}/>
+                            </Hidden>
+                            <Grid item xs={12} sm={9}>
+                                <div className='photos-dropdown'/>
                             </Grid>
-                        </Hidden>
+                        </Grid>
 
                         {/* Photos */}
                         <Grid
                             container
                             item
                             xs={12}
+                            spacing={2}
                             direction="row"
                             alignItems="center"
                             justify="space-between"
                         >
-                            <Grid item xs={12} sm={4} md={3} lg={3} xl={3}>
+                            <Grid item xs={12} sm={3}>
                                 <Typography variant="subtitle1">
                                     <strong>
                                         Фотографии{' '}
@@ -577,7 +557,6 @@ const CreateAdvertisement = () => {
                                 </Typography>
                             </Grid>
                         </Grid>
-
                         <Grid
                             container
                             item
@@ -587,7 +566,7 @@ const CreateAdvertisement = () => {
                             justify="space-between"
                             spacing={2}
                         >
-                            <Grid item xs={12} sm={3} md={3} lg={3} xl={3}>
+                            <Grid item xs={12} sm={3} md={3}>
                                 <Typography variant="subtitle1">
                                     <strong>
                                         Описание{' '}
@@ -597,7 +576,7 @@ const CreateAdvertisement = () => {
                                     </strong>
                                 </Typography>
                             </Grid>
-                            <Grid item xs={12} sm={9} md={9} lg={9} xl={9}>
+                            <Grid item xs={12} sm={9}>
                                 <TextareaAutosize
                                     className={classes.description}
                                     aria-label="Phone"
@@ -613,7 +592,7 @@ const CreateAdvertisement = () => {
                             alignItems="center"
                             spacing={2}
                         >
-                            <Grid item xs={12} sm={3} md={3} lg={3} xl={3}>
+                            <Grid item xs={12} sm={3} md={3}>
                                 <Typography variant="subtitle1">
                                     <strong>
                                         Телефон{' '}
@@ -623,7 +602,7 @@ const CreateAdvertisement = () => {
                                     </strong>
                                 </Typography>
                             </Grid>
-                            <Grid item xs={12} sm={4} md={3} lg={3} xl={3}>
+                            <Grid item xs={12} sm={4} md={3}>
                                 <TextField
                                     variant="outlined"
                                     id="phone"
@@ -637,8 +616,6 @@ const CreateAdvertisement = () => {
                                 xs={12}
                                 sm={5}
                                 md={6}
-                                lg={6}
-                                xl={6}
                                 container
                                 alignItems="center"
                                 justify="space-around"
@@ -669,11 +646,17 @@ const CreateAdvertisement = () => {
                             </Grid>
                         </Grid>
                     </Grid>
-
-                    {/* Adaptive  */}
                     <Hidden smDown>
-                        <Grid container item xs={3} className={classes.adBanner}>
-                            <div className='bottom-banner'/>
+                        <Grid
+                            item
+                            md={3}
+                            container
+                            justify="flex-end"
+                            className={classes.adBanner}
+                        >
+                            <Grid item md={12}>
+                                <div className='right-banner'/>
+                            </Grid>
                         </Grid>
                     </Hidden>
                 </Grid>

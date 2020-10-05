@@ -8,6 +8,11 @@ export const useStyle = makeStyles((theme) => ({
         '& svg.MuiSvgIcon-root': {
             fill: '#9a64d0',
         },
+        '& div.photos-dropdown': {
+            height: '200px',
+            backgroundColor: '#C0C0C0',
+            borderRadius: '4px'
+        }
     },
     title: {
         margin: '50px 0',
@@ -116,16 +121,11 @@ export const useStyle = makeStyles((theme) => ({
         },
     },
     adBanner: {
-        '& > div': {
+        '& > div > div.right-banner': {
             width: '100%',
+            height: '470px',
             borderRadius: '7px',
             backgroundColor: '#C0C0C0',
-        },
-        '& > div.right-banner': {
-            height: '300px'
-        },
-        '& > div.bottom-banner': {
-            height: '480px'
         }
     }
 }))

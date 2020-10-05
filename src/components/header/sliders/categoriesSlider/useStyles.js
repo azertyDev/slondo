@@ -9,7 +9,7 @@ export const useStyles = makeStyles((theme) => ({
         },
         '& div.category-slider': {
             position: 'relative',
-            marginTop: '10px',
+            marginTop: '20px',
             '& > div.slick-slider': {
                 '& > div.slick-prev, & > div.slick-next': {
                     width: '40px',

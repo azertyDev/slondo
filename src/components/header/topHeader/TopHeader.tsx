@@ -26,9 +26,10 @@ import {LeftDrawer} from './drawer/Drawer'
 import {useStyles} from './useStyle'
 
 
-export const TopHeader = () => {
-    const [isOpen, setIsOpen] = useState(false)
-    const classes = useStyles()
+export const TopHeader = (props) => {
+    const {local} = props;
+    const [isOpen, setIsOpen] = useState(false);
+    const classes = useStyles();
     return (
         <div className={classes.root}>
             <Grid container justify="space-between" alignItems="center">
@@ -36,14 +37,14 @@ export const TopHeader = () => {
                     <Grid item md={4}>
                         <div className="location">
                             <Typography variant="subtitle1">
-                                Местоположение:
+                                {local.location}:
                             </Typography>
                             <img src={PlIcon} className="pl-icon"/>
                             <Typography
                                 variant="subtitle1"
                                 className="select-region"
                             >
-                                Выберите регион
+                                {local.region}
                             </Typography>
                         </div>
                     </Grid>
@@ -87,7 +88,7 @@ export const TopHeader = () => {
                                 <a href="#">
                                     <img src={HelpIcon}/>
                                     <Typography variant="subtitle1">
-                                        Помощь
+                                        {local.help}
                                     </Typography>
                                 </a>
                             </div>
@@ -97,7 +98,7 @@ export const TopHeader = () => {
                                 <a href="#">
                                     <img src={StoreIcon}/>
                                     <Typography variant="subtitle1">
-                                        Магазины
+                                        {local.shops}
                                     </Typography>
                                 </a>
                             </div>
@@ -107,7 +108,7 @@ export const TopHeader = () => {
                                 <a href="#">
                                     <img src={BusinessIcon}/>
                                     <Typography variant="subtitle1">
-                                        Для бизнеса
+                                        {local.forBusiness}
                                     </Typography>
                                 </a>
                             </div>
@@ -140,7 +141,7 @@ export const TopHeader = () => {
                                 </IconButton>
                             </Grid>
                             <Grid className="top-header-logo">
-                                <a href="#">
+                                <a href="/">
                                     <img src={Logo} alt="Slondo logo"/>
                                 </a>
                             </Grid>

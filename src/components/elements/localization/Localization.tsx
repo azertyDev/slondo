@@ -1,10 +1,16 @@
-import React from "react";
+import React from "react"
+import {useDispatch} from 'react-redux'
+import {setLocal} from "../../../redux/actions/localizationActions"
+import {Typography} from "@material-ui/core"
 import {useStyles} from './useStyles'
-import {Typography} from "@material-ui/core";
 
 
 export const Localization = () => {
+    const dispatch = useDispatch();
 
+    const setLocalAction = (lang) => () => {
+        dispatch(setLocal(lang))
+    };
     const classes = useStyles()
 
     return (
@@ -12,12 +18,14 @@ export const Localization = () => {
             <Typography
                 variant="subtitle1"
                 className="localization-item"
+                onClick={setLocalAction('ru')}
             >
                 Ру
             </Typography>
             <Typography
                 variant="subtitle1"
                 className="localization-item"
+                onClick={setLocalAction('uz')}
             >
                 O’z
             </Typography>

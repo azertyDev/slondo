@@ -28,7 +28,7 @@ const MyApp: FC<AppProps> = (props) => {
             </Head>
             <ThemeProvider theme={theme}>
                 <CssBaseline/>
-                <Header/>
+                <Header {...props.pageProps} />
                 <Component {...props.pageProps} />
                 <Footer/>
             </ThemeProvider>

@@ -5,6 +5,7 @@ export const useStyles = makeStyles((theme) => ({
         display: 'flex',
         '& > h6.localization-item': {
             lineHeight: 1,
+            cursor: 'pointer',
             '&:first-child': {
                 color: theme.palette.primary.main,
                 paddingRight: '4px',

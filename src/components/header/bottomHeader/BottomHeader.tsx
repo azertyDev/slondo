@@ -29,7 +29,7 @@ const BottomHeader = (props) => {
                         <Grid container justify="space-between" alignItems="center" spacing={1}>
                             <Grid container item xs={3} alignItems="center">
                                 <Grid container item md={7} lg={6} className="bottom-logo">
-                                    <a href="#">
+                                    <a href="/">
                                         <img src={Logo} alt="Slondo logo"/>
                                     </a>
                                 </Grid>

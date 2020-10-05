@@ -1,8 +1,8 @@
 import React, {useRef} from 'react'
 import {Container} from '@material-ui/core'
 import SlickSlider from 'react-slick'
-import {settings} from './sliderSettings'
 import {SliderArrow} from "../../../elements/slider_arrow/SliderArrow";
+import {settings} from './sliderSettings'
 import {useStyles} from './useStyles'
 
 

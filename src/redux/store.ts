@@ -3,10 +3,10 @@ import thunkMiddleware from 'redux-thunk'
 import {composeWithDevTools} from 'redux-devtools-extension'
 import {MakeStore, createWrapper, Context} from 'next-redux-wrapper'
 
-import {mainSlider} from "./reducers/mainSlider";
+import {localization} from "./reducers/localization";
 
 const rootReducer = combineReducers({
-    mainSlider,
+    localization,
 });
 const enhancer = composeWithDevTools(
     applyMiddleware(thunkMiddleware),

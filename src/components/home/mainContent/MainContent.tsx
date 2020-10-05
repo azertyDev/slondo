@@ -23,7 +23,7 @@ const TabPanel = (props) => {
             {value === index && children}
         </div>
     )
-}
+};
 
 export const MainContent = () => {
     const classes = useStyles()

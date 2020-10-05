@@ -6,7 +6,7 @@ import {settings} from './sliderSettings'
 import {useStyles} from './useStyles'
 
 
-export const CategorySlider = () => {
+export const CategoriesSlider = () => {
 
     const classes = useStyles();
 

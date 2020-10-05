@@ -1,7 +1,6 @@
 import {GetStaticProps} from 'next'
 import {Home} from '../src/components/home/Home'
-import {wrapper} from "../src/redux/store";
-import {fetchMainSliderImgs} from "../src/redux/actions/mainSliderActions";
+import {wrapper} from "../src/redux/store"
 
 
 const Index = (props) => {
@@ -10,12 +9,11 @@ const Index = (props) => {
     )
 }
 
-// export const getStaticProps: GetStaticProps = wrapper.getStaticProps(async ({store}) => {
-//     store.dispatch(await fetchMainSliderImgs());
-//     const {mainSlider} = store.getState();
-//     return {
-//         props: {images: mainSlider.images},
-//     }
-// });
+export const getStaticProps: GetStaticProps = wrapper.getStaticProps(({store}) => {
+    const {localization} = store.getState();
+    return {
+        props: {localization}
+    }
+});
 
 export default Index;

@@ -19,6 +19,7 @@ const colors = {
     gray: '#C0C0C0',
     adBgColor: '#88CAEC',
     lotBgColor: '#AD66D5',
+    createAdBtnColor: '#7DBCF6'
 };
 
 // Create a theme instance.
@@ -27,7 +28,9 @@ const theme = createMuiTheme({
         primary: {
             main: colors.main,
             white: colors.white,
-            gray: colors.gray
+            gray: colors.gray,
+            adBgColor: colors.adBgColor,
+            createAdBtnColor: colors.createAdBtnColor
         },
     },
     breakpoints: {
@@ -48,6 +51,9 @@ const theme = createMuiTheme({
     overrides: {
         MuiCssBaseline: {
             '@global': {
+                'body': {
+                    fontSize: '16px',
+                },
                 backgroundColor: colors.white,
                 '@font-face': [calibri],
                 ':focus': {
