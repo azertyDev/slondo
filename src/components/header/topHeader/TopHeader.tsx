@@ -37,14 +37,14 @@ export const TopHeader = (props) => {
                     <Grid item md={4}>
                         <div className="location">
                             <Typography variant="subtitle1">
-                                {local.location}:
+                                {/*{local.location}:*/}
                             </Typography>
                             <img src={PlIcon} className="pl-icon"/>
                             <Typography
                                 variant="subtitle1"
                                 className="select-region"
                             >
-                                {local.region}
+                                {/*{local.region}*/}
                             </Typography>
                         </div>
                     </Grid>
@@ -88,7 +88,7 @@ export const TopHeader = (props) => {
                                 <a href="#">
                                     <img src={HelpIcon}/>
                                     <Typography variant="subtitle1">
-                                        {local.help}
+                                        {/*{local.help}*/}
                                     </Typography>
                                 </a>
                             </div>
@@ -98,7 +98,7 @@ export const TopHeader = (props) => {
                                 <a href="#">
                                     <img src={StoreIcon}/>
                                     <Typography variant="subtitle1">
-                                        {local.shops}
+                                        {/*{local.shops}*/}
                                     </Typography>
                                 </a>
                             </div>
@@ -108,7 +108,7 @@ export const TopHeader = (props) => {
                                 <a href="#">
                                     <img src={BusinessIcon}/>
                                     <Typography variant="subtitle1">
-                                        {local.forBusiness}
+                                        {/*{local.forBusiness}*/}
                                     </Typography>
                                 </a>
                             </div>
