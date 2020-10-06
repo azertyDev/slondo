@@ -1,8 +1,8 @@
 import React from 'react'
-import CreateAdvertisement from '../src/components/createAdvertisement/CreateAdvertisement'
+import { CreateAdvertisementContainer } from '../src/components/advertisement/CreateAdvertisementContainer'
 
 const Create_advertisement = (props) => {
-    return <CreateAdvertisement {...props} />
+    return <CreateAdvertisementContainer {...props} />
 }
 
 export default Create_advertisement

@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, { useState } from 'react'
 import {
     Container,
     Grid,
@@ -13,14 +13,14 @@ import {
     TextareaAutosize,
     Hidden,
 } from '@material-ui/core'
-import {AdvertisementSelect} from './advertisementSelect/AdvertisementSelect'
-import {ButtonComponent} from '../elements/button/Button'
-import {Help, Search} from '@material-ui/icons'
+import { AdvertisementSelect } from '../advertisementSelect/AdvertisementSelect'
+import { ButtonComponent } from '../../elements/button/Button'
+import { Help, Search } from '@material-ui/icons'
 
 // Styles
-import {useStyles} from './useStyles'
+import { useStyles } from './useStyles'
 
-const CreateAdvertisement = () => {
+const CreateAdvertisement = (props) => {
     const classes = useStyles()
     const [value, setValue] = useState('')
     const [checked, setChecked] = useState(false)
@@ -38,14 +38,8 @@ const CreateAdvertisement = () => {
                 <Typography variant="h4" className={classes.title}>
                     Новое объявление - <span>Электроника </span>
                 </Typography>
-                <Grid container justify='space-between'>
-                    <Grid
-                        container
-                        item
-                        spacing={1}
-                        xs={12}
-                        md={9}
-                    >
+                <Grid container justify="space-between">
+                    <Grid container item spacing={1} xs={12} md={9}>
                         <Grid
                             container
                             item
@@ -73,7 +67,9 @@ const CreateAdvertisement = () => {
                                     </strong>
                                 </Typography>
                             </Grid>
-                            <AdvertisementSelect/>
+                            <Grid item xs={12} sm={6} md={3} lg={3}>
+                                <AdvertisementSelect />
+                            </Grid>
 
                             <Grid
                                 item
@@ -94,8 +90,9 @@ const CreateAdvertisement = () => {
                                     </strong>
                                 </Typography>
                             </Grid>
-
-                            <AdvertisementSelect/>
+                            <Grid item xs={12} sm={6} md={3} lg={3}>
+                                <AdvertisementSelect />
+                            </Grid>
                         </Grid>
 
                         <Grid
@@ -129,8 +126,9 @@ const CreateAdvertisement = () => {
                                     Марка
                                 </Typography>
                             </Grid>
-
-                            <AdvertisementSelect/>
+                            <Grid item xs={12} sm={6} md={3} lg={3}>
+                                <AdvertisementSelect />
+                            </Grid>
 
                             <Grid
                                 item
@@ -144,7 +142,9 @@ const CreateAdvertisement = () => {
                                     Операционная система
                                 </Typography>
                             </Grid>
-                            <AdvertisementSelect/>
+                            <Grid item xs={12} sm={6} md={3} lg={3}>
+                                <AdvertisementSelect />
+                            </Grid>
                         </Grid>
 
                         <Grid
@@ -161,16 +161,18 @@ const CreateAdvertisement = () => {
                                     Диагональ экрана
                                 </Typography>
                             </Grid>
-
-                            <AdvertisementSelect/>
+                            <Grid item xs={12} sm={6} md={3} lg={3}>
+                                <AdvertisementSelect />
+                            </Grid>
 
                             <Grid item xs={12} sm={6} md={3} lg={3} xl={3}>
                                 <Typography variant="subtitle1">
                                     4G,LTE
                                 </Typography>
                             </Grid>
-
-                            <AdvertisementSelect/>
+                            <Grid item xs={12} sm={6} md={3} lg={3}>
+                                <AdvertisementSelect />
+                            </Grid>
                         </Grid>
                         <Grid
                             container
@@ -186,16 +188,18 @@ const CreateAdvertisement = () => {
                                     Встроенная память
                                 </Typography>
                             </Grid>
-
-                            <AdvertisementSelect/>
+                            <Grid item xs={12} sm={6} md={3} lg={3}>
+                                <AdvertisementSelect />
+                            </Grid>
 
                             <Grid item xs={12} sm={6} md={3} lg={3} xl={3}>
                                 <Typography variant="subtitle1">
                                     Кол-во SIM-карт
                                 </Typography>
                             </Grid>
-
-                            <AdvertisementSelect/>
+                            <Grid item xs={12} sm={6} md={3} lg={3}>
+                                <AdvertisementSelect />
+                            </Grid>
                         </Grid>
                         <Grid
                             container
@@ -211,14 +215,16 @@ const CreateAdvertisement = () => {
                                     Слот для карт памяти
                                 </Typography>
                             </Grid>
-
-                            <AdvertisementSelect/>
+                            <Grid item xs={12} sm={6} md={3} lg={3}>
+                                <AdvertisementSelect />
+                            </Grid>
 
                             <Grid item xs={12} sm={6} md={3} lg={3} xl={3}>
                                 <Typography variant="subtitle1">GPS</Typography>
                             </Grid>
-
-                            <AdvertisementSelect/>
+                            <Grid item xs={12} sm={6} md={3} lg={3}>
+                                <AdvertisementSelect />
+                            </Grid>
                         </Grid>
                         <Grid
                             container
@@ -234,16 +240,18 @@ const CreateAdvertisement = () => {
                                     Основная камера
                                 </Typography>
                             </Grid>
-
-                            <AdvertisementSelect/>
+                            <Grid item xs={12} sm={6} md={3} lg={3}>
+                                <AdvertisementSelect />
+                            </Grid>
 
                             <Grid item xs={12} sm={6} md={3} lg={3} xl={3}>
                                 <Typography variant="subtitle1">
                                     NFC модуль
                                 </Typography>
                             </Grid>
-
-                            <AdvertisementSelect/>
+                            <Grid item xs={12} sm={6} md={3} lg={3}>
+                                <AdvertisementSelect />
+                            </Grid>
                         </Grid>
                         <Grid
                             container
@@ -259,16 +267,18 @@ const CreateAdvertisement = () => {
                                     Фронтальная камера
                                 </Typography>
                             </Grid>
-
-                            <AdvertisementSelect/>
+                            <Grid item xs={12} sm={6} md={3} lg={3}>
+                                <AdvertisementSelect />
+                            </Grid>
 
                             <Grid item xs={12} sm={6} md={3} lg={3} xl={3}>
                                 <Typography variant="subtitle1">
                                     Срок использования
                                 </Typography>
                             </Grid>
-
-                            <AdvertisementSelect/>
+                            <Grid item xs={12} sm={6} md={3} lg={3}>
+                                <AdvertisementSelect />
+                            </Grid>
                         </Grid>
                         <Grid
                             container
@@ -372,8 +382,9 @@ const CreateAdvertisement = () => {
                                     </strong>
                                 </Typography>
                             </Grid>
-
-                            <AdvertisementSelect/>
+                            <Grid item xs={12} sm={6} md={3} lg={3}>
+                                <AdvertisementSelect />
+                            </Grid>
                         </Grid>
                         <Grid item xs={12}>
                             <Typography variant="h5" color="initial">
@@ -404,7 +415,7 @@ const CreateAdvertisement = () => {
                                     onChange={handleCheckboxChange}
                                     color="primary"
                                 />
-                                <Help className="question-mark"/>
+                                <Help className="question-mark" />
                                 <Typography variant="subtitle2">
                                     Примечание: Вы подключили услугу «Безопасный
                                     торг». Ваша сделка защищена. Стоимость
@@ -442,7 +453,7 @@ const CreateAdvertisement = () => {
                                     onChange={handleCheckboxChange}
                                     color="primary"
                                 />
-                                <Help className="question-mark"/>
+                                <Help className="question-mark" />
                                 <Typography variant="subtitle2">
                                     Примечание: Вы будете выделены специальным
                                     стикером доставка. Доставка осуществляется
@@ -484,11 +495,11 @@ const CreateAdvertisement = () => {
                                         'aria-label': 'secondary checkbox',
                                     }}
                                 />
-                                <Help className="question-mark"/>
+                                <Help className="question-mark" />
                                 <Typography variant="subtitle2">
                                     Примечание: Вы принимаете предложения от
                                     других пользователей на обмен. Вы будете
-                                    выделены специальным <br/>
+                                    выделены специальным <br />
                                     стикером «Возможен обмен»
                                 </Typography>
                             </Grid>
@@ -515,17 +526,17 @@ const CreateAdvertisement = () => {
                                     InputProps={{
                                         startAdornment: (
                                             <InputAdornment position="start">
-                                                <Search/>
+                                                <Search />
                                             </InputAdornment>
-                                        )
+                                        ),
                                     }}
                                 />
                             </Grid>
                             <Hidden xsDown>
-                                <Grid item sm={3}/>
+                                <Grid item sm={3} />
                             </Hidden>
                             <Grid item xs={12} sm={9}>
-                                <div className='photos-dropdown'/>
+                                <div className="photos-dropdown" />
                             </Grid>
                         </Grid>
 
@@ -633,6 +644,7 @@ const CreateAdvertisement = () => {
                                     variant="contained"
                                     color="primary"
                                     className={classes.nextButton}
+                                    onClick={props.handlePreview}
                                 >
                                     Далее
                                 </ButtonComponent>
@@ -648,7 +660,7 @@ const CreateAdvertisement = () => {
                             className={classes.adBanner}
                         >
                             <Grid item md={12}>
-                                <div className='right-banner'/>
+                                <div className="right-banner" />
                             </Grid>
                         </Grid>
                     </Hidden>
