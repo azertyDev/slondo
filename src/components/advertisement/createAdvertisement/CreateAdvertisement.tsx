@@ -20,7 +20,12 @@ import { Help, Search } from '@material-ui/icons'
 // Styles
 import { useStyles } from './useStyles'
 
+<<<<<<< HEAD:src/components/advertisement/createAdvertisement/CreateAdvertisement.tsx
 const CreateAdvertisement = (props) => {
+=======
+// test
+const CreateAdvertisement = () => {
+>>>>>>> dev:src/components/createAdvertisement/CreateAdvertisement.tsx
     const classes = useStyles()
     const [value, setValue] = useState('')
     const [checked, setChecked] = useState(false)
