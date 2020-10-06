@@ -51,8 +51,8 @@ const theme = createMuiTheme({
             '@global': {
                 body: {
                     fontSize: '16px',
+                    backgroundColor: colors.white,
                 },
-                backgroundColor: colors.white,
                 '@font-face': [calibri],
                 ':focus': {
                     outline: 0,
