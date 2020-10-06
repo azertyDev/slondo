@@ -38,10 +38,6 @@ export const TopHeader = (props) => {
                         <div className="location">
                             <Typography variant="subtitle1">
                                 {/*{local.location}:*/}
-<<<<<<< HEAD
-                                Местоположение
-=======
->>>>>>> dev
                             </Typography>
                             <img src={PlIcon} className="pl-icon"/>
                             <Typography

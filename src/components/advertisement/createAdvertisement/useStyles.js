@@ -23,6 +23,11 @@ export const useStyles = makeStyles((theme) => ({
             fontSize: '2rem',
             margin: '30px 0',
         },
+        [theme.breakpoints.down('xs')]: {
+            fontSize: '2rem',
+            margin: '30px 0',
+            textAlign: 'center'
+        },
     },
     advertisementSettings: {
         margin: '30px 0',
