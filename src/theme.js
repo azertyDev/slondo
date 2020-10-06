@@ -1,5 +1,5 @@
-import {createMuiTheme} from '@material-ui/core/styles'
-import {SERVER_URL} from './constants'
+import { createMuiTheme } from '@material-ui/core/styles'
+import { SERVER_URL } from './constants'
 
 const calibri = {
     fontFamily: 'Calibri',
@@ -17,8 +17,8 @@ const colors = {
     gray: '#C0C0C0',
     adBgColor: '#88CAEC',
     lotBgColor: '#AD66D5',
-    createAdBtnColor: '#7DBCF6'
-};
+    createAdBtnColor: '#7DBCF6',
+}
 
 // Create a theme instance.
 const theme = createMuiTheme({
@@ -28,7 +28,7 @@ const theme = createMuiTheme({
             white: colors.white,
             gray: colors.gray,
             adBgColor: colors.adBgColor,
-            createAdBtnColor: colors.createAdBtnColor
+            createAdBtnColor: colors.createAdBtnColor,
         },
     },
     breakpoints: {
@@ -49,7 +49,7 @@ const theme = createMuiTheme({
     overrides: {
         MuiCssBaseline: {
             '@global': {
-                'body': {
+                body: {
                     fontSize: '16px',
                     backgroundColor: colors.white,
                 },
