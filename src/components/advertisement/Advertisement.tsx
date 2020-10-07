@@ -5,20 +5,28 @@ import { Grid, Hidden, Container } from '@material-ui/core'
 
 // styles
 import { useStyles } from './useStyles'
+import { SuccessAdvertisement } from './successAdvertisement/SuccessAdvertisement'
 
 export const Advertisement = (props) => {
     const classes = useStyles()
 
     return (
         <div className={classes.root}>
-            <Container maxWidth='lg'>
+            <Container maxWidth="lg">
                 <Grid container spacing={1}>
                     <Grid item xs={12} md={9}>
-                    {props.isPreview ? (
-                        <PreviewAdvertisement />
-                    ) : (
-                        <CreateAdvertisement handlePreview={props.handlePreview} />
-                    )}
+                        {props.isSuccess ? (
+                            <SuccessAdvertisement />
+                        ) : props.isPreview ? (
+                            <PreviewAdvertisement
+                                handleSuccess={props.handleSuccess}
+                            />
+                        ) : (
+                            <CreateAdvertisement
+                                handlePreview={props.handlePreview}
+                            />
+                        )}
+                        
                     </Grid>
                     <Hidden smDown>
                         <Grid

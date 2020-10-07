@@ -1,4 +1,5 @@
 import {makeStyles} from '@material-ui/core/styles'
+import theme from '../../../theme'
 
 export const useStyles = makeStyles(() => ({
     root: {
@@ -11,8 +12,20 @@ export const useStyles = makeStyles(() => ({
         },
         
         '& div.card-title > h6': {
+            backgroundColor: '#88caec',
             position: 'absolute',
             top: '10px',
+            left: '10px',
+            height: '17px',
+            padding: '0 5px',
+            lineHeight: '1.3',
+            borderRadius: '3px',
+            color: '#fff',
+        },
+        '& div.card-categoryName': {
+            opacity: '0.4',
+            position: 'absolute',
+            bottom: '95px',
             left: '10px',
             height: '17px',
             padding: '0 5px',
@@ -27,6 +40,9 @@ export const useStyles = makeStyles(() => ({
         
         '& h6.MuiTypography-subtitle1': {
             fontSize: '1.375rem',
+            [theme.breakpoints.down('sm')]: {
+                fontSize: '1.2rem',
+            }
         },
         '& div.MuiCardContent-root': {
             paddingBottom: '10px',

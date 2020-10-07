@@ -104,7 +104,7 @@ export const useStyles = makeStyles((theme) => ({
         color: '#9b66d2',
     },
     nextButtonBlock: {
-        marginTop: '50px',
+        margin: '50px 0',
         [theme.breakpoints.down('md')]: {
             marginTop: '30px',
         },

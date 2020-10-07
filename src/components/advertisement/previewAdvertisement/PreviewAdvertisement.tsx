@@ -1,11 +1,11 @@
 import React from 'react'
-import { Container, Grid, Typography } from '@material-ui/core'
+import { Grid, Typography } from '@material-ui/core'
 import { ButtonComponent } from './../../elements/button/Button';
 
 // styles
 import { useStyles } from './useStyles'
 
-export const PreviewAdvertisement = () => {
+export const PreviewAdvertisement = (props) => {
     const classes = useStyles()
     return (
         <div className={classes.root}>
@@ -350,7 +350,7 @@ export const PreviewAdvertisement = () => {
                             <ButtonComponent>Назад</ButtonComponent>
                         </Grid>
                         <Grid item xs={6} container alignItems="center">
-                            <ButtonComponent>Далее</ButtonComponent>
+                            <ButtonComponent onClick={props.handleSuccess}>Далее</ButtonComponent>
                         </Grid>
                     </Grid>
                 </Grid>

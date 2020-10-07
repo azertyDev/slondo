@@ -5,7 +5,7 @@ import {Card, CardActionArea, CardContent, CardMedia, Typography} from '@materia
 import {useStyles} from './useStyle'
 
 export const CardItem = (props) => {
-    const {title, description, image, price} = props;
+    const {title, description, image, price,categoryName} = props;
     const classes = useStyles();
     return (
         <Card className={classes.root}>
@@ -15,6 +15,12 @@ export const CardItem = (props) => {
                         {title}
                     </Typography>
                 </div>
+                <div className='card-categoryName'>
+                    <Typography variant="subtitle2">
+                        {categoryName}
+                    </Typography>
+                </div>
+
                 <CardMedia
                     className='card-media'
                     image={image}

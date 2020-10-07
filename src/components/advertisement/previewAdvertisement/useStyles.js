@@ -7,9 +7,13 @@ export const useStyles = makeStyles((theme) => ({
             marginBottom: '10px',
         },
     },
-    title: { margin: '30px 0' },
+    title: { margin: '50px 0' },
     subTitle: { margin: '20px 0' },
     buttons: {
-        marginTop: '50px'
+        margin: '50px 0',
+        '& button':{
+            padding: '10px 80px'
+        },
     }
 }))
+    
