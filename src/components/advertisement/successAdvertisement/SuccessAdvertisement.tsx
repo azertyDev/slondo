@@ -1,11 +1,11 @@
 import React from 'react'
 import { Grid, Typography, Paper } from '@material-ui/core'
-import { ButtonComponent } from './../../elements/button/Button'
+import { ButtonComponent } from '../../elements/button/Button'
 import HomeIcon from '@material-ui/icons/Home'
 import CheckCircleIcon from '@material-ui/icons/CheckCircle'
 // styles
 import { useStyles } from './useStyles'
-import { AdsAndLotsBlock } from '../../elements/adsAndLotsBlock/adsAndLotsBlock'
+import { AdsAndLotsBlock } from '../../elements/adsAndLotsBlock/AdsAndLotsBlock'
 
 export const SuccessAdvertisement = () => {
     const classes = useStyles()
