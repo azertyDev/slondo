@@ -1,19 +1,15 @@
-import {GetStaticProps} from 'next'
 import {Home} from '../src/components/home/Home'
-import {wrapper} from "../src/redux/store"
+import {withTranslation} from "../i18n"
 
 
-const Index = (props) => {
+const HomePage = (props) => {
     return (
         <Home {...props} />
     )
-}
+};
 
-export const getStaticProps: GetStaticProps = wrapper.getStaticProps(({store}) => {
-    const {localization} = store.getState();
-    return {
-        props: {localization}
-    }
+HomePage.getInitialProps = async () => ({
+    namespacesRequired: ['main', 'common'],
 });
 
-export default Index;
+export default withTranslation(['main', 'common'])(HomePage);

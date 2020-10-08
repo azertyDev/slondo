@@ -1,9 +1,11 @@
 import React from "react"
 import {TopHeader} from "./TopHeader"
 
-
-export const TopHeaderContainer = (props) => {
+const TopHeaderContainer = (props) => {
+    const {t} = props;
     return (
-        <TopHeader local={props.local}/>
+        <TopHeader t={t}/>
     )
-}
+};
+
+export default TopHeaderContainer

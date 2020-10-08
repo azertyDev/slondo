@@ -1,4 +1,5 @@
 import React from 'react'
+import Link from 'next/link'
 import {MainSlider} from '../header/sliders/mainSlider/MainSlider'
 import {CategoriesSlider} from '../header/sliders/categoriesSlider/CategoriesSlider'
 import {MainContent} from './mainContent/MainContent'
@@ -6,8 +7,10 @@ import {Container, Hidden, Slide, Typography, useScrollTrigger} from "@material-
 import {useStyles} from './useStyle'
 
 
-export const Home = () => {
+export const Home = (props) => {
+    const {t} = props;
     const trigger = useScrollTrigger();
+
     const classes = useStyles();
     return (
         <>
@@ -17,22 +20,26 @@ export const Home = () => {
                 </div>
                 <Container maxWidth='lg'>
                     <div className={classes.categorySlider}>
-                        <CategoriesSlider/>
+                        <CategoriesSlider t={t}/>
                     </div>
                     <div className={classes.mainContent}>
-                        <MainContent/>
+                        <MainContent t={t}/>
                     </div>
                 </Container>
             </main>
             <Hidden mdUp>
                 <div className={classes.createAdBlock}>
-                    <Slide appear={false} direction='up' in={!trigger}>
-                        <a href='/create_advertisement'>
-                            <Typography variant='h6'>
-                                Создать объявление
-                            </Typography>
+                    <Link href='/create_advertisement'>
+                        <a>
+                            <Slide appear={false} direction='up' in={!trigger}>
+                                <div>
+                                    <Typography variant='h6'>
+                                        {t('common:createAd')}
+                                    </Typography>
+                                </div>
+                            </Slide>
                         </a>
-                    </Slide>
+                    </Link>
                 </div>
             </Hidden>
         </>

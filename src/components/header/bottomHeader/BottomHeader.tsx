@@ -1,4 +1,5 @@
 import React, {useState} from "react"
+import Link from 'next/link'
 import {AppBar, Container, Grid, Hidden, MenuItem, Select, Typography} from "@material-ui/core"
 import {ButtonComponent} from "../../elements/button/Button"
 import {SearchForm} from "../../elements/search_form/SearchForm"
@@ -13,14 +14,14 @@ import {useStyles} from "./useStyle"
 
 
 const BottomHeader = (props) => {
-    const classes = useStyles(props);
-    const {isScrollBreak} = props;
+    const {isScrollBreak, t} = props;
     const [adType, setAdType] = useState('');
 
     const handleChange = (e) => {
         setAdType(e.target.value);
     };
 
+    const classes = useStyles(props);
 
     return (
         <div className={classes.root}>
@@ -30,13 +31,15 @@ const BottomHeader = (props) => {
                         <Grid container justify="space-between" alignItems="center" spacing={1}>
                             <Grid container item xs={3} alignItems="center">
                                 <Grid container item md={7} lg={6} className="bottom-logo">
-                                    <a href="/">
-                                        <img src={Logo} alt="Slondo logo"/>
-                                    </a>
+                                    <Link href='/'>
+                                        <a>
+                                            <img src={Logo} alt="Slondo logo"/>
+                                        </a>
+                                    </Link>
                                 </Grid>
                                 <Grid item container md={5} lg={6} justify="center" className="category-menu">
                                     <ButtonComponent>
-                                        <Typography variant="subtitle2">Категории</Typography>
+                                        <Typography variant="subtitle2">{t('categories')}</Typography>
                                         <img
                                             src={CategoryIcon}
                                             alt="Category icon"
@@ -53,7 +56,7 @@ const BottomHeader = (props) => {
                                 className="search-block"
                             >
                                 <Grid item md={9}>
-                                    <SearchForm/>
+                                    <SearchForm t={t}/>
                                 </Grid>
                                 <Grid className='select-menu' item md={3}>
                                     <Select
@@ -63,7 +66,7 @@ const BottomHeader = (props) => {
                                         displayEmpty
                                     >
                                         <MenuItem value="">
-                                            <Typography variant='subtitle2'>Тип объявления</Typography>
+                                            <Typography variant='subtitle2'>{t('adType')}</Typography>
                                         </MenuItem>
                                         <MenuItem value={10}>
                                             <Typography variant='subtitle2'>test</Typography>
@@ -78,22 +81,24 @@ const BottomHeader = (props) => {
                                 </Grid>
                             </Grid>
                             <Grid item md={2} className='create-ad'>
-                                <ButtonComponent>
-                                    <Typography variant="subtitle2">
-                                        Создать объявление
-                                    </Typography>
-                                    <img
-                                        src={AddIcon}
-                                        style={{
-                                            marginLeft: '10px',
-                                            height: '20px',
-                                        }}
-                                    />
-                                </ButtonComponent>
+                                <Link href='/create_advertisement'>
+                                    <a>
+                                        <Typography variant="subtitle2">
+                                            {t('common:createAd')}
+                                        </Typography>
+                                        <img
+                                            src={AddIcon}
+                                            style={{
+                                                marginLeft: '10px',
+                                                height: '20px',
+                                            }}
+                                        />
+                                    </a>
+                                </Link>
                             </Grid>
                             <Grid item container alignItems="center" xs={1}>
                                 <ButtonComponent className='bottom-sign-button' onClick={props.handleOpenModal}>
-                                    <Typography variant="subtitle2">Войти</Typography>
+                                    <Typography variant="subtitle2">{t('signin')}</Typography>
                                     <img src={SignIcon} alt="Sign in"/>
                                 </ButtonComponent>
                             </Grid>
@@ -104,7 +109,7 @@ const BottomHeader = (props) => {
             {/*      Adaptive       */}
             <Hidden mdUp>
                 <div className='select-local'>
-                    <SearchForm/>
+                    <SearchForm t={t}/>
                 </div>
             </Hidden>
         </div>

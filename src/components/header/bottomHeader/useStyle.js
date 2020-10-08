@@ -37,9 +37,6 @@ export const useStyles = makeStyles((theme) => ({
                 marginLeft: '8px'
             }
         },
-        '& span.MuiButton-label': {
-            textTransform: 'none',
-        },
         '& div.select-menu > div': {
             width: '100%',
             '& div.MuiSelect-selectMenu': {
@@ -51,6 +48,17 @@ export const useStyles = makeStyles((theme) => ({
             },
             '& svg': {
                 right: 0
+            }
+        },
+        '& div.create-ad': {
+            backgroundColor: theme.palette.primary.main,
+            borderRadius: '6px',
+            '& > a': {
+                display: 'flex',
+                justifyContent: 'center',
+                padding: '3px 10px',
+                color: theme.palette.primary.white,
+                textDecoration: 'none'
             }
         },
         '& button.bottom-sign-button': {

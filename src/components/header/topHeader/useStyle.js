@@ -5,8 +5,7 @@ export const useStyles = makeStyles((theme) => ({
     root: {
         '& div.location': {
             display: 'flex',
-            alignItems: 'center',
-            fontSize: '14px'
+            alignItems: 'center'
         },
         '& img.pl-icon': {
             width: '32px',
@@ -34,6 +33,9 @@ export const useStyles = makeStyles((theme) => ({
                 '& > img': {
                     [theme.breakpoints.down('lg')]: {
                         width: '15px'
+                    },
+                    [theme.breakpoints.up('lg')]: {
+                        width: '20px'
                     },
                 }
             },

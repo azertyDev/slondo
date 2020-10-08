@@ -1,4 +1,5 @@
 import React, {useState} from 'react'
+import Link from 'next/link'
 import {
     Grid,
     Hidden,
@@ -27,7 +28,7 @@ import {useStyles} from './useStyle'
 
 
 export const TopHeader = (props) => {
-    const {local} = props;
+    const {t} = props;
     const [isOpen, setIsOpen] = useState(false);
     const classes = useStyles();
     return (
@@ -37,14 +38,14 @@ export const TopHeader = (props) => {
                     <Grid item md={4}>
                         <div className="location">
                             <Typography variant="subtitle1">
-                                {/*{local.location}:*/}
+                                {t('location')}:
                             </Typography>
                             <img src={PlIcon} className="pl-icon"/>
                             <Typography
                                 variant="subtitle1"
                                 className="select-region"
                             >
-                                {/*{local.region}*/}
+                                {t('region')}
                             </Typography>
                         </div>
                     </Grid>
@@ -88,7 +89,7 @@ export const TopHeader = (props) => {
                                 <a href="#">
                                     <img src={HelpIcon}/>
                                     <Typography variant="subtitle1">
-                                        {/*{local.help}*/}
+                                        {t('help')}
                                     </Typography>
                                 </a>
                             </div>
@@ -98,7 +99,7 @@ export const TopHeader = (props) => {
                                 <a href="#">
                                     <img src={StoreIcon}/>
                                     <Typography variant="subtitle1">
-                                        {/*{local.shops}*/}
+                                        {t('shops')}
                                     </Typography>
                                 </a>
                             </div>
@@ -108,7 +109,7 @@ export const TopHeader = (props) => {
                                 <a href="#">
                                     <img src={BusinessIcon}/>
                                     <Typography variant="subtitle1">
-                                        {/*{local.forBusiness}*/}
+                                        {t('forBusiness')}
                                     </Typography>
                                 </a>
                             </div>
@@ -141,9 +142,11 @@ export const TopHeader = (props) => {
                                 </IconButton>
                             </Grid>
                             <Grid className="top-header-logo">
-                                <a href="/">
-                                    <img src={Logo} alt="Slondo logo"/>
-                                </a>
+                                <Link href="/">
+                                    <a>
+                                        <img src={Logo} alt="Slondo logo"/>
+                                    </a>
+                                </Link>
                             </Grid>
                             <Grid className={classes.avatarBlock}>
                                 <img src={Avatar} alt='avatar'/>
