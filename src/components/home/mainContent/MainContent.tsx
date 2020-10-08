@@ -8,7 +8,7 @@ import {
 import {BackSpaceArrow} from '../../elements/icons'
 import {CardItem} from '../../elements/card/Card'
 import {ButtonComponent} from '../../elements/button/Button'
-import {CustomTab} from '../../elements/tab/Tab'
+import {CustomTab} from '../../elements/custom_tab/CustomTab'
 import {useStyles} from './useStyles'
 
 

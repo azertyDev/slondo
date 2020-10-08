@@ -8,6 +8,7 @@ import {
     TextField,
 } from '@material-ui/core'
 import {ButtonComponent} from '../button/Button'
+import {CustomTab} from '../custom_tab/CustomTab'
 import {
     BonusIcon,
     BezopasniyTorgIcon,
@@ -15,7 +16,6 @@ import {
     TorgIcon,
     RatingIcon,
 } from '../icons'
-import {CustomTab} from '../tab/Tab'
 
 // styles
 import {useStyles} from './useStyles'
