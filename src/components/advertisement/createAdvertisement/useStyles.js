@@ -23,6 +23,11 @@ export const useStyles = makeStyles((theme) => ({
             fontSize: '2rem',
             margin: '30px 0',
         },
+        [theme.breakpoints.down('xs')]: {
+            fontSize: '2rem',
+            margin: '30px 0',
+            textAlign: 'center'
+        },
     },
     advertisementSettings: {
         margin: '30px 0',
@@ -99,7 +104,7 @@ export const useStyles = makeStyles((theme) => ({
         color: '#9b66d2',
     },
     nextButtonBlock: {
-        marginTop: '50px',
+        margin: '50px 0',
         [theme.breakpoints.down('md')]: {
             marginTop: '30px',
         },
