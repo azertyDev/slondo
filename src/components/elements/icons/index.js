@@ -34,6 +34,11 @@ const AdvertisementIcon = `icons/obyavleniya_icon.svg`
 const TorgIcon = `icons/torg_icon.svg`
 const RatingIcon = `icons/rating_icon.svg`
 const BackSpaceArrow = `icons/back_space_arrow.svg`
+const ShareIcon = `icons/share-icon.svg`
+const DownArrow = `icons/down_arrow.svg`
+const EyeIcon = `icons/eye_icon.svg`
+const HeartIcon = `icons/heart_icon.svg`
+const ComplainIcon = `icons/complain_icon.svg`
 
 
 export {
@@ -72,5 +77,10 @@ export {
     AdvertisementIcon,
     TorgIcon,
     RatingIcon,
-    BackSpaceArrow
+    BackSpaceArrow,
+    ShareIcon,
+    DownArrow,
+    EyeIcon,
+    HeartIcon,
+    ComplainIcon
 }

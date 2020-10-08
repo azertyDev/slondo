@@ -1,14 +1,15 @@
 import React from 'react'
-import {TopHeaderContainer} from "./topHeader/TopHeaderContainer"
+import {Container} from '@material-ui/core'
+import TopHeaderContainer from "./topHeader/TopHeaderContainer"
 import BottomHeader from './bottomHeader/BottomHeader'
-import { Container } from '@material-ui/core'
-import { ModalComponent } from '../elements/modal/Modal'
+import {ModalComponent} from '../elements/modal/Modal'
+import {withTranslation} from '../../../i18n'
 
 // styles
-import { useStyles } from './useStyles'
+import {useStyles} from './useStyles'
 
-export const Header = () => {
-
+const Header = (props) => {
+    const {t} = props;
     const classes = useStyles();
     const [open, setOpen] = React.useState(false);
 
@@ -23,9 +24,9 @@ export const Header = () => {
     return (
         <header className={classes.root}>
             <Container maxWidth="lg">
-                <TopHeaderContainer />
+                <TopHeaderContainer t={t}/>
                 <div className={classes.bottomHeaderWrapper}>
-                    <BottomHeader handleOpenModal={handleOpenModal} />
+                    <BottomHeader t={t} handleOpenModal={handleOpenModal}/>
                 </div>
                 <ModalComponent
                     open={open}
@@ -35,3 +36,5 @@ export const Header = () => {
         </header>
     )
 };
+
+export default withTranslation(['header', 'common'])(Header);

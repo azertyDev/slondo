@@ -12,7 +12,12 @@ export const settings = {
             breakpoint: 1000,
             settings: {
                 slidesToShow: 3,
-                initialSlide: 2
+            }
+        },
+        {
+            breakpoint: 650,
+            settings: {
+                slidesToShow: 2,
             }
         },
         {

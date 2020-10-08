@@ -1,30 +1,27 @@
 import React from "react"
-import {useDispatch} from 'react-redux'
-import {setLocal} from "../../../redux/actions/localizationActions"
 import {Typography} from "@material-ui/core"
+import {i18n} from '../../../../i18n'
 import {useStyles} from './useStyles'
 
 
 export const Localization = () => {
-    const dispatch = useDispatch();
 
-    const setLocalAction = (lang) => () => {
-        dispatch(setLocal(lang))
-    };
+    const setLocalAction = (lang) => () => i18n.changeLanguage(lang);
+
     const classes = useStyles()
 
     return (
         <div className={classes.root}>
             <Typography
                 variant="subtitle1"
-                className="localization-item"
+                className={i18n.language === 'ru' ? classes.selected : ''}
                 onClick={setLocalAction('ru')}
             >
                 Ру
             </Typography>
             <Typography
                 variant="subtitle1"
-                className="localization-item"
+                className={i18n.language === 'uz' ? classes.selected : ''}
                 onClick={setLocalAction('uz')}
             >
                 O’z

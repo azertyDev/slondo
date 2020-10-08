@@ -1,13 +1,13 @@
 import makeStyles from '@material-ui/core/styles/makeStyles'
 
+
 export const useStyles = makeStyles((theme) => ({
     root: {
         display: 'flex',
-        '& > h6.localization-item': {
+        '& > h6': {
             lineHeight: 1,
             cursor: 'pointer',
             '&:first-child': {
-                color: theme.palette.primary.main,
                 paddingRight: '4px',
                 borderRight: '1px #000 solid'
             },
@@ -15,5 +15,8 @@ export const useStyles = makeStyles((theme) => ({
                 paddingLeft: '4px',
             }
         }
+    },
+    selected:{
+        color: theme.palette.primary.main
     }
 }))

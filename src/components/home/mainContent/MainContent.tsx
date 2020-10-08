@@ -25,13 +25,14 @@ const TabPanel = (props) => {
     )
 };
 
-export const MainContent = () => {
-    const classes = useStyles()
-    const [value, setValue] = useState(0)
+export const MainContent = (props) => {
+    const {t} = props;
+    const classes = useStyles();
+    const [value, setValue] = useState(0);
 
     const handleChange = (event, newValue) => {
         setValue(newValue)
-    }
+    };
 
     return (
         <div className={classes.root}>
@@ -43,8 +44,8 @@ export const MainContent = () => {
                         indicatorColor="primary"
                         className="tabs"
                     >
-                        <Tab label={<Typography>Все объявления</Typography>} id={0} selected={true}/>
-                        <Tab label={<Typography>Все аукционы</Typography>} id={1}/>
+                        <Tab label={<Typography>{t("allAds")}</Typography>} id={0} selected={true}/>
+                        <Tab label={<Typography>{t("allLots")}</Typography>} id={1}/>
                     </Tabs>
                 </Grid>
             </Grid>
@@ -55,7 +56,7 @@ export const MainContent = () => {
                             <Grid item container spacing={1}>
                                 <Grid xs={6} sm={4} lg={3} item>
                                     <CardItem
-                                        title="Объявление"
+                                        title={t('ad')}
                                         className="card-item"
                                         alt="adv"
                                         image={`img/card-image.jpg`}
@@ -65,7 +66,7 @@ export const MainContent = () => {
                                 </Grid>
                                 <Grid xs={6} sm={4} lg={3} item>
                                     <CardItem
-                                        title="Объявление"
+                                        title={t('ad')}
                                         className="card-item"
                                         alt="adv"
                                         image={`img/card-image.jpg`}
@@ -75,7 +76,7 @@ export const MainContent = () => {
                                 </Grid>
                                 <Grid xs={6} sm={4} lg={3} item>
                                     <CardItem
-                                        title="Объявление"
+                                        title={t('ad')}
                                         className="card-item"
                                         alt="adv"
                                         image={`img/card-image.jpg`}
@@ -85,7 +86,7 @@ export const MainContent = () => {
                                 </Grid>
                                 <Grid xs={6} sm={4} lg={3} item>
                                     <CardItem
-                                        title="Объявление"
+                                        title={t('ad')}
                                         className="card-item"
                                         alt="adv"
                                         image={`img/card-image.jpg`}
@@ -95,7 +96,7 @@ export const MainContent = () => {
                                 </Grid>
                                 <Grid xs={6} sm={4} lg={3} item>
                                     <CardItem
-                                        title="Объявление"
+                                        title={t('ad')}
                                         className="card-item"
                                         alt="adv"
                                         image={`img/card-image.jpg`}
@@ -105,7 +106,7 @@ export const MainContent = () => {
                                 </Grid>
                                 <Grid xs={6} sm={4} lg={3} item>
                                     <CardItem
-                                        title="Объявление"
+                                        title={t('ad')}
                                         className="card-item"
                                         alt="adv"
                                         image={`img/card-image.jpg`}
@@ -115,7 +116,7 @@ export const MainContent = () => {
                                 </Grid>
                                 <Grid xs={6} sm={4} lg={3} item>
                                     <CardItem
-                                        title="Объявление"
+                                        title={t('ad')}
                                         className="card-item"
                                         alt="adv"
                                         image={`img/card-image.jpg`}
@@ -125,7 +126,7 @@ export const MainContent = () => {
                                 </Grid>
                                 <Grid xs={6} sm={4} lg={3} item>
                                     <CardItem
-                                        title="Объявление"
+                                        title={t('ad')}
                                         className="card-item"
                                         alt="adv"
                                         image={`img/card-image.jpg`}
@@ -141,7 +142,7 @@ export const MainContent = () => {
                             <Grid item container spacing={1}>
                                 <Grid xs={6} sm={4} lg={3} item>
                                     <CardItem
-                                        title="Лот"
+                                        title={t('lot')}
                                         className="card-item"
                                         alt="adv"
                                         image={`img/card-image.jpg`}
@@ -151,7 +152,7 @@ export const MainContent = () => {
                                 </Grid>
                                 <Grid xs={6} sm={4} lg={3} item>
                                     <CardItem
-                                        title="Лот"
+                                        title={t('lot')}
                                         className="card-item"
                                         alt="adv"
                                         image={`img/card-image.jpg`}
@@ -161,7 +162,7 @@ export const MainContent = () => {
                                 </Grid>
                                 <Grid xs={6} sm={4} lg={3} item>
                                     <CardItem
-                                        title="Лот"
+                                        title={t('lot')}
                                         className="card-item"
                                         alt="adv"
                                         image={`img/card-image.jpg`}
@@ -171,7 +172,7 @@ export const MainContent = () => {
                                 </Grid>
                                 <Grid xs={6} sm={4} lg={3} item>
                                     <CardItem
-                                        title="Лот"
+                                        title={t('lot')}
                                         className="card-item"
                                         alt="adv"
                                         image={`img/card-image.jpg`}
@@ -181,7 +182,7 @@ export const MainContent = () => {
                                 </Grid>
                                 <Grid xs={6} sm={4} lg={3} item>
                                     <CardItem
-                                        title="Лот"
+                                        title={t('lot')}
                                         className="card-item"
                                         alt="adv"
                                         image={`img/card-image.jpg`}
@@ -191,7 +192,7 @@ export const MainContent = () => {
                                 </Grid>
                                 <Grid xs={6} sm={4} lg={3} item>
                                     <CardItem
-                                        title="Лот"
+                                        title={t('lot')}
                                         className="card-item"
                                         alt="adv"
                                         image={`img/card-image.jpg`}
@@ -201,7 +202,7 @@ export const MainContent = () => {
                                 </Grid>
                                 <Grid xs={6} sm={4} lg={3} item>
                                     <CardItem
-                                        title="Лот"
+                                        title={t('lot')}
                                         className="card-item"
                                         alt="adv"
                                         image={`img/card-image.jpg`}
@@ -211,7 +212,7 @@ export const MainContent = () => {
                                 </Grid>
                                 <Grid xs={6} sm={4} lg={3} item>
                                     <CardItem
-                                        title="Лот"
+                                        title={t('lot')}
                                         className="card-item"
                                         alt="adv"
                                         image={`img/card-image.jpg`}
@@ -240,7 +241,7 @@ export const MainContent = () => {
             <Grid container className={classes.showMoreContainer}>
                 <Grid item xs={12} md={9} className='show-more-block'>
                     <ButtonComponent>
-                        Показать еще
+                        {t('showMore')}
                         <img src={BackSpaceArrow} alt='back_space_arrow'/>
                     </ButtonComponent>
                     <div className='show-more-line'/>

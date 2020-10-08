@@ -6,13 +6,13 @@ import {settings} from './sliderSettings'
 import {useStyles} from './useStyles'
 
 
-export const CategoriesSlider = () => {
-
+export const CategoriesSlider = (props) => {
+    const {t} = props;
     const classes = useStyles();
 
     return (
         <div className={classes.root}>
-            <Typography variant="h4">Популярные категории</Typography>
+            <Typography variant="h4">{t('popularCategories')}</Typography>
             <div className='category-slider'>
                 <SlickSlider {...settings}>
                     <a href="#">

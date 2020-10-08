@@ -1,11 +1,12 @@
-import React, {FunctionComponent} from "react"
+import React from "react"
 import {Hidden, Typography} from "@material-ui/core"
 import {SearchIcon, FilterIcon} from "../icons";
 import {ButtonComponent} from "../button/Button"
 import {useStyles} from "./useStyles"
 
 
-export const SearchForm: FunctionComponent = () => {
+export const SearchForm = (props) => {
+    const {t} = props;
     const classes = useStyles();
     return (
         <form className={classes.root}>
@@ -17,12 +18,12 @@ export const SearchForm: FunctionComponent = () => {
             <input
                 type="text"
                 className="search-input"
-                placeholder="Что будем искать?"
+                placeholder={t('searchText')}
             />
             <Hidden smDown>
                 <ButtonComponent className="search-button">
                     <Typography variant="subtitle2">
-                        Найти
+                        {t('searchBtn')}
                     </Typography>
                 </ButtonComponent>
             </Hidden>
