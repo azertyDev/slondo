@@ -1,27 +1,28 @@
-import React, { useState } from 'react'
+import React, {useState} from 'react'
 import {
     Grid,
     Modal,
     Typography,
     Container,
     Tabs,
-    Tab,
     TextField,
 } from '@material-ui/core'
-import { ButtonComponent } from '../button/Button'
+import {ButtonComponent} from '../button/Button'
 import {
     BonusIcon,
     BezopasniyTorgIcon,
     AdvertisementIcon,
     TorgIcon,
     RatingIcon,
-} from '../../elements/icons/index'
+} from '../icons'
+import {CustomTab} from '../tab/Tab'
 
 // styles
-import { useStyles } from './useStyles'
+import {useStyles} from './useStyles'
+
 
 const TabPanel = (props) => {
-    const { children, value, index, ...other } = props
+    const {children, value, index, ...other} = props
 
     return (
         <div hidden={value !== index} {...other}>
@@ -39,6 +40,7 @@ export const ModalComponent = (props) => {
         setValue(newValue)
     }
 
+    // @ts-ignore
     const body = (
         <div className={classes.body}>
             <Grid container>
@@ -51,7 +53,7 @@ export const ModalComponent = (props) => {
                             alignItems="center"
                             justify="center"
                         >
-                            <img src={BonusIcon} alt="bonus-icon" />
+                            <img src={BonusIcon} alt="bonus-icon"/>
                         </Grid>
                         <Grid item xs={9} container alignItems="center">
                             <Typography variant="subtitle2" color="initial">
@@ -108,7 +110,7 @@ export const ModalComponent = (props) => {
                             alignItems="center"
                             justify="center"
                         >
-                            <img src={TorgIcon} alt="torg-icon" />
+                            <img src={TorgIcon} alt="torg-icon"/>
                         </Grid>
                         <Grid item xs={9} container alignItems="center">
                             <Typography variant="subtitle2" color="initial">
@@ -125,7 +127,7 @@ export const ModalComponent = (props) => {
                             alignItems="center"
                             justify="center"
                         >
-                            <img src={RatingIcon} alt="rating-icon" />
+                            <img src={RatingIcon} alt="rating-icon"/>
                         </Grid>
                         <Grid item xs={9} container alignItems="center">
                             <Typography variant="subtitle2" color="initial">
@@ -156,7 +158,7 @@ export const ModalComponent = (props) => {
                                     indicatorColor="primary"
                                     className={classes.tabs}
                                 >
-                                    <Tab
+                                    <CustomTab
                                         label={
                                             <Typography variant="subtitle2">
                                                 Войти
@@ -167,7 +169,7 @@ export const ModalComponent = (props) => {
                                         disableFocusRipple
                                         disableRipple
                                     />
-                                    <Tab
+                                    <CustomTab
                                         label={
                                             <Typography variant="subtitle2">
                                                 Регистрация

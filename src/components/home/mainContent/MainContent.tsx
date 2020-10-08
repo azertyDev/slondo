@@ -3,12 +3,12 @@ import {
     Grid,
     Typography,
     Hidden,
-    Tab,
     Tabs,
 } from '@material-ui/core'
 import {BackSpaceArrow} from '../../elements/icons'
 import {CardItem} from '../../elements/card/Card'
 import {ButtonComponent} from '../../elements/button/Button'
+import {CustomTab} from '../../elements/tab/Tab'
 import {useStyles} from './useStyles'
 
 
@@ -44,8 +44,8 @@ export const MainContent = (props) => {
                         indicatorColor="primary"
                         className="tabs"
                     >
-                        <Tab label={<Typography>{t("allAds")}</Typography>} id={0} selected={true}/>
-                        <Tab label={<Typography>{t("allLots")}</Typography>} id={1}/>
+                        <CustomTab label={<Typography>{t("allAds")}</Typography>} id={0} selected={true}/>
+                        <CustomTab label={<Typography>{t("allLots")}</Typography>} id={1}/>
                     </Tabs>
                 </Grid>
             </Grid>
