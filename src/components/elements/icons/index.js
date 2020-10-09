@@ -39,7 +39,11 @@ const DownArrow = `icons/down_arrow.svg`
 const EyeIcon = `icons/eye_icon.svg`
 const HeartIcon = `icons/heart_icon.svg`
 const ComplainIcon = `icons/complain_icon.svg`
-
+const UserAvatar = `icons/user_avatar.svg`
+const StarIcon = `icons/star_icon.svg`
+const DeliveryIcon = `icons/delivery_icon.svg`
+const BezopasniyTorgIcon1 = `icons/bezopasniy_torg1.svg`
+const SwapIcon = `icons/swap_icon.png`
 
 export {
     Avatar,
@@ -82,5 +86,10 @@ export {
     DownArrow,
     EyeIcon,
     HeartIcon,
-    ComplainIcon
+    ComplainIcon,
+    UserAvatar,
+    StarIcon,
+    DeliveryIcon,
+    BezopasniyTorgIcon1,
+    SwapIcon,
 }

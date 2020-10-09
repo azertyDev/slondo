@@ -46,7 +46,7 @@ export const SuccessAdvertisement = () => {
                 </Grid>
                 
                 <Grid item container xs={12} direction="row" justify="center">
-                    <AdsAndLotsBlock />
+                    <AdsAndLotsBlock title='Возможно Вам понравится'/>
                 </Grid>
             </Grid>
         </div>
