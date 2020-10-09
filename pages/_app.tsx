@@ -1,12 +1,9 @@
 import React from 'react'
 import {compose} from "redux"
 import {ThemeProvider, CssBaseline} from '@material-ui/core'
-import Head from 'next/head'
 import App from 'next/app'
 import theme from '../src/theme'
 import {wrapper} from '../src/redux/store'
-import Header from '../src/components/header/Header'
-import {Footer} from "../src/components/footer/Footer"
 import {appWithTranslation} from '../i18n'
 
 // Import css files
@@ -25,14 +22,9 @@ const MyApp = (props) => {
 
     return (
         <>
-            <Head>
-                <title>My page</title>
-            </Head>
             <ThemeProvider theme={theme}>
                 <CssBaseline/>
-                <Header {...props.pageProps} />
                 <Component {...props.pageProps} />
-                <Footer/>
             </ThemeProvider>
         </>
     );

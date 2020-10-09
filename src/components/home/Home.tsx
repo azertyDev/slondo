@@ -5,6 +5,7 @@ import {CategoriesSlider} from '../header/sliders/categoriesSlider/CategoriesSli
 import {MainContent} from './mainContent/MainContent'
 import {Container, Hidden, Slide, Typography, useScrollTrigger} from "@material-ui/core"
 import {useStyles} from './useStyle'
+import {MainLayout} from "../MainLayout";
 
 
 export const Home = (props) => {
@@ -13,20 +14,18 @@ export const Home = (props) => {
 
     const classes = useStyles();
     return (
-        <>
-            <main>
-                <div className={classes.mainSlider}>
-                    <MainSlider/>
+        <MainLayout title=''>
+            <div className={classes.mainSlider}>
+                <MainSlider/>
+            </div>
+            <Container maxWidth='lg'>
+                <div className={classes.categorySlider}>
+                    <CategoriesSlider t={t}/>
                 </div>
-                <Container maxWidth='lg'>
-                    <div className={classes.categorySlider}>
-                        <CategoriesSlider t={t}/>
-                    </div>
-                    <div className={classes.mainContent}>
-                        <MainContent t={t}/>
-                    </div>
-                </Container>
-            </main>
+                <div className={classes.mainContent}>
+                    <MainContent t={t}/>
+                </div>
+            </Container>
             <Hidden mdUp>
                 <div className={classes.createAdBlock}>
                     <Link href='/create_advertisement'>
@@ -42,6 +41,6 @@ export const Home = (props) => {
                     </Link>
                 </div>
             </Hidden>
-        </>
+        </MainLayout>
     )
 }
