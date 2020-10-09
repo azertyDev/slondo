@@ -26,8 +26,8 @@ export const Advertisement = (props) => {
                                 handlePreview={props.handlePreview}
                             />
                         )}
-                        
                     </Grid>
+                    
                     <Hidden smDown>
                         <Grid
                             item
