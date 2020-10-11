@@ -20,7 +20,7 @@ export const AdsAndLotsBlock = (props) => {
                     </Typography>
                 </Grid>
                 
-                <Grid xs={6} sm={4} md={3} lg={2} item>
+                <Grid xs={props.xs} sm={props.sm} md={props.md} lg={props.lg} item>
                     <CardItem
                         title="Объявление"
                         className="card-item"
@@ -31,7 +31,7 @@ export const AdsAndLotsBlock = (props) => {
                         categoryName="Женский гардероб"
                     />
                 </Grid>
-                <Grid xs={6} sm={4} md={3} lg={2} item>
+                <Grid xs={props.xs} sm={props.sm} md={props.md} lg={props.lg} item>
                     <CardItem
                         title="Объявление"
                         className="card-item"
@@ -41,7 +41,7 @@ export const AdsAndLotsBlock = (props) => {
                         description="Продам сумку в хорошем соcтоянии"
                     />
                 </Grid>
-                <Grid xs={6} sm={4} md={3} lg={2} item>
+                <Grid xs={props.xs} sm={props.sm} md={props.md} lg={props.lg} item>
                     <CardItem
                         title="Объявление"
                         className="card-item"
@@ -52,7 +52,7 @@ export const AdsAndLotsBlock = (props) => {
                         categoryName="Женский гардероб"
                     />
                 </Grid>
-                <Grid xs={6} sm={4} md={3} lg={2} item>
+                <Grid xs={props.xs} sm={props.sm} md={props.md} lg={props.lg} item>
                     <CardItem
                         title="Объявление"
                         className="card-item"
@@ -62,7 +62,7 @@ export const AdsAndLotsBlock = (props) => {
                         description="Продам сумку в хорошем соcтоянии"
                     />
                 </Grid>
-                <Grid xs={6} sm={4} md={3} lg={2} item>
+                <Grid xs={props.xs} sm={props.sm} md={props.md} lg={props.lg} item>
                     <CardItem
                         title="Объявление"
                         className="card-item"
@@ -73,7 +73,7 @@ export const AdsAndLotsBlock = (props) => {
                         categoryName="Женский гардероб"
                     />
                 </Grid>
-                <Grid xs={6} sm={4} md={3} lg={2} item>
+                <Grid xs={props.xs} sm={props.sm} md={props.md} lg={props.lg} item>
                     <CardItem
                         title="Объявление"
                         className="card-item"
@@ -83,7 +83,7 @@ export const AdsAndLotsBlock = (props) => {
                         description="Продам сумку в хорошем соcтоянии"
                     />
                 </Grid>
-                <Grid xs={6} sm={4} md={3} lg={2} item>
+                <Grid xs={props.xs} sm={props.sm} md={props.md} lg={props.lg} item>
                     <CardItem
                         title="Объявление"
                         className="card-item"
@@ -94,7 +94,7 @@ export const AdsAndLotsBlock = (props) => {
                         categoryName="Женский гардероб"
                     />
                 </Grid>
-                <Grid xs={6} sm={4} md={3} lg={2} item>
+                <Grid xs={props.xs} sm={props.sm} md={props.md} lg={props.lg} item>
                     <CardItem
                         title="Объявление"
                         className="card-item"
@@ -104,7 +104,7 @@ export const AdsAndLotsBlock = (props) => {
                         description="Продам сумку в хорошем соcтоянии"
                     />
                 </Grid>
-                <Grid xs={6} sm={4} md={3} lg={2} item>
+                <Grid xs={props.xs} sm={props.sm} md={props.md} lg={props.lg} item>
                     <CardItem
                         title="Объявление"
                         className="card-item"
@@ -115,7 +115,7 @@ export const AdsAndLotsBlock = (props) => {
                         categoryName="Женский гардероб"
                     />
                 </Grid>
-                <Grid xs={6} sm={4} md={3} lg={2} item>
+                <Grid xs={props.xs} sm={props.sm} md={props.md} lg={props.lg} item>
                     <CardItem
                         title="Объявление"
                         className="card-item"
@@ -125,7 +125,7 @@ export const AdsAndLotsBlock = (props) => {
                         description="Продам сумку в хорошем соcтоянии"
                     />
                 </Grid>
-                <Grid xs={6} sm={4} md={3} lg={2} item>
+                <Grid xs={props.xs} sm={props.sm} md={props.md} lg={props.lg} item>
                     <CardItem
                         title="Объявление"
                         className="card-item"
@@ -136,7 +136,7 @@ export const AdsAndLotsBlock = (props) => {
                         categoryName="Женский гардероб"
                     />
                 </Grid>
-                <Grid xs={6} sm={4} md={3} lg={2} item>
+                <Grid xs={props.xs} sm={props.sm} md={props.md} lg={props.lg} item>
                     <CardItem
                         title="Объявление"
                         className="card-item"
@@ -146,7 +146,6 @@ export const AdsAndLotsBlock = (props) => {
                         description="Продам сумку в хорошем соcтоянии"
                     />
                 </Grid>
-         
             </Grid>
         </div>
     )

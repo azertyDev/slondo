@@ -1,14 +1,17 @@
-import React, {useState} from 'react'
+import React, { useState } from 'react'
 import {
     Grid,
     Modal,
     Typography,
     Container,
     Tabs,
-    TextField,
+    OutlinedInput,
+    IconButton,
+    InputAdornment,
 } from '@material-ui/core'
-import {ButtonComponent} from '../button/Button'
-import {CustomTab} from '../custom_tab/CustomTab'
+import { ButtonComponent } from '../button/Button'
+import { CustomTab } from '../custom_tab/CustomTab'
+// icons
 import {
     BonusIcon,
     BezopasniyTorgIcon,
@@ -16,13 +19,14 @@ import {
     TorgIcon,
     RatingIcon,
 } from '../icons'
+import { Visibility, VisibilityOff } from '@material-ui/icons'
 
 // styles
-import {useStyles} from './useStyles'
-
+import { useStyles } from './useStyles'
+import { FormattedInput } from '../maskedInput/MaskedInput'
 
 const TabPanel = (props) => {
-    const {children, value, index, ...other} = props
+    const { children, value, index, ...other } = props
 
     return (
         <div hidden={value !== index} {...other}>
@@ -39,8 +43,23 @@ export const ModalComponent = (props) => {
     const handleChange = (event, newValue) => {
         setValue(newValue)
     }
+    const [passwordValues, setPasswordValues] = React.useState({
+        password: '',
+        showPassword: false,
+    })
 
-    // @ts-ignore
+    const handleChangePassword = (prop) => (event) => {
+        setPasswordValues({ ...passwordValues, [prop]: event.target.value })
+    }
+    
+  const handleClickShowPassword = () => {
+    setPasswordValues({ ...passwordValues, showPassword: !passwordValues.showPassword });
+  };
+
+  const handleMouseDownPassword = (event) => {
+    event.preventDefault();
+  };
+
     const body = (
         <div className={classes.body}>
             <Grid container>
@@ -53,7 +72,7 @@ export const ModalComponent = (props) => {
                             alignItems="center"
                             justify="center"
                         >
-                            <img src={BonusIcon} alt="bonus-icon"/>
+                            <img src={BonusIcon} alt="bonus-icon" />
                         </Grid>
                         <Grid item xs={9} container alignItems="center">
                             <Typography variant="subtitle2" color="initial">
@@ -110,7 +129,7 @@ export const ModalComponent = (props) => {
                             alignItems="center"
                             justify="center"
                         >
-                            <img src={TorgIcon} alt="torg-icon"/>
+                            <img src={TorgIcon} alt="torg-icon" />
                         </Grid>
                         <Grid item xs={9} container alignItems="center">
                             <Typography variant="subtitle2" color="initial">
@@ -127,7 +146,7 @@ export const ModalComponent = (props) => {
                             alignItems="center"
                             justify="center"
                         >
-                            <img src={RatingIcon} alt="rating-icon"/>
+                            <img src={RatingIcon} alt="rating-icon" />
                         </Grid>
                         <Grid item xs={9} container alignItems="center">
                             <Typography variant="subtitle2" color="initial">
@@ -197,12 +216,7 @@ export const ModalComponent = (props) => {
                                     </Grid>
 
                                     <Grid item xs={12}>
-                                        <TextField
-                                            //   onChange={}
-                                            placeholder="+ (998) 97 ___ __ __"
-                                            fullWidth
-                                            variant="outlined"
-                                        />
+                                        <FormattedInput />
                                     </Grid>
 
                                     <Grid item xs={12}>
@@ -215,11 +229,38 @@ export const ModalComponent = (props) => {
                                     </Grid>
 
                                     <Grid item xs={12}>
-                                        <TextField
-                                            //   onChange={}
-                                            type="password"
+                                        <OutlinedInput
                                             fullWidth
-                                            variant="outlined"
+                                            id="filled-adornment-password"
+                                            type={
+                                                passwordValues.showPassword
+                                                    ? 'text'
+                                                    : 'password'
+                                            }
+                                            value={passwordValues.password}
+                                            onChange={handleChangePassword(
+                                                'password',
+                                            )}
+                                            endAdornment={
+                                                <InputAdornment position="end">
+                                                    <IconButton
+                                                        aria-label="toggle password visibility"
+                                                        onClick={
+                                                            handleClickShowPassword
+                                                        }
+                                                        onMouseDown={
+                                                            handleMouseDownPassword
+                                                        }
+                                                        edge="end"
+                                                    >
+                                                        {passwordValues.showPassword ? (
+                                                            <Visibility />
+                                                        ) : (
+                                                            <VisibilityOff />
+                                                        )}
+                                                    </IconButton>
+                                                </InputAdornment>
+                                            }
                                         />
                                     </Grid>
 

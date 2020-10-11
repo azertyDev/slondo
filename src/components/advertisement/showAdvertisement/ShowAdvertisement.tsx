@@ -4,7 +4,7 @@ import { BreadcrumbsComponent } from '../../elements/breadcrumbs/Breadcrumbs'
 import { ButtonComponent } from '../../elements/button/Button';
 import { AdsAndLotsBlock } from '../../elements/adsAndLotsBlock/AdsAndLotsBlock';
 import Link from 'next/link';
-import { 
+import {
     ShareIcon,
     DownArrow, 
     EyeIcon, 
@@ -17,7 +17,6 @@ import {
     Whatsapp, 
     Telegram,
     UserAvatar,
-    StarIcon,
     BezopasniyTorgIcon1,
     DeliveryIcon,
     SwapIcon
@@ -26,6 +25,7 @@ import {
 // styles
 import { useStyles } from "./useStyles";
 import { MainLayout } from '../../MainLayout';
+import { RatingComponent } from '../../elements/rating/Rating';
 
 export const ShowAdvertisement = (props) => {
     const { t } = props;
@@ -209,12 +209,7 @@ export const ShowAdvertisement = (props) => {
                                             </Typography>
                                         </Grid>
                                         <Grid item xs={12} container>
-                                            <img src={StarIcon} className={classes.starIcon}/>
-                                            <img src={StarIcon} className={classes.starIcon}/>
-                                            <img src={StarIcon} className={classes.starIcon}/>
-                                            <img src={StarIcon} className={classes.starIcon}/>
-                                            <img src={StarIcon} className={classes.starIcon}/>
-                                            <Typography variant="subtitle1" color="initial" className={classes.rating}>4.0</Typography>
+                                            <RatingComponent />
                                         </Grid>
                                     </Grid>
                                 </Grid>
@@ -269,7 +264,7 @@ export const ShowAdvertisement = (props) => {
                         </Grid>
 
                         <Grid item container xs={12} direction="row" justify="center">
-                            <AdsAndLotsBlock title='Похожие объявления'/>
+                            <AdsAndLotsBlock title='Похожие объявления' xs={6} sm={4} md={3} lg={2}/>
                         </Grid>
                     </Grid>
                 </Container>
