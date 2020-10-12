@@ -43,7 +43,7 @@ export const useStyles = makeStyles(({palette}) => ({
         }
     },
     tabsContainer: {
-        marginTop: '30px'
+        marginTop: '25px'
     },
     tabs: {
         width: '100%',

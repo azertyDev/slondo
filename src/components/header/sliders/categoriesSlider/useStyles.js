@@ -12,12 +12,11 @@ export const useStyles = makeStyles((theme) => ({
             marginTop: '20px',
             '& > div.slick-slider': {
                 '& > div.slick-prev, & > div.slick-next': {
+                    position: 'absolute',
+                    top: 'calc(50% - 20px)',
                     width: '40px',
                     height: '40px',
                     zIndex: 10,
-                    '&::before': {
-                        content: '""'
-                    }
                 },
                 '& div.slick-prev': {
                     left: 0

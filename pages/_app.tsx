@@ -6,9 +6,9 @@ import theme from '../src/theme'
 import {wrapper} from '../src/redux/store'
 import {appWithTranslation} from '../i18n'
 
-// Import css files
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
+// Slick css file
+import "../slick.min.css"
+
 
 const MyApp = (props) => {
     const {Component} = props;

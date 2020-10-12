@@ -8,8 +8,8 @@ import {useStyles} from './useStyles'
 
 export const CategoriesSlider = (props) => {
     const {t} = props;
-    const classes = useStyles();
 
+    const classes = useStyles();
     return (
         <div className={classes.root}>
             <Typography variant="h4">{t('popularCategories')}</Typography>
