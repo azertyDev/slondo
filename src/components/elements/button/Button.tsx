@@ -12,6 +12,6 @@ export const ButtonComponent  = (props: ButtonProps) => {
     const classes = useStyles();
 
     return (
-        <ButtonBase className={`${classes.root} ${className}`} {...otherProps}/>
+        <ButtonBase disableTouchRipple={true} className={`${classes.root} ${className}`} {...otherProps}/>
     )
 };

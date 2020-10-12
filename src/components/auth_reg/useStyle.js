@@ -1,79 +1,61 @@
 import {makeStyles} from '@material-ui/core/styles'
 
-export const useStyles = makeStyles(({palette}) => ({
+export const useStyles = makeStyles((theme) => ({
     root: {
-        width: '725px',
-        borderRadius: '6px',
         backgroundColor: 'white',
+        width: '725px'
     },
     modalBodyInfo: {
-        display: 'flex',
-        flexDirection: 'column',
-        padding: '15px',
-        backgroundImage: 'linear-gradient(rgba(0,0,0,.6), rgba(0,0,0,.6)), url("./img/modal-image.jpg")',
+        paddingTop: '20px',
+        paddingBottom: '110px',
+        backgroundImage:
+            'linear-gradient(rgba(0,0,0,.6), rgba(0,0,0,.6)), url("./img/modal-image.jpg")',
         backgroundSize: 'cover',
-        borderTopLeftRadius: '6px',
-        borderBottomLeftRadius: '6px',
         '& h6.MuiTypography-root': {
+            fontWeight: '500',
+            fontSize: '12px',
             lineHeight: '14px',
             color: '#fff'
         },
-        '& > div, & > div > div': {
-            display: 'flex',
-        },
-        '& > div': {
-            flexDirection: 'column',
-            justifyContent: 'space-around',
-            height: '100%',
-            '& > div': {
-                alignItems: 'center',
-                '& > img': {
-                    marginRight: '15px'
-                }
-            }
-        }
     },
-    authRegForm: {
-        height: '540px',
-        padding: '30px 15px 0'
+    infoBlock: {
+        marginBottom: '50px',
+        '&:last-child': {
+            margin: '0'
+        },
+        '& h6.MuiTypography-subtitle2': {
+            lineHeight: '16px',
+        },
     },
     welcome: {
-        '& > h6': {
-            textAlign: 'center'
+        margin: '10px 0 0 0',
+        '& h6.MuiTypography-subtitle1': {
+            fontSize: '1.2rem',
         }
     },
     tabsContainer: {
-        marginTop: '30px'
+        marginTop: '45px'
     },
     tabs: {
         width: '100%',
         '& button.MuiButtonBase-root': {
             width: '50%',
-            borderBottom: '1px solid rgba(0,0,0,.23)'
         }
-    },
-    tabPanels: {
-        marginTop: '20px'
     },
     signPanel: {
+        '& h6.MuiTypography-subtitle2': {
+            fontSize: '1rem',
+            margin: '10px 0'
+        },
         '& a': {
-            textDecoration: 'none',
-            '& > p': {
-                margin: '10px 0',
-                textAlign: 'end',
-                color: palette.primary.main,
-            }
+            textDecoration: 'none'
+        },
+        '& p.MuiTypography-body2': {
+            margin: '10px 0',
+            color: theme.palette.primary.main,
         }
     },
-    forgetPswd: {
-        display: 'flex',
-        justifyContent: 'flex-end',
-        marginTop: '10px'
-    },
     modalSignButton: {
-        display: 'flex',
-        justifyContent: 'center',
-        marginTop: '20px',
         '& button.MuiButtonBase-root': {
             color: '#fff',
             background: "linear-gradient(49.94deg, #675EAA 19.03%, #AD66D5 72.72%)",
@@ -82,22 +64,13 @@ export const useStyles = makeStyles(({palette}) => ({
             width: '50%',
         }
     },
-    agreement: {
-        marginTop: '20px',
+    expression: {
         textAlign: 'center',
-        '& > a': {
-            color: palette.primary.main,
-            textDecoration: 'none'
-        }
+        fontSize: '12px',
+        color: '#000 !important',
+        letterSpacing: '0.4px',
     },
-    errorInput: {
-        '& fieldset': {
-            borderColor: `${palette.primary.error}!important`
-        }
-    },
-    errorTxt: {
-        height: '20px',
-        margin: '5px',
-        color: palette.primary.error
+    coloredText: {
+        color: '#675EAA'
     }
 }))

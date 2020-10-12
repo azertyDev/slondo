@@ -3,7 +3,7 @@ import {makeStyles} from '@material-ui/core/styles'
 export const useStyles = makeStyles((theme) => ({
     root: {
         '& div.tabs div.MuiTabs-flexContainer': {
-            justifyContent: 'space-around',
+            justifyContent: 'space-around'
         },
         '& div.cards-container': {
             marginTop: '10px'

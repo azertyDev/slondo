@@ -1,5 +1,5 @@
-import {createMuiTheme} from '@material-ui/core/styles'
-import {SERVER_URL} from './constants'
+import { createMuiTheme } from '@material-ui/core/styles'
+import { SERVER_URL } from './constants'
 
 const calibri = {
     fontFamily: 'Calibri',
@@ -18,7 +18,6 @@ const colors = {
     adBgColor: '#88CAEC',
     lotBgColor: '#AD66D5',
     createAdBtnColor: '#7DBCF6',
-    error: '#E9372E'
 }
 
 // Create a theme instance.
@@ -30,7 +29,6 @@ const theme = createMuiTheme({
             gray: colors.gray,
             adBgColor: colors.adBgColor,
             createAdBtnColor: colors.createAdBtnColor,
-            error: colors.error
         },
     },
     breakpoints: {
@@ -43,7 +41,7 @@ const theme = createMuiTheme({
         },
     },
     typography: {
-        fontFamily: ['Calibri', "Roboto", "Helvetica", "Arial", "sans-serif"],
+        fontFamily: ['Calibri'],
         subtitle1: {
             lineHeight: 1.5,
         },
@@ -51,34 +49,26 @@ const theme = createMuiTheme({
     overrides: {
         MuiCssBaseline: {
             '@global': {
+                body: {
+                    fontSize: '16px',
+                    backgroundColor: colors.white,
+                },
                 '@font-face': [calibri],
                 ':focus': {
                     outline: 0,
                 },
-                body: {
-                    fontSize: '16px',
-                    backgroundColor: colors.white
-                }
-            }
+            },
         },
         MuiPaper: {
             root: {
-                backgroundColor: colors.white
-            }
+                backgroundColor: colors.white,
+            },
         },
         MuiOutlinedInput: {
             root: {
                 borderRadius: '6px',
-                '&:hover > fieldset.MuiOutlinedInput-notchedOutline':{
-                    borderColor: 'rgba(0, 0, 0, 0.23)'
-                }
-            }
+            },
         },
-        MuiTab: {
-            root: {
-                textTransform: 'none'
-            }
-        }
     },
 })
 

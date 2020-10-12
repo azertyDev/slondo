@@ -1,5 +1,5 @@
 import React, {useState} from "react"
-import {Link} from '../../../../i18n'
+import Link from 'next/link'
 import {AppBar, Container, Grid, Hidden, MenuItem, Select, Typography} from "@material-ui/core"
 import {ButtonComponent} from "../../elements/button/Button"
 import {SearchForm} from "../../elements/search_form/SearchForm"
@@ -22,6 +22,7 @@ const BottomHeader = (props) => {
     };
 
     const classes = useStyles(props);
+
     return (
         <div className={classes.root}>
             <Hidden smDown>

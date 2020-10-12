@@ -1,13 +1,11 @@
 import React from 'react'
-import {Link} from '../../../i18n'
+import Link from 'next/link'
 import {MainSlider} from '../header/sliders/mainSlider/MainSlider'
 import {CategoriesSlider} from '../header/sliders/categoriesSlider/CategoriesSlider'
 import {MainContent} from './mainContent/MainContent'
 import {Container, Hidden, Slide, Typography, useScrollTrigger} from "@material-ui/core"
-import {MainLayout} from "../MainLayout"
-
-// styles
 import {useStyles} from './useStyle'
+import {MainLayout} from "../MainLayout";
 
 
 export const Home = (props) => {
@@ -16,7 +14,7 @@ export const Home = (props) => {
 
     const classes = useStyles();
     return (
-        <MainLayout title={t('title')}>
+        <MainLayout title=''>
             <div className={classes.mainSlider}>
                 <MainSlider/>
             </div>
