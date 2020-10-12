@@ -1,7 +1,24 @@
 {
-  "bonus": "Получайте бонусы за регистрацию, создание объявлений или торгов",
-  "safeBuying": "Воспользуйтесь безопасной покупкой. Мы доставим товар до Ваших дверей",
-  "createAd": "Создавайте объявления, воспользуйтесь бонусами, что бы ускорить продажу",
-  "createAuction": "Создавайте торг, где пользователи смогут дать наивысшую цену за Ваш товар",
-  "rating": "Проверяйте продавцом при помощи рейтинговой системы. Чем больше звезд, тем надежнее"
+  "bonus": "Ro'yxatdan o'tish, e'lonlar yoki savdo yaratish uchun bonuslarni oling.",
+  "safeBuying": "Xavfsiz xariddan foydalaning. Mahsulotingizni eshigizni tagiga yetkazamiz.",
+  "createAd": "E'lonlar yarating, sotishni tezlashtirish uchun bonuslardan foydalaning.",
+  "createAuction": "Foydalanuvchilar sizning mahsulotingiz uchun eng yuqori narxni berishi mumkin bo'lgan savdo-sotiq yarating.",
+  "rating": "Sotuvchini reyting tizimi yordamida tekshiring. Qancha yulduzlari ko'proq, shuncha ishonchliroq.",
+  "welcome": "Slondoga xush kelibsiz!",
+  "authSite": "Saytning barcha xususiyatlaridan foydalanish uchun tizimga kiring.",
+  "signInTitle": "Kirish",
+  "signUpTitle": "Ro'yxat",
+  "signIn": "Kirish",
+  "signUp": "Ro'yxatdan o'tish",
+  "forgetPassword": "Parolni unutdingizmi?",
+  "confirm": "Tasdiqlash",
+  "enterPhone": "Telefon raqamingizni kiriting",
+  "enterPassword": "Parolni kiriting",
+  "agreement": {
+    "firstPart": "Saytga kirish orqali siz",
+    "secondPart": "litsenziya shartnomasi",
+    "thirdPart": "va",
+    "fourthPart": "maxfiylik siyosati",
+    "fifthPart": "shartlarini qabul qilasiz."
+  }
 }

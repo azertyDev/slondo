@@ -9,6 +9,8 @@ import {BackSpaceArrow} from '../../elements/icons'
 import {CardItem} from '../../elements/card/Card'
 import {ButtonComponent} from '../../elements/button/Button'
 import {CustomTab} from '../../elements/custom_tab/CustomTab'
+
+// styles
 import {useStyles} from './useStyles'
 
 
@@ -27,13 +29,13 @@ const TabPanel = (props) => {
 
 export const MainContent = (props) => {
     const {t} = props;
-    const classes = useStyles();
     const [value, setValue] = useState(0);
 
     const handleChange = (event, newValue) => {
         setValue(newValue)
     };
 
+    const classes = useStyles();
     return (
         <div className={classes.root}>
             <Grid container>
@@ -44,8 +46,8 @@ export const MainContent = (props) => {
                         indicatorColor="primary"
                         className="tabs"
                     >
-                        <CustomTab label={<Typography>{t("allAds")}</Typography>} id={0} selected={true}/>
-                        <CustomTab label={<Typography>{t("allLots")}</Typography>} id={1}/>
+                        <CustomTab label={<Typography variant='h6'>{t("allAds")}</Typography>} id={0}/>
+                        <CustomTab label={<Typography variant='h6'>{t("allLots")}</Typography>} id={1}/>
                     </Tabs>
                 </Grid>
             </Grid>

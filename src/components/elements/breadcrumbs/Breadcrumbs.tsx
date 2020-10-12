@@ -1,6 +1,5 @@
 import React from 'react';
-import Typography from '@material-ui/core/Typography';
-import Breadcrumbs from '@material-ui/core/Breadcrumbs';
+import {Typography, Breadcrumbs} from '@material-ui/core';
 import Link from '@material-ui/core/Link';
 
 // styles
@@ -8,7 +7,6 @@ import { useStyles } from './useStyles'
 
 function handleClick(event) {
   event.preventDefault();
-  console.info(event.value);
 }
 
 export const BreadcrumbsComponent = () => {

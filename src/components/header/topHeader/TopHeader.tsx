@@ -30,6 +30,7 @@ import {useStyles} from './useStyle'
 export const TopHeader = (props) => {
     const {t} = props;
     const [isOpen, setIsOpen] = useState(false);
+
     const classes = useStyles();
     return (
         <div className={classes.root}>

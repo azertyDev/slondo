@@ -1,27 +1,27 @@
 import React from 'react'
 import { Container, Grid, Typography } from '@material-ui/core'
-import { AdsAndLotsBlock } from '../../elements/adsAndLotsBlock/adsAndLotsBlock'
 import { BreadcrumbsComponent } from '../../elements/breadcrumbs/Breadcrumbs'
 import { ButtonComponent } from '../../elements/button/Button';
 import Link from 'next/link';
-import { 
+import {
     ShareIcon,
-    DownArrow, 
-    EyeIcon, 
-    HeartIcon, 
-    ComplainIcon, 
-    Facebook, 
-    Instagram, 
-    Youtube, 
-    Twitter, 
-    Whatsapp, 
-    Telegram 
+    DownArrow,
+    EyeIcon,
+    HeartIcon,
+    ComplainIcon,
+    Facebook,
+    Instagram,
+    Youtube,
+    Twitter,
+    Whatsapp,
+    Telegram
 } from "../../elements/icons";
 
 // styles
 import { useStyles } from "./useStyles";
 
 export const ShowAdvertisement = () => {
+
     const classes = useStyles()
     return (
         <div className={classes.root}>
@@ -37,7 +37,7 @@ export const ShowAdvertisement = () => {
                                 </Typography>
                                 <img src={ShareIcon} alt="share-icon" className={classes.shareIcon}/>
                             </Grid>
-                            
+
                             <Grid item xs={3} container justify='flex-end'>
                                 <Typography variant="h4" color="initial">
                                     1 350 000 Сум
@@ -50,7 +50,7 @@ export const ShowAdvertisement = () => {
                                 <Grid item xs={8}>
                                     <Typography variant="subtitle1" color="initial">Описание</Typography>
                                 </Grid>
-                                
+
                                 <Grid item xs={4} container justify='space-between' direction='row' alignItems='center'>
                                     <div className={classes.adLocation}>
                                         <Typography variant='subtitle1'>
@@ -58,14 +58,14 @@ export const ShowAdvertisement = () => {
                                         </Typography>
                                     </div>
                                     <img src={DownArrow} alt="location-down-arrow" className={classes.downArrow}/>
-                                </Grid>        
+                                </Grid>
 
                                 <Grid item xs={12} className={classes.description}>
                                     <Typography variant="subtitle1" color="initial">
                                     Продаю Samsung galaxy A5 2015 года. Состояние отличное. Экран не менялся, царапин явных нет.Первые руки. Цвет черный.
                                     Возможен обмен на iphone 7 с доплатой.
                                     </Typography>
-                                </Grid>              
+                                </Grid>
                             </Grid>
 
                             <Grid item xs={12} className={classes.block} container>
@@ -74,7 +74,7 @@ export const ShowAdvertisement = () => {
                                 </Grid>
                                 <Grid item xs={9}><Typography variant="subtitle1" color="initial">Б/у</Typography></Grid>
                             </Grid>
-                            
+
                             <Grid item xs={12} className={classes.block} container>
                                 <Grid item xs={12} container className={classes.adInfoRow}>
                                     <Grid item xs={3}>
@@ -96,7 +96,7 @@ export const ShowAdvertisement = () => {
                                     <Grid item xs={12}>
                                         <Typography variant="subtitle1" color="initial">Параметры</Typography>
                                     </Grid>
-                                </Grid>              
+                                </Grid>
                                 <Grid item xs={12} container className={classes.adInfoRow}>
                                 <Grid item xs={3}>
                                     <Typography variant="subtitle1" color="initial">Марка</Typography>
