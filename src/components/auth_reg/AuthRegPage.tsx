@@ -4,7 +4,7 @@ import {Link} from '../../../i18n'
 import {Formik, Form, Field} from 'formik'
 import {
     BonusIcon,
-    BezopasniyTorgIcon,
+    SafeBuyingIcon,
     AdvertisementIcon,
     TorgIcon,
     RatingIcon,
@@ -48,7 +48,7 @@ export const AuthRegPage = (props) => {
     };
 
     const handleChange = (event, newValue) => {
-        setValue(newValue)
+        setValue(newValue);
     };
 
     const classes = useStyles();
@@ -66,7 +66,7 @@ export const AuthRegPage = (props) => {
                             </div>
                             <div>
                                 <img
-                                    src={BezopasniyTorgIcon}
+                                    src={SafeBuyingIcon}
                                     alt="safeAuction-icon"
                                 />
                                 <Typography variant="subtitle2" color="initial">

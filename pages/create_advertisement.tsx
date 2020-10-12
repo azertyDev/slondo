@@ -5,7 +5,6 @@ const Create_advertisement = (props) => {
     return <AdvertisementContainer {...props} />
 }
 
-
 Create_advertisement.getInitialProps = async () => ({
     namespacesRequired: ['main', 'common'],
 });

@@ -3,6 +3,7 @@ import { Container, Grid, Hidden, Typography } from '@material-ui/core'
 import { BreadcrumbsComponent } from '../../elements/breadcrumbs/Breadcrumbs'
 import { ButtonComponent } from '../../elements/button/Button';
 import { AdsAndLotsBlock } from '../../elements/adsAndLotsBlock/AdsAndLotsBlock';
+import { MainLayout } from '../../MainLayout';
 import Link from 'next/link';
 import { 
     ShareIcon,
@@ -18,14 +19,13 @@ import {
     Telegram,
     UserAvatar,
     StarIcon,
-    BezopasniyTorgIcon1,
+    SafeBuyingIcon2,
     DeliveryIcon,
     SwapIcon
 } from "../../elements/icons";
 
 // styles
 import { useStyles } from "./useStyles";
-import { MainLayout } from '../../MainLayout';
 
 export const ShowAdvertisement = (props) => {
     const { t } = props;
@@ -242,7 +242,7 @@ export const ShowAdvertisement = (props) => {
                                     </Grid>
 
                                     <Grid item xs={12} container>
-                                        <Grid item xs={2} container justify='center'><img src={BezopasniyTorgIcon1}/></Grid>
+                                        <Grid item xs={2} container justify='center'><img src={SafeBuyingIcon2}/></Grid>
                                         <Grid item xs={10}>
                                             <Typography variant="subtitle1" color="initial">
                                                 Безопасный торг
