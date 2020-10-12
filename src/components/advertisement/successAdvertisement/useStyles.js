@@ -18,7 +18,6 @@ export const useStyles = makeStyles((theme) => ({
     successIcon: {
         marginRight: '20px',
         fontSize: '40px',
-        alignItems: 'center'
     },
     buttonBlock: {
         marginBottom: '50px',

@@ -345,7 +345,7 @@ export const PreviewAdvertisement = (props) => {
                 </Grid>
 
                 <Grid item container xs={12} direction="row" justify="center" className={classes.buttons}>
-                    <Grid container justify='space-between' item xs={8} sm={6} spacing={2}>
+                    <Grid container justify='space-between' item xs={8} sm={5} spacing={2}>
                         <Grid item xs={6} container alignItems="center">
                             <ButtonComponent>Назад</ButtonComponent>
                         </Grid>

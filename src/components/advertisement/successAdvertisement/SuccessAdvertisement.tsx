@@ -24,7 +24,7 @@ export const SuccessAdvertisement = () => {
 
                 <Grid item xs={12}>
                     <Paper elevation={1} className={classes.paper}>
-                        <Grid container justify="flex-start" alignContent='center'>
+                        <Grid container justify="flex-start" alignItems="center" alignContent='center'>
                             <div className={classes.successInfo}>
                                 <CheckCircleIcon color='primary' className={classes.successIcon}/>
                                 <Typography color="initial">
@@ -37,7 +37,7 @@ export const SuccessAdvertisement = () => {
                     </Paper>
                 </Grid>
                 <Grid item container xs={12} direction="row" justify="center" className={classes.buttonBlock}>
-                    <Grid item xs={5} sm={2} md={2}>
+                    <Grid item xs={5} sm={2}>
                         <ButtonComponent>
                             <HomeIcon color="inherit" />
                             На главную
@@ -46,7 +46,7 @@ export const SuccessAdvertisement = () => {
                 </Grid>
                 
                 <Grid item container xs={12} direction="row" justify="center">
-                    <AdsAndLotsBlock title='Возможно Вам понравится' xs={6} sm={4} md={3}/>
+                    <AdsAndLotsBlock title='Возможно Вам понравится'/>
                 </Grid>
             </Grid>
         </div>
