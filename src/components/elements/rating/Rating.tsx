@@ -19,7 +19,7 @@ const labels = {
 
 export const RatingComponent = () => {
     const classes = useStyles()
-    const [value, setValue] = React.useState(4.5)
+    const [value, setValue] = React.useState(3.5)
     const [hover, setHover] = React.useState(-1)
 
     return (
