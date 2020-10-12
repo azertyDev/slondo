@@ -12,7 +12,7 @@ import {
 import {CustomTab} from "../elements/custom_tab/CustomTab"
 import {ButtonComponent} from "../elements/button/Button"
 import {CustomField} from "../elements/custom_field/CustomField"
-import {requiredValidate} from '../validates/requiredValidate'
+import {requiredValidate, phoneValidate} from '../validates'
 
 // Styles
 import {useStyles} from './useStyle'
@@ -154,7 +154,7 @@ export const AuthRegPage = (props) => {
                                                             name='signInPhone'
                                                             type='phone'
                                                             placeholder={t('auth_reg:enterPhone')}
-                                                            validate={requiredValidate}
+                                                            validate={phoneValidate}
                                                             component={CustomField}
                                                             className={errors.signInPhone && touched.signInPhone ? classes.errorInput : ''}
                                                         />
@@ -224,7 +224,7 @@ export const AuthRegPage = (props) => {
                                                         name='signUpPhone'
                                                         type='phone'
                                                         placeholder={t('auth_reg:enterPhone')}
-                                                        validate={requiredValidate}
+                                                        validate={phoneValidate}
                                                         component={CustomField}
                                                         className={errors.signUpPhone && touched.signUpPhone ? classes.errorInput : ''}
                                                     />
