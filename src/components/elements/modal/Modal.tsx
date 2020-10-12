@@ -51,14 +51,17 @@ export const ModalComponent = (props) => {
     const handleChangePassword = (prop) => (event) => {
         setPasswordValues({ ...passwordValues, [prop]: event.target.value })
     }
-    
-  const handleClickShowPassword = () => {
-    setPasswordValues({ ...passwordValues, showPassword: !passwordValues.showPassword });
-  };
 
-  const handleMouseDownPassword = (event) => {
-    event.preventDefault();
-  };
+    const handleClickShowPassword = () => {
+        setPasswordValues({
+            ...passwordValues,
+            showPassword: !passwordValues.showPassword,
+        })
+    }
+
+    const handleMouseDownPassword = (event) => {
+        event.preventDefault()
+    }
 
     const body = (
         <div className={classes.body}>
@@ -335,13 +338,11 @@ export const ModalComponent = (props) => {
     return (
         <div className={classes.root}>
             <Modal
-                open={props.open}
-                onClose={props.handleCloseModal}
-                aria-labelledby="simple-modal-title"
-                aria-describedby="simple-modal-description"
+                open={isOpen}
+                onClose={handleCloseModal}
                 className={classes.modal}
             >
-                {body}
+                {children}
             </Modal>
         </div>
     )

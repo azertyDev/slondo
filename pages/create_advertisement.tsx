@@ -3,7 +3,7 @@ import { AdvertisementContainer } from '../src/components/advertisement/Advertis
 
 const Create_advertisement = (props) => {
     return <AdvertisementContainer {...props} />
-}
+};
 
 
 Create_advertisement.getInitialProps = async () => ({

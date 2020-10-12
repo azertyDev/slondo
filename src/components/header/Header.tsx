@@ -1,26 +1,29 @@
-import React from 'react'
+import React, {useState} from 'react'
+import {withTranslation, i18n} from '../../../i18n'
 import {Container} from '@material-ui/core'
 import TopHeaderContainer from "./topHeader/TopHeaderContainer"
 import BottomHeader from './bottomHeader/BottomHeader'
 import {ModalComponent} from '../elements/modal/Modal'
-import {withTranslation} from '../../../i18n'
+import {AuthRegPage} from "../auth_reg/AuthRegPage"
 
 // styles
 import {useStyles} from './useStyles'
 
 const Header = (props) => {
     const {t} = props;
-    const classes = useStyles();
-    const [open, setOpen] = React.useState(false);
+    const {language} = i18n;
+
+    const [isOpen, setIsOpen] = useState(false);
 
     const handleOpenModal = () => {
-        setOpen(true)
+        setIsOpen(true)
     };
 
     const handleCloseModal = () => {
-        setOpen(false)
+        setIsOpen(false)
     };
 
+    const classes = useStyles();
     return (
         <header className={classes.root}>
             <Container maxWidth="lg">
@@ -28,13 +31,17 @@ const Header = (props) => {
                 <div className={classes.bottomHeaderWrapper}>
                     <BottomHeader t={t} handleOpenModal={handleOpenModal}/>
                 </div>
-                <ModalComponent
-                    open={open}
-                    handleCloseModal={handleCloseModal}
-                />
             </Container>
+            <ModalComponent
+                isOpen={isOpen}
+                handleCloseModal={handleCloseModal}
+            >
+                <>
+                    <AuthRegPage t={t} language={language}/>
+                </>
+            </ModalComponent>
         </header>
     )
 };
 
-export default withTranslation(['header', 'common'])(Header);
+export default withTranslation(['header', 'auth_reg', 'common'])(Header);
