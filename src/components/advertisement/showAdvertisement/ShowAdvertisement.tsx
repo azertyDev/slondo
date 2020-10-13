@@ -29,6 +29,43 @@ import {
 // styles
 import { useStyles } from "./useStyles";
 
+const imgUrls = [
+    {
+        url: 'img/advertisement-image.jpg',
+        alt: 'adv-image',
+    },
+    {
+        url: 'img/advertisement-image.jpg',
+        alt: 'adv-image',
+    },
+    {
+        url: 'img/advertisement-image.jpg',
+        alt: 'adv-image',
+    },
+    {
+        url: 'img/advertisement-image.jpg',
+        alt: 'adv-image',
+    },
+    {
+        url: 'img/advertisement-image.jpg',
+        alt: 'adv-image',
+    },
+    {
+        url: 'img/advertisement-image.jpg',
+        alt: 'adv-image',
+    },
+    {
+        url: 'img/advertisement-image.jpg',
+        alt: 'adv-image',
+    },
+    {
+        url: 'img/advertisement-image.jpg',
+        alt: 'adv-image',
+    },
+    
+]
+
+
 export const ShowAdvertisement = (props) => {
     const { t } = props;
     const classes = useStyles()
@@ -57,7 +94,7 @@ export const ShowAdvertisement = (props) => {
                         <Grid container spacing={2}>
                             <Grid item xs={9}>
                                 <Grid item xs={12}>
-                                    {/* <SyncSliders/> */}
+                                    <SyncSliders imgs={imgUrls}/>
                                 </Grid>
 
                                 <Grid item xs={12} container justify='space-between' alignItems='center' className={classes.block}>

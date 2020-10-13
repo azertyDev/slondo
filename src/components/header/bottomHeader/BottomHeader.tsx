@@ -25,7 +25,7 @@ const BottomHeader = (props) => {
     return (
         <div className={classes.root}>
             <Hidden smDown>
-                <AppBar position={isScrollBreak ? "fixed" : "absolute"} color={"inherit"} elevation={0}>
+                <AppBar position={isScrollBreak ? "fixed" : "absolute"} color={"inherit"} elevation={isScrollBreak ? 1 : 0}>
                     <Container maxWidth='lg'>
                         <Grid container justify="space-between" alignItems="center" spacing={1}>
                             <Grid container item xs={3} alignItems="center">

@@ -1,64 +1,47 @@
-import React, { useEffect, useRef, useState } from 'react'
-import { CustomSlider } from '../customSlider/CustomSlider'
-import { useStyles } from './useStyles'
+import React, { useEffect, useRef, useState } from 'react';
+import { CustomSlider } from '../custom_slider/CustomSlider';
+import { useStyles } from './useStyles';
+import { FullscreenIcon } from '../icons';
+import Button from '@material-ui/core/Button';
 
 export const SyncSliders = (props) => {
-    const [slidersNav, setSlidersNav] = useState({ nav1: null, nav2: null })
-    const slider1 = useRef()
-    const slider2 = useRef()
+    const { imgs } = props;
+    const [slidersNav, setSlidersNav] = useState({ nav1: null, nav2: null });
+    const slider1 = useRef();
+    const slider2 = useRef();
 
     useEffect(() => {
         setSlidersNav({
             nav1: slider1.current,
             nav2: slider2.current,
-        })
-    }, [])
-    const imgUrls = [
-        {
-            url: 'img/advertisement-image.jpg',
-            alt: 'adv-image',
-        },
-        {
-            url: 'img/advertisement-image.jpg',
-            alt: 'adv-image',
-        },
-        {
-            url: 'img/advertisement-image.jpg',
-            alt: 'adv-image',
-        },
-        {
-            url: 'img/advertisement-image.jpg',
-            alt: 'adv-image',
-        },
-    ]
+        });
+    }, []);
 
-    const classes = useStyles()
-
+    const classes = useStyles();
     return (
         <div className={classes.root}>
-            <div className="first-slider">
-                <CustomSlider
-                    asNavFor={slidersNav.nav2}
-                    ref={slider1}
-                    dots={false}
-                >
-                    {imgUrls.map(({ url, alt }, i) => (
+            <div className={classes.firstSlider}>
+                <div className={classes.fullscreenIcon}>
+                    <Button variant="text" color="default">
+                        <img src={FullscreenIcon} alt="fullscreen-icon" />
+                    </Button>
+                </div>
+                <CustomSlider asNavFor={slidersNav.nav2} ref={slider1}>
+                    {imgs.map(({ url, alt }, i) => (
                         <div key={i}>
                             <img src={url} alt={alt} />
                         </div>
                     ))}
                 </CustomSlider>
             </div>
-            <div className="second-slider">
+            <div className={classes.secondSlider}>
                 <CustomSlider
                     asNavFor={slidersNav.nav1}
                     ref={slider2}
-                    dots={false}
-                    slidesToShow={5}
-                    swipeToSlide={true}
+                    slidesToShow={7}
                     focusOnSelect={true}
                 >
-                    {imgUrls.map(({ url, alt }, i) => (
+                    {imgs.map(({ url, alt }, i) => (
                         <div key={i}>
                             <img src={url} alt={alt} />
                         </div>
@@ -66,5 +49,5 @@ export const SyncSliders = (props) => {
                 </CustomSlider>
             </div>
         </div>
-    )
-}
+    );
+};
