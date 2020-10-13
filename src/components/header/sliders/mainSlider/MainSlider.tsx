@@ -7,7 +7,7 @@ import {useStyles} from './useStyles'
 
 
 export const MainSlider = () => {
-    const slider = useRef({
+    const slider: any = useRef({
         slickNext() {},
         slickPrev() {}
     });
