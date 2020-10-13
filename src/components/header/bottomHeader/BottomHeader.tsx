@@ -1,6 +1,6 @@
 import React, {useState} from "react"
-import Link from 'next/link'
 import {AppBar, Container, Grid, Hidden, MenuItem, Select, Typography} from "@material-ui/core"
+import {Link} from '../../../../i18n'
 import {ButtonComponent} from "../../elements/button/Button"
 import {SearchForm} from "../../elements/search_form/SearchForm"
 import {
@@ -22,7 +22,6 @@ const BottomHeader = (props) => {
     };
 
     const classes = useStyles(props);
-
     return (
         <div className={classes.root}>
             <Hidden smDown>
@@ -33,7 +32,7 @@ const BottomHeader = (props) => {
                                 <Grid container item md={7} lg={6} className="bottom-logo">
                                     <Link href='/'>
                                         <a>
-                                            <img src={Logo} alt="Slondo logo"/>
+                                            <img src={Logo} alt="logo"/>
                                         </a>
                                     </Link>
                                 </Grid>
@@ -81,7 +80,7 @@ const BottomHeader = (props) => {
                                 </Grid>
                             </Grid>
                             <Grid item md={2} className='create-ad'>
-                                <Link href='/create_advertisement'>
+                                <Link href={'/create_advertisement'}>
                                     <a>
                                         <Typography variant="subtitle2">
                                             {t('common:createAd')}
@@ -92,6 +91,7 @@ const BottomHeader = (props) => {
                                                 marginLeft: '10px',
                                                 height: '20px',
                                             }}
+                                            alt='plus'
                                         />
                                     </a>
                                 </Link>

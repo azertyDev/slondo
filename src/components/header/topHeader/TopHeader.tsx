@@ -1,5 +1,5 @@
 import React, {useState} from 'react'
-import Link from 'next/link'
+import {Link} from '../../../../i18n'
 import {
     Grid,
     Hidden,
@@ -58,22 +58,22 @@ export const TopHeader = (props) => {
                         className="social-icons"
                     >
                         <a href="#">
-                            <img src={Facebook}/>
+                            <img src={Facebook} alt='facebook'/>
                         </a>
                         <a href="#">
-                            <img src={Instagram}/>
+                            <img src={Instagram} alt='instagram'/>
                         </a>
                         <a href="#">
-                            <img src={Youtube}/>
+                            <img src={Youtube} alt='youtube'/>
                         </a>
                         <a href="#">
-                            <img src={Twitter}/>
+                            <img src={Twitter} alt='twitter'/>
                         </a>
                         <a href="#">
-                            <img src={Whatsapp}/>
+                            <img src={Whatsapp} alt='whatsapp'/>
                         </a>
                         <a href="#">
-                            <img src={Telegram}/>
+                            <img src={Telegram} alt='telegram'/>
                         </a>
                     </Grid>
                     <Grid
@@ -87,7 +87,7 @@ export const TopHeader = (props) => {
                         <Grid item>
                             <div className="multiple-content">
                                 <a href="#">
-                                    <img src={HelpIcon}/>
+                                    <img src={HelpIcon} alt='help'/>
                                     <Typography variant="subtitle1">
                                         {t('help')}
                                     </Typography>
@@ -97,7 +97,7 @@ export const TopHeader = (props) => {
                         <Grid item>
                             <div className="multiple-content">
                                 <a href="#">
-                                    <img src={StoreIcon}/>
+                                    <img src={StoreIcon} alt='store'/>
                                     <Typography variant="subtitle1">
                                         {t('shops')}
                                     </Typography>
@@ -107,7 +107,7 @@ export const TopHeader = (props) => {
                         <Grid item>
                             <div className="multiple-content">
                                 <a href="#">
-                                    <img src={BusinessIcon}/>
+                                    <img src={BusinessIcon} alt='business'/>
                                     <Typography variant="subtitle1">
                                         {t('forBusiness')}
                                     </Typography>
@@ -144,7 +144,7 @@ export const TopHeader = (props) => {
                             <Grid className="top-header-logo">
                                 <Link href="/">
                                     <a>
-                                        <img src={Logo} alt="Slondo logo"/>
+                                        <img src={Logo} alt="logo"/>
                                     </a>
                                 </Link>
                             </Grid>
