@@ -5,7 +5,7 @@ import { ButtonComponent } from '../../elements/button/Button';
 import { AdsAndLotsBlock } from '../../elements/adsAndLotsBlock/AdsAndLotsBlock';
 import { MainLayout } from '../../MainLayout';
 import { RatingComponent } from '../../elements/rating/Rating';
-import { CustomSlider } from '../../elements/slider/Slider';
+import { SyncSliders } from '../../elements/syncSlider/SyncSliders';
 import Link from 'next/link';
 import {
     ShareIcon,
@@ -56,7 +56,7 @@ export const ShowAdvertisement = (props) => {
                         <Grid container spacing={2}>
                             <Grid item xs={9}>
                                 <Grid item xs={12}>
-                                    <CustomSlider/>
+                                    {/* <SyncSliders/> */}
                                 </Grid>
 
                                 <Grid item xs={12} container justify='space-between' alignItems='center' className={classes.block}>

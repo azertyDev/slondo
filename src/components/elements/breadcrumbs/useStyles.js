@@ -8,5 +8,8 @@ export const useStyles = makeStyles((theme) => ({
         '& p': {
             fontSize: '12px'
         },
+        '& li.MuiBreadcrumbs-separator': {
+            margin: "0"
+        }
     },
 }))
