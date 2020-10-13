@@ -1,6 +1,6 @@
-import React, { useState } from 'react'
-import { Advertisement } from './Advertisement'
-
+import React, {useState} from 'react'
+import {Advertisement} from './Advertisement'
+import {MainLayout} from "../MainLayout";
 
 export const AdvertisementContainer = () => {
     const [isPreview, setIsPreview] = useState(false)
@@ -16,12 +16,14 @@ export const AdvertisementContainer = () => {
 
     return (
         <div>
-            <Advertisement
-                isPreview={isPreview}
-                handlePreview={handlePreview}
-                isSuccess={isSuccess}
-                handleSuccess={handleSuccess}
-            />
+            <MainLayout>
+                <Advertisement
+                    isPreview={isPreview}
+                    handlePreview={handlePreview}
+                    isSuccess={isSuccess}
+                    handleSuccess={handleSuccess}
+                />
+            </MainLayout>
         </div>
     )
 }

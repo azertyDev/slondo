@@ -4,7 +4,7 @@ import {Link} from '../../../i18n'
 import {Formik, Form, Field} from 'formik'
 import {
     BonusIcon,
-    BezopasniyTorgIcon,
+    SafeBuyingIcon,
     AdvertisementIcon,
     TorgIcon,
     RatingIcon,
@@ -12,10 +12,10 @@ import {
 import {CustomTab} from "../elements/custom_tab/CustomTab"
 import {ButtonComponent} from "../elements/button/Button"
 import {CustomField} from "../elements/custom_field/CustomField"
-import {requiredValidate} from '../validates/requiredValidate'
+import {requiredValidate, phoneValidate} from '../validates'
 
 // Styles
-import {useStyles} from './useStyle'
+import {useStyles} from './useStyles'
 
 interface ILoginValues {
     signInPhone: string,
@@ -48,7 +48,7 @@ export const AuthRegPage = (props) => {
     };
 
     const handleChange = (event, newValue) => {
-        setValue(newValue)
+        setValue(newValue);
     };
 
     const classes = useStyles();
@@ -66,7 +66,7 @@ export const AuthRegPage = (props) => {
                             </div>
                             <div>
                                 <img
-                                    src={BezopasniyTorgIcon}
+                                    src={SafeBuyingIcon}
                                     alt="safeAuction-icon"
                                 />
                                 <Typography variant="subtitle2" color="initial">
@@ -154,7 +154,7 @@ export const AuthRegPage = (props) => {
                                                             name='signInPhone'
                                                             type='phone'
                                                             placeholder={t('auth_reg:enterPhone')}
-                                                            validate={requiredValidate}
+                                                            validate={phoneValidate}
                                                             component={CustomField}
                                                             className={errors.signInPhone && touched.signInPhone ? classes.errorInput : ''}
                                                         />
@@ -224,7 +224,7 @@ export const AuthRegPage = (props) => {
                                                         name='signUpPhone'
                                                         type='phone'
                                                         placeholder={t('auth_reg:enterPhone')}
-                                                        validate={requiredValidate}
+                                                        validate={phoneValidate}
                                                         component={CustomField}
                                                         className={errors.signUpPhone && touched.signUpPhone ? classes.errorInput : ''}
                                                     />

@@ -93,7 +93,6 @@ export const CreateAdvertisement = (props) => {
                             <AdvertisementSelect />
                         </Grid>
                     </Grid>
-
                     <Grid
                         item
                         xs={12}
@@ -103,7 +102,6 @@ export const CreateAdvertisement = (props) => {
                             <strong>Настройки объявления</strong>
                         </Typography>
                     </Grid>
-
                     <Grid
                         container
                         item
@@ -145,7 +143,6 @@ export const CreateAdvertisement = (props) => {
                             <AdvertisementSelect />
                         </Grid>
                     </Grid>
-
                     <Grid
                         container
                         item
@@ -538,8 +535,6 @@ export const CreateAdvertisement = (props) => {
                             <div className="photos-dropdown" />
                         </Grid>
                     </Grid>
-
-                    {/* Photos */}
                     <Grid
                         container
                         item

@@ -10,7 +10,7 @@ import {CardItem} from '../../elements/card/Card'
 import {ButtonComponent} from '../../elements/button/Button'
 import {CustomTab} from '../../elements/custom_tab/CustomTab'
 
-// styles
+// Styles
 import {useStyles} from './useStyles'
 
 
@@ -46,7 +46,7 @@ export const MainContent = (props) => {
                         indicatorColor="primary"
                         className="tabs"
                     >
-                        <CustomTab label={<Typography variant='h6'>{t("allAds")}</Typography>} id={0}/>
+                        <CustomTab label={<Typography variant='h6'>{t("allAds")}</Typography>} id={0} selected={true}/>
                         <CustomTab label={<Typography variant='h6'>{t("allLots")}</Typography>} id={1}/>
                     </Tabs>
                 </Grid>

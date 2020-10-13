@@ -1,5 +1,5 @@
 import React from 'react'
-import { Container, Grid, Hidden, Slider, Typography } from '@material-ui/core'
+import { Container, Grid, Hidden, Typography } from '@material-ui/core'
 import { BreadcrumbsComponent } from '../../elements/breadcrumbs/Breadcrumbs'
 import { ButtonComponent } from '../../elements/button/Button';
 import { AdsAndLotsBlock } from '../../elements/adsAndLotsBlock/AdsAndLotsBlock';
@@ -7,7 +7,7 @@ import { MainLayout } from '../../MainLayout';
 import { RatingComponent } from '../../elements/rating/Rating';
 import { SyncSliders } from '../../elements/syncSlider/SyncSliders';
 import Link from 'next/link';
-import {
+import { 
     ShareIcon,
     DownArrow, 
     EyeIcon, 
@@ -20,7 +20,8 @@ import {
     Whatsapp, 
     Telegram,
     UserAvatar,
-    BezopasniyTorgIcon1,
+    StarIcon,
+    SafeBuyingIcon2,
     DeliveryIcon,
     SwapIcon
 } from "../../elements/icons";
@@ -238,7 +239,7 @@ export const ShowAdvertisement = (props) => {
                                     </Grid>
 
                                     <Grid item xs={12} container>
-                                        <Grid item xs={2} container justify='center'><img src={BezopasniyTorgIcon1}/></Grid>
+                                        <Grid item xs={2} container justify='center'><img src={SafeBuyingIcon2}/></Grid>
                                         <Grid item xs={10}>
                                             <Typography variant="subtitle1" color="initial">
                                                 Безопасный торг

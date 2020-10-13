@@ -4,16 +4,10 @@ import path from 'path'
 
 const {localeSubpaths} = _default().publicRuntimeConfig;
 
-export const {
-    i18n,
-    Link,
-    I18nContext,
-    useTranslation,
-    withTranslation,
-    appWithTranslation,
-} = new NextI18Next({
+
+export const {useTranslation, withTranslation, appWithTranslation, Link, i18n} = new NextI18Next({
     defaultLanguage: 'ru',
     otherLanguages: ['uz'],
     localeSubpaths,
-    localePath: path.resolve('./public/static/locales'),
+    localePath: path.resolve('./public/static/locales')
 });
