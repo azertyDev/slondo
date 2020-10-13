@@ -30,6 +30,7 @@ import {useStyles} from './useStyle'
 export const TopHeader = (props) => {
     const {t} = props;
     const [isOpen, setIsOpen] = useState(false);
+
     const classes = useStyles();
     return (
         <div className={classes.root}>
@@ -40,7 +41,7 @@ export const TopHeader = (props) => {
                             <Typography variant="subtitle1">
                                 {t('location')}:
                             </Typography>
-                            <img src={PlIcon} className="pl-icon"/>
+                            <img src={PlIcon} className="pl-icon" alt='location'/>
                             <Typography
                                 variant="subtitle1"
                                 className="select-region"
