@@ -15,7 +15,7 @@ import {CustomField} from "../elements/custom_field/CustomField"
 import {requiredValidate, phoneValidate} from '../validates'
 
 // Styles
-import {useStyles} from './useStyle'
+import {useStyles} from './useStyles'
 
 interface ILoginValues {
     signInPhone: string,

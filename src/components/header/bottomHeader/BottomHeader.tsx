@@ -10,7 +10,7 @@ import {
     AddIcon,
 } from '../../elements/icons'
 import {withScrollThreshold} from "../../hoc/withScrollThreshold"
-import {useStyles} from "./useStyle"
+import {useStyles} from "./useStyles"
 
 
 const BottomHeader = (props) => {

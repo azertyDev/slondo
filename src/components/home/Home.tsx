@@ -4,7 +4,7 @@ import {MainSlider} from '../header/sliders/mainSlider/MainSlider'
 import {CategoriesSlider} from '../header/sliders/categoriesSlider/CategoriesSlider'
 import {MainContent} from './mainContent/MainContent'
 import {Container, Hidden, Slide, Typography, useScrollTrigger} from "@material-ui/core"
-import {useStyles} from './useStyle'
+import {useStyles} from './useStyles'
 import {MainLayout} from "../MainLayout"
 
 

@@ -2,7 +2,7 @@ import React from 'react'
 import {Card, CardActionArea, CardContent, CardMedia, Typography} from '@material-ui/core'
 
 // styles
-import {useStyles} from './useStyle'
+import {useStyles} from './useStyles'
 
 export const CardItem = (props) => {
     const {title, description, image, price,categoryName} = props;

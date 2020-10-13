@@ -24,7 +24,7 @@ import {
 } from '../../elements/icons'
 import {Localization} from '../../elements/localization/Localization'
 import {LeftDrawer} from './drawer/Drawer'
-import {useStyles} from './useStyle'
+import {useStyles} from './useStyles'
 
 
 export const TopHeader = (props) => {
