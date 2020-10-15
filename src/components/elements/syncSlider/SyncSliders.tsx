@@ -1,8 +1,10 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { CustomSlider } from '../custom_slider/CustomSlider';
-import { useStyles } from './useStyles';
 import { FullscreenIcon } from '../icons';
 import Button from '@material-ui/core/Button';
+
+// styles
+import { useStyles } from './useStyles';
 
 export const SyncSliders = (props) => {
     const { imgs } = props;
@@ -22,7 +24,11 @@ export const SyncSliders = (props) => {
         <div className={classes.root}>
             <div className={classes.firstSlider}>
                 <div className={classes.fullscreenIcon}>
-                    <Button variant="text" color="default">
+                    <Button
+                        variant="text"
+                        color="default"
+                        // onClick={handle.enter}
+                    >
                         <img src={FullscreenIcon} alt="fullscreen-icon" />
                     </Button>
                 </div>

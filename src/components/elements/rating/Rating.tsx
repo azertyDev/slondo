@@ -26,6 +26,7 @@ export const RatingComponent = () => {
         <div className={classes.root}>
             <StyledRating
                 name="hover-feedback"
+                readOnly
                 value={value}
                 precision={0.5}
                 onChange={(event, newValue) => {
