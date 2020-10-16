@@ -68,8 +68,11 @@ export const useStyles = makeStyles((theme) => ({
         }
     },
     avatarBlock: {
-        '& > img': {
-            width: '40px'
+        '& > button': {
+            padding: '8px',
+            '& img': {
+                width: '40px'
+            }
         }
     }
 }))

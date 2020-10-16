@@ -8,5 +8,13 @@ export const useStyles = makeStyles((theme) => ({
         [theme.breakpoints.down('sm')]: {
             marginTop: '60px'
         }
+    },
+    modalDialog: {
+        overflowY: 'scroll',
+        '& > div': {
+            [theme.breakpoints.down('sm')]: {
+                backgroundColor: `${theme.palette.primary.white}!important`
+            }
+        }
     }
 }))

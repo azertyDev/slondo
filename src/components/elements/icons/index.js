@@ -43,4 +43,6 @@ export const ComplainIcon = `icons/complain_icon.svg`
 export const UserAvatar = `icons/user_avatar.svg`
 export const StarIcon = `icons/star_icon.svg`
 export const DeliveryIcon = `icons/delivery_icon.svg`
-export const SwapIcon = `icons/swap_icon.png`
+export const SwapIcon = `icons/swap_icon.svg`
+export const CloseBlackIcon = `icons/close_black_icon.svg`
+export const CloseWhiteIcon = `icons/close_white_icon.svg`

@@ -6,6 +6,7 @@
   "rating": "Sotuvchini reyting tizimi yordamida tekshiring. Qancha yulduzlari ko'proq, shuncha ishonchliroq.",
   "welcome": "Slondoga xush kelibsiz!",
   "authSite": "Saytning barcha xususiyatlaridan foydalanish uchun tizimga kiring.",
+  "signInAndReg": "Kirish va Ro'yxatdan o'tish",
   "signInTitle": "Kirish",
   "signUpTitle": "Ro'yxat",
   "signIn": "Kirish",
@@ -15,7 +16,7 @@
   "enterPhone": "Telefon raqamingizni kiriting",
   "enterPassword": "Parolni kiriting",
   "agreement": {
-    "firstPart": "Saytga kirish orqali siz",
+    "firstPart": "Saytda ro'yxatdan o'tish orqali siz",
     "secondPart": "litsenziya shartnomasi",
     "thirdPart": "va",
     "fourthPart": "maxfiylik siyosati",

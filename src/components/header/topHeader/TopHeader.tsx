@@ -28,7 +28,7 @@ import {useStyles} from './useStyles'
 
 
 export const TopHeader = (props) => {
-    const {t} = props;
+    const {t, handleOpenModal} = props;
     const [isOpen, setIsOpen] = useState(false);
 
     const classes = useStyles();
@@ -150,7 +150,9 @@ export const TopHeader = (props) => {
                                 </Link>
                             </Grid>
                             <Grid className={classes.avatarBlock}>
-                                <img src={Avatar} alt='avatar'/>
+                                <IconButton onClick={handleOpenModal}>
+                                    <img src={Avatar} alt='avatar'/>
+                                </IconButton>
                             </Grid>
                         </Grid>
                     </Toolbar>

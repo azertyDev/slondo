@@ -2,9 +2,9 @@ import React from "react"
 import {TopHeader} from "./TopHeader"
 
 const TopHeaderContainer = (props) => {
-    const {t} = props;
+    const {t, handleOpenModal} = props;
     return (
-        <TopHeader t={t}/>
+        <TopHeader t={t} handleOpenModal={handleOpenModal}/>
     )
 };
 

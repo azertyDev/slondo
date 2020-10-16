@@ -1,10 +1,11 @@
 import React, {useState} from 'react'
 import {withTranslation, i18n} from '../../../i18n'
-import {Container} from '@material-ui/core'
+import {Container, Hidden} from '@material-ui/core'
 import TopHeaderContainer from "./topHeader/TopHeaderContainer"
 import BottomHeader from './bottomHeader/BottomHeader'
 import {ModalComponent} from '../elements/modal/Modal'
 import {AuthRegPage} from "../auth_reg/AuthRegPage"
+import {AuthRegSm} from "../auth_reg/auth_reg_sm/AutRegSm"
 
 // styles
 import {useStyles} from './useStyles'
@@ -16,18 +17,18 @@ const Header = (props) => {
     const [isOpen, setIsOpen] = useState(false);
 
     const handleOpenModal = () => {
-        setIsOpen(true)
+        setIsOpen(true);
     };
 
     const handleCloseModal = () => {
-        setIsOpen(false)
+        setIsOpen(false);
     };
 
     const classes = useStyles();
     return (
         <header className={classes.root}>
             <Container maxWidth="lg">
-                <TopHeaderContainer t={t}/>
+                <TopHeaderContainer t={t} handleOpenModal={handleOpenModal}/>
                 <div className={classes.bottomHeaderWrapper}>
                     <BottomHeader t={t} handleOpenModal={handleOpenModal}/>
                 </div>
@@ -35,9 +36,23 @@ const Header = (props) => {
             <ModalComponent
                 isOpen={isOpen}
                 handleCloseModal={handleCloseModal}
+                className={classes.modalDialog}
             >
                 <>
-                    <AuthRegPage t={t} language={language}/>
+                    <Hidden smDown>
+                        <AuthRegPage
+                            t={t}
+                            language={language}
+                            handleCloseModal={handleCloseModal}
+                        />
+                    </Hidden>
+                    <Hidden mdUp>
+                        <AuthRegSm
+                            t={t}
+                            language={language}
+                            handleCloseModal={handleCloseModal}
+                        />
+                    </Hidden>
                 </>
             </ModalComponent>
         </header>

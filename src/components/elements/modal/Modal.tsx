@@ -5,14 +5,14 @@ import {Modal} from '@material-ui/core'
 import {useStyles} from './useStyles'
 
 
-export const ModalComponent = ({children, isOpen, handleCloseModal}) => {
+export const ModalComponent = ({children, className = '', isOpen, handleCloseModal}) => {
     const classes = useStyles();
     return (
         <div className={classes.root}>
             <Modal
                 open={isOpen}
                 onClose={handleCloseModal}
-                className={classes.modal}
+                className={`${classes.modal} ${className}`}
             >
                 {children}
             </Modal>
