@@ -27,7 +27,7 @@ import {
 } from "../../elements/icons";
 
 // styles
-import { useStyles } from "./useStyles";
+import { useStyles } from "./useStyles1";
 
 const imgUrls = [
     {

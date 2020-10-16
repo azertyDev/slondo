@@ -109,6 +109,30 @@ export const useStyles = makeStyles((theme) => ({
                 },
             },
         },
+        '& div.delivery-icon': {
+            '& > svg': {
+                width: '30px',
+                height: '30px',
+                '& > path': {
+                    fill: '#695EAE',
+                },
+            },
+        },
+        '& div.safe-icon': {
+            '& > svg': {
+                width: '30px',
+                height: '30px',
+                '& > path': {
+                    fill: '#E88F0C',
+                },
+            },
+        },
+        '& div.exchange-icon': {
+            '& > svg': {
+                width: '30px',
+                height: '30px',
+            },
+        },
     },
     breadcrumbs: {
         margin: '20px 0',
@@ -119,159 +143,4 @@ export const useStyles = makeStyles((theme) => ({
     shareIcon: {
         height: '25px',
     },
-
-    // block: {
-    //     padding: '20px 0',
-    //     borderBottom: '1px solid #ccc',
-    //     '&:last-child': {
-    //         border: 'none',
-    //     },
-    // },
-    // adLocation: {
-    //     flexWrap: 'wrap',
-    //     width: '40%',
-    //     '& a': {
-    //         display: 'flex',
-    //         flexDirection: 'row',
-    //         alignItems: 'center',
-    //         textDecoration: 'none',
-    //     },
-    //     '& h6.MuiTypography-subtitle1': {
-    //         color: '#9c65d5',
-    //         textOverflow: 'ellipsis',
-    //         overflow: 'hidden',
-    //         whiteSpace: 'nowrap',
-    //     },
-    // },
-    downArrow: {
-        height: '15px',
-        marginLeft: '5px',
-    },
-    // row: {
-    //     display: 'flex',
-    //     flexDirection: 'row',
-    //     marginBottom: '10px',
-    //     alignItems: 'center',
-    //     '&:last-child': {
-    //         marginBottom: '0',
-    //     },
-    // },
-    // innerRow: {
-    //     display: 'flex',
-    //     justifyContent: 'space-between',
-    //     alignItems: 'center',
-    //     width: '60%'
-    // },
-    // categoryTitle: {
-    //     '& h6.MuiTypography-subtitle1': {
-    //         fontWeight: '600'
-    //     }
-    // },
-    // description: {
-    //     marginTop: '20px',
-    // },
-    // complainLink: {
-    //     display: 'flex',
-    //     '& img': {
-    //         marginLeft: '5px',
-    //     },
-    // },
-    // moreButton: {
-    //     display: 'flex',
-    //     alignItems: 'center',
-    //     textDecoration: 'none',
-    //     color: '#9c65d5',
-    // },
-    // view: {
-    //     marginBottom: '20px',
-    // },
-    icons: {
-        width: '20px',
-    },
-    // favourites: {
-    //     display: 'flex',
-    //     justifyContent: 'flex-end',
-    //     '& a': {
-    //         display: 'flex',
-    //         textDecoration: 'none',
-    //         color: '#000',
-    //     },
-    // },
-
-    // complainText: {
-    //     color: 'rgba(0, 0, 0, 0.87)',
-    //     textDecoration: 'underline',
-    // },
-    // adShare: {
-    //     '& h6.MuiTypography-subtitle1': {
-    //         marginRight: '20px',
-    //     },
-    //     '& a': {
-    //         marginRight: '10px',
-    //     },
-    //     '& img': {
-    //         height: '40px',
-    //     },
-    // },
-    // contactButton: {
-    //     '& button.MuiButtonBase-root': {
-    //         marginBottom: '10px',
-    //     },
-    // },
-    // userAvatarIcon: {
-    //     height: '60px',
-    // },
-    // starIcon: {
-    //     height: '20px',
-    //     marginRight: '5px',
-    // },
-    // rating: {
-    //     marginLeft: '5px',
-    // },
-    // userInfo: {
-    //     alignContent: 'space-between',
-    //     margin: '20px 0',
-    //     '& h6.MuiTypography-subtitle1': {
-    //         fontSize: '1rem',
-    //     },
-    // },
-    // userName: {
-    //     color: '#9c65d5',
-    // },
-    // lastEntrance: {
-    //     fontSize: '12px',
-    //     marginBottom: '10px',
-    // },
-    // subscribe: {
-    //     margin: '10px 0',
-    //     '& h6.MuiTypography-subtitle1': {
-    //         color: '#111',
-    //         textDecoration: 'none',
-    //         letterSpacing: '0.6px',
-    //     },
-    //     '& a': {
-    //         textDecoration: 'none',
-    //     },
-    //     '&:hover': {
-    //         textDecoration: 'underline',
-    //     },
-    // },
-    // infoBlock: {
-    //     margin: '20px 0',
-    //     '& h6.MuiTypography-subtitle1': {
-    //         marginLeft: '10px',
-    //     },
-    //     '& img': {
-    //         height: '25px',
-    //     },
-    // },
-    // adBanner: {
-    //     marginTop: '50px',
-    //     '&  div.right-banner': {
-    //         width: '100%',
-    //         height: '470px',
-    //         borderRadius: '7px',
-    //         backgroundColor: '#C0C0C0',
-    //     },
-    // },
 }));
