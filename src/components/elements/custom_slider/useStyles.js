@@ -1,4 +1,4 @@
-import {makeStyles} from '@material-ui/core/styles'
+import { makeStyles } from '@material-ui/core/styles'
 
 export const useStyles = makeStyles(() => ({
     root: {
@@ -7,23 +7,15 @@ export const useStyles = makeStyles(() => ({
             zIndex: 10,
             '& img': {
                 width: '97%',
-                margin: 'auto'
-            }
+                margin: 'auto',
+            },
         },
-        '& button span svg:hover': {
-            fill: '#a153ff',
-        },
-        '& div.slider-arrows-container': {
+        '& button.MuiIconButton-root': {
             position: 'absolute',
-            top: 0,
-            display: 'flex',
-            alignItems: 'center',
-            width: '100%',
-            height: '100%',
-            '& > div.MuiContainer-root': {
-                display: 'flex',
-                justifyContent: 'space-between'
-            }
-        }
-    }
-}));
+            top: 'calc(50% - 20px)',
+        },
+        '& button.slick-next': {
+            right: 0,
+        },
+    },
+}))

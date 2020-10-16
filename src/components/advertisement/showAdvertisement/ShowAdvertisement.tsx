@@ -4,6 +4,8 @@ import { BreadcrumbsComponent } from '../../elements/breadcrumbs/Breadcrumbs'
 import { ButtonComponent } from '../../elements/button/Button';
 import { AdsAndLotsBlock } from '../../elements/adsAndLotsBlock/AdsAndLotsBlock';
 import { MainLayout } from '../../MainLayout';
+import { RatingComponent } from '../../elements/rating/Rating';
+import { SyncSliders } from '../../elements/syncSlider/SyncSliders';
 import Link from 'next/link';
 import { 
     ShareIcon,
@@ -26,6 +28,43 @@ import {
 
 // styles
 import { useStyles } from "./useStyles";
+
+const imgUrls = [
+    {
+        url: 'img/advertisement-image.jpg',
+        alt: 'adv-image',
+    },
+    {
+        url: 'img/advertisement-image.jpg',
+        alt: 'adv-image',
+    },
+    {
+        url: 'img/advertisement-image.jpg',
+        alt: 'adv-image',
+    },
+    {
+        url: 'img/advertisement-image.jpg',
+        alt: 'adv-image',
+    },
+    {
+        url: 'img/advertisement-image.jpg',
+        alt: 'adv-image',
+    },
+    {
+        url: 'img/advertisement-image.jpg',
+        alt: 'adv-image',
+    },
+    {
+        url: 'img/advertisement-image.jpg',
+        alt: 'adv-image',
+    },
+    {
+        url: 'img/advertisement-image.jpg',
+        alt: 'adv-image',
+    },
+    
+]
+
 
 export const ShowAdvertisement = (props) => {
     const { t } = props;
@@ -54,11 +93,14 @@ export const ShowAdvertisement = (props) => {
                             </Grid>
                         <Grid container spacing={2}>
                             <Grid item xs={9}>
+                                <Grid item xs={12}>
+                                    <SyncSliders imgs={imgUrls}/>
+                                </Grid>
+
                                 <Grid item xs={12} container justify='space-between' alignItems='center' className={classes.block}>
                                     <Grid item xs={8}>
                                         <Typography variant="subtitle1" color="initial">Описание</Typography>
                                     </Grid>
-                                    
                                     <Grid item xs={4} container justify='space-between' direction='row' alignItems='center'>
                                         <div className={classes.adLocation}>
                                             <Typography variant='subtitle1'>
@@ -67,7 +109,6 @@ export const ShowAdvertisement = (props) => {
                                         </div>
                                         <img src={DownArrow} alt="location-down-arrow" className={classes.downArrow}/>
                                     </Grid>        
-
                                     <Grid item xs={12} className={classes.description}>
                                         <Typography variant="subtitle1" color="initial">
                                         Продаю Samsung galaxy A5 2015 года. Состояние отличное. Экран не менялся, царапин явных нет.Первые руки. Цвет черный.
@@ -75,14 +116,12 @@ export const ShowAdvertisement = (props) => {
                                         </Typography>
                                     </Grid>              
                                 </Grid>
-
                                 <Grid item xs={12} className={classes.block} container>
                                     <Grid item xs={3}>
                                         <Typography variant="subtitle2" color="initial">Состояние</Typography>
                                     </Grid>
                                     <Grid item xs={9}><Typography variant="subtitle1" color="initial">Б/у</Typography></Grid>
                                 </Grid>
-                                
                                 <Grid item xs={12} className={classes.block} container>
                                     <Grid item xs={12} container className={classes.adInfoRow}>
                                         <Grid item xs={3}>
@@ -209,12 +248,7 @@ export const ShowAdvertisement = (props) => {
                                             </Typography>
                                         </Grid>
                                         <Grid item xs={12} container>
-                                            <img src={StarIcon} className={classes.starIcon}/>
-                                            <img src={StarIcon} className={classes.starIcon}/>
-                                            <img src={StarIcon} className={classes.starIcon}/>
-                                            <img src={StarIcon} className={classes.starIcon}/>
-                                            <img src={StarIcon} className={classes.starIcon}/>
-                                            <Typography variant="subtitle1" color="initial" className={classes.rating}>4.0</Typography>
+                                            <RatingComponent />
                                         </Grid>
                                     </Grid>
                                 </Grid>
@@ -269,7 +303,7 @@ export const ShowAdvertisement = (props) => {
                         </Grid>
 
                         <Grid item container xs={12} direction="row" justify="center">
-                            <AdsAndLotsBlock title='Похожие объявления'/>
+                            <AdsAndLotsBlock title='Похожие объявления' xs={6} sm={4} md={3} lg={2}/>
                         </Grid>
                     </Grid>
                 </Container>

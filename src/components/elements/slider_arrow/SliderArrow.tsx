@@ -8,7 +8,7 @@ export const SliderArrow = ({className = '', clickHandler = null, direction = nu
     const classes = useStyles();
     return (
         <IconButton className={`${classes.root} ${className}`} onClick={clickHandler}>
-            <img className={direction === 'left' ? 'left-arrow' : ''} src={RightArrow} alt='arrow'/>
+            <img className={direction === 'left' ? 'left-arrow' : 'right-arrow'} src={RightArrow} alt='arrow'/>
         </IconButton>
     )
 };

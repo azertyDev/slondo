@@ -12,7 +12,7 @@ export const useStyles = makeStyles(() => ({
         },
         
         '& div.card-title > h6': {
-            backgroundColor: '#88caec',
+            background: 'rgba(102, 255, 255, 0.4)',
             position: 'absolute',
             top: '10px',
             left: '10px',

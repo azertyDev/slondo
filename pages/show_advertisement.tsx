@@ -1,13 +1,14 @@
 import React from 'react'
-import { ShowAdvertisement } from '../src/components/advertisement/showAdvertisement/ShowAdvertisement'
+// import { ShowAdvertisement } from '../src/components/advertisement/showAdvertisement/ShowAdvertisement'
+import { ShowAdLot } from '../src/components/advertisement/showAdvertisement/ShowAdLot'
 
 const Show_advertisement = (props) => {
-    return <ShowAdvertisement {...props} />
+    return <ShowAdLot {...props} />
 }
 
 
 Show_advertisement.getInitialProps = async () => ({
-    namespacesRequired: ['main', 'common'],
+    namespacesRequired: ['', 'common'],
 });
 
 export default Show_advertisement
