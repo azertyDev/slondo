@@ -79,10 +79,18 @@ export const useStyles = makeStyles((theme) => ({
                         width: '20%',
                     },
                 },
+                '& > div:nth-child(odd)': {
+                    '& h6.MuiTypography-subtitle1': {
+                        fontWeight: 600,
+                    },
+                },
             },
         },
         '& div.ad-social': {
             display: 'flex',
+            [theme.breakpoints.down('xs')]: {
+                flexFlow: 'column wrap',
+            },
             '& > div': {
                 width: '50%',
                 display: 'flex',
@@ -98,6 +106,9 @@ export const useStyles = makeStyles((theme) => ({
             },
             '& > div:last-child': {
                 display: 'flex',
+                [theme.breakpoints.down('xs')]: {
+                    marginTop: '10px',
+                },
                 '& h6.MuiTypography-subtitle1': {
                     marginRight: '30px',
                 },
@@ -105,32 +116,11 @@ export const useStyles = makeStyles((theme) => ({
                     marginRight: '15px',
                     '& img': {
                         width: '40px',
+                        [theme.breakpoints.down('sm')]: {
+                            width: '30px',
+                        },
                     },
                 },
-            },
-        },
-        '& div.delivery-icon': {
-            '& > svg': {
-                width: '30px',
-                height: '30px',
-                '& > path': {
-                    fill: '#695EAE',
-                },
-            },
-        },
-        '& div.safe-icon': {
-            '& > svg': {
-                width: '30px',
-                height: '30px',
-                '& > path': {
-                    fill: '#E88F0C',
-                },
-            },
-        },
-        '& div.exchange-icon': {
-            '& > svg': {
-                width: '30px',
-                height: '30px',
             },
         },
     },
@@ -139,8 +129,39 @@ export const useStyles = makeStyles((theme) => ({
     },
     title: {
         marginBottom: '20px',
+        display: 'flex',
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'space-between',
+        
+        '& > div:first-child': {
+            display: 'flex',
+            justifyContent: 'space-between',
+            flexDirection: 'row',
+            alignItems: 'center',
+        },
+        [theme.breakpoints.down('xs')]: {
+            flexDirection: 'column',
+            textAlign: 'center',
+        },
     },
     shareIcon: {
         height: '25px',
+    },
+    icons: {
+        width: '20px',
+    },
+    downArrow: {
+        height: '15px',
+        marginLeft: '5px',
+    },
+    adBanner: {
+        marginTop: '50px',
+        '& > div.right-banner': {
+            width: '100%',
+            height: '470px',
+            borderRadius: '7px',
+            backgroundColor: '#C0C0C0',
+        },
     },
 }));

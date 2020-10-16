@@ -46,3 +46,4 @@ export const DeliveryIcon = `icons/delivery_icon.svg`;
 export const SwapIcon = `icons/swap_icon.png`;
 export const FullscreenIcon = `icons/fullscreen-icon.svg`;
 export const FullscreenIcon2 = `icons/fullscreen-icon2.svg`;
+export const Subscribe_icon = `icons/touch_icon.svg`;
