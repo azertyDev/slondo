@@ -3,6 +3,8 @@ import { Typography } from '@material-ui/core';
 import { ButtonComponent } from '../../../../elements/button/Button';
 import { CustomField } from '../../../../elements/custom_field/CustomField';
 
+import { Lock_icon } from '../../../../elements/icons';
+
 // styles
 import { useStyles } from './useStyles';
 
@@ -91,6 +93,29 @@ export const LotInfo = () => {
                         <Typography variant="subtitle2" color="initial">
                             Максимально возможная ставка 2025000
                         </Typography>
+                    </div>
+                    <div>
+                        <img src={Lock_icon} alt="lock-icon" />
+                        <Typography variant="subtitle1" color="initial">
+                            Резервная цена:
+                        </Typography>
+                        <Typography variant="subtitle1" color="initial">
+                            1 420 000 сум
+                        </Typography>
+                    </div>
+                    <div>
+                        <div>
+                            <Typography variant="subtitle1" color="initial">
+                                1 420 000 сум
+                            </Typography>
+                        </div>
+                        <div>
+                            <ButtonComponent>
+                                <Typography variant="subtitle1" color="initial">
+                                    Купить сейчас
+                                </Typography>
+                            </ButtonComponent>
+                        </div>
                     </div>
                     <div>
                         <ButtonComponent>

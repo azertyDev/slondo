@@ -12,7 +12,7 @@ export const useStyles = makeStyles((theme) => ({
     buttons: {
         margin: '50px 0',
         '& button':{
-            padding: '10px 80px'
+            // padding: '10px 80px',
         },
     }
 }))

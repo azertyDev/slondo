@@ -6,7 +6,7 @@ export const useStyles = makeStyles((theme) => ({
             display: 'flex',
             justifyContent: 'center',
             flexDirection: 'column',
-            marginBottom: '50px',
+            marginBottom: '30px',
             '& > div': {
                 display: 'flex',
                 justifyContent: 'center',
@@ -45,7 +45,7 @@ export const useStyles = makeStyles((theme) => ({
             },
             '& div.bet-info': {
                 flexDirection: 'column',
-                paddingBottom: "20px",
+                paddingBottom: '20px',
                 borderBottom: '1px solid #ccc',
                 '& > div': {
                     display: 'flex',
@@ -64,13 +64,34 @@ export const useStyles = makeStyles((theme) => ({
                         width: '40%',
                     },
                 },
-                
+
                 '& > div:nth-child(3)': {
                     justifyContent: 'flex-start',
-                    marginBottom: '30px'
                 },
-                '& > div:last-child': {
+                '& > div:nth-child(4)': {
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'flex-start',
+                    marginBottom: '30px',
+                    '& div': {
+                        width: '50%',
+                    },
+                    '& img': {
+                        marginRight: '5px',
+                    },
                 },
+                '& > div:nth-child(5)': {
+                    display: 'flex',
+                    marginBottom: '30px',
+                    alignItems: 'center',
+                    '& div': {
+                        width: '50%',
+                        '&  button': {
+                            width: '100%',
+                        },
+                    },
+                },
+                '& > div:last-child': {},
             },
         },
     },
