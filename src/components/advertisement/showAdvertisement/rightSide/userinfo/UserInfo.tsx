@@ -1,13 +1,13 @@
 import React from 'react';
 import { Typography } from '@material-ui/core';
-import { RatingComponent } from '../../../../elements/rating/Rating';
 import { ButtonComponent } from '../../../../elements/button/Button';
 import { Link } from '../../../../../../i18n';
+import { UserInfoWithAvatar } from '../../../../elements/userInfoWithAvatar/userInfoWithAvatar';
 // icons
 import { DeliveryIcon } from '../../../../elements/icons/DeliveryIcon';
 import { SafeIcon } from '../../../../elements/icons/SafeIcon';
 import { ExchangeIcon } from '../../../../elements/icons/ExchangeIcon';
-import { UserAvatar, Subscribe_icon } from '../../../../elements/icons';
+import { Subscribe_icon } from '../../../../elements/icons';
 
 // styles
 import { useStyles } from './useStyles';
@@ -33,26 +33,7 @@ export const UserInfo = () => {
                     </ButtonComponent>
                 </div>
             </div>
-            <div className="user-info">
-                <div>
-                    <img src={UserAvatar} />
-                </div>
-                <div>
-                    <div>
-                        <Typography variant="subtitle1" color="initial">
-                            <span>Алимов Р.</span> (5 объявлений)
-                        </Typography>
-                    </div>
-                    <div>
-                        <Typography variant="subtitle1" color="initial">
-                            На Slondo с 31 августа 2020 г.
-                        </Typography>
-                    </div>
-                    <div>
-                        <RatingComponent />
-                    </div>
-                </div>
-            </div>
+            <UserInfoWithAvatar />
             <div className="subscribe">
                 <div>
                     <img src={Subscribe_icon} />

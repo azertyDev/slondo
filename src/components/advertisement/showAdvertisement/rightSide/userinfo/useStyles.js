@@ -7,26 +7,6 @@ export const useStyles = makeStyles((theme) => ({
                 marginBottom: '10px',
             },
         },
-
-        '& div.user-info': {
-            display: 'flex',
-            margin: '20px 0 10px 0',
-            '& > div:first-child': {
-                width: '30%',
-                display: 'flex',
-                // alignItems: 'center',
-                // justifyContent: 'center',
-                '& > img': {
-                    height: '60px',
-                },
-            },
-            '& > div': {
-                '& > div:nth-child(2) > h6.MuiTypography-subtitle1': {
-                    fontSize: '0.75rem',
-                },
-            },
-        },
-
         '& div.subscribe': {
             display: 'flex',
             justifyContent: 'center',
