@@ -3,7 +3,11 @@ import { makeStyles } from '@material-ui/core/styles';
 export const useStyles = makeStyles((theme) => ({
     root: {
         '& div.action-menu-wrapper': {
-            '& > div.menu-item-1': {
+            '& > div': {
+                marginBottom: '10px',
+                boxShadow: '0px 1px 2px rgba(0, 0, 0, 0.25)',
+            },
+            '& > div.menu-item-subscribe': {
                 display: 'flex',
                 backgroundColor: '#F2F2F2',
                 justifyContent: 'space-around',
@@ -22,6 +26,60 @@ export const useStyles = makeStyles((theme) => ({
                             'linear-gradient(49.94deg, #675EAA 19.03%, #AD66D5 72.72%)',
                         WebkitBackgroundClip: 'text',
                         WebkitTextFillColor: 'transparent',
+                    },
+                },
+            },
+            '& > div.menu-item ': {
+                display: 'flex',
+                flexDirection: 'column',
+                backgroundColor: '#F2F2F2',
+                padding: '15px',
+                borderRadius: '10px',
+                '& > div': {
+                    marginBottom: '5px',
+                    '& > button': {
+                        padding: '10px 0',
+                        color: '#4E4E4E',
+                        boxShadow: '0px 1px 2px rgba(0, 0, 0, 0.25)',
+                        borderRadius: '5px',
+                        background: '#fff',
+                        '& > svg': {
+                            marginRight: '8px',
+                        },
+                    },
+                },
+                '& > div:last-child': {
+                    display: 'flex',
+                    marginBottom: '0',
+                    '& > button:first-child': {
+                        marginRight: '5px',
+                    },
+                },
+            },
+            '& > div.menu-item-3': {
+                display: 'flex',
+                flexDirection: 'column',
+                backgroundColor: '#F2F2F2',
+                padding: '15px',
+                borderRadius: '10px',
+                '& > div': {
+                    marginBottom: '5px',
+                    '& > button': {
+                        padding: '10px 0',
+                        color: '#4E4E4E',
+                        boxShadow: '0px 1px 2px rgba(0, 0, 0, 0.25)',
+                        borderRadius: '5px',
+                        background: '#fff',
+                        '& > svg': {
+                            marginRight: '8px',
+                        },
+                    },
+                },
+                '& > div:last-child': {
+                    display: 'flex',
+                    marginBottom: '0',
+                    '& > button:first-child': {
+                        marginRight: '5px',
                     },
                 },
             },
