@@ -1,12 +1,11 @@
 import React from 'react';
-import Header from '../header/Header';
 import { Cabinet } from './Cabinet';
+import { MainLayout } from './../MainLayout';
 
-export const CabinetContainer = () => {
+export const CabinetContainer = (props) => {
     return (
-        <div>
-            <Header/>
-            <Cabinet />
-        </div>
+        <MainLayout title="Личный кабинет">
+            <Cabinet {...props} />
+        </MainLayout>
     );
 };

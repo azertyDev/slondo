@@ -95,6 +95,10 @@ export const useStyles = makeStyles((theme) => ({
                         display: 'flex',
                         width: '20%',
                     },
+                    '& > div': {
+                        display: 'flex',
+                        alignItems: 'center'
+                    }
                 },
                 '& > div:nth-child(odd)': {
                     '& h6.MuiTypography-subtitle1': {
