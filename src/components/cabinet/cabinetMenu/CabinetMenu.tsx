@@ -1,5 +1,5 @@
 import React from 'react';
-import { Container, Grid, Typography } from '@material-ui/core';
+import {  Grid, Typography } from '@material-ui/core';
 import { ButtonComponent } from '../../elements/button/Button';
 import { UserInfoWithAvatar } from '../../elements/userInfoWithAvatar/UserInfoWithAvatar';
 

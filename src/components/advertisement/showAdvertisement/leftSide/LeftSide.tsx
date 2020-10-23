@@ -1,6 +1,6 @@
 import React from 'react';
-import { Grid, Typography } from '@material-ui/core';
-import { SyncSliders } from '../../../elements/syncSlider/SyncSliders';
+import {  Typography } from '@material-ui/core';
+import { SyncSliders } from 'components/elements/syncSlider/SyncSliders';
 import { Link } from '../../../../../i18n';
 
 // icons
@@ -13,7 +13,7 @@ import {
     Instagram,
     Youtube,
     Telegram,
-} from '../../../elements/icons';
+} from 'components/elements/icons';
 
 const imgUrls = [
     {
