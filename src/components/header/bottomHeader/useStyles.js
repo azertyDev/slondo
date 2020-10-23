@@ -50,17 +50,6 @@ export const useStyles = makeStyles((theme) => ({
                 right: 0
             }
         },
-        '& div.create-ad': {
-            backgroundColor: theme.palette.primary.main,
-            borderRadius: '6px',
-            '& > a': {
-                display: 'flex',
-                justifyContent: 'center',
-                padding: '3px 10px',
-                color: theme.palette.primary.white,
-                textDecoration: 'none'
-            }
-        },
         '& button.bottom-sign-button': {
             color: '#000',
             backgroundColor: '#E9E9E9',

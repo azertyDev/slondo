@@ -1,15 +1,22 @@
 import React, {useState} from 'react'
-import {IconButton, Typography} from '@material-ui/core'
-import {CloseWhiteIcon} from '../../elements/icons'
-import {ButtonComponent} from '../../elements/button/Button'
-import {AuthRegForm} from '../../elements/auth_reg_form/AuthRegForm'
-import {CustomSlider} from '../../elements/custom_slider/CustomSlider'
+import {Typography} from '@material-ui/core'
+import {CloseIcon, PrevArrowIcon} from '../../../elements/icons/index'
+import {ButtonComponent} from '../../../elements/button/Button'
+import {AuthRegForm} from '../../../elements/auth_reg_form/AuthRegForm'
+import {CustomSlider} from '../../../elements/custom_slider/CustomSlider'
+import {CustomList} from '../../../elements/custom_list/CustomList'
 import {settings} from './sliderSettings'
 import {useStyles} from "./useStyles"
 
+const list = [
+    {name: 'Акции и бонусы'},
+    {name: 'Помощь'},
+    {name: 'Служба поддержки'},
+    {name: 'Политика конфидециальности'}
+];
 
 export const AuthRegSm = (props) => {
-    const {t, language, handleCloseModal} = props;
+    const {t, handleCloseModal} = props;
 
     const [isAuthRegClicked, setIsAuthRegClicked] = useState(false);
 
@@ -17,8 +24,8 @@ export const AuthRegSm = (props) => {
         setIsAuthRegClicked(value);
     };
 
-    const onSubmit = (values, actions) => {
-        actions.resetForm();
+    const handleBack = () => {
+        setIsAuthRegClicked(false);
     };
 
     const classes = useStyles();
@@ -27,23 +34,30 @@ export const AuthRegSm = (props) => {
             {
                 isAuthRegClicked
                     ? (
-                        <AuthRegForm
-                            t={t}
-                            onSubmit={onSubmit}
-                            language={language}
-                            handleCloseModal={handleCloseModal}
-                        />
+                        <div className={classes.authForm}>
+                            <div className='btns-wrapper'>
+                                <PrevArrowIcon onClick={handleBack}/>
+                                <CloseIcon onClick={handleCloseModal}/>
+                            </div>
+                            <AuthRegForm
+                                t={t}
+                                handleCloseModal={handleCloseModal}
+                            />
+                        </div>
                     )
                     : (
                         <div className={classes.authRegMenu}>
                             <div className='close-modal-block'>
-                                <IconButton onClick={handleCloseModal}>
-                                    <img src={CloseWhiteIcon} alt="close"/>
-                                </IconButton>
+                                <CloseIcon onClick={handleCloseModal}/>
                             </div>
                             <div className='welcome-block'>
                                 <Typography variant='h6'>
                                     {t('auth_reg:welcome')}
+                                </Typography>
+                            </div>
+                            <div className='auth-site-txt'>
+                                <Typography variant="subtitle1" color="initial">
+                                    {t('auth_reg:authSite')}
                                 </Typography>
                             </div>
                             <div className='auth-reg-btn'>
@@ -60,6 +74,9 @@ export const AuthRegSm = (props) => {
                                     <img src={"img/bonus_img.png"} alt="bonus_img"/>
                                     <img src={"img/bonus_img.png"} alt="bonus_img"/>
                                 </CustomSlider>
+                            </div>
+                            <div className='list-block'>
+                                <CustomList list={list}/>
                             </div>
                         </div>
                     )

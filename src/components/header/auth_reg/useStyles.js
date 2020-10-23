@@ -1,6 +1,7 @@
 import {makeStyles} from '@material-ui/core/styles'
 
-export const useStyles = makeStyles(() => ({
+
+export const useStyles = makeStyles((theme) => ({
     root: {
         width: '725px',
         height: '530px',
@@ -26,15 +27,29 @@ export const useStyles = makeStyles(() => ({
                 display: 'flex',
                 alignItems: 'center',
                 '& > img': {
+                    width: '40px',
+                    height: '40px',
                     marginRight: '15px'
                 }
             }
         },
         '& div.auth-reg-block': {
             height: '100%',
-            '& > div': {
-                borderTopRightRadius: '6px',
-                borderBottomRightRadius: '6px',
+            backgroundColor: theme.palette.primary.white,
+            borderTopRightRadius: '6px',
+            borderBottomRightRadius: '6px',
+            '& > div.close-btn-wrapper': {
+                display: 'flex',
+                justifyContent: 'flex-end',
+                '& > button.MuiIconButton-root': {
+                    margin: '4px'
+                }
+            },
+            '& > div.welcome-block > h6': {
+                textAlign: 'center'
+            },
+            '& > div.auth-form': {
+                marginBottom: '5px'
             }
         }
     }

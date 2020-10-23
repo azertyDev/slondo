@@ -1,20 +1,37 @@
-import React, {useState} from 'react'
-import {withTranslation, i18n} from '../../../i18n'
+import React, {useEffect, useState} from 'react'
+import Cookies from 'universal-cookie'
+import {withTranslation} from '../../../i18n'
 import {Container, Hidden} from '@material-ui/core'
 import TopHeaderContainer from "./topHeader/TopHeaderContainer"
 import BottomHeader from './bottomHeader/BottomHeader'
 import {ModalComponent} from '../elements/modal/Modal'
-import {AuthRegPage} from "../auth_reg/AuthRegPage"
-import {AuthRegSm} from "../auth_reg/auth_reg_sm/AutRegSm"
+import {AuthRegPage} from "./auth_reg/AuthRegPage"
+import {AuthRegSm} from "./auth_reg/auth_reg_sm/AutRegSm"
+import {SET_IS_AUTH} from "../../redux/actions/authActions"
+import {useDispatch} from "react-redux"
 
 // styles
 import {useStyles} from './useStyles'
 
+
 const Header = (props) => {
     const {t} = props;
-    const {language} = i18n;
+
+    const dispatch = useDispatch();
+
+    const cookies = new Cookies();
+    const isTokenExst = !!cookies.get('token');
 
     const [isOpen, setIsOpen] = useState(false);
+
+    useEffect(() => {
+        console.log(isTokenExst)
+
+        dispatch({
+            type: SET_IS_AUTH,
+            payload: isTokenExst
+        });
+    }, [isTokenExst]);
 
     const handleOpenModal = () => {
         setIsOpen(true);
@@ -29,7 +46,7 @@ const Header = (props) => {
         <header className={classes.root}>
             <Container maxWidth="lg">
                 <TopHeaderContainer t={t} handleOpenModal={handleOpenModal}/>
-                <div className={classes.bottomHeaderWrapper}>
+                <div className={classes.bottomHeader}>
                     <BottomHeader t={t} handleOpenModal={handleOpenModal}/>
                 </div>
             </Container>
@@ -42,14 +59,12 @@ const Header = (props) => {
                     <Hidden smDown>
                         <AuthRegPage
                             t={t}
-                            language={language}
                             handleCloseModal={handleCloseModal}
                         />
                     </Hidden>
                     <Hidden mdUp>
                         <AuthRegSm
                             t={t}
-                            language={language}
                             handleCloseModal={handleCloseModal}
                         />
                     </Hidden>

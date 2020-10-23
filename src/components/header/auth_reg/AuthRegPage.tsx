@@ -6,19 +6,16 @@ import {
     AdvertisementIcon,
     TorgIcon,
     RatingIcon,
-} from '../elements/icons'
-import {AuthRegForm} from "../elements/auth_reg_form/AuthRegForm";
+} from '../../elements/icons'
+import {AuthRegForm} from "../../elements/auth_reg_form/AuthRegForm"
+import {CloseIcon} from "../../elements/icons/close_icon/CloseIcon"
 
 // Styles
 import {useStyles} from './useStyles'
 
 
 export const AuthRegPage = (props) => {
-    const {t, language, handleCloseModal} = props;
-
-    const onSubmit = (values, actions) => {
-        actions.resetForm();
-    };
+    const {t, handleCloseModal} = props;
 
     const classes = useStyles();
     return (
@@ -66,12 +63,23 @@ export const AuthRegPage = (props) => {
                 </Grid>
                 <Grid item xs={7}>
                     <div className='auth-reg-block'>
-                        <AuthRegForm
-                            t={t}
-                            language={language}
-                            handleCloseModal={handleCloseModal}
-                            onSubmit={onSubmit}
-                        />
+                        <div className='close-btn-wrapper'>
+                            <CloseIcon onClick={handleCloseModal}/>
+                        </div>
+                        <div className='welcome-block'>
+                            <Typography variant="h6" color="initial">
+                                {t('auth_reg:welcome')}
+                            </Typography>
+                            <Typography variant="subtitle2" color="initial">
+                                {t('auth_reg:authSite')}
+                            </Typography>
+                        </div>
+                        <div className='auth-form'>
+                            <AuthRegForm
+                                t={t}
+                                handleCloseModal={handleCloseModal}
+                            />
+                        </div>
                     </div>
                 </Grid>
             </Grid>

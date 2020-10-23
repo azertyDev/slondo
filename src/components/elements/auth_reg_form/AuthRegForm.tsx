@@ -1,52 +1,69 @@
-import React, {useState} from "react"
-import {IconButton, Tabs, Typography} from "@material-ui/core"
-import {Link} from "../../../../i18n"
-import {CloseBlackIcon} from '../icons'
+import React, {useState, useEffect} from "react"
+import {useDispatch, useSelector} from "react-redux"
+import {Tabs, Typography} from "@material-ui/core"
+import {i18n, Link} from "../../../../i18n"
 import {CustomTab} from "../custom_tab/CustomTab"
 import {CustomTabPanel} from "../custom_tab_panel/CustomTabPanel"
-import {Field, Form, Formik} from "formik"
+import {Form, Formik} from "formik"
 import {CustomField} from "../custom_field/CustomField"
 import {ButtonComponent} from "../button/Button"
 import {requiredValidate, phoneValidate} from '../../../components/validates'
+import {RootState} from "../../../redux/reducers/rootReducer"
+import {FETCH_TOKEN} from "../../../redux/actions/authActions"
 import {useStyles} from './useStyles'
 
-
-interface ILoginValues {
+type InputVals = {
     phone: string,
     password: string
-}
+};
+
+const initialInputsVals: InputVals = {phone: '998908080265', password: '123456789aaa'};
 
 export const AuthRegForm = (props) => {
-    const {t, language, handleCloseModal, onSubmit} = props;
-    const inputsVals: ILoginValues = {phone: '', password: ''};
+    const {t, handleCloseModal} = props;
+    const {language} = i18n;
 
-    const [value, setValue] = useState(0);
+    const dispatch = useDispatch();
+    const {isFetch, isAuth, error} = useSelector((store: RootState) => store.auth);
 
-    const handleChange = (event, newValue) => {
-        setValue(newValue);
+    const [tabValue, setTabValue] = useState(0);
+
+    useEffect(() => {
+        isAuth && handleCloseModal();
+    }, [isAuth]);
+
+    const tabsHandler = (event, newValue) => {
+        setTabValue(newValue);
+    };
+
+    const loginReg = (values) => {
+        tabValue === 0
+            ? dispatch({
+                type: FETCH_TOKEN,
+                payload: {
+                    phone: values.phone,
+                    password: values.password
+                }
+            })
+            : null
+    };
+
+    const onSubmit = (values, actions) => {
+        loginReg(values);
+        actions.resetForm();
     };
 
     const classes = useStyles();
     return (
         <div className={classes.root}>
-            <div className='close-btn-wrapper'>
-                <IconButton onClick={handleCloseModal}>
-                    <img src={CloseBlackIcon} alt="close"/>
-                </IconButton>
-            </div>
             <div className='form-block'>
-                <div className='welcome-block'>
-                    <Typography variant="h6" color="initial">
-                        {t('auth_reg:welcome')}
-                    </Typography>
-                    <Typography variant="subtitle2" color="initial">
-                        {t('auth_reg:authSite')}
-                    </Typography>
+                <div>
+                    {error && <Typography className={classes.errorTxt}>{error}</Typography>}
                 </div>
                 <div className='tabs-container'>
                     <Tabs
-                        value={value}
-                        onChange={handleChange}
+                        value={tabValue}
+                        onChange={tabsHandler}
                         indicatorColor="primary"
                         className='tabs'
                     >
@@ -69,12 +86,12 @@ export const AuthRegForm = (props) => {
                     </Tabs>
                     <div className='tab-panels'>
                         <CustomTabPanel
-                            value={value}
+                            value={tabValue}
                             index={0}
                             className='sign-panel'
                         >
-                            <Formik initialValues={inputsVals} onSubmit={onSubmit}>
-                                {({errors, touched}) => {
+                            <Formik initialValues={initialInputsVals} onSubmit={onSubmit}>
+                                {({errors, touched, setFieldValue}) => {
                                     return (
                                         <Form>
                                             <div>
@@ -84,12 +101,12 @@ export const AuthRegForm = (props) => {
                                                 >
                                                     {errors.phone && touched.phone ? errors.phone : ''}
                                                 </Typography>
-                                                <Field
+                                                <CustomField
                                                     name='phone'
-                                                    type='phone'
+                                                    type='tel'
                                                     placeholder={t('auth_reg:enterPhone')}
+                                                    setFieldValue={setFieldValue}
                                                     validate={phoneValidate}
-                                                    component={CustomField}
                                                     className={errors.phone && touched.phone ? classes.errorInput : ''}
                                                 />
                                             </div>
@@ -100,12 +117,12 @@ export const AuthRegForm = (props) => {
                                                 >
                                                     {errors.password && touched.password ? errors.password : ''}
                                                 </Typography>
-                                                <Field
+                                                <CustomField
                                                     name='password'
                                                     type="password"
                                                     placeholder={t('auth_reg:enterPassword')}
                                                     validate={requiredValidate}
-                                                    component={CustomField}
+                                                    setFieldValue={setFieldValue}
                                                     className={errors.password && touched.password ? classes.errorInput : ''}
                                                 />
                                             </div>
@@ -117,8 +134,9 @@ export const AuthRegForm = (props) => {
                                                 </a>
                                             </div>
                                             <div className={classes.modalBtns}>
-                                                <ButtonComponent className='signin-btn' type='submit'>
-                                                    {t('auth_reg:signIn')}
+                                                <ButtonComponent className='signin-btn' type='submit'
+                                                                 disabled={isFetch}>
+                                                    {t('common:signIn')}
                                                 </ButtonComponent>
                                             </div>
                                         </Form>
@@ -126,29 +144,25 @@ export const AuthRegForm = (props) => {
                                 }}
                             </Formik>
                         </CustomTabPanel>
-                        <CustomTabPanel value={value} index={1} className='reg-panel'>
-                            <Formik initialValues={inputsVals} onSubmit={onSubmit}>
-                                {({errors, touched}) => (
+                        <CustomTabPanel value={tabValue} index={1} className='reg-panel'>
+                            <Formik initialValues={initialInputsVals} onSubmit={onSubmit}>
+                                {({errors, touched, setFieldValue}) => (
                                     <Form>
                                         <div>
-                                            <div>
-                                                <Typography
-                                                    className={classes.errorTxt}
-                                                    variant="subtitle2"
-                                                >
-                                                    {errors.phone && touched.phone ? errors.phone : ''}
-                                                </Typography>
-                                            </div>
-                                            <div>
-                                                <Field
-                                                    name='phone'
-                                                    type='phone'
-                                                    placeholder={t('auth_reg:enterPhone')}
-                                                    validate={phoneValidate}
-                                                    component={CustomField}
-                                                    className={errors.phone && touched.phone ? classes.errorInput : ''}
-                                                />
-                                            </div>
+                                            <Typography
+                                                className={classes.errorTxt}
+                                                variant="subtitle2"
+                                            >
+                                                {errors.phone && touched.phone ? errors.phone : ''}
+                                            </Typography>
+                                            <CustomField
+                                                name='phone'
+                                                type='tel'
+                                                placeholder={t('auth_reg:enterPhone')}
+                                                validate={phoneValidate}
+                                                setFieldValue={setFieldValue}
+                                                className={errors.phone && touched.phone ? classes.errorInput : ''}
+                                            />
                                         </div>
                                         <div className={classes.modalBtns}>
                                             <ButtonComponent className='reg-btn' type='submit'>

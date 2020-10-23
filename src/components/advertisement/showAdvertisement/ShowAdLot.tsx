@@ -11,8 +11,9 @@ import { ButtonComponent } from '../../elements/button/Button';
 import { AdsAndLotsBlock } from '../../elements/adsAndLotsBlock/AdsAndLotsBlock';
 import { MainLayout } from '../../MainLayout';
 import { RatingComponent } from '../../elements/rating/Rating';
-import { SyncSliders } from '../../elements/syncSlider/SyncSliders';
+import { SyncSliders } from '../../elements/syncSliders/SyncSliders';
 import { Link } from '../../../../i18n';
+// icons
 import {
     ShareIcon,
     DownArrow,
@@ -26,10 +27,11 @@ import {
     Whatsapp,
     Telegram,
     UserAvatar,
-    SafeBuyingIcon2,
-    DeliveryIcon,
     SwapIcon,
 } from '../../elements/icons';
+import { DeliveryIcon } from '../../elements/icons/DeliveryIcon';
+import { SafeIcon } from './../../elements/icons/SafeIcon';
+import { ExchangeIcon } from '../../elements/icons/ExchangeIcon';
 
 // styles
 import { useStyles } from './useStyles';
@@ -75,7 +77,7 @@ export const ShowAdLot = (props) => {
     const classes = useStyles();
     return (
         <div className={classes.root}>
-            <MainLayout title='Просмотр объявления'>
+            <MainLayout title="Просмотр объявления">
                 <Container maxWidth="lg">
                     <Grid container>
                         <Grid item xs={12} className={classes.breadcrumbs}>
@@ -574,7 +576,9 @@ export const ShowAdLot = (props) => {
                                             container
                                             justify="center"
                                         >
-                                            <img src={DeliveryIcon} />
+                                            <div className="delivery-icon">
+                                                <DeliveryIcon />
+                                            </div>
                                         </Grid>
                                         <Grid item xs={10}>
                                             <Typography
@@ -593,7 +597,9 @@ export const ShowAdLot = (props) => {
                                             container
                                             justify="center"
                                         >
-                                            <img src={SafeBuyingIcon2} />
+                                            <div className="safe-icon">
+                                                <SafeIcon />
+                                            </div>
                                         </Grid>
                                         <Grid item xs={10}>
                                             <Typography
@@ -612,7 +618,9 @@ export const ShowAdLot = (props) => {
                                             container
                                             justify="center"
                                         >
-                                            <img src={SwapIcon} />
+                                            <div className="exchange-icon">
+                                                <ExchangeIcon />
+                                            </div>
                                         </Grid>
                                         <Grid item xs={10}>
                                             <Typography

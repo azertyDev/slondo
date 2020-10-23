@@ -9,11 +9,11 @@
   "signInAndReg": "Kirish va Ro'yxatdan o'tish",
   "signInTitle": "Kirish",
   "signUpTitle": "Ro'yxat",
-  "signIn": "Kirish",
   "signUp": "Ro'yxatdan o'tish",
   "forgetPassword": "Parolni unutdingizmi?",
   "confirm": "Tasdiqlash",
   "enterPhone": "Telefon raqamingizni kiriting",
+  "enterName": "Ismingizni kiriting",
   "enterPassword": "Parolni kiriting",
   "agreement": {
     "firstPart": "Saytda ro'yxatdan o'tish orqali siz",

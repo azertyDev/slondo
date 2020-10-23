@@ -1,4 +1,5 @@
 import React, {useState} from "react"
+import {useRouter} from 'next/router'
 import {AppBar, Container, Grid, Hidden, MenuItem, Select, Typography} from "@material-ui/core"
 import {Link} from '../../../../i18n'
 import {ButtonComponent} from "../../elements/button/Button"
@@ -10,22 +11,42 @@ import {
     AddIcon,
 } from '../../elements/icons'
 import {withScrollThreshold} from "../../hoc/withScrollThreshold"
+import {useSelector} from "react-redux"
+import {RootState} from "../../../redux/reducers/rootReducer"
 import {useStyles} from "./useStyles"
 
 
 const BottomHeader = (props) => {
-    const {isScrollBreak, t} = props;
+    const {isScrollBreak, handleOpenModal, t} = props;
+
+    const router = useRouter();
+
     const [adType, setAdType] = useState('');
 
-    const handleChange = (e) => {
+    const {isAuth} = useSelector((store: RootState) => store.auth);
+
+    const handleSelect = (e) => {
         setAdType(e.target.value);
+    };
+
+    const handleCreateAd = () => {
+        isAuth
+            ? router.push('/create_advertisement')
+            : handleOpenModal()
+    };
+
+    const handleAuthBtn = () => {
+        isAuth
+            ? console.log('exit')
+            : handleOpenModal()
     };
 
     const classes = useStyles(props);
     return (
         <div className={classes.root}>
             <Hidden smDown>
-                <AppBar position={isScrollBreak ? "fixed" : "absolute"} color={"inherit"} elevation={isScrollBreak ? 1 : 0}>
+                <AppBar position={isScrollBreak ? "fixed" : "absolute"} color={"inherit"}
+                        elevation={isScrollBreak ? 1 : 0}>
                     <Container maxWidth='lg'>
                         <Grid container justify="space-between" alignItems="center" spacing={1}>
                             <Grid container item xs={3} alignItems="center">
@@ -61,7 +82,7 @@ const BottomHeader = (props) => {
                                     <Select
                                         variant={'outlined'}
                                         value={adType}
-                                        onChange={handleChange}
+                                        onChange={handleSelect}
                                         displayEmpty
                                     >
                                         <MenuItem value="">
@@ -79,26 +100,25 @@ const BottomHeader = (props) => {
                                     </Select>
                                 </Grid>
                             </Grid>
-                            <Grid item md={2} className='create-ad'>
-                                <Link href={'/create_advertisement'}>
-                                    <a>
-                                        <Typography variant="subtitle2">
-                                            {t('common:createAd')}
-                                        </Typography>
-                                        <img
-                                            src={AddIcon}
-                                            style={{
-                                                marginLeft: '10px',
-                                                height: '20px',
-                                            }}
-                                            alt='plus'
-                                        />
-                                    </a>
-                                </Link>
+                            <Grid item md={2}>
+                                <ButtonComponent onClick={handleCreateAd}>
+                                    <Typography variant="subtitle2">
+                                        {t('common:createAd')}
+                                    </Typography>
+                                    <img
+                                        src={AddIcon}
+                                        style={{
+                                            marginLeft: '10px',
+                                            height: '20px',
+                                        }}
+                                        alt='plus'
+                                    />
+                                </ButtonComponent>
                             </Grid>
                             <Grid item container alignItems="center" xs={1}>
-                                <ButtonComponent className='bottom-sign-button' onClick={props.handleOpenModal}>
-                                    <Typography variant="subtitle2">{t('signin')}</Typography>
+                                <ButtonComponent className='bottom-sign-button' onClick={handleAuthBtn}>
+                                    <Typography
+                                        variant="subtitle2">{t(`common:${isAuth ? 'signOut' : 'signIn'}`)}</Typography>
                                     <img src={SignIcon} alt="Sign in"/>
                                 </ButtonComponent>
                             </Grid>

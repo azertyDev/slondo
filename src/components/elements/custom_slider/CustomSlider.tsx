@@ -1,10 +1,11 @@
-import React, { forwardRef, PropsWithChildren } from 'react';
-import SlickSlider, { Settings } from 'react-slick';
-import { settings } from './sliderSettings';
-import { useStyles } from './useStyles';
+import React, {forwardRef, PropsWithChildren} from 'react';
+import SlickSlider from 'react-slick';
+import {settings} from './sliderSettings';
+import {useStyles} from './useStyles';
+
 
 export const CustomSlider = forwardRef(
-    (props: PropsWithChildren<Settings>, ref: any) => {
+    (props: PropsWithChildren<any>, ref: any) => {
         const classes = useStyles();
         return (
             <SlickSlider

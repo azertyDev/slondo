@@ -5,8 +5,9 @@ export const phoneValidate = (value) => {
     let error;
     if (!value) {
         error = language === 'ru' ? 'Поле обязательно для заполнения' : 'Hoshiya to‘ldirilishi shart';
-    } else if (!/^(\+?\d{3})?\d{9}$/i.test(value)) {
-        error = language === 'ru' ? 'Неверный формат номера телефона' : "Telefon raqam farmati noto'g'ri";
     }
+    // else if (!/^\+\d{3}\(\d{2}\)\s\d{7}$/i.test(value)) {
+    //     error = language === 'ru' ? 'Неверный формат номера телефона' : "Telefon raqam formati noto'g'ri";
+    // }
     return error
 };

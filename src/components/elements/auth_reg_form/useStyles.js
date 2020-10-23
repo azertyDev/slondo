@@ -7,25 +7,10 @@ export const useStyles = makeStyles(({palette}) => ({
         width: '100%',
         height: '100%',
         backgroundColor: palette.primary.white,
-        '& > div.close-btn-wrapper': {
-            display: 'flex',
-            justifyContent: 'flex-end',
-            '& > button': {
-                margin: '4px',
-                padding: '8px',
-                '& img': {
-                    width: '16px'
-                }
-            }
-        },
         '& > div.form-block': {
             padding: '0 15px',
-            '& > div.welcome-block': {
-                '& > h6': {
-                    textAlign: 'center'
-                }
-            },
             '& div.tabs-container': {
+                height: '405px',
                 marginTop: '30px',
                 '& div.tabs': {
                     width: '100%',
@@ -89,6 +74,7 @@ export const useStyles = makeStyles(({palette}) => ({
             textDecoration: 'none'
         }
     },
+    
     // Errors
     errorInput: {
         '& fieldset': {

@@ -1,21 +1,23 @@
-import {createStore, applyMiddleware, combineReducers} from 'redux'
-import thunkMiddleware from 'redux-thunk'
+import {createStore, applyMiddleware} from 'redux'
+import createSagaMiddleware from 'redux-saga'
 import {composeWithDevTools} from 'redux-devtools-extension'
-import {MakeStore, createWrapper, Context} from 'next-redux-wrapper'
+import {MakeStore} from 'next-redux-wrapper'
+import {rootReducer} from "./reducers/rootReducer"
+import rootSaga from './sagas/rootSaga'
 
-import {localization} from "./reducers/localization";
 
-const rootReducer = combineReducers({
-    localization,
-});
+const sagaMiddleware = createSagaMiddleware();
+
 const enhancer = composeWithDevTools(
-    applyMiddleware(thunkMiddleware),
+    applyMiddleware(sagaMiddleware),
 );
 
 // create a makeStore function
-const makeStore: MakeStore = (context: Context) => createStore(rootReducer, enhancer);
-
-export type AppState = ReturnType<typeof rootReducer>;
+const makeStore: MakeStore = () => {
+    const store = createStore(rootReducer, enhancer);
+    sagaMiddleware.run(rootSaga);
+    return store
+};
 
 // export an assembled wrapper
-export const wrapper = createWrapper<AppState>(makeStore);
+export default makeStore;

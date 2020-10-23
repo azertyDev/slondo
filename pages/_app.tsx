@@ -3,8 +3,9 @@ import {compose} from "redux"
 import {ThemeProvider, CssBaseline} from '@material-ui/core'
 import App from 'next/app'
 import theme from '../src/theme'
-import {wrapper} from '../src/redux/store'
+import {createWrapper} from 'next-redux-wrapper'
 import {appWithTranslation} from '../i18n'
+import store from '../src/redux/store'
 
 // Slick css file
 import "../slick.min.css"
@@ -33,7 +34,7 @@ const MyApp = (props) => {
 MyApp.getInitialProps = async (appContext) => ({...await App.getInitialProps(appContext)})
 
 const withCompose = compose(
-    wrapper.withRedux,
+    createWrapper(store).withRedux,
     appWithTranslation
 );
 

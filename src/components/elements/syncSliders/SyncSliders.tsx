@@ -1,14 +1,14 @@
-import React, { useEffect, useRef, useState } from 'react';
-import { CustomSlider } from '../custom_slider/CustomSlider';
-import { FullscreenIcon } from '../icons';
+import React, {useEffect, useRef, useState} from 'react';
+import {CustomSlider} from '../custom_slider/CustomSlider';
+import {FullscreenIcon} from '../icons';
 import Button from '@material-ui/core/Button';
 
 // styles
-import { useStyles } from './useStyles';
+import {useStyles} from './useStyles';
 
 export const SyncSliders = (props) => {
-    const { imgs } = props;
-    const [slidersNav, setSlidersNav] = useState({ nav1: null, nav2: null });
+    const {imgs} = props;
+    const [slidersNav, setSlidersNav] = useState({nav1: null, nav2: null});
     const slider1 = useRef();
     const slider2 = useRef();
 
@@ -27,15 +27,14 @@ export const SyncSliders = (props) => {
                     <Button
                         variant="text"
                         color="default"
-                        // onClick={handle.enter}
                     >
-                        <img src={FullscreenIcon} alt="fullscreen-icon" />
+                        <img src={FullscreenIcon} alt="fullscreen-icon"/>
                     </Button>
                 </div>
                 <CustomSlider asNavFor={slidersNav.nav2} ref={slider1}>
-                    {imgs.map(({ url, alt }, i) => (
+                    {imgs.map(({url, alt}, i) => (
                         <div key={i}>
-                            <img src={url} alt={alt} />
+                            <img src={url} alt={alt}/>
                         </div>
                     ))}
                 </CustomSlider>
@@ -47,9 +46,9 @@ export const SyncSliders = (props) => {
                     slidesToShow={7}
                     focusOnSelect={true}
                 >
-                    {imgs.map(({ url, alt }, i) => (
+                    {imgs.map(({url, alt}, i) => (
                         <div key={i}>
-                            <img src={url} alt={alt} />
+                            <img src={url} alt={alt}/>
                         </div>
                     ))}
                 </CustomSlider>

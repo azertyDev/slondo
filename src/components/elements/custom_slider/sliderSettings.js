@@ -1,13 +1,13 @@
 import React from 'react';
-import { SliderArrow } from '../slider_arrow/SliderArrow';
+import {SliderArrow} from '../slider_arrow/SliderArrow';
 
 function NextArrow(props) {
-    const { className, onClick } = props;
-    return <SliderArrow className={className} clickHandler={onClick} />;
+    const {className, onClick} = props;
+    return <SliderArrow className={className} clickHandler={onClick}/>;
 }
 
 function PrevArrow(props) {
-    const { className, onClick } = props;
+    const {className, onClick} = props;
     return (
         <SliderArrow
             className={className}
@@ -18,6 +18,7 @@ function PrevArrow(props) {
 }
 
 export const settings = {
-    nextArrow: <NextArrow />,
-    prevArrow: <PrevArrow />,
+    swipeToSlide: true,
+    nextArrow: <NextArrow/>,
+    prevArrow: <PrevArrow/>,
 };

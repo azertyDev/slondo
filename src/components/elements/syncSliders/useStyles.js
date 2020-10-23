@@ -1,6 +1,6 @@
 import { makeStyles } from '@material-ui/core/styles';
 
-export const useStyles = makeStyles((theme) => ({
+export const useStyles = makeStyles(() => ({
     root: {
         position: 'relative',
         '& button.slick-prev': {
@@ -25,7 +25,7 @@ export const useStyles = makeStyles((theme) => ({
         },
         '& div.[data-index="1"] img': {
             marginLeft: 0,
-        },
+        }
     },
     fullscreenIcon: {
         position: 'absolute',

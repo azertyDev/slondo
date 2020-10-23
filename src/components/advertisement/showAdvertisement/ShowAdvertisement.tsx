@@ -5,7 +5,7 @@ import { ButtonComponent } from '../../elements/button/Button';
 import { AdsAndLotsBlock } from '../../elements/adsAndLotsBlock/AdsAndLotsBlock';
 import { MainLayout } from '../../MainLayout';
 import { RatingComponent } from '../../elements/rating/Rating';
-import { SyncSliders } from '../../elements/syncSlider/SyncSliders';
+import { SyncSliders } from '../../elements/syncSliders/SyncSliders';
 import Link from 'next/link';
 import { 
     ShareIcon,
@@ -27,7 +27,7 @@ import {
 } from "../../elements/icons";
 
 // styles
-import { useStyles } from "./useStyles";
+import { useStyles } from "./useStyles1";
 
 const imgUrls = [
     {

@@ -9,11 +9,11 @@
   "signInAndReg": "Вход и регистрация",
   "signInTitle": "Вход",
   "signUpTitle": "Регистрация",
-  "signIn": "Войти",
   "signUp": "Зарегистрироваться",
   "forgetPassword": "Забыли пароль?",
   "confirm": "Подтвердить",
   "enterPhone": "Введите номер телефона",
+  "enterName": "Введите имя",
   "enterPassword": "Введите пароль",
   "agreement": {
     "firstPart": "Регистрируясь на сайте вы принимаете условия",

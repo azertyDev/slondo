@@ -13,6 +13,7 @@ const calibri = {
 
 const colors = {
     main: '#9773af',
+    secondary: '#675EAA',
     white: '#fafafa',
     black: '#4E4E4E',
     gray: '#C0C0C0',
@@ -27,10 +28,12 @@ const theme = createMuiTheme({
     palette: {
         primary: {
             main: colors.main,
+            secondary: colors.secondary,
             white: colors.white,
             black: colors.black,
             gray: colors.gray,
             adBgColor: colors.adBgColor,
+            lotBgColor: colors.lotBgColor,
             createAdBtnColor: colors.createAdBtnColor,
             error: colors.error
         },
@@ -58,7 +61,6 @@ const theme = createMuiTheme({
                     outline: 0,
                 },
                 body: {
-                    fontSize: '16px',
                     backgroundColor: colors.white
                 }
             }
@@ -71,7 +73,7 @@ const theme = createMuiTheme({
         MuiOutlinedInput: {
             root: {
                 borderRadius: '6px',
-                '&:hover > fieldset.MuiOutlinedInput-notchedOutline':{
+                '&:hover > fieldset.MuiOutlinedInput-notchedOutline': {
                     borderColor: 'rgba(0, 0, 0, 0.23)'
                 }
             }
@@ -80,8 +82,15 @@ const theme = createMuiTheme({
             root: {
                 textTransform: 'none'
             }
+        },
+        MuiListItem: {
+            button: {
+                '&:hover': {
+                    backgroundColor: `${colors.white}!important`
+                }
+            }
         }
     },
 })
 
-export default theme
+export default theme;

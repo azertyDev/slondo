@@ -7,11 +7,11 @@ import {ServerStyleSheets} from '@material-ui/core/styles';
 export default class MyDocument extends Document {
     render() {
         return (
-            <Html lang="en">
+            <Html lang="ru">
                 <Head/>
                 <body>
-                <Main/>
-                <NextScript/>
+                    <Main/>
+                    <NextScript/>
                 </body>
             </Html>
         );
@@ -21,17 +21,17 @@ export default class MyDocument extends Document {
 // `getInitialProps` belongs to `_document` (instead of `_app`),
 // it's compatible with server-side generation (SSG).
 MyDocument.getInitialProps = async (ctx: DocumentContext) => {
-    
+
     // Render app and page and get the context of the page with collected side effects.
     const sheets = new ServerStyleSheets();
     const originalRenderPage = ctx.renderPage;
-    
+
     ctx.renderPage = () => originalRenderPage({
         enhanceApp: (App) => (props) => sheets.collect(<App {...props} />),
     });
-    
+
     const initialProps = await Document.getInitialProps(ctx);
-    
+
     return {
         ...initialProps,
         // Styles fragment is rendered after the app and page rendering finish.

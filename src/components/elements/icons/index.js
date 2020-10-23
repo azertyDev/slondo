@@ -13,8 +13,6 @@ export const CategoryIcon = `icons/kat_icon.svg`;
 export const SearchIcon = `icons/sr_icon.svg`;
 export const SignIcon = `icons/sign.svg`;
 export const AddIcon = `icons/add.svg`;
-export const LeftArrowIcon = `icons/slide_left_icon.svg`;
-export const RightArrowIcon = `icons/slide_right_icon.svg`;
 export const CarIcon = `icons/legkovoe_avto_optim_fin.svg`;
 export const Electronica = `icons/elektronika_optim_fin.svg`;
 export const KrasotaZdorovye = `icons/krasota_zdorovye_optim_fin.svg`;
@@ -43,5 +41,9 @@ export const ComplainIcon = `icons/complain_icon.svg`;
 export const UserAvatar = `icons/user_avatar.svg`;
 export const StarIcon = `icons/star_icon.svg`;
 export const DeliveryIcon = `icons/delivery_icon.svg`;
-export const SwapIcon = `icons/swap_icon.png`;
+export const SwapIcon = `icons/swap_icon.svg`;
 export const FullscreenIcon = `icons/fullscreen-icon.svg`;
+
+// Custom svgs
+export {CloseIcon} from './close_icon/CloseIcon';
+export {PrevArrowIcon} from './prev_arrow_icon/PrevArrowIcon';
