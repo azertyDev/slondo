@@ -6,6 +6,9 @@ export const useStyles = makeStyles({
         width: 200,
         display: 'flex',
         alignItems: 'center',
+        '& div.MuiBox-root-37': {
+            marginLeft: '5px'
+        }
     },
 })
 

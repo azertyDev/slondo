@@ -1,5 +1,6 @@
 import { makeStyles } from '@material-ui/core/styles';
 
+<<<<<<< HEAD
 export const useStyles = makeStyles(() => ({
     root: {
         '& div.ad-slider': {
@@ -27,120 +28,48 @@ export const useStyles = makeStyles(() => ({
             textDecoration: 'none',
         },
         '& div.description': {
-            display: 'flex',
-            justifyContent: 'space-between',
-            marginBottom: '10px',
-            '& > div:first-child h6.MuiTypography-subtitle1': {
-                fontWeight: 600,
-            },
-            '& a': {
-                display: 'flex',
-                alignItems: 'center',
-            },
-        },
-        '& div.ad-parameters': {
-            '& > div:first-child': {
-                margin: 0,
-            },
-            '& > div > div:first-child h6.MuiTypography-subtitle1': {
-                fontWeight: 600,
-            },
-            '& > div': {
-                display: 'flex',
-                margin: '0 0 10px 0',
-                '& > div:first-child': {
-                    width: '33%',
-                },
-                '& > div': {
-                    width: '100%',
-                },
-            },
-            '& > div:last-child': {
-                '& div:last-child': {
-                    display: 'flex',
-                    justifyContent: 'space-between',
-                    '& a': {
-                        display: 'flex',
-                        justifyContent: 'space-between',
-                        alignItems: 'center',
-                    },
-                },
-            },
-        },
-        '& div.ad-statistic': {
-            '& > div': {
-                display: 'flex',
-                marginBottom: '10px',
-                '& > div': {
-                    display: 'flex',
-                    width: '50%',
-                    '& > div:first-child': {
-                        display: 'flex',
-                        width: '20%',
-                    },
-                },
-            },
-        },
-        '& div.ad-social': {
-            display: 'flex',
-            '& > div': {
-                width: '50%',
-                display: 'flex',
-                alignItems: 'center',
-            },
-            '& > div:first-child': {
-                '& > a': {
-                    display: 'flex',
-                    '& img': {
-                        marginLeft: '10px',
-                    },
-                },
-            },
-            '& > div:last-child': {
-                display: 'flex',
-                '& h6.MuiTypography-subtitle1': {
-                    marginRight: '30px',
-                },
-                '& > a': {
-                    marginRight: '15px',
-                    '& img': {
-                        width: '40px',
-                    },
-                },
-            },
-        },
-        '& div.delivery-icon': {
-            '& > svg': {
-                width: '30px',
-                height: '30px',
-                '& > path': {
-                    fill: '#695EAE',
-                },
-            },
-        },
-        '& div.safe-icon': {
-            '& > svg': {
-                width: '30px',
-                height: '30px',
-                '& > path': {
-                    fill: '#E88F0C',
-                },
-            },
-        },
-        '& div.exchange-icon': {
-            '& > svg': {
-                width: '30px',
-                height: '30px',
-            },
-        },
-    },
+=======
+export const useStyles = makeStyles((theme) => ({
+    root: {},
     breadcrumbs: {
         margin: '20px 0',
     },
     title: {
         marginBottom: '20px',
+        display: 'flex',
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'space-between',
+
+        '& > div:first-child': {
+>>>>>>> 1082277c556717492bdf7d8d139075d53554f4d5
+            display: 'flex',
+            justifyContent: 'space-between',
+            flexDirection: 'row',
+            alignItems: 'center',
+            width: '75%',
+        },
+        '& > div:last-child': {
+            display: 'flex',
+            justifyContent: 'flex-end',
+            alignItems: 'center',
+            width: '25%',
+        },
+        [theme.breakpoints.down('xs')]: {
+            flexDirection: 'column',
+            textAlign: 'center',
+        },
     },
     shareIcon: {
         height: '25px',
+    },
+    adBanner: {
+        marginTop: '50px',
+        '& > div.right-banner': {
+            width: '100%',
+            height: '470px',
+            borderRadius: '7px',
+            backgroundColor: '#C0C0C0',
+        },
     },
 }));

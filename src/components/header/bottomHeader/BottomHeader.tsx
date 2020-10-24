@@ -12,7 +12,7 @@ import {
 } from '../../elements/icons'
 import {withScrollThreshold} from "../../hoc/withScrollThreshold"
 import {useSelector} from "react-redux"
-import {RootState} from "../../../redux/reducers/rootReducer"
+import {RootState} from "redux/reducers/rootReducer"
 import {useStyles} from "./useStyles"
 
 

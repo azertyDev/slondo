@@ -1,36 +1,26 @@
-import React from 'react'
-import { Typography, Breadcrumbs } from '@material-ui/core'
-import Link from '@material-ui/core/Link'
-import NavigateNextIcon from '@material-ui/icons/NavigateNext'
+import React from 'react';
+import { Typography, Breadcrumbs } from '@material-ui/core';
+import Link from '@material-ui/core/Link';
+import NavigateNextIcon from '@material-ui/icons/NavigateNext';
 
 // styles
-import { useStyles } from './useStyles'
+import { useStyles } from './useStyles';
 
 function handleClick(event) {
-    event.preventDefault()
+    event.preventDefault();
 }
 
-export const BreadcrumbsComponent = () => {
-    const classes = useStyles()
+export const BreadcrumbsComponent = ({ children }) => {
+    const classes = useStyles();
     return (
         <div className={classes.root}>
-            <Breadcrumbs
-                separator={<NavigateNextIcon fontSize="small" />}
+            <Breadcrumbs   
+                separator='•'
                 aria-label="breadcrumb"
+                className='bc'
             >
-                <Link color="inherit" href="#" onClick={handleClick}>
-                    Электроника
-                </Link>
-                <Link color="inherit" href="#" onClick={handleClick}>
-                    Телефоны и планшеты
-                </Link>
-                <Link color="inherit" href="#" onClick={handleClick}>
-                    Мобильные телефоны
-                </Link>
-                <Typography color="primary">
-                    Продаю Samsung A5 в отличном состоянии.
-                </Typography>
+                {children}
             </Breadcrumbs>
         </div>
-    )
-}
+    );
+};

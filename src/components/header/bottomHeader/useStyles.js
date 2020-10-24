@@ -55,7 +55,7 @@ export const useStyles = makeStyles((theme) => ({
             backgroundColor: '#E9E9E9',
             border: '1px solid #C0C0C0',
             '& > img': {
-                width: '20px',
+                width: '16px',
                 marginLeft: '8px'
             }
         },

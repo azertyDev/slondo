@@ -20,7 +20,7 @@ const colors = {
     adBgColor: '#88CAEC',
     lotBgColor: '#AD66D5',
     createAdBtnColor: '#7DBCF6',
-    error: '#E9372E'
+    error: '#E9372E',
 }
 
 // Create a theme instance.
@@ -35,7 +35,7 @@ const theme = createMuiTheme({
             adBgColor: colors.adBgColor,
             lotBgColor: colors.lotBgColor,
             createAdBtnColor: colors.createAdBtnColor,
-            error: colors.error
+            error: colors.error,
         },
     },
     breakpoints: {
@@ -48,9 +48,12 @@ const theme = createMuiTheme({
         },
     },
     typography: {
-        fontFamily: ['Calibri', "Roboto", "Helvetica", "Arial", "sans-serif"],
+        fontFamily: ['Calibri', 'Roboto', 'Helvetica', 'Arial', 'sans-serif'],
         subtitle1: {
             lineHeight: 1.5,
+        },
+        allVariants: {
+            color: '#4E4E4E',
         },
     },
     overrides: {
@@ -67,8 +70,8 @@ const theme = createMuiTheme({
         },
         MuiPaper: {
             root: {
-                backgroundColor: colors.white
-            }
+                backgroundColor: colors.white,
+            },
         },
         MuiOutlinedInput: {
             root: {

@@ -1,5 +1,4 @@
 import React from 'react'
-// import { ShowAdvertisement } from '../src/components/advertisement/showAdvertisement/ShowAdvertisement'
 import { ShowAdLot } from '../src/components/advertisement/showAdvertisement/ShowAdLot'
 
 const Show_advertisement = (props) => {

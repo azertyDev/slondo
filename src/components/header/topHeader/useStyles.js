@@ -1,18 +1,17 @@
-import {makeStyles} from '@material-ui/core/styles'
-
+import {makeStyles} from '@material-ui/core/styles';
 
 export const useStyles = makeStyles((theme) => ({
     root: {
         '& div.location': {
             display: 'flex',
-            alignItems: 'center'
+            alignItems: 'center',
         },
         '& img.pl-icon': {
             width: '32px',
             height: '23px',
         },
         '& h6.select-region': {
-            textDecoration: 'underline'
+            textDecoration: 'underline',
         },
         '& div.social-icons > a': {
             display: 'flex',
@@ -20,7 +19,7 @@ export const useStyles = makeStyles((theme) => ({
             marginRight: '12px',
             '& > img': {
                 width: '35px',
-            }
+            },
         },
         '& div.multiple-content': {
             display: 'flex',
@@ -31,13 +30,18 @@ export const useStyles = makeStyles((theme) => ({
                 alignItems: 'center',
                 color: '#000',
                 '& > img': {
+                    marginRight: '5px',
                     [theme.breakpoints.down('lg')]: {
-                        width: '15px'
+                        width: '16px',
                     },
                     [theme.breakpoints.up('lg')]: {
-                        width: '20px'
+                        width: '16px',
                     },
-                }
+                },
+            },
+            '& a:hover': {
+                color: '#AD66D5',
+                textDecoration: 'underline'
             },
             '& h6': {
                 [theme.breakpoints.down('lg')]: {
@@ -45,27 +49,23 @@ export const useStyles = makeStyles((theme) => ({
                 },
                 [theme.breakpoints.up('lg')]: {
                     fontSize: '1rem',
-                }
+                },
             },
         },
-        '& div.multiple-content > a > img': {
-            textDecoration: 'none',
-            height: '20px',
-            marginRight: '10px'
-        },
+        
         // ------------> adaptive <--------------- //
         '& div.top-header-logo > a > img': {
             height: '50px',
-            width: '145px'
+            width: '145px',
         },
         '& div.burger-menu': {
             width: '35px',
             '& > div': {
                 height: '4px',
                 backgroundColor: '#675EAA',
-                margin: '4px 0'
-            }
-        }
+                margin: '4px 0',
+            },
+        },
     },
     avatarBlock: {
         '& > button': {

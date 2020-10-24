@@ -5,13 +5,13 @@ export const Twitter = `icons/tw_icon.svg`;
 export const Whatsapp = `icons/wp_icon.svg`;
 export const Telegram = `icons/tg_icon.svg`;
 export const HelpIcon = `icons/help_icon.svg`;
-export const StoreIcon = `icons/store_icon.svg`;
-export const BusinessIcon = `icons/bz_icon.svg`;
-export const PlIcon = `icons/pl_icon.svg`;
+export const StoreIcon = `icons/shopping_icon.svg`;
+export const BusinessIcon = `icons/business_icon.svg`;
+export const PlIcon = `icons/place_icon.svg`;
 export const Logo = `icons/logo.svg`;
 export const CategoryIcon = `icons/kat_icon.svg`;
 export const SearchIcon = `icons/sr_icon.svg`;
-export const SignIcon = `icons/sign.svg`;
+export const SignIcon = `icons/sign_icon.svg`;
 export const AddIcon = `icons/add.svg`;
 export const CarIcon = `icons/legkovoe_avto_optim_fin.svg`;
 export const Electronica = `icons/elektronika_optim_fin.svg`;
@@ -38,11 +38,16 @@ export const DownArrow = `icons/down_arrow.svg`;
 export const EyeIcon = `icons/eye_icon.svg`;
 export const HeartIcon = `icons/heart_icon.svg`;
 export const ComplainIcon = `icons/complain_icon.svg`;
-export const UserAvatar = `icons/user_avatar.svg`;
+export const UserAvatar = `icons/user-avatar_icon.svg`;
 export const StarIcon = `icons/star_icon.svg`;
 export const DeliveryIcon = `icons/delivery_icon.svg`;
 export const SwapIcon = `icons/swap_icon.svg`;
 export const FullscreenIcon = `icons/fullscreen-icon.svg`;
+export const FullscreenIcon2 = `icons/fullscreen-icon2.svg`;
+export const Subscribe_icon = `icons/touch_icon.svg`;
+export const Lock_icon = `icons/lock_icon.svg`;
+export const SpeakerNotes_icon = `icons/speaker_notes.svg`;
+
 
 // Custom svgs
 export {CloseIcon} from './close_icon/CloseIcon';

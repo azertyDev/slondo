@@ -7,6 +7,6 @@ export const useStyles = makeStyles((theme) => ({
         color: theme.palette.primary.white,
         padding: '6px 10px',
         backgroundColor: theme.palette.primary.main,
-        borderRadius: '6px'
+        borderRadius: '5px'
     },
 }))
