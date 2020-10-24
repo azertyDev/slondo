@@ -6,6 +6,7 @@ const {localeSubpaths} = _default().publicRuntimeConfig;
 
 
 export const {useTranslation, withTranslation, appWithTranslation, Link, i18n} = new NextI18Next({
+    strictMode: false,
     defaultLanguage: 'ru',
     otherLanguages: ['uz'],
     localeSubpaths,
