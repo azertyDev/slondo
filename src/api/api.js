@@ -6,7 +6,7 @@ const instance = Axios.create({
 });
 
 
-export const userApi = {
+export const userAPI = {
     login(phone, password) {
         const form = new FormData();
         form.set('phone', phone);

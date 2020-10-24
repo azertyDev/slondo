@@ -7,8 +7,8 @@ import BottomHeader from './bottomHeader/BottomHeader'
 import {ModalComponent} from '../elements/modal/Modal'
 import {AuthRegPage} from "./auth_reg/AuthRegPage"
 import {AuthRegSm} from "./auth_reg/auth_reg_sm/AutRegSm"
-import {SET_IS_AUTH} from "../../redux/actions/authActions"
 import {useDispatch} from "react-redux"
+import {setIsAuth} from '@src/redux/slices/authSlice'
 
 // styles
 import {useStyles} from './useStyles'
@@ -25,12 +25,7 @@ const Header = (props) => {
     const [isOpen, setIsOpen] = useState(false);
 
     useEffect(() => {
-        console.log(isTokenExst)
-
-        dispatch({
-            type: SET_IS_AUTH,
-            payload: isTokenExst
-        });
+        dispatch(setIsAuth(isTokenExst));
     }, [isTokenExst]);
 
     const handleOpenModal = () => {

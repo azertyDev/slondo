@@ -8,16 +8,20 @@ import {Form, Formik} from "formik"
 import {CustomField} from "../custom_field/CustomField"
 import {ButtonComponent} from "../button/Button"
 import {requiredValidate, phoneValidate} from '../../../components/validates'
-import {RootState} from "../../../redux/reducers/rootReducer"
-import {FETCH_TOKEN} from "../../../redux/actions/authActions"
+import {RootState} from "@src/redux/rootReducer"
+import {fetchToken} from "@src/redux/slices/authSlice";
 import {useStyles} from './useStyles'
 
-type InputVals = {
+
+export type AuthInputVals = {
     phone: string,
     password: string
 };
 
-const initialInputsVals: InputVals = {phone: '998908080265', password: '123456789aaa'};
+const initialInputsVals: AuthInputVals = {
+    phone: '998908080265',
+    password: '123456789aaa'
+};
 
 export const AuthRegForm = (props) => {
     const {t, handleCloseModal} = props;
@@ -37,15 +41,9 @@ export const AuthRegForm = (props) => {
     };
 
     const loginReg = (values) => {
-        tabValue === 0
-            ? dispatch({
-                type: FETCH_TOKEN,
-                payload: {
-                    phone: values.phone,
-                    password: values.password
-                }
-            })
-            : null
+        if (tabValue === 0) {
+            dispatch(fetchToken(values))
+        }
     };
 
     const onSubmit = (values, actions) => {

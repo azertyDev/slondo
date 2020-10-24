@@ -1,11 +1,11 @@
 import React from 'react'
 import {compose} from "redux"
-import {ThemeProvider, CssBaseline} from '@material-ui/core'
-import App from 'next/app'
-import theme from '../src/theme'
-import {createWrapper} from 'next-redux-wrapper'
+import {Provider} from "react-redux"
+import App from 'next/dist/pages/_app'
 import {appWithTranslation} from '../i18n'
-import store from '../src/redux/store'
+import {ThemeProvider, CssBaseline} from '@material-ui/core'
+import theme from '@src/theme'
+import {store} from '@src/redux/store'
 
 // Slick css file
 import "../slick.min.css"
@@ -23,10 +23,12 @@ const MyApp = (props) => {
 
     return (
         <>
-            <ThemeProvider theme={theme}>
-                <CssBaseline/>
-                <Component {...props.pageProps} />
-            </ThemeProvider>
+            <Provider store={store}>
+                <ThemeProvider theme={theme}>
+                    <CssBaseline/>
+                    <Component {...props.pageProps} />
+                </ThemeProvider>
+            </Provider>
         </>
     );
 }
@@ -34,7 +36,6 @@ const MyApp = (props) => {
 MyApp.getInitialProps = async (appContext) => ({...await App.getInitialProps(appContext)})
 
 const withCompose = compose(
-    createWrapper(store).withRedux,
     appWithTranslation
 );
 

@@ -1,5 +1,5 @@
 import React from 'react'
-import { ShowAdLot } from '../src/components/advertisement/showAdvertisement/ShowAdLot'
+import { ShowAdLot } from '@src/components/advertisement/showAdvertisement/ShowAdLot'
 
 const Show_advertisement = (props) => {
     return <ShowAdLot {...props} />

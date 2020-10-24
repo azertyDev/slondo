@@ -1,4 +1,5 @@
-import {Home} from '../src/components/home/Home'
+import React from "react"
+import {Home} from '@src/components/home/Home'
 import {withTranslation} from "../i18n"
 
 

@@ -1,5 +1,5 @@
 import React from 'react';
-import { CabinetContainer } from './../src/components/cabinet/CabinetContainer';
+import { CabinetContainer } from '@src/components/cabinet/CabinetContainer';
 import { withTranslation } from '../i18n';
 
 const Cabinet = (props) => {

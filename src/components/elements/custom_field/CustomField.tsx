@@ -6,6 +6,10 @@ import {ICustomField} from "../../../../interfaces/ICustomField"
 
 export const CustomField: FC<ICustomField> = ({setFieldValue, validate, ...props}) => {
 
+    const handleOnchange = ({target}) => {
+        setFieldValue(props.name, target.value)
+    }
+
     return (
         <Field validate={validate} name={props.name}>
             {
@@ -16,6 +20,7 @@ export const CustomField: FC<ICustomField> = ({setFieldValue, validate, ...props
                         variant='outlined'
                         value={field.value}
                         onBlur={field.onBlur}
+                        onChange={handleOnchange}
                         {...props}
                     />
                 )
