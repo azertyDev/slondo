@@ -3,6 +3,7 @@ import { Container, Grid, Typography, Tabs, Paper } from '@material-ui/core'
 import { CabinetMenu } from './cabinetMenu/CabinetMenu'
 import { CustomTab } from '../elements/custom_tab/CustomTab'
 import { CabinetTabItem } from './card/CabinetTabItem'
+import { Notification } from '@src/components/cabinet/notification/Notification'
 
 
 // styles
@@ -73,8 +74,7 @@ export const Cabinet = (props) => {
                             <CabinetTabItem />
                         </TabPanel>
                         <TabPanel value={value} index={1}>
-                            <CabinetTabItem />
-                            <CabinetTabItem />
+                            {/*<Notification />*/}
                         </TabPanel>
                         <TabPanel value={value} index={2}>
                             <CabinetTabItem />

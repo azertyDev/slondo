@@ -1,12 +1,13 @@
 import React from 'react'
-import {Card, CardActionArea, CardContent, CardMedia, Typography} from '@material-ui/core'
+import { Card, CardActionArea, CardContent, CardMedia, Typography } from '@material-ui/core'
 
 // styles
-import {useStyles} from './useStyles'
+import { useStyles } from './useStyles'
 
 export const CardItem = (props) => {
-    const {title, description, image, price,categoryName} = props;
-    const classes = useStyles();
+    const { title, description, image, price, categoryName } = props
+
+    const classes = useStyles()
     return (
         <Card className={classes.root}>
             <CardActionArea title={description}>

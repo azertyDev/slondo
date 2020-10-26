@@ -1,13 +1,13 @@
 import React from 'react';
 import { Typography } from '@material-ui/core';
-import { ButtonComponent } from '../../../../elements/button/Button';
+import { ButtonComponent } from '@src/components/elements/button/Button';
 import { Link } from '../../../../../../i18n';
-import { UserInfoWithAvatar } from '../../../../elements/userInfoWithAvatar/userInfoWithAvatar';
+import { UserInfoWithAvatar } from '@src/components/elements/userInfoWithAvatar/UserInfoWithAvatar';
 // icons
-import { DeliveryIcon } from '../../../../elements/icons/DeliveryIcon';
-import { SafeIcon } from '../../../../elements/icons/SafeIcon';
-import { ExchangeIcon } from '../../../../elements/icons/ExchangeIcon';
-import { Subscribe_icon } from '../../../../elements/icons';
+import { DeliveryIcon } from '@src/components/elements/icons/DeliveryIcon';
+import { SafeIcon } from '@src/components/elements/icons/SafeIcon';
+import { ExchangeIcon } from '@src/components/elements/icons/ExchangeIcon';
+import { Subscribe_icon } from '@src/components/elements/icons';
 
 // styles
 import { useStyles } from './useStyles';

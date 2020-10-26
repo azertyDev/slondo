@@ -1,18 +1,13 @@
 import React from 'react';
-import { Container, Grid, Hidden, Typography } from '@material-ui/core';
-import { BreadcrumbsComponent } from '../../elements/breadcrumbs/Breadcrumbs';
-import { AdsAndLotsBlock } from '../../elements/adsAndLotsBlock/AdsAndLotsBlock';
-import { MainLayout } from '../../MainLayout';
-<<<<<<< HEAD
-import { RatingComponent } from '../../elements/rating/Rating';
-import { SyncSliders } from '../../elements/syncSliders/SyncSliders';
-=======
+import { Container, Grid, Hidden,  Typography } from '@material-ui/core';
+import { BreadcrumbsComponent } from '@src/components/elements/breadcrumbs/Breadcrumbs';
+import { AdsAndLotsBlock } from '@src/components/elements/adsAndLotsBlock/AdsAndLotsBlock';
+import { MainLayout } from '@src/components/MainLayout';
 import { RightSide } from './rightSide/RightSide';
 import { LeftSide } from './leftSide/LeftSide';
->>>>>>> 1082277c556717492bdf7d8d139075d53554f4d5
 import { Link } from '../../../../i18n';
 
-import { ShareIcon } from '../../elements/icons';
+import { ShareIcon } from '@src/components/elements/icons';
 
 // styles
 import { useStyles } from './useStyles';
@@ -26,7 +21,15 @@ export const ShowAdLot = (props) => {
             <MainLayout title="Просмотр объявления">
                 <Container maxWidth="lg">
                     <div className={classes.breadcrumbs}>
-                        <BreadcrumbsComponent />
+                        <BreadcrumbsComponent>
+                            <Link href="#">
+                                <a>Для дома и дачи</a>
+                            </Link>
+                            <Link href="#">
+                                <a>Мебель и интерьер</a>
+                            </Link>
+                            <Typography color="primary">Столовая мебель</Typography>
+                        </BreadcrumbsComponent>
                     </div>
                     <div className={classes.title}>
                         <div>

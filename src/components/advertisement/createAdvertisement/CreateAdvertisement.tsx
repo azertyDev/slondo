@@ -1,10 +1,8 @@
 import React, { useState } from 'react'
 import {
-    Container,
     Grid,
     Typography,
     FormControl,
-    InputBase,
     TextField,
     Select,
     MenuItem,
@@ -13,16 +11,16 @@ import {
     TextareaAutosize,
     Hidden,
 } from '@material-ui/core'
-import { AdvertisementSelect } from '../advertisementSelect/AdvertisementSelect'
-import { ButtonComponent } from '../../elements/button/Button'
+import { AdvertisementSelect } from '@src/components/advertisement/advertisementSelect/AdvertisementSelect'
+import { ButtonComponent } from '@src/components/elements/button/Button'
+
+//icons
 import { Help, Search } from '@material-ui/icons'
 
-// Styles
+// styles
 import { useStyles } from './useStyles'
 
-// test
 export const CreateAdvertisement = (props) => {
-    const classes = useStyles()
     const [value, setValue] = useState('')
     const [checked, setChecked] = useState(false)
 
@@ -33,6 +31,7 @@ export const CreateAdvertisement = (props) => {
         setChecked(event.target.checked)
     }
 
+    const classes = useStyles()
     return (
         <div className={classes.root}>
             <Typography variant="h4" className={classes.title}>
@@ -635,7 +634,6 @@ export const CreateAdvertisement = (props) => {
                     >
                         <Grid item>
                             <ButtonComponent
-                                variant="contained"
                                 color="primary"
                                 className={classes.nextButton}
                                 onClick={props.handlePreview}

@@ -1,14 +1,17 @@
 import React, { useState } from 'react'
-import { FormControl, Grid, MenuItem, Select } from '@material-ui/core'
+import { FormControl, MenuItem, Select } from '@material-ui/core'
+
+// styles
 import { useStyles } from './useStyles'
 
 export const AdvertisementSelect = (props) => {
-    const classes = useStyles()
     const [value, setValue] = useState('')
 
     const handleChange = (event) => {
         setValue(event.target.value)
     }
+
+    const classes = useStyles()
     return (
         <div className={classes.root}>
             <FormControl fullWidth variant="outlined">

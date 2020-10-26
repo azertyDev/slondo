@@ -1,5 +1,6 @@
 import React from 'react'
-import Box from '@material-ui/core/Box'
+import { Box, Typography } from '@material-ui/core'
+import Rating from '@material-ui/lab/Rating'
 
 // styles
 import { StyledRating, useStyles } from './useStyles'
@@ -18,27 +19,33 @@ const labels = {
 }
 
 export const RatingComponent = () => {
-    const classes = useStyles()
     const [value, setValue] = React.useState(3.5)
     const [hover, setHover] = React.useState(-1)
 
+    const classes = useStyles()
     return (
         <div className={classes.root}>
-            <StyledRating
-                name="hover-feedback"
-                readOnly
-                value={value}
-                precision={0.5}
-                onChange={(event, newValue) => {
-                    setValue(newValue)
-                }}
-                onChangeActive={(event, newHover) => {
-                    setHover(newHover)
-                }}
-            />
-            {value !== null && (
-                <Box ml={2}>{labels[hover !== -1 ? hover : value]}</Box>
-            )}
+            <div>
+                <Rating
+                    name="hover-feedback"
+                    readOnly
+                    value={value}
+                    precision={0.5}
+                    onChange={(event, newValue) => {
+                        setValue(newValue)
+                    }}
+                    onChangeActive={(event, newHover) => {
+                        setHover(newHover)
+                    }}
+                />
+                {value !== null && (
+                    <Box><Typography variant='subtitle1'>{labels[hover !== -1 ? hover : value]}</Typography></Box>
+                )}
+            </div>
+            <div>
+                <Typography variant='subtitle1'>(200 оценок)</Typography>
+
+            </div>
         </div>
     )
 }

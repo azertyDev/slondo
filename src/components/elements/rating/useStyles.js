@@ -1,14 +1,28 @@
 import { makeStyles, withStyles } from '@material-ui/core/styles'
 import Rating from '@material-ui/lab/Rating'
+import theme from '@src/theme'
 
 export const useStyles = makeStyles({
     root: {
-        width: 200,
         display: 'flex',
         alignItems: 'center',
-        '& div.MuiBox-root-37': {
-            marginLeft: '5px'
-        }
+        '& > div:first-child': {
+            display: 'flex',
+            alignItems: 'center',
+            flexDirection: 'row-reverse',
+            '& > span.MuiRating-root': {
+                fontSize: '1rem',
+            },
+            '& div.MuiBox-root': {
+                '& > h6.MuiTypography-subtitle1': {
+                    marginRight: '5px',
+                    fontWeight: 600,
+                },
+            },
+        },
+        '& > div:last-child': {
+            marginLeft: theme.spacing(1),
+        },
     },
 })
 

@@ -76,7 +76,7 @@ export const useStyles = makeStyles((theme) => ({
                                     alignItems: 'center',
                                     '& > h6.MuiTypography-subtitle1': {
                                         fontSize: '18px',
-                                        borderBottom: '1px solid #000',
+                                        borderBottom: '1px solid #4E4E4E',
                                         lineHeight: '20px',
                                     },
                                     '& > h6.MuiTypography-subtitle2': {
@@ -104,12 +104,18 @@ export const useStyles = makeStyles((theme) => ({
                         '& > div > div.location': {
                             display: 'flex',
                             justifyContent: 'space-between',
-                            '& > div': {
+                            '& > div:first-child': {
                                 display: 'flex',
                                 alignItems: 'center',
+                                width: '60%',
                                 '& > a': {
                                     display: 'flex',
                                 },
+                            }, '& > div': {
+                                display: 'flex',
+                                alignItems: 'center',
+                                justifyContent: 'flex-end',
+                                width: '40%',
                             },
                         },
                     },

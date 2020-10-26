@@ -1,7 +1,6 @@
 import { makeStyles } from '@material-ui/core/styles';
 
-<<<<<<< HEAD
-export const useStyles = makeStyles(() => ({
+export const useStyles = makeStyles((theme) => ({
     root: {
         '& div.ad-slider': {
             '& > div:last-child': {
@@ -28,21 +27,6 @@ export const useStyles = makeStyles(() => ({
             textDecoration: 'none',
         },
         '& div.description': {
-=======
-export const useStyles = makeStyles((theme) => ({
-    root: {},
-    breadcrumbs: {
-        margin: '20px 0',
-    },
-    title: {
-        marginBottom: '20px',
-        display: 'flex',
-        flexDirection: 'row',
-        alignItems: 'center',
-        justifyContent: 'space-between',
-
-        '& > div:first-child': {
->>>>>>> 1082277c556717492bdf7d8d139075d53554f4d5
             display: 'flex',
             justifyContent: 'space-between',
             flexDirection: 'row',
@@ -71,5 +55,8 @@ export const useStyles = makeStyles((theme) => ({
             borderRadius: '7px',
             backgroundColor: '#C0C0C0',
         },
+    },
+    breadcrumbs: {
+        margin: '20px 0',
     },
 }));

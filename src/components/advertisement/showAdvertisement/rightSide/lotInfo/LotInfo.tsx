@@ -1,9 +1,8 @@
 import React from 'react';
-import { Typography } from '@material-ui/core';
-import { ButtonComponent } from '../../../../elements/button/Button';
-import { CustomField } from '../../../../elements/custom_field/CustomField';
+import { Typography,TextField } from '@material-ui/core';
+import { ButtonComponent } from '@src/components/elements/button/Button';
 
-import { Lock_icon } from '../../../../elements/icons';
+import { Lock_icon } from '@src/components/elements/icons';
 
 // styles
 import { useStyles } from './useStyles';
@@ -82,7 +81,7 @@ export const LotInfo = () => {
                         </Typography>
                     </div>
                     <div>
-                        <CustomField placeholder="14200000" />
+                        <TextField placeholder="14200000" variant='outlined' />
                         <ButtonComponent>
                             <Typography variant="subtitle1" color="initial">
                                 Применить

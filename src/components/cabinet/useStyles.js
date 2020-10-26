@@ -11,7 +11,7 @@ export const useStyles = makeStyles((theme) => ({
                     borderBottom: '1px solid #838383',
                     width: '33.3%',
                     padding: '0',
-                    alignItems: 'flex-end',
+                    // alignItems: 'flex-end',
                     '& > span > h6.MuiTypography-subtitle1': {
                         textTransform: 'uppercase',
                     },

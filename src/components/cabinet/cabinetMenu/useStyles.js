@@ -1,4 +1,4 @@
-import { makeStyles } from '@material-ui/core/styles';
+import { makeStyles } from '@material-ui/core/styles'
 
 export const useStyles = makeStyles((theme) => ({
     root: {
@@ -42,12 +42,24 @@ export const useStyles = makeStyles((theme) => ({
                     marginBottom: '5px',
                     '& > button': {
                         padding: '10px 0',
-                        color: '#4E4E4E',
                         boxShadow: '0px 1px 2px rgba(0, 0, 0, 0.25)',
                         borderRadius: '5px',
                         background: '#fff',
+                        '& > h6.MuiTypography-subtitle1': {},
                         '& > svg': {
                             marginRight: '8px',
+                        },
+                    },
+
+                    '& > button:hover': {
+                        '& > h6.MuiTypography-subtitle1': {
+                            backgroundImage:
+                                'linear-gradient(49.94deg, #675EAA 19.03%, #AD66D5 72.72%)',
+                            WebkitBackgroundClip: 'text',
+                            WebkitTextFillColor: 'transparent',
+                        },
+                        '& > svg': {
+
                         },
                     },
                 },
@@ -64,4 +76,4 @@ export const useStyles = makeStyles((theme) => ({
             },
         },
     },
-}));
+}))
