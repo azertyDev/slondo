@@ -4,7 +4,7 @@ import { MainLayout } from './../MainLayout';
 
 export const CabinetContainer = (props) => {
     return (
-        <MainLayout title="Личный кабинет">
+        <MainLayout title="Архив объявлений">
             <Cabinet {...props} />
         </MainLayout>
     );

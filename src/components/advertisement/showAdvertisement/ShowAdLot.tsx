@@ -5,9 +5,9 @@ import { AdsAndLotsBlock } from '../../elements/adsAndLotsBlock/AdsAndLotsBlock'
 import { MainLayout } from '../../MainLayout';
 import { RightSide } from './rightSide/RightSide';
 import { LeftSide } from './leftSide/LeftSide';
-import { Link } from '../../../../i18n';
+import { Link } from '@root/i18n';
 
-import { ShareIcon } from '../../elements/icons';
+import { ShareIcon } from '@src/components/elements/icons';
 
 // styles
 import { useStyles } from './useStyles';
@@ -21,7 +21,15 @@ export const ShowAdLot = (props) => {
             <MainLayout title="Просмотр объявления">
                 <Container maxWidth="lg">
                     <div className={classes.breadcrumbs}>
-                        <BreadcrumbsComponent />
+                        <BreadcrumbsComponent>
+                            <Link href="#">
+                                <a>Для дома и дачи</a>
+                            </Link>
+                            <Link href="#">
+                                <a>Мебель и интерьер</a>
+                            </Link>
+                            <Typography color="primary">Столовая мебель</Typography>
+                        </BreadcrumbsComponent>
                     </div>
                     <div className={classes.title}>
                         <div>

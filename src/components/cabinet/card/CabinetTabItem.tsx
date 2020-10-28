@@ -1,23 +1,22 @@
-import React from 'react'
-import { Typography, Paper } from '@material-ui/core'
-import { BreadcrumbsComponent } from 'components/elements/breadcrumbs/Breadcrumbs'
-import { ButtonComponent } from 'components/elements/button/Button'
-import { Link } from '../../../../i18n'
+import React from 'react';
+import { Typography, Paper } from '@material-ui/core';
+import { BreadcrumbsComponent } from '@src/components/elements/breadcrumbs/Breadcrumbs';
+import { ButtonComponent } from '@src/components/elements/button/Button';
+import { Link } from '../../../../i18n';
 
 // icons
-import { FavoriteIcon } from 'components/elements/icons/FavoriteIcon'
-import { SettingsIcon } from 'components/elements/icons/SettingsIcon'
-import { LocationIcon } from 'components/elements/icons/LocationIcon'
-import { GromophoneIcon } from 'components/elements/icons/GromophoneIcon'
-import { PromoteIcon } from 'components/elements/icons/PromoteIcon'
-import { EyeIcon } from 'components/elements/icons/EyeIcon'
+import { FavoriteIcon } from '@src/components/elements/icons/FavoriteIcon';
+import { SettingsIcon } from '@src/components/elements/icons/SettingsIcon';
+import { LocationIcon } from '@src/components/elements/icons/LocationIcon';
+import { GromophoneIcon } from '@src/components/elements/icons/GromophoneIcon';
+import { PromoteIcon } from '@src/components/elements/icons/PromoteIcon';
+import { EyeIcon } from '@src/components/elements/icons/EyeIcon';
 
 // styles
-import { useStyles } from './useStyles'
-
+import { useStyles } from './useStyles';
 
 export const CabinetTabItem = (props) => {
-    const classes = useStyles()
+    const classes = useStyles();
     return (
         <div className={classes.root}>
             <div className="ad-block">
@@ -43,15 +42,18 @@ export const CabinetTabItem = (props) => {
                                     variant="caption"
                                     color="initial"
                                     noWrap
-                                >Объявление</Typography>
+                                >
+                                    Объявление
+                                </Typography>
                                 <span>
                                     <EyeIcon />
                                     <Typography
                                         variant="caption"
                                         color="initial"
                                         noWrap
-                                    >1240</Typography>
-
+                                    >
+                                        1240
+                                    </Typography>
                                 </span>
                             </div>
                             <div className="content">
@@ -62,7 +64,8 @@ export const CabinetTabItem = (props) => {
                                             color="initial"
                                             noWrap
                                         >
-                                            Мебель от производителя по супер скидке!
+                                            Мебель от производителя по супер
+                                            скидке!
                                         </Typography>
                                     </div>
                                     <div>
@@ -85,14 +88,18 @@ export const CabinetTabItem = (props) => {
                                     </div>
                                 </div>
                                 <div className="description">
-                                    <Typography variant="subtitle2" color="initial">
+                                    <Typography
+                                        variant="subtitle2"
+                                        color="initial"
+                                    >
                                         Не упустите шанс купить мебель от
-                                        производителя по доступным ценам! Шкаф купе
-                                        размер 138см ширина высота 210 см глубина 55
-                                        см. Наш фирменный магазин находится в
-                                        Мирзоулугбекском районе массив Феруза. Наш
-                                        фирменный магазин находится в
-                                        Мирзоулугбекском районе массив Феруза
+                                        производителя по доступным ценам! Шкаф
+                                        купе размер 138см ширина высота 210 см
+                                        глубина 55 см. Наш фирменный магазин
+                                        находится в Мирзоулугбекском районе
+                                        массив Феруза. Наш фирменный магазин
+                                        находится в Мирзоулугбекском районе
+                                        массив Феруза
                                     </Typography>
                                 </div>
                                 <div className="location">
@@ -111,7 +118,10 @@ export const CabinetTabItem = (props) => {
                                         </Typography>
                                     </div>
                                     <div>
-                                        <Typography variant="h5" color="initial">
+                                        <Typography
+                                            variant="h5"
+                                            color="initial"
+                                        >
                                             1 300 000 сум
                                         </Typography>
                                     </div>
@@ -120,12 +130,21 @@ export const CabinetTabItem = (props) => {
                         </Paper>
                     </div>
                     <div className="card-buttons">
-                        <ButtonComponent><GromophoneIcon />Продвижение</ButtonComponent>
-                        <ButtonComponent><PromoteIcon />Поднять в ТОП</ButtonComponent>
-                        <ButtonComponent><PromoteIcon />Поднять в ленте</ButtonComponent>
+                        <ButtonComponent>
+                            <GromophoneIcon />
+                            Продвижение
+                        </ButtonComponent>
+                        <ButtonComponent>
+                            <PromoteIcon />
+                            Поднять в ТОП
+                        </ButtonComponent>
+                        <ButtonComponent>
+                            <PromoteIcon />
+                            Поднять в ленте
+                        </ButtonComponent>
                     </div>
                 </div>
             </div>
         </div>
-    )
-}
+    );
+};

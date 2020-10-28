@@ -1,7 +1,5 @@
 import React from 'react';
-import { Typography, Breadcrumbs } from '@material-ui/core';
-import Link from '@material-ui/core/Link';
-import NavigateNextIcon from '@material-ui/icons/NavigateNext';
+import { Breadcrumbs } from '@material-ui/core';
 
 // styles
 import { useStyles } from './useStyles';

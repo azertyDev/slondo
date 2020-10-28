@@ -1,12 +1,11 @@
-import React from 'react';
-import { Typography } from '@material-ui/core';
-import { ButtonComponent } from '../../../../elements/button/Button';
-import { CustomFormikField } from '../../../../elements/custom_formik_field/CustomFormikField';
-
-import { Lock_icon } from '../../../../elements/icons';
+import React from 'react'
+import { Typography,TextField } from '@material-ui/core'
+import { ButtonComponent } from '@src/components/elements/button/Button'
+import { Lock_icon } from '@src/components/elements/icons'
 
 // styles
 import { useStyles } from './useStyles';
+
 
 export const LotInfo = () => {
     const classes = useStyles();
@@ -82,7 +81,7 @@ export const LotInfo = () => {
                         </Typography>
                     </div>
                     <div>
-                        {/*<CustomField placeholder="14200000" />*/}
+                        <TextField placeholder="14200000" variant='outlined' />
                         <ButtonComponent>
                             <Typography variant="subtitle1" color="initial">
                                 Применить

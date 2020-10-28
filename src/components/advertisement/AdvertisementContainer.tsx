@@ -1,6 +1,6 @@
 import React, {useState} from 'react'
-import {Advertisement} from './Advertisement'
-import {MainLayout} from "../MainLayout";
+import {Advertisement} from '@src/components/advertisement/Advertisement'
+import {MainLayout} from "@src/components/MainLayout";
 
 
 export const AdvertisementContainer = () => {

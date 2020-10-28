@@ -2,17 +2,32 @@ import {makeStyles} from '@material-ui/core/styles';
 
 
 export const useStyles = makeStyles((theme) => ({
-    root: {},
-    breadcrumbs: {
-        margin: '20px 0',
-    },
-    title: {
-        marginBottom: '20px',
-        display: 'flex',
-        flexDirection: 'row',
-        alignItems: 'center',
-        justifyContent: 'space-between',
-        '& > div:first-child': {
+    root: {
+        '& div.ad-slider': {
+            '& > div:last-child': {
+                display: 'flex',
+                justifyContent: 'flex-end',
+                marginTop: '20px',
+                '& > a': {
+                    display: 'flex',
+                    textDecoration: 'none',
+                    color: '#000',
+                    '& > img': {
+                        marginLeft: '10px',
+                    },
+                },
+                '& > a:hover': {
+                    textDecoration: 'underline',
+                },
+            },
+        },
+        '& hr': {
+            margin: '20px 0',
+        },
+        '& a': {
+            textDecoration: 'none',
+        },
+        '& div.description': {
             display: 'flex',
             justifyContent: 'space-between',
             flexDirection: 'row',
@@ -41,5 +56,8 @@ export const useStyles = makeStyles((theme) => ({
             borderRadius: '7px',
             backgroundColor: '#C0C0C0',
         },
+    },
+    breadcrumbs: {
+        margin: '20px 0',
     },
 }));

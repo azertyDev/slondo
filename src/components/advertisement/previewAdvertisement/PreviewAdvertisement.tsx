@@ -1,6 +1,6 @@
 import React from 'react'
 import { Grid, Typography } from '@material-ui/core'
-import { ButtonComponent } from './../../elements/button/Button';
+import { ButtonComponent } from '@src/components/elements/button/Button';
 
 // styles
 import { useStyles } from './useStyles'

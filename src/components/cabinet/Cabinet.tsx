@@ -1,8 +1,9 @@
 import React, { useState } from 'react'
-import { Container, Grid, Typography, Tabs, Paper } from '@material-ui/core'
-import { CabinetMenu } from './cabinetMenu/CabinetMenu'
+import { Container, Grid, Typography, Tabs } from '@material-ui/core'
 import { CustomTab } from '../elements/custom_tab/CustomTab'
 import { CabinetTabItem } from './card/CabinetTabItem'
+import { Notification } from '@src/components/cabinet/notification/Notification'
+import { CabinetSidebar } from '@src/components/cabinet/cabinetSidebar/CabinetSidebar'
 
 
 // styles
@@ -31,7 +32,7 @@ export const Cabinet = (props) => {
             <Container maxWidth="lg">
                 <Grid container spacing={2}>
                     <Grid item xs={3}>
-                        <CabinetMenu {...props} />
+                        <CabinetSidebar {...props} />
                     </Grid>
                     <Grid item xs={9}>
                         <Typography variant='h6' className='menu-title'>
@@ -73,8 +74,7 @@ export const Cabinet = (props) => {
                             <CabinetTabItem />
                         </TabPanel>
                         <TabPanel value={value} index={1}>
-                            <CabinetTabItem />
-                            <CabinetTabItem />
+                            <Notification />
                         </TabPanel>
                         <TabPanel value={value} index={2}>
                             <CabinetTabItem />
