@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Container, Grid, Typography, Tabs, Paper } from '@material-ui/core'
+import { Container, Grid, Typography, Tabs } from '@material-ui/core'
 import { CustomTab } from '../elements/custom_tab/CustomTab'
 import { CabinetTabItem } from './card/CabinetTabItem'
 import { Notification } from '@src/components/cabinet/notification/Notification'

@@ -1,11 +1,11 @@
-import React from 'react';
-import { Typography,TextField } from '@material-ui/core';
-import { ButtonComponent } from '@src/components/elements/button/Button';
-
-import { Lock_icon } from '@src/components/elements/icons';
+import React from 'react'
+import { Typography,TextField } from '@material-ui/core'
+import { ButtonComponent } from '@src/components/elements/button/Button'
+import { Lock_icon } from '@src/components/elements/icons'
 
 // styles
 import { useStyles } from './useStyles';
+
 
 export const LotInfo = () => {
     const classes = useStyles();

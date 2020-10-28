@@ -1,6 +1,6 @@
 import React from 'react';
 import { LotInfo } from './lotInfo/LotInfo';
-import { UserInfo } from './userInfo/UserInfo';
+import { UserInfo } from './userinfo/UserInfo';
 
 // styles
 import { useStyles } from './useStyles';

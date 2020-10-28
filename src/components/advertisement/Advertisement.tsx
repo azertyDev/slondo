@@ -4,12 +4,13 @@ import { CreateAdvertisement } from './createAdvertisement/CreateAdvertisement'
 import { PreviewAdvertisement } from './previewAdvertisement/PreviewAdvertisement'
 import { SuccessAdvertisement } from './successAdvertisement/SuccessAdvertisement'
 
+
 // styles
 import { useStyles } from './useStyles'
 
 export const Advertisement = (props) => {
-    const classes = useStyles()
 
+    const classes = useStyles()
     return (
         <div className={classes.root}>
             <Container maxWidth="lg">
@@ -27,7 +28,6 @@ export const Advertisement = (props) => {
                             />
                         )}
                     </Grid>
-                    
                     <Hidden smDown>
                         <Grid
                             item

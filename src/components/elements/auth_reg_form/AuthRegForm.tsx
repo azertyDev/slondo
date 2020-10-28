@@ -1,22 +1,18 @@
-import React, {useState, useEffect} from "react"
+import React, {useState} from "react"
 import {useDispatch, useSelector} from "react-redux"
 import {Tabs, Typography} from "@material-ui/core"
-import {i18n, Link} from "../../../../i18n"
+import {i18n, Link} from "@root/i18n"
 import {CustomTab} from "../custom_tab/CustomTab"
 import {CustomTabPanel} from "../custom_tab_panel/CustomTabPanel"
 import {Form, Formik} from "formik"
-import {CustomField} from "../custom_field/CustomField"
+import {CustomFormikField} from "../custom_formik_field/CustomFormikField"
 import {ButtonComponent} from "../button/Button"
 import {requiredValidate, phoneValidate} from '../../../components/validates'
 import {RootState} from "@src/redux/rootReducer"
-import {fetchToken} from "@src/redux/slices/authSlice";
+import {fetchToken} from "@src/redux/thunks/authRegThunk"
+import {AuthInputVals} from '@root/interfaces/IAuthInputVals'
 import {useStyles} from './useStyles'
 
-
-export type AuthInputVals = {
-    phone: string,
-    password: string
-};
 
 const initialInputsVals: AuthInputVals = {
     phone: '998908080265',
@@ -24,17 +20,13 @@ const initialInputsVals: AuthInputVals = {
 };
 
 export const AuthRegForm = (props) => {
-    const {t, handleCloseModal} = props;
+    const {t} = props;
     const {language} = i18n;
 
     const dispatch = useDispatch();
-    const {isFetch, isAuth, error} = useSelector((store: RootState) => store.auth);
+    const {isFetch, error} = useSelector((store: RootState) => store.auth);
 
     const [tabValue, setTabValue] = useState(0);
-
-    useEffect(() => {
-        isAuth && handleCloseModal();
-    }, [isAuth]);
 
     const tabsHandler = (event, newValue) => {
         setTabValue(newValue);
@@ -99,7 +91,7 @@ export const AuthRegForm = (props) => {
                                                 >
                                                     {errors.phone && touched.phone ? errors.phone : ''}
                                                 </Typography>
-                                                <CustomField
+                                                <CustomFormikField
                                                     name='phone'
                                                     type='tel'
                                                     placeholder={t('auth_reg:enterPhone')}
@@ -115,7 +107,7 @@ export const AuthRegForm = (props) => {
                                                 >
                                                     {errors.password && touched.password ? errors.password : ''}
                                                 </Typography>
-                                                <CustomField
+                                                <CustomFormikField
                                                     name='password'
                                                     type="password"
                                                     placeholder={t('auth_reg:enterPassword')}
@@ -132,8 +124,11 @@ export const AuthRegForm = (props) => {
                                                 </a>
                                             </div>
                                             <div className={classes.modalBtns}>
-                                                <ButtonComponent className='signin-btn' type='submit'
-                                                                 disabled={isFetch}>
+                                                <ButtonComponent
+                                                    className='signin-btn'
+                                                    type='submit'
+                                                    disabled={isFetch}
+                                                >
                                                     {t('common:signIn')}
                                                 </ButtonComponent>
                                             </div>
@@ -153,7 +148,7 @@ export const AuthRegForm = (props) => {
                                             >
                                                 {errors.phone && touched.phone ? errors.phone : ''}
                                             </Typography>
-                                            <CustomField
+                                            <CustomFormikField
                                                 name='phone'
                                                 type='tel'
                                                 placeholder={t('auth_reg:enterPhone')}

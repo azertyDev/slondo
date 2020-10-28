@@ -1,11 +1,11 @@
 import React from 'react';
-import { Container, Grid, Hidden,  Typography } from '@material-ui/core';
-import { BreadcrumbsComponent } from '@src/components/elements/breadcrumbs/Breadcrumbs';
-import { AdsAndLotsBlock } from '@src/components/elements/adsAndLotsBlock/AdsAndLotsBlock';
-import { MainLayout } from '@src/components/MainLayout';
+import { Container, Grid, Hidden, Typography } from '@material-ui/core';
+import { BreadcrumbsComponent } from '../../elements/breadcrumbs/Breadcrumbs';
+import { AdsAndLotsBlock } from '../../elements/adsAndLotsBlock/AdsAndLotsBlock';
+import { MainLayout } from '../../MainLayout';
 import { RightSide } from './rightSide/RightSide';
 import { LeftSide } from './leftSide/LeftSide';
-import { Link } from '../../../../i18n';
+import { Link } from '@root/i18n';
 import { CustomImageTag } from "@src/components/elements/custom_image_tag/CustomImageTag";
 
 // icons
