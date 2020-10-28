@@ -52,9 +52,9 @@ const theme = createMuiTheme({
         subtitle1: {
             lineHeight: 1.5,
         },
-        allVariants: {
-            color: '#4E4E4E',
-        },
+        // allVariants: {
+        //     color: '#4E4E4E',
+        // },
     },
     overrides: {
         MuiCssBaseline: {

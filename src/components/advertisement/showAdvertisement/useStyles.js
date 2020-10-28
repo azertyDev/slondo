@@ -1,34 +1,6 @@
-import { makeStyles } from '@material-ui/core/styles';
+import {makeStyles} from '@material-ui/core/styles';
 
-<<<<<<< HEAD
-export const useStyles = makeStyles(() => ({
-    root: {
-        '& div.ad-slider': {
-            '& > div:last-child': {
-                display: 'flex',
-                justifyContent: 'flex-end',
-                marginTop: '20px',
-                '& > a': {
-                    display: 'flex',
-                    textDecoration: 'none',
-                    color: '#000',
-                    '& > img': {
-                        marginLeft: '10px',
-                    },
-                },
-                '& > a:hover': {
-                    textDecoration: 'underline',
-                },
-            },
-        },
-        '& hr': {
-            margin: '20px 0',
-        },
-        '& a': {
-            textDecoration: 'none',
-        },
-        '& div.description': {
-=======
+
 export const useStyles = makeStyles((theme) => ({
     root: {},
     breadcrumbs: {
@@ -40,9 +12,7 @@ export const useStyles = makeStyles((theme) => ({
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'space-between',
-
         '& > div:first-child': {
->>>>>>> 1082277c556717492bdf7d8d139075d53554f4d5
             display: 'flex',
             justifyContent: 'space-between',
             flexDirection: 'row',

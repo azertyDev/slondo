@@ -1,10 +1,8 @@
 import React, { useState } from 'react'
 import {
-    Container,
     Grid,
     Typography,
     FormControl,
-    InputBase,
     TextField,
     Select,
     MenuItem,
@@ -20,7 +18,7 @@ import { Help, Search } from '@material-ui/icons'
 // Styles
 import { useStyles } from './useStyles'
 
-// test
+
 export const CreateAdvertisement = (props) => {
     const classes = useStyles()
     const [value, setValue] = useState('')
@@ -36,7 +34,7 @@ export const CreateAdvertisement = (props) => {
     return (
         <div className={classes.root}>
             <Typography variant="h4" className={classes.title}>
-                Новое объявление - <span>Электроника </span>
+                Новое объявление - <span>Электроника</span>
             </Typography>
             <Grid container justify="space-between" spacing={1}>
                     <Grid
@@ -51,32 +49,27 @@ export const CreateAdvertisement = (props) => {
                             item
                             xs={12}
                             sm={6}
-                            md={3}
                             lg={3}
-                            xl={3}
                             container
                             alignItems="center"
                         >
                             <Typography variant="subtitle1">
                                 <strong>
-                                    Тип объявления{' '}
+                                    Тип
                                     <span className={classes.required}>
                                         *
                                     </span>
                                 </strong>
                             </Typography>
                         </Grid>
-                        <Grid item xs={12} sm={6} md={3} lg={3}>
+                        <Grid item xs={12} sm={6} md={3}>
                             <AdvertisementSelect />
                         </Grid>
-
                         <Grid
                             item
                             xs={12}
                             sm={6}
-                            md={3}
                             lg={3}
-                            xl={3}
                             container
                             alignItems="center"
                         >
@@ -89,7 +82,7 @@ export const CreateAdvertisement = (props) => {
                                 </strong>
                             </Typography>
                         </Grid>
-                        <Grid item xs={12} sm={6} md={3} lg={3}>
+                        <Grid item xs={12} sm={6} md={3}>
                             <AdvertisementSelect />
                         </Grid>
                     </Grid>
@@ -123,7 +116,7 @@ export const CreateAdvertisement = (props) => {
                                 Марка
                             </Typography>
                         </Grid>
-                        <Grid item xs={12} sm={6} md={3} lg={3}>
+                        <Grid item xs={12} sm={6} md={3}>
                             <AdvertisementSelect />
                         </Grid>
 
@@ -139,7 +132,7 @@ export const CreateAdvertisement = (props) => {
                                 Операционная система
                             </Typography>
                         </Grid>
-                        <Grid item xs={12} sm={6} md={3} lg={3}>
+                        <Grid item xs={12} sm={6} md={3}>
                             <AdvertisementSelect />
                         </Grid>
                     </Grid>
@@ -635,8 +628,6 @@ export const CreateAdvertisement = (props) => {
                     >
                         <Grid item>
                             <ButtonComponent
-                                variant="contained"
-                                color="primary"
                                 className={classes.nextButton}
                                 onClick={props.handlePreview}
                             >

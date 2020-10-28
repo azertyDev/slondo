@@ -1,7 +1,6 @@
 import React, {useState} from "react"
-import {useRouter} from 'next/router'
 import {AppBar, Container, Grid, Hidden, MenuItem, Select, Typography} from "@material-ui/core"
-import {Link} from '../../../../i18n'
+import {Link} from '@root/i18n'
 import {ButtonComponent} from "../../elements/button/Button"
 import {SearchForm} from "../../elements/search_form/SearchForm"
 import {
@@ -11,34 +10,16 @@ import {
     AddIcon,
 } from '../../elements/icons'
 import {withScrollThreshold} from "../../hoc/withScrollThreshold"
-import {useSelector} from "react-redux"
-import {RootState} from "@src/redux/rootReducer"
 import {useStyles} from "./useStyles"
 
 
 const BottomHeader = (props) => {
-    const {isScrollBreak, handleOpenModal, t} = props;
-
-    const router = useRouter();
+    const {isScrollBreak, handleOpenModal, handleCreateAd, isAuth, t} = props;
 
     const [adType, setAdType] = useState('');
 
-    const {isAuth} = useSelector((store: RootState) => store.auth);
-
     const handleSelect = (e) => {
         setAdType(e.target.value);
-    };
-
-    const handleCreateAd = () => {
-        isAuth
-            ? router.push('/create_advertisement')
-            : handleOpenModal()
-    };
-
-    const handleAuthBtn = () => {
-        isAuth
-            ? console.log('exit')
-            : handleOpenModal()
     };
 
     const classes = useStyles(props);
@@ -116,7 +97,7 @@ const BottomHeader = (props) => {
                                 </ButtonComponent>
                             </Grid>
                             <Grid item container alignItems="center" xs={1}>
-                                <ButtonComponent className='bottom-sign-button' onClick={handleAuthBtn}>
+                                <ButtonComponent className='bottom-sign-button' onClick={handleOpenModal}>
                                     <Typography
                                         variant="subtitle2">{t(`common:${isAuth ? 'signOut' : 'signIn'}`)}</Typography>
                                     <img src={SignIcon} alt="Sign in"/>

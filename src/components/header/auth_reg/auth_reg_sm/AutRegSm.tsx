@@ -1,6 +1,6 @@
 import React, {useState} from 'react'
 import {Typography} from '@material-ui/core'
-import {CloseIcon, PrevArrowIcon} from '../../../elements/icons/index'
+import {CloseIcon, PrevArrowIcon} from '../../../elements/icons'
 import {ButtonComponent} from '../../../elements/button/Button'
 import {AuthRegForm} from '../../../elements/auth_reg_form/AuthRegForm'
 import {CustomSlider} from '../../../elements/custom_slider/CustomSlider'

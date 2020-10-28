@@ -1,5 +1,7 @@
 import React from 'react'
-import { ShowAdLot } from '@src/components/advertisement/showAdvertisement/ShowAdLot'
+import {ShowAdLot} from '@src/components/advertisement/showAdvertisement/ShowAdLot'
+import {withTranslation} from "../i18n"
+
 
 const Show_advertisement = (props) => {
     return <ShowAdLot {...props} />
@@ -7,7 +9,7 @@ const Show_advertisement = (props) => {
 
 
 Show_advertisement.getInitialProps = async () => ({
-    namespacesRequired: ['', 'common'],
+    namespacesRequired: ['common'],
 });
 
-export default Show_advertisement
+export default withTranslation(['common'])(Show_advertisement)

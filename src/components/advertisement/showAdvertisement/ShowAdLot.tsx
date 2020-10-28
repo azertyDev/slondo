@@ -3,13 +3,8 @@ import { Container, Grid, Hidden, Typography } from '@material-ui/core';
 import { BreadcrumbsComponent } from '../../elements/breadcrumbs/Breadcrumbs';
 import { AdsAndLotsBlock } from '../../elements/adsAndLotsBlock/AdsAndLotsBlock';
 import { MainLayout } from '../../MainLayout';
-<<<<<<< HEAD
-import { RatingComponent } from '../../elements/rating/Rating';
-import { SyncSliders } from '../../elements/syncSliders/SyncSliders';
-=======
 import { RightSide } from './rightSide/RightSide';
 import { LeftSide } from './leftSide/LeftSide';
->>>>>>> 1082277c556717492bdf7d8d139075d53554f4d5
 import { Link } from '../../../../i18n';
 
 import { ShareIcon } from '../../elements/icons';

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Typography } from '@material-ui/core';
 import { ButtonComponent } from '../../../../elements/button/Button';
-import { CustomField } from '../../../../elements/custom_field/CustomField';
+import { CustomFormikField } from '../../../../elements/custom_formik_field/CustomFormikField';
 
 import { Lock_icon } from '../../../../elements/icons';
 
@@ -82,7 +82,7 @@ export const LotInfo = () => {
                         </Typography>
                     </div>
                     <div>
-                        <CustomField placeholder="14200000" />
+                        {/*<CustomField placeholder="14200000" />*/}
                         <ButtonComponent>
                             <Typography variant="subtitle1" color="initial">
                                 Применить

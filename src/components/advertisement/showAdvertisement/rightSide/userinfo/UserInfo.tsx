@@ -1,8 +1,8 @@
 import React from 'react';
 import { Typography } from '@material-ui/core';
-import { ButtonComponent } from '../../../../elements/button/Button';
-import { Link } from '../../../../../../i18n';
-import { UserInfoWithAvatar } from '../../../../elements/userInfoWithAvatar/userInfoWithAvatar';
+import { ButtonComponent } from '@src/components/elements/button/Button';
+import { Link } from '@root/i18n';
+import { UserInfoWithAvatar } from '@src/components/elements/userInfoWithAvatar/UserInfoWithAvatar';
 // icons
 import { DeliveryIcon } from '../../../../elements/icons/DeliveryIcon';
 import { SafeIcon } from '../../../../elements/icons/SafeIcon';

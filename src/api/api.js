@@ -1,10 +1,13 @@
-import Axios from 'axios';
+import Axios from 'axios'
+import {i18n} from '@root/i18n'
+
 
 const instance = Axios.create({
     withCredentials: true,
     baseURL: 'http://54.205.72.116/api/'
-});
+})
 
+const lang = i18n.language;
 
 export const userAPI = {
     login(phone, password) {
@@ -19,8 +22,8 @@ export const userAPI = {
                 throw err
             })
     },
-    getSelfData() {
-        return instance.get(`self_data`)
+    getCategories() {
+        return instance.get(`categories/main?lang=${lang}`)
             .then(res => res.data)
             .catch(err => {
                 throw err

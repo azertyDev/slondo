@@ -2,6 +2,7 @@ import React, {useState} from 'react'
 import {Advertisement} from './Advertisement'
 import {MainLayout} from "../MainLayout";
 
+
 export const AdvertisementContainer = () => {
     const [isPreview, setIsPreview] = useState(false)
     const [isSuccess, setIsSuccess] = useState(false)
