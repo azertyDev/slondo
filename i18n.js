@@ -5,7 +5,7 @@ import path from 'path'
 const {localeSubpaths} = _default().publicRuntimeConfig;
 
 
-export const {useTranslation, withTranslation, appWithTranslation, Link, i18n} = new NextI18Next({
+export const {useTranslation, withTranslation, appWithTranslation, Link, i18n, Router} = new NextI18Next({
     strictMode: false,
     defaultLanguage: 'ru',
     otherLanguages: ['uz'],

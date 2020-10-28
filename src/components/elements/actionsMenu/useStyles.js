@@ -18,25 +18,31 @@ export const useStyles = makeStyles((theme) => ({
                     boxShadow: '0px 1px 2px rgba(0, 0, 0, 0.25)',
                     '& > svg': {
                         marginRight: '10px',
-                        '& > def > linearGradient > stop': {
-                            stopColor: 'red',
-                        },
                     },
                     '&:focus, &:active': {
                         border: '1px solid',
-                        borderStyle:'inset',
+                        borderStyle: 'inset',
                         borderRadius: '5px',
                         borderImageSlice: '1',
                         borderImageSource:
                             'linear-gradient(49.94deg, #675EAA 19.03%, #AD66D5 72.72%)',
-                       
+
                         '& > h6.MuiTypography-subtitle1': {
                             backgroundImage:
                                 'linear-gradient(49.94deg, #675EAA 19.03%, #AD66D5 72.72%)',
                             WebkitBackgroundClip: 'text',
                             WebkitTextFillColor: 'transparent',
                         },
-                        '& > svg': {},
+                        '& svg': {
+                            '& > defs > linearGradient > stop': {
+                                '&:first-child': {
+                                    stopColor: '#675EAA',
+                                },
+                                '&:last-child': {
+                                    stopColor: '#AD66D5',
+                                },
+                            },
+                        },
                     },
                 },
             },

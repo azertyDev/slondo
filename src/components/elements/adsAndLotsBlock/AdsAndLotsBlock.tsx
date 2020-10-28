@@ -24,7 +24,7 @@ export const AdsAndLotsBlock = (props) => {
                         title="Объявление"
                         className="card-item"
                         alt="adv"
-                        image={`img/card-image.jpg`}
+                        image={`/img/card-image.jpg`}
                         price="180 000 сум"
                         description="Продам сумку в хорошем соcтоянии"
                         categoryName="Женский гардероб"
@@ -35,7 +35,7 @@ export const AdsAndLotsBlock = (props) => {
                         title="Объявление"
                         className="card-item"
                         alt="adv"
-                        image={`img/mobile-image.jpg`}
+                        image={`/img/mobile-image.jpg`}
                         price="180 000 сум"
                         description="Продам сумку в хорошем соcтоянии"
                     />
@@ -45,28 +45,7 @@ export const AdsAndLotsBlock = (props) => {
                         title="Объявление"
                         className="card-item"
                         alt="adv"
-                        image={`img/card-image.jpg`}
-                        price="180 000 сум"
-                        description="Продам сумку в хорошем соcтоянии"
-                        categoryName="Женский гардероб"
-                    />
-                </Grid>
-                <Grid xs={6} sm={4} md={3} lg={2} item>
-                    <CardItem
-                        title="Объявление"
-                        className="card-item"
-                        alt="adv"
-                        image={`img/mobile-image.jpg`}
-                        price="180 000 сум"
-                        description="Продам сумку в хорошем соcтоянии"
-                    />
-                </Grid>
-                <Grid xs={6} sm={4} md={3} lg={2} item>
-                    <CardItem
-                        title="Объявление"
-                        className="card-item"
-                        alt="adv"
-                        image={`img/card-image.jpg`}
+                        image={`/img/card-image.jpg`}
                         price="180 000 сум"
                         description="Продам сумку в хорошем соcтоянии"
                         categoryName="Женский гардероб"
@@ -77,7 +56,7 @@ export const AdsAndLotsBlock = (props) => {
                         title="Объявление"
                         className="card-item"
                         alt="adv"
-                        image={`img/mobile-image.jpg`}
+                        image={`/img/mobile-image.jpg`}
                         price="180 000 сум"
                         description="Продам сумку в хорошем соcтоянии"
                     />
@@ -87,28 +66,7 @@ export const AdsAndLotsBlock = (props) => {
                         title="Объявление"
                         className="card-item"
                         alt="adv"
-                        image={`img/card-image.jpg`}
-                        price="180 000 сум"
-                        description="Продам сумку в хорошем соcтоянии"
-                        categoryName="Женский гардероб"
-                    />
-                </Grid>
-                <Grid xs={6} sm={4} md={3} lg={2} item>
-                    <CardItem
-                        title="Объявление"
-                        className="card-item"
-                        alt="adv"
-                        image={`img/mobile-image.jpg`}
-                        price="180 000 сум"
-                        description="Продам сумку в хорошем соcтоянии"
-                    />
-                </Grid>
-                <Grid xs={6} sm={4} md={3} lg={2} item>
-                    <CardItem
-                        title="Объявление"
-                        className="card-item"
-                        alt="adv"
-                        image={`img/card-image.jpg`}
+                        image={`/img/card-image.jpg`}
                         price="180 000 сум"
                         description="Продам сумку в хорошем соcтоянии"
                         categoryName="Женский гардероб"
@@ -119,7 +77,7 @@ export const AdsAndLotsBlock = (props) => {
                         title="Объявление"
                         className="card-item"
                         alt="adv"
-                        image={`img/mobile-image.jpg`}
+                        image={`/img/mobile-image.jpg`}
                         price="180 000 сум"
                         description="Продам сумку в хорошем соcтоянии"
                     />
@@ -129,7 +87,7 @@ export const AdsAndLotsBlock = (props) => {
                         title="Объявление"
                         className="card-item"
                         alt="adv"
-                        image={`img/card-image.jpg`}
+                        image={`/img/card-image.jpg`}
                         price="180 000 сум"
                         description="Продам сумку в хорошем соcтоянии"
                         categoryName="Женский гардероб"
@@ -140,7 +98,49 @@ export const AdsAndLotsBlock = (props) => {
                         title="Объявление"
                         className="card-item"
                         alt="adv"
-                        image={`img/mobile-image.jpg`}
+                        image={`/img/mobile-image.jpg`}
+                        price="180 000 сум"
+                        description="Продам сумку в хорошем соcтоянии"
+                    />
+                </Grid>
+                <Grid xs={6} sm={4} md={3} lg={2} item>
+                    <CardItem
+                        title="Объявление"
+                        className="card-item"
+                        alt="adv"
+                        image={`/img/card-image.jpg`}
+                        price="180 000 сум"
+                        description="Продам сумку в хорошем соcтоянии"
+                        categoryName="Женский гардероб"
+                    />
+                </Grid>
+                <Grid xs={6} sm={4} md={3} lg={2} item>
+                    <CardItem
+                        title="Объявление"
+                        className="card-item"
+                        alt="adv"
+                        image={`/img/mobile-image.jpg`}
+                        price="180 000 сум"
+                        description="Продам сумку в хорошем соcтоянии"
+                    />
+                </Grid>
+                <Grid xs={6} sm={4} md={3} lg={2} item>
+                    <CardItem
+                        title="Объявление"
+                        className="card-item"
+                        alt="adv"
+                        image={`/img/card-image.jpg`}
+                        price="180 000 сум"
+                        description="Продам сумку в хорошем соcтоянии"
+                        categoryName="Женский гардероб"
+                    />
+                </Grid>
+                <Grid xs={6} sm={4} md={3} lg={2} item>
+                    <CardItem
+                        title="Объявление"
+                        className="card-item"
+                        alt="adv"
+                        image={`/img/mobile-image.jpg`}
                         price="180 000 сум"
                         description="Продам сумку в хорошем соcтоянии"
                     />
