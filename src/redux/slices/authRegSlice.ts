@@ -1,19 +1,37 @@
-import {createSlice} from '@reduxjs/toolkit'
-import {fetchToken} from '../thunks/authRegThunk'
-import {IAuthReg} from "@root/interfaces/IAuthReg";
+import {createAsyncThunk, createSlice} from '@reduxjs/toolkit'
+import {userAPI} from "@src/api/api";
+import Cookies from "universal-cookie";
+import {AuthInputTypes} from "@root/types/AuthInputTypes";
+import {AuthRegTypes} from "@root/types/AuthRegTypes";
 
 
-const initialState: IAuthReg = {
+const cookies = new Cookies();
+
+const initialState: AuthRegTypes = {
     isFetch: false,
     isAuth: false,
     error: null
 };
 
+// Async thunk
+export const fetchToken = createAsyncThunk<never, AuthInputTypes>(
+    'auth/fetchTokenByLogin',
+    async ({phone, password}, {rejectWithValue}) => {
+        try {
+            const token = await userAPI.login(phone, password);
+            cookies.set('token', token, {maxAge: 2 * 3600});
+        } catch (e) {
+            return rejectWithValue(e.message);
+        }
+    }
+);
+
+// Slice
 const authRegSlice = createSlice({
     name: 'authReg',
     initialState,
     reducers: {
-        setIsAuth: (state, action) => {
+        setIsAuthAction: (state, action) => {
             state.isAuth = action.payload
         }
     },
@@ -33,5 +51,5 @@ const authRegSlice = createSlice({
     }
 });
 
-export const {setIsAuth} = authRegSlice.actions;
+export const {setIsAuthAction} = authRegSlice.actions;
 export const authReducer = authRegSlice.reducer;

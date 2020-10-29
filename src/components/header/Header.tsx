@@ -1,20 +1,20 @@
-import React, {useEffect, useState} from 'react'
-import Cookies from 'universal-cookie'
-import {i18n, withTranslation} from '@root/i18n'
-import {Container, Typography} from '@material-ui/core'
-import TopHeaderContainer from "./topHeader/TopHeaderContainer"
-import BottomHeader from './bottomHeader/BottomHeader'
-import {ModalComponent} from '../elements/modal/Modal'
-import {AuthRegPage} from "./auth_reg/AuthRegPage"
-import {useDispatch, useSelector} from "react-redux"
-import {setIsAuth} from '@src/redux/slices/authRegSlice'
-import {RootState} from "@src/redux/rootReducer"
-import {CreateAdModalForm} from "@src/components/advertisement/createAdModalForm/CreateAdModalForm"
-import {fetchCategories} from '@src/redux/thunks/categoriesThunk'
+import React, {useEffect, useState} from 'react';
+import Cookies from 'universal-cookie';
+import {withTranslation} from '@root/i18n';
+import {Container, Typography} from '@material-ui/core';
+import TopHeaderContainer from "./topHeader/TopHeaderContainer";
+import BottomHeader from './bottomHeader/BottomHeader';
+import {ModalComponent} from '../elements/modal/Modal';
+import {AuthRegPage} from "./auth_reg/AuthRegPage";
+import {useDispatch, useSelector} from "react-redux";
+import {setIsAuthAction} from '@src/redux/slices/authRegSlice';
+import {RootState} from "@src/redux/rootReducer";
+import {CreateAdModalForm} from "@src/components/advertisement/createAdModalForm/CreateAdModalForm";
+import {ButtonComponent} from "@src/components/elements/button/Button";
+
 
 // styles
-import {useStyles} from './useStyles'
-import {ButtonComponent} from "@src/components/elements/button/Button";
+import {useStyles} from './useStyles';
 
 
 const Header = (props) => {
@@ -22,7 +22,6 @@ const Header = (props) => {
 
     const cookies = new Cookies();
     const isTokenExst = !!cookies.get('token');
-    const lang = i18n.language;
 
     const {isAuth, error} = useSelector((store: RootState) => store.auth);
     const dispatch = useDispatch();
@@ -45,15 +44,11 @@ const Header = (props) => {
     };
 
     useEffect(() => {
-        dispatch(fetchCategories(lang));
-    }, [lang]);
-
-    useEffect(() => {
-        isAuth && !error && handleCloseModal()
+        !isCreateAd && isAuth && !error && handleCloseModal()
     }, [isAuth, error]);
 
     useEffect(() => {
-        dispatch(setIsAuth(isTokenExst));
+        dispatch(setIsAuthAction(isTokenExst));
     }, [isTokenExst]);
 
     const classes = useStyles();
@@ -88,7 +83,7 @@ const Header = (props) => {
                                     <div style={{width: '200px', height: '80px', backgroundColor: '#fff'}}>
                                         <Typography variant='h5'>Выйти из сайта?</Typography>
                                         <div style={{display: 'flex'}}>
-                                            <ButtonComponent>Отмена</ButtonComponent>
+                                            <ButtonComponent onClick={handleCloseModal}>Отмена</ButtonComponent>
                                             <ButtonComponent>Выйти</ButtonComponent>
                                         </div>
                                     </div>

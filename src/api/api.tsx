@@ -25,5 +25,12 @@ export const userAPI = {
             .catch(err => {
                 throw err
             })
+    },
+    getAdOrLot(ctgryID, subCtgryID, isLot) {
+        return instance.get(`categories/main?lang=${isLot}`)
+            .then(res => res.data)
+            .catch(err => {
+                throw err
+            })
     }
 }

@@ -1,37 +1,33 @@
-import React, {useState} from "react"
-import {Formik, Form} from "formik"
-import {Router} from "@root/i18n"
-import {MenuItem, Typography} from "@material-ui/core"
-import {ButtonComponent} from "@src/components/elements/button/Button"
-import {CustomFormikMenu} from "@src/components/elements/custom_formik_menu/CustomFormikMenu"
-import {object, number} from 'yup'
-import {useStyles} from './useStyles'
+import React, {useState} from "react";
+import {Formik, Form, FormikProps} from "formik";
+import {Router} from "@root/i18n";
+import {useDispatch, useSelector} from "react-redux";
+import {setAdOrLotCtgryAction} from '@src/redux/slices/createAdOrLotSlice';
+import {Menu, MenuItem, Typography} from "@material-ui/core";
+import {ButtonComponent} from "@src/components/elements/button/Button";
+import {adTypeAndCtgrySchema} from "@src/validation_schemas/validationSchemas";
+import {RootState} from "@src/redux/rootReducer";
+import {useStyles} from './useStyles';
 
 const initValues = {
     type: {
-        id: null,
-        desc: 'Выберите тип',
+        isLot: null,
+        name: 'Выберите тип'
     },
     category: {
         id: null,
-        desc: 'Выберите категорию'
+        name: 'Выберите категорию'
     }
 };
 
 export const CreateAdModalForm = (props) => {
     const {handleCloseModal} = props;
 
+    const dispatch = useDispatch();
+    const categoriesList = useSelector(({categories}: RootState) => categories.list);
+
     const [typeAnchor, setTypeAnchor] = useState(null);
     const [estateAnchor, setEstateAnchor] = useState(null);
-
-    const validationSchema = object({
-        type: object({
-            id: number().nullable().required('Выберите тип объявления!')
-        }),
-        category: object({
-            id: number().nullable().required('Выберите категорию!')
-        })
-    });
 
     const handleMenuOpen = (anchor) => (e) => {
         anchor(e.currentTarget)
@@ -44,44 +40,45 @@ export const CreateAdModalForm = (props) => {
     const handleClickMenuItem = (handleSetValue, values, newValue) => () => {
         handleSetValue({...values, ...newValue});
     };
-
-    const submit = () => {
+    const submit = (values) => {
+        dispatch(setAdOrLotCtgryAction({
+            isLot: values.type.isLot,
+            ...values
+        }));
         Router.push('/create_advertisement');
+        handleCloseModal();
     };
 
     const classes = useStyles();
     return (
-        <Formik initialValues={initValues} validationSchema={validationSchema} onSubmit={submit}>
-            {(props) => {
-                const {
-                    errors,
-                    touched,
-                    values,
-                    setValues,
-                    handleBlur,
-                } = props;
-                return (
+        <Formik initialValues={initValues} validationSchema={adTypeAndCtgrySchema} onSubmit={submit}>
+            {
+                ({
+                     errors,
+                     touched,
+                     values,
+                     setValues,
+                     handleBlur
+                 }: FormikProps<any> & { errors: any }) => (
                     <Form className={classes.root}>
                         <div className='menu-btns'>
                             <div>
-                                <Typography>{errors.type && touched.type ? errors.type.id : ''}</Typography>
-                                <ButtonComponent
-                                    onClick={handleMenuOpen(setTypeAnchor)}>{values.type.desc}</ButtonComponent>
-                                <CustomFormikMenu
+                                <Typography>{errors.type && touched.type ? errors.type.isLot : ''}</Typography>
+                                <ButtonComponent onClick={handleMenuOpen(setTypeAnchor)}>
+                                    {values.type.name}
+                                </ButtonComponent>
+                                <Menu
                                     className={classes.menu}
-                                    name={values}
                                     anchorEl={typeAnchor}
                                     open={Boolean(typeAnchor)}
                                     onClose={handleMenuClose(setTypeAnchor)}
-                                    setValues={setValues}
                                 >
                                     <MenuItem
-                                        value={1}
                                         id='Объявление'
                                         onClick={handleClickMenuItem(setValues, values, {
                                             type: {
-                                                id: 1,
-                                                desc: 'Объявление'
+                                                name: 'Объявление',
+                                                isLot: false
                                             }
                                         })}
                                         onBlur={handleBlur}
@@ -89,58 +86,50 @@ export const CreateAdModalForm = (props) => {
                                         <Typography>Объявление</Typography>
                                     </MenuItem>
                                     <MenuItem
-                                        value={2}
                                         id='Торг'
                                         onClick={handleClickMenuItem(setValues, values, {
                                             type: {
-                                                id: 2,
-                                                desc: 'Торг'
+                                                name: 'Торг',
+                                                isLot: true
                                             }
                                         })}
                                         onBlur={handleBlur}
                                     >
                                         <Typography>Торг</Typography>
                                     </MenuItem>
-                                </CustomFormikMenu>
+                                </Menu>
                             </div>
                             <div>
                                 <Typography>{errors.category && touched.category ? errors.category.id : ''}</Typography>
-                                <ButtonComponent
-                                    onClick={handleMenuOpen(setEstateAnchor)}>{values.category.desc}</ButtonComponent>
-                                <CustomFormikMenu
-                                    name={values}
+                                <ButtonComponent onClick={handleMenuOpen(setEstateAnchor)}>
+                                    {values.category.name}
+                                </ButtonComponent>
+                                <Menu
                                     anchorEl={estateAnchor}
                                     open={Boolean(estateAnchor)}
                                     onClose={handleMenuClose(setEstateAnchor)}
-                                    setValues={setValues}
                                 >
-                                    <MenuItem
-                                        id='Недвижимость'
-                                        value={3}
-                                        onBlur={handleBlur}
-                                        onClick={handleClickMenuItem(setValues, values, {
-                                            category: {
-                                                id: 3,
-                                                desc: 'Недвижимость'
-                                            }
-                                        })}
-                                    >
-                                        <Typography>Недвижимость</Typography>
-                                    </MenuItem>
-                                    <MenuItem
-                                        id='Автомобили'
-                                        value={4}
-                                        onBlur={handleBlur}
-                                        onClick={handleClickMenuItem(setValues, values, {
-                                            category: {
-                                                id: 4,
-                                                desc: 'Автомобили'
-                                            }
-                                        })}
-                                    >
-                                        <Typography>Автомобили</Typography>
-                                    </MenuItem>
-                                </CustomFormikMenu>
+                                    {
+                                        categoriesList.map((category) => {
+                                            const {id, name} = category
+                                            return (
+                                                <MenuItem
+                                                    key={id}
+                                                    id={name}
+                                                    value={id}
+                                                    onBlur={handleBlur}
+                                                    onClick={handleClickMenuItem(
+                                                        setValues,
+                                                        values,
+                                                        {category}
+                                                    )}
+                                                >
+                                                    <Typography>{name}</Typography>
+                                                </MenuItem>
+                                            )
+                                        })
+                                    }
+                                </Menu>
                             </div>
                         </div>
                         <div className='form-btns'>
@@ -153,7 +142,7 @@ export const CreateAdModalForm = (props) => {
                         </div>
                     </Form>
                 )
-            }}
+            }
         </Formik>
     )
 };

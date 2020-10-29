@@ -2,7 +2,7 @@ import React from 'react';
 import {  Typography } from '@material-ui/core';
 import { SyncSliders } from '@src/components/elements/syncSliders/SyncSliders';
 import { Link } from '@root/i18n';
-import { CustomImageTag } from '@root/src/components/elements/custom_image_tag/CustomImageTag';
+import { NextImgTag } from '@src/components/elements/next_img_tag/NextImgTag';
 
 // icons
 import {
@@ -66,7 +66,7 @@ export const LeftSide = () => {
                             <Typography variant="subtitle1" color="initial">
                                 Добавить в избранное
                             </Typography>
-                            <CustomImageTag
+                            <NextImgTag
                                 src={HeartIcon}
                                 alt="favourite-icon"
                                 className={classes.icons}
@@ -89,7 +89,7 @@ export const LeftSide = () => {
                                     Местоположение: г.Ташкент, Мирзо-Улугбекский
                                     район
                                 </Typography>
-                                <CustomImageTag
+                                <NextImgTag
                                     src={DownArrow}
                                     alt="location-down-arrow"
                                     className={classes.downArrow}
@@ -189,7 +189,7 @@ export const LeftSide = () => {
                                 <Typography variant="subtitle1" color="initial">
                                     Все параметры
                                 </Typography>
-                                <CustomImageTag
+                                <NextImgTag
                                     src={DownArrow}
                                     alt="downarrow"
                                     className={classes.downArrow}
@@ -213,7 +213,7 @@ export const LeftSide = () => {
                             </Typography>
                         </div>
                         <div>
-                            <CustomImageTag
+                            <NextImgTag
                                 src={EyeIcon}
                                 alt="eye-icon"
                                 className={classes.icons}
@@ -244,7 +244,7 @@ export const LeftSide = () => {
                             </Typography>
                         </div>
                         <div>
-                            <CustomImageTag
+                            <NextImgTag
                                 src={HeartIcon}
                                 alt="heart-icon"
                                 className={classes.icons}
@@ -270,7 +270,7 @@ export const LeftSide = () => {
                             <Typography variant="subtitle1" color="initial">
                                 Пожаловаться
                             </Typography>
-                            <CustomImageTag src={ComplainIcon} alt="comlain-icon" />
+                            <NextImgTag src={ComplainIcon} alt="comlain-icon" />
                         </a>
                     </Link>
                 </div>
@@ -280,22 +280,22 @@ export const LeftSide = () => {
                     </Typography>
                     <Link href="#">
                         <a>
-                            <CustomImageTag src={Facebook} />
+                            <NextImgTag src={Facebook} />
                         </a>
                     </Link>
                     <Link href="#">
                         <a>
-                            <CustomImageTag src={Instagram} />
+                            <NextImgTag src={Instagram} />
                         </a>
                     </Link>
                     <Link href="#">
                         <a>
-                            <CustomImageTag src={Youtube} />
+                            <NextImgTag src={Youtube} />
                         </a>
                     </Link>
                     <Link href="#">
                         <a>
-                            <CustomImageTag src={Telegram} />
+                            <NextImgTag src={Telegram} />
                         </a>
                     </Link>
                 </div>

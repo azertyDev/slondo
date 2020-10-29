@@ -1,5 +1,5 @@
 import React from 'react'
-import {Link} from '../../../i18n'
+import {Link} from '@root/i18n'
 import {MainSlider} from '../header/sliders/mainSlider/MainSlider'
 import {CategoriesSlider} from '../header/sliders/categoriesSlider/CategoriesSlider'
 import {MainContent} from './mainContent/MainContent'

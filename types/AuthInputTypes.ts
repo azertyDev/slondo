@@ -1,4 +1,4 @@
-export interface AuthInputVals {
+export type AuthInputTypes = {
     phone: string,
     password: string
 };

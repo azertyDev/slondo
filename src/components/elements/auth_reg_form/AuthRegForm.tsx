@@ -9,12 +9,12 @@ import {CustomFormikField} from "../custom_formik_field/CustomFormikField"
 import {ButtonComponent} from "../button/Button"
 import {requiredValidate, phoneValidate} from '../../../components/validates'
 import {RootState} from "@src/redux/rootReducer"
-import {fetchToken} from "@src/redux/thunks/authRegThunk"
-import {AuthInputVals} from '@root/interfaces/IAuthInputVals'
+import {fetchToken} from "@src/redux/slices/authRegSlice"
+import {AuthInputTypes} from "@root/types/AuthInputTypes";
 import {useStyles} from './useStyles'
 
 
-const initialInputsVals: AuthInputVals = {
+const initialInputsVals: AuthInputTypes = {
     phone: '998908080265',
     password: '123456789aaa'
 };

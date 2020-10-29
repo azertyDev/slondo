@@ -5,6 +5,6 @@ export interface ICustomField {
     type?: string,
     placeholder: string,
     className: string
-    setFieldValue: (field: string, value: any, shouldValidate?: boolean) => void,
+    setFieldValue: (field: string, value: never, shouldValidate?: boolean) => void,
     validate: FieldValidator,
 }

@@ -1,13 +1,27 @@
-import React from 'react'
-import {Typography} from '@material-ui/core'
-import {CarIcon} from '../../../elements/icons'
-import {CustomSlider} from "../../../elements/custom_slider/CustomSlider";
-import {settings} from './sliderSettings'
-import {useStyles} from './useStyles'
+import React, {FC, useEffect} from 'react';
+import {Typography} from '@material-ui/core';
+import {CustomSlider} from "@src/components/elements/custom_slider/CustomSlider";
+import {settings} from './sliderSettings';
+import {useDispatch, useSelector} from 'react-redux';
+import {RootState} from "@src/redux/rootReducer";
+import {i18n, Link} from "@root/i18n";
+import {fetchCategories} from "@src/redux/slices/categoriesSlice";
+import {WithT} from "i18next";
+import {useStyles} from './useStyles';
 
 
-export const CategoriesSlider = (props) => {
+export const CategoriesSlider: FC<WithT> = (props) => {
     const {t} = props;
+
+    const dispatch = useDispatch();
+
+    const lang = i18n.language;
+
+    const {error, list} = useSelector(({categories}: RootState) => categories);
+
+    useEffect(() => {
+        dispatch(fetchCategories(lang));
+    }, [dispatch, lang]);
 
     const classes = useStyles();
     return (
@@ -15,42 +29,23 @@ export const CategoriesSlider = (props) => {
             <Typography variant="h4">{t('popularCategories')}</Typography>
             <div className='category-slider'>
                 <CustomSlider {...settings}>
-                    <a href="#">
-                        <img src={CarIcon} alt='icon'/>
-                        <Typography>Легковые автомобили</Typography>
-                    </a>
-                    <a href="#">
-                        <img src={CarIcon} alt='icon'/>
-                        <Typography>Электроника</Typography>
-                    </a>
-                    <a href="#">
-                        <img src={CarIcon} alt='icon'/>
-                        <Typography>Красота и здоровье</Typography>
-                    </a>
-                    <a href="#">
-                        <img src={CarIcon} alt='icon'/>
-                        <Typography>Все для дома</Typography>
-                    </a>
-                    <a href="#">
-                        <img src={CarIcon} alt='icon'/>
-                        <Typography>Телефоны и планшеты</Typography>
-                    </a>
-                    <a href="#">
-                        <img src={CarIcon} alt='icon'/>
-                        <Typography>Компьютерная техника</Typography>
-                    </a>
-                    <a href="#">
-                        <img src={CarIcon} alt='icon'/>
-                        <Typography>Женский гардероб</Typography>
-                    </a>
-                    <a href="#">
-                        <img src={CarIcon} alt='icon'/>
-                        <Typography>Услуги</Typography>
-                    </a>
-                    <a href="#">
-                        <img src={CarIcon} alt='icon'/>
-                        <Typography>Отдых и спорт</Typography>
-                    </a>
+                    {
+                        error
+                            ? (
+                                <Typography>{error}</Typography>
+                            )
+                            : (
+                                list.map(category => (
+                                        <Link href="#" key={category.id}>
+                                            <a title={category.name}>
+                                                <img src={category.images.url} alt='category'/>
+                                                <Typography>{category.name}</Typography>
+                                            </a>
+                                        </Link>
+                                    )
+                                )
+                            )
+                    }
                 </CustomSlider>
             </div>
         </div>

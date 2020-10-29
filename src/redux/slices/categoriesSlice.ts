@@ -1,14 +1,31 @@
-import {createSlice} from '@reduxjs/toolkit'
+import {createAsyncThunk, createSlice} from '@reduxjs/toolkit'
 import {ICategories} from '@root/interfaces/ICategories'
-import {fetchCategories} from '../thunks/categoriesThunk'
+import {userAPI} from "@src/api/api";
 
 
 const initialState: ICategories = {
     isFetch: false,
     error: null,
-    categories: {},
+    list: [{
+        id: null,
+        name: '',
+        images: {id: null, url: ''}
+    }],
 };
 
+// Async thunk
+export const fetchCategories = createAsyncThunk<never, string>(
+    'categories/fetchCategories',
+    async (lang, {rejectWithValue}) => {
+        try {
+            return await userAPI.getCategories(lang);
+        } catch (e) {
+            return rejectWithValue(e.message);
+        }
+    }
+);
+
+// Slice
 const advertisementSlice = createSlice({
     name: 'categories',
     initialState,
@@ -20,7 +37,7 @@ const advertisementSlice = createSlice({
         })
         builder.addCase(fetchCategories.fulfilled, (state, action) => {
             state.isFetch = false;
-            state.categories = action.payload;
+            state.list = action.payload;
         })
         builder.addCase(fetchCategories.rejected, (state, action) => {
             state.isFetch = false;
