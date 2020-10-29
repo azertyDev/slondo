@@ -5,27 +5,14 @@ import {
     Hidden,
     Tabs,
 } from '@material-ui/core'
-import {BackSpaceArrow} from '../../elements/icons'
-import {CardItem} from '../../elements/card/Card'
-import {ButtonComponent} from '../../elements/button/Button'
-import {CustomTab} from '../../elements/custom_tab/CustomTab'
+import {CardItem} from '@src/components/elements/card/Card'
+import {ButtonComponent} from '@src/components/elements/button/Button'
+import {CustomTab} from '@src/components/elements/custom_tab/CustomTab'
+import { Banner } from '@src/components/elements/banner/Banner'
+import { CustomTabPanel } from "@src/components/elements/custom_tab_panel/CustomTabPanel";
 
 // Styles
 import {useStyles} from './useStyles'
-
-
-const TabPanel = (props) => {
-    const {children, value, index, ...other} = props
-
-    return (
-        <div
-            hidden={value !== index}
-            {...other}
-        >
-            {value === index && children}
-        </div>
-    )
-};
 
 export const MainContent = (props) => {
     const {t} = props;
@@ -53,189 +40,197 @@ export const MainContent = (props) => {
             </Grid>
             <Grid container className="cards-container">
                 <Grid item md={9} xs={12}>
-                    <TabPanel value={value} index={0}>
+                    <CustomTabPanel value={value} index={0}>
                         <div className="ads-wrapper">
-                            <Grid item container spacing={1}>
+                            <Grid item container spacing={2}>
                                 <Grid xs={6} sm={4} lg={3} item>
                                     <CardItem
-                                        title={t('ad')}
+                                        title='Sony PlayStation 4 slim 1TB + доставка'
+                                        cardType={t('ad')}
                                         className="card-item"
                                         alt="adv"
-                                        image={`/img/surprise_img.svg`}
-                                        price="180 000 сум"
-                                        description="Продам сумку в хорошем соcтоянии"
+                                        image={`/img/phone-image.jpg`}
+                                        price="2 500 000 сум"
+                                        location='Ташкент, Ташкентская область'
+                                        dateTime='20 октября в 16:32'
                                     />
                                 </Grid>
                                 <Grid xs={6} sm={4} lg={3} item>
                                     <CardItem
-                                        title={t('ad')}
+                                        title='Sony PlayStation 4 slim 1TB + доставка'
+                                        cardType={t('ad')}
                                         className="card-item"
                                         alt="adv"
-                                        image={`/img/modal-image.jpg`}
-                                        price="180 000 сум"
-                                        description="Продам сумку в хорошем соcтоянии"
+                                        image={`/img/supboofer-image.jpg`}
+                                        price="2 500 000 сум"
+                                        location='Ташкент, Ташкентская область'
+                                        dateTime='20 октября в 16:32'
                                     />
                                 </Grid>
                                 <Grid xs={6} sm={4} lg={3} item>
                                     <CardItem
-                                        title={t('ad')}
+                                        title='Sony PlayStation 4 slim 1TB + доставка'
+                                        cardType={t('ad')}
                                         className="card-item"
                                         alt="adv"
                                         image={`/img/clock-image.jpg`}
-                                        price="180 000 сум"
-                                        description="Продам сумку в хорошем соcтоянии"
+                                        price="2 500 000 сум"
+                                        location='Ташкент, Ташкентская область'
+                                        dateTime='20 октября в 16:32'
                                     />
                                 </Grid>
                                 <Grid xs={6} sm={4} lg={3} item>
                                     <CardItem
-                                        title={t('ad')}
+                                        title='Sony PlayStation 4 slim 1TB + доставка'
+                                        cardType={t('ad')}
                                         className="card-item"
                                         alt="adv"
-                                        image={`/img/card-image.jpg`}
-                                        price="180 000 сум"
-                                        description="Продам сумку в хорошем соcтоянии"
+                                        image={`https://images.unsplash.com/photo-1550432163-9cb326104944?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60`}
+                                        price="2 500 000 сум"
+                                        location='Ташкент, Ташкентская область'
+                                        dateTime='20 октября в 16:32'
                                     />
                                 </Grid>
                                 <Grid xs={6} sm={4} lg={3} item>
                                     <CardItem
-                                        title={t('ad')}
+                                        title='Sony PlayStation 4 slim 1TB + доставка'
+                                        cardType={t('ad')}
                                         className="card-item"
                                         alt="adv"
                                         image={`/img/notebook-image.jpg`}
-                                        price="180 000 сум"
-                                        description="Продам сумку в хорошем соcтоянии"
+                                        price="2 500 000 сум"
+                                        location='Ташкент, Ташкентская область'
+                                        dateTime='20 октября в 16:32'
                                     />
                                 </Grid>
                                 <Grid xs={6} sm={4} lg={3} item>
                                     <CardItem
-                                        title={t('ad')}
+                                        title='Sony PlayStation 4 slim 1TB + доставка'
+                                        cardType={t('ad')}
                                         className="card-item"
                                         alt="adv"
                                         image={`/img/router-image.jpg`}
-                                        price="180 000 сум"
-                                        description="Продам сумку в хорошем соcтоянии"
+                                        price="2 500 000 сум"
+                                        location='Ташкент, Ташкентская область'
+                                        dateTime='20 октября в 16:32'
                                     />
                                 </Grid>
                                 <Grid xs={6} sm={4} lg={3} item>
-                                    <CardItem
-                                        title={t('ad')}
-                                        className="card-item"
-                                        alt="adv"
-                                        image={`/img/card-image.jpg`}
-                                        price="180 000 сум"
-                                        description="Продам сумку в хорошем соcтоянии"
-                                    />
+                                    <Banner/>
                                 </Grid>
                                 <Grid xs={6} sm={4} lg={3} item>
                                     <CardItem
-                                        title={t('ad')}
+                                        title='Sony PlayStation 4 slim 1TB + доставка'
+                                        cardType={t('ad')}
                                         className="card-item"
                                         alt="adv"
-                                        image={`/img/card-image.jpg`}
-                                        price="180 000 сум"
-                                        description="Продам сумку в хорошем соcтоянии"
+                                        image={`/img/supboofer-image.jpg`}
+                                        price="2 500 000 сум"
+                                        location='Ташкент, Ташкентская область'
+                                        dateTime='20 октября в 16:32'
                                     />
                                 </Grid>
                             </Grid>
                         </div>
-                    </TabPanel>
-                    <TabPanel value={value} index={1}>
+                    </CustomTabPanel>
+                    <CustomTabPanel value={value} index={1}>
                         <div className="lots-wrapper">
-                            <Grid item container spacing={1}>
+                            <Grid item container spacing={2}>
                                 <Grid xs={6} sm={4} lg={3} item>
                                     <CardItem
-                                        title={t('lot')}
+                                        title='Sony PlayStation 4 slim 1TB + доставка'
+                                        cardType={t('lot')}
+                                        className="card-item"
+                                        alt="adv"
+                                        image={`/img/phone-image.jpg`}
+                                        price="2 500 000 сум"
+                                        location='Ташкент, Ташкентская область'
+                                        dateTime='20 октября в 16:32'
+                                    />
+                                </Grid>
+                                <Grid xs={6} sm={4} lg={3} item>
+                                    <Banner/> 
+                                </Grid>
+                                <Grid xs={6} sm={4} lg={3} item>
+                                    <CardItem
+                                        title='Sony PlayStation 4 slim 1TB + доставка'
+                                        cardType={t('lot')}
                                         className="card-item"
                                         alt="adv"
                                         image={`/img/card-image.jpg`}
-                                        price="180 000 сум"
-                                        description="Продам сумку в хорошем соcтоянии"
+                                        price="2 500 000 сум"
+                                        location='Ташкент, Ташкентская область'
+                                        dateTime='20 октября в 16:32'
                                     />
                                 </Grid>
                                 <Grid xs={6} sm={4} lg={3} item>
                                     <CardItem
-                                        title={t('lot')}
+                                        title='Sony PlayStation 4 slim 1TB + доставка'
+                                        cardType={t('lot')}
                                         className="card-item"
                                         alt="adv"
                                         image={`/img/card-image.jpg`}
-                                        price="180 000 сум"
-                                        description="Продам сумку в хорошем соcтоянии"
+                                        price="2 500 000 сум"
+                                        location='Ташкент, Ташкентская область'
+                                        dateTime='20 октября в 16:32'
                                     />
                                 </Grid>
                                 <Grid xs={6} sm={4} lg={3} item>
                                     <CardItem
-                                        title={t('lot')}
+                                        title='Sony PlayStation 4 slim 1TB + доставка'
+                                        cardType={t('lot')}
                                         className="card-item"
                                         alt="adv"
                                         image={`/img/card-image.jpg`}
-                                        price="180 000 сум"
-                                        description="Продам сумку в хорошем соcтоянии"
+                                        price="2 500 000 сум"
+                                        location='Ташкент, Ташкентская область'
+                                        dateTime='20 октября в 16:32'
                                     />
                                 </Grid>
                                 <Grid xs={6} sm={4} lg={3} item>
                                     <CardItem
-                                        title={t('lot')}
+                                        title='Sony PlayStation 4 slim 1TB + доставка'
+                                        cardType={t('lot')}
                                         className="card-item"
                                         alt="adv"
                                         image={`/img/card-image.jpg`}
-                                        price="180 000 сум"
-                                        description="Продам сумку в хорошем соcтоянии"
+                                        price="2 500 000 сум"
+                                        location='Ташкент, Ташкентская область'
+                                        dateTime='20 октября в 16:32'
                                     />
                                 </Grid>
                                 <Grid xs={6} sm={4} lg={3} item>
                                     <CardItem
-                                        title={t('lot')}
+                                        title='Sony PlayStation 4 slim 1TB + доставка'
+                                        cardType={t('lot')}
                                         className="card-item"
                                         alt="adv"
                                         image={`/img/card-image.jpg`}
-                                        price="180 000 сум"
-                                        description="Продам сумку в хорошем соcтоянии"
+                                        price="2 500 000 сум"
+                                        location='Ташкент, Ташкентская область'
+                                        dateTime='20 октября в 16:32'
                                     />
                                 </Grid>
                                 <Grid xs={6} sm={4} lg={3} item>
                                     <CardItem
-                                        title={t('lot')}
+                                        title='Sony PlayStation 4 slim 1TB + доставка'
+                                        cardType={t('lot')}
                                         className="card-item"
                                         alt="adv"
                                         image={`/img/card-image.jpg`}
-                                        price="180 000 сум"
-                                        description="Продам сумку в хорошем соcтоянии"
-                                    />
-                                </Grid>
-                                <Grid xs={6} sm={4} lg={3} item>
-                                    <CardItem
-                                        title={t('lot')}
-                                        className="card-item"
-                                        alt="adv"
-                                        image={`/img/card-image.jpg`}
-                                        price="180 000 сум"
-                                        description="Продам сумку в хорошем соcтоянии"
-                                    />
-                                </Grid>
-                                <Grid xs={6} sm={4} lg={3} item>
-                                    <CardItem
-                                        title={t('lot')}
-                                        className="card-item"
-                                        alt="adv"
-                                        image={`/img/card-image.jpg`}
-                                        price="180 000 сум"
-                                        description="Продам сумку в хорошем соcтоянии"
+                                        price="2 500 000 сум"
+                                        location='Ташкент, Ташкентская область'
+                                        dateTime='20 октября в 16:32'
                                     />
                                 </Grid>
                             </Grid>
                         </div>
-                    </TabPanel>
+                    </CustomTabPanel>
                 </Grid>
                 <Hidden smDown>
                     <Grid item container md={3} direction='column' className={classes.adBanner}>
                         <Grid item>
-                            <div className='top-banner'/>
-                        </Grid>
-                        <Grid item>
-                            <div className='central-banner'/>
-                        </Grid>
-                        <Grid item>
-                            <div className='bottom-banner'/>
+                            <Banner height='300px'/>
                         </Grid>
                     </Grid>
                 </Hidden>
@@ -243,10 +238,10 @@ export const MainContent = (props) => {
             <Grid container className={classes.showMoreContainer}>
                 <Grid item xs={12} md={9} className='show-more-block'>
                     <ButtonComponent>
-                        {t('showMore')}
-                        <img src={BackSpaceArrow} alt='back_space_arrow'/>
+                        <Typography variant="subtitle2" color="initial">
+                            {t('showMore')}
+                        </Typography>
                     </ButtonComponent>
-                    <div className='show-more-line'/>
                 </Grid>
             </Grid>
         </div>
