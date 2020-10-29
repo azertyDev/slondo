@@ -2,6 +2,7 @@ import React, {useEffect, useRef, useState} from 'react';
 import {CustomSlider} from '../custom_slider/CustomSlider';
 import {FullscreenIcon} from '../icons';
 import Button from '@material-ui/core/Button';
+import { CustomImageTag } from "@src/components/elements/custom_image_tag/CustomImageTag";
 
 // styles
 import {useStyles} from './useStyles';
@@ -34,7 +35,7 @@ export const SyncSliders = (props) => {
                 <CustomSlider asNavFor={slidersNav.nav2} ref={slider1}>
                     {imgs.map(({url, alt}, i) => (
                         <div key={i}>
-                            <img src={url} alt={alt}/>
+                            <CustomImageTag src={url} alt={alt}/>
                         </div>
                     ))}
                 </CustomSlider>
@@ -48,7 +49,7 @@ export const SyncSliders = (props) => {
                 >
                     {imgs.map(({url, alt}, i) => (
                         <div key={i}>
-                            <img src={url} alt={alt}/>
+                            <CustomImageTag src={url} alt={alt}/>
                         </div>
                     ))}
                 </CustomSlider>

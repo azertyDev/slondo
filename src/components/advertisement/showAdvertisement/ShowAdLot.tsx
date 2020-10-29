@@ -6,8 +6,10 @@ import { MainLayout } from '../../MainLayout';
 import { RightSide } from './rightSide/RightSide';
 import { LeftSide } from './leftSide/LeftSide';
 import { Link } from '@root/i18n';
+import { CustomImageTag } from "@src/components/elements/custom_image_tag/CustomImageTag";
 
-import { ShareIcon } from '@src/components/elements/icons';
+// icons
+import { ShareIcon } from '../../elements/icons';
 
 // styles
 import { useStyles } from './useStyles';
@@ -39,7 +41,7 @@ export const ShowAdLot = (props) => {
                             </Typography>
                             <Link href="#">
                                 <a>
-                                    <img
+                                    <CustomImageTag
                                         src={ShareIcon}
                                         alt="share-icon"
                                         className={classes.shareIcon}

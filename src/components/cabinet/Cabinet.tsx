@@ -75,6 +75,8 @@ export const Cabinet = (props) => {
                         </TabPanel>
                         <TabPanel value={value} index={1}>
                             <Notification />
+                            <Notification />
+                            <Notification />
                         </TabPanel>
                         <TabPanel value={value} index={2}>
                             <CabinetTabItem />

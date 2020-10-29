@@ -1,30 +1,33 @@
-import {makeStyles} from '@material-ui/core/styles'
+import { makeStyles } from '@material-ui/core/styles';
 
 export const useStyles = makeStyles((theme) => ({
     root: {
         '& div.tabs div.MuiTabs-flexContainer': {
-            justifyContent: 'space-around'
+            justifyContent: 'space-around',
+            '& h6': {
+                textTransform: 'uppercase',
+            },
         },
         '& div.cards-container': {
-            marginTop: '10px'
+            marginTop: '10px',
         },
         '& div.ads-wrapper': {
             '& div.card-title > h6': {
-                backgroundColor: 'rgba(136, 202, 236, .65)'
-            }
+                backgroundColor: 'rgba(136, 202, 236, .65)',
+            },
         },
         '& div.lots-wrapper': {
             '& div.card-title > h6': {
-                backgroundColor: 'rgba(173, 102, 213, .65)'
-            }
-        }
+                backgroundColor: 'rgba(173, 102, 213, .65)',
+            },
+        },
     },
     showMoreContainer: {
         [theme.breakpoints.up('md')]: {
-            marginTop: '10px'
+            marginTop: '10px',
         },
         [theme.breakpoints.down('md')]: {
-            marginTop: '30px'
+            marginTop: '30px',
         },
         '& div.show-more-block': {
             position: 'relative',
@@ -45,16 +48,16 @@ export const useStyles = makeStyles((theme) => ({
                     padding: '1px',
                     border: `1px solid ${theme.palette.primary.gray}`,
                     borderRadius: '8px',
-                    transform: 'rotate(-90deg)'
-                }
+                    transform: 'rotate(-90deg)',
+                },
             },
             '& > div.show-more-line': {
                 position: 'absolute',
                 top: '50%',
                 width: '100%',
-                borderBottom: `1px solid ${theme.palette.primary.gray}`
-            }
-        }
+                borderBottom: `1px solid ${theme.palette.primary.gray}`,
+            },
+        },
     },
     adBanner: {
         paddingLeft: '10px',
@@ -63,14 +66,14 @@ export const useStyles = makeStyles((theme) => ({
             backgroundColor: '#C0C0C0',
         },
         '& div.top-banner': {
-            height: '250px'
+            height: '250px',
         },
         '& div.central-banner': {
             height: '130px',
-            margin: '10px 0'
+            margin: '10px 0',
         },
         '& div.bottom-banner': {
-            height: '250px'
-        }
-    }
-}))
+            height: '250px',
+        },
+    },
+}));

@@ -1,7 +1,8 @@
 import React from 'react';
 import {  Typography } from '@material-ui/core';
 import { SyncSliders } from '@src/components/elements/syncSliders/SyncSliders';
-import { Link } from '../../../../../i18n';
+import { Link } from '@root/i18n';
+import { CustomImageTag } from '@root/src/components/elements/custom_image_tag/CustomImageTag';
 
 // icons
 import {
@@ -17,35 +18,35 @@ import {
 
 const imgUrls = [
     {
-        url: 'img/advertisement-image.jpg',
+        url: '/img/advertisement-image.jpg',
         alt: 'adv-image',
     },
     {
-        url: 'img/advertisement-image.jpg',
+        url: '/img/advertisement-image.jpg',
         alt: 'adv-image',
     },
     {
-        url: 'img/advertisement-image.jpg',
+        url: '/img/advertisement-image.jpg',
         alt: 'adv-image',
     },
     {
-        url: 'img/advertisement-image.jpg',
+        url: '/img/advertisement-image.jpg',
         alt: 'adv-image',
     },
     {
-        url: 'img/advertisement-image.jpg',
+        url: '/img/advertisement-image.jpg',
         alt: 'adv-image',
     },
     {
-        url: 'img/advertisement-image.jpg',
+        url: '/img/advertisement-image.jpg',
         alt: 'adv-image',
     },
     {
-        url: 'img/advertisement-image.jpg',
+        url: '/img/advertisement-image.jpg',
         alt: 'adv-image',
     },
     {
-        url: 'img/advertisement-image.jpg',
+        url: '/img/advertisement-image.jpg',
         alt: 'adv-image',
     },
 ];
@@ -65,7 +66,7 @@ export const LeftSide = () => {
                             <Typography variant="subtitle1" color="initial">
                                 Добавить в избранное
                             </Typography>
-                            <img
+                            <CustomImageTag
                                 src={HeartIcon}
                                 alt="favourite-icon"
                                 className={classes.icons}
@@ -88,7 +89,7 @@ export const LeftSide = () => {
                                     Местоположение: г.Ташкент, Мирзо-Улугбекский
                                     район
                                 </Typography>
-                                <img
+                                <CustomImageTag
                                     src={DownArrow}
                                     alt="location-down-arrow"
                                     className={classes.downArrow}
@@ -188,7 +189,7 @@ export const LeftSide = () => {
                                 <Typography variant="subtitle1" color="initial">
                                     Все параметры
                                 </Typography>
-                                <img
+                                <CustomImageTag
                                     src={DownArrow}
                                     alt="downarrow"
                                     className={classes.downArrow}
@@ -212,7 +213,7 @@ export const LeftSide = () => {
                             </Typography>
                         </div>
                         <div>
-                            <img
+                            <CustomImageTag
                                 src={EyeIcon}
                                 alt="eye-icon"
                                 className={classes.icons}
@@ -243,7 +244,7 @@ export const LeftSide = () => {
                             </Typography>
                         </div>
                         <div>
-                            <img
+                            <CustomImageTag
                                 src={HeartIcon}
                                 alt="heart-icon"
                                 className={classes.icons}
@@ -264,12 +265,12 @@ export const LeftSide = () => {
             </div>
             <div className="ad-social">
                 <div>
-                    <Link href="#">
+                    <Link href="/">
                         <a>
                             <Typography variant="subtitle1" color="initial">
                                 Пожаловаться
                             </Typography>
-                            <img src={ComplainIcon} alt="comlain-icon" />
+                            <CustomImageTag src={ComplainIcon} alt="comlain-icon" />
                         </a>
                     </Link>
                 </div>
@@ -279,22 +280,22 @@ export const LeftSide = () => {
                     </Typography>
                     <Link href="#">
                         <a>
-                            <img src={Facebook} />
+                            <CustomImageTag src={Facebook} />
                         </a>
                     </Link>
                     <Link href="#">
                         <a>
-                            <img src={Instagram} />
+                            <CustomImageTag src={Instagram} />
                         </a>
                     </Link>
                     <Link href="#">
                         <a>
-                            <img src={Youtube} />
+                            <CustomImageTag src={Youtube} />
                         </a>
                     </Link>
                     <Link href="#">
                         <a>
-                            <img src={Telegram} />
+                            <CustomImageTag src={Telegram} />
                         </a>
                     </Link>
                 </div>

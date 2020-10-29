@@ -61,7 +61,7 @@ export const MainContent = (props) => {
                                         title={t('ad')}
                                         className="card-item"
                                         alt="adv"
-                                        image={`img/card-image.jpg`}
+                                        image={`/img/surprise_img.svg`}
                                         price="180 000 сум"
                                         description="Продам сумку в хорошем соcтоянии"
                                     />
@@ -71,7 +71,7 @@ export const MainContent = (props) => {
                                         title={t('ad')}
                                         className="card-item"
                                         alt="adv"
-                                        image={`img/card-image.jpg`}
+                                        image={`/img/modal-image.jpg`}
                                         price="180 000 сум"
                                         description="Продам сумку в хорошем соcтоянии"
                                     />
@@ -81,7 +81,7 @@ export const MainContent = (props) => {
                                         title={t('ad')}
                                         className="card-item"
                                         alt="adv"
-                                        image={`img/card-image.jpg`}
+                                        image={`/img/clock-image.jpg`}
                                         price="180 000 сум"
                                         description="Продам сумку в хорошем соcтоянии"
                                     />
@@ -91,7 +91,7 @@ export const MainContent = (props) => {
                                         title={t('ad')}
                                         className="card-item"
                                         alt="adv"
-                                        image={`img/card-image.jpg`}
+                                        image={`/img/card-image.jpg`}
                                         price="180 000 сум"
                                         description="Продам сумку в хорошем соcтоянии"
                                     />
@@ -101,7 +101,7 @@ export const MainContent = (props) => {
                                         title={t('ad')}
                                         className="card-item"
                                         alt="adv"
-                                        image={`img/card-image.jpg`}
+                                        image={`/img/notebook-image.jpg`}
                                         price="180 000 сум"
                                         description="Продам сумку в хорошем соcтоянии"
                                     />
@@ -111,7 +111,7 @@ export const MainContent = (props) => {
                                         title={t('ad')}
                                         className="card-item"
                                         alt="adv"
-                                        image={`img/card-image.jpg`}
+                                        image={`/img/router-image.jpg`}
                                         price="180 000 сум"
                                         description="Продам сумку в хорошем соcтоянии"
                                     />
@@ -121,7 +121,7 @@ export const MainContent = (props) => {
                                         title={t('ad')}
                                         className="card-item"
                                         alt="adv"
-                                        image={`img/card-image.jpg`}
+                                        image={`/img/card-image.jpg`}
                                         price="180 000 сум"
                                         description="Продам сумку в хорошем соcтоянии"
                                     />
@@ -131,7 +131,7 @@ export const MainContent = (props) => {
                                         title={t('ad')}
                                         className="card-item"
                                         alt="adv"
-                                        image={`img/card-image.jpg`}
+                                        image={`/img/card-image.jpg`}
                                         price="180 000 сум"
                                         description="Продам сумку в хорошем соcтоянии"
                                     />
@@ -147,7 +147,7 @@ export const MainContent = (props) => {
                                         title={t('lot')}
                                         className="card-item"
                                         alt="adv"
-                                        image={`img/card-image.jpg`}
+                                        image={`/img/card-image.jpg`}
                                         price="180 000 сум"
                                         description="Продам сумку в хорошем соcтоянии"
                                     />
@@ -157,7 +157,7 @@ export const MainContent = (props) => {
                                         title={t('lot')}
                                         className="card-item"
                                         alt="adv"
-                                        image={`img/card-image.jpg`}
+                                        image={`/img/card-image.jpg`}
                                         price="180 000 сум"
                                         description="Продам сумку в хорошем соcтоянии"
                                     />
@@ -167,7 +167,7 @@ export const MainContent = (props) => {
                                         title={t('lot')}
                                         className="card-item"
                                         alt="adv"
-                                        image={`img/card-image.jpg`}
+                                        image={`/img/card-image.jpg`}
                                         price="180 000 сум"
                                         description="Продам сумку в хорошем соcтоянии"
                                     />
@@ -177,7 +177,7 @@ export const MainContent = (props) => {
                                         title={t('lot')}
                                         className="card-item"
                                         alt="adv"
-                                        image={`img/card-image.jpg`}
+                                        image={`/img/card-image.jpg`}
                                         price="180 000 сум"
                                         description="Продам сумку в хорошем соcтоянии"
                                     />
@@ -187,7 +187,7 @@ export const MainContent = (props) => {
                                         title={t('lot')}
                                         className="card-item"
                                         alt="adv"
-                                        image={`img/card-image.jpg`}
+                                        image={`/img/card-image.jpg`}
                                         price="180 000 сум"
                                         description="Продам сумку в хорошем соcтоянии"
                                     />
@@ -197,7 +197,7 @@ export const MainContent = (props) => {
                                         title={t('lot')}
                                         className="card-item"
                                         alt="adv"
-                                        image={`img/card-image.jpg`}
+                                        image={`/img/card-image.jpg`}
                                         price="180 000 сум"
                                         description="Продам сумку в хорошем соcтоянии"
                                     />
@@ -207,7 +207,7 @@ export const MainContent = (props) => {
                                         title={t('lot')}
                                         className="card-item"
                                         alt="adv"
-                                        image={`img/card-image.jpg`}
+                                        image={`/img/card-image.jpg`}
                                         price="180 000 сум"
                                         description="Продам сумку в хорошем соcтоянии"
                                     />
@@ -217,7 +217,7 @@ export const MainContent = (props) => {
                                         title={t('lot')}
                                         className="card-item"
                                         alt="adv"
-                                        image={`img/card-image.jpg`}
+                                        image={`/img/card-image.jpg`}
                                         price="180 000 сум"
                                         description="Продам сумку в хорошем соcтоянии"
                                     />
