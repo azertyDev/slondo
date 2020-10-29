@@ -1,38 +1,58 @@
-import React from 'react'
-import { Card, CardActionArea, CardContent, CardMedia, Typography } from '@material-ui/core'
+import React from 'react';
+import {
+    Card,
+    CardActionArea,
+    CardContent,
+    CardMedia,
+    IconButton,
+    Typography,
+} from '@material-ui/core';
+
+// icons
+import { FavoriteIcon } from '@src/components/elements/icons/FavoriteIcon';
 
 // styles
-import { useStyles } from './useStyles'
+import { useStyles } from './useStyles';
+import { DeliveryIcon } from '@src/components/elements/icons/DeliveryIcon';
+import { SafeIcon } from '@src/components/elements/icons/SafeIcon';
+import { SwapIcon } from '@src/components/elements/icons/SwapIcon';
 
 export const CardItem = (props) => {
-    const { title, description, image, price, categoryName } = props
+    const { cardType, title, location, dateTime, image, price } = props;
 
-    const classes = useStyles()
+    const classes = useStyles();
     return (
-        <Card className={classes.root}>
-            <CardActionArea title={description}>
-                <div className='card-title'>
-                    <Typography variant="subtitle2">
+        <Card className={classes.root} elevation={0}>
+            <CardMedia className="card-media" image={image}>
+                <div className="card-header">
+                    <div>
+                        <Typography variant="subtitle2">{cardType}</Typography>
+                        <IconButton>
+                            <FavoriteIcon />
+                        </IconButton>
+                    </div>
+                    <div>
+                        <span><DeliveryIcon/></span>
+                        <span><SafeIcon/></span>
+                        <span><SwapIcon/></span>
+                    </div>
+                </div>
+            </CardMedia>
+            <CardActionArea title={title}> 
+                <CardContent>
+                    <Typography variant="subtitle1" color="initial">
                         {title}
                     </Typography>
-                </div>
-                <div className='card-categoryName'>
-                    <Typography variant="subtitle2">
-                        {categoryName}
+                    <Typography variant="h5" color="initial">{price}</Typography>
+                    <Typography variant="caption" noWrap={true} color="initial" className='card-location'>
+                        {location}
                     </Typography>
-                </div>
-
-                <CardMedia
-                    className='card-media'
-                    image={image}
-                />
-                <CardContent>
-                    <Typography variant="subtitle1">{price}</Typography>
-                    <Typography variant="subtitle2" noWrap={true}>
-                        {description}
+                    <br/>
+                    <Typography variant="caption" noWrap={true} color="initial" className='card-location'>
+                        {dateTime}
                     </Typography>
                 </CardContent>
             </CardActionArea>
         </Card>
-    )
-}
+    );
+};

@@ -9,23 +9,21 @@ export const useStyles = makeStyles((theme) => ({
             },
         },
         '& div.cards-container': {
-            marginTop: '10px',
+            marginTop: '40px',
         },
         '& div.ads-wrapper': {
-            '& div.card-title > h6': {
+            '& div.card-header > div > h6.MuiTypography-subtitle2': {
                 backgroundColor: 'rgba(136, 202, 236, .65)',
             },
         },
         '& div.lots-wrapper': {
-            '& div.card-title > h6': {
+            '& div.card-header > div > h6.MuiTypography-subtitle2': {
                 backgroundColor: 'rgba(173, 102, 213, .65)',
             },
         },
     },
     showMoreContainer: {
-        [theme.breakpoints.up('md')]: {
-            marginTop: '10px',
-        },
+        marginTop: '40px',
         [theme.breakpoints.down('md')]: {
             marginTop: '30px',
         },
@@ -38,25 +36,20 @@ export const useStyles = makeStyles((theme) => ({
                 width: '170px',
                 color: '#000',
                 backgroundColor: theme.palette.primary.white,
-                border: `1px solid ${theme.palette.primary.gray}`,
+                boxShadow: '0px 0px 8px rgba(132, 92, 171, 0.2)',
+                borderRadius: '100px',
                 zIndex: 1,
-                '& > img': {
-                    position: 'absolute',
-                    right: '10px',
-                    width: '16px',
-                    height: '16px',
-                    padding: '1px',
-                    border: `1px solid ${theme.palette.primary.gray}`,
-                    borderRadius: '8px',
-                    transform: 'rotate(-90deg)',
+                '& > h6.MuiTypography-subtitle2': {
+                    lineHeight: '17px',
+                    letterSpacing: '0.25px',
                 },
             },
-            '& > div.show-more-line': {
-                position: 'absolute',
-                top: '50%',
-                width: '100%',
-                borderBottom: `1px solid ${theme.palette.primary.gray}`,
-            },
+            // '& > div.show-more-line': {
+            //     position: 'absolute',
+            //     top: '50%',
+            //     width: '100%',
+            //     borderBottom: `1px solid ${theme.palette.primary.gray}`,
+            // },
         },
     },
     adBanner: {
