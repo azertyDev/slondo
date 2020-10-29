@@ -1,6 +1,6 @@
 import {createSlice} from '@reduxjs/toolkit'
-import {fetchCategories} from '../thunks/categoriesThunk'
 import {ICategories} from '@root/interfaces/ICategories'
+import {fetchCategories} from '../thunks/categoriesThunk'
 
 
 const initialState: ICategories = {
@@ -18,9 +18,9 @@ const advertisementSlice = createSlice({
             state.isFetch = true;
             state.error = null;
         })
-        builder.addCase(fetchCategories.fulfilled, (state, payload) => {
+        builder.addCase(fetchCategories.fulfilled, (state, action) => {
             state.isFetch = false;
-            state.categories = payload;
+            state.categories = action.payload;
         })
         builder.addCase(fetchCategories.rejected, (state, action) => {
             state.isFetch = false;

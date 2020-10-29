@@ -34,7 +34,7 @@ export const AuthRegForm = (props) => {
 
     const loginReg = (values) => {
         if (tabValue === 0) {
-            dispatch(fetchToken(values))
+            return dispatch(fetchToken(values))
         }
     };
 

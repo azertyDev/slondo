@@ -31,7 +31,7 @@ export const ShowAdLot = (props) => {
                             <Typography color="primary">Столовая мебель</Typography>
                         </BreadcrumbsComponent>
                     </div>
-                    <div className={classes.title}>
+                    <div>
                         <div>
                             <Typography variant="h4" color="initial">
                                 Объявление: Продаю Samsung A5 в отличном

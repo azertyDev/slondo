@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react'
 import Cookies from 'universal-cookie'
-import {withTranslation} from '@root/i18n'
+import {i18n, withTranslation} from '@root/i18n'
 import {Container, Typography} from '@material-ui/core'
 import TopHeaderContainer from "./topHeader/TopHeaderContainer"
 import BottomHeader from './bottomHeader/BottomHeader'
@@ -10,9 +10,11 @@ import {useDispatch, useSelector} from "react-redux"
 import {setIsAuth} from '@src/redux/slices/authRegSlice'
 import {RootState} from "@src/redux/rootReducer"
 import {CreateAdModalForm} from "@src/components/advertisement/createAdModalForm/CreateAdModalForm"
+import {fetchCategories} from '@src/redux/thunks/categoriesThunk'
 
 // styles
 import {useStyles} from './useStyles'
+import {ButtonComponent} from "@src/components/elements/button/Button";
 
 
 const Header = (props) => {
@@ -20,8 +22,9 @@ const Header = (props) => {
 
     const cookies = new Cookies();
     const isTokenExst = !!cookies.get('token');
+    const lang = i18n.language;
 
-    const {isAuth} = useSelector((store: RootState) => store.auth);
+    const {isAuth, error} = useSelector((store: RootState) => store.auth);
     const dispatch = useDispatch();
 
     const [isOpen, setIsOpen] = useState(false);
@@ -40,6 +43,14 @@ const Header = (props) => {
         setIsOpen(true);
         setIsCreateAd(true);
     };
+
+    useEffect(() => {
+        dispatch(fetchCategories(lang));
+    }, [lang]);
+
+    useEffect(() => {
+        isAuth && !error && handleCloseModal()
+    }, [isAuth, error]);
 
     useEffect(() => {
         dispatch(setIsAuth(isTokenExst));
@@ -65,7 +76,7 @@ const Header = (props) => {
                 className={classes.modalDialog}
             >
                 {
-                    isCreateAd
+                    isCreateAd && isAuth
                         ? (
                             <div>
                                 <CreateAdModalForm handleCloseModal={handleCloseModal}/>
@@ -74,7 +85,13 @@ const Header = (props) => {
                         : (
                             isAuth
                                 ? (
-                                    <Typography style={{color: '#fff'}} variant='h4'>Выйти из сайта?</Typography>
+                                    <div style={{width: '200px', height: '80px', backgroundColor: '#fff'}}>
+                                        <Typography variant='h5'>Выйти из сайта?</Typography>
+                                        <div style={{display: 'flex'}}>
+                                            <ButtonComponent>Отмена</ButtonComponent>
+                                            <ButtonComponent>Выйти</ButtonComponent>
+                                        </div>
+                                    </div>
                                 )
                                 : (
                                     <>
