@@ -5,7 +5,7 @@ import 'core-js/es/map'
 import React from 'react'
 import {compose} from "redux"
 import App from 'next/dist/pages/_app'
-import {appWithTranslation} from '../i18n'
+import {appWithTranslation} from '@root/i18n'
 import {ThemeProvider, CssBaseline} from '@material-ui/core'
 import theme from '@src/theme'
 import {wrapper} from '@src/redux/store'

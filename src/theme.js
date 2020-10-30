@@ -52,6 +52,9 @@ const theme = createMuiTheme({
         subtitle1: {
             lineHeight: 1.5,
         },
+        h4: {
+            fontSize: '2.25rem'
+        },
         allVariants: {
             color: '#4E4E4E',
         },

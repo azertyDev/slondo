@@ -84,9 +84,7 @@ export const useStyles = makeStyles(() => ({
         '& > button': {
             '& > div.MuiCardContent-root': {
                 padding: '10px 15px',
-                '& > h6.MuiTypography-subtitle1': {
-                    lineHeight: '15px',
-                },'& > h5.MuiTypography-h5': {
+                '& > h5.MuiTypography-h5': {
                     lineHeight: '29px',
                 },
                 '& > span.MuiTypography-caption': {
