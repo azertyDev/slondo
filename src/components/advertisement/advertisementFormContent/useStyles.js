@@ -103,19 +103,6 @@ export const useStyles = makeStyles((theme) => ({
         textDecoration: 'none',
         color: '#9b66d2',
     },
-    nextButtonBlock: {
-        margin: '50px 0',
-        [theme.breakpoints.down('md')]: {
-            marginTop: '30px',
-        },
-        [theme.breakpoints.down('sm')]: {
-            marginTop: '25px',
-        },
-    },
-    nextButton: {
-        padding: '10px 80px',
-        [theme.breakpoints.down('sm')]: {padding: '10px 50px'},
-    },
     required: {
         color: 'red ',
     },

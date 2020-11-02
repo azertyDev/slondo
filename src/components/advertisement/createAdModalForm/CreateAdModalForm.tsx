@@ -1,50 +1,51 @@
-import React, {useState} from "react";
+import React, {FC, useState} from "react";
 import {Formik, Form, FormikProps} from "formik";
 import {Router} from "@root/i18n";
 import {useDispatch, useSelector} from "react-redux";
-import {setAdOrLotCtgryAction} from '@src/redux/slices/createAdOrLotSlice';
-import {Menu, MenuItem, Typography} from "@material-ui/core";
+import {Typography} from "@material-ui/core";
 import {ButtonComponent} from "@src/components/elements/button/Button";
-import {adTypeAndCtgrySchema} from "@src/validation_schemas/validationSchemas";
+// import {adTypeAndCtgrySchema} from "@src/validationSchemas";
 import {RootState} from "@src/redux/rootReducer";
+import {CustomMenu} from "@src/components/elements/custom_menu/CustomMenu";
 import {useStyles} from './useStyles';
 
+
+export const adTypesList = [
+    {id: 1, name: 'Объявление'},
+    {id: 2, name: 'Торг'},
+    {id: 3, name: 'Продвинутый торг'},
+];
+
 const initValues = {
-    type: {
-        isLot: null,
+    adType: {
+        id: null,
         name: 'Выберите тип'
     },
-    category: {
+    adCategory: {
         id: null,
         name: 'Выберите категорию'
     }
 };
 
-export const CreateAdModalForm = (props) => {
+export const CreateAdModalForm: FC<any> = (props) => {
     const {handleCloseModal} = props;
 
     const dispatch = useDispatch();
     const categoriesList = useSelector(({categories}: RootState) => categories.list);
 
     const [typeAnchor, setTypeAnchor] = useState(null);
-    const [estateAnchor, setEstateAnchor] = useState(null);
+    const [categoryAnchor, setCategoryAnchor] = useState(null);
 
-    const handleMenuOpen = (anchor) => (e) => {
-        anchor(e.currentTarget)
+    const handleMenuOpen = (setAnchor) => (e) => {
+        setAnchor(e.currentTarget);
     };
 
-    const handleMenuClose = (anchor) => () => {
-        anchor(null);
+    const handleMenuClose = (setAnchor) => () => {
+        setAnchor(null);
     };
 
-    const handleClickMenuItem = (handleSetValue, values, newValue) => () => {
-        handleSetValue({...values, ...newValue});
-    };
     const submit = (values) => {
-        dispatch(setAdOrLotCtgryAction({
-            isLot: values.type.isLot,
-            ...values
-        }));
+        // dispatch(setAdvrtCtgryAction(values));
         Router.push('/create_advertisement');
         handleCloseModal();
     };
@@ -59,89 +60,56 @@ export const CreateAdModalForm = (props) => {
                      values,
                      setValues,
                      handleBlur
-                 }: FormikProps<any> & { errors: any }) => (
-                    <Form className={classes.root}>
-                        <div className='menu-btns'>
-                            <div>
-                                <Typography>{errors.type && touched.type ? errors.type.isLot : ''}</Typography>
-                                <ButtonComponent onClick={handleMenuOpen(setTypeAnchor)}>
-                                    {values.type.name}
-                                </ButtonComponent>
-                                <Menu
-                                    className={classes.menu}
-                                    anchorEl={typeAnchor}
-                                    open={Boolean(typeAnchor)}
-                                    onClose={handleMenuClose(setTypeAnchor)}
-                                >
-                                    <MenuItem
-                                        id='Объявление'
-                                        onClick={handleClickMenuItem(setValues, values, {
-                                            type: {
-                                                name: 'Объявление',
-                                                isLot: false
-                                            }
-                                        })}
+                 }: FormikProps<any> & { errors: any }) => {
+
+                    const handleClickMenuItem = (valueName, setAnchor) => (newValue) => () => {
+                        setValues({...values, [valueName]: newValue});
+                        handleMenuClose(setAnchor)();
+                    };
+
+                    return (
+                        <Form className={classes.root}>
+                            <div className='menu-btns'>
+                                <div>
+                                    <Typography>{errors.adType && touched.adType ? errors.adType.id : ''}</Typography>
+                                    <ButtonComponent onClick={handleMenuOpen(setTypeAnchor)}>
+                                        {values.adType.name}
+                                    </ButtonComponent>
+                                    <CustomMenu
+                                        items={adTypesList}
+                                        open={Boolean(typeAnchor)}
+                                        anchorEl={typeAnchor}
                                         onBlur={handleBlur}
-                                    >
-                                        <Typography>Объявление</Typography>
-                                    </MenuItem>
-                                    <MenuItem
-                                        id='Торг'
-                                        onClick={handleClickMenuItem(setValues, values, {
-                                            type: {
-                                                name: 'Торг',
-                                                isLot: true
-                                            }
-                                        })}
+                                        onClose={handleMenuClose(setTypeAnchor)}
+                                        onClick={handleClickMenuItem('adType', setTypeAnchor)}
+                                    />
+                                </div>
+                                <div>
+                                    <Typography>{errors.adCategory && touched.adCategory ? errors.adCategory.id : ''}</Typography>
+                                    <ButtonComponent onClick={handleMenuOpen(setCategoryAnchor)}>
+                                        {values.adCategory.name}
+                                    </ButtonComponent>
+                                    <CustomMenu
+                                        items={categoriesList}
+                                        anchorEl={categoryAnchor}
+                                        open={Boolean(categoryAnchor)}
                                         onBlur={handleBlur}
-                                    >
-                                        <Typography>Торг</Typography>
-                                    </MenuItem>
-                                </Menu>
+                                        onClose={handleMenuClose(setCategoryAnchor)}
+                                        onClick={handleClickMenuItem('adCategory', setCategoryAnchor)}
+                                    />
+                                </div>
                             </div>
-                            <div>
-                                <Typography>{errors.category && touched.category ? errors.category.id : ''}</Typography>
-                                <ButtonComponent onClick={handleMenuOpen(setEstateAnchor)}>
-                                    {values.category.name}
+                            <div className='form-btns'>
+                                <ButtonComponent onClick={handleCloseModal}>
+                                    <Typography>Отмена</Typography>
                                 </ButtonComponent>
-                                <Menu
-                                    anchorEl={estateAnchor}
-                                    open={Boolean(estateAnchor)}
-                                    onClose={handleMenuClose(setEstateAnchor)}
-                                >
-                                    {
-                                        categoriesList.map((category) => {
-                                            const {id, name} = category
-                                            return (
-                                                <MenuItem
-                                                    key={id}
-                                                    id={name}
-                                                    value={id}
-                                                    onBlur={handleBlur}
-                                                    onClick={handleClickMenuItem(
-                                                        setValues,
-                                                        values,
-                                                        {category}
-                                                    )}
-                                                >
-                                                    <Typography>{name}</Typography>
-                                                </MenuItem>
-                                            )
-                                        })
-                                    }
-                                </Menu>
+                                <ButtonComponent type='submit'>
+                                    <Typography>Продолжить</Typography>
+                                </ButtonComponent>
                             </div>
-                        </div>
-                        <div className='form-btns'>
-                            <ButtonComponent onClick={handleCloseModal}>
-                                <Typography>Отмена</Typography>
-                            </ButtonComponent>
-                            <ButtonComponent type='submit'>
-                                <Typography>Продолжить</Typography>
-                            </ButtonComponent>
-                        </div>
-                    </Form>
-                )
+                        </Form>
+                    )
+                }
             }
         </Formik>
     )

@@ -13,7 +13,6 @@ export const CategoryIcon = `/icons/kat_icon.svg`;
 export const SearchIcon = `/icons/sr_icon.svg`;
 export const SignIcon = `/icons/sign_icon.svg`;
 export const AddIcon = `/icons/add.svg`;
-export const CarIcon = `/icons/legkovoe_avto_optim_fin.svg`;
 export const Electronica = `/icons/elektronika_optim_fin.svg`;
 export const KrasotaZdorovye = `/icons/krasota_zdorovye_optim_fin.svg`;
 export const Mebel = `/icons/mebel_optim_fin.svg`;

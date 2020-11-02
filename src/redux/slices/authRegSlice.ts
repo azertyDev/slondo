@@ -1,21 +1,20 @@
-import {createAsyncThunk, createSlice} from '@reduxjs/toolkit'
+import {createAsyncThunk, createSlice} from '@reduxjs/toolkit';
 import {userAPI} from "@src/api/api";
 import Cookies from "universal-cookie";
-import {AuthInputTypes} from "@root/types/AuthInputTypes";
-import {AuthRegTypes} from "@root/types/AuthRegTypes";
+import {AuthInputs, AuthReg} from "@root/interfaces/Auth";
 
 
 const cookies = new Cookies();
 
-const initialState: AuthRegTypes = {
+const initialState: AuthReg = {
     isFetch: false,
     isAuth: false,
     error: null
 };
 
 // Async thunk
-export const fetchToken = createAsyncThunk<never, AuthInputTypes>(
-    'auth/fetchTokenByLogin',
+export const fetchToken = createAsyncThunk<never, AuthInputs>(
+    'authReg/fetchTokenByLogin',
     async ({phone, password}, {rejectWithValue}) => {
         try {
             const token = await userAPI.login(phone, password);

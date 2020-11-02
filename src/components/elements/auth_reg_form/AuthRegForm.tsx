@@ -1,25 +1,26 @@
-import React, {useState} from "react"
-import {useDispatch, useSelector} from "react-redux"
-import {Tabs, Typography} from "@material-ui/core"
-import {i18n, Link} from "@root/i18n"
-import {CustomTab} from "../custom_tab/CustomTab"
-import {CustomTabPanel} from "../custom_tab_panel/CustomTabPanel"
-import {Form, Formik} from "formik"
-import {CustomFormikField} from "../custom_formik_field/CustomFormikField"
-import {ButtonComponent} from "../button/Button"
-import {requiredValidate, phoneValidate} from '../../../components/validates'
-import {RootState} from "@src/redux/rootReducer"
-import {fetchToken} from "@src/redux/slices/authRegSlice"
-import {AuthInputTypes} from "@root/types/AuthInputTypes";
-import {useStyles} from './useStyles'
+import React, {FC, useState} from "react";
+import {useDispatch, useSelector} from "react-redux";
+import {Tabs, Typography} from "@material-ui/core";
+import {i18n, Link} from "@root/i18n";
+import {CustomTab} from "../custom_tab/CustomTab";
+import {CustomTabPanel} from "../custom_tab_panel/CustomTabPanel";
+import {Form, Formik} from "formik";
+import {CustomFormikField} from "../custom_formik_field/CustomFormikField";
+import {ButtonComponent} from "../button/Button";
+import {requiredValidate, phoneValidate} from '@src/components/validates';
+import {RootState} from "@src/redux/rootReducer";
+import {fetchToken} from "@src/redux/slices/authRegSlice";
+import {AuthInputs} from "@root/interfaces/Auth";
+import {WithT} from "i18next";
+import {useStyles} from './useStyles';
 
 
-const initialInputsVals: AuthInputTypes = {
+const initialInputsVals: AuthInputs = {
     phone: '998908080265',
     password: '123456789aaa'
 };
 
-export const AuthRegForm = (props) => {
+export const AuthRegForm: FC<WithT & { handleCloseModal: () => void }> = (props) => {
     const {t} = props;
     const {language} = i18n;
 
@@ -34,7 +35,7 @@ export const AuthRegForm = (props) => {
 
     const loginReg = (values) => {
         if (tabValue === 0) {
-            return dispatch(fetchToken(values))
+            dispatch(fetchToken(values))
         }
     };
 

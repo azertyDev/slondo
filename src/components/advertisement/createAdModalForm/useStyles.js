@@ -16,6 +16,5 @@ export const useStyles = makeStyles((theme) => ({
         '& > div.form-btns': {
             display: 'flex',
         }
-    },
-    menu: {}
+    }
 }))

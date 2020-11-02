@@ -1,13 +1,20 @@
-import Axios from 'axios'
+import Axios, {AxiosInstance} from 'axios';
+import Cookies from 'universal-cookie';
 
+const cookies = new Cookies();
+const {token} = cookies.get('token') || {token: ''};
 
 const instance = Axios.create({
     withCredentials: true,
     baseURL: 'http://54.205.72.116/api/'
 });
 
+const config = {
+    headers: {Authorization: `Bearer ${token}`}
+};
+
 export const userAPI = {
-    login(phone, password) {
+    login: (phone: string, password: string): Promise<AxiosInstance> => {
         const form = new FormData();
         form.set('phone', phone);
         form.set('password', password);
@@ -19,15 +26,15 @@ export const userAPI = {
                 throw err
             })
     },
-    getCategories(lang) {
+    getCategories: (lang: string): Promise<AxiosInstance> => {
         return instance.get(`categories/main?lang=${lang}`)
             .then(res => res.data)
             .catch(err => {
                 throw err
             })
     },
-    getAdOrLot(ctgryID, subCtgryID, isLot) {
-        return instance.get(`categories/main?lang=${isLot}`)
+    getAdDataForCreate: (ctgryID: number, subCtgryID: number, lang: string): Promise<AxiosInstance> => {
+        return instance.get(`subcategory?parent_id=${ctgryID}&lang=${lang}&child_id=${subCtgryID}`)
             .then(res => res.data)
             .catch(err => {
                 throw err

@@ -1,9 +1,9 @@
 import {createAsyncThunk, createSlice} from '@reduxjs/toolkit'
-import {ICategories} from '@root/interfaces/ICategories'
+import {Categories} from '@root/interfaces/Categories'
 import {userAPI} from "@src/api/api";
 
 
-const initialState: ICategories = {
+const initialState: Categories = {
     isFetch: false,
     error: null,
     list: [{
@@ -14,7 +14,7 @@ const initialState: ICategories = {
 };
 
 // Async thunk
-export const fetchCategories = createAsyncThunk<never, string>(
+export const fetchCategories = createAsyncThunk<any, string>(
     'categories/fetchCategories',
     async (lang, {rejectWithValue}) => {
         try {
