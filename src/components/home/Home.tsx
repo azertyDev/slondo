@@ -24,9 +24,9 @@ export const Home = (props) => {
                 <div className={classes.categorySlider}>
                     <CategoriesSlider t={t} />
                 </div>
-                <div>
+                {/* <div>
                     <InterestCategory />
-                </div>
+                </div> */}
                 <div className={classes.mainContent}>
                     <MainContentContainer t={t} />
                 </div>

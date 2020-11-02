@@ -1,6 +1,6 @@
 export interface ICategories {
     isFetch: boolean,
-    error?: never,
+    error?: any,
     list: [{
         id: number,
         name: string,
