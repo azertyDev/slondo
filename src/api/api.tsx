@@ -1,12 +1,13 @@
 import Axios, {AxiosInstance} from 'axios';
 import Cookies from 'universal-cookie';
 
+
 const cookies = new Cookies();
 const {token} = cookies.get('token') || {token: ''};
 
 const instance = Axios.create({
     withCredentials: true,
-    baseURL: 'http://54.205.72.116/api/'
+    baseURL: 'http://54.205.72.116/api/',
 });
 
 const config = {
@@ -18,13 +19,14 @@ export const userAPI = {
         const form = new FormData();
         form.set('phone', phone);
         form.set('password', password);
-        return instance.post(`login`, form, {
-            headers: {'Content-Type': 'multipart/form-data'}
-        })
-            .then(res => res.data)
-            .catch(err => {
-                throw err
+        return instance
+            .post(`login`, form, {
+                headers: {'Content-Type': 'multipart/form-data'},
             })
+            .then((res) => res.data)
+            .catch((err) => {
+                throw err;
+            });
     },
     getCategories: (lang: string): Promise<AxiosInstance> => {
         return instance.get(`categories/main?lang=${lang}`)
@@ -39,5 +41,12 @@ export const userAPI = {
             .catch(err => {
                 throw err
             })
-    }
-}
+    },
+    getCardData: (itemsPerPage: number, page: number, type: string): Promise<AxiosInstance> => {
+        return instance.get(`ads/all?itemsPerPage=${itemsPerPage}&page=${page}&type=${type}`)
+            .then((res) => res.data)
+            .catch((err) => {
+                throw err;
+            });
+    },
+};

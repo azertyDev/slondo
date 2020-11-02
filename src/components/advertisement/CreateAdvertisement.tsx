@@ -77,7 +77,6 @@ export const CreateAdvertisement: FC<AdvertisementProps> = () => {
                                      setValues,
                                      handleBlur,
                                  }) => {
-                                    console.log(values)
 
                                     const handleCheckboxChange = (event) => {
                                         setValues(event.target.checked)
