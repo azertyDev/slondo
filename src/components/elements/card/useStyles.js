@@ -1,4 +1,4 @@
-import { makeStyles } from '@material-ui/core/styles';
+import {makeStyles} from '@material-ui/core/styles';
 import theme from '../../../theme';
 
 export const useStyles = makeStyles(() => ({
@@ -42,6 +42,7 @@ export const useStyles = makeStyles(() => ({
                             justifyContent: 'center',
                             padding: '7px',
                             background: 'rgba(255, 255, 255, 0.8)',
+                            // zIndex: '1000',
                             '& > span > svg': {
                                 '& > defs > linearGradient > stop': {
                                     '&:first-child': {

@@ -1,15 +1,19 @@
 import React, {useState} from "react"
 import {AppBar, Container, Grid, Hidden, MenuItem, Select, Typography} from "@material-ui/core"
+import {ButtonComponent} from "@src/components/elements/button/Button"
+import {SearchForm} from "@src/components/elements/search_form/SearchForm"
+import {withScrollThreshold} from "@src/components/hoc/withScrollThreshold"
 import {Link} from '@root/i18n'
-import {ButtonComponent} from "../../elements/button/Button"
-import {SearchForm} from "../../elements/search_form/SearchForm"
+
+// icons
 import {
     Logo,
     CategoryIcon,
     SignIcon,
     AddIcon,
-} from '../../elements/icons'
-import {withScrollThreshold} from "../../hoc/withScrollThreshold"
+} from '@src/components/elements/icons'
+
+// styles
 import {useStyles} from "./useStyles"
 
 
@@ -92,7 +96,7 @@ const BottomHeader = (props) => {
                                             marginLeft: '10px',
                                             height: '20px',
                                         }}
-                                        alt='plus'
+                                        alt='add_advertisement'
                                     />
                                 </ButtonComponent>
                             </Grid>

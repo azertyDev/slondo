@@ -1,5 +1,4 @@
 import React, {useState} from 'react'
-import {Link} from '../../../../i18n'
 import {
     Grid,
     Hidden,
@@ -8,6 +7,11 @@ import {
     Toolbar,
     IconButton,
 } from '@material-ui/core'
+import {Localization} from '@src/components/elements/localization/Localization'
+import {LeftDrawer} from './drawer/Drawer'
+import {Link} from '@root/i18n'
+
+// icons
 import {
     Logo,
     Facebook,
@@ -16,14 +20,12 @@ import {
     Twitter,
     Whatsapp,
     Telegram,
-    HelpIcon,
-    StoreIcon,
-    BusinessIcon,
     PlIcon,
-    Avatar
-} from '../../elements/icons'
-import {Localization} from '../../elements/localization/Localization'
-import {LeftDrawer} from './drawer/Drawer'
+    UserAvatar
+} from '@src/components/elements/icons'
+import {QuestionIcon, StoreIcon, BusinessIcon, LocationIcon} from "@src/components/elements/icons";
+
+// styles
 import {useStyles} from './useStyles'
 
 
@@ -38,15 +40,9 @@ export const TopHeader = (props) => {
                 <Hidden smDown>
                     <Grid item md={4}>
                         <div className="location">
+                            <LocationIcon/>
                             <Typography variant="subtitle1">
-                                {t('location')}:
-                            </Typography>
-                            <img src={PlIcon} className="pl-icon" alt='location'/>
-                            <Typography
-                                variant="subtitle1"
-                                className="select-region"
-                            >
-                                {t('region')}
+                                {t('location')}
                             </Typography>
                         </div>
                     </Grid>
@@ -85,34 +81,41 @@ export const TopHeader = (props) => {
                         className="multiple"
                         md={4}
                     >
+
                         <Grid item>
                             <div className="multiple-content">
-                                <a href="#">
-                                    <img src={HelpIcon} alt='help'/>
-                                    <Typography variant="subtitle1">
-                                        {t('help')}
-                                    </Typography>
-                                </a>
+                                <Link href='#'>
+                                    <a>
+                                        <Typography variant="subtitle1">
+                                            {t('forBusiness')}
+                                        </Typography>
+                                        <BusinessIcon/>
+                                    </a>
+                                </Link>
                             </div>
                         </Grid>
                         <Grid item>
                             <div className="multiple-content">
-                                <a href="#">
-                                    <img src={StoreIcon} alt='store'/>
-                                    <Typography variant="subtitle1">
-                                        {t('shops')}
-                                    </Typography>
-                                </a>
+                                <Link href='#'>
+                                    <a>
+                                        <Typography variant="subtitle1">
+                                            {t('shops')}
+                                        </Typography>
+                                        <StoreIcon/>
+                                    </a>
+                                </Link>
                             </div>
                         </Grid>
                         <Grid item>
                             <div className="multiple-content">
-                                <a href="#">
-                                    <img src={BusinessIcon} alt='business'/>
-                                    <Typography variant="subtitle1">
-                                        {t('forBusiness')}
-                                    </Typography>
-                                </a>
+                                <Link href='#'>
+                                    <a>
+                                        <Typography variant="subtitle1">
+                                            {t('help')}
+                                        </Typography>
+                                        <QuestionIcon/>
+                                    </a>
+                                </Link>
                             </div>
                         </Grid>
                         <Grid item>
@@ -151,7 +154,7 @@ export const TopHeader = (props) => {
                             </Grid>
                             <Grid className={classes.avatarBlock}>
                                 <IconButton onClick={handleOpenModal}>
-                                    <img src={Avatar} alt='avatar'/>
+                                    <img src={UserAvatar} alt='avatar'/>
                                 </IconButton>
                             </Grid>
                         </Grid>

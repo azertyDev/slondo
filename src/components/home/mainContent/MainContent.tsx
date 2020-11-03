@@ -1,16 +1,17 @@
-import React, { useState } from 'react';
-import { Grid, Typography, Hidden, Tabs } from '@material-ui/core';
-import { CardItem } from '@src/components/elements/card/Card';
-import { ButtonComponent } from '@src/components/elements/button/Button';
-import { CustomTab } from '@src/components/elements/custom_tab/CustomTab';
-import { Banner } from '@src/components/elements/banner/Banner';
-import { CustomTabPanel } from '@src/components/elements/custom_tab_panel/CustomTabPanel';
+import React from 'react';
+import {Grid, Typography, Hidden, Tabs} from '@material-ui/core';
+import {CardItem} from '@src/components/elements/card/Card';
+import {ButtonComponent} from '@src/components/elements/button/Button';
+import {CustomTab} from '@src/components/elements/custom_tab/CustomTab';
+import {Banner} from '@src/components/elements/banner/Banner';
+import {CustomTabPanel} from '@src/components/elements/custom_tab_panel/CustomTabPanel';
+import {Link} from '@root/i18n';
 
 // Styles
-import { useStyles } from './useStyles';
+import {useStyles} from './useStyles';
 
 export const MainContent = (props) => {
-    const { t, tabValue, handleTabChange, handleShowMore, adCardData, lotCardData } = props;
+    const {t, tabValue, handleTabChange, handleShowMore, adCardData, lotCardData} = props;
 
     const classes = useStyles();
     return (
@@ -57,18 +58,23 @@ export const MainContent = (props) => {
                                         lg={3}
                                         item
                                     >
-                                        <CardItem
-                                            title={item.title}
-                                            cardType={t('ad')}
-                                            className="card-item"
-                                            alt={item.title}
-                                            image={item.images[0].url}
-                                            price={item.price}
-                                            location={item.location}
-                                            dateTime={item.created_at}
-                                            safe_deal={item.safe_deal}
-                                            currency={item.currency.name}
-                                        />
+                                        <Link href={`/advertisement/show/${item.id}`}>
+                                            <a>
+                                                <CardItem
+                                                    title={item.title}
+                                                    cardType={t('ad')}
+                                                    className="card-item"
+                                                    alt={item.title}
+                                                    image={item.images[0].url}
+                                                    price={item.price}
+                                                    location={item.location}
+                                                    dateTime={item.created_at}
+                                                    safe_deal={item.safe_deal}
+                                                    currency={item.currency.name}
+                                                />
+                                            </a>
+                                        </Link>
+
                                     </Grid>
                                 ))}
                             </Grid>
@@ -85,18 +91,22 @@ export const MainContent = (props) => {
                                         lg={3}
                                         item
                                     >
-                                        <CardItem
-                                            title={item.title}
-                                            cardType={t('lot')}
-                                            className="card-item"
-                                            alt={item.title}
-                                            image={item.images[0].url}
-                                            price={item.price}
-                                            location={item.location}
-                                            dateTime={item.created_at}
-                                            safe_deal={item.safe_deal}
-                                            currency={item.currency.name}
-                                        />
+                                        <Link href={`/advertisement/show/${item.id}`}>
+                                            <a>
+                                                <CardItem
+                                                    title={item.title}
+                                                    cardType={t('lot')}
+                                                    className="card-item"
+                                                    alt={item.title}
+                                                    image={item.images[0].url}
+                                                    price={item.price}
+                                                    location={item.location}
+                                                    dateTime={item.created_at}
+                                                    safe_deal={item.safe_deal}
+                                                    currency={item.currency.name}
+                                                />
+                                            </a>
+                                        </Link>
                                     </Grid>
                                 ))}
                             </Grid>
@@ -112,7 +122,7 @@ export const MainContent = (props) => {
                         className={classes.adBanner}
                     >
                         <Grid item>
-                            <Banner height="300px" />
+                            <Banner height="300px"/>
                         </Grid>
                     </Grid>
                 </Hidden>

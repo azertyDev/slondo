@@ -31,7 +31,7 @@ export const MainContentContainer = (props) => {
     const handleTabChange = (_, newValue) => {
         setTabValue(newValue);
     };
-    console.log(adCardData)
+
     const setCardData = async (state, setState, currentPage,type) => {
         try {
             setState({
@@ -40,7 +40,6 @@ export const MainContentContainer = (props) => {
             });
 
             const newData = await fetchCardData(ITEMS_PER_PAGE, currentPage, type);
-            console.log(newData)
 
             setState({
                 ...state,

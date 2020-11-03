@@ -5,13 +5,9 @@ export const useStyles = makeStyles((theme) => ({
         '& div.location': {
             display: 'flex',
             alignItems: 'center',
-        },
-        '& img.pl-icon': {
-            width: '32px',
-            height: '23px',
-        },
-        '& h6.select-region': {
-            textDecoration: 'underline',
+            '& > svg': {
+                marginRight: '12px'
+            },
         },
         '& div.social-icons > a': {
             display: 'flex',
@@ -24,13 +20,17 @@ export const useStyles = makeStyles((theme) => ({
         '& div.multiple-content': {
             display: 'flex',
             flexFlow: 'row wrap',
-            '& a': {
+            '& > a': {
                 display: 'flex',
                 textDecoration: 'none',
                 alignItems: 'center',
-                color: '#000',
-                '& > img': {
-                    marginRight: '5px',
+                '& > h6.MuiTypography-subtitle1': {
+                    color: 'rgba(49, 49, 49, 0.7)',
+                    letterSpacing: '0.4px'
+                },
+                '& > svg': {
+                    marginLeft: '5px',
+                    height: '20px',
                     [theme.breakpoints.down('lg')]: {
                         width: '16px',
                     },
@@ -38,10 +38,13 @@ export const useStyles = makeStyles((theme) => ({
                         width: '16px',
                     },
                 },
-            },
-            '& a:hover': {
-                color: '#AD66D5',
-                textDecoration: 'underline'
+                '&:hover': {
+                    color: '#AD66D5',
+                    textDecoration: 'underline',
+                    '& > svg > path': {
+                        fill: '#AD66D5',
+                    }
+                }
             },
             '& h6': {
                 [theme.breakpoints.down('lg')]: {
@@ -52,7 +55,7 @@ export const useStyles = makeStyles((theme) => ({
                 },
             },
         },
-        
+
         // ------------> adaptive <--------------- //
         '& div.top-header-logo > a > img': {
             height: '50px',

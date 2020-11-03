@@ -1,4 +1,4 @@
-import { makeStyles } from '@material-ui/core/styles';
+import {makeStyles} from '@material-ui/core/styles';
 
 export const useStyles = makeStyles((theme) => ({
     root: {
@@ -15,11 +15,17 @@ export const useStyles = makeStyles((theme) => ({
             '& div.card-header > div > h6.MuiTypography-subtitle2': {
                 backgroundColor: 'rgba(136, 202, 236, .65)',
             },
+            '& > div > div> a': {
+                textDecoration: 'none'
+            }
         },
         '& div.lots-wrapper': {
             '& div.card-header > div > h6.MuiTypography-subtitle2': {
                 backgroundColor: 'rgba(173, 102, 213, .65)',
             },
+            '& > div > div> a': {
+                textDecoration: 'none'
+            }
         },
     },
     showMoreContainer: {
