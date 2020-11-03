@@ -11,9 +11,9 @@ import {RootState} from "@src/redux/rootReducer";
 import {ButtonComponent} from "@src/components/elements/button/Button";
 import {PreviewAdvertisement} from './previewAdvertisement/PreviewAdvertisement';
 import {i18n} from '@root/i18n';
+import {MainLayout} from "@src/components/MainLayout";
 // styles
 import {useStyles} from './useStyles';
-import {MainLayout} from "@src/components/MainLayout";
 
 
 export const CreateAdvertisement: FC<AdvertisementProps> = () => {
