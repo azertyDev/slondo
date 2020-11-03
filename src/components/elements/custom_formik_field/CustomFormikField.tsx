@@ -1,6 +1,6 @@
-import React, {FC} from "react"
-import {TextField} from "@material-ui/core"
-import {Field} from "formik"
+import React, {FC} from "react";
+import {TextField} from "@material-ui/core";
+import {Field} from "formik";
 
 
 export const CustomFormikField: FC<any> = (props) => {
