@@ -61,16 +61,9 @@ export const MainContent = (props) => {
                                         <Link href={`/advertisement/show/${item.id}`}>
                                             <a>
                                                 <CardItem
-                                                    title={item.title}
+                                                    {...item}
                                                     cardType={t('ad')}
                                                     className="card-item"
-                                                    alt={item.title}
-                                                    image={item.images[0].url}
-                                                    price={item.price}
-                                                    location={item.location}
-                                                    dateTime={item.created_at}
-                                                    safe_deal={item.safe_deal}
-                                                    currency={item.currency.name}
                                                 />
                                             </a>
                                         </Link>
@@ -94,16 +87,9 @@ export const MainContent = (props) => {
                                         <Link href={`/advertisement/show/${item.id}`}>
                                             <a>
                                                 <CardItem
-                                                    title={item.title}
                                                     cardType={t('lot')}
                                                     className="card-item"
-                                                    alt={item.title}
-                                                    image={item.images[0].url}
-                                                    price={item.price}
-                                                    location={item.location}
-                                                    dateTime={item.created_at}
-                                                    safe_deal={item.safe_deal}
-                                                    currency={item.currency.name}
+                                                    {...item}
                                                 />
                                             </a>
                                         </Link>

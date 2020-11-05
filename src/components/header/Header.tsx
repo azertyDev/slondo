@@ -63,7 +63,7 @@ const Header = (props) => {
 
     const classes = useStyles();
     return (
-        <header className={classes.root}>
+        <header className={classes.root} id='back-to-top-anchor'>
             <Container maxWidth="lg">
                 <TopHeaderContainer t={t} handleOpenModal={handleOpenModal}/>
                 <div className={classes.bottomHeader}>

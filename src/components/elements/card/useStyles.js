@@ -22,29 +22,58 @@ export const useStyles = makeStyles(() => ({
                 position: 'absolute',
                 top: '10px',
                 flexWrap: 'wrap',
-                '& > div': {
+                '& > div:first-child': {
                     width: '100%',
                     display: 'flex',
                     alignItems: 'center',
                     padding: '0 10px',
-                    '&:first-child': {
-                        justifyContent: 'space-between',
-                        '& > h6.MuiTypography-subtitle2': {
-                            borderRadius: '3px',
-                            padding: '0 5px',
-                            lineHeight: '1.3',
-                            letterSpacing: '0.4px',
-                            color: '#fff',
+                    justifyContent: 'space-between',
+                    '& > h6.MuiTypography-subtitle2': {
+                        borderRadius: '3px',
+                        padding: '0 5px',
+                        lineHeight: '1.3',
+                        letterSpacing: '0.4px',
+                        color: '#fff',
+                    },
+                    '& > button': {
+                        padding: '0',
+                        '& > span > svg': {
+                            '& > path:nth-child(1)': {
+                                fillOpacity: '0.8'
+                            },
+                            '& > defs:first-child > linearGradient > stop': {
+                                '&:first-child': {
+                                    stopColor: '#675EAA',
+                                },
+                                '&:last-child': {
+                                    stopColor: '#AD66D5',
+                                },
+                            },
+                            '& > defs:last-child > linearGradient > stop': {
+                                '&:first-child': {
+                                    stopColor: '#fff',
+                                },
+                                '&:last-child': {
+                                    stopColor: '#fff',
+                                },
+                            },
                         },
-                        '& > button': {
-                            display: 'flex',
-                            alignItems: 'center',
-                            justifyContent: 'center',
-                            padding: '7px',
-                            background: 'rgba(255, 255, 255, 0.8)',
-                            // zIndex: '1000',
+                        '&:hover': {
                             '& > span > svg': {
-                                '& > defs > linearGradient > stop': {
+                                transform: 'scale(1.1)',
+                                transitionDuration: '0.5s',
+                                '& > path:nth-child(2)': {
+                                    fillOpacity: '0.8',
+                                },
+                                '& > defs.def1 > linearGradient > stop': {
+                                    '&:first-child': {
+                                        stopColor: '#fff',
+                                    },
+                                    '&:last-child': {
+                                        stopColor: '#fff',
+                                    },
+                                },
+                                '& > defs:last-child > linearGradient > stop': {
                                     '&:first-child': {
                                         stopColor: '#675EAA',
                                     },

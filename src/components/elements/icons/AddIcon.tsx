@@ -2,11 +2,11 @@ import React from 'react'
 
 export const AddIcon = () => {
     return (
-        <svg width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <circle cx="12.5" cy="12.5" r="8.33883" transform="rotate(-45 12.5 12.5)" stroke="white" />
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path
-                d="M13.0962 7.17503L13.0962 11.9039L17.8251 11.9039V13.0961L13.0962 13.0961L13.0962 17.825L11.9041 17.825L11.9041 13.0961L7.17518 13.0961V11.9039L11.9041 11.9039L11.9041 7.17503L13.0962 7.17503Z"
-                fill="white" />
+                d="M13.9844 7.98438H7.98438V13.9844H6.01562V7.98438H0.015625V6.01562H6.01562V0.015625H7.98438V6.01562H13.9844V7.98438Z"
+                fill="white"/>
         </svg>
+
     )
 }
