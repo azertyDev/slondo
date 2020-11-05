@@ -1,11 +1,11 @@
-import { makeStyles } from '@material-ui/core/styles';
+import {makeStyles} from '@material-ui/core/styles';
 import theme from '../../../theme';
 
 export const useStyles = makeStyles(() => ({
     root: {
         position: 'relative',
         borderRadius: '7px',
-        filter: 'drop-shadow(0px 2px 8px rgba(132, 92, 171, 0.2))',
+        filter: 'drop-shadow(0px 2px 4px rgba(132, 92, 171, 0.2))',
         '&:hover': {
             boxShadow: 'rgba(0, 0, 0, 0.08) 0px 8px 16px 0px',
             cursor: 'pointer',
@@ -42,6 +42,7 @@ export const useStyles = makeStyles(() => ({
                             justifyContent: 'center',
                             padding: '7px',
                             background: 'rgba(255, 255, 255, 0.8)',
+                            // zIndex: '1000',
                             '& > span > svg': {
                                 '& > defs > linearGradient > stop': {
                                     '&:first-child': {
