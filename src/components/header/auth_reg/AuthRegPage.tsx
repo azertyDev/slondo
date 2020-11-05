@@ -10,9 +10,9 @@ import {
 import {AuthRegForm} from "../../elements/auth_reg_form/AuthRegForm"
 import {CloseIcon} from "@src/components/elements/icons"
 import {AuthRegSm} from "@src/components/header/auth_reg/auth_reg_sm/AutRegSm";
-
 // Styles
 import {useStyles} from './useStyles'
+
 
 export const AuthRegPage = (props) => {
     const {t, handleCloseModal} = props;

@@ -1,5 +1,6 @@
 import {makeStyles} from '@material-ui/core/styles'
 
+
 export const useStyles = makeStyles((theme) => ({
     root: {
         '& input.MuiOutlinedInput-input, div.MuiOutlinedInput-input': {
@@ -28,9 +29,6 @@ export const useStyles = makeStyles((theme) => ({
             margin: '30px 0',
             textAlign: 'center'
         },
-    },
-    advertisementSettings: {
-        margin: '30px 0',
     },
     advertisementType: {
         display: 'flex',

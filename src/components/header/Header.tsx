@@ -40,7 +40,7 @@ const Header = (props) => {
 
     const handleCreateAd = () => {
         isAuth
-            ? Router.push('/create_advertisement')
+            ? Router.push('/advertisement/create')
             : setIsOpen(true);
         setIsCreateAd(true);
     };
@@ -50,12 +50,12 @@ const Header = (props) => {
     }, [lang]);
 
     useEffect(() => {
-        isCreateAd && isAuth && Router.push('/create_advertisement');
+        isCreateAd && isAuth && Router.push('/advertisement/create');
     }, [isCreateAd, isAuth]);
 
     useEffect(() => {
-        isAuth && !error && handleCloseModal()
-    }, [isAuth, error, isCreateAd]);
+        isAuth && !error && handleCloseModal();
+    }, [isAuth, error]);
 
     useEffect(() => {
         dispatch(setIsAuthAction(isTokenExst));
