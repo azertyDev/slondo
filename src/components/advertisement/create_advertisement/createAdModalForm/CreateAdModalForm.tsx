@@ -52,7 +52,7 @@ export const CreateAdModalForm: FC<any> = (props) => {
 
     const classes = useStyles();
     return (
-        <Formik initialValues={initValues} validationSchema={adTypeAndCtgrySchema} onSubmit={submit}>
+        <Formik initialValues={initValues} onSubmit={submit}>
             {
                 ({
                      errors,
@@ -62,7 +62,7 @@ export const CreateAdModalForm: FC<any> = (props) => {
                      handleBlur
                  }: FormikProps<any> & { errors: any }) => {
 
-                    const handleClickMenuItem = (valueName, setAnchor) => (newValue) => () => {
+                    const handleClickMenuItem = (valueName) => (newValue, setAnchor) => () => {
                         setValues({...values, [valueName]: newValue});
                         handleMenuClose(setAnchor)();
                     };
@@ -76,12 +76,10 @@ export const CreateAdModalForm: FC<any> = (props) => {
                                         {values.adType.name}
                                     </ButtonComponent>
                                     <CustomMenu
+                                        valueName='adType'
                                         items={adTypesList}
-                                        open={Boolean(typeAnchor)}
-                                        anchorEl={typeAnchor}
                                         onBlur={handleBlur}
-                                        onClose={handleMenuClose(setTypeAnchor)}
-                                        onClick={handleClickMenuItem('adType', setTypeAnchor)}
+                                        onClick={handleClickMenuItem(setTypeAnchor)}
                                     />
                                 </div>
                                 <div>
@@ -90,12 +88,10 @@ export const CreateAdModalForm: FC<any> = (props) => {
                                         {values.adCategory.name}
                                     </ButtonComponent>
                                     <CustomMenu
+                                        valueName='adCategory'
                                         items={categoriesList}
-                                        anchorEl={categoryAnchor}
-                                        open={Boolean(categoryAnchor)}
                                         onBlur={handleBlur}
-                                        onClose={handleMenuClose(setCategoryAnchor)}
-                                        onClick={handleClickMenuItem('adCategory', setCategoryAnchor)}
+                                        onClick={handleClickMenuItem(setCategoryAnchor)}
                                     />
                                 </div>
                             </div>

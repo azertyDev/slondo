@@ -40,7 +40,7 @@ export const CustomMenu: FC<CustomMenuProps> = (props) => {
                     items.map((item, i) => (
                         <MenuItem
                             key={i}
-                            id={item.id}
+                            id={item.name}
                             onBlur={onBlur}
                             onClick={onClick(item, setAnchor)}
                         >

@@ -10,15 +10,15 @@ import {
 //icons
 import {Help, Search} from '@material-ui/icons';
 import {CustomMenu} from "@src/components/elements/custom_menu/CustomMenu";
-import {adTypesList} from "@src/components/advertisement/createAdModalForm/CreateAdModalForm";
+import {adTypesList} from "@src/components/advertisement/create_advertisement/createAdModalForm/CreateAdModalForm";
 // styles
 import {useStyles} from './useStyles';
 import {CustomFormikField} from "@src/components/elements/custom_formik_field/CustomFormikField";
 import {CustomFormikTextarea} from "@src/components/elements/custom_formik_textarea/CustomFormikTextarea";
-import {AdvertisementCreateData} from "@src/components/advertisement/advertisementFormContent/AdvertisementCreateData";
+import {AdvrtSettingsBlock} from "@src/components/advertisement/create_advertisement/advrtForm/advrt_settings_block/AdvrtSettingsBlock";
 
 
-export const AdvertisementFormContent: FC<any> = (props) => {
+export const AdvrtForm: FC<any> = (props) => {
 
     const {
         store,
@@ -111,19 +111,12 @@ export const AdvertisementFormContent: FC<any> = (props) => {
                         />
                     </Grid>
                 </Grid>
-                <Grid item container xs={12} spacing={1} className={classes.advertisementSettings}>
-                    <Grid item xs={12}>
-                        <Typography variant="h5">
-                            <strong>Настройки объявления</strong>
-                        </Typography>
-                    </Grid>
-                    <AdvertisementCreateData
-                        values={values}
-                        data={store.createAdvrt.data}
-                        onBlur={handleBlur}
-                        handleClickMenuItem={handleClickMenuItem}
-                    />
-                </Grid>
+                <AdvrtSettingsBlock
+                    values={values}
+                    data={store.createAdvrt.data}
+                    onBlur={handleBlur}
+                    handleClickMenuItem={handleClickMenuItem}
+                />
                 <Grid
                     container
                     item

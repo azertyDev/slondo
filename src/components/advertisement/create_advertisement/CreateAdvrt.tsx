@@ -1,6 +1,6 @@
 import React, {FC, useState} from 'react';
 import {Grid, Hidden, Container, Typography} from '@material-ui/core';
-import {AdvertisementFormContent} from './advertisementFormContent/AdvertisementFormContent';
+import {AdvrtForm} from './advrtForm/AdvrtForm';
 import {SuccessAdvertisement} from './successAdvertisement/SuccessAdvertisement';
 import {AdvertisementProps} from "@root/interfaces/Advertisement";
 import {createAdvrtSchema} from "@src/validationSchemas";
@@ -16,7 +16,7 @@ import {MainLayout} from "@src/components/MainLayout";
 import {useStyles} from './useStyles';
 
 
-export const CreateAdvertisement: FC<AdvertisementProps> = () => {
+export const CreateAdvrt: FC<AdvertisementProps> = () => {
 
     const store = useSelector((store: RootState) => store);
 
@@ -77,15 +77,15 @@ export const CreateAdvertisement: FC<AdvertisementProps> = () => {
                                      setValues,
                                      handleBlur,
                                  }) => {
-
-                                    const handleCheckboxChange = (event) => {
-                                        setValues(event.target.checked)
+                                    // console.log(values)
+                                    const handleCheckboxChange = () => {
+                                        console.log('checkbox');
                                     };
 
                                     const handleClickMenuItem = (valueName) => (newValue, setAnchor) => () => {
-                                        setValues({...values, [valueName]: newValue});
-
                                         setAnchor(null);
+
+                                        setValues({...values, [valueName]: newValue});
 
                                         // Fetch data when sub category chosen
                                         if (valueName === 'adSubCategory') {
@@ -94,7 +94,24 @@ export const CreateAdvertisement: FC<AdvertisementProps> = () => {
                                                 ctgryID: values.adCategory.id,
                                                 subCtgryID: newValue.id,
                                             }))
+                                            setValues({
+                                                ...initVals,
+                                                adType: values.adType,
+                                                adCategory: values.adCategory,
+                                                [valueName]: newValue
+                                            });
                                         }
+
+                                        // Reset sub props in values
+                                        Object.keys(newValue).map(key => {
+                                            if (values[key]) {
+                                                setValues({
+                                                    ...values,
+                                                    [valueName]: newValue,
+                                                    [key]: {id: null, name: 'Не выбрано', ...newValue[key]}
+                                                })
+                                            }
+                                        });
                                     };
 
                                     const handleClickMenuCategory = (newValue, setAnchor) => () => {
@@ -118,7 +135,7 @@ export const CreateAdvertisement: FC<AdvertisementProps> = () => {
                                                     : (
                                                         isPreview
                                                             ? <PreviewAdvertisement/>
-                                                            : <AdvertisementFormContent
+                                                            : <AdvrtForm
                                                                 store={store}
                                                                 errors={errors}
                                                                 touched={touched}

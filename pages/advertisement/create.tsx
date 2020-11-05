@@ -1,8 +1,8 @@
 import React from 'react'
-import {CreateAdvertisement} from '@src/components/advertisement/CreateAdvertisement'
+import {CreateAdvrt} from '@src/components/advertisement/create_advertisement/CreateAdvrt'
 
 const Create = (props) => {
-    return <CreateAdvertisement {...props} />
+    return <CreateAdvrt {...props} />
 }
 
 Create.getInitialProps = async () => ({
