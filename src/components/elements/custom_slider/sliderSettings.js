@@ -18,6 +18,7 @@ function PrevArrow(props) {
 }
 
 export const settings = {
+    adaptiveHeight: true,
     swipeToSlide: true,
     nextArrow: <NextArrow/>,
     prevArrow: <PrevArrow/>,

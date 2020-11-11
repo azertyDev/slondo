@@ -14,20 +14,12 @@ import {Link} from '@root/i18n'
 // icons
 import {
     Logo,
-    Facebook,
-    Instagram,
-    Youtube,
-    Twitter,
-    Whatsapp,
-    Telegram,
-    PlIcon,
     UserAvatar
 } from '@src/components/elements/icons'
-import {QuestionIcon, StoreIcon, BusinessIcon, LocationIcon} from "@src/components/elements/icons";
+import {QuestionIcon, LocationIcon, BonusIcon} from "@src/components/elements/icons";
 
 // styles
 import {useStyles} from './useStyles'
-
 
 export const TopHeader = (props) => {
     const {t, handleOpenModal} = props;
@@ -38,7 +30,7 @@ export const TopHeader = (props) => {
         <div className={classes.root}>
             <Grid container justify="space-between" alignItems="center">
                 <Hidden smDown>
-                    <Grid item md={4}>
+                    <Grid item md={6}>
                         <div className="location">
                             <LocationIcon/>
                             <Typography variant="subtitle1">
@@ -49,59 +41,19 @@ export const TopHeader = (props) => {
                     <Grid
                         item
                         container
-                        justify="center"
                         alignItems="center"
-                        md={4}
-                        className="social-icons"
-                    >
-                        <a href="#">
-                            <img src={Facebook} alt='facebook'/>
-                        </a>
-                        <a href="#">
-                            <img src={Instagram} alt='instagram'/>
-                        </a>
-                        <a href="#">
-                            <img src={Youtube} alt='youtube'/>
-                        </a>
-                        <a href="#">
-                            <img src={Twitter} alt='twitter'/>
-                        </a>
-                        <a href="#">
-                            <img src={Whatsapp} alt='whatsapp'/>
-                        </a>
-                        <a href="#">
-                            <img src={Telegram} alt='telegram'/>
-                        </a>
-                    </Grid>
-                    <Grid
-                        item
-                        container
-                        justify="space-between"
-                        alignItems="center"
+                        justify='flex-end'
                         className="multiple"
-                        md={4}
+                        md={6}
                     >
-
                         <Grid item>
                             <div className="multiple-content">
                                 <Link href='#'>
                                     <a>
                                         <Typography variant="subtitle1">
-                                            {t('forBusiness')}
+                                            {t('bonus')}
                                         </Typography>
-                                        <BusinessIcon/>
-                                    </a>
-                                </Link>
-                            </div>
-                        </Grid>
-                        <Grid item>
-                            <div className="multiple-content">
-                                <Link href='#'>
-                                    <a>
-                                        <Typography variant="subtitle1">
-                                            {t('shops')}
-                                        </Typography>
-                                        <StoreIcon/>
+                                        <BonusIcon/>
                                     </a>
                                 </Link>
                             </div>

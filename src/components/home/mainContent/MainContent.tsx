@@ -12,6 +12,7 @@ import {useStyles} from './useStyles';
 
 export const MainContent = (props) => {
     const {t, tabValue, handleTabChange, handleShowMore, adCardData, lotCardData} = props;
+    console.log(adCardData.cardData.total > adCardData.cardData.data.length);
 
     const classes = useStyles();
     return (

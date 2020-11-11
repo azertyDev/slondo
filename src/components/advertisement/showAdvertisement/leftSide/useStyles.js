@@ -1,14 +1,12 @@
-import { makeStyles } from '@material-ui/core/styles';
+import {makeStyles} from '@material-ui/core/styles';
 
 export const useStyles = makeStyles((theme) => ({
     root: {
         '& div.ad-slider': {
-            borderBottom: '1px solid #ccc',
-            paddingBottom: '20px',
             '& > div:last-child': {
                 display: 'flex',
                 justifyContent: 'flex-end',
-                marginTop: '20px',
+                flexDirection: 'column',
                 '& > a': {
                     display: 'flex',
                     textDecoration: 'none',
@@ -25,18 +23,48 @@ export const useStyles = makeStyles((theme) => ({
         '& a': {
             textDecoration: 'none',
         },
+        '& div.ad-info': {
+            display: 'flex',
+            justifyContent: 'space-around',
+            padding: '13px 0px',
+            background: '#F2F2F2',
+            borderRadius: '5px',
+            '& > h6.MuiTypography-subtitle1:first-child': {
+                '& > span': {
+                    color: '#2F80ED'
+                }
+            },
+            '& > h6.MuiTypography-subtitle1:last-child': {
+                display: 'flex',
+                alignItems: "center",
+                '& > svg': {
+                    marginLeft: '12px'
+                }
+            }
+        },
         '& div.description': {
-            borderBottom: '1px solid #ccc',
-            padding: '20px 0',
-            '& div': {
+            '& > div:first-child': {
+                '& > h6.MuiTypography-subtitle1': {
+                    display: 'flex',
+                    alignItems: 'center',
+                    '&:first-child': {
+                        fontWeight: '600'
+                    },
+                    '&:last-child': {
+                        marginTop: '10px',
+                        '& > svg': {
+                            width: '48px',
+                            height: '48px',
+                            marginRight: '10px'
+                        }
+                    }
+                },
+            },
+            '& > div:last-child': {
                 display: 'flex',
                 flexDirection: 'column',
-            },
-            '& > div:first-child': {
-                display: 'flex',
-                flexDirection: 'row',
                 justifyContent: 'space-between',
-                marginBottom: '10px',
+                marginTop: '30px',
                 '& > div': {
                     '& > h6.MuiTypography-subtitle1': {
                         color: '#838383',
@@ -51,14 +79,6 @@ export const useStyles = makeStyles((theme) => ({
         '& div.ad-parameters': {
             borderBottom: '1px solid #ccc',
             padding: '20px 0',
-            '& > div:first-child': {
-                marginBottom: '20px',
-                borderBottom: '1px solid #ccc',
-                paddingBottom: '20px',
-            },
-            '& > div > div:first-child h6.MuiTypography-subtitle1': {
-                color: '#838383',
-            },
             '& > div': {
                 display: 'flex',
                 margin: '0 0 10px 0',

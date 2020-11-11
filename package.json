@@ -17,11 +17,10 @@
     "next-i18next": "^6.0.3",
     "next-redux-wrapper": "^6.0.2",
     "react": "16.13.1",
+    "react-countdown": "^2.3.1",
     "react-dom": "16.13.1",
-    "react-dropzone": "^11.2.3",
     "react-redux": "^7.2.1",
     "react-slick": "^0.27.11",
-    "react-swipeable-views": "^0.13.9",
     "universal-cookie": "^4.0.4",
     "yup": "^0.29.3"
   },

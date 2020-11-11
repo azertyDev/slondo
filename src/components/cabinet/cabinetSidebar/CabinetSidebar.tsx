@@ -26,7 +26,7 @@ export const CabinetSidebar = (props) => {
                     </div>
                     <div>
                         <div><Typography variant="subtitle1" color="initial">9</Typography></div>
-                        <div><Typography variant="subtitle1">{t('cabinet:subscrtiptions')}</Typography></div>
+                        <div><Typography variant="subtitle1">{t('cabinet:subscriptions')}</Typography></div>
                     </div>
                 </div>
                 <ActionsMenu {...props}/>

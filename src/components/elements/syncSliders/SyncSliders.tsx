@@ -1,14 +1,10 @@
 import React, {useEffect, useRef, useState} from 'react';
 import {CustomSlider} from '../custom_slider/CustomSlider';
-import {FullscreenIcon} from '../icons';
-import Button from '@material-ui/core/Button';
-import { NextImgTag } from "@src/components/elements/next_img_tag/NextImgTag";
 
 // styles
 import {useStyles} from './useStyles';
 
 export const SyncSliders = (props) => {
-    const {imgs} = props;
     const [slidersNav, setSlidersNav] = useState({nav1: null, nav2: null});
     const slider1 = useRef();
     const slider2 = useRef();
@@ -24,21 +20,12 @@ export const SyncSliders = (props) => {
     return (
         <div className={classes.root}>
             <div className={classes.firstSlider}>
-                <div className={classes.fullscreenIcon}>
-                    <Button
-                        variant="text"
-                        color="default"
-                    >
-                        <img src={FullscreenIcon} alt="fullscreen-icon"/>
-                    </Button>
-                </div>
                 <CustomSlider asNavFor={slidersNav.nav2} ref={slider1}>
-                    {imgs.map(({url, alt}, i) => (
-                        <div key={i}>
-                            <NextImgTag src={url} alt={alt}/>
-                        </div>
+                    {props.imgs.map(({id, url, alt}, i) => (
+                        <img src={url} alt={alt} key={i}/>
                     ))}
                 </CustomSlider>
+
             </div>
             <div className={classes.secondSlider}>
                 <CustomSlider
@@ -47,10 +34,8 @@ export const SyncSliders = (props) => {
                     slidesToShow={7}
                     focusOnSelect={true}
                 >
-                    {imgs.map(({url, alt}, i) => (
-                        <div key={i}>
-                            <NextImgTag src={url} alt={alt}/>
-                        </div>
+                    {props.imgs.map(({url, alt}, i) => (
+                        <img src={url} alt={alt} key={i}/>
                     ))}
                 </CustomSlider>
             </div>

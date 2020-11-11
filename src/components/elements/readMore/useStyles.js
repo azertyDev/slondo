@@ -2,7 +2,7 @@ import {makeStyles} from "@material-ui/core";
 
 export const useStyles = makeStyles((theme) => ({
     root: {
-        width: '30%',
+        width: '80%',
         '& button.show-more-button': {
             background: 'none',
             width: 'auto',

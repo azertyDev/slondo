@@ -8,14 +8,13 @@ import {Link} from '@root/i18n'
 // icons
 import {
     Logo,
-    CategoryIcon,
-    SignIcon,
-    AddIcon,
 } from '@src/components/elements/icons'
+import {AddIcon} from "@src/components/elements/icons/AddIcon";
+import {CategorySortIcon} from "@src/components/elements/icons/CategorySortIcon";
+import {SignIcon} from "@src/components/elements/icons/SignIcon";
 
 // styles
 import {useStyles} from "./useStyles"
-
 
 const BottomHeader = (props) => {
     const {isScrollBreak, handleOpenModal, handleCreateAd, isAuth, t} = props;
@@ -43,12 +42,9 @@ const BottomHeader = (props) => {
                                     </Link>
                                 </Grid>
                                 <Grid item container md={5} lg={6} justify="center" className="category-menu">
-                                    <ButtonComponent>
+                                    <ButtonComponent color='primary' className='bottom-category-button header-button'>
                                         <Typography variant="subtitle2">{t('categories')}</Typography>
-                                        <img
-                                            src={CategoryIcon}
-                                            alt="Category icon"
-                                        />
+                                        <CategorySortIcon/>
                                     </ButtonComponent>
                                 </Grid>
                             </Grid>
@@ -86,25 +82,21 @@ const BottomHeader = (props) => {
                                 </Grid>
                             </Grid>
                             <Grid item md={2}>
-                                <ButtonComponent onClick={handleCreateAd}>
+                                <ButtonComponent
+                                    onClick={handleCreateAd}
+                                    color='primary'
+                                    className='create-ad-button header-button'>
                                     <Typography variant="subtitle2">
                                         {t('common:createAd')}
                                     </Typography>
-                                    <img
-                                        src={AddIcon}
-                                        style={{
-                                            marginLeft: '10px',
-                                            height: '20px',
-                                        }}
-                                        alt='add_advertisement'
-                                    />
+                                    <AddIcon/>
                                 </ButtonComponent>
                             </Grid>
                             <Grid item container alignItems="center" xs={1}>
-                                <ButtonComponent className='bottom-sign-button' onClick={handleOpenModal}>
+                                <ButtonComponent className='bottom-sign-button header-button' onClick={handleOpenModal}>
                                     <Typography
                                         variant="subtitle2">{t(`common:${isAuth ? 'signOut' : 'signIn'}`)}</Typography>
-                                    <img src={SignIcon} alt="Sign in"/>
+                                    <SignIcon/>
                                 </ButtonComponent>
                             </Grid>
                         </Grid>

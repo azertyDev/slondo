@@ -1,4 +1,4 @@
-import { makeStyles } from '@material-ui/core/styles';
+import {makeStyles} from '@material-ui/core/styles';
 
 export const useStyles = makeStyles((theme) => ({
     root: {
@@ -7,39 +7,43 @@ export const useStyles = makeStyles((theme) => ({
             justifyContent: 'center',
             flexDirection: 'column',
             marginBottom: '30px',
-            '& > div': {
+            '& div.lot-participants-block': {
                 display: 'flex',
-                justifyContent: 'center',
-            },
-
-            '& > div:nth-child(2)': {
-                display: 'flex',
-                justifyContent: 'center',
-                paddingBottom: '20px',
-                borderBottom: '1px solid #ccc',
-                marginBottom: '20px',
-                '& div': {
-                    width: '80%',
-                    height: '60px',
-                    backgroundColor: '#ccc',
-                },
-            },
-            '& div.lot-participants': {
                 flexDirection: 'column',
-                marginBottom: '20px',
-                paddingBottom: '20px',
-                borderBottom: '1px solid #ccc',
-                '& > div': {
-                    display: 'flex',
-                    justifyContent: 'space-between',
+                '& > h6.MuiTypography-subtitle1': {
+                    padding: '0 15px 7px 15px',
+                    fontWeight: '600',
+                },
+                '& > div.participants': {
+                    flexDirection: 'column',
+                    marginBottom: '8px',
+                    borderTop: '1px solid rgba(103, 94, 170, 0.5)',
+                    borderBottom: '1px solid rgba(103, 94, 170, 0.5)',
+                    padding: '15px',
                     '& > h6.MuiTypography-subtitle1': {
-                        width: '50%',
+                        marginBottom: '6px',
                     },
-                    '& > h6.MuiTypography-subtitle1:last-child': {
-                        textAlign: 'end',
-                    },
-                    '& > button': {
-                        marginTop: '20px',
+                    '& > div': {
+                        display: 'flex',
+                        justifyContent: 'space-between',
+                        '&:not(:last-child)': {
+                            marginBottom: '16px',
+                        },
+                        '& > h6.MuiTypography-subtitle1': {
+                            width: '50%',
+                        },
+                        '& > h6.MuiTypography-subtitle1:last-child': {
+                            textAlign: 'end',
+                            fontWeight: '600',
+                            color: '#666'
+                        },
+                        '& > button': {
+                            marginTop: '20px',
+                        },
+                        '& span': {
+                            color: '#AD66D5'
+                        },
+
                     },
                 },
             },
@@ -95,4 +99,53 @@ export const useStyles = makeStyles((theme) => ({
             },
         },
     },
+
+    lotTimer: {
+        display: 'flex',
+        justifyContent: "center",
+        flexDirection: "column",
+        padding: '15px 30px 8px 30px',
+        boxShadow: '0px 0px 8px rgba(103, 94, 170, 0.25)',
+        borderRadius: '3px',
+        '& > h6.MuiTypography-subtitle1': {
+            textAlign: 'center',
+            fontSize: '1.125rem',
+            fontWeight: '600',
+            lineHeight: 1
+        },
+        '& > div': {
+            display: 'flex',
+            justifyContent: "space-between",
+            marginTop: '7px',
+            '& > span': {
+                display: 'inline-block',
+                fontSize: '24px',
+                fontWeight: '600',
+                lineHeight: 'normal',
+            },
+            '& > div': {
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: 'center',
+                '& > span:first-child': {
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    textAlign: 'center',
+                    background: '#675EAA',
+                    borderRadius: '3px',
+                    width: '36px',
+                    height: '38px',
+                    '& h6.MuiTypography-h6': {
+                        fontWeight: '600',
+                        color: '#FFFFFF',
+                    },
+                },
+                '& > span.MuiTypography-caption': {
+                    marginTop: 5,
+                    textAlign: 'center',
+                }
+            }
+        }
+    }
 }));

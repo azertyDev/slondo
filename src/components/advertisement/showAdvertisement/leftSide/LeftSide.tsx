@@ -1,124 +1,61 @@
 import React from 'react';
-import {  Typography } from '@material-ui/core';
-import { SyncSliders } from '@src/components/elements/syncSliders/SyncSliders';
-import { Link } from '@root/i18n';
-import { NextImgTag } from '@src/components/elements/next_img_tag/NextImgTag';
+import {Typography} from '@material-ui/core';
+import {Link} from '@root/i18n';
+import {SyncSliders} from '@src/components/elements/syncSliders/SyncSliders';
+import {ReadMore} from "@src/components/elements/readMore/readMore";
 
 // icons
-import {
-    DownArrow,
-    EyeIcon,
-    HeartIcon,
-    ComplainIcon,
-    Facebook,
-    Instagram,
-    Youtube,
-    Telegram,
-} from '@src/components/elements/icons';
-
-const imgUrls = [
-    {
-        url: '/img/advertisement-image.jpg',
-        alt: 'adv-image',
-    },
-    {
-        url: '/img/advertisement-image.jpg',
-        alt: 'adv-image',
-    },
-    {
-        url: '/img/advertisement-image.jpg',
-        alt: 'adv-image',
-    },
-    {
-        url: '/img/advertisement-image.jpg',
-        alt: 'adv-image',
-    },
-    {
-        url: '/img/advertisement-image.jpg',
-        alt: 'adv-image',
-    },
-    {
-        url: '/img/advertisement-image.jpg',
-        alt: 'adv-image',
-    },
-    {
-        url: '/img/advertisement-image.jpg',
-        alt: 'adv-image',
-    },
-    {
-        url: '/img/advertisement-image.jpg',
-        alt: 'adv-image',
-    },
-];
+import {LocationIcon} from '@src/components/elements/icons/LocationIcon';
+import {WarningIcon} from "@src/components/elements/icons/WarningIcon";
 
 // styles
-import { useStyles } from './useStyles';
+import {useStyles} from './useStyles';
 
-export const LeftSide = () => {
+export const LeftSide = (props) => {
+    const date = new Date(props.created_at).toLocaleDateString();
+
     const classes = useStyles();
     return (
         <div className={classes.root}>
             <div className="ad-slider">
-                <SyncSliders imgs={imgUrls} />
-                <div>
-                    <Link href="#">
-                        <a>
-                            <Typography variant="subtitle1" color="initial">
-                                Добавить в избранное
-                            </Typography>
-                            <NextImgTag
-                                src={HeartIcon}
-                                alt="favourite-icon"
-                                className={classes.icons}
-                            />
-                        </a>
-                    </Link>
-                </div>
+                <SyncSliders imgs={props.images}/>
+            </div>
+            <div className='ad-info'>
+                <Typography variant='subtitle1'><span>Объявление №:</span> {props.id}</Typography>
+                <Typography variant='subtitle1'>Опубликовано: {date}</Typography>
+                <Typography variant='subtitle1'>Просмотров: {props.number_of_views}</Typography>
+                <Typography variant='subtitle1'>Пожаловаться <WarningIcon/></Typography>
             </div>
             <div className="description">
+                <div>
+                    <Typography variant="subtitle1" noWrap>
+                        Местоположение
+                    </Typography>
+                    <Typography variant="subtitle1" noWrap>
+                        <LocationIcon/>
+                        {
+                            `${props.region ? props.region.name : ''}${props.city ? `, ${props.city.name}` : ''}${props.district ? `, ${props.district.name}` : ''}`
+                        }
+                    </Typography>
+                </div>
                 <div>
                     <div>
                         <Typography variant="subtitle1" color="initial">
                             Описание
                         </Typography>
                     </div>
-                    <div>
-                        <Link href="#">
-                            <a>
-                                <Typography variant="subtitle1" noWrap>
-                                    Местоположение: г.Ташкент, Мирзо-Улугбекский
-                                    район
-                                </Typography>
-                                <NextImgTag
-                                    src={DownArrow}
-                                    alt="location-down-arrow"
-                                    className={classes.downArrow}
-                                />
-                            </a>
-                        </Link>
-                    </div>
-                </div>
-                <div>
-                    <Typography variant="subtitle1" color="initial">
-                        Продаю Samsung galaxy A5 2015 года. Состояние отличное.
-                        Экран не менялся, царапин явных нет.Первые руки. Цвет
-                        черный. Возможен обмен на iphone 7 с доплатой.
-                    </Typography>
+                    <ReadMore {...props}>
+                        <Typography variant="subtitle1" color="initial">
+                            {props.description}
+                        </Typography>
+                    </ReadMore>
                 </div>
             </div>
+
+            <div className="ad-category">
+
+            </div>
             <div className="ad-parameters">
-                <div>
-                    <div>
-                        <Typography variant="subtitle1" color="initial">
-                            Состояние
-                        </Typography>
-                    </div>
-                    <div>
-                        <Typography variant="subtitle1" color="initial">
-                            Б/у
-                        </Typography>
-                    </div>
-                </div>
                 <div>
                     <div>
                         <Typography variant="subtitle1" color="initial">
@@ -189,115 +126,9 @@ export const LeftSide = () => {
                                 <Typography variant="subtitle1" color="initial">
                                     Все параметры
                                 </Typography>
-                                <NextImgTag
-                                    src={DownArrow}
-                                    alt="downarrow"
-                                    className={classes.downArrow}
-                                />
                             </a>
                         </Link>
                     </div>
-                </div>
-            </div>
-            <div className="ad-statistic">
-                <div>
-                    <div>
-                        <Typography variant="subtitle1" color="initial">
-                            Просмотрено
-                        </Typography>
-                    </div>
-                    <div>
-                        <div>
-                            <Typography variant="subtitle1" color="initial">
-                                165
-                            </Typography>
-                        </div>
-                        <div>
-                            <NextImgTag
-                                src={EyeIcon}
-                                alt="eye-icon"
-                                className={classes.icons}
-                            />
-                        </div>
-                    </div>
-                    <div>
-                        <Typography variant="subtitle1" color="initial">
-                            Опубликовано
-                        </Typography>
-                    </div>
-                    <div>
-                        <Typography variant="subtitle1" color="initial">
-                            в 9:12, 27 августа 2020 г.
-                        </Typography>
-                    </div>
-                </div>
-                <div>
-                    <div>
-                        <Typography variant="subtitle1" color="initial">
-                            В избранном
-                        </Typography>
-                    </div>
-                    <div>
-                        <div>
-                            <Typography variant="subtitle1" color="initial">
-                                5
-                            </Typography>
-                        </div>
-                        <div>
-                            <NextImgTag
-                                src={HeartIcon}
-                                alt="heart-icon"
-                                className={classes.icons}
-                            />
-                        </div>
-                    </div>
-                    <div>
-                        <Typography variant="subtitle1" color="initial">
-                            Номер объявления
-                        </Typography>
-                    </div>
-                    <div>
-                        <Typography variant="subtitle1" color="initial">
-                            1001
-                        </Typography>
-                    </div>
-                </div>
-            </div>
-            <div className="ad-social">
-                <div>
-                    <Link href="/">
-                        <a>
-                            <Typography variant="subtitle1" color="initial">
-                                Пожаловаться
-                            </Typography>
-                            <NextImgTag src={ComplainIcon} alt="comlain-icon" />
-                        </a>
-                    </Link>
-                </div>
-                <div>
-                    <Typography variant="subtitle1" color="initial">
-                        Поделиться
-                    </Typography>
-                    <Link href="#">
-                        <a>
-                            <NextImgTag src={Facebook} />
-                        </a>
-                    </Link>
-                    <Link href="#">
-                        <a>
-                            <NextImgTag src={Instagram} />
-                        </a>
-                    </Link>
-                    <Link href="#">
-                        <a>
-                            <NextImgTag src={Youtube} />
-                        </a>
-                    </Link>
-                    <Link href="#">
-                        <a>
-                            <NextImgTag src={Telegram} />
-                        </a>
-                    </Link>
                 </div>
             </div>
         </div>

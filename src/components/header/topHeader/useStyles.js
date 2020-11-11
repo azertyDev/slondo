@@ -5,6 +5,10 @@ export const useStyles = makeStyles((theme) => ({
         '& div.location': {
             display: 'flex',
             alignItems: 'center',
+            '& > h6.MuiTypography-subtitle1': {
+                lineHeight: '20px',
+                borderBottom: '1px solid #4E4E4E',
+            },
             '& > svg': {
                 marginRight: '12px'
             },
@@ -16,6 +20,15 @@ export const useStyles = makeStyles((theme) => ({
             '& > img': {
                 width: '35px',
             },
+        },
+
+        '& div.multiple': {
+            '& > div:first-child': {
+                marginLeft: 0
+            },
+            '& > div': {
+                marginLeft: '50px'
+            }
         },
         '& div.multiple-content': {
             display: 'flex',
@@ -39,8 +52,9 @@ export const useStyles = makeStyles((theme) => ({
                     },
                 },
                 '&:hover': {
-                    color: '#AD66D5',
-                    textDecoration: 'underline',
+                    '& > h6.MuiTypography-subtitle1': {
+                        color: '#AD66D5',
+                    },
                     '& > svg > path': {
                         fill: '#AD66D5',
                     }

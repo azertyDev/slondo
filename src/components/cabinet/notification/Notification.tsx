@@ -1,6 +1,5 @@
 import React from 'react';
 import {Typography, Paper } from '@material-ui/core';
-import { ButtonComponent } from '../../elements/button/Button';
 import { Link } from '@root/i18n';
 
 // icons
@@ -9,7 +8,7 @@ import { CloseIcon } from '@src/components/elements/icons/close_icon/CloseIcon';
 // styles
 import { useStyles } from './useStyles';
 
-export const Notification = (props) => {
+export const Notification = () => {
     const classes = useStyles();
     return (
         <div className={classes.root}>
@@ -34,7 +33,7 @@ export const Notification = (props) => {
                     </Link>
                 </div>
                 <div className='notification-bg'></div>
-                <CloseIcon/>
+                {/*<CloseIcon/>*/}
             </Paper>
         </div>
     );

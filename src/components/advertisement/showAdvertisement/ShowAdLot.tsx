@@ -1,21 +1,21 @@
 import React from 'react';
-import { Container, Grid, Hidden, Typography } from '@material-ui/core';
-import { BreadcrumbsComponent } from '../../elements/breadcrumbs/Breadcrumbs';
-import { AdsAndLotsBlock } from '../../elements/adsAndLotsBlock/AdsAndLotsBlock';
-import { MainLayout } from '../../MainLayout';
-import { RightSide } from './rightSide/RightSide';
-import { LeftSide } from './leftSide/LeftSide';
-import { Link } from '@root/i18n';
-import { NextImgTag } from "@src/components/elements/next_img_tag/NextImgTag";
+import {Container, Grid, Hidden, Typography} from '@material-ui/core';
+import {BreadcrumbsComponent} from '../../elements/breadcrumbs/Breadcrumbs';
+// import {AdsAndLotsBlock} from '../../elements/adsAndLotsBlock/AdsAndLotsBlock';
+import {MainLayout} from '../../MainLayout';
+import {RightSide} from './rightSide/RightSide';
+import {LeftSide} from './leftSide/LeftSide';
+import {Link} from '@root/i18n';
 
 // icons
-import { ShareIcon } from '../../elements/icons';
 
 // styles
-import { useStyles } from './useStyles';
+import {useStyles} from './useStyles';
 
 export const ShowAdLot = (props) => {
-    const { t } = props;
+    const {adData, t} = props;
+
+    const {data} = adData;
 
     const classes = useStyles();
     return (
@@ -33,58 +33,60 @@ export const ShowAdLot = (props) => {
                             <Typography color="primary">Столовая мебель</Typography>
                         </BreadcrumbsComponent>
                     </div>
-                    <div>
+                    <div className='adv-header'>
                         <div>
-                            <Typography variant="h4" color="initial">
-                                Объявление: Продаю Samsung A5 в отличном
-                                состоянии.
-                            </Typography>
-                            <Link href="#">
-                                <a>
-                                    <NextImgTag
-                                        src={ShareIcon}
-                                        alt="share-icon"
-                                        className={classes.shareIcon}
-                                    />
-                                </a>
-                            </Link>
+                            <span>
+                                <Typography variant='h6'>
+                                    Объявление
+                                </Typography>
+                            </span>
+                            <span>
+                                <Typography variant="h6" color="initial">
+                                    {data.title}
+                                </Typography>
+                            </span>
+                            <span>
+                                <Typography variant='h6'>
+                                    {data.condition.name}
+                                </Typography>
+                            </span>
                         </div>
                         <div>
                             <Typography variant="h4" color="initial">
-                                1 350 000 Сум
+                                1 350 000 {data.currency.name}
                             </Typography>
                         </div>
                     </div>
-                    <Grid container spacing={2}> 
+                    <Grid container spacing={2}>
                         <Grid item xs={12} md={9}>
-                            <LeftSide />
+                            <LeftSide {...data}/>
                         </Grid>
 
                         <Hidden smDown>
                             <Grid item xs={3}>
-                                <RightSide />
+                                <RightSide {...props}/>
                                 <div className={classes.adBanner}>
-                                    <div className="right-banner" />
+                                    <div className="right-banner"/>
                                 </div>
                             </Grid>
                         </Hidden>
                     </Grid>
 
-                    <Grid
-                        item
-                        container
-                        xs={12}
-                        direction="row"
-                        justify="center"
-                    >
-                        <AdsAndLotsBlock
-                            title="Похожие объявления"
-                            xs={6}
-                            sm={4}
-                            md={3}
-                            lg={2}
-                        />
-                    </Grid>
+                    {/*<Grid*/}
+                    {/*    item*/}
+                    {/*    container*/}
+                    {/*    xs={12}*/}
+                    {/*    direction="row"*/}
+                    {/*    justify="center"*/}
+                    {/*>*/}
+                    {/*    <AdsAndLotsBlock*/}
+                    {/*        title="Похожие объявления"*/}
+                    {/*        xs={6}*/}
+                    {/*        sm={4}*/}
+                    {/*        md={3}*/}
+                    {/*        lg={2}*/}
+                    {/*    />*/}
+                    {/*</Grid>*/}
                 </Container>
             </MainLayout>
         </div>

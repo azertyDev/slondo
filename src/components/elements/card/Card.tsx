@@ -23,7 +23,7 @@ export const CardItem = (props) => {
     const classes = useStyles()
     return (
         <Card className={classes.root} elevation={0}>
-            <CardMedia className="card-media" image={images[0].url}>
+            <CardMedia className="card-media" image={images.length ? images[0].url : null}>
                 <div className="card-header">
                     <div>
                         <Typography variant="subtitle2">{cardType}</Typography>

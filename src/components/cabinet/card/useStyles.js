@@ -1,4 +1,4 @@
-import { makeStyles } from '@material-ui/core/styles'
+import {makeStyles} from '@material-ui/core/styles'
 
 export const useStyles = makeStyles((theme) => ({
     root: {
@@ -84,15 +84,8 @@ export const useStyles = makeStyles((theme) => ({
                                         lineHeight: '15px',
                                         color: '#838383',
                                     },
-                                    '& > a > svg': {
-                                        display: 'flex',
+                                    '& > a': {
                                         marginLeft: '5px',
-                                        '& > path': {
-                                            fill: '#838383',
-                                        },
-                                    },
-                                    '& > a:last-child > svg': {
-                                        marginLeft: '15px',
                                     },
                                 },
                             },
@@ -110,6 +103,7 @@ export const useStyles = makeStyles((theme) => ({
                                 width: '60%',
                                 '& > a': {
                                     display: 'flex',
+                                    marginRight: "10px"
                                 },
                             }, '& > div': {
                                 display: 'flex',

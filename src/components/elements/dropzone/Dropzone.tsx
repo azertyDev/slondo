@@ -50,18 +50,6 @@ export const Dropzone = (props) => {
                     <AddIcon/>
                 </div>
                 {thumbs}
-
-                {files.length > 0 &&
-                <>
-                    {files.map((file) => (
-                        <img
-                            alt="Preview"
-                            key={file.preview}
-                            src={file.preview}
-                        />
-                    ))}
-                </>
-                }
             </aside>
 
         </section>
