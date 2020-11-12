@@ -7,11 +7,46 @@ export const useStyles = makeStyles((theme) => ({
             justifyContent: 'center',
             flexDirection: 'column',
             marginBottom: '30px',
+            '& div.buy-now': {
+                display: 'flex',
+                flexDirection: 'column',
+                marginTop: 23,
+                '& div:first-child': {
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    '& div': {
+                        display: 'flex',
+                        flexDirection: 'column',
+                        alignItems: 'center',
+                        marginLeft: 20,
+                        '& > h6.MuiTypography-h6': {
+                            fontWeight: '600',
+                        },
+                        '& > h6.MuiTypography-subtitle2': {
+                            marginBottom: 5
+                        },
+                    },
+                },
+                '& > div:last-child': {
+                    marginTop: "15px",
+                    '& > button': {
+                        background: '#7DBCF6',
+                        borderRadius: '3px',
+                        '& > h6.MuiTypography-subtitle1': {
+                            color: '#fff',
+                            lineHeight: '16px'
+                        },
+                    },
+                }
+            },
             '& div.lot-participants-block': {
                 display: 'flex',
                 flexDirection: 'column',
+                marginTop: '20px',
                 '& > h6.MuiTypography-subtitle1': {
-                    padding: '0 15px 7px 15px',
+                    padding: '15px',
+                    paddingBottom: '7px',
                     fontWeight: '600',
                 },
                 '& > div.participants': {

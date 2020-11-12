@@ -50,7 +50,7 @@ const theme = createMuiTheme({
     typography: {
         fontFamily: ['Calibri', 'Roboto', 'Helvetica', 'Arial', 'sans-serif'],
         subtitle1: {
-            lineHeight: 1.5,
+            lineHeight: 1,
             color: '#4E4E4E',
         },
         h4: {
@@ -58,7 +58,7 @@ const theme = createMuiTheme({
         },
         allVariants: {
             color: '#4E4E4E',
-            lineHeight: 1
+            lineHeight: 1,
         },
     },
     overrides: {

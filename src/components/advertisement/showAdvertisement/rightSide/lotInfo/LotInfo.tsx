@@ -1,8 +1,8 @@
 import React from 'react';
 import {Typography, TextField} from '@material-ui/core';
 import {ButtonComponent} from '@src/components/elements/button/Button';
-import {Lock_icon} from '@src/components/elements/icons';
 import {LotTimer} from "@src/components/advertisement/showAdvertisement/rightSide/lotInfo/LotTimer";
+import {LockIcon} from "@src/components/elements/icons/LockIcon";
 
 // styles
 import {useStyles} from './useStyles';
@@ -21,12 +21,31 @@ export const LotInfo = (props) => {
                 <div>
                     {date !== 0 && <LotTimer {...data} date={date}/>}
                 </div>
+                <div className='buy-now'>
+                    <div>
+                        <LockIcon/>
+                        <div>
+                            <Typography variant="subtitle2" color="initial">
+                                Резервная цена:
+                            </Typography>
+                            <Typography variant="h6" color="initial">
+                                1 420 000 сум
+                            </Typography>
+                        </div>
+                    </div>
+                    <div>
+                        <ButtonComponent>
+                            <Typography variant="subtitle1" color="initial">
+                                Купить сейчас
+                            </Typography>
+                        </ButtonComponent>
+                    </div>
+                </div>
                 <div className="lot-participants-block">
                     <Typography variant="subtitle1" color="initial">
                         Текущие ставки
                     </Typography>
                     <div className="participants">
-
                         <div>
                             <Typography variant="subtitle1" noWrap>
                                 Playe***112 (<span>1</span>)
@@ -90,29 +109,6 @@ export const LotInfo = (props) => {
                         <Typography variant="subtitle2" color="initial">
                             Максимально возможная ставка 2025000
                         </Typography>
-                    </div>
-                    <div>
-                        <img src={Lock_icon} alt="lock-icon"/>
-                        <Typography variant="subtitle1" color="initial">
-                            Резервная цена:
-                        </Typography>
-                        <Typography variant="subtitle1" color="initial">
-                            1 420 000 сум
-                        </Typography>
-                    </div>
-                    <div>
-                        <div>
-                            <Typography variant="subtitle1" color="initial">
-                                1 420 000 сум
-                            </Typography>
-                        </div>
-                        <div>
-                            <ButtonComponent>
-                                <Typography variant="subtitle1" color="initial">
-                                    Купить сейчас
-                                </Typography>
-                            </ButtonComponent>
-                        </div>
                     </div>
                     <div>
                         <ButtonComponent>

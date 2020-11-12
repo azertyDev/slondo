@@ -11,19 +11,18 @@ import {WarningIcon} from "@src/components/elements/icons/WarningIcon";
 // styles
 import {useStyles} from './useStyles';
 
-export const LeftSide = (props) => {
-    const date = new Date(props.created_at).toLocaleDateString();
-
+export const LeftSide = ({data}) => {
+    const date = new Date(data.created_at).toLocaleDateString();
     const classes = useStyles();
     return (
         <div className={classes.root}>
             <div className="ad-slider">
-                <SyncSliders imgs={props.images}/>
+                <SyncSliders imgs={data.images}/>
             </div>
             <div className='ad-info'>
-                <Typography variant='subtitle1'><span>Объявление №:</span> {props.id}</Typography>
+                <Typography variant='subtitle1'><span>Объявление №:</span> {data.id}</Typography>
                 <Typography variant='subtitle1'>Опубликовано: {date}</Typography>
-                <Typography variant='subtitle1'>Просмотров: {props.number_of_views}</Typography>
+                <Typography variant='subtitle1'>Просмотров: {data.number_of_views}</Typography>
                 <Typography variant='subtitle1'>Пожаловаться <WarningIcon/></Typography>
             </div>
             <div className="description">
@@ -31,12 +30,18 @@ export const LeftSide = (props) => {
                     <Typography variant="subtitle1" noWrap>
                         Местоположение
                     </Typography>
-                    <Typography variant="subtitle1" noWrap>
-                        <LocationIcon/>
-                        {
-                            `${props.region ? props.region.name : ''}${props.city ? `, ${props.city.name}` : ''}${props.district ? `, ${props.district.name}` : ''}`
-                        }
-                    </Typography>
+                    {
+                        data.region.name || data.city.name || data.district.name
+                            ? (
+                                <Typography variant="subtitle1" noWrap>
+                                    <LocationIcon/>
+                                    {`${data.region.name ?? ''}`}
+                                    {data.city.name ? `, ${data.city.name}` : ''}
+                                    {data.district.name ? `, ${data.district.name}` : ''}
+                                </Typography>
+                            ) : <Typography variant='subtitle1'>Не указано</Typography>
+                    }
+
                 </div>
                 <div>
                     <div>
@@ -44,9 +49,9 @@ export const LeftSide = (props) => {
                             Описание
                         </Typography>
                     </div>
-                    <ReadMore {...props}>
+                    <ReadMore {...data}>
                         <Typography variant="subtitle1" color="initial">
-                            {props.description}
+                            {data.description}
                         </Typography>
                     </ReadMore>
                 </div>
