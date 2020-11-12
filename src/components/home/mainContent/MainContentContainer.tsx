@@ -32,7 +32,7 @@ export const MainContentContainer = (props) => {
         setTabValue(newValue);
     };
 
-    const setCardData = async (state, setState, currentPage,type) => {
+    const setCardData = async (state, setState, currentPage, type) => {
         try {
             setState({
                 ...state,
@@ -70,13 +70,12 @@ export const MainContentContainer = (props) => {
         }
     };
 
-
     useEffect(() => {
-         setCardData(adCardData, setAdCardData, adCurrentPage,'ad');
+        setCardData(adCardData, setAdCardData, adCurrentPage, 'ad');
     }, [adCurrentPage])
 
     useEffect(() => {
-        setCardData(lotCardData, setLotCardData, lotCurrentPage,'lot');
+        setCardData(lotCardData, setLotCardData, lotCurrentPage, 'lot');
     }, [lotCurrentPage])
 
     return (

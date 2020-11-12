@@ -10,7 +10,7 @@ import CheckCircleIcon from '@material-ui/icons/CheckCircle'
 // styles
 import { useStyles } from './useStyles'
 
-export const SuccessAdvertisement = () => {
+export const SuccessAdvrt = () => {
     const classes = useStyles()
     return (
         <div className={classes.root}>

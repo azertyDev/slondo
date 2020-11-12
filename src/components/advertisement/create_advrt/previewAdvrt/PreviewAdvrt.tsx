@@ -5,7 +5,7 @@ import { ButtonComponent } from '@src/components/elements/button/Button';
 // styles
 import { useStyles } from './useStyles'
 
-export const PreviewAdvertisement = (props) => {
+export const PreviewAdvrt = (props) => {
     const classes = useStyles()
     return (
         <div className={classes.root}>

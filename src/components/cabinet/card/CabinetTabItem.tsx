@@ -15,7 +15,7 @@ import { EyeIcon } from '@src/components/elements/icons/EyeIcon';
 // styles
 import { useStyles } from './useStyles';
 
-export const CabinetTabItem = (props) => {
+export const CabinetTabItem = () => {
     const classes = useStyles();
     return (
         <div className={classes.root}>

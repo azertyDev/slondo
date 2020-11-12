@@ -4,7 +4,9 @@ export interface Categories {
     list: [{
         id: number,
         name: string,
-        images: { id: number, url: string }
+        images: { id: number, url: string },
+        icons: { id: number, url: string },
+        childs: []
     }],
 }
 

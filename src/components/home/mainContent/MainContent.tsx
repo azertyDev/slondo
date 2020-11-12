@@ -6,9 +6,9 @@ import {CustomTab} from '@src/components/elements/custom_tab/CustomTab';
 import {Banner} from '@src/components/elements/banner/Banner';
 import {CustomTabPanel} from '@src/components/elements/custom_tab_panel/CustomTabPanel';
 import {Link} from '@root/i18n';
-
 // Styles
 import {useStyles} from './useStyles';
+
 
 export const MainContent = (props) => {
     const {t, tabValue, handleTabChange, handleShowMore, adCardData, lotCardData} = props;
@@ -50,7 +50,7 @@ export const MainContent = (props) => {
                     <CustomTabPanel value={tabValue} index={0}>
                         <div className="ads-wrapper">
                             <Grid item container spacing={2}>
-                                {adCardData.cardData.data.map((item) => (
+                                {adCardData.cardData.data.length && adCardData.cardData.data.map((item) => (
                                     <Grid
                                         key={item.id}
                                         xs={6}
@@ -65,7 +65,7 @@ export const MainContent = (props) => {
                                                     cardType={t('ad')}
                                                     className="card-item"
                                                     alt={item.title}
-                                                    image={item.images[0].url}
+                                                    image={item.images.length ? item.images[0].url : ''}
                                                     price={item.price}
                                                     location={item.location}
                                                     dateTime={item.created_at}
@@ -74,7 +74,6 @@ export const MainContent = (props) => {
                                                 />
                                             </a>
                                         </Link>
-
                                     </Grid>
                                 ))}
                             </Grid>
@@ -98,7 +97,7 @@ export const MainContent = (props) => {
                                                     cardType={t('lot')}
                                                     className="card-item"
                                                     alt={item.title}
-                                                    image={item.images[0].url}
+                                                    image={item.images.length ? item.images[0].url : ''}
                                                     price={item.price}
                                                     location={item.location}
                                                     dateTime={item.created_at}

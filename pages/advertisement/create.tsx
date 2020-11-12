@@ -1,5 +1,5 @@
 import React from 'react'
-import {CreateAdvrt} from '@src/components/advertisement/create_advertisement/CreateAdvrt'
+import {CreateAdvrt} from '@src/components/advertisement/create_advrt/CreateAdvrt'
 
 const Create = (props) => {
     return <CreateAdvrt {...props} />

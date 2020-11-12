@@ -8,11 +8,6 @@ export const useStyles = makeStyles((theme) => ({
         },
         '& svg.MuiSvgIcon-root': {
             fill: '#9a64d0',
-        },
-        '& div.photos-dropdown': {
-            height: '200px',
-            backgroundColor: '#C0C0C0',
-            borderRadius: '4px'
         }
     },
     title: {
@@ -36,7 +31,6 @@ export const useStyles = makeStyles((theme) => ({
         justifyContent: 'space-between',
     },
     categoryNameInput: {
-        // width: '250px',
         padding: '10px',
         borderRadius: 4,
         position: 'relative',
@@ -47,6 +41,9 @@ export const useStyles = makeStyles((theme) => ({
         '& input.MuiInputBase-input': {
             padding: '0',
         },
+    },
+    parameters: {
+        marginTop: '10px'
     },
     advertisementName: {
         '& p.MuiFormHelperText-contained': {

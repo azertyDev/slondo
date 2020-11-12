@@ -1,13 +1,12 @@
-import React, { useState } from 'react'
-import { Container, Grid, Typography, Tabs } from '@material-ui/core'
-import { CustomTab } from '../elements/custom_tab/CustomTab'
-import { CabinetTabItem } from './card/CabinetTabItem'
-import { Notification } from '@src/components/cabinet/notification/Notification'
-import { CabinetSidebar } from '@src/components/cabinet/cabinetSidebar/CabinetSidebar'
-
-
+import React, { useState } from 'react';
+import { Container, Grid, Typography, Tabs } from '@material-ui/core';
+import { CustomTab } from '../elements/custom_tab/CustomTab';
+import { CabinetTabItem } from './card/CabinetTabItem';
+import { Notification } from '@src/components/cabinet/notification/Notification';
+import { CabinetSidebar } from '@src/components/cabinet/cabinetSidebar/CabinetSidebar';
 // styles
-import { useStyles } from './useStyles'
+import { useStyles } from './useStyles';
+
 
 const TabPanel = (props) => {
     const { children, value, index, ...other } = props

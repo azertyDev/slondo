@@ -1,41 +1,33 @@
 import React, {FC} from 'react';
-import {
-    Grid,
-    Typography,
-    TextField,
-    Checkbox,
-    InputAdornment,
-    Hidden,
-} from '@material-ui/core';
-//icons
-import {Help, Search} from '@material-ui/icons';
-import {CustomMenu} from "@src/components/elements/custom_menu/CustomMenu";
-import {adTypesList} from "@src/components/advertisement/create_advertisement/createAdModalForm/CreateAdModalForm";
-// styles
-import {useStyles} from './useStyles';
+import {Grid, Typography} from '@material-ui/core';
+import {Help} from '@material-ui/icons';
 import {CustomFormikField} from "@src/components/elements/custom_formik_field/CustomFormikField";
 import {CustomFormikTextarea} from "@src/components/elements/custom_formik_textarea/CustomFormikTextarea";
-import {AdvrtSettingsBlock} from "@src/components/advertisement/create_advertisement/advrtForm/advrt_settings_block/AdvrtSettingsBlock";
+import {AdvrtSettingsBlock} from "@src/components/advertisement/create_advrt/advrtForm/advrt_settings_block/AdvrtSettingsBlock";
+import {CustomCheckbox} from "@src/components/elements/custom_checkbox/CustomCheckbox";
+import {PreviewPhotos} from "@src/components/elements/preview_photos/PreviewPhotos";
+// styles
+import {useStyles} from './useStyles';
 
 
 export const AdvrtForm: FC<any> = (props) => {
-
     const {
-        store,
+        isPreview,
+        createAdvrt,
         values,
+        setValues,
         touched,
         errors,
         handleBlur,
         handleCheckboxChange,
         handleClickMenuItem,
-        handleClickMenuCategory,
     } = props;
 
     const classes = useStyles();
     return (
         <div className={classes.root}>
             <Typography variant="h4" className={classes.title}>
-                Новое объявление - <span>{values.adCategory.name}</span>
+                Новое объявление - <span>{createAdvrt.category.name}</span>
             </Typography>
             <Grid container justify="space-between" spacing={1}>
                 <Grid
@@ -48,75 +40,67 @@ export const AdvrtForm: FC<any> = (props) => {
                     <Grid
                         item
                         xs={12}
-                        sm={4}
                         container
                     >
-                        <Typography variant="subtitle1">
-                            <strong>
-                                Тип
-                                <span className={classes.required}>
-                                    *
-                                </span>
-                            </strong>
-                        </Typography>
-                        <CustomMenu
-                            valueName={values.adType.name}
-                            items={adTypesList}
-                            onBlur={handleBlur}
-                            onClick={handleClickMenuItem('adType')}
-                        />
+                        <div>
+                            <Typography variant="subtitle1">
+                                <strong>
+                                    Тип
+                                    <span className={classes.required}>
+                                        *
+                                    </span>
+                                    - {`${createAdvrt.adType.name}`}
+                                </strong>
+                            </Typography>
+                        </div>
                     </Grid>
                     <Grid
                         item
                         xs={12}
-                        sm={4}
                         container
                     >
                         <Typography variant="subtitle1">
-                            <strong>
-                                Категория
-                                <span className={classes.required}>
-                                    *
-                                </span>
-                            </strong>
+                            <>
+                                <strong>
+                                    Категория
+                                    <span className={classes.required}>
+                                        *
+                                    </span>
+                                    - {`${createAdvrt.category.name} `}
+                                </strong>
+                                {
+                                    createAdvrt.data.name && (
+                                        <strong>
+                                            - {createAdvrt.data.name}
+                                        </strong>
+                                    )
+                                }
+                            </>
                         </Typography>
-                        <CustomMenu
-                            valueName={values.adCategory.name}
-                            items={store.categories.list}
-                            onBlur={handleBlur}
-                            onClick={handleClickMenuCategory}
-                        />
-                    </Grid>
-                    <Grid
-                        item
-                        xs={12}
-                        sm={4}
-                        container
-                        direction='column'
-                        justify='flex-end'
-                    >
-                        <Typography variant="subtitle1">
-                            <strong>
-                                Под категория
-                                <span className={classes.required}>
-                                    *
-                                </span>
-                            </strong>
-                        </Typography>
-                        <CustomMenu
-                            valueName={values.adSubCategory.name}
-                            items={values.adCategory.childs}
-                            onBlur={handleBlur}
-                            onClick={handleClickMenuItem('adSubCategory')}
-                        />
                     </Grid>
                 </Grid>
-                <AdvrtSettingsBlock
-                    values={values}
-                    data={store.createAdvrt.data}
-                    onBlur={handleBlur}
-                    handleClickMenuItem={handleClickMenuItem}
-                />
+                {
+                    createAdvrt.data.id && (
+                        <Grid item container className={classes.parameters}>
+                            <div>
+                                <Typography variant="h5">
+                                    <strong>Параметры</strong>
+                                </Typography>
+                            </div>
+                            {
+                                createAdvrt.data.id && (
+                                    <AdvrtSettingsBlock
+                                        isPreview={isPreview}
+                                        adsParams={values.adsParams}
+                                        createAdvrt={createAdvrt}
+                                        onBlur={handleBlur}
+                                        handleClickMenuItem={handleClickMenuItem}
+                                    />
+                                )
+                            }
+                        </Grid>
+                    )
+                }
                 <Grid
                     container
                     item
@@ -136,10 +120,15 @@ export const AdvrtForm: FC<any> = (props) => {
                         </Typography>
                     </Grid>
                     <Grid item xs={12} sm={6} md={9}>
-                        <CustomFormikField
-                            name='adName'
-                            placeholder="Пример: Samsung S9 black 64 Gb"
-                        />
+                        {
+                            isPreview
+                                ? <Typography>{values.title}</Typography>
+                                : <CustomFormikField
+                                    name='title'
+                                    placeholder="Пример: Samsung S9 black 64 Gb"
+                                    value={values.title}
+                                />
+                        }
                     </Grid>
                 </Grid>
                 <Grid item xs={12}>
@@ -164,10 +153,10 @@ export const AdvrtForm: FC<any> = (props) => {
                         xs={9}
                         className={classes.paymentAndDelivery}
                     >
-                        <Checkbox
-                            checked={values.safeBuy}
-                            onChange={handleCheckboxChange}
-                            color="primary"
+                        <CustomCheckbox
+                            disabled={isPreview}
+                            checked={values.safe_deal}
+                            onChange={handleCheckboxChange('safe_deal')}
                         />
                         <Help className="question-mark"/>
                         <Typography variant="subtitle2">
@@ -175,10 +164,9 @@ export const AdvrtForm: FC<any> = (props) => {
                             торг». Ваша сделка защищена. Стоимость
                             услуги составляет n%.{' '}
                             <a href="#">
-                                    <span className="safe-auction-rules">
-                                        Ознакомиться с правилами «Безопасный
-                                        торг»
-                                    </span>
+                                <span className="safe-auction-rules">
+                                    Ознакомиться с правилами «Безопасный торг»
+                                </span>
                             </a>
                         </Typography>
                     </Grid>
@@ -195,16 +183,15 @@ export const AdvrtForm: FC<any> = (props) => {
                             Есть доставка
                         </Typography>
                     </Grid>
-
                     <Grid
                         item
                         xs={9}
                         className={classes.paymentAndDelivery}
                     >
-                        <Checkbox
-                            checked={values.haveDelivery}
-                            onChange={handleCheckboxChange}
-                            color="primary"
+                        <CustomCheckbox
+                            disabled={isPreview}
+                            checked={values.delivery}
+                            onChange={handleCheckboxChange('delivery')}
                         />
                         <Help className="question-mark"/>
                         <Typography variant="subtitle2">
@@ -239,13 +226,10 @@ export const AdvrtForm: FC<any> = (props) => {
                         xs={9}
                         className={classes.paymentAndDelivery}
                     >
-                        <Checkbox
-                            checked={values.haveExch}
-                            onChange={handleCheckboxChange}
-                            color="primary"
-                            inputProps={{
-                                'aria-label': 'secondary checkbox',
-                            }}
+                        <CustomCheckbox
+                            disabled={isPreview}
+                            checked={values.exchange}
+                            onChange={handleCheckboxChange('exchange')}
                         />
                         <Help className="question-mark"/>
                         <Typography variant="subtitle2">
@@ -271,23 +255,15 @@ export const AdvrtForm: FC<any> = (props) => {
                         </Typography>
                     </Grid>
                     <Grid item xs={12} sm={9}>
-                        <TextField
-                            fullWidth
-                            variant="outlined"
-                            InputProps={{
-                                startAdornment: (
-                                    <InputAdornment position="start">
-                                        <Search/>
-                                    </InputAdornment>
-                                ),
-                            }}
-                        />
-                    </Grid>
-                    <Hidden xsDown>
-                        <Grid item sm={3}/>
-                    </Hidden>
-                    <Grid item xs={12} sm={9}>
-                        <div className="photos-dropdown"/>
+                        {
+                            isPreview
+                                ? <Typography>{values.location}</Typography>
+                                : <CustomFormikField
+                                    name='location'
+                                    value={values.location}
+                                    placeholder='Выберите регион'
+                                />
+                        }
                     </Grid>
                 </Grid>
                 <Grid
@@ -299,7 +275,7 @@ export const AdvrtForm: FC<any> = (props) => {
                     alignItems="center"
                     justify="space-between"
                 >
-                    <Grid item xs={12} sm={3}>
+                    <Grid item xs={12}>
                         <Typography variant="subtitle1">
                             <strong>
                                 Фотографии
@@ -308,6 +284,10 @@ export const AdvrtForm: FC<any> = (props) => {
                                 </span>
                             </strong>
                         </Typography>
+                        <PreviewPhotos
+                            values={values}
+                            setValues={setValues}
+                        />
                     </Grid>
                 </Grid>
                 <Grid
@@ -319,7 +299,7 @@ export const AdvrtForm: FC<any> = (props) => {
                     justify="space-between"
                     spacing={2}
                 >
-                    <Grid item xs={12} sm={3}>
+                    <Grid item xs={12}>
                         <Typography variant="subtitle1">
                             <strong>
                                 Описание
@@ -328,22 +308,22 @@ export const AdvrtForm: FC<any> = (props) => {
                                 </span>
                             </strong>
                         </Typography>
-                    </Grid>
-                    <Grid item xs={12} sm={9}>
-                        <CustomFormikTextarea
-                            name='description'
-                            className={classes.description}
-                            rowsMin={15}
-                            value={values.description}
-                        />
+                        {
+                            isPreview
+                                ? <Typography>{values.description}</Typography>
+                                : <CustomFormikTextarea
+                                    name='description'
+                                    className={classes.description}
+                                    rowsMin={15}
+                                    value={values.description}
+                                />
+                        }
                     </Grid>
                 </Grid>
                 <Grid
                     container
                     item
                     xs={12}
-                    direction="row"
-                    alignItems="center"
                     spacing={2}
                 >
                     <Grid item xs={12} sm={3}>
@@ -351,20 +331,22 @@ export const AdvrtForm: FC<any> = (props) => {
                             <strong>
                                 Телефон
                                 <span className={classes.required}>
-                                *
+                                    *
                                 </span>
                             </strong>
                         </Typography>
                     </Grid>
                     <Grid item xs={12} sm={4} md={3}>
-                        <TextField
-                            variant="outlined"
-                            id="phone"
-                            placeholder="+998 (__) ___ __ __"
-                            type="tel"
-                            fullWidth
-                            value={values.phone}
-                        />
+                        {
+                            isPreview
+                                ? <Typography>{values.phone}</Typography>
+                                : <CustomFormikField
+                                    type="tel"
+                                    name="phone"
+                                    placeholder="+998 (__) ___ __ __"
+                                    value={values.phone}
+                                />
+                        }
                     </Grid>
                     <Grid
                         item
