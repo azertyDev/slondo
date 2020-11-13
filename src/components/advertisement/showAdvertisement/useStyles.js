@@ -23,6 +23,7 @@ export const useStyles = makeStyles((theme) => ({
         '& div.adv-header': {
             display: 'flex',
             justifyContent: 'space-between',
+            margin: '10px 0',
             '& > div': {
                 '&:first-child': {
                     display: 'flex',

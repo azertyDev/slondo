@@ -87,27 +87,26 @@ export const LotInfo = (props) => {
                             </Typography>
                         </div>
                     </div>
+                    <Typography variant="subtitle1" color="initial">
+                        Все ставки
+                    </Typography>
                 </div>
-                <Typography variant="subtitle1" color="initial">
-                    Все ставки
-                </Typography>
+
                 <div className="bet-info">
                     <div>
-                        <Typography variant="subtitle1" color="initial">
-                            Сделать ставку
-                        </Typography>
-                    </div>
-                    <div>
                         <TextField placeholder="14200000" variant='outlined'/>
-                        <ButtonComponent>
+                        <ButtonComponent color='secondary'>
                             <Typography variant="subtitle1" color="initial">
-                                Применить
+                                Сделать ставку
                             </Typography>
                         </ButtonComponent>
                     </div>
                     <div>
                         <Typography variant="subtitle2" color="initial">
-                            Максимально возможная ставка 2025000
+                            Максимально возможная ставка
+                        </Typography>
+                        <Typography variant="subtitle2" color="initial">
+                            2 2500 000
                         </Typography>
                     </div>
                     <div>

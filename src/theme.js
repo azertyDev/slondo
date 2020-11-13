@@ -13,7 +13,7 @@ const calibri = {
 
 const colors = {
     main: '#9773af',
-    secondary: '#675EAA',
+    secondary: '#845CAB',
     white: '#ffffff',
     black: '#4E4E4E',
     gray: '#C0C0C0',
@@ -60,6 +60,14 @@ const theme = createMuiTheme({
             color: '#4E4E4E',
             lineHeight: 1,
         },
+        body1: {
+            fontSize: '1.125rem',
+            fontWeight: '600'
+        },
+        body2: {
+            fontSize: '1.125rem',
+        },
+
     },
     overrides: {
         MuiCssBaseline: {

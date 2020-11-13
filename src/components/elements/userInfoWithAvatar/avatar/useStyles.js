@@ -34,8 +34,8 @@ export const useStyles = makeStyles((theme) => ({
     root: {
         display: 'flex',
         '& span > div.MuiAvatar-root': {
-            width: '70px',
-            height: '70px',
+            width: '80px',
+            height: '80px',
         }
     },
 }))

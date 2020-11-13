@@ -38,26 +38,26 @@ export const useStyles = makeStyles((theme) => ({
                             position: 'relative',
                             '& > span.MuiTypography-caption': {
                                 position: 'absolute',
-                                top: '5px',
-                                left: '5px',
+                                top: '3px',
+                                left: '3px',
                                 backgroundColor: 'rgba(136, 202, 236, 0.65)',
                                 borderRadius: '5px',
-                                padding: '0 7px 0 7px',
+                                padding: '3px 7px',
                                 letterSpacing: '0.4px',
                                 color: '#fff',
                             },
                             '& > span:last-child': {
                                 position: 'absolute',
-                                bottom: '10px',
-                                left: '10px',
+                                bottom: '4px',
+                                left: '4px',
                                 display: 'flex',
                                 justifyContent: 'space-between',
                                 alignItems: 'center',
-                                padding: '0 3px 0 3px',
+                                padding: '3px',
                                 backgroundColor: 'rgba(255, 255, 255, 0.7)',
                                 borderRadius: '5px',
                                 '& > svg': {
-                                    marginRight: '5px',
+                                    marginRight: '8px',
                                 },
                             },
                         },
@@ -86,6 +86,11 @@ export const useStyles = makeStyles((theme) => ({
                                     },
                                     '& > a': {
                                         marginLeft: '5px',
+                                        '& > svg': {
+                                            '& path': {
+                                                fill: '#838383'
+                                            }
+                                        }
                                     },
                                 },
                             },

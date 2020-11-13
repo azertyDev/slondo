@@ -12,7 +12,6 @@ import {useStyles} from './useStyles';
 
 export const MainContent = (props) => {
     const {t, tabValue, handleTabChange, handleShowMore, adCardData, lotCardData} = props;
-    console.log(adCardData.cardData.total > adCardData.cardData.data.length);
 
     const classes = useStyles();
     return (
@@ -88,9 +87,9 @@ export const MainContent = (props) => {
                                         <Link href={`/advertisement/show/${item.id}`}>
                                             <a>
                                                 <CardItem
+                                                    {...item}
                                                     cardType={t('lot')}
                                                     className="card-item"
-                                                    {...item}
                                                 />
                                             </a>
                                         </Link>

@@ -14,6 +14,7 @@ import {EyeIcon} from '@src/components/elements/icons/EyeIcon';
 
 // styles
 import {useStyles} from './useStyles';
+import {FavoriteBorderIcon} from "@src/components/elements/icons/FavoriteBorderIcon";
 
 export const CabinetTabItem = (props) => {
     const classes = useStyles();
@@ -77,7 +78,7 @@ export const CabinetTabItem = (props) => {
                                         </Typography>
                                         <Link href="#">
                                             <a className='favorite-icon'>
-                                                <FavoriteIcon/>
+                                                <FavoriteBorderIcon/>
                                             </a>
                                         </Link>
                                         <Link href="#">
