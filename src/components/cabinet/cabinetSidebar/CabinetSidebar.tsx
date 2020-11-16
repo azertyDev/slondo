@@ -1,7 +1,7 @@
 import React from 'react'
 import { Grid, Typography } from '@material-ui/core'
-import { UserInfoWithAvatar } from '@src/components/elements/userInfoWithAvatar/UserInfoWithAvatar'
-import { ActionsMenu } from '@src/components/elements/actionsMenu/ActionsMenu'
+import { UserInfoWithAvatar } from '@src/components/elements/user_info_with_avatar/UserInfoWithAvatar'
+import { ActionsMenu } from '@src/components/elements/actions_menu/ActionsMenu'
 
 
 // styles
@@ -26,7 +26,7 @@ export const CabinetSidebar = (props) => {
                     </div>
                     <div>
                         <div><Typography variant="subtitle1" color="initial">9</Typography></div>
-                        <div><Typography variant="subtitle1">{t('cabinet:subscrtiptions')}</Typography></div>
+                        <div><Typography variant="subtitle1">{t('cabinet:subscriptions')}</Typography></div>
                     </div>
                 </div>
                 <ActionsMenu {...props}/>

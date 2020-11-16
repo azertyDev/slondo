@@ -10,9 +10,11 @@ export const createAdvrtSchema = yup.object({
     category: yup.object({
         id: yup.number().nullable().required(requiredMsg)
     }),
-    title: yup.string().required(requiredMsg),
-    location: yup.string().required(requiredMsg),
-    files: yup.array().required(requiredMsg),
-    description: yup.string().required(requiredMsg),
-    phone: yup.string().required(requiredMsg),
+    // title: yup.string().required(requiredMsg),
+    location: yup.object({
+        city_id: yup.number().required(requiredMsg),
+    }),
+    // files: yup.array().required(requiredMsg),
+    // description: yup.string().required(requiredMsg),
+    // phone: yup.string().required(requiredMsg),
 });

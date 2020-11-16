@@ -24,19 +24,6 @@ export const useStyles = makeStyles((theme) => ({
             width: '100%',
             borderRadius: '7px',
         },
-        '& div.category-menu': {
-            [theme.breakpoints.up('lg')]: {
-                padding: '0 15px',
-            },
-            [theme.breakpoints.down('md')]: {
-                padding: 0,
-            },
-            '& > button > img': {
-                height: '20px',
-                width: '20px',
-                marginLeft: '8px'
-            }
-        },
         '& div.select-menu > div': {
             width: '100%',
             '& div.MuiSelect-selectMenu': {
@@ -50,14 +37,31 @@ export const useStyles = makeStyles((theme) => ({
                 right: 0
             }
         },
-        '& button.bottom-sign-button': {
-            color: '#000',
-            backgroundColor: '#E9E9E9',
-            border: '1px solid #C0C0C0',
-            '& > img': {
-                width: '16px',
+        '& button.header-button': {
+            borderRadius: '10px',
+            '& > svg': {
                 marginLeft: '8px'
             }
+        },
+        '& button.bottom-sign-button': {
+            color: '#000',
+            backgroundColor: '#F2F2F2',
+
+        },
+        '& button.create-ad-button': {
+            '& > h6.MuiTypography-subtitle2': {
+                lineHeight: '15px',
+                letterSpacing: '0.5px',
+                color: '#fff'
+            },
+        },
+        '& button.bottom-category-button': {
+            '& > h6.MuiTypography-subtitle2': {
+                lineHeight: '15px',
+                letterSpacing: '0.5px',
+                fontSize: '1.125rem',
+                color: '#fff'
+            },
         },
         // Adaptive
         '& div.bottom-logo > a': {

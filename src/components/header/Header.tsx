@@ -11,7 +11,7 @@ import {setIsAuthAction} from '@src/redux/slices/authRegSlice';
 import {RootState} from "@src/redux/rootReducer";
 import {ButtonComponent} from "@src/components/elements/button/Button";
 import {fetchCategories} from "@src/redux/slices/categoriesSlice";
-import {CreateAdModalForm} from '@src/components/advertisement/create_advrt/createAdModalForm/CreateAdModalForm';
+import {CreateAdModalForm} from '@src/components/advertisement/create_advrt/create_ad_modal_form/CreateAdModalForm';
 // styles
 import {useStyles} from './useStyles';
 
@@ -58,7 +58,7 @@ const Header = (props) => {
 
     const classes = useStyles();
     return (
-        <header className={classes.root}>
+        <header className={classes.root} id='back-to-top-anchor'>
             <Container maxWidth="lg">
                 <TopHeaderContainer t={t} handleOpenModal={handleOpenModal}/>
                 <div className={classes.bottomHeader}>

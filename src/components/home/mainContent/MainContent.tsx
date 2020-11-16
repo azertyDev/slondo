@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {FC} from 'react';
 import {Grid, Typography, Hidden, Tabs} from '@material-ui/core';
 import {CardItem} from '@src/components/elements/card/Card';
 import {ButtonComponent} from '@src/components/elements/button/Button';
@@ -7,10 +7,21 @@ import {Banner} from '@src/components/elements/banner/Banner';
 import {CustomTabPanel} from '@src/components/elements/custom_tab_panel/CustomTabPanel';
 import {Link} from '@root/i18n';
 // Styles
+import {TFunction} from "i18next";
+import {CardData} from "@root/interfaces/CardData";
 import {useStyles} from './useStyles';
 
 
-export const MainContent = (props) => {
+interface MainContentProps {
+    t: TFunction;
+    tabValue: number;
+    handleTabChange: (_: unknown, newValue: number) => void;
+    handleShowMore: () => void;
+    adCardData: CardData;
+    lotCardData: CardData;
+}
+
+export const MainContent: FC<MainContentProps> = (props) => {
     const {t, tabValue, handleTabChange, handleShowMore, adCardData, lotCardData} = props;
 
     const classes = useStyles();
@@ -32,7 +43,6 @@ export const MainContent = (props) => {
                                 </Typography>
                             }
                             id={0}
-                            selected={true}
                         />
                         <CustomTab
                             label={
@@ -61,16 +71,9 @@ export const MainContent = (props) => {
                                         <Link href={`/advertisement/show/${item.id}`}>
                                             <a>
                                                 <CardItem
-                                                    title={item.title}
+                                                    {...item}
                                                     cardType={t('ad')}
                                                     className="card-item"
-                                                    alt={item.title}
-                                                    image={item.images.length ? item.images[0].url : ''}
-                                                    price={item.price}
-                                                    location={item.location}
-                                                    dateTime={item.created_at}
-                                                    safe_deal={item.safe_deal}
-                                                    currency={item.currency.name}
                                                 />
                                             </a>
                                         </Link>
@@ -93,16 +96,9 @@ export const MainContent = (props) => {
                                         <Link href={`/advertisement/show/${item.id}`}>
                                             <a>
                                                 <CardItem
-                                                    title={item.title}
+                                                    {...item}
                                                     cardType={t('lot')}
                                                     className="card-item"
-                                                    alt={item.title}
-                                                    image={item.images.length ? item.images[0].url : ''}
-                                                    price={item.price}
-                                                    location={item.location}
-                                                    dateTime={item.created_at}
-                                                    safe_deal={item.safe_deal}
-                                                    currency={item.currency.name}
                                                 />
                                             </a>
                                         </Link>

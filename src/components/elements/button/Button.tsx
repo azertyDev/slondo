@@ -5,7 +5,7 @@ import {useStyles} from "./useStyles"
 
 export const ButtonComponent = (props: PropsWithChildren<ButtonBaseProps>) => {
     const {className, ...otherProps} = props;
-    const classes = useStyles();
+    const classes = useStyles(props);
 
     return (
         <ButtonBase className={`${classes.root} ${className}`} {...otherProps}/>

@@ -1,19 +1,19 @@
 import React from 'react';
-import { Typography, Paper } from '@material-ui/core';
-import { BreadcrumbsComponent } from '@src/components/elements/breadcrumbs/Breadcrumbs';
-import { ButtonComponent } from '@src/components/elements/button/Button';
-import { Link } from '../../../../i18n';
+import {Typography, Paper, Button} from '@material-ui/core';
+import {BreadcrumbsComponent} from '@src/components/elements/breadcrumbs/Breadcrumbs';
+import {ButtonComponent} from '@src/components/elements/button/Button';
+import {Link} from '@root/i18n';
 
 // icons
-import { FavoriteIcon } from '@src/components/elements/icons/FavoriteIcon';
-import { SettingsIcon } from '@src/components/elements/icons/SettingsIcon';
-import { LocationIcon } from '@src/components/elements/icons/LocationIcon';
-import { GromophoneIcon } from '@src/components/elements/icons/GromophoneIcon';
-import { PromoteIcon } from '@src/components/elements/icons/PromoteIcon';
-import { EyeIcon } from '@src/components/elements/icons/EyeIcon';
+import {FavoriteIcon} from '@src/components/elements/icons/FavoriteIcon';
+import {SettingsIcon} from '@src/components/elements/icons/SettingsIcon';
+import {LocationIcon} from '@src/components/elements/icons/LocationIcon';
+import {GromophoneIcon} from '@src/components/elements/icons/GromophoneIcon';
+import {PromoteIcon} from '@src/components/elements/icons/PromoteIcon';
+import {EyeIcon} from '@src/components/elements/icons/EyeIcon';
 
 // styles
-import { useStyles } from './useStyles';
+import {useStyles} from './useStyles';
 
 export const CabinetTabItem = () => {
     const classes = useStyles();
@@ -46,7 +46,7 @@ export const CabinetTabItem = () => {
                                     Объявление
                                 </Typography>
                                 <span>
-                                    <EyeIcon />
+                                    <EyeIcon/>
                                     <Typography
                                         variant="caption"
                                         color="initial"
@@ -76,13 +76,13 @@ export const CabinetTabItem = () => {
                                             140
                                         </Typography>
                                         <Link href="#">
-                                            <a>
-                                                <FavoriteIcon />
+                                            <a className='favorite-icon'>
+                                                <FavoriteIcon/>
                                             </a>
                                         </Link>
                                         <Link href="#">
                                             <a>
-                                                <SettingsIcon />
+                                                <SettingsIcon/>
                                             </a>
                                         </Link>
                                     </div>
@@ -106,7 +106,7 @@ export const CabinetTabItem = () => {
                                     <div>
                                         <Link href="#">
                                             <a>
-                                                <LocationIcon />
+                                                <LocationIcon/>
                                             </a>
                                         </Link>
                                         <Typography
@@ -130,16 +130,15 @@ export const CabinetTabItem = () => {
                         </Paper>
                     </div>
                     <div className="card-buttons">
-                        <ButtonComponent>
-                            <GromophoneIcon />
+                        <Button endIcon={<GromophoneIcon/>} color='primary' variant="contained">
                             Продвижение
-                        </ButtonComponent>
+                        </Button>
                         <ButtonComponent>
-                            <PromoteIcon />
+                            <PromoteIcon/>
                             Поднять в ТОП
                         </ButtonComponent>
                         <ButtonComponent>
-                            <PromoteIcon />
+                            <PromoteIcon/>
                             Поднять в ленте
                         </ButtonComponent>
                     </div>

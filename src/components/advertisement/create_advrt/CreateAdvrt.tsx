@@ -1,8 +1,8 @@
 import React, {FC, useEffect, useState} from 'react';
 import {Grid, Hidden, Container, Typography} from '@material-ui/core';
-import {AdvrtForm} from './advrtForm/AdvrtForm';
-import {SuccessAdvrt} from './successAdvrt/SuccessAdvrt';
-import {AdvertisementProps} from "@root/interfaces/Advertisement";
+import {AdvrtForm} from './advrt_form/AdvrtForm';
+import {SuccessAdvrt} from './success_advrt/SuccessAdvrt';
+import {CreateAdFields} from "@root/interfaces/Advertisement";
 import {createAdvrtSchema} from "@root/validation_schemas/createAdvrtSchema";
 import {useFormik, FormikProvider} from "formik";
 import {useSelector} from "react-redux";
@@ -13,7 +13,7 @@ import {MainLayout} from "@src/components/MainLayout";
 import {useStyles} from './useStyles';
 
 
-const initFields = {
+const initFields: CreateAdFields = {
     adType: {
         id: null,
         name: ''
@@ -26,14 +26,14 @@ const initFields = {
     safe_deal: false,
     delivery: false,
     exchange: false,
-    location: '',
+    location: null,
     files: [],
     description: '',
     phone: '',
     adsParams: {}
 };
 
-export const CreateAdvrt: FC<AdvertisementProps> = () => {
+export const CreateAdvrt: FC = () => {
     const {createAdvrt} = useSelector((store: RootState) => store);
 
     const [isPreview, setIsPreview] = useState(false);
@@ -68,7 +68,46 @@ export const CreateAdvrt: FC<AdvertisementProps> = () => {
         setValues({...values, [valName]: target.checked});
     };
 
-    const handleClickMenuItem = (valueName) => (newValue, setAnchor) => () => {
+    const handleParamsCheckbox = (valueName, value) => () => {
+        const {adsParams} = values;
+        if (adsParams[valueName]) {
+            if (adsParams[valueName].some(val => val.id === value.id)) {
+                adsParams[valueName].map((val, index) => {
+                    if (val.id === value.id) {
+                        adsParams[valueName].splice(index, 1)
+                    }
+                });
+                setValues({
+                        ...values,
+                        adsParams: {...adsParams}
+                    }
+                );
+            } else {
+                setValues({
+                        ...values,
+                        adsParams: {
+                            ...adsParams,
+                            [valueName]: [
+                                ...adsParams[valueName],
+                                value
+                            ]
+                        }
+                    }
+                );
+            }
+        } else {
+            setValues({
+                    ...values,
+                    adsParams: {
+                        ...adsParams,
+                        [valueName]: [value]
+                    }
+                }
+            );
+        }
+    };
+
+    const handleMenuItem = (valueName) => (newValue, setAnchor) => () => {
         setAnchor(null);
 
         setValues({
@@ -94,13 +133,34 @@ export const CreateAdvrt: FC<AdvertisementProps> = () => {
         });
     };
 
+    const handleListItem = (valueName, value) => () => {
+        if (values.adsParams[valueName] && values.adsParams[valueName].id === value.id) {
+            delete values.adsParams[valueName];
+
+            setValues({
+                ...values,
+                adsParams: {
+                    ...values.adsParams
+                }
+            });
+        } else {
+            setValues({
+                ...values,
+                adsParams: {
+                    ...values.adsParams,
+                    [valueName]: value
+                }
+            });
+        }
+    };
+
     useEffect(() => {
         setErrors({});
         isPreview && setIsPreview(false);
-        setValues({...values, adType: createAdvrt.adType, category: createAdvrt.data});
+        setValues({...initFields, adType: createAdvrt.adType, category: createAdvrt.data});
     }, [createAdvrt.category.id, createAdvrt.data.id, createAdvrt.data.name]);
 
-    console.log(errors)
+    console.log(values)
     const classes = useStyles();
     return (
         <MainLayout>
@@ -122,7 +182,9 @@ export const CreateAdvrt: FC<AdvertisementProps> = () => {
                                                 values={values}
                                                 setValues={setValues}
                                                 handleBlur={handleBlur}
-                                                handleClickMenuItem={handleClickMenuItem}
+                                                handleMenuItem={handleMenuItem}
+                                                handleListItem={handleListItem}
+                                                handleParamsCheckbox={handleParamsCheckbox}
                                                 handleCheckboxChange={handleCheckboxChange}
                                             />
                                         )

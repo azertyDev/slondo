@@ -17,8 +17,9 @@ const initialState: CreateAdState = {
     },
     data: {
         id: null,
-        name: ''
-    }
+        name: '',
+        address: []
+    },
 };
 
 export const fetchAdDataForCreate = createAsyncThunk<any, CategoryIDs>(

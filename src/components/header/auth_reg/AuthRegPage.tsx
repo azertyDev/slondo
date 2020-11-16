@@ -25,7 +25,7 @@ export const AuthRegPage = (props) => {
                     <Grid item xs={5}>
                         <div className='info-block'>
                             <div>
-                                <img src={BonusIcon} alt="bonus-icon"/>
+                                <BonusIcon/>
                                 <Typography variant="subtitle2" color="initial">
                                     {t('auth_reg:bonus')}
                                 </Typography>

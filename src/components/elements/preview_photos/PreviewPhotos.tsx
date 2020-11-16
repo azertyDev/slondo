@@ -9,13 +9,14 @@ import {useStyles} from './useStyles';
 
 interface IPreviewPhotos {
     values: CreateAdFields,
-    setValues: Dispatch<any>
+    setValues: Dispatch<unknown>
+    isPreview: boolean
 }
 
 export const PreviewPhotos: FC<IPreviewPhotos> = (props) => {
     resetServerContext();
 
-    const {values, setValues} = props;
+    const {values, setValues, isPreview} = props;
     const {files} = values;
 
     const handleOnDragEnd = (result) => {
@@ -37,11 +38,11 @@ export const PreviewPhotos: FC<IPreviewPhotos> = (props) => {
                 setValues({
                     ...values,
                     files: [
-                        ...files,
                         {
                             file: target.files[0],
                             url: URL.createObjectURL(target.files[0])
-                        }
+                        },
+                        ...files
                     ]
                 })
             }
@@ -61,14 +62,14 @@ export const PreviewPhotos: FC<IPreviewPhotos> = (props) => {
     const classes = useStyles();
     return (
         <div>
-            <input type='file' onChange={handleUploadFile} accept="image/png,image/jpeg"/>
+            <input type='file' disabled={isPreview} onChange={handleUploadFile} accept="image/png,image/jpeg"/>
             <DragDropContext onDragEnd={handleOnDragEnd}>
                 <Droppable droppableId="images" direction="horizontal">
                     {(provided) => (
                         <Grid container className="images-wrapper" {...provided.droppableProps} ref={provided.innerRef}>
                             {files.map(({url, file}: { url: string, file: { name: string } }, index) => {
                                 return (
-                                    <Draggable key={url} draggableId={url} index={index}>
+                                    <Draggable isDragDisabled={isPreview} key={url} draggableId={url} index={index}>
                                         {(provided) => (
                                             <Grid
                                                 item
@@ -82,7 +83,12 @@ export const PreviewPhotos: FC<IPreviewPhotos> = (props) => {
                                                     style={{width: '160px', height: '120px', objectFit: 'cover'}}
                                                     alt={file.name}
                                                 />
-                                                <ButtonComponent onClick={removeFile(url)}>X</ButtonComponent>
+                                                <ButtonComponent
+                                                    disabled={isPreview}
+                                                    onClick={removeFile(url)}
+                                                >
+                                                    X
+                                                </ButtonComponent>
                                             </Grid>
                                         )}
                                     </Draggable>

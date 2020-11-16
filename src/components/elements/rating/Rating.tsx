@@ -3,7 +3,7 @@ import { Box, Typography } from '@material-ui/core'
 import Rating from '@material-ui/lab/Rating'
 
 // styles
-import { StyledRating, useStyles } from './useStyles'
+import { useStyles } from './useStyles'
 
 const labels = {
     0.5: '0.5',

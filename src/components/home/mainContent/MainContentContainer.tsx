@@ -1,23 +1,36 @@
-import React, {useEffect, useState} from 'react'
+import React, {FC, useEffect, useState} from 'react'
 import {MainContent} from './MainContent'
+import {TFunction} from "i18next";
 import {ITEMS_PER_PAGE} from '@root/src/constants'
 import {userAPI} from "@src/api/api";
+import {CardData} from "@root/interfaces/CardData";
 
 
-const initialCardData = {
+const initialCardData: CardData = {
     isFetch: false,
     error: null,
     cardData: {
-        data: [],
+        data: [{
+            id: null,
+            title: '',
+            cardType: '',
+            safe_deal: null,
+            price: null,
+            currency: {
+                id: null,
+                name: ''
+            },
+            created_at: '',
+            location: '',
+            images: [{
+                url: ''
+            }],
+        }],
         total: null,
     },
 };
 
-const fetchCardData = async (itemsPerPage, page, type) => {
-    return await userAPI.getCardData(itemsPerPage, page, type);
-};
-
-export const MainContentContainer = (props) => {
+export const MainContentContainer: FC<{ t: TFunction }> = (props) => {
     const {t} = props;
 
     const [tabValue, setTabValue] = useState(0);
@@ -39,7 +52,7 @@ export const MainContentContainer = (props) => {
                 isFetch: true
             });
 
-            const newData = await fetchCardData(ITEMS_PER_PAGE, currentPage, type);
+            const {total, data} = await userAPI.getCardData(ITEMS_PER_PAGE, currentPage, type);
 
             setState({
                 ...state,
@@ -49,8 +62,8 @@ export const MainContentContainer = (props) => {
             setState({
                 ...state,
                 cardData: {
-                    data: [...state.cardData.data, ...newData.data],
-                    total: newData.total
+                    data,
+                    total
                 }
             });
 
@@ -77,15 +90,16 @@ export const MainContentContainer = (props) => {
     useEffect(() => {
         setCardData(lotCardData, setLotCardData, lotCurrentPage, 'lot');
     }, [lotCurrentPage])
+    console.log(adCardData)
 
     return (
         <MainContent
             t={t}
             tabValue={tabValue}
-            handleTabChange={handleTabChange}
             adCardData={adCardData}
             lotCardData={lotCardData}
             handleShowMore={handleShowMore}
+            handleTabChange={handleTabChange}
         />
     )
 }
