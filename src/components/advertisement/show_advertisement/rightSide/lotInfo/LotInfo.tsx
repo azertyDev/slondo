@@ -1,9 +1,8 @@
 import React from 'react';
 import {Typography, TextField} from '@material-ui/core';
 import {ButtonComponent} from '@src/components/elements/button/Button';
-import {Lock_icon} from '@src/components/elements/icons';
+import {LockIcon} from '@src/components/elements/icons';
 import {LotTimer} from "@src/components/advertisement/show_advertisement/rightSide/lotInfo/LotTimer";
-
 // styles
 import {useStyles} from './useStyles';
 
@@ -21,12 +20,31 @@ export const LotInfo = (props) => {
                 <div>
                     {date !== 0 && <LotTimer {...data} date={date}/>}
                 </div>
+                <div className='buy-now'>
+                    <div>
+                        <LockIcon/>
+                        <div>
+                            <Typography variant="subtitle2" color="initial">
+                                Резервная цена:
+                            </Typography>
+                            <Typography variant="h6" color="initial">
+                                1 420 000 сум
+                            </Typography>
+                        </div>
+                    </div>
+                    <div>
+                        <ButtonComponent>
+                            <Typography variant="subtitle1" color="initial">
+                                Купить сейчас
+                            </Typography>
+                        </ButtonComponent>
+                    </div>
+                </div>
                 <div className="lot-participants-block">
                     <Typography variant="subtitle1" color="initial">
                         Текущие ставки
                     </Typography>
                     <div className="participants">
-
                         <div>
                             <Typography variant="subtitle1" noWrap>
                                 Playe***112 (<span>1</span>)
@@ -68,51 +86,27 @@ export const LotInfo = (props) => {
                             </Typography>
                         </div>
                     </div>
+                    <Typography variant="subtitle1" color="initial">
+                        Все ставки
+                    </Typography>
                 </div>
-                <Typography variant="subtitle1" color="initial">
-                    Все ставки
-                </Typography>
+
                 <div className="bet-info">
                     <div>
-                        <Typography variant="subtitle1" color="initial">
-                            Сделать ставку
-                        </Typography>
-                    </div>
-                    <div>
                         <TextField placeholder="14200000" variant='outlined'/>
-                        <ButtonComponent>
+                        <ButtonComponent color='secondary'>
                             <Typography variant="subtitle1" color="initial">
-                                Применить
+                                Сделать ставку
                             </Typography>
                         </ButtonComponent>
                     </div>
                     <div>
                         <Typography variant="subtitle2" color="initial">
-                            Максимально возможная ставка 2025000
+                            Максимально возможная ставка
                         </Typography>
-                    </div>
-                    <div>
-                        <img src={Lock_icon} alt="lock-icon"/>
-                        <Typography variant="subtitle1" color="initial">
-                            Резервная цена:
+                        <Typography variant="subtitle2" color="initial">
+                            2 2500 000
                         </Typography>
-                        <Typography variant="subtitle1" color="initial">
-                            1 420 000 сум
-                        </Typography>
-                    </div>
-                    <div>
-                        <div>
-                            <Typography variant="subtitle1" color="initial">
-                                1 420 000 сум
-                            </Typography>
-                        </div>
-                        <div>
-                            <ButtonComponent>
-                                <Typography variant="subtitle1" color="initial">
-                                    Купить сейчас
-                                </Typography>
-                            </ButtonComponent>
-                        </div>
                     </div>
                     <div>
                         <ButtonComponent>

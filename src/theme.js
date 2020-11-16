@@ -13,7 +13,7 @@ const calibri = {
 
 const colors = {
     main: '#9773af',
-    secondary: '#675EAA',
+    secondary: '#845CAB',
     white: '#ffffff',
     black: '#4E4E4E',
     gray: '#C0C0C0',
@@ -50,7 +50,7 @@ const theme = createMuiTheme({
     typography: {
         fontFamily: ['Calibri', 'Roboto', 'Helvetica', 'Arial', 'sans-serif'],
         subtitle1: {
-            lineHeight: 1.5,
+            lineHeight: 1,
             color: '#4E4E4E',
         },
         h4: {
@@ -58,8 +58,16 @@ const theme = createMuiTheme({
         },
         allVariants: {
             color: '#4E4E4E',
-            lineHeight: 1
+            lineHeight: 1,
         },
+        body1: {
+            fontSize: '1.125rem',
+            fontWeight: '600'
+        },
+        body2: {
+            fontSize: '1.125rem',
+        },
+
     },
     overrides: {
         MuiCssBaseline: {

@@ -3,20 +3,63 @@ import {makeStyles} from '@material-ui/core/styles';
 export const useStyles = makeStyles((theme) => ({
     root: {
         '& div.lot-info': {
+            marginTop: "10px",
             display: 'flex',
             justifyContent: 'center',
             flexDirection: 'column',
-            marginBottom: '30px',
+            '& div.buy-now': {
+                display: 'flex',
+                flexDirection: 'column',
+                marginTop: 23,
+                '& div:first-child': {
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    '& div': {
+                        display: 'flex',
+                        flexDirection: 'column',
+                        alignItems: 'center',
+                        marginLeft: 20,
+                        '& > h6.MuiTypography-h6': {
+                            fontWeight: '600',
+                        },
+                        '& > h6.MuiTypography-subtitle2': {
+                            marginBottom: 5
+                        },
+                    },
+                },
+                '& > div:last-child': {
+                    marginTop: "15px",
+                    '& > button': {
+                        background: '#7DBCF6',
+                        borderRadius: '3px',
+                        padding: '15px 0',
+                        '& > h6.MuiTypography-subtitle1': {
+                            color: '#fff',
+                            lineHeight: '16px',
+                            fontSize: '1.125rem'
+                        },
+                    },
+                }
+            },
             '& div.lot-participants-block': {
                 display: 'flex',
                 flexDirection: 'column',
+                marginTop: '20px',
+                marginBottom: '8px',
                 '& > h6.MuiTypography-subtitle1': {
-                    padding: '0 15px 7px 15px',
+                    fontSize: '1.125rem',
+                    padding: '15px',
+                    paddingBottom: '7px',
                     fontWeight: '600',
+                    '&:last-child': {
+                        padding: '10px 15px',
+                        color: '#675EAA',
+                        textDecorationLine: 'underline'
+                    }
                 },
                 '& > div.participants': {
                     flexDirection: 'column',
-                    marginBottom: '8px',
                     borderTop: '1px solid rgba(103, 94, 170, 0.5)',
                     borderBottom: '1px solid rgba(103, 94, 170, 0.5)',
                     padding: '15px',
@@ -49,52 +92,47 @@ export const useStyles = makeStyles((theme) => ({
             },
             '& div.bet-info': {
                 flexDirection: 'column',
-                paddingBottom: '20px',
+                padding: '15px 10px',
                 borderBottom: '1px solid #ccc',
+                background: '#F2F2F2',
+                borderRadius: '5px',
                 '& > div': {
                     display: 'flex',
                     justifyContent: 'center',
-                    marginBottom: '10px',
-                },
-                '& > div:nth-child(2)': {
-                    display: 'flex',
-                    '& > div': {
-                        marginRight: '10px',
-                        '& > div > input.MuiOutlinedInput-input': {
-                            padding: '10px',
+                    flexDirection: 'column',
+                    '& > div.MuiFormControl-root': {
+                        '& > div.MuiInputBase-root': {
+                            background: '#fff',
+                            borderRadius: '3px',
+                            '& input': {
+                                padding: '15px 20px',
+                            },
                         },
                     },
                     '& > button': {
-                        width: '40%',
+                        margin: '5px 0',
+                    },
+                    '&:nth-child(2)': {
+                        display: 'flex',
+                        flexDirection: 'column',
+                        alignItems: 'center',
+                        marginBottom: "25px",
+                        '& > h6.MuiTypography-subtitle2:last-child': {
+                            color: '#845CAB'
+                        }
+                    },
+                    '&:nth-child(3)': {
+                        justifyContent: 'flex-start',
+                        '& > button': {
+                            borderRadius: '3px',
+                            margin: 0,
+                            '& > h6.MuiTypography-subtitle1': {
+                                color: theme.palette.primary.white
+                            }
+                        }
                     },
                 },
 
-                '& > div:nth-child(3)': {
-                    justifyContent: 'flex-start',
-                },
-                '& > div:nth-child(4)': {
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'flex-start',
-                    marginBottom: '30px',
-                    '& div': {
-                        width: '50%',
-                    },
-                    '& img': {
-                        marginRight: '5px',
-                    },
-                },
-                '& > div:nth-child(5)': {
-                    display: 'flex',
-                    marginBottom: '30px',
-                    alignItems: 'center',
-                    '& div': {
-                        width: '50%',
-                        '&  button': {
-                            width: '100%',
-                        },
-                    },
-                },
                 '& > div:last-child': {},
             },
         },

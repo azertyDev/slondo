@@ -2,9 +2,9 @@ import React from 'react';
 import { Typography } from '@material-ui/core';
 import { RatingComponent } from '../rating/Rating';
 import { UserAvatarComponent } from '@src/components/elements/user_info_with_avatar/avatar/UserAvatarComponent'
-
+import {ButtonComponent} from "@src/components/elements/button/Button";
 // styles
-import { useStyles } from './useStyles';
+import {useStyles} from './useStyles';
 
 export const UserInfoWithAvatar = () => {
     const classes = useStyles();
@@ -26,8 +26,13 @@ export const UserInfoWithAvatar = () => {
                         </Typography>
                     </div>
                     <div>
-                        <RatingComponent />
+                        <RatingComponent/>
                     </div>
+                    <ButtonComponent>
+                        <Typography variant='subtitle2'>
+                            Подписаться
+                        </Typography>
+                    </ButtonComponent>
                 </div>
             </div>
         </div>

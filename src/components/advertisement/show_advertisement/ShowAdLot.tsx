@@ -59,15 +59,15 @@ export const ShowAdLot = (props) => {
                     </div>
                     <Grid container spacing={2}>
                         <Grid item xs={12} md={9}>
-                            <LeftSide {...data}/>
+                            <LeftSide data={data}/>
                         </Grid>
 
                         <Hidden smDown>
                             <Grid item xs={3}>
                                 <RightSide {...props}/>
-                                <div className={classes.adBanner}>
-                                    <div className="right-banner"/>
-                                </div>
+                                {/*<div className={classes.adBanner}>*/}
+                                {/*    <div className="right-banner"/>*/}
+                                {/*</div>*/}
                             </Grid>
                         </Hidden>
                     </Grid>

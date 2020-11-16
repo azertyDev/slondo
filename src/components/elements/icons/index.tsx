@@ -37,7 +37,6 @@ export const StarIcon = `/icons/star_icon.svg`;
 export const FullscreenIcon = `/icons/fullscreen-icon.svg`;
 export const FullscreenIcon2 = `/icons/fullscreen-icon2.svg`;
 export const Subscribe_icon = `/icons/touch_icon.svg`;
-export const Lock_icon = `/icons/lock_icon.svg`;
 export const SpeakerNotes_icon = `/icons/speaker_notes.svg`;
 
 
@@ -53,3 +52,4 @@ export {FavoriteIcon} from './FavoriteIcon';
 export {DeliveryIcon} from './DeliveryIcon';
 export {SafeIcon} from './SafeIcon';
 export {SwapIcon} from './SwapIcon';
+export {LockIcon} from './LockIcon';

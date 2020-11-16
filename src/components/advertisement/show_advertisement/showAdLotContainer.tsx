@@ -4,25 +4,25 @@ import {i18n} from '@root/i18n';
 import {useRouter} from 'next/router';
 import {ShowAdLot} from "@src/components/advertisement/show_advertisement/ShowAdLot";
 
+
+const initValues = {id: null, name: ''};
+
 const initialAdData = {
     isFetch: false,
     error: null,
     data: {
         id: null,
         title: '',
-        currency: {
-            id: null,
-            name: ''
-        },
-        condition: {
-            id: null,
-            name: ''
-        },
+        currency: initValues,
+        condition: initValues,
         created_at: null,
         expiration_at: null,
         number_of_views: null,
         images: [],
-        description: ''
+        description: '',
+        region: initValues,
+        city: initValues,
+        district: initValues,
     },
 };
 
@@ -38,7 +38,17 @@ export const ShowAdLotContainer = ({t}) => {
                 isFetch: true
             });
 
-            const newData = await userAPI.getAddById(adsId, lang);
+            const {
+                title,
+                currency,
+                condition,
+                images,
+                description,
+                region,
+                city,
+                district,
+                ...otherData
+            } = await userAPI.getAddById(adsId, lang);
 
             setAdData({
                 ...adData,
@@ -47,7 +57,17 @@ export const ShowAdLotContainer = ({t}) => {
 
             setAdData({
                 ...adData,
-                data: newData
+                data: {
+                    title,
+                    images,
+                    description,
+                    currency: currency ?? initValues,
+                    condition: condition ?? initValues,
+                    region: region ?? initValues,
+                    city: city ?? initValues,
+                    district: district ?? initValues,
+                    ...otherData
+                }
             });
 
         } catch (e) {
