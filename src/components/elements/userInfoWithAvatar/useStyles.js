@@ -18,7 +18,7 @@ export const useStyles = makeStyles((theme) => ({
                 }
             },
             '& button': {
-                padding: '8px 0',
+                padding: '5px 0',
                 border: '1px solid #2F80ED',
                 background: 'none',
                 borderRadius: '5px',

@@ -39,7 +39,7 @@ export const LeftSide = ({data}) => {
                 <span><PhoneIcon/> <Typography variant='subtitle1'>9:00-18:00</Typography></span>
             </div>
             <div className='ad-location'>
-                <Typography variant="body1" noWrap>
+                <Typography variant="button" noWrap>
                     Местоположение
                 </Typography>
                 {
@@ -57,7 +57,7 @@ export const LeftSide = ({data}) => {
             <div className="ad-description">
                 <div>
                     <div>
-                        <Typography variant="body1" color="initial">
+                        <Typography variant="button" color="initial">
                             Описание
                         </Typography>
                     </div>
@@ -69,7 +69,7 @@ export const LeftSide = ({data}) => {
                 </div>
             </div>
             <div className='started-price'>
-                <Typography variant='body1'>Стартовая цена</Typography>
+                <Typography variant='button'>Стартовая цена</Typography>
                 <span>
                     <Typography variant='body2'>750 000 сум</Typography>
                 </span>
@@ -78,7 +78,7 @@ export const LeftSide = ({data}) => {
 
             {/*</div>*/}
             <div className="ad-parameters">
-                <Typography variant="body1" color="initial">
+                <Typography variant="button" color="initial">
                     Параметры
                 </Typography>
                 <div>

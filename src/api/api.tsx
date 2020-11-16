@@ -42,13 +42,14 @@ export const userAPI = {
                 throw err
             })
     },
-    getCardData: (itemsPerPage: number, page: number, type: string): Promise<any> => {
-        return instance.get(`ads/all?itemsPerPage=${itemsPerPage}&page=${page}&type=${type}`)
+    getCardData: (itemsPerPage: number, page: number, type: string, lang: string): Promise<any> => {
+        return instance.get(`ads/all?itemsPerPage=${itemsPerPage}&page=${page}&type=${type}&lang=${lang}`)
             .then((res) => res.data)
             .catch((err) => {
                 throw err;
             });
     },
+
     getAddById: (ads_id, lang): Promise<any> => {
         return instance.get(`getAddById?ads_id=${ads_id}&lang=${lang}`)
             .then((res) => res.data)

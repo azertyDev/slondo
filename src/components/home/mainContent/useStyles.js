@@ -50,12 +50,6 @@ export const useStyles = makeStyles((theme) => ({
                     letterSpacing: '0.25px',
                 },
             },
-            // '& > div.show-more-line': {
-            //     position: 'absolute',
-            //     top: '50%',
-            //     width: '100%',
-            //     borderBottom: `1px solid ${theme.palette.primary.gray}`,
-            // },
         },
     },
     adBanner: {

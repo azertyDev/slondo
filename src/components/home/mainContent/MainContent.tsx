@@ -1,7 +1,6 @@
 import React from 'react';
 import {Grid, Typography, Hidden, Tabs} from '@material-ui/core';
 import {CardItem} from '@src/components/elements/card/Card';
-import {ButtonComponent} from '@src/components/elements/button/Button';
 import {CustomTab} from '@src/components/elements/custom_tab/CustomTab';
 import {Banner} from '@src/components/elements/banner/Banner';
 import {CustomTabPanel} from '@src/components/elements/custom_tab_panel/CustomTabPanel';
@@ -9,9 +8,10 @@ import {Link} from '@root/i18n';
 
 // Styles
 import {useStyles} from './useStyles';
+import {CustomPagination} from "@src/components/elements/custom_pagination/CustomPagination";
 
 export const MainContent = (props) => {
-    const {t, tabValue, handleTabChange, handleShowMore, adCardData, lotCardData} = props;
+    const {t, tabValue, handleTabChange, adCardData, lotCardData} = props;
 
     const classes = useStyles();
     return (
@@ -48,56 +48,71 @@ export const MainContent = (props) => {
             <Grid container className="cards-container">
                 <Grid item md={9} xs={12}>
                     <CustomTabPanel value={tabValue} index={0}>
-                        <div className="ads-wrapper">
-                            <Grid item container spacing={2}>
-                                {adCardData.cardData.data.map((item) => (
-                                    <Grid
-                                        key={item.id}
-                                        xs={6}
-                                        sm={4}
-                                        lg={3}
-                                        item
-                                    >
-                                        <Link href={`/advertisement/show/${item.id}`}>
-                                            <a>
-                                                <CardItem
-                                                    {...item}
-                                                    cardType={t('ad')}
-                                                    className="card-item"
-                                                />
-                                            </a>
-                                        </Link>
-
+                        {
+                            adCardData.error
+                                ? <Typography variant='subtitle1' className='errorText'>{adCardData.error}</Typography>
+                                : <div className="ads-wrapper">
+                                    <Grid item container spacing={2}>
+                                        {adCardData.cardData.data.map((item) => (
+                                            <Grid
+                                                key={item.id}
+                                                xs={6}
+                                                sm={4}
+                                                lg={3}
+                                                item
+                                            >
+                                                <Link href={`/advertisement/show/${item.id}`}>
+                                                    <a>
+                                                        <CardItem
+                                                            {...item}
+                                                            cardType={t('ad')}
+                                                            className="card-item"
+                                                        />
+                                                    </a>
+                                                </Link>
+                                            </Grid>
+                                        ))}
                                     </Grid>
-                                ))}
-                            </Grid>
-                        </div>
+                                </div>
+                        }
                     </CustomTabPanel>
                     <CustomTabPanel value={tabValue} index={1}>
-                        <div className="lots-wrapper">
-                            <Grid item container spacing={2}>
-                                {lotCardData.cardData.data.map((item) => (
-                                    <Grid
-                                        key={item.id}
-                                        xs={6}
-                                        sm={4}
-                                        lg={3}
-                                        item
-                                    >
-                                        <Link href={`/advertisement/show/${item.id}`}>
-                                            <a>
-                                                <CardItem
-                                                    {...item}
-                                                    cardType={t('lot')}
-                                                    className="card-item"
-                                                />
-                                            </a>
-                                        </Link>
+                        {
+                            lotCardData.error
+                                ? <Typography variant='subtitle1' className='errorText'>{lotCardData.error}</Typography>
+                                : <div className="lots-wrapper">
+                                    <Grid item container spacing={2}>
+                                        {lotCardData.cardData.data.map((item) => (
+                                            <Grid
+                                                key={item.id}
+                                                xs={6}
+                                                sm={4}
+                                                lg={3}
+                                                item
+                                            >
+                                                <Link href={`/advertisement/show/${item.id}`}>
+                                                    <a>
+                                                        <CardItem
+                                                            {...item}
+                                                            cardType={t('lot')}
+                                                            className="card-item"
+                                                        />
+                                                    </a>
+                                                </Link>
+                                            </Grid>
+                                        ))}
                                     </Grid>
-                                ))}
-                            </Grid>
-                        </div>
+                                </div>
+                        }
+
                     </CustomTabPanel>
+                    <Grid item xs={12} container justify='center'>
+                        <CustomPagination
+                            count={props.pageCount}
+                            currentPage={props.currentPage}
+                            handlePaginationPage={props.handlePaginationPage}
+                        />
+                    </Grid>
                 </Grid>
                 <Hidden smDown>
                     <Grid
@@ -113,17 +128,17 @@ export const MainContent = (props) => {
                     </Grid>
                 </Hidden>
             </Grid>
-            {((adCardData.cardData.total > adCardData.cardData.data.length && tabValue === 0) || (lotCardData.cardData.total > lotCardData.cardData.data.length && tabValue === 1)) && (
-                <Grid container className={classes.showMoreContainer}>
-                    <Grid item xs={12} md={9} className="show-more-block">
-                        <ButtonComponent onClick={handleShowMore}>
-                            <Typography variant="subtitle2" color="initial">
-                                {t('showMore')}
-                            </Typography>
-                        </ButtonComponent>
-                    </Grid>
-                </Grid>
-            )}
+            {/*{((adCardData.cardData.total > adCardData.cardData.data.length && tabValue === 0) || (lotCardData.cardData.total > lotCardData.cardData.data.length && tabValue === 1)) && (*/}
+            {/*    <Grid container className={classes.showMoreContainer}>*/}
+            {/*        <Grid item xs={12} md={9} className="show-more-block">*/}
+            {/*            <ButtonComponent onClick={handleShowMore}>*/}
+            {/*                <Typography variant="subtitle2" color="initial">*/}
+            {/*                    {t('showMore')}*/}
+            {/*                </Typography>*/}
+            {/*            </ButtonComponent>*/}
+            {/*        </Grid>*/}
+            {/*    </Grid>*/}
+            {/*)}*/}
         </div>
     );
 };

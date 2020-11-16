@@ -2,6 +2,7 @@ import React, {useEffect, useState} from 'react'
 import {MainContent} from './MainContent'
 import {ITEMS_PER_PAGE} from '@root/src/constants'
 import {userAPI} from "@src/api/api";
+import {i18n} from "@root/i18n";
 
 
 const initialCardData = {
@@ -13,33 +14,31 @@ const initialCardData = {
     },
 };
 
-const fetchCardData = async (itemsPerPage, page, type) => {
-    return await userAPI.getCardData(itemsPerPage, page, type);
+const fetchCardData = async (itemsPerPage, page, type, lang) => {
+    return await userAPI.getCardData(itemsPerPage, page, type, lang);
 };
 
 export const MainContentContainer = (props) => {
     const {t} = props;
+    const lang = i18n.language;
 
     const [tabValue, setTabValue] = useState(0);
-
     const [adCurrentPage, setAdCurrentPage] = useState(1);
     const [lotCurrentPage, setLotCurrentPage] = useState(1);
     const [adCardData, setAdCardData] = useState(initialCardData);
     const [lotCardData, setLotCardData] = useState(initialCardData);
+    const pageCount = Math.ceil((tabValue === 0 ? adCardData.cardData.total : lotCardData.cardData.total) / ITEMS_PER_PAGE) || 1;
 
+    const currentPage = tabValue === 0 ? adCurrentPage : lotCurrentPage;
 
-    const handleTabChange = (_, newValue) => {
-        setTabValue(newValue);
-    };
-
-    const setCardData = async (state, setState, currentPage,type) => {
+    const setCardData = async (state, setState, currentPage, type) => {
         try {
             setState({
                 ...state,
                 isFetch: true
             });
 
-            const newData = await fetchCardData(ITEMS_PER_PAGE, currentPage, type);
+            const newData = await fetchCardData(ITEMS_PER_PAGE, currentPage, type, lang);
 
             setState({
                 ...state,
@@ -49,8 +48,8 @@ export const MainContentContainer = (props) => {
             setState({
                 ...state,
                 cardData: {
-                    data: [...state.cardData.data, ...newData.data],
-                    total: newData.total
+                    data: newData.data,
+                    total: newData.total,
                 }
             });
 
@@ -62,31 +61,44 @@ export const MainContentContainer = (props) => {
         }
     };
 
-    const handleShowMore = () => {
-        if (tabValue === 0) {
-            setAdCurrentPage(adCurrentPage + 1)
-        } else {
-            setLotCurrentPage(lotCurrentPage + 1)
-        }
+    const handleTabChange = (_, newValue) => {
+        setTabValue(newValue);
+    };
+
+    // const handleShowMore = () => {
+    //     if (tabValue === 0) {
+    //         setAdCurrentPage(adCurrentPage + 1)
+    //     } else {
+    //         setLotCurrentPage(lotCurrentPage + 1)
+    //     }
+    // };
+
+    const handlePaginationPage = (_, pageNumber) => {
+        tabValue === 0
+            ? setAdCurrentPage(pageNumber)
+            : setLotCurrentPage(pageNumber)
     };
 
 
     useEffect(() => {
-         setCardData(adCardData, setAdCardData, adCurrentPage,'ad');
+        setCardData(adCardData, setAdCardData, adCurrentPage, 'ad');
     }, [adCurrentPage])
 
     useEffect(() => {
-        setCardData(lotCardData, setLotCardData, lotCurrentPage,'lot');
+        setCardData(lotCardData, setLotCardData, lotCurrentPage, 'lot');
     }, [lotCurrentPage])
 
     return (
         <MainContent
             t={t}
             tabValue={tabValue}
-            handleTabChange={handleTabChange}
             adCardData={adCardData}
             lotCardData={lotCardData}
-            handleShowMore={handleShowMore}
+            pageCount={pageCount}
+            currentPage={currentPage}
+            handlePaginationPage={handlePaginationPage}
+            handleTabChange={handleTabChange}
+            // handleShowMore={handleShowMore}
         />
     )
 }
