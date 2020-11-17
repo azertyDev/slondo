@@ -6,27 +6,33 @@ import {userAPI} from "@src/api/api";
 import {i18n} from "@root/i18n";
 import {CardData} from "@root/interfaces/CardData";
 
+const cardData = {
+    id: null,
+    title: '',
+    cardType: '',
+    safe_deal: null,
+    price: null,
+    currency: {
+        id: null,
+        name: ''
+    },
+    created_at: '',
+    location: '',
+    images: [{
+        url: ''
+    }],
+};
+const initCards = []
+for (let i = 1; i <= 16; i++) {
+    initCards.push(cardData);
+}
+
 
 const initialCardData: CardData = {
     isFetch: false,
     error: null,
     cardData: {
-        data: [{
-            id: null,
-            title: '',
-            cardType: '',
-            safe_deal: null,
-            price: null,
-            currency: {
-                id: null,
-                name: ''
-            },
-            created_at: '',
-            location: '',
-            images: [{
-                url: ''
-            }],
-        }],
+        data: initCards,
         total: null,
     },
 };
@@ -81,7 +87,7 @@ export const MainContentContainer: FC<{ t: TFunction }> = (props) => {
     const handleTabChange = (_, newValue) => {
         setTabValue(newValue);
     };
-
+    console.log(adCardData)
     // const handleShowMore = () => {
     //     if (tabValue === 0) {
     //         setAdCurrentPage(adCurrentPage + 1)
@@ -89,6 +95,7 @@ export const MainContentContainer: FC<{ t: TFunction }> = (props) => {
     //         setLotCurrentPage(lotCurrentPage + 1)
     //     }
     // };
+
 
     const handlePaginationPage = (_, pageNumber) => {
         tabValue === 0

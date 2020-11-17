@@ -1,8 +1,8 @@
-import React, { useState } from 'react'
-import { FormControl, MenuItem, Select } from '@material-ui/core'
+import React, {useState} from 'react'
+import {FormControl, MenuItem, Select} from '@material-ui/core'
 
 // styles
-import { useStyles } from './useStyles'
+import {useStyles} from './useStyles'
 
 export const AdvertisementSelect = (props) => {
     const [value, setValue] = useState('')

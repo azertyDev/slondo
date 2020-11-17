@@ -53,7 +53,7 @@ export const useStyles = makeStyles((theme) => ({
         },
     },
     adBanner: {
-        paddingLeft: '10px',
+        paddingLeft: '20px',
         '& > div > div': {
             borderRadius: '7px',
             backgroundColor: '#C0C0C0',
