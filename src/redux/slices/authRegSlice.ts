@@ -41,6 +41,7 @@ const authRegSlice = createSlice({
         })
         builder.addCase(fetchToken.fulfilled, (state) => {
             state.isFetch = false;
+            state.error = null;
             state.isAuth = true;
         })
         builder.addCase(fetchToken.rejected, (state, action) => {

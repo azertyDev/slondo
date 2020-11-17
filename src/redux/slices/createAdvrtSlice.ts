@@ -18,7 +18,12 @@ const initialState: CreateAdState = {
     data: {
         id: null,
         name: '',
-        address: []
+        address: [],
+        adsParams: [
+            {
+                currency: []
+            }
+        ]
     },
 };
 

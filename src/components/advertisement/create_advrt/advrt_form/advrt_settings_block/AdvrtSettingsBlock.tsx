@@ -10,14 +10,14 @@ export const AdvrtSettingsBlock: FC<any> = (props) => {
     const {
         isPreview,
         createAdvrt,
-        adsParams,
+        values,
         onBlur,
         handleMenuItem,
         handleListItem,
         handleParamsCheckbox
     } = props;
 
-    const data = isPreview ? adsParams : createAdvrt.data;
+    const data = isPreview ? values : createAdvrt.data;
 
     const classes = useStyles({isPreview});
     return (
@@ -28,14 +28,14 @@ export const AdvrtSettingsBlock: FC<any> = (props) => {
         >
             {
                 Object.keys(data).map(key => {
-                    if (!isPreview && adsParams[key]) {
+                    if (!isPreview && values[key]) {
                         return (
                             <>
                                 {listGenerator(data[key], key)}
                                 {
-                                    Object.keys(adsParams[key]).map(innerKey => {
-                                        if (Array.isArray(adsParams[key][innerKey]) && adsParams[key][innerKey].length) {
-                                            return listGenerator(adsParams[key][innerKey], innerKey)
+                                    Object.keys(values[key]).map(innerKey => {
+                                        if (Array.isArray(values[key][innerKey]) && values[key][innerKey].length) {
+                                            return listGenerator(values[key][innerKey], innerKey)
                                         }
                                     })
                                 }
@@ -50,14 +50,29 @@ export const AdvrtSettingsBlock: FC<any> = (props) => {
     function listGenerator(data: ItemsType | ItemsType[], key: string) {
         let fields;
 
-        const isExcludedRows = key !== 'adsParams' && key !== 'address' && key !== 'id' && key !== 'name';
+        const isExcludedRows = key !== 'id'
+            && key !== 'name'
+            && key !== 'title'
+            && key !== 'adsParams'
+            && key !== 'adType'
+            && key !== 'price'
+            && key !== 'safe_deal'
+            && key !== 'exchange'
+            && key !== 'delivery'
+            && key !== 'location'
+            && key !== 'currency'
+            && key !== 'phone'
+            && key !== 'description'
+            && key !== 'files';
         const isOptions = key === 'safety'
             || key === 'multimedia'
             || key === 'assistant'
             || key === 'exterior';
-        const isSpecialRows = key === 'body' || key === 'colors' || isOptions;
+        const isSpecialRows = key === 'body'
+            || key === 'colors'
+            || isOptions;
 
-        if (isExcludedRows) {
+        if (isExcludedRows && data) {
             if (isSpecialRows && Array.isArray(data) && data.length) {
                 fields = <div className='colors-list'>
                     {
@@ -70,7 +85,7 @@ export const AdvrtSettingsBlock: FC<any> = (props) => {
                                     key === 'body'
                                         ? (
                                             <div
-                                                className={adsParams[key] && adsParams[key].id === item.id ? classes.selected : ''}
+                                                className={values[key] && values[key].id === item.id ? classes.selected : ''}
                                             >
                                                 <img src={item.icon.url} alt={item.name}/>
                                                 <Typography>{item.name}</Typography>
@@ -79,7 +94,7 @@ export const AdvrtSettingsBlock: FC<any> = (props) => {
                                         : key === 'colors'
                                         ? (
                                             <div
-                                                className={adsParams[key] && adsParams[key].id === item.id ? classes.selected : ''}
+                                                className={values[key] && values[key].id === item.id ? classes.selected : ''}
                                                 style={{
                                                     width: '50px',
                                                     height: '50px',
@@ -92,8 +107,8 @@ export const AdvrtSettingsBlock: FC<any> = (props) => {
                                                 <CustomCheckbox
                                                     disabled={isPreview}
                                                     checked={
-                                                        adsParams[key]
-                                                        && adsParams[key].some(val => val.id === item.id)
+                                                        values[key]
+                                                        && values[key].some(val => val.id === item.id)
                                                     }
                                                     onChange={
                                                         handleParamsCheckbox(key, {id: item.id, name: item.name})
@@ -111,7 +126,7 @@ export const AdvrtSettingsBlock: FC<any> = (props) => {
                 if (Array.isArray(data)) {
                     data = [{id: null, name: 'Не выбрано'}, ...data];
                     fields = <CustomMenu
-                        valueName={adsParams[key] ? adsParams[key].name : data[0].name}
+                        valueName={values[key] ? values[key].name : data[0].name}
                         items={data}
                         onBlur={onBlur}
                         onClick={handleMenuItem(key)}
@@ -137,7 +152,7 @@ export const AdvrtSettingsBlock: FC<any> = (props) => {
                     key={key}
                     xs={12}
                     className={classes.gridItem}
-                    sm={isSpecialRows && !isPreview ? 12 : 6}
+                    sm={isSpecialRows && !isPreview || isOptions ? 12 : 6}
                 >
                     <Typography variant="subtitle1">{key}</Typography>
                     {fields}

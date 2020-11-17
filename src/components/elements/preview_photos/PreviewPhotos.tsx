@@ -31,7 +31,6 @@ export const PreviewPhotos: FC<IPreviewPhotos> = (props) => {
 
     const handleUploadFile = ({target}) => {
         if (target.files[0] && files.length < TOTAL_FILES_LIMIT) {
-
             const totalSize = files.reduce((total, item: { file: { size: number } }) => total + item.file.size, 0);
 
             if ((totalSize + target.files[0].size) < TOTAL_FILES_SIZE_LIMIT) {

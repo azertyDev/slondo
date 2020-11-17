@@ -11,6 +11,7 @@ import {setIsAuthAction} from '@src/redux/slices/authRegSlice';
 import {RootState} from "@src/redux/rootReducer";
 import {ButtonComponent} from "@src/components/elements/button/Button";
 import {fetchCategories} from "@src/redux/slices/categoriesSlice";
+import {fetchLocations} from "@src/redux/slices/locationsSlice";
 import {CreateAdModalForm} from '@src/components/advertisement/create_advrt/create_ad_modal_form/CreateAdModalForm';
 // styles
 import {useStyles} from './useStyles';
@@ -46,6 +47,7 @@ const Header = (props) => {
 
     useEffect(() => {
         dispatch(fetchCategories(lang));
+        dispatch(fetchLocations(lang));
     }, [lang]);
 
     useEffect(() => {

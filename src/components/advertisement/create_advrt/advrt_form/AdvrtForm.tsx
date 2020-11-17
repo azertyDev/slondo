@@ -9,10 +9,12 @@ import {PreviewPhotos} from "@src/components/elements/preview_photos/PreviewPhot
 // styles
 import {useStyles} from './useStyles';
 import {AddressAutocomplete} from "@src/components/elements/address_autocomplete/AddressAutocomplete";
+import {CustomMenu} from "@src/components/elements/custom_menu/CustomMenu";
 
 
 export const AdvrtForm: FC<any> = (props) => {
     const {
+        locations,
         isPreview,
         createAdvrt,
         values,
@@ -112,6 +114,68 @@ export const AdvrtForm: FC<any> = (props) => {
                         }
                     </Grid>
                 </Grid>
+                <Grid
+                    container
+                    item
+                    xs={12}
+                    alignItems="center"
+                    justify="space-between"
+                    spacing={2}
+                >
+                    <Grid item xs={12} sm={6}>
+                        <Grid item xs={12}>
+                            <Typography variant="subtitle1">
+                                <strong>
+                                    Цена
+                                    <span className={classes.required}>
+                                        *
+                                    </span>
+                                </strong>
+                            </Typography>
+                            {
+                                isPreview
+                                    ? <Typography>{`${values.price} ${values.currency.name}.`}</Typography>
+                                    : <div className={classes.selectPrice}>
+                                        <CustomFormikField
+                                            name='price'
+                                            value={values.price}
+                                        />
+                                        <CustomMenu
+                                            valueName={values.currency ? values.currency.name : 'Не выбрано'}
+                                            items={createAdvrt.data.adsParams ? createAdvrt.data.adsParams[0].currency : []}
+                                            onClick={handleMenuItem('currency')}
+                                            onBlur={handleBlur}
+                                        />
+                                    </div>
+                            }
+                        </Grid>
+                    </Grid>
+                    {
+                        createAdvrt.data.adsParams.length && createAdvrt.data.adsParams[0].condition
+                        && (
+                            <Grid item xs={12} sm={6}>
+                                <Typography variant="subtitle1">
+                                    <strong>
+                                        Состояние
+                                        <span className={classes.required}>
+                                            *
+                                        </span>
+                                    </strong>
+                                </Typography>
+                                {
+                                    isPreview
+                                        ? <Typography>{values.condition}</Typography>
+                                        : <CustomMenu
+                                            valueName={values.condition ? values.condition.name : 'Не выбрано'}
+                                            items={createAdvrt.data.adsParams[0].condition}
+                                            onClick={handleMenuItem('condition')}
+                                            onBlur={handleBlur}
+                                        />
+                                }
+                            </Grid>
+                        )
+                    }
+                </Grid>
                 {
                     createAdvrt.data.id && (
                         <Grid item container className={classes.parameters} direction='column'>
@@ -123,7 +187,7 @@ export const AdvrtForm: FC<any> = (props) => {
                             {createAdvrt.data.id && (
                                 <AdvrtSettingsBlock
                                     isPreview={isPreview}
-                                    adsParams={values.adsParams}
+                                    values={values}
                                     createAdvrt={createAdvrt}
                                     onBlur={handleBlur}
                                     handleMenuItem={handleMenuItem}
@@ -269,7 +333,7 @@ export const AdvrtForm: FC<any> = (props) => {
                                     placeholder='Выберите город или регион'
                                     values={values}
                                     setValues={setValues}
-                                    list={createAdvrt.data.address}
+                                    list={locations.data}
                                 />
                         }
                     </Grid>

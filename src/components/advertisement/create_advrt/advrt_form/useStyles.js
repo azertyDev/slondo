@@ -51,19 +51,12 @@ export const useStyles = makeStyles((theme) => ({
         },
     },
     selectPrice: {
-        '& div.MuiOutlinedInput-input': {
-            paddingLeft: '10px',
-            paddingRight: '10px',
-        },
-        '& svg.MuiSelect-iconOutlined': {
-            right: '5px',
-        },
+        display: 'flex'
     },
     paymentAndDelivery: {
         display: 'flex',
         alignItems: 'center',
         flexFlow: 'row',
-        // justifyContent: 'space-between',
         '& a': {
             textDecoration: 'none',
         },

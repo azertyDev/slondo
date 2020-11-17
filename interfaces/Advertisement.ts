@@ -20,19 +20,17 @@ export interface CreateAdState {
         id: number;
         name: string;
         address: [];
+        adsParams: [
+            {
+                currency: []
+            }
+        ];
     },
 }
 
 export interface CreateAdFields {
-    adType: {
-        id: number;
-        name: string
-    };
-    category: {
-        id: number;
-        name: string
-    };
     title: string;
+    price: string;
     safe_deal: boolean;
     delivery: boolean;
     exchange: boolean;
@@ -45,5 +43,4 @@ export interface CreateAdFields {
     files: [];
     description: string;
     phone: string;
-    adsParams: any;
 }

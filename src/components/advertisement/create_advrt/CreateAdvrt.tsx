@@ -1,5 +1,6 @@
 import React, {FC, useEffect, useState} from 'react';
 import {Grid, Hidden, Container, Typography} from '@material-ui/core';
+import {userAPI} from '@src/api/api';
 import {AdvrtForm} from './advrt_form/AdvrtForm';
 import {SuccessAdvrt} from './success_advrt/SuccessAdvrt';
 import {CreateAdFields} from "@root/interfaces/Advertisement";
@@ -14,15 +15,8 @@ import {useStyles} from './useStyles';
 
 
 const initFields: CreateAdFields = {
-    adType: {
-        id: null,
-        name: ''
-    },
-    category: {
-        id: null,
-        name: ''
-    },
     title: '',
+    price: '',
     safe_deal: false,
     delivery: false,
     exchange: false,
@@ -30,19 +24,49 @@ const initFields: CreateAdFields = {
     files: [],
     description: '',
     phone: '',
-    adsParams: {}
 };
 
-export const CreateAdvrt: FC = () => {
-    const {createAdvrt} = useSelector((store: RootState) => store);
+export const CreateAdvrt: FC<void> = () => {
+    const {createAdvrt, locations} = useSelector((store: RootState) => store);
 
     const [isPreview, setIsPreview] = useState(false);
     const [isSuccess, setIsSuccess] = useState(false);
 
-    const onSubmit = () => {
-        isPreview
-            ? console.log('submit')
-            : setIsPreview(true)
+    const prepareData = (data: CreateAdFields) => {
+        const form = new FormData();
+        const {
+            safe_deal,
+            delivery,
+            exchange,
+            location,
+            files,
+            ...otherValues
+        } = data;
+
+        form.set('ads_type_id', createAdvrt.adType.id.toString());
+        form.set('parent_categories_id', createAdvrt.category.id.toString());
+        // form.set('ads_type_id', adType.id);
+        // form.set('ads_type_id', adType.id);
+        // form.set('ads_type_id', adType.id);
+        // form.set('ads_type_id', adType.id);
+        // form.set('ads_type_id', adType.id);
+        // form.set('ads_type_id', adType.id);
+        return form;
+    };
+
+    const onSubmit = async (values: CreateAdFields) => {
+        try {
+            if (!isPreview) {
+                setIsPreview(true);
+            } else {
+                const data = prepareData(values);
+                await userAPI.createAdvrt(data);
+                setIsSuccess(true);
+                console.log('submit');
+            }
+        } catch (e) {
+            console.log(e);
+        }
     };
 
     const formik = useFormik({
@@ -69,41 +93,23 @@ export const CreateAdvrt: FC = () => {
     };
 
     const handleParamsCheckbox = (valueName, value) => () => {
-        const {adsParams} = values;
-        if (adsParams[valueName]) {
-            if (adsParams[valueName].some(val => val.id === value.id)) {
-                adsParams[valueName].map((val, index) => {
+        if (values[valueName]) {
+            if (values[valueName].some(val => val.id === value.id)) {
+                values[valueName].map((val, index) => {
                     if (val.id === value.id) {
-                        adsParams[valueName].splice(index, 1)
+                        values[valueName].splice(index, 1)
                     }
                 });
-                setValues({
-                        ...values,
-                        adsParams: {...adsParams}
-                    }
-                );
+                setValues({...values});
             } else {
                 setValues({
                         ...values,
-                        adsParams: {
-                            ...adsParams,
-                            [valueName]: [
-                                ...adsParams[valueName],
-                                value
-                            ]
-                        }
+                        [valueName]: [...values[valueName], value]
                     }
                 );
             }
         } else {
-            setValues({
-                    ...values,
-                    adsParams: {
-                        ...adsParams,
-                        [valueName]: [value]
-                    }
-                }
-            );
+            setValues({...values, [valueName]: [value]});
         }
     };
 
@@ -112,53 +118,39 @@ export const CreateAdvrt: FC = () => {
 
         setValues({
             ...values,
-            adsParams: {
-                ...values.adsParams,
-                [valueName]: newValue
-            }
+            [valueName]: newValue
         });
 
         // Reset sub props in values
         Object.keys(newValue).map(key => {
-            if (values.adsParams[key]) {
+            if (values[key]) {
                 setValues({
                     ...values,
-                    adsParams: {
-                        ...values.adsParams,
-                        [valueName]: newValue,
-                        [key]: {id: null, name: 'Не выбрано', ...newValue[key]}
-                    }
+                    [valueName]: newValue,
+                    [key]: {id: null, name: 'Не выбрано', ...newValue[key]}
                 })
             }
         });
     };
 
     const handleListItem = (valueName, value) => () => {
-        if (values.adsParams[valueName] && values.adsParams[valueName].id === value.id) {
-            delete values.adsParams[valueName];
+        if (values[valueName] && values[valueName].id === value.id) {
+            delete values[valueName];
 
-            setValues({
-                ...values,
-                adsParams: {
-                    ...values.adsParams
-                }
-            });
+            setValues({...values});
         } else {
             setValues({
                 ...values,
-                adsParams: {
-                    ...values.adsParams,
-                    [valueName]: value
-                }
+                [valueName]: value
             });
         }
     };
 
     useEffect(() => {
         setErrors({});
+        setValues({...initFields});
         isPreview && setIsPreview(false);
-        setValues({...initFields, adType: createAdvrt.adType, category: createAdvrt.data});
-    }, [createAdvrt.category.id, createAdvrt.data.id, createAdvrt.data.name]);
+    }, [createAdvrt.data.id, createAdvrt.data.name]);
 
     console.log(values)
     const classes = useStyles();
@@ -174,6 +166,7 @@ export const CreateAdvrt: FC = () => {
                                         ? <SuccessAdvrt/>
                                         : (
                                             <AdvrtForm
+                                                locations={locations}
                                                 isPreview={isPreview}
                                                 setIsPreview={setIsPreview}
                                                 createAdvrt={createAdvrt}
@@ -204,6 +197,7 @@ export const CreateAdvrt: FC = () => {
                                     }
                                     <ButtonComponent
                                         type='submit'
+                                        disabled={!(createAdvrt.adType.id && createAdvrt.category.id)}
                                         className={classes.nextButton}
                                     >
                                         <Typography>
