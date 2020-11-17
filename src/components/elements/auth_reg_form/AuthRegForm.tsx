@@ -42,6 +42,7 @@ export const AuthRegForm: FC<WithT & { handleCloseModal: () => void }> = (props)
     const onSubmit = (values, actions) => {
         loginReg(values);
         actions.resetForm();
+        props.handleCloseModal();
     };
 
     const classes = useStyles();
@@ -96,8 +97,6 @@ export const AuthRegForm: FC<WithT & { handleCloseModal: () => void }> = (props)
                                                     name='phone'
                                                     type='tel'
                                                     placeholder={t('auth_reg:enterPhone')}
-                                                    setFieldValue={setFieldValue}
-                                                    validate={phoneValidate}
                                                     className={errors.phone && touched.phone ? classes.errorInput : ''}
                                                 />
                                             </div>
@@ -112,8 +111,6 @@ export const AuthRegForm: FC<WithT & { handleCloseModal: () => void }> = (props)
                                                     name='password'
                                                     type="password"
                                                     placeholder={t('auth_reg:enterPassword')}
-                                                    validate={requiredValidate}
-                                                    setFieldValue={setFieldValue}
                                                     className={errors.password && touched.password ? classes.errorInput : ''}
                                                 />
                                             </div>
@@ -153,8 +150,6 @@ export const AuthRegForm: FC<WithT & { handleCloseModal: () => void }> = (props)
                                                 name='phone'
                                                 type='tel'
                                                 placeholder={t('auth_reg:enterPhone')}
-                                                validate={phoneValidate}
-                                                setFieldValue={setFieldValue}
                                                 className={errors.phone && touched.phone ? classes.errorInput : ''}
                                             />
                                         </div>

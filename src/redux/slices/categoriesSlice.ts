@@ -9,7 +9,9 @@ const initialState: Categories = {
     list: [{
         id: null,
         name: '',
-        images: {id: null, url: ''}
+        images: {id: null, url: ''},
+        icons: {id: null, url: ''},
+        childs: []
     }],
 };
 

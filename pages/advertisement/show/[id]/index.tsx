@@ -1,6 +1,6 @@
 import React from 'react'
 import {withTranslation} from "@root/i18n"
-import {ShowAdLotContainer} from "@src/components/advertisement/showAdvertisement/showAdLotContainer";
+import {ShowAdLotContainer} from "@src/components/advertisement/show_advertisement/showAdLotContainer";
 
 
 const Show_advertisement = (props) => {

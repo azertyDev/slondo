@@ -1,16 +1,30 @@
-import React from 'react';
+import React, {FC} from 'react';
 import {Grid, Typography, Hidden, Tabs} from '@material-ui/core';
 import {CardItem} from '@src/components/elements/card/Card';
 import {CustomTab} from '@src/components/elements/custom_tab/CustomTab';
 import {Banner} from '@src/components/elements/banner/Banner';
 import {CustomTabPanel} from '@src/components/elements/custom_tab_panel/CustomTabPanel';
 import {Link} from '@root/i18n';
-
 // Styles
+import {TFunction} from "i18next";
+import {CardData} from "@root/interfaces/CardData";
 import {useStyles} from './useStyles';
 import {CustomPagination} from "@src/components/elements/custom_pagination/CustomPagination";
 
-export const MainContent = (props) => {
+
+interface MainContentProps {
+    t: TFunction;
+    tabValue: number;
+    handleTabChange: (_: unknown, newValue: number) => void;
+    // handleShowMore: () => void;
+    adCardData: CardData;
+    lotCardData: CardData;
+    pageCount: number;
+    currentPage: number;
+    handlePaginationPage:  (_: unknown, pageNumber: number) => void;
+}
+
+export const MainContent: FC<MainContentProps> = (props) => {
     const {t, tabValue, handleTabChange, adCardData, lotCardData} = props;
 
     const classes = useStyles();
@@ -32,7 +46,6 @@ export const MainContent = (props) => {
                                 </Typography>
                             }
                             id={0}
-                            selected={true}
                         />
                         <CustomTab
                             label={
@@ -74,6 +87,7 @@ export const MainContent = (props) => {
                                         ))}
                                     </Grid>
                                 </div>
+
                         }
                     </CustomTabPanel>
                     <CustomTabPanel value={tabValue} index={1}>
@@ -104,7 +118,6 @@ export const MainContent = (props) => {
                                     </Grid>
                                 </div>
                         }
-
                     </CustomTabPanel>
                     <Grid item xs={12} container justify='center'>
                         <CustomPagination

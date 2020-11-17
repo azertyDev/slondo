@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {FC} from 'react'
 import {
     Card,
     CardActionArea,
@@ -7,28 +7,24 @@ import {
     IconButton,
     Typography,
 } from '@material-ui/core'
-
+import {InnerCardData} from "@root/interfaces/CardData";
 // icons
-import {FavoriteIcon} from '@src/components/elements/icons/FavoriteIcon'
-import {DeliveryIcon} from '@src/components/elements/icons/DeliveryIcon'
-import {SafeIcon} from '@src/components/elements/icons/SafeIcon'
-import {SwapIcon} from '@src/components/elements/icons/SwapIcon'
-
+import {FavoriteIcon, DeliveryIcon, SafeIcon, SwapIcon} from '@src/components/elements/icons';
 // styles
 import {useStyles} from './useStyles'
 
-export const CardItem = (props) => {
-    const {id,cardType, title, location, created_at, images, price, safe_deal, currency} = props
 
-    const classes = useStyles()
+export const CardItem: FC<InnerCardData & { className: string }> = (props) => {
+
+    const classes = useStyles();
     return (
         <Card className={classes.root} elevation={0}>
-            <CardMedia className="card-media" image={images.length ? images[0].url : null}>
+            <CardMedia className="card-media" image={props.images.length ? props.images[0].url : null}>
                 <div className="card-header">
                     <div>
-                        <Typography variant="subtitle2">{cardType}</Typography>
+                        <Typography variant="subtitle2">{props.cardType}</Typography>
                         <IconButton>
-                            <FavoriteIcon id={id}/>
+                            <FavoriteIcon id={props.id}/>
                         </IconButton>
                     </div>
                     <div>
@@ -36,7 +32,7 @@ export const CardItem = (props) => {
                             <DeliveryIcon/>
                         </span>
                         {
-                            safe_deal
+                            props.safe_deal
                                 ? <span>
                                     <SafeIcon/>
                                 </span>
@@ -48,18 +44,19 @@ export const CardItem = (props) => {
                     </div>
                 </div>
             </CardMedia>
-            <CardActionArea title={title}>
+            <CardActionArea title={props.title}>
                 <CardContent>
                     <Typography variant="subtitle1" color="initial" noWrap>
-                        {title}
+                        {props.title}
                     </Typography>
-                    <Typography variant="h5" color="initial">{price} <span>{currency.name}</span></Typography>
+                    <Typography variant="h5" color="initial">{props.price}
+                        <span>{props.currency.name}</span></Typography>
                     <Typography variant="caption" noWrap={true} color="initial" className='card-location'>
-                        {location}
+                        {props.location}
                     </Typography>
                     <br/>
                     <Typography variant="caption" noWrap={true} color="initial" className='card-location'>
-                        {created_at}
+                        {props.created_at}
                     </Typography>
                 </CardContent>
             </CardActionArea>

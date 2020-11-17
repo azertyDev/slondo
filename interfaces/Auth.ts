@@ -1,10 +1,10 @@
 export interface AuthInputs {
-    phone: string,
-    password: string
+    phone: string;
+    password: string;
 }
 
 export interface AuthReg {
-    isFetch: boolean,
-    isAuth: boolean,
-    error?: any
+    isFetch: boolean;
+    isAuth: boolean;
+    error?: unknown;
 }

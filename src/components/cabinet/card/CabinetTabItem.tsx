@@ -16,7 +16,7 @@ import {EyeIcon} from '@src/components/elements/icons/EyeIcon';
 import {useStyles} from './useStyles';
 import {FavoriteBorderIcon} from "@src/components/elements/icons/FavoriteBorderIcon";
 
-export const CabinetTabItem = (props) => {
+export const CabinetTabItem = () => {
     const classes = useStyles();
     return (
         <div className={classes.root}>

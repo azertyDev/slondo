@@ -7,7 +7,19 @@ import {CategoryIDs} from "@root/interfaces/Categories";
 const initialState: CreateAdState = {
     isFetch: false,
     error: null,
-    data: []
+    adType: {
+        id: null,
+        name: 'Выберите тип объявления'
+    },
+    category: {
+        id: null,
+        name: 'Выберите категорию'
+    },
+    data: {
+        id: null,
+        name: '',
+        address: []
+    },
 };
 
 export const fetchAdDataForCreate = createAsyncThunk<any, CategoryIDs>(
@@ -25,8 +37,12 @@ const createAdvrtSlice = createSlice({
     name: 'createAdvrt',
     initialState,
     reducers: {
+        createAdvrtDataAction: (state, action) => {
+            state.adType = action.payload.adType;
+            state.category = action.payload.category;
+        },
         resetCreateAdvrtDataAction: (state) => {
-            state.data = [];
+            state.data = initialState.data;
         }
     },
     extraReducers: (builder) => {
@@ -45,5 +61,5 @@ const createAdvrtSlice = createSlice({
     }
 });
 
-export const {resetCreateAdvrtDataAction} = createAdvrtSlice.actions;
+export const {resetCreateAdvrtDataAction, createAdvrtDataAction} = createAdvrtSlice.actions;
 export const createAdvrtReducer = createAdvrtSlice.reducer;

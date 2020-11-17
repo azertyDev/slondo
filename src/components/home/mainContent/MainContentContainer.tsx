@@ -1,15 +1,32 @@
-import React, {useEffect, useState} from 'react'
+import React, {FC, useEffect, useState} from 'react'
 import {MainContent} from './MainContent'
+import {TFunction} from "i18next";
 import {ITEMS_PER_PAGE} from '@root/src/constants'
 import {userAPI} from "@src/api/api";
 import {i18n} from "@root/i18n";
+import {CardData} from "@root/interfaces/CardData";
 
 
-const initialCardData = {
+const initialCardData: CardData = {
     isFetch: false,
     error: null,
     cardData: {
-        data: [],
+        data: [{
+            id: null,
+            title: '',
+            cardType: '',
+            safe_deal: null,
+            price: null,
+            currency: {
+                id: null,
+                name: ''
+            },
+            created_at: '',
+            location: '',
+            images: [{
+                url: ''
+            }],
+        }],
         total: null,
     },
 };
@@ -18,7 +35,7 @@ const fetchCardData = async (itemsPerPage, page, type, lang) => {
     return await userAPI.getCardData(itemsPerPage, page, type, lang);
 };
 
-export const MainContentContainer = (props) => {
+export const MainContentContainer: FC<{ t: TFunction }> = (props) => {
     const {t} = props;
     const lang = i18n.language;
 
@@ -78,7 +95,6 @@ export const MainContentContainer = (props) => {
             ? setAdCurrentPage(pageNumber)
             : setLotCurrentPage(pageNumber)
     };
-
 
     useEffect(() => {
         setCardData(adCardData, setAdCardData, adCurrentPage, 'ad');

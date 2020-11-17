@@ -34,12 +34,9 @@ export const HeartIcon = `/icons/heart_icon.svg`;
 export const ComplainIcon = `/icons/complain_icon.svg`;
 export const UserAvatar = `/icons/user-avatar_icon.svg`;
 export const StarIcon = `/icons/star_icon.svg`;
-export const DeliveryIcon = `/icons/delivery_icon.svg`;
-export const SwapIcon = `/icons/swap_icon.svg`;
 export const FullscreenIcon = `/icons/fullscreen-icon.svg`;
 export const FullscreenIcon2 = `/icons/fullscreen-icon2.svg`;
 export const Subscribe_icon = `/icons/touch_icon.svg`;
-export const Lock_icon = `/icons/lock_icon.svg`;
 export const SpeakerNotes_icon = `/icons/speaker_notes.svg`;
 
 
@@ -51,3 +48,8 @@ export {StoreIcon} from './StoreIcon';
 export {QuestionIcon} from './QuestionIcon';
 export {LocationIcon} from './LocationIcon';
 export {BonusIcon} from './BonusIcon';
+export {FavoriteIcon} from './FavoriteIcon';
+export {DeliveryIcon} from './DeliveryIcon';
+export {SafeIcon} from './SafeIcon';
+export {SwapIcon} from './SwapIcon';
+export {LockIcon} from './LockIcon';

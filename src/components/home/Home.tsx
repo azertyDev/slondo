@@ -5,16 +5,15 @@ import { MainSlider } from '../header/sliders/mainSlider/MainSlider'
 import { CategoriesSlider } from '../header/sliders/categoriesSlider/CategoriesSlider'
 import { MainLayout } from '../MainLayout'
 import { MainContentContainer } from '@src/components/home/mainContent/MainContentContainer'
-import { InterestCategory } from '@src/components/home/interestCategory/InterestCategory'
-
 // styles
 import { useStyles } from './useStyles'
+
 
 export const Home = (props) => {
     const { t } = props
     const trigger = useScrollTrigger()
 
-    const classes = useStyles()
+    const classes = useStyles();
     return (
         <MainLayout title={t('title')}>
             <div className={classes.mainSlider}>
@@ -24,9 +23,6 @@ export const Home = (props) => {
                 <div className={classes.categorySlider}>
                     <CategoriesSlider t={t} />
                 </div>
-                {/* <div>
-                    <InterestCategory />
-                </div> */}
                 <div className={classes.mainContent}>
                     <MainContentContainer t={t} />
                 </div>
