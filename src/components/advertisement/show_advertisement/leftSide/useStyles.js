@@ -51,20 +51,15 @@ export const useStyles = makeStyles((theme) => ({
                 marginRight: '30px',
                 borderRadius: '100px',
                 boxShadow: '0px 0px 15px rgba(0, 0, 0, 0.1)',
-                '& svg': {
-                    marginRight: 15,
-                },
-                '& h6.MuiTypography-subtitle1': {
-                    color: '#838383',
-                },
-                '&:nth-child(1)': {
+                '&.delivery': {
                     '& svg': {
                         '& path': {
                             fill: '#695EAE',
                         }
                     }
                 },
-                '&:nth-child(3)': {
+                '&.safe_deal': {},
+                '&.exchange': {
                     '& svg': {
                         width: 20,
                         height: 22,
@@ -72,7 +67,14 @@ export const useStyles = makeStyles((theme) => ({
                             fill: '#4E4E4E',
                         }
                     }
-                }
+                },
+                '&.available': {},
+                '& svg': {
+                    marginRight: 15,
+                },
+                '& h6.MuiTypography-subtitle1': {
+                    color: '#838383',
+                },
             }
         },
         '& div.ad-location': {

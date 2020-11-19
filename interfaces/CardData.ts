@@ -20,4 +20,6 @@ export type InnerCardData = {
     }
     images: Array<{ url: string }>;
     created_at: string;
+    delivery: number,
+    exchange: number,
 }

@@ -40,7 +40,7 @@ export const SpeakerNotes_icon = `/icons/speaker_notes.svg`;
 
 
 // Custom svgs
-export {CloseIcon} from './close_icon/CloseIcon';
+export {ButtonCloseIcon} from './close_icon/CloseIcon';
 export {PrevArrowIcon} from './prev_arrow_icon/PrevArrowIcon';
 export {BusinessIcon} from './BusinessIcon';
 export {StoreIcon} from './StoreIcon';
@@ -53,10 +53,13 @@ export {DeliveryIcon} from './DeliveryIcon';
 export {SafeIcon} from './SafeIcon';
 export {SwapIcon} from './SwapIcon';
 export {LockIcon} from './LockIcon';
-export {GramophoneIcon} from './GramophoneIcon';
+export {MegaphoneIcon} from './MegaphoneIcon';
 export {RaiseToTopIcon} from './RaiseToTopIcon';
 export {PromoteIcon} from './PromoteIcon';
 export {DoubleUpIcon} from './DoubleUpIcon';
 export {SettingsIcon} from './SettingsIcon';
 export {EyeIcon} from './EyeIcon';
+export {RestoreIcon} from './RestoreIcon';
+export {DoneAllIcon} from './DoneAllIcon';
+export {CloseIcon} from './CloseIcon';
 

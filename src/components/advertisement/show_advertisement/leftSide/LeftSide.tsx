@@ -19,6 +19,7 @@ export const LeftSide = ({data}) => {
     const date = new Date(data.created_at);
     const months = ["января", "февраля", "марта", "апреля", "мая", "июня", "июля", "августа", "сентября", "октября", "ноября", "декабря"]
     const formatted_date = date.getDate() + " " + months[(date.getMonth())] + " " + date.getFullYear();
+    console.log(data)
 
     const classes = useStyles();
     return (
@@ -26,19 +27,35 @@ export const LeftSide = ({data}) => {
             <div className="ad-slider">
                 <SyncSliders imgs={data.images}/>
             </div>
-            <div className='ad-info'>
-                <Typography variant='subtitle1'><span>Объявление №:</span> {data.id}</Typography>
-                <Typography variant='subtitle1'>Опубликовано: {formatted_date}</Typography>
-                <Typography variant='subtitle1'>Просмотров: {data.number_of_views}</Typography>
-                <Typography variant='subtitle1'>Пожаловаться <WarningIcon/></Typography>
+            <div className="ad-info">
+                <Typography variant="subtitle1"><span>Объявление №:</span> {data.id}</Typography>
+                <Typography variant="subtitle1">Опубликовано: {formatted_date}</Typography>
+                <Typography variant="subtitle1">Просмотров: {data.number_of_views}</Typography>
+                <Typography variant="subtitle1">Пожаловаться <WarningIcon/></Typography>
             </div>
-            <div className='ad-bonus'>
-                <span><DeliveryIcon/> <Typography variant='subtitle1'>Есть доставка</Typography></span>
-                <span><SafeIcon/> <Typography variant='subtitle1'>Безопасная покупка</Typography></span>
-                <span><SwapIcon/> <Typography variant='subtitle1'>Возможен обмен</Typography></span>
-                <span><PhoneIcon/> <Typography variant='subtitle1'>9:00-18:00</Typography></span>
+            <div className="ad-bonus">
+                { data.delivery
+                    ? <span className="delivery"><DeliveryIcon/> <Typography variant="subtitle1">Есть доставка</Typography></span>
+                    : null
+                }
+                { data.safe_deal
+                    ? <span className="safe_deal"><SafeIcon/> <Typography variant="subtitle1">Безопасная покупка</Typography></span>
+                    : null
+                }
+                { data.exchange
+                    ? <span className="exchange"><SwapIcon/> <Typography variant="subtitle1">Возможен обмен</Typography></span>
+                    : null
+                }
+                { data.available_start_time
+                    ? <span className="available"><PhoneIcon/> <Typography variant="subtitle1">{data.available_start_time}-{data.available_end_time}</Typography></span>
+                    : null
+                }
+                {/*<span className="delivery"><DeliveryIcon/> <Typography variant="subtitle1">Есть доставка</Typography></span>*/}
+                {/*<span className="safe_deal"><SafeIcon/> <Typography variant="subtitle1">Безопасная покупка</Typography></span>*/}
+                {/*<span className="exchange"><SwapIcon/> <Typography variant="subtitle1">Возможен обмен</Typography></span>*/}
+                {/*<span className="available"><PhoneIcon/> <Typography variant="subtitle1">{data.available_start_time}-{data.available_end_time}</Typography></span>*/}
             </div>
-            <div className='ad-location'>
+            <div className="ad-location">
                 <Typography variant="button" noWrap>
                     Местоположение
                 </Typography>
@@ -51,7 +68,7 @@ export const LeftSide = ({data}) => {
                             {data.city.name ? `, ${data.city.name}` : ''}
                             {data.district.name ? `, ${data.district.name}` : ''}
                         </Typography>
-                        : <Typography variant='subtitle1'>Не указано</Typography>
+                        : <Typography variant="subtitle1">Не указано</Typography>
                 }
             </div>
             <div className="ad-description">
@@ -68,10 +85,10 @@ export const LeftSide = ({data}) => {
                     </ReadMore>
                 </div>
             </div>
-            <div className='started-price'>
-                <Typography variant='button'>Стартовая цена</Typography>
+            <div className="started-price">
+                <Typography variant="button">Стартовая цена</Typography>
                 <span>
-                    <Typography variant='body2'>750 000 сум</Typography>
+                    <Typography variant="body2">750 000 сум</Typography>
                 </span>
             </div>
             {/*<div className="ad-category">*/}

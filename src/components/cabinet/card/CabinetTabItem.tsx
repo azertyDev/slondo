@@ -5,11 +5,12 @@ import {Link} from '@root/i18n';
 import {
     SettingsIcon,
     LocationIcon,
-    GramophoneIcon,
+    MegaphoneIcon,
     PromoteIcon,
     EyeIcon,
     DoubleUpIcon,
-    FavoriteBorderIcon
+    FavoriteBorderIcon,
+    RestoreIcon, CloseIcon, DoneAllIcon
 } from '@src/components/elements/icons';
 
 // styles
@@ -36,110 +37,128 @@ export const CabinetTabItem = () => {
                 </div>
                 <div>
                     <div>
-                        <Paper variant="outlined" elevation={2}>
-                            <div className="img">
-                                <Typography
-                                    variant="caption"
-                                    color="initial"
-                                    noWrap
-                                >
-                                    Объявление
-                                </Typography>
-                                <span>
-                                    <EyeIcon/>
+                        <div>
+                            <Paper variant="outlined" elevation={2}>
+                                <div>
+                                    <div className="img">
                                     <Typography
                                         variant="caption"
                                         color="initial"
                                         noWrap
                                     >
-                                        1240
+                                        Объявление
                                     </Typography>
-                                </span>
-                            </div>
-                            <div className="content">
-                                <div className="header">
-                                    <div>
+                                    <span>
+                                        <EyeIcon/>
                                         <Typography
-                                            variant="subtitle1"
+                                            variant="caption"
                                             color="initial"
                                             noWrap
                                         >
-                                            Мебель от производителя по супер
-                                            скидке!
+                                            1240
                                         </Typography>
+                                    </span>
+                                </div>
+                                    <div className="content">
+                                    <div className="header">
+                                        <div>
+                                            <Typography
+                                                variant="subtitle1"
+                                                color="initial"
+                                                noWrap
+                                            >
+                                                Мебель от производителя по супер
+                                                скидке!
+                                            </Typography>
+                                        </div>
+                                        <div>
+                                            <Typography
+                                                variant="subtitle2"
+                                                color="initial"
+                                            >
+                                                140
+                                            </Typography>
+                                            <Link href="#">
+                                                <a className="favorite-icon">
+                                                    <FavoriteBorderIcon/>
+                                                </a>
+                                            </Link>
+                                            <Link href="#">
+                                                <a>
+                                                    <SettingsIcon/>
+                                                </a>
+                                            </Link>
+                                        </div>
                                     </div>
-                                    <div>
+                                    <div className="description">
                                         <Typography
                                             variant="subtitle2"
                                             color="initial"
                                         >
-                                            140
-                                        </Typography>
-                                        <Link href="#">
-                                            <a className="favorite-icon">
-                                                <FavoriteBorderIcon/>
-                                            </a>
-                                        </Link>
-                                        <Link href="#">
-                                            <a>
-                                                <SettingsIcon/>
-                                            </a>
-                                        </Link>
-                                    </div>
-                                </div>
-                                <div className="description">
-                                    <Typography
-                                        variant="subtitle2"
-                                        color="initial"
-                                    >
-                                        Не упустите шанс купить мебель от
-                                        производителя по доступным ценам! Шкаф
-                                        купе размер 138см ширина высота 210 см
-                                        глубина 55 см. Наш фирменный магазин
-                                        находится в Мирзоулугбекском районе
-                                        массив Феруза. Наш фирменный магазин
-                                        находится в Мирзоулугбекском районе
-                                        массив Феруза
-                                    </Typography>
-                                </div>
-                                <div className="location">
-                                    <div>
-                                        <Link href="#">
-                                            <a>
-                                                <LocationIcon/>
-                                            </a>
-                                        </Link>
-                                        <Typography
-                                            variant="caption"
-                                            color="initial"
-                                        >
-                                            Ташкент, Ташкентская
-                                            область,Мирзо-Улугбекский район
+                                            Lorem ipsum dolor sit amet, consectetur adipisicing elit.
                                         </Typography>
                                     </div>
-                                    <div>
-                                        <Typography
-                                            variant="h5"
-                                            color="initial"
-                                        >
-                                            1 300 000 сум
-                                        </Typography>
+                                    <div className="location">
+                                        <div>
+                                            <Link href="#">
+                                                <a>
+                                                    <LocationIcon/>
+                                                </a>
+                                            </Link>
+                                            <Typography
+                                                variant="caption"
+                                                color="initial"
+                                            >
+                                                Ташкент, Ташкентская
+                                                область,Мирзо-Улугбекский район
+                                            </Typography>
+                                        </div>
+                                        <div>
+                                            <Typography
+                                                variant="h5"
+                                                color="initial"
+                                            >
+                                                1 300 000 сум
+                                            </Typography>
+                                        </div>
                                     </div>
                                 </div>
+                                </div>
+                            </Paper>
+                            <div className="status-buttons">
+                                <Button>
+                                    <RestoreIcon/>
+                                    <Typography variant="subtitle1">Ожидание</Typography>
+                                </Button>
+                                <Button>
+                                    <Typography variant="subtitle1">Завершить</Typography>
+                                </Button>
+                                {/*<Buton>*/}
+                                {/*    <DoneAllIcon/>*/}
+                                {/*    <Typography variant="subtitle1">Принято</Typography>*/}
+                                {/*</Button>*/}
+                                {/*<Button>*/}
+                                {/*    <CloseIcon/>*/}
+                                {/*    <Typography variant="subtitle1">Отказано</Typography>*/}
+                                {/*</Button>*/}
                             </div>
-                        </Paper>
+                        </div>
+                        <div className="card-buttons">
+                            <Button color="primary" variant="contained" className="promoteButton" aria-label="promoteButton">
+                                <Typography variant="subtitle1">Продвижение</Typography>
+                                <PromoteIcon/>
+                            </Button>
+                            <Button color="primary" variant="contained" className="raiseTopButton">
+                                <Typography variant="subtitle1">Поднять в ТОП</Typography>
+                                <MegaphoneIcon/>
+                            </Button>
+                            <Button color="primary" variant="contained" className="doubleUpButton">
+                                <Typography variant="subtitle1">Поднять в ленте</Typography>
+                                <DoubleUpIcon/>
+                            </Button>
+                        </div>
                     </div>
-                    <div className="card-buttons">
-                        <Button endIcon={<PromoteIcon/>} color="primary" variant="contained" className='promoteButton'>
-                            Продвижение
-                        </Button>
-                        <Button endIcon={<GramophoneIcon/>} color="primary" variant="contained" className='raiseTopButton'>
-                            Поднять в ТОП
-                        </Button>
-                        <Button endIcon={<DoubleUpIcon/>} color="primary" variant="contained" className='doubleUpButton'>
-                            Поднять в ленте
-                        </Button>
-                    </div>
+
                 </div>
             </div>
         </div>

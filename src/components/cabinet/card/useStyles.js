@@ -18,118 +18,174 @@ export const useStyles = makeStyles((theme) => ({
                 },
             },
             '& > div': {
-                display: 'flex',
-                flexDirection: 'row',
                 '& > div:first-child': {
-                    maxWidth: '75%',
-                    '& > div.MuiPaper-root': {
-                        display: 'flex',
-                        border: 0,
-                        '& > div.img': {
-                            borderTopLeftRadius: '10px',
-                            borderBottomLeftRadius: '10px',
-                            width: '80%',
-                            height: 'auto',
-                            backgroundImage:
-                                'url("https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQgtRf_ypExsaR6LsfyIdgSA-VW_MTKz8zo-g&usqp=CAU")',
-                            backgroundPosition: 'center top',
-                            backgroundSize: 'cover',
-                            backgroundRepeat: 'no-repeat',
-                            position: 'relative',
-                            '& > span.MuiTypography-caption': {
-                                position: 'absolute',
-                                top: '3px',
-                                left: '3px',
-                                backgroundColor: 'rgba(136, 202, 236, 0.65)',
-                                borderRadius: '5px',
-                                padding: '3px 7px',
-                                letterSpacing: '0.4px',
-                                color: '#fff',
-                            },
-                            '& > span:last-child': {
-                                position: 'absolute',
-                                bottom: '4px',
-                                left: '4px',
-                                display: 'flex',
-                                justifyContent: 'space-between',
-                                alignItems: 'center',
-                                padding: '3px',
-                                backgroundColor: 'rgba(255, 255, 255, 0.7)',
-                                borderRadius: '5px',
-                                '& > svg': {
-                                    marginRight: '8px',
-                                },
-                            },
-                        },
-                        '& > div:last-child': {
-                            padding: '10px 10px 10px 20px',
-                            border: '1px solid #ccc',
-                            borderLeft: 0,
-                            borderRadius: '0 10px 10px 0',
-                            '& > div.header': {
-                                display: 'flex',
-                                justifyContent: 'space-between',
-                                width: '100%',
-                                marginBottom: '10px',
-                                '& > div': {
-                                    display: 'flex',
-                                    alignItems: 'center',
-                                    '& > h6.MuiTypography-subtitle1': {
-                                        fontSize: '18px',
-                                        borderBottom: '1px solid #4E4E4E',
-                                        lineHeight: '20px',
-                                    },
-                                    '& > h6.MuiTypography-subtitle2': {
-                                        borderBottom: '1px solid #838383',
-                                        lineHeight: '15px',
-                                        color: '#838383',
-                                    },
-                                    '& > a': {
-                                        marginLeft: '5px',
-                                        '& > svg': {
-                                            '& path': {
-                                                fill: '#838383'
-                                            }
-                                        }
-                                    },
-                                },
-                            },
-                        },
-                        '& > div > div.description': {
-                            color: '#838383',
-                            marginBottom: '10px',
-                        },
-                        '& > div > div.location': {
+                    display: 'flex',
+                    flexDirection: 'row',
+                    '& > div:first-child': {
+                        zIndex: 1,
+                        '& > div.MuiPaper-root': {
                             display: 'flex',
-                            justifyContent: 'space-between',
-                            '& > div:first-child': {
+                            flexDirection: 'column',
+                            border: 0,
+                            boxShadow: '0px 0px 15px rgba(0, 0, 0, 0.1)',
+                            '& > div': {
                                 display: 'flex',
-                                alignItems: 'center',
-                                width: '60%',
-                                '& > a': {
-                                    display: 'flex',
-                                    marginRight: "10px"
+                                height: 160,
+                                '& > div.img': {
+                                    borderRadius: '10px 0px 0px 0px',
+                                    width: '160px',
+                                    height: 'auto',
+                                    backgroundImage:
+                                        'url(https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQgtRf_ypExsaR6LsfyIdgSA-VW_MTKz8zo-g&usqp=CAU)',
+                                    backgroundPosition: 'center top',
+                                    backgroundSize: 'cover',
+                                    backgroundRepeat: 'no-repeat',
+                                    position: 'relative',
+                                    '& > span.MuiTypography-caption': {
+                                        position: 'absolute',
+                                        top: '3px',
+                                        left: '3px',
+                                        backgroundColor: 'rgba(136, 202, 236, 0.65)',
+                                        borderRadius: '5px',
+                                        padding: '3px 7px',
+                                        letterSpacing: '0.4px',
+                                        color: '#fff',
+                                    },
+                                    '& > span:last-child': {
+                                        position: 'absolute',
+                                        bottom: '4px',
+                                        left: '4px',
+                                        display: 'flex',
+                                        justifyContent: 'space-between',
+                                        alignItems: 'center',
+                                        padding: '3px',
+                                        backgroundColor: 'rgba(255, 255, 255, 0.7)',
+                                        borderRadius: '5px',
+                                        '& > svg': {
+                                            marginRight: '8px',
+                                        },
+                                    },
                                 },
-                            }, '& > div': {
-                                display: 'flex',
-                                alignItems: 'center',
-                                justifyContent: 'flex-end',
-                                width: '40%',
-                            },
+                                '& > div:last-child': {
+                                    padding: '10px 10px 10px 20px',
+                                    borderLeft: 0,
+                                    borderRadius: '0 10px 0 0',
+                                    display: 'flex',
+                                    flexDirection: 'column',
+                                    justifyContent: 'space-between',
+                                    '& > div.header': {
+                                        display: 'flex',
+                                        justifyContent: 'space-between',
+                                        width: '100%',
+                                        marginBottom: '10px',
+                                        '& > div': {
+                                            display: 'flex',
+                                            alignItems: 'center',
+                                            '& > h6.MuiTypography-subtitle1': {
+                                                fontSize: '18px',
+                                                borderBottom: '1px solid #4E4E4E',
+                                                lineHeight: '20px',
+                                            },
+                                            '& > h6.MuiTypography-subtitle2': {
+                                                borderBottom: '1px solid #838383',
+                                                lineHeight: '20px',
+                                                color: '#838383',
+                                            },
+                                            '& > a': {
+                                                marginLeft: '5px',
+                                                '& > svg': {
+                                                    '& path': {
+                                                        fill: '#838383'
+                                                    }
+                                                },
+                                                '&:last-child': {
+                                                    marginLeft: '15px',
+                                                }
+                                            },
+                                        },
+                                    },
+                                },
+                                '& > div > div.description': {
+                                    color: '#838383',
+                                    marginBottom: '10px',
+                                },
+                                '& > div > div.location': {
+                                    display: 'flex',
+                                    justifyContent: 'space-between',
+                                    '& > div:first-child': {
+                                        display: 'flex',
+                                        alignItems: 'center',
+                                        width: '60%',
+                                        '& > a': {
+                                            display: 'flex',
+                                            marginRight: "10px"
+                                        },
+                                    }, '& > div': {
+                                        display: 'flex',
+                                        alignItems: 'center',
+                                        justifyContent: 'flex-end',
+                                        width: '40%',
+                                    },
+                                },
+                            }
                         },
+                        '& > div.status-buttons': {
+                            display: 'flex',
+                            '& button': {
+                                padding: '10px 0',
+                                borderRadius: '0px 0px 10px 10px',
+                                '&:first-child': {
+                                    width: '100%',
+                                    background: 'rgba(125, 188, 246, 0.8)',
+                                    '& svg': {
+                                        marginRight: 10
+                                    }
+                                },
+                                '&:last-child': {
+                                    width: '46%',
+                                    marginLeft: '20px',
+                                    background: '#BDBDBD',
+                                },
+                                '& h6.MuiTypography-subtitle1': {
+                                    color: '#fff'
+                                }
+                            }
+                        }
                     },
                 },
-                '& > div.card-buttons': {
-                    width: '25%',
+                '& > div > div.card-buttons': {
                     display: 'flex',
                     flexDirection: 'column',
-                    justifyContent: 'center',
+                    zIndex: 0,
                     '& > button': {
-                        padding: '10px',
-                        marginBottom: '10px',
+                        marginTop: 10,
+                        padding: 10,
                         transition: '.1s ease-in-out',
                         boxShadow: '2px 0px 4px rgba(0, 0, 0, 0.15)',
                         borderRadius: '0px 5px 5px 0px',
+                        // display: 'flex',
+                        transform: 'perspective(1px) translateZ(0)',
+                        position: 'relative',
+                        transitionDuration: '0.3s',
+                        transitionProperty: 'transform',
+                        left: '-120px',
+                        '& > span > svg': {
+                            marginLeft: '10px',
+                        },
+                        '&:disabled': {
+                            backgroundColor: '#ccc !important',
+                        },
+                        '&:hover': {
+                            transform: 'translateX(120px)',
+                        },
+                        '& h6.MuiTypography-subtitle1': {
+                            color: '#fff',
+                        },
+                        '& > span.MuiButton-label': {
+                            display: 'flex',
+                            alignItems: 'center',
+                            justifyContent: 'space-between',
+                        },
                         '&.promoteButton': {
                             backgroundColor: '#77B1FF'
                         },
@@ -139,12 +195,11 @@ export const useStyles = makeStyles((theme) => ({
                         '&.doubleUpButton': {
                             backgroundColor: '#F6AC6A'
                         },
-                        '& > svg': {
-                            marginRight: '10px',
-                        },
+
                     },
                 },
             },
+
         },
     },
 }))
