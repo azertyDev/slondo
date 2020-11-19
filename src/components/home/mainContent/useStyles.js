@@ -50,16 +50,10 @@ export const useStyles = makeStyles((theme) => ({
                     letterSpacing: '0.25px',
                 },
             },
-            // '& > div.show-more-line': {
-            //     position: 'absolute',
-            //     top: '50%',
-            //     width: '100%',
-            //     borderBottom: `1px solid ${theme.palette.primary.gray}`,
-            // },
         },
     },
     adBanner: {
-        paddingLeft: '10px',
+        paddingLeft: '20px',
         '& > div > div': {
             borderRadius: '7px',
             backgroundColor: '#C0C0C0',

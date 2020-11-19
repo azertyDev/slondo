@@ -6,10 +6,9 @@ import {CustomFormikTextarea} from "@src/components/elements/custom_formik_texta
 import {AdvrtSettingsBlock} from "@src/components/advertisement/create_advrt/advrt_form/advrt_settings_block/AdvrtSettingsBlock";
 import {CustomCheckbox} from "@src/components/elements/custom_checkbox/CustomCheckbox";
 import {PreviewPhotos} from "@src/components/elements/preview_photos/PreviewPhotos";
-// styles
-import {useStyles} from './useStyles';
-import {AddressAutocomplete} from "@src/components/elements/address_autocomplete/AddressAutocomplete";
+import {LocationAutocomplete} from "@src/components/elements/location_autocomplete/LocationAutocomplete";
 import {CustomMenu} from "@src/components/elements/custom_menu/CustomMenu";
+import {useStyles} from './useStyles';
 
 
 export const AdvrtForm: FC<any> = (props) => {
@@ -50,11 +49,7 @@ export const AdvrtForm: FC<any> = (props) => {
                         <div>
                             <Typography variant="subtitle1">
                                 <strong>
-                                    Тип
-                                    <span className={classes.required}>
-                                        *
-                                    </span>
-                                    - {`${createAdvrt.adType.name}`}
+                                    Тип - {`${createAdvrt.adType.name}`}
                                 </strong>
                             </Typography>
                         </div>
@@ -67,11 +62,7 @@ export const AdvrtForm: FC<any> = (props) => {
                         <Typography variant="subtitle1">
                             <>
                                 <strong>
-                                    Категория
-                                    <span className={classes.required}>
-                                        *
-                                    </span>
-                                    - {`${createAdvrt.category.name} `}
+                                    Категория - {`${createAdvrt.category.name} `}
                                 </strong>
                                 {
                                     createAdvrt.data.name && (
@@ -122,34 +113,38 @@ export const AdvrtForm: FC<any> = (props) => {
                     justify="space-between"
                     spacing={2}
                 >
-                    <Grid item xs={12} sm={6}>
-                        <Grid item xs={12}>
-                            <Typography variant="subtitle1">
-                                <strong>
-                                    Цена
-                                    <span className={classes.required}>
-                                        *
-                                    </span>
-                                </strong>
-                            </Typography>
-                            {
-                                isPreview
-                                    ? <Typography>{`${values.price} ${values.currency.name}.`}</Typography>
-                                    : <div className={classes.selectPrice}>
-                                        <CustomFormikField
-                                            name='price'
-                                            value={values.price}
-                                        />
-                                        <CustomMenu
-                                            valueName={values.currency ? values.currency.name : 'Не выбрано'}
-                                            items={createAdvrt.data.adsParams ? createAdvrt.data.adsParams[0].currency : []}
-                                            onClick={handleMenuItem('currency')}
-                                            onBlur={handleBlur}
-                                        />
-                                    </div>
-                            }
-                        </Grid>
-                    </Grid>
+                    {
+                        createAdvrt.category.id !== 11 && (
+                            <Grid item xs={12} sm={6}>
+                                <Grid item xs={12}>
+                                    <Typography variant="subtitle1">
+                                        <strong>
+                                            Цена
+                                            <span className={classes.required}>
+                                                *
+                                            </span>
+                                        </strong>
+                                    </Typography>
+                                    {
+                                        isPreview
+                                            ? <Typography>{`${values.price} ${values.currency.name}.`}</Typography>
+                                            : <div className={classes.selectPrice}>
+                                                <CustomFormikField
+                                                    name='price'
+                                                    value={values.price}
+                                                />
+                                                <CustomMenu
+                                                    valueName={values.currency ? values.currency.name : 'Не выбрано'}
+                                                    items={createAdvrt.data.adsParams ? createAdvrt.data.adsParams[0].currency : []}
+                                                    onClick={handleMenuItem('currency')}
+                                                    onBlur={handleBlur}
+                                                />
+                                            </div>
+                                    }
+                                </Grid>
+                            </Grid>
+                        )
+                    }
                     {
                         createAdvrt.data.adsParams.length && createAdvrt.data.adsParams[0].condition
                         && (
@@ -203,41 +198,45 @@ export const AdvrtForm: FC<any> = (props) => {
                         <strong>Оплата и доставка</strong>
                     </Typography>
                 </Grid>
-                <Grid
-                    container
-                    item
-                    xs={12}
-                    alignItems="center"
-                    justify="space-between"
-                >
-                    <Grid item xs={3}>
-                        <Typography variant="subtitle1">
-                            Безопасный торг
-                        </Typography>
-                    </Grid>
-                    <Grid
-                        item
-                        xs={9}
-                        className={classes.paymentAndDelivery}
-                    >
-                        <CustomCheckbox
-                            disabled={isPreview}
-                            checked={values.safe_deal}
-                            onChange={handleCheckboxChange('safe_deal')}
-                        />
-                        <Help className="question-mark"/>
-                        <Typography variant="subtitle2">
-                            Примечание: Вы подключили услугу «Безопасный
-                            торг». Ваша сделка защищена. Стоимость
-                            услуги составляет n%.{' '}
-                            <a href="#">
-                                <span className="safe-auction-rules">
-                                    Ознакомиться с правилами «Безопасный торг»
-                                </span>
-                            </a>
-                        </Typography>
-                    </Grid>
-                </Grid>
+                {
+                    createAdvrt.category.id !== 11 && (
+                        <Grid
+                            container
+                            item
+                            xs={12}
+                            alignItems="center"
+                            justify="space-between"
+                        >
+                            <Grid item xs={3}>
+                                <Typography variant="subtitle1">
+                                    Безопасный торг
+                                </Typography>
+                            </Grid>
+                            <Grid
+                                item
+                                xs={9}
+                                className={classes.paymentAndDelivery}
+                            >
+                                <CustomCheckbox
+                                    disabled={isPreview}
+                                    checked={values.safe_deal}
+                                    onChange={handleCheckboxChange('safe_deal')}
+                                />
+                                <Help className="question-mark"/>
+                                <Typography variant="subtitle2">
+                                    Примечание: Вы подключили услугу «Безопасный
+                                    торг». Ваша сделка защищена. Стоимость
+                                    услуги составляет n%.{' '}
+                                    <a href="#">
+                            <span className="safe-auction-rules">
+                                Ознакомиться с правилами «Безопасный торг»
+                            </span>
+                                    </a>
+                                </Typography>
+                            </Grid>
+                        </Grid>
+                    )
+                }
                 <Grid
                     container
                     item
@@ -267,10 +266,10 @@ export const AdvrtForm: FC<any> = (props) => {
                             за Ваш счет. В случае невыполнения доставки,
                             Вы можете быть заблокированы.
                             <a href="#">
-                                    <span className="safe-auction-rules">
-                                        Ознакомиться с правилами «Есть
-                                        доставка»
-                                    </span>
+                    <span className="safe-auction-rules">
+                    Ознакомиться с правилами «Есть
+                    доставка»
+                    </span>
                             </a>
                         </Typography>
                     </Grid>
@@ -327,8 +326,15 @@ export const AdvrtForm: FC<any> = (props) => {
                         </Typography>
                         {
                             isPreview
-                                ? <Typography>{`${values.location.area}, ${values.location.city}`}</Typography>
-                                : <AddressAutocomplete
+                                ? <Typography>
+                                    {
+                                        values.location.district
+                                            ? `${values.location.district}, ${values.location.city}, `
+                                            : `${values.location.city}, `
+                                    }
+                                    {`${values.location.region}.`}
+                                </Typography>
+                                : <LocationAutocomplete
                                     name='location'
                                     placeholder='Выберите город или регион'
                                     values={values}

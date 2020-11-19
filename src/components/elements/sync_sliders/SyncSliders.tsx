@@ -31,7 +31,7 @@ export const SyncSliders = (props) => {
                 <CustomSlider
                     asNavFor={slidersNav.nav1}
                     ref={slider2}
-                    slidesToShow={7}
+                    slidesToShow={props.imgs.length}
                     focusOnSelect={true}
                 >
                     {props.imgs.map(({url, alt}, i) => (

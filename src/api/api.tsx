@@ -44,8 +44,8 @@ export const userAPI = {
                 throw err
             })
     },
-    getCardData: (itemsPerPage: number, page: number, type: string): Promise<unknown> => {
-        return instance.get(`ads/all?itemsPerPage=${itemsPerPage}&page=${page}&type=${type}`)
+    getCardData: (itemsPerPage: number, page: number, type: string, lang: string): Promise<any> => {
+        return instance.get(`ads/all?itemsPerPage=${itemsPerPage}&page=${page}&type=${type}&lang=${lang}`)
             .then((res) => res.data)
             .catch((err) => {
                 throw err;

@@ -33,10 +33,10 @@ export const ShowAdLot = (props) => {
                             <Typography color="primary">Столовая мебель</Typography>
                         </BreadcrumbsComponent>
                     </div>
-                    <div className='adv-header'>
+                    <div className="adv-header">
                         <div>
                             <span>
-                                <Typography variant='h6'>
+                                <Typography variant="h6">
                                     Объявление
                                 </Typography>
                             </span>
@@ -46,7 +46,7 @@ export const ShowAdLot = (props) => {
                                 </Typography>
                             </span>
                             <span>
-                                <Typography variant='h6'>
+                                <Typography variant="h6">
                                     {data.condition.name}
                                 </Typography>
                             </span>

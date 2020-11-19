@@ -1,9 +1,10 @@
-import React, {FC} from "react";
+import React, {FC, Fragment} from "react";
 import {Grid, Typography} from "@material-ui/core";
 import {CustomMenu} from "@src/components/elements/custom_menu/CustomMenu";
 import {ItemsType} from "@root/interfaces/CustomMenuProps";
 import {useStyles} from './useStyles';
 import {CustomCheckbox} from "@src/components/elements/custom_checkbox/CustomCheckbox";
+import {CustomFormikField} from "@src/components/elements/custom_formik_field/CustomFormikField";
 
 
 export const AdvrtSettingsBlock: FC<any> = (props) => {
@@ -28,20 +29,70 @@ export const AdvrtSettingsBlock: FC<any> = (props) => {
         >
             {
                 Object.keys(data).map(key => {
-                    if (!isPreview && values[key]) {
-                        return (
-                            <>
-                                {listGenerator(data[key], key)}
-                                {
-                                    Object.keys(values[key]).map(innerKey => {
-                                        if (Array.isArray(values[key][innerKey]) && values[key][innerKey].length) {
-                                            return listGenerator(values[key][innerKey], innerKey)
-                                        }
-                                    })
-                                }
-                            </>
-                        )
-                    } else return listGenerator(data[key], key);
+                    return (
+                        <Fragment key={key}>
+                            {
+                                !isPreview && values[key]
+                                    ? (
+                                        <>
+                                            {listGenerator(data[key], key)}
+                                            {
+                                                Object.keys(values[key]).map(innerKey => {
+                                                    if (Array.isArray(values[key][innerKey]) && values[key][innerKey].length) {
+                                                        return listGenerator(values[key][innerKey], innerKey)
+                                                    }
+                                                })
+                                            }
+                                        </>
+                                    )
+                                    : listGenerator(data[key], key)
+                            }
+                            {
+                                key === 'body' && (
+                                    <>
+                                        <Grid
+                                            item
+                                            container
+                                            xs={12}
+                                            sm={6}
+                                            className={classes.gridItem}
+                                        >
+                                            <Typography variant="subtitle1">year</Typography>
+                                            {
+                                                isPreview
+                                                    ? <Typography>{values.year}</Typography>
+                                                    : <CustomFormikField
+                                                        name='year'
+                                                        type='number'
+                                                        placeholder='Год выпуска'
+                                                        value={values.year ?? ''}
+                                                    />
+                                            }
+                                        </Grid>
+                                        <Grid
+                                            item
+                                            container
+                                            xs={12}
+                                            sm={6}
+                                            className={classes.gridItem}
+                                        >
+                                            <Typography variant="subtitle1">mileage</Typography>
+                                            {
+                                                isPreview
+                                                    ? <Typography>{values.mileage}</Typography>
+                                                    : <CustomFormikField
+                                                        name='mileage'
+                                                        type='number'
+                                                        placeholder='Пробег'
+                                                        value={values.mileage ?? ''}
+                                                    />
+                                            }
+                                        </Grid>
+                                    </>
+                                )
+                            }
+                        </Fragment>
+                    )
                 })
             }
         </Grid>
@@ -64,17 +115,19 @@ export const AdvrtSettingsBlock: FC<any> = (props) => {
             && key !== 'phone'
             && key !== 'description'
             && key !== 'files';
+
         const isOptions = key === 'safety'
             || key === 'multimedia'
             || key === 'assistant'
             || key === 'exterior';
+
         const isSpecialRows = key === 'body'
             || key === 'colors'
             || isOptions;
 
         if (isExcludedRows && data) {
             if (isSpecialRows && Array.isArray(data) && data.length) {
-                fields = <div className='colors-list'>
+                fields = <div className='row-list'>
                     {
                         data.map(item => (
                             <div
@@ -149,9 +202,9 @@ export const AdvrtSettingsBlock: FC<any> = (props) => {
                 <Grid
                     item
                     container
+                    className={classes.gridItem}
                     key={key}
                     xs={12}
-                    className={classes.gridItem}
                     sm={isSpecialRows && !isPreview || isOptions ? 12 : 6}
                 >
                     <Typography variant="subtitle1">{key}</Typography>

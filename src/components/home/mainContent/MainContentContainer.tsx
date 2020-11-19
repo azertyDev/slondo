@@ -3,47 +3,56 @@ import {MainContent} from './MainContent'
 import {TFunction} from "i18next";
 import {ITEMS_PER_PAGE} from '@root/src/constants'
 import {userAPI} from "@src/api/api";
+import {i18n} from "@root/i18n";
 import {CardData} from "@root/interfaces/CardData";
+
+const cardData = {
+    id: null,
+    title: '',
+    cardType: '',
+    safe_deal: null,
+    price: null,
+    currency: {
+        id: null,
+        name: ''
+    },
+    created_at: '',
+    location: '',
+    images: [{
+        url: ''
+    }],
+};
+const initCards = []
+for (let i = 1; i <= 16; i++) {
+    initCards.push(cardData);
+}
 
 
 const initialCardData: CardData = {
     isFetch: false,
     error: null,
     cardData: {
-        data: [{
-            id: null,
-            title: '',
-            cardType: '',
-            safe_deal: null,
-            price: null,
-            currency: {
-                id: null,
-                name: ''
-            },
-            created_at: '',
-            location: '',
-            images: [{
-                url: ''
-            }],
-        }],
+        data: initCards,
         total: null,
     },
 };
 
+const fetchCardData = async (itemsPerPage, page, type, lang) => {
+    return await userAPI.getCardData(itemsPerPage, page, type, lang);
+};
+
 export const MainContentContainer: FC<{ t: TFunction }> = (props) => {
     const {t} = props;
+    const lang = i18n.language;
 
     const [tabValue, setTabValue] = useState(0);
-
     const [adCurrentPage, setAdCurrentPage] = useState(1);
     const [lotCurrentPage, setLotCurrentPage] = useState(1);
     const [adCardData, setAdCardData] = useState(initialCardData);
     const [lotCardData, setLotCardData] = useState(initialCardData);
+    const pageCount = Math.ceil((tabValue === 0 ? adCardData.cardData.total : lotCardData.cardData.total) / ITEMS_PER_PAGE) || 1;
 
-
-    const handleTabChange = (_, newValue) => {
-        setTabValue(newValue);
-    };
+    const currentPage = tabValue === 0 ? adCurrentPage : lotCurrentPage;
 
     const setCardData = async (state, setState, currentPage, type) => {
         try {
@@ -52,7 +61,7 @@ export const MainContentContainer: FC<{ t: TFunction }> = (props) => {
                 isFetch: true
             });
 
-            const {total, data} = await userAPI.getCardData(ITEMS_PER_PAGE, currentPage, type);
+            const newData = await fetchCardData(ITEMS_PER_PAGE, currentPage, type, lang);
 
             setState({
                 ...state,
@@ -62,8 +71,8 @@ export const MainContentContainer: FC<{ t: TFunction }> = (props) => {
             setState({
                 ...state,
                 cardData: {
-                    data,
-                    total
+                    data: newData.data,
+                    total: newData.total,
                 }
             });
 
@@ -75,12 +84,23 @@ export const MainContentContainer: FC<{ t: TFunction }> = (props) => {
         }
     };
 
-    const handleShowMore = () => {
-        if (tabValue === 0) {
-            setAdCurrentPage(adCurrentPage + 1)
-        } else {
-            setLotCurrentPage(lotCurrentPage + 1)
-        }
+    const handleTabChange = (_, newValue) => {
+        setTabValue(newValue);
+    };
+    console.log(adCardData)
+    // const handleShowMore = () => {
+    //     if (tabValue === 0) {
+    //         setAdCurrentPage(adCurrentPage + 1)
+    //     } else {
+    //         setLotCurrentPage(lotCurrentPage + 1)
+    //     }
+    // };
+
+
+    const handlePaginationPage = (_, pageNumber) => {
+        tabValue === 0
+            ? setAdCurrentPage(pageNumber)
+            : setLotCurrentPage(pageNumber)
     };
 
     useEffect(() => {
@@ -90,7 +110,6 @@ export const MainContentContainer: FC<{ t: TFunction }> = (props) => {
     useEffect(() => {
         setCardData(lotCardData, setLotCardData, lotCurrentPage, 'lot');
     }, [lotCurrentPage])
-    console.log(adCardData)
 
     return (
         <MainContent
@@ -98,8 +117,11 @@ export const MainContentContainer: FC<{ t: TFunction }> = (props) => {
             tabValue={tabValue}
             adCardData={adCardData}
             lotCardData={lotCardData}
-            handleShowMore={handleShowMore}
+            pageCount={pageCount}
+            currentPage={currentPage}
+            handlePaginationPage={handlePaginationPage}
             handleTabChange={handleTabChange}
+            // handleShowMore={handleShowMore}
         />
     )
 }

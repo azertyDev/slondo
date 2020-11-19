@@ -39,6 +39,8 @@ export interface CreateAdFields {
         area: string;
         city_id: number;
         city: string;
+        district: string;
+        district_id: number;
     };
     files: [];
     description: string;

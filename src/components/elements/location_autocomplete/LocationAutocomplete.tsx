@@ -12,8 +12,8 @@ const formatData = (list) => {
                     acc = [
                         ...acc,
                         {
-                            area_id: row.id,
-                            area: row.name,
+                            region_id: row.id,
+                            region: row.name,
                             city_id: city.id,
                             city: city.name,
                             district_id: district.id,
@@ -25,8 +25,8 @@ const formatData = (list) => {
                 acc = [
                     ...acc,
                     {
-                        area_id: row.id,
-                        area: row.name,
+                        region_id: row.id,
+                        region: row.name,
                         city_id: city.id,
                         city: city.name
                     }
@@ -37,7 +37,7 @@ const formatData = (list) => {
     }, []);
 };
 
-export const AddressAutocomplete: FC<AddressAutocompleteProps> = ({values, setValues, ...props}) => {
+export const LocationAutocomplete: FC<AddressAutocompleteProps> = ({values, setValues, ...props}) => {
     const optionSelected = ({district_id, city_id}, value) => {
         return value.district_id
             ? district_id === value.district_id
@@ -46,8 +46,8 @@ export const AddressAutocomplete: FC<AddressAutocompleteProps> = ({values, setVa
 
     const option = (location) => {
         return location.district
-            ? `${location.district}, ${location.city}, ${location.area}`
-            : `${location.city}, ${location.area}`;
+            ? `${location.district}, ${location.city}, ${location.region}`
+            : `${location.city}, ${location.region}`;
     };
 
     const onChange = (_, val) => {

@@ -1,6 +1,6 @@
 import React from 'react';
 
-export const DoubleChevronUpIcon = () => {
+export const RaiseToTopIcon = () => {
     return (
         <svg width="16" height="18" viewBox="0 0 16 18" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M3.88708 17.8079H0.824821V12.1792H3.88708V17.8079Z" fill="white"/>

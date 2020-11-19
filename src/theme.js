@@ -25,6 +25,13 @@ const colors = {
 
 // Create a theme instance.
 const theme = createMuiTheme({
+    props: {
+        MuiTypography: {
+            variantMapping: {
+                button: 'p'
+            }
+        }
+    },
     palette: {
         primary: {
             main: colors.main,
@@ -60,13 +67,14 @@ const theme = createMuiTheme({
             color: '#4E4E4E',
             lineHeight: 1,
         },
-        body1: {
-            fontSize: '1.125rem',
-            fontWeight: '600'
-        },
         body2: {
             fontSize: '1.125rem',
         },
+        button: {
+            fontSize: '1.125rem',
+            fontWeight: '600',
+            textTransform: 'none'
+        }
 
     },
     overrides: {
@@ -75,6 +83,10 @@ const theme = createMuiTheme({
                 '@font-face': [calibri],
                 ':focus': {
                     outline: 0,
+                },
+                ".errorText": {
+                    color: colors.error,
+                    textAlign: 'center'
                 },
                 body: {
                     backgroundColor: colors.white

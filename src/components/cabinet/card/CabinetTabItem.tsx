@@ -1,20 +1,19 @@
 import React from 'react';
 import {Typography, Paper, Button} from '@material-ui/core';
 import {BreadcrumbsComponent} from '@src/components/elements/breadcrumbs/Breadcrumbs';
-import {ButtonComponent} from '@src/components/elements/button/Button';
 import {Link} from '@root/i18n';
-
-// icons
-import {FavoriteIcon} from '@src/components/elements/icons/FavoriteIcon';
-import {SettingsIcon} from '@src/components/elements/icons/SettingsIcon';
-import {LocationIcon} from '@src/components/elements/icons/LocationIcon';
-import {GromophoneIcon} from '@src/components/elements/icons/GromophoneIcon';
-import {PromoteIcon} from '@src/components/elements/icons/PromoteIcon';
-import {EyeIcon} from '@src/components/elements/icons/EyeIcon';
+import {
+    SettingsIcon,
+    LocationIcon,
+    GramophoneIcon,
+    PromoteIcon,
+    EyeIcon,
+    DoubleUpIcon,
+    FavoriteBorderIcon
+} from '@src/components/elements/icons';
 
 // styles
 import {useStyles} from './useStyles';
-import {FavoriteBorderIcon} from "@src/components/elements/icons/FavoriteBorderIcon";
 
 export const CabinetTabItem = () => {
     const classes = useStyles();
@@ -77,7 +76,7 @@ export const CabinetTabItem = () => {
                                             140
                                         </Typography>
                                         <Link href="#">
-                                            <a className='favorite-icon'>
+                                            <a className="favorite-icon">
                                                 <FavoriteBorderIcon/>
                                             </a>
                                         </Link>
@@ -131,17 +130,15 @@ export const CabinetTabItem = () => {
                         </Paper>
                     </div>
                     <div className="card-buttons">
-                        <Button endIcon={<GromophoneIcon/>} color='primary' variant="contained">
+                        <Button endIcon={<PromoteIcon/>} color="primary" variant="contained" className='promoteButton'>
                             Продвижение
                         </Button>
-                        <ButtonComponent>
-                            <PromoteIcon/>
+                        <Button endIcon={<GramophoneIcon/>} color="primary" variant="contained" className='raiseTopButton'>
                             Поднять в ТОП
-                        </ButtonComponent>
-                        <ButtonComponent>
-                            <PromoteIcon/>
+                        </Button>
+                        <Button endIcon={<DoubleUpIcon/>} color="primary" variant="contained" className='doubleUpButton'>
                             Поднять в ленте
-                        </ButtonComponent>
+                        </Button>
                     </div>
                 </div>
             </div>

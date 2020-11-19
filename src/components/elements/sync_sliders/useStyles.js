@@ -12,8 +12,11 @@ export const useStyles = makeStyles(() => ({
         },
         firstSlider: {
             width: '100%',
+            height: '',
             '& div.slick-slide img': {
                 width: '100%',
+                height: '518px',
+                objectFit: 'cover'
             },
             '& a.overlay': {
                 /* Display over the entire page */
@@ -53,6 +56,7 @@ export const useStyles = makeStyles(() => ({
             }
         },
         secondSlider: {
+            marginTop: '5px',
             '& div.slick-track': {
                 width: '100% !important',
                 margin: 0
@@ -62,7 +66,8 @@ export const useStyles = makeStyles(() => ({
                 marginRight: '5px',
                 '& img': {
                     width: '100%',
-                    height: '120px',
+                    height: '118px',
+                    objectFit: 'cover'
                 },
             },
             '& div.[data-index="1"] img': {

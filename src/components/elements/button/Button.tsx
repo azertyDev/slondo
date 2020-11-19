@@ -8,6 +8,6 @@ export const ButtonComponent:FC<ButtonBaseProps> = (props) => {
     const classes = useStyles(props);
 
     return (
-        <ButtonBase disabled className={`${classes.root} ${className}`} {...otherProps}/>
+        <ButtonBase className={`${classes.root} ${className}`} {...otherProps}/>
     )
 };

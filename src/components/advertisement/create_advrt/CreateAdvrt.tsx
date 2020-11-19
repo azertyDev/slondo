@@ -45,12 +45,32 @@ export const CreateAdvrt: FC<void> = () => {
 
         form.set('ads_type_id', createAdvrt.adType.id.toString());
         form.set('parent_categories_id', createAdvrt.category.id.toString());
-        // form.set('ads_type_id', adType.id);
-        // form.set('ads_type_id', adType.id);
-        // form.set('ads_type_id', adType.id);
-        // form.set('ads_type_id', adType.id);
-        // form.set('ads_type_id', adType.id);
-        // form.set('ads_type_id', adType.id);
+        form.set('safe_deal', Number(safe_deal).toString());
+        form.set('delivery', Number(delivery).toString());
+        form.set('exchange', Number(exchange).toString());
+        form.set('year', '2018');
+        files.forEach(({file}: any) => form.set('files[]', file, file.name));
+
+        for (const key in location) {
+            if (typeof location[key] === 'number') {
+                form.set(key, Number(location[key]).toString());
+            }
+        }
+
+        for (const key in otherValues) {
+            if (otherValues[key]) {
+                if (typeof otherValues[key] === 'string') {
+                    form.set(key, otherValues[key]);
+                } else {
+                    form.set(`${key}_id`, otherValues[key].id);
+                }
+            }
+        }
+
+        // for (const key of form.entries()) {
+        //     console.log(key[0] + ', ' + key[1]);
+        // }
+
         return form;
     };
 
@@ -61,8 +81,8 @@ export const CreateAdvrt: FC<void> = () => {
             } else {
                 const data = prepareData(values);
                 await userAPI.createAdvrt(data);
-                setIsSuccess(true);
-                console.log('submit');
+                // setIsSuccess(true);
+                console.log('success');
             }
         } catch (e) {
             console.log(e);
@@ -85,7 +105,7 @@ export const CreateAdvrt: FC<void> = () => {
     } = formik;
 
     const handlePreview = (value) => () => {
-        setIsPreview(value)
+        setIsPreview(value);
     };
 
     const handleCheckboxChange = (valName) => ({target}) => {

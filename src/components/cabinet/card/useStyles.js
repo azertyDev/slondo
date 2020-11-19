@@ -121,13 +121,24 @@ export const useStyles = makeStyles((theme) => ({
                 },
                 '& > div.card-buttons': {
                     width: '25%',
-                    marginLeft: '20px',
                     display: 'flex',
                     flexDirection: 'column',
                     justifyContent: 'center',
                     '& > button': {
                         padding: '10px',
                         marginBottom: '10px',
+                        transition: '.1s ease-in-out',
+                        boxShadow: '2px 0px 4px rgba(0, 0, 0, 0.15)',
+                        borderRadius: '0px 5px 5px 0px',
+                        '&.promoteButton': {
+                            backgroundColor: '#77B1FF'
+                        },
+                        '&.raiseTopButton': {
+                            backgroundColor: '#57BD82'
+                        },
+                        '&.doubleUpButton': {
+                            backgroundColor: '#F6AC6A'
+                        },
                         '& > svg': {
                             marginRight: '10px',
                         },
