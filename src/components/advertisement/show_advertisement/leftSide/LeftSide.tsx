@@ -19,7 +19,6 @@ export const LeftSide = ({data}) => {
     const date = new Date(data.created_at);
     const months = ["января", "февраля", "марта", "апреля", "мая", "июня", "июля", "августа", "сентября", "октября", "ноября", "декабря"]
     const formatted_date = date.getDate() + " " + months[(date.getMonth())] + " " + date.getFullYear();
-    console.log(data)
 
     const classes = useStyles();
     return (
@@ -34,20 +33,24 @@ export const LeftSide = ({data}) => {
                 <Typography variant="subtitle1">Пожаловаться <WarningIcon/></Typography>
             </div>
             <div className="ad-bonus">
-                { data.delivery
-                    ? <span className="delivery"><DeliveryIcon/> <Typography variant="subtitle1">Есть доставка</Typography></span>
+                {data.delivery
+                    ?
+                    <span className="delivery"><DeliveryIcon/> <Typography variant="subtitle1">Есть доставка</Typography></span>
                     : null
                 }
-                { data.safe_deal
-                    ? <span className="safe_deal"><SafeIcon/> <Typography variant="subtitle1">Безопасная покупка</Typography></span>
+                {data.safe_deal
+                    ?
+                    <span className="safe_deal"><SafeIcon/> <Typography variant="subtitle1">Безопасная покупка</Typography></span>
                     : null
                 }
-                { data.exchange
-                    ? <span className="exchange"><SwapIcon/> <Typography variant="subtitle1">Возможен обмен</Typography></span>
+                {data.exchange
+                    ?
+                    <span className="exchange"><SwapIcon/> <Typography variant="subtitle1">Возможен обмен</Typography></span>
                     : null
                 }
-                { data.available_start_time
-                    ? <span className="available"><PhoneIcon/> <Typography variant="subtitle1">{data.available_start_time}-{data.available_end_time}</Typography></span>
+                {data.available_start_time
+                    ?
+                    <span className="available"><PhoneIcon/> <Typography variant="subtitle1">{data.available_start_time}-{data.available_end_time}</Typography></span>
                     : null
                 }
                 {/*<span className="delivery"><DeliveryIcon/> <Typography variant="subtitle1">Есть доставка</Typography></span>*/}

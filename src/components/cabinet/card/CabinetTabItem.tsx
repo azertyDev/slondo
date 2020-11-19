@@ -10,11 +10,14 @@ import {
     EyeIcon,
     DoubleUpIcon,
     FavoriteBorderIcon,
-    RestoreIcon, CloseIcon, DoneAllIcon
+    RestoreIcon,
+    CloseIcon,
+    DoneAllIcon
 } from '@src/components/elements/icons';
 
 // styles
 import {useStyles} from './useStyles';
+import {ButtonComponent} from "@src/components/elements/button/Button";
 
 export const CabinetTabItem = () => {
     const classes = useStyles();
@@ -126,18 +129,18 @@ export const CabinetTabItem = () => {
                                 </div>
                             </Paper>
                             <div className="status-buttons">
-                                <Button>
-                                    <RestoreIcon/>
+                                <ButtonComponent className="accepted" centerRipple>
+                                    <DoneAllIcon/>
                                     <Typography variant="subtitle1">Ожидание</Typography>
-                                </Button>
-                                <Button>
+                                </ButtonComponent>
+                                <Button className="complete">
                                     <Typography variant="subtitle1">Завершить</Typography>
                                 </Button>
-                                {/*<Buton>*/}
-                                {/*    <DoneAllIcon/>*/}
+                                {/*<Buton className='expecting'>*/}
+                                {/*    <RestoreIcon/>*/}
                                 {/*    <Typography variant="subtitle1">Принято</Typography>*/}
                                 {/*</Button>*/}
-                                {/*<Button>*/}
+                                {/*<Button className='denied'>*/}
                                 {/*    <CloseIcon/>*/}
                                 {/*    <Typography variant="subtitle1">Отказано</Typography>*/}
                                 {/*</Button>*/}
@@ -158,7 +161,6 @@ export const CabinetTabItem = () => {
                             </Button>
                         </div>
                     </div>
-
                 </div>
             </div>
         </div>

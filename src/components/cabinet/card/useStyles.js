@@ -28,6 +28,7 @@ export const useStyles = makeStyles((theme) => ({
                             flexDirection: 'column',
                             border: 0,
                             boxShadow: '0px 0px 15px rgba(0, 0, 0, 0.1)',
+                            borderRadius: '0 10px 0 0',
                             '& > div': {
                                 display: 'flex',
                                 height: 160,
@@ -69,7 +70,6 @@ export const useStyles = makeStyles((theme) => ({
                                 '& > div:last-child': {
                                     padding: '10px 10px 10px 20px',
                                     borderLeft: 0,
-                                    borderRadius: '0 10px 0 0',
                                     display: 'flex',
                                     flexDirection: 'column',
                                     justifyContent: 'space-between',
@@ -134,14 +134,28 @@ export const useStyles = makeStyles((theme) => ({
                             '& button': {
                                 padding: '10px 0',
                                 borderRadius: '0px 0px 10px 10px',
-                                '&:first-child': {
-                                    width: '100%',
-                                    background: 'rgba(125, 188, 246, 0.8)',
-                                    '& svg': {
-                                        marginRight: 10
-                                    }
+                                width: '100%',
+                                // zIndex: -1,
+                                // transition: '.1s ease-in-out',
+                                // transform: 'perspective(1px) translateZ(0)',
+                                // transitionProperty: 'transform',
+                                // top: '-10px',
+                                '&:hover': {
+                                    // transform: 'translateY(10px)',
                                 },
-                                '&:last-child': {
+                                '& svg': {
+                                    marginRight: 10
+                                },
+                                '&.expecting': {
+                                    background: 'rgba(125, 188, 246, 0.8)',
+                                },
+                                '&.accepted': {
+                                    background: 'rgba(144, 190, 39, 0.8)',
+                                },
+                                '&.denied': {
+                                    background: '#F08F8F',
+                                },
+                                '&.complete': {
                                     width: '46%',
                                     marginLeft: '20px',
                                     background: '#BDBDBD',

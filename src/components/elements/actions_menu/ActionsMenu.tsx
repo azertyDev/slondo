@@ -1,6 +1,7 @@
 import React from 'react'
 import {Typography} from '@material-ui/core'
 import {ButtonComponent} from '@src/components/elements/button/Button'
+import {Router} from '@root/i18n'
 
 // icons
 import {NotesIcon} from '@src/components/elements/icons/NotesIcon'
@@ -21,38 +22,43 @@ import {PowerIcon} from '@src/components/elements/icons/PowerIcon'
 import {useStyles} from './useStyles'
 
 export const ActionsMenu = (props) => {
+    const router = Router;
     const {t} = props
+
+    const onButtonClick = (url) => () => {
+        Router.push(`/cabinet/${url}`)
+    };
 
     const classes = useStyles()
     return (
         <div className={classes.root}>
             <div className="menu-item">
                 <div>
-                    <ButtonComponent>
+                    <ButtonComponent onClick={onButtonClick('myAds')}>
                         <NotesIcon/>
-                        <Typography variant='subtitle1'>{t('cabinet:myAds')}</Typography>
+                        <Typography variant="subtitle1">{t('cabinet:myAds')}</Typography>
                     </ButtonComponent>
                 </div>
                 <div>
                     <ButtonComponent>
                         <GavelIcon/>
-                        <Typography variant='subtitle1'>{t('cabinet:myLots')}</Typography>
+                        <Typography variant="subtitle1">{t('cabinet:myLots')}</Typography>
                     </ButtonComponent>
                 </div>
                 <div>
                     <ButtonComponent>
                         <FavoriteBorderIcon/>
-                        <Typography variant='subtitle1'>{t('cabinet:favourite')}</Typography>
+                        <Typography variant="subtitle1">{t('cabinet:favourite')}</Typography>
                     </ButtonComponent>
                 </div>
                 <div>
                     <ButtonComponent>
                         <SortIcon/>
-                        <Typography variant='subtitle1'>{t('cabinet:rating')}</Typography>
+                        <Typography variant="subtitle1">{t('cabinet:rating')}</Typography>
                     </ButtonComponent>
                     <ButtonComponent>
                         <ArchiveIcon/>
-                        <Typography variant='subtitle1'>{t('cabinet:adsArchive')}</Typography>
+                        <Typography variant="subtitle1">{t('cabinet:adsArchive')}</Typography>
                     </ButtonComponent>
                 </div>
             </div>
@@ -60,11 +66,11 @@ export const ActionsMenu = (props) => {
                 <div>
                     <ButtonComponent>
                         <NotificationIcon/>
-                        <Typography variant='subtitle1'>{t('cabinet:notifications')}</Typography>
+                        <Typography variant="subtitle1">{t('cabinet:notifications')}</Typography>
                     </ButtonComponent>
                     <ButtonComponent>
                         <LetterIcon/>
-                        <Typography variant='subtitle1'>{t('cabinet:messages')}</Typography>
+                        <Typography variant="subtitle1">{t('cabinet:messages')}</Typography>
                     </ButtonComponent>
                 </div>
             </div>
@@ -72,7 +78,7 @@ export const ActionsMenu = (props) => {
                 <div>
                     <ButtonComponent>
                         <SafeIcon/>
-                        <Typography variant='subtitle1'>{t('cabinet:safeShopping')}</Typography>
+                        <Typography variant="subtitle1">{t('cabinet:safeShopping')}</Typography>
                     </ButtonComponent>
                 </div>
             </div>
@@ -80,17 +86,17 @@ export const ActionsMenu = (props) => {
                 <div>
                     <ButtonComponent>
                         <WalletIcon/>
-                        <Typography variant='subtitle1'>{t('cabinet:paidServices')}</Typography>
+                        <Typography variant="subtitle1">{t('cabinet:paidServices')}</Typography>
                     </ButtonComponent>
                 </div>
                 <div>
                     <ButtonComponent>
                         <TimeLineIcon/>
-                        <Typography variant='subtitle1'>{t('cabinet:statistics')}</Typography>
+                        <Typography variant="subtitle1">{t('cabinet:statistics')}</Typography>
                     </ButtonComponent>
                     <ButtonComponent>
                         <ShoppingIcon/>
-                        <Typography variant='subtitle1'>{t('cabinet:myOrders')}</Typography>
+                        <Typography variant="subtitle1">{t('cabinet:myOrders')}</Typography>
                     </ButtonComponent>
                 </div>
             </div>
@@ -98,11 +104,11 @@ export const ActionsMenu = (props) => {
                 <div>
                     <ButtonComponent>
                         <SettingsIcon/>
-                        <Typography variant='subtitle1'>{t('cabinet:settings')}</Typography>
+                        <Typography variant="subtitle1">{t('cabinet:settings')}</Typography>
                     </ButtonComponent>
                     <ButtonComponent>
                         <PowerIcon/>
-                        <Typography variant='subtitle1'>{t('cabinet:exit')}</Typography>
+                        <Typography variant="subtitle1">{t('cabinet:exit')}</Typography>
                     </ButtonComponent>
                 </div>
             </div>

@@ -1,11 +1,11 @@
 import React from 'react';
-import {Cabinet} from './Cabinet';
 import {MainLayout} from '@src/components/MainLayout';
+import {MyAds} from "@src/components/cabinet/cabinet_pages/my_ads/CabinetMain";
 
 export const CabinetContainer = (props) => {
     return (
         <MainLayout title="Личный кабинет">
-            <Cabinet {...props} />
+            <MyAds {...props} />
         </MainLayout>
     );
 };
