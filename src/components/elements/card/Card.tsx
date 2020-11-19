@@ -33,9 +33,13 @@ export const CardItem: FC<InnerCardData & { className: string; isFetch: boolean 
                         </IconButton>
                     </div>
                     <div>
-                        <span>
-                            <DeliveryIcon/>
-                        </span>
+                        {
+                            props.delivery
+                                ? <span>
+                                    <DeliveryIcon/>
+                                    </span>
+                                : null
+                        }
                         {
                             props.safe_deal
                                 ? <span>
@@ -43,9 +47,12 @@ export const CardItem: FC<InnerCardData & { className: string; isFetch: boolean 
                                 </span>
                                 : null
                         }
-                        <span>
-                            <SwapIcon/>
-                        </span>
+                        {
+                            props.exchange
+                                ? <span>
+                                    <SwapIcon/>
+                                </span> : null
+                        }
                     </div>
                 </div>
             </CardMedia>
@@ -60,7 +67,8 @@ export const CardItem: FC<InnerCardData & { className: string; isFetch: boolean 
                     {props.isFetch
                         ? <Skeleton variant="rect"/>
                         :
-                        <Typography variant="h5" color="initial"> {props.price} <span>{props.currency.name}</span> </Typography>
+                        <Typography variant="h5" color="initial"> {props.price}
+                            <span>{props.currency.name}</span> </Typography>
                     }
                     {props.isFetch
                         ? <Skeleton variant="rect"/>

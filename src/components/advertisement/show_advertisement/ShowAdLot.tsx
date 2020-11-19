@@ -53,7 +53,7 @@ export const ShowAdLot = (props) => {
                         </div>
                         <div>
                             <Typography variant="h4" color="initial">
-                                1 350 000 {data.currency.name}
+                                {data.price} {data.currency.name}
                             </Typography>
                         </div>
                     </div>
