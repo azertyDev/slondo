@@ -1,7 +1,8 @@
 import React from 'react'
-import {Typography} from '@material-ui/core'
+import {Badge, Typography} from '@material-ui/core'
 import {ButtonComponent} from '@src/components/elements/button/Button'
 import {Router} from '@root/i18n'
+import {useRouter} from 'next/router'
 
 // icons
 import {NotesIcon} from '@src/components/elements/icons/NotesIcon'
@@ -22,7 +23,7 @@ import {PowerIcon} from '@src/components/elements/icons/PowerIcon'
 import {useStyles} from './useStyles'
 
 export const ActionsMenu = (props) => {
-    const router = Router;
+    const {pathname} = useRouter();
     const {t} = props
 
     const onButtonClick = (url) => () => {
@@ -34,29 +35,29 @@ export const ActionsMenu = (props) => {
         <div className={classes.root}>
             <div className="menu-item">
                 <div>
-                    <ButtonComponent onClick={onButtonClick('myAds')}>
+                    <ButtonComponent className={pathname === '/cabinet/myAds' ? 'selected' : ''} onClick={onButtonClick('myAds')}>
                         <NotesIcon/>
                         <Typography variant="subtitle1">{t('cabinet:myAds')}</Typography>
                     </ButtonComponent>
                 </div>
                 <div>
-                    <ButtonComponent>
+                    <ButtonComponent className={pathname === '/cabinet/myLots' ? 'selected' : ''} onClick={onButtonClick('myLots')}>
                         <GavelIcon/>
                         <Typography variant="subtitle1">{t('cabinet:myLots')}</Typography>
                     </ButtonComponent>
                 </div>
                 <div>
-                    <ButtonComponent>
+                    <ButtonComponent className={pathname === '/cabinet/favorite' ? 'selected' : ''} onClick={onButtonClick('favorite')}>
                         <FavoriteBorderIcon/>
                         <Typography variant="subtitle1">{t('cabinet:favourite')}</Typography>
                     </ButtonComponent>
                 </div>
                 <div>
-                    <ButtonComponent>
-                        <SortIcon/>
-                        <Typography variant="subtitle1">{t('cabinet:rating')}</Typography>
+                    <ButtonComponent className={pathname === '/cabinet/myOrders' ? 'selected' : ''}>
+                        <ShoppingIcon/>
+                        <Typography variant="subtitle1">{t('cabinet:myOrders')}</Typography>
                     </ButtonComponent>
-                    <ButtonComponent>
+                    <ButtonComponent className={pathname === '/cabinet/archive' ? 'selected' : ''} onClick={onButtonClick('archive')}>
                         <ArchiveIcon/>
                         <Typography variant="subtitle1">{t('cabinet:adsArchive')}</Typography>
                     </ButtonComponent>
@@ -64,19 +65,23 @@ export const ActionsMenu = (props) => {
             </div>
             <div className="menu-item">
                 <div>
-                    <ButtonComponent>
-                        <NotificationIcon/>
-                        <Typography variant="subtitle1">{t('cabinet:notifications')}</Typography>
-                    </ButtonComponent>
-                    <ButtonComponent>
-                        <LetterIcon/>
-                        <Typography variant="subtitle1">{t('cabinet:messages')}</Typography>
-                    </ButtonComponent>
+                    <Badge badgeContent={4} color="secondary">
+                        <ButtonComponent className={pathname === '/cabinet/notifications' ? 'selected' : ''} onClick={onButtonClick('notifications')}>
+                            <NotificationIcon/>
+                            <Typography variant="subtitle1">{t('cabinet:notifications')}</Typography>
+                        </ButtonComponent>
+                    </Badge>
+                    <Badge badgeContent={8} color="secondary">
+                        <ButtonComponent className={pathname === '/cabinet/messages' ? 'selected' : ''} onClick={onButtonClick('messages')}>
+                            <LetterIcon/>
+                            <Typography variant="subtitle1">{t('cabinet:messages')}</Typography>
+                        </ButtonComponent>
+                    </Badge>
                 </div>
             </div>
             <div className="menu-item">
                 <div>
-                    <ButtonComponent>
+                    <ButtonComponent className={pathname === '/cabinet/safetyDeal' ? 'selected' : ''} onClick={onButtonClick('safetyDeal')}>
                         <SafeIcon/>
                         <Typography variant="subtitle1">{t('cabinet:safeShopping')}</Typography>
                     </ButtonComponent>
@@ -84,29 +89,29 @@ export const ActionsMenu = (props) => {
             </div>
             <div className="menu-item">
                 <div>
-                    <ButtonComponent>
+                    <ButtonComponent className={pathname === '/cabinet/paidServices' ? 'selected' : ''}>
                         <WalletIcon/>
                         <Typography variant="subtitle1">{t('cabinet:paidServices')}</Typography>
                     </ButtonComponent>
                 </div>
                 <div>
-                    <ButtonComponent>
+                    <ButtonComponent className={pathname === '/cabinet/statistics' ? 'selected' : ''}>
                         <TimeLineIcon/>
                         <Typography variant="subtitle1">{t('cabinet:statistics')}</Typography>
                     </ButtonComponent>
-                    <ButtonComponent>
-                        <ShoppingIcon/>
-                        <Typography variant="subtitle1">{t('cabinet:myOrders')}</Typography>
+                    <ButtonComponent className={pathname === '/cabinet/rating' ? 'selected' : ''} onClick={onButtonClick('rating')}>
+                        <SortIcon/>
+                        <Typography variant="subtitle1">{t('cabinet:rating')}</Typography>
                     </ButtonComponent>
                 </div>
             </div>
             <div className="menu-item">
                 <div>
-                    <ButtonComponent>
+                    <ButtonComponent className={pathname === '/cabinet/settings' ? 'selected' : ''}>
                         <SettingsIcon/>
                         <Typography variant="subtitle1">{t('cabinet:settings')}</Typography>
                     </ButtonComponent>
-                    <ButtonComponent>
+                    <ButtonComponent className={pathname === '/cabinet/exit' ? 'selected' : ''}>
                         <PowerIcon/>
                         <Typography variant="subtitle1">{t('cabinet:exit')}</Typography>
                     </ButtonComponent>

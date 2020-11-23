@@ -5,6 +5,7 @@ export const useStyles = makeStyles((theme) => ({
         position: 'relative',
         height: '55.33px',
         '& header.MuiAppBar-root': {
+            background: '#fafafa',
             '& > div.MuiContainer-root': {
                 padding: ({isScrollBreak}) => !isScrollBreak && 0,
                 transition: 'padding .3s',

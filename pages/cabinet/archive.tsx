@@ -1,13 +1,13 @@
 import React from 'react';
-import { CabinetContainer } from '@src/components/cabinet/CabinetContainer';
-import { withTranslation } from '../../i18n';
+import {withTranslation} from '@root/i18n';
+import {ArchiveContainer} from "@src/components/cabinet/cabinet_pages/archive/ArchiveContainer";
 
-const Cabinet = (props) => {
-    return <CabinetContainer {...props} />;
+const Archive = (props) => {
+    return <ArchiveContainer {...props} title="Архив"/>;
 };
 
-Cabinet.getInitialProps = async () => ({
+Archive.getInitialProps = async () => ({
     namespacesRequired: ['cabinet'],
 });
 
-export default withTranslation(['cabinet'])(Cabinet);
+export default withTranslation(['cabinet'])(Archive);

@@ -4,7 +4,6 @@ import {Modal} from '@material-ui/core'
 // styles
 import {useStyles} from './useStyles'
 
-
 export const ModalComponent = ({children, className = '', isOpen, handleCloseModal}) => {
 
     const classes = useStyles();

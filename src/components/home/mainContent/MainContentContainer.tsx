@@ -87,7 +87,6 @@ export const MainContentContainer: FC<{ t: TFunction }> = (props) => {
     const handleTabChange = (_, newValue) => {
         setTabValue(newValue);
     };
-    console.log(adCardData)
     // const handleShowMore = () => {
     //     if (tabValue === 0) {
     //         setAdCurrentPage(adCurrentPage + 1)

@@ -19,7 +19,7 @@ import {
 import {useStyles} from './useStyles';
 import {ButtonComponent} from "@src/components/elements/button/Button";
 
-export const CabinetTabItem = () => {
+export const CabinetCard = () => {
     const classes = useStyles();
     return (
         <div className={classes.root}>
@@ -133,13 +133,13 @@ export const CabinetTabItem = () => {
                                     <DoneAllIcon/>
                                     <Typography variant="subtitle1">Ожидание</Typography>
                                 </ButtonComponent>
-                                <Button className="complete">
+                                 <ButtonComponent className="complete">
                                     <Typography variant="subtitle1">Завершить</Typography>
-                                </Button>
-                                {/*<Buton className='expecting'>*/}
+                                </ButtonComponent>
+                                {/*<ButtonComponent className='expecting'>*/}
                                 {/*    <RestoreIcon/>*/}
                                 {/*    <Typography variant="subtitle1">Принято</Typography>*/}
-                                {/*</Button>*/}
+                                {/*</ButtonComponent>*/}
                                 {/*<Button className='denied'>*/}
                                 {/*    <CloseIcon/>*/}
                                 {/*    <Typography variant="subtitle1">Отказано</Typography>*/}

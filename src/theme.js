@@ -89,7 +89,7 @@ const theme = createMuiTheme({
                     textAlign: 'center'
                 },
                 body: {
-                    backgroundColor: colors.white
+                    backgroundColor: '#fafafa'
                 }
             }
         },

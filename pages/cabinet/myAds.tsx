@@ -1,13 +1,13 @@
 import React from 'react';
-import { CabinetContainer } from '@src/components/cabinet/CabinetContainer';
-import { withTranslation } from '@root/i18n';
+import {withTranslation} from '@root/i18n';
+import {MyAdsContainer} from "@src/components/cabinet/cabinet_pages/my_ads/MyAdsContainer";
 
-const myAds = (props) => {
-    return <CabinetContainer {...props} title='Мои объявления' />;
+const MyAds = (props) => {
+    return <MyAdsContainer {...props} title="Мои объявления"/>;
 };
 
-myAds.getInitialProps = async () => ({
+MyAds.getInitialProps = async () => ({
     namespacesRequired: ['cabinet'],
 });
 
-export default withTranslation(['cabinet'])(myAds);
+export default withTranslation(['cabinet'])(MyAds);

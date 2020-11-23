@@ -19,27 +19,16 @@ export const useStyles = makeStyles((theme) => ({
                     position: 'relative',
                     border: '1px solid transparent',
                     backgroundClip: 'padding-box',
-                    '&:after': {
-                        position: 'absolute',
-                        top: '-10px',
-                        bottom: '-10px',
-                        left: '-10px',
-                        right: '-10px',
-                        background: 'linear-gradient(red, green)',
-                        content: '""',
-                        zIndex: '-1',
-                        borderRadius: '4px',
-                    },
                     '& > svg': {
                         marginRight: '10px',
                     },
-                    '&:focus, &:active': {
-                        // border: '1px solid',
-                        // borderStyle: 'inset',
-                        // borderRadius: '5px',
-                        // borderImageSlice: '1',
-                        // borderImageSource:
-                        //     'linear-gradient(49.94deg, #675EAA 19.03%, #AD66D5 72.72%)',
+                    '&.selected': {
+                        border: '1px solid',
+                        borderStyle: 'inset',
+                        borderRadius: '5px',
+                        borderImageSlice: '1',
+                        borderImageSource:
+                            'linear-gradient(49.94deg, #675EAA 19.03%, #AD66D5 72.72%)',
                         '& > h6.MuiTypography-subtitle1': {
                             backgroundImage:
                                 'linear-gradient(49.94deg, #675EAA 19.03%, #AD66D5 72.72%)',
