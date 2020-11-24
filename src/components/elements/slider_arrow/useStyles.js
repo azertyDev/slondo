@@ -10,7 +10,7 @@ export const useStyles = makeStyles(() => ({
         border: '1px solid',
         borderRadius: '20px',
         zIndex: 20,
-        '& img.left-arrow': {
+        '& svg.left-arrow': {
             transform: 'rotate(180deg)',
         },
         '&:hover':{

@@ -3,28 +3,13 @@ import {CustomSlider} from '../custom_slider/CustomSlider';
 // styles
 import {useStyles} from './useStyles';
 
-type SliderTypes = {
-    current: {
-        slickGoTo: () => void
-    }
-}
-
 export const SyncSliders = (props) => {
-    const {currentSlide, setCurrentSlide, handleOpenModal} = props;
-
     const [slidersNav, setSlidersNav] = useState({nav1: null, nav2: null});
-    const slider1: MutableRefObject<SliderTypes> = useRef({
-        current: {
-            slickGoTo: () => {
-            }
-        }
-    });
-    const slider2 = useRef();
+    const slider1: MutableRefObject<unknown> = useRef();
+    const slider2: MutableRefObject<unknown> = useRef();
 
-    const {slickGoTo} = slider1.current;
-
-    const handleBeforeChange = (newIndex) => {
-        setCurrentSlide && setCurrentSlide(newIndex);
+    const handleAfterChange = (newIndex) => {
+        props.setCurrentSlide && props.setCurrentSlide(newIndex);
     };
 
     useEffect(() => {
@@ -34,10 +19,6 @@ export const SyncSliders = (props) => {
         });
     }, []);
 
-    // useEffect(() => {
-    //     currentSlide && slickGoTo(currentSlide);
-    // }, []);
-
     const classes = useStyles();
     return (
         <div className={classes.root}>
@@ -46,13 +27,13 @@ export const SyncSliders = (props) => {
                     asNavFor={slidersNav.nav2}
                     ref={slider1}
                     swipe={false}
-                    afterChange={handleBeforeChange}
+                    afterChange={handleAfterChange}
                     variableWidth={props.variableWidth}
-                    initialSlide={currentSlide}
+                    initialSlide={props.currentSlide}
                     centerMode={props.centerMode}
                 >
                     {props.imgs.map(({id, url, alt}, i) => (
-                        <img src={url} alt={alt} key={i} onClick={handleOpenModal ?? null}/>
+                        <img src={url} alt={alt} key={i} onClick={props.handleOpenModal}/>
                     ))}
                 </CustomSlider>
             </div>
@@ -61,9 +42,8 @@ export const SyncSliders = (props) => {
                     asNavFor={slidersNav.nav1}
                     ref={slider2}
                     focusOnSelect={true}
-                    adaptiveHeight={true}
                     arrows={false}
-                    afterChange={handleBeforeChange}
+                    afterChange={handleAfterChange}
                     slidesToShow={4}
                 >
                     {props.imgs.map(({url, alt}, i) => (
@@ -74,5 +54,3 @@ export const SyncSliders = (props) => {
         </div>
     );
 };
-
-

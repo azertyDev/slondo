@@ -1,9 +1,9 @@
 import React, {useState} from 'react';
-import {Fade, Typography} from '@material-ui/core';
+import {Typography} from '@material-ui/core';
 import {Link} from '@root/i18n';
 import {SyncSliders} from '@src/components/elements/sync_sliders/SyncSliders';
 import {ReadMore} from "@src/components/elements/read_more/readMore";
-
+import {LeftSideModal} from "@src/components/advertisement/show_advertisement/leftSide/left_side_modal/LeftSideModal";
 // icons
 import {LocationIcon} from '@src/components/elements/icons/LocationIcon';
 import {WarningIcon} from "@src/components/elements/icons/WarningIcon";
@@ -11,21 +11,21 @@ import {PhoneIcon} from "@src/components/elements/icons/PhoneIcon";
 import {SwapIcon} from "@src/components/elements/icons/SwapIcon";
 import {SafeIcon} from "@src/components/elements/icons/SafeIcon";
 import {DeliveryIcon} from "@src/components/elements/icons/DeliveryIcon";
-
 // styles
 import {useStyles} from './useStyles';
-import {ModalComponent} from "@src/components/elements/modal/Modal";
 
 export const LeftSide = ({data}) => {
+    const [currentSlide, setCurrentSlide] = useState(0);
+    const [open, setOpen] = useState(false);
+
     const date = new Date(data.created_at);
     const months = ["января", "февраля", "марта", "апреля", "мая", "июня", "июля", "августа", "сентября", "октября", "ноября", "декабря"]
     const formatted_date = date.getDate() + " " + months[(date.getMonth())] + " " + date.getFullYear();
-    const [currentSlide, setCurrentSlide] = useState(0);
-    const [open, setOpen] = useState(false);
 
     const handleShowModal = (value) => () => {
         setOpen(value);
     };
+
     const classes = useStyles();
     return (
         <div className={classes.root}>
@@ -107,9 +107,6 @@ export const LeftSide = ({data}) => {
                     <Typography variant="body2">750 000 сум</Typography>
                 </span>
             </div>
-            {/*<div className="ad-category">*/}
-
-            {/*</div>*/}
             <div className="ad-parameters">
                 <Typography variant="button" color="initial">
                     Параметры
@@ -158,17 +155,14 @@ export const LeftSide = ({data}) => {
                     </div>
                 </div>
             </div>
-              <ModalComponent isOpen={open} handleCloseModal={handleShowModal(false)}>
-                  <div style={{width: '80%', height: '30%'}}>
-                      <SyncSliders
-                          imgs={data.images}
-                          currentSlide={currentSlide}
-                          setCurrentSlide={setCurrentSlide}
-                          variableWidth={false}
-                          centerMode={true}
-                      />
-                  </div>
-            </ModalComponent>
+            <LeftSideModal
+                imgs={data.images}
+                currentSlide={currentSlide}
+                setCurrentSlide={setCurrentSlide}
+                handleShowModal={handleShowModal}
+                isOpen={open}
+                title={data.title}
+            />
         </div>
     );
 };
