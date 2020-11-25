@@ -6,7 +6,7 @@ import {ButtonComponent} from "@src/components/elements/button/Button";
 // styles
 import {useStyles} from './useStyles';
 
-export const UserInfoWithAvatar = () => {
+export const UserInfoWithAvatar = (props) => {
     const classes = useStyles();
     return (
         <div className={classes.root}>
@@ -28,11 +28,15 @@ export const UserInfoWithAvatar = () => {
                     <div>
                         <Rating/>
                     </div>
-                    <ButtonComponent>
-                        <Typography variant="subtitle2">
-                            Подписаться
-                        </Typography>
-                    </ButtonComponent>
+                    {
+                        props.cabinet
+                        ? null
+                        : <ButtonComponent>
+                            <Typography variant="subtitle2">
+                                Подписаться
+                            </Typography>
+                        </ButtonComponent>
+                    }
                 </div>
             </div>
         </div>
