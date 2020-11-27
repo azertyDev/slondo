@@ -4,9 +4,6 @@ export const useStyles = makeStyles(() => ({
     root: {
         position: 'relative',
         '& button': {
-            border: 'none',
-            width: '40px',
-            height: '40px',
             '&.slick-prev': {
                 left: '25px',
             },
@@ -25,11 +22,15 @@ export const useStyles = makeStyles(() => ({
         },
         '& > div.slick-slider': {
             '& div.slick-slide': {
-                marginRight: 5
+                marginRight: 5,
+                '& img': {
+                    '&:hover': {
+                        cursor: 'zoom-in'
+                    }
+                }
             }
         },
         '& a.overlay': {
-            /* Display over the entire page */
             position: 'fixed',
             zIndex: '99',
             top: '0',
@@ -37,21 +38,15 @@ export const useStyles = makeStyles(() => ({
             width: '100%',
             height: '100%',
             background: 'rgba(0,0,0,0.9)',
-            /* Horizontal and vertical centering of the image */
             display: 'flex',
             alignItems: 'center',
             textAlign: 'center',
-            /* We hide all this by default */
             visibility: 'hidden',
             '& img': {
-                /* Maximum image size */
                 maxWidth: '90%',
                 maxHeight: '90%',
-
-                /* We keep the ratio of the image */
                 width: 'auto',
                 height: 'auto',
-
                 transform: 'scale(0.95)',
                 transition: 'transform .3s',
             },
@@ -66,18 +61,24 @@ export const useStyles = makeStyles(() => ({
         }
     },
     secondSlider: {
-        // marginTop: '5px',
+        '& div.slick-track': {
+            margin: 'inherit'
+        },
         '& div.slick-slide': {
+            // width: 'auto !important',
+            width: '212px !important',
+            // marginRight: 5,
             '& > div': {
-                padding: '2.5px'
+                height: '120px !important',
+                padding: '0 2.5px'
             },
             '& img': {
-                height: '118px',
-                objectFit: 'cover'
+                height: '120px',
+                objectFit: 'cover',
+                '&:hover': {
+                    cursor: 'pointer'
+                }
             },
-        },
-        // '& div.slick-active': {
-        //     marginRight: 5
-        // },
-    }
+        }
+    },
 }));

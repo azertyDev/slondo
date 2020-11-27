@@ -1,5 +1,5 @@
 import React from 'react';
-import {CardTabs} from "@src/components/cabinet/cabinet_pages/CardTabs";
+import {TabsContent} from "@src/components/cabinet/cabinet_pages/TabsContent";
 import {MyAdsComponent} from "@src/components/cabinet/cabinet_pages/my_ads/MyAdsComponent";
 
 export const MyAdsContainer = (props) => {
@@ -19,6 +19,6 @@ export const MyAdsContainer = (props) => {
     const title = 'Мои объявления';
 
     return (
-        <CardTabs title={title} tabsData={tabsData} headerTitle={title} t={props.t}/>
+        <TabsContent title={title} tabsData={tabsData} headerTitle={title} t={props.t}/>
     )
 }

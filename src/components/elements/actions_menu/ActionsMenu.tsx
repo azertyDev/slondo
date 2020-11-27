@@ -35,29 +35,43 @@ export const ActionsMenu = (props) => {
         <div className={classes.root}>
             <div className="menu-item">
                 <div>
-                    <ButtonComponent className={pathname === '/cabinet/myAds' ? 'selected' : ''} onClick={onButtonClick('myAds')}>
+                    <ButtonComponent
+                        className={pathname === '/cabinet/myAds' ? 'selected' : ''}
+                        onClick={onButtonClick('myAds')}
+                    >
                         <NotesIcon/>
                         <Typography variant="subtitle1">{t('cabinet:myAds')}</Typography>
                     </ButtonComponent>
                 </div>
                 <div>
-                    <ButtonComponent className={pathname === '/cabinet/myLots' ? 'selected' : ''} onClick={onButtonClick('myLots')}>
+                    <ButtonComponent
+                        className={pathname === '/cabinet/myLots' ? 'selected' : ''}
+                        onClick={onButtonClick('myLots')}
+                    >
                         <GavelIcon/>
                         <Typography variant="subtitle1">{t('cabinet:myLots')}</Typography>
                     </ButtonComponent>
                 </div>
                 <div>
-                    <ButtonComponent className={pathname === '/cabinet/favorite' ? 'selected' : ''} onClick={onButtonClick('favorite')}>
+                    <ButtonComponent
+                        className={pathname === '/cabinet/favorite' ? 'selected' : ''}
+                        onClick={onButtonClick('favorite')}
+                    >
                         <FavoriteBorderIcon/>
                         <Typography variant="subtitle1">{t('cabinet:favourite')}</Typography>
                     </ButtonComponent>
                 </div>
                 <div>
-                    <ButtonComponent className={pathname === '/cabinet/myOrders' ? 'selected' : ''}>
+                    <ButtonComponent
+                        className={pathname === '/cabinet/myOrders' ? 'selected' : ''}
+                    >
                         <ShoppingIcon/>
                         <Typography variant="subtitle1">{t('cabinet:myOrders')}</Typography>
                     </ButtonComponent>
-                    <ButtonComponent className={pathname === '/cabinet/archive' ? 'selected' : ''} onClick={onButtonClick('archive')}>
+                    <ButtonComponent
+                        className={pathname === '/cabinet/archive' ? 'selected' : ''}
+                        onClick={onButtonClick('archive')}
+                    >
                         <ArchiveIcon/>
                         <Typography variant="subtitle1">{t('cabinet:adsArchive')}</Typography>
                     </ButtonComponent>
@@ -107,7 +121,10 @@ export const ActionsMenu = (props) => {
             </div>
             <div className="menu-item">
                 <div>
-                    <ButtonComponent className={pathname === '/cabinet/settings' ? 'selected' : ''}>
+                    <ButtonComponent
+                        // className={pathname === '/cabinet/settings' ? 'selected' : ''}
+                        // onClick={onButtonClick('settings')}
+                    >
                         <SettingsIcon/>
                         <Typography variant="subtitle1">{t('cabinet:settings')}</Typography>
                     </ButtonComponent>

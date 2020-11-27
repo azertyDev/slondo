@@ -1,5 +1,7 @@
 import React, {MutableRefObject, useEffect, useRef, useState} from 'react';
 import {CustomSlider} from '../custom_slider/CustomSlider';
+import Router from 'next/router'
+
 // styles
 import {useStyles} from './useStyles';
 
@@ -8,6 +10,7 @@ export const SyncSliders = (props) => {
     const slider1: MutableRefObject<unknown> = useRef();
     const slider2: MutableRefObject<unknown> = useRef();
 
+    console.log(Router)
     const handleAfterChange = (newIndex) => {
         props.setCurrentSlide && props.setCurrentSlide(newIndex);
     };
@@ -42,9 +45,10 @@ export const SyncSliders = (props) => {
                     asNavFor={slidersNav.nav1}
                     ref={slider2}
                     focusOnSelect={true}
-                    arrows={false}
+                    arrows={props.arrows}
                     afterChange={handleAfterChange}
-                    slidesToShow={4}
+                    slidesToShow={props.imgs.length < 4 ? props.imgs.length : 4}
+                    swipeToSlide={true}
                 >
                     {props.imgs.map(({url, alt}, i) => (
                         <img src={url} alt={alt} key={i}/>

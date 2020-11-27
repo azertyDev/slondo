@@ -13,6 +13,9 @@ export const useStyles = makeStyles((theme) => ({
                 marginRight: '10px',
             },
             '& > div:last-child': {
+                display: 'flex',
+                flexFlow: 'column wrap',
+                justifyContent: 'center',
                 '& > div': {
                     marginBottom: '8px',
                 }

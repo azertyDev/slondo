@@ -1,5 +1,5 @@
 import React from 'react';
-import {CardTabs} from "@src/components/cabinet/cabinet_pages/CardTabs";
+import {TabsContent} from "@src/components/cabinet/cabinet_pages/TabsContent";
 import {ArchiveComponent} from '@src/components/cabinet/cabinet_pages/archive/ArchiveComponent'
 
 export const ArchiveContainer = (props) => {
@@ -19,6 +19,6 @@ export const ArchiveContainer = (props) => {
     const title = 'Архив';
 
     return (
-        <CardTabs title={title} tabsData={tabsData} headerTitle={title} t={props.t}/>
+        <TabsContent title={title} tabsData={tabsData} headerTitle={title} t={props.t}/>
     )
 }

@@ -23,12 +23,12 @@ export const useStyles = makeStyles((theme) => ({
                         marginRight: '10px',
                     },
                     '&.selected': {
-                        border: '1px solid',
-                        borderStyle: 'inset',
+                        border: '1px solid #AD66D5',
                         borderRadius: '5px',
-                        borderImageSlice: '1',
-                        borderImageSource:
-                            'linear-gradient(49.94deg, #675EAA 19.03%, #AD66D5 72.72%)',
+                        // borderStyle: 'inset',
+                        // borderImageSlice: '1',
+                        // borderImageSource:
+                        //     'linear-gradient(49.94deg, #675EAA 19.03%, #AD66D5 72.72%)',
                         '& > h6.MuiTypography-subtitle1': {
                             backgroundImage:
                                 'linear-gradient(49.94deg, #675EAA 19.03%, #AD66D5 72.72%)',

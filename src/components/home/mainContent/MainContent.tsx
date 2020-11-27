@@ -38,6 +38,7 @@ export const MainContent: FC<MainContentProps> = (props) => {
                         onChange={handleTabChange}
                         indicatorColor="primary"
                         className="tabs"
+                        variant="fullWidth"
                     >
                         <CustomTab
                             label={

@@ -3,7 +3,7 @@ import {withTranslation} from '@root/i18n';
 import {MessagesContainer} from "@src/components/cabinet/cabinet_pages/messages/MessagesContainer";
 
 const Messages = (props) => {
-    return <MessagesContainer {...props} title="Сообщения"/>;
+    return <MessagesContainer {...props}/>;
 };
 
 Messages.getInitialProps = async () => ({

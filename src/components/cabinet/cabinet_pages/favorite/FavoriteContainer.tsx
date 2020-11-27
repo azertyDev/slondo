@@ -1,5 +1,5 @@
 import React from 'react';
-import {CardTabs} from "@src/components/cabinet/cabinet_pages/CardTabs";
+import {TabsContent} from "@src/components/cabinet/cabinet_pages/TabsContent";
 import {FavoriteComponent} from "@src/components/cabinet/cabinet_pages/favorite/FavoriteComponent";
 
 export const FavoriteContainer = (props) => {
@@ -19,6 +19,6 @@ export const FavoriteContainer = (props) => {
     const title = 'Избранное';
 
     return (
-        <CardTabs title={title} tabsData={tabsData} headerTitle={title} t={props.t}/>
+        <TabsContent title={title} tabsData={tabsData} headerTitle={title} t={props.t}/>
     )
 }
