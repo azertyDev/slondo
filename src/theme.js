@@ -84,7 +84,7 @@ const theme = createMuiTheme({
                 ':focus': {
                     outline: 0,
                 },
-                ".errorText": {
+                ".error-text": {
                     color: colors.error,
                     textAlign: 'center'
                 },

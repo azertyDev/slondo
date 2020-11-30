@@ -2,11 +2,27 @@ import {makeStyles} from '@material-ui/core/styles';
 
 export const useStyles = makeStyles((theme) => ({
     root: {
-        '& div.tabs div.MuiTabs-flexContainer': {
-            justifyContent: 'space-around',
-            '& h6': {
-                textTransform: 'uppercase',
-            },
+        '& > h4': {
+            marginBottom: 30,
+        },
+        '& div.tabs': {
+            minHeight: 'auto',
+            '& div.MuiTabs-flexContainer': {
+                borderBottom: '1px solid #838383',
+                '& h6': {
+                    textTransform: 'uppercase',
+                    color: '#838383',
+                },
+                '& button.MuiTab-root': {
+                    // padding: 0,
+                    // paddingBottom: 5,
+                    // minHeight: 20,
+                },
+                '& button.MuiTab-textColorInherit': {
+                    opacity: 1
+
+                },
+            }
         },
         '& div.cards-container': {
             marginTop: '40px',

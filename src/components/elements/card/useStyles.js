@@ -26,12 +26,12 @@ export const useStyles = makeStyles(() => ({
                     '&:first-child': {
                         width: '100%',
                         display: 'flex',
-                        alignItems: 'center',
                         justifyContent: 'space-between',
                         '& > h6.MuiTypography-subtitle2': {
+                            height: 16,
                             borderRadius: '3px',
-                            padding: '0 7px',
-                            lineHeight: '1.3',
+                            padding: '0 5px',
+                            lineHeight: '1.2',
                             letterSpacing: '0.4px',
                             color: '#fff',
                         },
@@ -89,6 +89,8 @@ export const useStyles = makeStyles(() => ({
                     '&:last-child': {
                         display: 'flex',
                         '& > span': {
+                            width: 25,
+                            height: 25,
                             display: 'flex',
                             alignItems: 'center',
                             justifyContent: 'center',
@@ -97,8 +99,8 @@ export const useStyles = makeStyles(() => ({
                             borderRadius: '100%',
                             marginRight: '5px',
                             '& > svg': {
-                                width: '20px',
-                                height: '20px',
+                                // width: '15px',
+                                // height: '20px',
                                 '& > path': {
                                     fill: '#838383',
                                 },

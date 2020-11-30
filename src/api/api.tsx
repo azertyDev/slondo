@@ -28,7 +28,7 @@ export const userAPI = {
                 throw err;
             });
     },
-    getCategories: (lang: string): Promise<AxiosInstance> => {
+    getCategories: (lang: string): Promise<any> => {
         return instance.get(`categories/main?lang=${lang}`)
             .then(res => res.data)
             .catch(err => {

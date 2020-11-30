@@ -64,9 +64,9 @@ export const MainContent: FC<MainContentProps> = (props) => {
                     <CustomTabPanel value={tabValue} index={0}>
                         {
                             adCardData.error
-                                ? <Typography variant="subtitle1" className="errorText">{adCardData.error}</Typography>
+                                ? <Typography variant="subtitle1" className="error-text">{adCardData.error}</Typography>
                                 : <div className="ads-wrapper">
-                                    <Grid item container spacing={2}>
+                                    <Grid item container spacing={1}>
                                         {adCardData.cardData.data.map((item, index) => (
                                             <Grid
                                                 key={index}
@@ -89,13 +89,13 @@ export const MainContent: FC<MainContentProps> = (props) => {
                                         ))}
                                     </Grid>
                                 </div>
-
                         }
                     </CustomTabPanel>
                     <CustomTabPanel value={tabValue} index={1}>
                         {
                             lotCardData.error
-                                ? <Typography variant="subtitle1" className="errorText">{lotCardData.error}</Typography>
+                                ?
+                                <Typography variant="subtitle1" className="error-text">{lotCardData.error}</Typography>
                                 : <div className="lots-wrapper">
                                     <Grid item container spacing={2}>
                                         {lotCardData.cardData.data.map((item, index) => (
@@ -123,12 +123,16 @@ export const MainContent: FC<MainContentProps> = (props) => {
                         }
                     </CustomTabPanel>
                     <Grid item xs={12} container justify="center">
-                        <CustomPagination
-                            count={props.pageCount}
-                            currentPage={props.currentPage}
-                            handlePaginationPage={props.handlePaginationPage}
-                            // isFetch={}
-                        />
+                        {
+                            lotCardData.error || adCardData.error
+                                ? null
+                                : <CustomPagination
+                                    count={props.pageCount}
+                                    currentPage={props.currentPage}
+                                    handlePaginationPage={props.handlePaginationPage}
+                                />
+                        }
+
                     </Grid>
                 </Grid>
                 <Hidden smDown>

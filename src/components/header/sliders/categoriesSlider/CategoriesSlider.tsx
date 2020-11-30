@@ -2,35 +2,41 @@ import React, {FC} from 'react';
 import {Typography} from '@material-ui/core';
 import {CustomSlider} from "@src/components/elements/custom_slider/CustomSlider";
 import {settings} from './sliderSettings';
-import {useSelector} from 'react-redux';
-import {RootState} from "@src/redux/rootReducer";
 import {Link} from "@root/i18n";
 import {WithT} from "i18next";
 import {useStyles} from './useStyles';
+import {Skeleton} from "@material-ui/lab";
+import {Categories} from "@root/interfaces/Categories";
 
 
-export const CategoriesSlider: FC<WithT> = (props) => {
-    const {t} = props;
-
-    const {error, list} = useSelector(({categories}: RootState) => categories);
+export const CategoriesSlider: FC<WithT & { sliderData: Categories }> = (props) => {
+    const {t, sliderData} = props;
 
     const classes = useStyles();
     return (
         <div className={classes.root}>
             <Typography variant="h4">{t('popularCategories')}</Typography>
-            <div className='category-slider'>
+            <div className="category-slider">
                 <CustomSlider {...settings}>
                     {
-                        error
+                        sliderData.error
                             ? (
-                                <Typography>{error}</Typography>
+                                <Typography className="error-text">{sliderData.error}</Typography>
                             )
                             : (
-                                list.map(category => (
+                                sliderData.list.map(category => (
                                         <Link href="#" key={category.id}>
                                             <a title={category.name}>
-                                                <img src={category.images.url} alt='category'/>
-                                                <Typography>{category.name}</Typography>
+                                                {sliderData.isFetch ? (
+                                                    <Skeleton variant="circle" width={100} height={100}/>
+                                                ) : (
+                                                    <img src={category.images.url} alt="category"/>
+                                                )}
+                                                {sliderData.isFetch ? (
+                                                    <Skeleton variant="text"/>
+                                                ) : (
+                                                    <Typography>{category.name}</Typography>
+                                                )}
                                             </a>
                                         </Link>
                                     )
