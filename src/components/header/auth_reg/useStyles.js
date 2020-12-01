@@ -12,7 +12,7 @@ export const useStyles = makeStyles((theme) => ({
         '& div.info-block': {
             display: 'flex',
             flexDirection: 'column',
-            justifyContent: 'space-around',
+            justifyContent: 'space-evenly',
             height: '100%',
             padding: '15px',
             backgroundImage: 'linear-gradient(rgba(0,0,0,.6), rgba(0,0,0,.6)), url("./img/modal-image.jpg")',
@@ -27,7 +27,7 @@ export const useStyles = makeStyles((theme) => ({
                 display: 'flex',
                 alignItems: 'center',
                 '& > img': {
-                    width: '40px',
+                    minWidth: '40px',
                     height: '40px',
                     marginRight: '15px'
                 }

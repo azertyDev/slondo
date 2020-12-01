@@ -1,11 +1,11 @@
 import React from 'react'
 import {Grid, Hidden, Typography} from '@material-ui/core'
 import {
-    BonusIcon,
     SafeBuyingIcon,
     AdvertisementIcon,
     TorgIcon,
     RatingIcon,
+    Bonus_icon,
 } from '../../elements/icons'
 import {AuthRegForm} from "../../elements/auth_reg_form/AuthRegForm"
 import {CloseIcon} from "@src/components/elements/icons"
@@ -25,7 +25,7 @@ export const AuthRegPage = (props) => {
                     <Grid item xs={5}>
                         <div className='info-block'>
                             <div>
-                                <BonusIcon/>
+                                <img src={Bonus_icon} alt=""/>
                                 <Typography variant="subtitle2" color="initial">
                                     {t('auth_reg:bonus')}
                                 </Typography>

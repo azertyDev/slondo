@@ -5,7 +5,6 @@ export const Twitter = `/icons/tw_icon.svg`;
 export const Whatsapp = `/icons/wp_icon.svg`;
 export const Telegram = `/icons/tg_icon.svg`;
 export const PlIcon = `/icons/place_icon.svg`;
-export const Logo = `/icons/logo.svg`;
 export const CategoryIcon = `/icons/kat_icon.svg`;
 export const SearchIcon = `/icons/sr_icon.svg`;
 export const SignIcon = `/icons/sign_icon.svg`;
@@ -37,6 +36,7 @@ export const FullscreenIcon = `/icons/fullscreen-icon.svg`;
 export const FullscreenIcon2 = `/icons/fullscreen-icon2.svg`;
 export const Subscribe_icon = `/icons/touch_icon.svg`;
 export const SpeakerNotes_icon = `/icons/speaker_notes.svg`;
+export const Bonus_icon = `/icons/bonus_icon.svg`;
 
 
 // Custom svgs
@@ -62,4 +62,5 @@ export {EyeIcon} from './EyeIcon';
 export {RestoreIcon} from './RestoreIcon';
 export {DoneAllIcon} from './DoneAllIcon';
 export {CloseIcon} from './CloseIcon';
+export {Logo} from './logo/Logo'
 

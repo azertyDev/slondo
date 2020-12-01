@@ -63,7 +63,8 @@ export const useStyles = makeStyles(({palette}) => ({
             background: "linear-gradient(49.94deg, #675EAA 19.03%, #AD66D5 72.72%)",
             borderRadius: '3px',
             padding: '15px 0',
-            width: '50%'
+            width: '58.2%',
+            borderStyle: 'none'
         }
     },
     agreement: {
@@ -74,7 +75,7 @@ export const useStyles = makeStyles(({palette}) => ({
             textDecoration: 'none'
         }
     },
-    
+
     // Errors
     errorInput: {
         '& fieldset': {

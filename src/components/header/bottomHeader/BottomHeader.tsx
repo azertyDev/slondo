@@ -1,5 +1,5 @@
-import React, {useState} from "react"
-import {AppBar, Container, Grid, Hidden, MenuItem, Select, Typography} from "@material-ui/core"
+import React from "react"
+import {AppBar, Container, Grid, Hidden, Typography} from "@material-ui/core"
 import {ButtonComponent} from "@src/components/elements/button/Button"
 import {SearchForm} from "@src/components/elements/search_form/SearchForm"
 import {withScrollThreshold} from "@src/components/hoc/withScrollThreshold"
@@ -19,30 +19,24 @@ import {useStyles} from "./useStyles"
 const BottomHeader = (props) => {
     const {isScrollBreak, handleOpenModal, handleCreateAd, isAuth, t} = props;
 
-    const [adType, setAdType] = useState('');
-
-    const handleSelect = (e) => {
-        setAdType(e.target.value);
-    };
-
     const classes = useStyles(props);
     return (
         <div className={classes.root}>
             <Hidden smDown>
                 <AppBar position={isScrollBreak ? "fixed" : "absolute"} color={"inherit"}
                         elevation={isScrollBreak ? 1 : 0}>
-                    <Container maxWidth='lg'>
+                    <Container maxWidth="lg">
                         <Grid container justify="space-between" alignItems="center" spacing={1}>
                             <Grid container item xs={3} alignItems="center">
                                 <Grid container item md={7} lg={6} className="bottom-logo">
-                                    <Link href='/'>
+                                    <Link href="/">
                                         <a>
-                                            <img src={Logo} alt="logo"/>
+                                            <Logo/>
                                         </a>
                                     </Link>
                                 </Grid>
                                 <Grid item container md={5} lg={6} justify="center" className="category-menu">
-                                    <ButtonComponent color='primary' className='bottom-category-button header-button'>
+                                    <ButtonComponent color="primary" className="bottom-category-button header-button">
                                         <Typography variant="subtitle2">{t('categories')}</Typography>
                                         <CategorySortIcon/>
                                     </ButtonComponent>
@@ -52,48 +46,26 @@ const BottomHeader = (props) => {
                                 item
                                 container
                                 md={6}
-                                spacing={1}
                                 alignItems="center"
                                 className="search-block"
                             >
-                                <Grid item md={9}>
+                                <Grid item xs>
                                     <SearchForm t={t}/>
-                                </Grid>
-                                <Grid className='select-menu' item md={3}>
-                                    <Select
-                                        variant={'outlined'}
-                                        value={adType}
-                                        onChange={handleSelect}
-                                        displayEmpty
-                                    >
-                                        <MenuItem value="">
-                                            <Typography variant='subtitle2'>{t('adType')}</Typography>
-                                        </MenuItem>
-                                        <MenuItem value={10}>
-                                            <Typography variant='subtitle2'>test</Typography>
-                                        </MenuItem>
-                                        <MenuItem value={20}>
-                                            <Typography variant='subtitle2'>test2</Typography>
-                                        </MenuItem>
-                                        <MenuItem value={30}>
-                                            <Typography variant='subtitle2'>test3</Typography>
-                                        </MenuItem>
-                                    </Select>
                                 </Grid>
                             </Grid>
                             <Grid item md={2}>
                                 <ButtonComponent
                                     onClick={handleCreateAd}
-                                    color='primary'
-                                    className='create-ad-button header-button'>
+                                    color="primary"
+                                    className="create-ad-button header-button">
                                     <Typography variant="subtitle2">
                                         {t('common:createAd')}
                                     </Typography>
                                     <AddIcon/>
                                 </ButtonComponent>
                             </Grid>
-                            <Grid item container alignItems="center" xs={1}>
-                                <ButtonComponent className='bottom-sign-button header-button' onClick={handleOpenModal}>
+                            <Grid item container justify="center" alignItems="center" xs={1}>
+                                <ButtonComponent className="bottom-sign-button header-button" onClick={handleOpenModal}>
                                     <Typography
                                         variant="subtitle2">{t(`common:${isAuth ? 'signOut' : 'signIn'}`)}</Typography>
                                     <SignIcon/>
@@ -105,7 +77,7 @@ const BottomHeader = (props) => {
             </Hidden>
             {/*      Adaptive       */}
             <Hidden mdUp>
-                <div className='select-local'>
+                <div className="select-local">
                     <SearchForm t={t}/>
                 </div>
             </Hidden>
