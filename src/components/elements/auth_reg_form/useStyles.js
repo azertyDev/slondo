@@ -2,16 +2,9 @@ import {makeStyles} from '@material-ui/core/styles'
 
 export const useStyles = makeStyles(({palette}) => ({
     root: {
-        display: 'flex',
-        flexDirection: 'column',
-        width: '100%',
-        height: '100%',
-        backgroundColor: palette.primary.white,
         '& > div.form-block': {
-            padding: '0 15px',
             '& div.tabs-container': {
                 height: '405px',
-                marginTop: '30px',
                 '& div.tabs': {
                     width: '100%',
                     '& div.MuiTabs-flexContainer': {
@@ -26,18 +19,29 @@ export const useStyles = makeStyles(({palette}) => ({
                     '& > div.sign-panel > form, & > div.reg-panel > form': {
                         display: 'flex',
                         flexDirection: 'column',
-                        justifyContent: 'space-between'
+                        justifyContent: 'space-between',
+                        '& > div': {
+                            marginTop: '15px',
+                            '&:nth-child(3), &:nth-child(4)': {
+                                marginTop: 0,
+                            },
+                            '& > div': {
+                                marginTop: 10,
+                            },
+                            '& label': {
+                                marginLeft: 5,
+                            },
+                            '& input.MuiOutlinedInput-input': {
+                                height: '38px',
+                                padding: '0 16px'
+                            }
+                        },
                     },
                     '& > div.sign-panel > form': {
-                        height: '280px',
+
                         '& a': {
                             textDecoration: 'none',
-                            '& > p': {
-                                margin: '10px 0',
-                                textAlign: 'end',
-                                color: palette.primary.main,
-                            }
-                        }
+                        },
                     },
                     '& > div.reg-panel': {
                         display: 'flex',
@@ -53,11 +57,16 @@ export const useStyles = makeStyles(({palette}) => ({
         '& div.forget-password': {
             display: 'flex',
             justifyContent: 'flex-end',
+            '& > a > p.MuiTypography-body2': {
+                fontSize: '14px',
+                color: palette.primary.main,
+            }
         }
     },
     modalBtns: {
         display: 'flex',
         justifyContent: 'center',
+        marginTop: '30px !important',
         '& button.signin-btn, & button.reg-btn': {
             color: '#fff',
             background: "linear-gradient(49.94deg, #675EAA 19.03%, #AD66D5 72.72%)",
@@ -68,23 +77,15 @@ export const useStyles = makeStyles(({palette}) => ({
         }
     },
     agreement: {
-        margin: '18px 5px',
         textAlign: 'center',
-        '& > p > a': {
-            color: palette.primary.main,
-            textDecoration: 'none'
+        '& > p ': {
+            fontSize: '0.875rem',
+            lineHeight: '17px',
+            padding: '20px',
+            '& > a': {
+                color: palette.primary.main,
+                textDecoration: 'none'
+            }
         }
     },
-
-    // Errors
-    errorInput: {
-        '& fieldset': {
-            borderColor: `${palette.primary.error}!important`
-        }
-    },
-    errorTxt: {
-        height: '15px',
-        margin: '5px',
-        color: palette.primary.error
-    }
 }))

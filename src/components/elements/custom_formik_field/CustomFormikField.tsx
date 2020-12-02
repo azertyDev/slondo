@@ -4,17 +4,23 @@ import {Field} from "formik";
 
 
 export const CustomFormikField: FC<any> = (props) => {
+    const {labelText, ...otherProps} = props;
     return (
-        <Field {...props}>
+        <Field {...otherProps}>
             {
                 ({field}) => (
-                    <TextField
-                        fullWidth
-                        focused={false}
-                        variant='outlined'
-                        {...field}
-                        {...props}
-                    />
+                    <>
+                        <label>
+                            {labelText}
+                        </label>
+                        <TextField
+                            fullWidth
+                            focused={false}
+                            variant="outlined"
+                            {...field}
+                            {...otherProps}
+                        />
+                    </>
                 )
             }
         </Field>

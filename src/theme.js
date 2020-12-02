@@ -86,7 +86,17 @@ const theme = createMuiTheme({
                 },
                 ".error-text": {
                     color: colors.error,
-                    textAlign: 'center'
+                },
+                '.error-border': {
+                    borderColor: colors.error,
+                    '& div.MuiOutlinedInput-root': {
+                        '& > fieldset, &:hover > fieldset.MuiOutlinedInput-notchedOutline': {
+                            borderColor: colors.error
+                        },
+                    },
+                    '& button.MuiButtonBase-root': {
+                        borderColor: `${colors.error}!important`
+                    }
                 },
                 body: {
                     backgroundColor: '#fafafa'

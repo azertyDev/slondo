@@ -71,7 +71,7 @@ export const AuthRegPage = (props) => {
                                 <Typography variant="h6" color="initial">
                                     {t('auth_reg:welcome')}
                                 </Typography>
-                                <Typography variant="subtitle2" color="initial">
+                                <Typography variant="subtitle1" color="initial">
                                     {t('auth_reg:authSite')}
                                 </Typography>
                             </div>
