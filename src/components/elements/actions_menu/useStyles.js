@@ -1,4 +1,4 @@
-import {makeStyles} from '@material-ui/core/styles';
+import { makeStyles } from '@material-ui/core/styles';
 
 export const useStyles = makeStyles((theme) => ({
     root: {
@@ -16,7 +16,6 @@ export const useStyles = makeStyles((theme) => ({
                     borderRadius: '5px',
                     background: '#fff',
                     boxShadow: '0px 1px 2px rgba(0, 0, 0, 0.25)',
-                    position: 'relative',
                     border: '1px solid transparent',
                     backgroundClip: 'padding-box',
                     '& > svg': {
@@ -51,6 +50,19 @@ export const useStyles = makeStyles((theme) => ({
             '& > div:last-child': {
                 display: 'flex',
                 marginBottom: '0',
+                justifyContent: 'space-between',
+                '& > span.MuiBadge-root': {
+                    width: '49%',
+                    marginRight: '5px',
+                    '& span.MuiBadge-badge': {
+                        top: '5px',
+                        right: '5px',
+                        minWidth: '16px',
+                        height: '16px',
+                        padding: 0,
+                        fontWeight: 600,
+                    },
+                },
                 '& > button:first-child': {
                     marginRight: '5px',
                 },

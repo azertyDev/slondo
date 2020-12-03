@@ -57,7 +57,14 @@ export const useStyles = makeStyles((theme) => ({
                 alignItems: 'center',
                 justifyContent: 'center',
                 '& > button.MuiIconButton-root': {
-                    margin: '4px'
+                    padding: '5px',
+                    '& svg > path': {
+                        // fill: '#EB5757',
+                    }
+                },
+                '&:hover': {
+                    cursor: 'pointer',
+                    // background: '#fff'
                 }
             },
             '& > div.welcome-block > h6.MuiTypography-subtitle1': {

@@ -60,8 +60,9 @@ export const AuthRegForm: FC<WithT & { handleCloseModal: () => void }> = (props)
     return (
         <div className={classes.root}>
             <div className="form-block">
-                <div className="error-text">
-                    {error && <Typography variant="body2">{t('auth_reg:serverError')}</Typography>}
+                <div className="server-error">
+                    {error &&
+                    <Typography variant="body2" className="error-text">{t('auth_reg:serverError')}</Typography>}
                 </div>
                 <div className="tabs-container">
                     <Tabs
@@ -103,9 +104,11 @@ export const AuthRegForm: FC<WithT & { handleCloseModal: () => void }> = (props)
                                             placeholder="+ (998) __ ___ __ __"
                                             className={errors.phone && touched.phone ? 'error-border' : ''}
                                         />
-                                        <Typography variant="subtitle2" className='error-text'>
-                                            {errors.phone && touched.phone ? errors.phone : ''}
-                                        </Typography>
+                                        <div className="validation-block">
+                                            <Typography variant="subtitle2" className="error-text">
+                                                {errors.phone && touched.phone ? errors.phone : ''}
+                                            </Typography>
+                                        </div>
                                     </div>
                                     <div>
                                         <CustomFormikField
@@ -115,16 +118,16 @@ export const AuthRegForm: FC<WithT & { handleCloseModal: () => void }> = (props)
                                             placeholder={t('auth_reg:enterPassword')}
                                             className={errors.password && touched.password ? 'error-border' : ''}
                                         />
-                                        <Typography variant="subtitle2" className='error-text'>
-                                            {errors.password && touched.password ? errors.password : ''}
-                                        </Typography>
-                                    </div>
-                                    <div className="forget-password">
-                                        <a href="#">
-                                            <Typography variant="body2">
-                                                {t('auth_reg:forgetPassword')}
+                                        <div className="validation-block">
+                                            <Typography variant="subtitle2" className="error-text">
+                                                {errors.password && touched.password ? errors.password : ''}
                                             </Typography>
-                                        </a>
+                                            <a href="#">
+                                                <Typography variant="body2">
+                                                    {t('auth_reg:forgetPassword')}
+                                                </Typography>
+                                            </a>
+                                        </div>
                                     </div>
                                     <div className={classes.modalBtns}>
                                         <ButtonComponent
@@ -158,13 +161,15 @@ export const AuthRegForm: FC<WithT & { handleCloseModal: () => void }> = (props)
                                         <CustomFormikField
                                             name="phone"
                                             type="tel"
-                                            placeholder={t('auth_reg:enterPhone')}
+                                            placeholder="+ (998) __ ___ __ __"
                                             labelText={t('auth_reg:enterPhone')}
                                             className={errors.phone && touched.phone ? 'error-border' : ''}
                                         />
-                                        <Typography variant="subtitle2" className='error-text'>
-                                            {errors.phone && touched.phone ? errors.phone : ''}
-                                        </Typography>
+                                        <div className="validation-block">
+                                            <Typography variant="subtitle2" className="error-text">
+                                                {errors.phone && touched.phone ? errors.phone : ''}
+                                            </Typography>
+                                        </div>
                                     </div>
                                     <div className={classes.modalBtns}>
                                         <ButtonComponent className="reg-btn" type="submit">

@@ -66,10 +66,6 @@ export const LeftSide = ({data}) => {
                     <span className="available"><PhoneIcon/> <Typography variant="subtitle1">{data.available_start_time}-{data.available_end_time}</Typography></span>
                     : null
                 }
-                {/*<span className="delivery"><DeliveryIcon/> <Typography variant="subtitle1">Есть доставка</Typography></span>*/}
-                {/*<span className="safe_deal"><SafeIcon/> <Typography variant="subtitle1">Безопасная покупка</Typography></span>*/}
-                {/*<span className="exchange"><SwapIcon/> <Typography variant="subtitle1">Возможен обмен</Typography></span>*/}
-                {/*<span className="available"><PhoneIcon/> <Typography variant="subtitle1">{data.available_start_time}-{data.available_end_time}</Typography></span>*/}
             </div>
             <div className="ad-location">
                 <Typography variant="button" noWrap>

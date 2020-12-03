@@ -1,8 +1,9 @@
 import React from 'react'
 import {Badge, Typography} from '@material-ui/core'
-import {ButtonComponent} from '@src/components/elements/button/Button'
 import {Router} from '@root/i18n'
 import {useRouter} from 'next/router'
+import {ButtonComponent} from '@src/components/elements/button/Button'
+import { CustomBadge } from '@src/components/elements/custom_budge/CustomBadge';
 
 // icons
 import {NotesIcon} from '@src/components/elements/icons/NotesIcon'
@@ -62,12 +63,14 @@ export const ActionsMenu = (props) => {
                     </ButtonComponent>
                 </div>
                 <div>
-                    <ButtonComponent
-                        className={pathname === '/cabinet/myOrders' ? 'selected' : ''}
-                    >
-                        <ShoppingIcon/>
-                        <Typography variant="subtitle1">{t('cabinet:myOrders')}</Typography>
-                    </ButtonComponent>
+                    <Badge badgeContent={4} color="secondary">
+                        <ButtonComponent
+                            className={pathname === '/cabinet/myOrders' ? 'selected' : ''}
+                        >
+                            <ShoppingIcon/>
+                            <Typography variant="subtitle1">{t('cabinet:myOrders')}</Typography>
+                        </ButtonComponent>
+                    </Badge>
                     <ButtonComponent
                         className={pathname === '/cabinet/archive' ? 'selected' : ''}
                         onClick={onButtonClick('archive')}
@@ -79,13 +82,13 @@ export const ActionsMenu = (props) => {
             </div>
             <div className="menu-item">
                 <div>
-                    <Badge badgeContent={4} color="secondary">
+                    <CustomBadge badgeContent={4} color="secondary">
                         <ButtonComponent className={pathname === '/cabinet/notifications' ? 'selected' : ''} onClick={onButtonClick('notifications')}>
                             <NotificationIcon/>
                             <Typography variant="subtitle1">{t('cabinet:notifications')}</Typography>
                         </ButtonComponent>
-                    </Badge>
-                    <Badge badgeContent={8} color="secondary">
+                    </CustomBadge>
+                    <Badge badgeContent={8} color="secondary" >
                         <ButtonComponent className={pathname === '/cabinet/messages' ? 'selected' : ''} onClick={onButtonClick('messages')}>
                             <LetterIcon/>
                             <Typography variant="subtitle1">{t('cabinet:messages')}</Typography>

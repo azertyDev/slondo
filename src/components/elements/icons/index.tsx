@@ -63,4 +63,5 @@ export {RestoreIcon} from './RestoreIcon';
 export {DoneAllIcon} from './DoneAllIcon';
 export {CloseIcon} from './CloseIcon';
 export {Logo} from './logo/Logo'
+export {PhoneIcon} from './PhoneIcon'
 

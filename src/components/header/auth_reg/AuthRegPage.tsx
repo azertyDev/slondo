@@ -1,5 +1,5 @@
 import React from 'react'
-import {Grid, Hidden, Typography} from '@material-ui/core'
+import {Grid, Hidden, IconButton, Typography} from '@material-ui/core'
 import {
     SafeBuyingIcon,
     AdvertisementIcon,
@@ -64,8 +64,10 @@ export const AuthRegPage = (props) => {
                     </Grid>
                     <Grid item xs={7}>
                         <div className='auth-reg-block'>
-                            <div className='close-btn-wrapper'>
-                                <CloseIcon onClick={handleCloseModal}/>
+                            <div className='close-btn-wrapper' onClick={handleCloseModal}>
+                                <IconButton>
+                                    <CloseIcon/>
+                                </IconButton>
                             </div>
                             <div className='welcome-block'>
                                 <Typography variant="h6" color="initial">
