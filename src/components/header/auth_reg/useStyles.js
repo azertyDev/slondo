@@ -14,7 +14,7 @@ export const useStyles = makeStyles((theme) => ({
             flexDirection: 'column',
             height: '100%',
             padding: '45px 0',
-            backgroundImage: 'linear-gradient(rgba(0,0,0,.6), rgba(0,0,0,.6)), url("./img/modal-image.jpg")',
+            backgroundImage: 'linear-gradient(rgba(0,0,0,.6), rgba(0,0,0,.6)), url("/img/modal-image.jpg")',
             backgroundSize: 'cover',
             borderTopLeftRadius: '6px',
             borderBottomLeftRadius: '6px',

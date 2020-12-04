@@ -1,7 +1,6 @@
 import {makeStyles} from '@material-ui/core/styles';
-import theme from '../../../theme';
 
-export const useStyles = makeStyles(() => ({
+export const useStyles = makeStyles((theme) => ({
     root: {
         position: 'relative',
         borderRadius: '7px',

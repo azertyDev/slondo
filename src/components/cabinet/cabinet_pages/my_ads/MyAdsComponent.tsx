@@ -9,8 +9,8 @@ export const MyAdsComponent = (props) => {
 
     return (
         <div className={classes.root}>
-            <CabinetCard/>
-            <CabinetCard/>
+            <CabinetCard safeShopping={props.safeShopping}/>
+            <CabinetCard safeShopping={props.safeShopping}/>
         </div>
     )
 }

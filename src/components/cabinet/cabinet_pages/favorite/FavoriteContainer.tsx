@@ -10,7 +10,7 @@ export const FavoriteContainer = (props) => {
             component: <FavoriteComponent/>
         },
         {
-            title: 'Безопасная покупка',
+            title: 'Аукционы',
             count: 2,
             component: <FavoriteComponent/>
         },

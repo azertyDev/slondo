@@ -5,10 +5,15 @@ import Cookies from 'universal-cookie';
 const cookies = new Cookies();
 const {token} = cookies.get('token') || {token: ''};
 
+
+const productionIP = 'http://54.205.72.116/api/';
+const testingIP = 'http://192.168.1.60/slondo/public/api/';
+
 const instance = Axios.create({
     withCredentials: true,
-    baseURL: 'http://54.205.72.116/api/',
+    baseURL: testingIP,
 });
+
 
 const config = {
     headers: {Authorization: `Bearer ${token}`}

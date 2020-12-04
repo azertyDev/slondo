@@ -24,7 +24,7 @@ export const CardItem: FC<InnerCardData & { className: string; isFetch: boolean 
             {props.isFetch ? (
                 <Skeleton variant="rect" className={classes.skeleton}/>
             ) : (
-                <CardMedia className="card-media" image={props.images.length ? props.images[0].url : null}>
+                <CardMedia className="card-media" image={props.images.length ? props.images[0].url.original : null}>
                 <div className="card-header">
                     <div>
                         <Typography variant="subtitle2">{props.cardType}</Typography>

@@ -1,9 +1,9 @@
-import React, {PropsWithChildren} from 'react'
+import React, {FC, PropsWithChildren} from 'react'
 import {ButtonBase, ButtonBaseProps} from '@material-ui/core'
 import {useStyles} from "./useStyles"
 
 
-export const ButtonComponent = (props: PropsWithChildren<ButtonBaseProps>) => {
+export const ButtonComponent: FC<any> = (props: PropsWithChildren<ButtonBaseProps>) => {
     const {className, ...otherProps} = props;
     const classes = useStyles(props);
 

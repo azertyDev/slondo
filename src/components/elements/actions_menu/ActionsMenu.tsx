@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { FC } from 'react'
 import {Badge, Typography} from '@material-ui/core'
 import {Router} from '@root/i18n'
 import {useRouter} from 'next/router'
@@ -23,7 +23,7 @@ import {PowerIcon} from '@src/components/elements/icons/PowerIcon'
 // styles
 import {useStyles} from './useStyles'
 
-export const ActionsMenu = (props) => {
+export const ActionsMenu: FC<any> = (props) => {
     const {pathname} = useRouter();
     const {t} = props
 

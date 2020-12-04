@@ -12,7 +12,7 @@ export const MyAdsContainer = (props) => {
         {
             title: 'Безопасная покупка',
             count: 2,
-            component: <MyAdsComponent/>
+            component: <MyAdsComponent safeShopping/>
         },
     ]
 

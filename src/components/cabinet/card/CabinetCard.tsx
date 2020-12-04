@@ -23,7 +23,7 @@ import {
 import { useStyles } from './useStyles';
 import { ButtonComponent } from '@src/components/elements/button/Button';
 
-export const CabinetCard = () => {
+export const CabinetCard = (props) => {
     const classes = useStyles();
     return (
         <div className={classes.root}>
@@ -116,12 +116,14 @@ export const CabinetCard = () => {
                                                     Есть доставка
                                                 </Typography>
                                             </span>
-                                            <span className="safe_deal">
-                                                <SafeIcon />
-                                                <Typography variant="body1">
-                                                    Безопасная покупка
-                                                </Typography>
-                                            </span>
+                                            {props.safeShopping ? (
+                                                <span className="safe_deal">
+                                                    <SafeIcon />
+                                                    <Typography variant="body1">
+                                                        Безопасная покупка
+                                                    </Typography>
+                                                </span>
+                                            ) : null}
                                         </div>
                                         <div className="location">
                                             <div>

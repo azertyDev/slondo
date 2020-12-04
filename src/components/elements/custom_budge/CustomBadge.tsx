@@ -1,13 +1,13 @@
-import React from 'react';
+import React, { FC } from 'react';
 import { Badge } from '@material-ui/core';
 
 import { useStyles } from './useStyles';
 
-export const CustomBadge = ({ children }) => {
+export const CustomBadge: FC<any> = ({ children }, props) => {
     const classes = useStyles;
     return (
         <>
-            <Badge badgeContent={4} color="secondary" className={classes.root}>
+            <Badge {...props} className={classes.root}>
                 {children}
             </Badge>
         </>
