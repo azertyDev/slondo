@@ -1,16 +1,18 @@
-import {makeStyles} from '@material-ui/core/styles';
+import { makeStyles } from '@material-ui/core/styles';
 
 export const useStyles = makeStyles((theme) => ({
     root: {
         '& div.lot-info': {
-            marginTop: "10px",
+            marginTop: '10px',
             display: 'flex',
             justifyContent: 'center',
             flexDirection: 'column',
+            '& div.lot-timer': {
+                marginBottom: 23,
+            },
             '& div.buy-now': {
                 display: 'flex',
                 flexDirection: 'column',
-                marginTop: 23,
                 '& div:first-child': {
                     display: 'flex',
                     alignItems: 'center',
@@ -24,12 +26,12 @@ export const useStyles = makeStyles((theme) => ({
                             fontWeight: '600',
                         },
                         '& > h6.MuiTypography-subtitle2': {
-                            marginBottom: 5
+                            marginBottom: 5,
                         },
                     },
                 },
                 '& > div:last-child': {
-                    marginTop: "15px",
+                    marginTop: '15px',
                     '& > button': {
                         background: '#7DBCF6',
                         borderRadius: '3px',
@@ -37,10 +39,10 @@ export const useStyles = makeStyles((theme) => ({
                         '& > h6.MuiTypography-subtitle1': {
                             color: '#fff',
                             lineHeight: '16px',
-                            fontSize: '1.125rem'
+                            fontSize: '1.125rem',
                         },
                     },
-                }
+                },
             },
             '& div.lot-participants-block': {
                 display: 'flex',
@@ -55,8 +57,8 @@ export const useStyles = makeStyles((theme) => ({
                     '&:last-child': {
                         padding: '10px 15px',
                         color: '#675EAA',
-                        textDecorationLine: 'underline'
-                    }
+                        textDecorationLine: 'underline',
+                    },
                 },
                 '& > div.participants': {
                     flexDirection: 'column',
@@ -78,15 +80,14 @@ export const useStyles = makeStyles((theme) => ({
                         '& > h6.MuiTypography-subtitle1:last-child': {
                             textAlign: 'end',
                             fontWeight: '600',
-                            color: '#666'
+                            color: '#666',
                         },
                         '& > button': {
                             marginTop: '20px',
                         },
                         '& span': {
-                            color: '#AD66D5'
+                            color: '#AD66D5',
                         },
-
                     },
                 },
             },
@@ -116,10 +117,10 @@ export const useStyles = makeStyles((theme) => ({
                         display: 'flex',
                         flexDirection: 'column',
                         alignItems: 'center',
-                        marginBottom: "25px",
+                        marginBottom: '25px',
                         '& > h6.MuiTypography-subtitle2:last-child': {
-                            color: '#845CAB'
-                        }
+                            color: '#845CAB',
+                        },
                     },
                     '&:nth-child(3)': {
                         justifyContent: 'flex-start',
@@ -127,9 +128,9 @@ export const useStyles = makeStyles((theme) => ({
                             borderRadius: '3px',
                             margin: 0,
                             '& > h6.MuiTypography-subtitle1': {
-                                color: theme.palette.primary.white
-                            }
-                        }
+                                color: theme.palette.primary.white,
+                            },
+                        },
                     },
                 },
 
@@ -140,8 +141,8 @@ export const useStyles = makeStyles((theme) => ({
 
     lotTimer: {
         display: 'flex',
-        justifyContent: "center",
-        flexDirection: "column",
+        justifyContent: 'center',
+        flexDirection: 'column',
         padding: '15px 30px 8px 30px',
         boxShadow: '0px 0px 8px rgba(103, 94, 170, 0.25)',
         borderRadius: '3px',
@@ -149,11 +150,11 @@ export const useStyles = makeStyles((theme) => ({
             textAlign: 'center',
             fontSize: '1.125rem',
             fontWeight: '600',
-            lineHeight: 1
+            lineHeight: 1,
         },
         '& > div': {
             display: 'flex',
-            justifyContent: "space-between",
+            justifyContent: 'space-between',
             marginTop: '7px',
             '& > span': {
                 display: 'inline-block',
@@ -182,8 +183,8 @@ export const useStyles = makeStyles((theme) => ({
                 '& > span.MuiTypography-caption': {
                     marginTop: 5,
                     textAlign: 'center',
-                }
-            }
-        }
-    }
+                },
+            },
+        },
+    },
 }));
