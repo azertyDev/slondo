@@ -5,8 +5,9 @@
   "shops": "Магазины",
   "forBusiness": "Для бизнеса",
   "categories": "Категории",
-  "searchText": "Что будем искать",
+  "searchText": "Поиск по объявлениям",
   "searchBtn": "Найти",
   "adType": "Тип объявления",
-  "signin": "Войти"
+  "signin": "Войти",
+  "bonus": "Бонусы"
 }

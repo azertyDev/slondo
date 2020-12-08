@@ -1,252 +1,163 @@
-import React, {useState} from 'react'
-import {
-    Grid,
-    Typography,
-    Hidden,
-    Tabs,
-} from '@material-ui/core'
-import {BackSpaceArrow} from '../../elements/icons'
-import {CardItem} from '../../elements/card/Card'
-import {ButtonComponent} from '../../elements/button/Button'
-import {CustomTab} from '../../elements/custom_tab/CustomTab'
-import {useStyles} from './useStyles'
+import React, {FC} from 'react';
+import {Grid, Typography, Hidden, Tabs, Tab} from '@material-ui/core';
+import {CardItem} from '@src/components/elements/card/Card';
+import {Banner} from '@src/components/elements/banner/Banner';
+import {CustomTabPanel} from '@src/components/elements/custom_tab_panel/CustomTabPanel';
+import {Link} from '@root/i18n';
+import {TFunction} from "i18next";
+import {CardData} from "@root/interfaces/CardData";
+import {CustomPagination} from "../../elements/custom_pagination/CustomPagination";
+import {useStyles} from './useStyles';
 
 
-const TabPanel = (props) => {
-    const {children, value, index, ...other} = props
+interface MainContentProps {
+    t: TFunction;
+    tabValue: number;
+    handleTabChange: (_: unknown, newValue: number) => void;
+    // handleShowMore: () => void;
+    adCardData: CardData;
+    lotCardData: CardData;
+    pageCount: number;
+    currentPage: number;
+    handlePaginationPage: (_: unknown, pageNumber: number) => void;
+}
 
-    return (
-        <div
-            hidden={value !== index}
-            {...other}
-        >
-            {value === index && children}
-        </div>
-    )
-};
+export const MainContent: FC<MainContentProps> = (props) => {
+    const {t, tabValue, handleTabChange, adCardData, lotCardData} = props;
 
-export const MainContent = (props) => {
-    const {t} = props;
     const classes = useStyles();
-    const [value, setValue] = useState(0);
-
-    const handleChange = (event, newValue) => {
-        setValue(newValue)
-    };
-
     return (
         <div className={classes.root}>
+            <Typography variant="h4">Все объявления</Typography>
             <Grid container>
                 <Grid md={9} xs={12} item>
                     <Tabs
-                        value={value}
-                        onChange={handleChange}
+                        value={tabValue}
+                        onChange={handleTabChange}
                         indicatorColor="primary"
                         className="tabs"
+                        variant="fullWidth"
                     >
-                        <CustomTab label={<Typography>{t("allAds")}</Typography>} id={0} selected={true}/>
-                        <CustomTab label={<Typography>{t("allLots")}</Typography>} id={1}/>
+                        <Tab
+                            label={
+                                <Typography variant="h6">
+                                    {t('allAds')}
+                                </Typography>
+                            }
+                            value={0}
+                        />
+                        <Tab
+                            label={
+                                <Typography variant="h6">
+                                    {t('allLots')}
+                                </Typography>
+                            }
+                            value={1}
+                        />
                     </Tabs>
                 </Grid>
             </Grid>
             <Grid container className="cards-container">
                 <Grid item md={9} xs={12}>
-                    <TabPanel value={value} index={0}>
-                        <div className="ads-wrapper">
-                            <Grid item container spacing={1}>
-                                <Grid xs={6} sm={4} lg={3} item>
-                                    <CardItem
-                                        title={t('ad')}
-                                        className="card-item"
-                                        alt="adv"
-                                        image={`img/card-image.jpg`}
-                                        price="180 000 сум"
-                                        description="Продам сумку в хорошем соcтоянии"
-                                    />
-                                </Grid>
-                                <Grid xs={6} sm={4} lg={3} item>
-                                    <CardItem
-                                        title={t('ad')}
-                                        className="card-item"
-                                        alt="adv"
-                                        image={`img/card-image.jpg`}
-                                        price="180 000 сум"
-                                        description="Продам сумку в хорошем соcтоянии"
-                                    />
-                                </Grid>
-                                <Grid xs={6} sm={4} lg={3} item>
-                                    <CardItem
-                                        title={t('ad')}
-                                        className="card-item"
-                                        alt="adv"
-                                        image={`img/card-image.jpg`}
-                                        price="180 000 сум"
-                                        description="Продам сумку в хорошем соcтоянии"
-                                    />
-                                </Grid>
-                                <Grid xs={6} sm={4} lg={3} item>
-                                    <CardItem
-                                        title={t('ad')}
-                                        className="card-item"
-                                        alt="adv"
-                                        image={`img/card-image.jpg`}
-                                        price="180 000 сум"
-                                        description="Продам сумку в хорошем соcтоянии"
-                                    />
-                                </Grid>
-                                <Grid xs={6} sm={4} lg={3} item>
-                                    <CardItem
-                                        title={t('ad')}
-                                        className="card-item"
-                                        alt="adv"
-                                        image={`img/card-image.jpg`}
-                                        price="180 000 сум"
-                                        description="Продам сумку в хорошем соcтоянии"
-                                    />
-                                </Grid>
-                                <Grid xs={6} sm={4} lg={3} item>
-                                    <CardItem
-                                        title={t('ad')}
-                                        className="card-item"
-                                        alt="adv"
-                                        image={`img/card-image.jpg`}
-                                        price="180 000 сум"
-                                        description="Продам сумку в хорошем соcтоянии"
-                                    />
-                                </Grid>
-                                <Grid xs={6} sm={4} lg={3} item>
-                                    <CardItem
-                                        title={t('ad')}
-                                        className="card-item"
-                                        alt="adv"
-                                        image={`img/card-image.jpg`}
-                                        price="180 000 сум"
-                                        description="Продам сумку в хорошем соcтоянии"
-                                    />
-                                </Grid>
-                                <Grid xs={6} sm={4} lg={3} item>
-                                    <CardItem
-                                        title={t('ad')}
-                                        className="card-item"
-                                        alt="adv"
-                                        image={`img/card-image.jpg`}
-                                        price="180 000 сум"
-                                        description="Продам сумку в хорошем соcтоянии"
-                                    />
-                                </Grid>
-                            </Grid>
-                        </div>
-                    </TabPanel>
-                    <TabPanel value={value} index={1}>
-                        <div className="lots-wrapper">
-                            <Grid item container spacing={1}>
-                                <Grid xs={6} sm={4} lg={3} item>
-                                    <CardItem
-                                        title={t('lot')}
-                                        className="card-item"
-                                        alt="adv"
-                                        image={`img/card-image.jpg`}
-                                        price="180 000 сум"
-                                        description="Продам сумку в хорошем соcтоянии"
-                                    />
-                                </Grid>
-                                <Grid xs={6} sm={4} lg={3} item>
-                                    <CardItem
-                                        title={t('lot')}
-                                        className="card-item"
-                                        alt="adv"
-                                        image={`img/card-image.jpg`}
-                                        price="180 000 сум"
-                                        description="Продам сумку в хорошем соcтоянии"
-                                    />
-                                </Grid>
-                                <Grid xs={6} sm={4} lg={3} item>
-                                    <CardItem
-                                        title={t('lot')}
-                                        className="card-item"
-                                        alt="adv"
-                                        image={`img/card-image.jpg`}
-                                        price="180 000 сум"
-                                        description="Продам сумку в хорошем соcтоянии"
-                                    />
-                                </Grid>
-                                <Grid xs={6} sm={4} lg={3} item>
-                                    <CardItem
-                                        title={t('lot')}
-                                        className="card-item"
-                                        alt="adv"
-                                        image={`img/card-image.jpg`}
-                                        price="180 000 сум"
-                                        description="Продам сумку в хорошем соcтоянии"
-                                    />
-                                </Grid>
-                                <Grid xs={6} sm={4} lg={3} item>
-                                    <CardItem
-                                        title={t('lot')}
-                                        className="card-item"
-                                        alt="adv"
-                                        image={`img/card-image.jpg`}
-                                        price="180 000 сум"
-                                        description="Продам сумку в хорошем соcтоянии"
-                                    />
-                                </Grid>
-                                <Grid xs={6} sm={4} lg={3} item>
-                                    <CardItem
-                                        title={t('lot')}
-                                        className="card-item"
-                                        alt="adv"
-                                        image={`img/card-image.jpg`}
-                                        price="180 000 сум"
-                                        description="Продам сумку в хорошем соcтоянии"
-                                    />
-                                </Grid>
-                                <Grid xs={6} sm={4} lg={3} item>
-                                    <CardItem
-                                        title={t('lot')}
-                                        className="card-item"
-                                        alt="adv"
-                                        image={`img/card-image.jpg`}
-                                        price="180 000 сум"
-                                        description="Продам сумку в хорошем соcтоянии"
-                                    />
-                                </Grid>
-                                <Grid xs={6} sm={4} lg={3} item>
-                                    <CardItem
-                                        title={t('lot')}
-                                        className="card-item"
-                                        alt="adv"
-                                        image={`img/card-image.jpg`}
-                                        price="180 000 сум"
-                                        description="Продам сумку в хорошем соcтоянии"
-                                    />
-                                </Grid>
-                            </Grid>
-                        </div>
-                    </TabPanel>
+                    <CustomTabPanel value={tabValue} index={0}>
+                        {
+                            adCardData.error
+                                ? <Typography variant="subtitle1" className="error-text">{adCardData.error}</Typography>
+                                : <div className="ads-wrapper">
+                                    <Grid item container spacing={1}>
+                                        {adCardData.cardData.data.map((item, index) => (
+                                            <Grid
+                                                key={index}
+                                                xs={6}
+                                                sm={4}
+                                                lg={3}
+                                                item
+                                            >
+                                                <Link href={`/advertisement/show/${item.id}`}>
+                                                    <a>
+                                                        <CardItem
+                                                            {...item}
+                                                            isFetch={adCardData.isFetch}
+                                                            cardType={t('ad')}
+                                                            className="card-item"
+                                                        />
+                                                    </a>
+                                                </Link>
+                                            </Grid>
+                                        ))}
+                                    </Grid>
+                                </div>
+                        }
+                    </CustomTabPanel>
+                    <CustomTabPanel value={tabValue} index={1}>
+                        {
+                            lotCardData.error
+                                ?
+                                <Typography variant="subtitle1" className="error-text">{lotCardData.error}</Typography>
+                                : <div className="lots-wrapper">
+                                    <Grid item container spacing={2}>
+                                        {lotCardData.cardData.data.map((item, index) => (
+                                            <Grid
+                                                key={index}
+                                                xs={6}
+                                                sm={4}
+                                                lg={3}
+                                                item
+                                            >
+                                                <Link href={`/advertisement/show/${item.id}`}>
+                                                    <a>
+                                                        <CardItem
+                                                            {...item}
+                                                            isFetch={lotCardData.isFetch}
+                                                            cardType={t('lot')}
+                                                            className="card-item"
+                                                        />
+                                                    </a>
+                                                </Link>
+                                            </Grid>
+                                        ))}
+                                    </Grid>
+                                </div>
+                        }
+                    </CustomTabPanel>
+                    <Grid item xs={12} container justify="center">
+                        {
+                            lotCardData.error || adCardData.error
+                                ? null
+                                : <CustomPagination
+                                    count={props.pageCount}
+                                    currentPage={props.currentPage}
+                                    handlePaginationPage={props.handlePaginationPage}
+                                />
+                        }
+
+                    </Grid>
                 </Grid>
                 <Hidden smDown>
-                    <Grid item container md={3} direction='column' className={classes.adBanner}>
+                    <Grid
+                        item
+                        container
+                        md={3}
+                        direction="column"
+                        className={classes.adBanner}
+                    >
                         <Grid item>
-                            <div className='top-banner'/>
-                        </Grid>
-                        <Grid item>
-                            <div className='central-banner'/>
-                        </Grid>
-                        <Grid item>
-                            <div className='bottom-banner'/>
+                            <Banner height="300px"/>
                         </Grid>
                     </Grid>
                 </Hidden>
             </Grid>
-            <Grid container className={classes.showMoreContainer}>
-                <Grid item xs={12} md={9} className='show-more-block'>
-                    <ButtonComponent>
-                        {t('showMore')}
-                        <img src={BackSpaceArrow} alt='back_space_arrow'/>
-                    </ButtonComponent>
-                    <div className='show-more-line'/>
-                </Grid>
-            </Grid>
+            {/*{((adCardData.cardData.total > adCardData.cardData.data.length && tabValue === 0) || (lotCardData.cardData.total > lotCardData.cardData.data.length && tabValue === 1)) && (*/}
+            {/*    <Grid container className={classes.showMoreContainer}>*/}
+            {/*        <Grid item xs={12} md={9} className="show-more-block">*/}
+            {/*            <ButtonComponent onClick={handleShowMore}>*/}
+            {/*                <Typography variant="subtitle2" color="initial">*/}
+            {/*                    {t('showMore')}*/}
+            {/*                </Typography>*/}
+            {/*            </ButtonComponent>*/}
+            {/*        </Grid>*/}
+            {/*    </Grid>*/}
+            {/*)}*/}
         </div>
-    )
-}
+    );
+};

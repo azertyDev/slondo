@@ -2,9 +2,10 @@ import makeStyles from '@material-ui/core/styles/makeStyles'
 
 export const useStyles = makeStyles(() => ({
     root: {
+        width: '100%',
+        height: 38,
         position: 'relative',
         display: 'flex',
-        width: '100%',
         '& > img.search-icon, & > img.filter-icon': {
             position: 'absolute',
             height: '20px',
@@ -17,11 +18,28 @@ export const useStyles = makeStyles(() => ({
             right: '10px'
         },
         '& > input.search-input': {
-            padding: '8px 68px 8px 40px',
+            padding: '8px 230px 8px 40px',
             width: '100%',
             borderRadius: '7px',
             border: '1px solid #ccc',
             fontSize: '0.87rem',
+        },
+        '& > div.select-type': {
+            width: 150,
+            height: 38,
+            position: 'absolute',
+            right: '70px',
+            top: 0,
+            zIndex: 1,
+            '& > div': {
+                padding: 0,
+                height: 'inherit',
+                display: 'flex',
+                alignItems: 'center',
+            },
+            '& div.MuiSelect-select:focus': {
+                background: 'none',
+            }
         },
         '& > button.search-button': {
             width: '70px',

@@ -1,17 +1,13 @@
-import React, {PropsWithChildren} from 'react'
-import {ButtonBase} from '@material-ui/core'
+import React, {FC, PropsWithChildren} from 'react'
+import {ButtonBase, ButtonBaseProps} from '@material-ui/core'
 import {useStyles} from "./useStyles"
 
-type ButtonProps = {
-    children?: PropsWithChildren<any>,
-    [props: string]: any
-}
 
-export const ButtonComponent  = (props: ButtonProps) => {
+export const ButtonComponent: FC<PropsWithChildren<ButtonBaseProps>> = (props) => {
     const {className, ...otherProps} = props;
-    const classes = useStyles();
+    const classes = useStyles(props);
 
     return (
-        <ButtonBase disableTouchRipple={true} className={`${classes.root} ${className}`} {...otherProps}/>
+        <ButtonBase className={`${classes.root} ${className}`} {...otherProps}/>
     )
 };

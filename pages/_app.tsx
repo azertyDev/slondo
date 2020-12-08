@@ -1,17 +1,18 @@
+import 'core-js/es/promise'
+import 'core-js/es/set'
+import 'core-js/es/map'
+
 import React from 'react'
 import {compose} from "redux"
+import App from 'next/dist/pages/_app'
+import {appWithTranslation} from '@root/i18n'
 import {ThemeProvider, CssBaseline} from '@material-ui/core'
-import Head from 'next/head'
-import App from 'next/app'
-import theme from '../src/theme'
-import {wrapper} from '../src/redux/store'
-import Header from '../src/components/header/Header'
-import {Footer} from "../src/components/footer/Footer"
-import {appWithTranslation} from '../i18n'
+import theme from '@src/theme'
+import {wrapper} from '@src/redux/store'
 
-// Import css files
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
+// Slick css file
+import "../slick.min.css"
+
 
 const MyApp = (props) => {
     const {Component} = props;
@@ -25,25 +26,21 @@ const MyApp = (props) => {
 
     return (
         <>
-            <Head>
-                <title>My page</title>
-            </Head>
             <ThemeProvider theme={theme}>
                 <CssBaseline/>
-                <Header {...props.pageProps} />
                 <Component {...props.pageProps} />
-                <Footer/>
             </ThemeProvider>
         </>
     );
 }
 
-MyApp.getInitialProps = async (appContext) => ({...await App.getInitialProps(appContext)})
+MyApp.getStaticProps = async (appContext) => {
+    return ({...await App.getInitialProps(appContext)});
+}
 
 const withCompose = compose(
     wrapper.withRedux,
-    appWithTranslation
+    appWithTranslation,
 );
 
-//withRedux wrapper that passes the store to the App Component
 export default withCompose(MyApp)

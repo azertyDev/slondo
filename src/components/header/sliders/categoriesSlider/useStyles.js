@@ -12,12 +12,11 @@ export const useStyles = makeStyles((theme) => ({
             marginTop: '20px',
             '& > div.slick-slider': {
                 '& > div.slick-prev, & > div.slick-next': {
+                    position: 'absolute',
+                    top: 'calc(50% - 20px)',
                     width: '40px',
                     height: '40px',
                     zIndex: 10,
-                    '&::before': {
-                        content: '""'
-                    }
                 },
                 '& div.slick-prev': {
                     left: 0
@@ -30,17 +29,30 @@ export const useStyles = makeStyles((theme) => ({
                 display: 'none'
             }
         },
-        '& div.slick-slide div': {
-            width: '140px',
-            margin: 'auto',
-            '& > a': {
-                color: '#000',
-                textDecoration: 'none',
-                '& > img': {
-                    width: '140px',
-                },
-                '& > p': {
-                    textAlign: 'center'
+        '& div.slick-slide': {
+            width: "150px !important",
+            marginRight: '27px',
+            '& > div': {
+                width: 'auto !important',
+                margin: 'auto',
+                display: 'flex',
+                justifyContent: 'center',
+                '& > a': {
+                    width: '150px !important',
+                    height: '191px',
+                    color: '#000',
+                    textDecoration: 'none',
+                    display: 'flex',
+                    flexDirection: 'column',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    '& > img': {
+                        width: '140px',
+                        textAlign: 'center'
+                    },
+                    '& > p': {
+                        textAlign: 'center'
+                    }
                 }
             }
         }

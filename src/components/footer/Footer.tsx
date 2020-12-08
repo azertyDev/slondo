@@ -2,10 +2,10 @@ import React from 'react'
 import { Container, Typography } from '@material-ui/core'
 
 // Styles
-import { useStyles } from './useStyle'
+import { useStyles } from './useStyles'
 
 export const Footer = () => {
-    const classes = useStyles()
+    const classes = useStyles();
     return (
         <footer className={classes.root}>
             <Container>

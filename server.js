@@ -1,15 +1,13 @@
-#!/usr/bin/env node
-require('dotenv').config()
-const {createServer} = require('http')
-const {parse} = require('url')
-const next = require('next')
+/* eslint-disable @typescript-eslint/no-var-requires */
+const {createServer} = require('http');
+const {parse} = require('url');
+const next = require('next');
 
-const port = process.env.PORT;
-const serverUrl = process.env.SERVER_URL;
+const port = process.env.PORT || 3317;
+const serverUrl = process.env.SERVER_URL || 'http://localhost';
 const dev = process.env.NODE_ENV !== 'production'
 const app = next({dev})
 const handle = app.getRequestHandler()
-console.log(dev)
 app.prepare().then(() => {
     createServer((req, res) => {
         // Be sure to pass `true` as the second argument to `url.parse`.
@@ -20,6 +18,6 @@ app.prepare().then(() => {
         
     }).listen(port, (err) => {
         if (err) throw err
-        console.log(`> Ready on http://${serverUrl}:${port}`)
+        console.log(`Server started on ${serverUrl}:${port}`)
     })
 })

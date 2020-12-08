@@ -1,49 +1,47 @@
-import React, {useState} from "react"
-import Link from 'next/link'
-import {AppBar, Container, Grid, Hidden, MenuItem, Select, Typography} from "@material-ui/core"
-import {ButtonComponent} from "../../elements/button/Button"
-import {SearchForm} from "../../elements/search_form/SearchForm"
-import {
-    Logo,
-    CategoryIcon,
-    SignIcon,
-    AddIcon,
-} from '../../elements/icons'
-import {withScrollThreshold} from "../../hoc/withScrollThreshold"
-import {useStyles} from "./useStyle"
+import React from "react";
+import {AppBar, Container, Grid, Hidden, Typography} from "@material-ui/core";
+import {ButtonComponent} from "@src/components/elements/button/Button";
+import {SearchForm} from "@src/components/elements/search_form/SearchForm";
+import {withScrollThreshold} from "@src/components/hoc/withScrollThreshold";
+import {Link, Router} from '@root/i18n';
+import {Logo} from '@src/components/elements/icons';
+import {AddIcon} from "@src/components/elements/icons/AddIcon";
+import {CategorySortIcon} from "@src/components/elements/icons/CategorySortIcon";
+import {SignIcon} from "@src/components/elements/icons/SignIcon";
+// styles
+import {useStyles} from "./useStyles";
 
 
 const BottomHeader = (props) => {
-    const {isScrollBreak, t} = props;
-    const [adType, setAdType] = useState('');
+    const {isScrollBreak, handleOpenModal, isAuth, t} = props;
 
-    const handleChange = (e) => {
-        setAdType(e.target.value);
+    const forwardToCreateAd = () => {
+        Router.push('/advertisement/create');
     };
 
     const classes = useStyles(props);
-
     return (
         <div className={classes.root}>
             <Hidden smDown>
-                <AppBar position={isScrollBreak ? "fixed" : "absolute"} color={"inherit"} elevation={0}>
+                <AppBar
+                    color={"inherit"}
+                    elevation={isScrollBreak ? 1 : 0}
+                    position={isScrollBreak ? "fixed" : "absolute"}
+                >
                     <Container maxWidth='lg'>
                         <Grid container justify="space-between" alignItems="center" spacing={1}>
                             <Grid container item xs={3} alignItems="center">
                                 <Grid container item md={7} lg={6} className="bottom-logo">
-                                    <Link href='/'>
+                                    <Link href="/">
                                         <a>
-                                            <img src={Logo} alt="Slondo logo"/>
+                                            <Logo/>
                                         </a>
                                     </Link>
                                 </Grid>
                                 <Grid item container md={5} lg={6} justify="center" className="category-menu">
-                                    <ButtonComponent>
+                                    <ButtonComponent color="primary" className="bottom-category-button header-button">
                                         <Typography variant="subtitle2">{t('categories')}</Typography>
-                                        <img
-                                            src={CategoryIcon}
-                                            alt="Category icon"
-                                        />
+                                        <CategorySortIcon/>
                                     </ButtonComponent>
                                 </Grid>
                             </Grid>
@@ -51,55 +49,29 @@ const BottomHeader = (props) => {
                                 item
                                 container
                                 md={6}
-                                spacing={1}
                                 alignItems="center"
                                 className="search-block"
                             >
-                                <Grid item md={9}>
+                                <Grid item xs>
                                     <SearchForm t={t}/>
                                 </Grid>
-                                <Grid className='select-menu' item md={3}>
-                                    <Select
-                                        variant={'outlined'}
-                                        value={adType}
-                                        onChange={handleChange}
-                                        displayEmpty
-                                    >
-                                        <MenuItem value="">
-                                            <Typography variant='subtitle2'>{t('adType')}</Typography>
-                                        </MenuItem>
-                                        <MenuItem value={10}>
-                                            <Typography variant='subtitle2'>test</Typography>
-                                        </MenuItem>
-                                        <MenuItem value={20}>
-                                            <Typography variant='subtitle2'>test2</Typography>
-                                        </MenuItem>
-                                        <MenuItem value={30}>
-                                            <Typography variant='subtitle2'>test3</Typography>
-                                        </MenuItem>
-                                    </Select>
-                                </Grid>
                             </Grid>
-                            <Grid item md={2} className='create-ad'>
-                                <Link href='/create_advertisement'>
-                                    <a>
-                                        <Typography variant="subtitle2">
-                                            {t('common:createAd')}
-                                        </Typography>
-                                        <img
-                                            src={AddIcon}
-                                            style={{
-                                                marginLeft: '10px',
-                                                height: '20px',
-                                            }}
-                                        />
-                                    </a>
-                                </Link>
+                            <Grid item md={2}>
+                                <ButtonComponent
+                                    onClick={forwardToCreateAd}
+                                    color='primary'
+                                    className='create-ad-button header-button'>
+                                    <Typography variant="subtitle2">
+                                        {t('common:createAd')}
+                                    </Typography>
+                                    <AddIcon/>
+                                </ButtonComponent>
                             </Grid>
-                            <Grid item container alignItems="center" xs={1}>
-                                <ButtonComponent className='bottom-sign-button' onClick={props.handleOpenModal}>
-                                    <Typography variant="subtitle2">{t('signin')}</Typography>
-                                    <img src={SignIcon} alt="Sign in"/>
+                            <Grid item container justify="center" alignItems="center" xs={1}>
+                                <ButtonComponent className="bottom-sign-button header-button" onClick={handleOpenModal}>
+                                    <Typography
+                                        variant="subtitle2">{t(`common:${isAuth ? 'signOut' : 'signIn'}`)}</Typography>
+                                    <SignIcon/>
                                 </ButtonComponent>
                             </Grid>
                         </Grid>
@@ -108,7 +80,7 @@ const BottomHeader = (props) => {
             </Hidden>
             {/*      Adaptive       */}
             <Hidden mdUp>
-                <div className='select-local'>
+                <div className="select-local">
                     <SearchForm t={t}/>
                 </div>
             </Hidden>
