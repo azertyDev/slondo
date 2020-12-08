@@ -1,11 +1,11 @@
-import React, { MutableRefObject, useEffect, useRef, useState } from 'react';
-import { CustomSlider } from '../custom_slider/CustomSlider';
-
+import React, {MutableRefObject, useEffect, useRef, useState} from 'react';
+import {CustomSlider} from '../custom_slider/CustomSlider';
 // styles
-import { useStyles } from './useStyles';
+import {useStyles} from './useStyles';
+
 
 export const SyncSliders = (props) => {
-    const [slidersNav, setSlidersNav] = useState({ nav1: null, nav2: null });
+    const [slidersNav, setSlidersNav] = useState({nav1: null, nav2: null});
     const slider1: MutableRefObject<unknown> = useRef();
     const slider2: MutableRefObject<unknown> = useRef();
 
@@ -33,7 +33,7 @@ export const SyncSliders = (props) => {
                     initialSlide={props.currentSlide}
                     centerMode={props.centerMode}
                 >
-                    {props.imgs.map(({ url, alt }, i) => (
+                    {props.imgs.map(({url, alt}, i) => (
                         <img
                             src={url.original}
                             alt={alt}
@@ -45,16 +45,15 @@ export const SyncSliders = (props) => {
             </div>
             <div className={classes.secondSlider}>
                 <CustomSlider
-                    asNavFor={slidersNav.nav1}
                     ref={slider2}
                     focusOnSelect={true}
                     arrows={props.arrows}
                     afterChange={handleAfterChange}
-                    slidesToShow={props.imgs.length < 4 ? props.imgs.length : 4}
+                    slidesToShow={4}
                     swipeToSlide={true}
                 >
-                    {props.imgs.map(({ url, alt }, i) => (
-                        <img src={url.small} alt={alt} key={i} />
+                    {props.imgs.map(({url, alt}, i) => (
+                        <img src={url.small} alt={alt} key={i}/>
                     ))}
                 </CustomSlider>
             </div>

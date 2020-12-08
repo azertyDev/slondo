@@ -1,31 +1,34 @@
-import React from "react"
-import {AppBar, Container, Grid, Hidden, Typography} from "@material-ui/core"
-import {ButtonComponent} from "@src/components/elements/button/Button"
-import {SearchForm} from "@src/components/elements/search_form/SearchForm"
-import {withScrollThreshold} from "@src/components/hoc/withScrollThreshold"
-import {Link} from '@root/i18n'
-
-// icons
-import {
-    Logo,
-} from '@src/components/elements/icons'
+import React from "react";
+import {AppBar, Container, Grid, Hidden, Typography} from "@material-ui/core";
+import {ButtonComponent} from "@src/components/elements/button/Button";
+import {SearchForm} from "@src/components/elements/search_form/SearchForm";
+import {withScrollThreshold} from "@src/components/hoc/withScrollThreshold";
+import {Link, Router} from '@root/i18n';
+import {Logo} from '@src/components/elements/icons';
 import {AddIcon} from "@src/components/elements/icons/AddIcon";
 import {CategorySortIcon} from "@src/components/elements/icons/CategorySortIcon";
 import {SignIcon} from "@src/components/elements/icons/SignIcon";
-
 // styles
-import {useStyles} from "./useStyles"
+import {useStyles} from "./useStyles";
+
 
 const BottomHeader = (props) => {
-    const {isScrollBreak, handleOpenModal, handleCreateAd, isAuth, t} = props;
+    const {isScrollBreak, handleOpenModal, isAuth, t} = props;
+
+    const forwardToCreateAd = () => {
+        Router.push('/advertisement/create');
+    };
 
     const classes = useStyles(props);
     return (
         <div className={classes.root}>
             <Hidden smDown>
-                <AppBar position={isScrollBreak ? "fixed" : "absolute"} color={"inherit"}
-                        elevation={isScrollBreak ? 1 : 0}>
-                    <Container maxWidth="lg">
+                <AppBar
+                    color={"inherit"}
+                    elevation={isScrollBreak ? 1 : 0}
+                    position={isScrollBreak ? "fixed" : "absolute"}
+                >
+                    <Container maxWidth='lg'>
                         <Grid container justify="space-between" alignItems="center" spacing={1}>
                             <Grid container item xs={3} alignItems="center">
                                 <Grid container item md={7} lg={6} className="bottom-logo">
@@ -55,9 +58,9 @@ const BottomHeader = (props) => {
                             </Grid>
                             <Grid item md={2}>
                                 <ButtonComponent
-                                    onClick={handleCreateAd}
-                                    color="primary"
-                                    className="create-ad-button header-button">
+                                    onClick={forwardToCreateAd}
+                                    color='primary'
+                                    className='create-ad-button header-button'>
                                     <Typography variant="subtitle2">
                                         {t('common:createAd')}
                                     </Typography>

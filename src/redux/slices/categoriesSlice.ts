@@ -1,5 +1,5 @@
 import {createAsyncThunk, createSlice} from '@reduxjs/toolkit'
-import {Categories} from '@root/interfaces/Categories'
+import {Categories, CategoriesDataTypes} from '@root/interfaces/Categories'
 import {userAPI} from "@src/api/api";
 
 
@@ -9,14 +9,25 @@ const initialState: Categories = {
     list: [{
         id: null,
         name: '',
-        images: {id: null, url: ''},
-        icons: {id: null, url: ''},
-        childs: []
+        images: {
+            id: null,
+            url: {
+                original: ''
+            }
+        },
+        icons: {
+            id: null,
+            url: {
+                original: ''
+            }
+        },
+        childs: [],
+        has_auction: null
     }],
 };
 
 // Async thunk
-export const fetchCategories = createAsyncThunk<any, string>(
+export const fetchCategories = createAsyncThunk<CategoriesDataTypes, string>(
     'categories/fetchCategories',
     async (lang, {rejectWithValue}) => {
         try {
@@ -27,7 +38,6 @@ export const fetchCategories = createAsyncThunk<any, string>(
     }
 );
 
-// Slice
 const advertisementSlice = createSlice({
     name: 'categories',
     initialState,
@@ -39,6 +49,7 @@ const advertisementSlice = createSlice({
         })
         builder.addCase(fetchCategories.fulfilled, (state, action) => {
             state.isFetch = false;
+            state.error = null;
             state.list = action.payload;
         })
         builder.addCase(fetchCategories.rejected, (state, action) => {

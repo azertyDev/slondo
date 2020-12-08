@@ -1,16 +1,27 @@
 export interface Categories {
     isFetch: boolean;
     error?: unknown;
-    list: SliderListType[];
+    list: CategoriesDataTypes;
 }
 
-export type SliderListType = {
+export type CategoriesDataTypes = Array<{
     id: number;
     name: string;
-    images: { id: number; url: string };
-    icons: { id: number; url: string };
-    childs: []
-};
+    images: {
+        id: number;
+        url: {
+            original: ''
+        }
+    };
+    icons: {
+        id: number;
+        url: {
+            original: ''
+        }
+    };
+    childs: [];
+    has_auction: number;
+}>
 
 export interface CategoryIDs {
     ctgryID: number;

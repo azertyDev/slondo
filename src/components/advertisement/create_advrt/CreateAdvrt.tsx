@@ -1,238 +1,122 @@
-import React, {FC, useEffect, useState} from 'react';
-import {Grid, Hidden, Container, Typography} from '@material-ui/core';
-import {AdvrtForm} from './advrt_form/AdvrtForm';
-import {SuccessAdvrt} from './success_advrt/SuccessAdvrt';
-import {CreateAdFields} from "@root/interfaces/Advertisement";
-import {createAdvrtSchema} from "@root/validation_schemas/createAdvrtSchema";
-import {useFormik, FormikProvider} from "formik";
-import {useSelector} from "react-redux";
-import {RootState} from "@src/redux/rootReducer";
-import {ButtonComponent} from "@src/components/elements/button/Button";
-import {MainLayout} from "@src/components/MainLayout";
-// styles
+import React, {FC} from "react";
+import {
+    Tabs,
+    Typography,
+    InputBase,
+    List,
+    ListItem,
+    Grid,
+    Tab,
+    Hidden
+} from "@material-ui/core";
+import {AdvrtFormContainer} from "./advrt_form/AdvrtFormContainer";
 import {useStyles} from './useStyles';
 
 
-const initFields: CreateAdFields = {
-    adType: {
-        id: null,
-        name: ''
-    },
-    category: {
-        id: null,
-        name: ''
-    },
-    title: '',
-    safe_deal: false,
-    delivery: false,
-    exchange: false,
-    location: null,
-    files: [],
-    description: '',
-    phone: '',
-    adsParams: {}
-};
-
-export const CreateAdvrt: FC = () => {
-    const {createAdvrt} = useSelector((store: RootState) => store);
-
-    const [isPreview, setIsPreview] = useState(false);
-    const [isSuccess, setIsSuccess] = useState(false);
-
-    const onSubmit = () => {
-        isPreview
-            ? console.log('submit')
-            : setIsPreview(true)
-    };
-
-    const formik = useFormik({
-        initialValues: initFields,
-        validationSchema: createAdvrtSchema,
-        onSubmit
-    });
-
+export const CreateAdvrt: FC<any> = (props) => {
     const {
-        setValues,
-        values,
-        errors,
-        setErrors,
-        touched,
-        handleBlur,
-    } = formik;
+        isForm,
+        adTypes,
+        tabValue,
+        handleTab,
+        handleCategory,
+        handleSubCategory,
+        createAdvrt,
+        categoriesList,
+    } = props;
 
-    const handlePreview = (value) => () => {
-        setIsPreview(value)
-    };
+    const {adType, category, error, isFetch} = createAdvrt;
 
-    const handleCheckboxChange = (valName) => ({target}) => {
-        setValues({...values, [valName]: target.checked});
-    };
-
-    const handleParamsCheckbox = (valueName, value) => () => {
-        const {adsParams} = values;
-        if (adsParams[valueName]) {
-            if (adsParams[valueName].some(val => val.id === value.id)) {
-                adsParams[valueName].map((val, index) => {
-                    if (val.id === value.id) {
-                        adsParams[valueName].splice(index, 1)
-                    }
-                });
-                setValues({
-                        ...values,
-                        adsParams: {...adsParams}
-                    }
-                );
-            } else {
-                setValues({
-                        ...values,
-                        adsParams: {
-                            ...adsParams,
-                            [valueName]: [
-                                ...adsParams[valueName],
-                                value
-                            ]
-                        }
-                    }
-                );
-            }
-        } else {
-            setValues({
-                    ...values,
-                    adsParams: {
-                        ...adsParams,
-                        [valueName]: [value]
-                    }
-                }
-            );
-        }
-    };
-
-    const handleMenuItem = (valueName) => (newValue, setAnchor) => () => {
-        setAnchor(null);
-
-        setValues({
-            ...values,
-            adsParams: {
-                ...values.adsParams,
-                [valueName]: newValue
-            }
-        });
-
-        // Reset sub props in values
-        Object.keys(newValue).map(key => {
-            if (values.adsParams[key]) {
-                setValues({
-                    ...values,
-                    adsParams: {
-                        ...values.adsParams,
-                        [valueName]: newValue,
-                        [key]: {id: null, name: 'Не выбрано', ...newValue[key]}
-                    }
-                })
-            }
-        });
-    };
-
-    const handleListItem = (valueName, value) => () => {
-        if (values.adsParams[valueName] && values.adsParams[valueName].id === value.id) {
-            delete values.adsParams[valueName];
-
-            setValues({
-                ...values,
-                adsParams: {
-                    ...values.adsParams
-                }
-            });
-        } else {
-            setValues({
-                ...values,
-                adsParams: {
-                    ...values.adsParams,
-                    [valueName]: value
-                }
-            });
-        }
-    };
-
-    useEffect(() => {
-        setErrors({});
-        isPreview && setIsPreview(false);
-        setValues({...initFields, adType: createAdvrt.adType, category: createAdvrt.data});
-    }, [createAdvrt.category.id, createAdvrt.data.id, createAdvrt.data.name]);
-
-    console.log(values)
     const classes = useStyles();
     return (
-        <MainLayout>
-            <Container maxWidth="lg">
-                <Grid container spacing={1}>
-                    <Grid item xs={12} md={9}>
-                        <FormikProvider value={formik}>
-                            <form onSubmit={formik.handleSubmit}>
-                                {
-                                    isSuccess
-                                        ? <SuccessAdvrt/>
-                                        : (
-                                            <AdvrtForm
-                                                isPreview={isPreview}
-                                                setIsPreview={setIsPreview}
-                                                createAdvrt={createAdvrt}
-                                                errors={errors}
-                                                touched={touched}
-                                                values={values}
-                                                setValues={setValues}
-                                                handleBlur={handleBlur}
-                                                handleMenuItem={handleMenuItem}
-                                                handleListItem={handleListItem}
-                                                handleParamsCheckbox={handleParamsCheckbox}
-                                                handleCheckboxChange={handleCheckboxChange}
-                                            />
-                                        )
-                                }
-                                <div className={classes.nextButtonBlock}>
-                                    {
-                                        isPreview && (
-                                            <ButtonComponent
-                                                className={classes.nextButton}
-                                                onClick={handlePreview(false)}
-                                            >
-                                                <Typography>
-                                                    Назад
-                                                </Typography>
-                                            </ButtonComponent>
-                                        )
-                                    }
-                                    <ButtonComponent
-                                        type='submit'
-                                        className={classes.nextButton}
-                                    >
-                                        <Typography>
-                                            {
-                                                isPreview
-                                                    ? 'Создать'
-                                                    : 'Далее'
-                                            }
-                                        </Typography>
-                                    </ButtonComponent>
-                                </div>
-                            </form>
-                        </FormikProvider>
-                    </Grid>
-                    <Hidden smDown>
-                        <Grid
-                            item
-                            md={3}
-                            container
-                            justify="flex-end"
-                            className={classes.adBanner}
+        <Grid container spacing={2} className={classes.root}>
+            <Grid item xs={12} md={9}>
+                {isForm
+                    ? <AdvrtFormContainer {...props}/>
+                    : <div>
+                        <Tabs
+                            value={tabValue}
+                            onChange={handleTab}
+                            centered
                         >
-                            <Grid item md={12}>
-                                <div className="right-banner"/>
+                            {adTypes.map(type => (
+                                <Tab
+                                    key={type.id}
+                                    value={type.id}
+                                    label={
+                                        <Typography variant="subtitle1">
+                                            {type.name}
+                                        </Typography>
+                                    }
+                                />
+                            ))}
+                        </Tabs>
+                        <Grid container className={classes.tabsContent}>
+                            <Grid item xs={3} className='categories-block'>
+                                <div className='header'>
+                                    <Typography>Выберите категорию</Typography>
+                                </div>
+                                <List className='categories-list'>
+                                    {categoriesList.map((ctgr) => (
+                                        (adType.id === 1 || ctgr.has_auction === 1) && (
+                                            <ListItem
+                                                key={ctgr.id}
+                                                onClick={isFetch ? null : handleCategory(ctgr)}
+                                            >
+                                                <div>
+                                                    <img src={ctgr.icons.url.original} alt={ctgr.name}/>
+                                                    {ctgr.name}
+                                                </div>
+                                            </ListItem>
+                                        )
+                                    ))}
+                                </List>
+                            </Grid>
+                            <Grid item xs={9} className='sub-categories-block'>
+                                <div className='search-block'>
+                                    <InputBase style={{border: '1px solid'}} placeholder='Поиск по категориям'/>
+                                </div>
+                                {
+                                    isFetch
+                                        ? <div style={{height: '800px'}}>
+                                            <Typography>...Loading</Typography>
+                                        </div>
+                                        : error
+                                        ? <Typography className='error-text'>{error}</Typography>
+                                        : <List className='categories-list'>
+                                            {
+                                                (adType.id !== 1 && !!category.has_auction || adType.id === 1)
+                                                && <>
+                                                    {
+                                                        !!category.childs.length
+                                                            ? category.childs.map(({id, name}) => (
+                                                                <ListItem
+                                                                    key={id}
+                                                                    onClick={isFetch ? null : handleSubCategory(id, name)}
+                                                                >
+                                                                    <div>{name}</div>
+                                                                </ListItem>
+                                                            ))
+                                                            : <ListItem
+                                                                onClick={handleSubCategory()}
+                                                            >
+                                                                <div>{category.name}</div>
+                                                            </ListItem>
+                                                    }
+                                                </>
+                                            }
+                                        </List>
+                                }
                             </Grid>
                         </Grid>
-                    </Hidden>
+                    </div>
+                }
+            </Grid>
+            <Hidden smDown>
+                <Grid item md={3} className='advrt-banner'>
+                    <div/>
                 </Grid>
-            </Container>
-        </MainLayout>
+            </Hidden>
+        </Grid>
     )
-}
+};

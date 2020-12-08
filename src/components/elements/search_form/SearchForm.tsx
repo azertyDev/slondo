@@ -1,5 +1,5 @@
 import React, {useState} from "react"
-import {Hidden, MenuItem, NativeSelect, Typography} from "@material-ui/core"
+import {Hidden, NativeSelect, Typography} from "@material-ui/core"
 import {SearchIcon, FilterIcon} from "../icons";
 import {ButtonComponent} from "../button/Button"
 import {useStyles} from "./useStyles"
@@ -28,9 +28,9 @@ export const SearchForm = (props) => {
                 placeholder={t('searchText')}
             />
             <NativeSelect value={adType} onChange={handleSelect} className="select-type" disableUnderline>
-              <MenuItem value={1}>Все объявления</MenuItem>
-              <MenuItem value={2}>Объявления</MenuItem>
-              <MenuItem value={3}>Аукционы</MenuItem>
+              <option value={1}>Все объявления</option>
+              <option value={2}>Объявления</option>
+              <option value={3}>Аукционы</option>
             </NativeSelect>
             <Hidden smDown>
                 <ButtonComponent className="search-button">

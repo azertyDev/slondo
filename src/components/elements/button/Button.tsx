@@ -3,7 +3,7 @@ import {ButtonBase, ButtonBaseProps} from '@material-ui/core'
 import {useStyles} from "./useStyles"
 
 
-export const ButtonComponent: FC<any> = (props: PropsWithChildren<ButtonBaseProps>) => {
+export const ButtonComponent: FC<PropsWithChildren<ButtonBaseProps>> = (props) => {
     const {className, ...otherProps} = props;
     const classes = useStyles(props);
 

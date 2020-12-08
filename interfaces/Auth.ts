@@ -7,4 +7,5 @@ export interface AuthReg {
     isFetch: boolean;
     isAuth: boolean;
     error?: unknown;
+    isAuthModalOpen: boolean;
 }

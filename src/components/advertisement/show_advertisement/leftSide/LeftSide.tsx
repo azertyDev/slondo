@@ -63,7 +63,7 @@ export const LeftSide = ({ data, parameters, t }) => {
             );
         }
     });
-    console.log(data)
+    console.log(data);
     const classes = useStyles();
     return (
         <div className={classes.root}>
