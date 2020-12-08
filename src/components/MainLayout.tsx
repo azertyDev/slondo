@@ -17,7 +17,7 @@ export const MainLayout = ({children, title = 'SLONDO'}) => {
                 {children}
                 <ScrollTop>
                     <Fab color="secondary" size="small" aria-label="scroll back to top">
-                        <KeyboardArrowUpIcon />
+                        <KeyboardArrowUpIcon/>
                     </Fab>
                 </ScrollTop>
             </main>

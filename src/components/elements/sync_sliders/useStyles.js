@@ -1,71 +1,84 @@
 import {makeStyles} from '@material-ui/core/styles';
 
 export const useStyles = makeStyles(() => ({
-        root: {
-            position: 'relative',
-            '& button.slick-prev': {
-                left: '10px',
+    root: {
+        position: 'relative',
+        '& button': {
+            '&.slick-prev': {
+                left: '25px',
             },
-            '& button.slick-next': {
-                right: '10px',
+            '&.slick-next': {
+                right: '25px',
             },
+        }
+        
+    },
+    firstSlider: {
+        width: '100%',
+        '& div.slick-slide img': {
+            width: 'auto !important',
+            height: '518px',
+            objectFit: 'contain'
         },
-        firstSlider: {
-            width: '100%',
-            height: '',
-            '& div.slick-slide img': {
-                width: '100%',
-                height: '518px',
-                objectFit: 'cover'
-            },
-            '& a.overlay': {
-                /* Display over the entire page */
-                position: 'fixed',
-                zIndex: '99',
-                top: '0',
-                left: '0',
-                width: '100%',
-                height: '100%',
-                background: 'rgba(0,0,0,0.9)',
-                /* Horizontal and vertical centering of the image */
-                display: 'flex',
-                alignItems: 'center',
-                textAlign: 'center',
-                /* We hide all this by default */
-                visibility: 'hidden',
+        '& > div.slick-slider': {
+            '& div.slick-slide': {
+                marginRight: 5,
                 '& img': {
-                    /* Maximum image size */
-                    maxWidth: '90%',
-                    maxHeight: '90%',
-                    
-                    /* We keep the ratio of the image */
-                    width: 'auto',
-                    height: 'auto',
-                    
-                    transform: 'scale(0.95)',
-                    transition: 'transform .3s',
-                },
-                '&:target': {
-                    visibility: 'visible',
-                    outline: 'none',
-                    cursor: 'default',
-                    '& image': {
-                        transform: 'scale(1)',
+                    '&:hover': {
+                        cursor: 'zoom-in'
                     }
                 }
             }
         },
-        secondSlider: {
-            marginTop: '5px',
-            '& div.slick-slide': {
-                '& > div': {
-                    padding: '2.5px'
-                },
-                '& img': {
-                    height: '118px',
-                    objectFit: 'cover'
-                },
+        '& a.overlay': {
+            position: 'fixed',
+            zIndex: '99',
+            top: '0',
+            left: '0',
+            width: '100%',
+            height: '100%',
+            background: 'rgba(0,0,0,0.9)',
+            display: 'flex',
+            alignItems: 'center',
+            textAlign: 'center',
+            visibility: 'hidden',
+            '& img': {
+                maxWidth: '90%',
+                maxHeight: '90%',
+                width: 'auto',
+                height: 'auto',
+                transform: 'scale(0.95)',
+                transition: 'transform .3s',
+            },
+            '&:target': {
+                visibility: 'visible',
+                outline: 'none',
+                cursor: 'default',
+                '& image': {
+                    transform: 'scale(1)',
+                }
             }
         }
-    }))
-;
+    },
+    secondSlider: {
+        '& div.slick-track': {
+            margin: 'inherit'
+        },
+        '& div.slick-slide': {
+            // width: 'auto !important',
+            width: '212px !important',
+            // marginRight: 5,
+            '& > div': {
+                height: '120px !important',
+                padding: '0 2.5px'
+            },
+            '& img': {
+                height: '120px',
+                objectFit: 'cover',
+                '&:hover': {
+                    cursor: 'pointer'
+                }
+            },
+        }
+    },
+}));

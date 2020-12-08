@@ -29,17 +29,30 @@ export const useStyles = makeStyles((theme) => ({
                 display: 'none'
             }
         },
-        '& div.slick-slide div': {
-            width: '140px',
-            margin: 'auto',
-            '& > a': {
-                color: '#000',
-                textDecoration: 'none',
-                '& > img': {
-                    width: '140px',
-                },
-                '& > p': {
-                    textAlign: 'center'
+        '& div.slick-slide': {
+            width: "150px !important",
+            marginRight: '27px',
+            '& > div': {
+                width: 'auto !important',
+                margin: 'auto',
+                display: 'flex',
+                justifyContent: 'center',
+                '& > a': {
+                    width: '150px !important',
+                    height: '191px',
+                    color: '#000',
+                    textDecoration: 'none',
+                    display: 'flex',
+                    flexDirection: 'column',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    '& > img': {
+                        width: '140px',
+                        textAlign: 'center'
+                    },
+                    '& > p': {
+                        textAlign: 'center'
+                    }
                 }
             }
         }

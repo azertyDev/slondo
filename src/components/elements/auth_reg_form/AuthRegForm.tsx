@@ -3,7 +3,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {Tab, Tabs, Typography} from "@material-ui/core";
 import {i18n, Link} from "@root/i18n";
 import {CustomTabPanel} from "../custom_tab_panel/CustomTabPanel";
-import {Form, Formik} from "formik";
+import {Form, FormikProvider, useFormik} from "formik";
 import {CustomFormikField} from "../custom_formik_field/CustomFormikField";
 import {ButtonComponent} from "../button/Button";
 import {RootState} from "@src/redux/rootReducer";
@@ -11,11 +11,12 @@ import {fetchToken} from "@src/redux/slices/authRegSlice";
 import {AuthInputs} from "@root/interfaces/Auth";
 import {WithT} from "i18next";
 import {useStyles} from './useStyles';
+import {authRegSchema} from "@root/validation_schemas/authRegSchema";
 
 
 const initialInputsVals: AuthInputs = {
-    phone: '998908080265',
-    password: '123456789aaa'
+    phone: '',
+    password: ''
 };
 
 export const AuthRegForm: FC<WithT & { handleCloseModal: () => void }> = (props) => {
@@ -43,19 +44,31 @@ export const AuthRegForm: FC<WithT & { handleCloseModal: () => void }> = (props)
         props.handleCloseModal();
     };
 
+    const formik = useFormik({
+        initialValues: initialInputsVals,
+        validationSchema: authRegSchema,
+        onSubmit
+    });
+
+    const {
+        errors,
+        touched,
+    } = formik;
+
     const classes = useStyles();
     return (
         <div className={classes.root}>
-            <div className='form-block'>
-                <div>
-                    {error && <Typography className={classes.errorTxt}>{error}</Typography>}
+            <div className="form-block">
+                <div className="server-error">
+                    {error &&
+                    <Typography variant="body2" className="error-text">{t('auth_reg:serverError')}</Typography>}
                 </div>
-                <div className='tabs-container'>
+                <div className="tabs-container">
                     <Tabs
                         value={tabValue}
                         onChange={tabsHandler}
                         indicatorColor="primary"
-                        className='tabs'
+                        className="tabs"
                     >
                         <Tab
                             label={
@@ -74,99 +87,104 @@ export const AuthRegForm: FC<WithT & { handleCloseModal: () => void }> = (props)
                             value={1}
                         />
                     </Tabs>
-                    <div className='tab-panels'>
+                    <div className="tab-panels">
                         <CustomTabPanel
                             value={tabValue}
                             index={0}
-                            className='sign-panel'
+                            className="sign-panel"
                         >
-                            <Formik initialValues={initialInputsVals} onSubmit={onSubmit}>
-                                {({errors, touched, setFieldValue}) => {
-                                    return (
-                                        <Form>
-                                            <div>
-                                                <Typography
-                                                    className={classes.errorTxt}
-                                                    variant="subtitle2"
-                                                >
-                                                    {errors.phone && touched.phone ? errors.phone : ''}
-                                                </Typography>
-                                                <CustomFormikField
-                                                    name='phone'
-                                                    type='tel'
-                                                    placeholder={t('auth_reg:enterPhone')}
-                                                    className={errors.phone && touched.phone ? classes.errorInput : ''}
-                                                />
-                                            </div>
-                                            <div>
-                                                <Typography
-                                                    className={classes.errorTxt}
-                                                    variant="subtitle2"
-                                                >
-                                                    {errors.password && touched.password ? errors.password : ''}
-                                                </Typography>
-                                                <CustomFormikField
-                                                    name='password'
-                                                    type="password"
-                                                    placeholder={t('auth_reg:enterPassword')}
-                                                    className={errors.password && touched.password ? classes.errorInput : ''}
-                                                />
-                                            </div>
-                                            <div className='forget-password'>
-                                                <a href="#">
-                                                        <span>
-                                                            {t('auth_reg:forgetPassword')}
-                                                        </span>
-                                                </a>
-                                            </div>
-                                            <div className={classes.modalBtns}>
-                                                <ButtonComponent
-                                                    className='signin-btn'
-                                                    type='submit'
-                                                    disabled={isFetch}
-                                                >
-                                                    {t('common:signIn')}
-                                                </ButtonComponent>
-                                            </div>
-                                        </Form>
-                                    )
-                                }}
-                            </Formik>
-                        </CustomTabPanel>
-                        <CustomTabPanel value={tabValue} index={1} className='reg-panel'>
-                            <Formik initialValues={initialInputsVals} onSubmit={onSubmit}>
-                                {({errors, touched, setFieldValue}) => (
-                                    <Form>
-                                        <div>
-                                            <Typography
-                                                className={classes.errorTxt}
-                                                variant="subtitle2"
-                                            >
+                            <FormikProvider value={formik}>
+                                <Form onSubmit={formik.handleSubmit}>
+                                    <div>
+                                        <CustomFormikField
+                                            name="phone"
+                                            type="tel"
+                                            labelText={t('auth_reg:enterPhone')}
+                                            placeholder="+ (998) __ ___ __ __"
+                                            className={errors.phone && touched.phone ? 'error-border' : ''}
+                                        />
+                                        <div className="validation-block">
+                                            <Typography variant="subtitle2" className="error-text">
                                                 {errors.phone && touched.phone ? errors.phone : ''}
                                             </Typography>
-                                            <CustomFormikField
-                                                name='phone'
-                                                type='tel'
-                                                placeholder={t('auth_reg:enterPhone')}
-                                                className={errors.phone && touched.phone ? classes.errorInput : ''}
-                                            />
                                         </div>
-                                        <div className={classes.modalBtns}>
-                                            <ButtonComponent className='reg-btn' type='submit'>
-                                                {t('auth_reg:signUp')}
-                                            </ButtonComponent>
+                                    </div>
+                                    <div>
+                                        <CustomFormikField
+                                            name="password"
+                                            type="password"
+                                            labelText="Введите пароль"
+                                            placeholder={t('auth_reg:enterPassword')}
+                                            className={errors.password && touched.password ? 'error-border' : ''}
+                                        />
+                                        <div className="validation-block">
+                                            <Typography variant="subtitle2" className="error-text">
+                                                {errors.password && touched.password ? errors.password : ''}
+                                            </Typography>
+                                            <a href="#">
+                                                <Typography variant="body2">
+                                                    {t('auth_reg:forgetPassword')}
+                                                </Typography>
+                                            </a>
                                         </div>
-                                    </Form>
-                                )}
-                            </Formik>
+                                    </div>
+                                    <div className={classes.modalBtns}>
+                                        <ButtonComponent
+                                            className="signin-btn"
+                                            type="submit"
+                                            disabled={isFetch}
+                                        >
+                                            {t('common:signIn')}
+                                        </ButtonComponent>
+                                    </div>
+                                </Form>
+                            </FormikProvider>
                             <div className={classes.agreement}>
-                                <Typography className='reg-agreement' variant='body2'>
+                                <Typography className="reg-agreement" variant="body2">
+                                    Нажимая кнопку Войти вы принимаете условия {' '}
+                                    <Link href="#">
+                                        <a>лицензионного соглашения</a>
+                                    </Link>
+                                    {` ${t('auth_reg:agreement.thirdPart')} `}
+                                    <Link href="#">
+                                        <a>политики конфиденциальности</a>
+                                    </Link>
+                                    {language === 'uz' && ` ${t('auth_reg:agreement.fifthPart')}`}
+                                </Typography>
+                            </div>
+                        </CustomTabPanel>
+                        <CustomTabPanel value={tabValue} index={1} className="reg-panel">
+                            <FormikProvider value={formik}>
+                                <Form onSubmit={formik.handleSubmit}>
+                                    <div>
+                                        <CustomFormikField
+                                            name="phone"
+                                            type="tel"
+                                            placeholder="+ (998) __ ___ __ __"
+                                            labelText={t('auth_reg:enterPhone')}
+                                            className={errors.phone && touched.phone ? 'error-border' : ''}
+                                        />
+                                        <div className="validation-block">
+                                            <Typography variant="subtitle2" className="error-text">
+                                                {errors.phone && touched.phone ? errors.phone : ''}
+                                            </Typography>
+                                        </div>
+                                    </div>
+                                    <div className={classes.modalBtns}>
+                                        <ButtonComponent className="reg-btn" type="submit">
+                                            {t('auth_reg:signUp')}
+                                        </ButtonComponent>
+                                    </div>
+                                </Form>
+                            </FormikProvider>
+                            <div className={classes.agreement}>
+                                <Typography className="reg-agreement" variant="body2">
                                     {`${t('auth_reg:agreement.firstPart')} `}
-                                    <Link href='#'>
+                                    <Link href="#">
                                         <a>{`${t('auth_reg:agreement.secondPart')} `}</a>
                                     </Link>
                                     {`${t('auth_reg:agreement.thirdPart')} `}
-                                    <Link href='#'>
+                                    <Link href="#">
                                         <a>{`${t('auth_reg:agreement.fourthPart')}`}</a>
                                     </Link>
                                     {language === 'uz' && ` ${t('auth_reg:agreement.fifthPart')}`}

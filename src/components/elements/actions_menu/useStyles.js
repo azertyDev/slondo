@@ -1,4 +1,4 @@
-import {makeStyles} from '@material-ui/core/styles';
+import { makeStyles } from '@material-ui/core/styles';
 
 export const useStyles = makeStyles((theme) => ({
     root: {
@@ -16,27 +16,15 @@ export const useStyles = makeStyles((theme) => ({
                     borderRadius: '5px',
                     background: '#fff',
                     boxShadow: '0px 1px 2px rgba(0, 0, 0, 0.25)',
-                    position: 'relative',
                     border: '1px solid transparent',
                     backgroundClip: 'padding-box',
-                    '&:after': {
-                        position: 'absolute',
-                        top: '-10px',
-                        bottom: '-10px',
-                        left: '-10px',
-                        right: '-10px',
-                        background: 'linear-gradient(red, green)',
-                        content: '""',
-                        zIndex: '-1',
-                        borderRadius: '4px',
-                    },
                     '& > svg': {
                         marginRight: '10px',
                     },
-                    '&:focus, &:active': {
-                        // border: '1px solid',
+                    '&.selected': {
+                        border: '1px solid #AD66D5',
+                        borderRadius: '5px',
                         // borderStyle: 'inset',
-                        // borderRadius: '5px',
                         // borderImageSlice: '1',
                         // borderImageSource:
                         //     'linear-gradient(49.94deg, #675EAA 19.03%, #AD66D5 72.72%)',
@@ -62,6 +50,19 @@ export const useStyles = makeStyles((theme) => ({
             '& > div:last-child': {
                 display: 'flex',
                 marginBottom: '0',
+                justifyContent: 'space-between',
+                '& > span.MuiBadge-root': {
+                    width: '49%',
+                    marginRight: '5px',
+                    '& span.MuiBadge-badge': {
+                        top: '5px',
+                        right: '5px',
+                        minWidth: '16px',
+                        height: '16px',
+                        padding: 0,
+                        fontWeight: 600,
+                    },
+                },
                 '& > button:first-child': {
                     marginRight: '5px',
                 },

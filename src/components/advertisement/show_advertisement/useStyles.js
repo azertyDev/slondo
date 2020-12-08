@@ -1,5 +1,4 @@
-import {makeStyles} from '@material-ui/core/styles';
-
+import { makeStyles } from '@material-ui/core/styles';
 
 export const useStyles = makeStyles((theme) => ({
     root: {
@@ -34,12 +33,29 @@ export const useStyles = makeStyles((theme) => ({
                         display: 'flex',
                         alignItems: 'center',
                         height: '30px',
-                        padding: '0px 20px',
                         '& > h6.MuiTypography-h6': {
                             fontWeight: '600',
                         },
-                        '&:first-child': {
+                        '&.advertisement': {
                             background: 'rgba(136, 202, 236, 0.65)',
+                            borderRadius: '5px',
+                            padding: '0px 20px',
+                            '& > h6.MuiTypography-h6': {
+                                color: '#fff',
+                                fontWeight: '600',
+                            },
+                        },
+                        '&.lot': {
+                            background: 'rgba(173, 102, 213, 0.65)',
+                            borderRadius: '5px',
+                            padding: '0px 20px',
+                            '& > h6.MuiTypography-h6': {
+                                color: '#fff',
+                                fontWeight: '600',
+                            },
+                        },
+                        '&.advanced-lot': {
+                            background: 'rgba(242, 153, 74, 0.65)',
                             borderRadius: '5px',
                             padding: '0px 20px',
                             '& > h6.MuiTypography-h6': {
@@ -49,27 +65,27 @@ export const useStyles = makeStyles((theme) => ({
                         },
                         '&:nth-child(2)': {
                             flexGrow: 6,
-                            padding: '0 15px',
+                            margin: '0 15px',
                             '& > h6.MuiTypography-h6': {
                                 fontWeight: '600',
                             },
                         },
-                        '&:last-child': {
+                        '&.condition': {
                             background: '#90BE27',
                             borderRadius: '50px',
                             '& > h6.MuiTypography-h6': {
                                 color: '#fff',
                                 fontWeight: '600',
                             },
-                        }
+                        },
                     },
                 },
                 '&:last-child': {
                     width: '25%',
                     display: 'flex',
                     justifyContent: 'flex-end',
-                }
-            }
+                },
+            },
         },
         '& hr': {
             margin: '20px 0',

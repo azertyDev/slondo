@@ -5,6 +5,7 @@ export const useStyles = makeStyles((theme) => ({
         position: 'relative',
         height: '55.33px',
         '& header.MuiAppBar-root': {
+            background: '#fafafa',
             '& > div.MuiContainer-root': {
                 padding: ({isScrollBreak}) => !isScrollBreak && 0,
                 transition: 'padding .3s',
@@ -17,6 +18,12 @@ export const useStyles = makeStyles((theme) => ({
                     '& > div:last-child': {
                         paddingRight: 0
                     }
+                }
+            },
+            '& div.bottom-logo': {
+                '& a': {
+                    display: 'flex',
+                    alignItems: 'center'
                 }
             }
         },
@@ -39,6 +46,8 @@ export const useStyles = makeStyles((theme) => ({
         },
         '& button.header-button': {
             borderRadius: '10px',
+            borderStyle: 'initial',
+            height: '38px',
             '& > svg': {
                 marginLeft: '8px'
             }
@@ -46,7 +55,8 @@ export const useStyles = makeStyles((theme) => ({
         '& button.bottom-sign-button': {
             color: '#000',
             backgroundColor: '#F2F2F2',
-
+            boxShadow: '0px 1px 1px rgba(0, 0, 0, 0.15)',
+            width: '88px',
         },
         '& button.create-ad-button': {
             '& > h6.MuiTypography-subtitle2': {
@@ -56,6 +66,7 @@ export const useStyles = makeStyles((theme) => ({
             },
         },
         '& button.bottom-category-button': {
+            width: '136px',
             '& > h6.MuiTypography-subtitle2': {
                 lineHeight: '15px',
                 letterSpacing: '0.5px',

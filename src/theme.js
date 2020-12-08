@@ -100,7 +100,7 @@ const theme = createMuiTheme({
                     }
                 },
                 body: {
-                    backgroundColor: colors.white
+                    backgroundColor: '#fafafa'
                 }
             }
         },

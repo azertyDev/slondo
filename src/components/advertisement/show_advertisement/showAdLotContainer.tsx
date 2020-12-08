@@ -1,11 +1,10 @@
-import React, {useEffect, useState} from 'react'
-import {userAPI} from "@src/api/api";
-import {i18n} from '@root/i18n';
-import {useRouter} from 'next/router';
-import {ShowAdLot} from "@src/components/advertisement/show_advertisement/ShowAdLot";
+import React, { useEffect, useState } from 'react';
+import { userAPI } from '@src/api/api';
+import { i18n } from '@root/i18n';
+import { useRouter } from 'next/router';
+import { ShowAdLot } from '@src/components/advertisement/show_advertisement/ShowAdLot';
 
-
-const initValues = {id: null, name: ''};
+const initValues = { id: null, name: '' };
 
 const initialAdData = {
     isFetch: false,
@@ -23,11 +22,18 @@ const initialAdData = {
         region: initValues,
         city: initValues,
         district: initValues,
+        ads_type: initValues,
+        parent: {
+            id: null,
+            name: '',
+            mark: '',
+        },
     },
 };
 
-export const ShowAdLotContainer = ({t}) => {
+export const ShowAdLotContainer = ({ t }) => {
     const [adData, setAdData] = useState(initialAdData);
+    const [parameters, setParameters] = useState({});
     const adsId = useRouter().query.id;
     const lang = i18n.language;
 
@@ -35,7 +41,7 @@ export const ShowAdLotContainer = ({t}) => {
         try {
             setAdData({
                 ...adData,
-                isFetch: true
+                isFetch: true,
             });
 
             const {
@@ -52,7 +58,11 @@ export const ShowAdLotContainer = ({t}) => {
 
             setAdData({
                 ...adData,
-                isFetch: false
+                isFetch: false,
+            });
+
+            setParameters({
+                ...otherData[otherData.parent.mark],
             });
 
             setAdData({
@@ -66,25 +76,24 @@ export const ShowAdLotContainer = ({t}) => {
                     region: region ?? initValues,
                     city: city ?? initValues,
                     district: district ?? initValues,
-                    ...otherData
-                }
+                    ...otherData,
+                },
             });
-
         } catch (e) {
             setAdData({
                 ...adData,
-                error: e.message
+                error: e.message,
             });
         }
     };
 
     useEffect(() => {
-        fetchAdData()
-    }, [])
+        fetchAdData();
+    }, []);
 
     return (
         <>
-            <ShowAdLot adData={adData} t={t}/>
+            <ShowAdLot adData={adData} t={t} parameters={parameters} />
         </>
-    )
-}
+    );
+};

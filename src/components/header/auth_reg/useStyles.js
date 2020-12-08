@@ -12,9 +12,8 @@ export const useStyles = makeStyles((theme) => ({
         '& div.info-block': {
             display: 'flex',
             flexDirection: 'column',
-            justifyContent: 'space-around',
             height: '100%',
-            padding: '15px',
+            padding: '45px 0',
             backgroundImage: 'linear-gradient(rgba(0,0,0,.6), rgba(0,0,0,.6)), url("/img/modal-image.jpg")',
             backgroundSize: 'cover',
             borderTopLeftRadius: '6px',
@@ -26,27 +25,52 @@ export const useStyles = makeStyles((theme) => ({
             '& > div': {
                 display: 'flex',
                 alignItems: 'center',
+                height: '90px',
+                padding: '20px',
                 '& > img': {
-                    width: '40px',
+                    minWidth: '40px',
                     height: '40px',
                     marginRight: '15px'
+                },
+                '& > h6.MuiTypography-subtitle2': {
+                    lineHeight: '17px',
                 }
             }
         },
         '& div.auth-reg-block': {
-            height: '100%',
             backgroundColor: theme.palette.primary.white,
             borderTopRightRadius: '6px',
             borderBottomRightRadius: '6px',
+            position: 'relative',
+            padding: '25px 16px',
+            height: '100%',
             '& > div.close-btn-wrapper': {
+                position: 'absolute',
+                right: '-10px',
+                top: '-10px',
+                background: '#EB5757',
+                borderRadius: '100%',
+                padding: '6px',
+                width: '24px',
+                height: '24px',
                 display: 'flex',
-                justifyContent: 'flex-end',
+                alignItems: 'center',
+                justifyContent: 'center',
                 '& > button.MuiIconButton-root': {
-                    margin: '4px'
+                    padding: '5px',
+                    '& svg > path': {
+                        // fill: '#EB5757',
+                    }
+                },
+                '&:hover': {
+                    cursor: 'pointer',
+                    // background: '#fff'
                 }
             },
-            '& > div.welcome-block > h6': {
-                textAlign: 'center'
+            '& > div.welcome-block > h6.MuiTypography-subtitle1': {
+                color: 'rgba(49, 49, 49, 0.6)',
+                paddingRight: '100px',
+                marginTop: '8px'
             },
             '& > div.auth-form': {
                 marginBottom: '5px'

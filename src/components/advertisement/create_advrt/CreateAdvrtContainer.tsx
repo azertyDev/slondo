@@ -14,27 +14,6 @@ import {CameraIcon} from "@src/components/elements/icons";
 import {TOTAL_FILES_LIMIT} from "@src/constants";
 
 
-const initCreateAdState = {
-    isFetch: false,
-    error: null,
-    adType: {
-        id: null,
-        name: '',
-        currency: [],
-        expired: [],
-    },
-    category: {
-        id: null,
-        name: '',
-        childs: []
-    },
-    subCategory: {
-        id: null,
-        name: '',
-        data: {}
-    }
-};
-
 export const initUrl: FileType = {
     url: (
         <div style={{width: '140px', height: '140px', margin: 'auto'}}>
@@ -43,64 +22,87 @@ export const initUrl: FileType = {
     )
 };
 
-const initPhotos: FileType[] = Array.from({length: TOTAL_FILES_LIMIT}).map(() => initUrl);
-
-const initFormFields: CreateAdFields = {
-    isFetch: false,
-    error: null,
-    title: '',
-    safe_deal: false,
-    delivery: false,
-    exchange: false,
-    location: null,
-    files: initPhotos,
-    description: '',
-    phone: '',
-    price: '',
-    currency: {
-        id: null,
-        name: ''
-    },
-    avalTime: {
-        isActive: false,
-        start_time: '00:00',
-        end_time: '00:00',
-        week: [
-            {id: 1, name: 'Пн'},
-            {id: 2, name: 'Вт'},
-            {id: 3, name: 'Ср'},
-            {id: 4, name: 'Чт'},
-            {id: 5, name: 'Пт'},
-            {id: 6, name: 'Сб'},
-            {id: 7, name: 'Вс'}
-        ],
-    },
-    auction: {
-        duration: {
-            id: null,
-            expiration_at: null
-        },
-        offer_the_price: false,
-        auto_renewal: false,
-        reserve_price: '',
-        price_by_now: {
-            isActive: false,
-            value: ''
-        },
-        display_phone: false,
-    },
-    adParams: {
-        safety: [],
-        multimedia: [],
-        assistant: [],
-        exterior: [],
-        car_climate: [],
-        airbags: [],
-    }
-};
-
 export const CreateAdvrtContainer: FC<void> = () => {
     const lang = i18n.language;
+
+    const initPhotos: FileType[] = Array.from({
+        length: TOTAL_FILES_LIMIT
+    }).map(() => initUrl);
+
+    const initCreateAdState = {
+        isFetch: false,
+        error: null,
+        adType: {
+            id: null,
+            name: '',
+            currency: [],
+            expired: [],
+        },
+        category: {
+            id: null,
+            name: '',
+            childs: []
+        },
+        subCategory: {
+            id: null,
+            name: '',
+            data: {}
+        }
+    };
+
+    const initFormFields: CreateAdFields = {
+        isFetch: false,
+        error: null,
+        title: '',
+        safe_deal: false,
+        delivery: false,
+        exchange: false,
+        location: null,
+        files: initPhotos,
+        description: '',
+        phone: '',
+        price: '',
+        currency: {
+            id: null,
+            name: ''
+        },
+        avalTime: {
+            isActive: false,
+            start_time: '00:00',
+            end_time: '00:00',
+            week: [
+                {id: 1, name: 'Пн'},
+                {id: 2, name: 'Вт'},
+                {id: 3, name: 'Ср'},
+                {id: 4, name: 'Чт'},
+                {id: 5, name: 'Пт'},
+                {id: 6, name: 'Сб'},
+                {id: 7, name: 'Вс'}
+            ],
+        },
+        auction: {
+            duration: {
+                id: null,
+                expiration_at: null
+            },
+            offer_the_price: false,
+            auto_renewal: false,
+            reserve_price: '',
+            price_by_now: {
+                isActive: false,
+                value: ''
+            },
+            display_phone: false,
+        },
+        adParams: {
+            safety: [],
+            multimedia: [],
+            assistant: [],
+            exterior: [],
+            car_climate: [],
+            airbags: [],
+        }
+    };
 
     const categoriesList = useSelector(({categories}: RootState) => categories.list);
 
@@ -386,8 +388,8 @@ export const CreateAdvrtContainer: FC<void> = () => {
         setReqValues();
     }, [subCategory.name, adType.id]);
 
-    console.log(createAdvrt)
     console.log(values)
+    console.log(createAdvrt)
     return (
         <MainLayout>
             <Container maxWidth="lg">

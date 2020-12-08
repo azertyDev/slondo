@@ -6,6 +6,7 @@
   "rating": "Sotuvchini reyting tizimi yordamida tekshiring. Qancha yulduzlari ko'proq, shuncha ishonchliroq.",
   "welcome": "Slondoga xush kelibsiz!",
   "authSite": "Saytning barcha xususiyatlaridan foydalanish uchun tizimga kiring.",
+  "serverError": "Serverda xatolik, keyinroq urinib ko'ring",
   "signInAndReg": "Kirish va Ro'yxatdan o'tish",
   "signInTitle": "Kirish",
   "signUpTitle": "Ro'yxat",

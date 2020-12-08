@@ -1,9 +1,9 @@
 import React from 'react'
-import { Box, Typography } from '@material-ui/core'
-import Rating from '@material-ui/lab/Rating'
+import {Box, Typography} from '@material-ui/core'
+import CustomRating from '@material-ui/lab/Rating'
 
 // styles
-import { useStyles } from './useStyles'
+import {useStyles} from './useStyles'
 
 const labels = {
     0.5: '0.5',
@@ -18,7 +18,7 @@ const labels = {
     5: '5.0',
 }
 
-export const RatingComponent = () => {
+export const Rating = () => {
     const [value, setValue] = React.useState(3.5)
     const [hover, setHover] = React.useState(-1)
 
@@ -26,7 +26,7 @@ export const RatingComponent = () => {
     return (
         <div className={classes.root}>
             <div>
-                <Rating
+                <CustomRating
                     name="hover-feedback"
                     readOnly
                     value={value}
@@ -39,11 +39,11 @@ export const RatingComponent = () => {
                     }}
                 />
                 {value !== null && (
-                    <Box><Typography variant='subtitle1'>{labels[hover !== -1 ? hover : value]}</Typography></Box>
+                    <Box><Typography variant="subtitle1">{labels[hover !== -1 ? hover : value]}</Typography></Box>
                 )}
             </div>
             <div>
-                <Typography variant='subtitle1'>(200 оценок)</Typography>
+                <Typography variant="subtitle1">(200 оценок)</Typography>
 
             </div>
         </div>

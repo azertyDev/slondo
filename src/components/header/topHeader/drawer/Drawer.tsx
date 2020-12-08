@@ -44,8 +44,6 @@ export const LeftDrawer = ({isOpen, setIsOpen}: DrawerProps) => {
                         <Typography variant="h6">Помощь</Typography>
                     </a>
                 </Link>
-
-
             </div>
         </Drawer>
     )

@@ -17,7 +17,7 @@ export const LotInfo = (props) => {
     return (
         <div className={classes.root}>
             <div className="lot-info">
-                <div>
+                <div className='lot-timer'>
                     {date !== 0 && <LotTimer {...data} date={date}/>}
                 </div>
                 <div className='buy-now'>

@@ -8,7 +8,7 @@ export const CustomPagination = (props) => {
     const classes = useStyles();
     return (
         <div className={classes.root}>
-            <Pagination count={props.count} page={props.currentPage} onChange={props.handlePaginationPage} color="primary"/>
+            <Pagination count={props.count} page={props.currentPage} onChange={props.handlePaginationPage} shape="rounded"/>
         </div>
     );
 }

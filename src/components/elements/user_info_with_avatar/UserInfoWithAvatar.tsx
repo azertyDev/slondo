@@ -1,12 +1,12 @@
 import React from 'react';
-import { Typography } from '@material-ui/core';
-import { RatingComponent } from '../rating/Rating';
-import { UserAvatarComponent } from '@src/components/elements/user_info_with_avatar/avatar/UserAvatarComponent'
+import {Typography} from '@material-ui/core';
+import {Rating} from '@src/components/elements/rating/Rating';
+import {UserAvatarComponent} from '@src/components/elements/user_info_with_avatar/avatar/UserAvatarComponent'
 import {ButtonComponent} from "@src/components/elements/button/Button";
 // styles
 import {useStyles} from './useStyles';
 
-export const UserInfoWithAvatar = () => {
+export const UserInfoWithAvatar = (props) => {
     const classes = useStyles();
     return (
         <div className={classes.root}>
@@ -26,13 +26,17 @@ export const UserInfoWithAvatar = () => {
                         </Typography>
                     </div>
                     <div>
-                        <RatingComponent/>
+                        <Rating/>
                     </div>
-                    <ButtonComponent>
-                        <Typography variant='subtitle2'>
-                            Подписаться
-                        </Typography>
-                    </ButtonComponent>
+                    {
+                        props.cabinet
+                        ? null
+                        : <ButtonComponent>
+                            <Typography variant="subtitle2">
+                                Подписаться
+                            </Typography>
+                        </ButtonComponent>
+                    }
                 </div>
             </div>
         </div>
