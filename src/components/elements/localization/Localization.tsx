@@ -5,11 +5,9 @@ import {useStyles} from './useStyles'
 
 
 export const Localization = () => {
-
     const setLocalAction = (lang) => () => i18n.changeLanguage(lang);
 
     const classes = useStyles()
-
     return (
         <div className={classes.root}>
             <Typography

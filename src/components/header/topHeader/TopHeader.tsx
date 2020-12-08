@@ -1,5 +1,4 @@
 import React, {useState} from 'react'
-import Link from 'next/link'
 import {
     Grid,
     Hidden,
@@ -8,110 +7,67 @@ import {
     Toolbar,
     IconButton,
 } from '@material-ui/core'
+import {Localization} from '@src/components/elements/localization/Localization'
+import {LeftDrawer} from './drawer/Drawer'
+import {Link} from '@root/i18n'
+
+// icons
 import {
     Logo,
-    Facebook,
-    Instagram,
-    Youtube,
-    Twitter,
-    Whatsapp,
-    Telegram,
-    HelpIcon,
-    StoreIcon,
-    BusinessIcon,
-    PlIcon,
-    Avatar
-} from '../../elements/icons'
-import {Localization} from '../../elements/localization/Localization'
-import {LeftDrawer} from './drawer/Drawer'
-import {useStyles} from './useStyle'
+    UserAvatar
+} from '@src/components/elements/icons'
+import {QuestionIcon, LocationIcon, BonusIcon} from "@src/components/elements/icons";
 
+// styles
+import {useStyles} from './useStyles'
 
 export const TopHeader = (props) => {
-    const {t} = props;
+    const {t, handleOpenModal} = props;
     const [isOpen, setIsOpen] = useState(false);
+
     const classes = useStyles();
     return (
         <div className={classes.root}>
             <Grid container justify="space-between" alignItems="center">
                 <Hidden smDown>
-                    <Grid item md={4}>
+                    <Grid item md={6}>
                         <div className="location">
+                            <LocationIcon/>
                             <Typography variant="subtitle1">
-                                {t('location')}:
-                            </Typography>
-                            <img src={PlIcon} className="pl-icon"/>
-                            <Typography
-                                variant="subtitle1"
-                                className="select-region"
-                            >
-                                {t('region')}
+                                {t('location')}
                             </Typography>
                         </div>
                     </Grid>
                     <Grid
                         item
                         container
-                        justify="center"
                         alignItems="center"
-                        md={4}
-                        className="social-icons"
-                    >
-                        <a href="#">
-                            <img src={Facebook}/>
-                        </a>
-                        <a href="#">
-                            <img src={Instagram}/>
-                        </a>
-                        <a href="#">
-                            <img src={Youtube}/>
-                        </a>
-                        <a href="#">
-                            <img src={Twitter}/>
-                        </a>
-                        <a href="#">
-                            <img src={Whatsapp}/>
-                        </a>
-                        <a href="#">
-                            <img src={Telegram}/>
-                        </a>
-                    </Grid>
-                    <Grid
-                        item
-                        container
-                        justify="space-between"
-                        alignItems="center"
+                        justify='flex-end'
                         className="multiple"
-                        md={4}
+                        md={6}
                     >
                         <Grid item>
                             <div className="multiple-content">
-                                <a href="#">
-                                    <img src={HelpIcon}/>
-                                    <Typography variant="subtitle1">
-                                        {t('help')}
-                                    </Typography>
-                                </a>
+                                <Link href='#'>
+                                    <a>
+                                        <Typography variant="subtitle1">
+                                            {t('bonus')}
+                                        </Typography>
+                                        <BonusIcon/>
+                                    </a>
+                                </Link>
                             </div>
                         </Grid>
                         <Grid item>
                             <div className="multiple-content">
-                                <a href="#">
-                                    <img src={StoreIcon}/>
-                                    <Typography variant="subtitle1">
-                                        {t('shops')}
-                                    </Typography>
-                                </a>
-                            </div>
-                        </Grid>
-                        <Grid item>
-                            <div className="multiple-content">
-                                <a href="#">
-                                    <img src={BusinessIcon}/>
-                                    <Typography variant="subtitle1">
-                                        {t('forBusiness')}
-                                    </Typography>
-                                </a>
+                                <Link href='#'>
+                                    <a>
+                                        <Typography variant="subtitle1">
+                                            {t('help')}
+                                        </Typography>
+                                        <QuestionIcon/>
+                                    </a>
+                                </Link>
                             </div>
                         </Grid>
                         <Grid item>
@@ -144,12 +100,14 @@ export const TopHeader = (props) => {
                             <Grid className="top-header-logo">
                                 <Link href="/">
                                     <a>
-                                        <img src={Logo} alt="Slondo logo"/>
+                                        <img src={Logo} alt="logo"/>
                                     </a>
                                 </Link>
                             </Grid>
                             <Grid className={classes.avatarBlock}>
-                                <img src={Avatar} alt='avatar'/>
+                                <IconButton onClick={handleOpenModal}>
+                                    <img src={UserAvatar} alt='avatar'/>
+                                </IconButton>
                             </Grid>
                         </Grid>
                     </Toolbar>
