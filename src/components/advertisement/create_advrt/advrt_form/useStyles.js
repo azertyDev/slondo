@@ -51,19 +51,12 @@ export const useStyles = makeStyles((theme) => ({
         },
     },
     selectPrice: {
-        '& div.MuiOutlinedInput-input': {
-            paddingLeft: '10px',
-            paddingRight: '10px',
-        },
-        '& svg.MuiSelect-iconOutlined': {
-            right: '5px',
-        },
+        display: 'flex'
     },
     paymentAndDelivery: {
         display: 'flex',
         alignItems: 'center',
         flexFlow: 'row',
-        // justifyContent: 'space-between',
         '& a': {
             textDecoration: 'none',
         },
@@ -87,19 +80,38 @@ export const useStyles = makeStyles((theme) => ({
         },
     },
     description: {
-        maxWidth: '100%',
-        minWidth: '100%',
+        width: '100%',
         maxHeight: '230px',
         minHeight: '230px',
         padding: '10px',
     },
-    getSettings: {
-        textTransform: 'initial',
-        textDecoration: 'none',
-        color: '#9b66d2',
-    },
-    required: {
-        color: 'red ',
+    week: {
+        '& > div.switcher': {
+            display: 'flex',
+            justifyContent: 'space-between',
+            alignItems: 'center',
+            width: '100%'
+        },
+        '& div.scheduler': {
+            width: '100%',
+            height: '140px',
+            '& > div.week-days p.selected-day': {
+                color: '#fff',
+                backgroundColor: '#7DBCF6'
+            },
+            '& div.available-time': {
+                display: 'flex',
+                '& > div': {
+                    display: 'flex',
+                    alignItems: 'center'
+                }
+            }
+        },
+        '& > a.settings': {
+            textTransform: 'initial',
+            textDecoration: 'none',
+            color: '#9b66d2',
+        }
     },
     spacingNone: {
         padding: '4px !important',
@@ -114,5 +126,35 @@ export const useStyles = makeStyles((theme) => ({
             borderRadius: '7px',
             backgroundColor: '#C0C0C0',
         }
-    }
+    },
+    required: {
+        borderColor: theme.palette.primary.error,
+        '& div.MuiOutlinedInput-root': {
+            '& > fieldset, &:hover > fieldset.MuiOutlinedInput-notchedOutline': {
+                borderColor: theme.palette.primary.error
+            },
+        },
+        '& button.MuiButtonBase-root': {
+            borderColor: `${theme.palette.primary.error}!important`
+        }
+    },
+    nextButtonBlock: {
+        display: 'flex',
+        justifyContent: 'center',
+        margin: '50px 0',
+        [theme.breakpoints.down('md')]: {
+            marginTop: '30px',
+        },
+        [theme.breakpoints.down('sm')]: {
+            marginTop: '25px',
+        },
+    },
+    nextButton: {
+        width: '250px',
+        margin: '0 5px',
+        [theme.breakpoints.down('sm')]: {padding: '10px 50px'},
+        '& > p': {
+            color: theme.palette.primary.white
+        }
+    },
 }))

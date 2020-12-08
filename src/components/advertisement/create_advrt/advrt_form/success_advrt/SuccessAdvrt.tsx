@@ -1,16 +1,17 @@
 import React from 'react'
-import { Grid, Typography, Paper } from '@material-ui/core'
-import { ButtonComponent } from '@src/components/elements/button/Button'
-import { AdsAndLotsBlock } from '@src/components/elements/ads_and_lots_block/AdsAndLotsBlock'
-
-//icons
+import {Grid, Typography, Paper} from '@material-ui/core'
+import {ButtonComponent} from '@src/components/elements/button/Button'
+import {AdsAndLotsBlock} from '@src/components/elements/ads_and_lots_block/AdsAndLotsBlock'
 import HomeIcon from '@material-ui/icons/Home'
 import CheckCircleIcon from '@material-ui/icons/CheckCircle'
+import {Router} from "@root/i18n";
+import {useStyles} from './useStyles'
 
-// styles
-import { useStyles } from './useStyles'
 
-export const SuccessAdvrt = () => {
+export const SuccessAdvrt = ({handleCreateNew}) => {
+    const forwardToHome = () => {
+        Router.push('/');
+    };
     const classes = useStyles()
     return (
         <div className={classes.root}>
@@ -24,14 +25,13 @@ export const SuccessAdvrt = () => {
                         Поздравляем!
                     </Typography>
                 </Grid>
-
                 <Grid item xs={12}>
                     <Paper elevation={1} className={classes.paper}>
                         <Grid container justify="flex-start" alignItems="center" alignContent='center'>
                             <div className={classes.successInfo}>
                                 <CheckCircleIcon color='primary' className={classes.successIcon}/>
                                 <Typography color="initial">
-                                    Объявление отправлено на модерацию. <br />
+                                    Объявление отправлено на модерацию. <br/>
                                     Статус объявления Вы можете отслеживать в {' '}
                                     <a href="#">личном кабинете</a>
                                 </Typography>
@@ -40,16 +40,20 @@ export const SuccessAdvrt = () => {
                     </Paper>
                 </Grid>
                 <Grid item container xs={12} direction="row" justify="center" className={classes.buttonBlock}>
-                    <Grid item xs={5} sm={2}>
-                        <ButtonComponent>
-                            <HomeIcon color="inherit" />
+                    <Grid item xs={6} sm={2}>
+                        <ButtonComponent onClick={handleCreateNew} style={{color: '#fff'}}>
+                            Создать еще
+                        </ButtonComponent>
+                    </Grid>
+                    <Grid item xs={6} sm={2}>
+                        <ButtonComponent onClick={forwardToHome} style={{color: '#fff'}}>
+                            <HomeIcon color="inherit"/>
                             На главную
                         </ButtonComponent>
                     </Grid>
                 </Grid>
-                
                 <Grid item container xs={12} direction="row" justify="center">
-                    <AdsAndLotsBlock title='Возможно Вам понравится'/>
+                    {/*<AdsAndLotsBlock title='Возможно Вам понравится'/>*/}
                 </Grid>
             </Grid>
         </div>

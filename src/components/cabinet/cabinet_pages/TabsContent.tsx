@@ -1,6 +1,5 @@
 import React, {useState} from 'react';
-import {Grid, Tabs, Typography} from "@material-ui/core";
-import {CustomTab} from "@src/components/elements/custom_tab/CustomTab";
+import {Grid, Tabs, Typography, Tab} from "@material-ui/core";
 import {CustomTabPanel} from "@src/components/elements/custom_tab_panel/CustomTabPanel";
 import {CabinetMenuWrapper} from "@src/components/cabinet/CabinetMenuWrapper";
 // styles
@@ -24,7 +23,7 @@ export const TabsContent = ({tabsData, headerTitle, title, t}) => {
                         indicatorColor="primary"
                         variant="fullWidth"
                     >
-                        <CustomTab
+                        <Tab
                             label={
                                 <Typography variant="subtitle1">
                                     {`${tabsData[0].title} (${tabsData[0].count})`}
@@ -32,7 +31,7 @@ export const TabsContent = ({tabsData, headerTitle, title, t}) => {
                             }
                             id={0}
                         />
-                        <CustomTab
+                        <Tab
                             label={
                                 <Typography variant="subtitle1">
                                     {`${tabsData[1].title} (${tabsData[1].count})`}

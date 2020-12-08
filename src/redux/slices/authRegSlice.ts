@@ -9,7 +9,8 @@ const cookies = new Cookies();
 const initialState: AuthReg = {
     isFetch: false,
     isAuth: false,
-    error: null
+    error: null,
+    isAuthModalOpen: false
 };
 
 // Async thunk
@@ -31,7 +32,10 @@ const authRegSlice = createSlice({
     initialState,
     reducers: {
         setIsAuthAction: (state, action) => {
-            state.isAuth = action.payload
+            state.isAuth = action.payload;
+        },
+        setIsAuthModalOpen: (state, action) => {
+            state.isAuthModalOpen = action.payload;
         }
     },
     extraReducers: (builder) => {
@@ -41,6 +45,7 @@ const authRegSlice = createSlice({
         })
         builder.addCase(fetchToken.fulfilled, (state) => {
             state.isFetch = false;
+            state.error = null;
             state.isAuth = true;
         })
         builder.addCase(fetchToken.rejected, (state, action) => {
@@ -50,5 +55,5 @@ const authRegSlice = createSlice({
     }
 });
 
-export const {setIsAuthAction} = authRegSlice.actions;
+export const {setIsAuthAction, setIsAuthModalOpen} = authRegSlice.actions;
 export const authReducer = authRegSlice.reducer;

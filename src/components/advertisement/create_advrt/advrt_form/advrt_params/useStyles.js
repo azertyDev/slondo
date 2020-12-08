@@ -11,7 +11,7 @@ export const useStyles = makeStyles(() => ({
             width: ({isPreview}) => !isPreview && '100%',
             marginRight: '10px'
         },
-        '& div.colors-list': {
+        '& div.row-list': {
             display: 'flex'
         }
     },

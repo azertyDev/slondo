@@ -5,7 +5,6 @@ import {MainSlider} from '../header/sliders/mainSlider/MainSlider'
 import {MainLayout} from '../MainLayout'
 import {CategoriesSliderContainer} from "@src/components/header/sliders/categoriesSlider/CategoriesSliderContainer";
 import {MainContentContainer} from '@src/components/home/mainContent/MainContentContainer'
-// styles
 import {useStyles} from './useStyles'
 
 

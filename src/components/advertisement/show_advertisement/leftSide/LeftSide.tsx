@@ -1,5 +1,5 @@
-import React, { useState, useRef } from 'react';
-import { Typography, Portal } from '@material-ui/core';
+import React, { useState } from 'react';
+import { Typography } from '@material-ui/core';
 import { SyncSliders } from '@src/components/elements/sync_sliders/SyncSliders';
 import { ReadMore } from '@src/components/elements/read_more/readMore';
 import { LeftSideModal } from '@src/components/advertisement/show_advertisement/leftSide/left_side_modal/LeftSideModal';
@@ -63,7 +63,7 @@ export const LeftSide = ({ data, parameters, t }) => {
             );
         }
     });
-    console.log(data)
+
     const classes = useStyles();
     return (
         <div className={classes.root}>
@@ -151,23 +151,6 @@ export const LeftSide = ({ data, parameters, t }) => {
                             {data.description}
                         </Typography>
                     </ReadMore>
-
-                    {/* <div>
-                        <Typography variant="subtitle1" color="initial">
-
-                        </Typography>
-                        {show ? (
-                            <Portal container={container.current}>
-                                <Typography variant="subtitle1" color="initial">
-                                    {data.description}
-                                </Typography>
-                            </Portal>
-                        ) : null}
-                    </div>
-                    <div ref={container} />
-                    <button type="button" onClick={handleClick}>
-                        {show ? 'Unmount children' : 'Mount children'}
-                    </button> */}
                 </div>
             </div>
             <div className="ad-category">

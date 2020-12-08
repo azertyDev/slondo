@@ -14,7 +14,6 @@ import { Banner } from '@src/components/elements/banner/Banner';
 
 export const ShowAdLot = (props) => {
     const { adData, parameters, t } = props;
-
     const { data } = adData;
 
     const classes = useStyles();
@@ -34,7 +33,7 @@ export const ShowAdLot = (props) => {
                                 <a>
                                     {parameters.type
                                         ? parameters.type.name
-                                        : ''}
+                                        : 'test'}
                                 </a>
                             </Link>
                             <Typography color="primary">

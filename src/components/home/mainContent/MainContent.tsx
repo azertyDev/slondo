@@ -1,15 +1,13 @@
 import React, {FC} from 'react';
-import {Grid, Typography, Hidden, Tabs} from '@material-ui/core';
+import {Grid, Typography, Hidden, Tabs, Tab} from '@material-ui/core';
 import {CardItem} from '@src/components/elements/card/Card';
-import {CustomTab} from '@src/components/elements/custom_tab/CustomTab';
 import {Banner} from '@src/components/elements/banner/Banner';
 import {CustomTabPanel} from '@src/components/elements/custom_tab_panel/CustomTabPanel';
 import {Link} from '@root/i18n';
-// Styles
 import {TFunction} from "i18next";
 import {CardData} from "@root/interfaces/CardData";
+import {CustomPagination} from "../../elements/custom_pagination/CustomPagination";
 import {useStyles} from './useStyles';
-import {CustomPagination} from "@src/components/elements/custom_pagination/CustomPagination";
 
 
 interface MainContentProps {
@@ -40,21 +38,21 @@ export const MainContent: FC<MainContentProps> = (props) => {
                         className="tabs"
                         variant="fullWidth"
                     >
-                        <CustomTab
+                        <Tab
                             label={
                                 <Typography variant="h6">
                                     {t('allAds')}
                                 </Typography>
                             }
-                            id={0}
+                            value={0}
                         />
-                        <CustomTab
+                        <Tab
                             label={
                                 <Typography variant="h6">
                                     {t('allLots')}
                                 </Typography>
                             }
-                            id={1}
+                            value={1}
                         />
                     </Tabs>
                 </Grid>

@@ -11,7 +11,7 @@ export const useStyles = makeStyles(() => ({
                 right: '25px',
             },
         }
-
+        
     },
     firstSlider: {
         width: '100%',

@@ -1,11 +1,13 @@
 import {combineReducers} from '@reduxjs/toolkit'
 import {authReducer} from "./slices/authRegSlice"
-import {createAdvrtReducer} from "./slices/createAdvrtSlice"
+import {categoriesReducer} from "./slices/categoriesSlice"
+import {locationsReducer} from "./slices/locationsSlice";
 
 
 export const rootReducer = combineReducers({
     auth: authReducer,
-    createAdvrt: createAdvrtReducer
+    categories: categoriesReducer,
+    locations: locationsReducer
 })
 
 export type RootState = ReturnType<typeof rootReducer>
