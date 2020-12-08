@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import {Container, Grid, Typography, Tabs, Tab} from '@material-ui/core';
-import {CabinetTabItem} from './card/CabinetTabItem';
+import {CabinetCard} from './card/CabinetCard';
 import {Notification} from '@src/components/cabinet/notification/Notification';
 import {CabinetSidebar} from '@src/components/cabinet/cabinet_sidebar/CabinetSidebar';
 // styles
@@ -69,7 +69,7 @@ export const Cabinet = (props) => {
                             </Tabs>
                         </Grid>
                         <TabPanel value={value} index={0}>
-                            <CabinetTabItem/>
+                            <CabinetCard/>
                         </TabPanel>
                         <TabPanel value={value} index={1}>
                             <Notification/>
@@ -77,9 +77,9 @@ export const Cabinet = (props) => {
                             <Notification/>
                         </TabPanel>
                         <TabPanel value={value} index={2}>
-                            <CabinetTabItem/>
-                            <CabinetTabItem/>
-                            <CabinetTabItem/>
+                            <CabinetCard/>
+                            <CabinetCard/>
+                            <CabinetCard/>
                         </TabPanel>
                     </Grid>
                 </Grid>
