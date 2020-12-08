@@ -15,11 +15,11 @@ import {DeliveryIcon} from "@src/components/elements/icons/DeliveryIcon";
 // styles
 import {useStyles} from './useStyles';
 
+
 export const LeftSide = ({data}) => {
     const date = new Date(data.created_at);
     const months = ["января", "февраля", "марта", "апреля", "мая", "июня", "июля", "августа", "сентября", "октября", "ноября", "декабря"]
     const formatted_date = date.getDate() + " " + months[(date.getMonth())] + " " + date.getFullYear();
-    console.log(data)
 
     const classes = useStyles();
     return (

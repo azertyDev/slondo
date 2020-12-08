@@ -1,13 +1,11 @@
 import React, {FC, useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
-import {Tabs, Typography} from "@material-ui/core";
+import {Tab, Tabs, Typography} from "@material-ui/core";
 import {i18n, Link} from "@root/i18n";
-import {CustomTab} from "../custom_tab/CustomTab";
 import {CustomTabPanel} from "../custom_tab_panel/CustomTabPanel";
 import {Form, Formik} from "formik";
 import {CustomFormikField} from "../custom_formik_field/CustomFormikField";
 import {ButtonComponent} from "../button/Button";
-import {requiredValidate, phoneValidate} from '@src/components/validates';
 import {RootState} from "@src/redux/rootReducer";
 import {fetchToken} from "@src/redux/slices/authRegSlice";
 import {AuthInputs} from "@root/interfaces/Auth";
@@ -59,21 +57,21 @@ export const AuthRegForm: FC<WithT & { handleCloseModal: () => void }> = (props)
                         indicatorColor="primary"
                         className='tabs'
                     >
-                        <CustomTab
+                        <Tab
                             label={
                                 <Typography variant="subtitle1">
                                     {t('auth_reg:signInTitle')}
                                 </Typography>
                             }
-                            id={0}
+                            value={0}
                         />
-                        <CustomTab
+                        <Tab
                             label={
                                 <Typography variant="subtitle1">
                                     {t('auth_reg:signUpTitle')}
                                 </Typography>
                             }
-                            id={1}
+                            value={1}
                         />
                     </Tabs>
                     <div className='tab-panels'>

@@ -5,7 +5,7 @@ import {ButtonComponent} from "@src/components/elements/button/Button";
 
 
 export const CustomMenu: FC<CustomMenuProps> = (props) => {
-    const {valueName, items, onClick, onBlur} = props;
+    const {valueName, items, onClick, onBlur, getValByName = 'name'} = props;
 
     const [anchor, setAnchor] = useState(null);
 
@@ -18,14 +18,16 @@ export const CustomMenu: FC<CustomMenuProps> = (props) => {
     };
 
     return (
-        <>
+        <div style={{width: '100%'}} className={props.className}>
             <ButtonComponent
                 style={{
                     backgroundColor: '#fafafa',
                     border: '1px solid #4e4e4e',
                 }}
                 onClick={handleMenuOpen}
-                disabled={!items.length}
+                disabled={items.length <= 1}
+                name={props.name}
+                onBlur={onBlur}
             >
                 <Typography style={{color: '#4e4e4e'}}>
                     {valueName}
@@ -36,19 +38,16 @@ export const CustomMenu: FC<CustomMenuProps> = (props) => {
                 open={Boolean(anchor)}
                 onClose={handleMenuClose}
             >
-                {
-                    items.map((item, i) => (
-                        <MenuItem
-                            key={i}
-                            id={item.name}
-                            onBlur={onBlur}
-                            onClick={onClick(item, setAnchor)}
-                        >
-                            <Typography>{item.name}</Typography>
-                        </MenuItem>
-                    ))
-                }
+                {items.map((item, i) => (
+                    <MenuItem
+                        key={i}
+                        id={item.name}
+                        onClick={onClick(item, setAnchor)}
+                    >
+                        <Typography>{item[getValByName]}</Typography>
+                    </MenuItem>
+                ))}
             </Menu>
-        </>
+        </div>
     )
 };

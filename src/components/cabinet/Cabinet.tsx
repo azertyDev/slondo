@@ -1,15 +1,14 @@
-import React, { useState } from 'react';
-import { Container, Grid, Typography, Tabs } from '@material-ui/core';
-import { CustomTab } from '../elements/custom_tab/CustomTab';
-import { CabinetTabItem } from './card/CabinetTabItem';
-import { Notification } from '@src/components/cabinet/notification/Notification';
-import { CabinetSidebar } from '@src/components/cabinet/cabinetSidebar/CabinetSidebar';
+import React, {useState} from 'react';
+import {Container, Grid, Typography, Tabs, Tab} from '@material-ui/core';
+import {CabinetTabItem} from './card/CabinetTabItem';
+import {Notification} from '@src/components/cabinet/notification/Notification';
+import {CabinetSidebar} from '@src/components/cabinet/cabinet_sidebar/CabinetSidebar';
 // styles
-import { useStyles } from './useStyles';
+import {useStyles} from './useStyles';
 
 
 const TabPanel = (props) => {
-    const { children, value, index, ...other } = props
+    const {children, value, index, ...other} = props
 
     return (
         <div hidden={value !== index} {...other}>
@@ -43,44 +42,44 @@ export const Cabinet = (props) => {
                                 onChange={handleChange}
                                 indicatorColor="primary"
                             >
-                                <CustomTab
+                                <Tab
                                     label={
                                         <Typography variant="subtitle1">
                                             Объявления (2)
                                         </Typography>
                                     }
-                                    id={0}
+                                    value={0}
                                 />
-                                <CustomTab
+                                <Tab
                                     label={
                                         <Typography variant="subtitle1">
                                             Торги (2)
                                         </Typography>
                                     }
-                                    id={1}
+                                    value={1}
                                 />
-                                <CustomTab
+                                <Tab
                                     label={
                                         <Typography variant="subtitle1">
                                             продвинутые торги
                                         </Typography>
                                     }
-                                    id={2}
+                                    value={2}
                                 />
                             </Tabs>
                         </Grid>
                         <TabPanel value={value} index={0}>
-                            <CabinetTabItem />
+                            <CabinetTabItem/>
                         </TabPanel>
                         <TabPanel value={value} index={1}>
-                            <Notification />
-                            <Notification />
-                            <Notification />
+                            <Notification/>
+                            <Notification/>
+                            <Notification/>
                         </TabPanel>
                         <TabPanel value={value} index={2}>
-                            <CabinetTabItem />
-                            <CabinetTabItem />
-                            <CabinetTabItem />
+                            <CabinetTabItem/>
+                            <CabinetTabItem/>
+                            <CabinetTabItem/>
                         </TabPanel>
                     </Grid>
                 </Grid>

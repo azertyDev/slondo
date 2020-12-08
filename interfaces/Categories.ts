@@ -7,9 +7,20 @@ export interface Categories {
 export type CategoriesDataTypes = Array<{
     id: number;
     name: string;
-    images: { id: number; url: string };
-    icons: { id: number; url: string };
+    images: {
+        id: number;
+        url: {
+            original: ''
+        }
+    };
+    icons: {
+        id: number;
+        url: {
+            original: ''
+        }
+    };
     childs: [];
+    has_auction: number;
 }>
 
 export interface CategoryIDs {

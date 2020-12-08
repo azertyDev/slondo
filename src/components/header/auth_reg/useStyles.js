@@ -15,7 +15,7 @@ export const useStyles = makeStyles((theme) => ({
             justifyContent: 'space-around',
             height: '100%',
             padding: '15px',
-            backgroundImage: 'linear-gradient(rgba(0,0,0,.6), rgba(0,0,0,.6)), url("./img/modal-image.jpg")',
+            backgroundImage: 'linear-gradient(rgba(0,0,0,.6), rgba(0,0,0,.6)), url("/img/modal-image.jpg")',
             backgroundSize: 'cover',
             borderTopLeftRadius: '6px',
             borderBottomLeftRadius: '6px',

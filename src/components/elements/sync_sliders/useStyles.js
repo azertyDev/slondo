@@ -37,11 +37,11 @@ export const useStyles = makeStyles(() => ({
                     /* Maximum image size */
                     maxWidth: '90%',
                     maxHeight: '90%',
-
+                    
                     /* We keep the ratio of the image */
                     width: 'auto',
                     height: 'auto',
-
+                    
                     transform: 'scale(0.95)',
                     transition: 'transform .3s',
                 },
@@ -57,21 +57,14 @@ export const useStyles = makeStyles(() => ({
         },
         secondSlider: {
             marginTop: '5px',
-            '& div.slick-track': {
-                width: '100% !important',
-                margin: 0
-            },
             '& div.slick-slide': {
-                width: '210px !important',
-                marginRight: '5px',
+                '& > div': {
+                    padding: '2.5px'
+                },
                 '& img': {
-                    width: '100%',
                     height: '118px',
                     objectFit: 'cover'
                 },
-            },
-            '& div.[data-index="1"] img': {
-                marginLeft: 0,
             }
         }
     }))

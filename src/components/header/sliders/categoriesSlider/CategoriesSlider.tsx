@@ -20,23 +20,16 @@ export const CategoriesSlider: FC<WithT> = (props) => {
             <Typography variant="h4">{t('popularCategories')}</Typography>
             <div className='category-slider'>
                 <CustomSlider {...settings}>
-                    {
-                        error
-                            ? (
-                                <Typography>{error}</Typography>
-                            )
-                            : (
-                                list.map(category => (
-                                        <Link href="#" key={category.id}>
-                                            <a title={category.name}>
-                                                <img src={category.images.url} alt='category'/>
-                                                <Typography>{category.name}</Typography>
-                                            </a>
-                                        </Link>
-                                    )
-                                )
-                            )
-                    }
+                    {error
+                        ? <Typography>{error}</Typography>
+                        : list.map(category => (
+                            <Link href="#" key={category.id}>
+                                <a title={category.name}>
+                                    <img src={category.images.url.original} alt='category'/>
+                                    <Typography>{category.name}</Typography>
+                                </a>
+                            </Link>
+                        ))}
                 </CustomSlider>
             </div>
         </div>

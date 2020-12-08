@@ -14,7 +14,7 @@ const calibri = {
 const colors = {
     main: '#9773af',
     secondary: '#845CAB',
-    white: '#ffffff',
+    white: '#fafafa',
     black: '#4E4E4E',
     gray: '#C0C0C0',
     adBgColor: '#88CAEC',
@@ -75,7 +75,7 @@ const theme = createMuiTheme({
             fontWeight: '600',
             textTransform: 'none'
         }
-
+        
     },
     overrides: {
         MuiCssBaseline: {
@@ -84,9 +84,20 @@ const theme = createMuiTheme({
                 ':focus': {
                     outline: 0,
                 },
-                ".errorText": {
-                    color: colors.error,
+                '.error-text': {
+                    color: `${colors.error}!important`,
                     textAlign: 'center'
+                },
+                '.error-border': {
+                    borderColor: colors.error,
+                    '& div.MuiOutlinedInput-root': {
+                        '& > fieldset, &:hover > fieldset.MuiOutlinedInput-notchedOutline': {
+                            borderColor: colors.error
+                        },
+                    },
+                    '& button.MuiButtonBase-root': {
+                        borderColor: `${colors.error}!important`
+                    }
                 },
                 body: {
                     backgroundColor: colors.white

@@ -1,3 +1,5 @@
+import {ReactNode} from "react";
+
 export interface AdvertisementProps {
     isPreview: boolean;
     isSuccess: boolean;
@@ -19,7 +21,6 @@ export interface CreateAdState {
     data: {
         id: number;
         name: string;
-        address: [];
         adsParams: [
             {
                 currency: []
@@ -29,8 +30,14 @@ export interface CreateAdState {
 }
 
 export interface CreateAdFields {
+    isFetch: boolean;
+    error: string;
     title: string;
     price: string;
+    currency: {
+        id: number;
+        name: string;
+    };
     safe_deal: boolean;
     delivery: boolean;
     exchange: boolean;
@@ -42,7 +49,33 @@ export interface CreateAdFields {
         district: string;
         district_id: number;
     };
-    files: [];
+    files: FileType[];
     description: string;
     phone: string;
+    avalTime: {
+        isActive: boolean;
+        week: { id: number, name: string }[];
+        start_time: string;
+        end_time: string;
+    };
+    auction: {
+        duration: {
+            id: number;
+            expiration_at: string
+        };
+        offer_the_price: boolean;
+        auto_renewal: boolean;
+        display_phone: boolean;
+        reserve_price: string;
+        price_by_now: {
+            isActive: boolean;
+            value: string;
+        }
+    };
+    adParams: any
 }
+
+export type FileType = {
+    file?: { name: string };
+    url: string | ReactNode;
+};

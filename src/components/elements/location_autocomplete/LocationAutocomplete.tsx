@@ -1,4 +1,4 @@
-import React, {FC} from "react";
+import React, {AllHTMLAttributes, FC} from "react";
 import {Autocomplete} from "@material-ui/lab";
 import {TextField} from "@material-ui/core";
 import {AddressAutocompleteProps} from "@root/interfaces/AddressAutocomplete";
@@ -37,7 +37,7 @@ const formatData = (list) => {
     }, []);
 };
 
-export const LocationAutocomplete: FC<AddressAutocompleteProps> = ({values, setValues, ...props}) => {
+export const LocationAutocomplete: FC<AddressAutocompleteProps & AllHTMLAttributes<string>> = ({values, setValues, ...props}) => {
     const optionSelected = ({district_id, city_id}, value) => {
         return value.district_id
             ? district_id === value.district_id
@@ -62,7 +62,7 @@ export const LocationAutocomplete: FC<AddressAutocompleteProps> = ({values, setV
             options={formatData(props.list)}
             getOptionSelected={optionSelected}
             getOptionLabel={option}
-            renderInput={(params) => {
+            renderInput={(params: any) => {
                 return <TextField
                     fullWidth
                     focused={false}

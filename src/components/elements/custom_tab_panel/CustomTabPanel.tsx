@@ -1,7 +1,13 @@
-import React from "react";
+import React, {FC, ReactNode} from "react";
 
+interface CustomTabPanelProps {
+    value: number;
+    index: number;
+    children?: ReactNode;
+    className?: string;
+}
 
-export const CustomTabPanel = (props) => {
+export const CustomTabPanel: FC<CustomTabPanelProps> = (props) => {
     const {children, value, index, ...other} = props
 
     return (

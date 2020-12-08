@@ -62,4 +62,5 @@ export {EyeIcon} from './EyeIcon';
 export {RestoreIcon} from './RestoreIcon';
 export {DoneAllIcon} from './DoneAllIcon';
 export {CloseIcon} from './CloseIcon';
+export {CameraIcon} from './CameraIcon';
 

@@ -9,9 +9,20 @@ const initialState: Categories = {
     list: [{
         id: null,
         name: '',
-        images: {id: null, url: ''},
-        icons: {id: null, url: ''},
-        childs: []
+        images: {
+            id: null,
+            url: {
+                original: ''
+            }
+        },
+        icons: {
+            id: null,
+            url: {
+                original: ''
+            }
+        },
+        childs: [],
+        has_auction: null
     }],
 };
 

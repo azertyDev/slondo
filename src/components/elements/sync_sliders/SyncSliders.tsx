@@ -20,23 +20,30 @@ export const SyncSliders = (props) => {
     return (
         <div className={classes.root}>
             <div className={classes.firstSlider}>
-                <CustomSlider asNavFor={slidersNav.nav2} ref={slider1}>
-                    {props.imgs.map(({id, url, alt}, i) => (
-                        <img src={url} alt={alt} key={i}/>
-                    ))}
+                <CustomSlider
+                    ref={slider1}
+                    asNavFor={slidersNav.nav2}
+                >
+                    {
+                        props.imgs.map(({url, alt}, i) => (
+                            <img src={url} alt={alt} key={i}/>
+                        ))
+                    }
                 </CustomSlider>
-
             </div>
             <div className={classes.secondSlider}>
                 <CustomSlider
-                    asNavFor={slidersNav.nav1}
                     ref={slider2}
-                    slidesToShow={props.imgs.length}
                     focusOnSelect={true}
+                    asNavFor={slidersNav.nav1}
+                    slidesToShow={4}
+                    arrows={false}
                 >
-                    {props.imgs.map(({url, alt}, i) => (
-                        <img src={url} alt={alt} key={i}/>
-                    ))}
+                    {
+                        props.imgs.map(({url, alt}, i) => (
+                            <img src={url} alt={alt} key={i}/>
+                        ))
+                    }
                 </CustomSlider>
             </div>
         </div>

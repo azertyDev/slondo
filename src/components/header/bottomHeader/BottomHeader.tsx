@@ -1,23 +1,19 @@
-import React, {useState} from "react"
-import {AppBar, Container, Grid, Hidden, MenuItem, Select, Typography} from "@material-ui/core"
-import {ButtonComponent} from "@src/components/elements/button/Button"
-import {SearchForm} from "@src/components/elements/search_form/SearchForm"
-import {withScrollThreshold} from "@src/components/hoc/withScrollThreshold"
-import {Link} from '@root/i18n'
-
-// icons
-import {
-    Logo,
-} from '@src/components/elements/icons'
+import React, {useState} from "react";
+import {AppBar, Container, Grid, Hidden, MenuItem, Select, Typography} from "@material-ui/core";
+import {ButtonComponent} from "@src/components/elements/button/Button";
+import {SearchForm} from "@src/components/elements/search_form/SearchForm";
+import {withScrollThreshold} from "@src/components/hoc/withScrollThreshold";
+import {Link, Router} from '@root/i18n';
+import {Logo} from '@src/components/elements/icons';
 import {AddIcon} from "@src/components/elements/icons/AddIcon";
 import {CategorySortIcon} from "@src/components/elements/icons/CategorySortIcon";
 import {SignIcon} from "@src/components/elements/icons/SignIcon";
-
 // styles
-import {useStyles} from "./useStyles"
+import {useStyles} from "./useStyles";
+
 
 const BottomHeader = (props) => {
-    const {isScrollBreak, handleOpenModal, handleCreateAd, isAuth, t} = props;
+    const {isScrollBreak, handleOpenModal, isAuth, t} = props;
 
     const [adType, setAdType] = useState('');
 
@@ -25,12 +21,19 @@ const BottomHeader = (props) => {
         setAdType(e.target.value);
     };
 
+    const forwardToCreateAd = () => {
+        Router.push('/advertisement/create');
+    };
+
     const classes = useStyles(props);
     return (
         <div className={classes.root}>
             <Hidden smDown>
-                <AppBar position={isScrollBreak ? "fixed" : "absolute"} color={"inherit"}
-                        elevation={isScrollBreak ? 1 : 0}>
+                <AppBar
+                    color={"inherit"}
+                    elevation={isScrollBreak ? 1 : 0}
+                    position={isScrollBreak ? "fixed" : "absolute"}
+                >
                     <Container maxWidth='lg'>
                         <Grid container justify="space-between" alignItems="center" spacing={1}>
                             <Grid container item xs={3} alignItems="center">
@@ -83,7 +86,7 @@ const BottomHeader = (props) => {
                             </Grid>
                             <Grid item md={2}>
                                 <ButtonComponent
-                                    onClick={handleCreateAd}
+                                    onClick={forwardToCreateAd}
                                     color='primary'
                                     className='create-ad-button header-button'>
                                     <Typography variant="subtitle2">

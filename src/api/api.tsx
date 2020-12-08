@@ -7,13 +7,20 @@ import {CategoriesDataTypes} from "@root/interfaces/Categories";
 const cookies = new Cookies();
 const {token} = cookies.get('token') || {token: ''};
 
+const productionIP = 'http://54.205.72.116/api/';
+const testingIP = 'http://192.168.1.60/slondo/public/api/';
+
 const instance = Axios.create({
     withCredentials: true,
-    baseURL: 'http://54.205.72.116/api/',
+    baseURL: testingIP,
 });
 
 const config = {
-    headers: {Authorization: `Bearer ${token}`}
+    headers: {
+        'Content-Type': 'multipart/form-data',
+        // 'Authorization': `Bearer ${token}`,
+        "Access-Control-Allow-Origin": "*"
+    }
 };
 
 export const userAPI = {
@@ -66,10 +73,17 @@ export const userAPI = {
             })
     },
     createAdvrt: (data: any): Promise<LocationsDataTypes> => {
-        return instance.post(`regular/ads/new`, data, config)
+        return instance.post(`regular/ads/new`, data)
             .then(res => res.data)
             .catch(err => {
                 throw err
             })
     },
+    getAdTypes: (lang: string) => {
+        return instance.get(`ads/type?lang=${lang}`)
+            .then(res => res.data)
+            .catch(err => {
+                throw err
+            })
+    }
 };
