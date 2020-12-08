@@ -122,12 +122,29 @@ export const useStyles = makeStyles(() => ({
                 justifyContent: 'space-between',
                 marginTop: '30px',
                 '& > div': {
-                    '& > h6.MuiTypography-subtitle1': {
-                        color: '#838383',
-                    },
+                    '& > h6.MuiTypography-subtitle1': {},
                     '& a': {
                         display: 'flex',
                         alignItems: 'center',
+                    },
+                },
+            },
+        },
+        '& div.ad-category': {
+            marginBottom: '40px',
+            '& > p.MuiTypography-button': {
+                marginBottom: 22,
+            },
+            '& > div': {
+                background: '#F2F2F2',
+                borderRadius: '10px',
+                display: 'inline-block',
+                padding: '8px 21px',
+                '& > h6.MuiTypography-subtitle1': {
+                    fontSize: '1.125rem',
+                    '& > span': {
+                        color: '#675EAA',
+                        fontWeight: '600',
                     },
                 },
             },

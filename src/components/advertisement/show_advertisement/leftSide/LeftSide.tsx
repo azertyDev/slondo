@@ -1,8 +1,9 @@
-import React, { useState } from 'react';
-import { Typography } from '@material-ui/core';
+import React, { useState, useRef } from 'react';
+import { Typography, Portal } from '@material-ui/core';
 import { SyncSliders } from '@src/components/elements/sync_sliders/SyncSliders';
 import { ReadMore } from '@src/components/elements/read_more/readMore';
 import { LeftSideModal } from '@src/components/advertisement/show_advertisement/leftSide/left_side_modal/LeftSideModal';
+
 // icons
 import { LocationIcon } from '@src/components/elements/icons/LocationIcon';
 import { WarningIcon } from '@src/components/elements/icons/WarningIcon';
@@ -62,7 +63,7 @@ export const LeftSide = ({ data, parameters, t }) => {
             );
         }
     });
-
+    console.log(data)
     const classes = useStyles();
     return (
         <div className={classes.root}>
@@ -150,6 +151,36 @@ export const LeftSide = ({ data, parameters, t }) => {
                             {data.description}
                         </Typography>
                     </ReadMore>
+
+                    {/* <div>
+                        <Typography variant="subtitle1" color="initial">
+
+                        </Typography>
+                        {show ? (
+                            <Portal container={container.current}>
+                                <Typography variant="subtitle1" color="initial">
+                                    {data.description}
+                                </Typography>
+                            </Portal>
+                        ) : null}
+                    </div>
+                    <div ref={container} />
+                    <button type="button" onClick={handleClick}>
+                        {show ? 'Unmount children' : 'Mount children'}
+                    </button> */}
+                </div>
+            </div>
+            <div className="ad-category">
+                <Typography variant="button" color="initial">
+                    Категория
+                </Typography>
+                <div>
+                    <Typography variant="subtitle1" color="initial">
+                        {data.parent.name} - {data.child.name} -{' '}
+                        <span>
+                            {parameters.type ? parameters.type.name : ''}
+                        </span>
+                    </Typography>
                 </div>
             </div>
             <div className="started-price">
@@ -164,62 +195,7 @@ export const LeftSide = ({ data, parameters, t }) => {
                 <Typography variant="button" color="initial">
                     Параметры
                 </Typography>
-
                 <ul>{parameterItems}</ul>
-
-                {/* <div>
-                    <div>
-                        <Typography variant="subtitle1" color="initial">
-                            Марка
-                        </Typography>
-                    </div>
-                    <div>
-                        <Typography variant="subtitle1" color="initial">
-                            Samsung
-                        </Typography>
-                    </div>
-                </div>
-                <div>
-                    <div>
-                        <Typography variant="subtitle1" color="initial">
-                            Диагональ экрана
-                        </Typography>
-                    </div>
-                    <div>
-                        <Typography variant="subtitle1" color="initial">
-                            16.9
-                        </Typography>
-                    </div>
-                </div>
-                <div>
-                    <div>
-                        <Typography variant="subtitle1" color="initial">
-                            Встроенная память
-                        </Typography>
-                    </div>
-                    <div>
-                        <Typography variant="subtitle1" color="initial">
-                            32 Гб
-                        </Typography>
-                        <Link href="#">
-                            <a>
-                                <Typography variant="subtitle1" color="initial">
-                                    Все параметры
-                                </Typography>
-                            </a>
-                        </Link>
-                    </div>
-                </div> */}
-
-                {/* <ul>
-                    {                    
-                        Object.keys(parameter).map((field,i)=>{
-                            return (
-                                <li key={i}>{field}</li>
-                            )
-                        })
-                    }
-                </ul> */}
             </div>
             <LeftSideModal
                 imgs={data.images}
@@ -232,12 +208,3 @@ export const LeftSide = ({ data, parameters, t }) => {
         </div>
     );
 };
-
-// data[parametersField] = {
-//     age: null
-// brand: {id: 329, name: "Alexander McQueen"}
-// color: null
-// gender: null
-// group: null
-// height: null
-// }

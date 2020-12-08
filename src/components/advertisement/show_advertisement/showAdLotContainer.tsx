@@ -22,11 +22,26 @@ const initialAdData = {
         region: initValues,
         city: initValues,
         district: initValues,
-        ads_type: initValues,
+        ads_type: {
+            id: null,
+            name: '',
+            mark: '',
+        },
         parent: {
             id: null,
             name: '',
             mark: '',
+        },
+        child: {
+            id: null,
+            name: '',
+            mark: '',
+        },
+        auction: {
+            duration: '',
+            display_phone: '',
+            reserve_price: '',
+            price_by_now: '',
         },
     },
 };

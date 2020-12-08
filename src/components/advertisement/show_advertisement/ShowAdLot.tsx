@@ -10,6 +10,7 @@ import { Link } from '@root/i18n';
 
 // styles
 import { useStyles } from './useStyles';
+import { Banner } from '@src/components/elements/banner/Banner';
 
 export const ShowAdLot = (props) => {
     const { adData, parameters, t } = props;
@@ -27,10 +28,17 @@ export const ShowAdLot = (props) => {
                                 <a>{data.parent.name}</a>
                             </Link>
                             <Link href="#">
-                                <a>Мебель и интерьер</a>
+                                <a>{data.child.name}</a>
+                            </Link>
+                            <Link href="#">
+                                <a>
+                                    {parameters.type
+                                        ? parameters.type.name
+                                        : ''}
+                                </a>
                             </Link>
                             <Typography color="primary">
-                                Столовая мебель
+                                {data.title}
                             </Typography>
                         </BreadcrumbsComponent>
                     </div>
@@ -58,7 +66,7 @@ export const ShowAdLot = (props) => {
                             {data.condition.id ? (
                                 <span className="condition">
                                     <Typography variant="h6">
-                                        data.condition.name
+                                        {data.condition.name}
                                     </Typography>
                                 </span>
                             ) : null}
@@ -81,9 +89,9 @@ export const ShowAdLot = (props) => {
                         <Hidden smDown>
                             <Grid item xs={3}>
                                 <RightSide {...props} />
-                                {/*<div className={classes.adBanner}>*/}
-                                {/*    <div className="right-banner"/>*/}
-                                {/*</div>*/}
+                                <div className={classes.adBanner}>
+                                    <Banner height="424px" />
+                                </div>
                             </Grid>
                         </Hidden>
                     </Grid>

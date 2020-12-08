@@ -108,13 +108,7 @@ export const useStyles = makeStyles((theme) => ({
         height: '25px',
     },
     adBanner: {
-        marginTop: '50px',
-        '& > div.right-banner': {
-            width: '100%',
-            height: '470px',
-            borderRadius: '7px',
-            backgroundColor: '#C0C0C0',
-        },
+        marginTop: '55px',
     },
     breadcrumbs: {
         margin: '20px 0',

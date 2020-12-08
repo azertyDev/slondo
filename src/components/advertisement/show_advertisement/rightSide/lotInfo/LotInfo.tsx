@@ -1,34 +1,33 @@
 import React from 'react';
-import {Typography, TextField} from '@material-ui/core';
-import {ButtonComponent} from '@src/components/elements/button/Button';
-import {LockIcon} from '@src/components/elements/icons';
-import {LotTimer} from "@src/components/advertisement/show_advertisement/rightSide/lotInfo/LotTimer";
+import { Typography, TextField } from '@material-ui/core';
+import { ButtonComponent } from '@src/components/elements/button/Button';
+import { LockIcon } from '@src/components/elements/icons';
+import { LotTimer } from '@src/components/advertisement/show_advertisement/rightSide/lotInfo/LotTimer';
 // styles
-import {useStyles} from './useStyles';
-
+import { useStyles } from './useStyles';
 
 export const LotInfo = (props) => {
-    const {adData, t} = props;
-    const {data} = adData;
-    const date = new Date(data.expiration_at).getTime();
-
+    const { adData, t } = props;
+    const { data } = adData;
+    const date = new Date(data.expiration_at).getTime();    
 
     const classes = useStyles();
     return (
         <div className={classes.root}>
             <div className="lot-info">
-                <div className='lot-timer'>
-                    {date !== 0 && <LotTimer {...data} date={date}/>}
+                <div className="lot-timer">
+                    {date !== 0 && <LotTimer date={date} />}
                 </div>
-                <div className='buy-now'>
+                <div className="buy-now">
                     <div>
-                        <LockIcon/>
+                        <LockIcon />
                         <div>
                             <Typography variant="subtitle2" color="initial">
                                 Резервная цена:
                             </Typography>
                             <Typography variant="h6" color="initial">
-                                1 420 000 сум
+                                {data.auction.reserve_price}{' '}
+                                {data.currency.name}
                             </Typography>
                         </div>
                     </div>
@@ -93,8 +92,8 @@ export const LotInfo = (props) => {
 
                 <div className="bet-info">
                     <div>
-                        <TextField placeholder="14200000" variant='outlined'/>
-                        <ButtonComponent color='secondary'>
+                        <TextField placeholder="14200000" variant="outlined" />
+                        <ButtonComponent color="secondary">
                             <Typography variant="subtitle1" color="initial">
                                 Сделать ставку
                             </Typography>
