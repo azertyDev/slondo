@@ -51,10 +51,13 @@ export const LeftSide = ({ data, parameters, t }) => {
             parameters[key] !== null &&
             excludedFields.every((k) => k !== key)
         ) {
-            if (Array.isArray(parameters[key])) {
+            if (
+                Array.isArray(parameters[key]) &&
+                parameters[key].lenght !== 0
+            ) {
                 const params = parameters[key].map((param) => {
                     return (
-                        <li>
+                        <li key={param.id}>
                             <Typography variant="subtitle1" className="value">
                                 {param.name}
                             </Typography>
@@ -75,7 +78,8 @@ export const LeftSide = ({ data, parameters, t }) => {
                             {t(`${key}`)}
                         </Typography>
                         <Typography variant="subtitle1" className="value">
-                            {typeof parameters[key] === 'string'
+                            {typeof parameters[key] === 'string' ||
+                            typeof parameters[key] === 'number'
                                 ? parameters[key]
                                 : parameters[key].name}
                         </Typography>
