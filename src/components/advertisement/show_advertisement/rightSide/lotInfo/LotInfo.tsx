@@ -9,36 +9,40 @@ import { useStyles } from './useStyles';
 export const LotInfo = (props) => {
     const { adData, t } = props;
     const { data } = adData;
-    const date = new Date(data.expiration_at).getTime();    
+    const date = new Date(data.expiration_at).getTime();
 
     const classes = useStyles();
     return (
         <div className={classes.root}>
             <div className="lot-info">
-                <div className="lot-timer">
-                    {date !== 0 && <LotTimer date={date} />}
-                </div>
-                <div className="buy-now">
-                    <div>
-                        <LockIcon />
+                {data.ads_type.mark !== 'regular' ?? (
+                    <div className="lot-timer">
+                        {date !== 0 && <LotTimer date={date} />}
+                    </div>
+                )}
+                {data.auction ? (
+                    <div className="buy-now">
                         <div>
-                            <Typography variant="subtitle2" color="initial">
-                                Резервная цена:
-                            </Typography>
-                            <Typography variant="h6" color="initial">
-                                {data.auction.reserve_price}{' '}
-                                {data.currency.name}
-                            </Typography>
+                            <LockIcon />
+                            <div>
+                                <Typography variant="subtitle2" color="initial">
+                                    Резервная цена:
+                                </Typography>
+                                <Typography variant="h6" color="initial">
+                                    {data.auction.reserve_price}{' '}
+                                    {data.currency.name}
+                                </Typography>
+                            </div>
+                        </div>
+                        <div>
+                            <ButtonComponent>
+                                <Typography variant="subtitle1" color="initial">
+                                    Купить сейчас
+                                </Typography>
+                            </ButtonComponent>
                         </div>
                     </div>
-                    <div>
-                        <ButtonComponent>
-                            <Typography variant="subtitle1" color="initial">
-                                Купить сейчас
-                            </Typography>
-                        </ButtonComponent>
-                    </div>
-                </div>
+                ) : null}
                 <div className="lot-participants-block">
                     <Typography variant="subtitle1" color="initial">
                         Текущие ставки
@@ -89,7 +93,6 @@ export const LotInfo = (props) => {
                         Все ставки
                     </Typography>
                 </div>
-
                 <div className="bet-info">
                     <div>
                         <TextField placeholder="14200000" variant="outlined" />

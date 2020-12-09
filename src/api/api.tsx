@@ -8,11 +8,11 @@ import {CategoryType} from "@root/interfaces/Categories";
 // const {token} = cookies.get('token') || {token: ''};
 
 const amazonServer = 'http://54.205.72.116/api/';
-// const localServer = 'http://192.168.1.60/slondo/public/api/';
+const localServer = 'http://192.168.1.60/slondo/public/api/';
 
 const instance = Axios.create({
     withCredentials: true,
-    baseURL: amazonServer,
+    baseURL: localServer,
 });
 
 // const config = {
