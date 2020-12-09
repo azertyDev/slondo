@@ -1,18 +1,19 @@
 import React, {useEffect, useState} from 'react';
 import {CategoriesSlider} from "@src/components/header/sliders/categoriesSlider/CategoriesSlider";
-import {Categories, SliderListType} from "@root/interfaces/Categories";
+import {Categories, CategoryType} from "@root/interfaces/Categories";
 import {userAPI} from "@src/api/api";
 import {i18n} from "@root/i18n";
 
-const sliderDataList: SliderListType = {
+const sliderDataList: CategoryType = {
     id: null,
     name: '',
-    images: {id: null, url: ''},
-    icons: {id: null, url: ''},
-    childs: []
+    images: {id: null, url: {extra: ''}},
+    icons: {id: null, url: {extra: ''}},
+    childs: [],
+    has_auction: false
 }
 
-const initSliders: SliderListType[] = [];
+const initSliders: CategoryType[] = [];
 
 for (let i = 1; i <= 12; i++) {
     initSliders.push(sliderDataList);

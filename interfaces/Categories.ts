@@ -1,27 +1,27 @@
 export interface Categories {
     isFetch: boolean;
     error?: unknown;
-    list: CategoriesDataTypes;
+    list: CategoryType[];
 }
 
-export type CategoriesDataTypes = Array<{
+export type CategoryType = {
     id: number;
     name: string;
     images: {
         id: number;
         url: {
-            original: ''
+            extra: ''
         }
     };
     icons: {
         id: number;
         url: {
-            original: ''
+            extra: ''
         }
     };
     childs: [];
-    has_auction: number;
-}>
+    has_auction: boolean;
+}
 
 export interface CategoryIDs {
     ctgryID: number;

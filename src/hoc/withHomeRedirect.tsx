@@ -12,8 +12,6 @@ export const withHomeRedirect = (Component: ComponentType<any>) => {
             !isAuth && Router.push('/');
         }, [isAuth]);
 
-        return (
-            <Component/>
-        )
+        return <Component/>
     }
 };

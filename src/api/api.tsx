@@ -1,28 +1,27 @@
 import Axios from 'axios';
-import Cookies from 'universal-cookie';
+// import Cookies from 'universal-cookie';
 import {LocationsDataTypes} from "@root/interfaces/Locations";
-import {CategoriesDataTypes} from "@root/interfaces/Categories";
+import {CategoryType} from "@root/interfaces/Categories";
 
 
-const cookies = new Cookies();
-const {token} = cookies.get('token') || {token: ''};
+// const cookies = new Cookies();
+// const {token} = cookies.get('token') || {token: ''};
 
-const productionIP = 'http://54.205.72.116/api/';
-const testingIP = 'http://192.168.1.60/slondo/public/api/';
+const amazonServer = 'http://54.205.72.116/api/';
+// const localServer = 'http://192.168.1.60/slondo/public/api/';
 
 const instance = Axios.create({
     withCredentials: true,
-    baseURL: testingIP,
+    baseURL: amazonServer,
 });
 
-
-const config = {
-    headers: {
-        'Content-Type': 'multipart/form-data',
-        // 'Authorization': `Bearer ${token}`,
-        "Access-Control-Allow-Origin": "*"
-    }
-};
+// const config = {
+//     headers: {
+//         'Content-Type': 'multipart/form-data',
+//         // 'Authorization': `Bearer ${token}`,
+//         "Access-Control-Allow-Origin": "*"
+//     }
+// };
 
 export const userAPI = {
     login: (phone: string, password: string): Promise<unknown> => {
@@ -38,7 +37,7 @@ export const userAPI = {
                 throw err;
             });
     },
-    getCategories: (lang: string): Promise<CategoriesDataTypes> => {
+    getCategories: (lang: string): Promise<CategoryType[]> => {
         return instance.get(`categories/main?lang=${lang}`)
             .then(res => res.data)
             .catch(err => {
@@ -59,7 +58,7 @@ export const userAPI = {
                 throw err;
             });
     },
-    getAddById: (ads_id: any, lang: string): Promise<any> => {
+    getAddById: (ads_id, lang): Promise<any> => {
         return instance.get(`getAddById?ads_id=${ads_id}&lang=${lang}`)
             .then((res) => res.data)
             .catch((err) => {

@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
-import { Container, Grid, Typography, Tabs, Tab } from '@material-ui/core';
-import { CabinetCard } from '@src/components/cabinet/card/CabinetCard';
-import { Notification } from '@src/components/cabinet/notification/Notification';
-import { CabinetSidebar } from '@src/components/cabinet/cabinet_sidebar/CabinetSidebar';
+import React, {useState} from 'react';
+import {Container, Grid, Typography, Tabs, Tab} from '@material-ui/core';
+import {CabinetCard} from './card/CabinetCard';
+import {Notification} from '@src/components/cabinet/notification/Notification';
+import {CabinetSidebar} from '@src/components/cabinet/cabinet_sidebar/CabinetSidebar';
 // styles
 import { useStyles } from './useStyles';
 
@@ -68,7 +68,7 @@ export const Cabinet = (props) => {
                             </Tabs>
                         </Grid>
                         <TabPanel value={value} index={0}>
-                            <CabinetCard />
+                            <CabinetCard/>
                         </TabPanel>
                         <TabPanel value={value} index={1}>
                             <Notification />
@@ -76,9 +76,9 @@ export const Cabinet = (props) => {
                             <Notification />
                         </TabPanel>
                         <TabPanel value={value} index={2}>
-                            <CabinetCard />
-                            <CabinetCard />
-                            <CabinetCard />
+                            <CabinetCard/>
+                            <CabinetCard/>
+                            <CabinetCard/>
                         </TabPanel>
                     </Grid>
                 </Grid>

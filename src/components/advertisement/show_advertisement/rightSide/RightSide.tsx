@@ -1,7 +1,6 @@
 import React from 'react';
-import { LotInfo } from '@src/components/advertisement/show_advertisement/rightSide/lotInfo/LotInfo';
-import { UserInfo } from '@src/components/advertisement/show_advertisement/rightSide/userinfo/UserInfo';
-
+import {LotInfo} from './lotInfo/LotInfo';
+import {UserInfo} from './userinfo/UserInfo';
 // styles
 import { useStyles } from './useStyles';
 

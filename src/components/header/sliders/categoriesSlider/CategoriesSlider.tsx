@@ -20,28 +20,24 @@ export const CategoriesSlider: FC<WithT & { sliderData: Categories }> = (props) 
                 <CustomSlider {...settings}>
                     {
                         sliderData.error
-                            ? (
-                                <Typography className="error-text">{sliderData.error}</Typography>
-                            )
-                            : (
-                                sliderData.list.map(category => (
-                                        <Link href="#" key={category.id}>
-                                            <a title={category.name}>
-                                                {sliderData.isFetch ? (
+                            ? <Typography className="error-text">{sliderData.error}</Typography>
+                            : sliderData.list.map(category => (
+                                <Link href="#" key={category.id}>
+                                    <a title={category.name}>
+                                        {
+                                            sliderData.isFetch
+                                                ? <>
                                                     <Skeleton variant="circle" width={100} height={100}/>
-                                                ) : (
-                                                    <img src={category.images.url.original} alt="category"/>
-                                                )}
-                                                {sliderData.isFetch ? (
                                                     <Skeleton variant="text"/>
-                                                ) : (
+                                                </>
+                                                : <>
+                                                    <img src={category.images.url.extra} alt="category"/>
                                                     <Typography>{category.name}</Typography>
-                                                )}
-                                            </a>
-                                        </Link>
-                                    )
-                                )
-                            )
+                                                </>
+                                        }
+                                    </a>
+                                </Link>
+                            ))
                     }
                 </CustomSlider>
             </div>

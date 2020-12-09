@@ -12,7 +12,7 @@ export type InnerCardData = {
     title: string;
     cardType: string;
     safe_deal: number;
-    price: number;
+    price: string;
     location: string;
     currency: {
         id: number;

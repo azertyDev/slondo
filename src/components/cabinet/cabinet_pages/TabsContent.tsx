@@ -1,5 +1,9 @@
 import React, {useState} from 'react';
+<<<<<<< HEAD
 import {Grid, Tabs, Typography, Tab} from "@material-ui/core";
+=======
+import {Grid, Tabs, Tab, Typography} from "@material-ui/core";
+>>>>>>> master
 import {CustomTabPanel} from "@src/components/elements/custom_tab_panel/CustomTabPanel";
 import {CabinetMenuWrapper} from "@src/components/cabinet/CabinetMenuWrapper";
 // styles
@@ -29,7 +33,7 @@ export const TabsContent = ({tabsData, headerTitle, title, t}) => {
                                     {`${tabsData[0].title} (${tabsData[0].count})`}
                                 </Typography>
                             }
-                            id={0}
+                            value={0}
                         />
                         <Tab
                             label={
@@ -37,7 +41,7 @@ export const TabsContent = ({tabsData, headerTitle, title, t}) => {
                                     {`${tabsData[1].title} (${tabsData[1].count})`}
                                 </Typography>
                             }
-                            id={1}
+                            value={1}
                         />
                     </Tabs>
                 </Grid>
