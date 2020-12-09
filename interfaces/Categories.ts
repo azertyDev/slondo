@@ -10,13 +10,13 @@ export type CategoryType = {
     images: {
         id: number;
         url: {
-            extra: ''
+            default: ''
         }
     };
     icons: {
         id: number;
         url: {
-            extra: ''
+            default: ''
         }
     };
     childs: [];
