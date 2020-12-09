@@ -1,4 +1,4 @@
-import { makeStyles } from '@material-ui/core/styles';
+import {makeStyles} from '@material-ui/core/styles';
 
 export const useStyles = makeStyles(() => ({
     root: {
@@ -122,12 +122,29 @@ export const useStyles = makeStyles(() => ({
                 justifyContent: 'space-between',
                 marginTop: '30px',
                 '& > div': {
-                    '& > h6.MuiTypography-subtitle1': {
-                        color: '#838383',
-                    },
+                    '& > h6.MuiTypography-subtitle1': {},
                     '& a': {
                         display: 'flex',
                         alignItems: 'center',
+                    },
+                },
+            },
+        },
+        '& div.ad-category': {
+            marginBottom: '40px',
+            '& > p.MuiTypography-button': {
+                marginBottom: 22,
+            },
+            '& > div': {
+                background: '#F2F2F2',
+                borderRadius: '10px',
+                display: 'inline-block',
+                padding: '8px 21px',
+                '& > h6.MuiTypography-subtitle1': {
+                    fontSize: '1.125rem',
+                    '& > span': {
+                        color: '#675EAA',
+                        fontWeight: '600',
                     },
                 },
             },
@@ -151,20 +168,43 @@ export const useStyles = makeStyles(() => ({
             '& p.MuiTypography-button': {
                 marginBottom: '22px',
             },
-
+            '& > ul > div.params-list': {
+                display: 'flex',
+                alignItems: 'center',
+                marginBottom: '20px',
+                borderBottom: '1px solid #ccc',
+                paddingBottom: '5px',
+                '& > h6.MuiTypography-subtitle1': {
+                    width: '20%',
+                    display: 'inline-block',
+                },
+                '& > ul': {
+                    padding: 0,
+                    listStyle: 'none',
+                    '& > li': {
+                        '& > h6.MuiTypography-subtitle1': {
+                            fontSize: '18px',
+                            fontWeight: '600',
+                        },
+                    },
+                },
+            },
             '& > ul': {
+                margin: 0,
                 '& > li': {
                     listStyle: 'none',
                     display: 'flex',
                     marginBottom: 20,
+                    borderBottom: '1px solid #ccc',
+                    paddingBottom: '5px',
                     '&:last-child': {
                         margin: 0,
                     },
-                    '& div.key': {
+                    '& h6.key': {
                         width: '20%',
                         fontSize: '18px',
                     },
-                    '& div.value': {
+                    '& h6.value': {
                         width: '20%',
                         fontSize: '18px',
                         fontWeight: '600',
