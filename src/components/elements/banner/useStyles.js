@@ -10,9 +10,10 @@ export const useStyles = makeStyles(() => ({
             alignItems: 'center',
             justifyContent: 'center',
             background: '#F2F2F2',
+            borderRadius: '10px',
             '& > h5.MuiTypography-h5': {
                 color: '#7DBCF6',
-                fontWeight: '600'
+                fontWeight: '600',
             },
         },
     },

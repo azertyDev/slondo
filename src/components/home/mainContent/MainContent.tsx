@@ -142,7 +142,7 @@ export const MainContent: FC<MainContentProps> = (props) => {
                         className={classes.adBanner}
                     >
                         <Grid item>
-                            <Banner height="300px"/>
+                            <Banner height="345px"/>
                         </Grid>
                     </Grid>
                 </Hidden>
