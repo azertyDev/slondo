@@ -100,7 +100,7 @@ export const TopHeader = (props) => {
                             <Grid className="top-header-logo">
                                 <Link href="/">
                                     <a>
-					 <Logo/>
+                                        <Logo/>
                                     </a>
                                 </Link>
                             </Grid>

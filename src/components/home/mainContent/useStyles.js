@@ -1,4 +1,4 @@
-import {makeStyles} from '@material-ui/core/styles';
+import { makeStyles } from '@material-ui/core/styles';
 
 export const useStyles = makeStyles((theme) => ({
     root: {
@@ -19,10 +19,9 @@ export const useStyles = makeStyles((theme) => ({
                     // minHeight: 20,
                 },
                 '& button.MuiTab-textColorInherit': {
-                    opacity: 1
-
+                    opacity: 1,
                 },
-            }
+            },
         },
         '& div.cards-container': {
             marginTop: '40px',
@@ -32,16 +31,16 @@ export const useStyles = makeStyles((theme) => ({
                 backgroundColor: 'rgba(136, 202, 236, .65)',
             },
             '& > div > div> a': {
-                textDecoration: 'none'
-            }
+                textDecoration: 'none',
+            },
         },
         '& div.lots-wrapper': {
             '& div.card-header > div > h6.MuiTypography-subtitle2': {
                 backgroundColor: 'rgba(173, 102, 213, .65)',
             },
             '& > div > div> a': {
-                textDecoration: 'none'
-            }
+                textDecoration: 'none',
+            },
         },
     },
     showMoreContainer: {
@@ -70,10 +69,6 @@ export const useStyles = makeStyles((theme) => ({
     },
     adBanner: {
         paddingLeft: '20px',
-        '& > div > div': {
-            borderRadius: '7px',
-            backgroundColor: '#C0C0C0',
-        },
         '& div.top-banner': {
             height: '250px',
         },
@@ -83,6 +78,7 @@ export const useStyles = makeStyles((theme) => ({
         },
         '& div.bottom-banner': {
             height: '250px',
+            borderRadius: '10px',
         },
     },
 }));

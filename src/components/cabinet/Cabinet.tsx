@@ -4,27 +4,26 @@ import {CabinetCard} from './card/CabinetCard';
 import {Notification} from '@src/components/cabinet/notification/Notification';
 import {CabinetSidebar} from '@src/components/cabinet/cabinet_sidebar/CabinetSidebar';
 // styles
-import {useStyles} from './useStyles';
-
+import { useStyles } from './useStyles';
 
 const TabPanel = (props) => {
-    const {children, value, index, ...other} = props
+    const { children, value, index, ...other } = props;
 
     return (
         <div hidden={value !== index} {...other}>
             {value === index && children}
         </div>
-    )
-}
+    );
+};
 
 export const Cabinet = (props) => {
-    const [value, setValue] = useState(0)
+    const [value, setValue] = useState(0);
 
     const handleChange = (event, newValue) => {
-        setValue(newValue)
-    }
+        setValue(newValue);
+    };
 
-    const classes = useStyles()
+    const classes = useStyles();
     return (
         <div className={classes.root}>
             <Container maxWidth="lg">
@@ -33,7 +32,7 @@ export const Cabinet = (props) => {
                         <CabinetSidebar {...props} />
                     </Grid>
                     <Grid item xs={9}>
-                        <Typography variant='h6' className='menu-title'>
+                        <Typography variant="h6" className="menu-title">
                             Мои объявления
                         </Typography>
                         <Grid item xs={9}>
@@ -72,9 +71,9 @@ export const Cabinet = (props) => {
                             <CabinetCard/>
                         </TabPanel>
                         <TabPanel value={value} index={1}>
-                            <Notification/>
-                            <Notification/>
-                            <Notification/>
+                            <Notification />
+                            <Notification />
+                            <Notification />
                         </TabPanel>
                         <TabPanel value={value} index={2}>
                             <CabinetCard/>
@@ -85,5 +84,5 @@ export const Cabinet = (props) => {
                 </Grid>
             </Container>
         </div>
-    )
-}
+    );
+};

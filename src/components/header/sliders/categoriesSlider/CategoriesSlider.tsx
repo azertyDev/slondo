@@ -11,7 +11,7 @@ import {Categories} from "@root/interfaces/Categories";
 
 export const CategoriesSlider: FC<WithT & { sliderData: Categories }> = (props) => {
     const {t, sliderData} = props;
-
+    console.log(sliderData)
     const classes = useStyles();
     return (
         <div className={classes.root}>
@@ -20,28 +20,28 @@ export const CategoriesSlider: FC<WithT & { sliderData: Categories }> = (props) 
                 <CustomSlider {...settings}>
                     {
                         sliderData.error
-                            ? (
-                                <Typography className="error-text">{sliderData.error}</Typography>
-                            )
-                            : (
-                                sliderData.list.map(category => (
-                                        <Link href="#" key={category.id}>
-                                            <a title={category.name}>
-                                                {sliderData.isFetch ? (
+                            ? <Typography className="error-text">{sliderData.error}</Typography>
+                            : sliderData.list.map(category => (
+                                <Link href="#" key={category.id}>
+                                    <a title={category.name}>
+                                        {
+                                            sliderData.isFetch
+                                                ? <>
                                                     <Skeleton variant="circle" width={100} height={100}/>
                                                 ) : (
                                                     <img src={category.images.url.extra} alt="category"/>
                                                 )}
                                                 {sliderData.isFetch ? (
                                                     <Skeleton variant="text"/>
-                                                ) : (
+                                                </>
+                                                : <>
+                                                    <img src={category.images.url.default} alt="category"/>
                                                     <Typography>{category.name}</Typography>
-                                                )}
-                                            </a>
-                                        </Link>
-                                    )
-                                )
-                            )
+                                                </>
+                                        }
+                                    </a>
+                                </Link>
+                            ))
                     }
                 </CustomSlider>
             </div>

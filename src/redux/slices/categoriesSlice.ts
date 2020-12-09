@@ -12,13 +12,13 @@ const initialState: Categories = {
         images: {
             id: null,
             url: {
-                extra: ''
+                default: ''
             }
         },
         icons: {
             id: null,
             url: {
-                extra: ''
+                default: ''
             }
         },
         childs: [],

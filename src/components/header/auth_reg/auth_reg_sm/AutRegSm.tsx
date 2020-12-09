@@ -37,7 +37,7 @@ export const AuthRegSm = (props) => {
                         <div className={classes.authForm}>
                             <div className='btns-wrapper'>
                                 <PrevArrowIcon onClick={handleBack}/>
-                               {/*<CloseIcon onClick={handleCloseModal}/>*/}
+                                {/*<CloseIcon onClick={handleCloseModal}/>*/}
                             </div>
                             <AuthRegForm
                                 t={t}

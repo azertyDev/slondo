@@ -1,19 +1,21 @@
-import React, { useState } from 'react';
-import { Typography } from '@material-ui/core';
-import { SyncSliders } from '@src/components/elements/sync_sliders/SyncSliders';
-import { ReadMore } from '@src/components/elements/read_more/readMore';
-import { LeftSideModal } from '@src/components/advertisement/show_advertisement/leftSide/left_side_modal/LeftSideModal';
-// icons
-import { LocationIcon } from '@src/components/elements/icons/LocationIcon';
-import { WarningIcon } from '@src/components/elements/icons/WarningIcon';
-import { PhoneIcon } from '@src/components/elements/icons/PhoneIcon';
-import { SwapIcon } from '@src/components/elements/icons/SwapIcon';
-import { SafeIcon } from '@src/components/elements/icons/SafeIcon';
-import { DeliveryIcon } from '@src/components/elements/icons/DeliveryIcon';
-// styles
-import { useStyles } from './useStyles';
+import React, {useState} from 'react';
+import {Typography} from '@material-ui/core';
+import {SyncSliders} from '@src/components/elements/sync_sliders/SyncSliders';
+import {ReadMore} from '@src/components/elements/read_more/readMore';
+import {LeftSideModal} from '@src/components/advertisement/show_advertisement/leftSide/left_side_modal/LeftSideModal';
 
-export const LeftSide = ({ data, parameters, t }) => {
+// icons
+import {LocationIcon} from '@src/components/elements/icons/LocationIcon';
+import {WarningIcon} from '@src/components/elements/icons/WarningIcon';
+import {PhoneIcon} from '@src/components/elements/icons/PhoneIcon';
+import {SwapIcon} from '@src/components/elements/icons/SwapIcon';
+import {SafeIcon} from '@src/components/elements/icons/SafeIcon';
+import {DeliveryIcon} from '@src/components/elements/icons/DeliveryIcon';
+// styles
+import {useStyles} from './useStyles';
+
+
+export const LeftSide = ({data, parameters, t}) => {
     const [currentSlide, setCurrentSlide] = useState(0);
     const [open, setOpen] = useState(false);
 
@@ -42,24 +44,46 @@ export const LeftSide = ({ data, parameters, t }) => {
     const handleShowModal = (value) => () => {
         setOpen(value);
     };
-
+    console.log(data)
     const excludedFields = ['id', 'uniqid', 'color_id'];
 
     const parameterItems = Object.keys(parameters).map((key, i) => {
-        if (
-            parameters[key] !== null &&
-            excludedFields.every((k) => k !== key)
-        ) {
-            return (
-                <li key={i}>
-                    <div className="key">{t(`advrt:${key}`)}</div>
-                    <div className="value">
-                        {typeof parameters[key] === 'string'
-                            ? parameters[key]
-                            : parameters[key].name}
+        if (parameters[key] !== null && excludedFields.every((k) => k !== key)) {
+
+            if (Array.isArray(parameters[key]) && parameters[key].length !== 0) {
+                const params = parameters[key].map((param, i) => {
+                    return (
+                        <li key={i}>
+                            <Typography variant="subtitle1" className="value">
+                                {param.name}
+                            </Typography>
+                        </li>
+                    );
+                });
+
+                return (
+                    <div key={i} className="params-list">
+                        <Typography variant="subtitle1">{key}</Typography>
+                        <ul>{params}</ul>
                     </div>
-                </li>
-            );
+                );
+            } else if (!Array.isArray(parameters[key])) {
+                return (
+                    <li key={key}>
+                        <Typography variant="subtitle1" className="key">
+                            {t(`${key}`)}
+                        </Typography>
+                        <Typography variant="subtitle1" className="value">
+                            {
+                                typeof parameters[key] === 'string' ||
+                                typeof parameters[key] === 'number'
+                                    ? parameters[key]
+                                    : parameters[key].name
+                            }
+                        </Typography>
+                    </li>
+                );
+            }
         }
     });
 
@@ -87,13 +111,13 @@ export const LeftSide = ({ data, parameters, t }) => {
                     Просмотров: {data.number_of_views}
                 </Typography>
                 <Typography variant="subtitle1">
-                    Пожаловаться <WarningIcon />
+                    Пожаловаться <WarningIcon/>
                 </Typography>
             </div>
             <div className="ad-bonus">
                 {data.delivery ? (
                     <span className="delivery">
-                        <DeliveryIcon />{' '}
+                        <DeliveryIcon/>{' '}
                         <Typography variant="subtitle1">
                             Есть доставка
                         </Typography>
@@ -101,7 +125,7 @@ export const LeftSide = ({ data, parameters, t }) => {
                 ) : null}
                 {data.safe_deal ? (
                     <span className="safe_deal">
-                        <SafeIcon />{' '}
+                        <SafeIcon/>{' '}
                         <Typography variant="subtitle1">
                             Безопасная покупка
                         </Typography>
@@ -109,7 +133,7 @@ export const LeftSide = ({ data, parameters, t }) => {
                 ) : null}
                 {data.exchange ? (
                     <span className="exchange">
-                        <SwapIcon />{' '}
+                        <SwapIcon/>{' '}
                         <Typography variant="subtitle1">
                             Возможен обмен
                         </Typography>
@@ -117,7 +141,7 @@ export const LeftSide = ({ data, parameters, t }) => {
                 ) : null}
                 {data.available_start_time ? (
                     <span className="available">
-                        <PhoneIcon />{' '}
+                        <PhoneIcon/>{' '}
                         <Typography variant="subtitle1">
                             {data.available_start_time}-
                             {data.available_end_time}
@@ -131,7 +155,7 @@ export const LeftSide = ({ data, parameters, t }) => {
                 </Typography>
                 {data.region.name || data.city.name || data.district.name ? (
                     <Typography variant="subtitle1" noWrap>
-                        <LocationIcon />
+                        <LocationIcon/>
                         {`${data.region.name ?? ''}`}
                         {data.city.name ? `, ${data.city.name}` : ''}
                         {data.district.name ? `, ${data.district.name}` : ''}
@@ -152,6 +176,19 @@ export const LeftSide = ({ data, parameters, t }) => {
                     </ReadMore>
                 </div>
             </div>
+            <div className="ad-category">
+                <Typography variant="button" color="initial">
+                    Категория
+                </Typography>
+                <div>
+                    <Typography variant="subtitle1" color="initial">
+                        {data.parent.name} - {data.child.name} -{' '}
+                        <span>
+                            {parameters.type ? parameters.type.name : ''}
+                        </span>
+                    </Typography>
+                </div>
+            </div>
             <div className="started-price">
                 <Typography variant="button">Стартовая цена</Typography>
                 <span>
@@ -164,7 +201,6 @@ export const LeftSide = ({ data, parameters, t }) => {
                 <Typography variant="button" color="initial">
                     Параметры
                 </Typography>
-
                 <ul>{parameterItems}</ul>
             </div>
             <LeftSideModal

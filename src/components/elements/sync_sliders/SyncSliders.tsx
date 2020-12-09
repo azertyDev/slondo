@@ -35,7 +35,7 @@ export const SyncSliders = (props) => {
                 >
                     {props.imgs.map(({url, alt}, i) => (
                         <img
-                            src={url.original}
+                            src={url.default}
                             alt={alt}
                             key={i}
                             onClick={props.handleOpenModal}
@@ -53,7 +53,7 @@ export const SyncSliders = (props) => {
                     swipeToSlide={true}
                 >
                     {props.imgs.map(({url, alt}, i) => (
-                        <img src={url.small} alt={alt} key={i}/>
+                        <img src={url.default} alt={alt} key={i}/>
                     ))}
                 </CustomSlider>
             </div>

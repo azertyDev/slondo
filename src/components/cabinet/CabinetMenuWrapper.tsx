@@ -5,6 +5,7 @@ import {CabinetSidebar} from './cabinet_sidebar/CabinetSidebar';
 // styles
 import {useStyles} from './useStyles';
 
+
 export const CabinetMenuWrapper = ({children, title, headerTitle, t}) => {
 
     const classes = useStyles()

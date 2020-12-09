@@ -24,6 +24,7 @@ import { useStyles } from './useStyles';
 import { ButtonComponent } from '@src/components/elements/button/Button';
 
 export const CabinetCard = (props) => {
+    
     const classes = useStyles();
     return (
         <div className={classes.root}>

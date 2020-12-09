@@ -9,7 +9,7 @@ const dev = process.env.NODE_ENV !== 'production'
 const app = next({dev})
 const handle = app.getRequestHandler()
 
-console.log('is dev mode: ' + dev)
+console.log('dev mode: ' + dev)
 
 app.prepare().then(() => {
     createServer((req, res) => {
