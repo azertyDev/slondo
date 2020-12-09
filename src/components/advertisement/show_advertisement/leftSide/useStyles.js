@@ -168,20 +168,43 @@ export const useStyles = makeStyles(() => ({
             '& p.MuiTypography-button': {
                 marginBottom: '22px',
             },
-
+            '& > ul > div.params-list': {
+                display: 'flex',
+                alignItems: 'center',
+                marginBottom: '20px',
+                borderBottom: '1px solid #ccc',
+                paddingBottom: '5px',
+                '& > h6.MuiTypography-subtitle1': {
+                    width: '20%',
+                    display: 'inline-block',
+                },
+                '& > ul': {
+                    padding: 0,
+                    listStyle: 'none',
+                    '& > li': {
+                        '& > h6.MuiTypography-subtitle1': {
+                            fontSize: '18px',
+                            fontWeight: '600',
+                        },
+                    },
+                },
+            },
             '& > ul': {
+                margin: 0,
                 '& > li': {
                     listStyle: 'none',
                     display: 'flex',
                     marginBottom: 20,
+                    borderBottom: '1px solid #ccc',
+                    paddingBottom: '5px',
                     '&:last-child': {
                         margin: 0,
                     },
-                    '& div.key': {
+                    '& h6.key': {
                         width: '20%',
                         fontSize: '18px',
                     },
-                    '& div.value': {
+                    '& h6.value': {
                         width: '20%',
                         fontSize: '18px',
                         fontWeight: '600',

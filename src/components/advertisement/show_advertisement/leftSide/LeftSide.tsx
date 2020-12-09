@@ -51,16 +51,37 @@ export const LeftSide = ({ data, parameters, t }) => {
             parameters[key] !== null &&
             excludedFields.every((k) => k !== key)
         ) {
-            return (
-                <li key={i}>
-                    <div className="key">{t(`advrt:${key}`)}</div>
-                    <div className="value">
-                        {typeof parameters[key] === 'string'
-                            ? parameters[key]
-                            : parameters[key].name}
+            if (Array.isArray(parameters[key])) {
+                const params = parameters[key].map((param) => {
+                    return (
+                        <li>
+                            <Typography variant="subtitle1" className="value">
+                                {param.name}
+                            </Typography>
+                        </li>
+                    );
+                });
+
+                return (
+                    <div className="params-list">
+                        <Typography variant="subtitle1">{key}</Typography>
+                        <ul>{params}</ul>
                     </div>
-                </li>
-            );
+                );
+            } else {
+                return (
+                    <li key={i}>
+                        <Typography variant="subtitle1" className="key">
+                            {t(`${key}`)}
+                        </Typography>
+                        <Typography variant="subtitle1" className="value">
+                            {typeof parameters[key] === 'string'
+                                ? parameters[key]
+                                : parameters[key].name}
+                        </Typography>
+                    </li>
+                );
+            }
         }
     });
 

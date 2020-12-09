@@ -225,7 +225,9 @@ export const AdvrtFormContainer: FC<any> = (props) => {
             });
         }
     };
-    console.log(errors)
+    console.log(createAdvrt);
+    console.log(values);
+    
     return (
         <FormikProvider value={formik}>
             <form onSubmit={handleSubmit}>

@@ -37,7 +37,6 @@ export const SocialsBlock = (props) => {
                         <TelegramIcon />
                     </a>
                 </Link>
-
             </div>
         </div>
     )
