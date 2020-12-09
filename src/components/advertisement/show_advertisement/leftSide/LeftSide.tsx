@@ -1,21 +1,21 @@
-import React, { useState } from 'react';
-import { Typography } from '@material-ui/core';
-import { SyncSliders } from '@src/components/elements/sync_sliders/SyncSliders';
-import { ReadMore } from '@src/components/elements/read_more/readMore';
-import { LeftSideModal } from '@src/components/advertisement/show_advertisement/leftSide/left_side_modal/LeftSideModal';
+import React, {useState} from 'react';
+import {Typography} from '@material-ui/core';
+import {SyncSliders} from '@src/components/elements/sync_sliders/SyncSliders';
+import {ReadMore} from '@src/components/elements/read_more/readMore';
+import {LeftSideModal} from '@src/components/advertisement/show_advertisement/leftSide/left_side_modal/LeftSideModal';
 
 // icons
-import { LocationIcon } from '@src/components/elements/icons/LocationIcon';
-import { WarningIcon } from '@src/components/elements/icons/WarningIcon';
-import { PhoneIcon } from '@src/components/elements/icons/PhoneIcon';
-import { SwapIcon } from '@src/components/elements/icons/SwapIcon';
-import { SafeIcon } from '@src/components/elements/icons/SafeIcon';
-import { DeliveryIcon } from '@src/components/elements/icons/DeliveryIcon';
+import {LocationIcon} from '@src/components/elements/icons/LocationIcon';
+import {WarningIcon} from '@src/components/elements/icons/WarningIcon';
+import {PhoneIcon} from '@src/components/elements/icons/PhoneIcon';
+import {SwapIcon} from '@src/components/elements/icons/SwapIcon';
+import {SafeIcon} from '@src/components/elements/icons/SafeIcon';
+import {DeliveryIcon} from '@src/components/elements/icons/DeliveryIcon';
 // styles
-import { useStyles } from './useStyles';
+import {useStyles} from './useStyles';
 
 
-export const LeftSide = ({ data, parameters, t }) => {
+export const LeftSide = ({data, parameters, t}) => {
     const [currentSlide, setCurrentSlide] = useState(0);
     const [open, setOpen] = useState(false);
 
@@ -44,22 +44,16 @@ export const LeftSide = ({ data, parameters, t }) => {
     const handleShowModal = (value) => () => {
         setOpen(value);
     };
-
+    console.log(data)
     const excludedFields = ['id', 'uniqid', 'color_id'];
 
     const parameterItems = Object.keys(parameters).map((key, i) => {
-        if (
-            parameters[key] !== null &&
-            excludedFields.every((k) => k !== key)
-        ) {
-            if (
-                Array.isArray(parameters[key]) &&
-                parameters[key].lenght !== 0
-            ) {
-                const params = parameters[key].map((param) => {
-                    return (
-                        <li key={param.id}>
+        if (parameters[key] !== null && excludedFields.every((k) => k !== key)) {
 
+            if (Array.isArray(parameters[key]) && parameters[key].length !== 0) {
+                const params = parameters[key].map((param, i) => {
+                    return (
+                        <li key={i}>
                             <Typography variant="subtitle1" className="value">
                                 {param.name}
                             </Typography>
@@ -68,14 +62,14 @@ export const LeftSide = ({ data, parameters, t }) => {
                 });
 
                 return (
-                    <div className="params-list">
+                    <div key={i} className="params-list">
                         <Typography variant="subtitle1">{key}</Typography>
                         <ul>{params}</ul>
                     </div>
                 );
-            } else {
+            } else if (!Array.isArray(parameters[key])) {
                 return (
-                    <li key={i}>
+                    <li key={key}>
                         <Typography variant="subtitle1" className="key">
                             {t(`${key}`)}
                         </Typography>
@@ -117,13 +111,13 @@ export const LeftSide = ({ data, parameters, t }) => {
                     Просмотров: {data.number_of_views}
                 </Typography>
                 <Typography variant="subtitle1">
-                    Пожаловаться <WarningIcon />
+                    Пожаловаться <WarningIcon/>
                 </Typography>
             </div>
             <div className="ad-bonus">
                 {data.delivery ? (
                     <span className="delivery">
-                        <DeliveryIcon />{' '}
+                        <DeliveryIcon/>{' '}
                         <Typography variant="subtitle1">
                             Есть доставка
                         </Typography>
@@ -131,7 +125,7 @@ export const LeftSide = ({ data, parameters, t }) => {
                 ) : null}
                 {data.safe_deal ? (
                     <span className="safe_deal">
-                        <SafeIcon />{' '}
+                        <SafeIcon/>{' '}
                         <Typography variant="subtitle1">
                             Безопасная покупка
                         </Typography>
@@ -139,7 +133,7 @@ export const LeftSide = ({ data, parameters, t }) => {
                 ) : null}
                 {data.exchange ? (
                     <span className="exchange">
-                        <SwapIcon />{' '}
+                        <SwapIcon/>{' '}
                         <Typography variant="subtitle1">
                             Возможен обмен
                         </Typography>
@@ -147,7 +141,7 @@ export const LeftSide = ({ data, parameters, t }) => {
                 ) : null}
                 {data.available_start_time ? (
                     <span className="available">
-                        <PhoneIcon />{' '}
+                        <PhoneIcon/>{' '}
                         <Typography variant="subtitle1">
                             {data.available_start_time}-
                             {data.available_end_time}
@@ -161,7 +155,7 @@ export const LeftSide = ({ data, parameters, t }) => {
                 </Typography>
                 {data.region.name || data.city.name || data.district.name ? (
                     <Typography variant="subtitle1" noWrap>
-                        <LocationIcon />
+                        <LocationIcon/>
                         {`${data.region.name ?? ''}`}
                         {data.city.name ? `, ${data.city.name}` : ''}
                         {data.district.name ? `, ${data.district.name}` : ''}
