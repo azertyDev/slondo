@@ -1,7 +1,7 @@
 import React from 'react';
 import {Container, Grid, Typography} from '@material-ui/core';
 import {MainLayout} from "@src/components/MainLayout";
-import {CabinetSidebar} from '@src/components/cabinet/cabinetSidebar/CabinetSidebar';
+import {CabinetSidebar} from './cabinet_sidebar/CabinetSidebar';
 // styles
 import {useStyles} from './useStyles';
 

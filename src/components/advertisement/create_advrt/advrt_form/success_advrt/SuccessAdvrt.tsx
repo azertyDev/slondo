@@ -1,7 +1,6 @@
 import React from 'react'
 import {Grid, Typography, Paper} from '@material-ui/core'
 import {ButtonComponent} from '@src/components/elements/button/Button'
-import {AdsAndLotsBlock} from '@src/components/elements/ads_and_lots_block/AdsAndLotsBlock'
 import HomeIcon from '@material-ui/icons/Home'
 import CheckCircleIcon from '@material-ui/icons/CheckCircle'
 import {Router} from "@root/i18n";
