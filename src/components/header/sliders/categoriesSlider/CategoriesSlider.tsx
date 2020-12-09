@@ -11,7 +11,7 @@ import {Categories} from "@root/interfaces/Categories";
 
 export const CategoriesSlider: FC<WithT & { sliderData: Categories }> = (props) => {
     const {t, sliderData} = props;
-
+    console.log(sliderData)
     const classes = useStyles();
     return (
         <div className={classes.root}>
@@ -31,7 +31,7 @@ export const CategoriesSlider: FC<WithT & { sliderData: Categories }> = (props) 
                                                     <Skeleton variant="text"/>
                                                 </>
                                                 : <>
-                                                    <img src={category.images.url.extra} alt="category"/>
+                                                    <img src={category.images.url.default} alt="category"/>
                                                     <Typography>{category.name}</Typography>
                                                 </>
                                         }

@@ -14,6 +14,7 @@ import { DeliveryIcon } from '@src/components/elements/icons/DeliveryIcon';
 // styles
 import { useStyles } from './useStyles';
 
+
 export const LeftSide = ({ data, parameters, t }) => {
     const [currentSlide, setCurrentSlide] = useState(0);
     const [open, setOpen] = useState(false);
@@ -58,6 +59,7 @@ export const LeftSide = ({ data, parameters, t }) => {
                 const params = parameters[key].map((param) => {
                     return (
                         <li key={param.id}>
+
                             <Typography variant="subtitle1" className="value">
                                 {param.name}
                             </Typography>
