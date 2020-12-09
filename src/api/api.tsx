@@ -12,7 +12,7 @@ const testingIP = 'http://192.168.1.60/slondo/public/api/';
 
 const instance = Axios.create({
     withCredentials: true,
-    baseURL: testingIP,
+    baseURL: productionIP,
 });
 
 const config = {
