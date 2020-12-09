@@ -3,6 +3,7 @@ import { Typography } from '@material-ui/core';
 import { SyncSliders } from '@src/components/elements/sync_sliders/SyncSliders';
 import { ReadMore } from '@src/components/elements/read_more/readMore';
 import { LeftSideModal } from '@src/components/advertisement/show_advertisement/leftSide/left_side_modal/LeftSideModal';
+
 // icons
 import { LocationIcon } from '@src/components/elements/icons/LocationIcon';
 import { WarningIcon } from '@src/components/elements/icons/WarningIcon';

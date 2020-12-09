@@ -1,5 +1,9 @@
 import React, {useState} from 'react';
+<<<<<<< HEAD
+import {Grid, Tabs, Typography, Tab} from "@material-ui/core";
+=======
 import {Grid, Tabs, Tab, Typography} from "@material-ui/core";
+>>>>>>> master
 import {CustomTabPanel} from "@src/components/elements/custom_tab_panel/CustomTabPanel";
 import {CabinetMenuWrapper} from "@src/components/cabinet/CabinetMenuWrapper";
 // styles
