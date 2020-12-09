@@ -1,5 +1,5 @@
 import {createAsyncThunk, createSlice} from '@reduxjs/toolkit'
-import {Categories, CategoriesDataTypes} from '@root/interfaces/Categories'
+import {Categories, CategoryType} from '@root/interfaces/Categories'
 import {userAPI} from "@src/api/api";
 
 
@@ -12,13 +12,13 @@ const initialState: Categories = {
         images: {
             id: null,
             url: {
-                original: ''
+                extra: ''
             }
         },
         icons: {
             id: null,
             url: {
-                original: ''
+                extra: ''
             }
         },
         childs: [],
@@ -27,7 +27,7 @@ const initialState: Categories = {
 };
 
 // Async thunk
-export const fetchCategories = createAsyncThunk<CategoriesDataTypes, string>(
+export const fetchCategories = createAsyncThunk<CategoryType[], string>(
     'categories/fetchCategories',
     async (lang, {rejectWithValue}) => {
         try {

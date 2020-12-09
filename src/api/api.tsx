@@ -1,7 +1,7 @@
 import Axios from 'axios';
 import Cookies from 'universal-cookie';
 import {LocationsDataTypes} from "@root/interfaces/Locations";
-import {CategoriesDataTypes} from "@root/interfaces/Categories";
+import {CategoryType} from "@root/interfaces/Categories";
 
 
 const cookies = new Cookies();
@@ -12,9 +12,8 @@ const testingIP = 'http://192.168.1.60/slondo/public/api/';
 
 const instance = Axios.create({
     withCredentials: true,
-    baseURL: productionIP,
+    baseURL: testingIP,
 });
-
 
 const config = {
     headers: {
@@ -38,7 +37,7 @@ export const userAPI = {
                 throw err;
             });
     },
-    getCategories: (lang: string): Promise<CategoriesDataTypes> => {
+    getCategories: (lang: string): Promise<CategoryType[]> => {
         return instance.get(`categories/main?lang=${lang}`)
             .then(res => res.data)
             .catch(err => {
