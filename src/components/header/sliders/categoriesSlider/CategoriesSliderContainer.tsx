@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {FC, useEffect, useState} from 'react';
 import {CategoriesSlider} from "@src/components/header/sliders/categoriesSlider/CategoriesSlider";
 import {Categories, CategoryType} from "@root/interfaces/Categories";
 import {userAPI} from "@src/api/api";
@@ -25,7 +25,7 @@ const initialState: Categories = {
     list: initSliders,
 };
 
-export const CategoriesSliderContainer = (props) => {
+export const CategoriesSliderContainer: FC<any> = (props) => {
     const lang = i18n.language;
     const [sliderData, setSliderData] = useState(initialState);
 
