@@ -78,10 +78,12 @@ export const LeftSide = ({ data, parameters, t }) => {
                             {t(`${key}`)}
                         </Typography>
                         <Typography variant="subtitle1" className="value">
-                            {typeof parameters[key] === 'string' ||
-                            typeof parameters[key] === 'number'
-                                ? parameters[key]
-                                : parameters[key].name}
+                            {
+                                typeof parameters[key] === 'string' ||
+                                typeof parameters[key] === 'number'
+                                    ? parameters[key]
+                                    : parameters[key].name
+                            }
                         </Typography>
                     </li>
                 );

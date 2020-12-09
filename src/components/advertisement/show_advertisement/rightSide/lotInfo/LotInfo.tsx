@@ -10,7 +10,6 @@ export const LotInfo = (props) => {
     const { adData, t } = props;
     const { data } = adData;
     const date = new Date(data.expiration_at).getTime();
-    console.log(data);
 
     const classes = useStyles();
     return (
