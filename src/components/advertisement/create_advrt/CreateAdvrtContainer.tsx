@@ -386,7 +386,10 @@ export const CreateAdvrtContainer: FC<void> = () => {
 
     useEffect(() => {
         setReqValues();
-    }, [subCategory.name, adType.id]);
+    }, [category.id, subCategory.name, adType.id]);
+
+    console.log(values)
+    console.log(createAdvrt)
     return (
         <MainLayout>
             <Container maxWidth="lg">

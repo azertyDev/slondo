@@ -8,7 +8,7 @@ const sliderDataList: CategoryType = {
     id: null,
     name: '',
     images: {id: null, url: {default: ''}},
-    icons: {id: null, url: {extra: ''}},
+    icons: {id: null, url: {default: ''}},
     childs: [],
     has_auction: false
 }

@@ -31,7 +31,7 @@ export const useStyles = makeStyles(() => ({
                     },
                 },
                 '& div.social-icons': {
-                    '& > div': {
+                    '& > div': {git
                         margin: 0,
                         width: 'auto',
                     },

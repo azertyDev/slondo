@@ -11,7 +11,7 @@ import {Categories} from "@root/interfaces/Categories";
 
 export const CategoriesSlider: FC<WithT & { sliderData: Categories }> = (props) => {
     const {t, sliderData} = props;
-
+    console.log(sliderData)
     const classes = useStyles();
     return (
         <div className={classes.root}>

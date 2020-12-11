@@ -20,7 +20,7 @@ export type InnerCardData = {
     }
     images: Array<{
         url: {
-            original: string
+            default: string
         }
     }>;
     created_at: string;

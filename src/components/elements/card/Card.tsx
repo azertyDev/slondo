@@ -22,7 +22,7 @@ export const CardItem: FC<InnerCardData & { className: string; isFetch: boolean 
                 ? <Skeleton variant="rect" className={classes.skeleton}/>
                 : <CardMedia
                     className="card-media"
-                    image={props.images.length ? props.images[0].url.original : null}
+                    image={props.images.length ? props.images[0].url.default : null}
                 >
                     <div className="card-header">
                         <div>
