@@ -62,7 +62,7 @@ export const ShowAdLot = (props) => {
                                 </Typography>
                             </span>
                             {/* <SnackbarComponent /> */}
-                            {data.condition.id ? (
+                            {data.condition ? (
                                 <span className="condition">
                                     <Typography variant="h6">
                                         {data.condition.name}

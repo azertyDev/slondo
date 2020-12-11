@@ -7,7 +7,7 @@ import {i18n} from "@root/i18n";
 const sliderDataList: CategoryType = {
     id: null,
     name: '',
-    images: {id: null, url: {extra: ''}},
+    images: {id: null, url: {default: ''}},
     icons: {id: null, url: {extra: ''}},
     childs: [],
     has_auction: false

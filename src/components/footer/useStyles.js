@@ -8,18 +8,19 @@ export const useStyles = makeStyles(() => ({
         height: '400px',
         backgroundColor: '#F2F2F2',
         borderRadius: '100px 100px 0px 0px',
-        '& > div > div': {
-            padding: '60px 155px',
-            display: 'flex',
-            justifyContent: 'space-between',
-            width: '100%',
-            '& div': {
-                '& > ul': {
+        '& > div > div.wrapper': {
+            '& > div': {
+                '&.footer-top': {
+                    paddingTop: 60,
+                    paddingBottom: 90,
+                    mixBlendMode: 'normal',
+                },
+                '& > div > ul': {
                     padding: 0,
                     margin: 0,
                     listStyle: 'none',
                     '& > li': {
-                        marginBottom: 8,
+                        marginBottom: 20,
                         '&:last-child': {
                             marginBottom: 0,
                         },
@@ -29,12 +30,33 @@ export const useStyles = makeStyles(() => ({
                         },
                     },
                 },
-            },
-            '& > div > div.social-icons': {
-                '& > div': {
-                    margin: 0,
-                    width: 'auto',
+                '& div.social-icons': {
+                    '& > div': {
+                        margin: 0,
+                        width: 'auto',
+                    },
                 },
+            },
+        },
+        '& div.footer-bottom': {
+            position: 'relative',
+            display: 'flex',
+            paddingTop: '25px',
+            '& div': {
+                '& h6.MuiTypography-subtitle1': {
+                    fontSize: '12px',
+                    textAlign: 'center',
+                },
+            },
+            '&:before': {
+                content: '""',
+                position: 'absolute',
+                width: 1100,
+                height: 2,
+                background: '#E0E0E0',
+                borderRadius: '1px',
+                top: 0,
+                left: '50px',
             },
         },
     },

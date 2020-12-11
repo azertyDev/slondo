@@ -31,7 +31,7 @@ export const CategoriesSlider: FC<WithT & { sliderData: Categories }> = (props) 
                                                     <Skeleton variant="text"/>
                                                 </>
                                                 : <>
-                                                    <img src={category.images.url.extra} alt="category"/>
+                                                    <img src={category.images.url.default} alt="category"/>
                                                     <Typography>{category.name}</Typography>
                                                 </>
                                         }

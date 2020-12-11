@@ -15,11 +15,11 @@ export const LotInfo = (props) => {
     return (
         <div className={classes.root}>
             <div className="lot-info">
-                {data.ads_type.mark !== 'regular' ?? (
+                {data.ads_type.mark !== 'regular' ? (
                     <div className="lot-timer">
                         {date !== 0 && <LotTimer date={date} />}
                     </div>
-                )}
+                ) : null}
                 {data.auction ? (
                     <div className="buy-now">
                         <div>
