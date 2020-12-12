@@ -1,17 +1,18 @@
 import React, {FC, useEffect, useState} from 'react';
 import {Container} from '@material-ui/core';
-import {useSelector} from "react-redux";
+import {useSelector, useDispatch} from "react-redux";
 import {useFormik} from "formik";
 import {i18n} from "@root/i18n";
 import {userAPI} from '@src/api/api';
+import {TOTAL_FILES_LIMIT} from "@src/constants";
+import {CreateAdvrt} from "./CreateAdvrt";
 import {RootState} from "@src/redux/rootReducer";
 import {MainLayout} from "@src/components/MainLayout";
-import {CreateAdvrt} from "./CreateAdvrt";
+import {CameraIcon} from "@src/components/elements/icons";
 import {CreateAdFields, FileType} from "@root/interfaces/Advertisement";
 import {createAdvrtSchema, isRequired} from "@root/validation_schemas/createAdvrtSchema";
-import {autoSelectKeys, textFieldKeys} from "../create_advrt/advrt_form/AdvrtFormContainer";
-import {CameraIcon} from "@src/components/elements/icons";
-import {TOTAL_FILES_LIMIT} from "@src/constants";
+import {AdvrtFormContainer, autoSelectKeys, textFieldKeys} from "../create_advrt/advrt_form/AdvrtFormContainer";
+import {setErrorMsgAction} from '@root/src/redux/slices/errorSlice';
 
 
 export const initUrl: FileType = {
@@ -22,7 +23,7 @@ export const initUrl: FileType = {
     )
 };
 
-export const CreateAdvrtContainer: FC<void> = () => {
+export const CreateAdvrtContainer: FC = () => {
     const lang = i18n.language;
 
     const initPhotos: FileType[] = Array.from({
@@ -31,7 +32,6 @@ export const CreateAdvrtContainer: FC<void> = () => {
 
     const initCreateAdState = {
         isFetch: false,
-        error: null,
         adType: {
             id: null,
             name: '',
@@ -52,7 +52,6 @@ export const CreateAdvrtContainer: FC<void> = () => {
 
     const initFormFields: CreateAdFields = {
         isFetch: false,
-        error: null,
         title: '',
         safe_deal: false,
         delivery: false,
@@ -105,7 +104,7 @@ export const CreateAdvrtContainer: FC<void> = () => {
     };
 
     const categoriesList = useSelector(({categories}: RootState) => categories.list);
-
+    const dispatch = useDispatch();
     const [tabValue, setTabValue] = useState(1);
 
     const [adTypes, setAdTypes] = useState([]);
@@ -128,7 +127,7 @@ export const CreateAdvrtContainer: FC<void> = () => {
     const {values, setValues, setErrors, setTouched} = formik;
     const {adParams} = values;
 
-    const getAdTypes = async () => {
+    const setInitAdType = async () => {
         try {
             setCreateAdvrt({...createAdvrt, isFetch: true});
 
@@ -140,9 +139,10 @@ export const CreateAdvrtContainer: FC<void> = () => {
             setCreateAdvrt({
                 ...createAdvrt,
                 adType: adTypes[0]
-            })
-        } catch (error) {
-            setCreateAdvrt({...createAdvrt, error});
+            });
+        } catch (e) {
+            dispatch(setErrorMsgAction(e.message));
+            setCreateAdvrt({...createAdvrt, isFetch: false});
         }
     };
 
@@ -162,7 +162,6 @@ export const CreateAdvrtContainer: FC<void> = () => {
     const handleCategory = (category) => () => {
         setCreateAdvrt({
             ...createAdvrt,
-            error: null,
             category
         });
     };
@@ -192,11 +191,9 @@ export const CreateAdvrtContainer: FC<void> = () => {
                     category: createAdvrt.category
                 });
             }
-        } catch ({message}) {
-            setCreateAdvrt({
-                ...createAdvrt,
-                error: message
-            });
+        } catch (e) {
+            dispatch(setErrorMsgAction(e.message));
+            setCreateAdvrt({...createAdvrt, isFetch: false});
         }
     };
 
@@ -323,7 +320,8 @@ export const CreateAdvrtContainer: FC<void> = () => {
                 setIsPreview(false);
             }
         } catch (e) {
-            setValues({...values, error: e.message});
+            dispatch(setErrorMsgAction(e.message));
+            setCreateAdvrt({...createAdvrt, isFetch: false});
         }
     }
 
@@ -377,40 +375,43 @@ export const CreateAdvrtContainer: FC<void> = () => {
     };
 
     useEffect(() => {
-        getAdTypes();
+        setInitAdType();
     }, []);
+
+    useEffect(() => {
+        setReqValues();
+    }, [isForm]);
 
     useEffect(() => {
         adTypes.length && setAdType();
     }, [tabValue]);
-
-    useEffect(() => {
-        setReqValues();
-    }, [category.id, subCategory.name, adType.id]);
 
     console.log(values)
     console.log(createAdvrt)
     return (
         <MainLayout>
             <Container maxWidth="lg">
-                <CreateAdvrt
-                    formik={formik}
-                    isForm={isForm}
-                    setIsForm={setIsForm}
-                    isSuccess={isSuccess}
-                    setIsSuccess={setIsSuccess}
-                    isPreview={isPreview}
-                    setIsPreview={setIsPreview}
-                    adTypes={adTypes}
-                    tabValue={tabValue}
-                    createAdvrt={createAdvrt}
-                    categoriesList={categoriesList}
-                    handleCreateNew={handleCreateNew}
-                    handleBackBtn={handleBackBtn}
-                    handleTab={handleTab}
-                    handleCategory={handleCategory}
-                    handleSubCategory={handleSubCategory}
-                />
+                {
+                    isForm
+                        ? <AdvrtFormContainer
+                            formik={formik}
+                            isSuccess={isSuccess}
+                            isPreview={isPreview}
+                            setIsPreview={setIsPreview}
+                            createAdvrt={createAdvrt}
+                            handleBackBtn={handleBackBtn}
+                            handleCreateNew={handleCreateNew}
+                        />
+                        : <CreateAdvrt
+                            adTypes={adTypes}
+                            tabValue={tabValue}
+                            createAdvrt={createAdvrt}
+                            categoriesList={categoriesList}
+                            handleTab={handleTab}
+                            handleCategory={handleCategory}
+                            handleSubCategory={handleSubCategory}
+                        />
+                }
             </Container>
         </MainLayout>
     )

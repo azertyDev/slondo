@@ -1,16 +1,28 @@
-import React, {MutableRefObject, useEffect, useRef, useState} from 'react';
+import React, {Dispatch, FC, MutableRefObject, SetStateAction, useEffect, useRef, useState} from 'react';
 import {CustomSlider} from '../custom_slider/CustomSlider';
-// styles
 import {useStyles} from './useStyles';
 
 
-export const SyncSliders = (props) => {
+type SyncSlidersProps = {
+    isModalOpen: boolean;
+    currentSlide: number;
+    handleOpenModal?: () => void;
+    setCurrentSlide: Dispatch<SetStateAction<number>>;
+    imgs: {
+        alt: string;
+        url: { default: string }
+    }[];
+};
+
+export const SyncSliders: FC<SyncSlidersProps> = (props) => {
+    const {isModalOpen = false, imgs} = props;
+
     const [slidersNav, setSlidersNav] = useState({nav1: null, nav2: null});
     const slider1: MutableRefObject<unknown> = useRef();
     const slider2: MutableRefObject<unknown> = useRef();
 
     const handleAfterChange = (newIndex) => {
-        props.setCurrentSlide && props.setCurrentSlide(newIndex);
+        props.setCurrentSlide(newIndex);
     };
 
     useEffect(() => {
@@ -20,41 +32,50 @@ export const SyncSliders = (props) => {
         });
     }, []);
 
-    const classes = useStyles();
+    const classes = useStyles(isModalOpen);
     return (
         <div className={classes.root}>
             <div className={classes.firstSlider}>
                 <CustomSlider
-                    asNavFor={slidersNav.nav2}
                     ref={slider1}
-                    swipe={false}
+                    centerMode={isModalOpen || imgs.length < 2}
+                    asNavFor={slidersNav.nav2}
                     afterChange={handleAfterChange}
-                    variableWidth={props.variableWidth}
+                    variableWidth={!isModalOpen}
                     initialSlide={props.currentSlide}
-                    centerMode={props.centerMode}
                 >
-                    {props.imgs.map(({url, alt}, i) => (
-                        <img
-                            src={url.default}
-                            alt={alt}
-                            key={i}
-                            onClick={props.handleOpenModal}
-                        />
-                    ))}
+                    {
+                        imgs.map(({url, alt}, i) => (
+                            <img
+                                key={i}
+                                alt={alt}
+                                src={url.default}
+                                onClick={props.handleOpenModal}
+                            />
+                        ))
+                    }
                 </CustomSlider>
             </div>
             <div className={classes.secondSlider}>
                 <CustomSlider
                     ref={slider2}
-                    focusOnSelect={true}
-                    arrows={props.arrows}
-                    afterChange={handleAfterChange}
                     slidesToShow={4}
-                    swipeToSlide={true}
+                    slidesToScroll={1}
+                    arrows={false}
+                    infinite={true}
+                    focusOnSelect={true}
+                    asNavFor={slidersNav.nav1}
+                    afterChange={handleAfterChange}
                 >
-                    {props.imgs.map(({url, alt}, i) => (
-                        <img src={url.default} alt={alt} key={i}/>
-                    ))}
+                    {
+                        imgs.map(({url, alt}, i) => (
+                            <img
+                                key={i}
+                                alt={alt}
+                                src={url.default}
+                            />
+                        ))
+                    }
                 </CustomSlider>
             </div>
         </div>

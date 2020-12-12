@@ -8,7 +8,6 @@ import {Logo} from '@src/components/elements/icons';
 import {AddIcon} from "@src/components/elements/icons/AddIcon";
 import {CategorySortIcon} from "@src/components/elements/icons/CategorySortIcon";
 import {SignIcon} from "@src/components/elements/icons/SignIcon";
-// styles
 import {useStyles} from "./useStyles";
 
 

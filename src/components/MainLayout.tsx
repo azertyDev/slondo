@@ -1,12 +1,19 @@
-import React from "react";
+import React, {FC, ReactNode} from "react";
 import Head from "next/head";
+import {Fab} from "@material-ui/core";
 import Header from "./header/Header";
 import {Footer} from "./footer/Footer";
 import {ScrollTop} from "@src/components/elements/scroll_top/ScrollTop";
-import {Fab} from "@material-ui/core";
 import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp';
+import {ErrorModal} from "@src/components/error_modal/ErrorModal";
 
-export const MainLayout = ({children, title = 'SLONDO'}) => {
+
+type MainLayoutPropsType = {
+    children: ReactNode;
+    title?: string;
+};
+
+export const MainLayout: FC<MainLayoutPropsType> = ({children, title = 'SLONDO'}) => {
     return (
         <>
             <Head>
@@ -22,6 +29,7 @@ export const MainLayout = ({children, title = 'SLONDO'}) => {
                 </ScrollTop>
             </main>
             <Footer/>
+            <ErrorModal/>
         </>
     )
 }

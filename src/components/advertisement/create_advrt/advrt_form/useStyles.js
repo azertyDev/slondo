@@ -11,7 +11,7 @@ export const useStyles = makeStyles((theme) => ({
         }
     },
     title: {
-        margin: '50px 0',
+        margin: '20px 0 50px',
         '& span': {
             color: '#9c65d5',
         },
@@ -138,6 +138,16 @@ export const useStyles = makeStyles((theme) => ({
             borderColor: `${theme.palette.primary.error}!important`
         }
     },
+    backButton: {
+        width: '250px',
+        margin: '50px 5px 0',
+        [theme.breakpoints.down('sm')]: {
+            padding: '10px 50px'
+        },
+        '& > p': {
+            color: theme.palette.primary.white
+        }
+    },
     nextButtonBlock: {
         display: 'flex',
         justifyContent: 'center',
@@ -149,10 +159,12 @@ export const useStyles = makeStyles((theme) => ({
             marginTop: '25px',
         },
     },
-    nextButton: {
+    navButton: {
         width: '250px',
         margin: '0 5px',
-        [theme.breakpoints.down('sm')]: {padding: '10px 50px'},
+        [theme.breakpoints.down('sm')]: {
+            padding: '10px 50px'
+        },
         '& > p': {
             color: theme.palette.primary.white
         }

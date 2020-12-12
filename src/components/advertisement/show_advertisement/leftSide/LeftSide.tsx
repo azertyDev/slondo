@@ -3,15 +3,12 @@ import {Typography} from '@material-ui/core';
 import {SyncSliders} from '@src/components/elements/sync_sliders/SyncSliders';
 import {ReadMore} from '@src/components/elements/read_more/readMore';
 import {LeftSideModal} from '@src/components/advertisement/show_advertisement/leftSide/left_side_modal/LeftSideModal';
-
-// icons
 import {LocationIcon} from '@src/components/elements/icons/LocationIcon';
 import {WarningIcon} from '@src/components/elements/icons/WarningIcon';
 import {PhoneIcon} from '@src/components/elements/icons/PhoneIcon';
 import {SwapIcon} from '@src/components/elements/icons/SwapIcon';
 import {SafeIcon} from '@src/components/elements/icons/SafeIcon';
 import {DeliveryIcon} from '@src/components/elements/icons/DeliveryIcon';
-// styles
 import {useStyles} from './useStyles';
 
 
@@ -93,8 +90,6 @@ export const LeftSide = ({data, parameters, t}) => {
             <div className="ad-slider">
                 <SyncSliders
                     imgs={data.images}
-                    variableWidth={true}
-                    centerMode={false}
                     currentSlide={currentSlide}
                     setCurrentSlide={setCurrentSlide}
                     handleOpenModal={handleShowModal(true)}
@@ -204,12 +199,12 @@ export const LeftSide = ({data, parameters, t}) => {
                 <ul>{parameterItems}</ul>
             </div>
             <LeftSideModal
+                open={open}
+                title={data.title}
                 imgs={data.images}
                 currentSlide={currentSlide}
                 setCurrentSlide={setCurrentSlide}
-                handleShowModal={handleShowModal}
-                isOpen={open}
-                title={data.title}
+                handleShowModalClose={handleShowModal(false)}
             />
         </div>
     );

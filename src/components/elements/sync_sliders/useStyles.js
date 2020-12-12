@@ -11,12 +11,11 @@ export const useStyles = makeStyles(() => ({
                 right: '25px',
             },
         }
-        
     },
     firstSlider: {
         width: '100%',
         '& div.slick-slide img': {
-            width: 'auto !important',
+            width: isModalOpen => isModalOpen ? 'inherit' : 'auto !important',
             height: '518px',
             objectFit: 'contain'
         },
@@ -25,7 +24,7 @@ export const useStyles = makeStyles(() => ({
                 marginRight: 5,
                 '& img': {
                     '&:hover': {
-                        cursor: 'zoom-in'
+                        cursor: isModalOpen => isModalOpen ? 'default' : 'zoom-in'
                     }
                 }
             }
@@ -65,9 +64,6 @@ export const useStyles = makeStyles(() => ({
             margin: 'inherit'
         },
         '& div.slick-slide': {
-            // width: 'auto !important',
-            width: '212px !important',
-            // marginRight: 5,
             '& > div': {
                 height: '120px !important',
                 padding: '0 2.5px'

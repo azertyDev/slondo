@@ -46,16 +46,16 @@ const advertisementSlice = createSlice({
         builder.addCase(fetchCategories.pending, (state) => {
             state.isFetch = true;
             state.error = null;
-        })
+        });
         builder.addCase(fetchCategories.fulfilled, (state, action) => {
             state.isFetch = false;
             state.error = null;
             state.list = action.payload;
-        })
+        });
         builder.addCase(fetchCategories.rejected, (state, action) => {
             state.isFetch = false;
             state.error = action.payload;
-        })
+        });
     }
 });
 

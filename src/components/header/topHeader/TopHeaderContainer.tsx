@@ -1,7 +1,13 @@
-import React from "react"
+import React, {FC} from "react"
+import {WithT} from "i18next";
 import {TopHeader} from "./TopHeader"
 
-const TopHeaderContainer = (props) => {
+
+export type TopHeaderPropsType = {
+    handleOpenModal: () => void;
+} & WithT;
+
+const TopHeaderContainer: FC<TopHeaderPropsType> = (props) => {
     const {t, handleOpenModal} = props;
     return <TopHeader t={t} handleOpenModal={handleOpenModal}/>
 };

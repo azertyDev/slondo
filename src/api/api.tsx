@@ -58,7 +58,7 @@ export const userAPI = {
                 throw err;
             });
     },
-    getAddById: (ads_id, lang): Promise<any> => {
+    getAddById: (ads_id, lang: string): Promise<any> => {
         return instance.get(`getAddById?ads_id=${ads_id}&lang=${lang}`)
             .then((res) => res.data)
             .catch((err) => {

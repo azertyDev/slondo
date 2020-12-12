@@ -49,6 +49,13 @@ export const AdvrtForm: FC<any> = (props) => {
                     handleCreateNew={handleCreateNew}
                 />
                 : <>
+                    <ButtonComponent
+                        disabled={values.isFetch}
+                        className={classes.backButton}
+                        onClick={props.handleBackBtn}
+                    >
+                        <Typography>Назад</Typography>
+                    </ButtonComponent>
                     <Typography variant="h4" className={classes.title}>
                         Новое объявление - <span>{category.name}</span>
                     </Typography>
@@ -718,16 +725,9 @@ export const AdvrtForm: FC<any> = (props) => {
                     </Grid>
                     <div className={classes.nextButtonBlock}>
                         <ButtonComponent
-                            disabled={values.isFetch}
-                            className={classes.nextButton}
-                            onClick={props.handleBackBtn}
-                        >
-                            <Typography>Назад</Typography>
-                        </ButtonComponent>
-                        <ButtonComponent
-                            disabled={values.isFetch}
                             type='submit'
-                            className={classes.nextButton}
+                            disabled={values.isFetch}
+                            className={classes.navButton}
                         >
                             <Typography>
                                 {

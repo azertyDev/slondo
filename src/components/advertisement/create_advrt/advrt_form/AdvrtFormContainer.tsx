@@ -5,29 +5,12 @@ import {AdvrtForm} from './AdvrtForm';
 import {RootState} from "@src/redux/rootReducer";
 
 
-export const autoSelectKeys = [
-    'condition',
-    'area'
-];
-
-export const textFieldKeys = [
-    'area'
-];
+export const autoSelectKeys = ['condition', 'area'];
+export const textFieldKeys = ['area'];
 
 const numberRegEx = /^[0-9]*$/;
 
-
 export const AdvrtFormContainer: FC<any> = (props) => {
-    const {
-        createAdvrt,
-        isPreview,
-        setIsPreview,
-        formik,
-        isSuccess,
-        handleBackBtn,
-        handleCreateNew,
-    } = props;
-
     const {locations} = useSelector((store: RootState) => store);
 
     const {
@@ -38,7 +21,7 @@ export const AdvrtFormContainer: FC<any> = (props) => {
         setTouched,
         handleBlur,
         handleSubmit,
-    } = formik;
+    } = props.formik;
 
     let {adParams} = values;
 
@@ -225,18 +208,13 @@ export const AdvrtFormContainer: FC<any> = (props) => {
             });
         }
     };
-    console.log(createAdvrt);
-    console.log(values);
-    
+
     return (
-        <FormikProvider value={formik}>
+        <FormikProvider value={props.formik}>
             <form onSubmit={handleSubmit}>
                 <AdvrtForm
-                    isSuccess={isSuccess}
+                    {...props}
                     locations={locations}
-                    isPreview={isPreview}
-                    setIsPreview={setIsPreview}
-                    createAdvrt={createAdvrt}
                     errors={errors}
                     touched={touched}
                     setTouched={setTouched}
@@ -247,10 +225,8 @@ export const AdvrtFormContainer: FC<any> = (props) => {
                     handleInput={handleInput}
                     handleSwitch={handleSwitch}
                     handleWeekDay={handleWeekDay}
-                    handleBackBtn={handleBackBtn}
                     handleListItem={handleListItem}
                     handleMenuItem={handleMenuItem}
-                    handleCreateNew={handleCreateNew}
                     handleAuctionInput={handleAuctionInput}
                     handleParamsCheckbox={handleParamsCheckbox}
                     handleCheckboxChange={handleCheckboxChange}

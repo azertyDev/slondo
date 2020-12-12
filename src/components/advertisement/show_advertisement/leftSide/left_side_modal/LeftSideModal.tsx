@@ -1,28 +1,35 @@
-import React from 'react';
-import {Container, Typography} from '@material-ui/core';
+import React, {FC, Dispatch} from 'react';
+import {Container, Modal, Typography} from '@material-ui/core';
 import {SyncSliders} from "@src/components/elements/sync_sliders/SyncSliders";
-import {ModalComponent} from "@src/components/elements/modal/Modal";
-
-// styles
 import {useStyles} from './useStyles';
 
-export const LeftSideModal = (props) => {
+type LeftSideModalProps = {
+    imgs: [];
+    title: string;
+    open: boolean;
+    currentSlide: number;
+    setCurrentSlide: Dispatch<number>
+    handleShowModalClose: () => void;
+};
 
+export const LeftSideModal: FC<LeftSideModalProps> = (props) => {
     const classes = useStyles();
     return (
         <div className={classes.root}>
-            <ModalComponent isOpen={props.isOpen} handleCloseModal={props.handleShowModal(false)} className={classes.modal}>
+            <Modal
+                open={props.open}
+                className={classes.modal}
+                onClose={props.handleShowModalClose}
+            >
                 <Container className={classes.slider}>
                     <Typography variant="h6">
                         {props.title}
                     </Typography>
                     <SyncSliders
                         imgs={props.imgs}
+                        isModalOpen={props.open}
                         currentSlide={props.currentSlide}
                         setCurrentSlide={props.setCurrentSlide}
-                        variableWidth={false}
-                        centerMode={true}
-                        swipe={true}
                     />
                     <div className={classes.sliderCounter}>
                         <Typography variant="subtitle1">
@@ -30,7 +37,7 @@ export const LeftSideModal = (props) => {
                         </Typography>
                     </div>
                 </Container>
-            </ModalComponent>
+            </Modal>
         </div>
     )
 }

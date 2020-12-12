@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {FC, useState} from 'react';
 import {
     Grid,
     Hidden,
@@ -6,22 +6,17 @@ import {
     AppBar,
     Toolbar,
     IconButton,
-} from '@material-ui/core'
-import {Localization} from '@src/components/elements/localization/Localization'
-import {LeftDrawer} from './drawer/Drawer'
-import {Link} from '@root/i18n'
-
-// icons
-import {
-    Logo,
-    UserAvatar
-} from '@src/components/elements/icons'
+} from '@material-ui/core';
+import {Link} from '@root/i18n';
+import {useStyles} from './useStyles';
+import {LeftDrawer} from './drawer/Drawer';
+import {Logo, UserAvatar} from '@src/components/elements/icons';
+import {Localization} from '@src/components/elements/localization/Localization';
 import {QuestionIcon, LocationIcon, BonusIcon} from "@src/components/elements/icons";
+import {TopHeaderPropsType} from "@src/components/header/topHeader/TopHeaderContainer";
 
-// styles
-import {useStyles} from './useStyles'
 
-export const TopHeader = (props) => {
+export const TopHeader: FC<TopHeaderPropsType> = (props) => {
     const {t, handleOpenModal} = props;
     const [isOpen, setIsOpen] = useState(false);
 
