@@ -28,11 +28,7 @@ export const CategoriesSlider: FC<WithT & { categories: Categories }> = (props) 
                                             categories.isFetch
                                                 ? <>
                                                     <Skeleton variant="circle" width={100} height={100}/>
-                                                ) : (
-                                                    <img src={category.images.url.extra} alt="category"/>
-                                                )}
-                                                {sliderData.isFetch ? (
-                                                    <Skeleton variant="text"/>
+                                                    <Skeleton variant="text" width={100} height={16}/>
                                                 </>
                                                 : <>
                                                     <img src={category.images.url.default} alt="category"/>
