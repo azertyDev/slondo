@@ -1,10 +1,9 @@
-import React, { FC } from 'react';
-import { Container, Grid, Typography } from '@material-ui/core';
-import { MainLayout } from '@src/components/MainLayout';
-import { ButtonComponent } from '@src/components/elements/button/Button';
+import React, {FC} from 'react';
+import {Container, Grid, Typography} from '@material-ui/core';
+import {MainLayout} from '@src/components/MainLayout';
+import {ButtonComponent} from '@src/components/elements/button/Button';
+import {useStyles} from './useStyles';
 
-// styles
-import { useStyles } from './useStyles';
 
 const urls = [
     '/img/adv-background.png',
@@ -12,7 +11,7 @@ const urls = [
     '/img/advanced-lot-background.png',
 ];
 
-export const AdvTypesPage: FC<any> = (props) => {
+export const AdvTypesPage: FC<any> = () => {
     const imageUrls = {
         urls: urls,
     };
@@ -27,7 +26,8 @@ export const AdvTypesPage: FC<any> = (props) => {
                             <div className="advCard">
                                 <div>
                                     <Typography variant="subtitle1">Объявление</Typography>
-                                    <Typography variant="body2">Размещайте товары или услуги совершенно бесплатно</Typography>
+                                    <Typography variant="body2">Размещайте товары или услуги совершенно
+                                        бесплатно</Typography>
                                 </div>
                                 <ButtonComponent>
                                     Создать объявление
@@ -38,7 +38,8 @@ export const AdvTypesPage: FC<any> = (props) => {
                             <div className="advCard">
                                 <div>
                                     <Typography variant="subtitle1">Онлайн аукцион</Typography>
-                                    <Typography variant="body2">Торгуйте что бы получить более выгодную цену для Вас</Typography>
+                                    <Typography variant="body2">Торгуйте что бы получить более выгодную цену для
+                                        Вас</Typography>
                                 </div>
                                 <ButtonComponent>
                                     Создать аукцион

@@ -1,14 +1,14 @@
 import React from 'react';
-import { Typography, TextField } from '@material-ui/core';
-import { ButtonComponent } from '@src/components/elements/button/Button';
-import { LockIcon } from '@src/components/elements/icons';
-import { LotTimer } from '@src/components/advertisement/show_advertisement/rightSide/lotInfo/LotTimer';
-// styles
-import { useStyles } from './useStyles';
+import {Typography, TextField} from '@material-ui/core';
+import {ButtonComponent} from '@src/components/elements/button/Button';
+import {LockIcon} from '@src/components/elements/icons';
+import {AuctionTimer} from './AuctionTimer';
+import {useStyles} from './useStyles';
 
-export const LotInfo = (props) => {
-    const { adData, t } = props;
-    const { data } = adData;
+
+export const AuctionContent = (props) => {
+    const {adData, t} = props;
+    const {data} = adData;
     const date = new Date(data.expiration_at).getTime();
 
     const classes = useStyles();
@@ -17,13 +17,13 @@ export const LotInfo = (props) => {
             <div className="lot-info">
                 {data.ads_type.mark !== 'regular' ?? (
                     <div className="lot-timer">
-                        {date !== 0 && <LotTimer date={date} />}
+                        {date !== 0 && <AuctionTimer date={date}/>}
                     </div>
                 )}
                 {data.auction ? (
                     <div className="buy-now">
                         <div>
-                            <LockIcon />
+                            <LockIcon/>
                             <div>
                                 <Typography variant="subtitle2" color="initial">
                                     Резервная цена:
@@ -95,7 +95,7 @@ export const LotInfo = (props) => {
                 </div>
                 <div className="bet-info">
                     <div>
-                        <TextField placeholder="14200000" variant="outlined" />
+                        <TextField placeholder="14200000" variant="outlined"/>
                         <ButtonComponent color="secondary">
                             <Typography variant="subtitle1" color="initial">
                                 Сделать ставку

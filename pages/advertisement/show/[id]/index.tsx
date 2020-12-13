@@ -1,9 +1,9 @@
 import React from 'react';
 import { withTranslation } from '@root/i18n';
-import { ShowAdLotContainer } from '@src/components/advertisement/show_advertisement/showAdLotContainer';
+import { ShowAdvrtLotContainer } from '@src/components/advertisement/show_advrt_lot/ShowAdvrtLotContainer';
 
 const Show_advertisement = (props) => {
-    return <ShowAdLotContainer {...props} />;
+    return <ShowAdvrtLotContainer {...props} />;
 };
 
 Show_advertisement.getInitialProps = async () => ({

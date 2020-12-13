@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { userAPI } from '@src/api/api';
 import { i18n } from '@root/i18n';
 import { useRouter } from 'next/router';
-import { ShowAdLot } from '@src/components/advertisement/show_advertisement/ShowAdLot';
+import { ShowAdvrtLot } from '@src/components/advertisement/show_advrt_lot/ShowAdvrtLot';
 
 const initValues = { id: null, name: '' };
 
@@ -46,7 +46,7 @@ const initialAdData = {
     },
 };
 
-export const ShowAdLotContainer = ({ t }) => {
+export const ShowAdvrtLotContainer = ({ t }) => {
     const [adData, setAdData] = useState(initialAdData);
     const [parameters, setParameters] = useState({});
     const adsId = useRouter().query.id;
@@ -108,7 +108,7 @@ export const ShowAdLotContainer = ({ t }) => {
 
     return (
         <>
-            <ShowAdLot adData={adData} t={t} parameters={parameters} />
+            <ShowAdvrtLot adData={adData} t={t} parameters={parameters} />
         </>
     );
 };

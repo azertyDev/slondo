@@ -4,7 +4,7 @@ import Countdown from 'react-countdown';
 
 import { useStyles } from './useStyles';
 
-export const LotTimer = ({ date }) => {
+export const AuctionTimer = ({ date }) => {
     const formatNumber = (number) => {
         if (number <= 9) {
             return `0${number}`;

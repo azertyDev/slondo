@@ -18,28 +18,24 @@ export const CategoriesSlider: FC<WithT & { categories: Categories }> = (props) 
             <Typography variant="h4">{t('popularCategories')}</Typography>
             <div className="category-slider">
                 <CustomSlider {...settings}>
-                    {
-                        categories.error
-                            ? <Typography className="error-text">{categories.error}</Typography>
-                            : categories.list.map(category => (
-                                <Link href="#" key={category.id}>
-                                    <a title={category.name}>
-                                        {
-                                            categories.isFetch
-                                                ? <>
-                                                    <Skeleton variant="circle" width={100} height={100}/>
-                                                    <Skeleton variant="text" width={100} height={16}/>
-                                                </>
-                                                : <>
-                                                    <img src={category.images.url.default} alt="category"/>
-                                                    <Typography>{category.name}</Typography>
-                                                </>
-                                        }
-                                    </a>
-                                </Link>
-                            ))
-                    }
-                </CustomSlider>
+                    {categories.error
+                        ? <Typography className="error-text">{categories.error}</Typography>
+                        : categories.list.map(category => (
+                            <Link href="#" key={category.id}>
+                                <a title={category.name}>
+                                    {categories.isFetch
+                                        ? <>
+                                            <Skeleton variant="circle" width={100} height={100}/>
+                                            <Skeleton variant="text" width={100} height={16}/>
+                                        </>
+                                        : <>
+                                            <img src={category.images.url.default} alt="category"/>
+                                            <Typography>{category.name}</Typography>
+                                        </>}
+                                </a>
+                            </Link>
+                        ))
+                    }</CustomSlider>
             </div>
         </div>
     )

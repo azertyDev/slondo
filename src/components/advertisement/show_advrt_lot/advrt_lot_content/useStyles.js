@@ -1,24 +1,42 @@
 import {makeStyles} from '@material-ui/core/styles';
 
+
 export const useStyles = makeStyles(() => ({
     root: {
-        '& div.ad-slider': {
-            '& > div:last-child': {
-                display: 'flex',
-                justifyContent: 'flex-end',
-                flexDirection: 'column',
-                '& > a': {
-                    display: 'flex',
-                    textDecoration: 'none',
-                    color: '#000',
-                    '& > img': {
-                        marginLeft: '10px',
-                    },
+        '& a': {
+            textDecoration: 'none',
+        },
+        '& div.breadcrumbs': {
+            margin: '20px 0'
+        },
+        '& div.adv-header': {
+            display: 'flex',
+            margin: '10px 0',
+            '& > h6': {
+                lineHeight: '30px',
+                borderRadius: '5px',
+                padding: '0px 20px',
+                fontWeight: '600',
+                '&:first-child': {
+                    color: '#fff'
                 },
-                '& > a:hover': {
-                    textDecoration: 'underline',
+                '&.advertisement': {
+                    background: 'rgba(136, 202, 236, 0.65)'
                 },
-            },
+                '&.lot': {
+                    background: 'rgba(173, 102, 213, 0.65)'
+                },
+                '&.advanced-lot': {
+                    background: 'rgba(242, 153, 74, 0.65)'
+                },
+                '&.title': {
+                    maxWidth: '500px'
+                },
+                '&.condition': {
+                    background: '#90BE27',
+                    borderRadius: '50px',
+                },
+            }
         },
         '& div.ad-info': {
             display: 'flex',
@@ -159,12 +177,9 @@ export const useStyles = makeStyles(() => ({
                 padding: '12px 30px',
                 background: '#F2F2F2',
                 borderRadius: '10px',
-                '& > h6.MuiTypography-body2': {},
             },
         },
         '& div.ad-parameters': {
-            borderBottom: '1px solid #ccc',
-            paddingBottom: '65px',
             '& p.MuiTypography-button': {
                 marginBottom: '22px',
             },
@@ -236,9 +251,6 @@ export const useStyles = makeStyles(() => ({
             },
         },
     },
-    '& a': {
-        textDecoration: 'none',
-    },
     icons: {
         width: '20px',
     },
@@ -255,4 +267,57 @@ export const useStyles = makeStyles(() => ({
             backgroundColor: '#C0C0C0',
         },
     },
+    modal: {
+        backgroundColor: 'rgba(0, 0, 0, .95)',
+        '& h6.MuiTypography-h6': {
+            color: '#fff',
+            fontWeight: '600',
+            textAlign: 'center',
+        }
+    },
+    slider: {
+        '& div.slick-slide img': {
+            cursor: 'default'
+            // '&.makeStyles-firstSlider-20 div.slick-slider': {
+            //     '& > div.slick-list': {
+            //         width: '1065px !important',
+            //         height: '627px !important',
+            //         margin: '0 auto',
+            //         '& div.slick-track': {
+            //             '& div.slick-slide': {
+            //                 '& img': {
+            //                     width: '100% !important',
+            //                     '&:hover': {
+            //                         cursor: 'default'
+            //                     }
+            //                 }
+            //             }
+            //         }
+            //     }
+            // },
+            // '&.makeStyles-secondSlider-21': {
+            //     marginTop: 30,
+            //     '& > div.slick-slider': {
+            //         '& div.slick-list': {
+            //             width: '1065px',
+            //             margin: '0 auto',
+            //             '& div.slick-track': {
+            //                 display: 'flex',
+            //                 '& div.slick-slide': {
+            //                     marginRight: 15,
+            //                     width: 'auto !important',
+            //                     '& div': {
+            //                         width: '255px !important',
+            //                         height: '150px !important',
+            //                         '& img': {
+            //                             height: 150
+            //                         }
+            //                     },
+            //                 }
+            //             },
+            //         }
+            //     }
+            // }
+        },
+    }
 }));
