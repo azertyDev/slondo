@@ -4,8 +4,6 @@ import {Router} from '@root/i18n'
 import {useRouter} from 'next/router'
 import {ButtonComponent} from '@src/components/elements/button/Button'
 import { CustomBadge } from '@src/components/elements/custom_budge/CustomBadge';
-
-// icons
 import {NotesIcon} from '@src/components/elements/icons/NotesIcon'
 import {GavelIcon} from "@src/components/elements/icons/GavelIcon";
 import {ArchiveIcon} from '@src/components/elements/icons/ArchiveIcon'
@@ -19,9 +17,8 @@ import {TimeLineIcon} from '@src/components/elements/icons/TimeLineIcon'
 import {ShoppingIcon} from '@src/components/elements/icons/ShoppingIcon'
 import {SettingsIcon} from '@src/components/elements/icons/SettingsIcon'
 import {PowerIcon} from '@src/components/elements/icons/PowerIcon'
-
-// styles
 import {useStyles} from './useStyles'
+
 
 export const ActionsMenu: FC<any> = (props) => {
     const {pathname} = useRouter();
@@ -37,11 +34,11 @@ export const ActionsMenu: FC<any> = (props) => {
             <div className="menu-item">
                 <div>
                     <ButtonComponent
-                        className={pathname === '/cabinet/myAds' ? 'selected' : ''}
-                        onClick={onButtonClick('myAds')}
+                        className={pathname === '/cabinet/myAncmnts' ? 'selected' : ''}
+                        onClick={onButtonClick('myAncmnts')}
                     >
                         <NotesIcon/>
-                        <Typography variant="subtitle1">{t('cabinet:myAds')}</Typography>
+                        <Typography variant="subtitle1">{t('cabinet:myAncmnts')}</Typography>
                     </ButtonComponent>
                 </div>
                 <div>

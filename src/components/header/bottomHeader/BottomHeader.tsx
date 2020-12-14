@@ -15,7 +15,7 @@ const BottomHeader = (props) => {
     const {isScrollBreak, handleOpenModal, isAuth, t} = props;
 
     const forwardToCreateAd = () => {
-        Router.push('/advertisement/create');
+        Router.push('/announcement/create');
     };
 
     const classes = useStyles(props);
@@ -77,7 +77,6 @@ const BottomHeader = (props) => {
                     </Container>
                 </AppBar>
             </Hidden>
-            {/*      Adaptive       */}
             <Hidden mdUp>
                 <div className="select-local">
                     <SearchForm t={t}/>
