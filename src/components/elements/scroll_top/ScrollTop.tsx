@@ -1,24 +1,19 @@
-import React from 'react';
+import React, {FC} from 'react';
 import useScrollTrigger from '@material-ui/core/useScrollTrigger';
 import Zoom from '@material-ui/core/Zoom';
-
-// styles
 import {useStyles} from './useStyles'
 
-export const ScrollTop = (props) => {
-    const { children, window } = props;
 
+export const ScrollTop: FC = (props) => {
     const trigger = useScrollTrigger({
-        target: window ? window() : undefined,
         disableHysteresis: true,
-        threshold: 550,
+        threshold: 1000,
     });
 
     const handleClick = (event) => {
         const anchor = (event.target.ownerDocument || document).querySelector('#back-to-top-anchor');
-
         if (anchor) {
-            anchor.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            anchor.scrollIntoView({behavior: 'smooth', block: 'center'});
         }
     };
 
@@ -26,7 +21,7 @@ export const ScrollTop = (props) => {
     return (
         <Zoom in={trigger}>
             <div onClick={handleClick} role="presentation" className={classes.root}>
-                {children}
+                {props.children}
             </div>
         </Zoom>
     );

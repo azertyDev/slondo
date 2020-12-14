@@ -14,7 +14,6 @@ import {useStyles} from './useStyles'
 
 
 export const CardItem: FC<InnerCardData & { className: string; isFetch: boolean }> = (props) => {
-
     const classes = useStyles();
     return (
         <Card className={classes.root} elevation={0}>
@@ -32,52 +31,50 @@ export const CardItem: FC<InnerCardData & { className: string; isFetch: boolean 
                             </IconButton>
                         </div>
                         <div>
-                            {props.delivery
-                                ? <span>
-                                        <DeliveryIcon/>
-                                    </span>
-                                : null}
-                            {props.safe_deal
-                                ? <span>
+                            {!!props.delivery && (
+                                <span>
+                                    <DeliveryIcon/>
+                                </span>
+                            )}
+                            {!!props.safe_deal && (
+                                <span>
                                     <SafeIcon/>
                                 </span>
-                                : null}
-                            {props.exchange
-                                ? <span>
+                            )}
+                            {!!props.exchange && (
+                                <span>
                                     <SwapIcon/>
                                 </span>
-                                : null}
+                            )}
                         </div>
                     </div>
                 </CardMedia>}
             <CardActionArea title={props.title}>
                 <CardContent>
                     {props.isFetch
-                        ? <Skeleton variant="rect"/>
-                        : <Typography variant="subtitle1" color="initial" noWrap>
-                            {props.title}
-                        </Typography>
-                    }
-                    {props.isFetch
-                        ? <Skeleton variant="rect"/>
-                        : <Typography variant="h5" color="initial">
-                            {props.price}
-                            <span>{props.currency.name}</span>
-                        </Typography>
-                    }
-                    {props.isFetch
-                        ? <Skeleton variant="rect"/>
-                        : <Typography variant="caption" noWrap={true} color="initial" className="card-location">
-                            {props.location}
-                        </Typography>
-                    }
-                    <br/>
-                    {props.isFetch
-                        ? <Skeleton variant="rect"/>
-                        : <Typography variant="caption" noWrap={true} color="initial" className="card-location">
-                            {props.created_at}
-                        </Typography>
-                    }
+                        ? <>
+                            <Skeleton variant="rect"/>
+                            <Skeleton variant="rect"/>
+                            <Skeleton variant="rect"/>
+                            <br/>
+                            <Skeleton variant="rect"/>
+                        </>
+                        : <>
+                            <Typography variant="subtitle1" color="initial" noWrap>
+                                {props.title}
+                            </Typography>
+                            <Typography variant="h5" color="initial">
+                                {props.price}
+                                <span>{props.currency.name}</span>
+                            </Typography>
+                            <Typography variant="caption" noWrap color="initial" className="card-location">
+                                {props.location}
+                            </Typography>
+                            <br/>
+                            <Typography variant="caption" noWrap color="initial" className="card-location">
+                                {props.created_at}
+                            </Typography>
+                        </>}
                 </CardContent>
             </CardActionArea>
         </Card>

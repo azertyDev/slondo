@@ -8,7 +8,11 @@ import {TFunction} from "i18next";
 import {CardData} from "@root/interfaces/CardData";
 import {CustomPagination} from "../../elements/custom_pagination/CustomPagination";
 import {useStyles} from './useStyles';
+import CyrillicToTranslit from 'cyrillic-to-translit-js';
 
+
+const transform = new CyrillicToTranslit().transform;
+const formatRegEx = /[\-\,\.\;\"\']+/g;
 
 interface MainContentProps {
     t: TFunction;
@@ -60,12 +64,18 @@ export const MainContent: FC<MainContentProps> = (props) => {
             <Grid container className="cards-container">
                 <Grid item md={9} xs={12}>
                     <CustomTabPanel value={tabValue} index={0}>
-                        {
-                            adCardData.error
-                                ? <Typography variant="subtitle1" className="error-text">{adCardData.error}</Typography>
-                                : <div className="ads-wrapper">
-                                    <Grid item container spacing={1}>
-                                        {adCardData.cardData.data.map((item, index) => (
+                        {adCardData.error
+                            ? <Typography variant="subtitle1" className="error-text">{adCardData.error}</Typography>
+                            : <div className="ads-wrapper">
+                                <Grid item container spacing={1}>
+                                    {adCardData.cardData.data.map((item, index) => {
+                                        const translatedTitle =
+                                            transform(item.title)
+                                                .toLowerCase()
+                                                .replace(formatRegEx, ' ')
+                                                .replace(/\s+/g, '-');
+
+                                        return (
                                             <Grid
                                                 key={index}
                                                 xs={6}
@@ -73,7 +83,7 @@ export const MainContent: FC<MainContentProps> = (props) => {
                                                 lg={3}
                                                 item
                                             >
-                                                <Link href={`/advertisement/show/${item.id}`}>
+                                                <Link href={`/obyavlenie/${translatedTitle}-${item.id}`}>
                                                     <a>
                                                         <CardItem
                                                             {...item}
@@ -84,19 +94,24 @@ export const MainContent: FC<MainContentProps> = (props) => {
                                                     </a>
                                                 </Link>
                                             </Grid>
-                                        ))}
-                                    </Grid>
-                                </div>
-                        }
+                                        )
+                                    })}
+                                </Grid>
+                            </div>}
                     </CustomTabPanel>
                     <CustomTabPanel value={tabValue} index={1}>
-                        {
-                            lotCardData.error
-                                ?
-                                <Typography variant="subtitle1" className="error-text">{lotCardData.error}</Typography>
-                                : <div className="lots-wrapper">
-                                    <Grid item container spacing={2}>
-                                        {lotCardData.cardData.data.map((item, index) => (
+                        {lotCardData.error
+                            ? <Typography variant="subtitle1" className="error-text">{lotCardData.error}</Typography>
+                            : <div className="lots-wrapper">
+                                <Grid item container spacing={2}>
+                                    {lotCardData.cardData.data.map((item, index) => {
+                                        const translatedTitle =
+                                            transform(item.title)
+                                                .toLowerCase()
+                                                .replace(formatRegEx, ' ')
+                                                .replace(/\s+/g, '-');
+
+                                        return (
                                             <Grid
                                                 key={index}
                                                 xs={6}
@@ -104,7 +119,7 @@ export const MainContent: FC<MainContentProps> = (props) => {
                                                 lg={3}
                                                 item
                                             >
-                                                <Link href={`/advertisement/show/${item.id}`}>
+                                                <Link href={`/obyavlenie/${translatedTitle}-${item.id}`}>
                                                     <a>
                                                         <CardItem
                                                             {...item}
@@ -115,22 +130,18 @@ export const MainContent: FC<MainContentProps> = (props) => {
                                                     </a>
                                                 </Link>
                                             </Grid>
-                                        ))}
-                                    </Grid>
-                                </div>
-                        }
+                                        )
+                                    })}
+                                </Grid>
+                            </div>}
                     </CustomTabPanel>
                     <Grid item xs={12} container justify="center">
-                        {
-                            lotCardData.error || adCardData.error
-                                ? null
-                                : <CustomPagination
-                                    count={props.pageCount}
-                                    currentPage={props.currentPage}
-                                    handlePaginationPage={props.handlePaginationPage}
-                                />
-                        }
-
+                        {!(lotCardData.error || adCardData.error) && (
+                            <CustomPagination
+                                count={props.pageCount}
+                                currentPage={props.currentPage}
+                                handlePaginationPage={props.handlePaginationPage}
+                            />)}
                     </Grid>
                 </Grid>
                 <Hidden smDown>

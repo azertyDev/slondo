@@ -1,8 +1,8 @@
 import React from 'react';
 import {Typography, Paper } from '@material-ui/core';
 import { Link } from '@root/i18n';
-// styles
 import { useStyles } from './useStyles';
+
 
 export const Notification = () => {
     const classes = useStyles();

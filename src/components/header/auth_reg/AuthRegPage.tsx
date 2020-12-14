@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {FC} from 'react'
 import {Grid, Hidden, IconButton, Typography} from '@material-ui/core'
 import {
     SafeBuyingIcon,
@@ -10,11 +10,15 @@ import {
 import {AuthRegForm} from "../../elements/auth_reg_form/AuthRegForm"
 import {CloseIcon} from "@src/components/elements/icons"
 import {AuthRegSm} from "@src/components/header/auth_reg/auth_reg_sm/AutRegSm";
-// Styles
+import {WithT} from "i18next";
 import {useStyles} from './useStyles'
 
 
-export const AuthRegPage = (props) => {
+type AuthRegPageType = {
+    handleCloseModal: () => void;
+};
+
+export const AuthRegPage: FC<AuthRegPageType & WithT> = (props) => {
     const {t, handleCloseModal} = props;
 
     const classes = useStyles();

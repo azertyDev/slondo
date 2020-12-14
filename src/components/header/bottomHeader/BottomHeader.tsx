@@ -8,7 +8,6 @@ import {Logo} from '@src/components/elements/icons';
 import {AddIcon} from "@src/components/elements/icons/AddIcon";
 import {CategorySortIcon} from "@src/components/elements/icons/CategorySortIcon";
 import {SignIcon} from "@src/components/elements/icons/SignIcon";
-// styles
 import {useStyles} from "./useStyles";
 
 
@@ -16,7 +15,7 @@ const BottomHeader = (props) => {
     const {isScrollBreak, handleOpenModal, isAuth, t} = props;
 
     const forwardToCreateAd = () => {
-        Router.push('/advertisement/create');
+        Router.push('/announcement/create');
     };
 
     const classes = useStyles(props);
@@ -78,7 +77,6 @@ const BottomHeader = (props) => {
                     </Container>
                 </AppBar>
             </Hidden>
-            {/*      Adaptive       */}
             <Hidden mdUp>
                 <div className="select-local">
                     <SearchForm t={t}/>

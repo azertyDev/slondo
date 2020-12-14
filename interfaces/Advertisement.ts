@@ -31,7 +31,6 @@ export interface CreateAdState {
 
 export interface CreateAdFields {
     isFetch: boolean;
-    error: string;
     title: string;
     price: string;
     currency: {

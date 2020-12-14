@@ -8,7 +8,7 @@ import {CategoryType} from "@root/interfaces/Categories";
 // const {token} = cookies.get('token') || {token: ''};
 
 const amazonServer = 'http://54.205.72.116/api/';
-const localServer = 'http://192.168.1.60/slondo/public/api/';
+// const localServer = 'http://192.168.1.60/slondo/public/api/';
 
 const instance = Axios.create({
     withCredentials: true,
@@ -58,7 +58,7 @@ export const userAPI = {
                 throw err;
             });
     },
-    getAddById: (ads_id, lang): Promise<any> => {
+    getAddById: (ads_id: string | string[], lang: string): Promise<any> => {
         return instance.get(`getAddById?ads_id=${ads_id}&lang=${lang}`)
             .then((res) => res.data)
             .catch((err) => {
@@ -79,7 +79,7 @@ export const userAPI = {
                 throw err
             })
     },
-    getAdTypes: (lang: string) => {
+    getAdTypes: (lang: string): Promise<any> => {
         return instance.get(`ads/type?lang=${lang}`)
             .then(res => res.data)
             .catch(err => {

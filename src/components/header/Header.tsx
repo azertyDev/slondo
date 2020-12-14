@@ -1,10 +1,9 @@
 import React, {useEffect} from 'react';
 import Cookies from 'universal-cookie';
 import {i18n, withTranslation} from '@root/i18n';
-import {Container, Typography} from '@material-ui/core';
+import {Container, Modal, Typography} from '@material-ui/core';
 import TopHeaderContainer from "./topHeader/TopHeaderContainer";
 import BottomHeader from './bottomHeader/BottomHeader';
-import {ModalComponent} from '../elements/modal/Modal';
 import {AuthRegPage} from "./auth_reg/AuthRegPage";
 import {useDispatch, useSelector} from "react-redux";
 import {setIsAuthAction, setIsAuthModalOpen} from '@src/redux/slices/authRegSlice';
@@ -12,7 +11,6 @@ import {RootState} from "@src/redux/rootReducer";
 import {ButtonComponent} from "@src/components/elements/button/Button";
 import {fetchCategories} from "@src/redux/slices/categoriesSlice";
 import {fetchLocations} from "@src/redux/slices/locationsSlice";
-// styles
 import {useStyles} from './useStyles';
 
 
@@ -27,7 +25,7 @@ const Header = (props) => {
     const {isAuth, isAuthModalOpen} = useSelector((store: RootState) => store.auth);
     const dispatch = useDispatch();
 
-    const handleIsOpenModal = (value) => () => {
+    const handleModal = (value) => () => {
         dispatch(setIsAuthModalOpen(value));
     };
 
@@ -44,18 +42,21 @@ const Header = (props) => {
     return (
         <header className={classes.root} id='back-to-top-anchor'>
             <Container maxWidth="lg">
-                <TopHeaderContainer t={t} handleOpenModal={handleIsOpenModal(true)}/>
+                <TopHeaderContainer
+                    t={t}
+                    handleOpenModal={handleModal(true)}
+                />
                 <div className={classes.bottomHeader}>
                     <BottomHeader
                         t={t}
                         isAuth={isAuth}
-                        handleOpenModal={handleIsOpenModal(true)}
+                        handleOpenModal={handleModal(true)}
                     />
                 </div>
             </Container>
-            <ModalComponent
-                isOpen={isAuthModalOpen}
-                handleCloseModal={handleIsOpenModal(false)}
+            <Modal
+                open={isAuthModalOpen}
+                onClose={handleModal(false)}
                 className={classes.modalDialog}
             >
                 <>
@@ -64,17 +65,17 @@ const Header = (props) => {
                             ? <div style={{width: '200px', height: '80px', backgroundColor: '#fff'}}>
                                 <Typography variant='h5'>Выйти из сайта?</Typography>
                                 <div style={{display: 'flex'}}>
-                                    <ButtonComponent onClick={handleIsOpenModal(false)}>Отмена</ButtonComponent>
+                                    <ButtonComponent onClick={handleModal(false)}>Отмена</ButtonComponent>
                                     <ButtonComponent>Выйти</ButtonComponent>
                                 </div>
                             </div>
                             : <AuthRegPage
                                 t={t}
-                                handleCloseModal={handleIsOpenModal(false)}
+                                handleCloseModal={handleModal(false)}
                             />
                     }
                 </>
-            </ModalComponent>
+            </Modal>
         </header>
     )
 };

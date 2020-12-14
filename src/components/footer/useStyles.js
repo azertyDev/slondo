@@ -2,7 +2,6 @@ import { makeStyles } from '@material-ui/core/styles';
 
 export const useStyles = makeStyles(() => ({
     root: {
-        backgroundColor: '#97aaa5',
         marginTop: '50px',
         width: '100%',
         height: '400px',
@@ -31,7 +30,7 @@ export const useStyles = makeStyles(() => ({
                     },
                 },
                 '& div.social-icons': {
-                    '& > div': {git
+                    '& > div': {
                         margin: 0,
                         width: 'auto',
                     },
