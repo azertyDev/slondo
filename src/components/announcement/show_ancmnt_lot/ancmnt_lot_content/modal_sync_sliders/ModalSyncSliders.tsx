@@ -7,28 +7,24 @@ import React, {
     useState,
     useEffect,
 } from 'react';
-import {CustomSlider} from '../../../../elements/custom_slider/CustomSlider';
-import {useStyles} from './useStyles';
-import {Typography} from "@material-ui/core";
-
+import { CustomSlider } from '@src/components/elements/custom_slider/CustomSlider';
+import { useStyles } from './useStyles';
+import { Typography } from '@material-ui/core';
+import { ButtonComponent } from '@src/components/elements/button/Button';
 
 type SyncSlidersProps = {
     initialSlide: number;
     setInitialSlide: Dispatch<SetStateAction<number>>;
     imgs: {
         alt: string;
-        url: { default: string }
+        url: { default: string };
     }[];
 };
 
 export const ModalSyncSliders: FC<SyncSlidersProps> = (props) => {
-    const {
-        imgs,
-        initialSlide,
-        setInitialSlide,
-    } = props;
+    const { imgs, initialSlide, setInitialSlide } = props;
 
-    const [slidersNav, setSlidersNav] = useState({nav1: null, nav2: null});
+    const [slidersNav, setSlidersNav] = useState({ nav1: null, nav2: null });
     const slider1: MutableRefObject<unknown> = useRef();
     const slider2: MutableRefObject<unknown> = useRef();
 
@@ -63,11 +59,7 @@ export const ModalSyncSliders: FC<SyncSlidersProps> = (props) => {
                     afterChange={handleAfterChange}
                 >
                     {imgs.map((img, i) => (
-                        <img
-                            key={i}
-                            alt={img.alt}
-                            src={img.url.default}
-                        />
+                        <img key={i} alt={img.alt} src={img.url.default} />
                     ))}
                 </CustomSlider>
             </div>
@@ -81,20 +73,16 @@ export const ModalSyncSliders: FC<SyncSlidersProps> = (props) => {
                     arrows={false}
                     initialSlide={initialSlide}
                 >
-                    {imgs.map(({url, alt}, i) => (
-                        <img
-                            key={i}
-                            alt={alt}
-                            src={url.default}
-                        />
+                    {imgs.map(({ url, alt }, i) => (
+                        <img key={i} alt={alt} src={url.default} />
                     ))}
                 </CustomSlider>
-                <div className='slider-counter'>
-                    <button onClick={prev}>prev</button>
+                <div className="slider-counter">
+                    <ButtonComponent onClick={prev}>&lt;</ButtonComponent>
                     <Typography variant="subtitle1">
                         {initialSlide + 1} / {imgs.length}
                     </Typography>
-                    <button onClick={next}>next</button>
+                    <ButtonComponent onClick={next}>&gt;</ButtonComponent>
                 </div>
             </div>
         </div>

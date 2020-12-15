@@ -124,25 +124,34 @@ export const AncmntLotContent = ({ data, parameters, t }) => {
                 </BreadcrumbsComponent>
             </div>
             <div className="adv-header">
-                <Typography
-                    variant="h6"
-                    className={
-                        data.ads_type.id === 1
-                            ? 'advertisement'
-                            : data.ads_type.id === 2
-                            ? 'lot'
-                            : 'advanced-lot'
-                    }
-                >
-                    {data.ads_type.name}
-                </Typography>
-                <Typography variant="h2" className="title" noWrap>
-                    {data.title}
-                </Typography>
-                {data.condition.id && (
-                    <Typography className="condition" variant="h6">
-                        {data.condition.name}
+                <div>
+                    <Typography
+                        variant="h6"
+                        className={
+                            data.ads_type.id === 1
+                                ? 'advertisement'
+                                : data.ads_type.id === 2
+                                ? 'lot'
+                                : 'advanced-lot'
+                        }
+                    >
+                        {data.ads_type.name}
                     </Typography>
+                </div>
+                <div className="title">
+                    <Typography variant="h2" noWrap>
+                        {data.title}
+                    </Typography>
+                </div>
+
+                {/* data.condition.id */}
+                {true && (
+                    <div className="condition">
+                        <Typography variant="h6">
+                            {/* {data.condition.name} */}
+                            Б/У
+                        </Typography>
+                    </div>
                 )}
             </div>
             <SyncSliders

@@ -2,6 +2,8 @@ import { makeStyles } from '@material-ui/core/styles';
 
 export const useStyles = makeStyles(() => ({
     root: {
+        paddingBottom: 55,
+        borderBottom: '1px solid rgba(103, 94, 170, 0.5)',
         '& a': {
             textDecoration: 'none',
         },
@@ -15,32 +17,40 @@ export const useStyles = makeStyles(() => ({
             display: 'flex',
             marginBottom: '10px',
             alignItems: 'center',
-            '& > h6': {
-                marginRight: '15px',
-                padding: '0px 10px',
-                lineHeight: '30px',
-                borderRadius: '5px',
-                fontWeight: '600',
-                '&:first-child, &.condition': {
-                    color: '#fff',
+            '& > div': {
+                '&:not(:last-child)': {
+                    marginRight: '15px',
                 },
-                '&.advertisement': {
-                    background: 'rgba(136, 202, 236, 0.65)',
-                },
-                '&.lot': {
-                    background: 'rgba(173, 102, 213, 0.65)',
-                },
-                '&.advanced-lot': {
-                    background: 'rgba(242, 153, 74, 0.65)',
-                },
-                '&.condition': {
-                    margin: '0 10px 0 auto',
-                    background: '#90BE27',
-                    borderRadius: '50px',
+                '& > h6.MuiTypography-h6': {
+                    padding: '0px 20px',
+                    lineHeight: '30px',
+                    borderRadius: '5px',
+                    fontWeight: '600',
+                    '&.advertisement': {
+                        background: 'rgba(136, 202, 236, 0.65)',
+                    },
+                    '&.lot': {
+                        background: 'rgba(173, 102, 213, 0.65)',
+                    },
+                    '&.advanced-lot': {
+                        background: 'rgba(242, 153, 74, 0.65)',
+                    },
+                    '&:first-child, &.condition': {
+                        color: '#fff',
+                    },
                 },
             },
-            '& > h2': {
-                '&.title': {
+            '& > div.condition > h6.MuiTypography-h6': {
+                textAlign: 'end',
+                background: '#90BE27',
+                borderRadius: '50px',
+                margin: 0,
+                fontSize: '1.125rem',
+            },
+            '& > div.title': {
+                flex: 'auto!important',
+                marginRight: 15,
+                '& > h2.MuiTypography-h2': {
                     fontSize: '20px',
                     fontWeight: '600',
                 },
@@ -276,7 +286,7 @@ export const useStyles = makeStyles(() => ({
         },
     },
     modal: {
-        backgroundColor: 'rgba(0, 0, 0, .95)',
+        backgroundColor: 'rgba(51, 51, 51, 0.9)',
         '& h6.MuiTypography-h6': {
             color: '#fff',
             fontWeight: '600',
@@ -284,48 +294,10 @@ export const useStyles = makeStyles(() => ({
         },
     },
     slider: {
-        '& div.slick-slide img': {
-            cursor: 'default',
-            // '&.makeStyles-firstSlider-20 div.slick-slider': {
-            //     '& > div.slick-list': {
-            //         width: '1065px !important',
-            //         height: '627px !important',
-            //         margin: '0 auto',
-            //         '& div.slick-track': {
-            //             '& div.slick-slide': {
-            //                 '& img': {
-            //                     width: '100% !important',
-            //                     '&:hover': {
-            //                         cursor: 'default'
-            //                     }
-            //                 }
-            //             }
-            //         }
-            //     }
-            // },
-            // '&.makeStyles-secondSlider-21': {
-            //     marginTop: 30,
-            //     '& > div.slick-slider': {
-            //         '& div.slick-list': {
-            //             width: '1065px',
-            //             margin: '0 auto',
-            //             '& div.slick-track': {
-            //                 display: 'flex',
-            //                 '& div.slick-slide': {
-            //                     marginRight: 15,
-            //                     width: 'auto !important',
-            //                     '& div': {
-            //                         width: '255px !important',
-            //                         height: '150px !important',
-            //                         '& img': {
-            //                             height: 150
-            //                         }
-            //                     },
-            //                 }
-            //             },
-            //         }
-            //     }
-            // }
+        marginTop: '70px',
+        '& > h6.MuiTypography-h6': {
+            marginBottom: '25px',
+            textAlign: 'center',
         },
     },
 }));

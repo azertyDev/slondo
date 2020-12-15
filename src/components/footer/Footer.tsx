@@ -170,7 +170,7 @@ export const Footer = () => {
                         </Grid>
                         <Grid item xs={3} container>
                             <div className="social-icons">
-                                <SocialsBlock />
+                                <SocialsBlock footer/>
                             </div>
                         </Grid>
                     </Grid>

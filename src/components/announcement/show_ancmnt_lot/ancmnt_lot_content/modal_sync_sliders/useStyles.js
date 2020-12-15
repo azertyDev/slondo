@@ -1,4 +1,4 @@
-import {makeStyles} from '@material-ui/core/styles';
+import { makeStyles } from '@material-ui/core/styles';
 
 export const useStyles = makeStyles(() => ({
     root: {
@@ -10,10 +10,15 @@ export const useStyles = makeStyles(() => ({
             '&.slick-next': {
                 right: '25px',
             },
-        }
+        },
     },
     firstSlider: {
         width: '100%',
+        marginBottom: 30,
+        '& div.slick-list': {
+            width: '80%',
+            margin: '0 auto 0 auto',
+        },
         '& div.slick-slide img': {
             width: `100% !important`,
             height: '518px',
@@ -48,40 +53,55 @@ export const useStyles = makeStyles(() => ({
                 cursor: 'default',
                 '& image': {
                     transform: 'scale(1)',
-                }
-            }
-        }
+                },
+            },
+        },
     },
     secondSlider: {
+        '& div.slick-list': {
+            width: '80%',
+            margin: '0 auto 0 auto',
+        },
         '& div.slick-track': {
             margin: 'inherit',
         },
         '& div.slick-slide': {
+            padding: '0 7.5px',
             '& > div, & img': {
                 height: `150px !important`,
             },
             '& > div': {
-                padding: '0 2.5px'
+                padding: '0 2.5px',
             },
             '& img': {
                 objectFit: 'cover',
                 '&:hover': {
-                    cursor: 'pointer'
-                }
+                    cursor: 'pointer',
+                },
             },
         },
         '& > div.slider-counter': {
+            padding: '8px 0',
             display: 'flex',
-            width: '130px',
-            height: '30px',
+            width: '90px',
+            justifyContent: 'space-between',
             background: '#000',
             borderRadius: '100px',
             margin: '30px auto 0 auto',
-            '& h6.MuiTypography-subtitle1': {
+            '& > h6.MuiTypography-subtitle1': {
                 textAlign: 'center',
                 color: '#fff',
-                padding: '8px 0'
-            }
+            },
+            '& > button': {
+                background: 'none',
+                color: '#fff',
+                border: 'none',
+                width: '20px',
+                padding: 0,
+                '&:hover': {
+                    cursor: 'pointer',
+                },
+            },
         },
     },
 }));

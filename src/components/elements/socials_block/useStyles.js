@@ -1,8 +1,7 @@
-import { makeStyles } from '@material-ui/core/styles'
+import { makeStyles } from '@material-ui/core/styles';
 
 export const useStyles = makeStyles(() => ({
     root: {
-        width: '25%',
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
@@ -20,4 +19,4 @@ export const useStyles = makeStyles(() => ({
             },
         },
     },
-}))
+}));

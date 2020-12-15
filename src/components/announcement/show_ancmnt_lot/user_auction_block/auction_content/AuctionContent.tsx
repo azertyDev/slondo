@@ -14,12 +14,6 @@ export const AuctionContent = (props) => {
     return (
         <div className={classes.root}>
             <div className="lot-info">
-                <div className="price">
-                    <Typography variant="h4" color="initial">
-                        <span>{data.price}</span>{' '}
-                        {t(`common:${data.currency.name}`)}
-                    </Typography>
-                </div>
                 {data.auction && (
                     <div className="reserve-price">
                         <LockIcon />

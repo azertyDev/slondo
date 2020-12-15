@@ -1,12 +1,26 @@
-import {makeStyles} from '@material-ui/core/styles';
+import { makeStyles } from '@material-ui/core/styles';
 
 export const useStyles = makeStyles((theme) => ({
     root: {
-        margin: '20px 0!important',
         '& div.contact-buttons': {
-            '& button:not(:last-child)': {
-                marginBottom: '10px',
-            }
+            '& button': {
+                border: 'none',
+                height: 44,
+                '&:not(:last-child)': {
+                    marginBottom: '10px',
+                },
+                '&.safe-shopping-btn': {
+                    background: '#7DBCF6',
+                    '& > svg': {
+                        marginRight: 10,
+                        width: '17px',
+                        height: '20px',
+                        '& > path': {
+                            fill: '#fff',
+                        },
+                    },
+                },
+            },
         },
     },
 }));

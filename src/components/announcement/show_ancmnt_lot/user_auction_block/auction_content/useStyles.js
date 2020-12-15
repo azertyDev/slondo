@@ -2,21 +2,11 @@ import { makeStyles } from '@material-ui/core/styles';
 
 export const useStyles = makeStyles((theme) => ({
     root: {
+        marginBottom: 20,
         '& div.lot-info': {
             display: 'flex',
             justifyContent: 'center',
             flexDirection: 'column',
-            '& > div.price': {
-                marginBottom: 10,
-                '& > h4': {
-                    '& span': {
-                        fontWeight: '600',
-                        fontSize: 36,
-                    },
-                    textAlign: 'end',
-                    fontSize: 25,
-                },
-            },
             '& div.lot-timer': {
                 marginBottom: 20,
             },

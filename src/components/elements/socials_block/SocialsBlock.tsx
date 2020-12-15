@@ -13,11 +13,11 @@ export const SocialsBlock = (props) => {
     const classes = useStyles();
     return (
         <div className={classes.root}>
-            {props.footer ? (
+            {props.footer ? null : (
                 <Typography variant="subtitle1" color="initial">
                     Мы в социальных сетях:
                 </Typography>
-            ) : null}
+            )}
             <div>
                 <Link href="#">
                     <a>

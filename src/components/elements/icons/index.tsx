@@ -38,30 +38,30 @@ export const Subscribe_icon = `/icons/touch_icon.svg`;
 export const SpeakerNotes_icon = `/icons/speaker_notes.svg`;
 export const Bonus_icon = `/icons/bonus_icon.svg`;
 
-
 // Custom svgs
-export {ButtonCloseIcon} from './close_icon/CloseIcon';
-export {PrevArrowIcon} from './prev_arrow_icon/PrevArrowIcon';
-export {BusinessIcon} from './BusinessIcon';
-export {StoreIcon} from './StoreIcon';
-export {QuestionIcon} from './QuestionIcon';
-export {LocationIcon} from './LocationIcon';
-export {BonusIcon} from './BonusIcon';
-export {FavoriteIcon} from './FavoriteIcon';
-export {FavoriteBorderIcon} from './FavoriteBorderIcon';
-export {DeliveryIcon} from './DeliveryIcon';
-export {SafeIcon} from './SafeIcon';
-export {SwapIcon} from './SwapIcon';
-export {LockIcon} from './LockIcon';
-export {MegaphoneIcon} from './MegaphoneIcon';
-export {RaiseToTopIcon} from './RaiseToTopIcon';
-export {PromoteIcon} from './PromoteIcon';
-export {DoubleUpIcon} from './DoubleUpIcon';
-export {SettingsIcon} from './SettingsIcon';
-export {EyeIcon} from './EyeIcon';
-export {RestoreIcon} from './RestoreIcon';
-export {DoneAllIcon} from './DoneAllIcon';
-export {CloseIcon} from './CloseIcon';
-export {CameraIcon} from './CameraIcon';
-export {Logo} from './logo/Logo'
-export {PhoneIcon} from './PhoneIcon'
+export { ButtonCloseIcon } from './close_icon/CloseIcon';
+export { PrevArrowIcon } from './prev_arrow_icon/PrevArrowIcon';
+export { BusinessIcon } from './BusinessIcon';
+export { StoreIcon } from './StoreIcon';
+export { QuestionIcon } from './QuestionIcon';
+export { LocationIcon } from './LocationIcon';
+export { FavoriteIcon } from './FavoriteIcon';
+export { FavoriteBorderIcon } from './FavoriteBorderIcon';
+export { DeliveryIcon } from './DeliveryIcon';
+export { SafeIcon } from './SafeIcon';
+export { SwapIcon } from './SwapIcon';
+export { LockIcon } from './LockIcon';
+export { MegaphoneIcon } from './MegaphoneIcon';
+export { RaiseToTopIcon } from './RaiseToTopIcon';
+export { PromoteIcon } from './PromoteIcon';
+export { DoubleUpIcon } from './DoubleUpIcon';
+export { SettingsIcon } from './SettingsIcon';
+export { EyeIcon } from './EyeIcon';
+export { RestoreIcon } from './RestoreIcon';
+export { DoneAllIcon } from './DoneAllIcon';
+export { CloseIcon } from './CloseIcon';
+export { CameraIcon } from './CameraIcon';
+export { Logo } from './logo/Logo';
+export { PhoneIcon } from './PhoneIcon';
+export { SurpriseIcon } from './SurpriseIcon';
+export { SubstractIcon } from './SubstractIcon';
