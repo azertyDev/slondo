@@ -178,6 +178,7 @@ export const useStyles = makeStyles(() => ({
                 padding: '10px 21px',
                 '& > h6.MuiTypography-subtitle1': {
                     fontSize: '1.125rem',
+                    lineHeight: '25px',
                     '& > span': {
                         color: '#675EAA',
                         fontWeight: '600',
@@ -238,7 +239,6 @@ export const useStyles = makeStyles(() => ({
                         fontSize: '18px',
                     },
                     '& h6.value': {
-                        width: '20%',
                         fontSize: '18px',
                         fontWeight: '600',
                     },

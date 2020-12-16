@@ -11,7 +11,7 @@ const amazonServer = 'http://54.205.72.116/api/';
 // const localServer = 'http://192.168.1.60/slondo/public/api/';
 
 const instance = Axios.create({
-    withCredentials: false,
+    withCredentials: true,
     baseURL: amazonServer,
 });
 

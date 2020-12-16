@@ -21,7 +21,7 @@ export const UserContent = (props) => {
                 <ButtonComponent color="primary" onClick={handleShowPhone}>
                     <Typography variant="subtitle1" color="initial">
                         {isPhoneAval
-                            ? props.data.phone ?? '0123456789'
+                            ? props.data.phone ?? 'default'
                             : 'Показать номер'}
                     </Typography>
                 </ButtonComponent>

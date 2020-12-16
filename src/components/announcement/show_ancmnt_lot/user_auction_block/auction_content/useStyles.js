@@ -135,9 +135,6 @@ export const useStyles = makeStyles((theme) => ({
     },
 
     lotTimer: {
-        display: 'flex',
-        justifyContent: 'center',
-        flexDirection: 'column',
         padding: '15px 30px 8px 30px',
         boxShadow: '0px 0px 8px rgba(103, 94, 170, 0.25)',
         borderRadius: '3px',
@@ -149,35 +146,47 @@ export const useStyles = makeStyles((theme) => ({
         },
         '& > div': {
             display: 'flex',
-            justifyContent: 'space-between',
-            marginTop: '7px',
+            flexDirection: 'column',
+            '& div.timer-title': {
+                textAlign: 'center',
+                marginBottom: 10,
+                '& span.MuiTypography-button': {},
+            },
             '& > span': {
                 display: 'inline-block',
                 fontSize: '24px',
                 fontWeight: '600',
                 lineHeight: 'normal',
             },
-            '& > div': {
+            '& > div:last-child': {
                 display: 'flex',
-                flexDirection: 'column',
-                alignItems: 'center',
-                '& > span:first-child': {
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
+                justifyContent: 'space-between',
+                '& > div': {
                     textAlign: 'center',
-                    background: '#675EAA',
-                    borderRadius: '3px',
-                    width: '36px',
-                    height: '38px',
-                    '& h6.MuiTypography-h6': {
-                        fontWeight: '600',
-                        color: '#FFFFFF',
+                    '& span': {
+                        '&:first-child': {
+                            display: 'flex',
+                            alignItems: 'center',
+                            justifyContent: 'center',
+                            textAlign: 'center',
+                            background: '#675EAA',
+                            borderRadius: '3px',
+                            width: '36px',
+                            height: '38px',
+                            '& h6.MuiTypography-h6': {
+                                fontWeight: '600',
+                                color: '#FFFFFF',
+                            },
+                            '&.disabled': {
+                                background: '#BDBDBD',
+                            },
+                        },
                     },
                 },
-                '& > span.MuiTypography-caption': {
-                    marginTop: 5,
-                    textAlign: 'center',
+                '& > span': {
+                    marginTop: '5px',
+                    fontSize: '24px',
+                    fontWeight: '600',
                 },
             },
         },

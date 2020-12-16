@@ -63,6 +63,7 @@ export const AncmntLotContent = ({ data, parameters, t }) => {
                         </li>
                     );
                 });
+
                 items.push(
                     <div key={i} className="params-list">
                         <Typography variant="subtitle1">{key}</Typography>
