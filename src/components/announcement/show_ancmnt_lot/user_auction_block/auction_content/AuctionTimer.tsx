@@ -19,7 +19,7 @@ export const AuctionTimer = ({ date }) => {
                 <div>
                     <div className="timer-title">
                         <Typography variant="button" color="initial">
-                            Окончание торгов через:
+                            Аукцион закрыт:
                         </Typography>
                     </div>
                     <div>

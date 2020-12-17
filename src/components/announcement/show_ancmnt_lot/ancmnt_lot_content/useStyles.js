@@ -9,8 +9,13 @@ export const useStyles = makeStyles(() => ({
         },
         '& div.breadcrumbs': {
             marginBottom: '10px',
-            '& li.MuiBreadcrumbs-li a h6': {
-                color: 'rgba(49, 49, 49, 0.6)',
+            '& li.MuiBreadcrumbs-li': {
+                // '&:last-child': {
+                //     width: '41%',
+                // },
+                '& > a h6': {
+                    color: 'rgba(49, 49, 49, 0.6)',
+                },
             },
         },
         '& div.adv-header': {
@@ -83,7 +88,7 @@ export const useStyles = makeStyles(() => ({
                 display: 'flex',
                 alignItems: 'center',
                 flexDirection: 'row',
-                padding: '8px 15px',
+                padding: '5px 15px',
                 marginRight: '30px',
                 borderRadius: '100px',
                 boxShadow: '0px 0px 15px rgba(0, 0, 0, 0.1)',

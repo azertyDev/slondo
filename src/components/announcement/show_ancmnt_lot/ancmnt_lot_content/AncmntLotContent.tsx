@@ -54,15 +54,13 @@ export const AncmntLotContent = ({ data, parameters, t }) => {
                 Array.isArray(parameters[key]) &&
                 parameters[key].length !== 0
             ) {
-                const params = parameters[key].map((param, i) => {
-                    return (
-                        <li key={i}>
-                            <Typography variant="subtitle1" className="value">
-                                {param.name}
-                            </Typography>
-                        </li>
-                    );
-                });
+                const params = (
+                    <li>
+                        <Typography variant="subtitle1" className="value">
+                            {parameters[key].map(param => param.name).join(', ')}
+                        </Typography>
+                    </li>
+                );
 
                 items.push(
                     <div key={i} className="params-list">

@@ -30,12 +30,17 @@ export const UserContent = (props) => {
                         Написать продавцу
                     </Typography>
                 </ButtonComponent>
-                <ButtonComponent color="primary" className='safe-shopping-btn'>
-                    <SafeIcon />
-                    <Typography variant="subtitle1" color="initial">
-                        Безопасная покупка
-                    </Typography>
-                </ButtonComponent>
+                {props.data.safe_deal === 1 && (
+                    <ButtonComponent
+                        color="primary"
+                        className="safe-shopping-btn"
+                    >
+                        <SafeIcon />
+                        <Typography variant="subtitle1" color="initial">
+                            Безопасная покупка
+                        </Typography>
+                    </ButtonComponent>
+                )}
             </div>
         </div>
     );

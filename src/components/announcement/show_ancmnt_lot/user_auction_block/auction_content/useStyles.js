@@ -55,33 +55,101 @@ export const useStyles = makeStyles((theme) => ({
                         textDecorationLine: 'underline',
                     },
                 },
+                '& h6.all-bets': {
+                    fontWeight: '400',
+                },
                 '& > div.participants': {
-                    flexDirection: 'column',
+                    padding: '15px',
                     borderTop: '1px solid rgba(103, 94, 170, 0.5)',
                     borderBottom: '1px solid rgba(103, 94, 170, 0.5)',
-                    padding: '15px',
-                    '& > h6.MuiTypography-subtitle1': {
-                        marginBottom: '6px',
-                    },
-                    '& > div': {
-                        display: 'flex',
-                        justifyContent: 'space-between',
-                        '&:not(:last-child)': {
-                            marginBottom: '16px',
-                        },
-                        '& > h6.MuiTypography-subtitle1': {
-                            width: '50%',
-                        },
-                        '& > h6.MuiTypography-subtitle1:last-child': {
-                            textAlign: 'end',
-                            fontWeight: '600',
-                            color: '#666',
-                        },
-                        '& > button': {
-                            marginTop: '20px',
-                        },
-                        '& span': {
-                            color: '#AD66D5',
+                    '& > ul': {
+                        listStyle: 'none',
+                        padding: '0',
+                        margin: '0',
+                        '& > li': {
+                            display: 'flex',
+                            justifyContent: 'space-between',
+                            position: 'relative',
+                            padding: '10px 0',
+                            '& > div': {
+                                '&:first-child': {
+                                    display: 'flex',
+                                    flexFlow: 'column wrap',
+                                    width: '60%',
+                                    '& div.participant-name': {
+                                        marginBottom: '10px',
+                                        '& > h6.MuiTypography-subtitle1': {
+                                            color: '#666666',
+                                            '& > span': {
+                                                color: '#AD66D5',
+                                            },
+                                        },
+                                    },
+                                    '& div.dateAndTime': {
+                                        display: 'flex',
+                                        justifyContent: 'space-between',
+                                        width: '80%',
+                                        '& > h6.bet-time': {
+                                            color: '#2F80ED',
+                                            fontSize: '0.875rem',
+                                        },
+                                        '& > h6.bet-date': {
+                                            color: 'rgba(49, 49, 49, 0.6)',
+                                            fontSize: '0.875rem',
+                                        },
+                                    },
+                                },
+                                '&:last-child': {
+                                    textAlign: 'end',
+                                    width: '40%',
+                                    '& > h6': {
+                                        fontWeight: '600',
+                                        '&.final-bet': {
+                                            color: 'rgba(49, 49, 49, 0.6)',
+                                            marginBottom: '10px',
+                                        },
+                                        '&.per-bet': {
+                                            color: '#BDBDBD',
+                                            fontSize: '0.875rem',
+                                            fontWeight: '400',
+                                        },
+                                    },
+                                },
+                            },
+                            '&:after': {
+                                content: '""',
+                                position: 'absolute',
+                                bottom: 0,
+                                border: 0,
+                                margin: 0,
+                                height: 1,
+                                width: '100%',
+                                background: '#333',
+                                background:
+                                    'linear-gradient(left, hsla(0,0%,0%,0) 0%, hsla(0,0%,85%,1) 50%, hsla(0,0%,0%,0) 100%)',
+                            },
+                            '&:last-child': {
+                                '&:after': {
+                                    display: 'none',
+                                },
+                                paddingBottom: '0',
+                            },
+                            '&:first-child': {
+                                '& > div': {
+                                    '&:last-child': {
+                                        '& > h6': {
+                                            fontWeight: '600',
+                                            '&.final-bet': {
+                                                color: '#666666',
+                                            },
+                                            '&.per-bet': {
+                                                color: '#90BE27',
+                                                fontWeight: '600',
+                                            },
+                                        },
+                                    },
+                                },
+                            },
                         },
                     },
                 },

@@ -33,7 +33,8 @@ export const AuctionContent = (props) => {
                         {date !== 0 && <AuctionTimer date={date} />}
                     </div>
                 ) : null}
-                {data.auction ? (
+                {/* ----------------------- Убрать кнопку когда аукцион закрыт ----------------------- */}
+                {data.ads_type.id === 3 && (
                     <div className="buy-now">
                         <ButtonComponent>
                             <Typography variant="subtitle1" color="initial">
@@ -41,54 +42,91 @@ export const AuctionContent = (props) => {
                             </Typography>
                         </ButtonComponent>
                     </div>
-                ) : null}
+                )}
                 <div className="lot-participants-block">
                     <Typography variant="subtitle1" color="initial">
                         Текущие ставки
                     </Typography>
                     <div className="participants">
-                        <div>
-                            <Typography variant="subtitle1" noWrap>
-                                Playe***112 (<span>1</span>)
-                            </Typography>
-                            <Typography variant="subtitle1" noWrap>
-                                1 350 000
-                            </Typography>
-                        </div>
-                        <div>
-                            <Typography variant="subtitle1" noWrap>
-                                Samv****91 (<span>3</span>)
-                            </Typography>
-                            <Typography variant="subtitle1" noWrap>
-                                1 240 000
-                            </Typography>
-                        </div>
-                        <div>
-                            <Typography variant="subtitle1" noWrap>
-                                Sar***44 (<span>1</span>)
-                            </Typography>
-                            <Typography variant="subtitle1" noWrap>
-                                1 150 000
-                            </Typography>
-                        </div>
-                        <div>
-                            <Typography variant="subtitle1" noWrap>
-                                Playe***54 (<span>2</span>)
-                            </Typography>
-                            <Typography variant="subtitle1" noWrap>
-                                970 000
-                            </Typography>
-                        </div>
-                        <div>
-                            <Typography variant="subtitle1" noWrap>
-                                Grand***ve (<span>4</span>)
-                            </Typography>
-                            <Typography variant="subtitle1" noWrap>
-                                950 000
-                            </Typography>
-                        </div>
+                        <ul>
+                            <li>
+                                <div>
+                                    <div className='participant-name'>
+                                        <Typography variant="subtitle1" noWrap>
+                                            Playe***112 (<span>1</span>)
+                                        </Typography>
+                                    </div>
+                                    <div className='dateAndTime'>
+                                        <Typography variant="subtitle1" noWrap className='bet-time'>
+                                            14:32
+                                        </Typography>
+                                        <Typography variant="subtitle1" noWrap className='bet-date'>
+                                            04.12.20
+                                        </Typography>
+                                    </div>
+                                </div>
+                                <div className='bet'>
+                                    <Typography variant="subtitle1" noWrap className='final-bet'>
+                                        999 999 999
+                                    </Typography>
+                                    <Typography variant="subtitle1" noWrap className='per-bet'>
+                                        + 200 000
+                                    </Typography>
+                                </div>
+                            </li>
+                            <li>
+                                <div>
+                                    <div className='participant-name'>
+                                        <Typography variant="subtitle1" noWrap>
+                                            Sar***44 (<span>1</span>)
+                                        </Typography>
+                                    </div>
+                                    <div className='dateAndTime'>
+                                        <Typography variant="subtitle1" noWrap className='bet-time'>
+                                            12:14
+                                        </Typography>
+                                        <Typography variant="subtitle1" noWrap className='bet-date'>
+                                            04.12.20
+                                        </Typography>
+                                    </div>
+                                </div>
+                                <div className='bet'>
+                                    <Typography variant="subtitle1" noWrap className='final-bet'>
+                                        1 150 000
+                                    </Typography>
+                                    <Typography variant="subtitle1" noWrap className='per-bet'>
+                                        + 120 000
+                                    </Typography>
+                                </div>
+                            </li>
+                            <li>
+                                <div>
+                                    <div className='participant-name'>
+                                        <Typography variant="subtitle1" noWrap>
+                                            Grand***ve (<span>1</span>)
+                                        </Typography>
+                                    </div>
+                                    <div className='dateAndTime'>
+                                        <Typography variant="subtitle1" noWrap className='bet-time'>
+                                            11:32     
+                                        </Typography>
+                                        <Typography variant="subtitle1" noWrap className='bet-date'>
+                                            04.12.20
+                                        </Typography>
+                                    </div>
+                                </div>
+                                <div className='bet'>
+                                    <Typography variant="subtitle1" noWrap className='final-bet'>
+                                        970 000
+                                    </Typography>
+                                    <Typography variant="subtitle1" noWrap className='per-bet'>
+                                        + 20 000
+                                    </Typography>
+                                </div>
+                            </li>
+                        </ul>
                     </div>
-                    <Typography variant="subtitle1" color="initial">
+                    <Typography variant="subtitle1" color="initial" className='all-bets'>
                         Все ставки
                     </Typography>
                 </div>

@@ -81,10 +81,10 @@ export const useStyles = makeStyles(() => ({
             },
         },
         '& > div.slider-counter': {
-            padding: '8px 0',
             display: 'flex',
             width: '90px',
             justifyContent: 'space-between',
+            alignItems: 'center',
             background: '#000',
             borderRadius: '100px',
             margin: '30px auto 0 auto',
@@ -93,11 +93,20 @@ export const useStyles = makeStyles(() => ({
                 color: '#fff',
             },
             '& > button': {
+                height: 30,
                 background: 'none',
                 color: '#fff',
                 border: 'none',
                 width: '20px',
                 padding: 0,
+                borderTopLeftRadius: '100px',
+                borderBottomLeftRadius: '100px',
+                '&:last-child': {
+                    borderTopRightRadius: '100px',
+                    borderBottomRightRadius: '100px',
+                    borderTopLeftRadius: '0',
+                    borderBottomLeftRadius: '0',
+                },
                 '&:hover': {
                     cursor: 'pointer',
                 },
