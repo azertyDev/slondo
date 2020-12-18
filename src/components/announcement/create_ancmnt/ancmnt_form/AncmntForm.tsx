@@ -15,10 +15,11 @@ import {useStyles} from './useStyles';
 
 export const AncmntForm: FC<any> = (props) => {
     const {
+        t,
         locations,
         isSuccess,
         isPreview,
-        createAdvrt,
+        createAncmnt,
         values,
         setValues,
         touched,
@@ -30,13 +31,13 @@ export const AncmntForm: FC<any> = (props) => {
         handleMenuItem,
         handleListItem,
         handleInput,
-        handleCreateNew,
+        handleCreateReset,
         handleAuctionInput,
         handleParamsCheckbox,
         handleCheckboxChange,
     } = props;
 
-    const {adType, category, subCategory} = createAdvrt;
+    const {adType, category, subCategory} = createAncmnt;
 
     const isAuction = adType.id !== 1;
     const isAdvanceAuction = adType.id === 3;
@@ -46,7 +47,7 @@ export const AncmntForm: FC<any> = (props) => {
         <div className={classes.root}>
             {isSuccess
                 ? <SuccessAncmnt
-                    handleCreateNew={handleCreateNew}
+                    handleCreateReset={handleCreateReset}
                 />
                 : <>
                     <ButtonComponent
@@ -149,9 +150,10 @@ export const AncmntForm: FC<any> = (props) => {
                                     </Typography>
                                 </div>
                                 <AncmntParamsContainer
+                                    t={t}
                                     isPreview={isPreview}
                                     values={values}
-                                    createAdvrt={createAdvrt}
+                                    createAncmnt={createAncmnt}
                                     onBlur={handleBlur}
                                     errors={errors}
                                     touched={touched}

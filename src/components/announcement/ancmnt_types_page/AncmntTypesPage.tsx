@@ -1,67 +1,45 @@
-import React, {FC} from 'react';
-import {Container, Grid, Typography} from '@material-ui/core';
-import {MainLayout} from '@src/components/MainLayout';
-import {ButtonComponent} from '@src/components/elements/button/Button';
+import React, {Dispatch, FC, SetStateAction} from 'react';
+import {Grid, Typography, ButtonBase} from '@material-ui/core';
 import {useStyles} from './useStyles';
+import {AncmntTypesState} from "@root/interfaces/Announcement";
 
 
-const urls = [
-    '/img/adv-background.png',
-    '/img/lot-background.png',
-    '/img/advanced-lot-background.png',
-];
+type AncmntTypesPageProps = {
+    ancmntTypes: AncmntTypesState;
+    setAncmntType: Dispatch<SetStateAction<AncmntTypesState>>;
+};
 
-export const AncmntTypesPage: FC<any> = () => {
-    const imageUrls = {
-        urls: urls,
+export const AncmntTypesPage: FC<AncmntTypesPageProps> = ({ancmntTypes, setAncmntType}) => {
+
+    const handleSetAncmntType = (ancmntType) => () => {
+        setAncmntType(ancmntType);
     };
 
-    const classes = useStyles(imageUrls);
+    const classes = useStyles();
     return (
-        <MainLayout>
-            <div className={classes.root}>
-                <Container maxWidth="lg">
-                    <Grid container spacing={2}>
-                        <Grid item xs={4}>
-                            <div className="advCard">
+        <div className={classes.root}>
+            <Grid container spacing={2}>
+                {ancmntTypes.ancmnts.map((anType, i) => {
+                    return (
+                        <Grid item xs={4} key={i}>
+                            <ButtonBase
+                                onClick={handleSetAncmntType(anType)}
+                                style={{backgroundImage: `url(${anType.image.url})`}}
+                            >
                                 <div>
                                     <Typography variant="subtitle1">Объявление</Typography>
                                     <Typography variant="body2">
                                         Размещайте товары или услуги совершенно бесплатно
                                     </Typography>
                                 </div>
-                                <ButtonComponent>
-                                    Создать объявление
-                                </ButtonComponent>
-                            </div>
+                                {/*<ButtonComponent>*/}
+                                {/*    Создать объявление*/}
+                                {/*</ButtonComponent>*/}
+                            </ButtonBase>
                         </Grid>
-                        <Grid item xs={4}>
-                            <div className="advCard">
-                                <div>
-                                    <Typography variant="subtitle1">Онлайн аукцион</Typography>
-                                    <Typography variant="body2">
-                                        Торгуйте что бы получить более выгодную цену для Вас
-                                    </Typography>
-                                </div>
-                                <ButtonComponent>
-                                    Создать аукцион
-                                </ButtonComponent>
-                            </div>
-                        </Grid>
-                        <Grid item xs={4}>
-                            <div className="advCard">
-                                <div>
-                                    <Typography variant="subtitle1">Продвинутый аукцион</Typography>
-                                    <Typography variant="body2">Используй максимальный функционал</Typography>
-                                </div>
-                                <ButtonComponent>
-                                    Создать аукцион
-                                </ButtonComponent>
-                            </div>
-                        </Grid>
-                    </Grid>
-                </Container>
-            </div>
-        </MainLayout>
+                    )
+                })}
+            </Grid>
+        </div>
     );
 };

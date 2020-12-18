@@ -1,4 +1,5 @@
 import {ReactNode} from "react";
+import {CategoryType} from "@root/interfaces/Categories";
 
 export interface AdvertisementProps {
     isPreview: boolean;
@@ -7,36 +8,31 @@ export interface AdvertisementProps {
     handleSuccess: () => void
 }
 
-export interface CreateAdState {
+export interface CreateAncmntState {
     isFetch: boolean;
     error?: unknown;
-    adType: {
-        id: number;
-        name: string
-    };
-    category: {
-        id: number;
-        name: string
-    };
-    data: {
-        id: number;
-        name: string;
-        adsParams: [
-            {
-                currency: []
-            }
-        ];
-    },
+    adType: AncmntType;
+    category: CategoryType;
+    subCategory: IdNameType & { data: any };
 }
 
-export interface CreateAdFields {
+export type AncmntType = IdNameType & {
+    currency: IdNameType[];
+    condition: IdNameType[];
+    expired: { id: number, expiration_at: number }[];
+    image: { url: string }
+};
+
+export type AncmntTypesState = {
+    isFetch: boolean;
+    ancmnts: AncmntType[];
+};
+
+export interface CreateAncmntFields {
     isFetch: boolean;
     title: string;
     price: string;
-    currency: {
-        id: number;
-        name: string;
-    };
+    currency: IdNameType;
     safe_deal: boolean;
     delivery: boolean;
     exchange: boolean;
@@ -53,7 +49,7 @@ export interface CreateAdFields {
     phone: string;
     avalTime: {
         isActive: boolean;
-        week: { id: number, name: string }[];
+        week: IdNameType[];
         start_time: string;
         end_time: string;
     };
@@ -73,6 +69,11 @@ export interface CreateAdFields {
     };
     adParams: any
 }
+
+export type IdNameType = {
+    id: number;
+    name: string;
+};
 
 export type FileType = {
     file?: { name: string };

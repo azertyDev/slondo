@@ -214,12 +214,12 @@ export const AncmntFormContainer: FC<any> = (props) => {
             <form onSubmit={handleSubmit}>
                 <AncmntForm
                     {...props}
-                    locations={locations}
                     errors={errors}
                     touched={touched}
                     setTouched={setTouched}
                     values={values}
                     setValues={setValues}
+                    locations={locations}
                     handleBlur={handleBlur}
                     handleTime={handleTime}
                     handleInput={handleInput}

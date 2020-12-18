@@ -1,5 +1,4 @@
 import React, {FC, useEffect, useState} from 'react';
-import {Container} from '@material-ui/core';
 import {useSelector, useDispatch} from "react-redux";
 import {useFormik} from "formik";
 import {i18n} from "@root/i18n";
@@ -9,10 +8,19 @@ import {CreateAncmnt} from "./CreateAncmnt";
 import {RootState} from "@src/redux/rootReducer";
 import {MainLayout} from "@src/components/MainLayout";
 import {CameraIcon} from "@src/components/elements/icons";
-import {CreateAdFields, FileType} from "@root/interfaces/Advertisement";
+import {
+    CreateAncmntFields,
+    FileType,
+    CreateAncmntState,
+    AncmntTypesState
+} from "@root/interfaces/Announcement";
 import {createAdvrtSchema, isRequired} from "@root/validation_schemas/createAdvrtSchema";
 import {AncmntFormContainer, autoSelectKeys, textFieldKeys} from "./ancmnt_form/AncmntFormContainer";
 import {setErrorMsgAction} from '@root/src/redux/slices/errorSlice';
+import {AncmntTypesPage} from "@src/components/announcement/ancmnt_types_page/AncmntTypesPage";
+import {WithT} from "i18next";
+import {categoryDataNormalization, categorySearchHelper} from "@src/helpers";
+// import {stateHelper} from "@src/helpers";
 
 
 export const initUrl: FileType = {
@@ -23,25 +31,166 @@ export const initUrl: FileType = {
     )
 };
 
-export const CreateAncmntContainer: FC = () => {
+const initAncmntTypes = {
+    isFetch: false,
+    ancmnts: [
+        {
+            id: 1,
+            name: "Обычный",
+            currency: [
+                {
+                    id: 1,
+                    name: "уе"
+                },
+                {
+                    id: 2,
+                    name: "sum"
+                }
+            ],
+            expired: [
+                {
+                    id: 3,
+                    expiration_at: 720
+                }
+            ],
+            condition: [
+                {
+                    id: 1,
+                    name: "Новый"
+                },
+                {
+                    id: 2,
+                    name: "б/у"
+                }
+            ],
+            image: {
+                url: '/img/adv-background.png'
+            }
+        },
+        {
+            id: 2,
+            name: "Аукцион",
+            currency: [
+                {
+                    id: 3,
+                    name: "sum"
+                }
+            ],
+            expired: [
+                {
+                    id: 1,
+                    expiration_at: 2
+                },
+                {
+                    id: 2,
+                    expiration_at: 720
+                }
+            ],
+            condition: [
+                {
+                    id: 3,
+                    name: "Новый"
+                },
+                {
+                    id: 4,
+                    name: "б/у"
+                }
+            ],
+            image: {
+                url: '/img/lot-background.png'
+            }
+        },
+        {
+            id: 3,
+            name: "Продвинутый аукцион",
+            currency: [
+                {
+                    id: 4,
+                    name: "sum"
+                }
+            ],
+            expired: [
+                {
+                    id: 4,
+                    expiration_at: 2
+                },
+                {
+                    id: 5,
+                    expiration_at: 720
+                }
+            ],
+            condition: [
+                {
+                    id: 5,
+                    name: "Новый"
+                },
+                {
+                    id: 6,
+                    name: "б/у"
+                }
+            ],
+            image: {
+                url: '/img/advanced-lot-background.png'
+            }
+        }
+    ]
+};
+
+export const CreateAncmntContainer: FC<WithT> = ({t}) => {
     const lang = i18n.language;
 
     const initPhotos: FileType[] = Array.from({
         length: TOTAL_FILES_LIMIT
     }).map(() => initUrl);
 
-    const initCreateAdState = {
+    const initCreateAncmntState: CreateAncmntState = {
         isFetch: false,
+        error: null,
         adType: {
             id: null,
             name: '',
-            currency: [],
-            expired: [],
+            currency: [{
+                id: null,
+                name: ''
+            }],
+            expired: [{
+                id: null,
+                expiration_at: null
+            }],
+            condition: [{
+                id: null,
+                name: ''
+            }],
+            image: {url: ''}
         },
         category: {
             id: null,
             name: '',
-            childs: []
+            images: {
+                id: null,
+                url: {
+                    default: ''
+                }
+            },
+            icons: {
+                id: null,
+                url: {
+                    default: ''
+                }
+            },
+            childs: [{
+                parent: {
+                    id: null,
+                    name: ''
+                },
+                id: null,
+                name: '',
+                icons: [],
+                image: {
+                    url: ''
+                }
+            }],
+            has_auction: null,
         },
         subCategory: {
             id: null,
@@ -50,7 +199,7 @@ export const CreateAncmntContainer: FC = () => {
         }
     };
 
-    const initFormFields: CreateAdFields = {
+    const initFormFields: CreateAncmntFields = {
         isFetch: false,
         title: '',
         safe_deal: false,
@@ -103,14 +252,13 @@ export const CreateAncmntContainer: FC = () => {
         }
     };
 
-    const categoriesList = useSelector(({categories}: RootState) => categories.list);
+    const categoriesList = useSelector(({categories}: RootState) => categoryDataNormalization(categories.list));
     const dispatch = useDispatch();
-    const [tabValue, setTabValue] = useState(1);
 
-    const [adTypes, setAdTypes] = useState([]);
+    const [ancmntTypes, setAncmntTypes] = useState<AncmntTypesState>(initAncmntTypes);
 
-    const [createAdvrt, setCreateAdvrt] = useState(initCreateAdState);
-    const {adType, category, subCategory} = createAdvrt;
+    const [createAncmnt, setCreateAncmnt] = useState<CreateAncmntState>(initCreateAncmntState);
+    const {adType, category, subCategory} = createAncmnt;
 
     const [isForm, setIsForm] = useState(false);
 
@@ -127,93 +275,93 @@ export const CreateAncmntContainer: FC = () => {
     const {values, setValues, setErrors, setTouched} = formik;
     const {adParams} = values;
 
-    const setInitAdType = async () => {
-        try {
-            setCreateAdvrt({...createAdvrt, isFetch: true});
-
-            const adTypes = await userAPI.getAdTypes(lang);
-
-            setCreateAdvrt({...createAdvrt, isFetch: false});
-
-            setAdTypes(adTypes);
-            setCreateAdvrt({
-                ...createAdvrt,
-                adType: adTypes[0]
-            });
-        } catch (e) {
-            dispatch(setErrorMsgAction(e.message));
-            setCreateAdvrt({...createAdvrt, isFetch: false});
-        }
-    };
-
-    const handleTab = (_, newValue) => {
-        setTabValue(newValue);
-    };
-
-    const setAdType = () => {
-        const [selectedAdType] = adTypes.filter(type => type.id === tabValue);
-
-        setCreateAdvrt({
-            ...createAdvrt,
-            adType: selectedAdType
+    const setAncmntType = (selectedAncmntType) => {
+        setCreateAncmnt({
+            ...createAncmnt,
+            adType: selectedAncmntType
         });
     };
 
+    const handleSearch = ({target}) => {
+        const childs = categorySearchHelper(target.value, categoriesList);
+        if (target.value !== '') {
+            setCreateAncmnt({
+                ...createAncmnt,
+                category: {
+                    ...createAncmnt.category,
+                    childs
+                }
+            });
+        } else {
+            setCreateAncmnt({...initCreateAncmntState, adType});
+        }
+    };
+
     const handleCategory = (category) => () => {
-        setCreateAdvrt({
-            ...createAdvrt,
+        setCreateAncmnt({
+            ...createAncmnt,
             category
         });
     };
 
-    const handleSubCategory = (id, name) => async () => {
+    const handleSubCategory = (parent, child_id, name) => async () => {
         try {
-            if (id !== undefined) {
-                setCreateAdvrt({
-                    ...createAdvrt,
+            if (child_id !== undefined) {
+                setCreateAncmnt({
+                    ...createAncmnt,
                     isFetch: true
                 });
 
-                const data = await userAPI.getAdDataForCreate(category.id, id, lang);
+                const data = await userAPI.getAdDataForCreate(parent.id, child_id, lang);
 
                 setIsForm(true);
 
-                setCreateAdvrt({
-                    ...createAdvrt,
+                setCreateAncmnt({
+                    ...createAncmnt,
                     isFetch: false,
-                    subCategory: {id, name, data}
+                    category: parent,
+                    subCategory: {
+                        id: child_id,
+                        name,
+                        data
+                    }
                 });
             } else {
                 setIsForm(true);
-                setCreateAdvrt({
-                    ...initCreateAdState,
-                    adType: createAdvrt.adType,
-                    category: createAdvrt.category
+                setCreateAncmnt({
+                    ...initCreateAncmntState,
+                    adType: createAncmnt.adType,
+                    category: createAncmnt.category
                 });
             }
         } catch (e) {
             dispatch(setErrorMsgAction(e.message));
-            setCreateAdvrt({...createAdvrt, isFetch: false});
+            setCreateAncmnt({...createAncmnt, isFetch: false});
         }
     };
 
-    const handleCreateNew = () => {
+    const handleCreateReset = () => {
         setErrors({});
         setTouched({});
         setValues(initFormFields);
         isForm && setIsForm(false);
         isSuccess && setIsSuccess(false);
+        setCreateAncmnt({...initCreateAncmntState, adType});
+    };
+
+    const handleResetCreateAncmnt = () => {
+        setCreateAncmnt(initCreateAncmntState);
     };
 
     const handleBackBtn = () => {
         if (isPreview) {
             setIsPreview(false);
         } else {
-            handleCreateNew();
+            handleCreateReset();
         }
     };
 
-    const getFormData = (data: CreateAdFields) => {
+    const getFormData = (data: CreateAncmntFields) => {
         const form = new FormData();
         const {
             avalTime,
@@ -304,7 +452,7 @@ export const CreateAncmntContainer: FC = () => {
         return form;
     };
 
-    async function onSubmit(values: CreateAdFields) {
+    async function onSubmit(values: CreateAncmntFields) {
         try {
             if (!isPreview) {
                 setIsPreview(true);
@@ -321,7 +469,7 @@ export const CreateAncmntContainer: FC = () => {
             }
         } catch (e) {
             dispatch(setErrorMsgAction(e.message));
-            setCreateAdvrt({...createAdvrt, isFetch: false});
+            setCreateAncmnt({...createAncmnt, isFetch: false});
         }
     }
 
@@ -374,45 +522,47 @@ export const CreateAncmntContainer: FC = () => {
         });
     };
 
-    useEffect(() => {
-        setInitAdType();
-    }, []);
+    // useEffect(() => {
+    //     stateHelper(
+    //         ancmntTypes,
+    //         setAncmntTypes,
+    //         userAPI.getAdTypes(lang),
+    //         dispatch
+    //     );
+    // }, []);
 
     useEffect(() => {
         setReqValues();
     }, [isForm]);
 
-    useEffect(() => {
-        adTypes.length && setAdType();
-    }, [tabValue]);
-
-    console.log(values)
-    console.log(createAdvrt)
+    console.log(categoriesList)
+    console.log(createAncmnt)
     return (
         <MainLayout>
-            <Container maxWidth="lg">
-                {
-                    isForm
-                        ? <AncmntFormContainer
-                            formik={formik}
-                            isSuccess={isSuccess}
-                            isPreview={isPreview}
-                            setIsPreview={setIsPreview}
-                            createAdvrt={createAdvrt}
-                            handleBackBtn={handleBackBtn}
-                            handleCreateNew={handleCreateNew}
-                        />
-                        : <CreateAncmnt
-                            adTypes={adTypes}
-                            tabValue={tabValue}
-                            createAdvrt={createAdvrt}
-                            categoriesList={categoriesList}
-                            handleTab={handleTab}
-                            handleCategory={handleCategory}
-                            handleSubCategory={handleSubCategory}
-                        />
-                }
-            </Container>
+            {isForm
+                ? <AncmntFormContainer
+                    t={t}
+                    formik={formik}
+                    isSuccess={isSuccess}
+                    isPreview={isPreview}
+                    setIsPreview={setIsPreview}
+                    createAncmnt={createAncmnt}
+                    handleBackBtn={handleBackBtn}
+                    handleCreateReset={handleCreateReset}
+                />
+                : !!adType.id
+                    ? <CreateAncmnt
+                        handleSearch={handleSearch}
+                        createAncmnt={createAncmnt}
+                        categoriesList={categoriesList}
+                        handleCategory={handleCategory}
+                        handleSubCategory={handleSubCategory}
+                        handleResetCreateAncmnt={handleResetCreateAncmnt}
+                    />
+                    : <AncmntTypesPage
+                        ancmntTypes={ancmntTypes}
+                        setAncmntType={setAncmntType}
+                    />}
         </MainLayout>
     )
 }

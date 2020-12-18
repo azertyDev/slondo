@@ -1,30 +1,37 @@
+import {IdNameType} from "@root/interfaces/Announcement";
+
+
 export interface Categories {
     isFetch: boolean;
     error?: unknown;
     list: CategoryType[];
 }
 
-export type CategoryType = {
-    id: number;
-    name: string;
+export type CategoryType = IdNameType & {
     images: {
-        id: number;
+        id: number,
         url: {
-            default: ''
+            default: string
         }
-    };
+    },
     icons: {
-        id: number;
+        id: number,
         url: {
-            default: ''
+            default: string,
         }
-    };
-    childs: [];
-    has_auction: boolean;
+    },
+    childs: (IdNameType & {
+        parent: any,
+        icons: [],
+        image: {
+            url: string,
+        }
+    })[],
+    has_auction: number,
 }
 
 export interface CategoryIDs {
-    ctgryID: number;
-    subCtgryID: number;
-    lang: string;
+    ctgryID: number,
+    subCtgryID: number,
+    lang: string,
 }

@@ -1,5 +1,5 @@
 import {SetStateAction} from "react";
-import {CreateAdFields} from "@root/interfaces/Advertisement";
+import {CreateAdFields} from "@root/interfaces/Announcement";
 
 export interface AddressAutocompleteProps {
     values: CreateAdFields;

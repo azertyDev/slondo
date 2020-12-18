@@ -7,7 +7,7 @@ import {Router} from "@root/i18n";
 import {useStyles} from './useStyles'
 
 
-export const SuccessAncmnt = ({handleCreateNew}) => {
+export const SuccessAncmnt = ({handleCreateReset}) => {
     const forwardToHome = () => {
         Router.push('/');
     };
@@ -40,7 +40,7 @@ export const SuccessAncmnt = ({handleCreateNew}) => {
                 </Grid>
                 <Grid item container xs={12} direction="row" justify="center" className={classes.buttonBlock}>
                     <Grid item xs={6} sm={2}>
-                        <ButtonComponent onClick={handleCreateNew} style={{color: '#fff'}}>
+                        <ButtonComponent onClick={handleCreateReset} style={{color: '#fff'}}>
                             Создать еще
                         </ButtonComponent>
                     </Grid>
