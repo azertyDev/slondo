@@ -1,4 +1,4 @@
-import {makeStyles} from '@material-ui/core/styles';
+import { makeStyles } from '@material-ui/core/styles';
 
 export const useStyles = makeStyles((theme) => ({
     root: {
@@ -38,7 +38,7 @@ export const useStyles = makeStyles((theme) => ({
                             padding: '0',
                             '& > span > svg': {
                                 '& > path:nth-child(1)': {
-                                    fillOpacity: '0.8'
+                                    fillOpacity: '0.8',
                                 },
                                 '& > defs:first-child > linearGradient > stop': {
                                     '&:first-child': {
@@ -61,7 +61,8 @@ export const useStyles = makeStyles((theme) => ({
                                 //transform .3s cubic-bezier(.5,0,.5,3),-webkit-transform .3s cubic-bezier(.5,0,.5,3)
                                 '& > span > svg': {
                                     transform: 'scale(1.1)',
-                                    transition: 'transform .3s cubic-bezier(.5,0,.5,3),-webkit-transform .3s cubic-bezier(.5,0,.5,3)',
+                                    transition:
+                                        'transform .3s cubic-bezier(.5,0,.5,3),-webkit-transform .3s cubic-bezier(.5,0,.5,3)',
                                     '& > path:nth-child(2)': {
                                         fillOpacity: '0.8',
                                     },
@@ -128,6 +129,6 @@ export const useStyles = makeStyles((theme) => ({
         },
     },
     skeleton: {
-        height: '240px'
-    }
+        height: '240px',
+    },
 }));

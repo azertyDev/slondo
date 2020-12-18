@@ -66,7 +66,7 @@ const BottomHeader = (props) => {
                                     <AddIcon/>
                                 </ButtonComponent>
                             </Grid>
-                            <Grid item container justify="center" alignItems="center" xs={1}>
+                            <Grid item container justify="flex-end" alignItems="center" xs={1}>
                                 <ButtonComponent className="bottom-sign-button header-button" onClick={handleOpenModal}>
                                     <Typography
                                         variant="subtitle2">{t(`common:${isAuth ? 'signOut' : 'signIn'}`)}</Typography>

@@ -65,3 +65,4 @@ export { Logo } from './logo/Logo';
 export { PhoneIcon } from './PhoneIcon';
 export { SurpriseIcon } from './SurpriseIcon';
 export { SubstractIcon } from './SubstractIcon';
+export { Search_icon } from './SearchIcon';

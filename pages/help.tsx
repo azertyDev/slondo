@@ -1,9 +1,9 @@
 import React from 'react';
 import { withTranslation } from '@root/i18n';
-import { AncmntTypesPage } from '@src/components/announcement/ancmnt_types_page/AncmntTypesPage';
+import { HelpContainer } from '@root/src/components/help/HelpContainer';
 
 const TestPage = (props) => {
-    return <AncmntTypesPage {...props} />;
+    return <HelpContainer {...props} />;
 };
 
 TestPage.getInitialProps = async () => ({

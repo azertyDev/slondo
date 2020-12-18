@@ -72,7 +72,7 @@ export const TopHeader: FC<TopHeaderPropsType> = (props) => {
                         </Grid>
                         <Grid item>
                             <div className="multiple-content">
-                                <Link href="#">
+                                <Link href="/help">
                                     <a>
                                         <Typography variant="subtitle1">
                                             {t('help')}

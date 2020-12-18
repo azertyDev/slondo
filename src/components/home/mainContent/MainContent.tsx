@@ -34,7 +34,7 @@ export const MainContent: FC<MainContentProps> = (props) => {
         <div className={classes.root}>
             <Typography variant="h4">Все объявления</Typography>
             <Grid container>
-                <Grid md={9} xs={12} item>
+                <Grid item md={9} xs={12}>
                     <Tabs
                         value={tabValue}
                         onChange={handleTabChange}
@@ -67,7 +67,7 @@ export const MainContent: FC<MainContentProps> = (props) => {
                         {adCardData.error
                             ? <Typography variant="subtitle1" className="error-text">{adCardData.error}</Typography>
                             : <div className="ads-wrapper">
-                                <Grid item container spacing={1}>
+                                <Grid container>
                                     {adCardData.cardData.data.map((item, index) => {
                                         const translatedTitle =
                                             transform(item.title)
@@ -103,7 +103,7 @@ export const MainContent: FC<MainContentProps> = (props) => {
                         {lotCardData.error
                             ? <Typography variant="subtitle1" className="error-text">{lotCardData.error}</Typography>
                             : <div className="lots-wrapper">
-                                <Grid item container spacing={2}>
+                                <Grid container>
                                     {lotCardData.cardData.data.map((item, index) => {
                                         const translatedTitle =
                                             transform(item.title)

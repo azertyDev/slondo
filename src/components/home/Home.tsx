@@ -24,7 +24,7 @@ export const Home: FC<WithT> = ({t}) => {
                 <title>Slondo - доска объявлений</title>
             </Head>
             <Header/>
-            <main style={{marginTop: '40px'}}>
+            <main style={{marginTop: '48px'}}>
                 <div className={classes.mainSlider}>
                     <MainSlider/>
                 </div>

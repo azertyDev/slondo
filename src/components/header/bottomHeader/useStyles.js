@@ -3,7 +3,7 @@ import {makeStyles} from '@material-ui/core/styles'
 export const useStyles = makeStyles((theme) => ({
     root: {
         position: 'relative',
-        height: '55.33px',
+        height: '50px',
         '& header.MuiAppBar-root': {
             background: '#fafafa',
             '& > div.MuiContainer-root': {

@@ -26,20 +26,27 @@ export const useStyles = makeStyles((theme) => ({
         '& div.cards-container': {
             marginTop: '40px',
         },
-        '& div.ads-wrapper': {
-            '& div.card-header > div > h6.MuiTypography-subtitle2': {
-                backgroundColor: 'rgba(136, 202, 236, .65)',
+
+        '& div.ads-wrapper, div.lots-wrapper': {
+            '& > div.MuiGrid-container': {
+                width: 'calc(100% + 14px)',
+                margin: '-7px',
+                '& div.MuiGrid-item': {
+                    padding: '7px',
+                },
             },
             '& > div > div> a': {
                 textDecoration: 'none',
             },
         },
+        '& div.ads-wrapper': {
+            '& div.card-header > div > h6.MuiTypography-subtitle2': {
+                backgroundColor: 'rgba(136, 202, 236, .65)',
+            },
+        },
         '& div.lots-wrapper': {
             '& div.card-header > div > h6.MuiTypography-subtitle2': {
                 backgroundColor: 'rgba(173, 102, 213, .65)',
-            },
-            '& > div > div> a': {
-                textDecoration: 'none',
             },
         },
     },
