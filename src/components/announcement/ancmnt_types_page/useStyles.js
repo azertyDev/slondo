@@ -1,18 +1,19 @@
-import { makeStyles } from '@material-ui/core/styles';
+import {makeStyles} from '@material-ui/core/styles';
 
 
 export const useStyles = makeStyles(() => ({
     root: {
-        '& > div > div > div': {
-            height: '613px',
-            '& > div.advCard': {
+        marginBottom: '30px',
+        '& div.MuiGrid-item': {
+            '& > button': {
+                height: '613px',
                 display: 'flex',
                 flexDirection: 'column',
                 justifyContent: 'space-between',
                 alignItems: 'center',
-                height: 'inherit',
                 borderRadius: '25px',
                 boxShadow: '0px 2px 8px rgba(0, 0, 0, 0.2)',
+                cursor: 'pointer',
                 '& > div': {
                     textAlign: 'center',
                     marginTop: '35px',
@@ -27,9 +28,9 @@ export const useStyles = makeStyles(() => ({
                         color: 'rgba(255, 255, 255, 0.85)',
                         fontWeight: '600',
                         padding: '0 55px',
-                    },
+                    }
                 },
-                '& button': {
+                '& > button': {
                     backgroundColor: '#fff',
                     borderRadius: '100px',
                     width: '76%',
@@ -38,21 +39,6 @@ export const useStyles = makeStyles(() => ({
                     border: 'none',
                 },
             },
-            '&:first-child': {
-                '& > div.advCard': {
-                    backgroundImage: (props) => `url(${props.urls[0]})`,
-                },
-            },
-            '&:nth-child(2)': {
-                '& > div.advCard': {
-                    backgroundImage: (props) => `url(${props.urls[1]})`,
-                },
-            },
-            '&:last-child': {
-                '& > div.advCard': {
-                    backgroundImage: (props) => `url(${props.urls[2]})`,
-                },
-            },
-        },
-    },
+        }
+    }
 }));

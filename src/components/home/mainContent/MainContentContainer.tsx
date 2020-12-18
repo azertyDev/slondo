@@ -1,10 +1,11 @@
-import React, {FC, useEffect, useState} from 'react'
-import {MainContent} from './MainContent'
-import {TFunction} from "i18next";
-import {ITEMS_PER_PAGE} from '@root/src/constants'
+import React, {FC, useEffect, useState} from 'react';
+import {WithT} from "i18next";
+import {MainContent} from './MainContent';
+import {ITEMS_PER_PAGE} from '@src/constants';
 import {userAPI} from "@src/api/api";
 import {i18n} from "@root/i18n";
 import {CardData} from "@root/interfaces/CardData";
+
 
 const cardData = {
     id: null,
@@ -22,11 +23,12 @@ const cardData = {
         url: ''
     }],
 };
-const initCards = []
+
+const initCards = [];
+
 for (let i = 1; i <= 16; i++) {
     initCards.push(cardData);
 }
-
 
 const initialCardData: CardData = {
     isFetch: false,
@@ -41,7 +43,7 @@ const fetchCardData = async (itemsPerPage, page, type, lang) => {
     return await userAPI.getCardData(itemsPerPage, page, type, lang);
 };
 
-export const MainContentContainer: FC<{ t: TFunction }> = (props) => {
+export const MainContentContainer: FC<WithT> = (props) => {
     const {t} = props;
     const lang = i18n.language;
 
@@ -95,7 +97,6 @@ export const MainContentContainer: FC<{ t: TFunction }> = (props) => {
     //         setLotCurrentPage(lotCurrentPage + 1)
     //     }
     // };
-
 
     const handlePaginationPage = (_, pageNumber) => {
         tabValue === 0

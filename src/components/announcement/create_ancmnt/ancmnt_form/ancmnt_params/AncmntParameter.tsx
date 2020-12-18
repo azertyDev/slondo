@@ -9,6 +9,7 @@ import {useStyles} from "./useStyles";
 
 export const AncmntParameter: FC<any> = (props) => {
     const {
+        t,
         keyName,
         data,
         errors,
@@ -46,7 +47,7 @@ export const AncmntParameter: FC<any> = (props) => {
         fields = <>
             <Typography variant="subtitle1">
                 <strong>
-                    {keyName}
+                    {t(keyName)}
                 </strong>
                 {
                     isRequired(keyName)
@@ -113,7 +114,7 @@ export const AncmntParameter: FC<any> = (props) => {
         fields = <>
             <Typography variant="subtitle1">
                 <strong>
-                    {newKey}
+                    {t(newKey)}
                     {
                         isRequired(newKey)
                         && <span className='error-text'>*</span>
@@ -168,7 +169,7 @@ export const AncmntParameter: FC<any> = (props) => {
     } else if (!Array.isArray(data)) {
         fields = <>
             <Typography variant="subtitle1">
-                {keyName}
+                {t(keyName)}
                 {
                     isRequired(keyName)
                     && !isPreview

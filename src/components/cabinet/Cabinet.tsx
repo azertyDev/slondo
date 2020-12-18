@@ -3,18 +3,9 @@ import {Container, Grid, Typography, Tabs, Tab} from '@material-ui/core';
 import {CabinetCard} from './card/CabinetCard';
 import {Notification} from '@src/components/cabinet/notification/Notification';
 import {CabinetSidebar} from '@src/components/cabinet/cabinet_sidebar/CabinetSidebar';
-// styles
-import { useStyles } from './useStyles';
+import {CustomTabPanel} from "@src/components/elements/custom_tab_panel/CustomTabPanel";
+import {useStyles} from './useStyles';
 
-const TabPanel = (props) => {
-    const { children, value, index, ...other } = props;
-
-    return (
-        <div hidden={value !== index} {...other}>
-            {value === index && children}
-        </div>
-    );
-};
 
 export const Cabinet = (props) => {
     const [value, setValue] = useState(0);
@@ -67,19 +58,19 @@ export const Cabinet = (props) => {
                                 />
                             </Tabs>
                         </Grid>
-                        <TabPanel value={value} index={0}>
+                        <CustomTabPanel value={value} index={0}>
                             <CabinetCard/>
-                        </TabPanel>
-                        <TabPanel value={value} index={1}>
-                            <Notification />
-                            <Notification />
-                            <Notification />
-                        </TabPanel>
-                        <TabPanel value={value} index={2}>
+                        </CustomTabPanel>
+                        <CustomTabPanel value={value} index={1}>
+                            <Notification/>
+                            <Notification/>
+                            <Notification/>
+                        </CustomTabPanel>
+                        <CustomTabPanel value={value} index={2}>
                             <CabinetCard/>
                             <CabinetCard/>
                             <CabinetCard/>
-                        </TabPanel>
+                        </CustomTabPanel>
                     </Grid>
                 </Grid>
             </Container>

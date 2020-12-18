@@ -1,13 +1,13 @@
 import React, {Dispatch, FC} from 'react';
 import {DragDropContext, resetServerContext, DropResult} from 'react-beautiful-dnd';
 import {TOTAL_FILES_SIZE_LIMIT} from '@src/constants';
-import {CreateAdFields, FileType} from "@root/interfaces/Advertisement";
+import {CreateAncmntFields, FileType} from "@root/interfaces/Announcement";
 import {CustomDroppable} from "../preview_photos/CustomDroppable";
 import {initUrl} from "../CreateAncmntContainer";
 
 
 interface IPreviewPhotos {
-    values: CreateAdFields,
+    values: CreateAncmntFields,
     setValues: Dispatch<unknown>
     isPreview: boolean
 }

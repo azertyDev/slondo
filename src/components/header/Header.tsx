@@ -60,20 +60,18 @@ const Header = (props) => {
                 className={classes.modalDialog}
             >
                 <>
-                    {
-                        isAuth
-                            ? <div style={{width: '200px', height: '80px', backgroundColor: '#fff'}}>
-                                <Typography variant='h5'>Выйти из сайта?</Typography>
-                                <div style={{display: 'flex'}}>
-                                    <ButtonComponent onClick={handleModal(false)}>Отмена</ButtonComponent>
-                                    <ButtonComponent>Выйти</ButtonComponent>
-                                </div>
+                    {isAuth
+                        ? <div style={{width: '200px', height: '80px', backgroundColor: '#fff'}}>
+                            <Typography variant='h5'>Выйти из сайта?</Typography>
+                            <div style={{display: 'flex'}}>
+                                <ButtonComponent onClick={handleModal(false)}>Отмена</ButtonComponent>
+                                <ButtonComponent>Выйти</ButtonComponent>
                             </div>
-                            : <AuthRegPage
-                                t={t}
-                                handleCloseModal={handleModal(false)}
-                            />
-                    }
+                        </div>
+                        : <AuthRegPage
+                            t={t}
+                            handleCloseModal={handleModal(false)}
+                        />}
                 </>
             </Modal>
         </header>

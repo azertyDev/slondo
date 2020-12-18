@@ -1,68 +1,61 @@
 import React, {FC} from "react";
 import {
-    Tabs,
     Typography,
     InputBase,
     List,
     ListItem,
     Grid,
-    Tab,
     Hidden
 } from "@material-ui/core";
 import {useStyles} from './useStyles';
+import {ButtonComponent} from "@src/components/elements/button/Button";
+import {CategoryType} from "@root/interfaces/Categories";
+import {CreateAncmntState} from "@root/interfaces/Announcement";
 
 
-export const CreateAncmnt: FC<any> = (props) => {
+type CreateAncmntType = {
+    createAncmnt: CreateAncmntState;
+    categoriesList: CategoryType[];
+    handleSearch: (t) => void;
+    handleCategory: (c) => () => void;
+    handleSubCategory: (parent_id, child_id?, name?) => () => Promise<void>;
+    handleResetCreateAncmnt: () => void;
+};
+
+export const CreateAncmnt: FC<CreateAncmntType> = (props) => {
     const {
-        adTypes,
-        tabValue,
-        createAdvrt,
+        handleSearch,
+        createAncmnt,
         categoriesList,
-        handleTab,
         handleCategory,
         handleSubCategory,
+        handleResetCreateAncmnt
     } = props;
 
-    const {adType, category, error, isFetch} = createAdvrt;
+    const {adType, category, error, isFetch} = createAncmnt;
 
     const classes = useStyles();
     return (
         <Grid container spacing={2} className={classes.root}>
             <Grid item xs={12} md={9}>
-                <div>
-                    <Tabs
-                        value={tabValue}
-                        onChange={handleTab}
-                        centered
-                    >
-                        {
-                            adTypes.map(type => (
-                                <Tab
-                                    key={type.id}
-                                    value={type.id}
-                                    label={
-                                        <Typography variant="subtitle1">
-                                            {type.name}
-                                        </Typography>
-                                    }
-                                />
-                            ))
-                        }
-                    </Tabs>
-                    <Grid container className={classes.tabsContent}>
-                        <Grid item xs={3} className='categories-block'>
+                <ButtonComponent
+                    className='back-btn'
+                    onClick={handleResetCreateAncmnt}
+                >
+                    Назад
+                </ButtonComponent>
+                <div className='categories-block'>
+                    <Grid container>
+                        <Grid item xs={3} className='categories-list'>
                             <div className='header'>
                                 <Typography>Выберите категорию</Typography>
                             </div>
-                            <List className='categories-list'>
+                            <List>
                                 {categoriesList.map((ctgr) => (
                                     (adType.id === 1 || ctgr.has_auction === 1) && (
-                                        <ListItem
-                                            key={ctgr.id}
-                                            onClick={isFetch ? null : handleCategory(ctgr)}
-                                        >
-                                            <div>
-                                                <img src={ctgr.icons.url.original} alt={ctgr.name}/>
+                                        <ListItem key={ctgr.id}>
+                                            <div onClick={handleCategory(ctgr)}>
+                                                <img src={ctgr.icons.url.default} alt={ctgr.name}/>
                                                 {ctgr.name}
                                             </div>
                                         </ListItem>
@@ -70,39 +63,37 @@ export const CreateAncmnt: FC<any> = (props) => {
                                 ))}
                             </List>
                         </Grid>
-                        <Grid item xs={9} className='sub-categories-block'>
+                        <Grid item xs={9} className='sub-categories-list'>
                             <div className='search-block'>
-                                <InputBase style={{border: '1px solid'}} placeholder='Поиск по категориям'/>
+                                <InputBase
+                                    onChange={handleSearch}
+                                    style={{border: '1px solid'}}
+                                    placeholder='Поиск по категориям'
+                                />
                             </div>
-                            {
-                                isFetch
-                                    ? <div style={{height: '800px'}}>
-                                        <Typography>...Loading</Typography>
-                                    </div>
-                                    : error
+                            {isFetch
+                                ? <div style={{height: '800px'}}>
+                                    <Typography>...Loading</Typography>
+                                </div>
+                                : error
                                     ? <Typography className='error-text'>{error}</Typography>
-                                    : <List className='categories-list'>
-                                        {
-                                            (adType.id !== 1 && !!category.has_auction || adType.id === 1)
-                                            && <>
-                                                {
-                                                    !!category.childs.length
-                                                        ? category.childs.map(({id, name}) => (
-                                                            <ListItem
-                                                                key={id}
-                                                                onClick={isFetch ? null : handleSubCategory(id, name)}
-                                                            >
-                                                                <div>{name}</div>
-                                                            </ListItem>
-                                                        ))
-                                                        : <ListItem
-                                                            onClick={handleSubCategory()}
+                                    : <List>
+                                        {(adType.id !== 1 && !!category.has_auction || adType.id === 1)
+                                        && <>
+                                            {!!category.childs.length
+                                                ? category.childs.map(({parent, id, name}) => (
+                                                    <ListItem key={id}>
+                                                        <div
+                                                            onClick={handleSubCategory(parent, id, name)}
                                                         >
-                                                            <div>{category.name}</div>
-                                                        </ListItem>
-                                                }
-                                            </>
-                                        }
+                                                            {name}
+                                                        </div>
+                                                    </ListItem>
+                                                ))
+                                                : <ListItem onClick={handleSubCategory(category.id)}>
+                                                    <div>{category.name}</div>
+                                                </ListItem>}
+                                        </>}
                                     </List>
                             }
                         </Grid>

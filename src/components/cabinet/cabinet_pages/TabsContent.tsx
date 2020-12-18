@@ -1,11 +1,12 @@
-import React, {useState} from 'react';
+import React, {FC, useState} from 'react';
 import {Grid, Tabs, Tab, Typography} from "@material-ui/core";
 import {CustomTabPanel} from "@src/components/elements/custom_tab_panel/CustomTabPanel";
-import {CabinetMenuWrapper} from "@src/components/cabinet/CabinetMenuWrapper";
-// styles
+import {CabinetMenuPropsType, CabinetMenuWrapper} from "@src/components/cabinet/CabinetMenuWrapper";
+import {TabsDataType} from "@src/components/cabinet/cabinet_pages/archive/ArchiveContainer";
 import {useStyles} from './useStyles';
 
-export const TabsContent = ({tabsData, headerTitle, title, t}) => {
+
+export const TabsContent: FC<CabinetMenuPropsType & { tabsData: TabsDataType[] }> = ({tabsData, headerTitle, title, t}) => {
     const [value, setValue] = useState(0);
 
     const handleChange = (event, newValue) => {
@@ -45,9 +46,9 @@ export const TabsContent = ({tabsData, headerTitle, title, t}) => {
                     {tabsData[0].component}
                 </CustomTabPanel>
                 <CustomTabPanel value={value} index={1}>
-                     {tabsData[1].component}
+                    {tabsData[1].component}
                 </CustomTabPanel>
             </CabinetMenuWrapper>
         </div>
     )
-}
+};

@@ -8,15 +8,13 @@ import {dataPrepare} from "@src/components/announcement/create_ancmnt/ancmnt_for
 export const AncmntParamsContainer: FC<any> = (props) => {
     const {
         isPreview,
-        createAdvrt,
+        createAncmnt,
         values,
     } = props;
 
-    const {subCategory} = createAdvrt;
-
     const {adParams} = values;
 
-    const data = isPreview ? adParams : dataPrepare(subCategory.data, adParams);
+    const data = isPreview ? adParams : dataPrepare(createAncmnt.subCategory.data, adParams);
 
     const classes = useStyles({isPreview});
     return (
