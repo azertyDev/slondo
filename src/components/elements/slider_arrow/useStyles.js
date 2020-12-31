@@ -1,4 +1,4 @@
-import {makeStyles} from '@material-ui/core/styles'
+import { makeStyles } from '@material-ui/core/styles';
 
 export const useStyles = makeStyles(() => ({
     root: {
@@ -10,11 +10,22 @@ export const useStyles = makeStyles(() => ({
         boxShadow: '0px 0px 15px rgba(0, 0, 0, 0.1)',
         borderRadius: '100px',
         zIndex: 20,
+        '& span.MuiIconButton-label': {
+            // width: 'auto',
+            position: 'relative',
+        },
         '& svg.left-arrow': {
             transform: 'rotate(180deg)',
+            position: 'absolute',
+            left: 5,
         },
+        '& svg.right-arrow': {
+            position: 'absolute',
+            right: 5,
+        },
+
         '&:hover': {
-            backgroundColor: '#fafafa'
-        }
-    }
+            backgroundColor: '#fafafa',
+        },
+    },
 }));

@@ -7,8 +7,10 @@ import {
     Toolbar,
     IconButton,
 } from '@material-ui/core';
+import { TopHeaderPropsType } from '@src/components/header/topHeader/TopHeaderContainer';
 import { Link } from '@root/i18n';
-import { useStyles } from './useStyles';
+import { useRouter } from 'next/router';
+import { Router } from '@root/i18n';
 import { LeftDrawer } from './drawer/Drawer';
 import { Localization } from '@src/components/elements/localization/Localization';
 import {
@@ -19,11 +21,16 @@ import {
     UserAvatar,
     SubstractIcon,
 } from '@src/components/elements/icons';
-import { TopHeaderPropsType } from '@src/components/header/topHeader/TopHeaderContainer';
+import { useStyles } from './useStyles';
 
 export const TopHeader: FC<TopHeaderPropsType> = (props) => {
-    const { t, handleOpenModal } = props;
     const [isOpen, setIsOpen] = useState(false);
+    const { t, handleOpenModal } = props;
+    const { pathname } = useRouter();
+
+    const onButtonClick = (url) => () => {
+        Router.push(`/cabinet/${url}`);
+    };
 
     const classes = useStyles();
     return (
@@ -43,46 +50,44 @@ export const TopHeader: FC<TopHeaderPropsType> = (props) => {
                         container
                         alignItems="center"
                         justify="flex-end"
-                        className="multiple"
+                        className='multiple-actions'
                         md={6}
                     >
-                        <Grid item>
-                            <div className="multiple-content">
-                                <Link href="#">
-                                    <a>
-                                        <Typography variant="subtitle1">
-                                            {t('actions')}
-                                        </Typography>
-                                        <SurpriseIcon />
-                                    </a>
-                                </Link>
-                            </div>
+                        <Grid item xs={2}>
+                            <Link href="#">
+                                <a>
+                                    <Typography variant="subtitle1">
+                                        {t('actions')}
+                                    </Typography>
+                                    <SurpriseIcon />
+                                </a>
+                            </Link>
                         </Grid>
-                        <Grid item>
-                            <div className="multiple-content">
-                                <Link href="#">
-                                    <a>
-                                        <Typography variant="subtitle1">
-                                            {t('bonus')}
-                                        </Typography>
-                                        <SubstractIcon />
-                                    </a>
-                                </Link>
-                            </div>
+                        <Grid item xs={2}>
+                            <Link href="#">
+                                <a>
+                                    <Typography variant="subtitle1">
+                                        {t('bonus')}
+                                    </Typography>
+                                    <SubstractIcon />
+                                </a>
+                            </Link>
                         </Grid>
-                        <Grid item>
-                            <div className="multiple-content">
-                                <Link href="/help">
-                                    <a>
-                                        <Typography variant="subtitle1">
-                                            {t('help')}
-                                        </Typography>
-                                        <QuestionIcon />
-                                    </a>
-                                </Link>
-                            </div>
+                        <Grid item xs={2}>
+                            <Link href="/help">
+                                <a
+                                    className={
+                                        pathname === '/help' ? 'selected' : ''
+                                    }
+                                >
+                                    <Typography variant="subtitle1">
+                                        {t('help')}
+                                    </Typography>
+                                    <QuestionIcon />
+                                </a>
+                            </Link>
                         </Grid>
-                        <Grid item>
+                        <Grid item xs={2}>
                             <Localization />
                         </Grid>
                     </Grid>

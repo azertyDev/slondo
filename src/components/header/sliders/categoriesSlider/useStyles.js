@@ -1,11 +1,13 @@
-import {makeStyles} from "@material-ui/core/styles";
+import { makeStyles } from '@material-ui/core/styles';
 
 export const useStyles = makeStyles((theme) => ({
     root: {
+        marginTop: '28px',
         '& h4.MuiTypography-h4': {
+            marginBottom: 21,
             [theme.breakpoints.down('sm')]: {
-                fontSize: '1.83rem'
-            }
+                fontSize: '1.83rem',
+            },
         },
         '& div.category-slider': {
             position: 'relative',
@@ -19,27 +21,25 @@ export const useStyles = makeStyles((theme) => ({
                     zIndex: 10,
                 },
                 '& div.slick-prev': {
-                    left: 0
+                    left: 0,
                 },
                 '& div.slick-next': {
-                    right: 0
-                }
+                    right: 0,
+                },
             },
             '& div.slick-disabled': {
-                display: 'none'
-            }
+                display: 'none',
+            },
         },
         '& div.slick-slide': {
-            width: "150px !important",
+            width: '150px !important',
             marginRight: '27px',
             '& > div': {
                 width: 'auto !important',
-                margin: 'auto',
                 display: 'flex',
                 justifyContent: 'center',
                 '& > a': {
                     width: '150px !important',
-                    height: '191px',
                     color: '#000',
                     textDecoration: 'none',
                     display: 'flex',
@@ -48,13 +48,13 @@ export const useStyles = makeStyles((theme) => ({
                     justifyContent: 'center',
                     '& > img': {
                         width: '140px',
-                        textAlign: 'center'
+                        textAlign: 'center',
                     },
                     '& > p': {
-                        textAlign: 'center'
-                    }
-                }
-            }
-        }
-    }
-}))
+                        textAlign: 'center',
+                    },
+                },
+            },
+        },
+    },
+}));

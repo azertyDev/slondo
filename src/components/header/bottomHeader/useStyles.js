@@ -1,4 +1,4 @@
-import {makeStyles} from '@material-ui/core/styles'
+import { makeStyles } from '@material-ui/core/styles';
 
 export const useStyles = makeStyles((theme) => ({
     root: {
@@ -7,25 +7,25 @@ export const useStyles = makeStyles((theme) => ({
         '& header.MuiAppBar-root': {
             background: '#fafafa',
             '& > div.MuiContainer-root': {
-                padding: ({isScrollBreak}) => !isScrollBreak && 0,
+                padding: ({ isScrollBreak }) => !isScrollBreak && 0,
                 transition: 'padding .3s',
                 '& > div': {
                     width: '100%',
                     margin: 0,
                     '& > div:first-child': {
-                        paddingLeft: 0
+                        paddingLeft: 0,
                     },
                     '& > div:last-child': {
-                        paddingRight: 0
-                    }
-                }
+                        paddingRight: 0,
+                    },
+                },
             },
             '& div.bottom-logo': {
                 '& a': {
                     display: 'flex',
-                    alignItems: 'center'
-                }
-            }
+                    alignItems: 'center',
+                },
+            },
         },
         '& div.MuiFormControl-root': {
             width: '100%',
@@ -37,32 +37,33 @@ export const useStyles = makeStyles((theme) => ({
                 padding: '7px 0',
                 '& > h6': {
                     textAlign: 'center',
-                    paddingRight: '8px'
-                }
+                    paddingRight: '8px',
+                },
             },
             '& svg': {
-                right: 0
-            }
+                right: 0,
+            },
         },
         '& button.header-button': {
             borderRadius: '10px',
             borderStyle: 'initial',
             height: '38px',
             '& > svg': {
-                marginLeft: '8px'
-            }
+                marginLeft: '8px',
+            },
         },
         '& button.bottom-sign-button': {
             color: '#000',
             backgroundColor: '#F2F2F2',
             boxShadow: '0px 1px 1px rgba(0, 0, 0, 0.15)',
-            width: '88px',
+            width: '100%',
         },
         '& button.create-ad-button': {
+            width: '99.84%',
             '& > h6.MuiTypography-subtitle2': {
                 lineHeight: '15px',
                 letterSpacing: '0.5px',
-                color: '#fff'
+                color: '#fff',
             },
         },
         '& button.bottom-category-button': {
@@ -71,7 +72,7 @@ export const useStyles = makeStyles((theme) => ({
                 lineHeight: '15px',
                 letterSpacing: '0.5px',
                 fontSize: '1.125rem',
-                color: '#fff'
+                color: '#fff',
             },
         },
         // Adaptive
@@ -84,8 +85,8 @@ export const useStyles = makeStyles((theme) => ({
                 [theme.breakpoints.up('lg')]: {
                     width: '140px',
                     height: '47px',
-                }
-            }
+                },
+            },
         },
         '& div.category-menu > button, & div.select-menu, & div.create-ad, button.bottom-sign-button': {
             '& h6': {
@@ -94,8 +95,8 @@ export const useStyles = makeStyles((theme) => ({
                 },
                 [theme.breakpoints.up('lg')]: {
                     fontSize: '.875rem',
-                }
-            }
+                },
+            },
         },
         '& div.select-local': {
             '& > form': {
@@ -103,10 +104,10 @@ export const useStyles = makeStyles((theme) => ({
                 '& > div': {
                     padding: '8px 36px',
                     '& > h6': {
-                        textAlign: 'center'
-                    }
-                }
-            }
-        }
-    }
-}))
+                        textAlign: 'center',
+                    },
+                },
+            },
+        },
+    },
+}));

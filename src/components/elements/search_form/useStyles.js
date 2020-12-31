@@ -1,4 +1,4 @@
-import makeStyles from '@material-ui/core/styles/makeStyles'
+import makeStyles from '@material-ui/core/styles/makeStyles';
 
 export const useStyles = makeStyles(() => ({
     root: {
@@ -12,13 +12,15 @@ export const useStyles = makeStyles(() => ({
             top: 'calc(50% - 10px)',
         },
         '& > img.search-icon': {
-            left: '10px'
+            width: 18,
+            height: 18,
+            left: '10px',
         },
         '& > img.filter-icon': {
-            right: '10px'
+            right: '10px',
         },
         '& > input.search-input': {
-            padding: '8px 230px 8px 40px',
+            padding: '8px 230px 8px 35px',
             width: '100%',
             borderRadius: '7px',
             border: '1px solid #ccc',
@@ -28,7 +30,7 @@ export const useStyles = makeStyles(() => ({
             width: 150,
             height: 38,
             position: 'absolute',
-            right: '70px',
+            right: '90px',
             top: 0,
             zIndex: 1,
             '& > div': {
@@ -39,10 +41,10 @@ export const useStyles = makeStyles(() => ({
             },
             '& div.MuiSelect-select:focus': {
                 background: 'none',
-            }
+            },
         },
         '& > button.search-button': {
-            width: '70px',
+            width: 88,
             marginLeft: '-70px',
             color: '#000',
             border: '1px solid #C0C0C0',
@@ -52,6 +54,6 @@ export const useStyles = makeStyles(() => ({
             borderTopLeftRadius: '0',
             backgroundColor: '#E9E9E9',
             lineHeight: '1.65',
-        }
-    }
-}))
+        },
+    },
+}));

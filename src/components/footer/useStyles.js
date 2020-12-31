@@ -2,15 +2,13 @@ import { makeStyles } from '@material-ui/core/styles';
 
 export const useStyles = makeStyles(() => ({
     root: {
-        marginTop: '50px',
-        width: '100%',
-        height: '400px',
+        marginTop: '60px',
         backgroundColor: '#F2F2F2',
         borderRadius: '100px 100px 0px 0px',
+        padding: '60px 0',
         '& > div > div.wrapper': {
             '& > div': {
                 '&.footer-top': {
-                    paddingTop: 60,
                     paddingBottom: 90,
                     mixBlendMode: 'normal',
                 },
@@ -50,7 +48,7 @@ export const useStyles = makeStyles(() => ({
             '&:before': {
                 content: '""',
                 position: 'absolute',
-                width: 1100,
+                width: '90%',
                 height: 2,
                 background: '#E0E0E0',
                 borderRadius: '1px',

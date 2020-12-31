@@ -5,7 +5,6 @@ export const useStyles = makeStyles(() => ({
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
-        marginTop: '30px',
         '& > h6.MuiTypography-subtitle1': {
             fontWeight: 600,
             marginBottom: '10px',

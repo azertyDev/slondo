@@ -10,9 +10,6 @@ export const useStyles = makeStyles(() => ({
         '& div.breadcrumbs': {
             marginBottom: '10px',
             '& li.MuiBreadcrumbs-li': {
-                // '&:last-child': {
-                //     width: '41%',
-                // },
                 '& > a h6': {
                     color: 'rgba(49, 49, 49, 0.6)',
                 },
@@ -138,22 +135,24 @@ export const useStyles = makeStyles(() => ({
         '& div.ad-description': {
             marginBottom: '40px',
             '& p.MuiTypography-button': {
-                marginBottom: 22,
+                marginBottom: 19,
             },
-            '& > div:first-child': {
-                '& > h6.MuiTypography-subtitle1': {
-                    display: 'flex',
-                    alignItems: 'center',
-                    '&:first-child': {
-                        fontWeight: '600',
-                    },
-                    '&:last-child': {
-                        marginTop: '10px',
-                        '& > svg': {
-                            width: '48px',
-                            height: '48px',
-                            marginRight: '10px',
-                        },
+            '& h6.MuiTypography-subtitle1': {
+                fontSize: '1.125rem',
+            },
+            '& > h6.MuiTypography-subtitle1': {
+                display: 'flex',
+                alignItems: 'center',
+                lineHeight: '22px',
+                '&:first-child': {
+                    fontWeight: '600',
+                },
+                '&:last-child': {
+                    marginTop: '10px',
+                    '& > svg': {
+                        width: '48px',
+                        height: '48px',
+                        marginRight: '10px',
                     },
                 },
             },
@@ -161,7 +160,6 @@ export const useStyles = makeStyles(() => ({
                 display: 'flex',
                 flexDirection: 'column',
                 justifyContent: 'space-between',
-                marginTop: '30px',
                 '& > div': {
                     '& > h6.MuiTypography-subtitle1': {},
                     '& a': {
@@ -183,7 +181,6 @@ export const useStyles = makeStyles(() => ({
                 padding: '10px 21px',
                 '& > h6.MuiTypography-subtitle1': {
                     fontSize: '1.125rem',
-                    lineHeight: '25px',
                     '& > span': {
                         color: '#675EAA',
                         fontWeight: '600',
@@ -211,7 +208,6 @@ export const useStyles = makeStyles(() => ({
                 display: 'flex',
                 alignItems: 'center',
                 marginBottom: '20px',
-                borderBottom: '1px solid #ccc',
                 paddingBottom: '5px',
                 '& > h6.MuiTypography-subtitle1': {
                     width: '20%',
@@ -234,17 +230,16 @@ export const useStyles = makeStyles(() => ({
                     listStyle: 'none',
                     display: 'flex',
                     marginBottom: 20,
-                    borderBottom: '1px solid #ccc',
                     paddingBottom: '5px',
                     '&:last-child': {
                         margin: 0,
                     },
                     '& h6.key': {
                         width: '20%',
-                        fontSize: '18px',
+                        fontSize: '1.125rem',
                     },
                     '& h6.value': {
-                        fontSize: '18px',
+                        fontSize: '1.125rem',
                         fontWeight: '600',
                     },
                 },

@@ -12,7 +12,7 @@ export const ReadMore = ({t, children}) => {
     return (
         <div className={classes.root}>
             <div className={isHidden ? classes.hidden : null}>{children}</div>
-            <ButtonComponent onClick={() => setIsHidden(!isHidden)} className='show-more-button'>
+            <ButtonComponent onClick={() => setIsHidden(!isHidden)} className='show-more-button' disableRipple>
                 {isHidden ?
                     <Typography variant='subtitle1'>
                         Показать полностью

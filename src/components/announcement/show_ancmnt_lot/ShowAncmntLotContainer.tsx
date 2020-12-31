@@ -1,12 +1,11 @@
-import React, {FC, useEffect, useState} from 'react';
-import {useRouter} from 'next/router';
-import {WithT} from "i18next";
-import {i18n} from '@root/i18n';
-import {userAPI} from '@src/api/api';
-import {ShowAncmntLot} from '@src/components/announcement/show_ancmnt_lot/ShowAncmntLot';
+import React, { FC, useEffect, useState } from 'react';
+import { useRouter } from 'next/router';
+import { WithT } from 'i18next';
+import { i18n } from '@root/i18n';
+import { userAPI } from '@src/api/api';
+import { ShowAncmntLot } from '@src/components/announcement/show_ancmnt_lot/ShowAncmntLot';
 
-
-const initValues = {id: null, name: ''};
+const initValues = { id: null, name: '' };
 
 const initialAdData = {
     isFetch: false,
@@ -48,7 +47,7 @@ const initialAdData = {
     },
 };
 
-export const ShowAncmntLotContainer: FC<WithT> = ({t}) => {
+export const ShowAncmntLotContainer: FC<WithT> = ({ t }) => {
     const [adData, setAdData] = useState(initialAdData);
     const [parameters, setParameters] = useState({});
 
@@ -56,6 +55,8 @@ export const ShowAncmntLotContainer: FC<WithT> = ({t}) => {
     const splittedUrl = url.split('-');
 
     const lang = i18n.language;
+
+    const ancmntType = adData.data.ads_type.mark;
 
     const fetchAdData = async () => {
         try {
@@ -74,7 +75,10 @@ export const ShowAncmntLotContainer: FC<WithT> = ({t}) => {
                 city,
                 district,
                 ...otherData
-            } = await userAPI.getAddById(splittedUrl[splittedUrl.length - 1], lang);
+            } = await userAPI.getAddById(
+                splittedUrl[splittedUrl.length - 1],
+                lang,
+            );
 
             setAdData({
                 ...adData,
@@ -112,6 +116,11 @@ export const ShowAncmntLotContainer: FC<WithT> = ({t}) => {
     }, []);
 
     return (
-        <ShowAncmntLot adData={adData} t={t} parameters={parameters}/>
+        <ShowAncmntLot
+            t={t}
+            data={adData.data}
+            parameters={parameters}
+            ancmntType={ancmntType}
+        />
     );
 };

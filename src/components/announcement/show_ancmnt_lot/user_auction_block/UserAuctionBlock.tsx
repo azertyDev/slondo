@@ -6,8 +6,7 @@ import { SocialsBlock } from '@root/src/components/elements/socials_block/Social
 import { useStyles } from './useStyles';
 
 export const UserAuctionBlock = (props) => {
-    const { adData, t } = props;
-    const { data } = adData;
+    const { data, t } = props;
 
     const isAuction = data.ads_type.name !== 'Обычный';
 
@@ -21,7 +20,7 @@ export const UserAuctionBlock = (props) => {
                 </Typography>
             </div>
             {isAuction && <AuctionContent {...props} />}
-            <UserContent {...adData} />
+            <UserContent {...data} />
             <SocialsBlock className="social-block" />
         </div>
     );

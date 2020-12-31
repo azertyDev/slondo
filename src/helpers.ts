@@ -2,6 +2,18 @@ import {setErrorMsgAction} from "@src/redux/slices/errorSlice";
 import {CategoryType} from "@root/interfaces/Categories";
 import {Dispatch, SetStateAction} from "react";
 import {IdNameType} from "@root/interfaces/Announcement";
+import CyrillicToTranslit from 'cyrillic-to-translit-js';
+
+
+const transform = new CyrillicToTranslit().transform;
+const formatRegEx = /[\-\,\.\;\"\']+/g;
+
+export const transformTitle = ( title ) => {
+    transform(title)
+        .toLowerCase()
+        .replace(formatRegEx, ' ')
+        .replace(/\s+/g, '-');
+};
 
 interface StateHelper {
     state: any,
@@ -47,3 +59,4 @@ export const categorySearchHelper = (text: string, categoryList: CategoryType[])
             return list;
         }, []);
 };
+

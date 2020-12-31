@@ -1,5 +1,4 @@
 import React from 'react';
-import {CabinetCard} from "@src/components/cabinet/card/CabinetCard";
 
 // styles
 import {useStyles} from './useStyles';

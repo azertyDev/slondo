@@ -13,11 +13,6 @@ export const useStyles = makeStyles((theme) => ({
                     textTransform: 'uppercase',
                     color: '#838383',
                 },
-                '& button.MuiTab-root': {
-                    // padding: 0,
-                    // paddingBottom: 5,
-                    // minHeight: 20,
-                },
                 '& button.MuiTab-textColorInherit': {
                     opacity: 1,
                 },
@@ -35,7 +30,7 @@ export const useStyles = makeStyles((theme) => ({
                     padding: '7px',
                 },
             },
-            '& > div > div> a': {
+            '& a': {
                 textDecoration: 'none',
             },
         },

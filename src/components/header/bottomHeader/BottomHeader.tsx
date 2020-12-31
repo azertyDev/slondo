@@ -29,15 +29,15 @@ const BottomHeader = (props) => {
                 >
                     <Container maxWidth='lg'>
                         <Grid container justify="space-between" alignItems="center" spacing={1}>
-                            <Grid container item xs={3} alignItems="center">
-                                <Grid container item md={7} lg={6} className="bottom-logo">
+                            <Grid container item xs={3} alignItems="center" spacing={1}>
+                                <Grid container item md={6} className="bottom-logo">
                                     <Link href="/">
                                         <a>
                                             <Logo/>
                                         </a>
                                     </Link>
                                 </Grid>
-                                <Grid item container md={5} lg={6} justify="center" className="category-menu">
+                                <Grid item container md={6} justify="flex-end" className="category-menu">
                                     <ButtonComponent color="primary" className="bottom-category-button header-button">
                                         <Typography variant="subtitle2">{t('categories')}</Typography>
                                         <CategorySortIcon/>
@@ -55,7 +55,7 @@ const BottomHeader = (props) => {
                                     <SearchForm t={t}/>
                                 </Grid>
                             </Grid>
-                            <Grid item md={2}>
+                            <Grid item md={2} container justify='center'>
                                 <ButtonComponent
                                     onClick={forwardToCreateAd}
                                     color='primary'

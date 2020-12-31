@@ -1,11 +1,10 @@
-import React, {FC, useEffect, useState} from 'react';
-import {WithT} from "i18next";
-import {MainContent} from './MainContent';
-import {ITEMS_PER_PAGE} from '@src/constants';
-import {userAPI} from "@src/api/api";
-import {i18n} from "@root/i18n";
-import {CardData} from "@root/interfaces/CardData";
-
+import React, { FC, useEffect, useState } from 'react';
+import { WithT } from 'i18next';
+import { MainContent } from './MainContent';
+import { ITEMS_PER_PAGE } from '@src/constants';
+import { userAPI } from '@src/api/api';
+import { i18n } from '@root/i18n';
+import { CardData } from '@root/interfaces/CardData';
 
 const cardData = {
     id: null,
@@ -15,13 +14,15 @@ const cardData = {
     price: null,
     currency: {
         id: null,
-        name: ''
+        name: '',
     },
     created_at: '',
     location: '',
-    images: [{
-        url: ''
-    }],
+    images: [
+        {
+            url: '',
+        },
+    ],
 };
 
 const initCards = [];
@@ -33,8 +34,8 @@ for (let i = 1; i <= 16; i++) {
 const initialCardData: CardData = {
     isFetch: false,
     error: null,
-    cardData: {
-        data: initCards,
+    data: {
+        cards: initCards,
         total: null,
     },
 };
@@ -44,7 +45,7 @@ const fetchCardData = async (itemsPerPage, page, type, lang) => {
 };
 
 export const MainContentContainer: FC<WithT> = (props) => {
-    const {t} = props;
+    const { t } = props;
     const lang = i18n.language;
 
     const [tabValue, setTabValue] = useState(0);
@@ -52,7 +53,11 @@ export const MainContentContainer: FC<WithT> = (props) => {
     const [lotCurrentPage, setLotCurrentPage] = useState(1);
     const [adCardData, setAdCardData] = useState(initialCardData);
     const [lotCardData, setLotCardData] = useState(initialCardData);
-    const pageCount = Math.ceil((tabValue === 0 ? adCardData.cardData.total : lotCardData.cardData.total) / ITEMS_PER_PAGE) || 1;
+    const pageCount =
+        Math.ceil(
+            (tabValue === 0 ? adCardData.data.total : lotCardData.data.total) /
+                ITEMS_PER_PAGE,
+        ) || 1;
 
     const currentPage = tabValue === 0 ? adCurrentPage : lotCurrentPage;
 
@@ -60,28 +65,28 @@ export const MainContentContainer: FC<WithT> = (props) => {
         try {
             setState({
                 ...state,
-                isFetch: true
+                isFetch: true,
             });
 
-            const newData = await fetchCardData(ITEMS_PER_PAGE, currentPage, type, lang);
+            const newData = await fetchCardData(
+                ITEMS_PER_PAGE,
+                currentPage,
+                type,
+                lang,
+            );
 
             setState({
                 ...state,
-                isFetch: false
-            });
-
-            setState({
-                ...state,
-                cardData: {
-                    data: newData.data,
+                isFetch: false,
+                data: {
+                    cards: newData.data,
                     total: newData.total,
-                }
+                },
             });
-
         } catch (e) {
             setState({
                 ...state,
-                error: e.message
+                error: e.message,
             });
         }
     };
@@ -101,16 +106,16 @@ export const MainContentContainer: FC<WithT> = (props) => {
     const handlePaginationPage = (_, pageNumber) => {
         tabValue === 0
             ? setAdCurrentPage(pageNumber)
-            : setLotCurrentPage(pageNumber)
+            : setLotCurrentPage(pageNumber);
     };
 
     useEffect(() => {
         setCardData(adCardData, setAdCardData, adCurrentPage, 'ad');
-    }, [adCurrentPage])
+    }, [adCurrentPage]);
 
     useEffect(() => {
         setCardData(lotCardData, setLotCardData, lotCurrentPage, 'lot');
-    }, [lotCurrentPage])
+    }, [lotCurrentPage]);
 
     return (
         <MainContent
@@ -124,5 +129,5 @@ export const MainContentContainer: FC<WithT> = (props) => {
             handleTabChange={handleTabChange}
             // handleShowMore={handleShowMore}
         />
-    )
-}
+    );
+};

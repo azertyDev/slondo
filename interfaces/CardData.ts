@@ -1,8 +1,8 @@
 export interface CardData {
     isFetch: boolean;
     error: unknown;
-    cardData: {
-        data: Array<InnerCardData>;
+    data: {
+        cards: Array<InnerCardData>;
         total: number;
     };
 }
@@ -17,13 +17,18 @@ export type InnerCardData = {
     currency: {
         id: number;
         name: string;
-    }
+    };
     images: Array<{
         url: {
-            default: string
-        }
+            default: string;
+        };
     }>;
     created_at: string;
-    delivery: number,
-    exchange: number,
-}
+    delivery: number;
+    exchange: number;
+    ads_type: {
+        id: number;
+        name: string;
+        mark: string;
+    };
+};

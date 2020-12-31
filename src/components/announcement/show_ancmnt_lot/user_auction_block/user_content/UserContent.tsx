@@ -21,7 +21,7 @@ export const UserContent = (props) => {
                 <ButtonComponent color="primary" onClick={handleShowPhone}>
                     <Typography variant="subtitle1" color="initial">
                         {isPhoneAval
-                            ? props.data.phone ?? 'default'
+                            ? props.phone ?? 'default'
                             : 'Показать номер'}
                     </Typography>
                 </ButtonComponent>
@@ -30,7 +30,7 @@ export const UserContent = (props) => {
                         Написать продавцу
                     </Typography>
                 </ButtonComponent>
-                {props.data.safe_deal === 1 && (
+                {props.safe_deal === 1 && (
                     <ButtonComponent
                         color="primary"
                         className="safe-shopping-btn"

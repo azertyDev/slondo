@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Container, Modal, Typography } from '@material-ui/core';
 import { SyncSliders } from './sync_sliders/SyncSliders';
 import { ReadMore } from '@src/components/elements/read_more/readMore';
@@ -14,8 +14,8 @@ import { BreadcrumbsComponent } from '@src/components/elements/breadcrumbs/Bread
 import { Link } from '@root/i18n';
 
 export const AncmntLotContent = ({ data, parameters, t }) => {
-    const [initialSlide, setInitialSlide] = useState(0);
     const [open, setOpen] = useState(false);
+    const [initialSlide, setInitialSlide] = useState(0);
 
     const date = new Date(data.created_at);
     const months = [
@@ -57,7 +57,9 @@ export const AncmntLotContent = ({ data, parameters, t }) => {
                 const params = (
                     <li>
                         <Typography variant="subtitle1" className="value">
-                            {parameters[key].map(param => param.name).join(', ')}
+                            {parameters[key]
+                                .map((param) => param.name)
+                                .join(', ')}
                         </Typography>
                     </li>
                 );
@@ -142,7 +144,6 @@ export const AncmntLotContent = ({ data, parameters, t }) => {
                         {data.title}
                     </Typography>
                 </div>
-
                 {/* data.condition.id */}
                 {true && (
                     <div className="condition">
@@ -227,16 +228,24 @@ export const AncmntLotContent = ({ data, parameters, t }) => {
                 )}
             </div>
             <div className="ad-description">
-                <div>
-                    <Typography variant="button" color="initial">
-                        Описание
+                <Typography variant="button" color="initial">
+                    Описание
+                </Typography>
+                {data.description.length < 420 ? (
+                    <Typography variant="subtitle1" color="initial">
+                        {data.description}
                     </Typography>
+                ) : (
                     <ReadMore {...data}>
-                        <Typography variant="subtitle1" color="initial">
+                        <Typography
+                            variant="subtitle1"
+                            color="initial"
+                            id="description"
+                        >
                             {data.description}
                         </Typography>
                     </ReadMore>
-                </div>
+                )}
             </div>
             <div className="ad-category">
                 <Typography variant="button" color="initial">

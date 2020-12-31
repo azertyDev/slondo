@@ -13,7 +13,7 @@ import {FavoriteIcon, DeliveryIcon, SafeIcon, SwapIcon} from '@src/components/el
 import {useStyles} from './useStyles'
 
 
-export const CardItem: FC<InnerCardData & { className: string; isFetch: boolean }> = (props) => {
+export const CardItem: FC<InnerCardData & { isFetch: boolean }> = (props) => {
     const classes = useStyles();
     return (
         <Card className={classes.root} elevation={0}>
