@@ -1,39 +1,29 @@
 import React, {FC, useEffect, useState} from 'react';
 import {useSelector, useDispatch} from "react-redux";
-import {useFormik} from "formik";
 import {i18n} from "@root/i18n";
 import {userAPI} from '@src/api/api';
-import {TOTAL_FILES_LIMIT} from "@src/constants";
-import {CreateAncmnt} from "./CreateAncmnt";
+import {CreateAncmntCategory} from "./CreateAncmntCategory";
 import {RootState} from "@src/redux/rootReducer";
 import {MainLayout} from "@src/components/MainLayout";
-import {CameraIcon} from "@src/components/elements/icons";
 import {
-    CreateAncmntFields,
-    FileType,
     CreateAncmntState,
-    AncmntTypesState
+    AncmntStateTypes,
+    AncmntType,
 } from "@root/interfaces/Announcement";
-import {createAdvrtSchema, isRequired} from "@root/validation_schemas/createAdvrtSchema";
-import {AncmntFormContainer, autoSelectKeys, textFieldKeys} from "./ancmnt_form/AncmntFormContainer";
+import {AncmntFormContainer} from "./ancmnt_form/AncmntFormContainer";
 import {setErrorMsgAction} from '@root/src/redux/slices/errorSlice';
 import {AncmntTypesPage} from "@src/components/announcement/ancmnt_types_page/AncmntTypesPage";
 import {WithT} from "i18next";
 import {categoryDataNormalization, categorySearchHelper} from "@src/helpers";
-// import {stateHelper} from "@src/helpers";
+import {AncmntHeader} from './ancmnt_header/AncmntHeader';
+import {SuccessAncmnt} from "@src/components/announcement/create_ancmnt/ancmnt_form/success_ancmnt/SuccessAncmnt";
 
 
-export const initUrl: FileType = {
-    url: (
-        <div style={{width: '140px', height: '140px', margin: 'auto'}}>
-            <CameraIcon/>
-        </div>
-    )
-};
+const steps = ['Тип объявления', 'Категория', 'Заполнение', 'Проверка'];
 
 const initAncmntTypes = {
     isFetch: false,
-    ancmnts: [
+    types: [
         {
             id: 1,
             name: "Обычный",
@@ -51,16 +41,6 @@ const initAncmntTypes = {
                 {
                     id: 3,
                     expiration_at: 720
-                }
-            ],
-            condition: [
-                {
-                    id: 1,
-                    name: "Новый"
-                },
-                {
-                    id: 2,
-                    name: "б/у"
                 }
             ],
             image: {
@@ -86,16 +66,6 @@ const initAncmntTypes = {
                     expiration_at: 720
                 }
             ],
-            condition: [
-                {
-                    id: 3,
-                    name: "Новый"
-                },
-                {
-                    id: 4,
-                    name: "б/у"
-                }
-            ],
             image: {
                 url: '/img/lot-background.png'
             }
@@ -119,16 +89,6 @@ const initAncmntTypes = {
                     expiration_at: 720
                 }
             ],
-            condition: [
-                {
-                    id: 5,
-                    name: "Новый"
-                },
-                {
-                    id: 6,
-                    name: "б/у"
-                }
-            ],
             image: {
                 url: '/img/advanced-lot-background.png'
             }
@@ -139,30 +99,25 @@ const initAncmntTypes = {
 export const CreateAncmntContainer: FC<WithT> = ({t}) => {
     const lang = i18n.language;
 
-    const initPhotos: FileType[] = Array.from({
-        length: TOTAL_FILES_LIMIT
-    }).map(() => initUrl);
+    const initAncmntType = {
+        id: null,
+        name: '',
+        currency: [{
+            id: null,
+            name: ''
+        }],
+        expired: [{
+            id: null,
+            expiration_at: null
+        }],
+        image: {
+            url: ''
+        }
+    };
 
     const initCreateAncmntState: CreateAncmntState = {
         isFetch: false,
         error: null,
-        adType: {
-            id: null,
-            name: '',
-            currency: [{
-                id: null,
-                name: ''
-            }],
-            expired: [{
-                id: null,
-                expiration_at: null
-            }],
-            condition: [{
-                id: null,
-                name: ''
-            }],
-            image: {url: ''}
-        },
         category: {
             id: null,
             name: '',
@@ -178,391 +133,244 @@ export const CreateAncmntContainer: FC<WithT> = ({t}) => {
                     default: ''
                 }
             },
-            childs: [{
-                parent: {
-                    id: null,
-                    name: ''
-                },
-                id: null,
-                name: '',
-                icons: [],
-                image: {
-                    url: ''
-                }
-            }],
+            childs: [],
             has_auction: null,
         },
         subCategory: {
             id: null,
             name: '',
-            data: {}
-        }
-    };
-
-    const initFormFields: CreateAncmntFields = {
-        isFetch: false,
-        title: '',
-        safe_deal: false,
-        delivery: false,
-        exchange: false,
-        location: null,
-        files: initPhotos,
-        description: '',
-        phone: '',
-        price: '',
-        currency: {
-            id: null,
-            name: ''
-        },
-        avalTime: {
-            isActive: false,
-            start_time: '00:00',
-            end_time: '00:00',
-            week: [
-                {id: 1, name: 'Пн'},
-                {id: 2, name: 'Вт'},
-                {id: 3, name: 'Ср'},
-                {id: 4, name: 'Чт'},
-                {id: 5, name: 'Пт'},
-                {id: 6, name: 'Сб'},
-                {id: 7, name: 'Вс'}
-            ],
-        },
-        auction: {
-            duration: {
+            data: {},
+            parent: {
                 id: null,
-                expiration_at: null
-            },
-            offer_the_price: false,
-            auto_renewal: false,
-            reserve_price: '',
-            price_by_now: {
-                isActive: false,
-                value: ''
-            },
-            display_phone: false,
-        },
-        adParams: {
-            safety: [],
-            multimedia: [],
-            assistant: [],
-            exterior: [],
-            car_climate: [],
-            airbags: [],
+                name: ''
+            }
         }
     };
 
     const categoriesList = useSelector(({categories}: RootState) => categoryDataNormalization(categories.list));
     const dispatch = useDispatch();
 
-    const [ancmntTypes, setAncmntTypes] = useState<AncmntTypesState>(initAncmntTypes);
+    const [ancmntTypes, setAncmntTypes] = useState<AncmntStateTypes>(initAncmntTypes);
+
+    const [ancmntType, setAncmntType] = useState<AncmntType>(initAncmntType);
 
     const [createAncmnt, setCreateAncmnt] = useState<CreateAncmntState>(initCreateAncmntState);
-    const {adType, category, subCategory} = createAncmnt;
+    const {subCategory} = createAncmnt;
 
-    const [isForm, setIsForm] = useState(false);
+    const [activeStep, setActiveStep] = useState(0);
 
-    const [isPreview, setIsPreview] = useState(false);
+    const [searchTxt, setSearchTxt] = useState('');
 
-    const [isSuccess, setIsSuccess] = useState(false);
+    const handleNextStep = () => {
+        setActiveStep((prevStep) => prevStep + 1);
+    };
 
-    const formik = useFormik({
-        initialValues: initFormFields,
-        validationSchema: createAdvrtSchema,
-        onSubmit
-    });
+    const handlePrevStep = () => {
+        setActiveStep((prevStep) => prevStep - 1);
+    };
 
-    const {values, setValues, setErrors, setTouched} = formik;
-    const {adParams} = values;
+    const handleResetSteps = () => {
+        setActiveStep(0);
+    };
 
-    const setAncmntType = (selectedAncmntType) => {
-        setCreateAncmnt({
-            ...createAncmnt,
-            adType: selectedAncmntType
-        });
+    // const setAncmntsTypes = async () => {
+    //     try {
+    //         const types = userAPI.getAncmntsTypes(lang);
+    //         await setFetchedData(
+    //             ancmntTypes,
+    //             setAncmntTypes,
+    //             {types},
+    //         );
+    //     } catch (e) {
+    //         dispatch(setErrorMsgAction(e.message));
+    //         setAncmntTypes({...ancmntTypes, isFetch: false});
+    //     }
+    // };
+
+    const handleAncmntType = (selectedAncmntType) => () => {
+        handleNextStep();
+        setAncmntType(selectedAncmntType);
     };
 
     const handleSearch = ({target}) => {
-        const childs = categorySearchHelper(target.value, categoriesList);
-        if (target.value !== '') {
-            setCreateAncmnt({
-                ...createAncmnt,
-                category: {
-                    ...createAncmnt.category,
-                    childs
-                }
-            });
-        } else {
-            setCreateAncmnt({...initCreateAncmntState, adType});
-        }
+        setSearchTxt(target.value);
     };
 
-    const handleCategory = (category) => () => {
+    const setFoundCategoriesChilds = () => {
+        const childs = !!searchTxt
+            ? categorySearchHelper(searchTxt, categoriesList)
+            : [];
+
         setCreateAncmnt({
             ...createAncmnt,
-            category
+            category: {
+                ...initCreateAncmntState.category,
+                childs
+            }
         });
+    };
+
+    const handleCategory = (category) => async () => {
+        try {
+            if (category.id === 11 || category.id === 12) {
+                setCreateAncmnt({
+                    ...createAncmnt,
+                    subCategory: {
+                        ...subCategory,
+                        parent: {
+                            id: category.id,
+                            name: category.name
+                        }
+                    }
+                });
+                handleNextStep();
+            } else {
+                setCreateAncmnt({
+                    ...createAncmnt,
+                    category
+                });
+            }
+        } catch (e) {
+            dispatch(setErrorMsgAction(e.message));
+            setCreateAncmnt({...createAncmnt, isFetch: false});
+        }
     };
 
     const handleSubCategory = (parent, child_id, name) => async () => {
         try {
-            if (child_id !== undefined) {
+            setCreateAncmnt({
+                ...createAncmnt,
+                isFetch: true,
+            });
+
+            const data = await userAPI.getAdDataForCreateAncmnt(parent.id, child_id, lang);
+
+            setCreateAncmnt({
+                ...createAncmnt,
+                isFetch: false,
+                subCategory: {
+                    id: child_id,
+                    name,
+                    data,
+                    parent
+                }
+            });
+            handleNextStep();
+        } catch (e) {
+            dispatch(setErrorMsgAction(e.message));
+            setCreateAncmnt({...createAncmnt, isFetch: false});
+        }
+    };
+
+    const handleResetCreateData = () => {
+        setSearchTxt('');
+        setCreateAncmnt(initCreateAncmntState);
+    };
+
+    const handleResetAncmntType = () => {
+        handleResetSteps();
+        handleResetCreateData();
+        setAncmntType(initAncmntType);
+    };
+
+    const handleBackBtn = () => {
+        handlePrevStep();
+        switch (activeStep) {
+            case 1:
+                handleResetAncmntType();
+                break;
+            case 2:
+                handleResetCreateData();
+        }
+    };
+
+    const setCreateAncmntByLang = async () => {
+        const [ctgrByLang] = categoriesList.filter(ctgr => ctgr.id === subCategory.parent.id);
+        ctgrByLang && setCreateAncmnt({
+            ...createAncmnt,
+            category: ctgrByLang,
+        });
+        if (subCategory.id !== null) {
+            const [subCtgrByLang] = ctgrByLang.childs.filter(subCtgr => subCtgr.id === subCategory.id);
+
+            try {
                 setCreateAncmnt({
                     ...createAncmnt,
                     isFetch: true
                 });
 
-                const data = await userAPI.getAdDataForCreate(parent.id, child_id, lang);
-
-                setIsForm(true);
+                const data = await userAPI.getAdDataForCreateAncmnt(subCategory.parent.id, subCategory.id, lang);
 
                 setCreateAncmnt({
                     ...createAncmnt,
                     isFetch: false,
-                    category: parent,
                     subCategory: {
-                        id: child_id,
-                        name,
+                        ...subCtgrByLang,
                         data
                     }
                 });
-            } else {
-                setIsForm(true);
-                setCreateAncmnt({
-                    ...initCreateAncmntState,
-                    adType: createAncmnt.adType,
-                    category: createAncmnt.category
-                });
+            } catch (e) {
+                dispatch(setErrorMsgAction(e.message));
+                setCreateAncmnt({...createAncmnt, isFetch: false});
             }
-        } catch (e) {
-            dispatch(setErrorMsgAction(e.message));
-            setCreateAncmnt({...createAncmnt, isFetch: false});
         }
     };
 
-    const handleCreateReset = () => {
-        setErrors({});
-        setTouched({});
-        setValues(initFormFields);
-        isForm && setIsForm(false);
-        isSuccess && setIsSuccess(false);
-        setCreateAncmnt({...initCreateAncmntState, adType});
-    };
-
-    const handleResetCreateAncmnt = () => {
-        setCreateAncmnt(initCreateAncmntState);
-    };
-
-    const handleBackBtn = () => {
-        if (isPreview) {
-            setIsPreview(false);
-        } else {
-            handleCreateReset();
+    const renderPageByActiveStep = () => {
+        switch (activeStep) {
+            case 0:
+                return <AncmntTypesPage
+                    ancmntTypes={ancmntTypes}
+                    handleAncmntType={handleAncmntType}
+                />
+            case 1:
+                return <CreateAncmntCategory
+                    ancmntType={ancmntType}
+                    createAncmnt={createAncmnt}
+                    categoriesList={categoriesList}
+                    searchTxt={searchTxt}
+                    handleSearch={handleSearch}
+                    handleCategory={handleCategory}
+                    handleSubCategory={handleSubCategory}
+                />
+            case 4:
+                return <SuccessAncmnt
+                    handleCreateNewAncmnt={handleResetAncmntType}
+                />
+            default:
+                return <AncmntFormContainer
+                    t={t}
+                    activeStep={activeStep}
+                    ancmntType={ancmntType}
+                    createAncmnt={createAncmnt}
+                    handleNextStep={handleNextStep}
+                />
         }
-    };
-
-    const getFormData = (data: CreateAncmntFields) => {
-        const form = new FormData();
-        const {
-            avalTime,
-            location,
-            files,
-            adParams,
-            auction
-        } = data;
-
-        form.set('ads_type_id', adType.id.toString());
-        form.set('parent_categories_id', category.id.toString());
-        if (subCategory.id) {
-            form.set('child_categories_id', subCategory.id.toString());
-        }
-        form.set('title', data.title);
-        form.set('safe_deal', Number(data.safe_deal).toString());
-        form.set('delivery', Number(data.delivery).toString());
-        form.set('exchange', Number(data.exchange).toString());
-        form.set('phone', data.phone);
-        form.set('description', data.description);
-        form.set('price', data.price);
-        form.set('currency_id', data.currency.id.toString());
-
-        files.forEach(
-            ({file}: any) => {
-                if (file) form.append('files[]', file, file.name);
-            });
-
-        if (avalTime.isActive) {
-            avalTime.week.forEach((day, i) => (
-                form.append(`week[${i}]`, day.id.toString())
-            ));
-            form.set('start_time', avalTime.start_time.toString());
-            form.set('end_time', avalTime.end_time.toString());
-        }
-
-        for (const key in location) {
-            if (typeof location[key] === 'number') {
-                form.set(key, Number(location[key]).toString());
-            }
-        }
-
-        for (let key in adParams) {
-            const value = adParams[key];
-            if (value) {
-                if (typeof value === 'string') {
-                    const validKey = key.replace('_value', '');
-                    if (textFieldKeys.some(k => k === validKey)) {
-                        key = validKey;
-                    }
-                    form.set(key, value);
-                } else if (Array.isArray(value)) {
-                    value.forEach((value, i) => (
-                        form.append(`${key}[${i}]`, value.id))
-                    )
-                } else {
-                    if (value.id) {
-                        switch (key) {
-                            case 'models' :
-                                key = 'model';
-                                break;
-                            case 'colors' :
-                                key = 'color';
-                        }
-                        form.set(`${key}_id`, value.id);
-                    }
-                }
-            }
-        }
-
-        if (adType.id !== 1) {
-            form.set('duration_id', auction.duration.id.toString());
-            form.set('display_phone', Number(auction.display_phone).toString());
-            if (adType.id === 3) {
-                form.set('reserve_price', auction.reserve_price);
-                form.set('auto_renewal', Number(auction.auto_renewal).toString());
-                form.set('offer_the_price', Number(auction.offer_the_price).toString());
-                if (auction.price_by_now.isActive) {
-                    form.set('price_by_now', auction.price_by_now.value);
-                }
-            }
-        }
-
-        // for (const key of form.entries()) {
-        //     console.log(key[0] + '-' + key[1]);
-        // }
-
-        return form;
-    };
-
-    async function onSubmit(values: CreateAncmntFields) {
-        try {
-            if (!isPreview) {
-                setIsPreview(true);
-            } else {
-                setValues({...values, isFetch: true});
-
-                const data = getFormData(values);
-                await userAPI.createAdvrt(data);
-
-                setValues({...values, isFetch: false});
-
-                setIsSuccess(true);
-                setIsPreview(false);
-            }
-        } catch (e) {
-            dispatch(setErrorMsgAction(e.message));
-            setCreateAncmnt({...createAncmnt, isFetch: false});
-        }
-    }
-
-    const setReqValues = () => {
-        const reqVals = {};
-        const reqParamsVals = {};
-
-        const adParamsVals = subCategory.data;
-
-        if (category.id === 11) {
-            reqVals['price'] = '0';
-        }
-
-        if (adType.currency.length !== 0) {
-            reqVals['currency'] = adType.currency.filter(cur => cur.name === 'sum')[0];
-        }
-
-        if (adType.id !== 1 && adType.expired.length !== 0) {
-            reqVals['auction'] = {
-                ...values.auction,
-                duration: adType.expired[0]
-            };
-        }
-
-        Object.keys(adParamsVals).forEach(key => {
-            if (isRequired(key) && adParams[key] === undefined) {
-                if (key === 'manufacturer' && subCategory.id == 1) {
-                    reqParamsVals['models'] = {id: null, name: 'Не выбрано'};
-                }
-                if (Array.isArray(adParamsVals[key])) {
-                    reqParamsVals[key] = {id: null, name: 'Не выбрано'};
-                } else {
-                    reqParamsVals[key] = adParamsVals[key];
-                }
-            } else if (autoSelectKeys.some(k => k === key)) {
-                if (textFieldKeys.some(k => k === key)) {
-                    reqParamsVals[`${key}_value`] = '';
-                }
-                reqParamsVals[key] = adParamsVals[key][0];
-            }
-        });
-
-        setValues({
-            ...values,
-            ...reqVals,
-            adParams: {
-                ...adParams,
-                ...reqParamsVals
-            }
-        });
     };
 
     // useEffect(() => {
-    //     stateHelper(
-    //         ancmntTypes,
-    //         setAncmntTypes,
-    //         userAPI.getAdTypes(lang),
-    //         dispatch
-    //     );
+    //    setAncmntsTypes();
     // }, []);
 
     useEffect(() => {
-        setReqValues();
-    }, [isForm]);
+        setCreateAncmntByLang();
+    }, [categoriesList[0].name]);
 
-    console.log(categoriesList)
-    console.log(createAncmnt)
+    useEffect(() => {
+        setFoundCategoriesChilds();
+    }, [searchTxt]);
+
+    // console.log(createAncmnt)
+    // console.log(categoriesList)
     return (
         <MainLayout>
-            {isForm
-                ? <AncmntFormContainer
-                    t={t}
-                    formik={formik}
-                    isSuccess={isSuccess}
-                    isPreview={isPreview}
-                    setIsPreview={setIsPreview}
-                    createAncmnt={createAncmnt}
-                    handleBackBtn={handleBackBtn}
-                    handleCreateReset={handleCreateReset}
-                />
-                : !!adType.id
-                    ? <CreateAncmnt
-                        handleSearch={handleSearch}
-                        createAncmnt={createAncmnt}
-                        categoriesList={categoriesList}
-                        handleCategory={handleCategory}
-                        handleSubCategory={handleSubCategory}
-                        handleResetCreateAncmnt={handleResetCreateAncmnt}
-                    />
-                    : <AncmntTypesPage
-                        ancmntTypes={ancmntTypes}
-                        setAncmntType={setAncmntType}
-                    />}
+            {activeStep !== 0 && activeStep !== 4
+            && <AncmntHeader
+                steps={steps}
+                activeStep={activeStep}
+                handleBackBtn={handleBackBtn}
+            />}
+            {renderPageByActiveStep()}
         </MainLayout>
     )
 }

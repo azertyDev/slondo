@@ -1,16 +1,18 @@
-import React from 'react'
+import React, {FC, useEffect} from 'react'
 import {Grid, Typography, Paper} from '@material-ui/core'
 import {ButtonComponent} from '@src/components/elements/button/Button'
 import HomeIcon from '@material-ui/icons/Home'
 import CheckCircleIcon from '@material-ui/icons/CheckCircle'
-import {Router} from "@root/i18n";
+import {Link} from "@root/i18n";
 import {useStyles} from './useStyles'
 
 
-export const SuccessAncmnt = ({handleCreateReset}) => {
-    const forwardToHome = () => {
-        Router.push('/');
-    };
+export const SuccessAncmnt: FC<{ handleCreateNewAncmnt: () => void }> = ({handleCreateNewAncmnt}) => {
+
+    useEffect(() => {
+        window && window.scrollTo(0, 0);
+    }, []);
+
     const classes = useStyles()
     return (
         <div className={classes.root}>
@@ -40,15 +42,22 @@ export const SuccessAncmnt = ({handleCreateReset}) => {
                 </Grid>
                 <Grid item container xs={12} direction="row" justify="center" className={classes.buttonBlock}>
                     <Grid item xs={6} sm={2}>
-                        <ButtonComponent onClick={handleCreateReset} style={{color: '#fff'}}>
+                        <ButtonComponent
+                            onClick={handleCreateNewAncmnt}
+                            style={{color: '#fff'}}
+                        >
                             Создать еще
                         </ButtonComponent>
                     </Grid>
                     <Grid item xs={6} sm={2}>
-                        <ButtonComponent onClick={forwardToHome} style={{color: '#fff'}}>
-                            <HomeIcon color="inherit"/>
-                            На главную
-                        </ButtonComponent>
+                        <Link href='/'>
+                            <a>
+                                <ButtonComponent style={{color: '#fff'}}>
+                                    <HomeIcon color="inherit"/>
+                                    На главную
+                                </ButtonComponent>
+                            </a>
+                        </Link>
                     </Grid>
                 </Grid>
                 <Grid item container xs={12} direction="row" justify="center">

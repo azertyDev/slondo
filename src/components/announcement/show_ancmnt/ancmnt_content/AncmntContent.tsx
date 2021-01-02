@@ -14,7 +14,7 @@ import {BreadcrumbsComponent} from "@src/components/elements/breadcrumbs/Breadcr
 import {Link} from "@root/i18n";
 
 
-export const AncmntLotContent = ({data, parameters, t}) => {
+export const AncmntContent = ({data, parameters, t}) => {
     const [initialSlide, setInitialSlide] = useState(0);
     const [open, setOpen] = useState(false);
 

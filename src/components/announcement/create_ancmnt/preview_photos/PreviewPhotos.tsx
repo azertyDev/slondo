@@ -3,7 +3,7 @@ import {DragDropContext, resetServerContext, DropResult} from 'react-beautiful-d
 import {TOTAL_FILES_SIZE_LIMIT} from '@src/constants';
 import {CreateAncmntFields, FileType} from "@root/interfaces/Announcement";
 import {CustomDroppable} from "../preview_photos/CustomDroppable";
-import {initUrl} from "../CreateAncmntContainer";
+import {initPhoto} from "../ancmnt_form/AncmntFormContainer";
 
 
 interface IPreviewPhotos {
@@ -68,7 +68,7 @@ export const PreviewPhotos: FC<IPreviewPhotos> = (props) => {
                     ...values,
                     files: [
                         ...files,
-                        initUrl
+                        initPhoto
                     ]
                 });
             }

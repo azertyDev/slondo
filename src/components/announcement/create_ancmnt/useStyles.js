@@ -1,4 +1,5 @@
-import {makeStyles} from '@material-ui/core/styles'
+import {makeStyles} from '@material-ui/core/styles';
+
 
 export const useStyles = makeStyles((theme) => ({
     root: {
@@ -11,17 +12,21 @@ export const useStyles = makeStyles((theme) => ({
                 backgroundColor: '#C0C0C0',
             },
         },
-        '& button.back-btn': {
-            width: '250px',
-            color: theme.palette.primary.white
-        },
         '& div.categories-block': {
             marginTop: '40px',
-            '& div.categories-list, & div.sub-categories-list': {
-                '& ul > li > div': {
-                    cursor: 'pointer'
+            '& div.categories-menu, & div.sub-categories-menu': {
+                '& ul > li': {
+                    cursor: 'pointer',
+                },
+                '& li.selected-category': {
+                    backgroundColor: theme.palette.primary.gray
                 }
-            }
+            },
+            '& div.sub-categories-menu': {
+                '& ul > li:hover': {
+                    backgroundColor: theme.palette.primary.gray
+                }
+            },
         }
     },
 }))

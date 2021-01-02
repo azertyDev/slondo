@@ -1,5 +1,5 @@
 import {ReactNode} from "react";
-import {CategoryType} from "@root/interfaces/Categories";
+import {CategoryType, SubCategoryType} from "@root/interfaces/Categories";
 
 export interface AdvertisementProps {
     isPreview: boolean;
@@ -11,21 +11,19 @@ export interface AdvertisementProps {
 export interface CreateAncmntState {
     isFetch: boolean;
     error?: unknown;
-    adType: AncmntType;
     category: CategoryType;
-    subCategory: IdNameType & { data: any };
+    subCategory: SubCategoryType;
 }
 
 export type AncmntType = IdNameType & {
     currency: IdNameType[];
-    condition: IdNameType[];
     expired: { id: number, expiration_at: number }[];
     image: { url: string }
 };
 
-export type AncmntTypesState = {
+export type AncmntStateTypes = {
     isFetch: boolean;
-    ancmnts: AncmntType[];
+    types: AncmntType[];
 };
 
 export interface CreateAncmntFields {

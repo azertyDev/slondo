@@ -1,11 +1,11 @@
 import React from 'react';
-import {AuctionContent} from './auction_content/AuctionContent';
-import {UserContent} from './user_content/UserContent';
+import {AuctionInfo} from './auction_info/AuctionInfo';
+import {OwnerInfo} from './owner_info/OwnerInfo';
 import {Typography} from "@material-ui/core";
 import {useStyles} from './useStyles';
 
 
-export const UserAuctionBlock = (props) => {
+export const OwnerAuctionContent = (props) => {
     const {adData} = props;
     const {data} = adData;
 
@@ -21,8 +21,8 @@ export const UserAuctionBlock = (props) => {
                     </Typography>
                 )}
             </div>
-            {isAuction && <AuctionContent {...props} />}
-            <UserContent {...adData} />
+            {isAuction && <AuctionInfo {...props} />}
+            <OwnerInfo {...adData} />
         </div>
     );
 };

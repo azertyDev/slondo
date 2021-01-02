@@ -1,13 +1,13 @@
 import React from 'react';
 import {Grid, Hidden} from '@material-ui/core';
 import {MainLayout} from '@src/components/MainLayout';
-import {UserAuctionBlock} from './user_auction_block/UserAuctionBlock';
-import {AncmntLotContent} from './ancmnt_lot_content/AncmntLotContent';
+import {OwnerAuctionContent} from './owner_auction_content/OwnerAuctionContent';
+import {AncmntContent} from './ancmnt_content/AncmntContent';
 import {useStyles} from './useStyles';
 import {Banner} from '@src/components/elements/banner/Banner';
 
 
-export const ShowAncmntLot = (props) => {
+export const ShowAncmnt = (props) => {
     const {adData, parameters, t} = props;
     const {data} = adData;
 
@@ -17,7 +17,7 @@ export const ShowAncmntLot = (props) => {
             <MainLayout title="Просмотр объявления">
                 <Grid container spacing={2}>
                     <Grid item xs={12} md={9}>
-                        <AncmntLotContent
+                        <AncmntContent
                             data={data}
                             parameters={parameters}
                             t={t}
@@ -25,7 +25,7 @@ export const ShowAncmntLot = (props) => {
                     </Grid>
                     <Hidden smDown>
                         <Grid item xs={3}>
-                            <UserAuctionBlock {...props} />
+                            <OwnerAuctionContent {...props} />
                             <div className={classes.adBanner}>
                                 <Banner height="424px"/>
                             </div>

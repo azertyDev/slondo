@@ -1,4 +1,5 @@
 {
+    "automobile": "Avtomobil",
     "year": "Ishlab chiqarilgan yili ",
     "mileage": "Bosib o’tgan masofasi",
     "manufacturer": "Ishlab chiqaruvchi",
@@ -57,7 +58,7 @@
     "properties": "Xususiyatlari",
     "regulation": "Sozlash",
     "os": "Operatsion tizim",
-    "memory": "Qurilgan xotira ",
+    "memory": "Qurilgan xotira",
     "function": "Funksiyalari",
     "connector": "Ulagich",
     "device": "Qurilma",

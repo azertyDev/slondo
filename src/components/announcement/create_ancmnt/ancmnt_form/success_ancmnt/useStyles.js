@@ -1,8 +1,12 @@
-import { makeStyles } from '@material-ui/core/styles'
+import {makeStyles} from '@material-ui/core/styles'
 
 export const useStyles = makeStyles((theme) => ({
-    root: {},
-    title: { margin: '45px 0' },
+    root: {
+        '& a': {
+            textDecoration: 'none',
+        },
+    },
+    title: {margin: '45px 0'},
     paper: {
         display: 'flex',
         alignItems: 'center',
@@ -10,9 +14,6 @@ export const useStyles = makeStyles((theme) => ({
         marginBottom: '30px',
         '& h6.MuiTypography-subtitle2': {
             fontSize: '1rem',
-        },
-        '& a': {
-            textDecoration: 'none',
         },
     },
     successIcon: {
@@ -26,6 +27,6 @@ export const useStyles = makeStyles((theme) => ({
         display: 'flex',
         flexDirection: 'row',
         marginLeft: '50px',
-
+        
     },
 }))

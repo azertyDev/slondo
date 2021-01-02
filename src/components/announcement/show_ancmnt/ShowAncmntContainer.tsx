@@ -3,7 +3,7 @@ import {useRouter} from 'next/router';
 import {WithT} from "i18next";
 import {i18n} from '@root/i18n';
 import {userAPI} from '@src/api/api';
-import {ShowAncmntLot} from '@src/components/announcement/show_ancmnt_lot/ShowAncmntLot';
+import {ShowAncmnt} from '@src/components/announcement/show_ancmnt/ShowAncmnt';
 
 
 const initValues = {id: null, name: ''};
@@ -48,7 +48,7 @@ const initialAdData = {
     },
 };
 
-export const ShowAncmntLotContainer: FC<WithT> = ({t}) => {
+export const ShowAncmntContainer: FC<WithT> = ({t}) => {
     const [adData, setAdData] = useState(initialAdData);
     const [parameters, setParameters] = useState({});
 
@@ -112,6 +112,6 @@ export const ShowAncmntLotContainer: FC<WithT> = ({t}) => {
     }, []);
 
     return (
-        <ShowAncmntLot adData={adData} t={t} parameters={parameters}/>
+        <ShowAncmnt adData={adData} t={t} parameters={parameters}/>
     );
 };

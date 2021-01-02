@@ -37,6 +37,10 @@ export const FullscreenIcon2 = `/icons/fullscreen-icon2.svg`;
 export const Subscribe_icon = `/icons/touch_icon.svg`;
 export const SpeakerNotes_icon = `/icons/speaker_notes.svg`;
 export const Bonus_icon = `/icons/bonus_icon.svg`;
+export const Auto_view_icon = `/icons/auto_view_icon.svg`;
+export const Auto_icon = `/icons/auto_icon.svg`;
+export const Wheel_icon = `/icons/wheel_icon.svg`;
+export const Info_icon = `/icons/info_icon.svg`;
 
 
 // Custom svgs

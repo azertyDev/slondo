@@ -1,42 +1,31 @@
-import {setErrorMsgAction} from "@src/redux/slices/errorSlice";
-import {CategoryType} from "@root/interfaces/Categories";
-import {Dispatch, SetStateAction} from "react";
+import {CategoryType, SubCategoryType} from "@root/interfaces/Categories";
 import {IdNameType} from "@root/interfaces/Announcement";
 
-interface StateHelper {
-    state: any,
-    setState: Dispatch<SetStateAction<any>>,
-    fetchedData: Promise<any>,
-    dispatch: Dispatch<any>
-}
 
-type SearchType = (IdNameType & { parent: any, icons: [], image: { url: string } })[];
+export const numberRegEx = /^[0-9]*$/;
 
-export const stateHelper = async ({state, setState, fetchedData, dispatch}: StateHelper): Promise<void> => {
-    try {
-        setState({...state, isFetch: true});
-
-        const ancmnts = await fetchedData;
-
-        setState({...state, ancmnts, isFetch: false});
-    } catch (e) {
-        dispatch(setErrorMsgAction(e.message));
-        setState({...state, isFetch: false});
-    }
-};
+type SearchType = (IdNameType & {
+    parent: IdNameType,
+    icons: [],
+    image: { url: string }
+})[];
 
 export const categoryDataNormalization = (categoryList: CategoryType[]): CategoryType[] => (
     categoryList.map(category => {
-        const childs = category.childs.map(child => (
-            {...child, parent: category}
-        ));
+        const childs = category.childs.map(child => ({
+                ...child,
+                parent: {
+                    id: category.id,
+                    name: category.name
+                }
+            })
+        );
         return {...category, childs};
     })
 );
 
 export const categorySearchHelper = (text: string, categoryList: CategoryType[]): SearchType => {
     const searchRegExp = RegExp(text, 'i');
-
     return categoryList
         .reduce((list, category) => {
             category.childs.forEach(sub_ctgr => {
@@ -47,3 +36,22 @@ export const categorySearchHelper = (text: string, categoryList: CategoryType[])
             return list;
         }, []);
 };
+
+export const prepareCreateAncmnt = (data: any, adParams?: any): any => (
+    Object.keys(data).reduce((acc, key) => {
+        if (Array.isArray(data[key]) || data[key] === '') {
+            acc[key] = data[key];
+        }
+        if (
+            Array.isArray(data[key])
+            && data[key].length
+            && adParams !== undefined && adParams[key]
+        ) {
+            acc = {
+                ...acc,
+                ...prepareCreateAncmnt(adParams[key])
+            };
+        }
+        return acc;
+    }, {})
+);

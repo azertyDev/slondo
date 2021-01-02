@@ -58,11 +58,12 @@ export const useStyles = makeStyles((theme) => ({
             boxShadow: '0px 1px 1px rgba(0, 0, 0, 0.15)',
             width: '88px',
         },
-        '& button.create-ad-button': {
-            '& > h6.MuiTypography-subtitle2': {
+        '& a.create-ancmnt-link': {
+            textDecoration: 'none',
+            '& h6.MuiTypography-subtitle2': {
                 lineHeight: '15px',
                 letterSpacing: '0.5px',
-                color: '#fff'
+                color: '#fff',
             },
         },
         '& button.bottom-category-button': {

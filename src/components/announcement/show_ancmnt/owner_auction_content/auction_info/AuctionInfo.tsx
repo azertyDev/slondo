@@ -6,7 +6,7 @@ import {AuctionTimer} from './AuctionTimer';
 import {useStyles} from './useStyles';
 
 
-export const AuctionContent = (props) => {
+export const AuctionInfo = (props) => {
     const {adData, t} = props;
     const {data} = adData;
     const date = new Date(data.expiration_at).getTime();

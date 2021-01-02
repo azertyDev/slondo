@@ -49,56 +49,49 @@ export const AncmntParameter: FC<any> = (props) => {
                 <strong>
                     {t(keyName)}
                 </strong>
-                {
-                    isRequired(keyName)
-                    && <span className='error-text'>*</span>
-                }
-                {
-                    adParamsError
-                    && adParamsTouched
-                    && adParamsError[keyName]
-                    && adParamsTouched[keyName]
-                    && adParamsTouched[keyName].id
-                    && <span className='error-text'> {adParamsError[keyName].id}</span>
-                }
+                {isRequired(keyName)
+                && <span className='error-text'>*</span>}
+                {adParamsError
+                && adParamsTouched
+                && adParamsError[keyName]
+                && adParamsTouched[keyName]
+                && adParamsTouched[keyName].id
+                && <span className='error-text'> {adParamsError[keyName].id}</span>}
             </Typography>
             <div className='row-list'>
                 {data.map(item => (
                     <div key={item.id}>
-                        {
-                            keyName === 'body'
+                        {keyName === 'body'
+                            ? <div
+                                onClick={!isPreview ? handleListItem(keyName, item) : null}
+                                className={
+                                    adParams[keyName]
+                                    && adParams[keyName].id === item.id ? classes.selected : ''
+                                }
+                            >
+                                {/*<img src={item.icon.url} alt={item.name}/>*/}
+                                <Typography>{item.name}</Typography>
+                            </div>
+                            : keyName === 'colors'
                                 ? <div
                                     onClick={!isPreview ? handleListItem(keyName, item) : null}
-                                    className={
-                                        adParams[keyName]
-                                        && adParams[keyName].id === item.id ? classes.selected : ''
-                                    }
-                                >
-                                    {/*<img src={item.icon.url} alt={item.name}/>*/}
+                                    className={adParams[keyName] && adParams[keyName].id === item.id ? classes.selected : ''}
+                                    style={{
+                                        width: '50px',
+                                        height: '50px',
+                                        backgroundColor: `${item.hex_color_code}`,
+                                    }}
+                                />
+                                : <div style={{display: 'flex', alignItems: 'center'}}>
+                                    <CustomCheckbox
+                                        disabled={isPreview}
+                                        checked={
+                                            adParams[keyName] && adParams[keyName].some(val => val.id === item.id)
+                                        }
+                                        onChange={handleParamsCheckbox(keyName, item)}
+                                    />
                                     <Typography>{item.name}</Typography>
                                 </div>
-                                : <>
-                                    {keyName === 'colors'
-                                        ? <div
-                                            onClick={!isPreview ? handleListItem(keyName, item) : null}
-                                            className={adParams[keyName] && adParams[keyName].id === item.id ? classes.selected : ''}
-                                            style={{
-                                                width: '50px',
-                                                height: '50px',
-                                                backgroundColor: `${item.hex_color_code}`,
-                                            }}
-                                        />
-                                        : <div style={{display: 'flex', alignItems: 'center'}}>
-                                            <CustomCheckbox
-                                                disabled={isPreview}
-                                                checked={
-                                                    adParams[keyName] && adParams[keyName].some(val => val.id === item.id)
-                                                }
-                                                onChange={handleParamsCheckbox(keyName, item)}
-                                            />
-                                            <Typography>{item.name}</Typography>
-                                        </div>}
-                                </>
                         }
                     </div>
                 ))}
@@ -115,18 +108,14 @@ export const AncmntParameter: FC<any> = (props) => {
             <Typography variant="subtitle1">
                 <strong>
                     {t(newKey)}
-                    {
-                        isRequired(newKey)
-                        && <span className='error-text'>*</span>
-                    }
+                    {isRequired(newKey)
+                    && <span className='error-text'>*</span>}
                 </strong>
-                {
-                    adParamsError
-                    && adParamsTouched
-                    && adParamsError[newKey]
-                    && adParamsTouched[newKey]
-                    && <span className='error-text'> {adParamsError[newKey].id}</span>
-                }
+                {adParamsError
+                && adParamsTouched
+                && adParamsError[newKey]
+                && adParamsTouched[newKey]
+                && <span className='error-text'> {adParamsError[newKey].id}</span>}
             </Typography>
             <Grid container>
                 {isTextFieldKey && (
@@ -170,18 +159,14 @@ export const AncmntParameter: FC<any> = (props) => {
         fields = <>
             <Typography variant="subtitle1">
                 {t(keyName)}
-                {
-                    isRequired(keyName)
-                    && !isPreview
-                    && <span className='error-text'>*</span>
-                }
-                {
-                    adParamsError
-                    && adParamsTouched
-                    && adParamsError[keyName]
-                    && adParamsTouched[keyName]
-                    && <span className='error-text'> {adParamsError[keyName]}</span>
-                }
+                {isRequired(keyName)
+                && !isPreview
+                && <span className='error-text'>*</span>}
+                {adParamsError
+                && adParamsTouched
+                && adParamsError[keyName]
+                && adParamsTouched[keyName]
+                && <span className='error-text'> {adParamsError[keyName]}</span>}
             </Typography>
             {isPreview
                 ? <Typography>

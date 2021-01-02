@@ -1,4 +1,4 @@
-import React, {Dispatch, FC, SetStateAction} from 'react';
+import React, {FC} from 'react';
 import {Grid, Typography, ButtonBase} from '@material-ui/core';
 import {useStyles} from './useStyles';
 import {AncmntTypesState} from "@root/interfaces/Announcement";
@@ -6,35 +6,27 @@ import {AncmntTypesState} from "@root/interfaces/Announcement";
 
 type AncmntTypesPageProps = {
     ancmntTypes: AncmntTypesState;
-    setAncmntType: Dispatch<SetStateAction<AncmntTypesState>>;
+    handleAncmntType: (ancmntType) => () => void;
 };
 
-export const AncmntTypesPage: FC<AncmntTypesPageProps> = ({ancmntTypes, setAncmntType}) => {
-
-    const handleSetAncmntType = (ancmntType) => () => {
-        setAncmntType(ancmntType);
-    };
-
+export const AncmntTypesPage: FC<AncmntTypesPageProps> = ({ancmntTypes, handleAncmntType}) => {
     const classes = useStyles();
     return (
         <div className={classes.root}>
             <Grid container spacing={2}>
-                {ancmntTypes.ancmnts.map((anType, i) => {
+                {ancmntTypes.types.map((anType, i) => {
                     return (
                         <Grid item xs={4} key={i}>
                             <ButtonBase
-                                onClick={handleSetAncmntType(anType)}
+                                onClick={handleAncmntType(anType)}
                                 style={{backgroundImage: `url(${anType.image.url})`}}
                             >
                                 <div>
-                                    <Typography variant="subtitle1">Объявление</Typography>
+                                    <Typography variant="subtitle1">{anType.name}</Typography>
                                     <Typography variant="body2">
                                         Размещайте товары или услуги совершенно бесплатно
                                     </Typography>
                                 </div>
-                                {/*<ButtonComponent>*/}
-                                {/*    Создать объявление*/}
-                                {/*</ButtonComponent>*/}
                             </ButtonBase>
                         </Grid>
                     )

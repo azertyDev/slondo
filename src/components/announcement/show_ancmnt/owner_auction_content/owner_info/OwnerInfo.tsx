@@ -5,7 +5,7 @@ import {UserInfoWithAvatar} from '@src/components/elements/user_info_with_avatar
 import {useStyles} from './useStyles';
 
 
-export const UserContent = (props) => {
+export const OwnerInfo = (props) => {
     const [isPhoneAval, setIsPhoneAval] = React.useState(false);
 
     const handleShowPhone = () => {
