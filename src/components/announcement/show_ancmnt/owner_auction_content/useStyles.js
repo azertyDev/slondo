@@ -1,12 +1,21 @@
-import {makeStyles} from '@material-ui/core/styles';
+import { makeStyles } from '@material-ui/core/styles';
 
 export const useStyles = makeStyles(() => ({
     root: {
+        marginTop: '20px',
         '& > div.price': {
-            marginTop: '54px',
+            marginBottom: 10,
             '& > h4': {
-                textAlign: 'end'
-            }
-        }
+                '& span': {
+                    fontWeight: '600',
+                    fontSize: 36,
+                },
+                textAlign: 'end',
+                fontSize: 25,
+            },
+        },
+        '& div.social-block': {
+            width: '100%',
+        },
     },
 }));

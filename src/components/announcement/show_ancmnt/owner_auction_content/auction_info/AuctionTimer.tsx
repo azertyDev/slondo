@@ -15,44 +15,96 @@ export const AuctionTimer = ({ date }) => {
 
     const renderer = ({ days, hours, minutes, seconds, completed }) => {
         if (completed) {
-            return <div>Finish</div>;
+            return (
+                <div>
+                    <div className="timer-title">
+                        <Typography variant="button" color="initial">
+                            Аукцион закрыт:
+                        </Typography>
+                    </div>
+                    <div>
+                        <div>
+                            <span className="disabled">
+                                <Typography variant="h6">
+                                    {formatNumber(days)}
+                                </Typography>
+                            </span>
+                            <Typography variant="caption">дни</Typography>
+                        </div>
+                        <span>:</span>
+                        <div>
+                            <span className="disabled">
+                                <Typography variant="h6">
+                                    {formatNumber(hours)}
+                                </Typography>
+                            </span>
+                            <Typography variant="caption">часы</Typography>
+                        </div>
+                        <span>:</span>
+                        <div>
+                            <span className="disabled">
+                                <Typography variant="h6">
+                                    {formatNumber(minutes)}
+                                </Typography>
+                            </span>
+                            <Typography variant="caption">минуты</Typography>
+                        </div>
+                        <span>:</span>
+                        <div>
+                            <span className="disabled">
+                                <Typography variant="h6">
+                                    {formatNumber(seconds)}
+                                </Typography>
+                            </span>
+                            <Typography variant="caption">секунды</Typography>
+                        </div>
+                    </div>
+                </div>
+            );
         } else {
             return (
                 <div>
-                    <div>
-                        <span>
-                            <Typography variant="h6">
-                                {formatNumber(days)}
-                            </Typography>
-                        </span>
-                        <Typography variant="caption">дни</Typography>
+                    <div className="timer-title">
+                        <Typography variant="button" color="initial">
+                            Окончание торгов через:
+                        </Typography>
                     </div>
-                    <span>:</span>
                     <div>
-                        <span>
-                            <Typography variant="h6">
-                                {formatNumber(hours)}
-                            </Typography>
-                        </span>
-                        <Typography variant="caption">часы</Typography>
-                    </div>
-                    <span>:</span>
-                    <div>
-                        <span>
-                            <Typography variant="h6">
-                                {formatNumber(minutes)}
-                            </Typography>
-                        </span>
-                        <Typography variant="caption">минуты</Typography>
-                    </div>
-                    <span>:</span>
-                    <div>
-                        <span>
-                            <Typography variant="h6">
-                                {formatNumber(seconds)}
-                            </Typography>
-                        </span>
-                        <Typography variant="caption">секунды</Typography>
+                        <div>
+                            <span>
+                                <Typography variant="h6">
+                                    {formatNumber(days)}
+                                </Typography>
+                            </span>
+                            <Typography variant="caption">дни</Typography>
+                        </div>
+                        <span>:</span>
+                        <div>
+                            <span>
+                                <Typography variant="h6">
+                                    {formatNumber(hours)}
+                                </Typography>
+                            </span>
+                            <Typography variant="caption">часы</Typography>
+                        </div>
+                        <span>:</span>
+                        <div>
+                            <span>
+                                <Typography variant="h6">
+                                    {formatNumber(minutes)}
+                                </Typography>
+                            </span>
+                            <Typography variant="caption">минуты</Typography>
+                        </div>
+                        <span>:</span>
+                        <div>
+                            <span>
+                                <Typography variant="h6">
+                                    {formatNumber(seconds)}
+                                </Typography>
+                            </span>
+                            <Typography variant="caption">секунды</Typography>
+                        </div>
                     </div>
                 </div>
             );
@@ -62,9 +114,6 @@ export const AuctionTimer = ({ date }) => {
     const classes = useStyles();
     return (
         <div className={classes.lotTimer}>
-            <Typography variant="subtitle1" color="initial">
-                Окончание торгов через:
-            </Typography>
             <Countdown date={date} renderer={renderer} />
         </div>
     );

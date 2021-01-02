@@ -6,20 +6,19 @@ import {useStyles} from './useStyles';
 
 
 export const OwnerAuctionContent = (props) => {
-    const {adData} = props;
+    const {t, adData} = props;
     const {data} = adData;
 
     const isAuction = data.ads_type.name !== 'Обычный';
-    console.log(adData)
+
     const classes = useStyles();
     return (
         <div className={classes.root}>
-            <div className='price'>
-                {!isAuction && (
-                    <Typography variant="h4" color="initial">
-                        {data.price} {data.currency.name}
-                    </Typography>
-                )}
+            <div className="price">
+                <Typography variant="h4" color="initial">
+                    <span>{data.price}</span>{' '}
+                    {t(`common:${data.currency.name}`)}
+                </Typography>
             </div>
             {isAuction && <AuctionInfo {...props} />}
             <OwnerInfo {...adData} />

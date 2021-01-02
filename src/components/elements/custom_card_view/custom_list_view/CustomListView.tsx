@@ -10,8 +10,8 @@ import {
     EyeIcon,
     DoubleUpIcon,
     FavoriteBorderIcon,
-    RestoreIcon,
-    CloseIcon,
+    // RestoreIcon,
+    // CloseIcon,
     DoneAllIcon,
     DeliveryIcon,
     SafeIcon,
@@ -23,8 +23,8 @@ import {
 import { useStyles } from './useStyles';
 import { ButtonComponent } from '@src/components/elements/button/Button';
 
-export const CabinetCard = (props) => {
-    
+export const CustomListView = (props) => {
+    const { t, list } = props;
     const classes = useStyles();
     return (
         <div className={classes.root}>

@@ -5,7 +5,6 @@ import {i18n} from '@root/i18n';
 import {userAPI} from '@src/api/api';
 import {ShowAncmnt} from '@src/components/announcement/show_ancmnt/ShowAncmnt';
 
-
 const initValues = {id: null, name: ''};
 
 const initialAdData = {
@@ -57,6 +56,8 @@ export const ShowAncmntContainer: FC<WithT> = ({t}) => {
 
     const lang = i18n.language;
 
+    const ancmntType = adData.data.ads_type.mark;
+
     const fetchAdData = async () => {
         try {
             setAdData({
@@ -74,7 +75,10 @@ export const ShowAncmntContainer: FC<WithT> = ({t}) => {
                 city,
                 district,
                 ...otherData
-            } = await userAPI.getAddById(splittedUrl[splittedUrl.length - 1], lang);
+            } = await userAPI.getAddById(
+                splittedUrl[splittedUrl.length - 1],
+                lang,
+            );
 
             setAdData({
                 ...adData,

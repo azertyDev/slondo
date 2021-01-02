@@ -2,23 +2,22 @@ import { makeStyles } from '@material-ui/core/styles';
 
 export const useStyles = makeStyles(() => ({
     root: {
-        marginTop: '50px',
-        width: '100%',
-        height: '400px',
+        marginTop: '60px',
         backgroundColor: '#F2F2F2',
         borderRadius: '100px 100px 0px 0px',
-        '& > div > div': {
-            padding: '60px 155px',
-            display: 'flex',
-            justifyContent: 'space-between',
-            width: '100%',
-            '& div': {
-                '& > ul': {
+        padding: '60px 0',
+        '& > div > div.wrapper': {
+            '& > div': {
+                '&.footer-top': {
+                    paddingBottom: 90,
+                    mixBlendMode: 'normal',
+                },
+                '& > div > ul': {
                     padding: 0,
                     margin: 0,
                     listStyle: 'none',
                     '& > li': {
-                        marginBottom: 8,
+                        marginBottom: 20,
                         '&:last-child': {
                             marginBottom: 0,
                         },
@@ -28,12 +27,33 @@ export const useStyles = makeStyles(() => ({
                         },
                     },
                 },
-            },
-            '& > div > div.social-icons': {
-                '& > div': {
-                    margin: 0,
-                    width: 'auto',
+                '& div.social-icons': {
+                    '& > div': {
+                        margin: 0,
+                        width: 'auto',
+                    },
                 },
+            },
+        },
+        '& div.footer-bottom': {
+            position: 'relative',
+            display: 'flex',
+            paddingTop: '25px',
+            '& div': {
+                '& h6.MuiTypography-subtitle1': {
+                    fontSize: '12px',
+                    textAlign: 'center',
+                },
+            },
+            '&:before': {
+                content: '""',
+                position: 'absolute',
+                width: '90%',
+                height: 2,
+                background: '#E0E0E0',
+                borderRadius: '1px',
+                top: 0,
+                left: '50px',
             },
         },
     },

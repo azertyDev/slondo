@@ -10,14 +10,17 @@ type MainLayoutPropsType = {
     title?: string;
 };
 
-export const MainLayout: FC<MainLayoutPropsType> = ({children, title = 'SLONDO'}) => {
+export const MainLayout: FC<MainLayoutPropsType> = ({
+    children,
+    title = 'SLONDO',
+}) => {
     return (
         <>
             <Head>
                 <title>{title}</title>
             </Head>
             <Header/>
-            <main style={{marginTop: '40px'}}>
+            <main style={{marginTop: '48px'}}>
                 <Container maxWidth="lg">
                     {children}
                 </Container>
@@ -25,5 +28,5 @@ export const MainLayout: FC<MainLayoutPropsType> = ({children, title = 'SLONDO'}
             <Footer/>
             <ErrorModal/>
         </>
-    )
-}
+    );
+};

@@ -4,9 +4,6 @@ export const useStyles = makeStyles((theme) => ({
     mainSlider: {
         marginTop: '20px'
     },
-    categorySlider: {
-        marginTop: '10px'
-    },
     mainContent: {
         marginTop: '30px'
     },

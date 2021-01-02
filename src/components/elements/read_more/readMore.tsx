@@ -12,7 +12,7 @@ export const ReadMore = ({t, children}) => {
     return (
         <div className={classes.root}>
             <div className={isHidden ? classes.hidden : null}>{children}</div>
-            <ButtonComponent onClick={() => setIsHidden(!isHidden)} className='show-more-button'>
+            <ButtonComponent onClick={() => setIsHidden(!isHidden)} className='show-more-button' disableRipple>
                 {isHidden ?
                     <Typography variant='subtitle1'>
                         Показать полностью
@@ -22,7 +22,7 @@ export const ReadMore = ({t, children}) => {
                     </Typography>
                     :
                     <Typography variant='subtitle1'>
-                        Показать меньше
+                        Скрыть
                         <svg width="13" height="6" viewBox="0 0 13 6" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M13 6H0L6.5 0L13 6Z" fill="#675EAA"/>
                         </svg>

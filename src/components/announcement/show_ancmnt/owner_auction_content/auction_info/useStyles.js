@@ -2,55 +2,52 @@ import { makeStyles } from '@material-ui/core/styles';
 
 export const useStyles = makeStyles((theme) => ({
     root: {
+        marginBottom: 20,
         '& div.lot-info': {
             display: 'flex',
             justifyContent: 'center',
             flexDirection: 'column',
             '& div.lot-timer': {
-                marginBottom: 23,
+                marginBottom: 20,
             },
-            '& div.buy-now': {
+            '& div.reserve-price': {
                 display: 'flex',
-                flexDirection: 'column',
-                '& div:first-child': {
+                alignItems: 'center',
+                justifyContent: 'center',
+                borderRadius: 5,
+                background: '#F2F2F2',
+                padding: '8px 0',
+                marginBottom: 20,
+                '& div': {
                     display: 'flex',
+                    flexDirection: 'column',
                     alignItems: 'center',
-                    justifyContent: 'center',
-                    '& div': {
-                        display: 'flex',
-                        flexDirection: 'column',
-                        alignItems: 'center',
-                        marginLeft: 20,
-                        '& > h6.MuiTypography-h6': {
-                            fontWeight: '600',
-                        },
-                        '& > h6.MuiTypography-subtitle2': {
-                            marginBottom: 5,
-                        },
+                    marginLeft: 10,
+                    '& > h6.MuiTypography-subtitle2': {
+                        color: '#666666',
                     },
                 },
-                '& > div:last-child': {
-                    marginTop: '15px',
-                    '& > button': {
-                        background: '#7DBCF6',
-                        borderRadius: '3px',
-                        padding: '15px 0',
-                        '& > h6.MuiTypography-subtitle1': {
-                            color: '#fff',
-                            lineHeight: '16px',
-                            fontSize: '1.125rem',
-                        },
+            },
+            '& div.buy-now': {
+                marginBottom: 20,
+                '& > button': {
+                    background: '#7DBCF6',
+                    borderRadius: '3px',
+                    padding: '15px 0',
+                    '& > h6.MuiTypography-subtitle1': {
+                        color: '#fff',
+                        lineHeight: '16px',
+                        fontSize: '1.125rem',
                     },
                 },
             },
             '& div.lot-participants-block': {
                 display: 'flex',
                 flexDirection: 'column',
-                marginBottom: '8px',
+                marginBottom: 20,
                 '& > h6.MuiTypography-subtitle1': {
                     fontSize: '1.125rem',
-                    padding: '15px',
-                    paddingBottom: '7px',
+                    padding: '10px 15px',
                     fontWeight: '600',
                     '&:last-child': {
                         padding: '10px 15px',
@@ -58,33 +55,101 @@ export const useStyles = makeStyles((theme) => ({
                         textDecorationLine: 'underline',
                     },
                 },
+                '& h6.all-bets': {
+                    fontWeight: '400',
+                },
                 '& > div.participants': {
-                    flexDirection: 'column',
+                    padding: '15px',
                     borderTop: '1px solid rgba(103, 94, 170, 0.5)',
                     borderBottom: '1px solid rgba(103, 94, 170, 0.5)',
-                    padding: '15px',
-                    '& > h6.MuiTypography-subtitle1': {
-                        marginBottom: '6px',
-                    },
-                    '& > div': {
-                        display: 'flex',
-                        justifyContent: 'space-between',
-                        '&:not(:last-child)': {
-                            marginBottom: '16px',
-                        },
-                        '& > h6.MuiTypography-subtitle1': {
-                            width: '50%',
-                        },
-                        '& > h6.MuiTypography-subtitle1:last-child': {
-                            textAlign: 'end',
-                            fontWeight: '600',
-                            color: '#666',
-                        },
-                        '& > button': {
-                            marginTop: '20px',
-                        },
-                        '& span': {
-                            color: '#AD66D5',
+                    '& > ul': {
+                        listStyle: 'none',
+                        padding: '0',
+                        margin: '0',
+                        '& > li': {
+                            display: 'flex',
+                            justifyContent: 'space-between',
+                            position: 'relative',
+                            padding: '10px 0',
+                            '& > div': {
+                                '&:first-child': {
+                                    display: 'flex',
+                                    flexFlow: 'column wrap',
+                                    width: '60%',
+                                    '& div.participant-name': {
+                                        marginBottom: '10px',
+                                        '& > h6.MuiTypography-subtitle1': {
+                                            color: '#666666',
+                                            '& > span': {
+                                                color: '#AD66D5',
+                                            },
+                                        },
+                                    },
+                                    '& div.dateAndTime': {
+                                        display: 'flex',
+                                        justifyContent: 'space-between',
+                                        width: '80%',
+                                        '& > h6.bet-time': {
+                                            color: '#2F80ED',
+                                            fontSize: '0.875rem',
+                                        },
+                                        '& > h6.bet-date': {
+                                            color: 'rgba(49, 49, 49, 0.6)',
+                                            fontSize: '0.875rem',
+                                        },
+                                    },
+                                },
+                                '&:last-child': {
+                                    textAlign: 'end',
+                                    width: '40%',
+                                    '& > h6': {
+                                        fontWeight: '600',
+                                        '&.final-bet': {
+                                            color: 'rgba(49, 49, 49, 0.6)',
+                                            marginBottom: '10px',
+                                        },
+                                        '&.per-bet': {
+                                            color: '#BDBDBD',
+                                            fontSize: '0.875rem',
+                                            fontWeight: '400',
+                                        },
+                                    },
+                                },
+                            },
+                            '&:after': {
+                                content: '""',
+                                position: 'absolute',
+                                bottom: 0,
+                                border: 0,
+                                margin: 0,
+                                height: 1,
+                                width: '100%',
+                                background: '#333',
+                                background:
+                                    'linear-gradient(left, hsla(0,0%,0%,0) 0%, hsla(0,0%,85%,1) 50%, hsla(0,0%,0%,0) 100%)',
+                            },
+                            '&:last-child': {
+                                '&:after': {
+                                    display: 'none',
+                                },
+                                paddingBottom: '0',
+                            },
+                            '&:first-child': {
+                                '& > div': {
+                                    '&:last-child': {
+                                        '& > h6': {
+                                            fontWeight: '600',
+                                            '&.final-bet': {
+                                                color: '#666666',
+                                            },
+                                            '&.per-bet': {
+                                                color: '#90BE27',
+                                                fontWeight: '600',
+                                            },
+                                        },
+                                    },
+                                },
+                            },
                         },
                     },
                 },
@@ -138,9 +203,6 @@ export const useStyles = makeStyles((theme) => ({
     },
 
     lotTimer: {
-        display: 'flex',
-        justifyContent: 'center',
-        flexDirection: 'column',
         padding: '15px 30px 8px 30px',
         boxShadow: '0px 0px 8px rgba(103, 94, 170, 0.25)',
         borderRadius: '3px',
@@ -152,35 +214,47 @@ export const useStyles = makeStyles((theme) => ({
         },
         '& > div': {
             display: 'flex',
-            justifyContent: 'space-between',
-            marginTop: '7px',
+            flexDirection: 'column',
+            '& div.timer-title': {
+                textAlign: 'center',
+                marginBottom: 10,
+                '& span.MuiTypography-button': {},
+            },
             '& > span': {
                 display: 'inline-block',
                 fontSize: '24px',
                 fontWeight: '600',
                 lineHeight: 'normal',
             },
-            '& > div': {
+            '& > div:last-child': {
                 display: 'flex',
-                flexDirection: 'column',
-                alignItems: 'center',
-                '& > span:first-child': {
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
+                justifyContent: 'space-between',
+                '& > div': {
                     textAlign: 'center',
-                    background: '#675EAA',
-                    borderRadius: '3px',
-                    width: '36px',
-                    height: '38px',
-                    '& h6.MuiTypography-h6': {
-                        fontWeight: '600',
-                        color: '#FFFFFF',
+                    '& span': {
+                        '&:first-child': {
+                            display: 'flex',
+                            alignItems: 'center',
+                            justifyContent: 'center',
+                            textAlign: 'center',
+                            background: '#675EAA',
+                            borderRadius: '3px',
+                            width: '36px',
+                            height: '38px',
+                            '& h6.MuiTypography-h6': {
+                                fontWeight: '600',
+                                color: '#FFFFFF',
+                            },
+                            '&.disabled': {
+                                background: '#BDBDBD',
+                            },
+                        },
                     },
                 },
-                '& > span.MuiTypography-caption': {
-                    marginTop: 5,
-                    textAlign: 'center',
+                '& > span': {
+                    marginTop: '5px',
+                    fontSize: '24px',
+                    fontWeight: '600',
                 },
             },
         },

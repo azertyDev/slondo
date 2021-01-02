@@ -1,18 +1,12 @@
-import React, {FC} from 'react';
-import {Grid, Typography, Hidden, Tabs, Tab} from '@material-ui/core';
-import {CardItem} from '@src/components/elements/card/Card';
-import {Banner} from '@src/components/elements/banner/Banner';
-import {CustomTabPanel} from '@src/components/elements/custom_tab_panel/CustomTabPanel';
-import {Link} from '@root/i18n';
-import {TFunction} from "i18next";
-import {CardData} from "@root/interfaces/CardData";
-import {CustomPagination} from "../../elements/custom_pagination/CustomPagination";
-import {useStyles} from './useStyles';
-import CyrillicToTranslit from 'cyrillic-to-translit-js';
-
-
-const transform = new CyrillicToTranslit().transform;
-const formatRegEx = /[\-\,\.\;\"\']+/g;
+import React, { FC } from 'react';
+import { Grid, Typography, Hidden, Tabs, Tab } from '@material-ui/core';
+import { Banner } from '@src/components/elements/banner/Banner';
+import { CustomTabPanel } from '@src/components/elements/custom_tab_panel/CustomTabPanel';
+import { TFunction } from 'i18next';
+import { CardData } from '@root/interfaces/CardData';
+import { CustomPagination } from '../../elements/custom_pagination/CustomPagination';
+import { useStyles } from './useStyles';
+import { CustomCardView } from '@src/components/elements/custom_card_view/CustomCardView';
 
 interface MainContentProps {
     t: TFunction;
@@ -27,14 +21,14 @@ interface MainContentProps {
 }
 
 export const MainContent: FC<MainContentProps> = (props) => {
-    const {t, tabValue, handleTabChange, adCardData, lotCardData} = props;
+    const { t, tabValue, handleTabChange, adCardData, lotCardData } = props;
 
     const classes = useStyles();
     return (
         <div className={classes.root}>
             <Typography variant="h4">Все объявления</Typography>
             <Grid container>
-                <Grid md={9} xs={12} item>
+                <Grid item md={9} xs={12}>
                     <Tabs
                         value={tabValue}
                         onChange={handleTabChange}
@@ -64,84 +58,51 @@ export const MainContent: FC<MainContentProps> = (props) => {
             <Grid container className="cards-container">
                 <Grid item md={9} xs={12}>
                     <CustomTabPanel value={tabValue} index={0}>
-                        {adCardData.error
-                            ? <Typography variant="subtitle1" className="error-text">{adCardData.error}</Typography>
-                            : <div className="ads-wrapper">
-                                <Grid item container spacing={1}>
-                                    {adCardData.cardData.data.map((item, index) => {
-                                        const translatedTitle =
-                                            transform(item.title)
-                                                .toLowerCase()
-                                                .replace(formatRegEx, ' ')
-                                                .replace(/\s+/g, '-');
-
-                                        return (
-                                            <Grid
-                                                key={index}
-                                                xs={6}
-                                                sm={4}
-                                                lg={3}
-                                                item
-                                            >
-                                                <Link href={`/obyavlenie/${translatedTitle}-${item.id}`}>
-                                                    <a>
-                                                        <CardItem
-                                                            {...item}
-                                                            isFetch={adCardData.isFetch}
-                                                            cardType={t('ad')}
-                                                            className="card-item"
-                                                        />
-                                                    </a>
-                                                </Link>
-                                            </Grid>
-                                        )
-                                    })}
-                                </Grid>
-                            </div>}
+                        {adCardData.error ? (
+                            <Typography
+                                variant="subtitle1"
+                                className="error-text"
+                            >
+                                {adCardData.error}
+                            </Typography>
+                        ) : (
+                            <Grid container className="ads-wrapper">
+                                <CustomCardView
+                                    list={adCardData.data.cards}
+                                    t={t}
+                                    isFetch={adCardData.isFetch}
+                                />
+                            </Grid>
+                        )}
                     </CustomTabPanel>
                     <CustomTabPanel value={tabValue} index={1}>
-                        {lotCardData.error
-                            ? <Typography variant="subtitle1" className="error-text">{lotCardData.error}</Typography>
-                            : <div className="lots-wrapper">
-                                <Grid item container spacing={2}>
-                                    {lotCardData.cardData.data.map((item, index) => {
-                                        const translatedTitle =
-                                            transform(item.title)
-                                                .toLowerCase()
-                                                .replace(formatRegEx, ' ')
-                                                .replace(/\s+/g, '-');
-
-                                        return (
-                                            <Grid
-                                                key={index}
-                                                xs={6}
-                                                sm={4}
-                                                lg={3}
-                                                item
-                                            >
-                                                <Link href={`/obyavlenie/${translatedTitle}-${item.id}`}>
-                                                    <a>
-                                                        <CardItem
-                                                            {...item}
-                                                            isFetch={lotCardData.isFetch}
-                                                            cardType={t('lot')}
-                                                            className="card-item"
-                                                        />
-                                                    </a>
-                                                </Link>
-                                            </Grid>
-                                        )
-                                    })}
-                                </Grid>
-                            </div>}
+                        {lotCardData.error ? (
+                            <Typography
+                                variant="subtitle1"
+                                className="error-text"
+                            >
+                                {lotCardData.error}
+                            </Typography>
+                        ) : (
+                            <Grid container className="lots-wrapper">
+                                <CustomCardView
+                                    t={t}
+                                    list={lotCardData.data.cards}
+                                    isFetch={lotCardData.isFetch}
+                                />
+                            </Grid>
+                        )}
                     </CustomTabPanel>
                     <Grid item xs={12} container justify="center">
                         {!(lotCardData.error || adCardData.error) && (
                             <CustomPagination
                                 count={props.pageCount}
                                 currentPage={props.currentPage}
-                                handlePaginationPage={props.handlePaginationPage}
-                            />)}
+                                handlePaginationPage={
+                                    props.handlePaginationPage
+                                }
+                            />
+                        )}
                     </Grid>
                 </Grid>
                 <Hidden smDown>
@@ -153,7 +114,7 @@ export const MainContent: FC<MainContentProps> = (props) => {
                         className={classes.adBanner}
                     >
                         <Grid item>
-                            <Banner height="345px"/>
+                            <Banner height="335px" />
                         </Grid>
                     </Grid>
                 </Hidden>

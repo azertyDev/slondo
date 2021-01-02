@@ -9,9 +9,9 @@ import {SwapIcon} from '@src/components/elements/icons/SwapIcon';
 import {SafeIcon} from '@src/components/elements/icons/SafeIcon';
 import {DeliveryIcon} from '@src/components/elements/icons/DeliveryIcon';
 import {useStyles} from './useStyles';
-import {ModalSyncSliders} from "./modal_sync_sliders/ModalSyncSliders";
-import {BreadcrumbsComponent} from "@src/components/elements/breadcrumbs/Breadcrumbs";
-import {Link} from "@root/i18n";
+import {ModalSyncSliders} from './modal_sync_sliders/ModalSyncSliders';
+import {BreadcrumbsComponent} from '@src/components/elements/breadcrumbs/Breadcrumbs';
+import {Link} from '@root/i18n';
 
 
 export const AncmntContent = ({data, parameters, t}) => {
@@ -47,22 +47,29 @@ export const AncmntContent = ({data, parameters, t}) => {
     const excludedFields = ['id', 'type', 'sub_type', 'uniqid', 'color_id'];
 
     const parameterItems = Object.keys(parameters).reduce((items, key, i) => {
-        if (parameters[key] !== null && excludedFields.every((k) => k !== key)) {
-            if (Array.isArray(parameters[key]) && parameters[key].length !== 0) {
-                const params = parameters[key].map((param, i) => {
-                    return (
-                        <li key={i}>
-                            <Typography variant="subtitle1" className="value">
-                                {param.name}
-                            </Typography>
-                        </li>
-                    );
-                });
+        if (
+            parameters[key] !== null &&
+            excludedFields.every((k) => k !== key)
+        ) {
+            if (
+                Array.isArray(parameters[key]) &&
+                parameters[key].length !== 0
+            ) {
+                const params = (
+                    <li>
+                        <Typography variant="subtitle1" className="value">
+                            {parameters[key]
+                                .map((param) => param.name)
+                                .join(', ')}
+                        </Typography>
+                    </li>
+                );
+
                 items.push(
                     <div key={i} className="params-list">
                         <Typography variant="subtitle1">{key}</Typography>
                         <ul>{params}</ul>
-                    </div>
+                    </div>,
                 );
             } else if (!Array.isArray(parameters[key])) {
                 items.push(
@@ -71,12 +78,12 @@ export const AncmntContent = ({data, parameters, t}) => {
                             {t(`${key}`)}
                         </Typography>
                         <Typography variant="subtitle1" className="value">
-                            {typeof parameters[key] === 'string'
-                            || typeof parameters[key] === 'number'
+                            {typeof parameters[key] === 'string' ||
+                            typeof parameters[key] === 'number'
                                 ? parameters[key]
                                 : parameters[key].name}
                         </Typography>
-                    </li>
+                    </li>,
                 );
             }
         }
@@ -86,54 +93,66 @@ export const AncmntContent = ({data, parameters, t}) => {
     const classes = useStyles();
     return (
         <div className={classes.root}>
-            <div className='breadcrumbs'>
+            <div className="breadcrumbs">
                 <BreadcrumbsComponent>
                     <Link href="#">
                         <a>
-                            {data.parent.name}
+                            <Typography variant="subtitle1" noWrap>
+                                {data.parent.name}
+                            </Typography>
                         </a>
                     </Link>
                     {data.child.id && (
                         <Link href="#">
                             <a>
-                                {data.child.name}
+                                <Typography variant="subtitle1" noWrap>
+                                    {data.child.name}
+                                </Typography>
                             </a>
                         </Link>
                     )}
                     {parameters.type && (
                         <Link href="#">
                             <a>
-                                {parameters.type.name}
+                                <Typography variant="subtitle1" noWrap>
+                                    {parameters.type.name}
+                                </Typography>
                             </a>
                         </Link>
                     )}
-                    {parameters.sub_type && (
-                        <Link href="#">
-                            <a>
-                                {parameters.sub_type.name}
-                            </a>
-                        </Link>
-                    )}
+                    <Typography variant="subtitle1" color="primary" noWrap>
+                        {data.title}
+                    </Typography>
                 </BreadcrumbsComponent>
             </div>
             <div className="adv-header">
-                <Typography
-                    variant="h6"
-                    className={data.ads_type.id === 1
-                        ? 'advertisement'
-                        : data.ads_type.id === 2
-                            ? 'lot'
-                            : 'advanced-lot'}
-                >
-                    {data.ads_type.name}
-                </Typography>
-                <Typography variant="h6" className="title" noWrap>
-                    {data.title}
-                </Typography>
-                {data.condition.id && (
-                    <Typography className="condition" variant="h6">
-                        {data.condition.name}
+                <div>
+                    <Typography
+                        variant="h6"
+                        className={
+                            data.ads_type.id === 1
+                                ? 'advertisement'
+                                : data.ads_type.id === 2
+                                ? 'lot'
+                                : 'advanced-lot'
+                        }
+                    >
+                        {data.ads_type.name}
                     </Typography>
+                </div>
+                <div className="title">
+                    <Typography variant="h2" noWrap>
+                        {data.title}
+                    </Typography>
+                </div>
+                {/* data.condition.id */}
+                {true && (
+                    <div className="condition">
+                        <Typography variant="h6">
+                            {/* {data.condition.name} */}
+                            Б/У
+                        </Typography>
+                    </div>
                 )}
             </div>
             <SyncSliders
@@ -158,7 +177,8 @@ export const AncmntContent = ({data, parameters, t}) => {
             <div className="ad-bonus">
                 {!!data.delivery && (
                     <span className="delivery">
-                        <DeliveryIcon/>&nbsp;
+                        <DeliveryIcon/>
+                        &nbsp;
                         <Typography variant="subtitle1">
                             Есть доставка
                         </Typography>
@@ -166,7 +186,8 @@ export const AncmntContent = ({data, parameters, t}) => {
                 )}
                 {!!data.safe_deal && (
                     <span className="safe_deal">
-                        <SafeIcon/>&nbsp;
+                        <SafeIcon/>
+                        &nbsp;
                         <Typography variant="subtitle1">
                             Безопасная покупка
                         </Typography>
@@ -174,16 +195,20 @@ export const AncmntContent = ({data, parameters, t}) => {
                 )}
                 {!!data.exchange && (
                     <span className="exchange">
-                        <SwapIcon/>&nbsp;
+                        <SwapIcon/>
+                        &nbsp;
                         <Typography variant="subtitle1">
                             Возможен обмен
                         </Typography>
-                    </span>)}
+                    </span>
+                )}
                 {!!data.available_start_time && (
                     <span className="available">
-                        <PhoneIcon/>&nbsp;
+                        <PhoneIcon/>
+                        &nbsp;
                         <Typography variant="subtitle1">
-                            {data.available_start_time} - {data.available_end_time}
+                            {data.available_start_time} -{' '}
+                            {data.available_end_time}
                         </Typography>
                     </span>
                 )}
@@ -192,26 +217,36 @@ export const AncmntContent = ({data, parameters, t}) => {
                 <Typography variant="button" noWrap>
                     Местоположение
                 </Typography>
-                {data.region.name || data.city.name || data.district.name
-                    ? <Typography variant="subtitle1" noWrap>
+                {data.region.name || data.city.name || data.district.name ? (
+                    <Typography variant="subtitle1" noWrap>
                         <LocationIcon/>
                         {`${data.region.name ?? ''}`}
                         {data.city.name ? `, ${data.city.name}` : ''}
                         {data.district.name ? `, ${data.district.name}` : ''}
                     </Typography>
-                    : <Typography variant="subtitle1">Не указано</Typography>}
+                ) : (
+                    <Typography variant="subtitle1">Не указано</Typography>
+                )}
             </div>
             <div className="ad-description">
-                <div>
-                    <Typography variant="button" color="initial">
-                        Описание
+                <Typography variant="button" color="initial">
+                    Описание
+                </Typography>
+                {data.description.length < 420 ? (
+                    <Typography variant="subtitle1" color="initial">
+                        {data.description}
                     </Typography>
+                ) : (
                     <ReadMore {...data}>
-                        <Typography variant="subtitle1" color="initial">
+                        <Typography
+                            variant="subtitle1"
+                            color="initial"
+                            id="description"
+                        >
                             {data.description}
                         </Typography>
                     </ReadMore>
-                </div>
+                )}
             </div>
             <div className="ad-category">
                 <Typography variant="button" color="initial">
@@ -220,21 +255,11 @@ export const AncmntContent = ({data, parameters, t}) => {
                 <div>
                     <Typography variant="subtitle1" color="initial">
                         {data.parent.name}
-                        {data.child.id && (
-                            <>
-                                &nbsp;- {data.child.name}
-                            </>
-                        )}
-                        {parameters.type && (
-                            <>
-                                &nbsp;- {parameters.type.name}
-                            </>
-                        )}
+                        {data.child.id && <>&nbsp;- {data.child.name}</>}
+                        {parameters.type && <>&nbsp;- {parameters.type.name}</>}
                         {parameters.sub_type && (
                             <>
-                                &nbsp;- <span>
-                                    {parameters.sub_type.name}
-                                </span>
+                                &nbsp;- <span>{parameters.sub_type.name}</span>
                             </>
                         )}
                     </Typography>
@@ -264,9 +289,7 @@ export const AncmntContent = ({data, parameters, t}) => {
                 className={classes.modal}
             >
                 <Container className={classes.slider}>
-                    <Typography variant="h6">
-                        {data.title}
-                    </Typography>
+                    <Typography variant="h6">{data.title}</Typography>
                     <ModalSyncSliders
                         imgs={data.images}
                         initialSlide={initialSlide}

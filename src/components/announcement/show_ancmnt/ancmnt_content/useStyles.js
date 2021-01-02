@@ -1,44 +1,62 @@
-import {makeStyles} from '@material-ui/core/styles';
-
+import { makeStyles } from '@material-ui/core/styles';
 
 export const useStyles = makeStyles(() => ({
     root: {
+        paddingBottom: 55,
+        borderBottom: '1px solid rgba(103, 94, 170, 0.5)',
         '& a': {
             textDecoration: 'none',
         },
         '& div.breadcrumbs': {
-            margin: '20px 0'
+            marginBottom: '10px',
+            '& li.MuiBreadcrumbs-li': {
+                '& > a h6': {
+                    color: 'rgba(49, 49, 49, 0.6)',
+                },
+            },
         },
         '& div.adv-header': {
             display: 'flex',
-            margin: '10px 0',
-            '& > h6': {
-                marginRight: '5px',
-                padding: '0px 10px',
-                lineHeight: '30px',
-                borderRadius: '5px',
-                fontWeight: '600',
-                '&:first-child, &.condition': {
-                    color: '#fff'
+            marginBottom: '10px',
+            alignItems: 'center',
+            '& > div': {
+                '&:not(:last-child)': {
+                    marginRight: '15px',
                 },
-                '&.advertisement': {
-                    background: 'rgba(136, 202, 236, 0.65)'
+                '& > h6.MuiTypography-h6': {
+                    padding: '0px 20px',
+                    lineHeight: '30px',
+                    borderRadius: '5px',
+                    fontWeight: '600',
+                    '&.advertisement': {
+                        background: 'rgba(136, 202, 236, 0.65)',
+                    },
+                    '&.lot': {
+                        background: 'rgba(173, 102, 213, 0.65)',
+                    },
+                    '&.advanced-lot': {
+                        background: 'rgba(242, 153, 74, 0.65)',
+                    },
+                    '&:first-child, &.condition': {
+                        color: '#fff',
+                    },
                 },
-                '&.lot': {
-                    background: 'rgba(173, 102, 213, 0.65)'
+            },
+            '& > div.condition > h6.MuiTypography-h6': {
+                textAlign: 'end',
+                background: '#90BE27',
+                borderRadius: '50px',
+                margin: 0,
+                fontSize: '1.125rem',
+            },
+            '& > div.title': {
+                flex: 'auto!important',
+                marginRight: 15,
+                '& > h2.MuiTypography-h2': {
+                    fontSize: '20px',
+                    fontWeight: '600',
                 },
-                '&.advanced-lot': {
-                    background: 'rgba(242, 153, 74, 0.65)'
-                },
-                '&.title': {
-                    maxWidth: '500px'
-                },
-                '&.condition': {
-                    margin: '0 10px 0 auto',
-                    background: '#90BE27',
-                    borderRadius: '50px',
-                },
-            }
+            },
         },
         '& div.ad-info': {
             display: 'flex',
@@ -67,7 +85,7 @@ export const useStyles = makeStyles(() => ({
                 display: 'flex',
                 alignItems: 'center',
                 flexDirection: 'row',
-                padding: '8px 15px',
+                padding: '5px 15px',
                 marginRight: '30px',
                 borderRadius: '100px',
                 boxShadow: '0px 0px 15px rgba(0, 0, 0, 0.1)',
@@ -117,22 +135,24 @@ export const useStyles = makeStyles(() => ({
         '& div.ad-description': {
             marginBottom: '40px',
             '& p.MuiTypography-button': {
-                marginBottom: 22,
+                marginBottom: 19,
             },
-            '& > div:first-child': {
-                '& > h6.MuiTypography-subtitle1': {
-                    display: 'flex',
-                    alignItems: 'center',
-                    '&:first-child': {
-                        fontWeight: '600',
-                    },
-                    '&:last-child': {
-                        marginTop: '10px',
-                        '& > svg': {
-                            width: '48px',
-                            height: '48px',
-                            marginRight: '10px',
-                        },
+            '& h6.MuiTypography-subtitle1': {
+                fontSize: '1.125rem',
+            },
+            '& > h6.MuiTypography-subtitle1': {
+                display: 'flex',
+                alignItems: 'center',
+                lineHeight: '22px',
+                '&:first-child': {
+                    fontWeight: '600',
+                },
+                '&:last-child': {
+                    marginTop: '10px',
+                    '& > svg': {
+                        width: '48px',
+                        height: '48px',
+                        marginRight: '10px',
                     },
                 },
             },
@@ -140,7 +160,6 @@ export const useStyles = makeStyles(() => ({
                 display: 'flex',
                 flexDirection: 'column',
                 justifyContent: 'space-between',
-                marginTop: '30px',
                 '& > div': {
                     '& > h6.MuiTypography-subtitle1': {},
                     '& a': {
@@ -159,7 +178,7 @@ export const useStyles = makeStyles(() => ({
                 background: '#F2F2F2',
                 borderRadius: '10px',
                 display: 'inline-block',
-                padding: '8px 21px',
+                padding: '10px 21px',
                 '& > h6.MuiTypography-subtitle1': {
                     fontSize: '1.125rem',
                     '& > span': {
@@ -172,11 +191,11 @@ export const useStyles = makeStyles(() => ({
         '& div.started-price': {
             marginBottom: '40px',
             '& p.MuiTypography-button': {
-                marginBottom: 22,
+                marginBottom: '22px',
             },
             '& span': {
                 display: 'inline-block',
-                padding: '12px 30px',
+                padding: '10px 30px',
                 background: '#F2F2F2',
                 borderRadius: '10px',
             },
@@ -189,7 +208,6 @@ export const useStyles = makeStyles(() => ({
                 display: 'flex',
                 alignItems: 'center',
                 marginBottom: '20px',
-                borderBottom: '1px solid #ccc',
                 paddingBottom: '5px',
                 '& > h6.MuiTypography-subtitle1': {
                     width: '20%',
@@ -212,18 +230,16 @@ export const useStyles = makeStyles(() => ({
                     listStyle: 'none',
                     display: 'flex',
                     marginBottom: 20,
-                    borderBottom: '1px solid #ccc',
                     paddingBottom: '5px',
                     '&:last-child': {
                         margin: 0,
                     },
                     '& h6.key': {
                         width: '20%',
-                        fontSize: '18px',
+                        fontSize: '1.125rem',
                     },
                     '& h6.value': {
-                        width: '20%',
-                        fontSize: '18px',
+                        fontSize: '1.125rem',
                         fontWeight: '600',
                     },
                 },
@@ -270,56 +286,18 @@ export const useStyles = makeStyles(() => ({
         },
     },
     modal: {
-        backgroundColor: 'rgba(0, 0, 0, .95)',
+        backgroundColor: 'rgba(51, 51, 51, 0.9)',
         '& h6.MuiTypography-h6': {
             color: '#fff',
             fontWeight: '600',
             textAlign: 'center',
-        }
+        },
     },
     slider: {
-        '& div.slick-slide img': {
-            cursor: 'default'
-            // '&.makeStyles-firstSlider-20 div.slick-slider': {
-            //     '& > div.slick-list': {
-            //         width: '1065px !important',
-            //         height: '627px !important',
-            //         margin: '0 auto',
-            //         '& div.slick-track': {
-            //             '& div.slick-slide': {
-            //                 '& img': {
-            //                     width: '100% !important',
-            //                     '&:hover': {
-            //                         cursor: 'default'
-            //                     }
-            //                 }
-            //             }
-            //         }
-            //     }
-            // },
-            // '&.makeStyles-secondSlider-21': {
-            //     marginTop: 30,
-            //     '& > div.slick-slider': {
-            //         '& div.slick-list': {
-            //             width: '1065px',
-            //             margin: '0 auto',
-            //             '& div.slick-track': {
-            //                 display: 'flex',
-            //                 '& div.slick-slide': {
-            //                     marginRight: 15,
-            //                     width: 'auto !important',
-            //                     '& div': {
-            //                         width: '255px !important',
-            //                         height: '150px !important',
-            //                         '& img': {
-            //                             height: 150
-            //                         }
-            //                     },
-            //                 }
-            //             },
-            //         }
-            //     }
-            // }
+        marginTop: '70px',
+        '& > h6.MuiTypography-h6': {
+            marginBottom: '25px',
+            textAlign: 'center',
         },
-    }
+    },
 }));

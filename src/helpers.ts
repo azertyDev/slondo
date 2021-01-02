@@ -1,5 +1,17 @@
-import {CategoryType, SubCategoryType} from "@root/interfaces/Categories";
+import {CategoryType} from "@root/interfaces/Categories";
 import {IdNameType} from "@root/interfaces/Announcement";
+import CyrillicToTranslit from 'cyrillic-to-translit-js';
+
+
+const transform = new CyrillicToTranslit().transform;
+const formatRegEx = /[\-\,\.\;\"\']+/g;
+
+export const transformTitle = ( title ) => {
+    transform(title)
+        .toLowerCase()
+        .replace(formatRegEx, ' ')
+        .replace(/\s+/g, '-');
+};
 
 
 export const numberRegEx = /^[0-9]*$/;

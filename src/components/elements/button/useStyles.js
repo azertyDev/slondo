@@ -2,7 +2,6 @@ import makeStyles from '@material-ui/core/styles/makeStyles';
 
 export const useStyles = makeStyles((theme) => ({
     root: {
-        width: '100%',
         color: (props) =>
             props.color === 'primary'
                 ? theme.palette.primary.createAdBtnColor
