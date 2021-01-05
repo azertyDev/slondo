@@ -264,10 +264,10 @@ export const useStyles = makeStyles(() => ({
                         display: 'flex',
                         justifyContent: 'space-between',
                         alignItems: 'center',
-                    },
-                },
-            },
-        },
+                    }
+                }
+            }
+        }
     },
     icons: {
         width: '20px',
@@ -284,20 +284,5 @@ export const useStyles = makeStyles(() => ({
             borderRadius: '7px',
             backgroundColor: '#C0C0C0',
         },
-    },
-    modal: {
-        backgroundColor: 'rgba(51, 51, 51, 0.9)',
-        '& h6.MuiTypography-h6': {
-            color: '#fff',
-            fontWeight: '600',
-            textAlign: 'center',
-        },
-    },
-    slider: {
-        marginTop: '70px',
-        '& > h6.MuiTypography-h6': {
-            marginBottom: '25px',
-            textAlign: 'center',
-        },
-    },
+    }
 }));

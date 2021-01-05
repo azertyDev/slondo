@@ -17,5 +17,5 @@ export const useStyles = makeStyles(() => ({
         '& div.social-block': {
             width: '100%',
         },
-    },
+    }
 }));

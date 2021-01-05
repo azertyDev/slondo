@@ -1,13 +1,17 @@
-import { makeStyles } from '@material-ui/core/styles';
+import {makeStyles} from '@material-ui/core/styles';
 
 export const useStyles = makeStyles((theme) => ({
     root: {
         marginTop: '28px',
-        '& h4.MuiTypography-h4': {
+        '& a': {
+            textDecoration: 'none'
+        },
+        '& > h2.title': {
             marginBottom: 21,
+            fontWeight: 400,
             [theme.breakpoints.down('sm')]: {
                 fontSize: '1.83rem',
-            },
+            }
         },
         '& div.category-slider': {
             position: 'relative',
@@ -27,18 +31,18 @@ export const useStyles = makeStyles((theme) => ({
                     right: 0,
                 },
             },
-            '& div.slick-disabled': {
+            '& button.slick-disabled': {
                 display: 'none',
-            },
+            }
         },
         '& div.slick-slide': {
             width: '150px !important',
-            marginRight: '27px',
+            margin: '0 13px',
             '& > div': {
                 width: 'auto !important',
                 display: 'flex',
                 justifyContent: 'center',
-                '& > a': {
+                '& div.category': {
                     width: '150px !important',
                     color: '#000',
                     textDecoration: 'none',
@@ -48,13 +52,14 @@ export const useStyles = makeStyles((theme) => ({
                     justifyContent: 'center',
                     '& > img': {
                         width: '140px',
+                        height: '140px',
                         textAlign: 'center',
                     },
                     '& > p': {
                         textAlign: 'center',
-                    },
-                },
-            },
-        },
-    },
+                    }
+                }
+            }
+        }
+    }
 }));

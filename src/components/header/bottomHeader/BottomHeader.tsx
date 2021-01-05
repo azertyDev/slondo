@@ -23,7 +23,7 @@ const BottomHeader = (props) => {
                     elevation={isScrollBreak ? 1 : 0}
                     position={isScrollBreak ? "fixed" : "absolute"}
                 >
-                    <Container maxWidth='lg'>
+                    <Container maxWidth='xl'>
                         <Grid container justify="space-between" alignItems="center" spacing={1}>
                             <Grid container item xs={3} alignItems="center" spacing={1}>
                                 <Grid container item md={6} className="bottom-logo">

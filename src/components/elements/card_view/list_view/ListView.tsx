@@ -1,7 +1,7 @@
-import React from 'react';
-import { Typography, Paper, Button } from '@material-ui/core';
-import { BreadcrumbsComponent } from '@src/components/elements/breadcrumbs/Breadcrumbs';
-import { Link } from '@root/i18n';
+import React, {FC} from 'react';
+import {Typography, Paper, Button} from '@material-ui/core';
+import {BreadcrumbsComponent} from '@src/components/elements/breadcrumbs/Breadcrumbs';
+import {Link} from '@root/i18n';
 import {
     SettingsIcon,
     LocationIcon,
@@ -18,13 +18,12 @@ import {
     SwapIcon,
     PhoneIcon,
 } from '@src/components/elements/icons';
+import {useStyles} from './useStyles';
+import {ButtonComponent} from '@src/components/elements/button/Button';
+import {ViewPropsTypes} from "@src/components/elements/card_view/CardView";
 
-// styles
-import { useStyles } from './useStyles';
-import { ButtonComponent } from '@src/components/elements/button/Button';
 
-export const CustomListView = (props) => {
-    const { t, list } = props;
+export const ListView: FC<ViewPropsTypes> = () => {
     const classes = useStyles();
     return (
         <div className={classes.root}>
@@ -57,7 +56,7 @@ export const CustomListView = (props) => {
                                             Объявление
                                         </Typography>
                                         <span>
-                                            <EyeIcon />
+                                            <EyeIcon/>
                                             <Typography
                                                 variant="caption"
                                                 color="initial"
@@ -88,49 +87,47 @@ export const CustomListView = (props) => {
                                                 </Typography>
                                                 <Link href="#">
                                                     <a className="favorite-icon">
-                                                        <FavoriteBorderIcon />
+                                                        <FavoriteBorderIcon/>
                                                     </a>
                                                 </Link>
                                                 <Link href="#">
                                                     <a>
-                                                        <SettingsIcon />
+                                                        <SettingsIcon/>
                                                     </a>
                                                 </Link>
                                             </div>
                                         </div>
                                         <div className="description">
                                             <span className="available">
-                                                <PhoneIcon />
+                                                <PhoneIcon/>
                                                 <Typography variant="body1">
                                                     Пн-Пт 9:00-18:00
                                                 </Typography>
                                             </span>
                                             <span className="exchange">
-                                                <SwapIcon />
+                                                <SwapIcon/>
                                                 <Typography variant="body1">
                                                     Возможен обмен
                                                 </Typography>
                                             </span>
                                             <span className="delivery">
-                                                <DeliveryIcon />
+                                                <DeliveryIcon/>
                                                 <Typography variant="body1">
                                                     Есть доставка
                                                 </Typography>
                                             </span>
-                                            {props.safeShopping ? (
-                                                <span className="safe_deal">
-                                                    <SafeIcon />
-                                                    <Typography variant="body1">
-                                                        Безопасная покупка
-                                                    </Typography>
-                                                </span>
-                                            ) : null}
+                                            <span className="safe_deal">
+                                                <SafeIcon/>
+                                                <Typography variant="body1">
+                                                    Безопасная покупка
+                                                </Typography>
+                                            </span>
                                         </div>
                                         <div className="location">
                                             <div>
                                                 <Link href="#">
                                                     <a>
-                                                        <LocationIcon />
+                                                        <LocationIcon/>
                                                     </a>
                                                 </Link>
                                                 <Typography
@@ -159,7 +156,7 @@ export const CustomListView = (props) => {
                                     className="accepted"
                                     centerRipple
                                 >
-                                    <DoneAllIcon />
+                                    <DoneAllIcon/>
                                     <Typography variant="subtitle1">
                                         Ожидание
                                     </Typography>
@@ -189,7 +186,7 @@ export const CustomListView = (props) => {
                                 <Typography variant="subtitle1">
                                     Продвижение
                                 </Typography>
-                                <PromoteIcon />
+                                <PromoteIcon/>
                             </Button>
                             <Button
                                 color="primary"
@@ -199,7 +196,7 @@ export const CustomListView = (props) => {
                                 <Typography variant="subtitle1">
                                     Поднять в ТОП
                                 </Typography>
-                                <MegaphoneIcon />
+                                <MegaphoneIcon/>
                             </Button>
                             <Button
                                 color="primary"
@@ -209,7 +206,7 @@ export const CustomListView = (props) => {
                                 <Typography variant="subtitle1">
                                     Поднять в ленте
                                 </Typography>
-                                <DoubleUpIcon />
+                                <DoubleUpIcon/>
                             </Button>
                         </div>
                     </div>

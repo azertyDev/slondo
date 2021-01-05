@@ -1,5 +1,5 @@
 import React from 'react';
-import { CustomGridView } from '@src/components/elements/custom_card_view/custom_grid_view/CustomGridView';
+import { GridView } from '@src/components/elements/card_view/grid_view/GridView';
 import Typography from '@material-ui/core/Typography';
 import { useStyles } from './useStyles';
 
@@ -13,7 +13,7 @@ export const SimilarAncmnts = (props) => {
             <Typography variant="subtitle1" color="initial">
                 Похожие объявления
             </Typography>
-            <CustomGridView t={t} list={list} handleShowMore={handleShowMore} />
+            <GridView t={t} list={list} handleShowMore={handleShowMore} />
         </div>
     );
 };

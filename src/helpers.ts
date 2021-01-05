@@ -3,11 +3,11 @@ import {IdNameType} from "@root/interfaces/Announcement";
 import CyrillicToTranslit from 'cyrillic-to-translit-js';
 
 
-const transform = new CyrillicToTranslit().transform;
-const formatRegEx = /[\-\,\.\;\"\']+/g;
+export const transformTitle = (title: string): string => {
+    const transform = new CyrillicToTranslit().transform;
+    const formatRegEx = /[\-\,\.\;\"\']+/g;
 
-export const transformTitle = ( title ) => {
-    transform(title)
+    return transform(title)
         .toLowerCase()
         .replace(formatRegEx, ' ')
         .replace(/\s+/g, '-');

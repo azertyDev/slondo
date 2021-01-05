@@ -10,7 +10,7 @@ export const useStyles = makeStyles(() => ({
                 margin: 'auto',
             },
         },
-        '& button.MuiIconButton-root': {
+        '& button.slick-arrow': {
             position: 'absolute',
             top: 'calc(50% - 20px)',
         },

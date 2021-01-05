@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {Container, Modal, Typography} from '@material-ui/core';
+import {Typography} from '@material-ui/core';
 import {SyncSliders} from './sync_sliders/SyncSliders';
 import {ReadMore} from '@src/components/elements/read_more/readMore';
 import {LocationIcon} from '@src/components/elements/icons/LocationIcon';
@@ -146,14 +146,12 @@ export const AncmntContent = ({data, parameters, t}) => {
                     </Typography>
                 </div>
                 {/* data.condition.id */}
-                {true && (
-                    <div className="condition">
-                        <Typography variant="h6">
-                            {/* {data.condition.name} */}
-                            Б/У
-                        </Typography>
-                    </div>
-                )}
+                <div className="condition">
+                    <Typography variant="h6">
+                        {/* {data.condition.name} */}
+                        Б/У
+                    </Typography>
+                </div>
             </div>
             <SyncSliders
                 imgs={data.images}
@@ -283,20 +281,14 @@ export const AncmntContent = ({data, parameters, t}) => {
                     <ul>{parameterItems}</ul>
                 </div>
             )}
-            <Modal
+            <ModalSyncSliders
                 open={open}
                 onClose={handleShowModal(false)}
-                className={classes.modal}
-            >
-                <Container className={classes.slider}>
-                    <Typography variant="h6">{data.title}</Typography>
-                    <ModalSyncSliders
-                        imgs={data.images}
-                        initialSlide={initialSlide}
-                        setInitialSlide={setInitialSlide}
-                    />
-                </Container>
-            </Modal>
+                title={data.title}
+                imgs={data.images}
+                initialSlide={initialSlide}
+                setInitialSlide={setInitialSlide}
+            />
         </div>
     );
 };

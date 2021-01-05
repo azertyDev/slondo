@@ -1,10 +1,11 @@
-import { makeStyles } from '@material-ui/core/styles';
+import {makeStyles} from '@material-ui/core/styles';
 
-export const useStyles = makeStyles((theme) => ({
+export const useStyles = makeStyles(() => ({
     root: {
         marginBottom: '30px',
         '& div.contact-buttons': {
             '& button': {
+                width: '100%',
                 border: 'none',
                 height: 44,
                 '&:not(:last-child)': {
@@ -18,10 +19,10 @@ export const useStyles = makeStyles((theme) => ({
                         height: '20px',
                         '& > path': {
                             fill: '#fff',
-                        },
-                    },
-                },
-            },
-        },
-    },
+                        }
+                    }
+                }
+            }
+        }
+    }
 }));

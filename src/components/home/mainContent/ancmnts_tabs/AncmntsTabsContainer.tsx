@@ -1,10 +1,11 @@
-import React, { FC, useEffect, useState } from 'react';
-import { WithT } from 'i18next';
-import { MainContent } from './MainContent';
-import { ITEMS_PER_PAGE } from '@src/constants';
-import { userAPI } from '@src/api/api';
-import { i18n } from '@root/i18n';
-import { CardData } from '@root/interfaces/CardData';
+import React, {FC, useEffect, useState} from 'react';
+import {WithT} from 'i18next';
+import {AncmntsTabs} from './AncmntsTabs';
+import {ITEMS_PER_PAGE} from '@src/constants';
+import {userAPI} from '@src/api/api';
+import {i18n} from '@root/i18n';
+import {CardData} from '@root/interfaces/CardData';
+
 
 const cardData = {
     id: null,
@@ -18,11 +19,9 @@ const cardData = {
     },
     created_at: '',
     location: '',
-    images: [
-        {
-            url: '',
-        },
-    ],
+    images: [{
+        url: ''
+    }]
 };
 
 const initCards = [];
@@ -44,8 +43,7 @@ const fetchCardData = async (itemsPerPage, page, type, lang) => {
     return await userAPI.getCardData(itemsPerPage, page, type, lang);
 };
 
-export const MainContentContainer: FC<WithT> = (props) => {
-    const { t } = props;
+export const AncmntsTabsContainer: FC<WithT> = (props) => {
     const lang = i18n.language;
 
     const [tabValue, setTabValue] = useState(0);
@@ -53,11 +51,10 @@ export const MainContentContainer: FC<WithT> = (props) => {
     const [lotCurrentPage, setLotCurrentPage] = useState(1);
     const [adCardData, setAdCardData] = useState(initialCardData);
     const [lotCardData, setLotCardData] = useState(initialCardData);
-    const pageCount =
-        Math.ceil(
-            (tabValue === 0 ? adCardData.data.total : lotCardData.data.total) /
-                ITEMS_PER_PAGE,
-        ) || 1;
+    const pageCount = Math.ceil(
+        (tabValue === 0 ? adCardData.data.total : lotCardData.data.total) /
+        ITEMS_PER_PAGE,
+    ) || 1;
 
     const currentPage = tabValue === 0 ? adCurrentPage : lotCurrentPage;
 
@@ -118,8 +115,8 @@ export const MainContentContainer: FC<WithT> = (props) => {
     }, [lotCurrentPage]);
 
     return (
-        <MainContent
-            t={t}
+        <AncmntsTabs
+            t={props.t}
             tabValue={tabValue}
             adCardData={adCardData}
             lotCardData={lotCardData}

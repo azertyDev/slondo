@@ -1,20 +1,29 @@
-import { makeStyles } from '@material-ui/core/styles';
+import {makeStyles} from '@material-ui/core/styles';
 
 export const useStyles = makeStyles(() => ({
+    modal: {
+        backgroundColor: 'rgba(0, 0, 0, 0.9)'
+    },
     root: {
         position: 'relative',
+        marginTop: '20px',
         '& button': {
             '&.slick-prev': {
                 left: '25px',
             },
             '&.slick-next': {
                 right: '25px',
-            },
+            }
         },
+        '& > h6.title': {
+            color: '#fff',
+            fontWeight: '600',
+            textAlign: 'center',
+        }
     },
     firstSlider: {
         width: '100%',
-        marginBottom: 30,
+        marginTop: '10px',
         '& div.slick-list': {
             width: '80%',
             margin: '0 auto 0 auto',
@@ -53,9 +62,9 @@ export const useStyles = makeStyles(() => ({
                 cursor: 'default',
                 '& image': {
                     transform: 'scale(1)',
-                },
-            },
-        },
+                }
+            }
+        }
     },
     secondSlider: {
         '& div.slick-list': {
@@ -78,7 +87,7 @@ export const useStyles = makeStyles(() => ({
                 '&:hover': {
                     cursor: 'pointer',
                 },
-            },
+            }
         },
         '& > div.slider-counter': {
             display: 'flex',
@@ -109,8 +118,8 @@ export const useStyles = makeStyles(() => ({
                 },
                 '&:hover': {
                     cursor: 'pointer',
-                },
-            },
-        },
-    },
+                }
+            }
+        }
+    }
 }));

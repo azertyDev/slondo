@@ -21,6 +21,8 @@ const colors = {
     lotBgColor: '#AD66D5',
     createAdBtnColor: '#7DBCF6',
     error: '#E9372E',
+    tab: '#838383',
+    activeTab: '#2F80ED',
 }
 
 // Create a theme instance.
@@ -44,15 +46,20 @@ const theme = createMuiTheme({
             createAdBtnColor: colors.createAdBtnColor,
             error: colors.error,
         },
+        common: {
+            tab: colors.tab,
+            activeTab: colors.activeTab
+        }
     },
     breakpoints: {
         values: {
             xs: 0,
-            sm: 600,
-            md: 1024,
-            lg: 1280,
-            xl: 1920,
-        },
+            sm: 576,
+            md: 768,
+            lg: 992,
+            xl: 1280,
+            xxl: 1400
+        }
     },
     typography: {
         fontFamily: ['Calibri', 'Roboto', 'Helvetica', 'Arial', 'sans-serif'],
@@ -60,7 +67,7 @@ const theme = createMuiTheme({
             lineHeight: 1,
             color: '#4E4E4E',
         },
-        h4: {
+        h2: {
             fontSize: '2.25rem'
         },
         allVariants: {

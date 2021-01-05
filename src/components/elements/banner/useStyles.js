@@ -1,4 +1,4 @@
-import { makeStyles } from '@material-ui/core/styles';
+import {makeStyles} from '@material-ui/core/styles';
 
 export const useStyles = makeStyles(() => ({
     root: {
@@ -14,7 +14,7 @@ export const useStyles = makeStyles(() => ({
             '& > h5.MuiTypography-h5': {
                 color: '#7DBCF6',
                 fontWeight: '600',
-            },
-        },
+            }
+        }
     },
 }));

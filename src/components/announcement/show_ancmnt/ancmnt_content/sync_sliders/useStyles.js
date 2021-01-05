@@ -23,35 +23,35 @@ export const useStyles = makeStyles(() => ({
         '& > div.slick-slider div.slick-slide': {
             marginRight: 5,
         },
-        '& a.overlay': {
-            position: 'fixed',
-            zIndex: '99',
-            top: '0',
-            left: '0',
-            width: '100%',
-            height: '100%',
-            background: 'rgba(0,0,0,0.9)',
-            display: 'flex',
-            alignItems: 'center',
-            textAlign: 'center',
-            visibility: 'hidden',
-            '& img': {
-                maxWidth: '90%',
-                maxHeight: '90%',
-                width: 'auto',
-                height: 'auto',
-                transform: 'scale(0.95)',
-                transition: 'transform .3s',
-            },
-            '&:target': {
-                visibility: 'visible',
-                outline: 'none',
-                cursor: 'default',
-                '& image': {
-                    transform: 'scale(1)',
-                }
-            }
-        }
+        // '& a.overlay': {
+        //     position: 'fixed',
+        //     zIndex: '99',
+        //     top: '0',
+        //     left: '0',
+        //     width: '100%',
+        //     height: '100%',
+        //     background: 'rgba(0,0,0,0.9)',
+        //     display: 'flex',
+        //     alignItems: 'center',
+        //     textAlign: 'center',
+        //     visibility: 'hidden',
+        //     '& img': {
+        //         maxWidth: '90%',
+        //         maxHeight: '90%',
+        //         width: 'auto',
+        //         height: 'auto',
+        //         transform: 'scale(0.95)',
+        //         transition: 'transform .3s',
+        //     },
+        //     '&:target': {
+        //         visibility: 'visible',
+        //         outline: 'none',
+        //         cursor: 'default',
+        //         '& image': {
+        //             transform: 'scale(1)',
+        //         }
+        //     }
+        // }
     },
     secondSlider: {
         '& div.slick-track': {
