@@ -4,15 +4,15 @@ import { Banner } from '@src/components/elements/banner/Banner';
 import { CustomTabPanel } from '@src/components/elements/custom_tab_panel/CustomTabPanel';
 import { TFunction } from 'i18next';
 import { CardData } from '@root/interfaces/CardData';
-import { CustomPagination } from '../../elements/custom_pagination/CustomPagination';
-import { useStyles } from './useStyles';
 import { CustomCardView } from '@src/components/elements/custom_card_view/CustomCardView';
+import { ButtonComponent } from '@src/components/elements/button/Button';
+import { useStyles } from './useStyles';
 
 interface MainContentProps {
     t: TFunction;
     tabValue: number;
     handleTabChange: (_: unknown, newValue: number) => void;
-    // handleShowMore: () => void;
+    handleShowMore: () => void;
     adCardData: CardData;
     lotCardData: CardData;
     pageCount: number;
@@ -21,7 +21,14 @@ interface MainContentProps {
 }
 
 export const MainContent: FC<MainContentProps> = (props) => {
-    const { t, tabValue, handleTabChange, adCardData, lotCardData } = props;
+    const {
+        t,
+        tabValue,
+        handleTabChange,
+        handleShowMore,
+        adCardData,
+        lotCardData,
+    } = props;
 
     const classes = useStyles();
     return (
@@ -93,17 +100,36 @@ export const MainContent: FC<MainContentProps> = (props) => {
                             </Grid>
                         )}
                     </CustomTabPanel>
-                    <Grid item xs={12} container justify="center">
-                        {!(lotCardData.error || adCardData.error) && (
-                            <CustomPagination
-                                count={props.pageCount}
-                                currentPage={props.currentPage}
-                                handlePaginationPage={
-                                    props.handlePaginationPage
-                                }
-                            />
-                        )}
-                    </Grid>
+                    {/* {!(lotCardData.error || adCardData.error) && (
+                        <CustomPagination
+                            count={props.pageCount}
+                            currentPage={props.currentPage}
+                            handlePaginationPage={props.handlePaginationPage}
+                        />
+                    )} */}
+                    {((adCardData.data.total > adCardData.data.cards.length &&
+                        tabValue === 0) ||
+                        (lotCardData.data.total >
+                            lotCardData.data.cards.length &&
+                            tabValue === 1)) && (
+                        <Grid container className={classes.showMoreContainer}>
+                            <Grid
+                                item
+                                xs={12}
+                                md={9}
+                                className="show-more-block"
+                            >
+                                <ButtonComponent onClick={handleShowMore}>
+                                    <Typography
+                                        variant="subtitle2"
+                                        color="initial"
+                                    >
+                                        {t('showMore')}
+                                    </Typography>
+                                </ButtonComponent>
+                            </Grid>
+                        </Grid>
+                    )}
                 </Grid>
                 <Hidden smDown>
                     <Grid
@@ -119,17 +145,6 @@ export const MainContent: FC<MainContentProps> = (props) => {
                     </Grid>
                 </Hidden>
             </Grid>
-            {/*{((adCardData.cardData.total > adCardData.cardData.data.length && tabValue === 0) || (lotCardData.cardData.total > lotCardData.cardData.data.length && tabValue === 1)) && (*/}
-            {/*    <Grid container className={classes.showMoreContainer}>*/}
-            {/*        <Grid item xs={12} md={9} className="show-more-block">*/}
-            {/*            <ButtonComponent onClick={handleShowMore}>*/}
-            {/*                <Typography variant="subtitle2" color="initial">*/}
-            {/*                    {t('showMore')}*/}
-            {/*                </Typography>*/}
-            {/*            </ButtonComponent>*/}
-            {/*        </Grid>*/}
-            {/*    </Grid>*/}
-            {/*)}*/}
         </div>
     );
 };

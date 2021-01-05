@@ -29,7 +29,11 @@ export const CategoriesSlider: FC<WithT & { categories: Categories }> = (props) 
                                             <Skeleton variant="text" width={100} height={16}/>
                                         </>
                                         : <>
-                                            <img src={category.images.url.default} alt="category"/>
+                                            <div className="bg">
+                                                <div className="medium">
+                                                    <img src={category.images.url.default} alt="category"/>
+                                                </div>
+                                            </div>
                                             <Typography>{category.name}</Typography>
                                         </>}
                                 </a>

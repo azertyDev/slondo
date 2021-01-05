@@ -4,9 +4,6 @@ export const useStyles = makeStyles((theme) => ({
     mainSlider: {
         marginTop: '20px'
     },
-    mainContent: {
-        marginTop: '30px'
-    },
     createAdBlock: {
         position: 'fixed',
         bottom: 0,

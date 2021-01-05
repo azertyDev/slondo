@@ -7,6 +7,7 @@ export const useStyles = makeStyles((theme) => ({
             '& button': {
                 border: 'none',
                 height: 44,
+                width: '100%',
                 '&:not(:last-child)': {
                     marginBottom: '10px',
                 },

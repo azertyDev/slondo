@@ -38,9 +38,7 @@ export const Home: FC<WithT> = ({ t }) => {
                 <Container maxWidth="lg">
                     <CategoriesSliderContainer t={t} />
                     <PopularAncmnts t={t} />
-                    <div className={classes.mainContent}>
-                        <MainContentContainer t={t} />
-                    </div>
+                    <MainContentContainer t={t} />
                     <Hidden mdUp>
                         <div className={classes.createAdBlock}>
                             <Link href={'/create_advertisement'}>

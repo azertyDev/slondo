@@ -4,6 +4,7 @@ import { FaqComponent } from '@src/components/elements/faq_component/FaqComponen
 import { PopularAncmntsSliderContainer } from './popular_ancmnts_slider/PopularAncmntsSliderContainer';
 import { useStyles } from './useStyles';
 import { WithT } from 'i18next';
+import { SocialsBlock } from '@root/src/components/elements/socials_block/SocialsBlock';
 
 export const PopularAncmnts: FC<WithT> = ({ t }) => {
     const classes = useStyles();
@@ -19,6 +20,7 @@ export const PopularAncmnts: FC<WithT> = ({ t }) => {
                 </Grid>
                 <Grid item xs={3} className={classes.faqComponent}>
                     <FaqComponent />
+                    <SocialsBlock/>
                 </Grid>
             </Grid>
         </div>
