@@ -1,5 +1,5 @@
 import React from 'react';
-import { CustomListView } from '@root/src/components/elements/custom_card_view/custom_list_view/CustomListView';
+import { ListView } from '@src/components/elements/card_view/list_view/ListView';
 
 // styles
 import { useStyles } from './useStyles';
@@ -9,8 +9,8 @@ export const MyAncmnts = (props) => {
 
     return (
         <div className={classes.root}>
-            <CustomListView safeShopping={props.safeShopping} />
-            <CustomListView safeShopping={props.safeShopping} />
+            <ListView safeShopping={props.safeShopping} />
+            <ListView safeShopping={props.safeShopping} />
         </div>
     );
 };

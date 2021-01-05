@@ -1,10 +1,9 @@
-import React from 'react';
+import React, {FC} from 'react';
 import {Paper, Typography} from '@material-ui/core';
-
-// styles
 import {useStyles} from './useStyles';
 
-export const Banner = ({height}: { height?: string }) => {
+
+export const Banner: FC<{ height?: string }> = ({height}) => {
     const classes = useStyles();
     return (
         <div className={classes.root}>

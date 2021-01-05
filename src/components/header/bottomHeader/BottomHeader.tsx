@@ -3,7 +3,7 @@ import {AppBar, Container, Grid, Hidden, Typography} from "@material-ui/core";
 import {ButtonComponent} from "@src/components/elements/button/Button";
 import {SearchForm} from "@src/components/elements/search_form/SearchForm";
 import {withScrollThreshold} from "@src/components/hoc/withScrollThreshold";
-import {Link, Router} from '@root/i18n';
+import {Link} from '@root/i18n';
 import {Logo} from '@src/components/elements/icons';
 import {AddIcon} from "@src/components/elements/icons/AddIcon";
 import {CategorySortIcon} from "@src/components/elements/icons/CategorySortIcon";
@@ -14,10 +14,6 @@ import {useStyles} from "./useStyles";
 const BottomHeader = (props) => {
     const {isScrollBreak, handleOpenModal, isAuth, t} = props;
 
-    const forwardToCreateAd = () => {
-        Router.push('/announcement/create');
-    };
-
     const classes = useStyles(props);
     return (
         <div className={classes.root}>
@@ -27,7 +23,7 @@ const BottomHeader = (props) => {
                     elevation={isScrollBreak ? 1 : 0}
                     position={isScrollBreak ? "fixed" : "absolute"}
                 >
-                    <Container maxWidth='lg'>
+                    <Container maxWidth='xl'>
                         <Grid container justify="space-between" alignItems="center" spacing={1}>
                             <Grid container item xs={3} alignItems="center" spacing={1}>
                                 <Grid container item md={6} className="bottom-logo">
@@ -55,21 +51,26 @@ const BottomHeader = (props) => {
                                     <SearchForm t={t}/>
                                 </Grid>
                             </Grid>
-                            <Grid item md={2} container justify='center'>
-                                <ButtonComponent
-                                    onClick={forwardToCreateAd}
-                                    color='primary'
-                                    className='create-ad-button header-button'>
-                                    <Typography variant="subtitle2">
-                                        {t('common:createAd')}
-                                    </Typography>
-                                    <AddIcon/>
-                                </ButtonComponent>
+                            <Grid item md={2}>
+                                <Link href="/announcement/create">
+                                    <a className='create-ancmnt-link'>
+                                        <ButtonComponent
+                                            color='primary'
+                                            className='header-button'
+                                        >
+                                            <Typography variant="subtitle2">
+                                                {t('common:createAd')}
+                                            </Typography>
+                                            <AddIcon/>
+                                        </ButtonComponent>
+                                    </a>
+                                </Link>
                             </Grid>
                             <Grid item container justify="flex-end" alignItems="center" xs={1}>
                                 <ButtonComponent className="bottom-sign-button header-button" onClick={handleOpenModal}>
                                     <Typography
-                                        variant="subtitle2">{t(`common:${isAuth ? 'signOut' : 'signIn'}`)}</Typography>
+                                        variant="subtitle2"
+                                    >{t(`common:${isAuth ? 'signOut' : 'signIn'}`)}</Typography>
                                     <SignIcon/>
                                 </ButtonComponent>
                             </Grid>

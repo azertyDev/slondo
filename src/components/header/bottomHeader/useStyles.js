@@ -1,4 +1,4 @@
-import { makeStyles } from '@material-ui/core/styles';
+import {makeStyles} from '@material-ui/core/styles';
 
 export const useStyles = makeStyles((theme) => ({
     root: {
@@ -7,7 +7,7 @@ export const useStyles = makeStyles((theme) => ({
         '& header.MuiAppBar-root': {
             background: '#fafafa',
             '& > div.MuiContainer-root': {
-                padding: ({ isScrollBreak }) => !isScrollBreak && 0,
+                padding: ({isScrollBreak}) => !isScrollBreak && 0,
                 transition: 'padding .3s',
                 '& > div': {
                     width: '100%',
@@ -58,9 +58,9 @@ export const useStyles = makeStyles((theme) => ({
             boxShadow: '0px 1px 1px rgba(0, 0, 0, 0.15)',
             width: '100%',
         },
-        '& button.create-ad-button': {
-            width: '99.84%',
-            '& > h6.MuiTypography-subtitle2': {
+        '& a.create-ancmnt-link': {
+            textDecoration: 'none',
+            '& h6.MuiTypography-subtitle2': {
                 lineHeight: '15px',
                 letterSpacing: '0.5px',
                 color: '#fff',

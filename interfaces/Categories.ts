@@ -22,7 +22,6 @@ export type CategoryType = IdNameType & {
     },
     childs: (IdNameType & {
         parent: any,
-        icons: [],
         image: {
             url: string,
         }
@@ -34,4 +33,9 @@ export interface CategoryIDs {
     ctgryID: number,
     subCtgryID: number,
     lang: string,
+}
+
+export type SubCategoryType = IdNameType & {
+    data: any,
+    parent: IdNameType
 }

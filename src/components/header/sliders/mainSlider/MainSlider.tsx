@@ -1,4 +1,4 @@
-import React, {useRef} from 'react'
+import React, {FC, useRef} from 'react'
 import {Container} from '@material-ui/core'
 import SlickSlider from 'react-slick'
 import {SliderArrow} from "../../../elements/slider_arrow/SliderArrow"
@@ -6,13 +6,8 @@ import {settings} from './sliderSettings'
 import {useStyles} from './useStyles'
 
 
-export const MainSlider = () => {
-    const slider: any = useRef({
-        slickNext() {
-        },
-        slickPrev() {
-        }
-    });
+export const MainSlider: FC = () => {
+    const slider = useRef<any>();
 
     const next = () => slider.current.slickNext();
     const previous = () => slider.current.slickPrev();
@@ -49,12 +44,12 @@ export const MainSlider = () => {
                     <img src={`img/slider-img.jpg`} alt='img'/>
                 </div>
             </SlickSlider>
-            <div className='slider-arrows-container'>
-                <Container maxWidth='lg'>
-                    <SliderArrow direction='left' clickHandler={previous}/>
-                    <SliderArrow clickHandler={next}/>
-                </Container>
-            </div>
+            {/*<div className='slider-arrows-container'>*/}
+            {/*    <Container maxWidth='lg'>*/}
+            {/*        <SliderArrow direction='left' clickHandler={previous}/>*/}
+            {/*        <SliderArrow clickHandler={next}/>*/}
+            {/*    </Container>*/}
+            {/*</div>*/}
         </div>
     )
 };

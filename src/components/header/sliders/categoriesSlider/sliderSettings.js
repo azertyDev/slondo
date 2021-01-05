@@ -6,6 +6,7 @@ const Next = ({onClick, className}) => {
         <SliderArrow clickHandler={onClick}/>
     </div>
 };
+
 const Previous = ({onClick, className}) => {
     return <div className={className}>
         <SliderArrow direction='left' clickHandler={onClick}/>

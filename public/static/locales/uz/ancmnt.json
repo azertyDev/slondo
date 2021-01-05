@@ -1,6 +1,7 @@
 {
-    "year": "Ishlab chiqarilgan yili",
-    "mileage": "Bosib o'tgan masofasi",
+    "automobile": "Avtomobil",
+    "year": "Ishlab chiqarilgan yili ",
+    "mileage": "Bosib o’tgan masofasi",
     "manufacturer": "Ishlab chiqaruvchi",
     "models": "Model",
     "model":"Model",

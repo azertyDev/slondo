@@ -1,15 +1,15 @@
-import React, { FC, useEffect, useState } from 'react';
-import { WithT } from 'i18next';
-import { ITEMS_PER_PAGE } from '@src/constants';
-import { userAPI } from '@src/api/api';
-import { i18n } from '@root/i18n';
-import { CardData, InnerCardData } from '@root/interfaces/CardData';
-import { SimilarAncmnts } from './SimilarAncmnts';
+import React, {FC, useEffect, useState} from 'react';
+import {WithT} from 'i18next';
+import {ITEMS_PER_PAGE} from '@src/constants';
+import {userAPI} from '@src/api/api';
+import {i18n} from '@root/i18n';
+import {CardData, InnerCardData} from '@root/interfaces/CardData';
+import {SimilarAncmnts} from './SimilarAncmnts';
+
 
 const initCard: InnerCardData = {
     id: null,
     title: '',
-    cardType: '',
     safe_deal: null,
     price: null,
     currency: {
@@ -52,7 +52,7 @@ const initialCardData: CardData = {
 export const SimilarAncmntsContainer: FC<WithT & { ancmntType: string }> = (
     props,
 ) => {
-    const { t, ancmntType } = props;
+    const {t, ancmntType} = props;
     const lang = i18n.language;
 
     const [currentPage, setCurrentPage] = useState(1);

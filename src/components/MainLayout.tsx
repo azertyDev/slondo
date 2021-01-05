@@ -21,7 +21,7 @@ export const MainLayout: FC<MainLayoutPropsType> = ({
             </Head>
             <Header/>
             <main style={{marginTop: '48px'}}>
-                <Container maxWidth="lg">
+                <Container maxWidth="xl">
                     {children}
                 </Container>
             </main>

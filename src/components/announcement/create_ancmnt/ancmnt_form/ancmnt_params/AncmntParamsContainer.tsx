@@ -2,7 +2,7 @@ import React, {FC, Fragment} from "react";
 import {Grid} from "@material-ui/core";
 import {AncmntParameter} from './AncmntParameter';
 import {useStyles} from './useStyles';
-import {dataPrepare} from "@src/components/announcement/create_ancmnt/ancmnt_form/ancmnt_params/helpers";
+import {prepareCreateAncmnt} from "@src/helpers";
 
 
 export const AncmntParamsContainer: FC<any> = (props) => {
@@ -14,7 +14,7 @@ export const AncmntParamsContainer: FC<any> = (props) => {
 
     const {adParams} = values;
 
-    const data = isPreview ? adParams : dataPrepare(createAncmnt.subCategory.data, adParams);
+    const data = isPreview ? adParams : prepareCreateAncmnt(createAncmnt.subCategory.data, adParams);
 
     const classes = useStyles({isPreview});
     return (

@@ -1,23 +1,31 @@
 import {makeStyles} from '@material-ui/core/styles'
 
-export const useStyles = makeStyles(() => ({
+export const useStyles = makeStyles((theme) => ({
     root: {
         position: 'relative',
         maxWidth: '1920px',
-        margin: 'auto',
+        padding: '0 19px',
+        margin: '0 auto',
         '& div.slick-slider': {
             zIndex: 10,
             '& img': {
-                width: '97%',
-                margin: 'auto',
-                borderRadius: '5px'
+                borderRadius: '5px',
+                [theme.breakpoints.up('md')]: {
+                    width: '404px'
+                },
+                [theme.breakpoints.down('md')]: {
+                    width: '450px'
+                }
+            },
+            '& div.slick-slide': {
+                padding: '0 5px'
             }
         },
         '& button span svg:hover': {
             fill: '#a153ff',
         },
         '& div.slider-arrows-container': {
-            position: 'absolute',
+            // position: 'absolute',
             top: 0,
             display: 'flex',
             alignItems: 'center',

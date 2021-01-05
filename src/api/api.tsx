@@ -44,7 +44,7 @@ export const userAPI = {
                 throw err
             })
     },
-    getAdDataForCreate: (ctgryID: number, subCtgryID: number, lang: string): Promise<unknown> => {
+    getAdDataForCreateAncmnt: (ctgryID: number, subCtgryID: number, lang: string): Promise<unknown> => {
         return instance.get(`subcategory?parent_id=${ctgryID}&lang=${lang}&child_id=${subCtgryID}`)
             .then(res => res.data)
             .catch(err => {
@@ -79,7 +79,7 @@ export const userAPI = {
                 throw err
             })
     },
-    getAdTypes: (lang: string): Promise<any> => {
+    getAncmntsTypes: (lang: string): Promise<any> => {
         return instance.get(`ads/type?lang=${lang}`)
             .then(res => res.data)
             .catch(err => {

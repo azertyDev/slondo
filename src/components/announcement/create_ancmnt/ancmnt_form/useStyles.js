@@ -138,16 +138,6 @@ export const useStyles = makeStyles((theme) => ({
             borderColor: `${theme.palette.primary.error}!important`
         }
     },
-    backButton: {
-        width: '250px',
-        margin: '50px 5px 0',
-        [theme.breakpoints.down('sm')]: {
-            padding: '10px 50px'
-        },
-        '& > p': {
-            color: theme.palette.primary.white
-        }
-    },
     nextButtonBlock: {
         display: 'flex',
         justifyContent: 'center',

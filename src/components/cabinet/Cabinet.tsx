@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Container, Grid, Typography, Tabs, Tab } from '@material-ui/core';
-import { CustomListView } from '@root/src/components/elements/custom_card_view/custom_list_view/CustomListView';
+import { ListView } from '@src/components/elements/card_view/list_view/ListView';
 import { Notification } from '@src/components/cabinet/notification/Notification';
 import { CabinetSidebar } from '@src/components/cabinet/cabinet_sidebar/CabinetSidebar';
 import { CustomTabPanel } from '@src/components/elements/custom_tab_panel/CustomTabPanel';
