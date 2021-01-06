@@ -4,7 +4,7 @@ export const useStyles = makeStyles(() => ({
     root: {
         position: 'relative',
         maxWidth: '1920px',
-        padding: '0 20px',
+        padding: '0 19px',
         margin: '0 auto',
         '& div.slick-slider': {
             zIndex: 10,
