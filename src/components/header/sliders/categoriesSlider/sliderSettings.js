@@ -1,25 +1,11 @@
 import React from "react";
-import {SliderArrow} from "../../../elements/slider_arrow/SliderArrow";
 
-const Next = ({onClick, className}) => {
-    return <div className={className}>
-        <SliderArrow clickHandler={onClick}/>
-    </div>
-};
-
-const Previous = ({onClick, className}) => {
-    return <div className={className}>
-        <SliderArrow direction='left' clickHandler={onClick}/>
-    </div>
-};
 
 export const settings = {
     dots: false,
     infinite: false,
     slidesToShow: 7,
     slidesToScroll: 7,
-    nextArrow: <Next/>,
-    prevArrow: <Previous/>,
     responsive: [
         {
             breakpoint: 1200,
