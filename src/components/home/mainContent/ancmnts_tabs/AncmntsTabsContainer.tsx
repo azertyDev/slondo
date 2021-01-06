@@ -92,13 +92,13 @@ export const AncmntsTabsContainer: FC<WithT> = (props) => {
         setTabValue(newValue);
     };
 
-    // const handleShowMore = () => {
-    //     if (tabValue === 0) {
-    //         setAdCurrentPage(adCurrentPage + 1)
-    //     } else {
-    //         setLotCurrentPage(lotCurrentPage + 1)
-    //     }
-    // };
+    const handleShowMore = () => {
+        if (tabValue === 0) {
+            setAdCurrentPage(adCurrentPage + 1)
+        } else {
+            setLotCurrentPage(lotCurrentPage + 1)
+        }
+    };
 
     const handlePaginationPage = (_, pageNumber) => {
         tabValue === 0
@@ -124,7 +124,7 @@ export const AncmntsTabsContainer: FC<WithT> = (props) => {
             currentPage={currentPage}
             handlePaginationPage={handlePaginationPage}
             handleTabChange={handleTabChange}
-            // handleShowMore={handleShowMore}
+            handleShowMore={handleShowMore}
         />
     );
 };

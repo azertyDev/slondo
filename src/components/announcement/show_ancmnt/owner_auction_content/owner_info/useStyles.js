@@ -8,6 +8,7 @@ export const useStyles = makeStyles(() => ({
                 width: '100%',
                 border: 'none',
                 height: 44,
+                width: '100%',
                 '&:not(:last-child)': {
                     marginBottom: '10px',
                 },

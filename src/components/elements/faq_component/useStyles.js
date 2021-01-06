@@ -7,6 +7,7 @@ export const useStyles = makeStyles(() => ({
         alignItems: 'center',
         background: 'linear-gradient(49.94deg, #675EAA 19.03%, #AD66D5 72.72%)',
         borderRadius: 30,
+        marginBottom: 24,
         '& > h6.MuiTypography-subtitle1': {
             fontWeight: '600',
             marginTop: '15px',

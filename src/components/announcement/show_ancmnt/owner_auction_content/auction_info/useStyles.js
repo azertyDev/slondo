@@ -34,6 +34,7 @@ export const useStyles = makeStyles((theme) => ({
                     background: '#7DBCF6',
                     borderRadius: '3px',
                     padding: '15px 0',
+                    width: '100%',
                     '& > h6.MuiTypography-subtitle1': {
                         color: '#fff',
                         lineHeight: '16px',
