@@ -1,26 +1,24 @@
-import {makeStyles} from '@material-ui/core/styles'
-
+import { makeStyles } from '@material-ui/core/styles';
 
 export const useStyles = makeStyles((theme) => ({
     root: {
         width: '725px',
-        height: '530px',
-        borderRadius: '6px',
         '& > div.MuiGrid-container': {
-            height: '100%'
+            height: '100%',
         },
         '& div.info-block': {
             display: 'flex',
             flexDirection: 'column',
             height: '100%',
             padding: '45px 0',
-            backgroundImage: 'linear-gradient(rgba(0,0,0,.6), rgba(0,0,0,.6)), url("/img/modal-image.jpg")',
+            backgroundImage:
+                'linear-gradient(rgba(0,0,0,.6), rgba(0,0,0,.6)), url("/img/modal-image.jpg")',
             backgroundSize: 'cover',
-            borderTopLeftRadius: '6px',
-            borderBottomLeftRadius: '6px',
+            borderTopLeftRadius: '10px',
+            borderBottomLeftRadius: '10px',
             '& h6.MuiTypography-root': {
                 lineHeight: '14px',
-                color: '#fff'
+                color: '#fff',
             },
             '& > div': {
                 display: 'flex',
@@ -30,19 +28,20 @@ export const useStyles = makeStyles((theme) => ({
                 '& > img': {
                     minWidth: '40px',
                     height: '40px',
-                    marginRight: '15px'
+                    marginRight: '15px',
                 },
                 '& > h6.MuiTypography-subtitle2': {
                     lineHeight: '17px',
-                }
-            }
+                    fontWeight: 400,
+                },
+            },
         },
         '& div.auth-reg-block': {
             backgroundColor: theme.palette.primary.white,
-            borderTopRightRadius: '6px',
-            borderBottomRightRadius: '6px',
+            borderTopRightRadius: '10px',
+            borderBottomRightRadius: '10px',
             position: 'relative',
-            padding: '25px 16px',
+            padding: '19px 16px',
             height: '100%',
             '& > div.close-btn-wrapper': {
                 position: 'absolute',
@@ -60,21 +59,18 @@ export const useStyles = makeStyles((theme) => ({
                     padding: '5px',
                     '& svg > path': {
                         // fill: '#EB5757',
-                    }
+                    },
                 },
                 '&:hover': {
                     cursor: 'pointer',
                     // background: '#fff'
-                }
+                },
             },
             '& > div.welcome-block > h6.MuiTypography-subtitle1': {
                 color: 'rgba(49, 49, 49, 0.6)',
                 paddingRight: '100px',
-                marginTop: '8px'
+                marginTop: '8px',
             },
-            '& > div.auth-form': {
-                marginBottom: '5px'
-            }
-        }
-    }
-}))
+        },
+    },
+}));

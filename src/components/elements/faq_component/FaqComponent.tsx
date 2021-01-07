@@ -27,7 +27,7 @@ export const FaqComponent = () => {
                                     <SignIcon />
                                 </span>
                                 <Typography variant="subtitle1" color="initial">
-                                    Как зарегестрироваться?
+                                    Как зарегистрироваться?
                                 </Typography>
                             </a>
                         </Link>

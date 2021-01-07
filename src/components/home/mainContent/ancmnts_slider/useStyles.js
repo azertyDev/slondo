@@ -12,10 +12,10 @@ export const useStyles = makeStyles(() => ({
                 marginTop: '-14px'
             },
             '& button.slick-prev': {
-                left: '-10px'
+                left: '-5px'
             },
             '& button.slick-next': {
-                right: '-10px'
+                right: '-5px'
             },
             '& button.slick-disabled': {
                 display: 'none'

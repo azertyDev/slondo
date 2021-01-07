@@ -1,4 +1,4 @@
-import {makeStyles} from '@material-ui/core/styles';
+import { makeStyles } from '@material-ui/core/styles';
 
 export const useStyles = makeStyles((theme) => ({
     root: {
@@ -7,7 +7,7 @@ export const useStyles = makeStyles((theme) => ({
         '& header.MuiAppBar-root': {
             background: '#fafafa',
             '& > div.MuiContainer-root': {
-                padding: ({isScrollBreak}) => !isScrollBreak && 0,
+                padding: ({ isScrollBreak }) => !isScrollBreak && 0,
                 transition: 'padding .3s',
                 '& > div': {
                     width: '100%',
@@ -22,6 +22,7 @@ export const useStyles = makeStyles((theme) => ({
             },
             '& div.bottom-logo': {
                 '& a': {
+                    width: '100%',
                     display: 'flex',
                     alignItems: 'center',
                 },
@@ -60,14 +61,17 @@ export const useStyles = makeStyles((theme) => ({
         },
         '& a.create-ancmnt-link': {
             textDecoration: 'none',
-            '& h6.MuiTypography-subtitle2': {
-                lineHeight: '15px',
-                letterSpacing: '0.5px',
-                color: '#fff',
+            '& button': {
+                width: '100%',
+                '& h6.MuiTypography-subtitle2': {
+                    lineHeight: '15px',
+                    letterSpacing: '0.5px',
+                    color: '#fff',
+                },
             },
         },
         '& button.bottom-category-button': {
-            width: '136px',
+            width: '100%',
             '& > h6.MuiTypography-subtitle2': {
                 lineHeight: '15px',
                 letterSpacing: '0.5px',

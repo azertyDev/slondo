@@ -10,10 +10,12 @@ export const useStyles = makeStyles(() => ({
         marginBottom: 24,
         '& > h6.MuiTypography-subtitle1': {
             fontWeight: '600',
-            marginTop: '15px',
+            marginTop: '19px',
+            marginBottom: '18px',
             color: '#fff',
             fontSize: '1.125rem',
             letterSpacing: '0.15px',
+            lineHeight: '22px',
         },
         '& > div.MuiPaper-rounded': {
             width: '100%',
@@ -23,8 +25,7 @@ export const useStyles = makeStyles(() => ({
             display: 'flex',
             flexWrap: 'wrap',
             alignContent: 'space-between',
-            marginTop: '15px',
-            padding: '25px 13px',
+            padding: '24px 13px',
             '& > ul': {
                 listStyle: 'none',
                 margin: 0,

@@ -1,25 +1,22 @@
-import {makeStyles} from '@material-ui/core/styles'
+import { makeStyles } from '@material-ui/core/styles';
 
 export const useStyles = makeStyles((theme) => ({
-    mainSlider: {
-        marginTop: '20px'
-    },
     content: {
         marginTop: '40px',
         '& div.main-content': {
-            paddingRight: '20px',
+            paddingRight: '22px',
             '& section.tabs-wrapper': {
-                marginTop: '55px'
-            }
+                marginTop: '55px',
+            },
         },
         '& div.right-content': {
             '& section.faq-wrapper': {
-                marginTop: '51px'
+                marginTop: '51px',
             },
             '& section.banner-wrapper': {
-                marginTop: '223px'
-            }
-        }
+                marginTop: '137px',
+            },
+        },
     },
     createAdBlock: {
         position: 'fixed',
@@ -39,9 +36,9 @@ export const useStyles = makeStyles((theme) => ({
                 borderRadius: '12px',
                 '& > h6': {
                     fontSize: '1.15rem',
-                    textAlign: 'center'
-                }
-            }
-        }
-    }
-}))
+                    textAlign: 'center',
+                },
+            },
+        },
+    },
+}));

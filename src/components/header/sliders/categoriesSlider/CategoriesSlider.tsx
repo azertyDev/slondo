@@ -29,7 +29,11 @@ export const CategoriesSlider: FC<WithT & { categories: Categories }> = (props) 
                                 : <Link href="#" key={category.id}>
                                     <a title={category.name}>
                                         <div className='category'>
-                                            <img src={category.images.url.default} alt="category"/>
+                                            <div className="bg-layer">
+                                                <div className="medium">
+                                                    <img src={category.images.url.default} alt="category"/>
+                                                </div>
+                                            </div>
                                             <Typography>{category.name}</Typography>
                                         </div>
                                     </a>

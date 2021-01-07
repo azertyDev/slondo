@@ -9,7 +9,7 @@ export const Footer = () => {
     const classes = useStyles();
     return (
         <footer className={classes.root}>
-            <Container maxWidth='lg'>
+            <Container maxWidth='xl'>
                 <Grid container className="wrapper" justify="center">
                     <Grid container className="footer-top">
                         <Grid item xs={3} container justify="center">

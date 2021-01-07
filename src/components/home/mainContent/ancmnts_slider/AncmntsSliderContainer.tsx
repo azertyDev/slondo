@@ -1,11 +1,10 @@
-import React, {FC, useEffect, useState} from 'react';
-import {WithT} from 'i18next';
-import {ITEMS_PER_PAGE} from '@src/constants';
-import {userAPI} from '@src/api/api';
-import {i18n} from '@root/i18n';
-import {CardData, InnerCardData} from '@root/interfaces/CardData';
-import {AncmntsSlider} from './AncmntsSlider';
-
+import React, { FC, useEffect, useState } from 'react';
+import { WithT } from 'i18next';
+import { ITEMS_PER_PAGE } from '@src/constants';
+import { userAPI } from '@src/api/api';
+import { i18n } from '@root/i18n';
+import { CardData, InnerCardData } from '@root/interfaces/CardData';
+import { AncmntsSlider } from './AncmntsSlider';
 
 const initCard: InnerCardData = {
     id: null,
@@ -17,12 +16,25 @@ const initCard: InnerCardData = {
         name: '',
     },
     created_at: '',
-    location: '',
-    images: [{
-        url: {
-            default: ''
-        }
-    }],
+    region: {
+        id: null,
+        name: '',
+    },
+    city: {
+        id: null,
+        name: '',
+    },
+    district: {
+        id: null,
+        name: '',
+    },
+    images: [
+        {
+            url: {
+                default: '',
+            },
+        },
+    ],
     delivery: null,
     exchange: null,
     ads_type: {
@@ -44,11 +56,11 @@ const initialCardData: CardData = {
     data: {
         cards: initCards,
         total: null,
-    }
+    },
 };
 
 export const AncmntsSliderContainer: FC<WithT> = (props) => {
-    const {t} = props;
+    const { t } = props;
     const lang = i18n.language;
 
     const [currentPage, setCurrentPage] = useState(1);

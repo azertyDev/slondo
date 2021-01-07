@@ -40,6 +40,9 @@ export const CardItem: FC<CardItemProps> = (props) => {
         created_at,
         currency,
         ads_type,
+        region,
+        city,
+        district,
     } = props;
 
     const translatedTitle = transformTitle(title);
@@ -107,10 +110,21 @@ export const CardItem: FC<CardItemProps> = (props) => {
                                             {price}
                                             <span>{currency.name}</span>
                                         </Typography>
-                                        <Typography variant="caption" noWrap color="initial" className="card-location">
+                                        {/* <div>
+                                            {region.name || city.name || district.name ? (
+                                                <Typography variant="caption" noWrap color="initial" className="card-location">
+                                                    {`${region.name ?? ''}`}
+                                                    {city.name ? `, ${city.name}` : ''}
+                                                    {district.name ? `, ${district.name}` : ''}
+                                                </Typography>
+                                            ) : (
+                                                <Typography variant="subtitle1">Не указано</Typography>
+                                            )}
+                                        </div> */}
+                                        <Typography variant="subtitle1" color="initial">
                                             {location}
                                         </Typography>
-                                        <br/>
+                                        
                                         <Typography variant="caption" noWrap color="initial" className="card-location">
                                             {created_at}
                                         </Typography>

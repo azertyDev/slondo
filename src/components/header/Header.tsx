@@ -57,7 +57,7 @@ const Header = (props) => {
             <Modal
                 open={isAuthModalOpen}
                 onClose={handleModal(false)}
-                className={classes.modalDialog}
+                className={classes.modalDialog + 'modalDialog'}
             >
                 <>
                     {isAuth
