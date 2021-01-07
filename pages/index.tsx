@@ -1,16 +1,11 @@
-import React from "react";
+import React, {FC} from "react";
 import {Home} from '@src/components/home/Home';
-import {withTranslation} from "../i18n";
 
 
-const HomePage = (props) => {
+const HomePage: FC = (props) => {
     return (
         <Home {...props} />
     )
 };
 
-HomePage.getInitialProps = async () => ({
-    namespacesRequired: ['main', 'common'],
-});
-
-export default withTranslation(['main', 'common'])(HomePage);
+export default HomePage;

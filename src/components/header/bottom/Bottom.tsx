@@ -11,7 +11,7 @@ import {SignIcon} from "@src/components/elements/icons/SignIcon";
 import {useStyles} from "./useStyles";
 
 
-const BottomHeader = (props) => {
+const Bottom = (props) => {
     const {isScrollBreak, handleOpenModal, isAuth, t} = props;
 
     const classes = useStyles(props);
@@ -87,4 +87,4 @@ const BottomHeader = (props) => {
     )
 };
 
-export default withScrollThreshold(BottomHeader);
+export default withScrollThreshold(Bottom);

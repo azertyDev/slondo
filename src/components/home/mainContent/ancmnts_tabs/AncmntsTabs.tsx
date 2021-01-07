@@ -15,7 +15,7 @@ type MainContentProps = {
     adCardData: CardData;
     lotCardData: CardData;
     pageCount: number;
-}  & CustomPaginationTypes & WithT;
+} & CustomPaginationTypes & WithT;
 
 export const AncmntsTabs: FC<MainContentProps> = (props) => {
     const {
@@ -56,7 +56,7 @@ export const AncmntsTabs: FC<MainContentProps> = (props) => {
                     value={1}
                 />
             </Tabs>
-            <div className="cards-container">
+            <div className='tabs-content'>
                 <CustomTabPanel value={tabValue} index={0}>
                     {adCardData.error
                         ? <Typography
@@ -65,13 +65,11 @@ export const AncmntsTabs: FC<MainContentProps> = (props) => {
                         >
                             {adCardData.error}
                         </Typography>
-                        : <div className="ancmnts-wrapper">
-                            <CardView
-                                t={t}
-                                list={adCardData.data.cards}
-                                isFetch={adCardData.isFetch}
-                            />
-                        </div>}
+                        : <CardView
+                            t={t}
+                            list={adCardData.data.cards}
+                            isFetch={adCardData.isFetch}
+                        />}
                 </CustomTabPanel>
                 <CustomTabPanel value={tabValue} index={1}>
                     {lotCardData.error
@@ -81,22 +79,20 @@ export const AncmntsTabs: FC<MainContentProps> = (props) => {
                         >
                             {lotCardData.error}
                         </Typography>
-                        : <div className="auction-wrapper">
-                            <CardView
-                                t={t}
-                                list={lotCardData.data.cards}
-                                isFetch={lotCardData.isFetch}
-                            />
-                        </div>}
+                        : <CardView
+                            t={t}
+                            list={lotCardData.data.cards}
+                            isFetch={lotCardData.isFetch}
+                        />}
                 </CustomTabPanel>
-                <div className='pagination'>
-                    {!(lotCardData.error || adCardData.error)
-                    && <CustomPagination
-                        pageCount={pageCount}
-                        currentPage={currentPage}
-                        handlePaginationPage={handlePaginationPage}
-                    />}
-                </div>
+            </div>
+            <div className='pagination'>
+                {!(lotCardData.error || adCardData.error)
+                && <CustomPagination
+                    pageCount={pageCount}
+                    currentPage={currentPage}
+                    handlePaginationPage={handlePaginationPage}
+                />}
             </div>
             {/*{((adCardData.cardData.total > adCardData.cardData.data.length && tabValue === 0) || (lotCardData.cardData.total > lotCardData.cardData.data.length && tabValue === 1)) && (*/}
             {/*    <Grid container className={classes.showMoreContainer}>*/}

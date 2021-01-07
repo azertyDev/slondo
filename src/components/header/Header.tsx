@@ -1,9 +1,9 @@
-import React, {useEffect} from 'react';
+import React, {FC, useEffect} from 'react';
 import Cookies from 'universal-cookie';
 import {i18n, withTranslation} from '@root/i18n';
 import {Container, Modal, Typography} from '@material-ui/core';
-import TopHeaderContainer from "./topHeader/TopHeaderContainer";
-import BottomHeader from './bottomHeader/BottomHeader';
+import TopContainer from "./top/TopContainer";
+import BottomHeader from './bottom/Bottom';
 import {AuthRegPage} from "./auth_reg/AuthRegPage";
 import {useDispatch, useSelector} from "react-redux";
 import {setIsAuthAction, setIsAuthModalOpen} from '@src/redux/slices/authRegSlice';
@@ -11,12 +11,11 @@ import {RootState} from "@src/redux/rootReducer";
 import {ButtonComponent} from "@src/components/elements/button/Button";
 import {fetchCategories} from "@src/redux/slices/categoriesSlice";
 import {fetchLocations} from "@src/redux/slices/locationsSlice";
+import {WithT} from "i18next";
 import {useStyles} from './useStyles';
 
 
-const Header = (props) => {
-    const {t} = props;
-
+const Header: FC<WithT> = ({t}) => {
     const cookies = new Cookies();
     const isTokenExst = !!cookies.get('token');
 
@@ -41,39 +40,43 @@ const Header = (props) => {
     const classes = useStyles();
     return (
         <header className={classes.root} id='back-to-top-anchor'>
-            <Container maxWidth="xl">
-                <TopHeaderContainer
-                    t={t}
-                    handleOpenModal={handleModal(true)}
-                />
-                <div className={classes.bottomHeader}>
-                    <BottomHeader
-                        t={t}
-                        isAuth={isAuth}
-                        handleOpenModal={handleModal(true)}
-                    />
-                </div>
-            </Container>
-            <Modal
-                open={isAuthModalOpen}
-                onClose={handleModal(false)}
-                className={classes.modalDialog}
-            >
-                <>
-                    {isAuth
-                        ? <div style={{width: '200px', height: '80px', backgroundColor: '#fff'}}>
-                            <Typography variant='h5'>Выйти из сайта?</Typography>
-                            <div style={{display: 'flex'}}>
-                                <ButtonComponent onClick={handleModal(false)}>Отмена</ButtonComponent>
-                                <ButtonComponent>Выйти</ButtonComponent>
-                            </div>
-                        </div>
-                        : <AuthRegPage
+            <div className='header-wrapper'>
+                <Container maxWidth="xl">
+                    <div className='top-wrapper'>
+                        <TopContainer
                             t={t}
-                            handleCloseModal={handleModal(false)}
-                        />}
-                </>
-            </Modal>
+                            handleOpenModal={handleModal(true)}
+                        />
+                    </div>
+                    <div>
+                        <BottomHeader
+                            t={t}
+                            isAuth={isAuth}
+                            handleOpenModal={handleModal(true)}
+                        />
+                    </div>
+                </Container>
+                <Modal
+                    open={isAuthModalOpen}
+                    onClose={handleModal(false)}
+                    className={classes.modalDialog}
+                >
+                    <>
+                        {isAuth
+                            ? <div style={{width: '200px', height: '80px', backgroundColor: '#fff'}}>
+                                <Typography variant='h5'>Выйти из сайта?</Typography>
+                                <div style={{display: 'flex'}}>
+                                    <ButtonComponent onClick={handleModal(false)}>Отмена</ButtonComponent>
+                                    <ButtonComponent>Выйти</ButtonComponent>
+                                </div>
+                            </div>
+                            : <AuthRegPage
+                                t={t}
+                                handleCloseModal={handleModal(false)}
+                            />}
+                    </>
+                </Modal>
+            </div>
         </header>
     )
 };

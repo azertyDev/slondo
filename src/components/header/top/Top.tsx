@@ -7,7 +7,7 @@ import {
     Toolbar,
     IconButton,
 } from '@material-ui/core';
-import {TopHeaderPropsType} from '@src/components/header/topHeader/TopHeaderContainer';
+import {TopHeaderPropsType} from '@src/components/header/top/TopContainer';
 import {Link} from '@root/i18n';
 import {useRouter} from 'next/router';
 import {Router} from '@root/i18n';
@@ -23,7 +23,8 @@ import {
 } from '@src/components/elements/icons';
 import {useStyles} from './useStyles';
 
-export const TopHeader: FC<TopHeaderPropsType> = (props) => {
+
+export const Top: FC<TopHeaderPropsType> = (props) => {
     const [isOpen, setIsOpen] = useState(false);
     const {t, handleOpenModal} = props;
     const {pathname} = useRouter();

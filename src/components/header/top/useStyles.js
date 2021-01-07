@@ -1,9 +1,8 @@
-import { makeStyles } from '@material-ui/core/styles';
-import TextField from '@material-ui/core/TextField';
+import {makeStyles} from '@material-ui/core/styles';
+
 
 export const useStyles = makeStyles((theme) => ({
     root: {
-        marginTop: 12,
         '& div.location': {
             display: 'flex',
             alignItems: 'center',
@@ -83,7 +82,7 @@ export const useStyles = makeStyles((theme) => ({
                 },
             },
         },
-
+        
         // ------------> adaptive <--------------- //
         '& div.top-header-logo > a > img': {
             height: '50px',

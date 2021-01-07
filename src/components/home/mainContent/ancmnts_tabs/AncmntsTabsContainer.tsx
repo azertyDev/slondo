@@ -124,7 +124,7 @@ export const AncmntsTabsContainer: FC<WithT> = (props) => {
             currentPage={currentPage}
             handlePaginationPage={handlePaginationPage}
             handleTabChange={handleTabChange}
-            handleShowMore={handleShowMore}
+            // handleShowMore={handleShowMore}
         />
     );
 };

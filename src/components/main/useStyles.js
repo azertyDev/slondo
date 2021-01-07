@@ -1,23 +1,26 @@
 import {makeStyles} from '@material-ui/core/styles'
 
 export const useStyles = makeStyles((theme) => ({
-    mainSlider: {
-        marginTop: '20px'
-    },
-    content: {
-        marginTop: '40px',
-        '& div.main-content': {
-            paddingRight: '20px',
-            '& section.tabs-wrapper': {
-                marginTop: '55px'
-            }
+    root: {
+        paddingTop: '48px',
+        '& div.main-slider-wrapper': {
+            marginBottom: '40px'
         },
-        '& div.right-content': {
-            '& section.faq-wrapper': {
-                marginTop: '51px'
+        '& div.content-wrapper': {
+            '& div.categories-slider-wrapper': {
+                marginBottom: '40px'
             },
-            '& section.banner-wrapper': {
-                marginTop: '223px'
+            '& div.main-content': {
+                paddingRight: '20px',
+                '& section.ancmnts-slider-wrapper': {
+                    marginBottom: '55px'
+                }
+            },
+            '& div.right-content': {
+                '& section.faq-wrapper': {
+                    marginTop: '58px',
+                    marginBottom: '223px'
+                }
             }
         }
     },

@@ -1,8 +1,8 @@
 import {makeStyles} from '@material-ui/core/styles';
 
+
 export const useStyles = makeStyles((theme) => ({
     root: {
-        marginTop: '28px',
         '& a': {
             textDecoration: 'none'
         },
@@ -15,7 +15,6 @@ export const useStyles = makeStyles((theme) => ({
         },
         '& div.category-slider': {
             position: 'relative',
-            marginTop: '20px',
             '& > div.slick-slider': {
                 '& > div.slick-prev, & > div.slick-next': {
                     position: 'absolute',
