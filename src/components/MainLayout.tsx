@@ -2,8 +2,8 @@ import React, {FC} from "react";
 import Head from "next/head";
 import Header from "./header/Header";
 import Footer from "./footer/Footer";
-import {ErrorModal} from "@src/components/error_modal/ErrorModal";
 import {Container} from "@material-ui/core";
+import {ErrorModal} from "@src/components/error_modal/ErrorModal";
 
 
 type MainLayoutPropsType = {
@@ -18,12 +18,15 @@ export const MainLayout: FC<MainLayoutPropsType> = ({children, title = 'SLONDO'}
             </Head>
             <Header/>
             <main>
-                <Container maxWidth="xl" style={{paddingTop: '48px'}}>
+                <Container
+                    maxWidth="xl"
+                    style={{paddingTop: '48px'}}
+                >
                     {children}
                 </Container>
             </main>
             <Footer/>
             <ErrorModal/>
         </>
-    );
+    )
 };

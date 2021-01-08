@@ -200,7 +200,7 @@ export const Footer: FC<WithT> = () => {
                 </Container>
             </div>
         </footer>
-    );
+    )
 };
 
 export default withTranslation(['footer'])(Footer);

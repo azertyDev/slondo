@@ -2,18 +2,18 @@ import React, {FC, useEffect, useState} from 'react';
 import {useSelector, useDispatch} from "react-redux";
 import {i18n} from "@root/i18n";
 import {userAPI} from '@src/api/api';
-import {CreateAncmntCategory} from "./CreateAncmntCategory";
+import {CreateAncmnt} from "./CreateAncmnt";
 import {RootState} from "@src/redux/rootReducer";
 import {MainLayout} from "@src/components/MainLayout";
+import {WithT} from "i18next";
 import {
     CreateAncmntState,
     AncmntStateTypes,
-    AncmntType,
+    AncmntType
 } from "@root/interfaces/Announcement";
 import {AncmntFormContainer} from "./ancmnt_form/AncmntFormContainer";
 import {setErrorMsgAction} from '@root/src/redux/slices/errorSlice';
 import {AncmntTypesPage} from "@src/components/announcement/ancmnt_types_page/AncmntTypesPage";
-import {WithT} from "i18next";
 import {categoryDataNormalization, categorySearchHelper} from "@src/helpers";
 import {AncmntHeader} from './ancmnt_header/AncmntHeader';
 import {SuccessAncmnt} from "@src/components/announcement/create_ancmnt/ancmnt_form/success_ancmnt/SuccessAncmnt";
@@ -324,7 +324,7 @@ export const CreateAncmntContainer: FC<WithT> = ({t}) => {
                     handleAncmntType={handleAncmntType}
                 />
             case 1:
-                return <CreateAncmntCategory
+                return <CreateAncmnt
                     ancmntType={ancmntType}
                     createAncmnt={createAncmnt}
                     categoriesList={categoriesList}

@@ -8,9 +8,9 @@ import {
     Grid,
     Container,
 } from '@material-ui/core';
-import {MainSlider} from '../header/sliders/mainSlider/MainSlider';
+import {MainSlider} from '../../header/sliders/mainSlider/MainSlider';
 import {CategoriesSliderContainer} from '@src/components/header/sliders/categoriesSlider/CategoriesSliderContainer';
-import {AncmntsTabsContainer} from '@src/components/home/mainContent/ancmnts_tabs/AncmntsTabsContainer';
+import {AncmntsTabsContainer} from '@src/components/home/main/ancmnts_tabs/AncmntsTabsContainer';
 import {WithT} from 'i18next';
 import {ScrollTop} from '@src/components/elements/scroll_top/ScrollTop';
 import {Link, withTranslation} from '@root/i18n';
@@ -18,7 +18,7 @@ import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp';
 import {useStyles} from './useStyles';
 import {Banner} from "@src/components/elements/banner/Banner";
 import {FaqComponent} from "@src/components/elements/faq_component/FaqComponent";
-import {AncmntsSliderContainer} from "@src/components/home/mainContent/ancmnts_slider/AncmntsSliderContainer";
+import {AncmntsSliderContainer} from "@src/components/home/main/ancmnts_slider/AncmntsSliderContainer";
 
 
 export const Main: FC<WithT> = ({t}) => {
@@ -66,7 +66,7 @@ export const Main: FC<WithT> = ({t}) => {
                                     >
                                         <div>
                                             <Typography variant="h6">
-                                                {t('common:createAd')}
+                                                {t('common:createAncmnt')}
                                             </Typography>
                                         </div>
                                     </Slide>

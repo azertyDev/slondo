@@ -6,6 +6,7 @@ export const useStyles = makeStyles((theme) => ({
         width: '725px',
         height: '530px',
         borderRadius: '6px',
+        margin: '40px auto',
         '& > div.MuiGrid-container': {
             height: '100%'
         },
