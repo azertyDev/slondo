@@ -1,11 +1,10 @@
-import React, {FC, useEffect, useState} from 'react';
-import {WithT} from 'i18next';
-import {AncmntsTabs} from './AncmntsTabs';
-import {ITEMS_PER_PAGE} from '@src/constants';
-import {userAPI} from '@src/api/api';
-import {i18n} from '@root/i18n';
-import {CardData} from '@root/interfaces/CardData';
-
+import React, { FC, useEffect, useState } from 'react';
+import { WithT } from 'i18next';
+import { AncmntsTabs } from './AncmntsTabs';
+import { ITEMS_PER_PAGE } from '@src/constants';
+import { userAPI } from '@src/api/api';
+import { i18n } from '@root/i18n';
+import { CardData } from '@root/interfaces/CardData';
 
 const cardData = {
     id: null,
@@ -17,11 +16,30 @@ const cardData = {
         id: null,
         name: '',
     },
+    city: {
+        id: null,
+        name: '',
+    },
+    region: {
+        id: null,
+        name: '',
+    },
+    ads_type: {
+        id: null,
+        name: '',
+        mark: '',
+    },
+    delivery: null,
+    exchange: null,
     created_at: '',
     location: '',
-    images: [{
-        url: ''
-    }]
+    images: [
+        {
+            url: {
+                default: '',
+            },
+        },
+    ],
 };
 
 const initCards = [];
@@ -32,6 +50,7 @@ for (let i = 1; i <= 16; i++) {
 
 const initialCardData: CardData = {
     isFetch: false,
+    isShowMoreFetch: false,
     error: null,
     data: {
         cards: initCards,
@@ -47,36 +66,32 @@ export const AncmntsTabsContainer: FC<WithT> = (props) => {
     const lang = i18n.language;
 
     const [tabValue, setTabValue] = useState(0);
-    const [adCurrentPage, setAdCurrentPage] = useState(1);
-    const [lotCurrentPage, setLotCurrentPage] = useState(1);
-    const [adCardData, setAdCardData] = useState(initialCardData);
-    const [lotCardData, setLotCardData] = useState(initialCardData);
-    const pageCount = Math.ceil(
-        (tabValue === 0 ? adCardData.data.total : lotCardData.data.total) /
-        ITEMS_PER_PAGE,
-    ) || 1;
+    const [ancmntCurrentPage, setAncmntCurrentPage] = useState(1);
+    const [auctionCurrentPage, setAuctionCurrentPage] = useState(1);
+    const [ancmntCardData, setAncmntCardData] = useState(initialCardData);
+    const [auctionCardData, setAuctionCardData] = useState(initialCardData);
 
-    const currentPage = tabValue === 0 ? adCurrentPage : lotCurrentPage;
-
-    const setCardData = async (state, setState, currentPage, type) => {
+    const setCardData = async (state, setState, currentPage, type, isShowMore = false) => {
         try {
             setState({
                 ...state,
-                isFetch: true,
+                isFetch: !isShowMore,
+                isShowMoreFetch: true,
             });
 
             const newData = await fetchCardData(
                 ITEMS_PER_PAGE,
                 currentPage,
                 type,
-                lang,
+                lang
             );
 
             setState({
                 ...state,
                 isFetch: false,
+                isShowMoreFetch: false,
                 data: {
-                    cards: newData.data,
+                    cards: isShowMore ? [...state.data.cards, ...newData.data] : newData.data,
                     total: newData.total,
                 },
             });
@@ -94,35 +109,27 @@ export const AncmntsTabsContainer: FC<WithT> = (props) => {
 
     const handleShowMore = () => {
         if (tabValue === 0) {
-            setAdCurrentPage(adCurrentPage + 1)
+            const nextAncmntPage = ancmntCurrentPage + 1;
+            setAncmntCurrentPage(nextAncmntPage);
+            setCardData(ancmntCardData, setAncmntCardData, nextAncmntPage, 'ad', true);
         } else {
-            setLotCurrentPage(lotCurrentPage + 1)
+            const nextAuctionPage = auctionCurrentPage + 1;
+            setAuctionCurrentPage(nextAuctionPage);
+            setCardData(auctionCardData, setAuctionCardData, nextAuctionPage, 'lot', true);
         }
     };
 
-    const handlePaginationPage = (_, pageNumber) => {
-        tabValue === 0
-            ? setAdCurrentPage(pageNumber)
-            : setLotCurrentPage(pageNumber);
-    };
-
     useEffect(() => {
-        setCardData(adCardData, setAdCardData, adCurrentPage, 'ad');
-    }, [adCurrentPage]);
-
-    useEffect(() => {
-        setCardData(lotCardData, setLotCardData, lotCurrentPage, 'lot');
-    }, [lotCurrentPage]);
+        setCardData(ancmntCardData, setAncmntCardData, ancmntCurrentPage, 'ad');
+        setCardData(auctionCardData, setAuctionCardData, auctionCurrentPage, 'lot');
+    }, []);
 
     return (
         <AncmntsTabs
             t={props.t}
             tabValue={tabValue}
-            adCardData={adCardData}
-            lotCardData={lotCardData}
-            pageCount={pageCount}
-            currentPage={currentPage}
-            handlePaginationPage={handlePaginationPage}
+            ancmntCardData={ancmntCardData}
+            auctionCardData={auctionCardData}
             handleTabChange={handleTabChange}
             handleShowMore={handleShowMore}
         />

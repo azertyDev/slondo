@@ -3,13 +3,14 @@ import {makeStyles} from '@material-ui/core/styles';
 export const useStyles = makeStyles((theme) => ({
     root: {
         '& > h2.title': {
+            marginBottom: '30px',
             fontWeight: 400
         },
         '& div.MuiTabs-root': {
             display: 'flex',
             width: '100%',
             minHeight: 'auto',
-            marginTop: '24px',
+            marginBottom: '33px',
             '& div.MuiTabs-flexContainer': {
                 borderBottom: `1px solid ${theme.palette.common.tab}`,
                 '& h6': {
@@ -26,22 +27,19 @@ export const useStyles = makeStyles((theme) => ({
                 backgroundColor: theme.palette.common.activeTab
             }
         },
-        '& div.cards-container': {
-            marginTop: '33px',
-        },
-        '& div.ancmnts-wrapper, div.auction-wrapper': {
-            '& > div.MuiGrid-container': {
+        '& div.tabs-content': {
+            marginBottom: '40px',
+            '& div.MuiGrid-container': {
                 width: 'calc(100% + 14px)',
                 margin: '-7px',
                 '& div.MuiGrid-item': {
-                    padding: '7px',
+                    padding: '7px'
                 }
             }
         },
         '& div.pagination': {
             display: 'flex',
             justifyContent: 'center',
-            marginTop: '30px'
         }
     },
     showMoreContainer: {
@@ -56,11 +54,12 @@ export const useStyles = makeStyles((theme) => ({
             '& > button': {
                 position: 'relative',
                 width: '170px',
-                color: '#000',
+                height: '38px',
                 backgroundColor: theme.palette.primary.white,
-                boxShadow: '0px 0px 8px rgba(132, 92, 171, 0.2)',
+                boxShadow: '0px 0px 15px rgba(0, 0, 0, 0.1)',
+                border: 'none',
                 borderRadius: '100px',
-                zIndex: 1,
+                zIndex: 1,                
                 '& > h6.MuiTypography-subtitle2': {
                     lineHeight: '17px',
                     letterSpacing: '0.25px',

@@ -75,7 +75,7 @@ export const AuthRegPage: FC<AuthRegPageType & WithT> = (props) => {
                             </div>
                             <div className='welcome-block'>
                                 <Typography variant="h6" color="initial">
-                                    {t('auth_reg:welcome')}
+                                    {t('auth_reg:welcome')} 
                                 </Typography>
                                 <Typography variant="subtitle1" color="initial">
                                     {t('auth_reg:authSite')}

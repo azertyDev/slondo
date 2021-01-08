@@ -1,10 +1,11 @@
-import {makeStyles} from '@material-ui/core/styles';
+import { makeStyles } from '@material-ui/core/styles';
 
 export const useStyles = makeStyles((theme) => ({
     root: {
         position: 'relative',
+        height: '345px',
         '& a': {
-            textDecoration: 'none'
+            textDecoration: 'none',
         },
         '& > button.favorite-btn': {
             position: 'absolute',
@@ -22,7 +23,7 @@ export const useStyles = makeStyles((theme) => ({
                     },
                     '&:last-child': {
                         stopColor: '#AD66D5',
-                    }
+                    },
                 },
                 '& > defs:last-child > linearGradient > stop': {
                     '&:first-child': {
@@ -30,8 +31,8 @@ export const useStyles = makeStyles((theme) => ({
                     },
                     '&:last-child': {
                         stopColor: '#fff',
-                    }
-                }
+                    },
+                },
             },
             '&:hover': {
                 '& svg': {
@@ -54,21 +55,32 @@ export const useStyles = makeStyles((theme) => ({
                         },
                         '&:last-child': {
                             stopColor: '#AD66D5',
-                        }
-                    }
-                }
-            }
+                        },
+                    },
+                },
+            },
         },
         '& div.MuiCard-root': {
             position: 'relative',
             borderRadius: '7px',
             filter: 'drop-shadow(0px 2px 4px rgba(132, 92, 171, 0.2))',
+            height: '100%',
             '&:hover': {
                 boxShadow: 'rgba(0, 0, 0, 0.08) 0px 8px 16px 0px',
                 cursor: 'pointer',
             },
+            '& button.MuiCardActionArea-root': {
+                height: '105px',
+                '& > div.MuiCardContent-root': {
+                    height: 'inherit',
+                    display: 'flex',
+                    flexDirection: 'column',
+                    justifyContent: 'space-around',
+                },
+            },
             '& > div.card-media': {
                 height: '240px',
+
                 '& > div.card-header': {
                     width: '100%',
                     height: '100%',
@@ -85,15 +97,13 @@ export const useStyles = makeStyles((theme) => ({
                             borderRadius: '3px',
                             padding: '0 5px',
                             color: theme.palette.primary.white,
-                            backgroundColor: ancmntType =>
+                            backgroundColor: (ancmntType) =>
                                 ancmntType === 'auction'
                                     ? 'rgba(173, 102, 213, .65)'
-                                    : (
-                                        ancmntType === 'adv_auction'
-                                            ? 'rgba(242, 153, 74, .65)'
-                                            : 'rgba(136, 202, 236, .65)'
-                                    )
-                        }
+                                    : ancmntType === 'adv_auction'
+                                    ? 'rgba(242, 153, 74, .65)'
+                                    : 'rgba(136, 202, 236, .65)',
+                        },
                     },
                     '& > div.icons': {
                         '&:last-child': {
@@ -110,13 +120,13 @@ export const useStyles = makeStyles((theme) => ({
                                 marginRight: '5px',
                                 '& > svg': {
                                     '& > path': {
-                                        fill: '#838383'
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
+                                        fill: '#838383',
+                                    },
+                                },
+                            },
+                        },
+                    },
+                },
             },
             '& h6.MuiTypography-subtitle1': {
                 [theme.breakpoints.down('sm')]: {
@@ -134,9 +144,9 @@ export const useStyles = makeStyles((theme) => ({
                     },
                 },
             },
-        }
+        },
     },
     skeleton: {
         height: '240px',
-    }
+    },
 }));

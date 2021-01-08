@@ -51,6 +51,9 @@ export const useStyles = makeStyles((theme) => ({
             height: '38px',
             '& > svg': {
                 marginLeft: '8px',
+                [theme.breakpoints.down(1200)]: {
+                    display: 'none',
+                },
             },
         },
         '& button.bottom-sign-button': {
@@ -103,6 +106,7 @@ export const useStyles = makeStyles((theme) => ({
             },
         },
         '& div.select-local': {
+            padding: '10px 0',
             '& > form': {
                 width: '100%',
                 '& > div': {

@@ -7,7 +7,7 @@ import {
     Toolbar,
     IconButton,
 } from '@material-ui/core';
-import {TopHeaderPropsType} from '@src/components/header/topHeader/TopHeaderContainer';
+import {TopHeaderPropsType} from '@src/components/header/top/TopContainer';
 import {Link} from '@root/i18n';
 import {useRouter} from 'next/router';
 import {Router} from '@root/i18n';
@@ -23,7 +23,8 @@ import {
 } from '@src/components/elements/icons';
 import {useStyles} from './useStyles';
 
-export const TopHeader: FC<TopHeaderPropsType> = (props) => {
+
+export const Top: FC<TopHeaderPropsType> = (props) => {
     const [isOpen, setIsOpen] = useState(false);
     const {t, handleOpenModal} = props;
     const {pathname} = useRouter();
@@ -53,7 +54,7 @@ export const TopHeader: FC<TopHeaderPropsType> = (props) => {
                         className='multiple-actions'
                         md={6}
                     >
-                        <Grid item xs={2}>
+                        <Grid item md={2}>
                             <Link href="#">
                                 <a>
                                     <Typography variant="subtitle1">
@@ -63,7 +64,7 @@ export const TopHeader: FC<TopHeaderPropsType> = (props) => {
                                 </a>
                             </Link>
                         </Grid>
-                        <Grid item xs={2}>
+                        <Grid item md={2}>
                             <Link href="#">
                                 <a>
                                     <Typography variant="subtitle1">
@@ -73,7 +74,7 @@ export const TopHeader: FC<TopHeaderPropsType> = (props) => {
                                 </a>
                             </Link>
                         </Grid>
-                        <Grid item xs={2}>
+                        <Grid item md={2}>
                             <Link href="/help">
                                 <a
                                     className={pathname === '/help' ? 'selected' : ''}
@@ -85,7 +86,7 @@ export const TopHeader: FC<TopHeaderPropsType> = (props) => {
                                 </a>
                             </Link>
                         </Grid>
-                        <Grid item xs={2}>
+                        <Grid item md={2}>
                             <Localization/>
                         </Grid>
                     </Grid>

@@ -1,5 +1,6 @@
 export interface CardData {
     isFetch: boolean;
+    isShowMoreFetch: boolean;
     error: unknown;
     data: {
         cards: InnerCardData[];
@@ -20,7 +21,7 @@ export type InnerCardData = {
         id: number,
         name: string;
     },
-    district: {
+    district?: {
         id: number,
         name: string;
     },

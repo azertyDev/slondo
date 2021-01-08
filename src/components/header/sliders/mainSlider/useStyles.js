@@ -1,6 +1,7 @@
-import {makeStyles} from '@material-ui/core/styles'
+import {makeStyles} from '@material-ui/core/styles';
 
-export const useStyles = makeStyles((theme) => ({
+
+export const useStyles = makeStyles(() => ({
     root: {
         position: 'relative',
         maxWidth: '1920px',
@@ -9,32 +10,34 @@ export const useStyles = makeStyles((theme) => ({
         '& div.slick-slider': {
             zIndex: 10,
             '& img': {
-                borderRadius: '5px',
-                [theme.breakpoints.up('md')]: {
-                    width: '404px'
-                },
-                [theme.breakpoints.down('md')]: {
-                    width: '450px'
-                }
+                width: '100%',
+                borderRadius: '5px'
             },
             '& div.slick-slide': {
                 padding: '0 5px'
+            },
+            '& button.slick-arrow': {
+                position: 'absolute',
+                top: 'calc(50% - 25px)',
+                zIndex: 10
+            },
+            '& button.slick-prev': {
+                left: '20px'
+            },
+            '& button.slick-next': {
+                right: '20px'
             }
         },
         '& button span svg:hover': {
             fill: '#a153ff',
         },
         '& div.slider-arrows-container': {
-            // position: 'absolute',
+            position: 'absolute',
             top: 0,
             display: 'flex',
-            alignItems: 'center',
+            justifyContent: 'space-between',
             width: '100%',
-            height: '100%',
-            '& > div.MuiContainer-root': {
-                display: 'flex',
-                justifyContent: 'space-between'
-            }
+            height: '100%'
         }
     }
 }));

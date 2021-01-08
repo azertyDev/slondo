@@ -11,13 +11,13 @@ import {SignIcon} from "@src/components/elements/icons/SignIcon";
 import {useStyles} from "./useStyles";
 
 
-const BottomHeader = (props) => {
+const Bottom = (props) => {
     const {isScrollBreak, handleOpenModal, isAuth, t} = props;
 
     const classes = useStyles(props);
     return (
         <div className={classes.root}>
-            <Hidden smDown>
+            <Hidden mdDown>
                 <AppBar
                     color={"inherit"}
                     elevation={isScrollBreak ? 1 : 0}
@@ -78,7 +78,7 @@ const BottomHeader = (props) => {
                     </Container>
                 </AppBar>
             </Hidden>
-            <Hidden mdUp>
+            <Hidden lgUp>
                 <div className="select-local">
                     <SearchForm t={t}/>
                 </div>
@@ -87,4 +87,4 @@ const BottomHeader = (props) => {
     )
 };
 
-export default withScrollThreshold(BottomHeader);
+export default withScrollThreshold(Bottom);
