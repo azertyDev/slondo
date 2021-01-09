@@ -1,11 +1,11 @@
 export interface CardData {
     isFetch: boolean;
-    isShowMoreFetch: boolean;
+    isShowMoreFetch?: boolean;
     error: unknown;
     data: {
         cards: InnerCardData[];
         total: number;
-    };
+    }
 }
 
 export type InnerCardData = {

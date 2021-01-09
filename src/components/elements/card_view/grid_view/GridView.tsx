@@ -5,13 +5,12 @@ import {ViewPropsTypes} from "@src/components/elements/card_view/CardView";
 
 
 export const GridView: FC<ViewPropsTypes> = (props) => {
-    const {isFetch, list, t} = props;
+    const {isFetch, list} = props;
     return (
         <Grid container spacing={2}>
             {list.map((item, index) => (
-                <Grid key={index} xs={6} sm={4} lg={3} item>
+                <Grid key={index} xs={12} sm={6} md={4} lg={3} item>
                     <CardItem
-                        t={t}
                         {...item}
                         isFetch={isFetch}
                     />

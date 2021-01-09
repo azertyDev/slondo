@@ -1,17 +1,14 @@
-import React from 'react';
-import { Paper, Typography } from '@material-ui/core';
-import { Link } from '@root/i18n';
+import React, {FC} from 'react';
+import {Paper, Typography} from '@material-ui/core';
+import {Link} from '@root/i18n';
+import {SignIcon} from '@src/components/elements/icons/SignIcon';
+import {GavelIcon} from '@src/components/elements/icons/GavelIcon';
+import {NotesIcon} from '@src/components/elements/icons/NotesIcon';
+import {ShoppingIcon} from '@src/components/elements/icons/ShoppingIcon';
+import {useStyles} from './useStyles';
 
-// icons
-import { SignIcon } from '@src/components/elements/icons/SignIcon';
-import { GavelIcon } from '@src/components/elements/icons/GavelIcon';
-import { NotesIcon } from '@src/components/elements/icons/NotesIcon';
-import { ShoppingIcon } from '@src/components/elements/icons/ShoppingIcon';
 
-// styles
-import { useStyles } from './useStyles';
-
-export const FaqComponent = () => {
+export const FaqComponent: FC = () => {
     const classes = useStyles();
     return (
         <div className={classes.root}>
@@ -24,7 +21,7 @@ export const FaqComponent = () => {
                         <Link href="#">
                             <a>
                                 <span>
-                                    <SignIcon />
+                                    <SignIcon/>
                                 </span>
                                 <Typography variant="subtitle1" color="initial">
                                     Как зарегистрироваться?
@@ -36,7 +33,7 @@ export const FaqComponent = () => {
                         <Link href="#">
                             <a>
                                 <span>
-                                    <GavelIcon />
+                                    <GavelIcon/>
                                 </span>
                                 <Typography variant="subtitle1" color="initial">
                                     Как создать аукцион?
@@ -48,7 +45,7 @@ export const FaqComponent = () => {
                         <Link href="#">
                             <a>
                                 <span>
-                                    <NotesIcon />
+                                    <NotesIcon/>
                                 </span>
                                 <Typography variant="subtitle1" color="initial">
                                     Как создать объявление?
@@ -60,7 +57,7 @@ export const FaqComponent = () => {
                         <Link href="#">
                             <a>
                                 <span>
-                                    <ShoppingIcon />
+                                    <ShoppingIcon/>
                                 </span>
                                 <Typography variant="subtitle1" color="initial">
                                     Как учавствовать в аукционе?

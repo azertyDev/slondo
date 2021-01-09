@@ -5,20 +5,19 @@ import {SliderArrowIcon} from "@src/components/elements/icons/slider_arrow/Slide
 
 
 type SliderArrowProps = {
-    iconId: number;
     className?: string;
     onClick?: () => void;
     type?: string;
 };
 
-export const SliderArrow: FC<SliderArrowProps> = ({onClick, className, type, iconId}) => {
+export const SliderArrow: FC<SliderArrowProps> = ({onClick, className, type}) => {
     const classes = useStyles();
     return (
         <IconButton
             className={`${classes.root} ${className}`}
             onClick={onClick}
         >
-            <SliderArrowIcon className={type} iconId={iconId} />
+            <SliderArrowIcon className={type}/>
         </IconButton>
     )
 };

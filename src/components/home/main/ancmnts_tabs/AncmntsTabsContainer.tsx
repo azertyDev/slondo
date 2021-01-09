@@ -1,10 +1,10 @@
-import React, { FC, useEffect, useState } from 'react';
-import { WithT } from 'i18next';
-import { AncmntsTabs } from './AncmntsTabs';
-import { ITEMS_PER_PAGE } from '@src/constants';
-import { userAPI } from '@src/api/api';
-import { i18n } from '@root/i18n';
-import { CardData } from '@root/interfaces/CardData';
+import React, {FC, useEffect, useState} from 'react';
+import {WithT} from 'i18next';
+import {AncmntsTabs} from './AncmntsTabs';
+import {ITEMS_PER_PAGE} from '@src/constants';
+import {userAPI} from '@src/api/api';
+import {i18n} from '@root/i18n';
+import {CardData} from '@root/interfaces/CardData';
 
 const cardData = {
     id: null,
@@ -36,10 +36,10 @@ const cardData = {
     images: [
         {
             url: {
-                default: '',
-            },
-        },
-    ],
+                default: ''
+            }
+        }
+    ]
 };
 
 const initCards = [];
@@ -66,8 +66,10 @@ export const AncmntsTabsContainer: FC<WithT> = (props) => {
     const lang = i18n.language;
 
     const [tabValue, setTabValue] = useState(0);
+
     const [ancmntCurrentPage, setAncmntCurrentPage] = useState(1);
     const [auctionCurrentPage, setAuctionCurrentPage] = useState(1);
+
     const [ancmntCardData, setAncmntCardData] = useState(initialCardData);
     const [auctionCardData, setAuctionCardData] = useState(initialCardData);
 

@@ -1,13 +1,14 @@
 import React, {FC} from 'react';
 import {Container, Grid, Typography} from '@material-ui/core';
 import {SocialsBlock} from '@src/components/elements/socials_block/SocialsBlock';
-import {Link, withTranslation} from '@root/i18n';
+import {Link, useTranslation} from '@root/i18n';
 import {Logo} from '@src/components/elements/icons/logo/Logo';
 import {useStyles} from './useStyles';
-import {WithT} from "i18next";
 
 
-const Footer: FC<WithT> = () => {
+export const Footer: FC = () => {
+    const {t} = useTranslation(['footer']);
+
     const classes = useStyles();
     return (
         <footer className={classes.root}>
@@ -24,7 +25,7 @@ const Footer: FC<WithT> = () => {
                                                     variant="subtitle1"
                                                     color="initial"
                                                 >
-                                                    О Slondo
+                                                    {t('aboutSlondo')}
                                                 </Typography>
                                             </a>
                                         </Link>
@@ -200,7 +201,5 @@ const Footer: FC<WithT> = () => {
                 </Container>
             </div>
         </footer>
-    );
+    )
 };
-
-export default withTranslation(['footer'])(Footer);

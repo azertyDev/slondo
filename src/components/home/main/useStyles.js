@@ -1,4 +1,4 @@
-import { makeStyles } from '@material-ui/core/styles';
+import {makeStyles} from '@material-ui/core/styles';
 
 export const useStyles = makeStyles((theme) => ({
     root: {
@@ -11,15 +11,16 @@ export const useStyles = makeStyles((theme) => ({
                 marginBottom: '40px'
             },
             '& div.main-content': {
-                paddingRight: '20px',
                 '& section.ancmnts-slider-wrapper': {
                     marginBottom: '55px'
+                },
+                [theme.breakpoints.up('lg')]: {
+                    paddingRight: '20px'
                 }
             },
             '& div.right-content': {
                 '& section.faq-wrapper': {
-                    marginTop: '58px',
-                    marginBottom: '223px'
+                    margin: '58px 0 216px'
                 }
             }
         }

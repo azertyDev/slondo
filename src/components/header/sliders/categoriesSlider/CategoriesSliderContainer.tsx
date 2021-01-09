@@ -7,5 +7,5 @@ import {CategoriesSlider} from "@src/components/header/sliders/categoriesSlider/
 
 export const CategoriesSliderContainer: FC<WithT> = (props) => {
     const {categories} = useSelector((store: RootState) => store);
-    return <CategoriesSlider t={props.t} categories={categories}/>
+    return <CategoriesSlider {...props} categories={categories}/>
 };

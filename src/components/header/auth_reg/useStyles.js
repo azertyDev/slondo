@@ -3,6 +3,9 @@ import { makeStyles } from '@material-ui/core/styles';
 export const useStyles = makeStyles((theme) => ({
     root: {
         width: '725px',
+        height: '530px',
+        borderRadius: '6px',
+        margin: '40px auto',
         '& > div.MuiGrid-container': {
             height: '100%',
         },

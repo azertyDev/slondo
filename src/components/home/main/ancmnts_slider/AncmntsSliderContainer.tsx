@@ -1,10 +1,10 @@
-import React, { FC, useEffect, useState } from 'react';
-import { WithT } from 'i18next';
-import { ITEMS_PER_PAGE } from '@src/constants';
-import { userAPI } from '@src/api/api';
-import { i18n } from '@root/i18n';
-import { CardData, InnerCardData } from '@root/interfaces/CardData';
-import { AncmntsSlider } from './AncmntsSlider';
+import React, {FC, useEffect, useState} from 'react';
+import {ITEMS_PER_PAGE} from '@src/constants';
+import {userAPI} from '@src/api/api';
+import {i18n} from '@root/i18n';
+import {CardData, InnerCardData} from '@root/interfaces/CardData';
+import {AncmntsSlider} from './AncmntsSlider';
+
 
 const initCard: InnerCardData = {
     id: null,
@@ -59,8 +59,7 @@ const initialCardData: CardData = {
     },
 };
 
-export const AncmntsSliderContainer: FC<WithT> = (props) => {
-    const { t } = props;
+export const AncmntsSliderContainer: FC = () => {
     const lang = i18n.language;
 
     const [currentPage, setCurrentPage] = useState(1);
@@ -79,7 +78,7 @@ export const AncmntsSliderContainer: FC<WithT> = (props) => {
                 ITEMS_PER_PAGE,
                 currentPage,
                 type,
-                lang,
+                lang
             );
 
             setCardData({
@@ -104,7 +103,6 @@ export const AncmntsSliderContainer: FC<WithT> = (props) => {
 
     return (
         <AncmntsSlider
-            t={t}
             title={'Телефоны и планшеты'}
             list={cardData.data.cards}
         />

@@ -4,9 +4,9 @@ import {Typography} from '@material-ui/core';
 import {CustomSlider} from "@src/components/elements/custom_slider/CustomSlider";
 import {settings} from './sliderSettings';
 import {Link} from "@root/i18n";
-import {useStyles} from './useStyles';
 import {Skeleton} from "@material-ui/lab";
 import {Categories} from "@root/interfaces/Categories";
+import {useStyles} from './useStyles';
 
 
 export const CategoriesSlider: FC<WithT & { categories: Categories }> = (props) => {
@@ -34,7 +34,7 @@ export const CategoriesSlider: FC<WithT & { categories: Categories }> = (props) 
                                                     <img src={category.images.url.default} alt="category"/>
                                                 </div>
                                             </div>
-                                            <Typography>{category.name}</Typography>
+                                            <span>{category.name}</span>
                                         </div>
                                     </a>
                                 </Link>

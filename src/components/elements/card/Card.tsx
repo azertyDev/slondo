@@ -1,5 +1,6 @@
 import React, {FC} from 'react';
 import {Link} from '@root/i18n';
+import {useTranslation} from "react-i18next";
 import {
     Card,
     CardActionArea,
@@ -15,7 +16,6 @@ import {
     SafeIcon,
     SwapIcon
 } from '@src/components/elements/icons';
-import {WithT} from "i18next";
 import {InnerCardData} from "@root/interfaces/CardData";
 import {transformTitle} from "@src/helpers";
 import {useStyles} from './useStyles';
@@ -23,11 +23,12 @@ import {useStyles} from './useStyles';
 
 type CardItemProps = {
     isFetch: boolean;
-} & InnerCardData & WithT;
+} & InnerCardData;
 
 export const CardItem: FC<CardItemProps> = (props) => {
+    const {t} = useTranslation(['common']);
+
     const {
-        t,
         id,
         isFetch,
         images,
@@ -36,13 +37,11 @@ export const CardItem: FC<CardItemProps> = (props) => {
         exchange,
         title,
         price,
-        location,
         created_at,
         currency,
         ads_type,
         region,
-        city,
-        district,
+        city
     } = props;
 
     const translatedTitle = transformTitle(title);
@@ -70,25 +69,19 @@ export const CardItem: FC<CardItemProps> = (props) => {
                                 <div className="card-header">
                                     <div className='title'>
                                         <Typography variant="subtitle2">
-                                            {t(`common:${ads_type}`)}
+                                            {t(ads_type ? ads_type.mark : 'ancmnt')}
                                         </Typography>
                                     </div>
                                     <div className='icons'>
-                                        {!!delivery && (
-                                            <span>
-                                    <DeliveryIcon/>
-                                </span>
-                                        )}
-                                        {!!safe_deal && (
-                                            <span>
-                                    <SafeIcon/>
-                                </span>
-                                        )}
-                                        {!!exchange && (
-                                            <span>
-                                    <SwapIcon/>
-                                </span>
-                                        )}
+                                        {!!delivery && <span>
+                                                <DeliveryIcon/>
+                                            </span>}
+                                        {!!safe_deal && <span>
+                                            <SafeIcon/>
+                                        </span>}
+                                        {!!exchange && <span>
+                                            <SwapIcon/>
+                                        </span>}
                                     </div>
                                 </div>
                             </CardMedia>}
@@ -110,22 +103,10 @@ export const CardItem: FC<CardItemProps> = (props) => {
                                             {price}
                                             <span>{currency.name}</span>
                                         </Typography>
-                                        {/* <div>
-                                            {region.name || city.name || district.name ? (
-                                                <Typography variant="caption" noWrap color="initial" className="card-location">
-                                                    {`${region.name ?? ''}`}
-                                                    {city.name ? `, ${city.name}` : ''}
-                                                    {district.name ? `, ${district.name}` : ''}
-                                                </Typography>
-                                            ) : (
-                                                <Typography variant="subtitle1">Не указано</Typography>
-                                            )}
-                                        </div> */}
-                                        <Typography variant="subtitle1" color="initial">
-                                            {location}
+                                        <Typography variant="caption" noWrap>
+                                            {`${city.name}, ${region.name}`}
                                         </Typography>
-                                        
-                                        <Typography variant="caption" noWrap color="initial" className="card-location">
+                                        <Typography variant="caption">
                                             {created_at}
                                         </Typography>
                                     </>}

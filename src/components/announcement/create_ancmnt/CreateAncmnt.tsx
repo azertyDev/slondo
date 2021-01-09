@@ -22,7 +22,7 @@ type CreateAncmntType = {
     handleSubCategory: (parent, child_id?, name?) => () => void;
 };
 
-export const CreateAncmntCategory: FC<CreateAncmntType> = (props) => {
+export const CreateAncmnt: FC<CreateAncmntType> = (props) => {
     const {
         ancmntType,
         searchTxt,

@@ -1,9 +1,9 @@
 {
   "title": "Asosiy",
   "popularCategories": "Mashhur toifalar",
-  "allAds": "E'lonlar",
-  "allLots": "Savdolar",
-  "ad": "E'lon",
-  "lot": "Lot",
-  "showMore": "Ko'proq ko'rsatish"
+  "allAncmnts": "Hamma e'lonlar",
+  "ancmnts": "E'lonlar",
+  "auctions": "Auktsionlar",
+  "adv_auction": "Murakkab auktsion",
+  "showMore": "Yana ko'rsatish"
 }

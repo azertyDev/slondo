@@ -1,6 +1,8 @@
 {
-    "signIn": "Kirish",
-    "signOut": "Chiqish",
-    "createAd": "E'lon yaratish",
-    "sum": "so'm"
+  "signIn": "Kirish",
+  "signOut": "Chiqish",
+  "createAncmnt": "E'lon yaratish",
+  "sum": "so'm",
+  "ancmnt": "E'lon",
+  "auction": "Auktsion"
 }

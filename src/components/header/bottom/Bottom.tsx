@@ -59,7 +59,7 @@ const Bottom = (props) => {
                                             className='header-button'
                                         >
                                             <Typography variant="subtitle2">
-                                                {t('common:createAd')}
+                                                {t('common:createAncmnt')}
                                             </Typography>
                                             <AddIcon/>
                                         </ButtonComponent>

@@ -1,6 +1,7 @@
-import React from 'react';
+import React, {FC} from 'react';
 
-export const SliderArrowIcon = ({ className }) => {
+
+export const SliderArrowIcon: FC<{ className: string }> = ({className}) => {
     const iconId = Math.random();
     return (
         <svg
@@ -17,15 +18,15 @@ export const SliderArrowIcon = ({ className }) => {
             />
             <defs>
                 <linearGradient
-                    id={iconId}
+                    id={iconId.toString()}
                     x1="-7.51585e-07"
                     y1="8.33333"
                     x2="9.61161"
                     y2="13.3208"
                     gradientUnits="userSpaceOnUse"
                 >
-                    <stop stopColor="#675EAA" />
-                    <stop offset="1" stopColor="#AD66D5" />
+                    <stop stopColor="#675EAA"/>
+                    <stop offset="1" stopColor="#AD66D5"/>
                 </linearGradient>
             </defs>
         </svg>

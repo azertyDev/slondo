@@ -1,9 +1,9 @@
 import React, {FC, useEffect} from 'react';
 import Cookies from 'universal-cookie';
-import {i18n, withTranslation} from '@root/i18n';
+import {i18n, useTranslation} from '@root/i18n';
 import {Container, Modal, Typography} from '@material-ui/core';
-import TopContainer from "./top/TopContainer";
-import BottomHeader from './bottom/Bottom';
+import Top from "./top/TopContainer";
+import Bottom from './bottom/Bottom';
 import {AuthRegPage} from "./auth_reg/AuthRegPage";
 import {useDispatch, useSelector} from "react-redux";
 import {setIsAuthAction, setIsAuthModalOpen} from '@src/redux/slices/authRegSlice';
@@ -11,11 +11,12 @@ import {RootState} from "@src/redux/rootReducer";
 import {ButtonComponent} from "@src/components/elements/button/Button";
 import {fetchCategories} from "@src/redux/slices/categoriesSlice";
 import {fetchLocations} from "@src/redux/slices/locationsSlice";
-import {WithT} from "i18next";
 import {useStyles} from './useStyles';
 
 
-const Header: FC<WithT> = ({t}) => {
+export const Header: FC = () => {
+    const {t} = useTranslation(['header', 'auth_reg', 'common']);
+
     const cookies = new Cookies();
     const isTokenExst = !!cookies.get('token');
 
@@ -43,13 +44,13 @@ const Header: FC<WithT> = ({t}) => {
             <div className='header-wrapper'>
                 <Container maxWidth="xl">
                     <div className='top-wrapper'>
-                        <TopContainer
+                        <Top
                             t={t}
                             handleOpenModal={handleModal(true)}
                         />
                     </div>
                     <div>
-                        <BottomHeader
+                        <Bottom
                             t={t}
                             isAuth={isAuth}
                             handleOpenModal={handleModal(true)}
@@ -80,5 +81,3 @@ const Header: FC<WithT> = ({t}) => {
         </header>
     )
 };
-
-export default withTranslation(['header', 'auth_reg', 'common'])(Header);

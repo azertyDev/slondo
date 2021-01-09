@@ -102,8 +102,8 @@ export const useStyles = makeStyles((theme) => ({
                                     ? 'rgba(173, 102, 213, .65)'
                                     : ancmntType === 'adv_auction'
                                     ? 'rgba(242, 153, 74, .65)'
-                                    : 'rgba(136, 202, 236, .65)',
-                        },
+                                    : 'rgba(136, 202, 236, .65)'
+                        }
                     },
                     '& > div.icons': {
                         '&:last-child': {
@@ -120,13 +120,13 @@ export const useStyles = makeStyles((theme) => ({
                                 marginRight: '5px',
                                 '& > svg': {
                                     '& > path': {
-                                        fill: '#838383',
-                                    },
-                                },
-                            },
-                        },
-                    },
-                },
+                                        fill: '#838383'
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
             },
             '& h6.MuiTypography-subtitle1': {
                 [theme.breakpoints.down('sm')]: {
@@ -141,10 +141,10 @@ export const useStyles = makeStyles((theme) => ({
                     },
                     '& > span.MuiTypography-caption': {
                         color: '#838383',
-                    },
-                },
-            },
-        },
+                    }
+                }
+            }
+        }
     },
     skeleton: {
         height: '240px',
