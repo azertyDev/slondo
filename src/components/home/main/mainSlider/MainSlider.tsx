@@ -1,4 +1,4 @@
-import {CustomSlider} from '@root/src/components/elements/custom_slider/CustomSlider';
+import {CustomSlider} from '@src/components/elements/custom_slider/CustomSlider';
 import React, {FC} from 'react';
 import {settings} from './sliderSettings';
 import {useStyles} from './useStyles';

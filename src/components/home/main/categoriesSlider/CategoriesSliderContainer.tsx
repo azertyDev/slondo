@@ -2,7 +2,7 @@ import React, {FC} from 'react';
 import {WithT} from "i18next";
 import {useSelector} from "react-redux";
 import {RootState} from "@src/redux/rootReducer";
-import {CategoriesSlider} from "@src/components/header/sliders/categoriesSlider/CategoriesSlider";
+import {CategoriesSlider} from "@src/components/home/main/categoriesSlider/CategoriesSlider";
 
 
 export const CategoriesSliderContainer: FC<WithT> = (props) => {

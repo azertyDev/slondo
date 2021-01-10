@@ -8,8 +8,8 @@ import {
     Grid,
     Container,
 } from '@material-ui/core';
-import {MainSlider} from '@src/components/header/sliders/mainSlider/MainSlider';
-import {CategoriesSliderContainer} from '@src/components/header/sliders/categoriesSlider/CategoriesSliderContainer';
+import {MainSlider} from '@src/components/home/main/mainSlider/MainSlider';
+import {CategoriesSliderContainer} from '@src/components/home/main/categoriesSlider/CategoriesSliderContainer';
 import {AncmntsSliderContainer} from "./ancmnts_slider/AncmntsSliderContainer";
 import {AncmntsTabsContainer} from './ancmnts_tabs/AncmntsTabsContainer';
 import {ScrollTop} from '@src/components/elements/scroll_top/ScrollTop';
