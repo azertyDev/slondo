@@ -87,9 +87,11 @@ export const AncmntsTabsContainer: FC<WithT> = (props) => {
     };
 
     useEffect(() => {
-        setCardData(ancmntCardData, setAncmntCardData, ancmntCurrentPage, 'ad');
-        setCardData(auctionCardData, setAuctionCardData, auctionCurrentPage, 'lot');
-    }, []);
+        ancmntCurrentPage !== 1 && setAncmntCurrentPage(1);
+        auctionCurrentPage !== 1 && setAuctionCurrentPage(1);
+        setCardData(ancmntCardData, setAncmntCardData, 1, 'ad');
+        setCardData(auctionCardData, setAuctionCardData, 1, 'lot');
+    }, [lang]);
 
     return (
         <AncmntsTabs

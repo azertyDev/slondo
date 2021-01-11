@@ -26,13 +26,11 @@ const initCard = {
         id: null,
         name: '',
     },
-    images: [
-        {
-            url: {
-                default: ''
-            }
+    images: [{
+        url: {
+            default: ''
         }
-    ],
+    }],
     delivery: null,
     exchange: null,
     ads_type: {
@@ -96,7 +94,7 @@ export const AncmntsSliderContainer: FC = () => {
 
     useEffect(() => {
         setFetchedCardData();
-    }, [currentPage]);
+    }, [currentPage, lang]);
 
     return (
         <AncmntsSlider

@@ -17,7 +17,7 @@ import {
     SwapIcon
 } from '@src/components/elements/icons';
 import {InnerCardData} from "@root/interfaces/CardData";
-import {transformTitle} from "@src/helpers";
+import {pricePrettier, transformTitle} from "@src/helpers";
 import {useStyles} from './useStyles';
 
 
@@ -100,8 +100,8 @@ export const CardItem: FC<CardItemProps> = (props) => {
                                             {title}
                                         </Typography>
                                         <Typography variant="h5" color="initial">
-                                            {price}
-                                            <span>{currency.name}</span>
+                                            {pricePrettier(price)}
+                                            <span> {t(currency.name)}</span>
                                         </Typography>
                                         <Typography variant="caption" noWrap>
                                             {`${city.name}, ${region.name}`}
@@ -117,4 +117,4 @@ export const CardItem: FC<CardItemProps> = (props) => {
             </Link>
         </div>
     )
-}
+};
