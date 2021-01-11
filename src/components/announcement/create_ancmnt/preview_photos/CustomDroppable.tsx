@@ -1,10 +1,18 @@
-import React, {Fragment} from "react";
+import React, {FC, Fragment} from "react";
 import {Grid} from "@material-ui/core";
 import {Draggable, Droppable} from "react-beautiful-dnd";
 import {ButtonComponent} from "@src/components/elements/button/Button";
+import {FileType} from "@root/interfaces/Announcement";
 
 
-export const CustomDroppable = (props) => {
+type CustomDroppableProps = {
+    droppableId: string;
+    files: FileType[];
+    isPreview: boolean;
+    removeFile: (url) => () => void;
+};
+
+export const CustomDroppable: FC<CustomDroppableProps> = (props) => {
     const {droppableId, files, isPreview, removeFile} = props;
 
     return (
@@ -47,7 +55,7 @@ export const CustomDroppable = (props) => {
                                                     {...provided.dragHandleProps}
                                                 >
                                                     <img
-                                                        src={url}
+                                                        src={url as string}
                                                         style={{
                                                             width: '160px',
                                                             height: '120px',

@@ -20,7 +20,7 @@ export const useStyles = makeStyles((theme) => ({
             },
             '& div.right-content': {
                 '& section.faq-wrapper': {
-                    margin: '58px 0 216px'
+                    margin: '58px 0 217px'
                 }
             }
         }
@@ -38,14 +38,14 @@ export const useStyles = makeStyles((theme) => ({
                 width: '235px',
                 padding: '10px 25px',
                 marginBottom: '8px',
-                color: '#fff',
+                color: theme.palette.primary.white,
                 backgroundColor: theme.palette.primary.createAdBtnColor,
                 borderRadius: '12px',
                 '& > h6': {
                     fontSize: '1.15rem',
                     textAlign: 'center',
-                },
-            },
-        },
-    },
+                }
+            }
+        }
+    }
 }));

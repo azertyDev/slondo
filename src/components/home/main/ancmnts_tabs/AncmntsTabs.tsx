@@ -32,6 +32,9 @@ export const AncmntsTabs: FC<MainContentProps> = (props) => {
         auctionCardData,
     } = props;
 
+    const isAncmntsExist = ancmntCardData.data.total > ancmntCardData.data.cards.length && tabValue === 0;
+    const isAuctionsExist = auctionCardData.data.total > auctionCardData.data.cards.length && tabValue === 1;
+
     const classes = useStyles();
     return (
         <div className={classes.root}>
@@ -75,9 +78,7 @@ export const AncmntsTabs: FC<MainContentProps> = (props) => {
                         />}
                 </CustomTabPanel>
             </div>
-            {(ancmntCardData.data.total > ancmntCardData.data.cards.length && tabValue === 0)
-            ||
-            (auctionCardData.data.total > auctionCardData.data.cards.length && tabValue === 1)
+            {(isAncmntsExist || isAuctionsExist)
             && <Grid container className={classes.showMoreContainer}>
                 <Grid item xs={12} className="show-more-block">
                     {ancmntCardData.isShowMoreFetch || auctionCardData.isShowMoreFetch

@@ -2,33 +2,38 @@ import React, {FC} from 'react';
 import {Typography} from '@material-ui/core';
 import {CustomSlider} from '@src/components/elements/custom_slider/CustomSlider';
 import {CardItem} from '@src/components/elements/card/Card';
-import {InnerCardData} from '@root/interfaces/CardData';
+import {CardData} from '@root/interfaces/CardData';
 import {settings} from "./sliderSettings";
 import {useStyles} from './useStyles';
 
 
-export const AncmntsSlider: FC<{ title: string; list: InnerCardData[] }> = (props) => {
-    const {list, title} = props;
+export const AncmntsSlider: FC<{ title: string; cardData: CardData }> = ({cardData, title}) => {
+    const {isFetch, error, data: {cards}} = cardData;
 
     const classes = useStyles();
     return (
         <div className={classes.root}>
-            <Typography className="title" variant="h2">
-                {title}
-            </Typography>
-            <div className="slider">
-                <CustomSlider
-                    {...settings}
-                >
-                    {list.map((card) => (
-                        <CardItem
-                            isFetch={false}
-                            key={card.id}
-                            {...card}
-                        />
-                    ))}
-                </CustomSlider>
-            </div>
+            {!!error
+                ? <Typography className="error-text">{error}</Typography>
+                : <>
+                    <Typography className="title" variant="h2">
+                        {title}
+                    </Typography>
+                    <div className="slider">
+                        <CustomSlider
+                            {...settings}
+                        >
+                            {cards.map((card) => (
+                                <CardItem
+                                    isFetch={isFetch}
+                                    key={card.id}
+                                    {...card}
+                                />
+                            ))}
+                        </CustomSlider>
+                    </div>
+                </>
+            }
         </div>
     )
 };

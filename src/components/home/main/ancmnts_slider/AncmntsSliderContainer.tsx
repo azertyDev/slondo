@@ -2,11 +2,13 @@ import React, {FC, useEffect, useState} from 'react';
 import {ITEMS_PER_PAGE} from '@src/constants';
 import {userAPI} from '@src/api/api';
 import {i18n} from '@root/i18n';
-import {CardData, InnerCardData} from '@root/interfaces/CardData';
+import {CardData} from '@root/interfaces/CardData';
 import {AncmntsSlider} from './AncmntsSlider';
+import {setErrorMsgAction} from "@src/redux/slices/errorSlice";
+import {useDispatch} from "react-redux";
 
 
-const initCard: InnerCardData = {
+const initCard = {
     id: null,
     title: '',
     safe_deal: null,
@@ -24,33 +26,25 @@ const initCard: InnerCardData = {
         id: null,
         name: '',
     },
-    district: {
-        id: null,
-        name: '',
-    },
     images: [
         {
             url: {
-                default: '',
-            },
-        },
+                default: ''
+            }
+        }
     ],
     delivery: null,
     exchange: null,
     ads_type: {
         id: null,
         name: '',
-        mark: '',
-    },
+        mark: ''
+    }
 };
 
-const initCards: InnerCardData[] = [];
+export const initCards = Array.from({length: ITEMS_PER_PAGE}).map(() => initCard);
 
-for (let i = 1; i <= 16; i++) {
-    initCards.push(initCard);
-}
-
-const initialCardData: CardData = {
+const initCardData: CardData = {
     isFetch: false,
     error: null,
     data: {
@@ -60,10 +54,12 @@ const initialCardData: CardData = {
 };
 
 export const AncmntsSliderContainer: FC = () => {
+    const dispatch = useDispatch();
+
     const lang = i18n.language;
 
     const [currentPage, setCurrentPage] = useState(1);
-    const [cardData, setCardData] = useState(initialCardData);
+    const [cardData, setCardData] = useState(initCardData);
 
     const type = 'lot';
 
@@ -90,6 +86,7 @@ export const AncmntsSliderContainer: FC = () => {
                 },
             });
         } catch (e) {
+            dispatch(setErrorMsgAction(e.message));
             setCardData({
                 ...cardData,
                 error: e.message,
@@ -104,7 +101,7 @@ export const AncmntsSliderContainer: FC = () => {
     return (
         <AncmntsSlider
             title={'Телефоны и планшеты'}
-            list={cardData.data.cards}
+            cardData={cardData}
         />
     );
 };

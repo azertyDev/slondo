@@ -8,8 +8,8 @@ import {
     Grid,
     Container,
 } from '@material-ui/core';
-import {MainSlider} from '@src/components/home/main/mainSlider/MainSlider';
-import {CategoriesSliderContainer} from '@src/components/home/main/categoriesSlider/CategoriesSliderContainer';
+import {MainSlider} from './mainSlider/MainSlider';
+import {CategoriesSlider} from './categoriesSlider/CategoriesSlider';
 import {AncmntsSliderContainer} from "./ancmnts_slider/AncmntsSliderContainer";
 import {AncmntsTabsContainer} from './ancmnts_tabs/AncmntsTabsContainer';
 import {ScrollTop} from '@src/components/elements/scroll_top/ScrollTop';
@@ -34,7 +34,7 @@ export const Main: FC = () => {
                 </div>
                 <Container maxWidth="xl" className='content-wrapper'>
                     <div className='categories-slider-wrapper'>
-                        <CategoriesSliderContainer t={t}/>
+                        <CategoriesSlider t={t}/>
                     </div>
                     <Grid container>
                         <Grid item lg={9} xs={12} className='main-content'>

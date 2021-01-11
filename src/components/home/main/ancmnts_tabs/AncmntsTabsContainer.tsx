@@ -5,50 +5,12 @@ import {ITEMS_PER_PAGE} from '@src/constants';
 import {userAPI} from '@src/api/api';
 import {i18n} from '@root/i18n';
 import {CardData} from '@root/interfaces/CardData';
+import {initCards} from '../ancmnts_slider/AncmntsSliderContainer';
+import {setErrorMsgAction} from "@src/redux/slices/errorSlice";
+import {useDispatch} from "react-redux";
 
-const cardData = {
-    id: null,
-    title: '',
-    cardType: '',
-    safe_deal: null,
-    price: null,
-    currency: {
-        id: null,
-        name: '',
-    },
-    city: {
-        id: null,
-        name: '',
-    },
-    region: {
-        id: null,
-        name: '',
-    },
-    ads_type: {
-        id: null,
-        name: '',
-        mark: '',
-    },
-    delivery: null,
-    exchange: null,
-    created_at: '',
-    location: '',
-    images: [
-        {
-            url: {
-                default: ''
-            }
-        }
-    ]
-};
 
-const initCards = [];
-
-for (let i = 1; i <= 16; i++) {
-    initCards.push(cardData);
-}
-
-const initialCardData: CardData = {
+const initCardData: CardData = {
     isFetch: false,
     isShowMoreFetch: false,
     error: null,
@@ -63,6 +25,8 @@ const fetchCardData = async (itemsPerPage, page, type, lang) => {
 };
 
 export const AncmntsTabsContainer: FC<WithT> = (props) => {
+    const dispatch = useDispatch();
+
     const lang = i18n.language;
 
     const [tabValue, setTabValue] = useState(0);
@@ -70,8 +34,8 @@ export const AncmntsTabsContainer: FC<WithT> = (props) => {
     const [ancmntCurrentPage, setAncmntCurrentPage] = useState(1);
     const [auctionCurrentPage, setAuctionCurrentPage] = useState(1);
 
-    const [ancmntCardData, setAncmntCardData] = useState(initialCardData);
-    const [auctionCardData, setAuctionCardData] = useState(initialCardData);
+    const [ancmntCardData, setAncmntCardData] = useState(initCardData);
+    const [auctionCardData, setAuctionCardData] = useState(initCardData);
 
     const setCardData = async (state, setState, currentPage, type, isShowMore = false) => {
         try {
@@ -98,6 +62,7 @@ export const AncmntsTabsContainer: FC<WithT> = (props) => {
                 },
             });
         } catch (e) {
+            dispatch(setErrorMsgAction(e.message));
             setState({
                 ...state,
                 error: e.message,

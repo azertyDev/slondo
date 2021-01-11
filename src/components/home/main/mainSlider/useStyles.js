@@ -8,7 +8,6 @@ export const useStyles = makeStyles(() => ({
         padding: '0 19px',
         margin: '0 auto',
         '& div.slick-slider': {
-            zIndex: 10,
             '& img': {
                 width: '100%',
                 borderRadius: '5px'
@@ -19,7 +18,6 @@ export const useStyles = makeStyles(() => ({
             '& button.slick-arrow': {
                 position: 'absolute',
                 top: 'calc(50% - 25px)',
-                zIndex: 10
             },
             '& button.slick-prev': {
                 left: '20px'

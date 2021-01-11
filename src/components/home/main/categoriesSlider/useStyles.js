@@ -7,11 +7,7 @@ export const useStyles = makeStyles((theme) => ({
             textDecoration: 'none',
         },
         '& > h2.title': {
-            marginBottom: 21,
-            fontWeight: 400,
-            [theme.breakpoints.down('sm')]: {
-                fontSize: '1.83rem',
-            },
+            marginBottom: '21px'
         },
         '& div.category-slider': {
             position: 'relative',
@@ -42,19 +38,17 @@ export const useStyles = makeStyles((theme) => ({
                     flexDirection: 'column',
                     alignItems: 'center',
                     justifyContent: 'center',
-                    height: '188px',
                     color: theme.palette.primary.black,
-                    '& span': {
-                        padding: '0 2px',
+                    '& > span.category-name': {
                         textAlign: 'center',
-                        fontSize: '1.125rem'
+                        fontSize: '1.125rem',
                     },
                     '& div.bg-layer': {
                         position: 'relative',
-                        background: 'linear-gradient(90deg, #f0f0f0 0%, #eaeaeb 67.06%, #e4e4e6 100%)',
                         width: '132px',
                         height: '132px',
-                        marginBottom: '25px',
+                        marginBottom: '20px',
+                        background: 'linear-gradient(90deg, #f0f0f0 0%, #eaeaeb 67.06%, #e4e4e6 100%)',
                         borderRadius: '100px'
                     },
                     '& div.medium': {

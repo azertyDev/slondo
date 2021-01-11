@@ -1,29 +1,33 @@
-import {createAsyncThunk, createSlice} from '@reduxjs/toolkit'
-import {Categories, CategoryType} from '@root/interfaces/Categories'
+import {createAsyncThunk, createSlice} from '@reduxjs/toolkit';
+import {Categories, CategoryType} from '@root/interfaces/Categories';
 import {userAPI} from "@src/api/api";
 
+
+const initCategory = {
+    id: null,
+    name: '',
+    images: {
+        id: null,
+        url: {
+            default: ''
+        }
+    },
+    icons: {
+        id: null,
+        url: {
+            default: ''
+        }
+    },
+    childs: [],
+    has_auction: null
+};
+
+const initCategories = Array.from({length: 11}).map(() => initCategory);
 
 const initialState: Categories = {
     isFetch: false,
     error: null,
-    list: [{
-        id: null,
-        name: '',
-        images: {
-            id: null,
-            url: {
-                default: ''
-            }
-        },
-        icons: {
-            id: null,
-            url: {
-                default: ''
-            }
-        },
-        childs: [],
-        has_auction: null
-    }],
+    list: initCategories,
 };
 
 // Async thunk

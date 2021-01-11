@@ -3,8 +3,7 @@ import {makeStyles} from '@material-ui/core/styles';
 export const useStyles = makeStyles(() => ({
     root: {
         '& h2.title': {
-            marginBottom: '15px',
-            fontWeight: '400'
+            marginBottom: '15px'
         },
         '& div.slider': {
             margin: '0 -6px',

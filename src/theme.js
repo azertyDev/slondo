@@ -67,9 +67,6 @@ const theme = createMuiTheme({
             lineHeight: 1,
             color: '#4E4E4E',
         },
-        h2: {
-            fontSize: '2.25rem'
-        },
         allVariants: {
             color: '#4E4E4E',
             lineHeight: 1,
@@ -137,6 +134,14 @@ const theme = createMuiTheme({
             }
         }
     },
-})
+});
+
+theme.typography.h2 = {
+    fontSize: '2.25rem',
+    fontWeight: 400,
+    [theme.breakpoints.down('sm')]: {
+        fontSize: '1.83rem',
+    }
+};
 
 export default theme;
