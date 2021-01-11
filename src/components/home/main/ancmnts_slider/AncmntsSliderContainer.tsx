@@ -47,8 +47,8 @@ const initCardData: CardData = {
     error: null,
     data: {
         cards: initCards,
-        total: null,
-    },
+        total: null
+    }
 };
 
 export const AncmntsSliderContainer: FC = () => {
@@ -81,7 +81,7 @@ export const AncmntsSliderContainer: FC = () => {
                 data: {
                     cards: newData.data,
                     total: newData.total,
-                },
+                }
             });
         } catch (e) {
             dispatch(setErrorMsgAction(e.message));
