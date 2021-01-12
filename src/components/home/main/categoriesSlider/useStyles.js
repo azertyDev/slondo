@@ -1,5 +1,4 @@
-import {makeStyles} from '@material-ui/core/styles';
-
+import { makeStyles } from '@material-ui/core/styles';
 
 export const useStyles = makeStyles((theme) => ({
     root: {
@@ -7,7 +6,7 @@ export const useStyles = makeStyles((theme) => ({
             textDecoration: 'none',
         },
         '& > h2.title': {
-            marginBottom: '21px'
+            marginBottom: '21px',
         },
         '& div.category-slider': {
             position: 'relative',
@@ -15,24 +14,30 @@ export const useStyles = makeStyles((theme) => ({
                 '& > button.slick-prev, & > button.slick-next': {
                     position: 'absolute',
                     top: '23%',
-                    zIndex: 10
+                    zIndex: 10,
                 },
                 '& button.slick-prev': {
-                    left: '-12px'
+                    left: '-12px',
                 },
                 '& button.slick-next': {
-                    right: '-12px'
+                    right: '-12px',
                 },
             },
             '& button.slick-disabled': {
-                display: 'none'
-            }
+                display: 'none',
+            },
         },
         '& div.slick-slide': {
             '& > div': {
                 width: 'auto !important',
                 display: 'flex',
                 justifyContent: 'center',
+                '& div.category-skeleton': {
+                    display: 'flex !important',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    flexDirection: 'column',
+                },
                 '& div.category': {
                     display: 'flex',
                     flexDirection: 'column',
@@ -48,8 +53,9 @@ export const useStyles = makeStyles((theme) => ({
                         width: '132px',
                         height: '132px',
                         marginBottom: '20px',
-                        background: 'linear-gradient(90deg, #f0f0f0 0%, #eaeaeb 67.06%, #e4e4e6 100%)',
-                        borderRadius: '100px'
+                        background:
+                            'linear-gradient(90deg, #f0f0f0 0%, #eaeaeb 67.06%, #e4e4e6 100%)',
+                        borderRadius: '100px',
                     },
                     '& div.medium': {
                         position: 'absolute',
@@ -59,10 +65,10 @@ export const useStyles = makeStyles((theme) => ({
                             'linear-gradient(90deg, #d7d6e3 -18.43%, #fafafa 147.2%)',
                         width: '127px',
                         height: '127px',
-                        borderRadius: '100px'
-                    }
-                }
-            }
-        }
-    }
+                        borderRadius: '100px',
+                    },
+                },
+            },
+        },
+    },
 }));

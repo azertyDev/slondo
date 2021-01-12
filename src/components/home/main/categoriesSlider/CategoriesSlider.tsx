@@ -30,9 +30,9 @@ export const CategoriesSlider: FC<WithT> = ({t}) => {
                         ? <Typography className="error-text">{error}</Typography>
                         : list.map(category => (
                             isFetch
-                                ? <div className='category' key={category.id}>
-                                    <Skeleton variant="circle" width={100} height={100}/>
-                                    <Skeleton variant="text" width={100} height={16}/>
+                                ? <div className='category-skeleton' key={category.id}>
+                                    <Skeleton variant="circle" width={127} height={127} style={{marginBottom: 20}}/>
+                                    <Skeleton variant="text" width={127} height={25}/>
                                 </div>
                                 : <Link href="#" key={category.id}>
                                     <a title={category.name}>
