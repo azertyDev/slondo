@@ -8,7 +8,7 @@ import {CategoryType} from "@root/interfaces/Categories";
 // const {token} = cookies.get('token') || {token: ''};
 
 const amazonServer = 'http://54.205.72.116/api/';
-// const localServer = 'http://192.168.1.60/slondo/public/api/';
+const localServer = 'http://192.168.1.60/slondo/public/api/';
 
 const instance = Axios.create({
     withCredentials: true,
@@ -38,18 +38,18 @@ export const userAPI = {
             });
     },
     getCategories: (lang: string): Promise<CategoryType[]> => {
-        return instance.get(`categories/main?lang=${lang}`)
+        return instance.get(`categories/all?lang=${lang}`)
             .then(res => res.data)
             .catch(err => {
-                throw err
-            })
+                throw err;
+            });
     },
     getAdDataForCreateAncmnt: (ctgryID: number, subCtgryID: number, lang: string): Promise<unknown> => {
         return instance.get(`subcategory?parent_id=${ctgryID}&lang=${lang}&child_id=${subCtgryID}`)
             .then(res => res.data)
             .catch(err => {
-                throw err
-            })
+                throw err;
+            });
     },
     getCardData: (itemsPerPage: number, page: number, type: string, lang: string): Promise<any> => {
         return instance.get(`ads/all?itemsPerPage=${itemsPerPage}&page=${page}&type=${type}&lang=${lang}`)
@@ -63,27 +63,27 @@ export const userAPI = {
             .then((res) => res.data)
             .catch((err) => {
                 throw err;
-            })
+            });
     },
     getLocations: (lang: string): Promise<LocationsDataTypes> => {
         return instance.get(`location?lang=${lang}`)
             .then(res => res.data)
             .catch(err => {
                 throw err
-            })
+            });
     },
     createAdvrt: (data: any): Promise<LocationsDataTypes> => {
         return instance.post(`regular/ads/new`, data)
             .then(res => res.data)
             .catch(err => {
                 throw err
-            })
+            });
     },
     getAncmntsTypes: (lang: string): Promise<any> => {
         return instance.get(`ads/type?lang=${lang}`)
             .then(res => res.data)
             .catch(err => {
                 throw err
-            })
+            });
     }
 };

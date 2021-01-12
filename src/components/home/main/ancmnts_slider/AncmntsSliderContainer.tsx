@@ -26,13 +26,11 @@ const initCard = {
         id: null,
         name: '',
     },
-    images: [
-        {
-            url: {
-                default: ''
-            }
+    images: [{
+        url: {
+            default: ''
         }
-    ],
+    }],
     delivery: null,
     exchange: null,
     ads_type: {
@@ -49,8 +47,8 @@ const initCardData: CardData = {
     error: null,
     data: {
         cards: initCards,
-        total: null,
-    },
+        total: null
+    }
 };
 
 export const AncmntsSliderContainer: FC = () => {
@@ -83,7 +81,7 @@ export const AncmntsSliderContainer: FC = () => {
                 data: {
                     cards: newData.data,
                     total: newData.total,
-                },
+                }
             });
         } catch (e) {
             dispatch(setErrorMsgAction(e.message));
@@ -96,7 +94,7 @@ export const AncmntsSliderContainer: FC = () => {
 
     useEffect(() => {
         setFetchedCardData();
-    }, [currentPage]);
+    }, [currentPage, lang]);
 
     return (
         <AncmntsSlider

@@ -67,3 +67,6 @@ export const prepareCreateAncmnt = (data: any, adParams?: any): any => (
         return acc;
     }, {})
 );
+
+export const pricePrettier = (price: number): string =>
+    price && price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ");
