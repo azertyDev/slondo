@@ -37,9 +37,9 @@ jobs:
         aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         aws-region: us-east-1
 
-    - name: SlondoUz
-      id: commit-status
-      uses: aws-actions/amazon-ecr-login@v1
+    - name: Login to Amazon ECR
+      id: login-ecr
+      uses: aws-actions/amazon-ecr-SlondoUz@v1
 
     - name: ecs-slondo-deploy
       id: build-image
