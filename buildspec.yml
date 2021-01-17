@@ -14,5 +14,4 @@ phases:
       - npm start
 artifacts:
       files:
-        - index.js
-        - package.json
+        - '**/*'
