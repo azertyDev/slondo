@@ -39,7 +39,7 @@ export const CategoriesSlider: FC<WithT> = ({t}) => {
                                         <div className='category'>
                                             <div className="bg-layer">
                                                 <div className="medium">
-                                                    <img src={category.images.url.default} alt={category.name}/>
+                                                    <img src={category.image.url.default} alt={category.name}/>
                                                 </div>
                                             </div>
                                             <span className='category-name'>{category.name}</span>

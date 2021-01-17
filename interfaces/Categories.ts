@@ -7,27 +7,26 @@ export interface Categories {
     list: CategoryType[];
 }
 
-export type CategoryType = IdNameType & {
-    images: {
-        id: number,
+export type CategoryType = {
+    image: {
         url: {
-            default: string
+            default: string;
         }
     },
-    icons: {
-        id: number,
-        url: {
-            default: string,
-        }
+    icon: {
+        url: string;
     },
-    childs: (IdNameType & {
-        parent: any,
-        image: {
-            url: string,
-        }
-    })[],
-    has_auction: number,
-}
+    model: ModelType[];
+    has_auction: number;
+} & IdNameType;
+
+export type ModelType = {
+    parents: IdNameType[];
+    image: {
+        url: string
+    };
+    type: IdNameType[];
+} & IdNameType;
 
 export interface CategoryIDs {
     ctgryID: number,
@@ -35,7 +34,6 @@ export interface CategoryIDs {
     lang: string,
 }
 
-export type SubCategoryType = IdNameType & {
-    data: any,
-    parent: IdNameType
-}
+export type SubLvlCtgrsType = {
+    parents: IdNameType[]
+} & IdNameType

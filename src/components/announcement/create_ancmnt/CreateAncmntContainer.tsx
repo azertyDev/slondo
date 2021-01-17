@@ -8,7 +8,6 @@ import {MainLayout} from "@src/components/MainLayout";
 import {WithT} from "i18next";
 import {
     CreateAncmntState,
-    AncmntStateTypes,
     AncmntType
 } from "@root/interfaces/Announcement";
 import {AncmntFormContainer} from "./ancmnt_form/AncmntFormContainer";
@@ -17,11 +16,12 @@ import {AncmntTypesPage} from "@src/components/announcement/ancmnt_types_page/An
 import {categoryDataNormalization, categorySearchHelper} from "@src/helpers";
 import {AncmntHeader} from './ancmnt_header/AncmntHeader';
 import {SuccessAncmnt} from "@src/components/announcement/create_ancmnt/ancmnt_form/success_ancmnt/SuccessAncmnt";
+import {SubLvlCtgrsType} from "@root/interfaces/Categories";
 
 
 const steps = ['Тип объявления', 'Категория', 'Заполнение', 'Проверка'];
 
-const initAncmntTypes = {
+const initAncmntTypeStates = {
     isFetch: false,
     types: [
         {
@@ -99,7 +99,7 @@ const initAncmntTypes = {
 export const CreateAncmntContainer: FC<WithT> = ({t}) => {
     const lang = i18n.language;
 
-    const initAncmntType = {
+    const initAncmntTypeState = {
         id: null,
         name: '',
         currency: [{
@@ -115,47 +115,40 @@ export const CreateAncmntContainer: FC<WithT> = ({t}) => {
         }
     };
 
-    const initCreateAncmntState: CreateAncmntState = {
+    const initCreateAncmntState = {
         isFetch: false,
         error: null,
         category: {
             id: null,
             name: '',
-            images: {
-                id: null,
+            image: {
                 url: {
                     default: ''
                 }
             },
-            icons: {
+            icon: {
                 id: null,
-                url: {
-                    default: ''
-                }
+                url: ''
             },
-            childs: [],
+            model: [],
             has_auction: null,
-        },
-        subCategory: {
-            id: null,
-            name: '',
-            data: {},
-            parent: {
-                id: null,
-                name: ''
-            }
         }
     };
 
-    const categoriesList = useSelector(({categories}: RootState) => categoryDataNormalization(categories.list));
+    const categoriesList = useSelector(({categories}: RootState) => {
+        return categoryDataNormalization(categories.list);
+        // return categories.list;
+    });
+
     const dispatch = useDispatch();
 
-    const [ancmntTypes, setAncmntTypes] = useState<AncmntStateTypes>(initAncmntTypes);
+    const [ancmntType, setAncmntType] = useState<AncmntType>(initAncmntTypeState);
 
-    const [ancmntType, setAncmntType] = useState<AncmntType>(initAncmntType);
+    const [ancmntTypes, setAncmntTypes] = useState<{ isFetch: boolean, types: AncmntType[] }>(initAncmntTypeStates);
 
     const [createAncmnt, setCreateAncmnt] = useState<CreateAncmntState>(initCreateAncmntState);
-    const {subCategory} = createAncmnt;
+
+    const [subLvlCtgrs, setSubLvlCtgrs] = useState<SubLvlCtgrsType[]>([]);
 
     const [activeStep, setActiveStep] = useState(0);
 
@@ -196,44 +189,38 @@ export const CreateAncmntContainer: FC<WithT> = ({t}) => {
         setSearchTxt(target.value);
     };
 
-    const setFoundCategoriesChilds = () => {
-        const childs = !!searchTxt
-            ? categorySearchHelper(searchTxt, categoriesList)
-            : [];
+    // const setFoundCategoriesChilds = () => {
+    //     const model = !!searchTxt
+    //         ? categorySearchHelper(searchTxt, categoriesList)
+    //         : [];
+    //
+    //     setCreateAncmnt({
+    //         ...createAncmnt,
+    //         category: {
+    //             ...initCreateAncmntState.category,
+    //             model
+    //         }
+    //     });
+    // };
 
-        setCreateAncmnt({
-            ...createAncmnt,
-            category: {
-                ...initCreateAncmntState.category,
-                childs
-            }
-        });
-    };
-
-    const handleCategory = (category) => async () => {
+    const handleCategory = (category) => () => {
         try {
-            if (category.id === 11 || category.id === 12) {
-                setCreateAncmnt({
-                    ...createAncmnt,
-                    subCategory: {
-                        ...subCategory,
-                        parent: {
-                            id: category.id,
-                            name: category.name
-                        }
-                    }
-                });
-                handleNextStep();
-            } else {
-                setCreateAncmnt({
-                    ...createAncmnt,
-                    category
-                });
+            let list = [];
+            if (category.type) {
+                list = category.type;
+            } else if (category.model) {
+                list = category.model;
+                setCreateAncmnt(category)
             }
+            setSubLvlCtgrs(list);
         } catch (e) {
             dispatch(setErrorMsgAction(e.message));
             setCreateAncmnt({...createAncmnt, isFetch: false});
         }
+    };
+
+    const handleBackCtgr = () => {
+        setSubLvlCtgrs(createAncmnt.category.model);
     };
 
     const handleSubCategory = (parent, child_id, name) => async () => {
@@ -243,17 +230,17 @@ export const CreateAncmntContainer: FC<WithT> = ({t}) => {
                 isFetch: true,
             });
 
-            const data = await userAPI.getAdDataForCreateAncmnt(parent.id, child_id, lang);
+            const data = await userAPI.getDataForCreateAncmnt(parent.id, child_id, lang);
 
             setCreateAncmnt({
                 ...createAncmnt,
                 isFetch: false,
-                subCategory: {
-                    id: child_id,
-                    name,
-                    data,
-                    parent
-                }
+                // subCategory: {
+                //     id: child_id,
+                //     name,
+                //     data,
+                //     parent
+                // }
             });
             handleNextStep();
         } catch (e) {
@@ -270,7 +257,7 @@ export const CreateAncmntContainer: FC<WithT> = ({t}) => {
     const handleResetAncmntType = () => {
         handleResetSteps();
         handleResetCreateData();
-        setAncmntType(initAncmntType);
+        setAncmntType(initAncmntTypeState);
     };
 
     const handleBackBtn = () => {
@@ -285,42 +272,42 @@ export const CreateAncmntContainer: FC<WithT> = ({t}) => {
     };
 
     const setCreateAncmntByLang = async () => {
-        const [ctgrByLang] = categoriesList.filter(ctgr => ctgr.id === subCategory.parent.id);
-        ctgrByLang && setCreateAncmnt({
-            ...createAncmnt,
-            category: ctgrByLang,
-        });
-        if (subCategory.id !== null) {
-            const [subCtgrByLang] = ctgrByLang.childs.filter(subCtgr => subCtgr.id === subCategory.id);
-
-            try {
-                setCreateAncmnt({
-                    ...createAncmnt,
-                    isFetch: true
-                });
-
-                const data = await userAPI.getAdDataForCreateAncmnt(subCategory.parent.id, subCategory.id, lang);
-
-                setCreateAncmnt({
-                    ...createAncmnt,
-                    isFetch: false,
-                    subCategory: {
-                        ...subCtgrByLang,
-                        data
-                    }
-                });
-            } catch (e) {
-                dispatch(setErrorMsgAction(e.message));
-                setCreateAncmnt({...createAncmnt, isFetch: false});
-            }
-        }
+        // const [ctgrByLang] = categoriesList.filter(ctgr => ctgr.id === subCategory.parent.id);
+        // ctgrByLang && setCreateAncmnt({
+        //     ...createAncmnt,
+        //     category: ctgrByLang,
+        // });
+        // if (subCategory.id !== null) {
+        //     const [subCtgrByLang] = ctgrByLang.model.filter(subCtgr => subCtgr.id === subCategory.id);
+        //
+        //     try {
+        //         setCreateAncmnt({
+        //             ...createAncmnt,
+        //             isFetch: true
+        //         });
+        //
+        //         const data = await userAPI.getAdDataForCreateAncmnt(subCategory.parent.id, subCategory.id, lang);
+        //
+        //         setCreateAncmnt({
+        //             ...createAncmnt,
+        //             isFetch: false,
+        //             subCategory: {
+        //                 ...subCtgrByLang,
+        //                 data
+        //             }
+        //         });
+        //     } catch (e) {
+        //         dispatch(setErrorMsgAction(e.message));
+        //         setCreateAncmnt({...createAncmnt, isFetch: false});
+        //     }
+        // }
     };
 
     const renderPageByActiveStep = () => {
         switch (activeStep) {
             case 0:
                 return <AncmntTypesPage
-                    ancmntTypes={ancmntTypes}
+                    ancmntTypes={ancmntTypes.types}
                     handleAncmntType={handleAncmntType}
                 />
             case 1:
@@ -328,7 +315,9 @@ export const CreateAncmntContainer: FC<WithT> = ({t}) => {
                     ancmntType={ancmntType}
                     createAncmnt={createAncmnt}
                     categoriesList={categoriesList}
+                    subLvlCtgrs={subLvlCtgrs}
                     searchTxt={searchTxt}
+                    handleBackCtgr={handleBackCtgr}
                     handleSearch={handleSearch}
                     handleCategory={handleCategory}
                     handleSubCategory={handleSubCategory}
@@ -352,13 +341,13 @@ export const CreateAncmntContainer: FC<WithT> = ({t}) => {
     //    setAncmntsTypes();
     // }, []);
 
-    useEffect(() => {
-        setCreateAncmntByLang();
-    }, [categoriesList[0].name]);
+    // useEffect(() => {
+    //     setCreateAncmntByLang();
+    // }, [categoriesList[0].name]);
 
-    useEffect(() => {
-        setFoundCategoriesChilds();
-    }, [searchTxt]);
+    // useEffect(() => {
+    //     setFoundCategoriesChilds();
+    // }, [searchTxt]);
 
     // console.log(createAncmnt)
     // console.log(categoriesList)

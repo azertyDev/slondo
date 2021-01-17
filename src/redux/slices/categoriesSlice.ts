@@ -3,26 +3,30 @@ import {Categories, CategoryType} from '@root/interfaces/Categories';
 import {userAPI} from "@src/api/api";
 
 
-const initCategory = {
+const initCategory: CategoryType = {
     id: null,
     name: '',
-    images: {
-        id: null,
+    image: {
         url: {
             default: ''
         }
     },
-    icons: {
-        id: null,
-        url: {
-            default: ''
-        }
+    icon: {
+        url: ''
     },
-    childs: [],
+    model: [{
+        id: null,
+        name: '',
+        type: [],
+        image: {
+            url: ''
+        },
+        parents: []
+    }],
     has_auction: null
 };
 
-const initCategories = Array.from({length: 11}).map(() => initCategory);
+const initCategories = Array.from({length: 12}).map(() => initCategory);
 
 const initialState: Categories = {
     isFetch: false,

@@ -12,7 +12,7 @@ export const MyAncmntsContainer = (props) => {
         {
             title: 'Безопасная покупка',
             count: 2,
-            component: <MyAncmnts safeShopping/>
+            component: <MyAncmnts/>
         },
     ]
 

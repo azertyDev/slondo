@@ -12,7 +12,7 @@ const localServer = 'http://192.168.1.60/slondo/public/api/';
 
 const instance = Axios.create({
     withCredentials: true,
-    baseURL: amazonServer,
+    baseURL: amazonServer
 });
 
 // const config = {
@@ -30,7 +30,7 @@ export const userAPI = {
         form.set('password', password);
         return instance
             .post(`login`, form, {
-                headers: {'Content-Type': 'multipart/form-data'},
+                headers: {'Content-Type': 'multipart/form-data'}
             })
             .then((res) => res.data)
             .catch((err) => {
@@ -41,17 +41,17 @@ export const userAPI = {
         return instance.get(`categories/all?lang=${lang}`)
             .then(res => res.data)
             .catch(err => {
-                throw err;
+                throw err
             });
     },
-    getAdDataForCreateAncmnt: (ctgryID: number, subCtgryID: number, lang: string): Promise<unknown> => {
+    getDataForCreateAncmnt: (ctgryID: number, subCtgryID: number, lang: string): Promise<unknown> => {
         return instance.get(`subcategory?parent_id=${ctgryID}&lang=${lang}&child_id=${subCtgryID}`)
             .then(res => res.data)
             .catch(err => {
-                throw err;
+                throw err
             });
     },
-    getCardData: (itemsPerPage: number, page: number, type: string, lang: string): Promise<any> => {
+    getCards: (itemsPerPage: number, page: number, type: string, lang: string): Promise<any> => {
         return instance.get(`ads/all?itemsPerPage=${itemsPerPage}&page=${page}&type=${type}&lang=${lang}`)
             .then((res) => res.data)
             .catch((err) => {

@@ -1,8 +1,8 @@
 import {SetStateAction} from "react";
-import {CreateAdFields} from "@root/interfaces/Announcement";
+import {CreateAncmntFields} from "@root/interfaces/Announcement";
 
 export interface AddressAutocompleteProps {
-    values: CreateAdFields;
+    values: CreateAncmntFields;
     setValues: (values: SetStateAction<unknown>, shouldValidate?: boolean | undefined) => any;
     list: Array<{
         id: number;

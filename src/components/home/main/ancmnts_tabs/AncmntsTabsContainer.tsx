@@ -17,11 +17,7 @@ const initCardData: CardData = {
     data: {
         cards: initCards,
         total: null,
-    },
-};
-
-const fetchCardData = async (itemsPerPage, page, type, lang) => {
-    return await userAPI.getCardData(itemsPerPage, page, type, lang);
+    }
 };
 
 export const AncmntsTabsContainer: FC<WithT> = (props) => {
@@ -45,12 +41,7 @@ export const AncmntsTabsContainer: FC<WithT> = (props) => {
                 isShowMoreFetch: true,
             });
 
-            const newData = await fetchCardData(
-                ITEMS_PER_PAGE,
-                currentPage,
-                type,
-                lang
-            );
+            const newData = await userAPI.getCards(ITEMS_PER_PAGE, currentPage, type, lang);
 
             setState({
                 ...state,
@@ -59,7 +50,7 @@ export const AncmntsTabsContainer: FC<WithT> = (props) => {
                 data: {
                     cards: isShowMore ? [...state.data.cards, ...newData.data] : newData.data,
                     total: newData.total,
-                },
+                }
             });
         } catch (e) {
             dispatch(setErrorMsgAction(e.message));

@@ -1,4 +1,4 @@
-import {CategoryType} from "@root/interfaces/Categories";
+import {CategoryType, ModelType} from "@root/interfaces/Categories";
 import {IdNameType} from "@root/interfaces/Announcement";
 import CyrillicToTranslit from 'cyrillic-to-translit-js';
 
@@ -22,17 +22,47 @@ type SearchType = (IdNameType & {
     image: { url: string }
 })[];
 
-export const categoryDataNormalization = (categoryList: CategoryType[]): CategoryType[] => (
-    categoryList.map(category => {
-        const childs = category.childs.map(child => ({
-                ...child,
-                parent: {
-                    id: category.id,
-                    name: category.name
-                }
-            })
-        );
-        return {...category, childs};
+const addParents = (list, parents) => (
+    list.map(ctgr => {
+        if (ctgr.type) {
+            const type = addParents(
+                ctgr.type,
+                [
+                    ...parents,
+                    {
+                        id: ctgr.id,
+                        name: ctgr.name
+                    }
+                ]
+            )
+            return {
+                ...ctgr,
+                type,
+                parents
+            }
+        } else {
+            return {
+                ...ctgr,
+                parents
+            }
+        }
+    })
+);
+
+export const categoryDataNormalization = (categoryList) => (
+    categoryList.map(ctgr => {
+        if (ctgr.model) {
+            const model = addParents(
+                ctgr.model,
+                [{
+                    id: ctgr.id,
+                    name: ctgr.name
+                }]
+            );
+            return {...ctgr, model};
+        } else {
+            return ctgr;
+        }
     })
 );
 
@@ -40,7 +70,7 @@ export const categorySearchHelper = (text: string, categoryList: CategoryType[])
     const searchRegExp = RegExp(text, 'i');
     return categoryList
         .reduce((list, category) => {
-            category.childs.forEach(sub_ctgr => {
+            category.model.forEach(sub_ctgr => {
                 if (searchRegExp.test(sub_ctgr.name)) {
                     list.push(sub_ctgr);
                 }

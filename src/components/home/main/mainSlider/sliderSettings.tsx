@@ -11,8 +11,8 @@ export const settings = {
     slidesToScroll: 1,
     speed: 500,
     autoplaySpeed: 5000,
-    prevArrow: <SliderArrow type='prev'/>,
-    nextArrow: <SliderArrow type='next'/>,
+    prevArrow: <SliderArrow/>,
+    nextArrow: <SliderArrow/>,
     responsive: [
         {
             breakpoint: 1280,

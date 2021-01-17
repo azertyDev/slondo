@@ -4,7 +4,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {AncmntForm} from './AncmntForm';
 import {RootState} from "@src/redux/rootReducer";
 import {AncmntType, CreateAncmntFields, FileType} from "@root/interfaces/Announcement";
-import {SubCategoryType} from "@root/interfaces/Categories";
+import {SubLvlCtgrsType} from "@root/interfaces/Categories";
 import {setErrorMsgAction} from "@src/redux/slices/errorSlice";
 import {createAdvrtSchema, isRequired} from "@root/validation_schemas/createAdvrtSchema";
 import {TOTAL_FILES_LIMIT} from "@src/constants";
@@ -80,7 +80,7 @@ export const initFormFields: CreateAncmntFields = {
     }
 };
 
-export const formData = (data: CreateAncmntFields, ancmntType: AncmntType, subCategory: SubCategoryType): FormData => {
+export const formData = (data: CreateAncmntFields, ancmntType: AncmntType, subCategory: SubLvlCtgrsType): FormData => {
     const form = new FormData();
     const {
         avalTime,
@@ -91,7 +91,7 @@ export const formData = (data: CreateAncmntFields, ancmntType: AncmntType, subCa
     } = data;
 
     form.set('ads_type_id', ancmntType.id.toString());
-    form.set('parent_categories_id', subCategory.parent.id.toString());
+    form.set('parent_categories_id', subCategory.parents[0].id.toString());
     form.set('title', data.title);
     form.set('safe_deal', Number(data.safe_deal).toString());
     form.set('delivery', Number(data.delivery).toString());

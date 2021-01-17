@@ -68,7 +68,7 @@ export const AncmntsSliderContainer: FC = () => {
                 isFetch: true,
             });
 
-            const newData = await userAPI.getCardData(
+            const newData = await userAPI.getCards(
                 ITEMS_PER_PAGE,
                 currentPage,
                 type,

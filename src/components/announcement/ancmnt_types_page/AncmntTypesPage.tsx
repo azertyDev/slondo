@@ -1,11 +1,11 @@
 import React, {FC} from 'react';
 import {Grid, Typography, ButtonBase} from '@material-ui/core';
 import {useStyles} from './useStyles';
-import {AncmntTypesState} from "@root/interfaces/Announcement";
+import {AncmntType} from "@root/interfaces/Announcement";
 
 
 type AncmntTypesPageProps = {
-    ancmntTypes: AncmntTypesState;
+    ancmntTypes: AncmntType[];
     handleAncmntType: (ancmntType) => () => void;
 };
 
@@ -14,7 +14,7 @@ export const AncmntTypesPage: FC<AncmntTypesPageProps> = ({ancmntTypes, handleAn
     return (
         <div className={classes.root}>
             <Grid container spacing={2}>
-                {ancmntTypes.types.map((anType, i) => {
+                {ancmntTypes.map((anType, i) => {
                     return (
                         <Grid item xs={4} key={i}>
                             <ButtonBase

@@ -17,14 +17,15 @@ const initCard: InnerCardData = {
         name: '',
     },
     created_at: '',
-    location: '',
     images: [
         {
             url: {
                 default: '',
-            },
-        },
+            }
+        }
     ],
+    region: null,
+    city: null,
     delivery: null,
     exchange: null,
     ads_type: {
@@ -49,10 +50,10 @@ const initialCardData: CardData = {
     },
 };
 
-export const SimilarAncmntsContainer: FC<WithT & { ancmntType: string }> = (
+export const SimilarAncmntsContainer: FC<{ ancmntType: string }> = (
     props,
 ) => {
-    const {t, ancmntType} = props;
+    const {ancmntType} = props;
     const lang = i18n.language;
 
     const [currentPage, setCurrentPage] = useState(1);
@@ -67,7 +68,7 @@ export const SimilarAncmntsContainer: FC<WithT & { ancmntType: string }> = (
                 isFetch: true,
             });
 
-            const newData = await userAPI.getCardData(
+            const newData = await userAPI.getCards(
                 ITEMS_PER_PAGE,
                 currentPage,
                 type,
@@ -100,7 +101,7 @@ export const SimilarAncmntsContainer: FC<WithT & { ancmntType: string }> = (
 
     return (
         <SimilarAncmnts
-            t={t}
+            isFetch={cardData.isFetch}
             list={cardData.data.cards}
             handleShowMore={handleShowMore}
         />

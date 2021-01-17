@@ -8,32 +8,37 @@ import {
     Hidden
 } from "@material-ui/core";
 import {useStyles} from './useStyles';
-import {CategoryType} from "@root/interfaces/Categories";
+import {CategoryType, SubLvlCtgrsType} from "@root/interfaces/Categories";
 import {AncmntType, CreateAncmntState} from "@root/interfaces/Announcement";
 
 
-type CreateAncmntType = {
+type CreateAncmntProps = {
     createAncmnt: CreateAncmntState;
     categoriesList: CategoryType[];
+    subLvlCtgrs: SubLvlCtgrsType[];
     searchTxt: string;
     handleSearch: (t) => void;
     ancmntType: AncmntType;
     handleCategory: (c) => () => void;
     handleSubCategory: (parent, child_id?, name?) => () => void;
+    handleBackCtgr: () => void;
 };
 
-export const CreateAncmnt: FC<CreateAncmntType> = (props) => {
+export const CreateAncmnt: FC<CreateAncmntProps> = (props) => {
     const {
         ancmntType,
         searchTxt,
+        subLvlCtgrs,
         handleSearch,
         createAncmnt,
         categoriesList,
         handleCategory,
-        handleSubCategory,
+        handleBackCtgr,
+        handleSubCategory
     } = props;
 
     const {category, error, isFetch} = createAncmnt;
+    console.log(createAncmnt)
 
     const classes = useStyles();
     return (
@@ -57,14 +62,18 @@ export const CreateAncmnt: FC<CreateAncmntType> = (props) => {
                                         }
                                     >
                                         <div onClick={handleCategory(ctgr)}>
-                                            <img src={ctgr.icons.url.default} alt={ctgr.name}/>
+                                            <img src={ctgr.icon.url} alt={ctgr.name}/>
                                             {ctgr.name}
                                         </div>
                                     </ListItem>
                                 ))}
                             </List>
                         </Grid>
-                        <Grid item xs={9} className='sub-categories-menu'>
+                        <Grid
+                            item
+                            xs={9}
+                            className='sub-categories-menu'
+                        >
                             <div className='search-block'>
                                 <InputBase
                                     onChange={handleSearch}
@@ -72,34 +81,36 @@ export const CreateAncmnt: FC<CreateAncmntType> = (props) => {
                                     placeholder='Поиск по категориям'
                                 />
                             </div>
+                            {!!subLvlCtgrs.length && subLvlCtgrs[0].parents.length === 2
+                            && <div>
+                                <button onClick={handleBackCtgr}>{'<'}</button>
+                            </div>}
                             {isFetch
                                 ? <div style={{height: '800px'}}>
                                     <Typography>...Loading</Typography>
                                 </div>
                                 : error
                                     ? <Typography className='error-text'>{error}</Typography>
-                                    : ((ancmntType.id !== 1 && !!category.has_auction || ancmntType.id === 1)
-                                    && !!category.childs.length)
-                                    && <List>
-                                        {category.childs.map(({parent, id, name}, i) => (
+                                    : <List>
+                                        {subLvlCtgrs.map((ctgr, i) => (
                                             <ListItem
                                                 key={i}
-                                                onClick={handleSubCategory(parent, id, name)}
+                                                onClick={handleCategory(ctgr)}
                                             >
                                                 <div>
                                                     <Typography variant='subtitle1'>
-                                                        {name}
+                                                        {ctgr.name}
                                                     </Typography>
-                                                    {!!searchTxt && (
-                                                        <Typography className='parent-category' variant='subtitle2'>
-                                                            {parent.name}
-                                                        </Typography>
-                                                    )}
+                                                    {!!searchTxt && <Typography
+                                                        className='parent-category'
+                                                        variant='subtitle2'
+                                                    >
+                                                        {parent.name}
+                                                    </Typography>}
                                                 </div>
                                             </ListItem>
                                         ))}
-                                    </List>
-                            }
+                                    </List>}
                         </Grid>
                     </Grid>
                 </div>

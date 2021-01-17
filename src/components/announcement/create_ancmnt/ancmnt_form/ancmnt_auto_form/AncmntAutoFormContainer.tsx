@@ -16,7 +16,7 @@ type AncmntAutoFormPropsTypes = {
 export const AncmntAutoFormContainer: FC<AncmntAutoFormPropsTypes> = (props) => {
     const {t, createAncmnt, values} = props;
     const {adParams} = values;
-    const data = prepareCreateAncmnt(createAncmnt.subCategory.data, adParams);
+    const data = prepareCreateAncmnt(createAncmnt.category.model, adParams);
     console.log(data)
 
     const autoData = {
