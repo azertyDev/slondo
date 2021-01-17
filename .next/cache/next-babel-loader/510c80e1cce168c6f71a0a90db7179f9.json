@@ -1,1 +1,0 @@
-{"ast":null,"code":"import { string, object } from \"yup\";\nconst requiredMsg = 'Поле обязательно для заполнения';\nexport const authRegSchema = object({\n  phone: string().required(requiredMsg),\n  password: string().required(requiredMsg)\n});","map":null,"metadata":{},"sourceType":"module"}

@@ -1,1 +1,0 @@
-{"ast":null,"code":"const {\n  makeStyles\n} = require('@material-ui/core');\n\nexport const useStyles = makeStyles(() => ({\n  root: {\n    overflowY: 'scroll',\n    display: 'flex',\n    alignItems: 'center',\n    justifyContent: 'center'\n  }\n}));","map":null,"metadata":{},"sourceType":"module"}

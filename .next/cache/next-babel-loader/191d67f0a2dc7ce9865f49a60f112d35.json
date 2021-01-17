@@ -1,1 +1,0 @@
-{"ast":null,"code":"var __jsx = React.createElement;\nimport React from \"react\";\nimport { TopHeader } from \"./TopHeader\";\n\nconst TopHeaderContainer = props => {\n  const {\n    t\n  } = props;\n  return __jsx(TopHeader, {\n    t: t\n  });\n};\n\nexport default TopHeaderContainer;","map":null,"metadata":{},"sourceType":"module"}

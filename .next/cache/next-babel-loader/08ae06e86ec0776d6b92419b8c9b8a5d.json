@@ -1,1 +1,0 @@
-{"ast":null,"code":"var __jsx = React.createElement;\nimport React from 'react';\nimport { MessagesComponent } from \"@src/components/cabinet/cabinet_pages/messages/MessagesComponent\";\nexport var MessagesContainer = function MessagesContainer(props) {\n  return __jsx(MessagesComponent, {\n    t: props.t\n  });\n};","map":null,"metadata":{},"sourceType":"module"}

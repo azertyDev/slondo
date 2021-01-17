@@ -1,1 +1,0 @@
-{"ast":null,"code":"var __jsx = React.createElement;\nimport React from 'react'; // styles\n\nimport { useStyles } from './useStyles';\nexport const FavoriteComponent = props => {\n  const classes = useStyles();\n  return __jsx(\"div\", {\n    className: classes.root\n  }, __jsx(\"div\", null, \"Favorite\"));\n};","map":null,"metadata":{},"sourceType":"module"}
