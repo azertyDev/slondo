@@ -1,0 +1,1 @@
+{"ast":null,"code":"export { selfData } from './selfData';","map":{"version":3,"sources":["C:/Users/abror/Documents/projects/slondo/src/redux/reducers/index.ts"],"names":["selfData"],"mappings":"AAAA,SAAQA,QAAR,QAAuB,YAAvB","sourcesContent":["export {selfData} from './selfData'"]},"metadata":{},"sourceType":"module"}

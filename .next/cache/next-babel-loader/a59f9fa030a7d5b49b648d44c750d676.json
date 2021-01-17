@@ -1,0 +1,1 @@
+{"ast":null,"code":"var __jsx = React.createElement;\nimport React from \"react\";\nimport { Home } from '@src/components/home/Home';\n\nvar HomePage = function HomePage(props) {\n  return __jsx(Home, props);\n};\n\nexport default HomePage;","map":null,"metadata":{},"sourceType":"module"}

@@ -1,0 +1,19 @@
+{
+  "/404": "pages/404.js",
+  "/_app": "pages/_app.js",
+  "/_document": "pages/_document.js",
+  "/announcement/create": "pages/announcement/create.js",
+  "/cabinet/archive": "pages/cabinet/archive.js",
+  "/cabinet/favorite": "pages/cabinet/favorite.js",
+  "/cabinet/messages": "pages/cabinet/messages.js",
+  "/cabinet/myAncmnts": "pages/cabinet/myAncmnts.js",
+  "/cabinet/myLots": "pages/cabinet/myLots.js",
+  "/cabinet/notifications": "pages/cabinet/notifications.js",
+  "/cabinet/rating": "pages/cabinet/rating.js",
+  "/cabinet/safetyDeal": "pages/cabinet/safetyDeal.js",
+  "/cabinet/subscribe": "pages/cabinet/subscribe.js",
+  "/help": "pages/help.js",
+  "/": "pages/index.js",
+  "/obyavlenie/[url]": "pages/obyavlenie/[url].js",
+  "/_error": "pages/_error.js"
+}

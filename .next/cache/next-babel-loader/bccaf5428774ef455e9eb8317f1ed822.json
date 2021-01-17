@@ -1,0 +1,1 @@
+{"ast":null,"code":"var __jsx = React.createElement;\nimport React from 'react';\nimport { RatingComponent } from \"@src/components/cabinet/cabinet_pages/rating/RatingComponent\";\nexport const RatingContainer = props => {\n  return __jsx(RatingComponent, {\n    t: props.t\n  });\n};","map":null,"metadata":{},"sourceType":"module"}

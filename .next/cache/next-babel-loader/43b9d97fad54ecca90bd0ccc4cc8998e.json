@@ -1,0 +1,1 @@
+{"ast":null,"code":"import { makeStyles } from '@material-ui/core/styles';\nexport const useStyles = makeStyles(theme => ({\n  root: {\n    marginTop: '10px'\n  },\n  bottomHeaderWrapper: {\n    [theme.breakpoints.down('sm')]: {\n      marginTop: '60px'\n    }\n  }\n}));","map":null,"metadata":{},"sourceType":"module"}

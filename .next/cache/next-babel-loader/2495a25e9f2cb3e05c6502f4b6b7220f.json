@@ -1,0 +1,1 @@
+{"ast":null,"code":"var __jsx = React.createElement;\nimport React from \"react\";\nimport { withTranslation } from \"../i18n\";\n\nvar Custom404 = function Custom404(_ref) {\n  var t = _ref.t;\n  return __jsx(\"h1\", null, t('pageNotFound'));\n};\n\nexport default withTranslation(['errors'])(Custom404);","map":null,"metadata":{},"sourceType":"module"}

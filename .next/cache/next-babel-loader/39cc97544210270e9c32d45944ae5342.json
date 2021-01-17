@@ -1,0 +1,1 @@
+{"ast":null,"code":"var __jsx = React.createElement;\nimport React from 'react';\nimport { AdvertisementContainer } from '../src/components/advertisement/AdvertisementContainer';\n\nconst Create_advertisement = props => {\n  return __jsx(AdvertisementContainer, props);\n};\n\nexport default Create_advertisement;","map":null,"metadata":{},"sourceType":"module"}

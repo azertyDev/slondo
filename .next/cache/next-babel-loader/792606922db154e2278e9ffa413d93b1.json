@@ -1,0 +1,1 @@
+{"ast":null,"code":"var __jsx = React.createElement;\nimport React from \"react\";\nimport { Tab } from \"@material-ui/core\";\nexport var CustomTab = function CustomTab(props) {\n  return __jsx(Tab, props);\n};","map":null,"metadata":{},"sourceType":"module"}

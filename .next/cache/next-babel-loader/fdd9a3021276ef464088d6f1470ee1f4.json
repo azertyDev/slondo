@@ -1,0 +1,1 @@
+{"ast":null,"code":"var __jsx = React.createElement;\nimport React from 'react';\nimport { NotificationsComponent } from \"@src/components/cabinet/cabinet_pages/notifications/NotificationsComponent\";\nexport const NotificationsContainer = props => {\n  return __jsx(NotificationsComponent, {\n    t: props.t\n  });\n};","map":null,"metadata":{},"sourceType":"module"}

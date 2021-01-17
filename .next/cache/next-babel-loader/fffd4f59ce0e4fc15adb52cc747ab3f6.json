@@ -1,0 +1,1 @@
+{"ast":null,"code":"var __jsx = React.createElement;\nimport React from 'react';\nimport { useStyles } from './useStyles';\nexport var ArchiveComponent = function ArchiveComponent() {\n  var classes = useStyles();\n  return __jsx(\"div\", {\n    className: classes.root\n  }, __jsx(\"div\", null, \"Archive\"));\n};","map":null,"metadata":{},"sourceType":"module"}

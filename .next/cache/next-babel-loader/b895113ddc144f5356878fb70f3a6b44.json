@@ -1,0 +1,1 @@
+{"ast":null,"code":"var __jsx = React.createElement;\nimport React from \"react\";\nimport { Top } from \"./Top\";\n\nconst TopContainer = props => {\n  const {\n    t,\n    handleOpenModal\n  } = props;\n  return __jsx(Top, {\n    t: t,\n    handleOpenModal: handleOpenModal\n  });\n};\n\nexport default TopContainer;","map":null,"metadata":{},"sourceType":"module"}

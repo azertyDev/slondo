@@ -1,0 +1,1 @@
+{"ast":null,"code":"export const SERVER_URL = `${process.env.SERVER_URL}:${process.env.PORT}`;\nexport const ITEMS_PER_PAGE = 16;\nexport const TOTAL_FILES_LIMIT = 8;\nexport const TOTAL_FILES_SIZE_LIMIT = 2.5e+7; // 25 mb","map":null,"metadata":{},"sourceType":"module"}

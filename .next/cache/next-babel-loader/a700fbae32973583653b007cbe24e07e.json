@@ -1,0 +1,1 @@
+{"ast":null,"code":"var _require = require('@material-ui/core'),\n    makeStyles = _require.makeStyles;\n\nexport var useStyles = makeStyles(function () {\n  return {\n    root: {\n      overflowY: 'scroll',\n      display: 'flex',\n      alignItems: 'center',\n      justifyContent: 'center'\n    }\n  };\n});","map":null,"metadata":{},"sourceType":"module"}
