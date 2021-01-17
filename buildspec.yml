@@ -8,6 +8,9 @@ phases:
       nodejs: 12
   build:
     commands:
+      - npm build
+  post_build:
+    commands:
       - npm start
 artifacts:
       files:
