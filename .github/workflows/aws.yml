@@ -38,7 +38,7 @@ jobs:
         aws-region: us-east-1
 
     - name: SlondoUz
-      id: 084857813481
+      id: commit-status
       uses: aws-actions/amazon-ecr-login@v1
 
     - name: ecs-slondo-deploy
