@@ -1,1 +1,0 @@
-{"ast":null,"code":"var __jsx = React.createElement;\nimport React from 'react';\nimport { SafetyDealComponent } from \"@src/components/cabinet/cabinet_pages/safety_deal/SafetyDealComponent\";\nexport var SafetyDealContainer = function SafetyDealContainer(props) {\n  return __jsx(SafetyDealComponent, {\n    t: props.t\n  });\n};","map":null,"metadata":{},"sourceType":"module"}

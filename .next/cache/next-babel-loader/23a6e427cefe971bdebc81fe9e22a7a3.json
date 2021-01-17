@@ -1,1 +1,0 @@
-{"ast":null,"code":"import { makeStyles } from '@material-ui/core/styles';\nexport var useStyles = makeStyles(function () {\n  return {\n    root: {\n      width: '600px',\n      height: '400px',\n      backgroundColor: '#fff'\n    }\n  };\n});","map":null,"metadata":{},"sourceType":"module"}

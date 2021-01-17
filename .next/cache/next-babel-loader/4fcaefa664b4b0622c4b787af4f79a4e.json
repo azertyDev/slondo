@@ -1,1 +1,0 @@
-{"ast":null,"code":"import { makeStyles } from \"@material-ui/core/styles\";\nexport var useStyles = makeStyles(function (theme) {\n  return {\n    root: {\n      position: 'fixed',\n      bottom: theme.spacing(2),\n      right: theme.spacing(2)\n    }\n  };\n});","map":null,"metadata":{},"sourceType":"module"}
