@@ -81,9 +81,6 @@ export const HelpMenu: FC = ({ children }) => {
                             <ListItemText primary="Взаимодействие пользователей" />
                         </ListItem>
                         <ListItem button>
-                            <ListItemText primary="Поиск объявлений" />
-                        </ListItem>
-                        <ListItem button>
                             <ListItemText primary="Бонусная система" />
                         </ListItem>
                         <ListItem button>
@@ -103,6 +100,11 @@ export const HelpMenu: FC = ({ children }) => {
                         </ListItem>
                         <ListItem button>
                             <ListItemText primary="Нарушение интеллектуальных прав" />
+                        </ListItem>
+                    </List>
+                    <List component="nav" className={classes.helpMenu + ' support'}>
+                        <ListItem button>
+                            <ListItemText primary="Обратная связь" />
                         </ListItem>
                     </List>
                 </Grid>

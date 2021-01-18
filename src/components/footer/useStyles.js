@@ -43,6 +43,12 @@ export const useStyles = makeStyles(() => ({
                 display: 'flex',
                 paddingTop: '25px',
                 '& div': {
+                    '&:nth-child(2)': {
+                        '& h6.MuiTypography-subtitle1': {
+                            opacity: 0.6,
+                            lineHeight: '15px',
+                        },
+                    },
                     '& h6.MuiTypography-subtitle1': {
                         fontSize: '12px',
                         textAlign: 'center',

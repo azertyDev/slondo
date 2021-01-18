@@ -34,6 +34,16 @@ export const ActionsMenu: FC<any> = (props) => {
             <div className="menu-item">
                 <div>
                     <ButtonComponent
+                        className={pathname === '/cabinet/myAncmnts' ? 'selected' : 'moderation-failed'}
+                        // onClick={onButtonClick('myAncmnts')}
+                    >
+                        <Typography variant="subtitle1">Не прошло модерацию (2)</Typography>
+                    </ButtonComponent>
+                </div>
+            </div>
+            <div className="menu-item">
+                <div>
+                    <ButtonComponent
                         className={pathname === '/cabinet/myAncmnts' ? 'selected' : ''}
                         onClick={onButtonClick('myAncmnts')}
                     >
@@ -43,11 +53,11 @@ export const ActionsMenu: FC<any> = (props) => {
                 </div>
                 <div>
                     <ButtonComponent
-                        className={pathname === '/cabinet/myLots' ? 'selected' : ''}
-                        onClick={onButtonClick('myLots')}
+                        className={pathname === '/cabinet/myAuctions' ? 'selected' : ''}
+                        onClick={onButtonClick('myAuctions')}
                     >
                         <GavelIcon/>
-                        <Typography variant="subtitle1">{t('cabinet:myLots')}</Typography>
+                        <Typography variant="subtitle1">{t('cabinet:myAuctions')}</Typography>
                     </ButtonComponent>
                 </div>
                 <div>

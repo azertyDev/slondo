@@ -2,6 +2,12 @@ import { makeStyles } from '@material-ui/core/styles';
 
 export const useStyles = makeStyles(() => ({
     root: {
+        '& div.error-wrapper': {
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+            minHeight: '366px',
+        },
         '& h2.title': {
             marginBottom: '15px',
         },

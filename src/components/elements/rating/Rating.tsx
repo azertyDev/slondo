@@ -1,9 +1,13 @@
-import React from 'react'
-import {Box, Typography} from '@material-ui/core'
-import CustomRating from '@material-ui/lab/Rating'
+import React, { FC } from 'react';
+import { Box, Typography } from '@material-ui/core';
+import CustomRating from '@material-ui/lab/Rating';
 
 // styles
-import {useStyles} from './useStyles'
+import { useStyles } from './useStyles';
+
+type RatingPropsType = {
+    card: boolean;
+};
 
 const labels = {
     0.5: '0.5',
@@ -16,13 +20,13 @@ const labels = {
     4: '4.0',
     4.5: '4.5',
     5: '5.0',
-}
+};
 
-export const Rating = () => {
-    const [value, setValue] = React.useState(3.5)
-    const [hover, setHover] = React.useState(-1)
+export const Rating: FC<RatingPropsType> = (props) => {
+    const [value, setValue] = React.useState(3.5);
+    const [hover, setHover] = React.useState(-1);
 
-    const classes = useStyles()
+    const classes = useStyles();
     return (
         <div className={classes.root}>
             <div>
@@ -32,20 +36,26 @@ export const Rating = () => {
                     value={value}
                     precision={0.5}
                     onChange={(event, newValue) => {
-                        setValue(newValue)
+                        setValue(newValue);
                     }}
                     onChangeActive={(event, newHover) => {
-                        setHover(newHover)
+                        setHover(newHover);
                     }}
                 />
                 {value !== null && (
-                    <Box><Typography variant="subtitle1">{labels[hover !== -1 ? hover : value]}</Typography></Box>
+                    <Box>
+                        <Typography variant="subtitle1">
+                            {labels[hover !== -1 ? hover : value]}
+                        </Typography>
+                    </Box>
                 )}
             </div>
-            <div>
-                <Typography variant="subtitle1">(200 оценок)</Typography>
 
-            </div>
+            {!props.card && (
+                <div>
+                    <Typography variant="subtitle1">(200 оценок)</Typography>
+                </div>
+            )}
         </div>
-    )
-}
+    );
+};

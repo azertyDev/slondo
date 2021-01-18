@@ -2,22 +2,23 @@ import makeStyles from '@material-ui/core/styles/makeStyles';
 
 export const useStyles = makeStyles((theme) => ({
     root: {
-        marginTop: '30px',
-        display: 'inline-block',
-        width: '80%',
-        filter: 'drop-shadow(0px 0px 8px rgba(132, 92, 171, 0.2))',
+        boxShadow: '0px 0px 15px 0px rgba(0, 0, 0, 0.1)',
+        borderRadius: '10px',
+        position: 'relative',
+        marginBottom: 20,
         '& > div.MuiPaper-root': {
-            position: 'relative',
+            minHeight: '172px',
             padding: '15px',
-            borderRadius: '10px',
+            background: ({ img }) => `no-repeat 101% -22% url(${img})`,
             '& > div': {
                 display: 'inline-block',
-                width: '55%',
+                maxWidth: '400px',
+                minWidth: '400px',
                 '& > h5.MuiTypography-h5': {
                     fontWeight: '600',
                 },
                 '& > h6.MuiTypography-subtitle1': {
-                    margin: '15px 0',
+                    margin: '20px 0',
                     lineHeight: '15px',
                     color: '#838383',
                 },
@@ -25,29 +26,48 @@ export const useStyles = makeStyles((theme) => ({
                     textDecoration: 'none',
                     display: 'inline-block',
                     '& > h6.more-details': {
-                        color: '#7DBCF6',
+                        lineHeight: '20px',
+                        color: theme.palette.primary.createAdBtnColor,
                         fontWeight: '600',
                     },
                 },
             },
-            '& > div.notification-bg': {
-                width: '200px',
-                height: '100%',
-                backgroundImage: `url(img/surprise_img.svg)`,
-                backgroundPosition: 'center right',
-                backgroundSize: 'auto',
-                backgroundRepeat: 'no-repeat',
+            '& > div.image': {
                 position: 'absolute',
-                top: '0px',
-                right: '30px',
+                bottom: '-10px',
+                right: '-10px',
+                '& > svg': {},
             },
-
             '& > button': {
                 width: '30px',
                 height: '30px',
                 position: 'absolute',
                 top: '10px',
                 right: '10px',
+            },
+        },
+        '& > button.MuiIconButton-root': {
+            position: 'absolute',
+            right: '9px',
+            top: '12px',
+            width: '24px',
+            height: '24px',
+            padding: '5px',
+            background: '#EBEBF0',
+            borderRadius: '100%',
+            '& svg': {
+                height: 10,
+                '& > path': {
+                    fill: '#28293D',
+                },
+            },
+            '&:hover': {
+                background: '#F08F8F',
+                '& svg': {
+                    '& > path': {
+                        fill: '#fff',
+                    },
+                },
             },
         },
     },

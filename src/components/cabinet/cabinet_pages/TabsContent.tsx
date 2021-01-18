@@ -1,12 +1,16 @@
-import React, {FC, useState} from 'react';
-import {Grid, Tabs, Tab, Typography} from "@material-ui/core";
-import {CustomTabPanel} from "@src/components/elements/custom_tab_panel/CustomTabPanel";
-import {CabinetMenuPropsType, CabinetMenuWrapper} from "@src/components/cabinet/CabinetMenuWrapper";
-import {TabsDataType} from "@src/components/cabinet/cabinet_pages/archive/ArchiveContainer";
-import {useStyles} from './useStyles';
+import React, { FC, useState } from 'react';
+import { Grid, Tabs, Tab, Typography } from '@material-ui/core';
+import { CustomTabPanel } from '@src/components/elements/custom_tab_panel/CustomTabPanel';
+import {
+    CabinetMenuPropsType,
+    CabinetMenuWrapper,
+} from '@src/components/cabinet/CabinetMenuWrapper';
+import { TabsDataType } from '@src/components/cabinet/cabinet_pages/archive/ArchiveContainer';
+import { useStyles } from './useStyles';
 
-
-export const TabsContent: FC<CabinetMenuPropsType & { tabsData: TabsDataType[] }> = ({tabsData, headerTitle, title, t}) => {
+export const TabsContent: FC<
+    CabinetMenuPropsType & { tabsData: TabsDataType[] }
+> = ({ tabsData, headerTitle, title, t }) => {
     const [value, setValue] = useState(0);
 
     const handleChange = (event, newValue) => {
@@ -21,8 +25,12 @@ export const TabsContent: FC<CabinetMenuPropsType & { tabsData: TabsDataType[] }
                     <Tabs
                         value={value}
                         onChange={handleChange}
-                        indicatorColor="primary"
                         variant="fullWidth"
+                        TabIndicatorProps={{
+                            style: {
+                                backgroundColor: '#AD66D5',
+                            },
+                        }}
                     >
                         <Tab
                             label={
@@ -50,5 +58,5 @@ export const TabsContent: FC<CabinetMenuPropsType & { tabsData: TabsDataType[] }
                 </CustomTabPanel>
             </CabinetMenuWrapper>
         </div>
-    )
+    );
 };

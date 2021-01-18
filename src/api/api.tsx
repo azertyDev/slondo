@@ -12,7 +12,7 @@ const localServer = 'http://192.168.1.60/slondo/public/api/';
 
 const instance = Axios.create({
     withCredentials: true,
-    baseURL: amazonServer,
+    baseURL: localServer,
 });
 
 // const config = {
@@ -38,7 +38,7 @@ export const userAPI = {
             });
     },
     getCategories: (lang: string): Promise<CategoryType[]> => {
-        return instance.get(`categories/all?lang=${lang}`)
+        return instance.get(`categories/main?lang=${lang}`)
             .then(res => res.data)
             .catch(err => {
                 throw err;

@@ -1,6 +1,6 @@
 import { makeStyles } from '@material-ui/core/styles';
 
-export const useStyles = makeStyles(() => ({
+export const useStyles = makeStyles((theme) => ({
     root: {
         '& div.menu-item': {
             display: 'flex',
@@ -20,6 +20,11 @@ export const useStyles = makeStyles(() => ({
                     backgroundClip: 'padding-box',
                     '& > svg': {
                         marginRight: '10px',
+                    },
+                    '&.moderation-failed': {
+                        '& > h6.MuiTypography-subtitle1': {
+                            color: theme.palette.primary.error
+                        },
                     },
                     '&.selected': {
                         border: '1px solid #AD66D5',

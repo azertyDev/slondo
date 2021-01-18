@@ -34,7 +34,7 @@ export const ErrorModal: FC = () => {
                     Свяжитесь с <span>службой поддержки</span> если у вас есть
                     вопросы
                 </Typography>
-                <ButtonComponent>
+                <ButtonComponent onClick={onClose}>
                     <Typography variant="subtitle1" color="initial">
                         Ок
                     </Typography>

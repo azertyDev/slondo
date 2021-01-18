@@ -7,6 +7,9 @@ export const useStyles = makeStyles((theme) => ({
             marginLeft: 15,
             marginBottom: 15,
         },
+        '& nav.support': {
+            marginTop: 15,
+        },
     },
     helpMenu: {
         width: '100%',

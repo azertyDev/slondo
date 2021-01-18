@@ -17,7 +17,7 @@ export const Cabinet = (props) => {
     return (
         <div className={classes.root}>
             <Container maxWidth="lg">
-                <Grid container spacing={2}>
+                <Grid container>
                     <Grid item xs={3}>
                         <CabinetSidebar {...props} />
                     </Grid>
@@ -58,7 +58,7 @@ export const Cabinet = (props) => {
                             </Tabs>
                         </Grid>
                         <CustomTabPanel value={value} index={0}>
-                            <CustomListCard />
+                            <ListView />
                         </CustomTabPanel>
                         <CustomTabPanel value={value} index={1}>
                             <Notification />
@@ -66,9 +66,9 @@ export const Cabinet = (props) => {
                             <Notification />
                         </CustomTabPanel>
                         <CustomTabPanel value={value} index={2}>
-                            <CustomListCard />
-                            <CustomListCard />
-                            <CustomListCard />
+                            <ListView />
+                            <ListView />
+                            <ListView />
                         </CustomTabPanel>
                     </Grid>
                 </Grid>

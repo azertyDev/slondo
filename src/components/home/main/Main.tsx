@@ -1,6 +1,5 @@
 import React, { FC } from 'react';
 import {
-    Fab,
     Hidden,
     Slide,
     Typography,
@@ -16,8 +15,8 @@ import { ScrollTop } from '@src/components/elements/scroll_top/ScrollTop';
 import { Link, useTranslation } from '@root/i18n';
 import { Banner } from '@src/components/elements/banner/Banner';
 import { FaqComponent } from '@src/components/elements/faq_component/FaqComponent';
-import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp';
 import { useStyles } from './useStyles';
+import { SocialsBlock } from '../../elements/socials_block/SocialsBlock';
 
 export const Main: FC = () => {
     const { t } = useTranslation(['main', 'common']);
@@ -48,23 +47,25 @@ export const Main: FC = () => {
                             <Grid item lg={3} className="right-content">
                                 <section className="faq-wrapper">
                                     <FaqComponent />
+                                    <SocialsBlock/>
                                 </section>
                                 <section className="banner-wrapper">
                                     <Banner height="345px" />
                                 </section>
+                                <ScrollTop>
+                                    <a
+                                        aria-label="scroll back to top"
+                                        className={classes.scrollTop}
+                                    >
+                                        <span className="MuiFab">
+                                            <span className="icon"></span>
+                                        </span>
+                                    </a>
+                                </ScrollTop>
                             </Grid>
-                            <ScrollTop>
-                                <a
-                                    aria-label="scroll back to top"
-                                    className={classes.scrollTop}
-                                >
-                                    <span className="MuiFab">
-                                        <span className="icon"></span>
-                                    </span>
-                                </a>
-                            </ScrollTop>
                         </Hidden>
                     </Grid>
+
                     <Hidden lgUp>
                         <div className={classes.createAdBlock}>
                             <Link href={'/announcement/create'}>

@@ -9,12 +9,15 @@ export const useStyles = makeStyles((theme) => ({
             marginBottom: '21px',
         },
         '& div.category-slider': {
-            position: 'relative',
+            '& div.error-wrapper': {
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center',
+                minHeight: '188px',
+            },
             '& > div.slick-slider': {
                 '& > button.slick-prev, & > button.slick-next': {
-                    position: 'absolute',
                     top: '23%',
-                    zIndex: 10,
                 },
                 '& button.slick-prev': {
                     left: '-12px',

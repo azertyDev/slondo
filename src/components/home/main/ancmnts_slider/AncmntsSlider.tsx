@@ -23,19 +23,21 @@ export const AncmntsSlider: FC<{ title: string; cardData: CardData }> = ({
                 {title}
             </Typography>
             <div className="slider">
-                <CustomSlider
-                    {...settings}
-                >
-                    {!!error
-                        ? <Typography className="error-text">{error}</Typography>
-                        : cards.map((card) => (
+                {!!error ? (
+                    <div className="error-wrapper">
+                    <Typography className="error-text">{error}</Typography>
+                </div>
+                ) : (
+                    <CustomSlider {...settings}>
+                        {cards.map((card) => (
                             <CardItem
                                 isFetch={isFetch}
                                 key={card.id}
                                 {...card}
                             />
                         ))}
-                </CustomSlider>
+                    </CustomSlider>
+                )}
             </div>
         </div>
     );

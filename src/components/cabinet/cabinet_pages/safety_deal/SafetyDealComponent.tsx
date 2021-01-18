@@ -13,7 +13,9 @@ export const SafetyDealComponent = (props) => {
         <div className={classes.root}>
             <CabinetMenuWrapper headerTitle={title} title={title} t={props.t}>
                 <Grid item xs={9}>
-                    <div>Safety deal</div>
+                    <div className='wrapper'>
+                        
+                    </div>
                 </Grid>
             </CabinetMenuWrapper>
         </div>

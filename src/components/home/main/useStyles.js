@@ -15,12 +15,12 @@ export const useStyles = makeStyles((theme) => ({
                     marginBottom: '55px',
                 },
                 [theme.breakpoints.up('lg')]: {
-                    paddingRight: '20px',
+                    paddingRight: '16px',
                 },
             },
             '& div.right-content': {
                 '& section.faq-wrapper': {
-                    margin: '58px 0 217px',
+                    margin: '58px 0 131px',
                 },
             },
         },

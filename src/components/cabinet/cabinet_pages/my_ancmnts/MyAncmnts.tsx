@@ -9,8 +9,8 @@ export const MyAncmnts = (props) => {
 
     return (
         <div className={classes.root}>
-            <ListView safeShopping={props.safeShopping} />
-            <ListView safeShopping={props.safeShopping} />
+            {/* <ListView />
+            <ListView /> */}
         </div>
     );
 };

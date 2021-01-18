@@ -26,7 +26,7 @@ export const UserInfoWithAvatar = (props) => {
                         </Typography>
                     </div>
                     <div>
-                        <Rating/>
+                        <Rating card={false}/>
                     </div>
                     {
                         props.cabinet

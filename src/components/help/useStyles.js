@@ -27,6 +27,9 @@ export const useStyles = makeStyles((theme) => ({
         },
         '& div.MuiGrid-item': {
             paddingLeft: '40px',
+            '&:last-child': {
+                paddingLeft: '70px',
+            }
         },
     },
 
