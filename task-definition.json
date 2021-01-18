@@ -5,8 +5,8 @@
     "inferenceAccelerators": [],
     "containerDefinitions": [
         {
-            "name": "ecs-slondo-build",
-            "image": "ecs-slondo-build-repository:00000",
+            "name": "slondo-web-app-repository",
+            "image": "slondo-web-app-repository:00000",
             "resourceRequirements": null,
             "essential": true,
             "portMappings": [
