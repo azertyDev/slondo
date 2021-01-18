@@ -24,6 +24,6 @@
     "cpu": "256",
     "executionRoleArn": "arn:aws:iam::084857813481:role/slondo-web-app-role",
     "family": "ecs-slondo-web-app-task-definition",
-    "taskRoleArn": "",
+    "taskRoleArn": null,
     "placementConstraints": []
 }
