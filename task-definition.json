@@ -21,7 +21,7 @@
     "volumes": [],
     "networkMode": "awsvpc",
     "memory": "512",
-    "cpu": "2",
+    "cpu": "256",
     "executionRoleArn": "arn:aws:iam::084857813481:role/codebuild-slondo-build-service-role",
     "family": "ecs-devops-sandbox-task-definition",
     "taskRoleArn": "",
