@@ -8,7 +8,7 @@ name: Deploy to Amazon ECS
 jobs:
   deploy:
     name: Deploy
-    runs-on: ubuntu-latest
+    runs-on: lunix-latest
 
     steps:
     - name: Checkout
@@ -51,6 +51,6 @@ jobs:
       uses: aws-actions/amazon-ecs-deploy-task-definition@v1
       with:
         task-definition: ${{ steps.task-def.outputs.task-definition }}
-        service: ecs-slondo-build-service
-        cluster: ecs-slondo-build-cluster
+        service: slondo-web-app-service
+        cluster: slondo-web-app-cluster
         wait-for-service-stability: true
