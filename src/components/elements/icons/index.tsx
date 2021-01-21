@@ -71,3 +71,4 @@ export { SurpriseIcon } from './SurpriseIcon';
 export { SubstractIcon } from './SubstractIcon';
 export { Search_icon } from './SearchIcon';
 export { LetterIcon } from './LetterIcon';
+export { NotificationIcon } from './NotificationIcon';

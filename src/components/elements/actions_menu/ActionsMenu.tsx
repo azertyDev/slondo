@@ -34,10 +34,10 @@ export const ActionsMenu: FC<any> = (props) => {
             <div className="menu-item">
                 <div>
                     <ButtonComponent
-                        className={pathname === '/cabinet/myAncmnts' ? 'selected' : 'moderation-failed'}
+                        className={pathname === '/cabinet/not-moderated' ? 'selected' : ''}
                         // onClick={onButtonClick('myAncmnts')}
                     >
-                        <Typography variant="subtitle1">Не прошло модерацию (2)</Typography>
+                        <Typography variant="subtitle1" className='error-text'>Не прошло модерацию (2)</Typography>
                     </ButtonComponent>
                 </div>
             </div>

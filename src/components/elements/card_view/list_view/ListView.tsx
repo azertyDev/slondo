@@ -1,5 +1,13 @@
+// @ts-check
 import React, { FC } from 'react';
-import { Typography, Paper, Button } from '@material-ui/core';
+import {
+    Typography,
+    Paper,
+    Button,
+    Grid,
+    Hidden,
+    Tooltip,
+} from '@material-ui/core';
 import {
     SettingsIcon,
     LocationIcon,
@@ -16,6 +24,7 @@ import {
     SwapIcon,
     PhoneIcon,
     LetterIcon,
+    NotificationIcon,
 } from '@src/components/elements/icons';
 import { ButtonComponent } from '@src/components/elements/button/Button';
 import { BreadcrumbsComponent } from '@src/components/elements/breadcrumbs/Breadcrumbs';
@@ -23,18 +32,23 @@ import { ViewPropsTypes } from '@src/components/elements/card_view/CardView';
 import { UserAvatarComponent } from '@src/components/elements/user_info_with_avatar/avatar/UserAvatarComponent';
 import { Rating } from '@src/components/elements/rating/Rating';
 import { Link } from '@root/i18n';
+import { pricePrettier } from '@src/helpers';
+import { WithT } from 'i18next';
+import { useRouter } from 'next/router';
 import { useStyles } from './useStyles';
 
-export const ListView: FC<ViewPropsTypes> = (props) => {
-    const { isFetch, list } = props;
+export const ListView: FC<ViewPropsTypes & WithT> = (props) => {
+    const { pathname } = useRouter();
+    const { list, t } = props;
+    const longText = `Вы принимаете предложения от других пользователей на обмен. Вы будете выделены специальным стикером. Ознакомиться с правилами «Возможен обмен»`;
 
     const classes = useStyles();
     return (
         <div className={classes.root}>
             {list.map((el) => {
                 return (
-                    <div className="ad-block" key={el.id}>
-                        <div>
+                    <Grid container key={el.id}>
+                        <Grid item xs={9} className="left-content">
                             <div className="breadcrumbs">
                                 <BreadcrumbsComponent>
                                     <Link href="#">
@@ -61,7 +75,7 @@ export const ListView: FC<ViewPropsTypes> = (props) => {
                                 </Typography>
                             </div>
                             <Paper variant="outlined" elevation={2}>
-                                <div className='card-data'>
+                                <div className="card-data">
                                     <div className="img">
                                         {el.images.map((image) => (
                                             <img
@@ -94,7 +108,7 @@ export const ListView: FC<ViewPropsTypes> = (props) => {
                                     </div>
                                     <div className="content">
                                         <div className="header">
-                                            <div>
+                                            <div className="ancmnt-title">
                                                 <Typography
                                                     variant="subtitle1"
                                                     color="initial"
@@ -130,12 +144,14 @@ export const ListView: FC<ViewPropsTypes> = (props) => {
                                                 </Typography>
                                             </span>
                                             {!!el.exchange && (
-                                                <span className="exchange">
-                                                    <SwapIcon />
-                                                    <Typography variant="body1">
-                                                        Возможен обмен
-                                                    </Typography>
-                                                </span>
+                                                <Tooltip title={longText} arrow>
+                                                    <span className="exchange">
+                                                        <SwapIcon />
+                                                        <Typography variant="body1">
+                                                            Возможен обмен
+                                                        </Typography>
+                                                    </span>
+                                                </Tooltip>
                                             )}
                                             {!!el.delivery && (
                                                 <span className="delivery">
@@ -176,52 +192,23 @@ export const ListView: FC<ViewPropsTypes> = (props) => {
                                                     variant="h5"
                                                     color="initial"
                                                 >
-                                                    {el.price}{' '}
-                                                    {el.currency.name}
+                                                    {pricePrettier(el.price)}{' '}
+                                                    {t(el.currency.name)}
                                                 </Typography>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                                <div className="card-buttons">
-                                    <Button
-                                        color="primary"
-                                        variant="contained"
-                                        className="promoteButton"
-                                        aria-label="promoteButton"
-                                        disabled={!el.promote}
-                                    >
-                                        <Typography variant="subtitle1">
-                                            Продвижение
-                                        </Typography>
-                                        <PromoteIcon />
-                                    </Button>
-                                    <Button
-                                        color="primary"
-                                        variant="contained"
-                                        className="raiseTopButton"
-                                        disabled={!el.raise}
-                                    >
-                                        <Typography variant="subtitle1">
-                                            Поднять в ТОП
-                                        </Typography>
-                                        <MegaphoneIcon />
-                                    </Button>
-                                    <Button
-                                        color="primary"
-                                        variant="contained"
-                                        className="doubleUpButton"
-                                        disabled={!el.raiseInRape}
-                                    >
-                                        <Typography variant="subtitle1">
-                                            Поднять в ленте
-                                        </Typography>
-                                        <DoubleUpIcon />
-                                    </Button>
-                                </div>
                             </Paper>
                             <div className="status-buttons">
-                                {el.accepted && (
+                                {el.accepted ? (
+                                    <ButtonComponent className="accept">
+                                        <DoneAllIcon />
+                                        <Typography variant="subtitle1">
+                                            Принять
+                                        </Typography>
+                                    </ButtonComponent>
+                                ) : (
                                     <ButtonComponent className="accepted">
                                         <DoneAllIcon />
                                         <Typography variant="subtitle1">
@@ -237,47 +224,154 @@ export const ListView: FC<ViewPropsTypes> = (props) => {
                                         </Typography>
                                     </ButtonComponent>
                                 )}
-                                {el.denied && (
+                                {el.isModerated && (
+                                    <ButtonComponent className="expecting">
+                                        <RestoreIcon />
+                                        <Typography variant="subtitle1">
+                                            На модерации
+                                        </Typography>
+                                    </ButtonComponent>
+                                )}
+                                {el.follow && (
+                                    <ButtonComponent className="follow">
+                                        <NotificationIcon />
+                                        <Typography variant="subtitle1">
+                                            Следить
+                                        </Typography>
+                                    </ButtonComponent>
+                                )}
+                                {el.denied ? (
                                     <Button className="denied">
                                         <CloseIcon />
                                         <Typography variant="subtitle1">
                                             Отказано
                                         </Typography>
                                     </Button>
-                                )}
-                                {el.accepted && el.expected && el.denied ? (
-                                    <ButtonComponent className="complete">
+                                ) : (
+                                    <Button className="denied">
+                                        <CloseIcon />
                                         <Typography variant="subtitle1">
-                                            Завершить
+                                            Отказать
                                         </Typography>
-                                    </ButtonComponent>
+                                    </Button>
+                                )}
+                                {el.accepted ||
+                                    el.expected ||
+                                    (el.denied && (
+                                        <ButtonComponent className="complete">
+                                            <Typography variant="subtitle1">
+                                                Завершить
+                                            </Typography>
+                                        </ButtonComponent>
+                                    ))}
+                            </div>
+                        </Grid>
+                        <Hidden xsUp={false}>
+                            <Grid item xs={3} className="right-content">
+                                {pathname === '/cabinet/myAncmnts' && (
+                                    <div className="card-buttons">
+                                        <Button
+                                            color="primary"
+                                            variant="contained"
+                                            className="promoteButton"
+                                            aria-label="promoteButton"
+                                            disabled={el.isModerated}
+                                        >
+                                            <Typography variant="subtitle1">
+                                                Продвижение
+                                            </Typography>
+                                            <PromoteIcon />
+                                        </Button>
+                                        <Button
+                                            color="primary"
+                                            variant="contained"
+                                            className="raiseTopButton"
+                                            disabled={el.isModerated}
+                                        >
+                                            <Typography variant="subtitle1">
+                                                Поднять в ТОП
+                                            </Typography>
+                                            <MegaphoneIcon />
+                                        </Button>
+                                        <Button
+                                            color="primary"
+                                            variant="contained"
+                                            className="doubleUpButton"
+                                            disabled={el.isModerated}
+                                        >
+                                            <Typography variant="subtitle1">
+                                                Поднять в ленте
+                                            </Typography>
+                                            <DoubleUpIcon />
+                                        </Button>
+                                    </div>
+                                )}
+
+                                {pathname === '/cabinet/myAuctions' ? (
+                                    <div className="profile-form">
+                                        <div className="extreme-rate">
+                                            <Typography
+                                                variant="subtitle1"
+                                                color="initial"
+                                            >
+                                                Крайняя ставка
+                                            </Typography>
+                                            {/* <Typography
+                                                variant="subtitle1"
+                                                color="initial"
+                                            >
+                                                Продавец
+                                            </Typography> */}
+                                            <ButtonComponent>
+                                                <Typography
+                                                    variant="subtitle1"
+                                                    color="initial"
+                                                >
+                                                    ?
+                                                </Typography>
+                                            </ButtonComponent>
+                                        </div>
+                                        <div className="profile-data">
+                                            <UserAvatarComponent />
+                                            <Typography
+                                                variant="subtitle1"
+                                                color="initial"
+                                            >
+                                                Имя Фамилия
+                                            </Typography>
+                                            <Rating card />
+                                            <ButtonComponent className="show-phone-btn">
+                                                <Typography
+                                                    variant="subtitle2"
+                                                    color="initial"
+                                                >
+                                                    Показать номер
+                                                </Typography>
+                                            </ButtonComponent>
+                                        </div>
+                                        <div>
+                                            <ButtonComponent>
+                                                <LetterIcon />
+                                                <Typography
+                                                    variant="subtitle1"
+                                                    color="initial"
+                                                >
+                                                    Написать
+                                                </Typography>
+                                            </ButtonComponent>
+                                            {/* <Typography
+                                            variant="subtitle2"
+                                            color="initial"
+                                        >
+                                            <span>*</span> Оценка доступна в течении 90
+                                            календарных дней
+                                        </Typography> */}
+                                        </div>
+                                    </div>
                                 ) : null}
-                            </div>
-                        </div>
-                        {/* <div className="profile-form">
-                            <div>
-                                <UserAvatarComponent />
-                                <Typography variant="subtitle1" color="initial">
-                                    <span>Имя Фамилия</span>
-                                </Typography>
-                                <Rating card />
-                                <ButtonComponent className="show-phone-btn">
-                                    <Typography
-                                        variant="subtitle2"
-                                        color="initial"
-                                    >
-                                        Показать номер
-                                    </Typography>
-                                </ButtonComponent>
-                            </div>
-                            <ButtonComponent>
-                                <LetterIcon />
-                                <Typography variant="subtitle1" color="initial">
-                                    Написать
-                                </Typography>
-                            </ButtonComponent>
-                        </div> */}
-                    </div>
+                            </Grid>
+                        </Hidden>
+                    </Grid>
                 );
             })}
         </div>

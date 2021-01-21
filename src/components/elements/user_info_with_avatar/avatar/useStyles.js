@@ -1,10 +1,10 @@
-import Badge from '@material-ui/core/Badge'
-import { makeStyles, withStyles } from '@material-ui/core/styles'
+import Badge from '@material-ui/core/Badge';
+import { makeStyles, withStyles } from '@material-ui/core/styles';
 
 export const StyledBadge = withStyles((theme) => ({
     badge: {
-        backgroundColor: '#44b700',
-        color: '#44b700',
+        backgroundColor: 'rgba(173, 102, 213, 1)',
+        color: 'rgba(173, 102, 213, 1)',
         boxShadow: `0 0 0 2px ${theme.palette.background.paper}`,
         '&::after': {
             position: 'absolute',
@@ -28,7 +28,7 @@ export const StyledBadge = withStyles((theme) => ({
             opacity: 0,
         },
     },
-}))(Badge)
+}))(Badge);
 
 export const useStyles = makeStyles((theme) => ({
     root: {
@@ -36,6 +36,6 @@ export const useStyles = makeStyles((theme) => ({
         '& span > div.MuiAvatar-root': {
             width: '80px',
             height: '80px',
-        }
+        },
     },
-}))
+}));

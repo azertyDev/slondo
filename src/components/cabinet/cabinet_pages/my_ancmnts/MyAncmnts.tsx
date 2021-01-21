@@ -1,16 +1,22 @@
-import React from 'react';
-import { ListView } from '@src/components/elements/card_view/list_view/ListView';
+import React, { FC } from 'react';
+import {
+    CardView,
+    ViewPropsTypes,
+} from '@root/src/components/elements/card_view/CardView';
+import { WithT } from 'i18next';
 
 // styles
 import { useStyles } from './useStyles';
 
-export const MyAncmnts = (props) => {
+export const MyAncmnts: FC<ViewPropsTypes & WithT> = (props) => {
+    const { isFetch, list, t } = props;
     const classes = useStyles();
 
     return (
         <div className={classes.root}>
-            {/* <ListView />
-            <ListView /> */}
+            <>
+                <CardView listMode={true} list={list} isFetch={isFetch} t={t} />
+            </>
         </div>
     );
 };

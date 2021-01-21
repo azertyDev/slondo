@@ -1,11 +1,11 @@
-import React from 'react'
-import Avatar from '@material-ui/core/Avatar'
+import React from 'react';
+import Avatar from '@material-ui/core/Avatar';
 
 // styles
-import { useStyles, StyledBadge } from './useStyles'
+import { useStyles, StyledBadge } from './useStyles';
 
 export const UserAvatarComponent = () => {
-    const classes = useStyles()
+    const classes = useStyles();
     return (
         <div className={classes.root}>
             <StyledBadge
@@ -16,9 +16,11 @@ export const UserAvatarComponent = () => {
                 }}
                 variant="dot"
             >
-                <Avatar alt="Remy Sharp" src="https://material-ui.com/static/images/avatar/1.jpg" />
+                <Avatar
+                    alt="avatar"
+                    src="https://i.pinimg.com/originals/6c/a1/68/6ca168f20499b9edf0092a57373ea5b7.jpg"
+                />
             </StyledBadge>
         </div>
-    )
-}
-
+    );
+};

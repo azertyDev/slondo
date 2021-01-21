@@ -7,13 +7,13 @@ export const useStyles = makeStyles((theme) => ({
             margin: '0 0 30px 30px',
         },
         '& div.MuiTabs-root': {
-            minHeight: 20,
+            minHeight: 28,
             '& > div > div': {
                 '& > button': {
                     borderBottom: '1px solid #838383',
                     width: '100%',
                     padding: '0',
-                    minHeight: 20,
+                    minHeight: 28,
                     '& > span > h6.MuiTypography-subtitle1': {
                         textTransform: 'uppercase',
                     },

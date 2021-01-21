@@ -1,18 +1,20 @@
-import React from 'react';
+import React, { FC } from 'react';
 import { TabsContent } from '@src/components/cabinet/cabinet_pages/TabsContent';
 import { MyAncmnts } from '@src/components/cabinet/cabinet_pages/my_ancmnts/MyAncmnts';
+import { CabinetMockData } from '../../CabinetData';
+import { WithT } from 'i18next';
 
-export const MyAncmntsContainer = (props) => {
+export const MyAncmntsContainer: FC<WithT> = ({t}) => {
     const tabsData = [
         {
             title: 'Объявления',
-            count: 2,
-            component: <MyAncmnts />,
+            count: CabinetMockData.length,
+            component: <MyAncmnts list={CabinetMockData} t={t}/>,
         },
         {
             title: 'Безопасная покупка',
-            count: 2,
-            component: <MyAncmnts safeShopping />,
+            count: CabinetMockData.length,
+            component: <MyAncmnts list={CabinetMockData} t={t}/>,
         },
     ];
 

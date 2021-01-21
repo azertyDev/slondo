@@ -16,7 +16,6 @@ export const useStyles = makeStyles((theme) => ({
         boxShadow: (props) =>
             props.color === 'primary' ? 'none' : '0px 0px 8px 0px #845CAB 20%',
         borderRadius: '3px',
-        border: '1px solid',
         borderColor: (props) =>
             props.color === 'primary'
                 ? 'transparent'

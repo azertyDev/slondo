@@ -16,15 +16,8 @@ export const useStyles = makeStyles((theme) => ({
                     borderRadius: '5px',
                     background: '#fff',
                     boxShadow: '0px 1px 2px rgba(0, 0, 0, 0.25)',
-                    border: '1px solid transparent',
-                    backgroundClip: 'padding-box',
                     '& > svg': {
                         marginRight: '10px',
-                    },
-                    '&.moderation-failed': {
-                        '& > h6.MuiTypography-subtitle1': {
-                            color: theme.palette.primary.error
-                        },
                     },
                     '&.selected': {
                         border: '1px solid #AD66D5',

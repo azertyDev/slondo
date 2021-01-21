@@ -13,7 +13,7 @@ export type InnerCardData = {
     title: string;
     safe_deal: number;
     price: number;
-    number_of_views: number,
+    number_of_views: number;
     region: {
         id: number;
         name: string;
@@ -43,10 +43,12 @@ export type InnerCardData = {
         name: string;
         mark: string;
     };
-    accepted: boolean;
-    expected: boolean;
-    denied: boolean;
-    promote: boolean;
-    raise: boolean;
-    raiseInRape: boolean;
+    accepted?: boolean;
+    expected?: boolean;
+    denied?: boolean;
+    promote?: boolean;
+    raise?: boolean;
+    raiseInRape?: boolean;
+    isModerated?: boolean;
+    follow?: boolean;
 };
