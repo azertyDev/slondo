@@ -103,7 +103,7 @@ export const useStyles = makeStyles((theme) => ({
                                     color: '#838383',
                                 },
                                 '& > a': {
-                                    marginLeft: '5px',
+                                    marginLeft: '7px',
                                     '&.favorite-icon': {
                                         '& svg': {
                                             '& defs': {
@@ -280,6 +280,8 @@ export const useStyles = makeStyles((theme) => ({
                     left: '-120px',
                     '& > span > svg': {
                         marginLeft: '10px',
+                        width: '16px',
+                        height: '16px',
                     },
                     '&:disabled': {
                         backgroundColor: '#ccc !important',

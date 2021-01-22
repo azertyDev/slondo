@@ -22,10 +22,6 @@ export const useStyles = makeStyles((theme) => ({
                     '&.selected': {
                         border: '1px solid #AD66D5',
                         borderRadius: '5px',
-                        // borderStyle: 'inset',
-                        // borderImageSlice: '1',
-                        // borderImageSource:
-                        //     'linear-gradient(49.94deg, #675EAA 19.03%, #AD66D5 72.72%)',
                         '& > h6.MuiTypography-subtitle1': {
                             backgroundImage:
                                 'linear-gradient(49.94deg, #675EAA 19.03%, #AD66D5 72.72%)',
@@ -59,6 +55,8 @@ export const useStyles = makeStyles((theme) => ({
                         height: '16px',
                         padding: 0,
                         fontWeight: 600,
+                        backgroundColor: '#EB5757',
+                        color: '#fff',
                     },
                 },
                 '& > button:first-child': {

@@ -193,7 +193,7 @@ export const ListView: FC<ViewPropsTypes & WithT> = (props) => {
                                                     color="initial"
                                                 >
                                                     {pricePrettier(el.price)}{' '}
-                                                    {t(el.currency.name)}
+                                                    {t(`common:${el.currency.name}`)}
                                                 </Typography>
                                             </div>
                                         </div>
@@ -201,7 +201,7 @@ export const ListView: FC<ViewPropsTypes & WithT> = (props) => {
                                 </div>
                             </Paper>
                             <div className="status-buttons">
-                                {el.accepted ? (
+                                {!!el.accepted ? (
                                     <ButtonComponent className="accept">
                                         <DoneAllIcon />
                                         <Typography variant="subtitle1">
@@ -216,7 +216,7 @@ export const ListView: FC<ViewPropsTypes & WithT> = (props) => {
                                         </Typography>
                                     </ButtonComponent>
                                 )}
-                                {el.expected && (
+                                {!!el.expected && (
                                     <ButtonComponent className="expecting">
                                         <RestoreIcon />
                                         <Typography variant="subtitle1">
@@ -224,7 +224,7 @@ export const ListView: FC<ViewPropsTypes & WithT> = (props) => {
                                         </Typography>
                                     </ButtonComponent>
                                 )}
-                                {el.isModerated && (
+                                {!!el.isModerated && (
                                     <ButtonComponent className="expecting">
                                         <RestoreIcon />
                                         <Typography variant="subtitle1">
@@ -232,7 +232,7 @@ export const ListView: FC<ViewPropsTypes & WithT> = (props) => {
                                         </Typography>
                                     </ButtonComponent>
                                 )}
-                                {el.follow && (
+                                {!!el.follow && (
                                     <ButtonComponent className="follow">
                                         <NotificationIcon />
                                         <Typography variant="subtitle1">
@@ -240,7 +240,7 @@ export const ListView: FC<ViewPropsTypes & WithT> = (props) => {
                                         </Typography>
                                     </ButtonComponent>
                                 )}
-                                {el.denied ? (
+                                {!!el.denied ? (
                                     <Button className="denied">
                                         <CloseIcon />
                                         <Typography variant="subtitle1">
@@ -255,7 +255,7 @@ export const ListView: FC<ViewPropsTypes & WithT> = (props) => {
                                         </Typography>
                                     </Button>
                                 )}
-                                {el.accepted ||
+                                {!!el.accepted ||
                                     el.expected ||
                                     (el.denied && (
                                         <ButtonComponent className="complete">

@@ -2,10 +2,10 @@ import React, { FC, useState } from 'react';
 import { Hidden, NativeSelect, Typography } from '@material-ui/core';
 import { SearchIcon, FilterIcon } from '../icons';
 import { ButtonComponent } from '../button/Button';
-import { useStyles } from './useStyles';
 import { useTranslation } from '@root/i18n';
+import { useStyles } from './useStyles';
 
-export const SearchForm: FC = (props) => {
+export const SearchForm: FC = () => {
     const { t } = useTranslation(['header']);
 
     const [adType, setAdType] = useState(1);
