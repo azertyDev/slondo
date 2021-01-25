@@ -5,12 +5,16 @@ import {
     FormGroup,
     Grid,
     Switch,
+    Checkbox,
+    FormLabel,
+    Card,
     Typography,
 } from '@material-ui/core';
 import { CabinetMenuWrapper } from '@src/components/cabinet/CabinetMenuWrapper';
 import { CustomFormikField } from '@src/components/elements/custom_formik_field/CustomFormikField';
 import { Form, FormikProvider, useFormik } from 'formik';
 import { useStyles } from './useStyles';
+import { ButtonComponent } from '@root/src/components/elements/button/Button';
 
 const initialInputsVals = {
     firstName: '',
@@ -39,17 +43,17 @@ export const SafetyDealComponent: FC = () => {
             <CabinetMenuWrapper headerTitle={title} title={title}>
                 <div className="wrapper">
                     <Grid item xs={7}>
-                        <FormControl component="div">
-                            <FormGroup aria-label="position">
-                                <FormControlLabel
-                                    control={<Switch color="primary" />}
-                                    label="Подключить функцию Безопасная покупка"
-                                    labelPlacement="start"
-                                />
-                            </FormGroup>
-                        </FormControl>
                         <FormikProvider value={formik}>
                             <Form onSubmit={formik.handleSubmit}>
+                                <FormControl component="div">
+                                    <FormGroup aria-label="position">
+                                        <FormControlLabel
+                                            control={<Switch color="primary" />}
+                                            label="Подключить функцию Безопасная покупка"
+                                            labelPlacement="start"
+                                        />
+                                    </FormGroup>
+                                </FormControl>
                                 <CustomFormikField
                                     name="firstName"
                                     type="text"
@@ -84,6 +88,73 @@ export const SafetyDealComponent: FC = () => {
                                     labelText="Добавить резервный номер"
                                     placeholder="+998"
                                 />
+                                <FormControlLabel
+                                    control={<Checkbox color="primary" />}
+                                    label="Отображать номер телефона"
+                                    labelPlacement="start"
+                                />
+                                <div>
+                                    <FormLabel component="label">
+                                        Добавить карту<span>*</span>
+                                    </FormLabel>
+                                    <Card className={classes.creditCard}>
+                                        <Typography
+                                            variant="subtitle1"
+                                            color="initial"
+                                        >
+                                            Slondo bank
+                                        </Typography>
+                                        <Typography
+                                            variant="subtitle2"
+                                            color="initial"
+                                        >
+                                            Номер карты
+                                        </Typography>
+                                        <div>
+                                            <CustomFormikField
+                                                name="card-number"
+                                                type="text"
+                                                placeholder="XXXX"
+                                            />
+                                            <CustomFormikField
+                                                name="card-number"
+                                                type="text"
+                                                placeholder="XXXX"
+                                            />
+                                            <CustomFormikField
+                                                name="card-number"
+                                                type="text"
+                                                placeholder="XXXX"
+                                            />
+                                            <CustomFormikField
+                                                name="card-number"
+                                                type="text"
+                                                placeholder="XXXX"
+                                            />
+                                        </div>
+                                        <Typography
+                                            variant="subtitle2"
+                                            color="initial"
+                                        >
+                                            Срок действия
+                                        </Typography>
+                                        <div>
+                                            <CustomFormikField
+                                                name="card-number"
+                                                type="text"
+                                                placeholder="xx/xx"
+                                                helperText="месяц / год"
+                                            />
+                                            <ButtonComponent disabled>
+                                                Сохранить
+                                            </ButtonComponent>
+                                        </div>
+                                    </Card>
+                                </div>
+                                <div className='submit-part'>
+                                    <ButtonComponent>Применить</ButtonComponent>
+                                    <Typography variant="subtitle1" color="initial">Нажимая кнопку “Сохранить” вы принимаете публичную оферту “Безопасной покупки”</Typography>
+                                </div>
                             </Form>
                         </FormikProvider>
                     </Grid>
