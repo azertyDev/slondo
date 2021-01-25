@@ -147,15 +147,15 @@ export const PostFormContainer: FC<PostFormContainerProps & WithT> = (props) => 
             available_days,
             phone: !!phone ? phone : null,
             currency_id: currency.id,
+            [mark]: {}
         };
+
         Object.keys(postParamsByMark).map(k => {
-            if (!!postParamsByMark[k] && postParamsByMark[k].id) {
-                valsForCrtPost[mark][`${k}_id`] = postParamsByMark[k].id;
+            if (!!postParamsByMark[k] && !!postParamsByMark[k].id) {
+                const modifiedKey = k.replace(/s$/, '');
+                valsForCrtPost[mark][`${modifiedKey}_id`] = postParamsByMark[k].id;
             } else {
-                valsForCrtPost[mark] = {
-                    ...valsForCrtPost[mark],
-                    [k]: postParamsByMark[k]
-                }
+                valsForCrtPost[mark][k] = postParamsByMark[k];
             }
         });
 
@@ -203,15 +203,13 @@ export const PostFormContainer: FC<PostFormContainerProps & WithT> = (props) => 
 
         Object.keys(dataForCrtPost).forEach(dataKey => {
             if (Array.isArray(dataForCrtPost[dataKey])) {
-                postParams[mark] = {
-                    ...postParams[mark],
-                    [dataKey]: noSelectData
+                if (textFieldKeys.some(k => k === dataKey)) {
+                    postParams[mark][dataKey] = {...noSelectData, txt: ''}
+                } else {
+                    postParams[mark][dataKey] = noSelectData;
                 }
             } else {
-                postParams[mark] = {
-                    ...postParams[mark],
-                    [dataKey]: dataForCrtPost[dataKey]
-                }
+                postParams[mark][dataKey] = dataForCrtPost[dataKey];
             }
         });
 
@@ -240,7 +238,6 @@ export const PostFormContainer: FC<PostFormContainerProps & WithT> = (props) => 
                 form.set('ads_id', postId.toString());
                 await userAPI.uploadPhotos(form);
 
-                console.log(postId)
                 setValues({...values, isFetch: false});
 
                 handleNextStep();
@@ -265,13 +262,14 @@ export const PostFormContainer: FC<PostFormContainerProps & WithT> = (props) => 
             <form onSubmit={handleSubmit}>
                 <PostForm
                     {...props}
+                    mark={mark}
                     errors={errors}
                     touched={touched}
                     values={values}
-                    mark={mark}
                     setValues={setValues}
                     locations={locations}
                     handleBlur={handleBlur}
+                    secLvlCtgr={secLvlCtgr}
                     handleTime={handleTime}
                     handleInput={handleInput}
                     handleSwitch={handleSwitch}
@@ -279,8 +277,6 @@ export const PostFormContainer: FC<PostFormContainerProps & WithT> = (props) => 
                     handleListItem={handleListItem}
                     handleMenuItem={handleMenuItem}
                     handleLocation={handleLocation}
-                    secLvlCtgr={secLvlCtgr}
-                    handleAuctionInput={handleAuctionInput}
                     handleParamsCheckbox={handleParamsCheckbox}
                     handleCheckboxChange={handleCheckboxChange}
                 />
@@ -337,26 +333,33 @@ export const PostFormContainer: FC<PostFormContainerProps & WithT> = (props) => 
         }
     }
 
-    function handleParamsCheckbox(valueName, value) {
+    function handleListItem(keyName, value) {
         return () => {
-            let post = {...postParams, [valueName]: [value]};
+            if (postParamsByMark[keyName] && postParamsByMark[keyName].id === value.id) {
+                postParamsByMark[keyName] = {id: null, name: 'Не выбрано'};
+            } else {
+                postParamsByMark[keyName] = value;
+            }
+            postParams[mark] = postParamsByMark;
+            setValues({...values, postParams});
+        };
+    }
 
-            if (postParams[valueName]) {
-                if (postParams[valueName].some(val => val.id === value.id)) {
-                    postParams[valueName].map((val, index) => {
+    function handleParamsCheckbox(keyName, value) {
+        return () => {
+            if (postParamsByMark[keyName]) {
+                if (postParamsByMark[keyName].some(val => val.id === value.id)) {
+                    postParamsByMark[keyName].forEach((val, index) => {
                         if (val.id === value.id) {
-                            postParams[valueName].splice(index, 1);
+                            postParamsByMark[keyName].splice(index, 1);
                         }
                     });
                 } else {
-                    post = {
-                        ...postParams,
-                        [valueName]: [...postParams[valueName], value]
-                    };
+                    postParamsByMark[keyName] = value;
                 }
+                postParams[mark] = postParamsByMark;
+                setValues({...values, postParams});
             }
-
-            setValues({...values, postParams: post});
         };
     }
 
@@ -381,73 +384,45 @@ export const PostFormContainer: FC<PostFormContainerProps & WithT> = (props) => 
                     }
                 });
             } else {
-                // Reset sub props in values
-                Object.keys(newValue).map(key => {
-                    if (postParams[key]) {
-                        values.postParams = {
-                            ...postParams,
-                            [key]: {id: null, name: 'Не выбрано'}
-                        };
-                    }
-                    postParams[mark] = {
-                        ...postParams[mark],
-                        [valueName]: newValue
-                    };
-
-                    setValues({
-                        ...values,
-                        postParams: {...postParams}
-                    });
-                });
+                const isTxtField = textFieldKeys.some(k => k === valueName);
+                postParams[mark] = {
+                    ...postParamsByMark,
+                    [valueName]: isTxtField
+                        ? {...postParamsByMark[valueName], ...newValue}
+                        : newValue
+                };
+                setValues({...values, postParams});
             }
         }
     }
 
-    function handleListItem(valueName, value) {
-        return () => {
-            if (postParams[valueName] && postParams[valueName].id === value.id) {
-                values.postParams = {
-                    ...postParams,
-                    [valueName]: {id: null, name: 'Не выбрано'}
-                };
-            } else {
-                values.postParams = {...postParams, [valueName]: value};
-            }
-            setValues({...values});
-        };
-    }
+    function handleInput({target: {name, value}}) {
+        const isNumericField = [
+            'price',
+            'reserve_price',
+            'price_by_now',
+            'year',
+            'area'
+        ].some((n => n === name));
 
-    function handleInput({target}) {
-        const {name, value} = target;
-        if (name === 'price') {
-            if (numberRegEx.test(target.value)) {
-                values.defaultParams.price = value;
-                setValues({...values});
+        if (isNumericField) {
+            if (numberRegEx.test(value)) {
+                if (name === 'price') {
+                    values.defaultParams.price = value;
+                } else if (name === 'reserve_price') {
+                    values.auction.reserve_price = value;
+                } else if (name === 'price_by_now') {
+                    values.auction.price_by_now.value = value;
+                } else if (name === 'year') {
+                    postParams[mark].year = value;
+                } else if (name === 'area') {
+                    postParams[mark].area.txt = value;
+                }
             }
         } else {
             values.defaultParams[name] = value;
-            setValues({...values});
         }
-    }
-
-    function handleAuctionInput(valName) {
-        return ({target}) => {
-            if (numberRegEx.test(target.value)) {
-                if (valName === 'price_by_now') {
-                    values.auction = {
-                        ...values.auction,
-                        [valName]: {
-                            isActive: true,
-                            value: target.value
-                        }
-                    };
-                    setValues({...values});
-                } else {
-                    values.auction = {...values.auction, [valName]: target.value};
-                    setValues({...values});
-                }
-            }
-        }
+        setValues({...values});
     }
 
     function handleSwitch(_, value) {

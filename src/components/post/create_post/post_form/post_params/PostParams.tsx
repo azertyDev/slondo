@@ -3,7 +3,7 @@ import {Grid, TextField, Typography} from "@material-ui/core";
 import {isRequired} from "@root/validation_schemas/createPostSchema";
 import {CustomCheckbox} from "@src/components/elements/custom_checkbox/CustomCheckbox";
 import {CustomMenu} from "@src/components/elements/custom_menu/CustomMenu";
-import {autoSelectKeys, textFieldKeys} from "../PostFormContainer";
+import {textFieldKeys} from "../PostFormContainer";
 import {useStyles} from "./useStyles";
 
 
@@ -37,8 +37,8 @@ export const PostParams: FC<any> = (props) => {
 
     const isNotEmptyArray = Array.isArray(data) && !!data.length;
     const isTextFieldKey = textFieldKeys.some(k => k === keyName);
-    console.log(paramsByMark[keyName])
     let fields;
+
     const classes = useStyles({isPreview});
     if (isSpecialRows && isNotEmptyArray) {
         fields = <>
@@ -81,33 +81,30 @@ export const PostParams: FC<any> = (props) => {
                                 />
                                 : <div style={{display: 'flex', alignItems: 'center'}}>
                                     <CustomCheckbox
-                                        disabled={isPreview}
                                         checked={
                                             paramsByMark[keyName] && paramsByMark[keyName].some(val => val.id === item.id)
                                         }
                                         onChange={handleParamsCheckbox(keyName, item)}
                                     />
                                     <Typography>{item.name}</Typography>
-                                </div>
-                        }
+                                </div>}
                     </div>
                 ))}
             </div>
         </>;
     } else if (isNotEmptyArray) {
-        const newKey = isTextFieldKey ? `${keyName}_value` : keyName;
         fields = <>
             <Typography variant="subtitle1">
                 <strong>
-                    {t(newKey)}
-                    {isRequired(newKey)
+                    {t(keyName)}
+                    {isRequired(keyName)
                     && <span className='error-text'>*</span>}
                 </strong>
                 {postParamsError
                 && postParamsTouched
-                && postParamsError[newKey]
-                && postParamsTouched[newKey]
-                && <span className='error-text'> {postParamsError[newKey].id}</span>}
+                && postParamsError[keyName]
+                && postParamsTouched[keyName]
+                && <span className='error-text'> {postParamsError[keyName].id}</span>}
             </Typography>
             <Grid container>
                 {isTextFieldKey && (
@@ -115,14 +112,17 @@ export const PostParams: FC<any> = (props) => {
                         <TextField
                             fullWidth
                             variant='outlined'
-                            value={paramsByMark[newKey] ?? ''}
+                            value={
+                                paramsByMark[keyName]
+                                    ? isTextFieldKey ? paramsByMark[keyName].txt : ''
+                                    : ''}
                             name={keyName}
                             onChange={handleInput}
                             className={
                                 postParamsError
                                 && postParamsTouched
-                                && postParamsError[newKey]
-                                && postParamsTouched[newKey] ? 'error-border' : ''
+                                && postParamsError[keyName]
+                                && postParamsTouched[keyName] ? 'error-border' : ''
                             }
                         />
                     </Grid>
@@ -149,6 +149,7 @@ export const PostParams: FC<any> = (props) => {
             </Grid>
         </>;
     } else if (!Array.isArray(data)) {
+        console.log(paramsByMark[keyName])
         fields = <>
             <Typography variant="subtitle1">
                 {t(keyName)}
