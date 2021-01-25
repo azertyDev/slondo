@@ -37,9 +37,5 @@ export type InnerCardData = {
     created_at: string;
     delivery: number;
     exchange: number;
-    ads_type: {
-        id: number;
-        name: string;
-        mark: string;
-    };
+    ads_type: string;
 };

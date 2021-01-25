@@ -37,7 +37,14 @@ const formatData = (list) => {
     }, []);
 };
 
-export const LocationAutocomplete: FC<AddressAutocompleteProps & AllHTMLAttributes<string>> = ({values, setValues, ...props}) => {
+export const LocationAutocomplete:
+    FC<AddressAutocompleteProps & AllHTMLAttributes<string>> = (
+    {
+        list,
+        onChange,
+        disabled
+    }
+) => {
     const optionSelected = ({district_id, city_id}, value) => {
         return value.district_id
             ? district_id === value.district_id
@@ -50,27 +57,23 @@ export const LocationAutocomplete: FC<AddressAutocompleteProps & AllHTMLAttribut
             : `${location.city}, ${location.region}`;
     };
 
-    const onChange = (_, val) => {
-        setValues({...values, location: val});
-    };
-
     return (
         <Autocomplete
-            value={values.location}
+            disabled={disabled}
             onChange={onChange}
             noOptionsText='Город или регион с таким именем не найден'
-            options={formatData(props.list)}
+            options={formatData(list)}
             getOptionSelected={optionSelected}
             getOptionLabel={option}
-            renderInput={(params: any) => {
-                return <TextField
+            renderInput={(params: any) => (
+                <TextField
+                    {...params}
                     fullWidth
                     focused={false}
                     variant='outlined'
-                    {...params}
-                    {...props}
+                    placeholder='Выберите местоположение'
                 />
-            }}
+            )}
         />
     )
 };

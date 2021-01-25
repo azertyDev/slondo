@@ -1,10 +1,5 @@
-import {SetStateAction} from "react";
-import {CreateAncmntFields} from "@root/interfaces/Announcement";
-
 export interface AddressAutocompleteProps {
-    values: CreateAncmntFields;
-    setValues: (values: SetStateAction<unknown>, shouldValidate?: boolean | undefined) => any;
-    list: Array<{
+    list: {
         id: number;
         name: string;
         cities: [{
@@ -16,5 +11,5 @@ export interface AddressAutocompleteProps {
                 name: string;
             }]
         }]
-    }>;
+    }[];
 }

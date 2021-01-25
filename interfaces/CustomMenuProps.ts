@@ -1,6 +1,7 @@
 import {FocusEvent} from "react";
 
 export interface CustomMenuProps {
+    disabled?: boolean;
     name?: string;
     className?: string;
     valueName: string;

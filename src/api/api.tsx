@@ -2,6 +2,7 @@ import Axios from 'axios';
 // import Cookies from 'universal-cookie';
 import {LocationsDataTypes} from "@root/interfaces/Locations";
 import {CategoryType} from "@root/interfaces/Categories";
+import {InnerCardData} from "@root/interfaces/CardData";
 
 
 // const cookies = new Cookies();
@@ -12,7 +13,7 @@ const localServer = 'http://192.168.1.60/slondo/public/api/';
 
 const instance = Axios.create({
     withCredentials: true,
-    baseURL: amazonServer
+    baseURL: localServer
 });
 
 // const config = {
@@ -44,14 +45,25 @@ export const userAPI = {
                 throw err
             });
     },
-    getDataForCreateAncmnt: (ctgryID: number, subCtgryID: number, lang: string): Promise<unknown> => {
-        return instance.get(`subcategory?parent_id=${ctgryID}&lang=${lang}&child_id=${subCtgryID}`)
+    getDataForCreatePost: (data): Promise<any> => {
+        const {
+            fstLvlCtgr,
+            secLvlCtgr,
+            trdLvlCtgr,
+            lang
+        } = data;
+        return instance.get(
+            `subcategory?category_id=${fstLvlCtgr}&sub_category_id=${secLvlCtgr}&type_id=${trdLvlCtgr}&lang=${lang}`
+        )
             .then(res => res.data)
             .catch(err => {
                 throw err
             });
     },
-    getCards: (itemsPerPage: number, page: number, type: string, lang: string): Promise<any> => {
+    getCards: (itemsPerPage: number, page: number, type: string, lang: string): Promise<{
+        data: InnerCardData[];
+        total: number;
+    }> => {
         return instance.get(`ads/all?itemsPerPage=${itemsPerPage}&page=${page}&type=${type}&lang=${lang}`)
             .then((res) => res.data)
             .catch((err) => {
@@ -72,8 +84,8 @@ export const userAPI = {
                 throw err
             });
     },
-    createAdvrt: (data: any): Promise<LocationsDataTypes> => {
-        return instance.post(`regular/ads/new`, data)
+    createPost: (values: any): Promise<LocationsDataTypes> => {
+        return instance.post(`regular/ads/new`, values)
             .then(res => res.data)
             .catch(err => {
                 throw err
@@ -81,6 +93,13 @@ export const userAPI = {
     },
     getAncmntsTypes: (lang: string): Promise<any> => {
         return instance.get(`ads/type?lang=${lang}`)
+            .then(res => res.data)
+            .catch(err => {
+                throw err
+            });
+    },
+    uploadPhotos: (form: FormData): Promise<any> => {
+        return instance.post(`regular/ads/imageUpload`, form)
             .then(res => res.data)
             .catch(err => {
                 throw err

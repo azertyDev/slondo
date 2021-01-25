@@ -4,6 +4,7 @@
   "createAncmnt": "E'lon yaratish",
   "sum": "so'm",
   "уе": "у.е.",
-  "ancmnt": "E'lon",
-  "auction": "Auktsion"
+  "anc": "Объявление",
+  "auc": "Аукцион",
+  "exauc": "Продвинутый аукцион"
 }

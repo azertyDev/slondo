@@ -46,7 +46,7 @@ export const CardItem: FC<CardItemProps> = (props) => {
 
     const translatedTitle = transformTitle(title);
 
-    const classes = useStyles(ads_type);
+    const classes = useStyles({ads_type});
     return (
         <div className={classes.root}>
             <IconButton className='favorite-btn'>
@@ -69,7 +69,7 @@ export const CardItem: FC<CardItemProps> = (props) => {
                                 <div className="card-header">
                                     <div className='title'>
                                         <Typography variant="subtitle2">
-                                            {t(ads_type ? ads_type.mark : 'ancmnt')}
+                                            {t(ads_type)}
                                         </Typography>
                                     </div>
                                     <div className='icons'>

@@ -10,8 +10,8 @@ import {
 } from '@material-ui/core';
 import {MainSlider} from './mainSlider/MainSlider';
 import {CategoriesSlider} from './categoriesSlider/CategoriesSlider';
-import {AncmntsSliderContainer} from "./ancmnts_slider/AncmntsSliderContainer";
-import {AncmntsTabsContainer} from './ancmnts_tabs/AncmntsTabsContainer';
+import {PostsSliderContainer} from "./posts_slider/PostsSliderContainer";
+import {PostsTabsContainer} from './posts_tabs/PostsTabsContainer';
 import {ScrollTop} from '@src/components/elements/scroll_top/ScrollTop';
 import {Link, useTranslation} from '@root/i18n';
 import {Banner} from "@src/components/elements/banner/Banner";
@@ -39,10 +39,10 @@ export const Main: FC = () => {
                     <Grid container>
                         <Grid item lg={9} xs={12} className='main-content'>
                             <section className='ancmnts-slider-wrapper'>
-                                <AncmntsSliderContainer/>
+                                <PostsSliderContainer/>
                             </section>
                             <section>
-                                <AncmntsTabsContainer t={t}/>
+                                <PostsTabsContainer t={t}/>
                             </section>
                         </Grid>
                         <Hidden mdDown>
@@ -67,7 +67,7 @@ export const Main: FC = () => {
                     </Grid>
                     <Hidden lgUp>
                         <div className={classes.createAdBlock}>
-                            <Link href={'/announcement/create'}>
+                            <Link href={'/post/create'}>
                                 <a>
                                     <Slide
                                         appear={false}

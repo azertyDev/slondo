@@ -6,10 +6,9 @@ import {userAPI} from "@src/api/api";
 const initCategory: CategoryType = {
     id: null,
     name: '',
+    mark: '',
     image: {
-        url: {
-            default: ''
-        }
+        url: ''
     },
     icon: {
         url: ''

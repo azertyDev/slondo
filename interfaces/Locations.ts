@@ -4,16 +4,16 @@ export interface Locations {
     data: LocationsDataTypes
 }
 
-export type LocationsDataTypes = Array<{
+export type LocationsDataTypes = {
     id: number;
     name: string;
-    cities: Array<{
+    cities: {
         id: number;
         name: string;
-        district: Array<{
+        district: {
             id: number;
             city_id: number;
             name: string;
-        }>;
-    }>;
-}>;
+        }[];
+    }[];
+}[];

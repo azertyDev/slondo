@@ -1,5 +1,4 @@
-import {CategoryType, ModelType} from "@root/interfaces/Categories";
-import {IdNameType} from "@root/interfaces/Announcement";
+import {CategoryType, SubLvlCtgrsType} from "@root/interfaces/Categories";
 import CyrillicToTranslit from 'cyrillic-to-translit-js';
 
 
@@ -15,12 +14,6 @@ export const transformTitle = (title: string): string => {
 
 
 export const numberRegEx = /^[0-9]*$/;
-
-type SearchType = (IdNameType & {
-    parent: IdNameType,
-    icons: [],
-    image: { url: string }
-})[];
 
 const addParents = (list, parents) => (
     list.map(ctgr => {
@@ -49,7 +42,7 @@ const addParents = (list, parents) => (
     })
 );
 
-export const categoryDataNormalization = (categoryList) => (
+export const categoryDataNormalization = (categoryList: CategoryType[]) => (
     categoryList.map(ctgr => {
         if (ctgr.model) {
             const model = addParents(
@@ -66,37 +59,50 @@ export const categoryDataNormalization = (categoryList) => (
     })
 );
 
-export const categorySearchHelper = (text: string, categoryList: CategoryType[]): SearchType => {
-    const searchRegExp = RegExp(text, 'i');
+export const categorySearchHelper = (txt: string, categoryList: CategoryType[]): SubLvlCtgrsType[] => {
     return categoryList
         .reduce((list, category) => {
-            category.model.forEach(sub_ctgr => {
-                if (searchRegExp.test(sub_ctgr.name)) {
-                    list.push(sub_ctgr);
-                }
-            })
+            list = [...list, ...getMatchedCtgrs(txt, category.model)];
             return list;
         }, []);
+
+    function getMatchedCtgrs(txt, list) {
+        const searchRegExp = RegExp(txt, 'i');
+        let matchedCtgrs = [];
+
+        if (list !== undefined) {
+            list.forEach(ctgr => {
+                if (searchRegExp.test(ctgr.name)) {
+                    matchedCtgrs.push(ctgr);
+                }
+                matchedCtgrs = [
+                    ...matchedCtgrs,
+                    ...getMatchedCtgrs(txt, ctgr.type)
+                ];
+            });
+        }
+
+        return matchedCtgrs;
+    }
 };
 
-export const prepareCreateAncmnt = (data: any, adParams?: any): any => (
-    Object.keys(data).reduce((acc, key) => {
-        if (Array.isArray(data[key]) || data[key] === '') {
-            acc[key] = data[key];
-        }
-        if (
-            Array.isArray(data[key])
-            && data[key].length
-            && adParams !== undefined && adParams[key]
-        ) {
-            acc = {
-                ...acc,
-                ...prepareCreateAncmnt(adParams[key])
-            };
-        }
-        return acc;
-    }, {})
-);
+export const formatDataForCrtPost = (data: any) => {
+    return data
+        ? Object.keys(data).reduce((acc, key) => {
+            if (key === 'type') {
+                acc = {
+                    ...acc,
+                    ...formatDataForCrtPost(data[key][0])
+                };
+            } else {
+                if (Array.isArray(data[key]) || data[key] === '') {
+                    acc[key] = data[key];
+                }
+            }
+            return acc;
+        }, {})
+        : {}
+};
 
 export const pricePrettier = (price: number): string =>
     price && price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ");

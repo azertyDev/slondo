@@ -1,4 +1,4 @@
-import {IdNameType} from "@root/interfaces/Announcement";
+import {IdNameType} from "@root/interfaces/Post";
 
 
 export interface Categories {
@@ -8,10 +8,9 @@ export interface Categories {
 }
 
 export type CategoryType = {
+    mark: string;
     image: {
-        url: {
-            default: string;
-        }
+        url: string;
     },
     icon: {
         url: string;
@@ -27,12 +26,6 @@ export type ModelType = {
     };
     type: IdNameType[];
 } & IdNameType;
-
-export interface CategoryIDs {
-    ctgryID: number,
-    subCtgryID: number,
-    lang: string,
-}
 
 export type SubLvlCtgrsType = {
     parents: IdNameType[]
