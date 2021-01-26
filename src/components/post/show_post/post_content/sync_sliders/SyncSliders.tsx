@@ -38,7 +38,7 @@ export const SyncSliders: FC<SyncSlidersProps> = (props) => {
         });
     }, []);
 
-    const classes = useStyles();
+    const classes = useStyles({ imgs });
     return (
         <div className={classes.root}>
             <div className={classes.firstSlider}>

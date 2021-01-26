@@ -58,7 +58,9 @@ export const useStyles = makeStyles(() => ({
             margin: 'inherit'
         },
         '& div.slick-slide': {
-            width: '212px !important',
+            width: (props) =>
+            props.imgs.length > 4 ? '230px' : '212px !important',
+            // width: '212px !important',
             '& > div, & img': {
                 height: `120px !important`,
             },

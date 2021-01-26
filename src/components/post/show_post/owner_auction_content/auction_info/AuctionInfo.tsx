@@ -3,6 +3,7 @@ import {Typography, TextField} from '@material-ui/core';
 import {ButtonComponent} from '@src/components/elements/button/Button';
 import {LockIcon} from '@src/components/elements/icons';
 import {AuctionTimer} from './AuctionTimer';
+import { pricePrettier } from '@root/src/helpers';
 import {useStyles} from './useStyles';
 
 
@@ -24,7 +25,7 @@ export const AuctionInfo = (props) => {
                                 Резервная цена:
                             </Typography>
                             <Typography variant="h6" color="initial">
-                                {data.auction.reserve_price}{' '}
+                                {pricePrettier(data.auction.reserve_price)}{' '}
                                 {data.currency.name}
                             </Typography>
                         </div>

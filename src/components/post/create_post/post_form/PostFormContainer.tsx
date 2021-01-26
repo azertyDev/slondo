@@ -55,7 +55,7 @@ export const PostFormContainer: FC<PostFormContainerProps & WithT> = (props) => 
     const {locations} = useSelector((store: RootState) => store);
     const isAuction = postType.name === 'auc' || postType.name === 'exauc';
 
-    const mark = category.mark.replace(/s$/, '');
+    const {mark} = category;
     const initPhotos: FileType[] = Array.from({length: TOTAL_FILES_LIMIT}).map(() => initPhoto);
     const weekDays = Array.from({length: 7}).map((_, i) => ({id: ++i}));
     const initFormikForm: CreatePostProps = {
@@ -154,8 +154,7 @@ export const PostFormContainer: FC<PostFormContainerProps & WithT> = (props) => 
 
         Object.keys(postParamsByMark).map(k => {
             if (!!postParamsByMark[k] && !!postParamsByMark[k].id) {
-                const modifiedKey = k.replace(/s$/, '');
-                valsForCrtPost[mark][`${modifiedKey}_id`] = postParamsByMark[k].id;
+                valsForCrtPost[mark][`${k}_id`] = postParamsByMark[k].id;
             } else {
                 valsForCrtPost[mark][k] = postParamsByMark[k];
             }

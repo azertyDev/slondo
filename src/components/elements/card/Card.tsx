@@ -26,7 +26,6 @@ type CardItemProps = {
 
 export const CardItem: FC<CardItemProps> = (props) => {
     const { t } = useTranslation(['common']);
-    console.log(props);
 
     const {
         id,
