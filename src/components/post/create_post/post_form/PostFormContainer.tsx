@@ -7,16 +7,18 @@ import {PostType, CreatePostProps, FileType, IdNameType} from "@root/interfaces/
 import {setErrorMsgAction} from "@src/redux/slices/errorSlice";
 import {createPostSchema} from "@root/validation_schemas/createPostSchema";
 import {TOTAL_FILES_LIMIT} from "@src/constants";
-import {numberRegEx} from "@src/helpers";
+import {
+    noSelectData,
+    numberRegEx,
+    numericFields,
+    textFieldKeys,
+    timeRegEx
+} from "@src/helpers";
 import {CameraIcon} from "@src/components/elements/icons";
 import {userAPI} from "@src/api/api";
 import {CategoryType} from "@root/interfaces/Categories";
 import {WithT} from "i18next";
 
-
-export const autoSelectKeys = ['condition', 'area'];
-export const textFieldKeys = ['area'];
-export const noSelectData = {id: null, name: 'Не выбрано'}
 
 export const initPhoto: FileType = {
     url: (
@@ -286,51 +288,14 @@ export const PostFormContainer: FC<PostFormContainerProps & WithT> = (props) => 
 
     // ----------------------------------------------> Handlers <-------------------------------------------------
     function handleLocation(_, loc) {
-        const location = !!loc
+        defaultParams.location = !!loc
             ? {
                 region_id: loc.region_id ?? null,
                 city_id: loc.city_id ?? null,
                 district_id: loc.district_id ?? null
             }
             : initFormikForm.defaultParams.location;
-
-        setValues({
-            ...values,
-            defaultParams: {
-                ...defaultParams,
-                location
-            }
-        });
-    }
-
-    function handleCheckboxChange(valName) {
-        return ({target}) => {
-            const isAuctionField = ['auto_renewal', 'display_phone', 'offer_the_price']
-                .some(fieldName => fieldName === valName);
-
-            if (isAuctionField) {
-                setValues({
-                    ...values,
-                    auction: {
-                        ...values.auction,
-                        [valName]: target.checked
-                    }
-                });
-            } else if (valName === 'price_by_now') {
-                setValues({
-                    ...values,
-                    auction: {
-                        ...values.auction,
-                        price_by_now: {
-                            isActive: target.checked,
-                            value: values.auction.price_by_now.value
-                        }
-                    }
-                });
-            } else {
-                setValues({...values, [valName]: target.checked});
-            }
-        }
+        setValues({...values});
     }
 
     function handleListItem(keyName, value) {
@@ -340,9 +305,23 @@ export const PostFormContainer: FC<PostFormContainerProps & WithT> = (props) => 
             } else {
                 postParamsByMark[keyName] = value;
             }
-            postParams[mark] = postParamsByMark;
-            setValues({...values, postParams});
+            setValues({...values});
         };
+    }
+
+    function handleCheckboxChange(valName) {
+        return ({target}) => {
+            const isAuctionField = ['auto_renewal', 'display_phone', 'offer_the_price']
+                .some(fieldName => fieldName === valName);
+            if (isAuctionField) {
+                auction[valName] = target.checked;
+            } else if (valName === 'price_by_now') {
+                auction.price_by_now.isActive = target.checked;
+            } else {
+                defaultParams[valName] = target.checked;
+            }
+            setValues({...values});
+        }
     }
 
     function handleParamsCheckbox(keyName, value) {
@@ -357,83 +336,63 @@ export const PostFormContainer: FC<PostFormContainerProps & WithT> = (props) => 
                 } else {
                     postParamsByMark[keyName] = value;
                 }
-                postParams[mark] = postParamsByMark;
-                setValues({...values, postParams});
-            }
-        };
-    }
-
-    function handleMenuItem(valueName) {
-        return (newValue, setAnchor) => () => {
-            setAnchor(null);
-
-            if (valueName === 'currency') {
-                setValues({
-                    ...values,
-                    defaultParams: {
-                        ...defaultParams,
-                        currency: newValue
-                    }
-                });
-            } else if (valueName === 'duration') {
-                setValues({
-                    ...values,
-                    auction: {
-                        ...values.auction,
-                        [valueName]: newValue
-                    }
-                });
-            } else {
-                const isTxtField = textFieldKeys.some(k => k === valueName);
-                postParams[mark] = {
-                    ...postParamsByMark,
-                    [valueName]: isTxtField
-                        ? {...postParamsByMark[valueName], ...newValue}
-                        : newValue
-                };
-                setValues({...values, postParams});
+                setValues({...values});
             }
         }
     }
 
-    function handleInput({target: {name, value}}) {
-        const isNumericField = [
-            'price',
-            'reserve_price',
-            'price_by_now',
-            'year',
-            'area'
-        ].some((n => n === name));
+    function handleMenuItem(valueKey) {
+        return (newValue, setAnchor) => () => {
+            setAnchor(null);
+            if (valueKey === 'currency') {
+                defaultParams.currency = newValue;
+            } else if (valueKey === 'duration') {
+                auction[valueKey] = newValue;
+            } else {
+                const isTxtField = textFieldKeys.some(k => k === valueKey);
+                postParamsByMark[valueKey] = isTxtField
+                    ? {...postParamsByMark[valueKey], ...newValue}
+                    : newValue;
+            }
+            setValues({...values});
+        }
+    }
 
+    function handleInput({target: {name, value}}) {
+        const isNumericField = numericFields.some((n => n === name));
         if (isNumericField) {
             if (numberRegEx.test(value)) {
-                if (name === 'price') {
-                    values.defaultParams.price = value;
-                } else if (name === 'reserve_price') {
-                    values.auction.reserve_price = value;
-                } else if (name === 'price_by_now') {
-                    values.auction.price_by_now.value = value;
-                } else if (name === 'year') {
-                    postParams[mark].year = value;
-                } else if (name === 'area') {
-                    postParams[mark].area.txt = value;
+                switch (name) {
+                    case 'price':
+                        defaultParams[name] = value;
+                        break;
+                    case 'reserve_price':
+                        auction[name] = value;
+                        break;
+                    case 'price_by_now':
+                        auction[name].value = value;
+                        break;
+                    case 'year':
+                        postParamsByMark[name] = value;
+                        break;
+                    case 'area':
+                        postParamsByMark[name].txt = value;
                 }
             }
         } else {
-            values.defaultParams[name] = value;
+            defaultParams[name] = value;
         }
         setValues({...values});
     }
 
     function handleSwitch(_, value) {
         defaultParams.avalTime.isActive = value;
-        setValues({...values, defaultParams});
+        setValues({...values});
     }
 
     function handleAvalDays(day) {
         return () => {
             const isExstDay = defaultParams.avalTime.available_days.some(({id}) => id === day.id);
-
             if (isExstDay) {
                 defaultParams.avalTime.available_days.map(({id}, index) => {
                     if (id === day.id) {
@@ -443,20 +402,15 @@ export const PostFormContainer: FC<PostFormContainerProps & WithT> = (props) => 
             } else {
                 defaultParams.avalTime.available_days.push({id: day.id});
             }
-
-            setValues({...values, defaultParams});
+            setValues({...values});
         };
     }
 
-    function handleTime({target}) {
-        let {value} = target;
-        const regEx = /^([0-1]?[0-9]|2[0-3])?:([0-5][0-9]?)?$/;
-        const isValid = regEx.test(value);
-
-        if (isValid) {
+    function handleTime({target: {value, name}}) {
+        if (timeRegEx.test(value)) {
             value = value.replace(/^:(.+)/, m => `00${m}`).replace(/(.+):$/, m => `${m}00`);
-            defaultParams.avalTime = {...defaultParams.avalTime, [target.name]: value};
-            setValues({...values, defaultParams});
+            defaultParams.avalTime = {...defaultParams.avalTime, [name]: value};
+            setValues({...values});
         }
     }
-}
+};

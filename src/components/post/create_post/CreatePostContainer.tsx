@@ -1,4 +1,4 @@
-import React, {FC, useState} from 'react';
+import React, {FC, useEffect, useState} from 'react';
 import {useSelector, useDispatch} from "react-redux";
 import {userAPI} from '@src/api/api';
 import {CreatePost} from "./CreatePost";
@@ -6,10 +6,7 @@ import {RootState} from "@src/redux/rootReducer";
 import {MainLayout} from "@src/components/MainLayout";
 import {WithT} from "i18next";
 import {i18n} from '@root/i18n';
-import {
-    CreatePostState,
-    PostType
-} from "@root/interfaces/Post";
+import {CreatePostState, PostType} from "@root/interfaces/Post";
 import {PostFormContainer, SecLvlCtgrType} from "./post_form/PostFormContainer";
 import {setErrorMsgAction} from '@root/src/redux/slices/errorSlice';
 import {PostTypesPage} from "@src/components/post/post_types_page/PostTypesPage";
@@ -21,85 +18,85 @@ import {SubLvlCtgrsType} from "@root/interfaces/Categories";
 
 const steps = ['Тип объявления', 'Категория', 'Заполнение', 'Проверка'];
 
-const initPostTypeStates: { isFetch: boolean, types: PostType[] } = {
-    isFetch: false,
-    types: [
-        {
-            id: 1,
-            name: "post",
-            currency: [
-                {
-                    id: 1,
-                    name: "уе"
-                },
-                {
-                    id: 2,
-                    name: "sum"
-                }
-            ],
-            expired: [
-                {
-                    id: 3,
-                    expiration_at: '720'
-                }
-            ],
-            image: {
-                url: '/img/adv-background.png'
-            }
-        },
-        {
-            id: 2,
-            name: "auc",
-            currency: [
-                {
-                    id: 3,
-                    name: "sum"
-                }
-            ],
-            expired: [
-                {
-                    id: 1,
-                    expiration_at: '2'
-                },
-                {
-                    id: 2,
-                    expiration_at: '720'
-                }
-            ],
-            image: {
-                url: '/img/lot-background.png'
-            }
-        },
-        {
-            id: 3,
-            name: "exauc",
-            currency: [
-                {
-                    id: 4,
-                    name: "sum"
-                }
-            ],
-            expired: [
-                {
-                    id: 4,
-                    expiration_at: '2'
-                },
-                {
-                    id: 5,
-                    expiration_at: '720'
-                }
-            ],
-            image: {
-                url: '/img/advanced-lot-background.png'
-            }
-        }
-    ]
-};
-
 export type createPostContainerType = CreatePostState & { dataForCrtPost: any };
 
 export const CreatePostContainer: FC<WithT> = ({t}) => {
     const lang = i18n.language;
+
+    const initPostTypeStates: { isFetch: boolean, types: PostType[] } = {
+        isFetch: false,
+        types: [
+            {
+                id: 1,
+                name: "post",
+                currency: [
+                    {
+                        id: 1,
+                        name: "уе"
+                    },
+                    {
+                        id: 2,
+                        name: "sum"
+                    }
+                ],
+                expired: [
+                    {
+                        id: 3,
+                        expiration_at: '720'
+                    }
+                ],
+                image: {
+                    url: '/img/adv-background.png'
+                }
+            },
+            {
+                id: 2,
+                name: "auc",
+                currency: [
+                    {
+                        id: 3,
+                        name: "sum"
+                    }
+                ],
+                expired: [
+                    {
+                        id: 1,
+                        expiration_at: '2'
+                    },
+                    {
+                        id: 2,
+                        expiration_at: '720'
+                    }
+                ],
+                image: {
+                    url: '/img/lot-background.png'
+                }
+            },
+            {
+                id: 3,
+                name: "exauc",
+                currency: [
+                    {
+                        id: 4,
+                        name: "sum"
+                    }
+                ],
+                expired: [
+                    {
+                        id: 4,
+                        expiration_at: '2'
+                    },
+                    {
+                        id: 5,
+                        expiration_at: '720'
+                    }
+                ],
+                image: {
+                    url: '/img/advanced-lot-background.png'
+                }
+            }
+        ]
+    };
 
     const initPostTypeState = {
         id: null,
@@ -138,9 +135,8 @@ export const CreatePostContainer: FC<WithT> = ({t}) => {
         }
     };
 
-    const categoriesList = useSelector(({categories}: RootState) => {
-        return categoryDataNormalization(categories.list);
-    });
+    const categoriesList = useSelector(({categories}: RootState) =>
+        categoryDataNormalization(categories.list));
 
     const dispatch = useDispatch();
 
@@ -162,17 +158,14 @@ export const CreatePostContainer: FC<WithT> = ({t}) => {
     };
 
     const [subLvlCtgrs, setSubLvlCtgrs] = useState<SubLvlCtgrsType[]>([]);
-
     const [activeStep, setActiveStep] = useState(0);
 
-    const [searchTxt, setSearchTxt] = useState('');
-
     const handleNextStep = () => {
-        setActiveStep((prevStep) => prevStep + 1);
+        setActiveStep(prevStep => prevStep + 1);
     };
 
     const handlePrevStep = () => {
-        setActiveStep((prevStep) => prevStep - 1);
+        setActiveStep(prevStep => prevStep - 1);
     };
 
     const handleResetSteps = () => {
@@ -204,15 +197,15 @@ export const CreatePostContainer: FC<WithT> = ({t}) => {
             : [];
         setSubLvlCtgrs(matchedCtgrs);
     };
-
-    const handleSearch = ({target: {value}}) => {
-        setSearchTxt(value);
-        setMatchedCtgrs(value);
-        if (!!category.id) {
-            setSubLvlCtgrs([]);
-            setCreatePost(initCreatePostState);
-        }
-    };
+    //
+    // const handleSearch = ({target: {value}}) => {
+    //     setSearchTxt(value);
+    //     setMatchedCtgrs(value);
+    //     if (!!category.id) {
+    //         setSubLvlCtgrs([]);
+    //         setCreatePost(initCreatePostState);
+    //     }
+    // };
 
     const handleCategory = ctgr => async () => {
         if ((ctgr.model && ctgr.model.length) || (ctgr.type && ctgr.type.length)) {
@@ -223,7 +216,7 @@ export const CreatePostContainer: FC<WithT> = ({t}) => {
                 : categoriesList.filter(ctr => (!!ctr.id && ctr.id === ctgr.parents[0].id))[0];
 
             setSubLvlCtgrs(list);
-            setSearchTxt('');
+            // setSearchTxt('');
             setCreatePost({...createPost, category: mainCtgr});
         } else {
             try {
@@ -269,9 +262,8 @@ export const CreatePostContainer: FC<WithT> = ({t}) => {
     };
 
     const handleResetCreateData = () => {
-        setSearchTxt('');
-        setSubLvlCtgrs([]);
-        setCreatePost(initCreatePostState);
+        !!setSubLvlCtgrs.length && setSubLvlCtgrs([]);
+        !!category.id && setCreatePost(initCreatePostState);
     };
 
     const handleResetPostType = () => {
@@ -281,14 +273,8 @@ export const CreatePostContainer: FC<WithT> = ({t}) => {
     };
 
     const handleBackBtn = () => {
-        switch (activeStep) {
-            case 1:
-                handleResetPostType();
-                break;
-            case 2:
-                handleResetCreateData();
-        }
         handlePrevStep();
+        handleResetCreateData();
     };
 
     const setSubLvlCtgrsByLang = () => {
@@ -302,17 +288,18 @@ export const CreatePostContainer: FC<WithT> = ({t}) => {
                 setSubLvlCtgrs(newLangCtgr.model);
             }
             setCreatePost({...createPost, category: newLangCtgr});
-        } else if (!!searchTxt) handleResetCreateData();
+        }
+        // else if (!!searchTxt) handleResetCreateData();
     };
 
     // useEffect(() => {
     //    setAncmntsTypes();
     // }, []);
 
-    // useEffect(() => {
-    //     setSubLvlCtgrsByLang();
-    // }, [categoriesList[0].name]);
-    // console.log(activeStep)
+    useEffect(() => {
+        setSubLvlCtgrsByLang();
+    }, [categoriesList[0].name]);
+
     return (
         <MainLayout>
             {activeStep !== 0 && activeStep !== 4
@@ -331,12 +318,14 @@ export const CreatePostContainer: FC<WithT> = ({t}) => {
                 && <CreatePost
                     postType={postType}
                     createPost={createPost}
+                    setCreatePost={setCreatePost}
+                    setSubLvlCtgrs={setSubLvlCtgrs}
                     categoriesList={categoriesList}
                     subLvlCtgrs={subLvlCtgrs}
-                    searchTxt={searchTxt}
+                    setMatchedCtgrs={setMatchedCtgrs}
                     handleBackCtgr={handleBackCtgr}
-                    handleSearch={handleSearch}
                     handleCategory={handleCategory}
+                    initCreatePostState={initCreatePostState}
                 />}
                 {(activeStep === 2 || activeStep === 3)
                 && <PostFormContainer
@@ -348,8 +337,7 @@ export const CreatePostContainer: FC<WithT> = ({t}) => {
                     handleNextStep={handleNextStep}
                     dataForCrtPost={formatDataForCrtPost(dataForCrtPost)}
                 />}
-                {activeStep === 4
-                && <SuccessPost handleCreateNewPost={handleResetPostType}/>}
+                {activeStep === 4 && <SuccessPost handleCreateNewPost={handleResetPostType}/>}
             </>
         </MainLayout>
     )

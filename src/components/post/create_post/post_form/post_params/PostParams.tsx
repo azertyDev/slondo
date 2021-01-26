@@ -3,7 +3,7 @@ import {Grid, TextField, Typography} from "@material-ui/core";
 import {isRequired} from "@root/validation_schemas/createPostSchema";
 import {CustomCheckbox} from "@src/components/elements/custom_checkbox/CustomCheckbox";
 import {CustomMenu} from "@src/components/elements/custom_menu/CustomMenu";
-import {textFieldKeys} from "../PostFormContainer";
+import {textFieldKeys} from "@src/helpers";
 import {useStyles} from "./useStyles";
 
 
@@ -63,8 +63,7 @@ export const PostParams: FC<any> = (props) => {
                                 onClick={!isPreview ? handleListItem(keyName, item) : null}
                                 className={
                                     paramsByMark[keyName]
-                                    && paramsByMark[keyName].id === item.id ? classes.selected : ''
-                                }
+                                    && paramsByMark[keyName].id === item.id ? classes.selected : ''}
                             >
                                 {/*<img src={item.icon.url} alt={item.name}/>*/}
                                 <Typography>{item.name}</Typography>
