@@ -1,4 +1,9 @@
-import React, {FC} from "react";
+import React, {
+    FC,
+    Dispatch,
+    SetStateAction,
+    useState,
+} from "react";
 import {
     Typography,
     InputBase,
@@ -10,36 +15,50 @@ import {
 import {useStyles} from './useStyles';
 import {CategoryType, SubLvlCtgrsType} from "@root/interfaces/Categories";
 import {PostType, CreatePostState} from "@root/interfaces/Post";
+import {createPostContainerType} from "@src/components/post/create_post/CreatePostContainer";
 
 
 type CreateAncmntProps = {
-    createPost: CreatePostState;
     categoriesList: CategoryType[];
     subLvlCtgrs: SubLvlCtgrsType[];
-    searchTxt: string;
-    handleSearch: (t) => void;
     postType: PostType;
-    handleCategory: (c) => () => void;
     handleBackCtgr: () => void;
+    setMatchedCtgrs: (t) => void;
+    handleCategory: (c) => () => void;
+    createPost: CreatePostState;
+    setCreatePost: Dispatch<SetStateAction<createPostContainerType>>;
+    setSubLvlCtgrs: Dispatch<SetStateAction<SubLvlCtgrsType[]>>;
+    initCreatePostState: createPostContainerType;
 };
 
 export const CreatePost: FC<CreateAncmntProps> = (props) => {
     const {
         postType,
-        searchTxt,
-        subLvlCtgrs,
-        handleSearch,
         createPost,
+        setCreatePost,
         categoriesList,
         handleCategory,
         handleBackCtgr,
+        setMatchedCtgrs,
+        subLvlCtgrs,
+        setSubLvlCtgrs,
+        initCreatePostState
     } = props;
 
     const {category, error, isFetch} = createPost;
+    const [searchTxt, setSearchTxt] = useState('');
 
-    const isThirdLvlCtgr = !searchTxt
-        && !!subLvlCtgrs.length
+    const isThirdLvlCtgr = !!subLvlCtgrs.length
         && subLvlCtgrs.every(ctgr => ctgr.parents.length === 2);
+
+    const handleSearch = ({target: {value}}) => {
+        setSearchTxt(value);
+        setMatchedCtgrs(value);
+        if (!!category.id) {
+            setSubLvlCtgrs([]);
+            setCreatePost(initCreatePostState);
+        }
+    };
 
     const classes = useStyles();
     return (
@@ -53,15 +72,14 @@ export const CreatePost: FC<CreateAncmntProps> = (props) => {
                             </div>
                             <List>
                                 {categoriesList.map((ctgr, i) => (
-                                    (postType.id === 1 || ctgr.has_auction === 1)
+                                    (postType.name === 'post' || ctgr.has_auction === 1)
                                     && <ListItem
                                         key={i}
                                         onClick={handleCategory(ctgr)}
                                         className={
                                             category.id === ctgr.id
                                                 ? 'selected-category'
-                                                : ''
-                                        }
+                                                : ''}
                                     >
                                         <img src={ctgr.icon.url} alt={ctgr.name}/>
                                         {ctgr.name}

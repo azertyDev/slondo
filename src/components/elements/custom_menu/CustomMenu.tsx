@@ -3,7 +3,7 @@ import {Menu, MenuItem, Typography} from "@material-ui/core";
 import {CustomMenuProps} from "@root/interfaces/CustomMenuProps";
 import {ButtonComponent} from "@src/components/elements/button/Button";
 import {isRequired} from "@root/validation_schemas/createPostSchema";
-import {noSelectData} from "@src/components/post/create_post/post_form/PostFormContainer";
+import {noSelectData} from "@src/helpers";
 
 
 export const CustomMenu: FC<CustomMenuProps> = (props) => {

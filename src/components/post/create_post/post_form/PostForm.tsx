@@ -35,7 +35,6 @@ type PostFormProps = {
     handleMenuItem,
     handleListItem,
     handleInput,
-    handleAuctionInput,
     handleParamsCheckbox,
     handleCheckboxChange,
     dataForCrtPost,
@@ -62,7 +61,6 @@ export const PostForm: FC<PostFormProps & WithT> = (props) => {
         handleMenuItem,
         handleListItem,
         handleInput,
-        handleAuctionInput,
         handleParamsCheckbox,
         handleCheckboxChange,
         dataForCrtPost,
@@ -288,9 +286,9 @@ export const PostForm: FC<PostFormProps & WithT> = (props) => {
                                         </Typography>
                                         : <TextField
                                             variant='outlined'
-                                            value={auction.reserve_price}
                                             name='reserve_price'
-                                            onChange={handleAuctionInput}
+                                            value={auction.reserve_price}
+                                            onChange={handleInput}
                                         />
                                     }
                                 </Grid>
@@ -315,7 +313,7 @@ export const PostForm: FC<PostFormProps & WithT> = (props) => {
                                                     variant='outlined'
                                                     name='price_by_now'
                                                     value={auction.price_by_now.value}
-                                                    onChange={handleAuctionInput}
+                                                    onChange={handleInput}
                                                 />
                                             }
                                             &nbsp;<Typography>сум.</Typography>

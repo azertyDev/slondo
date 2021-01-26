@@ -14,6 +14,19 @@ export const transformTitle = (title: string): string => {
 
 
 export const numberRegEx = /^[0-9]*$/;
+export const timeRegEx = /^([0-1]?[0-9]|2[0-3])?:([0-5][0-9]?)?$/;
+
+
+export const textFieldKeys = ['area'];
+export const numericFields = [
+    'price',
+    'reserve_price',
+    'price_by_now',
+    'year',
+    'area',
+];
+
+export const noSelectData = {id: null, name: 'Не выбрано'};
 
 const addParents = (list, parents) => (
     list.map(ctgr => {

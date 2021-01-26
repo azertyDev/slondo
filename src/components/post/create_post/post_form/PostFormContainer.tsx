@@ -7,16 +7,18 @@ import {PostType, CreatePostProps, FileType, IdNameType} from "@root/interfaces/
 import {setErrorMsgAction} from "@src/redux/slices/errorSlice";
 import {createPostSchema} from "@root/validation_schemas/createPostSchema";
 import {TOTAL_FILES_LIMIT} from "@src/constants";
-import {numberRegEx} from "@src/helpers";
+import {
+    noSelectData,
+    numberRegEx,
+    numericFields,
+    textFieldKeys,
+    timeRegEx
+} from "@src/helpers";
 import {CameraIcon} from "@src/components/elements/icons";
 import {userAPI} from "@src/api/api";
 import {CategoryType} from "@root/interfaces/Categories";
 import {WithT} from "i18next";
 
-
-export const autoSelectKeys = ['condition', 'area'];
-export const textFieldKeys = ['area'];
-export const noSelectData = {id: null, name: 'Не выбрано'}
 
 export const initPhoto: FileType = {
     url: (
@@ -147,15 +149,15 @@ export const PostFormContainer: FC<PostFormContainerProps & WithT> = (props) => 
             available_days,
             phone: !!phone ? phone : null,
             currency_id: currency.id,
+            [mark]: {}
         };
+
         Object.keys(postParamsByMark).map(k => {
-            if (!!postParamsByMark[k] && postParamsByMark[k].id) {
-                valsForCrtPost[mark][`${k}_id`] = postParamsByMark[k].id;
+            if (!!postParamsByMark[k] && !!postParamsByMark[k].id) {
+                const modifiedKey = k.replace(/s$/, '');
+                valsForCrtPost[mark][`${modifiedKey}_id`] = postParamsByMark[k].id;
             } else {
-                valsForCrtPost[mark] = {
-                    ...valsForCrtPost[mark],
-                    [k]: postParamsByMark[k]
-                }
+                valsForCrtPost[mark][k] = postParamsByMark[k];
             }
         });
 
@@ -203,15 +205,13 @@ export const PostFormContainer: FC<PostFormContainerProps & WithT> = (props) => 
 
         Object.keys(dataForCrtPost).forEach(dataKey => {
             if (Array.isArray(dataForCrtPost[dataKey])) {
-                postParams[mark] = {
-                    ...postParams[mark],
-                    [dataKey]: noSelectData
+                if (textFieldKeys.some(k => k === dataKey)) {
+                    postParams[mark][dataKey] = {...noSelectData, txt: ''}
+                } else {
+                    postParams[mark][dataKey] = noSelectData;
                 }
             } else {
-                postParams[mark] = {
-                    ...postParams[mark],
-                    [dataKey]: dataForCrtPost[dataKey]
-                }
+                postParams[mark][dataKey] = dataForCrtPost[dataKey];
             }
         });
 
@@ -240,7 +240,6 @@ export const PostFormContainer: FC<PostFormContainerProps & WithT> = (props) => 
                 form.set('ads_id', postId.toString());
                 await userAPI.uploadPhotos(form);
 
-                console.log(postId)
                 setValues({...values, isFetch: false});
 
                 handleNextStep();
@@ -265,13 +264,14 @@ export const PostFormContainer: FC<PostFormContainerProps & WithT> = (props) => 
             <form onSubmit={handleSubmit}>
                 <PostForm
                     {...props}
+                    mark={mark}
                     errors={errors}
                     touched={touched}
                     values={values}
-                    mark={mark}
                     setValues={setValues}
                     locations={locations}
                     handleBlur={handleBlur}
+                    secLvlCtgr={secLvlCtgr}
                     handleTime={handleTime}
                     handleInput={handleInput}
                     handleSwitch={handleSwitch}
@@ -279,8 +279,6 @@ export const PostFormContainer: FC<PostFormContainerProps & WithT> = (props) => 
                     handleListItem={handleListItem}
                     handleMenuItem={handleMenuItem}
                     handleLocation={handleLocation}
-                    secLvlCtgr={secLvlCtgr}
-                    handleAuctionInput={handleAuctionInput}
                     handleParamsCheckbox={handleParamsCheckbox}
                     handleCheckboxChange={handleCheckboxChange}
                 />
@@ -290,175 +288,111 @@ export const PostFormContainer: FC<PostFormContainerProps & WithT> = (props) => 
 
     // ----------------------------------------------> Handlers <-------------------------------------------------
     function handleLocation(_, loc) {
-        const location = !!loc
+        defaultParams.location = !!loc
             ? {
                 region_id: loc.region_id ?? null,
                 city_id: loc.city_id ?? null,
                 district_id: loc.district_id ?? null
             }
             : initFormikForm.defaultParams.location;
+        setValues({...values});
+    }
 
-        setValues({
-            ...values,
-            defaultParams: {
-                ...defaultParams,
-                location
+    function handleListItem(keyName, value) {
+        return () => {
+            if (postParamsByMark[keyName] && postParamsByMark[keyName].id === value.id) {
+                postParamsByMark[keyName] = {id: null, name: 'Не выбрано'};
+            } else {
+                postParamsByMark[keyName] = value;
             }
-        });
+            setValues({...values});
+        };
     }
 
     function handleCheckboxChange(valName) {
         return ({target}) => {
             const isAuctionField = ['auto_renewal', 'display_phone', 'offer_the_price']
                 .some(fieldName => fieldName === valName);
-
             if (isAuctionField) {
-                setValues({
-                    ...values,
-                    auction: {
-                        ...values.auction,
-                        [valName]: target.checked
-                    }
-                });
+                auction[valName] = target.checked;
             } else if (valName === 'price_by_now') {
-                setValues({
-                    ...values,
-                    auction: {
-                        ...values.auction,
-                        price_by_now: {
-                            isActive: target.checked,
-                            value: values.auction.price_by_now.value
-                        }
-                    }
-                });
+                auction.price_by_now.isActive = target.checked;
             } else {
-                setValues({...values, [valName]: target.checked});
+                defaultParams[valName] = target.checked;
             }
+            setValues({...values});
         }
     }
 
-    function handleParamsCheckbox(valueName, value) {
+    function handleParamsCheckbox(keyName, value) {
         return () => {
-            let post = {...postParams, [valueName]: [value]};
-
-            if (postParams[valueName]) {
-                if (postParams[valueName].some(val => val.id === value.id)) {
-                    postParams[valueName].map((val, index) => {
+            if (postParamsByMark[keyName]) {
+                if (postParamsByMark[keyName].some(val => val.id === value.id)) {
+                    postParamsByMark[keyName].forEach((val, index) => {
                         if (val.id === value.id) {
-                            postParams[valueName].splice(index, 1);
+                            postParamsByMark[keyName].splice(index, 1);
                         }
                     });
                 } else {
-                    post = {
-                        ...postParams,
-                        [valueName]: [...postParams[valueName], value]
-                    };
+                    postParamsByMark[keyName] = value;
                 }
-            }
-
-            setValues({...values, postParams: post});
-        };
-    }
-
-    function handleMenuItem(valueName) {
-        return (newValue, setAnchor) => () => {
-            setAnchor(null);
-
-            if (valueName === 'currency') {
-                setValues({
-                    ...values,
-                    defaultParams: {
-                        ...defaultParams,
-                        currency: newValue
-                    }
-                });
-            } else if (valueName === 'duration') {
-                setValues({
-                    ...values,
-                    auction: {
-                        ...values.auction,
-                        [valueName]: newValue
-                    }
-                });
-            } else {
-                // Reset sub props in values
-                Object.keys(newValue).map(key => {
-                    if (postParams[key]) {
-                        values.postParams = {
-                            ...postParams,
-                            [key]: {id: null, name: 'Не выбрано'}
-                        };
-                    }
-                    postParams[mark] = {
-                        ...postParams[mark],
-                        [valueName]: newValue
-                    };
-
-                    setValues({
-                        ...values,
-                        postParams: {...postParams}
-                    });
-                });
-            }
-        }
-    }
-
-    function handleListItem(valueName, value) {
-        return () => {
-            if (postParams[valueName] && postParams[valueName].id === value.id) {
-                values.postParams = {
-                    ...postParams,
-                    [valueName]: {id: null, name: 'Не выбрано'}
-                };
-            } else {
-                values.postParams = {...postParams, [valueName]: value};
-            }
-            setValues({...values});
-        };
-    }
-
-    function handleInput({target}) {
-        const {name, value} = target;
-        if (name === 'price') {
-            if (numberRegEx.test(target.value)) {
-                values.defaultParams.price = value;
                 setValues({...values});
             }
-        } else {
-            values.defaultParams[name] = value;
+        }
+    }
+
+    function handleMenuItem(valueKey) {
+        return (newValue, setAnchor) => () => {
+            setAnchor(null);
+            if (valueKey === 'currency') {
+                defaultParams.currency = newValue;
+            } else if (valueKey === 'duration') {
+                auction[valueKey] = newValue;
+            } else {
+                const isTxtField = textFieldKeys.some(k => k === valueKey);
+                postParamsByMark[valueKey] = isTxtField
+                    ? {...postParamsByMark[valueKey], ...newValue}
+                    : newValue;
+            }
             setValues({...values});
         }
     }
 
-    function handleAuctionInput(valName) {
-        return ({target}) => {
-            if (numberRegEx.test(target.value)) {
-                if (valName === 'price_by_now') {
-                    values.auction = {
-                        ...values.auction,
-                        [valName]: {
-                            isActive: true,
-                            value: target.value
-                        }
-                    };
-                    setValues({...values});
-                } else {
-                    values.auction = {...values.auction, [valName]: target.value};
-                    setValues({...values});
+    function handleInput({target: {name, value}}) {
+        const isNumericField = numericFields.some((n => n === name));
+        if (isNumericField) {
+            if (numberRegEx.test(value)) {
+                switch (name) {
+                    case 'price':
+                        defaultParams[name] = value;
+                        break;
+                    case 'reserve_price':
+                        auction[name] = value;
+                        break;
+                    case 'price_by_now':
+                        auction[name].value = value;
+                        break;
+                    case 'year':
+                        postParamsByMark[name] = value;
+                        break;
+                    case 'area':
+                        postParamsByMark[name].txt = value;
                 }
             }
+        } else {
+            defaultParams[name] = value;
         }
+        setValues({...values});
     }
 
     function handleSwitch(_, value) {
         defaultParams.avalTime.isActive = value;
-        setValues({...values, defaultParams});
+        setValues({...values});
     }
 
     function handleAvalDays(day) {
         return () => {
             const isExstDay = defaultParams.avalTime.available_days.some(({id}) => id === day.id);
-
             if (isExstDay) {
                 defaultParams.avalTime.available_days.map(({id}, index) => {
                     if (id === day.id) {
@@ -468,20 +402,15 @@ export const PostFormContainer: FC<PostFormContainerProps & WithT> = (props) => 
             } else {
                 defaultParams.avalTime.available_days.push({id: day.id});
             }
-
-            setValues({...values, defaultParams});
+            setValues({...values});
         };
     }
 
-    function handleTime({target}) {
-        let {value} = target;
-        const regEx = /^([0-1]?[0-9]|2[0-3])?:([0-5][0-9]?)?$/;
-        const isValid = regEx.test(value);
-
-        if (isValid) {
+    function handleTime({target: {value, name}}) {
+        if (timeRegEx.test(value)) {
             value = value.replace(/^:(.+)/, m => `00${m}`).replace(/(.+):$/, m => `${m}00`);
-            defaultParams.avalTime = {...defaultParams.avalTime, [target.name]: value};
-            setValues({...values, defaultParams});
+            defaultParams.avalTime = {...defaultParams.avalTime, [name]: value};
+            setValues({...values});
         }
     }
-}
+};
