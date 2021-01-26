@@ -7,27 +7,23 @@ import React, {
     useState,
     useEffect,
 } from 'react';
-import {CustomSlider} from '@src/components/elements/custom_slider/CustomSlider';
-import {useStyles} from './useStyles';
-
+import { CustomSlider } from '@src/components/elements/custom_slider/CustomSlider';
+import { useStyles } from './useStyles';
 
 type SyncSlidersProps = {
     handleOpenModal: () => void;
     setInitialSlide: Dispatch<SetStateAction<number>>;
     imgs: {
         alt: string;
-        url: { default: string }
+        url: { default: string };
     }[];
 };
 
 export const SyncSliders: FC<SyncSlidersProps> = (props) => {
-    const {
-        imgs,
-        setInitialSlide,
-        handleOpenModal,
-    } = props;
+    const { imgs, setInitialSlide, handleOpenModal } = props;
 
-    const [slidersNav, setSlidersNav] = useState({nav1: null, nav2: null});
+    const slidesToShow = 4;
+    const [slidersNav, setSlidersNav] = useState({ nav1: null, nav2: null });
     const slider1: MutableRefObject<unknown> = useRef();
     const slider2: MutableRefObject<unknown> = useRef();
 
@@ -68,17 +64,15 @@ export const SyncSliders: FC<SyncSlidersProps> = (props) => {
                 <CustomSlider
                     ref={slider2}
                     asNavFor={slidersNav.nav1}
-                    slidesToShow={4}
+                    slidesToShow={
+                        imgs.length > slidesToShow ? slidesToShow : imgs.length
+                    }
                     slidesToScroll={1}
                     arrows={false}
                     focusOnSelect={true}
                 >
-                    {imgs.map(({url, alt}, i) => (
-                        <img
-                            key={i}
-                            alt={alt}
-                            src={url.default}
-                        />
+                    {imgs.map(({ url, alt }, i) => (
+                        <img key={i} alt={alt} src={url.default} />
                     ))}
                 </CustomSlider>
             </div>

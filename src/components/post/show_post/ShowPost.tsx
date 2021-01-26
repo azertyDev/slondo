@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { FC } from 'react';
 import {Grid, Hidden} from '@material-ui/core';
 import {MainLayout} from '@src/components/MainLayout';
 import {OwnerAuctionContent} from './owner_auction_content/OwnerAuctionContent';
@@ -7,7 +7,7 @@ import {useStyles} from './useStyles';
 import {Banner} from '@src/components/elements/banner/Banner';
 
 
-export const ShowPost = (props) => {
+export const ShowPost: FC<any> = (props) => {
     const {adData, parameters, t} = props;
     const {data} = adData;
 

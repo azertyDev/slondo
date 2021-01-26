@@ -1,20 +1,20 @@
-import React, {useState} from 'react';
-import {Typography} from '@material-ui/core';
-import {SyncSliders} from './sync_sliders/SyncSliders';
-import {ReadMore} from '@src/components/elements/read_more/readMore';
-import {LocationIcon} from '@src/components/elements/icons/LocationIcon';
-import {WarningIcon} from '@src/components/elements/icons/WarningIcon';
-import {PhoneIcon} from '@src/components/elements/icons/PhoneIcon';
-import {SwapIcon} from '@src/components/elements/icons/SwapIcon';
-import {SafeIcon} from '@src/components/elements/icons/SafeIcon';
-import {DeliveryIcon} from '@src/components/elements/icons/DeliveryIcon';
-import {useStyles} from './useStyles';
-import {ModalSyncSliders} from './modal_sync_sliders/ModalSyncSliders';
-import {BreadcrumbsComponent} from '@src/components/elements/breadcrumbs/Breadcrumbs';
-import {Link} from '@root/i18n';
+import React, { FC, useState } from 'react';
+import { Typography } from '@material-ui/core';
+import { SyncSliders } from './sync_sliders/SyncSliders';
+import { ReadMore } from '@src/components/elements/read_more/readMore';
+import { LocationIcon } from '@src/components/elements/icons/LocationIcon';
+import { WarningIcon } from '@src/components/elements/icons/WarningIcon';
+import { PhoneIcon } from '@src/components/elements/icons/PhoneIcon';
+import { SwapIcon } from '@src/components/elements/icons/SwapIcon';
+import { SafeIcon } from '@src/components/elements/icons/SafeIcon';
+import { DeliveryIcon } from '@src/components/elements/icons/DeliveryIcon';
+import { useStyles } from './useStyles';
+import { ModalSyncSliders } from './modal_sync_sliders/ModalSyncSliders';
+import { BreadcrumbsComponent } from '@src/components/elements/breadcrumbs/Breadcrumbs';
+import { Link } from '@root/i18n';
+import { pricePrettier } from '@root/src/helpers';
 
-
-export const AncmntContent = ({data, parameters, t}) => {
+export const AncmntContent: FC<any> = ({ data, parameters, t }) => {
     const [initialSlide, setInitialSlide] = useState(0);
     const [open, setOpen] = useState(false);
 
@@ -98,15 +98,15 @@ export const AncmntContent = ({data, parameters, t}) => {
                     <Link href="#">
                         <a>
                             <Typography variant="subtitle1" noWrap>
-                                {data.parent.name}
+                                {data.category.name}
                             </Typography>
                         </a>
                     </Link>
-                    {data.child.id && (
+                    {data.category.sub_category.length && (
                         <Link href="#">
                             <a>
                                 <Typography variant="subtitle1" noWrap>
-                                    {data.child.name}
+                                    {data.category.sub_category[0].name}
                                 </Typography>
                             </a>
                         </Link>
@@ -120,7 +120,12 @@ export const AncmntContent = ({data, parameters, t}) => {
                             </a>
                         </Link>
                     )}
-                    <Typography variant="subtitle1" color="primary" noWrap>
+                    <Typography
+                        variant="subtitle1"
+                        color="primary"
+                        noWrap
+                        style={{ width: '400px' }}
+                    >
                         {data.title}
                     </Typography>
                 </BreadcrumbsComponent>
@@ -145,12 +150,8 @@ export const AncmntContent = ({data, parameters, t}) => {
                         {data.title}
                     </Typography>
                 </div>
-                {/* data.condition.id */}
                 <div className="condition">
-                    <Typography variant="h6">
-                        {/* {data.condition.name} */}
-                        Б/У
-                    </Typography>
+                    <Typography variant="h6">{data.condition.name}</Typography>
                 </div>
             </div>
             <SyncSliders
@@ -169,13 +170,13 @@ export const AncmntContent = ({data, parameters, t}) => {
                     Просмотров: {data.number_of_views}
                 </Typography>
                 <Typography variant="subtitle1">
-                    Пожаловаться <WarningIcon/>
+                    Пожаловаться <WarningIcon />
                 </Typography>
             </div>
             <div className="ad-bonus">
                 {!!data.delivery && (
                     <span className="delivery">
-                        <DeliveryIcon/>
+                        <DeliveryIcon />
                         &nbsp;
                         <Typography variant="subtitle1">
                             Есть доставка
@@ -184,7 +185,7 @@ export const AncmntContent = ({data, parameters, t}) => {
                 )}
                 {!!data.safe_deal && (
                     <span className="safe_deal">
-                        <SafeIcon/>
+                        <SafeIcon />
                         &nbsp;
                         <Typography variant="subtitle1">
                             Безопасная покупка
@@ -193,7 +194,7 @@ export const AncmntContent = ({data, parameters, t}) => {
                 )}
                 {!!data.exchange && (
                     <span className="exchange">
-                        <SwapIcon/>
+                        <SwapIcon />
                         &nbsp;
                         <Typography variant="subtitle1">
                             Возможен обмен
@@ -202,7 +203,7 @@ export const AncmntContent = ({data, parameters, t}) => {
                 )}
                 {!!data.available_start_time && (
                     <span className="available">
-                        <PhoneIcon/>
+                        <PhoneIcon />
                         &nbsp;
                         <Typography variant="subtitle1">
                             {data.available_start_time} -{' '}
@@ -217,7 +218,7 @@ export const AncmntContent = ({data, parameters, t}) => {
                 </Typography>
                 {data.region.name || data.city.name || data.district.name ? (
                     <Typography variant="subtitle1" noWrap>
-                        <LocationIcon/>
+                        <LocationIcon />
                         {`${data.region.name ?? ''}`}
                         {data.city.name ? `, ${data.city.name}` : ''}
                         {data.district.name ? `, ${data.district.name}` : ''}
@@ -225,6 +226,25 @@ export const AncmntContent = ({data, parameters, t}) => {
                 ) : (
                     <Typography variant="subtitle1">Не указано</Typography>
                 )}
+            </div>
+            <div className="ad-category">
+                <Typography variant="button" color="initial">
+                    Категория
+                </Typography>
+                <div>
+                    <Typography variant="subtitle1" color="initial">
+                        {data.category.name}
+                        {data.category.sub_category.length && (
+                            <>&nbsp;- {data.category.sub_category[0].name}</>
+                        )}
+                        {parameters.type && <>&nbsp;- {parameters.type.name}</>}
+                        {parameters.sub_type && (
+                            <>
+                                &nbsp;- <span>{parameters.sub_type.name}</span>
+                            </>
+                        )}
+                    </Typography>
+                </div>
             </div>
             <div className="ad-description">
                 <Typography variant="button" color="initial">
@@ -246,29 +266,12 @@ export const AncmntContent = ({data, parameters, t}) => {
                     </ReadMore>
                 )}
             </div>
-            <div className="ad-category">
-                <Typography variant="button" color="initial">
-                    Категория
-                </Typography>
-                <div>
-                    <Typography variant="subtitle1" color="initial">
-                        {data.parent.name}
-                        {data.child.id && <>&nbsp;- {data.child.name}</>}
-                        {parameters.type && <>&nbsp;- {parameters.type.name}</>}
-                        {parameters.sub_type && (
-                            <>
-                                &nbsp;- <span>{parameters.sub_type.name}</span>
-                            </>
-                        )}
-                    </Typography>
-                </div>
-            </div>
-            {data.ads_type.name !== 'Обычный' && (
+            {data.ads_type.name !== 'post' && (
                 <div className="started-price">
                     <Typography variant="button">Стартовая цена</Typography>
                     <span>
                         <Typography variant="body2">
-                            {data.price} {data.currency.name}
+                            {pricePrettier(data.price)} {data.currency.name}
                         </Typography>
                     </span>
                 </div>

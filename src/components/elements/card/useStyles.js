@@ -98,7 +98,7 @@ export const useStyles = makeStyles((theme) => ({
                             padding: '0 5px',
                             color: theme.palette.primary.white,
                             backgroundColor: ({ads_type}) => (
-                                ads_type === 'anc'
+                                ads_type === 'post'
                                     ? 'rgba(136, 202, 236, .65)'
                                     : ads_type === 'auc'
                                         ? 'rgba(173, 102, 213, .65)'

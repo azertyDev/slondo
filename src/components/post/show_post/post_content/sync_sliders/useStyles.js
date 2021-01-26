@@ -58,6 +58,7 @@ export const useStyles = makeStyles(() => ({
             margin: 'inherit'
         },
         '& div.slick-slide': {
+            width: '212px !important',
             '& > div, & img': {
                 height: `120px !important`,
             },
