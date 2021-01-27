@@ -8,10 +8,10 @@ import {setErrorMsgAction} from "@src/redux/slices/errorSlice";
 import {createPostSchema} from "@root/validation_schemas/createPostSchema";
 import {TOTAL_FILES_LIMIT} from "@src/constants";
 import {
-    noSelectData,
+    noSelect,
     numberRegEx,
     numericFields,
-    textFieldKeys,
+    fieldKeysWithTxt,
     timeRegEx
 } from "@src/helpers";
 import {CameraIcon} from "@src/components/elements/icons";
@@ -55,7 +55,7 @@ export const PostFormContainer: FC<PostFormContainerProps & WithT> = (props) => 
     const {locations} = useSelector((store: RootState) => store);
     const isAuction = postType.name === 'auc' || postType.name === 'exauc';
 
-    const mark = category.mark.replace(/s$/, '');
+    const {mark} = category;
     const initPhotos: FileType[] = Array.from({length: TOTAL_FILES_LIMIT}).map(() => initPhoto);
     const weekDays = Array.from({length: 7}).map((_, i) => ({id: ++i}));
     const initFormikForm: CreatePostProps = {
@@ -154,8 +154,10 @@ export const PostFormContainer: FC<PostFormContainerProps & WithT> = (props) => 
 
         Object.keys(postParamsByMark).map(k => {
             if (!!postParamsByMark[k] && !!postParamsByMark[k].id) {
-                const modifiedKey = k.replace(/s$/, '');
-                valsForCrtPost[mark][`${modifiedKey}_id`] = postParamsByMark[k].id;
+                if (!!postParamsByMark[k].txt) {
+                    valsForCrtPost[mark][k] = postParamsByMark[k].txt;
+                }
+                valsForCrtPost[mark][`${k}_id`] = postParamsByMark[k].id;
             } else {
                 valsForCrtPost[mark][k] = postParamsByMark[k];
             }
@@ -205,10 +207,12 @@ export const PostFormContainer: FC<PostFormContainerProps & WithT> = (props) => 
 
         Object.keys(dataForCrtPost).forEach(dataKey => {
             if (Array.isArray(dataForCrtPost[dataKey])) {
-                if (textFieldKeys.some(k => k === dataKey)) {
-                    postParams[mark][dataKey] = {...noSelectData, txt: ''}
-                } else {
-                    postParams[mark][dataKey] = noSelectData;
+                if (!!dataForCrtPost[dataKey].length) {
+                    if (fieldKeysWithTxt.some(k => k === dataKey)) {
+                        postParams[mark][dataKey] = {...noSelect, txt: ''};
+                    } else {
+                        postParams[mark][dataKey] = noSelect;
+                    }
                 }
             } else {
                 postParams[mark][dataKey] = dataForCrtPost[dataKey];
@@ -256,8 +260,8 @@ export const PostFormContainer: FC<PostFormContainerProps & WithT> = (props) => 
     }, []);
 
     // console.log(secLvlCtgr)
-    console.log(values)
     // console.log(dataForCrtPost)
+    console.log(values)
 
     return (
         <FormikProvider value={formik}>
@@ -325,8 +329,8 @@ export const PostFormContainer: FC<PostFormContainerProps & WithT> = (props) => 
     }
 
     function handleParamsCheckbox(keyName, value) {
-        return () => {
-            if (postParamsByMark[keyName]) {
+        return ({target}) => {
+            if (postParamsByMark[keyName] && !!value) {
                 if (postParamsByMark[keyName].some(val => val.id === value.id)) {
                     postParamsByMark[keyName].forEach((val, index) => {
                         if (val.id === value.id) {
@@ -336,8 +340,10 @@ export const PostFormContainer: FC<PostFormContainerProps & WithT> = (props) => 
                 } else {
                     postParamsByMark[keyName] = value;
                 }
-                setValues({...values});
+            } else {
+                postParamsByMark[keyName] = target.checked;
             }
+            setValues({...values});
         }
     }
 
@@ -349,7 +355,7 @@ export const PostFormContainer: FC<PostFormContainerProps & WithT> = (props) => 
             } else if (valueKey === 'duration') {
                 auction[valueKey] = newValue;
             } else {
-                const isTxtField = textFieldKeys.some(k => k === valueKey);
+                const isTxtField = fieldKeysWithTxt.some(k => k === valueKey);
                 postParamsByMark[valueKey] = isTxtField
                     ? {...postParamsByMark[valueKey], ...newValue}
                     : newValue;
@@ -372,11 +378,11 @@ export const PostFormContainer: FC<PostFormContainerProps & WithT> = (props) => 
                     case 'price_by_now':
                         auction[name].value = value;
                         break;
-                    case 'year':
-                        postParamsByMark[name] = value;
-                        break;
                     case 'area':
                         postParamsByMark[name].txt = value;
+                        break;
+                    default:
+                        postParamsByMark[name] = value;
                 }
             }
         } else {

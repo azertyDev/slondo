@@ -3,7 +3,7 @@ import {Grid, TextField, Typography} from "@material-ui/core";
 import {isRequired} from "@root/validation_schemas/createPostSchema";
 import {CustomCheckbox} from "@src/components/elements/custom_checkbox/CustomCheckbox";
 import {CustomMenu} from "@src/components/elements/custom_menu/CustomMenu";
-import {textFieldKeys} from "@src/helpers";
+import {fieldKeysWithTxt} from "@src/helpers";
 import {useStyles} from "./useStyles";
 
 
@@ -35,12 +35,13 @@ export const PostParams: FC<any> = (props) => {
 
     const isSpecialRows = keyName === 'body' || keyName === 'colors' || isOptions;
 
-    const isNotEmptyArray = Array.isArray(data) && !!data.length;
-    const isTextFieldKey = textFieldKeys.some(k => k === keyName);
+    const isArray = Array.isArray(data);
+    const isFieldKeyWithTxt = fieldKeysWithTxt.some(k => k === keyName);
+
     let fields;
 
     const classes = useStyles({isPreview});
-    if (isSpecialRows && isNotEmptyArray) {
+    if (isSpecialRows && isArray) {
         fields = <>
             <Typography variant="subtitle1">
                 <strong>
@@ -80,10 +81,11 @@ export const PostParams: FC<any> = (props) => {
                                 />
                                 : <div style={{display: 'flex', alignItems: 'center'}}>
                                     <CustomCheckbox
-                                        checked={
-                                            paramsByMark[keyName] && paramsByMark[keyName].some(val => val.id === item.id)
-                                        }
                                         onChange={handleParamsCheckbox(keyName, item)}
+                                        checked={
+                                            paramsByMark[keyName]
+                                            && paramsByMark[keyName].some(val => val.id === item.id)
+                                        }
                                     />
                                     <Typography>{item.name}</Typography>
                                 </div>}
@@ -91,7 +93,7 @@ export const PostParams: FC<any> = (props) => {
                 ))}
             </div>
         </>;
-    } else if (isNotEmptyArray) {
+    } else if (isArray) {
         fields = <>
             <Typography variant="subtitle1">
                 <strong>
@@ -106,14 +108,14 @@ export const PostParams: FC<any> = (props) => {
                 && <span className='error-text'> {postParamsError[keyName].id}</span>}
             </Typography>
             <Grid container>
-                {isTextFieldKey && (
+                {isFieldKeyWithTxt && (
                     <Grid item xs={9}>
                         <TextField
                             fullWidth
                             variant='outlined'
                             value={
                                 paramsByMark[keyName]
-                                    ? isTextFieldKey ? paramsByMark[keyName].txt : ''
+                                    ? isFieldKeyWithTxt ? paramsByMark[keyName].txt : ''
                                     : ''}
                             name={keyName}
                             onChange={handleInput}
@@ -126,7 +128,7 @@ export const PostParams: FC<any> = (props) => {
                         />
                     </Grid>
                 )}
-                <Grid item xs={isTextFieldKey ? 3 : 12}>
+                <Grid item xs={isFieldKeyWithTxt ? 3 : 12}>
                     {isPreview
                         ? <Typography>
                             {paramsByMark[keyName].name}
@@ -148,7 +150,6 @@ export const PostParams: FC<any> = (props) => {
             </Grid>
         </>;
     } else if (!Array.isArray(data)) {
-        console.log(paramsByMark[keyName])
         fields = <>
             <Typography variant="subtitle1">
                 {t(keyName)}
@@ -161,28 +162,34 @@ export const PostParams: FC<any> = (props) => {
                 && postParamsTouched[keyName]
                 && <span className='error-text'> {postParamsError[keyName]}</span>}
             </Typography>
-            {isPreview
-                ? <Typography>
-                    {typeof paramsByMark[keyName] === 'string'
-                        ? paramsByMark[keyName]
-                        : paramsByMark[keyName].name}
-                </Typography>
-                : <TextField
-                    fullWidth
-                    name={keyName}
-                    variant='outlined'
-                    value={paramsByMark[keyName] ?? ''}
-                    onChange={handleInput}
-                    className={
-                        postParamsError
-                        && postParamsTouched
-                        && postParamsError[keyName]
-                        && postParamsTouched[keyName] ? 'error-border' : ''
-                    }
-                />}
+            {typeof data === 'boolean'
+                ? <CustomCheckbox
+                    disabled={isPreview}
+                    checked={!!paramsByMark[keyName]}
+                    onChange={handleParamsCheckbox(keyName)}
+                />
+                : isPreview
+                    ? <Typography>
+                        {typeof paramsByMark[keyName] === 'string'
+                            ? paramsByMark[keyName]
+                            : paramsByMark[keyName].name}
+                    </Typography>
+                    : <TextField
+                        fullWidth
+                        name={keyName}
+                        variant='outlined'
+                        value={paramsByMark[keyName] ?? ''}
+                        onChange={handleInput}
+                        className={
+                            postParamsError
+                            && postParamsTouched
+                            && postParamsError[keyName]
+                            && postParamsTouched[keyName] ? 'error-border' : ''
+                        }
+                    />}
         </>
     }
-    fields = fields
+    fields = !!fields
         ? <Grid
             item
             container

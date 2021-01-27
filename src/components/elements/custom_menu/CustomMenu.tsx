@@ -3,7 +3,7 @@ import {Menu, MenuItem, Typography} from "@material-ui/core";
 import {CustomMenuProps} from "@root/interfaces/CustomMenuProps";
 import {ButtonComponent} from "@src/components/elements/button/Button";
 import {isRequired} from "@root/validation_schemas/createPostSchema";
-import {noSelectData} from "@src/helpers";
+import {noSelect} from "@src/helpers";
 
 
 export const CustomMenu: FC<CustomMenuProps> = (props) => {
@@ -50,10 +50,10 @@ export const CustomMenu: FC<CustomMenuProps> = (props) => {
             >
                 {!isRequired(name)
                 && <MenuItem
-                    id={noSelectData.name}
-                    onClick={onClick(noSelectData, setAnchor)}
+                    id={noSelect.name}
+                    onClick={onClick(noSelect, setAnchor)}
                 >
-                    <Typography>{noSelectData.name}</Typography>
+                    <Typography>{noSelect.name}</Typography>
                 </MenuItem>}
                 {items.map((item, i) => (
                     <MenuItem

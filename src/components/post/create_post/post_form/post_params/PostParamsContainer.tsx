@@ -32,7 +32,7 @@ export const PostParamsContainer: FC<any> = (props) => {
                         handleMenuItem={props.handleMenuItem}
                         handleListItem={props.handleListItem}
                         handleInput={props.handleInput}
-                        handleParamsCheckbox={props.handleCheckbox}
+                        handleParamsCheckbox={props.handleParamsCheckbox}
                     />
                 </Fragment>
             ))}

@@ -10,7 +10,11 @@ import {CreatePostState, PostType} from "@root/interfaces/Post";
 import {PostFormContainer, SecLvlCtgrType} from "./post_form/PostFormContainer";
 import {setErrorMsgAction} from '@root/src/redux/slices/errorSlice';
 import {PostTypesPage} from "@src/components/post/post_types_page/PostTypesPage";
-import {categoryDataNormalization, categorySearchHelper, formatDataForCrtPost} from "@src/helpers";
+import {
+    dataForCrtPostNormalize,
+    categoryDataNormalization,
+    categorySearchHelper,
+} from "@src/helpers";
 import {PostHeader} from './post_header/PostHeader';
 import {SuccessPost} from "@src/components/post/create_post/post_form/success_post/SuccessPost";
 import {SubLvlCtgrsType} from "@root/interfaces/Categories";
@@ -197,15 +201,6 @@ export const CreatePostContainer: FC<WithT> = ({t}) => {
             : [];
         setSubLvlCtgrs(matchedCtgrs);
     };
-    //
-    // const handleSearch = ({target: {value}}) => {
-    //     setSearchTxt(value);
-    //     setMatchedCtgrs(value);
-    //     if (!!category.id) {
-    //         setSubLvlCtgrs([]);
-    //         setCreatePost(initCreatePostState);
-    //     }
-    // };
 
     const handleCategory = ctgr => async () => {
         if ((ctgr.model && ctgr.model.length) || (ctgr.type && ctgr.type.length)) {
@@ -262,8 +257,10 @@ export const CreatePostContainer: FC<WithT> = ({t}) => {
     };
 
     const handleResetCreateData = () => {
+        !!category.id
+        && activeStep !== 3
+        && setCreatePost(initCreatePostState);
         !!setSubLvlCtgrs.length && setSubLvlCtgrs([]);
-        !!category.id && setCreatePost(initCreatePostState);
     };
 
     const handleResetPostType = () => {
@@ -287,7 +284,8 @@ export const CreatePostContainer: FC<WithT> = ({t}) => {
             } else if (parents[0]) {
                 setSubLvlCtgrs(newLangCtgr.model);
             }
-            setCreatePost({...createPost, category: newLangCtgr});
+            createPost.category = newLangCtgr;
+            setCreatePost({...createPost});
         }
         // else if (!!searchTxt) handleResetCreateData();
     };
@@ -335,7 +333,7 @@ export const CreatePostContainer: FC<WithT> = ({t}) => {
                     category={category}
                     secLvlCtgr={secLvlCtgr}
                     handleNextStep={handleNextStep}
-                    dataForCrtPost={formatDataForCrtPost(dataForCrtPost)}
+                    dataForCrtPost={dataForCrtPostNormalize(dataForCrtPost)}
                 />}
                 {activeStep === 4 && <SuccessPost handleCreateNewPost={handleResetPostType}/>}
             </>
