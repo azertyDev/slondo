@@ -13,6 +13,7 @@ const initCard = {
     title: '',
     safe_deal: null,
     price: null,
+    sub_category_id: null,
     currency: {
         id: null,
         name: '',
@@ -31,6 +32,11 @@ const initCard = {
             default: ''
         }
     }],
+    category: { 
+        id: null,
+        name: '',
+        mark: ''
+    },
     delivery: null,
     exchange: null,
     ads_type: 'anc'

@@ -1,11 +1,11 @@
-import React, {FC, useEffect, useState} from 'react';
-import {useRouter} from 'next/router';
-import {WithT} from "i18next";
-import {i18n} from '@root/i18n';
-import {userAPI} from '@src/api/api';
-import {ShowPost} from '@src/components/post/show_post/ShowPost';
+import React, { FC, useEffect, useState } from 'react';
+import { useRouter } from 'next/router';
+import { WithT } from 'i18next';
+import { i18n } from '@root/i18n';
+import { userAPI } from '@src/api/api';
+import { ShowPost } from '@src/components/post/show_post/ShowPost';
 
-const initValues = {id: null, name: ''};
+const initValues = { id: null, name: '' };
 
 const initialAdData = {
     isFetch: false,
@@ -18,22 +18,19 @@ const initialAdData = {
         created_at: null,
         expiration_at: null,
         number_of_views: null,
+        sub_category_id: null,
         images: [],
         description: '',
         region: initValues,
         city: initValues,
         district: initValues,
+        category: {
+            id: null,
+            name: '',
+            mark: '',
+            sub_category: []
+        },
         ads_type: {
-            id: null,
-            name: '',
-            mark: '',
-        },
-        parent: {
-            id: null,
-            name: '',
-            mark: '',
-        },
-        child: {
             id: null,
             name: '',
             mark: '',
@@ -47,16 +44,15 @@ const initialAdData = {
     },
 };
 
-export const ShowPostContainer: FC<WithT> = ({t}) => {
+export const ShowPostContainer: FC<WithT> = ({ t }) => {
     const [adData, setAdData] = useState(initialAdData);
     const [parameters, setParameters] = useState({});
 
     const url = useRouter().query.url as string;
     const splittedUrl = url.split('-');
-
+    const params = splittedUrl.splice(-3);
+    
     const lang = i18n.language;
-
-    const ancmntType = adData.data.ads_type.mark;
 
     const fetchAdData = async () => {
         try {
@@ -76,21 +72,17 @@ export const ShowPostContainer: FC<WithT> = ({t}) => {
                 district,
                 ...otherData
             } = await userAPI.getAddById(
-                splittedUrl[splittedUrl.length - 1],
+                params[0],
                 lang,
+                params[1],
+                params[2],
             );
+            
+            setParameters(otherData.model);
 
             setAdData({
                 ...adData,
                 isFetch: false,
-            });
-
-            setParameters({
-                ...otherData[otherData.parent.mark],
-            });
-
-            setAdData({
-                ...adData,
                 data: {
                     title,
                     images,
@@ -115,7 +107,5 @@ export const ShowPostContainer: FC<WithT> = ({t}) => {
         fetchAdData();
     }, []);
 
-    return (
-        <ShowPost adData={adData} t={t} parameters={parameters}/>
-    );
+    return <ShowPost adData={adData} t={t} parameters={parameters} />;
 };

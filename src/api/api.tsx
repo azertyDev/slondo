@@ -70,8 +70,8 @@ export const userAPI = {
                 throw err;
             });
     },
-    getAddById: (ads_id: string | string[], lang: string): Promise<any> => {
-        return instance.get(`getAddById?ads_id=${ads_id}&lang=${lang}`)
+    getAddById: (ads_id: string | string[], lang: string, type: string, sub_category_id: string): Promise<any> => {
+        return instance.get(`getAddById?ads_id=${ads_id}&lang=${lang}&type=${type}&sub_category_id=${sub_category_id}`)
             .then((res) => res.data)
             .catch((err) => {
                 throw err;

@@ -25,7 +25,8 @@ export const useStyles = makeStyles(() => ({
         width: '100%',
         marginTop: '10px',
         '& div.slick-list': {
-            width: '80%',
+            height: '627px',
+            // width: '80%',
             margin: '0 auto 0 auto',
         },
         '& div.slick-slide img': {

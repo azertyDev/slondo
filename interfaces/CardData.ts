@@ -5,7 +5,7 @@ export interface CardData {
     data: {
         cards: InnerCardData[];
         total: number;
-    }
+    };
 }
 
 export type InnerCardData = {
@@ -14,17 +14,17 @@ export type InnerCardData = {
     safe_deal: number;
     price: number;
     region: {
-        id: number,
+        id: number;
         name: string;
-    },
+    };
     city: {
-        id: number,
+        id: number;
         name: string;
-    },
+    };
     district?: {
-        id: number,
+        id: number;
         name: string;
-    },
+    };
     currency: {
         id: number;
         name: string;
@@ -34,8 +34,14 @@ export type InnerCardData = {
             default: string;
         };
     }[];
+    category: {
+        id: null;
+        name: string;
+        mark: string;
+    };
     created_at: string;
     delivery: number;
     exchange: number;
     ads_type: string;
+    sub_category_id: null;
 };
