@@ -1,5 +1,4 @@
-import {CategoryType} from "@root/interfaces/Categories";
-import {IdNameType} from "@root/interfaces/Announcement";
+import {CategoryType, SubLvlCtgrsType} from "@root/interfaces/Categories";
 import CyrillicToTranslit from 'cyrillic-to-translit-js';
 
 
@@ -15,58 +14,120 @@ export const transformTitle = (title: string): string => {
 
 
 export const numberRegEx = /^[0-9]*$/;
+export const timeRegEx = /^([0-1]?[0-9]|2[0-3])?:([0-5][0-9]?)?$/;
 
-type SearchType = (IdNameType & {
-    parent: IdNameType,
-    icons: [],
-    image: { url: string }
-})[];
 
-export const categoryDataNormalization = (categoryList: CategoryType[]): CategoryType[] => (
-    categoryList.map(category => {
-        const childs = category.childs.map(child => ({
-                ...child,
-                parent: {
-                    id: category.id,
-                    name: category.name
-                }
-            })
-        );
-        return {...category, childs};
+export const fieldKeysWithTxt = ['area'];
+export const numericFields = [
+    'price',
+    'reserve_price',
+    'price_by_now',
+    'year',
+    'area',
+    'floor',
+    'general_area',
+    'kitchen_area',
+    'living_area',
+    'number_of_floors'
+];
+
+const excludedKeys = ['id', 'type_id', 'sub_type_id'];
+
+export const noSelect = {id: null, name: 'Не выбрано'};
+
+const addParents = (list, parents) => (
+    list.map(ctgr => {
+        if (ctgr.type) {
+            const type = addParents(
+                ctgr.type,
+                [
+                    ...parents,
+                    {
+                        id: ctgr.id,
+                        name: ctgr.name
+                    }
+                ]
+            )
+            return {
+                ...ctgr,
+                type,
+                parents
+            }
+        } else {
+            return {
+                ...ctgr,
+                parents
+            }
+        }
     })
 );
 
-export const categorySearchHelper = (text: string, categoryList: CategoryType[]): SearchType => {
-    const searchRegExp = RegExp(text, 'i');
+export const categoryDataNormalization = (categoryList: CategoryType[]) => (
+    categoryList.map(ctgr => {
+        if (ctgr.model) {
+            const model = addParents(
+                ctgr.model,
+                [{
+                    id: ctgr.id,
+                    name: ctgr.name
+                }]
+            );
+            return {...ctgr, model};
+        } else {
+            return ctgr;
+        }
+    })
+);
+
+export const categorySearchHelper = (txt: string, categoryList: CategoryType[]): SubLvlCtgrsType[] => {
     return categoryList
         .reduce((list, category) => {
-            category.childs.forEach(sub_ctgr => {
-                if (searchRegExp.test(sub_ctgr.name)) {
-                    list.push(sub_ctgr);
-                }
-            })
+            list = [...list, ...getMatchedCtgrs(txt, category.model)];
             return list;
         }, []);
+
+    function getMatchedCtgrs(txt, list) {
+        const searchRegExp = RegExp(txt, 'i');
+        let matchedCtgrs = [];
+
+        if (list !== undefined) {
+            list.forEach(ctgr => {
+                if (searchRegExp.test(ctgr.name)) {
+                    matchedCtgrs.push(ctgr);
+                }
+                matchedCtgrs = [
+                    ...matchedCtgrs,
+                    ...getMatchedCtgrs(txt, ctgr.type)
+                ];
+            });
+        }
+
+        return matchedCtgrs;
+    }
 };
 
-export const prepareCreateAncmnt = (data: any, adParams?: any): any => (
-    Object.keys(data).reduce((acc, key) => {
-        if (Array.isArray(data[key]) || data[key] === '') {
-            acc[key] = data[key];
-        }
-        if (
-            Array.isArray(data[key])
-            && data[key].length
-            && adParams !== undefined && adParams[key]
-        ) {
-            acc = {
-                ...acc,
-                ...prepareCreateAncmnt(adParams[key])
-            };
-        }
-        return acc;
-    }, {})
-);
+export const dataForCrtPostNormalize = (data: any) => {
+    return !!data
+        ? Object.keys(data).reduce((acc, key) => {
+            const isExcludedKey = excludedKeys.some(k => k === key);
+            if (key === 'type') {
+                acc = {
+                    ...acc,
+                    ...dataForCrtPostNormalize(data[key][0])
+                };
+            } else {
+                if ((Array.isArray(data[key]) && data[key].length) || data[key] === '') {
+                    acc[key] = data[key];
+                } else if (key === 'furnished') {
+                    acc[key] = false;
+                } else if (Number.isInteger(data[key]) && !isExcludedKey) {
+                    acc[key] = '';
+                }
+            }
+            return acc;
+        }, {})
+        : {};
+};
 
 export const pricePrettier = (price: number): string =>
     price && price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ");

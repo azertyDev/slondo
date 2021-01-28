@@ -6,11 +6,12 @@ import {
     CabinetMenuWrapper,
 } from '@src/components/cabinet/CabinetMenuWrapper';
 import { TabsDataType } from '@src/components/cabinet/cabinet_pages/archive/ArchiveContainer';
+import { WithT } from 'i18next';
 import { useStyles } from './useStyles';
 
 export const TabsContent: FC<
-    CabinetMenuPropsType & { tabsData: TabsDataType[] }
-> = ({ tabsData, headerTitle, title }) => {
+    CabinetMenuPropsType & { tabsData: TabsDataType[] } & WithT
+> = ({ tabsData, headerTitle, title, t }) => {
     const [value, setValue] = useState(0);
 
     const handleChange = (event, newValue) => {

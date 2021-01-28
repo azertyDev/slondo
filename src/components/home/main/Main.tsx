@@ -7,16 +7,17 @@ import {
     Grid,
     Container,
 } from '@material-ui/core';
-import { MainSlider } from './mainSlider/MainSlider';
-import { CategoriesSlider } from './categoriesSlider/CategoriesSlider';
-import { AncmntsSliderContainer } from './ancmnts_slider/AncmntsSliderContainer';
-import { AncmntsTabsContainer } from './ancmnts_tabs/AncmntsTabsContainer';
-import { ScrollTop } from '@src/components/elements/scroll_top/ScrollTop';
-import { Link, useTranslation } from '@root/i18n';
-import { Banner } from '@src/components/elements/banner/Banner';
-import { FaqComponent } from '@src/components/elements/faq_component/FaqComponent';
-import { useStyles } from './useStyles';
+import {MainSlider} from './mainSlider/MainSlider';
+import {CategoriesSlider} from './categoriesSlider/CategoriesSlider';
+import {PostsSliderContainer} from "./posts_slider/PostsSliderContainer";
+import {PostsTabsContainer} from './posts_tabs/PostsTabsContainer';
+import {ScrollTop} from '@src/components/elements/scroll_top/ScrollTop';
+import {Link, useTranslation} from '@root/i18n';
+import {Banner} from "@src/components/elements/banner/Banner";
+import {FaqComponent} from "@src/components/elements/faq_component/FaqComponent";
 import { SocialsBlock } from '../../elements/socials_block/SocialsBlock';
+import {useStyles} from './useStyles';
+
 
 export const Main: FC = () => {
     const { t } = useTranslation(['main', 'common']);
@@ -35,12 +36,12 @@ export const Main: FC = () => {
                         <CategoriesSlider t={t} />
                     </div>
                     <Grid container>
-                        <Grid item lg={9} xs={12} className="main-content">
-                            <section className="ancmnts-slider-wrapper">
-                                <AncmntsSliderContainer />
+                        <Grid item lg={9} xs={12} className='main-content'>
+                            <section className='ancmnts-slider-wrapper'>
+                                <PostsSliderContainer/>
                             </section>
                             <section>
-                                <AncmntsTabsContainer t={t} />
+                                <PostsTabsContainer t={t}/>
                             </section>
                         </Grid>
                         <Hidden mdDown>
@@ -68,7 +69,7 @@ export const Main: FC = () => {
 
                     <Hidden lgUp>
                         <div className={classes.createAdBlock}>
-                            <Link href={'/announcement/create'}>
+                            <Link href={'/post/create'}>
                                 <a>
                                     <Slide
                                         appear={false}

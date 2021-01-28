@@ -2,6 +2,7 @@ import NextI18Next from 'next-i18next';
 import _default from 'next/config';
 import path from 'path';
 
+
 const { localeSubpaths } = _default().publicRuntimeConfig;
 
 export const {

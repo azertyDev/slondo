@@ -1,4 +1,4 @@
-import { makeStyles } from '@material-ui/core/styles';
+import {makeStyles} from '@material-ui/core/styles';
 
 export const useStyles = makeStyles((theme) => ({
     root: {
@@ -17,7 +17,7 @@ export const useStyles = makeStyles((theme) => ({
                 '& > path:nth-child(1)': {
                     fillOpacity: '0.8',
                 },
-                '& > defs:first-child > linearGradient > stop': {
+                '& > defs.def1 > linearGradient > stop': {
                     '&:first-child': {
                         stopColor: '#675EAA',
                     },
@@ -80,7 +80,7 @@ export const useStyles = makeStyles((theme) => ({
             },
             '& > div.card-media': {
                 height: '240px',
-
+                
                 '& > div.card-header': {
                     width: '100%',
                     height: '100%',
@@ -97,12 +97,13 @@ export const useStyles = makeStyles((theme) => ({
                             borderRadius: '3px',
                             padding: '0 5px',
                             color: theme.palette.primary.white,
-                            backgroundColor: (ancmntType) =>
-                                ancmntType === 'auction'
-                                    ? 'rgba(173, 102, 213, .65)'
-                                    : ancmntType === 'adv_auction'
-                                    ? 'rgba(242, 153, 74, .65)'
-                                    : 'rgba(136, 202, 236, .65)'
+                            backgroundColor: ({ads_type}) => (
+                                ads_type === 'post'
+                                    ? 'rgba(136, 202, 236, .65)'
+                                    : ads_type === 'auc'
+                                        ? 'rgba(173, 102, 213, .65)'
+                                        : 'rgba(242, 153, 74, .65)'
+                            )
                         }
                     },
                     '& > div.icons': {

@@ -1,6 +1,7 @@
 import React, { FC } from 'react';
 
-export const PhoneIcon: FC = () => {
+export const PhoneIcon = () => {
+    
     const iconId = Math.random();
     return (
         <svg

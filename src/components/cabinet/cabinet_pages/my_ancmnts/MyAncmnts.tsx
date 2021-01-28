@@ -6,7 +6,7 @@ import {
 import { WithT } from 'i18next';
 
 // styles
-import { useStyles } from './useStyles';
+import {useStyles} from './useStyles';
 
 export const MyAncmnts: FC<ViewPropsTypes & WithT> = (props) => {
     const { isFetch, list, t } = props;

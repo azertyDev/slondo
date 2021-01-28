@@ -35,11 +35,8 @@ export type InnerCardData = {
             default: string;
         };
     }[];
-    created_at: string;
-    delivery: number;
-    exchange: number;
-    ads_type: {
-        id: number;
+    category: {
+        id: null;
         name: string;
         mark: string;
     };

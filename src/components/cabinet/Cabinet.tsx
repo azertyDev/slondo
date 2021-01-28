@@ -1,10 +1,10 @@
-import React, { useState } from 'react';
-import { Container, Grid, Typography, Tabs, Tab } from '@material-ui/core';
-import { ListView } from '@src/components/elements/card_view/list_view/ListView';
-import { Notification } from '@src/components/cabinet/notification/Notification';
-import { CabinetSidebar } from '@src/components/cabinet/cabinet_sidebar/CabinetSidebar';
-import { CustomTabPanel } from '@src/components/elements/custom_tab_panel/CustomTabPanel';
-import { useStyles } from './useStyles';
+import React, {useState} from 'react';
+import {Container, Grid, Typography, Tabs, Tab} from '@material-ui/core';
+import {ListView} from '@src/components/elements/card_view/list_view/ListView';
+import {Notification} from '@src/components/cabinet/notification/Notification';
+import {CabinetSidebar} from '@src/components/cabinet/cabinet_sidebar/CabinetSidebar';
+import {CustomTabPanel} from '@src/components/elements/custom_tab_panel/CustomTabPanel';
+import {useStyles} from './useStyles';
 
 export const Cabinet = (props) => {
     const [value, setValue] = useState(0);
@@ -61,9 +61,9 @@ export const Cabinet = (props) => {
                             <ListView />
                         </CustomTabPanel>
                         <CustomTabPanel value={value} index={1}>
-                            <Notification />
-                            <Notification />
-                            <Notification />
+                            <Notification/>
+                            <Notification/>
+                            <Notification/>
                         </CustomTabPanel>
                         <CustomTabPanel value={value} index={2}>
                             <ListView />

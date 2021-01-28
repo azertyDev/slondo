@@ -1,4 +1,4 @@
-import {IdNameType} from "@root/interfaces/Announcement";
+import {IdNameType} from "@root/interfaces/Post";
 
 
 export interface Categories {
@@ -7,35 +7,26 @@ export interface Categories {
     list: CategoryType[];
 }
 
-export type CategoryType = IdNameType & {
-    images: {
-        id: number,
-        url: {
-            default: string
-        }
+export type CategoryType = {
+    mark: string;
+    image: {
+        url: string;
     },
-    icons: {
-        id: number,
-        url: {
-            default: string,
-        }
+    icon: {
+        url: string;
     },
-    childs: (IdNameType & {
-        parent: any,
-        image: {
-            url: string,
-        }
-    })[],
-    has_auction: number,
-}
+    model: ModelType[];
+    has_auction: number;
+} & IdNameType;
 
-export interface CategoryIDs {
-    ctgryID: number,
-    subCtgryID: number,
-    lang: string,
-}
+export type ModelType = {
+    parents: IdNameType[];
+    image: {
+        url: string
+    };
+    type: IdNameType[];
+} & IdNameType;
 
-export type SubCategoryType = IdNameType & {
-    data: any,
-    parent: IdNameType
-}
+export type SubLvlCtgrsType = {
+    parents: IdNameType[]
+} & IdNameType

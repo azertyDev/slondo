@@ -78,8 +78,8 @@ const Bottom = (props) => {
                                 </Grid>
                             </Grid>
                             <Grid item md={2}>
-                                <Link href="/announcement/create">
-                                    <a className="create-ancmnt-link">
+                                <Link href="/post/create">
+                                    <a className='create-ancmnt-link'>
                                         <ButtonComponent
                                             color="primary"
                                             className="header-button"

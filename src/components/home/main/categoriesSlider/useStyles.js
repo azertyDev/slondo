@@ -52,26 +52,24 @@ export const useStyles = makeStyles((theme) => ({
                         fontSize: '1.125rem',
                     },
                     '& div.bg-layer': {
-                        position: 'relative',
-                        width: '132px',
-                        height: '132px',
                         marginBottom: '20px',
                         background:
                             'linear-gradient(90deg, #f0f0f0 0%, #eaeaeb 67.06%, #e4e4e6 100%)',
                         borderRadius: '100px',
                     },
                     '& div.medium': {
-                        position: 'absolute',
-                        top: '2px',
-                        left: '2px',
                         background:
                             'linear-gradient(90deg, #d7d6e3 -18.43%, #fafafa 147.2%)',
-                        width: '127px',
-                        height: '127px',
+                        width: '132px',
+                        height: '132px',
                         borderRadius: '100px',
-                    },
-                },
-            },
-        },
-    },
+                        '& > img': {
+                            height: '100%',
+                            objectFit: 'contain'
+                        }
+                    }
+                }
+            }
+        }
+    }
 }));

@@ -21,6 +21,6 @@ export const MyAncmntsContainer: FC<WithT> = ({t}) => {
     const title = 'Мои объявления';
 
     return (
-        <TabsContent title={title} tabsData={tabsData} headerTitle={title} />
+        <TabsContent title={title} tabsData={tabsData} headerTitle={title} t={t}/>
     );
 };
