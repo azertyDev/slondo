@@ -8,6 +8,7 @@ import {
     CardMedia,
     IconButton,
     Typography,
+    Tooltip,
 } from '@material-ui/core';
 import Skeleton from '@material-ui/lab/Skeleton';
 import {
@@ -78,19 +79,34 @@ export const CardItem: FC<CardItemProps> = (props) => {
                                     </div>
                                     <div className="icons">
                                         {!!delivery && (
-                                            <span>
-                                                <DeliveryIcon />
-                                            </span>
+                                            <Tooltip
+                                                title="Есть доставка"
+                                                arrow
+                                            >
+                                                <span>
+                                                    <DeliveryIcon />
+                                                </span>
+                                            </Tooltip>
                                         )}
                                         {!!safe_deal && (
-                                            <span>
-                                                <SafeIcon />
-                                            </span>
+                                            <Tooltip
+                                                title="Безопасная покупка"
+                                                arrow
+                                            >
+                                                <span>
+                                                    <SafeIcon />
+                                                </span>
+                                            </Tooltip>
                                         )}
                                         {!!exchange && (
-                                            <span>
-                                                <SwapIcon />
-                                            </span>
+                                            <Tooltip
+                                                title="Возможен обмен"
+                                                arrow
+                                            >
+                                                <span>
+                                                    <SwapIcon />
+                                                </span>
+                                            </Tooltip>
                                         )}
                                     </div>
                                 </div>

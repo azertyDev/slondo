@@ -89,6 +89,9 @@ export const useStyles = makeStyles(() => ({
                 marginRight: '30px',
                 borderRadius: '100px',
                 boxShadow: '0px 0px 15px rgba(0, 0, 0, 0.1)',
+                '&:last-child': {
+                    marginRight: 0,
+                },
                 '&.delivery': {
                     '& svg': {
                         '& path': {

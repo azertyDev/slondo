@@ -12,9 +12,10 @@ import { useStyles } from './useStyles';
 import { ModalSyncSliders } from './modal_sync_sliders/ModalSyncSliders';
 import { BreadcrumbsComponent } from '@src/components/elements/breadcrumbs/Breadcrumbs';
 import { Link } from '@root/i18n';
+import { WithT } from 'i18next';
 import { pricePrettier } from '@root/src/helpers';
 
-export const AncmntContent: FC<any> = ({ data, parameters, t }) => {
+export const AncmntContent: FC<WithT & any> = ({ data, parameters, t }) => {
     const [initialSlide, setInitialSlide] = useState(0);
     const [open, setOpen] = useState(false);
 
@@ -204,6 +205,11 @@ export const AncmntContent: FC<any> = ({ data, parameters, t }) => {
                 {!!data.available_start_time && (
                     <span className="available">
                         <PhoneIcon />
+                        <Typography variant="subtitle1" color="primary">
+                            {data.available_days.map((k) =>
+                                t(`common:${k.name}`),
+                            )}
+                        </Typography>
                         &nbsp;
                         <Typography variant="subtitle1">
                             {data.available_start_time} -{' '}

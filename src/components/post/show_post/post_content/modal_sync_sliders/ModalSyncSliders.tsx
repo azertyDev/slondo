@@ -7,10 +7,10 @@ import React, {
     useState,
     useEffect,
 } from 'react';
-import {CustomSlider} from '@src/components/elements/custom_slider/CustomSlider';
-import {useStyles} from './useStyles';
-import {Container, Modal, Typography} from '@material-ui/core';
-import {ButtonComponent} from '@src/components/elements/button/Button';
+import { CustomSlider } from '@src/components/elements/custom_slider/CustomSlider';
+import { useStyles } from './useStyles';
+import { Container, Modal, Typography } from '@material-ui/core';
+import { ButtonComponent } from '@src/components/elements/button/Button';
 
 type SyncSlidersProps = {
     open: boolean;
@@ -25,15 +25,9 @@ type SyncSlidersProps = {
 };
 
 export const ModalSyncSliders: FC<SyncSlidersProps> = (props) => {
-    const {
-        open,
-        onClose,
-        title, imgs,
-        initialSlide,
-        setInitialSlide
-    } = props;
+    const { open, onClose, title, imgs, initialSlide, setInitialSlide } = props;
 
-    const [slidersNav, setSlidersNav] = useState({nav1: null, nav2: null});
+    const [slidersNav, setSlidersNav] = useState({ nav1: null, nav2: null });
     const slider1: MutableRefObject<unknown> = useRef();
     const slider2: MutableRefObject<unknown> = useRef();
 
@@ -58,13 +52,11 @@ export const ModalSyncSliders: FC<SyncSlidersProps> = (props) => {
 
     const classes = useStyles();
     return (
-        <Modal
-            open={open}
-            onClose={onClose}
-            className={classes.modal}
-        >
-            <Container className={classes.root} maxWidth='lg'>
-                <Typography className='title' variant="h6">{title}</Typography>
+        <Modal open={open} onClose={onClose} className={classes.modal}>
+            <Container className={classes.root} maxWidth="xl">
+                <Typography className="title" variant="h6">
+                    {title}
+                </Typography>
                 <div className={classes.firstSlider}>
                     <CustomSlider
                         ref={slider1}
@@ -74,7 +66,7 @@ export const ModalSyncSliders: FC<SyncSlidersProps> = (props) => {
                         afterChange={handleAfterChange}
                     >
                         {imgs.map((img, i) => (
-                            <img key={i} alt={img.alt} src={img.url.default}/>
+                            <img key={i} alt={img.alt} src={img.url.default} />
                         ))}
                     </CustomSlider>
                 </div>
@@ -82,14 +74,18 @@ export const ModalSyncSliders: FC<SyncSlidersProps> = (props) => {
                     <CustomSlider
                         ref={slider2}
                         asNavFor={slidersNav.nav1}
-                        slidesToShow={4}
+                        slidesToShow={
+                            imgs.length > 4
+                                ? 4
+                                : imgs.length
+                        }
                         slidesToScroll={1}
                         focusOnSelect={true}
                         arrows={false}
                         initialSlide={initialSlide}
                     >
-                        {imgs.map(({url, alt}, i) => (
-                            <img key={i} alt={alt} src={url.default}/>
+                        {imgs.map(({ url, alt }, i) => (
+                            <img key={i} alt={alt} src={url.default} />
                         ))}
                     </CustomSlider>
                     <div className="slider-counter">

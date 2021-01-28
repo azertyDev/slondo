@@ -17,7 +17,7 @@ export const useStyles = makeStyles((theme) => ({
                 '& > path:nth-child(1)': {
                     fillOpacity: '0.8',
                 },
-                '& > defs:first-child > linearGradient > stop': {
+                '& > defs.def1 > linearGradient > stop': {
                     '&:first-child': {
                         stopColor: '#675EAA',
                     },

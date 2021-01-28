@@ -1,29 +1,29 @@
-import {makeStyles} from '@material-ui/core/styles';
+import { makeStyles } from '@material-ui/core/styles';
 
 export const useStyles = makeStyles(() => ({
     modal: {
-        backgroundColor: 'rgba(0, 0, 0, 0.9)'
+        backgroundColor: 'rgba(0, 0, 0, 0.9)',
     },
     root: {
         position: 'relative',
         marginTop: '20px',
         '& button': {
             '&.slick-prev': {
-                left: '25px',
+                // left: '25px',
             },
             '&.slick-next': {
-                right: '25px',
-            }
+                // right: '25px',
+            },
         },
         '& > h6.title': {
             color: '#fff',
             fontWeight: '600',
             textAlign: 'center',
-        }
+        },
     },
     firstSlider: {
         width: '100%',
-        marginTop: '10px',
+        margin: '10px 0',
         '& div.slick-list': {
             height: '627px',
             // width: '80%',
@@ -31,12 +31,10 @@ export const useStyles = makeStyles(() => ({
         },
         '& div.slick-slide img': {
             width: `100% !important`,
-            height: '518px',
+            height: '-webkit-fill-available',
             objectFit: 'contain',
         },
-        '& > div.slick-slider div.slick-slide': {
-            marginRight: 5,
-        },
+        '& > div.slick-slider div.slick-slide': {},
         '& a.overlay': {
             position: 'fixed',
             zIndex: '99',
@@ -63,9 +61,9 @@ export const useStyles = makeStyles(() => ({
                 cursor: 'default',
                 '& image': {
                     transform: 'scale(1)',
-                }
-            }
-        }
+                },
+            },
+        },
     },
     secondSlider: {
         '& div.slick-list': {
@@ -88,7 +86,7 @@ export const useStyles = makeStyles(() => ({
                 '&:hover': {
                     cursor: 'pointer',
                 },
-            }
+            },
         },
         '& > div.slider-counter': {
             display: 'flex',
@@ -119,8 +117,8 @@ export const useStyles = makeStyles(() => ({
                 },
                 '&:hover': {
                     cursor: 'pointer',
-                }
-            }
-        }
-    }
+                },
+            },
+        },
+    },
 }));
