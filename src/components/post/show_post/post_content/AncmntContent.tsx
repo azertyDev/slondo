@@ -45,7 +45,14 @@ export const AncmntContent: FC<WithT & any> = ({ data, parameters, t }) => {
         setOpen(value);
     };
 
-    const excludedFields = ['id', 'type', 'sub_type', 'uniqid', 'color_id'];
+    const excludedFields = [
+        'id',
+        'type',
+        'sub_type',
+        'uniqid',
+        'color_id',
+        'type_id',
+    ];
 
     const parameterItems = Object.keys(parameters).reduce((items, key, i) => {
         if (
@@ -78,6 +85,19 @@ export const AncmntContent: FC<WithT & any> = ({ data, parameters, t }) => {
                         <Typography variant="subtitle1" className="key">
                             {t(`${key}`)}
                         </Typography>
+                        {parameters[key].hex_color_code && (
+                            <span
+                                style={{
+                                    backgroundColor: `${parameters[key].hex_color_code}`,
+                                    width: 32,
+                                    height: 32,
+                                    boxShadow:
+                                        '-1px 0px 2px rgba(0, 0, 0, 0.15)',
+                                    marginRight: '20px',
+                                    borderRadius: '50%',
+                                }}
+                            ></span>
+                        )}
                         <Typography variant="subtitle1" className="value">
                             {typeof parameters[key] === 'string' ||
                             typeof parameters[key] === 'number'

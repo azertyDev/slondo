@@ -8,9 +8,10 @@ import React, {
     useEffect,
 } from 'react';
 import { CustomSlider } from '@src/components/elements/custom_slider/CustomSlider';
-import { useStyles } from './useStyles';
+import InnerImageZoom from 'react-inner-image-zoom';
 import { Container, Modal, Typography } from '@material-ui/core';
 import { ButtonComponent } from '@src/components/elements/button/Button';
+import { useStyles } from './useStyles';
 
 type SyncSlidersProps = {
     open: boolean;
@@ -20,7 +21,7 @@ type SyncSlidersProps = {
     setInitialSlide: Dispatch<SetStateAction<number>>;
     imgs: {
         alt: string;
-        url: { default: string };
+        url: { default: string; extra: string };
     }[];
 };
 
@@ -49,7 +50,6 @@ export const ModalSyncSliders: FC<SyncSlidersProps> = (props) => {
             nav2: slider2.current,
         });
     }, []);
-
     const classes = useStyles();
     return (
         <Modal open={open} onClose={onClose} className={classes.modal}>
@@ -66,7 +66,15 @@ export const ModalSyncSliders: FC<SyncSlidersProps> = (props) => {
                         afterChange={handleAfterChange}
                     >
                         {imgs.map((img, i) => (
-                            <img key={i} alt={img.alt} src={img.url.default} />
+                            <InnerImageZoom
+                                className="image-zoom"
+                                key={i}
+                                src={img.url.default}
+                                zoomSrc={img.url.extra}
+                                fullscreenOnMobile={true}
+                                moveType='drag'
+                                zoomScale={1.7}
+                            />
                         ))}
                     </CustomSlider>
                 </div>
@@ -74,11 +82,7 @@ export const ModalSyncSliders: FC<SyncSlidersProps> = (props) => {
                     <CustomSlider
                         ref={slider2}
                         asNavFor={slidersNav.nav1}
-                        slidesToShow={
-                            imgs.length > 4
-                                ? 4
-                                : imgs.length
-                        }
+                        slidesToShow={imgs.length > 4 ? 4 : imgs.length}
                         slidesToScroll={1}
                         focusOnSelect={true}
                         arrows={false}

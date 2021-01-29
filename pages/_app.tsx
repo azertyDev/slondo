@@ -12,6 +12,8 @@ import {wrapper} from '@src/redux/store'
 
 // Slick css file
 import "../slick.min.css"
+// react-inner-image-zoom
+import 'react-inner-image-zoom/lib/InnerImageZoom/styles.min.css';
 
 
 const MyApp = (props) => {

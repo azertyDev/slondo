@@ -33,7 +33,7 @@ export const PostParams: FC<any> = (props) => {
         || keyName === 'car_climate'
         || keyName === 'airbags';
 
-    const isSpecialRows = keyName === 'body' || keyName === 'colors' || isOptions;
+    const isSpecialRows = keyName === 'body' || keyName === 'color' || isOptions;
 
     const isArray = Array.isArray(data);
     const isFieldKeyWithTxt = fieldKeysWithTxt.some(k => k === keyName);
@@ -69,7 +69,7 @@ export const PostParams: FC<any> = (props) => {
                                 {/*<img src={item.icon.url} alt={item.name}/>*/}
                                 <Typography>{item.name}</Typography>
                             </div>
-                            : keyName === 'colors'
+                            : keyName === 'color'
                                 ? <div
                                     onClick={!isPreview ? handleListItem(keyName, item) : null}
                                     className={paramsByMark[keyName] && paramsByMark[keyName].id === item.id ? classes.selected : ''}

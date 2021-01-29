@@ -205,7 +205,7 @@ export const useStyles = makeStyles(() => ({
         },
         '& div.ad-parameters': {
             '& p.MuiTypography-button': {
-                marginBottom: '22px',
+                marginBottom: '30px',
             },
             '& > ul > div.params-list': {
                 display: 'flex',
@@ -232,6 +232,7 @@ export const useStyles = makeStyles(() => ({
                 '& > li': {
                     listStyle: 'none',
                     display: 'flex',
+                    alignItems: 'center',
                     marginBottom: 20,
                     paddingBottom: '5px',
                     '&:last-child': {
@@ -240,6 +241,7 @@ export const useStyles = makeStyles(() => ({
                     '& h6.key': {
                         width: '20%',
                         fontSize: '1.125rem',
+                        color: '#828282'
                     },
                     '& h6.value': {
                         fontSize: '1.125rem',

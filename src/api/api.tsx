@@ -39,7 +39,7 @@ export const userAPI = {
             });
     },
     getCategories: (lang: string): Promise<CategoryType[]> => {
-        return instance.get(`categories/main?lang=${lang}`)
+        return instance.get(`categories/all?lang=${lang}`)
             .then(res => res.data)
             .catch(err => {
                 throw err

@@ -22,19 +22,29 @@ export const useStyles = makeStyles(() => ({
         },
     },
     firstSlider: {
-        width: '100%',
         margin: '10px 0',
-        '& div.slick-list': {
-            height: '627px',
-            // width: '80%',
-            margin: '0 auto 0 auto',
+        '& > div.slick-slider': {
+            '& div.slick-list': {
+                width: '80%',
+                margin: '0 auto 0 auto',
+                '& div.slick-slide': {
+                    display: 'flex',
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                    height: '627px',
+                    '& figure.image-zoom': {
+                        '& img': {
+                            // height: '627px',
+                            // objectFit: 'contain',
+                            // width: 'auto',
+                        },
+                        '& span.iiz__hint': {
+                            display: 'none',
+                        },
+                    },
+                },
+            },
         },
-        '& div.slick-slide img': {
-            width: `100% !important`,
-            height: '-webkit-fill-available',
-            objectFit: 'contain',
-        },
-        '& > div.slick-slider div.slick-slide': {},
         '& a.overlay': {
             position: 'fixed',
             zIndex: '99',
