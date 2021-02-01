@@ -1,22 +1,22 @@
 import React, {FC} from 'react';
 import {Grid, TextField, Typography} from '@material-ui/core';
 import {ButtonComponent} from "@src/components/elements/button/Button";
-import {PostParams} from "@src/components/post/create_post/post_form/components/post_params/PostParams";
+import {CustomMenu} from "@src/components/elements/custom_menu/CustomMenu";
 import {PostAutoFormContainer} from "@src/components/post/create_post/post_form/post_auto_form/PostAutoFormContainer";
 import {WithT} from "i18next";
 import {CreatePostProps} from "@root/interfaces/Post";
 import {SecLvlCtgrType} from "../post_form/PostFormContainer";
-import {DataForCrtPostType} from "@src/components/post/create_post/CreatePostContainer";
+import {DataForCrtPostType} from "../CreatePostContainer";
+import {PostParams} from "./components/post_params/PostParams";
 import {Header} from './components/header/Header';
-import {AuctionParams} from "@src/components/post/create_post/post_form/components/auction_params/AuctionParams";
-import {PaymentDelivery} from "@src/components/post/create_post/post_form/components/payment_delivery/PaymentDelivery";
+import {AuctionParams} from "./components/auction_params/AuctionParams";
+import {PaymentDelivery} from "./components/payment_delivery/PaymentDelivery";
 import {Location} from './components/location/Location';
-import {CustomMenu} from "@src/components/elements/custom_menu/CustomMenu";
 import {Photos} from "./components/photos/Photos";
 import {Description} from './components/description/Description';
 import {Contacts} from './components/contacts/Contacts';
 import {useStyles} from './useStyles';
-import {AvailableDays} from "@src/components/post/create_post/post_form/components/available_days/AvailableDays";
+import {AvailableDays} from "./components/available_days/AvailableDays";
 
 
 type PostFormProps = {

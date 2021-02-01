@@ -2,22 +2,11 @@ import {CategoryType, SubLvlCtgrsType} from "@root/interfaces/Categories";
 import CyrillicToTranslit from 'cyrillic-to-translit-js';
 
 
-export const transformTitle = (title: string): string => {
-    const transform = new CyrillicToTranslit().transform;
-    const formatRegEx = /[\-\,\.\;\"\']+/g;
-
-    return transform(title)
-        .toLowerCase()
-        .replace(formatRegEx, ' ')
-        .replace(/\s+/g, '-');
-};
-
-
-export const numberRegEx = /^[0-9]*$/;
+export const whiteSpacesRegEx = /\s/g;
+export const numberRegEx = /^[0-9,\s]*$/;
 export const timeRegEx = /^([0-1]?[0-9]|2[0-3])?:([0-5][0-9]?)?$/;
 
-
-export const fieldKeysWithTxt = ['area'];
+const excludedKeys = ['id', 'type_id', 'sub_type_id'];
 export const numericFields = [
     'price',
     'reserve_price',
@@ -30,7 +19,6 @@ export const numericFields = [
     'living_area',
     'number_of_floors'
 ];
-
 export const optionKeys = [
     'safety',
     'multimedia',
@@ -46,9 +34,24 @@ export const optionKeys = [
     'anti_theft'
 ];
 
-const excludedKeys = ['id', 'type_id', 'sub_type_id'];
+export const transformTitle = (title: string): string => {
+    const transform = new CyrillicToTranslit().transform;
+    const formatRegEx = /[\-\,\.\;\"\']+/g;
+
+    return transform(title)
+        .toLowerCase()
+        .replace(formatRegEx, ' ')
+        .replace(/\s+/g, '-');
+};
+
+export const pricePrettier = (price: number): string =>
+    price && price.toString()
+        .replace(/\s/g, '')
+        .replace(/\B(?=(\d{3})+(?!\d))/g, " ");
 
 export const noSelect = {id: null, name: 'Не выбрано'};
+
+export const fieldKeysWithTxt = ['area'];
 
 const addParents = (list, parents) => (
     list.map(ctgr => {
@@ -156,6 +159,3 @@ export const categorySearchHelper = (txt: string, categoryList: CategoryType[]):
         return matchedCtgrs;
     }
 };
-
-export const pricePrettier = (price: number): string =>
-    price && price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ");
