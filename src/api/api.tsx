@@ -45,15 +45,14 @@ export const userAPI = {
                 throw err
             });
     },
-    getDataForCreatePost: (data): Promise<any> => {
-        const {
-            fstLvlCtgr,
-            secLvlCtgr,
-            trdLvlCtgr,
-            lang
-        } = data;
+    getDataForCreatePost: (
+        fstCtgrId: number,
+        secCtgrId: number,
+        trdCtgrId: number,
+        lang: string
+    ): Promise<any> => {
         return instance.get(
-            `subcategory?category_id=${fstLvlCtgr}&sub_category_id=${secLvlCtgr}&type_id=${trdLvlCtgr}&lang=${lang}`
+            `subcategory?category_id=${fstCtgrId}&sub_category_id=${secCtgrId}&type_id=${trdCtgrId}&lang=${lang}`
         )
             .then(res => res.data)
             .catch(err => {

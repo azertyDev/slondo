@@ -31,6 +31,21 @@ export const numericFields = [
     'number_of_floors'
 ];
 
+export const optionKeys = [
+    'safety',
+    'multimedia',
+    'assistant',
+    'exterior',
+    'car_climate',
+    'airbags',
+    'assistance',
+    'other',
+    'comfort',
+    'view',
+    'parking',
+    'anti_theft'
+];
+
 const excludedKeys = ['id', 'type_id', 'sub_type_id'];
 
 export const noSelect = {id: null, name: 'Не выбрано'};
@@ -62,7 +77,7 @@ const addParents = (list, parents) => (
     })
 );
 
-export const categoryDataNormalization = (categoryList: CategoryType[]) => (
+export const categoriesListNormalize = (categoryList: CategoryType[]) => (
     categoryList.map(ctgr => {
         if (ctgr.model) {
             const model = addParents(
@@ -78,6 +93,42 @@ export const categoryDataNormalization = (categoryList: CategoryType[]) => (
         }
     })
 );
+
+export const dataForCrtPostNormalize = (data: any) => {
+    if (!!data) {
+        data = Object.keys(data).reduce((acc: any, key) => {
+            const isExcludedKey = excludedKeys.some(k => k === key);
+            if (Array.isArray(data[key]) && !!data[key].length && key !== 'manufacturers') {
+                if (key === 'type') {
+                    acc = {
+                        ...acc,
+                        ...dataForCrtPostNormalize(data[key][0])
+                    };
+                } else {
+                    acc[key] = data[key];
+                    if (key === 'manufacturer' && data[key][0].models) {
+                        acc.model = [];
+                    }
+                }
+            } else {
+                if (key === 'furnished') {
+                    acc[key] = false;
+                } else if (key === 'default_param') {
+                    acc = {
+                        ...acc,
+                        ...dataForCrtPostNormalize(data[key])
+                    };
+                } else if (Number.isInteger(data[key]) && !isExcludedKey) {
+                    acc[key] = '';
+                }
+            }
+            return acc;
+        }, {});
+    } else {
+        data = {};
+    }
+    return data
+};
 
 export const categorySearchHelper = (txt: string, categoryList: CategoryType[]): SubLvlCtgrsType[] => {
     return categoryList
@@ -104,29 +155,6 @@ export const categorySearchHelper = (txt: string, categoryList: CategoryType[]):
 
         return matchedCtgrs;
     }
-};
-
-export const dataForCrtPostNormalize = (data: any) => {
-    return !!data
-        ? Object.keys(data).reduce((acc, key) => {
-            const isExcludedKey = excludedKeys.some(k => k === key);
-            if (key === 'type') {
-                acc = {
-                    ...acc,
-                    ...dataForCrtPostNormalize(data[key][0])
-                };
-            } else {
-                if ((Array.isArray(data[key]) && data[key].length) || data[key] === '') {
-                    acc[key] = data[key];
-                } else if (key === 'furnished') {
-                    acc[key] = false;
-                } else if (Number.isInteger(data[key]) && !isExcludedKey) {
-                    acc[key] = '';
-                }
-            }
-            return acc;
-        }, {})
-        : {};
 };
 
 export const pricePrettier = (price: number): string =>

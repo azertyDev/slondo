@@ -28,7 +28,7 @@ export const CustomMenu: FC<CustomMenuProps> = (props) => {
     };
 
     return (
-        <div style={{width: '100%'}} className={props.className}>
+        <div className={props.className}>
             <ButtonComponent
                 style={{
                     backgroundColor: '#fafafa',

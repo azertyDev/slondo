@@ -2,8 +2,8 @@ import React, {Dispatch, FC} from 'react';
 import {DragDropContext, resetServerContext, DropResult} from 'react-beautiful-dnd';
 import {TOTAL_FILES_SIZE_LIMIT} from '@src/constants';
 import {CreatePostProps, FileType} from "@root/interfaces/Post";
-import {CustomDroppable} from "../preview_photos/CustomDroppable";
-import {initPhoto} from "../post_form/PostFormContainer";
+import {CustomDroppable} from "./CustomDroppable";
+import {initPhoto} from "../../../PostFormContainer";
 
 
 interface IPreviewPhotos {
