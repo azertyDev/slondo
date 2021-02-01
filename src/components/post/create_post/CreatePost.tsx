@@ -9,16 +9,15 @@ import {
     InputBase,
     List,
     ListItem,
-    Grid,
-    Hidden
+    Grid
 } from "@material-ui/core";
 import {useStyles} from './useStyles';
 import {CategoryType, SubLvlCtgrsType} from "@root/interfaces/Categories";
 import {PostType, CreatePostState} from "@root/interfaces/Post";
-import {createPostContainerType} from "@src/components/post/create_post/CreatePostContainer";
 
 
-type CreateAncmntProps = {
+type CreatePostProps = {
+    isFetch: boolean;
     categoriesList: CategoryType[];
     subLvlCtgrs: SubLvlCtgrsType[];
     postType: PostType;
@@ -26,15 +25,16 @@ type CreateAncmntProps = {
     setMatchedCtgrs: (t) => void;
     handleCategory: (c) => () => void;
     createPost: CreatePostState;
-    setCreatePost: Dispatch<SetStateAction<createPostContainerType>>;
+    setCreatePost: Dispatch<SetStateAction<CreatePostState>>;
     setSubLvlCtgrs: Dispatch<SetStateAction<SubLvlCtgrsType[]>>;
-    initCreatePostState: createPostContainerType;
+    initCreatePostState: CreatePostState;
 };
 
-export const CreatePost: FC<CreateAncmntProps> = (props) => {
+export const CreatePost: FC<CreatePostProps> = (props) => {
     const {
         postType,
         createPost,
+        isFetch,
         setCreatePost,
         categoriesList,
         handleCategory,
@@ -45,7 +45,7 @@ export const CreatePost: FC<CreateAncmntProps> = (props) => {
         initCreatePostState
     } = props;
 
-    const {category, error, isFetch} = createPost;
+    const {category, error} = createPost;
     const [searchTxt, setSearchTxt] = useState('');
 
     const isThirdLvlCtgr = !!subLvlCtgrs.length
@@ -63,7 +63,7 @@ export const CreatePost: FC<CreateAncmntProps> = (props) => {
     const classes = useStyles();
     return (
         <Grid container spacing={2} className={classes.root}>
-            <Grid item xs={12} md={9}>
+            <Grid item xs={12}>
                 <div className='categories-block'>
                     <Grid container>
                         <Grid item xs={3} className='categories-menu'>
@@ -135,11 +135,6 @@ export const CreatePost: FC<CreateAncmntProps> = (props) => {
                     </Grid>
                 </div>
             </Grid>
-            <Hidden smDown>
-                <Grid item md={3} className='advrt-banner'>
-                    <div/>
-                </Grid>
-            </Hidden>
         </Grid>
     )
 };

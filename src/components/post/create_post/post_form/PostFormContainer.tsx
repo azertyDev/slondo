@@ -1,6 +1,7 @@
-import React, {FC, useEffect} from 'react';
+import React, {Dispatch, FC, SetStateAction, useEffect} from 'react';
 import {FormikProvider, useFormik} from "formik";
 import {useDispatch, useSelector} from "react-redux";
+import {userAPI} from "@src/api/api";
 import {PostForm} from './PostForm';
 import {RootState} from "@src/redux/rootReducer";
 import {PostType, CreatePostProps, FileType, IdNameType} from "@root/interfaces/Post";
@@ -12,12 +13,12 @@ import {
     numberRegEx,
     numericFields,
     fieldKeysWithTxt,
-    timeRegEx
+    timeRegEx, optionKeys,
 } from "@src/helpers";
 import {CameraIcon} from "@src/components/elements/icons";
-import {userAPI} from "@src/api/api";
 import {CategoryType} from "@root/interfaces/Categories";
 import {WithT} from "i18next";
+import {DataForCrtPostType} from "@src/components/post/create_post/CreatePostContainer";
 
 
 export const initPhoto: FileType = {
@@ -33,8 +34,9 @@ type PostFormContainerProps = {
     handleNextStep: () => void;
     postType: PostType;
     category: CategoryType;
-    dataForCrtPost: any;
-    secLvlCtgr: SecLvlCtgrType
+    dataForCrtPost: DataForCrtPostType;
+    setDataForCrtPost: Dispatch<SetStateAction<DataForCrtPostType>>
+    secCtgr: SecLvlCtgrType
 }
 
 export type SecLvlCtgrType = {
@@ -47,30 +49,32 @@ export const PostFormContainer: FC<PostFormContainerProps & WithT> = (props) => 
         postType,
         handleNextStep,
         category,
-        secLvlCtgr,
+        secCtgr,
         dataForCrtPost,
+        setDataForCrtPost,
     } = props;
 
     const dispatch = useDispatch();
     const {locations} = useSelector((store: RootState) => store);
-    const isAuction = postType.name === 'auc' || postType.name === 'exauc';
+    const isAuction = ['auc', 'exauc'].some(type => type === postType.name);
 
     const {mark} = category;
-    const initPhotos: FileType[] = Array.from({length: TOTAL_FILES_LIMIT}).map(() => initPhoto);
     const weekDays = Array.from({length: 7}).map((_, i) => ({id: ++i}));
+    const initPhotos: FileType[] = Array.from({length: TOTAL_FILES_LIMIT}).map(() => initPhoto);
+
     const initFormikForm: CreatePostProps = {
         isFetch: false,
         files: initPhotos,
         postParams: {
             [mark]: {
-                [`${mark}_id`]: null,
-                type_id: null
+                [`${mark}_id`]: secCtgr.id,
+                type_id: secCtgr.type.id
             }
         },
         defaultParams: {
-            category_id: null,
-            sub_category_id: null,
-            ads_type_id: null,
+            category_id: category.id,
+            sub_category_id: secCtgr.id,
+            ads_type_id: postType.id,
             title: '',
             safe_deal: false,
             delivery: false,
@@ -83,10 +87,7 @@ export const PostFormContainer: FC<PostFormContainerProps & WithT> = (props) => 
             description: '',
             phone: '',
             price: '',
-            currency: {
-                id: null,
-                name: ''
-            },
+            currency: postType.currency[0],
             avalTime: {
                 isActive: false,
                 start_time: '00:00',
@@ -149,17 +150,23 @@ export const PostFormContainer: FC<PostFormContainerProps & WithT> = (props) => 
             available_days,
             phone: !!phone ? phone : null,
             currency_id: currency.id,
-            [mark]: {}
+            [mark]: {
+                [`${mark}_id`]: secCtgr.id
+            }
         };
 
         Object.keys(postParamsByMark).map(k => {
-            if (!!postParamsByMark[k] && !!postParamsByMark[k].id) {
-                if (!!postParamsByMark[k].txt) {
-                    valsForCrtPost[mark][k] = postParamsByMark[k].txt;
+            if (postParamsByMark[k]) {
+                if (Array.isArray(postParamsByMark[k]) && postParamsByMark[k].length) {
+                    valsForCrtPost[mark][k] = postParamsByMark[k].map(val => ({id: val.id}));
+                } else if (postParamsByMark[k].id) {
+                    if (postParamsByMark[k].txt) {
+                        valsForCrtPost[mark][k] = postParamsByMark[k].txt;
+                    }
+                    valsForCrtPost[mark][`${k}_id`] = postParamsByMark[k].id;
+                } else if (!!postParamsByMark[k]) {
+                    valsForCrtPost[mark][k] = postParamsByMark[k];
                 }
-                valsForCrtPost[mark][`${k}_id`] = postParamsByMark[k].id;
-            } else {
-                valsForCrtPost[mark][k] = postParamsByMark[k];
             }
         });
 
@@ -182,48 +189,54 @@ export const PostFormContainer: FC<PostFormContainerProps & WithT> = (props) => 
                 price_by_now: !!value ? value : null
             };
         }
-
         return valsForCrtPost;
     };
 
     const setDefaultVals = () => {
-        defaultParams.category_id = category.id;
-        defaultParams.sub_category_id = secLvlCtgr.id;
-        defaultParams.ads_type_id = postType.id;
-        defaultParams.currency = postType.currency[0];
+        const {data} = dataForCrtPost;
 
         if (mark === 'free') {
             defaultParams.price = '0';
         }
-
         if (isAuction) {
             auction.duration = postType.expired[0];
         }
+        if (postParamsByMark.spares_type) {
+            postParamsByMark.spares_type = noSelect;
+        }
 
-        postParams[mark] = {
-            [`${mark}_id`]: secLvlCtgr.id,
-            type_id: secLvlCtgr.type.id
-        };
+        Object.keys(data).forEach(dataKey => {
+            const isFieldKeysWithTxt = fieldKeysWithTxt.some(k => k === dataKey);
+            const isOptionKey = optionKeys.some(k => k === dataKey);
 
-        Object.keys(dataForCrtPost).forEach(dataKey => {
-            if (Array.isArray(dataForCrtPost[dataKey])) {
-                if (!!dataForCrtPost[dataKey].length) {
-                    if (fieldKeysWithTxt.some(k => k === dataKey)) {
-                        postParams[mark][dataKey] = {...noSelect, txt: ''};
-                    } else {
-                        postParams[mark][dataKey] = noSelect;
+            if (Array.isArray(data[dataKey])) {
+                const isCarManufacturer = dataKey === 'manufacturer' && !!data[dataKey][0].models;
+
+                if (data[dataKey].length) {
+                    if (isFieldKeysWithTxt) {
+                        postParamsByMark[dataKey] = {...noSelect, txt: ''};
+                    } else if (isOptionKey) {
+                        postParamsByMark[dataKey] = [];
+                    } else if (!postParamsByMark[dataKey]) {
+                        if (isCarManufacturer) {
+                            const fstMnfctr = data[dataKey][0];
+
+                            postParamsByMark[dataKey] = {id: fstMnfctr.id, name: fstMnfctr.name};
+                            postParamsByMark.model = noSelect;
+
+                            dataForCrtPost.data.model = fstMnfctr.models;
+                            setDataForCrtPost({...dataForCrtPost})
+                        } else {
+                            postParamsByMark[dataKey] = noSelect;
+                        }
                     }
                 }
             } else {
-                postParams[mark][dataKey] = dataForCrtPost[dataKey];
+                postParamsByMark[dataKey] = data[dataKey];
             }
         });
 
-        setValues({
-            ...values,
-            defaultParams,
-            postParams
-        });
+        setValues({...values});
     };
 
     async function onSubmit() {
@@ -255,12 +268,15 @@ export const PostFormContainer: FC<PostFormContainerProps & WithT> = (props) => 
     }
 
     useEffect(() => {
-        setDefaultVals();
         window && window.scrollTo(0, 0);
     }, []);
 
-    // console.log(secLvlCtgr)
-    // console.log(dataForCrtPost)
+    useEffect(() => {
+        setDefaultVals();
+    }, [dataForCrtPost]);
+
+    // console.log(secCtgr)
+    console.log(dataForCrtPost)
     console.log(values)
 
     return (
@@ -275,7 +291,7 @@ export const PostFormContainer: FC<PostFormContainerProps & WithT> = (props) => 
                     setValues={setValues}
                     locations={locations}
                     handleBlur={handleBlur}
-                    secLvlCtgr={secLvlCtgr}
+                    secCtgr={secCtgr}
                     handleTime={handleTime}
                     handleInput={handleInput}
                     handleSwitch={handleSwitch}
@@ -305,7 +321,7 @@ export const PostFormContainer: FC<PostFormContainerProps & WithT> = (props) => 
     function handleListItem(keyName, value) {
         return () => {
             if (postParamsByMark[keyName] && postParamsByMark[keyName].id === value.id) {
-                postParamsByMark[keyName] = {id: null, name: 'Не выбрано'};
+                postParamsByMark[keyName] = noSelect;
             } else {
                 postParamsByMark[keyName] = value;
             }
@@ -331,14 +347,14 @@ export const PostFormContainer: FC<PostFormContainerProps & WithT> = (props) => 
     function handleParamsCheckbox(keyName, value) {
         return ({target}) => {
             if (postParamsByMark[keyName] && !!value) {
-                if (postParamsByMark[keyName].some(val => val.id === value.id)) {
-                    postParamsByMark[keyName].forEach((val, index) => {
-                        if (val.id === value.id) {
+                if (postParamsByMark[keyName].some(({id}) => id === value.id)) {
+                    postParamsByMark[keyName].forEach(({id}, index) => {
+                        if (id === value.id) {
                             postParamsByMark[keyName].splice(index, 1);
                         }
                     });
                 } else {
-                    postParamsByMark[keyName] = value;
+                    postParamsByMark[keyName].push(value);
                 }
             } else {
                 postParamsByMark[keyName] = target.checked;
@@ -347,9 +363,10 @@ export const PostFormContainer: FC<PostFormContainerProps & WithT> = (props) => 
         }
     }
 
-    function handleMenuItem(valueKey) {
+    function handleMenuItem(valueKey: string) {
         return (newValue, setAnchor) => () => {
             setAnchor(null);
+
             if (valueKey === 'currency') {
                 defaultParams.currency = newValue;
             } else if (valueKey === 'duration') {
@@ -360,6 +377,16 @@ export const PostFormContainer: FC<PostFormContainerProps & WithT> = (props) => 
                     ? {...postParamsByMark[valueKey], ...newValue}
                     : newValue;
             }
+
+            if (valueKey === 'parts') {
+                dataForCrtPost.data.spares_type = newValue.spares_type;
+                setDataForCrtPost({...dataForCrtPost});
+            } else if (valueKey === 'manufacturer' && postParamsByMark[valueKey].models) {
+                postParamsByMark.model = noSelect;
+                dataForCrtPost.data.model = postParamsByMark[valueKey].models;
+                setDataForCrtPost({...dataForCrtPost});
+            }
+
             setValues({...values});
         }
     }
