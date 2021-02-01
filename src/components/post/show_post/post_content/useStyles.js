@@ -7,6 +7,9 @@ export const useStyles = makeStyles(() => ({
         '& a': {
             textDecoration: 'none',
         },
+        '& div:last-child': {
+            margin: '0 !important',
+        },
         '& div.breadcrumbs': {
             marginBottom: '10px',
             '& li.MuiBreadcrumbs-li': {
@@ -28,13 +31,13 @@ export const useStyles = makeStyles(() => ({
                     lineHeight: '30px',
                     borderRadius: '5px',
                     fontWeight: '600',
-                    '&.advertisement': {
+                    '&.post': {
                         background: 'rgba(136, 202, 236, 0.65)',
                     },
-                    '&.lot': {
+                    '&.auc': {
                         background: 'rgba(173, 102, 213, 0.65)',
                     },
-                    '&.advanced-lot': {
+                    '&.exauc': {
                         background: 'rgba(242, 153, 74, 0.65)',
                     },
                     '&:first-child, &.condition': {
@@ -141,6 +144,7 @@ export const useStyles = makeStyles(() => ({
                 marginBottom: 19,
             },
             '& h6.MuiTypography-subtitle1': {
+                width: '80%',
                 fontSize: '1.125rem',
             },
             '& > h6.MuiTypography-subtitle1': {
@@ -204,6 +208,14 @@ export const useStyles = makeStyles(() => ({
             },
         },
         '& div.ad-parameters': {
+            '& h6.key': {
+                width: '20%',
+                fontSize: '1.125rem',
+                color: '#AAA',
+            },
+            '& h6.value': {
+                fontSize: '1.125rem',
+            },
             '& p.MuiTypography-button': {
                 marginBottom: '30px',
             },
@@ -213,18 +225,11 @@ export const useStyles = makeStyles(() => ({
                 marginBottom: '20px',
                 paddingBottom: '5px',
                 '& > h6.MuiTypography-subtitle1': {
-                    width: '20%',
                     display: 'inline-block',
                 },
                 '& > ul': {
                     padding: 0,
                     listStyle: 'none',
-                    '& > li': {
-                        '& > h6.MuiTypography-subtitle1': {
-                            fontSize: '18px',
-                            fontWeight: '600',
-                        },
-                    },
                 },
             },
             '& > ul': {
@@ -237,15 +242,6 @@ export const useStyles = makeStyles(() => ({
                     paddingBottom: '5px',
                     '&:last-child': {
                         margin: 0,
-                    },
-                    '& h6.key': {
-                        width: '20%',
-                        fontSize: '1.125rem',
-                        color: '#828282'
-                    },
-                    '& h6.value': {
-                        fontSize: '1.125rem',
-                        fontWeight: '600',
                     },
                 },
             },
@@ -269,10 +265,10 @@ export const useStyles = makeStyles(() => ({
                         display: 'flex',
                         justifyContent: 'space-between',
                         alignItems: 'center',
-                    }
-                }
-            }
-        }
+                    },
+                },
+            },
+        },
     },
     icons: {
         width: '20px',
@@ -289,5 +285,5 @@ export const useStyles = makeStyles(() => ({
             borderRadius: '7px',
             backgroundColor: '#C0C0C0',
         },
-    }
+    },
 }));

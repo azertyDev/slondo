@@ -7,12 +7,14 @@ export const useStyles = makeStyles(() => ({
     root: {
         position: 'relative',
         marginTop: '20px',
-        '& button': {
-            '&.slick-prev': {
-                // left: '25px',
-            },
-            '&.slick-next': {
-                // right: '25px',
+        '& > button.MuiIconButton-root': {
+            position: 'absolute',
+            top: 0,
+            right: 0,
+            '&:hover': {
+                '& path': {
+                    fill: '#EB5757',
+                },
             },
         },
         '& > h6.title': {
@@ -33,10 +35,9 @@ export const useStyles = makeStyles(() => ({
                     alignItems: 'center',
                     height: '627px',
                     '& figure.image-zoom': {
-                        '& img': {
-                            // height: '627px',
-                            // objectFit: 'contain',
-                            // width: 'auto',
+                        '& img.iiz__img': {
+                            maxHeight: '627px',
+                            objectFit: 'contain',
                         },
                         '& span.iiz__hint': {
                             display: 'none',
@@ -77,22 +78,21 @@ export const useStyles = makeStyles(() => ({
     },
     secondSlider: {
         '& div.slick-list': {
-            width: '80%',
+            width: '85%',
             margin: '0 auto 0 auto',
         },
         '& div.slick-track': {
             margin: 'inherit',
         },
         '& div.slick-slide': {
-            padding: '0 7.5px',
-            '& > div, & img': {
-                height: `150px !important`,
-            },
+            width: 'auto !important',
             '& > div': {
                 padding: '0 2.5px',
             },
             '& img': {
                 objectFit: 'cover',
+                height: `150px !important`,
+                width: '255px !important',
                 '&:hover': {
                     cursor: 'pointer',
                 },

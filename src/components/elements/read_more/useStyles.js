@@ -2,7 +2,6 @@ import { makeStyles } from '@material-ui/core';
 
 export const useStyles = makeStyles((theme) => ({
     root: {
-        width: '80%',
         '& h6.MuiTypography-subtitle1': {
             lineHeight: '22px',
         },

@@ -15,7 +15,7 @@ import { Link } from '@root/i18n';
 import { WithT } from 'i18next';
 import { pricePrettier } from '@root/src/helpers';
 
-export const AncmntContent: FC<WithT & any> = ({ data, parameters, t }) => {
+export const PostContent: FC<WithT & any> = ({ data, parameters, t }) => {
     const [initialSlide, setInitialSlide] = useState(0);
     const [open, setOpen] = useState(false);
 
@@ -75,7 +75,9 @@ export const AncmntContent: FC<WithT & any> = ({ data, parameters, t }) => {
 
                 items.push(
                     <div key={i} className="params-list">
-                        <Typography variant="subtitle1">{key}</Typography>
+                        <Typography variant="subtitle1" className="key">
+                            {key}
+                        </Typography>
                         <ul>{params}</ul>
                     </div>,
                 );
@@ -157,10 +159,10 @@ export const AncmntContent: FC<WithT & any> = ({ data, parameters, t }) => {
                         variant="h6"
                         className={
                             data.ads_type.id === 1
-                                ? 'advertisement'
+                                ? 'post'
                                 : data.ads_type.id === 2
-                                ? 'lot'
-                                : 'advanced-lot'
+                                ? 'auc'
+                                : 'exauc'
                         }
                     >
                         {data.ads_type.name}
@@ -263,10 +265,9 @@ export const AncmntContent: FC<WithT & any> = ({ data, parameters, t }) => {
                         {data.category.sub_category.length && (
                             <>&nbsp;- {data.category.sub_category[0].name}</>
                         )}
-                        {parameters.type && <>&nbsp;- {parameters.type.name}</>}
-                        {parameters.sub_type && (
+                        {parameters.type && (
                             <>
-                                &nbsp;- <span>{parameters.sub_type.name}</span>
+                                &nbsp;- <span>{parameters.type.name}</span>
                             </>
                         )}
                     </Typography>
@@ -292,7 +293,8 @@ export const AncmntContent: FC<WithT & any> = ({ data, parameters, t }) => {
                     </ReadMore>
                 )}
             </div>
-            {data.ads_type.name !== 'post' && (
+            {(data.ads_type.mark === 'auc' ||
+                data.ads_type.mark === 'exauc') && (
                 <div className="started-price">
                     <Typography variant="button">Стартовая цена</Typography>
                     <span>

@@ -9,8 +9,9 @@ import React, {
 } from 'react';
 import { CustomSlider } from '@src/components/elements/custom_slider/CustomSlider';
 import InnerImageZoom from 'react-inner-image-zoom';
-import { Container, Modal, Typography } from '@material-ui/core';
+import { Container, IconButton, Modal, Typography } from '@material-ui/core';
 import { ButtonComponent } from '@src/components/elements/button/Button';
+import { CloseIcon } from '@root/src/components/elements/icons';
 import { useStyles } from './useStyles';
 
 type SyncSlidersProps = {
@@ -21,7 +22,7 @@ type SyncSlidersProps = {
     setInitialSlide: Dispatch<SetStateAction<number>>;
     imgs: {
         alt: string;
-        url: { default: string; extra: string };
+        url: { default: string };
     }[];
 };
 
@@ -29,6 +30,7 @@ export const ModalSyncSliders: FC<SyncSlidersProps> = (props) => {
     const { open, onClose, title, imgs, initialSlide, setInitialSlide } = props;
 
     const [slidersNav, setSlidersNav] = useState({ nav1: null, nav2: null });
+
     const slider1: MutableRefObject<unknown> = useRef();
     const slider2: MutableRefObject<unknown> = useRef();
 
@@ -50,10 +52,14 @@ export const ModalSyncSliders: FC<SyncSlidersProps> = (props) => {
             nav2: slider2.current,
         });
     }, []);
+
     const classes = useStyles();
     return (
         <Modal open={open} onClose={onClose} className={classes.modal}>
             <Container className={classes.root} maxWidth="xl">
+                <IconButton onClick={onClose}>
+                    <CloseIcon />
+                </IconButton>
                 <Typography className="title" variant="h6">
                     {title}
                 </Typography>
@@ -70,9 +76,8 @@ export const ModalSyncSliders: FC<SyncSlidersProps> = (props) => {
                                 className="image-zoom"
                                 key={i}
                                 src={img.url.default}
-                                zoomSrc={img.url.extra}
                                 fullscreenOnMobile={true}
-                                moveType='drag'
+                                moveType="drag"
                                 zoomScale={1.7}
                             />
                         ))}
@@ -82,7 +87,7 @@ export const ModalSyncSliders: FC<SyncSlidersProps> = (props) => {
                     <CustomSlider
                         ref={slider2}
                         asNavFor={slidersNav.nav1}
-                        slidesToShow={imgs.length > 4 ? 4 : imgs.length}
+                        slidesToShow={imgs.length}
                         slidesToScroll={1}
                         focusOnSelect={true}
                         arrows={false}

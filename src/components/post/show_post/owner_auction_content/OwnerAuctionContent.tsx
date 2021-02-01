@@ -10,7 +10,7 @@ export const OwnerAuctionContent = (props) => {
     const {t, adData} = props;
     const {data} = adData;
 
-    const isAuction = data.ads_type.name !== 'Обычный';
+    const isAuction = data.ads_type.mark === 'auc' || data.ads_type.mark === 'exauc';
 
     const classes = useStyles();
     return (

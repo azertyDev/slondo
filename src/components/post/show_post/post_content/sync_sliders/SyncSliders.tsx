@@ -22,8 +22,8 @@ type SyncSlidersProps = {
 export const SyncSliders: FC<SyncSlidersProps> = (props) => {
     const { imgs, setInitialSlide, handleOpenModal } = props;
 
-    const slidesToShow = 4;
     const [slidersNav, setSlidersNav] = useState({ nav1: null, nav2: null });
+    
     const slider1: MutableRefObject<unknown> = useRef();
     const slider2: MutableRefObject<unknown> = useRef();
 
@@ -64,12 +64,10 @@ export const SyncSliders: FC<SyncSlidersProps> = (props) => {
                 <CustomSlider
                     ref={slider2}
                     asNavFor={slidersNav.nav1}
-                    slidesToShow={
-                        imgs.length > slidesToShow ? slidesToShow : imgs.length
-                    }
+                    slidesToShow={imgs.length}
                     slidesToScroll={1}
-                    arrows={false}
                     focusOnSelect={true}
+                    arrows={false}
                 >
                     {imgs.map(({ url, alt }, i) => (
                         <img key={i} alt={alt} src={url.default} />

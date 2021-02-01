@@ -19,7 +19,14 @@ const initialAdData = {
         expiration_at: null,
         number_of_views: null,
         sub_category_id: null,
-        images: [],
+        images: [
+            {
+                alt: '',
+                url: {
+                    default: '',
+                },
+            },
+        ],
         description: '',
         region: initValues,
         city: initValues,
@@ -28,7 +35,7 @@ const initialAdData = {
             id: null,
             name: '',
             mark: '',
-            sub_category: []
+            sub_category: [],
         },
         ads_type: {
             id: null,
@@ -51,7 +58,7 @@ export const ShowPostContainer: FC<WithT> = ({ t }) => {
     const url = useRouter().query.url as string;
     const splittedUrl = url.split('-');
     const params = splittedUrl.splice(-3);
-    
+
     const lang = i18n.language;
 
     const fetchAdData = async () => {
@@ -71,13 +78,8 @@ export const ShowPostContainer: FC<WithT> = ({ t }) => {
                 city,
                 district,
                 ...otherData
-            } = await userAPI.getAddById(
-                params[0],
-                lang,
-                params[1],
-                params[2],
-            );
-            
+            } = await userAPI.getAddById(params[0], lang, params[1], params[2]);
+
             setParameters(otherData.model);
 
             setAdData({
@@ -105,7 +107,7 @@ export const ShowPostContainer: FC<WithT> = ({ t }) => {
 
     useEffect(() => {
         fetchAdData();
-    }, []);
+    }, [lang]);
 
     return <ShowPost adData={adData} t={t} parameters={parameters} />;
 };
