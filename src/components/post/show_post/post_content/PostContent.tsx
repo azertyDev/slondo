@@ -19,6 +19,11 @@ export const PostContent: FC<WithT & any> = ({ data, parameters, t }) => {
     const [initialSlide, setInitialSlide] = useState(0);
     const [open, setOpen] = useState(false);
 
+    const days = (...args) => {
+        if (args.length < 7) return args.join(',');
+        return `${args[0]} - ${args[6]}`;
+    };
+
     const date = new Date(data.created_at);
     const months = [
         'января',
@@ -147,7 +152,7 @@ export const PostContent: FC<WithT & any> = ({ data, parameters, t }) => {
                         variant="subtitle1"
                         color="primary"
                         noWrap
-                        style={{ width: '400px' }}
+                        style={{ width: '280px' }}
                     >
                         {data.title}
                     </Typography>
@@ -229,7 +234,7 @@ export const PostContent: FC<WithT & any> = ({ data, parameters, t }) => {
                         <PhoneIcon />
                         <Typography variant="subtitle1" color="primary">
                             {data.available_days.map((k) =>
-                                t(`common:${k.name}`),
+                                t(`common:${days(k.name)}`),
                             )}
                         </Typography>
                         &nbsp;

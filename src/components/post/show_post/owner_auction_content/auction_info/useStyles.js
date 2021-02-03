@@ -2,14 +2,15 @@ import { makeStyles } from '@material-ui/core/styles';
 
 export const useStyles = makeStyles((theme) => ({
     root: {
-        marginBottom: 20,
+        marginBottom: 60,
         '& div.lot-info': {
-            display: 'flex',
-            justifyContent: 'center',
-            flexDirection: 'column',
-            '& div.lot-timer': {
+            '& > div': {
                 marginBottom: 20,
+                '&:last-child': {
+                    margin: 0,
+                },
             },
+            '& div.lot-timer': {},
             '& div.reserve-price': {
                 display: 'flex',
                 alignItems: 'center',
@@ -17,7 +18,6 @@ export const useStyles = makeStyles((theme) => ({
                 borderRadius: 5,
                 background: '#F2F2F2',
                 padding: '8px 0',
-                marginBottom: 20,
                 '& div': {
                     display: 'flex',
                     flexDirection: 'column',
@@ -29,29 +29,35 @@ export const useStyles = makeStyles((theme) => ({
                 },
             },
             '& div.buy-now': {
-                marginBottom: 20,
+                background: '#F2F2F2',
+                borderRadius: '5px',
+
+                padding: '15px 10px',
+                display: 'flex',
+                justifyContent: 'space-around',
+                alignItems: 'center',
+                '& > h6.MuiTypography-subtitle1': {
+                    fontSize: '1.125rem',
+                    textAlign: 'center',
+                },
                 '& > button': {
-                    background: '#7DBCF6',
-                    borderRadius: '3px',
-                    padding: '15px 0',
-                    width: '100%',
+                    background: theme.palette.primary.createAdBtnColor,
+                    padding: '14px 10px',
                     '& > h6.MuiTypography-subtitle1': {
                         color: '#fff',
-                        lineHeight: '16px',
-                        fontSize: '1.125rem',
                     },
                 },
             },
             '& div.lot-participants-block': {
                 display: 'flex',
                 flexDirection: 'column',
-                marginBottom: 20,
+
                 '& > h6.MuiTypography-subtitle1': {
                     fontSize: '1.125rem',
                     padding: '10px 15px',
                     fontWeight: '600',
                     '&:last-child': {
-                        padding: '10px 15px',
+                        padding: '10px 15px 0',
                         color: '#675EAA',
                         textDecorationLine: 'underline',
                     },
@@ -158,7 +164,6 @@ export const useStyles = makeStyles((theme) => ({
             '& div.bet-info': {
                 flexDirection: 'column',
                 padding: '15px 10px',
-                borderBottom: '1px solid #ccc',
                 background: '#F2F2F2',
                 borderRadius: '5px',
                 '& > div': {
@@ -176,12 +181,10 @@ export const useStyles = makeStyles((theme) => ({
                     },
                     '& > button': {
                         margin: '5px 0',
+                        border: '1px solid #AD66D5',
                     },
                     '&:nth-child(2)': {
-                        display: 'flex',
-                        flexDirection: 'column',
-                        alignItems: 'center',
-                        marginBottom: '25px',
+                        textAlign: 'center',
                         '& > h6.MuiTypography-subtitle2:last-child': {
                             color: '#845CAB',
                         },
@@ -199,6 +202,15 @@ export const useStyles = makeStyles((theme) => ({
                 },
 
                 '& > div:last-child': {},
+            },
+            '& div.suggest_price': {
+                '& > button': {
+                    width: '100%',
+                    background: '#675EAA',
+                    '& > h6.MuiTypography-subtitle1': {
+                        color: '#fff',
+                    },
+                },
             },
         },
     },

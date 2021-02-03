@@ -1,8 +1,13 @@
-import {makeStyles} from '@material-ui/core/styles';
+import { makeStyles } from '@material-ui/core/styles';
 
 export const useStyles = makeStyles(() => ({
     root: {
-        marginBottom: '30px',
+        '& > div': {
+            marginBottom: '30px',
+            '&:last-child': {
+                margin: 0,
+            },
+        },
         '& div.contact-buttons': {
             '& button': {
                 width: '100%',
@@ -20,10 +25,10 @@ export const useStyles = makeStyles(() => ({
                         height: '20px',
                         '& > path': {
                             fill: '#fff',
-                        }
-                    }
-                }
-            }
-        }
-    }
+                        },
+                    },
+                },
+            },
+        },
+    },
 }));

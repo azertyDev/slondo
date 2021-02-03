@@ -34,6 +34,7 @@ export const CreatePostContainer: FC<WithT> = ({t}) => {
         {
             id: 1,
             name: "post",
+            subtitle: 'Размещайте товары или услуги совершенно бесплатно',
             currency: [
                 {
                     id: 1,
@@ -52,11 +53,13 @@ export const CreatePostContainer: FC<WithT> = ({t}) => {
             ],
             image: {
                 url: '/img/adv-background.png'
-            }
+            },
+            guide: 'Как создать объявление?'
         },
         {
             id: 2,
             name: "auc",
+            subtitle: 'Торгуйте что бы получить более выгодную цену для Вас',
             currency: [
                 {
                     id: 3,
@@ -75,11 +78,13 @@ export const CreatePostContainer: FC<WithT> = ({t}) => {
             ],
             image: {
                 url: '/img/lot-background.png'
-            }
+            },
+            guide: 'Как создать аукцион?'
         },
         {
             id: 3,
             name: "exauc",
+            subtitle: 'Используй максимальный функционал',
             currency: [
                 {
                     id: 4,
@@ -98,7 +103,8 @@ export const CreatePostContainer: FC<WithT> = ({t}) => {
             ],
             image: {
                 url: '/img/advanced-lot-background.png'
-            }
+            },
+            guide: 'Как создать продвинутый аукцион?'
         }
     ];
 
@@ -115,7 +121,9 @@ export const CreatePostContainer: FC<WithT> = ({t}) => {
         }],
         image: {
             url: ''
-        }
+        },
+        guide: '',
+        subtitle: ''
     };
 
     const initCreatePostState: CreatePostState = {
@@ -327,6 +335,7 @@ export const CreatePostContainer: FC<WithT> = ({t}) => {
                 && <PostTypesPage
                     postTypes={postTypes}
                     handlePostType={handlePostType}
+                    t={t}
                 />}
                 {activeStep === 1
                 && <CreatePost

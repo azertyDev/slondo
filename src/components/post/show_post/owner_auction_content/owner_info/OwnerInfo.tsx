@@ -1,10 +1,11 @@
 import React from 'react';
-import {Typography} from '@material-ui/core';
-import {ButtonComponent} from '@src/components/elements/button/Button';
-import {UserInfoWithAvatar} from '@src/components/elements/user_info_with_avatar/UserInfoWithAvatar';
-import {SafeIcon} from '@root/src/components/elements/icons';
+import { Typography } from '@material-ui/core';
+import { ButtonComponent } from '@src/components/elements/button/Button';
+import { UserInfoWithAvatar } from '@src/components/elements/user_info_with_avatar/UserInfoWithAvatar';
+import { SafeIcon } from '@root/src/components/elements/icons';
 
-import {useStyles} from './useStyles';
+import { useStyles } from './useStyles';
+import { SocialsBlock } from '@root/src/components/elements/socials_block/SocialsBlock';
 
 export const OwnerInfo = (props) => {
     const [isPhoneAval, setIsPhoneAval] = React.useState(false);
@@ -16,7 +17,7 @@ export const OwnerInfo = (props) => {
     const classes = useStyles();
     return (
         <div className={classes.root}>
-            <UserInfoWithAvatar/>
+            <UserInfoWithAvatar />
             <div className="contact-buttons">
                 <ButtonComponent color="primary" onClick={handleShowPhone}>
                     <Typography variant="subtitle1" color="initial">
@@ -35,13 +36,14 @@ export const OwnerInfo = (props) => {
                         color="primary"
                         className="safe-shopping-btn"
                     >
-                        <SafeIcon/>
+                        <SafeIcon />
                         <Typography variant="subtitle1" color="initial">
                             Безопасная покупка
                         </Typography>
                     </ButtonComponent>
                 )}
             </div>
+            <SocialsBlock />
         </div>
     );
 };

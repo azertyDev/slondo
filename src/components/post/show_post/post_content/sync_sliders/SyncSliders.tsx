@@ -8,6 +8,9 @@ import React, {
     useEffect,
 } from 'react';
 import { CustomSlider } from '@src/components/elements/custom_slider/CustomSlider';
+import { IconButton } from '@material-ui/core';
+import ShareIcon from '@material-ui/icons/Share';
+import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
 import { useStyles } from './useStyles';
 
 type SyncSlidersProps = {
@@ -23,7 +26,7 @@ export const SyncSliders: FC<SyncSlidersProps> = (props) => {
     const { imgs, setInitialSlide, handleOpenModal } = props;
 
     const [slidersNav, setSlidersNav] = useState({ nav1: null, nav2: null });
-    
+
     const slider1: MutableRefObject<unknown> = useRef();
     const slider2: MutableRefObject<unknown> = useRef();
 
@@ -42,6 +45,9 @@ export const SyncSliders: FC<SyncSlidersProps> = (props) => {
     return (
         <div className={classes.root}>
             <div className={classes.firstSlider}>
+                <IconButton className="favorite-btn">
+                    <FavoriteBorderIcon />
+                </IconButton>
                 <CustomSlider
                     ref={slider1}
                     asNavFor={slidersNav.nav2}
@@ -59,6 +65,9 @@ export const SyncSliders: FC<SyncSlidersProps> = (props) => {
                         />
                     ))}
                 </CustomSlider>
+                <IconButton className="share-btn">
+                    <ShareIcon />
+                </IconButton>
             </div>
             <div className={classes.secondSlider}>
                 <CustomSlider

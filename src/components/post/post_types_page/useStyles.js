@@ -1,13 +1,13 @@
-import {makeStyles} from '@material-ui/core/styles';
+import { makeStyles } from '@material-ui/core/styles';
 
-
-export const useStyles = makeStyles(() => ({
+export const useStyles = makeStyles((theme) => ({
     root: {
         marginBottom: '30px',
         '& div.MuiGrid-item': {
             '& > button': {
                 height: '613px',
                 display: 'flex',
+                marginBottom: 30,
                 flexDirection: 'column',
                 justifyContent: 'space-between',
                 alignItems: 'center',
@@ -28,7 +28,7 @@ export const useStyles = makeStyles(() => ({
                         color: 'rgba(255, 255, 255, 0.85)',
                         fontWeight: '600',
                         padding: '0 55px',
-                    }
+                    },
                 },
                 '& > button': {
                     backgroundColor: '#fff',
@@ -39,6 +39,31 @@ export const useStyles = makeStyles(() => ({
                     border: 'none',
                 },
             },
-        }
-    }
+            '& > div.guide': {
+                textAlign: 'center',
+                '& a': {
+                    textDecoration: 'none',
+                },
+                '& h6.MuiTypography-subtitle2': {
+                    fontSize: '1.125rem',
+                    marginBottom: 5,
+                    textDecoration: 'underline',
+                },
+                '& h6': {
+                    '&.post': {
+                        color: '#2F80ED',
+                    },
+                    '&.auc': {
+                        color: theme.palette.primary.secondary,
+                    },
+                    '&.exauc': {
+                        color: '#F2994A',
+                    },
+                },
+                '& h6.MuiTypography-subtitle1': {
+                    color: 'rgba(49, 49, 49, 0.6)',
+                },
+            },
+        },
+    },
 }));
