@@ -10,7 +10,7 @@ import {
 import {CustomTabPanel} from '@src/components/elements/custom_tab_panel/CustomTabPanel';
 import {CardData} from '@root/interfaces/CardData';
 import {useStyles} from './useStyles';
-import {CardView} from '@src/components/elements/card_view/CardView';
+import {CardView} from '@src/components/elements/card/card_view/CardView';
 import {ButtonComponent} from '@root/src/components/elements/button/Button';
 
 

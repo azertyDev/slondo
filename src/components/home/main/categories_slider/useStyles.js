@@ -1,4 +1,4 @@
-import { makeStyles } from '@material-ui/core/styles';
+import {makeStyles} from '@material-ui/core/styles';
 
 export const useStyles = makeStyles((theme) => ({
     root: {
@@ -25,6 +25,9 @@ export const useStyles = makeStyles((theme) => ({
                 '& button.slick-next': {
                     right: '-12px',
                 },
+                '& div.slick-slide img': {
+                    width: '100%'
+                }
             },
             '& button.slick-disabled': {
                 display: 'none',

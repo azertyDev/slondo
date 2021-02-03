@@ -1,9 +1,9 @@
 import React from 'react';
-import {RatingComponent} from "@src/components/cabinet/cabinet_pages/rating/RatingComponent";
+import {Rating} from "@src/components/cabinet/cabinet_pages/rating/Rating";
 
 export const RatingContainer = (props) => {
 
     return (
-        <RatingComponent t={props.t}/>
+        <Rating t={props.t}/>
     )
 }

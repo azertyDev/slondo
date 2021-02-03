@@ -1,27 +1,27 @@
-import React, { FC } from 'react';
-import { Typography } from '@material-ui/core';
-import { Router } from '@root/i18n';
-import { useRouter } from 'next/router';
-import { ButtonComponent } from '@src/components/elements/button/Button';
-import { CustomBadge } from '@src/components/elements/custom_budge/CustomBadge';
-import { NotesIcon } from '@src/components/elements/icons/NotesIcon';
-import { GavelIcon } from '@src/components/elements/icons/GavelIcon';
-import { ArchiveIcon } from '@src/components/elements/icons/ArchiveIcon';
-import { FavoriteBorderIcon } from '@src/components/elements/icons/FavoriteBorderIcon';
-import { SortIcon } from '@src/components/elements/icons/SortIcon';
-import { NotificationIcon } from '@src/components/elements/icons/NotificationIcon';
-import { LetterIcon } from '@src/components/elements/icons/LetterIcon';
-import { SafeIcon } from '@src/components/elements/icons/SafeIcon';
-import { WalletIcon } from '@src/components/elements/icons/WalletIcon';
-import { TimeLineIcon } from '@src/components/elements/icons/TimeLineIcon';
-import { ShoppingIcon } from '@src/components/elements/icons/ShoppingIcon';
-import { SettingsIcon } from '@src/components/elements/icons/SettingsIcon';
-import { PowerIcon } from '@src/components/elements/icons/PowerIcon';
-import { useStyles } from './useStyles';
+import React, {FC} from 'react';
+import {Typography} from '@material-ui/core';
+import {Router} from '@root/i18n';
+import {useRouter} from 'next/router';
+import {ButtonComponent} from '@src/components/elements/button/Button';
+import {CustomBadge} from '@src/components/elements/custom_budge/CustomBadge';
+import {NotesIcon} from '@src/components/elements/icons/NotesIcon';
+import {GavelIcon} from '@src/components/elements/icons/GavelIcon';
+import {ArchiveIcon} from '@src/components/elements/icons/ArchiveIcon';
+import {FavoriteBorderIcon} from '@src/components/elements/icons/FavoriteBorderIcon';
+import {SortIcon} from '@src/components/elements/icons/SortIcon';
+import {NotificationIcon} from '@src/components/elements/icons/NotificationIcon';
+import {LetterIcon} from '@src/components/elements/icons/LetterIcon';
+import {SafeIcon} from '@src/components/elements/icons/SafeIcon';
+import {WalletIcon} from '@src/components/elements/icons/WalletIcon';
+import {TimeLineIcon} from '@src/components/elements/icons/TimeLineIcon';
+import {ShoppingIcon} from '@src/components/elements/icons/ShoppingIcon';
+import {SettingsIcon} from '@src/components/elements/icons/SettingsIcon';
+import {PowerIcon} from '@src/components/elements/icons/PowerIcon';
+import {useStyles} from './useStyles';
 
 export const ActionsMenu: FC<any> = (props) => {
-    const { pathname } = useRouter();
-    const { t } = props;
+    const {pathname} = useRouter();
+    const {t} = props;
 
     const onButtonClick = (url) => () => {
         Router.push(`/cabinet/${url}`);
@@ -38,7 +38,6 @@ export const ActionsMenu: FC<any> = (props) => {
                                 ? 'selected'
                                 : ''
                         }
-                        // onClick={onButtonClick('myAncmnts')}
                     >
                         <Typography variant="subtitle1" className="error-text">
                             Не прошло модерацию (2)
@@ -50,24 +49,24 @@ export const ActionsMenu: FC<any> = (props) => {
                 <div>
                     <ButtonComponent
                         className={
-                            pathname === '/cabinet/myAncmnts' ? 'selected' : ''
+                            pathname === '/cabinet/posts' ? 'selected' : ''
                         }
-                        onClick={onButtonClick('myAncmnts')}
+                        onClick={onButtonClick('posts')}
                     >
-                        <NotesIcon />
+                        <NotesIcon/>
                         <Typography variant="subtitle1">
-                            {t('cabinet:myAncmnts')}
+                            {t('cabinet:myPosts')}
                         </Typography>
                     </ButtonComponent>
                 </div>
                 <div>
                     <ButtonComponent
                         className={
-                            pathname === '/cabinet/myAuctions' ? 'selected' : ''
+                            pathname === '/cabinet/auctions' ? 'selected' : ''
                         }
-                        onClick={onButtonClick('myAuctions')}
+                        onClick={onButtonClick('auctions')}
                     >
-                        <GavelIcon />
+                        <GavelIcon/>
                         <Typography variant="subtitle1">
                             {t('cabinet:myAuctions')}
                         </Typography>
@@ -80,7 +79,7 @@ export const ActionsMenu: FC<any> = (props) => {
                         }
                         onClick={onButtonClick('favorite')}
                     >
-                        <FavoriteBorderIcon />
+                        <FavoriteBorderIcon/>
                         <Typography variant="subtitle1">
                             {t('cabinet:favourite')}
                         </Typography>
@@ -90,12 +89,12 @@ export const ActionsMenu: FC<any> = (props) => {
                     <CustomBadge badgeContent={4}>
                         <ButtonComponent
                             className={
-                                pathname === '/cabinet/myOrders'
+                                pathname === '/cabinet/orders'
                                     ? 'selected'
                                     : ''
                             }
                         >
-                            <ShoppingIcon />
+                            <ShoppingIcon/>
                             <Typography variant="subtitle1">
                                 {t('cabinet:myOrders')}
                             </Typography>
@@ -107,9 +106,9 @@ export const ActionsMenu: FC<any> = (props) => {
                         }
                         onClick={onButtonClick('archive')}
                     >
-                        <ArchiveIcon />
+                        <ArchiveIcon/>
                         <Typography variant="subtitle1">
-                            {t('cabinet:adsArchive')}
+                            {t('cabinet:archive')}
                         </Typography>
                     </ButtonComponent>
                 </div>
@@ -125,7 +124,7 @@ export const ActionsMenu: FC<any> = (props) => {
                             }
                             onClick={onButtonClick('notifications')}
                         >
-                            <NotificationIcon />
+                            <NotificationIcon/>
                             <Typography variant="subtitle1">
                                 {t('cabinet:notifications')}
                             </Typography>
@@ -140,7 +139,7 @@ export const ActionsMenu: FC<any> = (props) => {
                             }
                             onClick={onButtonClick('messages')}
                         >
-                            <LetterIcon />
+                            <LetterIcon/>
                             <Typography variant="subtitle1">
                                 {t('cabinet:messages')}
                             </Typography>
@@ -156,7 +155,7 @@ export const ActionsMenu: FC<any> = (props) => {
                         }
                         onClick={onButtonClick('safetyDeal')}
                     >
-                        <SafeIcon />
+                        <SafeIcon/>
                         <Typography variant="subtitle1">
                             {t('cabinet:safeShopping')}
                         </Typography>
@@ -172,7 +171,7 @@ export const ActionsMenu: FC<any> = (props) => {
                                 : ''
                         }
                     >
-                        <WalletIcon />
+                        <WalletIcon/>
                         <Typography variant="subtitle1">
                             {t('cabinet:paidServices')}
                         </Typography>
@@ -184,7 +183,7 @@ export const ActionsMenu: FC<any> = (props) => {
                             pathname === '/cabinet/statistics' ? 'selected' : ''
                         }
                     >
-                        <TimeLineIcon />
+                        <TimeLineIcon/>
                         <Typography variant="subtitle1">
                             {t('cabinet:statistics')}
                         </Typography>
@@ -195,7 +194,7 @@ export const ActionsMenu: FC<any> = (props) => {
                         }
                         onClick={onButtonClick('rating')}
                     >
-                        <SortIcon />
+                        <SortIcon/>
                         <Typography variant="subtitle1">
                             {t('cabinet:rating')}
                         </Typography>
@@ -205,10 +204,10 @@ export const ActionsMenu: FC<any> = (props) => {
             <div className="menu-item">
                 <div>
                     <ButtonComponent
-                    // className={pathname === '/cabinet/settings' ? 'selected' : ''}
-                    // onClick={onButtonClick('settings')}
+                        // className={pathname === '/cabinet/settings' ? 'selected' : ''}
+                        // onClick={onButtonClick('settings')}
                     >
-                        <SettingsIcon />
+                        <SettingsIcon/>
                         <Typography variant="subtitle1">
                             {t('cabinet:settings')}
                         </Typography>
@@ -218,7 +217,7 @@ export const ActionsMenu: FC<any> = (props) => {
                             pathname === '/cabinet/exit' ? 'selected' : ''
                         }
                     >
-                        <PowerIcon />
+                        <PowerIcon/>
                         <Typography variant="subtitle1">
                             {t('cabinet:exit')}
                         </Typography>

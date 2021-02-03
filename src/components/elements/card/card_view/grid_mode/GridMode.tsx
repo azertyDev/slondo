@@ -1,11 +1,10 @@
 import React, {FC} from 'react';
 import {Grid} from '@material-ui/core';
-import {CardItem} from '@src/components/elements/card/Card';
-import {ViewPropsTypes} from "@src/components/elements/card_view/CardView";
-import { WithT } from 'i18next';
+import {CardItem} from '@src/components/elements/card/card_item/CardItem';
+import {ViewPropsTypes} from "@src/components/elements/card/card_view/CardView";
 
 
-export const GridView: FC<ViewPropsTypes> = (props) => {
+export const GridMode: FC<ViewPropsTypes> = (props) => {
     const {isFetch, list,} = props;
     return (
         <Grid container spacing={2}>

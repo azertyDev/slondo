@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import { NotificationsComponent } from '@src/components/cabinet/cabinet_pages/notifications/NotificationsComponent';
+import { Notifications } from '@src/components/cabinet/cabinet_pages/notifications/Notifications';
 
 export type NotificationDataType = {
     id: number;
@@ -26,5 +26,5 @@ const notificationMockData: NotificationDataType[] = [
 ];
 
 export const NotificationsContainer: FC = () => {
-    return <NotificationsComponent notifications={notificationMockData} />;
+    return <Notifications notifications={notificationMockData} />;
 };

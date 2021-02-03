@@ -1,7 +1,7 @@
 {
-    "myAncmnts": "Мои объявления",
+    "myPosts": "Мои объявления",
     "myAuctions": "Мои аукционы",
-    "adsArchive": "Архив",
+    "archive": "Архив",
     "rating": "Рейтинг",
     "favourite": "Избранное",
     "reviews": "Отзывов",
@@ -15,5 +15,4 @@
     "myOrders": "Мои покупки",
     "settings": "Настройки",
     "exit": "Выход"
-
 }

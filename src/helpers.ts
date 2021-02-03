@@ -7,6 +7,7 @@ export const numberRegEx = /^[0-9,\s]*$/;
 export const timeRegEx = /^([0-1]?[0-9]|2[0-3])?:([0-5][0-9]?)?$/;
 
 const excludedKeys = ['id', 'type_id', 'sub_type_id'];
+
 export const numericFields = [
     'price',
     'reserve_price',
@@ -19,6 +20,7 @@ export const numericFields = [
     'living_area',
     'number_of_floors'
 ];
+
 export const optionKeys = [
     'safety',
     'multimedia',
@@ -44,10 +46,13 @@ export const transformTitle = (title: string): string => {
         .replace(/\s+/g, '-');
 };
 
-export const pricePrettier = (price: number): string =>
-    price && price.toString()
-        .replace(/\s/g, '')
-        .replace(/\B(?=(\d{3})+(?!\d))/g, " ");
+export const pricePrettier = (price: string): string => {
+    return !!price
+        ? price.toString()
+            .replace(/\s/g, '')
+            .replace(/\B(?=(\d{3})+(?!\d))/g, " ")
+        : '';
+}
 
 export const noSelect = {id: null, name: 'Не выбрано'};
 

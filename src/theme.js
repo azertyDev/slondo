@@ -23,6 +23,9 @@ const colors = {
     error: '#E9372E',
     tab: '#838383',
     activeTab: '#2F80ED',
+    postBgColor: 'rgba(136, 202, 236, 0.65)',
+    aucBgColor: 'rgba(173, 102, 213, 0.65)',
+    exAucBgColor: 'rgba(242, 153, 74, 0.65)'
 }
 
 // Create a theme instance.
@@ -45,6 +48,9 @@ const theme = createMuiTheme({
             lotBgColor: colors.lotBgColor,
             createAdBtnColor: colors.createAdBtnColor,
             error: colors.error,
+            postBgColor: colors.postBgColor,
+            aucBgColor: colors.aucBgColor,
+            exAucBgColor: colors.exAucBgColor,
         },
         common: {
             tab: colors.tab,

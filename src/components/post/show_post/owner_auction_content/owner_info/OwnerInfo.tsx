@@ -1,12 +1,12 @@
-import React from 'react';
+import React, {FC} from 'react';
 import {Typography} from '@material-ui/core';
 import {ButtonComponent} from '@src/components/elements/button/Button';
 import {UserInfoWithAvatar} from '@src/components/elements/user_info_with_avatar/UserInfoWithAvatar';
 import {SafeIcon} from '@root/src/components/elements/icons';
-
 import {useStyles} from './useStyles';
 
-export const OwnerInfo = (props) => {
+
+export const OwnerInfo: FC<any> = ({phone, safe_deal}) => {
     const [isPhoneAval, setIsPhoneAval] = React.useState(false);
 
     const handleShowPhone = () => {
@@ -21,7 +21,7 @@ export const OwnerInfo = (props) => {
                 <ButtonComponent color="primary" onClick={handleShowPhone}>
                     <Typography variant="subtitle1" color="initial">
                         {isPhoneAval
-                            ? props.phone ?? 'default'
+                            ? phone ?? 'default'
                             : 'Показать номер'}
                     </Typography>
                 </ButtonComponent>
@@ -30,7 +30,7 @@ export const OwnerInfo = (props) => {
                         Написать продавцу
                     </Typography>
                 </ButtonComponent>
-                {props.safe_deal === 1 && (
+                {safe_deal === 1 && (
                     <ButtonComponent
                         color="primary"
                         className="safe-shopping-btn"

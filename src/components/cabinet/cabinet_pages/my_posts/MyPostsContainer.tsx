@@ -1,24 +1,24 @@
 import React, {FC} from 'react';
 import {TabsContent} from '@src/components/cabinet/cabinet_pages/TabsContent';
-import {MyAuctions} from '@src/components/cabinet/cabinet_pages/my_auctions/MyAuctions';
+import {MyPosts} from '@src/components/cabinet/cabinet_pages/my_posts/MyPosts';
 import {CabinetMockData} from '../../CabinetMockData';
 
 
-export const MyAuctionsContainer: FC = () => {
+export const MyPostsContainer: FC = () => {
     const tabsData = [
         {
-            title: 'Созданные',
+            title: 'Объявления',
             count: CabinetMockData.length,
-            component: <MyAuctions list={CabinetMockData}/>,
+            component: <MyPosts list={CabinetMockData}/>,
         },
         {
-            title: 'Участие',
+            title: 'Безопасная покупка',
             count: CabinetMockData.length,
-            component: <MyAuctions list={CabinetMockData}/>,
+            component: <MyPosts list={CabinetMockData}/>,
         },
     ];
 
-    const title = 'Мои аукционы';
+    const title = 'Мои объявления';
 
     return (
         <TabsContent title={title} tabsData={tabsData} headerTitle={title}/>

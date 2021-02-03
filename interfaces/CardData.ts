@@ -12,7 +12,7 @@ export type InnerCardData = {
     id: number;
     title: string;
     safe_deal: number;
-    price: number;
+    price: string;
     number_of_views?: number;
     region: {
         id: number;
@@ -35,11 +35,16 @@ export type InnerCardData = {
             default: string;
         };
     }[];
-    category: {
-        id: null;
+    category?: {
+        id: number;
         name: string;
         mark: string;
     };
+    sub_category_id?: number;
+    ads_type: string;
+    created_at: string;
+    delivery: number;
+    exchange: number;
     accepted?: boolean;
     expected?: boolean;
     denied?: boolean;
