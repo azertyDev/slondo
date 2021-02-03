@@ -1,14 +1,14 @@
-import React from 'react';
-import { Typography, TextField } from '@material-ui/core';
-import { ButtonComponent } from '@src/components/elements/button/Button';
-import { LockIcon } from '@src/components/elements/icons';
-import { AuctionTimer } from './AuctionTimer';
-import { pricePrettier } from '@root/src/helpers';
-import { useStyles } from './useStyles';
+import React, {FC} from 'react';
+import {Typography, TextField} from '@material-ui/core';
+import {ButtonComponent} from '@src/components/elements/button/Button';
+import {LockIcon} from '@src/components/elements/icons';
+import {AuctionTimer} from './AuctionTimer';
+import {pricePrettier} from '@root/src/helpers';
+import {useStyles} from './useStyles';
 
-export const AuctionInfo = (props) => {
-    const { adData } = props;
-    const { data } = adData;
+
+export const AuctionInfo: FC<any> = (props) => {
+    const {data} = props;
 
     const date = new Date(data.expiration_at).getTime();
 
@@ -16,25 +16,23 @@ export const AuctionInfo = (props) => {
     return (
         <div className={classes.root}>
             <div className="lot-info">
-                {data.auction && (
-                    <div className="reserve-price">
-                        <LockIcon />
-                        <div>
-                            <Typography variant="subtitle2" color="initial">
-                                Резервная цена:
-                            </Typography>
-                            <Typography variant="h6" color="initial">
-                                {pricePrettier(data.auction.reserve_price)}{' '}
-                                {data.currency.name}
-                            </Typography>
-                        </div>
+                {data.auction
+                && <div className="reserve-price">
+                    <LockIcon/>
+                    <div>
+                        <Typography variant="subtitle2" color="initial">
+                            Резервная цена:
+                        </Typography>
+                        <Typography variant="h6" color="initial">
+                            {pricePrettier(data.auction.reserve_price)}{' '}
+                            {data.currency.name}
+                        </Typography>
                     </div>
-                )}
-                {data.ads_type.mark !== 'regular' ? (
-                    <div className="lot-timer">
-                        {date !== 0 && <AuctionTimer date={date} />}
-                    </div>
-                ) : null}
+                </div>}
+                {data.ads_type.mark !== 'post'
+                && <div className="lot-timer">
+                    {date !== 0 && <AuctionTimer date={date}/>}
+                </div>}
                 <div className="lot-participants-block">
                     <Typography variant="subtitle1" color="initial">
                         Текущие ставки

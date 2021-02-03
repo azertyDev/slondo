@@ -13,7 +13,10 @@ import {
     numberRegEx,
     numericFields,
     fieldKeysWithTxt,
-    timeRegEx, optionKeys,
+    timeRegEx,
+    optionKeys,
+    pricePrettier,
+    whiteSpacesRegEx,
 } from "@src/helpers";
 import {CameraIcon} from "@src/components/elements/icons";
 import {CategoryType} from "@root/interfaces/Categories";
@@ -131,6 +134,7 @@ export const PostFormContainer: FC<PostFormContainerProps & WithT> = (props) => 
 
     const preparedValues = () => {
         const {
+            price,
             phone,
             currency,
             location,
@@ -145,10 +149,11 @@ export const PostFormContainer: FC<PostFormContainerProps & WithT> = (props) => 
         const valsForCrtPost: any = {
             ...defParams,
             ...location,
+            phone,
+            price: price.replace(whiteSpacesRegEx, ''),
             start_time,
             end_time,
             available_days,
-            phone: !!phone ? phone : null,
             currency_id: currency.id,
             [mark]: {
                 [`${mark}_id`]: secCtgr.id
@@ -185,8 +190,8 @@ export const PostFormContainer: FC<PostFormContainerProps & WithT> = (props) => 
                 offer_the_price,
                 auto_renewal,
                 duration_id: duration.id,
-                reserve_price: !!reserve_price ? reserve_price : null,
-                price_by_now: !!value ? value : null
+                reserve_price: reserve_price.replace(whiteSpacesRegEx, ''),
+                price_by_now: value.replace(whiteSpacesRegEx, '')
             };
         }
         return valsForCrtPost;
@@ -393,8 +398,10 @@ export const PostFormContainer: FC<PostFormContainerProps & WithT> = (props) => 
 
     function handleInput({target: {name, value}}) {
         const isNumericField = numericFields.some((n => n === name));
+
         if (isNumericField) {
             if (numberRegEx.test(value)) {
+                value = pricePrettier(value);
                 switch (name) {
                     case 'price':
                         defaultParams[name] = value;
@@ -406,6 +413,9 @@ export const PostFormContainer: FC<PostFormContainerProps & WithT> = (props) => 
                         auction[name].value = value;
                         break;
                     case 'area':
+                        postParamsByMark[name].txt = value;
+                        break;
+                    case 'mileage':
                         postParamsByMark[name].txt = value;
                         break;
                     default:

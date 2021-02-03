@@ -3,7 +3,7 @@ import React from 'react';
 // styles
 import {useStyles} from './useStyles';
 
-export const FavoriteComponent = (props) => {
+export const Favorite = (props) => {
     const classes = useStyles();
 
     return (

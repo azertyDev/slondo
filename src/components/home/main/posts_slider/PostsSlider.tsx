@@ -1,10 +1,10 @@
-import React, { FC } from 'react';
-import { Typography } from '@material-ui/core';
-import { CustomSlider } from '@src/components/elements/custom_slider/CustomSlider';
-import { CardItem } from '@src/components/elements/card/Card';
-import { CardData } from '@root/interfaces/CardData';
-import { settings } from './sliderSettings';
-import { useStyles } from './useStyles';
+import React, {FC} from 'react';
+import {Typography} from '@material-ui/core';
+import {CustomSlider} from '@src/components/elements/custom_slider/CustomSlider';
+import {CardItem} from '@src/components/elements/card/card_item/CardItem';
+import {CardData} from '@root/interfaces/CardData';
+import {settings} from './sliderSettings';
+import {useStyles} from './useStyles';
 
 
 export const PostsSlider: FC<{ title: string; cardData: CardData }> = ({cardData, title}) => {
@@ -19,8 +19,8 @@ export const PostsSlider: FC<{ title: string; cardData: CardData }> = ({cardData
             <div className="slider">
                 {!!error ? (
                     <div className="error-wrapper">
-                    <Typography className="error-text">{error}</Typography>
-                </div>
+                        <Typography className="error-text">{error}</Typography>
+                    </div>
                 ) : (
                     <CustomSlider {...settings}>
                         {cards.map((card) => (

@@ -7,9 +7,6 @@ export const useStyles = makeStyles(() => ({
         '& a': {
             textDecoration: 'none',
         },
-        '& div:last-child': {
-            margin: '0 !important',
-        },
         '& div.breadcrumbs': {
             marginBottom: '10px',
             '& li.MuiBreadcrumbs-li': {

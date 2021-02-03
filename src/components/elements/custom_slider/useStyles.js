@@ -4,10 +4,7 @@ export const useStyles = makeStyles(() => ({
     root: {
         position: 'relative',
         '& div.slick-slide': {
-            zIndex: 10,
-            '& img': {
-                width: '100%',
-            }
+            zIndex: 10
         },
         '& button.slick-arrow': {
             position: 'absolute',

@@ -13,7 +13,6 @@ export const useStyles = makeStyles(() => ({
         },
     },
     firstSlider: {
-        width: '100%',
         position: 'relative',
         '& > button': {
             width: 50,
@@ -48,31 +47,26 @@ export const useStyles = makeStyles(() => ({
                 },
             },
         },
-        '& div.slick-slide img': {
-            width: `auto !important`,
-            height: '518px',
-            objectFit: 'contain',
-            cursor: 'zoom-in',
-        },
-        '& > div.slick-slider div.slick-slide': {
-            marginRight: 5,
+        '& div.slick-track': {
+            display: 'flex',
+            justifyContent: 'center',
+            '& div.slick-slide': {
+                margin: '0 1px',
+                '& img': {
+                    width: 'auto !important',
+                    height: '518px',
+                    objectFit: 'contain',
+                    cursor: 'zoom-in',
+                },
+            },
         },
     },
     secondSlider: {
-        '& div.slick-track': {
-            margin: 'inherit',
-        },
         '& div.slick-slide': {
-            width: (props) =>
-                props.imgs.length > 4 ? '230px' : '212px !important',
-            // width: '212px !important',
+            maxWidth: '230px !important',
+            padding: '0 2.5px',
             '& > div, & img': {
                 height: `120px !important`,
-            },
-            '& > div': {
-                padding: '0 2.5px',
-            },
-            '& img': {
                 objectFit: 'cover',
                 '&:hover': {
                     cursor: 'pointer',

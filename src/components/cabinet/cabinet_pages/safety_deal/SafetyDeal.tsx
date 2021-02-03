@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, {FC} from 'react';
 import {
     FormControl,
     FormControlLabel,
@@ -10,11 +10,11 @@ import {
     Card,
     Typography,
 } from '@material-ui/core';
-import { CabinetMenuWrapper } from '@src/components/cabinet/CabinetMenuWrapper';
-import { CustomFormikField } from '@src/components/elements/custom_formik_field/CustomFormikField';
-import { Form, FormikProvider, useFormik } from 'formik';
-import { useStyles } from './useStyles';
-import { ButtonComponent } from '@root/src/components/elements/button/Button';
+import {CabinetMenuWrapper} from '@src/components/cabinet/CabinetMenuWrapper';
+import {CustomFormikField} from '@src/components/elements/custom_formik_field/CustomFormikField';
+import {Form, FormikProvider, useFormik} from 'formik';
+import {useStyles} from './useStyles';
+import {ButtonComponent} from '@root/src/components/elements/button/Button';
 
 const initialInputsVals = {
     firstName: '',
@@ -23,7 +23,7 @@ const initialInputsVals = {
     backupPhoneNumber: '',
 };
 
-export const SafetyDealComponent: FC = () => {
+export const SafetyDeal: FC = () => {
     const title = 'Безопасная покупка';
 
     const onSubmit = (values) => {
@@ -35,7 +35,7 @@ export const SafetyDealComponent: FC = () => {
         onSubmit,
     });
 
-    const { errors, touched } = formik;
+    const {errors, touched} = formik;
 
     const classes = useStyles();
     return (
@@ -48,7 +48,7 @@ export const SafetyDealComponent: FC = () => {
                                 <FormControl component="div">
                                     <FormGroup aria-label="position">
                                         <FormControlLabel
-                                            control={<Switch color="primary" />}
+                                            control={<Switch color="primary"/>}
                                             label="Подключить функцию Безопасная покупка"
                                             labelPlacement="start"
                                         />
@@ -89,7 +89,7 @@ export const SafetyDealComponent: FC = () => {
                                     placeholder="+998"
                                 />
                                 <FormControlLabel
-                                    control={<Checkbox color="primary" />}
+                                    control={<Checkbox color="primary"/>}
                                     label="Отображать номер телефона"
                                     labelPlacement="start"
                                 />
@@ -153,7 +153,8 @@ export const SafetyDealComponent: FC = () => {
                                 </div>
                                 <div className='submit-part'>
                                     <ButtonComponent>Применить</ButtonComponent>
-                                    <Typography variant="subtitle1" color="initial">Нажимая кнопку “Сохранить” вы принимаете публичную оферту “Безопасной покупки”</Typography>
+                                    <Typography variant="subtitle1" color="initial">Нажимая кнопку “Сохранить” вы
+                                        принимаете публичную оферту “Безопасной покупки”</Typography>
                                 </div>
                             </Form>
                         </FormikProvider>

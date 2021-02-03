@@ -1,5 +1,4 @@
-// @ts-check
-import React, { FC } from 'react';
+import React, {FC} from 'react';
 import {
     Typography,
     Paper,
@@ -26,21 +25,24 @@ import {
     LetterIcon,
     NotificationIcon,
 } from '@src/components/elements/icons';
-import { ButtonComponent } from '@src/components/elements/button/Button';
-import { BreadcrumbsComponent } from '@src/components/elements/breadcrumbs/Breadcrumbs';
-import { ViewPropsTypes } from '@src/components/elements/card_view/CardView';
-import { UserAvatarComponent } from '@src/components/elements/user_info_with_avatar/avatar/UserAvatarComponent';
-import { Rating } from '@src/components/elements/rating/Rating';
-import { Link } from '@root/i18n';
-import { pricePrettier } from '@src/helpers';
-import { WithT } from 'i18next';
-import { useRouter } from 'next/router';
-import { useStyles } from './useStyles';
+import {ButtonComponent} from '@src/components/elements/button/Button';
+import {BreadcrumbsComponent} from '@src/components/elements/breadcrumbs/Breadcrumbs';
+import {ViewPropsTypes} from '@src/components/elements/card/card_view/CardView';
+import {UserAvatarComponent} from '@src/components/elements/user_info_with_avatar/avatar/UserAvatarComponent';
+import {Rating} from '@src/components/elements/rating/Rating';
+import {Link} from '@root/i18n';
+import {pricePrettier} from '@src/helpers';
+import {useRouter} from 'next/router';
+import {useTranslation} from "react-i18next";
+import {useStyles} from './useStyles';
 
-export const ListView: FC<ViewPropsTypes & WithT> = (props) => {
-    const { pathname } = useRouter();
-    const { list, t } = props;
-    const longText = `Вы принимаете предложения от других пользователей на обмен. Вы будете выделены специальным стикером. Ознакомиться с правилами «Возможен обмен»`;
+
+const longText = `Вы принимаете предложения от других пользователей на обмен. Вы будете выделены специальным стикером. Ознакомиться с правилами «Возможен обмен»`;
+
+export const ListMode: FC<ViewPropsTypes> = (props) => {
+    const {pathname} = useRouter();
+    const {list} = props;
+    const {t} = useTranslation(['common']);
 
     const classes = useStyles();
     return (
@@ -62,15 +64,9 @@ export const ListView: FC<ViewPropsTypes & WithT> = (props) => {
                                     </Typography>
                                 </BreadcrumbsComponent>
                                 <Typography variant="subtitle1" color="initial">
-                                    {el.ads_type.mark === 'regular' ? (
-                                        <span className="type-regular">
-                                            Объявление №:
-                                        </span>
-                                    ) : (
-                                        <span className="type-auction">
-                                            Аукцион №:
-                                        </span>
-                                    )}
+                                    <span className="type-auction">
+                                        {t(el.ads_type)} №:
+                                    </span>
                                     {el.id}
                                 </Typography>
                             </div>
@@ -87,16 +83,12 @@ export const ListView: FC<ViewPropsTypes & WithT> = (props) => {
                                             variant="caption"
                                             color="initial"
                                             noWrap
-                                            className={
-                                                el.ads_type.mark === 'regular'
-                                                    ? 'ancmnt'
-                                                    : 'auction'
-                                            }
+                                            className={el.ads_type}
                                         >
-                                            {el.ads_type.name}
+                                            {t(el.ads_type)}
                                         </Typography>
                                         <span>
-                                            <EyeIcon />
+                                            <EyeIcon/>
                                             <Typography
                                                 variant="caption"
                                                 color="initial"
@@ -126,19 +118,19 @@ export const ListView: FC<ViewPropsTypes & WithT> = (props) => {
                                                 </Typography>
                                                 <Link href="#">
                                                     <a className="favorite-icon">
-                                                        <FavoriteBorderIcon />
+                                                        <FavoriteBorderIcon/>
                                                     </a>
                                                 </Link>
                                             </div>
                                             <Link href="#">
                                                 <a className="settings-button">
-                                                    <SettingsIcon />
+                                                    <SettingsIcon/>
                                                 </a>
                                             </Link>
                                         </div>
                                         <div className="description">
                                             <span className="available">
-                                                <PhoneIcon />
+                                                <PhoneIcon/>
                                                 <Typography variant="body1">
                                                     Пн-Пт 9:00-18:00
                                                 </Typography>
@@ -146,7 +138,7 @@ export const ListView: FC<ViewPropsTypes & WithT> = (props) => {
                                             {!!el.exchange && (
                                                 <Tooltip title={longText} arrow>
                                                     <span className="exchange">
-                                                        <SwapIcon />
+                                                        <SwapIcon/>
                                                         <Typography variant="body1">
                                                             Возможен обмен
                                                         </Typography>
@@ -155,7 +147,7 @@ export const ListView: FC<ViewPropsTypes & WithT> = (props) => {
                                             )}
                                             {!!el.delivery && (
                                                 <span className="delivery">
-                                                    <DeliveryIcon />
+                                                    <DeliveryIcon/>
                                                     <Typography variant="body1">
                                                         Есть доставка
                                                     </Typography>
@@ -163,7 +155,7 @@ export const ListView: FC<ViewPropsTypes & WithT> = (props) => {
                                             )}
                                             {!!el.safe_deal && (
                                                 <span className="safe_deal">
-                                                    <SafeIcon />
+                                                    <SafeIcon/>
                                                     <Typography variant="body1">
                                                         Безопасная покупка
                                                     </Typography>
@@ -174,7 +166,7 @@ export const ListView: FC<ViewPropsTypes & WithT> = (props) => {
                                             <div>
                                                 <Link href="#">
                                                     <a>
-                                                        <LocationIcon />
+                                                        <LocationIcon/>
                                                     </a>
                                                 </Link>
                                                 <Typography
@@ -193,7 +185,7 @@ export const ListView: FC<ViewPropsTypes & WithT> = (props) => {
                                                     color="initial"
                                                 >
                                                     {pricePrettier(el.price)}{' '}
-                                                    {t(`common:${el.currency.name}`)}
+                                                    {t(el.currency.name)}
                                                 </Typography>
                                             </div>
                                         </div>
@@ -203,14 +195,14 @@ export const ListView: FC<ViewPropsTypes & WithT> = (props) => {
                             <div className="status-buttons">
                                 {!!el.accepted ? (
                                     <ButtonComponent className="accept">
-                                        <DoneAllIcon />
+                                        <DoneAllIcon/>
                                         <Typography variant="subtitle1">
                                             Принять
                                         </Typography>
                                     </ButtonComponent>
                                 ) : (
                                     <ButtonComponent className="accepted">
-                                        <DoneAllIcon />
+                                        <DoneAllIcon/>
                                         <Typography variant="subtitle1">
                                             Принято
                                         </Typography>
@@ -218,7 +210,7 @@ export const ListView: FC<ViewPropsTypes & WithT> = (props) => {
                                 )}
                                 {!!el.expected && (
                                     <ButtonComponent className="expecting">
-                                        <RestoreIcon />
+                                        <RestoreIcon/>
                                         <Typography variant="subtitle1">
                                             Ожидание
                                         </Typography>
@@ -226,7 +218,7 @@ export const ListView: FC<ViewPropsTypes & WithT> = (props) => {
                                 )}
                                 {!!el.isModerated && (
                                     <ButtonComponent className="expecting">
-                                        <RestoreIcon />
+                                        <RestoreIcon/>
                                         <Typography variant="subtitle1">
                                             На модерации
                                         </Typography>
@@ -234,7 +226,7 @@ export const ListView: FC<ViewPropsTypes & WithT> = (props) => {
                                 )}
                                 {!!el.follow && (
                                     <ButtonComponent className="follow">
-                                        <NotificationIcon />
+                                        <NotificationIcon/>
                                         <Typography variant="subtitle1">
                                             Следить
                                         </Typography>
@@ -242,28 +234,28 @@ export const ListView: FC<ViewPropsTypes & WithT> = (props) => {
                                 )}
                                 {!!el.denied ? (
                                     <Button className="denied">
-                                        <CloseIcon />
+                                        <CloseIcon/>
                                         <Typography variant="subtitle1">
                                             Отказано
                                         </Typography>
                                     </Button>
                                 ) : (
                                     <Button className="denied">
-                                        <CloseIcon />
+                                        <CloseIcon/>
                                         <Typography variant="subtitle1">
                                             Отказать
                                         </Typography>
                                     </Button>
                                 )}
                                 {!!el.accepted ||
-                                    el.expected ||
-                                    (el.denied && (
-                                        <ButtonComponent className="complete">
-                                            <Typography variant="subtitle1">
-                                                Завершить
-                                            </Typography>
-                                        </ButtonComponent>
-                                    ))}
+                                el.expected ||
+                                (el.denied && (
+                                    <ButtonComponent className="complete">
+                                        <Typography variant="subtitle1">
+                                            Завершить
+                                        </Typography>
+                                    </ButtonComponent>
+                                ))}
                             </div>
                         </Grid>
                         <Hidden xsUp={false}>
@@ -280,7 +272,7 @@ export const ListView: FC<ViewPropsTypes & WithT> = (props) => {
                                             <Typography variant="subtitle1">
                                                 Продвижение
                                             </Typography>
-                                            <PromoteIcon />
+                                            <PromoteIcon/>
                                         </Button>
                                         <Button
                                             color="primary"
@@ -291,7 +283,7 @@ export const ListView: FC<ViewPropsTypes & WithT> = (props) => {
                                             <Typography variant="subtitle1">
                                                 Поднять в ТОП
                                             </Typography>
-                                            <MegaphoneIcon />
+                                            <MegaphoneIcon/>
                                         </Button>
                                         <Button
                                             color="primary"
@@ -302,11 +294,10 @@ export const ListView: FC<ViewPropsTypes & WithT> = (props) => {
                                             <Typography variant="subtitle1">
                                                 Поднять в ленте
                                             </Typography>
-                                            <DoubleUpIcon />
+                                            <DoubleUpIcon/>
                                         </Button>
                                     </div>
                                 )}
-
                                 {pathname === '/cabinet/myAuctions' ? (
                                     <div className="profile-form">
                                         <div className="extreme-rate">
@@ -332,14 +323,14 @@ export const ListView: FC<ViewPropsTypes & WithT> = (props) => {
                                             </ButtonComponent>
                                         </div>
                                         <div className="profile-data">
-                                            <UserAvatarComponent />
+                                            <UserAvatarComponent/>
                                             <Typography
                                                 variant="subtitle1"
                                                 color="initial"
                                             >
                                                 Имя Фамилия
                                             </Typography>
-                                            <Rating card />
+                                            <Rating card/>
                                             <ButtonComponent className="show-phone-btn">
                                                 <Typography
                                                     variant="subtitle2"
@@ -351,7 +342,7 @@ export const ListView: FC<ViewPropsTypes & WithT> = (props) => {
                                         </div>
                                         <div>
                                             <ButtonComponent>
-                                                <LetterIcon />
+                                                <LetterIcon/>
                                                 <Typography
                                                     variant="subtitle1"
                                                     color="initial"

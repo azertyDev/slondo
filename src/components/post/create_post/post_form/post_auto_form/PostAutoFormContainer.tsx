@@ -12,37 +12,36 @@ type AncmntAutoFormPropsTypes = {
     setValues: (values: SetStateAction<CreatePostProps>, shouldValidate?: boolean | undefined) => any;
 } & WithT;
 
-export const PostAutoFormContainer: FC<AncmntAutoFormPropsTypes> = (props) => {
+export const PostAutoFormContainer: FC<any> = (props) => {
     const {t, createAncmnt, values} = props;
     const {postParams} = values;
-    const data = {}
-        // prepareCrtPostData(createAncmnt.category.model, postParams);
+    // prepareCrtPostData(createAncmnt.category.model, postParams);
 
-    const autoData = {
-        automobile: {
-            icon: Auto_icon,
-            manufacturer: data.manufacturer,
-            models: data.models,
-            body: data.body,
-            transmission: data.transmission,
-            drive: data.drive,
-            car_engine_capacity: data.car_engine_capacity,
-            car_engine_type: data.car_engine_type
-        }
-    };
+    // const autoData = {
+    //     automobile: {
+    //         icon: Auto_icon,
+    //         manufacturer: data.manufacturer,
+    //         models: data.models,
+    //         body: data.body,
+    //         transmission: data.transmission,
+    //         drive: data.drive,
+    //         car_engine_capacity: data.car_engine_capacity,
+    //         car_engine_type: data.car_engine_type
+    //     }
+    // };
 
-    const form = Object.keys(autoData).map((key, i) => {
-        return <AccordionComponent
-            key={i}
-            title={t(key)}
-            icon={autoData[key].icon}
-        />
-    });
+    // const form = Object.keys(autoData).map((key, i) => {
+    //     return <AccordionComponent
+    //         key={i}
+    //         title={t(key)}
+    //         icon={autoData[key].icon}
+    //     />
+    // });
 
     return (
         <PostAutoForm
             {...props}
-            form={form}
+            // form={form}
         />
     )
 };

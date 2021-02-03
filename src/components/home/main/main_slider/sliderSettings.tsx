@@ -1,5 +1,5 @@
 import React from "react";
-import {SliderArrow} from "@src/components/elements/slider_arrow/SliderArrow";
+import {SliderArrow} from "@src/components/elements/custom_slider/slider_arrow/SliderArrow";
 
 
 export const settings = {

@@ -1,7 +1,3 @@
-import 'core-js/es/promise'
-import 'core-js/es/set'
-import 'core-js/es/map'
-
 import React from 'react'
 import {compose} from "redux"
 import App from 'next/dist/pages/_app'
@@ -9,10 +5,7 @@ import {appWithTranslation} from '@root/i18n'
 import {ThemeProvider, CssBaseline} from '@material-ui/core'
 import theme from '@src/theme'
 import {wrapper} from '@src/redux/store'
-
-// Slick css file
 import "../slick.min.css"
-// react-inner-image-zoom
 import 'react-inner-image-zoom/lib/InnerImageZoom/styles.min.css';
 
 
@@ -27,12 +20,10 @@ const MyApp = (props) => {
     }, []);
 
     return (
-        <>
-            <ThemeProvider theme={theme}>
-                <CssBaseline/>
-                <Component {...props.pageProps} />
-            </ThemeProvider>
-        </>
+        <ThemeProvider theme={theme}>
+            <CssBaseline/>
+            <Component {...props.pageProps} />
+        </ThemeProvider>
     );
 }
 

@@ -1,24 +1,24 @@
-import React from 'react';
+import React, {FC} from 'react';
 import {TabsContent} from "@src/components/cabinet/cabinet_pages/TabsContent";
-import {FavoriteComponent} from "@src/components/cabinet/cabinet_pages/favorite/FavoriteComponent";
+import {Favorite} from "@src/components/cabinet/cabinet_pages/favorite/Favorite";
 
-export const FavoriteContainer = (props) => {
+export const FavoriteContainer: FC<any> = () => {
     const tabsData = [
         {
             title: 'Объявления',
             count: 2,
-            component: <FavoriteComponent/>
+            component: <Favorite/>
         },
         {
             title: 'Аукционы',
             count: 2,
-            component: <FavoriteComponent/>
+            component: <Favorite/>
         },
     ]
 
     const title = 'Избранное';
 
     return (
-        <TabsContent title={title} tabsData={tabsData} headerTitle={title} t={props.t}/>
+        <TabsContent title={title} tabsData={tabsData} headerTitle={title}/>
     )
 }

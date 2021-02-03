@@ -1,11 +1,11 @@
-import { InnerCardData } from '@root/interfaces/CardData';
+import {InnerCardData} from '@root/interfaces/CardData';
 
 export const CabinetMockData: InnerCardData[] = [
     {
         id: 1,
         title: 'Спальная мебель: купить мебель для спальни новую',
         safe_deal: 1,
-        price: 123456,
+        price: '123456',
         number_of_views: 1,
         region: {
             id: 1233,
@@ -33,11 +33,7 @@ export const CabinetMockData: InnerCardData[] = [
         created_at: '22.09.2020',
         delivery: 1,
         exchange: 1,
-        ads_type: {
-            id: 43122,
-            name: 'Объявление',
-            mark: 'regular',
-        },
+        ads_type: 'post',
         accepted: false,
         expected: false,
         denied: false,
@@ -51,7 +47,7 @@ export const CabinetMockData: InnerCardData[] = [
         id: 2,
         title: 'Купить мебель для гостиной',
         safe_deal: 1,
-        price: 123456,
+        price: '123456',
 
         number_of_views: 1,
         region: {
@@ -80,11 +76,7 @@ export const CabinetMockData: InnerCardData[] = [
         created_at: '22.09.2020',
         delivery: 0,
         exchange: 0,
-        ads_type: {
-            id: 43122,
-            name: 'Аукцион',
-            mark: 'auction',
-        },
+        ads_type: 'auc',
         accepted: true,
         expected: false,
         denied: false,
@@ -96,7 +88,7 @@ export const CabinetMockData: InnerCardData[] = [
         id: 3,
         title: 'Купить мебель для офиса',
         safe_deal: 0,
-        price: 123456,
+        price: '123456',
 
         number_of_views: 1,
         region: {
@@ -125,11 +117,7 @@ export const CabinetMockData: InnerCardData[] = [
         created_at: '22.09.2020',
         delivery: 0,
         exchange: 1,
-        ads_type: {
-            id: 43122,
-            name: 'Аукцион',
-            mark: 'auction',
-        },
+        ads_type: 'exauc',
         accepted: false,
         expected: false,
         denied: true,
@@ -141,7 +129,7 @@ export const CabinetMockData: InnerCardData[] = [
         id: 4,
         title: 'Кухонные гарнитуры на заказ кухни на заказ в Ташкенте',
         safe_deal: 0,
-        price: 123456,
+        price: '123456',
         number_of_views: 1,
         region: {
             id: 1233,
@@ -169,11 +157,7 @@ export const CabinetMockData: InnerCardData[] = [
         created_at: '22.09.2020',
         delivery: 0,
         exchange: 1,
-        ads_type: {
-            id: 43122,
-            name: 'Объявление',
-            mark: 'regular',
-        },
+        ads_type: 'post',
         accepted: false,
         expected: false,
         denied: false,

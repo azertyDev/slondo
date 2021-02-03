@@ -1,14 +1,14 @@
-import React, { FC } from 'react';
-import { Grid, Hidden } from '@material-ui/core';
-import { MainLayout } from '@src/components/MainLayout';
-import { OwnerAuctionContent } from './owner_auction_content/OwnerAuctionContent';
-import { PostContent } from './post_content/PostContent';
-import { Banner } from '@src/components/elements/banner/Banner';
-import { useStyles } from './useStyles';
+import React, {FC} from 'react';
+import {Grid, Hidden} from '@material-ui/core';
+import {MainLayout} from '@src/components/MainLayout';
+import {OwnerAuctionContent} from './owner_auction_content/OwnerAuctionContent';
+import {PostContent} from './post_content/PostContent';
+import {Banner} from '@src/components/elements/banner/Banner';
+import {useStyles} from './useStyles';
+
 
 export const ShowPost: FC<any> = (props) => {
-    const { adData, parameters, t } = props;
-    const { data } = adData;
+    const {postData: {data}, parameters, t} = props;
 
     const classes = useStyles();
     return (
@@ -26,7 +26,7 @@ export const ShowPost: FC<any> = (props) => {
                         <Grid item xs={3}>
                             <OwnerAuctionContent {...props} />
                             <div className={classes.adBanner}>
-                                <Banner height="424px" />
+                                <Banner height="424px"/>
                             </div>
                         </Grid>
                     </Hidden>

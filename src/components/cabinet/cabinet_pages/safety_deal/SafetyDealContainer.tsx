@@ -1,9 +1,9 @@
 import React from 'react';
-import {SafetyDealComponent} from "@src/components/cabinet/cabinet_pages/safety_deal/SafetyDealComponent";
+import {SafetyDeal} from "@src/components/cabinet/cabinet_pages/safety_deal/SafetyDeal";
 
-export const SafetyDealContainer = (props) => {
+export const SafetyDealContainer = () => {
 
     return (
-        <SafetyDealComponent t={props.t}/>
+        <SafetyDeal/>
     )
 }

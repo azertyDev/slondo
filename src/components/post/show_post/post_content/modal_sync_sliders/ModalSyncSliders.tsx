@@ -2,24 +2,22 @@ import React, {
     FC,
     Dispatch,
     SetStateAction,
-    MutableRefObject,
     useRef,
-    useState,
-    useEffect,
 } from 'react';
-import { CustomSlider } from '@src/components/elements/custom_slider/CustomSlider';
 import InnerImageZoom from 'react-inner-image-zoom';
-import { Container, IconButton, Modal, Typography } from '@material-ui/core';
-import { ButtonComponent } from '@src/components/elements/button/Button';
-import { CloseIcon } from '@root/src/components/elements/icons';
-import { useStyles } from './useStyles';
+import {CustomSlider} from '@src/components/elements/custom_slider/CustomSlider';
+import {Container, IconButton, Modal, Typography} from '@material-ui/core';
+import {ButtonComponent} from '@src/components/elements/button/Button';
+import {CloseIcon} from '@root/src/components/elements/icons';
+import {useStyles} from './useStyles';
+
 
 type SyncSlidersProps = {
     open: boolean;
     onClose: () => void;
     title: string;
-    initialSlide: number;
-    setInitialSlide: Dispatch<SetStateAction<number>>;
+    currentSlide: number;
+    setCurrentSlide: Dispatch<SetStateAction<number>>;
     imgs: {
         alt: string;
         url: { default: string };
@@ -27,85 +25,89 @@ type SyncSlidersProps = {
 };
 
 export const ModalSyncSliders: FC<SyncSlidersProps> = (props) => {
-    const { open, onClose, title, imgs, initialSlide, setInitialSlide } = props;
+    const {
+        open,
+        onClose,
+        title,
+        imgs,
+        currentSlide,
+        setCurrentSlide
+    } = props;
 
-    const [slidersNav, setSlidersNav] = useState({ nav1: null, nav2: null });
+    const imgsCount = !!imgs.length ? imgs.length : 1;
 
-    const slider1: MutableRefObject<unknown> = useRef();
-    const slider2: MutableRefObject<unknown> = useRef();
+    const {nav1, nav2} = {
+        nav1: useRef<any>(),
+        nav2: useRef<any>()
+    };
 
-    const handleAfterChange = (slide) => {
-        setInitialSlide(slide);
+    const handleAfterChange = slide => {
+        setCurrentSlide(slide);
     };
 
     const prev = () => {
-        slidersNav.nav2.slickPrev();
+        nav2 && nav2.current.slickPrev();
     };
 
     const next = () => {
-        slidersNav.nav2.slickNext();
+        nav2 && nav2.current.slickNext();
     };
-
-    useEffect(() => {
-        setSlidersNav({
-            nav1: slider1.current,
-            nav2: slider2.current,
-        });
-    }, []);
 
     const classes = useStyles();
     return (
         <Modal open={open} onClose={onClose} className={classes.modal}>
-            <Container className={classes.root} maxWidth="xl">
+            <div className={classes.root}>
                 <IconButton onClick={onClose}>
-                    <CloseIcon />
+                    <CloseIcon/>
                 </IconButton>
                 <Typography className="title" variant="h6">
                     {title}
                 </Typography>
                 <div className={classes.firstSlider}>
                     <CustomSlider
-                        ref={slider1}
-                        asNavFor={slidersNav.nav2}
-                        centerMode={imgs.length === 1}
-                        initialSlide={initialSlide}
+                        ref={nav1}
+                        asNavFor={nav2.current}
+                        centerMode={true}
+                        initialSlide={currentSlide}
+                        slidesToShow={1}
                         afterChange={handleAfterChange}
                     >
-                        {imgs.map((img, i) => (
+                        {imgs.map((img, i) =>
                             <InnerImageZoom
-                                className="image-zoom"
                                 key={i}
+                                className="image-zoom"
                                 src={img.url.default}
                                 fullscreenOnMobile={true}
                                 moveType="drag"
                                 zoomScale={1.7}
                             />
-                        ))}
+                        )}
                     </CustomSlider>
                 </div>
-                <div className={classes.secondSlider}>
+                <Container maxWidth='lg' className={classes.secondSlider}>
                     <CustomSlider
-                        ref={slider2}
-                        asNavFor={slidersNav.nav1}
-                        slidesToShow={imgs.length}
-                        slidesToScroll={1}
-                        focusOnSelect={true}
+                        ref={nav2}
+                        asNavFor={nav1.current}
                         arrows={false}
-                        initialSlide={initialSlide}
+                        focusOnSelect={true}
+                        slidesToScroll={1}
+                        initialSlide={currentSlide}
+                        afterChange={handleAfterChange}
+                        slidesToShow={imgsCount > 3 ? 4 : imgsCount}
                     >
-                        {imgs.map(({ url, alt }, i) => (
-                            <img key={i} alt={alt} src={url.default} />
-                        ))}
+                        {imgs.map(({url, alt}, i) =>
+                            <img key={i} alt={alt} src={url.default}/>
+                        )}
                     </CustomSlider>
                     <div className="slider-counter">
                         <ButtonComponent onClick={prev}>&lt;</ButtonComponent>
                         <Typography variant="subtitle1">
-                            {initialSlide + 1} / {imgs.length}
+                            {currentSlide + 1} / {imgs.length}
                         </Typography>
                         <ButtonComponent onClick={next}>&gt;</ButtonComponent>
                     </div>
-                </div>
-            </Container>
+                </Container>
+            </div>
         </Modal>
     );
 };

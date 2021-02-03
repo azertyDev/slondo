@@ -7,8 +7,8 @@ import {
     Grid,
     Container,
 } from '@material-ui/core';
-import {MainSlider} from './mainSlider/MainSlider';
-import {CategoriesSlider} from './categoriesSlider/CategoriesSlider';
+import {MainSlider} from './main_slider/MainSlider';
+import {CategoriesSlider} from './categories_slider/CategoriesSlider';
 import {PostsSliderContainer} from "./posts_slider/PostsSliderContainer";
 import {PostsTabsContainer} from './posts_tabs/PostsTabsContainer';
 import {ScrollTop} from '@src/components/elements/scroll_top/ScrollTop';

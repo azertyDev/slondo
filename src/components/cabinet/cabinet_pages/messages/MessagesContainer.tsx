@@ -1,9 +1,9 @@
 import React from 'react';
-import {MessagesComponent} from "@src/components/cabinet/cabinet_pages/messages/MessagesComponent";
+import {Messages} from "@src/components/cabinet/cabinet_pages/messages/Messages";
 
 export const MessagesContainer = (props) => {
 
     return (
-        <MessagesComponent t={props.t}/>
+        <Messages t={props.t}/>
     )
 }

@@ -1,58 +1,57 @@
-import React, { FC, useEffect, useState } from 'react';
-import { useRouter } from 'next/router';
-import { WithT } from 'i18next';
-import { i18n } from '@root/i18n';
-import { userAPI } from '@src/api/api';
-import { ShowPost } from '@src/components/post/show_post/ShowPost';
+import React, {FC, useEffect, useState} from 'react';
+import {useRouter} from 'next/router';
+import {WithT} from 'i18next';
+import {i18n} from '@root/i18n';
+import {userAPI} from '@src/api/api';
+import {ShowPost} from '@src/components/post/show_post/ShowPost';
 
-const initValues = { id: null, name: '' };
 
-const initialAdData = {
-    isFetch: false,
-    error: null,
-    data: {
-        id: null,
-        title: '',
-        currency: initValues,
-        condition: initValues,
-        created_at: null,
-        expiration_at: null,
-        number_of_views: null,
-        sub_category_id: null,
-        images: [
-            {
-                alt: '',
-                url: {
-                    default: '',
-                },
+export const ShowPostContainer: FC<WithT> = ({t}) => {
+
+    const initValues = {id: null, name: ''};
+
+    const initialAdData = {
+        isFetch: false,
+        error: null,
+        data: {
+            id: null,
+            title: '',
+            price: '',
+            currency: initValues,
+            condition: initValues,
+            created_at: null,
+            expiration_at: null,
+            number_of_views: null,
+            sub_category_id: null,
+            images: [],
+            description: '',
+            region: initValues,
+            city: initValues,
+            district: initValues,
+            category: {
+                id: null,
+                name: '',
+                mark: '',
+                sub_category: [{
+                    id: null,
+                    name: ''
+                }],
             },
-        ],
-        description: '',
-        region: initValues,
-        city: initValues,
-        district: initValues,
-        category: {
-            id: null,
-            name: '',
-            mark: '',
-            sub_category: [],
+            ads_type: {
+                id: null,
+                name: '',
+                mark: '',
+            },
+            auction: {
+                duration: '',
+                display_phone: '',
+                reserve_price: '',
+                price_by_now: '',
+            },
         },
-        ads_type: {
-            id: null,
-            name: '',
-            mark: '',
-        },
-        auction: {
-            duration: '',
-            display_phone: '',
-            reserve_price: '',
-            price_by_now: '',
-        },
-    },
-};
+    };
 
-export const ShowPostContainer: FC<WithT> = ({ t }) => {
-    const [adData, setAdData] = useState(initialAdData);
+    const [postData, setPostData] = useState(initialAdData);
     const [parameters, setParameters] = useState({});
 
     const url = useRouter().query.url as string;
@@ -63,8 +62,8 @@ export const ShowPostContainer: FC<WithT> = ({ t }) => {
 
     const fetchAdData = async () => {
         try {
-            setAdData({
-                ...adData,
+            setPostData({
+                ...postData,
                 isFetch: true,
             });
 
@@ -82,8 +81,8 @@ export const ShowPostContainer: FC<WithT> = ({ t }) => {
 
             setParameters(otherData.model);
 
-            setAdData({
-                ...adData,
+            setPostData({
+                ...postData,
                 isFetch: false,
                 data: {
                     title,
@@ -98,8 +97,8 @@ export const ShowPostContainer: FC<WithT> = ({ t }) => {
                 },
             });
         } catch (e) {
-            setAdData({
-                ...adData,
+            setPostData({
+                ...postData,
                 error: e.message,
             });
         }
@@ -107,7 +106,11 @@ export const ShowPostContainer: FC<WithT> = ({ t }) => {
 
     useEffect(() => {
         fetchAdData();
-    }, [lang]);
+    }, [lang])
 
-    return <ShowPost adData={adData} t={t} parameters={parameters} />;
+    return <ShowPost
+        t={t}
+        postData={postData}
+        parameters={parameters}
+    />
 };

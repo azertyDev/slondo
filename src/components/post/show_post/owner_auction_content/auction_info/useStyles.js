@@ -10,7 +10,6 @@ export const useStyles = makeStyles((theme) => ({
                     margin: 0,
                 },
             },
-            '& div.lot-timer': {},
             '& div.reserve-price': {
                 display: 'flex',
                 alignItems: 'center',
@@ -200,8 +199,6 @@ export const useStyles = makeStyles((theme) => ({
                         },
                     },
                 },
-
-                '& > div:last-child': {},
             },
             '& div.suggest_price': {
                 '& > button': {
@@ -214,7 +211,6 @@ export const useStyles = makeStyles((theme) => ({
             },
         },
     },
-
     lotTimer: {
         padding: '15px 30px 8px 30px',
         boxShadow: '0px 0px 8px rgba(103, 94, 170, 0.25)',

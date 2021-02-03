@@ -1,8 +1,8 @@
-import React, { FC, ReactElement } from 'react';
-import { WithT } from 'i18next';
-import { TabsContent } from '@src/components/cabinet/cabinet_pages/TabsContent';
-import { ArchiveComponent } from '@src/components/cabinet/cabinet_pages/archive/ArchiveComponent';
-import { CabinetMockData } from '../../CabinetData';
+import React, {FC, ReactElement} from 'react';
+import {TabsContent} from '@src/components/cabinet/cabinet_pages/TabsContent';
+import {Archive} from '@src/components/cabinet/cabinet_pages/archive/Archive';
+import {CabinetMockData} from '../../CabinetMockData';
+
 
 export type TabsDataType = {
     title: string;
@@ -10,20 +10,20 @@ export type TabsDataType = {
     component: ReactElement;
 };
 
-export const ArchiveContainer: FC<WithT> = ({ t }) => {
+export const ArchiveContainer: FC<any> = () => {
     const tabsData: TabsDataType[] = [
         {
             title: 'Объявления',
             count: CabinetMockData.length,
             component: (
-                <ArchiveComponent list={CabinetMockData} isFetch t={t} />
+                <Archive list={CabinetMockData} isFetch />
             ),
         },
         {
             title: 'Аукционы',
             count: CabinetMockData.length,
             component: (
-                <ArchiveComponent list={CabinetMockData} isFetch t={t} />
+                <Archive list={CabinetMockData} isFetch />
             ),
         },
     ];
@@ -31,6 +31,6 @@ export const ArchiveContainer: FC<WithT> = ({ t }) => {
     const title = 'Архив';
 
     return (
-        <TabsContent title={title} tabsData={tabsData} headerTitle={title} />
+        <TabsContent title={title} tabsData={tabsData} headerTitle={title}/>
     );
 };

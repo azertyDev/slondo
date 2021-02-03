@@ -1,5 +1,5 @@
 import React from 'react';
-import {GridView} from '@src/components/elements/card_view/grid_view/GridView';
+import {GridMode} from '@src/components/elements/card/card_view/grid_mode/GridMode';
 import Typography from '@material-ui/core/Typography';
 import {useStyles} from './useStyles';
 
@@ -13,7 +13,7 @@ export const SimilarPosts = (props) => {
             <Typography variant="subtitle1" color="initial">
                 Похожие объявления
             </Typography>
-            <GridView isFetch={isFetch} list={list}/>
+            <GridMode isFetch={isFetch} list={list}/>
         </div>
     );
 };

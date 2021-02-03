@@ -1,5 +1,4 @@
 import React, {FC, useEffect, useState} from 'react';
-import {WithT} from 'i18next';
 import {ITEMS_PER_PAGE} from '@src/constants';
 import {userAPI} from '@src/api/api';
 import {i18n} from '@root/i18n';
@@ -28,11 +27,7 @@ const initCard: InnerCardData = {
     city: null,
     delivery: null,
     exchange: null,
-    ads_type: {
-        id: null,
-        name: '',
-        mark: '',
-    },
+    ads_type: '',
 };
 
 const initCards: InnerCardData[] = [];

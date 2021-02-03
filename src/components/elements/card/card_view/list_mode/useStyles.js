@@ -1,4 +1,4 @@
-import { makeStyles } from '@material-ui/core/styles';
+import {makeStyles} from '@material-ui/core/styles';
 
 export const useStyles = makeStyles((theme) => ({
     root: {
@@ -13,12 +13,15 @@ export const useStyles = makeStyles((theme) => ({
                 marginBottom: 10,
                 '& > h6.MuiTypography-subtitle1': {
                     fontSize: '12px',
-                    '& > span.type-regular': {
-                        color: theme.palette.primary.adBgColor,
-                    },
-                    '& > span.type-auction': {
-                        color: theme.palette.primary.lotBgColor,
-                    },
+                    // '& > span.post': {
+                    //     color: theme.palette.primary.adBgColor,
+                    // },
+                    // '& > span.auc': {
+                    //     color: theme.palette.primary.lotBgColor,
+                    // },
+                    // '& > span.exauc': {
+                    //     color: theme.palette.primary.lotBgColor,
+                    // },
                 },
             },
             '& div.MuiPaper-root': {
@@ -52,11 +55,14 @@ export const useStyles = makeStyles((theme) => ({
                             padding: '2px 10px',
                             letterSpacing: '0.4px',
                             color: '#fff',
-                            '&.ancmnt': {
-                                backgroundColor: 'rgba(136, 202, 236, 0.65)',
+                            '&.post': {
+                                backgroundColor: theme.palette.primary.postBgColor,
                             },
-                            '&.auction': {
-                                backgroundColor: 'rgba(173, 102, 213, 0.65)',
+                            '&.auc': {
+                                backgroundColor: theme.palette.primary.aucBgColor,
+                            },
+                            '&.exauc': {
+                                backgroundColor: theme.palette.primary.exAucBgColor,
                             },
                         },
                         '& > span:last-child': {
