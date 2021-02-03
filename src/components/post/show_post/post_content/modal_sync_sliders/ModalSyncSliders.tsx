@@ -2,7 +2,7 @@ import React, {
     FC,
     Dispatch,
     SetStateAction,
-    useRef,
+    useRef
 } from 'react';
 import InnerImageZoom from 'react-inner-image-zoom';
 import {CustomSlider} from '@src/components/elements/custom_slider/CustomSlider';
@@ -14,8 +14,8 @@ import {useStyles} from './useStyles';
 
 type SyncSlidersProps = {
     open: boolean;
-    onClose: () => void;
     title: string;
+    onClose: () => void;
     currentSlide: number;
     setCurrentSlide: Dispatch<SetStateAction<number>>;
     imgs: {
