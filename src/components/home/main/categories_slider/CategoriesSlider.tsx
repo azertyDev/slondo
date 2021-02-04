@@ -8,6 +8,7 @@ import { Skeleton } from '@material-ui/lab';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '@src/redux/rootReducer';
 import { setErrorMsgAction } from '@root/src/redux/slices/errorSlice';
+import { categoriesList } from '@src/components/common_data/categoriesList';
 import { useStyles } from './useStyles';
 
 export const CategoriesSlider: FC<WithT> = ({ t }) => {
@@ -28,49 +29,27 @@ export const CategoriesSlider: FC<WithT> = ({ t }) => {
                 {t('popularCategories')}
             </Typography>
             <div className="category-slider">
-                {error ? (
-                    <div className="error-wrapper">
-                        <Typography className="error-text">{error}</Typography>
-                    </div>
-                ) : (
-                    <CustomSlider {...settings}>
-                        {list.map((category) =>
-                            isFetch ? (
-                                <div
-                                    className="category-skeleton"
-                                    key={category.id}
-                                >
-                                    <Skeleton
-                                        variant="circle"
-                                        width={127}
-                                        height={127}
-                                        style={{ marginBottom: 20 }}
-                                    />
-                                    <Skeleton
-                                        variant="text"
-                                        width={127}
-                                        height={25}
-                                    />
-                                </div>
-                            ) : (
-                                <Link href="#" key={category.id}>
-                                    <a title={category.name}>
-                                        <div className="category">
-                                            <div className="bg-layer">
-                                                <div className="medium">
-                                                    <img src={category.image.url} alt={category.name}/>
-                                                </div>
-                                            </div>
-                                            <span className="category-name">
-                                                {category.name}
-                                            </span>
+                <CustomSlider {...settings}>
+                    {categoriesList.map((category) => (
+                        <Link href="#" key={category.id}>
+                            <a title={category.name}>
+                                <div className="category">
+                                    <div className="bg-layer">
+                                        <div className="medium">
+                                            <img
+                                                src={category.icon}
+                                                alt={category.name}
+                                            />
                                         </div>
-                                    </a>
-                                </Link>
-                            ),
-                        )}
-                    </CustomSlider>
-                )}
+                                    </div>
+                                    <span className="category-name">
+                                        {category.name}
+                                    </span>
+                                </div>
+                            </a>
+                        </Link>
+                    ))}
+                </CustomSlider>
             </div>
         </div>
     );
