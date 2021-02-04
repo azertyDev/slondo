@@ -324,44 +324,45 @@ export const CreatePostContainer: FC<WithT> = ({t}) => {
 
     return (
         <MainLayout>
-            {activeStep !== 0 && activeStep !== 4
-            && <PostHeader
-                steps={steps}
-                activeStep={activeStep}
-                handleBackBtn={handleBackBtn}
-            />}
             <>
-                {activeStep === 0
-                && <PostTypesPage
-                    postTypes={postTypes}
-                    handlePostType={handlePostType}
-                    t={t}
-                />}
-                {activeStep === 1
-                && <CreatePost
-                    postType={postType}
-                    createPost={createPost}
-                    isFetch={dataForCrtPost.isFetch}
-                    setCreatePost={setCreatePost}
-                    setSubLvlCtgrs={setSubLvlCtgrs}
-                    categoriesList={categoriesList}
-                    subLvlCtgrs={subLvlCtgrs}
-                    setMatchedCtgrs={setMatchedCtgrs}
-                    handleBackCtgr={handleBackCtgr}
-                    handleCategory={handleCategory}
-                    initCreatePostState={initCreatePostState}
-                />}
-                {(activeStep === 2 || activeStep === 3)
-                && <PostFormContainer
-                    t={t}
+                <PostHeader
+                    steps={steps}
                     activeStep={activeStep}
-                    postType={postType}
-                    category={category}
-                    secCtgr={secCtgr}
-                    handleNextStep={handleNextStep}
-                    dataForCrtPost={dataForCrtPost}
-                    setDataForCrtPost={setDataForCrtPost}
-                />}
+                    handleBackBtn={handleBackBtn}
+                />
+                <>
+                    {activeStep === 0
+                    && <PostTypesPage
+                        postTypes={postTypes}
+                        handlePostType={handlePostType}
+                        t={t}
+                    />}
+                    {activeStep === 1
+                    && <CreatePost
+                        postType={postType}
+                        createPost={createPost}
+                        isFetch={dataForCrtPost.isFetch}
+                        setCreatePost={setCreatePost}
+                        setSubLvlCtgrs={setSubLvlCtgrs}
+                        categoriesList={categoriesList}
+                        subLvlCtgrs={subLvlCtgrs}
+                        setMatchedCtgrs={setMatchedCtgrs}
+                        handleBackCtgr={handleBackCtgr}
+                        handleCategory={handleCategory}
+                        initCreatePostState={initCreatePostState}
+                    />}
+                    {(activeStep === 2 || activeStep === 3)
+                    && <PostFormContainer
+                        t={t}
+                        activeStep={activeStep}
+                        postType={postType}
+                        category={category}
+                        secCtgr={secCtgr}
+                        handleNextStep={handleNextStep}
+                        dataForCrtPost={dataForCrtPost}
+                        setDataForCrtPost={setDataForCrtPost}
+                    />}
+                </>
                 {activeStep === 4 && <SuccessPost handleCreateNewPost={handleResetPostType}/>}
             </>
         </MainLayout>

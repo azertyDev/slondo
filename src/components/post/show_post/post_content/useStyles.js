@@ -1,6 +1,6 @@
 import {makeStyles} from '@material-ui/core/styles';
 
-export const useStyles = makeStyles(() => ({
+export const useStyles = makeStyles((theme) => ({
     root: {
         paddingBottom: 55,
         borderBottom: '1px solid rgba(103, 94, 170, 0.5)',
@@ -114,7 +114,7 @@ export const useStyles = makeStyles(() => ({
                     marginRight: 15,
                 },
                 '& h6.MuiTypography-subtitle1': {
-                    color: '#838383',
+                    color: theme.palette.common.tab,
                 },
             },
         },
