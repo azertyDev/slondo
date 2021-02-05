@@ -1,0 +1,57 @@
+{
+    "searchCategory": "Kategoriyani qidirish",
+    "howToCreatePost": "E'lon yaratish",
+    "howToCreateAuc": "Auksion yaratish",
+    "howToCreateExAuc": "Kengaytirilgan auksion yaratish",
+    "trainingVideo": "O'quv videosi",
+    "maxFunctionality": "Maksimal funktsional imkoniyatlaridan foydalaning",
+    "tradeToGetBetter": "O'zingiz uchun yaxshiroq narxni olish uchun savdo qiling",
+    "postFree": "Mahsulotlarni yoki xizmatlarni bepul joylashtiring",
+    "postType": "E'lon turi",
+    "category": "Kategoriya",
+    "fill": "To'ldirish",
+    "check": "Tekshirish",
+
+    "car": "Yengil Avtomobillar",
+    "madeInUzb": "O'zbekistonda ishlab chiqarilgan",
+    "foreignCars": "Inomarkalar",
+
+    "transport": "Maxsus texnika va transport",
+    "motorcyclesAndMototechnics": "Mototsikllar va mototexnika",
+    "motorcycles": "Mototsikllar",
+
+    "parts": "Ehtiyot qismlar va aksessuarlar",
+    "forCars": "Yengil avtomobillar uchun",
+
+    "estate": "Ko'chmas mulk",
+    "apartments": "Kvartiralar",
+    "sale": "Sotish",
+
+    "job": "Ish",
+    "vacancies": "Bo'sh ish o'rinlari",
+    "autoBusiness": "Avtobiznes",
+
+    "service": "Xizmatlar",
+    "repairAndConstruction": "Qurilish va ta'mirlash",
+    "interiorDesign": "Interyer dizayni",
+
+    "goods": "Buyumlar, Bolalar tovarlari va bezak buyumlar",
+    "womensWardrobe": "Ayollar garderobi",
+    "accessories": "Aksessuarlar",
+
+    "home": "Uylar, dacha, dala hovlilar, kottejlar",
+    "furnitureAndInterior": "Mebel va interyer",
+    "sofasAndArmchairs": "Divan va kreslolar",
+
+    "electronics": "Elektronika",
+    "phonesAndTablets": "Telefon va planshetlar",
+    "mobilePhones": "Mobil telefonlar",
+
+    "hobbies": "Xobbi va dam olish",
+    "tickets": "Biletlar",
+
+    "animal": "Hayvonlar",
+    "dogs": "Itlar",
+
+    "free": "Tekinga beraman"
+}

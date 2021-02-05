@@ -2,26 +2,14 @@ import React, { FC, Dispatch, SetStateAction, useState } from 'react';
 import { Typography, InputBase, List, ListItem, Grid } from '@material-ui/core';
 import { CategoryType, SubLvlCtgrsType } from '@root/interfaces/Categories';
 import { PostType, CreatePostState } from '@root/interfaces/Post';
-import { Search_icon } from '@src/components/elements/icons';
-import {
-    CarIcon,
-    SpecTechIcon,
-    PartsIcon,
-    ApartmentsIcon,
-    JobIcon,
-    ServicesIcon,
-    HangerIcon,
-    SofaIcon,
-    ElectronicIcon,
-    HobbyIcon,
-    AnimalsIcon,
-    ForFreeIcon,
-} from '@src/components/elements/icons';
+import { BackspaceIcon, Search_icon } from '@src/components/elements/icons';
+import { ButtonComponent } from '../../elements/button/Button';
+import { WithT } from 'i18next';
 import { useStyles } from './useStyles';
 
 type CreatePostProps = {
     isFetch: boolean;
-    categoriesList: CategoryType[];
+    categories_list: CategoryType[];
     subLvlCtgrs: SubLvlCtgrsType[];
     postType: PostType;
     handleBackCtgr: () => void;
@@ -33,21 +21,21 @@ type CreatePostProps = {
     initCreatePostState: CreatePostState;
 };
 
-export const CreatePost: FC<CreatePostProps> = (props) => {
+export const CreatePost: FC<CreatePostProps & WithT> = (props) => {
     const {
         postType,
         createPost,
         isFetch,
         setCreatePost,
-        categoriesList,
+        categories_list,
         handleCategory,
         handleBackCtgr,
         setMatchedCtgrs,
         subLvlCtgrs,
         setSubLvlCtgrs,
         initCreatePostState,
+        t,
     } = props;
-    console.log(props);
 
     const { category, error } = createPost;
     const [searchTxt, setSearchTxt] = useState('');
@@ -70,10 +58,10 @@ export const CreatePost: FC<CreatePostProps> = (props) => {
         <Grid container className={classes.root}>
             <Grid item xs={3} className="categories-menu">
                 <List disablePadding>
-                    {categoriesList.map(
+                    {categories_list.map(
                         (ctgr, i) =>
                             (postType.name === 'post' ||
-                                ctgr.has_auction === 1) && (
+                                ctgr.has_auction === true) && (
                                 <ListItem
                                     key={i}
                                     onClick={handleCategory(ctgr)}
@@ -84,12 +72,12 @@ export const CreatePost: FC<CreatePostProps> = (props) => {
                                             : ''
                                     }
                                 >
-                                    <CarIcon />
+                                    {ctgr.smallIcon}
                                     <Typography
                                         variant="subtitle1"
                                         color="initial"
                                     >
-                                        {ctgr.name}
+                                        {t(`categories:${ctgr.name}`)}
                                     </Typography>
                                 </ListItem>
                             ),
@@ -100,7 +88,7 @@ export const CreatePost: FC<CreatePostProps> = (props) => {
                 <div className="search-block">
                     <InputBase
                         onChange={handleSearch}
-                        placeholder="Поиск категорий"
+                        placeholder={t(`categories:searchCategory`)}
                         value={searchTxt}
                         fullWidth
                         startAdornment={<Search_icon />}
@@ -116,14 +104,22 @@ export const CreatePost: FC<CreatePostProps> = (props) => {
                     <List disablePadding>
                         {isThirdLvlCtgr && (
                             <ListItem onClick={handleBackCtgr}>
-                                <span>{'<-'}</span>
+                                <ButtonComponent className="back-btn">
+                                    <BackspaceIcon />
+                                    <Typography
+                                        variant="subtitle1"
+                                        color="initial"
+                                    >
+                                        Объявление
+                                    </Typography>
+                                </ButtonComponent>
                             </ListItem>
                         )}
                         {subLvlCtgrs.map((ctgr, i) => (
                             <ListItem key={i} onClick={handleCategory(ctgr)}>
                                 <div>
                                     <Typography variant="subtitle1">
-                                        {ctgr.name}
+                                        {t(`categories:${ctgr.name}`)}
                                     </Typography>
                                     {!!searchTxt && (
                                         <Typography

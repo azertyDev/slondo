@@ -17,13 +17,18 @@ export const useStyles = makeStyles((theme) => ({
                     borderRadius: '5px',
                     '& > svg': {
                         margin: '0 15px',
-                    }
+                    },
                 },
             },
             '& li.selected-category': {
                 border: '1px solid #845CAB',
                 '& > h6.MuiTypography-subtitle1': {
                     color: theme.palette.primary.secondary,
+                },
+                '& > svg': {
+                    '& > path': {
+                        fill: '#845CAB',
+                    },
                 },
             },
         },
@@ -43,6 +48,17 @@ export const useStyles = makeStyles((theme) => ({
                     '& > input.MuiInputBase-input': {
                         padding: '10px 0',
                     },
+                },
+            },
+            '& button.back-btn': {
+                color: theme.palette.primary.white,
+                background: 'none',
+                padding: 0,
+                '& svg': {
+                    margin: '0 15px',
+                },
+                '& h6.MuiTypography-subtitle1': {
+                    fontWeight: 600,
                 },
             },
             '& ul': {
