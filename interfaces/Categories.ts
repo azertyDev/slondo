@@ -8,15 +8,14 @@ export interface Categories {
 }
 
 export type CategoryType = {
-    mark: string;
-    image: {
-        url: string;
-    },
     icon: {
         url: string;
     },
+    smallIcon: {
+        url: string;
+    },
     model: ModelType[];
-    has_auction: number;
+    has_auction: boolean;
 } & IdNameType;
 
 export type ModelType = {

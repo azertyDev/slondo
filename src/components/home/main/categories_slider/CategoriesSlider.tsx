@@ -4,11 +4,10 @@ import { Typography } from '@material-ui/core';
 import { CustomSlider } from '@src/components/elements/custom_slider/CustomSlider';
 import { settings } from './sliderSettings';
 import { Link } from '@root/i18n';
-import { Skeleton } from '@material-ui/lab';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '@src/redux/rootReducer';
 import { setErrorMsgAction } from '@root/src/redux/slices/errorSlice';
-import { categoriesList } from '@src/components/common_data/categoriesList';
+import { categories_list } from '@src/components/common_data/categoriesList';
 import { useStyles } from './useStyles';
 
 export const CategoriesSlider: FC<WithT> = ({ t }) => {
@@ -30,20 +29,20 @@ export const CategoriesSlider: FC<WithT> = ({ t }) => {
             </Typography>
             <div className="category-slider">
                 <CustomSlider {...settings}>
-                    {categoriesList.map((category) => (
+                    {categories_list.map((category) => (
                         <Link href="#" key={category.id}>
                             <a title={category.name}>
                                 <div className="category">
                                     <div className="bg-layer">
                                         <div className="medium">
                                             <img
-                                                src={category.icon}
+                                                src={category.icon.url}
                                                 alt={category.name}
                                             />
                                         </div>
                                     </div>
                                     <span className="category-name">
-                                        {category.name}
+                                        {t(`categories:${category.name}`)}
                                     </span>
                                 </div>
                             </a>

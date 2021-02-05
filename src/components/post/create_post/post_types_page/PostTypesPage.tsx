@@ -32,7 +32,8 @@ export const PostTypesPage: FC<AncmntTypesPageProps & WithT> = ({
                                         {t(`common:${anType.name}`)}
                                     </Typography>
                                     <Typography variant="body2">
-                                        {anType.subtitle}
+                                        
+                                        {t(`categories:${anType.subtitle}`)}
                                     </Typography>
                                 </div>
                             </ButtonBase>
@@ -43,11 +44,11 @@ export const PostTypesPage: FC<AncmntTypesPageProps & WithT> = ({
                                         color="initial"
                                         className={anType.name}
                                     >
-                                        {anType.guide}
+                                        ({t(`categories:${anType.guide}`)})
                                     </Typography>
                                 </a>
                                 <Typography variant="subtitle1" color="initial">
-                                    ({t('common:trainingVideo')})
+                                    ({t('categories:trainingVideo')})
                                 </Typography>
                             </div>
                         </Grid>
