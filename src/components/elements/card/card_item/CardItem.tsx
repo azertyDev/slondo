@@ -56,9 +56,9 @@ export const CardItem: FC<CardItemProps> = (props) => {
                 <FavoriteIcon id={id}/>
             </IconButton>
             <Link
-                href={`/obyavlenie/${translatedTitle}-${id}-${category.mark}-${sub_category_id}`}
+                href={`/obyavlenie/${translatedTitle}-${id}-${category.mark}-${sub_category_id ?? ''}`}
             >
-                <a>
+                <a target='_blank'>
                     <Card elevation={0} title={title}>
                         {isFetch ? (
                             <Skeleton

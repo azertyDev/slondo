@@ -1,56 +1,48 @@
-import React, {
-    FC,
-    Dispatch,
-    SetStateAction,
-    useRef,
-} from 'react';
-import { IconButton } from '@material-ui/core';
+import React, {FC} from 'react';
+import {IconButton} from '@material-ui/core';
 import ShareIcon from '@material-ui/icons/Share';
 import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
 import {CustomSlider} from '@src/components/elements/custom_slider/CustomSlider';
+import {SlidersRefType} from "../../ShowPostContainer";
 import {useStyles} from './useStyles';
 
 
 type SyncSlidersProps = {
     handleOpenModal: () => void;
-    setCurrentSlide: Dispatch<SetStateAction<number>>;
     imgs: {
         alt: string;
         url: { default: string };
     }[];
+    slidersRefs: SlidersRefType;
 };
 
 export const SyncSliders: FC<SyncSlidersProps> = (props) => {
     const {
         imgs,
-        setCurrentSlide,
         handleOpenModal,
+        slidersRefs
     } = props;
 
+    const {
+        slider1,
+        slider2,
+        slider3,
+    } = slidersRefs;
+
     const imgsCount = !!imgs.length ? imgs.length : 1;
-
-    const {nav1, nav2} = {
-        nav1: useRef<any>(),
-        nav2: useRef<any>()
-    };
-
-    const handleBeforeChange = (_, nextSlide) => {
-        setCurrentSlide(nextSlide);
-    };
 
     const classes = useStyles();
     return (
         <div className={classes.root}>
             <div className={classes.firstSlider}>
                 <IconButton className="favorite-btn">
-                    <FavoriteBorderIcon />
+                    <FavoriteBorderIcon/>
                 </IconButton>
                 <CustomSlider
-                    ref={nav1}
-                    asNavFor={nav2.current}
+                    ref={slider1}
+                    asNavFor={slider2.current}
                     variableWidth={true}
                     focusOnSelect={true}
-                    beforeChange={handleBeforeChange}
                 >
                     {imgs.map((img, i) =>
                         <img
@@ -62,13 +54,13 @@ export const SyncSliders: FC<SyncSlidersProps> = (props) => {
                     )}
                 </CustomSlider>
                 <IconButton className="share-btn">
-                    <ShareIcon />
+                    <ShareIcon/>
                 </IconButton>
             </div>
             <div className={classes.secondSlider}>
                 <CustomSlider
-                    ref={nav2}
-                    asNavFor={nav1.current}
+                    ref={slider2}
+                    asNavFor={slider3.current}
                     slidesToShow={imgsCount > 3 ? 4 : imgsCount}
                     focusOnSelect={true}
                     arrows={false}

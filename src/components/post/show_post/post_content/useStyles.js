@@ -1,4 +1,4 @@
-import { makeStyles } from '@material-ui/core/styles';
+import {makeStyles} from '@material-ui/core/styles';
 
 export const useStyles = makeStyles(() => ({
     root: {
@@ -15,7 +15,7 @@ export const useStyles = makeStyles(() => ({
                 },
             },
         },
-        '& div.adv-header': {
+        '& div.post-header': {
             display: 'flex',
             marginBottom: '10px',
             alignItems: 'center',
@@ -58,7 +58,7 @@ export const useStyles = makeStyles(() => ({
                 },
             },
         },
-        '& div.ad-info': {
+        '& div.post-info': {
             display: 'flex',
             justifyContent: 'space-around',
             padding: '13px 0px',
@@ -78,7 +78,7 @@ export const useStyles = makeStyles(() => ({
                 },
             },
         },
-        '& div.ad-bonus': {
+        '& div.post-bonus': {
             display: 'flex',
             marginBottom: '20px',
             '& span': {
@@ -118,7 +118,7 @@ export const useStyles = makeStyles(() => ({
                 },
             },
         },
-        '& div.ad-location': {
+        '& div.post-location': {
             marginBottom: '40px',
             '& p.MuiTypography-button': {
                 marginBottom: 16,
@@ -135,14 +135,14 @@ export const useStyles = makeStyles(() => ({
                 },
             },
         },
-        '& div.ad-description': {
+        '& div.post-description': {
             marginBottom: '40px',
             '& p.MuiTypography-button': {
                 marginBottom: 19,
             },
-            '& h6.MuiTypography-subtitle1': {
-                width: '80%',
+            '& h6.description': {
                 fontSize: '1.125rem',
+                paddingRight: '8vw'
             },
             '& > h6.MuiTypography-subtitle1': {
                 display: 'flex',
@@ -157,8 +157,8 @@ export const useStyles = makeStyles(() => ({
                         width: '48px',
                         height: '48px',
                         marginRight: '10px',
-                    },
-                },
+                    }
+                }
             },
             '& > div:last-child': {
                 display: 'flex',
@@ -169,11 +169,11 @@ export const useStyles = makeStyles(() => ({
                     '& a': {
                         display: 'flex',
                         alignItems: 'center',
-                    },
-                },
-            },
+                    }
+                }
+            }
         },
-        '& div.ad-category': {
+        '& div.post-category': {
             marginBottom: '40px',
             '& > p.MuiTypography-button': {
                 marginBottom: 22,
@@ -188,9 +188,9 @@ export const useStyles = makeStyles(() => ({
                     '& > span': {
                         color: '#675EAA',
                         fontWeight: '600',
-                    },
-                },
-            },
+                    }
+                }
+            }
         },
         '& div.started-price': {
             marginBottom: '40px',
@@ -204,7 +204,7 @@ export const useStyles = makeStyles(() => ({
                 borderRadius: '10px',
             },
         },
-        '& div.ad-parameters': {
+        '& div.post-parameters': {
             '& h6.key': {
                 width: '20%',
                 fontSize: '1.125rem',
@@ -262,10 +262,10 @@ export const useStyles = makeStyles(() => ({
                         display: 'flex',
                         justifyContent: 'space-between',
                         alignItems: 'center',
-                    },
-                },
-            },
-        },
+                    }
+                }
+            }
+        }
     },
     icons: {
         width: '20px',

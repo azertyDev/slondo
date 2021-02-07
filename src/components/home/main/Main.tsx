@@ -66,7 +66,6 @@ export const Main: FC = () => {
                             </Grid>
                         </Hidden>
                     </Grid>
-
                     <Hidden lgUp>
                         <div className={classes.createAdBlock}>
                             <Link href={'/post/create'}>

@@ -9,7 +9,7 @@ import {i18n} from '@root/i18n';
 import {CreatePostState, IdNameType, PostType} from "@root/interfaces/Post";
 import {PostFormContainer} from "./post_form/PostFormContainer";
 import {setErrorMsgAction} from '@root/src/redux/slices/errorSlice';
-import {PostTypesPage} from "@src/components/post/post_types_page/PostTypesPage";
+import {PostTypesPage} from "@src/components/post/create_post/post_types_page/PostTypesPage";
 import {
     dataForCrtPostNormalize,
     categoriesListNormalize,

@@ -8,7 +8,13 @@ import {useStyles} from './useStyles';
 
 
 export const ShowPost: FC<any> = (props) => {
-    const {postData: {data}, parameters, t} = props;
+    const {
+        t,
+        postData: {data},
+        parameters,
+        descHeight,
+        slidersRefs
+    } = props;
 
     const classes = useStyles();
     return (
@@ -20,6 +26,8 @@ export const ShowPost: FC<any> = (props) => {
                             t={t}
                             data={data}
                             parameters={parameters}
+                            descHeight={descHeight}
+                            slidersRefs={slidersRefs}
                         />
                     </Grid>
                     <Hidden smDown>

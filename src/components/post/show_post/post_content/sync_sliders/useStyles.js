@@ -1,4 +1,4 @@
-import { makeStyles } from '@material-ui/core/styles';
+import {makeStyles} from '@material-ui/core/styles';
 
 export const useStyles = makeStyles(() => ({
     root: {
@@ -56,10 +56,10 @@ export const useStyles = makeStyles(() => ({
                     width: 'auto !important',
                     height: '518px',
                     objectFit: 'contain',
-                    cursor: 'zoom-in',
-                },
-            },
-        },
+                    cursor: 'pointer',
+                }
+            }
+        }
     },
     secondSlider: {
         '& div.slick-slide': {

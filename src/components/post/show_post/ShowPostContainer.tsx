@@ -1,4 +1,4 @@
-import React, {FC, useEffect, useState} from 'react';
+import React, {FC, MutableRefObject, useEffect, useRef, useState} from 'react';
 import {useRouter} from 'next/router';
 import {WithT} from 'i18next';
 import {i18n} from '@root/i18n';
@@ -6,11 +6,18 @@ import {userAPI} from '@src/api/api';
 import {ShowPost} from '@src/components/post/show_post/ShowPost';
 
 
+export type SlidersRefType = {
+    slider1?: MutableRefObject<any>;
+    slider2?: MutableRefObject<any>;
+    slider3?: MutableRefObject<any>;
+    slider4?: MutableRefObject<any>;
+};
+
 export const ShowPostContainer: FC<WithT> = ({t}) => {
 
     const initValues = {id: null, name: ''};
 
-    const initialAdData = {
+    const initialPostData = {
         isFetch: false,
         error: null,
         data: {
@@ -23,7 +30,12 @@ export const ShowPostContainer: FC<WithT> = ({t}) => {
             expiration_at: null,
             number_of_views: null,
             sub_category_id: null,
-            images: [],
+            images: [{
+                id: null,
+                url: {
+                    default: ''
+                }
+            }],
             description: '',
             region: initValues,
             city: initValues,
@@ -47,12 +59,21 @@ export const ShowPostContainer: FC<WithT> = ({t}) => {
                 display_phone: '',
                 reserve_price: '',
                 price_by_now: '',
-            },
-        },
+            }
+        }
     };
 
-    const [postData, setPostData] = useState(initialAdData);
+    const initSlidersRefs: SlidersRefType = {
+        slider1: useRef(),
+        slider2: useRef(),
+        slider3: useRef(),
+        slider4: useRef()
+    };
+
+    const [postData, setPostData] = useState(initialPostData);
     const [parameters, setParameters] = useState({});
+    const [slidersRefs, setSlidersRefs] = useState(initSlidersRefs);
+    const [descHeight, setDescHeight] = useState(0);
 
     const url = useRouter().query.url as string;
     const splittedUrl = url.split('-');
@@ -60,7 +81,7 @@ export const ShowPostContainer: FC<WithT> = ({t}) => {
 
     const lang = i18n.language;
 
-    const fetchAdData = async () => {
+    const fetchPostData = async () => {
         try {
             setPostData({
                 ...postData,
@@ -75,11 +96,19 @@ export const ShowPostContainer: FC<WithT> = ({t}) => {
                 description,
                 region,
                 city,
+                available_days,
                 district,
                 ...otherData
             } = await userAPI.getAddById(params[0], lang, params[1], params[2]);
 
             setParameters(otherData.model);
+
+            if (available_days) {
+                otherData.available_days = available_days.map(day => {
+                    day.name = t(`common:${day.name}`);
+                    return day;
+                })
+            }
 
             setPostData({
                 ...postData,
@@ -94,7 +123,7 @@ export const ShowPostContainer: FC<WithT> = ({t}) => {
                     city: city ?? initValues,
                     district: district ?? initValues,
                     ...otherData,
-                },
+                }
             });
         } catch (e) {
             setPostData({
@@ -105,11 +134,22 @@ export const ShowPostContainer: FC<WithT> = ({t}) => {
     };
 
     useEffect(() => {
-        fetchAdData();
-    }, [lang])
+        fetchPostData();
+    }, [lang]);
+
+    useEffect(() => {
+        setSlidersRefs(initSlidersRefs);
+    }, []);
+
+    useEffect(() => {
+        const height = document.getElementById('post-description').clientHeight;
+        setDescHeight(height);
+    }, [postData]);
 
     return <ShowPost
         t={t}
+        slidersRefs={slidersRefs}
+        descHeight={descHeight}
         postData={postData}
         parameters={parameters}
     />

@@ -164,3 +164,26 @@ export const categorySearchHelper = (txt: string, categoryList: CategoryType[]):
         return matchedCtgrs;
     }
 };
+
+export const weekDaysHelper = (days) => {
+    const daysLen = days.length;
+    let isInOrder: boolean;
+    let result = '';
+
+    if (daysLen > 3) {
+        isInOrder = days.every(
+            ({id}, i) => days[i + 1] ? (id + 1 - days[i + 1].id) === 0 : true
+        );
+
+        if (isInOrder) {
+            result = `${days[0].name} - ${days[daysLen - 1].name}`;
+        } else {
+            result = days.map(day => day.name).join(', ');
+        }
+
+    } else {
+        result = `${days[0].name}${days[1] ? `, ${days[1].name}` : ''}`;
+    }
+
+    return result;
+};

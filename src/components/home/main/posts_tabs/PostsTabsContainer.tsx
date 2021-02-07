@@ -30,7 +30,7 @@ export const PostsTabsContainer: FC<WithT> = (props) => {
     const [ancmntCurrentPage, setAncmntCurrentPage] = useState(1);
     const [auctionCurrentPage, setAuctionCurrentPage] = useState(1);
 
-    const [ancmntCardData, setAncmntCardData] = useState(initCardData);
+    const [postCardData, setPostCardData] = useState(initCardData);
     const [auctionCardData, setAuctionCardData] = useState(initCardData);
 
     const setCardData = async (state, setState, currentPage, type, isShowMore = false) => {
@@ -69,7 +69,7 @@ export const PostsTabsContainer: FC<WithT> = (props) => {
         if (tabValue === 0) {
             const nextAncmntPage = ancmntCurrentPage + 1;
             setAncmntCurrentPage(nextAncmntPage);
-            setCardData(ancmntCardData, setAncmntCardData, nextAncmntPage, 'post', true);
+            setCardData(postCardData, setPostCardData, nextAncmntPage, 'post', true);
         } else {
             const nextAuctionPage = auctionCurrentPage + 1;
             setAuctionCurrentPage(nextAuctionPage);
@@ -80,7 +80,7 @@ export const PostsTabsContainer: FC<WithT> = (props) => {
     useEffect(() => {
         ancmntCurrentPage !== 1 && setAncmntCurrentPage(1);
         auctionCurrentPage !== 1 && setAuctionCurrentPage(1);
-        setCardData(ancmntCardData, setAncmntCardData, 1, 'post');
+        setCardData(postCardData, setPostCardData, 1, 'post');
         setCardData(auctionCardData, setAuctionCardData, 1, 'auc');
     }, [lang]);
 
@@ -88,7 +88,7 @@ export const PostsTabsContainer: FC<WithT> = (props) => {
         <PostsTabs
             t={props.t}
             tabValue={tabValue}
-            ancmntCardData={ancmntCardData}
+            postCardData={postCardData}
             auctionCardData={auctionCardData}
             handleTabChange={handleTabChange}
             handleShowMore={handleShowMore}

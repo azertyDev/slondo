@@ -93,8 +93,8 @@ export const PostFormContainer: FC<PostFormContainerProps & WithT> = (props) => 
             currency: postType.currency[0],
             avalTime: {
                 isActive: false,
-                start_time: '00:00',
-                end_time: '00:00',
+                start_time: '09:00',
+                end_time: '18:00',
                 available_days: weekDays,
             }
         },
@@ -132,13 +132,14 @@ export const PostFormContainer: FC<PostFormContainerProps & WithT> = (props) => 
     const {postParams, defaultParams, auction} = values;
     const postParamsByMark = postParams[mark];
 
-    const preparedValues = () => {
+    const prepareValues = () => {
         const {
             price,
             phone,
             currency,
             location,
             avalTime: {
+                isActive,
                 start_time,
                 end_time,
                 available_days
@@ -151,14 +152,19 @@ export const PostFormContainer: FC<PostFormContainerProps & WithT> = (props) => 
             ...location,
             phone,
             price: price.replace(whiteSpacesRegEx, ''),
-            start_time,
-            end_time,
-            available_days,
             currency_id: currency.id,
             [mark]: {
                 [`${mark}_id`]: secCtgr.id
             }
         };
+
+        if (isActive) {
+            if (!!available_days.length) {
+                valsForCrtPost.available_days = available_days;
+            }
+            valsForCrtPost.start_time = start_time;
+            valsForCrtPost.end_time = end_time;
+        }
 
         Object.keys(postParamsByMark).map(k => {
             if (postParamsByMark[k]) {
@@ -256,7 +262,7 @@ export const PostFormContainer: FC<PostFormContainerProps & WithT> = (props) => 
 
                 files.forEach(({file}: any) => file && form.append('files[]', file, file.name));
 
-                const valsForCrtPost = preparedValues();
+                const valsForCrtPost = prepareValues();
                 const postId = await userAPI.createPost(valsForCrtPost);
 
                 form.set('ads_id', postId.toString());

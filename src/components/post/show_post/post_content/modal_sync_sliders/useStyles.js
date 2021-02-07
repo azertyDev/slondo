@@ -2,7 +2,9 @@ import {makeStyles} from '@material-ui/core/styles';
 
 export const useStyles = makeStyles(() => ({
     modal: {
-        backgroundColor: 'rgba(0, 0, 0, 0.9)',
+        '& > div:first-child': {
+            backgroundColor: 'rgba(0, 0, 0, 0.9) !important',
+        }
     },
     root: {
         position: 'relative',
@@ -34,6 +36,9 @@ export const useStyles = makeStyles(() => ({
                 display: 'flex',
                 justifyContent: 'center',
                 '& figure.image-zoom': {
+                    '& img.iiz__img, & img.iiz__zoom-img': {
+                        visibility: 'inherit'
+                    },
                     '& img.iiz__img': {
                         height: '580px',
                         objectFit: 'contain'

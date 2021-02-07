@@ -18,7 +18,7 @@ type MainContentProps = {
     tabValue: number;
     handleTabChange: (_: unknown, newValue: number) => void;
     handleShowMore: () => void;
-    ancmntCardData: CardData;
+    postCardData: CardData;
     auctionCardData: CardData;
 } & WithT;
 
@@ -28,11 +28,11 @@ export const PostsTabs: FC<MainContentProps> = (props) => {
         tabValue,
         handleTabChange,
         handleShowMore,
-        ancmntCardData,
+        postCardData,
         auctionCardData,
     } = props;
 
-    const isAncmntsExist = ancmntCardData.data.total > ancmntCardData.data.cards.length && tabValue === 0;
+    const isAncmntsExist = postCardData.data.total > postCardData.data.cards.length && tabValue === 0;
     const isAuctionsExist = auctionCardData.data.total > auctionCardData.data.cards.length && tabValue === 1;
 
     const classes = useStyles();
@@ -58,13 +58,13 @@ export const PostsTabs: FC<MainContentProps> = (props) => {
             </Tabs>
             <div className="tabs-content">
                 <CustomTabPanel value={tabValue} index={0}>
-                    {ancmntCardData.error
+                    {postCardData.error
                         ? <Typography variant="subtitle1" className="error-text">
-                            {ancmntCardData.error}
+                            {postCardData.error}
                         </Typography>
                         : <CardView
-                            list={ancmntCardData.data.cards}
-                            isFetch={ancmntCardData.isFetch}
+                            list={postCardData.data.cards}
+                            isFetch={postCardData.isFetch}
                         />}
                 </CustomTabPanel>
                 <CustomTabPanel value={tabValue} index={1}>
@@ -81,11 +81,11 @@ export const PostsTabs: FC<MainContentProps> = (props) => {
             {(isAncmntsExist || isAuctionsExist)
             && <Grid container className={classes.showMoreContainer}>
                 <Grid item xs={12} className="show-more-block">
-                    {ancmntCardData.isShowMoreFetch || auctionCardData.isShowMoreFetch
+                    {postCardData.isShowMoreFetch || auctionCardData.isShowMoreFetch
                         ? <CircularProgress size={25}/>
                         : <ButtonComponent onClick={handleShowMore}>
                             <Typography variant="subtitle2" color="initial">
-                                {t('showMore')}
+                                {t('common:showMore')}
                             </Typography>
                         </ButtonComponent>}
                 </Grid>

@@ -12,11 +12,19 @@ import {SyncSliders} from './sync_sliders/SyncSliders';
 import {ModalSyncSliders} from './modal_sync_sliders/ModalSyncSliders';
 import {BreadcrumbsComponent} from '@src/components/elements/breadcrumbs/Breadcrumbs';
 import {Link} from '@root/i18n';
-import {pricePrettier} from '@root/src/helpers';
+import {pricePrettier, weekDaysHelper} from '@root/src/helpers';
 import {useStyles} from './useStyles';
 
 
-export const PostContent: FC<WithT & any> = ({data, parameters, t}) => {
+export const PostContent: FC<WithT & any> = (props) => {
+    const {
+        t,
+        data,
+        slidersRefs,
+        parameters,
+        descHeight,
+    } = props;
+
     const date = new Date(data.created_at);
 
     const months = [
@@ -33,6 +41,7 @@ export const PostContent: FC<WithT & any> = ({data, parameters, t}) => {
         'ноября',
         'декабря',
     ];
+
     const excludedFields = [
         'id',
         'type',
@@ -41,12 +50,12 @@ export const PostContent: FC<WithT & any> = ({data, parameters, t}) => {
         'color_id',
         'type_id',
     ];
+
     const formatted_date = `${date.getDate()} ${months[date.getMonth()]} ${date.getFullYear()}`;
 
     const [open, setOpen] = useState(false);
-    const [currentSlide, setCurrentSlide] = useState(0);
 
-    const handleShowModal = (value) => () => setOpen(value);
+    const handleShowModal = value => () => setOpen(value);
 
     const parameterItems = Object.keys(parameters).reduce((items, key, i) => {
         if (parameters[key] !== null && excludedFields.every((k) => k !== key)) {
@@ -66,13 +75,13 @@ export const PostContent: FC<WithT & any> = ({data, parameters, t}) => {
                             {key}
                         </Typography>
                         <ul>{params}</ul>
-                    </div>,
+                    </div>
                 );
             } else if (!Array.isArray(parameters[key])) {
                 items.push(
                     <li key={key}>
                         <Typography variant="subtitle1" className="key">
-                            {t(`${key}`)}
+                            {t(key)}
                         </Typography>
                         {parameters[key].hex_color_code
                         && <span
@@ -86,14 +95,12 @@ export const PostContent: FC<WithT & any> = ({data, parameters, t}) => {
                             }}
                         />}
                         <Typography variant="subtitle1" className="value">
-                            {
-                                typeof parameters[key] === 'string'
-                                || typeof parameters[key] === 'number'
-                                    ? parameters[key]
-                                    : parameters[key].name
-                            }
+                            {typeof parameters[key] === 'string'
+                            || typeof parameters[key] === 'number'
+                                ? parameters[key]
+                                : parameters[key].name}
                         </Typography>
-                    </li>,
+                    </li>
                 );
             }
         }
@@ -132,25 +139,19 @@ export const PostContent: FC<WithT & any> = ({data, parameters, t}) => {
                         variant="subtitle1"
                         color="primary"
                         noWrap
-                        style={{ width: '280px' }}
+                        style={{width: '280px'}}
                     >
                         {data.title}
                     </Typography>
                 </BreadcrumbsComponent>
             </div>
-            <div className="adv-header">
+            <div className="post-header">
                 <div>
                     <Typography
                         variant="h6"
-                        className={
-                            data.ads_type.id === 1
-                                ? 'post'
-                                : data.ads_type.id === 2
-                                ? 'auc'
-                                : 'exauc'
-                        }
+                        className={data.ads_type.mark}
                     >
-                        {data.ads_type.name}
+                        {t(`common:${data.ads_type.mark}`)}
                     </Typography>
                 </div>
                 <div className="title">
@@ -163,11 +164,11 @@ export const PostContent: FC<WithT & any> = ({data, parameters, t}) => {
                 </div>
             </div>
             <SyncSliders
+                slidersRefs={slidersRefs}
                 imgs={data.images}
-                setCurrentSlide={setCurrentSlide}
                 handleOpenModal={handleShowModal(true)}
             />
-            <div className="ad-info">
+            <div className="post-info">
                 <Typography variant="subtitle1">
                     <span>Объявление №:</span> {data.id}
                 </Typography>
@@ -181,7 +182,7 @@ export const PostContent: FC<WithT & any> = ({data, parameters, t}) => {
                     Пожаловаться <WarningIcon/>
                 </Typography>
             </div>
-            <div className="ad-bonus">
+            <div className="post-bonus">
                 {
                     !!data.delivery
                     && <span className="delivery">
@@ -213,19 +214,22 @@ export const PostContent: FC<WithT & any> = ({data, parameters, t}) => {
                     !!data.available_start_time
                     && <span className="available">
                         <PhoneIcon/>
-                        <Typography variant="subtitle1" color="primary">
-                            {data.available_days.map((k) =>
-                                t(`common:${k.name}`),
-                            )}
-                        </Typography>
-                        &nbsp;
+                        {
+                            !!data.available_days.length
+                            && <>
+                                <Typography variant="subtitle1" color="primary">
+                                    {weekDaysHelper(data.available_days)}
+                                </Typography>
+                                &nbsp;&nbsp;
+                            </>
+                        }
                         <Typography variant="subtitle1">
-                            {data.available_start_time} -{' '}{data.available_end_time}
+                            {`${data.available_start_time} - ${data.available_end_time}`}
                         </Typography>
                     </span>
                 }
             </div>
-            <div className="ad-location">
+            <div className="post-location">
                 <Typography variant="button" noWrap>
                     Местоположение
                 </Typography>
@@ -238,7 +242,7 @@ export const PostContent: FC<WithT & any> = ({data, parameters, t}) => {
                     </Typography>
                     : <Typography variant="subtitle1">Не указано</Typography>}
             </div>
-            <div className="ad-category">
+            <div className="post-category">
                 <Typography variant="button" color="initial">
                     Категория
                 </Typography>
@@ -250,23 +254,19 @@ export const PostContent: FC<WithT & any> = ({data, parameters, t}) => {
                     </Typography>
                 </div>
             </div>
-            <div className="ad-description">
+            <div className="post-description">
                 <Typography variant="button" color="initial">
                     Описание
                 </Typography>
-                {data.description.length < 420
-                    ? <Typography variant="subtitle1" color="initial">
+                <ReadMore t={t} descHeight={descHeight}>
+                    <Typography
+                        className='description'
+                        variant="subtitle1"
+                        id="post-description"
+                    >
                         {data.description}
                     </Typography>
-                    : <ReadMore {...data}>
-                        <Typography
-                            variant="subtitle1"
-                            color="initial"
-                            id="description"
-                        >
-                            {data.description}
-                        </Typography>
-                    </ReadMore>}
+                </ReadMore>
             </div>
             {
                 (data.ads_type.mark === 'auc' || data.ads_type.mark === 'exauc')
@@ -280,18 +280,17 @@ export const PostContent: FC<WithT & any> = ({data, parameters, t}) => {
                 </div>
             }
             {!!parameterItems.length
-            && <div className="ad-parameters">
+            && <div className="post-parameters">
                 <Typography variant="button" color="initial">
                     Параметры
                 </Typography>
                 <ul>{parameterItems}</ul>
             </div>}
             <ModalSyncSliders
+                slidersRefs={slidersRefs}
                 open={open}
                 title={data.title}
                 imgs={data.images}
-                currentSlide={currentSlide}
-                setCurrentSlide={setCurrentSlide}
                 onClose={handleShowModal(false)}
             />
         </div>

@@ -1,14 +1,10 @@
-import React, {
-    FC,
-    Dispatch,
-    SetStateAction,
-    useRef
-} from 'react';
+import React, {FC, useState} from 'react';
 import InnerImageZoom from 'react-inner-image-zoom';
 import {CustomSlider} from '@src/components/elements/custom_slider/CustomSlider';
 import {Container, IconButton, Modal, Typography} from '@material-ui/core';
 import {ButtonComponent} from '@src/components/elements/button/Button';
 import {CloseIcon} from '@root/src/components/elements/icons';
+import {SlidersRefType} from "../../ShowPostContainer";
 import {useStyles} from './useStyles';
 
 
@@ -16,46 +12,52 @@ type SyncSlidersProps = {
     open: boolean;
     title: string;
     onClose: () => void;
-    currentSlide: number;
-    setCurrentSlide: Dispatch<SetStateAction<number>>;
     imgs: {
         alt: string;
         url: { default: string };
     }[];
+    slidersRefs: SlidersRefType;
 };
 
 export const ModalSyncSliders: FC<SyncSlidersProps> = (props) => {
     const {
         open,
+        slidersRefs,
         onClose,
         title,
         imgs,
-        currentSlide,
-        setCurrentSlide
     } = props;
+
+    const {
+        slider1,
+        slider3,
+        slider4
+    } = slidersRefs;
 
     const imgsCount = !!imgs.length ? imgs.length : 1;
 
-    const {nav1, nav2} = {
-        nav1: useRef<any>(),
-        nav2: useRef<any>()
-    };
+    const [curState, setCurState] = useState(1);
 
-    const handleAfterChange = slide => {
-        setCurrentSlide(slide);
+    const handleBeforeSlide = (_, index) => {
+        setCurState(index + 1);
     };
 
     const prev = () => {
-        nav2 && nav2.current.slickPrev();
+        slider3 && slider3.current.slickPrev();
     };
 
     const next = () => {
-        nav2 && nav2.current.slickNext();
+        slider3 && slider3.current.slickNext();
     };
 
     const classes = useStyles();
     return (
-        <Modal open={open} onClose={onClose} className={classes.modal}>
+        <Modal
+            open={open}
+            onClose={onClose}
+            className={classes.modal}
+            keepMounted
+        >
             <div className={classes.root}>
                 <IconButton onClick={onClose}>
                     <CloseIcon/>
@@ -65,34 +67,29 @@ export const ModalSyncSliders: FC<SyncSlidersProps> = (props) => {
                 </Typography>
                 <div className={classes.firstSlider}>
                     <CustomSlider
-                        ref={nav1}
-                        asNavFor={nav2.current}
+                        ref={slider3}
+                        asNavFor={slider4.current}
                         centerMode={true}
-                        initialSlide={currentSlide}
-                        slidesToShow={1}
-                        afterChange={handleAfterChange}
                     >
                         {imgs.map((img, i) =>
                             <InnerImageZoom
                                 key={i}
-                                className="image-zoom"
-                                src={img.url.default}
-                                fullscreenOnMobile={true}
                                 moveType="drag"
                                 zoomScale={1.7}
+                                src={img.url.default}
+                                className="image-zoom"
+                                fullscreenOnMobile={true}
                             />
                         )}
                     </CustomSlider>
                 </div>
                 <Container maxWidth='lg' className={classes.secondSlider}>
                     <CustomSlider
-                        ref={nav2}
-                        asNavFor={nav1.current}
+                        ref={slider4}
+                        asNavFor={slider1.current}
                         arrows={false}
                         focusOnSelect={true}
-                        slidesToScroll={1}
-                        initialSlide={currentSlide}
-                        afterChange={handleAfterChange}
+                        beforeChange={handleBeforeSlide}
                         slidesToShow={imgsCount > 3 ? 4 : imgsCount}
                     >
                         {imgs.map(({url, alt}, i) =>
@@ -102,7 +99,7 @@ export const ModalSyncSliders: FC<SyncSlidersProps> = (props) => {
                     <div className="slider-counter">
                         <ButtonComponent onClick={prev}>&lt;</ButtonComponent>
                         <Typography variant="subtitle1">
-                            {currentSlide + 1} / {imgs.length}
+                            {curState} / {imgsCount}
                         </Typography>
                         <ButtonComponent onClick={next}>&gt;</ButtonComponent>
                     </div>

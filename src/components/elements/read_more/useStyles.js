@@ -1,6 +1,6 @@
 import { makeStyles } from '@material-ui/core';
 
-export const useStyles = makeStyles((theme) => ({
+export const useStyles = makeStyles(() => ({
     root: {
         '& h6.MuiTypography-subtitle1': {
             lineHeight: '22px',
@@ -15,9 +15,9 @@ export const useStyles = makeStyles((theme) => ({
                 color: '#675EAA',
                 '& > svg': {
                     marginLeft: '20px',
-                },
-            },
-        },
+                }
+            }
+        }
     },
     hidden: {
         display: '-webkit-box',
