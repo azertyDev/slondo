@@ -1,4 +1,4 @@
-import React, { FC, useState } from 'react';
+import React, { FC, useState, useEffect } from 'react';
 import { Hidden, NativeSelect, Typography } from '@material-ui/core';
 import { SearchIcon, FilterIcon } from '../icons';
 import { ButtonComponent } from '../button/Button';

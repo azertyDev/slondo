@@ -53,7 +53,7 @@ export const CategoriesSlider: FC<WithT> = ({ t }) => {
                                     />
                                 </div>
                             ) : (
-                                <Link href="#" key={category.id}>
+                                <Link href={`categories/${category.mark}`} key={category.id}>
                                     <a title={category.name}>
                                         <div className="category">
                                             <div className="bg-layer">
