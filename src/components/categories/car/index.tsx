@@ -1,6 +1,7 @@
 import React from 'react'
 import {MainLayout} from "@src/components/MainLayout";
 import {useStyles} from './useStyles'
+import Filter from "@src/components/categories/car/filter";
 
 const Car = () => {
 
@@ -9,7 +10,7 @@ const Car = () => {
     return (
         <MainLayout title="Автомобили">
             <div className={classes.root}>
-                Car
+                <Filter />
             </div>
         </MainLayout>
     )
