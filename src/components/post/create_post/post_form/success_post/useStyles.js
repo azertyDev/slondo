@@ -1,32 +1,41 @@
-import {makeStyles} from '@material-ui/core/styles'
+import { makeStyles } from '@material-ui/core/styles';
 
 export const useStyles = makeStyles((theme) => ({
     root: {
+        '& h5.MuiTypography-h5': {
+            fontWeight: 600,
+        },
         '& a': {
             textDecoration: 'none',
+            color: theme.palette.primary.secondary,
         },
     },
-    title: {margin: '45px 0'},
     paper: {
         display: 'flex',
         alignItems: 'center',
+        justifyContent: 'center',
         minHeight: '200px',
         marginBottom: '30px',
         '& h6.MuiTypography-subtitle2': {
             fontSize: '1rem',
         },
     },
-    successIcon: {
-        marginRight: '20px',
-        fontSize: '40px',
-    },
-    buttonBlock: {
-        marginBottom: '50px',
-    },
     successInfo: {
         display: 'flex',
         flexDirection: 'row',
-        marginLeft: '50px',
-        
     },
-}))
+    successIcon: {
+        fontSize: 30,
+        marginRight: 25,
+        '& > path': {
+            fill: '#27AE60',
+        },
+    },
+    buttonBlock: {
+        '& button.MuiButtonBase-root': {
+            width: '100%',
+            borderRadius: 5,
+            background: theme.palette.primary.createAdBtnColor,
+        },
+    },
+}));

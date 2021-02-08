@@ -72,7 +72,7 @@ export const CreatePost: FC<CreatePostProps & WithT> = (props) => {
                                             : ''
                                     }
                                 >
-                                    {ctgr.smallIcon}
+                                    {ctgr.icon}
                                     <Typography
                                         variant="subtitle1"
                                         color="initial"

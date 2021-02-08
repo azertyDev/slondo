@@ -13,11 +13,16 @@ export const useStyles = makeStyles((theme) => ({
                 alignItems: 'center',
                 borderRadius: '25px',
                 boxShadow: '0px 2px 8px rgba(0, 0, 0, 0.2)',
-                cursor: 'pointer',
-                '& > div': {
+                background:
+                    'linear-gradient(49.94deg, #dcf3fc 19.03%, #a9bdf2 72.72%)',
+                '& > div.card-bg': {
                     textAlign: 'center',
-                    marginTop: '35px',
+                    height: '100%',
+                    backgroundPosition: 'center',
+                    backgroundRepeat: 'no-repeat',
+                    backgroundSize: 'contain',
                     '& h6.MuiTypography-subtitle1': {
+                        marginTop: '35px',
                         fontSize: '1.875rem',
                         color: '#fff',
                         fontWeight: '600',
@@ -31,7 +36,7 @@ export const useStyles = makeStyles((theme) => ({
                     },
                 },
                 '& > button': {
-                    backgroundColor: '#fff',
+                    background: '#fff',
                     borderRadius: '100px',
                     width: '76%',
                     margin: '0 55px 35px',

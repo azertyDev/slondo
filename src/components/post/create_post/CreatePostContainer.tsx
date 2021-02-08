@@ -346,11 +346,13 @@ export const CreatePostContainer: FC<WithT> = ({ t }) => {
     return (
         <MainLayout>
             <>
-                <PostHeader
-                    steps={steps}
-                    activeStep={activeStep}
-                    handleBackBtn={handleBackBtn}
-                />
+                {activeStep !== 4 && (
+                    <PostHeader
+                        steps={steps}
+                        activeStep={activeStep}
+                        handleBackBtn={handleBackBtn}
+                    />
+                )}
                 <>
                     {activeStep === 0 && (
                         <PostTypesPage

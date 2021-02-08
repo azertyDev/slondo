@@ -11,28 +11,39 @@ import {
     HobbyIcon,
     AnimalsIcon,
     ForFreeIcon,
+    Car,
+    Motorcycle,
+    Estate,
+    Job,
+    Service,
+    Home,
+    Hobby,
+    Free,
+    Animals,
+    Goods,
 } from '@src/components/elements/icons';
 
-const Car = '/img/categories_img/car.png';
-const Transport = '/img/categories_img/transport.png';
-const Parts = '/img/categories_img/parts.png';
-const Estate = '/img/categories_img/estate.png';
-const Job = '/img/categories_img/job.png';
-const Service = '/img/categories_img/service.png';
-const Goods = '/img/categories_img/goods.png';
-const Home = '/img/categories_img/home.png';
-const Electronics = '/img/categories_img/electronics.png';
-const Hobbies = '/img/categories_img/hobbies.png';
-const Animal = '/img/categories_img/animal.png';
-const Free = '/img/categories_img/free.png';
+const CarImage = '/img/categories_img/car.png';
+const TransportImage = '/img/categories_img/transport.png';
+const PartsImage = '/img/categories_img/parts.png';
+const EstateImage = '/img/categories_img/estate.png';
+const JobImage = '/img/categories_img/job.png';
+const ServiceImage = '/img/categories_img/service.png';
+const GoodsImage = '/img/categories_img/goods.png';
+const HomeImage = '/img/categories_img/home.png';
+const ElectronicsImage = '/img/categories_img/electronics.png';
+const HobbiesImage = '/img/categories_img/hobbies.png';
+const AnimalImage = '/img/categories_img/animal.png';
+const FreeImage = '/img/categories_img/free.png';
 
 export const categories_list = [
     {
         id: 1,
         name: 'car',
         has_auction: false,
-        icon: { url: Car },
-        smallIcon: <CarIcon />,
+        image: { url: CarImage },
+        colorIcon: <Car />,
+        icon: <CarIcon />,
         model: [
             {
                 id: 1,
@@ -45,8 +56,9 @@ export const categories_list = [
         id: 2,
         name: 'transport',
         has_auction: false,
-        icon: { url: Transport },
-        smallIcon: <SpecTechIcon />,
+        image: { url: TransportImage },
+        colorIcon: <Motorcycle />,
+        icon: <SpecTechIcon />,
         model: [
             {
                 id: 1,
@@ -66,8 +78,9 @@ export const categories_list = [
         id: 3,
         name: 'parts',
         has_auction: false,
-        icon: { url: Parts },
-        smallIcon: <PartsIcon />,
+        image: { url: PartsImage },
+        colorIcon: <PartsIcon />,
+        icon: <PartsIcon />,
         model: [
             {
                 id: 1,
@@ -81,8 +94,9 @@ export const categories_list = [
         id: 4,
         name: 'estate',
         has_auction: false,
-        icon: { url: Estate },
-        smallIcon: <ApartmentsIcon />,
+        image: { url: EstateImage },
+        colorIcon: <Estate />,
+        icon: <ApartmentsIcon />,
         model: [
             {
                 id: 1,
@@ -105,8 +119,9 @@ export const categories_list = [
         id: 5,
         name: 'job',
         has_auction: false,
-        icon: { url: Job },
-        smallIcon: <JobIcon />,
+        image: { url: JobImage },
+        colorIcon: <Job />,
+        icon: <JobIcon />,
         model: [
             {
                 id: 1,
@@ -129,8 +144,9 @@ export const categories_list = [
         id: 6,
         name: 'service',
         has_auction: false,
-        icon: { url: Service },
-        smallIcon: <ServicesIcon />,
+        image: { url: ServiceImage },
+        colorIcon: <Service />,
+        icon: <ServicesIcon />,
         model: [
             {
                 id: 1,
@@ -153,8 +169,9 @@ export const categories_list = [
         id: 7,
         name: 'goods',
         has_auction: false,
-        icon: { url: Goods },
-        smallIcon: <HangerIcon />,
+        image: { url: GoodsImage },
+        colorIcon: <Goods />,
+        icon: <HangerIcon />,
         model: [
             {
                 id: 1,
@@ -177,8 +194,9 @@ export const categories_list = [
         id: 8,
         name: 'home',
         has_auction: false,
-        icon: { url: Home },
-        smallIcon: <SofaIcon />,
+        image: { url: HomeImage },
+        colorIcon: <Home />,
+        icon: <SofaIcon />,
         model: [
             {
                 id: 1,
@@ -201,8 +219,9 @@ export const categories_list = [
         id: 9,
         name: 'electronics',
         has_auction: false,
-        icon: { url: Electronics },
-        smallIcon: <ElectronicIcon />,
+        image: { url: ElectronicsImage },
+        colorIcon: <ElectronicIcon />,
+        icon: <ElectronicIcon />,
         model: [
             {
                 id: 1,
@@ -225,8 +244,9 @@ export const categories_list = [
         id: 10,
         name: 'hobbies',
         has_auction: false,
-        icon: { url: Hobbies },
-        smallIcon: <HobbyIcon />,
+        image: { url: HobbiesImage },
+        colorIcon: <Hobby />,
+        icon: <HobbyIcon />,
         model: [
             {
                 id: 1,
@@ -240,8 +260,9 @@ export const categories_list = [
         id: 11,
         name: 'animal',
         has_auction: false,
-        icon: { url: Animal },
-        smallIcon: <AnimalsIcon />,
+        image: { url: AnimalImage },
+        colorIcon: <Animals />,
+        icon: <AnimalsIcon />,
         model: [
             {
                 id: 1,
@@ -254,7 +275,8 @@ export const categories_list = [
         id: 12,
         name: 'free',
         has_auction: false,
-        icon: { url: Free },
-        smallIcon: <ForFreeIcon />,
+        image: { url: FreeImage },
+        colorIcon: <Free />,
+        icon: <ForFreeIcon />,
     },
 ];

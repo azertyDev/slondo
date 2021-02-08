@@ -11,9 +11,7 @@ import { categories_list } from '@src/components/common_data/categoriesList';
 import { useStyles } from './useStyles';
 
 export const CategoriesSlider: FC<WithT> = ({ t }) => {
-    const { isFetch, error, list } = useSelector(
-        (store: RootState) => store.categories,
-    );
+    const { error } = useSelector((store: RootState) => store.categories);
 
     const dispatch = useDispatch();
 
@@ -36,7 +34,7 @@ export const CategoriesSlider: FC<WithT> = ({ t }) => {
                                     <div className="bg-layer">
                                         <div className="medium">
                                             <img
-                                                src={category.icon.url}
+                                                src={category.image.url}
                                                 alt={category.name}
                                             />
                                         </div>
