@@ -4,10 +4,9 @@ export const useStyles = makeStyles(() => ({
     root: {
         width: '100%',
         height: 'auto',
-        position: 'relative',
-        display: 'flex',
         background: '#F7F7F7',
         borderRadius: 10,
+        padding: 15,
         '& > img.search-icon': {
             width: 18,
             height: 18,

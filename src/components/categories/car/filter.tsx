@@ -1,5 +1,6 @@
 import React, {FC} from 'react'
-import Dropdown from '../../elements/fields/dropdown'
+import Dropdown from '../../elements/fields/Dropdown'
+import FromTo from '../../elements/fields/FromTo'
 import Grid from '@material-ui/core/Grid';
 import {Button} from "@material-ui/core";
 
@@ -17,7 +18,7 @@ const Filter: FC = () => {
                 <Dropdown title="Позиция" />
             </Grid>
             <Grid item sm={3}>
-                <Dropdown title="От и До" />
+                <FromTo />
             </Grid>
             <Grid item sm={3}>
                 <Dropdown title="Год выпуска" />
@@ -29,12 +30,14 @@ const Filter: FC = () => {
                 <Dropdown title="Пробег От и До" />
             </Grid>
             <Grid item sm={4}>
-                <Button variant="contained" color="primary">
-                    Применить
-                </Button>
-                <Button variant="contained">
-                    Сбросить
-                </Button>
+                <div>
+                    <Button variant="contained" color="primary">
+                        Применить
+                    </Button>
+                    <Button variant="contained">
+                        Сбросить
+                    </Button>
+                </div>
             </Grid>
         </Grid>
     )
