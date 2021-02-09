@@ -7,22 +7,20 @@ import Select from '@material-ui/core/Select';
 import {CustomInput} from './useStyles'
 
 
-const Dropdown = ({title}) => {
-    const [age, setAge] = useState(10)
+const Dropdown = ({title, parentCallback}) => {
+    const [age, setAge] = useState(undefined)
 
-    const handleChange = (event) => {
-        setAge(event.target.value)
+    const onTrigger = (event) => {
+        parentCallback(event.target.value);
     }
-
     return (
         <div>
             <FormControl fullWidth>
-                <InputLabel id="demo-customized-select-label">{title}</InputLabel>
+                <div>{title}</div>
                 <Select
-                    labelId="demo-customized-select-label"
                     id="demo-customized-select"
                     value={age}
-                    onChange={handleChange}
+                    onChange={onTrigger}
                     input={<CustomInput />}
                 >
                     <MenuItem value={10}>Ten</MenuItem>
