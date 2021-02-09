@@ -107,7 +107,7 @@ export const Footer: FC = () => {
                                         </Link>
                                     </li>
                                     <li>
-                                        <Link href="#">
+                                        <Link href="/sitemap">
                                             <a>
                                                 <Typography
                                                     variant="subtitle1"

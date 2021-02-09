@@ -17,13 +17,13 @@ export const PostTypesPage: FC<PostTypesPageProps & WithT> = ({handlePostType, t
                 {postTypes.map((anType, i) => {
                     return (
                         <Grid item xs={4} key={i}>
-                            <ButtonBase
-                                onClick={handlePostType(anType)}
-                                style={{
-                                    backgroundImage: `url(${anType.image.url})`,
-                                }}
-                            >
-                                <div>
+                            <ButtonBase onClick={handlePostType(anType)}>
+                                <div
+                                    style={{
+                                        backgroundImage: `url(${anType.image.url})`,
+                                    }}
+                                    className='card-bg'
+                                >
                                     <Typography variant="subtitle1">
                                         {t(`common:${anType.name}`)}
                                     </Typography>
