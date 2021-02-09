@@ -1,4 +1,7 @@
 {
+  "signIn": "Kirish",
+  "signOut": "Chiqish",
+  "signOutFromSite": "Saitdan chiqishini holisizmi?",
   "bonus": "Ro'yxatdan o'tish, e'lonlar yoki savdo yaratish uchun bonuslarni oling.",
   "safeBuying": "Xavfsiz xariddan foydalaning. Mahsulotingizni eshigizni tagiga yetkazamiz.",
   "createAd": "E'lonlar yarating, sotishni tezlashtirish uchun bonuslardan foydalaning.",

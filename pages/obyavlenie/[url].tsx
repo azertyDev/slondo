@@ -7,7 +7,7 @@ const Show_advertisement = (props) => {
 };
 
 Show_advertisement.getInitialProps = async () => ({
-    namespacesRequired: ['post', 'common'],
+    namespacesRequired: ['post'],
 });
 
-export default withTranslation(['post', 'common'])(Show_advertisement);
+export default withTranslation(['post'])(Show_advertisement);

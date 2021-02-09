@@ -1,0 +1,57 @@
+{
+    "searchCategory": "Поиск категорий",
+    "howToCreatePost": "Как создать объявление?",
+    "howToCreateAuc": "Как создать аукцион?",
+    "howToCreateExAuc": "Как создать продвинутый аукцион?",
+    "trainingVideo": "Обучающее видео",
+    "maxFunctionality": "Используй максимальный функционал",
+    "tradeToGetBetter": "Торгуйте что бы получить более выгодную цену для Вас",
+    "postFree": "Размещайте товары или услуги совершенно бесплатно",
+    "postType": "Тип объявления",
+    "category": "Категория",
+    "fill": "Заполнение",
+    "check": "Проверка",
+
+    "car": "Легковые автомобили",
+    "madeInUzb": "Сделано в Узбекистане",
+    "foreignCars": "Иномарки",
+
+    "transport": "Спецтехника и транспорт",
+    "motorcyclesAndMotorTech": "Мотоциклы и мототехника",
+    "motorcycles": "Мотоциклы",
+
+    "parts": "Запчасти и аксессуары",
+    "forCars": "Для легковых автомобилей",
+
+    "estate": "Недвижимость",
+    "apartments": "Квартиры",
+    "sale": "Продажа",
+
+    "job": "Работа",
+    "vacancies": "Вакансии",
+    "autoBusiness": "Автобизнес",
+
+    "service": "Услуги",
+    "repairAndConstruction": "Ремонт и строительство",
+    "interiorDesign": "Дизайн интерьера",
+
+    "goods": "Вещи, Детские товары и украшения",
+    "womenWardrobe": "Женский гардероб",
+    "accessories": "Аксессуары",
+
+    "home": "Для дома и дачи",
+    "furnitureAndInterior": "Мебель и интерьер",
+    "sofasAndArmchairs": "Диваны и кресла",
+
+    "electronics": "Электроника",
+    "phonesAndTablets": "Телефоны и планшеты",
+    "mobilePhones": "Мобильные телефоны",
+
+    "hobbies": "Хобби и отдых",
+    "tickets": "Билеты",
+
+    "animal": "Животные",
+    "dogs": "Собаки",
+
+    "free": "Отдам даром"
+}

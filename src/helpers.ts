@@ -1,48 +1,16 @@
 import {CategoryType, SubLvlCtgrsType} from "@root/interfaces/Categories";
 import CyrillicToTranslit from 'cyrillic-to-translit-js';
+import {excludedKeys} from "@src/common_data/form_fields_list";
+import {pnctnMarksRegEx} from "@src/common_data/reg_ex";
+import {TFunction} from "i18next";
 
-
-export const whiteSpacesRegEx = /\s/g;
-export const numberRegEx = /^[0-9,\s]*$/;
-export const timeRegEx = /^([0-1]?[0-9]|2[0-3])?:([0-5][0-9]?)?$/;
-
-const excludedKeys = ['id', 'type_id', 'sub_type_id'];
-
-export const numericFields = [
-    'price',
-    'reserve_price',
-    'price_by_now',
-    'year',
-    'area',
-    'floor',
-    'general_area',
-    'kitchen_area',
-    'living_area',
-    'number_of_floors'
-];
-
-export const optionKeys = [
-    'safety',
-    'multimedia',
-    'assistant',
-    'exterior',
-    'car_climate',
-    'airbags',
-    'assistance',
-    'other',
-    'comfort',
-    'view',
-    'parking',
-    'anti_theft'
-];
 
 export const transformTitle = (title: string): string => {
     const transform = new CyrillicToTranslit().transform;
-    const formatRegEx = /[\-\,\.\;\"\']+/g;
 
     return transform(title)
         .toLowerCase()
-        .replace(formatRegEx, ' ')
+        .replace(pnctnMarksRegEx, ' ')
         .replace(/\s+/g, '-');
 };
 
@@ -53,10 +21,6 @@ export const pricePrettier = (price: string): string => {
             .replace(/\B(?=(\d{3})+(?!\d))/g, " ")
         : '';
 }
-
-export const noSelect = {id: null, name: 'Не выбрано'};
-
-export const fieldKeysWithTxt = ['area'];
 
 const addParents = (list, parents) => (
     list.map(ctgr => {
@@ -186,4 +150,26 @@ export const weekDaysHelper = (days) => {
     }
 
     return result;
+};
+
+export const categoriesTrans = (ctgrList: any[], t: TFunction) => {
+    return ctgrList.reduce((acc, ctgr) => {
+        const cloneCtgr = {
+            ...ctgr,
+            name: t(`categories:${ctgr.name}`)
+        };
+
+        if (ctgr.model) {
+            cloneCtgr.model = categoriesTrans(ctgr.model, t);
+        }
+        if (ctgr.type) {
+            cloneCtgr.type = categoriesTrans(ctgr.type, t);
+        }
+        if (ctgr.parents) {
+            cloneCtgr.parents = categoriesTrans(ctgr.parents, t);
+        }
+
+        acc.push(cloneCtgr);
+        return acc;
+    }, []);
 };

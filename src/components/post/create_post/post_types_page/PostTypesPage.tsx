@@ -1,19 +1,15 @@
-import React, { FC } from 'react';
-import { Grid, Typography, ButtonBase } from '@material-ui/core';
-import { PostType } from '@root/interfaces/Post';
-import { WithT } from 'i18next';
-import { useStyles } from './useStyles';
+import React, {FC} from 'react';
+import {Grid, Typography, ButtonBase} from '@material-ui/core';
+import {WithT} from 'i18next';
+import {useStyles} from './useStyles';
+import {postTypes} from "@src/common_data/categoriesList";
 
-type AncmntTypesPageProps = {
-    postTypes: PostType[];
+
+type PostTypesPageProps = {
     handlePostType: (ancmntType) => () => void;
 };
 
-export const PostTypesPage: FC<AncmntTypesPageProps & WithT> = ({
-    postTypes,
-    handlePostType,
-    t,
-}) => {
+export const PostTypesPage: FC<PostTypesPageProps & WithT> = ({handlePostType, t}) => {
     const classes = useStyles();
     return (
         <div className={classes.root}>
@@ -21,18 +17,18 @@ export const PostTypesPage: FC<AncmntTypesPageProps & WithT> = ({
                 {postTypes.map((anType, i) => {
                     return (
                         <Grid item xs={4} key={i}>
-                            <ButtonBase
-                                onClick={handlePostType(anType)}
-                                style={{
-                                    backgroundImage: `url(${anType.image.url})`,
-                                }}
-                            >
-                                <div>
+                            <ButtonBase onClick={handlePostType(anType)}>
+                                <div
+                                    style={{
+                                        backgroundImage: `url(${anType.image.url})`,
+                                    }}
+                                    className='card-bg'
+                                >
                                     <Typography variant="subtitle1">
                                         {t(`common:${anType.name}`)}
                                     </Typography>
                                     <Typography variant="body2">
-                                        {anType.subtitle}
+                                        {t(`categories:${anType.subtitle}`)}
                                     </Typography>
                                 </div>
                             </ButtonBase>
@@ -43,11 +39,11 @@ export const PostTypesPage: FC<AncmntTypesPageProps & WithT> = ({
                                         color="initial"
                                         className={anType.name}
                                     >
-                                        {anType.guide}
+                                        ({t(`categories:${anType.guide}`)})
                                     </Typography>
                                 </a>
                                 <Typography variant="subtitle1" color="initial">
-                                    ({t('common:trainingVideo')})
+                                    ({t('categories:trainingVideo')})
                                 </Typography>
                             </div>
                         </Grid>

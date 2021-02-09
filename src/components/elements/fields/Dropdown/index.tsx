@@ -1,13 +1,11 @@
-import React, {useState} from 'react'
-import { makeStyles, withStyles } from '@material-ui/core/styles';
-import InputLabel from '@material-ui/core/InputLabel';
+import React from 'react'
 import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import {CustomInput} from './useStyles'
 
 
-const Dropdown = ({title, parentCallback, name}) => {
+const Dropdown = ({title, parentCallback, name, data, disabled}) => {
 
     const onTrigger = (event) => {
         parentCallback(event.target.name, event.target.value);
@@ -20,10 +18,12 @@ const Dropdown = ({title, parentCallback, name}) => {
                     name={name}
                     onChange={onTrigger}
                     input={<CustomInput />}
+                    defaultValue=""
+                    disabled={disabled}
                 >
-                    <MenuItem value={10}>Ten</MenuItem>
-                    <MenuItem value={20}>Twenty</MenuItem>
-                    <MenuItem value={30}>Thirty</MenuItem>
+                    {data.map((item) => (
+                        <MenuItem value={item.id}>{item.name}</MenuItem>
+                    ))}
                 </Select>
             </FormControl>
         </div>

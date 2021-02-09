@@ -2,8 +2,8 @@ import React, {FC} from "react";
 import {Checkbox, Grid, TextField, Typography} from "@material-ui/core";
 import {isRequired} from "@root/validation_schemas/createPostSchema";
 import {CustomMenu} from "@src/components/elements/custom_menu/CustomMenu";
-import {fieldKeysWithTxt, optionKeys} from "@src/helpers";
 import {useStyles} from "./useStyles";
+import {fieldKeysWithTxt, optionKeys} from "@root/src/common_data/form_fields_list";
 
 
 export const Params: FC<any> = (props) => {

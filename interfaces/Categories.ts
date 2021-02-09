@@ -4,27 +4,34 @@ import {IdNameType} from "@root/interfaces/Post";
 export interface Categories {
     isFetch: boolean;
     error?: unknown;
-    list: CategoryType[];
+    data: CategoriesDataTypes[];
 }
-
+export type CategoriesDataTypes = {
+    id: number;
+    manufactures: [];
+    name: string;
+    defaultParams: {
+        id: number;
+        name: string;
+        adjustable_seats: AdjustableSeats[]
+    }[]
+}[];
+export type AdjustableSeats = {
+    id: number;
+    name: string;
+}[];
 export type CategoryType = {
-    mark: string;
-    image: {
-        url: string;
-    },
     icon: {
         url: string;
     },
-    model: ModelType[];
-    has_auction: number;
+    smallIcon: any;
+    model?: ModelType[];
+    has_auction: boolean;
 } & IdNameType;
 
 export type ModelType = {
     parents: IdNameType[];
-    image: {
-        url: string
-    };
-    type: IdNameType[];
+    type?: SubLvlCtgrsType[];
 } & IdNameType;
 
 export type SubLvlCtgrsType = {

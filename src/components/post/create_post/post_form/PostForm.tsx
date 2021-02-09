@@ -2,7 +2,7 @@ import React, {FC} from 'react';
 import {Grid, TextField, Typography} from '@material-ui/core';
 import {ButtonComponent} from "@src/components/elements/button/Button";
 import {CustomMenu} from "@src/components/elements/custom_menu/CustomMenu";
-import {PostAutoFormContainer} from "@src/components/post/create_post/post_form/post_auto_form/PostAutoFormContainer";
+// import {PostAutoFormContainer} from "@src/components/post/create_post/post_form/post_auto_form/PostAutoFormContainer";
 import {WithT} from "i18next";
 import {CreatePostProps} from "@root/interfaces/Post";
 import {SecLvlCtgrType} from "../post_form/PostFormContainer";

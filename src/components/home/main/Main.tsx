@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, {FC} from 'react';
 import {
     Hidden,
     Slide,
@@ -15,12 +15,12 @@ import {ScrollTop} from '@src/components/elements/scroll_top/ScrollTop';
 import {Link, useTranslation} from '@root/i18n';
 import {Banner} from "@src/components/elements/banner/Banner";
 import {FaqComponent} from "@src/components/elements/faq_component/FaqComponent";
-import { SocialsBlock } from '../../elements/socials_block/SocialsBlock';
+import {SocialsBlock} from '../../elements/socials_block/SocialsBlock';
 import {useStyles} from './useStyles';
 
 
 export const Main: FC = () => {
-    const { t } = useTranslation(['main', 'common']);
+    const {t} = useTranslation(['main']);
 
     const trigger = useScrollTrigger();
 
@@ -29,11 +29,11 @@ export const Main: FC = () => {
         <main>
             <div className={classes.root}>
                 <div className="main-slider-wrapper">
-                    <MainSlider />
+                    <MainSlider/>
                 </div>
                 <Container maxWidth="xl" className="content-wrapper">
                     <div className="categories-slider-wrapper">
-                        <CategoriesSlider t={t} />
+                        <CategoriesSlider t={t}/>
                     </div>
                     <Grid container>
                         <Grid item lg={9} xs={12} className='main-content'>
@@ -47,11 +47,11 @@ export const Main: FC = () => {
                         <Hidden mdDown>
                             <Grid item lg={3} className="right-content">
                                 <section className="faq-wrapper">
-                                    <FaqComponent />
+                                    <FaqComponent/>
                                     <SocialsBlock/>
                                 </section>
                                 <section className="banner-wrapper">
-                                    <Banner height="345px" />
+                                    <Banner height="345px"/>
                                 </section>
                                 <ScrollTop>
                                     <a
@@ -59,7 +59,7 @@ export const Main: FC = () => {
                                         className={classes.scrollTop}
                                     >
                                         <span className="MuiFab">
-                                            <span className="icon"></span>
+                                            <span className="icon"/>
                                         </span>
                                     </a>
                                 </ScrollTop>
