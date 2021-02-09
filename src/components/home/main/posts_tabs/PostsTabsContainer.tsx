@@ -20,7 +20,7 @@ const initCardData: CardData = {
     }
 };
 
-export const PostsTabsContainer: FC<WithT> = (props) => {
+export const PostsTabsContainer: FC<WithT> = ({t}) => {
     const dispatch = useDispatch();
 
     const lang = i18n.language;
@@ -86,7 +86,7 @@ export const PostsTabsContainer: FC<WithT> = (props) => {
 
     return (
         <PostsTabs
-            t={props.t}
+            t={t}
             tabValue={tabValue}
             postCardData={postCardData}
             auctionCardData={auctionCardData}

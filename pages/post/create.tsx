@@ -7,7 +7,7 @@ const Create = (props) => {
 };
 
 Create.getInitialProps = async () => ({
-    namespacesRequired: ['ancmnt', 'categories', 'common'],
+    namespacesRequired: ['post'],
 });
 
-export default withTranslation(['ancmnt', 'categories', 'common'])(Create);
+export default withTranslation(['post'])(Create);

@@ -17,7 +17,7 @@
     "foreignCars": "Иномарки",
 
     "transport": "Спецтехника и транспорт",
-    "motorcyclesAndMototechnics": "Мотоциклы и мототехника",
+    "motorcyclesAndMotorTech": "Мотоциклы и мототехника",
     "motorcycles": "Мотоциклы",
 
     "parts": "Запчасти и аксессуары",
@@ -36,7 +36,7 @@
     "interiorDesign": "Дизайн интерьера",
 
     "goods": "Вещи, Детские товары и украшения",
-    "womensWardrobe": "Женский гардероб",
+    "womenWardrobe": "Женский гардероб",
     "accessories": "Аксессуары",
 
     "home": "Для дома и дачи",
@@ -51,7 +51,7 @@
     "tickets": "Билеты",
 
     "animal": "Животные",
-    "dogs": "Itlar",
+    "dogs": "Собаки",
 
     "free": "Отдам даром"
 }

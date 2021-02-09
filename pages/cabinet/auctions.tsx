@@ -7,7 +7,7 @@ const Auctions = (props) => {
 };
 
 Auctions.getInitialProps = async () => ({
-    namespacesRequired: ['cabinet', 'common'],
+    namespacesRequired: ['cabinet'],
 });
 
-export default withTranslation(['cabinet', 'common'])(Auctions);
+export default withTranslation(['cabinet'])(Auctions);

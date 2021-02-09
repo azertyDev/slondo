@@ -11,19 +11,14 @@ export type CategoryType = {
     icon: {
         url: string;
     },
-    smallIcon: {
-        url: string;
-    },
-    model: ModelType[];
+    smallIcon: any;
+    model?: ModelType[];
     has_auction: boolean;
 } & IdNameType;
 
 export type ModelType = {
     parents: IdNameType[];
-    image: {
-        url: string
-    };
-    type: IdNameType[];
+    type?: SubLvlCtgrsType[];
 } & IdNameType;
 
 export type SubLvlCtgrsType = {

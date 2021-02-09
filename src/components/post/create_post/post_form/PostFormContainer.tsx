@@ -8,20 +8,13 @@ import {PostType, CreatePostProps, FileType, IdNameType} from "@root/interfaces/
 import {setErrorMsgAction} from "@src/redux/slices/errorSlice";
 import {createPostSchema} from "@root/validation_schemas/createPostSchema";
 import {TOTAL_FILES_LIMIT} from "@src/constants";
-import {
-    noSelect,
-    numberRegEx,
-    numericFields,
-    fieldKeysWithTxt,
-    timeRegEx,
-    optionKeys,
-    pricePrettier,
-    whiteSpacesRegEx,
-} from "@src/helpers";
+import {pricePrettier} from "@src/helpers";
 import {CameraIcon} from "@src/components/elements/icons";
 import {CategoryType} from "@root/interfaces/Categories";
 import {WithT} from "i18next";
 import {DataForCrtPostType} from "@src/components/post/create_post/CreatePostContainer";
+import {numberRegEx, timeRegEx, whiteSpacesRegEx} from "@src/common_data/reg_ex";
+import {fieldKeysWithTxt, noSelect, numericFields, optionKeys} from '@root/src/common_data/form_fields_list';
 
 
 export const initPhoto: FileType = {
@@ -38,13 +31,13 @@ type PostFormContainerProps = {
     postType: PostType;
     category: CategoryType;
     dataForCrtPost: DataForCrtPostType;
-    setDataForCrtPost: Dispatch<SetStateAction<DataForCrtPostType>>
-    secCtgr: SecLvlCtgrType
-}
+    setDataForCrtPost: Dispatch<SetStateAction<DataForCrtPostType>>;
+    secCtgr: SecLvlCtgrType;
+};
 
 export type SecLvlCtgrType = {
     type: IdNameType
-} & IdNameType
+} & IdNameType;
 
 export const PostFormContainer: FC<PostFormContainerProps & WithT> = (props) => {
     const {
@@ -61,7 +54,6 @@ export const PostFormContainer: FC<PostFormContainerProps & WithT> = (props) => 
     const {locations} = useSelector((store: RootState) => store);
     const isAuction = ['auc', 'exauc'].some(type => type === postType.name);
 
-    const {mark} = category;
     const weekDays = Array.from({length: 7}).map((_, i) => ({id: ++i}));
     const initPhotos: FileType[] = Array.from({length: TOTAL_FILES_LIMIT}).map(() => initPhoto);
 
@@ -69,8 +61,8 @@ export const PostFormContainer: FC<PostFormContainerProps & WithT> = (props) => 
         isFetch: false,
         files: initPhotos,
         postParams: {
-            [mark]: {
-                [`${mark}_id`]: secCtgr.id,
+            [category.name]: {
+                [`${category.name}_id`]: secCtgr.id,
                 type_id: secCtgr.type.id
             }
         },
@@ -130,7 +122,7 @@ export const PostFormContainer: FC<PostFormContainerProps & WithT> = (props) => 
     } = formik;
 
     const {postParams, defaultParams, auction} = values;
-    const postParamsByMark = postParams[mark];
+    const postParamsByMark = postParams[category.name];
 
     const prepareValues = () => {
         const {
@@ -153,8 +145,8 @@ export const PostFormContainer: FC<PostFormContainerProps & WithT> = (props) => 
             phone,
             price: price.replace(whiteSpacesRegEx, ''),
             currency_id: currency.id,
-            [mark]: {
-                [`${mark}_id`]: secCtgr.id
+            [category.name]: {
+                [`${category.name}_id`]: secCtgr.id
             }
         };
 
@@ -169,14 +161,14 @@ export const PostFormContainer: FC<PostFormContainerProps & WithT> = (props) => 
         Object.keys(postParamsByMark).map(k => {
             if (postParamsByMark[k]) {
                 if (Array.isArray(postParamsByMark[k]) && postParamsByMark[k].length) {
-                    valsForCrtPost[mark][k] = postParamsByMark[k].map(val => ({id: val.id}));
+                    valsForCrtPost[category.name][k] = postParamsByMark[k].map(val => ({id: val.id}));
                 } else if (postParamsByMark[k].id) {
                     if (postParamsByMark[k].txt) {
-                        valsForCrtPost[mark][k] = postParamsByMark[k].txt;
+                        valsForCrtPost[category.name][k] = postParamsByMark[k].txt;
                     }
-                    valsForCrtPost[mark][`${k}_id`] = postParamsByMark[k].id;
+                    valsForCrtPost[category.name][`${k}_id`] = postParamsByMark[k].id;
                 } else if (!!postParamsByMark[k]) {
-                    valsForCrtPost[mark][k] = postParamsByMark[k];
+                    valsForCrtPost[category.name][k] = postParamsByMark[k];
                 }
             }
         });
@@ -206,7 +198,7 @@ export const PostFormContainer: FC<PostFormContainerProps & WithT> = (props) => 
     const setDefaultVals = () => {
         const {data} = dataForCrtPost;
 
-        if (mark === 'free') {
+        if (category.name === 'free') {
             defaultParams.price = '0';
         }
         if (isAuction) {
@@ -295,7 +287,7 @@ export const PostFormContainer: FC<PostFormContainerProps & WithT> = (props) => 
             <form onSubmit={handleSubmit}>
                 <PostForm
                     {...props}
-                    mark={mark}
+                    mark={category.name}
                     errors={errors}
                     touched={touched}
                     values={values}

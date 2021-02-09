@@ -1,31 +1,27 @@
-import React, { FC, useEffect, useState } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import { userAPI } from '@src/api/api';
-import { CreatePost } from './CreatePost';
-import { RootState } from '@src/redux/rootReducer';
-import { MainLayout } from '@src/components/MainLayout';
-import { WithT } from 'i18next';
-import { i18n } from '@root/i18n';
-import { CreatePostState, IdNameType, PostType } from '@root/interfaces/Post';
-import { PostFormContainer } from './post_form/PostFormContainer';
-import { setErrorMsgAction } from '@root/src/redux/slices/errorSlice';
-import { PostTypesPage } from '@src/components/post/post_types_page/PostTypesPage';
-import {
-    dataForCrtPostNormalize,
-    categoriesListNormalize,
-    categorySearchHelper,
-} from '@src/helpers';
-import { PostHeader } from './post_header/PostHeader';
-import { SuccessPost } from '@src/components/post/create_post/post_form/success_post/SuccessPost';
-import { SubLvlCtgrsType } from '@root/interfaces/Categories';
-import { categories_list } from '@src/components/common_data/categoriesList';
+import React, {FC, useEffect, useMemo, useState} from 'react';
+import {useDispatch} from 'react-redux';
+import {userAPI} from '@src/api/api';
+import {CreatePost} from './CreatePost';
+import {MainLayout} from '@src/components/MainLayout';
+import {WithT} from 'i18next';
+import {i18n} from '@root/i18n';
+import {CreatePostState, IdNameType, PostType} from '@root/interfaces/Post';
+import {PostFormContainer} from './post_form/PostFormContainer';
+import {setErrorMsgAction} from '@root/src/redux/slices/errorSlice';
+import {PostTypesPage} from './post_types_page/PostTypesPage';
+import {dataForCrtPostNormalize, categorySearchHelper, categoriesTrans} from '@src/helpers';
+import {PostHeader} from './post_header/PostHeader';
+import {SuccessPost} from '@src/components/post/create_post/post_form/success_post/SuccessPost';
+import {SubLvlCtgrsType} from '@root/interfaces/Categories';
+import {categoriesList} from '@src/common_data/categoriesList';
+
 
 export type DataForCrtPostType = {
     isFetch: boolean;
     data: any;
 };
 
-export const CreatePostContainer: FC<WithT> = ({ t }) => {
+export const CreatePostContainer: FC<WithT> = ({t}) => {
     const lang = i18n.language;
 
     const steps = [
@@ -33,84 +29,6 @@ export const CreatePostContainer: FC<WithT> = ({ t }) => {
         t('categories:category'),
         t('categories:fill'),
         t('categories:check'),
-    ];
-
-    const initPostTypeStates: PostType[] = [
-        {
-            id: 1,
-            name: 'post',
-            subtitle: 'postFree',
-            currency: [
-                {
-                    id: 1,
-                    name: 'уе',
-                },
-                {
-                    id: 2,
-                    name: 'sum',
-                },
-            ],
-            expired: [
-                {
-                    id: 3,
-                    expiration_at: '720',
-                },
-            ],
-            image: {
-                url: '/img/adv-background.png',
-            },
-            guide: 'howToCreatePost',
-        },
-        {
-            id: 2,
-            name: 'auc',
-            subtitle: 'tradeToGetBetter',
-            currency: [
-                {
-                    id: 3,
-                    name: 'sum',
-                },
-            ],
-            expired: [
-                {
-                    id: 1,
-                    expiration_at: '2',
-                },
-                {
-                    id: 2,
-                    expiration_at: '720',
-                },
-            ],
-            image: {
-                url: '/img/lot-background.png',
-            },
-            guide: 'howToCreateAuc',
-        },
-        {
-            id: 3,
-            name: 'exauc',
-            subtitle: 'maxFunctionality',
-            currency: [
-                {
-                    id: 4,
-                    name: 'sum',
-                },
-            ],
-            expired: [
-                {
-                    id: 4,
-                    expiration_at: '2',
-                },
-                {
-                    id: 5,
-                    expiration_at: '720',
-                },
-            ],
-            image: {
-                url: '/img/advanced-lot-background.png',
-            },
-            guide: 'howToCreateExAuc',
-        },
     ];
 
     const initPostTypeState = {
@@ -149,7 +67,7 @@ export const CreatePostContainer: FC<WithT> = ({ t }) => {
             },
             model: [],
             has_auction: null,
-        },
+        }
     };
 
     const initDataForCrtPost: DataForCrtPostType = {
@@ -163,33 +81,36 @@ export const CreatePostContainer: FC<WithT> = ({ t }) => {
         type: {
             id: null,
             name: null,
-        },
+        }
     };
-
-    // const categoriesList = useSelector(({ categories }: RootState) =>
-    //     categoriesListNormalize(categories.list),
-    // );
-
     const dispatch = useDispatch();
+
+    const categories = useMemo(() => categoriesTrans(categoriesList, t), [lang]);
 
     const [postType, setPostType] = useState<PostType>(initPostTypeState);
 
-    const [postTypes, setPostTypes] = useState<PostType[]>(initPostTypeStates);
+    const [createPost, setCreatePost] = useState<CreatePostState>(initCreatePostState);
+    const {category} = createPost;
 
-    const [createPost, setCreatePost] = useState<CreatePostState>(
-        initCreatePostState,
-    );
-    const { category } = createPost;
-    const [dataForCrtPost, setDataForCrtPost] = useState<DataForCrtPostType>(
-        initDataForCrtPost,
-    );
+    const [dataForCrtPost, setDataForCrtPost] = useState<DataForCrtPostType>(initDataForCrtPost);
 
-    const [secCtgr, setSecCtgr] = useState<IdNameType & { type: IdNameType }>(
-        initSecCtgr,
-    );
+    const [secCtgr, setSecCtgr] = useState<IdNameType & { type: IdNameType }>(initSecCtgr);
 
     const [subLvlCtgrs, setSubLvlCtgrs] = useState<SubLvlCtgrsType[]>([]);
+    const isThirdLvlCtgr = !!subLvlCtgrs.length && subLvlCtgrs.every(subCtgr => subCtgr.parents.length === 2);
+
     const [activeStep, setActiveStep] = useState(0);
+    const isPostTypeStep = activeStep === 0;
+    const isCategoriesStep = activeStep === 1;
+    const isFormStep = activeStep === 2 || activeStep === 3;
+    const isSuccessStep = activeStep === 4;
+
+    const [searchTxt, setSearchTxt] = useState('');
+
+    const setMatchedCtgrs = (txt) => {
+        const matchedCtgrs = txt.length > 2 ? categorySearchHelper(txt, categories) : [];
+        setSubLvlCtgrs(matchedCtgrs);
+    };
 
     const handleNextStep = () => {
         setActiveStep((prevStep) => prevStep + 1);
@@ -203,55 +124,31 @@ export const CreatePostContainer: FC<WithT> = ({ t }) => {
         setActiveStep(0);
     };
 
-    // const setAncmntsTypes = async () => {
-    //     try {
-    //         const types = userAPI.getAncmntsTypes(lang);
-    //         await setFetchedData(
-    //             postTypes,
-    //             setPostTypes,
-    //             {types},
-    //         );
-    //     } catch (e) {
-    //         dispatch(setErrorMsgAction(e.message));
-    //         setPostTypes({...postTypes, isFetch: false});
-    //     }
-    // };
-
     const handlePostType = (selectedAncmntType) => () => {
         handleNextStep();
         setPostType(selectedAncmntType);
     };
 
-    const setMatchedCtgrs = (txt) => {
-        const matchedCtgrs =
-            txt.length > 2 ? categorySearchHelper(txt, categoriesList) : [];
-        setSubLvlCtgrs(matchedCtgrs);
-    };
-
     const handleCategory = (ctgr) => async () => {
-        if (
-            (ctgr.model && ctgr.model.length) ||
-            (ctgr.type && ctgr.type.length)
-        ) {
+        if ((ctgr.model && ctgr.model.length) || (ctgr.type && ctgr.type.length)) {
             const list = ctgr.model ?? ctgr.type;
 
             const mainCtgr = ctgr.model
                 ? ctgr
-                : categories_list.filter(
-                      (ctr) => !!ctr.id && ctr.id === ctgr.parents[0].id,
-                  )[0];
+                : categories.filter(ctr => !!ctr.id && ctr.id === ctgr.parents[0].id)[0];
 
             setSubLvlCtgrs(list);
-            setCreatePost({ ...createPost, category: mainCtgr });
+            setCreatePost({...createPost, category: mainCtgr});
         } else {
             try {
+                handleNextStep();
                 if (ctgr.parents) {
                     const fstCtgr = ctgr.parents[0];
                     const secCtgr = ctgr.parents[1];
                     const secCtgrId = secCtgr ? secCtgr.id : ctgr.id;
                     const trdCtgrId = secCtgr ? ctgr.id : '';
 
-                    setDataForCrtPost({ ...dataForCrtPost, isFetch: true });
+                    setDataForCrtPost({...dataForCrtPost, isFetch: true});
 
                     const fetchedData = await userAPI.getDataForCreatePost(
                         fstCtgr.id,
@@ -265,7 +162,7 @@ export const CreatePostContainer: FC<WithT> = ({ t }) => {
                         category: {
                             ...category,
                             ...fstCtgr,
-                        },
+                        }
                     });
 
                     setSecCtgr({
@@ -283,15 +180,23 @@ export const CreatePostContainer: FC<WithT> = ({ t }) => {
                     });
                 } else {
                     setDataForCrtPost(initDataForCrtPost);
-                    setCreatePost({ ...createPost, category: ctgr });
+                    setCreatePost({...createPost, category: ctgr});
                     !!secCtgr.id && setSecCtgr(initSecCtgr);
                     !!setSubLvlCtgrs.length && setSubLvlCtgrs([]);
                 }
-                handleNextStep();
             } catch (e) {
                 dispatch(setErrorMsgAction(e.message));
-                setDataForCrtPost({ ...dataForCrtPost, isFetch: false });
+                setDataForCrtPost({...dataForCrtPost, isFetch: false});
             }
+        }
+    };
+
+    const handleSearch = ({target: {value}}) => {
+        setSearchTxt(value);
+        setMatchedCtgrs(value);
+        if (!!category.id) {
+            setSubLvlCtgrs([]);
+            setCreatePost(initCreatePostState);
         }
     };
 
@@ -313,70 +218,70 @@ export const CreatePostContainer: FC<WithT> = ({ t }) => {
 
     const handleBackBtn = () => {
         handlePrevStep();
+        isCategoriesStep && handleResetPostType();
     };
 
-    const setSubLvlCtgrsByLang = () => {
-        const [newLangCtgr] = categories_list.filter(
-            (ctgr) => !!ctgr.id && ctgr.id === category.id,
-        );
-        if (!!newLangCtgr) {
-            const { parents } = subLvlCtgrs[0];
-            if (parents[1]) {
-                const [subCtgr] = newLangCtgr.model.filter(
-                    (subCtgr) => subCtgr.id === parents[1].id,
-                );
-                setSubLvlCtgrs(subCtgr.type);
-            } else if (parents[0]) {
-                setSubLvlCtgrs(newLangCtgr.model);
-            }
-            createPost.category = newLangCtgr;
-            setCreatePost({ ...createPost });
+    const setSubLvlCtgrByLang = () => {
+        if (!!searchTxt) {
+            setMatchedCtgrs(searchTxt);
+        } else if (subLvlCtgrs.length) {
+            categories.forEach(ctgr => {
+                if (ctgr.id === category.id) {
+                    if (isThirdLvlCtgr) {
+                        ctgr.model.forEach(thCtgr => {
+                            if (subLvlCtgrs.some(ctgr => ctgr.id === thCtgr.id)) {
+                                setSubLvlCtgrs(thCtgr.type);
+                            }
+                        });
+                    } else {
+                        setSubLvlCtgrs(ctgr.model);
+                    }
+                    createPost.category = ctgr;
+                    setCreatePost({...createPost});
+                }
+            });
         }
-        // else if (!!searchTxt) handleResetCreateData();
     };
-
-    // useEffect(() => {
-    //    setAncmntsTypes();
-    // }, []);
 
     useEffect(() => {
-        setSubLvlCtgrsByLang();
-    }, [categories_list[0].name]);
+        setSubLvlCtgrByLang();
+    }, [lang]);
 
     return (
         <MainLayout>
             <>
                 <PostHeader
+                    t={t}
                     steps={steps}
+                    postType={postType}
                     activeStep={activeStep}
                     handleBackBtn={handleBackBtn}
+                    isSuccessStep={isSuccessStep}
+                    isPostTypeStep={isPostTypeStep}
                 />
                 <>
-                    {activeStep === 0 && (
+                    {isPostTypeStep && (
                         <PostTypesPage
-                            postTypes={postTypes}
-                            handlePostType={handlePostType}
                             t={t}
+                            handlePostType={handlePostType}
                         />
                     )}
-                    {activeStep === 1 && (
+                    {isCategoriesStep && (
                         <CreatePost
+                            t={t}
+                            searchTxt={searchTxt}
+                            handleSearch={handleSearch}
                             postType={postType}
                             createPost={createPost}
                             isFetch={dataForCrtPost.isFetch}
-                            setCreatePost={setCreatePost}
-                            setSubLvlCtgrs={setSubLvlCtgrs}
-                            // categoriesList={categoriesList}
-                            categories_list={categories_list}
-                            t={t}
+                            isThirdLvlCtgr={isThirdLvlCtgr}
+                            categoriesList={categories}
                             subLvlCtgrs={subLvlCtgrs}
-                            setMatchedCtgrs={setMatchedCtgrs}
                             handleBackCtgr={handleBackCtgr}
                             handleCategory={handleCategory}
-                            initCreatePostState={initCreatePostState}
                         />
                     )}
-                    {(activeStep === 2 || activeStep === 3) && (
+                    {isFormStep && (
                         <PostFormContainer
                             t={t}
                             activeStep={activeStep}
@@ -389,8 +294,8 @@ export const CreatePostContainer: FC<WithT> = ({ t }) => {
                         />
                     )}
                 </>
-                {activeStep === 4 && (
-                    <SuccessPost handleCreateNewPost={handleResetPostType} />
+                {isSuccessStep && (
+                    <SuccessPost handleCreateNewPost={handleResetPostType}/>
                 )}
             </>
         </MainLayout>

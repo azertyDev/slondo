@@ -1,17 +1,19 @@
-import { makeStyles } from '@material-ui/core';
+import {makeStyles} from '@material-ui/core';
 
 export const useStyles = makeStyles((theme) => ({
     root: {
         marginBottom: 15,
-        '& button.back-btn': {
-            color: theme.palette.primary.white,
-            background: 'none',
-            '& svg': {
-                margin: '0 30px',
-            },
+        '& div.menu-header': {
+            display: 'flex',
+            alignItems: 'center',
             '& h6.MuiTypography-h6': {
                 fontWeight: 600,
             },
+            '& button.back-btn': {
+                color: theme.palette.primary.white,
+                background: 'none',
+                padding: '12px 25px 12px 0'
+            }
         },
         '& div.MuiStepper-root': {
             padding: 0,
@@ -31,9 +33,9 @@ export const useStyles = makeStyles((theme) => ({
                     color: theme.palette.common.tab,
                     '&.MuiStepLabel-label': {
                         marginTop: 10,
-                    },
-                },
-            },
-        },
-    },
+                    }
+                }
+            }
+        }
+    }
 }));

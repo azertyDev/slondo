@@ -1,19 +1,15 @@
-import React, { FC } from 'react';
-import { Grid, Typography, ButtonBase } from '@material-ui/core';
-import { PostType } from '@root/interfaces/Post';
-import { WithT } from 'i18next';
-import { useStyles } from './useStyles';
+import React, {FC} from 'react';
+import {Grid, Typography, ButtonBase} from '@material-ui/core';
+import {WithT} from 'i18next';
+import {useStyles} from './useStyles';
+import {postTypes} from "@src/common_data/categoriesList";
 
-type AncmntTypesPageProps = {
-    postTypes: PostType[];
+
+type PostTypesPageProps = {
     handlePostType: (ancmntType) => () => void;
 };
 
-export const PostTypesPage: FC<AncmntTypesPageProps & WithT> = ({
-    postTypes,
-    handlePostType,
-    t,
-}) => {
+export const PostTypesPage: FC<PostTypesPageProps & WithT> = ({handlePostType, t}) => {
     const classes = useStyles();
     return (
         <div className={classes.root}>
@@ -32,7 +28,6 @@ export const PostTypesPage: FC<AncmntTypesPageProps & WithT> = ({
                                         {t(`common:${anType.name}`)}
                                     </Typography>
                                     <Typography variant="body2">
-                                        
                                         {t(`categories:${anType.subtitle}`)}
                                     </Typography>
                                 </div>

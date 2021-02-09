@@ -13,7 +13,6 @@ export type PostType = IdNameType & {
     expired: { id: number, expiration_at: string }[];
     image: { url: string },
     guide: string,
-    name: string,
     subtitle: string
 };
 

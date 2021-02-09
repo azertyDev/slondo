@@ -39,7 +39,7 @@ export const PostsTabs: FC<MainContentProps> = (props) => {
     return (
         <div className={classes.root}>
             <Typography className="title" variant="h2">
-                {t('allAncmnts')}
+                {t('allPosts')}
             </Typography>
             <Tabs
                 value={tabValue}
@@ -48,7 +48,7 @@ export const PostsTabs: FC<MainContentProps> = (props) => {
                 variant="fullWidth"
             >
                 <Tab
-                    label={<Typography variant="h6">{t('ancmnts')}</Typography>}
+                    label={<Typography variant="h6">{t('posts')}</Typography>}
                     value={0}
                 />
                 <Tab
@@ -85,7 +85,7 @@ export const PostsTabs: FC<MainContentProps> = (props) => {
                         ? <CircularProgress size={25}/>
                         : <ButtonComponent onClick={handleShowMore}>
                             <Typography variant="subtitle2" color="initial">
-                                {t('common:showMore')}
+                                {t('showMore')}
                             </Typography>
                         </ButtonComponent>}
                 </Grid>

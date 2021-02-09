@@ -1,9 +1,8 @@
 {
   "title": "Asosiy",
   "popularCategories": "Mashhur toifalar",
-  "allAncmnts": "Hamma e'lonlar",
-  "ancmnts": "E'lonlar",
+  "allPosts": "Hamma e'lonlar",
+  "posts": "E'lonlar",
   "auctions": "Auktsionlar",
-  "adv_auction": "Murakkab auktsion",
   "showMore": "Yana ko'rsatish"
 }

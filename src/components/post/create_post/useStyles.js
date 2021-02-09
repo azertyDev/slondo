@@ -28,9 +28,9 @@ export const useStyles = makeStyles((theme) => ({
                 '& > svg': {
                     '& > path': {
                         fill: '#845CAB',
-                    },
-                },
-            },
+                    }
+                }
+            }
         },
         '& div.categories-menu': {
             paddingRight: 20,
@@ -55,16 +55,16 @@ export const useStyles = makeStyles((theme) => ({
                 background: 'none',
                 padding: 0,
                 '& svg': {
-                    margin: '0 15px',
+                    marginRight: '15px',
                 },
                 '& h6.MuiTypography-subtitle1': {
                     fontWeight: 600,
-                },
+                }
             },
             '& ul': {
                 '& > li:hover': {
                     backgroundColor: theme.palette.primary.gray,
-                },
+                }
             },
             '& > div.sub-category-bg': {
                 width: '100%',
@@ -74,7 +74,7 @@ export const useStyles = makeStyles((theme) => ({
                 display: 'flex',
                 justifyContent: 'flex-end',
                 alignItems: 'center',
-                backgroundImage: `url(${'/img/category-bg.png'})`,
+                backgroundImage: `url('/img/category-bg.png')`,
                 backgroundRepeat: 'no-repeat',
                 backgroundPosition: 'bottom left',
                 opacity: 0.8,
@@ -85,8 +85,8 @@ export const useStyles = makeStyles((theme) => ({
                     color: theme.palette.common.tab,
                     maxWidth: '318px',
                     marginRight: '200px',
-                },
-            },
-        },
-    },
+                }
+            }
+        }
+    }
 }));

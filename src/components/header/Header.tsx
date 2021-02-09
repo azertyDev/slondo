@@ -9,13 +9,12 @@ import {useDispatch, useSelector} from "react-redux";
 import {setIsAuthAction, setIsAuthModalOpen} from '@src/redux/slices/authRegSlice';
 import {RootState} from "@src/redux/rootReducer";
 import {ButtonComponent} from "@src/components/elements/button/Button";
-import {fetchCategories} from "@src/redux/slices/categoriesSlice";
 import {fetchLocations} from "@src/redux/slices/locationsSlice";
 import {useStyles} from './useStyles';
 
 
 export const Header: FC = () => {
-    const {t} = useTranslation(['header', 'auth_reg', 'common']);
+    const {t} = useTranslation(['header']);
 
     const cookies = new Cookies();
     const isTokenExst = !!cookies.get('token');
@@ -30,7 +29,6 @@ export const Header: FC = () => {
     };
 
     useEffect(() => {
-        dispatch(fetchCategories(lang));
         dispatch(fetchLocations(lang));
     }, [lang]);
 
@@ -65,10 +63,10 @@ export const Header: FC = () => {
                     <>
                         {isAuth
                             ? <div style={{width: '200px', height: '80px', backgroundColor: '#fff'}}>
-                                <Typography variant='h5'>Выйти из сайта?</Typography>
+                                <Typography variant='h5'>{t('auth_reg:signOutFromSite')}</Typography>
                                 <div style={{display: 'flex'}}>
-                                    <ButtonComponent onClick={handleModal(false)}>Отмена</ButtonComponent>
-                                    <ButtonComponent>Выйти</ButtonComponent>
+                                    <ButtonComponent onClick={handleModal(false)}>{t('auth_reg:cancel')}</ButtonComponent>
+                                    <ButtonComponent>{t('auth_reg:signOut')}</ButtonComponent>
                                 </div>
                             </div>
                             : <AuthRegPage

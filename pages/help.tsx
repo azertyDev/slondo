@@ -7,7 +7,7 @@ const TestPage = (props) => {
 };
 
 TestPage.getInitialProps = async () => ({
-    namespacesRequired: ['cabinet'],
+    namespacesRequired: ['common'],
 });
 
-export default withTranslation(['cabinet'])(TestPage);
+export default withTranslation(['common'])(TestPage);

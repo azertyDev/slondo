@@ -1,26 +1,14 @@
-import React, { FC, useEffect } from 'react';
-import { WithT } from 'i18next';
-import { Typography } from '@material-ui/core';
-import { CustomSlider } from '@src/components/elements/custom_slider/CustomSlider';
-import { settings } from './sliderSettings';
-import { Link } from '@root/i18n';
-import { useDispatch, useSelector } from 'react-redux';
-import { RootState } from '@src/redux/rootReducer';
-import { setErrorMsgAction } from '@root/src/redux/slices/errorSlice';
-import { categories_list } from '@src/components/common_data/categoriesList';
-import { useStyles } from './useStyles';
+import React, {FC} from 'react';
+import {WithT} from 'i18next';
+import {Link} from '@root/i18n';
+import {Typography} from '@material-ui/core';
+import {CustomSlider} from '@src/components/elements/custom_slider/CustomSlider';
+import {settings} from './sliderSettings';
+import {categoriesList} from "@src/common_data/categoriesList";
+import {useStyles} from './useStyles';
 
-export const CategoriesSlider: FC<WithT> = ({ t }) => {
-    const { isFetch, error, list } = useSelector(
-        (store: RootState) => store.categories,
-    );
 
-    const dispatch = useDispatch();
-
-    useEffect(() => {
-        !!error && dispatch(setErrorMsgAction(error));
-    }, [error]);
-
+export const CategoriesSlider: FC<WithT> = ({t}) => {
     const classes = useStyles();
     return (
         <div className={classes.root}>
@@ -29,9 +17,9 @@ export const CategoriesSlider: FC<WithT> = ({ t }) => {
             </Typography>
             <div className="category-slider">
                 <CustomSlider {...settings}>
-                    {categories_list.map((category) => (
+                    {categoriesList.map((category) => (
                         <Link href="#" key={category.id}>
-                            <a title={category.name}>
+                            <a title={t(`categories:${category.name}`)}>
                                 <div className="category">
                                     <div className="bg-layer">
                                         <div className="medium">
