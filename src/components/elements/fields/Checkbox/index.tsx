@@ -4,7 +4,6 @@ import ToggleButtonGroup from '@material-ui/lab/ToggleButtonGroup';
 
 const CustomCheckbox = ({name, data, parentCallback}) => {
     const [formats, setFormats] = React.useState(() => []);
-    console.warn("formats", formats)
     const handleFormat = (event, newFormats) => {
         setFormats(newFormats);
         parentCallback(name, newFormats)

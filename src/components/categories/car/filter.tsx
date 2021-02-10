@@ -29,7 +29,7 @@ const Filter: FC = () => {
     const colors = data?.default_param?.colors
     const engine_capacity = [{id: 1, name: '1,5'}, {id: 2, name: '1,6'}, {id: 3, name: '1,8'}]
     const condition = [{id: 1, name: 'новое'}, {id: 1, name: 'Средний'}, {id: 1, name: 'кириб йотибди'}]
-    console.warn("data", data)
+
     const handleCallback = (name, value) =>{
         setFilter({
             ...filter,
