@@ -17,7 +17,6 @@ const Filter: FC = () => {
     const [filter, setFilter] = useState({manufacturer_id: null})
     const [data, setData] = useState(null)
     const [show, setShow] = useState(false)
-    const [checkItems, setCheckItems] = useState(new Map())
 
     const car_marks = data?.default_param?.manufacturer
     const car_models = car_marks?.find(function(model){return model?.id === filter?.manufacturer_id})?.models || []
