@@ -1,22 +1,32 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 import {CustomInput} from './useStyles'
-import {FormControl} from "@root/node_modules/@material-ui/core";
 
-
-const FromTo = () => {
-    const [from, setFrom] = useState('')
-    const [to, setTo] = useState('')
-
+const FromTo = ({disabled, parentCallback, name, title}) => {
+    const [price, setPrice] = useState({
+        from: null,
+        to: null
+    })
+    useEffect(() => {
+            parentCallback(name, price);
+    }, [price])
     return (
-        <div style={{display: 'flex'}}>
-            <FormControl fullWidth style={{marginRight: 7}}>
-                <div>От</div>
-                <CustomInput value={from} onChange={(event) => setFrom(event.target.value)}/>
-            </FormControl>
-            <FormControl>
-                <div>До</div>
-                <CustomInput value={to} onChange={(event) => setTo(event.target.value)}/>
-            </FormControl>
+        <div>
+            <div>{title}</div>
+            <div style={{display: "flex", justifyContent: "space-between"}}>
+                    <CustomInput
+                        name="from"
+                        placeholder="От"
+                        onChange={(event) => setPrice({...price, [event.target.name]: event.target.value})}
+                        disabled={disabled}
+                    />
+                    &nbsp;
+                    <CustomInput
+                        name="to"
+                        placeholder="До"
+                        onChange={(event) => setPrice({...price, [event.target.name]: event.target.value})}
+                        disabled={disabled}
+                    />
+            </div>
         </div>
     )
 }

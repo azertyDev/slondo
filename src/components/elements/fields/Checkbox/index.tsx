@@ -1,64 +1,32 @@
-import React, {useState} from 'react'
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import Checkbox from '@material-ui/core/Checkbox';
+import React from 'react'
+import ToggleButton from '@material-ui/lab/ToggleButton';
+import ToggleButtonGroup from '@material-ui/lab/ToggleButtonGroup';
 
-const CustomCheckbox = ({parentCallback}) => {
-    const [state, setState] = useState({
-        checkedA: true,
-        checkedB: true,
-        checkedF: true,
-        checkedG: true,
-    });
-    const onTrigger = (event) => {
-        parentCallback(event.target.name, event.target.value);
-    }
+const CustomCheckbox = ({name, data, parentCallback}) => {
+    const [formats, setFormats] = React.useState(() => []);
+    console.warn("formats", formats)
+    const handleFormat = (event, newFormats) => {
+        setFormats(newFormats);
+        parentCallback(name, newFormats)
+    };
     return (
-        <div style={{display: 'flex', justifyContent: 'space-between'}}>
-            <FormControlLabel
-                control={
-                    <Checkbox
-                        checked={state.checkedB}
-                        onChange={onTrigger}
-                        name="checkedB"
-                        color="primary"
-                    />
-                }
-                label="Механика"
-            />
-            <FormControlLabel
-                control={
-                    <Checkbox
-                        checked={state.checkedA}
-                        onChange={onTrigger}
-                        name="checkedB"
-                        color="primary"
-                    />
-                }
-                label="Автомат"
-            />
-            <FormControlLabel
-                control={
-                    <Checkbox
-                        checked={state.checkedF}
-                        onChange={onTrigger}
-                        name="checkedB"
-                        color="primary"
-                    />
-                }
-                label="Вариант"
-            />
-            <FormControlLabel
-                control={
-                    <Checkbox
-                        checked={state.checkedG}
-                        onChange={onTrigger}
-                        name="checkedB"
-                        color="primary"
-                    />
-                }
-                label="Робот"
-            />
-        </div>
+        <ToggleButtonGroup
+            value={formats}
+            onChange={handleFormat}
+            aria-label="text formatting"
+            style={{display: 'flex', justifyContent: 'space-between'}}
+        >
+            {data?.map((item) => (
+                <ToggleButton
+                    key={item.id}
+                    value={item.id}
+                    aria-label="bold"
+                    style={{borderRadius: 100, border: '1px solid #845CAB'}}
+                >
+                    {item.name}
+                </ToggleButton>
+            ))}
+        </ToggleButtonGroup>
     )
 }
 
