@@ -1,4 +1,4 @@
-import { makeStyles } from '@material-ui/core/styles';
+import { makeStyles } from '@material-ui/core/styles'
 
 export const useStyles = makeStyles((theme) => ({
     root: {
@@ -18,19 +18,20 @@ export const useStyles = makeStyles((theme) => ({
                     '& > svg': {
                         margin: '0 15px',
                     },
+                    '&.selected-category': {
+                        border: '1px solid #845CAB',
+                        '& > h6.MuiTypography-subtitle1': {
+                            color: theme.palette.primary.secondary,
+                        },
+                        '& > svg': {
+                            '& > path': {
+                                fill: '#845CAB',
+                            },
+                        },
+                    },
                 },
             },
-            '& li.selected-category': {
-                border: '1px solid #845CAB',
-                '& > h6.MuiTypography-subtitle1': {
-                    color: theme.palette.primary.secondary,
-                },
-                '& > svg': {
-                    '& > path': {
-                        fill: '#845CAB',
-                    }
-                }
-            }
+
         },
         '& div.categories-menu': {
             paddingRight: 20,
@@ -59,12 +60,12 @@ export const useStyles = makeStyles((theme) => ({
                 },
                 '& h6.MuiTypography-subtitle1': {
                     fontWeight: 600,
-                }
+                },
             },
             '& ul': {
                 '& > li:hover': {
                     backgroundColor: theme.palette.primary.gray,
-                }
+                },
             },
             '& > div.sub-category-bg': {
                 width: '100%',
@@ -85,8 +86,8 @@ export const useStyles = makeStyles((theme) => ({
                     color: theme.palette.common.tab,
                     maxWidth: '318px',
                     marginRight: '200px',
-                }
-            }
-        }
-    }
-}));
+                },
+            },
+        },
+    },
+}))
