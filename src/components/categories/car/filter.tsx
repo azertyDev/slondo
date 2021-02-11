@@ -5,7 +5,6 @@ import {Button} from "@material-ui/core";
 import {i18n} from "@root/i18n";
 import Grid from '@material-ui/core/Grid';
 import Dropdown from '@src/components/elements/fields/Dropdown'
-import {SearchForm} from '@src/components/elements/fields/SearchForm';
 import FromToDropdown from "@src/components/elements/fields/FromToDropdown";
 import FromTo from '@src/components/elements/fields/FromToTextField'
 import Checkbox from '@src/components/elements/fields/Checkbox'
@@ -14,9 +13,10 @@ const Filter: FC = () => {
     const lang = i18n.language;
     const router = useRouter()
     const {categoryID} = router.query
-    const [filter, setFilter] = useState({manufacturer_id: null})
+    const [filter, setFilter] = useState({manufacturer_id: null, car_category: 1})
     const [data, setData] = useState(null)
     const [show, setShow] = useState(false)
+    const [category, setCategory] = useState(1)
 
     const car_marks = data?.default_param?.manufacturer
     const car_models = car_marks?.find(function(model){return model?.id === filter?.manufacturer_id})?.models || []
@@ -27,7 +27,9 @@ const Filter: FC = () => {
     const drive = data?.default_param?.drive
     const colors = data?.default_param?.colors
     const engine_capacity = [{id: 1, name: '1,5'}, {id: 2, name: '1,6'}, {id: 3, name: '1,8'}]
-    const condition = [{id: 1, name: 'новое'}, {id: 1, name: 'Средний'}, {id: 1, name: 'кириб йотибди'}]
+    const condition = [{id: 1, name: 'новое'}, {id: 2, name: 'Средний'}, {id: 3, name: 'кириб йотибди'}]
+
+    const car_production_categories = [{id: 1, name: 'Местный'}, {id: 2, name: 'Иномарка'}]
 
     const handleCallback = (name, value) =>{
         setFilter({
@@ -37,15 +39,26 @@ const Filter: FC = () => {
     }
 
     useEffect(() => {
-        userAPI.getDataForCreatePost(Number(categoryID), 1, undefined, lang).then(
+        userAPI.getDataForCreatePost(Number(categoryID), filter?.car_category, undefined, lang).then(
                 result => setData(result)
             )
-    },[lang])
+    },[lang, filter.car_category])
 
+    const handleSubmit = (event) => {
+        event.preventDefault()
+        console.warn("filter", filter)
+    }
     return (
+        <form onSubmit={handleSubmit}>
         <Grid container spacing={3}>
-            <Grid item sm={12}>
-                <SearchForm />
+            <Grid item sm={4}>
+                <Dropdown
+                    title="Категория"
+                    name="car_category"
+                    parentCallback={handleCallback}
+                    data={car_production_categories}
+                    disabled={false}
+                />
             </Grid>
             <Grid item sm={4}>
                 <Dropdown
@@ -104,21 +117,21 @@ const Filter: FC = () => {
                 />
             </Grid>
             <Grid></Grid>
-            <Grid item sm={12}>
+            <Grid item sm={8}>
                 <Checkbox
                     name='engine_type'
+                    title='Тип двигателя'
                     parentCallback={handleCallback}
                     data={car_transmissions}
                 />
             </Grid>
             {show && <>
-                <Grid item sm={4}>
-                    <Dropdown
-                        title="Тип кузова"
-                        name="body"
+                <Grid item sm={12}>
+                    <Checkbox
+                        name='body'
+                        title='Тип кузова'
                         parentCallback={handleCallback}
                         data={body}
-                        disabled={false}
                     />
                 </Grid>
                 <Grid item sm={4}>
@@ -130,34 +143,6 @@ const Filter: FC = () => {
                         disabled={false}
                     />
                 </Grid>
-            <Grid item sm={4}>
-                <Dropdown
-                    title="Тип двигателя"
-                    name="engine_type"
-                    parentCallback={handleCallback}
-                    data={engine_type}
-                    disabled={false}
-                />
-            </Grid>
-                <Grid item sm={4}>
-                    <Dropdown
-                        title="Привод"
-                        name="drive"
-                        parentCallback={handleCallback}
-                        data={drive}
-                        disabled={false}
-                    />
-                </Grid>
-                <Grid item sm={4}>
-                    <Dropdown
-                        title="Цвет"
-                        name="colors"
-                        parentCallback={handleCallback}
-                        data={colors}
-                        disabled={false}
-                        color={true}
-                    />
-                </Grid>
                 <Grid item sm={4}>
                     <Dropdown
                         title="Состояние"
@@ -167,23 +152,49 @@ const Filter: FC = () => {
                         disabled={false}
                     />
                 </Grid>
+                <Grid item sm={8}>
+                    <Checkbox
+                        name='drive'
+                        title='Привод'
+                        parentCallback={handleCallback}
+                        data={drive}
+                    />
+                </Grid>
+                <Grid item sm={8}>
+                    <Checkbox
+                        title='Тип двигателя'
+                        name='engine_type'
+                        parentCallback={handleCallback}
+                        data={engine_type}
+                    />
+                </Grid>
+                <Grid item sm={12}>
+                    <Checkbox
+                        title='Цвет'
+                        name='colors'
+                        parentCallback={handleCallback}
+                        data={colors}
+                        color={true}
+                    />
+                </Grid>
             </>}
-            <Grid item sm={8} style={{display: "flex", alignItems: "center"}}>
-                <div onClick={() => setShow(!show)}>
-                    {show ? <span>Основные фильтры</span> : <span>Все фильтры</span>}
-                </div>
-            </Grid>
-            <Grid item sm={4}>
-                <div style={{display: 'flex', justifyContent: 'space-around'}}>
-                    <Button variant="contained" color="primary" style={{height: 41}}>
-                        Применить
-                    </Button>
-                    <Button variant="contained" style={{height: 41}}>
-                        Сбросить
-                    </Button>
-                </div>
-            </Grid>
+                <Grid item sm={8} style={{display: "flex", alignItems: "center", marginTop: 40}}>
+                    <div onClick={() => setShow(!show)}>
+                        {show ? <span>Основные фильтры</span> : <span>Все фильтры</span>}
+                    </div>
+                </Grid>
+                <Grid item sm={4}>
+                    <div style={{display: 'flex', justifyContent: 'space-around', marginTop: 40}}>
+                        <Button type="submit" variant="contained" color="primary" style={{height: 41}}>
+                            Применить
+                        </Button>
+                        <Button variant="contained" style={{height: 41}}>
+                            Сбросить
+                        </Button>
+                    </div>
+                </Grid>
         </Grid>
+        </form>
     )
 }
 

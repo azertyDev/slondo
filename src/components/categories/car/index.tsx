@@ -11,7 +11,6 @@ const Car = () => {
         <MainLayout title="Автомобили">
             <div className={classes.root}>
                 <Filter />
-
             </div>
         </MainLayout>
     )

@@ -9,7 +9,6 @@ export const SearchForm: FC = () => {
     const { t } = useTranslation(['categories']);
 
     const [adType, setAdType] = useState(1);
-
     const handleSelect = (e) => {
         setAdType(e.target.value);
     };
