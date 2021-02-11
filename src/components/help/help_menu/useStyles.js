@@ -7,7 +7,7 @@ export const useStyles = makeStyles((theme) => ({
             marginLeft: 15,
             marginBottom: 15,
         },
-        '& nav.support': {
+        '& nav.feedback': {
             marginTop: 15,
         },
     },
@@ -48,7 +48,7 @@ export const useStyles = makeStyles((theme) => ({
         border: '1px solid #AD66D5',
     },
     searchInput: {
-        width: 305,
+        width: 268,
         boxShadow: '0px 1px 10px rgba(0, 0, 0, 0.1)',
         marginBottom: 10,
         borderRadius: 10,
