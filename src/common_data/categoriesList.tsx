@@ -72,7 +72,7 @@ export const categoriesList: CategoryType[] = [
                     },
                     {
                         'id': 2,
-                        'name': 'Мопеды и скутеры',
+                        name: 'Мопеды и скутеры',
                         parents: [
                             { id: 2, name: 'transport' },
                             { id: 1, name: 'motorcyclesAndMotorTech' },
@@ -80,7 +80,7 @@ export const categoriesList: CategoryType[] = [
                     },
                     {
                         'id': 3,
-                        'name': 'Квадроциклы',
+                        name: 'Квадроциклы',
                         parents: [
                             { id: 2, name: 'transport' },
                             { id: 1, name: 'motorcyclesAndMotorTech' },
@@ -88,7 +88,7 @@ export const categoriesList: CategoryType[] = [
                     },
                     {
                         'id': 4,
-                        'name': 'Картинг',
+                        name: 'Картинг',
                         parents: [
                             { id: 2, name: 'transport' },
                             { id: 1, name: 'motorcyclesAndMotorTech' },

@@ -5,11 +5,14 @@ import { InputAdornment, List, ListItem, TextField, Typography } from '@material
 import { useTranslation } from 'i18n'
 import { useStyles } from './useStyles'
 import { Search_icon } from '@src/components/elements/icons'
+import Tooltip from '@material-ui/core/Tooltip';
 
 
 export const CustomDrawer = ({ toggleDrawer, position }) => {
     const { t } = useTranslation()
-
+    console.warn(position.left)
+    console.warn("categoriesList", categoriesList)
+    const [subList, setSubList] = useState([])
 
     const classes = useStyles()
     const list = (anchor) => (
@@ -33,9 +36,10 @@ export const CustomDrawer = ({ toggleDrawer, position }) => {
                 {
                     categoriesList.map((ctgr, i) =>
                         <ListItem
-                            key={i}
+                            key={ctgr.id}
                             disableGutters
                             button
+                            onMouseEnter={() => setSubList(ctgr)}
                         >
                             <div className='icon'>
                                 {ctgr.smallIcon}
@@ -54,7 +58,7 @@ export const CustomDrawer = ({ toggleDrawer, position }) => {
     )
 
     return (
-        <div>
+        <div style={{position: 'relative'}}>
             <Drawer
                 anchor='left'
                 open={position['left']}
@@ -63,6 +67,29 @@ export const CustomDrawer = ({ toggleDrawer, position }) => {
             >
                 {list('left')}
             </Drawer>
+            <div style={{
+                display: subList.length === 0 ? 'none' : '',
+                height: '100vh',
+                width: "100%",
+                background: "white",
+                position: 'absolute',
+                zIndex: 99999,
+                left: '120px',
+                top: -35
+            }}>
+                {subList?.model?.map((ParentItem) => {
+                    return (
+                        <div key={ParentItem.id}>
+                            <Typography variant="h6" gutterBottom color="secondary">{ParentItem.name}</Typography>
+                            {ParentItem?.type?.map((item) => (
+                                <Typography variant="body2" key={item.id}>
+                                    {item.name}
+                                </Typography>
+                            ))}
+                        </div>
+                    )
+                })}
+            </div>
         </div>
     )
 }
