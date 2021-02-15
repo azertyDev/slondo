@@ -87,7 +87,7 @@ export const categories_list: CategoryType[] = [
                     },
                     {
                         id: 4,
-                        'name': 'karting',
+                        'name': 'carting',
                         parents: [
                             {id: 2, name: 'transport'},
                             {id: 1, name: 'motorcyclesAndMotorTech'}
@@ -118,7 +118,7 @@ export const categories_list: CategoryType[] = [
                 type: [
                     {
                         id: 7,
-                        'name': 'Автобусы',
+                        'name': 'buses',
                         parents: [
                             {id: 2, name: 'transport'},
                             {id: 2, name: 'busesAndTrucks'},
@@ -126,7 +126,7 @@ export const categories_list: CategoryType[] = [
                     },
                     {
                         id: 8,
-                        'name': 'Микроавтобусы',
+                        'name': 'minibuses',
                         parents: [
                             {id: 2, name: 'transport'},
                             {id: 2, name: 'busesAndTrucks'},
@@ -134,7 +134,7 @@ export const categories_list: CategoryType[] = [
                     },
                     {
                         id: 9,
-                        'name': 'Авторефрижератор',
+                        'name': 'refrigeratedTruck',
                         parents: [
                             {id: 2, name: 'transport'},
                             {id: 2, name: 'busesAndTrucks'},
@@ -142,7 +142,7 @@ export const categories_list: CategoryType[] = [
                     },
                     {
                         id: 10,
-                        'name': 'Автодома',
+                        'name': 'motorHomes',
                         parents: [
                             {id: 2, name: 'transport'},
                             {id: 2, name: 'busesAndTrucks'},
@@ -150,7 +150,7 @@ export const categories_list: CategoryType[] = [
                     },
                     {
                         id: 11,
-                        'name': 'Грузовики',
+                        'name': 'trucks',
                         parents: [
                             {id: 2, name: 'transport'},
                             {id: 2, name: 'busesAndTrucks'},
@@ -158,7 +158,7 @@ export const categories_list: CategoryType[] = [
                     },
                     {
                         id: 12,
-                        'name': 'Легкий коммерческий транспорт',
+                        'name': 'commercialTransport',
                         parents: [
                             {id: 2, name: 'transport'},
                             {id: 2, name: 'busesAndTrucks'},
@@ -166,7 +166,7 @@ export const categories_list: CategoryType[] = [
                     },
                     {
                         id: 13,
-                        'name': 'Прицепы',
+                        'name': 'trailers',
                         parents: [
                             {id: 2, name: 'transport'},
                             {id: 2, name: 'busesAndTrucks'},
@@ -174,7 +174,7 @@ export const categories_list: CategoryType[] = [
                     },
                     {
                         id: 14,
-                        'name': 'Тягачи',
+                        'name': 'tractorUnits',
                         parents: [
                             {id: 2, name: 'transport'},
                             {id: 2, name: 'busesAndTrucks'},
@@ -182,7 +182,7 @@ export const categories_list: CategoryType[] = [
                     },
                     {
                         id: 15,
-                        'name': 'Фудтрак',
+                        'name': 'foodTruck',
                         parents: [
                             {id: 2, name: 'transport'},
                             {id: 2, name: 'busesAndTrucks'},
