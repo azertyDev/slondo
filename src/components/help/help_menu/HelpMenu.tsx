@@ -1,4 +1,4 @@
-import React, { FC, useState } from 'react';
+import React, { FC, useState } from 'react'
 import {
     TextField,
     Typography,
@@ -8,23 +8,24 @@ import {
     Collapse,
     InputAdornment,
     Grid,
-} from '@material-ui/core';
-import { Search_icon } from '@src/components/elements/icons/SearchIcon';
-import { useStyles } from './useStyles';
+} from '@material-ui/core'
+import { Search_icon } from '@src/components/elements/icons/SearchIcon'
+import { useStyles } from './useStyles'
+import { Link } from '@root/i18n'
 
 export const HelpMenu: FC = ({ children }) => {
-    const [open, setOpen] = useState(false);
-    const [isActive, setActive] = useState(false);
+    const [open, setOpen] = useState(false)
+    const [isActive, setActive] = useState(false)
 
     const handleClick = () => {
-        setOpen(!open);
-    };
+        setOpen(!open)
+    }
 
     const handleToggle = () => {
-        setActive(!isActive);
-    };
+        setActive(!isActive)
+    }
 
-    const classes = useStyles();
+    const classes = useStyles()
     return (
         <div className={classes.root}>
             <Typography variant="h6" color="initial">
@@ -102,16 +103,20 @@ export const HelpMenu: FC = ({ children }) => {
                             <ListItemText primary="Нарушение интеллектуальных прав" />
                         </ListItem>
                     </List>
-                    <List component="nav" className={classes.helpMenu + ' support'}>
-                        <ListItem button>
-                            <ListItemText primary="Обратная связь" />
-                        </ListItem>
+                    <List component="nav" className={classes.helpMenu + ' feedback'}>
+                        <Link href='/help/feedback'>
+                            <a>
+                                <ListItem button>
+                                    <ListItemText primary="Обратная связь" />
+                                </ListItem>
+                            </a>
+                        </Link>
                     </List>
                 </Grid>
-                <Grid item xs={9}>
+                <Grid item xs={9} style={{ paddingLeft: '40px' }}>
                     {children}
                 </Grid>
             </Grid>
         </div>
-    );
-};
+    )
+}

@@ -1,4 +1,4 @@
-import {makeStyles} from '@material-ui/core/styles';
+import { makeStyles } from '@material-ui/core/styles'
 
 export const useStyles = makeStyles((theme) => ({
     root: {
@@ -19,15 +19,16 @@ export const useStyles = makeStyles((theme) => ({
             display: 'flex',
             marginBottom: '10px',
             alignItems: 'center',
-            '& > div': {
-                '&:not(:last-child)': {
-                    marginRight: '15px',
-                },
+            '& div:not(:last-child)': {
+                marginRight: 10,
+            },
+            '& > div.post-type': {
                 '& > h6.MuiTypography-h6': {
                     padding: '0px 20px',
                     lineHeight: '30px',
                     borderRadius: '5px',
                     fontWeight: '600',
+                    color: '#fff',
                     '&.post': {
                         background: 'rgba(136, 202, 236, 0.65)',
                     },
@@ -37,24 +38,50 @@ export const useStyles = makeStyles((theme) => ({
                     '&.exauc': {
                         background: 'rgba(242, 153, 74, 0.65)',
                     },
-                    '&:first-child, &.condition': {
-                        color: '#fff',
-                    },
                 },
             },
-            '& > div.condition > h6.MuiTypography-h6': {
-                textAlign: 'end',
-                background: '#90BE27',
-                borderRadius: '50px',
-                margin: 0,
-                fontSize: '1.125rem',
-            },
             '& > div.title': {
-                flex: 'auto!important',
-                marginRight: 15,
+                flex: 1,
                 '& > h2.MuiTypography-h2': {
                     fontSize: '20px',
                     fontWeight: '600',
+                },
+            },
+            '& button': {
+                background: 'none',
+                borderRadius: '100px',
+                color: '#838383',
+                padding: 5,
+                '& > svg': {
+                    marginRight: 5,
+                    '& > defs > linearGradient': {
+                        '& stop': {
+                            stopColor: '#F2C94C',
+                        },
+                    },
+                },
+                '&:disabled': {
+                    color: '#BDBDBD',
+                    '& > svg': {
+                        marginRight: 5,
+                        '& > defs > linearGradient': {
+                            '& stop': {
+                                stopColor: '#BDBDBD',
+                            },
+                        },
+                    },
+                },
+            },
+            '& > div.condition': {
+                borderRadius: '50px',
+                background: '#90BE27',
+                textAlign: 'end',
+                padding: '6px 20px',
+                '& > h6.MuiTypography-h6': {
+                    fontSize: '1.125rem',
+                    fontWeight: '600',
+                    color: '#fff',
+                    lineHeight: 1,
                 },
             },
         },
@@ -65,14 +92,21 @@ export const useStyles = makeStyles((theme) => ({
             background: '#F2F2F2',
             borderRadius: '5px',
             margin: '20px 0',
+            '& > a': {
+                textDecorationLine: 'underline',
+            },
             '& > h6.MuiTypography-subtitle1:first-child': {
                 '& > span': {
                     color: '#2F80ED',
                 },
             },
-            '& > h6.MuiTypography-subtitle1:last-child': {
+            '& h6.MuiTypography-subtitle1:last-child': {
                 display: 'flex',
                 alignItems: 'center',
+                '&:hover': {
+                    cursor: 'pointer',
+                    textDecoration: 'underline',
+                },
                 '& > svg': {
                     marginLeft: '12px',
                 },
@@ -142,7 +176,7 @@ export const useStyles = makeStyles((theme) => ({
             },
             '& h6.description': {
                 fontSize: '1.125rem',
-                paddingRight: '8vw'
+                paddingRight: '8vw',
             },
             '& > h6.MuiTypography-subtitle1': {
                 display: 'flex',
@@ -157,8 +191,8 @@ export const useStyles = makeStyles((theme) => ({
                         width: '48px',
                         height: '48px',
                         marginRight: '10px',
-                    }
-                }
+                    },
+                },
             },
             '& > div:last-child': {
                 display: 'flex',
@@ -169,9 +203,9 @@ export const useStyles = makeStyles((theme) => ({
                     '& a': {
                         display: 'flex',
                         alignItems: 'center',
-                    }
-                }
-            }
+                    },
+                },
+            },
         },
         '& div.post-category': {
             marginBottom: '40px',
@@ -188,9 +222,9 @@ export const useStyles = makeStyles((theme) => ({
                     '& > span': {
                         color: '#675EAA',
                         fontWeight: '600',
-                    }
-                }
-            }
+                    },
+                },
+            },
         },
         '& div.started-price': {
             marginBottom: '40px',
@@ -262,10 +296,14 @@ export const useStyles = makeStyles((theme) => ({
                         display: 'flex',
                         justifyContent: 'space-between',
                         alignItems: 'center',
-                    }
-                }
-            }
-        }
+                    },
+                },
+            },
+        },
+        '& div.MuiSnackbar-root': {
+            position: 'absolute',
+            marginTop: '-10px',
+        },
     },
     icons: {
         width: '20px',
@@ -273,6 +311,91 @@ export const useStyles = makeStyles((theme) => ({
     downArrow: {
         height: '15px',
         marginLeft: '5px',
+    },
+    modal: {
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
+    modalBody: {
+        backgroundColor: theme.palette.background.paper,
+        borderRadius: 10,
+        boxShadow: '0px 0px 15px rgba(0, 0, 0, 0.1)',
+        padding: '25px 15px',
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        '& > h6.MuiTypography-h6': {
+            fontWeight: 600,
+            marginBottom: 15,
+            textAlign: 'center',
+        },
+        '& > nav.MuiList-root': {
+            width: 490,
+            '& > div.MuiListItem-button': {
+                '& > div.MuiListItemText-root': {
+                    margin: 0,
+                },
+                '&:last-child': {
+                    marginBottom: 15,
+                },
+                marginBottom: 5,
+                border: '1px solid #E0E0E0',
+                borderRadius: 5,
+                padding: '15px 0 15px 15px',
+            },
+        },
+        '& > div.textarea': {
+            width: '100%',
+            '& > h6.MuiTypography-subtitle1': {
+                marginBottom: 5,
+            },
+            '& p.MuiFormHelperText-contained': {
+                margin: 0,
+                marginTop: 5,
+                textAlign: 'end',
+                color: '#838383',
+                fontSize: '0.875rem',
+            },
+        },
+        '& > button.MuiButtonBase-root': {
+            width: '200px',
+            background: '#675EAA',
+            borderRadius: '5px',
+            '& > h6.MuiTypography-subtitle1': {
+                color: '#fff',
+            },
+        },
+    },
+    snackbar: {
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        background: theme.palette.primary.adBgColor,
+        borderRadius: '100px',
+        padding: 5,
+        '& > span': {
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+            width: 36,
+            height: 36,
+            background: theme.palette.background.paper,
+            borderRadius: '100%',
+            '& > svg': {
+                '& > defs > linearGradient': {
+                    '& stop': {
+                        stopColor: '#F2C94C',
+                    },
+                },
+            },
+        },
+        '& > h6.MuiTypography-h6': {
+            color: '#fff',
+        },
+        '& > h6.MuiTypography-h6, span': {
+            marginRight: 50,
+        },
     },
     adBanner: {
         marginTop: '50px',
@@ -283,4 +406,4 @@ export const useStyles = makeStyles((theme) => ({
             backgroundColor: '#C0C0C0',
         },
     },
-}));
+}))

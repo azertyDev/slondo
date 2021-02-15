@@ -1,20 +1,34 @@
-import React from 'react';
-import {AppBar, Container, Grid, Hidden, Typography} from '@material-ui/core';
-import {ButtonComponent} from '@src/components/elements/button/Button';
-import {SearchForm} from '@src/components/elements/search_form/SearchForm';
-import {withScrollThreshold} from '@src/components/hoc/withScrollThreshold';
-import {Link} from '@root/i18n';
-import {Logo} from '@src/components/elements/icons';
-import {AddIcon} from '@src/components/elements/icons/AddIcon';
-import {CategorySortIcon} from '@src/components/elements/icons/CategorySortIcon';
-import {SignIcon} from '@src/components/elements/icons/SignIcon';
-import {useStyles} from './useStyles';
+import React from 'react'
+import { AppBar, Container, Grid, Hidden, Typography } from '@material-ui/core'
+import { ButtonComponent } from '@src/components/elements/button/Button'
+import { SearchForm } from '@src/components/elements/search_form/SearchForm'
+import { withScrollThreshold } from '@src/components/hoc/withScrollThreshold'
+import { Link } from '@root/i18n'
+import { Logo } from '@src/components/elements/icons'
+import { AddIcon } from '@src/components/elements/icons/AddIcon'
+import { CategorySortIcon } from '@src/components/elements/icons/CategorySortIcon'
+import { SignIcon } from '@src/components/elements/icons/SignIcon'
+import { useStyles } from './useStyles'
+import { CustomDrawer } from '@src/components/elements/drawer/Drawer'
 
 
 const Bottom = (props) => {
-    const {isScrollBreak, handleOpenModal, isAuth, t} = props;
+    const { isScrollBreak, handleOpenModal, isAuth, t } = props
+    const [drawerPosition, setDrawerPosition] = React.useState({
+        left: false,
+    })
 
-    const classes = useStyles(props);
+    const toggleDrawer = (anchor, open) => (event) => {
+        if (
+            event.type === 'keydown' &&
+            (event.key === 'Tab' || event.key === 'Shift')
+        ) {
+            return
+        }
+        setDrawerPosition({ ...drawerPosition, [anchor]: open })
+    }
+
+    const classes = useStyles(props)
     return (
         <div className={classes.root}>
             <Hidden mdDown>
@@ -45,7 +59,7 @@ const Bottom = (props) => {
                                 >
                                     <Link href="/">
                                         <a>
-                                            <Logo/>
+                                            <Logo />
                                         </a>
                                     </Link>
                                 </Grid>
@@ -59,11 +73,12 @@ const Bottom = (props) => {
                                     <ButtonComponent
                                         color="primary"
                                         className="bottom-category-button header-button"
+                                        onClick={toggleDrawer('left', true)}
                                     >
                                         <Typography variant="subtitle2">
                                             {t('header:categories')}
                                         </Typography>
-                                        <CategorySortIcon/>
+                                        <CategorySortIcon />
                                     </ButtonComponent>
                                 </Grid>
                             </Grid>
@@ -75,7 +90,7 @@ const Bottom = (props) => {
                                 className="search-block"
                             >
                                 <Grid item xs>
-                                    <SearchForm/>
+                                    <SearchForm />
                                 </Grid>
                             </Grid>
                             <Grid item md={2}>
@@ -88,7 +103,7 @@ const Bottom = (props) => {
                                             <Typography variant="subtitle2">
                                                 {t('header:createPost')}
                                             </Typography>
-                                            <AddIcon/>
+                                            <AddIcon />
                                         </ButtonComponent>
                                     </a>
                                 </Link>
@@ -107,7 +122,7 @@ const Bottom = (props) => {
                                     <Typography variant="subtitle2">
                                         {t(`auth_reg:${isAuth ? 'signOut' : 'signIn'}`)}
                                     </Typography>
-                                    <SignIcon/>
+                                    <SignIcon />
                                 </ButtonComponent>
                             </Grid>
                         </Grid>
@@ -116,11 +131,12 @@ const Bottom = (props) => {
             </Hidden>
             <Hidden lgUp>
                 <div className="select-local">
-                    <SearchForm/>
+                    <SearchForm />
                 </div>
             </Hidden>
+            <CustomDrawer toggleDrawer={toggleDrawer} position={drawerPosition} />
         </div>
-    );
-};
+    )
+}
 
-export default withScrollThreshold(Bottom);
+export default withScrollThreshold(Bottom)

@@ -1,4 +1,4 @@
-import { makeStyles } from '@material-ui/core/styles';
+import { makeStyles } from '@material-ui/core/styles'
 
 export const useStyles = makeStyles((theme) => ({
     root: {
@@ -17,20 +17,21 @@ export const useStyles = makeStyles((theme) => ({
                     borderRadius: '5px',
                     '& > svg': {
                         margin: '0 15px',
-                    }
-                }
-            },
-            '& li.selected-category': {
-                border: '1px solid #845CAB',
-                '& > h6.MuiTypography-subtitle1': {
-                    color: theme.palette.primary.secondary,
+                    },
+                    '&.selected-category': {
+                        border: '1px solid #845CAB',
+                        '& > h6.MuiTypography-subtitle1': {
+                            color: theme.palette.primary.secondary,
+                        },
+                        '& > svg': {
+                            '& > path': {
+                                fill: '#845CAB',
+                            },
+                        },
+                    },
                 },
-                '& > svg': {
-                    '& > path': {
-                        fill: '#845CAB',
-                    }
-                }
-            }
+            },
+
         },
         '& div.categories-menu': {
             paddingRight: 20,
@@ -59,16 +60,16 @@ export const useStyles = makeStyles((theme) => ({
                 },
                 '& h6.MuiTypography-subtitle1': {
                     fontWeight: 600,
-                }
+                },
             },
             '& ul': {
                 '& > li:hover': {
                     backgroundColor: theme.palette.primary.gray,
-                }
+                },
             },
             '& > div.sub-category-bg': {
                 width: '100%',
-                height: '497px',
+                height: '500px',
                 background: '#F2F2F2',
                 borderRadius: '10px',
                 display: 'flex',
@@ -85,8 +86,8 @@ export const useStyles = makeStyles((theme) => ({
                     color: theme.palette.common.tab,
                     maxWidth: '318px',
                     marginRight: '200px',
-                }
-            }
-        }
-    }
-}));
+                },
+            },
+        },
+    },
+}))

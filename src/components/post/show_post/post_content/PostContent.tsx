@@ -1,21 +1,29 @@
-import React, {FC, useState} from 'react';
-import {WithT} from 'i18next';
-import {Link} from '@root/i18n';
-import {Typography} from '@material-ui/core';
-import {ReadMore} from '@src/components/elements/read_more/readMore';
-import {LocationIcon} from '@src/components/elements/icons/LocationIcon';
-import {WarningIcon} from '@src/components/elements/icons/WarningIcon';
-import {PhoneIcon} from '@src/components/elements/icons/PhoneIcon';
-import {SwapIcon} from '@src/components/elements/icons/SwapIcon';
-import {SafeIcon} from '@src/components/elements/icons/SafeIcon';
-import {DeliveryIcon} from '@src/components/elements/icons/DeliveryIcon';
-import {SyncSliders} from './sync_sliders/SyncSliders';
-import {ModalSyncSliders} from './modal_sync_sliders/ModalSyncSliders';
-import {BreadcrumbsComponent} from '@src/components/elements/breadcrumbs/Breadcrumbs';
-import {months} from "@src/common_data/common";
-import {pricePrettier, weekDaysHelper} from '@root/src/helpers';
-import {useStyles} from './useStyles';
+import React, { FC, useState } from 'react'
+import { WithT } from 'i18next'
+import { Typography, Modal, Backdrop, List, ListItem, ListItemText, TextField, Snackbar } from '@material-ui/core'
+import { ReadMore } from '@src/components/elements/read_more/readMore'
+import { LocationIcon } from '@src/components/elements/icons/LocationIcon'
+import { WarningIcon } from '@src/components/elements/icons/WarningIcon'
+import { PhoneIcon } from '@src/components/elements/icons/PhoneIcon'
+import { SwapIcon } from '@src/components/elements/icons/SwapIcon'
+import { SafeIcon } from '@src/components/elements/icons/SafeIcon'
+import { DeliveryIcon } from '@src/components/elements/icons/DeliveryIcon'
+import { SyncSliders } from './sync_sliders/SyncSliders'
+import { ModalSyncSliders } from './modal_sync_sliders/ModalSyncSliders'
+import { BreadcrumbsComponent } from '@src/components/elements/breadcrumbs/Breadcrumbs'
+import { Link } from '@root/i18n'
+import { pricePrettier, weekDaysHelper } from '@root/src/helpers'
+import { useStyles } from './useStyles'
+import { ButtonComponent } from '@src/components/elements/button/Button'
+import { NotificationIcon } from '@src/components/elements/icons'
 
+type PostContentTypes = {
+    openSliderModal: boolean,
+    openModal: boolean,
+    openSnackbar: boolean,
+    vertical: string,
+    horizontal: string,
+}
 
 export const PostContent: FC<WithT & any> = (props) => {
     const {
@@ -24,18 +32,65 @@ export const PostContent: FC<WithT & any> = (props) => {
         slidersRefs,
         parameters,
         descHeight,
-    } = props;
+    } = props
 
-    const date = new Date(data.created_at);
+    const [state, setState] = React.useState<PostContentTypes>({
+        openSliderModal: false,
+        openModal: false,
+        openSnackbar: false,
+        vertical: 'top',
+        horizontal: 'right',
+    })
+    const { openModal, openSliderModal, openSnackbar, horizontal, vertical } = state
 
-    const formatted_date = `${date.getDate()} ${months[date.getMonth()]} ${date.getFullYear()}`;
+    const date = new Date(data.created_at)
 
-    const [open, setOpen] = useState(false);
+    const months = [
+        'января',
+        'февраля',
+        'марта',
+        'апреля',
+        'мая',
+        'июня',
+        'июля',
+        'августа',
+        'сентября',
+        'октября',
+        'ноября',
+        'декабря',
+    ]
 
-    const handleShowModal = value => () => setOpen(value);
+    const excludedFields = [
+        'id',
+        'type',
+        'sub_type',
+        'uniqid',
+        'color_id',
+        'type_id',
+    ]
+
+    const formatted_date = `${date.getDate()} ${months[date.getMonth()]} ${date.getFullYear()}`
+
+    const handleShowSliderModal = value => () => setState({ ...state, openSliderModal: value })
+
+    const handleOpenModal = () => {
+        setState({ ...state, openModal: true })
+    }
+
+    const handleCloseModal = () => {
+        setState({ ...state, openModal: false })
+    }
+
+    const handleOpenSnackbar = (newState) => () => {
+        setState({ openSnackbar: true, ...newState })
+    }
+
+    const handleCloseSnackbar = () => {
+        setState({ ...state, openSnackbar: false })
+    }
 
     const parameterItems = Object.keys(parameters).reduce((items, key, i) => {
-        if (parameters[key] !== null) {
+        if (parameters[key] !== null && excludedFields.every((k) => k !== key)) {
             if (Array.isArray(parameters[key]) && parameters[key].length !== 0) {
                 const params = (
                     <li>
@@ -45,15 +100,15 @@ export const PostContent: FC<WithT & any> = (props) => {
                                 .join(', ')}
                         </Typography>
                     </li>
-                );
+                )
                 items.push(
                     <div key={i} className="params-list">
                         <Typography variant="subtitle1" className="key">
                             {key}
                         </Typography>
                         <ul>{params}</ul>
-                    </div>
-                );
+                    </div>,
+                )
             } else if (!Array.isArray(parameters[key])) {
                 items.push(
                     <li key={key}>
@@ -77,14 +132,14 @@ export const PostContent: FC<WithT & any> = (props) => {
                                 ? parameters[key]
                                 : parameters[key].name}
                         </Typography>
-                    </li>
-                );
+                    </li>,
+                )
             }
         }
-        return items;
-    }, []);
+        return items
+    }, [])
 
-    const classes = useStyles();
+    const classes = useStyles()
     return (
         <div className={classes.root}>
             <div className="breadcrumbs">
@@ -116,14 +171,14 @@ export const PostContent: FC<WithT & any> = (props) => {
                         variant="subtitle1"
                         color="primary"
                         noWrap
-                        style={{width: '280px'}}
+                        style={{ width: '280px' }}
                     >
                         {data.title}
                     </Typography>
                 </BreadcrumbsComponent>
             </div>
             <div className="post-header">
-                <div>
+                <div className='post-type'>
                     <Typography
                         variant="h6"
                         className={data.ads_type.mark}
@@ -136,14 +191,23 @@ export const PostContent: FC<WithT & any> = (props) => {
                         {data.title}
                     </Typography>
                 </div>
-                <div className="condition">
-                    <Typography variant="h6">{data.condition.name}</Typography>
+                <div>
+                    <ButtonComponent onClick={handleOpenSnackbar({ vertical: 'top', horizontal: 'right' })}>
+                        <NotificationIcon />
+                        Следить
+                    </ButtonComponent>
                 </div>
+                {
+                    !data.condition.name &&
+                    <div className="condition">
+                        <Typography variant="h6">Б/У</Typography>
+                    </div>
+                }
             </div>
             <SyncSliders
                 slidersRefs={slidersRefs}
                 imgs={data.images}
-                handleOpenModal={handleShowModal(true)}
+                handleOpenModal={handleShowSliderModal(true)}
             />
             <div className="post-info">
                 <Typography variant="subtitle1">
@@ -155,15 +219,15 @@ export const PostContent: FC<WithT & any> = (props) => {
                 <Typography variant="subtitle1">
                     Просмотров: {data.number_of_views}
                 </Typography>
-                <Typography variant="subtitle1">
-                    Пожаловаться <WarningIcon/>
+                <Typography variant="subtitle1" onClick={handleOpenModal}>
+                    Пожаловаться <WarningIcon />
                 </Typography>
             </div>
             <div className="post-bonus">
                 {
                     !!data.delivery
                     && <span className="delivery">
-                        <DeliveryIcon/>&nbsp;
+                        <DeliveryIcon />&nbsp;
                         <Typography variant="subtitle1">
                             Есть доставка
                         </Typography>
@@ -172,7 +236,7 @@ export const PostContent: FC<WithT & any> = (props) => {
                 {
                     !!data.safe_deal
                     && <span className="safe_deal">
-                        <SafeIcon/>&nbsp;
+                        <SafeIcon />&nbsp;
                         <Typography variant="subtitle1">
                             Безопасная покупка
                         </Typography>
@@ -181,7 +245,7 @@ export const PostContent: FC<WithT & any> = (props) => {
                 {
                     !!data.exchange
                     && <span className="exchange">
-                        <SwapIcon/>&nbsp;
+                        <SwapIcon />&nbsp;
                         <Typography variant="subtitle1">
                             Возможен обмен
                         </Typography>
@@ -190,7 +254,7 @@ export const PostContent: FC<WithT & any> = (props) => {
                 {
                     !!data.available_start_time
                     && <span className="available">
-                        <PhoneIcon/>
+                        <PhoneIcon />
                         {
                             !!data.available_days.length
                             && <>
@@ -212,7 +276,7 @@ export const PostContent: FC<WithT & any> = (props) => {
                 </Typography>
                 {data.region.name || data.city.name || data.district.name
                     ? <Typography variant="subtitle1" noWrap>
-                        <LocationIcon/>
+                        <LocationIcon />
                         {`${data.region.name ?? ''}`}
                         {data.city.name ? `, ${data.city.name}` : ''}
                         {data.district.name ? `, ${data.district.name}` : ''}
@@ -265,11 +329,74 @@ export const PostContent: FC<WithT & any> = (props) => {
             </div>}
             <ModalSyncSliders
                 slidersRefs={slidersRefs}
-                open={open}
+                open={openSliderModal}
                 title={data.title}
                 imgs={data.images}
-                onClose={handleShowModal(false)}
+                onClose={handleShowSliderModal(false)}
             />
+            <Modal
+                className={classes.modal}
+                open={openModal}
+                onClose={handleCloseModal}
+                BackdropComponent={Backdrop}
+                BackdropProps={{
+                    timeout: 200,
+                }}
+            >
+                <div className={classes.modalBody}>
+                    <Typography variant='h6'>
+                        Выберите причину жалобы
+                    </Typography>
+                    <List component="nav" disablePadding>
+                        <ListItem button disableGutters>
+                            <ListItemText primary="Столкнулся с мошенничеством и обманом." />
+                        </ListItem>
+                        <ListItem button disableGutters>
+                            <ListItemText primary="Товар указан, но его нет в наличии." />
+                        </ListItem>
+                        <ListItem button disableGutters>
+                            <ListItemText primary="Цена неактуальная." />
+                        </ListItem>
+                        <ListItem button disableGutters>
+                            <ListItemText primary="Содержание нарушает правила сервиса." />
+                        </ListItem>
+                        <ListItem button disableGutters>
+                            <ListItemText primary="Автор объявления вызывает подозрения." />
+                        </ListItem>
+                    </List>
+                    <div className='textarea'>
+                        <Typography variant='subtitle1'>Другое</Typography>
+                        <TextField
+                            fullWidth
+                            multiline
+                            rows={10}
+                            placeholder='Опишите причину'
+                            helperText='0/500'
+                            variant="outlined"
+                        />
+                    </div>
+                    <ButtonComponent>
+                        <Typography variant='subtitle1'>
+                            Отправить
+                        </Typography>
+                    </ButtonComponent>
+                </div>
+            </Modal>
+            <Snackbar
+                anchorOrigin={{ vertical, horizontal }}
+                open={openSnackbar}
+                onClose={handleCloseSnackbar}
+                key={vertical + horizontal}
+            >
+                <div className={classes.snackbar}>
+                    <span>
+                        <NotificationIcon />
+                    </span>
+                    <Typography variant='h6'>
+                        Ставка повышена!
+                    </Typography>
+                </div>
+            </Snackbar>
         </div>
-    );
-};
+    )
+}

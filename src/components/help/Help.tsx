@@ -10,17 +10,6 @@ export const Help = () => {
     const handleClick = () => {
         setShow(!show);
     };
-
-    // {
-    //     data: [
-    //         {
-    //             id: 1,
-    //             title: 'Заказ и предложение услуг на Slondo',
-    //             articles: [{title:Я хочу заказать услугу, content: 'asasdasdasdasdasdasdasd' }]
-    //         }
-    //     ]
-    // }
-
     const classes = useStyles();
     return (
         <div className={classes.root}>
