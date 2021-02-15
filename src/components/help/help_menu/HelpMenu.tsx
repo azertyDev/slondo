@@ -45,7 +45,7 @@ export const HelpMenu: FC = ({ children }) => {
                 placeholder="Поиск категорий"
             />
             <Grid container>
-                <Grid item xs={3} style={{ paddingRight: '40px' }}>
+                <Grid item xs={3}>
                     <List component="nav" className={classes.helpMenu}>
                         <ListItem button onClick={handleClick}>
                             <ListItemText primary="Заказ и предложение услуг" />
@@ -104,7 +104,7 @@ export const HelpMenu: FC = ({ children }) => {
                         </ListItem>
                     </List>
                     <List component="nav" className={classes.helpMenu + ' feedback'}>
-                        <Link href='/feedback'>
+                        <Link href='/help/feedback'>
                             <a>
                                 <ListItem button>
                                     <ListItemText primary="Обратная связь" />
@@ -113,7 +113,7 @@ export const HelpMenu: FC = ({ children }) => {
                         </Link>
                     </List>
                 </Grid>
-                <Grid item xs={9}>
+                <Grid item xs={9} style={{ paddingLeft: '40px' }}>
                     {children}
                 </Grid>
             </Grid>

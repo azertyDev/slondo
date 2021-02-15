@@ -8,12 +8,12 @@ import {InnerCardData} from "@root/interfaces/CardData";
 // const cookies = new Cookies();
 // const {token} = cookies.get('token') || {token: ''};
 
-const amazonServer = 'http://54.205.72.116/api/';
+const uztelecom = 'https://backend.testb.uz/api/';
 const localServer = 'http://192.168.1.60/slondo/public/api/';
 
 const instance = Axios.create({
     withCredentials: true,
-    baseURL: amazonServer
+    baseURL: uztelecom
 });
 
 // const config = {

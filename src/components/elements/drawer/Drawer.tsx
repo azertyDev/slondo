@@ -1,20 +1,17 @@
-import React, { useState } from 'react'
+import React, {useState} from 'react'
 import Drawer from '@material-ui/core/Drawer'
-import { categoriesList } from '@src/common_data/categoriesList'
-import { InputAdornment, List, ListItem, TextField, Typography } from '@material-ui/core'
-import { useTranslation } from 'i18n'
-import { useStyles } from './useStyles'
-import { Search_icon } from '@src/components/elements/icons'
-import Tooltip from '@material-ui/core/Tooltip';
-
+import {categories_list} from '@src/common_data/categories_list'
+import {InputAdornment, List, ListItem, TextField, Typography} from '@material-ui/core'
+import {useTranslation} from 'i18n'
+import {useStyles} from './useStyles'
+import {Search_icon} from '@src/components/elements/icons'
+import {Link} from '@root/i18n'
 
 export const CustomDrawer = ({ toggleDrawer, position }) => {
+    const classes = useStyles()
     const { t } = useTranslation()
-    console.warn(position.left)
-    console.warn("categoriesList", categoriesList)
     const [subList, setSubList] = useState([])
 
-    const classes = useStyles()
     const list = (anchor) => (
         <div
             className={classes.drawerList}
@@ -25,7 +22,7 @@ export const CustomDrawer = ({ toggleDrawer, position }) => {
                 InputProps={{
                     startAdornment: (
                         <InputAdornment position="start">
-                            <Search_icon />
+                            <Search_icon/>
                         </InputAdornment>
                     ),
                 }}
@@ -34,22 +31,23 @@ export const CustomDrawer = ({ toggleDrawer, position }) => {
             />
             <List>
                 {
-                    categoriesList.map((ctgr, i) =>
+                    categories_list.map((ctgr, i) =>
                         <ListItem
                             key={ctgr.id}
                             disableGutters
                             button
                             onMouseEnter={() => setSubList(ctgr)}
                         >
-                            <div className='icon'>
-                                {ctgr.smallIcon}
-                            </div>
-                            <Typography
-                                variant="subtitle1"
-                                color="initial"
-                            >
-                                {t(`categories:${ctgr.name}`)}
-                            </Typography>
+                                    <div className='icon'>
+                                        {ctgr.smallIcon}
+                                    </div>
+                                    <Typography
+                                            variant="subtitle1"
+                                            color="initial"
+                                    >
+
+                                            {t(`categories:${ctgr.name}`)}
+                                    </Typography>
                         </ListItem>
                     )
                 }
@@ -63,7 +61,7 @@ export const CustomDrawer = ({ toggleDrawer, position }) => {
                 anchor='left'
                 open={position['left']}
                 onClose={toggleDrawer('left', false)}
-                BackdropProps={{ invisible: true }}
+                BackdropProps={{invisible: true}}
             >
                 {list('left')}
             </Drawer>
@@ -77,14 +75,19 @@ export const CustomDrawer = ({ toggleDrawer, position }) => {
                 left: '120px',
                 top: -35
             }}>
-                {subList?.model?.map((ParentItem) => {
+                <h1 onClick={() => setSubList([])} style={{cursor: "pointer"}}>X</h1>
+                {subList?.subCategory?.map((ParentItem) => {
                     return (
                         <div key={ParentItem.id}>
                             <Typography variant="h6" gutterBottom color="secondary">{ParentItem.name}</Typography>
                             {ParentItem?.type?.map((item) => (
-                                <Typography variant="body2" key={item.id}>
-                                    {item.name}
-                                </Typography>
+                                <Link href={`/categories/${ParentItem.parents[0].name}/${item.name}`}>
+                                    <a>
+                                        <Typography variant="body2" key={item.id}>
+                                            {item.name}
+                                        </Typography>
+                                    </a>
+                                </Link>
                             ))}
                         </div>
                     )

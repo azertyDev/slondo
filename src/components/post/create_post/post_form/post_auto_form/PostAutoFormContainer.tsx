@@ -15,7 +15,7 @@ type AncmntAutoFormPropsTypes = {
 export const PostAutoFormContainer: FC<any> = (props) => {
     const {t, createAncmnt, values} = props;
     const {postParams} = values;
-    // prepareCrtPostData(createAncmnt.category.model, postParams);
+    // prepareCrtPostData(createAncmnt.car.model, postParams);
 
     // const autoData = {
     //     automobile: {

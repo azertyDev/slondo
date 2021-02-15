@@ -2,7 +2,7 @@ import {CategoryType, SubLvlCtgrsType} from "@root/interfaces/Categories";
 import CyrillicToTranslit from 'cyrillic-to-translit-js';
 import {excludedKeys} from "@src/common_data/form_fields_list";
 import {pnctnMarksRegEx} from "@src/common_data/reg_ex";
-import {TFunction} from "i18next";
+import {TFunction} from "next-i18next";
 
 
 export const transformTitle = (title: string): string => {
@@ -23,26 +23,26 @@ export const pricePrettier = (price: string): string => {
 }
 
 const addParents = (list, parents) => (
-    list.map(ctgr => {
-        if (ctgr.type) {
+    list.map(ctgry => {
+        if (ctgry.type) {
             const type = addParents(
-                ctgr.type,
+                ctgry.type,
                 [
                     ...parents,
                     {
-                        id: ctgr.id,
-                        name: ctgr.name
+                        id: ctgry.id,
+                        name: ctgry.name
                     }
                 ]
             )
             return {
-                ...ctgr,
+                ...ctgry,
                 type,
                 parents
             }
         } else {
             return {
-                ...ctgr,
+                ...ctgry,
                 parents
             }
         }
@@ -50,18 +50,18 @@ const addParents = (list, parents) => (
 );
 
 export const categoriesListNormalize = (categoryList: CategoryType[]) => (
-    categoryList.map(ctgr => {
-        if (ctgr.model) {
-            const model = addParents(
-                ctgr.model,
+    categoryList.map(ctgry => {
+        if (ctgry.subCategory) {
+            const subCategory = addParents(
+                ctgry.subCategory,
                 [{
-                    id: ctgr.id,
-                    name: ctgr.name
+                    id: ctgry.id,
+                    name: ctgry.name
                 }]
             );
-            return {...ctgr, model};
+            return {...ctgry, subCategory};
         } else {
-            return ctgr;
+            return ctgry;
         }
     })
 );
@@ -79,7 +79,7 @@ export const dataForCrtPostNormalize = (data: any) => {
                 } else {
                     acc[key] = data[key];
                     if (key === 'manufacturer' && data[key][0].models) {
-                        acc.model = [];
+                        acc.subCategory = [];
                     }
                 }
             } else {
@@ -102,10 +102,10 @@ export const dataForCrtPostNormalize = (data: any) => {
     return data
 };
 
-export const categorySearchHelper = (txt: string, categoryList: CategoryType[]): SubLvlCtgrsType[] => {
+export const categorySearchHelper = (txt: string, categoryList: CategoryType[], t: TFunction): SubLvlCtgrsType[] => {
     return categoryList
         .reduce((list, category) => {
-            list = [...list, ...getMatchedCtgrs(txt, category.model)];
+            list = [...list, ...getMatchedCtgrs(txt, category.subCategory)];
             return list;
         }, []);
 
@@ -114,13 +114,13 @@ export const categorySearchHelper = (txt: string, categoryList: CategoryType[]):
         let matchedCtgrs = [];
 
         if (list !== undefined) {
-            list.forEach(ctgr => {
-                if (searchRegExp.test(ctgr.name)) {
-                    matchedCtgrs.push(ctgr);
+            list.forEach(ctgry => {
+                if (searchRegExp.test(t(`categories:${ctgry.name}`))) {
+                    matchedCtgrs.push(ctgry);
                 }
                 matchedCtgrs = [
                     ...matchedCtgrs,
-                    ...getMatchedCtgrs(txt, ctgr.type)
+                    ...getMatchedCtgrs(txt, ctgry.type)
                 ];
             });
         }
@@ -152,24 +152,11 @@ export const weekDaysHelper = (days) => {
     return result;
 };
 
-export const categoriesTrans = (ctgrList: any[], t: TFunction) => {
-    return ctgrList.reduce((acc, ctgr) => {
-        const cloneCtgr = {
-            ...ctgr,
-            name: t(`categories:${ctgr.name}`)
-        };
-
-        if (ctgr.model) {
-            cloneCtgr.model = categoriesTrans(ctgr.model, t);
+export const categoriesByType = (ctgryList: CategoryType[], postType: string): CategoryType[] => {
+    return ctgryList.reduce((acc, ctgry) => {
+        if (postType === 'post' || ctgry.has_auction) {
+            acc.push(ctgry);
         }
-        if (ctgr.type) {
-            cloneCtgr.type = categoriesTrans(ctgr.type, t);
-        }
-        if (ctgr.parents) {
-            cloneCtgr.parents = categoriesTrans(ctgr.parents, t);
-        }
-
-        acc.push(cloneCtgr);
         return acc;
     }, []);
 };

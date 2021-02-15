@@ -1,11 +1,11 @@
 import {IdNameType} from "@root/interfaces/Post";
 
-
 export interface Categories {
     isFetch: boolean;
     error?: unknown;
     data: CategoriesDataTypes[];
 }
+
 export type CategoriesDataTypes = {
     id: number;
     manufactures: [];
@@ -20,20 +20,23 @@ export type AdjustableSeats = {
     id: number;
     name: string;
 }[];
-export type CategoryType = {
+
+export type CategoryType = IdNameType & {
+
     icon: {
         url: string;
     },
     smallIcon: any;
-    model?: ModelType[];
+    subCategory?: SubCategoryType[];
     has_auction: boolean;
-} & IdNameType;
+};
 
-export type ModelType = {
+export type SubCategoryType = IdNameType & {
     parents: IdNameType[];
     type?: SubLvlCtgrsType[];
-} & IdNameType;
+};
 
-export type SubLvlCtgrsType = {
+export type SubLvlCtgrsType = IdNameType & {
     parents: IdNameType[]
+
 } & IdNameType

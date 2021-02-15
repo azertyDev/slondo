@@ -1,22 +1,12 @@
 import React, {FC} from 'react';
-import {Grid, TextField, Typography} from '@material-ui/core';
-import {ButtonComponent} from "@src/components/elements/button/Button";
-import {CustomMenu} from "@src/components/elements/custom_menu/CustomMenu";
-// import {PostAutoFormContainer} from "@src/components/post/create_post/post_form/post_auto_form/PostAutoFormContainer";
 import {WithT} from "i18next";
 import {CreatePostProps} from "@root/interfaces/Post";
-import {SecLvlCtgrType} from "../post_form/PostFormContainer";
-import {DataForCrtPostType} from "../CreatePostContainer";
-import {PostParams} from "./components/post_params/PostParams";
-import {Header} from './components/header/Header';
-import {AuctionParams} from "./components/auction_params/AuctionParams";
-import {PaymentDelivery} from "./components/payment_delivery/PaymentDelivery";
-import {Location} from './components/location/Location';
-import {Photos} from "./components/photos/Photos";
-import {Description} from './components/description/Description';
-import {Contacts} from './components/contacts/Contacts';
+import {DataForCrtPostType} from "./PostFormContainer";
+import {PostParams} from "./post_params/PostParams";
+import {Photos} from "./photos/Photos";
+import {AccordionComponent} from "@src/components/post/create_post/post_form/post_auto_form/accordion_component/AccordionComponent";
+import {PriceDescContacts} from "@src/components/post/create_post/post_form/price_desc_contacts/PriceDescContacts";
 import {useStyles} from './useStyles';
-import {AvailableDays} from "./components/available_days/AvailableDays";
 
 
 type PostFormProps = {
@@ -40,7 +30,6 @@ type PostFormProps = {
     handleParamsCheckbox,
     handleCheckboxChange,
     dataForCrtPost: DataForCrtPostType,
-    secCtgr: SecLvlCtgrType
 }
 
 export const PostForm: FC<PostFormProps & WithT> = (props) => {
@@ -66,7 +55,6 @@ export const PostForm: FC<PostFormProps & WithT> = (props) => {
         handleParamsCheckbox,
         handleCheckboxChange,
         dataForCrtPost,
-        secCtgr,
     } = props;
 
     const {defaultParams, postParams, auction} = values;
@@ -77,174 +65,76 @@ export const PostForm: FC<PostFormProps & WithT> = (props) => {
 
     const classes = useStyles();
     return (
-        // mark === 'car'
-        //     ? <PostAutoFormContainer {...props}/>
         <div className={classes.root}>
-            <div className='header-wrapper'>
-                <Header
-                    postType={postType}
-                    category={category}
-                    secCtgr={secCtgr}
-                    errors={errors}
-                    touched={touched}
-                    isPreview={isPreview}
-                    handleInput={handleInput}
-                    defaultParams={defaultParams}
-                />
-            </div>
             {!!Object.keys(dataForCrtPost.data).length
-            && <div className='post-params-wrapper'>
-                <PostParams
-                    t={t}
+            && <div className='accordion-wrapper'>
+                <AccordionComponent
                     isPreview={isPreview}
-                    onBlur={handleBlur}
-                    errors={errors}
-                    touched={touched}
-                    handleInput={handleInput}
-                    handleMenuItem={handleMenuItem}
-                    handleListItem={handleListItem}
-                    paramsByMark={postParams[mark]}
-                    handleParamsCheckbox={handleParamsCheckbox}
-                    dataForCrtPost={dataForCrtPost}
-                />
+                    title={t('parameters')}
+                    nextBlockTitle={t('appearance')}
+                    icon='/icons/parameters.svg'
+                >
+                    <PostParams
+                        t={t}
+                        isPreview={isPreview}
+                        onBlur={handleBlur}
+                        errors={errors}
+                        touched={touched}
+                        handleInput={handleInput}
+                        handleMenuItem={handleMenuItem}
+                        handleListItem={handleListItem}
+                        paramsByMark={postParams[mark]}
+                        handleParamsCheckbox={handleParamsCheckbox}
+                        dataForCrtPost={dataForCrtPost}
+                    />
+                </AccordionComponent>
             </div>}
-            {category.mark !== 'free'
-            && <>
-                {isAuction
-                    ? <div>
-                        <AuctionParams
-                            auction={auction}
-                            errors={errors}
-                            touched={touched}
-                            postType={postType}
-                            isPreview={isPreview}
-                            handleBlur={handleBlur}
-                            handleInput={handleInput}
-                            defaultParams={defaultParams}
-                            handleMenuItem={handleMenuItem}
-                            handleCheckboxChange={handleCheckboxChange}
-                        />
-                    </div>
-                    : <div>
-                        <Typography variant="subtitle1">
-                            <strong>
-                                Цена
-                                {!isPreview
-                                && <span className='error-text'>*</span>}
-                            </strong>
-                            {errors.price
-                            && touched.price
-                            && <span className='error-text'> {errors.price}</span>}
-                        </Typography>
-                        {isPreview
-                            ? <Typography>
-                                {`${defaultParams.price} ${defaultParams.currency.name}.`}
-                            </Typography>
-                            : <Grid container>
-                                <Grid item xs={3}>
-                                    <TextField
-                                        fullWidth
-                                        variant='outlined'
-                                        value={defaultParams.price ?? ''}
-                                        className={errors.price && touched.price
-                                            ? 'error-border'
-                                            : ''}
-                                        name='price'
-                                        onChange={handleInput}
-                                    />
-                                </Grid>
-                                <CustomMenu
-                                    name='currency'
-                                    valueName={
-                                        defaultParams.currency
-                                            ? defaultParams.currency.name
-                                            : 'Не выбрано'}
-                                    items={postType.currency}
-                                    onClick={handleMenuItem('currency')}
-                                    onBlur={handleBlur}
-                                />
-                            </Grid>
-                        }
-                    </div>
-                }
-            </>}
-            <div>
-                <PaymentDelivery
+            <div className='accordion-wrapper'>
+                <AccordionComponent
                     isPreview={isPreview}
-                    handleCheckboxChange={handleCheckboxChange}
-                    defaultParams={defaultParams}
-                />
+                    title={t('appearance')}
+                    nextBlockTitle={t('priceDescContacts')}
+                    icon='/icons/view.svg'
+                >
+                    <Photos
+                        t={t}
+                        isPreview={isPreview}
+                        errors={errors}
+                        touched={touched}
+                        values={values}
+                        setValues={setValues}
+                    />
+                </AccordionComponent>
             </div>
-            <div className='location-wrapper'>
-                <Location
+            <div className='accordion-wrapper'>
+                <AccordionComponent
                     isPreview={isPreview}
-                    errors={errors}
-                    touched={touched}
-                    handleBlur={handleBlur}
-                    handleLocation={handleLocation}
-                    locations={locations}
-                />
-            </div>
-            <div>
-                <Photos
-                    isPreview={isPreview}
-                    errors={errors}
-                    touched={touched}
-                    values={values}
-                    setValues={setValues}
-                />
-            </div>
-            <div>
-                <Description
-                    errors={errors}
-                    touched={touched}
-                    isPreview={isPreview}
-                    handleInput={handleInput}
-                    handleBlur={handleBlur}
-                    defaultParams={defaultParams}
-                />
-            </div>
-            <Grid
-                item
-                container
-                justify='space-between'
-                spacing={1}
-            >
-                <Grid item xs={6}>
-                    <Contacts
+                    title={t('priceDescContacts')}
+                    nextBlockTitle={t('next')}
+                    icon='/icons/info_icon.svg'
+                >
+                    <PriceDescContacts
+                        t={t}
                         isPreview={isPreview}
                         isAuction={isAuction}
-                        auction={auction}
-                        handleCheckboxChange={handleCheckboxChange}
+                        errors={errors}
+                        touched={touched}
+                        postType={postType}
+                        category={category}
                         defaultParams={defaultParams}
+                        auction={auction}
+                        locations={locations}
+                        avalTime={avalTime}
+                        handleAvalDays={handleAvalDays}
+                        handleBlur={handleBlur}
+                        handleCheckboxChange={handleCheckboxChange}
                         handleInput={handleInput}
+                        handleLocation={handleLocation}
+                        handleMenuItem={handleMenuItem}
+                        handleSwitch={handleSwitch}
+                        handleTime={handleTime}
                     />
-                </Grid>
-                {
-                    !isAuction
-                    && <Grid item xs={6}>
-                        {(isPreview && avalTime.isActive || !isPreview)
-                        && <AvailableDays
-                            isPreview={isPreview}
-                            avalTime={avalTime}
-                            handleTime={handleTime}
-                            handleBlur={handleBlur}
-                            handleSwitch={handleSwitch}
-                            handleAvalDays={handleAvalDays}
-                        />}
-                    </Grid>
-                }
-            </Grid>
-            <div className='next-button-wrapper'>
-                <ButtonComponent
-                    type='submit'
-                    disabled={values.isFetch}
-                    className='nav-button'
-                >
-                    <Typography>
-                        {isPreview ? 'Создать' : 'Далее'}
-                    </Typography>
-                </ButtonComponent>
+                </AccordionComponent>
             </div>
         </div>
     )

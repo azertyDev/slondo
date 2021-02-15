@@ -1,4 +1,32 @@
 {
+    "category": "Toifa",
+    "searchCategory": "Toifani qidirish",
+    "selectCategory": "Toifani tanlang",
+
+    "howToCreatePost": "E'lon yaratish",
+    "howToCreateAuc": "Auksion yaratish",
+    "howToCreateExAuc": "Kengaytirilgan auksion yaratish",
+    "trainingVideo": "O'quv videosi",
+    "maxFunctionality": "Maksimal funktsional imkoniyatlaridan foydalaning",
+    "tradeToGetBetter": "O'zingiz uchun yaxshiroq narxni olish uchun savdo qiling",
+    "postFree": "Mahsulotlarni yoki xizmatlarni bepul joylashtiring",
+
+    "postType": "E'lon turi",
+    "fill": "To'ldirish",
+    "check": "Tekshirish",
+
+    "parameters": "Parametrlar",
+    "appearance": "Tashqi ko'rinish",
+    "priceDescContacts": "Narx, tavsif va aloqa",
+    "next": "Keyingi",
+    "postTitle": "E'lon nomi",
+    "price": "Narx",
+    "noSelect": "Tanlangan emas",
+    "exampleTitle": "Sarlavhani yozing",
+    "photos": "Rasmlar",
+
+    "congratulations": "Tabriklimiz!",
+
     "automobile": "Avtomobil",
     "year": "Ishlab chiqarilgan yili ",
     "mileage": "Bosib o’tgan masofasi",
@@ -62,7 +90,6 @@
     "function": "Funksiyalari",
     "connector": "Ulagich",
     "device": "Qurilma",
-    "category": "Turkumi",
     "quality": "Yozuv sifati",
     "format": "Tashuvchi formati",
     "zoom": "Zoom",

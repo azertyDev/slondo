@@ -18,7 +18,7 @@ const errorSlice = createSlice({
             state.isError = false;
             state.errorMsg = '';
         }
-    },
+    }
 });
 
 export const {setErrorMsgAction, resetErrorAction} = errorSlice.actions;
