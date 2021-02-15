@@ -46,17 +46,23 @@ export const PostCategories: FC = () => {
         const {id, name, subCategory, type} = ctgr;
         const list = subCategory ?? type;
 
+        const url = `/create/form/${postType}`;
+
         if (ctgr.parents) {
             const mainCtgr = ctgr.parents[0];
+            const mainCtgrName = mainCtgr.name;
+
             if (ctgr.parents[1]) {
-                const mainCtgrName = ctgr.parents[0].name;
                 const subCtgrName = ctgr.parents[1].name;
                 const typeName = ctgr.name;
 
-                Router.push(`/create/form/${postType}-${mainCtgrName}-${subCtgrName}-${typeName}`);
+                Router.push(`${url}-${mainCtgrName}-${subCtgrName}-${typeName}`);
             } else {
                 category.subCategory = {...category.subCategory, id, name};
                 setCategory({...category, ...mainCtgr});
+
+                const subCtgrName = ctgr.name;
+                type && Router.push(`${url}-${mainCtgrName}-${subCtgrName}`);
             }
         } else {
             setCategory({...category, id, name});
