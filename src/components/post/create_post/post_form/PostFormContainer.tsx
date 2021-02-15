@@ -12,7 +12,6 @@ import {pricePrettier} from "@src/helpers";
 import {CameraIcon} from "@src/components/elements/icons";
 import {CategoryType} from "@root/interfaces/Categories";
 import {WithT} from "i18next";
-import {DataForCrtPostType} from "@src/components/post/create_post/CreatePostContainer";
 import {numberRegEx, timeRegEx, whiteSpacesRegEx} from "@src/common_data/reg_ex";
 import {fieldKeysWithTxt, noSelect, numericFields, optionKeys} from '@root/src/common_data/form_fields_list';
 
@@ -25,14 +24,19 @@ export const initPhoto: FileType = {
     )
 };
 
+export type DataForCrtPostType = {
+    isFetch: boolean;
+    data: any;
+};
+
 type PostFormContainerProps = {
     activeStep: number;
     handleNextStep: () => void;
     postType: PostType;
     category: CategoryType;
     dataForCrtPost: DataForCrtPostType;
-    setDataForCrtPost: Dispatch<SetStateAction<DataForCrtPostType>>;
     secCtgr: SecLvlCtgrType;
+    setDataForCrtPost: Dispatch<SetStateAction<DataForCrtPostType>>;
 };
 
 export type SecLvlCtgrType = {
@@ -62,7 +66,7 @@ export const PostFormContainer: FC<PostFormContainerProps & WithT> = (props) => 
         files: initPhotos,
         postParams: {
             [category.name]: {
-                [`${category.name}_id`]: secCtgr.id,
+                [`${secCtgr.name}_id`]: secCtgr.id,
                 type_id: secCtgr.type.id
             }
         },
@@ -192,6 +196,7 @@ export const PostFormContainer: FC<PostFormContainerProps & WithT> = (props) => 
                 price_by_now: value.replace(whiteSpacesRegEx, '')
             };
         }
+
         return valsForCrtPost;
     };
 
@@ -278,9 +283,9 @@ export const PostFormContainer: FC<PostFormContainerProps & WithT> = (props) => 
         setDefaultVals();
     }, [dataForCrtPost]);
 
-    // console.log(secCtgr)
-    console.log(dataForCrtPost)
-    console.log(values)
+    console.log(secCtgr)
+    // console.log(values)
+    // console.log(dataForCrtPost)
 
     return (
         <FormikProvider value={formik}>
@@ -294,7 +299,6 @@ export const PostFormContainer: FC<PostFormContainerProps & WithT> = (props) => 
                     setValues={setValues}
                     locations={locations}
                     handleBlur={handleBlur}
-                    secCtgr={secCtgr}
                     handleTime={handleTime}
                     handleInput={handleInput}
                     handleSwitch={handleSwitch}
@@ -309,15 +313,16 @@ export const PostFormContainer: FC<PostFormContainerProps & WithT> = (props) => 
         </FormikProvider>
     )
 
-    // ----------------------------------------------> Handlers <-------------------------------------------------
+    // ----------------------------------------------> Handlers <------------------------------------------------- //
     function handleLocation(_, loc) {
         defaultParams.location = !!loc
-            ? {
-                region_id: loc.region_id ?? null,
-                city_id: loc.city_id ?? null,
-                district_id: loc.district_id ?? null
-            }
-            : initFormikForm.defaultParams.location;
+            ? (
+                {
+                    region_id: loc.region_id ?? null,
+                    city_id: loc.city_id ?? null,
+                    district_id: loc.district_id ?? null
+                }
+            ) : initFormikForm.defaultParams.location;
         setValues({...values});
     }
 

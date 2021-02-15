@@ -1,5 +1,6 @@
 import React, {FC, useState} from 'react';
 import {WithT} from 'i18next';
+import {Link} from '@root/i18n';
 import {Typography} from '@material-ui/core';
 import {ReadMore} from '@src/components/elements/read_more/readMore';
 import {LocationIcon} from '@src/components/elements/icons/LocationIcon';
@@ -11,7 +12,7 @@ import {DeliveryIcon} from '@src/components/elements/icons/DeliveryIcon';
 import {SyncSliders} from './sync_sliders/SyncSliders';
 import {ModalSyncSliders} from './modal_sync_sliders/ModalSyncSliders';
 import {BreadcrumbsComponent} from '@src/components/elements/breadcrumbs/Breadcrumbs';
-import {Link} from '@root/i18n';
+import {months} from "@src/common_data/common";
 import {pricePrettier, weekDaysHelper} from '@root/src/helpers';
 import {useStyles} from './useStyles';
 
@@ -27,30 +28,6 @@ export const PostContent: FC<WithT & any> = (props) => {
 
     const date = new Date(data.created_at);
 
-    const months = [
-        'января',
-        'февраля',
-        'марта',
-        'апреля',
-        'мая',
-        'июня',
-        'июля',
-        'августа',
-        'сентября',
-        'октября',
-        'ноября',
-        'декабря',
-    ];
-
-    const excludedFields = [
-        'id',
-        'type',
-        'sub_type',
-        'uniqid',
-        'color_id',
-        'type_id',
-    ];
-
     const formatted_date = `${date.getDate()} ${months[date.getMonth()]} ${date.getFullYear()}`;
 
     const [open, setOpen] = useState(false);
@@ -58,7 +35,7 @@ export const PostContent: FC<WithT & any> = (props) => {
     const handleShowModal = value => () => setOpen(value);
 
     const parameterItems = Object.keys(parameters).reduce((items, key, i) => {
-        if (parameters[key] !== null && excludedFields.every((k) => k !== key)) {
+        if (parameters[key] !== null) {
             if (Array.isArray(parameters[key]) && parameters[key].length !== 0) {
                 const params = (
                     <li>

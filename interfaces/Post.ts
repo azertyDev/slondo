@@ -1,12 +1,4 @@
 import {ReactNode} from "react";
-import {CategoryType} from "@root/interfaces/Categories";
-
-
-export interface CreatePostState {
-    isFetch: boolean;
-    error?: unknown;
-    category: CategoryType;
-}
 
 export type PostType = IdNameType & {
     currency: IdNameType[];
