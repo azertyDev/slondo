@@ -1,4 +1,32 @@
 {
+    "category": "Категория",
+    "searchCategory": "Поиск категорий",
+    "selectCategory": "Выберите категорию",
+
+    "howToCreatePost": "Как создать объявление?",
+    "howToCreateAuc": "Как создать аукцион?",
+    "howToCreateExAuc": "Как создать продвинутый аукцион?",
+    "trainingVideo": "Обучающее видео",
+    "maxFunctionality": "Используй максимальный функционал",
+    "tradeToGetBetter": "Торгуйте что бы получить более выгодную цену для Вас",
+    "postFree": "Размещайте товары или услуги совершенно бесплатно",
+
+    "postType": "Тип объявления",
+    "fill": "Заполнение",
+    "check": "Проверка",
+
+    "parameters": "Параметры",
+    "appearance": "Внешний вид",
+    "priceDescContacts": "Цена, описание и контакты",
+    "next": "Далее",
+    "postTitle": "Заголовок объявления",
+    "price": "Цена",
+    "noSelect": "Не выбрано",
+    "exampleTitle": "Напишите заголовок",
+    "photos": "Фотографии",
+
+    "congratulations": "Поздравляем!",
+
     "automobile": "Автомобиль",
     "year": "Год выпуска",
     "mileage": "Пробег",
@@ -62,7 +90,6 @@
     "function": "Функции",
     "connector": "Разъем",
     "device": "Устройство",
-    "category": "Категория",
     "quality": "Качество записи",
     "format": "Формат носителя",
     "zoom": "Zoom",

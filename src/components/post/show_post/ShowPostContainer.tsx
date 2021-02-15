@@ -1,7 +1,6 @@
 import React, {FC, MutableRefObject, useEffect, useRef, useState} from 'react';
 import {useRouter} from 'next/router';
-import {WithT} from 'i18next';
-import {i18n} from '@root/i18n';
+import {i18n, useTranslation} from '@root/i18n';
 import {userAPI} from '@src/api/api';
 import {ShowPost} from '@src/components/post/show_post/ShowPost';
 
@@ -13,7 +12,12 @@ export type SlidersRefType = {
     slider4?: MutableRefObject<any>;
 };
 
-export const ShowPostContainer: FC<WithT> = ({t}) => {
+export const ShowPostContainer: FC = () => {
+    const {t} = useTranslation(['post']);
+
+    const url = useRouter().query.url as string;
+    const splittedUrl = url.split('-');
+    const params = splittedUrl.splice(-3);
 
     const initValues = {id: null, name: ''};
 
@@ -74,10 +78,6 @@ export const ShowPostContainer: FC<WithT> = ({t}) => {
     const [parameters, setParameters] = useState({});
     const [slidersRefs, setSlidersRefs] = useState(initSlidersRefs);
     const [descHeight, setDescHeight] = useState(0);
-
-    const url = useRouter().query.url as string;
-    const splittedUrl = url.split('-');
-    const params = splittedUrl.splice(-3);
 
     const lang = i18n.language;
 

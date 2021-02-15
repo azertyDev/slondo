@@ -1,45 +1,49 @@
 import React, {FC} from 'react';
-import {WithT} from "i18next";
+import {Link, useTranslation} from "@root/i18n";
 import {Grid, Step, StepLabel, Stepper, Typography, IconButton} from '@material-ui/core';
-import {ButtonComponent} from '@src/components/elements/button/Button';
 import {BackspaceIcon} from '@root/src/components/elements/icons';
 import {useStyles} from './useStyles';
-import {PostType} from "@root/interfaces/Post";
+
 
 type AncmntAuctionTopPropsType = {
     activeStep: number;
-    steps: string[];
-    handleBackBtn: () => void;
-    postType: PostType;
-    isSuccessStep: boolean;
-    isPostTypeStep: boolean;
+    backUrl?: string;
+    postType?: string;
 };
 
-export const PostHeader: FC<AncmntAuctionTopPropsType & WithT> = (props) => {
+export const PostHeader: FC<AncmntAuctionTopPropsType> = (props) => {
+    const {t} = useTranslation(['post']);
+
     const {
-        t,
-        postType,
         activeStep,
-        steps,
-        handleBackBtn,
-        isSuccessStep,
-        isPostTypeStep
+        backUrl,
+        postType
     } = props;
+
+    const isPostTypeStep = activeStep === 0;
+
+    const steps = [
+        t('postType'),
+        t('category'),
+        t('fill'),
+        t('check')
+    ];
 
     const classes = useStyles();
     return (
         <Grid container alignItems="center" className={classes.root}>
             <Grid item xs={3}>
-                {!isPostTypeStep && !isSuccessStep
+                {!isPostTypeStep
                 && <div className='menu-header'>
-                    <IconButton
-                        className="back-btn"
-                        onClick={handleBackBtn}
-                    >
-                        <BackspaceIcon/>
-                    </IconButton>
+                    <Link href={backUrl}>
+                        <a>
+                            <IconButton className="back-btn">
+                                <BackspaceIcon/>
+                            </IconButton>
+                        </a>
+                    </Link>
                     <Typography variant="h6" color="initial">
-                        {t(`common:${postType.name}`)}
+                        {t(`common:${postType}`)}
                     </Typography>
                 </div>}
             </Grid>

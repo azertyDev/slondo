@@ -1,31 +1,52 @@
 import React, {FC} from "react";
 import {Accordion, AccordionDetails, AccordionSummary, Typography} from '@material-ui/core';
+import {ButtonComponent} from "@src/components/elements/button/Button";
 import {useStyles} from './useStyles';
 
 
 type AccordionComponentPropsTypes = {
-    icon: string;
+    isFetch?: boolean;
+    isPreview: boolean;
+    icon?: string;
     title: string;
+    nextBlockTitle: string;
 };
 
 export const AccordionComponent: FC<AccordionComponentPropsTypes> = (props) => {
-    const {icon, title} = props;
+    const {
+        icon,
+        title,
+        nextBlockTitle,
+        isFetch,
+        isPreview,
+        children
+    } = props;
 
     const classes = useStyles();
     return (
         <div className={classes.root}>
-            <Accordion expanded={true}>
-                <AccordionSummary id="panel1a-header">
+            <Accordion expanded={isPreview || true}>
+                <AccordionSummary id="panel-header">
                     <img src={icon} alt="icon"/>
-                    <Typography className={classes.root}>
+                    <Typography variant='h5'>
                         {title}
                     </Typography>
                 </AccordionSummary>
                 <AccordionDetails>
-                    <Typography>
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada lacus ex,
-                        sit amet blandit leo lobortis eget.
-                    </Typography>
+                    <div className='acc-content'>
+                        {children}
+                        <div className='next-button-wrapper'>
+                            <ButtonComponent
+                                type='submit'
+                                disabled={isFetch}
+                                className='nav-button'
+                            >
+                                <Typography>
+                                    {nextBlockTitle}
+                                </Typography>
+                            </ButtonComponent>
+                        </div>
+                    </div>
                 </AccordionDetails>
             </Accordion>
         </div>
