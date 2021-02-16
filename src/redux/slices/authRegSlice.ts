@@ -14,11 +14,23 @@ const initialState: AuthReg = {
 };
 
 // Async thunk
-export const fetchToken = createAsyncThunk<never, AuthInputs>(
+export const fetchTokenLogin = createAsyncThunk<never, AuthInputs>(
     'authReg/fetchTokenByLogin',
     async ({phone, password}, {rejectWithValue}) => {
         try {
             const token = await userAPI.login(phone, password);
+            cookies.set('token', token, {maxAge: 2 * 3600});
+        } catch (e) {
+            return rejectWithValue(e.message);
+        }
+    }
+);
+
+export const fetchTokenRegister = createAsyncThunk<never, AuthInputs>(
+    'authReg/fetchTokenByLogin',
+    async ({phone, password}, {rejectWithValue}) => {
+        try {
+            const token = await userAPI.register(phone, password);
             cookies.set('token', token, {maxAge: 2 * 3600});
         } catch (e) {
             return rejectWithValue(e.message);
@@ -39,16 +51,16 @@ const authRegSlice = createSlice({
         }
     },
     extraReducers: (builder) => {
-        builder.addCase(fetchToken.pending, (state) => {
+        builder.addCase(fetchTokenLogin.pending, (state) => {
             state.isFetch = true;
             state.error = null;
         })
-        builder.addCase(fetchToken.fulfilled, (state) => {
+        builder.addCase(fetchTokenLogin.fulfilled, (state) => {
             state.isFetch = false;
             state.error = null;
             state.isAuth = true;
         })
-        builder.addCase(fetchToken.rejected, (state, action) => {
+        builder.addCase(fetchTokenLogin.rejected, (state, action) => {
             state.isFetch = false;
             state.error = action.payload;
         })

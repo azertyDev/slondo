@@ -7,7 +7,7 @@ import {Form, FormikProvider, useFormik} from "formik";
 import {CustomFormikField} from "../custom_formik_field/CustomFormikField";
 import {ButtonComponent} from "../button/Button";
 import {RootState} from "@src/redux/rootReducer";
-import {fetchToken} from "@src/redux/slices/authRegSlice";
+import {fetchTokenLogin, fetchTokenRegister} from "@src/redux/slices/authRegSlice";
 import {AuthInputs} from "@root/interfaces/Auth";
 import {WithT} from "i18next";
 import {useStyles} from './useStyles';
@@ -32,28 +32,29 @@ export const AuthRegForm: FC<WithT & { handleCloseModal: () => void }> = (props)
         setTabValue(newValue);
     };
 
-    const loginReg = (values) => {
+    const loginReg = (values, tabValue) => {
+        console.warn("tabValue222", tabValue)
         if (tabValue === 0) {
-            dispatch(fetchToken(values))
+            dispatch(fetchTokenLogin(values))
+        } else{
+            dispatch(fetchTokenRegister(values))
         }
     };
 
     const onSubmit = (values, actions) => {
-        loginReg(values);
+        console.warn("tabValue1111", tabValue)
+        loginReg(values, tabValue);
         actions.resetForm();
         props.handleCloseModal();
     };
 
     const formik = useFormik({
         initialValues: initialInputsVals,
-        validationSchema: authRegSchema,
+        validationSchema: tabValue === 0 ? authRegSchema : '',
         onSubmit
     });
 
-    const {
-        errors,
-        touched,
-    } = formik;
+    const { errors, touched} = formik;
 
     const classes = useStyles();
     return (
@@ -171,7 +172,10 @@ export const AuthRegForm: FC<WithT & { handleCloseModal: () => void }> = (props)
                                         </div>
                                     </div>
                                     <div className={classes.modalBtns}>
-                                        <ButtonComponent className="reg-btn" type="submit">
+                                        <ButtonComponent
+                                            className="reg-btn"
+                                            type="submit"
+                                        >
                                             {t('auth_reg:signUp')}
                                         </ButtonComponent>
                                     </div>

@@ -13,7 +13,7 @@ const localServer = 'http://192.168.1.60/slondo/public/api/';
 
 const instance = Axios.create({
     withCredentials: true,
-    baseURL: uztelecom
+    baseURL: localServer
 });
 
 // const config = {
@@ -31,6 +31,18 @@ export const userAPI = {
         form.set('password', password);
         return instance
             .post(`login`, form, {
+                headers: {'Content-Type': 'multipart/form-data'}
+            })
+            .then((res) => res.data)
+            .catch((err) => {
+                throw err;
+            });
+    },
+    register: (phone: string): Promise<unknown> => {
+        const form = new FormData();
+        form.set('phone', phone);
+        return instance
+            .post(`register`, form, {
                 headers: {'Content-Type': 'multipart/form-data'}
             })
             .then((res) => res.data)
