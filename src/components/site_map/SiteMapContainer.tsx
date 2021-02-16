@@ -9,7 +9,6 @@ export const SiteMapContainer: FC<WithT> = ({t}) => {
         return category
     })
 
-
     return (
         <MainLayout title="Карта сайта">
             <SiteMapComponent t={t} categories={categories}/>

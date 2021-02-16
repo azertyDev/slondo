@@ -1,11 +1,6 @@
-import React from 'react';
-import {withTranslation} from 'next-i18next';
+import React, {FC} from 'react';
 import {PostFormContainer} from '@src/components/post/create_post/post_form/PostFormContainer';
 
-const Create = (props) => <PostFormContainer {...props} />;
+const Create: FC = () => <PostFormContainer/>;
 
-Create.getInitialProps = async () => ({
-    namespacesRequired: ['post'],
-});
-
-export default withTranslation(['post'])(Create);
+export default Create;
