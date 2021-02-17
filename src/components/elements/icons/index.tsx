@@ -99,3 +99,4 @@ export { Other } from './site_map_icons/Other';
 export { Phone } from './site_map_icons/Phone';
 export { Service } from './site_map_icons/Service';
 export { Hacker } from './Hacker';
+export { PersonIcon } from './Person'

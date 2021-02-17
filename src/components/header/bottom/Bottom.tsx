@@ -4,7 +4,7 @@ import { ButtonComponent } from '@src/components/elements/button/Button'
 import { SearchForm } from '@src/components/elements/search_form/SearchForm'
 import { withScrollThreshold } from '@src/components/hoc/withScrollThreshold'
 import { Link } from '@root/i18n'
-import { Logo } from '@src/components/elements/icons'
+import { Logo, PersonIcon } from '@src/components/elements/icons'
 import { AddIcon } from '@src/components/elements/icons/AddIcon'
 import { CategorySortIcon } from '@src/components/elements/icons/CategorySortIcon'
 import { SignIcon } from '@src/components/elements/icons/SignIcon'
@@ -115,15 +115,23 @@ const Bottom = (props) => {
                                 alignItems="center"
                                 xs={1}
                             >
-                                <ButtonComponent
-                                    className="bottom-sign-button header-button"
-                                    onClick={handleOpenModal}
-                                >
-                                    <Typography variant="subtitle2">
-                                        {t(`auth_reg:${isAuth ? 'signOut' : 'signIn'}`)}
-                                    </Typography>
-                                    <SignIcon />
-                                </ButtonComponent>
+                                {isAuth ? <div>
+                                    <Link href='/cabinet/posts'>
+                                        <a>
+                                            <PersonIcon />
+                                        </a>
+                                    </Link>
+                                    </div> :
+                                        <ButtonComponent
+                                            className="bottom-sign-button header-button"
+                                            onClick={handleOpenModal}
+                                        >
+                                            <Typography variant="subtitle2">
+                                                {t('auth_reg:signIn')}
+                                            </Typography>
+                                            <SignIcon />
+                                        </ButtonComponent>
+                                }
                             </Grid>
                         </Grid>
                     </Container>

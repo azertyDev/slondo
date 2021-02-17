@@ -2,9 +2,9 @@ import React, {FC} from 'react';
 import {TabsContent} from '@src/components/cabinet/cabinet_pages/TabsContent';
 import {MyPosts} from '@src/components/cabinet/cabinet_pages/my_posts/MyPosts';
 import {CabinetMockData} from '../../CabinetMockData';
+import {withHomeRedirect} from '@src/hoc/withHomeRedirect'
 
-
-export const MyPostsContainer: FC = () => {
+const MyPostsContainer: FC = () => {
     const tabsData = [
         {
             title: 'Объявления',
@@ -24,3 +24,5 @@ export const MyPostsContainer: FC = () => {
         <TabsContent title={title} tabsData={tabsData} headerTitle={title}/>
     );
 };
+
+export default withHomeRedirect(MyPostsContainer)

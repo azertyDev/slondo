@@ -42,10 +42,9 @@ export const AuthRegForm: FC<WithT & { handleCloseModal: () => void }> = (props)
     };
 
     const onSubmit = (values, actions) => {
-        console.warn("tabValue1111", tabValue)
         loginReg(values, tabValue);
         actions.resetForm();
-        props.handleCloseModal();
+        tabValue === 0 ? props.handleCloseModal() : setTabValue(0);
     };
 
     const formik = useFormik({
