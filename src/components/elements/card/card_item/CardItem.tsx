@@ -70,6 +70,7 @@ export const CardItem: FC<CardItemProps> = (props) => {
                                 className="card-media"
                                 image={images.length ? images[0].url.default : null}
                             >
+                                <div />
                                 <div className="card-header">
                                     <div className="title">
                                         <Typography variant="subtitle2">

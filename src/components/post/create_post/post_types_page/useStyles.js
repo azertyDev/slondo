@@ -1,4 +1,4 @@
-import {makeStyles} from '@material-ui/core/styles';
+import { makeStyles } from '@material-ui/core/styles'
 
 export const useStyles = makeStyles((theme) => ({
     root: {
@@ -14,10 +14,11 @@ export const useStyles = makeStyles((theme) => ({
                 borderRadius: '25px',
                 boxShadow: '0px 2px 8px rgba(0, 0, 0, 0.2)',
                 textDecoration: 'none',
-                background: 'linear-gradient(49.94deg, #dcf3fc 19.03%, #a9bdf2 72.72%)', '& > div.card-bg': {
+                background: 'linear-gradient(49.94deg, #dcf3fc 19.03%, #a9bdf2 72.72%)',
+                '& > div.card-bg': {
                     textAlign: 'center',
                     height: '100%',
-                    backgroundPosition: 'center',
+                    backgroundPosition: 'bottom',
                     backgroundRepeat: 'no-repeat',
                     backgroundSize: 'contain',
                     '& h6.MuiTypography-subtitle1': {
@@ -70,4 +71,4 @@ export const useStyles = makeStyles((theme) => ({
             },
         },
     },
-}));
+}))

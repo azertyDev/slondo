@@ -71,7 +71,7 @@ export const categories_list: CategoryType[] = [
                     },
                     {
                         id: 2,
-                        'name': 'mopedsAndScooters',
+                        name: 'mopedsAndScooters',
                         parents: [
                             {id: 2, name: 'transport'},
                             {id: 1, name: 'motorcyclesAndMotorTech'},
@@ -79,7 +79,7 @@ export const categories_list: CategoryType[] = [
                     },
                     {
                         id: 3,
-                        'name': 'quadBikes',
+                        name: 'quadBikes',
                         parents: [
                             {id: 2, name: 'transport'},
                             {id: 1, name: 'motorcyclesAndMotorTech'},
@@ -87,7 +87,7 @@ export const categories_list: CategoryType[] = [
                     },
                     {
                         id: 4,
-                        'name': 'carting',
+                        name: 'carting',
                         parents: [
                             {id: 2, name: 'transport'},
                             {id: 1, name: 'motorcyclesAndMotorTech'}
@@ -95,7 +95,7 @@ export const categories_list: CategoryType[] = [
                     },
                     {
                         id: 5,
-                        'name': 'snowmobiles',
+                        name: 'snowmobiles',
                         parents: [
                             {id: 2, name: 'transport'},
                             {id: 1, name: 'motorcyclesAndMotorTech'}
@@ -103,7 +103,7 @@ export const categories_list: CategoryType[] = [
                     },
                     {
                         id: 6,
-                        'name': 'buggy',
+                        name: 'buggy',
                         parents: [
                             {id: 2, name: 'transport'},
                             {id: 1, name: 'motorcyclesAndMotorTech'}
@@ -118,7 +118,7 @@ export const categories_list: CategoryType[] = [
                 type: [
                     {
                         id: 7,
-                        'name': 'buses',
+                        name: 'buses',
                         parents: [
                             {id: 2, name: 'transport'},
                             {id: 2, name: 'busesAndTrucks'},
@@ -126,7 +126,7 @@ export const categories_list: CategoryType[] = [
                     },
                     {
                         id: 8,
-                        'name': 'minibuses',
+                        name: 'minibuses',
                         parents: [
                             {id: 2, name: 'transport'},
                             {id: 2, name: 'busesAndTrucks'},
@@ -134,7 +134,7 @@ export const categories_list: CategoryType[] = [
                     },
                     {
                         id: 9,
-                        'name': 'refrigeratedTruck',
+                        name: 'refrigeratedTruck',
                         parents: [
                             {id: 2, name: 'transport'},
                             {id: 2, name: 'busesAndTrucks'},
@@ -142,7 +142,7 @@ export const categories_list: CategoryType[] = [
                     },
                     {
                         id: 10,
-                        'name': 'motorHomes',
+                        name: 'motorHomes',
                         parents: [
                             {id: 2, name: 'transport'},
                             {id: 2, name: 'busesAndTrucks'},
@@ -150,7 +150,7 @@ export const categories_list: CategoryType[] = [
                     },
                     {
                         id: 11,
-                        'name': 'trucks',
+                        name: 'trucks',
                         parents: [
                             {id: 2, name: 'transport'},
                             {id: 2, name: 'busesAndTrucks'},
@@ -158,7 +158,7 @@ export const categories_list: CategoryType[] = [
                     },
                     {
                         id: 12,
-                        'name': 'commercialTransport',
+                        name: 'commercialTransport',
                         parents: [
                             {id: 2, name: 'transport'},
                             {id: 2, name: 'busesAndTrucks'},
@@ -166,7 +166,7 @@ export const categories_list: CategoryType[] = [
                     },
                     {
                         id: 13,
-                        'name': 'trailers',
+                        name: 'trailers',
                         parents: [
                             {id: 2, name: 'transport'},
                             {id: 2, name: 'busesAndTrucks'},
@@ -174,7 +174,7 @@ export const categories_list: CategoryType[] = [
                     },
                     {
                         id: 14,
-                        'name': 'tractorUnits',
+                        name: 'tractorUnits',
                         parents: [
                             {id: 2, name: 'transport'},
                             {id: 2, name: 'busesAndTrucks'},
@@ -182,7 +182,7 @@ export const categories_list: CategoryType[] = [
                     },
                     {
                         id: 15,
-                        'name': 'foodTruck',
+                        name: 'foodTruck',
                         parents: [
                             {id: 2, name: 'transport'},
                             {id: 2, name: 'busesAndTrucks'},
@@ -197,7 +197,7 @@ export const categories_list: CategoryType[] = [
                 type: [
                     {
                         id: 16,
-                        'name': 'Автовышки',
+                        name: 'aerialPlatform',
                         parents: [
                             {id: 2, name: 'transport'},
                             {id: 3, name: 'specTech'},
@@ -205,7 +205,7 @@ export const categories_list: CategoryType[] = [
                     },
                     {
                         id: 17,
-                        'name': 'Автокраны',
+                        name: 'truckCranes',
                         parents: [
                             {id: 2, name: 'transport'},
                             {id: 3, name: 'specTech'},
@@ -213,7 +213,7 @@ export const categories_list: CategoryType[] = [
                     },
                     {
                         id: 18,
-                        'name': 'Бульдозеры',
+                        name: 'bulldozers',
                         parents: [
                             {id: 2, name: 'transport'},
                             {id: 3, name: 'specTech'},
@@ -221,7 +221,7 @@ export const categories_list: CategoryType[] = [
                     },
                     {
                         id: 19,
-                        'name': 'Коммунальная техника',
+                        name: 'utilityTechnology',
                         parents: [
                             {id: 2, name: 'transport'},
                             {id: 3, name: 'specTech'},
@@ -229,7 +229,7 @@ export const categories_list: CategoryType[] = [
                     },
                     {
                         id: 20,
-                        'name': 'Погрузчики',
+                        name: 'loaders',
                         parents: [
                             {id: 2, name: 'transport'},
                             {id: 3, name: 'specTech'},
@@ -237,7 +237,7 @@ export const categories_list: CategoryType[] = [
                     },
                     {
                         id: 21,
-                        'name': 'Сельхозтехника',
+                        name: 'agriculturalMachinery',
                         parents: [
                             {id: 2, name: 'transport'},
                             {id: 3, name: 'specTech'},
@@ -245,7 +245,7 @@ export const categories_list: CategoryType[] = [
                     },
                     {
                         id: 22,
-                        'name': 'Строительная техника',
+                        name: 'constructionMachinery',
                         parents: [
                             {id: 2, name: 'transport'},
                             {id: 3, name: 'specTech'},
@@ -253,7 +253,7 @@ export const categories_list: CategoryType[] = [
                     },
                     {
                         id: 23,
-                        'name': 'Лесозаготовочная техника',
+                        name: 'forestryEquipment',
                         parents: [
                             {id: 2, name: 'transport'},
                             {id: 3, name: 'specTech'},
@@ -261,7 +261,7 @@ export const categories_list: CategoryType[] = [
                     },
                     {
                         id: 24,
-                        'name': 'Экскаваторы',
+                        name: 'excavators',
                         parents: [
                             {id: 2, name: 'transport'},
                             {id: 3, name: 'specTech'},
@@ -269,7 +269,7 @@ export const categories_list: CategoryType[] = [
                     },
                     {
                         id: 25,
-                        'name': 'Другие',
+                        name: 'Другие',
                         parents: [
                             {id: 2, name: 'transport'},
                             {id: 3, name: 'specTech'},
@@ -279,55 +279,55 @@ export const categories_list: CategoryType[] = [
             },
             {
                 id: 4,
-                name: 'Водный транспорт',
+                name: 'waterTransport',
                 parents: [{id: 2, name: 'transport'}],
                 type: [
                     {
                         id: 26,
-                        'name': 'Вёсельные лодки',
+                        name: 'rowingBoats',
                         parents: [
                             {id: 2, name: 'transport'},
-                            {id: 4, name: 'Водный транспорт'},
+                            {id: 4, name: 'waterTransport'},
                         ],
                     },
                     {
                         id: 27,
-                        'name': 'Гидроциклы',
+                        name: 'jetSkis',
                         parents: [
                             {id: 2, name: 'transport'},
-                            {id: 4, name: 'Водный транспорт'},
+                            {id: 4, name: 'waterTransport'},
                         ],
                     },
                     {
                         id: 28,
-                        'name': 'Катера и яхты',
+                        name: 'boatsAndYachts',
                         parents: [
                             {id: 2, name: 'transport'},
-                            {id: 4, name: 'Водный транспорт'},
+                            {id: 4, name: 'waterTransport'},
                         ],
                     },
                     {
                         id: 29,
-                        'name': 'Каяки и каноэ',
+                        name: 'kayaksAndCanoes',
                         parents: [
                             {id: 2, name: 'transport'},
-                            {id: 4, name: 'Водный транспорт'},
+                            {id: 4, name: 'waterTransport'},
                         ],
                     },
                     {
                         id: 30,
-                        'name': 'Моторные лодки',
+                        name: 'motorBoats',
                         parents: [
                             {id: 2, name: 'transport'},
-                            {id: 4, name: 'Водный транспорт'},
+                            {id: 4, name: 'waterTransport'},
                         ],
                     },
                     {
                         id: 31,
-                        'name': 'Надувные лодки',
+                        name: 'inflatableBoat',
                         parents: [
                             {id: 2, name: 'transport'},
-                            {id: 4, name: 'Водный транспорт'},
+                            {id: 4, name: 'waterTransport'},
                         ],
                     },
                 ],
@@ -345,58 +345,59 @@ export const categories_list: CategoryType[] = [
                 id: 1,
                 name: 'forCars',
                 parents: [{id: 3, name: 'parts'}],
+                type: []
             },
             {
                 id: 2,
-                name: 'Для мотоциклов и мототехники',
+                name: 'forMotorcyclesAndMotortech',
                 parents: [{id: 3, name: 'parts'}],
                 type: [
                     {
                         id: 1,
-                        'name': 'Мотоциклы',
+                        name: 'motorcycles',
                         parents: [
-                            {id: 1, name: 'parts'},
-                            {id: 2, name: 'Для мотоциклов и мототехники'},
+                            {id: 3, name: 'parts'},
+                            {id: 2, name: 'forMotorcyclesAndMotortech'},
                         ],
                     },
                     {
                         id: 2,
-                        'name': 'Мопеды и скутеры',
+                        name: 'mopedsAndScooters',
                         parents: [
-                            {id: 1, name: 'parts'},
-                            {id: 2, name: 'Для мотоциклов и мототехники'},
+                            {id: 3, name: 'parts'},
+                            {id: 2, name: 'forMotorcyclesAndMotortech'},
                         ],
                     },
                     {
                         id: 3,
-                        'name': 'Квадроциклы',
+                        name: 'quadBikes',
                         parents: [
-                            {id: 1, name: 'parts'},
-                            {id: 2, name: 'Для мотоциклов и мототехники'},
+                            {id: 3, name: 'parts'},
+                            {id: 2, name: 'forMotorcyclesAndMotortech'},
                         ],
                     },
                     {
                         id: 4,
-                        'name': 'Картинг',
+                        name: 'carting',
                         parents: [
-                            {id: 1, name: 'parts'},
-                            {id: 2, name: 'Для мотоциклов и мототехники'},
+                            {id: 3, name: 'parts'},
+                            {id: 2, name: 'forMotorcyclesAndMotortech'},
                         ],
                     },
                     {
                         id: 5,
-                        'name': 'Снегоходы',
+                        name: 'snowmobiles',
                         parents: [
-                            {id: 1, name: 'parts'},
-                            {id: 2, name: 'Для мотоциклов и мототехники'},
+                            {id: 3, name: 'parts'},
+                            {id: 2, name: 'forMotorcyclesAndMotortech'},
                         ],
                     },
                     {
                         id: 6,
-                        'name': 'Багги',
+                        name: 'buggy',
                         parents: [
-                            {id: 1, name: 'parts'},
-                            {id: 2, name: 'Для мотоциклов и мототехники'},
+                            {id: 3, name: 'parts'},
+                            {id: 2, name: 'forMotorcyclesAndMotortech'},
                         ]
                     }
                 ]
@@ -408,81 +409,81 @@ export const categories_list: CategoryType[] = [
                 type: [
                     {
                         id: 7,
-                        'name': 'Автобусы',
+                        name: 'Автобусы',
                         parents: [
-                            {id: 1, name: 'parts'},
+                            {id: 3, name: 'parts'},
                             {id: 3, name: 'Для автобусов и грузовиков'},
                         ],
                     },
                     {
                         id: 8,
-                        'name': 'Микроавтобусы',
+                        name: 'Микроавтобусы',
                         parents: [
-                            {id: 1, name: 'parts'},
+                            {id: 3, name: 'parts'},
                             {id: 3, name: 'Для автобусов и грузовиков'},
                         ],
                     },
                     {
                         id: 9,
-                        'name': 'Авторефрижератор',
+                        name: 'Авторефрижератор',
                         parents: [
-                            {id: 1, name: 'parts'},
+                            {id: 3, name: 'parts'},
                             {id: 3, name: 'Для автобусов и грузовиков'},
                         ],
                     },
                     {
                         id: 10,
-                        'name': 'Автодома',
+                        name: 'Автодома',
                         parents: [
-                            {id: 1, name: 'parts'},
+                            {id: 3, name: 'parts'},
                             {id: 3, name: 'Для автобусов и грузовиков'},
                         ],
                     },
                     {
                         id: 11,
-                        'name': 'Грузовики',
+                        name: 'Грузовики',
                         parents: [
-                            {id: 1, name: 'parts'},
+                            {id: 3, name: 'parts'},
                             {id: 3, name: 'Для автобусов и грузовиков'},
                         ],
                     },
                     {
                         id: 12,
-                        'name': 'Легкий коммерческий транспорт',
+                        name: 'Легкий коммерческий транспорт',
                         parents: [
-                            {id: 1, name: 'parts'},
+                            {id: 3, name: 'parts'},
                             {id: 3, name: 'Для автобусов и грузовиков'},
                         ],
                     },
                     {
                         id: 13,
-                        'name': 'Прицепы',
+                        name: 'Прицепы',
                         parents: [
-                            {id: 1, name: 'parts'},
+                            {id: 3, name: 'parts'},
                             {id: 3, name: 'Для автобусов и грузовиков'},
                         ],
                     },
                     {
                         id: 14,
-                        'name': 'Тягачи',
+                        name: 'Тягачи',
                         parents: [
-                            {id: 1, name: 'parts'},
+                            {id: 3, name: 'parts'},
                             {id: 3, name: 'Для автобусов и грузовиков'},
                         ],
                     },
                     {
                         id: 15,
-                        'name': 'Фудтрак',
+                        name: 'Фудтрак',
                         parents: [
-                            {id: 1, name: 'parts'},
+                            {id: 3, name: 'parts'},
                             {id: 3, name: 'Для автобусов и грузовиков'},
                         ],
                     },
                     {
                         id: 16,
-                        'name': 'Другие',
+                        name: 'Другие',
                         parents: [
-                            {id: 1, name: 'parts'},
+                            {id: 3, name: 'parts'},
                             {id: 3, name: 'Для автобусов и грузовиков'},
                         ],
                     },
@@ -495,89 +496,89 @@ export const categories_list: CategoryType[] = [
                 type: [
                     {
                         id: 17,
-                        'name': 'Автовышки',
+                        name: 'aerialPlatform',
                         parents: [
-                            {id: 1, name: 'parts'},
-                            {id: 4, 'name': 'Для спецтехники'},
+                            {id: 3, name: 'parts'},
+                            {id: 4, name: 'Для спецтехники'},
                         ]
                     },
                     {
                         id: 18,
-                        'name': 'Автокраны',
+                        name: 'truckCranes',
                         parents: [
-                            {id: 1, name: 'parts'},
-                            {id: 4, 'name': 'Для спецтехники'},
+                            {id: 3, name: 'parts'},
+                            {id: 4, name: 'Для спецтехники'},
                         ],
                     },
                     {
                         id: 19,
-                        'name': 'Бульдозеры',
+                        name: 'bulldozers',
                         parents: [
-                            {id: 1, name: 'parts'},
-                            {id: 4, 'name': 'Для спецтехники'},
+                            {id: 3, name: 'parts'},
+                            {id: 4, name: 'Для спецтехники'},
                         ],
                     },
                     {
                         id: 20,
-                        'name': 'Коммунальная техника',
+                        name: 'utilityTechnology',
                         parents: [
-                            {id: 1, name: 'parts'},
-                            {id: 4, 'name': 'Для спецтехники'}
+                            {id: 3, name: 'parts'},
+                            {id: 4, name: 'Для спецтехники'}
                         ]
                     },
                     {
                         id: 21,
-                        'name': 'Погрузчики',
+                        name: 'loaders',
                         parents: [
-                            {id: 1, name: 'parts'},
-                            {id: 4, 'name': 'Для спецтехники'},
+                            {id: 3, name: 'parts'},
+                            {id: 4, name: 'Для спецтехники'},
                         ],
                     },
                     {
                         id: 22,
-                        'name': 'Сельхозтехника',
+                        name: 'agriculturalMachinery',
                         parents: [
-                            {id: 1, name: 'parts'},
-                            {id: 4, 'name': 'Для спецтехники'},
+                            {id: 3, name: 'parts'},
+                            {id: 4, name: 'Для спецтехники'},
                         ],
                     },
                     {
                         id: 23,
-                        'name': 'Строительная техника',
+                        name: 'constructionMachinery',
                         parents: [
-                            {id: 1, name: 'parts'},
-                            {id: 4, 'name': 'Для спецтехники'},
+                            {id: 3, name: 'parts'},
+                            {id: 4, name: 'Для спецтехники'},
                         ],
                     },
                     {
                         id: 24,
-                        'name': 'Лесозаготовочная техника',
+                        name: 'forestryEquipment',
                         parents: [
-                            {id: 1, name: 'parts'},
-                            {id: 4, 'name': 'Для спецтехники'},
+                            {id: 3, name: 'parts'},
+                            {id: 4, name: 'Для спецтехники'},
                         ],
                     },
                     {
                         id: 25,
-                        'name': 'Экскаваторы',
+                        name: 'excavators',
                         parents: [
-                            {id: 1, name: 'parts'},
-                            {id: 4, 'name': 'Для спецтехники'},
+                            {id: 3, name: 'parts'},
+                            {id: 4, name: 'Для спецтехники'},
                         ],
                     },
                     {
                         id: 26,
-                        'name': 'Другие',
+                        name: 'others',
                         parents: [
-                            {id: 1, name: 'parts'},
-                            {id: 4, 'name': 'Для спецтехники'},
+                            {id: 3, name: 'parts'},
+                            {id: 4, name: 'Для спецтехники'},
                         ],
                     },
                 ],
             },
             {
                 id: 5,
-                name: 'Для водного транспорта',
+                name: 'forWaterTransport',
                 parents: [{id: 3, name: 'parts'}],
             }
         ]
@@ -604,7 +605,7 @@ export const categories_list: CategoryType[] = [
                     },
                     {
                         id: 2,
-                        name: 'Аренда на длительное время',
+                        name: 'longTermRent',
                         parents: [
                             {id: 4, name: 'estate'},
                             {id: 1, name: 'apartments'},
@@ -612,7 +613,7 @@ export const categories_list: CategoryType[] = [
                     },
                     {
                         id: 3,
-                        name: 'Аренда по суточно',
+                        name: 'dailyRent',
                         parents: [
                             {id: 4, name: 'estate'},
                             {id: 1, name: 'apartments'},
@@ -622,23 +623,27 @@ export const categories_list: CategoryType[] = [
             },
             {
                 id: 2,
-                name: 'Дома, дачи, коттеджи',
+                name: 'housesCottages',
                 parents: [{id: 4, name: 'estate'}],
+                'type': [],
             },
             {
                 id: 3,
-                'name': 'Земельные участки',
+                name: 'land',
                 parents: [{id: 4, name: 'estate'}],
+                'type': [],
             },
             {
                 id: 4,
-                'name': 'Подземные стоянки и боксы',
+                name: 'parkingLotsAndBoxes',
                 parents: [{id: 4, name: 'estate'}],
+                'type': [],
             },
             {
                 id: 5,
-                'name': 'Коммерческая недвижимость',
+                name: 'commercialProperty',
                 parents: [{id: 4, name: 'estate'}],
+                'type': [],
             },
         ],
     },
@@ -664,7 +669,7 @@ export const categories_list: CategoryType[] = [
                     },
                     {
                         id: 2,
-                        'name': 'Безопасность и охрана',
+                        name: 'safetyAndSecurity',
                         parents: [
                             {id: 5, name: 'job'},
                             {id: 1, name: 'vacancies'},
@@ -672,7 +677,7 @@ export const categories_list: CategoryType[] = [
                     },
                     {
                         id: 3,
-                        'name': 'Офисный персонал',
+                        name: 'officeStaff',
                         parents: [
                             {id: 5, name: 'job'},
                             {id: 1, name: 'vacancies'},
@@ -680,7 +685,7 @@ export const categories_list: CategoryType[] = [
                     },
                     {
                         id: 4,
-                        'name': 'Высший менеджмент',
+                        name: 'topManagement',
                         parents: [
                             {id: 5, name: 'job'},
                             {id: 1, name: 'vacancies'},
@@ -688,7 +693,7 @@ export const categories_list: CategoryType[] = [
                     },
                     {
                         id: 5,
-                        'name': 'Добыча сырья, энергетика',
+                        name: 'extractionMaterials',
                         parents: [
                             {id: 5, name: 'job'},
                             {id: 1, name: 'vacancies'},
@@ -696,7 +701,7 @@ export const categories_list: CategoryType[] = [
                     },
                     {
                         id: 6,
-                        'name': 'Домашний персонал',
+                        name: 'homeStaff',
                         parents: [
                             {id: 5, name: 'job'},
                             {id: 1, name: 'vacancies'},
@@ -704,7 +709,7 @@ export const categories_list: CategoryType[] = [
                     },
                     {
                         id: 7,
-                        'name': 'Издательства и СМИ',
+                        name: 'publishersAndMedia',
                         parents: [
                             {id: 5, name: 'job'},
                             {id: 1, name: 'vacancies'},
@@ -712,7 +717,7 @@ export const categories_list: CategoryType[] = [
                     },
                     {
                         id: 8,
-                        'name': 'Информационные технологии',
+                        name: 'informationTechnology',
                         parents: [
                             {id: 5, name: 'job'},
                             {id: 1, name: 'vacancies'},
@@ -720,7 +725,7 @@ export const categories_list: CategoryType[] = [
                     },
                     {
                         id: 9,
-                        'name': 'Искусство и развлечения',
+                        name: 'artsAndEntertainment',
                         parents: [
                             {id: 5, name: 'job'},
                             {id: 1, name: 'vacancies'},
@@ -728,7 +733,7 @@ export const categories_list: CategoryType[] = [
                     },
                     {
                         id: 10,
-                        'name': 'Закупки',
+                        name: 'procurement',
                         parents: [
                             {id: 5, name: 'job'},
                             {id: 1, name: 'vacancies'},
@@ -736,7 +741,7 @@ export const categories_list: CategoryType[] = [
                     },
                     {
                         id: 11,
-                        'name': 'Маркетинг и реклама',
+                        name: 'marketingAndAdvertising',
                         parents: [
                             {id: 5, name: 'job'},
                             {id: 1, name: 'vacancies'},
@@ -744,7 +749,7 @@ export const categories_list: CategoryType[] = [
                     },
                     {
                         id: 12,
-                        'name': 'Медицина и фармацевтика',
+                        name: 'medicineAndPharmaceuticals',
                         parents: [
                             {id: 5, name: 'job'},
                             {id: 1, name: 'vacancies'},
@@ -752,7 +757,7 @@ export const categories_list: CategoryType[] = [
                     },
                     {
                         id: 13,
-                        'name': 'Начало карьеры / без опыта работы',
+                        name: 'careerStart',
                         parents: [
                             {id: 5, name: 'job'},
                             {id: 1, name: 'vacancies'},
@@ -760,7 +765,7 @@ export const categories_list: CategoryType[] = [
                     },
                     {
                         id: 14,
-                        'name': 'Образование и наука',
+                        name: 'educationAndScience',
                         parents: [
                             {id: 5, name: 'job'},
                             {id: 1, name: 'vacancies'},
@@ -768,7 +773,7 @@ export const categories_list: CategoryType[] = [
                     },
                     {
                         id: 15,
-                        'name': 'Разнорабочие',
+                        name: 'handymen',
                         parents: [
                             {id: 5, name: 'job'},
                             {id: 1, name: 'vacancies'},
@@ -776,7 +781,7 @@ export const categories_list: CategoryType[] = [
                     },
                     {
                         id: 16,
-                        'name': 'Логистика и транспорт',
+                        name: 'logisticsAndTransport',
                         parents: [
                             {id: 5, name: 'job'},
                             {id: 1, name: 'vacancies'},
@@ -784,7 +789,7 @@ export const categories_list: CategoryType[] = [
                     },
                     {
                         id: 17,
-                        'name': 'Продажи',
+                        name: 'sales',
                         parents: [
                             {id: 5, name: 'job'},
                             {id: 1, name: 'vacancies'},
@@ -792,7 +797,7 @@ export const categories_list: CategoryType[] = [
                     },
                     {
                         id: 18,
-                        'name': 'Производство',
+                        name: 'production',
                         parents: [
                             {id: 5, name: 'job'},
                             {id: 1, name: 'vacancies'},
@@ -800,7 +805,7 @@ export const categories_list: CategoryType[] = [
                     },
                     {
                         id: 19,
-                        'name': 'Рестораны и общепит',
+                        name: 'restaurantsAndCatering',
                         parents: [
                             {id: 5, name: 'job'},
                             {id: 1, name: 'vacancies'},
@@ -808,7 +813,7 @@ export const categories_list: CategoryType[] = [
                     },
                     {
                         id: 20,
-                        'name': 'Сельское хозяйство',
+                        name: 'agriculture',
                         parents: [
                             {id: 5, name: 'job'},
                             {id: 1, name: 'vacancies'},
@@ -816,7 +821,7 @@ export const categories_list: CategoryType[] = [
                     },
                     {
                         id: 21,
-                        'name': 'Спорт и красота',
+                        name: 'sportsAndBeauty',
                         parents: [
                             {id: 5, name: 'job'},
                             {id: 1, name: 'vacancies'},
@@ -824,7 +829,7 @@ export const categories_list: CategoryType[] = [
                     },
                     {
                         id: 22,
-                        'name': 'Страхование',
+                        name: 'insurance',
                         parents: [
                             {id: 5, name: 'job'},
                             {id: 1, name: 'vacancies'},
@@ -832,7 +837,7 @@ export const categories_list: CategoryType[] = [
                     },
                     {
                         id: 23,
-                        'name': 'Строительство и ремонт',
+                        name: 'constructionAndRepair',
                         parents: [
                             {id: 5, name: 'job'},
                             {id: 1, name: 'vacancies'},
@@ -840,7 +845,7 @@ export const categories_list: CategoryType[] = [
                     },
                     {
                         id: 24,
-                        'name': 'Туризм и гостиницы',
+                        name: 'tourismAndHotels',
                         parents: [
                             {id: 5, name: 'job'},
                             {id: 1, name: 'vacancies'},
@@ -848,7 +853,7 @@ export const categories_list: CategoryType[] = [
                     },
                     {
                         id: 25,
-                        'name': 'Недвижимость',
+                        name: 'Property',
                         parents: [
                             {id: 5, name: 'job'},
                             {id: 1, name: 'vacancies'},
@@ -856,7 +861,7 @@ export const categories_list: CategoryType[] = [
                     },
                     {
                         id: 26,
-                        'name': 'Бухгалтерия и финансы',
+                        name: 'accountingAndFinance',
                         parents: [
                             {id: 5, name: 'job'},
                             {id: 1, name: 'vacancies'},
@@ -864,7 +869,7 @@ export const categories_list: CategoryType[] = [
                     },
                     {
                         id: 27,
-                        'name': 'Банковская сфера',
+                        name: 'bankingSector',
                         parents: [
                             {id: 5, name: 'job'},
                             {id: 1, name: 'vacancies'},
@@ -872,7 +877,7 @@ export const categories_list: CategoryType[] = [
                     },
                     {
                         id: 28,
-                        'name': 'Управление персоналом',
+                        name: 'personnelManagement',
                         parents: [
                             {id: 5, name: 'job'},
                             {id: 1, name: 'vacancies'},
@@ -880,7 +885,7 @@ export const categories_list: CategoryType[] = [
                     },
                     {
                         id: 29,
-                        'name': 'Юриспруденция',
+                        name: 'jurisprudence',
                         parents: [
                             {id: 5, name: 'job'},
                             {id: 1, name: 'vacancies'},
@@ -888,7 +893,7 @@ export const categories_list: CategoryType[] = [
                     },
                     {
                         id: 30,
-                        'name': 'Другие',
+                        name: 'others',
                         parents: [
                             {id: 5, name: 'job'},
                             {id: 1, name: 'vacancies'},
@@ -925,7 +930,7 @@ export const categories_list: CategoryType[] = [
                     },
                     {
                         id: 2,
-                        'name': 'Дома и коттеджи',
+                        name: 'housesAndCottages',
                         parents: [
                             {id: 6, name: 'service'},
                             {id: 1, name: 'repairAndConstruction'},
@@ -933,7 +938,7 @@ export const categories_list: CategoryType[] = [
                     },
                     {
                         id: 3,
-                        'name': 'Кровельные работы',
+                        name: 'roofing',
                         parents: [
                             {id: 6, name: 'service'},
                             {id: 1, name: 'repairAndConstruction'},
@@ -941,7 +946,7 @@ export const categories_list: CategoryType[] = [
                     },
                     {
                         id: 4,
-                        'name': 'Малярные работы',
+                        name: 'paintingWorks',
                         parents: [
                             {id: 6, name: 'service'},
                             {id: 1, name: 'repairAndConstruction'},
@@ -949,7 +954,7 @@ export const categories_list: CategoryType[] = [
                     },
                     {
                         id: 5,
-                        'name': 'Мелкий ремонт',
+                        name: 'minorRepairs',
                         parents: [
                             {id: 6, name: 'service'},
                             {id: 1, name: 'repairAndConstruction'},
@@ -957,7 +962,7 @@ export const categories_list: CategoryType[] = [
                     },
                     {
                         id: 6,
-                        'name': 'Натяжные потолки',
+                        name: 'stretchCeiling',
                         parents: [
                             {id: 6, name: 'service'},
                             {id: 1, name: 'repairAndConstruction'},
@@ -965,7 +970,7 @@ export const categories_list: CategoryType[] = [
                     },
                     {
                         id: 7,
-                        'name': 'Отделка квартир',
+                        name: 'apartmentRenovation',
                         parents: [
                             {id: 6, name: 'service'},
                             {id: 1, name: 'repairAndConstruction'},
@@ -973,7 +978,7 @@ export const categories_list: CategoryType[] = [
                     },
                     {
                         id: 8,
-                        'name': 'Остекление и ремонт окон',
+                        name: 'glazingAndWindowRepair',
                         parents: [
                             {id: 6, name: 'service'},
                             {id: 1, name: 'repairAndConstruction'},
@@ -981,7 +986,7 @@ export const categories_list: CategoryType[] = [
                     },
                     {
                         id: 9,
-                        'name': 'Проектные работы',
+                        name: 'designWork',
                         parents: [
                             {id: 6, name: 'service'},
                             {id: 1, name: 'repairAndConstruction'},
@@ -989,7 +994,7 @@ export const categories_list: CategoryType[] = [
                     },
                     {
                         id: 10,
-                        'name': 'Ремонт квартир',
+                        name: 'renovationOfApartments',
                         parents: [
                             {id: 6, name: 'service'},
                             {id: 1, name: 'repairAndConstruction'},
@@ -997,7 +1002,7 @@ export const categories_list: CategoryType[] = [
                     },
                     {
                         id: 11,
-                        'name': 'Сборка мебели',
+                        name: 'furnitureAssembly',
                         parents: [
                             {id: 6, name: 'service'},
                             {id: 1, name: 'repairAndConstruction'},
@@ -1005,7 +1010,7 @@ export const categories_list: CategoryType[] = [
                     },
                     {
                         id: 12,
-                        'name': 'Сварочные работы',
+                        name: 'weldingWorks',
                         parents: [
                             {id: 6, name: 'service'},
                             {id: 1, name: 'repairAndConstruction'},
@@ -1013,7 +1018,7 @@ export const categories_list: CategoryType[] = [
                     },
                     {
                         id: 13,
-                        'name': 'Укладка и ремонт плитки',
+                        name: 'layingAndRepairingTiles',
                         parents: [
                             {id: 6, name: 'service'},
                             {id: 1, name: 'repairAndConstruction'},
@@ -1021,7 +1026,7 @@ export const categories_list: CategoryType[] = [
                     },
                     {
                         id: 14,
-                        'name': 'Плотники',
+                        name: 'carpenters',
                         parents: [
                             {id: 6, name: 'service'},
                             {id: 1, name: 'repairAndConstruction'},
@@ -1029,7 +1034,7 @@ export const categories_list: CategoryType[] = [
                     },
                     {
                         id: 15,
-                        'name': 'Сантехники',
+                        name: 'plumbers',
                         parents: [
                             {id: 6, name: 'service'},
                             {id: 1, name: 'repairAndConstruction'},
@@ -1037,7 +1042,7 @@ export const categories_list: CategoryType[] = [
                     },
                     {
                         id: 16,
-                        'name': 'Электрики',
+                        name: 'electricians',
                         parents: [
                             {id: 6, name: 'service'},
                             {id: 1, name: 'repairAndConstruction'},
@@ -1045,7 +1050,7 @@ export const categories_list: CategoryType[] = [
                     },
                     {
                         id: 17,
-                        'name': 'Установка и ремонт дверей',
+                        name: 'installationAndRepairDoors',
                         parents: [
                             {id: 6, name: 'service'},
                             {id: 1, name: 'repairAndConstruction'},
@@ -1053,7 +1058,7 @@ export const categories_list: CategoryType[] = [
                     },
                     {
                         id: 18,
-                        'name': 'Штукатурные работы',
+                        name: 'plasteringWorks',
                         parents: [
                             {id: 6, name: 'service'},
                             {id: 1, name: 'repairAndConstruction'},
@@ -1061,7 +1066,7 @@ export const categories_list: CategoryType[] = [
                     },
                     {
                         id: 19,
-                        'name': 'Вскрытие замков',
+                        name: 'pickingLocks',
                         parents: [
                             {id: 6, name: 'service'},
                             {id: 1, name: 'repairAndConstruction'},
@@ -1069,7 +1074,7 @@ export const categories_list: CategoryType[] = [
                     },
                     {
                         id: 20,
-                        'name': 'Другие услуги',
+                        name: 'otherServices',
                         parents: [
                             {id: 6, name: 'service'},
                             {id: 1, name: 'repairAndConstruction'},
@@ -1079,1073 +1084,1073 @@ export const categories_list: CategoryType[] = [
             },
             {
                 id: 2,
-                name: 'Мастер на час',
+                name: 'masterForAnHour',
                 parents: [{id: 6, name: 'Услуги'}],
                 type: [
                     {
                         id: 21,
-                        'name': 'Дезинфекция и дезинсекция',
+                        name: 'disinfectionAndDisinsection',
                         parents: [
                             {id: 6, name: 'service'},
-                            {id: 2, name: 'Мастер на час'},
+                            {id: 2, name: 'masterForAnHour'},
                         ],
                     },
                     {
                         id: 22,
-                        'name': 'Мастер на час',
+                        name: 'masterForAnHour',
                         parents: [
                             {id: 6, name: 'service'},
-                            {id: 2, name: 'Мастер на час'},
+                            {id: 2, name: 'masterForAnHour'},
                         ],
                     },
                     {
                         id: 23,
-                        'name': 'Услуги няни и гувернантки',
+                        name: 'babysittingAndGovernessServices',
                         parents: [
                             {id: 6, name: 'service'},
-                            {id: 2, name: 'Мастер на час'},
+                            {id: 2, name: 'masterForAnHour'},
                         ],
                     },
                     {
                         id: 24,
-                        'name': 'Услуги сиделки',
+                        name: 'nursingServices',
                         parents: [
                             {id: 6, name: 'service'},
-                            {id: 2, name: 'Мастер на час'},
+                            {id: 2, name: 'masterForAnHour'},
                         ],
                     },
                     {
                         id: 25,
-                        'name': 'Другие услуги',
+                        name: 'otherServices',
                         parents: [
                             {id: 6, name: 'service'},
-                            {id: 2, name: 'Мастер на час'},
+                            {id: 2, name: 'masterForAnHour'},
                         ],
                     },
                 ],
             },
             {
                 id: 3,
-                name: 'Перевозки',
+                name: 'transportation',
                 parents: [{id: 6, name: 'service'}],
                 type: [
                     {
                         id: 26,
-                        'name': 'Аренда авто',
+                        name: 'rentCar',
                         parents: [
                             {id: 6, name: 'service'},
-                            {id: 3, name: 'Перевозки'},
+                            {id: 3, name: 'transportation'},
                         ],
                     },
                     {
                         id: 27,
-                        'name': 'Аренда спецтехники',
+                        name: 'rentSpecialTech',
                         parents: [
                             {id: 6, name: 'service'},
-                            {id: 3, name: 'Перевозки'},
+                            {id: 3, name: 'transportation'},
                         ],
                     },
                     {
                         id: 28,
-                        'name': 'Вывоз мусора',
+                        name: 'garbageRemoval',
                         parents: [
                             {id: 6, name: 'service'},
-                            {id: 3, name: 'Перевозки'},
+                            {id: 3, name: 'transportation'},
                         ],
                     },
                     {
                         id: 29,
-                        'name': 'Грузоперевозки',
+                        name: 'cargoTransportation',
                         parents: [
                             {id: 6, name: 'service'},
-                            {id: 3, name: 'Перевозки'},
+                            {id: 3, name: 'transportation'},
                         ],
                     },
                     {
                         id: 30,
-                        'name': 'Грузчики',
+                        name: 'movers',
                         parents: [
                             {id: 6, name: 'service'},
-                            {id: 3, name: 'Перевозки'},
+                            {id: 3, name: 'transportation'},
                         ],
                     },
                     {
                         id: 31,
-                        'name': 'Перегон',
+                        name: 'distillation',
                         parents: [
                             {id: 6, name: 'service'},
-                            {id: 3, name: 'Перевозки'},
+                            {id: 3, name: 'transportation'},
                         ],
                     },
                     {
                         id: 32,
-                        'name': 'Пассажирские перевозки',
+                        name: 'passengerTransportation',
                         parents: [
                             {id: 6, name: 'service'},
-                            {id: 3, name: 'Перевозки'},
+                            {id: 3, name: 'transportation'},
                         ],
                     },
                     {
                         id: 33,
-                        'name': 'Услуги водителя',
+                        name: 'driverServices',
                         parents: [
                             {id: 6, name: 'service'},
-                            {id: 3, name: 'Перевозки'},
+                            {id: 3, name: 'transportation'},
                         ],
                     },
                     {
                         id: 34,
-                        'name': 'Услуги эвакуатора',
+                        name: 'towTruckServices',
                         parents: [
                             {id: 6, name: 'service'},
-                            {id: 3, name: 'Перевозки'},
+                            {id: 3, name: 'transportation'},
                         ],
                     },
                     {
                         id: 35,
-                        'name': 'Другие услуги',
+                        name: 'otherServices',
                         parents: [
                             {id: 6, name: 'service'},
-                            {id: 3, name: 'Перевозки'},
+                            {id: 3, name: 'transportation'},
                         ],
                     },
                 ],
             },
             {
                 id: 4,
-                name: 'Красота и здоровье',
+                name: 'beautyAndHealth',
                 parents: [{id: 6, name: 'service'}],
                 type: [
                     {
                         id: 36,
-                        'name': 'Депиляция и шугаринг',
+                        name: 'depilationAndShugaring',
                         parents: [
                             {id: 6, name: 'service'},
-                            {id: 4, name: 'Красота и здоровье'},
+                            {id: 4, name: 'beautyAndHealth'},
                         ],
                     },
                     {
                         id: 37,
-                        'name': 'Макияж',
+                        name: 'makeup',
                         parents: [
                             {id: 6, name: 'service'},
-                            {id: 4, name: 'Красота и здоровье'},
+                            {id: 4, name: 'beautyAndHealth'},
                         ],
                     },
                     {
                         id: 38,
-                        'name': 'Маникюр и педикюр',
+                        name: 'manicureAndPedicure',
                         parents: [
                             {id: 6, name: 'service'},
-                            {id: 4, name: 'Красота и здоровье'},
+                            {id: 4, name: 'beautyAndHealth'},
                         ],
                     },
                     {
                         id: 39,
-                        'name': 'Массаж',
+                        name: 'massage',
                         parents: [
                             {id: 6, name: 'service'},
-                            {id: 4, name: 'Красота и здоровье'},
+                            {id: 4, name: 'beautyAndHealth'},
                         ],
                     },
                     {
                         id: 40,
-                        'name': 'Наращивание волос',
+                        name: 'hairExtension',
                         parents: [
                             {id: 6, name: 'service'},
-                            {id: 4, name: 'Красота и здоровье'},
+                            {id: 4, name: 'beautyAndHealth'},
                         ],
                     },
                     {
                         id: 41,
-                        'name': 'Наращивание ресниц, услуги бровиста',
+                        name: 'eyelashExtensionEyebrowServices',
                         parents: [
                             {id: 6, name: 'service'},
-                            {id: 4, name: 'Красота и здоровье'},
+                            {id: 4, name: 'beautyAndHealth'},
                         ],
                     },
                     {
                         id: 42,
-                        'name': 'СПА-услуги',
+                        name: 'spaServices',
                         parents: [
                             {id: 6, name: 'service'},
-                            {id: 4, name: 'Красота и здоровье'},
+                            {id: 4, name: 'beautyAndHealth'},
                         ],
                     },
                     {
                         id: 43,
-                        'name': 'Тату и пирсинг',
+                        name: 'tattooAndPiercing',
                         parents: [
                             {id: 6, name: 'service'},
-                            {id: 4, name: 'Красота и здоровье'},
+                            {id: 4, name: 'beautyAndHealth'},
                         ],
                     },
                     {
                         id: 44,
-                        'name': 'Услуги парикмахера',
+                        name: 'hairdresserServices',
                         parents: [
                             {id: 6, name: 'service'},
-                            {id: 4, name: 'Красота и здоровье'},
+                            {id: 4, name: 'beautyAndHealth'},
                         ],
                     },
                     {
                         id: 45,
-                        'name': 'Другие услуги',
+                        name: 'otherServices',
                         parents: [
                             {id: 6, name: 'service'},
-                            {id: 4, name: 'Красота и здоровье'},
+                            {id: 4, name: 'beautyAndHealth'},
                         ],
                     },
                 ],
             },
             {
                 id: 5,
-                name: 'Компьютерные услуги',
+                name: 'computerServices',
                 parents: [{id: 6, name: 'service'}],
                 type: [
                     {
                         id: 46,
-                        'name': 'Веб-Дизайн',
+                        name: 'webDesign',
                         parents: [
                             {id: 6, name: 'service'},
-                            {id: 5, name: 'Компьютерные услуги'},
+                            {id: 5, name: 'computerServices'},
                         ],
                     },
                     {
                         id: 47,
-                        'name': 'Компьютерная помощь и настройка ПК',
+                        name: 'computerHelpAndPCSetup',
                         parents: [
                             {id: 6, name: 'service'},
-                            {id: 5, name: 'Компьютерные услуги'},
+                            {id: 5, name: 'computerServices'},
                         ],
                     },
                     {
                         id: 48,
-                        'name': 'Набор текста',
+                        name: 'typing',
                         parents: [
                             {id: 6, name: 'service'},
-                            {id: 5, name: 'Компьютерные услуги'},
+                            {id: 5, name: 'computerServices'},
                         ],
                     },
                     {
                         id: 49,
-                        'name': 'Сборка ПК',
+                        name: 'pcAssembly',
                         parents: [
                             {id: 6, name: 'service'},
-                            {id: 5, name: 'Компьютерные услуги'},
+                            {id: 5, name: 'computerServices'},
                         ],
                     },
                     {
                         id: 50,
-                        'name': 'Подключение Интернета',
+                        name: 'internetConnection',
                         parents: [
                             {id: 6, name: 'service'},
-                            {id: 5, name: 'Компьютерные услуги'},
+                            {id: 5, name: 'computerServices'},
                         ],
                     },
                     {
                         id: 51,
-                        'name': 'Создание и продвижение сайтов',
+                        name: 'websiteDevelopmentAndPromotion',
                         parents: [
                             {id: 6, name: 'service'},
-                            {id: 5, name: 'Компьютерные услуги'},
+                            {id: 5, name: 'computerServices'},
                         ],
                     },
                     {
                         id: 52,
-                        'name': 'Установка ПО',
+                        name: 'installingSoftware',
                         parents: [
                             {id: 6, name: 'service'},
-                            {id: 5, name: 'Компьютерные услуги'},
+                            {id: 5, name: 'computerServices'},
                         ],
                     },
                     {
                         id: 53,
-                        'name': 'Другие услуги',
+                        name: 'otherServices',
                         parents: [
                             {id: 6, name: 'service'},
-                            {id: 5, name: 'Компьютерные услуги'},
+                            {id: 5, name: 'computerServices'},
                         ],
                     },
                 ],
             },
             {
                 id: 6,
-                name: 'Автоуслуги',
+                name: 'carServices',
                 parents: [{id: 6, name: 'service'}],
                 type: [
                     {
                         id: 54,
-                        'name': 'Установка аудио системы',
+                        name: 'installingAudioSystem',
                         parents: [
                             {id: 6, name: 'service'},
-                            {id: 6, name: 'Автоуслуги'},
+                            {id: 6, name: 'carServices'},
                         ],
                     },
                     {
                         id: 55,
-                        'name': 'Автостекла и зеркала',
+                        name: 'autoGlassAndMirrors',
                         parents: [
                             {id: 6, name: 'service'},
-                            {id: 6, name: 'Автоуслуги'},
+                            {id: 6, name: 'carServices'},
                         ],
                     },
                     {
                         id: 56,
-                        'name': 'Автоэлектрика',
+                        name: 'autoElectrician',
                         parents: [
                             {id: 6, name: 'service'},
-                            {id: 6, name: 'Автоуслуги'},
+                            {id: 6, name: 'carServices'},
                         ],
                     },
                     {
                         id: 57,
-                        'name': 'Диагностика авто',
+                        name: 'carDiagnostics',
                         parents: [
                             {id: 6, name: 'service'},
-                            {id: 6, name: 'Автоуслуги'},
+                            {id: 6, name: 'carServices'},
                         ],
                     },
                     {
                         id: 58,
-                        'name': 'Кузовные работы и покраска автомобиля',
+                        name: 'bodyworkAndCarPainting',
                         parents: [
                             {id: 6, name: 'service'},
-                            {id: 6, name: 'Автоуслуги'},
+                            {id: 6, name: 'carServices'},
                         ],
                     },
                     {
                         id: 59,
-                        'name': 'Кондиционеры и обогрев',
+                        name: 'airConditionersAndHeating',
                         parents: [
                             {id: 6, name: 'service'},
-                            {id: 6, name: 'Автоуслуги'},
+                            {id: 6, name: 'carServices'},
                         ],
                     },
                     {
                         id: 60,
-                        'name': 'Покраска авто',
+                        name: 'carPainting',
                         parents: [
                             {id: 6, name: 'service'},
-                            {id: 6, name: 'Автоуслуги'},
+                            {id: 6, name: 'carServices'},
                         ],
                     },
                     {
                         id: 61,
-                        'name': 'Ремонт двигателя и ходовой',
+                        name: 'engineAndChassisRepair',
                         parents: [
                             {id: 6, name: 'service'},
-                            {id: 6, name: 'Автоуслуги'},
+                            {id: 6, name: 'carServices'},
                         ],
                     },
                     {
                         id: 62,
-                        'name': 'Ремонт мототехники',
+                        name: 'repairMotorVehicles',
                         parents: [
                             {id: 6, name: 'service'},
-                            {id: 6, name: 'Автоуслуги'},
+                            {id: 6, name: 'carServices'},
                         ],
                     },
                     {
                         id: 63,
-                        'name': 'Ремонт рулевого управления',
+                        name: 'steeringRepair',
                         parents: [
                             {id: 6, name: 'service'},
-                            {id: 6, name: 'Автоуслуги'},
+                            {id: 6, name: 'carServices'},
                         ],
                     },
                     {
                         id: 64,
-                        'name': 'Ремонт топливной системы',
+                        name: 'fuelSystemRepair',
                         parents: [
                             {id: 6, name: 'service'},
-                            {id: 6, name: 'Автоуслуги'},
+                            {id: 6, name: 'carServices'},
                         ],
                     },
                     {
                         id: 65,
-                        'name': 'Тюнинг и установка доп. оборудования',
+                        name: 'tuning',
                         parents: [
                             {id: 6, name: 'service'},
-                            {id: 6, name: 'Автоуслуги'},
+                            {id: 6, name: 'carServices'},
                         ],
                     },
                     {
                         id: 66,
-                        'name': 'Техническое обслуживание',
+                        name: 'maintenance',
                         parents: [
                             {id: 6, name: 'service'},
-                            {id: 6, name: 'Автоуслуги'},
+                            {id: 6, name: 'carServices'},
                         ],
                     },
                     {
                         id: 67,
-                        'name': 'Химчистка, полировка и мойка авто',
+                        name: 'dryCleaningAndCarWash',
                         parents: [
                             {id: 6, name: 'service'},
-                            {id: 6, name: 'Автоуслуги'},
+                            {id: 6, name: 'carServices'},
                         ],
                     },
                     {
                         id: 68,
-                        'name': 'Шиномонтаж и ремонт дисков',
+                        name: 'tireServiceAndWheelRepair',
                         parents: [
                             {id: 6, name: 'service'},
-                            {id: 6, name: 'Автоуслуги'},
+                            {id: 6, name: 'carServices'},
                         ],
                     },
                     {
                         id: 69,
-                        'name': 'Электрооборудование',
+                        name: 'electricalEquipment',
                         parents: [
                             {id: 6, name: 'service'},
-                            {id: 6, name: 'Автоуслуги'},
+                            {id: 6, name: 'carServices'},
                         ],
                     },
                     {
                         id: 70,
-                        'name': 'Другие услуги',
+                        name: 'otherServices',
                         parents: [
                             {id: 6, name: 'service'},
-                            {id: 6, name: 'Автоуслуги'},
+                            {id: 6, name: 'carServices'},
                         ],
                     },
                 ],
             },
             {
                 id: 7,
-                name: 'Ремонт техники',
+                name: 'repairEquipment',
                 parents: [{id: 6, name: 'service'}],
                 type: [
                     {
                         id: 71,
-                        'name': 'Ремонт газового оборудования',
+                        name: 'gasEquipmentRepair',
                         parents: [
                             {id: 6, name: 'service'},
-                            {id: 7, name: 'Ремонт техники'},
+                            {id: 7, name: 'repairEquipment'},
                         ],
                     },
                     {
                         id: 72,
-                        'name': 'Ремонт компьютеров и ноутбуков',
+                        name: 'repairComputersAndLaptops',
                         parents: [
                             {id: 6, name: 'service'},
-                            {id: 7, name: 'Ремонт техники'},
+                            {id: 7, name: 'repairEquipment'},
                         ],
                     },
                     {
                         id: 73,
-                        'name': 'Ремонт смартфонов и телефонов',
+                        name: 'repairSmartphonesAndPhones',
                         parents: [
                             {id: 6, name: 'service'},
-                            {id: 7, name: 'Ремонт техники'},
+                            {id: 7, name: 'repairEquipment'},
                         ],
                     },
                     {
                         id: 74,
-                        'name': 'Ремонт телевизоров, аудио и -видеотехники',
+                        name: 'repairAudioAndVideoEquipment',
                         parents: [
                             {id: 6, name: 'service'},
-                            {id: 7, name: 'Ремонт техники'},
+                            {id: 7, name: 'repairEquipment'},
                         ],
                     },
                     {
                         id: 75,
-                        'name': 'Ремонт фототехники',
+                        name: 'photoEquipmentRepair',
                         parents: [
                             {id: 6, name: 'service'},
-                            {id: 7, name: 'Ремонт техники'},
+                            {id: 7, name: 'repairEquipment'},
                         ],
                     },
                     {
                         id: 76,
-                        'name': 'Ремонт часов',
+                        name: 'watchRepair',
                         parents: [
                             {id: 6, name: 'service'},
-                            {id: 7, name: 'Ремонт техники'},
+                            {id: 7, name: 'repairEquipment'},
                         ],
                     },
                     {
                         id: 77,
-                        'name': 'Установка и ремонт кондиционеров',
+                        name: 'installationAndRepairAirConditioners',
                         parents: [
                             {id: 6, name: 'service'},
-                            {id: 7, name: 'Ремонт техники'},
+                            {id: 7, name: 'repairEquipment'},
                         ],
                     },
                     {
                         id: 78,
-                        'name': 'Установка систем безопасности',
+                        name: 'installationSecuritySystems',
                         parents: [
                             {id: 6, name: 'service'},
-                            {id: 7, name: 'Ремонт техники'},
+                            {id: 7, name: 'repairEquipment'},
                         ],
                     },
                     {
                         id: 79,
-                        'name': 'Установка и ремонт бытовой техники',
+                        name: 'installationAndRepairHouseholdAppliances',
                         parents: [
                             {id: 6, name: 'service'},
-                            {id: 7, name: 'Ремонт техники'},
+                            {id: 7, name: 'repairEquipment'},
                         ],
                     },
                     {
                         id: 80,
-                        'name': 'Другие услуги',
+                        name: 'otherServices',
                         parents: [
                             {id: 6, name: 'service'},
-                            {id: 7, name: 'Ремонт техники'},
+                            {id: 7, name: 'repairEquipment'},
                         ],
                     },
                 ],
             },
             {
                 id: 8,
-                'name': 'Обучение',
+                name: 'training',
                 parents: [{id: 6, name: 'service'}],
                 'type': [
                     {
                         id: 81,
-                        'name': 'Дошкольное развитие',
+                        name: 'preSchoolDevelopment',
                         parents: [
                             {id: 6, name: 'service'},
-                            {id: 8, name: 'Обучение'},
+                            {id: 8, name: 'training'},
                         ],
                     },
                     {
                         id: 82,
-                        'name': 'Мастер-классы и тренинги',
+                        name: 'masterClassesAndTrainings',
                         parents: [
                             {id: 6, name: 'service'},
-                            {id: 8, name: 'Обучение'},
+                            {id: 8, name: 'training'},
                         ],
                     },
                     {
                         id: 83,
-                        'name': 'Обучение вождению',
+                        name: 'drivingTraining',
                         parents: [
                             {id: 6, name: 'service'},
-                            {id: 8, name: 'Обучение'},
+                            {id: 8, name: 'training'},
                         ],
                     },
                     {
                         id: 84,
-                        'name': 'Обучение языкам',
+                        name: 'languageTeaching',
                         parents: [
                             {id: 6, name: 'service'},
-                            {id: 8, name: 'Обучение'},
+                            {id: 8, name: 'training'},
                         ],
                     },
                     {
                         id: 85,
-                        'name': 'Подготовка к экзаменам',
+                        name: 'preparationForExams',
                         parents: [
                             {id: 6, name: 'service'},
-                            {id: 8, name: 'Обучение'},
+                            {id: 8, name: 'training'},
                         ],
                     },
                     {
                         id: 86,
-                        'name': 'Профессиональное обучение',
+                        name: 'professionalEducation',
                         parents: [
                             {id: 6, name: 'service'},
-                            {id: 8, name: 'Обучение'},
+                            {id: 8, name: 'training'},
                         ],
                     },
                     {
                         id: 87,
-                        'name': 'Уроки музыки и театрального мастерства',
+                        name: 'musicAndTheaterLessons',
                         parents: [
                             {id: 6, name: 'service'},
-                            {id: 8, name: 'Обучение'},
+                            {id: 8, name: 'training'},
                         ],
                     },
                     {
                         id: 88,
-                        'name': 'Уроки рисования, дизайна и рукоделия',
+                        name: 'drawingDesignAndHandicraftLessons',
                         parents: [
                             {id: 6, name: 'service'},
-                            {id: 8, name: 'Обучение'},
+                            {id: 8, name: 'training'},
                         ],
                     },
                     {
                         id: 89,
-                        'name': 'Логопед и дефектолог',
+                        name: 'speechTherapistAndDefectologist',
                         parents: [
                             {id: 6, name: 'service'},
-                            {id: 8, name: 'Обучение'},
+                            {id: 8, name: 'training'},
                         ],
                     },
                     {
                         id: 90,
-                        'name': 'Танцы',
+                        name: 'dancing',
                         parents: [
                             {id: 6, name: 'service'},
-                            {id: 8, name: 'Обучение'},
+                            {id: 8, name: 'training'},
                         ],
                     },
                     {
                         id: 91,
-                        'name': 'Психологи',
+                        name: 'psychologists',
                         parents: [
                             {id: 6, name: 'service'},
-                            {id: 8, name: 'Обучение'},
+                            {id: 8, name: 'training'},
                         ],
                     },
                     {
                         id: 92,
-                        'name': 'Репетиторы',
+                        name: 'tutors',
                         parents: [
                             {id: 6, name: 'service'},
-                            {id: 8, name: 'Обучение'},
+                            {id: 8, name: 'training'},
                         ],
                     },
                     {
                         id: 93,
-                        'name': 'Услуги тренера',
+                        name: 'trainerServices',
                         parents: [
                             {id: 6, name: 'service'},
-                            {id: 8, name: 'Обучение'},
+                            {id: 8, name: 'training'},
                         ],
                     },
                     {
                         id: 94,
-                        'name': 'Другие услуги',
+                        name: 'otherServices',
                         parents: [
                             {id: 6, name: 'service'},
-                            {id: 8, name: 'Обучение'},
+                            {id: 8, name: 'training'},
                         ],
                     },
                 ],
             },
             {
                 id: 9,
-                'name': 'Деловые услуги',
+                name: 'businessServices',
                 parents: [{id: 6, name: 'service'}],
                 'type': [
                     {
                         id: 95,
-                        'name': 'Бизнес-консультирование',
+                        name: 'businessConsulting',
                         parents: [
                             {id: 6, name: 'service'},
-                            {id: 9, name: 'Деловые услуги'},
+                            {id: 9, name: 'businessServices'},
                         ],
                     },
                     {
                         id: 96,
-                        'name': 'Бухгалтерия и финансы',
+                        name: 'accountingAndFinance',
                         parents: [
                             {id: 6, name: 'service'},
-                            {id: 9, name: 'Деловые услуги'},
+                            {id: 9, name: 'businessServices'},
                         ],
                     },
                     {
                         id: 97,
-                        'name': 'Консультирование ВЭД',
+                        name: 'foreignEconomicActivityConsulting',
                         parents: [
                             {id: 6, name: 'service'},
-                            {id: 9, name: 'Деловые услуги'},
+                            {id: 9, name: 'businessServices'},
                         ],
                     },
                     {
                         id: 98,
-                        'name': 'Изготовление вывесок и рекламы',
+                        name: 'productionSignsAndAdvertisements',
                         parents: [
                             {id: 6, name: 'service'},
-                            {id: 9, name: 'Деловые услуги'},
+                            {id: 9, name: 'businessServices'},
                         ],
                     },
                     {
                         id: 99,
-                        'name': 'Маркетинг и реклама',
+                        name: 'marketingAndAdvertising',
                         parents: [
                             {id: 6, name: 'service'},
-                            {id: 9, name: 'Деловые услуги'},
+                            {id: 9, name: 'businessServices'},
                         ],
                     },
                     {
                         id: 100,
-                        'name': 'Перевод текстов',
+                        name: 'translationTexts',
                         parents: [
                             {id: 6, name: 'service'},
-                            {id: 9, name: 'Деловые услуги'},
+                            {id: 9, name: 'businessServices'},
                         ],
                     },
                     {
                         id: 101,
-                        'name': 'Полиграфия',
+                        name: 'polygraphy',
                         parents: [
                             {id: 6, name: 'service'},
-                            {id: 9, name: 'Деловые услуги'},
+                            {id: 9, name: 'businessServices'},
                         ],
                     },
                     {
                         id: 102,
-                        'name': 'Риэлторские услуги',
+                        name: 'realtor',
                         parents: [
                             {id: 6, name: 'service'},
-                            {id: 9, name: 'Деловые услуги'},
+                            {id: 9, name: 'businessServices'},
                         ],
                     },
                     {
                         id: 103,
-                        'name': 'Составление я',
+                        name: 'composing',
                         parents: [
                             {id: 6, name: 'service'},
-                            {id: 9, name: 'Деловые услуги'},
+                            {id: 9, name: 'businessServices'},
                         ],
                     },
                     {
                         id: 104,
-                        'name': 'Юридические услуги',
+                        name: 'legalServices',
                         parents: [
                             {id: 6, name: 'service'},
-                            {id: 9, name: 'Деловые услуги'},
+                            {id: 9, name: 'businessServices'},
                         ],
                     },
                     {
                         id: 105,
-                        'name': 'Другие услуги',
+                        name: 'otherServices',
                         parents: [
                             {id: 6, name: 'service'},
-                            {id: 9, name: 'Деловые услуги'},
+                            {id: 9, name: 'businessServices'},
                         ],
                     },
                 ],
             },
             {
                 id: 10,
-                'name': 'Организация праздников',
+                name: 'equipmentAndAttractionsRental',
                 parents: [{id: 6, name: 'service'}],
                 'type': [
                     {
                         id: 106,
-                        'name': 'Аренда оборудования и аттракционов',
+                        name: 'equipmentAndAttractionsRental',
                         parents: [
                             {id: 6, name: 'service'},
-                            {id: 10, name: 'Аренда оборудования и аттракционов'},
+                            {id: 10, name: 'equipmentAndAttractionsRental'},
                         ],
                     },
                     {
                         id: 107,
-                        'name': 'Аренда площадки',
+                        name: 'leaseSite',
                         parents: [
                             {id: 6, name: 'service'},
-                            {id: 10, name: 'Аренда оборудования и аттракционов'},
+                            {id: 10, name: 'equipmentAndAttractionsRental'},
                         ],
                     },
                     {
                         id: 108,
-                        'name': 'Ведущие, музыканты и артисты',
+                        name: 'presentersMusiciansAndArtists',
                         parents: [
                             {id: 6, name: 'service'},
-                            {id: 10, name: 'Аренда оборудования и аттракционов'},
+                            {id: 10, name: 'equipmentAndAttractionsRental'},
                         ],
                     },
                     {
                         id: 109,
-                        'name': 'Организация мероприятий',
+                        name: 'organizationEvents',
                         parents: [
                             {id: 6, name: 'service'},
-                            {id: 10, name: 'Аренда оборудования и аттракционов'},
+                            {id: 10, name: 'equipmentAndAttractionsRental'},
                         ],
                     },
                     {
                         id: 110,
-                        'name': 'Приготовление еды и кейтеринг',
+                        name: 'foodPreparationAndCatering',
                         parents: [
                             {id: 6, name: 'service'},
-                            {id: 10, name: 'Аренда оборудования и аттракционов'},
+                            {id: 10, name: 'equipmentAndAttractionsRental'},
                         ],
                     },
                     {
                         id: 111,
-                        'name': 'Прокат костюмов',
+                        name: 'suitRental',
                         parents: [
                             {id: 6, name: 'service'},
-                            {id: 10, name: 'Аренда оборудования и аттракционов'},
+                            {id: 10, name: 'equipmentAndAttractionsRental'},
                         ],
                     },
                     {
                         id: 112,
-                        'name': 'Промоутеры и модели',
+                        name: 'promotersAndModels',
                         parents: [
                             {id: 6, name: 'service'},
-                            {id: 10, name: 'Аренда оборудования и аттракционов'},
+                            {id: 10, name: 'equipmentAndAttractionsRental'},
                         ],
                     },
                     {
                         id: 113,
-                        'name': 'Туризм и отдых',
+                        name: 'tourismRest',
                         parents: [
                             {id: 6, name: 'service'},
-                            {id: 10, name: 'Аренда оборудования и аттракционов'},
+                            {id: 10, name: 'equipmentAndAttractionsRental'},
                         ],
                     },
                     {
                         id: 114,
-                        'name': 'Цветы и декор',
+                        name: 'flowersDecor',
                         parents: [
                             {id: 6, name: 'service'},
-                            {id: 10, name: 'Аренда оборудования и аттракционов'},
+                            {id: 10, name: 'equipmentAndAttractionsRental'},
                         ],
                     },
                     {
                         id: 115,
-                        'name': 'Другие услуги',
+                        name: 'otherServices',
                         parents: [
                             {id: 6, name: 'service'},
-                            {id: 10, name: 'Аренда оборудования и аттракционов'},
+                            {id: 10, name: 'equipmentAndAttractionsRental'},
                         ],
                     },
                 ],
             },
             {
                 id: 11,
-                'name': 'Фото и видеосъемка',
+                name: 'photoAndVideoFilming',
                 parents: [{id: 6, name: 'service'}],
                 'type': [
                     {
                         id: 141,
-                        'name': 'Видеомонтажер',
+                        name: 'videoEditor',
                         parents: [
                             {id: 6, name: 'service'},
-                            {id: 11, name: 'Фото и видеосъемка'},
+                            {id: 11, name: 'photoAndVideoFilming'},
                         ],
                     },
                 ],
             },
             {
                 id: 12,
-                'name': 'Уборка',
+                name: 'cleaning',
                 parents: [{id: 6, name: 'service'}],
                 'type': [
                     {
                         id: 116,
-                        'name': 'Мойка окон и балконов',
+                        name: 'washingWindowsAndBalconies',
                         parents: [
                             {id: 6, name: 'service'},
-                            {id: 12, name: 'Уборка'},
+                            {id: 12, name: 'cleaning'},
                         ],
                     },
                     {
                         id: 117,
-                        'name': 'Уборка квартир',
+                        name: 'cleaningApartments',
                         parents: [
                             {id: 6, name: 'service'},
-                            {id: 12, name: 'Уборка'},
+                            {id: 12, name: 'cleaning'},
                         ],
                     },
                     {
                         id: 118,
-                        'name': 'Уборка домов',
+                        name: 'houseCleaning',
                         parents: [
                             {id: 6, name: 'service'},
-                            {id: 12, name: 'Уборка'},
+                            {id: 12, name: 'cleaning'},
                         ],
                     },
                     {
                         id: 119,
-                        'name': 'Услуги домработницы',
+                        name: 'housekeepingServices',
                         parents: [
                             {id: 6, name: 'service'},
-                            {id: 12, name: 'Уборка'},
+                            {id: 12, name: 'cleaning'},
                         ],
                     },
                     {
                         id: 120,
-                        'name': 'Химчистка, стирка и глажка',
+                        name: 'dryCleaningWashingAndIroning',
                         parents: [
                             {id: 6, name: 'service'},
-                            {id: 12, name: 'Уборка'},
+                            {id: 12, name: 'cleaning'},
                         ],
                     },
                     {
                         id: 121,
-                        'name': 'Другие услуги',
+                        name: 'otherServices',
                         parents: [
                             {id: 6, name: 'service'},
-                            {id: 12, name: 'Уборка'},
+                            {id: 12, name: 'cleaning'},
                         ],
                     },
                 ],
             },
             {
                 id: 13,
-                'name': 'Изготовление на заказ',
+                name: 'manufacturingToOrder',
                 parents: [{id: 6, name: 'service'}],
                 'type': [
                     {
                         id: 122,
-                        'name': 'Изготовление и ремонт одежды, обуви, аксессуаров',
+                        name: 'manufactureAndRepairClothesAccessories',
                         parents: [
                             {id: 6, name: 'service'},
-                            {id: 13, name: 'Изготовление на заказ'},
+                            {id: 13, name: 'manufacturingToOrder'},
                         ],
                     },
                     {
                         id: 123,
-                        'name': 'Кованые изделия на заказ',
+                        name: 'forgedProductsToOrder',
                         parents: [
                             {id: 6, name: 'service'},
-                            {id: 13, name: 'Изготовление на заказ'},
+                            {id: 13, name: 'manufacturingToOrder'},
                         ],
                     },
                     {
                         id: 124,
-                        'name': 'Мебель на заказ',
+                        name: 'customMadeFurniture',
                         parents: [
                             {id: 6, name: 'service'},
-                            {id: 13, name: 'Изготовление на заказ'},
+                            {id: 13, name: 'manufacturingToOrder'},
                         ],
                     },
                     {
                         id: 125,
-                        'name': 'Музыка, стихи и озвучка на заказ',
+                        name: 'musicPoetryAndVoiceActingToOrder',
                         parents: [
                             {id: 6, name: 'service'},
-                            {id: 13, name: 'Изготовление на заказ'},
+                            {id: 13, name: 'manufacturingToOrder'},
                         ],
                     },
                     {
                         id: 126,
-                        'name': 'Печати и штампы на заказ',
+                        name: 'customSealsAndStamps',
                         parents: [
                             {id: 6, name: 'service'},
-                            {id: 13, name: 'Изготовление на заказ'},
+                            {id: 13, name: 'manufacturingToOrder'},
                         ],
                     },
                     {
                         id: 127,
-                        'name': 'Рисунок, живопись и графика на заказ',
+                        name: 'drawingPaintingAndGraphicsToOrder',
                         parents: [
                             {id: 6, name: 'service'},
-                            {id: 13, name: 'Изготовление на заказ'},
+                            {id: 13, name: 'manufacturingToOrder'},
                         ],
                     },
                     {
                         id: 128,
-                        'name': 'Сувенирная продукция и полиграфия',
+                        name: 'souvenirProductsAndPrinting',
                         parents: [
                             {id: 6, name: 'service'},
-                            {id: 13, name: 'Изготовление на заказ'},
+                            {id: 13, name: 'manufacturingToOrder'},
                         ],
                     },
                     {
                         id: 129,
-                        'name': 'Ювелирные услуги',
+                        name: 'jewelryServices',
                         parents: [
                             {id: 6, name: 'service'},
-                            {id: 13, name: 'Изготовление на заказ'},
+                            {id: 13, name: 'manufacturingToOrder'},
                         ],
                     },
                     {
                         id: 130,
-                        'name': 'Другие услуги',
+                        name: 'otherServices',
                         parents: [
                             {id: 6, name: 'service'},
-                            {id: 13, name: 'Изготовление на заказ'},
+                            {id: 13, name: 'manufacturingToOrder'},
                         ],
                     },
                 ],
             },
             {
                 id: 14,
-                'name': 'Продукты питания',
+                name: 'food',
                 parents: [{id: 6, name: 'service'}],
                 'type': [
                     {
                         id: 131,
-                        'name': 'Выпечка и торты на заказ',
+                        name: 'bakingAndCakesToOrder',
                         parents: [
                             {id: 6, name: 'service'},
-                            {id: 14, name: 'Продукты питания'},
+                            {id: 14, name: 'food'},
                         ],
                     },
                     {
                         id: 132,
-                        'name': 'Продукты питания',
+                        name: 'food',
                         parents: [
                             {id: 6, name: 'service'},
-                            {id: 14, name: 'Продукты питания'},
+                            {id: 14, name: 'food'},
                         ],
                     },
                     {
                         id: 133,
-                        'name': 'Услуги повара',
+                        name: 'cookServices',
                         parents: [
                             {id: 6, name: 'service'},
-                            {id: 14, name: 'Продукты питания'},
+                            {id: 14, name: 'food'},
                         ],
                     },
                     {
                         id: 134,
-                        'name': 'Чай и кофе',
+                        name: 'teaAndCoffee',
                         parents: [
                             {id: 6, name: 'service'},
-                            {id: 14, name: 'Продукты питания'},
+                            {id: 14, name: 'food'},
                         ],
                     },
                     {
                         id: 135,
-                        'name': 'Другие услуги',
+                        name: 'otherServices',
                         parents: [
                             {id: 6, name: 'service'},
-                            {id: 14, name: 'Продукты питания'},
+                            {id: 14, name: 'food'},
                         ],
                     },
                 ],
             },
             {
                 id: 15,
-                'name': 'Уход за животными',
+                name: 'animalCare',
                 parents: [{id: 6, name: 'service'}],
                 'type': [
                     {
                         id: 136,
-                        'name': 'Вязка',
+                        name: 'knitting',
                         parents: [
                             {id: 6, name: 'service'},
-                            {id: 15, name: 'Уход за животными'},
+                            {id: 15, name: 'animalCare'},
                         ],
                     },
                     {
                         id: 137,
-                        'name': 'Дрессировка и выгул',
+                        name: 'trainingAndWalking',
                         parents: [
                             {id: 6, name: 'service'},
-                            {id: 15, name: 'Уход за животными'},
+                            {id: 15, name: 'animalCare'},
                         ],
                     },
                     {
                         id: 138,
-                        'name': 'Передержка',
+                        name: 'overexposure',
                         parents: [
                             {id: 6, name: 'service'},
-                            {id: 15, name: 'Уход за животными'},
+                            {id: 15, name: 'animalCare'},
                         ],
                     },
                     {
                         id: 139,
-                        'name': 'Стрижка и уход за животными',
+                        name: 'animalGroomingAndGrooming',
                         parents: [
                             {id: 6, name: 'service'},
-                            {id: 15, name: 'Уход за животными'},
+                            {id: 15, name: 'animalCare'},
                         ],
                     },
                     {
                         id: 140,
-                        'name': 'Другие услуги',
+                        name: 'otherServices',
                         parents: [
                             {id: 6, name: 'service'},
-                            {id: 15, name: 'Уход за животными'},
+                            {id: 15, name: 'animalCare'},
                         ],
                     },
                 ],
             },
             {
                 id: 16,
-                'name': 'Няни и сиделки',
+                name: 'babysittersAndNurses',
                 parents: [{id: 6, name: 'service'}],
             }
         ]
@@ -2172,7 +2177,7 @@ export const categories_list: CategoryType[] = [
                     },
                     {
                         id: 2,
-                        'name': 'Блузы',
+                        name: 'blouses',
                         parents: [
                             {id: 7, name: 'goods'},
                             {id: 1, name: 'womenWardrobe'},
@@ -2180,7 +2185,7 @@ export const categories_list: CategoryType[] = [
                     },
                     {
                         id: 3,
-                        'name': 'Рубашки',
+                        name: 'shirts',
                         parents: [
                             {id: 7, name: 'goods'},
                             {id: 1, name: 'womenWardrobe'},
@@ -2188,7 +2193,7 @@ export const categories_list: CategoryType[] = [
                     },
                     {
                         id: 4,
-                        'name': 'Будущим мамам',
+                        name: 'expectantMothers',
                         parents: [
                             {id: 7, name: 'goods'},
                             {id: 1, name: 'womenWardrobe'},
@@ -2196,7 +2201,7 @@ export const categories_list: CategoryType[] = [
                     },
                     {
                         id: 5,
-                        'name': 'Верхняя одежда',
+                        name: 'outerwear',
                         parents: [
                             {id: 7, name: 'goods'},
                             {id: 1, name: 'womenWardrobe'},
@@ -2204,7 +2209,7 @@ export const categories_list: CategoryType[] = [
                     },
                     {
                         id: 6,
-                        'name': 'Головные уборы',
+                        name: 'hats',
                         parents: [
                             {id: 7, name: 'goods'},
                             {id: 1, name: 'womenWardrobe'},
@@ -2212,7 +2217,7 @@ export const categories_list: CategoryType[] = [
                     },
                     {
                         id: 7,
-                        'name': 'Домашняя одежда',
+                        name: 'homeClothes',
                         parents: [
                             {id: 7, name: 'goods'},
                             {id: 1, name: 'womenWardrobe'},
@@ -2220,7 +2225,7 @@ export const categories_list: CategoryType[] = [
                     },
                     {
                         id: 8,
-                        'name': 'Комбинезоны',
+                        name: 'overalls',
                         parents: [
                             {id: 7, name: 'goods'},
                             {id: 1, name: 'womenWardrobe'},
@@ -2228,7 +2233,7 @@ export const categories_list: CategoryType[] = [
                     },
                     {
                         id: 9,
-                        'name': 'Купальники',
+                        name: 'swimwear',
                         parents: [
                             {id: 7, name: 'goods'},
                             {id: 1, name: 'womenWardrobe'},
@@ -2236,7 +2241,7 @@ export const categories_list: CategoryType[] = [
                     },
                     {
                         id: 10,
-                        'name': 'Нижнее белье',
+                        name: 'underwear',
                         parents: [
                             {id: 7, name: 'goods'},
                             {id: 1, name: 'womenWardrobe'},
@@ -2244,7 +2249,7 @@ export const categories_list: CategoryType[] = [
                     },
                     {
                         id: 11,
-                        'name': 'Обувь',
+                        name: 'footwear',
                         parents: [
                             {id: 7, name: 'goods'},
                             {id: 1, name: 'womenWardrobe'},
@@ -2252,7 +2257,7 @@ export const categories_list: CategoryType[] = [
                     },
                     {
                         id: 12,
-                        'name': 'Пиджаки и костюмы',
+                        name: 'blazersAndSuits',
                         parents: [
                             {id: 7, name: 'goods'},
                             {id: 1, name: 'womenWardrobe'},
@@ -2260,7 +2265,7 @@ export const categories_list: CategoryType[] = [
                     },
                     {
                         id: 13,
-                        'name': 'Платья и юбки',
+                        name: 'dressesAndSkirts',
                         parents: [
                             {id: 7, name: 'goods'},
                             {id: 1, name: 'womenWardrobe'},
@@ -2268,7 +2273,7 @@ export const categories_list: CategoryType[] = [
                     },
                     {
                         id: 14,
-                        'name': 'Свитеры и толстовки',
+                        name: 'sweatersHoodies',
                         parents: [
                             {id: 7, name: 'goods'},
                             {id: 1, name: 'womenWardrobe'},
@@ -2276,7 +2281,7 @@ export const categories_list: CategoryType[] = [
                     },
                     {
                         id: 15,
-                        'name': 'Спортивная одежда',
+                        name: 'sportswear',
                         parents: [
                             {id: 7, name: 'goods'},
                             {id: 1, name: 'womenWardrobe'},
@@ -2284,7 +2289,7 @@ export const categories_list: CategoryType[] = [
                     },
                     {
                         id: 16,
-                        'name': 'Футболки и топы',
+                        name: 'tShirtsAndTops',
                         parents: [
                             {id: 7, name: 'goods'},
                             {id: 1, name: 'womenWardrobe'},
@@ -2292,7 +2297,7 @@ export const categories_list: CategoryType[] = [
                     },
                     {
                         id: 17,
-                        'name': 'Штаны и шорты',
+                        name: 'pantsShorts',
                         parents: [
                             {id: 7, name: 'goods'},
                             {id: 1, name: 'womenWardrobe'},
@@ -2300,7 +2305,7 @@ export const categories_list: CategoryType[] = [
                     },
                     {
                         id: 18,
-                        'name': 'Другое',
+                        name: 'other',
                         parents: [
                             {id: 7, name: 'goods'},
                             {id: 1, name: 'womenWardrobe'},
@@ -2308,7 +2313,7 @@ export const categories_list: CategoryType[] = [
                     },
                     {
                         id: 19,
-                        'name': 'Сумки',
+                        name: 'handbags',
                         parents: [
                             {id: 7, name: 'goods'},
                             {id: 1, name: 'womenWardrobe'},
@@ -2316,7 +2321,7 @@ export const categories_list: CategoryType[] = [
                     },
                     {
                         id: 20,
-                        'name': 'Украшения',
+                        name: 'decorations',
                         parents: [
                             {id: 7, name: 'goods'},
                             {id: 1, name: 'womenWardrobe'},
@@ -2324,7 +2329,7 @@ export const categories_list: CategoryType[] = [
                     },
                     {
                         id: 86,
-                        'name': 'Блузы и рубашки',
+                        name: 'blouses',
                         parents: [
                             {id: 7, name: 'goods'},
                             {id: 1, name: 'womenWardrobe'},
@@ -2334,12 +2339,12 @@ export const categories_list: CategoryType[] = [
             },
             {
                 id: 2,
-                'name': 'Мужской гардероб',
+                name: 'mansWardrobe',
                 parents: [{id: 7, name: 'goods'}],
                 'type': [
                     {
                         id: 21,
-                        'name': 'Аксессуары',
+                        name: 'accessories',
                         parents: [
                             {id: 7, name: 'goods'},
                             {id: 2, name: 'Мужской гардероб'},
@@ -2347,7 +2352,7 @@ export const categories_list: CategoryType[] = [
                     },
                     {
                         id: 22,
-                        'name': 'Верхняя одежда',
+                        name: 'outerwear',
                         parents: [
                             {id: 7, name: 'goods'},
                             {id: 2, name: 'Мужской гардероб'},
@@ -2355,7 +2360,7 @@ export const categories_list: CategoryType[] = [
                     },
                     {
                         id: 23,
-                        'name': 'Головные уборы',
+                        name: 'hats',
                         parents: [
                             {id: 7, name: 'goods'},
                             {id: 2, name: 'Мужской гардероб'},
@@ -2363,7 +2368,7 @@ export const categories_list: CategoryType[] = [
                     },
                     {
                         id: 24,
-                        'name': 'Домашняя одежда',
+                        name: 'homeClothes',
                         parents: [
                             {id: 7, name: 'goods'},
                             {id: 2, name: 'Мужской гардероб'},
@@ -2371,7 +2376,7 @@ export const categories_list: CategoryType[] = [
                     },
                     {
                         id: 25,
-                        'name': 'Комбинезоны',
+                        name: 'overalls',
                         parents: [
                             {id: 7, name: 'goods'},
                             {id: 2, name: 'Мужской гардероб'},
@@ -2379,7 +2384,7 @@ export const categories_list: CategoryType[] = [
                     },
                     {
                         id: 26,
-                        'name': 'Нижнее белье',
+                        name: 'underwear',
                         parents: [
                             {id: 7, name: 'goods'},
                             {id: 2, name: 'Мужской гардероб'},
@@ -2387,7 +2392,7 @@ export const categories_list: CategoryType[] = [
                     },
                     {
                         id: 27,
-                        'name': 'Обувь',
+                        name: 'footwear',
                         parents: [
                             {id: 7, name: 'goods'},
                             {id: 2, name: 'Мужской гардероб'},
@@ -2395,7 +2400,7 @@ export const categories_list: CategoryType[] = [
                     },
                     {
                         id: 28,
-                        'name': 'Пиджаки и костюмы',
+                        name: 'blazersAndSuits',
                         parents: [
                             {id: 7, name: 'goods'},
                             {id: 2, name: 'Мужской гардероб'},
@@ -2403,7 +2408,7 @@ export const categories_list: CategoryType[] = [
                     },
                     {
                         id: 29,
-                        'name': 'Рубашки',
+                        name: 'shirts',
                         parents: [
                             {id: 7, name: 'goods'},
                             {id: 2, name: 'Мужской гардероб'},
@@ -2411,7 +2416,7 @@ export const categories_list: CategoryType[] = [
                     },
                     {
                         id: 30,
-                        'name': 'Свитеры и толстовки',
+                        name: 'sweatersHoodies',
                         parents: [
                             {id: 7, name: 'goods'},
                             {id: 2, name: 'Мужской гардероб'},
@@ -2419,7 +2424,7 @@ export const categories_list: CategoryType[] = [
                     },
                     {
                         id: 31,
-                        'name': 'Спецодежда',
+                        name: 'overalls',
                         parents: [
                             {id: 7, name: 'goods'},
                             {id: 2, name: 'Мужской гардероб'},
@@ -2427,7 +2432,7 @@ export const categories_list: CategoryType[] = [
                     },
                     {
                         id: 32,
-                        'name': 'Спортивная одежда',
+                        name: 'sportswear',
                         parents: [
                             {id: 7, name: 'goods'},
                             {id: 2, name: 'Мужской гардероб'},
@@ -2435,7 +2440,7 @@ export const categories_list: CategoryType[] = [
                     },
                     {
                         id: 33,
-                        'name': 'Футболки и поло',
+                        name: 'tShirtsAndPolos',
                         parents: [
                             {id: 7, name: 'goods'},
                             {id: 2, name: 'Мужской гардероб'},
@@ -2443,7 +2448,7 @@ export const categories_list: CategoryType[] = [
                     },
                     {
                         id: 34,
-                        'name': 'Штаны и шорты',
+                        name: 'pantsAndShorts',
                         parents: [
                             {id: 7, name: 'goods'},
                             {id: 2, name: 'Мужской гардероб'},
@@ -2451,7 +2456,7 @@ export const categories_list: CategoryType[] = [
                     },
                     {
                         id: 35,
-                        'name': 'Другое',
+                        name: 'other',
                         parents: [
                             {id: 7, name: 'goods'},
                             {id: 2, name: 'Мужской гардероб'},
@@ -2461,12 +2466,12 @@ export const categories_list: CategoryType[] = [
             },
             {
                 id: 3,
-                'name': 'Детская одежда',
+                name: 'babyClothes',
                 parents: [{id: 7, name: 'goods'}],
                 'type': [
                     {
                         id: 36,
-                        'name': 'Аксессуары',
+                        name: 'accessories',
                         parents: [
                             {id: 7, name: 'goods'},
                             {id: 3, name: 'Детская одежда'},
@@ -2474,7 +2479,7 @@ export const categories_list: CategoryType[] = [
                     },
                     {
                         id: 37,
-                        'name': 'Блузы и рубашки',
+                        name: 'blousesAndShirts',
                         parents: [
                             {id: 7, name: 'goods'},
                             {id: 3, name: 'Детская одежда'},
@@ -2482,7 +2487,7 @@ export const categories_list: CategoryType[] = [
                     },
                     {
                         id: 38,
-                        'name': 'Верхняя одежда',
+                        name: 'outerwear',
                         parents: [
                             {id: 7, name: 'goods'},
                             {id: 3, name: 'Детская одежда'},
@@ -2490,7 +2495,7 @@ export const categories_list: CategoryType[] = [
                     },
                     {
                         id: 39,
-                        'name': 'Головные уборы',
+                        name: 'hats',
                         parents: [
                             {id: 7, name: 'goods'},
                             {id: 3, name: 'Детская одежда'},
@@ -2498,7 +2503,7 @@ export const categories_list: CategoryType[] = [
                     },
                     {
                         id: 40,
-                        'name': 'Домашняя одежда',
+                        name: 'homeClothes',
                         parents: [
                             {id: 7, name: 'goods'},
                             {id: 3, name: 'Детская одежда'},
@@ -2506,7 +2511,7 @@ export const categories_list: CategoryType[] = [
                     },
                     {
                         id: 41,
-                        'name': 'Комбинезоны и боди',
+                        name: 'jumpsuitsBodysuits',
                         parents: [
                             {id: 7, name: 'goods'},
                             {id: 3, name: 'Детская одежда'},
@@ -2514,7 +2519,7 @@ export const categories_list: CategoryType[] = [
                     },
                     {
                         id: 42,
-                        'name': 'Конверты',
+                        name: 'envelopes',
                         parents: [
                             {id: 7, name: 'goods'},
                             {id: 3, name: 'Детская одежда'},
@@ -2522,7 +2527,7 @@ export const categories_list: CategoryType[] = [
                     },
                     {
                         id: 43,
-                        'name': 'Нижнее белье',
+                        name: 'underwear',
                         parents: [
                             {id: 7, name: 'goods'},
                             {id: 3, name: 'Детская одежда'},
@@ -2530,7 +2535,7 @@ export const categories_list: CategoryType[] = [
                     },
                     {
                         id: 44,
-                        'name': 'Обувь',
+                        name: 'footwear',
                         parents: [
                             {id: 7, name: 'goods'},
                             {id: 3, name: 'Детская одежда'},
@@ -2538,7 +2543,7 @@ export const categories_list: CategoryType[] = [
                     },
                     {
                         id: 45,
-                        'name': 'Пиджаки и костюмы',
+                        name: 'blazersAndSuits',
                         parents: [
                             {id: 7, name: 'goods'},
                             {id: 3, name: 'Детская одежда'},
@@ -2546,7 +2551,7 @@ export const categories_list: CategoryType[] = [
                     },
                     {
                         id: 46,
-                        'name': 'Платья и юбки',
+                        name: 'dressesAndSkirts',
                         parents: [
                             {id: 7, name: 'goods'},
                             {id: 3, name: 'Детская одежда'},
@@ -2554,7 +2559,7 @@ export const categories_list: CategoryType[] = [
                     },
                     {
                         id: 47,
-                        'name': 'Ползунки и распашонки',
+                        name: 'romperAndUndershirts',
                         parents: [
                             {id: 7, name: 'goods'},
                             {id: 3, name: 'Детская одежда'},
@@ -2562,7 +2567,7 @@ export const categories_list: CategoryType[] = [
                     },
                     {
                         id: 48,
-                        'name': 'Свитеры и толстовки',
+                        name: 'sweatersHoodies',
                         parents: [
                             {id: 7, name: 'goods'},
                             {id: 3, name: 'Детская одежда'},
@@ -2570,7 +2575,7 @@ export const categories_list: CategoryType[] = [
                     },
                     {
                         id: 49,
-                        'name': 'Спортивная одежда',
+                        name: 'sportswear',
                         parents: [
                             {id: 7, name: 'goods'},
                             {id: 3, name: 'Детская одежда'},
@@ -2578,7 +2583,7 @@ export const categories_list: CategoryType[] = [
                     },
                     {
                         id: 50,
-                        'name': 'Футболки',
+                        name: 'tShirts',
                         parents: [
                             {id: 7, name: 'goods'},
                             {id: 3, name: 'Детская одежда'},
@@ -2586,7 +2591,7 @@ export const categories_list: CategoryType[] = [
                     },
                     {
                         id: 51,
-                        'name': 'Штаны и шорты',
+                        name: 'pantsAndShorts',
                         parents: [
                             {id: 7, name: 'goods'},
                             {id: 3, name: 'Детская одежда'},
@@ -2594,7 +2599,7 @@ export const categories_list: CategoryType[] = [
                     },
                     {
                         id: 52,
-                        'name': 'Другое',
+                        name: 'other',
                         parents: [
                             {id: 7, name: 'goods'},
                             {id: 3, name: 'Детская одежда'},
@@ -2604,12 +2609,12 @@ export const categories_list: CategoryType[] = [
             },
             {
                 id: 4,
-                'name': 'Товары для детей и игрушки',
+                name: 'productsForChildren',
                 parents: [{id: 7, name: 'goods'}],
                 'type': [
                     {
                         id: 53,
-                        'name': 'Автокресла',
+                        name: 'carSeats',
                         parents: [
                             {id: 7, name: 'goods'},
                             {id: 4, name: 'Товары для детей и игрушки'},
@@ -2617,7 +2622,7 @@ export const categories_list: CategoryType[] = [
                     },
                     {
                         id: 54,
-                        'name': 'Здоровье и уход',
+                        name: 'healthAndCare',
                         parents: [
                             {id: 7, name: 'goods'},
                             {id: 4, name: 'Товары для детей и игрушки'},
@@ -2625,7 +2630,7 @@ export const categories_list: CategoryType[] = [
                     },
                     {
                         id: 55,
-                        'name': 'Игрушки и игры',
+                        name: 'toysAndGames',
                         parents: [
                             {id: 7, name: 'goods'},
                             {id: 4, name: 'Товары для детей и игрушки'},
@@ -2633,7 +2638,7 @@ export const categories_list: CategoryType[] = [
                     },
                     {
                         id: 56,
-                        'name': 'Коляски',
+                        name: 'strollers',
                         parents: [
                             {id: 7, name: 'goods'},
                             {id: 4, name: 'Товары для детей и игрушки'},
@@ -2641,7 +2646,7 @@ export const categories_list: CategoryType[] = [
                     },
                     {
                         id: 57,
-                        'name': 'Кормление и питание',
+                        name: 'feedingAndNutrition',
                         parents: [
                             {id: 7, name: 'goods'},
                             {id: 4, name: 'Товары для детей и игрушки'},
@@ -2649,7 +2654,7 @@ export const categories_list: CategoryType[] = [
                     },
                     {
                         id: 58,
-                        'name': 'Купание',
+                        name: 'bathing',
                         parents: [
                             {id: 7, name: 'goods'},
                             {id: 4, name: 'Товары для детей и игрушки'},
@@ -2657,7 +2662,7 @@ export const categories_list: CategoryType[] = [
                     },
                     {
                         id: 59,
-                        'name': 'Обустройство детской',
+                        name: 'arrangementNursery',
                         parents: [
                             {id: 7, name: 'goods'},
                             {id: 4, name: 'Товары для детей и игрушки'},
@@ -2665,7 +2670,7 @@ export const categories_list: CategoryType[] = [
                     },
                     {
                         id: 60,
-                        'name': 'Подгузники и горшки',
+                        name: 'diapersAndPots',
                         parents: [
                             {id: 7, name: 'goods'},
                             {id: 4, name: 'Товары для детей и игрушки'},
@@ -2673,7 +2678,7 @@ export const categories_list: CategoryType[] = [
                     },
                     {
                         id: 61,
-                        'name': 'Радио- и видеоняни',
+                        name: 'radioAndVideoBabyMonitors',
                         parents: [
                             {id: 7, name: 'goods'},
                             {id: 4, name: 'Товары для детей и игрушки'},
@@ -2681,7 +2686,7 @@ export const categories_list: CategoryType[] = [
                     },
                     {
                         id: 62,
-                        'name': 'Товары для мам',
+                        name: 'productsForMothers',
                         parents: [
                             {id: 7, name: 'goods'},
                             {id: 4, name: 'Товары для детей и игрушки'},
@@ -2689,7 +2694,7 @@ export const categories_list: CategoryType[] = [
                     },
                     {
                         id: 63,
-                        'name': 'Товары для учебы',
+                        name: 'goodsForStudy',
                         parents: [
                             {id: 7, name: 'goods'},
                             {id: 4, name: 'Товары для детей и игрушки'},
@@ -2697,7 +2702,7 @@ export const categories_list: CategoryType[] = [
                     },
                     {
                         id: 64,
-                        'name': 'Другое',
+                        name: 'other',
                         parents: [
                             {id: 7, name: 'goods'},
                             {id: 4, name: 'Товары для детей и игрушки'},
@@ -2707,12 +2712,12 @@ export const categories_list: CategoryType[] = [
             },
             {
                 id: 5,
-                'name': 'Хэндмейд',
+                name: 'handmade',
                 parents: [{id: 7, name: 'goods'}],
                 'type': [
                     {
                         id: 65,
-                        'name': 'Косметика',
+                        name: 'cosmetics',
                         parents: [
                             {id: 7, name: 'goods'},
                             {id: 5, name: 'Хэндмейд'},
@@ -2720,7 +2725,7 @@ export const categories_list: CategoryType[] = [
                     },
                     {
                         id: 66,
-                        'name': 'Украшения',
+                        name: 'decorations',
                         parents: [
                             {id: 7, name: 'goods'},
                             {id: 5, name: 'Хэндмейд'},
@@ -2728,7 +2733,7 @@ export const categories_list: CategoryType[] = [
                     },
                     {
                         id: 67,
-                        'name': 'Куклы и игрушки',
+                        name: 'dollsAndToys',
                         parents: [
                             {id: 7, name: 'goods'},
                             {id: 5, name: 'Хэндмейд'},
@@ -2736,7 +2741,7 @@ export const categories_list: CategoryType[] = [
                     },
                     {
                         id: 68,
-                        'name': 'Оформление интерьера',
+                        name: 'interiorDecoration',
                         parents: [
                             {id: 7, name: 'goods'},
                             {id: 5, name: 'Хэндмейд'},
@@ -2744,7 +2749,7 @@ export const categories_list: CategoryType[] = [
                     },
                     {
                         id: 69,
-                        'name': 'Аксессуары',
+                        name: 'accessories',
                         parents: [
                             {id: 7, name: 'goods'},
                             {id: 5, name: 'Хэндмейд'},
@@ -2752,7 +2757,7 @@ export const categories_list: CategoryType[] = [
                     },
                     {
                         id: 70,
-                        'name': 'Оформление праздников',
+                        name: 'holidaysDecoration',
                         parents: [
                             {id: 7, name: 'goods'},
                             {id: 5, name: 'Хэндмейд'},
@@ -2760,7 +2765,7 @@ export const categories_list: CategoryType[] = [
                     },
                     {
                         id: 71,
-                        'name': 'Канцелярия',
+                        name: 'chancery',
                         parents: [
                             {id: 7, name: 'goods'},
                             {id: 5, name: 'Хэндмейд'},
@@ -2768,7 +2773,7 @@ export const categories_list: CategoryType[] = [
                     },
                     {
                         id: 72,
-                        'name': 'Посуда',
+                        name: 'dishes',
                         parents: [
                             {id: 7, name: 'goods'},
                             {id: 5, name: 'Хэндмейд'},
@@ -2776,7 +2781,7 @@ export const categories_list: CategoryType[] = [
                     },
                     {
                         id: 73,
-                        'name': 'Другое',
+                        name: 'other',
                         parents: [
                             {id: 7, name: 'goods'},
                             {id: 5, name: 'Хэндмейд'},
@@ -2786,103 +2791,103 @@ export const categories_list: CategoryType[] = [
             },
             {
                 id: 6,
-                'name': 'Красота и здоровье',
+                name: 'beautyAndHealth',
                 parents: [{id: 7, name: 'goods'}],
                 'type': [
                     {
                         id: 74,
-                        'name': 'Макияж',
+                        name: 'makeup',
                         parents: [
                             {id: 7, name: 'goods'},
-                            {id: 6, name: 'Красота и здоровье'},
+                            {id: 6, name: 'beautyAndHealth'},
                         ],
                     },
                     {
                         id: 75,
-                        'name': 'Маникюр и педикюр',
+                        name: 'manicureAndPedicure',
                         parents: [
                             {id: 7, name: 'goods'},
-                            {id: 6, name: 'Красота и здоровье'},
+                            {id: 6, name: 'beautyAndHealth'},
                         ],
                     },
                     {
                         id: 76,
-                        'name': 'Товары для здоровья',
+                        name: 'healthProducts',
                         parents: [
                             {id: 7, name: 'goods'},
-                            {id: 6, name: 'Красота и здоровье'},
+                            {id: 6, name: 'beautyAndHealth'},
                         ],
                     },
                     {
                         id: 77,
-                        'name': 'Парфюмерия',
+                        name: 'perfumery',
                         parents: [
                             {id: 7, name: 'goods'},
-                            {id: 6, name: 'Красота и здоровье'},
+                            {id: 6, name: 'beautyAndHealth'},
                         ],
                     },
                     {
                         id: 78,
-                        'name': 'Стрижка и удаление волос',
+                        name: 'haircutAndHairRemoval',
                         parents: [
                             {id: 7, name: 'goods'},
-                            {id: 6, name: 'Красота и здоровье'},
+                            {id: 6, name: 'beautyAndHealth'},
                         ],
                     },
                     {
                         id: 79,
-                        'name': 'Уход за волосами',
+                        name: 'hairCare',
                         parents: [
                             {id: 7, name: 'goods'},
-                            {id: 6, name: 'Красота и здоровье'},
+                            {id: 6, name: 'beautyAndHealth'},
                         ],
                     },
                     {
                         id: 80,
-                        'name': 'Уход за кожей',
+                        name: 'skinCare',
                         parents: [
                             {id: 7, name: 'goods'},
-                            {id: 6, name: 'Красота и здоровье'},
+                            {id: 6, name: 'beautyAndHealth'},
                         ],
                     },
                     {
                         id: 81,
-                        'name': 'Фены и укладка',
+                        name: 'hairDryersAndStyling',
                         parents: [
                             {id: 7, name: 'goods'},
-                            {id: 6, name: 'Красота и здоровье'},
+                            {id: 6, name: 'beautyAndHealth'},
                         ],
                     },
                     {
                         id: 82,
-                        'name': 'Тату и татуаж',
+                        name: 'tattooPermanentMakeup',
                         parents: [
                             {id: 7, name: 'goods'},
-                            {id: 6, name: 'Красота и здоровье'},
+                            {id: 6, name: 'beautyAndHealth'},
                         ],
                     },
                     {
                         id: 83,
-                        'name': 'Солярии и загар',
+                        name: 'solariumsAndTanning',
                         parents: [
                             {id: 7, name: 'goods'},
-                            {id: 6, name: 'Красота и здоровье'},
+                            {id: 6, name: 'beautyAndHealth'},
                         ],
                     },
                     {
                         id: 84,
-                        'name': 'Средства для гигиены',
+                        name: 'hygieneProducts',
                         parents: [
                             {id: 7, name: 'goods'},
-                            {id: 6, name: 'Красота и здоровье'},
+                            {id: 6, name: 'beautyAndHealth'},
                         ],
                     },
                     {
                         id: 85,
-                        'name': 'Другое',
+                        name: 'other',
                         parents: [
                             {id: 7, name: 'goods'},
-                            {id: 6, name: 'Красота и здоровье'},
+                            {id: 6, name: 'beautyAndHealth'},
                         ],
                     },
                 ],
@@ -2911,7 +2916,7 @@ export const categories_list: CategoryType[] = [
                     },
                     {
                         id: 2,
-                        'name': 'Кровати и матрасы',
+                        name: 'bedsAndMattresses',
                         parents: [
                             {id: 8, name: 'home'},
                             {id: 1, name: 'furnitureAndInterior'},
@@ -2919,7 +2924,7 @@ export const categories_list: CategoryType[] = [
                     },
                     {
                         id: 3,
-                        'name': 'Кухонные гарнитуры',
+                        name: 'kitchenSets',
                         parents: [
                             {id: 8, name: 'home'},
                             {id: 1, name: 'furnitureAndInterior'},
@@ -2927,7 +2932,7 @@ export const categories_list: CategoryType[] = [
                     },
                     {
                         id: 4,
-                        'name': 'Освещение',
+                        name: 'lighting',
                         parents: [
                             {id: 8, name: 'home'},
                             {id: 1, name: 'furnitureAndInterior'},
@@ -2935,7 +2940,7 @@ export const categories_list: CategoryType[] = [
                     },
                     {
                         id: 5,
-                        'name': 'Оформление интерьера',
+                        name: 'interiorDecoration',
                         parents: [
                             {id: 8, name: 'home'},
                             {id: 1, name: 'furnitureAndInterior'},
@@ -2943,7 +2948,7 @@ export const categories_list: CategoryType[] = [
                     },
                     {
                         id: 6,
-                        'name': 'Охрана и сигнализации',
+                        name: 'securityAndAlarms',
                         parents: [
                             {id: 8, name: 'home'},
                             {id: 1, name: 'furnitureAndInterior'},
@@ -2951,7 +2956,7 @@ export const categories_list: CategoryType[] = [
                     },
                     {
                         id: 7,
-                        'name': 'Подставки и тумбы',
+                        name: 'standsAndPedestals',
                         parents: [
                             {id: 8, name: 'home'},
                             {id: 1, name: 'furnitureAndInterior'},
@@ -2959,7 +2964,7 @@ export const categories_list: CategoryType[] = [
                     },
                     {
                         id: 8,
-                        'name': 'Садовая мебель',
+                        name: 'gardenFurniture',
                         parents: [
                             {id: 8, name: 'home'},
                             {id: 1, name: 'furnitureAndInterior'},
@@ -2967,7 +2972,7 @@ export const categories_list: CategoryType[] = [
                     },
                     {
                         id: 9,
-                        'name': 'Столы и стулья',
+                        name: 'tablesAndChairs',
                         parents: [
                             {id: 8, name: 'home'},
                             {id: 1, name: 'furnitureAndInterior'},
@@ -2975,7 +2980,7 @@ export const categories_list: CategoryType[] = [
                     },
                     {
                         id: 10,
-                        'name': 'Текстиль и ковры',
+                        name: 'textilesAndCarpets',
                         parents: [
                             {id: 8, name: 'home'},
                             {id: 1, name: 'furnitureAndInterior'},
@@ -2983,7 +2988,7 @@ export const categories_list: CategoryType[] = [
                     },
                     {
                         id: 11,
-                        'name': 'Шкафы и комоды',
+                        name: 'wardrobesAndDressers',
                         parents: [
                             {id: 8, name: 'home'},
                             {id: 1, name: 'furnitureAndInterior'},
@@ -2991,7 +2996,7 @@ export const categories_list: CategoryType[] = [
                     },
                     {
                         id: 12,
-                        'name': 'Бытовая хими',
+                        name: 'householdChemicals',
                         parents: [
                             {id: 8, name: 'home'},
                             {id: 1, name: 'furnitureAndInterior'},
@@ -2999,7 +3004,7 @@ export const categories_list: CategoryType[] = [
                     },
                     {
                         id: 13,
-                        'name': 'Сад и огород',
+                        name: 'garden',
                         parents: [
                             {id: 8, name: 'home'},
                             {id: 1, name: 'furnitureAndInterior'},
@@ -3007,7 +3012,7 @@ export const categories_list: CategoryType[] = [
                     },
                     {
                         id: 14,
-                        'name': 'Другое',
+                        name: 'other',
                         parents: [
                             {id: 8, name: 'home'},
                             {id: 1, name: 'furnitureAndInterior'},
@@ -3017,202 +3022,203 @@ export const categories_list: CategoryType[] = [
             },
             {
                 id: 2,
-                'name': 'Посуда и товары для кухни',
+                name: 'dishesAndGoodsForKitchen',
                 parents: [{id: 8, name: 'home'}],
                 'type': [
                     {
                         id: 15,
-                        'name': 'Посуда',
+                        name: 'dishes',
                         parents: [
                             {id: 8, name: 'home'},
-                            {id: 2, name: 'Посуда и товары для кухни'},
+                            {id: 2, name: 'dishesAndGoodsForKitchen'},
                         ],
                     },
                     {
                         id: 16,
-                        'name': 'Товары для кухни',
+                        name: 'kitchenGoods',
                         parents: [
                             {id: 8, name: 'home'},
-                            {id: 2, name: 'Посуда и товары для кухни'},
+                            {id: 2, name: 'dishesAndGoodsForKitchen'},
                         ],
                     },
                 ],
             },
             {
                 id: 3,
-                'name': 'Продукты питания',
+                name: 'food',
                 parents: [{id: 8, name: 'home'}],
+                'type': [],
             },
             {
                 id: 4,
-                'name': 'Ремонт и строительство',
+                name: 'repairAndConstruction',
                 parents: [{id: 8, name: 'home'}],
                 'type': [
                     {
                         id: 17,
-                        'name': 'Двери',
+                        name: 'doors',
                         parents: [
                             {id: 8, name: 'home'},
-                            {id: 4, name: 'Ремонт и строительство'},
+                            {id: 4, name: 'repairAndConstruction'},
                         ],
                     },
                     {
                         id: 18,
-                        'name': 'Измерительные инструменты',
+                        name: 'measuringTools',
                         parents: [
                             {id: 8, name: 'home'},
-                            {id: 4, name: 'Ремонт и строительство'},
+                            {id: 4, name: 'repairAndConstruction'},
                         ],
                     },
                     {
                         id: 19,
-                        'name': 'Окна',
+                        name: 'window',
                         parents: [
                             {id: 8, name: 'home'},
-                            {id: 4, name: 'Ремонт и строительство'},
+                            {id: 4, name: 'repairAndConstruction'},
                         ],
                     },
                     {
                         id: 20,
-                        'name': 'Отопление и вентиляция',
+                        name: 'heatingAndVentilation',
                         parents: [
                             {id: 8, name: 'home'},
-                            {id: 4, name: 'Ремонт и строительство'},
+                            {id: 4, name: 'repairAndConstruction'},
                         ],
                     },
                     {
                         id: 21,
-                        'name': 'Потолки',
+                        name: 'ceilings',
                         parents: [
                             {id: 8, name: 'home'},
-                            {id: 4, name: 'Ремонт и строительство'},
+                            {id: 4, name: 'repairAndConstruction'},
                         ],
                     },
                     {
                         id: 22,
-                        'name': 'Ручные инструменты',
+                        name: 'handTools',
                         parents: [
                             {id: 8, name: 'home'},
-                            {id: 4, name: 'Ремонт и строительство'},
+                            {id: 4, name: 'repairAndConstruction'},
                         ],
                     },
                     {
                         id: 23,
-                        'name': 'Сантехника и водоснабжение',
+                        name: 'plumbingAndWaterSupply',
                         parents: [
                             {id: 8, name: 'home'},
-                            {id: 4, name: 'Ремонт и строительство'},
+                            {id: 4, name: 'repairAndConstruction'},
                         ],
                     },
                     {
                         id: 24,
-                        'name': 'Стройматериалы',
+                        name: 'buildingMaterials',
                         parents: [
                             {id: 8, name: 'home'},
-                            {id: 4, name: 'Ремонт и строительство'},
+                            {id: 4, name: 'repairAndConstruction'},
                         ],
                     },
                     {
                         id: 25,
-                        'name': 'Электрика',
+                        name: 'electrician',
                         parents: [
                             {id: 8, name: 'home'},
-                            {id: 4, name: 'Ремонт и строительство'},
+                            {id: 4, name: 'repairAndConstruction'},
                         ],
                     },
                     {
                         id: 26,
-                        'name': 'Электроинструменты',
+                        name: 'powerTools',
                         parents: [
                             {id: 8, name: 'home'},
-                            {id: 4, name: 'Ремонт и строительство'},
+                            {id: 4, name: 'repairAndConstruction'},
                         ],
                     },
                     {
                         id: 27,
-                        'name': 'Другое',
+                        name: 'other',
                         parents: [
                             {id: 8, name: 'home'},
-                            {id: 4, name: 'Ремонт и строительство'},
+                            {id: 4, name: 'repairAndConstruction'},
                         ],
                     },
                 ],
             },
             {
                 id: 5,
-                'name': 'Растения',
+                name: 'plants',
                 parents: [{id: 8, name: 'home'}],
                 'type': [
                     {
                         id: 28,
-                        'name': 'Аксессуары для рассады',
+                        name: 'seedlingAccessories',
                         parents: [
                             {id: 8, name: 'home'},
-                            {id: 5, name: 'Растения'},
+                            {id: 5, name: 'plants'},
                         ],
                     },
                     {
                         id: 29,
-                        'name': 'Горшки для растений',
+                        name: 'plantPots',
                         parents: [
                             {id: 8, name: 'home'},
-                            {id: 5, name: 'Растения'},
+                            {id: 5, name: 'plants'},
                         ],
                     },
                     {
                         id: 30,
-                        'name': 'Комнатные растения',
+                        name: 'houseplants',
                         parents: [
                             {id: 8, name: 'home'},
-                            {id: 5, name: 'Растения'},
+                            {id: 5, name: 'plants'},
                         ],
                     },
                     {
                         id: 31,
-                        'name': 'Садовые растения',
+                        name: 'gardenPlants',
                         parents: [
                             {id: 8, name: 'home'},
-                            {id: 5, name: 'Растения'},
+                            {id: 5, name: 'plants'},
                         ],
                     },
                     {
                         id: 32,
-                        'name': 'Семена и саженцы',
+                        name: 'seedsAndSeedlings',
                         parents: [
                             {id: 8, name: 'home'},
-                            {id: 5, name: 'Растения'},
+                            {id: 5, name: 'plants'},
                         ],
                     },
                     {
                         id: 33,
-                        'name': 'Полки для растений',
+                        name: 'plantShelves',
                         parents: [
                             {id: 8, name: 'home'},
-                            {id: 5, name: 'Растения'},
+                            {id: 5, name: 'plants'},
                         ],
                     },
                     {
                         id: 34,
-                        'name': 'Подставки для растений',
+                        name: 'plantStands',
                         parents: [
                             {id: 8, name: 'home'},
-                            {id: 5, name: 'Растения'},
+                            {id: 5, name: 'plants'},
                         ],
                     },
                     {
                         id: 35,
-                        'name': 'Химия для растений',
+                        name: 'chemistryForPlants',
                         parents: [
                             {id: 8, name: 'home'},
-                            {id: 5, name: 'Растения'},
+                            {id: 5, name: 'plants'},
                         ],
                     },
                     {
                         id: 36,
-                        'name': 'Почва',
+                        name: 'soil',
                         parents: [
                             {id: 8, name: 'home'},
-                            {id: 5, name: 'Растения'},
+                            {id: 5, name: 'plants'},
                         ],
                     },
                 ],
@@ -3241,7 +3247,7 @@ export const categories_list: CategoryType[] = [
                     },
                     {
                         id: 2,
-                        'name': 'Планшеты',
+                        name: 'tablets',
                         parents: [
                             {id: 9, name: 'electronics'},
                             {id: 1, name: 'phonesAndTablets'},
@@ -3249,7 +3255,7 @@ export const categories_list: CategoryType[] = [
                     },
                     {
                         id: 3,
-                        'name': 'Умные часы и браслеты',
+                        name: 'smartWatchesAndBracelets',
                         parents: [
                             {id: 9, name: 'electronics'},
                             {id: 1, name: 'phonesAndTablets'},
@@ -3257,7 +3263,7 @@ export const categories_list: CategoryType[] = [
                     },
                     {
                         id: 4,
-                        'name': 'Стационарные телефоны-Рации и спутниковые телефоны',
+                        name: 'landlineTelephonesAndSatellitePhones',
                         parents: [
                             {id: 9, name: 'electronics'},
                             {id: 1, name: 'phonesAndTablets'},
@@ -3265,7 +3271,7 @@ export const categories_list: CategoryType[] = [
                     },
                     {
                         id: 5,
-                        'name': 'Запчасти',
+                        name: 'spareParts',
                         parents: [
                             {id: 9, name: 'electronics'},
                             {id: 1, name: 'phonesAndTablets'},
@@ -3273,7 +3279,7 @@ export const categories_list: CategoryType[] = [
                     },
                     {
                         id: 6,
-                        'name': 'Внешние аккумуляторы',
+                        name: 'externalBatteries',
                         parents: [
                             {id: 9, name: 'electronics'},
                             {id: 1, name: 'phonesAndTablets'},
@@ -3281,7 +3287,7 @@ export const categories_list: CategoryType[] = [
                     },
                     {
                         id: 7,
-                        'name': 'Зарядные устройства',
+                        name: 'chargingDevice',
                         parents: [
                             {id: 9, name: 'electronics'},
                             {id: 1, name: 'phonesAndTablets'},
@@ -3289,7 +3295,7 @@ export const categories_list: CategoryType[] = [
                     },
                     {
                         id: 8,
-                        'name': 'Чехлы',
+                        name: 'covers',
                         parents: [
                             {id: 9, name: 'electronics'},
                             {id: 1, name: 'phonesAndTablets'},
@@ -3297,7 +3303,7 @@ export const categories_list: CategoryType[] = [
                     },
                     {
                         id: 9,
-                        'name': 'Аксессуары',
+                        name: 'accessories',
                         parents: [
                             {id: 9, name: 'electronics'},
                             {id: 1, name: 'phonesAndTablets'},
@@ -3307,459 +3313,459 @@ export const categories_list: CategoryType[] = [
             },
             {
                 id: 2,
-                'name': 'Фото и видеокамеры',
+                name: 'photoAndVideoCameras',
                 parents: [{id: 9, name: 'electronics'}],
                 'type': [
                     {
                         id: 10,
-                        'name': 'Фотоаппараты',
+                        name: 'cameras',
                         parents: [
                             {id: 9, name: 'electronics'},
-                            {id: 2, name: 'Фото и видеокамеры'},
+                            {id: 2, name: 'photoAndVideoCameras'},
                         ],
                     },
                     {
                         id: 11,
-                        'name': 'Видеокамеры',
+                        name: 'camcorders',
                         parents: [
                             {id: 9, name: 'electronics'},
-                            {id: 2, name: 'Фото и видеокамеры'},
+                            {id: 2, name: 'photoAndVideoCameras'},
                         ],
                     },
                     {
                         id: 12,
-                        'name': 'Видеонаблюдение',
+                        name: 'cctv',
                         parents: [
                             {id: 9, name: 'electronics'},
-                            {id: 2, name: 'Фото и видеокамеры'},
+                            {id: 2, name: 'photoAndVideoCameras'},
                         ],
                     },
                     {
                         id: 13,
-                        'name': 'Объективы',
+                        name: 'lenses',
                         parents: [
                             {id: 9, name: 'electronics'},
-                            {id: 2, name: 'Фото и видеокамеры'},
+                            {id: 2, name: 'photoAndVideoCameras'},
                         ],
                     },
                     {
                         id: 14,
-                        'name': 'Фотовспышки',
+                        name: 'photoFlashes',
                         parents: [
                             {id: 9, name: 'electronics'},
-                            {id: 2, name: 'Фото и видеокамеры'},
+                            {id: 2, name: 'photoAndVideoCameras'},
                         ],
                     },
                     {
                         id: 15,
-                        'name': 'Аксессуары',
+                        name: 'accessories',
                         parents: [
                             {id: 9, name: 'electronics'},
-                            {id: 2, name: 'Фото и видеокамеры'},
+                            {id: 2, name: 'photoAndVideoCameras'},
                         ],
                     },
                     {
                         id: 16,
-                        'name': 'Штативы и стабилизаторы',
+                        name: 'tripodsAndStabilizers',
                         parents: [
                             {id: 9, name: 'electronics'},
-                            {id: 2, name: 'Фото и видеокамеры'},
+                            {id: 2, name: 'photoAndVideoCameras'},
                         ],
                     },
                     {
                         id: 17,
-                        'name': 'Студийное оборудование',
+                        name: 'studioEquipment',
                         parents: [
                             {id: 9, name: 'electronics'},
-                            {id: 2, name: 'Фото и видеокамеры'},
+                            {id: 2, name: 'photoAndVideoCameras'},
                         ],
                     },
                     {
                         id: 18,
-                        'name': 'Цифровые фоторамки',
+                        name: 'digitalPhotoFrames',
                         parents: [
                             {id: 9, name: 'electronics'},
-                            {id: 2, name: 'Фото и видеокамеры'},
+                            {id: 2, name: 'photoAndVideoCameras'},
                         ],
                     },
                     {
                         id: 19,
-                        'name': 'Компактные фотопринтеры',
+                        name: 'compactPhotoPrinters',
                         parents: [
                             {id: 9, name: 'electronics'},
-                            {id: 2, name: 'Фото и видеокамеры'},
+                            {id: 2, name: 'photoAndVideoCameras'},
                         ],
                     },
                     {
                         id: 20,
-                        'name': 'Бинокли и оптические приборы',
+                        name: 'binocularsAndOpticalInstruments',
                         parents: [
                             {id: 9, name: 'electronics'},
-                            {id: 2, name: 'Фото и видеокамеры'},
+                            {id: 2, name: 'photoAndVideoCameras'},
                         ],
                     },
                 ],
             },
             {
                 id: 3,
-                'name': 'Тв, аудио, видео',
+                name: 'tvAudioVideo',
                 parents: [{id: 9, name: 'electronics'}],
                 'type': [
                     {
                         id: 21,
-                        'name': 'Телевизоры',
+                        name: 'tvSets',
                         parents: [
                             {id: 9, name: 'electronics'},
-                            {id: 3, name: 'Тв, аудио, видео'},
+                            {id: 3, name: 'tvAudioVideo'},
                         ],
                     },
                     {
                         id: 22,
-                        'name': 'Проекторы',
+                        name: 'projectors',
                         parents: [
                             {id: 9, name: 'electronics'},
-                            {id: 3, name: 'Тв, аудио, видео'},
+                            {id: 3, name: 'tvAudioVideo'},
                         ],
                     },
                     {
                         id: 23,
-                        'name': 'Акустика, колонки, сабвуферы',
+                        name: 'acousticsSpeakersSubwoofers',
                         parents: [
                             {id: 9, name: 'electronics'},
-                            {id: 3, name: 'Тв, аудио, видео'},
+                            {id: 3, name: 'tvAudioVideo'},
                         ],
                     },
                     {
                         id: 24,
-                        'name': 'Домашние кинотеатры',
+                        name: 'homeCinemas',
                         parents: [
                             {id: 9, name: 'electronics'},
-                            {id: 3, name: 'Тв, аудио, видео'},
+                            {id: 3, name: 'tvAudioVideo'},
                         ],
                     },
                     {
                         id: 25,
-                        'name': 'DVD, Blu-ray и медиаплееры',
+                        name: 'dvdBlurayAndMediaPlayers',
                         parents: [
                             {id: 9, name: 'electronics'},
-                            {id: 3, name: 'Тв, аудио, видео'},
+                            {id: 3, name: 'tvAudioVideo'},
                         ],
                     },
                     {
                         id: 26,
-                        'name': 'Музыкальные центры и магнитолы',
+                        name: 'musicCentersAndRadioTapeRecorders',
                         parents: [
                             {id: 9, name: 'electronics'},
-                            {id: 3, name: 'Тв, аудио, видео'},
+                            {id: 3, name: 'tvAudioVideo'},
                         ],
                     },
                     {
                         id: 27,
-                        'name': 'MP3-плееры и портативное аудио',
+                        name: 'mp3PlayersAndPortableAudio',
                         parents: [
                             {id: 9, name: 'electronics'},
-                            {id: 3, name: 'Тв, аудио, видео'},
+                            {id: 3, name: 'tvAudioVideo'},
                         ],
                     },
                     {
                         id: 28,
-                        'name': 'Электронные книги',
+                        name: 'eBooks',
                         parents: [
                             {id: 9, name: 'electronics'},
-                            {id: 3, name: 'Тв, аудио, видео'},
+                            {id: 3, name: 'tvAudioVideo'},
                         ],
                     },
                     {
                         id: 29,
-                        'name': 'Спутниковое и цифровое ТВ',
+                        name: 'satelliteAndDigitalTv',
                         parents: [
                             {id: 9, name: 'electronics'},
-                            {id: 3, name: 'Тв, аудио, видео'},
+                            {id: 3, name: 'tvAudioVideo'},
                         ],
                     },
                     {
                         id: 30,
-                        'name': 'Аудиоусилители и ресиверы',
+                        name: 'audioAmplifiersAndReceivers',
                         parents: [
                             {id: 9, name: 'electronics'},
-                            {id: 3, name: 'Тв, аудио, видео'},
+                            {id: 3, name: 'tvAudioVideo'},
                         ],
                     },
                     {
                         id: 31,
-                        'name': 'Наушники',
+                        name: 'headphones',
                         parents: [
                             {id: 9, name: 'electronics'},
-                            {id: 3, name: 'Тв, аудио, видео'},
+                            {id: 3, name: 'tvAudioVideo'},
                         ],
                     },
                     {
                         id: 32,
-                        'name': 'Микрофоны',
+                        name: 'microphones',
                         parents: [
                             {id: 9, name: 'electronics'},
-                            {id: 3, name: 'Тв, аудио, видео'},
+                            {id: 3, name: 'tvAudioVideo'},
                         ],
                     },
                     {
                         id: 33,
-                        'name': 'Аксессуары',
+                        name: 'accessories',
                         parents: [
                             {id: 9, name: 'electronics'},
-                            {id: 3, name: 'Тв, аудио, видео'},
+                            {id: 3, name: 'tvAudioVideo'},
                         ],
                     },
                 ],
             },
             {
                 id: 4,
-                'name': 'Бытовая техника',
+                name: 'appliances',
                 parents: [{id: 9, name: 'electronics'}],
                 'type': [
                     {
                         id: 34,
-                        'name': 'Весы',
+                        name: 'libra',
                         parents: [
                             {id: 9, name: 'electronics'},
-                            {id: 4, name: 'Бытовая техника'},
+                            {id: 4, name: 'appliances'},
                         ],
                     },
                     {
                         id: 35,
-                        'name': 'Вытяжки',
+                        name: 'hoods',
                         parents: [
                             {id: 9, name: 'electronics'},
-                            {id: 4, name: 'Бытовая техника'},
+                            {id: 4, name: 'appliances'},
                         ],
                     },
                     {
                         id: 36,
-                        'name': 'Измельчение и смешивание',
+                        name: 'grindingAndMixing',
                         parents: [
                             {id: 9, name: 'electronics'},
-                            {id: 4, name: 'Бытовая техника'},
+                            {id: 4, name: 'appliances'},
                         ],
                     },
                     {
                         id: 37,
-                        'name': 'Климатическая техника',
+                        name: 'airConditioningEquipment',
                         parents: [
                             {id: 9, name: 'electronics'},
-                            {id: 4, name: 'Бытовая техника'},
+                            {id: 4, name: 'appliances'},
                         ],
                     },
                     {
                         id: 38,
-                        'name': 'Кулеры и фильтры для воды',
+                        name: 'coolersAndWaterFilters',
                         parents: [
                             {id: 9, name: 'electronics'},
-                            {id: 4, name: 'Бытовая техника'},
+                            {id: 4, name: 'appliances'},
                         ],
                     },
                     {
                         id: 39,
-                        'name': 'Плиты и духовые шкафы',
+                        name: 'stovesAndOvens',
                         parents: [
                             {id: 9, name: 'electronics'},
-                            {id: 4, name: 'Бытовая техника'},
+                            {id: 4, name: 'appliances'},
                         ],
                     },
                     {
                         id: 40,
-                        'name': 'Посудомоечные машины',
+                        name: 'dishwashers',
                         parents: [
                             {id: 9, name: 'electronics'},
-                            {id: 4, name: 'Бытовая техника'},
+                            {id: 4, name: 'appliances'},
                         ],
                     },
                     {
                         id: 41,
-                        'name': 'Приготовление еды',
+                        name: 'cooking',
                         parents: [
                             {id: 9, name: 'electronics'},
-                            {id: 4, name: 'Бытовая техника'},
+                            {id: 4, name: 'appliances'},
                         ],
                     },
                     {
                         id: 42,
-                        'name': 'Приготовление напитков',
+                        name: 'preparationDrinks',
                         parents: [
                             {id: 9, name: 'electronics'},
-                            {id: 4, name: 'Бытовая техника'},
+                            {id: 4, name: 'appliances'},
                         ],
                     },
                     {
                         id: 43,
-                        'name': 'Пылесосы и пароочистители',
+                        name: 'vacuumCleanersAndSteamCleaners',
                         parents: [
                             {id: 9, name: 'electronics'},
-                            {id: 4, name: 'Бытовая техника'},
+                            {id: 4, name: 'appliances'},
                         ],
                     },
                     {
                         id: 44,
-                        'name': 'Стиральные машины',
+                        name: 'washingMachines',
                         parents: [
                             {id: 9, name: 'electronics'},
-                            {id: 4, name: 'Бытовая техника'},
+                            {id: 4, name: 'appliances'},
                         ],
                     },
                     {
                         id: 45,
-                        'name': 'Утюги и уход за одеждой',
+                        name: 'ironsAndGarmentCare',
                         parents: [
                             {id: 9, name: 'electronics'},
-                            {id: 4, name: 'Бытовая техника'},
+                            {id: 4, name: 'appliances'},
                         ],
                     },
                     {
                         id: 46,
-                        'name': 'Холодильники',
+                        name: 'refrigerators',
                         parents: [
                             {id: 9, name: 'electronics'},
-                            {id: 4, name: 'Бытовая техника'},
+                            {id: 4, name: 'appliances'},
                         ],
                     },
                     {
                         id: 47,
-                        'name': 'Швейное оборудование',
+                        name: 'sewingMachines',
                         parents: [
                             {id: 9, name: 'electronics'},
-                            {id: 4, name: 'Бытовая техника'},
+                            {id: 4, name: 'appliances'},
                         ],
                     },
                 ],
             },
             {
                 id: 5,
-                'name': 'Компьютерная техника',
+                name: 'computerTechnology',
                 parents: [{id: 9, name: 'electronics'}],
                 'type': [
                     {
                         id: 48,
-                        'name': 'Ноутбуки',
+                        name: 'laptops',
                         parents: [
                             {id: 9, name: 'electronics'},
-                            {id: 5, name: 'Компьютерная техника'},
+                            {id: 5, name: 'computerTechnology'},
                         ],
                     },
                     {
                         id: 49,
-                        'name': 'Компьютеры',
+                        name: 'computers',
                         parents: [
                             {id: 9, name: 'electronics'},
-                            {id: 5, name: 'Компьютерная техника'},
+                            {id: 5, name: 'computerTechnology'},
                         ],
                     },
                     {
                         id: 50,
-                        'name': 'Мониторы',
+                        name: 'monitors',
                         parents: [
                             {id: 9, name: 'electronics'},
-                            {id: 5, name: 'Компьютерная техника'},
+                            {id: 5, name: 'computerTechnology'},
                         ],
                     },
                     {
                         id: 51,
-                        'name': 'Клавиатуры и мыши',
+                        name: 'keyboardsAndMice',
                         parents: [
                             {id: 9, name: 'electronics'},
-                            {id: 5, name: 'Компьютерная техника'},
+                            {id: 5, name: 'computerTechnology'},
                         ],
                     },
                     {
                         id: 52,
-                        'name': 'Оргтехника и расходники',
+                        name: 'officeEquipmentAndConsumables',
                         parents: [
                             {id: 9, name: 'electronics'},
-                            {id: 5, name: 'Компьютерная техника'},
+                            {id: 5, name: 'computerTechnology'},
                         ],
                     },
                     {
                         id: 53,
-                        'name': 'Сетевое оборудование',
+                        name: 'networkHardware',
                         parents: [
                             {id: 9, name: 'electronics'},
-                            {id: 5, name: 'Компьютерная техника'},
+                            {id: 5, name: 'computerTechnology'},
                         ],
                     },
                     {
                         id: 54,
-                        'name': 'Мультимедиа',
+                        name: 'multimedia',
                         parents: [
                             {id: 9, name: 'electronics'},
-                            {id: 5, name: 'Компьютерная техника'},
+                            {id: 5, name: 'computerTechnology'},
                         ],
                     },
                     {
                         id: 55,
-                        'name': 'Накопители данных и картридеры',
+                        name: 'dataStorageDevicesAndCardReaders',
                         parents: [
                             {id: 9, name: 'electronics'},
-                            {id: 5, name: 'Компьютерная техника'},
+                            {id: 5, name: 'computerTechnology'},
                         ],
                     },
                     {
                         id: 56,
-                        'name': 'Программное обеспечение',
+                        name: 'software',
                         parents: [
                             {id: 9, name: 'electronics'},
-                            {id: 5, name: 'Компьютерная техника'},
+                            {id: 5, name: 'computerTechnology'},
                         ],
                     },
                     {
                         id: 57,
-                        'name': 'Рули, джойстики, геймпады',
+                        name: 'steeringWheelsJoysticksGamepads',
                         parents: [
                             {id: 9, name: 'electronics'},
-                            {id: 5, name: 'Компьютерная техника'},
+                            {id: 5, name: 'computerTechnology'},
                         ],
                     },
                     {
                         id: 58,
-                        'name': 'Комплектующие и запчасти',
+                        name: 'componentsAndSpareParts',
                         parents: [
                             {id: 9, name: 'electronics'},
-                            {id: 5, name: 'Компьютерная техника'},
+                            {id: 5, name: 'computerTechnology'},
                         ],
                     },
                     {
                         id: 59,
-                        'name': 'Аксессуары',
+                        name: 'accessories',
                         parents: [
                             {id: 9, name: 'electronics'},
-                            {id: 5, name: 'Компьютерная техника'},
+                            {id: 5, name: 'computerTechnology'},
                         ],
                     },
                 ],
             },
             {
                 id: 6,
-                'name': 'Игры, приставки и программы',
+                name: 'gamesConsolesAndPrograms',
                 parents: [{id: 9, name: 'electronics'}],
                 'type': [
                     {
                         id: 60,
-                        'name': 'Диски',
+                        name: 'discs',
                         parents: [
                             {id: 9, name: 'electronics'},
-                            {id: 6, name: 'Игры, приставки и программы'},
+                            {id: 6, name: 'gamesConsolesAndPrograms'},
                         ],
                     },
                     {
                         id: 61,
-                        'name': 'Игровые приставки',
+                        name: 'gamingConsoles',
                         parents: [
                             {id: 9, name: 'electronics'},
-                            {id: 6, name: 'Игры, приставки и программы'},
+                            {id: 6, name: 'gamesConsolesAndPrograms'},
                         ],
                     },
                     {
                         id: 62,
-                        'name': 'Игры для приставок и ПК',
+                        name: 'gamesForConsolesAndPc',
                         parents: [
                             {id: 9, name: 'electronics'},
-                            {id: 6, name: 'Игры, приставки и программы'},
+                            {id: 6, name: 'gamesConsolesAndPrograms'},
                         ],
                     },
                 ],
@@ -3780,521 +3786,526 @@ export const categories_list: CategoryType[] = [
             },
             {
                 id: 2,
-                'name': 'Спорт и отдых',
+                name: 'sportsAndRecreation',
                 parents: [{id: 10, name: 'hobbies'}],
                 'type': [
                     {
                         id: 8,
-                        'name': 'Спортивная защита',
+                        name: 'sportsProtection',
                         parents: [
                             {id: 10, name: 'hobbies'},
-                            {id: 2, name: 'Спорт и отдых'},
+                            {id: 2, name: 'sportsAndRecreation'},
                         ],
                     },
                     {
                         id: 9,
-                        'name': 'Велосипеды',
+                        name: 'bicycles',
                         parents: [
                             {id: 10, name: 'hobbies'},
-                            {id: 2, name: 'Спорт и отдых'},
+                            {id: 2, name: 'sportsAndRecreation'},
                         ],
                     },
                     {
                         id: 10,
-                        'name': 'Ролики и скейтбординг',
+                        name: 'rollersAndSkateboarding',
                         parents: [
                             {id: 10, name: 'hobbies'},
-                            {id: 2, name: 'Спорт и отдых'},
+                            {id: 2, name: 'sportsAndRecreation'},
                         ],
                     },
                     {
                         id: 11,
-                        'name': 'Самокаты и гироскутеры',
+                        name: 'scootersAndGyroScooters',
                         parents: [
                             {id: 10, name: 'hobbies'},
-                            {id: 2, name: 'Спорт и отдых'},
+                            {id: 2, name: 'sportsAndRecreation'},
                         ],
                     },
                     {
                         id: 12,
-                        'name': 'Бильярд и боулинг',
+                        name: 'billiardsAndBowling',
                         parents: [
                             {id: 10, name: 'hobbies'},
-                            {id: 2, name: 'Спорт и отдых'},
+                            {id: 2, name: 'sportsAndRecreation'},
                         ],
                     },
                     {
                         id: 13,
-                        'name': 'Водные виды спорта',
+                        name: 'waterSports',
                         parents: [
                             {id: 10, name: 'hobbies'},
-                            {id: 2, name: 'Спорт и отдых'},
+                            {id: 2, name: 'sportsAndRecreation'},
                         ],
                     },
                     {
                         id: 14,
-                        'name': 'Единоборства',
+                        name: 'martialArts',
                         parents: [
                             {id: 10, name: 'hobbies'},
-                            {id: 2, name: 'Спорт и отдых'},
+                            {id: 2, name: 'sportsAndRecreation'},
                         ],
                     },
                     {
                         id: 15,
-                        'name': 'Зимние виды спорта',
+                        name: 'winterSports',
                         parents: [
                             {id: 10, name: 'hobbies'},
-                            {id: 2, name: 'Спорт и отдых'},
+                            {id: 2, name: 'sportsAndRecreation'},
                         ],
                     },
                     {
                         id: 16,
-                        'name': 'Игры с мячом',
+                        name: 'ballGames',
                         parents: [
                             {id: 10, name: 'hobbies'},
-                            {id: 2, name: 'Спорт и отдых'},
+                            {id: 2, name: 'sportsAndRecreation'},
                         ],
                     },
                     {
                         id: 17,
-                        'name': 'Охота и рыбалка',
+                        name: 'huntingAndFishing',
                         parents: [
                             {id: 10, name: 'hobbies'},
-                            {id: 2, name: 'Спорт и отдых'},
+                            {id: 2, name: 'sportsAndRecreation'},
                         ],
                     },
                     {
                         id: 18,
-                        'name': 'Туризм и отдых на природе',
+                        name: 'tourismAndOutdoorRecreation',
                         parents: [
                             {id: 10, name: 'hobbies'},
-                            {id: 2, name: 'Спорт и отдых'},
+                            {id: 2, name: 'sportsAndRecreation'},
                         ],
                     },
                     {
                         id: 19,
-                        'name': 'Теннис, бадминтон, дартс',
+                        name: 'tennisBadmintonDarts',
                         parents: [
                             {id: 10, name: 'hobbies'},
-                            {id: 2, name: 'Спорт и отдых'},
+                            {id: 2, name: 'sportsAndRecreation'},
                         ],
                     },
                     {
                         id: 20,
-                        'name': 'Тренажеры и фитнес',
+                        name: 'exerciseEquipmentAndFitness',
                         parents: [
                             {id: 10, name: 'hobbies'},
-                            {id: 2, name: 'Спорт и отдых'},
+                            {id: 2, name: 'sportsAndRecreation'},
                         ],
                     },
                     {
                         id: 21,
-                        'name': 'Спортивное питание',
+                        name: 'sportsNutrition',
                         parents: [
                             {id: 10, name: 'hobbies'},
-                            {id: 2, name: 'Спорт и отдых'},
+                            {id: 2, name: 'sportsAndRecreation'},
                         ],
                     },
                     {
                         id: 22,
-                        'name': 'Другое',
+                        name: 'other',
                         parents: [
                             {id: 10, name: 'hobbies'},
-                            {id: 2, name: 'Спорт и отдых'},
+                            {id: 2, name: 'sportsAndRecreation'},
                         ],
                     },
                 ],
             },
             {
                 id: 3,
-                'name': 'Видеофильмы',
+                name: 'videoFilms',
                 parents: [{id: 10, name: 'hobbies'}],
+                'type': [],
             },
             {
                 id: 4,
-                'name': 'Книги и журналы',
+                name: 'booksAndMagazines',
                 parents: [{id: 10, name: 'hobbies'}],
+                'type': [],
             },
             {
                 id: 5,
-                'name': 'Коллекционирование',
+                name: 'collecting',
                 parents: [{id: 10, name: 'hobbies'}],
                 'type': [
                     {
                         id: 32,
-                        'name': 'Антикварная мебель, посуда',
+                        name: 'antiqueFurnitureDishes',
                         parents: [
                             {id: 10, name: 'hobbies'},
-                            {id: 5, name: 'Коллекционирование'},
+                            {id: 5, name: 'collecting'},
                         ],
                     },
                     {
                         id: 33,
-                        'name': 'Банкноты',
+                        name: 'banknotes',
                         parents: [
                             {id: 10, name: 'hobbies'},
-                            {id: 5, name: 'Коллекционирование'},
+                            {id: 5, name: 'collecting'},
                         ],
                     },
                     {
                         id: 34,
-                        'name': 'Билеты',
+                        name: 'tickets',
                         parents: [
                             {id: 10, name: 'hobbies'},
-                            {id: 5, name: 'Коллекционирование'},
+                            {id: 5, name: 'collecting'},
                         ],
                     },
                     {
                         id: 35,
-                        'name': 'Вещи знаменитостей, автографы',
+                        name: 'celebrityThingsAutographs',
                         parents: [
                             {id: 10, name: 'hobbies'},
-                            {id: 5, name: 'Коллекционирование'},
+                            {id: 5, name: 'collecting'},
                         ],
                     },
                     {
                         id: 36,
-                        'name': 'Виниловые пластинки',
+                        name: 'vinylRecords',
                         parents: [
                             {id: 10, name: 'hobbies'},
-                            {id: 5, name: 'Коллекционирование'},
+                            {id: 5, name: 'collecting'},
                         ],
                     },
                     {
                         id: 37,
-                        'name': 'Вкладыши, наклейки',
+                        name: 'insertsStickers',
                         parents: [
                             {id: 10, name: 'hobbies'},
-                            {id: 5, name: 'Коллекционирование'},
+                            {id: 5, name: 'collecting'},
                         ],
                     },
                     {
                         id: 38,
-                        'name': 'Военные вещи',
+                        name: 'militaryStuff',
                         parents: [
                             {id: 10, name: 'hobbies'},
-                            {id: 5, name: 'Коллекционирование'},
+                            {id: 5, name: 'collecting'},
                         ],
                     },
                     {
                         id: 39,
-                        'name': 'Документы',
+                        name: 'documents',
                         parents: [
                             {id: 10, name: 'hobbies'},
-                            {id: 5, name: 'Коллекционирование'},
+                            {id: 5, name: 'collecting'},
                         ],
                     },
                     {
                         id: 40,
-                        'name': 'Жетоны, медали, значки',
+                        name: 'tokensMedalsBadges',
                         parents: [
                             {id: 10, name: 'hobbies'},
-                            {id: 5, name: 'Коллекционирование'},
+                            {id: 5, name: 'collecting'},
                         ],
                     },
                     {
                         id: 41,
-                        'name': 'Календари',
+                        name: 'calendars',
                         parents: [
                             {id: 10, name: 'hobbies'},
-                            {id: 5, name: 'Коллекционирование'},
+                            {id: 5, name: 'collecting'},
                         ],
                     },
                     {
                         id: 42,
-                        'name': 'Киндер-сюрпризы',
+                        name: 'kinderSurprises',
                         parents: [
                             {id: 10, name: 'hobbies'},
-                            {id: 5, name: 'Коллекционирование'},
+                            {id: 5, name: 'collecting'},
                         ],
                     },
                     {
                         id: 43,
-                        'name': 'Книги, журналы, рукописи',
+                        name: 'booksMagazinesManuscripts',
                         parents: [
                             {id: 10, name: 'hobbies'},
-                            {id: 5, name: 'Коллекционирование'},
+                            {id: 5, name: 'collecting'},
                         ],
                     },
                     {
                         id: 44,
-                        'name': 'Конверты, открытки',
+                        name: 'envelopesPostcards',
                         parents: [
                             {id: 10, name: 'hobbies'},
-                            {id: 5, name: 'Коллекционирование'},
+                            {id: 5, name: 'collecting'},
                         ],
                     },
                     {
                         id: 45,
-                        'name': 'Копилки',
+                        name: 'piggyBanks',
                         parents: [
                             {id: 10, name: 'hobbies'},
-                            {id: 5, name: 'Коллекционирование'},
+                            {id: 5, name: 'collecting'},
                         ],
                     },
                     {
                         id: 46,
-                        'name': 'Куклы, игрушки',
+                        name: 'dollsToys',
                         parents: [
                             {id: 10, name: 'hobbies'},
-                            {id: 5, name: 'Коллекционирование'},
+                            {id: 5, name: 'collecting'},
                         ],
                     },
                     {
                         id: 47,
-                        'name': 'Магниты',
+                        name: 'magnets',
                         parents: [
                             {id: 10, name: 'hobbies'},
-                            {id: 5, name: 'Коллекционирование'},
+                            {id: 5, name: 'collecting'},
                         ],
                     },
                     {
                         id: 48,
-                        'name': 'Марки',
+                        name: 'stamps',
                         parents: [
                             {id: 10, name: 'hobbies'},
-                            {id: 5, name: 'Коллекционирование'},
+                            {id: 5, name: 'collecting'},
                         ],
                     },
                     {
                         id: 49,
-                        'name': 'Модели',
+                        name: 'models',
                         parents: [
                             {id: 10, name: 'hobbies'},
-                            {id: 5, name: 'Коллекционирование'},
+                            {id: 5, name: 'collecting'},
                         ],
                     },
                     {
                         id: 50,
-                        'name': 'Монеты, нумизматика',
+                        name: 'coinsNumismatics',
                         parents: [
                             {id: 10, name: 'hobbies'},
-                            {id: 5, name: 'Коллекционирование'},
+                            {id: 5, name: 'collecting'},
                         ],
                     },
                     {
                         id: 51,
-                        'name': 'Музыкальные инструменты',
+                        name: 'musicalInstruments',
                         parents: [
                             {id: 10, name: 'hobbies'},
-                            {id: 5, name: 'Коллекционирование'},
+                            {id: 5, name: 'collecting'},
                         ],
                     },
                     {
                         id: 52,
-                        'name': 'Пепельницы, зажигалки',
+                        name: 'ashtraysLighters',
                         parents: [
                             {id: 10, name: 'hobbies'},
-                            {id: 5, name: 'Коллекционирование'},
+                            {id: 5, name: 'collecting'},
                         ],
                     },
                     {
                         id: 53,
-                        'name': 'Пластиковые карточки',
+                        name: 'plasticCards',
                         parents: [
                             {id: 10, name: 'hobbies'},
-                            {id: 5, name: 'Коллекционирование'},
+                            {id: 5, name: 'collecting'},
                         ],
                     },
                     {
                         id: 54,
-                        'name': 'Предметы искусства, картины',
+                        name: 'artObjectsPaintings',
                         parents: [
                             {id: 10, name: 'hobbies'},
-                            {id: 5, name: 'Коллекционирование'},
+                            {id: 5, name: 'collecting'},
                         ],
                     },
                     {
                         id: 55,
-                        'name': 'Статуэтки, фигурки',
+                        name: 'figurinesFigurines',
                         parents: [
                             {id: 10, name: 'hobbies'},
-                            {id: 5, name: 'Коллекционирование'},
+                            {id: 5, name: 'collecting'},
                         ],
                     },
                     {
                         id: 56,
-                        'name': 'Украшения, аксессуары',
+                        name: 'jewelryAccessories',
                         parents: [
                             {id: 10, name: 'hobbies'},
-                            {id: 5, name: 'Коллекционирование'},
+                            {id: 5, name: 'collecting'},
                         ],
                     },
                     {
                         id: 57,
-                        'name': 'Фотографии, письма',
+                        name: 'photosLetters',
                         parents: [
                             {id: 10, name: 'hobbies'},
-                            {id: 5, name: 'Коллекционирование'},
+                            {id: 5, name: 'collecting'},
                         ],
                     },
                     {
                         id: 58,
-                        'name': 'Шахматы, игры',
+                        name: 'chessGames',
                         parents: [
                             {id: 10, name: 'hobbies'},
-                            {id: 5, name: 'Коллекционирование'},
+                            {id: 5, name: 'collecting'},
                         ],
                     },
                     {
                         id: 59,
-                        'name': 'Шкатулки',
+                        name: 'caskets',
                         parents: [
                             {id: 10, name: 'hobbies'},
-                            {id: 5, name: 'Коллекционирование'},
+                            {id: 5, name: 'collecting'},
                         ],
                     },
                     {
                         id: 60,
-                        'name': 'Этикетки, бутылки, пробки',
+                        name: 'labelsBottlesCorks',
                         parents: [
                             {id: 10, name: 'hobbies'},
-                            {id: 5, name: 'Коллекционирование'},
+                            {id: 5, name: 'collecting'},
                         ],
                     },
                     {
                         id: 61,
-                        'name': 'Другое',
+                        name: 'other',
                         parents: [
                             {id: 10, name: 'hobbies'},
-                            {id: 5, name: 'Коллекционирование'},
+                            {id: 5, name: 'collecting'},
                         ],
                     },
                 ],
             },
             {
                 id: 6,
-                'name': 'Материалы для творчества',
+                name: 'materialsForCreativity',
                 parents: [{id: 10, name: 'hobbies'}],
+                'type': [],
             },
             {
                 id: 7,
-                'name': 'Музыка',
+                name: 'music',
                 parents: [{id: 10, name: 'hobbies'}],
+                'type': [],
             },
             {
                 id: 8,
-                'name': 'Музыкальные инструменты',
+                name: 'musicalInstruments',
                 parents: [{id: 10, name: 'hobbies'}],
                 'type': [
                     {
                         id: 77,
-                        'name': 'Аккордеон, гармони, баяны',
+                        name: 'accordionButtonAccordions',
                         parents: [
                             {id: 10, name: 'hobbies'},
-                            {id: 8, name: 'Музыкальные инструменты'},
+                            {id: 8, name: 'musicalInstruments'},
                         ],
                     },
                     {
                         id: 78,
-                        'name': 'Классические гитары',
+                        name: 'classicalGuitars',
                         parents: [
                             {id: 10, name: 'hobbies'},
-                            {id: 8, name: 'Музыкальные инструменты'},
+                            {id: 8, name: 'musicalInstruments'},
                         ],
                     },
                     {
                         id: 79,
-                        'name': 'Акустические гитары',
+                        name: 'acousticGuitars',
                         parents: [
                             {id: 10, name: 'hobbies'},
-                            {id: 8, name: 'Музыкальные инструменты'},
+                            {id: 8, name: 'musicalInstruments'},
                         ],
                     },
                     {
                         id: 80,
-                        'name': 'Бас-гитары',
+                        name: 'bassGuitars',
                         parents: [
                             {id: 10, name: 'hobbies'},
-                            {id: 8, name: 'Музыкальные инструменты'},
+                            {id: 8, name: 'musicalInstruments'},
                         ],
                     },
                     {
                         id: 81,
-                        'name': 'Электрогитары',
+                        name: 'electricGuitars',
                         parents: [
                             {id: 10, name: 'hobbies'},
-                            {id: 8, name: 'Музыкальные инструменты'},
+                            {id: 8, name: 'musicalInstruments'},
                         ],
                     },
                     {
                         id: 82,
-                        'name': 'Гитарное усиление',
+                        name: 'guitarAmplification',
                         parents: [
                             {id: 10, name: 'hobbies'},
-                            {id: 8, name: 'Музыкальные инструменты'},
+                            {id: 8, name: 'musicalInstruments'},
                         ],
                     },
                     {
                         id: 83,
-                        'name': 'Духовые инструменты',
+                        name: 'windInstruments',
                         parents: [
                             {id: 10, name: 'hobbies'},
-                            {id: 8, name: 'Музыкальные инструменты'},
+                            {id: 8, name: 'musicalInstruments'},
                         ],
                     },
                     {
                         id: 84,
-                        'name': 'Клавишные',
+                        name: 'keyboards',
                         parents: [
                             {id: 10, name: 'hobbies'},
-                            {id: 8, name: 'Музыкальные инструменты'},
+                            {id: 8, name: 'musicalInstruments'},
                         ],
                     },
                     {
                         id: 85,
-                        'name': 'Микшерные пульты',
+                        name: 'mixingConsoles',
                         parents: [
                             {id: 10, name: 'hobbies'},
-                            {id: 8, name: 'Музыкальные инструменты'},
+                            {id: 8, name: 'musicalInstruments'},
                         ],
                     },
                     {
                         id: 86,
-                        'name': 'Народные инструменты',
+                        name: 'folkInstruments',
                         parents: [
                             {id: 10, name: 'hobbies'},
-                            {id: 8, name: 'Музыкальные инструменты'},
+                            {id: 8, name: 'musicalInstruments'},
                         ],
                     },
                     {
                         id: 87,
-                        'name': 'Педали эффектов',
+                        name: 'effectsPedals',
                         parents: [
                             {id: 10, name: 'hobbies'},
-                            {id: 8, name: 'Музыкальные инструменты'},
+                            {id: 8, name: 'musicalInstruments'},
                         ],
                     },
                     {
                         id: 88,
-                        'name': 'Скрипки, смычковые',
+                        name: 'violinsBowed',
                         parents: [
                             {id: 10, name: 'hobbies'},
-                            {id: 8, name: 'Музыкальные инструменты'},
+                            {id: 8, name: 'musicalInstruments'},
                         ],
                     },
                     {
                         id: 89,
-                        'name': 'Ударные инструменты',
+                        name: 'percussionInstruments',
                         parents: [
                             {id: 10, name: 'hobbies'},
-                            {id: 8, name: 'Музыкальные инструменты'},
+                            {id: 8, name: 'musicalInstruments'},
                         ],
                     },
                     {
                         id: 90,
-                        'name': 'Аксессуары',
+                        name: 'accessories',
                         parents: [
                             {id: 10, name: 'hobbies'},
-                            {id: 8, name: 'Музыкальные инструменты'},
+                            {id: 8, name: 'musicalInstruments'},
                         ],
                     },
                 ],
             },
             {
                 id: 9,
-                'name': 'Настольные игры',
+                name: 'boardGames',
                 parents: [{id: 10, name: 'hobbies'}],
+                'type': [],
             },
         ],
     },
@@ -4312,40 +4323,40 @@ export const categories_list: CategoryType[] = [
             },
             {
                 id: 2,
-                'name': 'Кошки',
+                name: 'cats',
                 parents: [{id: 11, name: 'animal'}],
             },
             {
                 id: 3,
-                'name': 'Птицы',
+                name: 'birds',
                 parents: [{id: 11, name: 'animal'}],
             },
             {
                 id: 4,
-                'name': 'Грызуны',
+                name: 'rodents',
                 parents: [{id: 11, name: 'animal'}],
             },
             {
                 id: 5,
-                'name': 'Рыбки',
+                name: 'fishes',
                 parents: [{id: 11, name: 'animal'}],
             },
             {
                 id: 6,
-                'name': 'Сельскохозяйственные животные',
+                name: 'farmAnimals',
                 parents: [{id: 11, name: 'animal'}],
             },
             {
                 id: 7,
-                'name': 'Другие животные',
+                name: 'otherAnimals',
                 parents: [{id: 11, name: 'animal'}],
             },
             {
                 id: 8,
-                'name': 'Товары для животных',
+                name: 'goodsForPets',
                 parents: [{id: 11, name: 'animal'}],
-            }
-        ]
+            },
+        ],
     },
     {
         id: 12,
@@ -4353,5 +4364,5 @@ export const categories_list: CategoryType[] = [
         has_auction: false,
         icon: {url: Free},
         smallIcon: <ForFreeIcon/>,
-    }
+    },
 ];

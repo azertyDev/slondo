@@ -1,23 +1,23 @@
-import React, { FC, useState } from 'react';
-import { Hidden, NativeSelect, Typography } from '@material-ui/core';
-import { SearchIcon, FilterIcon } from '../icons';
-import { ButtonComponent } from '../button/Button';
-import { useTranslation } from '@root/i18n';
-import { useStyles } from './useStyles';
+import React, { FC, useState } from 'react'
+import { Hidden, NativeSelect, Typography } from '@material-ui/core'
+import { FilterIcon, Search_icon } from '@src/components/elements/icons'
+import { ButtonComponent } from '../button/Button'
+import { useTranslation } from '@root/i18n'
+import { useStyles } from './useStyles'
 
 export const SearchForm: FC = () => {
-    const { t } = useTranslation(['header']);
+    const { t } = useTranslation(['header'])
 
-    const [adType, setAdType] = useState(1);
+    const [adType, setAdType] = useState(1)
 
     const handleSelect = (e) => {
-        setAdType(e.target.value);
-    };
+        setAdType(e.target.value)
+    }
 
-    const classes = useStyles();
+    const classes = useStyles()
     return (
         <form className={classes.root}>
-            <img src={SearchIcon} className="search-icon" alt="search" />
+            <Search_icon />
             <input
                 type="text"
                 className="search-input"
@@ -41,12 +41,8 @@ export const SearchForm: FC = () => {
                 </ButtonComponent>
             </Hidden>
             <Hidden mdUp>
-                <img
-                    src={FilterIcon}
-                    alt="filter icon"
-                    className="filter-icon"
-                />
+                <FilterIcon />
             </Hidden>
         </form>
-    );
-};
+    )
+}
