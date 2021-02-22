@@ -29,7 +29,7 @@ export const SyncSliders: FC<SyncSlidersProps> = (props) => {
         slider3,
     } = slidersRefs;
 
-    const imgsCount = !!imgs.length ? imgs.length : 1;
+    const imgsCount = !!imgs?.length ? imgs?.length : 1;
 
     const classes = useStyles();
     return (
@@ -44,7 +44,7 @@ export const SyncSliders: FC<SyncSlidersProps> = (props) => {
                     variableWidth={true}
                     focusOnSelect={true}
                 >
-                    {imgs.map((img, i) =>
+                    {imgs?.map((img, i) =>
                         <img
                             key={i}
                             alt={img.alt}
@@ -65,7 +65,7 @@ export const SyncSliders: FC<SyncSlidersProps> = (props) => {
                     focusOnSelect={true}
                     arrows={false}
                 >
-                    {imgs.map(({url, alt}, i) =>
+                    {imgs?.map(({url, alt}, i) =>
                         <img key={i} alt={alt} src={url.default}/>
                     )}
                 </CustomSlider>

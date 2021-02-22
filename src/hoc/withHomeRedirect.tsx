@@ -7,11 +7,10 @@ import {Router} from '@root/i18n';
 export const withHomeRedirect = (Component: ComponentType<any>) => {
     return () => {
         const {isAuth} = useSelector(({auth}: RootState) => auth);
-
         useEffect(() => {
             !isAuth && Router.push('/');
         }, [isAuth]);
 
-        return <Component/>
+        return isAuth && <Component/>
     }
 };

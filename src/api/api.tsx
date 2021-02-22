@@ -13,7 +13,7 @@ const localServer = 'http://192.168.1.60/slondo/public/api/';
 
 const instance = Axios.create({
     withCredentials: true,
-    baseURL: uztelecom
+    baseURL: localServer
 });
 
 // const config = {
@@ -33,6 +33,53 @@ export const userAPI = {
             .post(`login`, form, {
                 headers: {'Content-Type': 'multipart/form-data'}
             })
+            .then((res) => res.data)
+            .catch((err) => {
+                throw err;
+            });
+    },
+    register: (phone: string): Promise<unknown> => {
+        const form = new FormData();
+        form.set('phone', phone);
+        return instance
+            .post(`register`, form, {
+                headers: {'Content-Type': 'multipart/form-data'}
+            })
+            .then((res) => res.data)
+            .catch((err) => {
+                throw err;
+            });
+    },
+    recovery: (phone: string, code: string, password: string, password_confirmation: string): Promise<unknown> => {
+        const form = new FormData();
+        form.set('phone', phone);
+        form.set('code', code);
+        form.set('password', password);
+        form.set('password_confirmation', password_confirmation);
+        return instance
+            .post(`recovery`, form, {
+                headers: {'Content-Type': 'multipart/form-data'}
+            })
+            .then((res) => res.data)
+            .catch((err) => {
+                throw err;
+            });
+    },
+    recoveryRequest: (phone: string): Promise<unknown> => {
+        const form = new FormData();
+        form.set('phone', phone);
+        return instance
+            .post(`recoveryRequest`, form, {
+                headers: {'Content-Type': 'multipart/form-data'}
+            })
+            .then((res) => res.data)
+            .catch((err) => {
+                throw err;
+            });
+    },
+    recoverySMS: (phone: string, code: string): Promise<unknown> => {
+        return instance
+            .get(`checkShortCode?phone=${phone}&code=${code}`,)
             .then((res) => res.data)
             .catch((err) => {
                 throw err;

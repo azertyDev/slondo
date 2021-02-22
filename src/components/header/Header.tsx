@@ -61,18 +61,10 @@ export const Header: FC = () => {
                     className={classes.modalDialog}
                 >
                     <>
-                        {isAuth
-                            ? <div style={{width: '200px', height: '80px', backgroundColor: '#fff'}}>
-                                <Typography variant='h5'>{t('auth_reg:signOutFromSite')}</Typography>
-                                <div style={{display: 'flex'}}>
-                                    <ButtonComponent onClick={handleModal(false)}>{t('auth_reg:cancel')}</ButtonComponent>
-                                    <ButtonComponent>{t('auth_reg:signOut')}</ButtonComponent>
-                                </div>
-                            </div>
-                            : <AuthRegPage
-                                t={t}
-                                handleCloseModal={handleModal(false)}
-                            />}
+                        <AuthRegPage
+                            t={t}
+                            handleCloseModal={handleModal(false)}
+                        />
                     </>
                 </Modal>
             </div>

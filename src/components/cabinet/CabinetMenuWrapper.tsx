@@ -4,13 +4,13 @@ import {MainLayout} from "@src/components/MainLayout";
 import {CabinetSidebar} from './cabinet_sidebar/CabinetSidebar';
 import {useStyles} from './useStyles';
 
-
 export type CabinetMenuPropsType = {
     title: string;
     headerTitle: string;
 };
 
 export const CabinetMenuWrapper:FC<CabinetMenuPropsType> = ({children, title, headerTitle}) => {
+
     const classes = useStyles()
     return (
         <MainLayout title={`Мой кабинет | ${title}`}>
