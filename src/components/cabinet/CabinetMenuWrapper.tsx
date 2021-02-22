@@ -1,10 +1,8 @@
-import React, {FC, useEffect} from 'react';
+import React, {FC} from 'react';
 import {Grid, Typography} from '@material-ui/core';
 import {MainLayout} from "@src/components/MainLayout";
 import {CabinetSidebar} from './cabinet_sidebar/CabinetSidebar';
 import {useStyles} from './useStyles';
-import {useRouter} from "next/router";
-import Cookies from "universal-cookie";
 
 export type CabinetMenuPropsType = {
     title: string;
@@ -12,17 +10,6 @@ export type CabinetMenuPropsType = {
 };
 
 export const CabinetMenuWrapper:FC<CabinetMenuPropsType> = ({children, title, headerTitle}) => {
-    // const router = useRouter()
-    // const pageUrl = router.route
-    // const cookies = new Cookies();
-    //
-    //
-    // // console.warn("data", router, checker)
-    // useEffect(()=> {
-    //     const token = cookies.get('token')
-    //     const checker = typeof token === 'object' && token !== null
-    //     checker ? router.push(pageUrl) : router.push('/')
-    // }, [])
 
     const classes = useStyles()
     return (

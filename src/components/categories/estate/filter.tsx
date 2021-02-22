@@ -35,7 +35,6 @@ const Filter: FC = () => {
             [name]: value
         })
     }
-    console.warn("data", data)
 
     useEffect(() => {
         userAPI.getDataForCreatePost(Number(categoryID), undefined, undefined, lang).then(
@@ -45,7 +44,6 @@ const Filter: FC = () => {
 
     const handleSubmit = (event) => {
         event.preventDefault()
-        console.warn("filter", filter)
     }
     return (
         <form onSubmit={handleSubmit}>

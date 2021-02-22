@@ -1,7 +1,7 @@
 import {createAsyncThunk, createSlice} from '@reduxjs/toolkit';
 import {userAPI} from "@src/api/api";
 import Cookies from "universal-cookie";
-import {AuthInputs, AuthReg} from "@root/interfaces/Auth";
+import {AuthInputs, AuthReg, RecoveryInputs} from "@root/interfaces/Auth";
 
 
 const cookies = new Cookies();
@@ -27,10 +27,32 @@ export const fetchTokenLogin = createAsyncThunk<never, AuthInputs>(
 );
 
 export const fetchTokenRegister = createAsyncThunk<never, AuthInputs>(
-    'authReg/fetchTokenByLogin',
+    'authReg/fetchTokenByRegister',
     async ({phone}, {rejectWithValue}) => {
         try {
+            await userAPI.register(phone);
+        } catch (e) {
+            return rejectWithValue(e.message);
+        }
+    }
+);
 
+export const fetchRecovery = createAsyncThunk<never, AuthInputs>(
+    'authReg/fetchRecovery',
+    async ({phone}, {rejectWithValue}) => {
+        try {
+            await userAPI.recoveryRequest(phone);
+        } catch (e) {
+            return rejectWithValue(e.message);
+        }
+    }
+);
+export const fetchTokenRecovery = createAsyncThunk<never, RecoveryInputs>(
+    'authReg/fetchTokenByLogin',
+    async ({phone, code, password, password_confirmation}, {rejectWithValue}) => {
+        try {
+            const token = await userAPI.recovery(phone, code, password, password_confirmation);
+            cookies.set('token', token, {maxAge: 2 * 3600});
         } catch (e) {
             return rejectWithValue(e.message);
         }
@@ -57,7 +79,6 @@ const authRegSlice = createSlice({
         builder.addCase(fetchTokenLogin.fulfilled, (state) => {
             state.isFetch = false;
             state.error = null;
-            state.isAuth = true;
         })
         builder.addCase(fetchTokenLogin.rejected, (state, action) => {
             state.isFetch = false;

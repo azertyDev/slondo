@@ -7,16 +7,17 @@ import {Form, FormikProvider, useFormik} from "formik";
 import {CustomFormikField} from "../custom_formik_field/CustomFormikField";
 import {ButtonComponent} from "../button/Button";
 import {RootState} from "@src/redux/rootReducer";
-import {fetchTokenLogin, fetchTokenRegister} from "@src/redux/slices/authRegSlice";
+import {fetchTokenLogin, fetchTokenRegister, fetchRecovery} from "@src/redux/slices/authRegSlice";
 import {AuthInputs} from "@root/interfaces/Auth";
 import {WithT} from "i18next";
 import {useStyles} from './useStyles';
 import {authRegSchema} from "@root/validation_schemas/authRegSchema";
-
+import ConfirmAuth from "@src/components/elements/auth_reg_form/ConfirmAuth";
 
 const initialInputsVals: AuthInputs = {
-    phone: '',
-    password: ''
+    phone: '+998',
+    password: '',
+    code: ''
 };
 
 export const AuthRegForm: FC<WithT & { handleCloseModal: () => void }> = (props) => {
@@ -27,23 +28,25 @@ export const AuthRegForm: FC<WithT & { handleCloseModal: () => void }> = (props)
     const {isFetch, error} = useSelector((store: RootState) => store.auth);
 
     const [tabValue, setTabValue] = useState(0);
-
+    const [resetPassword, setResetPassword] = useState(false)
     const tabsHandler = (event, newValue) => {
         setTabValue(newValue);
+        newValue === 0 &&  setResetPassword(false)
     };
 
+
     const loginReg = (values, tabValue) => {
-        console.warn("tabValue222", tabValue)
+        const phone = values.phone.replace("+", "")
+        const data = {...values, phone}
         if (tabValue === 0) {
-            dispatch(fetchTokenLogin(values))
+            dispatch(fetchTokenLogin(data))
         } else{
-            dispatch(fetchTokenRegister(values))
+            dispatch(fetchTokenRegister(data))
         }
     };
 
-    const onSubmit = (values, actions) => {
+    const onSubmit = (values) => {
         loginReg(values, tabValue);
-        actions.resetForm();
         tabValue === 0 ? props.handleCloseModal() : setTabValue(0);
     };
 
@@ -81,7 +84,7 @@ export const AuthRegForm: FC<WithT & { handleCloseModal: () => void }> = (props)
                         <Tab
                             label={
                                 <Typography variant="subtitle1">
-                                    {t('auth_reg:signUpTitle')}
+                                    {t(`auth_reg:${resetPassword ? 'resetPassTitle' : 'signUpTitle'}`)}
                                 </Typography>
                             }
                             value={1}
@@ -121,11 +124,13 @@ export const AuthRegForm: FC<WithT & { handleCloseModal: () => void }> = (props)
                                             <Typography variant="subtitle2" className="error-text">
                                                 {errors.password && touched.password ? errors.password : ''}
                                             </Typography>
-                                            <a href="#">
-                                                <Typography variant="body2">
-                                                    {t('auth_reg:forgetPassword')}
-                                                </Typography>
-                                            </a>
+                                            <Typography
+                                                variant="body2"
+                                                onClick={() => {setTabValue(1), setResetPassword(true)}}
+                                                style={{cursor: "pointer"}}
+                                            >
+                                                {t('auth_reg:forgetPassword')}
+                                            </Typography>
                                         </div>
                                     </div>
                                     <div className={classes.modalBtns}>
@@ -154,6 +159,9 @@ export const AuthRegForm: FC<WithT & { handleCloseModal: () => void }> = (props)
                             </div>
                         </CustomTabPanel>
                         <CustomTabPanel value={tabValue} index={1} className="reg-panel">
+                            { resetPassword ?
+                                <ConfirmAuth t={t} />
+                                :
                             <FormikProvider value={formik}>
                                 <Form onSubmit={formik.handleSubmit}>
                                     <div>
@@ -180,6 +188,7 @@ export const AuthRegForm: FC<WithT & { handleCloseModal: () => void }> = (props)
                                     </div>
                                 </Form>
                             </FormikProvider>
+                                }
                             <div className={classes.agreement}>
                                 <Typography className="reg-agreement" variant="body2">
                                     {`${t('auth_reg:agreement.firstPart')} `}

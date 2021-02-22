@@ -73,7 +73,8 @@ export const CustomDrawer = ({ toggleDrawer, position }) => {
                 position: 'absolute',
                 zIndex: 99999,
                 left: '120px',
-                top: -35
+                top: -35,
+                overflowY: 'auto'
             }}>
                 <h1 onClick={() => setSubList([])} style={{cursor: "pointer"}}>X</h1>
                 {subList?.subCategory?.map((ParentItem) => {

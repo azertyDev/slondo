@@ -33,7 +33,7 @@ export const PostContent: FC<WithT & any> = (props) => {
         parameters,
         descHeight,
     } = props
-
+    const category = data?.category?.mark
     const [state, setState] = React.useState<PostContentTypes>({
         openSliderModal: false,
         openModal: false,
@@ -44,7 +44,6 @@ export const PostContent: FC<WithT & any> = (props) => {
     const { openModal, openSliderModal, openSnackbar, horizontal, vertical } = state
 
     const date = new Date(data.created_at)
-
     const months = [
         'января',
         'февраля',
@@ -144,7 +143,7 @@ export const PostContent: FC<WithT & any> = (props) => {
         <div className={classes.root}>
             <div className="breadcrumbs">
                 <BreadcrumbsComponent>
-                    <Link href="#">
+                    <Link href={`/categories/${data.category.mark}`}>
                         <a>
                             <Typography variant="subtitle1" noWrap>
                                 {data.category.name}
@@ -152,7 +151,7 @@ export const PostContent: FC<WithT & any> = (props) => {
                         </a>
                     </Link>
                     {data.category.sub_category.length
-                    && <Link href="#">
+                    && <Link href={`/categories/${data.category.mark}/${data.category.sub_category[0].name}`}>
                         <a>
                             <Typography variant="subtitle1" noWrap>
                                 {data.category.sub_category[0].name}
@@ -160,7 +159,7 @@ export const PostContent: FC<WithT & any> = (props) => {
                         </a>
                     </Link>}
                     {parameters.type
-                    && <Link href="#">
+                    && <Link href={`/categories/${data.category.mark}/${parameters.type.name}`}>
                         <a>
                             <Typography variant="subtitle1" noWrap>
                                 {parameters.type.name}

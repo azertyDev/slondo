@@ -34,7 +34,7 @@ export const ModalSyncSliders: FC<SyncSlidersProps> = (props) => {
         slider4
     } = slidersRefs;
 
-    const imgsCount = !!imgs.length ? imgs.length : 1;
+    const imgsCount = !!imgs?.length ? imgs?.length : 1;
 
     const [curState, setCurState] = useState(1);
 
@@ -71,7 +71,7 @@ export const ModalSyncSliders: FC<SyncSlidersProps> = (props) => {
                         asNavFor={slider4.current}
                         centerMode={true}
                     >
-                        {imgs.map((img, i) =>
+                        {imgs?.map((img, i) =>
                             <InnerImageZoom
                                 key={i}
                                 moveType="drag"
@@ -92,7 +92,7 @@ export const ModalSyncSliders: FC<SyncSlidersProps> = (props) => {
                         beforeChange={handleBeforeSlide}
                         slidesToShow={imgsCount > 3 ? 4 : imgsCount}
                     >
-                        {imgs.map(({url, alt}, i) =>
+                        {imgs?.map(({url, alt}, i) =>
                             <img key={i} alt={alt} src={url.default}/>
                         )}
                     </CustomSlider>

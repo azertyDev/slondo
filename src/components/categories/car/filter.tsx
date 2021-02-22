@@ -46,7 +46,6 @@ const Filter: FC = () => {
 
     const handleSubmit = (event) => {
         event.preventDefault()
-        console.warn("filter", filter)
     }
     return (
         <form onSubmit={handleSubmit}>
