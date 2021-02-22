@@ -1,14 +1,14 @@
-import React, { useState } from 'react'
+import React, {FC} from 'react'
 import Drawer from '@material-ui/core/Drawer'
-import { categoriesList } from '@src/common_data/categoriesList'
-import { InputAdornment, List, ListItem, TextField, Typography } from '@material-ui/core'
-import { useTranslation } from 'i18n'
-import { useStyles } from './useStyles'
-import { Search_icon } from '@src/components/elements/icons'
+import {categories_list} from '@src/common_data/categories_list'
+import {InputAdornment, List, ListItem, TextField, Typography} from '@material-ui/core'
+import {useTranslation} from 'i18n'
+import {useStyles} from './useStyles'
+import {Search_icon} from '@src/components/elements/icons'
 
 
-export const CustomDrawer = ({ toggleDrawer, position }) => {
-    const { t } = useTranslation()
+export const CustomDrawer: FC<any> = ({toggleDrawer, position}) => {
+    const {t} = useTranslation()
 
 
     const classes = useStyles()
@@ -22,7 +22,7 @@ export const CustomDrawer = ({ toggleDrawer, position }) => {
                 InputProps={{
                     startAdornment: (
                         <InputAdornment position="start">
-                            <Search_icon />
+                            <Search_icon/>
                         </InputAdornment>
                     ),
                 }}
@@ -31,7 +31,7 @@ export const CustomDrawer = ({ toggleDrawer, position }) => {
             />
             <List disablePadding>
                 {
-                    categoriesList.map((ctgr, i) =>
+                    categories_list.map((ctgr, i) =>
                         <ListItem
                             key={i}
                             disableGutters
@@ -62,7 +62,6 @@ export const CustomDrawer = ({ toggleDrawer, position }) => {
                 </ListItem>
             </List>
             <Typography variant='subtitle1'>
-
             </Typography>
         </div>
     )
@@ -73,7 +72,7 @@ export const CustomDrawer = ({ toggleDrawer, position }) => {
                 anchor='left'
                 open={position['left']}
                 onClose={toggleDrawer('left', false)}
-                BackdropProps={{ invisible: true }}
+                BackdropProps={{invisible: true}}
             >
                 {list('left')}
             </Drawer>

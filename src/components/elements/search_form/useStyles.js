@@ -1,4 +1,4 @@
-import makeStyles from '@material-ui/core/styles/makeStyles';
+import makeStyles from '@material-ui/core/styles/makeStyles'
 
 export const useStyles = makeStyles(() => ({
     root: {
@@ -6,14 +6,12 @@ export const useStyles = makeStyles(() => ({
         height: 38,
         position: 'relative',
         display: 'flex',
-        '& > img.search-icon, & > img.filter-icon': {
+        '& > svg, & > img.filter-icon': {
             position: 'absolute',
             height: '20px',
             top: 'calc(50% - 10px)',
         },
-        '& > img.search-icon': {
-            width: 18,
-            height: 18,
+        '& > svg': {
             left: '10px',
         },
         '& > img.filter-icon': {
@@ -39,8 +37,8 @@ export const useStyles = makeStyles(() => ({
                 display: 'flex',
                 alignItems: 'center',
             },
-            '& div.MuiSelect-select:focus': {
-                background: 'none',
+            '& select.MuiSelect-select:focus': {
+                backgroundColor: 'none',
             },
         },
         '& > button.search-button': {
@@ -56,4 +54,4 @@ export const useStyles = makeStyles(() => ({
             lineHeight: '1.65',
         },
     },
-}));
+}))

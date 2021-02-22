@@ -1,9 +1,14 @@
-import {makeStyles} from '@material-ui/core/styles';
+import { makeStyles } from '@material-ui/core/styles'
 
 export const useStyles = makeStyles((theme) => ({
     root: {
         position: 'relative',
         height: '345px',
+        transition: 'all 0.4s ease 0s',
+        '&:hover': {
+            transform: 'translate(0px, -8px)',
+            // boxShadow: 'rgb(24 24 24 / 50%) 0px 10px 40px -10px',
+        },
         '& a': {
             textDecoration: 'none',
         },
@@ -80,7 +85,7 @@ export const useStyles = makeStyles((theme) => ({
             },
             '& > div.card-media': {
                 height: '240px',
-                
+
                 '& > div.card-header': {
                     width: '100%',
                     height: '100%',
@@ -97,14 +102,14 @@ export const useStyles = makeStyles((theme) => ({
                             borderRadius: '3px',
                             padding: '0 5px',
                             color: theme.palette.primary.white,
-                            backgroundColor: ({ads_type}) => (
+                            backgroundColor: ({ ads_type }) => (
                                 ads_type === 'post'
                                     ? 'rgba(136, 202, 236, .65)'
                                     : ads_type === 'auc'
-                                        ? 'rgba(173, 102, 213, .65)'
-                                        : 'rgba(242, 153, 74, .65)'
-                            )
-                        }
+                                    ? 'rgba(173, 102, 213, .65)'
+                                    : 'rgba(242, 153, 74, .65)'
+                            ),
+                        },
                     },
                     '& > div.icons': {
                         '&:last-child': {
@@ -121,13 +126,13 @@ export const useStyles = makeStyles((theme) => ({
                                 marginRight: '5px',
                                 '& > svg': {
                                     '& > path': {
-                                        fill: '#838383'
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
+                                        fill: '#838383',
+                                    },
+                                },
+                            },
+                        },
+                    },
+                },
             },
             '& h6.MuiTypography-subtitle1': {
                 [theme.breakpoints.down('sm')]: {
@@ -142,12 +147,12 @@ export const useStyles = makeStyles((theme) => ({
                     },
                     '& > span.MuiTypography-caption': {
                         color: '#838383',
-                    }
-                }
-            }
-        }
+                    },
+                },
+            },
+        },
     },
     skeleton: {
         height: '240px',
     },
-}));
+}))
