@@ -111,7 +111,7 @@ const Bottom = (props) => {
                             <Grid
                                 item
                                 container
-                                justify="flex-end"
+                                justify="center"
                                 alignItems="center"
                                 xs={1}
                             >

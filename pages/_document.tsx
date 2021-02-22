@@ -1,12 +1,12 @@
-import React from 'react';
+import React from 'react'
 import Document, {
     Html,
     Head,
     Main,
     NextScript,
     DocumentContext,
-} from 'next/document';
-import { ServerStyleSheets } from '@material-ui/core/styles';
+} from 'next/document'
+import { ServerStyleSheets } from '@material-ui/core/styles'
 
 export default class MyDocument extends Document {
     render() {
@@ -42,7 +42,7 @@ export default class MyDocument extends Document {
                     <NextScript />
                 </body>
             </Html>
-        );
+        )
     }
 }
 
@@ -50,15 +50,15 @@ export default class MyDocument extends Document {
 // it's compatible with server-side generation (SSG).
 MyDocument.getInitialProps = async (ctx: DocumentContext) => {
     // Render app and page and get the context of the page with collected side effects.
-    const sheets = new ServerStyleSheets();
-    const originalRenderPage = ctx.renderPage;
+    const sheets = new ServerStyleSheets()
+    const originalRenderPage = ctx.renderPage
 
     ctx.renderPage = () =>
         originalRenderPage({
             enhanceApp: (App) => (props) => sheets.collect(<App {...props} />),
-        });
+        })
 
-    const initialProps = await Document.getInitialProps(ctx);
+    const initialProps = await Document.getInitialProps(ctx)
 
     return {
         ...initialProps,
@@ -67,5 +67,5 @@ MyDocument.getInitialProps = async (ctx: DocumentContext) => {
             ...React.Children.toArray(initialProps.styles),
             sheets.getStyleElement(),
         ],
-    };
-};
+    }
+}

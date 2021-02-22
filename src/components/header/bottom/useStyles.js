@@ -15,9 +15,6 @@ export const useStyles = makeStyles((theme) => ({
                     '& > div:first-child': {
                         paddingLeft: 0,
                     },
-                    '& > div:last-child': {
-                        paddingRight: 0,
-                    },
                 },
             },
             '& div.bottom-logo': {

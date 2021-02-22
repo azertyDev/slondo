@@ -55,7 +55,7 @@ const theme = createMuiTheme({
         common: {
             tab: colors.tab,
             activeTab: colors.activeTab
-        }
+        },
     },
     breakpoints: {
         values: {

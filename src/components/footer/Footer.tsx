@@ -1,15 +1,15 @@
-import React, {FC} from 'react';
-import {Container, Grid, Typography} from '@material-ui/core';
-import {SocialsBlock} from '@src/components/elements/socials_block/SocialsBlock';
-import {Link, useTranslation} from '@root/i18n';
-import {Logo} from '@src/components/elements/icons/logo/Logo';
-import {useStyles} from './useStyles';
+import React, { FC } from 'react'
+import { Container, Grid, Typography } from '@material-ui/core'
+import { SocialsBlock } from '@src/components/elements/socials_block/SocialsBlock'
+import { Link, useTranslation } from '@root/i18n'
+import { Logo } from '@src/components/elements/icons/logo/Logo'
+import { useStyles } from './useStyles'
 
 
 export const Footer: FC = () => {
-    const {t} = useTranslation(['footer']);
+    const { t } = useTranslation(['footer'])
 
-    const classes = useStyles();
+    const classes = useStyles()
     return (
         <footer className={classes.root}>
             <div className='footer-wrapper'>
@@ -43,7 +43,7 @@ export const Footer: FC = () => {
                                         </Link>
                                     </li>
                                     <li>
-                                        <Link href="#">
+                                        <Link href="/security">
                                             <a>
                                                 <Typography
                                                     variant="subtitle1"
@@ -159,7 +159,7 @@ export const Footer: FC = () => {
                                         </Link>
                                     </li>
                                     <li>
-                                        <Link href="#">
+                                        <Link href="/legal/userAgreements">
                                             <a>
                                                 <Typography
                                                     variant="subtitle1"
@@ -174,13 +174,13 @@ export const Footer: FC = () => {
                             </Grid>
                             <Grid item xs={3} container>
                                 <div className="social-icons">
-                                    <SocialsBlock footer/>
+                                    <SocialsBlock footer />
                                 </div>
                             </Grid>
                         </Grid>
                         <div className="footer-bottom">
                             <Grid item xs={3} container justify='center' alignItems='center'>
-                                <Logo/>
+                                <Logo />
                             </Grid>
                             <Grid item xs={6} container justify="center" alignItems='center'>
                                 <Typography variant="subtitle1" color="initial">
@@ -202,4 +202,4 @@ export const Footer: FC = () => {
             </div>
         </footer>
     )
-};
+}
