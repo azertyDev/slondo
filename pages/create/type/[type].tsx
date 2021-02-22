@@ -1,6 +1,6 @@
 import React, {FC} from 'react';
-import {PostCategories} from '@src/components/post/create_post/post_categories/PostCategories';
+import {PostCategoriesPage} from '@src/components/post/create_post/post_categories_page/PostCategoriesPage';
 
-const Type: FC = () => <PostCategories/>;
+const Type: FC = () => <PostCategoriesPage/>;
 
 export default Type;

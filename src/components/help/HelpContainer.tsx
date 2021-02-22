@@ -1,14 +1,15 @@
-import React from 'react';
-import { MainLayout } from '@src/components/MainLayout';
-import { Help } from '@src/components/help/Help';
-import { HelpMenu } from './help_menu/HelpMenu';
+import React from 'react'
+import { MainLayout } from '@src/components/MainLayout'
+import { Help } from '@src/components/help/Help'
+import { ThemesMenu } from '../elements/themes_menu/ThemesMenu'
+import { data } from '@src/components/help/help_page_data'
 
 export const HelpContainer = () => {
     return (
         <MainLayout title="Помощь">
-            <HelpMenu>
+            <ThemesMenu data={data} title="Помощь">
                 <Help />
-            </HelpMenu>
+            </ThemesMenu>
         </MainLayout>
-    );
-};
+    )
+}

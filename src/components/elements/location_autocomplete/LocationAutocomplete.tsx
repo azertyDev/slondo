@@ -2,6 +2,7 @@ import React, {AllHTMLAttributes, FC} from "react";
 import {Autocomplete} from "@material-ui/lab";
 import {TextField} from "@material-ui/core";
 import {AddressAutocompleteProps} from "@root/interfaces/AddressAutocomplete";
+import {useTranslation} from "@root/i18n";
 
 
 const formatData = (list) => {
@@ -37,43 +38,38 @@ const formatData = (list) => {
     }, []);
 };
 
-export const LocationAutocomplete:
-    FC<AddressAutocompleteProps & AllHTMLAttributes<string>> = (
-    {
-        list,
-        onChange,
-        disabled
-    }
-) => {
-    const optionSelected = ({district_id, city_id}, value) => {
-        return value.district_id
+type LocationAutocompletePropsType = AddressAutocompleteProps & AllHTMLAttributes<string>;
+
+export const LocationAutocomplete: FC<LocationAutocompletePropsType> = (props) => {
+    const {t} = useTranslation(['common']);
+    const {list, onChange, disabled} = props;
+
+    const optionSelected = ({district_id, city_id}, value) =>
+        value.district_id
             ? district_id === value.district_id
             : city_id === value.city_id;
-    };
 
-    const option = (location) => {
-        return location.district
+    const option = (location) =>
+        location.district
             ? `${location.district}, ${location.city}, ${location.region}`
             : `${location.city}, ${location.region}`;
-    };
 
     return (
         <Autocomplete
             disabled={disabled}
             onChange={onChange}
-            noOptionsText='Город или регион с таким именем не найден'
+            getOptionLabel={option}
             options={formatData(list)}
             getOptionSelected={optionSelected}
-            getOptionLabel={option}
-            renderInput={(params: any) => (
+            noOptionsText={t('cityOrRegionNotFound')}
+            renderInput={params =>
                 <TextField
                     {...params}
                     fullWidth
                     focused={false}
                     variant='outlined'
-                    placeholder='Выберите местоположение'
-                />
-            )}
+                    placeholder={t('choiceLocation')}
+                />}
         />
     )
 };

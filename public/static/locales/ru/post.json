@@ -17,12 +17,12 @@
 
     "parameters": "Параметры",
     "appearance": "Внешний вид",
-    "priceDescContacts": "Цена, описание и контакты",
+    "titleDescContacts": "Заголовок, описание и контакты",
     "next": "Далее",
     "postTitle": "Заголовок объявления",
     "price": "Цена",
     "noSelect": "Не выбрано",
-    "exampleTitle": "Напишите заголовок",
+    "exampleTitle": "Название заголовока",
     "photos": "Фотографии",
 
     "congratulations": "Поздравляем!",

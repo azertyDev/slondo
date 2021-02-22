@@ -1,28 +1,28 @@
-import React, { FC, useState } from 'react'
-import { WithT } from 'i18next'
-import { Typography, Modal, Backdrop, List, ListItem, ListItemText, TextField, Snackbar } from '@material-ui/core'
-import { ReadMore } from '@src/components/elements/read_more/readMore'
-import { LocationIcon } from '@src/components/elements/icons/LocationIcon'
-import { WarningIcon } from '@src/components/elements/icons/WarningIcon'
-import { PhoneIcon } from '@src/components/elements/icons/PhoneIcon'
-import { SwapIcon } from '@src/components/elements/icons/SwapIcon'
-import { SafeIcon } from '@src/components/elements/icons/SafeIcon'
-import { DeliveryIcon } from '@src/components/elements/icons/DeliveryIcon'
-import { SyncSliders } from './sync_sliders/SyncSliders'
-import { ModalSyncSliders } from './modal_sync_sliders/ModalSyncSliders'
-import { BreadcrumbsComponent } from '@src/components/elements/breadcrumbs/Breadcrumbs'
-import { Link } from '@root/i18n'
-import { pricePrettier, weekDaysHelper } from '@root/src/helpers'
-import { useStyles } from './useStyles'
-import { ButtonComponent } from '@src/components/elements/button/Button'
-import { NotificationIcon } from '@src/components/elements/icons'
+import React, {FC} from 'react'
+import {WithT} from 'i18next'
+import {Typography, Modal, Backdrop, List, ListItem, ListItemText, TextField, Snackbar} from '@material-ui/core'
+import {ReadMore} from '@src/components/elements/read_more/readMore'
+import {LocationIcon} from '@src/components/elements/icons/LocationIcon'
+import {WarningIcon} from '@src/components/elements/icons/WarningIcon'
+import {PhoneIcon} from '@src/components/elements/icons/PhoneIcon'
+import {SwapIcon} from '@src/components/elements/icons/SwapIcon'
+import {SafeIcon} from '@src/components/elements/icons/SafeIcon'
+import {DeliveryIcon} from '@src/components/elements/icons/DeliveryIcon'
+import {SyncSliders} from './sync_sliders/SyncSliders'
+import {ModalSyncSliders} from './modal_sync_sliders/ModalSyncSliders'
+import {BreadcrumbsComponent} from '@src/components/elements/breadcrumbs/Breadcrumbs'
+import {Link} from '@root/i18n'
+import {numberPrettier, weekDaysHelper} from '@root/src/helpers'
+import {useStyles} from './useStyles'
+import {ButtonComponent} from '@src/components/elements/button/Button'
+import {NotificationIcon} from '@src/components/elements/icons'
 
 type PostContentTypes = {
     openSliderModal: boolean,
     openModal: boolean,
     openSnackbar: boolean,
-    vertical: string,
-    horizontal: string,
+    vertical: 'top',
+    horizontal: 'right',
 }
 
 export const PostContent: FC<WithT & any> = (props) => {
@@ -33,7 +33,7 @@ export const PostContent: FC<WithT & any> = (props) => {
         parameters,
         descHeight,
     } = props
-    const category = data?.category?.mark
+
     const [state, setState] = React.useState<PostContentTypes>({
         openSliderModal: false,
         openModal: false,
@@ -41,9 +41,10 @@ export const PostContent: FC<WithT & any> = (props) => {
         vertical: 'top',
         horizontal: 'right',
     })
-    const { openModal, openSliderModal, openSnackbar, horizontal, vertical } = state
+    const {openModal, openSliderModal, openSnackbar, horizontal, vertical} = state
 
-    const date = new Date(data.created_at)
+    const date = new Date(data.created_at);
+
     const months = [
         'января',
         'февраля',
@@ -70,22 +71,22 @@ export const PostContent: FC<WithT & any> = (props) => {
 
     const formatted_date = `${date.getDate()} ${months[date.getMonth()]} ${date.getFullYear()}`
 
-    const handleShowSliderModal = value => () => setState({ ...state, openSliderModal: value })
+    const handleShowSliderModal = value => () => setState({...state, openSliderModal: value})
 
     const handleOpenModal = () => {
-        setState({ ...state, openModal: true })
+        setState({...state, openModal: true})
     }
 
     const handleCloseModal = () => {
-        setState({ ...state, openModal: false })
+        setState({...state, openModal: false})
     }
 
     const handleOpenSnackbar = (newState) => () => {
-        setState({ openSnackbar: true, ...newState })
+        setState({openSnackbar: true, ...newState})
     }
 
     const handleCloseSnackbar = () => {
-        setState({ ...state, openSnackbar: false })
+        setState({...state, openSnackbar: false})
     }
 
     const parameterItems = Object.keys(parameters).reduce((items, key, i) => {
@@ -143,7 +144,7 @@ export const PostContent: FC<WithT & any> = (props) => {
         <div className={classes.root}>
             <div className="breadcrumbs">
                 <BreadcrumbsComponent>
-                    <Link href={`/categories/${data.category.mark}`}>
+                    <Link href="#">
                         <a>
                             <Typography variant="subtitle1" noWrap>
                                 {data.category.name}
@@ -151,7 +152,7 @@ export const PostContent: FC<WithT & any> = (props) => {
                         </a>
                     </Link>
                     {data.category.sub_category.length
-                    && <Link href={`/categories/${data.category.mark}/${data.category.sub_category[0].name}`}>
+                    && <Link href="#">
                         <a>
                             <Typography variant="subtitle1" noWrap>
                                 {data.category.sub_category[0].name}
@@ -159,7 +160,7 @@ export const PostContent: FC<WithT & any> = (props) => {
                         </a>
                     </Link>}
                     {parameters.type
-                    && <Link href={`/categories/${data.category.mark}/${parameters.type.name}`}>
+                    && <Link href="#">
                         <a>
                             <Typography variant="subtitle1" noWrap>
                                 {parameters.type.name}
@@ -170,7 +171,7 @@ export const PostContent: FC<WithT & any> = (props) => {
                         variant="subtitle1"
                         color="primary"
                         noWrap
-                        style={{ width: '280px' }}
+                        style={{width: '280px'}}
                     >
                         {data.title}
                     </Typography>
@@ -191,8 +192,8 @@ export const PostContent: FC<WithT & any> = (props) => {
                     </Typography>
                 </div>
                 <div>
-                    <ButtonComponent onClick={handleOpenSnackbar({ vertical: 'top', horizontal: 'right' })}>
-                        <NotificationIcon />
+                    <ButtonComponent onClick={handleOpenSnackbar({vertical, horizontal})}>
+                        <NotificationIcon/>
                         Следить
                     </ButtonComponent>
                 </div>
@@ -219,14 +220,14 @@ export const PostContent: FC<WithT & any> = (props) => {
                     Просмотров: {data.number_of_views}
                 </Typography>
                 <Typography variant="subtitle1" onClick={handleOpenModal}>
-                    Пожаловаться <WarningIcon />
+                    Пожаловаться <WarningIcon/>
                 </Typography>
             </div>
             <div className="post-bonus">
                 {
                     !!data.delivery
                     && <span className="delivery">
-                        <DeliveryIcon />&nbsp;
+                        <DeliveryIcon/>&nbsp;
                         <Typography variant="subtitle1">
                             Есть доставка
                         </Typography>
@@ -235,7 +236,7 @@ export const PostContent: FC<WithT & any> = (props) => {
                 {
                     !!data.safe_deal
                     && <span className="safe_deal">
-                        <SafeIcon />&nbsp;
+                        <SafeIcon/>&nbsp;
                         <Typography variant="subtitle1">
                             Безопасная покупка
                         </Typography>
@@ -244,7 +245,7 @@ export const PostContent: FC<WithT & any> = (props) => {
                 {
                     !!data.exchange
                     && <span className="exchange">
-                        <SwapIcon />&nbsp;
+                        <SwapIcon/>&nbsp;
                         <Typography variant="subtitle1">
                             Возможен обмен
                         </Typography>
@@ -253,7 +254,7 @@ export const PostContent: FC<WithT & any> = (props) => {
                 {
                     !!data.available_start_time
                     && <span className="available">
-                        <PhoneIcon />
+                        <PhoneIcon/>
                         {
                             !!data.available_days.length
                             && <>
@@ -275,7 +276,7 @@ export const PostContent: FC<WithT & any> = (props) => {
                 </Typography>
                 {data.region.name || data.city.name || data.district.name
                     ? <Typography variant="subtitle1" noWrap>
-                        <LocationIcon />
+                        <LocationIcon/>
                         {`${data.region.name ?? ''}`}
                         {data.city.name ? `, ${data.city.name}` : ''}
                         {data.district.name ? `, ${data.district.name}` : ''}
@@ -314,7 +315,7 @@ export const PostContent: FC<WithT & any> = (props) => {
                     <Typography variant="button">Стартовая цена</Typography>
                     <span>
                         <Typography variant="body2">
-                            {pricePrettier(data.price)} {data.currency.name}
+                            {numberPrettier(data.price)} {data.currency.name}
                         </Typography>
                     </span>
                 </div>
@@ -348,19 +349,19 @@ export const PostContent: FC<WithT & any> = (props) => {
                     </Typography>
                     <List component="nav" disablePadding>
                         <ListItem button disableGutters>
-                            <ListItemText primary="Столкнулся с мошенничеством и обманом." />
+                            <ListItemText primary="Столкнулся с мошенничеством и обманом."/>
                         </ListItem>
                         <ListItem button disableGutters>
-                            <ListItemText primary="Товар указан, но его нет в наличии." />
+                            <ListItemText primary="Товар указан, но его нет в наличии."/>
                         </ListItem>
                         <ListItem button disableGutters>
-                            <ListItemText primary="Цена неактуальная." />
+                            <ListItemText primary="Цена неактуальная."/>
                         </ListItem>
                         <ListItem button disableGutters>
-                            <ListItemText primary="Содержание нарушает правила сервиса." />
+                            <ListItemText primary="Содержание нарушает правила сервиса."/>
                         </ListItem>
                         <ListItem button disableGutters>
-                            <ListItemText primary="Автор объявления вызывает подозрения." />
+                            <ListItemText primary="Автор объявления вызывает подозрения."/>
                         </ListItem>
                     </List>
                     <div className='textarea'>
@@ -382,14 +383,14 @@ export const PostContent: FC<WithT & any> = (props) => {
                 </div>
             </Modal>
             <Snackbar
-                anchorOrigin={{ vertical, horizontal }}
+                anchorOrigin={{vertical, horizontal}}
                 open={openSnackbar}
                 onClose={handleCloseSnackbar}
                 key={vertical + horizontal}
             >
                 <div className={classes.snackbar}>
                     <span>
-                        <NotificationIcon />
+                        <NotificationIcon/>
                     </span>
                     <Typography variant='h6'>
                         Ставка повышена!
