@@ -8,16 +8,16 @@ import {useStyles} from './useStyles';
 type AncmntAuctionTopPropsType = {
     activeStep: number;
     backUrl?: string;
-    postType?: string;
+    title?: string;
 };
 
-export const PostHeader: FC<AncmntAuctionTopPropsType> = (props) => {
+export const CreatePostHeader: FC<AncmntAuctionTopPropsType> = (props) => {
     const {t} = useTranslation(['post']);
 
     const {
+        title,
         activeStep,
         backUrl,
-        postType
     } = props;
 
     const isPostTypeStep = activeStep === 0;
@@ -31,8 +31,11 @@ export const PostHeader: FC<AncmntAuctionTopPropsType> = (props) => {
 
     const classes = useStyles();
     return (
-        <Grid container alignItems="center" className={classes.root}>
-            <Grid item xs={3}>
+        <Grid
+            container
+            className={classes.root}
+        >
+            <Grid item xs={8}>
                 {!isPostTypeStep
                 && <div className='menu-header'>
                     <Link href={backUrl}>
@@ -42,18 +45,22 @@ export const PostHeader: FC<AncmntAuctionTopPropsType> = (props) => {
                             </IconButton>
                         </a>
                     </Link>
-                    <Typography variant="h6" color="initial">
-                        {t(`common:${postType}`)}
+                    <Typography
+                        noWrap
+                        variant="h6"
+                        title={title}
+                    >
+                        {title}
                     </Typography>
                 </div>}
             </Grid>
-            <Grid container justify="center" item xs={9}>
+            <Grid item xs={4}>
                 <Stepper activeStep={activeStep} alternativeLabel>
-                    {steps.map((label) => (
+                    {steps.map(label =>
                         <Step key={label}>
                             <StepLabel>{label}</StepLabel>
                         </Step>
-                    ))}
+                    )}
                 </Stepper>
             </Grid>
         </Grid>

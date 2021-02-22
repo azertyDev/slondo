@@ -1,6 +1,6 @@
 import React, {FC} from 'react';
-import {PostSuccess} from '@src/components/post/create_post/post_form/post_success/PostSuccess';
+import {PostSuccessPage} from '@src/components/post/create_post/post_form/post_success_page/PostSuccessPage';
 
-const Create: FC = () => <PostSuccess/>;
+const Create: FC = () => <PostSuccessPage/>;
 
 export default Create;

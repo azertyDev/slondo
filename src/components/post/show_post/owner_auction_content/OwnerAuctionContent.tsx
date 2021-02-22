@@ -2,7 +2,7 @@ import React, {FC} from 'react';
 import {AuctionInfo} from './auction_info/AuctionInfo';
 import {OwnerInfo} from './owner_info/OwnerInfo';
 import {Typography} from "@material-ui/core";
-import {pricePrettier} from '@root/src/helpers';
+import {numberPrettier} from '@root/src/helpers';
 import {useStyles} from './useStyles';
 
 
@@ -17,7 +17,7 @@ export const OwnerAuctionContent: FC<any> = (props) => {
         <div className={classes.root}>
             <div className="price">
                 <Typography variant="h4" color="initial">
-                    <span>{pricePrettier(data.price)}</span>{' '}
+                    <span>{numberPrettier(data.price)}</span>{' '}
                     {t(`common:${data.currency.name}`)}
                 </Typography>
             </div>

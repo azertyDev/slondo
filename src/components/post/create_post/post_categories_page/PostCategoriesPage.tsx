@@ -3,20 +3,20 @@ import {useRouter} from "next/router";
 import {i18n, useTranslation, Router} from '@root/i18n';
 import {MainLayout} from '@src/components/MainLayout';
 import {categorySearchHelper, categoriesByType} from '@src/helpers';
-import {PostHeader} from '../post_header/PostHeader';
+import {CreatePostHeader} from '../create_post_header/CreatePostHeader';
 import {SubCtgrsType} from '@root/interfaces/Categories';
 import {Grid, InputBase, List, ListItem, Typography} from "@material-ui/core";
 import {BackspaceIcon, Search_icon} from "@src/components/elements/icons";
 import {ButtonComponent} from "@src/components/elements/button/Button";
 import {IdNameType} from "@root/interfaces/Post";
-import {useStyles} from "@src/components/post/create_post/post_categories/useStyles";
+import {useStyles} from "@src/components/post/create_post/post_categories_page/useStyles";
 
 
 type CategoryStateType = IdNameType & {
     subCategory: IdNameType
 };
 
-export const PostCategories: FC = () => {
+export const PostCategoriesPage: FC = () => {
         const initCategory: CategoryStateType = {
             id: null,
             name: '',
@@ -52,10 +52,10 @@ export const PostCategories: FC = () => {
 
                 if (ctgr.parents[1]) {
                     const subCtgrId = ctgr.parents[1].name;
-                    Router.push(`${url}?category=${mainCtgr.name}&subCategory=${subCtgrId}&type=${ctgr.name}`);
+                    Router.push(`${url}?categoryName=${mainCtgr.name}&subCategoryName=${subCtgrId}&typeName=${ctgr.name}&preview=0`);
                 } else {
                     if (!type) {
-                        Router.push(`${url}?category=${mainCtgr.name}&subCategory=${ctgr.name}`);
+                        Router.push(`${url}?categoryName=${mainCtgr.name}&subCategoryName=${ctgr.name}&preview=0`);
                     } else {
                         category.subCategory = {
                             ...category.subCategory,
@@ -67,7 +67,7 @@ export const PostCategories: FC = () => {
                 }
             } else {
                 if (ctgr.name === 'free') {
-                    Router.push(`${url}?category=${ctgr.name}`);
+                    Router.push(`${url}?categoryName=${ctgr.name}&preview=0`);
                 } else {
                     setCategory({
                         ...category,
@@ -123,7 +123,7 @@ export const PostCategories: FC = () => {
                 });
             }
         };
-        console.log(`main:`, category)
+
         useEffect(() => {
             setSubLvlCtgrByLang();
         }, [lang]);
@@ -131,9 +131,9 @@ export const PostCategories: FC = () => {
         const classes = useStyles();
         return (
             <MainLayout>
-                <PostHeader
+                <CreatePostHeader
                     activeStep={1}
-                    postType={postType}
+                    title={t(`common:${postType}`)}
                     backUrl='/create/type'
                 />
                 <Grid container className={classes.root}>

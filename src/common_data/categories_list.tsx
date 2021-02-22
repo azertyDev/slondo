@@ -604,7 +604,7 @@ export const categories_list: CategoryType[] = [
                     },
                     {
                         id: 2,
-                        'name': 'Аренда на длительное время',
+                        name: 'Аренда на длительное время',
                         parents: [
                             {id: 4, name: 'estate'},
                             {id: 1, name: 'apartments'},
@@ -612,7 +612,7 @@ export const categories_list: CategoryType[] = [
                     },
                     {
                         id: 3,
-                        'name': 'Аренда по суточно',
+                        name: 'Аренда по суточно',
                         parents: [
                             {id: 4, name: 'estate'},
                             {id: 1, name: 'apartments'},
@@ -622,27 +622,23 @@ export const categories_list: CategoryType[] = [
             },
             {
                 id: 2,
-                'name': 'Дома, дачи, коттеджи',
+                name: 'Дома, дачи, коттеджи',
                 parents: [{id: 4, name: 'estate'}],
-                'type': [],
             },
             {
                 id: 3,
                 'name': 'Земельные участки',
                 parents: [{id: 4, name: 'estate'}],
-                'type': [],
             },
             {
                 id: 4,
                 'name': 'Подземные стоянки и боксы',
                 parents: [{id: 4, name: 'estate'}],
-                'type': [],
             },
             {
                 id: 5,
                 'name': 'Коммерческая недвижимость',
                 parents: [{id: 4, name: 'estate'}],
-                'type': [],
             },
         ],
     },
@@ -3046,7 +3042,6 @@ export const categories_list: CategoryType[] = [
                 id: 3,
                 'name': 'Продукты питания',
                 parents: [{id: 8, name: 'home'}],
-                'type': [],
             },
             {
                 id: 4,
@@ -3914,13 +3909,11 @@ export const categories_list: CategoryType[] = [
                 id: 3,
                 'name': 'Видеофильмы',
                 parents: [{id: 10, name: 'hobbies'}],
-                'type': [],
             },
             {
                 id: 4,
                 'name': 'Книги и журналы',
                 parents: [{id: 10, name: 'hobbies'}],
-                'type': [],
             },
             {
                 id: 5,
@@ -4173,13 +4166,11 @@ export const categories_list: CategoryType[] = [
                 id: 6,
                 'name': 'Материалы для творчества',
                 parents: [{id: 10, name: 'hobbies'}],
-                'type': [],
             },
             {
                 id: 7,
                 'name': 'Музыка',
                 parents: [{id: 10, name: 'hobbies'}],
-                'type': [],
             },
             {
                 id: 8,
@@ -4304,7 +4295,6 @@ export const categories_list: CategoryType[] = [
                 id: 9,
                 'name': 'Настольные игры',
                 parents: [{id: 10, name: 'hobbies'}],
-                'type': [],
             },
         ],
     },
@@ -4354,8 +4344,8 @@ export const categories_list: CategoryType[] = [
                 id: 8,
                 'name': 'Товары для животных',
                 parents: [{id: 11, name: 'animal'}],
-            },
-        ],
+            }
+        ]
     },
     {
         id: 12,
@@ -4363,5 +4353,5 @@ export const categories_list: CategoryType[] = [
         has_auction: false,
         icon: {url: Free},
         smallIcon: <ForFreeIcon/>,
-    },
+    }
 ];

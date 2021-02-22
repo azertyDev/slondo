@@ -1,8 +1,26 @@
-export const fieldKeysWithTxt = ['area'];
+export const fieldKeysWithTxt = ['area', 'mileage'];
 
 export const noSelect = {id: null, name: 'Не выбрано'};
 
-export const excludedKeys = ['id', 'type_id', 'sub_type_id'];
+export const estateTxtFields = [
+    'floor',
+    'land_area',
+    'living_area',
+    'general_area',
+    'kitchen_area',
+    'living_area',
+    'ceiling_height',
+    'number_of_floors',
+    'number_of_bedrooms',
+];
+
+export const excludedKeys = [
+    'id',
+    'name',
+    'type',
+    'type_id',
+    'sub_type_id'
+];
 
 export const numericFields = [
     'price',
@@ -14,7 +32,9 @@ export const numericFields = [
     'general_area',
     'kitchen_area',
     'living_area',
-    'number_of_floors'
+    'land_area',
+    'number_of_floors',
+    'number_of_bedrooms',
 ];
 
 export const optionKeys = [
@@ -29,5 +49,5 @@ export const optionKeys = [
     'comfort',
     'view',
     'parking',
-    'anti_theft'
+    'anti_theft',
 ];

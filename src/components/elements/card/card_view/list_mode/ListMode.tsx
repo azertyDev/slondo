@@ -31,7 +31,7 @@ import {ViewPropsTypes} from '@src/components/elements/card/card_view/CardView';
 import {UserAvatarComponent} from '@src/components/elements/user_info_with_avatar/avatar/UserAvatarComponent';
 import {Rating} from '@src/components/elements/rating/Rating';
 import {Link} from '@root/i18n';
-import {pricePrettier} from '@src/helpers';
+import {numberPrettier} from '@src/helpers';
 import {useRouter} from 'next/router';
 import {useTranslation} from "react-i18next";
 import {useStyles} from './useStyles';
@@ -184,7 +184,7 @@ export const ListMode: FC<ViewPropsTypes> = (props) => {
                                                     variant="h5"
                                                     color="initial"
                                                 >
-                                                    {pricePrettier(el.price)}{' '}
+                                                    {numberPrettier(el.price)}{' '}
                                                     {t(el.currency.name)}
                                                 </Typography>
                                             </div>

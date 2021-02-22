@@ -3,17 +3,17 @@ import {Grid, Typography} from '@material-ui/core';
 import {useTranslation, Link} from '@root/i18n';
 import {postTypes} from "@src/common_data/post_types_list";
 import {MainLayout} from "@src/components/MainLayout";
-import {PostHeader} from "@src/components/post/create_post/post_header/PostHeader";
+import {CreatePostHeader} from "@src/components/post/create_post/create_post_header/CreatePostHeader";
 import {useStyles} from './useStyles';
 
 
-export const PostTypes: FC = () => {
+export const PostTypesPage: FC = () => {
     const {t} = useTranslation(['post']);
 
     const classes = useStyles();
     return (
         <MainLayout>
-            <PostHeader activeStep={0}/>
+            <CreatePostHeader activeStep={0}/>
             <div className={classes.root}>
                 <Grid container spacing={2}>
                     {postTypes.map((postType, i) =>
