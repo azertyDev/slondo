@@ -269,7 +269,7 @@ export const categories_list: CategoryType[] = [
                     },
                     {
                         id: 25,
-                        name: 'Другие',
+                        name: 'others',
                         parents: [
                             {id: 2, name: 'transport'},
                             {id: 3, name: 'specTech'},
@@ -404,94 +404,94 @@ export const categories_list: CategoryType[] = [
             },
             {
                 id: 3,
-                name: 'Для автобусов и грузовиков',
+                name: 'forBusesAndTrucks',
                 parents: [{id: 3, name: 'parts'}],
                 type: [
                     {
                         id: 7,
-                        name: 'Автобусы',
+                        name: 'buses',
                         parents: [
                             {id: 3, name: 'parts'},
-                            {id: 3, name: 'Для автобусов и грузовиков'},
+                            {id: 3, name: 'forBusesAndTrucks'},
                         ],
                     },
                     {
                         id: 8,
-                        name: 'Микроавтобусы',
+                        name: 'minibuses',
                         parents: [
                             {id: 3, name: 'parts'},
-                            {id: 3, name: 'Для автобусов и грузовиков'},
+                            {id: 3, name: 'forBusesAndTrucks'},
                         ],
                     },
                     {
                         id: 9,
-                        name: 'Авторефрижератор',
+                        name: 'refrigeratedTruck',
                         parents: [
                             {id: 3, name: 'parts'},
-                            {id: 3, name: 'Для автобусов и грузовиков'},
+                            {id: 3, name: 'forBusesAndTrucks'},
                         ],
                     },
                     {
                         id: 10,
-                        name: 'Автодома',
+                        name: 'motorHomes',
                         parents: [
                             {id: 3, name: 'parts'},
-                            {id: 3, name: 'Для автобусов и грузовиков'},
+                            {id: 3, name: 'forBusesAndTrucks'},
                         ],
                     },
                     {
                         id: 11,
-                        name: 'Грузовики',
+                        name: 'trucks',
                         parents: [
                             {id: 3, name: 'parts'},
-                            {id: 3, name: 'Для автобусов и грузовиков'},
+                            {id: 3, name: 'forBusesAndTrucks'},
                         ],
                     },
                     {
                         id: 12,
-                        name: 'Легкий коммерческий транспорт',
+                        name: 'commercialTransport',
                         parents: [
                             {id: 3, name: 'parts'},
-                            {id: 3, name: 'Для автобусов и грузовиков'},
+                            {id: 3, name: 'forBusesAndTrucks'},
                         ],
                     },
                     {
                         id: 13,
-                        name: 'Прицепы',
+                        name: 'trailers',
                         parents: [
                             {id: 3, name: 'parts'},
-                            {id: 3, name: 'Для автобусов и грузовиков'},
+                            {id: 3, name: 'forBusesAndTrucks'},
                         ],
                     },
                     {
                         id: 14,
-                        name: 'Тягачи',
+                        name: 'tractorUnits',
                         parents: [
                             {id: 3, name: 'parts'},
-                            {id: 3, name: 'Для автобусов и грузовиков'},
+                            {id: 3, name: 'forBusesAndTrucks'},
                         ],
                     },
                     {
                         id: 15,
-                        name: 'Фудтрак',
+                        name: 'foodTruck',
                         parents: [
                             {id: 3, name: 'parts'},
-                            {id: 3, name: 'Для автобусов и грузовиков'},
+                            {id: 3, name: 'forBusesAndTrucks'},
                         ],
                     },
                     {
                         id: 16,
-                        name: 'Другие',
+                        name: 'others',
                         parents: [
                             {id: 3, name: 'parts'},
-                            {id: 3, name: 'Для автобусов и грузовиков'},
+                            {id: 3, name: 'forBusesAndTrucks'},
                         ],
                     },
                 ],
             },
             {
                 id: 4,
-                name: 'Для спецтехники',
+                name: 'forSpecialTech',
                 parents: [{id: 3, name: 'parts'}],
                 type: [
                     {
@@ -499,7 +499,7 @@ export const categories_list: CategoryType[] = [
                         name: 'aerialPlatform',
                         parents: [
                             {id: 3, name: 'parts'},
-                            {id: 4, name: 'Для спецтехники'},
+                            {id: 4, name: 'forSpecialTech'},
                         ]
                     },
                     {
@@ -507,7 +507,7 @@ export const categories_list: CategoryType[] = [
                         name: 'truckCranes',
                         parents: [
                             {id: 3, name: 'parts'},
-                            {id: 4, name: 'Для спецтехники'},
+                            {id: 4, name: 'forSpecialTech'},
                         ],
                     },
                     {
@@ -515,7 +515,7 @@ export const categories_list: CategoryType[] = [
                         name: 'bulldozers',
                         parents: [
                             {id: 3, name: 'parts'},
-                            {id: 4, name: 'Для спецтехники'},
+                            {id: 4, name: 'forSpecialTech'},
                         ],
                     },
                     {
@@ -523,7 +523,7 @@ export const categories_list: CategoryType[] = [
                         name: 'utilityTechnology',
                         parents: [
                             {id: 3, name: 'parts'},
-                            {id: 4, name: 'Для спецтехники'}
+                            {id: 4, name: 'forSpecialTech'}
                         ]
                     },
                     {
@@ -531,7 +531,7 @@ export const categories_list: CategoryType[] = [
                         name: 'loaders',
                         parents: [
                             {id: 3, name: 'parts'},
-                            {id: 4, name: 'Для спецтехники'},
+                            {id: 4, name: 'forSpecialTech'},
                         ],
                     },
                     {
@@ -539,7 +539,7 @@ export const categories_list: CategoryType[] = [
                         name: 'agriculturalMachinery',
                         parents: [
                             {id: 3, name: 'parts'},
-                            {id: 4, name: 'Для спецтехники'},
+                            {id: 4, name: 'forSpecialTech'},
                         ],
                     },
                     {
@@ -547,7 +547,7 @@ export const categories_list: CategoryType[] = [
                         name: 'constructionMachinery',
                         parents: [
                             {id: 3, name: 'parts'},
-                            {id: 4, name: 'Для спецтехники'},
+                            {id: 4, name: 'forSpecialTech'},
                         ],
                     },
                     {
@@ -555,7 +555,7 @@ export const categories_list: CategoryType[] = [
                         name: 'forestryEquipment',
                         parents: [
                             {id: 3, name: 'parts'},
-                            {id: 4, name: 'Для спецтехники'},
+                            {id: 4, name: 'forSpecialTech'},
                         ],
                     },
                     {
@@ -563,7 +563,7 @@ export const categories_list: CategoryType[] = [
                         name: 'excavators',
                         parents: [
                             {id: 3, name: 'parts'},
-                            {id: 4, name: 'Для спецтехники'},
+                            {id: 4, name: 'forSpecialTech'},
                         ],
                     },
                     {
@@ -571,7 +571,7 @@ export const categories_list: CategoryType[] = [
                         name: 'others',
                         parents: [
                             {id: 3, name: 'parts'},
-                            {id: 4, name: 'Для спецтехники'},
+                            {id: 4, name: 'forSpecialTech'},
                         ],
                     },
                 ],
@@ -903,7 +903,7 @@ export const categories_list: CategoryType[] = [
             },
             {
                 id: 2,
-                name: 'Резюме',
+                name: 'resume',
                 parents: [{id: 5, name: 'job'}],
             }
         ]
@@ -918,7 +918,7 @@ export const categories_list: CategoryType[] = [
             {
                 id: 1,
                 name: 'repairAndConstruction',
-                parents: [{id: 6, name: 'Услуги'}],
+                parents: [{id: 6, name: 'service'}],
                 type: [
                     {
                         id: 1,
@@ -1085,7 +1085,7 @@ export const categories_list: CategoryType[] = [
             {
                 id: 2,
                 name: 'masterForAnHour',
-                parents: [{id: 6, name: 'Услуги'}],
+                parents: [{id: 6, name: 'service'}],
                 type: [
                     {
                         id: 21,
@@ -2347,7 +2347,7 @@ export const categories_list: CategoryType[] = [
                         name: 'accessories',
                         parents: [
                             {id: 7, name: 'goods'},
-                            {id: 2, name: 'Мужской гардероб'},
+                            {id: 2, name: 'mansWardrobe'},
                         ],
                     },
                     {
@@ -2355,7 +2355,7 @@ export const categories_list: CategoryType[] = [
                         name: 'outerwear',
                         parents: [
                             {id: 7, name: 'goods'},
-                            {id: 2, name: 'Мужской гардероб'},
+                            {id: 2, name: 'mansWardrobe'},
                         ],
                     },
                     {
@@ -2363,7 +2363,7 @@ export const categories_list: CategoryType[] = [
                         name: 'hats',
                         parents: [
                             {id: 7, name: 'goods'},
-                            {id: 2, name: 'Мужской гардероб'},
+                            {id: 2, name: 'mansWardrobe'},
                         ],
                     },
                     {
@@ -2371,7 +2371,7 @@ export const categories_list: CategoryType[] = [
                         name: 'homeClothes',
                         parents: [
                             {id: 7, name: 'goods'},
-                            {id: 2, name: 'Мужской гардероб'},
+                            {id: 2, name: 'mansWardrobe'},
                         ],
                     },
                     {
@@ -2379,7 +2379,7 @@ export const categories_list: CategoryType[] = [
                         name: 'overalls',
                         parents: [
                             {id: 7, name: 'goods'},
-                            {id: 2, name: 'Мужской гардероб'},
+                            {id: 2, name: 'mansWardrobe'},
                         ],
                     },
                     {
@@ -2387,7 +2387,7 @@ export const categories_list: CategoryType[] = [
                         name: 'underwear',
                         parents: [
                             {id: 7, name: 'goods'},
-                            {id: 2, name: 'Мужской гардероб'},
+                            {id: 2, name: 'mansWardrobe'},
                         ],
                     },
                     {
@@ -2395,7 +2395,7 @@ export const categories_list: CategoryType[] = [
                         name: 'footwear',
                         parents: [
                             {id: 7, name: 'goods'},
-                            {id: 2, name: 'Мужской гардероб'},
+                            {id: 2, name: 'mansWardrobe'},
                         ],
                     },
                     {
@@ -2403,7 +2403,7 @@ export const categories_list: CategoryType[] = [
                         name: 'blazersAndSuits',
                         parents: [
                             {id: 7, name: 'goods'},
-                            {id: 2, name: 'Мужской гардероб'},
+                            {id: 2, name: 'mansWardrobe'},
                         ],
                     },
                     {
@@ -2411,7 +2411,7 @@ export const categories_list: CategoryType[] = [
                         name: 'shirts',
                         parents: [
                             {id: 7, name: 'goods'},
-                            {id: 2, name: 'Мужской гардероб'},
+                            {id: 2, name: 'mansWardrobe'},
                         ],
                     },
                     {
@@ -2419,7 +2419,7 @@ export const categories_list: CategoryType[] = [
                         name: 'sweatersHoodies',
                         parents: [
                             {id: 7, name: 'goods'},
-                            {id: 2, name: 'Мужской гардероб'},
+                            {id: 2, name: 'mansWardrobe'},
                         ],
                     },
                     {
@@ -2427,7 +2427,7 @@ export const categories_list: CategoryType[] = [
                         name: 'overalls',
                         parents: [
                             {id: 7, name: 'goods'},
-                            {id: 2, name: 'Мужской гардероб'},
+                            {id: 2, name: 'mansWardrobe'},
                         ],
                     },
                     {
@@ -2435,7 +2435,7 @@ export const categories_list: CategoryType[] = [
                         name: 'sportswear',
                         parents: [
                             {id: 7, name: 'goods'},
-                            {id: 2, name: 'Мужской гардероб'},
+                            {id: 2, name: 'mansWardrobe'},
                         ],
                     },
                     {
@@ -2443,7 +2443,7 @@ export const categories_list: CategoryType[] = [
                         name: 'tShirtsAndPolos',
                         parents: [
                             {id: 7, name: 'goods'},
-                            {id: 2, name: 'Мужской гардероб'},
+                            {id: 2, name: 'mansWardrobe'},
                         ],
                     },
                     {
@@ -2451,7 +2451,7 @@ export const categories_list: CategoryType[] = [
                         name: 'pantsAndShorts',
                         parents: [
                             {id: 7, name: 'goods'},
-                            {id: 2, name: 'Мужской гардероб'},
+                            {id: 2, name: 'mansWardrobe'},
                         ],
                     },
                     {
@@ -2459,7 +2459,7 @@ export const categories_list: CategoryType[] = [
                         name: 'other',
                         parents: [
                             {id: 7, name: 'goods'},
-                            {id: 2, name: 'Мужской гардероб'},
+                            {id: 2, name: 'mansWardrobe'},
                         ],
                     },
                 ],
@@ -2474,7 +2474,7 @@ export const categories_list: CategoryType[] = [
                         name: 'accessories',
                         parents: [
                             {id: 7, name: 'goods'},
-                            {id: 3, name: 'Детская одежда'},
+                            {id: 3, name: 'babyClothes'},
                         ],
                     },
                     {
@@ -2482,7 +2482,7 @@ export const categories_list: CategoryType[] = [
                         name: 'blousesAndShirts',
                         parents: [
                             {id: 7, name: 'goods'},
-                            {id: 3, name: 'Детская одежда'},
+                            {id: 3, name: 'babyClothes'},
                         ],
                     },
                     {
@@ -2490,7 +2490,7 @@ export const categories_list: CategoryType[] = [
                         name: 'outerwear',
                         parents: [
                             {id: 7, name: 'goods'},
-                            {id: 3, name: 'Детская одежда'},
+                            {id: 3, name: 'babyClothes'},
                         ],
                     },
                     {
@@ -2498,7 +2498,7 @@ export const categories_list: CategoryType[] = [
                         name: 'hats',
                         parents: [
                             {id: 7, name: 'goods'},
-                            {id: 3, name: 'Детская одежда'},
+                            {id: 3, name: 'babyClothes'},
                         ],
                     },
                     {
@@ -2506,7 +2506,7 @@ export const categories_list: CategoryType[] = [
                         name: 'homeClothes',
                         parents: [
                             {id: 7, name: 'goods'},
-                            {id: 3, name: 'Детская одежда'},
+                            {id: 3, name: 'babyClothes'},
                         ],
                     },
                     {
@@ -2514,7 +2514,7 @@ export const categories_list: CategoryType[] = [
                         name: 'jumpsuitsBodysuits',
                         parents: [
                             {id: 7, name: 'goods'},
-                            {id: 3, name: 'Детская одежда'},
+                            {id: 3, name: 'babyClothes'},
                         ],
                     },
                     {
@@ -2522,7 +2522,7 @@ export const categories_list: CategoryType[] = [
                         name: 'envelopes',
                         parents: [
                             {id: 7, name: 'goods'},
-                            {id: 3, name: 'Детская одежда'},
+                            {id: 3, name: 'babyClothes'},
                         ],
                     },
                     {
@@ -2530,7 +2530,7 @@ export const categories_list: CategoryType[] = [
                         name: 'underwear',
                         parents: [
                             {id: 7, name: 'goods'},
-                            {id: 3, name: 'Детская одежда'},
+                            {id: 3, name: 'babyClothes'},
                         ],
                     },
                     {
@@ -2538,7 +2538,7 @@ export const categories_list: CategoryType[] = [
                         name: 'footwear',
                         parents: [
                             {id: 7, name: 'goods'},
-                            {id: 3, name: 'Детская одежда'},
+                            {id: 3, name: 'babyClothes'},
                         ],
                     },
                     {
@@ -2546,7 +2546,7 @@ export const categories_list: CategoryType[] = [
                         name: 'blazersAndSuits',
                         parents: [
                             {id: 7, name: 'goods'},
-                            {id: 3, name: 'Детская одежда'},
+                            {id: 3, name: 'babyClothes'},
                         ],
                     },
                     {
@@ -2554,7 +2554,7 @@ export const categories_list: CategoryType[] = [
                         name: 'dressesAndSkirts',
                         parents: [
                             {id: 7, name: 'goods'},
-                            {id: 3, name: 'Детская одежда'},
+                            {id: 3, name: 'babyClothes'},
                         ],
                     },
                     {
@@ -2562,7 +2562,7 @@ export const categories_list: CategoryType[] = [
                         name: 'romperAndUndershirts',
                         parents: [
                             {id: 7, name: 'goods'},
-                            {id: 3, name: 'Детская одежда'},
+                            {id: 3, name: 'babyClothes'},
                         ],
                     },
                     {
@@ -2570,7 +2570,7 @@ export const categories_list: CategoryType[] = [
                         name: 'sweatersHoodies',
                         parents: [
                             {id: 7, name: 'goods'},
-                            {id: 3, name: 'Детская одежда'},
+                            {id: 3, name: 'babyClothes'},
                         ],
                     },
                     {
@@ -2578,7 +2578,7 @@ export const categories_list: CategoryType[] = [
                         name: 'sportswear',
                         parents: [
                             {id: 7, name: 'goods'},
-                            {id: 3, name: 'Детская одежда'},
+                            {id: 3, name: 'babyClothes'},
                         ],
                     },
                     {
@@ -2586,7 +2586,7 @@ export const categories_list: CategoryType[] = [
                         name: 'tShirts',
                         parents: [
                             {id: 7, name: 'goods'},
-                            {id: 3, name: 'Детская одежда'},
+                            {id: 3, name: 'babyClothes'},
                         ],
                     },
                     {
@@ -2594,7 +2594,7 @@ export const categories_list: CategoryType[] = [
                         name: 'pantsAndShorts',
                         parents: [
                             {id: 7, name: 'goods'},
-                            {id: 3, name: 'Детская одежда'},
+                            {id: 3, name: 'babyClothes'},
                         ],
                     },
                     {
@@ -2602,7 +2602,7 @@ export const categories_list: CategoryType[] = [
                         name: 'other',
                         parents: [
                             {id: 7, name: 'goods'},
-                            {id: 3, name: 'Детская одежда'},
+                            {id: 3, name: 'babyClothes'},
                         ],
                     },
                 ],
@@ -2617,7 +2617,7 @@ export const categories_list: CategoryType[] = [
                         name: 'carSeats',
                         parents: [
                             {id: 7, name: 'goods'},
-                            {id: 4, name: 'Товары для детей и игрушки'},
+                            {id: 4, name: 'productsForChildren'},
                         ],
                     },
                     {
@@ -2625,7 +2625,7 @@ export const categories_list: CategoryType[] = [
                         name: 'healthAndCare',
                         parents: [
                             {id: 7, name: 'goods'},
-                            {id: 4, name: 'Товары для детей и игрушки'},
+                            {id: 4, name: 'productsForChildren'},
                         ],
                     },
                     {
@@ -2633,7 +2633,7 @@ export const categories_list: CategoryType[] = [
                         name: 'toysAndGames',
                         parents: [
                             {id: 7, name: 'goods'},
-                            {id: 4, name: 'Товары для детей и игрушки'},
+                            {id: 4, name: 'productsForChildren'},
                         ],
                     },
                     {
@@ -2641,7 +2641,7 @@ export const categories_list: CategoryType[] = [
                         name: 'strollers',
                         parents: [
                             {id: 7, name: 'goods'},
-                            {id: 4, name: 'Товары для детей и игрушки'},
+                            {id: 4, name: 'productsForChildren'},
                         ],
                     },
                     {
@@ -2649,7 +2649,7 @@ export const categories_list: CategoryType[] = [
                         name: 'feedingAndNutrition',
                         parents: [
                             {id: 7, name: 'goods'},
-                            {id: 4, name: 'Товары для детей и игрушки'},
+                            {id: 4, name: 'productsForChildren'},
                         ],
                     },
                     {
@@ -2657,7 +2657,7 @@ export const categories_list: CategoryType[] = [
                         name: 'bathing',
                         parents: [
                             {id: 7, name: 'goods'},
-                            {id: 4, name: 'Товары для детей и игрушки'},
+                            {id: 4, name: 'productsForChildren'},
                         ],
                     },
                     {
@@ -2665,7 +2665,7 @@ export const categories_list: CategoryType[] = [
                         name: 'arrangementNursery',
                         parents: [
                             {id: 7, name: 'goods'},
-                            {id: 4, name: 'Товары для детей и игрушки'},
+                            {id: 4, name: 'productsForChildren'},
                         ],
                     },
                     {
@@ -2673,7 +2673,7 @@ export const categories_list: CategoryType[] = [
                         name: 'diapersAndPots',
                         parents: [
                             {id: 7, name: 'goods'},
-                            {id: 4, name: 'Товары для детей и игрушки'},
+                            {id: 4, name: 'productsForChildren'},
                         ],
                     },
                     {
@@ -2681,7 +2681,7 @@ export const categories_list: CategoryType[] = [
                         name: 'radioAndVideoBabyMonitors',
                         parents: [
                             {id: 7, name: 'goods'},
-                            {id: 4, name: 'Товары для детей и игрушки'},
+                            {id: 4, name: 'productsForChildren'},
                         ],
                     },
                     {
@@ -2689,7 +2689,7 @@ export const categories_list: CategoryType[] = [
                         name: 'productsForMothers',
                         parents: [
                             {id: 7, name: 'goods'},
-                            {id: 4, name: 'Товары для детей и игрушки'},
+                            {id: 4, name: 'productsForChildren'},
                         ],
                     },
                     {
@@ -2697,7 +2697,7 @@ export const categories_list: CategoryType[] = [
                         name: 'goodsForStudy',
                         parents: [
                             {id: 7, name: 'goods'},
-                            {id: 4, name: 'Товары для детей и игрушки'},
+                            {id: 4, name: 'productsForChildren'},
                         ],
                     },
                     {
@@ -2705,7 +2705,7 @@ export const categories_list: CategoryType[] = [
                         name: 'other',
                         parents: [
                             {id: 7, name: 'goods'},
-                            {id: 4, name: 'Товары для детей и игрушки'},
+                            {id: 4, name: 'productsForChildren'},
                         ],
                     },
                 ],
@@ -2720,7 +2720,7 @@ export const categories_list: CategoryType[] = [
                         name: 'cosmetics',
                         parents: [
                             {id: 7, name: 'goods'},
-                            {id: 5, name: 'Хэндмейд'},
+                            {id: 5, name: 'handmade'},
                         ],
                     },
                     {
@@ -2728,7 +2728,7 @@ export const categories_list: CategoryType[] = [
                         name: 'decorations',
                         parents: [
                             {id: 7, name: 'goods'},
-                            {id: 5, name: 'Хэндмейд'},
+                            {id: 5, name: 'handmade'},
                         ],
                     },
                     {
@@ -2736,7 +2736,7 @@ export const categories_list: CategoryType[] = [
                         name: 'dollsAndToys',
                         parents: [
                             {id: 7, name: 'goods'},
-                            {id: 5, name: 'Хэндмейд'},
+                            {id: 5, name: 'handmade'},
                         ],
                     },
                     {
@@ -2744,7 +2744,7 @@ export const categories_list: CategoryType[] = [
                         name: 'interiorDecoration',
                         parents: [
                             {id: 7, name: 'goods'},
-                            {id: 5, name: 'Хэндмейд'},
+                            {id: 5, name: 'handmade'},
                         ],
                     },
                     {
@@ -2752,7 +2752,7 @@ export const categories_list: CategoryType[] = [
                         name: 'accessories',
                         parents: [
                             {id: 7, name: 'goods'},
-                            {id: 5, name: 'Хэндмейд'},
+                            {id: 5, name: 'handmade'},
                         ],
                     },
                     {
@@ -2760,7 +2760,7 @@ export const categories_list: CategoryType[] = [
                         name: 'holidaysDecoration',
                         parents: [
                             {id: 7, name: 'goods'},
-                            {id: 5, name: 'Хэндмейд'},
+                            {id: 5, name: 'handmade'},
                         ],
                     },
                     {
@@ -2768,7 +2768,7 @@ export const categories_list: CategoryType[] = [
                         name: 'chancery',
                         parents: [
                             {id: 7, name: 'goods'},
-                            {id: 5, name: 'Хэндмейд'},
+                            {id: 5, name: 'handmade'},
                         ],
                     },
                     {
@@ -2776,7 +2776,7 @@ export const categories_list: CategoryType[] = [
                         name: 'dishes',
                         parents: [
                             {id: 7, name: 'goods'},
-                            {id: 5, name: 'Хэндмейд'},
+                            {id: 5, name: 'handmade'},
                         ],
                     },
                     {
@@ -2784,7 +2784,7 @@ export const categories_list: CategoryType[] = [
                         name: 'other',
                         parents: [
                             {id: 7, name: 'goods'},
-                            {id: 5, name: 'Хэндмейд'},
+                            {id: 5, name: 'handmade'},
                         ],
                     },
                 ],
