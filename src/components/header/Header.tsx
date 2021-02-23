@@ -1,14 +1,13 @@
 import React, {FC, useEffect} from 'react';
 import Cookies from 'universal-cookie';
 import {i18n, useTranslation} from '@root/i18n';
-import {Container, Modal, Typography} from '@material-ui/core';
+import {Container, Modal} from '@material-ui/core';
 import Top from "./top/TopContainer";
 import Bottom from './bottom/Bottom';
 import {AuthRegPage} from "./auth_reg/AuthRegPage";
 import {useDispatch, useSelector} from "react-redux";
 import {setIsAuthAction, setIsAuthModalOpen} from '@src/redux/slices/authRegSlice';
 import {RootState} from "@src/redux/rootReducer";
-import {ButtonComponent} from "@src/components/elements/button/Button";
 import {fetchLocations} from "@src/redux/slices/locationsSlice";
 import {useStyles} from './useStyles';
 

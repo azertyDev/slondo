@@ -8,7 +8,7 @@ import {PreviewPhotos} from "./preview_photos/PreviewPhotos";
 import {CustomAccordion} from "../accordion/CustomAccordion";
 import {IdNameType} from "@root/interfaces/Post";
 import {useStyles} from './useStyles';
-import { ViewIcon } from '@src/components/elements/icons'
+import {ViewIcon} from '@src/components/elements/icons'
 
 
 type AppearanceFormPropsType = {
@@ -38,7 +38,7 @@ export const AppearanceForm: FC<AppearanceFormPropsType> = (props) => {
 
     const onSubmit = ({files, color}) => {
         const photos = files.filter(({file}) => file);
-        handleSetPost({photos, color});
+        handleSetPost({photos, color_id: color.id});
     };
 
     const formik = useFormik({
