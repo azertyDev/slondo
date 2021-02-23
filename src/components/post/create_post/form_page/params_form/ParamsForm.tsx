@@ -8,14 +8,15 @@ import {
     fieldKeysWithTxt,
     noSelect,
     numericFields,
-    optionKeys
-} from "@src/common_data/form_fields";
-import {isRequired} from "@root/validation_schemas/createPostSchema";
-import {CustomMenu} from "@src/components/elements/custom_menu/CustomMenu";
-import {CustomAccordion} from "../accordion/CustomAccordion";
-import {numberPrettier} from "@src/helpers";
-import {numberRegEx} from "@src/common_data/reg_ex";
-import {useStyles} from "./useStyles";
+    optionKeys,
+} from '@src/common_data/form_fields';
+import { isRequired } from '@root/validation_schemas/createPostSchema'
+import { CustomMenu } from '@src/components/elements/custom_menu/CustomMenu'
+import { CustomAccordion } from '../accordion/CustomAccordion'
+import { numberPrettier } from '@src/helpers'
+import { numberRegEx } from '@src/common_data/reg_ex'
+import { useStyles } from './useStyles'
+import { ParametersIcon } from '@src/components/elements/icons'
 
 
 type ParamsFormPropsType = {
@@ -126,7 +127,7 @@ export const ParamsForm: FC<ParamsFormPropsType> = (props) => {
                     open={open}
                     title={t('parameters')}
                     nextButtonTxt={t('appearance')}
-                    icon='/icons/parameters.svg'
+                    icon={<ParametersIcon />}
                 >
                     <Grid
                         container

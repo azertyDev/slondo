@@ -1,7 +1,7 @@
-import React, { FC, useState, useEffect } from 'react';
-import { Hidden, NativeSelect, Typography } from '@material-ui/core';
-import { SearchIcon, FilterIcon } from '../../icons';
-import { ButtonComponent } from '../../button/Button';
+import React, { FC, useState } from 'react';
+import { Hidden, NativeSelect, Typography } from '@material-ui/core'
+import { FilterIcon } from '../../icons'
+import { ButtonComponent } from '../../button/Button'
 import { useTranslation } from '@root/i18n';
 import { useStyles } from './useStyles';
 
@@ -39,11 +39,7 @@ export const SearchForm: FC = () => {
                 </ButtonComponent>
             </Hidden>
             <Hidden mdUp>
-                <img
-                    src={FilterIcon}
-                    alt="filter icon"
-                    className="filter-icon"
-                />
+               <FilterIcon/>
             </Hidden>
         </form>
     );

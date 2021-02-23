@@ -54,7 +54,7 @@ export const AuctionParams: FC<AuctionParamsPropsType> = (props) => {
                                 name='price'
                                 variant='outlined'
                                 onChange={handleInput}
-                                value={defaultParams.price ?? ''}
+                                value={values.price ?? ''}
                                 className={errors.price && touched.price ? 'error-border' : ''}
                             />
                         </Grid>
@@ -63,7 +63,7 @@ export const AuctionParams: FC<AuctionParamsPropsType> = (props) => {
                             onBlur={handleBlur}
                             items={postType.currency}
                             onClick={handleMenuItem('currency')}
-                            valueName={defaultParams.currency ? defaultParams.currency.name : 'Не выбрано'}
+                            valueName={values.currency ? values.currency.name : 'Не выбрано'}
                         />
                     </Grid>
                 </Grid>

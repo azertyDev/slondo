@@ -8,6 +8,7 @@ import {PreviewPhotos} from "./preview_photos/PreviewPhotos";
 import {CustomAccordion} from "../accordion/CustomAccordion";
 import {IdNameType} from "@root/interfaces/Post";
 import {useStyles} from './useStyles';
+import { ViewIcon } from '@src/components/elements/icons'
 
 
 type AppearanceFormPropsType = {
@@ -71,7 +72,7 @@ export const AppearanceForm: FC<AppearanceFormPropsType> = (props) => {
                 <form onSubmit={handleSubmit}>
                     <CustomAccordion
                         open={open}
-                        icon='/icons/view.svg'
+                        icon={<ViewIcon/>}
                         title={t('appearance')}
                         nextButtonTxt={t('titleDescContacts')}
                     >
