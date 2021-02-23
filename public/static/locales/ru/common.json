@@ -12,6 +12,6 @@
     "Fr": "Пт",
     "Sa": "Сб",
     "Su": "Вс",
-    "cityOrRegionNotFound": "Адрес с таким именем не найден",
+    "cityOrRegionNotFound": "Адрес не найден",
     "choiceLocation": "Выберите местоположение"
 }

@@ -36,8 +36,7 @@ export const CreatePostHeader: FC<AncmntAuctionTopPropsType> = (props) => {
             className={classes.root}
         >
             <Grid item xs={8}>
-                {!isPostTypeStep
-                && <div className='menu-header'>
+                {!isPostTypeStep && <div className='menu-header'>
                     <Link href={backUrl}>
                         <a>
                             <IconButton className="back-btn">

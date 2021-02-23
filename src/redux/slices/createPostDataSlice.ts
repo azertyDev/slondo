@@ -1,7 +1,7 @@
 import {createSlice} from '@reduxjs/toolkit';
 
 type CreatePostDataState = {
-    photos: any[],
+    photo: any,
     params: any,
     defaultParams: {
         category_id: number,
@@ -16,7 +16,7 @@ type CreatePostDataState = {
 };
 
 const initialState: CreatePostDataState = {
-    photos: [],
+    photo: null,
     params: {},
     defaultParams: {
         category_id: null,
@@ -37,9 +37,11 @@ const createPostDataSlice = createSlice({
         setParamsAction: (state, {payload}) => {
             state.params = {...state.params, ...payload};
         },
-        setPhotosAndColorAction: (state, {payload: {photos, color}}) => {
-            state.photos = photos;
-            state.params.color = color;
+        setColorAction: (state, {payload}) => {
+            state.params.color = payload;
+        },
+        setPhotosAction: (state, {payload}) => {
+            state.photo = payload;
         },
         setDefaultParamsAction: (state, {payload}) => {
             state.defaultParams = payload;
@@ -50,7 +52,8 @@ const createPostDataSlice = createSlice({
 export const {
     setParamsAction,
     setDefaultParamsAction,
-    setPhotosAndColorAction,
+    setColorAction,
+    setPhotosAction
 } = createPostDataSlice.actions;
 
 export const createPostDataReducer = createPostDataSlice.reducer;
