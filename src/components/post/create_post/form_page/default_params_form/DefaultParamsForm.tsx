@@ -21,6 +21,7 @@ import {PostType} from "@root/interfaces/Post";
 import {WEEK_DAYS} from "@src/common_data/common";
 import {Router} from "@root/i18n";
 import {useStyles} from './useStyles';
+import { StateIcon } from '@src/components/elements/icons'
 
 
 type PriceDescContactsProps = {
@@ -220,7 +221,7 @@ export const DefaultParamsForm: FC<PriceDescContactsProps> = (props) => {
                     open={open}
                     title={t('titleDescContacts')}
                     nextButtonTxt={t('next')}
-                    icon='/icons/info_icon.svg'
+                    icon={<StateIcon/>}
                 >
                     <div className={classes.root}>
                         <Typography className='title' variant="subtitle1">

@@ -30,3 +30,5 @@ export const MainLayout: FC<MainLayoutPropsType> = ({ children, title = 'SLONDO'
         </>
     )
 }
+
+

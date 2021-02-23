@@ -7,7 +7,7 @@ import {useStyles} from './useStyles';
 type AccordionComponentPropsTypes = {
     isFetch?: boolean;
     open: boolean;
-    icon?: string;
+    icon?: any;
     title: string;
     nextButtonTxt: string;
 };
@@ -27,7 +27,7 @@ export const CustomAccordion: FC<AccordionComponentPropsTypes> = (props) => {
         <div className={classes.root}>
             <Accordion expanded={open}>
                 <AccordionSummary id="panel-header">
-                    <img src={icon} alt="icon"/>
+                    {icon}
                     <Typography variant='h5'>
                         {title}
                     </Typography>
