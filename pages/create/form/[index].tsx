@@ -1,6 +1,6 @@
 import React, {FC} from 'react';
-import {PostFormContainer} from '@src/components/post/create_post/post_form/PostFormContainer';
+import {FormPage} from '@src/components/post/create_post/form_page/FormPage';
 
-const Create: FC = () => <PostFormContainer/>;
+const Create: FC = () => <FormPage/>;
 
 export default Create;

@@ -17,12 +17,12 @@
 
     "parameters": "Parametrlar",
     "appearance": "Tashqi ko'rinish",
-    "priceDescContacts": "Narx, tavsif va aloqa",
+    "titleDescContacts": "E'lon nomi, tavsif va aloqa",
     "next": "Keyingi",
     "postTitle": "E'lon nomi",
-    "price": "Narx",
+    "price": "Narxi",
     "noSelect": "Tanlangan emas",
-    "exampleTitle": "Sarlavhani yozing",
+    "exampleTitle": "Sarlavha nomi",
     "photos": "Rasmlar",
 
     "congratulations": "Tabriklimiz!",

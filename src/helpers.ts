@@ -1,6 +1,6 @@
 import {CategoryType, SubCtgrsType} from "@root/interfaces/Categories";
 import CyrillicToTranslit from 'cyrillic-to-translit-js';
-import {excludedKeys} from "@src/common_data/form_fields_list";
+import {excludedKeys} from "@src/common_data/form_fields";
 import {pnctnMarksRegEx} from "@src/common_data/reg_ex";
 import {TFunction} from "next-i18next";
 import {categories_list} from "@src/common_data/categories_list";
@@ -15,7 +15,7 @@ export const transformTitle = (title: string): string => {
         .replace(/\s+/g, '-');
 };
 
-export const pricePrettier = (price: string): string => {
+export const numberPrettier = (price: string): string => {
     return !!price
         ? price.toString()
             .replace(/\s/g, '')
@@ -67,41 +67,41 @@ export const categoriesListNormalize = (categoryList: CategoryType[]) => (
     })
 );
 
-export const dataForCrtPostNormalize = (data: any) => {
-    if (!!data) {
-        data = Object.keys(data).reduce((acc: any, ctgrName) => {
-            const isExcludedKey = excludedKeys.some(k => k === ctgrName);
-            if (Array.isArray(data[ctgrName]) && !!data[ctgrName].length && ctgrName !== 'manufacturers') {
-                if (ctgrName === 'type') {
-                    acc = {
-                        ...acc,
-                        ...dataForCrtPostNormalize(data[ctgrName][0])
-                    };
-                } else {
-                    acc[ctgrName] = data[ctgrName];
-                    if (ctgrName === 'manufacturer' && data[ctgrName][0].models) {
-                        acc.subCategory = [];
-                    }
-                }
-            } else {
-                if (ctgrName === 'furnished') {
-                    acc[ctgrName] = false;
-                } else if (ctgrName === 'default_param') {
-                    acc = {
-                        ...acc,
-                        ...dataForCrtPostNormalize(data[ctgrName])
-                    };
-                } else if (Number.isInteger(data[ctgrName]) && !isExcludedKey) {
-                    acc[ctgrName] = '';
-                }
-            }
-            return acc;
-        }, {});
-    } else {
-        data = {};
-    }
-    return data
-};
+// export const dataForCrtPostNormalize = (data: any) => {
+//     if (!!data) {
+//         data = Object.keys(data).reduce((acc: any, ctgrName) => {
+//             const isExcludedKey = excludedKeys.some(k => k === ctgrName);
+//             if (Array.isArray(data[ctgrName]) && !!data[ctgrName].length && ctgrName !== 'manufacturers') {
+//                 if (ctgrName === 'type') {
+//                     acc = {
+//                         ...acc,
+//                         ...dataForCrtPostNormalize(data[ctgrName][0])
+//                     };
+//                 } else {
+//                     acc[ctgrName] = data[ctgrName];
+//                     if (ctgrName === 'manufacturer' && data[ctgrName][0].models) {
+//                         acc.subCategory = [];
+//                     }
+//                 }
+//             } else {
+//                 if (ctgrName === 'furnished') {
+//                     acc[ctgrName] = false;
+//                 } else if (ctgrName === 'default_param') {
+//                     acc = {
+//                         ...acc,
+//                         ...dataForCrtPostNormalize(data[ctgrName])
+//                     };
+//                 } else if (Number.isInteger(data[ctgrName]) && !isExcludedKey) {
+//                     acc[ctgrName] = '';
+//                 }
+//             }
+//             return acc;
+//         }, {});
+//     } else {
+//         data = {};
+//     }
+//     return data
+// };
 
 export const categorySearchHelper = (txt: string, categoryList: CategoryType[], t: TFunction): SubCtgrsType[] => {
     return categoryList
@@ -162,16 +162,24 @@ export const categoriesByType = (postType: string): CategoryType[] => {
     }, []);
 };
 
-export const getCategoryByParams = (categories, params, categoryName: string) => {
-    const {subCategory, type} = params;
+export const getCategoriesByParams = (categories, params) => {
+    const {categoryName, subCategoryName, typeName} = params;
     return categories.reduce((acc, ctgry) => {
-        if (categoryName === ctgry.name) {
-            acc.mainCategory = {id: ctgry.id, name: ctgry.name};
-            if (subCategory && ctgry.subCategory) {
-                acc.subCategory = getCategoryByParams(ctgry.subCategory, params, subCategory);
-            }
-            if (type && ctgry.type) {
-                acc.type = getCategoryByParams(ctgry.type, params, type);
+        if (ctgry.name === categoryName) {
+            acc.category = {id: ctgry.id, name: ctgry.name};
+            if (subCategoryName && ctgry.subCategory) {
+                const subCategory = ctgry.subCategory.find(({name}) => name === subCategoryName);
+                if (subCategory) {
+                    const {id, name, type} = subCategory;
+                    acc.subCategory = {id, name};
+                    if (typeName && type) {
+                        const typeCtgr = type.find(({name}) => name === typeName);
+                        if (typeCtgr) {
+                            const {id, name} = typeCtgr;
+                            acc.type = {id, name};
+                        }
+                    }
+                }
             }
         }
         return acc;

@@ -18,11 +18,13 @@ import {ShoppingIcon} from '@src/components/elements/icons/ShoppingIcon';
 import {SettingsIcon} from '@src/components/elements/icons/SettingsIcon';
 import {PowerIcon} from '@src/components/elements/icons/PowerIcon';
 import {useStyles} from './useStyles';
+import Cookies from "universal-cookie";
 
 export const ActionsMenu: FC<any> = (props) => {
+    const cookies = new Cookies();
+    const router = useRouter()
     const {pathname} = useRouter();
     const {t} = props;
-
     const onButtonClick = (url) => () => {
         Router.push(`/cabinet/${url}`);
     };
@@ -212,10 +214,12 @@ export const ActionsMenu: FC<any> = (props) => {
                             {t('cabinet:settings')}
                         </Typography>
                     </ButtonComponent>
+
                     <ButtonComponent
                         className={
                             pathname === '/cabinet/exit' ? 'selected' : ''
                         }
+                        onClick={() => {cookies.remove('token'), router.push('/')}}
                     >
                         <PowerIcon/>
                         <Typography variant="subtitle1">

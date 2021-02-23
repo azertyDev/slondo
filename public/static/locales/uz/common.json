@@ -13,5 +13,7 @@
   "Th": "Pa",
   "Fr": "Ju",
   "Sa": "Sha",
-  "Su": "Ya"
+  "Su": "Ya",
+  "cityOrRegionNotFound": "Bunaqa manzil topilmadi",
+  "choiceLocation": "Manzilni tanlang"
 }

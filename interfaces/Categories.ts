@@ -3,10 +3,26 @@ import {IdNameType} from "@root/interfaces/Post";
 export interface Categories {
     isFetch: boolean;
     error?: unknown;
-    list: CategoryType[];
+    data: CategoriesDataTypes[];
 }
 
+export type CategoriesDataTypes = {
+    id: number;
+    manufactures: [];
+    name: string;
+    defaultParams: {
+        id: number;
+        name: string;
+        adjustable_seats: AdjustableSeats[]
+    }[]
+}[];
+export type AdjustableSeats = {
+    id: number;
+    name: string;
+}[];
+
 export type CategoryType = IdNameType & {
+
     icon: {
         url: string;
     },
@@ -22,4 +38,5 @@ export type SubCategoryType = IdNameType & {
 
 export type SubCtgrsType = IdNameType & {
     parents: IdNameType[]
-};
+
+} & IdNameType

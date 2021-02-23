@@ -15,16 +15,12 @@ export const ArchiveContainer: FC<any> = () => {
         {
             title: 'Объявления',
             count: CabinetMockData.length,
-            component: (
-                <Archive list={CabinetMockData} isFetch />
-            ),
+            component: <Archive list={CabinetMockData} isFetch />
         },
         {
             title: 'Аукционы',
             count: CabinetMockData.length,
-            component: (
-                <Archive list={CabinetMockData} isFetch />
-            ),
+            component: <Archive list={CabinetMockData} isFetch />
         },
     ];
 

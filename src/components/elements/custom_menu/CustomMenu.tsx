@@ -3,7 +3,7 @@ import {Menu, MenuItem, Typography} from "@material-ui/core";
 import {CustomMenuProps} from "@root/interfaces/CustomMenuProps";
 import {ButtonComponent} from "@src/components/elements/button/Button";
 import {isRequired} from "@root/validation_schemas/createPostSchema";
-import {noSelect} from "@src/common_data/form_fields_list";
+import {noSelect} from "@src/common_data/form_fields";
 
 
 export const CustomMenu: FC<CustomMenuProps> = (props) => {
@@ -35,7 +35,7 @@ export const CustomMenu: FC<CustomMenuProps> = (props) => {
                     border: '1px solid #4e4e4e',
                 }}
                 onClick={handleMenuOpen}
-                disabled={!items.length || disabled}
+                disabled={items.length < 2 || disabled}
                 name={props.name}
                 onBlur={onBlur}
             >
