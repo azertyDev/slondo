@@ -15,4 +15,7 @@ export const authRegSchema = object({
 
 export const authRecoverySchema = object({
     phone: string().required(requiredMsg),
+    password_confirmation: string().required(codeMsg)
+        .min(4, minCodeMsg)
+        .max(4, maxCodeMsg)
 });

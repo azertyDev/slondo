@@ -70,7 +70,7 @@ const ConfirmAuth = ({t}) => {
                             />
                             <div className="validation-block">
                                 <Typography variant="subtitle2" className="error-text">
-                                    {errors.password && touched.password ? errors.password : ''}
+                                    {errors.phone && touched.phone ? 'error-border' : ''}
                                 </Typography>
                             </div>
 
