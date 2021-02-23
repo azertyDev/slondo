@@ -9,7 +9,6 @@ import {useDispatch} from "react-redux";
 import {fetchRecovery, fetchTokenRecovery, setIsAuthModalOpen} from "@src/redux/slices/authRegSlice";
 import {authRecoverySchema} from "@root/validation_schemas/authRegSchema";
 import {userAPI} from "@src/api/api";
-import Cookies from "universal-cookie";
 
 
 const initialInputsVals: RecoveryInputs = {
