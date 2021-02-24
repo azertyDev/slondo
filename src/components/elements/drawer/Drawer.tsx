@@ -1,6 +1,6 @@
 import React, {useState} from 'react'
 import Drawer from '@material-ui/core/Drawer'
-import {menu_list_cyrillic} from '@src/common_data/menu_list_cyrillic'
+import {categories_list} from '@src/common_data/categories_list'
 import {InputAdornment, List, ListItem, TextField, Typography} from '@material-ui/core'
 import {useTranslation} from 'i18n'
 import {useStyles} from './useStyles'
@@ -12,6 +12,7 @@ export const CustomDrawer = ({ toggleDrawer, position }) => {
     const classes = useStyles()
     const { t } = useTranslation(["categories"])
     const [subList, setSubList] = useState<any>([])
+    console.warn("subList", subList)
     const list = (anchor) => (
         <div
             className={classes.drawerList}
@@ -31,7 +32,7 @@ export const CustomDrawer = ({ toggleDrawer, position }) => {
             />
             <List>
                 {
-                    menu_list_cyrillic.map((ctgr, i) =>
+                    categories_list.map((ctgr, i) =>
                         <ListItem
                             key={ctgr.id}
                             disableGutters
@@ -79,18 +80,17 @@ export const CustomDrawer = ({ toggleDrawer, position }) => {
             }}>
                 <h1 onClick={() => setSubList([])} style={{cursor: "pointer"}}>X</h1>
                 {subList?.subCategory?.map((ParentItem) => {
-                    console.warn("ParentItem", ParentItem)
                     return (
                         <div key={ParentItem.id}>
                             <Typography variant="h6" gutterBottom color="secondary">
-                                <Link href={`/categories/${transformTitle(ParentItem.parents[0].name)}/${ParentItem.name}`}>
+                                <Link href={`/categories/${transformTitle(ParentItem.ru_name)}`}>
                                     <a>
                                         {t(ParentItem.name)}
                                     </a>
                                 </Link>
                             </Typography>
                             {ParentItem?.type?.map((item) => (
-                                <Link href={`/categories/${ParentItem.parents[0].name}/${item.name}`}>
+                                <Link href={`/categories/${transformTitle(ParentItem.ru_name)}/${transformTitle(item.ru_name)}`}>
                                     <a>
                                         <Typography variant="body2" key={item.id}>
                                             {t(item.name)}

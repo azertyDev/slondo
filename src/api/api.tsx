@@ -4,34 +4,27 @@ import {LocationsDataTypes} from "@root/interfaces/Locations";
 import {CategoryType} from "@root/interfaces/Categories";
 import {InnerCardData} from "@root/interfaces/CardData";
 import Cookies from "universal-cookie";
+import {authChecker} from "@src/helpers";
 
 const cookie = new Cookies()
-
-// const cookies = new Cookies();
-// const {token} = cookies.get('token') || {token: ''};
 
 const uztelecom = 'https://backend.testb.uz/api/';
 const localServer = 'http://192.168.1.60/slondo/public/api/';
 
-const token = cookie.get('token')
-console.warn("token", token)
 
 const instance = Axios.create({
     withCredentials: true,
     baseURL: localServer,
-    headers: {
-        'Content-Type': 'multipart/form-data',
-        'Authorization' : `Token `
-    }
+    headers: authChecker()
+        ? {
+            "Content-Type": "multipart/form-data",
+            Authorization: `Bearer ${cookie.get('token')}`,
+        }
+        : {
+            "Content-Type": "multipart/form-data",
+        },
 });
 
-// const config = {
-//     headers: {
-//         'Content-Type': 'multipart/form-data',
-//         // 'Authorization': `Bearer ${token}`,
-//         "Access-Control-Allow-Origin": "*"
-//     }
-// };
 
 export const userAPI = {
     login: (phone: string, password: string): Promise<unknown> => {
@@ -39,9 +32,7 @@ export const userAPI = {
         form.set('phone', phone);
         form.set('password', password);
         return instance
-            .post(`login`, form, {
-                headers: {'Content-Type': 'multipart/form-data'}
-            })
+            .post(`login`, form)
             .then((res) => res.data)
             .catch((err) => {
                 throw err;
@@ -51,9 +42,7 @@ export const userAPI = {
         const form = new FormData();
         form.set('phone', phone);
         return instance
-            .post(`register`, form, {
-                headers: {'Content-Type': 'multipart/form-data'}
-            })
+            .post(`register`, form)
             .then((res) => res.data)
             .catch((err) => {
                 throw err;
@@ -66,9 +55,7 @@ export const userAPI = {
         form.set('password', password);
         form.set('password_confirmation', password_confirmation);
         return instance
-            .post(`recovery`, form, {
-                headers: {'Content-Type': 'multipart/form-data'}
-            })
+            .post(`recovery`, form)
             .then((res) => res.data)
             .catch((err) => {
                 throw err;
@@ -78,9 +65,7 @@ export const userAPI = {
         const form = new FormData();
         form.set('phone', phone);
         return instance
-            .post(`recoveryRequest`, form, {
-                headers: {'Content-Type': 'multipart/form-data'}
-            })
+            .post(`recoveryRequest`, form)
             .then((res) => res.data)
             .catch((err) => {
                 throw err;
@@ -94,13 +79,11 @@ export const userAPI = {
                 throw err;
             });
     },
-    favoriteAds: (id: number): Promise<unknown> => {
+    favoriteAds: (id): Promise<unknown> => {
         const form = new FormData();
-        form.set('id', id);
+        form.set('ads_id', id);
         return instance
-            .post(`regular/ads/favorite?ads_id=${id}`, form, {
-                headers: {'Content-Type': 'multipart/form-data'}
-            })
+            .post(`regular/ads/favorite`, form)
             .then((res) => res.data)
             .catch((err) => {
                 throw err;

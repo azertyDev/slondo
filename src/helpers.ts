@@ -9,7 +9,7 @@ import Cookies from "universal-cookie";
 const cookie = new Cookies()
 
 export const authChecker = () => {
-    return typeof cookie.get('token') === 'object' ? true : false
+    return typeof cookie.get('token') !== 'undefined' ? true : false
 }
 
 export const transformTitle = (title: string): string => {
