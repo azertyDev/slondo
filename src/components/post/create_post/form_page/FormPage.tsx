@@ -4,26 +4,28 @@ import {i18n, useTranslation} from "@root/i18n";
 import {useDispatch} from "react-redux";
 import {FileType} from "@root/interfaces/Post";
 import {CameraIcon} from "@src/components/elements/icons";
-import {postTypes} from "@src/common_data/post_types_list";
-import {MainLayout} from "@src/components/MainLayout";
-import {ParamsForm} from "./params_form/ParamsForm";
-import {AppearanceForm} from "./appearance_form/AppearanceForm";
-import {DefaultParamsForm} from "./default_params_form/DefaultParamsForm";
-import {setErrorMsgAction} from '@root/src/redux/slices/errorSlice';
-import {getCategoriesByParams} from "@src/helpers";
-import {CreatePostHeader} from "../create_post_header/CreatePostHeader";
-import {categories_list} from "@src/common_data/categories_list";
-import {useStyles} from './useStyles';
-import {userAPI} from "@src/api/api";
+import { postTypes } from '@src/common_data/post_types_list'
+import { MainLayout } from '@src/components/MainLayout'
+import { ParamsForm } from './params_form/ParamsForm'
+import { AppearanceForm } from './appearance_form/AppearanceForm'
+import { DefaultParamsForm } from './default_params_form/DefaultParamsForm'
+import { setErrorMsgAction } from '@root/src/redux/slices/errorSlice'
+import { getCategoriesByParams } from '@src/helpers'
+import { CreatePostHeader } from '../create_post_header/CreatePostHeader'
+import { categories_list } from '@src/common_data/categories_list'
+import { useStyles } from './useStyles'
+import { userAPI } from '@src/api/api'
+import { CarForm } from '@src/components/post/create_post/form_page/car_form/CarForm'
+import { EstateForm } from '@src/components/post/create_post/form_page/estate_form/EstateForm'
 
 
 export const initPhoto: FileType = {
     url: (
-        <div style={{width: '100px', height: '100px', margin: 'auto'}}>
-            <CameraIcon/>
+        <div style={{ width: '100px', height: '100px', margin: 'auto' }}>
+            <CameraIcon />
         </div>
-    )
-};
+    ),
+}
 
 export type DataForCrtPostType = {
     isFetch: boolean;
@@ -104,9 +106,9 @@ export const FormPage: FC = () => {
     const paramsFormByCategory = () => {
         switch (category.name) {
             case 'car':
-                return <h4>Car</h4>;
+                return <CarForm t={t} />
             case 'estate':
-                return <h4>Estate</h4>;
+                return <EstateForm t={t} />
             default:
                 return <ParamsForm
                     t={t}

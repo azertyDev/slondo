@@ -3,7 +3,9 @@ import Axios from 'axios';
 import {LocationsDataTypes} from "@root/interfaces/Locations";
 import {CategoryType} from "@root/interfaces/Categories";
 import {InnerCardData} from "@root/interfaces/CardData";
+import Cookies from "universal-cookie";
 
+const cookie = new Cookies()
 
 // const cookies = new Cookies();
 // const {token} = cookies.get('token') || {token: ''};
@@ -11,9 +13,16 @@ import {InnerCardData} from "@root/interfaces/CardData";
 const uztelecom = 'https://backend.testb.uz/api/';
 const localServer = 'http://192.168.1.60/slondo/public/api/';
 
+const token = cookie.get('token')
+console.warn("token", token)
+
 const instance = Axios.create({
     withCredentials: true,
-    baseURL: localServer
+    baseURL: localServer,
+    headers: {
+        'Content-Type': 'multipart/form-data',
+        'Authorization' : `Token `
+    }
 });
 
 // const config = {
@@ -80,6 +89,18 @@ export const userAPI = {
     recoverySMS: (phone: string, code: string): Promise<unknown> => {
         return instance
             .get(`checkShortCode?phone=${phone}&code=${code}`,)
+            .then((res) => res.data)
+            .catch((err) => {
+                throw err;
+            });
+    },
+    favoriteAds: (id: number): Promise<unknown> => {
+        const form = new FormData();
+        form.set('id', id);
+        return instance
+            .post(`regular/ads/favorite?ads_id=${id}`, form, {
+                headers: {'Content-Type': 'multipart/form-data'}
+            })
             .then((res) => res.data)
             .catch((err) => {
                 throw err;

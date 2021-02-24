@@ -4,7 +4,13 @@ import {excludedKeys} from "@src/common_data/form_fields";
 import {pnctnMarksRegEx} from "@src/common_data/reg_ex";
 import {TFunction} from "next-i18next";
 import {categories_list} from "@src/common_data/categories_list";
+import Cookies from "universal-cookie";
 
+const cookie = new Cookies()
+
+export const authChecker = () => {
+    return typeof cookie.get('token') === 'object' ? true : false
+}
 
 export const transformTitle = (title: string): string => {
     const transform = new CyrillicToTranslit().transform;
