@@ -57,6 +57,7 @@ export type LocationType = {
 export type IdNameType = {
     id: number;
     name: string;
+    ru_name?: string;
 };
 
 export type FileType = {
