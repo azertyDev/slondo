@@ -1,4 +1,4 @@
-import React, {FC} from 'react'
+import React, {FC, useState} from 'react'
 import {Link} from '@root/i18n'
 import {useTranslation} from 'react-i18next'
 import {
@@ -13,6 +13,7 @@ import {
 import Skeleton from '@material-ui/lab/Skeleton'
 import {
     FavoriteIcon,
+    FavoritedIcon,
     DeliveryIcon,
     SafeIcon,
     SwapIcon,
@@ -28,7 +29,7 @@ type CardItemProps = {
 
 export const CardItem: FC<CardItemProps> = (props) => {
     const {t} = useTranslation(['common'])
-
+    const [liked, setLiked] = useState(false)
     const {
         id,
         isFetch,
@@ -52,8 +53,9 @@ export const CardItem: FC<CardItemProps> = (props) => {
     const classes = useStyles({ads_type})
     return (
         <div className={classes.root}>
-            <IconButton className="favorite-btn">
-                <FavoriteIcon id={id}/>
+            <IconButton className="favorite-btn" onClick={() => setLiked(!liked)}>
+                {liked ? <FavoriteIcon id={id}/> :
+                <FavoritedIcon />}
             </IconButton>
             <Link
                 href={`/obyavlenie/${translatedTitle}-${id}-${category.mark}-${sub_category_id ?? ''}`}

@@ -19,7 +19,7 @@ const initialInputsVals: RecoveryInputs = {
 };
 
 const ConfirmAuth = ({t}) => {
-    const [seconds, setSeconds] = useState(60);
+    const [seconds, setSeconds] = useState<any>(60);
     const dispatch = useDispatch();
     const [smsConfirm, setSmsConfirm] = useState(false)
     const [codeChecker, setCodeChecker] = useState(false)
@@ -65,11 +65,11 @@ const ConfirmAuth = ({t}) => {
                             <CustomFormikPasswordField
                                 name="password"
                                 labelText={t('auth_reg:enterNewPassword')}
-                                className={errors.phone && touched.phone ? 'error-border' : ''}
+                                className={errors.password && touched.password ? 'error-border' : ''}
                             />
                             <div className="validation-block">
                                 <Typography variant="subtitle2" className="error-text">
-                                    {errors.phone && touched.phone ? 'error-border' : ''}
+                                    {errors.password && touched.password ? errors.password : ''}
                                 </Typography>
                             </div>
 

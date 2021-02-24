@@ -1,4 +1,4 @@
-import {string, object} from "yup";
+import {string, object, ref} from "yup";
 
 
 const requiredMsg = 'Поле обязательно для заполнения';
@@ -6,6 +6,8 @@ const phoneNumberLength = 'Телефон номер должен быть на�
 const minCharacterMsg = 'Пароль должен быть не менее 6 символов!';
 const minCodeMsg = 'Код должен быть не меньше 4 символов';
 const maxCodeMsg = 'Код должен быть не больше 4 символов';
+const passwordMin = 'Пароль должен быть не меньше 6 символов'
+const passwordMatch = 'Пароль должен совпадать с предыдущим'
 
 export const authRegSchema = object({
     phone: string().required(requiredMsg)
@@ -16,7 +18,10 @@ export const authRegSchema = object({
 
 export const authRecoverySchema = object({
     phone: string().required(requiredMsg),
-    password_confirmation: string().required(requiredMsg)
-        .min(4, minCodeMsg)
-        .max(4, maxCodeMsg)
+    code: string().min(4, minCodeMsg)
+        .max(4, maxCodeMsg),
+    password: string().min(6, passwordMin),
+    password_confirmation: string()
+        .oneOf([ref('password'), null], passwordMatch)
+
 });

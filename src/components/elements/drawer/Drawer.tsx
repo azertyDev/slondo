@@ -1,17 +1,17 @@
 import React, {useState} from 'react'
 import Drawer from '@material-ui/core/Drawer'
-import {categories_list} from '@src/common_data/categories_list'
+import {menu_list_cyrillic} from '@src/common_data/menu_list_cyrillic'
 import {InputAdornment, List, ListItem, TextField, Typography} from '@material-ui/core'
 import {useTranslation} from 'i18n'
 import {useStyles} from './useStyles'
 import {Search_icon} from '@src/components/elements/icons'
 import {Link} from '@root/i18n'
+import {transformTitle} from '@src/helpers'
 
 export const CustomDrawer = ({ toggleDrawer, position }) => {
     const classes = useStyles()
-    const { t } = useTranslation()
-    const [subList, setSubList] = useState([])
-
+    const { t } = useTranslation(["categories"])
+    const [subList, setSubList] = useState<any>([])
     const list = (anchor) => (
         <div
             className={classes.drawerList}
@@ -31,7 +31,7 @@ export const CustomDrawer = ({ toggleDrawer, position }) => {
             />
             <List>
                 {
-                    categories_list.map((ctgr, i) =>
+                    menu_list_cyrillic.map((ctgr, i) =>
                         <ListItem
                             key={ctgr.id}
                             disableGutters
@@ -45,8 +45,7 @@ export const CustomDrawer = ({ toggleDrawer, position }) => {
                                             variant="subtitle1"
                                             color="initial"
                                     >
-
-                                            {t(`categories:${ctgr.name}`)}
+                                            {t(ctgr.name)}
                                     </Typography>
                         </ListItem>
                     )
@@ -66,7 +65,9 @@ export const CustomDrawer = ({ toggleDrawer, position }) => {
                 {list('left')}
             </Drawer>
             <div style={{
-                display: subList.length === 0 ? 'none' : '',
+                display: subList.length === 0 ? 'none' : 'flex',
+                flexDirection: 'column',
+                flexWrap: 'wrap',
                 height: '100vh',
                 width: "100%",
                 background: "white",
@@ -78,14 +79,21 @@ export const CustomDrawer = ({ toggleDrawer, position }) => {
             }}>
                 <h1 onClick={() => setSubList([])} style={{cursor: "pointer"}}>X</h1>
                 {subList?.subCategory?.map((ParentItem) => {
+                    console.warn("ParentItem", ParentItem)
                     return (
                         <div key={ParentItem.id}>
-                            <Typography variant="h6" gutterBottom color="secondary">{ParentItem.name}</Typography>
+                            <Typography variant="h6" gutterBottom color="secondary">
+                                <Link href={`/categories/${transformTitle(ParentItem.parents[0].name)}/${ParentItem.name}`}>
+                                    <a>
+                                        {t(ParentItem.name)}
+                                    </a>
+                                </Link>
+                            </Typography>
                             {ParentItem?.type?.map((item) => (
                                 <Link href={`/categories/${ParentItem.parents[0].name}/${item.name}`}>
                                     <a>
                                         <Typography variant="body2" key={item.id}>
-                                            {item.name}
+                                            {t(item.name)}
                                         </Typography>
                                     </a>
                                 </Link>
