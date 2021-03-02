@@ -1,49 +1,36 @@
-import axios from 'axios';
+import Axios from 'axios';
 import {LocationsDataTypes} from "@root/interfaces/Locations";
 import {CategoryType} from "@root/interfaces/Categories";
 import {FavoriteType} from "@root/interfaces/Favorites";
 import {InnerCardData} from "@root/interfaces/CardData";
 import {AuctionsDataTypes} from "@root/interfaces/Auctions";
 import Cookies from "universal-cookie";
-import {authChecker} from "@src/helpers";
+
 
 const cookie = new Cookies()
-
 
 const uztelecom = 'https://backend.testb.uz/api/';
 const localServer = 'http://192.168.1.60/slondo/public/api/';
 
 
-export const defaultOptions = () => {
-    const token = cookie.get('token');
-    const config = {
-        baseURL: localServer,
-        headers: {
-            "Content-Type": "multipart/form-data",
-        },
-    };
-    if (token) {
-        config.headers["Authorization"] = `Bearer ${token}`;
-    }
-    return config;
-};
-
-const gnrapi = () => axios.create(defaultOptions());
-
-export let instance = gnrapi();
-
-export const rgnrapi = () => (instance = gnrapi());
-
-const setToken = (token) => ({
-    headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${token}`,
-    }
+const instance = Axios.create({
+    withCredentials: true,
+    baseURL: uztelecom
 });
+
+export const setToken = () => {
+    const token = cookie.get('token');
+    return {
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`,
+        }
+    }
+};
 
 
 export const userAPI = {
-    login: (phone: string, password: string): Promise<unknown> => {
+    login: (phone: string, password: string): Promise<{ token:string }> => {
         const form = new FormData();
         form.set('phone', phone);
         form.set('password', password);
@@ -158,21 +145,21 @@ export const userAPI = {
                 throw err
             });
     },
-    createPost: (values: any, token: string): Promise<string> => {
-        return instance.post(`regular/ads/new`, values, setToken(token))
+    createPost: (values: any): Promise<string> => {
+        return instance.post(`regular/ads/new`, values, setToken())
             .then(res => res.data)
             .catch(err => {
                 throw err
             });
     },
-    uploadPhotos: (form: FormData, token): Promise<any> => {
-        return instance.post(`regular/ads/imageUpload`, form, setToken(token))
+    uploadPhotos: (form: FormData): Promise<any> => {
+        return instance.post(`regular/ads/imageUpload`, form, setToken())
             .then(res => res.data)
             .catch(err => {
                 throw err
             });
     },
-    getAncmntsTypes: (lang: string): Promise<any> => {
+    getPostsTypes: (lang: string): Promise<any> => {
         return instance.get(`ads/type?lang=${lang}`)
             .then(res => res.data)
             .catch(err => {
@@ -183,7 +170,7 @@ export const userAPI = {
         const form = new FormData();
         form.set('auction_id', id);
         form.set('bet', bet);
-        return instance.post(`regular/auction/nextBet`, form)
+        return instance.post(`regular/auction/nextBet`, form, setToken())
             .then(res => res.data)
             .catch(err => {
                 throw err

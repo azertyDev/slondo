@@ -2,13 +2,13 @@ import {createAsyncThunk, createSlice} from '@reduxjs/toolkit';
 import {userAPI} from "@src/api/api";
 import Cookies from "universal-cookie";
 import {AuthInputs, AuthReg, RecoveryInputs} from "@root/interfaces/Auth";
-import {rgnrapi} from "@src/api/api";
+
 
 const cookies = new Cookies();
 
 const initialState: AuthReg = {
     isFetch: false,
-    isAuth: typeof cookies.get('token') !== 'undefined' ? true : false,
+    isAuth: typeof cookies.get('token') !== 'undefined',
     error: null,
     isAuthModalOpen: false
 };
@@ -18,12 +18,8 @@ export const fetchTokenLogin = createAsyncThunk<never, AuthInputs>(
     'authReg/fetchTokenByLogin',
     async ({phone, password}, {rejectWithValue}) => {
         try {
-            const tokenObj = await userAPI.login(phone, password);
-            // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-            // @ts-ignore
-            const token = tokenObj?.token
+            const {token} = await userAPI.login(phone, password);
             cookies.set('token', token, {maxAge: 2 * 3600});
-            rgnrapi();
         } catch (e) {
             return rejectWithValue(e.message);
         }

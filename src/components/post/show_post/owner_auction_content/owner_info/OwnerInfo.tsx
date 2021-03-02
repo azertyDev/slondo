@@ -23,7 +23,7 @@ export const OwnerInfo: FC<any> = ({phone, safe_deal}) => {
                 <ButtonComponent color="primary" onClick={handleShowPhone}>
                     <Typography variant="subtitle1" color="initial">
                         {isPhoneAval
-                            ? phone ?? 'default'
+                            ? phone || 'default'
                             : 'Показать номер'}
                     </Typography>
                 </ButtonComponent>
