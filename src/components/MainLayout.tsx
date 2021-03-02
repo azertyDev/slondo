@@ -24,6 +24,7 @@ export const MainLayout: FC<MainLayoutPropsType> = ({ children, title = 'SLONDO'
                     style={{ paddingTop: '48px', position: 'relative' }}
                 >
                     {children}
+                    <AdditionalComponent />
                 </Container>
             </main>
             <Footer />

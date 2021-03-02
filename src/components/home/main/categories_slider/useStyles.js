@@ -1,4 +1,4 @@
-import {makeStyles} from '@material-ui/core/styles';
+import { makeStyles } from '@material-ui/core/styles'
 
 export const useStyles = makeStyles((theme) => ({
     root: {
@@ -55,6 +55,11 @@ export const useStyles = makeStyles((theme) => ({
                         fontSize: '1.125rem',
                     },
                     '& div.bg-layer': {
+                        width: '140px',
+                        height: '140px',
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
                         marginBottom: '20px',
                         background:
                             'linear-gradient(90deg, #f0f0f0 0%, #eaeaeb 67.06%, #e4e4e6 100%)',
@@ -68,8 +73,8 @@ export const useStyles = makeStyles((theme) => ({
                         borderRadius: '100px',
                         '& > img': {
                             height: '100%',
-                            objectFit: 'contain'
-                        }
+                            objectFit: 'contain',
+                        },
                     }
                 }
             }

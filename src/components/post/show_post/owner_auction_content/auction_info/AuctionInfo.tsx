@@ -29,7 +29,7 @@ export const AuctionInfo: FC<any> = (props) => {
 
     const handleSubmit = (value) => {
         userAPI.betAuction(value)
-            .then(result => result && userAPI.getAuctionBets(data.auction.id, 1 )
+            .then(result => result && userAPI.getAuctionBets(data.auction.id, 1)
                 .then(result => {
                     setLastPage(result.last_page);
                     setList(result.data)
@@ -65,8 +65,10 @@ export const AuctionInfo: FC<any> = (props) => {
                     {date !== 0 && <AuctionTimer date={date}/>}
                 </div>}
                 <div className="lot-participants-block">
-                    <Typography variant="subtitle1" color="initial"
-                                style={{display: 'flex', justifyContent: 'space-between'}}>
+                    <Typography
+                        variant="subtitle1" color="initial"
+                        style={{display: 'flex', justifyContent: 'space-between'}}
+                    >
                         <div>
                             Текущие ставки
                         </div>
@@ -77,7 +79,8 @@ export const AuctionInfo: FC<any> = (props) => {
                     <div
                         className="participants"
                         style={{height: showAll ? 400 : 200, overflow: showAll ? "auto" : "hidden"}}
-                        onScroll={handleScroll}>
+                        onScroll={handleScroll}
+                    >
                         <ul>
                             {list && list?.map((item) => (
                                 <li key={item?.id}>

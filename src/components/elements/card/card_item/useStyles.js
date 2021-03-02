@@ -4,11 +4,11 @@ export const useStyles = makeStyles((theme) => ({
     root: {
         position: 'relative',
         height: '345px',
-        transition: 'all 0.4s ease 0s',
-        '&:hover': {
-            transform: 'translate(0px, -8px)',
-            // boxShadow: 'rgb(24 24 24 / 50%) 0px 10px 40px -10px',
-        },
+        // transition: 'all 0.4s ease 0s',
+        // '&:hover': {
+        //     transform: 'translate(0px, -8px)',
+        // boxShadow: 'rgb(24 24 24 / 50%) 0px 10px 40px -10px',
+        // },
         '& a': {
             textDecoration: 'none',
         },

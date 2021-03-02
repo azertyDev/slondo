@@ -78,7 +78,7 @@ export const Main: FC = () => {
                                     >
                                         <div>
                                             <Typography variant="h6">
-                                                {t('common:createAncmnt')}
+                                                {t('header:createPost')}
                                             </Typography>
                                         </div>
                                     </Slide>

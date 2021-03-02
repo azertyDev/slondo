@@ -19,6 +19,11 @@ export const useStyles = makeStyles((theme) => ({
             backgroundSize: 'cover',
             borderTopLeftRadius: '10px',
             borderBottomLeftRadius: '10px',
+            '& svg': {
+                marginRight: 20,
+                width: '70px',
+                height: '40px',
+            },
             '& h6.MuiTypography-root': {
                 lineHeight: '14px',
                 color: '#fff',
@@ -60,9 +65,7 @@ export const useStyles = makeStyles((theme) => ({
                 justifyContent: 'center',
                 '& > button.MuiIconButton-root': {
                     padding: '5px',
-                    '& svg > path': {
-                        // fill: '#EB5757',
-                    },
+
                 },
                 '&:hover': {
                     cursor: 'pointer',

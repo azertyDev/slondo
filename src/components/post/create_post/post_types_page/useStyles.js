@@ -5,6 +5,13 @@ export const useStyles = makeStyles((theme) => ({
         marginBottom: '30px',
         '& div.MuiGrid-item': {
             '& > a': {
+                '&.post': {
+                    background: 'linear-gradient(49.94deg, #dcf3fc 19.03%, #a9bdf2 72.72%)',
+                },
+                '&.auc': {
+                    background: 'linear-gradient(49.94deg, #c18dde 19.03%, #8880c9 72.72%)',
+                },
+                '&.exauc': {},
                 height: '613px',
                 display: 'flex',
                 marginBottom: 30,
@@ -14,12 +21,21 @@ export const useStyles = makeStyles((theme) => ({
                 borderRadius: '25px',
                 boxShadow: '0px 2px 8px rgba(0, 0, 0, 0.2)',
                 textDecoration: 'none',
-                background: 'linear-gradient(49.94deg, #dcf3fc 19.03%, #a9bdf2 72.72%)',
-                '& > div.card-bg': {
-                    textAlign: 'center',
-                    height: '100%',
+                '& > div.post': {
                     backgroundPosition: 'bottom',
                     backgroundRepeat: 'no-repeat',
+                },
+                '& > div.auc': {
+                    backgroundPosition: '0px 300px',
+                    backgroundRepeat: 'no-repeat',
+                },
+                '& > div.exauc': {
+                    backgroundPosition: 'center',
+                    backgroundRepeat: 'no-repeat',
+                },
+                '& > div': {
+                    textAlign: 'center',
+                    height: '100%',
                     backgroundSize: 'contain',
                     '& h6.MuiTypography-subtitle1': {
                         marginTop: '35px',

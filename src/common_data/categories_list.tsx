@@ -57,10 +57,10 @@ export const categories_list: CategoryType[] = [
                     {
                         id: 1,
                         name: 'car',
-                    },
-                ],
-            },
-        ],
+                    }
+                ]
+            }
+        ]
     },
     {
         id: 2,
@@ -396,7 +396,6 @@ export const categories_list: CategoryType[] = [
                 name: 'forCars',
                 ru_name: 'Для легковых автомобилей',
                 parents: [{ id: 3, name: 'parts' }],
-                type: [],
             },
             {
                 id: 2,
@@ -712,28 +711,24 @@ export const categories_list: CategoryType[] = [
                 name: 'housesCottages',
                 ru_name: 'Дома, дачи, коттеджи',
                 parents: [{ id: 4, name: 'estate' }],
-                type: [],
             },
             {
                 id: 3,
                 name: 'land',
                 ru_name: 'Земельные участки',
                 parents: [{ id: 4, name: 'estate' }],
-                type: [],
             },
             {
                 id: 4,
                 name: 'parkingLotsAndBoxes',
                 ru_name: 'Подземные стоянки и боксы',
                 parents: [{ id: 4, name: 'estate' }],
-                type: [],
             },
             {
                 id: 5,
                 name: 'commercialProperty',
                 ru_name: 'Коммерческая недвижимость',
                 parents: [{ id: 4, name: 'estate' }],
-                type: [],
             },
         ],
     },
@@ -3441,7 +3436,6 @@ export const categories_list: CategoryType[] = [
                 name: 'food',
                 ru_name: 'Продукты питания',
                 parents: [{ id: 8, name: 'home' }],
-                type: [],
             },
             {
                 id: 4,
@@ -4419,14 +4413,12 @@ export const categories_list: CategoryType[] = [
                 name: 'videoFilms',
                 ru_name: 'Видеофильмы',
                 parents: [{ id: 10, name: 'hobbies' }],
-                type: [],
             },
             {
                 id: 4,
                 name: 'booksAndMagazines',
                 ru_name: 'Книги и журналы',
                 parents: [{ id: 10, name: 'hobbies' }],
-                type: [],
             },
             {
                 id: 5,
@@ -4711,14 +4703,12 @@ export const categories_list: CategoryType[] = [
                 name: 'materialsForCreativity',
                 ru_name: 'Материалы для творчества',
                 parents: [{ id: 10, name: 'hobbies' }],
-                type: [],
             },
             {
                 id: 7,
                 name: 'music',
                 ru_name: 'Музыка',
                 parents: [{ id: 10, name: 'hobbies' }],
-                type: [],
             },
             {
                 id: 8,
@@ -4859,7 +4849,6 @@ export const categories_list: CategoryType[] = [
                 name: 'boardGames',
                 ru_name: 'Настольные игры',
                 parents: [{ id: 10, name: 'hobbies' }],
-                type: [],
             },
         ],
     },

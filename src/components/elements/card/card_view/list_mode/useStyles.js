@@ -108,20 +108,26 @@ export const useStyles = makeStyles((theme) => ({
                                     lineHeight: '20px',
                                     color: '#838383',
                                 },
-                                '& > a': {
-                                    marginLeft: '7px',
-                                    '&.favorite-icon': {
-                                        '& svg': {
-                                            '& defs': {
-                                                '& linearGradient': {
-                                                    '& > stop': {
-                                                        '&:first-child': {
-                                                            stopColor:
-                                                                '#675EAA !important',
-                                                        },
-                                                        '&:last-child': {
-                                                            stopColor:
-                                                                '#AD66D5',
+                                '&.favorite': {
+                                    background: '#F5F5F5',
+                                    boxShadow: '0px 1px 2px rgba(0, 0, 0, 0.15)',
+                                    borderRadius: '10px 0px 10px 10px',
+                                    padding: 10,
+                                    '& > a': {
+                                        marginLeft: '7px',
+                                        '&.favorite-icon': {
+                                            '& svg': {
+                                                '& defs': {
+                                                    '& linearGradient': {
+                                                        '& > stop': {
+                                                            '&:first-child': {
+                                                                stopColor:
+                                                                    '#675EAA !important',
+                                                            },
+                                                            '&:last-child': {
+                                                                stopColor:
+                                                                    '#AD66D5',
+                                                            },
                                                         },
                                                     },
                                                 },

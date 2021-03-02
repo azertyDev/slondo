@@ -39,8 +39,8 @@ export const CustomDrawer: FC<any> = ({toggleDrawer, position}) => {
             <List>
                 {categories_list.map(({id, name, smallIcon, subCategory}) =>
                     <ListItem
-                        button
                         key={id}
+                        button
                         disableGutters
                         onMouseEnter={handleSubCategory(subCategory)}
                     >
@@ -84,22 +84,20 @@ export const CustomDrawer: FC<any> = ({toggleDrawer, position}) => {
                 }}
             >
                 <h1 onClick={() => setSubCategory([])} style={{cursor: "pointer"}}>X</h1>
-                {
-                    subCategory.map(ParentItem =>
-                        <div key={ParentItem.id}>
-                            <Typography variant="h6" gutterBottom color="secondary">{ParentItem.name}</Typography>
-                            {ParentItem?.type?.map(item =>
-                                <Link href={`/categories/${ParentItem.parents[0].name}/${item.name}`}>
-                                    <a>
-                                        <Typography variant="body2" key={item.id}>
-                                            {item.name}
-                                        </Typography>
-                                    </a>
-                                </Link>
-                            )}
-                        </div>
-                    )
-                }
+                {subCategory.map((ParentItem) =>
+                    <div key={ParentItem.id}>
+                        <Typography variant="h6" gutterBottom color="secondary">{ParentItem.name}</Typography>
+                        {ParentItem?.type?.map(item =>
+                            <Link key={item.id} href={`/categories/${ParentItem.parents[0].name}/${item.name}`}>
+                                <a>
+                                    <Typography variant="body2" key={item.id}>
+                                        {item.name}
+                                    </Typography>
+                                </a>
+                            </Link>
+                        )}
+                    </div>
+                )}
             </div>
         </div>
     )

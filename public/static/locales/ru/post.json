@@ -141,5 +141,21 @@
     "buyNow": "Купить сейчас",
     "autoRenewal": "Авто продление",
     "offerPrice": "Предложить цену",
-    "displayPhone": "Показывать свой номер"
+    "displayPhone": "Показывать свой номер",
+
+    "position": "позиция",
+    "furnished": "Меблирована",
+    "living_area:": "Жилая площадь, м2",
+    "kitchen_area": "Площадь кухни, м2",
+    "number_of_floors:": "Этажность дома",
+    "floor": "Этаж",
+    "payments": "Предоплата",
+    "posted": "кто разместил",
+    "area": "площадь",
+    "general_area": "Общая площадь",
+    "ceiling_height": "Высота потолка",
+    "number_of_bedrooms": "Количество комнат",
+    "land_area": "Площадь участка в сот.",
+    "land": "Земельные участки + аренда",
+    "engine_capacity": "Объем двигателя см3"
 }
