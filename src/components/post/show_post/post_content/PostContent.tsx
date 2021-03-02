@@ -143,15 +143,8 @@ export const PostContent: FC<WithT & any> = (props) => {
         <div className={classes.root}>
             <div className="breadcrumbs">
                 <BreadcrumbsComponent>
-                    <Link href="#">
-                        <a>
-                            <Typography variant="subtitle1" noWrap>
-                                {data.category.name}
-                            </Typography>
-                        </a>
-                    </Link>
                     {data.category.sub_category.length
-                    && <Link href="#">
+                    && <Link href={`/categories/${data.category.mark}`}>
                         <a>
                             <Typography variant="subtitle1" noWrap>
                                 {data.category.sub_category[0].name}

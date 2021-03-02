@@ -7,7 +7,7 @@ import {Form, FormikProvider, useFormik} from "formik";
 import {CustomFormikField} from "../custom_formik_field/CustomFormikField";
 import {ButtonComponent} from "../button/Button";
 import {RootState} from "@src/redux/rootReducer";
-import {fetchTokenLogin, fetchTokenRegister, fetchRecovery} from "@src/redux/slices/authRegSlice";
+import {fetchTokenLogin, fetchTokenRegister} from "@src/redux/slices/authRegSlice";
 import {AuthInputs} from "@root/interfaces/Auth";
 import {WithT} from "i18next";
 import {useStyles} from './useStyles';

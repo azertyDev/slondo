@@ -1,16 +1,38 @@
-import Axios from 'axios';
+import axios from 'axios';
 import {LocationsDataTypes} from "@root/interfaces/Locations";
 import {CategoryType} from "@root/interfaces/Categories";
+import {FavoriteType} from "@root/interfaces/Favorites";
 import {InnerCardData} from "@root/interfaces/CardData";
+import {AuctionsDataTypes} from "@root/interfaces/Auctions";
+import Cookies from "universal-cookie";
+import {authChecker} from "@src/helpers";
+
+const cookie = new Cookies()
 
 
 const uztelecom = 'https://backend.testb.uz/api/';
 const localServer = 'http://192.168.1.60/slondo/public/api/';
 
-const instance = Axios.create({
-    withCredentials: true,
-    baseURL: uztelecom
-});
+
+export const defaultOptions = () => {
+    const token = cookie.get('token');
+    const config = {
+        baseURL: localServer,
+        headers: {
+            "Content-Type": "multipart/form-data",
+        },
+    };
+    if (token) {
+        config.headers["Authorization"] = `Bearer ${token}`;
+    }
+    return config;
+};
+
+const gnrapi = () => axios.create(defaultOptions());
+
+export let instance = gnrapi();
+
+export const rgnrapi = () => (instance = gnrapi());
 
 const setToken = (token) => ({
     headers: {
@@ -19,15 +41,14 @@ const setToken = (token) => ({
     }
 });
 
+
 export const userAPI = {
     login: (phone: string, password: string): Promise<unknown> => {
         const form = new FormData();
         form.set('phone', phone);
         form.set('password', password);
         return instance
-            .post(`login`, form, {
-                headers: {'Content-Type': 'multipart/form-data'}
-            })
+            .post(`login`, form)
             .then((res) => res.data)
             .catch((err) => {
                 throw err;
@@ -37,9 +58,7 @@ export const userAPI = {
         const form = new FormData();
         form.set('phone', phone);
         return instance
-            .post(`register`, form, {
-                headers: {'Content-Type': 'multipart/form-data'}
-            })
+            .post(`register`, form)
             .then((res) => res.data)
             .catch((err) => {
                 throw err;
@@ -52,9 +71,7 @@ export const userAPI = {
         form.set('password', password);
         form.set('password_confirmation', password_confirmation);
         return instance
-            .post(`recovery`, form, {
-                headers: {'Content-Type': 'multipart/form-data'}
-            })
+            .post(`recovery`, form)
             .then((res) => res.data)
             .catch((err) => {
                 throw err;
@@ -64,9 +81,7 @@ export const userAPI = {
         const form = new FormData();
         form.set('phone', phone);
         return instance
-            .post(`recoveryRequest`, form, {
-                headers: {'Content-Type': 'multipart/form-data'}
-            })
+            .post(`recoveryRequest`, form)
             .then((res) => res.data)
             .catch((err) => {
                 throw err;
@@ -80,6 +95,24 @@ export const userAPI = {
                 throw err;
             });
     },
+    favoriteAds: (id): Promise<unknown> => {
+        const form = new FormData();
+        form.set('ads_id', id);
+        return instance
+            .post(`regular/ads/favorite`, form)
+            .then((res) => res.data)
+            .catch((err) => {
+                throw err;
+            });
+    },
+    getFavorites: (lang: string, lot: string): Promise<FavoriteType[]> => {
+        return instance.get(`regular/ads/get/favorites?type=${lot}&lang=${lang}`)
+            .then(res => res.data)
+            .catch(err => {
+                throw err
+            });
+    },
+
     getCategories: (lang: string): Promise<CategoryType[]> => {
         return instance.get(`categories/all?lang=${lang}`)
             .then(res => res.data)
@@ -141,6 +174,23 @@ export const userAPI = {
     },
     getAncmntsTypes: (lang: string): Promise<any> => {
         return instance.get(`ads/type?lang=${lang}`)
+            .then(res => res.data)
+            .catch(err => {
+                throw err
+            });
+    },
+    betAuction: ({bet, id}: any): Promise<AuctionsDataTypes> => {
+        const form = new FormData();
+        form.set('auction_id', id);
+        form.set('bet', bet);
+        return instance.post(`regular/auction/nextBet`, form)
+            .then(res => res.data)
+            .catch(err => {
+                throw err
+            });
+    },
+    getAuctionBets: (id: string, page: number): Promise<any> => {
+        return instance.get(`auction/allBets?auction_id=${id}&page=${page}&per_page=25`)
             .then(res => res.data)
             .catch(err => {
                 throw err

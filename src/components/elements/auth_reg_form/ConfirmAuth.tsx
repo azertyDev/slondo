@@ -9,7 +9,6 @@ import {useDispatch} from "react-redux";
 import {fetchRecovery, fetchTokenRecovery, setIsAuthModalOpen} from "@src/redux/slices/authRegSlice";
 import {authRecoverySchema} from "@root/validation_schemas/authRegSchema";
 import {userAPI} from "@src/api/api";
-import Cookies from "universal-cookie";
 
 
 const initialInputsVals: RecoveryInputs = {
@@ -21,7 +20,6 @@ const initialInputsVals: RecoveryInputs = {
 
 const ConfirmAuth = ({t}) => {
     const dispatch = useDispatch();
-
     const [seconds, setSeconds] = useState<any>(60);
     const [smsConfirm, setSmsConfirm] = useState(false)
     const [codeChecker, setCodeChecker] = useState(false)
@@ -36,6 +34,7 @@ const ConfirmAuth = ({t}) => {
 
 
     const confirmMsg = (values) => {
+
         if (codeChecker) {
             dispatch(fetchTokenRecovery(values));
             dispatch(setIsAuthModalOpen(false));
@@ -69,7 +68,7 @@ const ConfirmAuth = ({t}) => {
                             <CustomFormikPasswordField
                                 name="password"
                                 labelText={t('auth_reg:enterNewPassword')}
-                                className={errors.phone && touched.phone ? 'error-border' : ''}
+                                className={errors.password && touched.password ? 'error-border' : ''}
                             />
                             <div className="validation-block">
                                 <Typography variant="subtitle2" className="error-text">
