@@ -1,23 +1,30 @@
 import Axios from 'axios';
+// import Cookies from 'universal-cookie';
 import {LocationsDataTypes} from "@root/interfaces/Locations";
 import {CategoryType} from "@root/interfaces/Categories";
 import {InnerCardData} from "@root/interfaces/CardData";
+import Cookies from "universal-cookie";
+import {authChecker} from "@src/helpers";
 
+const cookie = new Cookies()
 
 const uztelecom = 'https://backend.testb.uz/api/';
 const localServer = 'http://192.168.1.60/slondo/public/api/';
 
+
 const instance = Axios.create({
     withCredentials: true,
-    baseURL: uztelecom
+    baseURL: localServer,
+    headers: authChecker()
+        ? {
+            "Content-Type": "multipart/form-data",
+            Authorization: `Bearer ${cookie.get('token')}`,
+        }
+        : {
+            "Content-Type": "multipart/form-data",
+        },
 });
 
-const setToken = (token) => ({
-    headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${token}`,
-    }
-});
 
 export const userAPI = {
     login: (phone: string, password: string): Promise<unknown> => {
@@ -25,9 +32,7 @@ export const userAPI = {
         form.set('phone', phone);
         form.set('password', password);
         return instance
-            .post(`login`, form, {
-                headers: {'Content-Type': 'multipart/form-data'}
-            })
+            .post(`login`, form)
             .then((res) => res.data)
             .catch((err) => {
                 throw err;
@@ -37,9 +42,7 @@ export const userAPI = {
         const form = new FormData();
         form.set('phone', phone);
         return instance
-            .post(`register`, form, {
-                headers: {'Content-Type': 'multipart/form-data'}
-            })
+            .post(`register`, form)
             .then((res) => res.data)
             .catch((err) => {
                 throw err;
@@ -52,9 +55,7 @@ export const userAPI = {
         form.set('password', password);
         form.set('password_confirmation', password_confirmation);
         return instance
-            .post(`recovery`, form, {
-                headers: {'Content-Type': 'multipart/form-data'}
-            })
+            .post(`recovery`, form)
             .then((res) => res.data)
             .catch((err) => {
                 throw err;
@@ -64,9 +65,7 @@ export const userAPI = {
         const form = new FormData();
         form.set('phone', phone);
         return instance
-            .post(`recoveryRequest`, form, {
-                headers: {'Content-Type': 'multipart/form-data'}
-            })
+            .post(`recoveryRequest`, form)
             .then((res) => res.data)
             .catch((err) => {
                 throw err;
@@ -75,6 +74,16 @@ export const userAPI = {
     recoverySMS: (phone: string, code: string): Promise<unknown> => {
         return instance
             .get(`checkShortCode?phone=${phone}&code=${code}`,)
+            .then((res) => res.data)
+            .catch((err) => {
+                throw err;
+            });
+    },
+    favoriteAds: (id): Promise<unknown> => {
+        const form = new FormData();
+        form.set('ads_id', id);
+        return instance
+            .post(`regular/ads/favorite`, form)
             .then((res) => res.data)
             .catch((err) => {
                 throw err;
@@ -125,15 +134,8 @@ export const userAPI = {
                 throw err
             });
     },
-    createPost: (values: any, token: string): Promise<string> => {
-        return instance.post(`regular/ads/new`, values, setToken(token))
-            .then(res => res.data)
-            .catch(err => {
-                throw err
-            });
-    },
-    uploadPhotos: (form: FormData, token): Promise<any> => {
-        return instance.post(`regular/ads/imageUpload`, form, setToken(token))
+    createPost: (values: any): Promise<LocationsDataTypes> => {
+        return instance.post(`regular/ads/new`, values)
             .then(res => res.data)
             .catch(err => {
                 throw err
@@ -146,4 +148,11 @@ export const userAPI = {
                 throw err
             });
     },
+    uploadPhotos: (form: FormData): Promise<any> => {
+        return instance.post(`regular/ads/imageUpload`, form)
+            .then(res => res.data)
+            .catch(err => {
+                throw err
+            });
+    }
 };

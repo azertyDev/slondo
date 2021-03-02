@@ -25,6 +25,7 @@ export type CategoryType = IdNameType & {
     icon: {
         url: string;
     },
+    ru_name: string;
     smallIcon: any;
     subCategory?: SubCategoryType[];
     has_auction: boolean;

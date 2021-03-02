@@ -8,7 +8,7 @@ const cookies = new Cookies();
 
 const initialState: AuthReg = {
     isFetch: false,
-    isAuth: typeof cookies.get('token') === 'object' && cookies.get('token') !== null ? true : false,
+    isAuth: typeof cookies.get('token') !== 'undefined' ? true : false,
     error: null,
     isAuthModalOpen: false
 };
@@ -18,7 +18,9 @@ export const fetchTokenLogin = createAsyncThunk<never, AuthInputs>(
     'authReg/fetchTokenByLogin',
     async ({phone, password}, {rejectWithValue}) => {
         try {
-            const token = await userAPI.login(phone, password);
+            const tokenObj = await userAPI.login(phone, password);
+            const token = tokenObj?.token
+            console.warn("token44", token)
             cookies.set('token', token, {maxAge: 2 * 3600});
         } catch (e) {
             return rejectWithValue(e.message);
@@ -51,7 +53,8 @@ export const fetchTokenRecovery = createAsyncThunk<never, RecoveryInputs>(
     'authReg/fetchTokenByLogin',
     async ({phone, code, password, password_confirmation}, {rejectWithValue}) => {
         try {
-            const token = await userAPI.recovery(phone, code, password, password_confirmation);
+            const tokenObj = await userAPI.recovery(phone, code, password, password_confirmation);
+            const token = tokenObj?.token
             cookies.set('token', token, {maxAge: 2 * 3600});
         } catch (e) {
             return rejectWithValue(e.message);

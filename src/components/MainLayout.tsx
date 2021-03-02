@@ -4,6 +4,7 @@ import { Header } from './header/Header'
 import { Footer } from './footer/Footer'
 import { Container } from '@material-ui/core'
 import { ErrorModal } from '@src/components/error_modal/ErrorModal'
+import { AdditionalComponent } from '@src/components/elements/additional/AdditionalComponent'
 
 
 type MainLayoutPropsType = {

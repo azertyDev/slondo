@@ -1,10 +1,10 @@
 import React, {FC} from 'react';
 import {IconButton} from '@material-ui/core';
-import ShareIcon from '@material-ui/icons/Share';
 import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
 import {CustomSlider} from '@src/components/elements/custom_slider/CustomSlider';
 import {SlidersRefType} from "../../ShowPostContainer";
 import {useStyles} from './useStyles';
+import CustomTooltip from "@src/components/elements/custom_tooltip/CustomTooltip";
 
 
 type SyncSlidersProps = {
@@ -17,6 +17,7 @@ type SyncSlidersProps = {
 };
 
 export const SyncSliders: FC<SyncSlidersProps> = (props) => {
+
     const {
         imgs,
         handleOpenModal,
@@ -31,6 +32,10 @@ export const SyncSliders: FC<SyncSlidersProps> = (props) => {
 
     const imgsCount = !!imgs?.length ? imgs?.length : 1;
 
+    const copyUrl = () => {
+        const copiedUrl = window.location.href
+        navigator.clipboard.writeText(copiedUrl)
+    }
     const classes = useStyles();
     return (
         <div className={classes.root}>
@@ -53,8 +58,8 @@ export const SyncSliders: FC<SyncSlidersProps> = (props) => {
                         />
                     )}
                 </CustomSlider>
-                <IconButton className="share-btn">
-                    <ShareIcon/>
+                <IconButton className="share-btn" onClick={copyUrl}>
+                    <CustomTooltip title={"Скопировано!"}/>
                 </IconButton>
             </div>
             <div className={classes.secondSlider}>

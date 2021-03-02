@@ -1,4 +1,4 @@
-import React, {FC} from 'react'
+import React, {FC, useState} from 'react'
 import {Link} from '@root/i18n'
 import {useTranslation} from 'react-i18next'
 import {
@@ -13,13 +13,15 @@ import {
 import Skeleton from '@material-ui/lab/Skeleton'
 import {
     FavoriteIcon,
+    FavoritedIcon,
     DeliveryIcon,
     SafeIcon,
     SwapIcon,
 } from '@src/components/elements/icons'
 import {InnerCardData} from '@root/interfaces/CardData'
-import {numberPrettier, transformTitle} from '@src/helpers'
+import {numberPrettier, transformTitle, authChecker} from '@src/helpers'
 import {useStyles} from './useStyles'
+import {userAPI} from '@src/api/api'
 
 
 type CardItemProps = {
@@ -27,7 +29,9 @@ type CardItemProps = {
 } & InnerCardData;
 
 export const CardItem: FC<CardItemProps> = (props) => {
+
     const {t} = useTranslation(['common'])
+    const [liked, setLiked] = useState(false)
 
     const {
         id,
@@ -52,9 +56,12 @@ export const CardItem: FC<CardItemProps> = (props) => {
     const classes = useStyles({ads_type})
     return (
         <div className={classes.root}>
-            <IconButton className="favorite-btn">
-                <FavoriteIcon id={id}/>
-            </IconButton>
+            {authChecker() &&
+                <IconButton className="favorite-btn" onClick={() => {userAPI.favoriteAds(id), setLiked(!liked)}}>
+                    {liked ? <FavoriteIcon id={id}/> :
+                        <FavoritedIcon/>}
+                </IconButton>
+            }
             <Link
                 href={`/obyavlenie/${translatedTitle}-${id}-${category.mark}-${sub_category_id ?? ''}`}
             >
@@ -154,3 +161,5 @@ export const CardItem: FC<CardItemProps> = (props) => {
         </div>
     )
 }
+
+

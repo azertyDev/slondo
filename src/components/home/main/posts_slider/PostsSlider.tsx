@@ -7,7 +7,7 @@ import {settings} from './sliderSettings';
 import {useStyles} from './useStyles';
 
 
-export const PostsSlider: FC<{ title: string; cardData: CardData }> = ({cardData, title}) => {
+const PostsSliderView: FC<{ title: string; cardData: CardData }> = ({cardData, title}) => {
     const {isFetch, error, data: {cards}} = cardData;
 
     const classes = useStyles();
@@ -36,3 +36,4 @@ export const PostsSlider: FC<{ title: string; cardData: CardData }> = ({cardData
         </div>
     );
 };
+export const PostsSlider = React.memo(PostsSliderView)
