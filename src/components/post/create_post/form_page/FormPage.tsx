@@ -41,7 +41,7 @@ export const FormPage: FC = () => {
     const isPreview = !!Number(preview);
     const isSuccess = !!Number(success);
 
-    const backUrl = isPreview ? asPath.replace(/preview=1$/, 'preview=0') : `/create/type/${index}`;
+    const backUrl = isPreview ? asPath.replace(/preview=1/, 'preview=0') : `/create/type/${index}`;
 
     const title = `${t(`categories:${category.name}`)}
         ${subCategory ? ` - ${t(`categories:${subCategory.name}`)}` : ''}
@@ -156,8 +156,6 @@ export const FormPage: FC = () => {
         !isCategoryFree && setFetchedFilters();
     }, []);
 
-    // console.log(post, mark)
-    // console.log('openKeys', openKeys)
     const classes = useStyles();
     return (
         <MainLayout>
