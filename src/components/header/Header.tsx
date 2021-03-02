@@ -1,11 +1,11 @@
 import React, {FC, useEffect} from 'react';
-import Cookies from 'universal-cookie';
-import {i18n, useTranslation} from '@root/i18n';
+import {useDispatch, useSelector} from "react-redux";
 import {Container, Modal} from '@material-ui/core';
+import {i18n, useTranslation} from '@root/i18n';
+import {cookies} from '@root/src/helpers';
 import Top from "./top/TopContainer";
 import Bottom from './bottom/Bottom';
 import {AuthRegPage} from "./auth_reg/AuthRegPage";
-import {useDispatch, useSelector} from "react-redux";
 import {setIsAuthAction, setIsAuthModalOpen} from '@src/redux/slices/authRegSlice';
 import {RootState} from "@src/redux/rootReducer";
 import {fetchLocations} from "@src/redux/slices/locationsSlice";
@@ -15,7 +15,6 @@ import {useStyles} from './useStyles';
 export const Header: FC = () => {
     const {t} = useTranslation(['header']);
 
-    const cookies = new Cookies();
     const isToken = !!cookies.get('token');
 
     const lang = i18n.language;

@@ -1,10 +1,8 @@
 import {createAsyncThunk, createSlice} from '@reduxjs/toolkit';
-import Cookies from "universal-cookie";
 import {userAPI} from "@src/api/api";
+import {cookies} from "@src/helpers";
 import {AuthInputs, AuthReg, RecoveryInputs} from "@root/interfaces/Auth";
 
-
-const cookies = new Cookies();
 
 const initialState: AuthReg = {
     isFetch: false,

@@ -17,20 +17,23 @@ import {TimeLineIcon} from '@src/components/elements/icons/TimeLineIcon';
 import {ShoppingIcon} from '@src/components/elements/icons/ShoppingIcon';
 import {SettingsIcon} from '@src/components/elements/icons/SettingsIcon';
 import {PowerIcon} from '@src/components/elements/icons/PowerIcon';
+import {cookies} from '@src/helpers';
 import {useStyles} from './useStyles';
-import Cookies from "universal-cookie";
+
 
 export const ActionsMenu: FC<any> = (props) => {
-    const cookies = new Cookies();
-    const router = useRouter()
-    const {pathname} = useRouter();
     const {t} = props;
+
+    const router = useRouter()
+    const {pathname} = router;
+
     const onButtonClick = (url) => () => {
         Router.push(`/cabinet/${url}`);
     };
 
     const signOut = () => {
-        cookies.remove('token');
+        console.log('remove')
+        cookies.remove('token', {path: '/'});
         router.push('/');
     };
 

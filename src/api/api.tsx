@@ -4,10 +4,8 @@ import {CategoryType} from "@root/interfaces/Categories";
 import {FavoriteType} from "@root/interfaces/Favorites";
 import {InnerCardData} from "@root/interfaces/CardData";
 import {AuctionsDataTypes} from "@root/interfaces/Auctions";
-import Cookies from "universal-cookie";
+import {cookies} from "@src/helpers";
 
-
-const cookie = new Cookies()
 
 const uztelecom = 'https://backend.testb.uz/api/';
 const localServer = 'http://192.168.1.60/slondo/public/api/';
@@ -19,7 +17,7 @@ const instance = Axios.create({
 });
 
 export const setToken = () => {
-    const token = cookie.get('token');
+    const token = cookies.get('token');
     return {
         headers: {
             'Content-Type': 'application/json',

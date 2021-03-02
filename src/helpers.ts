@@ -6,10 +6,11 @@ import {TFunction} from "next-i18next";
 import {categories_list} from "@src/common_data/categories_list";
 import Cookies from "universal-cookie";
 
-const cookie = new Cookies()
+
+export const cookies = new Cookies();
 
 export const authChecker = () => {
-    return typeof cookie.get('token') !== 'undefined' ? true : false
+    return typeof cookies.get('token') !== 'undefined'
 }
 
 export const transformTitle = (title: string): string => {
