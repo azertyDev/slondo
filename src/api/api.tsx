@@ -1,5 +1,4 @@
 import Axios from 'axios';
-// import Cookies from 'universal-cookie';
 import {LocationsDataTypes} from "@root/interfaces/Locations";
 import {CategoryType} from "@root/interfaces/Categories";
 import {InnerCardData} from "@root/interfaces/CardData";
@@ -141,7 +140,7 @@ export const userAPI = {
                 throw err
             });
     },
-    getAncmntsTypes: (lang: string): Promise<any> => {
+    getPostTypes: (lang: string): Promise<any> => {
         return instance.get(`ads/type?lang=${lang}`)
             .then(res => res.data)
             .catch(err => {
