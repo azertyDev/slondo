@@ -1,3 +1,4 @@
+
 import React, { FC, useEffect } from 'react'
 import { WithT } from 'i18next'
 import { FormikProvider, useFormik } from 'formik'
@@ -6,7 +7,6 @@ import {
     estateTxtFields,
     excludedKeys,
     fieldKeysWithTxt,
-    noSelect,
     numericFields,
     optionKeys,
 } from '@src/common_data/form_fields'
@@ -17,6 +17,7 @@ import { numberPrettier } from '@src/helpers'
 import { numberRegEx } from '@src/common_data/reg_ex'
 import { useStyles } from './useStyles'
 import { CarIcon, FlatIcon, ParametersIcon } from '@src/components/elements/icons'
+
 
 
 export const EstateForm: FC<any> = (props) => {
@@ -57,7 +58,7 @@ export const EstateForm: FC<any> = (props) => {
         handleBlur,
     } = formik
 
-    const handleInput = ({ target: { name, value } }) => {
+    const handleInput = ({target: {name, value}}) => {
         const isNumericField = numericFields.some(n => n === name)
 
         if (isNumericField) {
@@ -81,6 +82,8 @@ export const EstateForm: FC<any> = (props) => {
         if (values[keyName] && !!value) {
             if (values[keyName].some(({ id }) => id === value.id)) {
                 values[keyName].forEach(({ id }, index) => {
+
+
                     if (id === value.id) {
                         values[keyName].splice(index, 1)
                     }
@@ -94,24 +97,9 @@ export const EstateForm: FC<any> = (props) => {
         setValues({ ...values })
     }
 
-    // useEffect(() => {
-    //     setDefaultVals();
-    // }, [filters]);
-
     const classes = useStyles()
     return (
-        <FormikProvider value={formik}>
-            <form onSubmit={handleSubmit}>
-                <CustomAccordion
-                    open={open}
-                    title={t('flat')}
-                    nextButtonTxt={t('appearance')}
-                    icon={<FlatIcon />}
-                >
-                    <h4>Car</h4>
-                </CustomAccordion>
-            </form>
-        </FormikProvider>
+      <div></div>
     )
 
     async function setDefaultVals() {
@@ -126,9 +114,10 @@ export const EstateForm: FC<any> = (props) => {
                     if (Array.isArray(filters[key])) {
                         if (filters[key].length && key !== 'type') {
                             if (isFieldKeyWithTxt) {
-                                values[key] = { ...filters[key][0], txt: '' }
+                                values[key] = {...filters[key][0], txt: ''}
                             } else if (!values[key]) {
-                                values[key] = noSelect
+                                values[key] = null;
+
                             } else if (isOptionKey) {
                                 values[key] = []
                             }
@@ -138,7 +127,6 @@ export const EstateForm: FC<any> = (props) => {
                     }
                 }
             })
-
             setValues({ ...values })
         }
     }

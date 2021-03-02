@@ -1,5 +1,4 @@
 import axios from 'axios';
-// import Cookies from 'universal-cookie';
 import {LocationsDataTypes} from "@root/interfaces/Locations";
 import {CategoryType} from "@root/interfaces/Categories";
 import {FavoriteType} from "@root/interfaces/Favorites";
@@ -10,25 +9,10 @@ import {authChecker} from "@src/helpers";
 
 const cookie = new Cookies()
 
+
 const uztelecom = 'https://backend.testb.uz/api/';
 const localServer = 'http://192.168.1.60/slondo/public/api/';
 
-
-// const gnrapi = () => axios.create({
-//     withCredentials: true,
-//     baseURL: localServer,
-//     timeout: 2000,
-//     headers:  authChecker()
-//             ? {
-//                 "Content-Type": "multipart/form-data",
-//                 "Authorization": `Bearer ${cookie.get('token')}`,
-//             }
-//             : {
-//                 "Content-Type": "multipart/form-data",
-//             }
-// });
-//
-// const instance = gnrapi()
 
 export const defaultOptions = () => {
     const token = cookie.get('token');
@@ -49,6 +33,14 @@ const gnrapi = () => axios.create(defaultOptions());
 export let instance = gnrapi();
 
 export const rgnrapi = () => (instance = gnrapi());
+
+const setToken = (token) => ({
+    headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`,
+    }
+});
+
 
 export const userAPI = {
     login: (phone: string, password: string): Promise<unknown> => {
@@ -166,8 +158,15 @@ export const userAPI = {
                 throw err
             });
     },
-    createPost: (values: any): Promise<LocationsDataTypes> => {
-        return instance.post(`regular/ads/new`, values)
+    createPost: (values: any, token: string): Promise<string> => {
+        return instance.post(`regular/ads/new`, values, setToken(token))
+            .then(res => res.data)
+            .catch(err => {
+                throw err
+            });
+    },
+    uploadPhotos: (form: FormData, token): Promise<any> => {
+        return instance.post(`regular/ads/imageUpload`, form, setToken(token))
             .then(res => res.data)
             .catch(err => {
                 throw err
@@ -175,13 +174,6 @@ export const userAPI = {
     },
     getAncmntsTypes: (lang: string): Promise<any> => {
         return instance.get(`ads/type?lang=${lang}`)
-            .then(res => res.data)
-            .catch(err => {
-                throw err
-            });
-    },
-    uploadPhotos: (form: FormData): Promise<any> => {
-        return instance.post(`regular/ads/imageUpload`, form)
             .then(res => res.data)
             .catch(err => {
                 throw err

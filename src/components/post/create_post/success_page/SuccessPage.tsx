@@ -45,12 +45,13 @@ export const SuccessPage: FC = () => {
                     className={classes.buttonBlock}
                 >
                     <Grid item xs={6} sm={2}>
-                        <ButtonComponent
-                            // onClick={handleCreateNewPost}
-                            style={{color: '#fff'}}
-                        >
-                            Создать еще
-                        </ButtonComponent>
+                        <Link href="/create/type">
+                            <a>
+                                <ButtonComponent style={{color: '#fff'}}>
+                                    Создать еще
+                                </ButtonComponent>
+                            </a>
+                        </Link>
                     </Grid>
                     <Grid item xs={6} sm={2}>
                         <Link href="/">

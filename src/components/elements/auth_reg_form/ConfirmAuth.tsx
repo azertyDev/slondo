@@ -19,8 +19,8 @@ const initialInputsVals: RecoveryInputs = {
 };
 
 const ConfirmAuth = ({t}) => {
-    const [seconds, setSeconds] = useState<any>(60);
     const dispatch = useDispatch();
+    const [seconds, setSeconds] = useState<any>(60);
     const [smsConfirm, setSmsConfirm] = useState(false)
     const [codeChecker, setCodeChecker] = useState(false)
 
@@ -34,12 +34,15 @@ const ConfirmAuth = ({t}) => {
 
 
     const confirmMsg = (values) => {
-        codeChecker ?
-            (dispatch(fetchTokenRecovery(values)), dispatch(setIsAuthModalOpen(false))):
-        smsConfirm ?
-            dispatch(fetchRecovery(values)) :
-            dispatch(userAPI.recoverySMS(values.phone, values.code).then(result =>
-                setCodeChecker(typeof result === 'object' && result !== null)))
+
+        if (codeChecker) {
+            dispatch(fetchTokenRecovery(values));
+            dispatch(setIsAuthModalOpen(false));
+        } else if (smsConfirm) {
+            dispatch(fetchRecovery(values));
+            userAPI.recoverySMS(values.phone, values.code)
+                .then(result => setCodeChecker(typeof result === 'object' && result !== null))
+        }
     };
 
     const onSubmit = (values) => {
@@ -54,14 +57,14 @@ const ConfirmAuth = ({t}) => {
         validationSchema: authRecoverySchema,
         onSubmit
     });
-    const { errors, touched} = formik;
+    const {errors, touched} = formik;
 
     return (
         <FormikProvider value={formik}>
             <Form onSubmit={formik.handleSubmit}>
                 {
-                    codeChecker ?
-                        <div>
+                    codeChecker
+                        ? <div>
                             <CustomFormikPasswordField
                                 name="password"
                                 labelText={t('auth_reg:enterNewPassword')}
@@ -72,7 +75,6 @@ const ConfirmAuth = ({t}) => {
                                     {errors.password && touched.password ? errors.password : ''}
                                 </Typography>
                             </div>
-
                             <CustomFormikPasswordField
                                 name="password_confirmation"
                                 labelText={t('auth_reg:enterNewPasswordAgain')}
@@ -83,8 +85,8 @@ const ConfirmAuth = ({t}) => {
                                     {errors.password_confirmation && touched.password_confirmation ? errors.password_confirmation : ''}
                                 </Typography>
                             </div>
-                        </div> :
-                        <div>
+                        </div>
+                        : <div>
                             <CustomFormikField
                                 name="phone"
                                 type="tel"

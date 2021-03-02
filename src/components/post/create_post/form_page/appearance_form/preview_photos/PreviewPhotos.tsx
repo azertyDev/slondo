@@ -3,7 +3,6 @@ import {DragDropContext, resetServerContext, DropResult} from 'react-beautiful-d
 import {TOTAL_FILES_SIZE_LIMIT} from '@src/constants';
 import {FileType} from "@root/interfaces/Post";
 import {CustomDroppable} from "./CustomDroppable";
-import {initPhoto} from "../../FormPage";
 
 
 type PreviewPhotosPropsType = {
@@ -12,7 +11,8 @@ type PreviewPhotosPropsType = {
 };
 
 const sizeCounter = (files) => (
-    files.reduce((total, {size}) => {
+    files.reduce(
+        (total, {size}) => {
             if (size) {
                 total += total + size
             }
@@ -70,10 +70,7 @@ export const PreviewPhotos: FC<PreviewPhotosPropsType> = (props) => {
                 files.splice(index, 1);
                 setValues({
                     ...values,
-                    files: [
-                        ...files,
-                        initPhoto
-                    ]
+                    files
                 });
             }
         });
