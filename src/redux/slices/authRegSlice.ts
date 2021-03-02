@@ -1,6 +1,6 @@
 import {createAsyncThunk, createSlice} from '@reduxjs/toolkit';
-import {userAPI} from "@src/api/api";
 import Cookies from "universal-cookie";
+import {userAPI} from "@src/api/api";
 import {AuthInputs, AuthReg, RecoveryInputs} from "@root/interfaces/Auth";
 
 
@@ -47,14 +47,12 @@ export const fetchRecovery = createAsyncThunk<never, AuthInputs>(
         }
     }
 );
+
 export const fetchTokenRecovery = createAsyncThunk<never, RecoveryInputs>(
     'authReg/fetchTokenByLogin',
     async ({phone, code, password, password_confirmation}, {rejectWithValue}) => {
         try {
-            const tokenObj = await userAPI.recovery(phone, code, password, password_confirmation);
-            // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-            // @ts-ignore
-            const token = tokenObj?.token
+            const {token} = await userAPI.recovery(phone, code, password, password_confirmation);
             cookies.set('token', token, {maxAge: 2 * 3600});
         } catch (e) {
             return rejectWithValue(e.message);

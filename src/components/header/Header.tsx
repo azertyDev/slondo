@@ -16,7 +16,7 @@ export const Header: FC = () => {
     const {t} = useTranslation(['header']);
 
     const cookies = new Cookies();
-    const isTokenExst = !!cookies.get('token');
+    const isToken = !!cookies.get('token');
 
     const lang = i18n.language;
 
@@ -32,8 +32,8 @@ export const Header: FC = () => {
     }, [lang]);
 
     useEffect(() => {
-        dispatch(setIsAuthAction(isTokenExst));
-    }, [isTokenExst]);
+        dispatch(setIsAuthAction(isToken));
+    }, [isToken]);
 
     const classes = useStyles();
     return (

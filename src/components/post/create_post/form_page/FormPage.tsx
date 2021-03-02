@@ -1,6 +1,5 @@
 import React, {FC, useEffect, useState} from 'react';
 import {useRouter} from "next/router";
-import Cookies from "universal-cookie";
 import {Typography} from "@material-ui/core";
 import {i18n, Router, useTranslation} from "@root/i18n";
 import {useDispatch} from "react-redux";
@@ -112,18 +111,15 @@ export const FormPage: FC = () => {
 
     const publishPost = async () => {
         try {
-            const cookies = new Cookies();
-            const {token} = cookies.get('token') || {token: ''};
-
             const {photos, ...data} = post;
             const form = new FormData();
 
-            const postId = await userAPI.createPost(data, token);
+            const postId = await userAPI.createPost(data);
 
             form.append('ads_id', postId);
             photos.forEach(photo => form.append('files[]', photo.file));
 
-            await userAPI.uploadPhotos(form, token);
+            await userAPI.uploadPhotos(form);
             Router.push(asPath.replace(/success=0$/, 'success=1'));
         } catch (e) {
             dispatch(setErrorMsgAction(e.message));

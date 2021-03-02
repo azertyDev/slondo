@@ -13,7 +13,7 @@ import {useStyles} from './useStyles'
 
 
 const Bottom = (props) => {
-    const {isScrollBreak, handleOpenModal, isAuth, t} = props
+    const {isScrollBreak, handleOpenModal, isAuth, t} = props;
     const [drawerPosition, setDrawerPosition] = useState({left: false})
 
     const toggleDrawer = (anchor, open) => (event) => {
@@ -113,25 +113,23 @@ const Bottom = (props) => {
                                 alignItems="center"
                                 xs={1}
                             >
-                                {
-                                    isAuth
-                                        ? <div>
-                                            <Link href='/cabinet/posts'>
-                                                <a>
-                                                    <PersonIcon/>
-                                                </a>
-                                            </Link>
-                                        </div>
-                                        : <ButtonComponent
-                                            className="bottom-sign-button header-button"
-                                            onClick={handleOpenModal}
-                                        >
-                                            <Typography variant="subtitle2">
-                                                {t('auth_reg:signIn')}
-                                            </Typography>
-                                            <SignIcon/>
-                                        </ButtonComponent>
-                                }
+                                {isAuth
+                                    ? <div>
+                                        <Link href='/cabinet/posts'>
+                                            <a>
+                                                <PersonIcon/>
+                                            </a>
+                                        </Link>
+                                    </div>
+                                    : <ButtonComponent
+                                        className="bottom-sign-button header-button"
+                                        onClick={handleOpenModal}
+                                    >
+                                        <Typography variant="subtitle2">
+                                            {t('auth_reg:signIn')}
+                                        </Typography>
+                                        <SignIcon/>
+                                    </ButtonComponent>}
                             </Grid>
                         </Grid>
                     </Container>

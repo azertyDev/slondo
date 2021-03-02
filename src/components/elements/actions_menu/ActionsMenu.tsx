@@ -29,17 +29,18 @@ export const ActionsMenu: FC<any> = (props) => {
         Router.push(`/cabinet/${url}`);
     };
 
+    const signOut = () => {
+        cookies.remove('token');
+        router.push('/');
+    };
+
     const classes = useStyles();
     return (
         <div className={classes.root}>
             <div className="menu-item">
                 <div>
                     <ButtonComponent
-                        className={
-                            pathname === '/cabinet/not-moderated'
-                                ? 'selected'
-                                : ''
-                        }
+                        className={pathname === '/cabinet/not-moderated' ? 'selected' : ''}
                     >
                         <Typography variant="subtitle1" className="error-text">
                             Не прошло модерацию (2)
@@ -50,9 +51,7 @@ export const ActionsMenu: FC<any> = (props) => {
             <div className="menu-item">
                 <div>
                     <ButtonComponent
-                        className={
-                            pathname === '/cabinet/posts' ? 'selected' : ''
-                        }
+                        className={pathname === '/cabinet/posts' ? 'selected' : ''}
                         onClick={onButtonClick('posts')}
                     >
                         <NotesIcon/>
@@ -63,9 +62,7 @@ export const ActionsMenu: FC<any> = (props) => {
                 </div>
                 <div>
                     <ButtonComponent
-                        className={
-                            pathname === '/cabinet/auctions' ? 'selected' : ''
-                        }
+                        className={pathname === '/cabinet/auctions' ? 'selected' : ''}
                         onClick={onButtonClick('auctions')}
                     >
                         <GavelIcon/>
@@ -76,9 +73,7 @@ export const ActionsMenu: FC<any> = (props) => {
                 </div>
                 <div>
                     <ButtonComponent
-                        className={
-                            pathname === '/cabinet/favorite' ? 'selected' : ''
-                        }
+                        className={pathname === '/cabinet/favorite' ? 'selected' : ''}
                         onClick={onButtonClick('favorite')}
                     >
                         <FavoriteBorderIcon/>
@@ -90,11 +85,7 @@ export const ActionsMenu: FC<any> = (props) => {
                 <div>
                     <CustomBadge badgeContent={4}>
                         <ButtonComponent
-                            className={
-                                pathname === '/cabinet/orders'
-                                    ? 'selected'
-                                    : ''
-                            }
+                            className={pathname === '/cabinet/orders' ? 'selected' : ''}
                         >
                             <ShoppingIcon/>
                             <Typography variant="subtitle1">
@@ -103,9 +94,7 @@ export const ActionsMenu: FC<any> = (props) => {
                         </ButtonComponent>
                     </CustomBadge>
                     <ButtonComponent
-                        className={
-                            pathname === '/cabinet/archive' ? 'selected' : ''
-                        }
+                        className={pathname === '/cabinet/archive' ? 'selected' : ''}
                         onClick={onButtonClick('archive')}
                     >
                         <ArchiveIcon/>
@@ -119,11 +108,7 @@ export const ActionsMenu: FC<any> = (props) => {
                 <div>
                     <CustomBadge badgeContent={4}>
                         <ButtonComponent
-                            className={
-                                pathname === '/cabinet/notifications'
-                                    ? 'selected'
-                                    : ''
-                            }
+                            className={pathname === '/cabinet/notifications' ? 'selected' : ''}
                             onClick={onButtonClick('notifications')}
                         >
                             <NotificationIcon/>
@@ -134,11 +119,7 @@ export const ActionsMenu: FC<any> = (props) => {
                     </CustomBadge>
                     <CustomBadge badgeContent={8}>
                         <ButtonComponent
-                            className={
-                                pathname === '/cabinet/messages'
-                                    ? 'selected'
-                                    : ''
-                            }
+                            className={pathname === '/cabinet/messages' ? 'selected' : ''}
                             onClick={onButtonClick('messages')}
                         >
                             <LetterIcon/>
@@ -152,9 +133,7 @@ export const ActionsMenu: FC<any> = (props) => {
             <div className="menu-item">
                 <div>
                     <ButtonComponent
-                        className={
-                            pathname === '/cabinet/safetyDeal' ? 'selected' : ''
-                        }
+                        className={pathname === '/cabinet/safetyDeal' ? 'selected' : ''}
                         onClick={onButtonClick('safetyDeal')}
                     >
                         <SafeIcon/>
@@ -167,11 +146,7 @@ export const ActionsMenu: FC<any> = (props) => {
             <div className="menu-item">
                 <div>
                     <ButtonComponent
-                        className={
-                            pathname === '/cabinet/paidServices'
-                                ? 'selected'
-                                : ''
-                        }
+                        className={pathname === '/cabinet/paidServices' ? 'selected' : ''}
                     >
                         <WalletIcon/>
                         <Typography variant="subtitle1">
@@ -181,9 +156,7 @@ export const ActionsMenu: FC<any> = (props) => {
                 </div>
                 <div>
                     <ButtonComponent
-                        className={
-                            pathname === '/cabinet/statistics' ? 'selected' : ''
-                        }
+                        className={pathname === '/cabinet/statistics' ? 'selected' : ''}
                     >
                         <TimeLineIcon/>
                         <Typography variant="subtitle1">
@@ -191,9 +164,7 @@ export const ActionsMenu: FC<any> = (props) => {
                         </Typography>
                     </ButtonComponent>
                     <ButtonComponent
-                        className={
-                            pathname === '/cabinet/rating' ? 'selected' : ''
-                        }
+                        className={pathname === '/cabinet/rating' ? 'selected' : ''}
                         onClick={onButtonClick('rating')}
                     >
                         <SortIcon/>
@@ -214,12 +185,9 @@ export const ActionsMenu: FC<any> = (props) => {
                             {t('cabinet:settings')}
                         </Typography>
                     </ButtonComponent>
-
                     <ButtonComponent
-                        className={
-                            pathname === '/cabinet/exit' ? 'selected' : ''
-                        }
-                        onClick={() => {cookies.remove('token'), router.push('/')}}
+                        className={pathname === '/cabinet/exit' ? 'selected' : ''}
+                        onClick={signOut}
                     >
                         <PowerIcon/>
                         <Typography variant="subtitle1">
