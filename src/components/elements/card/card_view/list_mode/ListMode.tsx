@@ -109,7 +109,7 @@ export const ListMode: FC<ViewPropsTypes> = (props) => {
                                                     {el.title}
                                                 </Typography>
                                             </div>
-                                            <div>
+                                            <div className='favorite'>
                                                 <Typography
                                                     variant="subtitle2"
                                                     color="initial"

@@ -44,6 +44,7 @@ export const useStyles = makeStyles((theme) => ({
                 '& > h6': {
                     fontSize: '1.15rem',
                     textAlign: 'center',
+                    color: '#fff',
                 },
             },
         },
@@ -51,7 +52,6 @@ export const useStyles = makeStyles((theme) => ({
     scrollTop: {
         width: 50,
         height: 50,
-        transition: '0.5s',
         backgroundSize: '200% auto',
         color: '#fff',
         borderRadius: '50%',

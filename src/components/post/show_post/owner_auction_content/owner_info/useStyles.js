@@ -1,6 +1,6 @@
 import { makeStyles } from '@material-ui/core/styles';
 
-export const useStyles = makeStyles(() => ({
+export const useStyles = makeStyles((theme) => ({
     root: {
         '& > div': {
             marginBottom: '30px',
@@ -13,9 +13,15 @@ export const useStyles = makeStyles(() => ({
                 width: '100%',
                 border: 'none',
                 height: 44,
-                width: '100%',
                 '&:not(:last-child)': {
                     marginBottom: '10px',
+                },
+                '&.contact-btn': {
+                    background: 'none',
+                    border: `1px solid ${theme.palette.primary.secondary}`,
+                    '& .MuiTypography-subtitle1': {
+                        color: '#7461BA',
+                    },
                 },
                 '&.safe-shopping-btn': {
                     background: '#7DBCF6',

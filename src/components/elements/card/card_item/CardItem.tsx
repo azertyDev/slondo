@@ -68,9 +68,8 @@ export const CardItem: FC<CardItemProps> = (props) => {
                         ) : (
                             <CardMedia
                                 className="card-media"
-                                image={images.length ? images[0].url.default : null}
+                                image={images.length ? images[0].url.default : '/img/card-logo.png'}
                             >
-                                <div />
                                 <div className="card-header">
                                     <div className="title">
                                         <Typography variant="subtitle2">
@@ -139,7 +138,7 @@ export const CardItem: FC<CardItemProps> = (props) => {
                                             <span> {t(currency.name)}</span>
                                         </Typography>
                                         <Typography variant="caption" noWrap>
-                                            {`${city.name}, ${region.name}`}
+                                            {`${region.name}, ${city.name}`}
                                         </Typography>
                                         <Typography variant="caption">
                                             {created_at}

@@ -35,8 +35,8 @@ export const Top: FC<TopHeaderPropsType> = (props) => {
     const classes = useStyles()
     return (
         <div className={classes.root}>
-            <Grid container justify="space-between" alignItems="center">
-                <Hidden smDown>
+            <Hidden smDown>
+                <Grid container justify="space-between" alignItems="center">
                     <Grid item md={6}>
                         <div className="location">
                             <LocationIcon />
@@ -89,8 +89,8 @@ export const Top: FC<TopHeaderPropsType> = (props) => {
                             <Localization />
                         </Grid>
                     </Grid>
-                </Hidden>
-            </Grid>
+                </Grid>
+            </Hidden>
             {/*    Adaptive   */}
             <Hidden mdUp>
                 <AppBar position={'fixed'} color={'inherit'} elevation={0}>

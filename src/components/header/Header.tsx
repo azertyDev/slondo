@@ -41,12 +41,10 @@ export const Header: FC = () => {
         <header className={classes.root} id='back-to-top-anchor'>
             <div className='header-wrapper'>
                 <Container maxWidth="xl">
-                    <div className='top-wrapper'>
-                        <Top
-                            t={t}
-                            handleOpenModal={handleModal(true)}
-                        />
-                    </div>
+                    <Top
+                        t={t}
+                        handleOpenModal={handleModal(true)}
+                    />
                     <div>
                         <Bottom
                             t={t}

@@ -27,7 +27,7 @@ export const OwnerInfo: FC<any> = ({phone, safe_deal}) => {
                             : 'Показать номер'}
                     </Typography>
                 </ButtonComponent>
-                <ButtonComponent color="primary">
+                <ButtonComponent color="primary" className='contact-btn'>
                     <Typography variant="subtitle1" color="initial">
                         Написать продавцу
                     </Typography>

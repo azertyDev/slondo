@@ -99,9 +99,10 @@ export const useStyles = makeStyles((theme) => ({
     },
     avatarBlock: {
         '& > button': {
-            padding: '8px',
-            '& img': {
+            padding: 0,
+            '& svg': {
                 width: '40px',
+                height: '40px',
             },
         },
     },

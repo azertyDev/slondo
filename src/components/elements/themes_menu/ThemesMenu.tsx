@@ -23,8 +23,6 @@ export const ThemesMenu: FC<any> = ({ data, onClick, title }) => {
             <List component="nav" className={classes.helpMenu}>
                 {
                     data.map((el) => {
-                        console.log(term === `${el.term}`)
-
                         return (
                             <ListItem
                                 button

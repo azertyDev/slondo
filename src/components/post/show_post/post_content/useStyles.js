@@ -42,6 +42,7 @@ export const useStyles = makeStyles((theme) => ({
             },
             '& > div.title': {
                 flex: 1,
+                width: '500px',
                 '& > h2.MuiTypography-h2': {
                     fontSize: '20px',
                     fontWeight: '600',
@@ -242,7 +243,7 @@ export const useStyles = makeStyles((theme) => ({
             '& h6.key': {
                 width: '20%',
                 fontSize: '1.125rem',
-                color: '#AAA',
+                color: '#838383',
             },
             '& h6.value': {
                 fontSize: '1.125rem',

@@ -119,10 +119,10 @@ export const PostContent: FC<WithT & any> = (props) => {
                         && <span
                             style={{
                                 backgroundColor: `${parameters[key].hex_color_code}`,
-                                width: 32,
-                                height: 32,
-                                boxShadow: '-1px 0px 2px rgba(0, 0, 0, 0.15)',
-                                marginRight: '20px',
+                                width: 24,
+                                height: 24,
+                                boxShadow: '0px 0px 4px rgba(0, 0, 0, 0.25)',
+                                marginRight: 15,
                                 borderRadius: '50%',
                             }}
                         />}

@@ -19,9 +19,9 @@ export const PostTypesPage: FC = () => {
                     {postTypes.map((postType, i) =>
                         <Grid item xs={4} key={i}>
                             <Link href={`/create/type/${postType.name}`}>
-                                <a>
+                                <a className={postType.name}>
                                     <div
-                                        className='card-bg'
+                                        className={postType.name}
                                         style={{backgroundImage: `url(${postType.image.url})`}}
                                     >
                                         <Typography variant="subtitle1">

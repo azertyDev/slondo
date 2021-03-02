@@ -21,7 +21,7 @@ export const ShowPost: FC<any> = (props) => {
         <div className={classes.root}>
             <MainLayout title="Просмотр объявления">
                 <Grid container spacing={2}>
-                    <Grid item xs={12} md={9}>
+                    <Grid item lg={9}>
                         <PostContent
                             t={t}
                             data={data}
@@ -30,11 +30,11 @@ export const ShowPost: FC<any> = (props) => {
                             slidersRefs={slidersRefs}
                         />
                     </Grid>
-                    <Hidden smDown>
+                    <Hidden mdDown>
                         <Grid item xs={3}>
                             <OwnerAuctionContent {...props} />
                             <div className={classes.adBanner}>
-                                <Banner height="424px"/>
+                                <Banner height="424px" />
                             </div>
                         </Grid>
                     </Hidden>
