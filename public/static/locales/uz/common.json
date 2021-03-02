@@ -7,13 +7,6 @@
   "post": "E'lon",
   "auc": "Auksion",
   "exauc": "Kengaytirilgan auksion",
-  "Mo": "Du",
-  "Tu": "Se",
-  "We": "Cho",
-  "Th": "Pa",
-  "Fr": "Ju",
-  "Sa": "Sha",
-  "Su": "Ya",
-  "cityOrRegionNotFound": "Bunaqa manzil topilmadi",
-  "choiceLocation": "Manzilni tanlang"
+  "location": "Joylashuv",
+  "edit": "O'zgartitish"
 }

@@ -3,7 +3,7 @@ import {Grid, Typography} from '@material-ui/core';
 import {useTranslation, Link} from '@root/i18n';
 import {postTypes} from "@src/common_data/post_types_list";
 import {MainLayout} from "@src/components/MainLayout";
-import {CreatePostHeader} from "@src/components/post/create_post/create_post_header/CreatePostHeader";
+import {Top} from "@src/components/post/create_post/top/Top";
 import {useStyles} from './useStyles';
 
 
@@ -13,7 +13,7 @@ export const PostTypesPage: FC = () => {
     const classes = useStyles();
     return (
         <MainLayout>
-            <CreatePostHeader activeStep={0}/>
+            <Top activeStep={0}/>
             <div className={classes.root}>
                 <Grid container spacing={2}>
                     {postTypes.map((postType, i) =>

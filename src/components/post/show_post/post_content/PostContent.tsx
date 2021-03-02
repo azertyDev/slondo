@@ -63,7 +63,6 @@ export const PostContent: FC<WithT & any> = (props) => {
     const excludedFields = [
         'id',
         'type',
-        'sub_type',
         'uniqid',
         'color_id',
         'type_id',
@@ -252,22 +251,23 @@ export const PostContent: FC<WithT & any> = (props) => {
                     </span>
                 }
                 {
-                    !!data.available_start_time
-                    && <span className="available">
+                    !!data.available_start_time && (
+                        <span className="available">
                         <PhoneIcon/>
-                        {
-                            !!data.available_days.length
-                            && <>
-                                <Typography variant="subtitle1" color="primary">
-                                    {weekDaysHelper(data.available_days)}
-                                </Typography>
-                                &nbsp;&nbsp;
-                            </>
-                        }
-                        <Typography variant="subtitle1">
+                            {
+                                !!data.available_days.length
+                                && <>
+                                    <Typography variant="subtitle1" color="primary">
+                                        {weekDaysHelper(data.available_days, t)}
+                                    </Typography>
+                                    &nbsp;&nbsp;
+                                </>
+                            }
+                            <Typography variant="subtitle1">
                             {`${data.available_start_time} - ${data.available_end_time}`}
                         </Typography>
                     </span>
+                    )
                 }
             </div>
             <div className="post-location">

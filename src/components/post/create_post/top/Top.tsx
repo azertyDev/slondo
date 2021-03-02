@@ -11,7 +11,7 @@ type AncmntAuctionTopPropsType = {
     title?: string;
 };
 
-export const CreatePostHeader: FC<AncmntAuctionTopPropsType> = (props) => {
+export const Top: FC<AncmntAuctionTopPropsType> = (props) => {
     const {t} = useTranslation(['post']);
 
     const {

@@ -6,76 +6,86 @@ import {
     estateTxtFields,
     excludedKeys,
     fieldKeysWithTxt,
-    noSelect,
     numericFields,
     optionKeys,
 } from '@src/common_data/form_fields';
-import { isRequired } from '@root/validation_schemas/createPostSchema'
-import { CustomMenu } from '@src/components/elements/custom_menu/CustomMenu'
-import { CustomAccordion } from '../accordion/CustomAccordion'
-import { numberPrettier } from '@src/helpers'
-import { numberRegEx } from '@src/common_data/reg_ex'
-import { useStyles } from './useStyles'
-import { ParametersIcon } from '@src/components/elements/icons'
+import {isRequired} from '@root/validation_schemas/createPostSchemas';
+import {CustomAccordion} from '../accordion/CustomAccordion';
+import {numberPrettier} from '@src/helpers';
+import {numberRegEx} from '@src/common_data/reg_ex';
+import {ParametersIcon} from '@src/components/elements/icons';
+import {paramsFormSchema} from "@root/validation_schemas/createPostSchemas";
+import {CustomSelect} from "@src/components/elements/customSelect/CustomSelect";
+import {useStyles} from './useStyles';
 
 
-type ParamsFormPropsType = {
-    open: boolean,
-    mark,
-    filters,
-    category,
-    subCategory,
-    type,
-    handleSetPost
-} & WithT;
-
-const prepareData = (data) => (
+const prepareData = data => (
     Object.keys(data).reduce((acc, key) => {
-        if (typeof data[key] === 'object' && Object.keys(data[key]).length) {
-            acc[`${key}_id`] = data[key].id;
-        } else {
-            acc[key] = data[key];
+        if (data[key]) {
+            if (typeof data[key] === 'object' && Object.keys(data[key]).length) {
+                acc[`${key}_id`] = data[key].id;
+            } else {
+                acc[key] = data[key];
+            }
         }
         return acc;
     }, {})
 );
 
+type ParamsFormPropsType = {
+    openKey: boolean,
+    isPreview: boolean,
+    mark,
+    filters,
+    subCategory,
+    type,
+    post,
+    setPost,
+    handleFormOpen: (k, e) => void
+} & WithT;
+
 export const ParamsForm: FC<ParamsFormPropsType> = (props) => {
     const {
         t,
-        open,
+        openKey,
+        isPreview,
         mark,
         filters,
-        category,
         subCategory,
         type,
-        handleSetPost
+        post,
+        setPost,
+        handleFormOpen
     } = props;
 
-    const initForm = {
-        [`${mark}_id`]: category.id,
-        sub_type_id: subCategory ? subCategory.id : null,
-        type_id: type ? type.id : null,
-    };
+    const formKey = 'params';
+    const nextFormName = 'appearance';
 
     const onSubmit = (values) => {
         values = prepareData(values);
-        handleSetPost({[mark]: values});
+        post[mark] = {
+            ...post[mark],
+            ...values,
+            [`${mark}_id`]: subCategory ? subCategory.id : null,
+            type_id: type ? type.id : null,
+        };
+        setPost({...post});
+        handleFormOpen(nextFormName, true);
     };
 
     const formik = useFormik({
         onSubmit,
-        initialValues: initForm,
-        validationSchema: null,
+        initialValues: {},
+        validationSchema: paramsFormSchema,
     });
 
     const {
-        values,
-        setValues,
         errors,
+        values,
+        handleBlur,
+        setValues,
         touched,
         handleSubmit,
-        handleBlur
     } = formik;
 
     const handleInput = ({target: {name, value}}) => {
@@ -93,9 +103,8 @@ export const ParamsForm: FC<ParamsFormPropsType> = (props) => {
         setValues({...values});
     };
 
-    const handleMenuItem = (valueKey: string) => (newValue, setAnchor) => () => {
-        setAnchor(null);
-        setValues({...values, [valueKey]: newValue});
+    const handleSelect = (value, key) => {
+        setValues({...values, [key]: value});
     };
 
     const handleParamsCheckbox = (keyName, value?) => ({target}) => {
@@ -115,182 +124,9 @@ export const ParamsForm: FC<ParamsFormPropsType> = (props) => {
         setValues({...values});
     };
 
-    useEffect(() => {
-        setDefaultVals();
-    }, [filters]);
-
-    const classes = useStyles();
-    return (
-        <FormikProvider value={formik}>
-            <form onSubmit={handleSubmit}>
-                <CustomAccordion
-                    open={open}
-                    title={t('parameters')}
-                    nextButtonTxt={t('appearance')}
-                    icon={<ParametersIcon />}
-                >
-                    <Grid
-                        container
-                        spacing={2}
-                        className={classes.root}
-                    >
-                        {Object.keys(filters).map(key => {
-                            const postParamsError = errors.values;
-                            const postParamsTouched = touched.values;
-
-                            const isExcludeValue = excludedKeys.some(k => k === key);
-                            const isOptionsKey = optionKeys.some(k => k === key) && filters[key].length;
-                            const isFieldKeyWithTxt = fieldKeysWithTxt.some(k => k === key);
-                            const isNoEmptyArray = Array.isArray(filters[key]) && filters[key].length;
-
-                            return !isExcludeValue && <Grid
-                                item
-                                container
-                                xs={12}
-                                key={key}
-                                className='grid-item'
-                                sm={isOptionsKey ? 12 : 6}
-                            >
-                                {
-                                    // isOptionsKey
-                                    //     ? <>
-                                    //         <Typography variant="subtitle1">
-                                    //             <strong>
-                                    //                 {t(key)}:
-                                    //             </strong>
-                                    //             {isRequired(key) && <span className='error-text'>*</span>}
-                                    //             {
-                                    //                 postParamsError
-                                    //                 && postParamsTouched
-                                    //                 && postParamsError[key]
-                                    //                 && postParamsTouched[key]
-                                    //                 && postParamsTouched[key].id
-                                    //                 && <span className='error-text'>
-                                    //                     &nbsp;{postParamsError[key].id}
-                                    //                 </span>
-                                    //             }
-                                    //         </Typography>
-                                    //         <div className='row-list'>
-                                    //             {filters[key].map(item =>
-                                    //                 <div key={item.id}>
-                                    //                     <div
-                                    //                         style={{
-                                    //                             display: 'flex',
-                                    //                             alignItems: 'center'
-                                    //                         }}
-                                    //                     >
-                                    //                         <Checkbox
-                                    //                             color='primary'
-                                    //                             disabled={isPreview}
-                                    //                             onChange={handleParamsCheckbox(key, item)}
-                                    //                             checked={!!values[key] && values[key].some(({id}) => id === item.id)}
-                                    //                         />
-                                    //                         <Typography>{item.name}</Typography>
-                                    //                     </div>
-                                    //                 </div>
-                                    //             )}
-                                    //         </div>
-                                    //     </>
-                                    isNoEmptyArray
-                                        ? <>
-                                            <Typography variant="subtitle1">
-                                                <strong>
-                                                    {t(key)}
-                                                    {isRequired(key) && <span className='error-text'>*</span>}
-                                                </strong>
-                                                {
-                                                    postParamsError
-                                                    && postParamsTouched
-                                                    && postParamsError[key]
-                                                    && postParamsTouched[key]
-                                                    && <span className='error-text'>
-                                                            &nbsp;{postParamsError[key].id}
-                                                        </span>
-                                                }
-                                            </Typography>
-                                            <Grid container>
-                                                {isFieldKeyWithTxt
-                                                && <Grid item xs={9}>
-                                                    <TextField
-                                                        fullWidth
-                                                        variant='outlined'
-                                                        value={values[key] ? values[key].txt : ''}
-                                                        name={key}
-                                                        onChange={handleInput}
-                                                        className={
-                                                            postParamsError
-                                                            && postParamsTouched
-                                                            && postParamsError[key]
-                                                            && postParamsTouched[key] ? 'error-border' : ''
-                                                        }
-                                                    />
-                                                </Grid>}
-                                                <Grid item xs={isFieldKeyWithTxt ? 3 : 6}>
-                                                    <CustomMenu
-                                                        name={key}
-                                                        onBlur={handleBlur}
-                                                        onClick={handleMenuItem(key)}
-                                                        className={
-                                                            postParamsError
-                                                            && postParamsTouched
-                                                            && postParamsError[key]
-                                                            && postParamsTouched[key] ? 'error-border' : ''
-                                                        }
-                                                        valueName={values[key] ? values[key].name : ''}
-                                                        items={filters[key]}
-                                                    />
-                                                </Grid>
-                                            </Grid>
-                                        </>
-                                        : !Array.isArray(filters[key]) && <Grid item xs={6}>
-                                        <Typography variant="subtitle1">
-                                            <strong>
-                                                {t(key)}:
-                                            </strong>
-                                            {isRequired(key) && <span className='error-text'>*</span>}
-                                            {
-                                                postParamsError
-                                                && postParamsTouched
-                                                && postParamsError[key]
-                                                && postParamsTouched[key]
-                                                && <span className='error-text'>&nbsp;{postParamsError[key]}</span>
-                                            }
-                                        </Typography>
-                                        {
-                                            filters[key] === 1
-                                                ? <Checkbox
-                                                    color='primary'
-                                                    checked={!!values[key]}
-                                                    onChange={handleParamsCheckbox(key)}
-                                                />
-                                                : <TextField
-                                                    fullWidth
-                                                    name={key}
-                                                    variant='outlined'
-                                                    value={values[key] ?? ''}
-                                                    onChange={handleInput}
-                                                    className={
-                                                        postParamsError
-                                                        && postParamsTouched
-                                                        && postParamsError[key]
-                                                        && postParamsTouched[key]
-                                                            ? 'error-border'
-                                                            : ''
-                                                    }
-                                                />
-                                        }
-                                    </Grid>
-                                }
-                            </Grid>
-                        })}
-                    </Grid>
-                </CustomAccordion>
-            </form>
-        </FormikProvider>
-    )
-
-    async function setDefaultVals() {
+    const setDefaultVals = () => {
         if (mark !== 'free') {
+
             Object.keys(filters).forEach(key => {
                 const isExcludedKey = excludedKeys.some(k => k === key);
                 const isFieldKeyWithTxt = fieldKeysWithTxt.some(k => k === key);
@@ -299,11 +135,11 @@ export const ParamsForm: FC<ParamsFormPropsType> = (props) => {
 
                 if (!isExcludedKey) {
                     if (Array.isArray(filters[key])) {
-                        if (filters[key].length && key !== 'type') {
+                        if (filters[key].length) {
                             if (isFieldKeyWithTxt) {
                                 values[key] = {...filters[key][0], txt: ''};
                             } else if (!values[key]) {
-                                values[key] = noSelect;
+                                values[key] = null;
                             } else if (isOptionKey) {
                                 values[key] = [];
                             }
@@ -316,5 +152,160 @@ export const ParamsForm: FC<ParamsFormPropsType> = (props) => {
 
             setValues({...values});
         }
-    }
+    };
+
+    useEffect(() => {
+        setDefaultVals();
+    }, [filters]);
+
+    const classes = useStyles();
+    return (
+        <FormikProvider value={formik}>
+            <form onSubmit={handleSubmit}>
+                <CustomAccordion
+                    formKey={formKey}
+                    handleOpen={handleFormOpen}
+                    open={openKey || isPreview}
+                    isPreview={isPreview}
+                    title={t('parameters')}
+                    nextButtonTxt={t(nextFormName)}
+                    icon={<ParametersIcon/>}
+                >
+                    <Grid
+                        container
+                        spacing={2}
+                        className={classes.root}
+                    >
+                        {
+                            isPreview
+                                ? Object.keys(values).map(key => {
+                                    if (!!values[key]) {
+                                        let value = values[key];
+
+                                        if (typeof values[key] === 'object') {
+                                            if (values[key].id) {
+                                                value = values[key].name;
+                                            } else return;
+                                        }
+
+                                        return (
+                                            <Grid
+                                                item
+                                                key={key}
+                                                sm={6}
+                                                xs={12}
+                                                className='grid-item'
+                                            >
+                                                <Typography variant="subtitle1">
+                                                    <strong>
+                                                        {t(key)}:
+                                                    </strong>
+                                                    &nbsp;{value}
+                                                </Typography>
+                                            </Grid>
+                                        )
+                                    }
+                                })
+                                : Object.keys(filters).map(key => {
+                                    const isExcludeValue = excludedKeys.some(k => k === key);
+                                    const isOptionsKey = optionKeys.some(k => k === key) && filters[key].length;
+                                    const isFieldKeyWithTxt = fieldKeysWithTxt.some(k => k === key);
+                                    const isNoEmptyArray = Array.isArray(filters[key]) && filters[key].length;
+
+                                    return !isExcludeValue && <Grid
+                                        item
+                                        container
+                                        xs={12}
+                                        key={key}
+                                        className='grid-item'
+                                        sm={isOptionsKey ? 12 : 6}
+                                    >
+                                        {
+                                            isNoEmptyArray
+                                                ? <>
+                                                    <Typography variant="subtitle1">
+                                                        <strong>
+                                                            {t(key)}
+                                                            {isRequired(key) && <span className='error-text'>*</span>}
+                                                        </strong>
+                                                        {
+                                                            errors[key]
+                                                            && touched[key]
+                                                            && <span className='error-text'>
+                                                                &nbsp;{t(errors[key] as string)}
+                                                            </span>
+                                                        }
+                                                    </Typography>
+                                                    <Grid container>
+                                                        {
+                                                            isFieldKeyWithTxt && (
+                                                                <Grid item xs={9}>
+                                                                    <TextField
+                                                                        fullWidth
+                                                                        name={key}
+                                                                        variant='outlined'
+                                                                        onChange={handleInput}
+                                                                        value={values[key] ? values[key].txt : ''}
+                                                                        className={errors[key] && touched[key] ? 'error-border' : ''}
+                                                                    />
+                                                                </Grid>
+                                                            )
+                                                        }
+                                                        <Grid item xs={isFieldKeyWithTxt ? 3 : 6}>
+                                                            <CustomSelect
+                                                                t={t}
+                                                                name={key}
+                                                                values={values}
+                                                                items={filters[key]}
+                                                                onBlur={handleBlur}
+                                                                handleSelect={handleSelect}
+                                                                error={!!(errors[key] && touched[key])}
+                                                            />
+                                                        </Grid>
+                                                    </Grid>
+                                                </>
+                                                : (
+                                                    !Array.isArray(filters[key]) && (
+                                                        <Grid item xs={6}>
+                                                            <Typography variant="subtitle1">
+                                                                <strong>
+                                                                    {t(key)}:
+                                                                </strong>
+                                                                {isRequired(key) && <span className='error-text'>*</span>}
+                                                                {
+                                                                    errors[key]
+                                                                    && touched[key]
+                                                                    && <span className='error-text'>
+                                                                        &nbsp;{errors[key]}
+                                                                    </span>
+                                                                }
+                                                            </Typography>
+                                                            {
+                                                                filters[key] === 1
+                                                                    ? <Checkbox
+                                                                        color='primary'
+                                                                        checked={!!values[key]}
+                                                                        onChange={handleParamsCheckbox(key)}
+                                                                    />
+                                                                    : <TextField
+                                                                        fullWidth
+                                                                        name={key}
+                                                                        variant='outlined'
+                                                                        value={values[key] ?? ''}
+                                                                        onChange={handleInput}
+                                                                        className={errors[key] && touched[key] ? 'error-border' : ''}
+                                                                    />
+                                                            }
+                                                        </Grid>
+                                                    )
+                                                )
+                                        }
+                                    </Grid>
+                                })
+                        }
+                    </Grid>
+                </CustomAccordion>
+            </form>
+        </FormikProvider>
+    )
 };

@@ -1,12 +1,8 @@
 import Axios from 'axios';
-// import Cookies from 'universal-cookie';
 import {LocationsDataTypes} from "@root/interfaces/Locations";
 import {CategoryType} from "@root/interfaces/Categories";
 import {InnerCardData} from "@root/interfaces/CardData";
 
-
-// const cookies = new Cookies();
-// const {token} = cookies.get('token') || {token: ''};
 
 const uztelecom = 'https://backend.testb.uz/api/';
 const localServer = 'http://192.168.1.60/slondo/public/api/';
@@ -16,13 +12,12 @@ const instance = Axios.create({
     baseURL: uztelecom
 });
 
-// const config = {
-//     headers: {
-//         'Content-Type': 'multipart/form-data',
-//         // 'Authorization': `Bearer ${token}`,
-//         "Access-Control-Allow-Origin": "*"
-//     }
-// };
+const setToken = (token) => ({
+    headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`,
+    }
+});
 
 export const userAPI = {
     login: (phone: string, password: string): Promise<unknown> => {
@@ -130,8 +125,15 @@ export const userAPI = {
                 throw err
             });
     },
-    createPost: (values: any): Promise<LocationsDataTypes> => {
-        return instance.post(`regular/ads/new`, values)
+    createPost: (values: any, token: string): Promise<string> => {
+        return instance.post(`regular/ads/new`, values, setToken(token))
+            .then(res => res.data)
+            .catch(err => {
+                throw err
+            });
+    },
+    uploadPhotos: (form: FormData, token): Promise<any> => {
+        return instance.post(`regular/ads/imageUpload`, form, setToken(token))
             .then(res => res.data)
             .catch(err => {
                 throw err
@@ -144,11 +146,4 @@ export const userAPI = {
                 throw err
             });
     },
-    uploadPhotos: (form: FormData): Promise<any> => {
-        return instance.post(`regular/ads/imageUpload`, form)
-            .then(res => res.data)
-            .catch(err => {
-                throw err
-            });
-    }
 };

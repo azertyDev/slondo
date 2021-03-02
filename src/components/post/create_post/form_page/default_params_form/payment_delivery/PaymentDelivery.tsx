@@ -56,15 +56,15 @@ export const PaymentDelivery: FC<PaymentDeliveryPropsType> = (props) => {
                 </Grid>
             </Grid>
             <Grid
-                container
                 item
+                container
                 xs={12}
                 alignItems="center"
                 justify="space-between"
             >
                 <Grid item xs={3}>
                     <Typography variant="subtitle1">
-                        {t('haveDelivery')}
+                        {t('delivery')}
                     </Typography>
                 </Grid>
                 <Grid
@@ -73,6 +73,7 @@ export const PaymentDelivery: FC<PaymentDeliveryPropsType> = (props) => {
                     className='payment-delivery'
                 >
                     <Checkbox
+                        color='primary'
                         checked={values.delivery}
                         onChange={handleCheckboxChange('delivery')}
                     />
@@ -99,7 +100,7 @@ export const PaymentDelivery: FC<PaymentDeliveryPropsType> = (props) => {
             >
                 <Grid item xs={3}>
                     <Typography variant="subtitle1">
-                        {t('haveExchange')}
+                        {t('exchange')}
                     </Typography>
                 </Grid>
                 <Grid
@@ -108,6 +109,7 @@ export const PaymentDelivery: FC<PaymentDeliveryPropsType> = (props) => {
                     className='payment-delivery'
                 >
                     <Checkbox
+                        color='primary'
                         checked={values.exchange}
                         onChange={handleCheckboxChange('exchange')}
                     />

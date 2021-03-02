@@ -344,8 +344,7 @@ export const categories_list: CategoryType[] = [
             {
                 id: 1,
                 name: 'forCars',
-                parents: [{id: 3, name: 'parts'}],
-                type: []
+                parents: [{id: 3, name: 'parts'}]
             },
             {
                 id: 2,
@@ -624,26 +623,22 @@ export const categories_list: CategoryType[] = [
             {
                 id: 2,
                 name: 'housesCottages',
-                parents: [{id: 4, name: 'estate'}],
-                'type': [],
+                parents: [{id: 4, name: 'estate'}]
             },
             {
                 id: 3,
                 name: 'land',
-                parents: [{id: 4, name: 'estate'}],
-                'type': [],
+                parents: [{id: 4, name: 'estate'}]
             },
             {
                 id: 4,
                 name: 'parkingLotsAndBoxes',
-                parents: [{id: 4, name: 'estate'}],
-                'type': [],
+                parents: [{id: 4, name: 'estate'}]
             },
             {
                 id: 5,
                 name: 'commercialProperty',
-                parents: [{id: 4, name: 'estate'}],
-                'type': [],
+                parents: [{id: 4, name: 'estate'}]
             },
         ],
     },
@@ -1608,7 +1603,7 @@ export const categories_list: CategoryType[] = [
                 id: 8,
                 name: 'training',
                 parents: [{id: 6, name: 'service'}],
-                'type': [
+                type: [
                     {
                         id: 81,
                         name: 'preSchoolDevelopment',
@@ -1727,7 +1722,7 @@ export const categories_list: CategoryType[] = [
                 id: 9,
                 name: 'businessServices',
                 parents: [{id: 6, name: 'service'}],
-                'type': [
+                type: [
                     {
                         id: 95,
                         name: 'businessConsulting',
@@ -1822,7 +1817,7 @@ export const categories_list: CategoryType[] = [
                 id: 10,
                 name: 'equipmentAndAttractionsRental',
                 parents: [{id: 6, name: 'service'}],
-                'type': [
+                type: [
                     {
                         id: 106,
                         name: 'equipmentAndAttractionsRental',
@@ -1909,7 +1904,7 @@ export const categories_list: CategoryType[] = [
                 id: 11,
                 name: 'photoAndVideoFilming',
                 parents: [{id: 6, name: 'service'}],
-                'type': [
+                type: [
                     {
                         id: 141,
                         name: 'videoEditor',
@@ -1924,7 +1919,7 @@ export const categories_list: CategoryType[] = [
                 id: 12,
                 name: 'cleaning',
                 parents: [{id: 6, name: 'service'}],
-                'type': [
+                type: [
                     {
                         id: 116,
                         name: 'washingWindowsAndBalconies',
@@ -1979,7 +1974,7 @@ export const categories_list: CategoryType[] = [
                 id: 13,
                 name: 'manufacturingToOrder',
                 parents: [{id: 6, name: 'service'}],
-                'type': [
+                type: [
                     {
                         id: 122,
                         name: 'manufactureAndRepairClothesAccessories',
@@ -2058,7 +2053,7 @@ export const categories_list: CategoryType[] = [
                 id: 14,
                 name: 'food',
                 parents: [{id: 6, name: 'service'}],
-                'type': [
+                type: [
                     {
                         id: 131,
                         name: 'bakingAndCakesToOrder',
@@ -2105,7 +2100,7 @@ export const categories_list: CategoryType[] = [
                 id: 15,
                 name: 'animalCare',
                 parents: [{id: 6, name: 'service'}],
-                'type': [
+                type: [
                     {
                         id: 136,
                         name: 'knitting',
@@ -2328,20 +2323,20 @@ export const categories_list: CategoryType[] = [
                         ],
                     },
                     {
-                        id: 86,
+                        id: 21,
                         name: 'blouses',
                         parents: [
                             {id: 7, name: 'goods'},
                             {id: 1, name: 'womenWardrobe'},
-                        ],
-                    },
-                ],
+                        ]
+                    }
+                ]
             },
             {
                 id: 2,
                 name: 'mansWardrobe',
                 parents: [{id: 7, name: 'goods'}],
-                'type': [
+                type: [
                     {
                         id: 21,
                         name: 'accessories',
@@ -2468,7 +2463,7 @@ export const categories_list: CategoryType[] = [
                 id: 3,
                 name: 'babyClothes',
                 parents: [{id: 7, name: 'goods'}],
-                'type': [
+                type: [
                     {
                         id: 36,
                         name: 'accessories',
@@ -2611,7 +2606,7 @@ export const categories_list: CategoryType[] = [
                 id: 4,
                 name: 'productsForChildren',
                 parents: [{id: 7, name: 'goods'}],
-                'type': [
+                type: [
                     {
                         id: 53,
                         name: 'carSeats',
@@ -2714,7 +2709,7 @@ export const categories_list: CategoryType[] = [
                 id: 5,
                 name: 'handmade',
                 parents: [{id: 7, name: 'goods'}],
-                'type': [
+                type: [
                     {
                         id: 65,
                         name: 'cosmetics',
@@ -2793,7 +2788,7 @@ export const categories_list: CategoryType[] = [
                 id: 6,
                 name: 'beautyAndHealth',
                 parents: [{id: 7, name: 'goods'}],
-                'type': [
+                type: [
                     {
                         id: 74,
                         name: 'makeup',
@@ -3024,7 +3019,7 @@ export const categories_list: CategoryType[] = [
                 id: 2,
                 name: 'dishesAndGoodsForKitchen',
                 parents: [{id: 8, name: 'home'}],
-                'type': [
+                type: [
                     {
                         id: 15,
                         name: 'dishes',
@@ -3046,14 +3041,13 @@ export const categories_list: CategoryType[] = [
             {
                 id: 3,
                 name: 'food',
-                parents: [{id: 8, name: 'home'}],
-                'type': [],
+                parents: [{id: 8, name: 'home'}]
             },
             {
                 id: 4,
                 name: 'repairAndConstruction',
                 parents: [{id: 8, name: 'home'}],
-                'type': [
+                type: [
                     {
                         id: 17,
                         name: 'doors',
@@ -3148,7 +3142,7 @@ export const categories_list: CategoryType[] = [
                 id: 5,
                 name: 'plants',
                 parents: [{id: 8, name: 'home'}],
-                'type': [
+                type: [
                     {
                         id: 28,
                         name: 'seedlingAccessories',
@@ -3315,7 +3309,7 @@ export const categories_list: CategoryType[] = [
                 id: 2,
                 name: 'photoAndVideoCameras',
                 parents: [{id: 9, name: 'electronics'}],
-                'type': [
+                type: [
                     {
                         id: 10,
                         name: 'cameras',
@@ -3410,7 +3404,7 @@ export const categories_list: CategoryType[] = [
                 id: 3,
                 name: 'tvAudioVideo',
                 parents: [{id: 9, name: 'electronics'}],
-                'type': [
+                type: [
                     {
                         id: 21,
                         name: 'tvSets',
@@ -3521,7 +3515,7 @@ export const categories_list: CategoryType[] = [
                 id: 4,
                 name: 'appliances',
                 parents: [{id: 9, name: 'electronics'}],
-                'type': [
+                type: [
                     {
                         id: 34,
                         name: 'libra',
@@ -3640,7 +3634,7 @@ export const categories_list: CategoryType[] = [
                 id: 5,
                 name: 'computerTechnology',
                 parents: [{id: 9, name: 'electronics'}],
-                'type': [
+                type: [
                     {
                         id: 48,
                         name: 'laptops',
@@ -3743,7 +3737,7 @@ export const categories_list: CategoryType[] = [
                 id: 6,
                 name: 'gamesConsolesAndPrograms',
                 parents: [{id: 9, name: 'electronics'}],
-                'type': [
+                type: [
                     {
                         id: 60,
                         name: 'discs',
@@ -3788,7 +3782,7 @@ export const categories_list: CategoryType[] = [
                 id: 2,
                 name: 'sportsAndRecreation',
                 parents: [{id: 10, name: 'hobbies'}],
-                'type': [
+                type: [
                     {
                         id: 8,
                         name: 'sportsProtection',
@@ -3914,20 +3908,18 @@ export const categories_list: CategoryType[] = [
             {
                 id: 3,
                 name: 'videoFilms',
-                parents: [{id: 10, name: 'hobbies'}],
-                'type': [],
+                parents: [{id: 10, name: 'hobbies'}]
             },
             {
                 id: 4,
                 name: 'booksAndMagazines',
-                parents: [{id: 10, name: 'hobbies'}],
-                'type': [],
+                parents: [{id: 10, name: 'hobbies'}]
             },
             {
                 id: 5,
                 name: 'collecting',
                 parents: [{id: 10, name: 'hobbies'}],
-                'type': [
+                type: [
                     {
                         id: 32,
                         name: 'antiqueFurnitureDishes',
@@ -4173,20 +4165,18 @@ export const categories_list: CategoryType[] = [
             {
                 id: 6,
                 name: 'materialsForCreativity',
-                parents: [{id: 10, name: 'hobbies'}],
-                'type': [],
+                parents: [{id: 10, name: 'hobbies'}]
             },
             {
                 id: 7,
                 name: 'music',
-                parents: [{id: 10, name: 'hobbies'}],
-                'type': [],
+                parents: [{id: 10, name: 'hobbies'}]
             },
             {
                 id: 8,
                 name: 'musicalInstruments',
                 parents: [{id: 10, name: 'hobbies'}],
-                'type': [
+                type: [
                     {
                         id: 77,
                         name: 'accordionButtonAccordions',
@@ -4304,8 +4294,7 @@ export const categories_list: CategoryType[] = [
             {
                 id: 9,
                 name: 'boardGames',
-                parents: [{id: 10, name: 'hobbies'}],
-                'type': [],
+                parents: [{id: 10, name: 'hobbies'}]
             },
         ],
     },
