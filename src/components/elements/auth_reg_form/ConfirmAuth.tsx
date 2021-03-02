@@ -21,7 +21,6 @@ const initialInputsVals: RecoveryInputs = {
 
 const ConfirmAuth = ({t}) => {
     const dispatch = useDispatch();
-
     const [seconds, setSeconds] = useState<any>(60);
     const [smsConfirm, setSmsConfirm] = useState(false)
     const [codeChecker, setCodeChecker] = useState(false)
@@ -36,6 +35,7 @@ const ConfirmAuth = ({t}) => {
 
 
     const confirmMsg = (values) => {
+
         if (codeChecker) {
             dispatch(fetchTokenRecovery(values));
             dispatch(setIsAuthModalOpen(false));

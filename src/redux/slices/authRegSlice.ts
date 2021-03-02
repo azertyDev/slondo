@@ -2,7 +2,7 @@ import {createAsyncThunk, createSlice} from '@reduxjs/toolkit';
 import {userAPI} from "@src/api/api";
 import Cookies from "universal-cookie";
 import {AuthInputs, AuthReg, RecoveryInputs} from "@root/interfaces/Auth";
-
+import {rgnrapi} from "@src/api/api";
 
 const cookies = new Cookies();
 
@@ -19,9 +19,11 @@ export const fetchTokenLogin = createAsyncThunk<never, AuthInputs>(
     async ({phone, password}, {rejectWithValue}) => {
         try {
             const tokenObj = await userAPI.login(phone, password);
+            // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+            // @ts-ignore
             const token = tokenObj?.token
-            console.warn("token44", token)
             cookies.set('token', token, {maxAge: 2 * 3600});
+            rgnrapi();
         } catch (e) {
             return rejectWithValue(e.message);
         }
@@ -54,6 +56,8 @@ export const fetchTokenRecovery = createAsyncThunk<never, RecoveryInputs>(
     async ({phone, code, password, password_confirmation}, {rejectWithValue}) => {
         try {
             const tokenObj = await userAPI.recovery(phone, code, password, password_confirmation);
+            // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+            // @ts-ignore
             const token = tokenObj?.token
             cookies.set('token', token, {maxAge: 2 * 3600});
         } catch (e) {

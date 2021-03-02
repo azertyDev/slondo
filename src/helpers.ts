@@ -1,17 +1,16 @@
-import Cookies from "universal-cookie";
-import CyrillicToTranslit from 'cyrillic-to-translit-js';
 import {CategoryType, SubCtgrsType} from "@root/interfaces/Categories";
+import CyrillicToTranslit from 'cyrillic-to-translit-js';
 import {excludedKeys} from "@src/common_data/form_fields";
 import {punctuationMarksRegEx} from "@src/common_data/reg_ex";
 import {TFunction} from "next-i18next";
 import {categories_list} from "@src/common_data/categories_list";
+import Cookies from "universal-cookie";
 
-
-const cookie = new Cookies();
+const cookie = new Cookies()
 
 export const authChecker = () => {
-    return typeof cookie.get('token') !== 'undefined'
-};
+    return typeof cookie.get('token') !== 'undefined' ? true : false
+}
 
 export const transformTitle = (title: string): string => {
     const transform = new CyrillicToTranslit().transform;
@@ -78,50 +77,6 @@ export const addParentsToCtgrs = (categoriesList: CategoryType[]) => {
     }
 };
 
-const addParents = (list, parents) => (
-    list.map(ctgry => {
-        if (ctgry.type) {
-            const type = addParents(
-                ctgry.type,
-                [
-                    ...parents,
-                    {
-                        id: ctgry.id,
-                        name: ctgry.name
-                    }
-                ]
-            )
-            return {
-                ...ctgry,
-                type,
-                parents
-            }
-        } else {
-            return {
-                ...ctgry,
-                parents
-            }
-        }
-    })
-);
-
-export const categoriesListNormalize = (categoryList: CategoryType[]) => (
-    categoryList.map(ctgry => {
-        if (ctgry.subCategory) {
-            const subCategory = addParents(
-                ctgry.subCategory,
-                [{
-                    id: ctgry.id,
-                    name: ctgry.name
-                }]
-            );
-            return {...ctgry, subCategory};
-        } else {
-            return ctgry;
-        }
-    })
-);
-
 export const dataForCrtPostNormalize = (data: any) => {
     if (!!data) {
         data = Object.keys(data).reduce((acc: any, ctgrName) => {
@@ -186,6 +141,7 @@ export const categorySearchHelper = (txt: string, categoryList: CategoryType[], 
 };
 
 export const weekDaysHelper = (days, t: TFunction) => {
+    console.log(days)
     const daysLen = days.length;
     let isInOrder: boolean;
     let result = '';
