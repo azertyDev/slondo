@@ -39,7 +39,7 @@ const ConfirmAuth = ({t}) => {
         smsConfirm ?
             dispatch(fetchRecovery(values)) :
             dispatch(userAPI.recoverySMS(values.phone, values.code).then(result =>
-                setCodeChecker(typeof result === 'object' && result !== null ? true : false)))
+                setCodeChecker(typeof result === 'object' && result !== null)))
     };
 
     const onSubmit = (values) => {

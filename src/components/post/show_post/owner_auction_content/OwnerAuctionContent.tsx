@@ -5,7 +5,6 @@ import {Typography} from "@material-ui/core";
 import {numberPrettier} from '@root/src/helpers';
 import {useStyles} from './useStyles';
 
-
 export const OwnerAuctionContent: FC<any> = (props) => {
     const {t, postData} = props;
     const {data} = postData;

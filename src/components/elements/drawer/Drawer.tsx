@@ -12,7 +12,6 @@ export const CustomDrawer = ({ toggleDrawer, position }) => {
     const classes = useStyles()
     const { t } = useTranslation(["categories"])
     const [subList, setSubList] = useState<any>([])
-    console.warn("subList", subList)
     const list = (anchor) => (
         <div
             className={classes.drawerList}

@@ -140,7 +140,6 @@ export const PostContent: FC<WithT & any> = (props) => {
     }, [])
 
     const classes = useStyles()
-    console.warn("data", data, parameters)
     return (
         <div className={classes.root}>
             <div className="breadcrumbs">

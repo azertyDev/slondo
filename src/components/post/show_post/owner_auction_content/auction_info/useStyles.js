@@ -131,7 +131,7 @@ export const useStyles = makeStyles((theme) => ({
                                 height: 1,
                                 width: '100%',
                                 background: '#333',
-                                background:
+                                backgroundColor:
                                     'linear-gradient(left, hsla(0,0%,0%,0) 0%, hsla(0,0%,85%,1) 50%, hsla(0,0%,0%,0) 100%)',
                             },
                             '&:last-child': {

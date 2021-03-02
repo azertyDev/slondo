@@ -1,8 +1,10 @@
-import Axios from 'axios';
+import axios from 'axios';
 // import Cookies from 'universal-cookie';
 import {LocationsDataTypes} from "@root/interfaces/Locations";
 import {CategoryType} from "@root/interfaces/Categories";
+import {FavoriteType} from "@root/interfaces/Favorites";
 import {InnerCardData} from "@root/interfaces/CardData";
+import {AuctionsDataTypes} from "@root/interfaces/Auctions";
 import Cookies from "universal-cookie";
 import {authChecker} from "@src/helpers";
 
@@ -12,19 +14,41 @@ const uztelecom = 'https://backend.testb.uz/api/';
 const localServer = 'http://192.168.1.60/slondo/public/api/';
 
 
-const instance = Axios.create({
-    withCredentials: true,
-    baseURL: localServer,
-    headers: authChecker()
-        ? {
-            "Content-Type": "multipart/form-data",
-            Authorization: `Bearer ${cookie.get('token')}`,
-        }
-        : {
+// const gnrapi = () => axios.create({
+//     withCredentials: true,
+//     baseURL: localServer,
+//     timeout: 2000,
+//     headers:  authChecker()
+//             ? {
+//                 "Content-Type": "multipart/form-data",
+//                 "Authorization": `Bearer ${cookie.get('token')}`,
+//             }
+//             : {
+//                 "Content-Type": "multipart/form-data",
+//             }
+// });
+//
+// const instance = gnrapi()
+
+export const defaultOptions = () => {
+    const token = cookie.get('token');
+    const config = {
+        baseURL: localServer,
+        headers: {
             "Content-Type": "multipart/form-data",
         },
-});
+    };
+    if (token) {
+        config.headers["Authorization"] = `Bearer ${token}`;
+    }
+    return config;
+};
 
+const gnrapi = () => axios.create(defaultOptions());
+
+export let instance = gnrapi();
+
+export const rgnrapi = () => (instance = gnrapi());
 
 export const userAPI = {
     login: (phone: string, password: string): Promise<unknown> => {
@@ -89,6 +113,14 @@ export const userAPI = {
                 throw err;
             });
     },
+    getFavorites: (lang: string, lot: string): Promise<FavoriteType[]> => {
+        return instance.get(`regular/ads/get/favorites?type=${lot}&lang=${lang}`)
+            .then(res => res.data)
+            .catch(err => {
+                throw err
+            });
+    },
+
     getCategories: (lang: string): Promise<CategoryType[]> => {
         return instance.get(`categories/all?lang=${lang}`)
             .then(res => res.data)
@@ -154,5 +186,22 @@ export const userAPI = {
             .catch(err => {
                 throw err
             });
-    }
+    },
+    betAuction: ({bet, id}: any): Promise<AuctionsDataTypes> => {
+        const form = new FormData();
+        form.set('auction_id', id);
+        form.set('bet', bet);
+        return instance.post(`regular/auction/nextBet`, form)
+            .then(res => res.data)
+            .catch(err => {
+                throw err
+            });
+    },
+    getAuctionBets: (id: string, page: number): Promise<any> => {
+        return instance.get(`auction/allBets?auction_id=${id}&page=${page}&per_page=25`)
+            .then(res => res.data)
+            .catch(err => {
+                throw err
+            });
+    },
 };
