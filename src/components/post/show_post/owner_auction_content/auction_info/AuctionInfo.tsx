@@ -9,6 +9,7 @@ import {userAPI} from "@src/api/api";
 import AuctionForm from './AuctionForm'
 import {authChecker} from "@root/src/helpers";
 
+
 export const AuctionInfo: FC<any> = (props) => {
     const classes = useStyles();
     const {data} = props;
@@ -18,7 +19,6 @@ export const AuctionInfo: FC<any> = (props) => {
     const [list, setList] = useState([])
     const [lastPage, setLastPage] = useState(null)
     const [maximumPrice, setMaximumPrice] = useState(null)
-    console.warn("list", list, lastPage)
 
     useEffect(() => {
         userAPI.getAuctionBets(data.auction.id, page).then(result => {

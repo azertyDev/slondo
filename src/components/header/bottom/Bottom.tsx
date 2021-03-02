@@ -18,8 +18,7 @@ const Bottom = (props) => {
 
     const toggleDrawer = (anchor, open) => (event) => {
         if (
-            event.type === 'keydown' &&
-            (event.key === 'Tab' || event.key === 'Shift')
+            event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')
         ) {
             return
         }

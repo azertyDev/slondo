@@ -14,6 +14,7 @@ import {useStyles} from './useStyles';
 import {authRegSchema} from "@root/validation_schemas/authRegSchema";
 import ConfirmAuth from "@src/components/elements/auth_reg_form/ConfirmAuth";
 
+
 const initialInputsVals: AuthInputs = {
     phone: '+998',
     password: '',
@@ -31,7 +32,7 @@ export const AuthRegForm: FC<WithT & { handleCloseModal: () => void }> = (props)
     const [resetPassword, setResetPassword] = useState(false)
     const tabsHandler = (event, newValue) => {
         setTabValue(newValue);
-        newValue === 0 &&  setResetPassword(false)
+        newValue === 0 && setResetPassword(false)
     };
 
 
@@ -40,7 +41,7 @@ export const AuthRegForm: FC<WithT & { handleCloseModal: () => void }> = (props)
         const data = {...values, phone}
         if (tabValue === 0) {
             dispatch(fetchTokenLogin(data))
-        } else{
+        } else {
             dispatch(fetchTokenRegister(data))
         }
     };
@@ -52,11 +53,11 @@ export const AuthRegForm: FC<WithT & { handleCloseModal: () => void }> = (props)
 
     const formik = useFormik({
         initialValues: initialInputsVals,
-        validationSchema: tabValue === 0 ? authRegSchema : '',
+        validationSchema: tabValue === 0 ? authRegSchema : null,
         onSubmit
     });
 
-    const { errors, touched} = formik;
+    const {errors, touched} = formik;
 
     const classes = useStyles();
     return (
@@ -126,7 +127,9 @@ export const AuthRegForm: FC<WithT & { handleCloseModal: () => void }> = (props)
                                             </Typography>
                                             <Typography
                                                 variant="body2"
-                                                onClick={() => {setTabValue(1), setResetPassword(true)}}
+                                                onClick={() => {
+                                                    setTabValue(1), setResetPassword(true)
+                                                }}
                                                 style={{cursor: "pointer"}}
                                             >
                                                 {t('auth_reg:forgetPassword')}
@@ -159,36 +162,36 @@ export const AuthRegForm: FC<WithT & { handleCloseModal: () => void }> = (props)
                             </div>
                         </CustomTabPanel>
                         <CustomTabPanel value={tabValue} index={1} className="reg-panel">
-                            { resetPassword ?
-                                <ConfirmAuth t={t} />
+                            {resetPassword ?
+                                <ConfirmAuth t={t}/>
                                 :
-                            <FormikProvider value={formik}>
-                                <Form onSubmit={formik.handleSubmit}>
-                                    <div>
-                                        <CustomFormikField
-                                            name="phone"
-                                            type="tel"
-                                            placeholder="+ (998) __ ___ __ __"
-                                            labelText={t('auth_reg:enterPhone')}
-                                            className={errors.phone && touched.phone ? 'error-border' : ''}
-                                        />
-                                        <div className="validation-block">
-                                            <Typography variant="subtitle2" className="error-text">
-                                                {errors.phone && touched.phone ? errors.phone : ''}
-                                            </Typography>
+                                <FormikProvider value={formik}>
+                                    <Form onSubmit={formik.handleSubmit}>
+                                        <div>
+                                            <CustomFormikField
+                                                name="phone"
+                                                type="tel"
+                                                placeholder="+ (998) __ ___ __ __"
+                                                labelText={t('auth_reg:enterPhone')}
+                                                className={errors.phone && touched.phone ? 'error-border' : ''}
+                                            />
+                                            <div className="validation-block">
+                                                <Typography variant="subtitle2" className="error-text">
+                                                    {errors.phone && touched.phone ? errors.phone : ''}
+                                                </Typography>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div className={classes.modalBtns}>
-                                        <ButtonComponent
-                                            className="reg-btn"
-                                            type="submit"
-                                        >
-                                            {t('auth_reg:signUp')}
-                                        </ButtonComponent>
-                                    </div>
-                                </Form>
-                            </FormikProvider>
-                                }
+                                        <div className={classes.modalBtns}>
+                                            <ButtonComponent
+                                                className="reg-btn"
+                                                type="submit"
+                                            >
+                                                {t('auth_reg:signUp')}
+                                            </ButtonComponent>
+                                        </div>
+                                    </Form>
+                                </FormikProvider>
+                            }
                             <div className={classes.agreement}>
                                 <Typography className="reg-agreement" variant="body2">
                                     {`${t('auth_reg:agreement.firstPart')} `}

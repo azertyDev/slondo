@@ -1,17 +1,17 @@
+import Cookies from "universal-cookie";
 import {CategoryType, SubCtgrsType} from "@root/interfaces/Categories";
 import CyrillicToTranslit from 'cyrillic-to-translit-js';
 import {excludedKeys} from "@src/common_data/form_fields";
 import {punctuationMarksRegEx} from "@src/common_data/reg_ex";
 import {TFunction} from "next-i18next";
 import {categories_list} from "@src/common_data/categories_list";
-import Cookies from "universal-cookie";
 
 
 export const cookies = new Cookies();
 
-export const authChecker = () => {
-    return typeof cookies.get('token') !== 'undefined'
-}
+export const authChecker = (): boolean => {
+    return typeof cookies.get('token') !== 'undefined';
+};
 
 export const transformTitle = (title: string): string => {
     const transform = new CyrillicToTranslit().transform;

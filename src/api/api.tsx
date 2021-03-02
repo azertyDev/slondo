@@ -13,10 +13,10 @@ const localServer = 'http://192.168.1.60/slondo/public/api/';
 
 const instance = Axios.create({
     withCredentials: true,
-    baseURL: localServer
+    baseURL: uztelecom
 });
 
-export const setToken = () => {
+export const setTokenToHeader = () => {
     const token = cookies.get('token');
     return {
         headers: {
@@ -144,14 +144,14 @@ export const userAPI = {
             });
     },
     createPost: (values: any): Promise<string> => {
-        return instance.post(`regular/ads/new`, values, setToken())
+        return instance.post(`regular/ads/new`, values, setTokenToHeader())
             .then(res => res.data)
             .catch(err => {
                 throw err
             });
     },
     uploadPhotos: (form: FormData): Promise<any> => {
-        return instance.post(`regular/ads/imageUpload`, form, setToken())
+        return instance.post(`regular/ads/imageUpload`, form, setTokenToHeader())
             .then(res => res.data)
             .catch(err => {
                 throw err
@@ -168,7 +168,7 @@ export const userAPI = {
         const form = new FormData();
         form.set('auction_id', id);
         form.set('bet', bet);
-        return instance.post(`regular/auction/nextBet`, form, setToken())
+        return instance.post(`regular/auction/nextBet`, form, setTokenToHeader())
             .then(res => res.data)
             .catch(err => {
                 throw err

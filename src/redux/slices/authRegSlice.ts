@@ -5,19 +5,18 @@ import {AuthInputs, AuthReg, RecoveryInputs} from "@root/interfaces/Auth";
 
 
 const initialState: AuthReg = {
-    isFetch: false,
-    isAuth: typeof cookies.get('token') !== 'undefined',
     error: null,
+    isFetch: false,
+    isAuth: !!cookies.get('token'),
     isAuthModalOpen: false
 };
 
-// Async thunk
 export const fetchTokenLogin = createAsyncThunk<never, AuthInputs>(
     'authReg/fetchTokenByLogin',
     async ({phone, password}, {rejectWithValue}) => {
         try {
             const {token} = await userAPI.login(phone, password);
-            cookies.set('token', token, {maxAge: 2 * 3600});
+            cookies.set('token', token, {path: '/', maxAge: 2 * 3600});
         } catch (e) {
             return rejectWithValue(e.message);
         }
@@ -51,14 +50,13 @@ export const fetchTokenRecovery = createAsyncThunk<never, RecoveryInputs>(
     async ({phone, code, password, password_confirmation}, {rejectWithValue}) => {
         try {
             const {token} = await userAPI.recovery(phone, code, password, password_confirmation);
-            cookies.set('token', token, {maxAge: 2 * 3600});
+            cookies.set('token', token, {path: '/', maxAge: 2 * 3600});
         } catch (e) {
             return rejectWithValue(e.message);
         }
     }
 );
 
-// Slice
 const authRegSlice = createSlice({
     name: 'authReg',
     initialState,

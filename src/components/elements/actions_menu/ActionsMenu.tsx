@@ -32,7 +32,6 @@ export const ActionsMenu: FC<any> = (props) => {
     };
 
     const signOut = () => {
-        console.log('remove')
         cookies.remove('token', {path: '/'});
         router.push('/');
     };

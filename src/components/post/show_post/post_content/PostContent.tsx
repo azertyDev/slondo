@@ -1,5 +1,6 @@
 import React, {FC} from 'react'
 import {WithT} from 'i18next'
+import {Link} from '@root/i18n'
 import {Typography, Modal, Backdrop, List, ListItem, ListItemText, TextField, Snackbar} from '@material-ui/core'
 import {ReadMore} from '@src/components/elements/read_more/readMore'
 import {LocationIcon} from '@src/components/elements/icons/LocationIcon'
@@ -11,11 +12,11 @@ import {DeliveryIcon} from '@src/components/elements/icons/DeliveryIcon'
 import {SyncSliders} from './sync_sliders/SyncSliders'
 import {ModalSyncSliders} from './modal_sync_sliders/ModalSyncSliders'
 import {BreadcrumbsComponent} from '@src/components/elements/breadcrumbs/Breadcrumbs'
-import {Link} from '@root/i18n'
 import {numberPrettier, weekDaysHelper} from '@root/src/helpers'
-import {useStyles} from './useStyles'
 import {ButtonComponent} from '@src/components/elements/button/Button'
 import {NotificationIcon} from '@src/components/elements/icons'
+import {useStyles} from './useStyles'
+
 
 type PostContentTypes = {
     openSliderModal: boolean,

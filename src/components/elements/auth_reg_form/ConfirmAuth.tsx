@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react'
+import React, {useEffect, useState} from 'react';
 import {CustomFormikField} from "@src/components/elements/custom_formik_field/CustomFormikField";
 import {CustomFormikPasswordField} from "@src/components/elements/custom_formik_password_field/CustomFormikPasswordField";
 import {Typography, Button} from "@material-ui/core";
@@ -9,7 +9,6 @@ import {useDispatch} from "react-redux";
 import {fetchRecovery, fetchTokenRecovery, setIsAuthModalOpen} from "@src/redux/slices/authRegSlice";
 import {authRecoverySchema} from "@root/validation_schemas/authRegSchema";
 import {userAPI} from "@src/api/api";
-import Cookies from "universal-cookie";
 
 
 const initialInputsVals: RecoveryInputs = {
@@ -35,7 +34,6 @@ const ConfirmAuth = ({t}) => {
 
 
     const confirmMsg = (values) => {
-
         if (codeChecker) {
             dispatch(fetchTokenRecovery(values));
             dispatch(setIsAuthModalOpen(false));
