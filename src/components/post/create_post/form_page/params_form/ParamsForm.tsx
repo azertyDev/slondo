@@ -126,7 +126,6 @@ export const ParamsForm: FC<ParamsFormPropsType> = (props) => {
 
     const setDefaultVals = () => {
         if (mark !== 'free') {
-
             Object.keys(filters).forEach(key => {
                 const isExcludedKey = excludedKeys.some(k => k === key);
                 const isFieldKeyWithTxt = fieldKeysWithTxt.some(k => k === key);

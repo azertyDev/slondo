@@ -78,23 +78,20 @@ export const addParentsToCtgrs = (categoriesList: CategoryType[]) => {
     }
 };
 
-export const dataForCrtPostNormalize = (data: any) => {
+export const dataForCrtPostNormalize = (data: any, type?) => {
     if (!!data) {
         data = Object.keys(data).reduce((acc: any, key) => {
             const isExcludedKey = excludedKeys.some(k => k === key);
 
             if (Array.isArray(data[key]) && !!data[key].length && key !== 'manufacturers') {
-                // if (key === 'type') {
-                //     acc = {
-                //         ...acc,
-                //         ...dataForCrtPostNormalize(data[key][0])
-                //     };
-                // } else {
-                acc[key] = data[key];
+                const isExcludeTypeKey = type && key === 'type';
+
+                if (!isExcludeTypeKey) {
+                    acc[key] = data[key];
+                }
                 if (key === 'manufacturer' && data[key][0].models) {
                     acc.subCategory = [];
                 }
-                // }
             } else {
                 if (key === 'furnished') {
                     acc[key] = false;

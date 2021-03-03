@@ -101,7 +101,7 @@ export const FormPage: FC = () => {
 
             setFilters({
                 isFetch: false,
-                data: dataForCrtPostNormalize(fetchedData)
+                data: dataForCrtPostNormalize(fetchedData, type)
             });
         } catch (e) {
             dispatch(setErrorMsgAction(e.message));
