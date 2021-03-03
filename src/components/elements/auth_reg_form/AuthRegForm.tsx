@@ -29,25 +29,27 @@ export const AuthRegForm: FC<WithT & { handleCloseModal: () => void }> = (props)
     const {isFetch, error} = useSelector((store: RootState) => store.auth);
 
     const [tabValue, setTabValue] = useState(0);
-    const [resetPassword, setResetPassword] = useState(false)
+    const [resetPassword, setResetPassword] = useState(false);
+
     const tabsHandler = (event, newValue) => {
         setTabValue(newValue);
         newValue === 0 && setResetPassword(false)
     };
 
 
-    const loginReg = (values, tabValue) => {
-        const phone = values.phone.replace("+", "")
-        const data = {...values, phone}
+    const loginReg = (values) => {
+        const phone = values.phone.replace("+", "");
+        const data = {...values, phone};
+
         if (tabValue === 0) {
-            dispatch(fetchTokenLogin(data))
+            dispatch(fetchTokenLogin(data));
         } else {
-            dispatch(fetchTokenRegister(data))
+            dispatch(fetchTokenRegister(data));
         }
     };
 
     const onSubmit = (values) => {
-        loginReg(values, tabValue);
+        loginReg(values);
         tabValue === 0 ? props.handleCloseModal() : setTabValue(0);
     };
 
@@ -162,10 +164,9 @@ export const AuthRegForm: FC<WithT & { handleCloseModal: () => void }> = (props)
                             </div>
                         </CustomTabPanel>
                         <CustomTabPanel value={tabValue} index={1} className="reg-panel">
-                            {resetPassword ?
-                                <ConfirmAuth t={t}/>
-                                :
-                                <FormikProvider value={formik}>
+                            {resetPassword
+                                ? <ConfirmAuth t={t}/>
+                                : <FormikProvider value={formik}>
                                     <Form onSubmit={formik.handleSubmit}>
                                         <div>
                                             <CustomFormikField

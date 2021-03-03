@@ -26,7 +26,6 @@ export const setTokenToHeader = () => {
     }
 };
 
-
 export const userAPI = {
     login: (phone: string, password: string): Promise<{ token: string }> => {
         const form = new FormData();
@@ -80,9 +79,9 @@ export const userAPI = {
                 throw err;
             });
     },
-    favoriteAds: (id): Promise<unknown> => {
+    favoriteAds: (id: number): Promise<unknown> => {
         const form = new FormData();
-        form.set('ads_id', id);
+        form.set('ads_id', `${id}`);
         return instance
             .post(`regular/ads/favorite`, form)
             .then((res) => res.data)
