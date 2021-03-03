@@ -3,8 +3,20 @@ import {makeStyles} from '@material-ui/core/styles'
 
 export const useStyles = makeStyles((theme) => ({
     root: {
-        '& div.MuiAccordionSummary-root:hover:not(.Mui-disabled)': {
-            cursor: 'default'
+        '& div.MuiAccordionSummary-root': {
+            '& div.header-preview': {
+                display: 'flex',
+                alignItems: 'center',
+                marginLeft: '20px',
+                '& > span': {
+                    color: theme.palette.primary.createAdBtnColor,
+                    textDecoration: 'underline',
+                    cursor: 'pointer'
+                }
+            },
+            '&:hover:not(.Mui-disabled)': {
+                cursor: 'default'
+            }
         },
         '& div.MuiAccordionDetails-root': {
             display: 'block',

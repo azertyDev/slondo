@@ -47,7 +47,7 @@ export const ListMode: FC<ViewPropsTypes> = (props) => {
     const classes = useStyles();
     return (
         <div className={classes.root}>
-            {list.map((el) => {
+            {list?.map((el) => {
                 return (
                     <Grid container key={el.id}>
                         <Grid item xs={9} className="left-content">
@@ -73,12 +73,9 @@ export const ListMode: FC<ViewPropsTypes> = (props) => {
                             <Paper variant="outlined" elevation={2}>
                                 <div className="card-data">
                                     <div className="img">
-                                        {el.images.map((image) => (
                                             <img
-                                                src={image.url.default}
-                                                key={el.id}
+                                                src={el.images[0].url.default}
                                             />
-                                        ))}
                                         <Typography
                                             variant="caption"
                                             color="initial"
@@ -178,9 +175,9 @@ export const ListMode: FC<ViewPropsTypes> = (props) => {
                                                     color="initial"
                                                     noWrap
                                                 >
-                                                    {el.region.name},{' '}
-                                                    {el.city.name},{' '}
-                                                    {el.district.name}
+                                                    {el.region?.name},{' '}
+                                                    {el.city?.name},{' '}
+                                                    {el.district?.name}
                                                 </Typography>
                                             </div>
                                             <div>
@@ -189,14 +186,14 @@ export const ListMode: FC<ViewPropsTypes> = (props) => {
                                                     color="initial"
                                                 >
                                                     {numberPrettier(el.price)}{' '}
-                                                    {t(el.currency.name)}
+                                                    {t(el.currency?.name)}
                                                 </Typography>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </Paper>
-                            <div className="status-buttons">
+                            {true && <div className="status-buttons">
                                 {!!el.accepted ? (
                                     <ButtonComponent className="accept">
                                         <DoneAllIcon/>
@@ -260,7 +257,7 @@ export const ListMode: FC<ViewPropsTypes> = (props) => {
                                         </Typography>
                                     </ButtonComponent>
                                 ))}
-                            </div>
+                            </div>}
                         </Grid>
                         <Hidden xsUp={false}>
                             <Grid item xs={3} className="right-content">

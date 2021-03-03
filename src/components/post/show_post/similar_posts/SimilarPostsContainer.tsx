@@ -45,16 +45,14 @@ const initialCardData: CardData = {
     },
 };
 
-export const SimilarPostsContainer: FC<{ ancmntType: string }> = (
-    props,
-) => {
+export const SimilarPostsContainer: FC<{ ancmntType: string }> = (props) => {
     const {ancmntType} = props;
     const lang = i18n.language;
 
     const [currentPage, setCurrentPage] = useState(1);
     const [cardData, setCardData] = useState(initialCardData);
 
-    const type = ancmntType === 'regular' ? 'ad' : 'lot';
+    const type = ancmntType === 'post' ? 'auc' : 'exauc';
 
     const setFetchedCardData = async () => {
         try {

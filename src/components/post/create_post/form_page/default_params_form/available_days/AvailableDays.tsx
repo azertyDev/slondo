@@ -23,6 +23,8 @@ export const AvailableDays: FC<AvailableDaysPropsType> = (props) => {
         handleSwitch,
     } = props;
 
+    const {isActive, time} = avalTime;
+
     const classes = useStyles();
     return (
         <div className={classes.root}>
@@ -34,7 +36,7 @@ export const AvailableDays: FC<AvailableDaysPropsType> = (props) => {
                 </Typography>
                 <Switch
                     color='primary'
-                    checked={avalTime.isActive}
+                    checked={isActive}
                     onChange={handleSwitch}
                 />
             </div>
@@ -42,40 +44,37 @@ export const AvailableDays: FC<AvailableDaysPropsType> = (props) => {
                 <div className='week-days'>
                     {WEEK_DAYS.map(day =>
                         <Checkbox
-                            disabled={!avalTime.isActive}
+                            disabled={!isActive}
                             key={day.id}
-                            checked={avalTime.isActive && avalTime.available_days.some(({id}) => id === day.id)}
+                            checked={isActive && time.available_days.some(({id}) => id === day.id)}
                             checkedIcon={
                                 <Typography className='selected-day'>
-                                    {day.name}
+                                    {t(day.name)}
                                 </Typography>
                             }
-                            icon={<Typography>{day.name}</Typography>}
+                            icon={<Typography>{t(day.name)}</Typography>}
                             onChange={handleAvalDays(day)}
                         />
                     )}
                 </div>
                 <div className='available-time'>
                     <div>
-                        <Typography>{t('from')}</Typography>
                         <TextField
                             variant='outlined'
                             name='start_time'
                             onChange={handleTime}
                             onBlur={handleBlur}
-                            value={avalTime.start_time}
-                            disabled={!avalTime.isActive}
+                            value={time.start_time}
+                            disabled={!isActive}
                         />
-                    </div>
-                    <div>
-                        <Typography>{t('before')}</Typography>
+                        <span>&nbsp;-&nbsp;</span>
                         <TextField
                             name='end_time'
                             variant='outlined'
                             onBlur={handleBlur}
                             onChange={handleTime}
-                            value={avalTime.end_time}
-                            disabled={!avalTime.isActive}
+                            value={time.end_time}
+                            disabled={!isActive}
                         />
                     </div>
                 </div>

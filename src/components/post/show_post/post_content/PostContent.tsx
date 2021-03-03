@@ -1,5 +1,6 @@
 import React, {FC} from 'react'
 import {WithT} from 'i18next'
+import {Link} from '@root/i18n'
 import {Typography, Modal, Backdrop, List, ListItem, ListItemText, TextField, Snackbar} from '@material-ui/core'
 import {ReadMore} from '@src/components/elements/read_more/readMore'
 import {LocationIcon} from '@src/components/elements/icons/LocationIcon'
@@ -11,11 +12,11 @@ import {DeliveryIcon} from '@src/components/elements/icons/DeliveryIcon'
 import {SyncSliders} from './sync_sliders/SyncSliders'
 import {ModalSyncSliders} from './modal_sync_sliders/ModalSyncSliders'
 import {BreadcrumbsComponent} from '@src/components/elements/breadcrumbs/Breadcrumbs'
-import {Link} from '@root/i18n'
 import {numberPrettier, weekDaysHelper} from '@root/src/helpers'
-import {useStyles} from './useStyles'
 import {ButtonComponent} from '@src/components/elements/button/Button'
 import {NotificationIcon} from '@src/components/elements/icons'
+import {useStyles} from './useStyles'
+
 
 type PostContentTypes = {
     openSliderModal: boolean,
@@ -63,7 +64,6 @@ export const PostContent: FC<WithT & any> = (props) => {
     const excludedFields = [
         'id',
         'type',
-        'sub_type',
         'uniqid',
         'color_id',
         'type_id',
@@ -144,15 +144,8 @@ export const PostContent: FC<WithT & any> = (props) => {
         <div className={classes.root}>
             <div className="breadcrumbs">
                 <BreadcrumbsComponent>
-                    <Link href="#">
-                        <a>
-                            <Typography variant="subtitle1" noWrap>
-                                {data.category.name}
-                            </Typography>
-                        </a>
-                    </Link>
                     {data.category.sub_category.length
-                    && <Link href="#">
+                    && <Link href={`/categories/${data.category.mark}`}>
                         <a>
                             <Typography variant="subtitle1" noWrap>
                                 {data.category.sub_category[0].name}
@@ -252,22 +245,23 @@ export const PostContent: FC<WithT & any> = (props) => {
                     </span>
                 }
                 {
-                    !!data.available_start_time
-                    && <span className="available">
+                    !!data.available_start_time && (
+                        <span className="available">
                         <PhoneIcon/>
-                        {
-                            !!data.available_days.length
-                            && <>
-                                <Typography variant="subtitle1" color="primary">
-                                    {weekDaysHelper(data.available_days)}
-                                </Typography>
-                                &nbsp;&nbsp;
-                            </>
-                        }
-                        <Typography variant="subtitle1">
+                            {
+                                !!data.available_days.length
+                                && <>
+                                    <Typography variant="subtitle1" color="primary">
+                                        {weekDaysHelper(data.available_days, t)}
+                                    </Typography>
+                                    &nbsp;&nbsp;
+                                </>
+                            }
+                            <Typography variant="subtitle1">
                             {`${data.available_start_time} - ${data.available_end_time}`}
                         </Typography>
                     </span>
+                    )
                 }
             </div>
             <div className="post-location">

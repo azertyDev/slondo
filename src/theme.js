@@ -99,10 +99,10 @@ const theme = createMuiTheme({
                     textAlign: 'center'
                 },
                 '.error-border': {
-                    borderColor: colors.error,
+                    borderColor: `${colors.error}!important`,
                     '& div.MuiOutlinedInput-root': {
                         '& > fieldset, &:hover > fieldset.MuiOutlinedInput-notchedOutline': {
-                            borderColor: colors.error
+                            borderColor: `${colors.error}!important`
                         },
                     },
                     '& button.MuiButtonBase-root': {

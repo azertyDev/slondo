@@ -6,17 +6,16 @@ import {
     estateTxtFields,
     excludedKeys,
     fieldKeysWithTxt,
-    noSelect,
     numericFields,
     optionKeys,
 } from '@src/common_data/form_fields';
-import { isRequired } from '@root/validation_schemas/createPostSchema'
-import { CustomMenu } from '@src/components/elements/custom_menu/CustomMenu'
-import { CustomAccordion } from '../accordion/CustomAccordion'
-import { numberPrettier } from '@src/helpers'
-import { numberRegEx } from '@src/common_data/reg_ex'
-import { useStyles } from './useStyles'
-import { CarIcon, ParametersIcon } from '@src/components/elements/icons'
+import {isRequired} from '@root/validation_schemas/createPostSchemas'
+import {CustomMenu} from '@src/components/elements/custom_menu/CustomMenu'
+import {CustomAccordion} from '../accordion/CustomAccordion'
+import {numberPrettier} from '@src/helpers'
+import {numberRegEx} from '@src/common_data/reg_ex'
+import {useStyles} from './useStyles'
+import {CarIcon, ParametersIcon} from '@src/components/elements/icons'
 
 
 export const CarForm: FC<any> = (props) => {
@@ -100,18 +99,19 @@ export const CarForm: FC<any> = (props) => {
 
     const classes = useStyles();
     return (
-        <FormikProvider value={formik}>
-            <form onSubmit={handleSubmit}>
-                <CustomAccordion
-                    open={open}
-                    title={t('automobile')}
-                    nextButtonTxt={t('appearance')}
-                    icon={<CarIcon />}
-                >
-                    <h4>Car</h4>
-                </CustomAccordion>
-            </form>
-        </FormikProvider>
+        <div></div>
+        // <FormikProvider value={formik}>
+        //     <form onSubmit={handleSubmit}>
+        //         <CustomAccordion
+        //             open={open}
+        //             title={t('automobile')}
+        //             nextButtonTxt={t('appearance')}
+        //             icon={<CarIcon/>}
+        //         >
+        //             <h4>Car</h4>
+        //         </CustomAccordion>
+        //     </form>
+        // </FormikProvider>
     )
 
     async function setDefaultVals() {
@@ -128,7 +128,7 @@ export const CarForm: FC<any> = (props) => {
                             if (isFieldKeyWithTxt) {
                                 values[key] = {...filters[key][0], txt: ''};
                             } else if (!values[key]) {
-                                values[key] = noSelect;
+                                values[key] = null;
                             } else if (isOptionKey) {
                                 values[key] = [];
                             }

@@ -1,4 +1,4 @@
-import React, { FC, useState } from 'react'
+import React, {FC, useState} from 'react'
 import {
     Grid,
     Hidden,
@@ -7,12 +7,11 @@ import {
     Toolbar,
     IconButton,
 } from '@material-ui/core'
-import { TopHeaderPropsType } from '@src/components/header/top/TopContainer'
-import { Link } from '@root/i18n'
-import { useRouter } from 'next/router'
-import { Router } from '@root/i18n'
-import { LeftDrawer } from './drawer/Drawer'
-import { Localization } from '@src/components/elements/localization/Localization'
+import {TopHeaderPropsType} from '@src/components/header/top/TopContainer'
+import {Link} from '@root/i18n'
+import {useRouter} from 'next/router'
+import {LeftDrawer} from './drawer/Drawer'
+import {Localization} from '@src/components/elements/localization/Localization'
 import {
     QuestionIcon,
     LocationIcon,
@@ -20,28 +19,24 @@ import {
     Logo,
     SubstractIcon, UserAvatarIcon,
 } from '@src/components/elements/icons'
-import { useStyles } from './useStyles'
+import {useStyles} from './useStyles'
 
 
 export const Top: FC<TopHeaderPropsType> = (props) => {
     const [isOpen, setIsOpen] = useState(false)
-    const { t, handleOpenModal } = props
-    const { pathname } = useRouter()
-
-    const onButtonClick = (url) => () => {
-        Router.push(`/cabinet/${url}`)
-    }
+    const {t, handleOpenModal} = props
+    const {pathname} = useRouter();
 
     const classes = useStyles()
     return (
         <div className={classes.root}>
-            <Hidden smDown>
-                <Grid container justify="space-between" alignItems="center">
+            <Grid container justify="space-between" alignItems="center">
+                <Hidden mdDown>
                     <Grid item md={6}>
                         <div className="location">
-                            <LocationIcon />
+                            <LocationIcon/>
                             <Typography variant="subtitle1">
-                                {t('location')}
+                                {t(`common:location`)}
                             </Typography>
                         </div>
                     </Grid>
@@ -59,7 +54,7 @@ export const Top: FC<TopHeaderPropsType> = (props) => {
                                     <Typography variant="subtitle1">
                                         {t('actions')}
                                     </Typography>
-                                    <SurpriseIcon />
+                                    <SurpriseIcon/>
                                 </a>
                             </Link>
                         </Grid>
@@ -69,7 +64,7 @@ export const Top: FC<TopHeaderPropsType> = (props) => {
                                     <Typography variant="subtitle1">
                                         {t('bonus')}
                                     </Typography>
-                                    <SubstractIcon />
+                                    <SubstractIcon/>
                                 </a>
                             </Link>
                         </Grid>
@@ -81,18 +76,18 @@ export const Top: FC<TopHeaderPropsType> = (props) => {
                                     <Typography variant="subtitle1">
                                         {t('help')}
                                     </Typography>
-                                    <QuestionIcon />
+                                    <QuestionIcon/>
                                 </a>
                             </Link>
                         </Grid>
                         <Grid item md={2}>
-                            <Localization />
+                            <Localization/>
                         </Grid>
                     </Grid>
-                </Grid>
-            </Hidden>
+                </Hidden>
+            </Grid>
             {/*    Adaptive   */}
-            <Hidden mdUp>
+            <Hidden lgUp>
                 <AppBar position={'fixed'} color={'inherit'} elevation={0}>
                     <Toolbar>
                         <Grid
@@ -106,28 +101,28 @@ export const Top: FC<TopHeaderPropsType> = (props) => {
                                     onClick={() => setIsOpen(true)}
                                 >
                                     <div className="burger-menu">
-                                        <div />
-                                        <div />
-                                        <div />
+                                        <div/>
+                                        <div/>
+                                        <div/>
                                     </div>
                                 </IconButton>
                             </Grid>
                             <Grid className="top-header-logo">
                                 <Link href="/">
                                     <a>
-                                        <Logo />
+                                        <Logo/>
                                     </a>
                                 </Link>
                             </Grid>
                             <Grid className={classes.avatarBlock}>
                                 <IconButton onClick={handleOpenModal}>
-                                    <UserAvatarIcon />
+                                    <UserAvatarIcon/>
                                 </IconButton>
                             </Grid>
                         </Grid>
                     </Toolbar>
                 </AppBar>
-                <LeftDrawer isOpen={isOpen} setIsOpen={setIsOpen} />
+                <LeftDrawer isOpen={isOpen} setIsOpen={setIsOpen}/>
             </Hidden>
         </div>
     )

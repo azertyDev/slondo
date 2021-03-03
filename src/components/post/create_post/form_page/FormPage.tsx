@@ -1,31 +1,24 @@
 import React, {FC, useEffect, useState} from 'react';
 import {useRouter} from "next/router";
-import {i18n, useTranslation} from "@root/i18n";
+import {Typography} from "@material-ui/core";
+import {i18n, Router, useTranslation} from "@root/i18n";
 import {useDispatch} from "react-redux";
-import {FileType} from "@root/interfaces/Post";
-import {CameraIcon} from "@src/components/elements/icons";
-import { postTypes } from '@src/common_data/post_types_list'
-import { MainLayout } from '@src/components/MainLayout'
-import { ParamsForm } from './params_form/ParamsForm'
-import { AppearanceForm } from './appearance_form/AppearanceForm'
-import { DefaultParamsForm } from './default_params_form/DefaultParamsForm'
-import { setErrorMsgAction } from '@root/src/redux/slices/errorSlice'
-import { getCategoriesByParams } from '@src/helpers'
-import { CreatePostHeader } from '../create_post_header/CreatePostHeader'
-import { categories_list } from '@src/common_data/categories_list'
-import { useStyles } from './useStyles'
-import { userAPI } from '@src/api/api'
-import { CarForm } from '@src/components/post/create_post/form_page/car_form/CarForm'
-import { EstateForm } from '@src/components/post/create_post/form_page/estate_form/EstateForm'
+import {postTypes} from '@src/common_data/post_types_list';
+import {MainLayout} from '@src/components/MainLayout';
+import {ParamsForm} from './params_form/ParamsForm';
+import {AppearanceForm} from './appearance_form/AppearanceForm';
+import {DefaultParamsForm} from './default_params_form/DefaultParamsForm';
+import {setErrorMsgAction} from '@root/src/redux/slices/errorSlice';
+import {dataForCrtPostNormalize, getCategoriesByParams} from '@src/helpers';
+import {categories_list} from '@src/common_data/categories_list';
+import {Top} from '../top/Top';
+import {userAPI} from '@src/api/api';
+import {CarForm} from '@src/components/post/create_post/form_page/car_form/CarForm';
+import {EstateForm} from '@src/components/post/create_post/form_page/estate_form/EstateForm';
+import {ButtonComponent} from "@src/components/elements/button/Button";
+import {SuccessPage} from "@src/components/post/create_post/success_page/SuccessPage";
+import {useStyles} from './useStyles';
 
-
-export const initPhoto: FileType = {
-    url: (
-        <div style={{ width: '100px', height: '100px', margin: 'auto' }}>
-            <CameraIcon />
-        </div>
-    ),
-}
 
 export type DataForCrtPostType = {
     isFetch: boolean;
@@ -39,14 +32,16 @@ export const FormPage: FC = () => {
     const lang = i18n.language;
 
     const {asPath, query} = useRouter();
-    const {index, preview, ...params} = query;
+    const {index, preview, success, ...params} = query;
 
     const {category, subCategory, type} = getCategoriesByParams(categories_list, params);
     const mark = category.name;
-    const isCategoryFree = category.name !== 'free';
+    const isCategoryFree = category.name === 'free';
 
     const isPreview = !!Number(preview);
-    const backUrl = isPreview ? asPath.replace(/1$/, '0') : `/create/type/${index}`;
+    const isSuccess = !!Number(success);
+
+    const backUrl = isPreview ? asPath.replace(/preview=1/, 'preview=0') : `/create/type/${index}`;
 
     const title = `${t(`categories:${category.name}`)}
         ${subCategory ? ` - ${t(`categories:${subCategory.name}`)}` : ''}
@@ -54,38 +49,49 @@ export const FormPage: FC = () => {
 
     const postType = postTypes.find(type => type.name === index);
 
+    const initPost = {
+        ads_type_id: postType.id,
+        category_id: category.id,
+        sub_category_id: subCategory ? subCategory.id : null,
+        photos: []
+    };
+
     const initFilters: { isFetch: boolean, data: any } = {
         isFetch: false,
         data: {}
     };
 
-    const initOpenStats = {
-        carParamsOpen: true,
-        paramsOpen: category.name !== 'car' || true,
-        appearanceOpen: category.name === 'free' || true,
-        defParamsOpen: true,
+    const initOpenKeys = {
+        car: mark === 'car',
+        estate: mark === 'estate',
+        params: mark !== 'car' && mark !== 'estate',
+        appearance: false,
+        defParams: false
     };
 
-    const [post, setPost] = useState({});
+    const [post, setPost] = useState(initPost);
 
     const [filters, setFilters] = useState(initFilters);
     const {color, ...data} = filters.data;
 
-    const [openStats, setOpenStats] = useState(initOpenStats);
-    const {
-        paramsOpen,
-        appearanceOpen,
-        defParamsOpen
-    } = openStats;
+    const [openKeys, setOpenKeys] = useState(initOpenKeys);
 
-    const handleSetPost = (value) => {
-        setPost({...post, ...value})
-    }
+    const handleFormOpen = (key, expanded) => {
+        for (const k in openKeys) {
+            if (k !== key) {
+                openKeys[k] = false;
+            } else {
+                openKeys[key] = expanded;
+            }
+        }
+        // openKeys[key] = expanded;
+        setOpenKeys({...openKeys});
+    };
 
     const setFetchedFilters = async () => {
         try {
-            const subCtgrId = subCategory ? subCategory.id : null;
-            const typeId = type ? type.id : null;
+            const subCtgrId = subCategory ? subCategory.id : '';
+            const typeId = type ? type.id : '';
 
             setFilters({
                 ...filters,
@@ -96,8 +102,25 @@ export const FormPage: FC = () => {
 
             setFilters({
                 isFetch: false,
-                data: fetchedData
+                data: dataForCrtPostNormalize(fetchedData)
             });
+        } catch (e) {
+            dispatch(setErrorMsgAction(e.message));
+        }
+    };
+
+    const publishPost = async () => {
+        try {
+            const {photos, ...data} = post;
+            const form = new FormData();
+
+            const postId = await userAPI.createPost(data);
+
+            form.append('ads_id', postId);
+            photos.forEach(photo => form.append('files[]', photo.file));
+
+            await userAPI.uploadPhotos(form);
+            Router.push(asPath.replace(/success=0$/, 'success=1'));
         } catch (e) {
             dispatch(setErrorMsgAction(e.message));
         }
@@ -106,132 +129,89 @@ export const FormPage: FC = () => {
     const paramsFormByCategory = () => {
         switch (category.name) {
             case 'car':
-                return <CarForm t={t} />
+                return <CarForm t={t}/>;
             case 'estate':
-                return <EstateForm t={t} />
+                return <EstateForm t={t}/>;
             default:
                 return <ParamsForm
                     t={t}
                     mark={mark}
                     filters={data}
-                    open={paramsOpen}
-                    category={category}
-                    subCategory={subCategory}
                     type={type}
-                    handleSetPost={handleSetPost}
+                    post={post}
+                    setPost={setPost}
+                    isPreview={isPreview}
+                    subCategory={subCategory}
+                    openKey={openKeys.params}
+                    handleFormOpen={handleFormOpen}
                 />;
         }
     };
 
     useEffect(() => {
-        isCategoryFree && setFetchedFilters();
+        window.scrollTo(0, 0);
+    }, [asPath]);
+
+    useEffect(() => {
+        !isCategoryFree && setFetchedFilters();
     }, []);
 
-    console.log(post)
     const classes = useStyles();
     return (
         <MainLayout>
-            <CreatePostHeader
-                activeStep={2}
-                title={title}
-                backUrl={backUrl}
-            />
-            <div className={classes.root}>
-                {isCategoryFree && <div>
-                    {paramsFormByCategory()}
-                </div>}
-                <div>
-                    <AppearanceForm
-                        t={t}
-                        isPreview={isPreview}
-                        open={appearanceOpen}
-                        colors={color}
-                        handleSetPost={handleSetPost}
-                    />
-                </div>
-                <div>
-                    <DefaultParamsForm
-                        t={t}
-                        mark={mark}
-                        asPath={asPath}
-                        open={defParamsOpen}
-                        postType={postType}
-                        handleSetPost={handleSetPost}
-                    />
-                </div>
-            </div>
+            {
+                isSuccess
+                    ? <SuccessPage/>
+                    : <>
+                        <Top
+                            activeStep={isPreview ? 3 : 2}
+                            title={title}
+                            backUrl={backUrl}
+                        />
+                        <div className={classes.root}>
+                            {!isCategoryFree && (
+                                <div>
+                                    {paramsFormByCategory()}
+                                </div>
+                            )}
+                            <div>
+                                <AppearanceForm
+                                    t={t}
+                                    mark={mark}
+                                    colors={color}
+                                    isPreview={isPreview}
+                                    post={post}
+                                    setPost={setPost}
+                                    openKey={openKeys.appearance}
+                                    handleFormOpen={handleFormOpen}
+                                />
+                            </div>
+                            <div>
+                                <DefaultParamsForm
+                                    t={t}
+                                    mark={mark}
+                                    asPath={asPath}
+                                    postType={postType}
+                                    post={post}
+                                    setPost={setPost}
+                                    isPreview={isPreview}
+                                    openKey={openKeys.defParams}
+                                    handleFormOpen={handleFormOpen}
+                                    isCategoryFree={isCategoryFree}
+                                />
+                            </div>
+                            {isPreview && (
+                                <div className='publish-button-wrapper'>
+                                    <ButtonComponent onClick={publishPost}>
+                                        <Typography variant='subtitle1'>
+                                            {t('publish')}
+                                        </Typography>
+                                    </ButtonComponent>
+                                </div>
+                            )}
+                        </div>
+                    </>
+            }
         </MainLayout>
     )
 };
-
-// const prepareValues = () => {
-//     const {
-//         price,
-//         phone,
-//         currency,
-//         location,
-//         avalTime: {
-//             isActive,
-//             start_time,
-//             end_time,
-//             available_days
-//         },
-//         ...defParams
-//     } = defaultParams;
-//
-//     const valsForCrtPost: any = {
-//         ...defParams,
-//         ...location,
-//         phone,
-//         price: price.replace(whiteSpacesRegEx, ''),
-//         currency_id: currency.id,
-//         [category.name]: {
-//             [`${category.name}_id`]: category.id
-//         }
-//     };
-//
-//     if (isActive) {
-//         if (!!available_days.length) {
-//             valsForCrtPost.available_days = available_days;
-//         }
-//         valsForCrtPost.start_time = start_time;
-//         valsForCrtPost.end_time = end_time;
-//     }
-//
-//     Object.keys(postParamsByMark).map(k => {
-//         if (postParamsByMark[k]) {
-//             if (Array.isArray(postParamsByMark[k]) && postParamsByMark[k].length) {
-//                 valsForCrtPost[category.name][k] = postParamsByMark[k].map(val => ({id: val.id}));
-//             } else if (postParamsByMark[k].id) {
-//                 if (postParamsByMark[k].txt) {
-//                     valsForCrtPost[category.name][k] = postParamsByMark[k].txt;
-//                 }
-//                 valsForCrtPost[category.name][`${k}_id`] = postParamsByMark[k].id;
-//             } else if (!!postParamsByMark[k]) {
-//                 valsForCrtPost[category.name][k] = postParamsByMark[k];
-//             }
-//         }
-//     });
-//
-//     if (isAuction) {
-//         const {
-//             duration,
-//             display_phone,
-//             auto_renewal,
-//             reserve_price,
-//             offer_the_price,
-//             price_by_now: {value}
-//         } = auction;
-//
-//         valsForCrtPost.auction = {
-//             display_phone,
-//             offer_the_price,
-//             auto_renewal,
-//             duration_id: duration.id,
-//             reserve_price: reserve_price.replace(whiteSpacesRegEx, ''),
-//             price_by_now: value.replace(whiteSpacesRegEx, '')
-//         };
-//     }
-//
-//     return valsForCrtPost;
-// };

@@ -3,13 +3,13 @@ import {useRouter} from "next/router";
 import {i18n, useTranslation, Router} from '@root/i18n';
 import {MainLayout} from '@src/components/MainLayout';
 import {categorySearchHelper, categoriesByType} from '@src/helpers';
-import {CreatePostHeader} from '../create_post_header/CreatePostHeader';
+import {Top} from '../top/Top';
 import {SubCtgrsType} from '@root/interfaces/Categories';
 import {Grid, InputBase, List, ListItem, Typography} from "@material-ui/core";
 import {BackspaceIcon, Search_icon} from "@src/components/elements/icons";
 import {ButtonComponent} from "@src/components/elements/button/Button";
 import {IdNameType} from "@root/interfaces/Post";
-import {useStyles} from "@src/components/post/create_post/post_categories_page/useStyles";
+import {useStyles} from "@src/components/post/create_post/categories_page/useStyles";
 
 
 type CategoryStateType = IdNameType & {
@@ -52,22 +52,25 @@ export const PostCategoriesPage: FC = () => {
 
                 if (ctgr.parents[1]) {
                     const subCtgrId = ctgr.parents[1].name;
-                    Router.push(`${url}?categoryName=${mainCtgr.name}&subCategoryName=${subCtgrId}&typeName=${ctgr.name}&preview=0`);
+                    Router.push(`${url}?categoryName=${mainCtgr.name}&subCategoryName=${subCtgrId}&typeName=${ctgr.name}&preview=0&success=0`);
                 } else {
                     if (!type) {
-                        Router.push(`${url}?categoryName=${mainCtgr.name}&subCategoryName=${ctgr.name}&preview=0`);
+                        Router.push(`${url}?categoryName=${mainCtgr.name}&subCategoryName=${ctgr.name}&preview=0&success=0`);
                     } else {
                         category.subCategory = {
                             ...category.subCategory,
                             id: ctgr.id,
                             name: ctgr.name
                         };
-                        setCategory({...category, ...mainCtgr});
+                        setCategory({
+                            ...category,
+                            ...mainCtgr
+                        });
                     }
                 }
             } else {
                 if (ctgr.name === 'free') {
-                    Router.push(`${url}?categoryName=${ctgr.name}&preview=0`);
+                    Router.push(`${url}?categoryName=${ctgr.name}&preview=0&success=0`);
                 } else {
                     setCategory({
                         ...category,
@@ -125,16 +128,20 @@ export const PostCategoriesPage: FC = () => {
         };
 
         useEffect(() => {
+            window.scrollTo(0, 0);
+        }, []);
+
+        useEffect(() => {
             setSubLvlCtgrByLang();
         }, [lang]);
 
         const classes = useStyles();
         return (
             <MainLayout>
-                <CreatePostHeader
+                <Top
                     activeStep={1}
-                    title={t(`common:${postType}`)}
                     backUrl='/create/type'
+                    title={t(`common:${postType}`)}
                 />
                 <Grid container className={classes.root}>
                     <Grid item xs={3} className="categories-menu">
@@ -166,32 +173,35 @@ export const PostCategoriesPage: FC = () => {
                         </div>
                         {!!subCtgrs.length
                             ? <List disablePadding>
-                                {isThirdLvlCtgr
-                                && <ListItem onClick={handleBackCtgr}>
-                                    <ButtonComponent className="back-btn">
-                                        <BackspaceIcon/>
-                                        <Typography variant="subtitle1">
-                                            {t(`categories:${subCtgrs[0].parents[1].name}`)}
-                                        </Typography>
-                                    </ButtonComponent>
-                                </ListItem>}
-                                {subCtgrs.map((ctgr, i) =>
-                                    <ListItem key={i} onClick={handleCategory(ctgr)}>
-                                        <div>
+                                {isThirdLvlCtgr && (
+                                    <ListItem onClick={handleBackCtgr}>
+                                        <ButtonComponent className="back-btn">
+                                            <BackspaceIcon/>
                                             <Typography variant="subtitle1">
-                                                {t(`categories:${ctgr.name}`)}
+                                                {t(`categories:${subCtgrs[0].parents[1].name}`)}
                                             </Typography>
-                                            {!!searchTxt
-                                            && <Typography
-                                                className="parent-category"
-                                                variant="subtitle2"
-                                            >
-                                                {t(`categories:${ctgr.parents[0].name}`)}
-                                                {ctgr.parents[1] && ` - ${t(`categories:${ctgr.parents[1].name}`)}`}
-                                            </Typography>}
-                                        </div>
+                                        </ButtonComponent>
                                     </ListItem>
                                 )}
+                                {
+                                    subCtgrs.map((ctgr, i) =>
+                                        <ListItem key={i} onClick={handleCategory(ctgr)}>
+                                            <div>
+                                                <Typography variant="subtitle1">
+                                                    {t(`categories:${ctgr.name}`)}
+                                                </Typography>
+                                                {!!searchTxt
+                                                && <Typography
+                                                    className="parent-category"
+                                                    variant="subtitle2"
+                                                >
+                                                    {t(`categories:${ctgr.parents[0].name}`)}
+                                                    {ctgr.parents[1] && ` - ${t(`categories:${ctgr.parents[1].name}`)}`}
+                                                </Typography>}
+                                            </div>
+                                        </ListItem>
+                                    )
+                                }
                             </List>
                             : <div className="sub-category-bg">
                                 <Typography variant="h2">

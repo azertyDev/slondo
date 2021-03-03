@@ -4,8 +4,9 @@ import {CardItem} from '@src/components/elements/card/card_item/CardItem';
 import {ViewPropsTypes} from "@src/components/elements/card/card_view/CardView";
 
 
-export const GridMode: FC<ViewPropsTypes> = (props) => {
+const GridModeView: FC<ViewPropsTypes> = (props) => {
     const {isFetch, list,} = props;
+
     return (
         <Grid container spacing={2}>
             {list.map((item, index) => (
@@ -19,3 +20,5 @@ export const GridMode: FC<ViewPropsTypes> = (props) => {
         </Grid>
     )
 };
+
+export const GridMode = React.memo(GridModeView)

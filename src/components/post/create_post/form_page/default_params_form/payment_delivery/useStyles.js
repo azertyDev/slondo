@@ -15,10 +15,10 @@ export const useStyles = makeStyles(() => ({
             '& span.MuiButtonBase-root': {
                 padding: '0',
                 borderRadius: '5px',
-                '& svg path': {
-                    backgroundColor: '#eaeaea',
-                    fill: '#ccc',
-                },
+                // '& svg path': {
+                //     backgroundColor: '#eaeaea',
+                //     fill: '#ccc',
+                // },
             },
             '& svg.question-mark': {
                 marginLeft: '5px',
@@ -28,7 +28,7 @@ export const useStyles = makeStyles(() => ({
                 marginLeft: '5px',
             },
             '& span.safe-auction-rules': {
-                color: '#9a64d0;',
+                color: '#9a64d0',
             }
         }
     }

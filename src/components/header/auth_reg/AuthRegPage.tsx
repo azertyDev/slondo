@@ -1,5 +1,5 @@
-import React, { FC } from 'react'
-import { Grid, Hidden, IconButton, Typography } from '@material-ui/core'
+import React, {FC} from 'react'
+import {Grid, Hidden, IconButton, Typography} from '@material-ui/core'
 import {
     SafeBuyingIcon,
     AdsIcon,
@@ -7,11 +7,11 @@ import {
     RatingIcon,
     BonusIcon,
 } from '@src/components/elements/icons'
-import { AuthRegForm } from '../../elements/auth_reg_form/AuthRegForm'
-import { CloseIcon } from '@src/components/elements/icons'
-import { AuthRegSm } from '@src/components/header/auth_reg/auth_reg_sm/AutRegSm'
-import { WithT } from 'i18next'
-import { useStyles } from './useStyles'
+import {AuthRegForm} from '../../elements/auth_reg_form/AuthRegForm'
+import {CloseIcon} from '@src/components/elements/icons'
+import {AuthRegSm} from '@src/components/header/auth_reg/auth_reg_sm/AutRegSm'
+import {WithT} from 'i18next'
+import {useStyles} from './useStyles'
 
 
 type AuthRegPageType = {
@@ -19,9 +19,9 @@ type AuthRegPageType = {
 };
 
 export const AuthRegPage: FC<AuthRegPageType & WithT> = (props) => {
-    const { t, handleCloseModal } = props
+    const {t, handleCloseModal} = props
 
-    const classes = useStyles()
+    const classes = useStyles();
     return (
         <div className={classes.root}>
             <Hidden smDown>
@@ -29,31 +29,31 @@ export const AuthRegPage: FC<AuthRegPageType & WithT> = (props) => {
                     <Grid item xs={5}>
                         <div className='info-block'>
                             <div>
-                                <BonusIcon />
+                                <BonusIcon/>
                                 <Typography variant="subtitle2" color="initial">
                                     {t('auth_reg:bonus')}
                                 </Typography>
                             </div>
                             <div>
-                                <SafeBuyingIcon />
+                                <SafeBuyingIcon/>
                                 <Typography variant="subtitle2" color="initial">
                                     {t('auth_reg:safeBuying')}
                                 </Typography>
                             </div>
                             <div>
-                                <AdsIcon />
+                                <AdsIcon/>
                                 <Typography variant="subtitle2" color="initial">
                                     {t('auth_reg:createAd')}
                                 </Typography>
                             </div>
                             <div>
-                                <TorgIcon />
+                                <TorgIcon/>
                                 <Typography variant="subtitle2" color="initial">
                                     {t('auth_reg:createAuction')}
                                 </Typography>
                             </div>
                             <div>
-                                <RatingIcon />
+                                <RatingIcon/>
                                 <Typography variant="subtitle2" color="initial">
                                     {t('auth_reg:rating')}
                                 </Typography>
@@ -64,7 +64,7 @@ export const AuthRegPage: FC<AuthRegPageType & WithT> = (props) => {
                         <div className='auth-reg-block'>
                             <div className='close-btn-wrapper' onClick={handleCloseModal}>
                                 <IconButton>
-                                    <CloseIcon />
+                                    <CloseIcon/>
                                 </IconButton>
                             </div>
                             <div className='welcome-block'>

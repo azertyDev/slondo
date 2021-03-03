@@ -31,8 +31,11 @@ export const Description: FC<DescriptionPropsType> = (props) => {
                     {t('description')}
                     <span className='error-text'>*</span>
                 </strong>
-                {errors.description && touched.description
-                && <span className='error-text'> {errors.description}</span>}
+                {
+                    errors.description
+                    && touched.description
+                    && <span className='error-text'>&nbsp;{t(errors.description)}</span>
+                }
             </Typography>
             <CustomFormikTextarea
                 rowsMin={15}

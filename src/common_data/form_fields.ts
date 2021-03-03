@@ -1,6 +1,6 @@
 export const fieldKeysWithTxt = ['area', 'mileage'];
 
-export const noSelect = {id: null, name: 'Не выбрано'};
+export const requiredMsg = 'requireField';
 
 export const estateTxtFields = [
     'floor',
