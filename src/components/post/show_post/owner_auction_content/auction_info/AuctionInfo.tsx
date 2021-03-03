@@ -7,10 +7,11 @@ import {numberPrettier} from '@root/src/helpers';
 import {useStyles} from './useStyles';
 import {userAPI} from "@src/api/api";
 import AuctionForm from './AuctionForm'
-import {authChecker} from "@root/src/helpers";
+import {useSelector} from "react-redux";
 
 
 export const AuctionInfo: FC<any> = (props) => {
+    const isAuth = useSelector<any>(state => state.auth.isAuth)
     const classes = useStyles();
     const {data} = props;
     const [showAll, setShowAll] = useState(false)
@@ -18,7 +19,8 @@ export const AuctionInfo: FC<any> = (props) => {
     const date = new Date(data.expiration_at).getTime();
     const [list, setList] = useState([])
     const [lastPage, setLastPage] = useState(null)
-    const [maximumPrice, setMaximumPrice] = useState(null)
+    console.warn("isAuth", isAuth)
+
 
     useEffect(() => {
         userAPI.getAuctionBets(data.auction.id, page).then(result => {
@@ -42,6 +44,11 @@ export const AuctionInfo: FC<any> = (props) => {
         if (page !== lastPage && bottom) {
             setPage(prev => prev + 1)
         }
+    }
+
+    const handleRefresh = () => {
+        userAPI.getAuctionBets(data.auction.id, 1)
+            .then(result => setList(result.data))
     }
 
     return (
@@ -72,7 +79,7 @@ export const AuctionInfo: FC<any> = (props) => {
                         <div>
                             Текущие ставки
                         </div>
-                        <div onClick={() => console.warn("click")} style={{cursor: "pointer"}}>
+                        <div onClick={handleRefresh} style={{cursor: "pointer"}}>
                             <RefreshIcon/>
                         </div>
                     </Typography>
@@ -87,7 +94,7 @@ export const AuctionInfo: FC<any> = (props) => {
                                     <div>
                                         <div className="participant-name">
                                             <Typography variant="subtitle1" noWrap>
-                                                {item?.user?.phone} (<span>1</span>)
+                                                {item?.user?.phone} (<span>{item?.number_of_bets}</span>)
                                             </Typography>
                                         </div>
                                         <div className="dateAndTime">
@@ -138,15 +145,15 @@ export const AuctionInfo: FC<any> = (props) => {
                     </Typography>
                 </div>
                 <div className="bet-info">
-                    {authChecker() && <AuctionForm data={data} handleFormSubmit={handleSubmit}/>}
-                    <div>
+                    {isAuth && <AuctionForm data={data} handleFormSubmit={handleSubmit}/>}
+                    {isAuth && <div>
                         <Typography variant="subtitle2" color="initial">
                             Максимально возможная ставка
                         </Typography>
                         <Typography variant="subtitle2" color="initial">
-                            2 2500 000
+                            {list?.[0]?.max_bet}
                         </Typography>
-                    </div>
+                    </div>}
                 </div>
                 {data.ads_type.id === 3 && (
                     <div className="buy-now">
