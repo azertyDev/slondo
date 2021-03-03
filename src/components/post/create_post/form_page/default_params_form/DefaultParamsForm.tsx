@@ -258,8 +258,8 @@ export const DefaultParamsForm: FC<DefaultParamsPropsType> = (props) => {
         }
     }, []);
 
-    console.log('vals', values)
-    console.log('errors', errors)
+    // console.log('vals', values)
+    // console.log('errors', errors)
     // console.log('touched', touched)
     const classes = useStyles();
     return (

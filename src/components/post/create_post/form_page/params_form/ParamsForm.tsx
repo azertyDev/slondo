@@ -66,8 +66,8 @@ export const ParamsForm: FC<ParamsFormPropsType> = (props) => {
         post[mark] = {
             ...post[mark],
             ...values,
-            [`${mark}_id`]: subCategory ? subCategory.id : null,
-            type_id: type ? type.id : null,
+            [`${mark}_id`]: subCategory ? subCategory.id : '',
+            type_id: type ? type.id : values.type_id ?? '',
         };
         setPost({...post});
         handleFormOpen(nextFormName, true);
@@ -158,6 +158,7 @@ export const ParamsForm: FC<ParamsFormPropsType> = (props) => {
         setDefaultVals();
     }, [filters]);
 
+    console.log('params vals', values)
     const classes = useStyles();
     return (
         <FormikProvider value={formik}>

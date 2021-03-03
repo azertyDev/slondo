@@ -84,7 +84,6 @@ export const FormPage: FC = () => {
                 openKeys[key] = expanded;
             }
         }
-        // openKeys[key] = expanded;
         setOpenKeys({...openKeys});
     };
 
@@ -156,6 +155,7 @@ export const FormPage: FC = () => {
         !isCategoryFree && setFetchedFilters();
     }, []);
 
+    console.log('post', post)
     const classes = useStyles();
     return (
         <MainLayout>

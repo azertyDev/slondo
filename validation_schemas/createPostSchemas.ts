@@ -1,25 +1,9 @@
 import {object, string, array, lazy} from "yup";
-import {requiredMsg} from "@src/common_data/form_fields";
+import {requiredMsg, requireFields} from "@src/common_data/form_fields";
 
-
-const reqList = [
-    'condition',
-    'currency',
-    'price',
-    'year',
-    'mileage',
-    'body',
-    'manufacturer',
-    'models',
-    'colors',
-    'car_engine_type',
-    'transmission',
-    'transport_type',
-    'area_value'
-];
 
 export const isRequired = (field: string): boolean =>
-    reqList.some(reqField => reqField === field);
+    requireFields.some(reqField => reqField === field);
 
 export const paramsFormSchema = lazy((value) => object(
     Object.entries(value)

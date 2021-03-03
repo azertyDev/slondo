@@ -80,32 +80,34 @@ export const addParentsToCtgrs = (categoriesList: CategoryType[]) => {
 
 export const dataForCrtPostNormalize = (data: any) => {
     if (!!data) {
-        data = Object.keys(data).reduce((acc: any, ctgrName) => {
-            const isExcludedKey = excludedKeys.some(k => k === ctgrName);
-            if (Array.isArray(data[ctgrName]) && !!data[ctgrName].length && ctgrName !== 'manufacturers') {
-                if (ctgrName === 'type') {
-                    acc = {
-                        ...acc,
-                        ...dataForCrtPostNormalize(data[ctgrName][0])
-                    };
-                } else {
-                    acc[ctgrName] = data[ctgrName];
-                    if (ctgrName === 'manufacturer' && data[ctgrName][0].models) {
-                        acc.subCategory = [];
-                    }
+        data = Object.keys(data).reduce((acc: any, key) => {
+            const isExcludedKey = excludedKeys.some(k => k === key);
+
+            if (Array.isArray(data[key]) && !!data[key].length && key !== 'manufacturers') {
+                // if (key === 'type') {
+                //     acc = {
+                //         ...acc,
+                //         ...dataForCrtPostNormalize(data[key][0])
+                //     };
+                // } else {
+                acc[key] = data[key];
+                if (key === 'manufacturer' && data[key][0].models) {
+                    acc.subCategory = [];
                 }
+                // }
             } else {
-                if (ctgrName === 'furnished') {
-                    acc[ctgrName] = false;
-                } else if (ctgrName === 'default_param') {
+                if (key === 'furnished') {
+                    acc[key] = false;
+                } else if (key === 'default_param') {
                     acc = {
                         ...acc,
-                        ...dataForCrtPostNormalize(data[ctgrName])
+                        ...dataForCrtPostNormalize(data[key])
                     };
-                } else if (Number.isInteger(data[ctgrName]) && !isExcludedKey) {
-                    acc[ctgrName] = '';
+                } else if (Number.isInteger(data[key]) && !isExcludedKey) {
+                    acc[key] = '';
                 }
             }
+
             return acc;
         }, {});
     } else {
@@ -142,7 +144,6 @@ export const categorySearchHelper = (txt: string, categoryList: CategoryType[], 
 };
 
 export const weekDaysHelper = (days, t: TFunction) => {
-    console.log(days)
     const daysLen = days.length;
     let isInOrder: boolean;
     let result = '';
