@@ -88,8 +88,12 @@ export const dataForCrtPostNormalize = (data: any, type?) => {
 
                 if (!isExcludeTypeKey) {
                     acc[key] = data[key];
-                }
-                if (key === 'manufacturer' && data[key][0].models) {
+                } else if (key === 'type') {
+                    acc = {
+                        ...acc,
+                        ...dataForCrtPostNormalize(data[key][0])
+                    };
+                } else if (key === 'manufacturer' && data[key][0].models) {
                     acc.subCategory = [];
                 }
             } else {

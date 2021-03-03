@@ -16,6 +16,7 @@ export const fetchTokenLogin = createAsyncThunk<never, AuthInputs>(
     async ({phone, password}, {rejectWithValue}) => {
         try {
             const {token} = await userAPI.login(phone, password);
+            console.log(token)
             cookies.set('token', token, {path: '/', maxAge: 2 * 3600});
         } catch (e) {
             return rejectWithValue(e.message);

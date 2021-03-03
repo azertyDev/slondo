@@ -157,7 +157,6 @@ export const ParamsForm: FC<ParamsFormPropsType> = (props) => {
         setDefaultVals();
     }, [filters]);
 
-    console.log('params vals', values)
     const classes = useStyles();
     return (
         <FormikProvider value={formik}>
