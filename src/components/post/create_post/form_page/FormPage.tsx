@@ -90,8 +90,8 @@ export const FormPage: FC = () => {
 
     const setFetchedFilters = async () => {
         try {
-            const subCtgrId = subCategory ? subCategory.id : null;
-            const typeId = type ? type.id : null;
+            const subCtgrId = subCategory ? subCategory.id : '';
+            const typeId = type ? type.id : '';
 
             setFilters({
                 ...filters,

@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {FC, useEffect, useState} from 'react';
 import {CustomFormikField} from "@src/components/elements/custom_formik_field/CustomFormikField";
 import {CustomFormikPasswordField} from "@src/components/elements/custom_formik_password_field/CustomFormikPasswordField";
 import {Typography, Button} from "@material-ui/core";
@@ -9,6 +9,7 @@ import {useDispatch} from "react-redux";
 import {fetchRecovery, fetchTokenRecovery, setIsAuthModalOpen} from "@src/redux/slices/authRegSlice";
 import {authRecoverySchema} from "@root/validation_schemas/authRegSchema";
 import {userAPI} from "@src/api/api";
+import {WithT} from "i18next";
 
 
 const initialInputsVals: RecoveryInputs = {
@@ -18,8 +19,9 @@ const initialInputsVals: RecoveryInputs = {
     password_confirmation: ''
 };
 
-const ConfirmAuth = ({t}) => {
+const ConfirmAuth: FC<WithT> = ({t}) => {
     const dispatch = useDispatch();
+
     const [seconds, setSeconds] = useState<any>(60);
     const [smsConfirm, setSmsConfirm] = useState(false)
     const [codeChecker, setCodeChecker] = useState(false)
@@ -39,16 +41,16 @@ const ConfirmAuth = ({t}) => {
             dispatch(setIsAuthModalOpen(false));
         } else if (smsConfirm) {
             dispatch(fetchRecovery(values));
+        } else {
             userAPI.recoverySMS(values.phone, values.code)
                 .then(result => setCodeChecker(typeof result === 'object' && result !== null))
         }
     };
 
     const onSubmit = (values) => {
-        const phone = values.phone.replace("+", "")
-        const data = {...values, phone}
+        const phone = values.phone.replace("+", "");
+        const data = {...values, phone};
         confirmMsg(data);
-
     };
 
     const formik = useFormik({
@@ -56,6 +58,7 @@ const ConfirmAuth = ({t}) => {
         validationSchema: authRecoverySchema,
         onSubmit
     });
+
     const {errors, touched} = formik;
 
     return (

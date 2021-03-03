@@ -21,7 +21,7 @@ type AuthRegPageType = {
 export const AuthRegPage: FC<AuthRegPageType & WithT> = (props) => {
     const {t, handleCloseModal} = props
 
-    const classes = useStyles()
+    const classes = useStyles();
     return (
         <div className={classes.root}>
             <Hidden smDown>

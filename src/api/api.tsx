@@ -13,7 +13,7 @@ const localServer = 'http://192.168.1.60/slondo/public/api/';
 
 const instance = Axios.create({
     withCredentials: true,
-    baseURL: uztelecom
+    baseURL: localServer
 });
 
 export const setTokenToHeader = () => {
@@ -25,7 +25,6 @@ export const setTokenToHeader = () => {
         }
     }
 };
-
 
 export const userAPI = {
     login: (phone: string, password: string): Promise<{ token: string }> => {
@@ -80,9 +79,9 @@ export const userAPI = {
                 throw err;
             });
     },
-    favoriteAds: (id): Promise<unknown> => {
+    favoriteAds: (id: number): Promise<unknown> => {
         const form = new FormData();
-        form.set('ads_id', id);
+        form.set('ads_id', `${id}`);
         return instance
             .post(`regular/ads/favorite`, form)
             .then((res) => res.data)

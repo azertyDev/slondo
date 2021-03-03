@@ -122,6 +122,9 @@
     "Sa": "Sha",
     "Su": "Ya",
 
+    "availableDays": "Свободные дни",
+    "availableTime": "Свободные часы",
+
     "callTimes": "Qong'iroq qilish vaqti",
     "configs": "Sozlamalar",
     "publish": "Nashr qilmoq",

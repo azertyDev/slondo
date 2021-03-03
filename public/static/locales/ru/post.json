@@ -126,6 +126,9 @@
     "publish": "Опубликовать",
     "requireField": "Поле обязательно к заполнению",
 
+    "availableDays": "Свободные дни",
+    "availableTime": "Свободные часы",
+
     "cityOrRegionNotFound": "Адрес не найден",
     "choiceLocation": "Выберите местоположение",
 
