@@ -109,28 +109,32 @@ export const ListMode: FC<ViewPropsTypes> = (props) => {
                                                     {el.title}
                                                 </Typography>
                                             </div>
-                                            <div className='favorite'>
-                                                <Typography
-                                                    variant="subtitle2"
-                                                    color="initial"
-                                                >
-                                                    140
-                                                </Typography>
-                                                <Link href="#">
-                                                    <a className="favorite-icon">
-                                                        <FavoriteBorderIcon/>
-                                                    </a>
-                                                </Link>
+                                            <div className='card-btn'>
+                                                <div className='favorite'>
+                                                    <Typography
+                                                        variant="subtitle1"
+                                                        color="initial"
+                                                    >
+                                                        140
+                                                    </Typography>
+                                                    <Link href="#">
+                                                        <a className="favorite-icon">
+                                                            <FavoriteBorderIcon />
+                                                        </a>
+                                                    </Link>
+                                                </div>
+                                                <div className='settings-button'>
+                                                    <Link href="#">
+                                                        <a>
+                                                            <SettingsIcon />
+                                                        </a>
+                                                    </Link>
+                                                </div>
                                             </div>
-                                            <Link href="#">
-                                                <a className="settings-button">
-                                                    <SettingsIcon/>
-                                                </a>
-                                            </Link>
                                         </div>
                                         <div className="description">
                                             <span className="available">
-                                                <PhoneIcon/>
+                                                <PhoneIcon />
                                                 <Typography variant="body1">
                                                     Пн-Пт 9:00-18:00
                                                 </Typography>

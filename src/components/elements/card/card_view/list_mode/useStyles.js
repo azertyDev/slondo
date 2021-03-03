@@ -87,6 +87,7 @@ export const useStyles = makeStyles((theme) => ({
                         display: 'flex',
                         flexDirection: 'column',
                         justifyContent: 'space-between',
+                        position: 'relative',
                         '& > div.header': {
                             display: 'flex',
                             justifyContent: 'space-between',
@@ -108,25 +109,35 @@ export const useStyles = makeStyles((theme) => ({
                                     lineHeight: '20px',
                                     color: '#838383',
                                 },
-                                '&.favorite': {
-                                    background: '#F5F5F5',
-                                    boxShadow: '0px 1px 2px rgba(0, 0, 0, 0.15)',
-                                    borderRadius: '10px 0px 10px 10px',
-                                    padding: 10,
-                                    '& > a': {
-                                        marginLeft: '7px',
-                                        '&.favorite-icon': {
-                                            '& svg': {
-                                                '& defs': {
-                                                    '& linearGradient': {
-                                                        '& > stop': {
-                                                            '&:first-child': {
-                                                                stopColor:
-                                                                    '#675EAA !important',
-                                                            },
-                                                            '&:last-child': {
-                                                                stopColor:
-                                                                    '#AD66D5',
+                                '&.card-btn': {
+                                    position: 'absolute',
+                                    top: 0,
+                                    right: 20,
+                                    '& > .favorite, & > .settings-button': {
+                                        background: '#F5F5F5',
+                                        boxShadow: '0px 1px 2px rgba(0, 0, 0, 0.15)',
+                                        borderRadius: '0px 0px 10px 10px',
+                                        display: 'flex',
+                                        alignItems: 'center',
+                                    },
+                                    '& > .favorite': {
+                                        marginRight: 20,
+                                        padding: '11px 15px',
+                                        '& > a': {
+                                            marginLeft: '7px',
+                                            '&.favorite-icon': {
+                                                '& svg': {
+                                                    '& defs': {
+                                                        '& linearGradient': {
+                                                            '& > stop': {
+                                                                '&:first-child': {
+                                                                    stopColor:
+                                                                        '#675EAA !important',
+                                                                },
+                                                                '&:last-child': {
+                                                                    stopColor:
+                                                                        '#AD66D5',
+                                                                },
                                                             },
                                                         },
                                                     },
@@ -134,19 +145,18 @@ export const useStyles = makeStyles((theme) => ({
                                             },
                                         },
                                     },
-                                },
-                            },
-                            '& > a.settings-button': {
-                                background: '#BDBDBD',
-                                borderRadius: '0px 0px 5px 5px',
-                                padding: '11px 11px 10px',
-                                position: 'absolute',
-                                top: 0,
-                                right: '20px',
-                                '& > svg': {
-                                    height: '18px',
-                                    '& path': {
-                                        fill: '#fff',
+                                    '& > .settings-button': {
+                                        padding: '9.5px 12px',
+                                        '& > a': {
+                                            height: '100%',
+                                            width: '100%',
+                                            '& > svg': {
+                                                height: '18px',
+                                                '& path': {
+                                                    fill: '#4E4E4E',
+                                                },
+                                            },
+                                        },
                                     },
                                 },
                             },
