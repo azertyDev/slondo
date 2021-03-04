@@ -1,4 +1,5 @@
 import React, {FC, useEffect, useState} from 'react';
+import {Top} from '../top/Top';
 import {useRouter} from "next/router";
 import {Typography} from "@material-ui/core";
 import {i18n, Router, useTranslation} from "@root/i18n";
@@ -11,12 +12,12 @@ import {DefaultParamsForm} from './default_params_form/DefaultParamsForm';
 import {setErrorMsgAction} from '@root/src/redux/slices/errorSlice';
 import {dataForCrtPostNormalize, getCategoriesByParams} from '@src/helpers';
 import {categories_list} from '@src/common_data/categories_list';
-import {Top} from '../top/Top';
 import {userAPI} from '@src/api/api';
 import {CarForm} from '@src/components/post/create_post/form_page/car_form/CarForm';
 import {EstateForm} from '@src/components/post/create_post/form_page/estate_form/EstateForm';
 import {ButtonComponent} from "@src/components/elements/button/Button";
-import {SuccessPage} from "@src/components/post/create_post/success_page/SuccessPage";
+import {SuccessPage} from "@src/components/post/create_post/form_page/success_page/SuccessPage";
+import {withAuthRedirect} from "@src/hoc/withAuthRedirect";
 import {useStyles} from './useStyles';
 
 
@@ -25,7 +26,7 @@ export type DataForCrtPostType = {
     data: any;
 };
 
-export const FormPage: FC = () => {
+const FormPage: FC = () => {
     const dispatch = useDispatch();
 
     const {t} = useTranslation(['post']);
@@ -215,3 +216,5 @@ export const FormPage: FC = () => {
         </MainLayout>
     )
 };
+
+export default withAuthRedirect(FormPage);

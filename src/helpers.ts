@@ -34,7 +34,7 @@ export const clearWhiteSpaces = (txt: string): string => {
     return txt.replace(/\s+/g, "");
 }
 
-export const addParentsToCtgrs = (categoriesList: CategoryType[]) => {
+export const addParentsToCtgrs = (categoriesList: CategoryType[]): CategoryType[] => {
     return categoriesList.map(ctgry => {
         if (ctgry.subCategory) {
             const subCategory = addParents(

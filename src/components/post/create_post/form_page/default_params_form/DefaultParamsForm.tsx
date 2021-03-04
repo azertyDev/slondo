@@ -74,7 +74,7 @@ export const DefaultParamsForm: FC<DefaultParamsPropsType> = (props) => {
             time: {
                 start_time: '09:00',
                 end_time: '18:00',
-                available_days: [...WEEK_DAYS],
+                available_days: [...WEEK_DAYS]
             }
         },
         auction: {
@@ -102,11 +102,23 @@ export const DefaultParamsForm: FC<DefaultParamsPropsType> = (props) => {
         } = values;
 
         if (isAuction) {
-            const {duration, ...others} = auction;
+            const {
+                duration,
+                price_by_now,
+                reserve_price,
+                auto_renewal,
+                offer_the_price,
+                ...others
+            } = auction;
 
             others.duration_id = duration.id;
-            others.price_by_now = clearWhiteSpaces(auction.price_by_now.value);
-            others.reserve_price = clearWhiteSpaces(auction.reserve_price);
+
+            if (isAdvanceAuction) {
+                others.price_by_now = clearWhiteSpaces(price_by_now.value);
+                others.reserve_price = clearWhiteSpaces(reserve_price);
+                others.auto_renewal = auto_renewal;
+                others.offer_the_price = offer_the_price;
+            }
 
             otherVals.auction = others;
         }
@@ -115,7 +127,7 @@ export const DefaultParamsForm: FC<DefaultParamsPropsType> = (props) => {
 
         location = {
             region_id: region.id,
-            city_id: city.id,
+            city_id: city.id
         };
 
         if (district) {
@@ -144,7 +156,7 @@ export const DefaultParamsForm: FC<DefaultParamsPropsType> = (props) => {
     const formik = useFormik({
         onSubmit,
         initialValues: initForm,
-        validationSchema: defaultParamsSchema,
+        validationSchema: defaultParamsSchema
     });
 
     const {
@@ -203,7 +215,7 @@ export const DefaultParamsForm: FC<DefaultParamsPropsType> = (props) => {
             'price_by_now',
             'offer_the_price',
             'auto_renewal',
-            'display_phone',
+            'display_phone'
         ];
 
         if (auctionOptionsList.some(option => option === name)) {
