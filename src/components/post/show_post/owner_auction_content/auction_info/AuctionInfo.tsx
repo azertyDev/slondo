@@ -1,28 +1,59 @@
-import React, {FC, useEffect, useState} from 'react';
-import {Typography} from '@material-ui/core';
-import {ButtonComponent} from '@src/components/elements/button/Button';
-import {LockIcon, RefreshIcon} from '@src/components/elements/icons';
-import {AuctionTimer} from './AuctionTimer';
-import {numberPrettier} from '@root/src/helpers';
-import {useStyles} from './useStyles';
-import {userAPI} from "@src/api/api";
+import React, {FC, useEffect, useState} from 'react'
+import {InputBase, Typography} from '@material-ui/core'
+import {ButtonComponent} from '@src/components/elements/button/Button'
+import {LockIcon, RefreshIcon} from '@src/components/elements/icons'
+import {AuctionTimer} from './AuctionTimer'
+import {numberPrettier} from '@root/src/helpers'
+import {useStyles} from './useStyles'
+import {userAPI} from '@src/api/api'
 import AuctionForm from './AuctionForm'
-import {authChecker} from "@root/src/helpers";
+import {authChecker} from '@root/src/helpers'
+import {CustomModal} from '@src/components/elements/custom_modal/CustomModal'
 
 
 export const AuctionInfo: FC<any> = (props) => {
-    const classes = useStyles();
-    const {data} = props;
+    const classes = useStyles()
+    const { data } = props
     const [showAll, setShowAll] = useState(false)
     const [page, setPage] = useState(1)
-    const date = new Date(data.expiration_at).getTime();
+    const date = new Date(data.expiration_at).getTime()
     const [list, setList] = useState([])
     const [lastPage, setLastPage] = useState(null)
     const [maximumPrice, setMaximumPrice] = useState(null)
+    const [openModal, setOpenModal] = React.useState(false)
+
+    const modalBody = (
+        <div className={classes.modalBody}>
+            <Typography variant='subtitle1' className='subtitle'>
+                Предложенная стоимость не может быть
+                меньше стартовой цены или сделанной ставки
+            </Typography>
+            <div className='form'>
+                <InputBase
+                    className='input'
+                    placeholder='Впишите сумму'
+                    fullWidth
+                />
+                <ButtonComponent>
+                    <Typography variant='subtitle1'>
+                        Предложить
+                    </Typography>
+                </ButtonComponent>
+            </div>
+        </div>
+    )
+
+    const handleModalOpen = () => {
+        setOpenModal(true)
+    }
+
+    const handleModalClose = () => {
+        setOpenModal(false)
+    }
 
     useEffect(() => {
         userAPI.getAuctionBets(data.auction.id, page).then(result => {
-            setLastPage(result.last_page);
+            setLastPage(result.last_page)
             setList(prev => [...prev, ...result.data])
         })
     }, [page])
@@ -35,7 +66,6 @@ export const AuctionInfo: FC<any> = (props) => {
                     setList(result.data)
                 }))
     }
-
 
     const handleScroll = (e) => {
         const bottom = e.target.scrollHeight - e.target.scrollTop === e.target.clientHeight;
@@ -153,7 +183,7 @@ export const AuctionInfo: FC<any> = (props) => {
                         <Typography variant="subtitle1" color="initial">
                             1 420 000 000 сум
                         </Typography>
-                        <ButtonComponent>
+                        <ButtonComponent onClick={handleModalOpen}>
                             <Typography variant="subtitle1" color="initial">
                                 Купить сейчас
                             </Typography>
@@ -161,13 +191,16 @@ export const AuctionInfo: FC<any> = (props) => {
                     </div>
                 )}
                 <div className='suggest_price'>
-                    <ButtonComponent>
+                    <ButtonComponent onClick={handleModalOpen}>
                         <Typography variant="subtitle1" color="initial">
                             Предложить цену
                         </Typography>
                     </ButtonComponent>
                 </div>
             </div>
+            <CustomModal title='Предложить цену' handleClose={handleModalClose} open={openModal}>
+                {modalBody}
+            </CustomModal>
         </div>
     );
 };
