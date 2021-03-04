@@ -23,7 +23,7 @@ export const AuctionInfo: FC<any> = (props) => {
 
 
     useEffect(() => {
-        userAPI.getAuctionBets(data.auction.id, page).then(result => {
+        userAPI.getAuctionBets(data?.auction?.id, page).then(result => {
             setLastPage(result.last_page);
             setList(prev => [...prev, ...result.data])
         })
@@ -50,12 +50,11 @@ export const AuctionInfo: FC<any> = (props) => {
         userAPI.getAuctionBets(data.auction.id, 1)
             .then(result => setList(result.data))
     }
-
+    console.warn("asd", data.auction.reserve_price > list?.[0]?.bet)
     return (
         <div className={classes.root}>
             <div className="lot-info">
-                {data.auction
-                && <div className="reserve-price">
+                {data.auction && data.auction.reserve_price > list?.[0]?.bet && <div className="reserve-price">
                     <LockIcon/>
                     <div>
                         <Typography variant="subtitle2" color="initial">
@@ -94,7 +93,8 @@ export const AuctionInfo: FC<any> = (props) => {
                                     <div>
                                         <div className="participant-name">
                                             <Typography variant="subtitle1" noWrap>
-                                                {item?.user?.phone} (<span>{item?.number_of_bets}</span>)
+                                                {item?.user?.phone} {item?.number_of_bets &&
+                                            <span>({item?.number_of_bets})</span>}
                                             </Typography>
                                         </div>
                                         <div className="dateAndTime">
@@ -127,7 +127,7 @@ export const AuctionInfo: FC<any> = (props) => {
                                             noWrap
                                             className="per-bet"
                                         >
-                                            + {item?.outbid}
+                                            {item?.outbid === 0 ? "Стартовая цена" : `+${item?.outbid}`}
                                         </Typography>
                                     </div>
                                 </li>
@@ -144,36 +144,39 @@ export const AuctionInfo: FC<any> = (props) => {
                         Все ставки
                     </Typography>
                 </div>
-                <div className="bet-info">
-                    {isAuth && <AuctionForm data={data} handleFormSubmit={handleSubmit}/>}
-                    {isAuth && <div>
-                        <Typography variant="subtitle2" color="initial">
-                            Максимально возможная ставка
-                        </Typography>
-                        <Typography variant="subtitle2" color="initial">
-                            {list?.[0]?.max_bet}
-                        </Typography>
-                    </div>}
-                </div>
-                {data.ads_type.id === 3 && (
-                    <div className="buy-now">
-                        <Typography variant="subtitle1" color="initial">
-                            1 420 000 000 сум
-                        </Typography>
+                {isAuth &&
+                <>
+                    <div className="bet-info">
+                        <AuctionForm data={data} handleFormSubmit={handleSubmit} list={list}/>
+                        <div>
+                            <Typography variant="subtitle2" color="initial">
+                                Максимально возможная ставка:
+                            </Typography>
+                            <Typography variant="subtitle2" color="initial">
+                                {list?.[0]?.max_bet} сум
+                            </Typography>
+                        </div>
+                    </div>
+                    {data.ads_type.id === 3 && (
+                        <div className="buy-now">
+                            <Typography variant="subtitle1" color="initial">
+                                1 420 000 000 сум
+                            </Typography>
+                            <ButtonComponent>
+                                <Typography variant="subtitle1" color="initial">
+                                    Купить сейчас
+                                </Typography>
+                            </ButtonComponent>
+                        </div>
+                    )}
+                    <div className='suggest_price'>
                         <ButtonComponent>
                             <Typography variant="subtitle1" color="initial">
-                                Купить сейчас
+                                Предложить цену
                             </Typography>
                         </ButtonComponent>
                     </div>
-                )}
-                <div className='suggest_price'>
-                    <ButtonComponent>
-                        <Typography variant="subtitle1" color="initial">
-                            Предложить цену
-                        </Typography>
-                    </ButtonComponent>
-                </div>
+                </>}
             </div>
         </div>
     );
