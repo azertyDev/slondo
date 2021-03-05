@@ -13,6 +13,21 @@ export const authChecker = (): boolean => {
     return typeof cookies.get('token') !== 'undefined';
 };
 
+export const toCamelCase = (text: string) => {
+    const result = [];
+    const toLower = text.toLocaleLowerCase().split('');
+    const toLowerLen = toLower.length;
+    for(let i = 0; i < toLowerLen; i++){
+        if(toLower[i] === ' '){
+            result.push(toLower[i+1].toUpperCase())
+            i++
+        }else {
+            result.push(toLower[i])
+        }
+    }
+    return result.join('')
+}
+
 export const transformTitle = (title: string): string => {
     const transform = new CyrillicToTranslit().transform;
 

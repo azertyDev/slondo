@@ -20,7 +20,7 @@ export const OwnerAuctionContent: FC<any> = (props) => {
                     {t(`common:${data.currency.name}`)}
                 </Typography>
             </div>
-            {isAuction && <AuctionInfo data={data} />}
+            {isAuction && <AuctionInfo data={data} t={t} />}
             <OwnerInfo
                 phone={data.phone}
                 safe_deal={data.safe_deal}

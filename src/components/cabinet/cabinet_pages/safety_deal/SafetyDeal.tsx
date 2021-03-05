@@ -89,7 +89,7 @@ export const SafetyDeal: FC = () => {
                                     placeholder="+998"
                                 />
                                 <FormControlLabel
-                                    control={<Checkbox color="primary"/>}
+                                    control={<Checkbox color="secondary"/>}
                                     label="Отображать номер телефона"
                                     labelPlacement="start"
                                 />
