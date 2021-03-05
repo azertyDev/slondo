@@ -114,7 +114,7 @@ const Bottom = (props) => {
                             >
                                 {isAuth
                                     ? <div>
-                                        <Link href='/cabinet/posts'>
+                                        <Link href='#'>
                                             <a>
                                                 <PersonIcon/>
                                             </a>

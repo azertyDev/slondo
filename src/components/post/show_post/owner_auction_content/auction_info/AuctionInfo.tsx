@@ -1,30 +1,35 @@
-import React, {FC, useEffect, useState} from 'react';
-import {Typography} from '@material-ui/core';
-import {ButtonComponent} from '@src/components/elements/button/Button';
-import {LockIcon, RefreshIcon} from '@src/components/elements/icons';
-import {AuctionTimer} from './AuctionTimer';
-import {numberPrettier} from '@root/src/helpers';
-import {useStyles} from './useStyles';
-import {userAPI} from "@src/api/api";
+import React, {FC, useEffect, useState} from 'react'
+import {Typography} from '@material-ui/core'
+import {ButtonComponent} from '@src/components/elements/button/Button'
+import {LockIcon, RefreshIcon} from '@src/components/elements/icons'
+import {AuctionTimer} from './AuctionTimer'
+import {numberPrettier} from '@root/src/helpers'
+import {useStyles} from './useStyles'
+import BuyAuctionComponent from './BuyAuction';
+import {userAPI} from '@src/api/api'
 import AuctionForm from './AuctionForm'
-import {useSelector} from "react-redux";
-
+import {useDispatch, useSelector} from "react-redux";
+import {setErrorMsgAction } from '@src/redux/slices/errorSlice'
+import {toCamelCase} from "@root/src/helpers";
+import {useTranslation} from "@root/i18n";
 
 export const AuctionInfo: FC<any> = (props) => {
+    const { t } = useTranslation()
+    const dispatch = useDispatch()
     const isAuth = useSelector<any>(state => state.auth.isAuth)
-    const classes = useStyles();
-    const {data} = props;
+    const classes = useStyles()
+    const { data } = props
     const [showAll, setShowAll] = useState(false)
     const [page, setPage] = useState(1)
-    const date = new Date(data.expiration_at).getTime();
+    const date = new Date(data.expiration_at).getTime()
     const [list, setList] = useState([])
     const [lastPage, setLastPage] = useState(null)
-    console.warn("isAuth", isAuth)
-
+    const auction_id = data?.auction?.id
+    const ads_id = data?.id
 
     useEffect(() => {
-        userAPI.getAuctionBets(data?.auction?.id, page).then(result => {
-            setLastPage(result.last_page);
+        userAPI.getAuctionBets(data.auction.id, page).then(result => {
+            setLastPage(result.last_page)
             setList(prev => [...prev, ...result.data])
         })
     }, [page])
@@ -36,8 +41,8 @@ export const AuctionInfo: FC<any> = (props) => {
                     setLastPage(result.last_page);
                     setList(result.data)
                 }))
+            .catch(error => dispatch(setErrorMsgAction(t(`auction:${toCamelCase(error.response.data.message)}`))))
     }
-
 
     const handleScroll = (e) => {
         const bottom = e.target.scrollHeight - e.target.scrollTop === e.target.clientHeight;
@@ -49,8 +54,9 @@ export const AuctionInfo: FC<any> = (props) => {
     const handleRefresh = () => {
         userAPI.getAuctionBets(data.auction.id, 1)
             .then(result => setList(result.data))
+            .catch(err => dispatch(setErrorMsgAction(err.message)))
     }
-    console.warn("asd", data.auction.reserve_price > list?.[0]?.bet)
+
     return (
         <div className={classes.root}>
             <div className="lot-info">
@@ -157,27 +163,20 @@ export const AuctionInfo: FC<any> = (props) => {
                             </Typography>
                         </div>
                     </div>
-                    {data.ads_type.id === 3 && (
-                        <div className="buy-now">
-                            <Typography variant="subtitle1" color="initial">
-                                1 420 000 000 сум
-                            </Typography>
-                            <ButtonComponent>
-                                <Typography variant="subtitle1" color="initial">
-                                    Купить сейчас
-                                </Typography>
-                            </ButtonComponent>
-                        </div>
-                    )}
-                    <div className='suggest_price'>
-                        <ButtonComponent>
-                            <Typography variant="subtitle1" color="initial">
-                                Предложить цену
-                            </Typography>
-                        </ButtonComponent>
-                    </div>
-                </>}
+                {data.ads_type.id === 3 && (
+                    <BuyAuctionComponent auction_id={auction_id} ads_id={ads_id} />
+                )}
+                <div className='suggest_price'>
+                    <ButtonComponent>
+                        <Typography variant="subtitle1" color="initial">
+                            Предложить цену
+                        </Typography>
+                    </ButtonComponent>
+                </div>
+                </>
+                }
             </div>
+
         </div>
     );
 };
