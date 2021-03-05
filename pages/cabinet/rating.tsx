@@ -1,13 +1,6 @@
-import React from 'react';
-import {withTranslation} from '@root/i18n';
-import {RatingContainer} from "@src/components/cabinet/cabinet_pages/rating/RatingContainer";
+import React, {FC} from 'react';
+import RatingContainer from "@src/components/cabinet/cabinet_pages/rating/RatingContainer";
 
-const Rating = (props) => {
-    return <RatingContainer {...props}/>;
-};
+const Rating: FC = () => <RatingContainer/>;
 
-Rating.getInitialProps = async () => ({
-    namespacesRequired: ['cabinet'],
-});
-
-export default withTranslation(['cabinet'])(Rating);
+export default Rating;

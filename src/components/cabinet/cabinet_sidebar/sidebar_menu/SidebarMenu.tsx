@@ -19,11 +19,10 @@ import {SettingsIcon} from '@src/components/elements/icons/SettingsIcon';
 import {PowerIcon} from '@src/components/elements/icons/PowerIcon';
 import {cookies} from '@src/helpers';
 import {useStyles} from './useStyles';
+import {WithT} from "i18next";
 
 
-export const ActionsMenu: FC<any> = (props) => {
-    const {t} = props;
-
+export const SidebarMenu: FC<WithT> = ({t}) => {
     const router = useRouter()
     const {pathname} = router;
 

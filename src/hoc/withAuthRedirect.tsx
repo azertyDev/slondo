@@ -1,22 +1,20 @@
 import React, {ComponentType, useEffect} from "react";
-import {useDispatch, useSelector} from "react-redux";
-import {setIsAuthModalOpen} from "../redux/slices/authRegSlice";
-import {RootState} from "@src/redux/rootReducer";
+import {useDispatch} from "react-redux";
 import {Router} from '@root/i18n';
+import {cookies} from "@src/helpers";
+import {setIsAuthModalOpen} from "../redux/slices/authRegSlice";
 
 
-export const withAuthRedirect = (Component: ComponentType<any>) => {
-    return () => {
-        const {isAuth} = useSelector(({auth}: RootState) => auth);
-        const dispatch = useDispatch();
+export const withAuthRedirect = (Component: ComponentType<any>) => () => {
+    const dispatch = useDispatch();
+    const isAuth = !!cookies.get('token');
 
-        useEffect(() => {
-            if (!isAuth) {
-                Router.push('/');
-                dispatch(setIsAuthModalOpen(true));
-            }
-        }, [isAuth]);
+    useEffect(() => {
+        if (!isAuth) {
+            Router.push('/');
+            dispatch(setIsAuthModalOpen(true));
+        }
+    }, [isAuth]);
 
-        return isAuth && <Component/>;
-    }
+    return <Component/>;
 };

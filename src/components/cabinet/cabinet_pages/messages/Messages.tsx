@@ -1,6 +1,6 @@
 import React, {FC} from 'react';
 import {Grid} from "@material-ui/core";
-import {CabinetMenuWrapper} from "@src/components/cabinet/CabinetMenuWrapper";
+import {CabinetWrapper} from "@src/components/cabinet/CabinetWrapper";
 import {useStyles} from './useStyles';
 
 
@@ -11,13 +11,13 @@ export const Messages: FC<any> = () => {
     const classes = useStyles();
     return (
         <div className={classes.root}>
-            <CabinetMenuWrapper headerTitle={title} title={title}>
+            <CabinetWrapper headerTitle={title} title={title}>
                 <Grid item xs={9}>
                     <div>
                         Messages
                     </div>
                 </Grid>
-            </CabinetMenuWrapper>
+            </CabinetWrapper>
         </div>
     )
 }

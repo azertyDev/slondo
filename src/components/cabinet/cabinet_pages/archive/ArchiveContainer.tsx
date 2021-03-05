@@ -2,6 +2,7 @@ import React, {FC, ReactElement} from 'react';
 import {TabsContent} from '@src/components/cabinet/cabinet_pages/TabsContent';
 import {Archive} from '@src/components/cabinet/cabinet_pages/archive/Archive';
 import {CabinetMockData} from '../../CabinetMockData';
+import {withAuthRedirect} from "@src/hoc/withAuthRedirect";
 
 
 export type TabsDataType = {
@@ -10,7 +11,7 @@ export type TabsDataType = {
     component: ReactElement;
 };
 
-export const ArchiveContainer: FC<any> = () => {
+const ArchiveContainer: FC = () => {
     const tabsData: TabsDataType[] = [
         {
             title: 'Объявления',
@@ -30,3 +31,5 @@ export const ArchiveContainer: FC<any> = () => {
         <TabsContent title={title} tabsData={tabsData} headerTitle={title}/>
     );
 };
+
+export default withAuthRedirect(ArchiveContainer);

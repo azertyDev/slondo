@@ -92,6 +92,11 @@ export const categories_list: CategoryType[] = [
                         id: 6,
                         name: 'buggy',
                         ru_name: 'Багги'
+                    },
+                    {
+                        id: 7,
+                        name: 'other',
+                        ru_name: "Другое"
                     }
                 ]
             },
@@ -101,49 +106,54 @@ export const categories_list: CategoryType[] = [
                 ru_name: 'Автобусы и грузовики',
                 type: [
                     {
-                        id: 7,
+                        id: 8,
                         name: 'buses',
                         ru_name: 'Автобусы'
                     },
                     {
-                        id: 8,
+                        id: 9,
                         name: 'minibuses',
                         ru_name: 'Микроавтобусы'
                     },
                     {
-                        id: 9,
+                        id: 10,
                         name: 'refrigeratedTruck',
                         ru_name: 'Авторефрижератор'
                     },
                     {
-                        id: 10,
+                        id: 11,
                         name: 'motorHomes',
                         ru_name: 'Автодома'
                     },
                     {
-                        id: 11,
+                        id: 12,
                         name: 'trucks',
                         ru_name: 'Грузовики'
                     },
                     {
-                        id: 12,
+                        id: 13,
                         name: 'commercialTransport',
                         ru_name: 'Легкий коммерческий транспорт'
                     },
                     {
-                        id: 13,
+                        id: 14,
                         name: 'trailers',
                         ru_name: 'Прицепы'
                     },
                     {
-                        id: 14,
+                        id: 15,
                         name: 'tractorUnits',
                         ru_name: 'Тягачи'
                     },
                     {
-                        id: 15,
+                        id: 16,
                         name: 'foodTruck',
                         ru_name: 'Фудтрак'
+                    },
+                    {
+                        id: 17,
+                        name: 'other',
+                        ru_name: "Другое"
                     }
                 ]
             },
@@ -153,54 +163,54 @@ export const categories_list: CategoryType[] = [
                 ru_name: 'Спецтехника',
                 type: [
                     {
-                        id: 16,
+                        id: 18,
                         name: 'aerialPlatform',
                         ru_name: 'Автовышки'
                     },
                     {
-                        id: 17,
+                        id: 19,
                         name: 'truckCranes',
                         ru_name: 'Автокраны'
                     },
                     {
-                        id: 18,
+                        id: 20,
                         name: 'bulldozers',
                         ru_name: 'Бульдозеры'
                     },
                     {
-                        id: 19,
+                        id: 21,
                         name: 'utilityTechnology',
                         ru_name: 'Коммунальная техника'
                     },
                     {
-                        id: 20,
+                        id: 22,
                         name: 'loaders',
                         ru_name: 'Погрузчики'
                     },
                     {
-                        id: 21,
+                        id: 23,
                         name: 'agriculturalMachinery',
                         ru_name: 'Сельхозтехника'
                     },
                     {
-                        id: 22,
+                        id: 24,
                         name: 'constructionMachinery',
                         ru_name: 'Строительная техника'
                     },
                     {
-                        id: 23,
+                        id: 25,
                         name: 'forestryEquipment',
                         ru_name: 'Лесозаготовочная техника'
                     },
                     {
-                        id: 24,
+                        id: 26,
                         name: 'excavators',
                         ru_name: 'Экскаваторы'
                     },
                     {
-                        id: 25,
-                        name: 'others',
-                        ru_name: 'Другие'
+                        id: 27,
+                        name: 'other',
+                        ru_name: 'Другое'
                     }
                 ]
             },
@@ -210,34 +220,39 @@ export const categories_list: CategoryType[] = [
                 ru_name: 'Водный транспорт',
                 type: [
                     {
-                        id: 26,
+                        id: 28,
                         name: 'rowingBoats',
                         ru_name: 'Вёсельные лодки'
                     },
                     {
-                        id: 27,
+                        id: 29,
                         name: 'jetSkis',
                         ru_name: 'Гидроциклы'
                     },
                     {
-                        id: 28,
+                        id: 30,
                         name: 'boatsAndYachts',
                         ru_name: 'Катера и яхты'
                     },
                     {
-                        id: 29,
+                        id: 31,
                         name: 'kayaksAndCanoes',
                         ru_name: 'Каяки и каноэ'
                     },
                     {
-                        id: 30,
+                        id: 32,
                         name: 'motorBoats',
                         ru_name: 'Моторные лодки'
                     },
                     {
-                        id: 31,
+                        id: 33,
                         name: 'inflatableBoat',
                         ru_name: 'Надувные лодки'
+                    },
+                    {
+                        id: 34,
+                        name: 'other',
+                        ru_name: 'Другое'
                     }
                 ]
             }
@@ -290,6 +305,11 @@ export const categories_list: CategoryType[] = [
                         id: 6,
                         name: 'buggy',
                         ru_name: 'Багги'
+                    },
+                    {
+                        id: 7,
+                        name: 'other',
+                        ru_name: 'Другое'
                     }
                 ]
             },
@@ -299,54 +319,54 @@ export const categories_list: CategoryType[] = [
                 ru_name: 'Для автобусов и грузовиков',
                 type: [
                     {
-                        id: 7,
+                        id: 8,
                         name: 'buses',
                         ru_name: 'Автобусы'
                     },
                     {
-                        id: 8,
+                        id: 9,
                         name: 'minibuses',
                         ru_name: 'Микроавтобусы'
                     },
                     {
-                        id: 9,
+                        id: 10,
                         name: 'refrigeratedTruck',
                         ru_name: 'Авторефрижератор'
                     },
                     {
-                        id: 10,
+                        id: 11,
                         name: 'motorHomes',
                         ru_name: 'Автодома'
                     },
                     {
-                        id: 11,
+                        id: 12,
                         name: 'trucks',
                         ru_name: 'Грузовики'
                     },
                     {
-                        id: 12,
+                        id: 13,
                         name: 'commercialTransport',
                         ru_name: 'Легкий коммерческий транспорт'
                     },
                     {
-                        id: 13,
+                        id: 14,
                         name: 'trailers',
                         ru_name: 'Прицепы'
                     },
                     {
-                        id: 14,
+                        id: 15,
                         name: 'tractorUnits',
                         ru_name: 'Тягачи'
                     },
                     {
-                        id: 15,
+                        id: 16,
                         name: 'foodTruck',
                         ru_name: 'Фудтрак'
                     },
                     {
-                        id: 16,
-                        name: 'others',
-                        ru_name: 'Другие'
+                        id: 17,
+                        name: 'other',
+                        ru_name: 'Другое'
                     }
                 ]
             },
@@ -356,54 +376,54 @@ export const categories_list: CategoryType[] = [
                 ru_name: 'Для спецтехники',
                 type: [
                     {
-                        id: 17,
+                        id: 18,
                         name: 'aerialPlatform',
                         ru_name: 'Автовышки'
                     },
                     {
-                        id: 18,
+                        id: 19,
                         name: 'truckCranes',
                         ru_name: 'Автокраны'
                     },
                     {
-                        id: 19,
+                        id: 20,
                         name: 'bulldozers',
                         ru_name: 'Бульдозеры'
                     },
                     {
-                        id: 20,
+                        id: 21,
                         name: 'utilityTechnology',
                         ru_name: 'Коммунальная техника'
                     },
                     {
-                        id: 21,
+                        id: 22,
                         name: 'loaders',
                         ru_name: 'Погрузчики'
                     },
                     {
-                        id: 22,
+                        id: 23,
                         name: 'agriculturalMachinery',
                         ru_name: 'Сельхозтехника'
                     },
                     {
-                        id: 23,
+                        id: 24,
                         name: 'constructionMachinery',
                         ru_name: 'Строительная техника'
                     },
                     {
-                        id: 24,
+                        id: 25,
                         name: 'forestryEquipment',
                         ru_name: 'Лесозаготовочная техника'
                     },
                     {
-                        id: 25,
+                        id: 26,
                         name: 'excavators',
                         ru_name: 'Экскаваторы'
                     },
                     {
-                        id: 26,
-                        name: 'others',
-                        ru_name: 'Другие'
+                        id: 27,
+                        name: 'other',
+                        ru_name: 'Другое'
                     }
                 ]
             },
@@ -670,8 +690,8 @@ export const categories_list: CategoryType[] = [
                     },
                     {
                         id: 30,
-                        name: 'others',
-                        ru_name: 'Другие'
+                        name: 'other',
+                        ru_name: 'Другое'
                     }
                 ]
             },
@@ -682,123 +702,153 @@ export const categories_list: CategoryType[] = [
                 type: [
                     {
                         id: 31,
-                        name: "Автобизнес"
+                        name: "Автобизнес",
+                        ru_name: "Автобизнес"
                     },
                     {
                         id: 32,
-                        name: "Безопасность и охрана"
+                        name: "Безопасность и охрана",
+                        ru_name: "Безопасность и охрана"
                     },
                     {
                         id: 33,
-                        name: "Офисный персонал"
+                        name: "Офисный персонал",
+                        ru_name: "Офисный персонал"
                     },
                     {
                         id: 34,
-                        name: "Высший менеджмент"
+                        name: "Высший менеджмент",
+                        ru_name: "Высший менеджмент"
                     },
                     {
                         id: 35,
-                        name: "Добыча сырья, энергетика"
+                        name: "Добыча сырья, энергетика",
+                        ru_name: "Добыча сырья, энергетика"
                     },
                     {
                         id: 36,
-                        name: "Домашний персонал"
+                        name: "Домашний персонал",
+                        ru_name: "Домашний персонал"
                     },
                     {
                         id: 37,
-                        name: "Издательства и СМИ"
+                        name: "Издательства и СМИ",
+                        ru_name: "Издательства и СМИ"
                     },
                     {
                         id: 38,
-                        name: "Информационные технологии"
+                        name: "Информационные технологии",
+                        ru_name: "Информационные технологии"
                     },
                     {
                         id: 39,
-                        name: "Искусство и развлечения"
+                        name: "Искусство и развлечения",
+                        ru_name: "Искусство и развлечения"
                     },
                     {
                         id: 40,
-                        name: "Закупки"
+                        name: "Закупки",
+                        ru_name: "Закупки"
                     },
                     {
                         id: 41,
-                        name: "Маркетинг и реклама"
+                        name: "Маркетинг и реклама",
+                        ru_name: "Маркетинг и реклама"
                     },
                     {
                         id: 42,
-                        name: "Медицина и фармацевтика"
+                        name: "Медицина и фармацевтика",
+                        ru_name: "Медицина и фармацевтика"
                     },
                     {
                         id: 43,
-                        name: "Начало карьеры / без опыта работы"
+                        name: "Начало карьеры / без опыта работы",
+                        ru_name: "Начало карьеры / без опыта работы"
                     },
                     {
                         id: 44,
-                        name: "Образование и наука"
+                        name: "Образование и наука",
+                        ru_name: "Образование и наука"
                     },
                     {
                         id: 45,
-                        name: "Разнорабочие"
+                        name: "Разнорабочие",
+                        ru_name: "Разнорабочие"
                     },
                     {
                         id: 46,
-                        name: "Логистика и транспорт"
+                        name: "Логистика и транспорт",
+                        ru_name: "Логистика и транспорт"
                     },
                     {
                         id: 47,
-                        name: "Продажи"
+                        name: "Продажи",
+                        ru_name: "Продажи"
                     },
                     {
                         id: 48,
-                        name: "Производство"
+                        name: "Производство",
+                        ru_name: "Производство"
                     },
                     {
                         id: 49,
-                        name: "Рестораны и общепит"
+                        name: "Рестораны и общепит",
+                        ru_name: "Рестораны и общепит"
                     },
                     {
                         id: 50,
-                        name: "Сельское хозяйство"
+                        name: "Сельское хозяйство",
+                        ru_name: "Сельское хозяйство"
                     },
                     {
                         id: 51,
-                        name: "Спорт и красота"
+                        name: "Спорт и красота",
+                        ru_name: "Спорт и красота"
                     },
                     {
                         id: 52,
-                        name: "Страхование"
+                        name: "Страхование",
+                        ru_name: "Страхование"
                     },
                     {
                         id: 53,
-                        name: "Строительство и ремонт"
+                        name: "Строительство и ремонт",
+                        ru_name: "Строительство и ремонт"
                     },
                     {
                         id: 54,
-                        name: "Туризм и гостиницы"
+                        name: "Туризм и гостиницы",
+                        ru_name: "Туризм и гостиницы"
                     },
                     {
                         id: 55,
-                        name: "Недвижимость"
+                        name: "Недвижимость",
+                        ru_name: "Недвижимость"
                     },
                     {
                         id: 56,
-                        name: "Бухгалтерия и финансы"
+                        name: "Бухгалтерия и финансы",
+                        ru_name: "Бухгалтерия и финансы"
                     },
                     {
                         id: 57,
-                        name: "Банковская сфера"
+                        name: "Банковская сфера",
+                        ru_name: "Банковская сфера"
                     },
                     {
                         id: 58,
-                        name: "Управление персоналом"
+                        name: "Управление персоналом",
+                        ru_name: "Управление персоналом"
                     },
                     {
                         id: 59,
-                        name: "Юриспруденция"
+                        name: "Юриспруденция",
+                        ru_name: "Юриспруденция"
                     },
                     {
                         id: 60,
-                        name: "Другие"
+                        name: "other",
+                        ru_name: "Другое"
                     }
                 ]
             }
@@ -2402,6 +2452,11 @@ export const categories_list: CategoryType[] = [
                         id: 16,
                         name: 'householdChemicals',
                         ru_name: 'Бытовая химия'
+                    },
+                    {
+                        id: 17,
+                        name: 'other',
+                        ru_name: 'Другое'
                     }
                 ]
             },
@@ -2416,57 +2471,57 @@ export const categories_list: CategoryType[] = [
                 ru_name: 'Ремонт и строительство',
                 type: [
                     {
-                        id: 17,
+                        id: 18,
                         name: 'doors',
                         ru_name: 'Двери'
                     },
                     {
-                        id: 18,
+                        id: 19,
                         name: 'measuringTools',
                         ru_name: 'Измерительные инструменты'
                     },
                     {
-                        id: 19,
+                        id: 20,
                         name: 'window',
                         ru_name: 'Окна'
                     },
                     {
-                        id: 20,
+                        id: 21,
                         name: 'heatingAndVentilation',
                         ru_name: 'Отопление и вентиляция'
                     },
                     {
-                        id: 21,
+                        id: 22,
                         name: 'ceilings',
                         ru_name: 'Потолки'
                     },
                     {
-                        id: 22,
+                        id: 23,
                         name: 'handTools',
                         ru_name: 'Ручные инструменты'
                     },
                     {
-                        id: 23,
+                        id: 24,
                         name: 'plumbingAndWaterSupply',
                         ru_name: 'Сантехника и водоснабжение'
                     },
                     {
-                        id: 24,
+                        id: 25,
                         name: 'buildingMaterials',
                         ru_name: 'Стройматериалы'
                     },
                     {
-                        id: 25,
+                        id: 26,
                         name: 'electrician',
                         ru_name: 'Электрика'
                     },
                     {
-                        id: 26,
+                        id: 27,
                         name: 'powerTools',
                         ru_name: 'Электроинструменты'
                     },
                     {
-                        id: 27,
+                        id: 28,
                         name: 'other',
                         ru_name: 'Другое'
                     }
@@ -2478,57 +2533,57 @@ export const categories_list: CategoryType[] = [
                 ru_name: 'Растения',
                 type: [
                     {
-                        id: 28,
+                        id: 29,
                         name: 'seedlingAccessories',
                         ru_name: 'Аксессуары для рассады'
                     },
                     {
-                        id: 29,
+                        id: 30,
                         name: 'plantPots',
                         ru_name: 'Горшки для растений'
                     },
                     {
-                        id: 30,
+                        id: 31,
                         name: 'houseplants',
                         ru_name: 'Комнатные растения'
                     },
                     {
-                        id: 31,
+                        id: 32,
                         name: 'gardenPlants',
                         ru_name: 'Садовые растения'
                     },
                     {
-                        id: 32,
+                        id: 33,
                         name: 'seedsAndSeedlings',
                         ru_name: 'Семена и саженцы'
                     },
                     {
-                        id: 33,
+                        id: 34,
                         name: 'plantShelves',
                         ru_name: 'Полки для растений'
                     },
                     {
-                        id: 34,
+                        id: 35,
                         name: 'plantStands',
                         ru_name: 'Подставки для растений'
                     },
                     {
-                        id: 35,
+                        id: 36,
                         name: "Seedling",
                         ru_name: "Рассада"
                     },
                     {
-                        id: 36,
+                        id: 37,
                         name: 'chemistryForPlants',
                         ru_name: 'Химия для растений'
                     },
                     {
-                        id: 37,
+                        id: 38,
                         name: "soil",
                         ru_name: 'Почва'
                     },
                     {
-                        id: 38,
+                        id: 39,
                         name: 'other',
                         ru_name: 'Другое'
                     }
@@ -2603,6 +2658,11 @@ export const categories_list: CategoryType[] = [
                         id: 11,
                         name: 'accessories',
                         ru_name: 'Аксессуары'
+                    },
+                    {
+                        id: 12,
+                        name: 'other',
+                        ru_name: 'Другое'
                     }
                 ]
             },
@@ -2612,59 +2672,64 @@ export const categories_list: CategoryType[] = [
                 ru_name: 'Фото и видеокамеры',
                 type: [
                     {
-                        id: 12,
+                        id: 13,
                         name: 'cameras',
                         ru_name: 'Фотоаппараты'
                     },
                     {
-                        id: 13,
+                        id: 14,
                         name: 'camcorders',
                         ru_name: 'Видеокамеры'
                     },
                     {
-                        id: 14,
+                        id: 15,
                         name: 'cctv',
                         ru_name: 'Видеонаблюдение'
                     },
                     {
-                        id: 15,
+                        id: 16,
                         name: 'lenses',
                         ru_name: 'Объективы'
                     },
                     {
-                        id: 16,
+                        id: 17,
                         name: 'photoFlashes',
                         ru_name: 'Фотовспышки'
                     },
                     {
-                        id: 17,
+                        id: 18,
                         name: 'accessories',
                         ru_name: 'Аксессуары'
                     },
                     {
-                        id: 18,
+                        id: 19,
                         name: 'tripodsAndStabilizers',
                         ru_name: 'Штативы и стабилизаторы'
                     },
                     {
-                        id: 19,
+                        id: 20,
                         name: 'studioEquipment',
                         ru_name: 'Студийное оборудование'
                     },
                     {
-                        id: 20,
+                        id: 21,
                         name: 'digitalPhotoFrames',
                         ru_name: 'Цифровые фоторамки'
                     },
                     {
-                        id: 21,
+                        id: 22,
                         name: 'compactPhotoPrinters',
                         ru_name: 'Компактные фотопринтеры'
                     },
                     {
-                        id: 22,
+                        id: 23,
                         name: 'binocularsAndOpticalInstruments',
                         ru_name: 'Бинокли и оптические приборы'
+                    },
+                    {
+                        id: 24,
+                        name: 'other',
+                        ru_name: 'Другое'
                     }
                 ]
             },
@@ -2674,64 +2739,69 @@ export const categories_list: CategoryType[] = [
                 ru_name: 'Тв, аудио, видео',
                 type: [
                     {
-                        id: 23,
+                        id: 25,
                         name: 'tvSets',
                         ru_name: 'Телевизоры'
                     },
                     {
-                        id: 24,
+                        id: 26,
                         name: 'projectors',
                         ru_name: 'Проекторы'
                     },
                     {
-                        id: 25,
+                        id: 27,
                         name: 'acousticsSpeakersSubwoofers',
                         ru_name: 'Акустика, колонки, сабвуферы'
                     },
                     {
-                        id: 26,
+                        id: 28,
                         name: 'homeCinemas',
                         ru_name: 'Домашние кинотеатры'
                     },
                     {
-                        id: 27,
+                        id: 29,
                         name: 'dvdBlurayAndMediaPlayers',
                         ru_name: 'DVD, Blu-ray и медиаплееры'
                     },
                     {
-                        id: 28,
+                        id: 30,
                         name: 'musicCentersAndRadioTapeRecorders',
                         ru_name: 'Музыкальные центры и магнитолы'
                     },
                     {
-                        id: 29,
+                        id: 31,
                         name: 'mp3PlayersAndPortableAudio',
                         ru_name: 'MP3-плееры и портативное аудио'
                     },
                     {
-                        id: 30,
+                        id: 32,
                         name: 'satelliteAndDigitalTv',
                         ru_name: 'Спутниковое и цифровое ТВ'
                     },
                     {
-                        id: 31,
+                        id: 33,
                         name: 'audioAmplifiersAndReceivers',
                         ru_name: 'Аудиоусилители и ресиверы'
                     },
                     {
-                        id: 32,
+                        id: 34,
                         name: 'headphones',
                         ru_name: 'Наушники'
                     },
                     {
-                        id: 33,
+                        id: 35,
                         name: 'microphones',
                         ru_name: 'Микрофоны'
                     },
                     {
-                        id: 34,
+                        id: 36,
                         name: 'accessories',
                         ru_name: 'Аксессуары'
+                    },
+                    {
+                        id: 37,
+                        name: 'other',
+                        ru_name: 'Другое'
                     }
                 ]
             },
@@ -2741,74 +2811,79 @@ export const categories_list: CategoryType[] = [
                 ru_name: 'Бытовая техника',
                 type: [
                     {
-                        id: 35,
+                        id: 38,
                         name: 'libra',
                         ru_name: 'Весы'
                     },
                     {
-                        id: 36,
+                        id: 39,
                         name: 'hoods',
                         ru_name: 'Вытяжки'
                     },
                     {
-                        id: 37,
+                        id: 40,
                         name: 'grindingAndMixing',
                         ru_name: 'Измельчение и смешивание'
                     },
                     {
-                        id: 38,
+                        id: 41,
                         name: 'airConditioningEquipment',
                         ru_name: 'Климатическая техника'
                     },
                     {
-                        id: 39,
+                        id: 42,
                         name: 'coolersAndWaterFilters',
                         ru_name: 'Кулеры и фильтры для воды'
                     },
                     {
-                        id: 40,
+                        id: 43,
                         name: 'stovesAndOvens',
                         ru_name: 'Плиты и духовые шкафы'
                     },
                     {
-                        id: 41,
+                        id: 44,
                         name: 'dishwashers',
                         ru_name: 'Посудомоечные машины'
                     },
                     {
-                        id: 42,
+                        id: 45,
                         name: 'cooking',
                         ru_name: 'Приготовление еды'
                     },
                     {
-                        id: 43,
+                        id: 46,
                         name: 'preparationDrinks',
                         ru_name: 'Приготовление напитков'
                     },
                     {
-                        id: 44,
+                        id: 47,
                         name: 'vacuumCleanersAndSteamCleaners',
                         ru_name: 'Пылесосы и пароочистители'
                     },
                     {
-                        id: 45,
+                        id: 48,
                         name: 'washingMachines',
                         ru_name: 'Стиральные машины'
                     },
                     {
-                        id: 46,
+                        id: 49,
                         name: 'ironsAndGarmentCare',
                         ru_name: 'Утюги и уход за одеждой'
                     },
                     {
-                        id: 47,
+                        id: 50,
                         name: 'refrigerators',
                         ru_name: 'Холодильники'
                     },
                     {
-                        id: 48,
+                        id: 51,
                         name: 'sewingMachines',
                         ru_name: 'Швейное оборудование'
+                    },
+                    {
+                        id: 52,
+                        name: 'other',
+                        ru_name: 'Другое'
                     }
                 ]
             },
@@ -2818,59 +2893,64 @@ export const categories_list: CategoryType[] = [
                 ru_name: 'Компьютерная техника',
                 type: [
                     {
-                        id: 49,
+                        id: 53,
                         name: 'laptops',
                         ru_name: 'Ноутбуки'
                     },
                     {
-                        id: 50,
+                        id: 54,
                         name: 'computers',
                         ru_name: 'Компьютеры'
                     },
                     {
-                        id: 51,
+                        id: 55,
                         name: 'monitors',
                         ru_name: 'Мониторы'
                     },
                     {
-                        id: 52,
+                        id: 56,
                         name: 'keyboardsAndMice',
                         ru_name: 'Клавиатуры и мыши'
                     },
                     {
-                        id: 53,
+                        id: 57,
                         name: 'officeEquipmentAndConsumables',
                         ru_name: 'Оргтехника и расходники'
                     },
                     {
-                        id: 54,
+                        id: 58,
                         name: 'networkHardware',
                         ru_name: 'Сетевое оборудование'
                     },
                     {
-                        id: 55,
+                        id: 59,
                         name: 'multimedia',
                         ru_name: 'Мультимедиа'
                     },
                     {
-                        id: 56,
+                        id: 60,
                         name: 'dataStorageDevicesAndCardReaders',
                         ru_name: 'Накопители данных и картридеры'
                     },
                     {
-                        id: 57,
+                        id: 61,
                         name: 'steeringWheelsJoysticksGamepads',
                         ru_name: 'Рули, джойстики, геймпады'
                     },
                     {
-                        id: 58,
+                        id: 62,
                         name: 'componentsAndSpareParts',
                         ru_name: 'Комплектующие и запчасти'
                     },
                     {
-                        id: 59,
+                        id: 63,
                         name: 'accessories',
                         ru_name: 'Аксессуары'
+                    },
+                    {
+                        id: 64,
+                        name: 'other',
+                        ru_name: 'Другое'
                     }
                 ]
             },
@@ -2880,24 +2960,29 @@ export const categories_list: CategoryType[] = [
                 ru_name: 'Игры, приставки и программы',
                 type: [
                     {
-                        id: 60,
+                        id: 65,
                         name: 'gamingConsoles',
                         ru_name: 'Игровые приставки'
                     },
                     {
-                        id: 61,
+                        id: 66,
                         name: 'gamesForConsolesAndPc',
                         ru_name: 'Игры для приставок'
                     },
                     {
-                        id: 62,
+                        id: 67,
                         name: "computerGames",
                         ru_name: "Компьютерные игры"
                     },
                     {
-                        id: 63,
+                        id: 68,
                         name: "programs",
                         ru_name: "Программы"
+                    },
+                    {
+                        id: 69,
+                        name: 'other',
+                        ru_name: 'Другое'
                     }
                 ]
             }
@@ -2922,29 +3007,34 @@ export const categories_list: CategoryType[] = [
                 ru_name: 'Видеофильмы',
                 type: [
                     {
-                        id: 9,
+                        id: 10,
                         name: "DVD",
                         ru_name: "DVD"
                     },
                     {
-                        id: 10,
+                        id: 11,
                         name: "Blu-Ray",
                         ru_name: "Blu-Ray"
                     },
                     {
-                        id: 11,
+                        id: 12,
                         name: "CD",
                         ru_name: "CD"
                     },
                     {
-                        id: 12,
+                        id: 13,
                         name: "VHSCassettes",
                         ru_name: "Кассеты VHS"
                     },
                     {
-                        id: 13,
+                        id: 14,
                         name: "onlineSubscription",
                         ru_name: "Онлайн подписка"
+                    },
+                    {
+                        id: 15,
+                        name: 'other',
+                        ru_name: 'Другое'
                     }
                 ]
             },
@@ -2964,49 +3054,49 @@ export const categories_list: CategoryType[] = [
                 ru_name: 'Материалы для творчества',
                 type: [
                     {
-                        id: 48,
-                        name: "burningOut",
-                        ru_name: "Выжигание",
-                    },
-                    {
-                        id: 49,
-                        name: "knitting",
-                        ru_name: "Вязание",
-                    },
-                    {
-                        id: 50,
-                        name: "modelingSculpture",
-                        ru_name: "Лепка, скульптура",
-                    },
-                    {
                         id: 51,
-                        name: "weavingMacrame",
-                        ru_name: "Плетение, макраме",
+                        name: "burningOut",
+                        ru_name: "Выжигание"
                     },
                     {
                         id: 52,
-                        name: "origami",
-                        ru_name: "Поделки из бумаги",
+                        name: "knitting",
+                        ru_name: "Вязание"
                     },
                     {
                         id: 53,
-                        name: "woodCarving",
-                        ru_name: "Резьба по дереву",
+                        name: "modelingSculpture",
+                        ru_name: "Лепка, скульптура"
                     },
                     {
                         id: 54,
-                        name: "drawingColoring",
-                        ru_name: "Рисование, раскраски",
+                        name: "weavingMacrame",
+                        ru_name: "Плетение, макраме"
                     },
                     {
                         id: 55,
-                        name: "sewingEmbroidery",
-                        ru_name: "Шитье, вышивание",
+                        name: "origami",
+                        ru_name: "Поделки из бумаги"
                     },
                     {
                         id: 56,
+                        name: "woodCarving",
+                        ru_name: "Резьба по дереву"
+                    },
+                    {
+                        id: 57,
+                        name: "drawingColoring",
+                        ru_name: "Рисование, раскраски"
+                    },
+                    {
+                        id: 58,
+                        name: "sewingEmbroidery",
+                        ru_name: "Шитье, вышивание"
+                    },
+                    {
+                        id: 59,
                         name: "other",
-                        ru_name: "Другое",
+                        ru_name: "Другое"
                     }
                 ]
             },
@@ -3026,82 +3116,82 @@ export const categories_list: CategoryType[] = [
                 ru_name: 'Настольные игры',
                 type: [
                     {
-                        id: 77,
-                        name: "adventurers",
-                        ru_name: "Бродилки",
-                    },
-                    {
-                        id: 78,
-                        name: "kidsGames",
-                        ru_name: "Детские игры",
-                    },
-                    {
-                        id: 79,
-                        name: "partyGames",
-                        ru_name: "Игры для вечеринок",
-                    },
-                    {
-                        id: 80,
-                        name: "cardGames",
-                        ru_name: "Карточные игры",
-                    },
-                    {
-                        id: 81,
-                        name: "classicGames",
-                        ru_name: "Классические игры",
-                    },
-                    {
                         id: 82,
-                        name: "logicalGames",
-                        ru_name: "Логические игры",
+                        name: "adventurers",
+                        ru_name: "Бродилки"
                     },
                     {
                         id: 83,
-                        name: "gameSets",
-                        ru_name: "Наборы игр",
+                        name: "kidsGames",
+                        ru_name: "Детские игры"
                     },
                     {
                         id: 84,
-                        name: "Puzzles",
-                        ru_name: "Паззлы и головоломки",
+                        name: "partyGames",
+                        ru_name: "Игры для вечеринок"
                     },
                     {
                         id: 85,
-                        name: "adventureGames",
-                        ru_name: "Приключенческие игры",
+                        name: "cardGames",
+                        ru_name: "Карточные игры"
                     },
                     {
                         id: 86,
-                        name: "familyGames",
-                        ru_name: "Семейные игры",
+                        name: "classicGames",
+                        ru_name: "Классические игры"
                     },
                     {
                         id: 87,
-                        name: "wordsAndAssociations",
-                        ru_name: "Слова и ассоциации",
+                        name: "logicalGames",
+                        ru_name: "Логические игры"
                     },
                     {
                         id: 88,
-                        name: "strategyGames",
-                        ru_name: "Стратегические игры",
+                        name: "gameSets",
+                        ru_name: "Наборы игр"
                     },
                     {
                         id: 89,
-                        name: "footballHockeyBilliards",
-                        ru_name: "Футбол, хоккей, бильярд",
+                        name: "Puzzles",
+                        ru_name: "Паззлы и головоломки"
                     },
                     {
                         id: 90,
-                        name: "chessCheckersBackgammon",
-                        ru_name: "Шахматы, шашки, нарды",
+                        name: "adventureGames",
+                        ru_name: "Приключенческие игры"
                     },
                     {
                         id: 91,
-                        name: "economicGames",
-                        ru_name: "Экономические игры",
+                        name: "familyGames",
+                        ru_name: "Семейные игры"
                     },
                     {
                         id: 92,
+                        name: "wordsAndAssociations",
+                        ru_name: "Слова и ассоциации"
+                    },
+                    {
+                        id: 93,
+                        name: "strategyGames",
+                        ru_name: "Стратегические игры"
+                    },
+                    {
+                        id: 94,
+                        name: "footballHockeyBilliards",
+                        ru_name: "Футбол, хоккей, бильярд"
+                    },
+                    {
+                        id: 95,
+                        name: "chessCheckersBackgammon",
+                        ru_name: "Шахматы, шашки, нарды"
+                    },
+                    {
+                        id: 96,
+                        name: "economicGames",
+                        ru_name: "Экономические игры"
+                    },
+                    {
+                        id: 97,
                         name: "other",
                         ru_name: "Другое"
                     }

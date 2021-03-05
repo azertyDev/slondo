@@ -7,7 +7,7 @@ import {AuthInputs, AuthReg, RecoveryInputs} from "@root/interfaces/Auth";
 const initialState: AuthReg = {
     error: null,
     isFetch: false,
-    isAuth: !!cookies.get('token'),
+    isAuth: false,
     isAuthModalOpen: false
 };
 
@@ -16,8 +16,7 @@ export const fetchTokenLogin = createAsyncThunk<never, AuthInputs>(
     async ({phone, password}, {rejectWithValue}) => {
         try {
             const {token} = await userAPI.login(phone, password);
-            console.log(token)
-            cookies.set('token', token, {path: '/', maxAge: 2 * 3600});
+            !!token && cookies.set('token', token, {path: '/', maxAge: 2 * 3600});
         } catch (e) {
             return rejectWithValue(e.message);
         }
@@ -51,7 +50,7 @@ export const fetchTokenRecovery = createAsyncThunk<never, RecoveryInputs>(
     async ({phone, code, password, password_confirmation}, {rejectWithValue}) => {
         try {
             const {token} = await userAPI.recovery(phone, code, password, password_confirmation);
-            cookies.set('token', token, {path: '/', maxAge: 2 * 3600});
+            !!token && cookies.set('token', token, {path: '/', maxAge: 2 * 3600});
         } catch (e) {
             return rejectWithValue(e.message);
         }

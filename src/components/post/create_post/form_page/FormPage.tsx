@@ -38,6 +38,7 @@ const FormPage: FC = () => {
     const {category, subCategory, type} = getCategoriesByParams(categories_list, params);
     const mark = category.name;
     const isCategoryFree = category.name === 'free';
+    const isCtgrAnimalFishes = category.name === 'animal' && subCategory.name === 'fishes';
 
     const isPreview = !!Number(preview);
     const isSuccess = !!Number(success);
@@ -66,7 +67,7 @@ const FormPage: FC = () => {
         car: mark === 'car',
         estate: mark === 'estate',
         params: mark !== 'car' && mark !== 'estate',
-        appearance: false,
+        appearance: mark === 'free',
         defParams: false
     };
 
@@ -153,10 +154,11 @@ const FormPage: FC = () => {
     }, [asPath]);
 
     useEffect(() => {
-        !isCategoryFree && setFetchedFilters();
+        if (!isCategoryFree && !isCtgrAnimalFishes) {
+            setFetchedFilters();
+        }
     }, []);
 
-    console.log('post', post)
     const classes = useStyles();
     return (
         <MainLayout>

@@ -1,9 +1,11 @@
 import React, {FC, useEffect, useState} from 'react';
 import {TabsContent} from "@src/components/cabinet/cabinet_pages/TabsContent";
 import {Favorite} from "@src/components/cabinet/cabinet_pages/favorite/Favorite";
+import {withAuthRedirect} from '@root/src/hoc/withAuthRedirect';
 import {userAPI} from "@src/api/api";
 
-export const FavoriteContainer: FC<any> = () => {
+
+const FavoriteContainer: FC = () => {
     const [data, setData] = useState<any>([])
     const [type, setType] = useState('post')
 
@@ -13,13 +15,13 @@ export const FavoriteContainer: FC<any> = () => {
         {
             title: 'Объявления',
             count: count,
-            component: <Favorite data={list} handleType={setType} type='post' />
+            component: <Favorite data={list} handleType={setType} type='post'/>
         },
         {
             title: 'Аукционы',
             count: count,
-            component: <Favorite data={list} handleType={setType} type='auc' />
-        },
+            component: <Favorite data={list} handleType={setType} type='auc'/>
+        }
     ]
 
     useEffect(() => {
@@ -31,4 +33,6 @@ export const FavoriteContainer: FC<any> = () => {
     return (
         <TabsContent title={title} tabsData={tabsData} headerTitle={title}/>
     )
-}
+};
+
+export default withAuthRedirect(FavoriteContainer);

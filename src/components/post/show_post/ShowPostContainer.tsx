@@ -99,7 +99,7 @@ export const ShowPostContainer: FC = () => {
                 available_days,
                 district,
                 ...otherData
-            } = await userAPI.getAddById(params[0], lang, params[1], params[2]);
+            } = await userAPI.getPostById(params[0], lang, params[1], params[2]);
 
             setParameters(otherData.model);
 

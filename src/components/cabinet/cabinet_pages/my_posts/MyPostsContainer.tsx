@@ -2,7 +2,8 @@ import React, {FC} from 'react';
 import {TabsContent} from '@src/components/cabinet/cabinet_pages/TabsContent';
 import {MyPosts} from '@src/components/cabinet/cabinet_pages/my_posts/MyPosts';
 import {CabinetMockData} from '../../CabinetMockData';
-import {withAuthRedirect} from '@src/hoc/withAuthRedirect'
+import {withAuthRedirect} from '@src/hoc/withAuthRedirect';
+
 
 const MyPostsContainer: FC = () => {
     const tabsData = [
@@ -25,4 +26,4 @@ const MyPostsContainer: FC = () => {
     );
 };
 
-export default withAuthRedirect(MyPostsContainer)
+export default withAuthRedirect(MyPostsContainer);

@@ -17,21 +17,20 @@ export const PostsSlider: FC<{ title: string; cardData: CardData }> = ({cardData
                 {title}
             </Typography>
             <div className="slider">
-                {!!error ? (
-                    <div className="error-wrapper">
+                {!!error
+                    ? <div className="error-wrapper">
                         <Typography className="error-text">{error}</Typography>
                     </div>
-                ) : (
-                    <CustomSlider {...settings}>
-                        {cards.map((card) => (
+                    : <CustomSlider {...settings}>
+                        {cards.map(card =>
                             <CardItem
                                 isFetch={isFetch}
                                 key={card.id}
                                 {...card}
                             />
-                        ))}
+                        )}
                     </CustomSlider>
-                )}
+                }
             </div>
         </div>
     );
