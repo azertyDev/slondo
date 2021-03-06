@@ -1,13 +1,12 @@
-import React, {FC, useEffect} from "react";
+import React, {FC, Fragment, useEffect} from "react";
 import {WithT} from "i18next";
 import {FormikProvider, useFormik} from "formik";
 import {Checkbox, Grid, TextField, Typography} from "@material-ui/core";
 import {
-    estateTxtFields,
     excludedKeys,
     fieldKeysWithTxt,
     numericFields,
-    optionKeys,
+    optionKeys
 } from '@src/common_data/form_fields';
 import {isRequired} from '@root/validation_schemas/createPostSchemas';
 import {CustomAccordion} from '../accordion/CustomAccordion';
@@ -67,7 +66,7 @@ export const ParamsForm: FC<ParamsFormPropsType> = (props) => {
             ...post[mark],
             ...values,
             [`${mark}_id`]: subCategory ? subCategory.id : '',
-            type_id: type ? type.id : values.type_id ?? '',
+            type_id: type ? type.id : values.type_id ?? ''
         };
         setPost({...post});
         handleFormOpen(nextFormName, true);
@@ -76,7 +75,7 @@ export const ParamsForm: FC<ParamsFormPropsType> = (props) => {
     const formik = useFormik({
         onSubmit,
         initialValues: {},
-        validationSchema: paramsFormSchema,
+        validationSchema: paramsFormSchema
     });
 
     const {
@@ -85,7 +84,7 @@ export const ParamsForm: FC<ParamsFormPropsType> = (props) => {
         handleBlur,
         setValues,
         touched,
-        handleSubmit,
+        handleSubmit
     } = formik;
 
     const handleInput = ({target: {name, value}}) => {
@@ -128,27 +127,19 @@ export const ParamsForm: FC<ParamsFormPropsType> = (props) => {
         if (mark !== 'free') {
             Object.keys(filters).forEach(key => {
                 const isExcludedKey = excludedKeys.some(k => k === key);
-                const isFieldKeyWithTxt = fieldKeysWithTxt.some(k => k === key);
-                const isEstateTxtField = estateTxtFields.some(k => k === key);
                 const isOptionKey = optionKeys.some(k => k === key);
-
                 if (!isExcludedKey) {
                     if (Array.isArray(filters[key])) {
-                        if (filters[key].length) {
-                            if (isFieldKeyWithTxt) {
-                                values[key] = {...filters[key][0], txt: ''};
-                            } else if (!values[key]) {
-                                values[key] = null;
-                            } else if (isOptionKey) {
-                                values[key] = [];
-                            }
+                        if (!values[key]) {
+                            values[key] = null;
+                        } else if (isOptionKey) {
+                            values[key] = [];
                         }
-                    } else if (!isEstateTxtField && !values[key]) {
+                    } else if (!values[key]) {
                         values[key] = filters[key];
                     }
                 }
             });
-
             setValues({...values});
         }
     };
@@ -156,7 +147,7 @@ export const ParamsForm: FC<ParamsFormPropsType> = (props) => {
     useEffect(() => {
         setDefaultVals();
     }, [filters]);
-
+    console.log(values)
     const classes = useStyles();
     return (
         <FormikProvider value={formik}>
@@ -175,136 +166,130 @@ export const ParamsForm: FC<ParamsFormPropsType> = (props) => {
                         spacing={2}
                         className={classes.root}
                     >
-                        {
-                            isPreview
-                                ? Object.keys(values).map(key => {
-                                    if (!!values[key]) {
-                                        let value = values[key];
+                        {isPreview
+                            ? Object.keys(values).map(key => {
+                                if (!!values[key]) {
+                                    let value = values[key];
 
-                                        if (typeof values[key] === 'object') {
-                                            if (values[key].id) {
-                                                value = values[key].name;
-                                            } else return;
-                                        }
+                                    if (typeof values[key] === 'object') {
+                                        if (values[key].id) {
+                                            value = values[key].name;
 
-                                        return (
-                                            <Grid
-                                                item
-                                                key={key}
-                                                sm={6}
-                                                xs={12}
-                                                className='grid-item'
-                                            >
-                                                <Typography variant="subtitle1">
-                                                    <strong>
-                                                        {t(key)}:
-                                                    </strong>
-                                                    &nbsp;{value}
-                                                </Typography>
-                                            </Grid>
-                                        )
-                                    }
-                                })
-                                : Object.keys(filters).map(key => {
-                                    const isExcludeValue = excludedKeys.some(k => k === key);
-                                    const isOptionsKey = optionKeys.some(k => k === key) && filters[key].length;
-                                    const isFieldKeyWithTxt = fieldKeysWithTxt.some(k => k === key);
-                                    const isNoEmptyArray = Array.isArray(filters[key]) && filters[key].length;
-
-                                    return !isExcludeValue && <Grid
-                                        item
-                                        container
-                                        xs={12}
-                                        key={key}
-                                        className='grid-item'
-                                        sm={isOptionsKey ? 12 : 6}
-                                    >
-                                        {
-                                            isNoEmptyArray
-                                                ? <>
+                                            return (
+                                                <Grid
+                                                    item
+                                                    key={key}
+                                                    sm={6}
+                                                    xs={12}
+                                                    className='grid-item'
+                                                >
                                                     <Typography variant="subtitle1">
                                                         <strong>
-                                                            {t(key)}
-                                                            {isRequired(key) && <span className='error-text'>*</span>}
+                                                            {t(key)}:&nbsp;
                                                         </strong>
-                                                        {
-                                                            errors[key]
-                                                            && touched[key]
-                                                            && <span className='error-text'>
-                                                                &nbsp;{t(errors[key] as string)}
-                                                            </span>
-                                                        }
+                                                        {value}
                                                     </Typography>
-                                                    <Grid container>
-                                                        {
-                                                            isFieldKeyWithTxt && (
-                                                                <Grid item xs={9}>
-                                                                    <TextField
-                                                                        fullWidth
-                                                                        name={key}
-                                                                        variant='outlined'
-                                                                        onChange={handleInput}
-                                                                        value={values[key] ? values[key].txt : ''}
-                                                                        className={errors[key] && touched[key] ? 'error-border' : ''}
-                                                                    />
-                                                                </Grid>
-                                                            )
-                                                        }
-                                                        <Grid item xs={isFieldKeyWithTxt ? 3 : 6}>
-                                                            <CustomSelect
-                                                                t={t}
-                                                                name={key}
-                                                                values={values}
-                                                                items={filters[key]}
-                                                                onBlur={handleBlur}
-                                                                handleSelect={handleSelect}
-                                                                error={!!(errors[key] && touched[key])}
-                                                            />
-                                                        </Grid>
-                                                    </Grid>
-                                                </>
-                                                : (
-                                                    !Array.isArray(filters[key]) && (
-                                                        <Grid item xs={6}>
-                                                            <Typography variant="subtitle1">
-                                                                <strong>
-                                                                    {t(key)}:
-                                                                </strong>
-                                                                {isRequired(key) && <span className='error-text'>*</span>}
-                                                                {
-                                                                    errors[key]
-                                                                    && touched[key]
-                                                                    && <span className='error-text'>
-                                                                        &nbsp;{errors[key]}
-                                                                    </span>
-                                                                }
-                                                            </Typography>
-                                                            {
-                                                                filters[key] === 1
-                                                                    ? <Checkbox
-                                                                        color='primary'
-                                                                        checked={!!values[key]}
-                                                                        onChange={handleParamsCheckbox(key)}
-                                                                    />
-                                                                    : <TextField
-                                                                        fullWidth
-                                                                        name={key}
-                                                                        variant='outlined'
-                                                                        value={values[key] ?? ''}
-                                                                        onChange={handleInput}
-                                                                        className={errors[key] && touched[key] ? 'error-border' : ''}
-                                                                    />
-                                                            }
-                                                        </Grid>
-                                                    )
-                                                )
+                                                </Grid>
+                                            )
                                         }
-                                    </Grid>
-                                })
-                        }
+                                    }
+                                }
+                            })
+                            : getFields(filters)}
                     </Grid>
                 </CustomAccordion>
             </form>
         </FormikProvider>
     )
+
+    function getFields(filters) {
+        return Object.keys(filters).map(key => {
+            const isArray = Array.isArray(filters[key]) && filters[key].length;
+            const isExcludeValue = excludedKeys.some(k => k === key);
+            const isFieldKeyWithTxt = fieldKeysWithTxt.some(k => k === key);
+
+            if (!isExcludeValue) {
+                return (
+                    <Fragment key={key}>
+                        <Grid
+                            item
+                            container
+                            sm={6}
+                            xs={12}
+                            key={key}
+                            className='grid-item'
+                        >
+                            {isArray
+                                ? <>
+                                    <Typography variant="subtitle1">
+                                        <strong>
+                                            {t(key)}
+                                            {isRequired(key) && <span className='error-text'>*&nbsp;</span>}
+                                        </strong>
+                                        {errors[key] && touched[key] && (
+                                            <span className='error-text'>
+                                                {t(errors[key] as string)}
+                                            </span>
+                                        )}
+                                    </Typography>
+                                    <Grid container>
+                                        {isFieldKeyWithTxt && (
+                                            <Grid item xs={9}>
+                                                <TextField
+                                                    fullWidth
+                                                    name={key}
+                                                    variant='outlined'
+                                                    onChange={handleInput}
+                                                    value={values[key] ? values[key].txt : ''}
+                                                    className={errors[key] && touched[key] ? 'error-border' : ''}
+                                                />
+                                            </Grid>
+                                        )}
+                                        <Grid item xs={isFieldKeyWithTxt ? 3 : 6}>
+                                            <CustomSelect
+                                                t={t}
+                                                name={key}
+                                                values={values}
+                                                items={filters[key]}
+                                                onBlur={handleBlur}
+                                                handleSelect={handleSelect}
+                                                error={!!(errors[key] && touched[key])}
+                                            />
+                                        </Grid>
+                                    </Grid>
+                                </>
+                                : <Grid item xs={6}>
+                                    <Typography variant="subtitle1">
+                                        <strong>
+                                            {t(key)}:
+                                        </strong>
+                                        {isRequired(key) && <span className='error-text'>*&nbsp;</span>}
+                                        {errors[key] && touched[key] && (
+                                            <span className='error-text'>
+                                                {errors[key]}
+                                            </span>
+                                        )}
+                                    </Typography>
+                                    {filters[key] === 1
+                                        ? <Checkbox
+                                            color='primary'
+                                            checked={!!values[key]}
+                                            onChange={handleParamsCheckbox(key)}
+                                        />
+                                        : <TextField
+                                            fullWidth
+                                            name={key}
+                                            variant='outlined'
+                                            onChange={handleInput}
+                                            value={values[key] ?? ''}
+                                            className={errors[key] && touched[key] ? 'error-border' : ''}
+                                        />}
+                                </Grid>}
+                        </Grid>
+                        {values[key] && Object.keys(values[key]).length && getFields(values[key])}
+                    </Fragment>
+                )
+            }
+        })
+    }
 };

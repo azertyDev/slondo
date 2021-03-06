@@ -17,11 +17,11 @@ export const toCamelCase = (text: string) => {
     const result = [];
     const toLower = text.toLocaleLowerCase().split('');
     const toLowerLen = toLower.length;
-    for(let i = 0; i < toLowerLen; i++){
-        if(toLower[i] === ' '){
-            result.push(toLower[i+1].toUpperCase())
+    for (let i = 0; i < toLowerLen; i++) {
+        if (toLower[i] === ' ') {
+            result.push(toLower[i + 1].toUpperCase())
             i++
-        }else {
+        } else {
             result.push(toLower[i])
         }
     }
@@ -96,9 +96,9 @@ export const addParentsToCtgrs = (categoriesList: CategoryType[]): CategoryType[
 export const dataForCrtPostNormalize = (data: any, type?) => {
     if (!!data) {
         data = Object.keys(data).reduce((acc: any, key) => {
-            const isExcludedKey = excludedKeys.some(k => k === key);
+            // const isExcludedKey = excludedKeys.some(k => k === key);
 
-            if (Array.isArray(data[key]) && !!data[key].length && key !== 'manufacturers') {
+            if (Array.isArray(data[key]) && !!data[key].length) {
                 const isExcludeTypeKey = type && key === 'type';
 
                 if (!isExcludeTypeKey) {
@@ -108,8 +108,6 @@ export const dataForCrtPostNormalize = (data: any, type?) => {
                         ...acc,
                         ...dataForCrtPostNormalize(data[key][0])
                     };
-                } else if (key === 'manufacturer' && data[key][0].models) {
-                    acc.subCategory = [];
                 }
             } else {
                 if (key === 'furnished') {
@@ -119,9 +117,10 @@ export const dataForCrtPostNormalize = (data: any, type?) => {
                         ...acc,
                         ...dataForCrtPostNormalize(data[key])
                     };
-                } else if (Number.isInteger(data[key]) && !isExcludedKey) {
-                    acc[key] = '';
                 }
+                // else if (Number.isInteger(data[key]) && !isExcludedKey) {
+                //     acc[key] = '';
+                // }
             }
 
             return acc;

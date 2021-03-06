@@ -37,13 +37,15 @@ const FormPage: FC = () => {
 
     const {category, subCategory, type} = getCategoriesByParams(categories_list, params);
     const mark = category.name;
-    const isCategoryFree = category.name === 'free';
+
     const isCtgrAnimalFishes = category.name === 'animal' && subCategory.name === 'fishes';
 
     const isPreview = !!Number(preview);
     const isSuccess = !!Number(success);
 
-    const backUrl = isPreview ? asPath.replace(/preview=1/, 'preview=0') : `/create/type/${index}`;
+    const backUrl = isPreview
+        ? asPath.replace(/preview=1/, 'preview=0')
+        : `/create/type/${index}`;
 
     const title = `${t(`categories:${category.name}`)}
         ${subCategory ? ` - ${t(`categories:${subCategory.name}`)}` : ''}
@@ -58,6 +60,12 @@ const FormPage: FC = () => {
         photos: []
     };
 
+    if (isCtgrAnimalFishes) {
+        initPost[mark] = {
+            [`${mark}_id`]: subCategory.id
+        }
+    }
+
     const initFilters: { isFetch: boolean, data: any } = {
         isFetch: false,
         data: {}
@@ -67,14 +75,14 @@ const FormPage: FC = () => {
         car: mark === 'car',
         estate: mark === 'estate',
         params: mark !== 'car' && mark !== 'estate',
-        appearance: mark === 'free',
+        appearance: isCtgrAnimalFishes,
         defParams: false
     };
 
     const [post, setPost] = useState(initPost);
 
     const [filters, setFilters] = useState(initFilters);
-    const {color, ...data} = filters.data;
+    const {color, ...otherFilters} = filters.data;
 
     const [openKeys, setOpenKeys] = useState(initOpenKeys);
 
@@ -137,7 +145,7 @@ const FormPage: FC = () => {
                 return <ParamsForm
                     t={t}
                     mark={mark}
-                    filters={data}
+                    filters={otherFilters}
                     type={type}
                     post={post}
                     setPost={setPost}
@@ -154,67 +162,63 @@ const FormPage: FC = () => {
     }, [asPath]);
 
     useEffect(() => {
-        if (!isCategoryFree && !isCtgrAnimalFishes) {
+        if (!isCtgrAnimalFishes) {
             setFetchedFilters();
         }
     }, []);
-
+    console.log(filters)
     const classes = useStyles();
     return (
         <MainLayout>
-            {
-                isSuccess
-                    ? <SuccessPage/>
-                    : <>
-                        <Top
-                            activeStep={isPreview ? 3 : 2}
-                            title={title}
-                            backUrl={backUrl}
-                        />
-                        <div className={classes.root}>
-                            {!isCategoryFree && (
-                                <div>
-                                    {paramsFormByCategory()}
-                                </div>
-                            )}
+            {isSuccess
+                ? <SuccessPage/>
+                : <>
+                    <Top
+                        title={title}
+                        backUrl={backUrl}
+                        activeStep={isPreview ? 3 : 2}
+                    />
+                    <div className={classes.root}>
+                        {!isCtgrAnimalFishes && (
                             <div>
-                                <AppearanceForm
-                                    t={t}
-                                    mark={mark}
-                                    colors={color}
-                                    isPreview={isPreview}
-                                    post={post}
-                                    setPost={setPost}
-                                    openKey={openKeys.appearance}
-                                    handleFormOpen={handleFormOpen}
-                                />
+                                {paramsFormByCategory()}
                             </div>
-                            <div>
-                                <DefaultParamsForm
-                                    t={t}
-                                    mark={mark}
-                                    asPath={asPath}
-                                    postType={postType}
-                                    post={post}
-                                    setPost={setPost}
-                                    isPreview={isPreview}
-                                    openKey={openKeys.defParams}
-                                    handleFormOpen={handleFormOpen}
-                                    isCategoryFree={isCategoryFree}
-                                />
-                            </div>
-                            {isPreview && (
-                                <div className='publish-button-wrapper'>
-                                    <ButtonComponent onClick={publishPost}>
-                                        <Typography variant='subtitle1'>
-                                            {t('publish')}
-                                        </Typography>
-                                    </ButtonComponent>
-                                </div>
-                            )}
+                        )}
+                        <div>
+                            <AppearanceForm
+                                t={t}
+                                mark={mark}
+                                colors={color}
+                                isPreview={isPreview}
+                                post={post}
+                                setPost={setPost}
+                                openKey={openKeys.appearance}
+                                handleFormOpen={handleFormOpen}
+                            />
                         </div>
-                    </>
-            }
+                        <div>
+                            <DefaultParamsForm
+                                t={t}
+                                asPath={asPath}
+                                postType={postType}
+                                post={post}
+                                setPost={setPost}
+                                isPreview={isPreview}
+                                openKey={openKeys.defParams}
+                                handleFormOpen={handleFormOpen}
+                            />
+                        </div>
+                        {isPreview && (
+                            <div className='publish-button-wrapper'>
+                                <ButtonComponent onClick={publishPost}>
+                                    <Typography variant='subtitle1'>
+                                        {t('publish')}
+                                    </Typography>
+                                </ButtonComponent>
+                            </div>
+                        )}
+                    </div>
+                </>}
         </MainLayout>
     )
 };

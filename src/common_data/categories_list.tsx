@@ -3253,13 +3253,5 @@ export const categories_list: CategoryType[] = [
                 ru_name: 'Товары для животных'
             }
         ]
-    },
-    {
-        id: 12,
-        name: 'free',
-        ru_name: 'Отдам даром',
-        has_auction: false,
-        icon: {url: Free},
-        smallIcon: <ForFreeIcon/>
     }
 ];

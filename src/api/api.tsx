@@ -16,12 +16,12 @@ const instance = Axios.create({
     baseURL: localServer
 });
 
-export const setTokenToHeader = () => {
+export const setTokenToHeader = (): { headers: any } => {
     const token = cookies.get('token');
     return {
         headers: {
             'Content-Type': 'application/json',
-            'Authorization': `Bearer ${token}`,
+            'Authorization': `Bearer ${token}`
         }
     }
 };
@@ -73,7 +73,7 @@ export const userAPI = {
     },
     recoverySMS: (phone: string, code: string): Promise<unknown> => {
         return instance
-            .get(`checkShortCode?phone=${phone}&code=${code}`,)
+            .get(`checkShortCode?phone=${phone}&code=${code}`)
             .then((res) => res.data)
             .catch((err) => {
                 throw err;
@@ -83,14 +83,14 @@ export const userAPI = {
         const form = new FormData();
         form.set('ads_id', `${id}`);
         return instance
-            .post(`regular/ads/favorite`, form, setTokenToHeader())
+            .post(`regular/post/favorite`, form, setTokenToHeader())
             .then((res) => res.data)
             .catch((err) => {
                 throw err;
             });
     },
     getFavorites: (lang: string, lot: string): Promise<FavoriteType[]> => {
-        return instance.get(`regular/ads/get/favorites?type=${lot}&lang=${lang}`)
+        return instance.get(`regular/post/get/favorites?type=${lot}&lang=${lang}`)
             .then(res => res.data)
             .catch(err => {
                 throw err
@@ -122,14 +122,14 @@ export const userAPI = {
         data: InnerCardData[];
         total: number;
     }> => {
-        return instance.get(`ads/all?itemsPerPage=${itemsPerPage}&page=${page}&type=${type}&lang=${lang}`)
+        return instance.get(`post/all?itemsPerPage=${itemsPerPage}&page=${page}&type=${type}&lang=${lang}`)
             .then((res) => res.data)
             .catch((err) => {
                 throw err;
             });
     },
-    getPostById: (ads_id: string | string[], lang: string, type: string, sub_category_id: string): Promise<any> => {
-        return instance.get(`getAddById?ads_id=${ads_id}&lang=${lang}&type=${type}&sub_category_id=${sub_category_id}`)
+    getPostById: (post_id: string | string[], lang: string, type: string, sub_category_id: string): Promise<any> => {
+        return instance.get(`getPostById?id=${post_id}&lang=${lang}&type=${type}&sub_category_id=${sub_category_id}`)
             .then((res) => res.data)
             .catch((err) => {
                 throw err;
@@ -143,21 +143,21 @@ export const userAPI = {
             });
     },
     createPost: (values: any): Promise<string> => {
-        return instance.post(`regular/ads/new`, values, setTokenToHeader())
+        return instance.post(`regular/post/new`, values, setTokenToHeader())
             .then(res => res.data)
             .catch(err => {
                 throw err
             });
     },
     uploadPhotos: (form: FormData): Promise<any> => {
-        return instance.post(`regular/ads/imageUpload`, form, setTokenToHeader())
+        return instance.post(`regular/post/imageUpload`, form, setTokenToHeader())
             .then(res => res.data)
             .catch(err => {
                 throw err
             });
     },
     getPostsTypes: (lang: string): Promise<any> => {
-        return instance.get(`ads/type?lang=${lang}`)
+        return instance.get(`post/type?lang=${lang}`)
             .then(res => res.data)
             .catch(err => {
                 throw err
@@ -189,5 +189,5 @@ export const userAPI = {
             .catch(err => {
                 throw err
             });
-    },
+    }
 };
