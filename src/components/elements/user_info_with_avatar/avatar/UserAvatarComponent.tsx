@@ -4,10 +4,10 @@ import Avatar from '@material-ui/core/Avatar';
 // styles
 import { useStyles, StyledBadge } from './useStyles';
 
-export const UserAvatarComponent = () => {
+export const UserAvatarComponent = (props) => {
     const classes = useStyles();
     return (
-        <div className={classes.root}>
+        <div className={classes.root + ' ' + props.className}>
             <StyledBadge
                 overlap="circle"
                 anchorOrigin={{
