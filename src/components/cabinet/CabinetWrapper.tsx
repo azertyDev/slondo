@@ -9,9 +9,9 @@ export type CabinetMenuPropsType = {
     headerTitle: string;
 };
 
-export const CabinetMenuWrapper:FC<CabinetMenuPropsType> = ({children, title, headerTitle}) => {
+export const CabinetWrapper:FC<CabinetMenuPropsType> = ({children, title, headerTitle}) => {
+    const classes = useStyles();
 
-    const classes = useStyles()
     return (
         <MainLayout title={`Мой кабинет | ${title}`}>
             <div className={classes.root}>
@@ -29,4 +29,4 @@ export const CabinetMenuWrapper:FC<CabinetMenuPropsType> = ({children, title, he
             </div>
         </MainLayout>
     )
-}
+};

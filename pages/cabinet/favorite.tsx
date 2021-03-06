@@ -1,13 +1,6 @@
-import React from 'react';
-import {withTranslation} from '@root/i18n';
-import {FavoriteContainer} from "@src/components/cabinet/cabinet_pages/favorite/FavoriteContainer";
+import React, {FC} from 'react';
+import FavoriteContainer from "@src/components/cabinet/cabinet_pages/favorite/FavoriteContainer";
 
-const Favorite = (props) => {
-    return <FavoriteContainer {...props}/>;
-};
+const Favorite: FC = () => <FavoriteContainer/>;
 
-Favorite.getInitialProps = async () => ({
-    namespacesRequired: ['cabinet'],
-});
-
-export default withTranslation(['cabinet'])(Favorite);
+export default Favorite;

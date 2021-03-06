@@ -29,12 +29,10 @@ import {PreviewDefParams} from "@src/components/post/create_post/form_page/defau
 type DefaultParamsPropsType = {
     postType: PostType,
     openKey: boolean,
-    mark: string,
     asPath: string,
     post,
     setPost,
     isPreview: boolean,
-    isCategoryFree: boolean,
     handleFormOpen: (k, e) => void
 } & WithT;
 
@@ -43,13 +41,11 @@ export const DefaultParamsForm: FC<DefaultParamsPropsType> = (props) => {
         t,
         isPreview,
         openKey,
-        mark,
         asPath,
         postType,
         post,
         setPost,
-        handleFormOpen,
-        isCategoryFree
+        handleFormOpen
     } = props;
 
     const formKey = 'defParams';
@@ -67,14 +63,14 @@ export const DefaultParamsForm: FC<DefaultParamsPropsType> = (props) => {
         location: null,
         description: '',
         phone: '',
-        price: mark === 'free' ? '0' : '',
+        price: '',
         currency: postType.currency[0],
         avalTime: {
             isActive: false,
             time: {
                 start_time: '09:00',
                 end_time: '18:00',
-                available_days: [...WEEK_DAYS],
+                available_days: [...WEEK_DAYS]
             }
         },
         auction: {
@@ -102,11 +98,23 @@ export const DefaultParamsForm: FC<DefaultParamsPropsType> = (props) => {
         } = values;
 
         if (isAuction) {
-            const {duration, ...others} = auction;
+            const {
+                duration,
+                price_by_now,
+                reserve_price,
+                auto_renewal,
+                offer_the_price,
+                ...others
+            } = auction;
 
             others.duration_id = duration.id;
-            others.price_by_now = clearWhiteSpaces(auction.price_by_now.value);
-            others.reserve_price = clearWhiteSpaces(auction.reserve_price);
+
+            if (isAdvanceAuction) {
+                others.price_by_now = clearWhiteSpaces(price_by_now.value);
+                others.reserve_price = clearWhiteSpaces(reserve_price);
+                others.auto_renewal = auto_renewal;
+                others.offer_the_price = offer_the_price;
+            }
 
             otherVals.auction = others;
         }
@@ -115,7 +123,7 @@ export const DefaultParamsForm: FC<DefaultParamsPropsType> = (props) => {
 
         location = {
             region_id: region.id,
-            city_id: city.id,
+            city_id: city.id
         };
 
         if (district) {
@@ -144,7 +152,7 @@ export const DefaultParamsForm: FC<DefaultParamsPropsType> = (props) => {
     const formik = useFormik({
         onSubmit,
         initialValues: initForm,
-        validationSchema: defaultParamsSchema,
+        validationSchema: defaultParamsSchema
     });
 
     const {
@@ -203,7 +211,7 @@ export const DefaultParamsForm: FC<DefaultParamsPropsType> = (props) => {
             'price_by_now',
             'offer_the_price',
             'auto_renewal',
-            'display_phone',
+            'display_phone'
         ];
 
         if (auctionOptionsList.some(option => option === name)) {
@@ -258,8 +266,8 @@ export const DefaultParamsForm: FC<DefaultParamsPropsType> = (props) => {
         }
     }, []);
 
-    console.log('vals', values)
-    console.log('errors', errors)
+    // console.log('vals', values)
+    // console.log('errors', errors)
     // console.log('touched', touched)
     const classes = useStyles();
     return (
@@ -275,155 +283,142 @@ export const DefaultParamsForm: FC<DefaultParamsPropsType> = (props) => {
                     icon={<StateIcon/>}
                 >
                     <div className={classes.root}>
-                        {
-                            isPreview
-                                ? <PreviewDefParams
-                                    t={t}
-                                    values={values}
-                                    isAuction={isAuction}
-                                    isAdvanceAuction={isAdvanceAuction}
-                                    locationText={locationText}
-                                    isCategoryFree={isCategoryFree}
-                                />
-                                : <div>
-                                    <Typography variant="subtitle1">
-                                        <strong>
-                                            {t('postTitle')}:
-                                            {<span className='error-text'>*&nbsp;</span>}
-                                        </strong>
-                                        {
-                                            errors.title
-                                            && touched.title
-                                            && <span className='error-text'>{t(errors.title as string)}</span>
-                                        }
-                                    </Typography>
-                                    <CustomFormikField
-                                        name='title'
-                                        value={values.title}
-                                        onChange={handleInput}
-                                        placeholder={t('exampleTitle')}
-                                        className={errors.title && touched.title ? 'error-border' : ''}
-                                    />
+                        {isPreview
+                            ? <PreviewDefParams
+                                t={t}
+                                values={values}
+                                isAuction={isAuction}
+                                isAdvanceAuction={isAdvanceAuction}
+                                locationText={locationText}
+                            />
+                            : <div>
+                                <Typography variant="subtitle1">
+                                    <strong>
+                                        {t('postTitle')}:
+                                        {<span className='error-text'>*&nbsp;</span>}
+                                    </strong>
                                     {
-                                        mark !== 'free' && (
-                                            <>
-                                                {
-                                                    isAuction
-                                                        ? <div>
-                                                            <AuctionParams
-                                                                t={t}
-                                                                values={values}
-                                                                errors={errors}
-                                                                touched={touched}
-                                                                postType={postType}
-                                                                handleBlur={handleBlur}
-                                                                handleInput={handleInput}
-                                                                handleSelect={handleSelect}
-                                                                isAdvanceAuction={isAdvanceAuction}
-                                                                handleCheckboxChange={handleCheckboxChange}
-                                                            />
-                                                        </div>
-                                                        : !isCategoryFree
-                                                        && (
-                                                            <div>
-                                                                <Typography variant="subtitle1">
-                                                                    <strong>
-                                                                        {t('price')}
-                                                                        <span className='error-text'>*&nbsp;</span>
-                                                                    </strong>
-                                                                    {
-                                                                        errors.price
-                                                                        && touched.price
-                                                                        && <span className='error-text'>
-                                                                            {t(errors.price as string)}
-                                                                        </span>
-                                                                    }
-                                                                </Typography>
-                                                                <Grid container>
-                                                                    <Grid item xs={3}>
-                                                                        <TextField
-                                                                            fullWidth
-                                                                            name='price'
-                                                                            variant='outlined'
-                                                                            onBlur={handleBlur}
-                                                                            onChange={handleInput}
-                                                                            value={values.price ?? ''}
-                                                                            className={errors.price && touched.price ? 'error-border' : ''}
-                                                                        />
-                                                                    </Grid>
-                                                                    <CustomSelect
-                                                                        t={t}
-                                                                        name='currency'
-                                                                        values={values}
-                                                                        onBlur={handleBlur}
-                                                                        items={postType.currency}
-                                                                        handleSelect={handleSelect}
-                                                                    />
-                                                                </Grid>
-                                                            </div>
-                                                        )
-                                                }
-                                            </>
-                                        )
+                                        errors.title
+                                        && touched.title
+                                        && <span className='error-text'>{t(errors.title as string)}</span>
                                     }
-                                    <div>
-                                        <PaymentDelivery
+                                </Typography>
+                                <CustomFormikField
+                                    name='title'
+                                    value={values.title}
+                                    onChange={handleInput}
+                                    placeholder={t('exampleTitle')}
+                                    className={errors.title && touched.title ? 'error-border' : ''}
+                                />
+                                {isAuction
+                                    ? <div>
+                                        <AuctionParams
                                             t={t}
                                             values={values}
+                                            errors={errors}
+                                            touched={touched}
+                                            postType={postType}
+                                            handleBlur={handleBlur}
+                                            handleInput={handleInput}
+                                            handleSelect={handleSelect}
+                                            isAdvanceAuction={isAdvanceAuction}
                                             handleCheckboxChange={handleCheckboxChange}
                                         />
                                     </div>
-                                    <div className='location-wrapper'>
-                                        <LocationAutocomplete
-                                            name='location'
-                                            locationError={errors.location}
-                                            locationTouched={touched.location}
-                                            value={values.location}
-                                            locations={locations.data}
-                                            onBlur={handleBlur}
-                                            onChange={handleLocation}
-                                        />
-                                    </div>
-                                    <div>
-                                        <Description
-                                            t={t}
-                                            errors={errors}
-                                            touched={touched}
-                                            handleInput={handleInput}
-                                            handleBlur={handleBlur}
-                                            description={values.description}
-                                        />
-                                    </div>
-                                    <Grid
-                                        item
-                                        container
-                                        justify='space-between'
-                                        spacing={1}
-                                    >
-                                        <Grid item xs={6}>
-                                            <Contacts
-                                                t={t}
-                                                values={values}
-                                                isAuction={isAuction}
-                                                handleInput={handleInput}
-                                                handleCheckboxChange={handleCheckboxChange}
-                                            />
-                                        </Grid>
-                                        {!isAuction && (
-                                            <Grid item xs={6}>
-                                                <AvailableDays
-                                                    t={t}
-                                                    avalTime={values.avalTime}
-                                                    handleBlur={handleBlur}
-                                                    handleTime={handleTime}
-                                                    handleSwitch={handleSwitch}
-                                                    handleAvalDays={handleAvalDays}
+                                    : <div>
+                                        <Typography variant="subtitle1">
+                                            <strong>
+                                                {t('price')}
+                                                <span className='error-text'>*&nbsp;</span>
+                                            </strong>
+                                            {
+                                                errors.price
+                                                && touched.price
+                                                && <span className='error-text'>
+                                                                            {t(errors.price as string)}
+                                                                        </span>
+                                            }
+                                        </Typography>
+                                        <Grid container>
+                                            <Grid item xs={3}>
+                                                <TextField
+                                                    fullWidth
+                                                    name='price'
+                                                    variant='outlined'
+                                                    onBlur={handleBlur}
+                                                    onChange={handleInput}
+                                                    value={values.price ?? ''}
+                                                    className={errors.price && touched.price ? 'error-border' : ''}
                                                 />
                                             </Grid>
-                                        )}
-                                    </Grid>
+                                            <CustomSelect
+                                                t={t}
+                                                name='currency'
+                                                values={values}
+                                                onBlur={handleBlur}
+                                                items={postType.currency}
+                                                handleSelect={handleSelect}
+                                            />
+                                        </Grid>
+                                    </div>
+                                }
+                                <div>
+                                    <PaymentDelivery
+                                        t={t}
+                                        values={values}
+                                        handleCheckboxChange={handleCheckboxChange}
+                                    />
                                 </div>
-                        }
+                                <div className='location-wrapper'>
+                                    <LocationAutocomplete
+                                        name='location'
+                                        locationError={errors.location}
+                                        locationTouched={touched.location}
+                                        value={values.location}
+                                        locations={locations.data}
+                                        onBlur={handleBlur}
+                                        onChange={handleLocation}
+                                    />
+                                </div>
+                                <div>
+                                    <Description
+                                        t={t}
+                                        errors={errors}
+                                        touched={touched}
+                                        handleInput={handleInput}
+                                        handleBlur={handleBlur}
+                                        description={values.description}
+                                    />
+                                </div>
+                                <Grid
+                                    item
+                                    container
+                                    justify='space-between'
+                                    spacing={1}
+                                >
+                                    <Grid item xs={6}>
+                                        <Contacts
+                                            t={t}
+                                            values={values}
+                                            isAuction={isAuction}
+                                            handleInput={handleInput}
+                                            handleCheckboxChange={handleCheckboxChange}
+                                        />
+                                    </Grid>
+                                    {!isAuction && (
+                                        <Grid item xs={6}>
+                                            <AvailableDays
+                                                t={t}
+                                                avalTime={values.avalTime}
+                                                handleBlur={handleBlur}
+                                                handleTime={handleTime}
+                                                handleSwitch={handleSwitch}
+                                                handleAvalDays={handleAvalDays}
+                                            />
+                                        </Grid>
+                                    )}
+                                </Grid>
+                            </div>}
                     </div>
                 </CustomAccordion>
             </form>

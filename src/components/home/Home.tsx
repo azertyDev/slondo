@@ -8,7 +8,7 @@ import {ErrorModal} from '@src/components/error_modal/ErrorModal';
 
 export const Home: FC = () => {
     return (
-        <div>
+        <>
             <Head>
                 <title>Slondo - доска объявлений</title>
             </Head>
@@ -16,6 +16,6 @@ export const Home: FC = () => {
             <Main/>
             <Footer/>
             <ErrorModal/>
-        </div>
+        </>
     )
 };

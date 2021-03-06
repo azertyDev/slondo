@@ -8,17 +8,17 @@ export const postTypes: PostType[] = [
         currency: [
             {
                 id: 1,
-                name: 'уе',
+                name: 'уе'
             },
             {
                 id: 2,
-                name: 'sum',
+                name: 'sum'
             }
         ],
         expired: [
             {
                 id: 3,
-                hours: 720,
+                hours: 720
             }
         ],
         image: {

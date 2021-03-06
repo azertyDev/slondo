@@ -4,10 +4,11 @@ import {useTranslation, Link} from '@root/i18n';
 import {postTypes} from "@src/common_data/post_types_list";
 import {MainLayout} from "@src/components/MainLayout";
 import {Top} from "@src/components/post/create_post/top/Top";
+import {withAuthRedirect} from "@src/hoc/withAuthRedirect";
 import {useStyles} from './useStyles';
 
 
-export const PostTypesPage: FC = () => {
+const PostTypesPage: FC = () => {
     const {t} = useTranslation(['post']);
 
     const classes = useStyles();
@@ -39,7 +40,7 @@ export const PostTypesPage: FC = () => {
                                         variant="subtitle2"
                                         className={postType.name}
                                     >
-                                        ({t(`${postType.guide}`)})
+                                        {t(`${postType.guide}`)}
                                     </Typography>
                                 </a>
                                 <Typography variant="subtitle1" color="initial">
@@ -53,3 +54,5 @@ export const PostTypesPage: FC = () => {
         </MainLayout>
     );
 };
+
+export default withAuthRedirect(PostTypesPage);

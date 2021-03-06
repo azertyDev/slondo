@@ -32,11 +32,10 @@ export type CategoryType = IdNameType & {
 };
 
 export type SubCategoryType = IdNameType & {
-    parents: IdNameType[];
+    parents?: IdNameType[];
     type?: SubCtgrsType[];
 };
 
 export type SubCtgrsType = IdNameType & {
-    parents: IdNameType[]
-
-} & IdNameType
+    parents?: IdNameType[]
+};

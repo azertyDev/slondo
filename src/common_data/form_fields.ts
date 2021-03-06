@@ -1,3 +1,20 @@
+export const requireFields = [
+    'type',
+    'condition',
+    'currency',
+    'price',
+    'year',
+    'mileage',
+    'body',
+    'manufacturer',
+    'models',
+    'colors',
+    'car_engine_type',
+    'transmission',
+    'transport_type',
+    'area_value'
+];
+
 export const fieldKeysWithTxt = ['area', 'mileage'];
 
 export const requiredMsg = 'requireField';
@@ -17,7 +34,7 @@ export const estateTxtFields = [
 export const excludedKeys = [
     'id',
     'name',
-    'type',
+    // 'type',
     'type_id',
     'sub_type_id'
 ];

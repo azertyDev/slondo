@@ -13,6 +13,21 @@ export const authChecker = (): boolean => {
     return typeof cookies.get('token') !== 'undefined';
 };
 
+export const toCamelCase = (text: string) => {
+    const result = [];
+    const toLower = text.toLocaleLowerCase().split('');
+    const toLowerLen = toLower.length;
+    for (let i = 0; i < toLowerLen; i++) {
+        if (toLower[i] === ' ') {
+            result.push(toLower[i + 1].toUpperCase())
+            i++
+        } else {
+            result.push(toLower[i])
+        }
+    }
+    return result.join('')
+}
+
 export const transformTitle = (title: string): string => {
     const transform = new CyrillicToTranslit().transform;
 
@@ -34,7 +49,7 @@ export const clearWhiteSpaces = (txt: string): string => {
     return txt.replace(/\s+/g, "");
 }
 
-export const addParentsToCtgrs = (categoriesList: CategoryType[]) => {
+export const addParentsToCtgrs = (categoriesList: CategoryType[]): CategoryType[] => {
     return categoriesList.map(ctgry => {
         if (ctgry.subCategory) {
             const subCategory = addParents(
@@ -78,34 +93,36 @@ export const addParentsToCtgrs = (categoriesList: CategoryType[]) => {
     }
 };
 
-export const dataForCrtPostNormalize = (data: any) => {
+export const dataForCrtPostNormalize = (data: any, type?) => {
     if (!!data) {
-        data = Object.keys(data).reduce((acc: any, ctgrName) => {
-            const isExcludedKey = excludedKeys.some(k => k === ctgrName);
-            if (Array.isArray(data[ctgrName]) && !!data[ctgrName].length && ctgrName !== 'manufacturers') {
-                if (ctgrName === 'type') {
+        data = Object.keys(data).reduce((acc: any, key) => {
+            // const isExcludedKey = excludedKeys.some(k => k === key);
+
+            if (Array.isArray(data[key]) && !!data[key].length) {
+                const isExcludeTypeKey = type && key === 'type';
+
+                if (!isExcludeTypeKey) {
+                    acc[key] = data[key];
+                } else if (key === 'type') {
                     acc = {
                         ...acc,
-                        ...dataForCrtPostNormalize(data[ctgrName][0])
+                        ...dataForCrtPostNormalize(data[key][0])
                     };
-                } else {
-                    acc[ctgrName] = data[ctgrName];
-                    if (ctgrName === 'manufacturer' && data[ctgrName][0].models) {
-                        acc.subCategory = [];
-                    }
                 }
             } else {
-                if (ctgrName === 'furnished') {
-                    acc[ctgrName] = false;
-                } else if (ctgrName === 'default_param') {
+                if (key === 'furnished') {
+                    acc[key] = false;
+                } else if (key === 'default_param') {
                     acc = {
                         ...acc,
-                        ...dataForCrtPostNormalize(data[ctgrName])
+                        ...dataForCrtPostNormalize(data[key])
                     };
-                } else if (Number.isInteger(data[ctgrName]) && !isExcludedKey) {
-                    acc[ctgrName] = '';
                 }
+                // else if (Number.isInteger(data[key]) && !isExcludedKey) {
+                //     acc[key] = '';
+                // }
             }
+
             return acc;
         }, {});
     } else {
@@ -142,7 +159,6 @@ export const categorySearchHelper = (txt: string, categoryList: CategoryType[], 
 };
 
 export const weekDaysHelper = (days, t: TFunction) => {
-    console.log(days)
     const daysLen = days.length;
     let isInOrder: boolean;
     let result = '';

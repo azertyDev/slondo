@@ -1,17 +1,22 @@
 import React, {FC, useEffect, useState} from 'react'
-import {InputBase, Typography} from '@material-ui/core'
+import {Typography} from '@material-ui/core'
 import {ButtonComponent} from '@src/components/elements/button/Button'
 import {LockIcon, RefreshIcon} from '@src/components/elements/icons'
 import {AuctionTimer} from './AuctionTimer'
 import {numberPrettier} from '@root/src/helpers'
 import {useStyles} from './useStyles'
+import BuyAuctionComponent from './BuyAuction';
 import {userAPI} from '@src/api/api'
 import AuctionForm from './AuctionForm'
-import {authChecker} from '@root/src/helpers'
-import {CustomModal} from '@src/components/elements/custom_modal/CustomModal'
-
+import {useDispatch, useSelector} from "react-redux";
+import {setErrorMsgAction } from '@src/redux/slices/errorSlice'
+import {toCamelCase} from "@root/src/helpers";
+import {useTranslation} from "@root/i18n";
 
 export const AuctionInfo: FC<any> = (props) => {
+    const { t } = useTranslation()
+    const dispatch = useDispatch()
+    const isAuth = useSelector<any>(state => state.auth.isAuth)
     const classes = useStyles()
     const { data } = props
     const [showAll, setShowAll] = useState(false)
@@ -19,37 +24,8 @@ export const AuctionInfo: FC<any> = (props) => {
     const date = new Date(data.expiration_at).getTime()
     const [list, setList] = useState([])
     const [lastPage, setLastPage] = useState(null)
-    const [maximumPrice, setMaximumPrice] = useState(null)
-    const [openModal, setOpenModal] = React.useState(false)
-
-    const modalBody = (
-        <div className={classes.modalBody}>
-            <Typography variant='subtitle1' className='subtitle'>
-                Предложенная стоимость не может быть
-                меньше стартовой цены или сделанной ставки
-            </Typography>
-            <div className='form'>
-                <InputBase
-                    className='input'
-                    placeholder='Впишите сумму'
-                    fullWidth
-                />
-                <ButtonComponent>
-                    <Typography variant='subtitle1'>
-                        Предложить
-                    </Typography>
-                </ButtonComponent>
-            </div>
-        </div>
-    )
-
-    const handleModalOpen = () => {
-        setOpenModal(true)
-    }
-
-    const handleModalClose = () => {
-        setOpenModal(false)
-    }
+    const auction_id = data?.auction?.id
+    const ads_id = data?.id
 
     useEffect(() => {
         userAPI.getAuctionBets(data.auction.id, page).then(result => {
@@ -65,6 +41,7 @@ export const AuctionInfo: FC<any> = (props) => {
                     setLastPage(result.last_page);
                     setList(result.data)
                 }))
+            .catch(error => dispatch(setErrorMsgAction(t(`auction:${toCamelCase(error.response.data.message)}`))))
     }
 
     const handleScroll = (e) => {
@@ -74,11 +51,16 @@ export const AuctionInfo: FC<any> = (props) => {
         }
     }
 
+    const handleRefresh = () => {
+        userAPI.getAuctionBets(data.auction.id, 1)
+            .then(result => setList(result.data))
+            .catch(err => dispatch(setErrorMsgAction(err.message)))
+    }
+
     return (
         <div className={classes.root}>
             <div className="lot-info">
-                {data.auction
-                && <div className="reserve-price">
+                {data.auction && data.auction.reserve_price > list?.[0]?.bet && <div className="reserve-price">
                     <LockIcon/>
                     <div>
                         <Typography variant="subtitle2" color="initial">
@@ -102,7 +84,7 @@ export const AuctionInfo: FC<any> = (props) => {
                         <div>
                             Текущие ставки
                         </div>
-                        <div onClick={() => console.warn("click")} style={{cursor: "pointer"}}>
+                        <div onClick={handleRefresh} style={{cursor: "pointer"}}>
                             <RefreshIcon/>
                         </div>
                     </Typography>
@@ -117,7 +99,8 @@ export const AuctionInfo: FC<any> = (props) => {
                                     <div>
                                         <div className="participant-name">
                                             <Typography variant="subtitle1" noWrap>
-                                                {item?.user?.phone} (<span>1</span>)
+                                                {item?.user?.phone} {item?.number_of_bets &&
+                                            <span>({item?.number_of_bets})</span>}
                                             </Typography>
                                         </div>
                                         <div className="dateAndTime">
@@ -150,7 +133,7 @@ export const AuctionInfo: FC<any> = (props) => {
                                             noWrap
                                             className="per-bet"
                                         >
-                                            + {item?.outbid}
+                                            {item?.outbid === 0 ? "Стартовая цена" : `+${item?.outbid}`}
                                         </Typography>
                                     </div>
                                 </li>
@@ -167,40 +150,33 @@ export const AuctionInfo: FC<any> = (props) => {
                         Все ставки
                     </Typography>
                 </div>
-                <div className="bet-info">
-                    {authChecker() && <AuctionForm data={data} handleFormSubmit={handleSubmit}/>}
-                    <div>
-                        <Typography variant="subtitle2" color="initial">
-                            Максимально возможная ставка
-                        </Typography>
-                        <Typography variant="subtitle2" color="initial">
-                            2 2500 000
-                        </Typography>
-                    </div>
-                </div>
-                {data.ads_type.id === 3 && (
-                    <div className="buy-now">
-                        <Typography variant="subtitle1" color="initial">
-                            1 420 000 000 сум
-                        </Typography>
-                        <ButtonComponent onClick={handleModalOpen}>
-                            <Typography variant="subtitle1" color="initial">
-                                Купить сейчас
+                {isAuth &&
+                <>
+                    <div className="bet-info">
+                        <AuctionForm data={data} handleFormSubmit={handleSubmit} list={list}/>
+                        <div>
+                            <Typography variant="subtitle2" color="initial">
+                                Максимально возможная ставка:
                             </Typography>
-                        </ButtonComponent>
+                            <Typography variant="subtitle2" color="initial">
+                                {list?.[0]?.max_bet} сум
+                            </Typography>
+                        </div>
                     </div>
+                {data.ads_type.id === 3 && (
+                    <BuyAuctionComponent auction_id={auction_id} ads_id={ads_id} />
                 )}
                 <div className='suggest_price'>
-                    <ButtonComponent onClick={handleModalOpen}>
+                    <ButtonComponent>
                         <Typography variant="subtitle1" color="initial">
                             Предложить цену
                         </Typography>
                     </ButtonComponent>
                 </div>
+                </>
+                }
             </div>
-            <CustomModal title='Предложить цену' handleClose={handleModalClose} open={openModal}>
-                {modalBody}
-            </CustomModal>
+
         </div>
     );
 };

@@ -19,10 +19,10 @@ export const Header: FC = () => {
 
     const lang = i18n.language;
 
-    const {isAuth, isAuthModalOpen} = useSelector((store: RootState) => store.auth);
     const dispatch = useDispatch();
+    const {isAuth, isAuthModalOpen} = useSelector((store: RootState) => store.auth);
 
-    const handleModal = (value) => () => {
+    const handleModal = value => () => {
         dispatch(setIsAuthModalOpen(value));
     };
 

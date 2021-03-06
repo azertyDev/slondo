@@ -1,4 +1,5 @@
 import React, {FC, useEffect, useState} from 'react';
+import {Top} from '../top/Top';
 import {useRouter} from "next/router";
 import {Typography} from "@material-ui/core";
 import {i18n, Router, useTranslation} from "@root/i18n";
@@ -11,12 +12,12 @@ import {DefaultParamsForm} from './default_params_form/DefaultParamsForm';
 import {setErrorMsgAction} from '@root/src/redux/slices/errorSlice';
 import {dataForCrtPostNormalize, getCategoriesByParams} from '@src/helpers';
 import {categories_list} from '@src/common_data/categories_list';
-import {Top} from '../top/Top';
 import {userAPI} from '@src/api/api';
 import {CarForm} from '@src/components/post/create_post/form_page/car_form/CarForm';
 import {EstateForm} from '@src/components/post/create_post/form_page/estate_form/EstateForm';
 import {ButtonComponent} from "@src/components/elements/button/Button";
-import {SuccessPage} from "@src/components/post/create_post/success_page/SuccessPage";
+import {SuccessPage} from "@src/components/post/create_post/form_page/success_page/SuccessPage";
+import {withAuthRedirect} from "@src/hoc/withAuthRedirect";
 import {useStyles} from './useStyles';
 
 
@@ -25,7 +26,7 @@ export type DataForCrtPostType = {
     data: any;
 };
 
-export const FormPage: FC = () => {
+const FormPage: FC = () => {
     const dispatch = useDispatch();
 
     const {t} = useTranslation(['post']);
@@ -36,12 +37,15 @@ export const FormPage: FC = () => {
 
     const {category, subCategory, type} = getCategoriesByParams(categories_list, params);
     const mark = category.name;
-    const isCategoryFree = category.name === 'free';
+
+    const isCtgrAnimalFishes = category.name === 'animal' && subCategory.name === 'fishes';
 
     const isPreview = !!Number(preview);
     const isSuccess = !!Number(success);
 
-    const backUrl = isPreview ? asPath.replace(/preview=1/, 'preview=0') : `/create/type/${index}`;
+    const backUrl = isPreview
+        ? asPath.replace(/preview=1/, 'preview=0')
+        : `/create/type/${index}`;
 
     const title = `${t(`categories:${category.name}`)}
         ${subCategory ? ` - ${t(`categories:${subCategory.name}`)}` : ''}
@@ -56,6 +60,12 @@ export const FormPage: FC = () => {
         photos: []
     };
 
+    if (isCtgrAnimalFishes) {
+        initPost[mark] = {
+            [`${mark}_id`]: subCategory.id
+        }
+    }
+
     const initFilters: { isFetch: boolean, data: any } = {
         isFetch: false,
         data: {}
@@ -65,14 +75,14 @@ export const FormPage: FC = () => {
         car: mark === 'car',
         estate: mark === 'estate',
         params: mark !== 'car' && mark !== 'estate',
-        appearance: false,
+        appearance: isCtgrAnimalFishes,
         defParams: false
     };
 
     const [post, setPost] = useState(initPost);
 
     const [filters, setFilters] = useState(initFilters);
-    const {color, ...data} = filters.data;
+    const {color, ...otherFilters} = filters.data;
 
     const [openKeys, setOpenKeys] = useState(initOpenKeys);
 
@@ -84,7 +94,6 @@ export const FormPage: FC = () => {
                 openKeys[key] = expanded;
             }
         }
-        // openKeys[key] = expanded;
         setOpenKeys({...openKeys});
     };
 
@@ -102,7 +111,7 @@ export const FormPage: FC = () => {
 
             setFilters({
                 isFetch: false,
-                data: dataForCrtPostNormalize(fetchedData)
+                data: dataForCrtPostNormalize(fetchedData, type)
             });
         } catch (e) {
             dispatch(setErrorMsgAction(e.message));
@@ -136,7 +145,7 @@ export const FormPage: FC = () => {
                 return <ParamsForm
                     t={t}
                     mark={mark}
-                    filters={data}
+                    filters={otherFilters}
                     type={type}
                     post={post}
                     setPost={setPost}
@@ -153,65 +162,65 @@ export const FormPage: FC = () => {
     }, [asPath]);
 
     useEffect(() => {
-        !isCategoryFree && setFetchedFilters();
+        if (!isCtgrAnimalFishes) {
+            setFetchedFilters();
+        }
     }, []);
-
+    console.log(filters)
     const classes = useStyles();
     return (
         <MainLayout>
-            {
-                isSuccess
-                    ? <SuccessPage/>
-                    : <>
-                        <Top
-                            activeStep={isPreview ? 3 : 2}
-                            title={title}
-                            backUrl={backUrl}
-                        />
-                        <div className={classes.root}>
-                            {!isCategoryFree && (
-                                <div>
-                                    {paramsFormByCategory()}
-                                </div>
-                            )}
+            {isSuccess
+                ? <SuccessPage/>
+                : <>
+                    <Top
+                        title={title}
+                        backUrl={backUrl}
+                        activeStep={isPreview ? 3 : 2}
+                    />
+                    <div className={classes.root}>
+                        {!isCtgrAnimalFishes && (
                             <div>
-                                <AppearanceForm
-                                    t={t}
-                                    mark={mark}
-                                    colors={color}
-                                    isPreview={isPreview}
-                                    post={post}
-                                    setPost={setPost}
-                                    openKey={openKeys.appearance}
-                                    handleFormOpen={handleFormOpen}
-                                />
+                                {paramsFormByCategory()}
                             </div>
-                            <div>
-                                <DefaultParamsForm
-                                    t={t}
-                                    mark={mark}
-                                    asPath={asPath}
-                                    postType={postType}
-                                    post={post}
-                                    setPost={setPost}
-                                    isPreview={isPreview}
-                                    openKey={openKeys.defParams}
-                                    handleFormOpen={handleFormOpen}
-                                    isCategoryFree={isCategoryFree}
-                                />
-                            </div>
-                            {isPreview && (
-                                <div className='publish-button-wrapper'>
-                                    <ButtonComponent onClick={publishPost}>
-                                        <Typography variant='subtitle1'>
-                                            {t('publish')}
-                                        </Typography>
-                                    </ButtonComponent>
-                                </div>
-                            )}
+                        )}
+                        <div>
+                            <AppearanceForm
+                                t={t}
+                                mark={mark}
+                                colors={color}
+                                isPreview={isPreview}
+                                post={post}
+                                setPost={setPost}
+                                openKey={openKeys.appearance}
+                                handleFormOpen={handleFormOpen}
+                            />
                         </div>
-                    </>
-            }
+                        <div>
+                            <DefaultParamsForm
+                                t={t}
+                                asPath={asPath}
+                                postType={postType}
+                                post={post}
+                                setPost={setPost}
+                                isPreview={isPreview}
+                                openKey={openKeys.defParams}
+                                handleFormOpen={handleFormOpen}
+                            />
+                        </div>
+                        {isPreview && (
+                            <div className='publish-button-wrapper'>
+                                <ButtonComponent onClick={publishPost}>
+                                    <Typography variant='subtitle1'>
+                                        {t('publish')}
+                                    </Typography>
+                                </ButtonComponent>
+                            </div>
+                        )}
+                    </div>
+                </>}
         </MainLayout>
     )
 };
+
+export default withAuthRedirect(FormPage);

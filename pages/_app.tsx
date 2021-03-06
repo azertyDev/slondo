@@ -27,15 +27,15 @@ const MyApp = (props) => {
     );
 };
 
-// MyApp.getInitialProps = async ({Component, ctx}) => {
-//     let pageProps = {};
-//
-//     if (Component.getInitialProps) {
-//         pageProps = await Component.getInitialProps(ctx);
-//     }
-//
-//     return {pageProps};
-// };
+MyApp.getInitialProps = async ({Component, ctx}) => {
+    let pageProps = {};
+
+    if (Component.getInitialProps) {
+        pageProps = await Component.getInitialProps(ctx);
+    }
+
+    return {pageProps};
+};
 
 const withCompose = compose(
     wrapper.withRedux,

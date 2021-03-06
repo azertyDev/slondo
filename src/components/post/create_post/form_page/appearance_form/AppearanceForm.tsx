@@ -57,7 +57,7 @@ export const AppearanceForm: FC<AppearanceFormPropsType> = (props) => {
     const formik = useFormik({
         onSubmit,
         initialValues: initForm,
-        validationSchema: appearanceSchema,
+        validationSchema: appearanceSchema
     });
 
     const {
@@ -104,94 +104,85 @@ export const AppearanceForm: FC<AppearanceFormPropsType> = (props) => {
                     open={openKey || isPreview}
                 >
                     <div className={classes.root}>
-                        {
-                            isPreview
-                                ? <div className='preview'>
-                                    {
-                                        !!color && <div className='color-preview'>
-                                            <Typography variant="subtitle1">
-                                                <strong>
-                                                    {t('colors')}:
-                                                </strong>
-                                            </Typography>
-                                            <div
-                                                className='color'
-                                                style={{backgroundColor: values.color.hex_color_code}}
-                                            />
-                                        </div>
-                                    }
-                                    <div className='photos-preview'>
+                        {isPreview
+                            ? <div className='preview'>
+                                {!!color && (
+                                    <div className='color-preview'>
                                         <Typography variant="subtitle1">
                                             <strong>
-                                                {t('photos')}:
+                                                {t('colors')}:
                                             </strong>
                                         </Typography>
-                                        {
-                                            files.map((photo, i) =>
-                                                <img
-                                                    key={i}
-                                                    alt="photo"
-                                                    src={photo.url}
-                                                />
-                                            )
-                                        }
-                                    </div>
+                                        <div
+                                            className='color'
+                                            style={{backgroundColor: values.color.hex_color_code}}
+                                        />
+                                    </div>)}
+                                <div className='photos-preview'>
+                                    <Typography variant="subtitle1">
+                                        <strong>
+                                            {t('photos')}:
+                                        </strong>
+                                    </Typography>
+                                    {files.map((photo, i) =>
+                                        <img
+                                            key={i}
+                                            alt="photo"
+                                            src={photo.url}
+                                        />
+                                    )}
                                 </div>
-                                : <div>
-                                    {
-                                        !!colors && (
-                                            <>
-                                                <Typography variant="subtitle1">
-                                                    <strong>
-                                                        {t('colors')}
-                                                        {<span className='error-text'>*&nbsp;</span>}
-                                                    </strong>
-                                                    {
-                                                        errors.color
-                                                        && touched.color
-                                                        && <span className='error-text'>
-                                                            {t(errors.color as string)}
-                                                        </span>
-                                                    }
-                                                </Typography>
-                                                <div className='color-wrapper'>
-                                                    {
-                                                        colors.map(clr =>
-                                                            <div
-                                                                key={clr.id}
-                                                                onClick={handleColor(clr)}
-                                                                className={!!color && clr.id === color.id ? 'selected-color' : ''}
-                                                                style={{
-                                                                    width: '50px',
-                                                                    height: '50px',
-                                                                    backgroundColor: clr.hex_color_code
-                                                                }}
-                                                            />
-                                                        )
-                                                    }
-                                                </div>
-                                            </>
-                                        )
-                                    }
-                                    <div className='photos-wrapper'>
+                            </div>
+                            : <div>
+                                {!!colors && (
+                                    <>
                                         <Typography variant="subtitle1">
                                             <strong>
-                                                {t('photos')}
-                                                {<span className='error-text'>*</span>}
+                                                {t('colors')}
+                                                {<span className='error-text'>*&nbsp;</span>}
                                             </strong>
                                             {
-                                                errors.files
-                                                && touched.files
-                                                && <span className='error-text'>&nbsp;{t(errors.files as string)}</span>
+                                                errors.color
+                                                && touched.color
+                                                && <span className='error-text'>
+                                                        {t(errors.color as string)}
+                                                    </span>
                                             }
                                         </Typography>
-                                        <PreviewPhotos
-                                            values={values}
-                                            setValues={setValues}
-                                        />
-                                    </div>
+                                        <div className='color-wrapper'>
+                                            {colors.map(clr =>
+                                                <div
+                                                    key={clr.id}
+                                                    onClick={handleColor(clr)}
+                                                    className={!!color && clr.id === color.id ? 'selected-color' : ''}
+                                                    style={{
+                                                        width: '50px',
+                                                        height: '50px',
+                                                        backgroundColor: clr.hex_color_code
+                                                    }}
+                                                />
+                                            )}
+                                        </div>
+                                    </>
+                                )}
+                                <div className='photos-wrapper'>
+                                    <Typography variant="subtitle1">
+                                        <strong>
+                                            {t('photos')}
+                                            {<span className='error-text'>*</span>}
+                                        </strong>
+                                        {
+                                            errors.files
+                                            && touched.files
+                                            && <span className='error-text'>&nbsp;{t(errors.files as string)}</span>
+                                        }
+                                    </Typography>
+                                    <PreviewPhotos
+                                        values={values}
+                                        setValues={setValues}
+                                    />
                                 </div>
-                        }
+                            </div>}
                     </div>
                 </CustomAccordion>
             </form>

@@ -11,7 +11,6 @@ type DefaultParamsPropsType = {
     isAuction,
     isAdvanceAuction,
     locationText,
-    isCategoryFree: boolean,
 } & WithT;
 
 export const PreviewDefParams: FC<DefaultParamsPropsType> = (props) => {
@@ -20,12 +19,11 @@ export const PreviewDefParams: FC<DefaultParamsPropsType> = (props) => {
         values,
         isAuction,
         isAdvanceAuction,
-        locationText,
-        isCategoryFree
+        locationText
     } = props;
 
     const {auction, avalTime} = values;
-    console.log(avalTime)
+
     return (
         <div>
             <div className='title-wrapper'>
@@ -36,83 +34,76 @@ export const PreviewDefParams: FC<DefaultParamsPropsType> = (props) => {
                     {values.title}
                 </Typography>
             </div>
-            {
-                isAuction
-                    ? <div>
-                        <Typography variant="subtitle1">
-                            <strong>
-                                {t('startPrice')}:&nbsp;
-                            </strong>
-                            {numberPrettier(values.price)}
-                        </Typography>
-                        <Typography variant="subtitle1">
-                            <strong>
-                                {t('auctionDuration')}:&nbsp;
-                            </strong>
-                            {auction.duration.hours}
-                        </Typography>
-                        {
-                            isAdvanceAuction && (
-                                <div>
+            {isAuction
+                ? <div>
+                    <Typography variant="subtitle1">
+                        <strong>
+                            {t('startPrice')}:&nbsp;
+                        </strong>
+                        {numberPrettier(values.price)}
+                    </Typography>
+                    <Typography variant="subtitle1">
+                        <strong>
+                            {t('auctionDuration')}:&nbsp;
+                        </strong>
+                        {auction.duration.hours}
+                    </Typography>
+                    {isAdvanceAuction && (
+                        <div>
+                            <Typography variant="subtitle1">
+                                <strong>
+                                    {t('reservePrice')}:&nbsp;
+                                </strong>
+                                {auction.reserve_price}
+                            </Typography>
+                            {
+                                auction.price_by_now.value && (
                                     <Typography variant="subtitle1">
                                         <strong>
-                                            {t('reservePrice')}:&nbsp;
+                                            {t('buyNow')}:&nbsp;
                                         </strong>
-                                        {auction.reserve_price}
+                                        {auction.price_by_now.value}
                                     </Typography>
-                                    {
-                                        auction.price_by_now.value && (
-                                            <Typography variant="subtitle1">
-                                                <strong>
-                                                    {t('buyNow')}:&nbsp;
-                                                </strong>
-                                                {auction.price_by_now.value}
-                                            </Typography>
-                                        )
-                                    }
-                                    {
-                                        auction.auto_renewal && (
-                                            <div className='auction-params'>
-                                                <Checkbox
-                                                    disabled
-                                                    color='primary'
-                                                    checked={auction.auto_renewal}
-                                                />
-                                                <Typography variant="subtitle1">
-                                                    {t('autoRenewal')}
-                                                </Typography>
-                                            </div>
-                                        )
-                                    }
-                                    {
-                                        auction.offer_the_price && (
-                                            <div className='auction-params'>
-                                                <Checkbox
-                                                    disabled
-                                                    color='primary'
-                                                    checked={auction.offer_the_price}
-                                                />
-                                                <Typography variant="subtitle1">
-                                                    {t('offerPrice')}
-                                                </Typography>
-                                            </div>
-                                        )
-                                    }
-                                </div>
-                            )
-                        }
-                    </div>
-                    : !isCategoryFree
-                    && (
-                        <Typography variant="subtitle1">
-                            <strong>
-                                {t('price')}:&nbsp;
-                            </strong>
-                            {numberPrettier(values.price)}&nbsp;
-                            {values.currency.name}
-                        </Typography>
-                    )
-            }
+                                )
+                            }
+                            {
+                                auction.auto_renewal && (
+                                    <div className='auction-params'>
+                                        <Checkbox
+                                            disabled
+                                            color='primary'
+                                            checked={auction.auto_renewal}
+                                        />
+                                        <Typography variant="subtitle1">
+                                            {t('autoRenewal')}
+                                        </Typography>
+                                    </div>
+                                )
+                            }
+                            {
+                                auction.offer_the_price && (
+                                    <div className='auction-params'>
+                                        <Checkbox
+                                            disabled
+                                            color='primary'
+                                            checked={auction.offer_the_price}
+                                        />
+                                        <Typography variant="subtitle1">
+                                            {t('offerPrice')}
+                                        </Typography>
+                                    </div>
+                                )
+                            }
+                        </div>
+                    )}
+                </div>
+                : <Typography variant="subtitle1">
+                    <strong>
+                        {t('price')}:&nbsp;
+                    </strong>
+                    {numberPrettier(values.price)}&nbsp;
+                    {values.currency.name}
+                </Typography>}
             <div className='post-options'>
                 {
                     values.safe_deal && (

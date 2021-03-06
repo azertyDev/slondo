@@ -1,13 +1,8 @@
-import React from 'react';
-import {withTranslation} from '@root/i18n';
+import React, {FC} from 'react';
 import MyPostsContainer from "@src/components/cabinet/cabinet_pages/my_posts/MyPostsContainer";
 
-const Posts = (props) => {
-    return <MyPostsContainer {...props}/>;
+const Posts: FC = () => {
+    return <MyPostsContainer/>;
 };
 
-Posts.getInitialProps = async () => ({
-    namespacesRequired: ['cabinet'],
-});
-
-export default withTranslation(['cabinet'])(Posts);
+export default Posts;
