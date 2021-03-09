@@ -4,7 +4,7 @@ import {useRouter} from "next/router";
 import {Typography} from "@material-ui/core";
 import {i18n, Router, useTranslation} from "@root/i18n";
 import {useDispatch} from "react-redux";
-import {postTypes} from '@src/common_data/post_types_list';
+import {postTypes} from '@src/common_data/post_types';
 import {MainLayout} from '@src/components/MainLayout';
 import {ParamsForm} from './params_form/ParamsForm';
 import {AppearanceForm} from './appearance_form/AppearanceForm';
@@ -13,8 +13,6 @@ import {setErrorMsgAction} from '@root/src/redux/slices/errorSlice';
 import {dataForCrtPostNormalize, getCategoriesByParams} from '@src/helpers';
 import {categories_list} from '@src/common_data/categories_list';
 import {userAPI} from '@src/api/api';
-import {CarForm} from '@src/components/post/create_post/form_page/car_form/CarForm';
-import {EstateForm} from '@src/components/post/create_post/form_page/estate_form/EstateForm';
 import {ButtonComponent} from "@src/components/elements/button/Button";
 import {SuccessPage} from "@src/components/post/create_post/form_page/success_page/SuccessPage";
 import {withAuthRedirect} from "@src/hoc/withAuthRedirect";
@@ -26,7 +24,7 @@ export type DataForCrtPostType = {
     data: any;
 };
 
-const FormPage: FC = () => {
+const FormsPage: FC = () => {
     const dispatch = useDispatch();
 
     const {t} = useTranslation(['post']);
@@ -71,30 +69,15 @@ const FormPage: FC = () => {
         data: {}
     };
 
-    const initOpenKeys = {
-        car: mark === 'car',
-        estate: mark === 'estate',
-        params: mark !== 'car' && mark !== 'estate',
-        appearance: isCtgrAnimalFishes,
-        defParams: false
-    };
+    const [currentFormIndex, setCurrentFormIndex] = useState(1);
 
     const [post, setPost] = useState(initPost);
 
     const [filters, setFilters] = useState(initFilters);
     const {color, ...otherFilters} = filters.data;
 
-    const [openKeys, setOpenKeys] = useState(initOpenKeys);
-
-    const handleFormOpen = (key, expanded) => {
-        for (const k in openKeys) {
-            if (k !== key) {
-                openKeys[k] = false;
-            } else {
-                openKeys[key] = expanded;
-            }
-        }
-        setOpenKeys({...openKeys});
+    const handleFormOpen = (index: number) => () => {
+        setCurrentFormIndex(index);
     };
 
     const setFetchedFilters = async () => {
@@ -135,28 +118,6 @@ const FormPage: FC = () => {
         }
     };
 
-    const paramsFormByCategory = () => {
-        switch (category.name) {
-            case 'car':
-                return <CarForm t={t}/>;
-            case 'estate':
-                return <EstateForm t={t}/>;
-            default:
-                return <ParamsForm
-                    t={t}
-                    mark={mark}
-                    filters={otherFilters}
-                    type={type}
-                    post={post}
-                    setPost={setPost}
-                    isPreview={isPreview}
-                    subCategory={subCategory}
-                    openKey={openKeys.params}
-                    handleFormOpen={handleFormOpen}
-                />;
-        }
-    };
-
     useEffect(() => {
         window.scrollTo(0, 0);
     }, [asPath]);
@@ -166,7 +127,7 @@ const FormPage: FC = () => {
             setFetchedFilters();
         }
     }, []);
-    console.log(filters)
+    console.log('filters', filters)
     const classes = useStyles();
     return (
         <MainLayout>
@@ -181,7 +142,18 @@ const FormPage: FC = () => {
                     <div className={classes.root}>
                         {!isCtgrAnimalFishes && (
                             <div>
-                                {paramsFormByCategory()}
+                                <ParamsForm
+                                    t={t}
+                                    mark={mark}
+                                    filters={otherFilters}
+                                    type={type}
+                                    post={post}
+                                    setPost={setPost}
+                                    isPreview={isPreview}
+                                    subCategory={subCategory}
+                                    currentFormIndex={currentFormIndex}
+                                    handleFormOpen={handleFormOpen}
+                                />
                             </div>
                         )}
                         <div>
@@ -189,10 +161,10 @@ const FormPage: FC = () => {
                                 t={t}
                                 mark={mark}
                                 colors={color}
-                                isPreview={isPreview}
                                 post={post}
                                 setPost={setPost}
-                                openKey={openKeys.appearance}
+                                isPreview={isPreview}
+                                currentFormIndex={currentFormIndex}
                                 handleFormOpen={handleFormOpen}
                             />
                         </div>
@@ -204,7 +176,7 @@ const FormPage: FC = () => {
                                 post={post}
                                 setPost={setPost}
                                 isPreview={isPreview}
-                                openKey={openKeys.defParams}
+                                currentFormIndex={currentFormIndex}
                                 handleFormOpen={handleFormOpen}
                             />
                         </div>
@@ -223,4 +195,4 @@ const FormPage: FC = () => {
     )
 };
 
-export default withAuthRedirect(FormPage);
+export default withAuthRedirect(FormsPage);

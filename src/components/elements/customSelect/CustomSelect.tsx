@@ -2,6 +2,7 @@ import React, {FC} from "react";
 import {NativeSelect} from "@material-ui/core";
 import {WithT} from "i18next";
 import {useStyles} from './useStyles';
+import {autoSelectKeys} from "@src/common_data/form_fields";
 
 
 type CustomSelectPropsType = {
@@ -31,13 +32,13 @@ export const CustomSelect: FC<CustomSelectPropsType> = (props) => {
         values
     } = props;
 
+    const isAutoSelectKey = autoSelectKeys.some(k => k === name);
+    const optionKey = name === 'duration' ? 'hours' : 'name';
 
     const onChange = ({target: {name, value}}) => {
         const selectedItem = items.find(item => item.id === +value) || {id: null};
         handleSelect(selectedItem, name);
     };
-
-    const optionKey = name === 'duration' ? 'hours' : 'name';
 
     const classes = useStyles();
     return (
@@ -49,7 +50,7 @@ export const CustomSelect: FC<CustomSelectPropsType> = (props) => {
             className={classes.root + `${error ? ' error-border' : ''}`}
             disableUnderline
         >
-            {items.length > 1 && (
+            {items.length > 1 && !isAutoSelectKey && (
                 <option value={0}>
                     {t('noSelect')}
                 </option>

@@ -14,7 +14,7 @@ export const PaymentDelivery: FC<PaymentDeliveryPropsType> = (props) => {
     const {
         t,
         handleCheckboxChange,
-        values,
+        values
     } = props;
 
     const classes = useStyles();
@@ -25,11 +25,12 @@ export const PaymentDelivery: FC<PaymentDeliveryPropsType> = (props) => {
                 item
                 xs={12}
                 alignItems="center"
-                justify="space-between"
             >
-                <Grid item xs={3}>
+                <Grid item xs={2}>
                     <Typography variant="subtitle1">
-                        {t('safeDeal')}
+                        <strong>
+                            {t('safeDeal')}
+                        </strong>
                     </Typography>
                 </Grid>
                 <Grid
@@ -60,11 +61,12 @@ export const PaymentDelivery: FC<PaymentDeliveryPropsType> = (props) => {
                 container
                 xs={12}
                 alignItems="center"
-                justify="space-between"
             >
-                <Grid item xs={3}>
+                <Grid item xs={2}>
                     <Typography variant="subtitle1">
-                        {t('delivery')}
+                        <strong>
+                            {t('delivery')}
+                        </strong>
                     </Typography>
                 </Grid>
                 <Grid
@@ -94,13 +96,13 @@ export const PaymentDelivery: FC<PaymentDeliveryPropsType> = (props) => {
                 container
                 item
                 xs={12}
-                direction="row"
                 alignItems="center"
-                justify="space-between"
             >
-                <Grid item xs={3}>
+                <Grid item xs={2}>
                     <Typography variant="subtitle1">
-                        {t('exchange')}
+                        <strong>
+                            {t('exchange')}
+                        </strong>
                     </Typography>
                 </Grid>
                 <Grid

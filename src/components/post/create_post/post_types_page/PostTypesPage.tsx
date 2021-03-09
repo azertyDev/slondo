@@ -1,7 +1,7 @@
 import React, {FC} from 'react';
 import {Grid, Typography} from '@material-ui/core';
 import {useTranslation, Link} from '@root/i18n';
-import {postTypes} from "@src/common_data/post_types_list";
+import {postTypes} from "@src/common_data/post_types";
 import {MainLayout} from "@src/components/MainLayout";
 import {Top} from "@src/components/post/create_post/top/Top";
 import {withAuthRedirect} from "@src/hoc/withAuthRedirect";

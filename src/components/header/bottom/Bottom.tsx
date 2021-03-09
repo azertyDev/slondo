@@ -17,9 +17,7 @@ const Bottom = (props) => {
     const [drawerPosition, setDrawerPosition] = useState({left: false})
 
     const toggleDrawer = (anchor, open) => (event) => {
-        if (
-            event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')
-        ) {
+        if (event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
             return
         }
         setDrawerPosition({...drawerPosition, [anchor]: open})
@@ -45,8 +43,8 @@ const Bottom = (props) => {
                                 container
                                 item
                                 xs={3}
-                                alignItems="center"
                                 spacing={1}
+                                alignItems="center"
                             >
                                 <Grid
                                     container
@@ -92,7 +90,7 @@ const Bottom = (props) => {
                             </Grid>
                             <Grid item md={2}>
                                 <Link href="/create/type">
-                                    <a className='create-ancmnt-link'>
+                                    <a className='create-post-link'>
                                         <ButtonComponent
                                             color="primary"
                                             className="header-button"
@@ -114,7 +112,7 @@ const Bottom = (props) => {
                             >
                                 {isAuth
                                     ? <div>
-                                        <Link href='#'>
+                                        <Link href='/cabinet/posts'>
                                             <a>
                                                 <PersonIcon/>
                                             </a>

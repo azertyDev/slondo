@@ -5,13 +5,12 @@ import {Checkbox, Grid, TextField, Typography} from '@material-ui/core'
 import {
     estateTxtFields,
     excludedKeys,
-    fieldKeysWithTxt,
     numericFields,
     optionKeys,
 } from '@src/common_data/form_fields'
 import {isRequired} from '@root/validation_schemas/createPostSchemas'
 import {CustomMenu} from '@src/components/elements/custom_menu/CustomMenu'
-import {CustomAccordion} from '../accordion/CustomAccordion'
+import {CustomAccordion} from '../../accordion/CustomAccordion'
 import {numberPrettier} from '@src/helpers'
 import {numberRegEx} from '@src/common_data/reg_ex'
 import {useStyles} from './useStyles'
@@ -118,16 +117,13 @@ export const EstateForm: FC<any> = (props) => {
         if (mark !== 'free') {
             Object.keys(filters).forEach(key => {
                 const isExcludedKey = excludedKeys.some(k => k === key)
-                const isFieldKeyWithTxt = fieldKeysWithTxt.some(k => k === key)
                 const isEstateTxtField = estateTxtFields.some(k => k === key)
                 const isOptionKey = optionKeys.some(k => k === key)
 
                 if (!isExcludedKey) {
                     if (Array.isArray(filters[key])) {
                         if (filters[key].length && key !== 'type') {
-                            if (isFieldKeyWithTxt) {
-                                values[key] = {...filters[key][0], txt: ''}
-                            } else if (!values[key]) {
+                            if (!values[key]) {
                                 values[key] = null;
                             } else if (isOptionKey) {
                                 values[key] = []

@@ -6,6 +6,7 @@ import {useTranslation} from 'i18n'
 import {Search_icon} from '@src/components/elements/icons'
 import {Link} from '@root/i18n'
 import {useStyles} from './useStyles'
+import {addParentsToCtgrs} from "@src/helpers";
 
 
 export const CustomDrawer: FC<any> = ({toggleDrawer, position}) => {
@@ -37,7 +38,7 @@ export const CustomDrawer: FC<any> = ({toggleDrawer, position}) => {
                 placeholder="Поиск категорий"
             />
             <List>
-                {categories_list.map(({id, name, smallIcon, subCategory}) =>
+                {addParentsToCtgrs(categories_list).map(({id, name, smallIcon, subCategory}) =>
                     <ListItem
                         key={id}
                         button

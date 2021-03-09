@@ -1,9 +1,8 @@
 /* eslint-disable prefer-const */
-import React, {FC, useEffect} from "react";
+import React, {FC} from "react";
 import {WithT} from "i18next";
 import {useSelector} from "react-redux";
 import {Grid, TextField, Typography} from "@material-ui/core";
-import {CustomFormikField} from "@src/components/elements/custom_formik_field/CustomFormikField";
 import {AuctionParams} from "./auction_params/AuctionParams";
 import {PaymentDelivery} from "./payment_delivery/PaymentDelivery";
 import {Description} from "./description/Description";
@@ -28,19 +27,19 @@ import {PreviewDefParams} from "@src/components/post/create_post/form_page/defau
 
 type DefaultParamsPropsType = {
     postType: PostType,
-    openKey: boolean,
+    currentFormIndex: number,
     asPath: string,
     post,
     setPost,
     isPreview: boolean,
-    handleFormOpen: (k, e) => void
+    handleFormOpen: (i) => () => void
 } & WithT;
 
 export const DefaultParamsForm: FC<DefaultParamsPropsType> = (props) => {
     const {
         t,
         isPreview,
-        openKey,
+        currentFormIndex,
         asPath,
         postType,
         post,
@@ -48,15 +47,13 @@ export const DefaultParamsForm: FC<DefaultParamsPropsType> = (props) => {
         handleFormOpen
     } = props;
 
-    const formKey = 'defParams';
-
-    const isAuction = postType.name === 'auc' || postType.name === 'exauc';
+    const formIndex = 3;
     const isAdvanceAuction = postType.name === 'exauc';
+    const isAuction = postType.name === 'auc' || isAdvanceAuction;
 
     const {locations} = useSelector((store: RootState) => store);
 
     const initForm = {
-        title: '',
         safe_deal: false,
         delivery: false,
         exchange: false,
@@ -70,11 +67,11 @@ export const DefaultParamsForm: FC<DefaultParamsPropsType> = (props) => {
             time: {
                 start_time: '09:00',
                 end_time: '18:00',
-                available_days: [...WEEK_DAYS]
+                week_days: [...WEEK_DAYS]
             }
         },
         auction: {
-            duration: null,
+            duration: postType.expired[0],
             reserve_price: '',
             offer_the_price: false,
             auto_renewal: false,
@@ -87,15 +84,16 @@ export const DefaultParamsForm: FC<DefaultParamsPropsType> = (props) => {
     };
 
     const onSubmit = (values) => {
-        values.price = clearWhiteSpaces(values.price);
+        const createData = {...values};
+        createData.price = clearWhiteSpaces(createData.price);
 
-        let {
+        const {
             auction,
             currency,
             location,
-            avalTime: {time},
-            ...otherVals
-        } = values;
+            avalTime: {isActive, time},
+            ...otherData
+        } = createData;
 
         if (isAuction) {
             const {
@@ -104,45 +102,47 @@ export const DefaultParamsForm: FC<DefaultParamsPropsType> = (props) => {
                 reserve_price,
                 auto_renewal,
                 offer_the_price,
-                ...others
+                ...otherAuctionData
             } = auction;
 
-            others.duration_id = duration.id;
+            otherAuctionData.duration_id = duration.id;
 
             if (isAdvanceAuction) {
-                others.price_by_now = clearWhiteSpaces(price_by_now.value);
-                others.reserve_price = clearWhiteSpaces(reserve_price);
-                others.auto_renewal = auto_renewal;
-                others.offer_the_price = offer_the_price;
+                otherAuctionData.price_by_now = clearWhiteSpaces(price_by_now.value);
+                otherAuctionData.reserve_price = clearWhiteSpaces(reserve_price);
+                otherAuctionData.auto_renewal = auto_renewal;
+                otherAuctionData.offer_the_price = offer_the_price;
             }
 
-            otherVals.auction = others;
+            otherData.auction = otherAuctionData;
         }
 
         const {region, city, district} = location;
 
-        location = {
+        const address: {
+            region_id: number,
+            city_id: number,
+            district_id?: number
+        } = {
             region_id: region.id,
             city_id: city.id
         };
 
         if (district) {
-            location = {
-                ...location,
-                district_id: district.id
-            };
+            address.district_id = district.id;
         }
 
-        let {available_days, ...startEndTimes} = time;
-
-        available_days = available_days.map(({id}) => ({id}));
+        if (isActive) {
+            let {week_days, start_time, end_time} = time;
+            otherData.start_time = start_time;
+            otherData.end_time = end_time;
+            otherData.week_days = week_days.map(({id}) => ({id}));
+        }
 
         setPost({
             ...post,
-            ...location,
-            ...otherVals,
-            ...startEndTimes,
-            available_days,
+            ...address,
+            ...otherData,
             currency_id: currency.id
         });
 
@@ -233,16 +233,16 @@ export const DefaultParamsForm: FC<DefaultParamsPropsType> = (props) => {
     };
 
     const handleAvalDays = day => () => {
-        const isExstDay = avalTime.time.available_days.some(({id}) => id === day.id);
+        const isExstDay = avalTime.time.week_days.some(({id}) => id === day.id);
 
         if (isExstDay) {
-            avalTime.time.available_days.map(({id}, index) => {
+            avalTime.time.week_days.map(({id}, index) => {
                 if (id === day.id) {
-                    avalTime.time.available_days.splice(index, 1);
+                    avalTime.time.week_days.splice(index, 1);
                 }
             });
         } else {
-            avalTime.time.available_days.push(day);
+            avalTime.time.week_days.push(day);
         }
 
         setValues({...values});
@@ -255,32 +255,19 @@ export const DefaultParamsForm: FC<DefaultParamsPropsType> = (props) => {
             setValues({...values});
         }
     };
-
-    useEffect(() => {
-        if (isAuction) {
-            auction.duration = {
-                id: null,
-                hours: null
-            };
-            setValues({...values});
-        }
-    }, []);
-
-    // console.log('vals', values)
-    // console.log('errors', errors)
-    // console.log('touched', touched)
+    console.log('defParams', values)
     const classes = useStyles();
     return (
         <FormikProvider value={formik}>
             <form onSubmit={handleSubmit}>
                 <CustomAccordion
-                    isPreview={isPreview}
-                    formKey={formKey}
-                    handleOpen={handleFormOpen}
-                    open={openKey || isPreview}
-                    title={t('titleDescContacts')}
-                    nextButtonTxt={t('next')}
                     icon={<StateIcon/>}
+                    isPreview={isPreview}
+                    open={currentFormIndex === formIndex}
+                    isEditable={currentFormIndex > formIndex}
+                    handleEdit={handleFormOpen(formIndex)}
+                    title={t('priceDescContacts')}
+                    nextButtonTxt={t('next')}
                 >
                     <div className={classes.root}>
                         {isPreview
@@ -292,24 +279,6 @@ export const DefaultParamsForm: FC<DefaultParamsPropsType> = (props) => {
                                 locationText={locationText}
                             />
                             : <div>
-                                <Typography variant="subtitle1">
-                                    <strong>
-                                        {t('postTitle')}:
-                                        {<span className='error-text'>*&nbsp;</span>}
-                                    </strong>
-                                    {
-                                        errors.title
-                                        && touched.title
-                                        && <span className='error-text'>{t(errors.title as string)}</span>
-                                    }
-                                </Typography>
-                                <CustomFormikField
-                                    name='title'
-                                    value={values.title}
-                                    onChange={handleInput}
-                                    placeholder={t('exampleTitle')}
-                                    className={errors.title && touched.title ? 'error-border' : ''}
-                                />
                                 {isAuction
                                     ? <div>
                                         <AuctionParams
@@ -325,43 +294,40 @@ export const DefaultParamsForm: FC<DefaultParamsPropsType> = (props) => {
                                             handleCheckboxChange={handleCheckboxChange}
                                         />
                                     </div>
-                                    : <div>
+                                    : <div className='price-wrapper'>
                                         <Typography variant="subtitle1">
                                             <strong>
                                                 {t('price')}
                                                 <span className='error-text'>*&nbsp;</span>
                                             </strong>
-                                            {
-                                                errors.price
-                                                && touched.price
-                                                && <span className='error-text'>
-                                                                            {t(errors.price as string)}
-                                                                        </span>
-                                            }
+                                            {errors.price && touched.price && (
+                                                <span className='error-text'>
+                                                    {t(errors.price as string)}
+                                                </span>
+                                            )}
                                         </Typography>
-                                        <Grid container>
-                                            <Grid item xs={3}>
-                                                <TextField
-                                                    fullWidth
-                                                    name='price'
-                                                    variant='outlined'
-                                                    onBlur={handleBlur}
-                                                    onChange={handleInput}
-                                                    value={values.price ?? ''}
-                                                    className={errors.price && touched.price ? 'error-border' : ''}
-                                                />
-                                            </Grid>
-                                            <CustomSelect
-                                                t={t}
-                                                name='currency'
-                                                values={values}
+                                        <div className='price-inputs'>
+                                            <TextField
+                                                fullWidth
+                                                name='price'
+                                                variant='outlined'
                                                 onBlur={handleBlur}
-                                                items={postType.currency}
-                                                handleSelect={handleSelect}
+                                                onChange={handleInput}
+                                                value={values.price ?? ''}
+                                                className={errors.price && touched.price ? 'error-border' : ''}
                                             />
-                                        </Grid>
-                                    </div>
-                                }
+                                            <div className='currency'>
+                                                <CustomSelect
+                                                    t={t}
+                                                    name='currency'
+                                                    values={values}
+                                                    onBlur={handleBlur}
+                                                    items={postType.currency}
+                                                    handleSelect={handleSelect}
+                                                />
+                                            </div>
+                                        </div>
+                                    </div>}
                                 <div>
                                     <PaymentDelivery
                                         t={t}

@@ -11,6 +11,7 @@ export const Home: FC = () => {
         <>
             <Head>
                 <title>Slondo - доска объявлений</title>
+                <meta name="robots" content="noindex"/>
             </Head>
             <Header/>
             <Main/>

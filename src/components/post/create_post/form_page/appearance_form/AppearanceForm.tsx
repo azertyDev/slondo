@@ -11,19 +11,19 @@ import {useStyles} from './useStyles';
 
 
 type AppearanceFormPropsType = {
-    isPreview: boolean,
-    openKey: boolean,
-    mark,
+    mark: string,
     colors: (IdNameType & { hex_color_code: string })[],
     post,
     setPost,
-    handleFormOpen: (k, e) => void
+    isPreview: boolean,
+    currentFormIndex: number,
+    handleFormOpen: (i) => () => void,
 } & WithT;
 
 export const AppearanceForm: FC<AppearanceFormPropsType> = (props) => {
     const {
         t,
-        openKey,
+        currentFormIndex,
         mark,
         colors,
         post,
@@ -32,13 +32,8 @@ export const AppearanceForm: FC<AppearanceFormPropsType> = (props) => {
         handleFormOpen
     } = props;
 
-    const formKey = 'appearance';
-    const nextFormKey = 'defParams';
-
-    const initForm = {
-        color: null,
-        files: []
-    };
+    const formIndex = 2;
+    const nextFormIndex = 3;
 
     const onSubmit = ({files, color}) => {
         const photos = files.filter(({file}) => file);
@@ -51,12 +46,15 @@ export const AppearanceForm: FC<AppearanceFormPropsType> = (props) => {
         }
 
         setPost({...post, photos});
-        handleFormOpen(nextFormKey, true);
+        handleFormOpen(nextFormIndex)();
     };
 
     const formik = useFormik({
         onSubmit,
-        initialValues: initForm,
+        initialValues: {
+            color: null,
+            files: []
+        },
         validationSchema: appearanceSchema
     });
 
@@ -95,13 +93,13 @@ export const AppearanceForm: FC<AppearanceFormPropsType> = (props) => {
         <FormikProvider value={formik}>
             <form onSubmit={handleSubmit}>
                 <CustomAccordion
-                    isPreview={isPreview}
-                    formKey={formKey}
-                    handleOpen={handleFormOpen}
                     icon={<ViewIcon/>}
+                    isPreview={isPreview}
+                    open={currentFormIndex === formIndex}
+                    isEditable={currentFormIndex > formIndex}
+                    handleEdit={handleFormOpen(formIndex)}
                     title={t('appearance')}
-                    nextButtonTxt={t('titleDescContacts')}
-                    open={openKey || isPreview}
+                    nextButtonTxt={t('priceDescContacts')}
                 >
                     <div className={classes.root}>
                         {isPreview

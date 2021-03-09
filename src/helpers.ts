@@ -1,7 +1,6 @@
 import Cookies from "universal-cookie";
 import {CategoryType, SubCtgrsType} from "@root/interfaces/Categories";
 import CyrillicToTranslit from 'cyrillic-to-translit-js';
-import {excludedKeys} from "@src/common_data/form_fields";
 import {punctuationMarksRegEx} from "@src/common_data/reg_ex";
 import {TFunction} from "next-i18next";
 import {categories_list} from "@src/common_data/categories_list";
@@ -96,8 +95,6 @@ export const addParentsToCtgrs = (categoriesList: CategoryType[]): CategoryType[
 export const dataForCrtPostNormalize = (data: any, type?) => {
     if (!!data) {
         data = Object.keys(data).reduce((acc: any, key) => {
-            // const isExcludedKey = excludedKeys.some(k => k === key);
-
             if (Array.isArray(data[key]) && !!data[key].length) {
                 const isExcludeTypeKey = type && key === 'type';
 
@@ -109,20 +106,7 @@ export const dataForCrtPostNormalize = (data: any, type?) => {
                         ...dataForCrtPostNormalize(data[key][0])
                     };
                 }
-            } else {
-                if (key === 'furnished') {
-                    acc[key] = false;
-                } else if (key === 'default_param') {
-                    acc = {
-                        ...acc,
-                        ...dataForCrtPostNormalize(data[key])
-                    };
-                }
-                // else if (Number.isInteger(data[key]) && !isExcludedKey) {
-                //     acc[key] = '';
-                // }
             }
-
             return acc;
         }, {});
     } else {
