@@ -64,6 +64,24 @@ export const CustomModal: FC<modalTypes> = ({ id, content, handleClose, open }) 
         </>
     )
 
+    const completePurchase = (
+        <>
+            <Typography className="title" variant="h6">
+                Вы подтверждаете завершение покупки?
+            </Typography>
+            <Typography className='subtitle' variant='subtitle1'>
+                При завершении покупки вы соглашаетесь с условиями услуги “Безопасная покупка”
+            </Typography>
+            <div className='confirm'>
+                <ButtonComponent className='submit'>
+                    <Typography variant='subtitle1'>
+                        Подтвердить
+                    </Typography>
+                </ButtonComponent>
+            </div>
+        </>
+    )
+
     return (
         <>
             <Modal
@@ -88,7 +106,7 @@ export const CustomModal: FC<modalTypes> = ({ id, content, handleClose, open }) 
                         </IconButton>
                         {content === 'settings' && (settings)}
                         {content === 'disableFavorite' && (disableFavorite)}
-                        {content === 'completePurchase' && <p>completePurchase</p>}
+                        {content === 'completePurchase' && (completePurchase)}
                     </div>
                 </Fade>
             </Modal>

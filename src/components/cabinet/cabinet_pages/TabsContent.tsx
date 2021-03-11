@@ -20,8 +20,8 @@ export const TabsContent: FC<CabinetMenuPropsType & { tabsData: TabsDataType }> 
         <div className={classes.root}>
             <CabinetWrapper headerTitle={headerTitle} title={title}>
                 {
-                    tabsData.map(tab => {
-                        return <React.Fragment key={tab.id}>
+                    title === 'myPurchases'
+                        ? <>
                             <Tabs
                                 value={value}
                                 onChange={handleChange}
@@ -30,7 +30,6 @@ export const TabsContent: FC<CabinetMenuPropsType & { tabsData: TabsDataType }> 
                                 TabIndicatorProps={{ style: { backgroundColor: '#AD66D5' } }}
                             >
                                 <Tab
-                                    key={tab.id}
                                     label={
                                         <Typography variant="subtitle1">
                                             {`${tab.title} (${tab.count})`}
@@ -42,10 +41,32 @@ export const TabsContent: FC<CabinetMenuPropsType & { tabsData: TabsDataType }> 
                             <CustomTabPanel value={value} index={tab.id}>
                                 {tab.component}
                             </CustomTabPanel>
+                        </>
+                        : tabsData.map(tab => {
+                            return <React.Fragment key={tab.id}>
+                                <Tabs
+                                    value={value}
+                                    onChange={handleChange}
+                                    variant="fullWidth"
+                                    className={classes.cabinetTabs}
+                                    TabIndicatorProps={{ style: { backgroundColor: '#AD66D5' } }}
+                                >
+                                    <Tab
+                                        key={tab.id}
+                                        label={
+                                            <Typography variant="subtitle1">
+                                                {`${tab.title} (${tab.count})`}
+                                            </Typography>
+                                        }
+                                        value={tab.id}
+                                    />
+                                </Tabs>
+                                <CustomTabPanel value={value} index={tab.id}>
+                                    {tab.component}
+                            </CustomTabPanel>
                         </React.Fragment>
                     })
                 }
-
             </CabinetWrapper>
         </div>
     );

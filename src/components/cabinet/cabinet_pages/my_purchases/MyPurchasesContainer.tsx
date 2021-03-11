@@ -21,7 +21,7 @@ const MyPurchasesContainer: FC = () => {
         }
     ]
 
-    const title = 'Мои объявления'
+    const title = 'myPurchases'
 
     return (
         <TabsContent title={title} tabsData={tabsData} headerTitle={title} />
