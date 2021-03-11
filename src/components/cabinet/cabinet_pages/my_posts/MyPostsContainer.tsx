@@ -7,7 +7,7 @@ import {userAPI} from "@src/api/api";
 
 
 const MyPostsContainer: FC = () => {
-    const [list, setList] = useState([])
+    const [list, setList] = useState<any>([])
 
     const tabsData = [
         {
