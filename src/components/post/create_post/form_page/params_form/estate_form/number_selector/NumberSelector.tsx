@@ -32,11 +32,10 @@ export const NumberSelector: FC<FloorsPropsType> = (props) => {
                     </span>
                 )}
             </Typography>
-            {Array.from({length: count}).map((_, i) => {
-                return (
-                    <span key={i}>{++i}</span>
-                )
-            })}
+            {Array.from({length: count}).map((_, i) =>
+                <span key={i}>{++i}</span>
+            )}
+            <span className='other'>{t('other')}</span>
         </div>
     )
 }

@@ -1,10 +1,10 @@
 import React, {FC, useEffect} from "react";
 import {Checkbox, Grid, Typography} from "@material-ui/core";
-import {CustomSelect} from "@src/components/elements/customSelect/CustomSelect";
 import {WithT} from "i18next";
+import {CustomSelect} from "@src/components/elements/customSelect/CustomSelect";
 import {ButtonComponent} from "@src/components/elements/button/Button";
-import {useStyles} from './useStyles';
 import {NumberSelector} from "@src/components/post/create_post/form_page/params_form/estate_form/number_selector/NumberSelector";
+import {useStyles} from './useStyles';
 
 
 type ApartmentsPropsType = {
@@ -120,8 +120,8 @@ export const Apartments: FC<ApartmentsPropsType> = (props) => {
                 <Grid item container xs={4}>
                     <NumberSelector
                         t={t}
-                        count={9}
-                        name='number_of_floors'
+                        count={5}
+                        name='rooms'
                         errors={errors}
                         touched={touched}
                     />

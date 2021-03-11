@@ -18,7 +18,7 @@ import {
     SwapIcon
 } from '@src/components/elements/icons'
 import {InnerCardData} from '@root/interfaces/CardData'
-import {numberPrettier, transformTitle, authChecker} from '@src/helpers'
+import {numberPrettier, transformTitle} from '@src/helpers'
 import {useStyles} from './useStyles'
 import {userAPI} from '@src/api/api'
 import {useSelector} from "react-redux";
@@ -33,7 +33,7 @@ export const CardItem: FC<CardItemProps> = (props) => {
     const {
         id,
         isFetch,
-        images,
+        image,
         delivery,
         safe_deal,
         exchange,
@@ -81,7 +81,7 @@ export const CardItem: FC<CardItemProps> = (props) => {
                         ) : (
                             <CardMedia
                                 className="card-media"
-                                image={images.length ? images[0].url.default : '/img/card-logo.png'}
+                                image={image ?? '/img/card-logo.png'}
                             >
                                 <div className="card-header">
                                     <div className="title">
