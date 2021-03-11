@@ -6,7 +6,7 @@ import {TabsDataType} from '@src/components/cabinet/cabinet_pages/archive/Archiv
 import {useStyles} from './useStyles';
 
 
-export const TabsContent: FC<CabinetMenuPropsType & { tabsData: TabsDataType[] }> = (
+export const TabsContent: FC<CabinetMenuPropsType & { tabsData: TabsDataType }> = (
     {tabsData, headerTitle, title}
 ) => {
     const [value, setValue] = useState(0);
@@ -43,7 +43,6 @@ export const TabsContent: FC<CabinetMenuPropsType & { tabsData: TabsDataType[] }
                                 {tab.component}
                             </CustomTabPanel>
                         </React.Fragment>
-
                     })
                 }
 

@@ -1,12 +1,18 @@
-import React, {FC} from 'react'
+import React, {FC, ReactElement} from 'react'
 import {TabsContent} from '@src/components/cabinet/cabinet_pages/TabsContent'
 import {MyPurchases} from '@src/components/cabinet/cabinet_pages/my_purchases/MyPurchases'
 import {CabinetMockData} from '@src/components/cabinet//CabinetMockData'
 import {withAuthRedirect} from '@src/hoc/withAuthRedirect'
 
+export type TabsDataType = {
+    id: number;
+    title: string;
+    count: number;
+    component: ReactElement;
+}[];
 
 const MyPurchasesContainer: FC = () => {
-    const tabsData = [
+    const tabsData: TabsDataType = [
         {
             id: 0,
             title: 'Безопасная покупка',

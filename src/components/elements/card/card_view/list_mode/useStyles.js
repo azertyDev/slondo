@@ -14,13 +14,13 @@ export const useStyles = makeStyles((theme) => ({
                 '& > h6.MuiTypography-subtitle1': {
                     fontSize: '12px',
                     '& > span.post': {
-                        color: theme.palette.primary.adBgColor,
+                        color: theme.palette.primary.postBgColor
                     },
                     '& > span.auc': {
-                        color: theme.palette.primary.lotBgColor,
+                        color: theme.palette.primary.aucBgColor
                     },
                     '& > span.exauc': {
-                        color: theme.palette.primary.lotBgColor,
+                        color: theme.palette.primary.exAucBgColor
                     },
                 },
             },
@@ -113,16 +113,16 @@ export const useStyles = makeStyles((theme) => ({
                                     position: 'absolute',
                                     top: 0,
                                     right: 20,
-                                    '& > .favorite, & > .settings-button': {
+                                    '& > .favorite, & > .settings, .isFavorite': {
                                         background: '#F5F5F5',
                                         boxShadow: '0px 1px 2px rgba(0, 0, 0, 0.15)',
                                         borderRadius: '0px 0px 10px 10px',
                                         display: 'flex',
-                                        alignItems: 'center',
+                                        alignItems: 'center'
                                     },
                                     '& > .favorite': {
                                         marginRight: 20,
-                                        padding: '11px 15px',
+                                        padding: '11px 12px',
                                         '& > a': {
                                             marginLeft: '7px',
                                             '&.favorite-icon': {
@@ -132,11 +132,11 @@ export const useStyles = makeStyles((theme) => ({
                                                             '& > stop': {
                                                                 '&:first-child': {
                                                                     stopColor:
-                                                                        '#675EAA !important',
+                                                                        '#675EAA !important'
                                                                 },
                                                                 '&:last-child': {
                                                                     stopColor:
-                                                                        '#AD66D5',
+                                                                        '#AD66D5'
                                                                 },
                                                             },
                                                         },
@@ -145,19 +145,25 @@ export const useStyles = makeStyles((theme) => ({
                                             },
                                         },
                                     },
-                                    '& > .settings-button': {
-                                        padding: '9.5px 12px',
-                                        '& > a': {
-                                            height: '100%',
-                                            width: '100%',
+                                    '& > .settings, .isFavorite': {
+                                        padding: '11px 12px',
+                                        '& > svg': {
+                                            height: '18px',
+                                            '& path': {
+                                                fill: '#4E4E4E'
+                                            }
+                                        },
+                                        '&:hover': {
+                                            cursor: 'pointer',
+                                            background: '#EB5757',
                                             '& > svg': {
                                                 height: '18px',
                                                 '& path': {
-                                                    fill: '#4E4E4E',
-                                                },
-                                            },
-                                        },
-                                    },
+                                                    fill: '#fff'
+                                                }
+                                            }
+                                        }
+                                    }
                                 },
                             },
                         },
@@ -449,16 +455,5 @@ export const useStyles = makeStyles((theme) => ({
         },
     },
 
-    settingsList: {
-        marginTop: 50,
-        width: '100%',
-        '& .MuiListItem-button': {
-            height: 48,
-            background: '#F2F2F2',
-            boxShadow: '0px 1px 2px rgba(0, 0, 0, 0.15)',
-            marginBottom: 5,
-            borderRadius: '3px',
-            textAlign: 'center',
-        },
-    },
+
 }));

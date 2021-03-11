@@ -10,10 +10,10 @@ export type TabsDataType = {
     title: string;
     count: number;
     component: ReactElement;
-};
+}[];
 
 const ArchiveContainer: FC = () => {
-    const tabsData: TabsDataType[] = [
+    const tabsData: TabsDataType = [
         {
             id: 0,
             title: 'Объявления',
