@@ -1,32 +1,55 @@
 import {object, string, array, lazy} from "yup";
-import {requiredMsg, requireFields} from "@src/common_data/form_fields";
+import {requiredMsg} from "@src/common_data/form_fields";
+import {isRequired} from "@root/src/helpers";
 
 
-export const isRequired = (field: string): boolean =>
-    requireFields.some(reqField => reqField === field);
-
-export const paramsFormSchema = lazy((value) => object(
-    Object.entries(value)
-        .reduce((acc, [key]) => {
-            if (isRequired(key)) {
-                if (typeof value[key] === 'object') {
-                    acc[key] = object<{ id: number }>()
-                        .nullable()
-                        .test(
-                            '',
-                            requiredMsg,
-                            value => !!value && !!value.id
-                        );
-                } else {
-                    acc[key] = string().required(requiredMsg);
+export const paramsFormSchema = lazy(
+    (value) => object({
+        title: string().required(requiredMsg),
+        ...Object.entries(value)
+            .reduce((acc, [key]) => {
+                if (isRequired(key)) {
+                    if (typeof value[key] === 'object') {
+                        acc[key] = object<{ id: number }>()
+                            .nullable()
+                            .test(
+                                '',
+                                requiredMsg,
+                                value => !!value && !!value.id
+                            );
+                    } else {
+                        acc[key] = string().required(requiredMsg);
+                    }
                 }
-            }
-            return acc;
-        }, {})
-));
+                return acc;
+            }, {})
+    })
+);
+
+export const regularFormSchema = lazy(
+    value => object(
+        Object.entries(value)
+            .reduce((acc, [key]) => {
+                if (isRequired(key)) {
+                    if (typeof value[key] === 'string') {
+                        acc[key] = string().required(requiredMsg);
+                    } else {
+                        acc[key] = object<{ id: number }>()
+                            .nullable()
+                            .test(
+                                `${key}`,
+                                requiredMsg,
+                                value => !!value
+                            );
+                    }
+                }
+                return acc;
+            }, {})
+    )
+);
 
 export const appearanceSchema = object({
-    files: array().required(requiredMsg),
+    files: array().required('addPhotos'),
     color: object<{ id: number }>()
         .nullable()
         .test(
@@ -37,7 +60,6 @@ export const appearanceSchema = object({
 });
 
 export const defaultParamsSchema = object({
-    title: string().required(requiredMsg),
     price: string().required(requiredMsg),
     description: string().required(requiredMsg),
     location: object<{ city: { id: number } }>()

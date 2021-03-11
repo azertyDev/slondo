@@ -16,6 +16,7 @@ export const MainLayout: FC<MainLayoutPropsType> = ({children, title = 'SLONDO'}
         <>
             <Head>
                 <title>{title}</title>
+                <meta name="robots" content="noindex"/>
             </Head>
             <Header/>
             <main>

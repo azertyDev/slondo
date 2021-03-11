@@ -30,11 +30,7 @@ export type InnerCardData = {
         id: number;
         name: string;
     };
-    images: {
-        url: {
-            default: string;
-        };
-    }[];
+    image: string;
     category?: {
         id: number;
         name: string;

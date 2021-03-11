@@ -1,7 +1,6 @@
 export const requireFields = [
+    'title',
     'type',
-    'condition',
-    'currency',
     'price',
     'year',
     'mileage',
@@ -12,10 +11,16 @@ export const requireFields = [
     'car_engine_type',
     'transmission',
     'transport_type',
-    'area_value'
+    'area_value',
+    'area',
+    'condition',
+    'duration',
+    'currency',
+    'estate_type',
+    'floor',
+    'number_of_floors',
+    'rooms'
 ];
-
-export const fieldKeysWithTxt = ['area', 'mileage'];
 
 export const requiredMsg = 'requireField';
 
@@ -28,7 +33,7 @@ export const estateTxtFields = [
     'living_area',
     'ceiling_height',
     'number_of_floors',
-    'number_of_bedrooms',
+    'number_of_bedrooms'
 ];
 
 export const excludedKeys = [
@@ -51,7 +56,7 @@ export const numericFields = [
     'living_area',
     'land_area',
     'number_of_floors',
-    'number_of_bedrooms',
+    'number_of_bedrooms'
 ];
 
 export const optionKeys = [
@@ -66,5 +71,5 @@ export const optionKeys = [
     'comfort',
     'view',
     'parking',
-    'anti_theft',
+    'anti_theft'
 ];

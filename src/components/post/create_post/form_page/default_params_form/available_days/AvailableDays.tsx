@@ -46,7 +46,7 @@ export const AvailableDays: FC<AvailableDaysPropsType> = (props) => {
                         <Checkbox
                             disabled={!isActive}
                             key={day.id}
-                            checked={isActive && time.available_days.some(({id}) => id === day.id)}
+                            checked={isActive && time.week_days.some(({id}) => id === day.id)}
                             checkedIcon={
                                 <Typography className='selected-day'>
                                     {t(day.name)}

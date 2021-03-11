@@ -4,15 +4,7 @@ export const useStyles = makeStyles((theme) => ({
     root: {
         '& > div.header-wrapper': {
             paddingTop: '10px'
-        },
-        // '& div.top-wrapper': {
-        //     [theme.breakpoints.down('sm')]: {
-        //         marginBottom: '60px',
-        //     },
-        //     [theme.breakpoints.up('sm')]: {
-        //         marginBottom: '10px',
-        //     }
-        // }
+        }
     },
     modalDialog: {
         '& > div:first-child': {

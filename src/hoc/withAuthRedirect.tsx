@@ -1,6 +1,6 @@
 import React, {ComponentType, useEffect} from "react";
 import {useDispatch} from "react-redux";
-import {Router} from '@root/i18n';
+// import {Router} from '@root/i18n';
 import {cookies} from "@src/helpers";
 import {setIsAuthModalOpen} from "../redux/slices/authRegSlice";
 
@@ -11,7 +11,7 @@ export const withAuthRedirect = (Component: ComponentType<any>) => () => {
 
     useEffect(() => {
         if (!isAuth) {
-            Router.push('/');
+            // Router.push('/');
             dispatch(setIsAuthModalOpen(true));
         }
     }, [isAuth]);
