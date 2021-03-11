@@ -1,16 +1,11 @@
-import { makeStyles } from '@material-ui/core/styles'
+import {makeStyles} from '@material-ui/core/styles'
 
 export const useStyles = makeStyles((theme) => ({
     root: {
         position: 'relative',
         height: '345px',
-        transition: 'all 0.4s ease 0s',
-        '&:hover': {
-            transform: 'translate(0px, -8px)',
-            // boxShadow: 'rgb(24 24 24 / 50%) 0px 10px 40px -10px',
-        },
         '& a': {
-            textDecoration: 'none',
+            textDecoration: 'none'
         },
         '& > button.favorite-btn': {
             position: 'absolute',
@@ -20,50 +15,50 @@ export const useStyles = makeStyles((theme) => ({
             zIndex: 10,
             '& svg': {
                 '& > path:nth-child(1)': {
-                    fillOpacity: '0.8',
+                    fillOpacity: '0.8'
                 },
                 '& > defs.def1 > linearGradient > stop': {
                     '&:first-child': {
-                        stopColor: '#675EAA',
+                        stopColor: '#675EAA'
                     },
                     '&:last-child': {
-                        stopColor: '#AD66D5',
-                    },
+                        stopColor: '#AD66D5'
+                    }
                 },
                 '& > defs:last-child > linearGradient > stop': {
                     '&:first-child': {
-                        stopColor: '#fff',
+                        stopColor: '#fff'
                     },
                     '&:last-child': {
-                        stopColor: '#fff',
-                    },
-                },
+                        stopColor: '#fff'
+                    }
+                }
             },
             '&:hover': {
                 '& svg': {
                     transform: 'scale(1.1)',
                     transition: 'transform .3s cubic-bezier(.5,0,.5,3)',
                     '& > path:nth-child(2)': {
-                        fillOpacity: '0.8',
+                        fillOpacity: '0.8'
                     },
                     '& > defs.def1 > linearGradient > stop': {
                         '&:first-child': {
-                            stopColor: '#fff',
+                            stopColor: '#fff'
                         },
                         '&:last-child': {
-                            stopColor: '#fff',
-                        },
+                            stopColor: '#fff'
+                        }
                     },
                     '& > defs:last-child > linearGradient > stop': {
                         '&:first-child': {
-                            stopColor: '#675EAA',
+                            stopColor: '#675EAA'
                         },
                         '&:last-child': {
-                            stopColor: '#AD66D5',
-                        },
-                    },
-                },
-            },
+                            stopColor: '#AD66D5'
+                        }
+                    }
+                }
+            }
         },
         '& div.MuiCard-root': {
             position: 'relative',
@@ -72,7 +67,7 @@ export const useStyles = makeStyles((theme) => ({
             height: '100%',
             '&:hover': {
                 boxShadow: 'rgba(0, 0, 0, 0.08) 0px 8px 16px 0px',
-                cursor: 'pointer',
+                cursor: 'pointer'
             },
             '& button.MuiCardActionArea-root': {
                 height: '105px',
@@ -80,12 +75,12 @@ export const useStyles = makeStyles((theme) => ({
                     height: 'inherit',
                     display: 'flex',
                     flexDirection: 'column',
-                    justifyContent: 'space-around',
-                },
+                    justifyContent: 'space-around'
+                }
             },
             '& > div.card-media': {
                 height: '240px',
-
+                
                 '& > div.card-header': {
                     width: '100%',
                     height: '100%',
@@ -102,14 +97,14 @@ export const useStyles = makeStyles((theme) => ({
                             borderRadius: '3px',
                             padding: '0 5px',
                             color: theme.palette.primary.white,
-                            backgroundColor: ({ ads_type }) => (
+                            backgroundColor: ({ads_type}) => (
                                 ads_type === 'post'
                                     ? 'rgba(136, 202, 236, .65)'
                                     : ads_type === 'auc'
                                     ? 'rgba(173, 102, 213, .65)'
                                     : 'rgba(242, 153, 74, .65)'
-                            ),
-                        },
+                            )
+                        }
                     },
                     '& > div.icons': {
                         '&:last-child': {
@@ -126,33 +121,33 @@ export const useStyles = makeStyles((theme) => ({
                                 marginRight: '5px',
                                 '& > svg': {
                                     '& > path': {
-                                        fill: '#838383',
-                                    },
-                                },
-                            },
-                        },
-                    },
-                },
+                                        fill: '#838383'
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
             },
             '& h6.MuiTypography-subtitle1': {
                 [theme.breakpoints.down('sm')]: {
-                    fontSize: '1.2rem',
-                },
+                    fontSize: '1.2rem'
+                }
             },
             '& > button': {
                 '& > div.MuiCardContent-root': {
                     padding: '10px 15px',
                     '& > h5.MuiTypography-h5': {
-                        lineHeight: '29px',
+                        lineHeight: '29px'
                     },
                     '& > span.MuiTypography-caption': {
-                        color: '#838383',
-                    },
-                },
-            },
-        },
+                        color: '#838383'
+                    }
+                }
+            }
+        }
     },
     skeleton: {
-        height: '240px',
-    },
+        height: '240px'
+    }
 }))

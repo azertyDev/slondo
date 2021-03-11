@@ -53,4 +53,6 @@ export type InnerCardData = {
     raiseInRape?: boolean;
     isModerated?: boolean;
     follow?: boolean;
+    isFavorite?: boolean;
+    completePurchase?: boolean;
 };

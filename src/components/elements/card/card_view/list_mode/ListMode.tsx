@@ -1,12 +1,12 @@
-import React, {FC} from 'react';
+import React, {FC, useState} from 'react'
 import {
     Typography,
     Paper,
     Button,
     Grid,
     Hidden,
-    Tooltip,
-} from '@material-ui/core';
+    Tooltip, ListItem, ListItemText, List, IconButton
+} from '@material-ui/core'
 import {
     SettingsIcon,
     LocationIcon,
@@ -23,31 +23,42 @@ import {
     SwapIcon,
     PhoneIcon,
     LetterIcon,
-    NotificationIcon,
-} from '@src/components/elements/icons';
-import {ButtonComponent} from '@src/components/elements/button/Button';
-import {BreadcrumbsComponent} from '@src/components/elements/breadcrumbs/Breadcrumbs';
-import {ViewPropsTypes} from '@src/components/elements/card/card_view/CardView';
-import {UserAvatarComponent} from '@src/components/elements/user_info_with_avatar/avatar/UserAvatarComponent';
-import {Rating} from '@src/components/elements/rating/Rating';
-import {Link} from '@root/i18n';
-import {numberPrettier} from '@src/helpers';
-import {useRouter} from 'next/router';
-import {useTranslation} from "react-i18next";
-import {useStyles} from './useStyles';
+    NotificationIcon
+} from '@src/components/elements/icons'
+import {ButtonComponent} from '@src/components/elements/button/Button'
+import {BreadcrumbsComponent} from '@src/components/elements/breadcrumbs/Breadcrumbs'
+import {CustomModal} from '@src/components/elements/custom_modal/CustomModal'
+import {ViewPropsTypes} from '@src/components/elements/card/card_view/CardView'
+import {UserAvatarComponent} from '@src/components/elements/user_info_with_avatar/avatar/UserAvatarComponent'
+import {Rating} from '@src/components/elements/rating/Rating'
+import {Link} from '@root/i18n'
+import {numberPrettier} from '@src/helpers'
+import {useRouter} from 'next/router'
+import {useTranslation} from 'react-i18next'
+import {useStyles} from './useStyles'
 
 
-const longText = `Вы принимаете предложения от других пользователей на обмен. Вы будете выделены специальным стикером. Ознакомиться с правилами «Возможен обмен»`;
+const longText = `Вы принимаете предложения от других пользователей на обмен. Вы будете выделены специальным стикером. Ознакомиться с правилами «Возможен обмен»`
 
-export const ListMode: FC<ViewPropsTypes> = (props) => {
-    const {pathname} = useRouter();
-    const {list} = props;
-    const {t} = useTranslation(['common']);
+export const ListMode: FC<ViewPropsTypes> = ({ list }) => {
+    const { pathname } = useRouter()
+    const { t } = useTranslation(['common'])
+    const [openModal, setOpenModal] = useState(false)
+    const [modalState, setModalState] = useState('')
 
-    const classes = useStyles();
+    const handleModalOpen = (value) => {
+        setOpenModal(true)
+        setModalState(value)
+    }
+
+    const handleModalClose = () => {
+        setOpenModal(false)
+    }
+    const classes = useStyles()
+
     return (
         <div className={classes.root}>
-            {list.map((el) => {
+            {list?.map((el) => {
                 return (
                     <Grid container key={el.id}>
                         <Grid item xs={9} className="left-content">
@@ -64,7 +75,7 @@ export const ListMode: FC<ViewPropsTypes> = (props) => {
                                     </Typography>
                                 </BreadcrumbsComponent>
                                 <Typography variant="subtitle1" color="initial">
-                                    <span className="type-auction">
+                                    <span className={el.ads_type}>
                                         {t(el.ads_type)} №:
                                     </span>
                                     {el.id}
@@ -73,12 +84,9 @@ export const ListMode: FC<ViewPropsTypes> = (props) => {
                             <Paper variant="outlined" elevation={2}>
                                 <div className="card-data">
                                     <div className="img">
-                                        {el.images.map((image) => (
-                                            <img
-                                                src={image.url.default}
-                                                key={el.id}
-                                            />
-                                        ))}
+                                        <img
+                                            src={el.images[0].url.default}
+                                        />
                                         <Typography
                                             variant="caption"
                                             color="initial"
@@ -88,7 +96,7 @@ export const ListMode: FC<ViewPropsTypes> = (props) => {
                                             {t(el.ads_type)}
                                         </Typography>
                                         <span>
-                                            <EyeIcon/>
+                                            <EyeIcon />
                                             <Typography
                                                 variant="caption"
                                                 color="initial"
@@ -109,28 +117,41 @@ export const ListMode: FC<ViewPropsTypes> = (props) => {
                                                     {el.title}
                                                 </Typography>
                                             </div>
-                                            <div>
-                                                <Typography
-                                                    variant="subtitle2"
-                                                    color="initial"
-                                                >
-                                                    140
-                                                </Typography>
-                                                <Link href="#">
-                                                    <a className="favorite-icon">
-                                                        <FavoriteBorderIcon/>
-                                                    </a>
-                                                </Link>
+                                            <div className='card-btn'>
+                                                <div className='favorite'>
+                                                    <Typography
+                                                        variant="subtitle1"
+                                                        color="initial"
+                                                    >
+                                                        140
+                                                    </Typography>
+                                                    <Link href="#">
+                                                        <a className="favorite-icon">
+                                                            <FavoriteBorderIcon />
+                                                        </a>
+                                                    </Link>
+                                                </div>
+                                                {
+                                                    el.isFavorite ?
+                                                        <div
+                                                            className='isFavorite'
+                                                            onClick={() => handleModalOpen('disableFavorite')}
+                                                        >
+                                                            <CloseIcon />
+                                                        </div>
+                                                        :
+                                                        <div
+                                                            className='settings'
+                                                            onClick={() => handleModalOpen('settings')}
+                                                        >
+                                                            <SettingsIcon />
+                                                        </div>
+                                                }
                                             </div>
-                                            <Link href="#">
-                                                <a className="settings-button">
-                                                    <SettingsIcon/>
-                                                </a>
-                                            </Link>
                                         </div>
                                         <div className="description">
                                             <span className="available">
-                                                <PhoneIcon/>
+                                                <PhoneIcon />
                                                 <Typography variant="body1">
                                                     Пн-Пт 9:00-18:00
                                                 </Typography>
@@ -138,7 +159,7 @@ export const ListMode: FC<ViewPropsTypes> = (props) => {
                                             {!!el.exchange && (
                                                 <Tooltip title={longText} arrow>
                                                     <span className="exchange">
-                                                        <SwapIcon/>
+                                                        <SwapIcon />
                                                         <Typography variant="body1">
                                                             Возможен обмен
                                                         </Typography>
@@ -147,7 +168,7 @@ export const ListMode: FC<ViewPropsTypes> = (props) => {
                                             )}
                                             {!!el.delivery && (
                                                 <span className="delivery">
-                                                    <DeliveryIcon/>
+                                                    <DeliveryIcon />
                                                     <Typography variant="body1">
                                                         Есть доставка
                                                     </Typography>
@@ -155,7 +176,7 @@ export const ListMode: FC<ViewPropsTypes> = (props) => {
                                             )}
                                             {!!el.safe_deal && (
                                                 <span className="safe_deal">
-                                                    <SafeIcon/>
+                                                    <SafeIcon />
                                                     <Typography variant="body1">
                                                         Безопасная покупка
                                                     </Typography>
@@ -166,7 +187,7 @@ export const ListMode: FC<ViewPropsTypes> = (props) => {
                                             <div>
                                                 <Link href="#">
                                                     <a>
-                                                        <LocationIcon/>
+                                                        <LocationIcon />
                                                     </a>
                                                 </Link>
                                                 <Typography
@@ -174,9 +195,9 @@ export const ListMode: FC<ViewPropsTypes> = (props) => {
                                                     color="initial"
                                                     noWrap
                                                 >
-                                                    {el.region.name},{' '}
-                                                    {el.city.name},{' '}
-                                                    {el.district.name}
+                                                    {el.region?.name},{' '}
+                                                    {el.city?.name},{' '}
+                                                    {el.district?.name}
                                                 </Typography>
                                             </div>
                                             <div>
@@ -185,82 +206,90 @@ export const ListMode: FC<ViewPropsTypes> = (props) => {
                                                     color="initial"
                                                 >
                                                     {numberPrettier(el.price)}{' '}
-                                                    {t(el.currency.name)}
+                                                    {t(el.currency?.name)}
                                                 </Typography>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </Paper>
-                            <div className="status-buttons">
-                                {!!el.accepted ? (
-                                    <ButtonComponent className="accept">
-                                        <DoneAllIcon/>
+                            {<div className="status-buttons">
+                                {/*{el.accepted ?*/}
+                                {/*    <ButtonComponent className="accepted">*/}
+                                {/*        <Typography variant="subtitle1">*/}
+                                {/*            Принято*/}
+                                {/*        </Typography>*/}
+                                {/*    </ButtonComponent>*/}
+                                {/*    :*/}
+                                {/*    <ButtonComponent className="default mr10">*/}
+                                {/*        <DoneAllIcon />*/}
+                                {/*        <Typography variant="subtitle1">*/}
+                                {/*            Принять*/}
+                                {/*        </Typography>*/}
+                                {/*    </ButtonComponent>*/}
+                                {/*}*/}
+                                {
+                                    el.completePurchase &&
+                                    <ButtonComponent className="default mr10"
+                                                     onClick={() => handleModalOpen('completePurchase')}>
                                         <Typography variant="subtitle1">
-                                            Принять
+                                            <DoneAllIcon />
+                                            Завершить покупку
                                         </Typography>
                                     </ButtonComponent>
-                                ) : (
-                                    <ButtonComponent className="accepted">
-                                        <DoneAllIcon/>
-                                        <Typography variant="subtitle1">
-                                            Принято
-                                        </Typography>
-                                    </ButtonComponent>
-                                )}
-                                {!!el.expected && (
-                                    <ButtonComponent className="expecting">
-                                        <RestoreIcon/>
-                                        <Typography variant="subtitle1">
-                                            Ожидание
-                                        </Typography>
-                                    </ButtonComponent>
-                                )}
-                                {!!el.isModerated && (
-                                    <ButtonComponent className="expecting">
-                                        <RestoreIcon/>
-                                        <Typography variant="subtitle1">
-                                            На модерации
-                                        </Typography>
-                                    </ButtonComponent>
-                                )}
-                                {!!el.follow && (
-                                    <ButtonComponent className="follow">
-                                        <NotificationIcon/>
-                                        <Typography variant="subtitle1">
-                                            Следить
-                                        </Typography>
-                                    </ButtonComponent>
-                                )}
-                                {!!el.denied ? (
-                                    <Button className="denied">
-                                        <CloseIcon/>
+                                }
+                                {/*{!!el.expected && (*/}
+                                {/*    <ButtonComponent className="expecting">*/}
+                                {/*        <RestoreIcon />*/}
+                                {/*        <Typography variant="subtitle1">*/}
+                                {/*            Ожидание*/}
+                                {/*        </Typography>*/}
+                                {/*    </ButtonComponent>*/}
+                                {/*)}*/}
+                                {/*{!!el.isModerated && (*/}
+                                {/*    <ButtonComponent className="expecting">*/}
+                                {/*        <RestoreIcon />*/}
+                                {/*        <Typography variant="subtitle1">*/}
+                                {/*            На модерации*/}
+                                {/*        </Typography>*/}
+                                {/*    </ButtonComponent>*/}
+                                {/*)}*/}
+                                {/*{!!el.follow && (*/}
+                                {/*    <ButtonComponent className="follow">*/}
+                                {/*        <NotificationIcon />*/}
+                                {/*        <Typography variant="subtitle1">*/}
+                                {/*            Следить*/}
+                                {/*        </Typography>*/}
+                                {/*    </ButtonComponent>*/}
+                                {/*)}*/}
+                                {el.denied ?
+                                    <ButtonComponent className="refused">
                                         <Typography variant="subtitle1">
                                             Отказано
                                         </Typography>
-                                    </Button>
-                                ) : (
-                                    <Button className="denied">
-                                        <CloseIcon/>
+                                    </ButtonComponent>
+                                    :
+                                    <ButtonComponent className="default refuse" disabled>
+                                        <CloseIcon />
                                         <Typography variant="subtitle1">
                                             Отказать
                                         </Typography>
-                                    </Button>
-                                )}
-                                {!!el.accepted ||
-                                el.expected ||
-                                (el.denied && (
-                                    <ButtonComponent className="complete">
-                                        <Typography variant="subtitle1">
-                                            Завершить
-                                        </Typography>
                                     </ButtonComponent>
-                                ))}
-                            </div>
+                                }
+                                {/*{!!el.accepted ||*/}
+                                {/*el.expected ||*/}
+                                {/*(el.denied && (*/}
+                                {/*    <ButtonComponent className="complete">*/}
+                                {/*        <Typography variant="subtitle1">*/}
+                                {/*            Завершить*/}
+                                {/*        </Typography>*/}
+                                {/*    </ButtonComponent>*/}
+                                {/*))}*/}
+                            </div>}
                         </Grid>
                         <Hidden xsUp={false}>
                             <Grid item xs={3} className="right-content">
-                                {pathname === '/cabinet/myAncmnts' && (
+                                {pathname === '/cabinet/posts' && (
                                     <div className="card-buttons">
                                         <Button
                                             color="primary"
@@ -272,7 +301,7 @@ export const ListMode: FC<ViewPropsTypes> = (props) => {
                                             <Typography variant="subtitle1">
                                                 Продвижение
                                             </Typography>
-                                            <PromoteIcon/>
+                                            <PromoteIcon />
                                         </Button>
                                         <Button
                                             color="primary"
@@ -283,7 +312,7 @@ export const ListMode: FC<ViewPropsTypes> = (props) => {
                                             <Typography variant="subtitle1">
                                                 Поднять в ТОП
                                             </Typography>
-                                            <MegaphoneIcon/>
+                                            <MegaphoneIcon />
                                         </Button>
                                         <Button
                                             color="primary"
@@ -294,11 +323,11 @@ export const ListMode: FC<ViewPropsTypes> = (props) => {
                                             <Typography variant="subtitle1">
                                                 Поднять в ленте
                                             </Typography>
-                                            <DoubleUpIcon/>
+                                            <DoubleUpIcon />
                                         </Button>
                                     </div>
                                 )}
-                                {pathname === '/cabinet/myAuctions' ? (
+                                {pathname === '/cabinet/auctions' ? (
                                     <div className="profile-form">
                                         <div className="extreme-rate">
                                             <Typography
@@ -323,31 +352,31 @@ export const ListMode: FC<ViewPropsTypes> = (props) => {
                                             </ButtonComponent>
                                         </div>
                                         <div className="profile-data">
-                                            <UserAvatarComponent/>
+                                            <UserAvatarComponent />
                                             <Typography
                                                 variant="subtitle1"
                                                 color="initial"
                                             >
                                                 Имя Фамилия
                                             </Typography>
-                                            <Rating card/>
+                                            <Rating card />
+                                            <ButtonComponent className='write'>
+                                                <LetterIcon />
+                                                <Typography
+                                                    variant="subtitle1"
+                                                    color="initial"
+                                                >
+                                                    Написать
+                                                </Typography>
+                                            </ButtonComponent>
+                                        </div>
+                                        <div>
                                             <ButtonComponent className="show-phone-btn">
                                                 <Typography
                                                     variant="subtitle2"
                                                     color="initial"
                                                 >
                                                     Показать номер
-                                                </Typography>
-                                            </ButtonComponent>
-                                        </div>
-                                        <div>
-                                            <ButtonComponent>
-                                                <LetterIcon/>
-                                                <Typography
-                                                    variant="subtitle1"
-                                                    color="initial"
-                                                >
-                                                    Написать
                                                 </Typography>
                                             </ButtonComponent>
                                             {/* <Typography
@@ -363,8 +392,14 @@ export const ListMode: FC<ViewPropsTypes> = (props) => {
                             </Grid>
                         </Hidden>
                     </Grid>
-                );
+                )
             })}
+            <CustomModal
+                id={Math.ceil(Math.random() * 100)}
+                handleClose={handleModalClose}
+                open={openModal}
+                content={modalState}
+            />
         </div>
-    );
-};
+    )
+}

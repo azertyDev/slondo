@@ -25,17 +25,17 @@ export type CategoryType = IdNameType & {
     icon: {
         url: string;
     },
+    ru_name: string;
     smallIcon: any;
     subCategory?: SubCategoryType[];
     has_auction: boolean;
 };
 
 export type SubCategoryType = IdNameType & {
-    parents: IdNameType[];
+    parents?: IdNameType[];
     type?: SubCtgrsType[];
 };
 
 export type SubCtgrsType = IdNameType & {
-    parents: IdNameType[]
-
-} & IdNameType
+    parents?: IdNameType[]
+};

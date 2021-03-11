@@ -1,4 +1,4 @@
-import { makeStyles } from '@material-ui/core/styles';
+import {makeStyles, fade} from '@material-ui/core/styles'
 
 export const useStyles = makeStyles((theme) => ({
     root: {
@@ -131,7 +131,7 @@ export const useStyles = makeStyles((theme) => ({
                                 height: 1,
                                 width: '100%',
                                 background: '#333',
-                                background:
+                                backgroundColor:
                                     'linear-gradient(left, hsla(0,0%,0%,0) 0%, hsla(0,0%,85%,1) 50%, hsla(0,0%,0%,0) 100%)',
                             },
                             '&:last-child': {
@@ -263,9 +263,46 @@ export const useStyles = makeStyles((theme) => ({
                 '& > span': {
                     marginTop: '5px',
                     fontSize: '24px',
-                    fontWeight: '600',
-                },
+                    fontWeight: '600'
+                }
             },
         },
     },
+    modalBody: {
+        textAlign: 'center',
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        '& .subtitle': {
+            marginBottom: 20
+        },
+        '& div.form': {
+            width: '60%',
+            display: 'flex',
+            flexDirection: 'column',
+            '& div.MuiInputBase-root': {
+                marginBottom: 10,
+                '& input': {
+                    borderRadius: 4,
+                    position: 'relative',
+                    backgroundColor: theme.palette.common.white,
+                    border: '1px solid #E0E0E0',
+                    fontSize: 16,
+                    padding: '10px 12px',
+                    transition: theme.transitions.create(['border-color', 'box-shadow']),
+                    '&:focus': {
+                        boxShadow: `${fade(theme.palette.secondary.main, 0.25)} 0 0 0 0.2rem`,
+                        borderColor: theme.palette.secondary.main
+                    }
+                }
+            },
+            '& button': {
+                background: '#7DBCF6',
+                marginBottom: 45,
+                '& .MuiTypography-subtitle1': {
+                    color: '#fff'
+                }
+            }
+        }
+    }
 }));

@@ -3,25 +3,26 @@ import {Grid, Typography} from '@material-ui/core';
 import {useTranslation, Link} from '@root/i18n';
 import {postTypes} from "@src/common_data/post_types_list";
 import {MainLayout} from "@src/components/MainLayout";
-import {CreatePostHeader} from "@src/components/post/create_post/create_post_header/CreatePostHeader";
+import {Top} from "@src/components/post/create_post/top/Top";
+import {withAuthRedirect} from "@src/hoc/withAuthRedirect";
 import {useStyles} from './useStyles';
 
 
-export const PostTypesPage: FC = () => {
+const PostTypesPage: FC = () => {
     const {t} = useTranslation(['post']);
 
     const classes = useStyles();
     return (
         <MainLayout>
-            <CreatePostHeader activeStep={0}/>
+            <Top activeStep={0}/>
             <div className={classes.root}>
                 <Grid container spacing={2}>
                     {postTypes.map((postType, i) =>
                         <Grid item xs={4} key={i}>
                             <Link href={`/create/type/${postType.name}`}>
-                                <a>
+                                <a className={postType.name}>
                                     <div
-                                        className='card-bg'
+                                        className={postType.name}
                                         style={{backgroundImage: `url(${postType.image.url})`}}
                                     >
                                         <Typography variant="subtitle1">
@@ -39,7 +40,7 @@ export const PostTypesPage: FC = () => {
                                         variant="subtitle2"
                                         className={postType.name}
                                     >
-                                        ({t(`${postType.guide}`)})
+                                        {t(`${postType.guide}`)}
                                     </Typography>
                                 </a>
                                 <Typography variant="subtitle1" color="initial">
@@ -53,3 +54,5 @@ export const PostTypesPage: FC = () => {
         </MainLayout>
     );
 };
+
+export default withAuthRedirect(PostTypesPage);

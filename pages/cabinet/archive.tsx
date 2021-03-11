@@ -1,13 +1,6 @@
-import React from 'react';
-import {withTranslation} from '@root/i18n';
-import {ArchiveContainer} from "@src/components/cabinet/cabinet_pages/archive/ArchiveContainer";
+import React, {FC} from 'react';
+import ArchiveContainer from "@src/components/cabinet/cabinet_pages/archive/ArchiveContainer";
 
-const Archive = (props) => {
-    return <ArchiveContainer {...props}/>;
-};
+const Archive: FC = () => <ArchiveContainer/>;
 
-Archive.getInitialProps = async () => ({
-    namespacesRequired: ['cabinet'],
-});
-
-export default withTranslation(['cabinet'])(Archive);
+export default Archive;

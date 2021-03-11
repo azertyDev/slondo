@@ -1,30 +1,31 @@
-import React, { FC, useState } from 'react'
-import { Hidden, NativeSelect, Typography } from '@material-ui/core'
-import { FilterIcon, Search_icon } from '@src/components/elements/icons'
-import { ButtonComponent } from '../button/Button'
-import { useTranslation } from '@root/i18n'
-import { useStyles } from './useStyles'
+import React, {FC, useState} from 'react';
+import {Hidden, NativeSelect, Typography} from '@material-ui/core';
+import {FilterIcon, Search_icon} from '@src/components/elements/icons';
+import {ButtonComponent} from '../button/Button';
+import {useTranslation} from '@root/i18n';
+import {useStyles} from './useStyles';
+
 
 export const SearchForm: FC = () => {
-    const { t } = useTranslation(['header'])
+    const {t} = useTranslation(['header']);
 
-    const [adType, setAdType] = useState(1)
+    const [postType, setPostType] = useState(1);
 
-    const handleSelect = (e) => {
-        setAdType(e.target.value)
-    }
+    const handleSelect = ({target}) => {
+        setPostType(target.value)
+    };
 
-    const classes = useStyles()
+    const classes = useStyles();
     return (
         <form className={classes.root}>
-            <Search_icon />
+            <Search_icon/>
             <input
                 type="text"
                 className="search-input"
                 placeholder={t('searchText')}
             />
             <NativeSelect
-                value={adType}
+                value={postType}
                 onChange={handleSelect}
                 className="select-type"
                 disableUnderline
@@ -41,8 +42,8 @@ export const SearchForm: FC = () => {
                 </ButtonComponent>
             </Hidden>
             <Hidden mdUp>
-                <FilterIcon />
+                <FilterIcon/>
             </Hidden>
         </form>
     )
-}
+};

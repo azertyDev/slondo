@@ -8,7 +8,7 @@ export const ThemesMenu: FC<any> = ({ data, onClick, title }) => {
     const [open, setOpen] = useState(false)
     const [isActive, setActive] = useState(false)
 
-    const { pathname } = useRouter()
+    const { query: { term } } = useRouter()
 
     const handleToggle = () => {
         setActive(!isActive)
@@ -28,7 +28,7 @@ export const ThemesMenu: FC<any> = ({ data, onClick, title }) => {
                                 button
                                 key={el.id}
                                 onClick={() => onClick(el.term)}
-                                className={pathname === `/legal/${el.term}` ? classes.active : ''}
+                                className={term === `${el.term}` ? classes.active : ''}
                             >
                                 <ListItemText primary={el.title} />
                             </ListItem>

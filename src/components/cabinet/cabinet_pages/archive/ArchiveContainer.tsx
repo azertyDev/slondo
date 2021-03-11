@@ -2,26 +2,30 @@ import React, {FC, ReactElement} from 'react';
 import {TabsContent} from '@src/components/cabinet/cabinet_pages/TabsContent';
 import {Archive} from '@src/components/cabinet/cabinet_pages/archive/Archive';
 import {CabinetMockData} from '../../CabinetMockData';
+import {withAuthRedirect} from "@src/hoc/withAuthRedirect";
 
 
 export type TabsDataType = {
+    id: number;
     title: string;
     count: number;
     component: ReactElement;
-};
+}[];
 
-export const ArchiveContainer: FC<any> = () => {
-    const tabsData: TabsDataType[] = [
+const ArchiveContainer: FC = () => {
+    const tabsData: TabsDataType = [
         {
+            id: 0,
             title: 'Объявления',
             count: CabinetMockData.length,
             component: <Archive list={CabinetMockData} isFetch />
         },
         {
+            id: 1,
             title: 'Аукционы',
             count: CabinetMockData.length,
             component: <Archive list={CabinetMockData} isFetch />
-        },
+        }
     ];
 
     const title = 'Архив';
@@ -30,3 +34,5 @@ export const ArchiveContainer: FC<any> = () => {
         <TabsContent title={title} tabsData={tabsData} headerTitle={title}/>
     );
 };
+
+export default withAuthRedirect(ArchiveContainer);

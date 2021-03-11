@@ -1,22 +1,21 @@
-import React, { FC, useEffect } from 'react'
-import { WithT } from 'i18next'
-import { FormikProvider, useFormik } from 'formik'
-import { Checkbox, Grid, TextField, Typography } from '@material-ui/core'
+import React, {FC, useEffect} from 'react'
+import {WithT} from 'i18next'
+import {FormikProvider, useFormik} from 'formik'
+import {Checkbox, Grid, TextField, Typography} from '@material-ui/core'
 import {
     estateTxtFields,
     excludedKeys,
     fieldKeysWithTxt,
-    noSelect,
     numericFields,
     optionKeys,
 } from '@src/common_data/form_fields'
-import { isRequired } from '@root/validation_schemas/createPostSchema'
-import { CustomMenu } from '@src/components/elements/custom_menu/CustomMenu'
-import { CustomAccordion } from '../accordion/CustomAccordion'
-import { numberPrettier } from '@src/helpers'
-import { numberRegEx } from '@src/common_data/reg_ex'
-import { useStyles } from './useStyles'
-import { CarIcon, FlatIcon, ParametersIcon } from '@src/components/elements/icons'
+import {isRequired} from '@root/validation_schemas/createPostSchemas'
+import {CustomMenu} from '@src/components/elements/custom_menu/CustomMenu'
+import {CustomAccordion} from '../accordion/CustomAccordion'
+import {numberPrettier} from '@src/helpers'
+import {numberRegEx} from '@src/common_data/reg_ex'
+import {useStyles} from './useStyles'
+import {CarIcon, FlatIcon, ParametersIcon} from '@src/components/elements/icons'
 
 
 export const EstateForm: FC<any> = (props) => {
@@ -57,7 +56,7 @@ export const EstateForm: FC<any> = (props) => {
         handleBlur,
     } = formik
 
-    const handleInput = ({ target: { name, value } }) => {
+    const handleInput = ({target: {name, value}}) => {
         const isNumericField = numericFields.some(n => n === name)
 
         if (isNumericField) {
@@ -69,18 +68,18 @@ export const EstateForm: FC<any> = (props) => {
             }
         }
 
-        setValues({ ...values })
+        setValues({...values})
     }
 
     const handleMenuItem = (valueKey: string) => (newValue, setAnchor) => () => {
         setAnchor(null)
-        setValues({ ...values, [valueKey]: newValue })
+        setValues({...values, [valueKey]: newValue})
     }
 
-    const handleParamsCheckbox = (keyName, value?) => ({ target }) => {
+    const handleParamsCheckbox = (keyName, value?) => ({target}) => {
         if (values[keyName] && !!value) {
-            if (values[keyName].some(({ id }) => id === value.id)) {
-                values[keyName].forEach(({ id }, index) => {
+            if (values[keyName].some(({id}) => id === value.id)) {
+                values[keyName].forEach(({id}, index) => {
                     if (id === value.id) {
                         values[keyName].splice(index, 1)
                     }
@@ -91,7 +90,7 @@ export const EstateForm: FC<any> = (props) => {
         } else {
             values[keyName] = target.checked
         }
-        setValues({ ...values })
+        setValues({...values})
     }
 
     // useEffect(() => {
@@ -100,18 +99,19 @@ export const EstateForm: FC<any> = (props) => {
 
     const classes = useStyles()
     return (
-        <FormikProvider value={formik}>
-            <form onSubmit={handleSubmit}>
-                <CustomAccordion
-                    open={open}
-                    title={t('flat')}
-                    nextButtonTxt={t('appearance')}
-                    icon={<FlatIcon />}
-                >
-                    <h4>Car</h4>
-                </CustomAccordion>
-            </form>
-        </FormikProvider>
+        <div></div>
+        // <FormikProvider value={formik}>
+        //     <form onSubmit={handleSubmit}>
+        //         <CustomAccordion
+        //             open={open}
+        //             title={t('flat')}
+        //             nextButtonTxt={t('appearance')}
+        //             icon={<FlatIcon/>}
+        //         >
+        //             <h4>Car</h4>
+        //         </CustomAccordion>
+        //     </form>
+        // </FormikProvider>
     )
 
     async function setDefaultVals() {
@@ -126,9 +126,9 @@ export const EstateForm: FC<any> = (props) => {
                     if (Array.isArray(filters[key])) {
                         if (filters[key].length && key !== 'type') {
                             if (isFieldKeyWithTxt) {
-                                values[key] = { ...filters[key][0], txt: '' }
+                                values[key] = {...filters[key][0], txt: ''}
                             } else if (!values[key]) {
-                                values[key] = noSelect
+                                values[key] = null;
                             } else if (isOptionKey) {
                                 values[key] = []
                             }
@@ -139,7 +139,7 @@ export const EstateForm: FC<any> = (props) => {
                 }
             })
 
-            setValues({ ...values })
+            setValues({...values})
         }
     }
 }

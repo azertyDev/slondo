@@ -1,24 +1,40 @@
-import React, {FC} from 'react';
+import React, {FC, useEffect, useState} from 'react';
 import {TabsContent} from "@src/components/cabinet/cabinet_pages/TabsContent";
 import {Favorite} from "@src/components/cabinet/cabinet_pages/favorite/Favorite";
+import {withAuthRedirect} from '@root/src/hoc/withAuthRedirect';
+import {userAPI} from "@src/api/api";
 
-export const FavoriteContainer: FC<any> = () => {
+
+const FavoriteContainer: FC = () => {
+    const [data, setData] = useState<any>([])
+    const [type, setType] = useState('post')
+    console.log(data)
+    const count = data?.data?.length
+    const list = data?.data
     const tabsData = [
         {
+            id: 0,
             title: 'Объявления',
-            count: 2,
-            component: <Favorite/>
+            count: count,
+            component: <Favorite data={list} handleType={setType} type='post' />
         },
         {
+            id: 1,
             title: 'Аукционы',
-            count: 2,
-            component: <Favorite/>
-        },
+            count: count,
+            component: <Favorite data={list} handleType={setType} type='auc' />
+        }
     ]
+
+    useEffect(() => {
+        userAPI.getFavorites('ru', type).then(result => setData(result))
+    }, [type])
 
     const title = 'Избранное';
 
     return (
         <TabsContent title={title} tabsData={tabsData} headerTitle={title}/>
     )
-}
+};
+
+export default withAuthRedirect(FavoriteContainer);

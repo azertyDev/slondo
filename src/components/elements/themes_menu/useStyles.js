@@ -57,6 +57,9 @@ export const useStyles = makeStyles((theme) => ({
     },
     active: {
         border: '1px solid #AD66D5',
+        '& .MuiTypography-subtitle1': {
+            color: theme.palette.primary.secondary,
+        },
     },
 
 }))

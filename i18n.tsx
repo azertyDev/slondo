@@ -3,7 +3,7 @@ import _default from 'next/config';
 import path from 'path';
 
 
-const { localeSubpaths } = _default().publicRuntimeConfig;
+const {localeSubpaths} = _default().publicRuntimeConfig;
 
 export const {
     useTranslation,

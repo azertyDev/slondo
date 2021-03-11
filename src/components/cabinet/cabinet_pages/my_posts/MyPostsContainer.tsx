@@ -2,20 +2,23 @@ import React, {FC} from 'react';
 import {TabsContent} from '@src/components/cabinet/cabinet_pages/TabsContent';
 import {MyPosts} from '@src/components/cabinet/cabinet_pages/my_posts/MyPosts';
 import {CabinetMockData} from '../../CabinetMockData';
-import {withHomeRedirect} from '@src/hoc/withHomeRedirect'
+import {withAuthRedirect} from '@src/hoc/withAuthRedirect';
+
 
 const MyPostsContainer: FC = () => {
     const tabsData = [
         {
+            id: 0,
             title: 'Объявления',
             count: CabinetMockData.length,
-            component: <MyPosts list={CabinetMockData}/>,
+            component: <MyPosts list={CabinetMockData} />
         },
         {
+            id: 1,
             title: 'Безопасная покупка',
             count: CabinetMockData.length,
-            component: <MyPosts list={CabinetMockData}/>,
-        },
+            component: <MyPosts list={CabinetMockData} />
+        }
     ];
 
     const title = 'Мои объявления';
@@ -25,4 +28,4 @@ const MyPostsContainer: FC = () => {
     );
 };
 
-export default withHomeRedirect(MyPostsContainer)
+export default withAuthRedirect(MyPostsContainer);

@@ -2,7 +2,7 @@ import {ReactNode} from "react";
 
 export type PostType = IdNameType & {
     currency: IdNameType[];
-    expired: { id: number, expiration_at: string }[];
+    expired: { id: number, hours: number }[];
     image: { url: string },
     guide: string,
     subtitle: string
@@ -57,6 +57,7 @@ export type LocationType = {
 export type IdNameType = {
     id: number;
     name: string;
+    ru_name?: string;
 };
 
 export type FileType = {

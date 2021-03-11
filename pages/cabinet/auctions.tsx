@@ -1,13 +1,6 @@
-import React from 'react';
-import {withTranslation} from '@root/i18n';
-import {MyAuctionsContainer} from "@root/src/components/cabinet/cabinet_pages/my_auctions/MyAuctionsContainer";
+import React, {FC} from 'react';
+import MyAuctionsContainer from "@root/src/components/cabinet/cabinet_pages/my_auctions/MyAuctionsContainer";
 
-const Auctions = (props) => {
-    return <MyAuctionsContainer {...props}/>;
-};
+const Auctions: FC = () => <MyAuctionsContainer/>;
 
-Auctions.getInitialProps = async () => ({
-    namespacesRequired: ['cabinet'],
-});
-
-export default withTranslation(['cabinet'])(Auctions);
+export default Auctions;

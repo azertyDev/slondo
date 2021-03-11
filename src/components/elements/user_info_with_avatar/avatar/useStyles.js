@@ -3,10 +3,11 @@ import { makeStyles, withStyles } from '@material-ui/core/styles';
 
 export const StyledBadge = withStyles((theme) => ({
     badge: {
-        backgroundColor: 'rgba(173, 102, 213, 1)',
-        color: 'rgba(173, 102, 213, 1)',
+        backgroundColor: '#27AE60',
+        color: '#27AE60',
         boxShadow: `0 0 0 2px ${theme.palette.background.paper}`,
         '&::after': {
+            display: 'default',
             position: 'absolute',
             top: 0,
             left: 0,

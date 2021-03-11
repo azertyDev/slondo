@@ -1,17 +1,39 @@
+import Cookies from "universal-cookie";
 import {CategoryType, SubCtgrsType} from "@root/interfaces/Categories";
 import CyrillicToTranslit from 'cyrillic-to-translit-js';
 import {excludedKeys} from "@src/common_data/form_fields";
-import {pnctnMarksRegEx} from "@src/common_data/reg_ex";
+import {punctuationMarksRegEx} from "@src/common_data/reg_ex";
 import {TFunction} from "next-i18next";
 import {categories_list} from "@src/common_data/categories_list";
 
+
+export const cookies = new Cookies();
+
+export const authChecker = (): boolean => {
+    return typeof cookies.get('token') !== 'undefined';
+};
+
+export const toCamelCase = (text: string) => {
+    const result = [];
+    const toLower = text.toLocaleLowerCase().split('');
+    const toLowerLen = toLower.length;
+    for (let i = 0; i < toLowerLen; i++) {
+        if (toLower[i] === ' ') {
+            result.push(toLower[i + 1].toUpperCase())
+            i++
+        } else {
+            result.push(toLower[i])
+        }
+    }
+    return result.join('')
+}
 
 export const transformTitle = (title: string): string => {
     const transform = new CyrillicToTranslit().transform;
 
     return transform(title)
         .toLowerCase()
-        .replace(pnctnMarksRegEx, ' ')
+        .replace(punctuationMarksRegEx, ' ')
         .replace(/\s+/g, '-');
 };
 
@@ -21,37 +43,14 @@ export const numberPrettier = (price: string): string => {
             .replace(/\s/g, '')
             .replace(/\B(?=(\d{3})+(?!\d))/g, " ")
         : '';
+};
+
+export const clearWhiteSpaces = (txt: string): string => {
+    return txt.replace(/\s+/g, "");
 }
 
-const addParents = (list, parents) => (
-    list.map(ctgry => {
-        if (ctgry.type) {
-            const type = addParents(
-                ctgry.type,
-                [
-                    ...parents,
-                    {
-                        id: ctgry.id,
-                        name: ctgry.name
-                    }
-                ]
-            )
-            return {
-                ...ctgry,
-                type,
-                parents
-            }
-        } else {
-            return {
-                ...ctgry,
-                parents
-            }
-        }
-    })
-);
-
-export const categoriesListNormalize = (categoryList: CategoryType[]) => (
-    categoryList.map(ctgry => {
+export const addParentsToCtgrs = (categoriesList: CategoryType[]): CategoryType[] => {
+    return categoriesList.map(ctgry => {
         if (ctgry.subCategory) {
             const subCategory = addParents(
                 ctgry.subCategory,
@@ -64,44 +63,73 @@ export const categoriesListNormalize = (categoryList: CategoryType[]) => (
         } else {
             return ctgry;
         }
-    })
-);
+    });
 
-// export const dataForCrtPostNormalize = (data: any) => {
-//     if (!!data) {
-//         data = Object.keys(data).reduce((acc: any, ctgrName) => {
-//             const isExcludedKey = excludedKeys.some(k => k === ctgrName);
-//             if (Array.isArray(data[ctgrName]) && !!data[ctgrName].length && ctgrName !== 'manufacturers') {
-//                 if (ctgrName === 'type') {
-//                     acc = {
-//                         ...acc,
-//                         ...dataForCrtPostNormalize(data[ctgrName][0])
-//                     };
-//                 } else {
-//                     acc[ctgrName] = data[ctgrName];
-//                     if (ctgrName === 'manufacturer' && data[ctgrName][0].models) {
-//                         acc.subCategory = [];
-//                     }
-//                 }
-//             } else {
-//                 if (ctgrName === 'furnished') {
-//                     acc[ctgrName] = false;
-//                 } else if (ctgrName === 'default_param') {
-//                     acc = {
-//                         ...acc,
-//                         ...dataForCrtPostNormalize(data[ctgrName])
-//                     };
-//                 } else if (Number.isInteger(data[ctgrName]) && !isExcludedKey) {
-//                     acc[ctgrName] = '';
-//                 }
-//             }
-//             return acc;
-//         }, {});
-//     } else {
-//         data = {};
-//     }
-//     return data
-// };
+    function addParents(list, parents) {
+        return list.map(ctgry => {
+            if (ctgry.type) {
+                const type = addParents(
+                    ctgry.type,
+                    [
+                        ...parents,
+                        {
+                            id: ctgry.id,
+                            name: ctgry.name
+                        }
+                    ]
+                )
+                return {
+                    ...ctgry,
+                    type,
+                    parents
+                }
+            } else {
+                return {
+                    ...ctgry,
+                    parents
+                }
+            }
+        })
+    }
+};
+
+export const dataForCrtPostNormalize = (data: any, type?) => {
+    if (!!data) {
+        data = Object.keys(data).reduce((acc: any, key) => {
+            // const isExcludedKey = excludedKeys.some(k => k === key);
+
+            if (Array.isArray(data[key]) && !!data[key].length) {
+                const isExcludeTypeKey = type && key === 'type';
+
+                if (!isExcludeTypeKey) {
+                    acc[key] = data[key];
+                } else if (key === 'type') {
+                    acc = {
+                        ...acc,
+                        ...dataForCrtPostNormalize(data[key][0])
+                    };
+                }
+            } else {
+                if (key === 'furnished') {
+                    acc[key] = false;
+                } else if (key === 'default_param') {
+                    acc = {
+                        ...acc,
+                        ...dataForCrtPostNormalize(data[key])
+                    };
+                }
+                // else if (Number.isInteger(data[key]) && !isExcludedKey) {
+                //     acc[key] = '';
+                // }
+            }
+
+            return acc;
+        }, {});
+    } else {
+        data = {};
+    }
+    return data
+};
 
 export const categorySearchHelper = (txt: string, categoryList: CategoryType[], t: TFunction): SubCtgrsType[] => {
     return categoryList
@@ -130,24 +158,22 @@ export const categorySearchHelper = (txt: string, categoryList: CategoryType[], 
     }
 };
 
-export const weekDaysHelper = (days) => {
+export const weekDaysHelper = (days, t: TFunction) => {
     const daysLen = days.length;
     let isInOrder: boolean;
     let result = '';
 
     if (daysLen > 3) {
-        isInOrder = days.every(
-            ({id}, i) => days[i + 1] ? (id + 1 - days[i + 1].id) === 0 : true
-        );
+        isInOrder = days.every(({id}, i) => days[i + 1] ? (id + 1 - days[i + 1].id) === 0 : true);
 
         if (isInOrder) {
-            result = `${days[0].name} - ${days[daysLen - 1].name}`;
+            result = `${t(days[0].name)} - ${t(days[daysLen - 1].name)}`;
         } else {
-            result = days.map(day => day.name).join(', ');
+            result = days.map(day => t(day.name)).join(', ');
         }
 
     } else {
-        result = `${days[0].name}${days[1] ? `, ${days[1].name}` : ''}`;
+        result = `${t(days[0].name)}${days[1] ? `, ${t(days[1].name)}` : ''}`;
     }
 
     return result;

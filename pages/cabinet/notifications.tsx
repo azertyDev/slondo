@@ -1,13 +1,6 @@
-import React from 'react';
-import {withTranslation} from '@root/i18n';
-import {NotificationsContainer} from "@src/components/cabinet/cabinet_pages/notifications/NotificationsContainer";
+import React, {FC} from 'react';
+import NotificationsContainer from "@src/components/cabinet/cabinet_pages/notifications/NotificationsContainer";
 
-const Notifications = (props) => {
-    return <NotificationsContainer {...props}/>;
-};
+const Notifications: FC = () => <NotificationsContainer/>;
 
-Notifications.getInitialProps = async () => ({
-    namespacesRequired: ['cabinet'],
-});
-
-export default withTranslation(['cabinet'])(Notifications);
+export default Notifications

@@ -1,25 +1,22 @@
 import {createAsyncThunk, createSlice} from '@reduxjs/toolkit';
 import {userAPI} from "@src/api/api";
-import Cookies from "universal-cookie";
+import {cookies} from "@src/helpers";
 import {AuthInputs, AuthReg, RecoveryInputs} from "@root/interfaces/Auth";
 
 
-const cookies = new Cookies();
-
 const initialState: AuthReg = {
-    isFetch: false,
-    isAuth: typeof cookies.get('token') === 'object' && cookies.get('token') !== null ? true : false,
     error: null,
+    isFetch: false,
+    isAuth: false,
     isAuthModalOpen: false
 };
 
-// Async thunk
 export const fetchTokenLogin = createAsyncThunk<never, AuthInputs>(
     'authReg/fetchTokenByLogin',
     async ({phone, password}, {rejectWithValue}) => {
         try {
-            const token = await userAPI.login(phone, password);
-            cookies.set('token', token, {maxAge: 2 * 3600});
+            const {token} = await userAPI.login(phone, password);
+            !!token && cookies.set('token', token, {path: '/', maxAge: 2 * 3600});
         } catch (e) {
             return rejectWithValue(e.message);
         }
@@ -47,19 +44,19 @@ export const fetchRecovery = createAsyncThunk<never, AuthInputs>(
         }
     }
 );
+
 export const fetchTokenRecovery = createAsyncThunk<never, RecoveryInputs>(
     'authReg/fetchTokenByLogin',
     async ({phone, code, password, password_confirmation}, {rejectWithValue}) => {
         try {
-            const token = await userAPI.recovery(phone, code, password, password_confirmation);
-            cookies.set('token', token, {maxAge: 2 * 3600});
+            const {token} = await userAPI.recovery(phone, code, password, password_confirmation);
+            !!token && cookies.set('token', token, {path: '/', maxAge: 2 * 3600});
         } catch (e) {
             return rejectWithValue(e.message);
         }
     }
 );
 
-// Slice
 const authRegSlice = createSlice({
     name: 'authReg',
     initialState,

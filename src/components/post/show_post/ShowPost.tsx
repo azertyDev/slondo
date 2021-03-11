@@ -18,10 +18,10 @@ export const ShowPost: FC<any> = (props) => {
 
     const classes = useStyles();
     return (
-        <div className={classes.root}>
-            <MainLayout title="Просмотр объявления">
+        <MainLayout title="Просмотр объявления">
+            <div className={classes.root}>
                 <Grid container spacing={2}>
-                    <Grid item xs={12} md={9}>
+                    <Grid item xs={12} lg={9}>
                         <PostContent
                             t={t}
                             data={data}
@@ -30,8 +30,8 @@ export const ShowPost: FC<any> = (props) => {
                             slidersRefs={slidersRefs}
                         />
                     </Grid>
-                    <Hidden smDown>
-                        <Grid item xs={3}>
+                    <Hidden mdDown>
+                        <Grid item lg={3}>
                             <OwnerAuctionContent {...props} />
                             <div className={classes.adBanner}>
                                 <Banner height="424px"/>
@@ -39,7 +39,7 @@ export const ShowPost: FC<any> = (props) => {
                         </Grid>
                     </Hidden>
                 </Grid>
-            </MainLayout>
-        </div>
+            </div>
+        </MainLayout>
     );
 };

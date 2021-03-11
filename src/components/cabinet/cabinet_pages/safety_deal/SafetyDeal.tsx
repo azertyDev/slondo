@@ -10,7 +10,7 @@ import {
     Card,
     Typography,
 } from '@material-ui/core';
-import {CabinetMenuWrapper} from '@src/components/cabinet/CabinetMenuWrapper';
+import {CabinetWrapper} from '@src/components/cabinet/CabinetWrapper';
 import {CustomFormikField} from '@src/components/elements/custom_formik_field/CustomFormikField';
 import {Form, FormikProvider, useFormik} from 'formik';
 import {useStyles} from './useStyles';
@@ -40,7 +40,7 @@ export const SafetyDeal: FC = () => {
     const classes = useStyles();
     return (
         <div className={classes.root}>
-            <CabinetMenuWrapper headerTitle={title} title={title}>
+            <CabinetWrapper headerTitle={title} title={title}>
                 <div className="wrapper">
                     <Grid item xs={7}>
                         <FormikProvider value={formik}>
@@ -89,7 +89,7 @@ export const SafetyDeal: FC = () => {
                                     placeholder="+998"
                                 />
                                 <FormControlLabel
-                                    control={<Checkbox color="primary"/>}
+                                    control={<Checkbox color="secondary"/>}
                                     label="Отображать номер телефона"
                                     labelPlacement="start"
                                 />
@@ -160,7 +160,7 @@ export const SafetyDeal: FC = () => {
                         </FormikProvider>
                     </Grid>
                 </div>
-            </CabinetMenuWrapper>
+            </CabinetWrapper>
         </div>
     );
 };

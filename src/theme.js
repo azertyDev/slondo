@@ -8,8 +8,8 @@ const calibri = {
     src: `
         url(${SERVER_URL}/fonts/Calibri.eot) format('eot')`,
     unicodeRange:
-        'U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF',
-};
+        'U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF'
+}
 
 const colors = {
     main: '#9773af',
@@ -20,6 +20,7 @@ const colors = {
     adBgColor: '#88CAEC',
     lotBgColor: '#AD66D5',
     createAdBtnColor: '#7DBCF6',
+    red: '#F08F8F',
     error: '#E9372E',
     tab: '#838383',
     activeTab: '#2F80ED',
@@ -47,15 +48,19 @@ const theme = createMuiTheme({
             adBgColor: colors.adBgColor,
             lotBgColor: colors.lotBgColor,
             createAdBtnColor: colors.createAdBtnColor,
+            red: colors.red,
             error: colors.error,
             postBgColor: colors.postBgColor,
             aucBgColor: colors.aucBgColor,
-            exAucBgColor: colors.exAucBgColor,
+            exAucBgColor: colors.exAucBgColor
+        },
+        secondary: {
+            main: colors.createAdBtnColor
         },
         common: {
             tab: colors.tab,
             activeTab: colors.activeTab
-        },
+        }
     },
     breakpoints: {
         values: {
@@ -99,10 +104,10 @@ const theme = createMuiTheme({
                     textAlign: 'center'
                 },
                 '.error-border': {
-                    borderColor: colors.error,
+                    borderColor: `${colors.error}!important`,
                     '& div.MuiOutlinedInput-root': {
                         '& > fieldset, &:hover > fieldset.MuiOutlinedInput-notchedOutline': {
-                            borderColor: colors.error
+                            borderColor: `${colors.error}!important`
                         },
                     },
                     '& button.MuiButtonBase-root': {

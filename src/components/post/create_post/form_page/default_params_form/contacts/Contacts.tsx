@@ -7,8 +7,7 @@ import {WithT} from "i18next";
 
 type ContactsPropsType = {
     isAuction,
-    phone,
-    displayPhone,
+    values,
     handleInput,
     handleCheckboxChange,
 } & WithT;
@@ -17,8 +16,7 @@ export const Contacts: FC<ContactsPropsType> = (props) => {
     const {
         t,
         isAuction,
-        phone,
-        displayPhone,
+        values,
         handleInput,
         handleCheckboxChange,
     } = props;
@@ -26,17 +24,20 @@ export const Contacts: FC<ContactsPropsType> = (props) => {
     const classes = useStyles();
     return (
         <div className={classes.root}>
-            {isAuction
-            && <div className='display-phone'>
-                <Checkbox
-                    color='primary'
-                    checked={displayPhone}
-                    onChange={handleCheckboxChange('display_phone')}
-                />
-                <Typography variant="subtitle1">
-                    {t('displayPhone')}
-                </Typography>
-            </div>}
+            {
+                isAuction && (
+                    <div className='display-phone'>
+                        <Checkbox
+                            color='primary'
+                            checked={values.display_phone}
+                            onChange={handleCheckboxChange('display_phone')}
+                        />
+                        <Typography variant="subtitle1">
+                            {t('displayPhone')}
+                        </Typography>
+                    </div>
+                )
+            }
             <div>
                 <Typography variant="subtitle1">
                     <strong>{t('ownPhone')}&nbsp;</strong>
@@ -53,7 +54,7 @@ export const Contacts: FC<ContactsPropsType> = (props) => {
                     type="tel"
                     name="phone"
                     placeholder="+998 (__) ___ __ __"
-                    value={phone}
+                    value={values.phone}
                     onChange={handleInput}
                 />
             </div>

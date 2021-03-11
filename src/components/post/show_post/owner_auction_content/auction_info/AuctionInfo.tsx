@@ -1,23 +1,66 @@
-import React, {FC} from 'react';
-import {Typography, TextField} from '@material-ui/core';
-import {ButtonComponent} from '@src/components/elements/button/Button';
-import {LockIcon} from '@src/components/elements/icons';
-import {AuctionTimer} from './AuctionTimer';
-import {numberPrettier} from '@root/src/helpers';
-import {useStyles} from './useStyles';
-
+import React, {FC, useEffect, useState} from 'react'
+import {Typography} from '@material-ui/core'
+import {ButtonComponent} from '@src/components/elements/button/Button'
+import {LockIcon, RefreshIcon} from '@src/components/elements/icons'
+import {AuctionTimer} from './AuctionTimer'
+import {numberPrettier} from '@root/src/helpers'
+import {useStyles} from './useStyles'
+import BuyAuctionComponent from './BuyAuction';
+import {userAPI} from '@src/api/api'
+import AuctionForm from './AuctionForm'
+import {useDispatch, useSelector} from "react-redux";
+import {setErrorMsgAction } from '@src/redux/slices/errorSlice'
+import {toCamelCase} from "@root/src/helpers";
+import {useTranslation} from "@root/i18n";
 
 export const AuctionInfo: FC<any> = (props) => {
-    const {data} = props;
+    const { t } = useTranslation()
+    const dispatch = useDispatch()
+    const isAuth = useSelector<any>(state => state.auth.isAuth)
+    const classes = useStyles()
+    const { data } = props
+    const [showAll, setShowAll] = useState(false)
+    const [page, setPage] = useState(1)
+    const date = new Date(data.expiration_at).getTime()
+    const [list, setList] = useState([])
+    const [lastPage, setLastPage] = useState(null)
+    const auction_id = data?.auction?.id
+    const ads_id = data?.id
 
-    const date = new Date(data.expiration_at).getTime();
+    useEffect(() => {
+        userAPI.getAuctionBets(data.auction.id, page).then(result => {
+            setLastPage(result.last_page)
+            setList(prev => [...prev, ...result.data])
+        })
+    }, [page])
 
-    const classes = useStyles();
+    const handleSubmit = (value) => {
+        userAPI.betAuction(value)
+            .then(result => result && userAPI.getAuctionBets(data.auction.id, 1)
+                .then(result => {
+                    setLastPage(result.last_page);
+                    setList(result.data)
+                }))
+            .catch(error => dispatch(setErrorMsgAction(t(`auction:${toCamelCase(error.response.data.message)}`))))
+    }
+
+    const handleScroll = (e) => {
+        const bottom = e.target.scrollHeight - e.target.scrollTop === e.target.clientHeight;
+        if (page !== lastPage && bottom) {
+            setPage(prev => prev + 1)
+        }
+    }
+
+    const handleRefresh = () => {
+        userAPI.getAuctionBets(data.auction.id, 1)
+            .then(result => setList(result.data))
+            .catch(err => dispatch(setErrorMsgAction(err.message)))
+    }
+
     return (
         <div className={classes.root}>
             <div className="lot-info">
-                {data.auction
-                && <div className="reserve-price">
+                {data.auction && data.auction.reserve_price > list?.[0]?.bet && <div className="reserve-price">
                     <LockIcon/>
                     <div>
                         <Typography variant="subtitle2" color="initial">
@@ -34,173 +77,94 @@ export const AuctionInfo: FC<any> = (props) => {
                     {date !== 0 && <AuctionTimer date={date}/>}
                 </div>}
                 <div className="lot-participants-block">
-                    <Typography variant="subtitle1" color="initial">
-                        Текущие ставки
+                    <Typography
+                        variant="subtitle1" color="initial"
+                        style={{display: 'flex', justifyContent: 'space-between'}}
+                    >
+                        <div>
+                            Текущие ставки
+                        </div>
+                        <div onClick={handleRefresh} style={{cursor: "pointer"}}>
+                            <RefreshIcon/>
+                        </div>
                     </Typography>
-                    <div className="participants">
+                    <div
+                        className="participants"
+                        style={{height: showAll ? 400 : 200, overflow: showAll ? "auto" : "hidden"}}
+                        onScroll={handleScroll}
+                    >
                         <ul>
-                            <li>
-                                <div>
-                                    <div className="participant-name">
-                                        <Typography variant="subtitle1" noWrap>
-                                            Playe***112 (<span>1</span>)
-                                        </Typography>
+                            {list && list?.map((item) => (
+                                <li key={item?.id}>
+                                    <div>
+                                        <div className="participant-name">
+                                            <Typography variant="subtitle1" noWrap>
+                                                {item?.user?.phone} {item?.number_of_bets &&
+                                            <span>({item?.number_of_bets})</span>}
+                                            </Typography>
+                                        </div>
+                                        <div className="dateAndTime">
+                                            <Typography
+                                                variant="subtitle1"
+                                                noWrap
+                                                className="bet-time"
+                                            >
+                                                {item?.created_at?.slice(11, 16)}
+                                            </Typography>
+                                            <Typography
+                                                variant="subtitle1"
+                                                noWrap
+                                                className="bet-date"
+                                            >
+                                                {item?.created_at?.slice(0, 10)}
+                                            </Typography>
+                                        </div>
                                     </div>
-                                    <div className="dateAndTime">
+                                    <div className="bet">
                                         <Typography
                                             variant="subtitle1"
                                             noWrap
-                                            className="bet-time"
+                                            className="final-bet"
                                         >
-                                            14:32
-                                        </Typography>
-                                        <Typography
-                                            variant="subtitle1"
-                                            noWrap
-                                            className="bet-date"
-                                        >
-                                            04.12.20
-                                        </Typography>
-                                    </div>
-                                </div>
-                                <div className="bet">
-                                    <Typography
-                                        variant="subtitle1"
-                                        noWrap
-                                        className="final-bet"
-                                    >
-                                        999 999 999
-                                    </Typography>
-                                    <Typography
-                                        variant="subtitle1"
-                                        noWrap
-                                        className="per-bet"
-                                    >
-                                        + 200 000
-                                    </Typography>
-                                </div>
-                            </li>
-                            <li>
-                                <div>
-                                    <div className="participant-name">
-                                        <Typography variant="subtitle1" noWrap>
-                                            Sar***44 (<span>1</span>)
-                                        </Typography>
-                                    </div>
-                                    <div className="dateAndTime">
-                                        <Typography
-                                            variant="subtitle1"
-                                            noWrap
-                                            className="bet-time"
-                                        >
-                                            12:14
+                                            {item?.bet}
                                         </Typography>
                                         <Typography
                                             variant="subtitle1"
                                             noWrap
-                                            className="bet-date"
+                                            className="per-bet"
                                         >
-                                            04.12.20
+                                            {item?.outbid === 0 ? "Стартовая цена" : `+${item?.outbid}`}
                                         </Typography>
                                     </div>
-                                </div>
-                                <div className="bet">
-                                    <Typography
-                                        variant="subtitle1"
-                                        noWrap
-                                        className="final-bet"
-                                    >
-                                        1 150 000
-                                    </Typography>
-                                    <Typography
-                                        variant="subtitle1"
-                                        noWrap
-                                        className="per-bet"
-                                    >
-                                        + 120 000
-                                    </Typography>
-                                </div>
-                            </li>
-                            <li>
-                                <div>
-                                    <div className="participant-name">
-                                        <Typography variant="subtitle1" noWrap>
-                                            Grand***ve (<span>1</span>)
-                                        </Typography>
-                                    </div>
-                                    <div className="dateAndTime">
-                                        <Typography
-                                            variant="subtitle1"
-                                            noWrap
-                                            className="bet-time"
-                                        >
-                                            11:32
-                                        </Typography>
-                                        <Typography
-                                            variant="subtitle1"
-                                            noWrap
-                                            className="bet-date"
-                                        >
-                                            04.12.20
-                                        </Typography>
-                                    </div>
-                                </div>
-                                <div className="bet">
-                                    <Typography
-                                        variant="subtitle1"
-                                        noWrap
-                                        className="final-bet"
-                                    >
-                                        970 000
-                                    </Typography>
-                                    <Typography
-                                        variant="subtitle1"
-                                        noWrap
-                                        className="per-bet"
-                                    >
-                                        + 20 000
-                                    </Typography>
-                                </div>
-                            </li>
+                                </li>
+                            ))}
                         </ul>
                     </div>
                     <Typography
                         variant="subtitle1"
                         color="initial"
                         className="all-bets"
+                        onClick={() => setShowAll(!showAll)}
+                        style={{cursor: "pointer"}}
                     >
                         Все ставки
                     </Typography>
                 </div>
-                <div className="bet-info">
-                    <div>
-                        <TextField placeholder="14200000" variant="outlined" />
-                        <ButtonComponent color="secondary">
-                            <Typography variant="subtitle1" color="initial">
-                                Сделать ставку
+                {isAuth &&
+                <>
+                    <div className="bet-info">
+                        <AuctionForm data={data} handleFormSubmit={handleSubmit} list={list}/>
+                        <div>
+                            <Typography variant="subtitle2" color="initial">
+                                Максимально возможная ставка:
                             </Typography>
-                        </ButtonComponent>
+                            <Typography variant="subtitle2" color="initial">
+                                {list?.[0]?.max_bet} сум
+                            </Typography>
+                        </div>
                     </div>
-                    <div>
-                        <Typography variant="subtitle2" color="initial">
-                            Максимально возможная ставка
-                        </Typography>
-                        <Typography variant="subtitle2" color="initial">
-                            2 2500 000
-                        </Typography>
-                    </div>
-                </div>
                 {data.ads_type.id === 3 && (
-                    <div className="buy-now">
-                        <Typography variant="subtitle1" color="initial">
-                            1 420 000 000 сум
-                        </Typography>
-                        <ButtonComponent>
-                            <Typography variant="subtitle1" color="initial">
-                                Купить сейчас
-                            </Typography>
-                        </ButtonComponent>
-                    </div>
+                    <BuyAuctionComponent auction_id={auction_id} ads_id={ads_id} />
                 )}
                 <div className='suggest_price'>
                     <ButtonComponent>
@@ -209,7 +173,10 @@ export const AuctionInfo: FC<any> = (props) => {
                         </Typography>
                     </ButtonComponent>
                 </div>
+                </>
+                }
             </div>
+
         </div>
     );
 };

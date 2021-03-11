@@ -1,14 +1,13 @@
 import React, {FC, useEffect} from 'react';
-import Cookies from 'universal-cookie';
+import {useDispatch, useSelector} from "react-redux";
+import {Container, Modal} from '@material-ui/core';
 import {i18n, useTranslation} from '@root/i18n';
-import {Container, Modal, Typography} from '@material-ui/core';
+import {cookies} from '@root/src/helpers';
 import Top from "./top/TopContainer";
 import Bottom from './bottom/Bottom';
 import {AuthRegPage} from "./auth_reg/AuthRegPage";
-import {useDispatch, useSelector} from "react-redux";
 import {setIsAuthAction, setIsAuthModalOpen} from '@src/redux/slices/authRegSlice';
 import {RootState} from "@src/redux/rootReducer";
-import {ButtonComponent} from "@src/components/elements/button/Button";
 import {fetchLocations} from "@src/redux/slices/locationsSlice";
 import {useStyles} from './useStyles';
 
@@ -16,15 +15,14 @@ import {useStyles} from './useStyles';
 export const Header: FC = () => {
     const {t} = useTranslation(['header']);
 
-    const cookies = new Cookies();
-    const isTokenExst = !!cookies.get('token');
+    const isToken = !!cookies.get('token');
 
     const lang = i18n.language;
 
-    const {isAuth, isAuthModalOpen} = useSelector((store: RootState) => store.auth);
     const dispatch = useDispatch();
+    const {isAuth, isAuthModalOpen} = useSelector((store: RootState) => store.auth);
 
-    const handleModal = (value) => () => {
+    const handleModal = value => () => {
         dispatch(setIsAuthModalOpen(value));
     };
 
@@ -33,20 +31,18 @@ export const Header: FC = () => {
     }, [lang]);
 
     useEffect(() => {
-        dispatch(setIsAuthAction(isTokenExst));
-    }, [isTokenExst]);
+        dispatch(setIsAuthAction(isToken));
+    }, [isToken]);
 
     const classes = useStyles();
     return (
         <header className={classes.root} id='back-to-top-anchor'>
             <div className='header-wrapper'>
                 <Container maxWidth="xl">
-                    <div className='top-wrapper'>
-                        <Top
-                            t={t}
-                            handleOpenModal={handleModal(true)}
-                        />
-                    </div>
+                    <Top
+                        t={t}
+                        handleOpenModal={handleModal(true)}
+                    />
                     <div>
                         <Bottom
                             t={t}

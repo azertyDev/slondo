@@ -1,32 +1,34 @@
-import React, { FC } from 'react'
+import React, {FC} from 'react'
 import Head from 'next/head'
-import { Header } from './header/Header'
-import { Footer } from './footer/Footer'
-import { Container } from '@material-ui/core'
-import { ErrorModal } from '@src/components/error_modal/ErrorModal'
+import {Header} from './header/Header'
+import {Footer} from './footer/Footer'
+import {Container} from '@material-ui/core'
+import {ErrorModal} from '@src/components/error_modal/ErrorModal'
+import {AdditionalComponent} from '@src/components/elements/additional/AdditionalComponent'
 
 
 type MainLayoutPropsType = {
     title?: string;
 };
 
-export const MainLayout: FC<MainLayoutPropsType> = ({ children, title = 'SLONDO' }) => {
+export const MainLayout: FC<MainLayoutPropsType> = ({children, title = 'SLONDO'}) => {
     return (
         <>
             <Head>
                 <title>{title}</title>
             </Head>
-            <Header />
+            <Header/>
             <main>
                 <Container
                     maxWidth="xl"
-                    style={{ paddingTop: '48px', position: 'relative' }}
+                    style={{paddingTop: '48px', position: 'relative'}}
                 >
                     {children}
+                    <AdditionalComponent/>
                 </Container>
             </main>
-            <Footer />
-            <ErrorModal />
+            <Footer/>
+            <ErrorModal/>
         </>
     )
 }

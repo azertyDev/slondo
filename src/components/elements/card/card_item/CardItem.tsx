@@ -1,4 +1,4 @@
-import React, {FC} from 'react'
+import React, {FC, useState} from 'react'
 import {Link} from '@root/i18n'
 import {useTranslation} from 'react-i18next'
 import {
@@ -8,18 +8,21 @@ import {
     CardMedia,
     IconButton,
     Typography,
-    Tooltip,
+    Tooltip
 } from '@material-ui/core'
 import Skeleton from '@material-ui/lab/Skeleton'
 import {
     FavoriteIcon,
     DeliveryIcon,
     SafeIcon,
-    SwapIcon,
+    SwapIcon
 } from '@src/components/elements/icons'
 import {InnerCardData} from '@root/interfaces/CardData'
-import {numberPrettier, transformTitle} from '@src/helpers'
+import {numberPrettier, transformTitle, authChecker} from '@src/helpers'
 import {useStyles} from './useStyles'
+import {userAPI} from '@src/api/api'
+import {useSelector} from "react-redux";
+import {RootState} from "@src/redux/rootReducer";
 
 
 type CardItemProps = {
@@ -27,8 +30,6 @@ type CardItemProps = {
 } & InnerCardData;
 
 export const CardItem: FC<CardItemProps> = (props) => {
-    const {t} = useTranslation(['common'])
-
     const {
         id,
         isFetch,
@@ -44,20 +45,32 @@ export const CardItem: FC<CardItemProps> = (props) => {
         region,
         city,
         sub_category_id,
-        category,
-    } = props
+        category
+    } = props;
 
-    const translatedTitle = transformTitle(title)
+    const {t} = useTranslation(['common']);
+    const translatedTitle = transformTitle(title);
 
-    const classes = useStyles({ads_type})
+    const {isAuth} = useSelector((store: RootState) => store.auth);
+
+    const [liked, setLiked] = useState(false);
+
+    const handleFavorite = () => {
+        setLiked(!liked);
+        userAPI.favoriteAds(id);
+    };
+
+    const classes = useStyles({ads_type});
     return (
         <div className={classes.root}>
-            <IconButton className="favorite-btn">
-                <FavoriteIcon id={id}/>
-            </IconButton>
-            <Link
-                href={`/obyavlenie/${translatedTitle}-${id}-${category.mark}-${sub_category_id ?? ''}`}
-            >
+            {isAuth && (
+                <IconButton
+                    className="favorite-btn" onClick={handleFavorite}
+                >
+                    <FavoriteIcon id={liked ? id : null}/>
+                </IconButton>
+            )}
+            <Link href={`/obyavlenie/${translatedTitle}-${id}-${category.mark}-${sub_category_id ?? ''}`}>
                 <a target='_blank'>
                     <Card elevation={0} title={title}>
                         {isFetch ? (
@@ -68,9 +81,8 @@ export const CardItem: FC<CardItemProps> = (props) => {
                         ) : (
                             <CardMedia
                                 className="card-media"
-                                image={images.length ? images[0].url.default : null}
+                                image={images.length ? images[0].url.default : '/img/card-logo.png'}
                             >
-                                <div />
                                 <div className="card-header">
                                     <div className="title">
                                         <Typography variant="subtitle2">
@@ -139,7 +151,7 @@ export const CardItem: FC<CardItemProps> = (props) => {
                                             <span> {t(currency.name)}</span>
                                         </Typography>
                                         <Typography variant="caption" noWrap>
-                                            {`${city.name}, ${region.name}`}
+                                            {`${region.name}, ${city.name}`}
                                         </Typography>
                                         <Typography variant="caption">
                                             {created_at}
@@ -154,3 +166,5 @@ export const CardItem: FC<CardItemProps> = (props) => {
         </div>
     )
 }
+
+

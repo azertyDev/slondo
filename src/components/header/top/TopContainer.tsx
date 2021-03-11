@@ -12,4 +12,4 @@ const TopContainer: FC<TopHeaderPropsType> = (props) => {
     return <Top t={t} handleOpenModal={handleOpenModal}/>
 };
 
-export default TopContainer
+export default TopContainer;
