@@ -6,15 +6,17 @@ import {UserSubscribes} from "@src/components/cabinet/cabinet_pages/user_social_
 export const UserSocialInfoContainer: FC = () => {
     const tabsData = [
         {
+            id: 0,
             title: 'Подписчики',
             count: 23,
-            component: <UserSubscribers/>
+            component: <UserSubscribers />
         },
         {
+            id: 1,
             title: 'Подписки',
             count: 3,
-            component: <UserSubscribes/>
-        },
+            component: <UserSubscribes />
+        }
     ]
 
     const title = 'Подписки';

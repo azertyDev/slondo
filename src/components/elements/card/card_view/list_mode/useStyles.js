@@ -13,15 +13,15 @@ export const useStyles = makeStyles((theme) => ({
                 marginBottom: 10,
                 '& > h6.MuiTypography-subtitle1': {
                     fontSize: '12px',
-                    // '& > span.post': {
-                    //     color: theme.palette.primary.adBgColor,
-                    // },
-                    // '& > span.auc': {
-                    //     color: theme.palette.primary.lotBgColor,
-                    // },
-                    // '& > span.exauc': {
-                    //     color: theme.palette.primary.lotBgColor,
-                    // },
+                    '& > span.post': {
+                        color: theme.palette.primary.adBgColor,
+                    },
+                    '& > span.auc': {
+                        color: theme.palette.primary.lotBgColor,
+                    },
+                    '& > span.exauc': {
+                        color: theme.palette.primary.lotBgColor,
+                    },
                 },
             },
             '& div.MuiPaper-root': {
@@ -241,6 +241,9 @@ export const useStyles = makeStyles((theme) => ({
             },
             '& div.status-buttons': {
                 display: 'flex',
+                '& .mr10': {
+                    marginRight: 10
+                },
                 '& button': {
                     padding: '10px 0',
                     borderRadius: '0px 0px 10px 10px',
@@ -248,36 +251,65 @@ export const useStyles = makeStyles((theme) => ({
                     height: '38px',
                     border: 'none',
                     boxShadow: 'inset 0px 4px 10px -5px rgba(0, 0, 0, 0.25)',
+                    '&:disabled': {
+                        '& > h6.MuiTypography-subtitle1': {
+                            color: '#ccc'
+                        },
+                        '& svg': {
+                            '& path': {
+                                fill: '#ccc'
+                            },
+                            '& > defs > linearGradient > stop': {
+                                '&:first-child': {
+                                    stopColor: '#ccc'
+                                },
+                                '&:last-child': {
+                                    stopColor: '#ccc'
+                                }
+                            }
+                        }
+                    },
+                    '&.default': {
+                        borderRadius: 5,
+                        marginTop: 10,
+                        background: '#F2F2F2',
+                        boxShadow: '0px 1px 2px rgba(0, 0, 0, 0.15)',
+                        '& h6.MuiTypography-subtitle1': {
+                            color: '#4e4e4e'
+                        }
+                    },
+                    '&.refuse': {
+                        '& svg > path': {
+                            fill: '#F08F8F'
+                        }
+                    },
                     '& svg': {
-                        marginRight: 10,
+                        marginRight: 10
                     },
                     '&.expecting': {
-                        background: 'rgba(125, 188, 246, 0.8)',
+                        background: 'rgba(125, 188, 246, 0.8)'
                     },
                     '&.follow': {
                         background: 'rgba(242, 201, 76, 1)',
                         '& > svg > path': {
-                            fill: '#fff',
-                        },
+                            fill: '#fff'
+                        }
                     },
                     '&.accepted': {
-                        background: 'rgba(144, 190, 39, 0.8)',
+                        background: 'rgba(144, 190, 39, 0.8)'
                     },
-                    '&.accept': {
-                        background: '#675EAA',
-                    },
-                    '&.denied': {
-                        background: '#F08F8F',
+                    '&.refused': {
+                        background: '#F08F8F'
                     },
                     '&.complete': {
                         width: '46%',
                         marginLeft: '20px',
-                        background: '#BDBDBD',
+                        background: '#BDBDBD'
                     },
                     '& h6.MuiTypography-subtitle1': {
-                        color: '#fff',
-                    },
-                },
+                        color: '#fff'
+                    }
+                }
             },
         },
         '& div.right-content': {
@@ -350,10 +382,11 @@ export const useStyles = makeStyles((theme) => ({
                         background:
                             'linear-gradient(49.94deg, rgb(103, 94, 170) 19.03%, rgb(173, 102, 213) 72.72%)',
                         fontSize: '0.75rem',
-                        color: '#fff',
+
                         padding: '0',
                         '& > h6.MuiTypography-subtitle1': {
                             fontSize: '0.875rem',
+                            color: '#fff'
                         },
                     },
                 },
@@ -375,28 +408,32 @@ export const useStyles = makeStyles((theme) => ({
                         width: 40,
                         height: 40,
                     },
-                    '& > button.show-phone-btn': {
+                    '& button.write': {
                         height: '33px',
                         background: '#FFFFFF',
                         boxShadow: '0px 1px 2px rgba(0, 0, 0, 0.15)',
                         borderRadius: '5px',
                         border: 0,
-                    },
+                        width: '100%',
+                        '& > h6.MuiTypography-subtitle1': {
+                            color: '#4e4e4e'
+                        },
+                        '& > svg': {
+                            marginRight: 10,
+                            '& > path': {
+                                fill: '#4e4e4e'
+                            }
+                        }
+                    }
                 },
-                '& button': {
+                '& button.show-phone-btn': {
                     backgroundColor: '#675EAA',
                     borderRadius: 5,
                     border: 'none',
                     height: '38px',
                     width: '100%',
-                    '& > h6.MuiTypography-subtitle1': {
-                        color: '#fff',
-                    },
-                    '& > svg': {
-                        marginRight: 10,
-                        '& > path': {
-                            fill: '#fff',
-                        },
+                    '& > h6.MuiTypography-subtitle2': {
+                        color: '#fff'
                     },
                 },
                 '& div:last-child': {

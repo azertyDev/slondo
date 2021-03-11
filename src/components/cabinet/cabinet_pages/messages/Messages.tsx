@@ -5,7 +5,7 @@ import {
     Menu,
     MenuItem, InputBase
 } from '@material-ui/core'
-import {CabinetMenuWrapper} from '@src/components/cabinet/CabinetMenuWrapper'
+import {CabinetWrapper} from '@src/components/cabinet/CabinetWrapper'
 import {UserAvatarComponent} from '@src/components/elements/user_info_with_avatar/avatar/UserAvatarComponent'
 import MoreVertIcon from '@material-ui/icons/MoreVert'
 import SendIcon from '@material-ui/icons/Send'
@@ -31,9 +31,9 @@ export const Messages: FC<any> = () => {
         setAnchorEl(null)
     }
 
-    const classes = useStyles()
+    const classes: any = useStyles();
     return <div>
-        <CabinetMenuWrapper headerTitle={title} title={title}>
+        <CabinetWrapper headerTitle={title} title={title}>
             <Grid container className={classes.messengerWrapper}>
                 <Grid item xs={4} className={classes.sidebar}>
                     <div className='conversation-list'>
@@ -116,6 +116,6 @@ export const Messages: FC<any> = () => {
                     </div>
                 </Grid>
             </Grid>
-        </CabinetMenuWrapper>
+        </CabinetWrapper>
     </div>
 }

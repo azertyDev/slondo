@@ -3,7 +3,7 @@
     "myAuctions": "Mening savdolarim",
     "archive": "Arxiv",
     "rating": "Reyting",
-    "favourite": "Sevimli",
+    "favorite": "Sevimli",
     "reviews": "Sharhlar",
     "subscribers": "Obunachilar",
     "subscriptions": "Obunalar",
@@ -12,7 +12,8 @@
     "safeShopping": "Xavfsiz xarid",
     "paidServices": "Pullik xizmatlar",
     "statistics": "Statistika",
-    "myOrders": "Buyurtmalarim",
+    "myPurchases": "Buyurtmalarim",
     "settings": "Sozlamalar",
-    "exit": "Chiqish"
+    "exit": "Chiqish",
+    "nonModerated": "Moderatsiyadan o'tmagan"
 }

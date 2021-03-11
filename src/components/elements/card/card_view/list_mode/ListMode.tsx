@@ -93,7 +93,7 @@ export const ListMode: FC<ViewPropsTypes> = (props) => {
                                     </Typography>
                                 </BreadcrumbsComponent>
                                 <Typography variant="subtitle1" color="initial">
-                                    <span className="type-auction">
+                                    <span className={el.ads_type}>
                                         {t(el.ads_type)} №:
                                     </span>
                                     {el.id}
@@ -222,75 +222,73 @@ export const ListMode: FC<ViewPropsTypes> = (props) => {
                                     </div>
                                 </div>
                             </Paper>
-                            {/*{true && <div className="status-buttons">*/}
-                            {/*    {!!el.accepted ? (*/}
-                            {/*        <ButtonComponent className="accept">*/}
-                            {/*            <DoneAllIcon/>*/}
-                            {/*            <Typography variant="subtitle1">*/}
-                            {/*                Принять*/}
-                            {/*            </Typography>*/}
-                            {/*        </ButtonComponent>*/}
-                            {/*    ) : (*/}
-                            {/*        <ButtonComponent className="accepted">*/}
-                            {/*            <DoneAllIcon/>*/}
-                            {/*            <Typography variant="subtitle1">*/}
-                            {/*                Принято*/}
-                            {/*            </Typography>*/}
-                            {/*        </ButtonComponent>*/}
-                            {/*    )}*/}
-                            {/*    {!!el.expected && (*/}
-                            {/*        <ButtonComponent className="expecting">*/}
-                            {/*            <RestoreIcon/>*/}
-                            {/*            <Typography variant="subtitle1">*/}
-                            {/*                Ожидание*/}
-                            {/*            </Typography>*/}
-                            {/*        </ButtonComponent>*/}
-                            {/*    )}*/}
-                            {/*    {!!el.isModerated && (*/}
-                            {/*        <ButtonComponent className="expecting">*/}
-                            {/*            <RestoreIcon/>*/}
-                            {/*            <Typography variant="subtitle1">*/}
-                            {/*                На модерации*/}
-                            {/*            </Typography>*/}
-                            {/*        </ButtonComponent>*/}
-                            {/*    )}*/}
-                            {/*    {!!el.follow && (*/}
-                            {/*        <ButtonComponent className="follow">*/}
-                            {/*            <NotificationIcon/>*/}
-                            {/*            <Typography variant="subtitle1">*/}
-                            {/*                Следить*/}
-                            {/*            </Typography>*/}
-                            {/*        </ButtonComponent>*/}
-                            {/*    )}*/}
-                            {/*    {!!el.denied ? (*/}
-                            {/*        <Button className="denied">*/}
-                            {/*            <CloseIcon/>*/}
-                            {/*            <Typography variant="subtitle1">*/}
-                            {/*                Отказано*/}
-                            {/*            </Typography>*/}
-                            {/*        </Button>*/}
-                            {/*    ) : (*/}
-                            {/*        <Button className="denied">*/}
-                            {/*            <CloseIcon/>*/}
-                            {/*            <Typography variant="subtitle1">*/}
-                            {/*                Отказать*/}
-                            {/*            </Typography>*/}
-                            {/*        </Button>*/}
-                            {/*    )}*/}
-                            {/*    {!!el.accepted ||*/}
-                            {/*    el.expected ||*/}
-                            {/*    (el.denied && (*/}
-                            {/*        <ButtonComponent className="complete">*/}
-                            {/*            <Typography variant="subtitle1">*/}
-                            {/*                Завершить*/}
-                            {/*            </Typography>*/}
-                            {/*        </ButtonComponent>*/}
-                            {/*    ))}*/}
-                            {/*</div>}*/}
+                            {<div className="status-buttons">
+                                {el.accepted ?
+                                    <ButtonComponent className="accepted">
+                                        <Typography variant="subtitle1">
+                                            Принято
+                                        </Typography>
+                                    </ButtonComponent>
+                                    :
+                                    <ButtonComponent className="default mr10">
+                                        <DoneAllIcon />
+                                        <Typography variant="subtitle1">
+                                            Принять
+                                        </Typography>
+                                    </ButtonComponent>
+                                }
+                                {/*{!!el.expected && (*/}
+                                {/*    <ButtonComponent className="expecting">*/}
+                                {/*        <RestoreIcon />*/}
+                                {/*        <Typography variant="subtitle1">*/}
+                                {/*            Ожидание*/}
+                                {/*        </Typography>*/}
+                                {/*    </ButtonComponent>*/}
+                                {/*)}*/}
+                                {/*{!!el.isModerated && (*/}
+                                {/*    <ButtonComponent className="expecting">*/}
+                                {/*        <RestoreIcon />*/}
+                                {/*        <Typography variant="subtitle1">*/}
+                                {/*            На модерации*/}
+                                {/*        </Typography>*/}
+                                {/*    </ButtonComponent>*/}
+                                {/*)}*/}
+                                {/*{!!el.follow && (*/}
+                                {/*    <ButtonComponent className="follow">*/}
+                                {/*        <NotificationIcon />*/}
+                                {/*        <Typography variant="subtitle1">*/}
+                                {/*            Следить*/}
+                                {/*        </Typography>*/}
+                                {/*    </ButtonComponent>*/}
+                                {/*)}*/}
+                                {el.denied ?
+                                    <ButtonComponent className="refused">
+                                        <Typography variant="subtitle1">
+                                            Отказано
+                                        </Typography>
+                                    </ButtonComponent>
+                                    :
+                                    <ButtonComponent className="default refuse" disabled>
+                                        <CloseIcon />
+                                        <Typography variant="subtitle1">
+                                            Отказать
+                                        </Typography>
+                                    </ButtonComponent>
+                                }
+                                {/*{!!el.accepted ||*/}
+                                {/*el.expected ||*/}
+                                {/*(el.denied && (*/}
+                                {/*    <ButtonComponent className="complete">*/}
+                                {/*        <Typography variant="subtitle1">*/}
+                                {/*            Завершить*/}
+                                {/*        </Typography>*/}
+                                {/*    </ButtonComponent>*/}
+                                {/*))}*/}
+                            </div>}
                         </Grid>
                         <Hidden xsUp={false}>
                             <Grid item xs={3} className="right-content">
-                                {pathname === '/cabinet/myAncmnts' && (
+                                {pathname === '/cabinet/posts' && (
                                     <div className="card-buttons">
                                         <Button
                                             color="primary"
@@ -324,11 +322,11 @@ export const ListMode: FC<ViewPropsTypes> = (props) => {
                                             <Typography variant="subtitle1">
                                                 Поднять в ленте
                                             </Typography>
-                                            <DoubleUpIcon/>
+                                            <DoubleUpIcon />
                                         </Button>
                                     </div>
                                 )}
-                                {pathname === '/cabinet/myAuctions' ? (
+                                {pathname === '/cabinet/auctions' ? (
                                     <div className="profile-form">
                                         <div className="extreme-rate">
                                             <Typography
@@ -353,31 +351,31 @@ export const ListMode: FC<ViewPropsTypes> = (props) => {
                                             </ButtonComponent>
                                         </div>
                                         <div className="profile-data">
-                                            <UserAvatarComponent/>
+                                            <UserAvatarComponent />
                                             <Typography
                                                 variant="subtitle1"
                                                 color="initial"
                                             >
                                                 Имя Фамилия
                                             </Typography>
-                                            <Rating card/>
+                                            <Rating card />
+                                            <ButtonComponent className='write'>
+                                                <LetterIcon />
+                                                <Typography
+                                                    variant="subtitle1"
+                                                    color="initial"
+                                                >
+                                                    Написать
+                                                </Typography>
+                                            </ButtonComponent>
+                                        </div>
+                                        <div>
                                             <ButtonComponent className="show-phone-btn">
                                                 <Typography
                                                     variant="subtitle2"
                                                     color="initial"
                                                 >
                                                     Показать номер
-                                                </Typography>
-                                            </ButtonComponent>
-                                        </div>
-                                        <div>
-                                            <ButtonComponent>
-                                                <LetterIcon/>
-                                                <Typography
-                                                    variant="subtitle1"
-                                                    color="initial"
-                                                >
-                                                    Написать
                                                 </Typography>
                                             </ButtonComponent>
                                             {/* <Typography

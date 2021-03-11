@@ -28,7 +28,25 @@ export const useStyles = makeStyles((theme) => ({
                     ? theme.palette.primary.white
                     : props.color === 'secondary'
                     ? theme.palette.primary.secondary
-                    : theme.palette.primary.black,
+                    : theme.palette.primary.black
         },
+        '&:disabled': {
+            '& > h6.MuiTypography-subtitle1': {
+                color: '#ccc'
+            },
+            '& svg': {
+                '& path': {
+                    fill: '#ccc'
+                },
+                '& > defs > linearGradient > stop': {
+                    '&:first-child': {
+                        stopColor: '#ccc'
+                    },
+                    '&:last-child': {
+                        stopColor: '#ccc'
+                    }
+                }
+            }
+        }
     },
 }));

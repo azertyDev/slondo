@@ -8,15 +8,17 @@ import {withAuthRedirect} from '@src/hoc/withAuthRedirect';
 const MyPostsContainer: FC = () => {
     const tabsData = [
         {
+            id: 0,
             title: 'Объявления',
             count: CabinetMockData.length,
-            component: <MyPosts list={CabinetMockData}/>,
+            component: <MyPosts list={CabinetMockData} />
         },
         {
+            id: 1,
             title: 'Безопасная покупка',
             count: CabinetMockData.length,
-            component: <MyPosts list={CabinetMockData}/>,
-        },
+            component: <MyPosts list={CabinetMockData} />
+        }
     ];
 
     const title = 'Мои объявления';

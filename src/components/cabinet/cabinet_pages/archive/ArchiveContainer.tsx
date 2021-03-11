@@ -6,6 +6,7 @@ import {withAuthRedirect} from "@src/hoc/withAuthRedirect";
 
 
 export type TabsDataType = {
+    id: number;
     title: string;
     count: number;
     component: ReactElement;
@@ -14,15 +15,17 @@ export type TabsDataType = {
 const ArchiveContainer: FC = () => {
     const tabsData: TabsDataType[] = [
         {
+            id: 0,
             title: 'Объявления',
             count: CabinetMockData.length,
             component: <Archive list={CabinetMockData} isFetch />
         },
         {
+            id: 1,
             title: 'Аукционы',
             count: CabinetMockData.length,
             component: <Archive list={CabinetMockData} isFetch />
-        },
+        }
     ];
 
     const title = 'Архив';
