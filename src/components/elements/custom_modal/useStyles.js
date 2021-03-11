@@ -31,7 +31,7 @@ export const useStyles = makeStyles((theme) => ({
                 '& .MuiTypography-subtitle1': {
                     color: '#fff'
                 },
-                '&:first-child': {
+                '&:first-child, .submit': {
                     background: theme.palette.primary.createAdBtnColor,
                     marginBottom: 10
                 },
