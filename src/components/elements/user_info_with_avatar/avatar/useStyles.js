@@ -7,6 +7,7 @@ export const StyledBadge = withStyles((theme) => ({
         color: '#27AE60',
         boxShadow: `0 0 0 2px ${theme.palette.background.paper}`,
         '&::after': {
+            display: 'default',
             position: 'absolute',
             top: 0,
             left: 0,

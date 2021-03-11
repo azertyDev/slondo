@@ -17,7 +17,7 @@ export const useStyles = makeStyles((theme) => ({
                     background: '#fff',
                     boxShadow: '0px 1px 2px rgba(0, 0, 0, 0.25)',
                     '& > svg': {
-                        marginRight: '10px',
+                        marginRight: '10px'
                     },
                     '&.selected': {
                         border: '1px solid #AD66D5',

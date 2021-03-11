@@ -1,8 +1,8 @@
 import React, {useEffect} from 'react';
+import {CardView} from "@src/components/elements/card/card_view/CardView";
 
 // styles
 import {useStyles} from './useStyles';
-import {CardView} from "@src/components/elements/card/card_view/CardView";
 
 export const Favorite = ({data, handleType, type}) => {
 

@@ -40,13 +40,15 @@ export const SidebarMenu: FC<WithT> = ({t}) => {
         <div className={classes.root}>
             <div className="menu-item">
                 <div>
-                    <ButtonComponent
-                        className={pathname === '/cabinet/not-moderated' ? 'selected' : ''}
-                    >
-                        <Typography variant="subtitle1" className="error-text">
-                            Не прошло модерацию (2)
-                        </Typography>
-                    </ButtonComponent>
+                    <CustomBadge badgeContent={2} style={{ width: '100%' }}>
+                        <ButtonComponent
+                            className={pathname === '/cabinet/not-moderated' ? 'selected' : ''}
+                        >
+                            <Typography variant="subtitle1">
+                                {t('cabinet:nonModerated')}
+                            </Typography>
+                        </ButtonComponent>
+                    </CustomBadge>
                 </div>
             </div>
             <div className="menu-item">
@@ -79,18 +81,19 @@ export const SidebarMenu: FC<WithT> = ({t}) => {
                     >
                         <FavoriteBorderIcon/>
                         <Typography variant="subtitle1">
-                            {t('cabinet:favourite')}
+                            {t('cabinet:favorite')}
                         </Typography>
                     </ButtonComponent>
                 </div>
                 <div>
                     <CustomBadge badgeContent={4}>
                         <ButtonComponent
-                            className={pathname === '/cabinet/orders' ? 'selected' : ''}
+                            className={pathname === '/cabinet/purchases' ? 'selected' : ''}
+                            onClick={onButtonClick('purchases')}
                         >
-                            <ShoppingIcon/>
+                            <ShoppingIcon />
                             <Typography variant="subtitle1">
-                                {t('cabinet:myOrders')}
+                                {t('cabinet:myPurchases')}
                             </Typography>
                         </ButtonComponent>
                     </CustomBadge>
@@ -158,6 +161,7 @@ export const SidebarMenu: FC<WithT> = ({t}) => {
                 <div>
                     <ButtonComponent
                         className={pathname === '/cabinet/statistics' ? 'selected' : ''}
+                        disabled
                     >
                         <TimeLineIcon/>
                         <Typography variant="subtitle1">
