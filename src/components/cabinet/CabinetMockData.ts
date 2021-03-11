@@ -42,6 +42,8 @@ export const CabinetMockData: InnerCardData[] = [
         promote: true,
         raise: true,
         raiseInRape: true,
+        isFavorite: true,
+        completePurchase: true
     },
     {
         id: 2,

@@ -8,19 +8,21 @@ import {userAPI} from "@src/api/api";
 const FavoriteContainer: FC = () => {
     const [data, setData] = useState<any>([])
     const [type, setType] = useState('post')
-
+    console.log(data)
     const count = data?.data?.length
     const list = data?.data
     const tabsData = [
         {
+            id: 0,
             title: 'Объявления',
             count: count,
-            component: <Favorite data={list} handleType={setType} type='post'/>
+            component: <Favorite data={list} handleType={setType} type='post' />
         },
         {
+            id: 1,
             title: 'Аукционы',
             count: count,
-            component: <Favorite data={list} handleType={setType} type='auc'/>
+            component: <Favorite data={list} handleType={setType} type='auc' />
         }
     ]
 

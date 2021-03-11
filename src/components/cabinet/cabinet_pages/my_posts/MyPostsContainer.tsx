@@ -11,15 +11,18 @@ const MyPostsContainer: FC = () => {
 
     const tabsData = [
         {
+            id: 0,
             title: 'Объявления',
             count: list?.data?.length,
             component: <MyPosts list={CabinetMockData}/>,
         },
         {
+            id: 1,
             title: 'Безопасная покупка',
             count: list?.data?.length,
-            component: <MyPosts list={CabinetMockData} />,
+            component: <MyPosts list={CabinetMockData}/>,
         },
+
     ];
 
     console.warn("list123123", list)

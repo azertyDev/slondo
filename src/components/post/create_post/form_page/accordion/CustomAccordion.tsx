@@ -9,50 +9,45 @@ type AccordionComponentPropsType = {
     isFetch?: boolean,
     open: boolean,
     isPreview: boolean,
-    icon?: any,
+    icon: any,
     title: string,
     nextButtonTxt: string,
-    handleOpen: (k, e) => void
-    formKey: string
+    handleEdit: () => void,
+    isEditable: boolean,
 };
 
 export const CustomAccordion: FC<AccordionComponentPropsType> = (props) => {
     const {
+        open,
         icon,
+        isFetch,
+        isPreview,
         title,
         nextButtonTxt,
-        isFetch,
-        open,
-        isPreview,
-        children,
-        handleOpen,
-        formKey,
+        handleEdit,
+        isEditable
     } = props;
 
     const {t} = useTranslation(['common']);
 
-    const onClick = () => {
-        handleOpen(formKey, true);
-    };
-
     const classes = useStyles();
     return (
         <div className={classes.root}>
-            <Accordion expanded={open}>
+            <Accordion expanded={open || isPreview}>
                 <AccordionSummary>
                     {icon}
                     <Typography variant='h5'>
                         {title}
                     </Typography>
-                    {!open && (
+                    {!open && !isPreview && isEditable && (
                         <div className='header-preview'>
-                            <span onClick={onClick}>{t('edit')}</span>
+                            <span onClick={handleEdit}>{t('edit')}</span>
                         </div>
                     )}
                 </AccordionSummary>
                 <AccordionDetails>
                     <div className='acc-content'>
-                        {children}
+                        {props.children}
                     </div>
                     {!isPreview && (
                         <div className='next-button-wrapper'>

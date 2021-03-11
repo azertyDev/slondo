@@ -18,7 +18,27 @@ export const useStyles = makeStyles((theme) => ({
         borderRadius: 10,
         '& h6.title': {
             fontWeight: 600,
-            marginBottom: 10
+            marginBottom: 10,
+            textAlign: 'center'
+        },
+        '& .confirm': {
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+            width: '100%',
+            '& button': {
+                width: '50%',
+                '& .MuiTypography-subtitle1': {
+                    color: '#fff'
+                },
+                '&:first-child': {
+                    background: theme.palette.primary.createAdBtnColor,
+                    marginBottom: 10
+                },
+                '&:last-child': {
+                    background: theme.palette.primary.red
+                }
+            }
         }
     },
     closeBtn: {
@@ -37,6 +57,18 @@ export const useStyles = makeStyles((theme) => ({
             '& path': {
                 fill: '#fff'
             }
+        }
+    },
+    settingsList: {
+        marginTop: 50,
+        width: '100%',
+        '& .MuiListItem-button': {
+            height: 48,
+            background: '#F2F2F2',
+            boxShadow: '0px 1px 2px rgba(0, 0, 0, 0.15)',
+            marginBottom: 5,
+            borderRadius: '3px',
+            textAlign: 'center'
         }
     }
 }))

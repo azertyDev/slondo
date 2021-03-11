@@ -59,7 +59,7 @@ export const useStyles = makeStyles((theme) => ({
             boxShadow: '0px 1px 1px rgba(0, 0, 0, 0.15)',
             width: '100%',
         },
-        '& a.create-ancmnt-link': {
+        '& a.create-post-link': {
             textDecoration: 'none',
             '& button': {
                 width: '100%',

@@ -2,6 +2,9 @@ import {makeStyles} from '@material-ui/core/styles'
 
 export const useStyles = makeStyles(() => ({
     root: {
+        '& span.MuiCheckbox-root': {
+            marginLeft: '-9px'
+        },
         '& div.auction-params': {
             display: 'flex',
             alignItems: 'center'
@@ -15,8 +18,27 @@ export const useStyles = makeStyles(() => ({
                 alignItems: 'center'
             }
         },
+        '& div.price-wrapper': {
+            '& div.price-inputs ': {
+                display: 'flex',
+                alignItems: 'center',
+                width: '425px',
+                '& > div:first-child': {
+                    marginRight: '15px'
+                },
+                '& div.currency': {
+                    width: '220px'
+                }
+            }
+        },
         '& div.location-wrapper': {
-            width: '50%'
+            width: '50%',
+            marginBottom: '20px'
+        },
+        '& div.description-wrapper': {
+            '& p': {
+                wordBreak: 'break-all'
+            }
         }
     }
 }))

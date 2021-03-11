@@ -7,12 +7,12 @@ export const postTypes: PostType[] = [
         subtitle: 'postFree',
         currency: [
             {
-                id: 1,
-                name: 'уе'
-            },
-            {
                 id: 2,
                 name: 'sum'
+            },
+            {
+                id: 1,
+                name: 'уе'
             }
         ],
         expired: [

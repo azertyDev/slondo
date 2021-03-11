@@ -2,6 +2,7 @@ import {createAsyncThunk, createSlice} from '@reduxjs/toolkit';
 import {userAPI} from "@src/api/api";
 import {cookies} from "@src/helpers";
 import {AuthInputs, AuthReg, RecoveryInputs} from "@root/interfaces/Auth";
+import {COOKIE_LIFE_TIME} from "@src/constants";
 
 
 const initialState: AuthReg = {
@@ -51,7 +52,7 @@ export const fetchTokenRecovery = createAsyncThunk<never, RecoveryInputs>(
     async ({phone, code, password, password_confirmation}, {rejectWithValue}) => {
         try {
             const {token} = await userAPI.recovery(phone, code, password, password_confirmation);
-            !!token && cookies.set('token', token, {path: '/', maxAge: 2 * 3600});
+            !!token && cookies.set('token', token, {path: '/', maxAge: COOKIE_LIFE_TIME});
         } catch (e) {
             return rejectWithValue(e.message);
         }
