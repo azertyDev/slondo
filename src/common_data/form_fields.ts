@@ -18,7 +18,8 @@ export const requireFields = [
     'currency',
     'estate_type',
     'floor',
-    'number_of_floors'
+    'number_of_floors',
+    'rooms'
 ];
 
 export const requiredMsg = 'requireField';
