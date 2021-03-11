@@ -8,10 +8,8 @@ import {useRouter} from "next/router";
 const BuyAuctionComponent = (props) => {
     const router = useRouter()
 
-    console.warn("router", router)
     const {auction_id, ads_id} = props
     const [openModal, setOpenModal] = React.useState(false)
-    console.warn("id", auction_id, ads_id)
     const handleModalOpen = () => {
         setOpenModal(true)
     }

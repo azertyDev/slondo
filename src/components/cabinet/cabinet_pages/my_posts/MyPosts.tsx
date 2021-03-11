@@ -1,4 +1,4 @@
-import React, {FC} from 'react';
+import React, {FC, useEffect} from 'react';
 import {
     CardView,
     ViewPropsTypes,
@@ -8,6 +8,7 @@ import {useStyles} from './useStyles';
 
 export const MyPosts: FC<ViewPropsTypes> = (props) => {
     const {isFetch, list} = props;
+
     const classes = useStyles();
 
     return (

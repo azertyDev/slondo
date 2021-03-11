@@ -15,8 +15,9 @@ export const fetchTokenLogin = createAsyncThunk<never, AuthInputs>(
     'authReg/fetchTokenByLogin',
     async ({phone, password}, {rejectWithValue}) => {
         try {
-            const {token} = await userAPI.login(phone, password);
+            const {token, user} = await userAPI.login(phone, password);
             !!token && cookies.set('token', token, {path: '/', maxAge: 2 * 3600});
+            !!user && cookies.set('user', user, {path: '/', maxAge: 2 * 3600});
         } catch (e) {
             return rejectWithValue(e.message);
         }

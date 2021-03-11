@@ -25,7 +25,6 @@ const ConfirmAuth: FC<WithT> = ({t}) => {
     const [seconds, setSeconds] = useState<any>(60);
     const [smsConfirm, setSmsConfirm] = useState(false)
     const [codeChecker, setCodeChecker] = useState(false)
-    console.warn("seconds", seconds)
     useEffect(() => {
         if (seconds > 0) {
             setTimeout(() => setSeconds(seconds - 1), 1000);

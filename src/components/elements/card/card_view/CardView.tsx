@@ -11,6 +11,7 @@ export type ViewPropsTypes = {
 
 export const CardView: FC<ViewPropsTypes & { listMode?: boolean, favorite?: boolean }> = (props) => {
     const {listMode = false, list, isFetch} = props;
+
     return listMode
         ? <ListMode list={list} isFetch={isFetch} />
         : <GridMode list={list} isFetch={isFetch} />

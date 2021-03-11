@@ -4,6 +4,7 @@ import {CategoryType} from "@root/interfaces/Categories";
 import {FavoriteType} from "@root/interfaces/Favorites";
 import {InnerCardData} from "@root/interfaces/CardData";
 import {AuctionsDataTypes} from "@root/interfaces/Auctions";
+import {UserInfo} from "@root/interfaces/Auth";
 import {cookies} from "@src/helpers";
 
 
@@ -27,7 +28,7 @@ export const setTokenToHeader = (): { headers: any } => {
 };
 
 export const userAPI = {
-    login: (phone: string, password: string): Promise<{ token: string }> => {
+    login: (phone: string, password: string): Promise<{ token: string, user: UserInfo }> => {
         const form = new FormData();
         form.set('phone', phone);
         form.set('password', password);
@@ -90,13 +91,40 @@ export const userAPI = {
             });
     },
     getFavorites: (lang: string, lot: string): Promise<FavoriteType[]> => {
-        return instance.get(`regular/post/get/favorites?type=${lot}&lang=${lang}`)
+        return instance.get(`regular/post/get/favorites?type=${lot}&lang=${lang}`, setTokenToHeader())
             .then(res => res.data)
             .catch(err => {
                 throw err
             });
     },
-
+    getPosts: (lang: string, lot: string): Promise<FavoriteType[]> => {
+        return instance.get(`regular/user/posts?type=${lot}&lang=${lang}`, setTokenToHeader())
+            .then(res => res.data)
+            .catch(err => {
+                throw err
+            });
+    },
+    getSubscribers: (): Promise<FavoriteType[]> => {
+        return instance.get(`regular/post/user/subscribers/all`, setTokenToHeader())
+            .then(res => res.data)
+            .catch(err => {
+                throw err
+            });
+    },
+    getSubscriptions: (): Promise<FavoriteType[]> => {
+        return instance.get(`regular/post/user/subscriptions/all`, setTokenToHeader())
+            .then(res => res.data)
+            .catch(err => {
+                throw err
+            });
+    },
+    getNumberOfSubs: (): Promise<FavoriteType[]> => {
+        return instance.get(`regular/user/numberOfSubscribe`, setTokenToHeader())
+            .then(res => res.data)
+            .catch(err => {
+                throw err
+            });
+    },
     getCategories: (lang: string): Promise<CategoryType[]> => {
         return instance.get(`categories/all?lang=${lang}`)
             .then(res => res.data)
@@ -129,7 +157,7 @@ export const userAPI = {
             });
     },
     getPostById: (post_id: string | string[], lang: string, type: string, sub_category_id: string): Promise<any> => {
-        return instance.get(`getPostById?id=${post_id}&lang=${lang}&type=${type}&sub_category_id=${sub_category_id}`)
+        return instance.get(`getPostById?id=${post_id}&lang=${lang}&type=${type}&sub_category_id=${sub_category_id}`, setTokenToHeader())
             .then((res) => res.data)
             .catch((err) => {
                 throw err;

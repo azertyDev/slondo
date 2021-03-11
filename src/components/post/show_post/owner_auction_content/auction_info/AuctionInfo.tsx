@@ -9,16 +9,17 @@ import BuyAuctionComponent from './BuyAuction';
 import {userAPI} from '@src/api/api'
 import AuctionForm from './AuctionForm'
 import {useDispatch, useSelector} from "react-redux";
-import {setErrorMsgAction } from '@src/redux/slices/errorSlice'
+import {setErrorMsgAction} from '@src/redux/slices/errorSlice'
 import {toCamelCase} from "@root/src/helpers";
 import {useTranslation} from "@root/i18n";
+import {userInfo} from "@root/src/helpers";
 
 export const AuctionInfo: FC<any> = (props) => {
-    const { t } = useTranslation()
+    const {t} = useTranslation()
     const dispatch = useDispatch()
     const isAuth = useSelector<any>(state => state.auth.isAuth)
     const classes = useStyles()
-    const { data } = props
+    const {data} = props
     const [showAll, setShowAll] = useState(false)
     const [page, setPage] = useState(1)
     const date = new Date(data.expiration_at).getTime()
@@ -26,6 +27,8 @@ export const AuctionInfo: FC<any> = (props) => {
     const [lastPage, setLastPage] = useState(null)
     const auction_id = data?.auction?.id
     const ads_id = data?.id
+    const user_info = userInfo()
+    const user_id = user_info?.id
 
     useEffect(() => {
         userAPI.getAuctionBets(data.auction.id, page).then(result => {
@@ -153,7 +156,8 @@ export const AuctionInfo: FC<any> = (props) => {
                 {isAuth &&
                 <>
                     <div className="bet-info">
-                        <AuctionForm data={data} handleFormSubmit={handleSubmit} list={list}/>
+                        {data?.user_id !== user_id &&
+                        <AuctionForm data={data} handleFormSubmit={handleSubmit} list={list}/>}
                         <div>
                             <Typography variant="subtitle2" color="initial">
                                 Максимально возможная ставка:
@@ -163,16 +167,16 @@ export const AuctionInfo: FC<any> = (props) => {
                             </Typography>
                         </div>
                     </div>
-                {data.ads_type.id === 3 && (
-                    <BuyAuctionComponent auction_id={auction_id} ads_id={ads_id} />
-                )}
-                <div className='suggest_price'>
-                    <ButtonComponent>
-                        <Typography variant="subtitle1" color="initial">
-                            Предложить цену
-                        </Typography>
-                    </ButtonComponent>
-                </div>
+                    {data.ads_type.id === 3 && (
+                        <BuyAuctionComponent auction_id={auction_id} ads_id={ads_id}/>
+                    )}
+                    <div className='suggest_price'>
+                        <ButtonComponent>
+                            <Typography variant="subtitle1" color="initial">
+                                Предложить цену
+                            </Typography>
+                        </ButtonComponent>
+                    </div>
                 </>
                 }
             </div>

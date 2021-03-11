@@ -91,7 +91,7 @@ export const PostContent: FC<WithT & any> = (props) => {
 
     const parameterItems = Object.keys(parameters).reduce((items, key, i) => {
         if (parameters[key] !== null && excludedFields.every((k) => k !== key)) {
-            if (Array.isArray(parameters[key]) && parameters[key].length !== 0) {
+            if (Array.isArray(parameters[key]) && parameters[key]?.length !== 0) {
                 const params = (
                     <li>
                         <Typography variant="subtitle1" className="value">
@@ -144,7 +144,7 @@ export const PostContent: FC<WithT & any> = (props) => {
         <div className={classes.root}>
             <div className="breadcrumbs">
                 <BreadcrumbsComponent>
-                    {data.category.sub_category.length
+                    {data?.category?.sub_category?.length
                     && <Link href={`/categories/${data.category.mark}`}>
                         <a>
                             <Typography variant="subtitle1" noWrap>
@@ -249,7 +249,7 @@ export const PostContent: FC<WithT & any> = (props) => {
                         <span className="available">
                         <PhoneIcon/>
                             {
-                                !!data.available_days.length
+                                !!data?.available_days?.length
                                 && <>
                                     <Typography variant="subtitle1" color="primary">
                                         {weekDaysHelper(data.available_days, t)}
@@ -314,7 +314,7 @@ export const PostContent: FC<WithT & any> = (props) => {
                     </span>
                 </div>
             }
-            {!!parameterItems.length
+            {!!parameterItems?.length
             && <div className="post-parameters">
                 <Typography variant="button" color="initial">
                     Параметры

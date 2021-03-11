@@ -13,6 +13,10 @@ import {WithT} from "i18next";
 import {useStyles} from './useStyles';
 import {authRegSchema} from "@root/validation_schemas/authRegSchema";
 import ConfirmAuth from "@src/components/elements/auth_reg_form/ConfirmAuth";
+import {setErrorMsgAction} from "@src/redux/slices/errorSlice";
+import {toCamelCase, cookies} from "@src/helpers";
+import {userAPI} from "@src/api/api";
+import {setIsAuthAction} from "@src/redux/slices/authRegSlice";
 
 
 const initialInputsVals: AuthInputs = {
@@ -40,11 +44,18 @@ export const AuthRegForm: FC<WithT & { handleCloseModal: () => void }> = (props)
     const loginReg = (values) => {
         const phone = values.phone.replace("+", "");
         const data = {...values, phone};
-
         if (tabValue === 0) {
-            dispatch(fetchTokenLogin(data));
+            userAPI.login(data.phone, data.password)
+                .then(result => {
+                    cookies.set('token', result.token, {path: '/', maxAge: 2 * 3600});
+                    cookies.set('user', result.user, {path: '/', maxAge: 2 * 3600});
+                    dispatch(setIsAuthAction({payload: true}));
+                })
+                .catch(error => dispatch(setErrorMsgAction(t(`auth_reg:${toCamelCase(error.response.data.error)}`))))
         } else {
-            dispatch(fetchTokenRegister(data));
+            userAPI.register(phone)
+                .then(result => console.warn("result", result))
+                .catch(error => dispatch(setErrorMsgAction(t(`auth_reg:${toCamelCase(error.response.data.error)}`))))
         }
     };
 

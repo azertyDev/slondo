@@ -13,6 +13,10 @@ export const authChecker = (): boolean => {
     return typeof cookies.get('token') !== 'undefined';
 };
 
+export const userInfo = () => {
+    return cookies.get('user') || {}
+}
+
 export const toCamelCase = (text: string) => {
     const result = [];
     const toLower = text.toLocaleLowerCase().split('');
