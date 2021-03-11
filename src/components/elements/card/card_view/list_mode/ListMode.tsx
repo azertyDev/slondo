@@ -46,6 +46,8 @@ export const ListMode: FC<ViewPropsTypes> = ({ list }) => {
     const [openModal, setOpenModal] = useState(false)
     const [modalState, setModalState] = useState('')
 
+    console.warn("list123123", list)
+
     const handleModalOpen = (value) => {
         setOpenModal(true)
         setModalState(value)
@@ -58,7 +60,7 @@ export const ListMode: FC<ViewPropsTypes> = ({ list }) => {
 
     return (
         <div className={classes.root}>
-            {list?.map((el) => {
+            {list?.data?.map((el) => {
                 return (
                     <Grid container key={el.id}>
                         <Grid item xs={9} className="left-content">
@@ -119,12 +121,6 @@ export const ListMode: FC<ViewPropsTypes> = ({ list }) => {
                                             </div>
                                             <div className='card-btn'>
                                                 <div className='favorite'>
-                                                    <Typography
-                                                        variant="subtitle1"
-                                                        color="initial"
-                                                    >
-                                                        140
-                                                    </Typography>
                                                     <Link href="#">
                                                         <a className="favorite-icon">
                                                             <FavoriteBorderIcon />

@@ -14,18 +14,16 @@ const MyPostsContainer: FC = () => {
             id: 0,
             title: 'Объявления',
             count: list?.data?.length,
-            component: <MyPosts list={CabinetMockData}/>,
+            component: <MyPosts list={list}/>,
         },
         {
             id: 1,
             title: 'Безопасная покупка',
             count: list?.data?.length,
-            component: <MyPosts list={CabinetMockData}/>,
+            component: <MyPosts list={list}/>,
         },
 
     ];
-
-    console.warn("list123123", list)
 
     const title = 'Мои объявления';
 
