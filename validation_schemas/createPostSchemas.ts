@@ -1,9 +1,7 @@
 import {object, string, array, lazy} from "yup";
-import {requiredMsg, requireFields} from "@src/common_data/form_fields";
+import {requiredMsg} from "@src/common_data/form_fields";
+import {isRequired} from "@root/src/helpers";
 
-
-export const isRequired = (field: string): boolean =>
-    requireFields.some(reqField => reqField === field);
 
 export const paramsFormSchema = lazy(
     (value) => object({
@@ -26,6 +24,28 @@ export const paramsFormSchema = lazy(
                 return acc;
             }, {})
     })
+);
+
+export const regularFormSchema = lazy(
+    value => object(
+        Object.entries(value)
+            .reduce((acc, [key]) => {
+                if (isRequired(key)) {
+                    if (typeof value[key] === 'string') {
+                        acc[key] = string().required(requiredMsg);
+                    } else {
+                        acc[key] = object<{ id: number }>()
+                            .nullable()
+                            .test(
+                                `${key}`,
+                                requiredMsg,
+                                value => !!value
+                            );
+                    }
+                }
+                return acc;
+            }, {})
+    )
 );
 
 export const appearanceSchema = object({

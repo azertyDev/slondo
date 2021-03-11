@@ -8,7 +8,7 @@ import {PaymentDelivery} from "./payment_delivery/PaymentDelivery";
 import {Description} from "./description/Description";
 import {Contacts} from "./contacts/Contacts";
 import {AvailableDays} from "./available_days/AvailableDays";
-import {numberRegEx, timeRegEx} from "@src/common_data/reg_ex";
+import {numberRegEx, timeRegEx} from "@src/common_data/reg_exs";
 import {FormikProvider, useFormik} from "formik";
 import {CustomAccordion} from "@src/components/post/create_post/form_page/accordion/CustomAccordion";
 import {numericFields} from "@src/common_data/form_fields";
@@ -47,7 +47,7 @@ export const DefaultParamsForm: FC<DefaultParamsPropsType> = (props) => {
         handleFormOpen
     } = props;
 
-    const formIndex = 3;
+    const formIndex = 1;
     const isAdvanceAuction = postType.name === 'exauc';
     const isAuction = postType.name === 'auc' || isAdvanceAuction;
 
@@ -255,7 +255,7 @@ export const DefaultParamsForm: FC<DefaultParamsPropsType> = (props) => {
             setValues({...values});
         }
     };
-    console.log('defParams', values)
+
     const classes = useStyles();
     return (
         <FormikProvider value={formik}>
@@ -264,7 +264,7 @@ export const DefaultParamsForm: FC<DefaultParamsPropsType> = (props) => {
                     icon={<StateIcon/>}
                     isPreview={isPreview}
                     open={currentFormIndex === formIndex}
-                    isEditable={currentFormIndex > formIndex}
+                    isEditable={currentFormIndex < formIndex}
                     handleEdit={handleFormOpen(formIndex)}
                     title={t('priceDescContacts')}
                     nextButtonTxt={t('next')}

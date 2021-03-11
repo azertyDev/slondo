@@ -1,12 +1,17 @@
 import Cookies from "universal-cookie";
 import {CategoryType, SubCtgrsType} from "@root/interfaces/Categories";
 import CyrillicToTranslit from 'cyrillic-to-translit-js';
-import {punctuationMarksRegEx} from "@src/common_data/reg_ex";
+import {punctuationMarksRegEx} from "@src/common_data/reg_exs";
 import {TFunction} from "next-i18next";
 import {categories_list} from "@src/common_data/categories_list";
+import {requireFields} from "@src/common_data/form_fields";
 
 
 export const cookies = new Cookies();
+
+export const isRequired = (field: string): boolean =>
+    requireFields.some(reqField => reqField === field);
+
 
 export const authChecker = (): boolean => {
     return typeof cookies.get('token') !== 'undefined';
@@ -92,12 +97,24 @@ export const addParentsToCtgrs = (categoriesList: CategoryType[]): CategoryType[
     }
 };
 
+export const prepareDataForCreate = data => (
+    Object.keys(data).reduce<any>((acc, key) => {
+        if (data[key]) {
+            if (typeof data[key] === 'object' && Object.keys(data[key]).length) {
+                acc[`${key}_id`] = data[key].id;
+            } else {
+                acc[key] = data[key];
+            }
+        }
+        return acc;
+    }, {})
+);
+
 export const dataForCrtPostNormalize = (data: any, type?) => {
     if (!!data) {
         data = Object.keys(data).reduce((acc: any, key) => {
             if (Array.isArray(data[key]) && !!data[key].length) {
                 const isExcludeTypeKey = type && key === 'type';
-
                 if (!isExcludeTypeKey) {
                     acc[key] = data[key];
                 } else if (key === 'type') {

@@ -6,7 +6,6 @@ import {i18n, Router, useTranslation} from "@root/i18n";
 import {useDispatch} from "react-redux";
 import {postTypes} from '@src/common_data/post_types';
 import {MainLayout} from '@src/components/MainLayout';
-import {ParamsForm} from './params_form/ParamsForm';
 import {AppearanceForm} from './appearance_form/AppearanceForm';
 import {DefaultParamsForm} from './default_params_form/DefaultParamsForm';
 import {setErrorMsgAction} from '@root/src/redux/slices/errorSlice';
@@ -17,6 +16,10 @@ import {ButtonComponent} from "@src/components/elements/button/Button";
 import {SuccessPage} from "@src/components/post/create_post/form_page/success_page/SuccessPage";
 import {withAuthRedirect} from "@src/hoc/withAuthRedirect";
 import {useStyles} from './useStyles';
+import {CustomFormikField} from "@src/components/elements/custom_formik_field/CustomFormikField";
+import {CarForm} from "@src/components/post/create_post/form_page/params_form/car_form/CarForm";
+import {EstateForm} from "@src/components/post/create_post/form_page/params_form/estate_form/EstateForm";
+import {RegularForm} from "@src/components/post/create_post/form_page/params_form/regular_form/RegularForm";
 
 
 export type DataForCrtPostType = {
@@ -69,12 +72,13 @@ const FormsPage: FC = () => {
         data: {}
     };
 
-    const [currentFormIndex, setCurrentFormIndex] = useState(1);
+    const [currentFormIndex, setCurrentFormIndex] = useState(mark === 'car' || mark === 'estate' ? 4 : 3);
 
     const [post, setPost] = useState(initPost);
 
     const [filters, setFilters] = useState(initFilters);
     const {color, ...otherFilters} = filters.data;
+
 
     const handleFormOpen = (index: number) => () => {
         setCurrentFormIndex(index);
@@ -127,7 +131,101 @@ const FormsPage: FC = () => {
             setFetchedFilters();
         }
     }, []);
-    console.log('filters', filters)
+
+    // console.log('filters', filters)
+
+    const titleComponent = (values, errors, touched, handleInput) => (
+        <div className='title-wrapper'>
+            {isPreview
+                ? <Typography variant="subtitle1">
+                    <strong>
+                        {t('postTitle')}:&nbsp;
+                    </strong>
+                    {values.title}
+                </Typography>
+                : <CustomFormikField
+                    style={{width: '50%'}}
+                    t={t}
+                    name='title'
+                    errors={errors}
+                    touched={touched}
+                    value={values.title}
+                    onChange={handleInput}
+                    placeholder={t('exampleTitle')}
+                    className={errors.title && touched.title ? 'error-border' : ''}
+                />}
+        </div>
+    );
+
+    const getFormByCategory = () => {
+        switch (mark) {
+            case 'car':
+                return <div>
+                    <CarForm
+                        t={t}
+                        filters={filters.data}
+                        isPreview={isPreview}
+                        handleFormOpen={handleFormOpen}
+                        titleComponent={titleComponent}
+                        type={type}
+                        subCategory={subCategory}
+                        mark={mark}
+                        post={post}
+                        setPost={setPost}
+                        currentFormIndex={currentFormIndex}
+                    />
+                </div>
+            case 'estate':
+                return <>
+                    <div>
+                        <EstateForm
+                            t={t}
+                            mark={mark}
+                            filters={filters.data}
+                            isPreview={isPreview}
+                            handleFormOpen={handleFormOpen}
+                            titleComponent={titleComponent}
+                            post={post}
+                            setPost={setPost}
+                            type={type}
+                            subCategory={subCategory}
+                            currentFormIndex={currentFormIndex}
+                        />
+                    </div>
+                    <div>
+                        <RegularForm
+                            t={t}
+                            mark={mark}
+                            filters={filters.data}
+                            isPreview={isPreview}
+                            handleFormOpen={handleFormOpen}
+                            post={post}
+                            setPost={setPost}
+                            type={type}
+                            subCategory={subCategory}
+                            currentFormIndex={currentFormIndex}
+                        />
+                    </div>
+                </>
+            default:
+                return <div>
+                    <RegularForm
+                        t={t}
+                        type={type}
+                        filters={filters.data}
+                        isPreview={isPreview}
+                        handleFormOpen={handleFormOpen}
+                        titleComponent={titleComponent}
+                        subCategory={subCategory}
+                        mark={mark}
+                        post={post}
+                        setPost={setPost}
+                        currentFormIndex={currentFormIndex}
+                    />
+                </div>
+        }
+    }
+
     const classes = useStyles();
     return (
         <MainLayout>
@@ -141,20 +239,7 @@ const FormsPage: FC = () => {
                     />
                     <div className={classes.root}>
                         {!isCtgrAnimalFishes && (
-                            <div>
-                                <ParamsForm
-                                    t={t}
-                                    mark={mark}
-                                    filters={otherFilters}
-                                    type={type}
-                                    post={post}
-                                    setPost={setPost}
-                                    isPreview={isPreview}
-                                    subCategory={subCategory}
-                                    currentFormIndex={currentFormIndex}
-                                    handleFormOpen={handleFormOpen}
-                                />
-                            </div>
+                            getFormByCategory()
                         )}
                         <div>
                             <AppearanceForm

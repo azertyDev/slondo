@@ -1,50 +1,65 @@
-import React, {FC, useEffect} from 'react'
-import {WithT} from 'i18next'
-import {FormikProvider, useFormik} from 'formik'
-import {Checkbox, Grid, TextField, Typography} from '@material-ui/core'
-import {
-    estateTxtFields,
-    excludedKeys,
-    numericFields,
-    optionKeys,
-} from '@src/common_data/form_fields'
-import {isRequired} from '@root/validation_schemas/createPostSchemas'
-import {CustomMenu} from '@src/components/elements/custom_menu/CustomMenu'
-import {CustomAccordion} from '../../accordion/CustomAccordion'
-import {numberPrettier} from '@src/helpers'
-import {numberRegEx} from '@src/common_data/reg_ex'
-import {useStyles} from './useStyles'
-import {CarIcon, FlatIcon, ParametersIcon} from '@src/components/elements/icons'
+import React, {FC, useEffect} from "react";
+import {WithT} from "i18next";
+import {paramsFormSchema} from "@root/validation_schemas/createPostSchemas";
+import {FlatIcon} from "@src/components/elements/icons";
+import {CustomAccordion} from "@src/components/post/create_post/form_page/accordion/CustomAccordion";
+import {isRequired, prepareDataForCreate} from "@src/helpers";
+import {FormikProvider, useFormik} from "formik";
+import {Apartments} from "@src/components/post/create_post/form_page/params_form/estate_form/apartments/Apartments";
+import {useStyles} from "./useStyles";
 
 
-export const EstateForm: FC<any> = (props) => {
+type RegularFormPropsType = {
+    filters,
+    post,
+    setPost,
+    mark,
+    isPreview: boolean,
+    handleFormOpen: (k) => () => void,
+    currentFormIndex: number,
+    titleComponent,
+    type,
+    subCategory,
+} & WithT;
+
+export const EstateForm: FC<RegularFormPropsType> = (props) => {
     const {
         t,
-        open,
         mark,
+        post,
+        setPost,
         filters,
-        category,
-        subCategory,
+        isPreview,
+        handleFormOpen,
+        currentFormIndex,
+        titleComponent,
         type,
-        handleSetPost,
-    } = props
+        subCategory
+    } = props;
 
-    // const initForm = {
-    //     [`${mark}_id`]: category.id,
-    //     sub_type_id: subCategory ? subCategory.id : null,
-    //     type_id: type ? type.id : null,
-    // };
+    const formIndex = 4;
+    const nextFormIndex = 3;
 
     const onSubmit = (values) => {
-        // values = prepareData(values);
-        // handleSetPost({[mark]: values});
-    }
+        const createData = prepareDataForCreate({...values});
+        post.title = values.title;
+        post[mark] = {
+            ...post[mark],
+            ...createData,
+            [`${mark}_id`]: subCategory ? subCategory.id : '',
+            type_id: type ? type.id : createData.type_id ?? ''
+        };
+        setPost({...post});
+        handleFormOpen(nextFormIndex)();
+    };
 
     const formik = useFormik({
         onSubmit,
-        initialValues: {},
-        validationSchema: null,
-    })
+        initialValues: {
+            title: ''
+        },
+        validationSchema: paramsFormSchema
+    });
 
     const {
         values,
@@ -52,90 +67,63 @@ export const EstateForm: FC<any> = (props) => {
         errors,
         touched,
         handleSubmit,
-        handleBlur,
-    } = formik
+        handleBlur
+    } = formik;
 
     const handleInput = ({target: {name, value}}) => {
-        const isNumericField = numericFields.some(n => n === name)
+        setValues({...values, [name]: value});
+    };
 
-        if (isNumericField) {
-            if (numberRegEx.test(value)) {
-                if (name !== 'year') {
-                    value = numberPrettier(value)
-                }
-                values[name] = value
-            }
+    const formBySubCategory = () => {
+        switch (subCategory.name) {
+            case 'apartments':
+                return <Apartments
+                    t={t}
+                    filters={filters}
+                    values={values}
+                    setValues={setValues}
+                    handleBlur={handleBlur}
+                    errors={errors}
+                    touched={touched}
+                />
         }
+    };
 
-        setValues({...values})
-    }
-
-    const handleMenuItem = (valueKey: string) => (newValue, setAnchor) => () => {
-        setAnchor(null)
-        setValues({...values, [valueKey]: newValue})
-    }
-
-    const handleParamsCheckbox = (keyName, value?) => ({target}) => {
-        if (values[keyName] && !!value) {
-            if (values[keyName].some(({id}) => id === value.id)) {
-                values[keyName].forEach(({id}, index) => {
-                    if (id === value.id) {
-                        values[keyName].splice(index, 1)
-                    }
-                })
-            } else {
-                values[keyName].push(value)
+    const setRequireVals = () => {
+        Object.keys(filters).forEach(k => {
+            if (!values[k] && isRequired(k)) {
+                values[k] = null;
             }
-        } else {
-            values[keyName] = target.checked
-        }
-        setValues({...values})
-    }
+        });
+        setValues({...values});
+    };
 
-    // useEffect(() => {
-    //     setDefaultVals();
-    // }, [filters]);
+    useEffect(() => {
+        setRequireVals();
+    }, [filters]);
 
-    const classes = useStyles()
+    console.log('values', values)
+    console.log('errors', errors)
+    // console.log('filters', filters)
+    const classes = useStyles();
     return (
-        <div></div>
-        // <FormikProvider value={formik}>
-        //     <form onSubmit={handleSubmit}>
-        //         <CustomAccordion
-        //             open={open}
-        //             title={t('flat')}
-        //             nextButtonTxt={t('appearance')}
-        //             icon={<FlatIcon/>}
-        //         >
-        //             <h4>Car</h4>
-        //         </CustomAccordion>
-        //     </form>
-        // </FormikProvider>
+        <FormikProvider value={formik}>
+            <form onSubmit={handleSubmit}>
+                <CustomAccordion
+                    icon={<FlatIcon/>}
+                    title={t('flat')}
+                    isPreview={isPreview}
+                    open={currentFormIndex === formIndex}
+                    isEditable={currentFormIndex < formIndex}
+                    handleEdit={handleFormOpen(formIndex)}
+                    nextButtonTxt={t('parameters')}
+                >
+                    <div className={classes.root}>
+                        {titleComponent(values, errors, touched, handleInput)}
+                        {formBySubCategory()}
+                    </div>
+                </CustomAccordion>
+            </form>
+        </FormikProvider>
     )
-
-    async function setDefaultVals() {
-        if (mark !== 'free') {
-            Object.keys(filters).forEach(key => {
-                const isExcludedKey = excludedKeys.some(k => k === key)
-                const isEstateTxtField = estateTxtFields.some(k => k === key)
-                const isOptionKey = optionKeys.some(k => k === key)
-
-                if (!isExcludedKey) {
-                    if (Array.isArray(filters[key])) {
-                        if (filters[key].length && key !== 'type') {
-                            if (!values[key]) {
-                                values[key] = null;
-                            } else if (isOptionKey) {
-                                values[key] = []
-                            }
-                        }
-                    } else if (!isEstateTxtField && !values[key]) {
-                        values[key] = filters[key]
-                    }
-                }
-            })
-
-            setValues({...values})
-        }
-    }
-}
+};

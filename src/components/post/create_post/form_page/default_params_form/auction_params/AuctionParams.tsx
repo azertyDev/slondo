@@ -95,12 +95,8 @@ export const AuctionParams: FC<AuctionParamsPropsType> = (props) => {
                             onBlur={handleBlur}
                             items={postType.expired}
                             handleSelect={handleSelect}
-                            error={
-                                errors.auction
-                                && touched.auction
-                                && errors.auction.duration
-                                && touched.auction.duration
-                            }
+                            errors={errors}
+                            touched={touched}
                         />
                     </div>
                 </Grid>

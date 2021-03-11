@@ -1,49 +1,67 @@
-import React, {FC, useEffect} from "react";
+import React, {FC, Fragment} from "react";
+import {Grid, Typography} from "@material-ui/core";
 import {WithT} from "i18next";
-import {FormikProvider, useFormik} from "formik";
-import {Checkbox, Grid, TextField, Typography} from "@material-ui/core";
-import {
-    estateTxtFields,
-    excludedKeys,
-    numericFields,
-    optionKeys,
-} from '@src/common_data/form_fields';
-import {isRequired} from '@root/validation_schemas/createPostSchemas'
-import {CustomMenu} from '@src/components/elements/custom_menu/CustomMenu'
-import {CustomAccordion} from '../../accordion/CustomAccordion'
-import {numberPrettier} from '@src/helpers'
-import {numberRegEx} from '@src/common_data/reg_ex'
-import {useStyles} from './useStyles'
-import {CarIcon, ParametersIcon} from '@src/components/elements/icons'
+import {excludedKeys, numericFields} from "@src/common_data/form_fields";
+import {isRequired, paramsFormSchema} from "@root/validation_schemas/createPostSchemas";
+import {CustomSelect} from "@src/components/elements/customSelect/CustomSelect";
+import {ParametersIcon} from "@src/components/elements/icons";
+import {CustomAccordion} from "@src/components/post/create_post/form_page/accordion/CustomAccordion";
+import {numberPrettier, prepareDataForCreate} from "@src/helpers";
+import {numberRegEx} from "@src/common_data/reg_exs";
+import {useStyles} from "./useStyles";
+import {useFormik} from "formik";
 
 
-export const CarForm: FC<any> = (props) => {
+type RegularFormPropsType = {
+    isPreview: boolean,
+    mark: string,
+    filters,
+    handleFormOpen: (k) => () => void,
+    currentFormIndex: number,
+    titleComponent,
+    type,
+    subCategory,
+    post,
+    setPost,
+} & WithT;
+
+export const CarForm: FC<RegularFormPropsType> = (props) => {
     const {
         t,
-        open,
         mark,
         filters,
-        category,
-        subCategory,
+        isPreview,
+        handleFormOpen,
+        currentFormIndex,
+        titleComponent,
         type,
-        handleSetPost
+        subCategory,
+        post,
+        setPost
     } = props;
 
-    // const initForm = {
-    //     [`${mark}_id`]: category.id,
-    //     sub_type_id: subCategory ? subCategory.id : null,
-    //     type_id: type ? type.id : null,
-    // };
+    const formIndex = 4;
+    const nextFormIndex = 3;
 
     const onSubmit = (values) => {
-        // values = prepareData(values);
-        // handleSetPost({[mark]: values});
+        const createData = prepareDataForCreate({...values});
+        post.title = values.title;
+        post[mark] = {
+            ...post[mark],
+            ...createData,
+            [`${mark}_id`]: subCategory ? subCategory.id : '',
+            type_id: type ? type.id : createData.type_id ?? ''
+        };
+        setPost({...post});
+        handleFormOpen(nextFormIndex)();
     };
 
     const formik = useFormik({
         onSubmit,
-        initialValues: {},
-        validationSchema: null,
+        initialValues: {
+            title: ''
+        },
+        validationSchema: paramsFormSchema
     });
 
     const {
@@ -51,9 +69,12 @@ export const CarForm: FC<any> = (props) => {
         setValues,
         errors,
         touched,
-        handleSubmit,
         handleBlur
     } = formik;
+
+    const handleSelect = (key, value) => {
+        setValues({...values, [key]: value});
+    };
 
     const handleInput = ({target: {name, value}}) => {
         const isNumericField = numericFields.some(n => n === name);
@@ -65,77 +86,56 @@ export const CarForm: FC<any> = (props) => {
                 }
                 values[name] = value;
             }
-        }
-
-        setValues({...values});
-    };
-
-    const handleMenuItem = (valueKey: string) => (newValue, setAnchor) => () => {
-        setAnchor(null);
-        setValues({...values, [valueKey]: newValue});
-    };
-
-    const handleParamsCheckbox = (keyName, value?) => ({target}) => {
-        if (values[keyName] && !!value) {
-            if (values[keyName].some(({id}) => id === value.id)) {
-                values[keyName].forEach(({id}, index) => {
-                    if (id === value.id) {
-                        values[keyName].splice(index, 1);
-                    }
-                });
-            } else {
-                values[keyName].push(value);
-            }
         } else {
-            values[keyName] = target.checked;
+            values[name] = value;
         }
+
         setValues({...values});
     };
-
-    // useEffect(() => {
-    //     setDefaultVals();
-    // }, [filters]);
 
     const classes = useStyles();
     return (
-        <div></div>
-        // <FormikProvider value={formik}>
-        //     <form onSubmit={handleSubmit}>
-        //         <CustomAccordion
-        //             open={open}
-        //             title={t('automobile')}
-        //             nextButtonTxt={t('appearance')}
-        //             icon={<CarIcon/>}
-        //         >
-        //             <h4>Car</h4>
-        //         </CustomAccordion>
-        //     </form>
-        // </FormikProvider>
-    )
-
-    async function setDefaultVals() {
-        if (mark !== 'free') {
-            Object.keys(filters).forEach(key => {
-                const isExcludedKey = excludedKeys.some(k => k === key);
-                const isEstateTxtField = estateTxtFields.some(k => k === key);
-                const isOptionKey = optionKeys.some(k => k === key);
-
-                if (!isExcludedKey) {
-                    if (Array.isArray(filters[key])) {
-                        if (filters[key].length && key !== 'type') {
-                            if (!values[key]) {
-                                values[key] = null;
-                            } else if (isOptionKey) {
-                                values[key] = [];
+        <CustomAccordion
+            icon={<ParametersIcon/>}
+            isPreview={isPreview}
+            open={currentFormIndex === formIndex}
+            isEditable={currentFormIndex < formIndex}
+            handleEdit={handleFormOpen(formIndex)}
+            title={t('parameters')}
+            nextButtonTxt={t('appearance')}
+        >
+            <div className={classes.root}>
+                {titleComponent}
+                <Grid container spacing={2}>
+                    {isPreview
+                        ? Object.keys(values).map(key => {
+                            if (!!values[key]) {
+                                let value = values[key];
+                                if (Object.keys(values[key]).length) {
+                                    if (values[key].name) {
+                                        value = values[key].name;
+                                        return (
+                                            <Grid
+                                                item
+                                                key={key}
+                                                sm={4}
+                                                xs={12}
+                                            >
+                                                <Typography variant="subtitle1">
+                                                    <strong>
+                                                        {t(key)}:&nbsp;
+                                                    </strong>
+                                                    {value}
+                                                </Typography>
+                                            </Grid>
+                                        )
+                                    }
+                                }
                             }
-                        }
-                    } else if (!isEstateTxtField && !values[key]) {
-                        values[key] = filters[key];
-                    }
-                }
-            });
-
-            setValues({...values});
-        }
-    }
+                        })
+                        : <div/>}
+                </Grid>
+            </div>
+        </CustomAccordion>
+    )
 };

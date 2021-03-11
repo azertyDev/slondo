@@ -33,7 +33,7 @@ export const AppearanceForm: FC<AppearanceFormPropsType> = (props) => {
     } = props;
 
     const formIndex = 2;
-    const nextFormIndex = 3;
+    const nextFormIndex = 1;
 
     const onSubmit = ({files, color}) => {
         const photos = files.filter(({file}) => file);
@@ -96,7 +96,7 @@ export const AppearanceForm: FC<AppearanceFormPropsType> = (props) => {
                     icon={<ViewIcon/>}
                     isPreview={isPreview}
                     open={currentFormIndex === formIndex}
-                    isEditable={currentFormIndex > formIndex}
+                    isEditable={currentFormIndex < formIndex}
                     handleEdit={handleFormOpen(formIndex)}
                     title={t('appearance')}
                     nextButtonTxt={t('priceDescContacts')}

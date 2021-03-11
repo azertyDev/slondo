@@ -1,4 +1,5 @@
 export const requireFields = [
+    'title',
     'type',
     'price',
     'year',
@@ -10,14 +11,14 @@ export const requireFields = [
     'car_engine_type',
     'transmission',
     'transport_type',
-    'area_value'
-];
-
-export const autoSelectKeys = [
+    'area_value',
     'area',
     'condition',
     'duration',
-    'currency'
+    'currency',
+    'estate_type',
+    'floor',
+    'number_of_floors'
 ];
 
 export const requiredMsg = 'requireField';
