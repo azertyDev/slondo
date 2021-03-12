@@ -249,7 +249,7 @@ export const PostContent: FC<WithT & any> = (props) => {
                         <span className="available">
                         <PhoneIcon/>
                             {
-                                !!data.available_days.length
+                                !!data?.available_days?.length
                                 && <>
                                     <Typography variant="subtitle1" color="primary">
                                         {weekDaysHelper(data.available_days, t)}

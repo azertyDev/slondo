@@ -10,14 +10,15 @@ import {CloseIcon} from '@src/components/elements/icons'
 import {useStyles} from './useStyles'
 import {ButtonComponent} from '@src/components/elements/button/Button'
 
-type modalTypes = {
-    id: number,
+type ModalTypes = {
+    id?: number,
     content: string,
     handleClose: EventHandler<any>,
+    handleSubmit?: () => void,
     open: boolean
 }
 
-export const CustomModal: FC<modalTypes> = ({ id, content, handleClose, open }) => {
+export const CustomModal: FC<ModalTypes> = ({ id, content, handleClose, open, handleSubmit }) => {
     const classes = useStyles()
 
     const settings = (
@@ -67,10 +68,10 @@ export const CustomModal: FC<modalTypes> = ({ id, content, handleClose, open }) 
     const completePurchase = (
         <>
             <Typography className="title" variant="h6">
-                Вы подтверждаете завершение покупки?
+                Вы подтверждаете зdiv.profile-dataавершение покупки?
             </Typography>
             <Typography className='subtitle' variant='subtitle1'>
-                При завершении покупки вы соглашаетесь с условиями услуги “Безопасная покупка”
+                При завершении покупки вы соглашаетесь с условиями услуги “<span>Безопасная покупка</span>”
             </Typography>
             <div className='confirm'>
                 <ButtonComponent className='submit'>
@@ -80,6 +81,29 @@ export const CustomModal: FC<modalTypes> = ({ id, content, handleClose, open }) 
                 </ButtonComponent>
             </div>
         </>
+    )
+
+    const buyNow = (
+        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+            <Typography
+                variant='subtitle1'
+                className='subtitle'
+                style={{ width: '80%', margin: '15px auto 0 auto', textAlign: 'center' }}
+            >
+                Нажимая кнопку “Купить сейчас” вы выкупаете лот на сумму 1 400 000 сум и соглашаетесь с условиями
+                сайта
+            </Typography>
+            <div className='form' style={{ marginTop: 30 }}>
+                <ButtonComponent
+                    style={{ background: '#7DBCF6', padding: ' 10px 60px ' }}
+                    onClick={() => handleSubmit()}
+                >
+                    <Typography variant='subtitle1' style={{ color: 'white' }}>
+                        Купить сейчас
+                    </Typography>
+                </ButtonComponent>
+            </div>
+        </div>
     )
 
     return (
@@ -107,6 +131,7 @@ export const CustomModal: FC<modalTypes> = ({ id, content, handleClose, open }) 
                         {content === 'settings' && (settings)}
                         {content === 'disableFavorite' && (disableFavorite)}
                         {content === 'completePurchase' && (completePurchase)}
+                        {content === 'buyNow' && (buyNow)}
                     </div>
                 </Fade>
             </Modal>

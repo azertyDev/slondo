@@ -85,7 +85,7 @@ export const ListMode: FC<ViewPropsTypes> = ({ list }) => {
                                 <div className="card-data">
                                     <div className="img">
                                         <img
-                                            src={el.images[0].url.default}
+                                            src={el.image}
                                         />
                                         <Typography
                                             variant="caption"
