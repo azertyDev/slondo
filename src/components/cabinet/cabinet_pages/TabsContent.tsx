@@ -7,16 +7,18 @@ import {CabinetMockData} from '@src/components/cabinet/CabinetMockData'
 import {MyPurchases} from '@src/components/cabinet/cabinet_pages/my_purchases/MyPurchases'
 import {useTranslation} from 'react-i18next'
 import {useStyles} from './useStyles'
+import {useRouter} from "next/router";
 
 
 export const TabsContent: FC<CabinetMenuPropsType & { tabsData: TabsDataType }> = (
     { tabsData, headerTitle, title }
 ) => {
+    const router = useRouter()
     const [value, setValue] = useState(0)
     const { t } = useTranslation('cabinet')
-
     const handleChange = (event, newValue) => {
         setValue(newValue)
+        router.push(`?tabValue=${value}`)
     }
 
     const classes = useStyles()

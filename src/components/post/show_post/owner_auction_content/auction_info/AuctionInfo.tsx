@@ -153,11 +153,10 @@ export const AuctionInfo: FC<any> = (props) => {
                         Все ставки
                     </Typography>
                 </div>
-                {isAuth &&
+                {isAuth && data?.user_id !== user_id &&
                 <>
                     <div className="bet-info">
-                        {data?.user_id !== user_id &&
-                        <AuctionForm data={data} handleFormSubmit={handleSubmit} list={list}/>}
+                        <AuctionForm data={data} handleFormSubmit={handleSubmit} list={list}/>
                         <div>
                             <Typography variant="subtitle2" color="initial">
                                 Максимально возможная ставка:

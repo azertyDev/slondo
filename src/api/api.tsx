@@ -104,6 +104,20 @@ export const userAPI = {
                 throw err
             });
     },
+    getAuctionSubs: (lang: string) => {
+        return instance.get(`regular/user/auctions/participating?lang=${lang}`, setTokenToHeader())
+            .then(res => res.data)
+            .catch(err => {
+                throw err
+            });
+    },
+    getSecurePosts: (lang: string, lot: string): Promise<FavoriteType[]> => {
+        return instance.get(`regular/user/posts/secure?type=${lot}&lang=${lang}`, setTokenToHeader())
+            .then(res => res.data)
+            .catch(err => {
+                throw err
+            });
+    },
     getSubscribers: (): Promise<FavoriteType[]> => {
         return instance.get(`regular/post/user/subscribers/all`, setTokenToHeader())
             .then(res => res.data)

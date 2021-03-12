@@ -2,7 +2,7 @@ import React, {FC} from 'react';
 import {AuctionInfo} from './auction_info/AuctionInfo';
 import {OwnerInfo} from './owner_info/OwnerInfo';
 import {Typography} from "@material-ui/core";
-import {numberPrettier} from '@root/src/helpers';
+import {numberPrettier, userInfo} from '@root/src/helpers';
 import {useStyles} from './useStyles';
 
 export const OwnerAuctionContent: FC<any> = (props) => {
@@ -11,6 +11,8 @@ export const OwnerAuctionContent: FC<any> = (props) => {
 
     const isAuction = data.ads_type.mark === 'auc' || data.ads_type.mark === 'exauc';
 
+    const user_info = userInfo()
+    const user_id = user_info?.id
     const classes = useStyles();
     return (
         <div className={classes.root}>
@@ -21,10 +23,11 @@ export const OwnerAuctionContent: FC<any> = (props) => {
                 </Typography>
             </div>
             {isAuction && <AuctionInfo data={data} t={t} />}
-            <OwnerInfo
+            {data?.user_id !== user_id &&
+                <OwnerInfo
                 phone={data.phone}
                 safe_deal={data.safe_deal}
-            />
+            />}
         </div>
     );
 };

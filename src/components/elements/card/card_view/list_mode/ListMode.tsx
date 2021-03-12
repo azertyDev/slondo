@@ -45,8 +45,7 @@ export const ListMode: FC<ViewPropsTypes> = ({ list }) => {
     const { t } = useTranslation(['common'])
     const [openModal, setOpenModal] = useState(false)
     const [modalState, setModalState] = useState('')
-
-    console.warn("list123123", list)
+    const filteredList = Array.isArray(list) ? list : list?.data
 
     const handleModalOpen = (value) => {
         setOpenModal(true)
@@ -60,7 +59,7 @@ export const ListMode: FC<ViewPropsTypes> = ({ list }) => {
 
     return (
         <div className={classes.root}>
-            {list?.data?.map((el) => {
+            {filteredList?.map((el) => {
                 return (
                     <Grid container key={el.id}>
                         <Grid item xs={9} className="left-content">
@@ -87,7 +86,7 @@ export const ListMode: FC<ViewPropsTypes> = ({ list }) => {
                                 <div className="card-data">
                                     <div className="img">
                                         <img
-                                            src={el.image.url.default}
+                                            src={el.image}
                                         />
                                         <Typography
                                             variant="caption"
@@ -121,6 +120,12 @@ export const ListMode: FC<ViewPropsTypes> = ({ list }) => {
                                             </div>
                                             <div className='card-btn'>
                                                 <div className='favorite'>
+                                                    <Typography
+                                                        variant="subtitle1"
+                                                        color="initial"
+                                                    >
+                                                        140
+                                                    </Typography>
                                                     <Link href="#">
                                                         <a className="favorite-icon">
                                                             <FavoriteBorderIcon />
@@ -128,7 +133,7 @@ export const ListMode: FC<ViewPropsTypes> = ({ list }) => {
                                                     </Link>
                                                 </div>
                                                 {
-                                                    el.isFavorite ?
+                                                    pathname?.includes('favorite') ?
                                                         <div
                                                             className='isFavorite'
                                                             onClick={() => handleModalOpen('disableFavorite')}
