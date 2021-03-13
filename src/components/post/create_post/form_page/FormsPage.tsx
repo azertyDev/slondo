@@ -15,11 +15,11 @@ import {userAPI} from '@src/api/api';
 import {ButtonComponent} from "@src/components/elements/button/Button";
 import {SuccessPage} from "@src/components/post/create_post/form_page/success_page/SuccessPage";
 import {withAuthRedirect} from "@src/hoc/withAuthRedirect";
-import {useStyles} from './useStyles';
 import {CustomFormikField} from "@src/components/elements/custom_formik_field/CustomFormikField";
 import {CarForm} from "@src/components/post/create_post/form_page/params_form/car_form/CarForm";
 import {EstateForm} from "@src/components/post/create_post/form_page/params_form/estate_form/EstateForm";
 import {RegularForm} from "@src/components/post/create_post/form_page/params_form/regular_form/RegularForm";
+import {useStyles} from './useStyles';
 
 
 export type DataForCrtPostType = {
@@ -57,7 +57,7 @@ const FormsPage: FC = () => {
     const initPost = {
         ads_type_id: postType.id,
         category_id: category.id,
-        sub_category_id: subCategory ? subCategory.id : null,
+        sub_category_id: subCategory?.id,
         photos: []
     };
 
@@ -77,7 +77,7 @@ const FormsPage: FC = () => {
     const [post, setPost] = useState(initPost);
 
     const [filters, setFilters] = useState(initFilters);
-    const {color, ...otherFilters} = filters.data;
+    const {colors, ...otherFilters} = filters.data;
 
 
     const handleFormOpen = (index: number) => () => {
@@ -86,8 +86,8 @@ const FormsPage: FC = () => {
 
     const setFetchedFilters = async () => {
         try {
-            const subCtgrId = subCategory ? subCategory.id : '';
-            const typeId = type ? type.id : '';
+            const subCtgrId = subCategory?.id ?? '';
+            const typeId = type?.id ?? '';
 
             setFilters({
                 ...filters,
@@ -105,7 +105,7 @@ const FormsPage: FC = () => {
         }
     };
 
-    const publishPost = async () => {
+    const toPublish = async () => {
         try {
             const {photos, ...data} = post;
             const form = new FormData();
@@ -122,18 +122,6 @@ const FormsPage: FC = () => {
         }
     };
 
-    useEffect(() => {
-        window.scrollTo(0, 0);
-    }, [asPath]);
-
-    useEffect(() => {
-        if (!isCtgrAnimalFishes) {
-            setFetchedFilters();
-        }
-    }, []);
-
-    // console.log('filters', filters)
-
     const titleComponent = (values, errors, touched, handleInput) => (
         <div className='title-wrapper'>
             {isPreview
@@ -144,9 +132,9 @@ const FormsPage: FC = () => {
                     {values.title}
                 </Typography>
                 : <CustomFormikField
-                    style={{width: '50%'}}
                     t={t}
                     name='title'
+                    style={{width: '50%'}}
                     errors={errors}
                     touched={touched}
                     value={values.title}
@@ -163,7 +151,7 @@ const FormsPage: FC = () => {
                 return <div>
                     <CarForm
                         t={t}
-                        filters={filters.data}
+                        filters={otherFilters}
                         isPreview={isPreview}
                         handleFormOpen={handleFormOpen}
                         titleComponent={titleComponent}
@@ -176,43 +164,27 @@ const FormsPage: FC = () => {
                     />
                 </div>
             case 'estate':
-                return <>
-                    <div>
-                        <EstateForm
-                            t={t}
-                            mark={mark}
-                            filters={filters.data}
-                            isPreview={isPreview}
-                            handleFormOpen={handleFormOpen}
-                            titleComponent={titleComponent}
-                            post={post}
-                            setPost={setPost}
-                            type={type}
-                            subCategory={subCategory}
-                            currentFormIndex={currentFormIndex}
-                        />
-                    </div>
-                    <div>
-                        <RegularForm
-                            t={t}
-                            mark={mark}
-                            filters={filters.data}
-                            isPreview={isPreview}
-                            handleFormOpen={handleFormOpen}
-                            post={post}
-                            setPost={setPost}
-                            type={type}
-                            subCategory={subCategory}
-                            currentFormIndex={currentFormIndex}
-                        />
-                    </div>
-                </>
+                return <div>
+                    <EstateForm
+                        t={t}
+                        mark={mark}
+                        filters={otherFilters}
+                        isPreview={isPreview}
+                        handleFormOpen={handleFormOpen}
+                        titleComponent={titleComponent}
+                        post={post}
+                        setPost={setPost}
+                        type={type}
+                        subCategory={subCategory}
+                        currentFormIndex={currentFormIndex}
+                    />
+                </div>
             default:
                 return <div>
                     <RegularForm
                         t={t}
                         type={type}
-                        filters={filters.data}
+                        filters={otherFilters}
                         isPreview={isPreview}
                         handleFormOpen={handleFormOpen}
                         titleComponent={titleComponent}
@@ -224,7 +196,20 @@ const FormsPage: FC = () => {
                     />
                 </div>
         }
-    }
+    };
+
+    useEffect(() => {
+        window.scrollTo(0, 0);
+    }, [asPath]);
+
+    useEffect(() => {
+        if (!isCtgrAnimalFishes) {
+            setFetchedFilters();
+        }
+    }, []);
+
+    // console.log('filters', filters)
+    console.log('post', post)
 
     const classes = useStyles();
     return (
@@ -245,7 +230,7 @@ const FormsPage: FC = () => {
                             <AppearanceForm
                                 t={t}
                                 mark={mark}
-                                colors={color}
+                                colors={colors}
                                 post={post}
                                 setPost={setPost}
                                 isPreview={isPreview}
@@ -267,7 +252,7 @@ const FormsPage: FC = () => {
                         </div>
                         {isPreview && (
                             <div className='publish-button-wrapper'>
-                                <ButtonComponent onClick={publishPost}>
+                                <ButtonComponent onClick={toPublish}>
                                     <Typography variant='subtitle1'>
                                         {t('publish')}
                                     </Typography>

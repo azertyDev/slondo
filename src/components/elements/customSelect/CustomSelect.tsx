@@ -49,7 +49,7 @@ export const CustomSelect: FC<CustomSelectPropsType> = (props) => {
                     {t(name)}
                     {isRequired(name) && <span className='error-text'>*&nbsp;</span>}
                 </strong>
-                {errors && errors[name] && touched[name] && (
+                {errors?.[name] && touched[name] && (
                     <span className='error-text'>
                         {t(errors[name] as string)}
                     </span>
@@ -60,8 +60,8 @@ export const CustomSelect: FC<CustomSelectPropsType> = (props) => {
                 name={name}
                 onBlur={onBlur}
                 onChange={onChange}
-                value={values[name] ? values[name].id ?? 0 : 0}
-                className={classes.root + `${errors && errors[name] && touched[name] ? ' error-border' : ''}`}
+                value={values[name]?.id ?? 0}
+                className={classes.root + `${errors?.[name] && touched[name] ? ' error-border' : ''}`}
             >
                 <option value={0}>
                     {t('noSelect')}

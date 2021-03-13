@@ -1,12 +1,15 @@
-import React, {FC, useEffect} from "react";
+import React, {FC, Fragment, useEffect} from "react";
 import {WithT} from "i18next";
 import {paramsFormSchema} from "@root/validation_schemas/createPostSchemas";
-import {FlatIcon} from "@src/components/elements/icons";
+import {FlatIcon, ParametersIcon} from "@src/components/elements/icons";
 import {CustomAccordion} from "@src/components/post/create_post/form_page/accordion/CustomAccordion";
 import {isRequired, prepareDataForCreate} from "@src/helpers";
 import {FormikProvider, useFormik} from "formik";
 import {Apartments} from "@src/components/post/create_post/form_page/params_form/estate_form/apartments/Apartments";
 import {useStyles} from "./useStyles";
+import {Grid, Typography} from "@material-ui/core";
+import {excludedKeys} from "@src/common_data/form_fields";
+import {CustomSelect} from "@src/components/elements/customSelect/CustomSelect";
 
 
 type RegularFormPropsType = {
@@ -74,6 +77,10 @@ export const EstateForm: FC<RegularFormPropsType> = (props) => {
         setValues({...values, [name]: value});
     };
 
+    const handleSelect = (key, value) => {
+        setValues({...values, [key]: value});
+    };
+
     const formBySubCategory = () => {
         switch (subCategory.name) {
             case 'apartments':
@@ -108,22 +115,94 @@ export const EstateForm: FC<RegularFormPropsType> = (props) => {
     const classes = useStyles();
     return (
         <FormikProvider value={formik}>
-            <form onSubmit={handleSubmit}>
+            <form onSubmit={handleSubmit} className={classes.root}>
+                <div className='apartments-wrapper'>
+                    <CustomAccordion
+                        icon={<FlatIcon/>}
+                        title={t('apartments')}
+                        isPreview={isPreview}
+                        open={currentFormIndex === formIndex}
+                        isEditable={currentFormIndex < formIndex}
+                        handleEdit={handleFormOpen(formIndex)}
+                        nextButtonTxt={t('parameters')}
+                    >
+                        <div className={classes.root}>
+                            {titleComponent(values, errors, touched, handleInput)}
+                            {formBySubCategory()}
+                        </div>
+                    </CustomAccordion>
+                </div>
                 <CustomAccordion
-                    icon={<FlatIcon/>}
-                    title={t('flat')}
+                    icon={<ParametersIcon/>}
                     isPreview={isPreview}
-                    open={currentFormIndex === formIndex}
-                    isEditable={currentFormIndex < formIndex}
-                    handleEdit={handleFormOpen(formIndex)}
-                    nextButtonTxt={t('parameters')}
+                    open={currentFormIndex === 3}
+                    isEditable={currentFormIndex < 3}
+                    handleEdit={handleFormOpen(3)}
+                    title={t('parameters')}
+                    nextButtonTxt={t('appearance')}
                 >
                     <div className={classes.root}>
-                        {titleComponent(values, errors, touched, handleInput)}
-                        {formBySubCategory()}
+                        <Grid container spacing={2}>
+                            {isPreview
+                                ? Object.keys(values).map(key => {
+                                    if (!!values[key]) {
+                                        if (Object.keys(values[key]).length) {
+                                            if (values[key].name) {
+                                                return (
+                                                    <Grid
+                                                        item
+                                                        sm={4}
+                                                        xs={12}
+                                                        key={key}
+                                                    >
+                                                        <Typography variant="subtitle1">
+                                                            <strong>
+                                                                {t(key)}:&nbsp;
+                                                            </strong>
+                                                            {values[key].name}
+                                                        </Typography>
+                                                    </Grid>
+                                                )
+                                            }
+                                        }
+                                    }
+                                })
+                                : getFields(filters)}
+                        </Grid>
                     </div>
                 </CustomAccordion>
             </form>
         </FormikProvider>
-    )
+    );
+
+    function getFields(filters) {
+        return Object.keys(filters).map(key => {
+            const isExcludeValue = excludedKeys.some(k => k === key);
+            const isNoEmptyArray = Array.isArray(filters[key]) && filters[key].length;
+
+            if (!isExcludeValue && isNoEmptyArray) {
+                return (
+                    <Fragment key={key}>
+                        <Grid
+                            item
+                            container
+                            sm={4}
+                            xs={12}
+                        >
+                            <CustomSelect
+                                t={t}
+                                name={key}
+                                values={values}
+                                errors={errors}
+                                touched={touched}
+                                onBlur={handleBlur}
+                                items={filters[key]}
+                                handleSelect={handleSelect}
+                            />
+                        </Grid>
+                    </Fragment>
+                )
+            }
+        })
+    }
 };

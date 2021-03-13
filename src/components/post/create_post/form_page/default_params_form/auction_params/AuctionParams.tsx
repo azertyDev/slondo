@@ -78,25 +78,15 @@ export const AuctionParams: FC<AuctionParamsPropsType> = (props) => {
                 )}
                 <Grid item container xs={12}>
                     <div className='auction-duration'>
-                        <Typography variant="subtitle1">
-                            <strong>
-                                {t('auctionDuration')}
-                            </strong>
-                            {errors.auction
-                            && touched.auction
-                            && errors.auction.duration
-                            && touched.auction.duration
-                            && <span className='error-text'>&nbsp;{t(errors.auction.duration)}</span>}
-                        </Typography>
                         <CustomSelect
                             t={t}
                             name='duration'
                             values={auction}
+                            errors={errors}
+                            touched={touched}
                             onBlur={handleBlur}
                             items={postType.expired}
                             handleSelect={handleSelect}
-                            errors={errors}
-                            touched={touched}
                         />
                     </div>
                 </Grid>

@@ -7,7 +7,7 @@ export const useStyles = makeStyles((theme) => ({
             color: theme.palette.primary.white,
             backgroundColor: theme.palette.common.activeTab,
             '&.selected': {
-                border: `3px solid ${theme.palette.primary.exAucBgColor}`,
+                border: `3px solid ${theme.palette.primary.exAucBgColor}`
             }
         },
         '& div.estate-type-btns': {

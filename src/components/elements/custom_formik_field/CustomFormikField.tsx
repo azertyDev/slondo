@@ -45,6 +45,7 @@ export const CustomFormikField: FC<CustomFormikFieldPropsType> = (props) => {
                         variant="outlined"
                         {...field}
                         {...otherProps}
+                        className={errors?.[name] && touched[name] ? 'error-border' : ''}
                     />
                 </>
             )}

@@ -11,7 +11,6 @@ export const requireFields = [
     'car_engine_type',
     'transmission',
     'transport_type',
-    'area_value',
     'area',
     'condition',
     'duration',
@@ -19,7 +18,8 @@ export const requireFields = [
     'estate_type',
     'floor',
     'number_of_floors',
-    'rooms'
+    'rooms',
+    'general_area',
 ];
 
 export const requiredMsg = 'requireField';

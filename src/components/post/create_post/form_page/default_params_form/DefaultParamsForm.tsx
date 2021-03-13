@@ -19,10 +19,10 @@ import {PostType} from "@root/interfaces/Post";
 import {WEEK_DAYS} from "@src/common_data/common";
 import {StateIcon} from '@src/components/elements/icons';
 import {Router} from "@root/i18n";
-import {useStyles} from './useStyles';
 import {LocationAutocomplete} from "@src/components/post/create_post/form_page/default_params_form/location/LocationAutocomplete";
 import {CustomSelect} from "@src/components/elements/customSelect/CustomSelect";
 import {PreviewDefParams} from "@src/components/post/create_post/form_page/default_params_form/PreviewDefParams";
+import {useStyles} from './useStyles';
 
 
 type DefaultParamsPropsType = {
@@ -170,7 +170,7 @@ export const DefaultParamsForm: FC<DefaultParamsPropsType> = (props) => {
         ? `${location.region.name}${location.city ? `, ${location.city.name}` : ''}${location.district ? `, ${location.district.name}` : ''}`
         : '';
 
-    const handleSelect = (value, key) => {
+    const handleSelect = (key, value) => {
         if (key === 'duration') {
             auction.duration = value;
         } else {
@@ -255,7 +255,8 @@ export const DefaultParamsForm: FC<DefaultParamsPropsType> = (props) => {
             setValues({...values});
         }
     };
-
+    // console.log('def', values)
+    // console.log('err', errors)
     const classes = useStyles();
     return (
         <FormikProvider value={formik}>

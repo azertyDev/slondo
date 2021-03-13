@@ -4,6 +4,7 @@ import {WithT} from "i18next";
 import {CustomSelect} from "@src/components/elements/customSelect/CustomSelect";
 import {ButtonComponent} from "@src/components/elements/button/Button";
 import {NumberSelector} from "@src/components/post/create_post/form_page/params_form/estate_form/number_selector/NumberSelector";
+import {CustomFormikField} from "@src/components/elements/custom_formik_field/CustomFormikField";
 import {useStyles} from './useStyles';
 
 
@@ -40,6 +41,11 @@ export const Apartments: FC<ApartmentsPropsType> = (props) => {
     };
 
     useEffect(() => {
+        values.area_id = filters.area?.[0].id || null;
+        setValues({...values});
+    }, [filters]);
+
+    useEffect(() => {
         values.floor = null;
         values.number_of_floors = null;
         setValues({...values});
@@ -55,7 +61,7 @@ export const Apartments: FC<ApartmentsPropsType> = (props) => {
                             {t('estate_type')}
                             <span className='error-text'>*&nbsp;</span>
                         </strong>
-                        {errors && errors.estate_type && touched.estate_type && (
+                        {errors?.estate_type && touched.estate_type && (
                             <span className='error-text'>
                                 {t(errors.estate_type as string)}
                             </span>
@@ -95,8 +101,8 @@ export const Apartments: FC<ApartmentsPropsType> = (props) => {
                     <Checkbox
                         name='utilities'
                         color='primary'
-                        checked={values.delivery}
                         onChange={handleCheckbox}
+                        checked={values.utilities ?? false}
                     />
                 </Grid>
                 <Grid item xs={4}>
@@ -106,6 +112,8 @@ export const Apartments: FC<ApartmentsPropsType> = (props) => {
                         name='floor'
                         errors={errors}
                         touched={touched}
+                        values={values}
+                        setValues={setValues}
                     />
                 </Grid>
                 <Grid item container xs={4}>
@@ -115,6 +123,8 @@ export const Apartments: FC<ApartmentsPropsType> = (props) => {
                         name='number_of_floors'
                         errors={errors}
                         touched={touched}
+                        values={values}
+                        setValues={setValues}
                     />
                 </Grid>
                 <Grid item container xs={4}>
@@ -124,11 +134,37 @@ export const Apartments: FC<ApartmentsPropsType> = (props) => {
                         name='rooms'
                         errors={errors}
                         touched={touched}
+                        values={values}
+                        setValues={setValues}
                     />
                 </Grid>
-                <Grid item xs={4}>Test</Grid>
-                <Grid item container xs={4}>Test</Grid>
-                <Grid item container xs={4}>Test</Grid>
+                <Grid item xs={4}>
+                    <CustomFormikField
+                        t={t}
+                        name='area'
+                        errors={errors}
+                        touched={touched}
+                        value={values.area ?? ''}
+                    />
+                </Grid>
+                <Grid item container xs={4}>
+                    <CustomFormikField
+                        t={t}
+                        name='living_area'
+                        errors={errors}
+                        touched={touched}
+                        value={values.living_area ?? ''}
+                    />
+                </Grid>
+                <Grid item container xs={4}>
+                    <CustomFormikField
+                        t={t}
+                        name='kitchen_area'
+                        errors={errors}
+                        touched={touched}
+                        value={values.kitchen_area ?? ''}
+                    />
+                </Grid>
             </Grid>
         </div>
     )

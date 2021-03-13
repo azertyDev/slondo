@@ -169,11 +169,9 @@ export const AppearanceForm: FC<AppearanceFormPropsType> = (props) => {
                                             {t('photos')}
                                             {<span className='error-text'>*</span>}
                                         </strong>
-                                        {
-                                            errors.files
-                                            && touched.files
-                                            && <span className='error-text'>&nbsp;{t(errors.files as string)}</span>
-                                        }
+                                        {errors.files && touched.files && (
+                                            <span className='error-text'>&nbsp;{t(errors.files as string)}</span>
+                                        )}
                                     </Typography>
                                     <PreviewPhotos
                                         values={values}
