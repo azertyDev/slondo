@@ -27,11 +27,7 @@ const initCard: InnerCardData = {
         id: null,
         name: '',
     },
-    images: [{
-        url: {
-            default: ''
-        }
-    }],
+    image: '',
     category: {
         id: null,
         name: '',

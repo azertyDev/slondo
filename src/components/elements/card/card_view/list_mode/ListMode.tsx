@@ -5,7 +5,7 @@ import {
     Button,
     Grid,
     Hidden,
-    Tooltip, ListItem, ListItemText, List, IconButton
+    Tooltip
 } from '@material-ui/core'
 import {
     SettingsIcon,
@@ -15,7 +15,6 @@ import {
     EyeIcon,
     DoubleUpIcon,
     FavoriteBorderIcon,
-    RestoreIcon,
     CloseIcon,
     DoneAllIcon,
     DeliveryIcon,
@@ -23,7 +22,6 @@ import {
     SwapIcon,
     PhoneIcon,
     LetterIcon,
-    NotificationIcon
 } from '@src/components/elements/icons'
 import {ButtonComponent} from '@src/components/elements/button/Button'
 import {BreadcrumbsComponent} from '@src/components/elements/breadcrumbs/Breadcrumbs'
@@ -36,7 +34,7 @@ import {numberPrettier} from '@src/helpers'
 import {useRouter} from 'next/router'
 import {useTranslation} from 'react-i18next'
 import {useStyles} from './useStyles'
-
+import {userAPI} from "@src/api/api";
 
 const longText = `Вы принимаете предложения от других пользователей на обмен. Вы будете выделены специальным стикером. Ознакомиться с правилами «Возможен обмен»`
 
@@ -54,6 +52,12 @@ export const ListMode: FC<ViewPropsTypes> = ({ list }) => {
 
     const handleModalClose = () => {
         setOpenModal(false)
+    }
+
+    const handleFavorite = (id) => {
+        userAPI.favoriteAds(id)
+            .then(result => console.warn(result))
+            .catch(error => console.warn("error", error))
     }
     const classes = useStyles()
 
@@ -136,7 +140,7 @@ export const ListMode: FC<ViewPropsTypes> = ({ list }) => {
                                                     pathname?.includes('favorite') ?
                                                         <div
                                                             className='isFavorite'
-                                                            onClick={() => handleModalOpen('disableFavorite')}
+                                                            onClick={() => handleFavorite(el.id)}
                                                         >
                                                             <CloseIcon />
                                                         </div>

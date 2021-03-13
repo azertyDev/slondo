@@ -401,7 +401,7 @@ export const useStyles = makeStyles((theme) => ({
                     background: '#F2F2F2',
                     padding: '15px 10px',
                     borderRadius: '10px 10px 0 0',
-                    height: '160px',
+                    height: '170px',
                     display: 'flex',
                     flexDirection: 'column',
                     justifyContent: 'space-between',

@@ -23,13 +23,7 @@ export const CabinetMockData: InnerCardData[] = [
             id: 444,
             name: 'sum',
         },
-        images: [
-            {
-                url: {
-                    default: '/img/mebel2.jpg',
-                },
-            },
-        ],
+        image: '/img/mebel2.jpg',
         created_at: '22.09.2020',
         delivery: 1,
         exchange: 1,
@@ -68,13 +62,7 @@ export const CabinetMockData: InnerCardData[] = [
             id: 444,
             name: 'sum',
         },
-        images: [
-            {
-                url: {
-                    default: '/img/mebel1.jpg',
-                },
-            },
-        ],
+        image: '/img/mebel1.jpg',
         created_at: '22.09.2020',
         delivery: 0,
         exchange: 0,
@@ -109,13 +97,7 @@ export const CabinetMockData: InnerCardData[] = [
             id: 444,
             name: 'sum',
         },
-        images: [
-            {
-                url: {
-                    default: '/img/mebel3.jpg',
-                },
-            },
-        ],
+        image: '/img/mebel3.jpg',
         created_at: '22.09.2020',
         delivery: 0,
         exchange: 1,
@@ -149,13 +131,7 @@ export const CabinetMockData: InnerCardData[] = [
             id: 3500000,
             name: 'sum',
         },
-        images: [
-            {
-                url: {
-                    default: '/img/mebel4.jpg',
-                },
-            },
-        ],
+        image: '/img/mebel4.jpg',
         created_at: '22.09.2020',
         delivery: 0,
         exchange: 1,

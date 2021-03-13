@@ -8,7 +8,6 @@ import {userAPI} from "@src/api/api";
 const FavoriteContainer: FC = () => {
     const [data, setData] = useState<any>([])
     const [type, setType] = useState('post')
-    console.log(data)
     const count = data?.data?.length
     const list = data?.data
     const tabsData = [

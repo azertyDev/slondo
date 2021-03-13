@@ -16,10 +16,18 @@ export const useStyles = makeStyles((theme) => ({
         backgroundColor: theme.palette.background.paper,
         padding: 25,
         borderRadius: 10,
-        '& h6.title': {
+        '& .title': {
             fontWeight: 600,
             marginBottom: 10,
             textAlign: 'center'
+        },
+        '& .subtitle': {
+            marginBottom: 30,
+            textAlign: 'center',
+            color: 'rgba(49, 49, 49, 0.6)',
+            '& > span': {
+                color: '#845CAB'
+            }
         },
         '& .confirm': {
             display: 'flex',
@@ -28,15 +36,14 @@ export const useStyles = makeStyles((theme) => ({
             width: '100%',
             '& button': {
                 width: '50%',
+                background: theme.palette.primary.red,
+
                 '& .MuiTypography-subtitle1': {
                     color: '#fff'
                 },
-                '&:first-child, .submit': {
+                '&.submit': {
                     background: theme.palette.primary.createAdBtnColor,
                     marginBottom: 10
-                },
-                '&:last-child': {
-                    background: theme.palette.primary.red
                 }
             }
         }
