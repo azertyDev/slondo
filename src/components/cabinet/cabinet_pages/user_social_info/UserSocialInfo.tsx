@@ -16,7 +16,6 @@ export const UserSocialInfo = (props) => {
             .then(result => setData(result))
             .catch(error => console.warn(error))
     }, [])
-    const { pathname } = useRouter()
 
     const onButtonClick = (url) => () => {
         Router.push(`/cabinet/${url}`)
