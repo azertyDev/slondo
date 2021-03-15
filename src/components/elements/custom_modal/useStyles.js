@@ -8,7 +8,6 @@ export const useStyles = makeStyles((theme) => ({
     },
     paper: {
         width: 430,
-        // height: 300,
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
@@ -25,8 +24,19 @@ export const useStyles = makeStyles((theme) => ({
             marginBottom: 30,
             textAlign: 'center',
             color: 'rgba(49, 49, 49, 0.6)',
-            '& > span': {
-                color: '#845CAB'
+            lineHeight: '22px',
+            '& span': {
+                '&.buy-now-price': {
+                    color: theme.palette.common.activeTab
+                },
+                '&.condition': {
+                    '& a': {
+                        color: theme.palette.primary.lotBgColor
+                    }
+                },
+                '&.safe-deal': {
+                    color: theme.palette.primary.secondary
+                }
             }
         },
         '& .confirm': {

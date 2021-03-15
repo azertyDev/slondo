@@ -15,12 +15,12 @@ export const useStyles = makeStyles(() => ({
                     padding: '0',
                     minHeight: 28,
                     '& > span > h6.MuiTypography-subtitle1': {
-                        textTransform: 'uppercase',
+                        textTransform: 'uppercase'
                     },
+                    '&.Mui-selected > span > h6.MuiTypography-subtitle1': {
+                        color: '#7DBCF6'
+                    }
                 },
-            },
-            '& > div > div > button.Mui-selected > span > h6.MuiTypography-subtitle1': {
-                color: '#7DBCF6',
             },
         },
     },

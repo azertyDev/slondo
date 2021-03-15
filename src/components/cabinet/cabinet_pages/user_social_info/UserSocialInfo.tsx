@@ -1,10 +1,12 @@
 import React, {useEffect, useState} from 'react'
-import {Typography} from '@material-ui/core'
-import {useRouter} from "next/router";
-import {Router} from "@root/i18n";
+import {List, Typography} from '@material-ui/core'
+import {useRouter} from 'next/router'
+import {Router} from '@root/i18n'
+import {ButtonComponent} from '@src/components/elements/button/Button'
+import {CustomBadge} from '@src/components/elements/custom_budge/CustomBadge'
+import {userAPI} from "@src/api/api";
 // styles
 import {useStyles} from './useStyles'
-import {userAPI} from "@src/api/api";
 
 export const UserSocialInfo = (props) => {
     const [data, setData] = useState(null)
@@ -14,6 +16,7 @@ export const UserSocialInfo = (props) => {
             .then(result => setData(result))
             .catch(error => console.warn(error))
     }, [])
+    const { pathname } = useRouter()
 
     const onButtonClick = (url) => () => {
         Router.push(`/cabinet/${url}`)
@@ -21,25 +24,25 @@ export const UserSocialInfo = (props) => {
 
     const classes = useStyles();
     return (
-        <div className={classes.root}>
-            <div className="menu-item-subscribe">
-                <div>
-                    <div><Typography variant="h6" color="initial">13</Typography></div>
-                    <div><Typography variant="subtitle1" >{props.t('cabinet:reviews')}</Typography></div>
-                </div>
-                <div onClick={onButtonClick('subscribe')} className={pathname === '/cabinet/subscribe' ? 'selected' : ''}>
-                    <div><Typography variant="h6" color="initial">{data?.original?.number_of_subscribers}</Typography></div>
-                    <div>
-                        <Typography variant="subtitle1">
-                            {props.t('cabinet:subscribers')}
-                        </Typography>
-                    </div>
-                </div>
-                <div>
-                    <div><Typography variant="h6" color="initial">{data?.original?.number_of_subscriptions}</Typography></div>
-                    <div><Typography variant="subtitle1">{props.t('cabinet:subscriptions')}</Typography></div>
-                </div>
-            </div>
-        </div>
+        <List className={classes.root}>
+            <CustomBadge badgeContent={6}>
+                <ButtonComponent
+                    onClick={onButtonClick('rating')}
+                    className={pathname === '/cabinet/rating' ? 'selected' : ''}
+                >
+                    <Typography variant="subtitle1">
+                        {props.t('cabinet:reviews')}
+                    </Typography>
+                </ButtonComponent>
+            </CustomBadge>
+            <ButtonComponent
+                onClick={onButtonClick('subscribe')}
+                className={pathname === '/cabinet/subscribe' ? 'selected' : ''}
+            >
+                <Typography variant="subtitle1">
+                    {props.t('cabinet:subscriptionsAndSubscribers')}
+                </Typography>
+            </ButtonComponent>
+        </List>
     )
 }

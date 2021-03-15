@@ -1,6 +1,6 @@
-import React, {FC} from "react";
-import {Divider, Grid, Typography} from "@material-ui/core";
-import {UserInfoWithAvatar} from "@src/components/elements/user_info_with_avatar/UserInfoWithAvatar";
+import React, {FC} from 'react'
+import {Grid, Typography} from '@material-ui/core'
+import {UserInfoWithAvatar} from '@src/components/elements/user_info_with_avatar/UserInfoWithAvatar'
 import {ButtonComponent} from "@src/components/elements/button/Button";
 // styles
 import {useStyles} from './useStyles';
