@@ -118,6 +118,10 @@ export const useStyles = makeStyles((theme) => ({
                                             color: '#BDBDBD',
                                             fontSize: '0.875rem',
                                             fontWeight: '400',
+                                            '& span.started-price': {
+                                                fontWeight: 600,
+                                                color: '#BB6BD9'
+                                            }
                                         },
                                     },
                                 },
@@ -132,7 +136,7 @@ export const useStyles = makeStyles((theme) => ({
                                 width: '100%',
                                 background: '#333',
                                 backgroundColor:
-                                    'linear-gradient(left, hsla(0,0%,0%,0) 0%, hsla(0,0%,85%,1) 50%, hsla(0,0%,0%,0) 100%)',
+                                    'linear-gradient(90deg, rgba(243, 243, 243, 0) -4.72%, rgba(204, 204, 204, 0.69) 47.81%, rgba(248, 248, 248, 0) 104.92%)',
                             },
                             '&:last-child': {
                                 '&:after': {

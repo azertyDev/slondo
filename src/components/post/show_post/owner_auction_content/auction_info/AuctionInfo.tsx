@@ -126,14 +126,18 @@ export const AuctionInfo: FC<any> = (props) => {
                                             noWrap
                                             className="final-bet"
                                         >
-                                            {item?.bet}
+                                            {numberPrettier(item?.bet)}
                                         </Typography>
                                         <Typography
                                             variant="subtitle1"
                                             noWrap
                                             className="per-bet"
                                         >
-                                            {item?.outbid === 0 ? "Стартовая цена" : `+${item?.outbid}`}
+                                            {item?.outbid === 0 ?
+                                                <span className='started-price'>Стартовая цена</span>
+                                                :
+                                                `+ ${numberPrettier(item?.outbid)}`
+                                            }
                                         </Typography>
                                     </div>
                                 </li>
@@ -159,7 +163,7 @@ export const AuctionInfo: FC<any> = (props) => {
                                 Максимально возможная ставка:
                             </Typography>
                             <Typography variant="subtitle2" color="initial">
-                                {list?.[0]?.max_bet} сум
+                                {numberPrettier(list?.[0]?.max_bet)} сум
                             </Typography>
                         </div>
                     </div>
@@ -176,7 +180,6 @@ export const AuctionInfo: FC<any> = (props) => {
                 </>
                 }
             </div>
-
         </div>
     );
 };

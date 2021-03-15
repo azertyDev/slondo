@@ -2,37 +2,49 @@ import {makeStyles} from '@material-ui/core/styles';
 
 export const useStyles = makeStyles((theme) => ({
     root: {
-        '& > div.menu-item-subscribe': {
-            display: 'flex',
-            backgroundColor: '#F2F2F2',
-            justifyContent: 'space-around',
-            padding: '19px 0 14px 0',
-            borderRadius: '10px',
-            '& > div': {
-                textAlign: 'center',
-                '& > div > h6.MuiTypography-subtitle1': {
-                    color: '#4E4E4E',
-                    cursor: 'pointer'
-                },
-                '& > div:first-child > h6.MuiTypography-h6': {
-                    textAlign: 'center',
-                    fontWeight: '600',
+        display: 'flex',
+        backgroundColor: '#F2F2F2',
+        padding: '15px',
+        borderRadius: '10px',
+        marginBottom: '10px',
+        '& .MuiBadge-root': {
+            marginRight: 5,
+            '& .MuiBadge-badge': {
+                top: '5px',
+                color: '#fff',
+                right: '5px',
+                height: '16px',
+                padding: ' 0',
+                minWidth: '16px',
+                fontWeight: '600',
+                backgroundColor: '#EB5757'
+            }
+        },
+        '& button': {
+            padding: '10px 15px',
+            borderRadius: '5px',
+            background: '#fff',
+            boxShadow: '0px 1px 2px rgba(0, 0, 0, 0.25)',
+            '&.selected': {
+                border: '1px solid #AD66D5',
+                borderRadius: '5px',
+                '& > h6.MuiTypography-subtitle1': {
                     backgroundImage:
                         'linear-gradient(49.94deg, #675EAA 19.03%, #AD66D5 72.72%)',
                     WebkitBackgroundClip: 'text',
-                    WebkitTextFillColor: 'transparent',
+                    WebkitTextFillColor: 'transparent'
                 },
-                '&.selected > div:last-child > h6.MuiTypography-subtitle1': {
-                    borderBottom: '1px solid #9864C9',
-                    backgroundImage:
-                        'linear-gradient(49.94deg, #675EAA 19.03%, #AD66D5 72.72%)',
-                    WebkitBackgroundClip: 'text',
-                    WebkitTextFillColor: 'transparent',
-                },
-                '&:hover': {
-                    cursor: 'pointer'
-                },
-            },
+                '& svg': {
+                    '& > defs > linearGradient > stop': {
+                        '&:first-child': {
+                            stopColor: '#675EAA'
+                        },
+                        '&:last-child': {
+                            stopColor: '#AD66D5'
+                        }
+                    }
+                }
+            }
         },
     },
 }));

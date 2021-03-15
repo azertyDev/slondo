@@ -31,7 +31,7 @@ export const TabsContent: FC<CabinetMenuPropsType & { tabsData: TabsDataType }> 
                                 onChange={handleChange}
                                 variant="fullWidth"
                                 className={classes.cabinetTabs}
-                                TabIndicatorProps={{ style: { backgroundColor: '#AD66D5' } }}
+                                indicatorColor='secondary'
                             >
                                 <Tab
                                     label={
@@ -52,11 +52,7 @@ export const TabsContent: FC<CabinetMenuPropsType & { tabsData: TabsDataType }> 
                                 onChange={handleChange}
                                 variant="fullWidth"
                                 className={classes.cabinetTabs}
-                                TabIndicatorProps={{
-                                    style: {
-                                        backgroundColor: '#AD66D5'
-                                    }
-                                }}
+                                indicatorColor={value === 1 ? 'primary' : 'secondary'}
                             >
                                 <Tab
                                     label={
@@ -64,7 +60,9 @@ export const TabsContent: FC<CabinetMenuPropsType & { tabsData: TabsDataType }> 
                                             {`${tabsData[0].title} (${tabsData[0].count})`}
                                         </Typography>
                                     }
+                                    title={'asdasdasd'}
                                     value={0}
+                                    textColor='secondary'
                                 />
                                 <Tab
                                     label={
@@ -73,6 +71,8 @@ export const TabsContent: FC<CabinetMenuPropsType & { tabsData: TabsDataType }> 
                                         </Typography>
                                     }
                                     value={1}
+                                    textColor='primary'
+                                    selected={true}
                                 />
                             </Tabs>
                             <CustomTabPanel value={value} index={0}>

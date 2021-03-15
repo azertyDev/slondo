@@ -9,6 +9,7 @@ import {
 import {CloseIcon} from '@src/components/elements/icons'
 import {useStyles} from './useStyles'
 import {ButtonComponent} from '@src/components/elements/button/Button'
+import {Link} from '@root/i18n'
 
 type ModalTypes = {
     id?: number,
@@ -51,7 +52,7 @@ export const CustomModal: FC<ModalTypes> = ({ id, content, handleClose, open, ha
                 Вы действительно хотите удалить объявление из избранных
             </Typography>
             <div className='confirm'>
-                <ButtonComponent>
+                <ButtonComponent className='submit'>
                     <Typography variant='subtitle1'>
                         Да
                     </Typography>
@@ -68,10 +69,10 @@ export const CustomModal: FC<ModalTypes> = ({ id, content, handleClose, open, ha
     const completePurchase = (
         <>
             <Typography className="title" variant="h6">
-                Вы подтверждаете зdiv.profile-dataавершение покупки?
+                Вы подтверждаете завершение покупки?
             </Typography>
             <Typography className='subtitle' variant='subtitle1'>
-                При завершении покупки вы соглашаетесь с условиями услуги “<span>Безопасная покупка</span>”
+                При завершении покупки вы соглашаетесь с условиями услуги “<span className='safe-deal'>Безопасная покупка</span>”
             </Typography>
             <div className='confirm'>
                 <ButtonComponent className='submit'>
@@ -84,26 +85,33 @@ export const CustomModal: FC<ModalTypes> = ({ id, content, handleClose, open, ha
     )
 
     const buyNow = (
-        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+        <>
+            <Typography className="title" variant="h6">
+                Купить сейчас
+            </Typography>
             <Typography
                 variant='subtitle1'
                 className='subtitle'
-                style={{ width: '80%', margin: '15px auto 0 auto', textAlign: 'center' }}
             >
-                Нажимая кнопку “Купить сейчас” вы выкупаете лот на сумму 1 400 000 сум и соглашаетесь с условиями
-                сайта
+                Нажимая кнопку “Купить сейчас” вы выкупаете лот на сумму&nbsp;
+                <span className='buy-now-price'>1 400 000</span> сум и соглашаетесь с&nbsp;
+                <span className='condition'>
+                    <Link href="#">
+                        <a>условиями</a>
+                    </Link>
+                </span> сайта
             </Typography>
-            <div className='form' style={{ marginTop: 30 }}>
+            <div className='confirm'>
                 <ButtonComponent
-                    style={{ background: '#7DBCF6', padding: ' 10px 60px ' }}
+                    className='submit'
                     onClick={() => handleSubmit()}
                 >
-                    <Typography variant='subtitle1' style={{ color: 'white' }}>
+                    <Typography variant='subtitle1'>
                         Купить сейчас
                     </Typography>
                 </ButtonComponent>
             </div>
-        </div>
+        </>
     )
 
     return (
