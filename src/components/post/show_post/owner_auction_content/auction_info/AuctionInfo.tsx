@@ -9,16 +9,17 @@ import BuyAuctionComponent from './BuyAuction';
 import {userAPI} from '@src/api/api'
 import AuctionForm from './AuctionForm'
 import {useDispatch, useSelector} from "react-redux";
-import {setErrorMsgAction } from '@src/redux/slices/errorSlice'
+import {setErrorMsgAction} from '@src/redux/slices/errorSlice'
 import {toCamelCase} from "@root/src/helpers";
 import {useTranslation} from "@root/i18n";
 
 export const AuctionInfo: FC<any> = (props) => {
-    const { t } = useTranslation()
+    console.log(props);
+    const {t} = useTranslation()
     const dispatch = useDispatch()
     const isAuth = useSelector<any>(state => state.auth.isAuth)
     const classes = useStyles()
-    const { data } = props
+    const {data} = props
     const [showAll, setShowAll] = useState(false)
     const [page, setPage] = useState(1)
     const date = new Date(data.expiration_at).getTime()
@@ -126,14 +127,18 @@ export const AuctionInfo: FC<any> = (props) => {
                                             noWrap
                                             className="final-bet"
                                         >
-                                            {item?.bet}
+                                            {numberPrettier(item?.bet)}
                                         </Typography>
                                         <Typography
                                             variant="subtitle1"
                                             noWrap
                                             className="per-bet"
                                         >
-                                            {item?.outbid === 0 ? "Стартовая цена" : `+${item?.outbid}`}
+                                            {item?.outbid === 0 ?
+                                                <span className='started-price'>Стартовая цена</span>
+                                                :
+                                                `+ ${numberPrettier(item?.outbid)}`
+                                            }
                                         </Typography>
                                     </div>
                                 </li>
@@ -159,24 +164,23 @@ export const AuctionInfo: FC<any> = (props) => {
                                 Максимально возможная ставка:
                             </Typography>
                             <Typography variant="subtitle2" color="initial">
-                                {list?.[0]?.max_bet} сум
+                                {numberPrettier(list?.[0]?.max_bet)} сум
                             </Typography>
                         </div>
                     </div>
-                {data.ads_type.id === 3 && (
-                    <BuyAuctionComponent auction_id={auction_id} ads_id={ads_id} />
-                )}
-                <div className='suggest_price'>
-                    <ButtonComponent>
-                        <Typography variant="subtitle1" color="initial">
-                            Предложить цену
-                        </Typography>
-                    </ButtonComponent>
-                </div>
+                    {data.ads_type.id === 3 && (
+                        <BuyAuctionComponent auction_id={auction_id} ads_id={ads_id}/>
+                    )}
+                    <div className='suggest_price'>
+                        <ButtonComponent>
+                            <Typography variant="subtitle1" color="initial">
+                                Предложить цену
+                            </Typography>
+                        </ButtonComponent>
+                    </div>
                 </>
                 }
             </div>
-
         </div>
     );
 };

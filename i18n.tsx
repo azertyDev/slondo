@@ -17,5 +17,5 @@ export const {
     defaultLanguage: 'ru',
     otherLanguages: ['uz'],
     localeSubpaths,
-    localePath: path.resolve('./public/static/locales'),
+    localePath: path.resolve('./public/static/locales')
 });

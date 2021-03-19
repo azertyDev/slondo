@@ -3,6 +3,8 @@ import {useRouter} from 'next/router';
 import {i18n, useTranslation} from '@root/i18n';
 import {userAPI} from '@src/api/api';
 import {ShowPost} from '@src/components/post/show_post/ShowPost';
+import {setErrorMsgAction} from '@src/redux/slices/errorSlice';
+import {useDispatch} from 'react-redux';
 
 
 export type SlidersRefType = {
@@ -13,8 +15,8 @@ export type SlidersRefType = {
 };
 
 export const ShowPostContainer: FC = () => {
-    const {t} = useTranslation(['post']);
-
+    const { t } = useTranslation(['post']);
+    const dispatch = useDispatch();
     const url = useRouter().query.url as string;
     const splittedUrl = url.split('-');
     const params = splittedUrl.splice(-3);
@@ -34,6 +36,14 @@ export const ShowPostContainer: FC = () => {
             expiration_at: null,
             number_of_views: null,
             sub_category_id: null,
+            creator: {
+                id: null,
+                name: '',
+                surname: '',
+                phone: '',
+                created_at: '',
+                avatar: ''
+            },
             images: [{
                 id: null,
                 url: {
@@ -122,14 +132,23 @@ export const ShowPostContainer: FC = () => {
                     region: region ?? initValues,
                     city: city ?? initValues,
                     district: district ?? initValues,
-                    ...otherData,
+                    ...otherData
                 }
             });
         } catch (e) {
             setPostData({
                 ...postData,
-                error: e.message,
+                error: e.message
             });
+        }
+    };
+
+    const handleFollow = (userId) => async () => {
+        try {
+            await userAPI.follow(userId);
+            console.log('subscribe successfully');
+        } catch (e) {
+            dispatch(setErrorMsgAction(e));
         }
     };
 
@@ -152,5 +171,6 @@ export const ShowPostContainer: FC = () => {
         descHeight={descHeight}
         postData={postData}
         parameters={parameters}
+        handleFollow={handleFollow}
     />
 };

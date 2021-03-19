@@ -1,15 +1,13 @@
 import React, {FC} from 'react';
 import {SubscriptionItem} from '@src/components/cabinet/cabinet_pages/user_social_info/subscription_item/SubscriptionItem';
-import {SubscriberType} from '@root/interfaces/Auth';
 import {useStyles} from './useStyles';
 
-
-export const UserSubscribers: FC<{ subscribers: SubscriberType[] }> = ({ subscribers }) => {
+export const UserSubscriptions: FC<any> = ({ subscriptions, handleFollow }) => {
 
     const classes = useStyles();
     return (
         <div className={classes.root}>
-            {subscribers.map(subscriber => <SubscriptionItem key={subscriber.id} {...subscriber} />)}
+            {subscriptions.map(subscription => <SubscriptionItem key={subscription.id} {...subscription} />)}
         </div>
     );
 };

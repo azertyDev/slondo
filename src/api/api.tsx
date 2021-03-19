@@ -1,10 +1,10 @@
 import Axios from 'axios';
-import {LocationsDataTypes} from "@root/interfaces/Locations";
-import {CategoryType} from "@root/interfaces/Categories";
-import {FavoriteType} from "@root/interfaces/Favorites";
-import {InnerCardData} from "@root/interfaces/CardData";
-import {AuctionsDataTypes} from "@root/interfaces/Auctions";
-import {cookies} from "@src/helpers";
+import {LocationsDataTypes} from '@root/interfaces/Locations';
+import {CategoryType} from '@root/interfaces/Categories';
+import {InnerCardData} from '@root/interfaces/CardData';
+import {AuctionsDataTypes} from '@root/interfaces/Auctions';
+import {UserInfo} from '@root/interfaces/Auth';
+import {cookies} from '@src/helpers';
 
 
 const uztelecom = 'https://backend.testb.uz/api/';
@@ -27,7 +27,7 @@ export const setTokenToHeader = (): { headers: any } => {
 };
 
 export const userAPI = {
-    login: (phone: string, password: string): Promise<{ token: string }> => {
+    login: (phone: string, password: string): Promise<{ token: string, user: UserInfo }> => {
         const form = new FormData();
         form.set('phone', phone);
         form.set('password', password);
@@ -79,7 +79,7 @@ export const userAPI = {
                 throw err;
             });
     },
-    favoriteAds: (id: number): Promise<unknown> => {
+    favoriteAds: (id: number): Promise<{ message: string }> => {
         const form = new FormData();
         form.set('ads_id', `${id}`);
         return instance
@@ -89,19 +89,53 @@ export const userAPI = {
                 throw err;
             });
     },
-    getFavorites: (lang: string, lot: string): Promise<FavoriteType[]> => {
-        return instance.get(`regular/post/get/favorites?type=${lot}&lang=${lang}`)
+    getFavorites: (lang: string, lot: string): Promise<any> => {
+        return instance.get(`regular/post/get/favorites?type=${lot}&lang=${lang}`, setTokenToHeader())
             .then(res => res.data)
             .catch(err => {
-                throw err
+                throw err;
             });
     },
-
+    getMyPosts: (lang: string, type: string): Promise<any> => {
+        return instance.get(`regular/user/posts?type=${type}&lang=${lang}`, setTokenToHeader())
+            .then(res => res.data)
+            .catch(err => {
+                throw err;
+            });
+    },
+    getAuctionSubs: (lang: string) => {
+        return instance.get(`regular/user/auctions/participating?lang=${lang}`, setTokenToHeader())
+            .then(res => res.data)
+            .catch(err => {
+                throw err;
+            });
+    },
+    getSecurePosts: (lang: string, lot: string): Promise<any> => {
+        return instance.get(`regular/user/posts/secure?type=${lot}&lang=${lang}`, setTokenToHeader())
+            .then(res => res.data)
+            .catch(err => {
+                throw err;
+            });
+    },
+    getSubs: (param) => {
+        return instance.get(`regular/user/${param}/all`, setTokenToHeader())
+            .then(res => res.data)
+            .catch(err => {
+                throw err;
+            });
+    },
+    follow: (id: number): Promise<{ message: string }> => {
+        return instance.post(`regular/user/subscribe?user_id=${id}`, {}, setTokenToHeader())
+            .then(res => res.data)
+            .catch(err => {
+                throw err;
+            });
+    },
     getCategories: (lang: string): Promise<CategoryType[]> => {
         return instance.get(`categories/all?lang=${lang}`)
             .then(res => res.data)
             .catch(err => {
-                throw err
+                throw err;
             });
     },
     getDataForCreatePost: (
@@ -129,7 +163,7 @@ export const userAPI = {
             });
     },
     getPostById: (post_id: string | string[], lang: string, type: string, sub_category_id: string): Promise<any> => {
-        return instance.get(`getPostById?id=${post_id}&lang=${lang}&type=${type}&sub_category_id=${sub_category_id}`)
+        return instance.get(`getPostById?id=${post_id}&lang=${lang}&type=${type}&sub_category_id=${sub_category_id}`, setTokenToHeader())
             .then((res) => res.data)
             .catch((err) => {
                 throw err;

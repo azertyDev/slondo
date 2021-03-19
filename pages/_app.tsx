@@ -6,7 +6,7 @@ import {wrapper} from '@src/redux/store';
 import theme from '@src/theme';
 import "../slick.min.css";
 import 'react-inner-image-zoom/lib/InnerImageZoom/styles.min.css';
-
+import Head from "next/head";
 
 const MyApp = (props) => {
     const {Component, pageProps} = props;
@@ -20,10 +20,15 @@ const MyApp = (props) => {
     }, []);
 
     return (
-        <ThemeProvider theme={theme}>
-            <CssBaseline/>
-            <Component {...pageProps} />
-        </ThemeProvider>
+        <>
+            {/*<Head>*/}
+            {/*    <meta name="viewport" content="viewport-fit=cover" />*/}
+            {/*</Head>*/}
+            <ThemeProvider theme={theme}>
+                <CssBaseline/>
+                <Component {...pageProps} />
+            </ThemeProvider>
+        </>
     );
 };
 

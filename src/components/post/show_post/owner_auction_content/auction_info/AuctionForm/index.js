@@ -16,7 +16,6 @@ const AuctionForm = ({data, handleFormSubmit, list}) => {
     const handleSubmit = (values) => {
         handleFormSubmit({...values, id})
     }
-    console.warn("min_bet", min_bet)
     const formik = useFormik({
         initialValues: {
             bet: '',

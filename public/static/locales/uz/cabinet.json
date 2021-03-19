@@ -5,6 +5,7 @@
     "rating": "Reyting",
     "favorite": "Sevimli",
     "reviews": "Sharhlar",
+    "subscriptionsAndSubscribers": "Obunachilar/obunalar",
     "subscribers": "Obunachilar",
     "subscriptions": "Obunalar",
     "notifications": "Bildiruvlar",
@@ -15,5 +16,6 @@
     "myPurchases": "Buyurtmalarim",
     "settings": "Sozlamalar",
     "exit": "Chiqish",
-    "nonModerated": "Moderatsiyadan o'tmagan"
+    "nonModerated": "Moderatsiyadan o'tmagan",
+    "registrationAt": "Slondoda {{registration_at}} yildan buyon"
 }

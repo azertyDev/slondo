@@ -23,9 +23,9 @@ const ConfirmAuth: FC<WithT> = ({t}) => {
     const dispatch = useDispatch();
 
     const [seconds, setSeconds] = useState<any>(60);
+    const [errorMessage, setErrormessage] = useState("")
     const [smsConfirm, setSmsConfirm] = useState(false)
     const [codeChecker, setCodeChecker] = useState(false)
-    console.warn("seconds", seconds)
     useEffect(() => {
         if (seconds > 0) {
             setTimeout(() => setSeconds(seconds - 1), 1000);
@@ -34,6 +34,9 @@ const ConfirmAuth: FC<WithT> = ({t}) => {
         }
     }, [seconds]);
 
+    const handleErrorMessage = () => {
+        setErrormessage("Дождитесь истечении времени запроса!")
+    }
 
     const confirmMsg = (values) => {
         if (codeChecker) {
@@ -43,7 +46,10 @@ const ConfirmAuth: FC<WithT> = ({t}) => {
             dispatch(fetchRecovery(values));
         } else {
             userAPI.recoverySMS(values.phone, values.code)
-                .then(result => {setCodeChecker(typeof result === 'object' && result !== null); setSeconds(60)})
+                .then(result => {
+                    setCodeChecker(typeof result === 'object' && result !== null);
+                    setSeconds(60)
+                })
         }
     };
 
@@ -117,11 +123,18 @@ const ConfirmAuth: FC<WithT> = ({t}) => {
                                     </div>
                                     <div>
                                         {typeof seconds === 'string' ? <Button type='submit'>
-                                            {seconds}
-                                        </Button> :
-                                        <Button>
-                                            {seconds}
-                                        </Button>
+                                            <div>
+                                                {seconds}
+                                            </div>
+                                            </Button> :
+                                            <div onClick={handleErrorMessage}>
+                                                <div>
+                                                    {seconds}
+                                                </div>
+                                                <div>
+                                                    {errorMessage}
+                                                </div>
+                                            </div>
                                         }
                                     </div>
                                 </>

@@ -1,10 +1,10 @@
 import React, {FC} from 'react';
 import {Grid} from '@material-ui/core';
 import {CardItem} from '@src/components/elements/card/card_item/CardItem';
-import {ViewPropsTypes} from "@src/components/elements/card/card_view/CardView";
+import {ViewPropsType} from "@src/components/elements/card/card_view/CardView";
 
 
-const GridModeView: FC<ViewPropsTypes> = (props) => {
+const GridModeView: FC<ViewPropsType> = (props) => {
     const {isFetch, list,} = props;
 
     return (

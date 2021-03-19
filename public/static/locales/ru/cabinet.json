@@ -4,9 +4,10 @@
     "archive": "Архив",
     "rating": "Рейтинг",
     "favorite": "Избранное",
-    "reviews": "Отзывов",
-    "subscribers": "Подписчика",
-    "subscriptions": "Подписок",
+    "reviews": "Отзывы",
+    "subscriptionsAndSubscribers": "Подписки/подписчики",
+    "subscribers": "Подписчики",
+    "subscriptions": "Подписки",
     "notifications": "Уведомления",
     "messages": "Сообщения",
     "safeShopping": "Безопасная покупка",
@@ -15,5 +16,6 @@
     "myPurchases": "Мои покупки",
     "settings": "Настройки",
     "exit": "Выход",
-    "nonModerated": "Не прошло модерацию"
+    "nonModerated": "Не прошло модерацию",
+    "registrationAt": "На Slondo с {{registration_at}}"
 }

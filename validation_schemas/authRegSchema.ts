@@ -11,13 +11,14 @@ const passwordMatch = 'Пароль должен совпадать с пред�
 
 export const authRegSchema = object({
     phone: number().typeError(numberMsg).required(requiredMsg)
-        .min(13, phoneNumberLength),
+        .test('len', phoneNumberLength, val => val.toString().length === 12),
     password: string().required(requiredMsg)
             .min(6, minCharacterMsg),
 });
 
 export const authRecoverySchema = object({
-    phone: number().required(requiredMsg),
+    phone: number().required(requiredMsg)
+        .test('len', phoneNumberLength, val => val.toString().length === 12),
     code: number().typeError(numberMsg),
         // .test('len', 'Must be exactly 5 characters', val => val.toString().length === 4),
     password: string().min(6, passwordMin),

@@ -1,24 +1,26 @@
-import React from 'react';
+import React, {FC} from 'react';
 import Avatar from '@material-ui/core/Avatar';
+import {StyledBadge, useStyles} from './useStyles';
 
-// styles
-import { useStyles, StyledBadge } from './useStyles';
+type UserAvatarComponentTypes = {
+    avatar: string | boolean
+}
 
-export const UserAvatarComponent = (props) => {
+export const UserAvatarComponent: FC<UserAvatarComponentTypes> = ({ avatar }) => {
     const classes = useStyles();
     return (
-        <div className={classes.root + ' ' + props.className}>
+        <div className={classes.root}>
             <StyledBadge
+                variant="dot"
                 overlap="circle"
                 anchorOrigin={{
                     vertical: 'bottom',
-                    horizontal: 'right',
+                    horizontal: 'right'
                 }}
-                variant="dot"
             >
                 <Avatar
                     alt="avatar"
-                    src="https://i.pinimg.com/originals/6c/a1/68/6ca168f20499b9edf0092a57373ea5b7.jpg"
+                    src={avatar as string}
                 />
             </StyledBadge>
         </div>

@@ -1,6 +1,8 @@
 {
   "signIn": "Kirish",
   "signOut": "Chiqish",
+  "userAlreadyRegistered": "Ro'yxatdan o'tish xatosi, ehtimol siz allaqachon tizimda ro'yxatdan o'tgansiz",
+  "unauthorised": "Telefon raqami va parol kombinatsiyasi noto'g'ri kiritilgan.",
   "signOutFromSite": "Saitdan chiqishini holisizmi?",
   "bonus": "Ro'yxatdan o'tish, e'lonlar yoki savdo yaratish uchun bonuslarni oling.",
   "safeBuying": "Xavfsiz xariddan foydalaning. Mahsulotingizni eshigizni tagiga yetkazamiz.",

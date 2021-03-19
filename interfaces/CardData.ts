@@ -1,3 +1,5 @@
+import {UserInfo} from '@root/interfaces/Auth';
+
 export interface CardData {
     isFetch: boolean;
     isShowMoreFetch?: boolean;
@@ -49,6 +51,7 @@ export type InnerCardData = {
     raiseInRape?: boolean;
     isModerated?: boolean;
     follow?: boolean;
-    isFavorite?: boolean;
+    favorite?: boolean;
     completePurchase?: boolean;
+    creator: UserInfo
 };
