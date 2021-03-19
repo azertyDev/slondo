@@ -18,6 +18,7 @@ type AppearanceFormPropsType = {
     isPreview: boolean,
     currentFormIndex: number,
     handleFormOpen: (i) => () => void,
+    handleNextFormOpen: () => void
 } & WithT;
 
 export const AppearanceForm: FC<AppearanceFormPropsType> = (props) => {
@@ -29,11 +30,11 @@ export const AppearanceForm: FC<AppearanceFormPropsType> = (props) => {
         post,
         setPost,
         isPreview,
-        handleFormOpen
+        handleFormOpen,
+        handleNextFormOpen
     } = props;
 
     const formIndex = 2;
-    const nextFormIndex = 1;
 
     const onSubmit = ({files, color}) => {
         const photos = files.filter(({file}) => file);
@@ -46,7 +47,7 @@ export const AppearanceForm: FC<AppearanceFormPropsType> = (props) => {
         }
 
         setPost({...post, photos});
-        handleFormOpen(nextFormIndex)();
+        handleNextFormOpen();
     };
 
     const formik = useFormik({

@@ -10,8 +10,8 @@ export const useStyles = makeStyles((theme) => ({
             '& > h6': {
                 justifyContent: 'center',
                 '&.numbers-item': {
-                    width: '24px',
-                    height: '24px',
+                    width: '28px',
+                    height: '28px',
                     margin: '0 5px',
                     borderRadius: '50%',
                     backgroundColor: '#fff',

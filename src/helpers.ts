@@ -99,11 +99,15 @@ export const addParentsToCtgrs = (categoriesList: CategoryType[]): CategoryType[
 
 export const prepareDataForCreate = data => (
     Object.keys(data).reduce<any>((acc, key) => {
-        if (data[key]) {
-            if (typeof data[key] === 'object' && Object.keys(data[key]).length) {
+        if (data[key] && key !== 'title') {
+            if (typeof data[key] === 'string' || typeof data[key] === 'number' || Array.isArray(data[key]) && data[key].length) {
+                if (Array.isArray(data[key])) {
+                    acc[key] = data[key].map(({id}) => ({id}));
+                } else {
+                    acc[key] = data[key];
+                }
+            } else if (typeof data[key] === 'object' && !Array.isArray(data[key])) {
                 acc[`${key}_id`] = data[key].id;
-            } else {
-                acc[key] = data[key];
             }
         }
         return acc;

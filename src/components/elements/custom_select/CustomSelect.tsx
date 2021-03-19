@@ -34,6 +34,7 @@ export const CustomSelect: FC<CustomSelectPropsType> = (props) => {
         touched
     } = props;
 
+    const isCurrency = name === 'currency';
     const optionKey = name === 'duration' ? 'hours' : 'name';
 
     const onChange = ({target: {name, value}}) => {
@@ -44,17 +45,19 @@ export const CustomSelect: FC<CustomSelectPropsType> = (props) => {
     const classes = useStyles();
     return (
         <>
-            <Typography variant="subtitle1">
-                <strong>
-                    {t(name)}
-                    {isRequired(name) && <span className='error-text'>*&nbsp;</span>}
-                </strong>
-                {errors?.[name] && touched[name] && (
-                    <span className='error-text'>
+            {!isCurrency && (
+                <Typography variant="subtitle1">
+                    <strong>
+                        {t(name)}
+                        {isRequired(name) && <span className='error-text'>*&nbsp;</span>}
+                    </strong>
+                    {errors?.[name] && touched[name] && (
+                        <span className='error-text'>
                         {t(errors[name] as string)}
                     </span>
-                )}
-            </Typography>
+                    )}
+                </Typography>
+            )}
             <NativeSelect
                 disableUnderline
                 name={name}
@@ -63,15 +66,17 @@ export const CustomSelect: FC<CustomSelectPropsType> = (props) => {
                 value={values[name]?.id ?? 0}
                 className={classes.root + `${errors?.[name] && touched[name] ? ' error-border' : ''}`}
             >
-                <option value={0}>
-                    {t('noSelect')}
-                </option>
+                {!isCurrency && (
+                    <option value={0}>
+                        {t('noSelect')}
+                    </option>
+                )}
                 {items.map(item =>
                     <option
                         key={item.id}
                         value={item.id}
                     >
-                        {name === 'currency' ? t(`common:${item[optionKey]}`) : item[optionKey]}
+                        {name === 'currency' ? t(`common:${item.name}`) : item[optionKey]}
                     </option>
                 )}
             </NativeSelect>

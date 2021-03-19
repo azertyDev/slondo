@@ -106,22 +106,22 @@ export const PostContent: FC<WithT & any> = (props) => {
                     <Typography variant="subtitle1" className="key">
                         {t(key)}
                     </Typography>
-                    {parameters[key].hex_color_code
-                    && <span
-                        style={{
-                            backgroundColor: `${parameters[key].hex_color_code}`,
-                            width: 24,
-                            height: 24,
-                            boxShadow: '0px 0px 4px rgba(0, 0, 0, 0.25)',
-                            marginRight: 15,
-                            borderRadius: '50%'
-                        }}
-                    />}
+                    {parameters[key]?.hex_color_code && (
+                        <span
+                            style={{
+                                backgroundColor: `${parameters[key]?.hex_color_code}`,
+                                width: 24,
+                                height: 24,
+                                boxShadow: '0px 0px 4px rgba(0, 0, 0, 0.25)',
+                                marginRight: 15,
+                                borderRadius: '50%'
+                            }}
+                        />
+                    )}
                     <Typography variant="subtitle1" className="value">
-                        {typeof parameters[key] === 'string'
-                        || typeof parameters[key] === 'number'
+                        {typeof parameters[key] === 'string' || typeof parameters[key] === 'number'
                             ? parameters[key]
-                            : parameters[key].name}
+                            : parameters[key]?.name}
                     </Typography>
                 </li>
             )

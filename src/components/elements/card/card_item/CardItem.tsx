@@ -1,6 +1,6 @@
-import React, {FC, useState} from 'react'
-import {Link} from '@root/i18n'
-import {useTranslation} from 'react-i18next'
+import React, {FC, useState} from 'react';
+import {Link} from '@root/i18n';
+import {useTranslation} from 'react-i18next';
 import {
     Card,
     CardActionArea,
@@ -9,20 +9,20 @@ import {
     IconButton,
     Typography,
     Tooltip
-} from '@material-ui/core'
-import Skeleton from '@material-ui/lab/Skeleton'
+} from '@material-ui/core';
+import Skeleton from '@material-ui/lab/Skeleton';
 import {
     FavoriteIcon,
     DeliveryIcon,
     SafeIcon,
     SwapIcon
-} from '@src/components/elements/icons'
-import {InnerCardData} from '@root/interfaces/CardData'
-import {numberPrettier, transformTitle} from '@src/helpers'
-import {useStyles} from './useStyles'
+} from '@src/components/elements/icons';
+import {InnerCardData} from '@root/interfaces/CardData';
+import {numberPrettier, transformTitle} from '@src/helpers';
 import {userAPI} from '@src/api/api'
 import {useSelector} from "react-redux";
 import {RootState} from "@src/redux/rootReducer";
+import {useStyles} from './useStyles';
 
 
 type CardItemProps = {

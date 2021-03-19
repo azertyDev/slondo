@@ -15,6 +15,7 @@ type modalTypes = {
     content: string,
     handleClose: EventHandler<any>,
     open: boolean
+    title: string
 }
 
 export const CustomModal: FC<modalTypes> = ({ id, content, handleClose, open }) => {

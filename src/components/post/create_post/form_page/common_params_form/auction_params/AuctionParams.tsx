@@ -1,7 +1,7 @@
 import React, {FC} from "react";
 import {WithT} from "i18next";
 import {Checkbox, Grid, TextField, Typography} from "@material-ui/core";
-import {CustomSelect} from "@root/src/components/elements/customSelect/CustomSelect";
+import {CustomSelect} from "@root/src/components/elements/custom_select/CustomSelect";
 import {useStyles} from './useStyles';
 
 

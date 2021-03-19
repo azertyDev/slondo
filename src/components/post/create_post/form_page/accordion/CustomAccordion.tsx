@@ -12,7 +12,7 @@ type AccordionComponentPropsType = {
     icon: any,
     title: string,
     nextButtonTxt: string,
-    handleEdit: () => void,
+    handleEdit?: () => void,
     isEditable: boolean,
 };
 

@@ -9,27 +9,21 @@ export const CabinetMockData: InnerCardData[] = [
         number_of_views: 1,
         region: {
             id: 1233,
-            name: 'Ташкентская область',
+            name: 'Ташкентская область'
         },
         city: {
             id: 34,
-            name: 'Бекабадский район',
+            name: 'Бекабадский район'
         },
         district: {
             id: 54443,
-            name: '',
+            name: ''
         },
         currency: {
             id: 444,
-            name: 'sum',
+            name: 'sum'
         },
-        images: [
-            {
-                url: {
-                    default: '/img/mebel2.jpg',
-                },
-            },
-        ],
+        image: '/img/mebel2.jpg',
         created_at: '22.09.2020',
         delivery: 1,
         exchange: 1,
@@ -54,27 +48,21 @@ export const CabinetMockData: InnerCardData[] = [
         number_of_views: 1,
         region: {
             id: 1233,
-            name: 'Ташкентская область',
+            name: 'Ташкентская область'
         },
         city: {
             id: 34,
-            name: 'Бекабадский район',
+            name: 'Бекабадский район'
         },
         district: {
             id: 54443,
-            name: '',
+            name: ''
         },
         currency: {
             id: 444,
-            name: 'sum',
+            name: 'sum'
         },
-        images: [
-            {
-                url: {
-                    default: '/img/mebel1.jpg',
-                },
-            },
-        ],
+        image: '/img/mebel1.jpg',
         created_at: '22.09.2020',
         delivery: 0,
         exchange: 0,
@@ -84,7 +72,7 @@ export const CabinetMockData: InnerCardData[] = [
         denied: false,
         promote: true,
         raise: true,
-        raiseInRape: true,
+        raiseInRape: true
     },
     {
         id: 3,
@@ -95,27 +83,21 @@ export const CabinetMockData: InnerCardData[] = [
         number_of_views: 1,
         region: {
             id: 1233,
-            name: 'Ташкентская область',
+            name: 'Ташкентская область'
         },
         city: {
             id: 34,
-            name: 'Бекабадский район',
+            name: 'Бекабадский район'
         },
         district: {
             id: 54443,
-            name: '',
+            name: ''
         },
         currency: {
             id: 444,
-            name: 'sum',
+            name: 'sum'
         },
-        images: [
-            {
-                url: {
-                    default: '/img/mebel3.jpg',
-                },
-            },
-        ],
+        image: '/img/mebel3.jpg',
         created_at: '22.09.2020',
         delivery: 0,
         exchange: 1,
@@ -125,7 +107,7 @@ export const CabinetMockData: InnerCardData[] = [
         denied: true,
         promote: true,
         raise: true,
-        raiseInRape: true,
+        raiseInRape: true
     },
     {
         id: 4,
@@ -135,27 +117,21 @@ export const CabinetMockData: InnerCardData[] = [
         number_of_views: 1,
         region: {
             id: 1233,
-            name: 'Ташкент',
+            name: 'Ташкент'
         },
         city: {
             id: 34,
-            name: 'Алмазарский район',
+            name: 'Алмазарский район'
         },
         district: {
             id: 54443,
-            name: '',
+            name: ''
         },
         currency: {
             id: 3500000,
-            name: 'sum',
+            name: 'sum'
         },
-        images: [
-            {
-                url: {
-                    default: '/img/mebel4.jpg',
-                },
-            },
-        ],
+        image: '/img/mebel4.jpg',
         created_at: '22.09.2020',
         delivery: 0,
         exchange: 1,
@@ -165,6 +141,6 @@ export const CabinetMockData: InnerCardData[] = [
         denied: false,
         promote: true,
         raise: true,
-        raiseInRape: true,
-    },
+        raiseInRape: true
+    }
 ];

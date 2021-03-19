@@ -5,7 +5,7 @@ import {
     Button,
     Grid,
     Hidden,
-    Tooltip, ListItem, ListItemText, List, IconButton
+    Tooltip
 } from '@material-ui/core'
 import {
     SettingsIcon,
@@ -15,7 +15,6 @@ import {
     EyeIcon,
     DoubleUpIcon,
     FavoriteBorderIcon,
-    RestoreIcon,
     CloseIcon,
     DoneAllIcon,
     DeliveryIcon,
@@ -23,7 +22,6 @@ import {
     SwapIcon,
     PhoneIcon,
     LetterIcon,
-    NotificationIcon
 } from '@src/components/elements/icons'
 import {ButtonComponent} from '@src/components/elements/button/Button'
 import {BreadcrumbsComponent} from '@src/components/elements/breadcrumbs/Breadcrumbs'
@@ -85,7 +83,7 @@ export const ListMode: FC<ViewPropsTypes> = ({ list }) => {
                                 <div className="card-data">
                                     <div className="img">
                                         <img
-                                            src={el.images[0].url.default}
+                                            src={el.image}
                                         />
                                         <Typography
                                             variant="caption"

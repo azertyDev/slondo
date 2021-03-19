@@ -3,6 +3,9 @@ import {makeStyles} from '@material-ui/core/styles';
 
 export const useStyles = makeStyles((theme) => ({
     root: {
+        '& div.title-wrapper': {
+            marginBottom: '15px'
+        },
         '& input.MuiOutlinedInput-input': {
             padding: '10px 15px'
         },

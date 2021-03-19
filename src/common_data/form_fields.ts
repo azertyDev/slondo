@@ -11,7 +11,6 @@ export const requireFields = [
     'car_engine_type',
     'transmission',
     'transport_type',
-    'area',
     'condition',
     'duration',
     'currency',
@@ -19,27 +18,16 @@ export const requireFields = [
     'floor',
     'number_of_floors',
     'rooms',
-    'general_area',
+    'area',
+    'land_area',
+    'general_area'
 ];
 
 export const requiredMsg = 'requireField';
 
-export const estateTxtFields = [
-    'floor',
-    'land_area',
-    'living_area',
-    'general_area',
-    'kitchen_area',
-    'living_area',
-    'ceiling_height',
-    'number_of_floors',
-    'number_of_bedrooms'
-];
-
 export const excludedKeys = [
     'id',
     'name',
-    // 'type',
     'type_id',
     'sub_type_id'
 ];

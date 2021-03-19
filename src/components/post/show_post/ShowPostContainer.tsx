@@ -134,12 +134,12 @@ export const ShowPostContainer: FC = () => {
     };
 
     useEffect(() => {
-        fetchPostData();
-    }, [lang]);
-
-    useEffect(() => {
         setSlidersRefs(initSlidersRefs);
     }, []);
+
+    useEffect(() => {
+        fetchPostData();
+    }, [lang]);
 
     useEffect(() => {
         const height = document.getElementById('post-description').clientHeight;

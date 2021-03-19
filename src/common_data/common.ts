@@ -10,7 +10,7 @@ export const months = [
     'сентября',
     'октября',
     'ноября',
-    'декабря',
+    'декабря'
 ];
 
 export const WEEK_DAYS = [

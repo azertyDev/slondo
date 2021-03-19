@@ -2,27 +2,28 @@ import React, {FC, Fragment} from "react";
 import {Grid, Typography} from "@material-ui/core";
 import {WithT} from "i18next";
 import {excludedKeys, numericFields} from "@src/common_data/form_fields";
-import {isRequired, paramsFormSchema} from "@root/validation_schemas/createPostSchemas";
-import {CustomSelect} from "@src/components/elements/customSelect/CustomSelect";
+import {paramsFormSchema} from "@root/validation_schemas/createPostSchemas";
+import {CustomSelect} from "@src/components/elements/custom_select/CustomSelect";
 import {ParametersIcon} from "@src/components/elements/icons";
 import {CustomAccordion} from "@src/components/post/create_post/form_page/accordion/CustomAccordion";
 import {numberPrettier, prepareDataForCreate} from "@src/helpers";
 import {numberRegEx} from "@src/common_data/reg_exs";
 import {useStyles} from "./useStyles";
 import {useFormik} from "formik";
+import {CustomFormikField} from "@src/components/elements/custom_formik_field/CustomFormikField";
 
 
 type RegularFormPropsType = {
     isPreview: boolean,
     mark: string,
     filters,
-    handleFormOpen: (k) => () => void,
     currentFormIndex: number,
-    titleComponent,
     type,
     subCategory,
     post,
     setPost,
+    handleNextFormOpen: () => void,
+    handleFormOpen: (k) => () => void,
 } & WithT;
 
 export const CarForm: FC<RegularFormPropsType> = (props) => {
@@ -33,7 +34,7 @@ export const CarForm: FC<RegularFormPropsType> = (props) => {
         isPreview,
         handleFormOpen,
         currentFormIndex,
-        titleComponent,
+        handleNextFormOpen,
         type,
         subCategory,
         post,
@@ -41,7 +42,6 @@ export const CarForm: FC<RegularFormPropsType> = (props) => {
     } = props;
 
     const formIndex = 4;
-    const nextFormIndex = 3;
 
     const onSubmit = (values) => {
         const createData = prepareDataForCreate({...values});
@@ -53,7 +53,7 @@ export const CarForm: FC<RegularFormPropsType> = (props) => {
             type_id: type ? type.id : createData.type_id ?? ''
         };
         setPost({...post});
-        handleFormOpen(nextFormIndex)();
+        handleNextFormOpen();
     };
 
     const formik = useFormik({
@@ -105,7 +105,26 @@ export const CarForm: FC<RegularFormPropsType> = (props) => {
             nextButtonTxt={t('appearance')}
         >
             <div className={classes.root}>
-                {titleComponent}
+                <div className='title-wrapper'>
+                    {isPreview
+                        ? <Typography variant="subtitle1">
+                            <strong>
+                                {t('title')}:&nbsp;
+                            </strong>
+                            {values.title}
+                        </Typography>
+                        : <CustomFormikField
+                            t={t}
+                            name='title'
+                            style={{width: '50%'}}
+                            errors={errors}
+                            touched={touched}
+                            value={values.title}
+                            onChange={handleInput}
+                            placeholder={t('exampleTitle')}
+                            className={errors.title && touched.title ? 'error-border' : ''}
+                        />}
+                </div>
                 <Grid container spacing={2}>
                     {isPreview
                         ? Object.keys(values).map(key => {
