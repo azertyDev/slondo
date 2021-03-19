@@ -38,9 +38,9 @@ export const Messages: FC<any> = () => {
                 <Grid item xs={4} className={classes.sidebar}>
                     <div className='conversation-list'>
                         {
-                            Array.from({ length: 15 }).map(() => {
+                            Array.from({length: 15}).map(() => {
                                 return <div className='conversation-item'>
-                                    <UserAvatarComponent className='avatar' />
+                                    <UserAvatarComponent avatar=''/>
                                     <div className='user-info'>
                                         <div className='user-name'>
                                             <Typography variant='subtitle1'>
@@ -70,7 +70,7 @@ export const Messages: FC<any> = () => {
                             aria-haspopup="true"
                             onClick={handleClick}
                         >
-                            <MoreVertIcon />
+                            <MoreVertIcon/>
                         </IconButton>
                         <Menu
                             id="long-menu"
@@ -101,7 +101,7 @@ export const Messages: FC<any> = () => {
                     </div>
                     <div className='compose'>
                         <IconButton className='sendFileBtn'>
-                            <AttachFileIcon />
+                            <AttachFileIcon/>
                         </IconButton>
                         <div className='textField'>
                             <InputBase
@@ -110,7 +110,7 @@ export const Messages: FC<any> = () => {
                                 fullWidth
                             />
                             <IconButton className='send-btn'>
-                                <SendIcon />
+                                <SendIcon/>
                             </IconButton>
                         </div>
                     </div>

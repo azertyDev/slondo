@@ -43,7 +43,7 @@ const ConfirmAuth: FC<WithT> = ({t}) => {
             dispatch(fetchTokenRecovery(values));
             dispatch(setIsAuthModalOpen(false));
         } else if (smsConfirm) {
-            dispatch(fetchRecovery(values));
+            dispatch(fetchRecovery());
         } else {
             userAPI.recoverySMS(values.phone, values.code)
                 .then(result => {

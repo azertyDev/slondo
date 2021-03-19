@@ -16,18 +16,26 @@ const initCard: InnerCardData = {
     sub_category_id: null,
     currency: {
         id: null,
-        name: '',
+        name: ''
     },
     created_at: '',
     region: {
         id: null,
-        name: '',
+        name: ''
     },
     city: {
         id: null,
-        name: '',
+        name: ''
     },
     image: '',
+    creator: {
+        id: null,
+        name: '',
+        surname: '',
+        phone: '',
+        avatar: '',
+        created_at: ''
+    },
     category: {
         id: null,
         name: '',
@@ -61,7 +69,7 @@ export const PostsSliderContainer: FC = () => {
         try {
             setCardData({
                 ...cardData,
-                isFetch: true,
+                isFetch: true
             });
 
             const {data, total} = await userAPI.getCards(
@@ -83,7 +91,7 @@ export const PostsSliderContainer: FC = () => {
             dispatch(setErrorMsgAction(e.message));
             setCardData({
                 ...cardData,
-                error: e.message,
+                error: e.message
             });
         }
     };

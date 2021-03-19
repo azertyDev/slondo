@@ -13,15 +13,23 @@ const initCard: InnerCardData = {
     price: null,
     currency: {
         id: null,
-        name: '',
+        name: ''
     },
     created_at: '',
     image: '',
+    creator: {
+        id: null,
+        name: '',
+        surname: '',
+        phone: '',
+        avatar: '',
+        created_at: ''
+    },
     region: null,
     city: null,
     delivery: null,
     exchange: null,
-    ads_type: '',
+    ads_type: ''
 };
 
 const initCards: InnerCardData[] = [];
@@ -35,8 +43,8 @@ const initialCardData: CardData = {
     error: null,
     data: {
         cards: initCards,
-        total: null,
-    },
+        total: null
+    }
 };
 
 export const SimilarPostsContainer: FC<{ ancmntType: string }> = (props) => {
@@ -52,14 +60,14 @@ export const SimilarPostsContainer: FC<{ ancmntType: string }> = (props) => {
         try {
             setCardData({
                 ...cardData,
-                isFetch: true,
+                isFetch: true
             });
 
             const newData = await userAPI.getCards(
                 ITEMS_PER_PAGE,
                 currentPage,
                 type,
-                lang,
+                lang
             );
 
             setCardData({
@@ -67,13 +75,13 @@ export const SimilarPostsContainer: FC<{ ancmntType: string }> = (props) => {
                 isFetch: false,
                 data: {
                     cards: newData.data,
-                    total: newData.total,
-                },
+                    total: newData.total
+                }
             });
         } catch (e) {
             setCardData({
                 ...cardData,
-                error: e.message,
+                error: e.message
             });
         }
     };
