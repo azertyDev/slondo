@@ -1,32 +1,30 @@
-import React, {FC, useState} from "react";
-import {useDispatch, useSelector} from "react-redux";
-import {Tab, Tabs, Typography} from "@material-ui/core";
-import {i18n, Link} from "@root/i18n";
-import {CustomTabPanel} from "../custom_tab_panel/CustomTabPanel";
-import {Form, FormikProvider, useFormik} from "formik";
-import {CustomFormikField} from "../custom_formik_field/CustomFormikField";
-import {ButtonComponent} from "../button/Button";
-import {RootState} from "@src/redux/rootReducer";
-import {fetchTokenLogin, fetchTokenRegister} from "@src/redux/slices/authRegSlice";
-import {AuthInputs} from "@root/interfaces/Auth";
-import {WithT} from "i18next";
+import React, {FC, useState} from 'react';
+import {useDispatch, useSelector} from 'react-redux';
+import {Tab, Tabs, Typography} from '@material-ui/core';
+import {i18n, Link} from '@root/i18n';
+import {CustomTabPanel} from '../custom_tab_panel/CustomTabPanel';
+import {Form, FormikProvider, useFormik} from 'formik';
+import {CustomFormikField} from '../custom_formik_field/CustomFormikField';
+import {ButtonComponent} from '../button/Button';
+import {RootState} from '@src/redux/rootReducer';
+import {WithT} from 'i18next';
 import {useStyles} from './useStyles';
-import {authRegSchema} from "@root/validation_schemas/authRegSchema";
-import ConfirmAuth from "@src/components/elements/auth_reg_form/ConfirmAuth";
-import {setErrorMsgAction} from "@src/redux/slices/errorSlice";
-import {toCamelCase, cookies} from "@src/helpers";
-import {userAPI} from "@src/api/api";
-import {setIsAuthAction} from "@src/redux/slices/authRegSlice";
+import {authRegSchema} from '@root/validation_schemas/authRegSchema';
+import ConfirmAuth from '@src/components/elements/auth_reg_form/ConfirmAuth';
+import {setErrorMsgAction} from '@src/redux/slices/errorSlice';
+import {cookies, toCamelCase} from '@src/helpers';
+import {signInAction} from '@src/redux/slices/authRegSlice';
+import {userAPI} from '@src/api/api';
 
 
-const initialInputsVals: AuthInputs = {
+const initialInputsVals = {
     phone: '+998',
     password: '',
     code: ''
 };
 
 export const AuthRegForm: FC<WithT & { handleCloseModal: () => void }> = (props) => {
-    const {t} = props;
+    const { t } = props;
     const {language} = i18n;
 
     const dispatch = useDispatch();
@@ -46,10 +44,9 @@ export const AuthRegForm: FC<WithT & { handleCloseModal: () => void }> = (props)
         const data = {...values, phone};
         if (tabValue === 0) {
             userAPI.login(data.phone, data.password)
-                .then(result => {
-                    cookies.set('token', result.token, {path: '/', maxAge: 2 * 3600});
-                    cookies.set('user', result.user, {path: '/', maxAge: 2 * 3600});
-                    dispatch(setIsAuthAction({payload: true}));
+                .then(({ token, user }) => {
+                    cookies.set('token', token, { path: '/', maxAge: 2 * 3600 });
+                    dispatch(signInAction(user));
                 })
                 .catch(error => dispatch(setErrorMsgAction(t(`auth_reg:${toCamelCase(error.response.data.error)}`))))
         } else {

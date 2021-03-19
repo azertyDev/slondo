@@ -12,9 +12,9 @@ import {useDispatch, useSelector} from "react-redux";
 import {setErrorMsgAction} from '@src/redux/slices/errorSlice'
 import {toCamelCase} from "@root/src/helpers";
 import {useTranslation} from "@root/i18n";
-import {userInfo} from "@root/src/helpers";
 
 export const AuctionInfo: FC<any> = (props) => {
+    console.log(props);
     const {t} = useTranslation()
     const dispatch = useDispatch()
     const isAuth = useSelector<any>(state => state.auth.isAuth)
@@ -27,8 +27,6 @@ export const AuctionInfo: FC<any> = (props) => {
     const [lastPage, setLastPage] = useState(null)
     const auction_id = data?.auction?.id
     const ads_id = data?.id
-    const user_info = userInfo()
-    const user_id = user_info?.id
 
     useEffect(() => {
         userAPI.getAuctionBets(data.auction.id, page).then(result => {
@@ -157,7 +155,7 @@ export const AuctionInfo: FC<any> = (props) => {
                         Все ставки
                     </Typography>
                 </div>
-                {isAuth && data?.user_id !== user_id &&
+                {isAuth &&
                 <>
                     <div className="bet-info">
                         <AuctionForm data={data} handleFormSubmit={handleSubmit} list={list}/>

@@ -1,27 +1,24 @@
-import React, {FC, useState} from 'react'
-import {Tabs, Tab, Typography} from '@material-ui/core'
-import {CustomTabPanel} from '@src/components/elements/custom_tab_panel/CustomTabPanel'
-import {CabinetMenuPropsType, CabinetWrapper} from '@src/components/cabinet/CabinetWrapper'
-import {TabsDataType} from '@src/components/cabinet/cabinet_pages/archive/ArchiveContainer'
-import {CabinetMockData} from '@src/components/cabinet/CabinetMockData'
-import {MyPurchases} from '@src/components/cabinet/cabinet_pages/my_purchases/MyPurchases'
-import {useTranslation} from 'react-i18next'
-import {useStyles} from './useStyles'
-import {useRouter} from "next/router";
+import React, {FC, useState} from 'react';
+import {Tab, Tabs, Typography} from '@material-ui/core';
+import {CustomTabPanel} from '@src/components/elements/custom_tab_panel/CustomTabPanel';
+import {CabinetMenuPropsType, CabinetWrapper} from '@src/components/cabinet/CabinetWrapper';
+import {TabsDataType} from '@src/components/cabinet/cabinet_pages/archive/ArchiveContainer';
+import {MyPurchases} from '@src/components/cabinet/cabinet_pages/my_purchases/MyPurchases';
+import {useTranslation} from 'react-i18next';
+import {useStyles} from './useStyles';
 
 
 export const TabsContent: FC<CabinetMenuPropsType & { tabsData: TabsDataType }> = (
     { tabsData, headerTitle, title }
 ) => {
-    const router = useRouter()
-    const [value, setValue] = useState(0)
-    const { t } = useTranslation('cabinet')
-    const handleChange = (event, newValue) => {
-        setValue(newValue)
-        router.push(`?tabValue=${value}`)
-    }
+    const { t } = useTranslation('cabinet');
+    const [value, setValue] = useState(0);
 
-    const classes = useStyles()
+    const handleChange = (event, newValue) => {
+        setValue(newValue);
+    };
+
+    const classes = useStyles();
     return (
         <div className={classes.root}>
             <CabinetWrapper headerTitle={headerTitle} title={title}>
@@ -45,7 +42,7 @@ export const TabsContent: FC<CabinetMenuPropsType & { tabsData: TabsDataType }> 
                                 />
                             </Tabs>
                             <CustomTabPanel value={value} index={value}>
-                                <MyPurchases list={CabinetMockData} />
+                                <MyPurchases />
                             </CustomTabPanel>
                         </>
                         : <>
@@ -59,17 +56,16 @@ export const TabsContent: FC<CabinetMenuPropsType & { tabsData: TabsDataType }> 
                                 <Tab
                                     label={
                                         <Typography variant="subtitle1">
-                                            {`${tabsData[0].title} (${tabsData[0].count})`}
+                                            {`${tabsData[0].title} (${tabsData[0].total})`}
                                         </Typography>
                                     }
-                                    title={'asdasdasd'}
                                     value={0}
                                     textColor='secondary'
                                 />
                                 <Tab
                                     label={
                                         <Typography variant="subtitle1">
-                                            {`${tabsData[1].title} (${tabsData[1].count})`}
+                                            {`${tabsData[1].title} (${tabsData[1].total})`}
                                         </Typography>
                                     }
                                     value={1}

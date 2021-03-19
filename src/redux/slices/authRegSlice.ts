@@ -1,44 +1,52 @@
 import {createAsyncThunk, createSlice} from '@reduxjs/toolkit';
-import {userAPI} from "@src/api/api";
-import {cookies} from "@src/helpers";
-import {AuthInputs, AuthReg, RecoveryInputs} from "@root/interfaces/Auth";
-import {COOKIE_LIFE_TIME} from "@src/constants";
+import {userAPI} from '@src/api/api';
+import {cookies} from '@src/helpers';
+import {AuthReg, RecoveryInputs} from '@root/interfaces/Auth';
+import {COOKIE_LIFE_TIME} from '@src/constants';
 
 
 const initialState: AuthReg = {
     error: null,
     isFetch: false,
     isAuth: false,
-    isAuthModalOpen: false
+    isAuthModalOpen: false,
+    user: {
+        id: null,
+        name: '',
+        surname: '',
+        phone: '',
+        avatar: '',
+        created_at: ''
+    }
 };
 
-export const fetchTokenLogin = createAsyncThunk<never, AuthInputs>(
-    'authReg/fetchTokenByLogin',
-    async ({phone, password}, {rejectWithValue}) => {
-        try {
-            const {token, user} = await userAPI.login(phone, password);
-            !!token && cookies.set('token', token, {path: '/', maxAge: 2 * 3600});
-            !!user && cookies.set('user', user, {path: '/', maxAge: 2 * 3600});
-        } catch (e) {
-            return rejectWithValue(e.message);
-        }
-    }
-);
+// export const fetchTokenLogin = createAsyncThunk<UserInfo, { phone: string, password: string }>(
+//     'authReg/fetchTokenByLogin',
+//     async ({ phone, password }, { rejectWithValue }) => {
+//         try {
+//             const { token, user } = await userAPI.login(phone, password);
+//             !!token && cookies.set('token', token, { path: '/', maxAge: 2 * 3600 });
+//             return user;
+//         } catch (e) {
+//             return rejectWithValue(e.message);
+//         }
+//     }
+// );
+//
+// export const fetchTokenRegister = createAsyncThunk<never, never>(
+//     'authReg/fetchTokenByRegister',
+//     async ({ phone }, { rejectWithValue }) => {
+//         try {
+//             await userAPI.register(phone);
+//         } catch (e) {
+//             return rejectWithValue(e.message);
+//         }
+//     }
+// );
 
-export const fetchTokenRegister = createAsyncThunk<never, AuthInputs>(
-    'authReg/fetchTokenByRegister',
-    async ({phone}, {rejectWithValue}) => {
-        try {
-            await userAPI.register(phone);
-        } catch (e) {
-            return rejectWithValue(e.message);
-        }
-    }
-);
-
-export const fetchRecovery = createAsyncThunk<never, AuthInputs>(
+export const fetchRecovery = createAsyncThunk<never, never>(
     'authReg/fetchRecovery',
-    async ({phone}, {rejectWithValue}) => {
+    async ({ phone }, { rejectWithValue }) => {
         try {
             await userAPI.recoveryRequest(phone);
         } catch (e) {
@@ -63,28 +71,32 @@ const authRegSlice = createSlice({
     name: 'authReg',
     initialState,
     reducers: {
-        setIsAuthAction: (state, action) => {
-            state.isAuth = action.payload;
+        signInAction: (state, action) => {
+            state.isAuth = true;
+            state.user = action.payload;
+        },
+        signOutAction: () => {
+            return { ...initialState };
         },
         setIsAuthModalOpen: (state, action) => {
             state.isAuthModalOpen = action.payload;
         }
     },
-    extraReducers: (builder) => {
-        builder.addCase(fetchTokenLogin.pending, (state) => {
-            state.isFetch = true;
-            state.error = null;
-        })
-        builder.addCase(fetchTokenLogin.fulfilled, (state) => {
-            state.isFetch = false;
-            state.error = null;
-        })
-        builder.addCase(fetchTokenLogin.rejected, (state, action) => {
-            state.isFetch = false;
-            state.error = action.payload;
-        })
-    }
+    // extraReducers: (builder) => {
+    //     builder.addCase(fetchTokenLogin.pending, (state) => {
+    //         state.isFetch = true;
+    //         state.error = null;
+    //     })
+    //     builder.addCase(fetchTokenLogin.fulfilled, (state) => {
+    //         state.isFetch = false;
+    //         state.error = null;
+    //     })
+    //     builder.addCase(fetchTokenLogin.rejected, (state, action) => {
+    //         state.isFetch = false;
+    //         state.error = action.payload;
+    //     })
+    // }
 });
 
-export const {setIsAuthAction, setIsAuthModalOpen} = authRegSlice.actions;
+export const { signInAction, signOutAction, setIsAuthModalOpen } = authRegSlice.actions;
 export const authReducer = authRegSlice.reducer;

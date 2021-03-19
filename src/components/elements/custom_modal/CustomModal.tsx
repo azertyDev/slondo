@@ -1,31 +1,34 @@
-import React, {EventHandler, FC} from 'react'
-import {
-    Modal,
-    Backdrop,
-    Fade,
-    IconButton,
-    Typography, List, ListItem, ListItemText
-} from '@material-ui/core'
-import {CloseIcon} from '@src/components/elements/icons'
-import {useStyles} from './useStyles'
-import {ButtonComponent} from '@src/components/elements/button/Button'
-import {Link} from '@root/i18n'
+import React, {FC} from 'react';
+import {Backdrop, Fade, IconButton, List, ListItem, ListItemText, Modal, Typography} from '@material-ui/core';
+import {CloseIcon} from '@src/components/elements/icons';
+import {ButtonComponent} from '@src/components/elements/button/Button';
+import {Link} from '@root/i18n';
+import {userAPI} from '@src/api/api';
+import {useStyles} from './useStyles';
 
-type ModalTypes = {
-    id?: number,
+type ModalPropsType = {
     content: string,
-    handleClose: EventHandler<any>,
+    handleClose: () => void,
+    openModal: boolean,
+    favoritePostId: number,
+    setOpenModal: (boolean) => void,
     handleSubmit?: () => void,
-    open: boolean
 }
 
-export const CustomModal: FC<ModalTypes> = ({ id, content, handleClose, open, handleSubmit }) => {
-    const classes = useStyles()
+export const CustomModal: FC<ModalPropsType> = ({ content, handleClose, openModal, handleSubmit, favoritePostId, setOpenModal }) => {
+    const classes = useStyles();
+
+    const handleFavorite = (id) => {
+        userAPI.favoriteAds(id)
+            .then(res => console.log(res.message))
+            .catch(e => console.log(e));
+        setOpenModal(false);
+    };
 
     const settings = (
         <>
             <Typography className="title" variant="h6">
-                Объявление № {id}
+                Объявление № 1
             </Typography>
             <List component="nav" aria-label="main" className={classes.settingsList} disablePadding>
                 <ListItem button>
@@ -52,12 +55,12 @@ export const CustomModal: FC<ModalTypes> = ({ id, content, handleClose, open, ha
                 Вы действительно хотите удалить объявление из избранных
             </Typography>
             <div className='confirm'>
-                <ButtonComponent className='submit'>
+                <ButtonComponent className='submit' onClick={() => handleFavorite(favoritePostId)}>
                     <Typography variant='subtitle1'>
                         Да
                     </Typography>
                 </ButtonComponent>
-                <ButtonComponent>
+                <ButtonComponent onClick={() => handleClose()}>
                     <Typography variant='subtitle1'>
                         Нет
                     </Typography>
@@ -120,7 +123,7 @@ export const CustomModal: FC<ModalTypes> = ({ id, content, handleClose, open, ha
                 aria-labelledby="transition-modal-title"
                 aria-describedby="transition-modal-description"
                 className={classes.modal}
-                open={open}
+                open={openModal}
                 onClose={handleClose}
                 closeAfterTransition
                 BackdropComponent={Backdrop}
@@ -128,7 +131,7 @@ export const CustomModal: FC<ModalTypes> = ({ id, content, handleClose, open, ha
                     timeout: 300
                 }}
             >
-                <Fade in={open}>
+                <Fade in={openModal}>
                     <div className={classes.paper}>
                         <IconButton
                             onClick={handleClose}

@@ -6,10 +6,22 @@ import {UserInfoWithAvatar} from '@src/components/elements/user_info_with_avatar
 import {SocialsBlock} from '@root/src/components/elements/socials_block/SocialsBlock';
 import {useStyles} from './useStyles';
 
+type OwnerPropsType = {
+    safe_deal: number,
+    owner?: {
+        id: number,
+        name: string,
+        surname: string,
+        phone: string,
+        created_at: string,
+        avatar: string
+    },
+    handleFollow: (userId) => () => void
+}
 
-export const OwnerInfo: FC<any> = ({phone, safe_deal}) => {
+
+export const OwnerInfo: FC<OwnerPropsType> = ({ safe_deal, owner, handleFollow }) => {
     const [isPhoneAval, setIsPhoneAval] = React.useState(false);
-
     const handleShowPhone = () => {
         setIsPhoneAval(!isPhoneAval);
     };
@@ -17,13 +29,14 @@ export const OwnerInfo: FC<any> = ({phone, safe_deal}) => {
     const classes = useStyles();
     return (
         <div className={classes.root}>
-            <UserInfoWithAvatar/>
+            <UserInfoWithAvatar canSubscribe owner={owner} handleFollow={handleFollow} />
             <div className="contact-buttons">
                 <ButtonComponent color="primary" onClick={handleShowPhone}>
                     <Typography variant="subtitle1" color="initial">
                         {isPhoneAval
-                            ? phone || 'default'
-                            : 'Показать номер'}
+                            ? owner.phone || 'default'
+                            : 'Показать номер'
+                        }
                     </Typography>
                 </ButtonComponent>
                 <ButtonComponent color="primary" className='contact-btn'>

@@ -6,7 +6,7 @@ import {cookies} from '@root/src/helpers';
 import Top from "./top/TopContainer";
 import Bottom from './bottom/Bottom';
 import {AuthRegPage} from "./auth_reg/AuthRegPage";
-import {setIsAuthAction, setIsAuthModalOpen} from '@src/redux/slices/authRegSlice';
+import {signInAction, setIsAuthModalOpen} from '@src/redux/slices/authRegSlice';
 import {RootState} from "@src/redux/rootReducer";
 import {fetchLocations} from "@src/redux/slices/locationsSlice";
 import {useStyles} from './useStyles';
@@ -30,9 +30,9 @@ export const Header: FC = () => {
         dispatch(fetchLocations(lang));
     }, [lang]);
 
-    useEffect(() => {
-        dispatch(setIsAuthAction(isToken));
-    }, [isToken]);
+    // useEffect(() => {
+    //     dispatch(signInAction(isToken));
+    // }, [isToken]);
 
     const classes = useStyles();
     return (

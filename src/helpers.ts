@@ -1,10 +1,10 @@
-import Cookies from "universal-cookie";
-import {CategoryType, SubCtgrsType} from "@root/interfaces/Categories";
+import Cookies from 'universal-cookie';
+import {CategoryType, SubCtgrsType} from '@root/interfaces/Categories';
 import CyrillicToTranslit from 'cyrillic-to-translit-js';
-import {punctuationMarksRegEx} from "@src/common_data/reg_exs";
-import {TFunction} from "next-i18next";
-import {categories_list} from "@src/common_data/categories_list";
-import {requireFields} from "@src/common_data/form_fields";
+import {punctuationMarksRegEx} from '@src/common_data/reg_exs';
+import {TFunction} from 'next-i18next';
+import {categories_list} from '@src/common_data/categories_list';
+import {requireFields} from '@src/common_data/form_fields';
 
 
 export const cookies = new Cookies();
@@ -16,10 +16,6 @@ export const isRequired = (field: string): boolean =>
 export const authChecker = (): boolean => {
     return typeof cookies.get('token') !== 'undefined';
 };
-
-export const userInfo = () => {
-    return cookies.get('user') || {}
-}
 
 export const toCamelCase = (text: string) => {
     const result = [];

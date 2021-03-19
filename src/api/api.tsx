@@ -1,11 +1,10 @@
 import Axios from 'axios';
-import {LocationsDataTypes} from "@root/interfaces/Locations";
-import {CategoryType} from "@root/interfaces/Categories";
-import {FavoriteType} from "@root/interfaces/Favorites";
-import {InnerCardData} from "@root/interfaces/CardData";
-import {AuctionsDataTypes} from "@root/interfaces/Auctions";
-import {UserInfo} from "@root/interfaces/Auth";
-import {cookies} from "@src/helpers";
+import {LocationsDataTypes} from '@root/interfaces/Locations';
+import {CategoryType} from '@root/interfaces/Categories';
+import {InnerCardData} from '@root/interfaces/CardData';
+import {AuctionsDataTypes} from '@root/interfaces/Auctions';
+import {UserInfo} from '@root/interfaces/Auth';
+import {cookies} from '@src/helpers';
 
 
 const uztelecom = 'https://backend.testb.uz/api/';
@@ -80,7 +79,7 @@ export const userAPI = {
                 throw err;
             });
     },
-    favoriteAds: (id: number): Promise<unknown> => {
+    favoriteAds: (id: number): Promise<{ message: string }> => {
         const form = new FormData();
         form.set('ads_id', `${id}`);
         return instance
@@ -90,60 +89,53 @@ export const userAPI = {
                 throw err;
             });
     },
-    getFavorites: (lang: string, lot: string): Promise<FavoriteType[]> => {
+    getFavorites: (lang: string, lot: string): Promise<any> => {
         return instance.get(`regular/post/get/favorites?type=${lot}&lang=${lang}`, setTokenToHeader())
             .then(res => res.data)
             .catch(err => {
-                throw err
+                throw err;
             });
     },
-    getPosts: (lang: string, lot: string): Promise<FavoriteType[]> => {
-        return instance.get(`regular/user/posts?type=${lot}&lang=${lang}`, setTokenToHeader())
+    getMyPosts: (lang: string, type: string): Promise<any> => {
+        return instance.get(`regular/user/posts?type=${type}&lang=${lang}`, setTokenToHeader())
             .then(res => res.data)
             .catch(err => {
-                throw err
+                throw err;
             });
     },
     getAuctionSubs: (lang: string) => {
         return instance.get(`regular/user/auctions/participating?lang=${lang}`, setTokenToHeader())
             .then(res => res.data)
             .catch(err => {
-                throw err
+                throw err;
             });
     },
-    getSecurePosts: (lang: string, lot: string): Promise<FavoriteType[]> => {
+    getSecurePosts: (lang: string, lot: string): Promise<any> => {
         return instance.get(`regular/user/posts/secure?type=${lot}&lang=${lang}`, setTokenToHeader())
             .then(res => res.data)
             .catch(err => {
-                throw err
+                throw err;
             });
     },
-    getSubscribers: (): Promise<FavoriteType[]> => {
-        return instance.get(`regular/post/user/subscribers/all`, setTokenToHeader())
+    getSubs: (param) => {
+        return instance.get(`regular/user/${param}/all`, setTokenToHeader())
             .then(res => res.data)
             .catch(err => {
-                throw err
+                throw err;
             });
     },
-    getSubscriptions: (): Promise<FavoriteType[]> => {
-        return instance.get(`regular/post/user/subscriptions/all`, setTokenToHeader())
+    follow: (id: number): Promise<{ message: string }> => {
+        return instance.post(`regular/user/subscribe?user_id=${id}`, {}, setTokenToHeader())
             .then(res => res.data)
             .catch(err => {
-                throw err
-            });
-    },
-    getNumberOfSubs: (): Promise<FavoriteType[]> => {
-        return instance.get(`regular/user/numberOfSubscribe`, setTokenToHeader())
-            .then(res => res.data)
-            .catch(err => {
-                throw err
+                throw err;
             });
     },
     getCategories: (lang: string): Promise<CategoryType[]> => {
         return instance.get(`categories/all?lang=${lang}`)
             .then(res => res.data)
             .catch(err => {
-                throw err
+                throw err;
             });
     },
     getDataForCreatePost: (

@@ -16,5 +16,6 @@
     "myPurchases": "Мои покупки",
     "settings": "Настройки",
     "exit": "Выход",
-    "nonModerated": "Не прошло модерацию"
+    "nonModerated": "Не прошло модерацию",
+    "registrationAt": "На Slondo с {{registration_at}}"
 }

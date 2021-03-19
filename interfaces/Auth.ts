@@ -1,19 +1,10 @@
-export interface AuthInputs {
-    phone: string;
-    password: string;
-    code: string;
-}
 export interface UserInfo {
-    active: number | null;
-    created_at: string | null;
-    email: string | null;
-    email_verified_at: string | null;
-    id: number | null;
-    name: string | null;
-    phone: string | null;
-    status: string | null;
-    surname: string | null;
-    updated_at: string;
+    id: number,
+    name: string,
+    surname: string,
+    phone: string,
+    avatar: string | boolean,
+    created_at: string
 }
 export interface RecoveryInputs {
     phone: string;
@@ -27,4 +18,12 @@ export interface AuthReg {
     isAuth: boolean;
     error?: unknown;
     isAuthModalOpen: boolean;
+    user: UserInfo
+}
+
+export type SubscriberType = {
+    id: number,
+    subscriber_id: number,
+    user_id: number,
+    user?: UserInfo
 }

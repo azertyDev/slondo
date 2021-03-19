@@ -13,7 +13,8 @@ export const ShowPost: FC<any> = (props) => {
         postData: {data},
         parameters,
         descHeight,
-        slidersRefs
+        slidersRefs,
+        handleFollow
     } = props;
 
     const classes = useStyles();
@@ -32,7 +33,7 @@ export const ShowPost: FC<any> = (props) => {
                     </Grid>
                     <Hidden mdDown>
                         <Grid item lg={3}>
-                            <OwnerAuctionContent {...props} />
+                            <OwnerAuctionContent t={t} postData={data} handleFollow={handleFollow} />
                             <div className={classes.adBanner}>
                                 <Banner height="424px"/>
                             </div>

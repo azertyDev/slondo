@@ -4,24 +4,16 @@ import {useRouter} from 'next/router'
 import {Router} from '@root/i18n'
 import {ButtonComponent} from '@src/components/elements/button/Button'
 import {CustomBadge} from '@src/components/elements/custom_budge/CustomBadge'
-import {userAPI} from "@src/api/api";
-// styles
 import {useStyles} from './useStyles'
 
 export const UserSocialInfo = (props) => {
-    const [data, setData] = useState(null)
-    const {pathname} = useRouter();
-    useEffect(() => {
-        userAPI.getNumberOfSubs()
-            .then(result => setData(result))
-            .catch(error => console.warn(error))
-    }, [])
+    const { pathname } = useRouter()
 
     const onButtonClick = (url) => () => {
         Router.push(`/cabinet/${url}`)
-    };
+    }
 
-    const classes = useStyles();
+    const classes = useStyles()
     return (
         <List className={classes.root}>
             <CustomBadge badgeContent={6}>

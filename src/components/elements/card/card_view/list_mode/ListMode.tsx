@@ -1,69 +1,40 @@
-import React, {FC, useState} from 'react'
+import React, {FC} from 'react';
+import {Button, Grid, Hidden, Paper, Tooltip, Typography} from '@material-ui/core';
 import {
-    Typography,
-    Paper,
-    Button,
-    Grid,
-    Hidden,
-    Tooltip
-} from '@material-ui/core'
-import {
-    SettingsIcon,
+    CloseIcon,
+    DeliveryIcon,
+    DoubleUpIcon,
+    EyeIcon,
+    LetterIcon,
     LocationIcon,
     MegaphoneIcon,
-    PromoteIcon,
-    EyeIcon,
-    DoubleUpIcon,
-    FavoriteBorderIcon,
-    CloseIcon,
-    DoneAllIcon,
-    DeliveryIcon,
-    SafeIcon,
-    SwapIcon,
     PhoneIcon,
-    LetterIcon,
-} from '@src/components/elements/icons'
-import {ButtonComponent} from '@src/components/elements/button/Button'
-import {BreadcrumbsComponent} from '@src/components/elements/breadcrumbs/Breadcrumbs'
-import {CustomModal} from '@src/components/elements/custom_modal/CustomModal'
-import {ViewPropsTypes} from '@src/components/elements/card/card_view/CardView'
-import {UserAvatarComponent} from '@src/components/elements/user_info_with_avatar/avatar/UserAvatarComponent'
-import {Rating} from '@src/components/elements/rating/Rating'
-import {Link} from '@root/i18n'
-import {numberPrettier} from '@src/helpers'
-import {useRouter} from 'next/router'
-import {useTranslation} from 'react-i18next'
-import {useStyles} from './useStyles'
-import {userAPI} from "@src/api/api";
+    PromoteIcon,
+    SafeIcon,
+    SettingsIcon,
+    SwapIcon
+} from '@src/components/elements/icons';
+import {ButtonComponent} from '@src/components/elements/button/Button';
+import {BreadcrumbsComponent} from '@src/components/elements/breadcrumbs/Breadcrumbs';
+import {ViewPropsType} from '@src/components/elements/card/card_view/CardView';
+import {UserAvatarComponent} from '@src/components/elements/user_info_with_avatar/avatar/UserAvatarComponent';
+import {Rating} from '@src/components/elements/rating/Rating';
+import {Link} from '@root/i18n';
+import {numberPrettier} from '@src/helpers';
+import {useRouter} from 'next/router';
+import {useTranslation} from 'react-i18next';
+import {useStyles} from './useStyles';
 
-const longText = `Вы принимаете предложения от других пользователей на обмен. Вы будете выделены специальным стикером. Ознакомиться с правилами «Возможен обмен»`
+const longText = `Вы принимаете предложения от других пользователей на обмен. Вы будете выделены специальным стикером. Ознакомиться с правилами «Возможен обмен»`;
 
-export const ListMode: FC<ViewPropsTypes> = ({ list }) => {
-    const { pathname } = useRouter()
-    const { t } = useTranslation(['common'])
-    const [openModal, setOpenModal] = useState(false)
-    const [modalState, setModalState] = useState('')
-    const filteredList = Array.isArray(list) ? list : list?.data
-
-    const handleModalOpen = (value) => {
-        setOpenModal(true)
-        setModalState(value)
-    }
-
-    const handleModalClose = () => {
-        setOpenModal(false)
-    }
-
-    const handleFavorite = (id) => {
-        userAPI.favoriteAds(id)
-            .then(result => console.warn(result))
-            .catch(error => console.warn("error", error))
-    }
-    const classes = useStyles()
-
+export const ListMode: FC<ViewPropsType> = ({ list, handleModalOpen }) => {
+    const { pathname } = useRouter();
+    const { t } = useTranslation(['common']);
+    console.log(list);
+    const classes = useStyles();
     return (
         <div className={classes.root}>
-            {filteredList?.map((el) => {
+            {list?.map((el) => {
                 return (
                     <Grid container key={el.id}>
                         <Grid item xs={9} className="left-content">
@@ -123,35 +94,20 @@ export const ListMode: FC<ViewPropsTypes> = ({ list }) => {
                                                 </Typography>
                                             </div>
                                             <div className='card-btn'>
-                                                <div className='favorite'>
-                                                    <Typography
-                                                        variant="subtitle1"
-                                                        color="initial"
+                                                {pathname?.includes('favorite') ?
+                                                    <div
+                                                        className='isFavorite'
+                                                        onClick={() => handleModalOpen('disableFavorite', el.id)}
                                                     >
-                                                        140
-                                                    </Typography>
-                                                    <Link href="#">
-                                                        <a className="favorite-icon">
-                                                            <FavoriteBorderIcon />
-                                                        </a>
-                                                    </Link>
-                                                </div>
-                                                {
-                                                    pathname?.includes('favorite') ?
-                                                        <div
-                                                            className='isFavorite'
-                                                            onClick={() => handleFavorite(el.id)}
-                                                        >
-                                                            <CloseIcon />
-                                                        </div>
-                                                        :
-                                                        <div
-                                                            className='settings'
-                                                            onClick={() => handleModalOpen('settings')}
-                                                        >
-                                                            <SettingsIcon />
-                                                        </div>
-                                                }
+                                                        <CloseIcon />
+                                                    </div>
+                                                    :
+                                                    <div
+                                                        className='settings'
+                                                        onClick={() => handleModalOpen('settings')}
+                                                    >
+                                                        <SettingsIcon />
+                                                    </div>}
                                             </div>
                                         </div>
                                         <div className="description">
@@ -233,16 +189,16 @@ export const ListMode: FC<ViewPropsTypes> = ({ list }) => {
                                 {/*        </Typography>*/}
                                 {/*    </ButtonComponent>*/}
                                 {/*}*/}
-                                {
-                                    el.completePurchase &&
-                                    <ButtonComponent className="default mr10"
-                                                     onClick={() => handleModalOpen('completePurchase')}>
-                                        <Typography variant="subtitle1">
-                                            <DoneAllIcon />
-                                            Завершить покупку
-                                        </Typography>
-                                    </ButtonComponent>
-                                }
+                                {/*{*/}
+                                {/*    el.completePurchase &&*/}
+                                {/*    <ButtonComponent className="default mr10"*/}
+                                {/*                     onClick={() => handleModalOpen('completePurchase')}>*/}
+                                {/*        <Typography variant="subtitle1">*/}
+                                {/*            <DoneAllIcon />*/}
+                                {/*            Завершить покупку*/}
+                                {/*        </Typography>*/}
+                                {/*    </ButtonComponent>*/}
+                                {/*}*/}
                                 {/*{!!el.expected && (*/}
                                 {/*    <ButtonComponent className="expecting">*/}
                                 {/*        <RestoreIcon />*/}
@@ -267,20 +223,20 @@ export const ListMode: FC<ViewPropsTypes> = ({ list }) => {
                                 {/*        </Typography>*/}
                                 {/*    </ButtonComponent>*/}
                                 {/*)}*/}
-                                {el.denied ?
-                                    <ButtonComponent className="refused">
-                                        <Typography variant="subtitle1">
-                                            Отказано
-                                        </Typography>
-                                    </ButtonComponent>
-                                    :
-                                    <ButtonComponent className="default refuse" disabled>
-                                        <CloseIcon />
-                                        <Typography variant="subtitle1">
-                                            Отказать
-                                        </Typography>
-                                    </ButtonComponent>
-                                }
+                                {/*{el.denied ?*/}
+                                {/*    <ButtonComponent className="refused">*/}
+                                {/*        <Typography variant="subtitle1">*/}
+                                {/*            Отказано*/}
+                                {/*        </Typography>*/}
+                                {/*    </ButtonComponent>*/}
+                                {/*    :*/}
+                                {/*    <ButtonComponent className="default refuse" disabled>*/}
+                                {/*        <CloseIcon />*/}
+                                {/*        <Typography variant="subtitle1">*/}
+                                {/*            Отказать*/}
+                                {/*        </Typography>*/}
+                                {/*    </ButtonComponent>*/}
+                                {/*}*/}
                                 {/*{!!el.accepted ||*/}
                                 {/*el.expected ||*/}
                                 {/*(el.denied && (*/}
@@ -357,7 +313,7 @@ export const ListMode: FC<ViewPropsTypes> = ({ list }) => {
                                             </ButtonComponent>
                                         </div>
                                         <div className="profile-data">
-                                            <UserAvatarComponent />
+                                            <UserAvatarComponent avatar={el.creator.avatar} />
                                             <Typography
                                                 variant="subtitle1"
                                                 color="initial"
@@ -399,12 +355,6 @@ export const ListMode: FC<ViewPropsTypes> = ({ list }) => {
                     </Grid>
                 )
             })}
-            <CustomModal
-                id={Math.ceil(Math.random() * 100)}
-                handleClose={handleModalClose}
-                open={openModal}
-                content={modalState}
-            />
         </div>
     )
 }

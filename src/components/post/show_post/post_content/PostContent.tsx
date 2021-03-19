@@ -61,6 +61,8 @@ export const PostContent: FC<WithT & any> = (props) => {
         'декабря',
     ]
 
+    const formatted_date = `${date.getDate()} ${months[date.getMonth()]} ${date.getFullYear()}`
+
     const excludedFields = [
         'id',
         'type',
@@ -69,7 +71,6 @@ export const PostContent: FC<WithT & any> = (props) => {
         'type_id',
     ]
 
-    const formatted_date = `${date.getDate()} ${months[date.getMonth()]} ${date.getFullYear()}`
 
     const handleShowSliderModal = value => () => setState({...state, openSliderModal: value})
 

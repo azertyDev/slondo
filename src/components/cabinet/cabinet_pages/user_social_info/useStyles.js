@@ -21,7 +21,7 @@ export const useStyles = makeStyles((theme) => ({
             }
         },
         '& button': {
-            padding: '10px 15px',
+            padding: '10px 10px',
             borderRadius: '5px',
             background: '#fff',
             boxShadow: '0px 1px 2px rgba(0, 0, 0, 0.25)',

@@ -1,18 +1,18 @@
 import React, {FC} from 'react';
 import {GridMode} from './grid_mode/GridMode';
 import {ListMode} from './list_mode/ListMode';
-import {InnerCardData} from "@root/interfaces/CardData";
 
-
-export type ViewPropsTypes = {
+export type ViewPropsType = {
     isFetch?: boolean;
-    list: InnerCardData[];
+    listMode?: boolean;
+    list?: any[];
+    handleModalOpen?: (value?, id?) => void
 };
 
-export const CardView: FC<ViewPropsTypes & { listMode?: boolean, favorite?: boolean }> = (props) => {
-    const {listMode = false, list, isFetch} = props;
+export const CardView: FC<ViewPropsType> = (props) => {
+    const { listMode = false, list, isFetch, handleModalOpen } = props;
 
     return listMode
-        ? <ListMode list={list} isFetch={isFetch} />
-        : <GridMode list={list} isFetch={isFetch} />
+        ? <ListMode list={list} isFetch={isFetch} handleModalOpen={handleModalOpen} />
+        : <GridMode list={list} isFetch={isFetch} />;
 };

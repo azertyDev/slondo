@@ -8,7 +8,7 @@ import {withAuthRedirect} from "@src/hoc/withAuthRedirect";
 export type TabsDataType = {
     id: number;
     title: string;
-    count: number;
+    total?: number;
     component: ReactElement;
 }[];
 
@@ -17,13 +17,13 @@ const ArchiveContainer: FC = () => {
         {
             id: 0,
             title: 'Объявления',
-            count: CabinetMockData.length,
+            total: CabinetMockData.length,
             component: <Archive list={CabinetMockData} isFetch />
         },
         {
             id: 1,
             title: 'Аукционы',
-            count: CabinetMockData.length,
+            total: CabinetMockData.length,
             component: <Archive list={CabinetMockData} isFetch />
         }
     ];
