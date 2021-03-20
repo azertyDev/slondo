@@ -19,16 +19,14 @@ export const useStyles = makeStyles(() => ({
             }
         },
         '& div.price-wrapper': {
-            '& div.price-inputs ': {
-                display: 'flex',
-                alignItems: 'center',
-                width: '425px',
-                '& > div:first-child': {
-                    marginRight: '15px'
-                },
-                '& div.currency': {
-                    width: '220px'
-                }
+            display: 'flex',
+            alignItems: 'flex-end',
+            width: '425px',
+            '& > div:first-child': {
+                marginRight: '15px'
+            },
+            '& div.currency': {
+                width: '220px'
             }
         },
         '& div.location-wrapper': {

@@ -4,7 +4,7 @@ import {Field} from 'formik';
 import {TFunction} from "i18next";
 import {TextFieldProps} from "@material-ui/core/TextField/TextField";
 import {isRequired} from "@src/helpers";
-
+import {useStyles} from './useStyles';
 
 type CustomFormikFieldPropsType = {
     t?: TFunction,
@@ -19,17 +19,19 @@ export const CustomFormikField: FC<CustomFormikFieldPropsType> = (props) => {
         name,
         errors,
         touched,
+        labelText,
         ...otherProps
     } = props;
 
+    const classes = useStyles();
     return (
         <Field name={name} {...otherProps}>
-            {({field}) => (
-                <>
+            {({field}) =>
+                <div className={classes.root}>
                     {t && (
                         <Typography variant="subtitle1">
                             <strong>
-                                {t(name)}
+                                {t(labelText ?? name)}
                                 {isRequired(name) && <span className='error-text'>*&nbsp;</span>}
                             </strong>
                             {errors[name] && touched[name] && (
@@ -45,9 +47,9 @@ export const CustomFormikField: FC<CustomFormikFieldPropsType> = (props) => {
                         variant="outlined"
                         {...field}
                         {...otherProps}
+                        className={errors?.[name] && touched[name] ? 'error-border' : ''}
                     />
-                </>
-            )}
+                </div>}
         </Field>
     );
 };

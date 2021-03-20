@@ -18,26 +18,24 @@ export const Contacts: FC<ContactsPropsType> = (props) => {
         isAuction,
         values,
         handleInput,
-        handleCheckboxChange,
+        handleCheckboxChange
     } = props;
 
     const classes = useStyles();
     return (
         <div className={classes.root}>
-            {
-                isAuction && (
-                    <div className='display-phone'>
-                        <Checkbox
-                            color='primary'
-                            checked={values.display_phone}
-                            onChange={handleCheckboxChange('display_phone')}
-                        />
-                        <Typography variant="subtitle1">
-                            {t('displayPhone')}
-                        </Typography>
-                    </div>
-                )
-            }
+            {isAuction && (
+                <div className='display-phone'>
+                    <Checkbox
+                        color='primary'
+                        checked={values.display_phone}
+                        onChange={handleCheckboxChange('display_phone')}
+                    />
+                    <Typography variant="subtitle1">
+                        {t('displayPhone')}
+                    </Typography>
+                </div>
+            )}
             <div>
                 <Typography variant="subtitle1">
                     <strong>{t('ownPhone')}&nbsp;</strong>

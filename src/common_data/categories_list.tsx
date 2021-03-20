@@ -10,8 +10,7 @@ import {
     SofaIcon,
     ElectronicIcon,
     HobbyIcon,
-    AnimalsIcon,
-    ForFreeIcon
+    AnimalsIcon
 } from '@src/components/elements/icons';
 import {CategoryType} from '@root/interfaces/Categories';
 
@@ -27,7 +26,6 @@ const Home = '/img/categories_img/home.png';
 const Electronics = '/img/categories_img/electronics.png';
 const Hobbies = '/img/categories_img/hobbies.png';
 const Animal = '/img/categories_img/animal.png';
-const Free = '/img/categories_img/free.png';
 
 export const categories_list: CategoryType[] = [
     {
@@ -471,15 +469,18 @@ export const categories_list: CategoryType[] = [
                 type: [
                     {
                         id: 1,
-                        name: "Продажа"
+                        name: 'sale',
+                        ru_name: "Продажа"
                     },
                     {
                         id: 2,
-                        name: "Аренда на длительное время"
+                        name: 'longTermRent',
+                        ru_name: "Аренда на длительное время"
                     },
                     {
                         id: 3,
-                        name: "Аренда по суточно"
+                        name: 'dailyRent',
+                        ru_name: "Аренда по суточно"
                     }
                 ]
             },
@@ -490,11 +491,13 @@ export const categories_list: CategoryType[] = [
                 type: [
                     {
                         id: 1,
-                        name: "Продажа"
+                        name: 'sale',
+                        ru_name: "Продажа"
                     },
                     {
                         id: 2,
-                        name: "Аренда на длительное время"
+                        name: 'longTermRent',
+                        ru_name: "Аренда на длительное время"
                     }
                 ]
             },
@@ -505,12 +508,14 @@ export const categories_list: CategoryType[] = [
                 type: [
                     {
                         id: 1,
-                        name: "Продажа"
+                        name: 'sale',
+                        ru_name: "Продажа"
                     },
                     {
                         id: 2,
-                        name: "Аренда на длительное время"
-                    }
+                        name: 'longTermRent',
+                        ru_name: "Аренда на длительное время"
+                    },
                 ]
             },
             {
@@ -520,12 +525,14 @@ export const categories_list: CategoryType[] = [
                 type: [
                     {
                         id: 1,
-                        name: "Продажа"
+                        name: 'sale',
+                        ru_name: "Продажа"
                     },
                     {
                         id: 2,
-                        name: "Аренда на длительное время"
-                    }
+                        name: 'longTermRent',
+                        ru_name: "Аренда на длительное время"
+                    },
                 ]
             }
         ]

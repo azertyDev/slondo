@@ -4,8 +4,8 @@ import {userAPI} from '@src/api/api';
 import {i18n} from '@root/i18n';
 import {CardData, InnerCardData} from '@root/interfaces/CardData';
 import {PostsSlider} from './PostsSlider';
-import {setErrorMsgAction} from '@src/redux/slices/errorSlice';
-import {useDispatch} from 'react-redux';
+import {setErrorMsgAction} from "@src/redux/slices/errorSlice";
+import {useDispatch} from "react-redux";
 
 
 const initCard: InnerCardData = {
@@ -18,15 +18,6 @@ const initCard: InnerCardData = {
         id: null,
         name: ''
     },
-    creator: {
-        id: null,
-        name: '',
-        surname: '',
-        phone: '',
-        avatar: ''
-        ,
-        created_at: ''
-    },
     created_at: '',
     region: {
         id: null,
@@ -37,6 +28,14 @@ const initCard: InnerCardData = {
         name: ''
     },
     image: '',
+    creator: {
+        id: null,
+        name: '',
+        surname: '',
+        phone: '',
+        avatar: '',
+        created_at: ''
+    },
     category: {
         id: null,
         name: '',
@@ -70,7 +69,7 @@ export const PostsSliderContainer: FC = () => {
         try {
             setCardData({
                 ...cardData,
-                isFetch: true,
+                isFetch: true
             });
 
             const {data, total} = await userAPI.getCards(
@@ -92,7 +91,7 @@ export const PostsSliderContainer: FC = () => {
             dispatch(setErrorMsgAction(e.message));
             setCardData({
                 ...cardData,
-                error: e.message,
+                error: e.message
             });
         }
     };

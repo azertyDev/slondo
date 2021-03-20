@@ -1,9 +1,8 @@
-/* eslint-disable prefer-const */
 import React, {FC} from "react";
 import {WithT} from "i18next";
+import {Help} from "@material-ui/icons";
 import {Checkbox, Typography} from "@material-ui/core";
 import {numberPrettier, weekDaysHelper} from "@src/helpers";
-import {Help} from "@material-ui/icons";
 import {useStyles} from './useStyles';
 
 
@@ -14,7 +13,7 @@ type DefaultParamsPropsType = {
     locationText,
 } & WithT;
 
-export const PreviewDefParams: FC<DefaultParamsPropsType> = (props) => {
+export const CommonParamsFormPreview: FC<DefaultParamsPropsType> = (props) => {
     const {
         t,
         values,
@@ -111,9 +110,9 @@ export const PreviewDefParams: FC<DefaultParamsPropsType> = (props) => {
                             торг». Ваша сделка защищена. Стоимость
                             услуги составляет n%.&nbsp;
                             <a href="#">
-                                    <span className="safe-auction-rules">
-                                        {t('safeDealRules')}
-                                    </span>
+                                <span className="safe-auction-rules">
+                                    {t('safeDealRules')}
+                                </span>
                             </a>
                         </Typography>
                     </div>
@@ -136,9 +135,9 @@ export const PreviewDefParams: FC<DefaultParamsPropsType> = (props) => {
                             за Ваш счет. В случае невыполнения доставки,
                             Вы можете быть заблокированы.&nbsp;
                             <a href="#">
-                                    <span className="safe-auction-rules">
-                                        {t('deliveryRules')}
-                                    </span>
+                                <span className="safe-auction-rules">
+                                    {t('deliveryRules')}
+                                </span>
                             </a>
                         </Typography>
                     </div>

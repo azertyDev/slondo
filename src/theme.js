@@ -76,14 +76,14 @@ const theme = createMuiTheme({
         fontFamily: ['Calibri', 'Roboto', 'Helvetica', 'Arial', 'sans-serif'],
         subtitle1: {
             lineHeight: 1,
-            color: '#4E4E4E',
+            color: '#4E4E4E'
         },
         allVariants: {
             color: '#4E4E4E',
-            lineHeight: 1,
+            lineHeight: 1
         },
         body2: {
-            fontSize: '1.125rem',
+            fontSize: '1.125rem'
         },
         button: {
             fontSize: '1.125rem',
@@ -97,7 +97,7 @@ const theme = createMuiTheme({
             '@global': {
                 '@font-face': [calibri],
                 ':focus': {
-                    outline: 0,
+                    outline: 0
                 },
                 '.error-text': {
                     color: `${colors.error}!important`,
@@ -108,7 +108,7 @@ const theme = createMuiTheme({
                     '& div.MuiOutlinedInput-root': {
                         '& > fieldset, &:hover > fieldset.MuiOutlinedInput-notchedOutline': {
                             borderColor: `${colors.error}!important`
-                        },
+                        }
                     },
                     '& button.MuiButtonBase-root': {
                         borderColor: `${colors.error}!important`
@@ -116,13 +116,16 @@ const theme = createMuiTheme({
                 },
                 body: {
                     backgroundColor: '#fafafa'
+                },
+                input: {
+                    WebkitBoxShadow: "0 0 0 1000px white inset"
                 }
             }
         },
         MuiPaper: {
             root: {
-                backgroundColor: colors.white,
-            },
+                backgroundColor: colors.white
+            }
         },
         MuiOutlinedInput: {
             root: {
@@ -144,14 +147,14 @@ const theme = createMuiTheme({
                 }
             }
         }
-    },
+    }
 });
 
 theme.typography.h2 = {
     fontSize: '2.25rem',
     fontWeight: 400,
     [theme.breakpoints.down('sm')]: {
-        fontSize: '1.83rem',
+        fontSize: '1.83rem'
     }
 };
 

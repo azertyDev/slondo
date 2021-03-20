@@ -1,7 +1,7 @@
 import React, {FC} from "react";
 import {WithT} from "i18next";
 import {Checkbox, Grid, TextField, Typography} from "@material-ui/core";
-import {CustomSelect} from "@root/src/components/elements/customSelect/CustomSelect";
+import {CustomSelect} from "@root/src/components/elements/custom_select/CustomSelect";
 import {useStyles} from './useStyles';
 
 
@@ -78,25 +78,15 @@ export const AuctionParams: FC<AuctionParamsPropsType> = (props) => {
                 )}
                 <Grid item container xs={12}>
                     <div className='auction-duration'>
-                        <Typography variant="subtitle1">
-                            <strong>
-                                {t('auctionDuration')}
-                            </strong>
-                            {errors.auction
-                            && touched.auction
-                            && errors.auction.duration
-                            && touched.auction.duration
-                            && <span className='error-text'>&nbsp;{t(errors.auction.duration)}</span>}
-                        </Typography>
                         <CustomSelect
                             t={t}
                             name='duration'
                             values={auction}
+                            errors={errors}
+                            touched={touched}
                             onBlur={handleBlur}
                             items={postType.expired}
                             handleSelect={handleSelect}
-                            errors={errors}
-                            touched={touched}
                         />
                     </div>
                 </Grid>

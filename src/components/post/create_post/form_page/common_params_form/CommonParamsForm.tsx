@@ -19,10 +19,11 @@ import {PostType} from "@root/interfaces/Post";
 import {WEEK_DAYS} from "@src/common_data/common";
 import {StateIcon} from '@src/components/elements/icons';
 import {Router} from "@root/i18n";
+import {LocationAutocomplete} from "@src/components/post/create_post/form_page/common_params_form/location/LocationAutocomplete";
+import {CustomSelect} from "@src/components/elements/custom_select/CustomSelect";
+import {CommonParamsFormPreview} from "@src/components/post/create_post/form_page/common_params_form/CommonParamsFormPreview";
 import {useStyles} from './useStyles';
-import {LocationAutocomplete} from "@src/components/post/create_post/form_page/default_params_form/location/LocationAutocomplete";
-import {CustomSelect} from "@src/components/elements/customSelect/CustomSelect";
-import {PreviewDefParams} from "@src/components/post/create_post/form_page/default_params_form/PreviewDefParams";
+import {CustomFormikField} from "@src/components/elements/custom_formik_field/CustomFormikField";
 
 
 type DefaultParamsPropsType = {
@@ -32,10 +33,9 @@ type DefaultParamsPropsType = {
     post,
     setPost,
     isPreview: boolean,
-    handleFormOpen: (i) => () => void
 } & WithT;
 
-export const DefaultParamsForm: FC<DefaultParamsPropsType> = (props) => {
+export const CommonParamsForm: FC<DefaultParamsPropsType> = (props) => {
     const {
         t,
         isPreview,
@@ -43,8 +43,7 @@ export const DefaultParamsForm: FC<DefaultParamsPropsType> = (props) => {
         asPath,
         postType,
         post,
-        setPost,
-        handleFormOpen
+        setPost
     } = props;
 
     const formIndex = 1;
@@ -170,7 +169,7 @@ export const DefaultParamsForm: FC<DefaultParamsPropsType> = (props) => {
         ? `${location.region.name}${location.city ? `, ${location.city.name}` : ''}${location.district ? `, ${location.district.name}` : ''}`
         : '';
 
-    const handleSelect = (value, key) => {
+    const handleSelect = (key, value) => {
         if (key === 'duration') {
             auction.duration = value;
         } else {
@@ -255,7 +254,8 @@ export const DefaultParamsForm: FC<DefaultParamsPropsType> = (props) => {
             setValues({...values});
         }
     };
-
+    console.log('def', values)
+    // console.log('err', errors)
     const classes = useStyles();
     return (
         <FormikProvider value={formik}>
@@ -265,13 +265,12 @@ export const DefaultParamsForm: FC<DefaultParamsPropsType> = (props) => {
                     isPreview={isPreview}
                     open={currentFormIndex === formIndex}
                     isEditable={currentFormIndex < formIndex}
-                    handleEdit={handleFormOpen(formIndex)}
-                    title={t('priceDescContacts')}
                     nextButtonTxt={t('next')}
+                    title={t('priceDescContacts')}
                 >
                     <div className={classes.root}>
                         {isPreview
-                            ? <PreviewDefParams
+                            ? <CommonParamsFormPreview
                                 t={t}
                                 values={values}
                                 isAuction={isAuction}
@@ -295,37 +294,25 @@ export const DefaultParamsForm: FC<DefaultParamsPropsType> = (props) => {
                                         />
                                     </div>
                                     : <div className='price-wrapper'>
-                                        <Typography variant="subtitle1">
-                                            <strong>
-                                                {t('price')}
-                                                <span className='error-text'>*&nbsp;</span>
-                                            </strong>
-                                            {errors.price && touched.price && (
-                                                <span className='error-text'>
-                                                    {t(errors.price as string)}
-                                                </span>
-                                            )}
-                                        </Typography>
-                                        <div className='price-inputs'>
-                                            <TextField
-                                                fullWidth
-                                                name='price'
-                                                variant='outlined'
+                                        <CustomFormikField
+                                            t={t}
+                                            name='price'
+                                            errors={errors}
+                                            touched={touched}
+                                            value={values.title}
+                                            onChange={handleInput}
+                                            style={{width: '270px'}}
+                                            className={errors.title && touched.title ? 'error-border' : ''}
+                                        />
+                                        <div className='currency'>
+                                            <CustomSelect
+                                                t={t}
+                                                name='currency'
+                                                values={values}
                                                 onBlur={handleBlur}
-                                                onChange={handleInput}
-                                                value={values.price ?? ''}
-                                                className={errors.price && touched.price ? 'error-border' : ''}
+                                                items={postType.currency}
+                                                handleSelect={handleSelect}
                                             />
-                                            <div className='currency'>
-                                                <CustomSelect
-                                                    t={t}
-                                                    name='currency'
-                                                    values={values}
-                                                    onBlur={handleBlur}
-                                                    items={postType.currency}
-                                                    handleSelect={handleSelect}
-                                                />
-                                            </div>
                                         </div>
                                     </div>}
                                 <div>
