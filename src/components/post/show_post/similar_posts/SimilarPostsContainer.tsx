@@ -15,6 +15,14 @@ const initCard: InnerCardData = {
         id: null,
         name: '',
     },
+    creator: {
+        id: null,
+        name: '',
+        surname: '',
+        phone: '',
+        avatar: '',
+        created_at: ''
+    },
     created_at: '',
     image: '',
     region: null,

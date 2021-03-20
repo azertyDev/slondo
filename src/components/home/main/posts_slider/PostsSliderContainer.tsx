@@ -4,8 +4,8 @@ import {userAPI} from '@src/api/api';
 import {i18n} from '@root/i18n';
 import {CardData, InnerCardData} from '@root/interfaces/CardData';
 import {PostsSlider} from './PostsSlider';
-import {setErrorMsgAction} from "@src/redux/slices/errorSlice";
-import {useDispatch} from "react-redux";
+import {setErrorMsgAction} from '@src/redux/slices/errorSlice';
+import {useDispatch} from 'react-redux';
 
 
 const initCard: InnerCardData = {
@@ -16,16 +16,25 @@ const initCard: InnerCardData = {
     sub_category_id: null,
     currency: {
         id: null,
+        name: ''
+    },
+    creator: {
+        id: null,
         name: '',
+        surname: '',
+        phone: '',
+        avatar: ''
+        ,
+        created_at: ''
     },
     created_at: '',
     region: {
         id: null,
-        name: '',
+        name: ''
     },
     city: {
         id: null,
-        name: '',
+        name: ''
     },
     image: '',
     category: {

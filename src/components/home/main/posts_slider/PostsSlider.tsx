@@ -9,6 +9,7 @@ import {useStyles} from './useStyles';
 
 export const PostsSlider: FC<{ title: string; cardData: CardData }> = ({cardData, title}) => {
     const {isFetch, error, data: {cards}} = cardData;
+    console.log(cardData);
 
     const classes = useStyles();
     return (

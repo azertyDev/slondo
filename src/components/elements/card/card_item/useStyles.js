@@ -13,43 +13,43 @@ export const useStyles = makeStyles((theme) => ({
             right: '10px',
             padding: '0',
             zIndex: 10,
-            // backgroundImage: (props) => props.isFavorite ? 'linear-gradient(49.94deg, #675EAA 19.03%, #AD66D5 72.72%)' : 'rgba(255, 255, 255, 0.8)',
-            backgroundImage: 'rgba(255, 255, 255, 0.8)',
             '& svg': {
-                '& > path:nth-child(1)': {
-                    fillOpacity: '0.8'
-                },
-                '& > defs.def1 > linearGradient > stop': {
-                    '&:first-child': {
-                        stopColor: '#675EAA'
+                '& defs': {
+                    '&.def1 stop': {
+                        stopColor: '#fff'
                     },
-                    '&:last-child': {
-                        stopColor: '#AD66D5'
+                    '&:last-child stop': {
+                        '&:first-child': {
+                            stopColor: '#675EAA'
+                        },
+                        '&:last-child': {
+                            stopColor: '#AD66D5'
+                        }
                     }
-                },
-                '& > defs:last-child > linearGradient > stop': {
-                    stopColor: '#fff'
                 }
             },
             '&:hover': {
-                backgroundImage: '#fff',
                 '& svg': {
                     transform: 'scale(1.1)',
                     transition: 'transform .3s cubic-bezier(.5,0,.5,3)',
-                    '& > path:nth-child(2)': {
-                        fillOpacity: '0.8'
-                    },
-                    '& > defs > linearGradient > stop': {
-                        stopColor: '#fff'
-                    },
-                    // '& > defs:last-child > linearGradient > stop': {
-                    //     '&:first-child': {
-                    //         stopColor: '#675EAA'
-                    //     },
-                    //     '&:last-child': {
-                    //         stopColor: '#AD66D5'
-                    //     }
-                    // }
+                    '& defs': {
+                        '&.def1 stop': {
+                            '&:first-child': {
+                                stopColor: '#675EAA'
+                            },
+                            '&:last-child': {
+                                stopColor: '#AD66D5'
+                            }
+                        },
+                        '&:last-child stop': {
+                            '&:first-child': {
+                                stopColor: '#fff'
+                            },
+                            '&:last-child': {
+                                stopColor: '#fff'
+                            }
+                        }
+                    }
                 }
             }
         },
