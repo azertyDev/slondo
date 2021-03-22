@@ -32,16 +32,15 @@ export const CardItem: FC<CardItemProps> = (props) => {
         region,
         city,
         sub_category_id,
-        category,
-        favorite
+        category
     } = props;
-    console.log(props);
+
     const isFavorite = true;
 
-    const { t } = useTranslation(['common']);
+    const {t} = useTranslation(['common']);
     const translatedTitle = transformTitle(title);
 
-    const { isAuth } = useSelector((store: RootState) => store.auth);
+    const {isAuth} = useSelector((store: RootState) => store.auth);
 
     const [liked, setLiked] = useState(false);
 
@@ -69,14 +68,14 @@ export const CardItem: FC<CardItemProps> = (props) => {
         userAPI.favoriteAds(id);
     };
 
-    const classes = useStyles({ ads_type, isFavorite });
+    const classes = useStyles({ads_type, isFavorite});
     return (
         <div className={classes.root}>
             {isAuth && (
                 <IconButton
                     className="favorite-btn" onClick={handleFavorite}
                 >
-                    <FavoriteIcon id={id} />
+                    <FavoriteIcon id={id}/>
                 </IconButton>
             )}
             <Link href={`/obyavlenie/${translatedTitle}-${id}-${category.mark}-${sub_category_id ?? ''}`}>

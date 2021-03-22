@@ -81,21 +81,7 @@ const authRegSlice = createSlice({
         setIsAuthModalOpen: (state, action) => {
             state.isAuthModalOpen = action.payload;
         }
-    },
-    // extraReducers: (builder) => {
-    //     builder.addCase(fetchTokenLogin.pending, (state) => {
-    //         state.isFetch = true;
-    //         state.error = null;
-    //     })
-    //     builder.addCase(fetchTokenLogin.fulfilled, (state) => {
-    //         state.isFetch = false;
-    //         state.error = null;
-    //     })
-    //     builder.addCase(fetchTokenLogin.rejected, (state, action) => {
-    //         state.isFetch = false;
-    //         state.error = action.payload;
-    //     })
-    // }
+    }
 });
 
 export const { signInAction, signOutAction, setIsAuthModalOpen } = authRegSlice.actions;

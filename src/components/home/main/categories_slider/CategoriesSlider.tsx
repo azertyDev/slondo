@@ -18,7 +18,7 @@ export const CategoriesSlider: FC<WithT> = ({t}) => {
             <div className="category-slider">
                 <CustomSlider {...settings}>
                     {categories_list.map((category) => (
-                        <Link href={`categories/${category.name}?categoryID=${category.id}`} key={category.id}>
+                        <Link href={`/categories/${category.name}?categoryID=${category.id}`} key={category.id}>
                             <a title={t(`categories:${category.name}`)}>
                                 <div className="category">
                                     <div className="bg-layer">
