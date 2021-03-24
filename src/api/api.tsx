@@ -17,11 +17,13 @@ const instance = Axios.create({
 });
 
 export const setTokenToHeader = (): { headers: any } => {
-    const token = cookies.get('token');
-    return {
-        headers: {
-            'Content-Type': 'application/json',
-            'Authorization': `Bearer ${token}`
+    const token = cookies.get('slondo_auth');
+    if (token) {
+        return {
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`
+            }
         }
     }
 };
@@ -38,7 +40,7 @@ export const userAPI = {
                 throw err;
             });
     },
-    register: (phone: string): Promise<unknown> => {
+    register: (phone: string): Promise<any> => {
         const form = new FormData();
         form.set('phone', phone);
         return instance
@@ -163,7 +165,10 @@ export const userAPI = {
             });
     },
     getPostById: (post_id: string | string[], lang: string, type: string, sub_category_id: string): Promise<any> => {
-        return instance.get(`getPostById?id=${post_id}&lang=${lang}&type=${type}&sub_category_id=${sub_category_id}`, setTokenToHeader())
+        return instance.get(
+            `getPostById?id=${post_id}&lang=${lang}&type=${type}&sub_category_id=${sub_category_id}`,
+            setTokenToHeader()
+        )
             .then((res) => res.data)
             .catch((err) => {
                 throw err;

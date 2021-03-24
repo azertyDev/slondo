@@ -1,6 +1,6 @@
 import React, {FC, MutableRefObject, useEffect, useRef, useState} from 'react';
 import {useRouter} from 'next/router';
-import {i18n, useTranslation} from '@root/i18n';
+import {i18n, useTranslation} from 'next-i18next';
 import {userAPI} from '@src/api/api';
 import {ShowPost} from '@src/components/post/show_post/ShowPost';
 import {setErrorMsgAction} from '@src/redux/slices/errorSlice';
@@ -15,7 +15,7 @@ export type SlidersRefType = {
 };
 
 export const ShowPostContainer: FC = () => {
-    const { t } = useTranslation(['post']);
+    const {t} = useTranslation(['post']);
     const dispatch = useDispatch();
     const url = useRouter().query.url as string;
     const splittedUrl = url.split('-');
@@ -61,18 +61,18 @@ export const ShowPostContainer: FC = () => {
                 sub_category: [{
                     id: null,
                     name: ''
-                }],
+                }]
             },
             ads_type: {
                 id: null,
                 name: '',
-                mark: '',
+                mark: ''
             },
             auction: {
                 duration: '',
                 display_phone: '',
                 reserve_price: '',
-                price_by_now: '',
+                price_by_now: ''
             }
         }
     };
@@ -95,7 +95,7 @@ export const ShowPostContainer: FC = () => {
         try {
             setPostData({
                 ...postData,
-                isFetch: true,
+                isFetch: true
             });
 
             const {

@@ -1,6 +1,6 @@
 import React, {FC} from 'react';
 import {WithT} from 'i18next';
-import {Link} from '@root/i18n';
+import Link from 'next/link';
 import {Typography} from '@material-ui/core';
 import {CustomSlider} from '@src/components/elements/custom_slider/CustomSlider';
 import {settings} from './sliderSettings';
@@ -18,7 +18,7 @@ export const CategoriesSlider: FC<WithT> = ({t}) => {
             <div className="category-slider">
                 <CustomSlider {...settings}>
                     {categories_list.map((category) => (
-                        <Link href={`categories/${category.name}?categoryID=${category.id}`} key={category.id}>
+                        <Link href={`/categories/${category.name}?categoryID=${category.id}`} key={category.id}>
                             <a title={t(`categories:${category.name}`)}>
                                 <div className="category">
                                     <div className="bg-layer">
@@ -27,7 +27,6 @@ export const CategoriesSlider: FC<WithT> = ({t}) => {
                                                 src={category.icon.url}
                                                 alt={category.name}
                                             />
-
                                         </div>
                                     </div>
                                     <span className="category-name">

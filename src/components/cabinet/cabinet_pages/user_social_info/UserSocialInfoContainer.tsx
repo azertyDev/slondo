@@ -43,7 +43,7 @@ export const UserSocialInfoContainer: FC = () => {
 
             setSubs({ ...subs });
         } catch (e) {
-            dispatch(setErrorMsgAction(e));
+            dispatch(setErrorMsgAction(e.message));
         }
     };
 
@@ -52,7 +52,7 @@ export const UserSocialInfoContainer: FC = () => {
             await userAPI.follow(userId);
             console.log('follow successful');
         } catch (e) {
-            dispatch(setErrorMsgAction(e));
+            dispatch(setErrorMsgAction(e.message));
         }
     };
 

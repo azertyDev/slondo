@@ -1,5 +1,5 @@
-import React, { FC, useState } from 'react';
-import { Field } from 'formik';
+import React, {FC, useState} from 'react';
+import {Field} from 'formik';
 import OutlinedInput from "@material-ui/core/OutlinedInput";
 import InputAdornment from "@material-ui/core/InputAdornment";
 import IconButton from "@material-ui/core/IconButton";
@@ -15,10 +15,10 @@ export const CustomFormikPasswordField: FC<any> = (props) => {
         setShowPassword(!showPassword)
     }
 
-    const { labelText, ...otherProps } = props;
+    const {labelText, ...otherProps} = props;
     return (
         <Field {...otherProps}>
-            {({ field }) => (
+            {({field}) => (
                 <>
                     {labelText ? <label>{labelText}</label> : null}
                     <FormControl variant="outlined" fullWidth>
@@ -36,7 +36,7 @@ export const CustomFormikPasswordField: FC<any> = (props) => {
                                         onClick={handleClickShowPassword}
                                         edge="end"
                                     >
-                                        {showPassword ? <Visibility /> : <VisibilityOff />}
+                                        {showPassword ? <Visibility/> : <VisibilityOff/>}
                                     </IconButton>
                                 </InputAdornment>
                             }

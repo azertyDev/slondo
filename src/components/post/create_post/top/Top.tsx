@@ -1,5 +1,5 @@
 import React, {FC} from 'react';
-import {Link, useTranslation} from "@root/i18n";
+import {useTranslation} from "next-i18next";
 import {Grid, Step, StepLabel, Stepper, Typography, IconButton} from '@material-ui/core';
 import {BackspaceIcon} from '@root/src/components/elements/icons';
 import {useStyles} from './useStyles';
@@ -7,8 +7,8 @@ import {useStyles} from './useStyles';
 
 type AncmntAuctionTopPropsType = {
     activeStep: number;
-    backUrl?: string;
     title?: string;
+    handleBack?: () => void
 };
 
 export const Top: FC<AncmntAuctionTopPropsType> = (props) => {
@@ -17,7 +17,7 @@ export const Top: FC<AncmntAuctionTopPropsType> = (props) => {
     const {
         title,
         activeStep,
-        backUrl,
+        handleBack
     } = props;
 
     const isPostTypeStep = activeStep === 0;
@@ -37,13 +37,9 @@ export const Top: FC<AncmntAuctionTopPropsType> = (props) => {
         >
             <Grid item xs={8}>
                 {!isPostTypeStep && <div className='menu-header'>
-                    <Link href={backUrl}>
-                        <a>
-                            <IconButton className="back-btn">
-                                <BackspaceIcon/>
-                            </IconButton>
-                        </a>
-                    </Link>
+                    <IconButton className="back-btn" onClick={handleBack}>
+                        <BackspaceIcon/>
+                    </IconButton>
                     <Typography
                         noWrap
                         variant="h6"

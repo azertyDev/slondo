@@ -1,21 +1,30 @@
-import React, {FC} from 'react'
-import {WithT} from 'i18next'
-import {Link} from '@root/i18n'
-import {Typography, Modal, Backdrop, List, ListItem, ListItemText, TextField, Snackbar} from '@material-ui/core'
-import {ReadMore} from '@src/components/elements/read_more/readMore'
-import {LocationIcon} from '@src/components/elements/icons/LocationIcon'
-import {WarningIcon} from '@src/components/elements/icons/WarningIcon'
-import {PhoneIcon} from '@src/components/elements/icons/PhoneIcon'
-import {SwapIcon} from '@src/components/elements/icons/SwapIcon'
-import {SafeIcon} from '@src/components/elements/icons/SafeIcon'
-import {DeliveryIcon} from '@src/components/elements/icons/DeliveryIcon'
-import {SyncSliders} from './sync_sliders/SyncSliders'
-import {ModalSyncSliders} from './modal_sync_sliders/ModalSyncSliders'
-import {BreadcrumbsComponent} from '@src/components/elements/breadcrumbs/Breadcrumbs'
-import {numberPrettier, weekDaysHelper} from '@root/src/helpers'
-import {ButtonComponent} from '@src/components/elements/button/Button'
-import {NotificationIcon} from '@src/components/elements/icons'
-import {useStyles} from './useStyles'
+import React, {FC} from 'react';
+import {WithT} from 'i18next';
+import Link from 'next/link';
+import {
+    Typography,
+    Modal,
+    Backdrop,
+    List,
+    ListItem,
+    ListItemText,
+    TextField,
+    Snackbar
+} from '@material-ui/core';
+import {ReadMore} from '@src/components/elements/read_more/readMore';
+import {LocationIcon} from '@src/components/elements/icons/LocationIcon';
+import {WarningIcon} from '@src/components/elements/icons/WarningIcon';
+import {PhoneIcon} from '@src/components/elements/icons/PhoneIcon';
+import {SwapIcon} from '@src/components/elements/icons/SwapIcon';
+import {SafeIcon} from '@src/components/elements/icons/SafeIcon';
+import {DeliveryIcon} from '@src/components/elements/icons/DeliveryIcon';
+import {SyncSliders} from './sync_sliders/SyncSliders';
+import {ModalSyncSliders} from './modal_sync_sliders/ModalSyncSliders';
+import {BreadcrumbsComponent} from '@src/components/elements/breadcrumbs/Breadcrumbs';
+import {numberPrettier, weekDaysHelper} from '@root/src/helpers';
+import {ButtonComponent} from '@src/components/elements/button/Button';
+import {NotificationIcon} from '@src/components/elements/icons';
+import {useStyles} from './useStyles';
 
 
 type PostContentTypes = {

@@ -3,11 +3,11 @@ import {WithT} from 'i18next';
 import {PostsTabs} from './PostsTabs';
 import {ITEMS_PER_PAGE} from '@src/constants';
 import {userAPI} from '@src/api/api';
-import {i18n} from '@root/i18n';
 import {CardData} from '@root/interfaces/CardData';
 import {initCards} from '../posts_slider/PostsSliderContainer';
 import {setErrorMsgAction} from "@src/redux/slices/errorSlice";
 import {useDispatch} from "react-redux";
+import {useRouter} from "next/router";
 
 
 const initCardData: CardData = {
@@ -23,7 +23,7 @@ const initCardData: CardData = {
 export const PostsTabsContainer: FC<WithT> = ({t}) => {
     const dispatch = useDispatch();
 
-    const lang = i18n.language;
+    const {locale} = useRouter();
 
     const [tabValue, setTabValue] = useState(0);
 
@@ -41,7 +41,7 @@ export const PostsTabsContainer: FC<WithT> = ({t}) => {
                 isShowMoreFetch: true,
             });
 
-            const newData = await userAPI.getCards(ITEMS_PER_PAGE, currentPage, type, lang);
+            const newData = await userAPI.getCards(ITEMS_PER_PAGE, currentPage, type, locale);
 
             setState({
                 ...state,
@@ -82,7 +82,7 @@ export const PostsTabsContainer: FC<WithT> = ({t}) => {
         auctionCurrentPage !== 1 && setAuctionCurrentPage(1);
         setCardData(postCardData, setPostCardData, 1, 'post');
         setCardData(auctionCardData, setAuctionCardData, 1, 'auc');
-    }, [lang]);
+    }, [locale]);
 
     return (
         <PostsTabs

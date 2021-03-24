@@ -11,15 +11,15 @@ export type CabinetMenuPropsType = {
     headerTitle: string;
 };
 
-export const CabinetWrapper: FC<CabinetMenuPropsType> = ({ children, title, headerTitle }) => {
-    const { user } = useSelector((store: RootState) => store.auth);
+export const CabinetWrapper: FC<CabinetMenuPropsType> = ({children, title, headerTitle}) => {
+    const {info} = useSelector((store: RootState) => store.user);
     const classes = useStyles();
     return (
         <MainLayout title={`Мой кабинет | ${title}`}>
             <div className={classes.root}>
                 <Grid container spacing={2}>
                     <Grid item xs={3}>
-                        <CabinetSidebar user={user} />
+                        <CabinetSidebar user={info}/>
                     </Grid>
                     <Grid item xs={9}>
                         <Typography variant="h6" className="menu-title">

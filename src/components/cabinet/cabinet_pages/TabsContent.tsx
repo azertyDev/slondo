@@ -9,9 +9,9 @@ import {useStyles} from './useStyles';
 
 
 export const TabsContent: FC<CabinetMenuPropsType & { tabsData: TabsDataType }> = (
-    { tabsData, headerTitle, title }
+    {tabsData, headerTitle, title}
 ) => {
-    const { t } = useTranslation('cabinet');
+    const {t} = useTranslation('cabinet');
     const [value, setValue] = useState(0);
 
     const handleChange = (event, newValue) => {
@@ -42,7 +42,7 @@ export const TabsContent: FC<CabinetMenuPropsType & { tabsData: TabsDataType }> 
                                 />
                             </Tabs>
                             <CustomTabPanel value={value} index={value}>
-                                <MyPurchases />
+                                <MyPurchases/>
                             </CustomTabPanel>
                         </>
                         : <>

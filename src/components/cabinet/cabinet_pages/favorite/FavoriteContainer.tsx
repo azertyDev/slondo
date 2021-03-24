@@ -3,10 +3,10 @@ import {TabsContent} from '@src/components/cabinet/cabinet_pages/TabsContent';
 import {Favorite} from '@src/components/cabinet/cabinet_pages/favorite/Favorite';
 import {withAuthRedirect} from '@root/src/hoc/withAuthRedirect';
 import {userAPI} from '@src/api/api';
-import {i18n} from '@root/i18n';
 import {useDispatch} from 'react-redux';
 import {setErrorMsgAction} from '@src/redux/slices/errorSlice';
 import {UserInfo} from '@root/interfaces/Auth';
+import {useRouter} from "next/router";
 
 export type FavoriteDataType = {
     id: number,
@@ -55,7 +55,7 @@ type initialFavoriteStateType = {
 }
 
 const FavoriteContainer: FC = () => {
-    const lang = i18n.language;
+    const {locale} = useRouter();
     const dispatch = useDispatch();
 
     const [openModal, setOpenModal] = useState(false);
@@ -91,7 +91,7 @@ const FavoriteContainer: FC = () => {
             favoriteData.isFetch = true;
             setFavoriteData({ ...favoriteData });
 
-            const cabFavoriteData = await userAPI.getFavorites(lang, type);
+            const cabFavoriteData = await userAPI.getFavorites(locale, type);
 
             favoriteData.isFetch = true;
 
@@ -105,7 +105,7 @@ const FavoriteContainer: FC = () => {
 
             setFavoriteData({ ...favoriteData });
         } catch (e) {
-            dispatch(setErrorMsgAction(e));
+            dispatch(setErrorMsgAction(e.message));
         }
     };
 

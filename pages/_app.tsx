@@ -1,17 +1,18 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {compose} from "redux";
-import {appWithTranslation} from '@root/i18n';
+import {appWithTranslation} from 'next-i18next';
 import {ThemeProvider, CssBaseline} from '@material-ui/core';
 import {wrapper} from '@src/redux/store';
 import theme from '@src/theme';
+import Head from "next/head";
 import "../slick.min.css";
 import 'react-inner-image-zoom/lib/InnerImageZoom/styles.min.css';
-import Head from "next/head";
 
-const MyApp = (props) => {
+
+const App = (props) => {
     const {Component, pageProps} = props;
 
-    React.useEffect(() => {
+    useEffect(() => {
         // Remove the server-side injected CSS.
         const jssStyles = document.querySelector('#jss-server-side');
         if (jssStyles) {
@@ -21,9 +22,9 @@ const MyApp = (props) => {
 
     return (
         <>
-            {/*<Head>*/}
-            {/*    <meta name="viewport" content="viewport-fit=cover" />*/}
-            {/*</Head>*/}
+            <Head>
+                <meta name="viewport" content="viewport-fit=cover"/>
+            </Head>
             <ThemeProvider theme={theme}>
                 <CssBaseline/>
                 <Component {...pageProps} />
@@ -32,7 +33,7 @@ const MyApp = (props) => {
     );
 };
 
-MyApp.getInitialProps = async ({Component, ctx}) => {
+App.getInitialProps = async ({Component, ctx}) => {
     let pageProps = {};
 
     if (Component.getInitialProps) {
@@ -44,7 +45,7 @@ MyApp.getInitialProps = async ({Component, ctx}) => {
 
 const withCompose = compose(
     wrapper.withRedux,
-    appWithTranslation,
+    appWithTranslation
 );
 
-export default withCompose(MyApp)
+export default withCompose(App);

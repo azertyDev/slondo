@@ -1,6 +1,7 @@
 import React, {FC} from 'react';
 import {Grid, Typography} from '@material-ui/core';
-import {useTranslation, Link} from '@root/i18n';
+import {useTranslation} from 'next-i18next';
+import Link from 'next/link';
 import {postTypes} from "@src/common_data/post_types";
 import {MainLayout} from "@src/components/MainLayout";
 import {Top} from "@src/components/post/create_post/top/Top";
@@ -29,7 +30,7 @@ const PostTypesPage: FC = () => {
                                             {t(`common:${postType.name}`)}
                                         </Typography>
                                         <Typography variant="body2">
-                                            {t(`${postType.subtitle}`)}
+                                            {t(postType.subtitle)}
                                         </Typography>
                                     </div>
                                 </a>

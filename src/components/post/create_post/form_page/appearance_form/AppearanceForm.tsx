@@ -3,7 +3,7 @@ import {WithT} from "i18next";
 import {FormikProvider, useFormik} from "formik";
 import {Typography} from "@material-ui/core";
 import {PreviewPhotos} from "./preview_photos/PreviewPhotos";
-import {CustomAccordion} from "../accordion/CustomAccordion";
+import {CustomAccordion} from "../components/accordion/CustomAccordion";
 import {IdNameType} from "@root/interfaces/Post";
 import {ViewIcon} from '@src/components/elements/icons';
 import {appearanceSchema} from "@root/validation_schemas/createPostSchemas";

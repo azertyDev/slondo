@@ -1,15 +1,15 @@
 import React, {FC, useState} from 'react';
-import {Link} from '@root/i18n';
+import Link from 'next/link';
 import {useTranslation} from 'react-i18next';
 import {Card, CardActionArea, CardContent, CardMedia, IconButton, Tooltip, Typography} from '@material-ui/core';
 import Skeleton from '@material-ui/lab/Skeleton';
 import {DeliveryIcon, FavoriteIcon, SafeIcon, SwapIcon} from '@src/components/elements/icons';
 import {InnerCardData} from '@root/interfaces/CardData';
 import {numberPrettier, transformTitle} from '@src/helpers';
-import {useStyles} from './useStyles';
 import {userAPI} from '@src/api/api';
 import {useSelector} from 'react-redux';
 import {RootState} from '@src/redux/rootReducer';
+import {useStyles} from './useStyles';
 
 
 type CardItemProps = {
@@ -32,13 +32,15 @@ export const CardItem: FC<CardItemProps> = (props) => {
         region,
         city,
         sub_category_id,
-        category,
-        favorite
+        category
     } = props;
-    const { t } = useTranslation(['common']);
+
+    const isFavorite = true;
+
+    const {t} = useTranslation(['common']);
     const translatedTitle = transformTitle(title);
 
-    const { isAuth } = useSelector((store: RootState) => store.auth);
+    const {isAuth} = useSelector((store: RootState) => store.user);
 
     const [liked, setLiked] = useState(false);
 
@@ -66,14 +68,14 @@ export const CardItem: FC<CardItemProps> = (props) => {
         userAPI.favoriteAds(id);
     };
 
-    const classes = useStyles({ ads_type, favorite });
+    const classes = useStyles({ads_type, isFavorite});
     return (
         <div className={classes.root}>
             {isAuth && (
                 <IconButton
                     className="favorite-btn" onClick={handleFavorite}
                 >
-                    <FavoriteIcon />
+                    <FavoriteIcon id={id}/>
                 </IconButton>
             )}
             <Link href={`/obyavlenie/${translatedTitle}-${id}-${category.mark}-${sub_category_id ?? ''}`}>
@@ -132,16 +134,15 @@ export const CardItem: FC<CardItemProps> = (props) => {
                         )}
                         <CardActionArea>
                             <CardContent>
-                                {isFetch ? (
-                                    <>
+                                {isFetch
+                                    ? <>
                                         <Skeleton variant="rect"/>
                                         <Skeleton variant="rect"/>
                                         <Skeleton variant="rect"/>
                                         <br/>
                                         <Skeleton variant="rect"/>
                                     </>
-                                ) : (
-                                    <>
+                                    : <>
                                         <Typography
                                             variant="subtitle1"
                                             color="initial"
@@ -162,8 +163,7 @@ export const CardItem: FC<CardItemProps> = (props) => {
                                         <Typography variant="caption">
                                             {formatted_date}
                                         </Typography>
-                                    </>
-                                )}
+                                    </>}
                             </CardContent>
                         </CardActionArea>
                     </Card>

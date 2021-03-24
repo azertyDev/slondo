@@ -1,7 +1,8 @@
 import React, {FC} from 'react';
 import {Typography} from '@material-ui/core';
-import {Router} from '@root/i18n';
 import {useRouter} from 'next/router';
+import {WithT} from "i18next";
+import {cookies} from '@src/helpers';
 import {ButtonComponent} from '@src/components/elements/button/Button';
 import {CustomBadge} from '@src/components/elements/custom_budge/CustomBadge';
 import {NotesIcon} from '@src/components/elements/icons/NotesIcon';
@@ -17,22 +18,24 @@ import {TimeLineIcon} from '@src/components/elements/icons/TimeLineIcon';
 import {ShoppingIcon} from '@src/components/elements/icons/ShoppingIcon';
 import {SettingsIcon} from '@src/components/elements/icons/SettingsIcon';
 import {PowerIcon} from '@src/components/elements/icons/PowerIcon';
-import {cookies} from '@src/helpers';
+import {useDispatch} from "react-redux";
+import {signOutAction} from '@src/redux/slices/userSlice';
 import {useStyles} from './useStyles';
-import {WithT} from "i18next";
 
 
 export const SidebarMenu: FC<WithT> = ({t}) => {
-    const router = useRouter()
-    const {pathname} = router;
+    const dispatch = useDispatch();
+    const {pathname, push} = useRouter();
 
-    const onButtonClick = (url) => () => {
-        Router.push(`/cabinet/${url}`);
+    const onButtonClick = (url) => async () => {
+        await push(`/cabinet/${url}`);
     };
 
-    const signOut = () => {
-        cookies.remove('token', {path: '/'});
-        router.push('/');
+    const signOut = async () => {
+        dispatch(signOutAction());
+        cookies.remove('slondo_auth', {path: '/'});
+        cookies.remove('slondo_user', {path: '/'});
+        await push('/');
     };
 
     const classes = useStyles();
@@ -40,7 +43,7 @@ export const SidebarMenu: FC<WithT> = ({t}) => {
         <div className={classes.root}>
             <div className="menu-item">
                 <div>
-                    <CustomBadge badgeContent={2} style={{ width: '100%' }}>
+                    <CustomBadge badgeContent={2} style={{width: '100%'}}>
                         <ButtonComponent
                             className={pathname === '/cabinet/not-moderated' ? 'selected' : ''}
                         >
@@ -91,7 +94,7 @@ export const SidebarMenu: FC<WithT> = ({t}) => {
                             className={pathname === '/cabinet/purchases' ? 'selected' : ''}
                             onClick={onButtonClick('purchases')}
                         >
-                            <ShoppingIcon />
+                            <ShoppingIcon/>
                             <Typography variant="subtitle1">
                                 {t('cabinet:myPurchases')}
                             </Typography>

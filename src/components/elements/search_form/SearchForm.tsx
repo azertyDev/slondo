@@ -2,7 +2,7 @@ import React, {FC, useState} from 'react';
 import {Hidden, NativeSelect, Typography} from '@material-ui/core';
 import {FilterIcon, Search_icon} from '@src/components/elements/icons';
 import {ButtonComponent} from '../button/Button';
-import {useTranslation} from '@root/i18n';
+import {useTranslation} from 'next-i18next';
 import {useStyles} from './useStyles';
 
 

@@ -1,13 +1,8 @@
 import React from 'react';
-import {withTranslation} from '@root/i18n';
 import AnimalComponent from "@root/src/components/categories/animal";
 
-const Animal = (props) => {
-    return <AnimalComponent {...props}/>;
+const Animal = () => {
+    return <AnimalComponent/>;
 };
 
-Animal.getInitialProps = async () => ({
-    namespacesRequired: ['cabinet', 'common'],
-});
-
-export default withTranslation(['cabinet', 'common'])(Animal);
+export default Animal;

@@ -13,14 +13,6 @@ export interface RecoveryInputs {
     password_confirmation: string;
 }
 
-export interface AuthReg {
-    isFetch: boolean;
-    isAuth: boolean;
-    error?: unknown;
-    isAuthModalOpen: boolean;
-    user: UserInfo
-}
-
 export type SubscriberType = {
     id: number,
     subscriber_id: number,

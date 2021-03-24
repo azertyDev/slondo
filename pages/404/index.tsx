@@ -1,8 +1,16 @@
+import {serverSideTranslations} from "next-i18next/serverSideTranslations";
 import React from "react";
-import {withTranslation} from "../../i18n";
+import {useTranslation} from "react-i18next";
 
-const Custom404 = ({t}) => {
+const Custom404 = () => {
+    const {t} = useTranslation('errors');
     return <h1>{t('pageNotFound')}</h1>
-}
+};
 
-export default withTranslation(['errors'])(Custom404);
+export const getStaticProps = async ({locale}) => ({
+    props: {
+        ...await serverSideTranslations(locale, ['errors'])
+    }
+});
+
+export default Custom404;

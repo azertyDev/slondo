@@ -1,17 +1,17 @@
-import React, {useEffect, useState} from 'react'
+import React, {FC} from 'react'
 import {List, Typography} from '@material-ui/core'
 import {useRouter} from 'next/router'
-import {Router} from '@root/i18n'
 import {ButtonComponent} from '@src/components/elements/button/Button'
 import {CustomBadge} from '@src/components/elements/custom_budge/CustomBadge'
 import {useStyles} from './useStyles'
+import {WithT} from "i18next";
 
-export const UserSocialInfo = (props) => {
-    const { pathname } = useRouter()
+export const UserSocialInfo: FC<WithT> = ({t}) => {
+    const {pathname, push} = useRouter();
 
     const onButtonClick = (url) => () => {
-        Router.push(`/cabinet/${url}`)
-    }
+        push(`/cabinet/${url}`)
+    };
 
     const classes = useStyles()
     return (
@@ -22,7 +22,7 @@ export const UserSocialInfo = (props) => {
                     className={pathname === '/cabinet/rating' ? 'selected' : ''}
                 >
                     <Typography variant="subtitle1">
-                        {props.t('cabinet:reviews')}
+                        {t('cabinet:reviews')}
                     </Typography>
                 </ButtonComponent>
             </CustomBadge>
@@ -31,7 +31,7 @@ export const UserSocialInfo = (props) => {
                 className={pathname === '/cabinet/subscribe' ? 'selected' : ''}
             >
                 <Typography variant="subtitle1">
-                    {props.t('cabinet:subscriptionsAndSubscribers')}
+                    {t('cabinet:subscriptionsAndSubscribers')}
                 </Typography>
             </ButtonComponent>
         </List>

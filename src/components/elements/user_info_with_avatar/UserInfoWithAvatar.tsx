@@ -13,8 +13,8 @@ type UserInfoWithAvatarPropsType = {
     handleFollow?: (userId) => () => void
 };
 
-export const UserInfoWithAvatar: FC<UserInfoWithAvatarPropsType> = ({ canSubscribe, owner, handleFollow }) => {
-    const { t } = useTranslation('cabinet');
+export const UserInfoWithAvatar: FC<UserInfoWithAvatarPropsType> = ({canSubscribe, owner, handleFollow}) => {
+    const {t} = useTranslation('cabinet');
 
     const date = new Date(owner.created_at);
 
@@ -25,7 +25,7 @@ export const UserInfoWithAvatar: FC<UserInfoWithAvatarPropsType> = ({ canSubscri
         <div className={classes.root}>
             <div className="user-info">
                 <div>
-                    <UserAvatarComponent avatar={owner.avatar} />
+                    <UserAvatarComponent avatar={owner.avatar}/>
                 </div>
                 <div>
                     <div>
@@ -41,7 +41,7 @@ export const UserInfoWithAvatar: FC<UserInfoWithAvatarPropsType> = ({ canSubscri
                         </Typography>
                     </div>
                     <div>
-                        <Rating card={false} />
+                        <Rating card={false}/>
                     </div>
                     {canSubscribe && (
                         <ButtonComponent onClick={handleFollow(owner.id)}>

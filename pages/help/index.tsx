@@ -1,13 +1,8 @@
 import React from 'react';
-import { withTranslation } from '@root/i18n';
-import { HelpContainer } from '@src/components/help/HelpContainer';
+import {HelpContainer} from '@src/components/help/HelpContainer';
 
-const TestPage = (props) => {
-    return <HelpContainer {...props} />;
+const TestPage = () => {
+    return <HelpContainer/>;
 };
 
-TestPage.getInitialProps = async () => ({
-    namespacesRequired: ['common'],
-});
-
-export default withTranslation(['common'])(TestPage);
+export default TestPage;

@@ -1,13 +1,8 @@
 import React from 'react';
-import {withTranslation} from '@root/i18n';
 import JobComponent from "@root/src/components/categories/job";
 
-const Job = (props) => {
-    return <JobComponent {...props}/>;
+const Job = () => {
+    return <JobComponent/>;
 };
 
-Job.getInitialProps = async () => ({
-    namespacesRequired: ['cabinet', 'common'],
-});
-
-export default withTranslation(['cabinet', 'common'])(Job);
+export default Job;

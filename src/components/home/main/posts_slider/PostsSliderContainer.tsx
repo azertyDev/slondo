@@ -1,11 +1,12 @@
 import React, {FC, useEffect, useState} from 'react';
 import {ITEMS_PER_PAGE} from '@src/constants';
 import {userAPI} from '@src/api/api';
-import {i18n} from '@root/i18n';
+import {i18n} from 'next-i18next';
 import {CardData, InnerCardData} from '@root/interfaces/CardData';
 import {PostsSlider} from './PostsSlider';
 import {setErrorMsgAction} from "@src/redux/slices/errorSlice";
 import {useDispatch} from "react-redux";
+import {useRouter} from "next/router";
 
 
 const initCard: InnerCardData = {
@@ -60,7 +61,7 @@ const initCardData: CardData = {
 export const PostsSliderContainer: FC = () => {
     const dispatch = useDispatch();
 
-    const lang = i18n.language;
+    const {locale} = useRouter();
 
     const [currentPage, setCurrentPage] = useState(1);
     const [cardData, setCardData] = useState(initCardData);
@@ -72,12 +73,7 @@ export const PostsSliderContainer: FC = () => {
                 isFetch: true
             });
 
-            const {data, total} = await userAPI.getCards(
-                ITEMS_PER_PAGE,
-                currentPage,
-                'auc',
-                lang
-            );
+            const {data, total} = await userAPI.getCards(ITEMS_PER_PAGE, currentPage, 'auc', locale);
 
             setCardData({
                 ...cardData,
@@ -98,7 +94,7 @@ export const PostsSliderContainer: FC = () => {
 
     useEffect(() => {
         setFetchedCardData();
-    }, [currentPage, lang]);
+    }, [currentPage, locale]);
 
     return (
         <PostsSlider

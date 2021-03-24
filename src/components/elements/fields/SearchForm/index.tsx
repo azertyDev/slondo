@@ -1,12 +1,12 @@
-import React, { FC, useState } from 'react';
-import { Hidden, NativeSelect, Typography } from '@material-ui/core'
-import { FilterIcon } from '../../icons'
-import { ButtonComponent } from '../../button/Button'
-import { useTranslation } from '@root/i18n';
-import { useStyles } from './useStyles';
+import React, {FC, useState} from 'react';
+import {Hidden, NativeSelect, Typography} from '@material-ui/core'
+import {FilterIcon} from '../../icons'
+import {ButtonComponent} from '../../button/Button'
+import {useTranslation} from 'next-i18next';
+import {useStyles} from './useStyles';
 
 export const SearchForm: FC = () => {
-    const { t } = useTranslation(['categories']);
+    const {t} = useTranslation(['categories']);
 
     const [adType, setAdType] = useState(1);
     const handleSelect = (e) => {
@@ -39,7 +39,7 @@ export const SearchForm: FC = () => {
                 </ButtonComponent>
             </Hidden>
             <Hidden mdUp>
-               <FilterIcon/>
+                <FilterIcon/>
             </Hidden>
         </form>
     );
