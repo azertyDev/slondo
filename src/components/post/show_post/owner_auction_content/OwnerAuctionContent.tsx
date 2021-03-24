@@ -7,7 +7,6 @@ import {useStyles} from './useStyles';
 
 export const OwnerAuctionContent: FC<any> = ({ t, postData, handleFollow }) => {
     const isAuction = postData.ads_type.mark === 'auc' || postData.ads_type.mark === 'exauc';
-
     const classes = useStyles();
     return (
         <div className={classes.root}>
@@ -20,7 +19,7 @@ export const OwnerAuctionContent: FC<any> = ({ t, postData, handleFollow }) => {
             {isAuction && <AuctionInfo data={postData} t={t} />}
             <OwnerInfo
                 safe_deal={postData.safe_deal}
-                owner={postData.creator}
+                owner={postData.author}
                 handleFollow={handleFollow}
             />
         </div>

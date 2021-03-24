@@ -17,5 +17,5 @@
     "settings": "Sozlamalar",
     "exit": "Chiqish",
     "nonModerated": "Moderatsiyadan o'tmagan",
-    "registrationAt": "Slondoda {{registration_at}} yildan buyon"
+    "created_at": "Slondoda {{created_at}} yildan buyon"
 }

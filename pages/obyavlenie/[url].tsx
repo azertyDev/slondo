@@ -9,7 +9,7 @@ export const getStaticProps: GetStaticProps = async ({locale}) => ({
     props: {
         ...await serverSideTranslations(
             locale,
-            ['post', 'common', 'header', 'footer', 'auth_reg']
+            ['post', 'common', 'cabinet', 'header', 'footer', 'auth_reg']
         )
     }
 });

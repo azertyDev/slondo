@@ -75,7 +75,7 @@ export const CardItem: FC<CardItemProps> = (props) => {
                 <IconButton
                     className="favorite-btn" onClick={handleFavorite}
                 >
-                    <FavoriteIcon id={id}/>
+                    <FavoriteIcon />
                 </IconButton>
             )}
             <Link href={`/obyavlenie/${translatedTitle}-${id}-${category.mark}-${sub_category_id ?? ''}`}>

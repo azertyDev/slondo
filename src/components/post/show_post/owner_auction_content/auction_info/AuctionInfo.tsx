@@ -15,7 +15,7 @@ import {useStyles} from './useStyles';
 export const AuctionInfo: FC<any> = (props) => {
     const {t} = useTranslation();
     const dispatch = useDispatch();
-    const isAuth = useSelector<any>(state => state.auth.isAuth);
+    const isAuth = useSelector<any>(state => state.user.isAuth);
     const {data} = props;
     const [showAll, setShowAll] = useState(false);
     const [page, setPage] = useState(1);

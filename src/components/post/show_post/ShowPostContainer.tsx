@@ -36,7 +36,7 @@ export const ShowPostContainer: FC = () => {
             expiration_at: null,
             number_of_views: null,
             sub_category_id: null,
-            creator: {
+            author: {
                 id: null,
                 name: '',
                 surname: '',

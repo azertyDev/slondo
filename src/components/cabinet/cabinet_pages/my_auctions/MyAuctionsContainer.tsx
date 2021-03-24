@@ -3,13 +3,13 @@ import {TabsContent} from '@src/components/cabinet/cabinet_pages/TabsContent';
 import {MyAuctions} from '@src/components/cabinet/cabinet_pages/my_auctions/MyAuctions';
 import {withAuthRedirect} from '@src/hoc/withAuthRedirect';
 import {userAPI} from '@src/api/api';
+import {useRouter} from 'next/router';
 import {useDispatch} from 'react-redux';
 import {setErrorMsgAction} from '@root/src/redux/slices/errorSlice';
-import {i18n} from '@root/i18n';
 
 
 export const MyAuctionsContainer: FC = () => {
-    const lang = i18n.language;
+    const { locale } = useRouter();
     const dispatch = useDispatch();
 
     const [openModal, setOpenModal] = useState(false);
@@ -44,8 +44,8 @@ export const MyAuctionsContainer: FC = () => {
             auctionData.isFetch = true;
             setAuctionData({ ...auctionData });
 
-            const createdAuctionsData = await userAPI.getMyPosts(lang, type);
-            const participatingData = await userAPI.getAuctionSubs(lang);
+            const createdAuctionsData = await userAPI.getMyPosts(locale, type);
+            const participatingData = await userAPI.getAuctionSubs(locale);
 
             auctionData.isFetch = true;
 

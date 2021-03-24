@@ -15,7 +15,7 @@ import {BreadcrumbsComponent} from '@src/components/elements/breadcrumbs/Breadcr
 import {ViewPropsType} from '@src/components/elements/card/card_view/CardView';
 import {UserAvatarComponent} from '@src/components/elements/user_info_with_avatar/avatar/UserAvatarComponent';
 import {Rating} from '@src/components/elements/rating/Rating';
-import {Link} from '@root/i18n';
+import Link from 'next/link';
 import {formatNumber, numberPrettier} from '@src/helpers';
 import Countdown from 'react-countdown';
 import {useRouter} from 'next/router';

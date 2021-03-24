@@ -2,7 +2,7 @@ import React, {FC} from 'react';
 import {Backdrop, Fade, IconButton, List, ListItem, ListItemText, Modal, Typography} from '@material-ui/core';
 import {CloseIcon} from '@src/components/elements/icons';
 import {ButtonComponent} from '@src/components/elements/button/Button';
-import {Link} from '@root/i18n';
+import Link from 'next/link';
 import {userAPI} from '@src/api/api';
 import {useStyles} from './useStyles';
 

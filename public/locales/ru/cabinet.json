@@ -17,5 +17,5 @@
     "settings": "Настройки",
     "exit": "Выход",
     "nonModerated": "Не прошло модерацию",
-    "registrationAt": "На Slondo с {{registration_at}}"
+    "created_at": "На Slondo с {{created_at}}"
 }

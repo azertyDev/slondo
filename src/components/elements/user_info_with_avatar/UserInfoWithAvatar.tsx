@@ -35,8 +35,8 @@ export const UserInfoWithAvatar: FC<UserInfoWithAvatarPropsType> = ({canSubscrib
                     </div>
                     <div>
                         <Typography variant="subtitle1" color="initial">
-                            {t('registrationAt', {
-                                registration_at: formatted_date?.toString()
+                            {t('created_at', {
+                                created_at: formatted_date?.toString()
                             })}
                         </Typography>
                     </div>
