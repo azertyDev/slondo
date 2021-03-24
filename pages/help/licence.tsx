@@ -1,14 +1,9 @@
 import React from 'react'
-import { withTranslation } from '@root/i18n'
-import { LegalContainer } from '@src/components/legal/LegalContainer'
+import {LegalContainer} from '@src/components/legal/LegalContainer'
 
-const LicenceAgreementPage = (props) => {
-    return <LegalContainer {...props} />
-}
+const LicenceAgreementPage = () => {
+    return <LegalContainer/>
+};
 
-LicenceAgreementPage.getInitialProps = async () => ({
-    namespacesRequired: ['common'],
-})
-
-export default withTranslation(['common'])(LicenceAgreementPage)
+export default LicenceAgreementPage;
 

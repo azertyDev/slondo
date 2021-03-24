@@ -1,13 +1,14 @@
-import React, { FC } from 'react'
-import { Container, Grid, Typography } from '@material-ui/core'
-import { SocialsBlock } from '@src/components/elements/socials_block/SocialsBlock'
-import { Link, useTranslation } from '@root/i18n'
-import { Logo } from '@src/components/elements/icons/logo/Logo'
-import { useStyles } from './useStyles'
+import React, {FC} from 'react'
+import {Container, Grid, Typography} from '@material-ui/core'
+import {SocialsBlock} from '@src/components/elements/socials_block/SocialsBlock'
+import {useTranslation} from 'next-i18next'
+import Link from 'next/link'
+import {Logo} from '@src/components/elements/icons/logo/Logo'
+import {useStyles} from './useStyles'
 
 
 export const Footer: FC = () => {
-    const { t } = useTranslation(['footer'])
+    const {t} = useTranslation(['footer']);
 
     const classes = useStyles()
     return (
@@ -174,13 +175,13 @@ export const Footer: FC = () => {
                             </Grid>
                             <Grid item xs={3} container>
                                 <div className="social-icons">
-                                    <SocialsBlock footer />
+                                    <SocialsBlock footer/>
                                 </div>
                             </Grid>
                         </Grid>
                         <div className="footer-bottom">
                             <Grid item xs={3} container justify='center' alignItems='center'>
-                                <Logo />
+                                <Logo/>
                             </Grid>
                             <Grid item xs={6} container justify="center" alignItems='center'>
                                 <Typography variant="subtitle1" color="initial">

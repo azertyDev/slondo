@@ -4,13 +4,13 @@ import {MyPosts} from '@src/components/cabinet/cabinet_pages/my_posts/MyPosts';
 import {withAuthRedirect} from '@src/hoc/withAuthRedirect';
 import {userAPI} from '@src/api/api';
 import {setErrorMsgAction} from '@src/redux/slices/errorSlice';
-import {i18n} from '@root/i18n';
 import {useDispatch} from 'react-redux';
+import {useRouter} from "next/router";
 
 
 const MyPostsContainer: FC = () => {
-    const lang = i18n.language;
     const dispatch = useDispatch();
+    const {locale} = useRouter();
 
     const initialState = {
         isFetch: false,
@@ -27,14 +27,14 @@ const MyPostsContainer: FC = () => {
 
     const fetchPostData = async (type) => {
         try {
-            const { myPosts, securePosts } = postData;
+            const {myPosts, securePosts} = postData;
             const isCreatedPost = type === 'post';
 
             postData.isFetch = true;
-            setPostData({ ...postData });
+            setPostData({...postData});
 
-            const myPostsData = await userAPI.getMyPosts(lang, type);
-            const securePostsData = await userAPI.getSecurePosts(lang, type);
+            const myPostsData = await userAPI.getMyPosts(locale, type);
+            const securePostsData = await userAPI.getSecurePosts(locale, type);
 
             postData.isFetch = true;
 
@@ -46,9 +46,9 @@ const MyPostsContainer: FC = () => {
                 securePosts.total = securePostsData.total;
             }
 
-            setPostData({ ...postData });
+            setPostData({...postData});
         } catch (e) {
-            dispatch(setErrorMsgAction(e));
+            dispatch(setErrorMsgAction(e.message));
         }
     };
     const tabsData = [
@@ -56,13 +56,13 @@ const MyPostsContainer: FC = () => {
             id: 0,
             title: 'Объявления',
             total: postData.myPosts.total,
-            component: <MyPosts list={postData.myPosts.data} />
+            component: <MyPosts list={postData.myPosts.data}/>
         },
         {
             id: 1,
             title: 'Безопасная покупка',
             total: postData.securePosts.total,
-            component: <MyPosts list={postData.securePosts.data} />
+            component: <MyPosts list={postData.securePosts.data}/>
         }
     ];
 
@@ -73,7 +73,7 @@ const MyPostsContainer: FC = () => {
     const title = 'Мои объявления';
 
     return (
-        <TabsContent title={title} tabsData={tabsData} headerTitle={title} />
+        <TabsContent title={title} tabsData={tabsData} headerTitle={title}/>
     );
 };
 

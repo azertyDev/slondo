@@ -19,7 +19,7 @@ import {BreadcrumbsComponent} from '@src/components/elements/breadcrumbs/Breadcr
 import {ViewPropsType} from '@src/components/elements/card/card_view/CardView';
 import {UserAvatarComponent} from '@src/components/elements/user_info_with_avatar/avatar/UserAvatarComponent';
 import {Rating} from '@src/components/elements/rating/Rating';
-import {Link} from '@root/i18n';
+import Link from 'next/link';
 import {numberPrettier} from '@src/helpers';
 import {useRouter} from 'next/router';
 import {useTranslation} from 'react-i18next';
@@ -27,10 +27,9 @@ import {useStyles} from './useStyles';
 
 const longText = `Вы принимаете предложения от других пользователей на обмен. Вы будете выделены специальным стикером. Ознакомиться с правилами «Возможен обмен»`;
 
-export const ListMode: FC<ViewPropsType> = ({ list, handleModalOpen }) => {
-    const { pathname } = useRouter();
-    const { t } = useTranslation(['common']);
-    console.log(list);
+export const ListMode: FC<ViewPropsType> = ({list, handleModalOpen}) => {
+    const {pathname} = useRouter();
+    const {t} = useTranslation(['common']);
     const classes = useStyles();
     return (
         <div className={classes.root}>
@@ -72,7 +71,7 @@ export const ListMode: FC<ViewPropsType> = ({ list, handleModalOpen }) => {
                                             {t(el.ads_type)}
                                         </Typography>
                                         <span>
-                                            <EyeIcon />
+                                            <EyeIcon/>
                                             <Typography
                                                 variant="caption"
                                                 color="initial"
@@ -99,20 +98,20 @@ export const ListMode: FC<ViewPropsType> = ({ list, handleModalOpen }) => {
                                                         className='isFavorite'
                                                         onClick={() => handleModalOpen('disableFavorite', el.id)}
                                                     >
-                                                        <CloseIcon />
+                                                        <CloseIcon/>
                                                     </div>
                                                     :
                                                     <div
                                                         className='settings'
                                                         onClick={() => handleModalOpen('settings')}
                                                     >
-                                                        <SettingsIcon />
+                                                        <SettingsIcon/>
                                                     </div>}
                                             </div>
                                         </div>
                                         <div className="description">
                                             <span className="available">
-                                                <PhoneIcon />
+                                                <PhoneIcon/>
                                                 <Typography variant="body1">
                                                     Пн-Пт 9:00-18:00
                                                 </Typography>
@@ -120,7 +119,7 @@ export const ListMode: FC<ViewPropsType> = ({ list, handleModalOpen }) => {
                                             {!!el.exchange && (
                                                 <Tooltip title={longText} arrow>
                                                     <span className="exchange">
-                                                        <SwapIcon />
+                                                        <SwapIcon/>
                                                         <Typography variant="body1">
                                                             Возможен обмен
                                                         </Typography>
@@ -129,7 +128,7 @@ export const ListMode: FC<ViewPropsType> = ({ list, handleModalOpen }) => {
                                             )}
                                             {!!el.delivery && (
                                                 <span className="delivery">
-                                                    <DeliveryIcon />
+                                                    <DeliveryIcon/>
                                                     <Typography variant="body1">
                                                         Есть доставка
                                                     </Typography>
@@ -137,7 +136,7 @@ export const ListMode: FC<ViewPropsType> = ({ list, handleModalOpen }) => {
                                             )}
                                             {!!el.safe_deal && (
                                                 <span className="safe_deal">
-                                                    <SafeIcon />
+                                                    <SafeIcon/>
                                                     <Typography variant="body1">
                                                         Безопасная покупка
                                                     </Typography>
@@ -148,7 +147,7 @@ export const ListMode: FC<ViewPropsType> = ({ list, handleModalOpen }) => {
                                             <div>
                                                 <Link href="#">
                                                     <a>
-                                                        <LocationIcon />
+                                                        <LocationIcon/>
                                                     </a>
                                                 </Link>
                                                 <Typography
@@ -262,7 +261,7 @@ export const ListMode: FC<ViewPropsType> = ({ list, handleModalOpen }) => {
                                             <Typography variant="subtitle1">
                                                 Продвижение
                                             </Typography>
-                                            <PromoteIcon />
+                                            <PromoteIcon/>
                                         </Button>
                                         <Button
                                             color="primary"
@@ -273,7 +272,7 @@ export const ListMode: FC<ViewPropsType> = ({ list, handleModalOpen }) => {
                                             <Typography variant="subtitle1">
                                                 Поднять в ТОП
                                             </Typography>
-                                            <MegaphoneIcon />
+                                            <MegaphoneIcon/>
                                         </Button>
                                         <Button
                                             color="primary"
@@ -284,7 +283,7 @@ export const ListMode: FC<ViewPropsType> = ({ list, handleModalOpen }) => {
                                             <Typography variant="subtitle1">
                                                 Поднять в ленте
                                             </Typography>
-                                            <DoubleUpIcon />
+                                            <DoubleUpIcon/>
                                         </Button>
                                     </div>
                                 )}
@@ -313,16 +312,16 @@ export const ListMode: FC<ViewPropsType> = ({ list, handleModalOpen }) => {
                                             </ButtonComponent>
                                         </div>
                                         <div className="profile-data">
-                                            <UserAvatarComponent avatar={el.creator.avatar} />
+                                            <UserAvatarComponent avatar={el.creator.avatar}/>
                                             <Typography
                                                 variant="subtitle1"
                                                 color="initial"
                                             >
                                                 Имя Фамилия
                                             </Typography>
-                                            <Rating card />
+                                            <Rating card/>
                                             <ButtonComponent className='write'>
-                                                <LetterIcon />
+                                                <LetterIcon/>
                                                 <Typography
                                                     variant="subtitle1"
                                                     color="initial"

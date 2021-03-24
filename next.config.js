@@ -1,13 +1,4 @@
-// eslint-disable-next-line @typescript-eslint/no-var-requires
-const {nextI18NextRewrites} = require('next-i18next/rewrites');
+/* eslint-disable @typescript-eslint/no-var-requires */
+const {i18n} = require('./next-i18next.config');
 
-const localeSubpaths = {
-    uz: 'uz'
-}
-
-module.exports = {
-    rewrites: async () => nextI18NextRewrites(localeSubpaths),
-    publicRuntimeConfig: {
-        localeSubpaths
-    }
-};
+module.exports = {i18n};

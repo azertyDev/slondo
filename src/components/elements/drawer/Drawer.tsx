@@ -1,10 +1,10 @@
 import React, {FC, useState} from 'react'
+import Link from 'next/link'
 import Drawer from '@material-ui/core/Drawer'
 import {InputAdornment, List, ListItem, TextField, Typography} from '@material-ui/core'
 import {categories_list} from '@src/common_data/categories_list'
-import {useTranslation} from 'i18n'
+import {useTranslation} from 'next-i18next';
 import {Search_icon} from '@src/components/elements/icons'
-import {Link} from '@root/i18n'
 import {useStyles} from './useStyles'
 import {addParentsToCtgrs} from "@src/helpers";
 

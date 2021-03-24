@@ -32,7 +32,7 @@ export const CustomFormikField: FC<CustomFormikFieldPropsType> = (props) => {
                         <Typography variant="subtitle1">
                             <strong>
                                 {t(labelText ?? name)}
-                                {isRequired(name) && <span className='error-text'>*&nbsp;</span>}
+                                {isRequired(name) && <span className='error-text'>*</span>}&nbsp;
                             </strong>
                             {errors[name] && touched[name] && (
                                 <span className='error-text'>

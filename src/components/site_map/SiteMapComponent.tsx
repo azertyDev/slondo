@@ -1,10 +1,12 @@
-import React, { FC } from 'react';
-import { Grid, Typography } from '@material-ui/core';
-import { WithT } from 'i18next';
+import React, {FC} from 'react';
+import {Grid, Typography} from '@material-ui/core';
 import Link from 'next/link';
-import { useStyles } from './useStyles';
+import {useStyles} from './useStyles';
+import {useTranslation} from "react-i18next";
 
-export const SiteMapComponent: FC<WithT & any> = ({ t, categories }) => {
+
+export const SiteMapComponent: FC<any> = ({categories}) => {
+    const {t} = useTranslation(['categories']);
     const classes = useStyles();
     return (
         <div className={classes.root}>

@@ -1,6 +1,6 @@
 import React, {FC} from 'react';
 import {Paper, Typography} from '@material-ui/core';
-import {Link} from '@root/i18n';
+import Link from 'next/link';
 import {SignIcon} from '@src/components/elements/icons/SignIcon';
 import {GavelIcon} from '@src/components/elements/icons/GavelIcon';
 import {NotesIcon} from '@src/components/elements/icons/NotesIcon';

@@ -3,13 +3,13 @@ import {TabsContent} from '@src/components/cabinet/cabinet_pages/TabsContent';
 import {MyAuctions} from '@src/components/cabinet/cabinet_pages/my_auctions/MyAuctions';
 import {withAuthRedirect} from '@src/hoc/withAuthRedirect';
 import {userAPI} from '@src/api/api';
+import {useRouter} from "next/router";
 import {useDispatch} from 'react-redux';
 import {setErrorMsgAction} from '@root/src/redux/slices/errorSlice';
-import {i18n} from '@root/i18n';
 
 
 export const MyAuctionsContainer: FC = () => {
-    const lang = i18n.language;
+    const {locale} = useRouter();
     const dispatch = useDispatch();
 
     const initialState = {
@@ -27,14 +27,14 @@ export const MyAuctionsContainer: FC = () => {
 
     const fetchAuctionData = async (type) => {
         try {
-            const { createdAuctions, participatingAuctions } = auctionData;
+            const {createdAuctions, participatingAuctions} = auctionData;
             const isCreatedAuction = type === 'auc';
 
             auctionData.isFetch = true;
-            setAuctionData({ ...auctionData });
+            setAuctionData({...auctionData});
 
-            const createdAuctionsData = await userAPI.getMyPosts(lang, type);
-            const participatingData = await userAPI.getAuctionSubs(lang);
+            const createdAuctionsData = await userAPI.getMyPosts(locale, type);
+            const participatingData = await userAPI.getAuctionSubs(locale);
 
             auctionData.isFetch = true;
 
@@ -46,9 +46,9 @@ export const MyAuctionsContainer: FC = () => {
                 participatingAuctions.total = participatingData.total;
             }
 
-            setAuctionData({ ...auctionData });
+            setAuctionData({...auctionData});
         } catch (e) {
-            dispatch(setErrorMsgAction(e));
+            dispatch(setErrorMsgAction(e.message));
         }
     };
 
@@ -57,13 +57,13 @@ export const MyAuctionsContainer: FC = () => {
             id: 0,
             title: 'Созданные',
             total: auctionData.createdAuctions.total,
-            component: <MyAuctions list={auctionData.createdAuctions.data} />
+            component: <MyAuctions list={auctionData.createdAuctions.data}/>
         },
         {
             id: 1,
             title: 'Участие',
             total: auctionData.participatingAuctions.total,
-            component: <MyAuctions list={auctionData.participatingAuctions.data} />
+            component: <MyAuctions list={auctionData.participatingAuctions.data}/>
         }
     ];
 
@@ -74,7 +74,7 @@ export const MyAuctionsContainer: FC = () => {
     const title = 'Мои аукционы';
 
     return (
-        <TabsContent title={title} tabsData={tabsData} headerTitle={title} />
+        <TabsContent title={title} tabsData={tabsData} headerTitle={title}/>
     );
 };
 

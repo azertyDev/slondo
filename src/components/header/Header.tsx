@@ -1,38 +1,38 @@
-import React, {FC, useEffect} from 'react';
+import {FC, useEffect} from 'react';
 import {useDispatch, useSelector} from "react-redux";
 import {Container, Modal} from '@material-ui/core';
-import {i18n, useTranslation} from '@root/i18n';
-import {cookies} from '@root/src/helpers';
+import {useTranslation} from 'next-i18next';
 import Top from "./top/TopContainer";
 import Bottom from './bottom/Bottom';
 import {AuthRegPage} from "./auth_reg/AuthRegPage";
-import {signInAction, setIsAuthModalOpen} from '@src/redux/slices/authRegSlice';
+import {signInAction, setIsAuthModalOpen} from '@src/redux/slices/userSlice';
 import {RootState} from "@src/redux/rootReducer";
 import {fetchLocations} from "@src/redux/slices/locationsSlice";
 import {useStyles} from './useStyles';
+import {cookies} from "@src/helpers";
+import {useRouter} from "next/router";
 
 
 export const Header: FC = () => {
-    const {t} = useTranslation(['header']);
-
-    const isToken = !!cookies.get('token');
-
-    const lang = i18n.language;
+    const user = cookies.get('slondo_user');
+    const isAuth = !!user;
 
     const dispatch = useDispatch();
-    const {isAuth, isAuthModalOpen} = useSelector((store: RootState) => store.auth);
+    const {t} = useTranslation(['header']);
+    const {locale} = useRouter();
+    const {isAuthModalOpen} = useSelector((store: RootState) => store.user);
 
     const handleModal = value => () => {
         dispatch(setIsAuthModalOpen(value));
     };
 
     useEffect(() => {
-        dispatch(fetchLocations(lang));
-    }, [lang]);
+        dispatch(fetchLocations(locale));
+    }, [locale]);
 
-    // useEffect(() => {
-    //     dispatch(signInAction(isToken));
-    // }, [isToken]);
+    useEffect(() => {
+        user && dispatch(signInAction(user));
+    }, [isAuth]);
 
     const classes = useStyles();
     return (
@@ -57,10 +57,7 @@ export const Header: FC = () => {
                     className={classes.modalDialog}
                 >
                     <>
-                        <AuthRegPage
-                            t={t}
-                            handleCloseModal={handleModal(false)}
-                        />
+                        <AuthRegPage handleCloseModal={handleModal(false)}/>
                     </>
                 </Modal>
             </div>

@@ -1,12 +1,8 @@
 import React, {Dispatch} from "react"
+import Link from 'next/link'
 import Drawer from '@material-ui/core/Drawer'
 import {Typography} from "@material-ui/core"
-import {Link} from '@root/i18n'
-
-// icons
 import {QuestionIcon, StoreIcon, BusinessIcon} from "@src/components/elements/icons";
-
-// styles
 import {useStyles} from './useStyles'
 
 type DrawerProps = {

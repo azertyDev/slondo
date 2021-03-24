@@ -1,7 +1,7 @@
 import React, {FC} from "react";
 import {Accordion, AccordionDetails, AccordionSummary, Typography} from '@material-ui/core';
 import {ButtonComponent} from "@src/components/elements/button/Button";
-import {useTranslation} from "@root/i18n";
+import {useTranslation} from "next-i18next";
 import {useStyles} from './useStyles';
 
 

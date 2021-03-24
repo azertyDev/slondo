@@ -1,8 +1,7 @@
-/* eslint-disable prefer-const */
-import React, {FC} from "react";
+import React, {Dispatch, FC, SetStateAction} from "react";
 import {WithT} from "i18next";
 import {useSelector} from "react-redux";
-import {Grid, TextField, Typography} from "@material-ui/core";
+import {Grid} from "@material-ui/core";
 import {AuctionParams} from "./auction_params/AuctionParams";
 import {PaymentDelivery} from "./payment_delivery/PaymentDelivery";
 import {Description} from "./description/Description";
@@ -18,12 +17,11 @@ import {RootState} from "@src/redux/rootReducer";
 import {PostType} from "@root/interfaces/Post";
 import {WEEK_DAYS} from "@src/common_data/common";
 import {StateIcon} from '@src/components/elements/icons';
-import {Router} from "@root/i18n";
 import {LocationAutocomplete} from "@src/components/post/create_post/form_page/common_params_form/location/LocationAutocomplete";
 import {CustomSelect} from "@src/components/post/create_post/form_page/components/custom_select/CustomSelect";
 import {CommonParamsFormPreview} from "@src/components/post/create_post/form_page/common_params_form/CommonParamsFormPreview";
-import {useStyles} from './useStyles';
 import {CustomFormikField} from "@src/components/elements/custom_formik_field/CustomFormikField";
+import {useStyles} from './useStyles';
 
 
 type DefaultParamsPropsType = {
@@ -33,14 +31,15 @@ type DefaultParamsPropsType = {
     post,
     setPost,
     isPreview: boolean,
+    setIsPreview: Dispatch<SetStateAction<boolean>>
 } & WithT;
 
 export const CommonParamsForm: FC<DefaultParamsPropsType> = (props) => {
     const {
         t,
         isPreview,
+        setIsPreview,
         currentFormIndex,
-        asPath,
         postType,
         post,
         setPost
@@ -132,7 +131,7 @@ export const CommonParamsForm: FC<DefaultParamsPropsType> = (props) => {
         }
 
         if (isActive) {
-            let {week_days, start_time, end_time} = time;
+            const {week_days, start_time, end_time} = time;
             otherData.start_time = start_time;
             otherData.end_time = end_time;
             otherData.week_days = week_days.map(({id}) => ({id}));
@@ -145,7 +144,7 @@ export const CommonParamsForm: FC<DefaultParamsPropsType> = (props) => {
             currency_id: currency.id
         });
 
-        Router.push(asPath.replace(/preview=0/, 'preview=1'));
+        setIsPreview(true);
     };
 
     const formik = useFormik({

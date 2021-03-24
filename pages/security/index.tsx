@@ -1,13 +1,8 @@
 import React from 'react'
-import { withTranslation } from '@root/i18n'
-import { SecurityContainer } from '@src/components/security/SecurityContainer'
+import {SecurityContainer} from '@src/components/security/SecurityContainer'
 
-const ScammersPage = (props) => {
-    return <SecurityContainer {...props} />
-}
+const ScammersPage = () => {
+    return <SecurityContainer/>
+};
 
-ScammersPage.getInitialProps = async () => ({
-    namespacesRequired: ['common'],
-})
-
-export default withTranslation(['common'])(ScammersPage)
+export default ScammersPage;

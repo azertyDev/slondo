@@ -37,26 +37,24 @@ export const Messages: FC<any> = () => {
             <Grid container className={classes.messengerWrapper}>
                 <Grid item xs={4} className={classes.sidebar}>
                     <div className='conversation-list'>
-                        {
-                            Array.from({length: 15}).map(() => {
-                                return <div className='conversation-item'>
-                                    <UserAvatarComponent avatar=''/>
-                                    <div className='user-info'>
-                                        <div className='user-name'>
-                                            <Typography variant='subtitle1'>
-                                                Feiyutech store
-                                            </Typography>
-                                            <Typography variant='subtitle2'>
-                                                18:36
-                                            </Typography>
-                                        </div>
-                                        <Typography variant='subtitle2' className='message-fragment' noWrap>
-                                            Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+                        {Array.from({length: 15}).map(() => {
+                            return <div className='conversation-item'>
+                                <UserAvatarComponent avatar=''/>
+                                <div className='user-info'>
+                                    <div className='user-name'>
+                                        <Typography variant='subtitle1'>
+                                            Feiyutech store
+                                        </Typography>
+                                        <Typography variant='subtitle2'>
+                                            18:36
                                         </Typography>
                                     </div>
+                                    <Typography variant='subtitle2' className='message-fragment' noWrap>
+                                        Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+                                    </Typography>
                                 </div>
-                            })
-                        }
+                            </div>
+                        })}
                     </div>
                 </Grid>
                 <Grid item xs={8} className={classes.chatBlock}>

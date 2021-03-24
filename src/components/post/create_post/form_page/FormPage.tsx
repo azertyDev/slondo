@@ -4,7 +4,7 @@ import {useRouter} from "next/router";
 import {useDispatch} from "react-redux";
 import {userAPI} from '@src/api/api';
 import {Top} from '../top/Top';
-import {i18n, Router, useTranslation} from "@root/i18n";
+import {useTranslation} from "next-i18next";
 import {postTypes} from '@src/common_data/post_types';
 import {MainLayout} from '@src/components/MainLayout';
 import {AppearanceForm} from './appearance_form/AppearanceForm';
@@ -33,23 +33,16 @@ const FormPage: FC = () => {
     const dispatch = useDispatch();
 
     const {t} = useTranslation(['post']);
-    const lang = i18n.language;
 
-    const {asPath, query} = useRouter();
-    const {index, preview, success, ...params} = query;
+    const {asPath, query, locale, push} = useRouter();
+    const {index, ...params} = query;
 
     const {category, subCategory, type} = getCategoriesByParams(categories_list, params);
     const mark = category.name;
 
     const isCtgrAnimalFishes = category.name === 'animal' && subCategory.name === 'fishes';
 
-    const isPreview = !!Number(preview);
-    const isSuccess = !!Number(success);
     const isExtendSubCtgr = extendSubCtgrs.some(ctgr => ctgr === subCategory.name);
-
-    const backUrl = isPreview
-        ? asPath.replace(/preview=1/, 'preview=0')
-        : `/create/type/${index}`;
 
     const title = `${t(`categories:${category.name}`)}
         ${subCategory ? ` - ${t(`categories:${subCategory.name}`)}` : ''}
@@ -74,6 +67,9 @@ const FormPage: FC = () => {
         isFetch: false,
         data: {}
     };
+
+    const [isSuccess, setIsSuccess] = useState(false);
+    const [isPreview, setIsPreview] = useState(false);
 
     const [currentFormIndex, setCurrentFormIndex] = useState(isExtendSubCtgr ? 4 : 3);
 
@@ -100,7 +96,7 @@ const FormPage: FC = () => {
                 isFetch: true
             });
 
-            const fetchedData = await userAPI.getDataForCreatePost(category.id, subCtgrId, typeId, lang);
+            const fetchedData = await userAPI.getDataForCreatePost(category.id, subCtgrId, typeId, locale);
 
             setFilters({
                 isFetch: false,
@@ -109,6 +105,12 @@ const FormPage: FC = () => {
         } catch (e) {
             dispatch(setErrorMsgAction(e.message));
         }
+    };
+
+    const handleBack = () => {
+        isPreview
+            ? setIsPreview(false)
+            : push(`/create/type/${index}`);
     };
 
     const toPublish = async () => {
@@ -122,7 +124,8 @@ const FormPage: FC = () => {
             photos.forEach(photo => form.append('files[]', photo.file));
 
             await userAPI.uploadPhotos(form);
-            Router.push(asPath.replace(/success=0$/, 'success=1'));
+
+            setIsSuccess(true);
         } catch (e) {
             dispatch(setErrorMsgAction(e.message));
         }
@@ -133,7 +136,7 @@ const FormPage: FC = () => {
     }, [asPath, post]);
 
     useEffect(() => {
-        if (!isCtgrAnimalFishes) {
+        if (!isCtgrAnimalFishes && !!category) {
             setFetchedFilters();
         }
     }, []);
@@ -149,7 +152,7 @@ const FormPage: FC = () => {
                 : <>
                     <Top
                         title={title}
-                        backUrl={backUrl}
+                        handleBack={handleBack}
                         activeStep={isPreview ? 3 : 2}
                     />
                     <div className={classes.root}>
@@ -188,6 +191,7 @@ const FormPage: FC = () => {
                                 post={post}
                                 setPost={setPost}
                                 isPreview={isPreview}
+                                setIsPreview={setIsPreview}
                                 currentFormIndex={currentFormIndex}
                             />
                         </div>

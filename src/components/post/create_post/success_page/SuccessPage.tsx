@@ -2,7 +2,8 @@ import React, {FC, useEffect} from 'react';
 import {Grid, Typography, Paper} from '@material-ui/core';
 import {ButtonComponent} from '@src/components/elements/button/Button';
 import CheckCircleOutlineIcon from '@material-ui/icons/CheckCircleOutline';
-import {Link, useTranslation} from '@root/i18n';
+import {useTranslation} from 'next-i18next';
+import Link from 'next/link';
 import {useStyles} from './useStyles';
 
 

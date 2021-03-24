@@ -4,9 +4,9 @@ import {StyledBadge, useStyles} from './useStyles';
 
 type UserAvatarComponentTypes = {
     avatar: string | boolean
-}
+};
 
-export const UserAvatarComponent: FC<UserAvatarComponentTypes> = ({ avatar }) => {
+export const UserAvatarComponent: FC<UserAvatarComponentTypes> = ({avatar}) => {
     const classes = useStyles();
     return (
         <div className={classes.root}>
@@ -20,7 +20,7 @@ export const UserAvatarComponent: FC<UserAvatarComponentTypes> = ({ avatar }) =>
             >
                 <Avatar
                     alt="avatar"
-                    src={avatar as string}
+                    src={avatar ? avatar as string : ''}
                 />
             </StyledBadge>
         </div>

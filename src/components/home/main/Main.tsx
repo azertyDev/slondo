@@ -5,19 +5,20 @@ import {
     Typography,
     useScrollTrigger,
     Grid,
-    Container,
+    Container
 } from '@material-ui/core';
 import {MainSlider} from './main_slider/MainSlider';
 import {CategoriesSlider} from './categories_slider/CategoriesSlider';
 import {PostsSliderContainer} from "./posts_slider/PostsSliderContainer";
 import {PostsTabsContainer} from './posts_tabs/PostsTabsContainer';
 import {ScrollTop} from '@src/components/elements/scroll_top/ScrollTop';
-import {Link, useTranslation} from '@root/i18n';
+import Link from 'next/link';
+import {useTranslation} from 'next-i18next';
 import {Banner} from "@src/components/elements/banner/Banner";
 import {FaqComponent} from "@src/components/elements/faq_component/FaqComponent";
 import {SocialsBlock} from '../../elements/socials_block/SocialsBlock';
-import { useStyles } from './useStyles'
-import { AdditionalComponent } from '@src/components/elements/additional/AdditionalComponent'
+import {useStyles} from './useStyles'
+import {AdditionalComponent} from '@src/components/elements/additional/AdditionalComponent'
 
 
 export const Main: FC = () => {
@@ -86,7 +87,7 @@ export const Main: FC = () => {
                             </Link>
                         </div>
                     </Hidden>
-                    <AdditionalComponent />
+                    <AdditionalComponent/>
                 </Container>
             </div>
         </main>

@@ -1,6 +1,6 @@
 import React, {FC, useEffect, useMemo, useState} from 'react';
 import {useRouter} from "next/router";
-import {i18n, useTranslation, Router} from '@root/i18n';
+import {useTranslation} from 'next-i18next';
 import {MainLayout} from '@src/components/MainLayout';
 import {categorySearchHelper, categoriesByType, addParentsToCtgrs} from '@src/helpers';
 import {Top} from '../top/Top';
@@ -27,12 +27,12 @@ const PostCategoriesPage: FC = () => {
         }
     };
 
-    const lang = i18n.language;
     const {t} = useTranslation(['post']);
 
-    const postType = useRouter().query.type as string;
+    const {locale, query, push} = useRouter();
+    const postType = query.type as string;
 
-    const categories = useMemo(() => addParentsToCtgrs(categoriesByType(postType)), [lang]);
+    const categories = useMemo(() => addParentsToCtgrs(categoriesByType(postType)), [locale]);
 
     const [category, setCategory] = useState(initCategory);
 
@@ -53,10 +53,10 @@ const PostCategoriesPage: FC = () => {
 
             if (ctgr.parents[1]) {
                 const subCtgrId = ctgr.parents[1].name;
-                Router.push(`${url}?categoryName=${mainCtgr.name}&subCategoryName=${subCtgrId}&typeName=${ctgr.name}&preview=0&success=0`);
+                push(`${url}?categoryName=${mainCtgr.name}&subCategoryName=${subCtgrId}&typeName=${ctgr.name}`);
             } else {
                 if (!type) {
-                    Router.push(`${url}?categoryName=${mainCtgr.name}&subCategoryName=${ctgr.name}&preview=0&success=0`);
+                    push(`${url}?categoryName=${mainCtgr.name}&subCategoryName=${ctgr.name}`);
                 } else {
                     category.subCategory = {
                         ...category.subCategory,
@@ -71,7 +71,7 @@ const PostCategoriesPage: FC = () => {
             }
         } else {
             if (ctgr.name === 'free') {
-                Router.push(`${url}?categoryName=${ctgr.name}&preview=0&success=0`);
+                push(`${url}?categoryName=${ctgr.name}`);
             } else {
                 setCategory({
                     ...category,
@@ -128,20 +128,22 @@ const PostCategoriesPage: FC = () => {
         }
     };
 
+    const handleBack = () => push('/create/type');
+
     useEffect(() => {
         window.scrollTo(0, 0);
     }, []);
 
     useEffect(() => {
         setSubLvlCtgrByLang();
-    }, [lang]);
+    }, [locale]);
 
     const classes = useStyles();
     return (
         <MainLayout>
             <Top
                 activeStep={1}
-                backUrl='/create/type'
+                handleBack={handleBack}
                 title={t(`common:${postType}`)}
             />
             <Grid container className={classes.root}>
@@ -184,32 +186,30 @@ const PostCategoriesPage: FC = () => {
                                     </ButtonComponent>
                                 </ListItem>
                             )}
-                            {
-                                subCtgrs.map((ctgr, i) =>
-                                    <ListItem key={i} onClick={handleCategory(ctgr)}>
-                                        <div>
-                                            <Typography variant="subtitle1">
-                                                {t(`categories:${ctgr.name}`)}
-                                            </Typography>
-                                            {!!searchTxt
-                                            && <Typography
+                            {subCtgrs.map((ctgr, i) =>
+                                <ListItem key={i} onClick={handleCategory(ctgr)}>
+                                    <div>
+                                        <Typography variant="subtitle1">
+                                            {t(`categories:${ctgr.name}`)}
+                                        </Typography>
+                                        {!!searchTxt && (
+                                            <Typography
                                                 className="parent-category"
                                                 variant="subtitle2"
                                             >
                                                 {t(`categories:${ctgr.parents[0].name}`)}
                                                 {ctgr.parents[1] && ` - ${t(`categories:${ctgr.parents[1].name}`)}`}
-                                            </Typography>}
-                                        </div>
-                                    </ListItem>
-                                )
-                            }
+                                            </Typography>
+                                        )}
+                                    </div>
+                                </ListItem>
+                            )}
                         </List>
                         : <div className="sub-category-bg">
                             <Typography variant="h2">
                                 {t('selectCategory')}
                             </Typography>
-                        </div>
-                    }
+                        </div>}
                 </Grid>
             </Grid>
         </MainLayout>

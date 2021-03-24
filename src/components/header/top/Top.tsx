@@ -1,33 +1,34 @@
-import React, {FC, useState} from 'react'
+import React, {FC, useState} from 'react';
 import {
     Grid,
     Hidden,
     Typography,
     AppBar,
     Toolbar,
-    IconButton,
-} from '@material-ui/core'
-import {TopHeaderPropsType} from '@src/components/header/top/TopContainer'
-import {Link} from '@root/i18n'
-import {useRouter} from 'next/router'
-import {LeftDrawer} from './drawer/Drawer'
-import {Localization} from '@src/components/elements/localization/Localization'
+    IconButton
+} from '@material-ui/core';
+import {TopHeaderPropsType} from '@src/components/header/top/TopContainer';
+import Link from 'next/link';
+import {useRouter} from 'next/router';
+import {LeftDrawer} from './drawer/Drawer';
+import {Localization} from './localization/Localization';
 import {
     QuestionIcon,
     LocationIcon,
     SurpriseIcon,
     Logo,
-    SubstractIcon, UserAvatarIcon,
-} from '@src/components/elements/icons'
-import {useStyles} from './useStyles'
+    SubstractIcon,
+    UserAvatarIcon
+} from '@src/components/elements/icons';
+import {useStyles} from './useStyles';
 
 
 export const Top: FC<TopHeaderPropsType> = (props) => {
-    const [isOpen, setIsOpen] = useState(false)
-    const {t, handleOpenModal} = props
+    const [isOpen, setIsOpen] = useState(false);
+    const {t, handleOpenModal} = props;
     const {pathname} = useRouter();
 
-    const classes = useStyles()
+    const classes = useStyles();
     return (
         <div className={classes.root}>
             <Grid container justify="space-between" alignItems="center">
@@ -70,9 +71,7 @@ export const Top: FC<TopHeaderPropsType> = (props) => {
                         </Grid>
                         <Grid item md={2}>
                             <Link href="/help">
-                                <a
-                                    className={pathname === '/help' ? 'selected' : ''}
-                                >
+                                <a className={pathname === '/help' ? 'selected' : ''}>
                                     <Typography variant="subtitle1">
                                         {t('help')}
                                     </Typography>

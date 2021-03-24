@@ -2,7 +2,7 @@ import React, {FC, FocusEvent} from "react";
 import {Autocomplete} from "@material-ui/lab";
 import {TextField, Typography} from "@material-ui/core";
 import {LocationsDataTypes} from "@root/interfaces/Locations";
-import {useTranslation} from "@root/i18n";
+import {useTranslation} from "next-i18next";
 
 
 type AddressAutocompleteType = {

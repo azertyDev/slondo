@@ -4,9 +4,9 @@ import Document, {
     Head,
     Main,
     NextScript,
-    DocumentContext,
+    DocumentContext
 } from 'next/document'
-import { ServerStyleSheets } from '@material-ui/core/styles'
+import {ServerStyleSheets} from '@material-ui/core/styles'
 
 export default class MyDocument extends Document {
     render() {
@@ -19,27 +19,27 @@ export default class MyDocument extends Document {
                         sizes="54x54"
                         href="/img/favicon.png"
                     />
-                    <link
-                        rel="apple-touch-icon"
-                        sizes="180x180"
-                        href="/favicon.png"
-                    />
-                    <link
-                        rel="icon"
-                        type="image/png"
-                        sizes="32x32"
-                        href="/favicon.png"
-                    />
-                    <link
-                        rel="icon"
-                        type="image/png"
-                        sizes="16x16"
-                        href="/favicon.png"
-                    />
+                    {/*<link*/}
+                    {/*    rel="apple-touch-icon"*/}
+                    {/*    sizes="180x180"*/}
+                    {/*    href="/favicon.png"*/}
+                    {/*/>*/}
+                    {/*<link*/}
+                    {/*    rel="icon"*/}
+                    {/*    type="image/png"*/}
+                    {/*    sizes="32x32"*/}
+                    {/*    href="/favicon.png"*/}
+                    {/*/>*/}
+                    {/*<link*/}
+                    {/*    rel="icon"*/}
+                    {/*    type="image/png"*/}
+                    {/*    sizes="16x16"*/}
+                    {/*    href="/favicon.png"*/}
+                    {/*/>*/}
                 </Head>
                 <body>
-                    <Main />
-                    <NextScript />
+                <Main/>
+                <NextScript/>
                 </body>
             </Html>
         )
@@ -55,7 +55,7 @@ MyDocument.getInitialProps = async (ctx: DocumentContext) => {
 
     ctx.renderPage = () =>
         originalRenderPage({
-            enhanceApp: (App) => (props) => sheets.collect(<App {...props} />),
+            enhanceApp: (App) => (props) => sheets.collect(<App {...props} />)
         })
 
     const initialProps = await Document.getInitialProps(ctx)
@@ -65,7 +65,7 @@ MyDocument.getInitialProps = async (ctx: DocumentContext) => {
         // Styles fragment is rendered after the app and page rendering finish.
         styles: [
             ...React.Children.toArray(initialProps.styles),
-            sheets.getStyleElement(),
-        ],
+            sheets.getStyleElement()
+        ]
     }
 }

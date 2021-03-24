@@ -4,13 +4,13 @@ import {useStyles} from './useStyles';
 
 
 export const MyPosts: FC<ViewPropsType> = (props) => {
-    const { isFetch, list } = props;
+    const {isFetch, list} = props;
 
     const classes = useStyles();
 
     return (
         <div className={classes.root}>
-            <CardView listMode={true} list={list} isFetch={isFetch} />
+            <CardView listMode={true} list={list} isFetch={isFetch}/>
         </div>
     );
 };

@@ -1,4 +1,3 @@
-import React from 'react'
 import {
     CarIcon,
     SpecTechIcon,
@@ -515,7 +514,7 @@ export const categories_list: CategoryType[] = [
                         id: 2,
                         name: 'longTermRent',
                         ru_name: "Аренда на длительное время"
-                    },
+                    }
                 ]
             },
             {
@@ -532,7 +531,7 @@ export const categories_list: CategoryType[] = [
                         id: 2,
                         name: 'longTermRent',
                         ru_name: "Аренда на длительное время"
-                    },
+                    }
                 ]
             }
         ]

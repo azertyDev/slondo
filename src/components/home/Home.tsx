@@ -6,8 +6,7 @@ import {Footer} from '@src/components/footer/Footer';
 import {ErrorModal} from '@src/components/error_modal/ErrorModal';
 
 
-export const Home: FC = (props) => {
-    console.log('test', props)
+export const Home: FC = () => {
     return (
         <>
             <Head>

@@ -1,15 +1,14 @@
-import React from 'react';
-import { Typography } from '@material-ui/core';
+import React, {FC} from 'react';
+import Link from 'next/link';
+import {Typography} from '@material-ui/core';
+import {FacebookIcon} from '@src/components/elements/icons/social_icons/FacebookIcon';
+import {InstagramIcon} from '@src/components/elements/icons/social_icons/InstagramIcon';
+import {YoutubeIcon} from '@src/components/elements/icons/social_icons/YoutubeIcon';
+import {TelegramIcon} from '@src/components/elements/icons/social_icons/TelegramIcon';
+import {useStyles} from './useStyles';
 
-// styles
-import { useStyles } from './useStyles';
-import { FacebookIcon } from '@src/components/elements/icons/social_icons/FacebookIcon';
-import { InstagramIcon } from '@src/components/elements/icons/social_icons/InstagramIcon';
-import { YoutubeIcon } from '@src/components/elements/icons/social_icons/YoutubeIcon';
-import { TelegramIcon } from '@src/components/elements/icons/social_icons/TelegramIcon';
-import { Link } from '@root/i18n';
 
-export const SocialsBlock = (props) => {
+export const SocialsBlock: FC<any> = (props) => {
     const classes = useStyles();
     return (
         <div className={classes.root}>
@@ -21,22 +20,22 @@ export const SocialsBlock = (props) => {
             <div>
                 <Link href="#">
                     <a>
-                        <FacebookIcon />
+                        <FacebookIcon/>
                     </a>
                 </Link>
                 <Link href="#">
                     <a>
-                        <InstagramIcon />
+                        <InstagramIcon/>
                     </a>
                 </Link>
                 <Link href="#">
                     <a>
-                        <YoutubeIcon />
+                        <YoutubeIcon/>
                     </a>
                 </Link>
                 <Link href="#">
                     <a>
-                        <TelegramIcon />
+                        <TelegramIcon/>
                     </a>
                 </Link>
             </div>
