@@ -12,6 +12,17 @@ export const MyAuctionsContainer: FC = () => {
     const lang = i18n.language;
     const dispatch = useDispatch();
 
+    const [openModal, setOpenModal] = useState(false);
+    const [modalState, setModalState] = useState('');
+
+    const handleModalOpen = (value: string) => {
+        setOpenModal(true);
+        setModalState(value);
+    };
+    const handleModalClose = () => {
+        setOpenModal(false);
+    };
+
     const initialState = {
         isFetch: false,
         createdAuctions: {
@@ -57,13 +68,31 @@ export const MyAuctionsContainer: FC = () => {
             id: 0,
             title: 'Созданные',
             total: auctionData.createdAuctions.total,
-            component: <MyAuctions list={auctionData.createdAuctions.data} />
+            component:
+                <MyAuctions
+                    list={auctionData.createdAuctions.data}
+                    isFetch={auctionData.isFetch}
+                    handleClose={handleModalClose}
+                    handleModalOpen={handleModalOpen}
+                    openModal={openModal}
+                    content={modalState}
+                    setOpenModal={setOpenModal}
+                />
         },
         {
             id: 1,
             title: 'Участие',
             total: auctionData.participatingAuctions.total,
-            component: <MyAuctions list={auctionData.participatingAuctions.data} />
+            component:
+                <MyAuctions
+                    list={auctionData.participatingAuctions.data}
+                    isFetch={auctionData.isFetch}
+                    handleClose={handleModalClose}
+                    handleModalOpen={handleModalOpen}
+                    openModal={openModal}
+                    content={modalState}
+                    setOpenModal={setOpenModal}
+                />
         }
     ];
 

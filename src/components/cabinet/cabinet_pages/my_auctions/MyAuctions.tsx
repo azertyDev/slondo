@@ -1,12 +1,38 @@
 import React, {FC} from 'react';
-import {CardView} from '@src/components/elements/card/card_view/CardView';
-import {ViewPropsType} from '@src/components/elements/card/card_view/CardView';
+import {CabinetCard} from '@src/components/cabinet/cabinet_card/CabinetCard';
+import {CustomModal} from '@src/components/elements/custom_modal/CustomModal';
+import {FavoriteDataType} from '@src/components/cabinet/cabinet_pages/favorite/FavoriteContainer';
 
+type MyAuctionsPropsType = {
+    isFetch: boolean,
+    list: FavoriteDataType[],
+    handleClose: () => void,
+    openModal: boolean,
+    content: string,
+    setOpenModal: (boolean) => void,
+    handleModalOpen: (value, id) => void,
+}
 
-export const MyAuctions: FC<ViewPropsType> = (props) => {
-    const {isFetch, list} = props;
+export const MyAuctions: FC<MyAuctionsPropsType> = (props) => {
+    const {
+        isFetch,
+        list,
+        handleClose,
+        openModal,
+        content,
+        setOpenModal,
+        handleModalOpen
+    } = props;
 
     return (
-        <CardView listMode={true} list={list} isFetch={isFetch}/>
-    )
+        <>
+            <CabinetCard list={list} isFetch={isFetch} handleModalOpen={handleModalOpen} />
+            <CustomModal
+                handleClose={handleClose}
+                openModal={openModal}
+                content={content}
+                setOpenModal={setOpenModal}
+            />
+        </>
+    );
 };

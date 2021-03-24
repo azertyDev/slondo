@@ -1,6 +1,7 @@
 import React, {FC} from 'react';
-import {CardView, ViewPropsType} from '@root/src/components/elements/card/card_view/CardView';
+import {ViewPropsType} from '@root/src/components/elements/card/card_view/CardView';
 import {useStyles} from './useStyles';
+import {CabinetCard} from '@src/components/cabinet/cabinet_card/CabinetCard';
 
 
 export const MyPosts: FC<ViewPropsType> = (props) => {
@@ -10,7 +11,7 @@ export const MyPosts: FC<ViewPropsType> = (props) => {
 
     return (
         <div className={classes.root}>
-            <CardView listMode={true} list={list} isFetch={isFetch} />
+            <CabinetCard listMode={true} list={list} isFetch={isFetch} />
         </div>
     );
 };

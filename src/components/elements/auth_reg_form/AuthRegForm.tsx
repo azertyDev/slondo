@@ -152,7 +152,7 @@ export const AuthRegForm: FC<WithT & { handleCloseModal: () => void }> = (props)
                                             type="submit"
                                             disabled={isFetch}
                                         >
-                                            {t('common:signIn')}
+                                            {t('header:signIn')}
                                         </ButtonComponent>
                                     </div>
                                 </Form>

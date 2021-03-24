@@ -3,7 +3,7 @@ import { Typography, Paper, IconButton } from '@material-ui/core';
 import { Link } from '@root/i18n';
 import { useStyles } from './useStyles';
 import { CloseIcon } from '@src/components/elements/icons';
-import { NotificationDataType } from '../cabinet_pages/notifications/NotificationsContainer';
+import { NotificationDataType } from '../NotificationsContainer';
 
 export const Notification: FC<NotificationDataType> = (props) => {
     const { img, title, text } = props;

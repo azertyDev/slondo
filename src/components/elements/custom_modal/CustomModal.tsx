@@ -10,7 +10,7 @@ type ModalPropsType = {
     content: string,
     handleClose: () => void,
     openModal: boolean,
-    favoritePostId: number,
+    favoritePostId?: number,
     setOpenModal: (boolean) => void,
     handleSubmit?: () => void,
 }

@@ -1,17 +1,11 @@
 import React from 'react';
 import { Typography } from '@material-ui/core';
 import Countdown from 'react-countdown';
+import {formatNumber} from '@src/helpers';
 
 import { useStyles } from './useStyles';
 
 export const AuctionTimer = ({ date }) => {
-    const formatNumber = (number) => {
-        if (number <= 9) {
-            return `0${number}`;
-        } else {
-            return number;
-        }
-    };
 
     const renderer = ({ days, hours, minutes, seconds, completed }) => {
         if (completed) {

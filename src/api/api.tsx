@@ -8,12 +8,12 @@ import {cookies} from '@src/helpers';
 
 
 const uztelecom = 'https://backend.testb.uz/api/';
-const localServer = 'http://192.168.1.60/slondo/public/api/';
+const localServer = 'http://192.168.100.60/slondo/public/api/';
 
 
 const instance = Axios.create({
     withCredentials: true,
-    baseURL: uztelecom
+    baseURL: localServer
 });
 
 export const setTokenToHeader = (): { headers: any } => {

@@ -116,6 +116,7 @@ const FavoriteContainer: FC = () => {
             total: favoriteData.favoritePosts.total,
             component: (
                 <Favorite
+                    isFetch={favoriteData.isFetch}
                     list={favoriteData.favoritePosts.data}
                     handleClose={handleModalClose}
                     handleModalOpen={handleModalOpen}
@@ -132,6 +133,7 @@ const FavoriteContainer: FC = () => {
             total: favoriteData.favoriteAuctions.total,
             component: (
                 <Favorite
+                    isFetch={favoriteData.isFetch}
                     handleClose={handleModalClose}
                     handleModalOpen={handleModalOpen}
                     openModal={openModal}

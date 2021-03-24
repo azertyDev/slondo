@@ -216,3 +216,11 @@ export const getCategoriesByParams = (categories, params) => {
         return acc;
     }, {});
 }
+
+export const formatNumber = (number) => {
+    if (number <= 9) {
+        return `0${number}`;
+    } else {
+        return number;
+    }
+};

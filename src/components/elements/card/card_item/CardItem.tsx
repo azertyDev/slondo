@@ -35,7 +35,6 @@ export const CardItem: FC<CardItemProps> = (props) => {
         category,
         favorite
     } = props;
-
     const { t } = useTranslation(['common']);
     const translatedTitle = transformTitle(title);
 

@@ -3,7 +3,7 @@ import {makeStyles} from '@material-ui/core/styles';
 export const useStyles = makeStyles((theme) => ({
     root: {
         '& div.MuiGrid-container': {
-            marginBottom: '20px',
+            marginBottom: '20px'
         },
         '& div.left-content': {
             zIndex: 10,
@@ -21,8 +21,8 @@ export const useStyles = makeStyles((theme) => ({
                     },
                     '& > span.exauc': {
                         color: theme.palette.primary.exAucBgColor
-                    },
-                },
+                    }
+                }
             },
             '& div.MuiPaper-root': {
                 border: 0,
@@ -45,7 +45,7 @@ export const useStyles = makeStyles((theme) => ({
                             borderRadius: '10px 0px 0px 0px',
                             height: '100%',
                             width: '100%',
-                            objectFit: 'cover',
+                            objectFit: 'cover'
                         },
                         '& > span.MuiTypography-caption': {
                             position: 'absolute',
@@ -56,14 +56,14 @@ export const useStyles = makeStyles((theme) => ({
                             letterSpacing: '0.4px',
                             color: '#fff',
                             '&.post': {
-                                backgroundColor: theme.palette.primary.postBgColor,
+                                backgroundColor: theme.palette.primary.postBgColor
                             },
                             '&.auc': {
-                                backgroundColor: theme.palette.primary.aucBgColor,
+                                backgroundColor: theme.palette.primary.aucBgColor
                             },
                             '&.exauc': {
-                                backgroundColor: theme.palette.primary.exAucBgColor,
-                            },
+                                backgroundColor: theme.palette.primary.exAucBgColor
+                            }
                         },
                         '& > span:last-child': {
                             position: 'absolute',
@@ -76,9 +76,9 @@ export const useStyles = makeStyles((theme) => ({
                             backgroundColor: 'rgba(255, 255, 255, 0.7)',
                             borderRadius: '5px',
                             '& > svg': {
-                                marginRight: '8px',
-                            },
-                        },
+                                marginRight: '8px'
+                            }
+                        }
                     },
                     '& > div.content': {
                         width: '100%',
@@ -97,17 +97,17 @@ export const useStyles = makeStyles((theme) => ({
                                 display: 'flex',
                                 alignItems: 'center',
                                 '&.ancmnt-title': {
-                                    width: '350px',
+                                    width: '350px'
                                 },
                                 '& > h6.MuiTypography-subtitle1': {
                                     fontSize: '18px',
                                     borderBottom: '1px solid #4E4E4E',
-                                    lineHeight: '20px',
+                                    lineHeight: '20px'
                                 },
                                 '& > h6.MuiTypography-subtitle2': {
                                     borderBottom: '1px solid #838383',
                                     lineHeight: '20px',
-                                    color: '#838383',
+                                    color: '#838383'
                                 },
                                 '&.card-btn': {
                                     position: 'absolute',
@@ -137,13 +137,13 @@ export const useStyles = makeStyles((theme) => ({
                                                                 '&:last-child': {
                                                                     stopColor:
                                                                         '#AD66D5'
-                                                                },
-                                                            },
-                                                        },
-                                                    },
-                                                },
-                                            },
-                                        },
+                                                                }
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
                                     },
                                     '& > .settings, .isFavorite': {
                                         padding: '11px 12px',
@@ -164,9 +164,9 @@ export const useStyles = makeStyles((theme) => ({
                                             }
                                         }
                                     }
-                                },
-                            },
-                        },
+                                }
+                            }
+                        }
                     },
                     '& > div > div.description': {
                         width: '370px',
@@ -186,42 +186,42 @@ export const useStyles = makeStyles((theme) => ({
                             '& p.MuiTypography-body1': {
                                 fontSize: '12px',
                                 color: '#838383',
-                                lineHeight: '15px',
+                                lineHeight: '15px'
                             },
                             '& svg': {
                                 width: '15px',
                                 height: '15px',
-                                marginRight: '15px',
+                                marginRight: '15px'
                             },
                             '&.available': {
                                 '& > svg': {
                                     '& > defs > linearGradient': {
                                         '& > stop': {
                                             '&:first-child': {
-                                                stopColor: '#30AB7C !important',
+                                                stopColor: '#30AB7C !important'
                                             },
                                             '&:last-child': {
-                                                stopColor: '#75BE55',
-                                            },
-                                        },
-                                    },
-                                },
+                                                stopColor: '#75BE55'
+                                            }
+                                        }
+                                    }
+                                }
                             },
                             '&.delivery': {
                                 '& svg': {
                                     '& path': {
-                                        fill: '#695EAE',
-                                    },
-                                },
+                                        fill: '#695EAE'
+                                    }
+                                }
                             },
                             '&.exchange': {
                                 '& svg': {
                                     '& path': {
-                                        fill: '#4e4e4e',
-                                    },
-                                },
-                            },
-                        },
+                                        fill: '#4e4e4e'
+                                    }
+                                }
+                            }
+                        }
                     },
                     '& > div > div.location': {
                         display: 'flex',
@@ -233,17 +233,23 @@ export const useStyles = makeStyles((theme) => ({
                             width: '60%',
                             '& > a': {
                                 display: 'flex',
-                                marginRight: '10px',
-                            },
+                                marginRight: '10px'
+                            }
                         },
                         '& > div': {
                             display: 'flex',
                             alignItems: 'center',
                             justifyContent: 'flex-end',
-                            width: '40%',
-                        },
+                            width: '40%'
+                        }
                     },
-                },
+                    '& .timer-title': {
+                        color: '#838383'
+                    },
+                    '& .timer': {
+                        color: theme.palette.primary.aucBgColor
+                    }
+                }
             },
             '& div.status-buttons': {
                 display: 'flex',
@@ -316,7 +322,7 @@ export const useStyles = makeStyles((theme) => ({
                         color: '#fff'
                     }
                 }
-            },
+            }
         },
         '& div.right-content': {
             '& div.card-buttons': {
@@ -341,32 +347,32 @@ export const useStyles = makeStyles((theme) => ({
                     '& > span > svg': {
                         marginLeft: '10px',
                         width: '16px',
-                        height: '16px',
+                        height: '16px'
                     },
                     '&:disabled': {
-                        backgroundColor: '#ccc !important',
+                        backgroundColor: '#ccc !important'
                     },
                     '&:hover': {
-                        transform: 'translateX(120px)',
+                        transform: 'translateX(120px)'
                     },
                     '& h6.MuiTypography-subtitle1': {
-                        color: '#fff',
+                        color: '#fff'
                     },
                     '& > span.MuiButton-label': {
                         display: 'flex',
                         alignItems: 'center',
-                        justifyContent: 'space-between',
+                        justifyContent: 'space-between'
                     },
                     '&.promoteButton': {
-                        backgroundColor: '#77B1FF',
+                        backgroundColor: '#77B1FF'
                     },
                     '&.raiseTopButton': {
-                        backgroundColor: '#57BD82',
+                        backgroundColor: '#57BD82'
                     },
                     '&.doubleUpButton': {
-                        backgroundColor: '#F6AC6A',
-                    },
-                },
+                        backgroundColor: '#F6AC6A'
+                    }
+                }
             },
             '& div.profile-form': {
                 marginLeft: 20,
@@ -379,7 +385,7 @@ export const useStyles = makeStyles((theme) => ({
                     marginBottom: '5px',
                     padding: '0 10px',
                     '& > h6.MuiTypography-subtitle1': {
-                        fontSize: '0.75rem',
+                        fontSize: '0.75rem'
                     },
                     '& > button': {
                         width: '20px',
@@ -393,34 +399,34 @@ export const useStyles = makeStyles((theme) => ({
                         '& > h6.MuiTypography-subtitle1': {
                             fontSize: '0.875rem',
                             color: '#fff'
-                        },
-                    },
+                        }
+                    }
                 },
                 '& > div.profile-data': {
                     boxShadow: '0px 1px 2px rgba(0, 0, 0, 0.15)',
                     background: '#F2F2F2',
                     padding: '15px 10px',
                     borderRadius: '10px 10px 0 0',
-                    height: '170px',
+                    height: '160px',
                     display: 'flex',
                     flexDirection: 'column',
                     justifyContent: 'space-between',
                     alignItems: 'center',
                     '& > h6.MuiTypography-subtitle1': {
                         fontSize: '1.125rem',
-                        textAlign: 'center',
+                        textAlign: 'center'
                     },
                     '& span > div.MuiAvatar-root': {
                         width: 40,
-                        height: 40,
+                        height: 40
                     },
                     '& button.write': {
-                        height: '33px',
                         background: '#FFFFFF',
                         boxShadow: '0px 1px 2px rgba(0, 0, 0, 0.15)',
                         borderRadius: '5px',
                         border: 0,
                         width: '100%',
+                        padding: 10,
                         '& > h6.MuiTypography-subtitle1': {
                             color: '#4e4e4e'
                         },
@@ -434,26 +440,26 @@ export const useStyles = makeStyles((theme) => ({
                 },
                 '& button.show-phone-btn': {
                     backgroundColor: '#675EAA',
-                    borderRadius: 5,
+                    borderRadius: '0 0 5px 5px',
                     border: 'none',
                     height: '38px',
                     width: '100%',
                     '& > h6.MuiTypography-subtitle2': {
                         color: '#fff'
-                    },
+                    }
                 },
                 '& div:last-child': {
                     '& > h6.MuiTypography-subtitle2': {
                         fontSize: '0.75rem',
                         padding: '5px 10px',
                         '& span': {
-                            color: theme.palette.primary.error,
-                        },
-                    },
-                },
-            },
-        },
-    },
+                            color: theme.palette.primary.error
+                        }
+                    }
+                }
+            }
+        }
+    }
 
 
 }));

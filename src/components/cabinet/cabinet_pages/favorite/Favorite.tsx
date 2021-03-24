@@ -3,9 +3,9 @@ import {CardView} from '@src/components/elements/card/card_view/CardView';
 import {useStyles} from './useStyles';
 import {CustomModal} from '@src/components/elements/custom_modal/CustomModal';
 import {FavoriteDataType} from '@src/components/cabinet/cabinet_pages/favorite/FavoriteContainer';
-import {CustomSnackbar} from '@src/components/elements/snackbar/Snackbar';
 
 type FavoritePropsType = {
+    isFetch: boolean,
     list: FavoriteDataType[],
     handleClose: () => void,
     openModal: boolean,

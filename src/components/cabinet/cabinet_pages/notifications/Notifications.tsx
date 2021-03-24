@@ -2,7 +2,7 @@ import React, {FC} from 'react';
 import {Grid} from '@material-ui/core';
 import {CabinetWrapper} from '@src/components/cabinet/CabinetWrapper';
 import {useStyles} from './useStyles';
-import {Notification} from '@src/components/cabinet/notification/Notification';
+import {Notification} from '@src/components/cabinet/cabinet_pages/notifications/notification_card/Notification';
 import {NotificationDataType} from './NotificationsContainer';
 
 

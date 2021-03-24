@@ -60,7 +60,7 @@ export const TabsContent: FC<CabinetMenuPropsType & { tabsData: TabsDataType }> 
                                         </Typography>
                                     }
                                     value={0}
-                                    textColor='secondary'
+                                    textColor='inherit'
                                 />
                                 <Tab
                                     label={
@@ -69,8 +69,9 @@ export const TabsContent: FC<CabinetMenuPropsType & { tabsData: TabsDataType }> 
                                         </Typography>
                                     }
                                     value={1}
-                                    textColor='primary'
+                                    textColor='inherit'
                                     selected={true}
+
                                 />
                             </Tabs>
                             <CustomTabPanel value={value} index={0}>
