@@ -2,7 +2,6 @@ import React, {FC, useState, useEffect} from 'react'
 import { useRouter } from 'next/router'
 import {userAPI} from "@src/api/api";
 import {Button} from "@material-ui/core";
-import {i18n} from "@root/i18n";
 import Grid from '@material-ui/core/Grid';
 import Dropdown from '@src/components/elements/fields/Dropdown'
 import {SearchForm} from '@src/components/elements/fields/SearchForm';
@@ -11,7 +10,7 @@ import FromTo from '@src/components/elements/fields/FromToTextField'
 import Checkbox from '@src/components/elements/fields/Checkbox'
 
 const Filter: FC = () => {
-    const lang = i18n.language;
+    const {locale} = useRouter();
     const router = useRouter()
     const {categoryID} = router.query
     const [filter, setFilter] = useState({manufacturer_id: null})
@@ -37,10 +36,10 @@ const Filter: FC = () => {
     }
 
     useEffect(() => {
-        userAPI.getDataForCreatePost(Number(categoryID), undefined, undefined, lang).then(
+        userAPI.getDataForCreatePost(Number(categoryID), undefined, undefined, locale).then(
                 result => setData(result)
             )
-    },[lang])
+    },[locale])
 
     const handleSubmit = (event) => {
         event.preventDefault()

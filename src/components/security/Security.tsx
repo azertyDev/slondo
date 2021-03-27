@@ -8,7 +8,7 @@ import {
     SecurityPaymentIcon,
     ShieldIcon,
 } from '@src/components/elements/icons'
-import { Link } from '@root/i18n'
+import Link from 'next/link'
 import { useStyles } from './useStyles'
 
 

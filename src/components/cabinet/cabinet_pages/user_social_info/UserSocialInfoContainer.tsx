@@ -21,6 +21,11 @@ export const UserSocialInfoContainer: FC = () => {
     };
 
     const [subs, setSubs] = useState(initialState);
+    const [tabIndex, setTabIndex] = useState(0);
+
+    const handleTabChange = (event, newValue) => {
+        setTabIndex(newValue);
+    };
 
     const fetchSubs = async (param) => {
         try {
@@ -72,7 +77,7 @@ export const UserSocialInfoContainer: FC = () => {
             id: 1,
             title: 'Подписчики',
             total: subs.subscribers.total,
-            component: <UserSubscribers subscribers={subs.subscribers.data} />
+            component: <UserSubscribers subscribers={subs.subscribers.data} handleFollow={handleFollow}/>
         }
     ];
 
@@ -80,6 +85,8 @@ export const UserSocialInfoContainer: FC = () => {
 
     return (
         <TabsContent
+            tabIndex={tabIndex}
+            handleTabChange={handleTabChange}
             title={title}
             tabsData={tabsData}
             headerTitle={title}

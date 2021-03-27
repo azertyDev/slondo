@@ -8,30 +8,29 @@ type MyAuctionsPropsType = {
     list: FavoriteDataType[],
     handleClose: () => void,
     openModal: boolean,
-    content: string,
     setOpenModal: (boolean) => void,
-    handleModalOpen: (value, id) => void,
+    handleModalOpen: (id?) => () => void,
 }
 
 export const MyAuctions: FC<MyAuctionsPropsType> = (props) => {
     const {
         isFetch,
         list,
+        handleModalOpen,
         handleClose,
         openModal,
-        content,
-        setOpenModal,
-        handleModalOpen
     } = props;
 
     return (
         <>
-            <CabinetCard list={list} isFetch={isFetch} handleModalOpen={handleModalOpen} />
+            <CabinetCard
+                list={list}
+                isFetch={isFetch}
+                handleModalOpen={handleModalOpen}
+            />
             <CustomModal
-                handleClose={handleClose}
+                handleModalClose={handleClose}
                 openModal={openModal}
-                content={content}
-                setOpenModal={setOpenModal}
             />
         </>
     );

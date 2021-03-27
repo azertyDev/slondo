@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 import { Typography, Paper, IconButton } from '@material-ui/core';
-import { Link } from '@root/i18n';
+import Link from 'next/link';
 import { useStyles } from './useStyles';
 import { CloseIcon } from '@src/components/elements/icons';
 import { NotificationDataType } from '../NotificationsContainer';

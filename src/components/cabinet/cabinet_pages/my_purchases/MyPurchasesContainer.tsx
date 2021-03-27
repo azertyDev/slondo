@@ -1,8 +1,8 @@
-import React, {FC, ReactElement} from 'react'
-import {TabsContent} from '@src/components/cabinet/cabinet_pages/TabsContent'
-import {MyPurchases} from '@src/components/cabinet/cabinet_pages/my_purchases/MyPurchases'
-import {withAuthRedirect} from '@src/hoc/withAuthRedirect'
-import {useTranslation} from 'react-i18next'
+import React, {FC, ReactElement, useState} from 'react';
+import {TabsContent} from '@src/components/cabinet/cabinet_pages/TabsContent';
+import {MyPurchases} from '@src/components/cabinet/cabinet_pages/my_purchases/MyPurchases';
+import {withAuthRedirect} from '@src/hoc/withAuthRedirect';
+import {useTranslation} from 'react-i18next';
 
 export type TabsDataType = {
     id: number;
@@ -12,7 +12,12 @@ export type TabsDataType = {
 }[];
 
 const MyPurchasesContainer: FC = () => {
-    const { t } = useTranslation('cabinet')
+    const { t } = useTranslation('cabinet');
+    const [tabIndex, setTabIndex] = useState(0);
+
+    const handleTabChange = (event, newValue) => {
+        setTabIndex(newValue);
+    };
     const tabsData: TabsDataType = [
         {
             id: 0,
@@ -20,12 +25,18 @@ const MyPurchasesContainer: FC = () => {
             count: 0,
             component: <MyPurchases />
         }
-    ]
+    ];
 
-    const title = t('myPurchases')
+    const title = t('myPurchases');
 
     return (
-        <TabsContent title={title} tabsData={tabsData} headerTitle={title} />
+        <TabsContent
+            tabIndex={tabIndex}
+            handleTabChange={handleTabChange}
+            title={title}
+            tabsData={tabsData}
+            headerTitle={title}
+        />
     )
 }
 

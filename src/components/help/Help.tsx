@@ -1,7 +1,7 @@
 import React from 'react';
-import { Grid, Typography, Portal } from '@material-ui/core';
-import { useStyles } from './useStyles';
-import { Link } from '@root/i18n';
+import {Grid, Portal, Typography} from '@material-ui/core';
+import {useStyles} from './useStyles';
+import Link from 'next/link';
 
 export const Help = () => {
     const [show, setShow] = React.useState(false);

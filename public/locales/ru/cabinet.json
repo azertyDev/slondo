@@ -17,5 +17,7 @@
     "settings": "Настройки",
     "exit": "Выход",
     "nonModerated": "Не прошло модерацию",
-    "created_at": "На Slondo с {{created_at}}"
+    "created_at": "На Slondo с {{created_at}}",
+    "cabinet": "Продал на Slondo",
+    "addToArchive": "Добавить в архив"
 }

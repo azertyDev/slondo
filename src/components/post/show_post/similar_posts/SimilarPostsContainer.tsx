@@ -1,9 +1,9 @@
 import React, {FC, useEffect, useState} from 'react';
 import {ITEMS_PER_PAGE} from '@src/constants';
 import {userAPI} from '@src/api/api';
-import {i18n} from '@root/i18n';
 import {CardData, InnerCardData} from '@root/interfaces/CardData';
 import {SimilarPosts} from './SimilarPosts';
+import {useRouter} from 'next/router';
 
 
 const initCard: InnerCardData = {
@@ -49,7 +49,7 @@ const initialCardData: CardData = {
 
 export const SimilarPostsContainer: FC<{ ancmntType: string }> = (props) => {
     const {ancmntType} = props;
-    const lang = i18n.language;
+    const { locale} = useRouter();
 
     const [currentPage, setCurrentPage] = useState(1);
     const [cardData, setCardData] = useState(initialCardData);
@@ -67,7 +67,7 @@ export const SimilarPostsContainer: FC<{ ancmntType: string }> = (props) => {
                 ITEMS_PER_PAGE,
                 currentPage,
                 type,
-                lang
+                locale
             );
 
             setCardData({

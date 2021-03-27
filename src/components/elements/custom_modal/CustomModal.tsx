@@ -3,51 +3,24 @@ import {Backdrop, Fade, IconButton, List, ListItem, ListItemText, Modal, Typogra
 import {CloseIcon} from '@src/components/elements/icons';
 import {ButtonComponent} from '@src/components/elements/button/Button';
 import Link from 'next/link';
-import {userAPI} from '@src/api/api';
 import {useStyles} from './useStyles';
 
 type ModalPropsType = {
-    content: string,
-    handleClose: () => void,
+    handleModalClose: () => void,
     openModal: boolean,
-    favoritePostId?: number,
-    setOpenModal: (boolean) => void,
     handleSubmit?: () => void,
+    handleRemoveFavorite?: () => void
 }
 
-export const CustomModal: FC<ModalPropsType> = ({ content, handleClose, openModal, handleSubmit, favoritePostId, setOpenModal }) => {
+export const CustomModal: FC<ModalPropsType> = (props) => {
+    const {
+        children,
+        handleModalClose,
+        openModal,
+        handleSubmit,
+        handleRemoveFavorite
+    } = props;
     const classes = useStyles();
-
-    const handleFavorite = (id) => {
-        userAPI.favoriteAds(id)
-            .then(res => console.log(res.message))
-            .catch(e => console.log(e));
-        setOpenModal(false);
-    };
-
-    const settings = (
-        <>
-            <Typography className="title" variant="h6">
-                Объявление № 1
-            </Typography>
-            <List component="nav" aria-label="main" className={classes.settingsList} disablePadding>
-                <ListItem button>
-                    <ListItemText
-                        primary='Деактивировать'
-                        primaryTypographyProps={{ variant: 'subtitle1' }}
-                    />
-                </ListItem>
-                <ListItem button>
-                    <ListItemText
-                        primary="Поднять в ленте"
-                        primaryTypographyProps={{ variant: 'subtitle1' }}
-                        secondary="(можно использовать 1 раз в 3 дня)"
-                        secondaryTypographyProps={{ variant: 'subtitle2' }}
-                    />
-                </ListItem>
-            </List>
-        </>
-    )
 
     const disableFavorite = (
         <>
@@ -55,12 +28,12 @@ export const CustomModal: FC<ModalPropsType> = ({ content, handleClose, openModa
                 Вы действительно хотите удалить объявление из избранных
             </Typography>
             <div className='confirm'>
-                <ButtonComponent className='submit' onClick={() => handleFavorite(favoritePostId)}>
+                <ButtonComponent className='submit' onClick={handleRemoveFavorite}>
                     <Typography variant='subtitle1'>
                         Да
                     </Typography>
                 </ButtonComponent>
-                <ButtonComponent onClick={() => handleClose()}>
+                <ButtonComponent onClick={handleModalClose}>
                     <Typography variant='subtitle1'>
                         Нет
                     </Typography>
@@ -124,7 +97,7 @@ export const CustomModal: FC<ModalPropsType> = ({ content, handleClose, openModa
                 aria-describedby="transition-modal-description"
                 className={classes.modal}
                 open={openModal}
-                onClose={handleClose}
+                onClose={handleModalClose}
                 closeAfterTransition
                 BackdropComponent={Backdrop}
                 BackdropProps={{
@@ -134,15 +107,12 @@ export const CustomModal: FC<ModalPropsType> = ({ content, handleClose, openModa
                 <Fade in={openModal}>
                     <div className={classes.paper}>
                         <IconButton
-                            onClick={handleClose}
+                            onClick={handleModalClose}
                             className={classes.closeBtn}
                         >
                             <CloseIcon />
                         </IconButton>
-                        {content === 'settings' && (settings)}
-                        {content === 'disableFavorite' && (disableFavorite)}
-                        {content === 'completePurchase' && (completePurchase)}
-                        {content === 'buyNow' && (buyNow)}
+                        {children}
                     </div>
                 </Fade>
             </Modal>

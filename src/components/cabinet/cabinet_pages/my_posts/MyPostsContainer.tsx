@@ -5,12 +5,23 @@ import {withAuthRedirect} from '@src/hoc/withAuthRedirect';
 import {userAPI} from '@src/api/api';
 import {setErrorMsgAction} from '@src/redux/slices/errorSlice';
 import {useDispatch} from 'react-redux';
-import {useRouter} from "next/router";
+import {useRouter} from 'next/router';
+import {Box, IconButton, List, ListItem, ListItemText, TextField, Typography} from '@material-ui/core';
+import ArrowBackIcon from '@material-ui/icons/ArrowBack';
+import {useStyles} from './useStyles';
+import {useTranslation} from 'next-i18next';
 
+const deactivateReasons = {
+    soldOnSlondoId: 1,
+    archiveId: 2
+};
 
 const MyPostsContainer: FC = () => {
     const dispatch = useDispatch();
-    const {locale} = useRouter();
+    const { locale } = useRouter();
+    const { t } = useTranslation('cabinet');
+    const { soldOnSlondoId, archiveId } = deactivateReasons;
+    const classes = useStyles();
 
     const initialState = {
         isFetch: false,
@@ -24,14 +35,38 @@ const MyPostsContainer: FC = () => {
         }
     };
     const [postData, setPostData] = useState(initialState);
+    const [tabIndex, setTabIndex] = useState(0);
+    const [openModal, setOpenModal] = useState(false);
+    const [modalContentIndex, setModalContentIndex] = useState(1);
+    const [reasonId, setReasonId] = useState(null);
+    const [postId, setPostId] = useState(null);
+
+    const handleOpenModal = (postId) => () => {
+        setOpenModal(true);
+        postId && setPostId(postId);
+    };
+    const handleCloseModal = () => {
+        setOpenModal(false);
+        setModalContentIndex(1);
+    };
+    const handleModalContentIndex = (index, reasonId?) => () => {
+        setModalContentIndex(index);
+        reasonId && setReasonId(reasonId);
+    };
+    const handlePrevMenu = () => {
+        setModalContentIndex(modalContentIndex - 1);
+    };
+    const handleTabChange = (event, newValue) => {
+        setTabIndex(newValue);
+    };
 
     const fetchPostData = async (type) => {
         try {
-            const {myPosts, securePosts} = postData;
+            const { myPosts, securePosts } = postData;
             const isCreatedPost = type === 'post';
 
             postData.isFetch = true;
-            setPostData({...postData});
+            setPostData({ ...postData });
 
             const myPostsData = await userAPI.getMyPosts(locale, type);
             const securePostsData = await userAPI.getSecurePosts(locale, type);
@@ -46,23 +81,150 @@ const MyPostsContainer: FC = () => {
                 securePosts.total = securePostsData.total;
             }
 
-            setPostData({...postData});
+            setPostData({ ...postData });
         } catch (e) {
             dispatch(setErrorMsgAction(e.message));
         }
     };
+
+    const handleDeactivate = async () => {
+        await userAPI.deactivateById(postId, reasonId, false);
+    };
+
+    const getModalContent = () => {
+        switch (modalContentIndex) {
+            case 1:
+                return <>
+                    <List
+                        component="nav"
+                        aria-label="main"
+                        className={classes.settingsList}
+                        disablePadding
+                    >
+                        <ListItem
+                            button
+                            onClick={handleModalContentIndex(2)}
+                        >
+                            <ListItemText
+                                primary='Деактивировать'
+                                primaryTypographyProps={{ variant: 'subtitle1' }}
+                            />
+                        </ListItem>
+                        <ListItem button>
+                            <ListItemText
+                                primary="Поднять в ленте"
+                                primaryTypographyProps={{ variant: 'subtitle1' }}
+                                secondary="(можно использовать 1 раз в 3 дня)"
+                                secondaryTypographyProps={{ variant: 'subtitle2' }}
+                            />
+                        </ListItem>
+                    </List>
+                </>;
+            case 2:
+                return <>
+                    <Typography variant='subtitle1' className="title">
+                        Деактивация
+                    </Typography>
+                    <List
+                        component="nav"
+                        aria-label="main"
+                        className={classes.settingsList}
+                        disablePadding
+                    >
+                        <ListItem
+                            button
+                            onClick={handleModalContentIndex(3, soldOnSlondoId)}
+                        >
+                            <ListItemText
+                                primary={t('sold_slondo')}
+                                primaryTypographyProps={{ variant: 'subtitle1' }}
+                            />
+                        </ListItem>
+                        <ListItem
+                            button
+                            onClick={handleModalContentIndex(4, archiveId)}
+                        >
+                            <ListItemText
+                                primary={t('addToArchive')}
+                                primaryTypographyProps={{ variant: 'subtitle1' }}
+                            />
+                        </ListItem>
+                    </List>
+                </>;
+            case 3:
+                return <>
+                    <Typography
+                        variant='subtitle1'
+                        className="title"
+                        onClick={handleModalContentIndex(3)}
+                    >
+                        Продал на Slondo
+                    </Typography>
+                    <Box>
+                        <div>
+                            <TextField
+                                label="None"
+                                id="outlined-margin-none"
+                                defaultValue="Default Value"
+                                className={classes.textField}
+                                helperText="Some important text"
+                                variant="outlined"
+                            />
+                        </div>
+                        <div className={classes.userAvatar}>
+
+                        </div>
+                    </Box>
+                </>;
+        }
+    };
+
+    const ModalContent = () => (
+        <>
+            {modalContentIndex === 1
+                ? <Typography className="title" variant="h6">
+                    Объявление № 1
+                </Typography>
+                : <IconButton
+                    className='prev-btn'
+                    aria-label="back"
+                    size="medium"
+                    onClick={handlePrevMenu}
+                >
+                    <ArrowBackIcon fontSize="inherit" />
+                </IconButton>}
+            {getModalContent()}
+        </>
+    );
+
     const tabsData = [
         {
             id: 0,
             title: 'Объявления',
             total: postData.myPosts.total,
-            component: <MyPosts list={postData.myPosts.data}/>
+            component:
+                <MyPosts
+                    isFetch={postData.isFetch}
+                    list={postData.myPosts.data}
+                    ModalContent={ModalContent}
+                    handleModalOpen={handleOpenModal}
+                    handleModalClose={handleCloseModal}
+                    openModal={openModal}
+                />
         },
         {
             id: 1,
             title: 'Безопасная покупка',
             total: postData.securePosts.total,
-            component: <MyPosts list={postData.securePosts.data}/>
+            component:
+                <MyPosts
+                    isFetch={postData.isFetch}
+                    list={postData.securePosts.data}
+                    ModalContent={ModalContent}
+                    handleModalOpen={handleOpenModal}
+                    handleModalClose={handleCloseModal}
+                    openModal={openModal}
+                />
         }
     ];
 
@@ -73,7 +235,12 @@ const MyPostsContainer: FC = () => {
     const title = 'Мои объявления';
 
     return (
-        <TabsContent title={title} tabsData={tabsData} headerTitle={title}/>
+        <TabsContent
+            tabIndex={tabIndex}
+            handleTabChange={handleTabChange}
+            title={title} tabsData={tabsData}
+            headerTitle={title}
+        />
     );
 };
 

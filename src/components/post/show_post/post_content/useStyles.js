@@ -1,4 +1,4 @@
-import { makeStyles } from '@material-ui/core/styles'
+import {makeStyles} from '@material-ui/core/styles';
 
 export const useStyles = makeStyles((theme) => ({
     root: {
@@ -10,9 +10,14 @@ export const useStyles = makeStyles((theme) => ({
         '& div.breadcrumbs': {
             marginBottom: '10px',
             '& li.MuiBreadcrumbs-li': {
-                '& > a h6': {
-                    color: 'rgba(49, 49, 49, 0.6)',
-                },
+                '& > a': {
+                    '& h6': {
+                        color: theme.palette.primary.main
+                    },
+                    '&:hover': {
+                        textDecoration: `underline solid ${theme.palette.primary.main}`
+                    }
+                }
             },
         },
         '& div.post-header': {

@@ -8,14 +8,14 @@ import {useStyles} from './useStyles';
 import {UserInfo} from '@root/interfaces/Auth';
 
 type UserInfoWithAvatarPropsType = {
-    canSubscribe: boolean,
     owner: UserInfo,
-    handleFollow?: (userId) => () => void
+    isOwner: boolean,
+    handleFollow?: (userId) => () => void,
+    subscribed?: boolean
 };
 
-export const UserInfoWithAvatar: FC<UserInfoWithAvatarPropsType> = ({canSubscribe, owner, handleFollow}) => {
-    const {t} = useTranslation('cabinet');
-
+export const UserInfoWithAvatar: FC<UserInfoWithAvatarPropsType> = ({ isOwner, owner, subscribed, handleFollow }) => {
+    const { t } = useTranslation('cabinet');
     const date = new Date(owner.created_at);
 
     const formatted_date = `${date.getDate()}.${date.getMonth() + 1}.${date.getFullYear()}`;
@@ -25,7 +25,7 @@ export const UserInfoWithAvatar: FC<UserInfoWithAvatarPropsType> = ({canSubscrib
         <div className={classes.root}>
             <div className="user-info">
                 <div>
-                    <UserAvatarComponent avatar={owner.avatar}/>
+                    <UserAvatarComponent avatar={owner.avatar} />
                 </div>
                 <div>
                     <div>
@@ -43,13 +43,13 @@ export const UserInfoWithAvatar: FC<UserInfoWithAvatarPropsType> = ({canSubscrib
                     <div>
                         <Rating card={false}/>
                     </div>
-                    {canSubscribe && (
-                        <ButtonComponent onClick={handleFollow(owner.id)}>
-                            <Typography variant="subtitle2">
-                                Подписаться {owner.id}
-                            </Typography>
-                        </ButtonComponent>
-                    )}
+                    {/*{!isOwner && (*/}
+                    {/*    <ButtonComponent onClick={handleFollow(owner.id)}>*/}
+                    {/*        <Typography variant="subtitle2">*/}
+                    {/*            {!subscribed ? 'Подписаться' : 'Отписаться'}*/}
+                    {/*        </Typography>*/}
+                    {/*    </ButtonComponent>*/}
+                    {/*)}*/}
                 </div>
             </div>
         </div>

@@ -222,11 +222,22 @@ export const userAPI = {
     buyAuction: (auction_id: string, ads_id: string): Promise<AuctionsDataTypes> => {
         const form = new FormData();
         form.set('auction_id', auction_id);
-        form.set('ads_id', ads_id)
+        form.set('ads_id', ads_id);
         return instance.post(`regular/auction/buyNow`, form, setTokenToHeader())
             .then(res => res.data)
             .catch(err => {
-                throw err
+                throw err;
+            });
+    },
+    deactivateById: (ads_id: number, reason_id: number, archive: boolean): Promise<any> => {
+        return instance.post(`regular/post/deactivate`, {
+            ads_id,
+            reason_id,
+            archive
+        }, setTokenToHeader())
+            .then(res => res.data)
+            .catch(err => {
+                throw err;
             });
     }
 };

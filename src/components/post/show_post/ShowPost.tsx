@@ -19,7 +19,7 @@ export const ShowPost: FC<any> = (props) => {
 
     const classes = useStyles();
     return (
-        <MainLayout title="Просмотр объявления">
+        <MainLayout title={data.title}>
             <div className={classes.root}>
                 <Grid container spacing={2}>
                     <Grid item xs={12} lg={9}>

@@ -16,11 +16,13 @@ type OwnerPropsType = {
         created_at: string,
         avatar: string
     },
+    isOwner: boolean,
     handleFollow: (userId) => () => void
+    subscribed: boolean
 }
 
 
-export const OwnerInfo: FC<OwnerPropsType> = ({ safe_deal, owner, handleFollow }) => {
+export const OwnerInfo: FC<OwnerPropsType> = ({ safe_deal, isOwner, owner, subscribed, handleFollow }) => {
     const [isPhoneAval, setIsPhoneAval] = React.useState(false);
     const handleShowPhone = () => {
         setIsPhoneAval(!isPhoneAval);
@@ -29,7 +31,7 @@ export const OwnerInfo: FC<OwnerPropsType> = ({ safe_deal, owner, handleFollow }
     const classes = useStyles();
     return (
         <div className={classes.root}>
-            <UserInfoWithAvatar canSubscribe owner={owner} handleFollow={handleFollow} />
+            <UserInfoWithAvatar subscribed={subscribed} isOwner={isOwner} owner={owner} handleFollow={handleFollow} />
             <div className="contact-buttons">
                 <ButtonComponent color="primary" onClick={handleShowPhone}>
                     <Typography variant="subtitle1" color="initial">

@@ -12,7 +12,7 @@ export const OwnerAuctionContent: FC<any> = ({ t, postData, handleFollow }) => {
         <div className={classes.root}>
             <div className="price">
                 <Typography variant="h4" color="initial">
-                    <span>{numberPrettier(postData.price)}</span>{' '}
+                    <span>{numberPrettier(postData.price)}</span>&nbsp;
                     {t(`common:${postData.currency.name}`)}
                 </Typography>
             </div>
@@ -20,7 +20,9 @@ export const OwnerAuctionContent: FC<any> = ({ t, postData, handleFollow }) => {
             <OwnerInfo
                 safe_deal={postData.safe_deal}
                 owner={postData.author}
+                isOwner={postData.creator}
                 handleFollow={handleFollow}
+                subscribed={postData.subscribed}
             />
         </div>
     );

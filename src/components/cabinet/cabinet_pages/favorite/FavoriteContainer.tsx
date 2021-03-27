@@ -6,7 +6,7 @@ import {userAPI} from '@src/api/api';
 import {useDispatch} from 'react-redux';
 import {setErrorMsgAction} from '@src/redux/slices/errorSlice';
 import {UserInfo} from '@root/interfaces/Auth';
-import {useRouter} from "next/router";
+import {useRouter} from 'next/router';
 
 export type FavoriteDataType = {
     id: number,
@@ -55,21 +55,8 @@ type initialFavoriteStateType = {
 }
 
 const FavoriteContainer: FC = () => {
-    const {locale} = useRouter();
+    const { locale } = useRouter();
     const dispatch = useDispatch();
-
-    const [openModal, setOpenModal] = useState(false);
-    const [favoritePostId, setFavoritePostId] = useState(null);
-    const [modalState, setModalState] = useState('');
-
-    const handleModalOpen = (value: string, id?: number) => {
-        setOpenModal(true);
-        setModalState(value);
-        setFavoritePostId(id);
-    };
-    const handleModalClose = () => {
-        setOpenModal(false);
-    };
 
     const initialFavoriteState: initialFavoriteStateType = {
         isFetch: false,
@@ -82,11 +69,30 @@ const FavoriteContainer: FC = () => {
             data: []
         }
     };
+
     const [favoriteData, setFavoriteData] = useState(initialFavoriteState);
+    const [selectedFavoriteId, setSelectedFavoriteId] = useState<number>(null);
+    const [openModal, setOpenModal] = useState(false);
+    const [modalState, setModalState] = useState('');
+    const [tabIndex, setTabIndex] = useState(0);
+
+    const handleTabChange = (event, newValue) => {
+        setTabIndex(newValue);
+    };
+
+    const handleModalOpen = (value: string, id?: number) => {
+        setOpenModal(true);
+        setModalState(value);
+        setSelectedFavoriteId(id);
+    };
+    const handleModalClose = () => {
+        setOpenModal(false);
+    };
+
     const fetchFavoriteData = async (type) => {
         try {
             const { favoritePosts, favoriteAuctions } = favoriteData;
-            const isCreatedAuction = type === 'post';
+            const isPost = type === 'post';
 
             favoriteData.isFetch = true;
             setFavoriteData({ ...favoriteData });
@@ -95,7 +101,7 @@ const FavoriteContainer: FC = () => {
 
             favoriteData.isFetch = true;
 
-            if (isCreatedAuction) {
+            if (isPost) {
                 favoritePosts.data = cabFavoriteData.data;
                 favoritePosts.total = cabFavoriteData.total;
             } else {
@@ -109,6 +115,20 @@ const FavoriteContainer: FC = () => {
         }
     };
 
+    const handleRemoveFavorite = async () => {
+        try {
+            await userAPI.favoriteAds(selectedFavoriteId);
+            if (tabIndex === 0) {
+                await fetchFavoriteData('post');
+            } else {
+                await fetchFavoriteData('auc');
+            }
+        } catch (e) {
+            dispatch(setErrorMsgAction(e.message));
+        }
+        setOpenModal(false);
+    };
+
     const tabsData = [
         {
             id: 0,
@@ -120,10 +140,9 @@ const FavoriteContainer: FC = () => {
                     list={favoriteData.favoritePosts.data}
                     handleClose={handleModalClose}
                     handleModalOpen={handleModalOpen}
+                    handleRemoveFavorite={handleRemoveFavorite}
                     openModal={openModal}
                     content={modalState}
-                    favoritePostId={favoritePostId}
-                    setOpenModal={setOpenModal}
                 />
             )
         },
@@ -133,13 +152,12 @@ const FavoriteContainer: FC = () => {
             total: favoriteData.favoriteAuctions.total,
             component: (
                 <Favorite
+                    handleRemoveFavorite={handleRemoveFavorite}
                     isFetch={favoriteData.isFetch}
                     handleClose={handleModalClose}
                     handleModalOpen={handleModalOpen}
                     openModal={openModal}
                     content={modalState}
-                    favoritePostId={favoritePostId}
-                    setOpenModal={setOpenModal}
                     list={favoriteData.favoriteAuctions.data}
                 />
             )
@@ -154,7 +172,13 @@ const FavoriteContainer: FC = () => {
     const title = 'Избранное';
 
     return (
-        <TabsContent title={title} tabsData={tabsData} headerTitle={title}/>
+        <TabsContent
+            title={title}
+            handleTabChange={handleTabChange}
+            tabIndex={tabIndex}
+            tabsData={tabsData}
+            headerTitle={title}
+        />
     )
 };
 

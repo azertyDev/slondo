@@ -25,6 +25,7 @@ import {numberPrettier, weekDaysHelper} from '@root/src/helpers';
 import {ButtonComponent} from '@src/components/elements/button/Button';
 import {NotificationIcon} from '@src/components/elements/icons';
 import {useStyles} from './useStyles';
+import {months} from '@src/common_data/common';
 
 
 type PostContentTypes = {
@@ -44,6 +45,8 @@ export const PostContent: FC<WithT & any> = (props) => {
         descHeight
     } = props
 
+    console.log(data);
+
     const [state, setState] = React.useState<PostContentTypes>({
         openSliderModal: false,
         openModal: false,
@@ -54,21 +57,6 @@ export const PostContent: FC<WithT & any> = (props) => {
     const {openModal, openSliderModal, openSnackbar, horizontal, vertical} = state
 
     const date = new Date(data.created_at);
-
-    const months = [
-        'января',
-        'февраля',
-        'марта',
-        'апреля',
-        'мая',
-        'июня',
-        'июля',
-        'августа',
-        'сентября',
-        'октября',
-        'ноября',
-        'декабря'
-    ];
 
     const formatted_date = `${date.getDate()} ${months[date.getMonth()]} ${date.getFullYear()}`
 
@@ -143,6 +131,15 @@ export const PostContent: FC<WithT & any> = (props) => {
         <div className={classes.root}>
             <div className="breadcrumbs">
                 <BreadcrumbsComponent>
+                    {data.category && (
+                        <Link href={`/categories/${data.category.mark}`}>
+                            <a>
+                                <Typography variant="subtitle1" noWrap>
+                                    {data.category.name}
+                                </Typography>
+                            </a>
+                        </Link>
+                    )}
                     {data.category.sub_category.length && (
                         <Link href={`/categories/${data.category.mark}`}>
                             <a>
@@ -161,14 +158,6 @@ export const PostContent: FC<WithT & any> = (props) => {
                             </a>
                         </Link>
                     )}
-                    <Typography
-                        variant="subtitle1"
-                        color="primary"
-                        noWrap
-                        style={{width: '280px'}}
-                    >
-                        {data.title}
-                    </Typography>
                 </BreadcrumbsComponent>
             </div>
             <div className="post-header">

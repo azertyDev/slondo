@@ -1,6 +1,6 @@
 import React from 'react'
 import { Typography } from '@material-ui/core'
-import { Link } from '@root/i18n'
+import Link from 'next/link'
 
 export const legal_docs = [
     {

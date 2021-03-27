@@ -17,5 +17,6 @@ export type SubscriberType = {
     id: number,
     subscriber_id: number,
     user_id: number,
-    user?: UserInfo
+    user?: UserInfo,
+    handleFollow: (user_id) => () => void
 }

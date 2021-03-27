@@ -12,7 +12,6 @@ import {
 } from '@src/components/elements/icons';
 import {ButtonComponent} from '@src/components/elements/button/Button';
 import {BreadcrumbsComponent} from '@src/components/elements/breadcrumbs/Breadcrumbs';
-import {ViewPropsType} from '@src/components/elements/card/card_view/CardView';
 import {UserAvatarComponent} from '@src/components/elements/user_info_with_avatar/avatar/UserAvatarComponent';
 import {Rating} from '@src/components/elements/rating/Rating';
 import Link from 'next/link';
@@ -22,13 +21,22 @@ import {useRouter} from 'next/router';
 import {useTranslation} from 'react-i18next';
 import {useStyles} from './useStyles';
 
-export const CabinetCard: FC<ViewPropsType> = ({ list, handleModalOpen }) => {
+type CabinetCardPropsType = {
+    isFetch?: boolean;
+    list?: any[];
+    handleModalOpen?: (id) => () => void
+}
+
+export const CabinetCard: FC<CabinetCardPropsType> = ({ list, isFetch, handleModalOpen }) => {
     const { pathname } = useRouter();
     const { t } = useTranslation(['common', 'categories']);
+
     const [isPhoneAval, setIsPhoneAval] = React.useState(false);
+
     const handleShowPhone = () => {
         setIsPhoneAval(!isPhoneAval);
     };
+
     const renderer = ({ days, hours, minutes, seconds, completed }) => {
         if (completed) {
             return (
@@ -65,25 +73,23 @@ export const CabinetCard: FC<ViewPropsType> = ({ list, handleModalOpen }) => {
         }
     };
 
-
     const classes = useStyles();
     return (
         <div className={classes.root}>
             {list?.map((el) => {
-                console.log(el);
                 return (
                     <Grid container key={el.id}>
                         <Grid item xs={9} className="left-content">
                             <div className="breadcrumbs">
                                 <BreadcrumbsComponent>
                                     <Link href="#">
-                                        <a>{t(`categories:${el.category.name}`)}</a>
+                                        <a>{t(`categories:${el.category?.name}`)}</a>
                                     </Link>
                                     <Link href="#">
-                                        <a>{t(`categories:${el.adsable.sub_category.name}`)}</a>
+                                        <a>{t(`categories:${el.adsable?.sub_category.name}`)}</a>
                                     </Link>
                                     <Link href="#">
-                                        <a>{t(`categories:${el.adsable.type.name}`)}</a>
+                                        <a>{t(`categories:${el.adsable?.type.name}`)}</a>
                                     </Link>
                                 </BreadcrumbsComponent>
                                 <Typography variant="subtitle1" color="initial">
@@ -130,17 +136,16 @@ export const CabinetCard: FC<ViewPropsType> = ({ list, handleModalOpen }) => {
                                                 </Typography>
                                             </div>
                                             <div className='card-btn'>
-                                                {pathname?.includes('favorite') ?
-                                                    <div
+                                                {pathname?.includes('favorite')
+                                                    ? <div
                                                         className='isFavorite'
-                                                        onClick={() => handleModalOpen('disableFavorite', el.id)}
+                                                        onClick={handleModalOpen(el.id)}
                                                     >
                                                         <CloseIcon />
                                                     </div>
-                                                    :
-                                                    <div
+                                                    : <div
                                                         className='settings'
-                                                        onClick={() => handleModalOpen('settings')}
+                                                        onClick={handleModalOpen(el.id)}
                                                     >
                                                         <SettingsIcon />
                                                     </div>}
@@ -223,7 +228,7 @@ export const CabinetCard: FC<ViewPropsType> = ({ list, handleModalOpen }) => {
                                             />
                                             <div>
                                                 <Typography variant='caption'>
-                                                    Ставки: {el.auction.number_of_bets}
+                                                    Ставки: {el.auction?.number_of_bets}
                                                 </Typography>
                                             </div>
                                         </Box>

@@ -1,4 +1,4 @@
-import {makeStyles} from '@material-ui/core/styles'
+import {makeStyles} from '@material-ui/core/styles';
 
 export const useStyles = makeStyles((theme) => ({
     modal: {
@@ -15,9 +15,14 @@ export const useStyles = makeStyles((theme) => ({
         backgroundColor: theme.palette.background.paper,
         padding: 25,
         borderRadius: 10,
+        '& .prev-btn': {
+            position: 'absolute',
+            top: 20,
+            left: 20,
+            padding: 0
+        },
         '& .title': {
             fontWeight: 600,
-            marginBottom: 10,
             textAlign: 'center'
         },
         '& .subtitle': {
@@ -76,16 +81,4 @@ export const useStyles = makeStyles((theme) => ({
             }
         }
     },
-    settingsList: {
-        marginTop: 50,
-        width: '100%',
-        '& .MuiListItem-button': {
-            height: 48,
-            background: '#F2F2F2',
-            boxShadow: '0px 1px 2px rgba(0, 0, 0, 0.15)',
-            marginBottom: 5,
-            borderRadius: '3px',
-            textAlign: 'center'
-        }
-    }
 }))

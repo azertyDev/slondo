@@ -13,11 +13,15 @@ export const MyAuctionsContainer: FC = () => {
     const dispatch = useDispatch();
 
     const [openModal, setOpenModal] = useState(false);
-    const [modalState, setModalState] = useState('');
+    const [tabIndex, setTabIndex] = useState(0);
+    const [postId, setPostId] = useState(null);
 
-    const handleModalOpen = (value: string) => {
+    const handleTabChange = (event, newValue) => {
+        setTabIndex(newValue);
+    };
+    const handleOpenModal = (postId) => () => {
         setOpenModal(true);
-        setModalState(value);
+        postId && setPostId(postId);
     };
     const handleModalClose = () => {
         setOpenModal(false);
@@ -73,9 +77,8 @@ export const MyAuctionsContainer: FC = () => {
                     list={auctionData.createdAuctions.data}
                     isFetch={auctionData.isFetch}
                     handleClose={handleModalClose}
-                    handleModalOpen={handleModalOpen}
+                    handleModalOpen={handleOpenModal}
                     openModal={openModal}
-                    content={modalState}
                     setOpenModal={setOpenModal}
                 />
         },
@@ -88,9 +91,8 @@ export const MyAuctionsContainer: FC = () => {
                     list={auctionData.participatingAuctions.data}
                     isFetch={auctionData.isFetch}
                     handleClose={handleModalClose}
-                    handleModalOpen={handleModalOpen}
+                    handleModalOpen={handleOpenModal}
                     openModal={openModal}
-                    content={modalState}
                     setOpenModal={setOpenModal}
                 />
         }
@@ -103,7 +105,13 @@ export const MyAuctionsContainer: FC = () => {
     const title = 'Мои аукционы';
 
     return (
-        <TabsContent title={title} tabsData={tabsData} headerTitle={title} />
+        <TabsContent
+            tabIndex={tabIndex}
+            handleTabChange={handleTabChange}
+            title={title}
+            tabsData={tabsData}
+            headerTitle={title}
+        />
     );
 };
 

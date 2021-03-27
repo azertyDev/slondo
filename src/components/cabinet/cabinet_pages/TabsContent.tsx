@@ -1,4 +1,4 @@
-import React, {FC, useState} from 'react';
+import React, {FC} from 'react';
 import {Tab, Tabs, Typography} from '@material-ui/core';
 import {CustomTabPanel} from '@src/components/elements/custom_tab_panel/CustomTabPanel';
 import {CabinetMenuPropsType, CabinetWrapper} from '@src/components/cabinet/CabinetWrapper';
@@ -7,16 +7,15 @@ import {MyPurchases} from '@src/components/cabinet/cabinet_pages/my_purchases/My
 import {useTranslation} from 'react-i18next';
 import {useStyles} from './useStyles';
 
+type TabsContentPropsType = {
+    tabIndex: number,
+    tabsData: TabsDataType,
+    handleTabChange: (e, v) => void
+} & CabinetMenuPropsType;
 
-export const TabsContent: FC<CabinetMenuPropsType & { tabsData: TabsDataType }> = (
-    {tabsData, headerTitle, title}
-) => {
-    const {t} = useTranslation('cabinet');
-    const [value, setValue] = useState(0);
-
-    const handleChange = (event, newValue) => {
-        setValue(newValue);
-    };
+export const TabsContent: FC<TabsContentPropsType> = (props) => {
+    const { tabsData, headerTitle, title, tabIndex, handleTabChange } = props;
+    const { t } = useTranslation('cabinet');
 
     const classes = useStyles();
     return (
@@ -26,8 +25,8 @@ export const TabsContent: FC<CabinetMenuPropsType & { tabsData: TabsDataType }> 
                     title === t('myPurchases')
                         ? <>
                             <Tabs
-                                value={value}
-                                onChange={handleChange}
+                                value={tabIndex}
+                                onChange={handleTabChange}
                                 variant="fullWidth"
                                 className={classes.cabinetTabs}
                                 indicatorColor='secondary'
@@ -38,20 +37,20 @@ export const TabsContent: FC<CabinetMenuPropsType & { tabsData: TabsDataType }> 
                                             Безопасная покупка
                                         </Typography>
                                     }
-                                    value={value}
+                                    value={tabIndex}
                                 />
                             </Tabs>
-                            <CustomTabPanel value={value} index={value}>
-                                <MyPurchases/>
+                            <CustomTabPanel value={tabIndex} index={tabIndex}>
+                                <MyPurchases />
                             </CustomTabPanel>
                         </>
                         : <>
                             <Tabs
-                                value={value}
-                                onChange={handleChange}
+                                value={tabIndex}
+                                onChange={handleTabChange}
                                 variant="fullWidth"
                                 className={classes.cabinetTabs}
-                                indicatorColor={value === 1 ? 'primary' : 'secondary'}
+                                indicatorColor={tabIndex === 1 ? 'primary' : 'secondary'}
                             >
                                 <Tab
                                     label={
@@ -74,10 +73,10 @@ export const TabsContent: FC<CabinetMenuPropsType & { tabsData: TabsDataType }> 
 
                                 />
                             </Tabs>
-                            <CustomTabPanel value={value} index={0}>
+                            <CustomTabPanel value={tabIndex} index={0}>
                                 {tabsData[0].component}
                             </CustomTabPanel>
-                            <CustomTabPanel value={value} index={1}>
+                            <CustomTabPanel value={tabIndex} index={1}>
                                 {tabsData[1].component}
                             </CustomTabPanel>
                         </>

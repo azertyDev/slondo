@@ -10,9 +10,8 @@ type FavoritePropsType = {
     handleClose: () => void,
     openModal: boolean,
     content: string,
-    favoritePostId: number,
-    setOpenModal: (boolean) => void,
     handleModalOpen: (value, id) => void,
+    handleRemoveFavorite: () => void
 }
 
 export const Favorite: FC<FavoritePropsType> = (props) => {
@@ -20,10 +19,8 @@ export const Favorite: FC<FavoritePropsType> = (props) => {
         list,
         handleClose,
         openModal,
-        content,
-        favoritePostId,
-        setOpenModal,
-        handleModalOpen
+        handleModalOpen,
+        handleRemoveFavorite
     } = props;
 
     const classes = useStyles();
@@ -31,11 +28,9 @@ export const Favorite: FC<FavoritePropsType> = (props) => {
         <div className={classes.root}>
             <CardView listMode={true} list={list} handleModalOpen={handleModalOpen} />
             <CustomModal
-                handleClose={handleClose}
+                handleModalClose={handleClose}
                 openModal={openModal}
-                content={content}
-                favoritePostId={favoritePostId}
-                setOpenModal={setOpenModal}
+                handleRemoveFavorite={handleRemoveFavorite}
             />
         </div>
     );

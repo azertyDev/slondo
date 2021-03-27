@@ -36,6 +36,8 @@ export const ShowPostContainer: FC = () => {
             expiration_at: null,
             number_of_views: null,
             sub_category_id: null,
+            creator: null,
+            subscribed: null,
             author: {
                 id: null,
                 name: '',
@@ -146,7 +148,6 @@ export const ShowPostContainer: FC = () => {
     const handleFollow = (userId) => async () => {
         try {
             await userAPI.follow(userId);
-            console.log('subscribe successfully');
         } catch (e) {
             dispatch(setErrorMsgAction(e));
         }
