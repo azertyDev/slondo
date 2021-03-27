@@ -3,7 +3,7 @@ import Avatar from '@material-ui/core/Avatar';
 import {StyledBadge, useStyles} from './useStyles';
 
 type UserAvatarComponentTypes = {
-    avatar: string | boolean
+    avatar?: string | boolean
 };
 
 export const UserAvatarComponent: FC<UserAvatarComponentTypes> = ({avatar}) => {

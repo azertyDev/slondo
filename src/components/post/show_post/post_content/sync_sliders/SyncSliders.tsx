@@ -2,9 +2,9 @@ import React, {FC} from 'react';
 import {IconButton} from '@material-ui/core';
 import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
 import {CustomSlider} from '@src/components/elements/custom_slider/CustomSlider';
-import {SlidersRefType} from "../../ShowPostContainer";
+import {SlidersRefType} from '../../ShowPostContainer';
 import {useStyles} from './useStyles';
-import CustomTooltip from "@src/components/elements/custom_tooltip/CustomTooltip";
+import CustomTooltip from '@src/components/elements/custom_tooltip/CustomTooltip';
 
 
 type SyncSlidersProps = {
@@ -59,7 +59,7 @@ export const SyncSliders: FC<SyncSlidersProps> = (props) => {
                     )}
                 </CustomSlider>
                 <IconButton className="share-btn" onClick={copyUrl}>
-                    <CustomTooltip title={"Скопировано!"}/>
+                    <CustomTooltip title={'Скопировано!'} arrow />
                 </IconButton>
             </div>
             <div className={classes.secondSlider}>

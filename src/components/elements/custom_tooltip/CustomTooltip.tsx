@@ -3,7 +3,7 @@ import Tooltip from '@material-ui/core/Tooltip';
 import ClickAwayListener from '@material-ui/core/ClickAwayListener';
 import ShareIcon from "@material-ui/icons/Share";
 
-const CustomTooltip = ({title}) => {
+const CustomTooltip = ({title, arrow}) => {
 
     const [open, setOpen] = React.useState(false);
 
@@ -28,6 +28,7 @@ const CustomTooltip = ({title}) => {
                     disableHoverListener
                     disableTouchListener
                     title={title}
+                    arrow={arrow}
                 >
                     <ShareIcon onClick={handleTooltipOpen} style={{paddingTop: 6}} />
                 </Tooltip>

@@ -11,6 +11,9 @@ export const useStyles = makeStyles((theme) => ({
                 display: 'flex',
                 justifyContent: 'space-between',
                 marginBottom: 10,
+                '& a:hover': {
+                    textDecorationLine: 'underline'
+                },
                 '& > h6.MuiTypography-subtitle1': {
                     fontSize: '12px',
                     '& > span.post': {

@@ -1,21 +1,25 @@
 import React, {FC} from 'react';
-import {Box, Button, Grid, Hidden, Paper, Typography} from '@material-ui/core';
+import {Box, Button, Grid, Hidden, Paper, Tooltip, Typography} from '@material-ui/core';
 import {
     CloseIcon,
+    DeliveryIcon,
     DoubleUpIcon,
     EyeIcon,
     LetterIcon,
     LocationIcon,
     MegaphoneIcon,
+    PhoneIcon,
     PromoteIcon,
-    SettingsIcon
+    SafeIcon,
+    SettingsIcon,
+    SwapIcon
 } from '@src/components/elements/icons';
 import {ButtonComponent} from '@src/components/elements/button/Button';
 import {BreadcrumbsComponent} from '@src/components/elements/breadcrumbs/Breadcrumbs';
 import {UserAvatarComponent} from '@src/components/elements/user_info_with_avatar/avatar/UserAvatarComponent';
 import {Rating} from '@src/components/elements/rating/Rating';
 import Link from 'next/link';
-import {formatNumber, numberPrettier} from '@src/helpers';
+import {formatNumber, numberPrettier, weekDaysHelper} from '@src/helpers';
 import Countdown from 'react-countdown';
 import {useRouter} from 'next/router';
 import {useTranslation} from 'react-i18next';
@@ -82,15 +86,24 @@ export const CabinetCard: FC<CabinetCardPropsType> = ({ list, isFetch, handleMod
                         <Grid item xs={9} className="left-content">
                             <div className="breadcrumbs">
                                 <BreadcrumbsComponent>
-                                    <Link href="#">
-                                        <a>{t(`categories:${el.category?.name}`)}</a>
-                                    </Link>
-                                    <Link href="#">
-                                        <a>{t(`categories:${el.adsable?.sub_category.name}`)}</a>
-                                    </Link>
-                                    <Link href="#">
-                                        <a>{t(`categories:${el.adsable?.type.name}`)}</a>
-                                    </Link>
+                                    {
+                                        el.category &&
+                                        <Link href="#">
+                                            <a>{t(`categories:${el.category.name}`)}</a>
+                                        </Link>
+                                    }
+                                    {
+                                        el.adsable &&
+                                        <Link href="#">
+                                            <a>{t(`categories:${el.adsable.sub_category?.name}`)}</a>
+                                        </Link>
+                                    }
+                                    {
+                                        el.adsable &&
+                                        <Link href="#">
+                                            <a>{t(`categories:${el.adsable.type?.name}`)}</a>
+                                        </Link>
+                                    }
                                 </BreadcrumbsComponent>
                                 <Typography variant="subtitle1" color="initial">
                                     <span className={el.ads_type}>
@@ -152,51 +165,40 @@ export const CabinetCard: FC<CabinetCardPropsType> = ({ list, isFetch, handleMod
                                             </div>
                                         </div>
                                         <div className="description">
-                                            {/*{*/}
-                                            {/*    !!el.available_days && (*/}
-                                            {/*        <span className="available">*/}
-                                            {/*            <PhoneIcon />*/}
-                                            {/*            <Typography variant="body1">*/}
-                                            {/*                {el.available_days}*/}
-                                            {/*            </Typography>*/}
-                                            {/*        </span>*/}
-                                            {/*    )*/}
-                                            {/*}*/}
-                                            {/*{*/}
-                                            {/*    !!el.exchange && (*/}
-                                            {/*        <Tooltip title={longText} arrow>*/}
-                                            {/*        <span className="exchange">*/}
-                                            {/*            <SwapIcon />*/}
-                                            {/*            <Typography variant="body1">*/}
-                                            {/*                Возможен обмен*/}
-                                            {/*            </Typography>*/}
-                                            {/*        </span>*/}
-                                            {/*        </Tooltip>*/}
-                                            {/*    )*/}
-                                            {/*}*/}
-                                            {/*{*/}
-                                            {/*    !!el.delivery && (*/}
-                                            {/*        <span className="delivery">*/}
-                                            {/*        <DeliveryIcon />*/}
-                                            {/*        <Typography variant="body1">*/}
-                                            {/*            Есть доставка*/}
-                                            {/*        </Typography>*/}
-                                            {/*    </span>*/}
-                                            {/*    )*/}
-                                            {/*}*/}
-                                            {/*{*/}
-                                            {/*    !!el.safe_deal && (*/}
-                                            {/*        <span className="safe_deal">*/}
-                                            {/*        <SafeIcon />*/}
-                                            {/*        <Typography variant="body1">*/}
-                                            {/*            Безопасная покупка*/}
-                                            {/*        </Typography>*/}
-                                            {/*    </span>*/}
-                                            {/*    )*/}
-                                            {/*}*/}
-                                            <Typography variant='subtitle1' noWrap>
-                                                {el.description}
-                                            </Typography>
+                                            {!!el.available_days?.length && (
+                                                <span className="available">
+                                                <PhoneIcon />
+                                                    <Typography variant="body1" color="primary">
+                                                        {weekDaysHelper(el.available_days, t)}
+                                                    </Typography>
+                                            </span>
+                                            )}
+                                            {!!el.exchange && (
+                                                <Tooltip title='Возможен обмен' arrow>
+                                                    <span className="exchange">
+                                                        <SwapIcon />
+                                                        <Typography variant="body1">
+                                                            Возможен обмен
+                                                        </Typography>
+                                                    </span>
+                                                </Tooltip>
+                                            )}
+                                            {!!el.delivery && (
+                                                <span className="delivery">
+                                                    <DeliveryIcon />
+                                                    <Typography variant="body1">
+                                                        Есть доставка
+                                                    </Typography>
+                                                </span>
+                                            )}
+                                            {!!el.safe_deal && (
+                                                <span className="safe_deal">
+                                                    <SafeIcon />
+                                                    <Typography variant="body1">
+                                                        Безопасная покупка
+                                                    </Typography>
+                                                </span>
+                                            )}
                                         </div>
                                         <div className="location">
                                             <div>
@@ -221,17 +223,21 @@ export const CabinetCard: FC<CabinetCardPropsType> = ({ list, isFetch, handleMod
                                                 </Typography>
                                             </div>
                                         </div>
-                                        <Box display='flex' justifyContent='space-between'>
-                                            <Countdown
-                                                date={new Date(el.expiration_at).getTime()}
-                                                renderer={renderer}
-                                            />
-                                            <div>
-                                                <Typography variant='caption'>
-                                                    Ставки: {el.auction?.number_of_bets}
-                                                </Typography>
-                                            </div>
-                                        </Box>
+                                        {
+                                            el.ads_type === 'auc' && (
+                                                <Box display='flex' justifyContent='space-between'>
+                                                    <Countdown
+                                                        date={new Date(el.expiration_at).getTime()}
+                                                        renderer={renderer}
+                                                    />
+                                                    <div>
+                                                        <Typography variant='caption'>
+                                                            Ставки: {el.auction?.number_of_bets}
+                                                        </Typography>
+                                                    </div>
+                                                </Box>
+                                            )
+                                        }
                                     </div>
                                 </Box>
                             </Paper>

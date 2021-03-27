@@ -3,7 +3,7 @@ import {UserInfo} from '@root/interfaces/Auth';
 export interface CardData {
     isFetch: boolean;
     isShowMoreFetch?: boolean;
-    error: unknown;
+    error?: unknown;
     data: {
         cards: InnerCardData[];
         total: number;

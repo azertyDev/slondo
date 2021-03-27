@@ -6,10 +6,22 @@ import {userAPI} from '@src/api/api';
 import {setErrorMsgAction} from '@src/redux/slices/errorSlice';
 import {useDispatch} from 'react-redux';
 import {useRouter} from 'next/router';
-import {Box, IconButton, List, ListItem, ListItemText, TextField, Typography} from '@material-ui/core';
+import {
+    Avatar,
+    Box,
+    Checkbox,
+    FormControlLabel,
+    IconButton,
+    List,
+    ListItem,
+    ListItemText,
+    TextField,
+    Typography
+} from '@material-ui/core';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import {useStyles} from './useStyles';
 import {useTranslation} from 'next-i18next';
+import {ButtonComponent} from '@src/components/elements/button/Button';
 
 const deactivateReasons = {
     soldOnSlondoId: 1,
@@ -40,6 +52,7 @@ const MyPostsContainer: FC = () => {
     const [modalContentIndex, setModalContentIndex] = useState(1);
     const [reasonId, setReasonId] = useState(null);
     const [postId, setPostId] = useState(null);
+    const [toArchive, setToArchive] = useState(false);
 
     const handleOpenModal = (postId) => () => {
         setOpenModal(true);
@@ -54,10 +67,18 @@ const MyPostsContainer: FC = () => {
         reasonId && setReasonId(reasonId);
     };
     const handlePrevMenu = () => {
-        setModalContentIndex(modalContentIndex - 1);
+        const backValue = modalContentIndex === 5 ? 3 : 1;
+        setModalContentIndex(modalContentIndex - backValue);
     };
     const handleTabChange = (event, newValue) => {
         setTabIndex(newValue);
+    };
+    const handleCheckbox = () => {
+        setToArchive(!toArchive);
+    };
+    const handleDeactivate = async () => {
+        await userAPI.deactivateById(postId, reasonId, toArchive);
+        setOpenModal(false);
     };
 
     const fetchPostData = async (type) => {
@@ -85,10 +106,6 @@ const MyPostsContainer: FC = () => {
         } catch (e) {
             dispatch(setErrorMsgAction(e.message));
         }
-    };
-
-    const handleDeactivate = async () => {
-        await userAPI.deactivateById(postId, reasonId, false);
     };
 
     const getModalContent = () => {
@@ -122,7 +139,7 @@ const MyPostsContainer: FC = () => {
                 </>;
             case 2:
                 return <>
-                    <Typography variant='subtitle1' className="title">
+                    <Typography variant='h6' className="title">
                         Деактивация
                     </Typography>
                     <List
@@ -142,7 +159,7 @@ const MyPostsContainer: FC = () => {
                         </ListItem>
                         <ListItem
                             button
-                            onClick={handleModalContentIndex(4, archiveId)}
+                            onClick={handleModalContentIndex(5, archiveId)}
                         >
                             <ListItemText
                                 primary={t('addToArchive')}
@@ -154,26 +171,53 @@ const MyPostsContainer: FC = () => {
             case 3:
                 return <>
                     <Typography
-                        variant='subtitle1'
+                        variant='h6'
                         className="title"
                         onClick={handleModalContentIndex(3)}
                     >
                         Продал на Slondo
                     </Typography>
-                    <Box>
-                        <div>
-                            <TextField
-                                label="None"
-                                id="outlined-margin-none"
-                                defaultValue="Default Value"
-                                className={classes.textField}
-                                helperText="Some important text"
-                                variant="outlined"
-                            />
-                        </div>
-                        <div className={classes.userAvatar}>
+                    <Box
+                        display='flex'
+                        justifyContent='space-between'
+                        className={classes.userPhoneAndData}
+                        width="100%"
 
-                        </div>
+                    >
+                        <TextField
+                            label="Укажите номер покупателя"
+                            id="outlined"
+                            defaultValue="+998"
+                            helperText="(Нажмите отправить если не знаете номер)"
+                            variant="outlined"
+                        />
+                        <Box className={classes.userData}>
+                            <Avatar src='' />
+                            <Typography variant='subtitle2'>
+                                Умид Хикматов
+                            </Typography>
+                        </Box>
+                        <Box>
+                            <ButtonComponent color='primary'>
+                                Отправить
+                            </ButtonComponent>
+                        </Box>
+                    </Box>
+                    <Box>
+                        <FormControlLabel
+                            control={<Checkbox onChange={handleCheckbox} />}
+                            label="Добавить объявление в архив"
+                        />
+                    </Box>
+                </>;
+            case 5:
+                return <>
+                    <Typography variant='h6' className="title">
+                        Вы уверены что хотите <br />добавить объявление в архив?
+                    </Typography>
+                    <Box display='flex' flexDirection='column'>
+                        <ButtonComponent color="primary" onClick={handleDeactivate}>Да</ButtonComponent>
+                        <ButtonComponent color="primary" onClick={handlePrevMenu}>Вернуться</ButtonComponent>
                     </Box>
                 </>;
         }
@@ -183,7 +227,7 @@ const MyPostsContainer: FC = () => {
         <>
             {modalContentIndex === 1
                 ? <Typography className="title" variant="h6">
-                    Объявление № 1
+                    Объявление № {postId}
                 </Typography>
                 : <IconButton
                     className='prev-btn'
@@ -233,7 +277,6 @@ const MyPostsContainer: FC = () => {
     }, []);
 
     const title = 'Мои объявления';
-
     return (
         <TabsContent
             tabIndex={tabIndex}

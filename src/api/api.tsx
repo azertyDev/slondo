@@ -239,5 +239,19 @@ export const userAPI = {
             .catch(err => {
                 throw err;
             });
+    },
+    getUserArchivePosts: (type: string, lang: string): Promise<any> => {
+        return instance.get(`regular/user/archivePosts?itemsPerPage=25&page=1&type=${type}&lang=${lang}`, setTokenToHeader())
+            .then(res => res.data)
+            .catch(err => {
+                throw err;
+            });
+    },
+    getUserByPhoneNumber: (phone: string): Promise<any> => {
+        return instance.get(`regular/user/byPhone?phone=${phone}`, setTokenToHeader())
+            .then(res => res.data)
+            .catch(err => {
+                throw err;
+            });
     }
 };

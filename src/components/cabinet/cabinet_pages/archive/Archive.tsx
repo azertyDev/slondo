@@ -1,11 +1,35 @@
-import React, {FC, ReactElement} from 'react';
-import {CardView, ViewPropsType} from '@src/components/elements/card/card_view/CardView';
+import React, {FC} from 'react';
+import {CustomModal} from '@src/components/elements/custom_modal/CustomModal';
+import {CabinetCard} from '@src/components/cabinet/cabinet_card/CabinetCard';
 
+type MyArchivePropsType = {
+    isFetch: boolean;
+    list?: any[];
+    openModal: boolean;
+    handleModalOpen: (id) => () => void;
+    handleModalClose: () => void;
+}
 
-export const Archive: FC<ViewPropsType> = (props): ReactElement => {
-    const { list, isFetch } = props;
+export const Archive: FC<MyArchivePropsType> = (props) => {
+    const {
+        list,
+        isFetch,
+        openModal,
+        handleModalOpen,
+        handleModalClose
+    } = props;
 
     return (
-        <CardView listMode={true} list={list} isFetch={isFetch} />
+        <>
+            <CabinetCard
+                list={list}
+                isFetch={isFetch}
+                handleModalOpen={handleModalOpen}
+            />
+            <CustomModal handleModalClose={handleModalClose} openModal={openModal}>
+                Archive settings
+            </CustomModal>
+        </>
+
     );
 };
