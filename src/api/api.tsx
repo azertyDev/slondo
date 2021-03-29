@@ -229,11 +229,11 @@ export const userAPI = {
                 throw err;
             });
     },
-    deactivateById: (ads_id: number, reason_id: number, archive: boolean): Promise<any> => {
+    deactivateById: (ads_id: number, reason_id?: number, to_archive?: boolean): Promise<any> => {
         return instance.post(`regular/post/deactivate`, {
             ads_id,
             reason_id,
-            archive
+            to_archive
         }, setTokenToHeader())
             .then(res => res.data)
             .catch(err => {
@@ -253,5 +253,12 @@ export const userAPI = {
             .catch(err => {
                 throw err;
             });
-    }
+    },
+    raiseInTape: (ads_id: number): Promise<AuctionsDataTypes> => {
+        return instance.post(`regular/user/post/rise/${ads_id}`, setTokenToHeader())
+            .then(res => res.data)
+            .catch(err => {
+                throw err;
+            });
+    },
 };

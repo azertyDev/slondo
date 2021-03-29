@@ -35,7 +35,7 @@ const MyPostsContainer: FC = () => {
     const { soldOnSlondoId, archiveId } = deactivateReasons;
     const classes = useStyles();
 
-    const initialState = {
+    const initialCardState = {
         isFetch: false,
         myPosts: {
             total: 0,
@@ -46,13 +46,28 @@ const MyPostsContainer: FC = () => {
             data: []
         }
     };
-    const [postData, setPostData] = useState(initialState);
+
+    const initialUserState = {
+        isFetch: false,
+        user: {
+            id: null,
+            name: '',
+            surname: '',
+            phone: '',
+            avatar: null
+        }
+    };
+
+    const [userData, setUserData] = useState(initialUserState);
+    const [userPhone, setUserPhone] = useState('998');
+    const [postData, setPostData] = useState(initialCardState);
     const [tabIndex, setTabIndex] = useState(0);
     const [openModal, setOpenModal] = useState(false);
     const [modalContentIndex, setModalContentIndex] = useState(1);
     const [reasonId, setReasonId] = useState(null);
     const [postId, setPostId] = useState(null);
     const [toArchive, setToArchive] = useState(false);
+    const [errorMsg, setErrMsg] = useState('');
 
     const handleOpenModal = (postId) => () => {
         setOpenModal(true);
@@ -79,6 +94,20 @@ const MyPostsContainer: FC = () => {
     const handleDeactivate = async () => {
         await userAPI.deactivateById(postId, reasonId, toArchive);
         setOpenModal(false);
+    };
+
+    const handleTextField = async (e) => {
+        try {
+            const phone = e.target.value;
+            setUserPhone(phone);
+            if (phone.length === 12) {
+                setUserData({ ...userData, isFetch: true });
+                const user = await userAPI.getUserByPhoneNumber(phone);
+                setUserData({ ...userData, user, isFetch: false });
+            }
+        } catch (e) {
+            setErrMsg(e.message);
+        }
     };
 
     const fetchPostData = async (type) => {
@@ -181,33 +210,71 @@ const MyPostsContainer: FC = () => {
                         display='flex'
                         justifyContent='space-between'
                         className={classes.userPhoneAndData}
-                        width="100%"
-
+                        mt={3}
+                        width='100%'
                     >
+                        {/*<TextField*/}
+                        {/*    label="Укажите номер покупателя"*/}
+                        {/*    id="outlined-basic"*/}
+                        {/*    variant="outlined"*/}
+                        {/*    value={userPhone}*/}
+                        {/*    onChange={handleTextField}*/}
+                        {/*    helperText={errorMsg !== '' ? errorMsg : '(Нажмите отправить если не знаете номер)'}*/}
+                        {/*/>*/}
                         <TextField
-                            label="Укажите номер покупателя"
-                            id="outlined"
-                            defaultValue="+998"
-                            helperText="(Нажмите отправить если не знаете номер)"
+                            id="outlined-helperText"
+                            label="Номер покупателя"
+                            value={userPhone}
+                            onChange={handleTextField}
+                            helperText={errorMsg !== '' ? errorMsg : '(Нажмите отправить если не знаете номер)'}
                             variant="outlined"
                         />
                         <Box className={classes.userData}>
-                            <Avatar src='' />
-                            <Typography variant='subtitle2'>
-                                Умид Хикматов
-                            </Typography>
-                        </Box>
-                        <Box>
-                            <ButtonComponent color='primary'>
-                                Отправить
-                            </ButtonComponent>
+                            {
+                                userData.isFetch
+                                    ? <Typography>loading...</Typography>
+                                    : <>
+                                        <Avatar src={userData.user.avatar === '' ? '' : userData.user.avatar} />
+                                        <Typography variant='subtitle2'>
+                                            {userData.user.name}
+                                            {userData.user.surname}
+                                        </Typography>
+                                    </>
+                            }
                         </Box>
                     </Box>
-                    <Box>
+                    <Box
+                        display='flex'
+                        justifyContent='space-between'
+                        mt={1}
+                        className={classes.toArchive}
+                        width='100%'
+                    >
                         <FormControlLabel
-                            control={<Checkbox onChange={handleCheckbox} />}
+                            control={
+                                <Checkbox
+                                    onChange={handleCheckbox}
+                                    checked={toArchive}
+                                />}
                             label="Добавить объявление в архив"
                         />
+                        <ButtonComponent>
+                            <Typography
+                                variant="subtitle1"
+                                color="initial"
+                            >
+                                ?
+                            </Typography>
+                        </ButtonComponent>
+                    </Box>
+                    <Box
+                        mt={1}
+                        width='100%'
+                        className={classes.submitBtn}
+                    >
+                        <ButtonComponent onClick={handleDeactivate}>
+                            Отправить
+                        </ButtonComponent>
                     </Box>
                 </>;
             case 5:

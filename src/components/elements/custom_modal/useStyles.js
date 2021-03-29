@@ -15,6 +15,9 @@ export const useStyles = makeStyles((theme) => ({
         backgroundColor: theme.palette.background.paper,
         padding: 25,
         borderRadius: 10,
+        '& .MuiCheckbox-root': {
+            padding: 0
+        },
         '& .prev-btn': {
             position: 'absolute',
             top: 20,
