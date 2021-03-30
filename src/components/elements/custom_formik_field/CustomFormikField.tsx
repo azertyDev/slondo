@@ -1,54 +1,53 @@
 import React, {FC} from 'react';
-import {TextField, Typography} from '@material-ui/core';
 import {Field} from 'formik';
-import {TFunction} from "i18next";
+import {TextField, Typography} from '@material-ui/core';
 import {TextFieldProps} from "@material-ui/core/TextField/TextField";
 import {isRequired} from "@src/helpers";
 import {useStyles} from './useStyles';
 
 type CustomFormikFieldPropsType = {
-    t?: TFunction,
-    errors?,
-    touched?,
+    errorMsg?: string,
     labelText?: string
 } & TextFieldProps;
 
 export const CustomFormikField: FC<CustomFormikFieldPropsType> = (props) => {
     const {
-        t,
         name,
-        errors,
-        touched,
+        errorMsg,
         labelText,
         ...otherProps
     } = props;
 
     const classes = useStyles();
     return (
-        <Field name={name} {...otherProps}>
+        <Field name={name} {...otherProps} >
             {({field}) =>
                 <div className={classes.root}>
-                    {t && (
-                        <Typography variant="subtitle1">
-                            <strong>
-                                {t(labelText ?? name)}
-                                {isRequired(name) && <span className='error-text'>*</span>}&nbsp;
-                            </strong>
-                            {errors[name] && touched[name] && (
-                                <span className='error-text'>
-                                    {t(errors[name] as string)}
-                                </span>
-                            )}
-                        </Typography>
-                    )}
+                    <div className='label-wrapper'>
+                        {labelText && (
+                            <Typography variant="subtitle1">
+                                <strong>
+                                    {labelText}
+                                    {isRequired(name) && <span className='error-text'>*</span>}&nbsp;
+                                </strong>
+                            </Typography>
+                        )}
+                    </div>
                     <TextField
                         fullWidth
                         focused={false}
                         variant="outlined"
                         {...field}
                         {...otherProps}
-                        className={errors?.[name] && touched[name] ? 'error-border' : ''}
+                        className={errorMsg ? 'error-border' : ''}
                     />
+                    {errorMsg && (
+                        <Typography variant="subtitle1">
+                            <span className='error-text'>
+                                {errorMsg}
+                            </span>
+                        </Typography>
+                    )}
                 </div>}
         </Field>
     );

@@ -8,7 +8,7 @@ export const useStyles = makeStyles((theme) => ({
     },
     modalDialog: {
         '& > div:first-child': {
-            [theme.breakpoints.down('sm')]: {
+            [theme.breakpoints.down('md')]: {
                 backgroundColor: `${theme.palette.primary.white}!important`,
             }
         }

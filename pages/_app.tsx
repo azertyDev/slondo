@@ -4,7 +4,6 @@ import {appWithTranslation} from 'next-i18next';
 import {ThemeProvider, CssBaseline} from '@material-ui/core';
 import {wrapper} from '@src/redux/store';
 import theme from '@src/theme';
-import Head from "next/head";
 import "../slick.min.css";
 import 'react-inner-image-zoom/lib/InnerImageZoom/styles.min.css';
 
@@ -21,15 +20,10 @@ const App = (props) => {
     }, []);
 
     return (
-        <>
-            <Head>
-                <meta name="viewport" content="viewport-fit=cover"/>
-            </Head>
-            <ThemeProvider theme={theme}>
-                <CssBaseline/>
-                <Component {...pageProps} />
-            </ThemeProvider>
-        </>
+        <ThemeProvider theme={theme}>
+            <CssBaseline/>
+            <Component {...pageProps} />
+        </ThemeProvider>
     );
 };
 

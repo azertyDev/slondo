@@ -11,7 +11,7 @@ import {numberRegEx, timeRegEx} from "@src/common_data/reg_exs";
 import {FormikProvider, useFormik} from "formik";
 import {CustomAccordion} from "@src/components/post/create_post/form_page/components/accordion/CustomAccordion";
 import {numericFields} from "@src/common_data/form_fields";
-import {defaultParamsSchema} from "@root/validation_schemas/createPostSchemas";
+import {auctionParamsSchema, defaultParamsSchema} from "@root/validation_schemas/createPostSchemas";
 import {clearWhiteSpaces, numberPrettier} from "@src/helpers";
 import {RootState} from "@src/redux/rootReducer";
 import {PostType} from "@root/interfaces/Post";
@@ -69,7 +69,7 @@ export const CommonParamsForm: FC<DefaultParamsPropsType> = (props) => {
             }
         },
         auction: {
-            duration: postType.expired[0],
+            duration: null,
             reserve_price: '',
             offer_the_price: false,
             auto_renewal: false,
@@ -150,7 +150,7 @@ export const CommonParamsForm: FC<DefaultParamsPropsType> = (props) => {
     const formik = useFormik({
         onSubmit,
         initialValues: initForm,
-        validationSchema: defaultParamsSchema
+        validationSchema: isAuction ? auctionParamsSchema : defaultParamsSchema
     });
 
     const {
@@ -179,23 +179,29 @@ export const CommonParamsForm: FC<DefaultParamsPropsType> = (props) => {
 
     const handleInput = ({target: {name, value}}) => {
         const isNumericField = numericFields.some((n => n === name));
-
         if (isNumericField) {
             if (numberRegEx.test(value)) {
-                value = numberPrettier(value);
+                const number = numberPrettier(value);
                 if (name === 'reserve_price') {
-                    auction[name] = value;
+                    setValues({...values, auction: {...auction, [name]: number}});
                 } else if (name === 'price_by_now') {
-                    auction[name].value = value;
+                    setValues({
+                        ...values,
+                        auction: {
+                            ...auction,
+                            price_by_now: {
+                                ...auction.price_by_now,
+                                value: number
+                            }
+                        }
+                    });
                 } else {
-                    values[name] = value;
+                    setValues({...values, [name]: number});
                 }
             }
         } else {
-            values[name] = value;
+            setValues({...values, [name]: value});
         }
-
-        setValues({...values});
     };
 
     const handleLocation = (_, location) => {
@@ -211,7 +217,6 @@ export const CommonParamsForm: FC<DefaultParamsPropsType> = (props) => {
             'auto_renewal',
             'display_phone'
         ];
-
         if (auctionOptionsList.some(option => option === name)) {
             if (name === 'price_by_now') {
                 auction.price_by_now.isActive = target.checked;
@@ -221,7 +226,6 @@ export const CommonParamsForm: FC<DefaultParamsPropsType> = (props) => {
         } else {
             values[name] = target.checked;
         }
-
         setValues({...values});
     };
 
@@ -232,7 +236,6 @@ export const CommonParamsForm: FC<DefaultParamsPropsType> = (props) => {
 
     const handleAvalDays = day => () => {
         const isExstDay = avalTime.time.week_days.some(({id}) => id === day.id);
-
         if (isExstDay) {
             avalTime.time.week_days.map(({id}, index) => {
                 if (id === day.id) {
@@ -242,7 +245,6 @@ export const CommonParamsForm: FC<DefaultParamsPropsType> = (props) => {
         } else {
             avalTime.time.week_days.push(day);
         }
-
         setValues({...values});
     };
 
@@ -253,8 +255,8 @@ export const CommonParamsForm: FC<DefaultParamsPropsType> = (props) => {
             setValues({...values});
         }
     };
-    console.log('def', values)
-    // console.log('err', errors)
+
+    console.log(errors)
     const classes = useStyles();
     return (
         <FormikProvider value={formik}>
@@ -273,8 +275,8 @@ export const CommonParamsForm: FC<DefaultParamsPropsType> = (props) => {
                                 t={t}
                                 values={values}
                                 isAuction={isAuction}
-                                isAdvanceAuction={isAdvanceAuction}
                                 locationText={locationText}
+                                isAdvanceAuction={isAdvanceAuction}
                             />
                             : <div>
                                 {isAuction
@@ -294,14 +296,15 @@ export const CommonParamsForm: FC<DefaultParamsPropsType> = (props) => {
                                     </div>
                                     : <div className='price-wrapper'>
                                         <CustomFormikField
-                                            t={t}
                                             name='price'
-                                            errors={errors}
-                                            touched={touched}
-                                            value={values.title}
+                                            value={values.price}
                                             onChange={handleInput}
                                             style={{width: '270px'}}
-                                            className={errors.title && touched.title ? 'error-border' : ''}
+                                            errorMsg={
+                                                errors.price && touched.price
+                                                    ? t(`errors:${errors.price}`)
+                                                    : ''
+                                            }
                                         />
                                         <div className='currency'>
                                             <CustomSelect
@@ -324,8 +327,11 @@ export const CommonParamsForm: FC<DefaultParamsPropsType> = (props) => {
                                 <div className='location-wrapper'>
                                     <LocationAutocomplete
                                         name='location'
-                                        locationError={errors.location}
-                                        locationTouched={touched.location}
+                                        errorMsg={
+                                            errors.location && touched.location
+                                                ? t(`errors:${errors.location}`)
+                                                : ''
+                                        }
                                         value={values.location}
                                         locations={locations.data}
                                         onBlur={handleBlur}
@@ -334,12 +340,15 @@ export const CommonParamsForm: FC<DefaultParamsPropsType> = (props) => {
                                 </div>
                                 <div>
                                     <Description
-                                        t={t}
-                                        errors={errors}
-                                        touched={touched}
+                                        label='description'
                                         handleInput={handleInput}
                                         handleBlur={handleBlur}
                                         description={values.description}
+                                        errorMsg={
+                                            errors.description && touched.description
+                                                ? t(`errors:${errors.description}`)
+                                                : ''
+                                        }
                                     />
                                 </div>
                                 <Grid

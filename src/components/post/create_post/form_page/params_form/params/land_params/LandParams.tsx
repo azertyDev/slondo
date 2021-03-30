@@ -5,8 +5,9 @@ import {CustomSelect} from "@src/components/post/create_post/form_page/component
 import {CustomFormikField} from "@src/components/elements/custom_formik_field/CustomFormikField";
 import {FormikType} from "@root/interfaces/Formik";
 import {useStyles} from './useStyles';
-import {OptionsRow} from "@src/components/post/create_post/form_page/components/options_row/OptionsRow";
+import {TypeSelect} from "@src/components/post/create_post/form_page/components/type_select/TypeSelect";
 import {PreviewValues} from "@src/components/post/create_post/form_page/params_form/PreviewValues";
+import {getErrorMsg} from "@src/helpers";
 
 
 type LandPropsType = {
@@ -55,7 +56,7 @@ export const LandParams: FC<LandPropsType> = (props) => {
                     : <>
                         <Grid item container xs={12} justify='space-between' alignItems='center'>
                             <Grid item xs={6}>
-                                <OptionsRow
+                                <TypeSelect
                                     t={t}
                                     errors={errors}
                                     touched={touched}
@@ -66,7 +67,7 @@ export const LandParams: FC<LandPropsType> = (props) => {
                                 />
                             </Grid>
                             <Grid item xs={3}>
-                                <OptionsRow
+                                <TypeSelect
                                     t={t}
                                     errors={errors}
                                     touched={touched}
@@ -91,12 +92,12 @@ export const LandParams: FC<LandPropsType> = (props) => {
                         )}
                         <Grid item xs={4}>
                             <CustomFormikField
-                                t={t}
-                                errors={errors}
-                                touched={touched}
                                 name='area'
-                                labelText='area_in_hundred'
+                                labelText={t('area_in_hundred')}
                                 value={values.area ?? ''}
+                                errorMsg={
+                                    getErrorMsg(errors.area, touched.area, t)
+                                }
                             />
                         </Grid>
                         <Grid item container xs={4}>

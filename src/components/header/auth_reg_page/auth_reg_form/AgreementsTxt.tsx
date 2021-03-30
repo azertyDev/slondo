@@ -8,20 +8,20 @@ type AgreementsPropsType = {
     isRegAgreements?: boolean
 } & WithT;
 
-export const Agreements: FC<AgreementsPropsType> = ({t, locale, isRegAgreements}) => {
+export const AgreementsTxt: FC<AgreementsPropsType> = ({t, locale, isRegAgreements}) => {
     return (
         isRegAgreements
             ? (
                 <Typography className="reg-agreement" variant="body2">
-                    {`${t('auth_reg:agreement.firstPart')} `}
+                    {`${t('agreement.firstPart')} `}
                     <Link href="#">
-                        <a>{`${t('auth_reg:agreement.secondPart')} `}</a>
+                        <a>{`${t('agreement.secondPart')} `}</a>
                     </Link>
-                    {`${t('auth_reg:agreement.thirdPart')} `}
+                    {`${t('agreement.thirdPart')} `}
                     <Link href="#">
-                        <a>{`${t('auth_reg:agreement.fourthPart')}`}</a>
+                        <a>{`${t('agreement.fourthPart')}`}</a>
                     </Link>
-                    {locale === 'uz' && ` ${t('auth_reg:agreement.fifthPart')}`}
+                    {locale === 'uz' && ` ${t('agreement.fifthPart')}`}
                 </Typography>
             ) : (
                 <Typography className="reg-agreement" variant="body2">
@@ -29,11 +29,11 @@ export const Agreements: FC<AgreementsPropsType> = ({t, locale, isRegAgreements}
                     <Link href="#">
                         <a>лицензионного соглашения</a>
                     </Link>
-                    {` ${t('auth_reg:agreement.thirdPart')} `}
+                    {` ${t('agreement.thirdPart')} `}
                     <Link href="#">
                         <a>политики конфиденциальности</a>
                     </Link>
-                    {locale === 'uz' && ` ${t('auth_reg:agreement.fifthPart')}`}
+                    {locale === 'uz' && ` ${t('agreement.fifthPart')}`}
                 </Typography>
             )
     )

@@ -114,11 +114,13 @@ export const CarForm: FC<RegularFormPropsType> = (props) => {
                             {values.title}
                         </Typography>
                         : <CustomFormikField
-                            t={t}
                             name='title'
                             style={{width: '50%'}}
-                            errors={errors}
-                            touched={touched}
+                            errorMsg={
+                                errors.title && touched.title
+                                    ? t(`errors:${errors.title}`)
+                                    : ''
+                            }
                             value={values.title}
                             onChange={handleInput}
                             placeholder={t('exampleTitle')}

@@ -36,8 +36,8 @@ export const userAPI = {
         return instance
             .post(`login`, form)
             .then((res) => res.data)
-            .catch((err) => {
-                throw err;
+            .catch(({response}) => {
+                throw response.data;
             });
     },
     register: (phone: string): Promise<any> => {
@@ -46,39 +46,38 @@ export const userAPI = {
         return instance
             .post(`register`, form)
             .then((res) => res.data)
-            .catch((err) => {
-                throw err;
+            .catch(({response}) => {
+                throw response.data;
             });
     },
-    recovery: (phone: string, code: string, password: string, password_confirmation: string): Promise<{ token: string }> => {
-        const form = new FormData();
-        form.set('phone', phone);
-        form.set('code', code);
-        form.set('password', password);
-        form.set('password_confirmation', password_confirmation);
-        return instance
-            .post(`recovery`, form)
-            .then((res) => res.data)
-            .catch((err) => {
-                throw err;
-            });
-    },
-    recoveryRequest: (phone: string): Promise<unknown> => {
+    getSmsCode: (phone: string): Promise<unknown> => {
         const form = new FormData();
         form.set('phone', phone);
         return instance
             .post(`recoveryRequest`, form)
             .then((res) => res.data)
-            .catch((err) => {
-                throw err;
+            .catch(({response}) => {
+                throw response.data;
             });
     },
-    recoverySMS: (phone: string, code: string): Promise<unknown> => {
+    confirmSmsCode: (phone: string, code: string): Promise<unknown> => {
         return instance
             .get(`checkShortCode?phone=${phone}&code=${code}`)
             .then((res) => res.data)
-            .catch((err) => {
-                throw err;
+            .catch(({response}) => {
+                throw response.data;
+            });
+    },
+    newPassword: (phone: string, code: string, newPassword: string): Promise<{ user: any, token: string }> => {
+        const form = new FormData();
+        form.set('phone', phone);
+        form.set('code', code);
+        form.set('password', newPassword);
+        return instance
+            .post(`recovery`, form)
+            .then((res) => res.data)
+            .catch(({response}) => {
+                throw response.data;
             });
     },
     favoriteAds: (id: number): Promise<{ message: string }> => {

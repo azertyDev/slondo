@@ -2054,7 +2054,7 @@ export const categories_list: CategoryType[] = [
                     },
                     {
                         id: 29,
-                        name: 'overalls',
+                        name: 'overallsAndUn',
                         ru_name: 'Спецодежда'
                     },
                     {
@@ -3012,36 +3012,36 @@ export const categories_list: CategoryType[] = [
                 name: 'videoFilms',
                 ru_name: 'Видеофильмы',
                 type: [
-                    {
-                        id: 10,
-                        name: "DVD",
-                        ru_name: "DVD"
-                    },
-                    {
-                        id: 11,
-                        name: "Blu-Ray",
-                        ru_name: "Blu-Ray"
-                    },
-                    {
-                        id: 12,
-                        name: "CD",
-                        ru_name: "CD"
-                    },
-                    {
-                        id: 13,
-                        name: "VHSCassettes",
-                        ru_name: "Кассеты VHS"
-                    },
-                    {
-                        id: 14,
-                        name: "onlineSubscription",
-                        ru_name: "Онлайн подписка"
-                    },
-                    {
-                        id: 15,
-                        name: 'other',
-                        ru_name: 'Другое'
-                    }
+                    // {
+                    //     id: 10,
+                    //     name: "DVD",
+                    //     ru_name: "DVD"
+                    // },
+                    // {
+                    //     id: 11,
+                    //     name: "Blu-Ray",
+                    //     ru_name: "Blu-Ray"
+                    // },
+                    // {
+                    //     id: 12,
+                    //     name: "CD",
+                    //     ru_name: "CD"
+                    // },
+                    // {
+                    //     id: 13,
+                    //     name: "VHSCassettes",
+                    //     ru_name: "Кассеты VHS"
+                    // },
+                    // {
+                    //     id: 14,
+                    //     name: "onlineSubscription",
+                    //     ru_name: "Онлайн подписка"
+                    // },
+                    // {
+                    //     id: 15,
+                    //     name: 'other',
+                    //     ru_name: 'Другое'
+                    // }
                 ]
             },
             {

@@ -51,11 +51,6 @@ export const NumberSelector: FC<FloorsPropsType> = (props) => {
                     {t(name)}
                     <span className='error-text'>*&nbsp;</span>
                 </strong>
-                {errors?.[name] && touched[name] && (
-                    <span className='error-text'>
-                        {t(errors[name] as string)}
-                    </span>
-                )}
             </Typography>
             <div className='numbers-wrapper'>
                 {Array.from({length: count}).map((_, i) => {
@@ -87,6 +82,13 @@ export const NumberSelector: FC<FloorsPropsType> = (props) => {
                         </Typography>}
                 </div>
             </div>
+            <Typography variant="subtitle1">
+                {errors?.[name] && touched[name] && (
+                    <span className='error-text'>
+                        {t(`errors:${errors[name] as string}`)}
+                    </span>
+                )}
+            </Typography>
         </div>
     )
 }

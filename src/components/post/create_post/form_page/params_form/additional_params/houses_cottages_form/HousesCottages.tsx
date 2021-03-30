@@ -5,7 +5,7 @@ import {CustomSelect} from "@src/components/post/create_post/form_page/component
 import {NumberSelector} from "@src/components/elements/number_selector/NumberSelector";
 import {CustomFormikField} from "@src/components/elements/custom_formik_field/CustomFormikField";
 import {FormikType} from "@root/interfaces/Formik";
-import {OptionsRow} from "@src/components/post/create_post/form_page/components/options_row/OptionsRow";
+import {TypeSelect} from "@src/components/post/create_post/form_page/components/type_select/TypeSelect";
 import {PreviewValues} from "@src/components/post/create_post/form_page/params_form/PreviewValues";
 import {CustomCheckbox} from "@src/components/post/create_post/form_page/components/custom_checkbox/CustomCheckbox";
 import {useStyles} from './useStyles';
@@ -63,7 +63,7 @@ export const HousesCottages: FC<HousesCottagesPropsType> = (props) => {
                     : <>
                         <Grid item container xs={12} alignItems='center'>
                             <Grid item container xs={4}>
-                                <OptionsRow
+                                <TypeSelect
                                     t={t}
                                     errors={errors}
                                     touched={touched}
@@ -74,7 +74,7 @@ export const HousesCottages: FC<HousesCottagesPropsType> = (props) => {
                                 />
                             </Grid>
                             <Grid item container xs={3}>
-                                <OptionsRow
+                                <TypeSelect
                                     t={t}
                                     errors={errors}
                                     touched={touched}
@@ -141,38 +141,50 @@ export const HousesCottages: FC<HousesCottagesPropsType> = (props) => {
                         </Grid>
                         <Grid item xs={4}>
                             <CustomFormikField
-                                t={t}
                                 name='general_area'
-                                errors={errors}
-                                touched={touched}
+                                labelText={t('general_area')}
                                 value={values.general_area ?? ''}
+                                errorMsg={
+                                    errors.general_area && touched.general_area
+                                        ? t(`errors:${errors.general_area}`)
+                                        : ''
+                                }
                             />
                         </Grid>
                         <Grid item container xs={4}>
                             <CustomFormikField
-                                t={t}
                                 name='land_area'
-                                errors={errors}
-                                touched={touched}
+                                labelText={t('land_area')}
                                 value={values.land_area ?? ''}
+                                errorMsg={
+                                    errors.land_area && touched.land_area
+                                        ? t(`errors:${errors.land_area}`)
+                                        : ''
+                                }
                             />
                         </Grid>
                         <Grid item container xs={4}>
                             <CustomFormikField
-                                t={t}
                                 name='living_area'
-                                errors={errors}
-                                touched={touched}
+                                labelText={t('living_area')}
                                 value={values.living_area ?? ''}
+                                errorMsg={
+                                    errors.living_area && touched.living_area
+                                        ? t(`errors:${errors.living_area}`)
+                                        : ''
+                                }
                             />
                         </Grid>
                         <Grid item container xs={4}>
                             <CustomFormikField
-                                t={t}
                                 name='ceiling_height'
-                                errors={errors}
-                                touched={touched}
+                                labelText={t('ceiling_height')}
                                 value={values.ceiling_height ?? ''}
+                                errorMsg={
+                                    errors.ceiling_height && touched.ceiling_height
+                                        ? t(`errors:${errors.ceiling_height}`)
+                                        : ''
+                                }
                             />
                         </Grid>
                         <Grid
@@ -185,11 +197,14 @@ export const HousesCottages: FC<HousesCottagesPropsType> = (props) => {
                                 t={t}
                                 name='posted'
                                 values={values}
-                                errors={errors}
-                                touched={touched}
                                 onBlur={handleBlur}
                                 items={filters.posted}
                                 handleSelect={handleSelect}
+                                errorMsg={
+                                    errors.posted && touched.posted
+                                        ? t(`errors:${errors.posted}`)
+                                        : ''
+                                }
                             />
                         </Grid>
                     </>}

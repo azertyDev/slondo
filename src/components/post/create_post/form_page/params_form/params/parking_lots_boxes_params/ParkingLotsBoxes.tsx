@@ -5,7 +5,7 @@ import {CustomSelect} from "@src/components/post/create_post/form_page/component
 import {CustomFormikField} from "@src/components/elements/custom_formik_field/CustomFormikField";
 import {useStyles} from './useStyles';
 import {FormikType} from "@root/interfaces/Formik";
-import {OptionsRow} from "@src/components/post/create_post/form_page/components/options_row/OptionsRow";
+import {TypeSelect} from "@src/components/post/create_post/form_page/components/type_select/TypeSelect";
 import {PreviewValues} from "@src/components/post/create_post/form_page/params_form/PreviewValues";
 
 
@@ -49,7 +49,7 @@ export const ParkingLotsBoxes: FC<ParkingLotsAndBoxesPropsType> = (props) => {
                 : <>
                     <Grid container spacing={2}>
                         <Grid item container xs={12} alignItems='center'>
-                            <OptionsRow
+                            <TypeSelect
                                 t={t}
                                 errors={errors}
                                 touched={touched}
@@ -61,20 +61,24 @@ export const ParkingLotsBoxes: FC<ParkingLotsAndBoxesPropsType> = (props) => {
                         </Grid>
                         <Grid item container xs={4}>
                             <CustomFormikField
-                                t={t}
                                 name='area'
-                                errors={errors}
-                                touched={touched}
                                 value={values.area ?? ''}
+                                errorMsg={
+                                    errors.area && touched.area
+                                        ? t(`errors:${errors.area as string}`)
+                                        : ''
+                                }
                             />
                         </Grid>
                         <Grid item container xs={4}>
                             <CustomFormikField
-                                t={t}
-                                errors={errors}
-                                touched={touched}
                                 name='parking_spaces'
                                 value={values.parking_spaces ?? ''}
+                                errorMsg={
+                                    errors.parking_spaces && touched.parking_spaces
+                                        ? t(`errors:${errors.parking_spaces as string}`)
+                                        : ''
+                                }
                             />
                         </Grid>
                         {type.id !== 1 && (

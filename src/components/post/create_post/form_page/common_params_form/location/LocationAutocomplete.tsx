@@ -11,8 +11,7 @@ type AddressAutocompleteType = {
     name: string,
     onChange: (_, location) => void,
     onBlur: { (e: FocusEvent<any>): void, <T = any>(fieldOrEvent: T): T extends string ? ((e: any) => void) : void },
-    locationError,
-    locationTouched,
+    errorMsg: string
 };
 
 export const LocationAutocomplete: FC<AddressAutocompleteType> = (props) => {
@@ -20,10 +19,9 @@ export const LocationAutocomplete: FC<AddressAutocompleteType> = (props) => {
         name,
         value,
         locations,
-        locationError,
-        locationTouched,
+        errorMsg,
         onChange,
-        onBlur,
+        onBlur
     } = props;
 
     const {t} = useTranslation(['post']);
@@ -53,11 +51,9 @@ export const LocationAutocomplete: FC<AddressAutocompleteType> = (props) => {
                     {t(`common:location`)}
                     <span className='error-text'>*</span>
                 </strong>
-                {
-                    locationError
-                    && locationTouched
-                    && <span className='error-text'>&nbsp;{t(locationError)}</span>
-                }
+                {errorMsg && <span className='error-text'>
+                    &nbsp;{t(`errors:${errorMsg}`)}
+                </span>}
             </Typography>
             <Autocomplete
                 value={value}
@@ -70,7 +66,7 @@ export const LocationAutocomplete: FC<AddressAutocompleteType> = (props) => {
                 renderInput={params =>
                     <TextField
                         {...params}
-                        className={locationError && locationTouched ? 'error-border' : ''}
+                        className={errorMsg !== '' ? 'error-border' : ''}
                         name={name}
                         onBlur={onBlur}
                         fullWidth

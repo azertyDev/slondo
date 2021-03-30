@@ -1,26 +1,31 @@
-import {number, string, object, ref} from "yup";
+import {string, object, ref} from "yup";
+import {fieldIsRequired} from "@src/common_data/form_fields";
 
-const numberMsg = "Пожалуйста введите только цыфры"
-const requiredMsg = 'Поле обязательно для заполнения';
-const phoneNumberLength = 'Неверный формат номера';
-const minCharacterMsg = 'Пароль должен быть не менее 6 символов!';
-// const minCodeMsg = 'Код должен быть не меньше 4 символов';
-const passwordMin = 'Пароль должен быть не меньше 6 символов';
-const passwordMatch = 'Пароль должен совпадать с предыдущим';
+const wrongNumberFormat = 'wrongNumberFormat';
+const passwordMin = 'passwordMustMinEightChars';
+const passwordsDifferent = 'passwordsDifferent';
 
-export const authRegSchema = object({
-    phone: number().typeError(numberMsg).required(requiredMsg)
-        .test('len', phoneNumberLength, val => val.toString().length === 12),
-    password: string().required(requiredMsg).min(6, minCharacterMsg)
+export const authSchema = object({
+    password: string().required(fieldIsRequired),
+    phone: string().required(fieldIsRequired)
+        .test('len', wrongNumberFormat, val => val?.length === 16)
 });
 
-export const authRecoverySchema = object({
-    phone: number().required(requiredMsg)
-        .test('len', phoneNumberLength, val => val.toString().length === 12),
-    code: number().typeError(numberMsg),
-    // .test('len', 'Must be exactly 5 characters', val => val.toString().length === 4),
-    password: string().min(6, passwordMin),
-    password_confirmation: string()
-        .oneOf([ref('password'), null], passwordMatch)
+export const passwordSchema = object({
+    password: string().required(fieldIsRequired)
+});
 
+export const phoneSchema = object({
+    phone: string().required(fieldIsRequired)
+        .test('len', wrongNumberFormat, val => val?.length === 16)
+});
+
+export const codeSchema = object({
+    code: string().required(fieldIsRequired)
+});
+
+export const passwordConfirmSchema = object({
+    newPassword: string().required(fieldIsRequired).min(8, passwordMin),
+    newPassword_confirm: string().required(fieldIsRequired)
+        .oneOf([ref('newPassword')], passwordsDifferent)
 });

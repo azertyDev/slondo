@@ -11,8 +11,7 @@ type CustomSelectPropsType = {
     onBlur,
     items: ItemsType[];
     handleSelect: (k, v) => void;
-    errors?,
-    touched?
+    errorMsg?: string
 } & WithT;
 
 type ItemsType = {
@@ -30,8 +29,7 @@ export const CustomSelect: FC<CustomSelectPropsType> = (props) => {
         handleSelect,
         onBlur,
         values,
-        errors,
-        touched
+        errorMsg
     } = props;
 
     const isCurrency = name === 'currency';
@@ -51,11 +49,6 @@ export const CustomSelect: FC<CustomSelectPropsType> = (props) => {
                         {t(name)}
                         {isRequired(name) && <span className='error-text'>*&nbsp;</span>}
                     </strong>
-                    {errors?.[name] && touched[name] && (
-                        <span className='error-text'>
-                        {t(errors[name] as string)}
-                    </span>
-                    )}
                 </Typography>
             )}
             <NativeSelect
@@ -64,7 +57,7 @@ export const CustomSelect: FC<CustomSelectPropsType> = (props) => {
                 onBlur={onBlur}
                 onChange={onChange}
                 value={values[name]?.id ?? 0}
-                className={classes.root + `${errors?.[name] && touched[name] ? ' error-border' : ''}`}
+                className={classes.root + `${errorMsg ? ' error-border' : ''}`}
             >
                 {!isCurrency && (
                     <option value={0}>
@@ -80,6 +73,13 @@ export const CustomSelect: FC<CustomSelectPropsType> = (props) => {
                     </option>
                 )}
             </NativeSelect>
+            <Typography variant="subtitle1">
+                {errorMsg && (
+                    <span className='error-text'>
+                        {errorMsg}
+                    </span>
+                )}
+            </Typography>
         </>
     )
 };

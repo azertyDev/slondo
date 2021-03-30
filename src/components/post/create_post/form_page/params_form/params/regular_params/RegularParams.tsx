@@ -1,8 +1,9 @@
 import React, {FC, Fragment} from "react";
-import {Grid, Typography} from "@material-ui/core";
 import {WithT} from "i18next";
+import {Grid, Typography} from "@material-ui/core";
 import {excludedKeys} from "@src/common_data/form_fields";
 import {CustomSelect} from "@src/components/post/create_post/form_page/components/custom_select/CustomSelect";
+import {getErrorMsg} from "@src/helpers";
 import {useStyles} from "./useStyles";
 
 
@@ -82,11 +83,12 @@ export const RegularParams: FC<RegularFormPropsType> = (props) => {
                                 t={t}
                                 name={key}
                                 values={values}
-                                errors={errors}
-                                touched={touched}
                                 onBlur={handleBlur}
                                 items={filters[key]}
                                 handleSelect={handleSelect}
+                                errorMsg={
+                                    getErrorMsg(errors[key], touched[key], t)
+                                }
                             />
                         </Grid>
                         {values[key] && Object.keys(values[key]).length && (

@@ -1,36 +1,20 @@
 import Cookies from 'universal-cookie';
+import {TFunction} from 'next-i18next';
 import {CategoryType, SubCtgrsType} from '@root/interfaces/Categories';
 import CyrillicToTranslit from 'cyrillic-to-translit-js';
 import {punctuationMarksRegEx} from '@src/common_data/reg_exs';
-import {TFunction} from 'next-i18next';
 import {categories_list} from '@src/common_data/categories_list';
 import {requireFields} from '@src/common_data/form_fields';
+import {COOKIE_LIFE_TIME} from "@src/constants";
 
 
 export const cookies = new Cookies();
+export const cookieOpts = {path: '/', maxAge: COOKIE_LIFE_TIME};
 
 export const isRequired = (field: string): boolean =>
     requireFields.some(reqField => reqField === field);
 
-
-export const authChecker = (): boolean => {
-    return typeof cookies.get('token') !== 'undefined';
-};
-
-// export const toCamelCase = (text: string) => {
-//     const result = [];
-//     const toLower = text.toLocaleLowerCase().split('');
-//     const toLowerLen = toLower.length;
-//     for (let i = 0; i < toLowerLen; i++) {
-//         if (toLower[i] === ' ') {
-//             result.push(toLower[i + 1].toUpperCase())
-//             i++
-//         } else {
-//             result.push(toLower[i])
-//         }
-//     }
-//     return result.join('')
-// }
+export const phoneFormat = (phone: string): string => phone.replace(/[\s+()]/g, "");
 
 export const transformTitle = (title: string): string => {
     const transform = new CyrillicToTranslit().transform;
@@ -217,10 +201,14 @@ export const getCategoriesByParams = (categories, params) => {
     }, {});
 }
 
-export const formatNumber = (number) => {
+export const formatNumber = (number: number) => {
     if (number <= 9) {
         return `0${number}`;
     } else {
         return number;
     }
 };
+
+export const getErrorMsg = (errorMsg, touched, t: TFunction): string => {
+    return errorMsg && touched ? t(`errors:${errorMsg}`) : '';
+}

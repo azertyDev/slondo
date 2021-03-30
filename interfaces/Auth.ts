@@ -6,12 +6,6 @@ export interface UserInfo {
     avatar: string | boolean,
     created_at: string
 }
-export interface RecoveryInputs {
-    phone: string;
-    password: string;
-    code: string;
-    password_confirmation: string;
-}
 
 export type SubscriberType = {
     id: number,

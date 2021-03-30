@@ -4,10 +4,11 @@ import {WithT} from "i18next";
 import {CustomSelect} from "@src/components/post/create_post/form_page/components/custom_select/CustomSelect";
 import {
     HandleOptionCheckboxType,
-    OptionsSection
-} from "@src/components/post/create_post/form_page/components/options_section/OptionsSection";
+    OptionsSelect
+} from "@src/components/post/create_post/form_page/components/options_select/OptionsSelect";
 import {PreviewValues} from "../../PreviewValues";
 import {FormikType} from "@root/interfaces/Formik";
+import {getErrorMsg} from "@src/helpers";
 import {useStyles} from "./useStyles";
 
 
@@ -64,11 +65,12 @@ export const ApartmentsParams: FC<RegularFormPropsType> = (props) => {
                                 t={t}
                                 name='material'
                                 values={values}
-                                errors={errors}
-                                touched={touched}
                                 onBlur={handleBlur}
                                 items={filters.material}
                                 handleSelect={handleSelect}
+                                errorMsg={
+                                    getErrorMsg(errors.material, touched.material, t)
+                                }
                             />
                         </Grid>
                         <Grid
@@ -81,11 +83,12 @@ export const ApartmentsParams: FC<RegularFormPropsType> = (props) => {
                                 t={t}
                                 name='layout'
                                 values={values}
-                                errors={errors}
-                                touched={touched}
                                 onBlur={handleBlur}
                                 items={filters.layout}
                                 handleSelect={handleSelect}
+                                errorMsg={
+                                    getErrorMsg(errors.layout, touched.layout, t)
+                                }
                             />
                         </Grid>
                         <Grid
@@ -98,11 +101,12 @@ export const ApartmentsParams: FC<RegularFormPropsType> = (props) => {
                                 t={t}
                                 name='repair'
                                 values={values}
-                                errors={errors}
-                                touched={touched}
                                 onBlur={handleBlur}
                                 items={filters.repair}
                                 handleSelect={handleSelect}
+                                errorMsg={
+                                    getErrorMsg(errors.repair, touched.repair, t)
+                                }
                             />
                         </Grid>
                         <Grid
@@ -115,8 +119,9 @@ export const ApartmentsParams: FC<RegularFormPropsType> = (props) => {
                                 t={t}
                                 name='lift'
                                 values={values}
-                                errors={errors}
-                                touched={touched}
+                                errorMsg={
+                                    getErrorMsg(errors.lift, touched.lift, t)
+                                }
                                 onBlur={handleBlur}
                                 items={filters.lift}
                                 handleSelect={handleSelect}
@@ -132,8 +137,10 @@ export const ApartmentsParams: FC<RegularFormPropsType> = (props) => {
                                 t={t}
                                 name='bathroom'
                                 values={values}
-                                errors={errors}
-                                touched={touched}
+                                errorMsg={
+                                    getErrorMsg(errors.bathroom, touched.bathroom, t
+                                    )
+                                }
                                 onBlur={handleBlur}
                                 items={filters.bathroom}
                                 handleSelect={handleSelect}
@@ -149,21 +156,22 @@ export const ApartmentsParams: FC<RegularFormPropsType> = (props) => {
                                 t={t}
                                 name='balcony'
                                 values={values}
-                                errors={errors}
-                                touched={touched}
+                                errorMsg={
+                                    getErrorMsg(errors.balcony, touched.balcony, t)
+                                }
                                 onBlur={handleBlur}
                                 items={filters.balcony}
                                 handleSelect={handleSelect}
                             />
                         </Grid>
-                        <OptionsSection
+                        <OptionsSelect
                             t={t}
                             name='amenities'
                             values={values}
                             options={filters.amenities}
                             handleOptionCheckbox={handleOptionCheckbox}
                         />
-                        <OptionsSection
+                        <OptionsSelect
                             t={t}
                             name='infrastructure'
                             values={values}

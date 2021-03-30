@@ -31,9 +31,9 @@ type CabinetCardPropsType = {
     handleModalOpen?: (id) => () => void
 }
 
-export const CabinetCard: FC<CabinetCardPropsType> = ({ list, isFetch, handleModalOpen }) => {
-    const { pathname } = useRouter();
-    const { t } = useTranslation(['common', 'categories']);
+export const CabinetCard: FC<CabinetCardPropsType> = ({list, isFetch, handleModalOpen}) => {
+    const {pathname} = useRouter();
+    const {t} = useTranslation(['common', 'categories']);
 
     const [isPhoneAval, setIsPhoneAval] = React.useState(false);
 
@@ -41,41 +41,21 @@ export const CabinetCard: FC<CabinetCardPropsType> = ({ list, isFetch, handleMod
         setIsPhoneAval(!isPhoneAval);
     };
 
-    const renderer = ({ days, hours, minutes, seconds, completed }) => {
-        if (completed) {
-            return (
-                <Box display="flex">
-                    <Typography variant="caption" color="initial" className="timer-title">
-                        Торги окончены -&nbsp;
-                    </Typography>
-                    <Box display="flex">
-                        <Typography variant="caption" className="timer">
-                            {formatNumber(days)}д
-                            : {formatNumber(hours)}ч
-                            : {formatNumber(minutes)}м
-                            : {formatNumber(seconds)}с
-                        </Typography>
-                    </Box>
-                </Box>
-            );
-        } else {
-            return (
-                <Box display="flex">
-                    <Typography variant="caption" color="initial" className="timer-title">
-                        Окончание торгов через -&nbsp;
-                    </Typography>
-                    <Box display="flex">
-                        <Typography variant="caption" className="timer">
-                            {formatNumber(days)}д
-                            : {formatNumber(hours)}ч
-                            : {formatNumber(minutes)}м
-                            : {formatNumber(seconds)}с
-                        </Typography>
-                    </Box>
-                </Box>
-            );
-        }
-    };
+    const timer = ({days, hours, minutes, seconds, completed}) => (
+        <Box display="flex">
+            <Typography variant="caption" color="initial" className="timer-title">
+                {completed ? 'Торги окончены' : 'Окончание торгов через'}&nbsp;-&nbsp;
+            </Typography>
+            <Box display="flex">
+                <Typography variant="caption" className="timer">
+                    {formatNumber(days)}д
+                    : {formatNumber(hours)}ч
+                    : {formatNumber(minutes)}м
+                    : {formatNumber(seconds)}с
+                </Typography>
+            </Box>
+        </Box>
+    );
 
     const classes = useStyles();
     return (
@@ -86,26 +66,21 @@ export const CabinetCard: FC<CabinetCardPropsType> = ({ list, isFetch, handleMod
                         <Grid item xs={9} className="left-content">
                             <div className="breadcrumbs">
                                 <BreadcrumbsComponent>
-                                    {
-                                        el.category &&
+                                    {el.category && (
                                         <Link href="#">
                                             <a>{t(`categories:${el.category.name}`)}</a>
                                         </Link>
-                                    }
-                                    {
-                                        el.adsable.sub_category
-                                            ? <Link href="#">
-                                                <a>{t(`categories:${el.adsable.sub_category?.name}`)}</a>
-                                            </Link>
-                                            : null
-                                    }
-                                    {
-                                        el.adsable.type
-                                            ? <Link href="#">
-                                                <a>{t(`categories:${el.adsable.type?.name}`)}</a>
-                                            </Link>
-                                            : null
-                                    }
+                                    )}
+                                    {el.adsable.sub_category && (
+                                        <Link href="#">
+                                            <a>{t(`categories:${el.adsable.sub_category.name}`)}</a>
+                                        </Link>
+                                    )}
+                                    {el.adsable.type && (
+                                        <Link href="#">
+                                            <a>{t(`categories:${el.adsable.type.name}`)}</a>
+                                        </Link>
+                                    )}
                                 </BreadcrumbsComponent>
                                 <Typography variant="subtitle1" color="initial">
                                     <span className={el.ads_type}>
@@ -117,9 +92,7 @@ export const CabinetCard: FC<CabinetCardPropsType> = ({ list, isFetch, handleMod
                             <Paper variant="outlined" elevation={2}>
                                 <Box className="card-data">
                                     <div className="img">
-                                        <img
-                                            src={el.image}
-                                        />
+                                        <img src={el.image}/>
                                         <Typography
                                             variant="caption"
                                             color="initial"
@@ -129,7 +102,7 @@ export const CabinetCard: FC<CabinetCardPropsType> = ({ list, isFetch, handleMod
                                             {t(el.ads_type)}
                                         </Typography>
                                         <span>
-                                            <EyeIcon />
+                                            <EyeIcon/>
                                             <Typography
                                                 variant="caption"
                                                 color="initial"
@@ -156,20 +129,20 @@ export const CabinetCard: FC<CabinetCardPropsType> = ({ list, isFetch, handleMod
                                                         className='isFavorite'
                                                         onClick={handleModalOpen(el.id)}
                                                     >
-                                                        <CloseIcon />
+                                                        <CloseIcon/>
                                                     </div>
                                                     : <div
                                                         className='settings'
                                                         onClick={handleModalOpen(el.id)}
                                                     >
-                                                        <SettingsIcon />
+                                                        <SettingsIcon/>
                                                     </div>}
                                             </div>
                                         </div>
                                         <div className="description">
                                             {!!el.available_days?.length && (
                                                 <span className="available">
-                                                <PhoneIcon />
+                                                <PhoneIcon/>
                                                     <Typography variant="body1" color="primary">
                                                         {weekDaysHelper(el.available_days, t)}
                                                     </Typography>
@@ -178,7 +151,7 @@ export const CabinetCard: FC<CabinetCardPropsType> = ({ list, isFetch, handleMod
                                             {!!el.exchange && (
                                                 <Tooltip title='Возможен обмен' arrow>
                                                     <span className="exchange">
-                                                        <SwapIcon />
+                                                        <SwapIcon/>
                                                         <Typography variant="body1">
                                                             Возможен обмен
                                                         </Typography>
@@ -187,7 +160,7 @@ export const CabinetCard: FC<CabinetCardPropsType> = ({ list, isFetch, handleMod
                                             )}
                                             {!!el.delivery && (
                                                 <span className="delivery">
-                                                    <DeliveryIcon />
+                                                    <DeliveryIcon/>
                                                     <Typography variant="body1">
                                                         Есть доставка
                                                     </Typography>
@@ -195,7 +168,7 @@ export const CabinetCard: FC<CabinetCardPropsType> = ({ list, isFetch, handleMod
                                             )}
                                             {!!el.safe_deal && (
                                                 <span className="safe_deal">
-                                                    <SafeIcon />
+                                                    <SafeIcon/>
                                                     <Typography variant="body1">
                                                         Безопасная покупка
                                                     </Typography>
@@ -204,7 +177,7 @@ export const CabinetCard: FC<CabinetCardPropsType> = ({ list, isFetch, handleMod
                                         </div>
                                         <div className="location">
                                             <div>
-                                                <LocationIcon />
+                                                <LocationIcon/>
                                                 <Typography
                                                     variant="caption"
                                                     color="initial"
@@ -225,21 +198,19 @@ export const CabinetCard: FC<CabinetCardPropsType> = ({ list, isFetch, handleMod
                                                 </Typography>
                                             </div>
                                         </div>
-                                        {
-                                            el.ads_type === 'auc' && (
-                                                <Box display='flex' justifyContent='space-between'>
-                                                    <Countdown
-                                                        date={new Date(el.expiration_at).getTime()}
-                                                        renderer={renderer}
-                                                    />
-                                                    <div>
-                                                        <Typography variant='caption'>
-                                                            Ставки: {el.auction?.number_of_bets}
-                                                        </Typography>
-                                                    </div>
-                                                </Box>
-                                            )
-                                        }
+                                        {el.ads_type === 'auc' && (
+                                            <Box display='flex' justifyContent='space-between'>
+                                                <Countdown
+                                                    date={new Date(el.expiration_at).getTime()}
+                                                    renderer={timer}
+                                                />
+                                                <div>
+                                                    <Typography variant='caption'>
+                                                        Ставки: {el.auction?.number_of_bets}
+                                                    </Typography>
+                                                </div>
+                                            </Box>
+                                        )}
                                     </div>
                                 </Box>
                             </Paper>
@@ -331,7 +302,7 @@ export const CabinetCard: FC<CabinetCardPropsType> = ({ list, isFetch, handleMod
                                             <Typography variant="subtitle1">
                                                 Продвижение
                                             </Typography>
-                                            <PromoteIcon />
+                                            <PromoteIcon/>
                                         </Button>
                                         <Button
                                             color="primary"
@@ -342,7 +313,7 @@ export const CabinetCard: FC<CabinetCardPropsType> = ({ list, isFetch, handleMod
                                             <Typography variant="subtitle1">
                                                 Поднять в ТОП
                                             </Typography>
-                                            <MegaphoneIcon />
+                                            <MegaphoneIcon/>
                                         </Button>
                                         <Button
                                             color="primary"
@@ -353,7 +324,7 @@ export const CabinetCard: FC<CabinetCardPropsType> = ({ list, isFetch, handleMod
                                             <Typography variant="subtitle1">
                                                 Поднять в ленте
                                             </Typography>
-                                            <DoubleUpIcon />
+                                            <DoubleUpIcon/>
                                         </Button>
                                     </div>
                                 )}
@@ -361,8 +332,10 @@ export const CabinetCard: FC<CabinetCardPropsType> = ({ list, isFetch, handleMod
                                     el.auction.winner ? (
                                         <div className="profile-form">
                                             <div className="extreme-rate">
-                                                <Typography variant="subtitle1"
-                                                            color="initial"> Победитель </Typography>
+                                                <Typography
+                                                    variant="subtitle1"
+                                                    color="initial"
+                                                > Победитель </Typography>
                                                 {/*<Typography variant="subtitle1" color="initial"> Крайняя ставка</Typography>*/}
                                                 {/*<Typography variant="subtitle1" color="initial"> Продавец </Typography>*/}
                                                 <ButtonComponent>
@@ -375,16 +348,16 @@ export const CabinetCard: FC<CabinetCardPropsType> = ({ list, isFetch, handleMod
                                                 </ButtonComponent>
                                             </div>
                                             <div className="profile-data">
-                                                <UserAvatarComponent avatar={el.auction.winner.avatar} />
+                                                <UserAvatarComponent avatar={el.auction.winner.avatar}/>
                                                 <Typography
                                                     variant="subtitle1"
                                                     color="initial"
                                                 >
                                                     {el.auction.winner.name}
                                                 </Typography>
-                                                <Rating card />
+                                                <Rating card/>
                                                 <ButtonComponent className='write'>
-                                                    <LetterIcon />
+                                                    <LetterIcon/>
                                                     <Typography
                                                         variant="subtitle2"
                                                         color="initial"

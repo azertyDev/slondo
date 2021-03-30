@@ -19,12 +19,6 @@ export const useStyles = makeStyles(() => ({
             }
         },
         '& div.price-wrapper': {
-            display: 'flex',
-            alignItems: 'flex-end',
-            width: '425px',
-            '& > div:first-child': {
-                marginRight: '15px'
-            },
             '& div.currency': {
                 width: '220px'
             }

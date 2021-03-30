@@ -32,7 +32,9 @@ export const SuccessPage: FC = () => {
                             <Typography color="initial">
                                 Объявление отправлено на модерацию. <br/>
                                 Статус объявления Вы можете отслеживать в
-                                <a href="/cabinet/posts"> личном кабинете</a>
+                                <Link href="/cabinet/posts">
+                                    <a> личном кабинете</a>
+                                </Link>
                             </Typography>
                         </div>
                     </Paper>

@@ -1,29 +1,28 @@
-import React from 'react'
-import {Formik, Form, useFormik} from 'formik'
+import React, {FC} from 'react';
+import {useFormik} from 'formik';
 import {Typography} from "@material-ui/core";
-import {ButtonComponent} from "../../../../../elements/button/Button";
-import {CustomFormikField} from "../../../../../elements/custom_formik_field/CustomFormikField";
-import {useStyles} from "./useStyles";
+import {ButtonComponent} from "@src/components/elements/button/Button";
 import {getAuctionSchema} from "@root/validation_schemas/auctionSchema";
+import {useStyles} from "./useStyles";
 
-const AuctionForm = ({data, handleFormSubmit, list}) => {
-    const classes = useStyles()
+const AuctionForm: FC<any> = ({data, handleFormSubmit, list}) => {
+    const classes = useStyles();
 
-    const min_bet = list?.[0]?.['min_bet']
-    const max_bet = list?.[0]?.['max_bet']
-    const id = data?.['auction']?.['id']
+    const min_bet = list?.[0]?.['min_bet'];
+    const max_bet = list?.[0]?.['max_bet'];
+    const id = data?.['auction']?.['id'];
 
     const handleSubmit = (values) => {
-        handleFormSubmit({...values, id})
-    }
+        handleFormSubmit({...values, id});
+    };
+
     const formik = useFormik({
-        initialValues: {
-            bet: '',
-        },
+        initialValues: {bet: ''},
         onSubmit: values => handleSubmit(values),
         validationSchema: getAuctionSchema(min_bet, max_bet)
     });
-    const {errors, touched} = formik
+
+    const {errors, touched} = formik;
     return (
         <div className={classes.root}>
             <form onSubmit={formik.handleSubmit}>
@@ -55,7 +54,8 @@ const AuctionForm = ({data, handleFormSubmit, list}) => {
                             border: '1px solid #675EAA',
                             width: '100%',
                             marginTop: 5
-                        }}>
+                        }}
+                    >
                         <Typography variant="subtitle1" color="initial">
                             Сделать ставку
                         </Typography>

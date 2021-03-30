@@ -6,16 +6,17 @@ import {AuctionTimer} from './AuctionTimer';
 import {numberPrettier} from '@root/src/helpers';
 import BuyAuctionComponent from './BuyAuction';
 import {userAPI} from '@src/api/api';
-import AuctionForm from './AuctionForm';
+import AuctionForm from './AuctionForm/AuctionFrom';
 import {useDispatch, useSelector} from "react-redux";
 import {setErrorMsgAction} from '@src/redux/slices/errorSlice';
 import {useTranslation} from "next-i18next";
+import {RootState} from "@src/redux/rootReducer";
 import {useStyles} from './useStyles';
 
 export const AuctionInfo: FC<any> = (props) => {
     const {t} = useTranslation();
     const dispatch = useDispatch();
-    const isAuth = useSelector<any>(state => state.user.isAuth);
+    const isAuth = useSelector<any>((state: RootState) => state.user.isAuth);
     const {data} = props;
     const [showAll, setShowAll] = useState(false);
     const [page, setPage] = useState(1);

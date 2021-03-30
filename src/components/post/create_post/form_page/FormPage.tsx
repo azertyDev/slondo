@@ -32,7 +32,7 @@ export type DataForCrtPostType = {
 const FormPage: FC = () => {
     const dispatch = useDispatch();
 
-    const {t} = useTranslation(['post']);
+    const {t} = useTranslation(['post', 'errors']);
 
     const {asPath, query, locale, push} = useRouter();
     const {index, ...params} = query;
@@ -140,9 +140,6 @@ const FormPage: FC = () => {
             setFetchedFilters();
         }
     }, []);
-
-    // console.log('filters', filters)
-    // console.log('post', post)
 
     const classes = useStyles();
     return (

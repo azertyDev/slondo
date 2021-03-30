@@ -5,7 +5,7 @@ import {CustomSelect} from "@src/components/post/create_post/form_page/component
 import {NumberSelector} from "@src/components/elements/number_selector/NumberSelector";
 import {CustomFormikField} from "@src/components/elements/custom_formik_field/CustomFormikField";
 import {FormikType} from "@root/interfaces/Formik";
-import {OptionsRow} from "@src/components/post/create_post/form_page/components/options_row/OptionsRow";
+import {TypeSelect} from "@src/components/post/create_post/form_page/components/type_select/TypeSelect";
 import {PreviewValues} from "@src/components/post/create_post/form_page/params_form/PreviewValues";
 import {CustomCheckbox} from "@src/components/post/create_post/form_page/components/custom_checkbox/CustomCheckbox";
 import {useStyles} from './useStyles';
@@ -64,7 +64,7 @@ export const Apartments: FC<ApartmentsPropsType> = (props) => {
                     : <>
                         <Grid container item xs={12}>
                             <Grid item container xs={isRent ? 4 : 12} alignItems='center'>
-                                <OptionsRow
+                                <TypeSelect
                                     t={t}
                                     values={values}
                                     errors={errors}
@@ -134,28 +134,37 @@ export const Apartments: FC<ApartmentsPropsType> = (props) => {
                         </Grid>
                         <Grid item xs={4}>
                             <CustomFormikField
-                                t={t}
                                 name='area'
-                                errors={errors}
-                                touched={touched}
+                                labelText={t('area')}
+                                errorMsg={
+                                    errors.area && touched.area
+                                        ? t(`errors:${errors.area as string}`)
+                                        : ''
+                                }
                                 value={values.area ?? ''}
                             />
                         </Grid>
                         <Grid item container xs={4}>
                             <CustomFormikField
-                                t={t}
                                 name='living_area'
-                                errors={errors}
-                                touched={touched}
+                                labelText={t('living_area')}
+                                errorMsg={
+                                    errors.living_area && touched.living_area
+                                        ? t(`errors:${errors.living_area as string}`)
+                                        : ''
+                                }
                                 value={values.living_area ?? ''}
                             />
                         </Grid>
                         <Grid item container xs={4}>
                             <CustomFormikField
-                                t={t}
                                 name='kitchen_area'
-                                errors={errors}
-                                touched={touched}
+                                labelText={t('kitchen_area')}
+                                errorMsg={
+                                    errors.kitchen_area && touched.kitchen_area
+                                        ? t(`errors:${errors.kitchen_area as string}`)
+                                        : ''
+                                }
                                 value={values.kitchen_area ?? ''}
                             />
                         </Grid>
@@ -169,11 +178,14 @@ export const Apartments: FC<ApartmentsPropsType> = (props) => {
                                 t={t}
                                 name='posted'
                                 values={values}
-                                errors={errors}
-                                touched={touched}
                                 onBlur={handleBlur}
                                 items={filters.posted}
                                 handleSelect={handleSelect}
+                                errorMsg={
+                                    errors.posted && touched.posted
+                                        ? t(`errors:${errors.posted}`)
+                                        : ''
+                                }
                             />
                         </Grid>
                     </>}

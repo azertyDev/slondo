@@ -2,5 +2,10 @@
   "pageNotFound": "Sahifa topilmadi",
   "user_already_registered": "Ro'yxatdan o'tish xatosi, ehtimol siz allaqachon tizimda ro'yxatdan o'tgansiz",
   "unauthorised": "Telefon raqami yoki parol noto'g'ri kiritilgan.",
-  "server_error": "Serverda xatolik, keyinroq urinib ko'ring"
+  "server_error": "Serverda xatolik, keyinroq urinib ko'ring",
+  "fieldIsRequired": "Maydon toldirilishi shart",
+  "wrongNumberFormat": "Raqam farmati notog'ri",
+  "passwordMustMinEightChars": "Parol kamida 8 shartli belgi",
+  "passwordsDifferent": "Parollar xar-xil",
+  "addPhotos": "Iltimos, rasm qo'shing"
 }

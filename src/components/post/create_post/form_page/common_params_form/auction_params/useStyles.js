@@ -5,19 +5,6 @@ export const useStyles = makeStyles(() => ({
         marginBottom: '20px',
         '& div.price-wrapper': {
             marginBottom: '20px'
-        },
-        '& div.auction-duration': {
-            width: '175px',
-            '& div.MuiInputBase-root': {
-                width: '100px'
-            }
-        },
-        '& div.adv-auction': {
-            '& div.buy-now-wrapper': {
-                '& div.MuiTextField-root': {
-                    width: '288px'
-                }
-            }
         }
     }
 }));

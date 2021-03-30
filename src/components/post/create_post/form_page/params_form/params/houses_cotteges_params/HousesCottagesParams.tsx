@@ -4,12 +4,12 @@ import {WithT} from "i18next";
 import {CustomSelect} from "@src/components/post/create_post/form_page/components/custom_select/CustomSelect";
 import {
     HandleOptionCheckboxType,
-    OptionsSection
-} from "@src/components/post/create_post/form_page/components/options_section/OptionsSection";
+    OptionsSelect
+} from "@src/components/post/create_post/form_page/components/options_select/OptionsSelect";
 import {PreviewValues} from "../../PreviewValues";
 import {FormikType} from "@root/interfaces/Formik";
 import {useStyles} from "./useStyles";
-import {CustomFormikField} from "@src/components/elements/custom_formik_field/CustomFormikField";
+import {getErrorMsg} from "@src/helpers";
 
 
 type RegularFormPropsType = {
@@ -68,11 +68,12 @@ export const HousesCottagesParams: FC<RegularFormPropsType> = (props) => {
                                 t={t}
                                 name='material'
                                 values={values}
-                                errors={errors}
-                                touched={touched}
                                 onBlur={handleBlur}
                                 items={filters.material}
                                 handleSelect={handleSelect}
+                                errorMsg={
+                                    getErrorMsg(errors.material, touched.material, t)
+                                }
                             />
                         </Grid>
                         <Grid
@@ -85,11 +86,12 @@ export const HousesCottagesParams: FC<RegularFormPropsType> = (props) => {
                                 t={t}
                                 name='heating'
                                 values={values}
-                                errors={errors}
-                                touched={touched}
                                 onBlur={handleBlur}
                                 items={filters.heating}
                                 handleSelect={handleSelect}
+                                errorMsg={
+                                    getErrorMsg(errors.heating, touched.heating, t)
+                                }
                             />
                         </Grid>
                         <Grid
@@ -102,11 +104,12 @@ export const HousesCottagesParams: FC<RegularFormPropsType> = (props) => {
                                 t={t}
                                 name='gas'
                                 values={values}
-                                errors={errors}
-                                touched={touched}
                                 onBlur={handleBlur}
                                 items={filters.gas}
                                 handleSelect={handleSelect}
+                                errorMsg={
+                                    getErrorMsg(errors.gas, touched.gas, t)
+                                }
                             />
                         </Grid>
                         <Grid
@@ -119,11 +122,12 @@ export const HousesCottagesParams: FC<RegularFormPropsType> = (props) => {
                                 t={t}
                                 name='electricity'
                                 values={values}
-                                errors={errors}
-                                touched={touched}
                                 onBlur={handleBlur}
                                 items={filters.electricity}
                                 handleSelect={handleSelect}
+                                errorMsg={
+                                    getErrorMsg(errors.electricity, touched.electricity, t)
+                                }
                             />
                         </Grid>
                         <Grid
@@ -136,11 +140,12 @@ export const HousesCottagesParams: FC<RegularFormPropsType> = (props) => {
                                 t={t}
                                 name='repair'
                                 values={values}
-                                errors={errors}
-                                touched={touched}
                                 onBlur={handleBlur}
                                 items={filters.repair}
                                 handleSelect={handleSelect}
+                                errorMsg={
+                                    getErrorMsg(errors.repair, touched.repair, t)
+                                }
                             />
                         </Grid>
                         <Grid
@@ -153,11 +158,12 @@ export const HousesCottagesParams: FC<RegularFormPropsType> = (props) => {
                                 t={t}
                                 name='sewerage'
                                 values={values}
-                                errors={errors}
-                                touched={touched}
                                 onBlur={handleBlur}
                                 items={filters.sewerage}
                                 handleSelect={handleSelect}
+                                errorMsg={
+                                    getErrorMsg(errors.sewerage, touched.sewerage, t)
+                                }
                             />
                         </Grid>
                         <Grid
@@ -170,11 +176,12 @@ export const HousesCottagesParams: FC<RegularFormPropsType> = (props) => {
                                 t={t}
                                 name='bathroom'
                                 values={values}
-                                errors={errors}
-                                touched={touched}
                                 onBlur={handleBlur}
                                 items={filters.bathroom}
                                 handleSelect={handleSelect}
+                                errorMsg={
+                                    getErrorMsg(errors.bathroom, touched.bathroom, t)
+                                }
                             />
                         </Grid>
                         <Grid
@@ -187,11 +194,12 @@ export const HousesCottagesParams: FC<RegularFormPropsType> = (props) => {
                                 t={t}
                                 name='water'
                                 values={values}
-                                errors={errors}
-                                touched={touched}
                                 onBlur={handleBlur}
                                 items={filters.water}
                                 handleSelect={handleSelect}
+                                errorMsg={
+                                    getErrorMsg(errors.water, touched.water, t)
+                                }
                             />
                         </Grid>
                         <Grid
@@ -204,21 +212,22 @@ export const HousesCottagesParams: FC<RegularFormPropsType> = (props) => {
                                 t={t}
                                 name='metro'
                                 values={values}
-                                errors={errors}
-                                touched={touched}
                                 onBlur={handleBlur}
                                 items={filters.metro}
                                 handleSelect={handleSelect}
+                                errorMsg={
+                                    getErrorMsg(errors.metro, touched.metro, t)
+                                }
                             />
                         </Grid>
-                        <OptionsSection
+                        <OptionsSelect
                             t={t}
                             name='amenities'
                             values={values}
                             options={filters.amenities}
                             handleOptionCheckbox={handleOptionCheckbox}
                         />
-                        <OptionsSection
+                        <OptionsSelect
                             t={t}
                             name='infrastructure'
                             values={values}

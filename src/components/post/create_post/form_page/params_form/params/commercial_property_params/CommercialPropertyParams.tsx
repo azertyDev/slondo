@@ -3,11 +3,10 @@ import {Grid} from "@material-ui/core";
 import {WithT} from "i18next";
 import {CustomSelect} from "@src/components/post/create_post/form_page/components/custom_select/CustomSelect";
 import {FormikType} from "@root/interfaces/Formik";
-import {OptionsRow} from "@src/components/post/create_post/form_page/components/options_row/OptionsRow";
 import {CustomFormikField} from "@src/components/elements/custom_formik_field/CustomFormikField";
-import {OptionsSection} from "@src/components/post/create_post/form_page/components/options_section/OptionsSection";
-import {useStyles} from './useStyles';
+import {OptionsSelect} from "@src/components/post/create_post/form_page/components/options_select/OptionsSelect";
 import {PreviewValues} from "@src/components/post/create_post/form_page/params_form/PreviewValues";
+import {useStyles} from './useStyles';
 
 
 type CommercialPropertyPropsType = {
@@ -56,14 +55,12 @@ export const CommercialPropertyParams: FC<CommercialPropertyPropsType> = (props)
                     : <>
                         <Grid item container xs={12} alignItems='center'>
                             <Grid item container xs={4}>
-                                <OptionsRow
+                                <OptionsSelect
                                     t={t}
-                                    errors={errors}
-                                    touched={touched}
-                                    values={values}
                                     name='estate_type'
+                                    values={values}
                                     options={filters.estate_type}
-                                    handleSelect={handleSelect}
+                                    handleOptionCheckbox={handleOptionCheckbox}
                                 />
                             </Grid>
                         </Grid>
@@ -91,11 +88,13 @@ export const CommercialPropertyParams: FC<CommercialPropertyPropsType> = (props)
                         )}
                         <Grid item container xs={4}>
                             <CustomFormikField
-                                t={t}
                                 name='area'
-                                errors={errors}
-                                touched={touched}
                                 value={values.area ?? ''}
+                                errorMsg={
+                                    errors.area && touched.area
+                                        ? t(`errors:${errors.area as string}`)
+                                        : ''
+                                }
                             />
                         </Grid>
                         <Grid item container xs={4}>
@@ -118,7 +117,7 @@ export const CommercialPropertyParams: FC<CommercialPropertyPropsType> = (props)
                                 handleSelect={handleSelect}
                             />
                         </Grid>
-                        <OptionsSection
+                        <OptionsSelect
                             t={t}
                             name='amenities'
                             values={values}

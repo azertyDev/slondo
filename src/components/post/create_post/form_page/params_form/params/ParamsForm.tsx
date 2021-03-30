@@ -139,15 +139,17 @@ export const ParamsForm: FC<DefaultFormPropsType> = (props) => {
                                 {values.title}
                             </Typography>
                             : <CustomFormikField
-                                t={t}
                                 name='title'
-                                errors={errors}
-                                touched={touched}
+                                labelText={t('title')}
                                 value={values.title}
                                 onChange={handleInput}
                                 style={{width: '50%'}}
                                 placeholder={t('exampleTitle')}
-                                className={errors.title && touched.title ? 'error-border' : ''}
+                                errorMsg={
+                                    errors.title && touched.title
+                                        ? t(`errors:${errors.title}`)
+                                        : ''
+                                }
                             />}
                     </div>
                 )}

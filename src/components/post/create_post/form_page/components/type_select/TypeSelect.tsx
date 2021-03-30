@@ -1,9 +1,9 @@
 import React, {FC} from "react";
 import {ButtonComponent} from "@src/components/elements/button/Button";
-import {useStyles} from './useStyles';
 import {Typography} from "@material-ui/core";
 import {WithT} from "i18next";
 import {isRequired} from "@src/helpers";
+import {useStyles} from '../options_select/useStyles';
 
 
 type SelectOptionsPropsType = {
@@ -15,7 +15,7 @@ type SelectOptionsPropsType = {
     options: any[]
 } & WithT;
 
-export const OptionsRow: FC<SelectOptionsPropsType> = (props) => {
+export const TypeSelect: FC<SelectOptionsPropsType> = (props) => {
     const {
         t,
         name,
@@ -38,11 +38,6 @@ export const OptionsRow: FC<SelectOptionsPropsType> = (props) => {
                     {t(name)}
                     {isRequired(name) && <span className='error-text'>*&nbsp;</span>}
                 </strong>
-                {errors[name] && touched[name] && (
-                    <span className='error-text'>
-                        {t(errors[name] as string)}
-                    </span>
-                )}
             </Typography>
             <div className='options'>
                 {options.map(item =>
@@ -54,6 +49,13 @@ export const OptionsRow: FC<SelectOptionsPropsType> = (props) => {
                         {item.name}
                     </ButtonComponent>)}
             </div>
+            <Typography variant="subtitle1">
+                {errors[name] && touched[name] && (
+                    <span className='error-text'>
+                        {t(`errors:${errors[name]}`)}
+                    </span>
+                )}
+            </Typography>
         </div>
     )
 };

@@ -2,6 +2,7 @@ export const requireFields = [
     'title',
     'type',
     'price',
+    'startPrice',
     'year',
     'mileage',
     'body',
@@ -23,7 +24,7 @@ export const requireFields = [
     'general_area'
 ];
 
-export const requiredMsg = 'requireField';
+export const fieldIsRequired = 'fieldIsRequired';
 
 export const excludedKeys = [
     'id',

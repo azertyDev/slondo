@@ -1,7 +1,7 @@
 import React, {FC} from "react";
 import {WithT} from "i18next";
 import {Checkbox, Grid, Typography} from "@material-ui/core";
-import {useStyles} from './useStyles';
+import {useStyles} from '../type_select/useStyles';
 
 
 export type HandleOptionCheckboxType = (name: string, value) => void;
@@ -13,7 +13,7 @@ type OptionsSectionPropsType = {
     handleOptionCheckbox: HandleOptionCheckboxType
 } & WithT;
 
-export const OptionsSection: FC<OptionsSectionPropsType> = (props) => {
+export const OptionsSelect: FC<OptionsSectionPropsType> = (props) => {
     const {
         t,
         name,
