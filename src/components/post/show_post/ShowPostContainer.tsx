@@ -59,11 +59,18 @@ export const ShowPostContainer: FC = () => {
             category: {
                 id: null,
                 name: '',
-                mark: '',
-                sub_category: [{
+                mark: ''
+            },
+            adsable: {
+                id: null,
+                sub_category: {
                     id: null,
                     name: ''
-                }]
+                },
+                type: {
+                    id: null,
+                    name: ''
+                }
             },
             ads_type: {
                 id: null,

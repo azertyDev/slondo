@@ -1,16 +1,7 @@
 import React, {FC} from 'react';
 import {WithT} from 'i18next';
 import Link from 'next/link';
-import {
-    Typography,
-    Modal,
-    Backdrop,
-    List,
-    ListItem,
-    ListItemText,
-    TextField,
-    Snackbar
-} from '@material-ui/core';
+import {Backdrop, List, ListItem, ListItemText, Modal, Snackbar, TextField, Typography} from '@material-ui/core';
 import {ReadMore} from '@src/components/elements/read_more/readMore';
 import {LocationIcon} from '@src/components/elements/icons/LocationIcon';
 import {WarningIcon} from '@src/components/elements/icons/WarningIcon';
@@ -45,8 +36,6 @@ export const PostContent: FC<WithT & any> = (props) => {
         descHeight
     } = props
 
-    console.log(data);
-
     const [state, setState] = React.useState<PostContentTypes>({
         openSliderModal: false,
         openModal: false,
@@ -55,29 +44,21 @@ export const PostContent: FC<WithT & any> = (props) => {
         horizontal: 'right'
     })
     const {openModal, openSliderModal, openSnackbar, horizontal, vertical} = state
-
     const date = new Date(data.created_at);
-
     const formatted_date = `${date.getDate()} ${months[date.getMonth()]} ${date.getFullYear()}`
-
     const handleShowSliderModal = value => () => setState({...state, openSliderModal: value})
-
     const handleOpenModal = () => {
         setState({...state, openModal: true})
     }
-
     const handleCloseModal = () => {
         setState({...state, openModal: false})
     }
-
     const handleOpenSnackbar = (newState) => () => {
         setState({openSnackbar: true, ...newState})
     }
-
     const handleCloseSnackbar = () => {
         setState({...state, openSnackbar: false})
     }
-
     const parameterItems = Object.keys(parameters).reduce((items, key, i) => {
         if (Array.isArray(parameters[key]) && parameters[key].length !== 0) {
             const params = (
@@ -131,33 +112,39 @@ export const PostContent: FC<WithT & any> = (props) => {
         <div className={classes.root}>
             <div className="breadcrumbs">
                 <BreadcrumbsComponent>
-                    {data.category && (
-                        <Link href={`/categories/${data.category.mark}`}>
-                            <a>
-                                <Typography variant="subtitle1" noWrap>
-                                    {data.category.name}
-                                </Typography>
-                            </a>
-                        </Link>
-                    )}
-                    {data.category.sub_category.length && (
-                        <Link href={`/categories/${data.category.mark}`}>
-                            <a>
-                                <Typography variant="subtitle1" noWrap>
-                                    {data.category.sub_category[0].name}
-                                </Typography>
-                            </a>
-                        </Link>
-                    )}
-                    {parameters.type && (
-                        <Link href="#">
-                            <a>
-                                <Typography variant="subtitle1" noWrap>
-                                    {parameters.type.name}
-                                </Typography>
-                            </a>
-                        </Link>
-                    )}
+                    {
+                        data.category
+                            ? (<Link href={`/categories/${data.category.mark}`}>
+                                <a>
+                                    <Typography variant="subtitle1" noWrap>
+                                        {data.category.name}
+                                    </Typography>
+                                </a>
+                            </Link>)
+                            : null
+                    }
+                    {
+                        data.adsable?.sub_category
+                            ? (<Link href={`/categories/${data.category.mark}`}>
+                                <a>
+                                    <Typography variant="subtitle1" noWrap>
+                                        {data.adsable.sub_category.name}
+                                    </Typography>
+                                </a>
+                            </Link>)
+                            : null
+                    }
+                    {
+                        data.adsable?.type
+                            ? (<Link href="#">
+                                <a>
+                                    <Typography variant="subtitle1" noWrap>
+                                        {data.adsable.type.name}
+                                    </Typography>
+                                </a>
+                            </Link>)
+                            : null
+                    }
                 </BreadcrumbsComponent>
             </div>
             <div className="post-header">
@@ -264,7 +251,7 @@ export const PostContent: FC<WithT & any> = (props) => {
                 <div>
                     <Typography variant="subtitle1" color="initial">
                         {data.category.name}
-                        {<>&nbsp;- {data.category.sub_category[0].name}</>}
+                        {<>&nbsp;- {data.adsable.sub_category.name}</>}
                         {parameters.type && <>&nbsp;- <span>{parameters.type.name}</span></>}
                     </Typography>
                 </div>
