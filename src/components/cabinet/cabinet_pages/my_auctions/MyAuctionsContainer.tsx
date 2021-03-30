@@ -48,7 +48,7 @@ export const MyAuctionsContainer: FC = () => {
             auctionData.isFetch = true;
             setAuctionData({ ...auctionData });
 
-            const createdAuctionsData = await userAPI.getMyPosts(locale, type);
+            const createdAuctionsData = await userAPI.getMyPosts({ type, locale });
             const participatingData = await userAPI.getAuctionSubs(locale);
 
             auctionData.isFetch = true;

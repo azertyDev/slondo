@@ -8,7 +8,9 @@ import {useRouter} from 'next/router';
 import {useDispatch} from 'react-redux';
 import {TabsDataType} from '@root/interfaces/CabinetTabs';
 import {UserInfo} from '@root/interfaces/Auth';
-
+import {IconButton, List, ListItem, ListItemText, Typography} from '@material-ui/core';
+import ArrowBackIcon from '@material-ui/icons/ArrowBack';
+import {useStyles} from '@src/components/cabinet/cabinet_pages/my_posts/useStyles';
 
 export type ArchivePostData = {
     id: number;
@@ -59,24 +61,21 @@ export type ArchivePostData = {
 const ArchiveContainer: FC = () => {
     const dispatch = useDispatch();
     const { locale } = useRouter();
-    const [tabIndex, setTabIndex] = useState(0);
-    const initialState = {
+    const classes = useStyles();
+    const initialArchiveState = {
         isFetch: false,
-        posts: {
-            total: 0,
-            data: []
-        },
-        auctions: {
+        myArchive: {
             total: 0,
             data: []
         }
     };
 
-    const [archiveData, setArchiveData] = useState(initialState);
+    const [tabIndex, setTabIndex] = useState(0);
+    const [archivePostsData, setArchivePostsData] = useState(initialArchiveState);
+    const [archiveAucData, setArchiveAucData] = useState(initialArchiveState);
     const [openModal, setOpenModal] = useState(false);
+    const [modalContentIndex, setModalContentIndex] = useState(1);
     const [postId, setPostId] = useState(null);
-
-    console.log(archiveData);
 
     const handleOpenModal = (postId) => () => {
         setOpenModal(true);
@@ -85,46 +84,130 @@ const ArchiveContainer: FC = () => {
     const handleCloseModal = () => {
         setOpenModal(false);
     };
-
     const handleTabChange = (event, newValue) => {
         setTabIndex(newValue);
     };
+    const handlePrevMenu = () => {
+        const backValue = modalContentIndex === 5 ? 3 : 1;
+        setModalContentIndex(modalContentIndex - backValue);
+    };
+    const handleModalContentIndex = (index) => () => {
+        setModalContentIndex(index);
+    };
 
-    const fetchArchivePosts = async () => {
+    const fetchArchivePosts = async (type?: string) => {
         try {
-            const { posts, auctions } = archiveData;
-
-            archiveData.isFetch = true;
-            setArchiveData({ ...archiveData });
-
             if (tabIndex === 0) {
-                const postData = await userAPI.getUserArchivePosts('post', locale);
-                posts.data = postData.data;
-                posts.total = postData.total;
-                archiveData.isFetch = false;
+                setArchivePostsData({ ...archivePostsData, isFetch: true });
+                const { data, total } = await userAPI.getUserArchivePosts({ locale });
+                setArchivePostsData({ myArchive: { data, total }, isFetch: true });
             } else {
-                const auctionData = await userAPI.getUserArchivePosts('auc', locale);
-                auctions.data = auctionData.data;
-                auctions.total = auctionData.total;
-                archiveData.isFetch = false;
+                setArchiveAucData({ ...archiveAucData, isFetch: true });
+                const { data, total } = await userAPI.getUserArchivePosts({ type, locale });
+                setArchivePostsData({ myArchive: { data, total }, isFetch: true });
             }
-
-            setArchiveData({ ...archiveData });
-
         } catch (e) {
             dispatch(setErrorMsgAction(e.message));
         }
     };
 
+    const handleRestorePost = async () => {
+        try {
+            await userAPI.restoreFromArchive(postId);
+            setOpenModal(false);
+            await fetchArchivePosts();
+            await fetchArchivePosts('auc');
+        } catch (e) {
+            dispatch(setErrorMsgAction(e.message));
+        }
+    };
+
+    const getModalContent = () => {
+        switch (modalContentIndex) {
+            case 1:
+                return <>
+                    <List
+                        component="nav"
+                        aria-label="main"
+                        className={classes.settingsList}
+                        disablePadding
+                    >
+                        <ListItem
+                            button
+                            onClick={handleModalContentIndex(2)}
+                        >
+                            <ListItemText
+                                primary='Восстановить'
+                                primaryTypographyProps={{ variant: 'subtitle1' }}
+                            />
+                        </ListItem>
+                    </List>
+                </>;
+            case 2:
+                return <>
+                    <Typography className="title" variant="h6">
+                        Подтвердите восстановление
+                    </Typography>
+                    <List
+                        component="nav"
+                        aria-label="main"
+                        className={classes.settingsList}
+                        disablePadding
+                    >
+                        <ListItem
+                            button
+                            onClick={handleRestorePost}
+                        >
+                            <ListItemText
+                                primary='Да'
+                                primaryTypographyProps={{ variant: 'subtitle1' }}
+                            />
+                        </ListItem>
+                        <ListItem
+                            button
+                            onClick={handlePrevMenu}
+                        >
+                            <ListItemText
+                                primary='Нет'
+                                primaryTypographyProps={{ variant: 'subtitle1' }}
+                            />
+                        </ListItem>
+                    </List>
+                </>;
+        }
+    };
+
+    const ModalContent = () => (
+        <>
+            {modalContentIndex === 1
+                ? <Typography className="title" variant="h6">
+                    Объявление № {postId}
+                </Typography>
+                : modalContentIndex === 5
+                    ? null
+                    : <IconButton
+                        className='prev-btn'
+                        aria-label="back"
+                        size="medium"
+                        onClick={handlePrevMenu}
+                    >
+                        <ArrowBackIcon fontSize="inherit" />
+                    </IconButton>
+            }
+            {getModalContent()}
+        </>
+    );
+
     const tabsData: TabsDataType = [
         {
             id: 0,
             title: 'Объявления',
-            total: archiveData.posts.total,
+            total: archivePostsData.myArchive.total,
             component:
                 <Archive
-                    list={archiveData.posts.data}
-                    isFetch={archiveData.isFetch}
+                    list={archivePostsData.myArchive.data}
+                    isFetch={archivePostsData.isFetch}
+                    ModalContent={ModalContent}
                     handleModalOpen={handleOpenModal}
                     handleModalClose={handleCloseModal}
                     openModal={openModal}
@@ -133,11 +216,12 @@ const ArchiveContainer: FC = () => {
         {
             id: 1,
             title: 'Аукционы',
-            total: archiveData.auctions.total,
+            total: archiveAucData.myArchive.total,
             component:
                 <Archive
-                    list={archiveData.auctions.data}
-                    isFetch={archiveData.isFetch}
+                    list={archiveAucData.myArchive.data}
+                    isFetch={archiveAucData.isFetch}
+                    ModalContent={ModalContent}
                     handleModalOpen={handleOpenModal}
                     handleModalClose={handleCloseModal}
                     openModal={openModal}
@@ -147,6 +231,7 @@ const ArchiveContainer: FC = () => {
 
     useEffect(() => {
         fetchArchivePosts();
+        fetchArchivePosts('auc');
     }, []);
 
     const title = 'Архив';

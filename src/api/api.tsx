@@ -98,22 +98,15 @@ export const userAPI = {
                 throw err;
             });
     },
-    getMyPosts: (lang: string, type: string): Promise<any> => {
-        return instance.get(`regular/user/posts?type=${type}&lang=${lang}`, setTokenToHeader())
+    getMyPosts: ({ type = 'post', onlySecure = 0, locale = 'ru' }: { type?: string, onlySecure?: number, locale: string }): Promise<any> => {
+        return instance.get(`regular/user/posts?type=${type}&lang=${locale}&secure=${onlySecure}`, setTokenToHeader())
             .then(res => res.data)
             .catch(err => {
                 throw err;
             });
     },
-    getAuctionSubs: (lang: string) => {
-        return instance.get(`regular/user/auctions/participating?lang=${lang}`, setTokenToHeader())
-            .then(res => res.data)
-            .catch(err => {
-                throw err;
-            });
-    },
-    getSecurePosts: (lang: string, lot: string): Promise<any> => {
-        return instance.get(`regular/user/posts/secure?type=${lot}&lang=${lang}`, setTokenToHeader())
+    getAuctionSubs: (locale = 'ru') => {
+        return instance.get(`regular/user/auctions/participating?lang=${locale}`, setTokenToHeader())
             .then(res => res.data)
             .catch(err => {
                 throw err;
@@ -240,8 +233,8 @@ export const userAPI = {
                 throw err;
             });
     },
-    getUserArchivePosts: (type: string, lang: string): Promise<any> => {
-        return instance.get(`regular/user/archivePosts?itemsPerPage=25&page=1&type=${type}&lang=${lang}`, setTokenToHeader())
+    getUserArchivePosts: ({ type = 'post', locale = 'ru' }: { type?: string, locale: string }): Promise<any> => {
+        return instance.get(`regular/user/archivePosts?itemsPerPage=25&page=1&type=${type}&lang=${locale}`, setTokenToHeader())
             .then(res => res.data)
             .catch(err => {
                 throw err;
@@ -261,4 +254,11 @@ export const userAPI = {
                 throw err;
             });
     },
+    restoreFromArchive: (ads_id: number): Promise<any> => {
+        return instance.post(`regular/user/post/restore/${ads_id}`, {}, setTokenToHeader())
+            .then(res => res.data)
+            .catch(err => {
+                throw err;
+            });
+    }
 };

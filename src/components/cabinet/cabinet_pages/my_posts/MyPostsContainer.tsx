@@ -19,35 +19,39 @@ import {
     Typography
 } from '@material-ui/core';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
-import {useStyles} from './useStyles';
 import {useTranslation} from 'next-i18next';
 import {ButtonComponent} from '@src/components/elements/button/Button';
+import {useStyles} from './useStyles';
 
-const deactivateReasons = {
-    soldOnSlondoId: 1,
-    archiveId: 2
-};
+type userStateType = {
+    isFetch: boolean,
+    user: {
+        id: number,
+        name: string,
+        surname: string,
+        phone: string,
+        avatar: string
+    }
+}
 
 const MyPostsContainer: FC = () => {
     const dispatch = useDispatch();
     const { locale } = useRouter();
     const { t } = useTranslation('cabinet');
-    const { soldOnSlondoId, archiveId } = deactivateReasons;
     const classes = useStyles();
 
-    const initialCardState = {
+    const deactivateReasons = {
+        soldOnSlondoId: 1,
+        archiveId: 2
+    };
+    const initialPostsState = {
         isFetch: false,
         myPosts: {
             total: 0,
             data: []
-        },
-        securePosts: {
-            total: 0,
-            data: []
         }
     };
-
-    const initialUserState = {
+    const initialUserState: userStateType = {
         isFetch: false,
         user: {
             id: null,
@@ -57,10 +61,12 @@ const MyPostsContainer: FC = () => {
             avatar: null
         }
     };
+    const { soldOnSlondoId, archiveId } = deactivateReasons;
 
     const [userData, setUserData] = useState(initialUserState);
     const [userPhone, setUserPhone] = useState('998');
-    const [postData, setPostData] = useState(initialCardState);
+    const [postData, setPostData] = useState(initialPostsState);
+    const [securePosts, setSecurePosts] = useState(initialPostsState);
     const [tabIndex, setTabIndex] = useState(0);
     const [openModal, setOpenModal] = useState(false);
     const [modalContentIndex, setModalContentIndex] = useState(1);
@@ -92,14 +98,22 @@ const MyPostsContainer: FC = () => {
         setToArchive(!toArchive);
     };
     const handleDeactivate = async () => {
-        await userAPI.deactivateById(postId, reasonId, toArchive);
-        setOpenModal(false);
-    };
-
-    const handleTextField = async (e) => {
         try {
-            const phone = e.target.value;
-            setUserPhone(phone);
+            await userAPI.deactivateById(postId, reasonId, toArchive);
+            setOpenModal(false);
+            if (tabIndex === 0) {
+                await fetchPostData('post');
+            } else {
+                await fetchPostData();
+            }
+        } catch (e) {
+            dispatch(setErrorMsgAction(e.message));
+        }
+    };
+    const handleTextField = async ({ target }) => {
+        const phone = target.value;
+        setUserPhone(phone);
+        try {
             if (phone.length === 12) {
                 setUserData({ ...userData, isFetch: true });
                 const user = await userAPI.getUserByPhoneNumber(phone);
@@ -110,28 +124,18 @@ const MyPostsContainer: FC = () => {
         }
     };
 
-    const fetchPostData = async (type) => {
+    const fetchPostData = async (type = null) => {
         try {
-            const { myPosts, securePosts } = postData;
             const isCreatedPost = type === 'post';
-
-            postData.isFetch = true;
-            setPostData({ ...postData });
-
-            const myPostsData = await userAPI.getMyPosts(locale, type);
-            const securePostsData = await userAPI.getSecurePosts(locale, type);
-
-            postData.isFetch = true;
-
             if (isCreatedPost) {
-                myPosts.data = myPostsData.data;
-                myPosts.total = myPostsData.total;
+                setPostData({ ...postData, isFetch: true });
+                const { data, total } = await userAPI.getMyPosts({ locale });
+                setPostData({ myPosts: { data, total }, isFetch: false });
             } else {
-                securePosts.data = securePostsData.data;
-                securePosts.total = securePostsData.total;
+                setSecurePosts({ ...postData, isFetch: true });
+                const { data, total } = await userAPI.getMyPosts({ onlySecure: 1, locale });
+                setSecurePosts({ myPosts: { data, total }, isFetch: false });
             }
-
-            setPostData({ ...postData });
         } catch (e) {
             dispatch(setErrorMsgAction(e.message));
         }
@@ -213,14 +217,6 @@ const MyPostsContainer: FC = () => {
                         mt={3}
                         width='100%'
                     >
-                        {/*<TextField*/}
-                        {/*    label="Укажите номер покупателя"*/}
-                        {/*    id="outlined-basic"*/}
-                        {/*    variant="outlined"*/}
-                        {/*    value={userPhone}*/}
-                        {/*    onChange={handleTextField}*/}
-                        {/*    helperText={errorMsg !== '' ? errorMsg : '(Нажмите отправить если не знаете номер)'}*/}
-                        {/*/>*/}
                         <TextField
                             id="outlined-helperText"
                             label="Номер покупателя"
@@ -234,8 +230,8 @@ const MyPostsContainer: FC = () => {
                                 userData.isFetch
                                     ? <Typography>loading...</Typography>
                                     : <>
-                                        <Avatar src={userData.user.avatar === '' ? '' : userData.user.avatar} />
-                                        <Typography variant='subtitle2'>
+                                        <Avatar src={userData.user.avatar === null ? '' : userData.user.avatar} />
+                                        <Typography variant='subtitle2' noWrap>
                                             {userData.user.name}
                                             {userData.user.surname}
                                         </Typography>
@@ -273,7 +269,7 @@ const MyPostsContainer: FC = () => {
                         className={classes.submitBtn}
                     >
                         <ButtonComponent onClick={handleDeactivate}>
-                            Отправить
+                            <Typography variant='subtitle1'>Отправить</Typography>
                         </ButtonComponent>
                     </Box>
                 </>;
@@ -283,8 +279,8 @@ const MyPostsContainer: FC = () => {
                         Вы уверены что хотите <br />добавить объявление в архив?
                     </Typography>
                     <Box display='flex' flexDirection='column'>
-                        <ButtonComponent color="primary" onClick={handleDeactivate}>Да</ButtonComponent>
-                        <ButtonComponent color="primary" onClick={handlePrevMenu}>Вернуться</ButtonComponent>
+                        <ButtonComponent onClick={handleDeactivate}>Да</ButtonComponent>
+                        <ButtonComponent onClick={handlePrevMenu}>Вернуться</ButtonComponent>
                     </Box>
                 </>;
         }
@@ -296,14 +292,17 @@ const MyPostsContainer: FC = () => {
                 ? <Typography className="title" variant="h6">
                     Объявление № {postId}
                 </Typography>
-                : <IconButton
-                    className='prev-btn'
-                    aria-label="back"
-                    size="medium"
-                    onClick={handlePrevMenu}
-                >
-                    <ArrowBackIcon fontSize="inherit" />
-                </IconButton>}
+                : modalContentIndex === 5
+                    ? null
+                    : <IconButton
+                        className='prev-btn'
+                        aria-label="back"
+                        size="medium"
+                        onClick={handlePrevMenu}
+                    >
+                        <ArrowBackIcon fontSize="inherit" />
+                    </IconButton>
+            }
             {getModalContent()}
         </>
     );
@@ -326,11 +325,11 @@ const MyPostsContainer: FC = () => {
         {
             id: 1,
             title: 'Безопасная покупка',
-            total: postData.securePosts.total,
+            total: securePosts.myPosts.total,
             component:
                 <MyPosts
                     isFetch={postData.isFetch}
-                    list={postData.securePosts.data}
+                    list={securePosts.myPosts.data}
                     ModalContent={ModalContent}
                     handleModalOpen={handleOpenModal}
                     handleModalClose={handleCloseModal}
@@ -341,9 +340,10 @@ const MyPostsContainer: FC = () => {
 
     useEffect(() => {
         fetchPostData('post');
+        fetchPostData();
     }, []);
 
-    const title = 'Мои объявления';
+    const title = t('myPosts');
     return (
         <TabsContent
             tabIndex={tabIndex}

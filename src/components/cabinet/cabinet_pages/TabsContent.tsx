@@ -2,10 +2,10 @@ import React, {FC} from 'react';
 import {Tab, Tabs, Typography} from '@material-ui/core';
 import {CustomTabPanel} from '@src/components/elements/custom_tab_panel/CustomTabPanel';
 import {CabinetMenuPropsType, CabinetWrapper} from '@src/components/cabinet/CabinetWrapper';
-import {TabsDataType} from '@src/components/cabinet/cabinet_pages/archive/ArchiveContainer';
 import {MyPurchases} from '@src/components/cabinet/cabinet_pages/my_purchases/MyPurchases';
 import {useTranslation} from 'react-i18next';
 import {useStyles} from './useStyles';
+import {TabsDataType} from '@root/interfaces/CabinetTabs';
 
 type TabsContentPropsType = {
     tabIndex: number,
