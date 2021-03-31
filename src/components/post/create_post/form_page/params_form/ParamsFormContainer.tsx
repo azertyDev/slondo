@@ -42,9 +42,11 @@ export const ParamsFormContainer: FC<RegularFormPropsType> = (props) => {
             post[mark] = {
                 ...post[mark],
                 ...preparedValues,
-                [`${mark}_id`]: subCategory.id,
-                type_id: type?.id ?? preparedValues.type_id ?? ''
+                [`${mark}_id`]: subCategory.id
             };
+            if (type) {
+                post[mark].type_id = type.id ?? preparedValues.type_id;
+            }
             setPost({...post});
         }
         handleNextFormOpen();

@@ -9,7 +9,7 @@ import {userAPI} from "@src/api/api";
 
 type ConfirmAuthPropsType = {
     phone: string,
-    timerSeconds: number,
+    timer: number,
     deactivateTimer: () => void,
     setCode: Dispatch<SetStateAction<string>>,
     setErrorMsg: Dispatch<SetStateAction<string>>,
@@ -19,7 +19,7 @@ type ConfirmAuthPropsType = {
 export const CodeConfirmForm: FC<ConfirmAuthPropsType> = (props) => {
     const {
         t,
-        timerSeconds,
+        timer,
         phone,
         setCode,
         setErrorMsg,
@@ -74,7 +74,7 @@ export const CodeConfirmForm: FC<ConfirmAuthPropsType> = (props) => {
                                 : ''
                         }
                     />
-                    <span>{timerSeconds}</span>
+                    <span>{timer}</span>
                 </div>
                 <div className='auth-btns'>
                     <ButtonComponent type="submit" disabled={values.isFetch}>

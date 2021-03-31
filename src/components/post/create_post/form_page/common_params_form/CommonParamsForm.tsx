@@ -12,7 +12,7 @@ import {FormikProvider, useFormik} from "formik";
 import {CustomAccordion} from "@src/components/post/create_post/form_page/components/accordion/CustomAccordion";
 import {numericFields} from "@src/common_data/form_fields";
 import {auctionParamsSchema, defaultParamsSchema} from "@root/validation_schemas/createPostSchemas";
-import {clearWhiteSpaces, numberPrettier} from "@src/helpers";
+import {clearWhiteSpaces, getErrorMsg, numberPrettier} from "@src/helpers";
 import {RootState} from "@src/redux/rootReducer";
 import {PostType} from "@root/interfaces/Post";
 import {WEEK_DAYS} from "@src/common_data/common";
@@ -137,6 +137,10 @@ export const CommonParamsForm: FC<DefaultParamsPropsType> = (props) => {
             otherData.week_days = week_days.map(({id}) => ({id}));
         }
 
+        !otherData.safe_deal && delete otherData.safe_deal;
+        !otherData.delivery && delete otherData.delivery;
+        !otherData.exchange && delete otherData.exchange;
+
         setPost({
             ...post,
             ...address,
@@ -164,9 +168,9 @@ export const CommonParamsForm: FC<DefaultParamsPropsType> = (props) => {
 
     const {auction, location, avalTime} = values;
 
-    const locationText = location
-        ? `${location.region.name}${location.city ? `, ${location.city.name}` : ''}${location.district ? `, ${location.district.name}` : ''}`
-        : '';
+    const locationText = !location
+        ? ''
+        : `${location.region.name}${location.city ? `, ${location.city.name}` : ''}${location.district ? `, ${location.district.name}` : ''}`;
 
     const handleSelect = (key, value) => {
         if (key === 'duration') {
@@ -183,13 +187,16 @@ export const CommonParamsForm: FC<DefaultParamsPropsType> = (props) => {
             if (numberRegEx.test(value)) {
                 const number = numberPrettier(value);
                 if (name === 'reserve_price') {
-                    setValues({...values, auction: {...auction, [name]: number}});
+                    setValues({
+                        ...values,
+                        auction: {...auction, [name]: number}
+                    });
                 } else if (name === 'price_by_now') {
                     setValues({
                         ...values,
                         auction: {
                             ...auction,
-                            price_by_now: {
+                            [name]: {
                                 ...auction.price_by_now,
                                 value: number
                             }
@@ -256,7 +263,6 @@ export const CommonParamsForm: FC<DefaultParamsPropsType> = (props) => {
         }
     };
 
-    console.log(errors)
     const classes = useStyles();
     return (
         <FormikProvider value={formik}>
@@ -294,19 +300,20 @@ export const CommonParamsForm: FC<DefaultParamsPropsType> = (props) => {
                                             handleCheckboxChange={handleCheckboxChange}
                                         />
                                     </div>
-                                    : <div className='price-wrapper'>
-                                        <CustomFormikField
-                                            name='price'
-                                            value={values.price}
-                                            onChange={handleInput}
-                                            style={{width: '270px'}}
-                                            errorMsg={
-                                                errors.price && touched.price
-                                                    ? t(`errors:${errors.price}`)
-                                                    : ''
-                                            }
-                                        />
-                                        <div className='currency'>
+                                    : <Grid container alignItems='flex-end'>
+                                        <Grid item xs={3}>
+                                            <CustomFormikField
+                                                name='price'
+                                                labelText={t('price')}
+                                                value={values.price}
+                                                onChange={handleInput}
+                                                style={{width: '270px'}}
+                                                errorMsg={
+                                                    getErrorMsg(errors.price, touched.price, t)
+                                                }
+                                            />
+                                        </Grid>
+                                        <Grid item xs={1}>
                                             <CustomSelect
                                                 t={t}
                                                 name='currency'
@@ -315,8 +322,8 @@ export const CommonParamsForm: FC<DefaultParamsPropsType> = (props) => {
                                                 items={postType.currency}
                                                 handleSelect={handleSelect}
                                             />
-                                        </div>
-                                    </div>}
+                                        </Grid>
+                                    </Grid>}
                                 <div>
                                     <PaymentDelivery
                                         t={t}
@@ -328,9 +335,7 @@ export const CommonParamsForm: FC<DefaultParamsPropsType> = (props) => {
                                     <LocationAutocomplete
                                         name='location'
                                         errorMsg={
-                                            errors.location && touched.location
-                                                ? t(`errors:${errors.location}`)
-                                                : ''
+                                            getErrorMsg(errors.location, touched.location, t)
                                         }
                                         value={values.location}
                                         locations={locations.data}
@@ -345,9 +350,7 @@ export const CommonParamsForm: FC<DefaultParamsPropsType> = (props) => {
                                         handleBlur={handleBlur}
                                         description={values.description}
                                         errorMsg={
-                                            errors.description && touched.description
-                                                ? t(`errors:${errors.description}`)
-                                                : ''
+                                            getErrorMsg(errors.description, touched.description, t)
                                         }
                                     />
                                 </div>

@@ -23,8 +23,8 @@ export const Header: FC = () => {
 
     const isAuth = userFromStore.isAuth || !!userFromCookie;
 
-    const handleModal = value => () => {
-        dispatch(setIsAuthModalOpen(value));
+    const handleOpenModal = () => {
+        dispatch(setIsAuthModalOpen(true));
     };
 
     useEffect(() => {
@@ -44,20 +44,19 @@ export const Header: FC = () => {
                 <Container maxWidth="xl">
                     <Top
                         t={t}
-                        handleOpenModal={handleModal(true)}
+                        handleOpenModal={handleOpenModal}
                     />
                     <div>
                         <Bottom
                             t={t}
                             isAuth={isAuth}
-                            handleOpenModal={handleModal(true)}
+                            handleOpenModal={handleOpenModal}
                         />
                     </div>
                 </Container>
                 <div className={classes.modalDialog}>
                     <AuthRegPage
                         isOpen={userFromStore.isAuthModalOpen}
-                        handleCloseModal={handleModal(false)}
                     />
                 </div>
             </div>

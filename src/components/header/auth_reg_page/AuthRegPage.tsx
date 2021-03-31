@@ -15,6 +15,8 @@ import {ButtonComponent} from "@src/components/elements/button/Button";
 import {CustomSlider} from "@src/components/elements/custom_slider/CustomSlider";
 import {CustomList} from "@src/components/elements/custom_list/CustomList";
 import {useStyles} from './useStyles';
+import {setIsAuthModalOpen} from "@src/redux/slices/userSlice";
+import {useDispatch} from "react-redux";
 
 
 const settings = {
@@ -47,39 +49,40 @@ const list = [
 ];
 
 type AuthRegPageType = {
-    handleCloseModal: () => void;
     isOpen: boolean
-};
-
-export type TimerType = {
-    isActive: boolean,
-    seconds: number
 };
 
 export const AuthRegPage: FC<AuthRegPageType> = (props) => {
     const {
-        isOpen,
-        handleCloseModal
+        isOpen
     } = props;
 
-    const initTimer = {
-        isActive: false,
-        seconds: 60
-    }
+    const initSeconds = 60;
+    const dispatch = useDispatch();
 
     const {t} = useTranslation(['auth_reg']);
     const [isAuthRegClicked, setIsAuthRegClicked] = useState(false);
     const [tabIndex, setTabIndex] = useState(0);
     const [errorMsg, setErrorMsg] = useState("");
     const [isRecoveryPswd, setIsRecoveryPswd] = useState(false);
-    const [timer, setTimer] = useState<TimerType>(initTimer);
-
-    const {isActive, seconds} = timer;
+    const [activeTimer, setActiveTimer] = useState(false);
+    const [timer, setTimer] = useState(initSeconds);
 
     const isSignInTab = tabIndex === 0;
 
     const tabsHandler = (_, newValue) => {
         setTabIndex(newValue);
+    };
+
+    const handleCancel = () => {
+        setTabIndex(0);
+        setActiveTimer(false);
+        setIsRecoveryPswd(false);
+    };
+
+    const handleCloseModal = () => {
+        handleCancel();
+        dispatch(setIsAuthModalOpen(false));
     };
 
     const handleForgetPass = () => {
@@ -96,31 +99,25 @@ export const AuthRegPage: FC<AuthRegPageType> = (props) => {
     };
 
     const handleActiveTimer = (value: boolean) => () => {
-        setTimer({...timer, isActive: value});
-    };
-
-    const handleCancel = () => {
-        setTabIndex(0);
-        setTimer(initTimer);
-        setIsRecoveryPswd(false);
+        setActiveTimer(value);
     };
 
     const runTimer = () => {
-        if (seconds > 0) {
-            setTimeout(() => {
-                setTimer({...timer, seconds: seconds - 1});
-            }, 1000);
-        }
-        if (seconds < 1) {
-            setTimer(initTimer);
+        if (activeTimer) {
+            if (timer > 0) {
+                setTimeout(() => {
+                    setTimer(timer - 1);
+                }, 1000);
+            }
+        } else {
+            setTimer(initSeconds);
         }
     };
 
     useEffect(() => {
-        isActive && runTimer();
-    }, [isActive, timer]);
+        runTimer();
+    }, [activeTimer, timer]);
 
-    console.log(timer)
     const classes = useStyles();
     return (
         <Modal
@@ -181,6 +178,7 @@ export const AuthRegPage: FC<AuthRegPageType> = (props) => {
                                 </div>
                                 <AuthRegContainer
                                     t={t}
+                                    activeTimer={activeTimer}
                                     timer={timer}
                                     tabIndex={tabIndex}
                                     errorMsg={errorMsg}
@@ -208,6 +206,7 @@ export const AuthRegPage: FC<AuthRegPageType> = (props) => {
                             <AuthRegContainer
                                 t={t}
                                 timer={timer}
+                                activeTimer={activeTimer}
                                 tabIndex={tabIndex}
                                 errorMsg={errorMsg}
                                 setErrorMsg={setErrorMsg}

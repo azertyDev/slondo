@@ -7,12 +7,12 @@ import {AgreementsTxt} from "@src/components/header/auth_reg_page/auth_reg_form/
 import {CustomTabPanel} from "@src/components/elements/custom_tab_panel/CustomTabPanel";
 import {RegForm} from "./reg_form/RegForm";
 import {RecoveryContainer} from "./recovery_form/RecoveryContainer";
-import {TimerType} from "@src/components/header/auth_reg_page/AuthRegPage";
 import {useStyles} from './useStyles';
 
 
 type AuthRegContainerPropsType = {
-    timer: TimerType,
+    activeTimer: boolean,
+    timer: number,
     tabIndex: number,
     errorMsg: string,
     isSignInTab: boolean,
@@ -28,6 +28,7 @@ type AuthRegContainerPropsType = {
 export const AuthRegContainer: FC<AuthRegContainerPropsType> = (props) => {
     const {
         t,
+        activeTimer,
         timer,
         tabIndex,
         errorMsg,
@@ -101,11 +102,12 @@ export const AuthRegContainer: FC<AuthRegContainerPropsType> = (props) => {
                             {isRecoveryPswd
                                 ? <RecoveryContainer
                                     t={t}
-                                    setErrorMsg={setErrorMsg}
                                     timer={timer}
-                                    handleActiveTimer={handleActiveTimer}
-                                    handleCloseModal={handleCloseModal}
+                                    activeTimer={activeTimer}
+                                    setErrorMsg={setErrorMsg}
                                     handleCancel={handleCancel}
+                                    handleCloseModal={handleCloseModal}
+                                    handleActiveTimer={handleActiveTimer}
                                 />
                                 : <div className='reg-form'>
                                     <RegForm

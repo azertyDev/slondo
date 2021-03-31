@@ -18,11 +18,6 @@ export const useStyles = makeStyles(() => ({
                 alignItems: 'center'
             }
         },
-        '& div.price-wrapper': {
-            '& div.currency': {
-                width: '220px'
-            }
-        },
         '& div.location-wrapper': {
             width: '50%',
             marginBottom: '20px'

@@ -71,9 +71,9 @@ export const AuctionParams: FC<AuctionParamsPropsType> = (props) => {
                     {isAdvanceAuction && (
                         <Grid item xs={2}>
                             <CustomFormikField
-                                name='reservePrice'
+                                name='reserve_price'
                                 labelText={t('reservePrice')}
-                                value={values.reservePrice ?? ''}
+                                value={values.reserve_price}
                                 onChange={handleInput}
                             />
                         </Grid>

@@ -50,7 +50,7 @@ export const PhoneForm: FC<ConfirmAuthPropsType> = (props) => {
         const phone = phoneFormat(values.phone);
         try {
             await setValues({...values, isFetch: true});
-            // await userAPI.getSmsCode(phone);
+            await userAPI.getSmsCode(phone);
             await setValues({...values, isFetch: false});
             setPhone(phone)
             activateTimer();

@@ -115,8 +115,8 @@ const FormPage: FC = () => {
 
     const toPublish = async () => {
         try {
-            const {photos, ...data} = post;
             const form = new FormData();
+            const {photos, ...data} = post;
 
             const postId = await userAPI.createPost(data);
 
@@ -140,7 +140,10 @@ const FormPage: FC = () => {
             setFetchedFilters();
         }
     }, []);
-
+    console.log('post', post)
+    console.log('category', category)
+    console.log('subCategory', subCategory)
+    console.log('type', type)
     const classes = useStyles();
     return (
         <MainLayout>

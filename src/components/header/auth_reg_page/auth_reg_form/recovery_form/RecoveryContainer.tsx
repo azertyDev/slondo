@@ -6,21 +6,22 @@ import {CodeConfirmForm} from "@src/components/header/auth_reg_page/auth_reg_for
 import {PhoneForm} from "@src/components/header/auth_reg_page/auth_reg_form/recovery_form/PhoneForm";
 import {useDispatch} from "react-redux";
 import {signInAction} from "@src/redux/slices/userSlice";
-import {TimerType} from "@src/components/header/auth_reg_page/AuthRegPage";
 
 
 type ConfirmAuthPropsType = {
+    timer: number,
+    activeTimer: boolean,
+    handleCancel: () => void
     handleCloseModal: () => void,
-    timer: TimerType
     handleActiveTimer: (v) => () => void,
     setErrorMsg: Dispatch<SetStateAction<string>>,
-    handleCancel: () => void
 } & WithT;
 
 export const RecoveryContainer: FC<ConfirmAuthPropsType> = (props) => {
     const {
         t,
         timer,
+        activeTimer,
         setErrorMsg,
         handleCloseModal,
         handleActiveTimer,
@@ -50,14 +51,14 @@ export const RecoveryContainer: FC<ConfirmAuthPropsType> = (props) => {
                         handleCloseModal={handleCloseModal}
                     />
                 </div>
-                : timer.isActive
+                : activeTimer
                     ? <div className='code-confirm-form'>
                         <CodeConfirmForm
                             t={t}
+                            timer={timer}
                             phone={phone}
                             setCode={setCode}
                             setErrorMsg={setErrorMsg}
-                            timerSeconds={timer.seconds}
                             setIsNewPassword={setIsNewPassword}
                             deactivateTimer={handleActiveTimer(false)}
                         />
