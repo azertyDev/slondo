@@ -2,7 +2,7 @@ import React, {FC} from 'react';
 import {WithT} from 'i18next';
 import Link from 'next/link';
 import {
-    Backdrop, Box,
+    Backdrop,
     Hidden,
     List,
     ListItem,
@@ -25,8 +25,8 @@ import {BreadcrumbsComponent} from '@src/components/elements/breadcrumbs/Breadcr
 import {numberPrettier, weekDaysHelper} from '@src/helpers';
 import {ButtonComponent} from '@src/components/elements/button/Button';
 import {NotificationIcon} from '@src/components/elements/icons';
-import {useStyles} from '../../../../../../../../Desktop/Новая папка/useStyles';
 import {months} from '@src/common_data/common';
+import {useStyles} from './useStyles';
 
 
 type PostContentTypes = {
