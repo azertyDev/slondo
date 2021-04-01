@@ -120,7 +120,6 @@ export const AuthRegPage: FC<AuthRegPageType> = (props) => {
         isActive && runTimer();
     }, [isActive, timer]);
 
-    console.log(timer)
     const classes = useStyles();
     return (
         <Modal

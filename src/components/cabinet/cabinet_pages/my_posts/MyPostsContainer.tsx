@@ -22,6 +22,8 @@ import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import {useTranslation} from 'next-i18next';
 import {ButtonComponent} from '@src/components/elements/button/Button';
 import {useStyles} from './useStyles';
+import {InitialCabinetCardState} from '@root/interfaces/Cabinet';
+import {TabsDataType} from '@root/interfaces/Cabinet';
 
 type userStateType = {
     isFetch: boolean,
@@ -44,7 +46,8 @@ const MyPostsContainer: FC = () => {
         soldOnSlondoId: 1,
         archiveId: 2
     };
-    const initialPostsState = {
+    const { soldOnSlondoId, archiveId } = deactivateReasons;
+    const initialPostsState: InitialCabinetCardState = {
         isFetch: false,
         myPosts: {
             total: 0,
@@ -61,8 +64,6 @@ const MyPostsContainer: FC = () => {
             avatar: null
         }
     };
-    const { soldOnSlondoId, archiveId } = deactivateReasons;
-
     const [userData, setUserData] = useState(initialUserState);
     const [userPhone, setUserPhone] = useState('998');
     const [postData, setPostData] = useState(initialPostsState);
@@ -123,7 +124,6 @@ const MyPostsContainer: FC = () => {
             setErrMsg(e.message);
         }
     };
-
     const fetchPostData = async (type = null) => {
         try {
             const isCreatedPost = type === 'post';
@@ -186,7 +186,7 @@ const MyPostsContainer: FC = () => {
                             onClick={handleModalContentIndex(3, soldOnSlondoId)}
                         >
                             <ListItemText
-                                primary={t('sold_slondo')}
+                                primary={t('sold_on_slondo')}
                                 primaryTypographyProps={{ variant: 'subtitle1' }}
                             />
                         </ListItem>
@@ -307,10 +307,15 @@ const MyPostsContainer: FC = () => {
         </>
     );
 
-    const tabsData = [
+    useEffect(() => {
+        fetchPostData('post');
+        fetchPostData();
+    }, []);
+
+    const tabsData: TabsDataType = [
         {
             id: 0,
-            title: 'Объявления',
+            title: t('posts'),
             total: postData.myPosts.total,
             component:
                 <MyPosts
@@ -324,7 +329,7 @@ const MyPostsContainer: FC = () => {
         },
         {
             id: 1,
-            title: 'Безопасная покупка',
+            title: t('securePosts'),
             total: securePosts.myPosts.total,
             component:
                 <MyPosts
@@ -338,12 +343,8 @@ const MyPostsContainer: FC = () => {
         }
     ];
 
-    useEffect(() => {
-        fetchPostData('post');
-        fetchPostData();
-    }, []);
-
     const title = t('myPosts');
+
     return (
         <TabsContent
             tabIndex={tabIndex}

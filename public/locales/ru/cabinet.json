@@ -19,5 +19,11 @@
     "nonModerated": "Не прошло модерацию",
     "created_at": "На Slondo с {{created_at}}",
     "cabinet": "Продал на Slondo",
-    "addToArchive": "Добавить в архив"
+    "sold_on_slondo": "Продал на SLONDO",
+    "addToArchive": "Добавить в архив",
+    "posts": "Объявления",
+    "securePosts": "Безопасная покупка",
+    "createdAuc": "Созданные",
+    "participatingAuc": "Участие",
+    "auctions": "Аукционы"
 }

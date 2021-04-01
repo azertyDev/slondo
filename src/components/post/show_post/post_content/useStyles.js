@@ -25,7 +25,7 @@ export const useStyles = makeStyles((theme) => ({
             marginBottom: '10px',
             alignItems: 'center',
             '& div:not(:last-child)': {
-                marginRight: 10,
+                marginRight: 10
             },
             '& > div.post-type': {
                 '& > h6.MuiTypography-h6': {
