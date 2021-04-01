@@ -25,8 +25,8 @@ import {BreadcrumbsComponent} from '@src/components/elements/breadcrumbs/Breadcr
 import {numberPrettier, weekDaysHelper} from '@src/helpers';
 import {ButtonComponent} from '@src/components/elements/button/Button';
 import {NotificationIcon} from '@src/components/elements/icons';
-import {useStyles} from '../../../../../../../../Desktop/Новая папка/useStyles';
 import {months} from '@src/common_data/common';
+import {useStyles} from './useStyles';
 
 
 type PostContentTypes = {
@@ -124,39 +124,33 @@ export const PostContent: FC<WithT & any> = (props) => {
             <Hidden mdDown>
                 <div className="breadcrumbs">
                     <BreadcrumbsComponent>
-                        {
-                            data.category
-                                ? (<Link href={`/categories/${data.category.mark}`}>
-                                    <a>
-                                        <Typography variant="subtitle1" noWrap>
-                                            {data.category.name}
-                                        </Typography>
-                                    </a>
-                                </Link>)
-                                : null
-                        }
-                        {
-                            data.adsable?.sub_category
-                                ? (<Link href={`/categories/${data.category.mark}`}>
-                                    <a>
-                                        <Typography variant="subtitle1" noWrap>
-                                            {data.adsable.sub_category.name}
-                                        </Typography>
-                                    </a>
-                                </Link>)
-                                : null
-                        }
-                        {
-                            data.adsable?.type
-                                ? (<Link href="#">
-                                    <a>
-                                        <Typography variant="subtitle1" noWrap>
-                                            {data.adsable.type.name}
-                                        </Typography>
-                                    </a>
-                                </Link>)
-                                : null
-                        }
+                        {data.category
+                            ? (<Link href={`/categories/${data.category.mark}`}>
+                                <a>
+                                    <Typography variant="subtitle1" noWrap>
+                                        {data.category.name}
+                                    </Typography>
+                                </a>
+                            </Link>)
+                            : null}
+                        {data.adsable?.sub_category
+                            ? (<Link href={`/categories/${data.category.mark}`}>
+                                <a>
+                                    <Typography variant="subtitle1" noWrap>
+                                        {data.adsable.sub_category.name}
+                                    </Typography>
+                                </a>
+                            </Link>)
+                            : null}
+                        {data.adsable?.type
+                            ? (<Link href="#">
+                                <a>
+                                    <Typography variant="subtitle1" noWrap>
+                                        {data.adsable.type.name}
+                                    </Typography>
+                                </a>
+                            </Link>)
+                            : null}
                     </BreadcrumbsComponent>
                 </div>
             </Hidden>
