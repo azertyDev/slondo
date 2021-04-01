@@ -189,24 +189,22 @@ export const PostContent: FC<WithT & any> = (props) => {
             />
             <Hidden lgUp>
                 <div className="post-header">
-                    <div className="type-condition">
-                        <div className='post-type'>
-                            <Typography
-                                variant="h6"
-                                className={data.ads_type.mark}
-                            >
-                                {t(`common:${data.ads_type.mark}`)}
-                            </Typography>
-                        </div>
-                        {!data.condition.name && (
-                            <div className="condition">
-                                <Typography variant="h6">Б/У</Typography>
-                            </div>
-                        )}
+                    <div className='post-type'>
+                        <Typography
+                            variant="h6"
+                            className={data.ads_type.mark}
+                        >
+                            {t(`common:${data.ads_type.mark}`)}
+                        </Typography>
                     </div>
                     <div>
                         <Typography variant='h6' className="price">
                             {data.price + ' ' + data.currency.name}
+                            {!data.condition.name && (
+                                <div className="condition">
+                                    <Typography variant="h6">Б/У</Typography>
+                                </div>
+                            )}
                         </Typography>
                         <Typography variant="h2" className="title" noWrap>
                             {data.title}
@@ -223,15 +221,15 @@ export const PostContent: FC<WithT & any> = (props) => {
                 </div>
             </Hidden>
             <div className="post-info">
-                <Typography variant="subtitle1">
-                    <span>Объявление №:</span> {data.id}
-                </Typography>
-                <Typography variant="subtitle1">
-                    Опубликовано: {formatted_date}
-                </Typography>
-                <Typography variant="subtitle1">
-                    Просмотров: {data.number_of_views}
-                </Typography>
+                    <Typography variant="subtitle1">
+                        <span>Объявление №:</span> {data.id}
+                    </Typography>
+                    <Typography variant="subtitle1">
+                        Опубликовано: {formatted_date}
+                    </Typography>
+                    <Typography variant="subtitle1">
+                        Просмотров: {data.number_of_views}
+                    </Typography>
                 <Typography variant="subtitle1" onClick={handleOpenModal}>
                     Пожаловаться <WarningIcon/>
                 </Typography>

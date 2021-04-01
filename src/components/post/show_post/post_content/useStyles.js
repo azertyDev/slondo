@@ -20,20 +20,30 @@ export const useStyles = makeStyles((theme) => ({
                 }
             },
         },
-        '& div.post-header': {
+        '& .post-header': {
             display: 'flex',
             marginBottom: '10px',
-            alignItems: 'center',
-            '& div:not(:last-child)': {
-                marginRight: 10
+            [theme.breakpoints.up('lg')]: {
+                alignItems: 'center',
             },
-            '& > div.post-type': {
-                '& > h6.MuiTypography-h6': {
+            [theme.breakpoints.down('md')]: {
+                flexDirection: 'column'
+            },
+            '& div.post-type': {
+                '& .MuiTypography-h6': {
                     padding: '0px 20px',
                     lineHeight: '30px',
                     borderRadius: '5px',
                     fontWeight: '600',
                     color: '#fff',
+                    [theme.breakpoints.down('md')]: {
+                        width: "100%",
+                        textAlign: 'center',
+                        marginBottom: '14px',
+                        fontWeight: '400',
+                        borderRadius: '0px 0px 5px 5px',
+                        fontSize: '0.75rem'
+                    },
                     '&.post': {
                         background: 'rgba(136, 202, 236, 0.65)',
                     },
@@ -45,9 +55,21 @@ export const useStyles = makeStyles((theme) => ({
                     },
                 },
             },
-            '& > div.title': {
+
+            '& .price': {
+                [theme.breakpoints.down('md')]: {
+                    fontWeight: '700',
+                    display: 'flex',
+                    justifyContent: 'space-between'
+                }
+            },
+            '& .title': {
+                [theme.breakpoints.down('md')]: {
+                    width: 'auto'
+                },
                 flex: 1,
                 width: '500px',
+                marginLeft: '15px',
                 '& > h2.MuiTypography-h2': {
                     fontSize: '20px',
                     fontWeight: '600',
@@ -78,16 +100,25 @@ export const useStyles = makeStyles((theme) => ({
                     },
                 },
             },
-            '& > div.condition': {
+            '& .condition': {
                 borderRadius: '50px',
                 background: '#90BE27',
                 textAlign: 'end',
                 padding: '6px 20px',
+                [theme.breakpoints.down('md')]: {
+                    background: '#2F80ED',
+                    fontSize: '0.75rem',
+                    padding: '3px 12.5px',
+                    textAlign: 'center'
+                },
                 '& > h6.MuiTypography-h6': {
                     fontSize: '1.125rem',
                     fontWeight: '600',
                     color: '#fff',
                     lineHeight: 1,
+                    [theme.breakpoints.down('md')]: {
+                        fontSize: '0.75rem',
+                    },
                 },
             },
         },
@@ -121,6 +152,7 @@ export const useStyles = makeStyles((theme) => ({
         '& div.post-bonus': {
             display: 'flex',
             marginBottom: '20px',
+            flexWrap: 'wrap',
             '& span': {
                 display: 'flex',
                 alignItems: 'center',
@@ -205,7 +237,6 @@ export const useStyles = makeStyles((theme) => ({
                 flexDirection: 'column',
                 justifyContent: 'space-between',
                 '& > div': {
-                    '& > h6.MuiTypography-subtitle1': {},
                     '& a': {
                         display: 'flex',
                         alignItems: 'center',
@@ -245,14 +276,7 @@ export const useStyles = makeStyles((theme) => ({
             },
         },
         '& div.post-parameters': {
-            '& h6.key': {
-                width: '20%',
-                fontSize: '1.125rem',
-                color: '#838383',
-            },
-            '& h6.value': {
-                fontSize: '1.125rem',
-            },
+
             '& p.MuiTypography-button': {
                 marginBottom: '30px',
             },
@@ -271,6 +295,9 @@ export const useStyles = makeStyles((theme) => ({
             },
             '& > ul': {
                 margin: 0,
+                [theme.breakpoints.down('md')]: {
+                    padding: 0
+                },
                 '& > li': {
                     listStyle: 'none',
                     display: 'flex',
@@ -280,6 +307,21 @@ export const useStyles = makeStyles((theme) => ({
                     '&:last-child': {
                         margin: 0,
                     },
+                    '& h6': {
+                        [theme.breakpoints.down('sm')]: {
+                            width: '50%'
+                        },
+                        '&.key': {
+                            [theme.breakpoints.up('md')]: {
+                                width: '20%'
+                            },
+                            fontSize: '1.125rem',
+                            color: '#838383',
+                        },
+                        '&.value': {
+                            fontSize: '1.125rem',
+                        },
+                    }
                 },
             },
             '& > div': {
