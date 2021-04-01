@@ -1,7 +1,17 @@
 import React, {FC} from 'react';
 import {WithT} from 'i18next';
 import Link from 'next/link';
-import {Backdrop, List, ListItem, ListItemText, Modal, Snackbar, TextField, Typography} from '@material-ui/core';
+import {
+    Backdrop, Box,
+    Hidden,
+    List,
+    ListItem,
+    ListItemText,
+    Modal,
+    Snackbar,
+    TextField,
+    Typography
+} from '@material-ui/core';
 import {ReadMore} from '@src/components/elements/read_more/readMore';
 import {LocationIcon} from '@src/components/elements/icons/LocationIcon';
 import {WarningIcon} from '@src/components/elements/icons/WarningIcon';
@@ -12,10 +22,10 @@ import {DeliveryIcon} from '@src/components/elements/icons/DeliveryIcon';
 import {SyncSliders} from './sync_sliders/SyncSliders';
 import {ModalSyncSliders} from './modal_sync_sliders/ModalSyncSliders';
 import {BreadcrumbsComponent} from '@src/components/elements/breadcrumbs/Breadcrumbs';
-import {numberPrettier, weekDaysHelper} from '@root/src/helpers';
+import {numberPrettier, weekDaysHelper} from '@src/helpers';
 import {ButtonComponent} from '@src/components/elements/button/Button';
 import {NotificationIcon} from '@src/components/elements/icons';
-import {useStyles} from './useStyles';
+import {useStyles} from '../../../../../../../../Desktop/Новая папка/useStyles';
 import {months} from '@src/common_data/common';
 
 
@@ -35,6 +45,7 @@ export const PostContent: FC<WithT & any> = (props) => {
         parameters,
         descHeight
     } = props
+
 
     const [state, setState] = React.useState<PostContentTypes>({
         openSliderModal: false,
@@ -110,74 +121,113 @@ export const PostContent: FC<WithT & any> = (props) => {
     const classes = useStyles()
     return (
         <div className={classes.root}>
-            <div className="breadcrumbs">
-                <BreadcrumbsComponent>
-                    {
-                        data.category
-                            ? (<Link href={`/categories/${data.category.mark}`}>
-                                <a>
-                                    <Typography variant="subtitle1" noWrap>
-                                        {data.category.name}
-                                    </Typography>
-                                </a>
-                            </Link>)
-                            : null
-                    }
-                    {
-                        data.adsable?.sub_category
-                            ? (<Link href={`/categories/${data.category.mark}`}>
-                                <a>
-                                    <Typography variant="subtitle1" noWrap>
-                                        {data.adsable.sub_category.name}
-                                    </Typography>
-                                </a>
-                            </Link>)
-                            : null
-                    }
-                    {
-                        data.adsable?.type
-                            ? (<Link href="#">
-                                <a>
-                                    <Typography variant="subtitle1" noWrap>
-                                        {data.adsable.type.name}
-                                    </Typography>
-                                </a>
-                            </Link>)
-                            : null
-                    }
-                </BreadcrumbsComponent>
-            </div>
-            <div className="post-header">
-                <div className='post-type'>
-                    <Typography
-                        variant="h6"
-                        className={data.ads_type.mark}
-                    >
-                        {t(`common:${data.ads_type.mark}`)}
-                    </Typography>
+            <Hidden mdDown>
+                <div className="breadcrumbs">
+                    <BreadcrumbsComponent>
+                        {
+                            data.category
+                                ? (<Link href={`/categories/${data.category.mark}`}>
+                                    <a>
+                                        <Typography variant="subtitle1" noWrap>
+                                            {data.category.name}
+                                        </Typography>
+                                    </a>
+                                </Link>)
+                                : null
+                        }
+                        {
+                            data.adsable?.sub_category
+                                ? (<Link href={`/categories/${data.category.mark}`}>
+                                    <a>
+                                        <Typography variant="subtitle1" noWrap>
+                                            {data.adsable.sub_category.name}
+                                        </Typography>
+                                    </a>
+                                </Link>)
+                                : null
+                        }
+                        {
+                            data.adsable?.type
+                                ? (<Link href="#">
+                                    <a>
+                                        <Typography variant="subtitle1" noWrap>
+                                            {data.adsable.type.name}
+                                        </Typography>
+                                    </a>
+                                </Link>)
+                                : null
+                        }
+                    </BreadcrumbsComponent>
                 </div>
-                <div className="title">
-                    <Typography variant="h2" noWrap>
-                        {data.title}
-                    </Typography>
-                </div>
-                <div>
-                    <ButtonComponent onClick={handleOpenSnackbar({vertical, horizontal})}>
-                        <NotificationIcon/>
-                        Следить
-                    </ButtonComponent>
-                </div>
-                {!data.condition.name && (
-                    <div className="condition">
-                        <Typography variant="h6">Б/У</Typography>
+            </Hidden>
+            <Hidden mdDown>
+                <div className="post-header">
+                    <div className='post-type'>
+                        <Typography
+                            variant="h6"
+                            className={data.ads_type.mark}
+                        >
+                            {t(`common:${data.ads_type.mark}`)}
+                        </Typography>
                     </div>
-                )}
-            </div>
+                    <div className="title">
+                        <Typography variant="h2" noWrap>
+                            {data.title}
+                        </Typography>
+                    </div>
+                    <div>
+                        <ButtonComponent onClick={handleOpenSnackbar({vertical, horizontal})}>
+                            <NotificationIcon/>
+                            Следить
+                        </ButtonComponent>
+                    </div>
+                    {!data.condition.name && (
+                        <div className="condition">
+                            <Typography variant="h6">Б/У</Typography>
+                        </div>
+                    )}
+                </div>
+            </Hidden>
             <SyncSliders
                 slidersRefs={slidersRefs}
                 imgs={data.images}
                 handleOpenModal={handleShowSliderModal(true)}
             />
+            <Hidden lgUp>
+                <div className="post-header">
+                    <div className="type-condition">
+                        <div className='post-type'>
+                            <Typography
+                                variant="h6"
+                                className={data.ads_type.mark}
+                            >
+                                {t(`common:${data.ads_type.mark}`)}
+                            </Typography>
+                        </div>
+                        {!data.condition.name && (
+                            <div className="condition">
+                                <Typography variant="h6">Б/У</Typography>
+                            </div>
+                        )}
+                    </div>
+                    <div>
+                        <Typography variant='h6' className="price">
+                            {data.price + ' ' + data.currency.name}
+                        </Typography>
+                        <Typography variant="h2" className="title" noWrap>
+                            {data.title}
+                        </Typography>
+                    </div>
+                    {data.ads_type.mark !== 'post' && (
+                        <div>
+                            <ButtonComponent onClick={handleOpenSnackbar({vertical, horizontal})}>
+                                <NotificationIcon/>
+                                Следить
+                            </ButtonComponent>
+                        </div>
+                    )}
+                </div>
+            </Hidden>
             <div className="post-info">
                 <Typography variant="subtitle1">
                     <span>Объявление №:</span> {data.id}
