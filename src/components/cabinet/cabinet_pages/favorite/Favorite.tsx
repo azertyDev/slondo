@@ -1,12 +1,12 @@
 import React, {FC, ReactElement} from 'react';
 import {useStyles} from './useStyles';
 import {CustomModal} from '@src/components/elements/custom_modal/CustomModal';
-import {FavoriteDataType} from '@src/components/cabinet/cabinet_pages/favorite/FavoriteContainer';
 import {CabinetCard} from '@src/components/cabinet/cabinet_card/CabinetCard';
+import {CardDataType} from '@root/interfaces/Cabinet';
 
 type FavoritePropsType = {
     isFetch: boolean,
-    list: FavoriteDataType[],
+    list: CardDataType,
     handleClose: () => void,
     openModal: boolean,
     handleModalOpen: (id) => () => void,

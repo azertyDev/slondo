@@ -2,7 +2,7 @@ import React, {FC} from 'react';
 import {WithT} from 'i18next';
 import Link from 'next/link';
 import {
-    Backdrop, Box,
+    Backdrop,
     Hidden,
     List,
     ListItem,

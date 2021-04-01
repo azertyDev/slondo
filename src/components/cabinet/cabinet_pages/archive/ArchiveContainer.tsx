@@ -6,11 +6,13 @@ import {userAPI} from '@src/api/api';
 import {setErrorMsgAction} from '@src/redux/slices/errorSlice';
 import {useRouter} from 'next/router';
 import {useDispatch} from 'react-redux';
-import {TabsDataType} from '@root/interfaces/CabinetTabs';
 import {UserInfo} from '@root/interfaces/Auth';
 import {IconButton, List, ListItem, ListItemText, Typography} from '@material-ui/core';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
+import {useTranslation} from 'next-i18next';
 import {useStyles} from '@src/components/cabinet/cabinet_pages/my_posts/useStyles';
+import {InitialCabinetCardState, TabsDataType} from '@root/interfaces/Cabinet';
+
 
 export type ArchivePostData = {
     id: number;
@@ -61,15 +63,16 @@ export type ArchivePostData = {
 const ArchiveContainer: FC = () => {
     const dispatch = useDispatch();
     const { locale } = useRouter();
+    const { t } = useTranslation('cabinet');
     const classes = useStyles();
-    const initialArchiveState = {
+
+    const initialArchiveState: InitialCabinetCardState = {
         isFetch: false,
-        myArchive: {
+        myPosts: {
             total: 0,
             data: []
         }
     };
-
     const [tabIndex, setTabIndex] = useState(0);
     const [archivePostsData, setArchivePostsData] = useState(initialArchiveState);
     const [archiveAucData, setArchiveAucData] = useState(initialArchiveState);
@@ -94,23 +97,21 @@ const ArchiveContainer: FC = () => {
     const handleModalContentIndex = (index) => () => {
         setModalContentIndex(index);
     };
-
     const fetchArchivePosts = async (type?: string) => {
         try {
             if (tabIndex === 0) {
                 setArchivePostsData({ ...archivePostsData, isFetch: true });
                 const { data, total } = await userAPI.getUserArchivePosts({ locale });
-                setArchivePostsData({ myArchive: { data, total }, isFetch: true });
+                setArchivePostsData({ myPosts: { data, total }, isFetch: true });
             } else {
                 setArchiveAucData({ ...archiveAucData, isFetch: true });
                 const { data, total } = await userAPI.getUserArchivePosts({ type, locale });
-                setArchivePostsData({ myArchive: { data, total }, isFetch: true });
+                setArchiveAucData({ myPosts: { data, total }, isFetch: true });
             }
         } catch (e) {
             dispatch(setErrorMsgAction(e.message));
         }
     };
-
     const handleRestorePost = async () => {
         try {
             await userAPI.restoreFromArchive(postId);
@@ -121,7 +122,16 @@ const ArchiveContainer: FC = () => {
             dispatch(setErrorMsgAction(e.message));
         }
     };
-
+    const handleDeletePost = async () => {
+        try {
+            await userAPI.deleteArchivePost(postId);
+            setOpenModal(false);
+            await fetchArchivePosts();
+            await fetchArchivePosts('auc');
+        } catch (e) {
+            dispatch(setErrorMsgAction(e.message));
+        }
+    };
     const getModalContent = () => {
         switch (modalContentIndex) {
             case 1:
@@ -141,6 +151,19 @@ const ArchiveContainer: FC = () => {
                                 primaryTypographyProps={{ variant: 'subtitle1' }}
                             />
                         </ListItem>
+                        {
+                            tabIndex === 1 && (
+                                <ListItem
+                                    button
+                                    onClick={handleModalContentIndex(5)}
+                                >
+                                    <ListItemText
+                                        primary='Удалить'
+                                        primaryTypographyProps={{ variant: 'subtitle1' }}
+                                    />
+                                </ListItem>
+                            )
+                        }
                     </List>
                 </>;
             case 2:
@@ -174,9 +197,39 @@ const ArchiveContainer: FC = () => {
                         </ListItem>
                     </List>
                 </>;
+            case 5:
+                return <>
+                    <Typography className="title" variant="h6">
+                        Подтвердите удаление
+                    </Typography>
+                    <List
+                        component="nav"
+                        aria-label="main"
+                        className={classes.settingsList}
+                        disablePadding
+                    >
+                        <ListItem
+                            button
+                            onClick={handleDeletePost}
+                        >
+                            <ListItemText
+                                primary='Да'
+                                primaryTypographyProps={{ variant: 'subtitle1' }}
+                            />
+                        </ListItem>
+                        <ListItem
+                            button
+                            onClick={handlePrevMenu}
+                        >
+                            <ListItemText
+                                primary='Нет'
+                                primaryTypographyProps={{ variant: 'subtitle1' }}
+                            />
+                        </ListItem>
+                    </List>
+                </>;
         }
     };
-
     const ModalContent = () => (
         <>
             {modalContentIndex === 1
@@ -201,11 +254,11 @@ const ArchiveContainer: FC = () => {
     const tabsData: TabsDataType = [
         {
             id: 0,
-            title: 'Объявления',
-            total: archivePostsData.myArchive.total,
+            title: t('posts'),
+            total: archivePostsData.myPosts.total,
             component:
                 <Archive
-                    list={archivePostsData.myArchive.data}
+                    list={archivePostsData.myPosts.data}
                     isFetch={archivePostsData.isFetch}
                     ModalContent={ModalContent}
                     handleModalOpen={handleOpenModal}
@@ -215,11 +268,11 @@ const ArchiveContainer: FC = () => {
         },
         {
             id: 1,
-            title: 'Аукционы',
-            total: archiveAucData.myArchive.total,
+            title: t('auctions'),
+            total: archiveAucData.myPosts.total,
             component:
                 <Archive
-                    list={archiveAucData.myArchive.data}
+                    list={archiveAucData.myPosts.data}
                     isFetch={archiveAucData.isFetch}
                     ModalContent={ModalContent}
                     handleModalOpen={handleOpenModal}
@@ -234,7 +287,7 @@ const ArchiveContainer: FC = () => {
         fetchArchivePosts('auc');
     }, []);
 
-    const title = 'Архив';
+    const title = t('archive');
 
     return (
         <TabsContent

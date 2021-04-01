@@ -1,15 +1,16 @@
-import React, {FC} from 'react';
+import React, {FC, ReactElement} from 'react';
 import {CabinetCard} from '@src/components/cabinet/cabinet_card/CabinetCard';
 import {CustomModal} from '@src/components/elements/custom_modal/CustomModal';
-import {FavoriteDataType} from '@src/components/cabinet/cabinet_pages/favorite/FavoriteContainer';
+import {CardDataType} from '@root/interfaces/Cabinet';
 
 type MyAuctionsPropsType = {
     isFetch: boolean,
-    list: FavoriteDataType[],
+    list: CardDataType,
     handleClose: () => void,
     openModal: boolean,
     setOpenModal: (boolean) => void,
     handleModalOpen: (id?) => () => void,
+    ModalContent: () => ReactElement;
 }
 
 export const MyAuctions: FC<MyAuctionsPropsType> = (props) => {
@@ -19,6 +20,7 @@ export const MyAuctions: FC<MyAuctionsPropsType> = (props) => {
         handleModalOpen,
         handleClose,
         openModal,
+        ModalContent
     } = props;
 
     return (
@@ -31,7 +33,9 @@ export const MyAuctions: FC<MyAuctionsPropsType> = (props) => {
             <CustomModal
                 handleModalClose={handleClose}
                 openModal={openModal}
-            />
+            >
+                <ModalContent />
+            </CustomModal>
         </>
     );
 };

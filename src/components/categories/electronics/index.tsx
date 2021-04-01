@@ -3,10 +3,11 @@ import {useRouter} from 'next/router'
 import {MainLayout} from "@src/components/MainLayout";
 
 const Electronics: FC = () => {
-    const router = useRouter()
+    const router = useRouter();
+    console.log(router.query)
     return (
-        <MainLayout title={`Electronics - ${router.query.id}`}>
-            {router.query.id}
+        <MainLayout title={`Electronika - ${router.query.city} - ${router.query.index}`}>
+            {router.query.index}
         </MainLayout>
     )
 };

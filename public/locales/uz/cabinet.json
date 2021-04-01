@@ -1,6 +1,6 @@
 {
     "myPosts": "Mening e'lonlarim",
-    "myAuctions": "Mening savdolarim",
+    "myAuctions": "Mening auksionlarim",
     "archive": "Arxiv",
     "rating": "Reyting",
     "favorite": "Sevimli",
@@ -17,5 +17,12 @@
     "settings": "Sozlamalar",
     "exit": "Chiqish",
     "nonModerated": "Moderatsiyadan o'tmagan",
-    "created_at": "Slondoda {{created_at}} yildan buyon"
+    "created_at": "Slondoda {{created_at}} yildan buyon",
+    "sold_on_slondo": "Slondoda sotildi",
+    "addToArchive": "Аrxivga qo'shish",
+    "posts": "E'lonlar",
+    "securePosts": "Xavfsiz xarid",
+    "createdAuc": "Yaratilgan",
+    "participatingAuc": "Qatnashgan",
+    "auctions": "Auksion"
 }

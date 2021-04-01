@@ -1,15 +1,12 @@
 import React, {FC} from 'react';
-import {Box, Button, Grid, Hidden, Paper, Tooltip, Typography} from '@material-ui/core';
+import {Box, Grid, Hidden, Paper, Tooltip, Typography} from '@material-ui/core';
 import {
     CloseIcon,
     DeliveryIcon,
-    DoubleUpIcon,
     EyeIcon,
     LetterIcon,
     LocationIcon,
-    MegaphoneIcon,
     PhoneIcon,
-    PromoteIcon,
     SafeIcon,
     SettingsIcon,
     SwapIcon
@@ -19,15 +16,16 @@ import {BreadcrumbsComponent} from '@src/components/elements/breadcrumbs/Breadcr
 import {UserAvatarComponent} from '@src/components/elements/user_info_with_avatar/avatar/UserAvatarComponent';
 import {Rating} from '@src/components/elements/rating/Rating';
 import Link from 'next/link';
-import {formatNumber, numberPrettier, weekDaysHelper} from '@src/helpers';
+import {formatNumber, weekDaysHelper} from '@src/helpers';
 import Countdown from 'react-countdown';
 import {useRouter} from 'next/router';
 import {useTranslation} from 'react-i18next';
 import {useStyles} from './useStyles';
+import {CardDataType} from '@root/interfaces/Cabinet';
 
 type CabinetCardPropsType = {
     isFetch?: boolean;
-    list?: any[];
+    list?: CardDataType;
     handleModalOpen?: (id) => () => void
 }
 
@@ -193,8 +191,7 @@ export const CabinetCard: FC<CabinetCardPropsType> = ({list, isFetch, handleModa
                                                     variant="h5"
                                                     color="initial"
                                                 >
-                                                    {numberPrettier(el.price)}{' '}
-                                                    {t(el.currency?.name)}
+                                                    {el.price + ' ' + t(el.currency.name)}
                                                 </Typography>
                                             </div>
                                         </div>
@@ -290,46 +287,46 @@ export const CabinetCard: FC<CabinetCardPropsType> = ({list, isFetch, handleModa
                         </Grid>
                         <Hidden xsUp={false}>
                             <Grid item xs={3} className="right-content">
-                                {pathname === '/cabinet/posts' && (
-                                    <div className="card-buttons">
-                                        <Button
-                                            color="primary"
-                                            variant="contained"
-                                            className="promoteButton"
-                                            aria-label="promoteButton"
-                                            disabled={el.isModerated}
-                                        >
-                                            <Typography variant="subtitle1">
-                                                Продвижение
-                                            </Typography>
-                                            <PromoteIcon/>
-                                        </Button>
-                                        <Button
-                                            color="primary"
-                                            variant="contained"
-                                            className="raiseTopButton"
-                                            disabled={el.isModerated}
-                                        >
-                                            <Typography variant="subtitle1">
-                                                Поднять в ТОП
-                                            </Typography>
-                                            <MegaphoneIcon/>
-                                        </Button>
-                                        <Button
-                                            color="primary"
-                                            variant="contained"
-                                            className="doubleUpButton"
-                                            disabled={el.isModerated}
-                                        >
-                                            <Typography variant="subtitle1">
-                                                Поднять в ленте
-                                            </Typography>
-                                            <DoubleUpIcon/>
-                                        </Button>
-                                    </div>
-                                )}
+                                {/*{pathname === '/cabinet/posts' && (*/}
+                                {/*    <div className="card-buttons">*/}
+                                {/*        <Button*/}
+                                {/*            color="primary"*/}
+                                {/*            variant="contained"*/}
+                                {/*            className="promoteButton"*/}
+                                {/*            aria-label="promoteButton"*/}
+                                {/*            disabled={el.isModerated}*/}
+                                {/*        >*/}
+                                {/*            <Typography variant="subtitle1">*/}
+                                {/*                Продвижение*/}
+                                {/*            </Typography>*/}
+                                {/*            <PromoteIcon/>*/}
+                                {/*        </Button>*/}
+                                {/*        <Button*/}
+                                {/*            color="primary"*/}
+                                {/*            variant="contained"*/}
+                                {/*            className="raiseTopButton"*/}
+                                {/*            disabled={el.isModerated}*/}
+                                {/*        >*/}
+                                {/*            <Typography variant="subtitle1">*/}
+                                {/*                Поднять в ТОП*/}
+                                {/*            </Typography>*/}
+                                {/*            <MegaphoneIcon/>*/}
+                                {/*        </Button>*/}
+                                {/*        <Button*/}
+                                {/*            color="primary"*/}
+                                {/*            variant="contained"*/}
+                                {/*            className="doubleUpButton"*/}
+                                {/*            disabled={el.isModerated}*/}
+                                {/*        >*/}
+                                {/*            <Typography variant="subtitle1">*/}
+                                {/*                Поднять в ленте*/}
+                                {/*            </Typography>*/}
+                                {/*            <DoubleUpIcon/>*/}
+                                {/*        </Button>*/}
+                                {/*    </div>*/}
+                                {/*)}*/}
                                 {pathname === '/cabinet/auctions' ? (
-                                    el.auction.winner ? (
+                                    el.auction?.winner && (
                                         <div className="profile-form">
                                             <div className="extreme-rate">
                                                 <Typography
@@ -387,7 +384,7 @@ export const CabinetCard: FC<CabinetCardPropsType> = ({list, isFetch, handleModa
                                         </Typography> */}
                                             </div>
                                         </div>
-                                    ) : null
+                                    )
                                 ) : null}
                             </Grid>
                         </Hidden>

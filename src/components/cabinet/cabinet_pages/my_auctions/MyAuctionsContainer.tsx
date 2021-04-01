@@ -6,14 +6,31 @@ import {userAPI} from '@src/api/api';
 import {useRouter} from 'next/router';
 import {useDispatch} from 'react-redux';
 import {setErrorMsgAction} from '@root/src/redux/slices/errorSlice';
+import {useTranslation} from 'next-i18next';
+import {InitialCabinetCardState, TabsDataType} from '@root/interfaces/Cabinet.js';
+import {IconButton, List, ListItem, ListItemText, Typography} from '@material-ui/core';
+import ArrowBackIcon from '@material-ui/icons/ArrowBack';
+import {useStyles} from './useStyles';
 
 
 export const MyAuctionsContainer: FC = () => {
-    const { locale } = useRouter();
     const dispatch = useDispatch();
+    const { locale } = useRouter();
+    const { t } = useTranslation('cabinet');
+    const classes = useStyles();
 
+    const initialState: InitialCabinetCardState = {
+        isFetch: false,
+        myPosts: {
+            total: 0,
+            data: []
+        }
+    };
+    const [auctionData, setAuctionData] = useState(initialState);
+    const [participatingData, setParticipatingData] = useState(initialState);
     const [openModal, setOpenModal] = useState(false);
     const [tabIndex, setTabIndex] = useState(0);
+    const [modalContentIndex, setModalContentIndex] = useState(1);
     const [postId, setPostId] = useState(null);
 
     const handleTabChange = (event, newValue) => {
@@ -26,56 +43,131 @@ export const MyAuctionsContainer: FC = () => {
     const handleModalClose = () => {
         setOpenModal(false);
     };
-
-    const initialState = {
-        isFetch: false,
-        createdAuctions: {
-            total: 0,
-            data: []
-        },
-        participatingAuctions: {
-            total: 0,
-            data: []
+    const handlePrevMenu = () => {
+        const backValue = modalContentIndex === 5 ? 3 : 1;
+        setModalContentIndex(modalContentIndex - backValue);
+    };
+    const handleModalContentIndex = (index) => () => {
+        setModalContentIndex(index);
+    };
+    const handleDeactivate = async () => {
+        try {
+            await userAPI.deactivateById(postId);
+            setOpenModal(false);
+            if (tabIndex === 0) {
+                await fetchAuctionData('auc');
+            } else {
+                await fetchAuctionData();
+            }
+        } catch (e) {
+            dispatch(setErrorMsgAction(e.message));
         }
     };
-    const [auctionData, setAuctionData] = useState(initialState);
-
-    const fetchAuctionData = async (type) => {
+    const fetchAuctionData = async (type?: string) => {
         try {
-            const { createdAuctions, participatingAuctions } = auctionData;
             const isCreatedAuction = type === 'auc';
-
-            auctionData.isFetch = true;
-            setAuctionData({ ...auctionData });
-
-            const createdAuctionsData = await userAPI.getMyPosts({ type, locale });
-            const participatingData = await userAPI.getAuctionSubs(locale);
-
-            auctionData.isFetch = true;
-
             if (isCreatedAuction) {
-                createdAuctions.data = createdAuctionsData.data;
-                createdAuctions.total = createdAuctionsData.total;
+                setAuctionData({ ...auctionData, isFetch: true });
+                const { data, total } = await userAPI.getMyPosts({ type, locale });
+                setAuctionData({ myPosts: { data, total }, isFetch: true });
             } else {
-                participatingAuctions.data = participatingData.data;
-                participatingAuctions.total = participatingData.total;
+                setParticipatingData({ ...auctionData, isFetch: true });
+                const { data, total } = await userAPI.getAuctionSubs(locale);
+                setParticipatingData({ myPosts: { data, total }, isFetch: true });
             }
-
-            setAuctionData({ ...auctionData });
         } catch (e) {
             dispatch(setErrorMsgAction(e));
         }
     };
 
-    const tabsData = [
+    const getModalContent = () => {
+        switch (modalContentIndex) {
+            case 1:
+                return <>
+                    <List
+                        component="nav"
+                        aria-label="main"
+                        className={classes.settingsList}
+                        disablePadding
+                    >
+                        <ListItem
+                            button
+                            onClick={handleModalContentIndex(2)}
+                        >
+                            <ListItemText
+                                primary='Деактивировать'
+                                primaryTypographyProps={{ variant: 'subtitle1' }}
+                            />
+                        </ListItem>
+                    </List>
+                </>;
+            case 2:
+                return <>
+                    <List
+                        component="nav"
+                        aria-label="main"
+                        className={classes.settingsList}
+                        disablePadding
+                    >
+                        <ListItem
+                            button
+                            onClick={handleDeactivate}
+                        >
+                            <ListItemText
+                                primary='Да'
+                                primaryTypographyProps={{ variant: 'subtitle1' }}
+                            />
+                        </ListItem>
+                        <ListItem
+                            button
+                            onClick={handlePrevMenu}
+                        >
+                            <ListItemText
+                                primary='Нет'
+                                primaryTypographyProps={{ variant: 'subtitle1' }}
+                            />
+                        </ListItem>
+
+                    </List>
+                </>;
+        }
+    };
+    const ModalContent = () => (
+        <>
+            {modalContentIndex === 1
+                ? <Typography className="title" variant="h6">
+                    Объявление № {postId}
+                </Typography>
+                : modalContentIndex === 5
+                    ? null
+                    : <IconButton
+                        className='prev-btn'
+                        aria-label="back"
+                        size="medium"
+                        onClick={handlePrevMenu}
+                    >
+                        <ArrowBackIcon fontSize="inherit" />
+                    </IconButton>
+            }
+            {getModalContent()}
+        </>
+    );
+
+    useEffect(() => {
+        fetchAuctionData('auc');
+        fetchAuctionData();
+    }, []);
+
+    const tabsData: TabsDataType = [
         {
             id: 0,
-            title: 'Созданные',
-            total: auctionData.createdAuctions.total,
+            title: t('createdAuc'),
+            total: auctionData.myPosts.total,
             component:
                 <MyAuctions
-                    list={auctionData.createdAuctions.data}
+                    list={auctionData.myPosts.data}
                     isFetch={auctionData.isFetch}
+                    ModalContent={ModalContent}
                     handleClose={handleModalClose}
                     handleModalOpen={handleOpenModal}
                     openModal={openModal}
@@ -84,12 +176,13 @@ export const MyAuctionsContainer: FC = () => {
         },
         {
             id: 1,
-            title: 'Участие',
-            total: auctionData.participatingAuctions.total,
+            title: t('participatingAuc'),
+            total: participatingData.myPosts.total,
             component:
                 <MyAuctions
-                    list={auctionData.participatingAuctions.data}
-                    isFetch={auctionData.isFetch}
+                    list={participatingData.myPosts.data}
+                    isFetch={participatingData.isFetch}
+                    ModalContent={ModalContent}
                     handleClose={handleModalClose}
                     handleModalOpen={handleOpenModal}
                     openModal={openModal}
@@ -98,11 +191,7 @@ export const MyAuctionsContainer: FC = () => {
         }
     ];
 
-    useEffect(() => {
-        fetchAuctionData('auc');
-    }, []);
-
-    const title = 'Мои аукционы';
+    const title = t('myAuctions');
 
     return (
         <TabsContent

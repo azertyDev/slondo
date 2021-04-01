@@ -2,10 +2,11 @@ import React, {FC, ReactElement} from 'react';
 import {useStyles} from './useStyles';
 import {CabinetCard} from '@src/components/cabinet/cabinet_card/CabinetCard';
 import {CustomModal} from '@src/components/elements/custom_modal/CustomModal';
+import {CardDataType} from '@root/interfaces/Cabinet';
 
 type MyPostsPropsType = {
     isFetch: boolean;
-    list?: any[];
+    list?: CardDataType;
     openModal: boolean;
     handleModalOpen: (id) => () => void;
     handleModalClose: () => void;

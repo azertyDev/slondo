@@ -1,10 +1,11 @@
 import React, {FC, ReactElement} from 'react';
 import {CustomModal} from '@src/components/elements/custom_modal/CustomModal';
 import {CabinetCard} from '@src/components/cabinet/cabinet_card/CabinetCard';
+import {CardDataType} from '@root/interfaces/Cabinet';
 
 type MyArchivePropsType = {
     isFetch: boolean;
-    list?: any[];
+    list?: CardDataType;
     openModal: boolean;
     handleModalOpen: (id) => () => void;
     handleModalClose: () => void;
