@@ -20,48 +20,32 @@ export const useStyles = makeStyles((theme) => ({
                 }
             },
         },
-        '& .post-header': {
+        '& div.post-header': {
             display: 'flex',
             marginBottom: '10px',
-            [theme.breakpoints.down('md')]: {
-                flexDirection: 'column'
+            alignItems: 'center',
+            '& div:not(:last-child)': {
+                marginRight: 10
             },
-            '& div.type-condition': {
-                display: 'flex',
-                marginRight: 10,
-                [theme.breakpoints.down('md')]: {
-                    marginRight: 0,
-                    justifyContent: 'space-between'
-                },
-                '& div.post-type': {
-                    '& .MuiTypography-h6': {
-                        padding: '0px 20px',
-                        lineHeight: '30px',
-                        borderRadius: '5px',
-                        fontWeight: '600',
-                        color: '#fff',
-                        '&.post': {
-                            background: 'rgba(136, 202, 236, 0.65)',
-                        },
-                        '&.auc': {
-                            background: 'rgba(173, 102, 213, 0.65)',
-                        },
-                        '&.exauc': {
-                            background: 'rgba(242, 153, 74, 0.65)',
-                        },
+            '& > div.post-type': {
+                '& > h6.MuiTypography-h6': {
+                    padding: '0px 20px',
+                    lineHeight: '30px',
+                    borderRadius: '5px',
+                    fontWeight: '600',
+                    color: '#fff',
+                    '&.post': {
+                        background: 'rgba(136, 202, 236, 0.65)',
+                    },
+                    '&.auc': {
+                        background: 'rgba(173, 102, 213, 0.65)',
+                    },
+                    '&.exauc': {
+                        background: 'rgba(242, 153, 74, 0.65)',
                     },
                 },
             },
-
-            '& .price': {
-                [theme.breakpoints.down('md')]: {
-                    fontWeight: '700'
-                }
-            },
-            '& .title': {
-                [theme.breakpoints.down('md')]: {
-                    width: 'auto'
-                },
+            '& > div.title': {
                 flex: 1,
                 width: '500px',
                 '& > h2.MuiTypography-h2': {
@@ -94,7 +78,7 @@ export const useStyles = makeStyles((theme) => ({
                     },
                 },
             },
-            '& .condition': {
+            '& > div.condition': {
                 borderRadius: '50px',
                 background: '#90BE27',
                 textAlign: 'end',
@@ -137,7 +121,6 @@ export const useStyles = makeStyles((theme) => ({
         '& div.post-bonus': {
             display: 'flex',
             marginBottom: '20px',
-            flexWrap: 'wrap',
             '& span': {
                 display: 'flex',
                 alignItems: 'center',
@@ -222,6 +205,7 @@ export const useStyles = makeStyles((theme) => ({
                 flexDirection: 'column',
                 justifyContent: 'space-between',
                 '& > div': {
+                    '& > h6.MuiTypography-subtitle1': {},
                     '& a': {
                         display: 'flex',
                         alignItems: 'center',
@@ -261,7 +245,14 @@ export const useStyles = makeStyles((theme) => ({
             },
         },
         '& div.post-parameters': {
-
+            '& h6.key': {
+                width: '20%',
+                fontSize: '1.125rem',
+                color: '#838383',
+            },
+            '& h6.value': {
+                fontSize: '1.125rem',
+            },
             '& p.MuiTypography-button': {
                 marginBottom: '30px',
             },
@@ -280,9 +271,6 @@ export const useStyles = makeStyles((theme) => ({
             },
             '& > ul': {
                 margin: 0,
-                [theme.breakpoints.down('md')]: {
-                    padding: 0
-                },
                 '& > li': {
                     listStyle: 'none',
                     display: 'flex',
@@ -292,21 +280,6 @@ export const useStyles = makeStyles((theme) => ({
                     '&:last-child': {
                         margin: 0,
                     },
-                    '& h6': {
-                        [theme.breakpoints.down('sm')]: {
-                            width: '50%'
-                        },
-                        '&.key': {
-                            [theme.breakpoints.up('md')]: {
-                                width: '20%'
-                            },
-                            fontSize: '1.125rem',
-                            color: '#838383',
-                        },
-                        '&.value': {
-                            fontSize: '1.125rem',
-                        },
-                    }
                 },
             },
             '& > div': {

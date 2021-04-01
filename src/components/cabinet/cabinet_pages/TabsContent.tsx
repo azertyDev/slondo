@@ -5,7 +5,7 @@ import {CabinetMenuPropsType, CabinetWrapper} from '@src/components/cabinet/Cabi
 import {MyPurchases} from '@src/components/cabinet/cabinet_pages/my_purchases/MyPurchases';
 import {useTranslation} from 'react-i18next';
 import {useStyles} from './useStyles';
-import {TabsDataType} from '@root/interfaces/CabinetTabs';
+import {TabsDataType} from '@root/interfaces/Cabinet';
 
 type TabsContentPropsType = {
     tabIndex: number,

@@ -90,8 +90,8 @@ export const userAPI = {
                 throw err;
             });
     },
-    getFavorites: (lang: string, lot: string): Promise<any> => {
-        return instance.get(`regular/post/get/favorites?type=${lot}&lang=${lang}`, setTokenToHeader())
+    getFavorites: ({ type = 'post', locale = 'ru' }: { type?: string, locale: string }): Promise<any> => {
+        return instance.get(`regular/post/get/favorites?type=${type}&lang=${locale}`, setTokenToHeader())
             .then(res => res.data)
             .catch(err => {
                 throw err;
@@ -255,6 +255,13 @@ export const userAPI = {
     },
     restoreFromArchive: (ads_id: number): Promise<any> => {
         return instance.post(`regular/user/post/restore/${ads_id}`, {}, setTokenToHeader())
+            .then(res => res.data)
+            .catch(err => {
+                throw err;
+            });
+    },
+    deleteArchivePost: (ads_id: number): Promise<any> => {
+        return instance.delete(`regular/post/delete/${ads_id}`, setTokenToHeader())
             .then(res => res.data)
             .catch(err => {
                 throw err;
