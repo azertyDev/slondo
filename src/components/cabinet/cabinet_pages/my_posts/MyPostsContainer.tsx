@@ -22,13 +22,13 @@ import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import {useTranslation} from 'next-i18next';
 import {ButtonComponent} from '@src/components/elements/button/Button';
 import {useStyles} from './useStyles';
-import {InitialCabinetCardState} from '@root/interfaces/Cabinet';
-import {TabsDataType} from '@root/interfaces/Cabinet';
+import {InitialCabinetCardState, TabsDataType} from '@root/interfaces/Cabinet';
+import exp from 'constants';
 
 type userStateType = {
     isFetch: boolean,
     user: {
-        id: number,
+        id: null,
         name: string,
         surname: string,
         phone: string,
@@ -51,7 +51,78 @@ const MyPostsContainer: FC = () => {
         isFetch: false,
         myPosts: {
             total: 0,
-            data: []
+            data: [
+                {
+                    ads_type: '',
+                    adsable: {
+                        id: null,
+                        sub_category: {
+                            id: null,
+                            name: ''
+                        },
+                        type: {
+                            id: null,
+                            name: ''
+                        }
+                    },
+                    auction: {
+                        winner: {
+                            id: null,
+                            name: '',
+                            surname: '',
+                            phone: '',
+                            avatar: '',
+                            created_at: ''
+                        },
+                        number_of_bets: null
+                    },
+                    author: {
+                        id: null,
+                        name: '',
+                        surname: '',
+                        phone: '',
+                        avatar: '',
+                        created_at: ''
+                    },
+                    available_days: '',
+                    category: {
+                        id: null,
+                        name: ''
+                    },
+                    city: {
+                        id: null,
+                        name: ''
+                    },
+                    created_at: '',
+                    creator: false,
+                    currency: {
+                        id: null,
+                        name: ''
+                    },
+                    delivery: null,
+                    description: '',
+                    district: {
+                        id: null,
+                        name: ''
+                    },
+                    exchange: null,
+                    expiration_at: '',
+                    favorite: false,
+                    id: null,
+                    image: '',
+                    number_of_views: null,
+                    price: null,
+                    region: {
+                        id: null,
+                        name: ''
+                    },
+                    safe_deal: null,
+                    status: '',
+                    subscribed: false,
+                    title: '',
+                    user_id: null
+                }
+            ]
         }
     };
     const initialUserState: userStateType = {
@@ -75,6 +146,14 @@ const MyPostsContainer: FC = () => {
     const [postId, setPostId] = useState(null);
     const [toArchive, setToArchive] = useState(false);
     const [errorMsg, setErrMsg] = useState('');
+
+    // const isExtendTime = (expiredDate) => {
+    //     const expDate = new Date(expiredDate).getTime() - 3;
+    //     return Date.now() >= (expDate)
+    //     console.log(Date.now() >= (expDate));
+    // };
+
+    // isExtendTime(securePosts.myPosts.data.length && securePosts.myPosts.data[0].expiration_at)
 
     const handleOpenModal = (postId) => () => {
         setOpenModal(true);

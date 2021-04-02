@@ -25,7 +25,7 @@ import {CardDataType} from '@root/interfaces/Cabinet';
 
 type CabinetCardPropsType = {
     isFetch?: boolean;
-    list?: CardDataType;
+    list: CardDataType[];
     handleModalOpen?: (id) => () => void
 }
 
@@ -69,12 +69,12 @@ export const CabinetCard: FC<CabinetCardPropsType> = ({list, isFetch, handleModa
                                             <a>{t(`categories:${el.category.name}`)}</a>
                                         </Link>
                                     )}
-                                    {el.adsable.sub_category && (
+                                    {el.adsable?.sub_category && (
                                         <Link href="#">
                                             <a>{t(`categories:${el.adsable.sub_category.name}`)}</a>
                                         </Link>
                                     )}
-                                    {el.adsable.type && (
+                                    {el.adsable?.type && (
                                         <Link href="#">
                                             <a>{t(`categories:${el.adsable.type.name}`)}</a>
                                         </Link>
@@ -195,7 +195,7 @@ export const CabinetCard: FC<CabinetCardPropsType> = ({list, isFetch, handleModa
                                                 </Typography>
                                             </div>
                                         </div>
-                                        {el.ads_type === 'auc' && (
+                                        {el.ads_type !== 'post' && (
                                             <Box display='flex' justifyContent='space-between'>
                                                 <Countdown
                                                     date={new Date(el.expiration_at).getTime()}

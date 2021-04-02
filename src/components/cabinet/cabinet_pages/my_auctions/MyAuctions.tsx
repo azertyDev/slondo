@@ -5,7 +5,7 @@ import {CardDataType} from '@root/interfaces/Cabinet';
 
 type MyAuctionsPropsType = {
     isFetch: boolean,
-    list: CardDataType,
+    list: CardDataType[],
     handleClose: () => void,
     openModal: boolean,
     setOpenModal: (boolean) => void,

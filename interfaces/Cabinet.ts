@@ -13,7 +13,7 @@ export interface InitialCabinetCardState {
     isFetch: boolean,
     myPosts: {
         total: number,
-        data: CardDataType
+        data: CardDataType[]
     }
 }
 
@@ -51,6 +51,6 @@ export type CardDataType = {
     subscribed: boolean
     title: string
     user_id: number
-}[]
+}
 
 type initValuesType = { id: number, name: string }

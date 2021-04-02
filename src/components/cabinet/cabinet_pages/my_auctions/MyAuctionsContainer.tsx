@@ -72,8 +72,8 @@ export const MyAuctionsContainer: FC = () => {
                 setAuctionData({ myPosts: { data, total }, isFetch: true });
             } else {
                 setParticipatingData({ ...auctionData, isFetch: true });
-                const { data, total } = await userAPI.getAuctionSubs(locale);
-                setParticipatingData({ myPosts: { data, total }, isFetch: true });
+                const { data, total, message } = await userAPI.getAuctionSubs(locale);
+                !message && setParticipatingData({ myPosts: { data, total }, isFetch: true });
             }
         } catch (e) {
             dispatch(setErrorMsgAction(e));

@@ -79,7 +79,6 @@ const ArchiveContainer: FC = () => {
     const [openModal, setOpenModal] = useState(false);
     const [modalContentIndex, setModalContentIndex] = useState(1);
     const [postId, setPostId] = useState(null);
-
     const handleOpenModal = (postId) => () => {
         setOpenModal(true);
         postId && setPostId(postId);
@@ -91,7 +90,7 @@ const ArchiveContainer: FC = () => {
         setTabIndex(newValue);
     };
     const handlePrevMenu = () => {
-        const backValue = modalContentIndex === 5 ? 3 : 1;
+        const backValue = modalContentIndex === 5 ? 4 : 1;
         setModalContentIndex(modalContentIndex - backValue);
     };
     const handleModalContentIndex = (index) => () => {
@@ -152,7 +151,7 @@ const ArchiveContainer: FC = () => {
                             />
                         </ListItem>
                         {
-                            tabIndex === 1 && (
+                            tabIndex === 0 && (
                                 <ListItem
                                     button
                                     onClick={handleModalContentIndex(5)}

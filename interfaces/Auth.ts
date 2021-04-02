@@ -3,7 +3,7 @@ export interface UserInfo {
     name: string,
     surname: string,
     phone: string,
-    avatar: string | boolean,
+    avatar: string,
     created_at: string
 }
 
