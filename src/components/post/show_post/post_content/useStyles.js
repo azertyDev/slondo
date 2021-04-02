@@ -43,12 +43,12 @@ export const useStyles = makeStyles((theme) => ({
                         fontWeight: '400',
                         borderRadius: '0px 0px 5px 5px',
                         fontSize: '0.75rem',
-                        '&.post' : {
-                            background: 'rgba(136, 202, 236, 0.85)'
-                        }
                     },
                     '&.post': {
-                        background: 'rgba(136, 202, 236, 0.65)'
+                        background: 'rgba(136, 202, 236, 0.65)',
+                        [theme.breakpoints.down('md')]: {
+                            background: 'rgba(136, 202, 236, 0.85)'
+                        },
                     },
                     '&.auc': {
                         background: 'rgba(173, 102, 213, 0.65)'
@@ -137,7 +137,7 @@ export const useStyles = makeStyles((theme) => ({
             },
             '& > h6.MuiTypography-subtitle1:first-child': {
                 '& > span': {
-                    color: '#2F80ED'
+                    color: '#2F80ED',
                 }
             },
             '& h6.MuiTypography-subtitle1:last-child': {
@@ -354,7 +354,12 @@ export const useStyles = makeStyles((theme) => ({
         '& div.MuiSnackbar-root': {
             position: 'absolute',
             marginTop: '-10px'
-        }
+        },
+        '& .slider-wrapper': {
+            [theme.breakpoints.down('md')]: {
+                filter: 'drop-shadow(0px 1px 8px rgba(0, 0, 0, 0.35))'
+            }
+        },
     },
     icons: {
         width: '20px'

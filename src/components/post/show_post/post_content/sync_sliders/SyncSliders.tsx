@@ -1,5 +1,5 @@
 import React, {FC} from 'react';
-import {IconButton, useMediaQuery, useTheme} from '@material-ui/core';
+import {Box, IconButton, useMediaQuery, useTheme} from '@material-ui/core';
 import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
 import {CustomSlider} from '@src/components/elements/custom_slider/CustomSlider';
 import {SlidersRefType} from '../../ShowPostContainer';
@@ -44,9 +44,6 @@ export const SyncSliders: FC<SyncSlidersProps> = (props) => {
     return (
         <div className={classes.root}>
             <div className={classes.firstSlider}>
-                <IconButton className="favorite-btn">
-                    <FavoriteBorderIcon/>
-                </IconButton>
                 <CustomSlider
                     focusOnSelect={true}
                     arrows={!isMdDown}
@@ -64,9 +61,12 @@ export const SyncSliders: FC<SyncSlidersProps> = (props) => {
                         />
                     )}
                 </CustomSlider>
-                <IconButton className="share-btn" onClick={copyUrl}>
-                    <CustomTooltip title={'Скопировано!'} arrow/>
-                </IconButton>
+                     <IconButton className="favorite-btn">
+                         <FavoriteBorderIcon/>
+                     </IconButton>
+                     <IconButton className="share-btn" onClick={copyUrl}>
+                         <CustomTooltip title={'Скопировано!'} arrow/>
+                     </IconButton>
             </div>
             {!isMdDown && imgsCount > 1 && (
                 <div className={classes.secondSlider}>

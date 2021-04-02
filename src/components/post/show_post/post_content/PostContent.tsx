@@ -182,11 +182,13 @@ export const PostContent: FC<WithT & any> = (props) => {
                     )}
                 </div>
             </Hidden>
-            <SyncSliders
-                slidersRefs={slidersRefs}
-                imgs={data.images}
-                handleOpenModal={handleShowSliderModal(true)}
-            />
+            <div className="slider-wrapper">
+                <SyncSliders
+                    slidersRefs={slidersRefs}
+                    imgs={data.images}
+                    handleOpenModal={handleShowSliderModal(true)}
+                />
+            </div>
             <Hidden lgUp>
                 <div className="post-header">
                     <div className='post-type'>
@@ -221,18 +223,20 @@ export const PostContent: FC<WithT & any> = (props) => {
                 </div>
             </Hidden>
             <div className="post-info">
-                    <Typography variant="subtitle1">
-                        <span>Объявление №:</span> {data.id}
-                    </Typography>
-                    <Typography variant="subtitle1">
-                        Опубликовано: {formatted_date}
-                    </Typography>
-                    <Typography variant="subtitle1">
-                        Просмотров: {data.number_of_views}
-                    </Typography>
-                <Typography variant="subtitle1" onClick={handleOpenModal}>
-                    Пожаловаться <WarningIcon/>
+                <Typography variant="subtitle1">
+                    <span>Объявление №:</span> {data.id}
                 </Typography>
+                <Typography variant="subtitle1">
+                    Опубликовано: {formatted_date}
+                </Typography>
+                <Typography variant="subtitle1">
+                    Просмотров: {data.number_of_views}
+                </Typography>
+                <Hidden mdDown>
+                    <Typography variant="subtitle1" onClick={handleOpenModal}>
+                        Пожаловаться <WarningIcon/>
+                    </Typography>
+                </Hidden>
             </div>
             <div className="post-bonus">
                 {!!data.delivery && (
@@ -286,18 +290,20 @@ export const PostContent: FC<WithT & any> = (props) => {
                     </Typography>
                     : <Typography variant="subtitle1">Не указано</Typography>}
             </div>
-            <div className="post-category">
-                <Typography variant="button" color="initial">
-                    Категория
-                </Typography>
-                <div>
-                    <Typography variant="subtitle1" color="initial">
-                        {data.category.name}
-                        {<>&nbsp;- {data.adsable.sub_category.name}</>}
-                        {parameters.type && <>&nbsp;- <span>{parameters.type.name}</span></>}
+            <Hidden mdDown>
+                <div className="post-category">
+                    <Typography variant="button" color="initial">
+                        Категория
                     </Typography>
+                    <div>
+                        <Typography variant="subtitle1" color="initial">
+                            {data.category.name}
+                            {<>&nbsp;- {data.adsable.sub_category.name}</>}
+                            {parameters.type && <>&nbsp;- <span>{parameters.type.name}</span></>}
+                        </Typography>
+                    </div>
                 </div>
-            </div>
+            </Hidden>
             <div className="post-description">
                 <Typography variant="button" color="initial">
                     Описание
