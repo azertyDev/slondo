@@ -6,7 +6,7 @@ import {CardDataType} from '@root/interfaces/Cabinet';
 
 type FavoritePropsType = {
     isFetch: boolean,
-    list: CardDataType,
+    list: CardDataType[],
     handleClose: () => void,
     openModal: boolean,
     handleModalOpen: (id) => () => void,
