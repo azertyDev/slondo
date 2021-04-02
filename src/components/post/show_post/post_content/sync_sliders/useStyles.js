@@ -1,16 +1,16 @@
 import {makeStyles} from '@material-ui/core/styles';
 
-export const useStyles = makeStyles(() => ({
+export const useStyles = makeStyles((theme) => ({
     root: {
         position: 'relative',
         '& button': {
             '&.slick-prev': {
-                left: '25px',
+                left: '25px'
             },
             '&.slick-next': {
-                right: '25px',
-            },
-        },
+                right: '25px'
+            }
+        }
     },
     firstSlider: {
         position: 'relative',
@@ -23,17 +23,17 @@ export const useStyles = makeStyles(() => ({
             background: '#fff',
             borderRadius: '100%',
             '&.favorite-btn': {
-                left: 25,
+                left: 25
             },
             '&.share-btn': {
-                right: 25,
+                right: 25
             },
             '& svg': {
                 width: 30,
                 height: 'auto',
                 '& path': {
-                    fill: '#8E62C2',
-                },
+                    fill: '#8E62C2'
+                }
             },
             '&:hover': {
                 background:
@@ -42,10 +42,10 @@ export const useStyles = makeStyles(() => ({
                     transform: 'scale(1.1)',
                     transition: 'transform .3s cubic-bezier(.5,0,.5,3)',
                     '& path': {
-                        fill: '#fff',
-                    },
-                },
-            },
+                        fill: '#fff'
+                    }
+                }
+            }
         },
         '& div.slick-track': {
             display: 'flex',
@@ -57,8 +57,22 @@ export const useStyles = makeStyles(() => ({
                     height: '518px',
                     objectFit: 'contain',
                     cursor: 'pointer',
+                    [theme.breakpoints.down('md')]: {
+                        width: '100% !important',
+                        objectFit: 'cover'
+                    }
                 }
             }
+        },
+        '& .slick-dots': {
+            position: 'absolute',
+            width: '100%',
+            padding: 0,
+            bottom: 0,
+            zIndex: '15',
+            display: 'flex !important',
+            listStyle: 'none',
+            justifyContent: 'center'
         }
     },
     secondSlider: {
@@ -69,9 +83,9 @@ export const useStyles = makeStyles(() => ({
                 height: `120px !important`,
                 objectFit: 'cover',
                 '&:hover': {
-                    cursor: 'pointer',
-                },
-            },
-        },
-    },
+                    cursor: 'pointer'
+                }
+            }
+        }
+    }
 }));

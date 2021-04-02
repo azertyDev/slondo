@@ -31,14 +31,12 @@ export const ShowPost: FC<any> = (props) => {
                             slidersRefs={slidersRefs}
                         />
                     </Grid>
-                    <Hidden mdDown>
-                        <Grid item lg={3}>
-                            <OwnerAuctionContent t={t} postData={data} handleFollow={handleFollow} />
-                            <div className={classes.adBanner}>
-                                <Banner height="424px"/>
-                            </div>
-                        </Grid>
-                    </Hidden>
+                    <Grid item lg={3} xs={12}>
+                        <OwnerAuctionContent t={t} postData={data} handleFollow={handleFollow}/>
+                        <div className={classes.adBanner}>
+                            <Banner height="424px"/>
+                        </div>
+                    </Grid>
                 </Grid>
             </div>
         </MainLayout>
