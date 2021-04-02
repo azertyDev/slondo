@@ -1,12 +1,14 @@
-import React, {FC} from 'react';
+import React, {FC, useState} from 'react';
 import {AuctionInfo} from './auction_info/AuctionInfo';
 import {OwnerInfo} from './owner_info/OwnerInfo';
 import {Typography} from '@material-ui/core';
 import {numberPrettier} from '@root/src/helpers';
 import {useStyles} from './useStyles';
+import {CustomModal} from '@src/components/elements/custom_modal/CustomModal';
 
 export const OwnerAuctionContent: FC<any> = ({ t, postData, handleFollow }) => {
     const isAuction = postData.ads_type.mark === 'auc' || postData.ads_type.mark === 'exauc';
+
     const classes = useStyles();
     return (
         <div className={classes.root}>
@@ -16,7 +18,12 @@ export const OwnerAuctionContent: FC<any> = ({ t, postData, handleFollow }) => {
                     {t(`common:${postData.currency.name}`)}
                 </Typography>
             </div>
-            {isAuction && <AuctionInfo data={postData} t={t} />}
+            {isAuction && (
+                <AuctionInfo
+                    data={postData}
+                    t={t}
+                />
+            )}
             <OwnerInfo
                 safe_deal={postData.safe_deal}
                 owner={postData.author}

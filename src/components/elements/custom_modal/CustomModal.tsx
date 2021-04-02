@@ -1,5 +1,5 @@
 import React, {FC} from 'react';
-import {Backdrop, Fade, IconButton, List, ListItem, ListItemText, Modal, Typography} from '@material-ui/core';
+import {Backdrop, Fade, IconButton, Modal, Typography} from '@material-ui/core';
 import {CloseIcon} from '@src/components/elements/icons';
 import {ButtonComponent} from '@src/components/elements/button/Button';
 import Link from 'next/link';

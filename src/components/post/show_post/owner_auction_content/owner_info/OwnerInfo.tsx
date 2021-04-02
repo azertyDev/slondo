@@ -18,7 +18,7 @@ type OwnerPropsType = {
     },
     isOwner: boolean,
     handleFollow: (userId) => () => void
-    subscribed: boolean
+    subscribed: boolean,
 }
 
 

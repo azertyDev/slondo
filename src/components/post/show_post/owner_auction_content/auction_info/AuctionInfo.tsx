@@ -7,17 +7,16 @@ import {numberPrettier} from '@root/src/helpers';
 import BuyAuctionComponent from './BuyAuction';
 import {userAPI} from '@src/api/api';
 import AuctionForm from './AuctionForm/AuctionFrom';
-import {useDispatch, useSelector} from "react-redux";
+import {useDispatch, useSelector} from 'react-redux';
 import {setErrorMsgAction} from '@src/redux/slices/errorSlice';
-import {useTranslation} from "next-i18next";
-import {RootState} from "@src/redux/rootReducer";
+import {RootState} from '@src/redux/rootReducer';
 import {useStyles} from './useStyles';
 
+
 export const AuctionInfo: FC<any> = (props) => {
-    const {t} = useTranslation();
     const dispatch = useDispatch();
     const isAuth = useSelector<any>((state: RootState) => state.user.isAuth);
-    const {data} = props;
+    const { data, handleOpenModal, t } = props;
     const [showAll, setShowAll] = useState(false);
     const [page, setPage] = useState(1);
     const date = new Date(data.expiration_at).getTime();
@@ -157,10 +156,9 @@ export const AuctionInfo: FC<any> = (props) => {
                         Все ставки
                     </Typography>
                 </div>
-                {isAuth &&
-                <>
+                {isAuth && <>
                     <div className="bet-info">
-                        <AuctionForm data={data} handleFormSubmit={handleSubmit} list={list}/>
+                        <AuctionForm data={data} handleFormSubmit={handleSubmit} list={list} />
                         <div>
                             <Typography variant="subtitle2" color="initial">
                                 Максимально возможная ставка:
@@ -171,10 +169,14 @@ export const AuctionInfo: FC<any> = (props) => {
                         </div>
                     </div>
                     {data.ads_type.id === 3 && (
-                        <BuyAuctionComponent auction_id={auction_id} ads_id={ads_id}/>
+                        <BuyAuctionComponent
+                            handleOpenModal={handleOpenModal}
+                            auction_id={auction_id}
+                            ads_id={ads_id}
+                        />
                     )}
                     <div className='suggest_price'>
-                        <ButtonComponent>
+                        <ButtonComponent onClick={handleOpenModal}>
                             <Typography variant="subtitle1" color="initial">
                                 Предложить цену
                             </Typography>
