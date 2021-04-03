@@ -147,11 +147,11 @@ export const ShowPostContainer: FC = () => {
                 ...auctionsBetsList,
                 isFetch: true
             });
-            const { data } = await userAPI.getAuctionBets(postData.data.auction.id && postData.data.auction.id, 1);
+            const { data } = await userAPI.getAuctionBets(postData.data.auction.id, 1);
             setAuctionBetsList({
                 ...auctionsBetsList,
                 isFetch: false,
-                list: [...auctionsBetsList.list, ...data]
+                list: data
             });
         } catch (e) {
             dispatch(setErrorMsgAction(e.message));
@@ -164,7 +164,7 @@ export const ShowPostContainer: FC = () => {
                 ...auctionsBetsList,
                 isFetch: true
             });
-            const { data, last_page } = await userAPI.getAuctionBets(postData.data.auction.id && postData.data.auction.id, page);
+            const { data, last_page } = await userAPI.getAuctionBets(postData.data.auction.id, page);
             setAuctionBetsList({
                 ...auctionsBetsList,
                 isFetch: false,
@@ -241,12 +241,12 @@ export const ShowPostContainer: FC = () => {
     }, []);
 
     useEffect(() => {
-        postData.data.auction.id && auctionBetsPagination();
-    }, [page]);
-
-    useEffect(() => {
         fetchPostData();
     }, [lang]);
+
+    useEffect(() => {
+        postData.data.auction.id && auctionBetsPagination();
+    }, [page, postData.data.auction.id]);
 
     useEffect(() => {
         const height = document.getElementById('post-description').clientHeight;

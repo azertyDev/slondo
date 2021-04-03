@@ -2,11 +2,9 @@ import React from 'react';
 import {Typography} from '@material-ui/core';
 import {ButtonComponent} from '@src/components/elements/button/Button';
 import {CustomModal} from '@src/components/elements/custom_modal/CustomModal';
-import {useRouter} from 'next/router';
 import Link from 'next/link';
 
 const BuyAuctionComponent = (props) => {
-    const router = useRouter();
     const {
         data: { auction },
         handleBuyNow,

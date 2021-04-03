@@ -14,12 +14,9 @@ import {SuggestPriceComponent} from '@src/components/post/show_post/owner_auctio
 export const AuctionInfo: FC<any> = (props) => {
     const isAuth = useSelector<any>((state: RootState) => state.user.isAuth);
     const {
-        t,
         data,
         list,
         openModal,
-        page,
-        lastPage,
         handleOpenModal,
         handleCloseModal,
         handleBuyNow,
@@ -109,10 +106,9 @@ export const AuctionInfo: FC<any> = (props) => {
                                             noWrap
                                             className="per-bet"
                                         >
-                                            {item?.outbid === 0 ?
-                                                <span className='started-price'>Стартовая цена</span>
-                                                :
-                                                `+ ${numberPrettier(item?.outbid)}`
+                                            {item?.outbid === 0
+                                                ? <span className='started-price'>Стартовая цена</span>
+                                                : `+ ${numberPrettier(item?.outbid)}`
                                             }
                                         </Typography>
                                     </div>
