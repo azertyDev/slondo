@@ -1,16 +1,16 @@
 import React, {FC} from 'react';
-import ElectronicsComponent from "@src/components/categories/electronics";
+import {Search} from "@src/components/search/Search";
 import {GetStaticPaths, GetStaticProps} from "next";
 import {serverSideTranslations} from "next-i18next/serverSideTranslations";
 
-const Product: FC = () => {
-    return <ElectronicsComponent/>;
+const SubCategory: FC = () => {
+    return <Search/>;
 };
 
 export const getStaticPaths: GetStaticPaths<{ slug: string }> = async () => {
     return {
-        paths: [], //indicates that no page needs be created at build time
-        fallback: true //indicates the type of fallback
+        paths: [],
+        fallback: 'blocking'
     }
 };
 
@@ -18,9 +18,9 @@ export const getStaticProps: GetStaticProps = async ({locale}) => ({
     props: {
         ...await serverSideTranslations(
             locale,
-            ['post', 'categories', 'common', 'header', 'footer', 'auth_reg', 'errors']
+            ['categories', 'header', 'footer', 'auth_reg', 'common', 'errors']
         )
     }
 });
 
-export default Product;
+export default SubCategory;

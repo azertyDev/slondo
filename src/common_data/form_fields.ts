@@ -36,7 +36,7 @@ export const excludedKeys = [
 export const numericFields = [
     'price',
     'reserve_price',
-    'price_by_now',
+    'price_buy_now',
     'year',
     'area',
     'floor',

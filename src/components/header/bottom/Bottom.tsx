@@ -8,7 +8,7 @@ import {Logo, PersonIcon} from '@src/components/elements/icons'
 import {AddIcon} from '@src/components/elements/icons/AddIcon'
 import {CategorySortIcon} from '@src/components/elements/icons/CategorySortIcon'
 import {SignIcon} from '@src/components/elements/icons/SignIcon'
-import {CustomDrawer} from '@src/components/elements/drawer/Drawer'
+import {CustomDrawer} from '@src/components/header/bottom/custom_drawer/CustomDrawer'
 import {useStyles} from './useStyles'
 
 

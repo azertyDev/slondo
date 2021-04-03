@@ -1,12 +1,12 @@
-import React, {FC, useState} from 'react'
-import Link from 'next/link'
-import Drawer from '@material-ui/core/Drawer'
-import {InputAdornment, List, ListItem, TextField, Typography} from '@material-ui/core'
-import {categories_list} from '@src/common_data/categories_list'
+import React, {FC, useState} from 'react';
+import Link from 'next/link';
+import Drawer from '@material-ui/core/Drawer';
+import {InputAdornment, List, ListItem, TextField, Typography} from '@material-ui/core';
+import {categories_list} from '@src/common_data/categories_list';
 import {useTranslation} from 'next-i18next';
-import {Search_icon} from '@src/components/elements/icons'
-import {useStyles} from './useStyles'
-import {addParentsToCtgrs} from "@src/helpers";
+import {Search_icon} from '@src/components/elements/icons';
+import {addParentsToCtgrs, transformToCyrillic} from "@src/helpers";
+import {useStyles} from './useStyles';
 
 
 export const CustomDrawer: FC<any> = ({toggleDrawer, position}) => {
@@ -16,8 +16,8 @@ export const CustomDrawer: FC<any> = ({toggleDrawer, position}) => {
 
     const handleSubCategory = (subCategory) => () => {
         subCategory
-            ? setSubCategory(subCategory)
-            : setSubCategory([]);
+        ? setSubCategory(subCategory)
+        : setSubCategory([]);
     };
 
     const list = () => (
@@ -85,21 +85,41 @@ export const CustomDrawer: FC<any> = ({toggleDrawer, position}) => {
                 }}
             >
                 <h1 onClick={() => setSubCategory([])} style={{cursor: "pointer"}}>X</h1>
-                {subCategory.map((ParentItem) =>
-                    <div key={ParentItem.id}>
-                        <Typography variant="h6" gutterBottom color="secondary">{ParentItem.name}</Typography>
-                        {ParentItem?.type?.map(item =>
-                            <Link key={item.id} href={`/categories/${ParentItem.parents[0].name}/${item.name}`}>
-                                <a>
-                                    <Typography variant="body2" key={item.id}>
-                                        {item.name}
-                                    </Typography>
-                                </a>
-                            </Link>
-                        )}
-                    </div>
-                )}
+                {subCategory.map(subCategory => {
+                    const subCategoryCyrillicName = transformToCyrillic(subCategory.ru_name);
+                    const type = subCategory.type;
+                    const url = `/tashkent/${subCategoryCyrillicName}`;
+                    return (
+                        <div key={subCategory.id}>
+                            {type
+                             ? <div>
+                                 <Typography variant="h6" gutterBottom color="secondary">
+                                     {subCategory.name}
+                                 </Typography>
+                                 {type.map(type => {
+                                     const typeName = transformToCyrillic(type.ru_name);
+                                     return (
+                                         <Link key={type.id} href={url + `/${typeName}`}>
+                                             <a>
+                                                 <Typography variant="body2" key={type.id}>
+                                                     {type.name}
+                                                 </Typography>
+                                             </a>
+                                         </Link>
+                                     );
+                                 })}
+                             </div>
+                             : <Link href={url}>
+                                 <a>
+                                     <Typography variant="h6" gutterBottom color="secondary">
+                                         {subCategory.name}
+                                     </Typography>
+                                 </a>
+                             </Link>}
+                        </div>
+                    );
+                })}
             </div>
         </div>
-    )
-}
+    );
+};

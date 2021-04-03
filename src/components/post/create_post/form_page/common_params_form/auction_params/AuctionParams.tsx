@@ -1,6 +1,6 @@
 import React, {FC} from "react";
 import {WithT} from "i18next";
-import {Checkbox, Grid, TextField, Typography} from "@material-ui/core";
+import {Checkbox, Grid, Typography} from "@material-ui/core";
 import {CustomSelect} from "@root/src/components/post/create_post/form_page/components/custom_select/CustomSelect";
 import {CustomFormikField} from "@src/components/elements/custom_formik_field/CustomFormikField";
 import {useStyles} from './useStyles';
@@ -34,7 +34,7 @@ export const AuctionParams: FC<AuctionParamsPropsType> = (props) => {
 
     const {auction} = values;
 
-    console.log(errors)
+    console.log('values', values);
     const classes = useStyles();
     return (
         <Grid className={classes.root}>
@@ -50,8 +50,8 @@ export const AuctionParams: FC<AuctionParamsPropsType> = (props) => {
                             handleSelect={handleSelect}
                             errorMsg={
                                 errors.auction && touched.auction
-                                    ? t(`errors:${errors.auction}`)
-                                    : ''
+                                ? t(`errors:${errors.auction}`)
+                                : ''
                             }
                         />
                     </Grid>
@@ -63,8 +63,8 @@ export const AuctionParams: FC<AuctionParamsPropsType> = (props) => {
                             onChange={handleInput}
                             errorMsg={
                                 errors.price && touched.price
-                                    ? t(`errors:${errors.price}`)
-                                    : ''
+                                ? t(`errors:${errors.price}`)
+                                : ''
                             }
                         />
                     </Grid>
@@ -85,8 +85,8 @@ export const AuctionParams: FC<AuctionParamsPropsType> = (props) => {
                             <Grid container item xs={12} alignItems='center'>
                                 <Checkbox
                                     color='primary'
-                                    checked={auction.price_by_now.isActive}
-                                    onChange={handleCheckboxChange('price_by_now')}
+                                    checked={auction.price_buy_now.isActive}
+                                    onChange={handleCheckboxChange('price_buy_now')}
                                 />
                                 <Typography variant="subtitle1">
                                     <strong>
@@ -94,12 +94,11 @@ export const AuctionParams: FC<AuctionParamsPropsType> = (props) => {
                                     </strong>
                                 </Typography>
                             </Grid>
-                            {auction.price_by_now.isActive && (
+                            {auction.price_buy_now.isActive && (
                                 <Grid item xs={3}>
-                                    <TextField
-                                        variant='outlined'
-                                        name='price_by_now'
-                                        value={auction.price_by_now.value}
+                                    <CustomFormikField
+                                        name='price_buy_now'
+                                        value={auction.price_buy_now.value}
                                         onChange={handleInput}
                                     />
                                 </Grid>
@@ -133,5 +132,5 @@ export const AuctionParams: FC<AuctionParamsPropsType> = (props) => {
                 )}
             </Grid>
         </Grid>
-    )
+    );
 };
