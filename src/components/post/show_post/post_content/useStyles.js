@@ -42,13 +42,13 @@ export const useStyles = makeStyles((theme) => ({
                         margin: '-3px 0px 14px 0px',
                         fontWeight: '400',
                         borderRadius: '0px 0px 5px 5px',
-                        fontSize: '0.75rem',
+                        fontSize: 'calc(12px + 8 * (100vw / 1280))'
                     },
                     '&.post': {
                         background: 'rgba(136, 202, 236, 0.65)',
                         [theme.breakpoints.down('md')]: {
                             background: 'rgba(136, 202, 236, 0.85)'
-                        },
+                        }
                     },
                     '&.auc': {
                         background: 'rgba(173, 102, 213, 0.65)'
@@ -63,12 +63,16 @@ export const useStyles = makeStyles((theme) => ({
                 [theme.breakpoints.down('md')]: {
                     fontWeight: '700',
                     display: 'flex',
-                    justifyContent: 'space-between'
+                    justifyContent: 'space-between',
+                    fontSize: 'calc(20px + 16 * (100vw / 1280))'
                 }
             },
             '& .title': {
                 [theme.breakpoints.down('md')]: {
-                    width: 'auto'
+                    width: 'auto',
+                    margin: '8px 0 0 0',
+                    fontSize: 'calc(14px + 6 * (100vw / 1280))',
+                    fontWeight: '500'
                 },
                 flex: 1,
                 width: '500px',
@@ -108,11 +112,13 @@ export const useStyles = makeStyles((theme) => ({
                 background: '#90BE27',
                 textAlign: 'end',
                 padding: '6px 20px',
+                display: 'flex',
                 [theme.breakpoints.down('md')]: {
                     background: '#2F80ED',
                     fontSize: '0.75rem',
                     padding: '3px 12.5px',
-                    textAlign: 'center'
+                    textAlign: 'center',
+                    alignItems: 'center'
                 },
                 '& > h6.MuiTypography-h6': {
                     fontSize: '1.125rem',
@@ -120,7 +126,8 @@ export const useStyles = makeStyles((theme) => ({
                     color: '#fff',
                     lineHeight: 1,
                     [theme.breakpoints.down('md')]: {
-                        fontSize: '0.75rem'
+                        fontWeight: '500',
+                        fontSize: 'calc(12px + 8 * (100vw / 1280))'
                     }
                 }
             }
@@ -137,7 +144,7 @@ export const useStyles = makeStyles((theme) => ({
             },
             '& > h6.MuiTypography-subtitle1:first-child': {
                 '& > span': {
-                    color: '#2F80ED',
+                    color: '#2F80ED'
                 }
             },
             '& h6.MuiTypography-subtitle1:last-child': {
@@ -156,6 +163,7 @@ export const useStyles = makeStyles((theme) => ({
             display: 'flex',
             marginBottom: '20px',
             flexWrap: 'wrap',
+
             '& span': {
                 display: 'flex',
                 alignItems: 'center',
@@ -164,13 +172,20 @@ export const useStyles = makeStyles((theme) => ({
                 marginRight: '30px',
                 borderRadius: '100px',
                 boxShadow: '0px 0px 15px rgba(0, 0, 0, 0.1)',
+                marginBottom: '12px',
+                [theme.breakpoints.down('md')]: {
+                    marginRight: '8px'
+                },
                 '&:last-child': {
                     marginRight: 0
                 },
                 '&.delivery': {
                     '& svg': {
                         '& path': {
-                            fill: '#695EAE'
+                            fill: '#695EAE',
+                            [theme.breakpoints.down('md')]: {
+                                fill: '#838383'
+                            }
                         }
                     }
                 },
@@ -180,16 +195,31 @@ export const useStyles = makeStyles((theme) => ({
                         width: 20,
                         height: 22,
                         '& path': {
-                            fill: '#4E4E4E'
+                            fill: '#4E4E4E',
+                            [theme.breakpoints.down('md')]: {
+                                fill: '#838383'
+                            }
                         }
                     }
                 },
-                '&.available': {},
-                '& svg': {
-                    marginRight: 15
+                '&.available': {
+                    '& svg': {
+                        marginRight: 15,
+                        '& > defs > linearGradient': {
+                            '& stop': {
+                                [theme.breakpoints.down('md')]: {
+                                    stopColor: '#838383;'
+                                }
+
+                            }
+                        }
+                    }
                 },
                 '& h6.MuiTypography-subtitle1': {
-                    color: theme.palette.common.tab
+                    color: theme.palette.common.tab,
+                    [theme.breakpoints.down('md')]: {
+                        fontSize: 'calc(10px + 6 * (100vw / 1280))'
+                    }
                 }
             }
         },
@@ -359,7 +389,7 @@ export const useStyles = makeStyles((theme) => ({
             [theme.breakpoints.down('md')]: {
                 filter: 'drop-shadow(0px 1px 8px rgba(0, 0, 0, 0.35))'
             }
-        },
+        }
     },
     icons: {
         width: '20px'

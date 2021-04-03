@@ -69,8 +69,7 @@ export const useStyles = makeStyles((theme) => ({
                     objectFit: 'contain',
                     cursor: 'pointer',
                     [theme.breakpoints.down('md')]: {
-                        width: '100% !important',
-                        objectFit: 'cover'
+                        height: '260px'
                     }
                 }
             }

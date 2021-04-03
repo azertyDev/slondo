@@ -45,9 +45,9 @@ export const SyncSliders: FC<SyncSlidersProps> = (props) => {
         <div className={classes.root}>
             <div className={classes.firstSlider}>
                 <CustomSlider
+                    variableWidth
                     focusOnSelect={true}
                     arrows={!isMdDown}
-                    variableWidth={!isMdDown}
                     ref={slider1}
                     dots={isMdDown}
                     asNavFor={isMdDown ? null : slider2.current}

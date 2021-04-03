@@ -222,61 +222,102 @@ export const PostContent: FC<WithT & any> = (props) => {
                     )}
                 </div>
             </Hidden>
-            <div className="post-info">
-                <Typography variant="subtitle1">
-                    <span>Объявление №:</span> {data.id}
-                </Typography>
-                <Typography variant="subtitle1">
-                    Опубликовано: {formatted_date}
-                </Typography>
-                <Typography variant="subtitle1">
-                    Просмотров: {data.number_of_views}
-                </Typography>
-                <Hidden mdDown>
+            <Hidden mdDown>
+                <div className="post-info">
+                    <Typography variant="subtitle1">
+                        <span>Объявление №:</span> {data.id}
+                    </Typography>
+                    <Typography variant="subtitle1">
+                        Опубликовано: {formatted_date}
+                    </Typography>
+                    <Typography variant="subtitle1">
+                        Просмотров: {data.number_of_views}
+                    </Typography>
                     <Typography variant="subtitle1" onClick={handleOpenModal}>
                         Пожаловаться <WarningIcon/>
                     </Typography>
-                </Hidden>
-            </div>
-            <div className="post-bonus">
-                {!!data.delivery && (
-                    <span className="delivery">
+                </div>
+            </Hidden>
+                <div className="post-bonus">
+                    {!!data.delivery && (
+                        <span className="delivery">
                         <DeliveryIcon/>&nbsp;
-                        <Typography variant="subtitle1">
+                            <Typography variant="subtitle1">
                             Есть доставка
                         </Typography>
                     </span>
-                )}
-                {!!data.safe_deal && (
-                    <span className="safe_deal">
+                    )}
+                    {!!data.safe_deal && (
+                        <span className="safe_deal">
                         <SafeIcon/>&nbsp;
-                        <Typography variant="subtitle1">
+                            <Typography variant="subtitle1">
                             Безопасная покупка
                         </Typography>
                     </span>
-                )}
-                {!!data.exchange && (
-                    <span className="exchange">
+                    )}
+                    {!!data.exchange && (
+                        <span className="exchange">
                         <SwapIcon/>&nbsp;
-                        <Typography variant="subtitle1">
+                            <Typography variant="subtitle1">
                             Возможен обмен
                         </Typography>
                     </span>
-                )}
-                {!!data.available_start_time && (
-                    <span className="available">
+                    )}
+                    {!!data.available_start_time && (
+                        <span className="available">
                         <PhoneIcon/>
-                        {!!data.available_days?.length && (
-                            <Typography variant="subtitle1" color="primary">
-                                {weekDaysHelper(data.available_days, t)}
-                            </Typography>
-                        )}
-                        &nbsp;&nbsp;<Typography variant="subtitle1">
+                            {!!data.available_days?.length && (
+                                <Typography variant="subtitle1" color="primary">
+                                    {weekDaysHelper(data.available_days, t)}
+                                </Typography>
+                            )}
+                            <Typography variant="subtitle1">
                             {`${data.available_start_time} - ${data.available_end_time}`}
                         </Typography>
                     </span>
-                )}
-            </div>
+                    )}
+                </div>
+            {/*<Hidden lgUp>*/}
+            {/*    <div className="post-bonus">*/}
+            {/*        {!!data.delivery && (*/}
+            {/*            <span className="delivery">*/}
+            {/*            <DeliveryIcon/>&nbsp;*/}
+            {/*                <Typography variant="subtitle1">*/}
+            {/*                Доставка*/}
+            {/*            </Typography>*/}
+            {/*        </span>*/}
+            {/*        )}*/}
+            {/*        {!!data.available_start_time && (*/}
+            {/*            <span className="available">*/}
+            {/*            <PhoneIcon/>*/}
+            {/*                {!!data.available_days?.length && (*/}
+            {/*                    <Typography variant="subtitle1" color="primary">*/}
+            {/*                        {weekDaysHelper(data.available_days, t)}*/}
+            {/*                    </Typography>*/}
+            {/*                )}*/}
+            {/*                &nbsp;&nbsp;<Typography variant="subtitle1">*/}
+            {/*                {`${data.available_start_time} - ${data.available_end_time}`}*/}
+            {/*            </Typography>*/}
+            {/*        </span>*/}
+            {/*        )}*/}
+            {/*        {!!data.exchange && (*/}
+            {/*            <span className="exchange">*/}
+            {/*            <SwapIcon/>&nbsp;*/}
+            {/*                <Typography variant="subtitle1">*/}
+            {/*                Обмен*/}
+            {/*            </Typography>*/}
+            {/*        </span>*/}
+            {/*        )}*/}
+            {/*        {!!data.safe_deal && (*/}
+            {/*            <span className="safe_deal">*/}
+            {/*            <SafeIcon/>&nbsp;*/}
+            {/*                <Typography variant="subtitle1">*/}
+            {/*                Безопасная покупка*/}
+            {/*            </Typography>*/}
+            {/*        </span>*/}
+            {/*        )}*/}
+            {/*    </div>*/}
+            {/*</Hidden>*/}
             <div className="post-location">
                 <Typography variant="button" noWrap>
                     Местоположение
@@ -336,6 +377,20 @@ export const PostContent: FC<WithT & any> = (props) => {
                     <ul>{parameterItems}</ul>
                 </div>
             )}
+            <div className="post-info">
+                <Typography variant="subtitle1">
+                    <span>Объявление №:</span> {data.id}
+                </Typography>
+                <Typography variant="subtitle1">
+                    Опубликовано: {formatted_date}
+                </Typography>
+                <Typography variant="subtitle1">
+                    Просмотров: {data.number_of_views}
+                </Typography>
+                <Typography variant="subtitle1" onClick={handleOpenModal}>
+                    Пожаловаться <WarningIcon/>
+                </Typography>
+            </div>
             <ModalSyncSliders
                 slidersRefs={slidersRefs}
                 open={openSliderModal}
