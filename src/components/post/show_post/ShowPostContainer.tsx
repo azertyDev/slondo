@@ -2,9 +2,14 @@ import React, {FC, MutableRefObject, useEffect, useRef, useState} from 'react';
 import {useRouter} from 'next/router';
 import {i18n, useTranslation} from 'next-i18next';
 import {userAPI} from '@src/api/api';
-import {ShowPost} from '@src/components/post/show_post/ShowPost';
 import {setErrorMsgAction} from '@src/redux/slices/errorSlice';
 import {useDispatch} from 'react-redux';
+import {MainLayout} from '@src/components/MainLayout';
+import {Grid, Hidden} from '@material-ui/core';
+import {PostContent} from '@src/components/post/show_post/post_content/PostContent';
+import {OwnerAuctionContent} from '@src/components/post/show_post/owner_auction_content/OwnerAuctionContent';
+import {Banner} from '@src/components/elements/banner/Banner';
+import {useStyles} from './useStyles';
 
 
 export type SlidersRefType = {
@@ -15,13 +20,15 @@ export type SlidersRefType = {
 };
 
 export const ShowPostContainer: FC = () => {
-    const {t} = useTranslation(['post']);
     const dispatch = useDispatch();
+    const { t } = useTranslation(['post']);
+    const router = useRouter();
+    const lang = i18n.language;
     const url = useRouter().query.url as string;
     const splittedUrl = url.split('-');
     const params = splittedUrl.splice(-3);
 
-    const initValues = {id: null, name: ''};
+    const initValues = { id: null, name: '' };
 
     const initialPostData = {
         isFetch: false,
@@ -78,12 +85,18 @@ export const ShowPostContainer: FC = () => {
                 mark: ''
             },
             auction: {
+                id: null,
                 duration: '',
                 display_phone: '',
                 reserve_price: '',
                 price_by_now: ''
             }
         }
+    };
+
+    const initialAuctionBetsList = {
+        isFetch: false,
+        list: []
     };
 
     const initSlidersRefs: SlidersRefType = {
@@ -97,8 +110,71 @@ export const ShowPostContainer: FC = () => {
     const [parameters, setParameters] = useState({});
     const [slidersRefs, setSlidersRefs] = useState(initSlidersRefs);
     const [descHeight, setDescHeight] = useState(0);
+    const [openModal, setOpenModal] = useState(false);
+    const [page, setPage] = useState(1);
+    const [auctionsBetsList, setAuctionBetsList] = useState(initialAuctionBetsList);
+    const [lastPage, setLastPage] = useState(null);
 
-    const lang = i18n.language;
+    const handleOpenModal = () => () => {
+        setOpenModal(true);
+    };
+    const handleCloseModal = () => () => {
+        setOpenModal(false);
+    };
+    const handleBuyNow = () => () => {
+        userAPI.buyAuction(postData.data.auction.id, postData.data.id)
+            .then(result => router.push('/'));
+    };
+    const handleSubmit = (value) => {
+        userAPI.betAuction(value)
+            .then(result => result && userAPI.getAuctionBets(postData.data.auction.id, 1)
+                .then(result => {
+                    setLastPage(result.last_page);
+                    setAuctionBetsList(result.data);
+                }))
+            .catch(error => dispatch(setErrorMsgAction(t(`auction:${error.response.data.message}`))));
+    };
+    const handleScroll = (e) => {
+        const bottom = e.target.scrollHeight - e.target.scrollTop === e.target.clientHeight;
+        if (page !== lastPage && bottom) {
+            setPage(prev => prev + 1);
+        }
+    };
+
+    const refreshAucBets = async () => {
+        try {
+            setAuctionBetsList({
+                ...auctionsBetsList,
+                isFetch: true
+            });
+            const { data } = await userAPI.getAuctionBets(postData.data.auction.id && postData.data.auction.id, 1);
+            setAuctionBetsList({
+                ...auctionsBetsList,
+                isFetch: false,
+                list: [...auctionsBetsList.list, ...data]
+            });
+        } catch (e) {
+            dispatch(setErrorMsgAction(e.message));
+        }
+    };
+
+    const auctionBetsPagination = async () => {
+        try {
+            setAuctionBetsList({
+                ...auctionsBetsList,
+                isFetch: true
+            });
+            const { data, last_page } = await userAPI.getAuctionBets(postData.data.auction.id && postData.data.auction.id, page);
+            setAuctionBetsList({
+                ...auctionsBetsList,
+                isFetch: false,
+                list: [...auctionsBetsList.list, ...data]
+            });
+            setLastPage(last_page);
+        } catch (e) {
+            dispatch(setErrorMsgAction(e.message));
+        }
+    };
 
     const fetchPostData = async () => {
         try {
@@ -126,7 +202,7 @@ export const ShowPostContainer: FC = () => {
                 otherData.available_days = available_days.map(day => {
                     day.name = t(`common:${day.name}`);
                     return day;
-                })
+                });
             }
 
             setPostData({
@@ -165,6 +241,10 @@ export const ShowPostContainer: FC = () => {
     }, []);
 
     useEffect(() => {
+        postData.data.auction.id && auctionBetsPagination();
+    }, [page]);
+
+    useEffect(() => {
         fetchPostData();
     }, [lang]);
 
@@ -173,12 +253,44 @@ export const ShowPostContainer: FC = () => {
         setDescHeight(height);
     }, [postData]);
 
-    return <ShowPost
-        t={t}
-        slidersRefs={slidersRefs}
-        descHeight={descHeight}
-        postData={postData}
-        parameters={parameters}
-        handleFollow={handleFollow}
-    />
+    const classes = useStyles();
+    return (
+        <MainLayout title={postData.data.title}>
+            <div className={classes.root}>
+                <Grid container spacing={2}>
+                    <Grid item xs={12} lg={9}>
+                        <PostContent
+                            t={t}
+                            data={postData.data}
+                            parameters={parameters}
+                            descHeight={descHeight}
+                            slidersRefs={slidersRefs}
+                        />
+                    </Grid>
+                    <Hidden mdDown>
+                        <Grid item lg={3}>
+                            <OwnerAuctionContent
+                                t={t}
+                                postData={postData.data}
+                                handleFollow={handleFollow}
+                                openModal={openModal}
+                                page={page}
+                                list={auctionsBetsList.list}
+                                lastPage={lastPage}
+                                handleOpenModal={handleOpenModal}
+                                handleCloseModal={handleCloseModal}
+                                handleBuyNow={handleBuyNow}
+                                handleSubmit={handleSubmit}
+                                handleScroll={handleScroll}
+                                handleRefresh={refreshAucBets}
+                            />
+                            <div className={classes.adBanner}>
+                                <Banner height="424px" />
+                            </div>
+                        </Grid>
+                    </Hidden>
+                </Grid>
+            </div>
+        </MainLayout>
+    );
 };

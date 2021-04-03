@@ -1,33 +1,25 @@
-import React, {useState} from 'react';
+import React from 'react';
 import {Typography} from '@material-ui/core';
 import {ButtonComponent} from '@src/components/elements/button/Button';
 import {CustomModal} from '@src/components/elements/custom_modal/CustomModal';
-import {userAPI} from '@src/api/api';
 import {useRouter} from 'next/router';
 import Link from 'next/link';
 
 const BuyAuctionComponent = (props) => {
     const router = useRouter();
-    const { auction_id, ads_id } = props;
-    const [openModal, setOpenModal] = useState(false);
-    console.log(openModal);
+    const {
+        data: { auction },
+        handleBuyNow,
+        openModal,
+        handleOpenModal,
+        handleCloseModal
+    } = props;
 
-    const handleOpenModal = () => () => {
-        setOpenModal(true);
-        console.log('asdasd');
-    };
-    const handleCloseModal = () => {
-        setOpenModal(false);
-    };
-    const handleSubmit = () => {
-        userAPI.buyAuction(auction_id, ads_id)
-            .then(result => router.push('/'));
-    };
     return (
         <>
             <div className="buy-now">
                 <Typography variant="subtitle1" color="initial">
-                    1 420 000 000 сум
+                    {auction.price_by_now} сум
                 </Typography>
                 <ButtonComponent onClick={handleOpenModal()}>
                     <Typography variant="subtitle1" color="initial">
@@ -36,7 +28,7 @@ const BuyAuctionComponent = (props) => {
                 </ButtonComponent>
             </div>
 
-            <CustomModal handleModalClose={handleCloseModal} openModal={openModal}>
+            <CustomModal handleModalClose={handleCloseModal()} openModal={openModal}>
                 <>
                     <Typography className="title" variant="h6">
                         Купить сейчас
@@ -56,7 +48,7 @@ const BuyAuctionComponent = (props) => {
                     <div className='confirm'>
                         <ButtonComponent
                             className='submit'
-                            onClick={() => handleSubmit()}
+                            onClick={handleBuyNow()}
                         >
                             <Typography variant='subtitle1'>
                                 Купить сейчас

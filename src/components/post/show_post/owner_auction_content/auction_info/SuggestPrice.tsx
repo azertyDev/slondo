@@ -1,42 +1,27 @@
-import React, {useState} from 'react'
-import {Typography} from '@material-ui/core'
-import {ButtonComponent} from '@src/components/elements/button/Button'
-import {CustomModal} from '@src/components/elements/custom_modal/CustomModal'
-import {userAPI} from '@src/api/api'
-import {useRouter} from 'next/router'
+import React from 'react';
+import {Typography} from '@material-ui/core';
+import {ButtonComponent} from '@src/components/elements/button/Button';
+import {CustomModal} from '@src/components/elements/custom_modal/CustomModal';
 
-const BuyAuctionComponent = (props) => {
-    // const router = useRouter()
-    // const [modalState, setModalState] = useState('')
-    // const {auction_id, ads_id} = props
-    // const [openModal, setOpenModal] = React.useState(false)
+export const SuggestPriceComponent = (props) => {
+    const {
+        openModal,
+        handleOpenModal,
+        handleCloseModal
+    } = props;
 
-    // const handleModalOpen = (value) => {
-    //     setOpenModal(true)
-    //     setModalState(value)
-    // }
-    //
-    // const handleModalClose = () => {
-    //     setOpenModal(false)
-    // }
-    // const handleSubmit = () => {
-    //     userAPI.buyAuction(auction_id, ads_id)
-    //         .then(result => router.push('/'))
-    // }
     return (
         <>
-            <div className="buy-now">
-                <Typography variant="subtitle1" color="initial">
-                    1 420 000 000 сум
-                </Typography>
-                <ButtonComponent>
+            <div className='suggest_price'>
+                <ButtonComponent onClick={handleOpenModal()}>
                     <Typography variant="subtitle1" color="initial">
-                        Купить сейчас
+                        Предложить цену
                     </Typography>
                 </ButtonComponent>
             </div>
+            <CustomModal handleModalClose={handleCloseModal()} openModal={openModal}>
+
+            </CustomModal>
         </>
     )
 }
-
-export default BuyAuctionComponent

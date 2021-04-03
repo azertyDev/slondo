@@ -1,68 +1,42 @@
-import React, {FC, useEffect, useState} from 'react';
+import React, {FC, useState} from 'react';
 import {Typography} from '@material-ui/core';
-import {ButtonComponent} from '@src/components/elements/button/Button';
 import {LockIcon, RefreshIcon} from '@src/components/elements/icons';
 import {AuctionTimer} from './AuctionTimer';
 import {numberPrettier} from '@root/src/helpers';
 import BuyAuctionComponent from './BuyAuction';
-import {userAPI} from '@src/api/api';
 import AuctionForm from './AuctionForm/AuctionFrom';
-import {useDispatch, useSelector} from 'react-redux';
-import {setErrorMsgAction} from '@src/redux/slices/errorSlice';
+import {useSelector} from 'react-redux';
 import {RootState} from '@src/redux/rootReducer';
 import {useStyles} from './useStyles';
+import {SuggestPriceComponent} from '@src/components/post/show_post/owner_auction_content/auction_info/SuggestPrice';
 
 
 export const AuctionInfo: FC<any> = (props) => {
-    const dispatch = useDispatch();
     const isAuth = useSelector<any>((state: RootState) => state.user.isAuth);
-    const { data, handleOpenModal, t } = props;
+    const {
+        t,
+        data,
+        list,
+        openModal,
+        page,
+        lastPage,
+        handleOpenModal,
+        handleCloseModal,
+        handleBuyNow,
+        handleSubmit,
+        handleScroll,
+        handleRefresh
+    } = props;
+
     const [showAll, setShowAll] = useState(false);
-    const [page, setPage] = useState(1);
     const date = new Date(data.expiration_at).getTime();
-    const [list, setList] = useState([]);
-    const [lastPage, setLastPage] = useState(null);
-
-    const ads_id = data?.id;
-    const auction_id = data?.auction?.id;
-
-    const handleSubmit = (value) => {
-        userAPI.betAuction(value)
-            .then(result => result && userAPI.getAuctionBets(data.auction.id, 1)
-                .then(result => {
-                    setLastPage(result.last_page);
-                    setList(result.data)
-                }))
-            .catch(error => dispatch(setErrorMsgAction(t(`auction:${error.response.data.message}`))))
-    };
-
-    const handleScroll = (e) => {
-        const bottom = e.target.scrollHeight - e.target.scrollTop === e.target.clientHeight;
-        if (page !== lastPage && bottom) {
-            setPage(prev => prev + 1);
-        }
-    };
-
-    const handleRefresh = () => {
-        userAPI.getAuctionBets(data.auction.id, 1)
-            .then(result => setList(result.data))
-            .catch(err => dispatch(setErrorMsgAction(err.message)))
-    };
-
-    useEffect(() => {
-        userAPI.getAuctionBets(data.auction.id, page)
-            .then(result => {
-                setLastPage(result.last_page)
-                setList(prev => [...prev, ...result.data])
-            })
-    }, [page]);
 
     const classes = useStyles();
     return (
         <div className={classes.root}>
             <div className="lot-info">
                 {data.auction && data.auction.reserve_price > list?.[0]?.bet && <div className="reserve-price">
-                    <LockIcon/>
+                    <LockIcon />
                     <div>
                         <Typography variant="subtitle2" color="initial">
                             Резервная цена:
@@ -96,7 +70,7 @@ export const AuctionInfo: FC<any> = (props) => {
                         onScroll={handleScroll}
                     >
                         <ul>
-                            {list && list?.map((item) => (
+                            {list.map((item) => (
                                 <li key={item?.id}>
                                     <div>
                                         <div className="participant-name">
@@ -170,18 +144,18 @@ export const AuctionInfo: FC<any> = (props) => {
                     </div>
                     {data.ads_type.id === 3 && (
                         <BuyAuctionComponent
+                            handleBuyNow={handleBuyNow}
                             handleOpenModal={handleOpenModal}
-                            auction_id={auction_id}
-                            ads_id={ads_id}
+                            openModal={openModal}
+                            handleCloseModal={handleCloseModal}
+                            data={data}
                         />
                     )}
-                    <div className='suggest_price'>
-                        <ButtonComponent onClick={handleOpenModal}>
-                            <Typography variant="subtitle1" color="initial">
-                                Предложить цену
-                            </Typography>
-                        </ButtonComponent>
-                    </div>
+                    <SuggestPriceComponent
+                        handleOpenModal={handleOpenModal}
+                        handleCloseModal={handleCloseModal}
+                        openModal={openModal}
+                    />
                 </>
                 }
             </div>

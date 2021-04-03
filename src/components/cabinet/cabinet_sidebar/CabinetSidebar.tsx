@@ -10,6 +10,7 @@ import {useStyles} from './useStyles';
 
 export const CabinetSidebar: FC<{ user: UserInfo }> = ({user}) => {
     const {t} = useTranslation(['cabinet']);
+    console.log(user);
 
     const classes = useStyles();
     return (

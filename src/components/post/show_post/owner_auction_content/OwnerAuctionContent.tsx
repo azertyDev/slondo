@@ -1,12 +1,27 @@
-import React, {FC, useState} from 'react';
+import React, {FC} from 'react';
 import {AuctionInfo} from './auction_info/AuctionInfo';
 import {OwnerInfo} from './owner_info/OwnerInfo';
 import {Typography} from '@material-ui/core';
 import {numberPrettier} from '@root/src/helpers';
 import {useStyles} from './useStyles';
-import {CustomModal} from '@src/components/elements/custom_modal/CustomModal';
 
-export const OwnerAuctionContent: FC<any> = ({ t, postData, handleFollow }) => {
+export const OwnerAuctionContent: FC<any> = (props) => {
+    const {
+        t,
+        postData,
+        handleFollow,
+        openModal,
+        page,
+        list,
+        lastPage,
+        handleOpenModal,
+        handleCloseModal,
+        handleBuyNow,
+        handleSubmit,
+        handleScroll,
+        handleRefresh
+    } = props;
+
     const isAuction = postData.ads_type.mark === 'auc' || postData.ads_type.mark === 'exauc';
 
     const classes = useStyles();
@@ -22,6 +37,16 @@ export const OwnerAuctionContent: FC<any> = ({ t, postData, handleFollow }) => {
                 <AuctionInfo
                     data={postData}
                     t={t}
+                    openModal={openModal}
+                    page={page}
+                    list={list}
+                    lastPage={lastPage}
+                    handleOpenModal={handleOpenModal}
+                    handleCloseModal={handleCloseModal}
+                    handleBuyNow={handleBuyNow}
+                    handleSubmit={handleSubmit}
+                    handleScroll={handleScroll}
+                    handleRefresh={handleRefresh}
                 />
             )}
             <OwnerInfo
