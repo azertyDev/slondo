@@ -1,22 +1,26 @@
-import React, {FC} from 'react'
-import Head from 'next/head'
-import {Header} from './header/Header'
-import {Footer} from './footer/Footer'
-import {Container} from '@material-ui/core'
-import {ErrorModal} from '@src/components/error_modal/ErrorModal'
-import {AdditionalComponent} from '@src/components/elements/additional/AdditionalComponent'
+import React, {FC} from 'react';
+import Head from 'next/head';
+import {Header} from './header/Header';
+import {Footer} from './footer/Footer';
+import {Container} from '@material-ui/core';
+import {ErrorModal} from '@src/components/error_modal/ErrorModal';
 
 
 type MainLayoutPropsType = {
     title?: string;
+    description?: string
 };
 
-export const MainLayout: FC<MainLayoutPropsType> = ({children, title = 'SLONDO'}) => {
+export const MainLayout: FC<MainLayoutPropsType> = (props) => {
+    const {children, description, title = 'SLONDO'} = props;
     return (
         <>
             <Head>
-                <title>{title}</title>
                 <meta name="robots" content="noindex"/>
+                <meta name="description" content={description}/>
+                <meta property="og:title" content={title} key="ogtitle" />
+                <meta property="og:description" content={description} key="ogdesc" />
+                <title>{title}</title>
             </Head>
             <Header/>
             <main>
@@ -25,13 +29,12 @@ export const MainLayout: FC<MainLayoutPropsType> = ({children, title = 'SLONDO'}
                     style={{paddingTop: '48px', position: 'relative'}}
                 >
                     {children}
-                    <AdditionalComponent/>
                 </Container>
             </main>
             <Footer/>
             <ErrorModal/>
         </>
-    )
-}
+    );
+};
 
 

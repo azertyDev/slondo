@@ -1,13 +1,13 @@
+import React, {FC} from "react";
+import {GetStaticProps} from "next";
 import {serverSideTranslations} from "next-i18next/serverSideTranslations";
-import React from "react";
-import {useTranslation} from "react-i18next";
+import {PageNotFound} from "@src/components/page_not_found/PageNotFound";
 
-const Custom404 = () => {
-    const {t} = useTranslation('errors');
-    return <h1>{t('pageNotFound')}</h1>
+const Custom404: FC = () => {
+    return <PageNotFound/>;
 };
 
-export const getStaticProps = async ({locale}) => ({
+export const getStaticProps: GetStaticProps = async ({locale}) => ({
     props: {
         ...await serverSideTranslations(locale, ['errors'])
     }

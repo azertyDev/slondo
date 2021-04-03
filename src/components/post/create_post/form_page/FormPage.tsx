@@ -1,7 +1,7 @@
 import React, {FC, useEffect, useState} from 'react';
 import {Typography} from "@material-ui/core";
 import {useRouter} from "next/router";
-import {useDispatch} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {userAPI} from '@src/api/api';
 import {Top} from '../top/Top';
 import {useTranslation} from "next-i18next";
@@ -17,6 +17,7 @@ import {SuccessPage} from "@src/components/post/create_post/success_page/Success
 import {withAuthRedirect} from "@src/hoc/withAuthRedirect";
 import {ParamsFormContainer} from "./params_form/ParamsFormContainer";
 import {useStyles} from './useStyles';
+import {RootState} from "@src/redux/rootReducer";
 
 
 const extendSubCtgrs = [
@@ -33,6 +34,7 @@ const FormPage: FC = () => {
     const dispatch = useDispatch();
 
     const {t} = useTranslation(['post', 'errors']);
+    const {phone} = useSelector((store: RootState) => store.user.info)
 
     const {asPath, query, locale, push} = useRouter();
     const {index, ...params} = query;
@@ -186,9 +188,10 @@ const FormPage: FC = () => {
                         <div>
                             <CommonParamsForm
                                 t={t}
+                                post={post}
+                                ownerPhone={phone}
                                 asPath={asPath}
                                 postType={postType}
-                                post={post}
                                 setPost={setPost}
                                 isPreview={isPreview}
                                 setIsPreview={setIsPreview}

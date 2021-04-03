@@ -1,5 +1,5 @@
 import React from 'react';
-import JobComponent from "@root/src/components/categories/job";
+import JobComponent from "@root/src/components/search/job";
 
 const Job = () => {
     return <JobComponent/>;

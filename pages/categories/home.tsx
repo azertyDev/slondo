@@ -1,5 +1,5 @@
 import React from 'react';
-import HomeComponent from "@root/src/components/categories/home";
+import HomeComponent from "@root/src/components/search/home";
 
 const Home = () => {
     return <HomeComponent/>;

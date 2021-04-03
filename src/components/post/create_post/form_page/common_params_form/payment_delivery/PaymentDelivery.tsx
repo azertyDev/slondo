@@ -6,56 +6,92 @@ import {useStyles} from './useStyles';
 
 
 type PaymentDeliveryPropsType = {
-    handleCheckboxChange,
     values,
+    isAuction: boolean,
+    handleCheckboxChange
 } & WithT;
 
 export const PaymentDelivery: FC<PaymentDeliveryPropsType> = (props) => {
     const {
         t,
-        handleCheckboxChange,
-        values
+        values,
+        isAuction,
+        handleCheckboxChange
     } = props;
 
     const classes = useStyles();
     return (
         <div className={classes.root}>
-            <Grid
-                container
-                item
-                xs={12}
-                alignItems="center"
-            >
-                <Grid item xs={2}>
-                    <Typography variant="subtitle1">
-                        <strong>
-                            {t('safeDeal')}
-                        </strong>
-                    </Typography>
-                </Grid>
-                <Grid
-                    item
-                    xs={9}
-                    className='payment-delivery'
-                >
-                    <Checkbox
-                        color='primary'
-                        checked={values.safe_deal}
-                        onChange={handleCheckboxChange('safe_deal')}
-                    />
-                    <Help className="question-mark"/>
-                    <Typography variant="subtitle2">
-                        Примечание: При подключении услуги «Безопасный
-                        торг». Ваша сделка защищена. Стоимость
-                        услуги составляет n%.&nbsp;
-                        <a href="#">
+            {!isAuction && (
+                <>
+                    <Grid
+                        container
+                        item
+                        xs={12}
+                        alignItems="center"
+                    >
+                        <Grid item xs={2}>
+                            <Typography variant="subtitle1">
+                                <strong>
+                                    {t('safeDeal')}
+                                </strong>
+                            </Typography>
+                        </Grid>
+                        <Grid
+                            item
+                            xs={9}
+                            className='payment-delivery'
+                        >
+                            <Checkbox
+                                color='primary'
+                                checked={values.safe_deal}
+                                onChange={handleCheckboxChange('safe_deal')}
+                            />
+                            <Help className="question-mark"/>
+                            <Typography variant="subtitle2">
+                                Примечание: При подключении услуги «Безопасный
+                                торг». Ваша сделка защищена. Стоимость
+                                услуги составляет n%.&nbsp;
+                                <a href="#">
                             <span className="safe-auction-rules">
                                 {t('safeDealRules')}
                             </span>
-                        </a>
-                    </Typography>
-                </Grid>
-            </Grid>
+                                </a>
+                            </Typography>
+                        </Grid>
+                    </Grid>
+                    <Grid
+                        container
+                        item
+                        xs={12}
+                        alignItems="center"
+                    >
+                        <Grid item xs={2}>
+                            <Typography variant="subtitle1">
+                                <strong>
+                                    {t('exchange')}
+                                </strong>
+                            </Typography>
+                        </Grid>
+                        <Grid
+                            item
+                            xs={9}
+                            className='payment-delivery'
+                        >
+                            <Checkbox
+                                color='primary'
+                                checked={values.exchange}
+                                onChange={handleCheckboxChange('exchange')}
+                            />
+                            <Help className="question-mark"/>
+                            <Typography variant="subtitle2">
+                                Примечание: Вы принимаете предложения от
+                                других пользователей на обмен.
+                            </Typography>
+                        </Grid>
+                    </Grid>
+                </>
+            )}
             <Grid
                 item
                 container
@@ -92,36 +128,6 @@ export const PaymentDelivery: FC<PaymentDeliveryPropsType> = (props) => {
                     </Typography>
                 </Grid>
             </Grid>
-            <Grid
-                container
-                item
-                xs={12}
-                alignItems="center"
-            >
-                <Grid item xs={2}>
-                    <Typography variant="subtitle1">
-                        <strong>
-                            {t('exchange')}
-                        </strong>
-                    </Typography>
-                </Grid>
-                <Grid
-                    item
-                    xs={9}
-                    className='payment-delivery'
-                >
-                    <Checkbox
-                        color='primary'
-                        checked={values.exchange}
-                        onChange={handleCheckboxChange('exchange')}
-                    />
-                    <Help className="question-mark"/>
-                    <Typography variant="subtitle2">
-                        Примечание: Вы принимаете предложения от
-                        других пользователей на обмен.
-                    </Typography>
-                </Grid>
-            </Grid>
         </div>
-    )
+    );
 };

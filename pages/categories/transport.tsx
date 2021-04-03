@@ -1,5 +1,5 @@
 import React from 'react';
-import TransportComponent from "@root/src/components/categories/transport";
+import TransportComponent from "@root/src/components/search/transport";
 
 const Transport = () => {
     return <TransportComponent/>;

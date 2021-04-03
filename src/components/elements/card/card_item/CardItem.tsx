@@ -5,7 +5,7 @@ import {Card, CardActionArea, CardContent, CardMedia, IconButton, Tooltip, Typog
 import Skeleton from '@material-ui/lab/Skeleton';
 import {DeliveryIcon, FavoriteIcon, SafeIcon, SwapIcon} from '@src/components/elements/icons';
 import {InnerCardData} from '@root/interfaces/CardData';
-import {numberPrettier, transformTitle} from '@src/helpers';
+import {numberPrettier, transformToCyrillic} from '@src/helpers';
 import {userAPI} from '@src/api/api';
 import {useSelector} from 'react-redux';
 import {RootState} from '@src/redux/rootReducer';
@@ -38,7 +38,7 @@ export const CardItem: FC<CardItemProps> = (props) => {
     const isFavorite = true;
 
     const {t} = useTranslation(['common']);
-    const translatedTitle = transformTitle(title);
+    const translatedTitle = transformToCyrillic(title);
 
     const {isAuth} = useSelector((store: RootState) => store.user);
 

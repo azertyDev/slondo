@@ -16,26 +16,47 @@ export const isRequired = (field: string): boolean =>
 
 export const phoneFormat = (phone: string): string => phone.replace(/[\s+()]/g, "");
 
-export const transformTitle = (title: string): string => {
-    const transform = new CyrillicToTranslit().transform;
+export const transformToCyrillic = (title: string, reverse?: boolean): string => {
+    const transform = reverse ? new CyrillicToTranslit().reverse : new CyrillicToTranslit().transform;
 
-    return transform(title)
-        .toLowerCase()
-        .replace(punctuationMarksRegEx, ' ')
-        .replace(/\s+/g, '-');
+    if (reverse) {
+        return transform(title);
+    } else {
+        return transform(title)
+            .toLowerCase()
+            .replace(punctuationMarksRegEx, ' ')
+            .replace(/\s+/g, '-');
+    }
+};
+
+export const getCtgrByCyrillicName = (name: string): any => {
+    return categories_list.reduce((acc: any, ctgr) => {
+        ctgr.subCategory.forEach(subCtgr => {
+            if (transformToCyrillic(subCtgr.ru_name) === name) {
+                acc = subCtgr;
+            } else {
+                subCtgr.type?.forEach(type => {
+                    if (transformToCyrillic(type.ru_name) === name) {
+                        acc = type;
+                    }
+                });
+            }
+        });
+        return acc;
+    }, null);
 };
 
 export const numberPrettier = (price: string): string => {
     return !!price
-        ? price.toString()
-            .replace(/\s/g, '')
-            .replace(/\B(?=(\d{3})+(?!\d))/g, " ")
-        : '';
+           ? price.toString()
+               .replace(/\s/g, '')
+               .replace(/\B(?=(\d{3})+(?!\d))/g, " ")
+           : '';
 };
 
 export const clearWhiteSpaces = (txt: string): string => {
     return txt.replace(/\s+/g, "");
-}
+};
 
 export const addParentsToCtgrs = (categoriesList: CategoryType[]): CategoryType[] => {
     return categoriesList.map(ctgry => {
@@ -65,19 +86,19 @@ export const addParentsToCtgrs = (categoriesList: CategoryType[]): CategoryType[
                             name: ctgry.name
                         }
                     ]
-                )
+                );
                 return {
                     ...ctgry,
                     type,
                     parents
-                }
+                };
             } else {
                 return {
                     ...ctgry,
                     parents
-                }
+                };
             }
-        })
+        });
     }
 };
 
@@ -117,7 +138,7 @@ export const dataForCrtPostNormalize = (data: any, type?) => {
     } else {
         data = {};
     }
-    return data
+    return data;
 };
 
 export const categorySearchHelper = (txt: string, categoryList: CategoryType[], t: TFunction): SubCtgrsType[] => {
@@ -199,7 +220,7 @@ export const getCategoriesByParams = (categories, params) => {
         }
         return acc;
     }, {});
-}
+};
 
 export const formatNumber = (number: number) => {
     if (number <= 9) {
@@ -211,4 +232,4 @@ export const formatNumber = (number: number) => {
 
 export const getErrorMsg = (errorMsg, touched, t: TFunction): string => {
     return errorMsg && touched ? t(`errors:${errorMsg}`) : '';
-}
+};

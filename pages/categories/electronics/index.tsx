@@ -1,5 +1,5 @@
 import React, {FC} from 'react';
-import ElectronicsComponent from "@src/components/categories/electronics";
+import ElectronicsComponent from "@src/components/search/Search";
 
 const Index: FC = () => {
     return <ElectronicsComponent/>;

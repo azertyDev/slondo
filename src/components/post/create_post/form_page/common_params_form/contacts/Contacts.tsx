@@ -10,6 +10,7 @@ type ContactsPropsType = {
     values,
     handleInput,
     handleCheckboxChange,
+    ownerPhone: string
 } & WithT;
 
 export const Contacts: FC<ContactsPropsType> = (props) => {
@@ -18,6 +19,7 @@ export const Contacts: FC<ContactsPropsType> = (props) => {
         isAuction,
         values,
         handleInput,
+        ownerPhone,
         handleCheckboxChange
     } = props;
 
@@ -38,14 +40,14 @@ export const Contacts: FC<ContactsPropsType> = (props) => {
             )}
             <div>
                 <Typography variant="subtitle1">
-                    <strong>{t('ownPhone')}&nbsp;</strong>
-                    <span>+998(90) 9998877</span>
+                    <strong>{t('ownPhone')}:&nbsp;</strong>
+                    <span>+{ownerPhone}</span>
                 </Typography>
             </div>
             <div>
                 <Typography variant="subtitle1">
                     <strong>
-                        {t('additionalPhone')}
+                        {t('additionalPhone')}:
                     </strong>
                 </Typography>
                 <CustomFormikField

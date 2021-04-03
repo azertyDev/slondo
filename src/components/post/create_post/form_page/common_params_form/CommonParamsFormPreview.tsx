@@ -8,9 +8,10 @@ import {useStyles} from './useStyles';
 
 type DefaultParamsPropsType = {
     values,
-    isAuction,
-    isAdvanceAuction,
-    locationText,
+    isAuction: boolean,
+    isAdvanceAuction: boolean,
+    locationText: string,
+    ownerPhone: string
 } & WithT;
 
 export const CommonParamsFormPreview: FC<DefaultParamsPropsType> = (props) => {
@@ -18,6 +19,7 @@ export const CommonParamsFormPreview: FC<DefaultParamsPropsType> = (props) => {
         t,
         values,
         isAuction,
+        ownerPhone,
         isAdvanceAuction,
         locationText
     } = props;
@@ -28,69 +30,69 @@ export const CommonParamsFormPreview: FC<DefaultParamsPropsType> = (props) => {
     return (
         <div className={classes.root}>
             {isAuction
-                ? <div>
-                    <Typography variant="subtitle1">
-                        <strong>
-                            {t('startPrice')}:&nbsp;
-                        </strong>
-                        {numberPrettier(values.price)}
-                    </Typography>
-                    <Typography variant="subtitle1">
-                        <strong>
-                            {t('auctionDuration')}:&nbsp;
-                        </strong>
-                        {auction.duration.hours}
-                    </Typography>
-                    {isAdvanceAuction && (
-                        <div>
-                            <Typography variant="subtitle1">
-                                <strong>
-                                    {t('reservePrice')}:&nbsp;
-                                </strong>
-                                {auction.reserve_price}
-                            </Typography>
-                            {auction.price_by_now.value && (
-                                <Typography variant="subtitle1">
-                                    <strong>
-                                        {t('buyNow')}:&nbsp;
-                                    </strong>
-                                    {auction.price_by_now.value}
-                                </Typography>
-                            )}
-                            {auction.auto_renewal && (
-                                <div className='auction-params'>
-                                    <Checkbox
-                                        disabled
-                                        color='primary'
-                                        checked={auction.auto_renewal}
-                                    />
-                                    <Typography variant="subtitle1">
-                                        {t('autoRenewal')}
-                                    </Typography>
-                                </div>
-                            )}
-                            {auction.offer_the_price && (
-                                <div className='auction-params'>
-                                    <Checkbox
-                                        disabled
-                                        color='primary'
-                                        checked={auction.offer_the_price}
-                                    />
-                                    <Typography variant="subtitle1">
-                                        {t('offerPrice')}
-                                    </Typography>
-                                </div>
-                            )}
-                        </div>
-                    )}
-                </div>
-                : <Typography variant="subtitle1">
-                    <strong>
-                        {t('price')}:&nbsp;
-                    </strong>
-                    {numberPrettier(values.price)}&nbsp;
-                    {values.currency.name}
-                </Typography>}
+             ? <div>
+                 <Typography variant="subtitle1">
+                     <strong>
+                         {t('startPrice')}:&nbsp;
+                     </strong>
+                     {numberPrettier(values.price)}
+                 </Typography>
+                 <Typography variant="subtitle1">
+                     <strong>
+                         {t('auctionDuration')}:&nbsp;
+                     </strong>
+                     {auction.duration.hours}
+                 </Typography>
+                 {isAdvanceAuction && (
+                     <div>
+                         <Typography variant="subtitle1">
+                             <strong>
+                                 {t('reservePrice')}:&nbsp;
+                             </strong>
+                             {auction.reserve_price}
+                         </Typography>
+                         {auction.price_buy_now.value && (
+                             <Typography variant="subtitle1">
+                                 <strong>
+                                     {t('buyNow')}:&nbsp;
+                                 </strong>
+                                 {auction.price_buy_now.value}
+                             </Typography>
+                         )}
+                         {auction.auto_renewal && (
+                             <div className='auction-params'>
+                                 <Checkbox
+                                     disabled
+                                     color='primary'
+                                     checked={auction.auto_renewal}
+                                 />
+                                 <Typography variant="subtitle1">
+                                     {t('autoRenewal')}
+                                 </Typography>
+                             </div>
+                         )}
+                         {auction.offer_the_price && (
+                             <div className='auction-params'>
+                                 <Checkbox
+                                     disabled
+                                     color='primary'
+                                     checked={auction.offer_the_price}
+                                 />
+                                 <Typography variant="subtitle1">
+                                     {t('offerPrice')}
+                                 </Typography>
+                             </div>
+                         )}
+                     </div>
+                 )}
+             </div>
+             : <Typography variant="subtitle1">
+                 <strong>
+                     {t('price')}:&nbsp;
+                 </strong>
+                 {numberPrettier(values.price)}&nbsp;
+                 {values.currency.name}
+             </Typography>}
             <div className='post-options'>
                 {values.safe_deal && (
                     <div>
@@ -185,7 +187,7 @@ export const CommonParamsFormPreview: FC<DefaultParamsPropsType> = (props) => {
                     <strong>
                         {t('ownPhone')}:&nbsp;
                     </strong>
-                    +998(90) 9998877
+                    +{ownerPhone}
                 </Typography>
                 {values.phone && (
                     <Typography variant="subtitle1">
@@ -208,5 +210,5 @@ export const CommonParamsFormPreview: FC<DefaultParamsPropsType> = (props) => {
                 </div>
             )}
         </div>
-    )
-}
+    );
+};

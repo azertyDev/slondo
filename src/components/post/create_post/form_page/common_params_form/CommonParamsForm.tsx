@@ -32,6 +32,7 @@ type DefaultParamsPropsType = {
     setPost,
     isPreview: boolean,
     setIsPreview: Dispatch<SetStateAction<boolean>>
+    ownerPhone: string
 } & WithT;
 
 export const CommonParamsForm: FC<DefaultParamsPropsType> = (props) => {
@@ -42,7 +43,8 @@ export const CommonParamsForm: FC<DefaultParamsPropsType> = (props) => {
         currentFormIndex,
         postType,
         post,
-        setPost
+        setPost,
+        ownerPhone
     } = props;
 
     const formIndex = 1;
@@ -74,7 +76,7 @@ export const CommonParamsForm: FC<DefaultParamsPropsType> = (props) => {
             offer_the_price: false,
             auto_renewal: false,
             display_phone: false,
-            price_by_now: {
+            price_buy_now: {
                 isActive: false,
                 value: ''
             }
@@ -96,7 +98,7 @@ export const CommonParamsForm: FC<DefaultParamsPropsType> = (props) => {
         if (isAuction) {
             const {
                 duration,
-                price_by_now,
+                price_buy_now,
                 reserve_price,
                 auto_renewal,
                 offer_the_price,
@@ -106,7 +108,7 @@ export const CommonParamsForm: FC<DefaultParamsPropsType> = (props) => {
             otherAuctionData.duration_id = duration.id;
 
             if (isAdvanceAuction) {
-                otherAuctionData.price_by_now = clearWhiteSpaces(price_by_now.value);
+                otherAuctionData.price_buy_now = clearWhiteSpaces(price_buy_now.value);
                 otherAuctionData.reserve_price = clearWhiteSpaces(reserve_price);
                 otherAuctionData.auto_renewal = auto_renewal;
                 otherAuctionData.offer_the_price = offer_the_price;
@@ -169,8 +171,8 @@ export const CommonParamsForm: FC<DefaultParamsPropsType> = (props) => {
     const {auction, location, avalTime} = values;
 
     const locationText = !location
-        ? ''
-        : `${location.region.name}${location.city ? `, ${location.city.name}` : ''}${location.district ? `, ${location.district.name}` : ''}`;
+                         ? ''
+                         : `${location.region.name}${location.city ? `, ${location.city.name}` : ''}${location.district ? `, ${location.district.name}` : ''}`;
 
     const handleSelect = (key, value) => {
         if (key === 'duration') {
@@ -191,13 +193,13 @@ export const CommonParamsForm: FC<DefaultParamsPropsType> = (props) => {
                         ...values,
                         auction: {...auction, [name]: number}
                     });
-                } else if (name === 'price_by_now') {
+                } else if (name === 'price_buy_now') {
                     setValues({
                         ...values,
                         auction: {
                             ...auction,
                             [name]: {
-                                ...auction.price_by_now,
+                                ...auction.price_buy_now,
                                 value: number
                             }
                         }
@@ -218,15 +220,15 @@ export const CommonParamsForm: FC<DefaultParamsPropsType> = (props) => {
 
     const handleCheckboxChange = name => ({target}) => {
         const auctionOptionsList = [
-            'price_by_now',
-            'price_by_now',
+            'price_buy_now',
+            'price_buy_now',
             'offer_the_price',
             'auto_renewal',
             'display_phone'
         ];
         if (auctionOptionsList.some(option => option === name)) {
-            if (name === 'price_by_now') {
-                auction.price_by_now.isActive = target.checked;
+            if (name === 'price_buy_now') {
+                auction.price_buy_now.isActive = target.checked;
             } else {
                 auction[name] = target.checked;
             }
@@ -277,115 +279,118 @@ export const CommonParamsForm: FC<DefaultParamsPropsType> = (props) => {
                 >
                     <div className={classes.root}>
                         {isPreview
-                            ? <CommonParamsFormPreview
-                                t={t}
-                                values={values}
-                                isAuction={isAuction}
-                                locationText={locationText}
-                                isAdvanceAuction={isAdvanceAuction}
-                            />
-                            : <div>
-                                {isAuction
-                                    ? <div>
-                                        <AuctionParams
-                                            t={t}
-                                            values={values}
-                                            errors={errors}
-                                            touched={touched}
-                                            postType={postType}
-                                            handleBlur={handleBlur}
-                                            handleInput={handleInput}
-                                            handleSelect={handleSelect}
-                                            isAdvanceAuction={isAdvanceAuction}
-                                            handleCheckboxChange={handleCheckboxChange}
-                                        />
-                                    </div>
-                                    : <Grid container alignItems='flex-end'>
-                                        <Grid item xs={3}>
-                                            <CustomFormikField
-                                                name='price'
-                                                labelText={t('price')}
-                                                value={values.price}
-                                                onChange={handleInput}
-                                                style={{width: '270px'}}
-                                                errorMsg={
-                                                    getErrorMsg(errors.price, touched.price, t)
-                                                }
-                                            />
-                                        </Grid>
-                                        <Grid item xs={1}>
-                                            <CustomSelect
-                                                t={t}
-                                                name='currency'
-                                                values={values}
-                                                onBlur={handleBlur}
-                                                items={postType.currency}
-                                                handleSelect={handleSelect}
-                                            />
-                                        </Grid>
-                                    </Grid>}
-                                <div>
-                                    <PaymentDelivery
-                                        t={t}
-                                        values={values}
-                                        handleCheckboxChange={handleCheckboxChange}
-                                    />
-                                </div>
-                                <div className='location-wrapper'>
-                                    <LocationAutocomplete
-                                        name='location'
-                                        errorMsg={
-                                            getErrorMsg(errors.location, touched.location, t)
-                                        }
-                                        value={values.location}
-                                        locations={locations.data}
-                                        onBlur={handleBlur}
-                                        onChange={handleLocation}
-                                    />
-                                </div>
-                                <div>
-                                    <Description
-                                        label='description'
-                                        handleInput={handleInput}
-                                        handleBlur={handleBlur}
-                                        description={values.description}
-                                        errorMsg={
-                                            getErrorMsg(errors.description, touched.description, t)
-                                        }
-                                    />
-                                </div>
-                                <Grid
-                                    item
-                                    container
-                                    justify='space-between'
-                                    spacing={1}
-                                >
-                                    <Grid item xs={6}>
-                                        <Contacts
-                                            t={t}
-                                            values={values}
-                                            isAuction={isAuction}
-                                            handleInput={handleInput}
-                                            handleCheckboxChange={handleCheckboxChange}
-                                        />
-                                    </Grid>
-                                    {!isAuction && (
-                                        <Grid item xs={6}>
-                                            <AvailableDays
-                                                t={t}
-                                                avalTime={values.avalTime}
-                                                handleBlur={handleBlur}
-                                                handleTime={handleTime}
-                                                handleSwitch={handleSwitch}
-                                                handleAvalDays={handleAvalDays}
-                                            />
-                                        </Grid>
-                                    )}
-                                </Grid>
-                            </div>}
+                         ? <CommonParamsFormPreview
+                             t={t}
+                             values={values}
+                             isAuction={isAuction}
+                             ownerPhone={ownerPhone}
+                             locationText={locationText}
+                             isAdvanceAuction={isAdvanceAuction}
+                         />
+                         : <div>
+                             {isAuction
+                              ? <div>
+                                  <AuctionParams
+                                      t={t}
+                                      values={values}
+                                      errors={errors}
+                                      touched={touched}
+                                      postType={postType}
+                                      handleBlur={handleBlur}
+                                      handleInput={handleInput}
+                                      handleSelect={handleSelect}
+                                      isAdvanceAuction={isAdvanceAuction}
+                                      handleCheckboxChange={handleCheckboxChange}
+                                  />
+                              </div>
+                              : <Grid container alignItems='flex-end'>
+                                  <Grid item xs={3}>
+                                      <CustomFormikField
+                                          name='price'
+                                          labelText={t('price')}
+                                          value={values.price}
+                                          onChange={handleInput}
+                                          style={{width: '270px'}}
+                                          errorMsg={
+                                              getErrorMsg(errors.price, touched.price, t)
+                                          }
+                                      />
+                                  </Grid>
+                                  <Grid item xs={1}>
+                                      <CustomSelect
+                                          t={t}
+                                          name='currency'
+                                          values={values}
+                                          onBlur={handleBlur}
+                                          items={postType.currency}
+                                          handleSelect={handleSelect}
+                                      />
+                                  </Grid>
+                              </Grid>}
+                             <div>
+                                 <PaymentDelivery
+                                     t={t}
+                                     values={values}
+                                     isAuction={isAuction}
+                                     handleCheckboxChange={handleCheckboxChange}
+                                 />
+                             </div>
+                             <div className='location-wrapper'>
+                                 <LocationAutocomplete
+                                     name='location'
+                                     errorMsg={
+                                         getErrorMsg(errors.location, touched.location, t)
+                                     }
+                                     value={values.location}
+                                     locations={locations.data}
+                                     onBlur={handleBlur}
+                                     onChange={handleLocation}
+                                 />
+                             </div>
+                             <div>
+                                 <Description
+                                     label='description'
+                                     handleInput={handleInput}
+                                     handleBlur={handleBlur}
+                                     description={values.description}
+                                     errorMsg={
+                                         getErrorMsg(errors.description, touched.description, t)
+                                     }
+                                 />
+                             </div>
+                             <Grid
+                                 item
+                                 container
+                                 spacing={1}
+                                 justify='space-between'
+                             >
+                                 <Grid item xs={6}>
+                                     <Contacts
+                                         t={t}
+                                         values={values}
+                                         isAuction={isAuction}
+                                         ownerPhone={ownerPhone}
+                                         handleInput={handleInput}
+                                         handleCheckboxChange={handleCheckboxChange}
+                                     />
+                                 </Grid>
+                                 {!isAuction && (
+                                     <Grid item xs={6}>
+                                         <AvailableDays
+                                             t={t}
+                                             avalTime={values.avalTime}
+                                             handleBlur={handleBlur}
+                                             handleTime={handleTime}
+                                             handleSwitch={handleSwitch}
+                                             handleAvalDays={handleAvalDays}
+                                         />
+                                     </Grid>
+                                 )}
+                             </Grid>
+                         </div>}
                     </div>
                 </CustomAccordion>
             </form>
         </FormikProvider>
-    )
-}
+    );
+};

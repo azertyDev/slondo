@@ -1,5 +1,5 @@
 import React from 'react';
-import EstateComponent from "@root/src/components/categories/estate";
+import EstateComponent from "@root/src/components/search/estate";
 
 const Estate = () => {
     return <EstateComponent/>;
