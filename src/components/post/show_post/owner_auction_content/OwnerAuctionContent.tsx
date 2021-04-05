@@ -19,7 +19,9 @@ export const OwnerAuctionContent: FC<any> = (props) => {
         handleBuyNow,
         handleSubmit,
         handleScroll,
-        handleRefresh
+        handleRefresh,
+        handleSuggestPrice,
+        handleTextField
     } = props;
 
     const isAuction = postData.ads_type.mark === 'auc' || postData.ads_type.mark === 'exauc';
@@ -47,6 +49,8 @@ export const OwnerAuctionContent: FC<any> = (props) => {
                     handleSubmit={handleSubmit}
                     handleScroll={handleScroll}
                     handleRefresh={handleRefresh}
+                    handleSuggestPrice={handleSuggestPrice}
+                    handleTextField={handleTextField}
                 />
             )}
             <OwnerInfo

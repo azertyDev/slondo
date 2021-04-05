@@ -10,12 +10,17 @@ export const useStyles = makeStyles((theme) => ({
             '& div.breadcrumbs': {
                 display: 'flex',
                 justifyContent: 'space-between',
+                alignItems: 'center',
                 marginBottom: 10,
-                '& a:hover': {
-                    textDecorationLine: 'underline'
+                '& a': {
+                    fontSize: '0.75rem',
+                    '&:hover': {
+                        textDecorationLine: 'underline'
+                    }
                 },
-                '& > h6.MuiTypography-subtitle1': {
-                    fontSize: '12px',
+                '& .MuiTypography-subtitle1': {
+                    fontSize: '0.75rem',
+                    marginRight: 10,
                     '& > span.post': {
                         color: theme.palette.primary.postBgColor
                     },
@@ -24,6 +29,14 @@ export const useStyles = makeStyles((theme) => ({
                     },
                     '& > span.exauc': {
                         color: theme.palette.primary.exAucBgColor
+                    }
+                },
+                '& .status': {
+                    padding: '0 20px',
+                    border: '1px solid #7DBCF6',
+                    borderRadius: '3px',
+                    '& .waiting': {
+                        color: '#7DBCF6'
                     }
                 }
             },
@@ -34,11 +47,11 @@ export const useStyles = makeStyles((theme) => ({
                 zIndex: 20,
                 '& div.card-data': {
                     display: 'flex',
-                    height: 160,
+                    height: 200,
                     position: 'relative',
                     '& > div.img': {
                         borderRadius: '10px 0px 0px 0px',
-                        width: '28.11%',
+                        width: '41.5%',
                         height: 'auto',
                         backgroundPosition: 'center top',
                         backgroundSize: 'cover',
@@ -256,73 +269,17 @@ export const useStyles = makeStyles((theme) => ({
             },
             '& div.status-buttons': {
                 display: 'flex',
+                marginTop: 5,
                 '& .mr10': {
                     marginRight: 10
                 },
                 '& button': {
-                    padding: '10px 0',
-                    borderRadius: '0px 0px 10px 10px',
-                    width: '100%',
-                    height: '38px',
-                    border: 'none',
-                    boxShadow: 'inset 0px 4px 10px -5px rgba(0, 0, 0, 0.25)',
-                    '&:disabled': {
-                        '& > h6.MuiTypography-subtitle1': {
-                            color: '#ccc'
-                        },
-                        '& svg': {
-                            '& path': {
-                                fill: '#ccc'
-                            },
-                            '& > defs > linearGradient > stop': {
-                                '&:first-child': {
-                                    stopColor: '#ccc'
-                                },
-                                '&:last-child': {
-                                    stopColor: '#ccc'
-                                }
-                            }
-                        }
-                    },
-                    '&.default': {
-                        borderRadius: 5,
-                        marginTop: 10,
-                        background: '#F2F2F2',
-                        boxShadow: '0px 1px 2px rgba(0, 0, 0, 0.15)',
-                        '& h6.MuiTypography-subtitle1': {
-                            color: '#4e4e4e'
-                        }
-                    },
-                    '&.refuse': {
-                        '& svg > path': {
-                            fill: '#F08F8F'
-                        }
-                    },
-                    '& svg': {
-                        marginRight: 10
-                    },
-                    '&.expecting': {
-                        background: 'rgba(125, 188, 246, 0.8)'
-                    },
-                    '&.follow': {
-                        background: 'rgba(242, 201, 76, 1)',
-                        '& > svg > path': {
-                            fill: '#fff'
-                        }
-                    },
-                    '&.accepted': {
-                        background: 'rgba(144, 190, 39, 0.8)'
-                    },
-                    '&.refused': {
-                        background: '#F08F8F'
-                    },
-                    '&.complete': {
-                        width: '46%',
-                        marginLeft: '20px',
-                        background: '#BDBDBD'
-                    },
-                    '& h6.MuiTypography-subtitle1': {
+                    background: 'linear-gradient(49.94deg, #675EAA 19.03%, #AD66D5 72.72%)',
+                    '& .MuiTypography-subtitle1': {
                         color: '#fff'
+                    },
+                    '&.end-auction': {
+                        width: '100%'
                     }
                 }
             }

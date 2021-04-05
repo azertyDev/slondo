@@ -114,6 +114,10 @@ export const ShowPostContainer: FC = () => {
     const [page, setPage] = useState(1);
     const [auctionsBetsList, setAuctionBetsList] = useState(initialAuctionBetsList);
     const [lastPage, setLastPage] = useState(null);
+    const [offerPrice, setOfferPrice] = useState({
+        isFetch: false,
+        price: null
+    });
 
     const handleOpenModal = () => () => {
         setOpenModal(true);
@@ -139,6 +143,20 @@ export const ShowPostContainer: FC = () => {
         if (page !== lastPage && bottom) {
             setPage(prev => prev + 1);
         }
+    };
+    const handleSuggestPrice = async () => {
+        try {
+            setOfferPrice({ ...offerPrice, isFetch: true });
+            await userAPI.offerThePrice(postData.data.auction.id, offerPrice.price);
+            setOfferPrice({ price: null, isFetch: false });
+            setOpenModal(false);
+        } catch (e) {
+            dispatch(setErrorMsgAction(e.message));
+        }
+    };
+
+    const handleTextField = ({ target }) => {
+        setOfferPrice({ ...offerPrice, price: target.value });
     };
 
     const refreshAucBets = async () => {
@@ -283,6 +301,8 @@ export const ShowPostContainer: FC = () => {
                                 handleSubmit={handleSubmit}
                                 handleScroll={handleScroll}
                                 handleRefresh={refreshAucBets}
+                                handleSuggestPrice={handleSuggestPrice}
+                                handleTextField={handleTextField}
                             />
                             <div className={classes.adBanner}>
                                 <Banner height="424px" />

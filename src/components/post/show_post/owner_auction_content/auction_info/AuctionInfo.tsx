@@ -22,7 +22,9 @@ export const AuctionInfo: FC<any> = (props) => {
         handleBuyNow,
         handleSubmit,
         handleScroll,
-        handleRefresh
+        handleRefresh,
+        handleSuggestPrice,
+        handleTextField
     } = props;
 
     const [showAll, setShowAll] = useState(false);
@@ -151,6 +153,8 @@ export const AuctionInfo: FC<any> = (props) => {
                         handleOpenModal={handleOpenModal}
                         handleCloseModal={handleCloseModal}
                         openModal={openModal}
+                        handleSuggestPrice={handleSuggestPrice}
+                        handleTextField={handleTextField}
                     />
                 </>
                 }

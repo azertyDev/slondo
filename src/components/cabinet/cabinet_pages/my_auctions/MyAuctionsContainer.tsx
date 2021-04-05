@@ -50,10 +50,22 @@ export const MyAuctionsContainer: FC = () => {
     const handleModalContentIndex = (index) => () => {
         setModalContentIndex(index);
     };
-    const handleDeactivate = async () => {
+    const handleDeactivate = (ads_id?: number) => async () => {
         try {
-            await userAPI.deactivateById(postId);
+            await userAPI.deactivateById(ads_id);
             setOpenModal(false);
+            if (tabIndex === 0) {
+                await fetchAuctionData('auc');
+            } else {
+                await fetchAuctionData();
+            }
+        } catch (e) {
+            dispatch(setErrorMsgAction(e.message));
+        }
+    };
+    const handleAcceptVictory = (auction_id, is_accepted) => async () => {
+        try {
+            await userAPI.acceptVictory(auction_id, is_accepted);
             if (tabIndex === 0) {
                 await fetchAuctionData('auc');
             } else {
@@ -111,7 +123,7 @@ export const MyAuctionsContainer: FC = () => {
                     >
                         <ListItem
                             button
-                            onClick={handleDeactivate}
+                            onClick={handleDeactivate(postId)}
                         >
                             <ListItemText
                                 primary='Да'
@@ -172,6 +184,8 @@ export const MyAuctionsContainer: FC = () => {
                     handleModalOpen={handleOpenModal}
                     openModal={openModal}
                     setOpenModal={setOpenModal}
+                    handleDeactivate={handleDeactivate}
+                    handleAcceptVictory={handleAcceptVictory}
                 />
         },
         {
@@ -187,6 +201,7 @@ export const MyAuctionsContainer: FC = () => {
                     handleModalOpen={handleOpenModal}
                     openModal={openModal}
                     setOpenModal={setOpenModal}
+                    handleAcceptVictory={handleAcceptVictory}
                 />
         }
     ];

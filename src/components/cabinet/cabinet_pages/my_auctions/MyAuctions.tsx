@@ -10,6 +10,8 @@ type MyAuctionsPropsType = {
     openModal: boolean,
     setOpenModal: (boolean) => void,
     handleModalOpen: (id?) => () => void,
+    handleDeactivate?: (ads_id) => () => void,
+    handleAcceptVictory?: (ads_id, is_accepted) => () => void,
     ModalContent: () => ReactElement;
 }
 
@@ -20,6 +22,8 @@ export const MyAuctions: FC<MyAuctionsPropsType> = (props) => {
         handleModalOpen,
         handleClose,
         openModal,
+        handleDeactivate,
+        handleAcceptVictory,
         ModalContent
     } = props;
 
@@ -29,6 +33,8 @@ export const MyAuctions: FC<MyAuctionsPropsType> = (props) => {
                 list={list}
                 isFetch={isFetch}
                 handleModalOpen={handleModalOpen}
+                handleDeactivate={handleDeactivate}
+                handleAcceptVictory={handleAcceptVictory}
             />
             <CustomModal
                 handleModalClose={handleClose}

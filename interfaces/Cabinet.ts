@@ -25,8 +25,10 @@ export type CardDataType = {
         type: initValuesType
     }
     auction: {
+        id: number
         winner: UserInfo,
-        number_of_bets: number
+        number_of_bets: number,
+        is_accepted: boolean | null
     },
     author: UserInfo,
     available_days: string

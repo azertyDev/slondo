@@ -266,5 +266,25 @@ export const userAPI = {
             .catch(err => {
                 throw err;
             });
+    },
+    acceptVictory: (auction_id: number, is_accepted: boolean): Promise<any> => {
+        return instance.post(`regular/auction/accept`, {
+            auction_id,
+            is_accepted
+        }, setTokenToHeader())
+            .then(res => res.data)
+            .catch(err => {
+                throw err;
+            });
+    },
+    offerThePrice: (auction_id: number, price: number): Promise<any> => {
+        return instance.post(`regular/auction/offerThePrice`, {
+            auction_id,
+            price
+        }, setTokenToHeader())
+            .then(res => res.data)
+            .catch(err => {
+                throw err;
+            });
     }
 };
