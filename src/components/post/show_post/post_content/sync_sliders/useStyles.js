@@ -28,17 +28,27 @@ export const useStyles = makeStyles((theme) => ({
             '&.favorite-btn': {
                 left: 25,
                 [theme.breakpoints.down('xs')]: {
-                    right: 90,
+                    right: 50,
                     left: 'inherit',
-                    background: 'rgba(0, 0, 0, 0.35)'
+                    background: 'rgba(0, 0, 0, 0.35)',
+                    width: '32px',
+                    height: '32px'
                 }
             },
             '&.share-btn': {
-                right: 25
+                right: 25,
+                [theme.breakpoints.down('xs')]: {
+                    width: '32px',
+                    height: '32px',
+                    right: 10,
+                }
             },
             '& svg': {
                 width: 30,
                 height: 'auto',
+                [theme.breakpoints.down('xs')]: {
+                    width: '19px'
+                },
                 '& path': {
                     fill: '#8E62C2',
                     [theme.breakpoints.down('md')]: {

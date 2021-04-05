@@ -124,33 +124,33 @@ export const PostContent: FC<WithT & any> = (props) => {
             <Hidden mdDown>
                 <div className="breadcrumbs">
                     <BreadcrumbsComponent>
-                        {data.category
-                            ? (<Link href={`/categories/${data.category.mark}`}>
+                        {data.category && (
+                            <Link href={`/categories/${data.category.mark}`}>
                                 <a>
                                     <Typography variant="subtitle1" noWrap>
                                         {data.category.name}
                                     </Typography>
                                 </a>
-                            </Link>)
-                            : null}
-                        {data.adsable?.sub_category
-                            ? (<Link href={`/categories/${data.category.mark}`}>
+                            </Link>
+                        )}
+                        {data.adsable?.sub_category && (
+                            <Link href={`/categories/${data.category.mark}`}>
                                 <a>
                                     <Typography variant="subtitle1" noWrap>
                                         {data.adsable.sub_category.name}
                                     </Typography>
                                 </a>
-                            </Link>)
-                            : null}
-                        {data.adsable?.type
-                            ? (<Link href="#">
+                            </Link>
+                        )}
+                        {data.adsable?.type && (
+                            <Link href="#">
                                 <a>
                                     <Typography variant="subtitle1" noWrap>
                                         {data.adsable.type.name}
                                     </Typography>
                                 </a>
-                            </Link>)
-                            : null}
+                            </Link>
+                        )}
                     </BreadcrumbsComponent>
                 </div>
             </Hidden>
@@ -238,97 +238,70 @@ export const PostContent: FC<WithT & any> = (props) => {
                     </Typography>
                 </div>
             </Hidden>
-                <div className="post-bonus">
-                    {!!data.delivery && (
-                        <span className="delivery">
+            <div className="post-bonus">
+                {!!data.delivery && (
+                    <span className="delivery">
                         <DeliveryIcon/>&nbsp;
-                            <Typography variant="subtitle1">
+                        <Typography variant="subtitle1">
                             Есть доставка
                         </Typography>
                     </span>
-                    )}
-                    {!!data.safe_deal && (
-                        <span className="safe_deal">
+                )}
+                {!!data.safe_deal && (
+                    <span className="safe_deal">
                         <SafeIcon/>&nbsp;
-                            <Typography variant="subtitle1">
+                        <Typography variant="subtitle1">
                             Безопасная покупка
                         </Typography>
                     </span>
-                    )}
-                    {!!data.exchange && (
-                        <span className="exchange">
+                )}
+                {!!data.exchange && (
+                    <span className="exchange">
                         <SwapIcon/>&nbsp;
-                            <Typography variant="subtitle1">
+                        <Typography variant="subtitle1">
                             Возможен обмен
                         </Typography>
                     </span>
-                    )}
-                    {!!data.available_start_time && (
-                        <span className="available">
+                )}
+                {!!data.available_start_time && (
+                    <span className="available">
                         <PhoneIcon/>
-                            {!!data.available_days?.length && (
-                                <Typography variant="subtitle1" color="primary">
-                                    {weekDaysHelper(data.available_days, t)}
-                                </Typography>
-                            )}
-                            <Typography variant="subtitle1">
+                        {!!data.available_days?.length && (
+                            <Typography variant="subtitle1" color="primary">
+                                {weekDaysHelper(data.available_days, t)}
+                            </Typography>
+                        )}
+                        <Typography variant="subtitle1">
                             {`${data.available_start_time} - ${data.available_end_time}`}
                         </Typography>
                     </span>
-                    )}
+                )}
+            </div>
+            <Hidden lgUp>
+                <div className="contact">
+                    <ButtonComponent>
+                        <Typography variant='subtitle1'>Позвонить</Typography>
+                    </ButtonComponent>
+                    <ButtonComponent>
+                        <Typography variant='subtitle1'>Написать</Typography>
+                    </ButtonComponent>
                 </div>
-            {/*<Hidden lgUp>*/}
-            {/*    <div className="post-bonus">*/}
-            {/*        {!!data.delivery && (*/}
-            {/*            <span className="delivery">*/}
-            {/*            <DeliveryIcon/>&nbsp;*/}
-            {/*                <Typography variant="subtitle1">*/}
-            {/*                Доставка*/}
-            {/*            </Typography>*/}
-            {/*        </span>*/}
-            {/*        )}*/}
-            {/*        {!!data.available_start_time && (*/}
-            {/*            <span className="available">*/}
-            {/*            <PhoneIcon/>*/}
-            {/*                {!!data.available_days?.length && (*/}
-            {/*                    <Typography variant="subtitle1" color="primary">*/}
-            {/*                        {weekDaysHelper(data.available_days, t)}*/}
-            {/*                    </Typography>*/}
-            {/*                )}*/}
-            {/*                &nbsp;&nbsp;<Typography variant="subtitle1">*/}
-            {/*                {`${data.available_start_time} - ${data.available_end_time}`}*/}
-            {/*            </Typography>*/}
-            {/*        </span>*/}
-            {/*        )}*/}
-            {/*        {!!data.exchange && (*/}
-            {/*            <span className="exchange">*/}
-            {/*            <SwapIcon/>&nbsp;*/}
-            {/*                <Typography variant="subtitle1">*/}
-            {/*                Обмен*/}
-            {/*            </Typography>*/}
-            {/*        </span>*/}
-            {/*        )}*/}
-            {/*        {!!data.safe_deal && (*/}
-            {/*            <span className="safe_deal">*/}
-            {/*            <SafeIcon/>&nbsp;*/}
-            {/*                <Typography variant="subtitle1">*/}
-            {/*                Безопасная покупка*/}
-            {/*            </Typography>*/}
-            {/*        </span>*/}
-            {/*        )}*/}
-            {/*    </div>*/}
-            {/*</Hidden>*/}
+            </Hidden>
             <div className="post-location">
-                <Typography variant="button" noWrap>
-                    Местоположение
-                </Typography>
-                {data.region.name || data.city.name || data.district.name
-                    ? <Typography variant="subtitle1" noWrap>
-                        <LocationIcon/>
-                        {`${data.region.name ?? ''}`}
-                        {data.city.name ? `, ${data.city.name}` : ''}
-                        {data.district.name ? `, ${data.district.name}` : ''}
+                <Hidden mdDown>
+                    <Typography variant="button" noWrap>
+                        Местоположение
                     </Typography>
+                </Hidden>
+                {data.region.name || data.city.name || data.district.name
+                    ? <div className='location-text'>
+                        <LocationIcon/>
+                        <Typography variant="subtitle1">
+                            {`${data.region.name ?? ''}`}
+                            {data.city.name ? `, ${data.city.name}` : ''}
+                            {data.district.name ? `, ${data.district.name}` : ''}
+                        </Typography>
+                    </div>
                     : <Typography variant="subtitle1">Не указано</Typography>}
             </div>
             <Hidden mdDown>
@@ -346,9 +319,11 @@ export const PostContent: FC<WithT & any> = (props) => {
                 </div>
             </Hidden>
             <div className="post-description">
-                <Typography variant="button" color="initial">
-                    Описание
-                </Typography>
+                <Hidden mdDown>
+                    <Typography variant="button" color="initial">
+                        Описание
+                    </Typography>
+                </Hidden>
                 <ReadMore t={t} descHeight={descHeight}>
                     <Typography
                         className='description'
@@ -379,7 +354,7 @@ export const PostContent: FC<WithT & any> = (props) => {
             )}
             <div className="post-info">
                 <Typography variant="subtitle1">
-                    <span>Объявление №:</span> {data.id}
+                    <span>Номер:</span> {data.id}
                 </Typography>
                 <Typography variant="subtitle1">
                     Опубликовано: {formatted_date}
@@ -387,9 +362,9 @@ export const PostContent: FC<WithT & any> = (props) => {
                 <Typography variant="subtitle1">
                     Просмотров: {data.number_of_views}
                 </Typography>
-                <Typography variant="subtitle1" onClick={handleOpenModal}>
-                    Пожаловаться <WarningIcon/>
-                </Typography>
+                {/*<Typography variant="subtitle1" onClick={handleOpenModal}>*/}
+                {/*    Пожаловаться <WarningIcon/>*/}
+                {/*</Typography>*/}
             </div>
             <ModalSyncSliders
                 slidersRefs={slidersRefs}

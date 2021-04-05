@@ -161,7 +161,7 @@ export const useStyles = makeStyles((theme) => ({
         },
         '& div.post-bonus': {
             display: 'flex',
-            marginBottom: '20px',
+            marginBottom: '15px',
             flexWrap: 'wrap',
 
             '& span': {
@@ -180,6 +180,13 @@ export const useStyles = makeStyles((theme) => ({
                     marginRight: 0
                 },
                 '&.delivery': {
+                    [theme.breakpoints.down('md')]: {
+                        width: '100%',
+                        padding: '3px',
+                        '& svg': {
+                            marginLeft: '10px'
+                        }
+                    },
                     '& svg': {
                         '& path': {
                             fill: '#695EAE',
@@ -189,8 +196,22 @@ export const useStyles = makeStyles((theme) => ({
                         }
                     }
                 },
-                '&.safe_deal': {},
+                '&.safe_deal': {
+                    [theme.breakpoints.down('md')]: {
+                        width: '100%'
+                    },
+                    '& svg': {
+                        '& path': {
+                            [theme.breakpoints.down('md')]: {
+                                fill: '#838383'
+                            }
+                        }
+                    }
+                },
                 '&.exchange': {
+                    [theme.breakpoints.down('md')]: {
+                        width: '100%'
+                    },
                     '& svg': {
                         width: 20,
                         height: 22,
@@ -203,6 +224,10 @@ export const useStyles = makeStyles((theme) => ({
                     }
                 },
                 '&.available': {
+                    [theme.breakpoints.down('md')]: {
+                        width: '100%',
+                        marginRight: '8px'
+                    },
                     '& svg': {
                         marginRight: 15,
                         '& > defs > linearGradient': {
@@ -210,7 +235,6 @@ export const useStyles = makeStyles((theme) => ({
                                 [theme.breakpoints.down('md')]: {
                                     stopColor: '#838383;'
                                 }
-
                             }
                         }
                     }
@@ -219,6 +243,29 @@ export const useStyles = makeStyles((theme) => ({
                     color: theme.palette.common.tab,
                     [theme.breakpoints.down('md')]: {
                         fontSize: 'calc(10px + 6 * (100vw / 1280))'
+                    }
+                }
+            }
+        },
+        '& div.contact': {
+            display: 'flex',
+            marginBottom: '20px',
+            '& button': {
+                marginRight: '8px',
+                borderRadius: '5px',
+                '& > h6': {
+                    color: '#fff'
+                },
+                '&:first-child': {
+                    padding: '11px 39px',
+                    background: 'linear-gradient(49.94deg, #675EAA 19.03%, #AD66D5 72.72%)'
+                },
+                '&:last-child': {
+                    padding: '11px 44px',
+                    background: '#fff',
+                    border: '1px solid #845CAB',
+                    '& h6': {
+                        color: '#845CAB'
                     }
                 }
             }
@@ -238,16 +285,45 @@ export const useStyles = makeStyles((theme) => ({
                     width: 49,
                     marginRight: 10
                 }
+            },
+            '& div.location-text': {
+                textDecoration: 'underline',
+                display: 'flex',
+                alignItems: 'center',
+                '& > svg': {
+                    [theme.breakpoints.down('md')]: {
+                        marginLeft: '-7px'
+                    }
+                },
+                '& > h6': {
+                    [theme.breakpoints.down('md')]: {
+                        fontSize: 'calc(12px + 4 * (100vw / 1280))',
+                        textDecoration: 'none'
+                    },
+                    overflow: 'hidden',
+                    whiteSpace: 'nowrap',
+                    textOverflow: 'ellipsis'
+                }
             }
         },
         '& div.post-description': {
             marginBottom: '40px',
             '& p.MuiTypography-button': {
-                marginBottom: 19
+                marginBottom: 15
             },
             '& h6.description': {
                 fontSize: '1.125rem',
-                paddingRight: '8vw'
+                paddingRight: '8vw',
+                [theme.breakpoints.down('md')]: {
+                    fontSize: 'calc(14px + 4 * (100vw / 1280))',
+                    color: '#4E4E4E',
+                    lineHeight: '1rem',[theme.breakpoints.down('md')]: {
+                        fontSize: 'calc(14px + 4 * (100vw / 1280))',
+                        color: '#4E4E4E',
+                        lineHeight: '1rem',
+                        padding: 0
+                    }
+                }
             },
             '& > h6.MuiTypography-subtitle1': {
                 display: 'flex',

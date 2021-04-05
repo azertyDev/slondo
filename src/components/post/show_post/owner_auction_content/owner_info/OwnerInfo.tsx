@@ -1,4 +1,4 @@
-import React, {FC} from 'react';
+import React, {useState, FC} from 'react';
 import {Typography} from '@material-ui/core';
 import {ButtonComponent} from '@src/components/elements/button/Button';
 import {SafeIcon} from '@root/src/components/elements/icons';
@@ -22,8 +22,8 @@ type OwnerPropsType = {
 }
 
 
-export const OwnerInfo: FC<OwnerPropsType> = ({ safe_deal, isOwner, owner, subscribed, handleFollow }) => {
-    const [isPhoneAval, setIsPhoneAval] = React.useState(false);
+export const OwnerInfo: FC<OwnerPropsType> = ({safe_deal, isOwner, owner, subscribed, handleFollow}) => {
+    const [isPhoneAval, setIsPhoneAval] = useState(false);
     const handleShowPhone = () => {
         setIsPhoneAval(!isPhoneAval);
     };
@@ -31,7 +31,7 @@ export const OwnerInfo: FC<OwnerPropsType> = ({ safe_deal, isOwner, owner, subsc
     const classes = useStyles();
     return (
         <div className={classes.root}>
-            <UserInfoWithAvatar subscribed={subscribed} isOwner={isOwner} owner={owner} handleFollow={handleFollow} />
+            <UserInfoWithAvatar subscribed={subscribed} isOwner={isOwner} owner={owner} handleFollow={handleFollow}/>
             <div className="contact-buttons">
                 <ButtonComponent color="primary" onClick={handleShowPhone}>
                     <Typography variant="subtitle1" color="initial">
