@@ -7,9 +7,10 @@ import {useRouter} from 'next/router';
 import {useDispatch} from 'react-redux';
 import {setErrorMsgAction} from '@root/src/redux/slices/errorSlice';
 import {useTranslation} from 'next-i18next';
-import {InitialCabinetCardState, TabsDataType} from '@root/interfaces/Cabinet.js';
 import {IconButton, List, ListItem, ListItemText, Typography} from '@material-ui/core';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
+import {InitialCabinetCardState, initValuesType, TabsDataType} from '@root/interfaces/Cabinet.js';
+import {UserInfo} from '@root/interfaces/Auth';
 import {useStyles} from './useStyles';
 
 
@@ -19,11 +20,60 @@ export const MyAuctionsContainer: FC = () => {
     const { t } = useTranslation('cabinet');
     const classes = useStyles();
 
+    const initialValues: initValuesType = { id: null, name: '' };
+    const userInfo: UserInfo = {
+        id: null,
+        name: '',
+        surname: '',
+        phone: '',
+        avatar: '',
+        created_at: ''
+    };
+
     const initialState: InitialCabinetCardState = {
         isFetch: false,
         myPosts: {
             total: 0,
-            data: []
+            data: [
+                {
+                    ads_type: '',
+                    adsable: {
+                        id: null,
+                        sub_category: initialValues,
+                        type: initialValues
+                    },
+                    auction: {
+                        id: null,
+                        winner: userInfo,
+                        number_of_bets: null,
+                        is_accepted: null,
+                        winner_id: null
+                    },
+                    author: userInfo,
+                    available_days: '',
+                    category: initialValues,
+                    city: initialValues,
+                    created_at: '',
+                    creator: false,
+                    currency: initialValues,
+                    delivery: null,
+                    description: '',
+                    district: initialValues,
+                    exchange: null,
+                    expiration_at: '',
+                    favorite: false,
+                    id: null,
+                    image: '',
+                    number_of_views: null,
+                    price: null,
+                    region: initialValues,
+                    safe_deal: null,
+                    status: '',
+                    subscribed: false,
+                    title: '',
+                    user_id: null
+                }
+            ]
         }
     };
     const [auctionData, setAuctionData] = useState(initialState);

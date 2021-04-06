@@ -154,11 +154,9 @@ export const ShowPostContainer: FC = () => {
             dispatch(setErrorMsgAction(e.message));
         }
     };
-
     const handleTextField = ({ target }) => {
         setOfferPrice({ ...offerPrice, price: target.value });
     };
-
     const refreshAucBets = async () => {
         try {
             setAuctionBetsList({
@@ -175,7 +173,6 @@ export const ShowPostContainer: FC = () => {
             dispatch(setErrorMsgAction(e.message));
         }
     };
-
     const auctionBetsPagination = async () => {
         try {
             setAuctionBetsList({
@@ -193,7 +190,6 @@ export const ShowPostContainer: FC = () => {
             dispatch(setErrorMsgAction(e.message));
         }
     };
-
     const fetchPostData = async () => {
         try {
             setPostData({
@@ -245,7 +241,6 @@ export const ShowPostContainer: FC = () => {
             });
         }
     };
-
     const handleFollow = (userId) => async () => {
         try {
             await userAPI.follow(userId);
@@ -270,6 +265,7 @@ export const ShowPostContainer: FC = () => {
         const height = document.getElementById('post-description').clientHeight;
         setDescHeight(height);
     }, [postData]);
+
 
     const classes = useStyles();
     return (

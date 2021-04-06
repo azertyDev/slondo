@@ -22,16 +22,22 @@ import {useRouter} from 'next/router';
 import {useTranslation} from 'react-i18next';
 import {useStyles} from './useStyles';
 import {CardDataType} from '@root/interfaces/Cabinet';
+import {useSelector} from 'react-redux';
+import {RootState} from '@src/redux/rootReducer';
 
 type CabinetCardPropsType = {
     isFetch?: boolean;
     list: CardDataType[];
     handleModalOpen?: (id) => () => void
-    handleDeactivate: (id) => () => void,
-    handleAcceptVictory: (ads_id, is_accepted) => () => void,
+    handleDeactivate?: (id) => () => void,
+    handleAcceptVictory?: (ads_id, is_accepted) => () => void,
 }
 
 export const CabinetCard: FC<CabinetCardPropsType> = (props) => {
+
+    const userFromStore = useSelector((store: RootState) => store.user);
+    const { info: { id } } = userFromStore;
+
     const { pathname } = useRouter();
     const { t } = useTranslation(['common', 'categories']);
     const {
@@ -147,10 +153,11 @@ export const CabinetCard: FC<CabinetCardPropsType> = (props) => {
                                                     ? <div className='isFavorite' onClick={handleModalOpen(el.id)}>
                                                         <CloseIcon />
                                                     </div>
-                                                    : <div className='settings' onClick={handleModalOpen(el.id)}>
+                                                    : el.creator && (
+                                                    <div className='settings' onClick={handleModalOpen(el.id)}>
                                                         <SettingsIcon />
                                                     </div>
-                                                }
+                                                )}
                                             </div>
                                         </div>
                                         <div className="description">
@@ -228,27 +235,33 @@ export const CabinetCard: FC<CabinetCardPropsType> = (props) => {
                                 </Box>
                             </Paper>
                             <div className="status-buttons">
-                                {
-                                    el.auction.winner && (
-                                        <ButtonComponent className='end-auction' onClick={handleDeactivate(el.auction.id)}>
-                                            <Typography variant='subtitle1'>
-                                                Завершить аукцион
-                                            </Typography>
+                                {console.log(el.creator && el.auction.winner && (!!el.auction.is_accepted === false || !!el.auction.is_accepted === true))}
+                                {(el.creator && el.auction.winner && (!!el.auction.is_accepted === false || !!el.auction.is_accepted === true)) && (
+                                    <ButtonComponent className='end-auction' onClick={handleDeactivate(el.id)}>
+                                        <Typography variant='subtitle1'>
+                                            Завершить аукцион
+                                        </Typography>
+                                    </ButtonComponent>
+                                )}
+
+                                {/*{console.log('--------------------------------')}*/}
+                                {/*{console.log(el.creator)}*/}
+                                {/*{console.log(!!el.auction.is_accepted)}*/}
+                                {/*{console.log(el.auction.winner_id === id)}*/}
+                                {/*{console.log(`all ${el.id} ${!el.creator && el.auction.is_accepted && (el.auction.winner_id === id)}`)}*/}
+                                {/*{console.log('--------------------------------')}*/}
+                                {/*{console.log(el.status === 'expired' && !el.creator && id === el.auction.winner_id)}*/}
+
+                                {(el.status === 'suspend' && !el.creator && id === el.auction.winner_id && el.auction.is_accepted === null) && (
+                                    <>
+                                        <ButtonComponent onClick={handleAcceptVictory(el.auction.id, true)}>
+                                            <Typography variant='subtitle1'>Принять</Typography>
                                         </ButtonComponent>
-                                    )
-                                }
-                                {
-                                    !el.creator && el.auction.is_accepted === null && (
-                                        <>
-                                            <ButtonComponent onClick={handleAcceptVictory(el.auction.id, true)}>
-                                                <Typography variant='subtitle1'>Принять</Typography>
-                                            </ButtonComponent>
-                                            <ButtonComponent onClick={handleAcceptVictory(el.auction.id, false)}>
-                                                <Typography variant='subtitle1'>Отказать</Typography>
-                                            </ButtonComponent>
-                                        </>
-                                    )
-                                }
+                                        <ButtonComponent onClick={handleAcceptVictory(el.auction.id, false)}>
+                                            <Typography variant='subtitle1'>Отказать</Typography>
+                                        </ButtonComponent>
+                                    </>
+                                )}
                             </div>
                         </Grid>
                         <Hidden xsUp={false}>
@@ -374,6 +387,7 @@ export const CabinetCard: FC<CabinetCardPropsType> = (props) => {
                                                 {el.author?.name}
                                             </Typography>
                                             <Rating card />
+                                            {el.author.id}
                                             <ButtonComponent className='write'>
                                                 <LetterIcon />
                                                 <Typography

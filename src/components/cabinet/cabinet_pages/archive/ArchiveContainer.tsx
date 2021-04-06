@@ -79,6 +79,7 @@ const ArchiveContainer: FC = () => {
     const [openModal, setOpenModal] = useState(false);
     const [modalContentIndex, setModalContentIndex] = useState(1);
     const [postId, setPostId] = useState(null);
+
     const handleOpenModal = (postId) => () => {
         setOpenModal(true);
         postId && setPostId(postId);
@@ -96,37 +97,32 @@ const ArchiveContainer: FC = () => {
     const handleModalContentIndex = (index) => () => {
         setModalContentIndex(index);
     };
-    const fetchArchivePosts = async (type?: string) => {
+    const fetchArchivePosts = async (type: string) => {
+        const isPostType = type === 'post';
+        const stateByType = isPostType ? archivePostsData : archiveAucData;
+        const setStateByType = isPostType ? setArchivePostsData : setArchiveAucData;
         try {
-            if (tabIndex === 0) {
-                setArchivePostsData({ ...archivePostsData, isFetch: true });
-                const { data, total } = await userAPI.getUserArchivePosts({ locale });
-                setArchivePostsData({ myPosts: { data, total }, isFetch: true });
-            } else {
-                setArchiveAucData({ ...archiveAucData, isFetch: true });
-                const { data, total } = await userAPI.getUserArchivePosts({ type, locale });
-                setArchiveAucData({ myPosts: { data, total }, isFetch: true });
-            }
+            setStateByType({ ...stateByType, isFetch: true });
+            const { data, total } = await userAPI.getUserArchivePosts({ type, locale });
+            setStateByType({ myPosts: { data, total }, isFetch: false });
         } catch (e) {
             dispatch(setErrorMsgAction(e.message));
         }
     };
-    const handleRestorePost = async () => {
+    const handleRestorePost = (type: string) => async () => {
         try {
+            setOpenModal(false);
             await userAPI.restoreFromArchive(postId);
-            setOpenModal(false);
-            await fetchArchivePosts();
-            await fetchArchivePosts('auc');
+            await fetchArchivePosts(type);
         } catch (e) {
             dispatch(setErrorMsgAction(e.message));
         }
     };
-    const handleDeletePost = async () => {
+    const handleDeletePost = (type?: string) => async () => {
         try {
-            await userAPI.deleteArchivePost(postId);
             setOpenModal(false);
-            await fetchArchivePosts();
-            await fetchArchivePosts('auc');
+            await userAPI.deleteArchivePost(postId);
+            await fetchArchivePosts(type);
         } catch (e) {
             dispatch(setErrorMsgAction(e.message));
         }
@@ -141,28 +137,28 @@ const ArchiveContainer: FC = () => {
                         className={classes.settingsList}
                         disablePadding
                     >
-                        <ListItem
-                            button
-                            onClick={handleModalContentIndex(2)}
-                        >
-                            <ListItemText
-                                primary='Восстановить'
-                                primaryTypographyProps={{ variant: 'subtitle1' }}
-                            />
-                        </ListItem>
-                        {
-                            tabIndex === 0 && (
-                                <ListItem
-                                    button
-                                    onClick={handleModalContentIndex(5)}
-                                >
-                                    <ListItemText
-                                        primary='Удалить'
-                                        primaryTypographyProps={{ variant: 'subtitle1' }}
-                                    />
-                                </ListItem>
-                            )
-                        }
+                        {tabIndex === 0 && (
+                            <ListItem
+                                button
+                                onClick={handleModalContentIndex(2)}
+                            >
+                                <ListItemText
+                                    primary='Восстановить'
+                                    primaryTypographyProps={{ variant: 'subtitle1' }}
+                                />
+                            </ListItem>
+                        )}
+                        {tabIndex === 0 && (
+                            <ListItem
+                                button
+                                onClick={handleModalContentIndex(5)}
+                            >
+                                <ListItemText
+                                    primary='Удалить'
+                                    primaryTypographyProps={{ variant: 'subtitle1' }}
+                                />
+                            </ListItem>
+                        )}
                     </List>
                 </>;
             case 2:
@@ -178,7 +174,7 @@ const ArchiveContainer: FC = () => {
                     >
                         <ListItem
                             button
-                            onClick={handleRestorePost}
+                            onClick={handleRestorePost('post')}
                         >
                             <ListItemText
                                 primary='Да'
@@ -209,7 +205,7 @@ const ArchiveContainer: FC = () => {
                     >
                         <ListItem
                             button
-                            onClick={handleDeletePost}
+                            onClick={handleDeletePost('post')}
                         >
                             <ListItemText
                                 primary='Да'
@@ -232,20 +228,22 @@ const ArchiveContainer: FC = () => {
     const ModalContent = () => (
         <>
             {modalContentIndex === 1
-                ? <Typography className="title" variant="h6">
-                    Объявление № {postId}
-                </Typography>
-                : modalContentIndex === 5
-                    ? null
-                    : <IconButton
-                        className='prev-btn'
-                        aria-label="back"
-                        size="medium"
-                        onClick={handlePrevMenu}
-                    >
-                        <ArrowBackIcon fontSize="inherit" />
-                    </IconButton>
-            }
+                ? (
+                    <Typography className="title" variant="h6">
+                        Объявление № {postId}
+                    </Typography>
+                )
+                : (modalContentIndex === 5 && (
+                        <IconButton
+                            className='prev-btn'
+                            aria-label="back"
+                            size="medium"
+                            onClick={handlePrevMenu}
+                        >
+                            <ArrowBackIcon fontSize="inherit" />
+                        </IconButton>
+                    )
+                )}
             {getModalContent()}
         </>
     );
@@ -281,8 +279,11 @@ const ArchiveContainer: FC = () => {
         }
     ];
 
+    console.log('archivePostsData ', archivePostsData);
+    console.log('archiveAucData ', archiveAucData);
+
     useEffect(() => {
-        fetchArchivePosts();
+        fetchArchivePosts('post');
         fetchArchivePosts('auc');
     }, []);
 

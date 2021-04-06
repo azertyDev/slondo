@@ -29,6 +29,7 @@ export type CardDataType = {
         winner: UserInfo,
         number_of_bets: number,
         is_accepted: boolean | null
+        winner_id: number
     },
     author: UserInfo,
     available_days: string
@@ -55,4 +56,4 @@ export type CardDataType = {
     user_id: number
 }
 
-type initValuesType = { id: number, name: string }
+export type initValuesType = { id: number, name: string }

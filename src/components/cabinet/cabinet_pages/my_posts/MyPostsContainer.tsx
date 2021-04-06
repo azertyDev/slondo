@@ -23,7 +23,6 @@ import {useTranslation} from 'next-i18next';
 import {ButtonComponent} from '@src/components/elements/button/Button';
 import {useStyles} from './useStyles';
 import {InitialCabinetCardState, TabsDataType} from '@root/interfaces/Cabinet';
-import exp from 'constants';
 
 type userStateType = {
     isFetch: boolean,
@@ -66,6 +65,8 @@ const MyPostsContainer: FC = () => {
                         }
                     },
                     auction: {
+                        id: null,
+                        is_accepted: null,
                         winner: {
                             id: null,
                             name: '',

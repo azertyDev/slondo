@@ -232,7 +232,7 @@ export const userAPI = {
                 throw err;
             });
     },
-    getUserArchivePosts: ({ type = 'post', locale = 'ru' }: { type?: string, locale: string }): Promise<any> => {
+    getUserArchivePosts: ({ type, locale }: { type: string, locale: string }): Promise<any> => {
         return instance.get(`regular/user/archivePosts?itemsPerPage=25&page=1&type=${type}&lang=${locale}`, setTokenToHeader())
             .then(res => res.data)
             .catch(err => {

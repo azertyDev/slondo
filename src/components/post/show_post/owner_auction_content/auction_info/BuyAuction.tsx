@@ -17,7 +17,7 @@ const BuyAuctionComponent = (props) => {
         <>
             <div className="buy-now">
                 <Typography variant="subtitle1" color="initial">
-                    {auction.price_by_now} сум
+                    {auction.price_buy_now} сум
                 </Typography>
                 <ButtonComponent onClick={handleOpenModal()}>
                     <Typography variant="subtitle1" color="initial">
@@ -36,7 +36,7 @@ const BuyAuctionComponent = (props) => {
                         className='subtitle'
                     >
                         Нажимая кнопку “Купить сейчас” вы выкупаете лот на сумму&nbsp;
-                        <span className='buy-now-price'>1 400 000</span> сум и соглашаетесь с&nbsp;
+                        <span className='buy-now-price'>{auction.price_buy_now}</span> сум и соглашаетесь с&nbsp;
                         <span className='condition'>
                     <Link href="#">
                         <a>условиями</a>
