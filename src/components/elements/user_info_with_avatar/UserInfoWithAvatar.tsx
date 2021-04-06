@@ -5,6 +5,7 @@ import {UserAvatarComponent} from '@src/components/elements/user_info_with_avata
 import {useTranslation} from 'react-i18next';
 import {useStyles} from './useStyles';
 import {UserInfo} from '@root/interfaces/Auth';
+import {ButtonComponent} from "@src/components/elements/button/Button";
 
 type UserInfoWithAvatarPropsType = {
     owner: UserInfo,
@@ -37,13 +38,13 @@ export const UserInfoWithAvatar: FC<UserInfoWithAvatarPropsType> = ({ isOwner, o
                         })}
                     </Typography>
                     <Rating card={false} />
-                    {/*{!isOwner && (*/}
-                    {/*    <ButtonComponent onClick={handleFollow(owner.id)}>*/}
-                    {/*        <Typography variant="subtitle2">*/}
-                    {/*            {!subscribed ? 'Подписаться' : 'Отписаться'}*/}
-                    {/*        </Typography>*/}
-                    {/*    </ButtonComponent>*/}
-                    {/*)}*/}
+                    {!isOwner && (
+                        <ButtonComponent onClick={handleFollow(owner.id)}>
+                            <Typography variant="subtitle2">
+                                {!subscribed ? 'Подписаться' : 'Отписаться'}
+                            </Typography>
+                        </ButtonComponent>
+                    )}
                 </div>
             </div>
         </div>

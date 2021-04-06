@@ -133,35 +133,63 @@ export const useStyles = makeStyles((theme) => ({
             }
         },
         '& div.post-info': {
-            display: 'flex',
-            justifyContent: 'space-around',
-            padding: '13px 0px',
+            padding: '13px 7px 12px',
             background: '#F2F2F2',
             borderRadius: '5px',
             margin: '20px 0',
-            '& > a': {
-                textDecorationLine: 'underline'
-            },
-            '& > h6.MuiTypography-subtitle1:first-child': {
-                '& > span': {
-                    color: '#2F80ED'
-                }
-            },
-            '& h6.MuiTypography-subtitle1:last-child': {
+            [theme.breakpoints.up('lg')]: {
                 display: 'flex',
-                alignItems: 'center',
-                '&:hover': {
-                    cursor: 'pointer',
-                    textDecoration: 'underline'
+                justifyContent: 'space-around'
+            },
+            '& div.info-wrapper': {
+                display: 'flex',
+                justifyContent: 'space-between',
+                '& > h6': {
+                    [theme.breakpoints.down('md')]: {
+                        color: '#838383',
+                        fontSize: 'calc(10px + 6 * (100vw / 1280))'
+                    }
                 },
-                '& > svg': {
-                    marginLeft: '12px'
+                '& > a': {
+                    textDecorationLine: 'underline'
+                },
+                '& > h6.MuiTypography-subtitle1:first-child': {
+                    '& > span': {
+                        color: '#2F80ED',
+                        [theme.breakpoints.down('md')]: {
+                            color: '#838383'
+                        }
+                    }
+                },
+                '& h6.MuiTypography-subtitle1:last-child': {
+                    display: 'flex',
+                    alignItems: 'center',
+                    '&:hover': {
+                        cursor: 'pointer',
+                        textDecoration: 'underline'
+                    },
+                    '& > svg': {
+                        marginLeft: '12px'
+                    }
+                },
+                [theme.breakpoints.down('md')]: {
+                    marginBottom: '12px'
                 }
+            },
+            '& button.btn-report ': {
+                position: 'relative',
+                left: '50%',
+                transform: 'translate(-50%,0)',
+                borderRadius: '5px',
+                color: '#F08F8F',
+                border: '1px solid #F08F8F',
+                width: '100%',
+                background: '#FFFFFF'
             }
         },
         '& div.post-bonus': {
             display: 'flex',
-            marginBottom: '15px',
+            marginBottom: '16px',
             flexWrap: 'wrap',
 
             '& span': {
@@ -181,7 +209,6 @@ export const useStyles = makeStyles((theme) => ({
                 },
                 '&.delivery': {
                     [theme.breakpoints.down('md')]: {
-                        width: '100%',
                         padding: '3px',
                         '& svg': {
                             marginLeft: '10px'
@@ -198,7 +225,6 @@ export const useStyles = makeStyles((theme) => ({
                 },
                 '&.safe_deal': {
                     [theme.breakpoints.down('md')]: {
-                        width: '100%'
                     },
                     '& svg': {
                         '& path': {
@@ -210,7 +236,6 @@ export const useStyles = makeStyles((theme) => ({
                 },
                 '&.exchange': {
                     [theme.breakpoints.down('md')]: {
-                        width: '100%'
                     },
                     '& svg': {
                         width: 20,
@@ -225,11 +250,13 @@ export const useStyles = makeStyles((theme) => ({
                 },
                 '&.available': {
                     [theme.breakpoints.down('md')]: {
-                        width: '100%',
                         marginRight: '8px'
                     },
                     '& svg': {
                         marginRight: 15,
+                        [theme.breakpoints.down('md')]: {
+                            marginRight: '6px',
+                        },
                         '& > defs > linearGradient': {
                             '& stop': {
                                 [theme.breakpoints.down('md')]: {
@@ -242,17 +269,21 @@ export const useStyles = makeStyles((theme) => ({
                 '& h6.MuiTypography-subtitle1': {
                     color: theme.palette.common.tab,
                     [theme.breakpoints.down('md')]: {
-                        fontSize: 'calc(10px + 6 * (100vw / 1280))'
+                        fontSize: 'calc(10px + 6 * (100vw / 1280))',
+                        fontWeight: '700'
+
                     }
                 }
             }
         },
         '& div.contact': {
             display: 'flex',
-            marginBottom: '20px',
+            marginBottom: '30px',
             '& button': {
                 marginRight: '8px',
                 borderRadius: '5px',
+                width: '50%',
+                fontSize: 'calc(14px + 2 * (100vw / 1280))',
                 '& > h6': {
                     color: '#fff'
                 },
@@ -271,7 +302,7 @@ export const useStyles = makeStyles((theme) => ({
             }
         },
         '& div.post-location': {
-            marginBottom: '40px',
+            marginBottom: '36px',
             '& p.MuiTypography-button': {
                 marginBottom: 16
             },
@@ -307,7 +338,7 @@ export const useStyles = makeStyles((theme) => ({
             }
         },
         '& div.post-description': {
-            marginBottom: '40px',
+            marginBottom: '36px',
             '& p.MuiTypography-button': {
                 marginBottom: 15
             },
@@ -317,7 +348,7 @@ export const useStyles = makeStyles((theme) => ({
                 [theme.breakpoints.down('md')]: {
                     fontSize: 'calc(14px + 4 * (100vw / 1280))',
                     color: '#4E4E4E',
-                    lineHeight: '1rem',[theme.breakpoints.down('md')]: {
+                    lineHeight: '1rem', [theme.breakpoints.down('md')]: {
                         fontSize: 'calc(14px + 4 * (100vw / 1280))',
                         color: '#4E4E4E',
                         lineHeight: '1rem',

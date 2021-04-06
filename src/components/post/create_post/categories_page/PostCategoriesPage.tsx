@@ -1,7 +1,7 @@
 import React, {FC, useEffect, useMemo, useState} from 'react';
 import {useRouter} from "next/router";
 import {useTranslation} from 'next-i18next';
-import {MainLayout} from '@src/components/MainLayout';
+import {MainLayout} from '@src/components/main_layout/MainLayout';
 import {categorySearchHelper, categoriesByType, addParentsToCtgrs} from '@src/helpers';
 import {Top} from '../top/Top';
 import {SubCtgrsType} from '@root/interfaces/Categories';

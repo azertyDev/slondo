@@ -1,6 +1,6 @@
 import React from 'react'
 import { useRouter } from 'next/router'
-import {MainLayout} from "@src/components/MainLayout";
+import {MainLayout} from "@src/components/main_layout/MainLayout";
 
 const Hobbies = () => {
     const router = useRouter()

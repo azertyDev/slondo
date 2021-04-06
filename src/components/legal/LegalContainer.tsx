@@ -1,7 +1,7 @@
 import React, {FC, useEffect, useState} from 'react'
 import {Grid} from '@material-ui/core'
 import {LegalComponent} from '@src/components/legal/LegalComponent'
-import {MainLayout} from '@src/components/MainLayout'
+import {MainLayout} from '@src/components/main_layout/MainLayout'
 import {ThemesMenu} from '@src/components/elements/themes_menu/ThemesMenu'
 import {legal_docs} from './LegalDocs'
 import {useRouter} from 'next/router'

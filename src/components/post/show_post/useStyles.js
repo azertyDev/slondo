@@ -1,7 +1,8 @@
-import { makeStyles } from '@material-ui/core/styles';
+import {makeStyles} from '@material-ui/core/styles';
 
 export const useStyles = makeStyles((theme) => ({
     root: {
+
         // '& div.ad-slider': {
         //     '& > div:last-child': {
         //         display: 'flex',
@@ -20,8 +21,8 @@ export const useStyles = makeStyles((theme) => ({
         //     },
         // },
         '& a': {
-            textDecoration: 'none',
-        },
+            textDecoration: 'none'
+        }
         // '& > div:last-child': {
         //     display: 'flex',
         //     justifyContent: 'flex-end',
@@ -34,9 +35,9 @@ export const useStyles = makeStyles((theme) => ({
         // },
     },
     shareIcon: {
-        height: '25px',
+        height: '25px'
     },
     adBanner: {
-        marginTop: '55px',
-    },
+        marginTop: '55px'
+    }
 }));

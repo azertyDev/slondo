@@ -6,7 +6,7 @@ import {userAPI} from '@src/api/api';
 import {Top} from '../top/Top';
 import {useTranslation} from "next-i18next";
 import {postTypes} from '@src/common_data/post_types';
-import {MainLayout} from '@src/components/MainLayout';
+import {MainLayout} from '@src/components/main_layout/MainLayout';
 import {AppearanceForm} from './appearance_form/AppearanceForm';
 import {CommonParamsForm} from './common_params_form/CommonParamsForm';
 import {setErrorMsgAction} from '@root/src/redux/slices/errorSlice';

@@ -1,6 +1,6 @@
 import React, {FC} from 'react';
 import {Grid, Hidden} from '@material-ui/core';
-import {MainLayout} from '@src/components/MainLayout';
+import {MainLayout} from '@src/components/main_layout/MainLayout';
 import {OwnerAuctionContent} from './owner_auction_content/OwnerAuctionContent';
 import {PostContent} from './post_content/PostContent';
 import {Banner} from '@src/components/elements/banner/Banner';

@@ -177,7 +177,7 @@ export const PostContent: FC<WithT & any> = (props) => {
                     </div>
                     {!data.condition.name && (
                         <div className="condition">
-                            <Typography variant="h6">Б/У</Typography>
+                            <Typography variant="h6">Новое</Typography>
                         </div>
                     )}
                 </div>
@@ -268,7 +268,7 @@ export const PostContent: FC<WithT & any> = (props) => {
                         <PhoneIcon/>
                         {!!data.available_days?.length && (
                             <Typography variant="subtitle1" color="primary">
-                                {weekDaysHelper(data.available_days, t)}
+                                {weekDaysHelper(data.available_days , t)}&nbsp;
                             </Typography>
                         )}
                         <Typography variant="subtitle1">
@@ -346,26 +346,44 @@ export const PostContent: FC<WithT & any> = (props) => {
             )}
             {!!parameterItems.length && (
                 <div className="post-parameters">
-                    <Typography variant="button" color="initial">
-                        Параметры
-                    </Typography>
+                    <Hidden mdDown>
+                        <Typography variant="button" color="initial">
+                            Параметры
+                        </Typography>
+                    </Hidden>
                     <ul>{parameterItems}</ul>
                 </div>
             )}
-            <div className="post-info">
-                <Typography variant="subtitle1">
-                    <span>Номер:</span> {data.id}
-                </Typography>
-                <Typography variant="subtitle1">
-                    Опубликовано: {formatted_date}
-                </Typography>
-                <Typography variant="subtitle1">
-                    Просмотров: {data.number_of_views}
-                </Typography>
-                {/*<Typography variant="subtitle1" onClick={handleOpenModal}>*/}
-                {/*    Пожаловаться <WarningIcon/>*/}
-                {/*</Typography>*/}
-            </div>
+            <Hidden lgUp>
+                <div className="post-info">
+                    <div className='info-wrapper'>
+                        <Typography variant="subtitle1">
+                            <span>Объяление №:</span> {data.id}
+                        </Typography>
+                        <Hidden xsDown>
+                            <Typography variant="subtitle1">
+                                Опубликовано: {formatted_date}
+                            </Typography>
+                        </Hidden>
+                        <Hidden smUp>
+                            <Typography variant="subtitle1">
+                                {formatted_date}
+                            </Typography>
+                        </Hidden>
+                        <Typography variant="subtitle1">
+                            Просмотров: {data.number_of_views}
+                        </Typography>
+                        <Hidden mdDown>
+                            <Typography variant="subtitle1" onClick={handleOpenModal}>
+                                Пожаловаться <WarningIcon/>
+                            </Typography>
+                        </Hidden>
+                    </div>
+                    <ButtonComponent className="btn-report" onClick={handleOpenModal}>
+                        Пожаловаться
+                    </ButtonComponent>
+                </div>
+            </Hidden>
             <ModalSyncSliders
                 slidersRefs={slidersRefs}
                 open={openSliderModal}

@@ -1,5 +1,5 @@
 import React from 'react'
-import {MainLayout} from "@src/components/MainLayout";
+import {MainLayout} from "@src/components/main_layout/MainLayout";
 import { useRouter } from 'next/router'
 import {useStyles} from './useStyles'
 import Filter from "@src/components/categories/car/filter";

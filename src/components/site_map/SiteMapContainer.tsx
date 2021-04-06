@@ -1,5 +1,5 @@
 import React, {FC} from 'react'
-import {MainLayout} from '@src/components/MainLayout'
+import {MainLayout} from '@src/components/main_layout/MainLayout'
 import {SiteMapComponent} from './SiteMapComponent'
 import {categories_list} from '@src/common_data/categories_list'
 
