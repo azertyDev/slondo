@@ -33,9 +33,11 @@ export const ShowPost: FC<any> = (props) => {
                     </Grid>
                     <Grid item lg={3} xs={12}>
                         <OwnerAuctionContent t={t} postData={data} handleFollow={handleFollow}/>
-                        <div className={classes.adBanner}>
-                            <Banner height="424px"/>
-                        </div>
+                        <Hidden mdDown>
+                            <div className={classes.adBanner}>
+                                <Banner height="424px"/>
+                            </div>
+                        </Hidden>
                     </Grid>
                 </Grid>
             </div>

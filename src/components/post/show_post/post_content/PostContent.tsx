@@ -169,12 +169,14 @@ export const PostContent: FC<WithT & any> = (props) => {
                             {data.title}
                         </Typography>
                     </div>
-                    <div>
-                        <ButtonComponent onClick={handleOpenSnackbar({vertical, horizontal})}>
-                            <NotificationIcon/>
-                            Следить
-                        </ButtonComponent>
-                    </div>
+                    {data.ads_type.mark !== 'post' && (
+                        <div>
+                            <ButtonComponent onClick={handleOpenSnackbar({vertical, horizontal})}>
+                                <NotificationIcon/>
+                                Следить
+                            </ButtonComponent>
+                        </div>
+                    )}
                     {!data.condition.name && (
                         <div className="condition">
                             <Typography variant="h6">Новое</Typography>
@@ -201,10 +203,10 @@ export const PostContent: FC<WithT & any> = (props) => {
                     </div>
                     <div>
                         <Typography variant='h6' className="price">
-                            {data.price + ' ' + data.currency.name}
+                            {numberPrettier(data.price) + ' ' + data.currency.name}
                             {!data.condition.name && (
                                 <div className="condition">
-                                    <Typography variant="h6">Б/У</Typography>
+                                    <Typography variant="h6">Новое</Typography>
                                 </div>
                             )}
                         </Typography>
@@ -268,7 +270,7 @@ export const PostContent: FC<WithT & any> = (props) => {
                         <PhoneIcon/>
                         {!!data.available_days?.length && (
                             <Typography variant="subtitle1" color="primary">
-                                {weekDaysHelper(data.available_days , t)}&nbsp;
+                                {weekDaysHelper(data.available_days, t)}&nbsp;
                             </Typography>
                         )}
                         <Typography variant="subtitle1">
@@ -381,6 +383,21 @@ export const PostContent: FC<WithT & any> = (props) => {
                     </div>
                     <ButtonComponent className="btn-report" onClick={handleOpenModal}>
                         Пожаловаться
+                    </ButtonComponent>
+                </div>
+            </Hidden>
+
+            <Hidden lgUp>
+                <div className='floating'>
+                    <div className="floating-text">
+                        <SafeIcon/>
+                        <Typography variant='subtitle2'>
+                            Безопасная покупка <br/>
+                            за 420 000 сум
+                        </Typography>
+                    </div>
+                    <ButtonComponent>
+                        Купить
                     </ButtonComponent>
                 </div>
             </Hidden>

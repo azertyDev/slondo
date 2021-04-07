@@ -58,7 +58,6 @@ export const useStyles = makeStyles((theme) => ({
                     }
                 }
             },
-
             '& .price': {
                 [theme.breakpoints.down('md')]: {
                     fontWeight: '700',
@@ -137,6 +136,10 @@ export const useStyles = makeStyles((theme) => ({
             background: '#F2F2F2',
             borderRadius: '5px',
             margin: '20px 0',
+            [theme.breakpoints.down('md')]: {
+                background: 'inherit',
+                margin: '35px 0 20px'
+            },
             [theme.breakpoints.up('lg')]: {
                 display: 'flex',
                 justifyContent: 'space-around'
@@ -202,48 +205,46 @@ export const useStyles = makeStyles((theme) => ({
                 boxShadow: '0px 0px 15px rgba(0, 0, 0, 0.1)',
                 marginBottom: '12px',
                 [theme.breakpoints.down('md')]: {
-                    marginRight: '8px'
+                    marginRight: '8px',
+                    padding: '5px 10px',
+                    boxShadow: "0px 1px 4px rgba(0, 0, 0, 0.04)",
+                    background: '#F7F7F7'
                 },
                 '&:last-child': {
                     marginRight: 0
                 },
                 '&.delivery': {
-                    [theme.breakpoints.down('md')]: {
-                        padding: '3px',
-                        '& svg': {
-                            marginLeft: '10px'
-                        }
-                    },
                     '& svg': {
                         '& path': {
                             fill: '#695EAE',
                             [theme.breakpoints.down('md')]: {
-                                fill: '#838383'
+                                fill: '#838383',
+                                boxShadow: 'inset 0px 2px 2px rgba(0, 0, 0, 0.35)'
                             }
                         }
                     }
                 },
                 '&.safe_deal': {
-                    [theme.breakpoints.down('md')]: {
-                    },
+                    [theme.breakpoints.down('md')]: {},
                     '& svg': {
                         '& path': {
                             [theme.breakpoints.down('md')]: {
-                                fill: '#838383'
+                                fill: '#838383',
+                                boxShadow: 'inset 0px 2px 2px rgba(0, 0, 0, 0.35)'
                             }
                         }
                     }
                 },
                 '&.exchange': {
-                    [theme.breakpoints.down('md')]: {
-                    },
+                    [theme.breakpoints.down('md')]: {},
                     '& svg': {
                         width: 20,
                         height: 22,
                         '& path': {
                             fill: '#4E4E4E',
                             [theme.breakpoints.down('md')]: {
-                                fill: '#838383'
+                                fill: '#838383',
+                                boxShadow: 'inset 0px 2px 2px rgba(0, 0, 0, 0.35)'
                             }
                         }
                     }
@@ -255,12 +256,13 @@ export const useStyles = makeStyles((theme) => ({
                     '& svg': {
                         marginRight: 15,
                         [theme.breakpoints.down('md')]: {
-                            marginRight: '6px',
+                            marginRight: '6px'
                         },
                         '& > defs > linearGradient': {
                             '& stop': {
                                 [theme.breakpoints.down('md')]: {
-                                    stopColor: '#838383;'
+                                    stopColor: '#838383',
+                                    boxShadow: 'inset 0px 2px 2px rgba(0, 0, 0, 0.35)'
                                 }
                             }
                         }
@@ -271,7 +273,6 @@ export const useStyles = makeStyles((theme) => ({
                     [theme.breakpoints.down('md')]: {
                         fontSize: 'calc(10px + 6 * (100vw / 1280))',
                         fontWeight: '700'
-
                     }
                 }
             }
@@ -348,7 +349,8 @@ export const useStyles = makeStyles((theme) => ({
                 [theme.breakpoints.down('md')]: {
                     fontSize: 'calc(14px + 4 * (100vw / 1280))',
                     color: '#4E4E4E',
-                    lineHeight: '1rem', [theme.breakpoints.down('md')]: {
+                    lineHeight: '1rem',
+                    [theme.breakpoints.down('md')]: {
                         fontSize: 'calc(14px + 4 * (100vw / 1280))',
                         color: '#4E4E4E',
                         lineHeight: '1rem',
@@ -416,7 +418,6 @@ export const useStyles = makeStyles((theme) => ({
             }
         },
         '& div.post-parameters': {
-
             '& p.MuiTypography-button': {
                 marginBottom: '30px'
             },
@@ -444,22 +445,33 @@ export const useStyles = makeStyles((theme) => ({
                     alignItems: 'center',
                     marginBottom: 20,
                     paddingBottom: '5px',
+                    [theme.breakpoints.down('sm')]: {
+                        display: 'block',
+                        marginBottom: '16px',
+                        paddingBottom: 0
+                    },
                     '&:last-child': {
                         margin: 0
                     },
                     '& h6': {
-                        [theme.breakpoints.down('sm')]: {
-                            width: '50%'
-                        },
                         '&.key': {
                             [theme.breakpoints.up('md')]: {
-                                width: '20%'
+                                width: '30%'
+                            },
+                            [theme.breakpoints.down('md')]: {
+                                fontSize: 'calc(14px + 4 * (100vw / 1280))'
+                            },
+                            [theme.breakpoints.down('sm')]: {
+                                paddingBottom: '8px',
+                                color: '#BDBDBD'
                             },
                             fontSize: '1.125rem',
                             color: '#838383'
                         },
                         '&.value': {
-                            fontSize: '1.125rem'
+                            [theme.breakpoints.down('md')]: {
+                                fontSize: 'calc(14px + 4 * (100vw / 1280))'
+                            }
                         }
                     }
                 }
@@ -495,6 +507,35 @@ export const useStyles = makeStyles((theme) => ({
         '& .slider-wrapper': {
             [theme.breakpoints.down('md')]: {
                 filter: 'drop-shadow(0px 1px 8px rgba(0, 0, 0, 0.35))'
+            }
+        },
+        '& .floating': {
+            position: 'fixed',
+            zIndex: '100',
+            bottom: 0,
+            left: 0,
+            width: '100%',
+            padding: '13px 7px 14px 17px',
+            display: 'flex',
+            background: '#494A61',
+            '& div.floating-text': {
+                display: 'flex',
+                alignItems: 'center',
+                width: '50%',
+                fontSize: 'calc(14px + 2 * (100vw / 1280))',
+                '& svg': {
+                    marginRight: '18px'
+                }
+            },
+            '& h6': {
+                color: '#FFFFFF',
+                fontSize: 'calc(10px + 6 * (100vw / 1280))'
+            },
+            '& button': {
+                width: '50%',
+                color: '#FFFFFF',
+                background: 'linear-gradient(49.94deg, #675EAA 19.03%, #AD66D5 72.72%)',
+                borderRadius: '3px'
             }
         }
     },

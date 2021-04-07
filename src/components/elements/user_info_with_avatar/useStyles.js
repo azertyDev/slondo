@@ -31,12 +31,10 @@ export const useStyles = makeStyles((theme) => ({
                         lineHeight: '0.875rem'
                     }
                 },
-                '& > div': {
-                    marginBottom: '8px',
-                    '&> div': {
-                        [theme.breakpoints.down('md')]: {
-                            margin: 0
-                        }
+                '& > div > div': {
+                    // '&:last-child > h6': {},
+                    [theme.breakpoints.down('md')]: {
+                        margin: 0
                     }
                 }
             },
