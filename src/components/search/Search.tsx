@@ -2,38 +2,40 @@ import React, {FC} from 'react';
 import {useRouter} from 'next/router';
 import {Typography} from "@material-ui/core";
 import {MainLayout} from "@src/components/MainLayout";
-import {getCtgrByCyrillicName} from "@src/helpers";
 import {useTranslation} from "react-i18next";
-import {SEOTextComponent} from "@src/components/elements/seo/SEOTextComponent";
 import {PageNotFound} from "@src/components/page_not_found/PageNotFound";
+import {defaultSEOContent, getSEOContent} from "@src/common_data/seo_content";
+import {SEOTextComponent} from "@src/components/elements/seo/SEOTextComponent";
+import {getCtgrsByCyrillicNames} from "@src/helpers";
+
 
 export const Search: FC = () => {
     const {t} = useTranslation(['categories', 'locations']);
-    const {query: {location, subCategoryName, typeName}, locale} = useRouter();
+    const {
+        query,
+        locale
+    } = useRouter();
 
-    const subCategory = getCtgrByCyrillicName(subCategoryName as string);
-    const type = getCtgrByCyrillicName(typeName as string);
+    const {location, categories, q} = query;
+    const [subCtgrName, typeCtgrName] = categories as string[];
 
-    const is404 = !subCategory || typeName && !type;
-    console.log('subCategory', subCategory);
-    console.log('type', type);
-    const title = is404
-                  ? null
-                  : `${type ? `${t(type.name)} ${locale === 'ru' ? 'в' : ''} ${t(`locations:${location}`)}` : ''}`;
+    const [subCtgr, typeCtgr] = getCtgrsByCyrillicNames(subCtgrName, typeCtgrName);
 
-    return (
-        is404
-        ? <PageNotFound/>
-        : <MainLayout title={title} description={''}>
-            <Typography>
-                {t(subCategory.name)}
-            </Typography>
-            {type && (
-                <Typography>
-                    {t(type.name)}
-                </Typography>
-            )}
-            <SEOTextComponent/>
-        </MainLayout>
-    );
+    const is404 = typeCtgrName && !typeCtgr || !subCtgr || categories.length > 2;
+
+    let seoContent = subCtgr ? getSEOContent(subCtgr.name, location as string)[locale] : defaultSEOContent[locale];
+    if (typeCtgr) seoContent = seoContent[typeCtgr.name];
+
+    const title = q ? `${q} - ${typeCtgr ? t(typeCtgr.name) : t(subCtgr.name)} - SLONDO.uz` : seoContent.title;
+    const description = q ? `${q} SLONDO.uz` : seoContent.description;
+
+    return !is404
+           ? (
+               <MainLayout title={title} description={description}>
+                   <Typography>
+                       {t(subCtgr.name)}
+                   </Typography>
+                   <SEOTextComponent text={seoContent.text}/>
+               </MainLayout>
+           ) : <PageNotFound/>;
 };

@@ -1,5 +1,6 @@
 import {ReactElement} from 'react';
 import {UserInfo} from '@root/interfaces/Auth';
+import {IdNameType} from "@root/interfaces/Post";
 
 export type TabsDataType = {
     id: number;
@@ -29,7 +30,7 @@ export type CardDataType = {
         number_of_bets: number
     },
     author: UserInfo,
-    available_days: string
+    available_days: IdNameType[],
     category: initValuesType
     city: initValuesType
     created_at: string

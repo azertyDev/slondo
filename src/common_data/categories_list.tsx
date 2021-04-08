@@ -1004,8 +1004,8 @@ export const categories_list: CategoryType[] = [
             },
             {
                 id: 3,
-                name: "Няни и сиделки",
-                ru_name: "babysittersAndNurses",
+                name: "babysittersAndNurses",
+                ru_name: "Няни и сиделки",
                 type: [
                     {
                         id: 25,
@@ -1734,7 +1734,7 @@ export const categories_list: CategoryType[] = [
             },
             {
                 id: 13,
-                name: "Уборка",
+                name: "cleaning",
                 ru_name: "Уборка",
                 type: [
                     {
@@ -1887,8 +1887,8 @@ export const categories_list: CategoryType[] = [
             },
             {
                 id: 17,
-                name: "Другое",
-                ru_name: "other"
+                name: "other",
+                ru_name: "Другое"
             }
         ]
     },
@@ -1912,73 +1912,73 @@ export const categories_list: CategoryType[] = [
                     },
                     {
                         id: 2,
-                        name: 'blouses',
-                        ru_name: 'Блузы'
+                        name: 'blouses_shirts',
+                        ru_name: 'Блузы и рубашки'
                     },
                     {
                         id: 3,
-                        name: 'shirts',
-                        ru_name: 'Рубашки'
-                    },
-                    {
-                        id: 4,
-                        name: 'expectantMothers',
+                        name: 'for_expectant_m',
                         ru_name: 'Будущим мамам'
                     },
                     {
-                        id: 5,
+                        id: 4,
                         name: 'outerwear',
                         ru_name: 'Верхняя одежда'
                     },
                     {
-                        id: 6,
+                        id: 5,
                         name: 'hats',
                         ru_name: 'Головные уборы'
                     },
                     {
-                        id: 7,
+                        id: 6,
                         name: 'homeClothes',
                         ru_name: 'Домашняя одежда'
                     },
                     {
-                        id: 8,
+                        id: 7,
                         name: 'overalls',
                         ru_name: 'Комбинезоны'
                     },
                     {
-                        id: 9,
+                        id: 8,
                         name: 'swimwear',
                         ru_name: 'Купальники'
                     },
                     {
-                        id: 10,
+                        id: 9,
                         name: 'underwear',
                         ru_name: 'Нижнее белье'
                     },
                     {
-                        id: 11,
+                        id: 10,
                         name: 'footwear',
                         ru_name: 'Обувь'
                     },
                     {
-                        id: 12,
+                        id: 11,
                         name: 'blazersAndSuits',
                         ru_name: 'Пиджаки и костюмы'
                     },
                     {
-                        id: 13,
+                        id: 12,
                         name: 'dressesAndSkirts',
                         ru_name: 'Платья и юбки'
                     },
                     {
-                        id: 14,
+                        id: 13,
                         name: 'sweatersHoodies',
                         ru_name: 'Свитеры и толстовки'
                     },
                     {
-                        id: 15,
+                        id: 14,
                         name: 'sportswear',
                         ru_name: 'Спортивная одежда'
+                    },
+                    {
+                        id: 15,
+                        name: 'overalls_and_un',
+                        ru_name: 'Спецодежда и униформа'
                     },
                     {
                         id: 16,
@@ -3010,39 +3010,7 @@ export const categories_list: CategoryType[] = [
             {
                 id: 2,
                 name: 'videoFilms',
-                ru_name: 'Видеофильмы',
-                type: [
-                    // {
-                    //     id: 10,
-                    //     name: "DVD",
-                    //     ru_name: "DVD"
-                    // },
-                    // {
-                    //     id: 11,
-                    //     name: "Blu-Ray",
-                    //     ru_name: "Blu-Ray"
-                    // },
-                    // {
-                    //     id: 12,
-                    //     name: "CD",
-                    //     ru_name: "CD"
-                    // },
-                    // {
-                    //     id: 13,
-                    //     name: "VHSCassettes",
-                    //     ru_name: "Кассеты VHS"
-                    // },
-                    // {
-                    //     id: 14,
-                    //     name: "onlineSubscription",
-                    //     ru_name: "Онлайн подписка"
-                    // },
-                    // {
-                    //     id: 15,
-                    //     name: 'other',
-                    //     ru_name: 'Другое'
-                    // }
-                ]
+                ru_name: 'Видеофильмы'
             },
             {
                 id: 3,
@@ -3052,59 +3020,164 @@ export const categories_list: CategoryType[] = [
             {
                 id: 4,
                 name: 'collecting',
-                ru_name: 'Коллекционирование'
+                ru_name: 'Коллекционирование',
+                type: [
+                    {
+                        id: 21,
+                        name: "antique_furniture_tableware",
+                        ru_name: 'Антикварная мебель, посуда'
+                    },
+                    {
+                        id: 22,
+                        name: "banknotes",
+                        ru_name: 'Банкноты'
+                    },
+                    {
+                        id: 23,
+                        name: "tickets",
+                        ru_name: 'Билеты'
+                    },
+                    {
+                        id: 24,
+                        name: "things_celebrities_autographs",
+                        ru_name: 'Вещи знаменитостей, автографы'
+                    },
+                    {
+                        id: 25,
+                        name: "vinyl_records",
+                        ru_name: 'Виниловые пластинки'
+                    },
+                    {
+                        id: 26,
+                        name: "inserts_stickers",
+                        ru_name: 'Вкладыши, наклейки'
+                    },
+                    {
+                        id: 27,
+                        name: "military_stuff",
+                        ru_name: 'Военные вещи'
+                    },
+                    {
+                        id: 28,
+                        name: "documents",
+                        ru_name: 'Документы'
+                    },
+                    {
+                        id: 29,
+                        name: "tokens_medals_badges",
+                        ru_name: 'Жетоны, медали, значки'
+                    },
+                    {
+                        id: 30,
+                        name: "calendars",
+                        ru_name: 'Календари'
+                    },
+                    {
+                        id: 31,
+                        name: "kinder_surprises",
+                        ru_name: 'Киндер-сюрпризы'
+                    },
+                    {
+                        id: 32,
+                        name: "books_magazines_manuscripts",
+                        ru_name: 'Книги, журналы, рукописи'
+                    },
+                    {
+                        id: 33,
+                        name: "envelopes_postcards",
+                        ru_name: 'Конверты, открытки'
+                    },
+                    {
+                        id: 34,
+                        name: "piggy_banks",
+                        ru_name: 'Копилки'
+                    },
+                    {
+                        id: 35,
+                        name: "dolls_toys",
+                        ru_name: 'Куклы, игрушки'
+                    },
+                    {
+                        id: 36,
+                        name: "magnets",
+                        ru_name: 'Магниты'
+                    },
+                    {
+                        id: 37,
+                        name: "stamps",
+                        ru_name: 'Марки'
+                    },
+                    {
+                        id: 38,
+                        name: "models",
+                        ru_name: 'Модели'
+                    },
+                    {
+                        id: 39,
+                        name: "coins_numismatics",
+                        ru_name: 'Монеты, нумизматика'
+                    },
+                    {
+                        id: 40,
+                        name: "musical_instruments",
+                        ru_name: 'Музыкальные инструменты'
+                    },
+                    {
+                        id: 41,
+                        name: "ashtrays_lighters",
+                        ru_name: 'Пепельницы, зажигалки'
+                    },
+                    {
+                        id: 42,
+                        name: "plastic_cards",
+                        ru_name: 'Пластиковые карточки'
+                    },
+                    {
+                        id: 43,
+                        name: "art_objects_paintings",
+                        ru_name: 'Предметы искусства, картины'
+                    },
+                    {
+                        id: 44,
+                        name: "figurines_figurines",
+                        ru_name: 'Статуэтки, фигурки'
+                    },
+                    {
+                        id: 45,
+                        name: "jewelry_accessories",
+                        ru_name: 'Украшения, аксессуары'
+                    },
+                    {
+                        id: 46,
+                        name: "photos_letters",
+                        ru_name: 'Фотографии, письма'
+                    },
+                    {
+                        id: 47,
+                        name: "chess_games",
+                        ru_name: 'Шахматы, игры'
+                    },
+                    {
+                        id: 48,
+                        name: "jewelry_boxes",
+                        ru_name: 'Шкатулки'
+                    },
+                    {
+                        id: 49,
+                        name: "labels_bottles_corks",
+                        ru_name: 'Этикетки, бутылки, пробки'
+                    },
+                    {
+                        id: 50,
+                        name: "other",
+                        ru_name: 'Другое'
+                    }
+                ]
             },
             {
                 id: 5,
                 name: 'materialsForCreativity',
-                ru_name: 'Материалы для творчества',
-                type: [
-                    {
-                        id: 51,
-                        name: "burningOut",
-                        ru_name: "Выжигание"
-                    },
-                    {
-                        id: 52,
-                        name: "knitting",
-                        ru_name: "Вязание"
-                    },
-                    {
-                        id: 53,
-                        name: "modelingSculpture",
-                        ru_name: "Лепка, скульптура"
-                    },
-                    {
-                        id: 54,
-                        name: "weavingMacrame",
-                        ru_name: "Плетение, макраме"
-                    },
-                    {
-                        id: 55,
-                        name: "origami",
-                        ru_name: "Поделки из бумаги"
-                    },
-                    {
-                        id: 56,
-                        name: "woodCarving",
-                        ru_name: "Резьба по дереву"
-                    },
-                    {
-                        id: 57,
-                        name: "drawingColoring",
-                        ru_name: "Рисование, раскраски"
-                    },
-                    {
-                        id: 58,
-                        name: "sewingEmbroidery",
-                        ru_name: "Шитье, вышивание"
-                    },
-                    {
-                        id: 59,
-                        name: "other",
-                        ru_name: "Другое"
-                    }
-                ]
+                ru_name: 'Материалы для творчества'
             },
             {
                 id: 6,
@@ -3114,99 +3187,171 @@ export const categories_list: CategoryType[] = [
             {
                 id: 7,
                 name: 'musicalInstruments',
-                ru_name: 'Музыкальные инструменты'
-            },
-            {
-                id: 8,
-                name: 'boardGames',
-                ru_name: 'Настольные игры',
+                ru_name: 'Музыкальные инструменты',
                 type: [
                     {
-                        id: 82,
-                        name: "adventurers",
-                        ru_name: "Бродилки"
+                        id: 67,
+                        name: "accordion_accordion_accordion",
+                        ru_name: 'Аккордеон, гармони, баяны'
                     },
                     {
-                        id: 83,
-                        name: "kidsGames",
-                        ru_name: "Детские игры"
+                        id: 68,
+                        name: "acoustic_guitars",
+                        ru_name: 'Акустические гитары'
                     },
                     {
-                        id: 84,
-                        name: "partyGames",
-                        ru_name: "Игры для вечеринок"
+                        id: 69,
+                        name: "classical_guitars",
+                        ru_name: 'Классические гитары'
                     },
                     {
-                        id: 85,
-                        name: "cardGames",
-                        ru_name: "Карточные игры"
+                        id: 70,
+                        name: "bass_guitars",
+                        ru_name: 'Бас-гитары'
                     },
                     {
-                        id: 86,
-                        name: "classicGames",
-                        ru_name: "Классические игры"
+                        id: 71,
+                        name: "electric_guitars",
+                        ru_name: 'Электрогитары'
                     },
                     {
-                        id: 87,
-                        name: "logicalGames",
-                        ru_name: "Логические игры"
+                        id: 72,
+                        name: "guitar_gain",
+                        ru_name: 'Гитарное усиление'
                     },
                     {
-                        id: 88,
-                        name: "gameSets",
-                        ru_name: "Наборы игр"
+                        id: 73,
+                        name: "wind_instruments",
+                        ru_name: 'Духовые инструменты'
                     },
                     {
-                        id: 89,
-                        name: "Puzzles",
-                        ru_name: "Паззлы и головоломки"
+                        id: 74,
+                        name: "keyboards",
+                        ru_name: 'Клавишные'
                     },
                     {
-                        id: 90,
-                        name: "adventureGames",
-                        ru_name: "Приключенческие игры"
+                        id: 75,
+                        name: "mixing_consoles",
+                        ru_name: 'Микшерные пульты'
                     },
                     {
-                        id: 91,
-                        name: "familyGames",
-                        ru_name: "Семейные игры"
+                        id: 76,
+                        name: "folk_instruments",
+                        ru_name: 'Народные инструменты'
                     },
                     {
-                        id: 92,
-                        name: "wordsAndAssociations",
-                        ru_name: "Слова и ассоциации"
+                        id: 77,
+                        name: "effect_pedals",
+                        ru_name: 'Педали эффектов'
                     },
                     {
-                        id: 93,
-                        name: "strategyGames",
-                        ru_name: "Стратегические игры"
+                        id: 78,
+                        name: "violins_bowed",
+                        ru_name: 'Скрипки, смычковые'
                     },
                     {
-                        id: 94,
-                        name: "footballHockeyBilliards",
-                        ru_name: "Футбол, хоккей, бильярд"
+                        id: 79,
+                        name: "percussion_instruments",
+                        ru_name: 'Ударные инструменты'
                     },
                     {
-                        id: 95,
-                        name: "chessCheckersBackgammon",
-                        ru_name: "Шахматы, шашки, нарды"
+                        id: 80,
+                        name: "accessories",
+                        ru_name: 'Аксессуары'
                     },
                     {
-                        id: 96,
-                        name: "economicGames",
-                        ru_name: "Экономические игры"
-                    },
-                    {
-                        id: 97,
+                        id: 81,
                         name: "other",
-                        ru_name: "Другое"
+                        ru_name: 'Другое'
                     }
                 ]
             },
             {
+                id: 8,
+                name: 'boardGames',
+                ru_name: 'Настольные игры'
+            },
+            {
                 id: 9,
                 name: 'sportsAndRecreation',
-                ru_name: 'Спорт и отдых'
+                ru_name: 'Спорт и отдых',
+                type: [
+                    {
+                        id: 98,
+                        name: "sports_protection",
+                        ru_name: 'Спортивная защита'
+                    },
+                    {
+                        id: 99,
+                        name: "bicycles",
+                        ru_name: 'Велосипеды'
+                    },
+                    {
+                        id: 100,
+                        name: "roller_skates_and_skateboarding",
+                        ru_name: 'Ролики и скейтбординг'
+                    },
+                    {
+                        id: 101,
+                        name: "scooters_and_gyrometer",
+                        ru_name: 'Самокаты и гироскутеры'
+                    },
+                    {
+                        id: 102,
+                        name: "billiards_and_bowling",
+                        ru_name: 'Бильярд и боулинг'
+                    },
+                    {
+                        id: 103,
+                        name: "water_sports",
+                        ru_name: 'Водные виды спорта'
+                    },
+                    {
+                        id: 104,
+                        name: "martial_arts",
+                        ru_name: 'Единоборства'
+                    },
+                    {
+                        id: 105,
+                        name: "winter_sports",
+                        ru_name: 'Зимние виды спорта'
+                    },
+                    {
+                        id: 106,
+                        name: "ball_games",
+                        ru_name: 'Игры с мячом'
+                    },
+                    {
+                        id: 107,
+                        name: "hunting_and_fishing",
+                        ru_name: 'Охота и рыбалка'
+                    },
+                    {
+                        id: 108,
+                        name: "tourism_and_outdoor_recreation",
+                        ru_name: 'Туризм и отдых на природе'
+                    },
+                    {
+                        id: 109,
+                        name: "tennis_badminton_darts",
+                        ru_name: 'Теннис, бадминтон, дартс'
+                    },
+                    {
+                        id: 110,
+                        name: "exercise_machines_and_fitness_equipment",
+                        ru_name: 'Тренажеры и фитнес'
+                    },
+                    {
+                        id: 111,
+                        name: "sports_nutrition",
+                        ru_name: 'Спортивное питание'
+                    },
+                    {
+                        id: 112,
+                        name: "other",
+                        ru_name: 'Другое'
+                    }
+                ]
             }
         ]
     },

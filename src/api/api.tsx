@@ -24,7 +24,7 @@ export const setTokenToHeader = (): { headers: any } => {
                 'Content-Type': 'application/json',
                 'Authorization': `Bearer ${token}`
             }
-        }
+        };
     }
 };
 
@@ -90,14 +90,14 @@ export const userAPI = {
                 throw err;
             });
     },
-    getFavorites: ({ type = 'post', locale = 'ru' }: { type?: string, locale: string }): Promise<any> => {
+    getFavorites: ({type = 'post', locale = 'ru'}: { type?: string, locale: string }): Promise<any> => {
         return instance.get(`regular/post/get/favorites?type=${type}&lang=${locale}`, setTokenToHeader())
             .then(res => res.data)
             .catch(err => {
                 throw err;
             });
     },
-    getMyPosts: ({ type = 'post', onlySecure = 0, locale = 'ru' }: { type?: string, onlySecure?: number, locale: string }): Promise<any> => {
+    getMyPosts: ({type = 'post', onlySecure = 0, locale = 'ru'}: { type?: string, onlySecure?: number, locale: string }): Promise<any> => {
         return instance.get(`regular/user/posts?type=${type}&lang=${locale}&secure=${onlySecure}`, setTokenToHeader())
             .then(res => res.data)
             .catch(err => {
@@ -143,7 +143,7 @@ export const userAPI = {
         )
             .then(res => res.data)
             .catch(err => {
-                throw err
+                throw err;
             });
     },
     getCards: (itemsPerPage: number, page: number, type: string, lang: string): Promise<{
@@ -170,28 +170,28 @@ export const userAPI = {
         return instance.get(`location?lang=${lang}`)
             .then(res => res.data)
             .catch(err => {
-                throw err
+                throw err;
             });
     },
     createPost: (values: any): Promise<string> => {
         return instance.post(`regular/post/new`, values, setTokenToHeader())
             .then(res => res.data)
             .catch(err => {
-                throw err
+                throw err;
             });
     },
     uploadPhotos: (form: FormData): Promise<any> => {
         return instance.post(`regular/post/imageUpload`, form, setTokenToHeader())
             .then(res => res.data)
             .catch(err => {
-                throw err
+                throw err;
             });
     },
     getPostsTypes: (lang: string): Promise<any> => {
         return instance.get(`post/type?lang=${lang}`)
             .then(res => res.data)
             .catch(err => {
-                throw err
+                throw err;
             });
     },
     betAuction: ({bet, id}: any): Promise<AuctionsDataTypes> => {
@@ -201,14 +201,14 @@ export const userAPI = {
         return instance.post(`regular/auction/nextBet`, form, setTokenToHeader())
             .then(res => res.data)
             .catch(err => {
-                throw err
+                throw err;
             });
     },
     getAuctionBets: (id: string, page: number): Promise<any> => {
         return instance.get(`auction/allBets?auction_id=${id}&page=${page}&per_page=25`)
             .then(res => res.data)
             .catch(err => {
-                throw err
+                throw err;
             });
     },
     buyAuction: (auction_id: string, ads_id: string): Promise<AuctionsDataTypes> => {
@@ -232,7 +232,7 @@ export const userAPI = {
                 throw err;
             });
     },
-    getUserArchivePosts: ({ type = 'post', locale = 'ru' }: { type?: string, locale: string }): Promise<any> => {
+    getUserArchivePosts: ({type = 'post', locale = 'ru'}: { type?: string, locale: string }): Promise<any> => {
         return instance.get(`regular/user/archivePosts?itemsPerPage=25&page=1&type=${type}&lang=${locale}`, setTokenToHeader())
             .then(res => res.data)
             .catch(err => {

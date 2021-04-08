@@ -1,3 +1,5 @@
+export const fieldIsRequired = 'fieldIsRequired';
+
 export const requireFields = [
     'title',
     'type',
@@ -24,8 +26,6 @@ export const requireFields = [
     'general_area'
 ];
 
-export const fieldIsRequired = 'fieldIsRequired';
-
 export const excludedKeys = [
     'id',
     'name',
@@ -49,16 +49,5 @@ export const numericFields = [
 ];
 
 export const optionKeys = [
-    'safety',
-    'multimedia',
-    'assistant',
-    'exterior',
-    'car_climate',
-    'airbags',
-    'assistance',
-    'other',
-    'comfort',
-    'view',
-    'parking',
-    'anti_theft'
+    'mount'
 ];

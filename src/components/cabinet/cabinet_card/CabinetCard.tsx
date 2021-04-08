@@ -20,8 +20,8 @@ import {formatNumber, weekDaysHelper} from '@src/helpers';
 import Countdown from 'react-countdown';
 import {useRouter} from 'next/router';
 import {useTranslation} from 'react-i18next';
-import {useStyles} from './useStyles';
 import {CardDataType} from '@root/interfaces/Cabinet';
+import {useStyles} from './useStyles';
 
 type CabinetCardPropsType = {
     isFetch?: boolean;
@@ -46,10 +46,10 @@ export const CabinetCard: FC<CabinetCardPropsType> = ({list, isFetch, handleModa
             </Typography>
             <Box display="flex">
                 <Typography variant="caption" className="timer">
-                    {formatNumber(days)}д
-                    : {formatNumber(hours)}ч
-                    : {formatNumber(minutes)}м
-                    : {formatNumber(seconds)}с
+                    {formatNumber(days)}д:
+                    {formatNumber(hours)}ч:
+                    {formatNumber(minutes)}м:
+                    {formatNumber(seconds)}с
                 </Typography>
             </Box>
         </Box>
@@ -123,18 +123,18 @@ export const CabinetCard: FC<CabinetCardPropsType> = ({list, isFetch, handleModa
                                             </div>
                                             <div className='card-btn'>
                                                 {pathname?.includes('favorite')
-                                                    ? <div
-                                                        className='isFavorite'
-                                                        onClick={handleModalOpen(el.id)}
-                                                    >
-                                                        <CloseIcon/>
-                                                    </div>
-                                                    : <div
-                                                        className='settings'
-                                                        onClick={handleModalOpen(el.id)}
-                                                    >
-                                                        <SettingsIcon/>
-                                                    </div>}
+                                                 ? <div
+                                                     className='isFavorite'
+                                                     onClick={handleModalOpen(el.id)}
+                                                 >
+                                                     <CloseIcon/>
+                                                 </div>
+                                                 : <div
+                                                     className='settings'
+                                                     onClick={handleModalOpen(el.id)}
+                                                 >
+                                                     <SettingsIcon/>
+                                                 </div>}
                                             </div>
                                         </div>
                                         <div className="description">
@@ -370,8 +370,8 @@ export const CabinetCard: FC<CabinetCardPropsType> = ({list, isFetch, handleModa
                                                         color="initial"
                                                     >
                                                         {isPhoneAval
-                                                            ? el.auction.winner.phone
-                                                            : 'Показать номер'
+                                                         ? el.auction.winner.phone
+                                                         : 'Показать номер'
                                                         }
                                                     </Typography>
                                                 </ButtonComponent>
