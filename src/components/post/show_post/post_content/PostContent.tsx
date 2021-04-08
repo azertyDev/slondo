@@ -2,12 +2,12 @@ import React, {FC} from 'react';
 import {WithT} from 'i18next';
 import Link from 'next/link';
 import {
-    Backdrop,
+    Backdrop, Container,
     Hidden,
     List,
     ListItem,
     ListItemText,
-    Modal,
+    Modal, Slide,
     Snackbar,
     TextField,
     Typography
@@ -24,7 +24,7 @@ import {ModalSyncSliders} from './modal_sync_sliders/ModalSyncSliders';
 import {BreadcrumbsComponent} from '@src/components/elements/breadcrumbs/Breadcrumbs';
 import {numberPrettier, weekDaysHelper} from '@src/helpers';
 import {ButtonComponent} from '@src/components/elements/button/Button';
-import {NotificationIcon} from '@src/components/elements/icons';
+import {LockIcon, NotificationIcon} from '@src/components/elements/icons';
 import {months} from '@src/common_data/common';
 import {useStyles} from './useStyles';
 
@@ -214,14 +214,6 @@ export const PostContent: FC<WithT & any> = (props) => {
                             {data.title}
                         </Typography>
                     </div>
-                    {data.ads_type.mark !== 'post' && (
-                        <div>
-                            <ButtonComponent onClick={handleOpenSnackbar({vertical, horizontal})}>
-                                <NotificationIcon/>
-                                Следить
-                            </ButtonComponent>
-                        </div>
-                    )}
                 </div>
             </Hidden>
             <Hidden mdDown>
@@ -241,6 +233,20 @@ export const PostContent: FC<WithT & any> = (props) => {
                 </div>
             </Hidden>
             <div className="post-bonus">
+                {data.ads_type.mark !== 'post' && (
+                    <div className="reserve">
+                        <LockIcon/>
+                        <div>
+                            <Typography variant="subtitle2" color="initial">
+                                Резервная цена:
+                            </Typography>
+                            <Typography variant="h6" color="initial">
+                                {numberPrettier(data.auction.reserve_price)}{' '}
+                                {data.currency.name}
+                            </Typography>
+                        </div>
+                    </div>
+                )}
                 {!!data.delivery && (
                     <span className="delivery">
                         <DeliveryIcon/>&nbsp;
@@ -280,14 +286,26 @@ export const PostContent: FC<WithT & any> = (props) => {
                 )}
             </div>
             <Hidden lgUp>
-                <div className="contact">
-                    <ButtonComponent>
-                        <Typography variant='subtitle1'>Позвонить</Typography>
-                    </ButtonComponent>
-                    <ButtonComponent>
-                        <Typography variant='subtitle1'>Написать</Typography>
-                    </ButtonComponent>
-                </div>
+                {data.ads_type.mark === 'post' && (
+                    <div className="contact">
+                        <ButtonComponent>
+                            <Typography variant='subtitle1'>Позвонить</Typography>
+                        </ButtonComponent>
+                        <ButtonComponent>
+                            <Typography variant='subtitle1'>Написать</Typography>
+                        </ButtonComponent>
+                    </div>
+                )}
+                {data.ads_type.mark !== 'post' && (
+                    <div className="contact">
+                        <ButtonComponent>
+                            <Typography variant='subtitle1'>Предложить цену</Typography>
+                        </ButtonComponent>
+                        <ButtonComponent>
+                            <Typography variant='subtitle1'>Написать</Typography>
+                        </ButtonComponent>
+                    </div>
+                )}
             </Hidden>
             <div className="post-location">
                 <Hidden mdDown>

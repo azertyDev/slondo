@@ -194,7 +194,6 @@ export const useStyles = makeStyles((theme) => ({
             display: 'flex',
             marginBottom: '16px',
             flexWrap: 'wrap',
-
             '& span': {
                 display: 'flex',
                 alignItems: 'center',
@@ -275,6 +274,30 @@ export const useStyles = makeStyles((theme) => ({
                         fontWeight: '700'
                     }
                 }
+            },
+            '& .reserve': {
+                display: 'flex',
+                marginRight: '8px',
+                padding: '5px 10px',
+                flexDirection: 'row',
+                borderRadius: '100px',
+                boxShadow: "0px 1px 4px rgba(0, 0, 0, 0.04)",
+                background: '#F7F7F7',
+                alignItems: 'center',
+                '& svg': {
+                    marginRight: '10px',
+                    width: '12px',
+                    height: '16px'
+                },
+                '& div': {
+                    '& > :last-child': {
+                        fontWeight: '700'
+                    },
+                    '& h6': {
+                        fontSize: 'calc(10px + 6 * (100vw / 1280))',
+                        color: '#838383'
+                    }
+                }
             }
         },
         '& div.contact': {
@@ -284,9 +307,10 @@ export const useStyles = makeStyles((theme) => ({
                 marginRight: '8px',
                 borderRadius: '5px',
                 width: '50%',
-                fontSize: 'calc(14px + 2 * (100vw / 1280))',
                 '& > h6': {
-                    color: '#fff'
+                    color: '#fff',
+                    fontSize: 'calc(14px + 2 * (100vw / 1280))',
+                    whiteSpace: 'nowrap'
                 },
                 '&:first-child': {
                     padding: '11px 39px',
@@ -514,6 +538,7 @@ export const useStyles = makeStyles((theme) => ({
             zIndex: '100',
             bottom: 0,
             left: 0,
+            right: 0,
             width: '100%',
             padding: '13px 7px 14px 17px',
             display: 'flex',
@@ -536,6 +561,23 @@ export const useStyles = makeStyles((theme) => ({
                 color: '#FFFFFF',
                 background: 'linear-gradient(49.94deg, #675EAA 19.03%, #AD66D5 72.72%)',
                 borderRadius: '3px'
+            }
+        },
+        '& div.btn-follow': {
+            boxShadow: '0px -1px 4px rgba(0, 0, 0, 0.04), 0px 1px 4px rgba(0, 0, 0, 0.04)',
+            marginBottom: '36px',
+            '& button': {
+                width: '100%',
+                borderRadius: '3px',
+                background: '#F7F7F7',
+                fontSize: 'calc(14px + 2 * (100vw / 1280))',
+                marginTop: '-10px',
+                '& svg': {
+                    marginRight: '10px',
+                    '& path': {
+                        fill: '#F2C94C'
+                    }
+                }
             }
         }
     },
