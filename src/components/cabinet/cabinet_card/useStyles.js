@@ -334,12 +334,12 @@ export const useStyles = makeStyles((theme) => ({
                     }
                 }
             },
-            '& div.profile-form': {
+            '& .profile-form, .offers-card': {
                 marginLeft: 20,
                 display: 'flex',
                 flexDirection: 'column',
                 justifyContent: 'space-between',
-                '& > div.extreme-rate': {
+                '& > .extreme-rate': {
                     display: 'flex',
                     justifyContent: 'space-between',
                     marginBottom: '5px',
@@ -354,7 +354,6 @@ export const useStyles = makeStyles((theme) => ({
                         background:
                             'linear-gradient(49.94deg, rgb(103, 94, 170) 19.03%, rgb(173, 102, 213) 72.72%)',
                         fontSize: '0.75rem',
-
                         padding: '0',
                         '& > h6.MuiTypography-subtitle1': {
                             fontSize: '0.875rem',
@@ -362,12 +361,11 @@ export const useStyles = makeStyles((theme) => ({
                         }
                     }
                 },
-                '& > div.profile-data': {
+                '& > .profile-data': {
                     boxShadow: '0px 1px 2px rgba(0, 0, 0, 0.15)',
                     background: '#F2F2F2',
-                    padding: '15px 10px',
+                    padding: 10,
                     borderRadius: '10px 10px 0 0',
-                    height: '160px',
                     display: 'flex',
                     flexDirection: 'column',
                     justifyContent: 'space-between',
@@ -380,13 +378,31 @@ export const useStyles = makeStyles((theme) => ({
                         width: 40,
                         height: 40
                     },
-                    '& button.write': {
+                    '& button': {
                         background: '#FFFFFF',
                         boxShadow: '0px 1px 2px rgba(0, 0, 0, 0.15)',
                         borderRadius: '5px',
                         border: 0,
                         width: '100%',
-                        padding: 10,
+                        padding: 8,
+                        '&.write': {},
+                        '&.accept': {
+                            marginBottom: 2,
+                            '& > svg': {
+                                marginRight: 10,
+                                '& > path': {
+                                    fill: '#90BE27'
+                                }
+                            }
+                        },
+                        '&.decline': {
+                            '& > svg': {
+                                marginRight: 10,
+                                '& > path': {
+                                    fill: '#F08F8F'
+                                }
+                            }
+                        },
                         '& > h6.MuiTypography-subtitle1': {
                             color: '#4e4e4e'
                         },
@@ -407,16 +423,16 @@ export const useStyles = makeStyles((theme) => ({
                     '& > h6.MuiTypography-subtitle2': {
                         color: '#fff'
                     }
-                },
-                '& div:last-child': {
-                    '& > h6.MuiTypography-subtitle2': {
-                        fontSize: '0.75rem',
-                        padding: '5px 10px',
-                        '& span': {
-                            color: theme.palette.primary.error
-                        }
-                    }
                 }
+                // '& div:last-child': {
+                //     '& > h6.MuiTypography-subtitle2': {
+                //         fontSize: '0.75rem',
+                //         padding: '5px 10px',
+                //         '& span': {
+                //             color: theme.palette.primary.error
+                //         }
+                //     }
+                // }
             }
         }
     }

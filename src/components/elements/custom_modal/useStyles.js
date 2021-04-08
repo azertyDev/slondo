@@ -7,7 +7,6 @@ export const useStyles = makeStyles((theme) => ({
         justifyContent: 'center'
     },
     paper: {
-        width: 430,
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',

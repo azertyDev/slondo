@@ -5,11 +5,11 @@ import {ButtonComponent} from "@src/components/elements/button/Button";
 import {getAuctionSchema} from "@root/validation_schemas/auctionSchema";
 import {useStyles} from "./useStyles";
 
-const AuctionForm: FC<any> = ({data, handleFormSubmit, list}) => {
+const AuctionForm: FC<any> = ({data, handleFormSubmit, auctionsBetsList}) => {
     const classes = useStyles();
 
-    const min_bet = list?.[0]?.['min_bet'];
-    const max_bet = list?.[0]?.['max_bet'];
+    const min_bet = auctionsBetsList?.[0]?.['min_bet'];
+    const max_bet = auctionsBetsList?.[0]?.['max_bet'];
     const id = data?.['auction']?.['id'];
 
     const handleSubmit = (values) => {

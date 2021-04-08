@@ -8,7 +8,7 @@ import {UserInfo} from '@root/interfaces/Auth';
 
 type UserInfoWithAvatarPropsType = {
     owner: UserInfo,
-    isOwner: boolean,
+    isOwner?: boolean,
     handleFollow?: (userId) => () => void,
     subscribed?: boolean
 };

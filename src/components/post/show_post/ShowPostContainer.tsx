@@ -10,6 +10,7 @@ import {PostContent} from '@src/components/post/show_post/post_content/PostConte
 import {OwnerAuctionContent} from '@src/components/post/show_post/owner_auction_content/OwnerAuctionContent';
 import {Banner} from '@src/components/elements/banner/Banner';
 import {useStyles} from './useStyles';
+import {AuctionInfo} from '@src/components/post/show_post/owner_auction_content/auction_info/AuctionInfo';
 
 
 export type SlidersRefType = {
@@ -44,6 +45,7 @@ export const ShowPostContainer: FC = () => {
             number_of_views: null,
             sub_category_id: null,
             creator: null,
+            status: '',
             subscribed: null,
             author: {
                 id: null,
@@ -89,7 +91,9 @@ export const ShowPostContainer: FC = () => {
                 duration: '',
                 display_phone: '',
                 reserve_price: '',
-                price_by_now: ''
+                price_by_now: '',
+                price_buy_now_status: null,
+                offer_the_price: null
             }
         }
     };
@@ -249,6 +253,26 @@ export const ShowPostContainer: FC = () => {
         }
     };
 
+    const auctionInfo = (
+        <AuctionInfo
+            data={postData.data}
+            t={t}
+            openModal={openModal}
+            page={page}
+            auctionsBetsList={auctionsBetsList.list}
+            lastPage={lastPage}
+            handleOpenModal={handleOpenModal}
+            handleCloseModal={handleCloseModal}
+            handleBuyNow={handleBuyNow}
+            handleSubmit={handleSubmit}
+            handleScroll={handleScroll}
+            handleRefresh={refreshAucBets}
+            handleSuggestPrice={handleSuggestPrice}
+            handleTextField={handleTextField}
+        />
+    );
+
+
     useEffect(() => {
         setSlidersRefs(initSlidersRefs);
     }, []);
@@ -291,14 +315,7 @@ export const ShowPostContainer: FC = () => {
                                 page={page}
                                 list={auctionsBetsList.list}
                                 lastPage={lastPage}
-                                handleOpenModal={handleOpenModal}
-                                handleCloseModal={handleCloseModal}
-                                handleBuyNow={handleBuyNow}
-                                handleSubmit={handleSubmit}
-                                handleScroll={handleScroll}
-                                handleRefresh={refreshAucBets}
-                                handleSuggestPrice={handleSuggestPrice}
-                                handleTextField={handleTextField}
+                                auctionInfo={auctionInfo}
                             />
                             <div className={classes.adBanner}>
                                 <Banner height="424px" />

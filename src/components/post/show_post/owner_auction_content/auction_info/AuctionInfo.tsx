@@ -1,21 +1,22 @@
 import React, {FC, useState} from 'react';
-import {Typography} from '@material-ui/core';
+import {TextField, Typography} from '@material-ui/core';
 import {LockIcon, RefreshIcon} from '@src/components/elements/icons';
 import {AuctionTimer} from './AuctionTimer';
 import {numberPrettier} from '@root/src/helpers';
-import BuyAuctionComponent from './BuyAuction';
 import AuctionForm from './AuctionForm/AuctionFrom';
 import {useSelector} from 'react-redux';
 import {RootState} from '@src/redux/rootReducer';
 import {useStyles} from './useStyles';
-import {SuggestPriceComponent} from '@src/components/post/show_post/owner_auction_content/auction_info/SuggestPrice';
+import {ButtonComponent} from '@src/components/elements/button/Button';
+import {CustomModal} from '@src/components/elements/custom_modal/CustomModal';
+import Link from 'next/link';
 
 
 export const AuctionInfo: FC<any> = (props) => {
     const isAuth = useSelector<any>((state: RootState) => state.user.isAuth);
     const {
         data,
-        list,
+        auctionsBetsList,
         openModal,
         handleOpenModal,
         handleCloseModal,
@@ -29,12 +30,16 @@ export const AuctionInfo: FC<any> = (props) => {
 
     const [showAll, setShowAll] = useState(false);
     const date = new Date(data.expiration_at).getTime();
+    const isExAuc = data.ads_type.id === 3;
+
+    console.log(data);
 
     const classes = useStyles();
     return (
         <div className={classes.root}>
             <div className="lot-info">
-                {data.auction && data.auction.reserve_price > list?.[0]?.bet && <div className="reserve-price">
+                {data.auction && data.auction.reserve_price > auctionsBetsList?.[0]?.bet &&
+                <div className="reserve-price">
                     <LockIcon />
                     <div>
                         <Typography variant="subtitle2" color="initial">
@@ -69,7 +74,7 @@ export const AuctionInfo: FC<any> = (props) => {
                         onScroll={handleScroll}
                     >
                         <ul>
-                            {list.map((item) => (
+                            {auctionsBetsList.map((item) => (
                                 <li key={item?.id}>
                                     <div>
                                         <div className="participant-name">
@@ -130,34 +135,90 @@ export const AuctionInfo: FC<any> = (props) => {
                 </div>
                 {isAuth && <>
                     <div className="bet-info">
-                        <AuctionForm data={data} handleFormSubmit={handleSubmit} list={list} />
+                        <AuctionForm data={data} handleFormSubmit={handleSubmit} auctionsBetsList={auctionsBetsList} />
                         <div>
                             <Typography variant="subtitle2" color="initial">
                                 Максимально возможная ставка:
                             </Typography>
                             <Typography variant="subtitle2" color="initial">
-                                {numberPrettier(list?.[0]?.max_bet)} сум
+                                {numberPrettier(auctionsBetsList?.[0]?.max_bet)} сум
                             </Typography>
                         </div>
                     </div>
-                    {data.ads_type.id === 3 && (
-                        <BuyAuctionComponent
-                            handleBuyNow={handleBuyNow}
-                            handleOpenModal={handleOpenModal}
-                            openModal={openModal}
-                            handleCloseModal={handleCloseModal}
-                            data={data}
-                        />
+                    {isExAuc && !!data.auction.price_buy_now_status && (
+                        <div>
+                            <div className="buy-now">
+                                <Typography variant="subtitle1" color="initial">
+                                    {data.auction.price_buy_now} сум
+                                </Typography>
+                                <ButtonComponent onClick={handleOpenModal()}>
+                                    <Typography variant="subtitle1" color="initial">
+                                        Купить сейчас
+                                    </Typography>
+                                </ButtonComponent>
+                            </div>
+                            <CustomModal handleModalClose={handleCloseModal()} openModal={openModal}>
+                                <>
+                                    <Typography className="title" variant="h6">
+                                        Купить сейчас
+                                    </Typography>
+                                    <Typography
+                                        variant='subtitle1'
+                                        className='subtitle'
+                                    >
+                                        Нажимая кнопку “Купить сейчас” вы выкупаете лот на сумму&nbsp;
+                                        <span className='buy-now-price'>{data.auction.price_buy_now}</span> сум и
+                                        соглашаетесь с&nbsp;
+                                        <span className='condition'>
+                                        <Link href="#">
+                                            <a>условиями</a>
+                                        </Link>
+                                        </span> сайта
+                                    </Typography>
+                                    <div className='confirm'>
+                                        <ButtonComponent
+                                            className='submit'
+                                            onClick={handleBuyNow()}
+                                        >
+                                            <Typography variant='subtitle1'>
+                                                Купить сейчас
+                                            </Typography>
+                                        </ButtonComponent>
+                                    </div>
+                                </>
+                            </CustomModal>
+                        </div>
                     )}
-                    <SuggestPriceComponent
-                        handleOpenModal={handleOpenModal}
-                        handleCloseModal={handleCloseModal}
-                        openModal={openModal}
-                        handleSuggestPrice={handleSuggestPrice}
-                        handleTextField={handleTextField}
-                    />
-                </>
-                }
+                    {isExAuc && !!data.auction.offer_the_price && (
+                        <div>
+                            <div className='suggest_price'>
+                                <ButtonComponent onClick={handleOpenModal()}>
+                                    <Typography variant="subtitle1" color="initial">
+                                        Предложить цену
+                                    </Typography>
+                                </ButtonComponent>
+                            </div>
+                            <CustomModal handleModalClose={handleCloseModal()} openModal={openModal}>
+                                Предложить цену
+                                <Typography variant='subtitle1'>
+                                    Предложенная стоимость не может быть <br />
+                                    меньше стартовой цены или сделанной ставки
+                                </Typography>
+                                <div style={{ display: 'flex', flexDirection: 'column' }}>
+                                    <TextField
+                                        id="outlined-basic"
+                                        label="Outlined"
+                                        variant="outlined"
+                                        placeholder='Впишите сумму'
+                                        onChange={handleTextField}
+                                    />
+                                    <ButtonComponent onClick={handleSuggestPrice}>
+                                        Предложить
+                                    </ButtonComponent>
+                                </div>
+                            </CustomModal>
+                        </div>)}
+                </>}
             </div>
         </div>
     );

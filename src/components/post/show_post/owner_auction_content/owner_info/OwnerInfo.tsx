@@ -5,17 +5,11 @@ import {SafeIcon} from '@root/src/components/elements/icons';
 import {UserInfoWithAvatar} from '@src/components/elements/user_info_with_avatar/UserInfoWithAvatar';
 import {SocialsBlock} from '@root/src/components/elements/socials_block/SocialsBlock';
 import {useStyles} from './useStyles';
+import {UserInfo} from '@root/interfaces/Auth';
 
 type OwnerPropsType = {
     safe_deal: number,
-    owner?: {
-        id: number,
-        name: string,
-        surname: string,
-        phone: string,
-        created_at: string,
-        avatar: string
-    },
+    owner?: UserInfo,
     isOwner: boolean,
     handleFollow: (userId) => () => void
     subscribed: boolean,

@@ -137,7 +137,7 @@ const ArchiveContainer: FC = () => {
                         className={classes.settingsList}
                         disablePadding
                     >
-                        {tabIndex === 0 && (
+                        {tabIndex !== 0 && (
                             <ListItem
                                 button
                                 onClick={handleModalContentIndex(2)}

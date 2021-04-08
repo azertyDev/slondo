@@ -1,41 +1,24 @@
-import React, {FC, ReactElement} from 'react';
-import {CabinetCard} from '@src/components/cabinet/cabinet_card/CabinetCard';
+import React, {FC, ReactElement, ReactNode} from 'react';
 import {CustomModal} from '@src/components/elements/custom_modal/CustomModal';
-import {CardDataType} from '@root/interfaces/Cabinet';
 
 type MyAuctionsPropsType = {
-    isFetch: boolean,
-    list: CardDataType[],
     handleClose: () => void,
     openModal: boolean,
-    setOpenModal: (boolean) => void,
-    handleModalOpen: (id?) => () => void,
-    handleDeactivate?: (ads_id) => () => void,
-    handleAcceptVictory?: (ads_id, is_accepted) => () => void,
-    ModalContent: () => ReactElement;
+    ModalContent: () => ReactElement,
+    auctionCard: ReactNode
 }
 
 export const MyAuctions: FC<MyAuctionsPropsType> = (props) => {
     const {
-        isFetch,
-        list,
-        handleModalOpen,
         handleClose,
         openModal,
-        handleDeactivate,
-        handleAcceptVictory,
-        ModalContent
+        ModalContent,
+        auctionCard
     } = props;
 
     return (
         <>
-            <CabinetCard
-                list={list}
-                isFetch={isFetch}
-                handleModalOpen={handleModalOpen}
-                handleDeactivate={handleDeactivate}
-                handleAcceptVictory={handleAcceptVictory}
-            />
+            {auctionCard}
             <CustomModal
                 handleModalClose={handleClose}
                 openModal={openModal}

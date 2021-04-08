@@ -97,7 +97,7 @@ export const userAPI = {
                 throw err;
             });
     },
-    getMyPosts: ({ type = 'post', onlySecure = 0, locale = 'ru' }: { type?: string, onlySecure?: number, locale: string }): Promise<any> => {
+    getMyPosts: ({ type, onlySecure = 0, locale = 'ru' }: { type?: string, onlySecure?: number, locale: string }): Promise<any> => {
         return instance.get(`regular/user/posts?type=${type}&lang=${locale}&secure=${onlySecure}`, setTokenToHeader())
             .then(res => res.data)
             .catch(err => {
@@ -281,6 +281,23 @@ export const userAPI = {
         return instance.post(`regular/auction/offerThePrice`, {
             auction_id,
             price
+        }, setTokenToHeader())
+            .then(res => res.data)
+            .catch(err => {
+                throw err;
+            });
+    },
+    getAllOffersById: (auction_id: number): Promise<any> => {
+        return instance.get(`regular/auction/allOffers?auction_id=${auction_id}`, setTokenToHeader())
+            .then(res => res.data)
+            .catch(err => {
+                throw err;
+            });
+    },
+    acceptOfferThePrice: (offer_id: number, is_accepted: boolean): Promise<any> => {
+        return instance.post(`regular/auction/acceptOfferThePrice`, {
+            offer_id,
+            is_accepted
         }, setTokenToHeader())
             .then(res => res.data)
             .catch(err => {

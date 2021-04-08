@@ -3,8 +3,8 @@ import {Box, Grid, Hidden, Paper, Tooltip, Typography} from '@material-ui/core';
 import {
     CloseIcon,
     DeliveryIcon,
+    DoneAllIcon,
     EyeIcon,
-    LetterIcon,
     LocationIcon,
     PhoneIcon,
     SafeIcon,
@@ -21,34 +21,36 @@ import Countdown from 'react-countdown';
 import {useRouter} from 'next/router';
 import {useTranslation} from 'react-i18next';
 import {useStyles} from './useStyles';
-import {CardDataType} from '@root/interfaces/Cabinet';
+import {CardDataType, OffersStateType} from '@root/interfaces/Cabinet';
 import {useSelector} from 'react-redux';
 import {RootState} from '@src/redux/rootReducer';
 
 type CabinetCardPropsType = {
-    isFetch?: boolean;
-    list: CardDataType[];
-    handleModalOpen?: (id) => () => void
+    isFetch?: boolean,
+    list?: CardDataType[],
+    offersData?: OffersStateType,
+    handleModalOpen?: (id) => () => void,
     handleDeactivate?: (id) => () => void,
     handleAcceptVictory?: (ads_id, is_accepted) => () => void,
+    acceptOfferThePrice?: (offer_id, is_accepted) => () => void,
+    fetchAllOffers?: (auction_id) => () => void,
 }
 
 export const CabinetCard: FC<CabinetCardPropsType> = (props) => {
-
-    const userFromStore = useSelector((store: RootState) => store.user);
-    const { info: { id } } = userFromStore;
-
+    const { info: { id } } = useSelector((store: RootState) => store.user);
     const { pathname } = useRouter();
     const { t } = useTranslation(['common', 'categories']);
     const {
-        list,
         isFetch,
+        list,
+        offersData,
         handleModalOpen,
         handleDeactivate,
-        handleAcceptVictory
+        handleAcceptVictory,
+        fetchAllOffers,
+        acceptOfferThePrice
     } = props;
     const [isPhoneAval, setIsPhoneAval] = React.useState(false);
-
     const handleShowPhone = () => {
         setIsPhoneAval(!isPhoneAval);
     };
@@ -99,7 +101,7 @@ export const CabinetCard: FC<CabinetCardPropsType> = (props) => {
                                         <span className={el.ads_type}>
                                             {t(el.ads_type)} №:&nbsp;
                                         </span>
-                                        {el.id}
+                                        {el.auction.id}
                                     </Typography>
                                     <div className='status'>
                                         <Typography variant='subtitle2' className='waiting'>
@@ -189,16 +191,29 @@ export const CabinetCard: FC<CabinetCardPropsType> = (props) => {
                                             )}
                                             {!!el.safe_deal && (
                                                 <span className="safe_deal">
-                                                    <SafeIcon/>
+                                                    <SafeIcon />
                                                     <Typography variant="body1">
                                                         Безопасная покупка
                                                     </Typography>
                                                 </span>
                                             )}
                                         </div>
+                                        {el.ads_type !== 'post' && (
+                                            <Box display='flex' justifyContent='space-between'>
+                                                <Countdown
+                                                    date={new Date(el.expiration_at).getTime()}
+                                                    renderer={timer}
+                                                />
+                                                <div>
+                                                    <Typography variant='caption'>
+                                                        Ставки: {el.auction?.number_of_bets}
+                                                    </Typography>
+                                                </div>
+                                            </Box>
+                                        )}
                                         <div className="location">
                                             <div>
-                                                <LocationIcon/>
+                                                <LocationIcon />
                                                 <Typography
                                                     variant="caption"
                                                     color="initial"
@@ -218,156 +233,153 @@ export const CabinetCard: FC<CabinetCardPropsType> = (props) => {
                                                 </Typography>
                                             </div>
                                         </div>
-                                        {el.ads_type !== 'post' && (
-                                            <Box display='flex' justifyContent='space-between'>
-                                                <Countdown
-                                                    date={new Date(el.expiration_at).getTime()}
-                                                    renderer={timer}
-                                                />
-                                                <div>
-                                                    <Typography variant='caption'>
-                                                        Ставки: {el.auction?.number_of_bets}
-                                                    </Typography>
-                                                </div>
-                                            </Box>
-                                        )}
                                     </div>
                                 </Box>
                             </Paper>
-                            <div className="status-buttons">
-                                {console.log(el.creator && el.auction.winner && (!!el.auction.is_accepted === false || !!el.auction.is_accepted === true))}
-                                {(el.creator && el.auction.winner && (!!el.auction.is_accepted === false || !!el.auction.is_accepted === true)) && (
+                            {(el.creator && el.auction.winner && (!!el.auction.is_accepted === false || !!el.auction.is_accepted === true)) && (
+                                <div className="status-buttons">
                                     <ButtonComponent className='end-auction' onClick={handleDeactivate(el.id)}>
                                         <Typography variant='subtitle1'>
                                             Завершить аукцион
                                         </Typography>
                                     </ButtonComponent>
-                                )}
-
-                                {/*{console.log('--------------------------------')}*/}
-                                {/*{console.log(el.creator)}*/}
-                                {/*{console.log(!!el.auction.is_accepted)}*/}
-                                {/*{console.log(el.auction.winner_id === id)}*/}
-                                {/*{console.log(`all ${el.id} ${!el.creator && el.auction.is_accepted && (el.auction.winner_id === id)}`)}*/}
-                                {/*{console.log('--------------------------------')}*/}
-                                {/*{console.log(el.status === 'expired' && !el.creator && id === el.auction.winner_id)}*/}
-
-                                {(el.status === 'suspend' && !el.creator && id === el.auction.winner_id && el.auction.is_accepted === null) && (
-                                    <>
-                                        <ButtonComponent onClick={handleAcceptVictory(el.auction.id, true)}>
-                                            <Typography variant='subtitle1'>Принять</Typography>
-                                        </ButtonComponent>
-                                        <ButtonComponent onClick={handleAcceptVictory(el.auction.id, false)}>
-                                            <Typography variant='subtitle1'>Отказать</Typography>
-                                        </ButtonComponent>
-                                    </>
-                                )}
-                            </div>
+                                </div>
+                            )}
+                            {(el.status === 'suspend' && !el.creator && id === el.auction.winner_id && el.auction.is_accepted === null) && (
+                                <div className="status-buttons">
+                                    <ButtonComponent onClick={handleAcceptVictory(el.auction.id, true)}>
+                                        <Typography variant='subtitle1'>Принять</Typography>
+                                    </ButtonComponent>
+                                    <ButtonComponent onClick={handleAcceptVictory(el.auction.id, false)}>
+                                        <Typography variant='subtitle1'>Отказать</Typography>
+                                    </ButtonComponent>
+                                </div>
+                            )}
                         </Grid>
                         <Hidden xsUp={false}>
                             <Grid item xs={3} className="right-content">
-                                {/*{pathname === '/cabinet/posts' && (*/}
-                                {/*    <div className="card-buttons">*/}
-                                {/*        <Button*/}
-                                {/*            color="primary"*/}
-                                {/*            variant="contained"*/}
-                                {/*            className="promoteButton"*/}
-                                {/*            aria-label="promoteButton"*/}
-                                {/*            disabled={el.isModerated}*/}
-                                {/*        >*/}
-                                {/*            <Typography variant="subtitle1">*/}
-                                {/*                Продвижение*/}
+                                {/*{el.auction.winner && (*/}
+                                {/*    <div className="profile-form">*/}
+                                {/*        <div className="extreme-rate">*/}
+                                {/*            <Typography*/}
+                                {/*                variant="subtitle1"*/}
+                                {/*                color="initial"*/}
+                                {/*            >*/}
+                                {/*                Победитель*/}
                                 {/*            </Typography>*/}
-                                {/*            <PromoteIcon/>*/}
-                                {/*        </Button>*/}
-                                {/*        <Button*/}
-                                {/*            color="primary"*/}
-                                {/*            variant="contained"*/}
-                                {/*            className="raiseTopButton"*/}
-                                {/*            disabled={el.isModerated}*/}
-                                {/*        >*/}
-                                {/*            <Typography variant="subtitle1">*/}
-                                {/*                Поднять в ТОП*/}
+                                {/*            <ButtonComponent>*/}
+                                {/*                <Typography*/}
+                                {/*                    variant="subtitle1"*/}
+                                {/*                    color="initial"*/}
+                                {/*                >*/}
+                                {/*                    ?*/}
+                                {/*                </Typography>*/}
+                                {/*            </ButtonComponent>*/}
+                                {/*        </div>*/}
+                                {/*        <div className="profile-data">*/}
+                                {/*            <UserAvatarComponent avatar={el.auction.winner.avatar} />*/}
+                                {/*            <Typography*/}
+                                {/*                variant="subtitle1"*/}
+                                {/*                color="initial"*/}
+                                {/*            >*/}
+                                {/*                {el.auction.winner.name}*/}
                                 {/*            </Typography>*/}
-                                {/*            <MegaphoneIcon/>*/}
-                                {/*        </Button>*/}
-                                {/*        <Button*/}
-                                {/*            color="primary"*/}
-                                {/*            variant="contained"*/}
-                                {/*            className="doubleUpButton"*/}
-                                {/*            disabled={el.isModerated}*/}
+                                {/*            <Rating card />*/}
+                                {/*            <ButtonComponent className='write'>*/}
+                                {/*                <LetterIcon />*/}
+                                {/*                <Typography*/}
+                                {/*                    variant="subtitle2"*/}
+                                {/*                    color="initial"*/}
+                                {/*                >*/}
+                                {/*                    Написать*/}
+                                {/*                </Typography>*/}
+                                {/*            </ButtonComponent>*/}
+                                {/*        </div>*/}
+                                {/*        <div>*/}
+                                {/*            <ButtonComponent className="show-phone-btn" onClick={handleShowPhone}>*/}
+                                {/*                <Typography*/}
+                                {/*                    variant="subtitle2"*/}
+                                {/*                    color="initial"*/}
+                                {/*                >*/}
+                                {/*                    {isPhoneAval*/}
+                                {/*                        ? el.auction.winner.phone*/}
+                                {/*                        : 'Показать номер'*/}
+                                {/*                    }*/}
+                                {/*                </Typography>*/}
+                                {/*            </ButtonComponent>*/}
+                                {/*            /!* <Typography*/}
+                                {/*            variant="subtitle2"*/}
+                                {/*            color="initial"*/}
                                 {/*        >*/}
-                                {/*            <Typography variant="subtitle1">*/}
-                                {/*                Поднять в ленте*/}
-                                {/*            </Typography>*/}
-                                {/*            <DoubleUpIcon/>*/}
-                                {/*        </Button>*/}
+                                {/*            <span>*</span> Оценка доступна в течении 90*/}
+                                {/*            календарных дней*/}
+                                {/*        </Typography> *!/*/}
+                                {/*        </div>*/}
                                 {/*    </div>*/}
                                 {/*)}*/}
-                                {el.auction.winner && (
-                                    <div className="profile-form">
-                                        <div className="extreme-rate">
-                                            <Typography
-                                                variant="subtitle1"
-                                                color="initial"
-                                            >
-                                                Победитель
-                                            </Typography>
-                                            <ButtonComponent>
-                                                <Typography
-                                                    variant="subtitle1"
-                                                    color="initial"
-                                                >
-                                                    ?
-                                                </Typography>
-                                            </ButtonComponent>
-                                        </div>
-                                        <div className="profile-data">
-                                            <UserAvatarComponent avatar={el.auction.winner.avatar} />
-                                            <Typography
-                                                variant="subtitle1"
-                                                color="initial"
-                                            >
-                                                {el.auction.winner.name}
-                                            </Typography>
-                                            <Rating card />
-                                            <ButtonComponent className='write'>
-                                                <LetterIcon />
-                                                <Typography
-                                                    variant="subtitle2"
-                                                    color="initial"
-                                                >
-                                                    Написать
-                                                </Typography>
-                                            </ButtonComponent>
-                                        </div>
-                                        <div>
-                                            <ButtonComponent className="show-phone-btn" onClick={handleShowPhone}>
-                                                <Typography
-                                                    variant="subtitle2"
-                                                    color="initial"
-                                                >
-                                                    {isPhoneAval
-                                                        ? el.auction.winner.phone
-                                                        : 'Показать номер'
-                                                    }
-                                                </Typography>
-                                            </ButtonComponent>
-                                            {/* <Typography
-                                            variant="subtitle2"
-                                            color="initial"
-                                        >
-                                            <span>*</span> Оценка доступна в течении 90
-                                            календарных дней
-                                        </Typography> */}
-                                        </div>
-                                    </div>
-                                )}
-                                {el.author && (
-                                    <div className="profile-form">
+                                {/*{el.author && (*/}
+                                {/*    <div className="profile-form">*/}
+                                {/*        <div className="extreme-rate">*/}
+                                {/*            <Typography variant="subtitle1" color="initial">*/}
+                                {/*                Продавец*/}
+                                {/*            </Typography>*/}
+                                {/*            <ButtonComponent>*/}
+                                {/*                <Typography*/}
+                                {/*                    variant="subtitle1"*/}
+                                {/*                    color="initial"*/}
+                                {/*                >*/}
+                                {/*                    ?*/}
+                                {/*                </Typography>*/}
+                                {/*            </ButtonComponent>*/}
+                                {/*        </div>*/}
+                                {/*        <div className="profile-data">*/}
+                                {/*            <UserAvatarComponent avatar={el.author.avatar && el.author.avatar} />*/}
+                                {/*            <Typography*/}
+                                {/*                variant="subtitle1"*/}
+                                {/*                color="initial"*/}
+                                {/*            >*/}
+                                {/*                {el.author.name}*/}
+                                {/*            </Typography>*/}
+                                {/*            <Rating card />*/}
+                                {/*            {el.author.id}*/}
+                                {/*            <ButtonComponent className='write'>*/}
+                                {/*                <LetterIcon />*/}
+                                {/*                <Typography*/}
+                                {/*                    variant="subtitle2"*/}
+                                {/*                    color="initial"*/}
+                                {/*                >*/}
+                                {/*                    Написать*/}
+                                {/*                </Typography>*/}
+                                {/*            </ButtonComponent>*/}
+                                {/*        </div>*/}
+                                {/*        <div>*/}
+                                {/*            <ButtonComponent className="show-phone-btn" onClick={handleShowPhone}>*/}
+                                {/*                <Typography*/}
+                                {/*                    variant="subtitle2"*/}
+                                {/*                    color="initial"*/}
+                                {/*                >*/}
+                                {/*                    {isPhoneAval*/}
+                                {/*                        ? el.author?.phone*/}
+                                {/*                        : 'Показать номер'*/}
+                                {/*                    }*/}
+                                {/*                </Typography>*/}
+                                {/*            </ButtonComponent>*/}
+                                {/*            /!* <Typography*/}
+                                {/*            variant="subtitle2"*/}
+                                {/*            color="initial"*/}
+                                {/*        >*/}
+                                {/*            <span>*</span> Оценка доступна в течении 90*/}
+                                {/*            календарных дней*/}
+                                {/*        </Typography> *!/*/}
+                                {/*        </div>*/}
+                                {/*    </div>*/}
+                                {/*)}*/}
+                                {console.log((`${el.auction.id} ${el.status !== 'expired'}`))}
+                                {pathname?.includes('auctions') && el.auction.offer && (el.status !== 'expired') && (
+                                    <div className="offers-card">
                                         <div className="extreme-rate">
                                             <Typography variant="subtitle1" color="initial">
-                                                Продавец
+                                                Предложенная цена ({el.auction.number_of_offers})
                                             </Typography>
                                             <ButtonComponent>
                                                 <Typography
@@ -379,44 +391,45 @@ export const CabinetCard: FC<CabinetCardPropsType> = (props) => {
                                             </ButtonComponent>
                                         </div>
                                         <div className="profile-data">
-                                            <UserAvatarComponent avatar={el.author?.avatar && el.author.avatar} />
+                                            <UserAvatarComponent
+                                                avatar={el.auction.offer.user.avatar && el.auction.offer.user.avatar}
+                                            />
                                             <Typography
-                                                variant="subtitle1"
+                                                variant="subtitle2"
                                                 color="initial"
                                             >
-                                                {el.author?.name}
+                                                {el.auction.offer.user.name}
                                             </Typography>
                                             <Rating card />
-                                            {el.author.id}
-                                            <ButtonComponent className='write'>
-                                                <LetterIcon />
+                                            <Typography variant='h6'>{el.auction.offer.price} сум</Typography>
+                                            <ButtonComponent className='accept'
+                                                             onClick={acceptOfferThePrice(el.auction.offer.id, true)}>
+                                                <DoneAllIcon />
                                                 <Typography
                                                     variant="subtitle2"
                                                     color="initial"
                                                 >
-                                                    Написать
+                                                    Принять
+                                                </Typography>
+                                            </ButtonComponent>
+                                            <ButtonComponent className='decline'
+                                                             onClick={acceptOfferThePrice(el.auction.offer.id, false)}>
+                                                <CloseIcon />
+                                                <Typography
+                                                    variant="subtitle2"
+                                                    color="initial"
+                                                >
+                                                    Отказать
                                                 </Typography>
                                             </ButtonComponent>
                                         </div>
                                         <div>
-                                            <ButtonComponent className="show-phone-btn" onClick={handleShowPhone}>
-                                                <Typography
-                                                    variant="subtitle2"
-                                                    color="initial"
-                                                >
-                                                    {isPhoneAval
-                                                        ? el.author?.phone
-                                                        : 'Показать номер'
-                                                    }
-                                                </Typography>
-                                            </ButtonComponent>
-                                            {/* <Typography
-                                            variant="subtitle2"
-                                            color="initial"
-                                        >
-                                            <span>*</span> Оценка доступна в течении 90
-                                            календарных дней
-                                        </Typography> */}
+                                            <Typography
+                                                variant='subtitle1'
+                                                onClick={fetchAllOffers(el.auction.id)}
+                                            >
+                                                Показать все предложения
+                                            </Typography>
                                         </div>
                                     </div>
                                 )}
