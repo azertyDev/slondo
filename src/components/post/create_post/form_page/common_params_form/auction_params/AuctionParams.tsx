@@ -34,7 +34,6 @@ export const AuctionParams: FC<AuctionParamsPropsType> = (props) => {
 
     const {auction} = values;
 
-    console.log('values', values);
     const classes = useStyles();
     return (
         <Grid className={classes.root}>

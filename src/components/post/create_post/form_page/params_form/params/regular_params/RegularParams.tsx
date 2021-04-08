@@ -1,10 +1,11 @@
 import React, {FC, Fragment} from "react";
 import {WithT} from "i18next";
 import {Grid, Typography} from "@material-ui/core";
-import {excludedKeys} from "@src/common_data/form_fields";
+import {excludedKeys, optionKeys} from "@src/common_data/form_fields";
 import {CustomSelect} from "@src/components/post/create_post/form_page/components/custom_select/CustomSelect";
 import {getErrorMsg} from "@src/helpers";
 import {useStyles} from "./useStyles";
+import {OptionsSelect} from "@src/components/post/create_post/form_page/components/options_select/OptionsSelect";
 
 
 type RegularFormPropsType = {
@@ -35,7 +36,7 @@ export const RegularParams: FC<RegularFormPropsType> = (props) => {
         <div className={classes.root}>
             <Grid container spacing={2}>
                 {isPreview
-                    ? Object.keys(values).map(key => {
+                 ? Object.keys(values).map(key => {
                         if (!!values[key]) {
                             let value = values[key];
                             if (Object.keys(values[key]).length) {
@@ -55,20 +56,21 @@ export const RegularParams: FC<RegularFormPropsType> = (props) => {
                                                 {value}
                                             </Typography>
                                         </Grid>
-                                    )
+                                    );
                                 }
                             }
                         }
                     })
-                    : getFields(filters)}
+                 : getFields(filters)}
             </Grid>
         </div>
-    )
+    );
 
     function getFields(filters) {
         return Object.keys(filters).map(key => {
             const isExcludeValue = excludedKeys.some(k => k === key);
             const isNoEmptyArray = Array.isArray(filters[key]) && filters[key].length;
+            const isOptionKey = optionKeys.some(optKey => optKey === key);
 
             if (!isExcludeValue && isNoEmptyArray) {
                 return (
@@ -76,27 +78,31 @@ export const RegularParams: FC<RegularFormPropsType> = (props) => {
                         <Grid
                             item
                             container
-                            sm={4}
                             xs={12}
+                            sm={isOptionKey ? 12 : 4}
                         >
-                            <CustomSelect
-                                t={t}
-                                name={key}
-                                values={values}
-                                onBlur={handleBlur}
-                                items={filters[key]}
-                                handleSelect={handleSelect}
-                                errorMsg={
-                                    getErrorMsg(errors[key], touched[key], t)
-                                }
-                            />
+                            {isOptionKey
+                             ? <OptionsSelect
+                                 t={t}
+                                 name={key}
+                                 values={values}
+                                 options={filters[key]}
+                                 handleOptionCheckbox={() => console.log('')}
+                             />
+                             : <CustomSelect
+                                 t={t}
+                                 name={key}
+                                 values={values}
+                                 onBlur={handleBlur}
+                                 items={filters[key]}
+                                 handleSelect={handleSelect}
+                                 errorMsg={getErrorMsg(errors[key], touched[key], t)}
+                             />}
                         </Grid>
-                        {values[key] && Object.keys(values[key]).length && (
-                            getFields(values[key])
-                        )}
+                        {values[key] && Object.keys(values[key]).length && getFields(values[key])}
                     </Fragment>
-                )
+                );
             }
-        })
+        });
     }
 };

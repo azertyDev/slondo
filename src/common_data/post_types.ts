@@ -15,12 +15,6 @@ export const postTypes: PostType[] = [
                 name: 'уе'
             }
         ],
-        expired: [
-            {
-                id: 3,
-                hours: 720
-            }
-        ],
         image: {
             url: '/img/adv-background.png'
         },
@@ -39,11 +33,11 @@ export const postTypes: PostType[] = [
         expired: [
             {
                 id: 1,
-                hours: 2
+                hours: 10
             },
             {
                 id: 2,
-                hours: 720
+                hours: 15
             }
         ],
         image: {
@@ -64,11 +58,11 @@ export const postTypes: PostType[] = [
         expired: [
             {
                 id: 4,
-                hours: 2
+                hours: 10
             },
             {
                 id: 5,
-                hours: 720
+                hours: 15
             }
         ],
         image: {

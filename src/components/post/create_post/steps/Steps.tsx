@@ -11,7 +11,7 @@ type AncmntAuctionTopPropsType = {
     handleBack?: () => void
 };
 
-export const Top: FC<AncmntAuctionTopPropsType> = (props) => {
+export const Steps: FC<AncmntAuctionTopPropsType> = (props) => {
     const {t} = useTranslation(['post']);
 
     const {

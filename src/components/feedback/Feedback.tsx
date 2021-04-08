@@ -1,26 +1,26 @@
-import React from 'react'
-import { Grid, Typography } from '@material-ui/core'
-import { useStyles } from './useStyles'
-import { Form, FormikProvider, useFormik } from 'formik'
-import { filterInputSchema } from '@root/validation_schemas/filterInputSchema'
-import { CustomFormikField } from '@src/components/elements/custom_formik_field/CustomFormikField'
-import { ButtonComponent } from '@src/components/elements/button/Button'
+import React, {FC} from 'react';
+import {Grid, Typography} from '@material-ui/core';
+import {useStyles} from './useStyles';
+import {Form, FormikProvider, useFormik} from 'formik';
+import {filterInputSchema} from '@root/validation_schemas/filterInputSchema';
+import {CustomFormikField} from '@src/components/elements/custom_formik_field/CustomFormikField';
+import {ButtonComponent} from '@src/components/elements/button/Button';
 
-const initialFeedbackInputsVals = {}
+const initialFeedbackInputsVals = {};
 
-export const Feedback = () => {
+export const Feedback: FC = () => {
 
     const onSubmit = (values) => {
-        console.log(values)
-    }
+        console.log(values);
+    };
 
     const formik = useFormik({
         initialValues: initialFeedbackInputsVals,
         validationSchema: filterInputSchema,
-        onSubmit,
-    })
+        onSubmit
+    });
 
-    const classes = useStyles()
+    const classes = useStyles();
     return (
         <Grid item xs={7} className={classes.root}>
             <Typography variant='h6'>Обратная связь</Typography>
@@ -37,7 +37,7 @@ export const Feedback = () => {
                                 placeholder="Введите Имя"
                                 size="small"
                                 InputLabelProps={{
-                                    shrink: true,
+                                    shrink: true
                                 }}
                             />
                             <CustomFormikField
@@ -45,7 +45,7 @@ export const Feedback = () => {
                                 placeholder="example@gmail.com"
                                 size="small"
                                 InputLabelProps={{
-                                    shrink: true,
+                                    shrink: true
                                 }}
                             />
                             <CustomFormikField
@@ -53,7 +53,7 @@ export const Feedback = () => {
                                 placeholder="+998  "
                                 size="small"
                                 InputLabelProps={{
-                                    shrink: true,
+                                    shrink: true
                                 }}
                             />
                         </div>
@@ -82,5 +82,5 @@ export const Feedback = () => {
                 </FormikProvider>
             </div>
         </Grid>
-    )
-}
+    );
+};
