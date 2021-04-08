@@ -108,7 +108,9 @@ export const CommonParamsForm: FC<DefaultParamsPropsType> = (props) => {
             otherAuctionData.duration_id = duration.id;
 
             if (isAdvanceAuction) {
-                otherAuctionData.price_buy_now = clearWhiteSpaces(price_buy_now.value);
+                if (price_buy_now.isActive) {
+                    otherAuctionData.price_buy_now = clearWhiteSpaces(price_buy_now.value);
+                }
                 otherAuctionData.reserve_price = clearWhiteSpaces(reserve_price);
                 otherAuctionData.auto_renewal = auto_renewal;
                 otherAuctionData.offer_the_price = offer_the_price;
@@ -221,7 +223,6 @@ export const CommonParamsForm: FC<DefaultParamsPropsType> = (props) => {
     const handleCheckboxChange = name => ({target}) => {
         const auctionOptionsList = [
             'price_buy_now',
-            'price_buy_now',
             'offer_the_price',
             'auto_renewal',
             'display_phone'
@@ -229,6 +230,9 @@ export const CommonParamsForm: FC<DefaultParamsPropsType> = (props) => {
         if (auctionOptionsList.some(option => option === name)) {
             if (name === 'price_buy_now') {
                 auction.price_buy_now.isActive = target.checked;
+                if (!target.checked) {
+                    auction.price_buy_now.value = '';
+                }
             } else {
                 auction[name] = target.checked;
             }
@@ -312,7 +316,7 @@ export const CommonParamsForm: FC<DefaultParamsPropsType> = (props) => {
                                           onChange={handleInput}
                                           style={{width: '270px'}}
                                           errorMsg={
-                                              getErrorMsg(errors.price, touched.price, t)
+                                              getErrorMsg(errors.price as string, touched.price as boolean, t)
                                           }
                                       />
                                   </Grid>
@@ -339,7 +343,7 @@ export const CommonParamsForm: FC<DefaultParamsPropsType> = (props) => {
                                  <LocationAutocomplete
                                      name='location'
                                      errorMsg={
-                                         getErrorMsg(errors.location, touched.location, t)
+                                         getErrorMsg(errors.location as string, touched.location as boolean, t)
                                      }
                                      value={values.location}
                                      locations={locations.data}
@@ -354,7 +358,7 @@ export const CommonParamsForm: FC<DefaultParamsPropsType> = (props) => {
                                      handleBlur={handleBlur}
                                      description={values.description}
                                      errorMsg={
-                                         getErrorMsg(errors.description, touched.description, t)
+                                         getErrorMsg(errors.description as string, touched.description as boolean, t)
                                      }
                                  />
                              </div>

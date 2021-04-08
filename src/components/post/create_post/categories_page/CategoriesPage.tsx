@@ -106,7 +106,7 @@ export const CategoriesPage: FC = () => {
     useEffect(() => {
         setSubLvlCtgrs();
     }, [categoryName, subCategoryName, locale]);
-    console.log('query', query);
+
     const classes = useStyles();
     return (
         <MainLayout>

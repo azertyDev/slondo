@@ -49,5 +49,6 @@ export const numericFields = [
 ];
 
 export const optionKeys = [
-    'mount'
+    'mount',
+    'properties'
 ];

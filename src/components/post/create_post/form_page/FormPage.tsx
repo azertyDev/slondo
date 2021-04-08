@@ -36,7 +36,6 @@ export const FormPage: FC = () => {
 
     const {asPath, query, locale, push} = useRouter();
     const [postTypeName, categoryName, subCategoryName, typeName] = query.slug as string[];
-    console.log('query', query);
 
     const {category, subCategory, type} = getCategoriesByParams(
         {
@@ -76,10 +75,10 @@ export const FormPage: FC = () => {
 
     const [isSuccess, setIsSuccess] = useState(false);
     const [isPreview, setIsPreview] = useState(false);
-    const [currentFormIndex, setCurrentFormIndex] = useState(isExtendSubCtgr ? 4 : 3);
     const [post, setPost] = useState(initPost);
     const [filters, setFilters] = useState(initFilters);
     const {colors, ...filtersData} = filters.data;
+    const [currentFormIndex, setCurrentFormIndex] = useState(isExtendSubCtgr ? 4 : 3);
 
     const handleNextFormOpen = () => {
         setCurrentFormIndex(currentFormIndex - 1);
@@ -147,10 +146,7 @@ export const FormPage: FC = () => {
             setFetchedFilters();
         }
     }, []);
-    console.log('post', post);
-    console.log('category', category);
-    console.log('subCategory', subCategory);
-    console.log('type', type);
+
     const classes = useStyles();
     return (
         <MainLayout>
