@@ -62,7 +62,8 @@ export const AuctionInfo: FC<any> = (props) => {
     return (
         <div className={classes.root}>
             <div className="lot-info">
-                {data.auction && data.auction.reserve_price > list?.[0]?.bet && <div className="reserve-price">
+                {data.auction && data.auction.reserve_price > list?.[0]?.bet &&
+                <div className="reserve-price">
                     <LockIcon/>
                     <div>
                         <Typography variant="subtitle2" color="initial">

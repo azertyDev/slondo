@@ -10,7 +10,7 @@ import {
     Modal, Slide,
     Snackbar,
     TextField,
-    Typography
+    Typography, useMediaQuery, useTheme
 } from '@material-ui/core';
 import {ReadMore} from '@src/components/elements/read_more/readMore';
 import {LocationIcon} from '@src/components/elements/icons/LocationIcon';
@@ -45,6 +45,9 @@ export const PostContent: FC<WithT & any> = (props) => {
         parameters,
         descHeight
     } = props
+
+    const theme = useTheme();
+    const isLg = useMediaQuery(theme.breakpoints.down('md'));
 
 
     const [state, setState] = React.useState<PostContentTypes>({
@@ -233,18 +236,12 @@ export const PostContent: FC<WithT & any> = (props) => {
                 </div>
             </Hidden>
             <div className="post-bonus">
-                {data.ads_type.mark !== 'post' && (
+                {data.ads_type.mark === 'exauc' && isLg && (
                     <div className="reserve">
                         <LockIcon/>
-                        <div>
-                            <Typography variant="subtitle2" color="initial">
-                                Резервная цена:
-                            </Typography>
-                            <Typography variant="h6" color="initial">
-                                {numberPrettier(data.auction.reserve_price)}{' '}
-                                {data.currency.name}
-                            </Typography>
-                        </div>
+                        <Typography variant="subtitle2" color="initial">
+                            Резервная цена: <br/>{numberPrettier(data.auction.reserve_price)} {data.currency.name}
+                        </Typography>
                     </div>
                 )}
                 {!!data.delivery && (
@@ -296,16 +293,27 @@ export const PostContent: FC<WithT & any> = (props) => {
                         </ButtonComponent>
                     </div>
                 )}
-                {data.ads_type.mark !== 'post' && (
+                {data.ads_type.mark === 'auc' && (
                     <div className="contact">
                         <ButtonComponent>
-                            <Typography variant='subtitle1'>Предложить цену</Typography>
+                            <Typography variant='subtitle1'>Позвонить</Typography>
                         </ButtonComponent>
                         <ButtonComponent>
                             <Typography variant='subtitle1'>Написать</Typography>
                         </ButtonComponent>
                     </div>
                 )}
+                {data.ads_type.mark === 'exauc' && (
+                    <div className="contact">
+                        <ButtonComponent>
+                            <Typography variant='subtitle1'>Предложить цену</Typography>
+                        </ButtonComponent>
+                        <ButtonComponent className="btn-buy-now">
+                            <Typography variant='subtitle1'>Купить сейчас</Typography>
+                        </ButtonComponent>
+                    </div>
+                )}
+
             </Hidden>
             <div className="post-location">
                 <Hidden mdDown>

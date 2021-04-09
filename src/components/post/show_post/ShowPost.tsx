@@ -22,6 +22,7 @@ export const ShowPost: FC<any> = (props) => {
         <MainLayout title={data.title}>
             <div className={classes.root}>
                 <Grid container spacing={2}>
+
                     <Grid item xs={12} lg={9}>
                         <PostContent
                             t={t}

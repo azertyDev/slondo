@@ -301,6 +301,9 @@ export const useStyles = makeStyles((theme) => ({
             }
         },
         '& div.contact': {
+            '& .btn-buy-now': {
+                background: 'yellow'
+            },
             display: 'flex',
             marginBottom: '30px',
             '& button': {
@@ -324,6 +327,7 @@ export const useStyles = makeStyles((theme) => ({
                         color: '#845CAB'
                     }
                 }
+
             }
         },
         '& div.post-location': {
