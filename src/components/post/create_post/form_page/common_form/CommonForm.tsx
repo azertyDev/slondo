@@ -1,26 +1,26 @@
-import React, {Dispatch, FC, SetStateAction} from 'react';
-import {WithT} from 'i18next';
-import {useSelector} from 'react-redux';
-import {Grid} from '@material-ui/core';
-import {AuctionParams} from './auction_params/AuctionParams';
-import {PaymentDelivery} from './payment_delivery/PaymentDelivery';
-import {Description} from './description/Description';
-import {Contacts} from './contacts/Contacts';
-import {AvailableDays} from './available_days/AvailableDays';
-import {numberRegEx, timeRegEx} from '@src/common_data/reg_exs';
-import {FormikProvider, useFormik} from 'formik';
-import {CustomAccordion} from '@src/components/post/create_post/form_page/components/accordion/CustomAccordion';
-import {numericFields} from '@src/common_data/form_fields';
-import {auctionParamsSchema, defaultParamsSchema} from '@root/validation_schemas/createPostSchemas';
-import {clearWhiteSpaces, getErrorMsg, numberPrettier} from '@src/helpers';
-import {RootState} from '@src/redux/rootReducer';
-import {PostType} from '@root/interfaces/Post';
-import {WEEK_DAYS} from '@src/common_data/common';
+import React, {Dispatch, FC, SetStateAction} from "react";
+import {WithT} from "i18next";
+import {useSelector} from "react-redux";
+import {Grid} from "@material-ui/core";
+import {AuctionParams} from "./auction_params/AuctionParams";
+import {PaymentDelivery} from "./payment_delivery/PaymentDelivery";
+import {Description} from "./description/Description";
+import {Contacts} from "./contacts/Contacts";
+import {AvailableDays} from "./available_days/AvailableDays";
+import {numberRegEx, timeRegEx} from "@src/common_data/reg_exs";
+import {FormikProvider, useFormik} from "formik";
+import {CustomAccordion} from "@src/components/post/create_post/form_page/components/accordion/CustomAccordion";
+import {numericFields} from "@src/common_data/form_fields";
+import {auctionParamsSchema, defaultParamsSchema} from "@root/validation_schemas/createPostSchemas";
+import {clearWhiteSpaces, getErrorMsg, numberPrettier} from "@src/helpers";
+import {RootState} from "@src/redux/rootReducer";
+import {PostType} from "@root/interfaces/Post";
+import {WEEK_DAYS} from "@src/common_data/common";
 import {StateIcon} from '@src/components/elements/icons';
-import {LocationAutocomplete} from '@src/components/post/create_post/form_page/common_params_form/location/LocationAutocomplete';
-import {CustomSelect} from '@src/components/post/create_post/form_page/components/custom_select/CustomSelect';
-import {CommonParamsFormPreview} from '@src/components/post/create_post/form_page/common_params_form/CommonParamsFormPreview';
-import {CustomFormikField} from '@src/components/elements/custom_formik_field/CustomFormikField';
+import {LocationAutocomplete} from "@src/components/post/create_post/form_page/common_form/location/LocationAutocomplete";
+import {CustomSelect} from "@src/components/post/create_post/form_page/components/custom_select/CustomSelect";
+import {CommonFormPreview} from "@src/components/post/create_post/form_page/common_form/CommonFormPreview";
+import {CustomFormikField} from "@src/components/elements/custom_formik_field/CustomFormikField";
 import {useStyles} from './useStyles';
 
 
@@ -35,7 +35,7 @@ type DefaultParamsPropsType = {
     ownerPhone: string
 } & WithT;
 
-export const CommonParamsForm: FC<DefaultParamsPropsType> = (props) => {
+export const CommonForm: FC<DefaultParamsPropsType> = (props) => {
     const {
         t,
         isPreview,
@@ -285,7 +285,7 @@ export const CommonParamsForm: FC<DefaultParamsPropsType> = (props) => {
                 >
                     <div className={classes.root}>
                         {isPreview
-                         ? <CommonParamsFormPreview
+                         ? <CommonFormPreview
                              t={t}
                              values={values}
                              isAuction={isAuction}
@@ -309,7 +309,7 @@ export const CommonParamsForm: FC<DefaultParamsPropsType> = (props) => {
                                       handleCheckboxChange={handleCheckboxChange}
                                   />
                               </div>
-                              : <Grid container alignItems='flex-end'>
+                              : <Grid container alignItems='center'>
                                   <Grid item xs={3}>
                                       <CustomFormikField
                                           name='price'
@@ -317,9 +317,7 @@ export const CommonParamsForm: FC<DefaultParamsPropsType> = (props) => {
                                           value={values.price}
                                           onChange={handleInput}
                                           style={{width: '270px'}}
-                                          errorMsg={
-                                              getErrorMsg(errors.price as string, touched.price as boolean, t)
-                                          }
+                                          errorMsg={getErrorMsg(errors.price, touched.price, t)}
                                       />
                                   </Grid>
                                   <Grid item xs={1}>
@@ -345,7 +343,7 @@ export const CommonParamsForm: FC<DefaultParamsPropsType> = (props) => {
                                  <LocationAutocomplete
                                      name='location'
                                      errorMsg={
-                                         getErrorMsg(errors.location as string, touched.location as boolean, t)
+                                         getErrorMsg(errors.location, touched.location, t)
                                      }
                                      value={values.location}
                                      locations={locations.data}
@@ -359,9 +357,7 @@ export const CommonParamsForm: FC<DefaultParamsPropsType> = (props) => {
                                      handleInput={handleInput}
                                      handleBlur={handleBlur}
                                      description={values.description}
-                                     errorMsg={
-                                         getErrorMsg(errors.description as string, touched.description as boolean, t)
-                                     }
+                                     errorMsg={getErrorMsg(errors.description, touched.description, t)}
                                  />
                              </div>
                              <Grid

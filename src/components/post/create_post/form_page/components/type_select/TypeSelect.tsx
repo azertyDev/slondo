@@ -3,7 +3,7 @@ import {ButtonComponent} from "@src/components/elements/button/Button";
 import {Typography} from "@material-ui/core";
 import {WithT} from "i18next";
 import {isRequired} from "@src/helpers";
-import {useStyles} from '../options_select/useStyles';
+import {useStyles} from './useStyles';
 
 
 type SelectOptionsPropsType = {

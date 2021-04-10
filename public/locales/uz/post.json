@@ -137,6 +137,7 @@
   "displayPhone": "Telefon raqamingizni ko'rsatish",
   "position": "lavozim",
   "furnished": "Jihozlangan",
+  "house_furnished": "Jihozlangan",
   "area": "Maydon м²",
   "area_in_hundred": "Maydon sotkada",
   "land_area": "Uchastkadagi maydon м²",
@@ -149,12 +150,15 @@
   "payments": "Oldindan to'lov",
   "posted": "E'lon egasi",
   "ceiling_height": "Shift balandligi metrda",
-  "number_of_bedrooms": "Xonalar soni",
+  "number_of_bedrooms": "Yotoq xonalar soni",
   "engine_capacity": "Dvigatel hajmi см³",
   "utilities": "Kommunal hisoblar narx ichiga kiritilgan",
+  "with_pledge": "Garov bilan",
   "infrastructure": "Infratuzilma",
   "amenities": "Vaziyat",
   "location": "Joylashish",
   "heating": "Uy isitish",
-  "metro": "Metrogacha"
+  "lift": "Lift",
+  "metro": "Metrogacha",
+  "garage": "Garaj"
 }
