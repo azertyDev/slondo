@@ -117,7 +117,6 @@ export const useStyles = makeStyles((theme) => ({
                                 },
                                 '& > h6.MuiTypography-subtitle1': {
                                     fontSize: '18px',
-                                    borderBottom: '1px solid #4E4E4E',
                                     lineHeight: '20px'
                                 },
                                 '& > h6.MuiTypography-subtitle2': {
@@ -339,6 +338,13 @@ export const useStyles = makeStyles((theme) => ({
                 display: 'flex',
                 flexDirection: 'column',
                 justifyContent: 'space-between',
+                '& .congrat': {
+                    '& .cracker-icon': {
+                        background: '#FFFFFF',
+                        borderRadius: '50%',
+                        padding: 8
+                    }
+                },
                 '& > .extreme-rate': {
                     display: 'flex',
                     justifyContent: 'space-between',

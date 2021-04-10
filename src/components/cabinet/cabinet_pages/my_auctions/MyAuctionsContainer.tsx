@@ -55,7 +55,10 @@ export const MyAuctionsContainer: FC = () => {
                         offer: null
                     },
                     author: initialUserInfo,
-                    available_days: '',
+                    available_days: [{
+                        id: null,
+                        name: ''
+                    }],
                     category: initialValues,
                     city: initialValues,
                     created_at: '',
@@ -152,7 +155,6 @@ export const MyAuctionsContainer: FC = () => {
                 setAuctionData({ ...auctionData, isFetch: true });
                 const { data, total } = await userAPI.getMyPosts({ type, locale });
                 setAuctionData({ myPosts: { data, total }, isFetch: true });
-                console.log(data, total);
             } else {
                 setParticipatingData({ ...auctionData, isFetch: true });
                 const { data, total, message } = await userAPI.getAuctionSubs(locale);

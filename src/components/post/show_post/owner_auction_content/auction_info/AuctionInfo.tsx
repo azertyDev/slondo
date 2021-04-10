@@ -32,8 +32,6 @@ export const AuctionInfo: FC<any> = (props) => {
     const date = new Date(data.expiration_at).getTime();
     const isExAuc = data.ads_type.id === 3;
 
-    console.log(data);
-
     const classes = useStyles();
     return (
         <div className={classes.root}>
@@ -53,7 +51,7 @@ export const AuctionInfo: FC<any> = (props) => {
                 </div>}
                 {data.ads_type.mark !== 'post' && (
                     <div className="lot-timer">
-                        {date !== 0 && <AuctionTimer date={date}/>}
+                        {date !== 0 && <AuctionTimer date={date} />}
                     </div>
                 )}
                 <div className="lot-participants-block">
@@ -145,7 +143,7 @@ export const AuctionInfo: FC<any> = (props) => {
                             </Typography>
                         </div>
                     </div>
-                    {isExAuc && !!data.auction.price_buy_now_status && (
+                    {isExAuc && !!data.auction.price_buy_now && (
                         <div>
                             <div className="buy-now">
                                 <Typography variant="subtitle1" color="initial">

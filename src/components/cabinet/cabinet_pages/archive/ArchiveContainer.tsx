@@ -12,6 +12,7 @@ import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import {useTranslation} from 'next-i18next';
 import {useStyles} from '@src/components/cabinet/cabinet_pages/my_posts/useStyles';
 import {InitialCabinetCardState, TabsDataType} from '@root/interfaces/Cabinet';
+import {CabinetCard} from '@src/components/cabinet/cabinet_card/CabinetCard';
 
 
 export type ArchivePostData = {
@@ -248,6 +249,14 @@ const ArchiveContainer: FC = () => {
         </>
     );
 
+    const archiveCard = (data, isFetch) => (
+        <CabinetCard
+            list={data}
+            isFetch={isFetch}
+            handleModalOpen={handleOpenModal}
+        />
+    );
+
     const tabsData: TabsDataType = [
         {
             id: 0,
@@ -255,12 +264,12 @@ const ArchiveContainer: FC = () => {
             total: archivePostsData.myPosts.total,
             component:
                 <Archive
-                    list={archivePostsData.myPosts.data}
-                    isFetch={archivePostsData.isFetch}
                     ModalContent={ModalContent}
-                    handleModalOpen={handleOpenModal}
                     handleModalClose={handleCloseModal}
                     openModal={openModal}
+                    archiveCard={
+                        archiveCard(archivePostsData.myPosts.data, archivePostsData.isFetch)
+                    }
                 />
         },
         {
@@ -269,18 +278,15 @@ const ArchiveContainer: FC = () => {
             total: archiveAucData.myPosts.total,
             component:
                 <Archive
-                    list={archiveAucData.myPosts.data}
-                    isFetch={archiveAucData.isFetch}
                     ModalContent={ModalContent}
-                    handleModalOpen={handleOpenModal}
                     handleModalClose={handleCloseModal}
                     openModal={openModal}
+                    archiveCard={
+                        archiveCard(archiveAucData.myPosts.data, archiveAucData.isFetch)
+                    }
                 />
         }
     ];
-
-    console.log('archivePostsData ', archivePostsData);
-    console.log('archiveAucData ', archiveAucData);
 
     useEffect(() => {
         fetchArchivePosts('post');

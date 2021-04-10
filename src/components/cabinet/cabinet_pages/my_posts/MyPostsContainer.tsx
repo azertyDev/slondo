@@ -90,7 +90,10 @@ const MyPostsContainer: FC = () => {
                         created_at: '',
                         available_days: ''
                     },
-                    available_days: '',
+                    available_days: [{
+                        id: null,
+                        name: ''
+                    }],
                     category: {
                         id: null,
                         name: ''

@@ -2,6 +2,7 @@ import React, {FC} from 'react';
 import {Box, Grid, Hidden, Paper, Tooltip, Typography} from '@material-ui/core';
 import {
     CloseIcon,
+    CrackerIcon,
     DeliveryIcon,
     DoneAllIcon,
     EyeIcon,
@@ -11,10 +12,7 @@ import {
     SettingsIcon,
     SwapIcon
 } from '@src/components/elements/icons';
-import {ButtonComponent} from '@src/components/elements/button/Button';
 import {BreadcrumbsComponent} from '@src/components/elements/breadcrumbs/Breadcrumbs';
-import {UserAvatarComponent} from '@src/components/elements/user_info_with_avatar/avatar/UserAvatarComponent';
-import {Rating} from '@src/components/elements/rating/Rating';
 import Link from 'next/link';
 import {formatNumber, weekDaysHelper} from '@src/helpers';
 import Countdown from 'react-countdown';
@@ -24,6 +22,9 @@ import {useStyles} from './useStyles';
 import {CardDataType, OffersStateType} from '@root/interfaces/Cabinet';
 import {useSelector} from 'react-redux';
 import {RootState} from '@src/redux/rootReducer';
+import {ButtonComponent} from '@src/components/elements/button/Button';
+import {Rating} from '@src/components/elements/rating/Rating';
+import {UserAvatarComponent} from '@src/components/elements/user_info_with_avatar/avatar/UserAvatarComponent';
 
 type CabinetCardPropsType = {
     isFetch?: boolean,
@@ -43,7 +44,6 @@ export const CabinetCard: FC<CabinetCardPropsType> = (props) => {
     const {
         isFetch,
         list,
-        offersData,
         handleModalOpen,
         handleDeactivate,
         handleAcceptVictory,
@@ -74,7 +74,7 @@ export const CabinetCard: FC<CabinetCardPropsType> = (props) => {
     const classes = useStyles();
     return (
         <div className={classes.root}>
-            {list?.map((el) => {
+            {list.map((el) => {
                 return (
                     <Grid container key={el.id}>
                         <Grid item xs={9} className="left-content">
@@ -105,13 +105,11 @@ export const CabinetCard: FC<CabinetCardPropsType> = (props) => {
                                     </Typography>
                                     <div className='status'>
                                         <Typography variant='subtitle2' className='waiting'>
-                                            {
-                                                el.auction.is_accepted === null
-                                                    ? 'Ожидание'
-                                                    : el.auction.is_accepted
+                                            {el.auction.is_accepted === null
+                                                ? 'Ожидание'
+                                                : el.auction.is_accepted
                                                     ? 'Принято'
-                                                    : 'Отказано'
-                                            }
+                                                    : 'Отказано'}
                                         </Typography>
                                     </div>
                                 </Box>
@@ -121,9 +119,9 @@ export const CabinetCard: FC<CabinetCardPropsType> = (props) => {
                                     <div className="img">
                                         <img src={el.image} alt={el.title} />
                                         <Typography
+                                            noWrap
                                             variant="caption"
                                             color="initial"
-                                            noWrap
                                             className={el.ads_type}
                                         >
                                             {t(el.ads_type)}
@@ -131,9 +129,9 @@ export const CabinetCard: FC<CabinetCardPropsType> = (props) => {
                                         <span>
                                             <EyeIcon/>
                                             <Typography
+                                                noWrap
                                                 variant="caption"
                                                 color="initial"
-                                                noWrap
                                             >
                                                 {el.number_of_views}
                                             </Typography>
@@ -143,9 +141,9 @@ export const CabinetCard: FC<CabinetCardPropsType> = (props) => {
                                         <div className="header">
                                             <div className="ancmnt-title">
                                                 <Typography
+                                                    noWrap
                                                     variant="subtitle1"
                                                     color="initial"
-                                                    noWrap
                                                 >
                                                     {el.title}
                                                 </Typography>
@@ -163,13 +161,13 @@ export const CabinetCard: FC<CabinetCardPropsType> = (props) => {
                                             </div>
                                         </div>
                                         <div className="description">
-                                            {!!el.available_days?.length && (
+                                            {!!el.available_days && (
                                                 <span className="available">
-                                                <PhoneIcon/>
+                                                    <PhoneIcon />
                                                     <Typography variant="body1" color="primary">
                                                         {weekDaysHelper(el.available_days, t)}
                                                     </Typography>
-                                            </span>
+                                                </span>
                                             )}
                                             {!!el.exchange && (
                                                 <Tooltip title='Возможен обмен' arrow>
@@ -236,7 +234,7 @@ export const CabinetCard: FC<CabinetCardPropsType> = (props) => {
                                     </div>
                                 </Box>
                             </Paper>
-                            {(el.creator && el.auction.winner && (!!el.auction.is_accepted === false || !!el.auction.is_accepted === true)) && (
+                            {el.creator && el.auction.is_accepted && el.status === 'suspended' && (
                                 <div className="status-buttons">
                                     <ButtonComponent className='end-auction' onClick={handleDeactivate(el.id)}>
                                         <Typography variant='subtitle1'>
@@ -245,7 +243,7 @@ export const CabinetCard: FC<CabinetCardPropsType> = (props) => {
                                     </ButtonComponent>
                                 </div>
                             )}
-                            {(el.status === 'suspend' && !el.creator && id === el.auction.winner_id && el.auction.is_accepted === null) && (
+                            {(el.status === 'suspended' && !el.creator && id === el.auction.winner_id && el.auction.is_accepted === null) && (
                                 <div className="status-buttons">
                                     <ButtonComponent onClick={handleAcceptVictory(el.auction.id, true)}>
                                         <Typography variant='subtitle1'>Принять</Typography>
@@ -374,7 +372,6 @@ export const CabinetCard: FC<CabinetCardPropsType> = (props) => {
                                 {/*        </div>*/}
                                 {/*    </div>*/}
                                 {/*)}*/}
-                                {console.log((`${el.auction.id} ${el.status !== 'expired'}`))}
                                 {pathname?.includes('auctions') && el.auction.offer && (el.status !== 'expired') && (
                                     <div className="offers-card">
                                         <div className="extreme-rate">
@@ -432,6 +429,23 @@ export const CabinetCard: FC<CabinetCardPropsType> = (props) => {
                                             </Typography>
                                         </div>
                                     </div>
+                                )}
+                                {el.status === 'suspended' && el.auction.winner_id === id && (
+                                    <Box className='profile-form'>
+                                        <Box display='flex' className='congrat'>
+                                            <div className='cracker-icon'>
+                                                <CrackerIcon />
+                                            </div>
+                                            <Typography variant='subtitle1'>
+                                                Поздравляем! Вы победили в аукционе № {el.auction.id}
+                                            </Typography>
+                                        </Box>
+                                        <Box>
+                                            <Typography variant='subtitle1'>
+                                                Вы можете принять либо отказаться от победы в аукционе
+                                            </Typography>
+                                        </Box>
+                                    </Box>
                                 )}
                             </Grid>
                         </Hidden>

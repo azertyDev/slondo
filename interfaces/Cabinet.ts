@@ -1,5 +1,6 @@
 import {ReactElement} from 'react';
 import {UserInfo} from '@root/interfaces/Auth';
+import {IdNameType} from '@root/interfaces/Post';
 
 export type TabsDataType = {
     id: number,
@@ -26,7 +27,7 @@ export type CardDataType = {
     }
     auction: {
         id: number,
-        is_accepted: boolean | null,
+        is_accepted: number,
         winner: UserInfo,
         winner_id: number,
         number_of_bets: number,
@@ -38,7 +39,7 @@ export type CardDataType = {
         }
     },
     author: UserInfo,
-    available_days: string,
+    available_days: IdNameType[],
     category: InitValuesType,
     city: InitValuesType,
     created_at: string,

@@ -11,6 +11,7 @@ import {OwnerAuctionContent} from '@src/components/post/show_post/owner_auction_
 import {Banner} from '@src/components/elements/banner/Banner';
 import {useStyles} from './useStyles';
 import {AuctionInfo} from '@src/components/post/show_post/owner_auction_content/auction_info/AuctionInfo';
+import {OwnerInfo} from '@src/components/post/show_post/owner_auction_content/owner_info/OwnerInfo';
 
 
 export type SlidersRefType = {
@@ -47,13 +48,15 @@ export const ShowPostContainer: FC = () => {
             creator: null,
             status: '',
             subscribed: null,
+            safe_deal: null,
             author: {
                 id: null,
                 name: '',
                 surname: '',
                 phone: '',
                 created_at: '',
-                avatar: ''
+                avatar: '',
+                available_days: ''
             },
             images: [{
                 id: null,
@@ -272,6 +275,16 @@ export const ShowPostContainer: FC = () => {
         />
     );
 
+    const ownerInfo = (
+        <OwnerInfo
+            safe_deal={postData.data.safe_deal}
+            owner={postData.data.author}
+            isOwner={postData.data.creator}
+            handleFollow={handleFollow}
+            subscribed={postData.data.subscribed}
+        />
+    );
+
 
     useEffect(() => {
         setSlidersRefs(initSlidersRefs);
@@ -282,8 +295,8 @@ export const ShowPostContainer: FC = () => {
     }, [lang]);
 
     useEffect(() => {
-        postData.data.auction.id && auctionBetsPagination();
-    }, [page, postData.data.auction.id]);
+        postData.data.auction?.id && auctionBetsPagination();
+    }, [page, postData.data.auction?.id]);
 
     useEffect(() => {
         const height = document.getElementById('post-description').clientHeight;
@@ -316,6 +329,7 @@ export const ShowPostContainer: FC = () => {
                                 list={auctionsBetsList.list}
                                 lastPage={lastPage}
                                 auctionInfo={auctionInfo}
+                                ownerInfo={ownerInfo}
                             />
                             <div className={classes.adBanner}>
                                 <Banner height="424px" />

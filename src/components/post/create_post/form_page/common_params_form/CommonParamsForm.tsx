@@ -1,26 +1,26 @@
-import React, {Dispatch, FC, SetStateAction} from "react";
-import {WithT} from "i18next";
-import {useSelector} from "react-redux";
-import {Grid} from "@material-ui/core";
-import {AuctionParams} from "./auction_params/AuctionParams";
-import {PaymentDelivery} from "./payment_delivery/PaymentDelivery";
-import {Description} from "./description/Description";
-import {Contacts} from "./contacts/Contacts";
-import {AvailableDays} from "./available_days/AvailableDays";
-import {numberRegEx, timeRegEx} from "@src/common_data/reg_exs";
-import {FormikProvider, useFormik} from "formik";
-import {CustomAccordion} from "@src/components/post/create_post/form_page/components/accordion/CustomAccordion";
-import {numericFields} from "@src/common_data/form_fields";
-import {auctionParamsSchema, defaultParamsSchema} from "@root/validation_schemas/createPostSchemas";
-import {clearWhiteSpaces, getErrorMsg, numberPrettier} from "@src/helpers";
-import {RootState} from "@src/redux/rootReducer";
-import {PostType} from "@root/interfaces/Post";
-import {WEEK_DAYS} from "@src/common_data/common";
+import React, {Dispatch, FC, SetStateAction} from 'react';
+import {WithT} from 'i18next';
+import {useSelector} from 'react-redux';
+import {Grid} from '@material-ui/core';
+import {AuctionParams} from './auction_params/AuctionParams';
+import {PaymentDelivery} from './payment_delivery/PaymentDelivery';
+import {Description} from './description/Description';
+import {Contacts} from './contacts/Contacts';
+import {AvailableDays} from './available_days/AvailableDays';
+import {numberRegEx, timeRegEx} from '@src/common_data/reg_exs';
+import {FormikProvider, useFormik} from 'formik';
+import {CustomAccordion} from '@src/components/post/create_post/form_page/components/accordion/CustomAccordion';
+import {numericFields} from '@src/common_data/form_fields';
+import {auctionParamsSchema, defaultParamsSchema} from '@root/validation_schemas/createPostSchemas';
+import {clearWhiteSpaces, getErrorMsg, numberPrettier} from '@src/helpers';
+import {RootState} from '@src/redux/rootReducer';
+import {PostType} from '@root/interfaces/Post';
+import {WEEK_DAYS} from '@src/common_data/common';
 import {StateIcon} from '@src/components/elements/icons';
-import {LocationAutocomplete} from "@src/components/post/create_post/form_page/common_params_form/location/LocationAutocomplete";
-import {CustomSelect} from "@src/components/post/create_post/form_page/components/custom_select/CustomSelect";
-import {CommonParamsFormPreview} from "@src/components/post/create_post/form_page/common_params_form/CommonParamsFormPreview";
-import {CustomFormikField} from "@src/components/elements/custom_formik_field/CustomFormikField";
+import {LocationAutocomplete} from '@src/components/post/create_post/form_page/common_params_form/location/LocationAutocomplete';
+import {CustomSelect} from '@src/components/post/create_post/form_page/components/custom_select/CustomSelect';
+import {CommonParamsFormPreview} from '@src/components/post/create_post/form_page/common_params_form/CommonParamsFormPreview';
+import {CustomFormikField} from '@src/components/elements/custom_formik_field/CustomFormikField';
 import {useStyles} from './useStyles';
 
 
@@ -111,7 +111,9 @@ export const CommonParamsForm: FC<DefaultParamsPropsType> = (props) => {
                 if (price_buy_now.isActive) {
                     otherAuctionData.price_buy_now = clearWhiteSpaces(price_buy_now.value);
                 }
-                otherAuctionData.reserve_price = clearWhiteSpaces(reserve_price);
+                if (reserve_price) {
+                    otherAuctionData.reserve_price = clearWhiteSpaces(reserve_price);
+                }
                 otherAuctionData.auto_renewal = auto_renewal;
                 otherAuctionData.offer_the_price = offer_the_price;
             }
