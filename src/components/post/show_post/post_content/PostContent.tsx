@@ -309,7 +309,7 @@ export const PostContent: FC<WithT & any> = (props) => {
                             <Typography variant='subtitle1'>Предложить цену</Typography>
                         </ButtonComponent>
                         <ButtonComponent className="btn-buy-now">
-                            <Typography variant='subtitle1'>Купить сейчас</Typography>
+                            <Typography variant='subtitle2'>Купить сейчас</Typography>
                         </ButtonComponent>
                     </div>
                 )}
@@ -414,18 +414,20 @@ export const PostContent: FC<WithT & any> = (props) => {
             </Hidden>
 
             <Hidden lgUp>
-                <div className='floating'>
-                    <div className="floating-text">
-                        <SafeIcon/>
-                        <Typography variant='subtitle2'>
-                            Безопасная покупка <br/>
-                            за 420 000 сум
-                        </Typography>
+                {data.ads_type.mark === 'post' && (
+                    <div className='floating'>
+                        <div className="floating-text">
+                            <SafeIcon/>
+                            <Typography variant='subtitle2'>
+                                Безопасная покупка <br/>
+                                за 420 000 сум
+                            </Typography>
+                        </div>
+                        <ButtonComponent>
+                            Купить
+                        </ButtonComponent>
                     </div>
-                    <ButtonComponent>
-                        Купить
-                    </ButtonComponent>
-                </div>
+                )}
             </Hidden>
             <ModalSyncSliders
                 slidersRefs={slidersRefs}

@@ -301,9 +301,12 @@ export const useStyles = makeStyles((theme) => ({
             }
         },
         '& div.contact': {
-            '& .btn-buy-now': {
-                background: 'yellow'
-            },
+            // '& .btn-buy-now': {
+            //     border: '1px solid #2F80ED !important',
+            //     '& h6': {
+            //         color: '#2F80ED !important'
+            //     }
+            // },
             display: 'flex',
             marginBottom: '30px',
             '& button': {
