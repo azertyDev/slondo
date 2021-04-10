@@ -3,6 +3,7 @@ import {WithT} from "i18next";
 import {TextField, Typography} from "@material-ui/core";
 import {numberRegEx} from "@src/common_data/reg_exs";
 import {useStyles} from './useStyles';
+import {isRequired} from "@src/helpers";
 
 
 type FloorsPropsType = {
@@ -49,7 +50,7 @@ export const NumberSelector: FC<FloorsPropsType> = (props) => {
             <Typography variant="subtitle1">
                 <strong>
                     {t(name)}
-                    <span className='error-text'>*&nbsp;</span>
+                    {isRequired(name) && <span className='error-text'>*&nbsp;</span>}
                 </strong>
             </Typography>
             <div className='numbers-wrapper'>
@@ -64,22 +65,22 @@ export const NumberSelector: FC<FloorsPropsType> = (props) => {
                         >
                             {++i}
                         </Typography>
-                    )
+                    );
                 })}
                 <div className='other-wrapper'>
                     {isOther
-                        ? <TextField
-                            name={name}
-                            variant='outlined'
-                            onChange={handleInput}
-                            value={values[name] ?? ''}
-                        />
-                        : <Typography
-                            variant='subtitle1'
-                            onClick={handleOther}
-                        >
-                            {t('other')}
-                        </Typography>}
+                     ? <TextField
+                         name={name}
+                         variant='outlined'
+                         onChange={handleInput}
+                         value={values[name] ?? ''}
+                     />
+                     : <Typography
+                         variant='subtitle1'
+                         onClick={handleOther}
+                     >
+                         {t('other')}
+                     </Typography>}
                 </div>
             </div>
             <Typography variant="subtitle1">
@@ -90,5 +91,5 @@ export const NumberSelector: FC<FloorsPropsType> = (props) => {
                 )}
             </Typography>
         </div>
-    )
-}
+    );
+};

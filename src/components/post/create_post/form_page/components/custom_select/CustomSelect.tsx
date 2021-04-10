@@ -42,7 +42,7 @@ export const CustomSelect: FC<CustomSelectPropsType> = (props) => {
 
     const classes = useStyles();
     return (
-        <>
+        <div className={classes.root}>
             {!isCurrency && (
                 <Typography variant="subtitle1">
                     <strong>
@@ -57,7 +57,7 @@ export const CustomSelect: FC<CustomSelectPropsType> = (props) => {
                 onBlur={onBlur}
                 onChange={onChange}
                 value={values[name]?.id ?? 0}
-                className={classes.root + `${errorMsg ? ' error-border' : ''}`}
+                className={'select-wrapper' + `${errorMsg ? ' error-border' : ''}`}
             >
                 {!isCurrency && (
                     <option value={0}>
@@ -80,6 +80,6 @@ export const CustomSelect: FC<CustomSelectPropsType> = (props) => {
                     </span>
                 )}
             </Typography>
-        </>
-    )
+        </div>
+    );
 };

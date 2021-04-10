@@ -10,7 +10,6 @@ import {cookies} from '@src/helpers';
 const uztelecom = 'https://backend.testb.uz/api/';
 const localServer = 'http://192.168.100.60/slondo/public/api/';
 
-
 const instance = Axios.create({
     withCredentials: true,
     baseURL: localServer
@@ -21,6 +20,8 @@ export const setTokenToHeader = (): { headers: any } => {
     if (token) {
         return {
             headers: {
+                'Cross-Origin-Embedder-Policy': 'require-corp',
+                'Cross-Origin-Opener-Policy': 'same-origin',
                 'Content-Type': 'application/json',
                 'Authorization': `Bearer ${token}`
             }
@@ -233,7 +234,10 @@ export const userAPI = {
             });
     },
     getUserArchivePosts: ({type = 'post', locale = 'ru'}: { type?: string, locale: string }): Promise<any> => {
-        return instance.get(`regular/user/archivePosts?itemsPerPage=25&page=1&type=${type}&lang=${locale}`, setTokenToHeader())
+        return instance.get(
+            `regular/user/archivePosts?itemsPerPage=25&page=1&type=${type}&lang=${locale}`,
+            setTokenToHeader()
+        )
             .then(res => res.data)
             .catch(err => {
                 throw err;

@@ -44,6 +44,7 @@ export const ApartmentsParams: FC<RegularFormPropsType> = (props) => {
         lift: values.lift,
         bathroom: values.bathroom,
         balcony: values.balcony,
+        metro: values.metro,
         amenities: values.amenities,
         infrastructure: values.infrastructure
     };
@@ -68,7 +69,7 @@ export const ApartmentsParams: FC<RegularFormPropsType> = (props) => {
                              onBlur={handleBlur}
                              items={filters.material}
                              handleSelect={handleSelect}
-                             errorMsg={getErrorMsg(errors.material as string, touched.material as boolean, t)}
+                             errorMsg={getErrorMsg(errors.material, touched.material, t)}
                          />
                      </Grid>
                      <Grid
@@ -84,9 +85,7 @@ export const ApartmentsParams: FC<RegularFormPropsType> = (props) => {
                              onBlur={handleBlur}
                              items={filters.layout}
                              handleSelect={handleSelect}
-                             errorMsg={
-                                 getErrorMsg(errors.layout as string, touched.layout as boolean, t)
-                             }
+                             errorMsg={getErrorMsg(errors.layout, touched.layout, t)}
                          />
                      </Grid>
                      <Grid
@@ -102,9 +101,7 @@ export const ApartmentsParams: FC<RegularFormPropsType> = (props) => {
                              onBlur={handleBlur}
                              items={filters.repair}
                              handleSelect={handleSelect}
-                             errorMsg={
-                                 getErrorMsg(errors.repair as string, touched.repair as boolean, t)
-                             }
+                             errorMsg={getErrorMsg(errors.repair, touched.repair, t)}
                          />
                      </Grid>
                      <Grid
@@ -117,12 +114,10 @@ export const ApartmentsParams: FC<RegularFormPropsType> = (props) => {
                              t={t}
                              name='lift'
                              values={values}
-                             errorMsg={
-                                 getErrorMsg(errors.lift as string, touched.lift as boolean, t)
-                             }
                              onBlur={handleBlur}
                              items={filters.lift}
                              handleSelect={handleSelect}
+                             errorMsg={getErrorMsg(errors.lift, touched.lift, t)}
                          />
                      </Grid>
                      <Grid
@@ -135,12 +130,10 @@ export const ApartmentsParams: FC<RegularFormPropsType> = (props) => {
                              t={t}
                              name='bathroom'
                              values={values}
-                             errorMsg={
-                                 getErrorMsg(errors.bathroom as string, touched.bathroom as boolean, t)
-                             }
                              onBlur={handleBlur}
                              items={filters.bathroom}
                              handleSelect={handleSelect}
+                             errorMsg={getErrorMsg(errors.bathroom, touched.bathroom, t)}
                          />
                      </Grid>
                      <Grid
@@ -153,12 +146,26 @@ export const ApartmentsParams: FC<RegularFormPropsType> = (props) => {
                              t={t}
                              name='balcony'
                              values={values}
-                             errorMsg={
-                                 getErrorMsg(errors.balcony as string, touched.balcony as boolean, t)
-                             }
                              onBlur={handleBlur}
                              items={filters.balcony}
                              handleSelect={handleSelect}
+                             errorMsg={getErrorMsg(errors.balcony, touched.balcony, t)}
+                         />
+                     </Grid>
+                     <Grid
+                         item
+                         container
+                         sm={4}
+                         xs={12}
+                     >
+                         <CustomSelect
+                             t={t}
+                             name='metro'
+                             values={values}
+                             onBlur={handleBlur}
+                             items={filters.metro}
+                             handleSelect={handleSelect}
+                             errorMsg={getErrorMsg(errors.metro, touched.metro, t)}
                          />
                      </Grid>
                      <OptionsSelect

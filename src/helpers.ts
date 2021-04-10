@@ -233,6 +233,6 @@ export const formatNumber = (number: number): string => (
     number <= 9 ? `0${number}` : number.toString()
 );
 
-export const getErrorMsg = (errorMsg: string, touched: boolean, t: TFunction): string => {
+export const getErrorMsg = (errorMsg, touched, t: TFunction): string => {
     return errorMsg && touched ? t(`errors:${errorMsg}`) : '';
 };

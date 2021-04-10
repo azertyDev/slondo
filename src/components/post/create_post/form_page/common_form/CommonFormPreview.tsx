@@ -14,7 +14,7 @@ type DefaultParamsPropsType = {
     ownerPhone: string
 } & WithT;
 
-export const CommonParamsFormPreview: FC<DefaultParamsPropsType> = (props) => {
+export const CommonFormPreview: FC<DefaultParamsPropsType> = (props) => {
     const {
         t,
         values,

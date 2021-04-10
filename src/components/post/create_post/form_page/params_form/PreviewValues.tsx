@@ -35,23 +35,23 @@ export const PreviewValues: FC<PreviewValuesPropsType> = (props) => {
                                 xs={12}
                             >
                                 {isBoolean
-                                    ? <CustomCheckbox
-                                        t={t}
-                                        disabled
-                                        name={key}
-                                        checked={true}
-                                    />
-                                    : <Typography variant="subtitle1">
-                                        <strong>
-                                            {t(key)}:&nbsp;
-                                        </strong>
-                                        {value}
-                                    </Typography>}
+                                 ? <CustomCheckbox
+                                     disabled
+                                     checked
+                                     name={key}
+                                     labelText={t(key)}
+                                 />
+                                 : <Typography variant="subtitle1">
+                                     <strong>
+                                         {t(key)}:&nbsp;
+                                     </strong>
+                                     {value}
+                                 </Typography>}
                             </Grid>
-                        )
+                        );
                     }
                 }
             )}
         </Grid>
-    )
+    );
 };

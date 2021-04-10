@@ -4,8 +4,8 @@ import {Grid, Typography} from "@material-ui/core";
 import {excludedKeys, optionKeys} from "@src/common_data/form_fields";
 import {CustomSelect} from "@src/components/post/create_post/form_page/components/custom_select/CustomSelect";
 import {getErrorMsg} from "@src/helpers";
-import {useStyles} from "./useStyles";
 import {OptionsSelect} from "@src/components/post/create_post/form_page/components/options_select/OptionsSelect";
+import {useStyles} from "./useStyles";
 
 
 type RegularFormPropsType = {

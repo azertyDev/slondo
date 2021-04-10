@@ -38,6 +38,10 @@ export const postTypes: PostType[] = [
             {
                 id: 2,
                 hours: 15
+            },
+            {
+                id: 7,
+                hours: 5
             }
         ],
         image: {
@@ -63,6 +67,10 @@ export const postTypes: PostType[] = [
             {
                 id: 5,
                 hours: 15
+            },
+            {
+                id: 8,
+                hours: 5
             }
         ],
         image: {

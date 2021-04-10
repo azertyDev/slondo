@@ -17,9 +17,9 @@ import {RootState} from "@src/redux/rootReducer";
 import {PostType} from "@root/interfaces/Post";
 import {WEEK_DAYS} from "@src/common_data/common";
 import {StateIcon} from '@src/components/elements/icons';
-import {LocationAutocomplete} from "@src/components/post/create_post/form_page/common_params_form/location/LocationAutocomplete";
+import {LocationAutocomplete} from "@src/components/post/create_post/form_page/common_form/location/LocationAutocomplete";
 import {CustomSelect} from "@src/components/post/create_post/form_page/components/custom_select/CustomSelect";
-import {CommonParamsFormPreview} from "@src/components/post/create_post/form_page/common_params_form/CommonParamsFormPreview";
+import {CommonFormPreview} from "@src/components/post/create_post/form_page/common_form/CommonFormPreview";
 import {CustomFormikField} from "@src/components/elements/custom_formik_field/CustomFormikField";
 import {useStyles} from './useStyles';
 
@@ -35,7 +35,7 @@ type DefaultParamsPropsType = {
     ownerPhone: string
 } & WithT;
 
-export const CommonParamsForm: FC<DefaultParamsPropsType> = (props) => {
+export const CommonForm: FC<DefaultParamsPropsType> = (props) => {
     const {
         t,
         isPreview,
@@ -111,7 +111,9 @@ export const CommonParamsForm: FC<DefaultParamsPropsType> = (props) => {
                 if (price_buy_now.isActive) {
                     otherAuctionData.price_buy_now = clearWhiteSpaces(price_buy_now.value);
                 }
-                otherAuctionData.reserve_price = clearWhiteSpaces(reserve_price);
+                if (reserve_price) {
+                    otherAuctionData.reserve_price = clearWhiteSpaces(reserve_price);
+                }
                 otherAuctionData.auto_renewal = auto_renewal;
                 otherAuctionData.offer_the_price = offer_the_price;
             }
@@ -283,7 +285,7 @@ export const CommonParamsForm: FC<DefaultParamsPropsType> = (props) => {
                 >
                     <div className={classes.root}>
                         {isPreview
-                         ? <CommonParamsFormPreview
+                         ? <CommonFormPreview
                              t={t}
                              values={values}
                              isAuction={isAuction}
@@ -307,7 +309,7 @@ export const CommonParamsForm: FC<DefaultParamsPropsType> = (props) => {
                                       handleCheckboxChange={handleCheckboxChange}
                                   />
                               </div>
-                              : <Grid container alignItems='flex-end'>
+                              : <Grid container alignItems='center'>
                                   <Grid item xs={3}>
                                       <CustomFormikField
                                           name='price'
@@ -315,9 +317,7 @@ export const CommonParamsForm: FC<DefaultParamsPropsType> = (props) => {
                                           value={values.price}
                                           onChange={handleInput}
                                           style={{width: '270px'}}
-                                          errorMsg={
-                                              getErrorMsg(errors.price as string, touched.price as boolean, t)
-                                          }
+                                          errorMsg={getErrorMsg(errors.price, touched.price, t)}
                                       />
                                   </Grid>
                                   <Grid item xs={1}>
@@ -343,7 +343,7 @@ export const CommonParamsForm: FC<DefaultParamsPropsType> = (props) => {
                                  <LocationAutocomplete
                                      name='location'
                                      errorMsg={
-                                         getErrorMsg(errors.location as string, touched.location as boolean, t)
+                                         getErrorMsg(errors.location, touched.location, t)
                                      }
                                      value={values.location}
                                      locations={locations.data}
@@ -357,9 +357,7 @@ export const CommonParamsForm: FC<DefaultParamsPropsType> = (props) => {
                                      handleInput={handleInput}
                                      handleBlur={handleBlur}
                                      description={values.description}
-                                     errorMsg={
-                                         getErrorMsg(errors.description as string, touched.description as boolean, t)
-                                     }
+                                     errorMsg={getErrorMsg(errors.description, touched.description, t)}
                                  />
                              </div>
                              <Grid

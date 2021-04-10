@@ -1,14 +1,14 @@
 import React, {FC, useEffect, useState} from 'react';
-import {Typography} from "@material-ui/core";
 import {useRouter} from "next/router";
+import {Typography} from "@material-ui/core";
+import {useTranslation} from "next-i18next";
 import {useDispatch, useSelector} from "react-redux";
 import {userAPI} from '@src/api/api';
 import {Steps} from '../steps/Steps';
-import {useTranslation} from "next-i18next";
 import {postTypes} from '@src/common_data/post_types';
 import {MainLayout} from '@src/components/MainLayout';
 import {AppearanceForm} from './appearance_form/AppearanceForm';
-import {CommonParamsForm} from './common_params_form/CommonParamsForm';
+import {CommonForm} from './common_form/CommonForm';
 import {setErrorMsgAction} from '@root/src/redux/slices/errorSlice';
 import {dataForCrtPostNormalize, getCategoriesByParams, CategoriesParamsType} from '@src/helpers';
 import {ButtonComponent} from "@src/components/elements/button/Button";
@@ -187,7 +187,7 @@ export const FormPage: FC = () => {
                          />
                      </div>
                      <div>
-                         <CommonParamsForm
+                         <CommonForm
                              t={t}
                              post={post}
                              ownerPhone={phone}

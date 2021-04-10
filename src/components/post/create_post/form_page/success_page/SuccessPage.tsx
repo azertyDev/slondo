@@ -48,7 +48,7 @@ export const SuccessPage: FC = () => {
                     className={classes.buttonBlock}
                 >
                     <Grid item xs={6} sm={2}>
-                        <Link href="/create/type">
+                        <Link href="/create/type/select" shallow>
                             <a>
                                 <ButtonComponent style={{color: '#fff'}}>
                                     Создать еще
@@ -66,9 +66,6 @@ export const SuccessPage: FC = () => {
                         </Link>
                     </Grid>
                 </Grid>
-                {/* <Grid item container xs={12} direction="row" justify="center">
-                    <CardView />
-                </Grid> */}
             </Grid>
         </div>
     );
