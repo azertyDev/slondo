@@ -20,6 +20,35 @@ export const useStyles = makeStyles((theme) => ({
                 }
             }
         },
+        '& div.post-type-adaptive': {
+            '& .MuiTypography-h6': {
+                padding: '0px 20px',
+                lineHeight: '30px',
+                borderRadius: '5px',
+                fontWeight: '600',
+                color: '#fff',
+                [theme.breakpoints.down('md')]: {
+                    width: "100%",
+                    textAlign: 'center',
+                    margin: '-3px 0px 14px 0px',
+                    fontWeight: '400',
+                    borderRadius: '0px 0px 5px 5px',
+                    fontSize: 'calc(12px + 8 * (100vw / 1280))'
+                },
+                '&.post': {
+                    background: 'rgba(136, 202, 236, 0.65)',
+                    [theme.breakpoints.down('md')]: {
+                        background: 'rgba(136, 202, 236, 0.85)'
+                    }
+                },
+                '&.auc': {
+                    background: 'rgba(173, 102, 213, 0.65)'
+                },
+                '&.exauc': {
+                    background: 'rgba(242, 153, 74, 0.65)'
+                }
+            }
+        },
         '& .post-header': {
             display: 'flex',
             marginBottom: '10px',
@@ -36,19 +65,8 @@ export const useStyles = makeStyles((theme) => ({
                     borderRadius: '5px',
                     fontWeight: '600',
                     color: '#fff',
-                    [theme.breakpoints.down('md')]: {
-                        width: "100%",
-                        textAlign: 'center',
-                        margin: '-3px 0px 14px 0px',
-                        fontWeight: '400',
-                        borderRadius: '0px 0px 5px 5px',
-                        fontSize: 'calc(12px + 8 * (100vw / 1280))'
-                    },
                     '&.post': {
-                        background: 'rgba(136, 202, 236, 0.65)',
-                        [theme.breakpoints.down('md')]: {
-                            background: 'rgba(136, 202, 236, 0.85)'
-                        }
+                        background: 'rgba(136, 202, 236, 0.65)'
                     },
                     '&.auc': {
                         background: 'rgba(173, 102, 213, 0.65)'
@@ -301,12 +319,12 @@ export const useStyles = makeStyles((theme) => ({
             }
         },
         '& div.contact': {
-            // '& .btn-buy-now': {
-            //     border: '1px solid #2F80ED !important',
-            //     '& h6': {
-            //         color: '#2F80ED !important'
-            //     }
-            // },
+            '& .btn-buy-now': {
+                border: '1px solid #2F80ED !important',
+                '& h6': {
+                    color: '#2F80ED !important'
+                }
+            },
             display: 'flex',
             marginBottom: '30px',
             '& button': {
@@ -326,6 +344,7 @@ export const useStyles = makeStyles((theme) => ({
                     padding: '11px 44px',
                     background: '#fff',
                     border: '1px solid #845CAB',
+                    marginRight: 0,
                     '& h6': {
                         color: '#845CAB'
                     }
@@ -570,6 +589,23 @@ export const useStyles = makeStyles((theme) => ({
                 borderRadius: '3px'
             }
         },
+        '& .floating-auc': {
+            position: 'fixed',
+            zIndex: '100',
+            bottom: 0,
+            left: 0,
+            right: 0,
+            width: '100%',
+            padding: '13px 7px 14px 17px',
+            display: 'flex',
+            background: '#494A61',
+            '& button': {
+                width: '50%',
+                color: '#FFFFFF',
+                background: 'linear-gradient(49.94deg, #675EAA 19.03%, #AD66D5 72.72%)',
+                borderRadius: '3px'
+            }
+        },
         '& div.btn-follow': {
             boxShadow: '0px -1px 4px rgba(0, 0, 0, 0.04), 0px 1px 4px rgba(0, 0, 0, 0.04)',
             marginBottom: '36px',
@@ -689,4 +725,4 @@ export const useStyles = makeStyles((theme) => ({
             backgroundColor: '#C0C0C0'
         }
     }
-}))
+}));

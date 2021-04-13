@@ -1,4 +1,4 @@
-import {makeStyles, fade} from '@material-ui/core/styles'
+import {makeStyles, fade} from '@material-ui/core/styles';
 
 export const useStyles = makeStyles((theme) => ({
     root: {
@@ -95,9 +95,15 @@ export const useStyles = makeStyles((theme) => ({
                                         display: 'flex',
                                         justifyContent: 'space-between',
                                         width: '80%',
+                                        [theme.breakpoints.down('md')]: {
+                                            justifyContent: 'flex-start'
+                                        },
                                         '& > h6.bet-time': {
                                             color: '#2F80ED',
-                                            fontSize: '0.875rem'
+                                            fontSize: '0.875rem',
+                                            [theme.breakpoints.down('md')]: {
+                                                marginRight: '30px'
+                                            }
                                         },
                                         '& > h6.bet-date': {
                                             color: 'rgba(49, 49, 49, 0.6)',

@@ -44,7 +44,7 @@ export const PostContent: FC<WithT & any> = (props) => {
         slidersRefs,
         parameters,
         descHeight
-    } = props
+    } = props;
 
     const theme = useTheme();
     const isLg = useMediaQuery(theme.breakpoints.down('md'));
@@ -56,23 +56,23 @@ export const PostContent: FC<WithT & any> = (props) => {
         openSnackbar: false,
         vertical: 'top',
         horizontal: 'right'
-    })
-    const {openModal, openSliderModal, openSnackbar, horizontal, vertical} = state
+    });
+    const {openModal, openSliderModal, openSnackbar, horizontal, vertical} = state;
     const date = new Date(data.created_at);
-    const formatted_date = `${date.getDate()} ${months[date.getMonth()]} ${date.getFullYear()}`
-    const handleShowSliderModal = value => () => setState({...state, openSliderModal: value})
+    const formatted_date = `${date.getDate()} ${months[date.getMonth()]} ${date.getFullYear()}`;
+    const handleShowSliderModal = value => () => setState({...state, openSliderModal: value});
     const handleOpenModal = () => {
-        setState({...state, openModal: true})
-    }
+        setState({...state, openModal: true});
+    };
     const handleCloseModal = () => {
-        setState({...state, openModal: false})
-    }
+        setState({...state, openModal: false});
+    };
     const handleOpenSnackbar = (newState) => () => {
-        setState({openSnackbar: true, ...newState})
-    }
+        setState({openSnackbar: true, ...newState});
+    };
     const handleCloseSnackbar = () => {
-        setState({...state, openSnackbar: false})
-    }
+        setState({...state, openSnackbar: false});
+    };
     const parameterItems = Object.keys(parameters).reduce((items, key, i) => {
         if (Array.isArray(parameters[key]) && parameters[key].length !== 0) {
             const params = (
@@ -83,7 +83,7 @@ export const PostContent: FC<WithT & any> = (props) => {
                             .join(', ')}
                     </Typography>
                 </li>
-            )
+            );
             items.push(
                 <div key={i} className="params-list">
                     <Typography variant="subtitle1" className="key">
@@ -91,7 +91,7 @@ export const PostContent: FC<WithT & any> = (props) => {
                     </Typography>
                     <ul>{params}</ul>
                 </div>
-            )
+            );
         } else if (!Array.isArray(parameters[key])) {
             items.push(
                 <li key={key}>
@@ -116,12 +116,12 @@ export const PostContent: FC<WithT & any> = (props) => {
                             : parameters[key]?.name}
                     </Typography>
                 </li>
-            )
+            );
         }
-        return items
-    }, [])
+        return items;
+    }, []);
 
-    const classes = useStyles()
+    const classes = useStyles();
     return (
         <div className={classes.root}>
             <Hidden mdDown>
@@ -193,10 +193,8 @@ export const PostContent: FC<WithT & any> = (props) => {
                     imgs={data.images}
                     handleOpenModal={handleShowSliderModal(true)}
                 />
-            </div>
-            <Hidden lgUp>
-                <div className="post-header">
-                    <div className='post-type'>
+                <Hidden lgUp>
+                    <div className='post-type-adaptive'>
                         <Typography
                             variant="h6"
                             className={data.ads_type.mark}
@@ -204,238 +202,262 @@ export const PostContent: FC<WithT & any> = (props) => {
                             {t(`common:${data.ads_type.mark}`)}
                         </Typography>
                     </div>
-                    <div>
-                        <Typography variant='h6' className="price">
-                            {numberPrettier(data.price) + ' ' + data.currency.name}
-                            {!data.condition.name && (
-                                <div className="condition">
-                                    <Typography variant="h6">Новое</Typography>
-                                </div>
-                            )}
-                        </Typography>
-                        <Typography variant="h2" className="title" noWrap>
-                            {data.title}
-                        </Typography>
+                </Hidden>
+            </div>
+            <Container maxWidth="xl" disableGutters={!isLg}>
+                <Hidden lgUp>
+                    <div className="post-header">
+                        <div>
+                            <Typography variant='h6' className="price">
+                                {numberPrettier(data.price) + ' ' + data.currency.name}
+                                {!data.condition.name && (
+                                    <div className="condition">
+                                        <Typography variant="h6">Новое</Typography>
+                                    </div>
+                                )}
+                            </Typography>
+                            <Typography variant="h2" className="title" noWrap>
+                                {data.title}
+                            </Typography>
+                        </div>
                     </div>
-                </div>
-            </Hidden>
-            <Hidden mdDown>
-                <div className="post-info">
-                    <Typography variant="subtitle1">
-                        <span>Объявление №:</span> {data.id}
-                    </Typography>
-                    <Typography variant="subtitle1">
-                        Опубликовано: {formatted_date}
-                    </Typography>
-                    <Typography variant="subtitle1">
-                        Просмотров: {data.number_of_views}
-                    </Typography>
-                    <Typography variant="subtitle1" onClick={handleOpenModal}>
-                        Пожаловаться <WarningIcon/>
-                    </Typography>
-                </div>
-            </Hidden>
-            <div className="post-bonus">
-                {data.ads_type.mark === 'exauc' && isLg && (
-                    <div className="reserve">
-                        <LockIcon/>
-                        <Typography variant="subtitle2" color="initial">
-                            Резервная цена: <br/>{numberPrettier(data.auction.reserve_price)} {data.currency.name}
-                        </Typography>
-                    </div>
-                )}
-                {!!data.delivery && (
-                    <span className="delivery">
-                        <DeliveryIcon/>&nbsp;
+                </Hidden>
+                <Hidden mdDown>
+                    <div className="post-info">
                         <Typography variant="subtitle1">
+                            <span>Объявление №:</span> {data.id}
+                        </Typography>
+                        <Typography variant="subtitle1">
+                            Опубликовано: {formatted_date}
+                        </Typography>
+                        <Typography variant="subtitle1">
+                            Просмотров: {data.number_of_views}
+                        </Typography>
+                        <Typography variant="subtitle1" onClick={handleOpenModal}>
+                            Пожаловаться <WarningIcon/>
+                        </Typography>
+                    </div>
+                </Hidden>
+                <div className="post-bonus">
+                    {data.ads_type.mark === 'exauc' && isLg && (
+                        <div className="reserve">
+                            <LockIcon/>
+                            <Typography variant="subtitle2" color="initial">
+                                Резервная цена: <br/>{numberPrettier(data.auction.reserve_price)} {data.currency.name}
+                            </Typography>
+                        </div>
+                    )}
+                    {!!data.delivery && (
+                        <span className="delivery">
+                        <DeliveryIcon/>&nbsp;
+                            <Typography variant="subtitle1">
                             Есть доставка
                         </Typography>
                     </span>
-                )}
-                {!!data.safe_deal && (
-                    <span className="safe_deal">
+                    )}
+                    {!!data.safe_deal && (
+                        <span className="safe_deal">
                         <SafeIcon/>&nbsp;
-                        <Typography variant="subtitle1">
+                            <Typography variant="subtitle1">
                             Безопасная покупка
                         </Typography>
                     </span>
-                )}
-                {!!data.exchange && (
-                    <span className="exchange">
+                    )}
+                    {!!data.exchange && (
+                        <span className="exchange">
                         <SwapIcon/>&nbsp;
-                        <Typography variant="subtitle1">
+                            <Typography variant="subtitle1">
                             Возможен обмен
                         </Typography>
                     </span>
-                )}
-                {!!data.available_start_time && (
-                    <span className="available">
+                    )}
+                    {!!data.available_start_time && (
+                        <span className="available">
                         <PhoneIcon/>
-                        {!!data.available_days?.length && (
-                            <Typography variant="subtitle1" color="primary">
-                                {weekDaysHelper(data.available_days, t)}&nbsp;
-                            </Typography>
-                        )}
-                        <Typography variant="subtitle1">
+                            {!!data.available_days?.length && (
+                                <Typography variant="subtitle1" color="primary">
+                                    {weekDaysHelper(data.available_days, t)}&nbsp;
+                                </Typography>
+                            )}
+                            <Typography variant="subtitle1">
                             {`${data.available_start_time} - ${data.available_end_time}`}
                         </Typography>
                     </span>
-                )}
-            </div>
-            <Hidden lgUp>
-                {data.ads_type.mark === 'post' && (
-                    <div className="contact">
-                        <ButtonComponent>
-                            <Typography variant='subtitle1'>Позвонить</Typography>
-                        </ButtonComponent>
-                        <ButtonComponent>
-                            <Typography variant='subtitle1'>Написать</Typography>
-                        </ButtonComponent>
-                    </div>
-                )}
-                {data.ads_type.mark === 'auc' && (
-                    <div className="contact">
-                        <ButtonComponent>
-                            <Typography variant='subtitle1'>Позвонить</Typography>
-                        </ButtonComponent>
-                        <ButtonComponent>
-                            <Typography variant='subtitle1'>Написать</Typography>
-                        </ButtonComponent>
-                    </div>
-                )}
-                {data.ads_type.mark === 'exauc' && (
-                    <div className="contact">
-                        <ButtonComponent>
-                            <Typography variant='subtitle1'>Предложить цену</Typography>
-                        </ButtonComponent>
-                        <ButtonComponent className="btn-buy-now">
-                            <Typography variant='subtitle2'>Купить сейчас</Typography>
-                        </ButtonComponent>
-                    </div>
-                )}
-
-            </Hidden>
-            <div className="post-location">
-                <Hidden mdDown>
-                    <Typography variant="button" noWrap>
-                        Местоположение
-                    </Typography>
-                </Hidden>
-                {data.region.name || data.city.name || data.district.name
-                    ? <div className='location-text'>
-                        <LocationIcon/>
-                        <Typography variant="subtitle1">
-                            {`${data.region.name ?? ''}`}
-                            {data.city.name ? `, ${data.city.name}` : ''}
-                            {data.district.name ? `, ${data.district.name}` : ''}
-                        </Typography>
-                    </div>
-                    : <Typography variant="subtitle1">Не указано</Typography>}
-            </div>
-            <Hidden mdDown>
-                <div className="post-category">
-                    <Typography variant="button" color="initial">
-                        Категория
-                    </Typography>
-                    <div>
-                        <Typography variant="subtitle1" color="initial">
-                            {data.category.name}
-                            {<>&nbsp;- {data.adsable.sub_category.name}</>}
-                            {parameters.type && <>&nbsp;- <span>{parameters.type.name}</span></>}
-                        </Typography>
-                    </div>
+                    )}
                 </div>
-            </Hidden>
-            <div className="post-description">
-                <Hidden mdDown>
-                    <Typography variant="button" color="initial">
-                        Описание
-                    </Typography>
+                <Hidden lgUp>
+                    {data.ads_type.mark === 'post' && (
+                        <div className="contact">
+                            <ButtonComponent>
+                                <Typography variant='subtitle1'>Позвонить</Typography>
+                            </ButtonComponent>
+                            <ButtonComponent>
+                                <Typography variant='subtitle1'>Написать</Typography>
+                            </ButtonComponent>
+                        </div>
+                    )}
+                    {data.ads_type.mark === 'auc' && (
+                        <div className="contact">
+                            <ButtonComponent>
+                                <Typography variant='subtitle1'>Позвонить</Typography>
+                            </ButtonComponent>
+                            <ButtonComponent>
+                                <Typography variant='subtitle1'>Написать</Typography>
+                            </ButtonComponent>
+                        </div>
+                    )}
+                    {data.ads_type.mark === 'exauc' && (
+                        <div className="contact">
+                            <ButtonComponent>
+                                <Typography variant='subtitle1'>Предложить цену</Typography>
+                            </ButtonComponent>
+                            <ButtonComponent>
+                                <Typography variant='subtitle2'>Написать</Typography>
+                            </ButtonComponent>
+                            {/*<ButtonComponent className="btn-buy-now">*/}
+                            {/*    <Typography variant='subtitle2'>Купить сейчас</Typography>*/}
+                            {/*</ButtonComponent>*/}
+
+                        </div>
+                    )}
+
                 </Hidden>
-                <ReadMore t={t} descHeight={descHeight}>
-                    <Typography
-                        className='description'
-                        variant="subtitle1"
-                        id="post-description"
-                    >
-                        {data.description}
-                    </Typography>
-                </ReadMore>
-            </div>
-            {(data.ads_type.mark === 'auc' || data.ads_type.mark === 'exauc') && (
-                <div className="started-price">
-                    <Typography variant="button">Стартовая цена</Typography>
-                    <span>
+                <div className="post-location">
+                    <Hidden mdDown>
+                        <Typography variant="button" noWrap>
+                            Местоположение
+                        </Typography>
+                    </Hidden>
+                    {data.region.name || data.city.name || data.district.name
+                        ? <div className='location-text'>
+                            <LocationIcon/>
+                            <Typography variant="subtitle1">
+                                {`${data.region.name ?? ''}`}
+                                {data.city.name ? `, ${data.city.name}` : ''}
+                                {data.district.name ? `, ${data.district.name}` : ''}
+                            </Typography>
+                        </div>
+                        : <Typography variant="subtitle1">Не указано</Typography>}
+                </div>
+                <Hidden mdDown>
+                    <div className="post-category">
+                        <Typography variant="button" color="initial">
+                            Категория
+                        </Typography>
+                        <div>
+                            <Typography variant="subtitle1" color="initial">
+                                {data.category.name}
+                                {<>&nbsp;- {data.adsable.sub_category.name}</>}
+                                {parameters.type && <>&nbsp;- <span>{parameters.type.name}</span></>}
+                            </Typography>
+                        </div>
+                    </div>
+                </Hidden>
+                <div className="post-description">
+                    <Hidden mdDown>
+                        <Typography variant="button" color="initial">
+                            Описание
+                        </Typography>
+                    </Hidden>
+                    <ReadMore t={t} descHeight={descHeight}>
+                        <Typography
+                            className='description'
+                            variant="subtitle1"
+                            id="post-description"
+                        >
+                            {data.description}
+                        </Typography>
+                    </ReadMore>
+                </div>
+                {(data.ads_type.mark === 'auc' || data.ads_type.mark === 'exauc') && (
+                    <div className="started-price">
+                        <Typography variant="button">Стартовая цена</Typography>
+                        <span>
                         <Typography variant="body2">
                             {numberPrettier(data.price)} {data.currency.name}
                         </Typography>
                     </span>
-                </div>
-            )}
-            {!!parameterItems.length && (
-                <div className="post-parameters">
-                    <Hidden mdDown>
-                        <Typography variant="button" color="initial">
-                            Параметры
-                        </Typography>
-                    </Hidden>
-                    <ul>{parameterItems}</ul>
-                </div>
-            )}
-            <Hidden lgUp>
-                <div className="post-info">
-                    <div className='info-wrapper'>
-                        <Typography variant="subtitle1">
-                            <span>Объяление №:</span> {data.id}
-                        </Typography>
-                        <Hidden xsDown>
-                            <Typography variant="subtitle1">
-                                Опубликовано: {formatted_date}
-                            </Typography>
-                        </Hidden>
-                        <Hidden smUp>
-                            <Typography variant="subtitle1">
-                                {formatted_date}
-                            </Typography>
-                        </Hidden>
-                        <Typography variant="subtitle1">
-                            Просмотров: {data.number_of_views}
-                        </Typography>
-                        <Hidden mdDown>
-                            <Typography variant="subtitle1" onClick={handleOpenModal}>
-                                Пожаловаться <WarningIcon/>
-                            </Typography>
-                        </Hidden>
-                    </div>
-                    <ButtonComponent className="btn-report" onClick={handleOpenModal}>
-                        Пожаловаться
-                    </ButtonComponent>
-                </div>
-            </Hidden>
-
-            <Hidden lgUp>
-                {data.ads_type.mark === 'post' && (
-                    <div className='floating'>
-                        <div className="floating-text">
-                            <SafeIcon/>
-                            <Typography variant='subtitle2'>
-                                Безопасная покупка <br/>
-                                за 420 000 сум
-                            </Typography>
-                        </div>
-                        <ButtonComponent>
-                            Купить
-                        </ButtonComponent>
                     </div>
                 )}
-            </Hidden>
-            <ModalSyncSliders
-                slidersRefs={slidersRefs}
-                open={openSliderModal}
-                title={data.title}
-                imgs={data.images}
-                onClose={handleShowSliderModal(false)}
-            />
+                {!!parameterItems.length && (
+                    <div className="post-parameters">
+                        <Hidden mdDown>
+                            <Typography variant="button" color="initial">
+                                Параметры
+                            </Typography>
+                        </Hidden>
+                        <ul>{parameterItems}</ul>
+                    </div>
+                )}
+                <Hidden lgUp>
+                    <div className="post-info">
+                        <div className='info-wrapper'>
+                            <Typography variant="subtitle1">
+                                <span>Объяление №:</span> {data.id}
+                            </Typography>
+                            <Hidden xsDown>
+                                <Typography variant="subtitle1">
+                                    Опубликовано: {formatted_date}
+                                </Typography>
+                            </Hidden>
+                            <Hidden smUp>
+                                <Typography variant="subtitle1">
+                                    {formatted_date}
+                                </Typography>
+                            </Hidden>
+                            <Typography variant="subtitle1">
+                                Просмотров: {data.number_of_views}
+                            </Typography>
+                            <Hidden mdDown>
+                                <Typography variant="subtitle1" onClick={handleOpenModal}>
+                                    Пожаловаться <WarningIcon/>
+                                </Typography>
+                            </Hidden>
+                        </div>
+                        <ButtonComponent className="btn-report" onClick={handleOpenModal}>
+                            Пожаловаться
+                        </ButtonComponent>
+                    </div>
+                </Hidden>
+
+                <Hidden lgUp>
+                    {data.ads_type.mark === 'post' && (
+                        <div className='floating'>
+                            <div className="floating-text">
+                                <SafeIcon/>
+                                <Typography variant='subtitle2'>
+                                    Безопасная покупка <br/>
+                                    за 420 000 сум
+                                </Typography>
+                            </div>
+                            <ButtonComponent>
+                                Купить
+                            </ButtonComponent>
+                        </div>
+                    )}
+                    {data.ads_type.mark !== 'post' && (
+                        <div className='floating-auc'>
+                            <div className="floating-content">
+                                <TextField id="standard-basic" placeholder="Введите сумму"/>
+                                <ButtonComponent>
+                                    Сделать ставку
+                                </ButtonComponent>
+                            </div>
+                            <Typography variant='subtitle2'>
+                                Максимальня возможная ставка
+                                20 000 009
+                            </Typography>
+                        </div>
+                    )}
+                </Hidden>
+                <ModalSyncSliders
+                    slidersRefs={slidersRefs}
+                    open={openSliderModal}
+                    title={data.title}
+                    imgs={data.images}
+                    onClose={handleShowSliderModal(false)}
+                />
+            </Container>
             <Modal
                 className={classes.modal}
                 open={openModal}
@@ -500,5 +522,5 @@ export const PostContent: FC<WithT & any> = (props) => {
                 </div>
             </Snackbar>
         </div>
-    )
-}
+    );
+};
