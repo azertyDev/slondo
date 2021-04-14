@@ -28,8 +28,8 @@ export const UserInfoWithAvatar: FC<UserInfoWithAvatarPropsType> = ({ isOwner, o
                 </div>
                 <div>
                     <Typography variant="subtitle1" color="initial">
-                        {owner.name !== null && owner.name}
-                        {owner.name !== null && owner.surname}
+                        {owner.name ?? ''}
+                        {owner.surname ?? ''}
                     </Typography>
                     <Typography variant="subtitle1" color="initial">
                         {t('created_at', {
