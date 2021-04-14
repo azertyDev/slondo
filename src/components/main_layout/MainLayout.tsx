@@ -1,7 +1,7 @@
 import React, {FC} from 'react';
 import Head from 'next/head';
-import {Header} from './header/Header';
-import {Footer} from './footer/Footer';
+import {Header} from '../header/Header';
+import {Footer} from '../footer/Footer';
 import {Container} from '@material-ui/core';
 import {ErrorModal} from '@src/components/error_modal/ErrorModal';
 import {defaultSEOContent} from "@src/common_data/seo_content";
