@@ -34,7 +34,7 @@ export const FormPage: FC = () => {
     const {t} = useTranslation(['post', 'errors']);
     const {phone} = useSelector((store: RootState) => store.user.info);
 
-    const {asPath, query, locale, push} = useRouter();
+    const {asPath, query, push} = useRouter();
     const [postTypeName, categoryName, subCategoryName, typeName] = query.slug as string[];
 
     const {category, subCategory, type} = getCategoriesByParams(
@@ -98,7 +98,7 @@ export const FormPage: FC = () => {
                 isFetch: true
             });
 
-            const fetchedData = await userAPI.getDataForCreatePost(category.id, subCtgrId, typeId, locale);
+            const fetchedData = await userAPI.getDataForCreatePost(category.id, subCtgrId, typeId);
 
             setFilters({
                 isFetch: false,

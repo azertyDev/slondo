@@ -13,7 +13,7 @@ export const fetchLocations = createAsyncThunk<LocationsDataTypes, string>(
     'locations/fetchLocations',
     async (lang, {rejectWithValue}) => {
         try {
-            return await userAPI.getLocations(lang);
+            return await userAPI.getLocations();
         } catch (e) {
             return rejectWithValue(e.message);
         }

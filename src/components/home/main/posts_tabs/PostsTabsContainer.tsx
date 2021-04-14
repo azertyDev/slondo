@@ -23,8 +23,6 @@ const initCardData: CardData = {
 export const PostsTabsContainer: FC<WithT> = ({t}) => {
     const dispatch = useDispatch();
 
-    const {locale} = useRouter();
-
     const [tabValue, setTabValue] = useState(0);
 
     const [postCurrentPage, setPostCurrentPage] = useState(1);
@@ -41,7 +39,7 @@ export const PostsTabsContainer: FC<WithT> = ({t}) => {
                 isShowMoreFetch: true,
             });
 
-            const newData = await userAPI.getCards(ITEMS_PER_PAGE, currentPage, type, locale);
+            const newData = await userAPI.getCards(ITEMS_PER_PAGE, currentPage, type);
 
             setState({
                 ...state,
@@ -82,7 +80,7 @@ export const PostsTabsContainer: FC<WithT> = ({t}) => {
         auctionCurrentPage !== 1 && setAuctionCurrentPage(1);
         setCardData(postCardData, setPostCardData, 1, 'post');
         setCardData(auctionCardData, setAuctionCardData, 1, 'auc');
-    }, [locale]);
+    }, []);
 
     return (
         <PostsTabs
