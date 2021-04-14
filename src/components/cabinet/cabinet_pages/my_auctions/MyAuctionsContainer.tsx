@@ -7,7 +7,7 @@ import {useRouter} from 'next/router';
 import {useDispatch} from 'react-redux';
 import {setErrorMsgAction} from '@root/src/redux/slices/errorSlice';
 import {useTranslation} from 'next-i18next';
-import {Box, IconButton, List, ListItem, ListItemText, Typography} from '@material-ui/core';
+import {Box, Grid, IconButton, List, ListItem, ListItemText, Typography} from '@material-ui/core';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import {InitialCabinetCardState, InitValuesType, OffersStateType, TabsDataType} from '@root/interfaces/Cabinet.js';
 import {UserInfo} from '@root/interfaces/Auth';
@@ -16,6 +16,7 @@ import {UserInfoWithAvatar} from '@src/components/elements/user_info_with_avatar
 import {ButtonComponent} from '@src/components/elements/button/Button';
 import {CloseIcon, DoneAllIcon} from '@src/components/elements/icons';
 import {CabinetCard} from '@src/components/cabinet/cabinet_card/CabinetCard';
+import {SecondaryCabinetCard} from '@src/components/cabinet/components/SecondaryCabinetCard';
 
 export const MyAuctionsContainer: FC = () => {
     const dispatch = useDispatch();
@@ -96,7 +97,6 @@ export const MyAuctionsContainer: FC = () => {
             user: initialUserInfo
         }]
     };
-
     const [auctionData, setAuctionData] = useState(initialState);
     const [participatingData, setParticipatingData] = useState(initialState);
     const [offersData, setOffersData] = useState(initialOffersState);
@@ -104,7 +104,11 @@ export const MyAuctionsContainer: FC = () => {
     const [openModal, setOpenModal] = useState(false);
     const [tabIndex, setTabIndex] = useState(0);
     const [modalContentIndex, setModalContentIndex] = useState(1);
+    const [showPhone, setShowPhone] = React.useState(false);
 
+    const handleShowPhone = () => {
+        setShowPhone(!showPhone);
+    };
     const handleTabChange = (event, newValue) => {
         setTabIndex(newValue);
     };
@@ -153,12 +157,12 @@ export const MyAuctionsContainer: FC = () => {
             const isCreatedAuction = type === 'auc';
             if (isCreatedAuction) {
                 setAuctionData({ ...auctionData, isFetch: true });
-                const { data, total } = await userAPI.getMyPosts({ type, locale });
-                setAuctionData({ myPosts: { data, total }, isFetch: true });
+                const { data, total } = await userAPI.getMyPosts({ type, locale, onlySecure: 0 });
+                setAuctionData({ myPosts: { data, total }, isFetch: false });
             } else {
                 setParticipatingData({ ...auctionData, isFetch: true });
                 const { data, total, message } = await userAPI.getAuctionSubs(locale);
-                !message && setParticipatingData({ myPosts: { data, total }, isFetch: true });
+                !message && setParticipatingData({ myPosts: { data, total }, isFetch: false });
             }
         } catch (e) {
             dispatch(setErrorMsgAction(e));
@@ -318,18 +322,67 @@ export const MyAuctionsContainer: FC = () => {
         fetchAuctionData();
     }, []);
 
-    const auctionCard = (data, isFetch) => (
-        <CabinetCard
-            list={data}
-            isFetch={isFetch}
-            handleModalOpen={handleOpenModal}
-            handleDeactivate={handleDeactivate}
-            handleAcceptVictory={handleAcceptVictory}
-            fetchAllOffers={fetchAllOffers}
-            offersData={offersData}
-            acceptOfferThePrice={acceptOfferThePrice}
-        />
-    );
+    const creatorAuctionCards = auctionData.myPosts.data.map(data => (
+        <Box mb={3} key={data.id}>
+            <Grid container>
+                <Grid item xs={9}>
+                    <CabinetCard
+                        cardData={data}
+                        handleModalOpen={handleOpenModal}
+                    />
+                    {data.auction.winner && (
+                        <Box mt={1}>
+                            <ButtonComponent className='end-auction' onClick={handleDeactivate(data.auction.id)}>
+                                <Typography variant='subtitle1'>
+                                    Завершить аукцион
+                                </Typography>
+                            </ButtonComponent>
+                        </Box>
+                    )}
+                </Grid>
+                <Grid item xs={3}>
+                    <SecondaryCabinetCard
+                        user={data.auction.winner}
+                        offersData={offersData}
+                        acceptOfferThePrice={acceptOfferThePrice}
+                        fetchAllOffers={fetchAllOffers}
+                        handleShowPhone={handleShowPhone}
+                        showPhone={showPhone}
+                    />
+                </Grid>
+            </Grid>
+        </Box>
+    ));
+
+    const participantsAuctionCards = participatingData.myPosts.data.map(data => (
+        <Box mb={3} key={data.id}>
+            <Grid container>
+                <Grid item xs={9}>
+                    <CabinetCard
+                        cardData={data}
+                        handleModalOpen={handleOpenModal}
+                    />
+                    {!data.creator && data.auction.is_accepted === null && (
+                        <Box mt={1}>
+                            <ButtonComponent onClick={handleAcceptVictory(data.auction.id, true)}>
+                                <Typography variant='subtitle1'>Принять</Typography>
+                            </ButtonComponent>
+                            <ButtonComponent onClick={handleAcceptVictory(data.auction.id, false)}>
+                                <Typography variant='subtitle1'>Отказать</Typography>
+                            </ButtonComponent>
+                        </Box>
+                    )}
+                </Grid>
+                <Grid item xs={3}>
+                    <SecondaryCabinetCard
+                        user={data.author}
+                        handleShowPhone={handleShowPhone}
+                        showPhone={showPhone}
+                    />
+                </Grid>
+            </Grid>
+        </Box>
+    ));
 
     const tabsData: TabsDataType = [
         {
@@ -338,12 +391,11 @@ export const MyAuctionsContainer: FC = () => {
             total: auctionData.myPosts.total,
             component:
                 <MyAuctions
+                    isFetch={auctionData.isFetch}
+                    openModal={openModal}
                     ModalContent={ModalContent}
                     handleClose={handleModalClose}
-                    openModal={openModal}
-                    auctionCard={
-                        auctionCard(auctionData.myPosts.data, auctionData.isFetch)
-                    }
+                    auctionCards={creatorAuctionCards}
                 />
         },
         {
@@ -352,12 +404,11 @@ export const MyAuctionsContainer: FC = () => {
             total: participatingData.myPosts.total,
             component:
                 <MyAuctions
+                    isFetch={auctionData.isFetch}
+                    openModal={openModal}
                     ModalContent={ModalContent}
                     handleClose={handleModalClose}
-                    openModal={openModal}
-                    auctionCard={
-                        auctionCard(participatingData.myPosts.data, participatingData.isFetch)
-                    }
+                    auctionCards={participantsAuctionCards}
                 />
         }
     ];

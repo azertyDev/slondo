@@ -1,43 +1,30 @@
-import React, {FC, ReactElement} from 'react';
-import {useStyles} from './useStyles';
-import {CabinetCard} from '@src/components/cabinet/cabinet_card/CabinetCard';
+import React, {FC, ReactElement, ReactNode} from 'react';
 import {CustomModal} from '@src/components/elements/custom_modal/CustomModal';
-import {CardDataType} from '@root/interfaces/Cabinet';
 
 type MyPostsPropsType = {
-    isFetch: boolean;
-    list: CardDataType[];
     openModal: boolean;
-    handleModalOpen: (id) => () => void;
     handleModalClose: () => void;
     ModalContent: () => ReactElement;
+    myPostCards: ReactNode;
 }
 
 export const MyPosts: FC<MyPostsPropsType> = (props) => {
     const {
-        isFetch,
-        list,
         openModal,
-        handleModalOpen,
         handleModalClose,
-        ModalContent
+        ModalContent,
+        myPostCards
     } = props;
 
-    const classes = useStyles();
-
     return (
-        <div className={classes.root}>
-            <CabinetCard
-                list={list}
-                isFetch={isFetch}
-                handleModalOpen={handleModalOpen}
-            />
+        <>
+            {myPostCards}
             <CustomModal
                 handleModalClose={handleModalClose}
                 openModal={openModal}
             >
                 <ModalContent />
             </CustomModal>
-        </div>
+        </>
     );
 };

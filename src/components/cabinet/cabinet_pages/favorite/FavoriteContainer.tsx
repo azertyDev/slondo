@@ -6,11 +6,14 @@ import {userAPI} from '@src/api/api';
 import {useDispatch} from 'react-redux';
 import {setErrorMsgAction} from '@src/redux/slices/errorSlice';
 import {useRouter} from 'next/router';
-import {IconButton, List, ListItem, ListItemText, Typography} from '@material-ui/core';
+import {Box, Grid, IconButton, List, ListItem, ListItemText, Typography} from '@material-ui/core';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import {useStyles} from './useStyles';
 import {InitialCabinetCardState, TabsDataType} from '@root/interfaces/Cabinet';
 import {useTranslation} from 'next-i18next';
+import {CabinetCard} from '@src/components/cabinet/cabinet_card/CabinetCard';
+import {ButtonComponent} from '@src/components/elements/button/Button';
+import {SecondaryCabinetCard} from '@src/components/cabinet/components/SecondaryCabinetCard';
 
 const FavoriteContainer: FC = () => {
     const dispatch = useDispatch();
@@ -131,11 +134,36 @@ const FavoriteContainer: FC = () => {
         </>
     );
 
-
     useEffect(() => {
         fetchFavoriteData('post');
         fetchFavoriteData('auc');
     }, []);
+
+    const favoritePostCards = favoritePostData.myPosts.data.map(data => (
+        <Box mb={3} key={data.id}>
+            <Grid container>
+                <Grid item xs={9}>
+                    <CabinetCard
+                        cardData={data}
+                        handleModalOpen={handleModalOpen}
+                    />
+                </Grid>
+            </Grid>
+        </Box>
+    ));
+
+    const favoriteAucCards = favoriteAucData.myPosts.data.map(data => (
+        <Box mb={3} key={data.id}>
+            <Grid container>
+                <Grid item xs={9}>
+                    <CabinetCard
+                        cardData={data}
+                        handleModalOpen={handleModalOpen}
+                    />
+                </Grid>
+            </Grid>
+        </Box>
+    ));
 
     const tabsData: TabsDataType = [
         {
@@ -144,8 +172,7 @@ const FavoriteContainer: FC = () => {
             total: favoritePostData.myPosts.total,
             component: (
                 <Favorite
-                    isFetch={favoritePostData.isFetch}
-                    list={favoritePostData.myPosts.data}
+                    favoriteCards={favoritePostCards}
                     handleClose={handleModalClose}
                     handleModalOpen={handleModalOpen}
                     openModal={openModal}
@@ -159,8 +186,7 @@ const FavoriteContainer: FC = () => {
             total: favoriteAucData.myPosts.total,
             component: (
                 <Favorite
-                    isFetch={favoriteAucData.isFetch}
-                    list={favoriteAucData.myPosts.data}
+                    favoriteCards={favoriteAucCards}
                     handleClose={handleModalClose}
                     handleModalOpen={handleModalOpen}
                     openModal={openModal}

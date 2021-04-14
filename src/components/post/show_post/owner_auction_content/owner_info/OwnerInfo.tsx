@@ -4,8 +4,8 @@ import {ButtonComponent} from '@src/components/elements/button/Button';
 import {SafeIcon} from '@root/src/components/elements/icons';
 import {UserInfoWithAvatar} from '@src/components/elements/user_info_with_avatar/UserInfoWithAvatar';
 import {SocialsBlock} from '@root/src/components/elements/socials_block/SocialsBlock';
-import {useStyles} from './useStyles';
 import {UserInfo} from '@root/interfaces/Auth';
+import {useStyles} from './useStyles';
 
 type OwnerPropsType = {
     safe_deal: number,

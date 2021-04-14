@@ -4,14 +4,17 @@ import {i18n, useTranslation} from 'next-i18next';
 import {userAPI} from '@src/api/api';
 import {setErrorMsgAction} from '@src/redux/slices/errorSlice';
 import {useDispatch} from 'react-redux';
-import {MainLayout} from '@src/components/MainLayout';
-import {Grid, Hidden} from '@material-ui/core';
+import {Container, Grid, Hidden, useMediaQuery, useTheme} from '@material-ui/core';
 import {PostContent} from '@src/components/post/show_post/post_content/PostContent';
 import {OwnerAuctionContent} from '@src/components/post/show_post/owner_auction_content/OwnerAuctionContent';
 import {Banner} from '@src/components/elements/banner/Banner';
-import {useStyles} from './useStyles';
 import {AuctionInfo} from '@src/components/post/show_post/owner_auction_content/auction_info/AuctionInfo';
 import {OwnerInfo} from '@src/components/post/show_post/owner_auction_content/owner_info/OwnerInfo';
+import Head from 'next/head';
+import {Header} from '@src/components/header/Header';
+import {Footer} from '@src/components/footer/Footer';
+import {ErrorModal} from '@src/components/error_modal/ErrorModal';
+import {useStyles} from './useStyles';
 
 
 export type SlidersRefType = {
@@ -23,14 +26,14 @@ export type SlidersRefType = {
 
 export const ShowPostContainer: FC = () => {
     const dispatch = useDispatch();
-    const { t } = useTranslation(['post']);
+    const {t} = useTranslation(['post']);
     const router = useRouter();
     const lang = i18n.language;
     const url = useRouter().query.url as string;
     const splittedUrl = url.split('-');
     const params = splittedUrl.splice(-3);
 
-    const initValues = { id: null, name: '' };
+    const initValues = {id: null, name: ''};
 
     const initialPostData = {
         isFetch: false,
@@ -153,16 +156,16 @@ export const ShowPostContainer: FC = () => {
     };
     const handleSuggestPrice = async () => {
         try {
-            setOfferPrice({ ...offerPrice, isFetch: true });
+            setOfferPrice({...offerPrice, isFetch: true});
             await userAPI.offerThePrice(postData.data.auction.id, offerPrice.price);
-            setOfferPrice({ price: null, isFetch: false });
+            setOfferPrice({price: null, isFetch: false});
             setOpenModal(false);
         } catch (e) {
             dispatch(setErrorMsgAction(e.message));
         }
     };
-    const handleTextField = ({ target }) => {
-        setOfferPrice({ ...offerPrice, price: target.value });
+    const handleTextField = ({target}) => {
+        setOfferPrice({...offerPrice, price: target.value});
     };
     const refreshAucBets = async () => {
         try {
@@ -170,7 +173,7 @@ export const ShowPostContainer: FC = () => {
                 ...auctionsBetsList,
                 isFetch: true
             });
-            const { data } = await userAPI.getAuctionBets(postData.data.auction.id, 1);
+            const {data} = await userAPI.getAuctionBets(postData.data.auction.id, 1);
             setAuctionBetsList({
                 ...auctionsBetsList,
                 isFetch: false,
@@ -186,7 +189,7 @@ export const ShowPostContainer: FC = () => {
                 ...auctionsBetsList,
                 isFetch: true
             });
-            const { data, last_page } = await userAPI.getAuctionBets(postData.data.auction.id, page);
+            const {data, last_page} = await userAPI.getAuctionBets(postData.data.auction.id, page);
             setAuctionBetsList({
                 ...auctionsBetsList,
                 isFetch: false,
@@ -285,6 +288,8 @@ export const ShowPostContainer: FC = () => {
         />
     );
 
+    const theme = useTheme();
+    const isMdDown = useMediaQuery(theme.breakpoints.down('md'));
 
     useEffect(() => {
         setSlidersRefs(initSlidersRefs);
@@ -306,9 +311,21 @@ export const ShowPostContainer: FC = () => {
 
     const classes = useStyles();
     return (
-        <MainLayout title={postData.data.title}>
-            <div className={classes.root}>
-                <Grid container spacing={2}>
+        <>
+            <Head>
+                <title>Slondo - доска объявлений</title>
+                <meta name="robots" content="noindex"/>
+            </Head>
+            <Hidden mdDown>
+                <Header/>
+            </Hidden>
+            <Container
+                maxWidth="xl"
+                className={classes.root}
+                style={{paddingTop: `${isMdDown ? 0 : '48px'}`, position: 'relative'}}
+                disableGutters={isMdDown}
+            >
+                <Grid container spacing={isMdDown ? 0 : 2}>
                     <Grid item xs={12} lg={9}>
                         <PostContent
                             t={t}
@@ -318,26 +335,24 @@ export const ShowPostContainer: FC = () => {
                             slidersRefs={slidersRefs}
                         />
                     </Grid>
-                    <Hidden mdDown>
-                        <Grid item lg={3}>
-                            <OwnerAuctionContent
-                                t={t}
-                                postData={postData.data}
-                                handleFollow={handleFollow}
-                                openModal={openModal}
-                                page={page}
-                                list={auctionsBetsList.list}
-                                lastPage={lastPage}
-                                auctionInfo={auctionInfo}
-                                ownerInfo={ownerInfo}
-                            />
+                    <Grid item lg={3} xs={12}>
+                        <OwnerAuctionContent
+                            t={t}
+                            postData={postData.data}
+                            handleFollow={handleFollow}
+                            auctionInfo={auctionInfo}
+                            ownerInfo={ownerInfo}
+                        />
+                        <Hidden mdDown>
                             <div className={classes.adBanner}>
-                                <Banner height="424px" />
+                                <Banner height="424px"/>
                             </div>
-                        </Grid>
-                    </Hidden>
+                        </Hidden>
+                    </Grid>
                 </Grid>
-            </div>
-        </MainLayout>
+            </Container>
+            {/*<Footer/>*/}
+            <ErrorModal/>
+        </>
     );
 };

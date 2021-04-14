@@ -1,11 +1,13 @@
 import React, {FC, ReactElement, ReactNode} from 'react';
 import {CustomModal} from '@src/components/elements/custom_modal/CustomModal';
+import {CircularProgress} from '@material-ui/core';
 
 type MyAuctionsPropsType = {
+    isFetch: boolean
     handleClose: () => void,
     openModal: boolean,
     ModalContent: () => ReactElement,
-    auctionCard: ReactNode
+    auctionCards: ReactNode
 }
 
 export const MyAuctions: FC<MyAuctionsPropsType> = (props) => {
@@ -13,12 +15,13 @@ export const MyAuctions: FC<MyAuctionsPropsType> = (props) => {
         handleClose,
         openModal,
         ModalContent,
-        auctionCard
+        auctionCards,
+        isFetch
     } = props;
 
     return (
         <>
-            {auctionCard}
+            {isFetch ? <CircularProgress color="secondary" /> : auctionCards}
             <CustomModal
                 handleModalClose={handleClose}
                 openModal={openModal}

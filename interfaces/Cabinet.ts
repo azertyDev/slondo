@@ -9,7 +9,6 @@ export type TabsDataType = {
     component: ReactElement,
 }[];
 
-
 export interface InitialCabinetCardState {
     isFetch: boolean,
     myPosts: {

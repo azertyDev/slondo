@@ -2,12 +2,13 @@ import React, {FC} from 'react';
 import {WithT} from 'i18next';
 import Link from 'next/link';
 import {
-    Backdrop, Container,
+    Backdrop,
+    Container,
     Hidden,
     List,
     ListItem,
     ListItemText,
-    Modal, Slide,
+    Modal,
     Snackbar,
     TextField,
     Typography, useMediaQuery, useTheme
@@ -112,8 +113,8 @@ export const PostContent: FC<WithT & any> = (props) => {
                     )}
                     <Typography variant="subtitle1" className="value">
                         {typeof parameters[key] === 'string' || typeof parameters[key] === 'number'
-                            ? parameters[key]
-                            : parameters[key]?.name}
+                         ? parameters[key]
+                         : parameters[key]?.name}
                     </Typography>
                 </li>
             );
@@ -286,7 +287,6 @@ export const PostContent: FC<WithT & any> = (props) => {
                     )}
                 </div>
                 <Hidden lgUp>
-
                     {data.ads_type.mark === 'post' && (
                         <div className="contact">
                             <ButtonComponent>
@@ -318,10 +318,8 @@ export const PostContent: FC<WithT & any> = (props) => {
                             {/*<ButtonComponent className="btn-buy-now">*/}
                             {/*    <Typography variant='subtitle2'>Купить сейчас</Typography>*/}
                             {/*</ButtonComponent>*/}
-
                         </div>
                     )}
-
                 </Hidden>
                 <div className="post-location">
                     <Hidden mdDown>
@@ -330,15 +328,15 @@ export const PostContent: FC<WithT & any> = (props) => {
                         </Typography>
                     </Hidden>
                     {data.region.name || data.city.name || data.district.name
-                        ? <div className='location-text'>
-                            <LocationIcon/>
-                            <Typography variant="subtitle1">
-                                {`${data.region.name ?? ''}`}
-                                {data.city.name ? `, ${data.city.name}` : ''}
-                                {data.district.name ? `, ${data.district.name}` : ''}
-                            </Typography>
-                        </div>
-                        : <Typography variant="subtitle1">Не указано</Typography>}
+                     ? <div className='location-text'>
+                         <LocationIcon/>
+                         <Typography variant="subtitle1">
+                             {`${data.region.name ?? ''}`}
+                             {data.city.name ? `, ${data.city.name}` : ''}
+                             {data.district.name ? `, ${data.district.name}` : ''}
+                         </Typography>
+                     </div>
+                     : <Typography variant="subtitle1">Не указано</Typography>}
                 </div>
                 <Hidden mdDown>
                     <div className="post-category">
@@ -420,7 +418,6 @@ export const PostContent: FC<WithT & any> = (props) => {
                         </ButtonComponent>
                     </div>
                 </Hidden>
-
                 <Hidden lgUp>
                     {data.ads_type.mark === 'post' && (
                         <div className='floating'>

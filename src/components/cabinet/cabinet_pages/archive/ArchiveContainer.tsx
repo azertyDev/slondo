@@ -7,12 +7,13 @@ import {setErrorMsgAction} from '@src/redux/slices/errorSlice';
 import {useRouter} from 'next/router';
 import {useDispatch} from 'react-redux';
 import {UserInfo} from '@root/interfaces/Auth';
-import {IconButton, List, ListItem, ListItemText, Typography} from '@material-ui/core';
+import {Box, Grid, IconButton, List, ListItem, ListItemText, Typography} from '@material-ui/core';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import {useTranslation} from 'next-i18next';
 import {useStyles} from '@src/components/cabinet/cabinet_pages/my_posts/useStyles';
 import {InitialCabinetCardState, TabsDataType} from '@root/interfaces/Cabinet';
 import {CabinetCard} from '@src/components/cabinet/cabinet_card/CabinetCard';
+import {SecondaryCabinetCard} from '@src/components/cabinet/components/SecondaryCabinetCard';
 
 
 export type ArchivePostData = {
@@ -249,13 +250,37 @@ const ArchiveContainer: FC = () => {
         </>
     );
 
-    const archiveCard = (data, isFetch) => (
-        <CabinetCard
-            list={data}
-            isFetch={isFetch}
-            handleModalOpen={handleOpenModal}
-        />
-    );
+    const archivePostCard = archivePostsData.myPosts.data.map(data => (
+        <Box mb={3} key={data.id}>
+            <Grid container>
+                <Grid item xs={9}>
+                    <CabinetCard
+                        cardData={data}
+                        handleModalOpen={handleOpenModal}
+                    />
+                    <Box>Buttons</Box>
+                </Grid>
+            </Grid>
+        </Box>
+    ));
+
+    const archiveAucCard = archiveAucData.myPosts.data.map(data => (
+        <Box mb={3} key={data.id}>
+            <Grid container>
+                <Grid item xs={9}>
+                    <CabinetCard
+                        cardData={data}
+                        handleModalOpen={handleOpenModal}
+                    />
+                </Grid>
+                <Grid item xs={3}>
+                    <SecondaryCabinetCard
+                        user={data.auction}
+                    />
+                </Grid>
+            </Grid>
+        </Box>
+    ));
 
     const tabsData: TabsDataType = [
         {
@@ -267,9 +292,7 @@ const ArchiveContainer: FC = () => {
                     ModalContent={ModalContent}
                     handleModalClose={handleCloseModal}
                     openModal={openModal}
-                    archiveCard={
-                        archiveCard(archivePostsData.myPosts.data, archivePostsData.isFetch)
-                    }
+                    archiveCard={archivePostCard}
                 />
         },
         {
@@ -281,9 +304,7 @@ const ArchiveContainer: FC = () => {
                     ModalContent={ModalContent}
                     handleModalClose={handleCloseModal}
                     openModal={openModal}
-                    archiveCard={
-                        archiveCard(archiveAucData.myPosts.data, archiveAucData.isFetch)
-                    }
+                    archiveCard={archiveAucCard}
                 />
         }
     ];
