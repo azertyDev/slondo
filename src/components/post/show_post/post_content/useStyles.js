@@ -554,11 +554,6 @@ export const useStyles = makeStyles((theme) => ({
             position: 'absolute',
             marginTop: '-10px'
         },
-        '& .slider-wrapper': {
-            [theme.breakpoints.down('md')]: {
-                filter: 'drop-shadow(0px 1px 8px rgba(0, 0, 0, 0.35))'
-            }
-        },
         '& .floating': {
             position: 'fixed',
             zIndex: '100',

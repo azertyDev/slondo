@@ -286,6 +286,7 @@ export const PostContent: FC<WithT & any> = (props) => {
                     )}
                 </div>
                 <Hidden lgUp>
+
                     {data.ads_type.mark === 'post' && (
                         <div className="contact">
                             <ButtonComponent>

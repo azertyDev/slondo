@@ -3,6 +3,7 @@ import {makeStyles} from '@material-ui/core/styles';
 export const useStyles = makeStyles((theme) => ({
     root: {
         position: 'relative',
+        filter: 'drop-shadow(0px 1px 8px rgba(0, 0, 0, 0.35))',
         '& button': {
             '&.slick-prev': {
                 left: '25px'
@@ -40,7 +41,7 @@ export const useStyles = makeStyles((theme) => ({
                 [theme.breakpoints.down('xs')]: {
                     width: '32px',
                     height: '32px',
-                    right: 10,
+                    right: 10
                 }
             },
             '& svg': {

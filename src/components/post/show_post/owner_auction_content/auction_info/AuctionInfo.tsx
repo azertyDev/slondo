@@ -1,5 +1,5 @@
 import React, {FC, useEffect, useState} from 'react';
-import {Typography} from '@material-ui/core';
+import {Hidden, Typography} from '@material-ui/core';
 import {ButtonComponent} from '@src/components/elements/button/Button';
 import {LockIcon, RefreshIcon} from '@src/components/elements/icons';
 import {AuctionTimer} from './AuctionTimer';
@@ -32,9 +32,9 @@ export const AuctionInfo: FC<any> = (props) => {
             .then(result => result && userAPI.getAuctionBets(data.auction.id, 1)
                 .then(result => {
                     setLastPage(result.last_page);
-                    setList(result.data)
+                    setList(result.data);
                 }))
-            .catch(error => dispatch(setErrorMsgAction(t(`auction:${error.response.data.message}`))))
+            .catch(error => dispatch(setErrorMsgAction(t(`auction:${error.response.data.message}`))));
     };
 
     const handleScroll = (e) => {
@@ -47,15 +47,15 @@ export const AuctionInfo: FC<any> = (props) => {
     const handleRefresh = () => {
         userAPI.getAuctionBets(data.auction.id, 1)
             .then(result => setList(result.data))
-            .catch(err => dispatch(setErrorMsgAction(err.message)))
+            .catch(err => dispatch(setErrorMsgAction(err.message)));
     };
 
     useEffect(() => {
         userAPI.getAuctionBets(data.auction.id, page)
             .then(result => {
-                setLastPage(result.last_page)
-                setList(prev => [...prev, ...result.data])
-            })
+                setLastPage(result.last_page);
+                setList(prev => [...prev, ...result.data]);
+            });
     }, [page]);
 
     const classes = useStyles();
