@@ -9,9 +9,8 @@ export const UserSubscribers: FC<any> = ({ subscribers , handleFollow}) => {
         <div className={classes.root}>
             {subscribers.map(subscriber => (
                 <SubscriptionItem
-                    isOwner={false}
-                    key={subscriber.id}
                     {...subscriber}
+                    key={subscriber.id}
                     handleFollow={handleFollow}
                 />)
             )}

@@ -14,5 +14,4 @@ export type SubscriberType = {
     user_id: number,
     user?: UserInfo,
     handleFollow: (user_id) => () => void,
-    isOwner: boolean
 }

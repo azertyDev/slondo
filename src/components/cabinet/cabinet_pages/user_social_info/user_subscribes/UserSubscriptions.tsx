@@ -3,14 +3,12 @@ import {SubscriptionItem} from '@src/components/cabinet/cabinet_pages/user_socia
 import {useStyles} from './useStyles';
 
 export const UserSubscriptions: FC<any> = ({ subscriptions, handleFollow }) => {
-
     const classes = useStyles();
     return (
         <div className={classes.root}>
             {subscriptions.map(subscription => (
                 <SubscriptionItem
                     {...subscription}
-                    isOwner={true}
                     key={subscription.id}
                     handleFollow={handleFollow}
                 />)

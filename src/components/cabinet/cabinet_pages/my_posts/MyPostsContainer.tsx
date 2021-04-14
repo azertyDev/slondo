@@ -5,7 +5,6 @@ import {withAuthRedirect} from '@src/hoc/withAuthRedirect';
 import {userAPI} from '@src/api/api';
 import {setErrorMsgAction} from '@src/redux/slices/errorSlice';
 import {useDispatch} from 'react-redux';
-import {useRouter} from 'next/router';
 import {
     Avatar,
     Box,
@@ -29,7 +28,6 @@ import {SecondaryCabinetCard} from '@src/components/cabinet/components/Secondary
 
 const MyPostsContainer: FC = () => {
     const dispatch = useDispatch();
-    const { locale } = useRouter();
     const { t } = useTranslation('cabinet');
     const classes = useStyles();
 
@@ -191,11 +189,11 @@ const MyPostsContainer: FC = () => {
         try {
             if (onlySecure) {
                 setSecurePosts({ ...postData, isFetch: true });
-                const { data, total } = await userAPI.getMyPosts({ type: 'post', onlySecure, locale });
+                const { data, total } = await userAPI.getMyPosts({ type: 'post', onlySecure });
                 setSecurePosts({ myPosts: { data, total }, isFetch: false });
             } else {
                 setPostData({ ...postData, isFetch: true });
-                const { data, total } = await userAPI.getMyPosts({ type: 'post', onlySecure, locale });
+                const { data, total } = await userAPI.getMyPosts({ type: 'post', onlySecure });
                 setPostData({ myPosts: { data, total }, isFetch: false });
             }
         } catch (e) {

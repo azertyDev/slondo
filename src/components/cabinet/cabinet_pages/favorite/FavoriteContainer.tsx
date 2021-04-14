@@ -5,19 +5,15 @@ import {withAuthRedirect} from '@root/src/hoc/withAuthRedirect';
 import {userAPI} from '@src/api/api';
 import {useDispatch} from 'react-redux';
 import {setErrorMsgAction} from '@src/redux/slices/errorSlice';
-import {useRouter} from 'next/router';
 import {Box, Grid, IconButton, List, ListItem, ListItemText, Typography} from '@material-ui/core';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import {useStyles} from './useStyles';
 import {InitialCabinetCardState, TabsDataType} from '@root/interfaces/Cabinet';
 import {useTranslation} from 'next-i18next';
 import {CabinetCard} from '@src/components/cabinet/cabinet_card/CabinetCard';
-import {ButtonComponent} from '@src/components/elements/button/Button';
-import {SecondaryCabinetCard} from '@src/components/cabinet/components/SecondaryCabinetCard';
 
 const FavoriteContainer: FC = () => {
     const dispatch = useDispatch();
-    const { locale } = useRouter();
     const { t } = useTranslation('cabinet');
     const classes = useStyles();
 
@@ -54,11 +50,11 @@ const FavoriteContainer: FC = () => {
             const isPost = type === 'post';
             if (isPost) {
                 setFavoritePostData({ ...favoritePostData, isFetch: true });
-                const { data, total } = await userAPI.getFavorites({ locale });
+                const { data, total } = await userAPI.getFavorites({type});
                 setFavoritePostData({ myPosts: { data, total }, isFetch: false });
             } else {
                 setFavoriteAucData({ ...favoriteAucData, isFetch: true });
-                const { data, total } = await userAPI.getFavorites({ type, locale });
+                const { data, total } = await userAPI.getFavorites({ type });
                 setFavoriteAucData({ myPosts: { data, total }, isFetch: false });
             }
         } catch (e) {
