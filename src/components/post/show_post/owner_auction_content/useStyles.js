@@ -1,6 +1,6 @@
-import { makeStyles } from '@material-ui/core/styles';
+import {makeStyles} from '@material-ui/core/styles';
 
-export const useStyles = makeStyles(() => ({
+export const useStyles = makeStyles((theme) => ({
     root: {
         marginTop: '20px',
         '& > div.price': {
@@ -9,13 +9,16 @@ export const useStyles = makeStyles(() => ({
                 '& span': {
                     fontWeight: '600',
                     fontSize: 36,
+                    [theme.breakpoints.down('lg')]: {
+                        fontSize: '30px'
+                    }
                 },
                 textAlign: 'end',
-                fontSize: 25,
-            },
+                fontSize: 25
+            }
         },
         '& div.social-block': {
-            width: '100%',
-        },
+            width: '100%'
+        }
     }
 }));

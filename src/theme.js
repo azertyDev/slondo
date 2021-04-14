@@ -90,7 +90,6 @@ const theme = createMuiTheme({
             fontWeight: '600',
             textTransform: 'none'
         }
-        
     },
     overrides: {
         MuiCssBaseline: {
@@ -115,7 +114,10 @@ const theme = createMuiTheme({
                     }
                 },
                 body: {
-                    backgroundColor: '#fafafa'
+                    backgroundColor: '#fafafa',
+                    '@media (max-width: 991px)': {
+                        fontFamily: ['Roboto', 'Helvetica', 'Arial', 'sans-serif']
+                    }
                 },
                 input: {
                     WebkitBoxShadow: "0 0 0 1000px white inset"

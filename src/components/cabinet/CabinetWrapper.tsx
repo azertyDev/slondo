@@ -1,6 +1,6 @@
 import React, {FC} from 'react';
 import {Grid, Typography} from '@material-ui/core';
-import {MainLayout} from '@src/components/MainLayout';
+import {MainLayout} from '@src/components/main_layout/MainLayout';
 import {CabinetSidebar} from './cabinet_sidebar/CabinetSidebar';
 import {useStyles} from './useStyles';
 import {useSelector} from 'react-redux';

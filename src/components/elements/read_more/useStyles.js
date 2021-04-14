@@ -1,6 +1,6 @@
 import { makeStyles } from '@material-ui/core';
 
-export const useStyles = makeStyles(() => ({
+export const useStyles = makeStyles((theme) => ({
     root: {
         '& h6.MuiTypography-subtitle1': {
             lineHeight: '22px',
@@ -11,6 +11,9 @@ export const useStyles = makeStyles(() => ({
             padding: '5px 0',
             display: 'flex',
             justifyContent: 'flex-start',
+            [theme.breakpoints.down('md')]: {
+               width: 'auto'
+            },
             '& > h6.MuiTypography-subtitle1': {
                 color: '#675EAA',
                 '& > svg': {

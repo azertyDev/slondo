@@ -1,4 +1,4 @@
-import {makeStyles, fade} from '@material-ui/core/styles'
+import {makeStyles, fade} from '@material-ui/core/styles';
 
 export const useStyles = makeStyles((theme) => ({
     root: {
@@ -7,8 +7,8 @@ export const useStyles = makeStyles((theme) => ({
             '& > div': {
                 marginBottom: 20,
                 '&:last-child': {
-                    margin: 0,
-                },
+                    margin: 0
+                }
             },
             '& div.reserve-price': {
                 display: 'flex',
@@ -23,9 +23,9 @@ export const useStyles = makeStyles((theme) => ({
                     alignItems: 'center',
                     marginLeft: 10,
                     '& > h6.MuiTypography-subtitle2': {
-                        color: '#666666',
-                    },
-                },
+                        color: '#666666'
+                    }
+                }
             },
             '& div.buy-now': {
                 background: '#F2F2F2',
@@ -37,15 +37,15 @@ export const useStyles = makeStyles((theme) => ({
                 alignItems: 'center',
                 '& > h6.MuiTypography-subtitle1': {
                     fontSize: '1.125rem',
-                    textAlign: 'center',
+                    textAlign: 'center'
                 },
                 '& > button': {
                     background: theme.palette.primary.createAdBtnColor,
                     padding: '14px 10px',
                     '& > h6.MuiTypography-subtitle1': {
-                        color: '#fff',
-                    },
-                },
+                        color: '#fff'
+                    }
+                }
             },
             '& div.lot-participants-block': {
                 display: 'flex',
@@ -58,11 +58,11 @@ export const useStyles = makeStyles((theme) => ({
                     '&:last-child': {
                         padding: '10px 15px 0',
                         color: '#675EAA',
-                        textDecorationLine: 'underline',
-                    },
+                        textDecorationLine: 'underline'
+                    }
                 },
                 '& h6.all-bets': {
-                    fontWeight: '400',
+                    fontWeight: '400'
                 },
                 '& > div.participants': {
                     padding: '15px',
@@ -87,23 +87,29 @@ export const useStyles = makeStyles((theme) => ({
                                         '& > h6.MuiTypography-subtitle1': {
                                             color: '#666666',
                                             '& > span': {
-                                                color: '#AD66D5',
-                                            },
-                                        },
+                                                color: '#AD66D5'
+                                            }
+                                        }
                                     },
                                     '& div.dateAndTime': {
                                         display: 'flex',
                                         justifyContent: 'space-between',
                                         width: '80%',
+                                        [theme.breakpoints.down('md')]: {
+                                            justifyContent: 'flex-start'
+                                        },
                                         '& > h6.bet-time': {
                                             color: '#2F80ED',
                                             fontSize: '0.875rem',
+                                            [theme.breakpoints.down('md')]: {
+                                                marginRight: '30px'
+                                            }
                                         },
                                         '& > h6.bet-date': {
                                             color: 'rgba(49, 49, 49, 0.6)',
-                                            fontSize: '0.875rem',
-                                        },
-                                    },
+                                            fontSize: '0.875rem'
+                                        }
+                                    }
                                 },
                                 '&:last-child': {
                                     textAlign: 'end',
@@ -112,7 +118,7 @@ export const useStyles = makeStyles((theme) => ({
                                         fontWeight: '600',
                                         '&.final-bet': {
                                             color: 'rgba(49, 49, 49, 0.6)',
-                                            marginBottom: '10px',
+                                            marginBottom: '10px'
                                         },
                                         '&.per-bet': {
                                             color: '#BDBDBD',
@@ -122,9 +128,9 @@ export const useStyles = makeStyles((theme) => ({
                                                 fontWeight: 600,
                                                 color: '#BB6BD9'
                                             }
-                                        },
-                                    },
-                                },
+                                        }
+                                    }
+                                }
                             },
                             '&:after': {
                                 content: '""',
@@ -136,13 +142,13 @@ export const useStyles = makeStyles((theme) => ({
                                 width: '100%',
                                 background: '#333',
                                 backgroundColor:
-                                    'linear-gradient(90deg, rgba(243, 243, 243, 0) -4.72%, rgba(204, 204, 204, 0.69) 47.81%, rgba(248, 248, 248, 0) 104.92%)',
+                                    'linear-gradient(90deg, rgba(243, 243, 243, 0) -4.72%, rgba(204, 204, 204, 0.69) 47.81%, rgba(248, 248, 248, 0) 104.92%)'
                             },
                             '&:last-child': {
                                 '&:after': {
-                                    display: 'none',
+                                    display: 'none'
                                 },
-                                paddingBottom: '0',
+                                paddingBottom: '0'
                             },
                             '&:first-child': {
                                 '& > div': {
@@ -150,19 +156,19 @@ export const useStyles = makeStyles((theme) => ({
                                         '& > h6': {
                                             fontWeight: '600',
                                             '&.final-bet': {
-                                                color: '#666666',
+                                                color: '#666666'
                                             },
                                             '&.per-bet': {
                                                 color: '#90BE27',
-                                                fontWeight: '600',
-                                            },
-                                        },
-                                    },
-                                },
-                            },
-                        },
-                    },
-                },
+                                                fontWeight: '600'
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
             },
             '& div.bet-info': {
                 flexDirection: 'column',
@@ -178,19 +184,19 @@ export const useStyles = makeStyles((theme) => ({
                             background: '#fff',
                             borderRadius: '3px',
                             '& input': {
-                                padding: '15px 20px',
-                            },
-                        },
+                                padding: '15px 20px'
+                            }
+                        }
                     },
                     '& > button': {
                         margin: '5px 0',
-                        border: '1px solid #AD66D5',
+                        border: '1px solid #AD66D5'
                     },
                     '&:nth-child(2)': {
                         textAlign: 'center',
                         '& > h6.MuiTypography-subtitle2:last-child': {
-                            color: '#845CAB',
-                        },
+                            color: '#845CAB'
+                        }
                     },
                     '&:nth-child(3)': {
                         justifyContent: 'flex-start',
@@ -198,22 +204,22 @@ export const useStyles = makeStyles((theme) => ({
                             borderRadius: '3px',
                             margin: 0,
                             '& > h6.MuiTypography-subtitle1': {
-                                color: theme.palette.primary.white,
-                            },
-                        },
-                    },
-                },
+                                color: theme.palette.primary.white
+                            }
+                        }
+                    }
+                }
             },
             '& div.suggest_price': {
                 '& > button': {
                     width: '100%',
                     background: '#675EAA',
                     '& > h6.MuiTypography-subtitle1': {
-                        color: '#fff',
-                    },
-                },
-            },
-        },
+                        color: '#fff'
+                    }
+                }
+            }
+        }
     },
     lotTimer: {
         padding: '15px 30px 8px 30px',
@@ -223,7 +229,7 @@ export const useStyles = makeStyles((theme) => ({
             textAlign: 'center',
             fontSize: '1.125rem',
             fontWeight: '600',
-            lineHeight: 1,
+            lineHeight: 1
         },
         '& > div': {
             display: 'flex',
@@ -231,17 +237,23 @@ export const useStyles = makeStyles((theme) => ({
             '& div.timer-title': {
                 textAlign: 'center',
                 marginBottom: 10,
-                '& span.MuiTypography-button': {},
+                '& span.MuiTypography-button': {}
             },
             '& > span': {
                 display: 'inline-block',
                 fontSize: '24px',
                 fontWeight: '600',
-                lineHeight: 'normal',
+                lineHeight: 'normal'
             },
             '& > div:last-child': {
                 display: 'flex',
                 justifyContent: 'space-between',
+                [theme.breakpoints.between('sm', 'md')]: {
+                    justifyContent: 'center',
+                    '& span': {
+                        margin: '-1px 20px'
+                    }
+                },
                 '& > div': {
                     textAlign: 'center',
                     '& span': {
@@ -256,21 +268,21 @@ export const useStyles = makeStyles((theme) => ({
                             height: '38px',
                             '& h6.MuiTypography-h6': {
                                 fontWeight: '600',
-                                color: '#FFFFFF',
+                                color: '#FFFFFF'
                             },
                             '&.disabled': {
-                                background: '#BDBDBD',
-                            },
-                        },
-                    },
+                                background: '#BDBDBD'
+                            }
+                        }
+                    }
                 },
                 '& > span': {
                     marginTop: '5px',
                     fontSize: '24px',
                     fontWeight: '600'
                 }
-            },
-        },
+            }
+        }
     },
     modalBody: {
         textAlign: 'center',

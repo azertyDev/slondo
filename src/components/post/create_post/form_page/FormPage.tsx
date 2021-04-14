@@ -6,7 +6,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {userAPI} from '@src/api/api';
 import {Steps} from '../steps/Steps';
 import {postTypes} from '@src/common_data/post_types';
-import {MainLayout} from '@src/components/MainLayout';
+import {MainLayout} from '@src/components/main_layout/MainLayout';
 import {AppearanceForm} from './appearance_form/AppearanceForm';
 import {CommonForm} from './common_form/CommonForm';
 import {setErrorMsgAction} from '@root/src/redux/slices/errorSlice';

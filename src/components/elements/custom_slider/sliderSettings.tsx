@@ -6,4 +6,5 @@ export const settings = {
     swipeToSlide: true,
     prevArrow: <SliderArrow/>,
     nextArrow: <SliderArrow/>,
+    appendDots: dots => <ul>{dots}</ul>,
 };

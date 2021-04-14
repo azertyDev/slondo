@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import { Box, Typography } from '@material-ui/core';
+import {Box, Hidden, Typography} from '@material-ui/core';
 import CustomRating from '@material-ui/lab/Rating';
 
 // styles
@@ -50,12 +50,13 @@ export const Rating: FC<RatingPropsType> = (props) => {
                     </Box>
                 )}
             </div>
-
-            {!props.card && (
-                <div>
-                    <Typography variant="subtitle1">(200 оценок)</Typography>
-                </div>
-            )}
+            <Hidden mdDown>
+                {!props.card && (
+                    <div>
+                        <Typography variant="subtitle1">(200 оценок)</Typography>
+                    </div>
+                )}
+            </Hidden>
         </div>
     );
 };
