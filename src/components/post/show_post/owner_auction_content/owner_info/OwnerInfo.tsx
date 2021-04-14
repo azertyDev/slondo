@@ -31,9 +31,8 @@ export const OwnerInfo: FC<OwnerPropsType> = ({safe_deal, isOwner, owner, subscr
                     <ButtonComponent color="primary" onClick={handleShowPhone}>
                         <Typography variant="subtitle1" color="initial">
                             {isPhoneAval
-                                ? owner.phone || 'default'
-                                : 'Показать номер'
-                            }
+                             ? owner.phone || 'default'
+                             : 'Показать номер'}
                         </Typography>
                     </ButtonComponent>
                     <ButtonComponent color="primary" className='contact-btn'>

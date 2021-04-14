@@ -4,7 +4,6 @@ import {Archive} from '@src/components/cabinet/cabinet_pages/archive/Archive';
 import {withAuthRedirect} from '@src/hoc/withAuthRedirect';
 import {userAPI} from '@src/api/api';
 import {setErrorMsgAction} from '@src/redux/slices/errorSlice';
-import {useRouter} from 'next/router';
 import {useDispatch} from 'react-redux';
 import {UserInfo} from '@root/interfaces/Auth';
 import {Box, Grid, IconButton, List, ListItem, ListItemText, Typography} from '@material-ui/core';
@@ -64,7 +63,6 @@ export type ArchivePostData = {
 
 const ArchiveContainer: FC = () => {
     const dispatch = useDispatch();
-    const { locale } = useRouter();
     const { t } = useTranslation('cabinet');
     const classes = useStyles();
 
@@ -105,7 +103,7 @@ const ArchiveContainer: FC = () => {
         const setStateByType = isPostType ? setArchivePostsData : setArchiveAucData;
         try {
             setStateByType({ ...stateByType, isFetch: true });
-            const { data, total } = await userAPI.getUserArchivePosts({ type, locale });
+            const { data, total } = await userAPI.getUserArchivePosts({ type });
             setStateByType({ myPosts: { data, total }, isFetch: false });
         } catch (e) {
             dispatch(setErrorMsgAction(e.message));

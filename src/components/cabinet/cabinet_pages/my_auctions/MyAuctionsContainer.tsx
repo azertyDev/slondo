@@ -3,7 +3,6 @@ import {TabsContent} from '@src/components/cabinet/cabinet_pages/TabsContent';
 import {MyAuctions} from '@src/components/cabinet/cabinet_pages/my_auctions/MyAuctions';
 import {withAuthRedirect} from '@src/hoc/withAuthRedirect';
 import {userAPI} from '@src/api/api';
-import {useRouter} from 'next/router';
 import {useDispatch} from 'react-redux';
 import {setErrorMsgAction} from '@root/src/redux/slices/errorSlice';
 import {useTranslation} from 'next-i18next';
@@ -20,7 +19,6 @@ import {SecondaryCabinetCard} from '@src/components/cabinet/components/Secondary
 
 export const MyAuctionsContainer: FC = () => {
     const dispatch = useDispatch();
-    const { locale } = useRouter();
     const { t } = useTranslation('cabinet');
     const classes = useStyles();
 
@@ -157,11 +155,11 @@ export const MyAuctionsContainer: FC = () => {
             const isCreatedAuction = type === 'auc';
             if (isCreatedAuction) {
                 setAuctionData({ ...auctionData, isFetch: true });
-                const { data, total } = await userAPI.getMyPosts({ type, locale, onlySecure: 0 });
+                const { data, total } = await userAPI.getMyPosts({ type, onlySecure: 0 });
                 setAuctionData({ myPosts: { data, total }, isFetch: false });
             } else {
                 setParticipatingData({ ...auctionData, isFetch: true });
-                const { data, total, message } = await userAPI.getAuctionSubs(locale);
+                const { data, total, message } = await userAPI.getAuctionSubs();
                 !message && setParticipatingData({ myPosts: { data, total }, isFetch: false });
             }
         } catch (e) {

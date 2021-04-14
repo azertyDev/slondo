@@ -11,7 +11,9 @@ import {
     Modal,
     Snackbar,
     TextField,
-    Typography, useMediaQuery, useTheme
+    Typography,
+    useMediaQuery,
+    useTheme
 } from '@material-ui/core';
 import {ReadMore} from '@src/components/elements/read_more/readMore';
 import {LocationIcon} from '@src/components/elements/icons/LocationIcon';
@@ -132,7 +134,7 @@ export const PostContent: FC<WithT & any> = (props) => {
                             <Link href={`/categories/${data.category.mark}`}>
                                 <a>
                                     <Typography variant="subtitle1" noWrap>
-                                        {data.category.name}
+                                        {t(`categories:${data.category.name}`)}
                                     </Typography>
                                 </a>
                             </Link>
@@ -141,7 +143,7 @@ export const PostContent: FC<WithT & any> = (props) => {
                             <Link href={`/categories/${data.category.mark}`}>
                                 <a>
                                     <Typography variant="subtitle1" noWrap>
-                                        {data.adsable.sub_category.name}
+                                        {t(`categories:${data.adsable.sub_category.name}`)}
                                     </Typography>
                                 </a>
                             </Link>
@@ -150,7 +152,7 @@ export const PostContent: FC<WithT & any> = (props) => {
                             <Link href="#">
                                 <a>
                                     <Typography variant="subtitle1" noWrap>
-                                        {data.adsable.type.name}
+                                        {t(`categories:${data.adsable.type.name}`)}
                                     </Typography>
                                 </a>
                             </Link>

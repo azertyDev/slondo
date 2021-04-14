@@ -30,8 +30,7 @@ export const ShowPostContainer: FC = () => {
     const router = useRouter();
     const lang = i18n.language;
     const url = useRouter().query.url as string;
-    const splittedUrl = url.split('-');
-    const params = splittedUrl.splice(-3);
+    const [postId] = url.split('-').splice(-1);
 
     const initValues = {id: null, name: ''};
 
@@ -137,7 +136,7 @@ export const ShowPostContainer: FC = () => {
     };
     const handleBuyNow = () => () => {
         userAPI.buyAuction(postData.data.auction.id, postData.data.id)
-            .then(result => router.push('/'));
+            .then(_ => router.push('/'));
     };
     const handleSubmit = (value) => {
         userAPI.betAuction(value)
@@ -218,7 +217,7 @@ export const ShowPostContainer: FC = () => {
                 available_days,
                 district,
                 ...otherData
-            } = await userAPI.getPostById(params[0], lang, params[1], params[2]);
+            } = await userAPI.getPostById(postId);
 
             setParameters(otherData.model);
 
@@ -308,13 +307,15 @@ export const ShowPostContainer: FC = () => {
         setDescHeight(height);
     }, [postData]);
 
-
     const classes = useStyles();
     return (
         <>
             <Head>
-                <title>Slondo - доска объявлений</title>
                 <meta name="robots" content="noindex"/>
+                <meta property="og:site_name" content="Slondo"/>
+                <meta property="og:type" content="website"/>
+                <meta property="og:title" content={postData.data.title} key="ogtitle"/>
+                <title>{postData.data.title}</title>
             </Head>
             <Hidden mdDown>
                 <Header/>
