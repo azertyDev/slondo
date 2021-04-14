@@ -11,6 +11,7 @@ import {
     Box,
     Checkbox,
     FormControlLabel,
+    Grid,
     IconButton,
     List,
     ListItem,
@@ -23,6 +24,8 @@ import {useTranslation} from 'next-i18next';
 import {ButtonComponent} from '@src/components/elements/button/Button';
 import {useStyles} from './useStyles';
 import {InitialCabinetCardState, initialUserStateType, TabsDataType} from '@root/interfaces/Cabinet';
+import {CabinetCard} from '@src/components/cabinet/cabinet_card/CabinetCard';
+import {SecondaryCabinetCard} from '@src/components/cabinet/components/SecondaryCabinetCard';
 
 const MyPostsContainer: FC = () => {
     const dispatch = useDispatch();
@@ -35,7 +38,6 @@ const MyPostsContainer: FC = () => {
         archiveId: 2
     };
     const { soldOnSlondoId, archiveId } = deactivateReasons;
-
     const initialUserState: initialUserStateType = {
         isFetch: false,
         user: {
@@ -145,15 +147,11 @@ const MyPostsContainer: FC = () => {
     const [postId, setPostId] = useState(null);
     const [toArchive, setToArchive] = useState(false);
     const [errorMsg, setErrMsg] = useState('');
+    const [showPhone, setShowPhone] = React.useState(false);
 
-    // const isExtendTime = (expiredDate) => {
-    //     const expDate = new Date(expiredDate).getTime() - 3;
-    //     return Date.now() >= (expDate)
-    //     console.log(Date.now() >= (expDate));
-    // };
-
-    // isExtendTime(securePosts.myPosts.data.length && securePosts.myPosts.data[0].expiration_at)
-
+    const handleShowPhone = () => {
+        setShowPhone(!showPhone);
+    };
     const handleOpenModal = (postId) => () => {
         setOpenModal(true);
         postId && setPostId(postId);
@@ -176,19 +174,6 @@ const MyPostsContainer: FC = () => {
     const handleCheckbox = () => {
         setToArchive(!toArchive);
     };
-    const handleDeactivate = async () => {
-        try {
-            await userAPI.deactivateById(postId, reasonId, toArchive);
-            setOpenModal(false);
-            if (tabIndex === 0) {
-                await fetchPostData('post');
-            } else {
-                await fetchPostData();
-            }
-        } catch (e) {
-            dispatch(setErrorMsgAction(e.message));
-        }
-    };
     const handleTextField = async ({ target }) => {
         const phone = target.value;
         setUserPhone(phone);
@@ -202,17 +187,29 @@ const MyPostsContainer: FC = () => {
             setErrMsg(e.message);
         }
     };
-    const fetchPostData = async (type = null) => {
-        const isPostType = type === 'post';
+    const fetchPostData = async (onlySecure: number) => {
         try {
-            if (isPostType) {
-                setPostData({ ...postData, isFetch: true });
-                const { data, total } = await userAPI.getMyPosts({ type, locale });
-                setPostData({ myPosts: { data, total }, isFetch: false });
-            } else {
+            if (onlySecure) {
                 setSecurePosts({ ...postData, isFetch: true });
-                const { data, total } = await userAPI.getMyPosts({ type, onlySecure: 1, locale });
+                const { data, total } = await userAPI.getMyPosts({ type: 'post', onlySecure, locale });
                 setSecurePosts({ myPosts: { data, total }, isFetch: false });
+            } else {
+                setPostData({ ...postData, isFetch: true });
+                const { data, total } = await userAPI.getMyPosts({ type: 'post', onlySecure, locale });
+                setPostData({ myPosts: { data, total }, isFetch: false });
+            }
+        } catch (e) {
+            dispatch(setErrorMsgAction(e.message));
+        }
+    };
+    const handleDeactivate = async () => {
+        try {
+            await userAPI.deactivateById(postId, reasonId, toArchive);
+            setOpenModal(false);
+            if (tabIndex === 0) {
+                await fetchPostData(0);
+            } else {
+                await fetchPostData(1);
             }
         } catch (e) {
             dispatch(setErrorMsgAction(e.message));
@@ -304,17 +301,15 @@ const MyPostsContainer: FC = () => {
                             variant="outlined"
                         />
                         <Box className={classes.userData}>
-                            {
-                                userData.isFetch
-                                    ? <Typography>loading...</Typography>
-                                    : <>
-                                        <Avatar src={userData.user.avatar === null ? '' : userData.user.avatar} />
-                                        <Typography variant='subtitle2' noWrap>
-                                            {userData.user.name}
-                                            {userData.user.surname}
-                                        </Typography>
-                                    </>
-                            }
+                            {userData.isFetch
+                                ? <Typography>loading...</Typography>
+                                : <>
+                                    <Avatar src={userData.user.avatar ?? ''} />
+                                    <Typography variant='subtitle2' noWrap>
+                                        {userData.user.name}
+                                        {userData.user.surname}
+                                    </Typography>
+                                </>}
                         </Box>
                     </Box>
                     <Box
@@ -386,9 +381,42 @@ const MyPostsContainer: FC = () => {
     );
 
     useEffect(() => {
-        fetchPostData('post');
-        fetchPostData();
+        fetchPostData(0);
+        fetchPostData(1);
     }, []);
+
+    const myPostCards = postData.myPosts.data.map(data => (
+        postData.isFetch && <Box mb={3} key={data.id}>
+            <Grid container key={data.id}>
+                <Grid item xs={9}>
+                    <CabinetCard
+                        cardData={data}
+                        handleModalOpen={handleOpenModal}
+                    />
+                </Grid>
+            </Grid>
+        </Box>
+    ));
+
+    const securePostCards = securePosts.myPosts.data.map(data => (
+        <Box key={data.id} mb={3}>
+            <Grid container>
+                <Grid item xs={9}>
+                    <CabinetCard
+                        cardData={data}
+                        handleModalOpen={handleOpenModal}
+                    />
+                </Grid>
+                <Grid item xs={3}>
+                    <SecondaryCabinetCard
+                        user={data}
+                        handleShowPhone={handleShowPhone}
+                        showPhone={showPhone}
+                    />
+                </Grid>
+            </Grid>
+        </Box>
+    ));
 
     const tabsData: TabsDataType = [
         {
@@ -397,12 +425,10 @@ const MyPostsContainer: FC = () => {
             total: postData.myPosts.total,
             component:
                 <MyPosts
-                    isFetch={postData.isFetch}
-                    list={postData.myPosts.data}
                     ModalContent={ModalContent}
-                    handleModalOpen={handleOpenModal}
                     handleModalClose={handleCloseModal}
                     openModal={openModal}
+                    myPostCards={myPostCards}
                 />
         },
         {
@@ -411,12 +437,10 @@ const MyPostsContainer: FC = () => {
             total: securePosts.myPosts.total,
             component:
                 <MyPosts
-                    isFetch={postData.isFetch}
-                    list={securePosts.myPosts.data}
                     ModalContent={ModalContent}
-                    handleModalOpen={handleOpenModal}
                     handleModalClose={handleCloseModal}
                     openModal={openModal}
+                    myPostCards={securePostCards}
                 />
         }
     ];

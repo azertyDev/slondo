@@ -13,7 +13,7 @@ import Link from 'next/link';
 
 
 export const AuctionInfo: FC<any> = (props) => {
-    const isAuth = useSelector<any>((state: RootState) => state.user.isAuth);
+    const { isAuth } = useSelector((state: RootState) => state.user);
     const {
         data,
         auctionsBetsList,
@@ -131,7 +131,7 @@ export const AuctionInfo: FC<any> = (props) => {
                         Все ставки
                     </Typography>
                 </div>
-                {isAuth && <>
+                {isAuth && !data.creator && <>
                     <div className="bet-info">
                         <AuctionForm data={data} handleFormSubmit={handleSubmit} auctionsBetsList={auctionsBetsList} />
                         <div>
