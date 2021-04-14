@@ -8,10 +8,10 @@ export const OwnerAuctionContent: FC<any> = (props) => {
     const {
         t,
         postData,
-        handleFollow,
         auctionInfo,
         ownerInfo
     } = props;
+
     const isAuction = postData.ads_type.mark === 'auc' || postData.ads_type.mark === 'exauc';
     const classes = useStyles();
     return (
