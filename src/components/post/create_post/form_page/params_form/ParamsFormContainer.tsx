@@ -13,11 +13,11 @@ type RegularFormPropsType = {
     post,
     setPost,
     mark,
+    type,
+    subCategory,
     isPreview: boolean,
     isExtendSubCtgr: boolean,
     currentFormIndex: number,
-    type,
-    subCategory,
     handleNextFormOpen: () => void,
     handleFormOpen: (k) => () => void,
 } & WithT;
@@ -54,9 +54,7 @@ export const ParamsFormContainer: FC<RegularFormPropsType> = (props) => {
 
     const formik = useFormik({
         onSubmit,
-        initialValues: {
-            title: ''
-        },
+        initialValues: {title: ''},
         validationSchema: paramsFormSchema
     });
 

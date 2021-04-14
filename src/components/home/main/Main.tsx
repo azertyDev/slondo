@@ -18,7 +18,7 @@ import {Banner} from "@src/components/elements/banner/Banner";
 import {FaqComponent} from "@src/components/elements/faq_component/FaqComponent";
 import {SocialsBlock} from '../../elements/socials_block/SocialsBlock';
 import {useStyles} from './useStyles'
-import {AdditionalComponent} from '@src/components/elements/additional/AdditionalComponent'
+import {SEOTextComponent} from '@src/components/elements/seo/SEOTextComponent'
 
 
 export const Main: FC = () => {
@@ -87,7 +87,7 @@ export const Main: FC = () => {
                             </Link>
                         </div>
                     </Hidden>
-                    <AdditionalComponent/>
+                    <SEOTextComponent/>
                 </Container>
             </div>
         </main>

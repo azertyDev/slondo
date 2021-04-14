@@ -9,8 +9,7 @@ import {useRouter} from 'next/router';
 import {IconButton, List, ListItem, ListItemText, Typography} from '@material-ui/core';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import {useStyles} from './useStyles';
-import {InitialCabinetCardState} from '@root/interfaces/Cabinet';
-import {TabsDataType} from '@root/interfaces/Cabinet';
+import {InitialCabinetCardState, TabsDataType} from '@root/interfaces/Cabinet';
 import {useTranslation} from 'next-i18next';
 
 const FavoriteContainer: FC = () => {

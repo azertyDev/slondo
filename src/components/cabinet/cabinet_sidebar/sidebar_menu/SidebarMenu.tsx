@@ -28,14 +28,14 @@ export const SidebarMenu: FC<WithT> = ({t}) => {
     const {pathname, push} = useRouter();
 
     const onButtonClick = (url) => async () => {
-        await push(`/cabinet/${url}`);
+        push(`/cabinet/${url}`);
     };
 
     const signOut = async () => {
         dispatch(signOutAction());
         cookies.remove('slondo_auth', {path: '/'});
         cookies.remove('slondo_user', {path: '/'});
-        await push('/');
+        push('/');
     };
 
     const classes = useStyles();

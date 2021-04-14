@@ -9,7 +9,7 @@ import {ButtonComponent} from "@src/components/elements/button/Button";
 
 type UserInfoWithAvatarPropsType = {
     owner: UserInfo,
-    isOwner: boolean,
+    isOwner?: boolean,
     handleFollow?: (userId) => () => void,
     subscribed?: boolean
 };
@@ -19,7 +19,6 @@ export const UserInfoWithAvatar: FC<UserInfoWithAvatarPropsType> = ({ isOwner, o
     const date = new Date(owner.created_at);
 
     const formatted_date = `${date.getDate()}.${date.getMonth() + 1}.${date.getFullYear()}`;
-
     const classes = useStyles();
     return (
         <div className={classes.root}>

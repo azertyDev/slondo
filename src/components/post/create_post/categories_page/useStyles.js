@@ -1,4 +1,4 @@
-import { makeStyles } from '@material-ui/core/styles'
+import {makeStyles} from '@material-ui/core/styles'
 
 export const useStyles = makeStyles((theme) => ({
     root: {
@@ -16,25 +16,25 @@ export const useStyles = makeStyles((theme) => ({
                     boxSizing: 'border-box',
                     borderRadius: '5px',
                     '& > svg': {
-                        margin: '0 15px',
+                        margin: '0 15px'
                     },
                     '&.selected-category': {
                         border: '1px solid #845CAB',
                         '& > h6.MuiTypography-subtitle1': {
-                            color: theme.palette.primary.secondary,
+                            color: theme.palette.primary.secondary
                         },
                         '& > svg': {
                             '& > path': {
-                                fill: '#845CAB',
-                            },
-                        },
-                    },
-                },
-            },
-
+                                fill: '#845CAB'
+                            }
+                        }
+                    }
+                }
+            }
+            
         },
         '& div.categories-menu': {
-            paddingRight: 20,
+            paddingRight: 20
         },
         '& div.sub-categories-menu': {
             '& div.search-block': {
@@ -44,28 +44,28 @@ export const useStyles = makeStyles((theme) => ({
                 '& > div.MuiInputBase-root': {
                     border: 0,
                     '& > svg': {
-                        margin: '0 20px 0 30px',
+                        margin: '0 20px 0 30px'
                     },
                     '& > input.MuiInputBase-input': {
-                        padding: '10px 0',
-                    },
-                },
+                        padding: '10px 0'
+                    }
+                }
             },
             '& button.back-btn': {
                 color: theme.palette.primary.white,
                 background: 'none',
                 padding: 0,
                 '& svg': {
-                    marginRight: '15px',
+                    marginRight: '15px'
                 },
                 '& h6.MuiTypography-subtitle1': {
-                    fontWeight: 600,
-                },
+                    fontWeight: 600
+                }
             },
             '& ul': {
                 '& > li:hover': {
-                    backgroundColor: theme.palette.primary.gray,
-                },
+                    backgroundColor: theme.palette.primary.gray
+                }
             },
             '& > div.sub-category-bg': {
                 width: '100%',
@@ -85,9 +85,9 @@ export const useStyles = makeStyles((theme) => ({
                     fontWeight: 600,
                     color: theme.palette.common.tab,
                     maxWidth: '318px',
-                    marginRight: '200px',
-                },
-            },
-        },
-    },
+                    marginRight: '200px'
+                }
+            }
+        }
+    }
 }))

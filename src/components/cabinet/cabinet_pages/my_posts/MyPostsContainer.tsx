@@ -22,19 +22,7 @@ import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import {useTranslation} from 'next-i18next';
 import {ButtonComponent} from '@src/components/elements/button/Button';
 import {useStyles} from './useStyles';
-import {InitialCabinetCardState} from '@root/interfaces/Cabinet';
-import {TabsDataType} from '@root/interfaces/Cabinet';
-
-type userStateType = {
-    isFetch: boolean,
-    user: {
-        id: number,
-        name: string,
-        surname: string,
-        phone: string,
-        avatar: string
-    }
-}
+import {InitialCabinetCardState, initialUserStateType, TabsDataType} from '@root/interfaces/Cabinet';
 
 const MyPostsContainer: FC = () => {
     const dispatch = useDispatch();
@@ -47,21 +35,103 @@ const MyPostsContainer: FC = () => {
         archiveId: 2
     };
     const { soldOnSlondoId, archiveId } = deactivateReasons;
-    const initialPostsState: InitialCabinetCardState = {
-        isFetch: false,
-        myPosts: {
-            total: 0,
-            data: []
-        }
-    };
-    const initialUserState: userStateType = {
+
+    const initialUserState: initialUserStateType = {
         isFetch: false,
         user: {
             id: null,
             name: '',
             surname: '',
             phone: '',
-            avatar: null
+            avatar: null,
+            created_at: '',
+            available_days: ''
+        }
+    };
+    const initialPostsState: InitialCabinetCardState = {
+        isFetch: false,
+        myPosts: {
+            total: 0,
+            data: [
+                {
+                    ads_type: '',
+                    adsable: {
+                        id: null,
+                        sub_category: {
+                            id: null,
+                            name: ''
+                        },
+                        type: {
+                            id: null,
+                            name: ''
+                        }
+                    },
+                    auction: {
+                        id: null,
+                        is_accepted: null,
+                        winner: {
+                            id: null,
+                            name: '',
+                            surname: '',
+                            phone: '',
+                            avatar: null,
+                            created_at: '',
+                            available_days: ''
+                        },
+                        number_of_bets: null,
+                        winner_id: null
+                    },
+                    author: {
+                        id: null,
+                        name: '',
+                        surname: '',
+                        phone: '',
+                        avatar: null,
+                        created_at: '',
+                        available_days: ''
+                    },
+                    available_days: [{
+                        id: null,
+                        name: ''
+                    }],
+                    category: {
+                        id: null,
+                        name: ''
+                    },
+                    city: {
+                        id: null,
+                        name: ''
+                    },
+                    created_at: '',
+                    creator: false,
+                    currency: {
+                        id: null,
+                        name: ''
+                    },
+                    delivery: null,
+                    description: '',
+                    district: {
+                        id: null,
+                        name: ''
+                    },
+                    exchange: null,
+                    expiration_at: '',
+                    favorite: false,
+                    id: null,
+                    image: '',
+                    number_of_views: null,
+                    price: null,
+                    region: {
+                        id: null,
+                        name: ''
+                    },
+                    safe_deal: null,
+                    status: '',
+                    subscribed: false,
+                    title: '',
+                    user_id: null
+                }
+            ]
         }
     };
     const [userData, setUserData] = useState(initialUserState);
@@ -75,6 +145,14 @@ const MyPostsContainer: FC = () => {
     const [postId, setPostId] = useState(null);
     const [toArchive, setToArchive] = useState(false);
     const [errorMsg, setErrMsg] = useState('');
+
+    // const isExtendTime = (expiredDate) => {
+    //     const expDate = new Date(expiredDate).getTime() - 3;
+    //     return Date.now() >= (expDate)
+    //     console.log(Date.now() >= (expDate));
+    // };
+
+    // isExtendTime(securePosts.myPosts.data.length && securePosts.myPosts.data[0].expiration_at)
 
     const handleOpenModal = (postId) => () => {
         setOpenModal(true);
@@ -125,15 +203,15 @@ const MyPostsContainer: FC = () => {
         }
     };
     const fetchPostData = async (type = null) => {
+        const isPostType = type === 'post';
         try {
-            const isCreatedPost = type === 'post';
-            if (isCreatedPost) {
+            if (isPostType) {
                 setPostData({ ...postData, isFetch: true });
-                const { data, total } = await userAPI.getMyPosts({ locale });
+                const { data, total } = await userAPI.getMyPosts({ type, locale });
                 setPostData({ myPosts: { data, total }, isFetch: false });
             } else {
                 setSecurePosts({ ...postData, isFetch: true });
-                const { data, total } = await userAPI.getMyPosts({ onlySecure: 1, locale });
+                const { data, total } = await userAPI.getMyPosts({ type, onlySecure: 1, locale });
                 setSecurePosts({ myPosts: { data, total }, isFetch: false });
             }
         } catch (e) {

@@ -6,7 +6,7 @@ import {CardDataType} from '@root/interfaces/Cabinet';
 
 type MyPostsPropsType = {
     isFetch: boolean;
-    list?: CardDataType;
+    list: CardDataType[];
     openModal: boolean;
     handleModalOpen: (id) => () => void;
     handleModalClose: () => void;

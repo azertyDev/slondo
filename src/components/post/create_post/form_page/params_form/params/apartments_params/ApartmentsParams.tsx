@@ -44,6 +44,7 @@ export const ApartmentsParams: FC<RegularFormPropsType> = (props) => {
         lift: values.lift,
         bathroom: values.bathroom,
         balcony: values.balcony,
+        metro: values.metro,
         amenities: values.amenities,
         infrastructure: values.infrastructure
     };
@@ -53,134 +54,137 @@ export const ApartmentsParams: FC<RegularFormPropsType> = (props) => {
         <div className={classes.root}>
             <Grid container spacing={2}>
                 {isPreview
-                    ? <PreviewValues t={t} values={previewVals}/>
-                    : <>
-                        <Grid
-                            item
-                            container
-                            sm={4}
-                            xs={12}
-                        >
-                            <CustomSelect
-                                t={t}
-                                name='material'
-                                values={values}
-                                onBlur={handleBlur}
-                                items={filters.material}
-                                handleSelect={handleSelect}
-                                errorMsg={
-                                    getErrorMsg(errors.material, touched.material, t)
-                                }
-                            />
-                        </Grid>
-                        <Grid
-                            item
-                            container
-                            sm={4}
-                            xs={12}
-                        >
-                            <CustomSelect
-                                t={t}
-                                name='layout'
-                                values={values}
-                                onBlur={handleBlur}
-                                items={filters.layout}
-                                handleSelect={handleSelect}
-                                errorMsg={
-                                    getErrorMsg(errors.layout, touched.layout, t)
-                                }
-                            />
-                        </Grid>
-                        <Grid
-                            item
-                            container
-                            sm={4}
-                            xs={12}
-                        >
-                            <CustomSelect
-                                t={t}
-                                name='repair'
-                                values={values}
-                                onBlur={handleBlur}
-                                items={filters.repair}
-                                handleSelect={handleSelect}
-                                errorMsg={
-                                    getErrorMsg(errors.repair, touched.repair, t)
-                                }
-                            />
-                        </Grid>
-                        <Grid
-                            item
-                            container
-                            sm={4}
-                            xs={12}
-                        >
-                            <CustomSelect
-                                t={t}
-                                name='lift'
-                                values={values}
-                                errorMsg={
-                                    getErrorMsg(errors.lift, touched.lift, t)
-                                }
-                                onBlur={handleBlur}
-                                items={filters.lift}
-                                handleSelect={handleSelect}
-                            />
-                        </Grid>
-                        <Grid
-                            item
-                            container
-                            sm={4}
-                            xs={12}
-                        >
-                            <CustomSelect
-                                t={t}
-                                name='bathroom'
-                                values={values}
-                                errorMsg={
-                                    getErrorMsg(errors.bathroom, touched.bathroom, t
-                                    )
-                                }
-                                onBlur={handleBlur}
-                                items={filters.bathroom}
-                                handleSelect={handleSelect}
-                            />
-                        </Grid>
-                        <Grid
-                            item
-                            container
-                            sm={4}
-                            xs={12}
-                        >
-                            <CustomSelect
-                                t={t}
-                                name='balcony'
-                                values={values}
-                                errorMsg={
-                                    getErrorMsg(errors.balcony, touched.balcony, t)
-                                }
-                                onBlur={handleBlur}
-                                items={filters.balcony}
-                                handleSelect={handleSelect}
-                            />
-                        </Grid>
-                        <OptionsSelect
-                            t={t}
-                            name='amenities'
-                            values={values}
-                            options={filters.amenities}
-                            handleOptionCheckbox={handleOptionCheckbox}
-                        />
-                        <OptionsSelect
-                            t={t}
-                            name='infrastructure'
-                            values={values}
-                            options={filters.infrastructure}
-                            handleOptionCheckbox={handleOptionCheckbox}
-                        />
-                    </>
+                 ? <PreviewValues t={t} values={previewVals}/>
+                 : <>
+                     <Grid
+                         item
+                         container
+                         sm={4}
+                         xs={12}
+                     >
+                         <CustomSelect
+                             t={t}
+                             name='material'
+                             values={values}
+                             onBlur={handleBlur}
+                             items={filters.material}
+                             handleSelect={handleSelect}
+                             errorMsg={getErrorMsg(errors.material, touched.material, t)}
+                         />
+                     </Grid>
+                     <Grid
+                         item
+                         container
+                         sm={4}
+                         xs={12}
+                     >
+                         <CustomSelect
+                             t={t}
+                             name='layout'
+                             values={values}
+                             onBlur={handleBlur}
+                             items={filters.layout}
+                             handleSelect={handleSelect}
+                             errorMsg={getErrorMsg(errors.layout, touched.layout, t)}
+                         />
+                     </Grid>
+                     <Grid
+                         item
+                         container
+                         sm={4}
+                         xs={12}
+                     >
+                         <CustomSelect
+                             t={t}
+                             name='repair'
+                             values={values}
+                             onBlur={handleBlur}
+                             items={filters.repair}
+                             handleSelect={handleSelect}
+                             errorMsg={getErrorMsg(errors.repair, touched.repair, t)}
+                         />
+                     </Grid>
+                     <Grid
+                         item
+                         container
+                         sm={4}
+                         xs={12}
+                     >
+                         <CustomSelect
+                             t={t}
+                             name='lift'
+                             values={values}
+                             onBlur={handleBlur}
+                             items={filters.lift}
+                             handleSelect={handleSelect}
+                             errorMsg={getErrorMsg(errors.lift, touched.lift, t)}
+                         />
+                     </Grid>
+                     <Grid
+                         item
+                         container
+                         sm={4}
+                         xs={12}
+                     >
+                         <CustomSelect
+                             t={t}
+                             name='bathroom'
+                             values={values}
+                             onBlur={handleBlur}
+                             items={filters.bathroom}
+                             handleSelect={handleSelect}
+                             errorMsg={getErrorMsg(errors.bathroom, touched.bathroom, t)}
+                         />
+                     </Grid>
+                     <Grid
+                         item
+                         container
+                         sm={4}
+                         xs={12}
+                     >
+                         <CustomSelect
+                             t={t}
+                             name='balcony'
+                             values={values}
+                             onBlur={handleBlur}
+                             items={filters.balcony}
+                             handleSelect={handleSelect}
+                             errorMsg={getErrorMsg(errors.balcony, touched.balcony, t)}
+                         />
+                     </Grid>
+                     <Grid
+                         item
+                         container
+                         sm={4}
+                         xs={12}
+                     >
+                         <CustomSelect
+                             t={t}
+                             name='metro'
+                             values={values}
+                             onBlur={handleBlur}
+                             items={filters.metro}
+                             handleSelect={handleSelect}
+                             errorMsg={getErrorMsg(errors.metro, touched.metro, t)}
+                         />
+                     </Grid>
+                     <OptionsSelect
+                         t={t}
+                         name='amenities'
+                         values={values}
+                         options={filters.amenities}
+                         handleOptionCheckbox={handleOptionCheckbox}
+                     />
+                     <OptionsSelect
+                         t={t}
+                         name='infrastructure'
+                         values={values}
+                         options={filters.infrastructure}
+                         handleOptionCheckbox={handleOptionCheckbox}
+                     />
+                 </>
                 }
             </Grid>
         </div>
-    )
+    );
 };

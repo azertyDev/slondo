@@ -3,9 +3,9 @@ import {ITEMS_PER_PAGE} from '@src/constants';
 import {userAPI} from '@src/api/api';
 import {CardData, InnerCardData} from '@root/interfaces/CardData';
 import {PostsSlider} from './PostsSlider';
-import {setErrorMsgAction} from "@src/redux/slices/errorSlice";
-import {useDispatch} from "react-redux";
-import {useRouter} from "next/router";
+import {setErrorMsgAction} from '@src/redux/slices/errorSlice';
+import {useDispatch} from 'react-redux';
+import {useRouter} from 'next/router';
 
 
 const initCard: InnerCardData = {
@@ -34,7 +34,8 @@ const initCard: InnerCardData = {
         surname: '',
         phone: '',
         avatar: '',
-        created_at: ''
+        created_at: '',
+        available_days: ''
     },
     category: {
         id: null,

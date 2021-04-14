@@ -3,8 +3,9 @@ export interface UserInfo {
     name: string,
     surname: string,
     phone: string,
-    avatar: string | boolean,
-    created_at: string
+    avatar: string,
+    created_at: string,
+    available_days: string
 }
 
 export type SubscriberType = {

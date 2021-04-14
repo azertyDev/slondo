@@ -5,19 +5,23 @@ import CyrillicToTranslit from 'cyrillic-to-translit-js';
 import {punctuationMarksRegEx} from '@src/common_data/reg_exs';
 import {categories_list} from '@src/common_data/categories_list';
 import {requireFields} from '@src/common_data/form_fields';
-import {COOKIE_LIFE_TIME} from "@src/constants";
+import {IdNameType} from "@root/interfaces/Post";
 
 
 export const cookies = new Cookies();
-export const cookieOpts = {path: '/', maxAge: COOKIE_LIFE_TIME};
+export const cookieOpts = {path: '/'};
 
 export const isRequired = (field: string): boolean =>
     requireFields.some(reqField => reqField === field);
 
 export const phoneFormat = (phone: string): string => phone.replace(/[\s+()]/g, "");
 
-export const transformTitle = (title: string): string => {
-    const transform = new CyrillicToTranslit().transform;
+export const transformToCyrillic = (title: string, reverse?: boolean): string => {
+    const transform = reverse ? new CyrillicToTranslit().reverse : new CyrillicToTranslit().transform;
+
+    if (reverse) {
+        return transform(title);
+    }
 
     return transform(title)
         .toLowerCase()
@@ -25,17 +29,35 @@ export const transformTitle = (title: string): string => {
         .replace(/\s+/g, '-');
 };
 
+export const getCtgrsByCyrillicNames = (subCtgrName: string, typeCtgrName?: string): any => {
+    return categories_list.reduce((acc: any, ctgr) => {
+        ctgr.subCategory.forEach(subCtgr => {
+            if (transformToCyrillic(subCtgr.ru_name) === subCtgrName) {
+                acc.push(subCtgr);
+                if (typeCtgrName) {
+                    subCtgr.type?.forEach(type => {
+                        if (transformToCyrillic(type.ru_name) === typeCtgrName) {
+                            acc.push(type);
+                        }
+                    });
+                }
+            }
+        });
+        return acc;
+    }, []);
+};
+
 export const numberPrettier = (price: string): string => {
     return !!price
-        ? price.toString()
-            .replace(/\s/g, '')
-            .replace(/\B(?=(\d{3})+(?!\d))/g, " ")
-        : '';
+           ? price.toString()
+               .replace(/\s/g, '')
+               .replace(/\B(?=(\d{3})+(?!\d))/g, " ")
+           : '';
 };
 
 export const clearWhiteSpaces = (txt: string): string => {
     return txt.replace(/\s+/g, "");
-}
+};
 
 export const addParentsToCtgrs = (categoriesList: CategoryType[]): CategoryType[] => {
     return categoriesList.map(ctgry => {
@@ -65,19 +87,19 @@ export const addParentsToCtgrs = (categoriesList: CategoryType[]): CategoryType[
                             name: ctgry.name
                         }
                     ]
-                )
+                );
                 return {
                     ...ctgry,
                     type,
                     parents
-                }
+                };
             } else {
                 return {
                     ...ctgry,
                     parents
-                }
+                };
             }
-        })
+        });
     }
 };
 
@@ -117,7 +139,7 @@ export const dataForCrtPostNormalize = (data: any, type?) => {
     } else {
         data = {};
     }
-    return data
+    return data;
 };
 
 export const categorySearchHelper = (txt: string, categoryList: CategoryType[], t: TFunction): SubCtgrsType[] => {
@@ -147,7 +169,7 @@ export const categorySearchHelper = (txt: string, categoryList: CategoryType[], 
     }
 };
 
-export const weekDaysHelper = (days, t: TFunction) => {
+export const weekDaysHelper = (days: IdNameType[], t: TFunction): string => {
     const daysLen = days.length;
     let isInOrder: boolean;
     let result = '';
@@ -177,9 +199,15 @@ export const categoriesByType = (postType: string): CategoryType[] => {
     }, []);
 };
 
-export const getCategoriesByParams = (categories, params) => {
+export type CategoriesParamsType = {
+    categoryName: string,
+    subCategoryName: string,
+    typeName: string
+};
+
+export const getCategoriesByParams = (params: CategoriesParamsType) => {
     const {categoryName, subCategoryName, typeName} = params;
-    return categories.reduce((acc, ctgry) => {
+    return categories_list.reduce((acc: any, ctgry) => {
         if (ctgry.name === categoryName) {
             acc.category = {id: ctgry.id, name: ctgry.name};
             if (subCategoryName && ctgry.subCategory) {
@@ -199,16 +227,12 @@ export const getCategoriesByParams = (categories, params) => {
         }
         return acc;
     }, {});
-}
-
-export const formatNumber = (number: number) => {
-    if (number <= 9) {
-        return `0${number}`;
-    } else {
-        return number;
-    }
 };
+
+export const formatNumber = (number: number): string => (
+    number <= 9 ? `0${number}` : number.toString()
+);
 
 export const getErrorMsg = (errorMsg, touched, t: TFunction): string => {
     return errorMsg && touched ? t(`errors:${errorMsg}`) : '';
-}
+};

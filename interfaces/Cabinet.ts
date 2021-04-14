@@ -1,11 +1,12 @@
 import {ReactElement} from 'react';
 import {UserInfo} from '@root/interfaces/Auth';
+import {IdNameType} from '@root/interfaces/Post';
 
 export type TabsDataType = {
-    id: number;
-    title: string;
-    total?: number;
-    component: ReactElement;
+    id: number,
+    title: string,
+    total?: number,
+    component: ReactElement,
 }[];
 
 
@@ -13,44 +14,71 @@ export interface InitialCabinetCardState {
     isFetch: boolean,
     myPosts: {
         total: number,
-        data: CardDataType
+        data: CardDataType[]
     }
 }
 
 export type CardDataType = {
-    ads_type: string
+    ads_type: string,
     adsable: {
         id: number,
-        sub_category: initValuesType,
-        type: initValuesType
+        sub_category: InitValuesType,
+        type: InitValuesType
     }
     auction: {
+        id: number,
+        is_accepted: number,
         winner: UserInfo,
-        number_of_bets: number
+        winner_id: number,
+        number_of_bets: number,
+        number_of_offers?: number,
+        offer?: {
+            id: number,
+            price: number,
+            user: UserInfo
+        }
     },
     author: UserInfo,
-    available_days: string
-    category: initValuesType
-    city: initValuesType
-    created_at: string
-    creator: boolean
-    currency: initValuesType
-    delivery: number
-    description: string
-    district: initValuesType
-    exchange: number
-    expiration_at: string
-    favorite: boolean
-    id: number
-    image: string
-    number_of_views: number
-    price: number
-    region: initValuesType
-    safe_deal: number
-    status: string
-    subscribed: boolean
-    title: string
-    user_id: number
-}[]
+    available_days: IdNameType[],
+    category: InitValuesType,
+    city: InitValuesType,
+    created_at: string,
+    creator: boolean,
+    currency: InitValuesType,
+    delivery: number,
+    description: string,
+    district: InitValuesType,
+    exchange: number,
+    expiration_at: string,
+    favorite: boolean,
+    id: number,
+    image: string,
+    number_of_views: number,
+    price: number,
+    region: InitValuesType,
+    safe_deal: number,
+    status: string,
+    subscribed: boolean,
+    title: string,
+    user_id: number,
+}
 
-type initValuesType = { id: number, name: string }
+export type OffersStateType = {
+    isFetch: boolean,
+    total: number,
+    data: [{
+        id: number,
+        auction_id: number,
+        price: number,
+        created_at: string,
+        offer_price_status: boolean,
+        user: UserInfo
+    }]
+}
+
+export type initialUserStateType = {
+    isFetch: boolean,
+    user: UserInfo
+}
+
+export type InitValuesType = { id: number, name: string }

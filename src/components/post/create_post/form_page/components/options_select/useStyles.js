@@ -1,10 +1,14 @@
 import {makeStyles} from '@material-ui/core/styles';
 
-export const useStyles = makeStyles(() => ({
+export const useStyles = makeStyles((theme) => ({
     root: {
-        width: '100%',
-        '& > h6': {
-            marginLeft: '9px'
+        height: '72px',
+        '& div.options > button': {
+            color: theme.palette.primary.white,
+            backgroundColor: theme.palette.common.activeTab,
+            '&.selected': {
+                border: `3px solid ${theme.palette.primary.exAucBgColor}`
+            }
         }
     }
 }));

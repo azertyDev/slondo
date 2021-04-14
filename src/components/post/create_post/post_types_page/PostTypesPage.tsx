@@ -3,24 +3,23 @@ import {Grid, Typography} from '@material-ui/core';
 import {useTranslation} from 'next-i18next';
 import Link from 'next/link';
 import {postTypes} from "@src/common_data/post_types";
-import {MainLayout} from "@src/components/main_layout/MainLayout";
-import {Top} from "@src/components/post/create_post/top/Top";
-import {withAuthRedirect} from "@src/hoc/withAuthRedirect";
+import {MainLayout} from "@src/components/MainLayout";
+import {Steps} from "@src/components/post/create_post/steps/Steps";
 import {useStyles} from './useStyles';
 
 
-const PostTypesPage: FC = () => {
+export const PostTypesPage: FC = () => {
     const {t} = useTranslation(['post']);
 
     const classes = useStyles();
     return (
         <MainLayout>
-            <Top activeStep={0}/>
+            <Steps activeStep={0}/>
             <div className={classes.root}>
                 <Grid container spacing={2}>
                     {postTypes.map((postType, i) =>
                         <Grid item xs={4} key={i}>
-                            <Link href={`/create/type/${postType.name}`}>
+                            <Link href={`/create/type/${postType.name}`} shallow>
                                 <a className={postType.name}>
                                     <div
                                         className={postType.name}
@@ -55,5 +54,3 @@ const PostTypesPage: FC = () => {
         </MainLayout>
     );
 };
-
-export default withAuthRedirect(PostTypesPage);

@@ -1,24 +1,24 @@
-import React, {useState} from 'react'
-import Link from 'next/link'
-import {AppBar, Container, Grid, Hidden, Typography} from '@material-ui/core'
-import {ButtonComponent} from '@src/components/elements/button/Button'
-import {SearchForm} from '@src/components/elements/search_form/SearchForm'
-import {withScrollThreshold} from '@src/hoc/withScrollThreshold'
-import {Logo, PersonIcon} from '@src/components/elements/icons'
-import {AddIcon} from '@src/components/elements/icons/AddIcon'
-import {CategorySortIcon} from '@src/components/elements/icons/CategorySortIcon'
-import {SignIcon} from '@src/components/elements/icons/SignIcon'
-import {CustomDrawer} from '@src/components/elements/drawer/Drawer'
-import {useStyles} from './useStyles'
+import React, {useState} from 'react';
+import Link from 'next/link';
+import {AppBar, Avatar, Container, Grid, Hidden, Typography} from '@material-ui/core';
+import {ButtonComponent} from '@src/components/elements/button/Button';
+import {SearchForm} from '@src/components/elements/search_form/SearchForm';
+import {withScrollThreshold} from '@src/hoc/withScrollThreshold';
+import {Logo} from '@src/components/elements/icons';
+import {AddIcon} from '@src/components/elements/icons/AddIcon';
+import {CategorySortIcon} from '@src/components/elements/icons/CategorySortIcon';
+import {SignIcon} from '@src/components/elements/icons/SignIcon';
+import {CustomDrawer} from '@src/components/header/bottom/custom_drawer/CustomDrawer';
+import {useStyles} from './useStyles';
 
 
 const Bottom = (props) => {
-    const {isScrollBreak, handleOpenModal, isAuth, t} = props;
-    const [drawerPosition, setDrawerPosition] = useState({left: false})
+    const { isScrollBreak, handleOpenModal, isAuth, t, avatar } = props;
+    const [drawerPosition, setDrawerPosition] = useState({ left: false });
 
     const toggleDrawer = (anchor, open) => (event) => {
         if (event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
-            return
+            return;
         }
         setDrawerPosition({...drawerPosition, [anchor]: open})
     }
@@ -89,7 +89,7 @@ const Bottom = (props) => {
                                 </Grid>
                             </Grid>
                             <Grid item md={2}>
-                                <Link href="/create/type">
+                                <Link href="/create/type/select">
                                     <a className='create-post-link'>
                                         <ButtonComponent
                                             color="primary"
@@ -111,13 +111,11 @@ const Bottom = (props) => {
                                 xs={1}
                             >
                                 {isAuth
-                                    ? <div>
-                                        <Link href='/cabinet/posts'>
-                                            <a>
-                                                <PersonIcon/>
-                                            </a>
-                                        </Link>
-                                    </div>
+                                    ? <Link href='/cabinet/posts'>
+                                        <a>
+                                            <Avatar alt="Remy Sharp" src={avatar} />
+                                        </a>
+                                    </Link>
                                     : <ButtonComponent
                                         className="bottom-sign-button header-button"
                                         onClick={handleOpenModal}
@@ -125,7 +123,7 @@ const Bottom = (props) => {
                                         <Typography variant="subtitle2">
                                             {t('auth_reg:signIn')}
                                         </Typography>
-                                        <SignIcon/>
+                                        <SignIcon />
                                     </ButtonComponent>}
                             </Grid>
                         </Grid>
