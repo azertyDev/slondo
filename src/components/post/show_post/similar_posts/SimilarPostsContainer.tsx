@@ -50,7 +50,6 @@ const initialCardData: CardData = {
 
 export const SimilarPostsContainer: FC<{ ancmntType: string }> = (props) => {
     const {ancmntType} = props;
-    const { locale} = useRouter();
 
     const [currentPage, setCurrentPage] = useState(1);
     const [cardData, setCardData] = useState(initialCardData);
@@ -67,8 +66,7 @@ export const SimilarPostsContainer: FC<{ ancmntType: string }> = (props) => {
             const newData = await userAPI.getCards(
                 ITEMS_PER_PAGE,
                 currentPage,
-                type,
-                locale
+                type
             );
 
             setCardData({

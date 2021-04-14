@@ -61,8 +61,6 @@ const initCardData: CardData = {
 export const PostsSliderContainer: FC = () => {
     const dispatch = useDispatch();
 
-    const {locale} = useRouter();
-
     const [currentPage, setCurrentPage] = useState(1);
     const [cardData, setCardData] = useState(initCardData);
 
@@ -73,7 +71,7 @@ export const PostsSliderContainer: FC = () => {
                 isFetch: true
             });
 
-            const {data, total} = await userAPI.getCards(ITEMS_PER_PAGE, currentPage, 'auc', locale);
+            const {data, total} = await userAPI.getCards(ITEMS_PER_PAGE, currentPage, 'auc');
 
             setCardData({
                 ...cardData,
@@ -94,7 +92,7 @@ export const PostsSliderContainer: FC = () => {
 
     useEffect(() => {
         setFetchedCardData();
-    }, [currentPage, locale]);
+    }, [currentPage]);
 
     return (
         <PostsSlider

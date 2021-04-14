@@ -30,9 +30,7 @@ export const CardItem: FC<CardItemProps> = (props) => {
         currency,
         ads_type,
         region,
-        city,
-        sub_category_id,
-        category
+        city
     } = props;
 
     const isFavorite = true;
@@ -78,7 +76,7 @@ export const CardItem: FC<CardItemProps> = (props) => {
                     <FavoriteIcon />
                 </IconButton>
             )}
-            <Link href={`/obyavlenie/${translatedTitle}-${id}-${category.mark}-${sub_category_id ?? ''}`}>
+            <Link href={`/obyavlenie/${translatedTitle}-${id}`}>
                 <a target='_blank'>
                     <Card elevation={0} title={title}>
                         {isFetch ? (

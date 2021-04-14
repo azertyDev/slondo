@@ -3,7 +3,7 @@ import {Grid, Typography} from '@material-ui/core';
 import {useTranslation} from 'next-i18next';
 import Link from 'next/link';
 import {postTypes} from "@src/common_data/post_types";
-import {MainLayout} from "@src/components/MainLayout";
+import {MainLayout} from '@src/components/main_layout/MainLayout';
 import {Steps} from "@src/components/post/create_post/steps/Steps";
 import {useStyles} from './useStyles';
 
