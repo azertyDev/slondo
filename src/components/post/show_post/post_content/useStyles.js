@@ -28,7 +28,7 @@ export const useStyles = makeStyles((theme) => ({
                 fontWeight: '600',
                 color: '#fff',
                 [theme.breakpoints.down('md')]: {
-                    width: "100%",
+                    width: '100%',
                     textAlign: 'center',
                     margin: '-3px 0px 14px 0px',
                     fontWeight: '400',
@@ -224,7 +224,7 @@ export const useStyles = makeStyles((theme) => ({
                 [theme.breakpoints.down('md')]: {
                     marginRight: '8px',
                     padding: '5px 10px',
-                    boxShadow: "0px 1px 4px rgba(0, 0, 0, 0.04)",
+                    boxShadow: '0px 1px 4px rgba(0, 0, 0, 0.04)',
                     background: '#F7F7F7'
                 },
                 '&:last-child': {
@@ -299,7 +299,7 @@ export const useStyles = makeStyles((theme) => ({
                 padding: '5px 10px',
                 flexDirection: 'row',
                 borderRadius: '100px',
-                boxShadow: "0px 1px 4px rgba(0, 0, 0, 0.04)",
+                boxShadow: '0px 1px 4px rgba(0, 0, 0, 0.04)',
                 background: '#F7F7F7',
                 alignItems: 'center',
                 '& svg': {
@@ -319,34 +319,70 @@ export const useStyles = makeStyles((theme) => ({
             }
         },
         '& div.contact': {
-            '& .btn-buy-now': {
-                border: '1px solid #2F80ED !important',
-                '& h6': {
-                    color: '#2F80ED !important'
-                }
-            },
             display: 'flex',
             marginBottom: '30px',
             '& button': {
-                marginRight: '8px',
+                marginRight: '6px',
                 borderRadius: '5px',
                 width: '50%',
                 '& > h6': {
                     color: '#fff',
                     fontSize: 'calc(14px + 2 * (100vw / 1280))',
                     whiteSpace: 'nowrap'
+
                 },
                 '&:first-child': {
+                    [theme.breakpoints.down('xs')]: {
+                        width: '49%'
+                    },
                     padding: '11px 39px',
                     background: 'linear-gradient(49.94deg, #675EAA 19.03%, #AD66D5 72.72%)'
                 },
                 '&:last-child': {
+                    [theme.breakpoints.down('xs')]: {
+                        width: '49%'
+                    },
                     padding: '11px 44px',
                     background: '#fff',
                     border: '1px solid #845CAB',
                     marginRight: 0,
                     '& h6': {
                         color: '#845CAB'
+                    }
+                }
+
+            }
+        },
+        '& div.btn-buy-now-offer': {
+            display: 'flex',
+            marginBottom: '30px',
+            '& button': {
+                marginRight: '6px',
+                borderRadius: '5px',
+                width: '50%',
+                '& > h6': {
+                    color: '#fff',
+                    fontSize: 'calc(14px + 2 * (100vw / 1280))',
+                    whiteSpace: 'nowrap'
+
+                },
+                '&:first-child': {
+                    [theme.breakpoints.down('xs')]: {
+                        width: '49%'
+                    },
+                    padding: '11px 39px',
+                    background: 'linear-gradient(90deg, #7DBCF6 0%, #63A6F4 100%);'
+                },
+                '&:last-child': {
+                    [theme.breakpoints.down('xs')]: {
+                        width: '49%'
+                    },
+                    padding: '11px 44px',
+                    background: '#fff',
+                    border: '1px solid #7DBCF6',
+                    marginRight: 0,
+                    '& h6': {
+                        color: '#7DBCF6'
                     }
                 }
 
@@ -400,12 +436,7 @@ export const useStyles = makeStyles((theme) => ({
                     fontSize: 'calc(14px + 4 * (100vw / 1280))',
                     color: '#4E4E4E',
                     lineHeight: '1rem',
-                    [theme.breakpoints.down('md')]: {
-                        fontSize: 'calc(14px + 4 * (100vw / 1280))',
-                        color: '#4E4E4E',
-                        lineHeight: '1rem',
-                        padding: 0
-                    }
+                    padding: 0
                 }
             },
             '& > h6.MuiTypography-subtitle1': {
@@ -592,7 +623,6 @@ export const useStyles = makeStyles((theme) => ({
             right: 0,
             width: '100%',
             padding: '13px 7px 14px 17px',
-            display: 'flex',
             background: '#494A61',
             '& button': {
                 width: '50%',

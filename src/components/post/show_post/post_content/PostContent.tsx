@@ -4,7 +4,7 @@ import Link from 'next/link';
 import {
     Backdrop,
     Container,
-    Hidden,
+    Hidden, InputBase,
     List,
     ListItem,
     ListItemText,
@@ -113,8 +113,8 @@ export const PostContent: FC<WithT & any> = (props) => {
                     )}
                     <Typography variant="subtitle1" className="value">
                         {typeof parameters[key] === 'string' || typeof parameters[key] === 'number'
-                         ? parameters[key]
-                         : parameters[key]?.name}
+                            ? parameters[key]
+                            : parameters[key]?.name}
                     </Typography>
                 </li>
             );
@@ -308,16 +308,23 @@ export const PostContent: FC<WithT & any> = (props) => {
                         </div>
                     )}
                     {data.ads_type.mark === 'exauc' && (
-                        <div className="contact">
-                            <ButtonComponent>
-                                <Typography variant='subtitle1'>Предложить цену</Typography>
-                            </ButtonComponent>
-                            <ButtonComponent>
-                                <Typography variant='subtitle2'>Написать</Typography>
-                            </ButtonComponent>
-                            {/*<ButtonComponent className="btn-buy-now">*/}
-                            {/*    <Typography variant='subtitle2'>Купить сейчас</Typography>*/}
-                            {/*</ButtonComponent>*/}
+                        <div>
+                            <div className="contact">
+                                <ButtonComponent>
+                                    <Typography variant='subtitle1'>Позвонить</Typography>
+                                </ButtonComponent>
+                                <ButtonComponent>
+                                    <Typography variant='subtitle2'>Написать</Typography>
+                                </ButtonComponent>
+                            </div>
+                            <div className="btn-buy-now-offer">
+                                <ButtonComponent>
+                                    <Typography variant='subtitle1'>Предложить цену</Typography>
+                                </ButtonComponent>
+                                <ButtonComponent>
+                                    <Typography variant='subtitle2'>Купить сейчас</Typography>
+                                </ButtonComponent>
+                            </div>
                         </div>
                     )}
                 </Hidden>
@@ -328,15 +335,15 @@ export const PostContent: FC<WithT & any> = (props) => {
                         </Typography>
                     </Hidden>
                     {data.region.name || data.city.name || data.district.name
-                     ? <div className='location-text'>
-                         <LocationIcon/>
-                         <Typography variant="subtitle1">
-                             {`${data.region.name ?? ''}`}
-                             {data.city.name ? `, ${data.city.name}` : ''}
-                             {data.district.name ? `, ${data.district.name}` : ''}
-                         </Typography>
-                     </div>
-                     : <Typography variant="subtitle1">Не указано</Typography>}
+                        ? <div className='location-text'>
+                            <LocationIcon/>
+                            <Typography variant="subtitle1">
+                                {`${data.region.name ?? ''}`}
+                                {data.city.name ? `, ${data.city.name}` : ''}
+                                {data.district.name ? `, ${data.district.name}` : ''}
+                            </Typography>
+                        </div>
+                        : <Typography variant="subtitle1">Не указано</Typography>}
                 </div>
                 <Hidden mdDown>
                     <div className="post-category">
@@ -436,7 +443,7 @@ export const PostContent: FC<WithT & any> = (props) => {
                     {data.ads_type.mark !== 'post' && (
                         <div className='floating-auc'>
                             <div className="floating-content">
-                                <TextField id="standard-basic" placeholder="Введите сумму"/>
+                                <TextField id="outlined-basic" placeholder="Введите сумму" variant="filled" />
                                 <ButtonComponent>
                                     Сделать ставку
                                 </ButtonComponent>
