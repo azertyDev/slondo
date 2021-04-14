@@ -4,14 +4,14 @@ import {i18n, useTranslation} from 'next-i18next';
 import {userAPI} from '@src/api/api';
 import {setErrorMsgAction} from '@src/redux/slices/errorSlice';
 import {useDispatch} from 'react-redux';
-import {MainLayout} from '@src/components/MainLayout';
+import {MainLayout} from '@src/components/main_layout/MainLayout';
 import {Grid, Hidden} from '@material-ui/core';
 import {PostContent} from '@src/components/post/show_post/post_content/PostContent';
 import {OwnerAuctionContent} from '@src/components/post/show_post/owner_auction_content/OwnerAuctionContent';
 import {Banner} from '@src/components/elements/banner/Banner';
-import {useStyles} from './useStyles';
 import {AuctionInfo} from '@src/components/post/show_post/owner_auction_content/auction_info/AuctionInfo';
 import {OwnerInfo} from '@src/components/post/show_post/owner_auction_content/owner_info/OwnerInfo';
+import {useStyles} from './useStyles';
 
 
 export type SlidersRefType = {

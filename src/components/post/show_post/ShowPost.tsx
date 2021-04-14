@@ -3,11 +3,11 @@ import {Container, Grid, Hidden, useMediaQuery, useTheme} from '@material-ui/cor
 import {OwnerAuctionContent} from './owner_auction_content/OwnerAuctionContent';
 import {PostContent} from './post_content/PostContent';
 import {Banner} from '@src/components/elements/banner/Banner';
-import {useStyles} from './useStyles';
 import Head from "next/head";
 import {Header} from "@src/components/header/Header";
 import {Footer} from "@src/components/footer/Footer";
 import {ErrorModal} from "@src/components/error_modal/ErrorModal";
+import {useStyles} from './useStyles';
 
 
 export const ShowPost: FC<any> = (props) => {
