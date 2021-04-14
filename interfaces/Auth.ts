@@ -4,7 +4,8 @@ export interface UserInfo {
     surname: string,
     phone: string,
     avatar: string,
-    created_at: string
+    created_at: string,
+    available_days: string
 }
 
 export type SubscriberType = {

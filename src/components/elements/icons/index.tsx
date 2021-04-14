@@ -73,4 +73,5 @@ export {StateIcon} from './StateIcon'
 export {FlatIcon} from './FlatIcon'
 export {WheelIcon} from './WheelIcon'
 export {CardLogo} from './logo/CardLogo'
-export {RefreshIcon} from './RefreshIcon'
+export {RefreshIcon} from './RefreshIcon';
+export {CrackerIcon} from './CrackerIcon';

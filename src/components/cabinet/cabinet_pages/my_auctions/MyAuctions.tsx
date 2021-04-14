@@ -1,35 +1,27 @@
-import React, {FC, ReactElement} from 'react';
-import {CabinetCard} from '@src/components/cabinet/cabinet_card/CabinetCard';
+import React, {FC, ReactElement, ReactNode} from 'react';
 import {CustomModal} from '@src/components/elements/custom_modal/CustomModal';
-import {CardDataType} from '@root/interfaces/Cabinet';
+import {CircularProgress} from '@material-ui/core';
 
 type MyAuctionsPropsType = {
-    isFetch: boolean,
-    list: CardDataType[],
+    isFetch: boolean
     handleClose: () => void,
     openModal: boolean,
-    setOpenModal: (boolean) => void,
-    handleModalOpen: (id?) => () => void,
-    ModalContent: () => ReactElement;
+    ModalContent: () => ReactElement,
+    auctionCards: ReactNode
 }
 
 export const MyAuctions: FC<MyAuctionsPropsType> = (props) => {
     const {
-        isFetch,
-        list,
-        handleModalOpen,
         handleClose,
         openModal,
-        ModalContent
+        ModalContent,
+        auctionCards,
+        isFetch
     } = props;
 
     return (
         <>
-            <CabinetCard
-                list={list}
-                isFetch={isFetch}
-                handleModalOpen={handleModalOpen}
-            />
+            {isFetch ? <CircularProgress color="secondary" /> : auctionCards}
             <CustomModal
                 handleModalClose={handleClose}
                 openModal={openModal}

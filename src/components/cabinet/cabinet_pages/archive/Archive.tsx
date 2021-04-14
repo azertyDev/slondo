@@ -1,34 +1,24 @@
-import React, {FC, ReactElement} from 'react';
+import React, {FC, ReactElement, ReactNode} from 'react';
 import {CustomModal} from '@src/components/elements/custom_modal/CustomModal';
-import {CabinetCard} from '@src/components/cabinet/cabinet_card/CabinetCard';
-import {CardDataType} from '@root/interfaces/Cabinet';
 
 type MyArchivePropsType = {
-    isFetch: boolean;
-    list?: CardDataType[];
+    archiveCard: ReactNode;
     openModal: boolean;
-    handleModalOpen: (id) => () => void;
     handleModalClose: () => void;
     ModalContent: () => ReactElement;
 }
 
 export const Archive: FC<MyArchivePropsType> = (props) => {
     const {
-        list,
-        isFetch,
+        archiveCard,
         openModal,
-        handleModalOpen,
         handleModalClose,
         ModalContent
     } = props;
 
     return (
         <>
-            <CabinetCard
-                list={list}
-                isFetch={isFetch}
-                handleModalOpen={handleModalOpen}
-            />
+            {archiveCard}
             <CustomModal
                 handleModalClose={handleModalClose}
                 openModal={openModal}

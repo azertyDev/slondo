@@ -21,7 +21,8 @@ const initCard: InnerCardData = {
         surname: '',
         phone: '',
         avatar: '',
-        created_at: ''
+        created_at: '',
+        available_days: ''
     },
     created_at: '',
     image: '',

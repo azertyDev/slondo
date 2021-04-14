@@ -16,7 +16,8 @@ const initialState: UserStateType = {
         surname: '',
         phone: '',
         avatar: '',
-        created_at: ''
+        created_at: '',
+        available_days: ''
     }
 };
 
