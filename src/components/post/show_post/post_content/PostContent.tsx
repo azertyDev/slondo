@@ -46,7 +46,8 @@ export const PostContent: FC<WithT & any> = (props) => {
         data,
         slidersRefs,
         parameters,
-        descHeight
+        descHeight,
+        auctionInfo
     } = props;
 
     const theme = useTheme();
@@ -300,13 +301,16 @@ export const PostContent: FC<WithT & any> = (props) => {
                         </div>
                     )}
                     {data.ads_type.mark === 'auc' && (
-                        <div className="contact">
-                            <ButtonComponent>
-                                <Typography variant='subtitle1'>Позвонить</Typography>
-                            </ButtonComponent>
-                            <ButtonComponent>
-                                <Typography variant='subtitle1'>Написать</Typography>
-                            </ButtonComponent>
+                        <div>
+                            <div className="contact">
+                                <ButtonComponent>
+                                    <Typography variant='subtitle1'>Позвонить</Typography>
+                                </ButtonComponent>
+                                <ButtonComponent>
+                                    <Typography variant='subtitle1'>Написать</Typography>
+                                </ButtonComponent>
+                            </div>
+                            {auctionInfo}
                         </div>
                     )}
                     {data.ads_type.mark === 'exauc' && (
@@ -319,6 +323,7 @@ export const PostContent: FC<WithT & any> = (props) => {
                                     <Typography variant='subtitle2'>Написать</Typography>
                                 </ButtonComponent>
                             </div>
+                            {auctionInfo}
                             <div className="btn-buy-now-offer">
                                 <ButtonComponent>
                                     <Typography variant='subtitle1'>Предложить цену</Typography>
@@ -445,7 +450,7 @@ export const PostContent: FC<WithT & any> = (props) => {
                     {data.ads_type.mark !== 'post' && (
                         <div className='floating-auc'>
                             <div className="floating-content">
-                                <TextField id="outlined-basic" placeholder="Введите сумму" variant="filled" />
+                                <TextField id="outlined-basic" placeholder="Введите сумму" variant="filled"/>
                                 <ButtonComponent>
                                     Сделать ставку
                                 </ButtonComponent>

@@ -3,6 +3,9 @@ import {makeStyles} from '@material-ui/core/styles';
 export const useStyles = makeStyles((theme) => ({
     root: {
         paddingBottom: 55,
+        [theme.breakpoints.down('md')]: {
+            marginBottom: '20px'
+        },
         borderBottom: '1px solid rgba(103, 94, 170, 0.5)',
         '& a': {
             textDecoration: 'none'

@@ -260,8 +260,8 @@ export const ShowPostContainer: FC = () => {
 
     const auctionInfo = (
         <AuctionInfo
-            data={postData.data}
             t={t}
+            data={postData.data}
             openModal={openModal}
             page={page}
             auctionsBetsList={auctionsBetsList.list}
@@ -334,6 +334,7 @@ export const ShowPostContainer: FC = () => {
                             parameters={parameters}
                             descHeight={descHeight}
                             slidersRefs={slidersRefs}
+                            auctionInfo={auctionInfo}
                         />
                     </Grid>
                     <Grid item lg={3} xs={12}>

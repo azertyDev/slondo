@@ -1,7 +1,7 @@
 import React, {FC} from 'react';
 import {useRouter} from 'next/router';
 import {Typography} from "@material-ui/core";
-import {MainLayout} from "@src/components/MainLayout";
+import {MainLayout} from "@src/components/main_layout/MainLayout";
 import {useTranslation} from "react-i18next";
 import {PageNotFound} from "@src/components/page_not_found/PageNotFound";
 import {defaultSEOContent, getSEOContent} from "@src/common_data/seo_content";

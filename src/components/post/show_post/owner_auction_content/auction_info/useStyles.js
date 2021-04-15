@@ -3,6 +3,9 @@ import {makeStyles, fade} from '@material-ui/core/styles';
 export const useStyles = makeStyles((theme) => ({
     root: {
         marginBottom: 60,
+        [theme.breakpoints.down('md')]: {
+            marginBottom: 30
+        },
         '& div.lot-info': {
             '& > div': {
                 marginBottom: 20,
@@ -50,7 +53,12 @@ export const useStyles = makeStyles((theme) => ({
             '& div.lot-participants-block': {
                 display: 'flex',
                 flexDirection: 'column',
-
+                [theme.breakpoints.down('md')]: {
+                    background: '#F5F5F5',
+                    boxShadow: '0px 1px 2px rgba(0, 0, 0, 0.15)',
+                    borderRadius: '10px',
+                    paddingBottom: '20px'
+                },
                 '& > h6.MuiTypography-subtitle1': {
                     fontSize: '1.125rem',
                     padding: '10px 15px',
@@ -58,7 +66,10 @@ export const useStyles = makeStyles((theme) => ({
                     '&:last-child': {
                         padding: '10px 15px 0',
                         color: '#675EAA',
-                        textDecorationLine: 'underline'
+                        textDecorationLine: 'underline',
+                        [theme.breakpoints.down('md')]: {
+                            textDecorationLine: 'none'
+                        }
                     }
                 },
                 '& h6.all-bets': {
