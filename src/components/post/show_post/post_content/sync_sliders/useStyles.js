@@ -28,7 +28,7 @@ export const useStyles = makeStyles((theme) => ({
                 justifyContent: 'flex-end'
             },
             [theme.breakpoints.down('xs')]: {
-                padding: '0px 10px'
+                padding: '10px 10px 0px'
             },
             '& button': {
                 width: 50,

@@ -3,8 +3,8 @@ import {WithT} from 'i18next';
 import Link from 'next/link';
 import {
     Backdrop,
-    Container,
-    Hidden, InputBase,
+    Container, Grid,
+    Hidden,
     List,
     ListItem,
     ListItemText,
@@ -27,7 +27,7 @@ import {ModalSyncSliders} from './modal_sync_sliders/ModalSyncSliders';
 import {BreadcrumbsComponent} from '@src/components/elements/breadcrumbs/Breadcrumbs';
 import {numberPrettier, weekDaysHelper} from '@src/helpers';
 import {ButtonComponent} from '@src/components/elements/button/Button';
-import {LockIcon, NotificationIcon} from '@src/components/elements/icons';
+import {NotificationIcon} from '@src/components/elements/icons';
 import {months} from '@src/common_data/common';
 import {useStyles} from './useStyles';
 
@@ -51,8 +51,9 @@ export const PostContent: FC<WithT & any> = (props) => {
     } = props;
 
     const theme = useTheme();
-    const isLg = useMediaQuery(theme.breakpoints.down('md'));
-
+    const isLgDown = useMediaQuery(theme.breakpoints.down('md'));
+    const isExAuc = data.ads_type.mark === 'exauc';
+    const isAuction = data.ads_type.mark === 'auc' || isExAuc;
 
     const [state, setState] = React.useState<PostContentTypes>({
         openSliderModal: false,
@@ -208,7 +209,7 @@ export const PostContent: FC<WithT & any> = (props) => {
                     </div>
                 </Hidden>
             </div>
-            <Container maxWidth="xl" disableGutters={!isLg}>
+            <Container maxWidth="xl" disableGutters={!isLgDown}>
                 <Hidden lgUp>
                     <div className="post-header">
                         <div>
@@ -243,14 +244,6 @@ export const PostContent: FC<WithT & any> = (props) => {
                     </div>
                 </Hidden>
                 <div className="post-bonus">
-                    {data.ads_type.mark === 'exauc' && isLg && (
-                        <div className="reserve">
-                            <LockIcon/>
-                            <Typography variant="subtitle2" color="initial">
-                                Резервная цена: <br/>{numberPrettier(data.auction.reserve_price)} {data.currency.name}
-                            </Typography>
-                        </div>
-                    )}
                     {!!data.delivery && (
                         <span className="delivery">
                         <DeliveryIcon/>&nbsp;
@@ -290,48 +283,17 @@ export const PostContent: FC<WithT & any> = (props) => {
                     )}
                 </div>
                 <Hidden lgUp>
-                    {data.ads_type.mark === 'post' && (
-                        <div className="contact">
-                            <ButtonComponent>
-                                <Typography variant='subtitle1'>Позвонить</Typography>
-                            </ButtonComponent>
-                            <ButtonComponent>
-                                <Typography variant='subtitle1'>Написать</Typography>
-                            </ButtonComponent>
-                        </div>
-                    )}
-                    {data.ads_type.mark === 'auc' && (
+                    <div className="contact">
+                        <ButtonComponent>
+                            <Typography variant='subtitle1'>Позвонить</Typography>
+                        </ButtonComponent>
+                        <ButtonComponent>
+                            <Typography variant='subtitle1'>Написать</Typography>
+                        </ButtonComponent>
+                    </div>
+                    {isAuction && (
                         <div>
-                            <div className="contact">
-                                <ButtonComponent>
-                                    <Typography variant='subtitle1'>Позвонить</Typography>
-                                </ButtonComponent>
-                                <ButtonComponent>
-                                    <Typography variant='subtitle1'>Написать</Typography>
-                                </ButtonComponent>
-                            </div>
                             {auctionInfo}
-                        </div>
-                    )}
-                    {data.ads_type.mark === 'exauc' && (
-                        <div>
-                            <div className="contact">
-                                <ButtonComponent>
-                                    <Typography variant='subtitle1'>Позвонить</Typography>
-                                </ButtonComponent>
-                                <ButtonComponent>
-                                    <Typography variant='subtitle2'>Написать</Typography>
-                                </ButtonComponent>
-                            </div>
-                            {auctionInfo}
-                            <div className="btn-buy-now-offer">
-                                <ButtonComponent>
-                                    <Typography variant='subtitle1'>Предложить цену</Typography>
-                                </ButtonComponent>
-                                <ButtonComponent>
-                                    <Typography variant='subtitle2'>Купить сейчас</Typography>
-                                </ButtonComponent>
-                            </div>
                         </div>
                     )}
                 </Hidden>
@@ -382,7 +344,7 @@ export const PostContent: FC<WithT & any> = (props) => {
                         </Typography>
                     </ReadMore>
                 </div>
-                {(data.ads_type.mark === 'auc' || data.ads_type.mark === 'exauc') && (
+                {isAuction && (
                     <div className="started-price">
                         <Typography variant="button">Стартовая цена</Typography>
                         <span>
@@ -431,36 +393,6 @@ export const PostContent: FC<WithT & any> = (props) => {
                             Пожаловаться
                         </ButtonComponent>
                     </div>
-                </Hidden>
-                <Hidden lgUp>
-                    {data.ads_type.mark === 'post' && (
-                        <div className='floating'>
-                            <div className="floating-text">
-                                <SafeIcon/>
-                                <Typography variant='subtitle2'>
-                                    Безопасная покупка <br/>
-                                    за 420 000 сум
-                                </Typography>
-                            </div>
-                            <ButtonComponent>
-                                Купить
-                            </ButtonComponent>
-                        </div>
-                    )}
-                    {data.ads_type.mark !== 'post' && (
-                        <div className='floating-auc'>
-                            <div className="floating-content">
-                                <TextField id="outlined-basic" placeholder="Введите сумму" variant="filled"/>
-                                <ButtonComponent>
-                                    Сделать ставку
-                                </ButtonComponent>
-                            </div>
-                            <Typography variant='subtitle2'>
-                                Максимальня возможная ставка
-                                20 000 009
-                            </Typography>
-                        </div>
-                    )}
                 </Hidden>
                 <ModalSyncSliders
                     slidersRefs={slidersRefs}

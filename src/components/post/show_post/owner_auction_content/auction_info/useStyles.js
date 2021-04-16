@@ -220,15 +220,54 @@ export const useStyles = makeStyles((theme) => ({
                         }
                     }
                 }
+
             },
-            '& div.suggest_price': {
+            '& .suggest_price': {
+                [theme.breakpoints.up('lg')]: {
+                    maxWidth: '100%'
+                },
                 '& > button': {
+                    [theme.breakpoints.down('md')]: {
+                        padding: '11px 39px'
+                    },
                     width: '100%',
-                    background: '#675EAA',
+                    background: 'linear-gradient(90deg, #7DBCF6 0%, #63A6F4 100%);',
                     '& > h6.MuiTypography-subtitle1': {
-                        color: '#fff'
+                        color: '#fff',
+                        [theme.breakpoints.down('md')]: {
+                            fontSize: 'calc(14px + 2 * (100vw / 1280))',
+                            whiteSpace: 'nowrap'
+                        }
                     }
                 }
+            },
+            '& .btn-buy-now': {
+                '& > button': {
+                    width: '100%',
+                    padding: '11px 44px',
+                    background: '#fff',
+                    border: '1px solid #7DBCF6',
+                    marginRight: 0,
+                    '& h6': {
+                        color: '#7DBCF6'
+                    }
+                }
+            }
+        },
+        '& .floating-auc': {
+            position: 'fixed',
+            zIndex: '100',
+            bottom: 0,
+            left: 0,
+            right: 0,
+            width: '100%',
+            padding: '13px 7px 14px 17px',
+            background: '#494A61',
+            '& button': {
+                width: '50%',
+                color: '#FFFFFF',
+                background: 'linear-gradient(49.94deg, #675EAA 19.03%, #AD66D5 72.72%)',
+                borderRadius: '3px'
             }
         }
     },

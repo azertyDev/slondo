@@ -1,19 +1,17 @@
 import React, {FC, useState} from 'react';
-import {TextField, Typography} from '@material-ui/core';
+import {Grid, Hidden, TextField, Typography} from '@material-ui/core';
 import {LockIcon, RefreshIcon} from '@src/components/elements/icons';
 import {AuctionTimer} from './AuctionTimer';
 import {numberPrettier} from '@root/src/helpers';
 import AuctionForm from './AuctionForm/AuctionFrom';
-import {useSelector} from 'react-redux';
-import {RootState} from '@src/redux/rootReducer';
-import {useStyles} from './useStyles';
 import {ButtonComponent} from '@src/components/elements/button/Button';
 import {CustomModal} from '@src/components/elements/custom_modal/CustomModal';
 import Link from 'next/link';
+import {useStyles} from './useStyles';
+import {FixedActionComponent} from '@src/components/post/show_post/post_content/fixed_action_component/FixdedActionComponent';
 
 
 export const AuctionInfo: FC<any> = (props) => {
-    const {isAuth} = useSelector((state: RootState) => state.user);
     const {
         data,
         auctionsBetsList,
@@ -30,7 +28,7 @@ export const AuctionInfo: FC<any> = (props) => {
 
     const [showAll, setShowAll] = useState(false);
     const date = new Date(data.expiration_at).getTime();
-    const isExAuc = data.ads_type.id === 3;
+    const isExAuc = data.ads_type.mark === 'exauc';
 
     const classes = useStyles();
     return (
@@ -131,93 +129,121 @@ export const AuctionInfo: FC<any> = (props) => {
                         Все ставки
                     </Typography>
                 </div>
-                {isAuth && !data.creator && <>
-                    <div className="bet-info">
-                        <AuctionForm data={data} handleFormSubmit={handleSubmit}
-                                     auctionsBetsList={auctionsBetsList}/>
-                        <div>
-                            <Typography variant="subtitle2" color="initial">
-                                Максимально возможная ставка:
-                            </Typography>
-                            <Typography variant="subtitle2" color="initial">
-                                {numberPrettier(auctionsBetsList?.[0]?.max_bet)} сум
-                            </Typography>
-                        </div>
-                    </div>
-                    {isExAuc && !!data.auction.price_buy_now && (
-                        <div>
-                            <div className="buy-now">
-                                <Typography variant="subtitle1" color="initial">
-                                    {data.auction.price_buy_now} сум
-                                </Typography>
-                                <ButtonComponent onClick={handleOpenModal()}>
-                                    <Typography variant="subtitle1" color="initial">
-                                        Купить сейчас
+                {!data.creator && (
+                    <>
+                        <Hidden mdDown>
+                            <div className="bet-info">
+                                <AuctionForm
+                                    data={data}
+                                    handleFormSubmit={handleSubmit}
+                                    auctionsBetsList={auctionsBetsList}
+                                />
+                                <div>
+                                    <Typography variant="subtitle2" color="initial">
+                                        Максимально возможная ставка:
                                     </Typography>
-                                </ButtonComponent>
+                                    <Typography variant="subtitle2" color="initial">
+                                        {numberPrettier(auctionsBetsList?.[0]?.max_bet)} сум
+                                    </Typography>
+                                </div>
                             </div>
-                            <CustomModal handleModalClose={handleCloseModal()} openModal={openModal}>
-                                <>
-                                    <Typography className="title" variant="h6">
-                                        Купить сейчас
-                                    </Typography>
-                                    <Typography
-                                        variant='subtitle1'
-                                        className='subtitle'
-                                    >
-                                        Нажимая кнопку “Купить сейчас” вы выкупаете лот на сумму&nbsp;
-                                        <span className='buy-now-price'>{data.auction.price_buy_now}</span> сум и
-                                        соглашаетесь с&nbsp;
-                                        <span className='condition'>
-                                        <Link href="#">
-                                            <a>условиями</a>
-                                        </Link>
-                                        </span> сайта
-                                    </Typography>
-                                    <div className='confirm'>
-                                        <ButtonComponent
-                                            className='submit'
-                                            onClick={handleBuyNow()}
-                                        >
-                                            <Typography variant='subtitle1'>
+                        </Hidden>
+                        {/*Mobile auction form*/}
+                        <Hidden lgUp>
+                            <FixedActionComponent
+                                isAuction={data.ads_type.mark !== 'post'}
+                            />
+                        </Hidden>
+                        {!!data.auction.price_buy_now && (
+                            <div>
+                                <Hidden mdDown>
+                                    <div className="buy-now">
+                                        <Typography variant="subtitle1" color="initial">
+                                            {data.auction.price_buy_now} сум
+                                        </Typography>
+                                        <ButtonComponent onClick={handleOpenModal()}>
+                                            <Typography variant="subtitle1" color="initial">
                                                 Купить сейчас
                                             </Typography>
                                         </ButtonComponent>
                                     </div>
-                                </>
-                            </CustomModal>
-                        </div>
-                    )}
-                    {isExAuc && !!data.auction.offer_the_price && (
-                        <div>
-                            <div className='suggest_price'>
-                                <ButtonComponent onClick={handleOpenModal()}>
-                                    <Typography variant="subtitle1" color="initial">
-                                        Предложить цену
-                                    </Typography>
-                                </ButtonComponent>
+                                </Hidden>
+                                <CustomModal handleModalClose={handleCloseModal()} openModal={openModal}>
+                                    <>
+                                        <Typography className="title" variant="h6">
+                                            Купить сейчас
+                                        </Typography>
+                                        <Typography
+                                            variant='subtitle1'
+                                            className='subtitle'
+                                        >
+                                            Нажимая кнопку “Купить сейчас” вы выкупаете лот на сумму&nbsp;
+                                            <span className='buy-now-price'>{data.auction.price_buy_now}</span> сум и
+                                            соглашаетесь с&nbsp;
+                                            <span className='condition'>
+                                        <Link href="#">
+                                            <a>условиями</a>
+                                        </Link>
+                                        </span> сайта
+                                        </Typography>
+                                        <div className='confirm'>
+                                            <ButtonComponent
+                                                className='submit'
+                                                onClick={handleBuyNow()}
+                                            >
+                                                <Typography variant='subtitle1'>
+                                                    Купить сейчас
+                                                </Typography>
+                                            </ButtonComponent>
+                                        </div>
+                                    </>
+                                </CustomModal>
                             </div>
-                            <CustomModal handleModalClose={handleCloseModal()} openModal={openModal}>
-                                Предложить цену
-                                <Typography variant='subtitle1'>
-                                    Предложенная стоимость не может быть <br/>
-                                    меньше стартовой цены или сделанной ставки
-                                </Typography>
-                                <div style={{display: 'flex', flexDirection: 'column'}}>
-                                    <TextField
-                                        id="outlined-basic"
-                                        label="Outlined"
-                                        variant="outlined"
-                                        placeholder='Впишите сумму'
-                                        onChange={handleTextField}
-                                    />
-                                    <ButtonComponent onClick={handleSuggestPrice}>
-                                        Предложить
-                                    </ButtonComponent>
-                                </div>
-                            </CustomModal>
-                        </div>)}
-                </>}
+
+                        )}
+                        {!!data.auction.offer_the_price && (
+                            <div>
+                                <Grid container>
+                                    <Grid item xs={isExAuc ? 6 : 12}
+                                          className='suggest_price'
+                                    >
+                                        <ButtonComponent onClick={handleOpenModal()}>
+                                            <Typography variant="subtitle1" color="initial">
+                                                Предложить цену
+                                            </Typography>
+                                        </ButtonComponent>
+                                    </Grid>
+                                    {isExAuc && (
+                                        <Grid item xs={6} className="btn-buy-now">
+                                            <ButtonComponent>
+                                                <Typography variant='subtitle2'>Купить сейчас</Typography>
+                                            </ButtonComponent>
+                                        </Grid>
+                                    )}
+                                </Grid>
+                                <CustomModal handleModalClose={handleCloseModal()} openModal={openModal}>
+                                    Предложить цену
+                                    <Typography variant='subtitle1'>
+                                        Предложенная стоимость не может быть <br/>
+                                        меньше стартовой цены или сделанной ставки
+                                    </Typography>
+                                    <div style={{display: 'flex', flexDirection: 'column'}}>
+                                        <TextField
+                                            id="outlined-basic"
+                                            label="Outlined"
+                                            variant="outlined"
+                                            placeholder='Впишите сумму'
+                                            onChange={handleTextField}
+                                        />
+                                        <ButtonComponent onClick={handleSuggestPrice}>
+                                            Предложить
+                                        </ButtonComponent>
+                                    </div>
+                                </CustomModal>
+                            </div>
+                        )}
+                    </>
+                )}
             </div>
         </div>
     );

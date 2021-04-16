@@ -295,30 +295,6 @@ export const useStyles = makeStyles((theme) => ({
                         fontWeight: '700'
                     }
                 }
-            },
-            '& .reserve': {
-                display: 'flex',
-                marginRight: '8px',
-                padding: '5px 10px',
-                flexDirection: 'row',
-                borderRadius: '100px',
-                boxShadow: '0px 1px 4px rgba(0, 0, 0, 0.04)',
-                background: '#F7F7F7',
-                alignItems: 'center',
-                '& svg': {
-                    marginRight: '10px',
-                    width: '12px',
-                    height: '16px'
-                },
-                '& div': {
-                    '& > :last-child': {
-                        fontWeight: '700'
-                    },
-                    '& h6': {
-                        fontSize: 'calc(10px + 6 * (100vw / 1280))',
-                        color: '#838383'
-                    }
-                }
             }
         },
         '& div.contact': {
@@ -360,34 +336,34 @@ export const useStyles = makeStyles((theme) => ({
             display: 'flex',
             marginBottom: '30px',
             '& button': {
-                marginRight: '6px',
-                borderRadius: '5px',
-                width: '50%',
+                width: '100%',
+                // marginRight: '6px',
+                // borderRadius: '5px',
                 '& > h6': {
                     color: '#fff',
                     fontSize: 'calc(14px + 2 * (100vw / 1280))',
                     whiteSpace: 'nowrap'
 
                 },
-                '&:first-child': {
-                    [theme.breakpoints.down('xs')]: {
-                        width: '49%'
-                    },
-                    padding: '11px 39px',
-                    background: 'linear-gradient(90deg, #7DBCF6 0%, #63A6F4 100%);'
-                },
-                '&:last-child': {
-                    [theme.breakpoints.down('xs')]: {
-                        width: '49%'
-                    },
-                    padding: '11px 44px',
-                    background: '#fff',
-                    border: '1px solid #7DBCF6',
-                    marginRight: 0,
-                    '& h6': {
-                        color: '#7DBCF6'
-                    }
-                }
+                // '&:first-child': {
+                //     [theme.breakpoints.down('xs')]: {
+                //         width: '49%'
+                //     },
+                //     padding: '11px 39px',
+                //     background: 'linear-gradient(90deg, #7DBCF6 0%, #63A6F4 100%);'
+                // },
+                // '&:last-child': {
+                //     [theme.breakpoints.down('xs')]: {
+                //         width: '49%'
+                //     },
+                //     padding: '11px 44px',
+                //     background: '#fff',
+                //     border: '1px solid #7DBCF6',
+                //     marginRight: 0,
+                //     '& h6': {
+                //         color: '#7DBCF6'
+                //     }
+                // }
 
             }
         },
@@ -587,52 +563,6 @@ export const useStyles = makeStyles((theme) => ({
         '& div.MuiSnackbar-root': {
             position: 'absolute',
             marginTop: '-10px'
-        },
-        '& .floating': {
-            position: 'fixed',
-            zIndex: '100',
-            bottom: 0,
-            left: 0,
-            right: 0,
-            width: '100%',
-            padding: '13px 7px 14px 17px',
-            display: 'flex',
-            background: '#494A61',
-            '& div.floating-text': {
-                display: 'flex',
-                alignItems: 'center',
-                width: '50%',
-                fontSize: 'calc(14px + 2 * (100vw / 1280))',
-                '& svg': {
-                    marginRight: '18px'
-                }
-            },
-            '& h6': {
-                color: '#FFFFFF',
-                fontSize: 'calc(10px + 6 * (100vw / 1280))'
-            },
-            '& button': {
-                width: '50%',
-                color: '#FFFFFF',
-                background: 'linear-gradient(49.94deg, #675EAA 19.03%, #AD66D5 72.72%)',
-                borderRadius: '3px'
-            }
-        },
-        '& .floating-auc': {
-            position: 'fixed',
-            zIndex: '100',
-            bottom: 0,
-            left: 0,
-            right: 0,
-            width: '100%',
-            padding: '13px 7px 14px 17px',
-            background: '#494A61',
-            '& button': {
-                width: '50%',
-                color: '#FFFFFF',
-                background: 'linear-gradient(49.94deg, #675EAA 19.03%, #AD66D5 72.72%)',
-                borderRadius: '3px'
-            }
         },
         '& div.btn-follow': {
             boxShadow: '0px -1px 4px rgba(0, 0, 0, 0.04), 0px 1px 4px rgba(0, 0, 0, 0.04)',

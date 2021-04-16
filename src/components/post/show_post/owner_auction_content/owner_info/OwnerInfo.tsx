@@ -5,7 +5,9 @@ import {SafeIcon} from '@root/src/components/elements/icons';
 import {UserInfoWithAvatar} from '@src/components/elements/user_info_with_avatar/UserInfoWithAvatar';
 import {SocialsBlock} from '@root/src/components/elements/socials_block/SocialsBlock';
 import {UserInfo} from '@root/interfaces/Auth';
+import {FixedActionComponent} from '@src/components/post/show_post/post_content/fixed_action_component/FixdedActionComponent';
 import {useStyles} from './useStyles';
+
 
 type OwnerPropsType = {
     safe_deal: number,
@@ -15,8 +17,15 @@ type OwnerPropsType = {
     subscribed: boolean,
 }
 
+export const OwnerInfo: FC<OwnerPropsType> = (props) => {
+    const {
+        safe_deal,
+        isOwner,
+        owner,
+        subscribed,
+        handleFollow
+    } = props;
 
-export const OwnerInfo: FC<OwnerPropsType> = ({safe_deal, isOwner, owner, subscribed, handleFollow}) => {
     const [isPhoneAval, setIsPhoneAval] = useState(false);
     const handleShowPhone = () => {
         setIsPhoneAval(!isPhoneAval);
@@ -31,8 +40,8 @@ export const OwnerInfo: FC<OwnerPropsType> = ({safe_deal, isOwner, owner, subscr
                     <ButtonComponent color="primary" onClick={handleShowPhone}>
                         <Typography variant="subtitle1" color="initial">
                             {isPhoneAval
-                             ? owner.phone || 'default'
-                             : 'Показать номер'}
+                                ? owner.phone || 'default'
+                                : 'Показать номер'}
                         </Typography>
                     </ButtonComponent>
                     <ButtonComponent color="primary" className='contact-btn'>
@@ -53,6 +62,11 @@ export const OwnerInfo: FC<OwnerPropsType> = ({safe_deal, isOwner, owner, subscr
                     )}
                 </div>
                 <SocialsBlock/>
+            </Hidden>
+            <Hidden lgUp>
+                <FixedActionComponent
+                    safe_deal={true}
+                />
             </Hidden>
         </div>
     );

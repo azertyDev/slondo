@@ -1,5 +1,5 @@
 import React, {FC} from 'react';
-import {Box, Hidden, IconButton, useMediaQuery, useTheme} from '@material-ui/core';
+import {Hidden, IconButton, useMediaQuery, useTheme} from '@material-ui/core';
 import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
 import {CustomSlider} from '@src/components/elements/custom_slider/CustomSlider';
 import {SlidersRefType} from '../../ShowPostContainer';
@@ -42,7 +42,6 @@ export const SyncSliders: FC<SyncSlidersProps> = (props) => {
     const isMdDown = useMediaQuery(theme.breakpoints.down('md'));
 
     const classes = useStyles();
-
     return (
         <div className={classes.root}>
             <div className={classes.firstSlider}>

@@ -88,7 +88,6 @@ export const ShowPostContainer: FC = () => {
             },
             ads_type: {
                 id: null,
-                name: '',
                 mark: ''
             },
             auction: {
