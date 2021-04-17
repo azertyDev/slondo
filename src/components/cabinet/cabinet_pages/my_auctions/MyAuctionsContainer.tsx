@@ -248,7 +248,7 @@ export const MyAuctionsContainer: FC = () => {
                             return (
                                 <Box px={5} py={2} display='flex' key={offer.id}>
                                     <Box>
-                                        <UserInfoWithAvatar owner={offer.user} />
+                                        <UserInfoWithAvatar owner={offer.user} isOwner={true}/>
                                     </Box>
                                     <Box>
                                         <Typography variant='subtitle2'>
@@ -328,9 +328,9 @@ export const MyAuctionsContainer: FC = () => {
                         cardData={data}
                         handleModalOpen={handleOpenModal}
                     />
-                    {data.auction.winner && (
+                    {data.auction.winner && data.status === 'success' && (
                         <Box mt={1}>
-                            <ButtonComponent className='end-auction' onClick={handleDeactivate(data.auction.id)}>
+                            <ButtonComponent className='end-auction' onClick={handleDeactivate(data.id)}>
                                 <Typography variant='subtitle1'>
                                     Завершить аукцион
                                 </Typography>
@@ -340,7 +340,7 @@ export const MyAuctionsContainer: FC = () => {
                 </Grid>
                 <Grid item xs={3}>
                     <SecondaryCabinetCard
-                        user={data.auction.winner}
+                        user={data}
                         offersData={offersData}
                         acceptOfferThePrice={acceptOfferThePrice}
                         fetchAllOffers={fetchAllOffers}
@@ -360,7 +360,7 @@ export const MyAuctionsContainer: FC = () => {
                         cardData={data}
                         handleModalOpen={handleOpenModal}
                     />
-                    {!data.creator && data.auction.is_accepted === null && (
+                    {!data.creator && data.status === 'suspended' && (
                         <Box mt={1}>
                             <ButtonComponent onClick={handleAcceptVictory(data.auction.id, true)}>
                                 <Typography variant='subtitle1'>Принять</Typography>
@@ -373,9 +373,11 @@ export const MyAuctionsContainer: FC = () => {
                 </Grid>
                 <Grid item xs={3}>
                     <SecondaryCabinetCard
-                        user={data.author}
+                        user={data}
                         handleShowPhone={handleShowPhone}
                         showPhone={showPhone}
+                        acceptOfferThePrice={acceptOfferThePrice}
+                        fetchAllOffers={fetchAllOffers}
                     />
                 </Grid>
             </Grid>

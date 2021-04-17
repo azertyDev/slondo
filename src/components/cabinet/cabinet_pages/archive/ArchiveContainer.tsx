@@ -273,7 +273,7 @@ const ArchiveContainer: FC = () => {
                 </Grid>
                 <Grid item xs={3}>
                     <SecondaryCabinetCard
-                        user={data.auction}
+                        user={data}
                     />
                 </Grid>
             </Grid>

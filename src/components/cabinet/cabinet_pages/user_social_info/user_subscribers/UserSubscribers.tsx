@@ -3,7 +3,6 @@ import {SubscriptionItem} from '@src/components/cabinet/cabinet_pages/user_socia
 import {useStyles} from './useStyles';
 
 export const UserSubscribers: FC<any> = ({ subscribers , handleFollow}) => {
-
     const classes = useStyles();
     return (
         <div className={classes.root}>

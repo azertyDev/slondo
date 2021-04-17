@@ -1,6 +1,6 @@
 import {makeStyles} from '@material-ui/core/styles';
 
-export const useStyles = makeStyles((theme) => ({
+export const useStyles = makeStyles(() => ({
     root: {
         '& .profile-form, .offers-card': {
             marginLeft: 20,

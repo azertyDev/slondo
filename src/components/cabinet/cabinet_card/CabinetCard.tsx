@@ -7,7 +7,6 @@ import {
     LocationIcon,
     PhoneIcon,
     SafeIcon,
-    SettingsIcon,
     SwapIcon
 } from '@src/components/elements/icons';
 import {BreadcrumbsComponent} from '@src/components/elements/breadcrumbs/Breadcrumbs';
@@ -74,11 +73,7 @@ export const CabinetCard: FC<CabinetCardPropsType> = (props) => {
                         <span className={cardData.ads_type}>
                             {t(cardData.ads_type)} №:&nbsp;
                         </span>
-                        {
-                            cardData.ads_type === 'post'
-                                ? cardData.id
-                                : cardData.auction.id
-                        }
+                        {cardData.id}
                     </Typography>
                     <div className='status'>
                         <Typography variant='subtitle2' className='waiting'>
@@ -122,16 +117,10 @@ export const CabinetCard: FC<CabinetCardPropsType> = (props) => {
                                 </Typography>
                             </div>
                             <div className='card-btn'>
-                                {pathname?.includes('favorite')
-                                    ?
+                                {pathname?.includes('favorite') && (
                                     <div className='isFavorite' onClick={handleModalOpen(cardData.id)}>
                                         <CloseIcon />
-                                    </div>
-                                    : cardData.creator && (
-                                    <div className='settings' onClick={handleModalOpen(cardData.id)}>
-                                        <SettingsIcon />
-                                    </div>
-                                )}
+                                    </div>)}
                             </div>
                         </div>
                         <div className="description">
