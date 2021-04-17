@@ -33,11 +33,8 @@ export const useStyles = makeStyles((theme) => ({
             '& button': {
                 width: 50,
                 height: 50,
-                background: '#fff',
+                background: 'rgba(0, 0, 0, .6)',
                 borderRadius: '100%',
-                [theme.breakpoints.down('md')]: {
-                    background: 'rgba(0, 0, 0, .6)'
-                },
                 [theme.breakpoints.down('xs')]: {
                     width: '32px',
                     height: '32px'
@@ -61,10 +58,7 @@ export const useStyles = makeStyles((theme) => ({
                     width: '19px'
                 },
                 '& path': {
-                    fill: '#8E62C2',
-                    [theme.breakpoints.down('md')]: {
-                        fill: '#fff'
-                    }
+                    fill: '#fff'
                 }
             },
 

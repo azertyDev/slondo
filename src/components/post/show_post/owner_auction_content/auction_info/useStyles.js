@@ -228,9 +228,9 @@ export const useStyles = makeStyles((theme) => ({
                 },
                 '& > button': {
                     [theme.breakpoints.down('md')]: {
-                        padding: '11px 39px'
+                        padding: '12px 39px'
                     },
-                    width: '100%',
+                    width: '97.5%',
                     background: 'linear-gradient(90deg, #7DBCF6 0%, #63A6F4 100%);',
                     '& > h6.MuiTypography-subtitle1': {
                         color: '#fff',
@@ -248,26 +248,11 @@ export const useStyles = makeStyles((theme) => ({
                     background: '#fff',
                     border: '1px solid #7DBCF6',
                     marginRight: 0,
+                    whiteSpace: 'nowrap',
                     '& h6': {
                         color: '#7DBCF6'
                     }
                 }
-            }
-        },
-        '& .floating-auc': {
-            position: 'fixed',
-            zIndex: '100',
-            bottom: 0,
-            left: 0,
-            right: 0,
-            width: '100%',
-            padding: '13px 7px 14px 17px',
-            background: '#494A61',
-            '& button': {
-                width: '50%',
-                color: '#FFFFFF',
-                background: 'linear-gradient(49.94deg, #675EAA 19.03%, #AD66D5 72.72%)',
-                borderRadius: '3px'
             }
         }
     },

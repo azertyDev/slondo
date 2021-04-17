@@ -203,24 +203,26 @@ export const AuctionInfo: FC<any> = (props) => {
                         )}
                         {!!data.auction.offer_the_price && (
                             <div>
-                                <Grid container>
-                                    <Grid item xs={isExAuc ? 6 : 12}
-                                          className='suggest_price'
-                                    >
-                                        <ButtonComponent onClick={handleOpenModal()}>
-                                            <Typography variant="subtitle1" color="initial">
-                                                Предложить цену
-                                            </Typography>
-                                        </ButtonComponent>
-                                    </Grid>
-                                    {isExAuc && (
-                                        <Grid item xs={6} className="btn-buy-now">
-                                            <ButtonComponent>
-                                                <Typography variant='subtitle2'>Купить сейчас</Typography>
+                                <Hidden lgUp>
+                                    <Grid container>
+                                        <Grid item xs={isExAuc ? 6 : 12}
+                                              className='suggest_price'
+                                        >
+                                            <ButtonComponent onClick={handleOpenModal()}>
+                                                <Typography variant="subtitle1" color="initial">
+                                                    Предложить цену
+                                                </Typography>
                                             </ButtonComponent>
                                         </Grid>
-                                    )}
-                                </Grid>
+                                        {isExAuc && (
+                                            <Grid item xs={6} className="btn-buy-now">
+                                                <ButtonComponent>
+                                                    <Typography variant='subtitle2'>Купить сейчас</Typography>
+                                                </ButtonComponent>
+                                            </Grid>
+                                        )}
+                                    </Grid>
+                                </Hidden>
                                 <CustomModal handleModalClose={handleCloseModal()} openModal={openModal}>
                                     Предложить цену
                                     <Typography variant='subtitle1'>
