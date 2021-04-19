@@ -185,8 +185,8 @@ export const SidebarMenu: FC<WithT> = ({t}) => {
             <div className="menu-item">
                 <div>
                     <ButtonComponent
-                        // className={pathname === '/cabinet/settings' ? 'selected' : ''}
-                        // onClick={onButtonClick('settings')}
+                        className={pathname === '/cabinet/settings' ? 'selected' : ''}
+                        onClick={onButtonClick('settings')}
                     >
                         <SettingsIcon/>
                         <Typography variant="subtitle1">

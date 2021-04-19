@@ -299,5 +299,15 @@ export const userAPI = {
             .catch(err => {
                 throw err;
             });
+    },
+    changeUserInfo: (name: string, surname: string): Promise<any> => {
+        return instance.post(`regular/user/info`, {
+            name,
+            surname
+        }, setTokenToHeader())
+            .then(res => res.data)
+            .catch(err => {
+                throw err;
+            });
     }
 };

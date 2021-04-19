@@ -28,7 +28,7 @@ export const UserInfoWithAvatar: FC<UserInfoWithAvatarPropsType> = ({ isOwner, o
                 </div>
                 <div>
                     <Typography variant="subtitle1" color="initial">
-                        {owner.name ?? ''}
+                        {owner.name ?? ''}&nbsp;
                         {owner.surname ?? ''}
                     </Typography>
                     <Typography variant="subtitle1" color="initial">
