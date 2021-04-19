@@ -3,21 +3,24 @@ import {makeStyles} from '@material-ui/core/styles';
 export const useStyles = makeStyles(() => ({
     modal: {
         '& > div:first-child': {
-            backgroundColor: 'rgba(0, 0, 0, 0.9) !important'
+            backgroundColor: 'rgba(0, 0, 0, 0.97) !important'
         }
     },
     root: {
-        position: 'relative',
+        '& div.close-title': {
+            padding: '0 7px'
+        },
         marginTop: '20px',
-        '& > button.MuiIconButton-root': {
-            position: 'absolute',
-            top: 0,
-            right: '60px',
-            '&:hover path': {
-                fill: '#EB5757'
+        '& div.close-wrapper': {
+            display: 'flex',
+            justifyContent: 'flex-end',
+            '& button.MuiIconButton-root': {
+                '&:hover path': {
+                    fill: '#eb5757'
+                }
             }
         },
-        '& > h6.title': {
+        '& h6.title': {
             color: '#fff',
             fontWeight: '600',
             textAlign: 'center'
@@ -40,6 +43,7 @@ export const useStyles = makeStyles(() => ({
                         visibility: 'inherit'
                     },
                     '& img.iiz__img': {
+                        width: ({isMdDown}) => isMdDown ? '100%' : 'auto',
                         height: '580px',
                         objectFit: 'contain'
                     },

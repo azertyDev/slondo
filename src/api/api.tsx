@@ -12,7 +12,7 @@ const localServer = 'http://192.168.100.60/slondo/public/api/';
 
 const instance = Axios.create({
     withCredentials: true,
-    baseURL: localServer
+    baseURL: uztelecom
 });
 
 export const setTokenToHeader = (): { headers: any } => {
@@ -91,14 +91,14 @@ export const userAPI = {
                 throw err;
             });
     },
-    getFavorites: ({ type}: { type?: string }): Promise<any> => {
+    getFavorites: ({type}: { type?: string }): Promise<any> => {
         return instance.get(`regular/post/get/favorites?type=${type}`, setTokenToHeader())
             .then(res => res.data)
             .catch(err => {
                 throw err;
             });
     },
-    getMyPosts: ({ type, onlySecure }: { type: string, onlySecure: number }): Promise<any> => {
+    getMyPosts: ({type, onlySecure}: { type: string, onlySecure: number }): Promise<any> => {
         return instance.get(`regular/user/posts?type=${type}&secure=${onlySecure}`, setTokenToHeader())
             .then(res => res.data)
             .catch(err => {
@@ -136,7 +136,7 @@ export const userAPI = {
     getDataForCreatePost: (
         fstCtgrId: number,
         secCtgrId: number,
-        trdCtgrId: number,
+        trdCtgrId: number
     ): Promise<any> => {
         return instance.get(
             `subcategory?category_id=${fstCtgrId}&sub_category_id=${secCtgrId}&type_id=${trdCtgrId}`
@@ -225,7 +225,7 @@ export const userAPI = {
                 throw err;
             });
     },
-    getUserArchivePosts: ({ type = 'post' }: { type?: string }): Promise<any> => {
+    getUserArchivePosts: ({type = 'post'}: { type?: string }): Promise<any> => {
         return instance.get(
             `regular/user/archivePosts?itemsPerPage=25&page=1&type=${type}`,
             setTokenToHeader()

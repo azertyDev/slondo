@@ -53,7 +53,7 @@ export const ModalSyncSliders: FC<SyncSlidersProps> = (props) => {
         slider3 && slider3.current.slickNext();
     };
 
-    const classes = useStyles();
+    const classes = useStyles({isMdDown});
     return (
         <Modal
             open={open}
@@ -62,17 +62,21 @@ export const ModalSyncSliders: FC<SyncSlidersProps> = (props) => {
             keepMounted
         >
             <div className={classes.root}>
-                <IconButton onClick={onClose}>
-                    <CloseIcon/>
-                </IconButton>
-                <Typography className="title" variant="h6">
-                    {title}
-                </Typography>
+                <div className='close-title'>
+                    <div className="close-wrapper">
+                        <IconButton onClick={onClose}>
+                            <CloseIcon/>
+                        </IconButton>
+                    </div>
+                    <Typography className="title" variant="h6">
+                        {title}
+                    </Typography>
+                </div>
                 <div className={classes.firstSlider}>
                     <CustomSlider
                         ref={slider3}
                         asNavFor={slider4.current}
-                        centerMode={true}
+                        centerMode={!isMdDown}
                         arrows={!isMdDown}
                         dots={isMdDown}
                     >
