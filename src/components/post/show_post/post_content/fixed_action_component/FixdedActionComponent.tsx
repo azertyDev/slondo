@@ -2,6 +2,7 @@ import React, {FC} from 'react';
 import {SafeIcon} from '@src/components/elements/icons';
 import {TextField, Typography} from '@material-ui/core';
 import {ButtonComponent} from '@src/components/elements/button/Button';
+import {CustomFormikField} from '@src/components/elements/custom_formik_field/CustomFormikField';
 import {useStyles} from './useStyles';
 
 
@@ -22,7 +23,12 @@ export const FixedActionComponent: FC<FixedActionComponentPropsType> = (props) =
             {isAuction
                 ? <div className='floating-auc'>
                     <div className="floating-content">
-                        <TextField id="outlined-basic" placeholder="Введите сумму" variant="filled"/>
+                        {/*<CustomFormikField*/}
+                        {/*    name='sum'*/}
+                        {/*    value=''*/}
+                        {/*    placeholder="Введите сумму"*/}
+                        {/*/>*/}
+                        {/*<TextField id="outlined-basic" placeholder="Введите сумму" variant="filled"/>*/}
                         <ButtonComponent>
                             Сделать ставку
                         </ButtonComponent>

@@ -51,7 +51,7 @@ export const PostContent: FC<WithT & any> = (props) => {
     } = props;
 
     const theme = useTheme();
-    const isLgDown = useMediaQuery(theme.breakpoints.down('md'));
+    const isMdDown = useMediaQuery(theme.breakpoints.down('md'));
     const isExAuc = data.ads_type.mark === 'exauc';
     const isAuction = data.ads_type.mark === 'auc' || isExAuc;
 
@@ -209,7 +209,7 @@ export const PostContent: FC<WithT & any> = (props) => {
                     </div>
                 </Hidden>
             </div>
-            <Container maxWidth="xl" disableGutters={!isLgDown}>
+            <Container maxWidth="xl" disableGutters={!isMdDown}>
                 <Hidden lgUp>
                     <div className="post-header">
                         <div>
@@ -246,7 +246,7 @@ export const PostContent: FC<WithT & any> = (props) => {
                 <div className="post-bonus">
                     {!!data.delivery && (
                         <span className="delivery">
-                        <DeliveryIcon/>&nbsp;
+                        <DeliveryIcon/>
                             <Typography variant="subtitle1">
                             Есть доставка
                         </Typography>
@@ -254,7 +254,7 @@ export const PostContent: FC<WithT & any> = (props) => {
                     )}
                     {!!data.safe_deal && (
                         <span className="safe_deal">
-                        <SafeIcon/>&nbsp;
+                        <SafeIcon/>
                             <Typography variant="subtitle1">
                             Безопасная покупка
                         </Typography>
@@ -262,7 +262,7 @@ export const PostContent: FC<WithT & any> = (props) => {
                     )}
                     {!!data.exchange && (
                         <span className="exchange">
-                        <SwapIcon/>&nbsp;
+                        <SwapIcon/>
                             <Typography variant="subtitle1">
                             Возможен обмен
                         </Typography>

@@ -3,16 +3,18 @@ import {Grid, Hidden, TextField, Typography} from '@material-ui/core';
 import {LockIcon, RefreshIcon} from '@src/components/elements/icons';
 import {AuctionTimer} from './AuctionTimer';
 import {numberPrettier} from '@root/src/helpers';
-import AuctionForm from './AuctionForm/AuctionFrom';
+import AuctionForm from './AuctionForm/AuctionForm';
 import {ButtonComponent} from '@src/components/elements/button/Button';
 import {CustomModal} from '@src/components/elements/custom_modal/CustomModal';
 import Link from 'next/link';
-import {useStyles} from './useStyles';
 import {FixedActionComponent} from '@src/components/post/show_post/post_content/fixed_action_component/FixdedActionComponent';
+import {WithT} from 'i18next';
+import {useStyles} from './useStyles';
 
 
-export const AuctionInfo: FC<any> = (props) => {
+export const AuctionInfo: FC<any & WithT> = (props) => {
     const {
+        t,
         data,
         auctionsBetsList,
         openModal,
@@ -131,29 +133,21 @@ export const AuctionInfo: FC<any> = (props) => {
                 </div>
                 {!data.creator && (
                     <>
-                        <Hidden mdDown>
-                            <div className="bet-info">
-                                <AuctionForm
-                                    data={data}
-                                    handleFormSubmit={handleSubmit}
-                                    auctionsBetsList={auctionsBetsList}
-                                />
-                                <div>
-                                    <Typography variant="subtitle2" color="initial">
-                                        Максимально возможная ставка:
-                                    </Typography>
-                                    <Typography variant="subtitle2" color="initial">
-                                        {numberPrettier(auctionsBetsList?.[0]?.max_bet)} сум
-                                    </Typography>
-                                </div>
-                            </div>
-                        </Hidden>
-                        {/*Mobile auction form*/}
-                        <Hidden lgUp>
-                            <FixedActionComponent
-                                isAuction={data.ads_type.mark !== 'post'}
+                        <div className="bet-info">
+                            <AuctionForm
+                                t={t}
+                                data={data}
+                                isAuction
+                                handleFormSubmit={handleSubmit}
+                                auctionsBetsList={auctionsBetsList}
                             />
-                        </Hidden>
+                        </div>
+                        {/*Mobile auction form*/}
+                        {/*<Hidden lgUp>*/}
+                        {/*    <FixedActionComponent*/}
+                        {/*        isAuction={data.ads_type.mark !== 'post'}*/}
+                        {/*    />*/}
+                        {/*</Hidden>*/}
                         {!!data.auction.price_buy_now && (
                             <div>
                                 <Hidden mdDown>

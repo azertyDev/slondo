@@ -227,45 +227,57 @@ export const useStyles = makeStyles((theme) => ({
                 [theme.breakpoints.down('md')]: {
                     marginRight: '8px',
                     padding: '5px 10px',
-                    boxShadow: '0px 1px 4px rgba(0, 0, 0, 0.04)',
-                    background: '#F7F7F7'
+                    background: '#F2F2F2',
+                    filter: 'drop-shadow(0px -1px 2px rgba(0, 0, 0, 0.05)) drop-shadow(0px 1px 2px rgba(0, 0, 0, 0.1))',
+                    boxShadow: '0px 0px 0px rgba(0, 0, 0, 0)'
                 },
                 '&:last-child': {
                     marginRight: 0
                 },
                 '&.delivery': {
+                    '& h6': {
+                        [theme.breakpoints.down('md')]: {
+                            color: '#4E4E4E'
+                        }
+                    },
                     '& svg': {
+                        marginRight: '5px',
                         '& path': {
                             fill: '#695EAE',
                             [theme.breakpoints.down('md')]: {
-                                fill: '#838383',
-                                boxShadow: 'inset 0px 2px 2px rgba(0, 0, 0, 0.35)'
+                                fill: '#4E4E4E'
                             }
                         }
                     }
                 },
                 '&.safe_deal': {
-                    [theme.breakpoints.down('md')]: {},
+                    '& h6': {
+                        [theme.breakpoints.down('md')]: {
+                            color: '#4E4E4E'
+                        }
+                    },
                     '& svg': {
+                        marginRight: '5px',
                         '& path': {
                             [theme.breakpoints.down('md')]: {
-                                fill: '#838383',
-                                boxShadow: 'inset 0px 2px 2px rgba(0, 0, 0, 0.35)'
+                                fill: '#4E4E4E'
                             }
                         }
                     }
                 },
                 '&.exchange': {
+                    '& h6': {
+                        [theme.breakpoints.down('md')]: {
+                            color: '#4E4E4E'
+                        }
+                    },
                     [theme.breakpoints.down('md')]: {},
                     '& svg': {
+                        marginRight: '5px',
                         width: 20,
                         height: 22,
                         '& path': {
-                            fill: '#4E4E4E',
-                            [theme.breakpoints.down('md')]: {
-                                fill: '#838383',
-                                boxShadow: 'inset 0px 2px 2px rgba(0, 0, 0, 0.35)'
-                            }
+                            fill: '#4E4E4E'
                         }
                     }
                 },
@@ -344,7 +356,7 @@ export const useStyles = makeStyles((theme) => ({
                     fontSize: 'calc(14px + 2 * (100vw / 1280))',
                     whiteSpace: 'nowrap'
 
-                },
+                }
                 // '&:first-child': {
                 //     [theme.breakpoints.down('xs')]: {
                 //         width: '49%'

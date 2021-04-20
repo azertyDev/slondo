@@ -3,7 +3,7 @@ import {makeStyles} from '@material-ui/core/styles';
 export const useStyles = makeStyles((theme) => ({
     root: {
         position: 'relative',
-        filter: 'drop-shadow(0px 1px 8px rgba(0, 0, 0, 0.35))',
+        // filter: 'drop-shadow(0px 1px 8px rgba(0, 0, 0, 0.35))',
         '& button': {
             '&.slick-prev': {
                 left: '25px'
@@ -24,6 +24,9 @@ export const useStyles = makeStyles((theme) => ({
             justifyContent: 'space-between',
             width: '100%',
             padding: '20px 25px 0',
+            [theme.breakpoints.down('md')]: {
+                background: 'linear-gradient(180deg, rgba(0, 0, 0, 0.5) 0%, rgba(0, 0, 0, 0.08) 52.08%, rgba(0, 0, 0, 0) 100%)'
+            },
             [theme.breakpoints.up('lg')]: {
                 justifyContent: 'flex-end'
             },
@@ -73,6 +76,12 @@ export const useStyles = makeStyles((theme) => ({
                     [theme.breakpoints.down('xs')]: {
                         marginRight: '8px'
                     }
+                }
+            },
+            '& .backspace-btn': {
+                background: 'none',
+                '& span > svg ': {
+                    boxShadow: '0px 1px 1px rgba(0, 0, 0, 0.25)'
                 }
             }
         },
