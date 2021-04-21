@@ -52,56 +52,57 @@ const AuctionForm: FC<AuctionFromPropsType> = (props) => {
     const classes = useStyles({isMdDown});
     return (
         <div className={classes.root}>
-            <FormikProvider value={formik}>
-                <form onSubmit={handleSubmit}>
-                    <div>
-                        <div className="bet-info">
-                            <CustomFormikField
-                                name="bet"
-                                type="number"
-                                placeholder={`Мин. ставка: ${min_bet} сум`}
-                                errorMsg={getErrorMsg(errors.bet, touched.bet, t)}
-                            />
-                        </div>
-                        <ButtonComponent
-                            color="secondary"
-                            type="submit"
-                            style={{
-                                borderRadius: '3px',
-                                border: '1px solid #675EAA',
-                                width: '100%',
-                                marginTop: 5
-                            }}
-                        >
-                            <Typography variant="subtitle1" color="initial">
-                                Сделать ставку
-                            </Typography>
-                        </ButtonComponent>
+            {isAuction
+                ? <FormikProvider value={formik}>
+                    <form onSubmit={handleSubmit}>
                         <div>
-                            <Typography variant="subtitle2" color="initial">
-                                Максимально возможная ставка:
-                            </Typography>
-                            <Typography variant="subtitle2" color="initial">
-                                {numberPrettier(auctionsBetsList?.[0]?.max_bet)} сум
-                            </Typography>
-                        </div>
-                        {safe_deal && (
-                            <div className='floating'>
-                                <div className="floating-text">
-                                    <SafeIcon/>
-                                    <Typography variant='subtitle2'>
-                                        Безопасная покупка <br/>
-                                        за 420 000 сум
-                                    </Typography>
-                                </div>
-                                <ButtonComponent>
-                                    Купить
-                                </ButtonComponent>
+                            <div className="bet-info">
+                                <CustomFormikField
+                                    name="bet"
+                                    type="number"
+                                    placeholder={`Мин. ставка: ${min_bet} сум`}
+                                    errorMsg={getErrorMsg(errors.bet, touched.bet, t)}
+                                />
                             </div>
-                        )}
+                            <ButtonComponent
+                                color="secondary"
+                                type="submit"
+                                style={{
+                                    borderRadius: '3px',
+                                    border: '1px solid #675EAA',
+                                    width: '100%',
+                                    marginTop: 5
+                                }}
+                            >
+                                <Typography variant="subtitle1" color="initial">
+                                    Сделать ставку
+                                </Typography>
+                            </ButtonComponent>
+                            <div>
+                                <Typography variant="subtitle2" color="initial">
+                                    Максимально возможная ставка:
+                                </Typography>
+                                <Typography variant="subtitle2" color="initial">
+                                    {numberPrettier(auctionsBetsList?.[0]?.max_bet)} сум
+                                </Typography>
+                            </div>
+                        </div>
+                    </form>
+                </FormikProvider>
+                : safe_deal && (
+                <div className='floating'>
+                    <div className="floating-text">
+                        <SafeIcon/>
+                        <Typography variant='subtitle2'>
+                            Безопасная покупка <br/>
+                            за 420 000 сум
+                        </Typography>
                     </div>
-                </form>
-            </FormikProvider>
+                    <ButtonComponent>
+                        Купить
+                    </ButtonComponent>
+                </div>
+            )}
         </div>
     );
 };

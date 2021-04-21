@@ -5,7 +5,6 @@ import {SafeIcon} from '@root/src/components/elements/icons';
 import {UserInfoWithAvatar} from '@src/components/elements/user_info_with_avatar/UserInfoWithAvatar';
 import {SocialsBlock} from '@root/src/components/elements/socials_block/SocialsBlock';
 import {UserInfo} from '@root/interfaces/Auth';
-import {FixedActionComponent} from '@src/components/post/show_post/post_content/fixed_action_component/FixdedActionComponent';
 import {useStyles} from './useStyles';
 
 
@@ -62,11 +61,6 @@ export const OwnerInfo: FC<OwnerPropsType> = (props) => {
                     )}
                 </div>
                 <SocialsBlock/>
-            </Hidden>
-            <Hidden lgUp>
-                <FixedActionComponent
-                    safe_deal={true}
-                />
             </Hidden>
         </div>
     );

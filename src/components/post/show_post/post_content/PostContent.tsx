@@ -27,7 +27,7 @@ import {ModalSyncSliders} from './modal_sync_sliders/ModalSyncSliders';
 import {BreadcrumbsComponent} from '@src/components/elements/breadcrumbs/Breadcrumbs';
 import {numberPrettier, weekDaysHelper} from '@src/helpers';
 import {ButtonComponent} from '@src/components/elements/button/Button';
-import {NotificationIcon} from '@src/components/elements/icons';
+import {NotificationIcon, RenewalIcon} from '@src/components/elements/icons';
 import {months} from '@src/common_data/common';
 import {useStyles} from './useStyles';
 
@@ -278,6 +278,14 @@ export const PostContent: FC<WithT & any> = (props) => {
                             )}
                             <Typography variant="subtitle1">
                             {`${data.available_start_time} - ${data.available_end_time}`}
+                        </Typography>
+                    </span>
+                    )}
+                    {!!data.auction?.auto_renewal && (
+                        <span className="auto-renewal">
+                            <RenewalIcon/>
+                            <Typography variant="subtitle1">
+                            Автопродление
                         </Typography>
                     </span>
                     )}

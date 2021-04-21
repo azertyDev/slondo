@@ -3,13 +3,32 @@ import {makeStyles} from '@material-ui/core/styles';
 export const useStyles = makeStyles((theme) => ({
     root: {
         position: 'relative',
-        // filter: 'drop-shadow(0px 1px 8px rgba(0, 0, 0, 0.35))',
+        [theme.breakpoints.down('md')]: {
+            // filter: 'drop-shadow(0px 1px 8px rgba(0, 0, 0, 0.35))'
+        },
         '& button': {
+            background: 'rgba(0, 0, 0, .6)',
             '&.slick-prev': {
-                left: '25px'
+                left: '25px',
+                '& span': {
+                    '&:before': {
+                        background: '#fff'
+                    },
+                    '&:after': {
+                        background: '#fff'
+                    }
+                }
             },
             '&.slick-next': {
-                right: '25px'
+                right: '25px',
+                '& span': {
+                    '&:before': {
+                        background: '#fff'
+                    },
+                    '&:after': {
+                        background: '#fff'
+                    }
+                }
             }
         }
     },
@@ -36,7 +55,6 @@ export const useStyles = makeStyles((theme) => ({
             '& button': {
                 width: 50,
                 height: 50,
-                background: 'rgba(0, 0, 0, .6)',
                 borderRadius: '100%',
                 [theme.breakpoints.down('xs')]: {
                     width: '32px',
@@ -81,7 +99,7 @@ export const useStyles = makeStyles((theme) => ({
             '& .backspace-btn': {
                 background: 'none',
                 '& span > svg ': {
-                    boxShadow: '0px 1px 1px rgba(0, 0, 0, 0.25)'
+                    filter: 'drop-shadow( 0px 1px 1px rgba(0, 0, 0, .25))'
                 }
             }
         },
@@ -89,7 +107,6 @@ export const useStyles = makeStyles((theme) => ({
             display: 'flex',
             justifyContent: 'center',
             '& div.slick-slide': {
-                margin: '0 1px',
                 '& img': {
                     width: 'auto !important',
                     height: '518px',

@@ -7,7 +7,6 @@ import AuctionForm from './AuctionForm/AuctionForm';
 import {ButtonComponent} from '@src/components/elements/button/Button';
 import {CustomModal} from '@src/components/elements/custom_modal/CustomModal';
 import Link from 'next/link';
-import {FixedActionComponent} from '@src/components/post/show_post/post_content/fixed_action_component/FixdedActionComponent';
 import {WithT} from 'i18next';
 import {useStyles} from './useStyles';
 
@@ -140,14 +139,9 @@ export const AuctionInfo: FC<any & WithT> = (props) => {
                                 isAuction
                                 handleFormSubmit={handleSubmit}
                                 auctionsBetsList={auctionsBetsList}
+                                safe_deal
                             />
                         </div>
-                        {/*Mobile auction form*/}
-                        {/*<Hidden lgUp>*/}
-                        {/*    <FixedActionComponent*/}
-                        {/*        isAuction={data.ads_type.mark !== 'post'}*/}
-                        {/*    />*/}
-                        {/*</Hidden>*/}
                         {!!data.auction.price_buy_now && (
                             <div>
                                 <Hidden mdDown>

@@ -39,20 +39,23 @@ export const useStyles = makeStyles((theme) => ({
                     fontSize: 'calc(12px + 8 * (100vw / 1280))'
                 },
                 '&.post': {
-                    background: 'rgba(136, 202, 236, 0.65)',
-                    [theme.breakpoints.down('md')]: {
-                        background: 'rgba(136, 202, 236, 0.85)'
-                    }
+                    background: 'rgba(136, 202, 236, .85)'
                 },
                 '&.auc': {
-                    background: 'rgba(173, 102, 213, 0.65)'
+                    background: 'rgba(187, 107, 217, .85)'
+
                 },
                 '&.exauc': {
-                    background: 'rgba(242, 153, 74, 0.65)'
+                    background: 'rgba(242, 153, 74, .85)'
                 }
             }
         },
         '& .post-header': {
+            '& div': {
+                '& .MuiTypography-h2': {
+                    lineHeight: '1.125'
+                }
+            },
             display: 'flex',
             marginBottom: '10px',
             [theme.breakpoints.up('lg')]: {
@@ -159,7 +162,7 @@ export const useStyles = makeStyles((theme) => ({
             margin: '20px 0',
             [theme.breakpoints.down('md')]: {
                 background: 'inherit',
-                margin: '35px 0 20px'
+                margin: '0 0 20px'
             },
             [theme.breakpoints.up('lg')]: {
                 display: 'flex',
@@ -271,7 +274,6 @@ export const useStyles = makeStyles((theme) => ({
                             color: '#4E4E4E'
                         }
                     },
-                    [theme.breakpoints.down('md')]: {},
                     '& svg': {
                         marginRight: '5px',
                         width: 20,
@@ -282,8 +284,14 @@ export const useStyles = makeStyles((theme) => ({
                     }
                 },
                 '&.available': {
+                    '& h6': {
+                        [theme.breakpoints.down('md')]: {
+                            color: '#4E4E4E'
+                        }
+                    },
                     [theme.breakpoints.down('md')]: {
-                        marginRight: '8px'
+                        marginRight: '8px',
+                        padding: '10px 10px'
                     },
                     '& svg': {
                         marginRight: 15,
@@ -293,9 +301,24 @@ export const useStyles = makeStyles((theme) => ({
                         '& > defs > linearGradient': {
                             '& stop': {
                                 [theme.breakpoints.down('md')]: {
-                                    stopColor: '#838383',
+                                    stopColor: '#4E4E4E',
                                     boxShadow: 'inset 0px 2px 2px rgba(0, 0, 0, 0.35)'
                                 }
+                            }
+                        }
+                    }
+                },
+                '&.auto-renewal': {
+                    '& h6': {
+                        [theme.breakpoints.down('md')]: {
+                            color: '#4E4E4E'
+                        }
+                    },
+                    '& svg': {
+                        marginRight: '5px',
+                        '& path': {
+                            [theme.breakpoints.down('md')]: {
+                                fill: '#4E4E4E'
                             }
                         }
                     }
@@ -307,11 +330,20 @@ export const useStyles = makeStyles((theme) => ({
                         fontWeight: '700'
                     }
                 }
+            },
+            [theme.breakpoints.down('md')]: {
+                '&:after': {
+                    content: '""',
+                    width: '100%',
+                    height: '0.8px',
+                    background: 'linear-gradient(90deg, rgba(243, 243, 243, 0.15) -4.72%, rgba(204, 204, 204, 0.8) 47.81%, rgba(248, 248, 248, 0.15) 104.92%)'
+                }
             }
         },
         '& div.contact': {
             display: 'flex',
             marginBottom: '30px',
+            position: 'relative',
             '& button': {
                 marginRight: '6px',
                 borderRadius: '5px',
@@ -342,44 +374,21 @@ export const useStyles = makeStyles((theme) => ({
                     }
                 }
 
-            }
-        },
-        '& div.btn-buy-now-offer': {
-            display: 'flex',
-            marginBottom: '30px',
-            '& button': {
-                width: '100%',
-                // marginRight: '6px',
-                // borderRadius: '5px',
-                '& > h6': {
-                    color: '#fff',
-                    fontSize: 'calc(14px + 2 * (100vw / 1280))',
-                    whiteSpace: 'nowrap'
-
+            },
+            [theme.breakpoints.down('md')]: {
+                '&:after': {
+                    position: 'absolute',
+                    bottom: '-16px',
+                    left: 0,
+                    content: '""',
+                    width: '100%',
+                    height: '0.8px',
+                    background: 'linear-gradient(90deg, rgba(243, 243, 243, 0.15) -4.72%, rgba(204, 204, 204, 0.8) 47.81%, rgba(248, 248, 248, 0.15) 104.92%)'
                 }
-                // '&:first-child': {
-                //     [theme.breakpoints.down('xs')]: {
-                //         width: '49%'
-                //     },
-                //     padding: '11px 39px',
-                //     background: 'linear-gradient(90deg, #7DBCF6 0%, #63A6F4 100%);'
-                // },
-                // '&:last-child': {
-                //     [theme.breakpoints.down('xs')]: {
-                //         width: '49%'
-                //     },
-                //     padding: '11px 44px',
-                //     background: '#fff',
-                //     border: '1px solid #7DBCF6',
-                //     marginRight: 0,
-                //     '& h6': {
-                //         color: '#7DBCF6'
-                //     }
-                // }
-
             }
         },
         '& div.post-location': {
+            position: 'relative',
             marginBottom: '36px',
             '& p.MuiTypography-button': {
                 marginBottom: 16
@@ -413,9 +422,21 @@ export const useStyles = makeStyles((theme) => ({
                     whiteSpace: 'nowrap',
                     textOverflow: 'ellipsis'
                 }
+            },
+            [theme.breakpoints.down('md')]: {
+                '&:after': {
+                    position: 'absolute',
+                    bottom: '-16px',
+                    left: 0,
+                    content: '""',
+                    width: '100%',
+                    height: '0.8px',
+                    background: 'linear-gradient(90deg, rgba(243, 243, 243, 0.15) -4.72%, rgba(204, 204, 204, 0.8) 47.81%, rgba(248, 248, 248, 0.15) 104.92%)'
+                }
             }
         },
         '& div.post-description': {
+            position: 'relative',
             marginBottom: '36px',
             '& p.MuiTypography-button': {
                 marginBottom: 15
@@ -456,6 +477,17 @@ export const useStyles = makeStyles((theme) => ({
                         alignItems: 'center'
                     }
                 }
+            },
+            [theme.breakpoints.down('md')]: {
+                '&:after': {
+                    position: 'absolute',
+                    bottom: '-16px',
+                    left: 0,
+                    content: '""',
+                    width: '100%',
+                    height: '0.8px',
+                    background: 'linear-gradient(90deg, rgba(243, 243, 243, 0.15) -4.72%, rgba(204, 204, 204, 0.8) 47.81%, rgba(248, 248, 248, 0.15) 104.92%)'
+                }
             }
         },
         '& div.post-category': {
@@ -490,6 +522,8 @@ export const useStyles = makeStyles((theme) => ({
             }
         },
         '& div.post-parameters': {
+            position: 'relative',
+            marginBottom: '35px',
             '& p.MuiTypography-button': {
                 marginBottom: '30px'
             },
@@ -569,6 +603,17 @@ export const useStyles = makeStyles((theme) => ({
                         justifyContent: 'space-between',
                         alignItems: 'center'
                     }
+                }
+            },
+            [theme.breakpoints.down('md')]: {
+                '&:after': {
+                    position: 'absolute',
+                    bottom: '-16px',
+                    left: 0,
+                    content: '""',
+                    width: '100%',
+                    height: '0.8px',
+                    background: 'linear-gradient(90deg, rgba(243, 243, 243, 0.15) -4.72%, rgba(204, 204, 204, 0.8) 47.81%, rgba(248, 248, 248, 0.15) 104.92%)'
                 }
             }
         },
