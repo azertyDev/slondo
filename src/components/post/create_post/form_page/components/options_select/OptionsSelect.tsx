@@ -1,13 +1,13 @@
-import React, {FC} from "react";
-import {WithT} from "i18next";
-import {Checkbox, Grid, Typography} from "@material-ui/core";
-import {useStyles} from '../type_select/useStyles';
+import React, {FC} from 'react';
+import {WithT} from 'i18next';
+import {Checkbox, Grid, Typography} from '@material-ui/core';
+import {useStyles} from '../deployed_select/useStyles';
 
 
 export type HandleOptionCheckboxType = (name: string, value) => void;
 
 type OptionsSectionPropsType = {
-    name: string,
+    name?: string,
     values,
     options: any[],
     handleOptionCheckbox: HandleOptionCheckboxType
@@ -19,24 +19,26 @@ export const OptionsSelect: FC<OptionsSectionPropsType> = (props) => {
         name,
         values,
         options = [],
-        handleOptionCheckbox,
+        handleOptionCheckbox
     } = props;
 
     const onClick = (item) => () => {
-        handleOptionCheckbox(name, item)
+        handleOptionCheckbox(name, item);
     };
 
     const classes = useStyles();
     return (
         <div className={classes.root}>
-            <Typography variant='subtitle1'>
-                <strong>
-                    {t(name)}
-                </strong>
-            </Typography>
+            {name && (
+                <Typography variant='subtitle1'>
+                    <strong>
+                        {t(name)}
+                    </strong>
+                </Typography>
+            )}
             <Grid container>
                 {options.map(item => {
-                    const checked = !!values[name]?.some(({id}) => id === item.id);
+                    const checked = !!values[name] && values[name].some(({id}) => id === item.id);
                     return (
                         <Grid
                             item
@@ -56,9 +58,9 @@ export const OptionsSelect: FC<OptionsSectionPropsType> = (props) => {
                                 {t(item.name)}
                             </Typography>
                         </Grid>
-                    )
+                    );
                 })}
             </Grid>
         </div>
-    )
+    );
 };

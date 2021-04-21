@@ -23,14 +23,21 @@ export const requireFields = [
     'rooms',
     'area',
     'land_area',
-    'general_area'
+    'general_area',
+    'model',
+    'position',
+    'engine_type',
+    'engine_capacity',
+    'drive'
 ];
 
 export const excludedKeys = [
+    'title',
     'id',
     'name',
     'type_id',
-    'sub_type_id'
+    'sub_type_id',
+    'area_id'
 ];
 
 export const numericFields = [
@@ -50,5 +57,17 @@ export const numericFields = [
 
 export const optionKeys = [
     'mount',
-    'properties'
+    'properties',
+    'power_windows',
+    'multimedia',
+    'anti_theft',
+    'airbags',
+    'assistance',
+    'parking',
+    'adjustable_seats',
+    'seat_heating',
+    'power_windows',
+    'seat_heating',
+    'steering',
+    'view'
 ];

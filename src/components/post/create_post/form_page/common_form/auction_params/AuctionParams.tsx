@@ -1,9 +1,10 @@
-import React, {FC} from "react";
-import {WithT} from "i18next";
-import {Checkbox, Grid, Typography} from "@material-ui/core";
-import {CustomSelect} from "@root/src/components/post/create_post/form_page/components/custom_select/CustomSelect";
-import {CustomFormikField} from "@src/components/elements/custom_formik_field/CustomFormikField";
+import React, {FC} from 'react';
+import {WithT} from 'i18next';
+import {Checkbox, Grid, Typography} from '@material-ui/core';
+import {DropDownSelect} from '@src/components/post/create_post/form_page/components/drop_down_select/DropDownSelect';
+import {CustomFormikField} from '@src/components/elements/custom_formik_field/CustomFormikField';
 import {useStyles} from './useStyles';
+import {getErrorMsg} from '@src/helpers';
 
 
 type AuctionParamsPropsType = {
@@ -40,18 +41,14 @@ export const AuctionParams: FC<AuctionParamsPropsType> = (props) => {
             <Grid container className='price-wrapper'>
                 <Grid item container spacing={2} xs={12}>
                     <Grid item container xs={4}>
-                        <CustomSelect
+                        <DropDownSelect
                             t={t}
                             name='duration'
                             values={auction}
                             onBlur={handleBlur}
                             items={postType.expired}
                             handleSelect={handleSelect}
-                            errorMsg={
-                                errors.auction && touched.auction
-                                ? t(`errors:${errors.auction}`)
-                                : ''
-                            }
+                            errorMsg={getErrorMsg(errors.auction, touched.auction, t)}
                         />
                     </Grid>
                     <Grid item xs={3}>
@@ -60,11 +57,7 @@ export const AuctionParams: FC<AuctionParamsPropsType> = (props) => {
                             labelText={t('startPrice')}
                             value={values.price}
                             onChange={handleInput}
-                            errorMsg={
-                                errors.price && touched.price
-                                ? t(`errors:${errors.price}`)
-                                : ''
-                            }
+                            errorMsg={getErrorMsg(errors.price, touched.price, t)}
                         />
                     </Grid>
                     {isAdvanceAuction && (
@@ -77,6 +70,18 @@ export const AuctionParams: FC<AuctionParamsPropsType> = (props) => {
                             />
                         </Grid>
                     )}
+                </Grid>
+                <Grid container alignItems='center' item xs={12}>
+                    <Checkbox
+                        color='primary'
+                        checked={auction.offer_the_price}
+                        onChange={handleCheckboxChange('offer_the_price')}
+                    />
+                    <Typography variant="subtitle1">
+                        <strong>
+                            {t('offerPrice')}
+                        </strong>
+                    </Typography>
                 </Grid>
                 {isAdvanceAuction && (
                     <>
@@ -112,18 +117,6 @@ export const AuctionParams: FC<AuctionParamsPropsType> = (props) => {
                             <Typography variant="subtitle1">
                                 <strong>
                                     {t('autoRenewal')}
-                                </strong>
-                            </Typography>
-                        </Grid>
-                        <Grid container alignItems='center' item xs={12}>
-                            <Checkbox
-                                color='primary'
-                                checked={auction.offer_the_price}
-                                onChange={handleCheckboxChange('offer_the_price')}
-                            />
-                            <Typography variant="subtitle1">
-                                <strong>
-                                    {t('offerPrice')}
                                 </strong>
                             </Typography>
                         </Grid>

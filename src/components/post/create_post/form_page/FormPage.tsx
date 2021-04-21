@@ -1,8 +1,8 @@
 import React, {FC, useEffect, useState} from 'react';
-import {useRouter} from "next/router";
-import {Typography} from "@material-ui/core";
-import {useTranslation} from "next-i18next";
-import {useDispatch, useSelector} from "react-redux";
+import {useRouter} from 'next/router';
+import {Typography} from '@material-ui/core';
+import {useTranslation} from 'next-i18next';
+import {useDispatch, useSelector} from 'react-redux';
 import {userAPI} from '@src/api/api';
 import {Steps} from '../steps/Steps';
 import {postTypes} from '@src/common_data/post_types';
@@ -11,16 +11,18 @@ import {AppearanceForm} from './appearance_form/AppearanceForm';
 import {CommonForm} from './common_form/CommonForm';
 import {setErrorMsgAction} from '@root/src/redux/slices/errorSlice';
 import {dataForCrtPostNormalize, getCategoriesByParams, CategoriesParamsType} from '@src/helpers';
-import {ButtonComponent} from "@src/components/elements/button/Button";
-import {SuccessPage} from "@src/components/post/create_post/form_page/success_page/SuccessPage";
-import {ParamsFormContainer} from "./params_form/ParamsFormContainer";
-import {RootState} from "@src/redux/rootReducer";
+import {ButtonComponent} from '@src/components/elements/button/Button';
+import {SuccessPage} from '@src/components/post/create_post/form_page/success_page/SuccessPage';
+import {ParamsFormContainer} from './params_form/ParamsFormContainer';
+import {RootState} from '@src/redux/rootReducer';
 import {useStyles} from './useStyles';
 
 
 const extendSubCtgrs = [
     'apartments',
-    'housesCottages'
+    'housesCottages',
+    'madeInUzb',
+    'foreignCars'
 ];
 
 export type DataForCrtPostType = {
@@ -45,7 +47,6 @@ export const FormPage: FC = () => {
         } as CategoriesParamsType
     );
 
-    const mark = category.name;
     const isCtgrAnimalFishes = category.name === 'animal' && subCategory.name === 'fishes';
     const isExtendSubCtgr = extendSubCtgrs.some(ctgr => ctgr === subCategory.name);
 
@@ -63,8 +64,8 @@ export const FormPage: FC = () => {
     };
 
     if (isCtgrAnimalFishes) {
-        initPost[mark] = {
-            [`${mark}_id`]: subCategory.id
+        initPost[categoryName] = {
+            [`${categoryName}_id`]: subCategory.id
         };
     }
 
@@ -88,7 +89,25 @@ export const FormPage: FC = () => {
         setCurrentFormIndex(formIndex);
     };
 
-    const setFetchedFilters = async () => {
+    const manufacturersDataNormalize = (data) => {
+        return data.manufacturers.map(({manufacturer}) => {
+            manufacturer = {
+                id: manufacturer.id,
+                name: manufacturer.name,
+                models: manufacturer.separate_models.map(({model}) => {
+                    model = {
+                        id: model.id,
+                        name: model.name,
+                        years: model.years.map(({year}) => year)
+                    };
+                    return model;
+                })
+            };
+            return manufacturer;
+        });
+    };
+
+    const fetchFilters = async () => {
         try {
             const subCtgrId = subCategory?.id ?? '';
             const typeId = type?.id ?? '';
@@ -98,7 +117,18 @@ export const FormPage: FC = () => {
                 isFetch: true
             });
 
-            const fetchedData = await userAPI.getDataForCreatePost(category.id, subCtgrId, typeId);
+            let fetchedData = await userAPI.getDataForCreatePost(category.id, subCtgrId, typeId);
+
+            if (categoryName === 'car') {
+                if (subCategoryName === 'madeInUzb') {
+                    fetchedData = {
+                        ...fetchedData.default_param,
+                        manufacturer: manufacturersDataNormalize(fetchedData)
+                    };
+                } else {
+                    fetchedData = {...fetchedData.default_param};
+                }
+            }
 
             setFilters({
                 isFetch: false,
@@ -143,7 +173,7 @@ export const FormPage: FC = () => {
 
     useEffect(() => {
         if (!isCtgrAnimalFishes && !!category) {
-            setFetchedFilters();
+            fetchFilters();
         }
     }, []);
 
@@ -161,13 +191,13 @@ export const FormPage: FC = () => {
                  <div className={classes.root}>
                      <ParamsFormContainer
                          t={t}
-                         mark={mark}
                          type={type}
                          filters={filtersData}
                          post={post}
                          setPost={setPost}
                          isPreview={isPreview}
                          subCategory={subCategory}
+                         categoryName={categoryName}
                          isExtendSubCtgr={isExtendSubCtgr}
                          currentFormIndex={currentFormIndex}
                          handleFormOpen={handleFormOpen}
@@ -176,14 +206,14 @@ export const FormPage: FC = () => {
                      <div>
                          <AppearanceForm
                              t={t}
-                             mark={mark}
                              colors={colors}
                              post={post}
                              setPost={setPost}
                              isPreview={isPreview}
+                             categoryName={categoryName}
+                             currentFormIndex={currentFormIndex}
                              handleFormOpen={handleFormOpen}
                              handleNextFormOpen={handleNextFormOpen}
-                             currentFormIndex={currentFormIndex}
                          />
                      </div>
                      <div>

@@ -5,7 +5,7 @@ import CyrillicToTranslit from 'cyrillic-to-translit-js';
 import {punctuationMarksRegEx} from '@src/common_data/reg_exs';
 import {categories_list} from '@src/common_data/categories_list';
 import {requireFields} from '@src/common_data/form_fields';
-import {IdNameType} from "@root/interfaces/Post";
+import {IdNameType} from '@root/interfaces/Post';
 
 
 export const cookies = new Cookies();
@@ -14,7 +14,7 @@ export const cookieOpts = {path: '/'};
 export const isRequired = (field: string): boolean =>
     requireFields.some(reqField => reqField === field);
 
-export const phoneFormat = (phone: string): string => phone.replace(/[\s+()]/g, "");
+export const phoneFormat = (phone: string): string => phone.replace(/[\s+()]/g, '');
 
 export const transformToCyrillic = (title: string, reverse?: boolean): string => {
     const transform = reverse ? new CyrillicToTranslit().reverse : new CyrillicToTranslit().transform;
@@ -51,12 +51,12 @@ export const numberPrettier = (price: string): string => {
     return !!price
            ? price.toString()
                .replace(/\s/g, '')
-               .replace(/\B(?=(\d{3})+(?!\d))/g, " ")
+               .replace(/\B(?=(\d{3})+(?!\d))/g, ' ')
            : '';
 };
 
 export const clearWhiteSpaces = (txt: string): string => {
-    return txt.replace(/\s+/g, "");
+    return txt.replace(/\s+/g, '');
 };
 
 export const addParentsToCtgrs = (categoriesList: CategoryType[]): CategoryType[] => {
@@ -103,16 +103,19 @@ export const addParentsToCtgrs = (categoriesList: CategoryType[]): CategoryType[
     }
 };
 
-export const prepareDataForCreate = data => (
+export const prepareDataForCreate = (data, filters) => (
     Object.keys(data).reduce<any>((acc, key) => {
+        const isArray = Array.isArray(data[key]);
         if (data[key] && key !== 'title') {
-            if (typeof data[key] === 'string' || typeof data[key] === 'number' || Array.isArray(data[key]) && data[key].length) {
-                if (Array.isArray(data[key])) {
+            if (typeof data[key] !== 'object' || isArray && data[key].length) {
+                if (isArray) {
                     acc[key] = data[key].map(({id}) => ({id}));
+                } else if (key === 'engine_capacity') {
+                    acc.engine_capacity_id = filters.engine_capacity.find(v => v.name === data[key]).id;
                 } else {
                     acc[key] = data[key];
                 }
-            } else if (typeof data[key] === 'object' && !Array.isArray(data[key])) {
+            } else if (typeof data[key] === 'object' && !isArray) {
                 acc[`${key}_id`] = data[key].id;
             }
         }

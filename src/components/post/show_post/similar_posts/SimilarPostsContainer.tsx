@@ -3,7 +3,6 @@ import {ITEMS_PER_PAGE} from '@src/constants';
 import {userAPI} from '@src/api/api';
 import {CardData, InnerCardData} from '@root/interfaces/CardData';
 import {SimilarPosts} from './SimilarPosts';
-import {useRouter} from 'next/router';
 
 
 const initCard: InnerCardData = {

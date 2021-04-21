@@ -5,7 +5,6 @@ import {CardData, InnerCardData} from '@root/interfaces/CardData';
 import {PostsSlider} from './PostsSlider';
 import {setErrorMsgAction} from '@src/redux/slices/errorSlice';
 import {useDispatch} from 'react-redux';
-import {useRouter} from 'next/router';
 
 
 const initCard: InnerCardData = {

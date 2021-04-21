@@ -11,7 +11,7 @@ import {useStyles} from './useStyles';
 
 
 type AppearanceFormPropsType = {
-    mark: string,
+    categoryName: string,
     colors: (IdNameType & { hex_color_code: string })[],
     post,
     setPost,
@@ -25,7 +25,7 @@ export const AppearanceForm: FC<AppearanceFormPropsType> = (props) => {
     const {
         t,
         currentFormIndex,
-        mark,
+        categoryName,
         colors,
         post,
         setPost,
@@ -40,8 +40,8 @@ export const AppearanceForm: FC<AppearanceFormPropsType> = (props) => {
         const photos = files.filter(({file}) => file);
 
         if (color) {
-            post[mark] = {
-                ...post[mark],
+            post[categoryName] = {
+                ...post[categoryName],
                 color_id: color.id
             };
         }
