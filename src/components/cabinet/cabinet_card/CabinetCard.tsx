@@ -6,8 +6,7 @@ import {
     EyeIcon,
     LocationIcon,
     PhoneIcon,
-    SafeIcon,
-    SettingsIcon,
+    SafeIcon, SettingsIcon,
     SwapIcon
 } from '@src/components/elements/icons';
 import {BreadcrumbsComponent} from '@src/components/elements/breadcrumbs/Breadcrumbs';
@@ -74,11 +73,7 @@ export const CabinetCard: FC<CabinetCardPropsType> = (props) => {
                         <span className={cardData.ads_type}>
                             {t(cardData.ads_type)} №:&nbsp;
                         </span>
-                        {
-                            cardData.ads_type === 'post'
-                                ? cardData.id
-                                : cardData.auction.id
-                        }
+                        {cardData.id}
                     </Typography>
                     <div className='status'>
                         <Typography variant='subtitle2' className='waiting'>

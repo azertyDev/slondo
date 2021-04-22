@@ -15,7 +15,7 @@ export const useStyles = makeStyles((theme) => ({
             '& > div:last-child': {
                 display: 'flex',
                 flexFlow: 'column wrap',
-                justifyContent: 'center',
+                justifyContent: 'space-around',
                 [theme.breakpoints.down('md')]: {
                     width: '201px'
                 },

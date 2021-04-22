@@ -13,6 +13,7 @@ export type CabinetMenuPropsType = {
 
 export const CabinetWrapper: FC<CabinetMenuPropsType> = ({children, title, headerTitle}) => {
     const {info} = useSelector((store: RootState) => store.user);
+
     const classes = useStyles();
     return (
         <MainLayout title={`Мой кабинет | ${title}`}>

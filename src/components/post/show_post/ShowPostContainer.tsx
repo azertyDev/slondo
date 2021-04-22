@@ -29,7 +29,7 @@ export const ShowPostContainer: FC = () => {
     const {t} = useTranslation(['post']);
     const router = useRouter();
     const lang = i18n.language;
-    const url = useRouter().query.url as string;
+    const url = router.query.url as string;
     const [postId] = url.split('-').splice(-1);
 
     const initValues = {id: null, name: ''};
@@ -119,6 +119,7 @@ export const ShowPostContainer: FC = () => {
     const [parameters, setParameters] = useState({});
     const [slidersRefs, setSlidersRefs] = useState(initSlidersRefs);
     const [descHeight, setDescHeight] = useState(0);
+    const [openBuyNowModal, setOpenBuyNowModal] = useState(false);
     const [openModal, setOpenModal] = useState(false);
     const [page, setPage] = useState(1);
     const [auctionsBetsList, setAuctionBetsList] = useState(initialAuctionBetsList);
@@ -128,6 +129,9 @@ export const ShowPostContainer: FC = () => {
         price: null
     });
 
+    const handleOpenBuyNowModal = () => () => {
+        setOpenBuyNowModal(true);
+    };
     const handleOpenModal = () => () => {
         setOpenModal(true);
     };
@@ -262,10 +266,12 @@ export const ShowPostContainer: FC = () => {
         <AuctionInfo
             data={postData.data}
             t={t}
+            openBuyNowModal={openBuyNowModal}
             openModal={openModal}
             page={page}
             auctionsBetsList={auctionsBetsList.list}
             lastPage={lastPage}
+            handleOpenBuyNowModal={handleOpenBuyNowModal}
             handleOpenModal={handleOpenModal}
             handleCloseModal={handleCloseModal}
             handleBuyNow={handleBuyNow}

@@ -18,6 +18,8 @@ export const AuctionInfo: FC<any> = (props) => {
         data,
         auctionsBetsList,
         openModal,
+        openBuyNowModal,
+        handleOpenBuyNowModal,
         handleOpenModal,
         handleCloseModal,
         handleBuyNow,
@@ -149,13 +151,13 @@ export const AuctionInfo: FC<any> = (props) => {
                                 <Typography variant="subtitle1" color="initial">
                                     {data.auction.price_buy_now} сум
                                 </Typography>
-                                <ButtonComponent onClick={handleOpenModal()}>
+                                <ButtonComponent onClick={handleOpenBuyNowModal()}>
                                     <Typography variant="subtitle1" color="initial">
                                         Купить сейчас
                                     </Typography>
                                 </ButtonComponent>
                             </div>
-                            <CustomModal handleModalClose={handleCloseModal()} openModal={openModal}>
+                            <CustomModal handleModalClose={handleCloseModal()} openModal={openBuyNowModal}>
                                 <>
                                     <Typography className="title" variant="h6">
                                         Купить сейчас

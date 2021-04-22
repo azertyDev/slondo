@@ -137,8 +137,7 @@ const ArchiveContainer: FC = () => {
                         className={classes.settingsList}
                         disablePadding
                     >
-                        {tabIndex !== 0 && (
-                            <ListItem
+                        <ListItem
                                 button
                                 onClick={handleModalContentIndex(2)}
                             >
@@ -147,7 +146,6 @@ const ArchiveContainer: FC = () => {
                                     primaryTypographyProps={{ variant: 'subtitle1' }}
                                 />
                             </ListItem>
-                        )}
                         {tabIndex === 0 && (
                             <ListItem
                                 button
@@ -273,7 +271,7 @@ const ArchiveContainer: FC = () => {
                 </Grid>
                 <Grid item xs={3}>
                     <SecondaryCabinetCard
-                        user={data.auction}
+                        user={data}
                     />
                 </Grid>
             </Grid>
