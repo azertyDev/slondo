@@ -24,11 +24,12 @@ export const OwnerAuctionContent: FC<any> = (props) => {
                     </Typography>
                 </div>
             </Hidden>
-            {isAuction
-                ? <Hidden mdDown>
+            {isAuction && (
+                <Hidden mdDown>
                     {auctionInfo}
                 </Hidden>
-                : ownerInfo}
+            )}
+            {ownerInfo}
         </div>
     );
 };

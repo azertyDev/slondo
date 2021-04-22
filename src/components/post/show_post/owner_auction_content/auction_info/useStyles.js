@@ -152,8 +152,7 @@ export const useStyles = makeStyles((theme) => ({
                                 height: 1,
                                 width: '100%',
                                 background: '#333',
-                                backgroundColor:
-                                    'linear-gradient(90deg, rgba(243, 243, 243, 0) -4.72%, rgba(204, 204, 204, 0.69) 47.81%, rgba(248, 248, 248, 0) 104.92%)'
+                                backgroundColor: 'linear-gradient(90deg, rgba(243, 243, 243, 0) -4.72%, rgba(204, 204, 204, 0.69) 47.81%, rgba(248, 248, 248, 0) 104.92%)'
                             },
                             '&:last-child': {
                                 '&:after': {
@@ -180,47 +179,6 @@ export const useStyles = makeStyles((theme) => ({
                         }
                     }
                 }
-            },
-            '& div.bet-info': {
-                flexDirection: 'column',
-                padding: '15px 10px',
-                background: '#F2F2F2',
-                borderRadius: '5px',
-                '& > div': {
-                    display: 'flex',
-                    justifyContent: 'center',
-                    flexDirection: 'column',
-                    '& > div.MuiFormControl-root': {
-                        '& > div.MuiInputBase-root': {
-                            background: '#fff',
-                            borderRadius: '3px',
-                            '& input': {
-                                padding: '15px 20px'
-                            }
-                        }
-                    },
-                    '& > button': {
-                        margin: '5px 0',
-                        border: '1px solid #AD66D5'
-                    },
-                    '&:nth-child(2)': {
-                        textAlign: 'center',
-                        '& > h6.MuiTypography-subtitle2:last-child': {
-                            color: '#845CAB'
-                        }
-                    },
-                    '&:nth-child(3)': {
-                        justifyContent: 'flex-start',
-                        '& > button': {
-                            borderRadius: '3px',
-                            margin: 0,
-                            '& > h6.MuiTypography-subtitle1': {
-                                color: theme.palette.primary.white
-                            }
-                        }
-                    }
-                }
-
             },
             '& .suggest_price': {
                 [theme.breakpoints.up('lg')]: {

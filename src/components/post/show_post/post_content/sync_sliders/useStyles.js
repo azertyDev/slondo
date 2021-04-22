@@ -4,7 +4,7 @@ export const useStyles = makeStyles((theme) => ({
     root: {
         position: 'relative',
         [theme.breakpoints.down('md')]: {
-            // filter: 'drop-shadow(0px 1px 8px rgba(0, 0, 0, 0.35))'
+            filter: 'drop-shadow(0px 1px 8px rgba(0, 0, 0, 0.35))'
         },
         '& button': {
             background: 'rgba(0, 0, 0, .6)',

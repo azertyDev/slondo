@@ -3,7 +3,7 @@ import {WithT} from 'i18next';
 import Link from 'next/link';
 import {
     Backdrop,
-    Container, Grid,
+    Container,
     Hidden,
     List,
     ListItem,

@@ -6,21 +6,21 @@ import {getAuctionSchema} from '@root/validation_schemas/auctionSchema';
 import {WithT} from 'i18next';
 import {getErrorMsg, numberPrettier} from '@src/helpers';
 import {CustomFormikField} from '@src/components/elements/custom_formik_field/CustomFormikField';
-import {useStyles} from './useStyles';
 import {SafeIcon} from '@src/components/elements/icons';
+import {useStyles} from './useStyles';
 
 type AuctionFromPropsType = {
-    data,
+    auctionId: number,
     isAuction: boolean,
     safe_deal: boolean,
     handleFormSubmit,
     auctionsBetsList
 } & WithT;
 
-const AuctionForm: FC<AuctionFromPropsType> = (props) => {
+export const AuctionForm: FC<AuctionFromPropsType> = (props) => {
     const {
         t,
-        data,
+        auctionId,
         isAuction,
         safe_deal,
         handleFormSubmit,
@@ -31,10 +31,9 @@ const AuctionForm: FC<AuctionFromPropsType> = (props) => {
 
     const min_bet = auctionsBetsList?.[0]?.['min_bet'];
     const max_bet = auctionsBetsList?.[0]?.['max_bet'];
-    const id = data?.['auction']?.['id'];
 
     const onSubmit = (values) => {
-        handleFormSubmit({...values, id});
+        handleFormSubmit({...values, auctionId});
     };
 
     const formik = useFormik({
@@ -55,30 +54,25 @@ const AuctionForm: FC<AuctionFromPropsType> = (props) => {
             {isAuction
                 ? <FormikProvider value={formik}>
                     <form onSubmit={handleSubmit}>
-                        <div>
-                            <div className="bet-info">
+                        <div className="bet-info">
+                            <div className="bet-form-btm">
                                 <CustomFormikField
                                     name="bet"
                                     type="number"
                                     placeholder={`Мин. ставка: ${min_bet} сум`}
                                     errorMsg={getErrorMsg(errors.bet, touched.bet, t)}
                                 />
+                                <ButtonComponent
+                                    className="place-bet"
+                                    color="secondary"
+                                    type="submit"
+                                >
+                                    <Typography variant="subtitle1" color="initial">
+                                        Сделать ставку
+                                    </Typography>
+                                </ButtonComponent>
                             </div>
-                            <ButtonComponent
-                                color="secondary"
-                                type="submit"
-                                style={{
-                                    borderRadius: '3px',
-                                    border: '1px solid #675EAA',
-                                    width: '100%',
-                                    marginTop: 5
-                                }}
-                            >
-                                <Typography variant="subtitle1" color="initial">
-                                    Сделать ставку
-                                </Typography>
-                            </ButtonComponent>
-                            <div>
+                            <div className="max-bet">
                                 <Typography variant="subtitle2" color="initial">
                                     Максимально возможная ставка:
                                 </Typography>
@@ -106,5 +100,3 @@ const AuctionForm: FC<AuctionFromPropsType> = (props) => {
         </div>
     );
 };
-
-export default AuctionForm;

@@ -3,7 +3,7 @@ import {Grid, Hidden, TextField, Typography} from '@material-ui/core';
 import {LockIcon, RefreshIcon} from '@src/components/elements/icons';
 import {AuctionTimer} from './AuctionTimer';
 import {numberPrettier} from '@root/src/helpers';
-import AuctionForm from './AuctionForm/AuctionForm';
+import {AuctionForm} from './AuctionForm/AuctionForm';
 import {ButtonComponent} from '@src/components/elements/button/Button';
 import {CustomModal} from '@src/components/elements/custom_modal/CustomModal';
 import Link from 'next/link';
@@ -48,11 +48,9 @@ export const AuctionInfo: FC<any & WithT> = (props) => {
                         </Typography>
                     </div>
                 </div>}
-                {data.ads_type.mark !== 'post' && (
-                    <div className="lot-timer">
-                        {date !== 0 && <AuctionTimer date={date}/>}
-                    </div>
-                )}
+                <div className="lot-timer">
+                    {date !== 0 && <AuctionTimer date={date}/>}
+                </div>
                 <div className="lot-participants-block">
                     <Typography
                         variant="subtitle1" color="initial"
@@ -132,16 +130,14 @@ export const AuctionInfo: FC<any & WithT> = (props) => {
                 </div>
                 {!data.creator && (
                     <>
-                        <div className="bet-info">
-                            <AuctionForm
-                                t={t}
-                                data={data}
-                                isAuction
-                                handleFormSubmit={handleSubmit}
-                                auctionsBetsList={auctionsBetsList}
-                                safe_deal
-                            />
-                        </div>
+                        <AuctionForm
+                            t={t}
+                            isAuction
+                            safe_deal
+                            auctionId={data.auction.id}
+                            handleFormSubmit={handleSubmit}
+                            auctionsBetsList={auctionsBetsList}
+                        />
                         {!!data.auction.price_buy_now && (
                             <div>
                                 <Hidden mdDown>
@@ -193,8 +189,10 @@ export const AuctionInfo: FC<any & WithT> = (props) => {
                             <div>
                                 <Hidden lgUp>
                                     <Grid container>
-                                        <Grid item xs={isExAuc ? 6 : 12}
-                                              className='suggest_price'
+                                        <Grid
+                                            item
+                                            xs={isExAuc ? 6 : 12}
+                                            className='suggest_price'
                                         >
                                             <ButtonComponent onClick={handleOpenModal()}>
                                                 <Typography variant="subtitle1" color="initial">

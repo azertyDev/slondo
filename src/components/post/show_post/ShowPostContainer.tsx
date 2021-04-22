@@ -278,7 +278,8 @@ export const ShowPostContainer: FC = () => {
 
     const ownerInfo = (
         <OwnerInfo
-            safe_deal={postData.data.safe_deal}
+            data={postData.data}
+            // safe_deal={postData.data.safe_deal}
             owner={postData.data.author}
             isOwner={postData.data.creator}
             handleFollow={handleFollow}
