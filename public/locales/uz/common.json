@@ -8,5 +8,9 @@
   "auc": "Auksion",
   "exauc": "Kengaytirilgan auksion",
   "location": "Joylashuv",
-  "edit": "O'zgartitish"
+  "edit": "O'zgartitish",
+  "name": "Ism",
+  "surname": "Familiya",
+  "phoneNumber": "Telefon raqam",
+  "selectGeolocation": "Joylashuvni tanlang"
 }

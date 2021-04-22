@@ -4,13 +4,18 @@ export const useStyles = makeStyles((theme) => ({
     root: {
         background: '#F2F2F2',
         borderRadius: '10px',
-        '& button .MuiTypography-subtitle1': {
-            color: '#fff'
-        }
+        padding: 30
     },
     editButton: {
+        backgroundColor: '#fff',
+        boxShadow: '0px 1px 2px 0px #00000014',
+        borderRadius: '100px',
+        padding: '9px 25px',
+        '& .MuiTypography-subtitle1': {
+            color: '#838383'
+        },
         '& svg': {
-            color: '#fff'
+            color: theme.palette.secondary
         }
     }
 }))

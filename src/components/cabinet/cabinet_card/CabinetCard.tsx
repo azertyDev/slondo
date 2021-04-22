@@ -6,7 +6,7 @@ import {
     EyeIcon,
     LocationIcon,
     PhoneIcon,
-    SafeIcon,
+    SafeIcon, SettingsIcon,
     SwapIcon
 } from '@src/components/elements/icons';
 import {BreadcrumbsComponent} from '@src/components/elements/breadcrumbs/Breadcrumbs';
@@ -117,10 +117,16 @@ export const CabinetCard: FC<CabinetCardPropsType> = (props) => {
                                 </Typography>
                             </div>
                             <div className='card-btn'>
-                                {pathname?.includes('favorite') && (
+                                {pathname?.includes('favorite')
+                                    ?
                                     <div className='isFavorite' onClick={handleModalOpen(cardData.id)}>
                                         <CloseIcon />
-                                    </div>)}
+                                    </div>
+                                    : cardData.creator && (
+                                    <div className='settings' onClick={handleModalOpen(cardData.id)}>
+                                        <SettingsIcon />
+                                    </div>
+                                )}
                             </div>
                         </div>
                         <div className="description">

@@ -300,11 +300,24 @@ export const userAPI = {
                 throw err;
             });
     },
-    changeUserInfo: (name: string, surname: string): Promise<any> => {
+    changeUserInfo: (createData): Promise<any> => {
         return instance.post(`regular/user/info`, {
-            name,
-            surname
+            ...createData
         }, setTokenToHeader())
+            .then(res => res.data)
+            .catch(err => {
+                throw err;
+            });
+    },
+    getUserInfo: (): Promise<any> => {
+        return instance.get(`regular/user/info`, setTokenToHeader())
+            .then(res => res.data)
+            .catch(err => {
+                throw err;
+            });
+    },
+    changeUserAvatar: (avatar): Promise<any> => {
+        return instance.post(`regular/user/avatar`, avatar, setTokenToHeader())
             .then(res => res.data)
             .catch(err => {
                 throw err;

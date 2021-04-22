@@ -5,7 +5,7 @@ import {UserAvatarComponent} from '@src/components/elements/user_info_with_avata
 import {useTranslation} from 'react-i18next';
 import {useStyles} from './useStyles';
 import {UserInfo} from '@root/interfaces/Auth';
-import {ButtonComponent} from "@src/components/elements/button/Button";
+import {ButtonComponent} from '@src/components/elements/button/Button';
 
 type UserInfoWithAvatarPropsType = {
     owner: UserInfo,
@@ -27,9 +27,8 @@ export const UserInfoWithAvatar: FC<UserInfoWithAvatarPropsType> = ({ isOwner, o
                     <UserAvatarComponent avatar={owner.avatar} />
                 </div>
                 <div>
-                    <Typography variant="subtitle1" color="initial">
-                        {owner.name ?? ''}&nbsp;
-                        {owner.surname ?? ''}
+                    <Typography color="initial" variant='subtitle1'>
+                        {`${owner.name ?? ''} ${owner.surname ?? ''}`}
                     </Typography>
                     <Typography variant="subtitle1" color="initial">
                         {t('created_at', {

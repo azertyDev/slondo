@@ -23,7 +23,9 @@ export const requireFields = [
     'rooms',
     'area',
     'land_area',
-    'general_area'
+    'general_area',
+    'user_name',
+    'user_surname'
 ];
 
 export const excludedKeys = [

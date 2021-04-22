@@ -1,14 +1,15 @@
-import React, {FC, FocusEvent} from "react";
-import {Autocomplete} from "@material-ui/lab";
-import {TextField, Typography} from "@material-ui/core";
-import {LocationsDataTypes} from "@root/interfaces/Locations";
-import {useTranslation} from "next-i18next";
+import React, {FC, FocusEvent} from 'react';
+import {Autocomplete} from '@material-ui/lab';
+import {TextField, Typography} from '@material-ui/core';
+import {LocationsDataTypes} from '@root/interfaces/Locations';
+import {useTranslation} from 'next-i18next';
 
 
 type AddressAutocompleteType = {
     locations: LocationsDataTypes,
     value: string,
     name: string,
+    disabled?: boolean,
     onChange: (_, location) => void,
     onBlur: { (e: FocusEvent<any>): void, <T = any>(fieldOrEvent: T): T extends string ? ((e: any) => void) : void },
     errorMsg: string
@@ -21,7 +22,8 @@ export const LocationAutocomplete: FC<AddressAutocompleteType> = (props) => {
         locations,
         errorMsg,
         onChange,
-        onBlur
+        onBlur,
+        disabled
     } = props;
 
     const {t} = useTranslation(['post']);
@@ -57,21 +59,22 @@ export const LocationAutocomplete: FC<AddressAutocompleteType> = (props) => {
             </Typography>
             <Autocomplete
                 value={value}
+                disabled={disabled}
                 onChange={onChange}
                 forcePopupIcon={false}
                 getOptionLabel={option}
-                options={locationsNormalize(locations)}
                 getOptionSelected={optionSelected}
+                options={locationsNormalize(locations)}
                 noOptionsText={t('cityOrRegionNotFound')}
                 renderInput={params =>
                     <TextField
-                        {...params}
-                        className={errorMsg !== '' ? 'error-border' : ''}
-                        name={name}
-                        onBlur={onBlur}
                         fullWidth
+                        {...params}
                         focused={false}
                         variant='outlined'
+                        name={name}
+                        onBlur={onBlur}
+                        className={errorMsg ? 'error-border' : ''}
                         placeholder={t('choiceLocation')}
                     />}
             />
