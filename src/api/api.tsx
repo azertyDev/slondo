@@ -322,5 +322,12 @@ export const userAPI = {
             .catch(err => {
                 throw err;
             });
+    },
+    deleteUserAvatar: (id: number): Promise<any> => {
+        return instance.delete(`regular/user/avatar/${id}`, setTokenToHeader())
+            .then(res => res.data)
+            .catch(err => {
+                throw err;
+            });
     }
 };

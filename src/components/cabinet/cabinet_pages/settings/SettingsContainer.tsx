@@ -11,7 +11,6 @@ import {setErrorMsgAction} from '@src/redux/slices/errorSlice';
 import {useFormik} from 'formik';
 import {SettingsForm} from '@src/components/cabinet/cabinet_pages/settings/settings_form/SettingsForm';
 import {UploadAvatarForm} from '@src/components/cabinet/cabinet_pages/settings/settings_form/upload_avatar_form/UploadAvatarForm';
-import {WEEK_DAYS} from '@src/common_data/common';
 import {timeRegEx} from '@src/common_data/reg_exs';
 import {CodeConfirm} from '@src/components/cabinet/cabinet_pages/settings/settings_form/password_recovery/CodeConfirm';
 import {regularFormSchema} from '@root/validation_schemas/createPostSchemas';
@@ -21,26 +20,24 @@ const SettingsContainer: FC = () => {
     const dispatch = useDispatch();
     const { t } = useTranslation(['cabinet', 'common', 'post', 'errors']);
     const userInfo = useSelector((store: RootState) => store.user.info);
-    const { locations } = useSelector((store: RootState) => store);
 
     const initSeconds = 60;
     const initUserInfo = {
-        user_name: '',
-        user_surname: '',
-        phone: '',
-        address: null,
+        user_name: userInfo.name,
+        user_surname: userInfo.surname,
+        phone: userInfo.phone,
         avalTime: {
             isActive: false,
             time: {
-                start_time: '09:00',
-                end_time: '18:00',
-                week_days: [...WEEK_DAYS]
+                start_time: userInfo.available_start_time ?? '09:00',
+                end_time: userInfo.available_end_time ?? '18:00',
+                week_days: userInfo.available_days
             }
         }
     };
     const [fetchingSmsCode, setFetchingSmsCode] = useState(false);
     const [formDisable, setFormDisable] = useState(true);
-    const [file, setFile] = React.useState(null);
+    const [file, setFile] = useState(null);
     const [isFileSelected, setIsSelected] = useState(false);
     const [openModal, setOpenModal] = useState(false);
     const [isPassConfirm, setIsPassConfirm] = useState(false);
@@ -56,29 +53,19 @@ const SettingsContainer: FC = () => {
             const {
                 user_name,
                 user_surname,
-                address: { region, city, district },
                 avalTime: { isActive, time },
                 ...otherData
             } = userData;
 
-            otherData.name = user_name;
-            otherData.surname = user_surname;
-
-            const location: any = {
-                region_id: region.id,
-                city_id: city.id
-            };
-
-            if (district) {
-                location.district_id = district.id;
-            }
-
             if (isActive) {
                 const { week_days, start_time, end_time } = time;
+                otherData.week_days = week_days.map(({ id }) => ({ id }));
                 otherData.start_time = start_time;
                 otherData.end_time = end_time;
-                otherData.week_days = week_days.map(({ id }) => ({ id }));
             }
+
+            otherData.name = user_name;
+            otherData.surname = user_surname;
 
             if (!!file) {
                 const formData = new FormData();
@@ -86,14 +73,20 @@ const SettingsContainer: FC = () => {
                 await userAPI.changeUserAvatar(formData);
             }
 
-            await userAPI.changeUserInfo({ ...userInfo, ...otherData, ...location });
+            await userAPI.changeUserInfo({ ...userInfo, ...otherData });
             const newUserInfo = await userAPI.getUserInfo();
 
+            setFormDisable(true);
             dispatch(signInAction(newUserInfo));
             cookies.set('slondo_user', newUserInfo, cookieOpts);
         } catch (e) {
             dispatch(setErrorMsgAction(e.message));
         }
+    };
+
+    const handleCancel = () => {
+        setValues(initUserInfo);
+        setFormDisable(true);
     };
 
     const formik = useFormik({
@@ -139,8 +132,8 @@ const SettingsContainer: FC = () => {
         setIsPassConfirm(true);
     };
 
-    const handleIsEditable = () => {
-        setFormDisable(!formDisable);
+    const handleAllowEdit = () => {
+        setFormDisable(false);
     };
 
     const handleUpload = async (event) => {
@@ -148,8 +141,17 @@ const SettingsContainer: FC = () => {
         setIsSelected(true);
     };
 
-    const handleLocation = (_, address) => {
-        setValues({ ...values, address });
+    const handleDeleteAvatar = (id) => async () => {
+        try {
+            await userAPI.deleteUserAvatar(id);
+            setFile({});
+            const newUserInfo = await userAPI.getUserInfo();
+
+            dispatch(signInAction(newUserInfo));
+            cookies.set('slondo_user', newUserInfo, cookieOpts);
+        } catch (e) {
+            dispatch(setErrorMsgAction(e.message));
+        }
     };
 
     const handleSwitch = (_, value) => {
@@ -183,8 +185,9 @@ const SettingsContainer: FC = () => {
     const handleTime = ({ target: { value, name } }) => {
         if (timeRegEx.test(value)) {
             value = value.replace(/^:(.+)/, m => `00${m}`).replace(/(.+):$/, m => `${m}00`);
-            avalTime.time = { ...avalTime.time, [name]: value };
-            setValues({ ...values });
+            let time = { ...avalTime.time };
+            time = { ...time, [name]: value };
+            setValues({ ...values, avalTime: { ...avalTime, time } });
         }
     };
 
@@ -236,6 +239,7 @@ const SettingsContainer: FC = () => {
             handleUpload={handleUpload}
             isFileSelected={isFileSelected}
             formDisable={formDisable}
+            handleDeleteAvatar={handleDeleteAvatar}
         />
     );
 
@@ -245,13 +249,12 @@ const SettingsContainer: FC = () => {
             formik={formik}
             formDisable={formDisable}
             uploadAvatarForm={uploadAvatarForm}
-            locations={locations.data}
-            onLocationChange={handleLocation}
             handleTime={handleTime}
             handleAvalDays={handleAvalDays}
             handleSwitch={handleSwitch}
             handleOpenModal={handleOpenModal}
             fetchingSmsCode={fetchingSmsCode}
+            handleCancel={handleCancel}
         />
     );
 
@@ -260,17 +263,13 @@ const SettingsContainer: FC = () => {
     }, [activeTimer, timer]);
 
     useEffect(() => {
-        setValues({
-            ...values,
-            ...userInfo,
-            user_name: userInfo.name,
-            user_surname: userInfo.surname
-        });
+        setValues(initUserInfo);
     }, [userInfo]);
 
+    console.log(values);
     return (
         <Settings
-            handleIsEditable={handleIsEditable}
+            handleAllowEdit={handleAllowEdit}
             settingsForm={settingsForm}
             openModal={openModal}
             modalContent={ModalContent}

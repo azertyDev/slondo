@@ -337,9 +337,8 @@ const MyPostsContainer: FC = () => {
                     <Box
                         mt={1}
                         width='100%'
-                        className={classes.submitBtn}
                     >
-                        <ButtonComponent onClick={handleDeactivate}>
+                        <ButtonComponent onClick={handleDeactivate} className={classes.submitBtn}>
                             <Typography variant='subtitle1'>Отправить</Typography>
                         </ButtonComponent>
                     </Box>

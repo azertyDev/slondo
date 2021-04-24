@@ -17,7 +17,9 @@ const initialState: UserStateType = {
         phone: '',
         avatar: '',
         created_at: '',
-        available_days: ''
+        available_days: '',
+        available_start_time: '',
+        available_end_time: ''
     }
 };
 
