@@ -38,8 +38,6 @@ const SettingsContainer: FC = () => {
     };
     const [fetchingSmsCode, setFetchingSmsCode] = useState(false);
     const [formDisable, setFormDisable] = useState(true);
-    const [file, setFile] = useState(null);
-    const [isFileSelected, setIsSelected] = useState(false);
     const [openModal, setOpenModal] = useState(false);
     const [isPassConfirm, setIsPassConfirm] = useState(false);
     const [errorMsg, setErrorMsg] = useState('');
@@ -147,7 +145,6 @@ const SettingsContainer: FC = () => {
 
     const handleDeleteAvatar = () => {
         setValues({ ...values, avatar: '' });
-        setIsSelected(false);
     };
 
     const handleSwitch = (_, value) => {
@@ -226,15 +223,14 @@ const SettingsContainer: FC = () => {
                 handleDisableTimer={handleDisableTimer}
                 handlePassConfirm={handlePassConfirm}
                 setOpenModal={setOpenModal}
+                errorMsg={errorMsg}
             />
     );
 
     const uploadAvatarForm = (
         <UploadAvatarForm
             t={t}
-            file={file}
             handleUpload={handleUpload}
-            isFileSelected={isFileSelected}
             formDisable={formDisable}
             handleDeleteAvatar={handleDeleteAvatar}
             avatar={values.avatar}

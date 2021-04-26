@@ -5,8 +5,8 @@ import {CustomFormikField} from '@src/components/elements/custom_formik_field/Cu
 import {codeSchema} from '@root/validation_schemas/authRegSchema';
 import {ButtonComponent} from '@src/components/elements/button/Button';
 import {userAPI} from '@src/api/api';
-import {useDispatch} from 'react-redux';
-import { setErrorMsgAction } from '@root/src/redux/slices/errorSlice';
+import {getErrorMsg} from '@src/helpers';
+import {Typography} from '@material-ui/core';
 
 type CodeConfirmPropsType = {
     phone: string,
@@ -15,20 +15,20 @@ type CodeConfirmPropsType = {
     setErrorMsg: Dispatch<SetStateAction<string>>,
     handlePassConfirm: () => void,
     setCode: Dispatch<SetStateAction<string>>,
-    setOpenModal: (value: boolean) => void
+    setOpenModal: (value: boolean) => void,
+    errorMsg: string
 } & WithT;
 
 export const CodeConfirm: FC<CodeConfirmPropsType> = (props) => {
-    const dispatch = useDispatch();
     const {
         t,
         timer,
         phone,
-        setErrorMsg,
         handleDisableTimer,
         handlePassConfirm,
         setCode,
-        setOpenModal
+        errorMsg,
+        setErrorMsg
     } = props;
 
 
@@ -43,9 +43,9 @@ export const CodeConfirm: FC<CodeConfirmPropsType> = (props) => {
             setCode(values.code);
             handleDisableTimer();
             handlePassConfirm();
+            !!errorMsg && setErrorMsg('');
         } catch (e) {
-            setOpenModal(false);
-            dispatch(setErrorMsgAction(e.error));
+            setErrorMsg(e.error);
         }
     }
 
@@ -76,14 +76,15 @@ export const CodeConfirm: FC<CodeConfirmPropsType> = (props) => {
                     <CustomFormikField
                         type="text"
                         name="code"
-                        labelText={t('enterSMS')}
-                        placeholder={t('enterSMS')}
-                        errorMsg={
-                            errors.code && touched.code
-                                ? t(`errors:${errors.code}`)
-                                : ''
-                        }
+                        labelText={t('post:enterSMS')}
+                        placeholder={t('post:enterSMS')}
+                        errorMsg={getErrorMsg(errors.code, touched.code, t)}
                     />
+                    {errorMsg && (
+                        <Typography variant='subtitle1'>
+                            {t(`errors:${errorMsg}`)}
+                        </Typography>
+                    )}
                     <span>{timer}</span>
                 </div>
                 <div className='auth-btns'>

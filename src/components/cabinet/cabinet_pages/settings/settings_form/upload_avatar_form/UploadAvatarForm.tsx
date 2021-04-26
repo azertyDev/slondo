@@ -6,10 +6,8 @@ import CancelIcon from '@material-ui/icons/Cancel';
 import {WithT} from 'i18next';
 
 type UploadAvatarFormProps = {
-    file: string,
     handleUpload: (event) => void,
     handleDeleteAvatar: () => void,
-    isFileSelected: boolean
     formDisable: boolean,
     avatar: string
 } & WithT;
@@ -19,9 +17,7 @@ export const UploadAvatarForm: FC<UploadAvatarFormProps> = (props) => {
     const classes = useStyles({ props });
     const {
         t,
-        file,
         handleUpload,
-        isFileSelected,
         formDisable,
         handleDeleteAvatar,
         avatar

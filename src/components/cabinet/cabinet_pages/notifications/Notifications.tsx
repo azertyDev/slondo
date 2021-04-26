@@ -2,12 +2,16 @@ import React, {FC} from 'react';
 import {Grid} from '@material-ui/core';
 import {CabinetWrapper} from '@src/components/cabinet/CabinetWrapper';
 import {useStyles} from './useStyles';
-import {Notification} from '@src/components/cabinet/cabinet_pages/notifications/notification_card/Notification';
-import {NotificationDataType} from './NotificationsContainer';
 
+type NotificationsPropsType = {
+    notifications
+}
 
-export const Notifications: FC<{ notifications: NotificationDataType[] }> = (props) => {
-    const {notifications} = props;
+export const Notifications: FC<NotificationsPropsType> = (props) => {
+    const {
+        notifications
+    } = props;
+
     const title = 'Уведомления';
 
     const classes = useStyles();
@@ -15,9 +19,16 @@ export const Notifications: FC<{ notifications: NotificationDataType[] }> = (pro
         <div className={classes.root}>
             <CabinetWrapper headerTitle={title} title={title}>
                 <Grid item xs={10}>
-                    {notifications.map((el) => (
-                        <Notification {...el} key={el.id}/>
-                    ))}
+                    {
+                        notifications.map(notification => {
+                            return (
+                                <div>
+                                    <strong>{notification.id}</strong>
+                                    <p>{notification.message}</p>
+                                </div>
+                            );
+                        })
+                    }
                 </Grid>
             </CabinetWrapper>
         </div>
