@@ -188,7 +188,7 @@ export const useStyles = makeStyles((theme) => ({
                     [theme.breakpoints.down('md')]: {
                         padding: '12px 39px'
                     },
-                    width: '97.5%',
+                    width: '100%',
                     background: 'linear-gradient(90deg, #7DBCF6 0%, #63A6F4 100%);',
                     '& > h6.MuiTypography-subtitle1': {
                         color: '#fff',

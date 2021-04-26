@@ -6,8 +6,8 @@ import {getAuctionSchema} from '@root/validation_schemas/auctionSchema';
 import {WithT} from 'i18next';
 import {getErrorMsg, numberPrettier} from '@src/helpers';
 import {CustomFormikField} from '@src/components/elements/custom_formik_field/CustomFormikField';
-import {SafeIcon} from '@src/components/elements/icons';
 import {useStyles} from './useStyles';
+import Grid from '@material-ui/core/Grid';
 
 type AuctionFromPropsType = {
     auctionId: number,
@@ -21,8 +21,6 @@ export const AuctionForm: FC<AuctionFromPropsType> = (props) => {
     const {
         t,
         auctionId,
-        isAuction,
-        safe_deal,
         handleFormSubmit,
         auctionsBetsList
     } = props;
@@ -51,19 +49,20 @@ export const AuctionForm: FC<AuctionFromPropsType> = (props) => {
     const classes = useStyles({isMdDown});
     return (
         <div className={classes.root}>
-            {isAuction
-                ? <FormikProvider value={formik}>
-                    <form onSubmit={handleSubmit}>
-                        <div className="bet-info">
-                            <div className="bet-form-btm">
+            <FormikProvider value={formik}>
+                <form onSubmit={handleSubmit}>
+                    <div className="bet-info fixed-bet-safe-deal">
+                        <Grid container spacing={1} className="input-btn">
+                            <Grid xs={isMdDown ? 7 : 12}>
                                 <CustomFormikField
                                     name="bet"
-                                    type="number"
                                     placeholder={`Мин. ставка: ${min_bet} сум`}
                                     errorMsg={getErrorMsg(errors.bet, touched.bet, t)}
                                 />
+                            </Grid>
+                            <Grid xs={isMdDown ? 5 : 12}>
                                 <ButtonComponent
-                                    className="place-bet"
+                                    className="btn-bet"
                                     color="secondary"
                                     type="submit"
                                 >
@@ -71,32 +70,19 @@ export const AuctionForm: FC<AuctionFromPropsType> = (props) => {
                                         Сделать ставку
                                     </Typography>
                                 </ButtonComponent>
-                            </div>
-                            <div className="max-bet">
-                                <Typography variant="subtitle2" color="initial">
-                                    Максимально возможная ставка:
-                                </Typography>
-                                <Typography variant="subtitle2" color="initial">
-                                    {numberPrettier(auctionsBetsList?.[0]?.max_bet)} сум
-                                </Typography>
-                            </div>
+                            </Grid>
+                        </Grid>
+                        <div className="max-bet">
+                            <Typography variant="subtitle2" color="initial">
+                                Максимально возможная ставка:
+                            </Typography>
+                            <Typography variant="subtitle2" color="initial">
+                                {numberPrettier(auctionsBetsList?.[0]?.max_bet)} сум
+                            </Typography>
                         </div>
-                    </form>
-                </FormikProvider>
-                : safe_deal && (
-                <div className='floating'>
-                    <div className="floating-text">
-                        <SafeIcon/>
-                        <Typography variant='subtitle2'>
-                            Безопасная покупка <br/>
-                            за 420 000 сум
-                        </Typography>
                     </div>
-                    <ButtonComponent>
-                        Купить
-                    </ButtonComponent>
-                </div>
-            )}
+                </form>
+            </FormikProvider>
         </div>
     );
 };

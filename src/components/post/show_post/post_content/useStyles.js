@@ -291,7 +291,7 @@ export const useStyles = makeStyles((theme) => ({
                     },
                     [theme.breakpoints.down('md')]: {
                         marginRight: '8px',
-                        padding: '10px 10px'
+                        padding: '9px 10px'
                     },
                     '& svg': {
                         marginRight: 15,
@@ -317,9 +317,7 @@ export const useStyles = makeStyles((theme) => ({
                     '& svg': {
                         marginRight: '5px',
                         '& path': {
-                            [theme.breakpoints.down('md')]: {
-                                fill: '#4E4E4E'
-                            }
+                            fill: '#4E4E4E'
                         }
                     }
                 },

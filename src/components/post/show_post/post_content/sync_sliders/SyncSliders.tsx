@@ -1,5 +1,5 @@
 import React, {FC} from 'react';
-import {Hidden, IconButton, useMediaQuery, useTheme} from '@material-ui/core';
+import {Hidden, IconButton, useMediaQuery, useScrollTrigger, useTheme} from '@material-ui/core';
 import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
 import {CustomSlider} from '@src/components/elements/custom_slider/CustomSlider';
 import {SlidersRefType} from '../../ShowPostContainer';

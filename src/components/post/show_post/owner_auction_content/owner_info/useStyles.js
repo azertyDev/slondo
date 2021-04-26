@@ -35,6 +35,24 @@ export const useStyles = makeStyles((theme) => ({
                     }
                 }
             }
+        },
+        '& .floating': {
+            display: 'flex',
+            left: '10px',
+            padding: '13px 7px 14px 17px',
+            '& div.floating-text': {
+                display: 'flex',
+                alignItems: 'center',
+                width: '50%',
+                fontSize: 'calc(14px + 2 * (100vw / 1280))',
+                '& svg': {
+                    marginRight: '18px'
+                }
+            },
+            '& h6': {
+                color: '#FFFFFF',
+                fontSize: 'calc(10px + 6 * (100vw / 1280))'
+            }
         }
     }
 }));

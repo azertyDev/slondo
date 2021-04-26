@@ -188,7 +188,7 @@ export const AuctionInfo: FC<any & WithT> = (props) => {
                         {!!data.auction.offer_the_price && (
                             <div>
                                 <Hidden lgUp>
-                                    <Grid container>
+                                    <Grid container spacing={1}>
                                         <Grid
                                             item
                                             xs={isExAuc ? 6 : 12}
