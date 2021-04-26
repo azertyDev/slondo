@@ -1,29 +1,30 @@
 import {Avatar, Button} from '@material-ui/core';
 import React, {FC} from 'react';
 import {useStyles} from './useStyles';
-import {useSelector} from 'react-redux';
-import {RootState} from '@src/redux/rootReducer';
 import AddCircleIcon from '@material-ui/icons/AddCircle';
 import CancelIcon from '@material-ui/icons/Cancel';
+import {WithT} from 'i18next';
 
 type UploadAvatarFormProps = {
     file: string,
     handleUpload: (event) => void,
-    handleDeleteAvatar: (id) => () => void,
+    handleDeleteAvatar: () => void,
     isFileSelected: boolean
-    formDisable: boolean
-}
+    formDisable: boolean,
+    avatar: string
+} & WithT;
 
 export const UploadAvatarForm: FC<UploadAvatarFormProps> = (props) => {
-    const { avatar, id } = useSelector((store: RootState) => store.user.info);
 
     const classes = useStyles({ props });
     const {
+        t,
         file,
         handleUpload,
         isFileSelected,
         formDisable,
-        handleDeleteAvatar
+        handleDeleteAvatar,
+        avatar
     } = props;
     return (
         <div id="upload-box">
@@ -44,35 +45,28 @@ export const UploadAvatarForm: FC<UploadAvatarFormProps> = (props) => {
                     disabled={formDisable}
                     startIcon={<AddCircleIcon color='inherit' />}
                 >
-                    Изменить фото
+                    {
+                        avatar
+                            ? t('cabinet:editAvatar')
+                            : t('cabinet:addAvatar')
+                    }
                 </Button>
             </label>
-
             <Button
                 variant="contained"
                 color="default"
                 aria-label="upload picture"
-                disabled={formDisable}
+                disabled={formDisable || !avatar}
                 component="span"
                 startIcon={<CancelIcon color='error' fontSize='small' />}
-                onClick={handleDeleteAvatar(id)}
+                onClick={handleDeleteAvatar}
             >
-                Удалить фото
+                {t('cabinet:deleteAvatar')}
             </Button>
-
-            {isFileSelected
-                ? <ImageThumb src={file} className={classes.small} />
-                : <Avatar src={avatar} className={classes.small} />
-            }
+            <Avatar
+                className={classes.small}
+                src={typeof avatar === 'object' && !!avatar ? URL.createObjectURL(avatar) : avatar}
+            />
         </div>
     );
-};
-
-
-const ImageThumb = ({ src, className }) => {
-    return <Avatar
-        src={URL.createObjectURL(src)}
-        alt={src.name}
-        className={className}
-    />;
 };

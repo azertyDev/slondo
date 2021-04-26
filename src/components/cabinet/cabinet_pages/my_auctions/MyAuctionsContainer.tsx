@@ -30,7 +30,9 @@ export const MyAuctionsContainer: FC = () => {
         phone: '',
         avatar: '',
         created_at: '',
-        available_days: ''
+        available_days: '',
+        available_start_time: '',
+        available_end_time: '',
     };
     const initialState: InitialCabinetCardState = {
         isFetch: false,

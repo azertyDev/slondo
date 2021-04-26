@@ -160,5 +160,8 @@
   "heating": "Uy isitish",
   "lift": "Lift",
   "metro": "Metrogacha",
-  "garage": "Garaj"
+  "garage": "Garaj",
+  "user_name": "Ism",
+  "user_surname": "Familiya",
+  "phoneNumber": "Telefon raqam"
 }

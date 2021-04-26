@@ -65,7 +65,7 @@ export const SettingsForm: FC<SettingsFormPropsType> = (props) => {
                         <Grid item xs={12} md={6}>
                             <CustomFormikField
                                 name='user_name'
-                                labelText={t('user_name')}
+                                labelText={t('post:user_name')}
                                 value={values.user_name}
                                 onChange={handleChange}
                                 disabled={formDisable}
@@ -76,18 +76,17 @@ export const SettingsForm: FC<SettingsFormPropsType> = (props) => {
                         <Grid item xs={12} md={6}>
                             <CustomFormikField
                                 name='user_surname'
-                                labelText={t('user_surname')}
+                                labelText={t('post:user_surname')}
                                 value={values.user_surname}
                                 onChange={handleChange}
                                 disabled={formDisable}
-                                errorMsg={getErrorMsg(errors.user_surname, touched.user_surname, t)}
                                 size='small'
                             />
                         </Grid>
                         <Grid item xs={12} md={6}>
                             <CustomFormikField
                                 name='phone'
-                                labelText={t('phoneNumber')}
+                                labelText={t('post:phoneNumber')}
                                 value={values.phone}
                                 onChange={handleChange}
                                 disabled

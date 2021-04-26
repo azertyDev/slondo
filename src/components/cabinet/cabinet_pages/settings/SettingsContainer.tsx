@@ -18,7 +18,7 @@ import {PasswordConfirmForm} from '@root/src/components/header/auth_reg_page/aut
 
 const SettingsContainer: FC = () => {
     const dispatch = useDispatch();
-    const { t } = useTranslation(['cabinet', 'common', 'post', 'errors']);
+    const { t } = useTranslation('cabinet');
     const userInfo = useSelector((store: RootState) => store.user.info);
 
     const initSeconds = 60;
@@ -26,6 +26,7 @@ const SettingsContainer: FC = () => {
         user_name: userInfo.name,
         user_surname: userInfo.surname,
         phone: userInfo.phone,
+        avatar: userInfo.avatar,
         avalTime: {
             isActive: false,
             time: {
@@ -54,6 +55,7 @@ const SettingsContainer: FC = () => {
                 user_name,
                 user_surname,
                 avalTime: { isActive, time },
+                avatar,
                 ...otherData
             } = userData;
 
@@ -67,12 +69,14 @@ const SettingsContainer: FC = () => {
             otherData.name = user_name;
             otherData.surname = user_surname;
 
-            if (!!file) {
+            if (!!values.avatar) {
                 const formData = new FormData();
-                formData.append('avatar', file);
+                formData.append('avatar', values.avatar);
                 await userAPI.changeUserAvatar(formData);
             }
-
+            if (avatar === '') {
+                await userAPI.deleteUserAvatar(userInfo.id);
+            }
             await userAPI.changeUserInfo({ ...userInfo, ...otherData });
             const newUserInfo = await userAPI.getUserInfo();
 
@@ -111,7 +115,7 @@ const SettingsContainer: FC = () => {
             await userAPI.getSmsCode(userInfo.phone);
             // await (_ => {
             //     return new Promise(function(resolve) {
-            //         setTimeout(resolve, 1000);
+            //         setTimeout(resolve, 500);
             //     });
             // })();
             await setFetchingSmsCode(false);
@@ -126,6 +130,7 @@ const SettingsContainer: FC = () => {
 
     const handleModalClose = () => {
         setOpenModal(false);
+        setIsPassConfirm(false);
     };
 
     const handlePassConfirm = () => {
@@ -133,25 +138,16 @@ const SettingsContainer: FC = () => {
     };
 
     const handleAllowEdit = () => {
-        setFormDisable(false);
+        setFormDisable(!formDisable);
     };
 
-    const handleUpload = async (event) => {
-        setFile(event.target.files[0]);
-        setIsSelected(true);
+    const handleUpload = (event) => {
+        setValues({ ...values, avatar: event.target.files[0] });
     };
 
-    const handleDeleteAvatar = (id) => async () => {
-        try {
-            await userAPI.deleteUserAvatar(id);
-            setFile({});
-            const newUserInfo = await userAPI.getUserInfo();
-
-            dispatch(signInAction(newUserInfo));
-            cookies.set('slondo_user', newUserInfo, cookieOpts);
-        } catch (e) {
-            dispatch(setErrorMsgAction(e.message));
-        }
+    const handleDeleteAvatar = () => {
+        setValues({ ...values, avatar: '' });
+        setIsSelected(false);
     };
 
     const handleSwitch = (_, value) => {
@@ -235,11 +231,13 @@ const SettingsContainer: FC = () => {
 
     const uploadAvatarForm = (
         <UploadAvatarForm
+            t={t}
             file={file}
             handleUpload={handleUpload}
             isFileSelected={isFileSelected}
             formDisable={formDisable}
             handleDeleteAvatar={handleDeleteAvatar}
+            avatar={values.avatar}
         />
     );
 

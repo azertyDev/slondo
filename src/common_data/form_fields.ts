@@ -25,7 +25,6 @@ export const requireFields = [
     'land_area',
     'general_area',
     'user_name',
-    'user_surname'
 ];
 
 export const excludedKeys = [

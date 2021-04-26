@@ -163,5 +163,8 @@
   "heating": "Отопление",
   "lift": "Лифт",
   "metro": "До метро",
-  "garage": "Гараж"
+  "garage": "Гараж",
+  "user_name": "Имя",
+  "user_surname": "Фамилия",
+  "phoneNumber": "Номер телефона"
 }

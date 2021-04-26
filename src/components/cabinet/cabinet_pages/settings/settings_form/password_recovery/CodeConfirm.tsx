@@ -46,7 +46,6 @@ export const CodeConfirm: FC<CodeConfirmPropsType> = (props) => {
         } catch (e) {
             setOpenModal(false);
             dispatch(setErrorMsgAction(e.error));
-            console.log(e.error);
         }
     }
 
@@ -63,8 +62,6 @@ export const CodeConfirm: FC<CodeConfirmPropsType> = (props) => {
         isSubmitting,
         handleSubmit
     } = formik;
-
-    console.log(values);
 
     return (
         <FormikProvider value={formik}>

@@ -24,5 +24,8 @@
     "securePosts": "Xavfsiz xarid",
     "createdAuc": "Yaratilgan",
     "participatingAuc": "Qatnashgan",
-    "auctions": "Auksion"
+    "auctions": "Auksion",
+    "editAvatar": "Rasm o'zgartirish",
+    "addAvatar": "Rasm qo'shish",
+    "deleteAvatar": "O'chirish"
 }
