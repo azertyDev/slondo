@@ -19,9 +19,9 @@ import {PasswordConfirmForm} from '@root/src/components/header/auth_reg_page/aut
 
 const SettingsContainer: FC = () => {
     const dispatch = useDispatch();
-    const { t } = useTranslation(['cabinet', 'common', 'post', 'errors']);
+    const {t} = useTranslation(['cabinet', 'common', 'post', 'errors']);
     const userInfo = useSelector((store: RootState) => store.user.info);
-    const { locations } = useSelector((store: RootState) => store);
+    const {locations} = useSelector((store: RootState) => store);
 
     const initSeconds = 60;
     const initUserInfo = {
@@ -51,13 +51,13 @@ const SettingsContainer: FC = () => {
 
     const handleSubmit = async (values) => {
         try {
-            const userData = { ...values };
+            const userData = {...values};
 
             const {
                 user_name,
                 user_surname,
-                address: { region, city, district },
-                avalTime: { isActive, time },
+                address: {region, city, district},
+                avalTime: {isActive, time},
                 ...otherData
             } = userData;
 
@@ -74,10 +74,10 @@ const SettingsContainer: FC = () => {
             }
 
             if (isActive) {
-                const { week_days, start_time, end_time } = time;
+                const {week_days, start_time, end_time} = time;
                 otherData.start_time = start_time;
                 otherData.end_time = end_time;
-                otherData.week_days = week_days.map(({ id }) => ({ id }));
+                otherData.week_days = week_days.map(({id}) => ({id}));
             }
 
             if (!!file) {
@@ -86,7 +86,7 @@ const SettingsContainer: FC = () => {
                 await userAPI.changeUserAvatar(formData);
             }
 
-            await userAPI.changeUserInfo({ ...userInfo, ...otherData, ...location });
+            await userAPI.changeUserInfo({...userInfo, ...otherData, ...location});
             const newUserInfo = await userAPI.getUserInfo();
 
             dispatch(signInAction(newUserInfo));
@@ -106,7 +106,7 @@ const SettingsContainer: FC = () => {
         values,
         setValues
     } = formik;
-    const { avalTime } = values;
+    const {avalTime} = values;
 
     const handleDisableTimer = () => {
         setActiveTimer(false);
@@ -126,7 +126,7 @@ const SettingsContainer: FC = () => {
             setActiveTimer(true);
         } catch (e) {
             setOpenModal(false);
-            dispatch(setErrorMsgAction(e.message))
+            dispatch(setErrorMsgAction(e.message));
             await setFetchingSmsCode(false);
         }
     };
@@ -149,18 +149,18 @@ const SettingsContainer: FC = () => {
     };
 
     const handleLocation = (_, address) => {
-        setValues({ ...values, address });
+        setValues({...values, address});
     };
 
     const handleSwitch = (_, value) => {
-        setValues({ ...values, avalTime: { ...avalTime, isActive: value } });
+        setValues({...values, avalTime: {...avalTime, isActive: value}});
     };
 
     const handleAvalDays = day => () => {
-        const isExstDay = avalTime.time.week_days.some(({ id }) => id === day.id);
-        let week_days = [...avalTime.time.week_days];
+        const isExstDay = avalTime.time.week_days.some(({id}) => id === day.id);
+        const week_days = [...avalTime.time.week_days];
         if (isExstDay) {
-            week_days.map(({ id }, index) => {
+            week_days.map(({id}, index) => {
                 if (id === day.id) {
                     week_days.splice(index, 1);
                 }
@@ -180,11 +180,11 @@ const SettingsContainer: FC = () => {
         });
     };
 
-    const handleTime = ({ target: { value, name } }) => {
+    const handleTime = ({target: {value, name}}) => {
         if (timeRegEx.test(value)) {
             value = value.replace(/^:(.+)/, m => `00${m}`).replace(/(.+):$/, m => `${m}00`);
-            avalTime.time = { ...avalTime.time, [name]: value };
-            setValues({ ...values });
+            avalTime.time = {...avalTime.time, [name]: value};
+            setValues({...values});
         }
     };
 
@@ -210,24 +210,24 @@ const SettingsContainer: FC = () => {
 
     const ModalContent = (
         isPassConfirm
-            ? <PasswordConfirmForm
-                t={t}
-                phone={values.phone}
-                code={code}
-                setErrorMsg={errorHandle}
-                handleCloseModal={handleModalClose}
-                handleSignIn={handleSignIn}
-            />
-            : <CodeConfirm
-                t={t}
-                timer={timer}
-                phone={userInfo.phone}
-                setErrorMsg={setErrorMsg}
-                setCode={setCode}
-                handleDisableTimer={handleDisableTimer}
-                handlePassConfirm={handlePassConfirm}
-                setOpenModal={setOpenModal}
-            />
+        ? <PasswordConfirmForm
+            t={t}
+            phone={values.phone}
+            code={code}
+            setErrorMsg={errorHandle}
+            handleCloseModal={handleModalClose}
+            handleSignIn={handleSignIn}
+        />
+        : <CodeConfirm
+            t={t}
+            timer={timer}
+            phone={userInfo.phone}
+            setErrorMsg={setErrorMsg}
+            setCode={setCode}
+            handleDisableTimer={handleDisableTimer}
+            handlePassConfirm={handlePassConfirm}
+            setOpenModal={setOpenModal}
+        />
     );
 
     const uploadAvatarForm = (
@@ -264,7 +264,7 @@ const SettingsContainer: FC = () => {
             ...values,
             ...userInfo,
             user_name: userInfo.name,
-            user_surname: userInfo.surname
+            user_surname: userInfo.surname ?? ''
         });
     }, [userInfo]);
 

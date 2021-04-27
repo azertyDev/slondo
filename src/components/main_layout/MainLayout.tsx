@@ -4,27 +4,46 @@ import {Header} from '../header/Header';
 import {Footer} from '../footer/Footer';
 import {Container} from '@material-ui/core';
 import {ErrorModal} from '@src/components/error_modal/ErrorModal';
-import {defaultSEOContent} from "@src/common_data/seo_content";
-import {useRouter} from "next/router";
+import {useRouter} from 'next/router';
+import {SEOTextComponent} from '@src/components/elements/seo_text/SEOTextComponent';
 
 
 type MainLayoutPropsType = {
-    title?: string;
-    description?: string
+    title?: string,
+    description?: string,
+    seoTxt?: string
+};
+
+const defaultSEOContent = {
+    ru: {
+        title: 'Slondo',
+        description: '',
+        text: 'В своём стремлении улучшить пользовательский опыт мы упускаем, что диаграммы связей неоднозначны предоставлены сами себе.'
+    },
+    uz: {
+        title: 'Slondo',
+        description: '',
+        text: 'В своём стремлении улучшить пользовательский опыт мы упускаем, что диаграммы связей неоднозначны предоставлены сами себе.'
+    }
 };
 
 export const MainLayout: FC<MainLayoutPropsType> = (props) => {
     const {locale} = useRouter();
-    const defaultTitle = defaultSEOContent[locale].title;
-    const defaultDesc = defaultSEOContent[locale].description;
-    const {children, description = defaultDesc, title = defaultTitle} = props;
+    const title = props.title ?? defaultSEOContent[locale].title;
+    const description = props.description ?? defaultSEOContent[locale].description;
+
+    const {
+        children,
+        seoTxt
+    } = props;
+
     return (
         <>
             <Head>
                 <meta name="robots" content="noindex"/>
+                <meta name="description" content={description}/>
                 <meta property="og:site_name" content="Slondo"/>
                 <meta property="og:type" content="website"/>
-                <meta name="description" content={description}/>
                 <meta property="og:title" content={title} key="ogtitle"/>
                 <meta property="og:description" content={description} key="ogdesc"/>
                 <title>{title}</title>
@@ -36,6 +55,7 @@ export const MainLayout: FC<MainLayoutPropsType> = (props) => {
                     style={{paddingTop: '48px', position: 'relative'}}
                 >
                     {children}
+                    {!!seoTxt && <SEOTextComponent text={seoTxt}/>}
                 </Container>
             </main>
             <Footer/>

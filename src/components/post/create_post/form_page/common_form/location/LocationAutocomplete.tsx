@@ -9,10 +9,10 @@ type AddressAutocompleteType = {
     locations: LocationsDataTypes,
     value: string,
     name: string,
-    disabled?: boolean,
     onChange: (_, location) => void,
     onBlur: { (e: FocusEvent<any>): void, <T = any>(fieldOrEvent: T): T extends string ? ((e: any) => void) : void },
-    errorMsg: string
+    errorMsg: string,
+    disabled?: boolean
 };
 
 export const LocationAutocomplete: FC<AddressAutocompleteType> = (props) => {
@@ -26,24 +26,24 @@ export const LocationAutocomplete: FC<AddressAutocompleteType> = (props) => {
         disabled
     } = props;
 
-    const {t} = useTranslation(['post']);
+    const {t} = useTranslation(['locations', 'post']);
 
     const optionSelected = (option, value) => {
         return value
-            ? value.district
-                ? option.district
-                    ? value.district.id === option.district.id
-                    : false
-                : value.city ? value.city.id === option.city.id : false
-            : false
+               ? value.district
+                 ? option.district
+                   ? value.district.id === option.district.id
+                   : false
+                 : value.city ? value.city.id === option.city.id : false
+               : false;
     };
 
     const option = (location) => {
         return location
-            ? location.district
-                ? `${location.region.name}, ${location.city.name}, ${location.district.name}`
-                : `${location.region.name}, ${location.city.name}`
-            : ''
+               ? location.district
+                 ? `${t(location.region.name)}, ${t(location.city.name)}, ${t(location.district.name)}`
+                 : `${t(location.region.name)}, ${t(location.city.name)}`
+               : '';
     };
 
     return (
@@ -63,23 +63,23 @@ export const LocationAutocomplete: FC<AddressAutocompleteType> = (props) => {
                 onChange={onChange}
                 forcePopupIcon={false}
                 getOptionLabel={option}
-                getOptionSelected={optionSelected}
                 options={locationsNormalize(locations)}
-                noOptionsText={t('cityOrRegionNotFound')}
+                getOptionSelected={optionSelected}
+                noOptionsText={t('post:cityOrRegionNotFound')}
                 renderInput={params =>
                     <TextField
-                        fullWidth
                         {...params}
-                        focused={false}
-                        variant='outlined'
                         name={name}
                         onBlur={onBlur}
-                        className={errorMsg ? 'error-border' : ''}
-                        placeholder={t('choiceLocation')}
+                        fullWidth
+                        focused={false}
+                        variant='outlined'
+                        placeholder={t('post:choiceLocation')}
+                        className={errorMsg !== '' ? 'error-border' : ''}
                     />}
             />
         </div>
-    )
+    );
 };
 
 function locationsNormalize(locations) {

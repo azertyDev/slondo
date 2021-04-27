@@ -1,7 +1,7 @@
 import React, {FC} from 'react';
 import {Grid, Typography} from '@material-ui/core';
 import {WithT} from 'i18next';
-import {CheckboxSelect} from '@src/components/post/create_post/form_page/components/checkbox_select/CheckboxSelect';
+import {CheckboxSelect} from '@src/components/elements/checkbox_select/CheckboxSelect';
 import {excludedKeys} from '@src/common_data/form_fields';
 
 
@@ -39,10 +39,11 @@ export const PreviewValues: FC<PreviewValuesPropsType> = (props) => {
                                 >
                                     {isBoolean
                                      ? <CheckboxSelect
+                                         t={t}
                                          disabled
                                          checked
                                          name={key}
-                                         labelText={t(key)}
+                                         labelText={key}
                                      />
                                      : <Typography variant="subtitle1">
                                          <strong>

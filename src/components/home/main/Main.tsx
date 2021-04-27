@@ -9,16 +9,13 @@ import {
 } from '@material-ui/core';
 import {MainSlider} from './main_slider/MainSlider';
 import {CategoriesSlider} from './categories_slider/CategoriesSlider';
-import {PostsSliderContainer} from "./posts_slider/PostsSliderContainer";
+import {PostsSliderContainer} from './posts_slider/PostsSliderContainer';
 import {PostsTabsContainer} from './posts_tabs/PostsTabsContainer';
-import {ScrollTop} from '@src/components/elements/scroll_top/ScrollTop';
 import Link from 'next/link';
 import {useTranslation} from 'next-i18next';
-import {Banner} from "@src/components/elements/banner/Banner";
-import {FaqComponent} from "@src/components/elements/faq_component/FaqComponent";
-import {SocialsBlock} from '../../elements/socials_block/SocialsBlock';
-import {useStyles} from './useStyles'
-import {SEOTextComponent} from '@src/components/elements/seo/SEOTextComponent'
+import {SEOTextComponent} from '@src/components/elements/seo_text/SEOTextComponent';
+import {HomeSidebar} from '@src/components/home/main/home_sidebar/HomeSideBar';
+import {useStyles} from './useStyles';
 
 
 export const Main: FC = () => {
@@ -39,7 +36,7 @@ export const Main: FC = () => {
                     </div>
                     <Grid container>
                         <Grid item lg={9} xs={12} className='main-content'>
-                            <section className='ancmnts-slider-wrapper'>
+                            <section className='posts-slider-wrapper'>
                                 <PostsSliderContainer/>
                             </section>
                             <section>
@@ -48,23 +45,7 @@ export const Main: FC = () => {
                         </Grid>
                         <Hidden mdDown>
                             <Grid item lg={3} className="right-content">
-                                <section className="faq-wrapper">
-                                    <FaqComponent/>
-                                    <SocialsBlock/>
-                                </section>
-                                <section className="banner-wrapper">
-                                    <Banner height="345px"/>
-                                </section>
-                                <ScrollTop>
-                                    <a
-                                        aria-label="scroll back to top"
-                                        className={classes.scrollTop}
-                                    >
-                                        <span className="MuiFab">
-                                            <span className="icon"/>
-                                        </span>
-                                    </a>
-                                </ScrollTop>
+                                <HomeSidebar/>
                             </Grid>
                         </Hidden>
                     </Grid>

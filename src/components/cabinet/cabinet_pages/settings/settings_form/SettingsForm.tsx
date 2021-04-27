@@ -67,35 +67,38 @@ export const SettingsForm: FC<SettingsFormPropsType> = (props) => {
                         </Grid>
                         <Grid item xs={6}>
                             <CustomFormikField
+                                t={t}
+                                size='small'
                                 name='user_name'
-                                labelText={t('user_name')}
+                                labelText='user_name'
                                 value={values.user_name}
                                 onChange={handleChange}
                                 disabled={formDisable}
                                 errorMsg={getErrorMsg(errors.user_name, touched.user_name, t)}
-                                size='small'
                             />
                         </Grid>
                         <Grid item xs={6}>
                             <CustomFormikField
+                                t={t}
+                                size='small'
                                 name='user_surname'
-                                labelText={t('user_surname')}
+                                labelText='user_surname'
                                 value={values.user_surname}
                                 onChange={handleChange}
                                 disabled={formDisable}
                                 errorMsg={getErrorMsg(errors.user_surname, touched.user_surname, t)}
-                                size='small'
                             />
                         </Grid>
                         <Grid item xs={6}>
                             <CustomFormikField
+                                t={t}
+                                disabled
+                                size='small'
                                 name='phone'
-                                labelText={t('phoneNumber')}
+                                labelText='phone_number'
                                 value={values.phone}
                                 onChange={handleChange}
-                                disabled
                                 errorMsg={getErrorMsg(errors.phone, touched.phone, t)}
-                                size='small'
                             />
                         </Grid>
                         <Grid item xs={6}>

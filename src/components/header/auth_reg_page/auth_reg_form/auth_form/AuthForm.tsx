@@ -8,7 +8,7 @@ import {CustomFormikField} from '@src/components/elements/custom_formik_field/Cu
 import {ButtonComponent} from '@src/components/elements/button/Button';
 import {authSchema} from '@root/validation_schemas/authRegSchema';
 import {signInAction} from '@src/redux/slices/userSlice';
-import {cookies, cookieOpts, phoneFormat} from "@src/helpers";
+import {cookies, cookieOpts, phoneFormat, getErrorMsg} from '@src/helpers';
 
 
 const initialInputsVals = {
@@ -75,28 +75,22 @@ export const AuthForm: FC<AuthFormPropsType> = (props) => {
         <FormikProvider value={formik}>
             <Form onSubmit={formik.handleSubmit}>
                 <CustomFormikField
+                    t={t}
                     type="tel"
                     name="phone"
-                    labelText={t('enterPhone')}
-                    errorMsg={
-                        errors?.phone && touched?.phone
-                            ? t(`errors:${errors.phone}`)
-                            : ''
-                    }
-                    placeholder={t('enterPhone')}
+                    labelText='enter_phone'
+                    placeholder={t('filters:enter_phone')}
                     onChange={handlePhoneInput}
+                    errorMsg={getErrorMsg(errors.phone, touched.phone, t)}
                 />
                 <CustomFormikField
+                    t={t}
                     name="password"
                     type="password"
-                    labelText={t('enterPassword')}
-                    errorMsg={
-                        errors?.password && touched?.password
-                            ? t(`errors:${errors.password}`)
-                            : ''
-                    }
-                    placeholder={t('enterPassword')}
+                    labelText='enter_password'
+                    placeholder={t('filters:enter_password')}
                     onChange={handlePasswordInput}
+                    errorMsg={getErrorMsg(errors.password, touched.password, t)}
                 />
                 <div className='forget-password'>
                     <Typography
@@ -104,7 +98,7 @@ export const AuthForm: FC<AuthFormPropsType> = (props) => {
                         onClick={handleForgetPass}
                         style={{cursor: "pointer"}}
                     >
-                        {t('forgetPassword')}
+                        {t('filters:forget_password')}
                     </Typography>
                 </div>
                 <div className='auth-btns'>

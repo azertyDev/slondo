@@ -5,7 +5,7 @@ import {CustomFormikField} from "@src/components/elements/custom_formik_field/Cu
 import {phoneSchema} from '@root/validation_schemas/authRegSchema';
 import {ButtonComponent} from "@src/components/elements/button/Button";
 import {userAPI} from "@src/api/api";
-import {phoneFormat} from "@src/helpers";
+import {getErrorMsg, phoneFormat} from '@src/helpers';
 
 
 type ConfirmAuthPropsType = {
@@ -64,15 +64,13 @@ export const PhoneForm: FC<ConfirmAuthPropsType> = (props) => {
         <FormikProvider value={formik}>
             <Form onSubmit={formik.handleSubmit} className='auth-form'>
                 <CustomFormikField
+                    t={t}
                     type="tel"
                     name="phone"
-                    labelText={t('enterPhone')}
-                    placeholder={t('enterPhone')}
+                    labelText='enter_phone'
+                    placeholder={t('filters:enter_phone')}
                     onChange={handlePhoneInput}
-                    errorMsg={
-                        errors.phone && touched.phone
-                            ? t(`errors:${errors.phone as string}`)
-                            : ''}
+                    errorMsg={getErrorMsg(errors.phone, touched.phone, t)}
                 />
                 <div className='auth-btns'>
                     <ButtonComponent type="submit" disabled={values.isFetch}>

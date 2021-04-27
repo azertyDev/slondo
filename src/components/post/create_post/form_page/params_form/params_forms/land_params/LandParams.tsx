@@ -1,7 +1,7 @@
 import React, {FC} from "react";
 import {WithT} from "i18next";
 import {Grid} from "@material-ui/core";
-import {DropDownSelect} from "@src/components/post/create_post/form_page/components/drop_down_select/DropDownSelect";
+import {DropDownSelect} from "@src/components/elements/drop_down_select/DropDownSelect";
 import {CustomFormikField} from "@src/components/elements/custom_formik_field/CustomFormikField";
 import {FormikType} from "@root/interfaces/Formik";
 import {useStyles} from './useStyles';
@@ -80,12 +80,11 @@ export const LandParams: FC<LandPropsType> = (props) => {
                         )}
                         <Grid item xs={4}>
                             <CustomFormikField
+                                t={t}
                                 name='area'
-                                labelText={t('area_in_hundred')}
+                                labelText='area_in_hundred'
                                 value={values.area ?? ''}
-                                errorMsg={
-                                    getErrorMsg(errors.area, touched.area, t)
-                                }
+                                errorMsg={getErrorMsg(errors.area, touched.area, t)}
                             />
                         </Grid>
                         <Grid item container xs={4}>

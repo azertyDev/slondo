@@ -1,6 +1,6 @@
 import Cookies from 'universal-cookie';
 import {TFunction} from 'next-i18next';
-import {CategoryType, SubCtgrsType} from '@root/interfaces/Categories';
+import {CategoryType, SubCategoryType, TypeCtgr} from '@root/interfaces/Categories';
 import CyrillicToTranslit from 'cyrillic-to-translit-js';
 import {punctuationMarksRegEx} from '@src/common_data/reg_exs';
 import {categories_list} from '@src/common_data/categories_list';
@@ -29,20 +29,24 @@ export const transformToCyrillic = (title: string, reverse?: boolean): string =>
         .replace(/\s+/g, '-');
 };
 
-export const getCtgrsByCyrillicNames = (subCtgrName: string, typeCtgrName?: string): any => {
-    return categories_list.reduce((acc: any, ctgr) => {
-        ctgr.subCategory.forEach(subCtgr => {
-            if (transformToCyrillic(subCtgr.ru_name) === subCtgrName) {
-                acc.push(subCtgr);
-                if (typeCtgrName) {
-                    subCtgr.type?.forEach(type => {
-                        if (transformToCyrillic(type.ru_name) === typeCtgrName) {
-                            acc.push(type);
-                        }
-                    });
+export type CtgrsByCyrillicNameType = [CategoryType, SubCategoryType, TypeCtgr?];
+export const getCtgrsByCyrillicNames = (categoryName: string, subCtgrName: string, typeCtgrName?: string): CtgrsByCyrillicNameType => {
+    return addParentsToCtgrs(categories_list).reduce((acc: any, ctgr) => {
+        if (transformToCyrillic(ctgr.ru_name) === categoryName) {
+            acc.push(ctgr);
+            ctgr.subCategory.forEach(subCtgr => {
+                if (transformToCyrillic(subCtgr.ru_name) === subCtgrName) {
+                    acc.push(subCtgr);
+                    if (typeCtgrName) {
+                        subCtgr.type?.forEach(type => {
+                            if (transformToCyrillic(type.ru_name) === typeCtgrName) {
+                                acc.push(type);
+                            }
+                        });
+                    }
                 }
-            }
-        });
+            });
+        }
         return acc;
     }, []);
 };
@@ -145,7 +149,7 @@ export const dataForCrtPostNormalize = (data: any, type?) => {
     return data;
 };
 
-export const categorySearchHelper = (txt: string, categoryList: CategoryType[], t: TFunction): SubCtgrsType[] => {
+export const categorySearchHelper = (txt: string, categoryList: CategoryType[], t: TFunction): SubCategoryType[] => {
     return categoryList
         .reduce((list, category) => {
             list = [...list, ...getMatchedCtgrs(txt, category.subCategory)];

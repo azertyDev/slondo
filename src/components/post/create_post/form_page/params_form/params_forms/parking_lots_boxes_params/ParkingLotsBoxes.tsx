@@ -1,7 +1,7 @@
 import React, {FC} from "react";
 import {Grid} from "@material-ui/core";
 import {WithT} from "i18next";
-import {DropDownSelect} from "@src/components/post/create_post/form_page/components/drop_down_select/DropDownSelect";
+import {DropDownSelect} from "@src/components/elements/drop_down_select/DropDownSelect";
 import {CustomFormikField} from "@src/components/elements/custom_formik_field/CustomFormikField";
 import {FormikType} from "@root/interfaces/Formik";
 import {DeployedSelect} from "@src/components/post/create_post/form_page/components/deployed_select/DeployedSelect";
@@ -55,16 +55,18 @@ export const ParkingLotsBoxes: FC<ParkingLotsAndBoxesPropsType> = (props) => {
                      </Grid>
                      <Grid item container xs={4}>
                          <CustomFormikField
+                             t={t}
                              name='area'
-                             labelText={t('area')}
+                             labelText='area'
                              value={values.area ?? ''}
                              errorMsg={getErrorMsg(errors.area, touched.area, t)}
                          />
                      </Grid>
                      <Grid item container xs={4}>
                          <CustomFormikField
+                             t={t}
                              name='parking_spaces'
-                             labelText={t('parking_spaces')}
+                             labelText='parking_spaces'
                              value={values.parking_spaces ?? ''}
                              errorMsg={getErrorMsg(errors.parking_spaces, touched.parking_spaces, t)}
                          />

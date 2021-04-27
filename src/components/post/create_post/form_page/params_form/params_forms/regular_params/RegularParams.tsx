@@ -2,7 +2,7 @@ import React, {FC, Fragment} from "react";
 import {WithT} from "i18next";
 import {Grid, Typography} from "@material-ui/core";
 import {excludedKeys, optionKeys} from "@src/common_data/form_fields";
-import {DropDownSelect} from "@src/components/post/create_post/form_page/components/drop_down_select/DropDownSelect";
+import {DropDownSelect} from "@src/components/elements/drop_down_select/DropDownSelect";
 import {getErrorMsg} from "@src/helpers";
 import {OptionsSelect} from "@src/components/post/create_post/form_page/components/options_select/OptionsSelect";
 import {useStyles} from "./useStyles";

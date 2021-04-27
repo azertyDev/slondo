@@ -31,7 +31,7 @@ export const AvailableDays: FC<AvailableDaysPropsType> = (props) => {
             <div className='switcher'>
                 <Typography variant="subtitle1">
                     <strong>
-                        {t('callTimes')}
+                        {t('common:callTimes')}
                     </strong>
                 </Typography>
                 <Switch
@@ -49,10 +49,10 @@ export const AvailableDays: FC<AvailableDaysPropsType> = (props) => {
                             checked={isActive && time.week_days.some(({id}) => id === day.id)}
                             checkedIcon={
                                 <Typography className='selected-day'>
-                                    {t(day.name)}
+                                    {t(`common:${day.name}`)}
                                 </Typography>
                             }
-                            icon={<Typography>{t(day.name)}</Typography>}
+                            icon={<Typography>{t(`common:${day.name}`)}</Typography>}
                             onChange={handleAvalDays(day)}
                         />
                     )}
@@ -79,7 +79,7 @@ export const AvailableDays: FC<AvailableDaysPropsType> = (props) => {
                     </div>
                 </div>
             </Paper>
-            <a href="#" className='settings'>{t('configs')}</a>
+            <a href="#" className='settings'>{t('common:configs')}</a>
         </div>
     )
 };

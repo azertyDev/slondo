@@ -3,15 +3,17 @@ import {Field} from 'formik';
 import {TextField, Typography} from '@material-ui/core';
 import {TextFieldProps} from "@material-ui/core/TextField/TextField";
 import {isRequired} from "@src/helpers";
+import {WithT} from 'i18next';
 import {useStyles} from './useStyles';
 
 type CustomFormikFieldPropsType = {
     errorMsg?: string,
     labelText?: string
-} & TextFieldProps;
+} & TextFieldProps & WithT;
 
 export const CustomFormikField: FC<CustomFormikFieldPropsType> = (props) => {
     const {
+        t,
         name,
         errorMsg,
         labelText,
@@ -27,7 +29,7 @@ export const CustomFormikField: FC<CustomFormikFieldPropsType> = (props) => {
                         {labelText && (
                             <Typography variant="subtitle1">
                                 <strong>
-                                    {labelText}
+                                    {t(`filters:${labelText}`)}
                                     {isRequired(name) && <span className='error-text'>*</span>}&nbsp;
                                 </strong>
                             </Typography>

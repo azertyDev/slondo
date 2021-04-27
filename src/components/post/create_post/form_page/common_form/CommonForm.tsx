@@ -18,7 +18,7 @@ import {PostType} from '@root/interfaces/Post';
 import {WEEK_DAYS} from '@src/common_data/common';
 import {StateIcon} from '@src/components/elements/icons';
 import {LocationAutocomplete} from '@src/components/post/create_post/form_page/common_form/location/LocationAutocomplete';
-import {DropDownSelect} from '@src/components/post/create_post/form_page/components/drop_down_select/DropDownSelect';
+import {DropDownSelect} from '@src/components/elements/drop_down_select/DropDownSelect';
 import {CommonFormPreview} from '@src/components/post/create_post/form_page/common_form/CommonFormPreview';
 import {CustomFormikField} from '@src/components/elements/custom_formik_field/CustomFormikField';
 import {useStyles} from './useStyles';
@@ -174,10 +174,6 @@ export const CommonForm: FC<DefaultParamsPropsType> = (props) => {
 
     const {auction, location, avalTime} = values;
 
-    const locationText = !location
-                         ? ''
-                         : `${location.region.name}${location.city ? `, ${location.city.name}` : ''}${location.district ? `, ${location.district.name}` : ''}`;
-
     const handleSelect = (key, value) => {
         if (key === 'duration') {
             auction.duration = value;
@@ -290,7 +286,7 @@ export const CommonForm: FC<DefaultParamsPropsType> = (props) => {
                              values={values}
                              isAuction={isAuction}
                              ownerPhone={ownerPhone}
-                             locationText={locationText}
+                             location={location}
                              isAdvanceAuction={isAdvanceAuction}
                          />
                          : <div>
@@ -312,8 +308,9 @@ export const CommonForm: FC<DefaultParamsPropsType> = (props) => {
                               : <Grid container alignItems='center'>
                                   <Grid item xs={3}>
                                       <CustomFormikField
+                                          t={t}
                                           name='price'
-                                          labelText={t('price')}
+                                          labelText='price'
                                           value={values.price}
                                           onChange={handleInput}
                                           style={{width: '270px'}}
@@ -342,13 +339,11 @@ export const CommonForm: FC<DefaultParamsPropsType> = (props) => {
                              <div className='location-wrapper'>
                                  <LocationAutocomplete
                                      name='location'
-                                     errorMsg={
-                                         getErrorMsg(errors.location, touched.location, t)
-                                     }
                                      value={values.location}
                                      locations={locations.data}
                                      onBlur={handleBlur}
                                      onChange={handleLocation}
+                                     errorMsg={getErrorMsg(errors.location, touched.location, t)}
                                  />
                              </div>
                              <div>

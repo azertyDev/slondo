@@ -141,13 +141,6 @@ const theme = createMuiTheme({
             root: {
                 textTransform: 'none'
             }
-        },
-        MuiListItem: {
-            button: {
-                '&:hover': {
-                    backgroundColor: `${colors.white}!important`
-                }
-            }
         }
     }
 });

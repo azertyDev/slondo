@@ -1,6 +1,6 @@
-import {GetStaticPaths, GetStaticProps} from "next";
-import {serverSideTranslations} from "next-i18next/serverSideTranslations";
-import CreatePost from "@src/components/post/create_post/CreatePost";
+import {GetStaticPaths, GetStaticProps} from 'next';
+import {serverSideTranslations} from 'next-i18next/serverSideTranslations';
+import CreatePost from '@src/components/post/create_post/CreatePost';
 
 export const getStaticPaths: GetStaticPaths<{ slug: string }> = async () => {
     return {
@@ -13,7 +13,17 @@ export const getStaticProps: GetStaticProps = async ({locale}) => ({
     props: {
         ...await serverSideTranslations(
             locale,
-            ['post', 'categories', 'common', 'header', 'footer', 'auth_reg', 'errors']
+            [
+                'post',
+                'filters',
+                'locations',
+                'categories',
+                'common',
+                'header',
+                'footer',
+                'auth_reg',
+                'errors'
+            ]
         )
     }
 });

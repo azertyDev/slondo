@@ -5,19 +5,20 @@ import {InputAdornment, List, ListItem, TextField, Typography} from '@material-u
 import {categories_list} from '@src/common_data/categories_list';
 import {useTranslation} from 'next-i18next';
 import {Search_icon} from '@src/components/elements/icons';
-import {addParentsToCtgrs, transformToCyrillic} from "@src/helpers";
+import {addParentsToCtgrs, transformToCyrillic} from '@src/helpers';
 import {useStyles} from './useStyles';
 
 
 export const CustomDrawer: FC<any> = ({toggleDrawer, position}) => {
-    const {t} = useTranslation(['categories']);
+    const {t} = useTranslation('categories');
 
-    const [subCategory, setSubCategory] = useState([]);
+    const initHoverCtgr = {
+        subCategory: []
+    };
+    const [hoverCtgr, setHoverCategory] = useState<any>(initHoverCtgr);
 
-    const handleSubCategory = (subCategory) => () => {
-        subCategory
-        ? setSubCategory(subCategory)
-        : setSubCategory([]);
+    const handleCategory = (ctgr) => () => {
+        setHoverCategory(ctgr ?? initHoverCtgr);
     };
 
     const list = () => (
@@ -38,21 +39,21 @@ export const CustomDrawer: FC<any> = ({toggleDrawer, position}) => {
                 placeholder="Поиск категорий"
             />
             <List>
-                {addParentsToCtgrs(categories_list).map(({id, name, smallIcon, subCategory}) =>
+                {addParentsToCtgrs(categories_list).map((ctgr) =>
                     <ListItem
-                        key={id}
+                        key={ctgr.id}
                         button
                         disableGutters
-                        onMouseEnter={handleSubCategory(subCategory)}
+                        onMouseEnter={handleCategory(ctgr)}
                     >
                         <div className='icon'>
-                            {smallIcon}
+                            {ctgr.smallIcon}
                         </div>
                         <Typography
                             variant="subtitle1"
                             color="initial"
                         >
-                            {t(name)}
+                            {t(ctgr.name)}
                         </Typography>
                     </ListItem>
                 )}
@@ -73,10 +74,10 @@ export const CustomDrawer: FC<any> = ({toggleDrawer, position}) => {
             </Drawer>
             <div
                 style={{
-                    display: subCategory.length === 0 ? 'none' : '',
+                    display: hoverCtgr.subCategory.length === 0 ? 'none' : '',
                     height: '100vh',
-                    width: "100%",
-                    background: "white",
+                    width: '100%',
+                    background: 'white',
                     position: 'absolute',
                     zIndex: 99999,
                     left: '120px',
@@ -84,18 +85,25 @@ export const CustomDrawer: FC<any> = ({toggleDrawer, position}) => {
                     overflowY: 'auto'
                 }}
             >
-                <h1 onClick={() => setSubCategory([])} style={{cursor: "pointer"}}>X</h1>
-                {subCategory.map(subCategory => {
-                    const subCategoryCyrillicName = transformToCyrillic(subCategory.ru_name);
+                <h1 onClick={() => setHoverCategory(initHoverCtgr)} style={{cursor: 'pointer'}}>X</h1>
+                {hoverCtgr.subCategory.map(subCategory => {
+                    const location = 'tashkent';
+                    const categoryName = transformToCyrillic(hoverCtgr.ru_name);
+                    const subCategoryName = transformToCyrillic(subCategory.ru_name);
                     const type = subCategory.type;
-                    const url = `/tashkent/${subCategoryCyrillicName}`;
+                    const url = `/${location}/${categoryName}/${subCategoryName}`;
+
                     return (
                         <div key={subCategory.id}>
                             {type
                              ? <div>
-                                 <Typography variant="h6" gutterBottom color="secondary">
-                                     {subCategory.name}
-                                 </Typography>
+                                 <Link key={type.id} href={url}>
+                                     <a>
+                                         <Typography variant="h6" gutterBottom color="secondary">
+                                             {subCategory.name}
+                                         </Typography>
+                                     </a>
+                                 </Link>
                                  {type.map(type => {
                                      const typeName = transformToCyrillic(type.ru_name);
                                      return (

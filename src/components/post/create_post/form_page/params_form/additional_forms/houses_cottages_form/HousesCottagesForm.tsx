@@ -1,13 +1,13 @@
 import React, {FC} from 'react';
 import {WithT} from 'i18next';
 import {Grid} from '@material-ui/core';
-import {DropDownSelect} from '@src/components/post/create_post/form_page/components/drop_down_select/DropDownSelect';
+import {DropDownSelect} from '@src/components/elements/drop_down_select/DropDownSelect';
 import {NumberSelect} from '@src/components/post/create_post/form_page/components/number_select/NumberSelect';
 import {CustomFormikField} from '@src/components/elements/custom_formik_field/CustomFormikField';
 import {FormikType} from '@root/interfaces/Formik';
 import {DeployedSelect} from '@src/components/post/create_post/form_page/components/deployed_select/DeployedSelect';
 import {PreviewValues} from '@src/components/post/create_post/form_page/params_form/PreviewValues';
-import {CheckboxSelect} from '@src/components/post/create_post/form_page/components/checkbox_select/CheckboxSelect';
+import {CheckboxSelect} from '@src/components/elements/checkbox_select/CheckboxSelect';
 import {getErrorMsg} from '@src/helpers';
 import {useStyles} from './useStyles';
 
@@ -91,8 +91,9 @@ export const HousesCottagesForm: FC<HousesCottagesPropsType> = (props) => {
                          </Grid>
                          <Grid item container xs={3} alignItems='center'>
                              <CheckboxSelect
+                                 t={t}
                                  name='furnished'
-                                 labelText={t('house_furnished')}
+                                 labelText='house_furnished'
                                  checked={values.furnished}
                                  onChange={handleCheckbox}
                              />
@@ -112,16 +113,18 @@ export const HousesCottagesForm: FC<HousesCottagesPropsType> = (props) => {
                              </Grid>
                              <Grid item container xs={4} alignItems='center'>
                                  <CheckboxSelect
+                                     t={t}
                                      name='utilities'
-                                     labelText={t('utilities')}
+                                     labelText='utilities'
                                      checked={values.utilities}
                                      onChange={handleCheckbox}
                                  />
                              </Grid>
                              <Grid item container xs={4} alignItems='center'>
                                  <CheckboxSelect
+                                     t={t}
                                      name='with_pledge'
-                                     labelText={t('with_pledge')}
+                                     labelText='with_pledge'
                                      checked={values.with_pledge}
                                      onChange={handleCheckbox}
                                  />
@@ -165,32 +168,36 @@ export const HousesCottagesForm: FC<HousesCottagesPropsType> = (props) => {
                      </Grid>
                      <Grid item xs={4}>
                          <CustomFormikField
+                             t={t}
                              name='general_area'
-                             labelText={t('general_area')}
+                             labelText='general_area'
                              value={values.general_area ?? ''}
                              errorMsg={getErrorMsg(errors.general_area, touched.general_area, t)}
                          />
                      </Grid>
                      <Grid item container xs={4}>
                          <CustomFormikField
+                             t={t}
                              name='land_area'
-                             labelText={t('land_area')}
+                             labelText='land_area'
                              value={values.land_area ?? ''}
                              errorMsg={getErrorMsg(errors.land_area, touched.land_area, t)}
                          />
                      </Grid>
                      <Grid item container xs={4}>
                          <CustomFormikField
+                             t={t}
                              name='living_area'
-                             labelText={t('living_area')}
+                             labelText='living_area'
                              value={values.living_area ?? ''}
                              errorMsg={getErrorMsg(errors.living_area, touched.living_area, t)}
                          />
                      </Grid>
                      <Grid item container xs={4}>
                          <CustomFormikField
+                             t={t}
                              name='ceiling_height'
-                             labelText={t('ceiling_height')}
+                             labelText='ceiling_height'
                              value={values.ceiling_height ?? ''}
                              errorMsg={getErrorMsg(errors.ceiling_height, touched.ceiling_height, t)}
                          />

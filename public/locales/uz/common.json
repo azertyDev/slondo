@@ -9,8 +9,15 @@
   "exauc": "Kengaytirilgan auksion",
   "location": "Joylashuv",
   "edit": "O'zgartitish",
-  "name": "Ism",
-  "surname": "Familiya",
-  "phoneNumber": "Telefon raqam",
-  "selectGeolocation": "Joylashuvni tanlang"
+  "selectGeolocation": "Joylashuvni tanlang",
+  "weInSocial": "Biz ijtimoiy tarmoqlarda",
+  "youLookingFor": "Siz izlayotgan edingiz",
+  "Mo": "Du",
+  "Tu": "Se",
+  "We": "Cho",
+  "Th": "Pa",
+  "Fr": "Ju",
+  "Sa": "Sha",
+  "Su": "Ya",
+  "callTimes": "Qong'iroq qilish vaqti"
 }

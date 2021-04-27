@@ -13,17 +13,17 @@ import {useStyles} from './useStyles';
 
 
 const Bottom = (props) => {
-    const { isScrollBreak, handleOpenModal, isAuth, t, avatar } = props;
-    const [drawerPosition, setDrawerPosition] = useState({ left: false });
+    const {isScrollBreak, handleOpenModal, isAuth, t, avatar} = props;
+    const [drawerPosition, setDrawerPosition] = useState({left: false});
 
     const toggleDrawer = (anchor, open) => (event) => {
         if (event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
             return;
         }
-        setDrawerPosition({...drawerPosition, [anchor]: open})
-    }
+        setDrawerPosition({...drawerPosition, [anchor]: open});
+    };
 
-    const classes = useStyles(props)
+    const classes = useStyles(props);
     return (
         <div className={classes.root}>
             <Hidden mdDown>
@@ -111,20 +111,20 @@ const Bottom = (props) => {
                                 xs={1}
                             >
                                 {isAuth
-                                    ? <Link href='/cabinet/posts'>
-                                        <a>
-                                            <Avatar alt="Remy Sharp" src={avatar} />
-                                        </a>
-                                    </Link>
-                                    : <ButtonComponent
-                                        className="bottom-sign-button header-button"
-                                        onClick={handleOpenModal}
-                                    >
-                                        <Typography variant="subtitle2">
-                                            {t('auth_reg:signIn')}
-                                        </Typography>
-                                        <SignIcon />
-                                    </ButtonComponent>}
+                                 ? <Link href='/cabinet/posts'>
+                                     <a>
+                                         <Avatar alt="Remy Sharp" src={avatar}/>
+                                     </a>
+                                 </Link>
+                                 : <ButtonComponent
+                                     className="bottom-sign-button header-button"
+                                     onClick={handleOpenModal}
+                                 >
+                                     <Typography variant="subtitle2">
+                                         {t('auth_reg:signIn')}
+                                     </Typography>
+                                     <SignIcon/>
+                                 </ButtonComponent>}
                             </Grid>
                         </Grid>
                     </Container>
@@ -140,7 +140,7 @@ const Bottom = (props) => {
                 position={drawerPosition}
             />
         </div>
-    )
-}
+    );
+};
 
-export default withScrollThreshold(Bottom)
+export default withScrollThreshold(Bottom);

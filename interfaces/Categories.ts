@@ -1,4 +1,5 @@
 import {IdNameType} from "@root/interfaces/Post";
+import exp from 'constants';
 
 export interface Categories {
     isFetch: boolean;
@@ -32,10 +33,10 @@ export type CategoryType = IdNameType & {
 };
 
 export type SubCategoryType = IdNameType & {
-    parents?: IdNameType[];
-    type?: SubCtgrsType[];
+    parents?: IdNameType[],
+    type?: TypeCtgr[]
 };
 
-export type SubCtgrsType = IdNameType & {
+export type TypeCtgr = IdNameType & {
     parents?: IdNameType[]
 };

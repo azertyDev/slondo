@@ -1,10 +1,27 @@
-import React, {FC} from 'react';
-import {Search} from "@src/components/search/Search";
-import {GetStaticPaths, GetStaticProps} from "next";
-import {serverSideTranslations} from "next-i18next/serverSideTranslations";
+import {FC} from 'react';
+import {SearchContainer} from '@src/components/search/SearchContainer';
+import {GetStaticPaths, GetStaticProps} from 'next';
+import {serverSideTranslations} from 'next-i18next/serverSideTranslations';
+import {useRouter} from 'next/router';
+import {getCtgrsByCyrillicNames} from '@src/helpers';
+import {PageNotFound} from '@src/components/page_not_found/PageNotFound';
 
-const Type: FC = () => {
-    return <Search/>;
+const SearchPage: FC = () => {
+    const {query, locale} = useRouter();
+    const {categories} = query;
+    const [categoryName, subCtgrName, typeCtgrName] = categories as string[];
+    const ctgrsByCyrillicName = getCtgrsByCyrillicNames(categoryName, subCtgrName, typeCtgrName);
+    const [ctgr, subCtgr, typeCtgr] = ctgrsByCyrillicName;
+
+    const is404 = !ctgr || !subCtgr || typeCtgrName && !typeCtgr || categories.length > 3;
+
+    return is404
+           ? <PageNotFound/>
+           : <SearchContainer
+               locale={locale}
+               query={query}
+               ctgrsByQuery={ctgrsByCyrillicName}
+           />;
 };
 
 export const getStaticPaths: GetStaticPaths<{ slug: string }> = async () => {
@@ -18,9 +35,19 @@ export const getStaticProps: GetStaticProps = async ({locale}) => ({
     props: {
         ...await serverSideTranslations(
             locale,
-            ['categories', 'header', 'footer', 'auth_reg', 'common', 'errors']
+            [
+                'categories',
+                'filters',
+                'post',
+                'locations',
+                'header',
+                'footer',
+                'auth_reg',
+                'common',
+                'errors'
+            ]
         )
     }
 });
 
-export default Type;
+export default SearchPage;

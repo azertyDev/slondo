@@ -10,7 +10,7 @@ type DefaultParamsPropsType = {
     values,
     isAuction: boolean,
     isAdvanceAuction: boolean,
-    locationText: string,
+    location,
     ownerPhone: string
 } & WithT;
 
@@ -21,10 +21,13 @@ export const CommonFormPreview: FC<DefaultParamsPropsType> = (props) => {
         isAuction,
         ownerPhone,
         isAdvanceAuction,
-        locationText
+        location
     } = props;
 
     const {auction, avalTime} = values;
+    const locationText = location
+                         ? `${t(`locations:${location.region.name}`)}${location.city ? `, ${t(`locations:${location.city.name}`)}` : ''}${location.district ? `, ${t(`locations:${location.district.name}`)}` : ''}`
+                         : '';
 
     const classes = useStyles();
     return (

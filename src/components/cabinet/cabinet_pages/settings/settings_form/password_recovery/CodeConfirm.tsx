@@ -6,7 +6,8 @@ import {codeSchema} from '@root/validation_schemas/authRegSchema';
 import {ButtonComponent} from '@src/components/elements/button/Button';
 import {userAPI} from '@src/api/api';
 import {useDispatch} from 'react-redux';
-import { setErrorMsgAction } from '@root/src/redux/slices/errorSlice';
+import {setErrorMsgAction} from '@root/src/redux/slices/errorSlice';
+import {getErrorMsg} from '@src/helpers';
 
 type CodeConfirmPropsType = {
     phone: string,
@@ -71,21 +72,19 @@ export const CodeConfirm: FC<CodeConfirmPropsType> = (props) => {
             <Form onSubmit={handleSubmit} className='auth-form'>
                 <div>
                     <CustomFormikField
+                        t={t}
+                        disabled
                         type="tel"
                         value={phone}
-                        disabled
-                        labelText={t('phoneNumber')}
+                        labelText='phone_number'
                     />
                     <CustomFormikField
+                        t={t}
                         type="text"
                         name="code"
-                        labelText={t('enterSMS')}
-                        placeholder={t('enterSMS')}
-                        errorMsg={
-                            errors.code && touched.code
-                                ? t(`errors:${errors.code}`)
-                                : ''
-                        }
+                        labelText='enterSMS'
+                        placeholder={t('filters:enterSMS')}
+                        errorMsg={getErrorMsg(errors.code, touched.code, t)}
                     />
                     <span>{timer}</span>
                 </div>

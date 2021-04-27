@@ -13,8 +13,10 @@ import {
 import {CabinetWrapper} from '@src/components/cabinet/CabinetWrapper';
 import {CustomFormikField} from '@src/components/elements/custom_formik_field/CustomFormikField';
 import {Form, FormikProvider, useFormik} from 'formik';
-import {useStyles} from './useStyles';
 import {ButtonComponent} from '@root/src/components/elements/button/Button';
+import {getErrorMsg} from '@src/helpers';
+import {useTranslation} from 'react-i18next';
+import {useStyles} from './useStyles';
 
 const initialInputsVals = {
     firstName: '',
@@ -24,7 +26,8 @@ const initialInputsVals = {
 };
 
 export const SafetyDeal: FC = () => {
-    const title = 'Безопасная покупка';
+    const {t} = useTranslation('filters');
+    const title = t('post:safe_deal');
 
     const onSubmit = (values) => {
         console.log(values);
@@ -55,27 +58,22 @@ export const SafetyDeal: FC = () => {
                                     </FormGroup>
                                 </FormControl>
                                 <CustomFormikField
+                                    t={t}
                                     name="firstName"
                                     type="text"
                                     labelText="Персональные данные"
                                     placeholder="Имя"
-                                    className={
-                                        errors.firstName && touched.firstName
-                                            ? 'error-border'
-                                            : ''
-                                    }
+                                    errorMsg={getErrorMsg(errors.firstName, touched.firstName, t)}
                                 />
                                 <CustomFormikField
+                                    t={t}
                                     name="secondName"
                                     type="text"
                                     placeholder="Фамилия"
-                                    className={
-                                        errors.secondName && touched.secondName
-                                            ? 'error-border'
-                                            : ''
-                                    }
+                                    errorMsg={getErrorMsg(errors.secondName, touched.secondName, t)}
                                 />
                                 <CustomFormikField
+                                    t={t}
                                     name="phone"
                                     type="tel"
                                     labelText="Номер телефона"
@@ -83,6 +81,7 @@ export const SafetyDeal: FC = () => {
                                     value="+998 90 908 0880"
                                 />
                                 <CustomFormikField
+                                    t={t}
                                     name="backupPhoneNumber"
                                     type="tel"
                                     labelText="Добавить резервный номер"
@@ -112,21 +111,25 @@ export const SafetyDeal: FC = () => {
                                         </Typography>
                                         <div>
                                             <CustomFormikField
+                                                t={t}
                                                 name="card-number"
                                                 type="text"
                                                 placeholder="XXXX"
                                             />
                                             <CustomFormikField
+                                                t={t}
                                                 name="card-number"
                                                 type="text"
                                                 placeholder="XXXX"
                                             />
                                             <CustomFormikField
+                                                t={t}
                                                 name="card-number"
                                                 type="text"
                                                 placeholder="XXXX"
                                             />
                                             <CustomFormikField
+                                                t={t}
                                                 name="card-number"
                                                 type="text"
                                                 placeholder="XXXX"
@@ -140,6 +143,7 @@ export const SafetyDeal: FC = () => {
                                         </Typography>
                                         <div>
                                             <CustomFormikField
+                                                t={t}
                                                 name="card-number"
                                                 type="text"
                                                 placeholder="xx/xx"

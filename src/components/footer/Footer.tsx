@@ -1,16 +1,16 @@
-import React, {FC} from 'react'
-import {Container, Grid, Typography} from '@material-ui/core'
-import {SocialsBlock} from '@src/components/elements/socials_block/SocialsBlock'
-import {useTranslation} from 'next-i18next'
-import Link from 'next/link'
-import {Logo} from '@src/components/elements/icons/logo/Logo'
-import {useStyles} from './useStyles'
+import React, {FC} from 'react';
+import {Container, Grid, Typography} from '@material-ui/core';
+import {SocialsBlock} from '@src/components/elements/socials_block/SocialsBlock';
+import {useTranslation} from 'next-i18next';
+import Link from 'next/link';
+import {Logo} from '@src/components/elements/icons/logo/Logo';
+import {useStyles} from './useStyles';
 
 
 export const Footer: FC = () => {
     const {t} = useTranslation(['footer']);
 
-    const classes = useStyles()
+    const classes = useStyles();
     return (
         <footer className={classes.root}>
             <div className='footer-wrapper'>
@@ -175,7 +175,7 @@ export const Footer: FC = () => {
                             </Grid>
                             <Grid item xs={3} container>
                                 <div className="social-icons">
-                                    <SocialsBlock footer/>
+                                    <SocialsBlock/>
                                 </div>
                             </Grid>
                         </Grid>
@@ -202,5 +202,5 @@ export const Footer: FC = () => {
                 </Container>
             </div>
         </footer>
-    )
-}
+    );
+};

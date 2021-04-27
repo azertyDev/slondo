@@ -1,7 +1,7 @@
 import React, {FC} from 'react';
 import {Grid, Typography} from '@material-ui/core';
 import {WithT} from 'i18next';
-import {DropDownSelect} from '@src/components/post/create_post/form_page/components/drop_down_select/DropDownSelect';
+import {DropDownSelect} from '@src/components/elements/drop_down_select/DropDownSelect';
 import {
     HandleOptionCheckboxType,
     OptionsSelect

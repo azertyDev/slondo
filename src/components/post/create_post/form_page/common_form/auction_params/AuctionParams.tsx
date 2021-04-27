@@ -1,7 +1,7 @@
 import React, {FC} from 'react';
 import {WithT} from 'i18next';
 import {Checkbox, Grid, Typography} from '@material-ui/core';
-import {DropDownSelect} from '@src/components/post/create_post/form_page/components/drop_down_select/DropDownSelect';
+import {DropDownSelect} from '@src/components/elements/drop_down_select/DropDownSelect';
 import {CustomFormikField} from '@src/components/elements/custom_formik_field/CustomFormikField';
 import {useStyles} from './useStyles';
 import {getErrorMsg} from '@src/helpers';
@@ -53,8 +53,9 @@ export const AuctionParams: FC<AuctionParamsPropsType> = (props) => {
                     </Grid>
                     <Grid item xs={3}>
                         <CustomFormikField
+                            t={t}
                             name='price'
-                            labelText={t('startPrice')}
+                            labelText='start_price'
                             value={values.price}
                             onChange={handleInput}
                             errorMsg={getErrorMsg(errors.price, touched.price, t)}
@@ -63,8 +64,9 @@ export const AuctionParams: FC<AuctionParamsPropsType> = (props) => {
                     {isAdvanceAuction && (
                         <Grid item xs={2}>
                             <CustomFormikField
+                                t={t}
                                 name='reserve_price'
-                                labelText={t('reservePrice')}
+                                labelText='reserve_price'
                                 value={values.reserve_price}
                                 onChange={handleInput}
                             />
@@ -101,9 +103,10 @@ export const AuctionParams: FC<AuctionParamsPropsType> = (props) => {
                             {auction.price_buy_now.isActive && (
                                 <Grid item xs={3}>
                                     <CustomFormikField
+                                        t={t}
                                         name='price_buy_now'
-                                        value={auction.price_buy_now.value}
                                         onChange={handleInput}
+                                        value={auction.price_buy_now.value}
                                     />
                                 </Grid>
                             )}

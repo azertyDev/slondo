@@ -1,11 +1,11 @@
 import React, {Dispatch, FC, SetStateAction} from 'react';
-import {WithT} from "i18next";
-import {Form, FormikProvider, useFormik} from "formik";
-import {CustomFormikField} from "@src/components/elements/custom_formik_field/CustomFormikField";
+import {WithT} from 'i18next';
+import {Form, FormikProvider, useFormik} from 'formik';
+import {CustomFormikField} from '@src/components/elements/custom_formik_field/CustomFormikField';
 import {passwordConfirmSchema} from '@root/validation_schemas/authRegSchema';
-import {ButtonComponent} from "@src/components/elements/button/Button";
-import {userAPI} from "@src/api/api";
-import {cookies, cookieOpts} from "@src/helpers";
+import {ButtonComponent} from '@src/components/elements/button/Button';
+import {userAPI} from '@src/api/api';
+import {cookies, cookieOpts, getErrorMsg} from '@src/helpers';
 
 
 type ConfirmAuthPropsType = {
@@ -65,24 +65,20 @@ export const PasswordConfirmForm: FC<ConfirmAuthPropsType> = (props) => {
             <Form onSubmit={formik.handleSubmit} className='auth-form'>
                 <div>
                     <CustomFormikField
+                        t={t}
                         type="password"
                         name="newPassword"
-                        labelText={t('enterNewPassword')}
-                        errorMsg={
-                            errors.newPassword && touched.newPassword
-                                ? t(`errors:${errors.newPassword as string}`)
-                                : ''}
-                        placeholder={t('enterPassword')}
+                        labelText='enter_new_password'
+                        placeholder={t('filters:enter_new_password')}
+                        errorMsg={getErrorMsg(errors.code, touched.code, t)}
                     />
                     <CustomFormikField
+                        t={t}
                         type="password"
                         name="newPassword_confirm"
-                        labelText={t('repeatNewPassword')}
-                        errorMsg={
-                            errors.newPassword_confirm && touched.newPassword_confirm
-                                ? t(`errors:${errors.newPassword_confirm as string}`)
-                                : ''}
-                        placeholder={t('repeatNewPassword')}
+                        labelText='repeat_new_password'
+                        placeholder={t('filters:repeat_new_password')}
+                        errorMsg={getErrorMsg(errors.code, touched.code, t)}
                     />
                 </div>
                 <div className='auth-btns'>
@@ -92,5 +88,5 @@ export const PasswordConfirmForm: FC<ConfirmAuthPropsType> = (props) => {
                 </div>
             </Form>
         </FormikProvider>
-    )
+    );
 };

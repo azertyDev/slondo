@@ -4,8 +4,9 @@ import {userAPI} from '@src/api/api';
 import {Form, FormikProvider, useFormik} from 'formik';
 import {CustomFormikField} from '@src/components/elements/custom_formik_field/CustomFormikField';
 import {phoneSchema} from '@root/validation_schemas/authRegSchema';
-import {ButtonComponent} from "@src/components/elements/button/Button";
-import {phoneFormat} from "@src/helpers";
+import {ButtonComponent} from '@src/components/elements/button/Button';
+import {getErrorMsg, phoneFormat} from '@src/helpers';
+import {Description} from '@src/components/post/create_post/form_page/common_form/description/Description';
 
 
 type RegFormPropsType = {
@@ -58,16 +59,13 @@ export const RegForm: FC<RegFormPropsType> = (props) => {
         <FormikProvider value={formik}>
             <Form onSubmit={formik.handleSubmit} className='auth-form'>
                 <CustomFormikField
+                    t={t}
                     type="tel"
                     name="phone"
-                    labelText={t('enterPhone')}
-                    errorMsg={
-                        errors.phone && touched.phone
-                            ? t(`errors:${errors.phone}`)
-                            : ''
-                    }
+                    labelText='enter_phone'
                     placeholder="+(998) __ _______"
                     onChange={handlePhoneInput}
+                    errorMsg={getErrorMsg(errors.phone, touched.phone, t)}
                 />
                 <div className='auth-btns'>
                     <ButtonComponent type="submit">
@@ -76,5 +74,5 @@ export const RegForm: FC<RegFormPropsType> = (props) => {
                 </div>
             </Form>
         </FormikProvider>
-    )
+    );
 };

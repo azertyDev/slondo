@@ -28,7 +28,8 @@ export const requireFields = [
     'position',
     'engine_type',
     'engine_capacity',
-    'drive'
+    'drive',
+    'user_name'
 ];
 
 export const excludedKeys = [
@@ -69,5 +70,6 @@ export const optionKeys = [
     'power_windows',
     'seat_heating',
     'steering',
-    'view'
+    'view',
+    'other'
 ];

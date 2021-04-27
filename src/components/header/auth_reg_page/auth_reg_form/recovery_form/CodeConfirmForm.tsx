@@ -5,6 +5,7 @@ import {CustomFormikField} from "@src/components/elements/custom_formik_field/Cu
 import {codeSchema} from '@root/validation_schemas/authRegSchema';
 import {ButtonComponent} from "@src/components/elements/button/Button";
 import {userAPI} from "@src/api/api";
+import {getErrorMsg} from '@src/helpers';
 
 
 type ConfirmAuthPropsType = {
@@ -64,15 +65,12 @@ export const CodeConfirmForm: FC<ConfirmAuthPropsType> = (props) => {
             <Form onSubmit={formik.handleSubmit} className='auth-form'>
                 <div>
                     <CustomFormikField
+                        t={t}
                         type="tel"
                         name="code"
-                        labelText={t('enterSMS')}
-                        placeholder={t('enterSMS')}
-                        errorMsg={
-                            errors.code && touched.code
-                                ? t(`errors:${errors.code}`)
-                                : ''
-                        }
+                        labelText='enter_sms'
+                        placeholder={t('filters:enter_sms')}
+                        errorMsg={getErrorMsg(errors.code, touched.code, t)}
                     />
                     <span>{timer}</span>
                 </div>

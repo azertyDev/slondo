@@ -1,13 +1,13 @@
 import React, {FC} from 'react';
 import {WithT} from 'i18next';
 import {Grid} from '@material-ui/core';
-import {DropDownSelect} from '@src/components/post/create_post/form_page/components/drop_down_select/DropDownSelect';
+import {DropDownSelect} from '@src/components/elements/drop_down_select/DropDownSelect';
 import {FormikType} from '@root/interfaces/Formik';
 import {getErrorMsg} from '@src/helpers';
 import {PreviewValues} from '../../PreviewValues';
-import {BodySelect} from '../../../components/body_select/BodySelect';
+import {BodySelect} from '../../../../../../elements/body_select/BodySelect';
 import {CustomFormikField} from '@src/components/elements/custom_formik_field/CustomFormikField';
-import {CheckboxSelect} from '@src/components/post/create_post/form_page/components/checkbox_select/CheckboxSelect';
+import {CheckboxSelect} from '@src/components/elements/checkbox_select/CheckboxSelect';
 import {useStyles} from './useStyles';
 
 
@@ -199,10 +199,11 @@ export const CarForm: FC<HousesCottagesPropsType> = (props) => {
                                          xs={12}
                                      >
                                          <CustomFormikField
+                                             t={t}
                                              name='engine_capacity'
-                                             labelText={t('engine_capacity')}
-                                             errorMsg={getErrorMsg(errors.engine_capacity, touched.engine_capacity, t)}
+                                             labelText='engine_capacity'
                                              value={values.engine_capacity}
+                                             errorMsg={getErrorMsg(errors.engine_capacity, touched.engine_capacity, t)}
                                          />
                                      </Grid>
                                      <Grid
@@ -212,10 +213,11 @@ export const CarForm: FC<HousesCottagesPropsType> = (props) => {
                                          xs={12}
                                      >
                                          <CustomFormikField
+                                             t={t}
                                              name='mileage'
-                                             labelText={t('mileage')}
-                                             errorMsg={getErrorMsg(errors.mileage, touched.mileage, t)}
+                                             labelText='mileage'
                                              value={values.mileage ?? ''}
+                                             errorMsg={getErrorMsg(errors.mileage, touched.mileage, t)}
                                          />
                                      </Grid>
                                      <Grid
@@ -226,9 +228,10 @@ export const CarForm: FC<HousesCottagesPropsType> = (props) => {
                                          xs={12}
                                      >
                                          <CheckboxSelect
+                                             t={t}
                                              name='broken'
+                                             labelText='broken'
                                              checked={values.broken}
-                                             labelText={t('broken')}
                                              onChange={handleCheckbox}
                                          />
                                      </Grid>

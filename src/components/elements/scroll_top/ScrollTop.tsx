@@ -1,13 +1,13 @@
 import React, {FC} from 'react';
 import useScrollTrigger from '@material-ui/core/useScrollTrigger';
 import Zoom from '@material-ui/core/Zoom';
-import {useStyles} from './useStyles'
+import {useStyles} from './useStyles';
 
 
-export const ScrollTop: FC = (props) => {
+export const ScrollTop: FC = () => {
     const trigger = useScrollTrigger({
         disableHysteresis: true,
-        threshold: 1000,
+        threshold: 1000
     });
 
     const handleClick = (event) => {
@@ -21,8 +21,15 @@ export const ScrollTop: FC = (props) => {
     return (
         <Zoom in={trigger}>
             <div onClick={handleClick} role="presentation" className={classes.root}>
-                {props.children}
+                <a
+                    aria-label="scroll back to top"
+                    className={classes.scrollTop}
+                >
+                    <div className='MuiFab'>
+                        <span className="icon"/>
+                    </div>
+                </a>
             </div>
         </Zoom>
     );
-}
+};

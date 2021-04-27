@@ -1,14 +1,16 @@
 import React, {FC} from 'react';
 import {Grid, Typography} from '@material-ui/core';
-import {useStyles} from './useStyles';
 import {Form, FormikProvider, useFormik} from 'formik';
 import {filterInputSchema} from '@root/validation_schemas/filterInputSchema';
 import {CustomFormikField} from '@src/components/elements/custom_formik_field/CustomFormikField';
 import {ButtonComponent} from '@src/components/elements/button/Button';
+import {useTranslation} from 'react-i18next';
+import {useStyles} from './useStyles';
 
 const initialFeedbackInputsVals = {};
 
 export const Feedback: FC = () => {
+    const {t} = useTranslation('filters');
 
     const onSubmit = (values) => {
         console.log(values);
@@ -33,6 +35,7 @@ export const Feedback: FC = () => {
                     <Form onSubmit={formik.handleSubmit}>
                         <div>
                             <CustomFormikField
+                                t={t}
                                 labelText='*Персональные данные'
                                 placeholder="Введите Имя"
                                 size="small"
@@ -41,6 +44,7 @@ export const Feedback: FC = () => {
                                 }}
                             />
                             <CustomFormikField
+                                t={t}
                                 labelText='*Почта'
                                 placeholder="example@gmail.com"
                                 size="small"
@@ -49,6 +53,7 @@ export const Feedback: FC = () => {
                                 }}
                             />
                             <CustomFormikField
+                                t={t}
                                 labelText='*Номер телефона'
                                 placeholder="+998  "
                                 size="small"
@@ -60,6 +65,7 @@ export const Feedback: FC = () => {
                         <div>
                             <label>*Сообщение</label>
                             <CustomFormikField
+                                t={t}
                                 multiline
                                 rows={10}
                                 variant="outlined"

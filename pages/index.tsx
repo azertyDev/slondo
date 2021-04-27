@@ -1,15 +1,20 @@
-import React, {FC} from "react";
-import {Home} from '@src/components/home/Home';
-import {GetStaticProps} from "next";
-import {serverSideTranslations} from "next-i18next/serverSideTranslations";
-
-const HomePage: FC = () => <Home/>;
+import {HomePage} from '@src/components/home/HomePage';
+import {GetStaticProps} from 'next';
+import {serverSideTranslations} from 'next-i18next/serverSideTranslations';
 
 export const getStaticProps: GetStaticProps = async ({locale}) => ({
     props: {
         ...await serverSideTranslations(
             locale,
-            ['main', 'header', 'footer', 'errors', 'auth_reg', 'categories', 'common']
+            [
+                'main',
+                'header',
+                'footer',
+                'errors',
+                'auth_reg',
+                'categories',
+                'common'
+            ]
         )
     }
 });

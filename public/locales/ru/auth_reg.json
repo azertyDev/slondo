@@ -20,13 +20,6 @@
   "next": "Далее",
   "forgetPassword": "Забыли пароль?",
   "confirm": "Подтвердить",
-  "enterPhone": "Введите номер телефона",
-  "enterName": "Введите имя",
-  "enterPassword": "Пароль",
-  "enterNewPassword": "Введите новый пароль",
-  "repeatNewPassword": "Введите пароль еще раз",
-  "enterSMS": "Введите проверочный код из SMS",
-  "sendAgain": "Запросить пароль еще раз",
   "agreement": {
     "firstPart": "Регистрируясь на сайте вы принимаете условия",
     "secondPart": "лицензионного соглашения",

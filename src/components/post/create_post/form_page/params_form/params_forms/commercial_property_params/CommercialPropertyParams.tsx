@@ -3,7 +3,7 @@ import {WithT} from "i18next";
 import {Grid} from "@material-ui/core";
 import {getErrorMsg} from "@src/helpers";
 import {FormikType} from "@root/interfaces/Formik";
-import {DropDownSelect} from "@src/components/post/create_post/form_page/components/drop_down_select/DropDownSelect";
+import {DropDownSelect} from "@src/components/elements/drop_down_select/DropDownSelect";
 import {CustomFormikField} from "@src/components/elements/custom_formik_field/CustomFormikField";
 import {OptionsSelect} from "@src/components/post/create_post/form_page/components/options_select/OptionsSelect";
 import {PreviewValues} from "@src/components/post/create_post/form_page/params_form/PreviewValues";
@@ -80,8 +80,9 @@ export const CommercialPropertyParams: FC<CommercialPropertyPropsType> = (props)
                      )}
                      <Grid item container xs={4}>
                          <CustomFormikField
+                             t={t}
                              name='area'
-                             labelText={t('area')}
+                             labelText='area'
                              value={values.area ?? ''}
                              errorMsg={getErrorMsg(errors.area, touched.area, t)}
                          />

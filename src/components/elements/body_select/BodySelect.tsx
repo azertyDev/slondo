@@ -25,7 +25,7 @@ export const BodySelect: FC<BodyTypesProps> = (props) => {
         <div className={classes.root}>
             <Typography variant='subtitle1' className='title'>
                 <strong>
-                    {t('body')}
+                    {t('filters:body')}
                     <span className='error-text'>*&nbsp;</span>
                 </strong>
                 {errorMsg && (

@@ -394,11 +394,6 @@ export const ParamsFormContainer: FC<RegularFormPropsType> = (props) => {
         setRequireVals();
     }, [filters]);
 
-    console.log('filters', filters);
-    console.log('values', values);
-    console.log('errors', errors);
-    console.log('touched', touched);
-    console.log('valuesByYear', valuesByYear);
     const classes = useStyles();
     return (
         <div className={classes.root}>
@@ -424,12 +419,13 @@ export const ParamsFormContainer: FC<RegularFormPropsType> = (props) => {
                                          {values.title}
                                      </Typography>
                                      : <CustomFormikField
+                                         t={t}
                                          name='title'
-                                         labelText={t('title')}
+                                         labelText='title'
                                          value={values.title}
                                          onChange={handleInput}
                                          style={{width: '50%'}}
-                                         placeholder={t('exampleTitle')}
+                                         placeholder={t('filters:example_title')}
                                          errorMsg={getErrorMsg(errors.title, touched.title, t)}
                                      />}
                                 </div>
@@ -456,12 +452,13 @@ export const ParamsFormContainer: FC<RegularFormPropsType> = (props) => {
                                      {values.title}
                                  </Typography>
                                  : <CustomFormikField
+                                     t={t}
                                      name='title'
-                                     labelText={t('title')}
+                                     labelText='title'
                                      value={values.title}
                                      onChange={handleInput}
                                      style={{width: '50%'}}
-                                     placeholder={t('exampleTitle')}
+                                     placeholder={t('filters:example_title')}
                                      errorMsg={getErrorMsg(errors.title, touched.title, t)}
                                  />}
                             </div>

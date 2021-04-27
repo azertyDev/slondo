@@ -7,24 +7,19 @@ import {useStyles} from './useStyles';
 
 type CustomSelectPropsType = {
     name: string;
+    labelTxt?: string,
     values,
     onBlur,
-    items: ItemsType[];
+    items: any[];
     handleSelect: (k, v) => void;
     errorMsg?: string
 } & WithT;
-
-type ItemsType = {
-    id: number,
-    name: string,
-    icon?: { url: string },
-    hex_color_code?: string
-};
 
 export const DropDownSelect: FC<CustomSelectPropsType> = (props) => {
     const {
         t,
         name,
+        labelTxt,
         items = [],
         handleSelect,
         onBlur,
@@ -43,14 +38,14 @@ export const DropDownSelect: FC<CustomSelectPropsType> = (props) => {
     const classes = useStyles();
     return (
         <div className={classes.root}>
-            {!isCurrency && (
-                <Typography variant="subtitle1">
+            <Typography variant="subtitle1">
+                {!isCurrency && (
                     <strong>
-                        {t(name)}
+                        {t(`filters:${labelTxt ?? name}`)}
                         {isRequired(name) && <span className='error-text'>*&nbsp;</span>}
                     </strong>
-                </Typography>
-            )}
+                )}
+            </Typography>
             <NativeSelect
                 disableUnderline
                 disabled={!items.length}
@@ -62,7 +57,7 @@ export const DropDownSelect: FC<CustomSelectPropsType> = (props) => {
             >
                 {!isCurrency && (
                     <option value={0}>
-                        {t('noSelect')}
+                        {t('filters:noSelect')}
                     </option>
                 )}
                 {items.map(item =>
@@ -70,7 +65,7 @@ export const DropDownSelect: FC<CustomSelectPropsType> = (props) => {
                         key={item.id}
                         value={item.id}
                     >
-                        {name === 'currency' ? t(`common:${item.name}`) : item[optionKey]}
+                        {name === 'currency' ? t(`filters:${item.name}`) : item[optionKey]}
                     </option>
                 )}
             </NativeSelect>
