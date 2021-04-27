@@ -41,7 +41,8 @@ export const SearchContainer: FC<SearchContainerPropsType> = (props) => {
 
     const initValues: any = {
         category: subCtgr ?? ctgr,
-        typeCategory: typeCtgr
+        typeCategory: typeCtgr,
+        location: []
     };
 
     const formik = useFormik({

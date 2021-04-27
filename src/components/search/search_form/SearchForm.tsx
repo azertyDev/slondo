@@ -51,6 +51,17 @@ export const SearchForm: FC<SearchFormPropsType> = (props) => {
                             />
                         </Grid>
                     )}
+                    <Grid item xs={4}>
+                        <DropDownSelect
+                            t={t}
+                            name='location'
+                            labelTxt='location'
+                            values={values}
+                            onBlur={handleBlur}
+                            handleSelect={handleSelect}
+                            items={values.location}
+                        />
+                    </Grid>
                 </Grid>
             </Form>
         </FormikProvider>

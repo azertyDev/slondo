@@ -4,7 +4,6 @@ import {ButtonComponent} from '@src/components/elements/button/Button';
 import {SafeIcon} from '@root/src/components/elements/icons';
 import {UserInfoWithAvatar} from '@src/components/elements/user_info_with_avatar/UserInfoWithAvatar';
 import {SocialsBlock} from '@root/src/components/elements/socials_block/SocialsBlock';
-import {AuctionForm} from '@src/components/post/show_post/owner_auction_content/auction_info/AuctionForm/AuctionForm';
 import {useStyles} from './useStyles';
 
 
@@ -24,7 +23,6 @@ export const OwnerInfo: FC<OwnerPropsType> = (props) => {
         author,
         creator,
         subscribed,
-        auction
     } = data;
 
     const [isPhoneAval, setIsPhoneAval] = useState(false);

@@ -98,7 +98,7 @@ export const AuthForm: FC<AuthFormPropsType> = (props) => {
                         onClick={handleForgetPass}
                         style={{cursor: "pointer"}}
                     >
-                        {t('filters:forget_password')}
+                        {t('forget_password')}
                     </Typography>
                 </div>
                 <div className='auth-btns'>

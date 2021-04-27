@@ -60,7 +60,8 @@ export const AuthRegPage: FC<AuthRegPageType> = (props) => {
     const initSeconds = 60;
     const dispatch = useDispatch();
 
-    const {t} = useTranslation(['auth_reg']);
+    const {t} = useTranslation('auth_reg');
+
     const [isAuthRegClicked, setIsAuthRegClicked] = useState(false);
     const [tabIndex, setTabIndex] = useState(0);
     const [errorMsg, setErrorMsg] = useState("");
@@ -225,18 +226,18 @@ export const AuthRegPage: FC<AuthRegPageType> = (props) => {
                             </div>
                             <div className='welcome-block'>
                                 <Typography variant='h6'>
-                                    {t('auth_reg:welcome')}
+                                    {t('welcome')}
                                 </Typography>
                             </div>
                             <div className='auth-site-txt'>
                                 <Typography variant="subtitle1" color="initial">
-                                    {t('auth_reg:authSite')}
+                                    {t('authSite')}
                                 </Typography>
                             </div>
                             <div className='auth-reg-btn'>
                                 <ButtonComponent onClick={authRegClickHandler(true)}>
                                     <Typography>
-                                        {t('auth_reg:signInAndReg')}
+                                        {t('signInAndReg')}
                                     </Typography>
                                 </ButtonComponent>
                             </div>

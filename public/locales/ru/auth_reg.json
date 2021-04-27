@@ -18,7 +18,7 @@
   "resetPassTitle": "Восстановление пароля",
   "continue": "Продолжить",
   "next": "Далее",
-  "forgetPassword": "Забыли пароль?",
+  "forget_password": "Забыли пароль?",
   "confirm": "Подтвердить",
   "agreement": {
     "firstPart": "Регистрируясь на сайте вы принимаете условия",
