@@ -4,11 +4,13 @@ import {Feedback} from '@src/components/feedback/Feedback';
 import {ThemesMenu} from '@src/components/elements/themes_menu/ThemesMenu';
 
 export const FeedbackContainer: FC = () => {
+    const handleClick = () => {
+        console.log('click help');
+    };
     return (
         <MainLayout title="Обратная связь">
-            <ThemesMenu>
-                <Feedback/>
-            </ThemesMenu>
+            <ThemesMenu handleClick={handleClick} data={[]} title='Feedback'/>
+            <Feedback/>
         </MainLayout>
     );
 };

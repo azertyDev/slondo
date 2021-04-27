@@ -1,4 +1,4 @@
-import React, {FC, ReactNode} from 'react';
+import {FC, ReactNode} from 'react';
 import {Form, FormikContextType, FormikProvider} from 'formik';
 import {getErrorMsg} from '@src/helpers';
 import {Box, Button, CircularProgress, FormControlLabel, Grid, Typography} from '@material-ui/core';
@@ -64,8 +64,9 @@ export const SettingsForm: FC<SettingsFormPropsType> = (props) => {
                         </Grid>
                         <Grid item xs={12} md={6}>
                             <CustomFormikField
+                                t={t}
                                 name='user_name'
-                                labelText={t('post:user_name')}
+                                labelText='user_name'
                                 value={values.user_name}
                                 onChange={handleChange}
                                 disabled={formDisable}
@@ -75,8 +76,9 @@ export const SettingsForm: FC<SettingsFormPropsType> = (props) => {
                         </Grid>
                         <Grid item xs={12} md={6}>
                             <CustomFormikField
+                                t={t}
                                 name='user_surname'
-                                labelText={t('post:user_surname')}
+                                labelText='user_surname'
                                 value={values.user_surname}
                                 onChange={handleChange}
                                 disabled={formDisable}
@@ -85,6 +87,7 @@ export const SettingsForm: FC<SettingsFormPropsType> = (props) => {
                         </Grid>
                         <Grid item xs={12} md={6}>
                             <CustomFormikField
+                                t={t}
                                 name='phone'
                                 labelText={t('post:phoneNumber')}
                                 value={values.phone}

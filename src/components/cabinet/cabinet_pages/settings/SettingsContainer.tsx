@@ -1,4 +1,4 @@
-import React, {FC, useEffect, useState} from 'react';
+import {FC, useEffect, useState} from 'react';
 import {useTranslation} from 'react-i18next';
 import {withAuthRedirect} from '@src/hoc/withAuthRedirect';
 import {Settings} from '@src/components/cabinet/cabinet_pages/settings/Settings';
@@ -18,7 +18,7 @@ import {PasswordConfirmForm} from '@root/src/components/header/auth_reg_page/aut
 
 const SettingsContainer: FC = () => {
     const dispatch = useDispatch();
-    const { t } = useTranslation('cabinet');
+    const {t} = useTranslation('cabinet');
     const userInfo = useSelector((store: RootState) => store.user.info);
 
     const initSeconds = 60;
@@ -47,19 +47,19 @@ const SettingsContainer: FC = () => {
 
     const handleSubmit = async (values) => {
         try {
-            const userData = { ...values };
+            const userData = {...values};
 
             const {
                 user_name,
                 user_surname,
-                avalTime: { isActive, time },
+                avalTime: {isActive, time},
                 avatar,
                 ...otherData
             } = userData;
 
             if (isActive) {
-                const { week_days, start_time, end_time } = time;
-                otherData.week_days = week_days.map(({ id }) => ({ id }));
+                const {week_days, start_time, end_time} = time;
+                otherData.week_days = week_days.map(({id}) => ({id}));
                 otherData.start_time = start_time;
                 otherData.end_time = end_time;
             }
@@ -75,7 +75,7 @@ const SettingsContainer: FC = () => {
             if (avatar === '') {
                 await userAPI.deleteUserAvatar(userInfo.id);
             }
-            await userAPI.changeUserInfo({ ...userInfo, ...otherData });
+            await userAPI.changeUserInfo({...userInfo, ...otherData});
             const newUserInfo = await userAPI.getUserInfo();
 
             setFormDisable(true);
@@ -101,7 +101,7 @@ const SettingsContainer: FC = () => {
         values,
         setValues
     } = formik;
-    const { avalTime } = values;
+    const {avalTime} = values;
 
     const handleDisableTimer = () => {
         setActiveTimer(false);
@@ -109,20 +109,15 @@ const SettingsContainer: FC = () => {
 
     const handleOpenModal = async () => {
         try {
-            await setFetchingSmsCode(true);
+            setFetchingSmsCode(true);
             await userAPI.getSmsCode(userInfo.phone);
-            // await (_ => {
-            //     return new Promise(function(resolve) {
-            //         setTimeout(resolve, 500);
-            //     });
-            // })();
-            await setFetchingSmsCode(false);
+            setFetchingSmsCode(false);
             setOpenModal(true);
             setActiveTimer(true);
         } catch (e) {
             setOpenModal(false);
-            dispatch(setErrorMsgAction(e.message))
-            await setFetchingSmsCode(false);
+            dispatch(setErrorMsgAction(e.message));
+            setFetchingSmsCode(false);
         }
     };
 
@@ -140,22 +135,22 @@ const SettingsContainer: FC = () => {
     };
 
     const handleUpload = (event) => {
-        setValues({ ...values, avatar: event.target.files[0] });
+        setValues({...values, avatar: event.target.files[0]});
     };
 
     const handleDeleteAvatar = () => {
-        setValues({ ...values, avatar: '' });
+        setValues({...values, avatar: ''});
     };
 
     const handleSwitch = (_, value) => {
-        setValues({ ...values, avalTime: { ...avalTime, isActive: value } });
+        setValues({...values, avalTime: {...avalTime, isActive: value}});
     };
 
     const handleAvalDays = day => () => {
-        const isExstDay = avalTime.time.week_days.some(({ id }) => id === day.id);
-        let week_days = [...avalTime.time.week_days];
+        const isExstDay = avalTime.time.week_days.some(({id}) => id === day.id);
+        const week_days = [...avalTime.time.week_days];
         if (isExstDay) {
-            week_days.map(({ id }, index) => {
+            week_days.map(({id}, index) => {
                 if (id === day.id) {
                     week_days.splice(index, 1);
                 }
@@ -175,12 +170,12 @@ const SettingsContainer: FC = () => {
         });
     };
 
-    const handleTime = ({ target: { value, name } }) => {
+    const handleTime = ({target: {value, name}}) => {
         if (timeRegEx.test(value)) {
             value = value.replace(/^:(.+)/, m => `00${m}`).replace(/(.+):$/, m => `${m}00`);
-            let time = { ...avalTime.time };
-            time = { ...time, [name]: value };
-            setValues({ ...values, avalTime: { ...avalTime, time } });
+            let time = {...avalTime.time};
+            time = {...time, [name]: value};
+            setValues({...values, avalTime: {...avalTime, time}});
         }
     };
 
@@ -206,25 +201,25 @@ const SettingsContainer: FC = () => {
 
     const ModalContent = (
         isPassConfirm
-            ? <PasswordConfirmForm
-                t={t}
-                phone={values.phone}
-                code={code}
-                setErrorMsg={errorHandle}
-                handleCloseModal={handleModalClose}
-                handleSignIn={handleSignIn}
-            />
-            : <CodeConfirm
-                t={t}
-                timer={timer}
-                phone={userInfo.phone}
-                setErrorMsg={setErrorMsg}
-                setCode={setCode}
-                handleDisableTimer={handleDisableTimer}
-                handlePassConfirm={handlePassConfirm}
-                setOpenModal={setOpenModal}
-                errorMsg={errorMsg}
-            />
+        ? <PasswordConfirmForm
+            t={t}
+            phone={values.phone}
+            code={code}
+            setErrorMsg={errorHandle}
+            handleCloseModal={handleModalClose}
+            handleSignIn={handleSignIn}
+        />
+        : <CodeConfirm
+            t={t}
+            timer={timer}
+            phone={userInfo.phone}
+            errorMsg={errorMsg}
+            setErrorMsg={setErrorMsg}
+            setCode={setCode}
+            handleDisableTimer={handleDisableTimer}
+            handlePassConfirm={handlePassConfirm}
+            setOpenModal={setOpenModal}
+        />
     );
 
     const uploadAvatarForm = (
@@ -260,7 +255,6 @@ const SettingsContainer: FC = () => {
         setValues(initUserInfo);
     }, [userInfo]);
 
-    console.log(values);
     return (
         <Settings
             handleAllowEdit={handleAllowEdit}

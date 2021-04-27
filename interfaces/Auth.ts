@@ -6,8 +6,8 @@ export interface UserInfo {
     avatar: string,
     created_at: string,
     available_days: string,
-    available_start_time: string,
-    available_end_time: string
+    available_start_time?: string,
+    available_end_time?: string
 }
 
 export type SubscriberType = {

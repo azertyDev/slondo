@@ -1,20 +1,25 @@
-import React, { FC, useState } from 'react'
-import { Grid, List, ListItem, ListItemText, Typography } from '@material-ui/core'
-import { useRouter } from 'next/router'
-import { useStyles } from './useStyles'
+import {FC, useState} from 'react';
+import {Grid, List, ListItem, ListItemText, Typography} from '@material-ui/core';
+import {useRouter} from 'next/router';
+import {useStyles} from './useStyles';
 
+type ThemesMenuPropsType = {
+    data: any[],
+    handleClick: (e) => void,
+    title: string
+};
 
-export const ThemesMenu: FC<any> = ({ data, onClick, title }) => {
-    const [open, setOpen] = useState(false)
-    const [isActive, setActive] = useState(false)
+export const ThemesMenu: FC<ThemesMenuPropsType> = ({data, handleClick, title}) => {
+    const [open, setOpen] = useState(false);
+    const [isActive, setActive] = useState(false);
 
-    const { query: { term } } = useRouter()
+    const {query: {term}} = useRouter();
 
     const handleToggle = () => {
-        setActive(!isActive)
-    }
+        setActive(!isActive);
+    };
 
-    const classes = useStyles()
+    const classes = useStyles();
     return (
         <Grid item xs={3} className={classes.root}>
             <Typography variant="h6" color="initial">
@@ -27,12 +32,12 @@ export const ThemesMenu: FC<any> = ({ data, onClick, title }) => {
                             <ListItem
                                 button
                                 key={el.id}
-                                onClick={() => onClick(el.term)}
+                                onClick={() => handleClick(el.term)}
                                 className={term === `${el.term}` ? classes.active : ''}
                             >
-                                <ListItemText primary={el.title} />
+                                <ListItemText primary={el.title}/>
                             </ListItem>
-                        )
+                        );
                     })
                 }
                 {/*<Collapse in={open} timeout="auto" unmountOnExit>*/}
@@ -56,5 +61,5 @@ export const ThemesMenu: FC<any> = ({ data, onClick, title }) => {
             {/*    </Link>*/}
             {/*</List>*/}
         </Grid>
-    )
-}
+    );
+};

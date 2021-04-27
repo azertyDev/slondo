@@ -1,4 +1,4 @@
-import React, {FC} from 'react';
+import {FC} from 'react';
 import {Grid, Typography} from '@material-ui/core';
 import {Form, FormikProvider, useFormik} from 'formik';
 import {filterInputSchema} from '@root/validation_schemas/filterInputSchema';
@@ -7,7 +7,6 @@ import {ButtonComponent} from '@src/components/elements/button/Button';
 import {useTranslation} from 'react-i18next';
 import {useStyles} from './useStyles';
 
-const initialFeedbackInputsVals = {};
 
 export const Feedback: FC = () => {
     const {t} = useTranslation('filters');
@@ -17,7 +16,7 @@ export const Feedback: FC = () => {
     };
 
     const formik = useFormik({
-        initialValues: initialFeedbackInputsVals,
+        initialValues: {},
         validationSchema: filterInputSchema,
         onSubmit
     });

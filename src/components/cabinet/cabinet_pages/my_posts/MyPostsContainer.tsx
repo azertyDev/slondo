@@ -28,14 +28,14 @@ import {SecondaryCabinetCard} from '@src/components/cabinet/components/Secondary
 
 const MyPostsContainer: FC = () => {
     const dispatch = useDispatch();
-    const { t } = useTranslation('cabinet');
+    const {t} = useTranslation('cabinet');
     const classes = useStyles();
 
     const deactivateReasons = {
         soldOnSlondoId: 1,
         archiveId: 2
     };
-    const { soldOnSlondoId, archiveId } = deactivateReasons;
+    const {soldOnSlondoId, archiveId} = deactivateReasons;
     const initialUserState: initialUserStateType = {
         isFetch: false,
         user: {
@@ -172,14 +172,14 @@ const MyPostsContainer: FC = () => {
     const handleCheckbox = () => {
         setToArchive(!toArchive);
     };
-    const handleTextField = async ({ target }) => {
+    const handleTextField = async ({target}) => {
         const phone = target.value;
         setUserPhone(phone);
         try {
             if (phone.length === 12) {
-                setUserData({ ...userData, isFetch: true });
+                setUserData({...userData, isFetch: true});
                 const user = await userAPI.getUserByPhoneNumber(phone);
-                setUserData({ ...userData, user, isFetch: false });
+                setUserData({...userData, user, isFetch: false});
             }
         } catch (e) {
             setErrMsg(e.message);
@@ -188,13 +188,13 @@ const MyPostsContainer: FC = () => {
     const fetchPostData = async (onlySecure: number) => {
         try {
             if (onlySecure) {
-                setSecurePosts({ ...postData, isFetch: true });
-                const { data, total } = await userAPI.getMyPosts({ type: 'post', onlySecure });
-                setSecurePosts({ myPosts: { data, total }, isFetch: false });
+                setSecurePosts({...postData, isFetch: true});
+                const {data, total} = await userAPI.getMyPosts({type: 'post', onlySecure});
+                setSecurePosts({myPosts: {data, total}, isFetch: false});
             } else {
-                setPostData({ ...postData, isFetch: true });
-                const { data, total } = await userAPI.getMyPosts({ type: 'post', onlySecure });
-                setPostData({ myPosts: { data, total }, isFetch: false });
+                setPostData({...postData, isFetch: true});
+                const {data, total} = await userAPI.getMyPosts({type: 'post', onlySecure});
+                setPostData({myPosts: {data, total}, isFetch: false});
             }
         } catch (e) {
             dispatch(setErrorMsgAction(e.message));
@@ -230,15 +230,15 @@ const MyPostsContainer: FC = () => {
                         >
                             <ListItemText
                                 primary='Деактивировать'
-                                primaryTypographyProps={{ variant: 'subtitle1' }}
+                                primaryTypographyProps={{variant: 'subtitle1'}}
                             />
                         </ListItem>
                         <ListItem button>
                             <ListItemText
                                 primary="Поднять в ленте"
-                                primaryTypographyProps={{ variant: 'subtitle1' }}
+                                primaryTypographyProps={{variant: 'subtitle1'}}
                                 secondary="(можно использовать 1 раз в 3 дня)"
-                                secondaryTypographyProps={{ variant: 'subtitle2' }}
+                                secondaryTypographyProps={{variant: 'subtitle2'}}
                             />
                         </ListItem>
                     </List>
@@ -260,7 +260,7 @@ const MyPostsContainer: FC = () => {
                         >
                             <ListItemText
                                 primary={t('sold_on_slondo')}
-                                primaryTypographyProps={{ variant: 'subtitle1' }}
+                                primaryTypographyProps={{variant: 'subtitle1'}}
                             />
                         </ListItem>
                         <ListItem
@@ -269,7 +269,7 @@ const MyPostsContainer: FC = () => {
                         >
                             <ListItemText
                                 primary={t('addToArchive')}
-                                primaryTypographyProps={{ variant: 'subtitle1' }}
+                                primaryTypographyProps={{variant: 'subtitle1'}}
                             />
                         </ListItem>
                     </List>
@@ -300,14 +300,14 @@ const MyPostsContainer: FC = () => {
                         />
                         <Box className={classes.userData}>
                             {userData.isFetch
-                                ? <Typography>loading...</Typography>
-                                : <>
-                                    <Avatar src={userData.user.avatar ?? ''} />
-                                    <Typography variant='subtitle2' noWrap>
-                                        {userData.user.name}
-                                        {userData.user.surname}
-                                    </Typography>
-                                </>}
+                             ? <Typography>loading...</Typography>
+                             : <>
+                                 <Avatar src={userData.user.avatar ?? ''}/>
+                                 <Typography variant='subtitle2' noWrap>
+                                     {userData.user.name}
+                                     {userData.user.surname}
+                                 </Typography>
+                             </>}
                         </Box>
                     </Box>
                     <Box
@@ -346,7 +346,7 @@ const MyPostsContainer: FC = () => {
             case 5:
                 return <>
                     <Typography variant='h6' className="title">
-                        Вы уверены что хотите <br />добавить объявление в архив?
+                        Вы уверены что хотите <br/>добавить объявление в архив?
                     </Typography>
                     <Box display='flex' flexDirection='column'>
                         <ButtonComponent onClick={handleDeactivate}>Да</ButtonComponent>
@@ -359,19 +359,19 @@ const MyPostsContainer: FC = () => {
     const ModalContent = () => (
         <>
             {modalContentIndex === 1
-                ? <Typography className="title" variant="h6">
-                    Объявление № {postId}
-                </Typography>
-                : modalContentIndex === 5
-                    ? null
-                    : <IconButton
-                        className='prev-btn'
-                        aria-label="back"
-                        size="medium"
-                        onClick={handlePrevMenu}
-                    >
-                        <ArrowBackIcon fontSize="inherit" />
-                    </IconButton>
+             ? <Typography className="title" variant="h6">
+                 Объявление № {postId}
+             </Typography>
+             : modalContentIndex === 5
+               ? null
+               : <IconButton
+                   className='prev-btn'
+                   aria-label="back"
+                   size="medium"
+                   onClick={handlePrevMenu}
+               >
+                   <ArrowBackIcon fontSize="inherit"/>
+               </IconButton>
             }
             {getModalContent()}
         </>
@@ -383,7 +383,7 @@ const MyPostsContainer: FC = () => {
     }, []);
 
     const myPostCards = postData.myPosts.data.map(data => (
-        postData.isFetch && <Box mb={3} key={data.id}>
+        <Box mb={3} key={data.id}>
             <Grid container key={data.id}>
                 <Grid item xs={9}>
                     <CabinetCard
@@ -422,6 +422,7 @@ const MyPostsContainer: FC = () => {
             total: postData.myPosts.total,
             component:
                 <MyPosts
+                    isFetch={postData.isFetch}
                     ModalContent={ModalContent}
                     handleModalClose={handleCloseModal}
                     openModal={openModal}
@@ -434,6 +435,7 @@ const MyPostsContainer: FC = () => {
             total: securePosts.myPosts.total,
             component:
                 <MyPosts
+                    isFetch={securePosts.isFetch}
                     ModalContent={ModalContent}
                     handleModalClose={handleCloseModal}
                     openModal={openModal}

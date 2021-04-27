@@ -1,13 +1,12 @@
-import React, {Dispatch, FC, SetStateAction} from 'react';
+import {Dispatch, FC, SetStateAction} from 'react';
 import {WithT} from 'i18next';
 import {Form, FormikProvider, useFormik} from 'formik';
 import {CustomFormikField} from '@src/components/elements/custom_formik_field/CustomFormikField';
 import {codeSchema} from '@root/validation_schemas/authRegSchema';
 import {ButtonComponent} from '@src/components/elements/button/Button';
 import {userAPI} from '@src/api/api';
-import {useDispatch} from 'react-redux';
-import {setErrorMsgAction} from '@root/src/redux/slices/errorSlice';
 import {getErrorMsg} from '@src/helpers';
+import {Typography} from '@material-ui/core';
 
 type CodeConfirmPropsType = {
     phone: string,
@@ -16,20 +15,20 @@ type CodeConfirmPropsType = {
     setErrorMsg: Dispatch<SetStateAction<string>>,
     handlePassConfirm: () => void,
     setCode: Dispatch<SetStateAction<string>>,
-    setOpenModal: (value: boolean) => void
+    setOpenModal: (value: boolean) => void,
+    errorMsg: string
 } & WithT;
 
 export const CodeConfirm: FC<CodeConfirmPropsType> = (props) => {
-    const dispatch = useDispatch();
     const {
         t,
         timer,
         phone,
-        setErrorMsg,
         handleDisableTimer,
         handlePassConfirm,
         setCode,
-        setOpenModal
+        errorMsg,
+        setErrorMsg
     } = props;
 
 
@@ -44,10 +43,9 @@ export const CodeConfirm: FC<CodeConfirmPropsType> = (props) => {
             setCode(values.code);
             handleDisableTimer();
             handlePassConfirm();
+            !!errorMsg && setErrorMsg('');
         } catch (e) {
-            setOpenModal(false);
-            dispatch(setErrorMsgAction(e.error));
-            console.log(e.error);
+            setErrorMsg(e.error);
         }
     }
 
@@ -60,12 +58,9 @@ export const CodeConfirm: FC<CodeConfirmPropsType> = (props) => {
     const {
         errors,
         touched,
-        values,
         isSubmitting,
         handleSubmit
     } = formik;
-
-    console.log(values);
 
     return (
         <FormikProvider value={formik}>
@@ -82,10 +77,15 @@ export const CodeConfirm: FC<CodeConfirmPropsType> = (props) => {
                         t={t}
                         type="text"
                         name="code"
-                        labelText='enterSMS'
-                        placeholder={t('filters:enterSMS')}
+                        labelText='enter_sms'
+                        placeholder={t('filters:enter_sms')}
                         errorMsg={getErrorMsg(errors.code, touched.code, t)}
                     />
+                    {errorMsg && (
+                        <Typography variant='subtitle1'>
+                            {t(`errors:${errorMsg}`)}
+                        </Typography>
+                    )}
                     <span>{timer}</span>
                 </div>
                 <div className='auth-btns'>

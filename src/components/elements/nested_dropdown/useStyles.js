@@ -6,7 +6,7 @@ export const useStyles = makeStyles((theme) => ({
             padding: 0
         },
         '& div.MuiListItem-gutters': {
-            padding: '7px 18px 6px 16px'
+            padding: '7px 17px 6px 16px'
         },
         '& div.MuiCollapse-container': {
             backgroundColor: theme.palette.primary.white,

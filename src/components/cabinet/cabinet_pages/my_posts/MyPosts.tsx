@@ -1,7 +1,9 @@
 import React, {FC, ReactElement, ReactNode} from 'react';
 import {CustomModal} from '@src/components/elements/custom_modal/CustomModal';
+import {Typography} from '@material-ui/core';
 
 type MyPostsPropsType = {
+    isFetch: boolean,
     openModal: boolean;
     handleModalClose: () => void;
     ModalContent: () => ReactElement;
@@ -10,6 +12,7 @@ type MyPostsPropsType = {
 
 export const MyPosts: FC<MyPostsPropsType> = (props) => {
     const {
+        isFetch,
         openModal,
         handleModalClose,
         ModalContent,
@@ -18,12 +21,12 @@ export const MyPosts: FC<MyPostsPropsType> = (props) => {
 
     return (
         <>
-            {myPostCards}
+            {isFetch ? <Typography>...Loading</Typography> : myPostCards}
             <CustomModal
                 handleModalClose={handleModalClose}
                 openModal={openModal}
             >
-                <ModalContent />
+                <ModalContent/>
             </CustomModal>
         </>
     );
