@@ -55,6 +55,7 @@ export const AuctionForm: FC<AuctionFromPropsType> = (props) => {
                         <Grid container spacing={1} className="input-btn">
                             <Grid xs={isMdDown ? 7 : 12}>
                                 <CustomFormikField
+                                    t={t}
                                     name="bet"
                                     placeholder={`Мин. ставка: ${min_bet} сум`}
                                     errorMsg={getErrorMsg(errors.bet, touched.bet, t)}
