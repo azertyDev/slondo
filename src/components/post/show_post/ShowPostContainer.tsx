@@ -349,7 +349,7 @@ export const ShowPostContainer: FC = () => {
                     </Grid>
                 </Grid>
             </Container>
-            {/*<Footer/>*/}
+            <Footer/>
             <ErrorModal/>
         </>
     );

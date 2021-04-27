@@ -4,7 +4,9 @@ export const useStyles = makeStyles((theme) => ({
     root: {
         paddingBottom: 55,
         [theme.breakpoints.down('md')]: {
-            marginBottom: '20px'
+            marginBottom: '20px',
+            borderBottom: 'none',
+            paddingBottom: 0
         },
         borderBottom: '1px solid rgba(103, 94, 170, 0.5)',
         '& a': {
@@ -162,11 +164,27 @@ export const useStyles = makeStyles((theme) => ({
             margin: '20px 0',
             [theme.breakpoints.down('md')]: {
                 background: 'inherit',
-                margin: '0 0 20px'
+                margin: '0 0 30px'
             },
             [theme.breakpoints.up('lg')]: {
                 display: 'flex',
                 justifyContent: 'space-around'
+            },
+            '& > h6.MuiTypography-subtitle1:first-child': {
+                '& > span': {
+                    color: '#2F80ED'
+                }
+            },
+            '& h6.MuiTypography-subtitle1:last-child': {
+                display: 'flex',
+                alignItems: 'center',
+                '&:hover': {
+                    cursor: 'pointer',
+                    textDecoration: 'underline'
+                },
+                '& > svg': {
+                    marginLeft: '12px'
+                }
             },
             '& div.info-wrapper': {
                 display: 'flex',
@@ -188,22 +206,11 @@ export const useStyles = makeStyles((theme) => ({
                         }
                     }
                 },
-                '& h6.MuiTypography-subtitle1:last-child': {
-                    display: 'flex',
-                    alignItems: 'center',
-                    '&:hover': {
-                        cursor: 'pointer',
-                        textDecoration: 'underline'
-                    },
-                    '& > svg': {
-                        marginLeft: '12px'
-                    }
-                },
                 [theme.breakpoints.down('md')]: {
                     marginBottom: '12px'
                 }
             },
-            '& button.btn-report ': {
+            '& button.btn-report': {
                 position: 'relative',
                 left: '50%',
                 transform: 'translate(-50%,0)',
@@ -606,7 +613,7 @@ export const useStyles = makeStyles((theme) => ({
             [theme.breakpoints.down('md')]: {
                 '&:after': {
                     position: 'absolute',
-                    bottom: '-16px',
+                    bottom: '-24px',
                     left: 0,
                     content: '""',
                     width: '100%',

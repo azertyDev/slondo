@@ -151,8 +151,7 @@ export const useStyles = makeStyles((theme) => ({
                                 margin: 0,
                                 height: 1,
                                 width: '100%',
-                                background: '#333',
-                                backgroundColor: 'linear-gradient(90deg, rgba(243, 243, 243, 0) -4.72%, rgba(204, 204, 204, 0.69) 47.81%, rgba(248, 248, 248, 0) 104.92%)'
+                                background: 'linear-gradient(90deg, rgba(243, 243, 243, 0) -4.72%, rgba(204, 204, 204, 0.69) 47.81%, rgba(248, 248, 248, 0) 104.92%)'
                             },
                             '&:last-child': {
                                 '&:after': {
