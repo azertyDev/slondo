@@ -1,40 +1,28 @@
-import React, { FC } from 'react';
-import { Typography, Paper, IconButton } from '@material-ui/core';
-import Link from 'next/link';
-import { useStyles } from './useStyles';
-import { CloseIcon } from '@src/components/elements/icons';
-import { NotificationDataType } from '../NotificationsContainer';
+import React, {FC} from 'react';
+import {IconButton, Paper, Typography} from '@material-ui/core';
+import {useStyles} from './useStyles';
+import {CloseIcon} from '@src/components/elements/icons';
+import {NotificationDataType} from '../NotificationsContainer';
 
 export const Notification: FC<NotificationDataType> = (props) => {
-    const { img, title, text } = props;
+    const {title, subTitle, ads_id} = props;
 
-    const classes = useStyles({ img });
+    const classes = useStyles();
     return (
-        <div className={classes.root}>
-            <Paper elevation={0}>
+        <>
+            <Paper elevation={0} className={classes.root}>
                 <div>
-                    <Typography variant="h5" color="initial">
-                        {title}
+                    <Typography variant="h6" color="initial" noWrap>
+                        {title} {ads_id}
                     </Typography>
-                    <Typography variant="subtitle1" color="initial">
-                        {text}
+                    <Typography variant="subtitle1" color="initial" noWrap>
+                        {subTitle}
                     </Typography>
-                    <Link href="#">
-                        <a>
-                            <Typography
-                                variant="subtitle1"
-                                color="initial"
-                                className="more-details"
-                            >
-                                Подробнее
-                            </Typography>
-                        </a>
-                    </Link>
                 </div>
+                <IconButton>
+                    <CloseIcon />
+                </IconButton>
             </Paper>
-            <IconButton>
-                <CloseIcon />
-            </IconButton>
-        </div>
+        </>
     );
 };

@@ -254,6 +254,7 @@ export const ShowPostContainer: FC = () => {
             });
         }
     };
+    console.log(postData);
     const handleFollow = (userId) => async () => {
         try {
             await userAPI.follow(userId);

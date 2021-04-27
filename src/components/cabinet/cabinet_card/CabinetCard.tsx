@@ -164,11 +164,11 @@ export const CabinetCard: FC<CabinetCardPropsType> = (props) => {
                                     </Typography>
                                 </div>
                             )}
-                            {!cardData.safe_deal && !cardData.delivery && !cardData.exchange && !cardData.available_days && (
-                                <Typography noWrap variant='subtitle1'>
-                                    {cardData.description}
-                                </Typography>
-                            )}
+                            {/*{!cardData.safe_deal && !cardData.delivery && !cardData.exchange && !cardData.available_days && (*/}
+                            {/*    <Typography noWrap variant='subtitle1'>*/}
+                            {/*        {cardData.description}*/}
+                            {/*    </Typography>*/}
+                            {/*)}*/}
                         </div>
                         {cardData.ads_type !== 'post' && (
                             <Box display='flex' justifyContent='space-between'>

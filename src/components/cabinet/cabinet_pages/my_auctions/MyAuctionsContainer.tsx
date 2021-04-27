@@ -184,6 +184,11 @@ export const MyAuctionsContainer: FC = () => {
         try {
             setOpenModal(false);
             await userAPI.acceptOfferThePrice(offer_id, is_accepted);
+            if (tabIndex === 0) {
+                await fetchAuctionData('auc');
+            } else {
+                await fetchAuctionData();
+            }
         } catch (e) {
             dispatch(setErrorMsgAction(e.message));
         }

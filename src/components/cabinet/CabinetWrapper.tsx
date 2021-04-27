@@ -22,7 +22,7 @@ export const CabinetWrapper: FC<CabinetMenuPropsType> = ({children, title, heade
                     <Grid item xs={3}>
                         <CabinetSidebar user={info}/>
                     </Grid>
-                    <Grid item xs={9}>
+                    <Grid item xs={9} container direction='column'>
                         <Typography variant="h6" className="menu-title">
                             {headerTitle}
                         </Typography>
