@@ -3,6 +3,9 @@ import {makeStyles, fade} from '@material-ui/core/styles';
 export const useStyles = makeStyles((theme) => ({
     root: {
         marginBottom: 60,
+        [theme.breakpoints.down('md')]: {
+            marginBottom: 30
+        },
         '& div.lot-info': {
             '& > div': {
                 marginBottom: 20,
@@ -50,7 +53,12 @@ export const useStyles = makeStyles((theme) => ({
             '& div.lot-participants-block': {
                 display: 'flex',
                 flexDirection: 'column',
-
+                [theme.breakpoints.down('md')]: {
+                    background: '#F5F5F5',
+                    boxShadow: '0px 1px 2px rgba(0, 0, 0, 0.15)',
+                    borderRadius: '10px',
+                    paddingBottom: '20px'
+                },
                 '& > h6.MuiTypography-subtitle1': {
                     fontSize: '1.125rem',
                     padding: '10px 15px',
@@ -58,7 +66,10 @@ export const useStyles = makeStyles((theme) => ({
                     '&:last-child': {
                         padding: '10px 15px 0',
                         color: '#675EAA',
-                        textDecorationLine: 'underline'
+                        textDecorationLine: 'underline',
+                        [theme.breakpoints.down('md')]: {
+                            textDecorationLine: 'none'
+                        }
                     }
                 },
                 '& h6.all-bets': {
@@ -140,9 +151,7 @@ export const useStyles = makeStyles((theme) => ({
                                 margin: 0,
                                 height: 1,
                                 width: '100%',
-                                background: '#333',
-                                backgroundColor:
-                                    'linear-gradient(90deg, rgba(243, 243, 243, 0) -4.72%, rgba(204, 204, 204, 0.69) 47.81%, rgba(248, 248, 248, 0) 104.92%)'
+                                background: 'linear-gradient(90deg, rgba(243, 243, 243, 0) -4.72%, rgba(204, 204, 204, 0.69) 47.81%, rgba(248, 248, 248, 0) 104.92%)'
                             },
                             '&:last-child': {
                                 '&:after': {
@@ -170,52 +179,35 @@ export const useStyles = makeStyles((theme) => ({
                     }
                 }
             },
-            '& div.bet-info': {
-                flexDirection: 'column',
-                padding: '15px 10px',
-                background: '#F2F2F2',
-                borderRadius: '5px',
-                '& > div': {
-                    display: 'flex',
-                    justifyContent: 'center',
-                    flexDirection: 'column',
-                    '& > div.MuiFormControl-root': {
-                        '& > div.MuiInputBase-root': {
-                            background: '#fff',
-                            borderRadius: '3px',
-                            '& input': {
-                                padding: '15px 20px'
-                            }
-                        }
+            '& .suggest_price': {
+                [theme.breakpoints.up('lg')]: {
+                    maxWidth: '100%'
+                },
+                '& > button': {
+                    [theme.breakpoints.down('md')]: {
+                        padding: '12px 39px'
                     },
-                    '& > button': {
-                        margin: '5px 0',
-                        border: '1px solid #AD66D5'
-                    },
-                    '&:nth-child(2)': {
-                        textAlign: 'center',
-                        '& > h6.MuiTypography-subtitle2:last-child': {
-                            color: '#845CAB'
-                        }
-                    },
-                    '&:nth-child(3)': {
-                        justifyContent: 'flex-start',
-                        '& > button': {
-                            borderRadius: '3px',
-                            margin: 0,
-                            '& > h6.MuiTypography-subtitle1': {
-                                color: theme.palette.primary.white
-                            }
+                    width: '100%',
+                    background: 'linear-gradient(90deg, #7DBCF6 0%, #63A6F4 100%);',
+                    '& > h6.MuiTypography-subtitle1': {
+                        color: '#fff',
+                        [theme.breakpoints.down('md')]: {
+                            fontSize: 'calc(14px + 2 * (100vw / 1280))',
+                            whiteSpace: 'nowrap'
                         }
                     }
                 }
             },
-            '& div.suggest_price': {
+            '& .btn-buy-now': {
                 '& > button': {
                     width: '100%',
-                    background: '#675EAA',
-                    '& > h6.MuiTypography-subtitle1': {
-                        color: '#fff'
+                    padding: '11px 44px',
+                    background: '#fff',
+                    border: '1px solid #7DBCF6',
+                    marginRight: 0,
+                    whiteSpace: 'nowrap',
+                    '& h6': {
+                        color: '#7DBCF6'
                     }
                 }
             }

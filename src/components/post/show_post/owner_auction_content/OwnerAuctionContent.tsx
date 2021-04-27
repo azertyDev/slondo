@@ -1,8 +1,8 @@
 import React, {FC} from 'react';
 import {Typography} from '@material-ui/core';
 import {numberPrettier} from '@root/src/helpers';
-import {useStyles} from './useStyles';
 import Hidden from '@material-ui/core/Hidden';
+import {useStyles} from './useStyles';
 
 export const OwnerAuctionContent: FC<any> = (props) => {
     const {
@@ -16,15 +16,20 @@ export const OwnerAuctionContent: FC<any> = (props) => {
     const classes = useStyles();
     return (
         <div className={classes.root}>
-            <div className="price">
-                <Typography variant="h4" color="initial">
-                    <Hidden mdDown>
+            <Hidden mdDown>
+                <div className="price">
+                    <Typography variant="h4" color="initial">
                         <span>{numberPrettier(postData.price)}</span>&nbsp;
                         {t(`common:${postData.currency.name}`)}
-                    </Hidden>
-                </Typography>
-            </div>
-            {isAuction ? auctionInfo : ownerInfo}
+                    </Typography>
+                </div>
+            </Hidden>
+            {isAuction && (
+                <Hidden mdDown>
+                    {auctionInfo}
+                </Hidden>
+            )}
+            {ownerInfo}
         </div>
     );
 };
