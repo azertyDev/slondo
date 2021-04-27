@@ -326,5 +326,19 @@ export const userAPI = {
             .catch(err => {
                 throw err;
             });
-    }
+    },
+    deleteUserAvatar: (id: number): Promise<any> => {
+        return instance.delete(`regular/user/avatar/${id}`, setTokenToHeader())
+            .then(res => res.data)
+            .catch(err => {
+                throw err;
+            });
+    },
+    getAllNotifications: (): Promise<any> => {
+        return instance.get(`regular/user/notification`, setTokenToHeader())
+            .then(res => res.data)
+            .catch(err => {
+                throw err;
+            });
+    },
 };

@@ -25,5 +25,8 @@
     "securePosts": "Безопасная покупка",
     "createdAuc": "Созданные",
     "participatingAuc": "Участие",
-    "auctions": "Аукционы"
+    "auctions": "Аукционы",
+    "editAvatar": "Изменить фото",
+    "addAvatar": "Добавить фото",
+    "deleteAvatar": "Удалить фото"
 }

@@ -42,11 +42,9 @@ export const useStyles = makeStyles(() => ({
         }
     },
     submitBtn: {
-        '& button': {
-            width: '100%',
-            '& h6': {
-                color: '#fff !important'
-            }
+        width: '100%',
+        '& > h6.MuiTypography-subtitle1': {
+            color: '#fff !important'
         }
     },
     settingsList: {

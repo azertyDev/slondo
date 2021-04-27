@@ -9,10 +9,11 @@ import {UserInfo} from '@root/interfaces/Auth';
 import {Box, Grid, IconButton, List, ListItem, ListItemText, Typography} from '@material-ui/core';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import {useTranslation} from 'next-i18next';
-import {useStyles} from '@src/components/cabinet/cabinet_pages/my_posts/useStyles';
+import {useStyles} from '@src/components/cabinet/cabinet_pages/archive/useStyles';
 import {InitialCabinetCardState, TabsDataType} from '@root/interfaces/Cabinet';
 import {CabinetCard} from '@src/components/cabinet/cabinet_card/CabinetCard';
 import {SecondaryCabinetCard} from '@src/components/cabinet/components/SecondaryCabinetCard';
+import {ButtonComponent} from '@src/components/elements/button/Button';
 
 
 export type ArchivePostData = {
@@ -80,8 +81,9 @@ const ArchiveContainer: FC = () => {
     const [modalContentIndex, setModalContentIndex] = useState(1);
     const [postId, setPostId] = useState(null);
 
-    const handleOpenModal = (postId) => () => {
+    const handleOpenModal = (postId: number, index?: number) => () => {
         setOpenModal(true);
+        setModalContentIndex(index);
         postId && setPostId(postId);
     };
     const handleCloseModal = () => {
@@ -139,16 +141,6 @@ const ArchiveContainer: FC = () => {
                     >
                         <ListItem
                                 button
-                                onClick={handleModalContentIndex(2)}
-                            >
-                                <ListItemText
-                                    primary='Восстановить'
-                                    primaryTypographyProps={{ variant: 'subtitle1' }}
-                                />
-                            </ListItem>
-                        {tabIndex === 0 && (
-                            <ListItem
-                                button
                                 onClick={handleModalContentIndex(5)}
                             >
                                 <ListItemText
@@ -156,7 +148,6 @@ const ArchiveContainer: FC = () => {
                                     primaryTypographyProps={{ variant: 'subtitle1' }}
                                 />
                             </ListItem>
-                        )}
                     </List>
                 </>;
             case 2:
@@ -181,7 +172,7 @@ const ArchiveContainer: FC = () => {
                         </ListItem>
                         <ListItem
                             button
-                            onClick={handlePrevMenu}
+                            onClick={handleCloseModal}
                         >
                             <ListItemText
                                 primary='Нет'
@@ -254,7 +245,16 @@ const ArchiveContainer: FC = () => {
                         cardData={data}
                         handleModalOpen={handleOpenModal}
                     />
-                    <Box>Buttons</Box>
+                    <Box mt={1}>
+                        <ButtonComponent
+                            className={classes.submitBtn}
+                            onClick={handleOpenModal(data.id, 2)}
+                        >
+                            <Typography variant='subtitle1'>
+                                Восстановить объявление
+                            </Typography>
+                        </ButtonComponent>
+                    </Box>
                 </Grid>
             </Grid>
         </Box>

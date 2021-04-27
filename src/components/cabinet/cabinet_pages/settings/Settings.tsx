@@ -7,7 +7,7 @@ import {CustomModal} from '@src/components/elements/custom_modal/CustomModal';
 
 type SettingsPropsType = {
     settingsForm: ReactNode,
-    handleIsEditable: () => void,
+    handleAllowEdit: () => void,
     openModal: boolean,
     handleClose: () => void,
     modalContent: ReactElement,
@@ -16,7 +16,7 @@ type SettingsPropsType = {
 export const Settings: FC<SettingsPropsType> = (props) => {
     const {
         settingsForm,
-        handleIsEditable,
+        handleAllowEdit,
         openModal,
         handleClose,
         modalContent
@@ -40,7 +40,7 @@ export const Settings: FC<SettingsPropsType> = (props) => {
                             color='secondary'
                             variant='text'
                             className={classes.editButton}
-                            onClick={handleIsEditable}
+                            onClick={handleAllowEdit}
                             startIcon={<EditIcon fontSize='small' />}
                         >
                             <Typography variant='subtitle1'>

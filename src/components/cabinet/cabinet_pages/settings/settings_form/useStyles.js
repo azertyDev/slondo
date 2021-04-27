@@ -1,5 +1,5 @@
 import {makeStyles, withStyles} from '@material-ui/core/styles';
-import {blue, purple} from '@material-ui/core/colors';
+import {blue} from '@material-ui/core/colors';
 import {Button, Switch} from '@material-ui/core';
 
 export const useStyles = makeStyles((theme) => ({
@@ -22,6 +22,7 @@ export const useStyles = makeStyles((theme) => ({
         display: 'flex'
     },
     button: {
+        width: '100%',
         '& .MuiTypography-subtitle1': {
             color: '#fff'
         }
