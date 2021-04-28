@@ -29,7 +29,7 @@ export const ShowPostContainer: FC = () => {
     const {t} = useTranslation(['post']);
     const router = useRouter();
     const lang = i18n.language;
-    const url = router.query.url as string;
+    const url = useRouter().query.url as string;
     const [postId] = url.split('-').splice(-1);
 
     const initValues = {id: null, name: ''};
@@ -88,7 +88,6 @@ export const ShowPostContainer: FC = () => {
             },
             ads_type: {
                 id: null,
-                name: '',
                 mark: ''
             },
             auction: {
@@ -119,7 +118,6 @@ export const ShowPostContainer: FC = () => {
     const [parameters, setParameters] = useState({});
     const [slidersRefs, setSlidersRefs] = useState(initSlidersRefs);
     const [descHeight, setDescHeight] = useState(0);
-    const [openBuyNowModal, setOpenBuyNowModal] = useState(false);
     const [openModal, setOpenModal] = useState(false);
     const [page, setPage] = useState(1);
     const [auctionsBetsList, setAuctionBetsList] = useState(initialAuctionBetsList);
@@ -129,9 +127,6 @@ export const ShowPostContainer: FC = () => {
         price: null
     });
 
-    const handleOpenBuyNowModal = () => () => {
-        setOpenBuyNowModal(true);
-    };
     const handleOpenModal = () => () => {
         setOpenModal(true);
     };
@@ -265,14 +260,12 @@ export const ShowPostContainer: FC = () => {
 
     const auctionInfo = (
         <AuctionInfo
-            data={postData.data}
             t={t}
-            openBuyNowModal={openBuyNowModal}
+            data={postData.data}
             openModal={openModal}
             page={page}
             auctionsBetsList={auctionsBetsList.list}
             lastPage={lastPage}
-            handleOpenBuyNowModal={handleOpenBuyNowModal}
             handleOpenModal={handleOpenModal}
             handleCloseModal={handleCloseModal}
             handleBuyNow={handleBuyNow}
@@ -286,11 +279,8 @@ export const ShowPostContainer: FC = () => {
 
     const ownerInfo = (
         <OwnerInfo
-            safe_deal={postData.data.safe_deal}
-            owner={postData.data.author}
-            isOwner={postData.data.creator}
+            data={postData.data}
             handleFollow={handleFollow}
-            subscribed={postData.data.subscribed}
         />
     );
 
@@ -341,6 +331,7 @@ export const ShowPostContainer: FC = () => {
                             parameters={parameters}
                             descHeight={descHeight}
                             slidersRefs={slidersRefs}
+                            auctionInfo={auctionInfo}
                         />
                     </Grid>
                     <Grid item lg={3} xs={12}>
@@ -359,7 +350,7 @@ export const ShowPostContainer: FC = () => {
                     </Grid>
                 </Grid>
             </Container>
-            {/*<Footer/>*/}
+            <Footer/>
             <ErrorModal/>
         </>
     );

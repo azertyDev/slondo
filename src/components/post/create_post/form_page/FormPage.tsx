@@ -57,6 +57,7 @@ export const FormPage: FC = () => {
     const postType = postTypes.find(type => type.name === postTypeName);
 
     const initPost = {
+        isFetch: false,
         ads_type_id: postType.id,
         category_id: category.id,
         sub_category_id: subCategory?.id,
@@ -152,15 +153,17 @@ export const FormPage: FC = () => {
     const toPublish = async () => {
         try {
             const form = new FormData();
-            const {photos, ...data} = post;
+            const {isFetch, photos, ...data} = post;
+
+            setPost({...post, isFetch: true});
 
             const postId = await userAPI.createPost(data);
 
             form.append('ads_id', postId);
             photos.forEach(photo => form.append('files[]', photo.file));
-
             await userAPI.uploadPhotos(form);
 
+            setPost({...post, isFetch: false});
             setIsSuccess(true);
         } catch (e) {
             dispatch(setErrorMsgAction(e.message));
@@ -231,7 +234,7 @@ export const FormPage: FC = () => {
                      </div>
                      {isPreview && (
                          <div className='publish-button-wrapper'>
-                             <ButtonComponent onClick={toPublish}>
+                             <ButtonComponent disabled={post.isFetch} onClick={toPublish}>
                                  <Typography variant='subtitle1'>
                                      {t('publish')}
                                  </Typography>

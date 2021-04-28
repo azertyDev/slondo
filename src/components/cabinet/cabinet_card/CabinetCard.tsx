@@ -20,18 +20,18 @@ import {useStyles} from './useStyles';
 
 type CabinetCardPropsType = {
     cardData: CardDataType,
-    handleModalOpen?: (id) => () => void,
+    handleModalOpen?: (id) => () => void
 }
 
 export const CabinetCard: FC<CabinetCardPropsType> = (props) => {
-    const { pathname } = useRouter();
-    const { t } = useTranslation(['common', 'categories']);
+    const {pathname} = useRouter();
+    const {t} = useTranslation(['common', 'categories']);
     const {
         cardData,
         handleModalOpen
     } = props;
 
-    const timer = ({ days, hours, minutes, seconds, completed }) => (
+    const timer = ({days, hours, minutes, seconds, completed}) => (
         <Box display="flex">
             <Typography variant="caption" color="initial" className="timer-title">
                 {completed ? 'Торги окончены' : 'Окончание торгов через'}&nbsp;-&nbsp;
@@ -85,7 +85,7 @@ export const CabinetCard: FC<CabinetCardPropsType> = (props) => {
             <Paper variant="outlined" elevation={2}>
                 <Box className="card-data">
                     <div className="img">
-                        <img src={cardData.image} alt={cardData.title} />
+                        <img src={cardData.image} alt={cardData.title}/>
                         <Typography
                             noWrap
                             variant="caption"
@@ -95,7 +95,7 @@ export const CabinetCard: FC<CabinetCardPropsType> = (props) => {
                             {t(cardData.ads_type)}
                         </Typography>
                         <span>
-                            <EyeIcon />
+                            <EyeIcon/>
                             <Typography
                                 noWrap
                                 variant="caption"
@@ -118,13 +118,13 @@ export const CabinetCard: FC<CabinetCardPropsType> = (props) => {
                             </div>
                             <div className='card-btn'>
                                 {pathname?.includes('favorite')
-                                    ?
-                                    <div className='isFavorite' onClick={handleModalOpen(cardData.id)}>
-                                        <CloseIcon />
-                                    </div>
-                                    : cardData.creator && cardData.ads_type === 'post' && (
+                                 ?
+                                 <div className='isFavorite' onClick={handleModalOpen(cardData.id)}>
+                                     <CloseIcon/>
+                                 </div>
+                                 : cardData.creator && cardData.ads_type === 'post' && (
                                     <div className='settings' onClick={handleModalOpen(cardData.id)}>
-                                        <SettingsIcon />
+                                        <SettingsIcon/>
                                     </div>
                                 )}
                             </div>
@@ -132,7 +132,7 @@ export const CabinetCard: FC<CabinetCardPropsType> = (props) => {
                         <div className="description">
                             {!!cardData.available_days && (
                                 <div className="available">
-                                    <PhoneIcon />
+                                    <PhoneIcon/>
                                     <Typography variant="body1" color="primary">
                                         {weekDaysHelper(cardData.available_days, t)}
                                     </Typography>
@@ -141,7 +141,7 @@ export const CabinetCard: FC<CabinetCardPropsType> = (props) => {
                             {!!cardData.exchange && (
                                 <Tooltip title='Возможен обмен' arrow>
                                     <div className="exchange">
-                                        <SwapIcon />
+                                        <SwapIcon/>
                                         <Typography variant="body1">
                                             Возможен обмен
                                         </Typography>
@@ -150,7 +150,7 @@ export const CabinetCard: FC<CabinetCardPropsType> = (props) => {
                             )}
                             {!!cardData.delivery && (
                                 <div className="delivery">
-                                    <DeliveryIcon />
+                                    <DeliveryIcon/>
                                     <Typography variant="body1">
                                         Есть доставка
                                     </Typography>
@@ -158,7 +158,7 @@ export const CabinetCard: FC<CabinetCardPropsType> = (props) => {
                             )}
                             {!!cardData.safe_deal && (
                                 <div className="safe_deal">
-                                    <SafeIcon />
+                                    <SafeIcon/>
                                     <Typography variant="body1">
                                         Безопасная покупка
                                     </Typography>
@@ -185,7 +185,7 @@ export const CabinetCard: FC<CabinetCardPropsType> = (props) => {
                         )}
                         <div className="location">
                             <div>
-                                <LocationIcon />
+                                <LocationIcon/>
                                 <Typography
                                     variant="caption"
                                     color="initial"

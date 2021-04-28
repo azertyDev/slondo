@@ -18,7 +18,7 @@
   "resetPassTitle": "Parolni qayta tiklash",
   "continue": "Davom ettirish",
   "next": "Keyin",
-  "forgetPassword": "Parolni unutdingizmi?",
+  "forget_password": "Parolni unutdingizmi?",
   "confirm": "Tasdiqlash",
   "agreement": {
     "firstPart": "Saytda ro'yxatdan o'tish orqali siz",
