@@ -11,7 +11,21 @@ import {WithT} from 'i18next';
 import {useStyles} from './useStyles';
 
 
-export const AuctionInfo: FC<any & WithT> = (props) => {
+type AuctionInfoPropsType = {
+    data,
+    openModal,
+    auctionsBetsList,
+    handleOpenModal,
+    handleCloseModal,
+    handleBuyNow,
+    handleBet,
+    handleScroll,
+    handleRefresh,
+    handleSuggestPrice,
+    handleTextField
+} & WithT;
+
+export const AuctionInfo: FC<AuctionInfoPropsType> = (props) => {
     const {
         t,
         data,
@@ -20,7 +34,7 @@ export const AuctionInfo: FC<any & WithT> = (props) => {
         handleOpenModal,
         handleCloseModal,
         handleBuyNow,
-        handleSubmit,
+        handleBet,
         handleScroll,
         handleRefresh,
         handleSuggestPrice,
@@ -35,7 +49,7 @@ export const AuctionInfo: FC<any & WithT> = (props) => {
     return (
         <div className={classes.root}>
             <div className="lot-info">
-                {data.auction && data.auction.reserve_price > auctionsBetsList?.[0]?.bet &&
+                {data.auction && data.auction.reserve_price > auctionsBetsList[0]?.bet &&
                 <div className="reserve-price">
                     <LockIcon/>
                     <div>
@@ -49,7 +63,7 @@ export const AuctionInfo: FC<any & WithT> = (props) => {
                     </div>
                 </div>}
                 <div className="lot-timer">
-                    {date !== 0 && <AuctionTimer date={date}/>}
+                    {!!date && <AuctionTimer date={date}/>}
                 </div>
                 <div className="lot-participants-block">
                     <Typography
@@ -70,48 +84,47 @@ export const AuctionInfo: FC<any & WithT> = (props) => {
                     >
                         <ul>
                             {auctionsBetsList.map((item) => (
-                                <li key={item?.id}>
+                                <li key={item.id}>
                                     <div>
                                         <div className="participant-name">
                                             <Typography variant="subtitle1" noWrap>
-                                                {item?.user?.phone} {item?.number_of_bets &&
-                                            <span>({item?.number_of_bets})</span>}
+                                                {item.user?.phone} {item.number_of_bets &&
+                                            <span>({item.number_of_bets})</span>}
                                             </Typography>
                                         </div>
                                         <div className="dateAndTime">
                                             <Typography
-                                                variant="subtitle1"
                                                 noWrap
+                                                variant="subtitle1"
                                                 className="bet-time"
                                             >
-                                                {item?.created_at?.slice(11, 16)}
+                                                {item.created_at?.slice(11, 16)}
                                             </Typography>
                                             <Typography
-                                                variant="subtitle1"
                                                 noWrap
+                                                variant="subtitle1"
                                                 className="bet-date"
                                             >
-                                                {item?.created_at?.slice(0, 10)}
+                                                {item.created_at?.slice(0, 10)}
                                             </Typography>
                                         </div>
                                     </div>
                                     <div className="bet">
                                         <Typography
-                                            variant="subtitle1"
                                             noWrap
+                                            variant="subtitle1"
                                             className="final-bet"
                                         >
-                                            {numberPrettier(item?.bet)}
+                                            {numberPrettier(item.bet)}
                                         </Typography>
                                         <Typography
                                             variant="subtitle1"
                                             noWrap
                                             className="per-bet"
                                         >
-                                            {item?.outbid === 0
-                                                ? <span className='started-price'>Стартовая цена</span>
-                                                : `+ ${numberPrettier(item?.outbid)}`
-                                            }
+                                            {item.outbid === 0
+                                             ? <span className='started-price'>Стартовая цена</span>
+                                             : `+ ${numberPrettier(item.outbid)}`}
                                         </Typography>
                                     </div>
                                 </li>
@@ -122,8 +135,8 @@ export const AuctionInfo: FC<any & WithT> = (props) => {
                         variant="subtitle1"
                         color="initial"
                         className="all-bets"
-                        onClick={() => setShowAll(!showAll)}
                         style={{cursor: 'pointer'}}
+                        onClick={() => setShowAll(!showAll)}
                     >
                         Все ставки
                     </Typography>
@@ -132,10 +145,7 @@ export const AuctionInfo: FC<any & WithT> = (props) => {
                     <>
                         <AuctionForm
                             t={t}
-                            isAuction
-                            safe_deal
-                            auctionId={data.auction.id}
-                            handleFormSubmit={handleSubmit}
+                            handleBet={handleBet}
                             auctionsBetsList={auctionsBetsList}
                         />
                         {!!data.auction.price_buy_now && (
@@ -143,16 +153,16 @@ export const AuctionInfo: FC<any & WithT> = (props) => {
                                 <Hidden mdDown>
                                     <div className="buy-now">
                                         <Typography variant="subtitle1" color="initial">
-                                            {data.auction.price_buy_now} сум
+                                            {numberPrettier(data.auction.price_buy_now)} сум
                                         </Typography>
-                                        <ButtonComponent onClick={handleOpenModal()}>
+                                        <ButtonComponent onClick={handleOpenModal}>
                                             <Typography variant="subtitle1" color="initial">
                                                 Купить сейчас
                                             </Typography>
                                         </ButtonComponent>
                                     </div>
                                 </Hidden>
-                                <CustomModal handleModalClose={handleCloseModal()} openModal={openModal}>
+                                <CustomModal handleModalClose={handleCloseModal} openModal={openModal}>
                                     <>
                                         <Typography className="title" variant="h6">
                                             Купить сейчас
@@ -162,18 +172,21 @@ export const AuctionInfo: FC<any & WithT> = (props) => {
                                             className='subtitle'
                                         >
                                             Нажимая кнопку “Купить сейчас” вы выкупаете лот на сумму&nbsp;
-                                            <span className='buy-now-price'>{data.auction.price_buy_now}</span> сум и
-                                            соглашаетесь с&nbsp;
+                                            <span className='buy-now-price'>
+                                                {numberPrettier(data.auction.price_buy_now)}
+                                            </span>
+                                            сум и соглашаетесь с&nbsp;
                                             <span className='condition'>
-                                        <Link href="#">
-                                            <a>условиями</a>
-                                        </Link>
-                                        </span> сайта
+                                                <Link href="#">
+                                                    <a>условиями</a>
+                                                </Link>
+                                            </span>
+                                            сайта
                                         </Typography>
                                         <div className='confirm'>
                                             <ButtonComponent
                                                 className='submit'
-                                                onClick={handleBuyNow()}
+                                                onClick={handleBuyNow}
                                             >
                                                 <Typography variant='subtitle1'>
                                                     Купить сейчас
@@ -183,18 +196,13 @@ export const AuctionInfo: FC<any & WithT> = (props) => {
                                     </>
                                 </CustomModal>
                             </div>
-
                         )}
                         {!!data.auction.offer_the_price && (
                             <div>
                                 <Hidden lgUp>
                                     <Grid container spacing={1}>
-                                        <Grid
-                                            item
-                                            xs={isExAuc ? 6 : 12}
-                                            className='suggest_price'
-                                        >
-                                            <ButtonComponent onClick={handleOpenModal()}>
+                                        <Grid item xs={isExAuc ? 6 : 12} className='suggest_price'>
+                                            <ButtonComponent onClick={handleOpenModal}>
                                                 <Typography variant="subtitle1" color="initial">
                                                     Предложить цену
                                                 </Typography>
@@ -209,7 +217,7 @@ export const AuctionInfo: FC<any & WithT> = (props) => {
                                         )}
                                     </Grid>
                                 </Hidden>
-                                <CustomModal handleModalClose={handleCloseModal()} openModal={openModal}>
+                                <CustomModal handleModalClose={handleCloseModal} openModal={openModal}>
                                     Предложить цену
                                     <Typography variant='subtitle1'>
                                         Предложенная стоимость не может быть <br/>

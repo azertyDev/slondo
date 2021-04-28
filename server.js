@@ -20,4 +20,4 @@ app.prepare().then(() => {
         if (err) throw err
         console.log(`Server started on ${serverUrl}:${port}`)
     })
-})
+});

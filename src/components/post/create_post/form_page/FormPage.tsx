@@ -166,6 +166,7 @@ export const FormPage: FC = () => {
             setPost({...post, isFetch: false});
             setIsSuccess(true);
         } catch (e) {
+            setPost({...post, isFetch: false});
             dispatch(setErrorMsgAction(e.message));
         }
     };
