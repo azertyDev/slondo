@@ -4,16 +4,16 @@ import {i18n, useTranslation} from 'next-i18next';
 import {userAPI} from '@src/api/api';
 import {setErrorMsgAction} from '@src/redux/slices/errorSlice';
 import {useDispatch} from 'react-redux';
-import {Container, Grid, Hidden, useMediaQuery, useTheme} from '@material-ui/core';
+import {Container, Grid, Hidden, Typography, useMediaQuery, useTheme} from '@material-ui/core';
 import {PostContent} from '@src/components/post/show_post/post_content/PostContent';
-import {OwnerAuctionContent} from '@src/components/post/show_post/owner_auction_content/OwnerAuctionContent';
 import {Banner} from '@src/components/elements/banner/Banner';
-import {AuctionInfo} from '@src/components/post/show_post/owner_auction_content/auction_info/AuctionInfo';
-import {OwnerInfo} from '@src/components/post/show_post/owner_auction_content/owner_info/OwnerInfo';
+import {AuctionInfo} from '@src/components/post/show_post/owner_auction_info/auction_info/AuctionInfo';
+import {OwnerInfo} from '@src/components/post/show_post/owner_auction_info/owner_info/OwnerInfo';
 import Head from 'next/head';
 import {Header} from '@src/components/header/Header';
 import {Footer} from '@src/components/footer/Footer';
 import {ErrorModal} from '@src/components/error_modal/ErrorModal';
+import {numberPrettier} from '@src/helpers';
 import {useStyles} from './useStyles';
 
 
@@ -25,9 +25,10 @@ export type SlidersRefType = {
 };
 
 export const ShowPostContainer: FC = () => {
+    const router = useRouter();
     const dispatch = useDispatch();
     const {t} = useTranslation(['post']);
-    const router = useRouter();
+
     const lang = i18n.language;
     const url = useRouter().query.url as string;
     const [postId] = url.split('-').splice(-1);
@@ -118,33 +119,37 @@ export const ShowPostContainer: FC = () => {
     const [parameters, setParameters] = useState({});
     const [slidersRefs, setSlidersRefs] = useState(initSlidersRefs);
     const [descHeight, setDescHeight] = useState(0);
-    const [openModal, setOpenModal] = useState(false);
     const [page, setPage] = useState(1);
+    const [openModal, setOpenModal] = useState(false);
     const [auctionsBetsList, setAuctionBetsList] = useState(initialAuctionBetsList);
     const [lastPage, setLastPage] = useState(null);
-    const [offerPrice, setOfferPrice] = useState({
-        isFetch: false,
-        price: null
-    });
+    const [offerPrice, setOfferPrice] = useState({isFetch: false, price: null});
 
-    const handleOpenModal = () => () => {
+    const {data} = postData;
+
+    const isAuction = data.ads_type.mark === 'auc' || data.ads_type.mark === 'exauc';
+
+    const handleOpenModal = () => {
         setOpenModal(true);
     };
-    const handleCloseModal = () => () => {
+    const handleCloseModal = () => {
         setOpenModal(false);
     };
-    const handleBuyNow = () => () => {
-        userAPI.buyAuction(postData.data.auction.id, postData.data.id)
+    const handleBuyNow = () => {
+        userAPI.buyAuction(data.auction.id, data.id)
             .then(_ => router.push('/'));
     };
-    const handleSubmit = (value) => {
-        userAPI.betAuction(value)
-            .then(result => result && userAPI.getAuctionBets(postData.data.auction.id, 1)
-                .then(result => {
-                    setLastPage(result.last_page);
-                    setAuctionBetsList(result.data);
-                }))
-            .catch(error => dispatch(setErrorMsgAction(t(`auction:${error.response.data.message}`))));
+    const handleBet = async (bet) => {
+        try {
+            await userAPI.betAuction(bet, data.auction.id);
+            const bets = await userAPI.getAuctionBets(data.auction.id, 1);
+            setLastPage(bets.last_page);
+            setAuctionBetsList({...auctionsBetsList, list: bets.data});
+        } catch (e) {
+            dispatch(
+                setErrorMsgAction(t(`errors:${e.response.data.message}`))
+            );
+        }
     };
     const handleScroll = (e) => {
         const bottom = e.target.scrollHeight - e.target.scrollTop === e.target.clientHeight;
@@ -155,7 +160,7 @@ export const ShowPostContainer: FC = () => {
     const handleSuggestPrice = async () => {
         try {
             setOfferPrice({...offerPrice, isFetch: true});
-            await userAPI.offerThePrice(postData.data.auction.id, offerPrice.price);
+            await userAPI.offerThePrice(data.auction.id, offerPrice.price);
             setOfferPrice({price: null, isFetch: false});
             setOpenModal(false);
         } catch (e) {
@@ -171,11 +176,11 @@ export const ShowPostContainer: FC = () => {
                 ...auctionsBetsList,
                 isFetch: true
             });
-            const {data} = await userAPI.getAuctionBets(postData.data.auction.id, 1);
+            const bets = await userAPI.getAuctionBets(data.auction.id, 1);
             setAuctionBetsList({
                 ...auctionsBetsList,
                 isFetch: false,
-                list: data
+                list: bets.data
             });
         } catch (e) {
             dispatch(setErrorMsgAction(e.message));
@@ -183,27 +188,21 @@ export const ShowPostContainer: FC = () => {
     };
     const auctionBetsPagination = async () => {
         try {
-            setAuctionBetsList({
-                ...auctionsBetsList,
-                isFetch: true
-            });
-            const {data, last_page} = await userAPI.getAuctionBets(postData.data.auction.id, page);
+            setAuctionBetsList({...auctionsBetsList, isFetch: true});
+            const bets = await userAPI.getAuctionBets(data.auction.id, page);
             setAuctionBetsList({
                 ...auctionsBetsList,
                 isFetch: false,
-                list: [...auctionsBetsList.list, ...data]
+                list: [...auctionsBetsList.list, ...bets.data]
             });
-            setLastPage(last_page);
+            setLastPage(bets.last_page);
         } catch (e) {
             dispatch(setErrorMsgAction(e.message));
         }
     };
     const fetchPostData = async () => {
         try {
-            setPostData({
-                ...postData,
-                isFetch: true
-            });
+            setPostData({...postData, isFetch: true});
 
             const {
                 title,
@@ -261,25 +260,23 @@ export const ShowPostContainer: FC = () => {
     const auctionInfo = (
         <AuctionInfo
             t={t}
-            data={postData.data}
+            data={data}
             openModal={openModal}
-            page={page}
             auctionsBetsList={auctionsBetsList.list}
-            lastPage={lastPage}
-            handleOpenModal={handleOpenModal}
-            handleCloseModal={handleCloseModal}
+            handleBet={handleBet}
             handleBuyNow={handleBuyNow}
-            handleSubmit={handleSubmit}
             handleScroll={handleScroll}
             handleRefresh={refreshAucBets}
-            handleSuggestPrice={handleSuggestPrice}
+            handleOpenModal={handleOpenModal}
             handleTextField={handleTextField}
+            handleCloseModal={handleCloseModal}
+            handleSuggestPrice={handleSuggestPrice}
         />
     );
 
     const ownerInfo = (
         <OwnerInfo
-            data={postData.data}
+            data={data}
             handleFollow={handleFollow}
         />
     );
@@ -296,8 +293,8 @@ export const ShowPostContainer: FC = () => {
     }, [lang]);
 
     useEffect(() => {
-        postData.data.auction?.id && auctionBetsPagination();
-    }, [page, postData.data.auction?.id]);
+        data.auction?.id && auctionBetsPagination();
+    }, [page, data.auction?.id]);
 
     useEffect(() => {
         const height = document.getElementById('post-description').clientHeight;
@@ -311,8 +308,8 @@ export const ShowPostContainer: FC = () => {
                 <meta name="robots" content="noindex"/>
                 <meta property="og:site_name" content="Slondo"/>
                 <meta property="og:type" content="website"/>
-                <meta property="og:title" content={postData.data.title} key="ogtitle"/>
-                <title>{postData.data.title}</title>
+                <meta property="og:title" content={data.title} key="ogtitle"/>
+                <title>{data.title}</title>
             </Head>
             <Hidden mdDown>
                 <Header/>
@@ -320,14 +317,14 @@ export const ShowPostContainer: FC = () => {
             <Container
                 maxWidth="xl"
                 className={classes.root}
-                style={{paddingTop: `${isMdDown ? 0 : '48px'}`, position: 'relative'}}
                 disableGutters={isMdDown}
+                style={{paddingTop: `${isMdDown ? 0 : '48px'}`, position: 'relative'}}
             >
                 <Grid container spacing={isMdDown ? 0 : 2}>
                     <Grid item xs={12} lg={9}>
                         <PostContent
                             t={t}
-                            data={postData.data}
+                            data={data}
                             parameters={parameters}
                             descHeight={descHeight}
                             slidersRefs={slidersRefs}
@@ -335,13 +332,22 @@ export const ShowPostContainer: FC = () => {
                         />
                     </Grid>
                     <Grid item lg={3} xs={12}>
-                        <OwnerAuctionContent
-                            t={t}
-                            postData={postData.data}
-                            handleFollow={handleFollow}
-                            auctionInfo={auctionInfo}
-                            ownerInfo={ownerInfo}
-                        />
+                        <div className={classes.ownerAucContent}>
+                            <Hidden mdDown>
+                                <div className="price">
+                                    <Typography variant="h4" color="initial">
+                                        <span>{numberPrettier(data.price)}</span>&nbsp;
+                                        {t(`common:${data.currency.name}`)}
+                                    </Typography>
+                                </div>
+                            </Hidden>
+                            {isAuction && (
+                                <Hidden mdDown>
+                                    {auctionInfo}
+                                </Hidden>
+                            )}
+                            {ownerInfo}
+                        </div>
                         <Hidden mdDown>
                             <div className={classes.adBanner}>
                                 <Banner height="424px"/>

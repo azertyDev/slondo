@@ -12,7 +12,7 @@ const localServer = 'http://192.168.100.60/slondo/public/api/';
 
 const instance = Axios.create({
     withCredentials: true,
-    baseURL: uztelecom
+    baseURL: localServer
 });
 
 const setTokenToHeader = () => {
@@ -191,7 +191,7 @@ export const userAPI = {
                 throw err;
             });
     },
-    betAuction: ({bet, id}: any): Promise<AuctionsDataTypes> => {
+    betAuction: (bet: string, id: string): Promise<AuctionsDataTypes> => {
         const form = new FormData();
         form.set('auction_id', id);
         form.set('bet', bet);
@@ -340,5 +340,5 @@ export const userAPI = {
             .catch(err => {
                 throw err;
             });
-    },
+    }
 };

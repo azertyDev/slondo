@@ -24,7 +24,7 @@ const SettingsContainer: FC = () => {
     const initSeconds = 60;
     const initUserInfo = {
         user_name: userInfo.name,
-        user_surname: userInfo.surname,
+        user_surname: userInfo.surname ?? '',
         phone: userInfo.phone,
         avatar: userInfo.avatar,
         avalTime: {
@@ -36,6 +36,7 @@ const SettingsContainer: FC = () => {
             }
         }
     };
+
     const [fetchingSmsCode, setFetchingSmsCode] = useState(false);
     const [formDisable, setFormDisable] = useState(true);
     const [openModal, setOpenModal] = useState(false);
@@ -67,7 +68,7 @@ const SettingsContainer: FC = () => {
             otherData.name = user_name;
             otherData.surname = user_surname;
 
-            if (!!values.avatar) {
+            if (!!values.avatar && typeof values.avatar === 'object') {
                 const formData = new FormData();
                 formData.append('avatar', values.avatar);
                 await userAPI.changeUserAvatar(formData);
@@ -263,7 +264,6 @@ const SettingsContainer: FC = () => {
             modalContent={ModalContent}
             handleClose={handleModalClose}
         />
-
     );
 };
 

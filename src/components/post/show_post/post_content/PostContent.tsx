@@ -1,4 +1,4 @@
-import React, {FC} from 'react';
+import {FC, useState} from 'react';
 import {WithT} from 'i18next';
 import Link from 'next/link';
 import {
@@ -9,7 +9,6 @@ import {
     ListItem,
     ListItemText,
     Modal,
-    Snackbar,
     TextField,
     Typography,
     useMediaQuery,
@@ -27,17 +26,14 @@ import {ModalSyncSliders} from './modal_sync_sliders/ModalSyncSliders';
 import {BreadcrumbsComponent} from '@src/components/elements/breadcrumbs/Breadcrumbs';
 import {numberPrettier, weekDaysHelper} from '@src/helpers';
 import {ButtonComponent} from '@src/components/elements/button/Button';
-import {NotificationIcon, RenewalIcon} from '@src/components/elements/icons';
+import {RenewalIcon} from '@src/components/elements/icons';
 import {months} from '@src/common_data/common';
 import {useStyles} from './useStyles';
 
 
 type PostContentTypes = {
     openSliderModal: boolean,
-    openModal: boolean,
-    openSnackbar: boolean,
-    vertical: 'top',
-    horizontal: 'right',
+    openModal: boolean
 }
 
 export const PostContent: FC<WithT & any> = (props) => {
@@ -55,16 +51,11 @@ export const PostContent: FC<WithT & any> = (props) => {
     const isExAuc = data.ads_type.mark === 'exauc';
     const isAuction = data.ads_type.mark === 'auc' || isExAuc;
 
-    const [state, setState] = React.useState<PostContentTypes>({
-        openSliderModal: false,
-        openModal: false,
-        openSnackbar: false,
-        vertical: 'top',
-        horizontal: 'right'
-    });
-    const {openModal, openSliderModal, openSnackbar, horizontal, vertical} = state;
+    const [state, setState] = useState<PostContentTypes>({openSliderModal: false, openModal: false});
+    const {openModal, openSliderModal} = state;
     const date = new Date(data.created_at);
     const formatted_date = `${date.getDate()} ${months[date.getMonth()]} ${date.getFullYear()}`;
+
     const handleShowSliderModal = value => () => setState({...state, openSliderModal: value});
     const handleOpenModal = () => {
         setState({...state, openModal: true});
@@ -72,12 +63,7 @@ export const PostContent: FC<WithT & any> = (props) => {
     const handleCloseModal = () => {
         setState({...state, openModal: false});
     };
-    const handleOpenSnackbar = (newState) => () => {
-        setState({openSnackbar: true, ...newState});
-    };
-    const handleCloseSnackbar = () => {
-        setState({...state, openSnackbar: false});
-    };
+
     const parameterItems = Object.keys(parameters).reduce((items, key, i) => {
         if (Array.isArray(parameters[key]) && parameters[key].length !== 0) {
             const params = (
@@ -177,14 +163,6 @@ export const PostContent: FC<WithT & any> = (props) => {
                             {data.title}
                         </Typography>
                     </div>
-                    {data.ads_type.mark !== 'post' && (
-                        <div>
-                            <ButtonComponent onClick={handleOpenSnackbar({vertical, horizontal})}>
-                                <NotificationIcon/>
-                                Следить
-                            </ButtonComponent>
-                        </div>
-                    )}
                     {!data.condition.name && (
                         <div className="condition">
                             <Typography variant="h6">Новое</Typography>
@@ -458,21 +436,6 @@ export const PostContent: FC<WithT & any> = (props) => {
                     </ButtonComponent>
                 </div>
             </Modal>
-            <Snackbar
-                anchorOrigin={{vertical, horizontal}}
-                open={openSnackbar}
-                onClose={handleCloseSnackbar}
-                key={vertical + horizontal}
-            >
-                <div className={classes.snackbar}>
-                    <span>
-                        <NotificationIcon/>
-                    </span>
-                    <Typography variant='h6'>
-                        Ставка повышена!
-                    </Typography>
-                </div>
-            </Snackbar>
         </div>
     );
 };

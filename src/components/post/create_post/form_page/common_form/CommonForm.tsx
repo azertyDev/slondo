@@ -85,7 +85,7 @@ export const CommonForm: FC<DefaultParamsPropsType> = (props) => {
 
     const onSubmit = (values) => {
         const createData = {...values};
-        createData.price = clearWhiteSpaces(createData.price);
+        createData.price = Number.parseInt(clearWhiteSpaces(createData.price));
 
         const {
             auction,
@@ -106,14 +106,14 @@ export const CommonForm: FC<DefaultParamsPropsType> = (props) => {
             } = auction;
 
             othersAuctionData.duration_id = duration.id;
-            othersAuctionData.offer_the_price = offer_the_price;
+            othersAuctionData.offer_the_price = Number.parseInt(offer_the_price);
 
             if (isAdvanceAuction) {
                 if (price_buy_now.isActive) {
-                    othersAuctionData.price_buy_now = clearWhiteSpaces(price_buy_now.value);
+                    othersAuctionData.price_buy_now = Number.parseInt(clearWhiteSpaces(price_buy_now.value));
                 }
                 if (reserve_price) {
-                    othersAuctionData.reserve_price = clearWhiteSpaces(reserve_price);
+                    othersAuctionData.reserve_price = Number.parseInt(clearWhiteSpaces(reserve_price));
                 }
                 othersAuctionData.auto_renewal = auto_renewal;
             }
