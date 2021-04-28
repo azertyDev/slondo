@@ -1,17 +1,23 @@
 import React, {FC} from 'react';
 import {CabinetWrapper} from '@src/components/cabinet/CabinetWrapper';
 import {useStyles} from './useStyles';
-import { Box, Grid } from '@material-ui/core';
 import {Notification} from '@src/components/cabinet/cabinet_pages/notifications/notification_card/Notification';
+import {ButtonComponent} from '@src/components/elements/button/Button';
 
 type NotificationsPropsType = {
-    notifications
+    notifications,
+    handleDeleteNotification: (id) => () => void,
+    handleDeleteAllNotification: () => void,
 }
 
 export const Notifications: FC<NotificationsPropsType> = (props) => {
     const {
-        notifications
+        notifications,
+        handleDeleteNotification,
+        handleDeleteAllNotification
     } = props;
+
+    console.log(notifications);
 
     const title = 'Уведомления';
 
@@ -19,18 +25,18 @@ export const Notifications: FC<NotificationsPropsType> = (props) => {
     return (
         <div className={classes.root}>
             <CabinetWrapper headerTitle={title} title={title}>
-                {
-                    notifications.map(notification => {
-                        return (
-                            <Notification
-                                key={notification.id}
-                                title={notification.message}
-                                subTitle='Пожалуйста, заполните данные о себе, что бы мы могли поставить Вам оценку 5 звезд'
-                                ads_id={notification.ads_id}
-                            />
-                        );
-                    })
-                }
+                <ButtonComponent onClick={handleDeleteAllNotification}>
+                    Удалить все уведомления
+                </ButtonComponent>
+                {notifications.data.map(notification => {
+                    return (
+                        <Notification
+                            key={notification.id}
+                            data={notification}
+                            handleDeleteNotification={handleDeleteNotification}
+                        />
+                    );
+                })}
             </CabinetWrapper>
         </div>
     );

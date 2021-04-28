@@ -340,5 +340,19 @@ export const userAPI = {
             .catch(err => {
                 throw err;
             });
+    },
+    deleteUserNotification: (id: number): Promise<any> => {
+        return instance.delete(`regular/user/notification/${id}`, setTokenToHeader())
+            .then(res => res.data)
+            .catch(err => {
+                throw err;
+            });
+    },
+    deleteAllNotification: (user_id: number): Promise<any> => {
+        return instance.delete(`regular/user/notifications/${user_id}`, setTokenToHeader())
+            .then(res => res.data)
+            .catch(err => {
+                throw err;
+            });
     }
 };

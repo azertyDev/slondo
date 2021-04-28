@@ -2,10 +2,26 @@ import React, {FC} from 'react';
 import {IconButton, Paper, Typography} from '@material-ui/core';
 import {useStyles} from './useStyles';
 import {CloseIcon} from '@src/components/elements/icons';
-import {NotificationDataType} from '../NotificationsContainer';
+
+export type NotificationDataType = {
+   data,
+    handleDeleteNotification: (id) => () => void
+};
 
 export const Notification: FC<NotificationDataType> = (props) => {
-    const {title, subTitle, ads_id} = props;
+    const {
+        data,
+        handleDeleteNotification
+    } = props;
+
+    const {
+        id,
+        message,
+        subTitle = 'test',
+        ads_id,
+    } = data;
+
+    console.log(data);
 
     const classes = useStyles();
     return (
@@ -13,13 +29,13 @@ export const Notification: FC<NotificationDataType> = (props) => {
             <Paper elevation={0} className={classes.root}>
                 <div>
                     <Typography variant="h6" color="initial" noWrap>
-                        {title} {ads_id}
+                        {message} {ads_id}
                     </Typography>
                     <Typography variant="subtitle1" color="initial" noWrap>
                         {subTitle}
                     </Typography>
                 </div>
-                <IconButton>
+                <IconButton onClick={handleDeleteNotification(id)}>
                     <CloseIcon />
                 </IconButton>
             </Paper>

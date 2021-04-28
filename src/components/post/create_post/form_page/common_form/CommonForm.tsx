@@ -106,7 +106,7 @@ export const CommonForm: FC<DefaultParamsPropsType> = (props) => {
             } = auction;
 
             othersAuctionData.duration_id = duration.id;
-            othersAuctionData.offer_the_price = Number.parseInt(offer_the_price);
+            othersAuctionData.offer_the_price = offer_the_price;
 
             if (isAdvanceAuction) {
                 if (price_buy_now.isActive) {

@@ -1,41 +1,64 @@
 import React, {FC, useEffect, useState} from 'react';
 import {Notifications} from '@src/components/cabinet/cabinet_pages/notifications/Notifications';
 import {withAuthRedirect} from '@src/hoc/withAuthRedirect';
-import {useDispatch} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import {setErrorMsgAction} from '@src/redux/slices/errorSlice';
 import {userAPI} from '@src/api/api';
+import {RootState} from '@src/redux/rootReducer';
 
-export type NotificationDataType = {
-    title: string,
-    subTitle: string,
-    ads_id: number
-};
-
+type initialStateType = {
+    isFetch: boolean,
+    data: {
+        id: number,
+        ads_id: number,
+        status: string,
+        receiver_id: number,
+        type: string,
+        message: string,
+        go_to: number,
+        go_to_type: string,
+        updated_at: string,
+        created_at: string
+    }[]
+}
 
 const NotificationsContainer: FC = () => {
     const dispatch = useDispatch();
-
-    const initialState = [
-        {
-            id: null,
-            ads_id: null,
-            status: '',
-            receiver_id: null,
-            type: '',
-            message: '',
-            go_to: null,
-            updated_at: '',
-            created_at: ''
-        }
-    ];
+    const userInfo = useSelector((store:  RootState) => store.user.info )
+    const initialState: initialStateType = {
+        isFetch: false,
+        data: []
+    };
 
     const [notifications, setNotifications] = useState(initialState);
 
     const fetchAllNotification = async () => {
         try {
+            setNotifications({...notifications, isFetch: true});
             const {data} = await userAPI.getAllNotifications();
-            console.log(notifications);
-            setNotifications(data);
+            setNotifications({...notifications, data, isFetch: false});
+        } catch (e) {
+            dispatch(setErrorMsgAction(e.message));
+        }
+    };
+
+    const handleDeleteNotification = (id) => async () => {
+        try {
+            setNotifications({...notifications, isFetch: true});
+            await userAPI.deleteUserNotification(id);
+            const {data} = await userAPI.getAllNotifications();
+            setNotifications({...notifications, data, isFetch: false});
+        } catch (e) {
+            dispatch(setErrorMsgAction(e.message));
+        }
+    };
+
+    const handleDeleteAllNotification = async () => {
+        try {
+            setNotifications({...notifications, isFetch: true});
+            await userAPI.deleteAllNotification(userInfo.id);
+            const {data} = await userAPI.getAllNotifications();
+            setNotifications({...notifications, data, isFetch: false});
         } catch (e) {
             dispatch(setErrorMsgAction(e.message));
         }
@@ -46,7 +69,11 @@ const NotificationsContainer: FC = () => {
     }, []);
 
 
-    return <Notifications notifications={notifications} />;
+    return <Notifications
+        notifications={notifications}
+        handleDeleteNotification={handleDeleteNotification}
+        handleDeleteAllNotification={handleDeleteAllNotification}
+    />;
 };
 
 export default withAuthRedirect(NotificationsContainer);
