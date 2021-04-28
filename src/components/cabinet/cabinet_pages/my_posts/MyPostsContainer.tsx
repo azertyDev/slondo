@@ -131,7 +131,6 @@ const MyPostsContainer: FC = () => {
     const [modalContentIndex, setModalContentIndex] = useState(1);
     const [reasonId, setReasonId] = useState(null);
     const [postId, setPostId] = useState(null);
-    const [toArchive, setToArchive] = useState(false);
     const [errorMsg, setErrMsg] = useState('');
     const [showPhone, setShowPhone] = React.useState(false);
 
@@ -187,7 +186,7 @@ const MyPostsContainer: FC = () => {
     };
     const handleDeactivate = async () => {
         try {
-            await userAPI.deactivateById(postId, reasonId, toArchive);
+            await userAPI.deactivateById(postId, reasonId);
             setOpenModal(false);
             setModalContentIndex(1);
             if (tabIndex === 0) {

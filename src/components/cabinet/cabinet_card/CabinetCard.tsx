@@ -6,7 +6,8 @@ import {
     EyeIcon,
     LocationIcon,
     PhoneIcon,
-    SafeIcon, SettingsIcon,
+    SafeIcon,
+    SettingsIcon,
     SwapIcon
 } from '@src/components/elements/icons';
 import {BreadcrumbsComponent} from '@src/components/elements/breadcrumbs/Breadcrumbs';
@@ -20,7 +21,7 @@ import {useStyles} from './useStyles';
 
 type CabinetCardPropsType = {
     cardData: CardDataType,
-    handleModalOpen?: (id) => () => void
+    handleModalOpen?: (id: number, index?: number) => () => void
 }
 
 export const CabinetCard: FC<CabinetCardPropsType> = (props) => {
@@ -123,8 +124,8 @@ export const CabinetCard: FC<CabinetCardPropsType> = (props) => {
                                      <CloseIcon/>
                                  </div>
                                  : cardData.creator && cardData.ads_type === 'post' && (
-                                    <div className='settings' onClick={handleModalOpen(cardData.id)}>
-                                        <SettingsIcon/>
+                                    <div className='settings' onClick={handleModalOpen(cardData.id, 1)}>
+                                        <SettingsIcon />
                                     </div>
                                 )}
                             </div>
