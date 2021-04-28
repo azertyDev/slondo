@@ -10,70 +10,80 @@ import {Box, Grid, IconButton, List, ListItem, ListItemText, Typography} from '@
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import {useTranslation} from 'next-i18next';
 import {useStyles} from '@src/components/cabinet/cabinet_pages/archive/useStyles';
-import {InitialCabinetCardState, TabsDataType} from '@root/interfaces/Cabinet';
+import {InitialCabinetCardState, InitValuesType, TabsDataType} from '@root/interfaces/Cabinet';
 import {CabinetCard} from '@src/components/cabinet/cabinet_card/CabinetCard';
 import {SecondaryCabinetCard} from '@src/components/cabinet/components/SecondaryCabinetCard';
 import {ButtonComponent} from '@src/components/elements/button/Button';
 
-
-export type ArchivePostData = {
-    id: number;
-    title: string;
-    safe_deal: number;
-    price: string;
-    number_of_views?: number;
-    region: {
-        id: number;
-        name: string;
-    };
-    city: {
-        id: number;
-        name: string;
-    };
-    district?: {
-        id: number;
-        name: string;
-    };
-    currency: {
-        id: number;
-        name: string;
-    };
-    image: string;
-    category?: {
-        id: number;
-        name: string;
-        mark: string;
-    };
-    sub_category_id?: number;
-    ads_type: string;
-    created_at: string;
-    delivery: number;
-    exchange: number;
-    accepted?: boolean;
-    expected?: boolean;
-    denied?: boolean;
-    promote?: boolean;
-    raise?: boolean;
-    raiseInRape?: boolean;
-    isModerated?: boolean;
-    follow?: boolean;
-    favorite?: boolean;
-    completePurchase?: boolean;
-    creator: UserInfo
-};
-
 const ArchiveContainer: FC = () => {
     const dispatch = useDispatch();
-    const { t } = useTranslation('cabinet');
+    const {t} = useTranslation('cabinet');
     const classes = useStyles();
 
+    const initialValues: InitValuesType = {id: null, name: ''};
+    const initialUserInfo: UserInfo = {
+        id: null,
+        name: '',
+        surname: '',
+        phone: '',
+        avatar: '',
+        created_at: '',
+        available_days: '',
+        available_start_time: '',
+        available_end_time: ''
+    };
     const initialArchiveState: InitialCabinetCardState = {
         isFetch: false,
         myPosts: {
             total: 0,
-            data: []
+            data: [
+                {
+                    ads_type: '',
+                    adsable: {
+                        id: null,
+                        sub_category: initialValues,
+                        type: initialValues
+                    },
+                    auction: {
+                        id: null,
+                        winner: initialUserInfo,
+                        number_of_bets: null,
+                        is_accepted: null,
+                        winner_id: null,
+                        number_of_offers: null,
+                        offer: null
+                    },
+                    author: initialUserInfo,
+                    available_days: [{
+                        id: null,
+                        name: ''
+                    }],
+                    category: initialValues,
+                    city: initialValues,
+                    created_at: '',
+                    creator: false,
+                    currency: initialValues,
+                    delivery: null,
+                    description: '',
+                    district: initialValues,
+                    exchange: null,
+                    expiration_at: '',
+                    favorite: false,
+                    id: null,
+                    image: '',
+                    number_of_views: null,
+                    price: null,
+                    region: initialValues,
+                    safe_deal: null,
+                    status: '',
+                    subscribed: false,
+                    title: '',
+                    user_id: null
+                }
+            ]
         }
     };
+
     const [tabIndex, setTabIndex] = useState(0);
     const [archivePostsData, setArchivePostsData] = useState(initialArchiveState);
     const [archiveAucData, setArchiveAucData] = useState(initialArchiveState);
@@ -245,16 +255,18 @@ const ArchiveContainer: FC = () => {
                         cardData={data}
                         handleModalOpen={handleOpenModal}
                     />
-                    <Box mt={1}>
-                        <ButtonComponent
-                            className={classes.submitBtn}
-                            onClick={handleOpenModal(data.id, 2)}
-                        >
-                            <Typography variant='subtitle1'>
-                                Восстановить объявление
-                            </Typography>
-                        </ButtonComponent>
-                    </Box>
+                    {data.status !== 'sold' && (
+                        <Box mt={1}>
+                            <ButtonComponent
+                                className={classes.submitBtn}
+                                onClick={handleOpenModal(data.id, 2)}
+                            >
+                                <Typography variant='subtitle1'>
+                                    Восстановить объявление
+                                </Typography>
+                            </ButtonComponent>
+                        </Box>
+                    )}
                 </Grid>
             </Grid>
         </Box>

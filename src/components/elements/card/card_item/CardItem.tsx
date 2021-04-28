@@ -1,22 +1,26 @@
-import React, {FC, useState} from 'react';
+import React, {FC, useEffect, useState} from 'react';
 import Link from 'next/link';
 import {useTranslation} from 'react-i18next';
 import {Card, CardActionArea, CardContent, CardMedia, IconButton, Tooltip, Typography} from '@material-ui/core';
 import Skeleton from '@material-ui/lab/Skeleton';
-import {DeliveryIcon, FavoriteIcon, SafeIcon, SwapIcon} from '@src/components/elements/icons';
+import {DeliveryIcon, SafeIcon, SwapIcon} from '@src/components/elements/icons';
 import {InnerCardData} from '@root/interfaces/CardData';
 import {numberPrettier, transformToCyrillic} from '@src/helpers';
 import {userAPI} from '@src/api/api';
-import {useSelector} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import {RootState} from '@src/redux/rootReducer';
 import {useStyles} from './useStyles';
-
+import {setErrorMsgAction} from '@src/redux/slices/errorSlice';
+import {months} from '@src/common_data/common';
+import FavoriteIcon from '@material-ui/icons/Favorite';
+import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
 
 type CardItemProps = {
     isFetch: boolean;
 } & InnerCardData;
 
 export const CardItem: FC<CardItemProps> = (props) => {
+    const dispatch = useDispatch();
     const {
         id,
         isFetch,
@@ -30,7 +34,9 @@ export const CardItem: FC<CardItemProps> = (props) => {
         currency,
         ads_type,
         region,
-        city
+        city,
+        creator,
+        favorite
     } = props;
 
     const isFavorite = true;
@@ -40,40 +46,36 @@ export const CardItem: FC<CardItemProps> = (props) => {
 
     const {isAuth} = useSelector((store: RootState) => store.user);
 
-    const [liked, setLiked] = useState(false);
+    const [liked, setLiked] = useState(favorite);
 
     const date = new Date(created_at);
 
-    const months = [
-        'января',
-        'февраля',
-        'марта',
-        'апреля',
-        'мая',
-        'июня',
-        'июля',
-        'августа',
-        'сентября',
-        'октября',
-        'ноября',
-        'декабря'
-    ];
-
     const formatted_date = `${date.getDate()} ${months[date.getMonth()]} ${date.getHours() + ':' + date.getMinutes()}`;
 
-    const handleFavorite = () => {
-        setLiked(!liked);
-        userAPI.favoriteAds(id);
+    const handleFavorite = async () => {
+        try {
+            await userAPI.favoriteAds(id);
+            setLiked(!liked);
+        } catch (e) {
+            dispatch(setErrorMsgAction(e.message));
+        }
     };
+
+    useEffect(() => {
+        setLiked(favorite)
+    }, [favorite]);
 
     const classes = useStyles({ads_type, isFavorite});
     return (
         <div className={classes.root}>
-            {isAuth && (
+            {isAuth && !creator && (
                 <IconButton
                     className="favorite-btn" onClick={handleFavorite}
                 >
-                    <FavoriteIcon />
+                    {liked
+                        ? <FavoriteIcon />
+                        : <FavoriteBorderIcon />
+                    }
                 </IconButton>
             )}
             <Link href={`/obyavlenie/${translatedTitle}-${id}`}>

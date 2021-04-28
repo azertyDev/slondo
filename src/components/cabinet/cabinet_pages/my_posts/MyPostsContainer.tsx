@@ -5,19 +5,7 @@ import {withAuthRedirect} from '@src/hoc/withAuthRedirect';
 import {userAPI} from '@src/api/api';
 import {setErrorMsgAction} from '@src/redux/slices/errorSlice';
 import {useDispatch} from 'react-redux';
-import {
-    Avatar,
-    Box,
-    Checkbox,
-    FormControlLabel,
-    Grid,
-    IconButton,
-    List,
-    ListItem,
-    ListItemText,
-    TextField,
-    Typography
-} from '@material-ui/core';
+import {Avatar, Box, Grid, IconButton, List, ListItem, ListItemText, TextField, Typography} from '@material-ui/core';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import {useTranslation} from 'next-i18next';
 import {ButtonComponent} from '@src/components/elements/button/Button';
@@ -169,9 +157,6 @@ const MyPostsContainer: FC = () => {
     const handleTabChange = (event, newValue) => {
         setTabIndex(newValue);
     };
-    const handleCheckbox = () => {
-        setToArchive(!toArchive);
-    };
     const handleTextField = async ({target}) => {
         const phone = target.value;
         setUserPhone(phone);
@@ -204,6 +189,7 @@ const MyPostsContainer: FC = () => {
         try {
             await userAPI.deactivateById(postId, reasonId, toArchive);
             setOpenModal(false);
+            setModalContentIndex(1);
             if (tabIndex === 0) {
                 await fetchPostData(0);
             } else {
@@ -309,30 +295,6 @@ const MyPostsContainer: FC = () => {
                                  </Typography>
                              </>}
                         </Box>
-                    </Box>
-                    <Box
-                        display='flex'
-                        justifyContent='space-between'
-                        mt={1}
-                        className={classes.toArchive}
-                        width='100%'
-                    >
-                        <FormControlLabel
-                            control={
-                                <Checkbox
-                                    onChange={handleCheckbox}
-                                    checked={toArchive}
-                                />}
-                            label="Добавить объявление в архив"
-                        />
-                        <ButtonComponent>
-                            <Typography
-                                variant="subtitle1"
-                                color="initial"
-                            >
-                                ?
-                            </Typography>
-                        </ButtonComponent>
                     </Box>
                     <Box
                         mt={1}

@@ -154,7 +154,7 @@ export const userAPI = {
             });
     },
     getCards: (itemsPerPage: number, page: number, type: string): Promise<{ data: InnerCardData[]; total: number; }> => {
-        return instance.get(`post/all?itemsPerPage=${itemsPerPage}&page=${page}&type=${type}`)
+        return instance.get(`post/all?itemsPerPage=${itemsPerPage}&page=${page}&type=${type}`, setTokenToHeader())
             .then((res) => res.data)
             .catch((err) => {
                 throw err;
