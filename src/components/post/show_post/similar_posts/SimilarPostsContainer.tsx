@@ -14,7 +14,9 @@ const initCard: InnerCardData = {
         id: null,
         name: ''
     },
-    creator: {
+    creator: false,
+    favorite: false,
+    author: {
         id: null,
         name: '',
         surname: '',

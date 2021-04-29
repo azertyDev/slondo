@@ -36,6 +36,7 @@ export const ShowPostContainer: FC = () => {
             expiration_at: null,
             number_of_views: null,
             sub_category_id: null,
+            favorite: false,
             creator: false,
             status: '',
             subscribed: null,
@@ -50,12 +51,11 @@ export const ShowPostContainer: FC = () => {
                 avatar: '',
                 available_days: ''
             },
-            images: [{
-                id: null,
-                url: {
-                    default: ''
-                }
-            }],
+            observer: {
+                number_of_views: 0,
+                number_of_favorites: 0
+            },
+            images: [],
             description: '',
             region: initValues,
             city: initValues,

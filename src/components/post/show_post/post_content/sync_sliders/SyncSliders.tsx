@@ -1,19 +1,17 @@
-import React, {FC} from 'react';
-import {Hidden, IconButton, Typography, useMediaQuery, useTheme} from '@material-ui/core';
-import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
+import {FC} from 'react';
+import {Box, Hidden, IconButton, Typography, useMediaQuery, useTheme} from '@material-ui/core';
+import {KeyboardBackspace, FavoriteBorder} from '@material-ui/icons';
 import {CustomSlider} from '@src/components/elements/custom_slider/CustomSlider';
-import {SlidersRefType} from '../../ShowPostContainer';
-import {useStyles} from './useStyles';
+import {SlidersRefType} from '../PostContent';
 import CustomTooltip from '@src/components/elements/custom_tooltip/CustomTooltip';
-import KeyboardBackspaceIcon from '@material-ui/icons/KeyboardBackspace';
-import Box from '@material-ui/core/Box';
+import {useStyles} from './useStyles';
 
 
 type SyncSlidersProps = {
     handleOpenModal: () => void;
     imgs: {
         alt: string;
-        url: {default: string};
+        url: { default: string };
     }[];
     slidersRefs: SlidersRefType;
     handleFavorite: () => void;
@@ -22,9 +20,8 @@ type SyncSlidersProps = {
 };
 
 export const SyncSliders: FC<SyncSlidersProps> = (props) => {
-
     const {
-        imgs,
+        imgs = [],
         handleOpenModal,
         slidersRefs,
         handleFavorite,
@@ -38,15 +35,14 @@ export const SyncSliders: FC<SyncSlidersProps> = (props) => {
         slider3
     } = slidersRefs;
 
-    const imgsCount = !!imgs?.length ? imgs?.length : 1;
+    const imgsCount = !!imgs.length ? imgs.length : 1;
 
     const copyUrl = () => {
         const copiedUrl = window.location.href;
         navigator.clipboard.writeText(copiedUrl);
     };
 
-    const theme = useTheme();
-    const isMdDown = useMediaQuery(theme.breakpoints.down('md'));
+    const isMdDown = useMediaQuery(useTheme().breakpoints.down('md'));
 
     const classes = useStyles({isFavorite});
     return (
@@ -60,7 +56,7 @@ export const SyncSliders: FC<SyncSlidersProps> = (props) => {
                     dots={isMdDown}
                     asNavFor={isMdDown ? null : slider2.current}
                 >
-                    {imgs?.map((img, i) =>
+                    {imgs.map((img, i) =>
                         <img
                             key={i}
                             alt={img.alt}
@@ -72,13 +68,13 @@ export const SyncSliders: FC<SyncSlidersProps> = (props) => {
                 <div className="icon-buttons">
                     <Hidden lgUp>
                         <IconButton className="backspace-btn">
-                            <KeyboardBackspaceIcon />
+                            <KeyboardBackspace/>
                         </IconButton>
                     </Hidden>
                     <div className='share-favo-btns'>
                         <Box display='flex' alignItems='center' flexDirection='column'>
                             <IconButton className="favorite-btn" onClick={handleFavorite}>
-                                <FavoriteBorderIcon />
+                                <FavoriteBorder/>
                             </IconButton>
                             <div className='favorite-count'>
                                 <Typography variant='subtitle1'>
@@ -87,7 +83,7 @@ export const SyncSliders: FC<SyncSlidersProps> = (props) => {
                             </div>
                         </Box>
                         <IconButton className="share-btn" onClick={copyUrl}>
-                            <CustomTooltip title={'Скопировано!'} arrow />
+                            <CustomTooltip title={'Скопировано!'} arrow/>
                         </IconButton>
                     </div>
                 </div>
@@ -101,7 +97,7 @@ export const SyncSliders: FC<SyncSlidersProps> = (props) => {
                         focusOnSelect={true}
                         arrows={false}
                     >
-                        {imgs?.map(({url, alt}, i) =>
+                        {imgs.map(({url, alt}, i) =>
                             <img key={i} alt={alt} src={url.default}/>
                         )}
                     </CustomSlider>

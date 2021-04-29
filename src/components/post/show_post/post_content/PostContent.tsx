@@ -29,6 +29,9 @@ import {ButtonComponent} from '@src/components/elements/button/Button';
 import {RenewalIcon} from '@src/components/elements/icons';
 import {months} from '@src/common_data/common';
 import {AuctionInfo} from '@src/components/post/show_post/owner_auction_info/auction_info/AuctionInfo';
+import {userAPI} from '@src/api/api';
+import {setErrorMsgAction} from '@root/src/redux/slices/errorSlice';
+import {useDispatch} from 'react-redux';
 import {useStyles} from './useStyles';
 
 
@@ -49,6 +52,7 @@ export const PostContent: FC<PostContentTypes> = (props) => {
         data
     } = props;
 
+    const dispatch = useDispatch();
     const isMdDown = useMediaQuery(useTheme().breakpoints.down('md'));
     const isExAuc = data.ads_type.mark === 'exauc';
     const isAuction = data.ads_type.mark === 'auc' || isExAuc;
@@ -62,6 +66,8 @@ export const PostContent: FC<PostContentTypes> = (props) => {
         slider4: useRef()
     };
 
+    const [favorite, setFavorite] = useState(data.favorite);
+    const [favCount, setFavCount] = useState(0);
     const [descHeight, setDescHeight] = useState(0);
     const [slidersRefs, setSlidersRefs] = useState(initSlidersRefs);
     const [modalsState, setModalsState] = useState({openSliderModal: false, openComplaintModal: false});
@@ -71,11 +77,19 @@ export const PostContent: FC<PostContentTypes> = (props) => {
     const formatted_date = `${date.getDate()} ${months[date.getMonth()]} ${date.getFullYear()}`;
 
     const handleShowSliderModal = value => () => setModalsState({...modalsState, openSliderModal: value});
-    const handleComplaintModal = (value) => () => {
-        setModalsState({...modalsState, openComplaintModal: value});
+    const handleComplaintModal = value => () => setModalsState({...modalsState, openComplaintModal: value});
+    const handleFavorite = () => {
+        try {
+            const count = favorite ? favCount - 1 : favCount + 1;
+            setFavorite(!favorite);
+            setFavCount(count);
+            userAPI.favoriteAds(data.id);
+        } catch (e) {
+            dispatch(setErrorMsgAction(e.message));
+        }
     };
 
-    const parameterItems = model ? Object.keys(model).reduce((items, key, i) => {
+    const parameterItems = Object.keys(model ?? {}).reduce((items, key, i) => {
         if (Array.isArray(model[key]) && model[key].length !== 0) {
             const params = (
                 <li>
@@ -121,11 +135,16 @@ export const PostContent: FC<PostContentTypes> = (props) => {
             );
         }
         return items;
-    }, []) : [];
+    }, []);
 
     useEffect(() => {
         setSlidersRefs(initSlidersRefs);
     }, []);
+
+    useEffect(() => {
+        setFavorite(data.favorite);
+        setFavCount(data.observer.number_of_favorites);
+    }, [data]);
 
     useEffect(() => {
         const height = document.getElementById('post-description').clientHeight;
@@ -192,8 +211,11 @@ export const PostContent: FC<PostContentTypes> = (props) => {
             </Hidden>
             <div className="slider-wrapper">
                 <SyncSliders
-                    slidersRefs={slidersRefs}
                     imgs={data.images}
+                    isFavorite={favorite}
+                    slidersRefs={slidersRefs}
+                    favoriteCount={favCount}
+                    handleFavorite={handleFavorite}
                     handleOpenModal={handleShowSliderModal(true)}
                 />
                 <Hidden lgUp>

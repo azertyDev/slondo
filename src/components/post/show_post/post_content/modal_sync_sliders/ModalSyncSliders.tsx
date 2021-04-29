@@ -1,10 +1,10 @@
-import React, {FC, useState} from 'react';
+import {FC, useState} from 'react';
 import InnerImageZoom from 'react-inner-image-zoom';
 import {CustomSlider} from '@src/components/elements/custom_slider/CustomSlider';
 import {Container, IconButton, Modal, Typography, useMediaQuery, useTheme} from '@material-ui/core';
 import {ButtonComponent} from '@src/components/elements/button/Button';
 import {CloseIcon} from '@root/src/components/elements/icons';
-import {SlidersRefType} from '../../ShowPostContainer';
+import {SlidersRefType} from '../PostContent';
 import {useStyles} from './useStyles';
 
 

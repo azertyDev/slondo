@@ -29,6 +29,8 @@ export const AuctionInfo: FC<AuctionInfoPropsType> = (props) => {
     const dispatch = useDispatch();
     const date = new Date(data.expiration_at).getTime();
     const isExAuc = data.ads_type.mark === 'exauc';
+    const hasBuyNow = !!data.auction.price_buy_now;
+    const hasOfferPrice = !!data.auction.offer_the_price;
 
     const initAuctionsBets = {
         isFetch: false,
@@ -226,7 +228,7 @@ export const AuctionInfo: FC<AuctionInfoPropsType> = (props) => {
                             handleBet={handleBet}
                             auctionsBets={auctionsBets.list}
                         />
-                        {!!data.auction.price_buy_now && (
+                        {hasBuyNow && (
                             <div>
                                 <Hidden mdDown>
                                     <div className="buy-now">
@@ -275,54 +277,61 @@ export const AuctionInfo: FC<AuctionInfoPropsType> = (props) => {
                                 </CustomModal>
                             </div>
                         )}
-                        {!!data.auction.offer_the_price && (
-                            <div>
-                                <Hidden lgUp>
-                                    <Grid container spacing={1}>
-                                        <Grid item xs={isExAuc ? 6 : 12} className='suggest_price'>
+                        <div>
+                            <Hidden lgUp>
+                                <Grid container spacing={1}>
+                                    {hasOfferPrice && (
+                                        <Grid
+                                            item xs={isExAuc && hasBuyNow ? 6 : 12}
+                                            className='suggest_price'
+                                        >
                                             <ButtonComponent onClick={handleModalOfferPrice(true)}>
                                                 <Typography variant="subtitle1" color="initial">
                                                     Предложить цену
                                                 </Typography>
                                             </ButtonComponent>
                                         </Grid>
-                                        {isExAuc && (
-                                            <Grid item xs={6} className="btn-buy-now">
-                                                <ButtonComponent>
-                                                    <Typography variant='subtitle2'>Купить сейчас</Typography>
-                                                </ButtonComponent>
-                                            </Grid>
-                                        )}
-                                    </Grid>
-                                </Hidden>
-                                <div className='suggest_price'>
-                                    <ButtonComponent onClick={handleModalOfferPrice(true)}>
-                                        <Typography variant="subtitle1" color="initial">
-                                            Предложить цену
-                                        </Typography>
-                                    </ButtonComponent>
-                                </div>
-                                <CustomModal handleModalClose={handleModalOfferPrice(false)} openModal={openOfferPrice}>
-                                    Предложить цену
-                                    <Typography variant='subtitle1'>
-                                        Предложенная стоимость не может быть <br/>
-                                        меньше стартовой цены или сделанной ставки
-                                    </Typography>
-                                    <div style={{display: 'flex', flexDirection: 'column'}}>
-                                        <TextField
-                                            id="outlined-basic"
-                                            label="Outlined"
-                                            variant="outlined"
-                                            placeholder='Впишите сумму'
-                                            onChange={handleTextField}
-                                        />
-                                        <ButtonComponent onClick={handleOfferPrice}>
-                                            Предложить
+                                    )}
+                                    {isExAuc && hasBuyNow && (
+                                        <Grid item xs={6} className="btn-buy-now">
+                                            <ButtonComponent>
+                                                <Typography variant='subtitle2'>Купить сейчас</Typography>
+                                            </ButtonComponent>
+                                        </Grid>
+                                    )}
+                                </Grid>
+                            </Hidden>
+                            {hasOfferPrice && (
+                                <Hidden mdDown>
+                                    <div className='suggest_price'>
+                                        <ButtonComponent onClick={handleModalOfferPrice(true)}>
+                                            <Typography variant="subtitle1" color="initial">
+                                                Предложить цену
+                                            </Typography>
                                         </ButtonComponent>
                                     </div>
-                                </CustomModal>
-                            </div>
-                        )}
+                                </Hidden>
+                            )}
+                            <CustomModal handleModalClose={handleModalOfferPrice(false)} openModal={openOfferPrice}>
+                                Предложить цену
+                                <Typography variant='subtitle1'>
+                                    Предложенная стоимость не может быть <br/>
+                                    меньше стартовой цены или сделанной ставки
+                                </Typography>
+                                <div style={{display: 'flex', flexDirection: 'column'}}>
+                                    <TextField
+                                        id="outlined-basic"
+                                        label="Outlined"
+                                        variant="outlined"
+                                        placeholder='Впишите сумму'
+                                        onChange={handleTextField}
+                                    />
+                                    <ButtonComponent onClick={handleOfferPrice}>
+                                        Предложить
+                                    </ButtonComponent>
+                                </div>
+                            </CustomModal>
+                        </div>
                     </>
                 )}
             </div>
