@@ -1,4 +1,6 @@
-import React, {FC, useState} from 'react';
+import {FC, useEffect, useState} from 'react';
+import Link from 'next/link';
+import {WithT} from 'i18next';
 import {Grid, Hidden, TextField, Typography} from '@material-ui/core';
 import {LockIcon, RefreshIcon} from '@src/components/elements/icons';
 import {AuctionTimer} from './AuctionTimer';
@@ -6,62 +8,138 @@ import {numberPrettier} from '@root/src/helpers';
 import {AuctionForm} from './AuctionForm/AuctionForm';
 import {ButtonComponent} from '@src/components/elements/button/Button';
 import {CustomModal} from '@src/components/elements/custom_modal/CustomModal';
-import Link from 'next/link';
-import {WithT} from 'i18next';
+import {userAPI} from '@src/api/api';
+import {setErrorMsgAction} from '@src/redux/slices/errorSlice';
+import {useDispatch} from 'react-redux';
+import {useRouter} from 'next/router';
 import {useStyles} from './useStyles';
 
 
 type AuctionInfoPropsType = {
     data,
-    openModal,
-    auctionsBetsList,
-    handleOpenModal,
-    handleCloseModal,
-    handleBuyNow,
-    handleBet,
-    handleScroll,
-    handleRefresh,
-    handleSuggestPrice,
-    handleTextField
 } & WithT;
 
 export const AuctionInfo: FC<AuctionInfoPropsType> = (props) => {
     const {
         t,
-        data,
-        auctionsBetsList,
-        openModal,
-        handleOpenModal,
-        handleCloseModal,
-        handleBuyNow,
-        handleBet,
-        handleScroll,
-        handleRefresh,
-        handleSuggestPrice,
-        handleTextField
+        data
     } = props;
 
-    const [showAll, setShowAll] = useState(false);
+    const router = useRouter();
+    const dispatch = useDispatch();
     const date = new Date(data.expiration_at).getTime();
     const isExAuc = data.ads_type.mark === 'exauc';
+
+    const initAuctionsBets = {
+        isFetch: false,
+        list: []
+    };
+
+    const [showAll, setShowAll] = useState(false);
+    const [openBuyNow, setOpenBuyNow] = useState(false);
+    const [openOfferPrice, setOpenOfferPrice] = useState(false);
+    const [offerPrice, setOfferPrice] = useState({isFetch: false, price: null});
+    const [page, setPage] = useState(1);
+    const [auctionsBets, setAuctionBets] = useState(initAuctionsBets);
+
+    const handleModalBuyNow = (value) => () => {
+        setOpenBuyNow(value);
+    };
+    const handleModalOfferPrice = (value) => () => {
+        setOpenOfferPrice(value);
+    };
+    const handleBuyNow = async () => {
+        try {
+            await userAPI.buyNow(data.auction.id, data.id);
+            router.push('/');
+        } catch ({response}) {
+            dispatch(
+                setErrorMsgAction(t(`errors:${response.data.message}`))
+            );
+        }
+    };
+    const handleBet = async (bet) => {
+        try {
+            await userAPI.betAuction(bet, data.auction.id);
+            const bets = await userAPI.getAuctionBets(data.auction.id, 1);
+            setAuctionBets({...auctionsBets, list: bets.data});
+        } catch (e) {
+            dispatch(
+                setErrorMsgAction(t(`errors:${e.response.data.message}`))
+            );
+        }
+    };
+    const handleScroll = (e) => {
+        const isScrollBottom = e.target.scrollHeight - e.target.scrollTop === e.target.clientHeight;
+        if (isScrollBottom) {
+            setPage(prev => prev + 1);
+        }
+    };
+    const handleOfferPrice = async () => {
+        try {
+            setOfferPrice({...offerPrice, isFetch: true});
+            await userAPI.offerThePrice(data.auction.id, offerPrice.price);
+            setOfferPrice({price: null, isFetch: false});
+            setOpenOfferPrice(false);
+        } catch (e) {
+            dispatch(setErrorMsgAction(e.message));
+        }
+    };
+    const handleTextField = ({target}) => {
+        setOfferPrice({...offerPrice, price: target.value});
+    };
+    const handleRefreshBets = async () => {
+        try {
+            setAuctionBets({
+                ...auctionsBets,
+                isFetch: true
+            });
+            const bets = await userAPI.getAuctionBets(data.auction.id, 1);
+            setAuctionBets({
+                ...auctionsBets,
+                isFetch: false,
+                list: bets.data
+            });
+        } catch (e) {
+            dispatch(setErrorMsgAction(e.message));
+        }
+    };
+    const auctionBetsPagination = async () => {
+        try {
+            setAuctionBets({...auctionsBets, isFetch: true});
+            const bets = await userAPI.getAuctionBets(data.auction.id, page);
+            setAuctionBets({
+                ...auctionsBets,
+                isFetch: false,
+                list: [...auctionsBets.list, ...bets.data]
+            });
+        } catch (e) {
+            dispatch(setErrorMsgAction(e.message));
+        }
+    };
+
+    useEffect(() => {
+        auctionBetsPagination();
+    }, [page]);
 
     const classes = useStyles();
     return (
         <div className={classes.root}>
             <div className="lot-info">
-                {data.auction && data.auction.reserve_price > auctionsBetsList[0]?.bet &&
-                <div className="reserve-price">
-                    <LockIcon/>
-                    <div>
-                        <Typography variant="subtitle2" color="initial">
-                            Резервная цена:
-                        </Typography>
-                        <Typography variant="h6" color="initial">
-                            {numberPrettier(data.auction.reserve_price)}{' '}
-                            {data.currency.name}
-                        </Typography>
+                {data.auction && data.auction.reserve_price > auctionsBets[0]?.bet && (
+                    <div className="reserve-price">
+                        <LockIcon/>
+                        <div>
+                            <Typography variant="subtitle2" color="initial">
+                                Резервная цена:
+                            </Typography>
+                            <Typography variant="h6" color="initial">
+                                {numberPrettier(data.auction.reserve_price)}{' '}
+                                {data.currency.name}
+                            </Typography>
+                        </div>
                     </div>
-                </div>}
+                )}
                 <div className="lot-timer">
                     {!!date && <AuctionTimer date={date}/>}
                 </div>
@@ -73,7 +151,7 @@ export const AuctionInfo: FC<AuctionInfoPropsType> = (props) => {
                         <div>
                             Текущие ставки
                         </div>
-                        <div onClick={handleRefresh} style={{cursor: 'pointer'}}>
+                        <div onClick={handleRefreshBets} style={{cursor: 'pointer'}}>
                             <RefreshIcon/>
                         </div>
                     </Typography>
@@ -83,13 +161,13 @@ export const AuctionInfo: FC<AuctionInfoPropsType> = (props) => {
                         onScroll={handleScroll}
                     >
                         <ul>
-                            {auctionsBetsList.map((item) => (
+                            {auctionsBets.list.map((item) => (
                                 <li key={item.id}>
                                     <div>
                                         <div className="participant-name">
                                             <Typography variant="subtitle1" noWrap>
-                                                {item.user?.phone} {item.number_of_bets &&
-                                            <span>({item.number_of_bets})</span>}
+                                                {item.user.name}
+                                                {item.number_of_bets && <span>({item.number_of_bets})</span>}
                                             </Typography>
                                         </div>
                                         <div className="dateAndTime">
@@ -118,8 +196,8 @@ export const AuctionInfo: FC<AuctionInfoPropsType> = (props) => {
                                             {numberPrettier(item.bet)}
                                         </Typography>
                                         <Typography
-                                            variant="subtitle1"
                                             noWrap
+                                            variant="subtitle1"
                                             className="per-bet"
                                         >
                                             {item.outbid === 0
@@ -146,7 +224,7 @@ export const AuctionInfo: FC<AuctionInfoPropsType> = (props) => {
                         <AuctionForm
                             t={t}
                             handleBet={handleBet}
-                            auctionsBetsList={auctionsBetsList}
+                            auctionsBets={auctionsBets.list}
                         />
                         {!!data.auction.price_buy_now && (
                             <div>
@@ -155,14 +233,14 @@ export const AuctionInfo: FC<AuctionInfoPropsType> = (props) => {
                                         <Typography variant="subtitle1" color="initial">
                                             {numberPrettier(data.auction.price_buy_now)} сум
                                         </Typography>
-                                        <ButtonComponent onClick={handleOpenModal}>
+                                        <ButtonComponent onClick={handleModalBuyNow(true)}>
                                             <Typography variant="subtitle1" color="initial">
                                                 Купить сейчас
                                             </Typography>
                                         </ButtonComponent>
                                     </div>
                                 </Hidden>
-                                <CustomModal handleModalClose={handleCloseModal} openModal={openModal}>
+                                <CustomModal handleModalClose={handleModalBuyNow(false)} openModal={openBuyNow}>
                                     <>
                                         <Typography className="title" variant="h6">
                                             Купить сейчас
@@ -175,10 +253,10 @@ export const AuctionInfo: FC<AuctionInfoPropsType> = (props) => {
                                             <span className='buy-now-price'>
                                                 {numberPrettier(data.auction.price_buy_now)}
                                             </span>
-                                            сум и соглашаетесь с&nbsp;
+                                            сум и соглашаетесь с &nbsp;
                                             <span className='condition'>
                                                 <Link href="#">
-                                                    <a>условиями</a>
+                                                    <a>условиями&nbsp;</a>
                                                 </Link>
                                             </span>
                                             сайта
@@ -202,7 +280,7 @@ export const AuctionInfo: FC<AuctionInfoPropsType> = (props) => {
                                 <Hidden lgUp>
                                     <Grid container spacing={1}>
                                         <Grid item xs={isExAuc ? 6 : 12} className='suggest_price'>
-                                            <ButtonComponent onClick={handleOpenModal}>
+                                            <ButtonComponent onClick={handleModalOfferPrice(true)}>
                                                 <Typography variant="subtitle1" color="initial">
                                                     Предложить цену
                                                 </Typography>
@@ -217,7 +295,14 @@ export const AuctionInfo: FC<AuctionInfoPropsType> = (props) => {
                                         )}
                                     </Grid>
                                 </Hidden>
-                                <CustomModal handleModalClose={handleCloseModal} openModal={openModal}>
+                                <div className='suggest_price'>
+                                    <ButtonComponent onClick={handleModalOfferPrice(true)}>
+                                        <Typography variant="subtitle1" color="initial">
+                                            Предложить цену
+                                        </Typography>
+                                    </ButtonComponent>
+                                </div>
+                                <CustomModal handleModalClose={handleModalOfferPrice(false)} openModal={openOfferPrice}>
                                     Предложить цену
                                     <Typography variant='subtitle1'>
                                         Предложенная стоимость не может быть <br/>
@@ -231,7 +316,7 @@ export const AuctionInfo: FC<AuctionInfoPropsType> = (props) => {
                                             placeholder='Впишите сумму'
                                             onChange={handleTextField}
                                         />
-                                        <ButtonComponent onClick={handleSuggestPrice}>
+                                        <ButtonComponent onClick={handleOfferPrice}>
                                             Предложить
                                         </ButtonComponent>
                                     </div>

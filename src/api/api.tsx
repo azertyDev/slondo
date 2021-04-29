@@ -208,10 +208,17 @@ export const userAPI = {
                 throw err;
             });
     },
-    buyAuction: (auction_id: string, ads_id: string): Promise<AuctionsDataTypes> => {
+    getPostAuthorPhones: (postId: string): Promise<any> => {
+        return instance.get(`getPhone/${postId}`)
+            .then(res => res.data)
+            .catch(err => {
+                throw err;
+            });
+    },
+    buyNow: (auctionId: string, postId: string): Promise<AuctionsDataTypes> => {
         const form = new FormData();
-        form.set('auction_id', auction_id);
-        form.set('ads_id', ads_id);
+        form.set('auction_id', auctionId);
+        form.set('ads_id', postId);
         return instance.post(`regular/auction/buyNow`, form, setTokenToHeader())
             .then(res => res.data)
             .catch(err => {

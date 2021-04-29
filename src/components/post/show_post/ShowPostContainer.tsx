@@ -1,40 +1,28 @@
-import React, {FC, MutableRefObject, useEffect, useRef, useState} from 'react';
+import {FC, useEffect, useState} from 'react';
+import Head from 'next/head';
 import {useRouter} from 'next/router';
-import {i18n, useTranslation} from 'next-i18next';
+import {useTranslation} from 'next-i18next';
 import {userAPI} from '@src/api/api';
 import {setErrorMsgAction} from '@src/redux/slices/errorSlice';
 import {useDispatch} from 'react-redux';
-import {Container, Grid, Hidden, Typography, useMediaQuery, useTheme} from '@material-ui/core';
+import {Container, Grid, Hidden, useMediaQuery, useTheme} from '@material-ui/core';
 import {PostContent} from '@src/components/post/show_post/post_content/PostContent';
 import {Banner} from '@src/components/elements/banner/Banner';
-import {AuctionInfo} from '@src/components/post/show_post/owner_auction_info/auction_info/AuctionInfo';
-import {OwnerInfo} from '@src/components/post/show_post/owner_auction_info/owner_info/OwnerInfo';
-import Head from 'next/head';
 import {Header} from '@src/components/header/Header';
 import {Footer} from '@src/components/footer/Footer';
 import {ErrorModal} from '@src/components/error_modal/ErrorModal';
-import {numberPrettier} from '@src/helpers';
+import {OwnerAuctionInfo} from '@src/components/post/show_post/owner_auction_info/OwnerAuctionInfo';
 import {useStyles} from './useStyles';
 
 
-export type SlidersRefType = {
-    slider1?: MutableRefObject<any>;
-    slider2?: MutableRefObject<any>;
-    slider3?: MutableRefObject<any>;
-    slider4?: MutableRefObject<any>;
-};
-
 export const ShowPostContainer: FC = () => {
-    const router = useRouter();
     const dispatch = useDispatch();
-    const {t} = useTranslation(['post']);
+    const {t} = useTranslation('post');
 
-    const lang = i18n.language;
     const url = useRouter().query.url as string;
     const [postId] = url.split('-').splice(-1);
 
     const initValues = {id: null, name: ''};
-
     const initialPostData = {
         isFetch: false,
         error: null,
@@ -48,10 +36,11 @@ export const ShowPostContainer: FC = () => {
             expiration_at: null,
             number_of_views: null,
             sub_category_id: null,
-            creator: null,
+            creator: false,
             status: '',
             subscribed: null,
             safe_deal: null,
+            model: null,
             author: {
                 id: null,
                 name: '',
@@ -103,107 +92,12 @@ export const ShowPostContainer: FC = () => {
         }
     };
 
-    const initialAuctionBetsList = {
-        isFetch: false,
-        list: []
-    };
-
-    const initSlidersRefs: SlidersRefType = {
-        slider1: useRef(),
-        slider2: useRef(),
-        slider3: useRef(),
-        slider4: useRef()
-    };
-
     const [postData, setPostData] = useState(initialPostData);
-    const [parameters, setParameters] = useState({});
-    const [slidersRefs, setSlidersRefs] = useState(initSlidersRefs);
-    const [descHeight, setDescHeight] = useState(0);
-    const [page, setPage] = useState(1);
-    const [openModal, setOpenModal] = useState(false);
-    const [auctionsBetsList, setAuctionBetsList] = useState(initialAuctionBetsList);
-    const [lastPage, setLastPage] = useState(null);
-    const [offerPrice, setOfferPrice] = useState({isFetch: false, price: null});
-
     const {data} = postData;
 
-    const isAuction = data.ads_type.mark === 'auc' || data.ads_type.mark === 'exauc';
-
-    const handleOpenModal = () => {
-        setOpenModal(true);
-    };
-    const handleCloseModal = () => {
-        setOpenModal(false);
-    };
-    const handleBuyNow = () => {
-        userAPI.buyAuction(data.auction.id, data.id)
-            .then(_ => router.push('/'));
-    };
-    const handleBet = async (bet) => {
-        try {
-            await userAPI.betAuction(bet, data.auction.id);
-            const bets = await userAPI.getAuctionBets(data.auction.id, 1);
-            setLastPage(bets.last_page);
-            setAuctionBetsList({...auctionsBetsList, list: bets.data});
-        } catch (e) {
-            dispatch(
-                setErrorMsgAction(t(`errors:${e.response.data.message}`))
-            );
-        }
-    };
-    const handleScroll = (e) => {
-        const bottom = e.target.scrollHeight - e.target.scrollTop === e.target.clientHeight;
-        if (page !== lastPage && bottom) {
-            setPage(prev => prev + 1);
-        }
-    };
-    const handleSuggestPrice = async () => {
-        try {
-            setOfferPrice({...offerPrice, isFetch: true});
-            await userAPI.offerThePrice(data.auction.id, offerPrice.price);
-            setOfferPrice({price: null, isFetch: false});
-            setOpenModal(false);
-        } catch (e) {
-            dispatch(setErrorMsgAction(e.message));
-        }
-    };
-    const handleTextField = ({target}) => {
-        setOfferPrice({...offerPrice, price: target.value});
-    };
-    const refreshAucBets = async () => {
-        try {
-            setAuctionBetsList({
-                ...auctionsBetsList,
-                isFetch: true
-            });
-            const bets = await userAPI.getAuctionBets(data.auction.id, 1);
-            setAuctionBetsList({
-                ...auctionsBetsList,
-                isFetch: false,
-                list: bets.data
-            });
-        } catch (e) {
-            dispatch(setErrorMsgAction(e.message));
-        }
-    };
-    const auctionBetsPagination = async () => {
-        try {
-            setAuctionBetsList({...auctionsBetsList, isFetch: true});
-            const bets = await userAPI.getAuctionBets(data.auction.id, page);
-            setAuctionBetsList({
-                ...auctionsBetsList,
-                isFetch: false,
-                list: [...auctionsBetsList.list, ...bets.data]
-            });
-            setLastPage(bets.last_page);
-        } catch (e) {
-            dispatch(setErrorMsgAction(e.message));
-        }
-    };
     const fetchPostData = async () => {
         try {
             setPostData({...postData, isFetch: true});
-
             const {
                 title,
                 currency,
@@ -212,12 +106,10 @@ export const ShowPostContainer: FC = () => {
                 description,
                 region,
                 city,
-                available_days,
                 district,
+                available_days,
                 ...otherData
             } = await userAPI.getPostById(postId);
-
-            setParameters(otherData.model);
 
             if (available_days) {
                 otherData.available_days = available_days.map(day => {
@@ -242,63 +134,15 @@ export const ShowPostContainer: FC = () => {
                 }
             });
         } catch (e) {
-            setPostData({
-                ...postData,
-                error: e.message
-            });
-        }
-    };
-    const handleFollow = (userId) => async () => {
-        try {
-            await userAPI.follow(userId);
-        } catch (e) {
-            dispatch(setErrorMsgAction(e));
+            dispatch(setErrorMsgAction(e.message));
         }
     };
 
-    const auctionInfo = (
-        <AuctionInfo
-            t={t}
-            data={data}
-            openModal={openModal}
-            auctionsBetsList={auctionsBetsList.list}
-            handleBet={handleBet}
-            handleBuyNow={handleBuyNow}
-            handleScroll={handleScroll}
-            handleRefresh={refreshAucBets}
-            handleOpenModal={handleOpenModal}
-            handleTextField={handleTextField}
-            handleCloseModal={handleCloseModal}
-            handleSuggestPrice={handleSuggestPrice}
-        />
-    );
-
-    const ownerInfo = (
-        <OwnerInfo
-            data={data}
-            handleFollow={handleFollow}
-        />
-    );
-
-    const theme = useTheme();
-    const isMdDown = useMediaQuery(theme.breakpoints.down('md'));
-
-    useEffect(() => {
-        setSlidersRefs(initSlidersRefs);
-    }, []);
+    const isMdDown = useMediaQuery(useTheme().breakpoints.down('md'));
 
     useEffect(() => {
         fetchPostData();
-    }, [lang]);
-
-    useEffect(() => {
-        data.auction?.id && auctionBetsPagination();
-    }, [page, data.auction?.id]);
-
-    useEffect(() => {
-        const height = document.getElementById('post-description').clientHeight;
-        setDescHeight(height);
-    }, [postData]);
+    }, []);
 
     const classes = useStyles();
     return (
@@ -324,29 +168,13 @@ export const ShowPostContainer: FC = () => {
                         <PostContent
                             t={t}
                             data={data}
-                            parameters={parameters}
-                            descHeight={descHeight}
-                            slidersRefs={slidersRefs}
-                            auctionInfo={auctionInfo}
                         />
                     </Grid>
                     <Grid item lg={3} xs={12}>
-                        <div className={classes.ownerAucContent}>
-                            <Hidden mdDown>
-                                <div className="price">
-                                    <Typography variant="h4" color="initial">
-                                        <span>{numberPrettier(data.price)}</span>&nbsp;
-                                        {t(`common:${data.currency.name}`)}
-                                    </Typography>
-                                </div>
-                            </Hidden>
-                            {isAuction && (
-                                <Hidden mdDown>
-                                    {auctionInfo}
-                                </Hidden>
-                            )}
-                            {ownerInfo}
-                        </div>
+                        <OwnerAuctionInfo
+                            t={t}
+                            data={data}
+                        />
                         <Hidden mdDown>
                             <div className={classes.adBanner}>
                                 <Banner height="424px"/>

@@ -4,31 +4,36 @@ import {ButtonComponent} from '@src/components/elements/button/Button';
 import {SafeIcon} from '@root/src/components/elements/icons';
 import {UserInfoWithAvatar} from '@src/components/elements/user_info_with_avatar/UserInfoWithAvatar';
 import {SocialsBlock} from '@root/src/components/elements/socials_block/SocialsBlock';
+import {WithT} from 'i18next';
 import {useStyles} from './useStyles';
 
 
 type OwnerPropsType = {
     data,
-    handleFollow: (userId) => () => void
-};
+    authorPhones: {phone: string, additional_number: string},
+    handleFollow: (userId) => () => void,
+    showPhone: boolean,
+    handleShowPhone: () => void
+} & WithT;
 
 export const OwnerInfo: FC<OwnerPropsType> = (props) => {
     const {
+        t,
         data,
-        handleFollow
+        authorPhones,
+        handleFollow,
+        showPhone,
+        handleShowPhone
     } = props;
 
     const {
         safe_deal,
         author,
         creator,
-        subscribed,
+        subscribed
     } = data;
 
-    const [isPhoneAval, setIsPhoneAval] = useState(false);
-    const handleShowPhone = () => {
-        setIsPhoneAval(!isPhoneAval);
-    };
+    const showPhoneTxt = showPhone ? authorPhones.phone || 'number_not_available' : 'show_phone';
 
     const classes = useStyles();
     return (
@@ -38,32 +43,40 @@ export const OwnerInfo: FC<OwnerPropsType> = (props) => {
                 <div className="contact-buttons">
                     <ButtonComponent color="primary" onClick={handleShowPhone}>
                         <Typography variant="subtitle1" color="initial">
-                            {isPhoneAval
-                                ? author.phone || 'default'
-                                : 'Показать номер'}
+                            <span>{t(showPhoneTxt)}</span>
+                            {showPhone && authorPhones.additional_number && (
+                                <>
+                                    <br/>
+                                    <span>{t(authorPhones.additional_number)}</span>
+                                </>
+                            )}
                         </Typography>
                     </ButtonComponent>
-                    <ButtonComponent color="primary" className='contact-btn'>
-                        <Typography variant="subtitle1" color="initial">
-                            Написать продавцу
-                        </Typography>
-                    </ButtonComponent>
-                    {!!safe_deal && (
-                        <ButtonComponent
-                            color="primary"
-                            className="safe-shopping-btn"
-                        >
-                            <SafeIcon/>
-                            <Typography variant="subtitle1" color="initial">
-                                Безопасная покупка
-                            </Typography>
-                        </ButtonComponent>
+                    {!creator && (
+                        <>
+                            <ButtonComponent color="primary" className='contact-btn'>
+                                <Typography variant="subtitle1" color="initial">
+                                    Написать продавцу
+                                </Typography>
+                            </ButtonComponent>
+                            {!!safe_deal && (
+                                <ButtonComponent
+                                    color="primary"
+                                    className="safe-shopping-btn"
+                                >
+                                    <SafeIcon/>
+                                    <Typography variant="subtitle1" color="initial">
+                                        Безопасная покупка
+                                    </Typography>
+                                </ButtonComponent>
+                            )}
+                        </>
                     )}
                 </div>
                 <SocialsBlock/>
             </Hidden>
             <Hidden lgUp>
-                {!!safe_deal && (
+                {!creator && !!safe_deal && (
                     <div className='fixed-bet-safe-deal floating'>
                         <div className="floating-text">
                             <SafeIcon/>
