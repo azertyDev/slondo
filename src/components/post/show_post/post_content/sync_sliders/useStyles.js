@@ -60,6 +60,17 @@ export const useStyles = makeStyles((theme) => ({
                     width: '32px',
                     height: '32px'
                 },
+                '& svg': {
+                    width: 30,
+                    height: 'auto',
+                    [theme.breakpoints.down('xs')]: {
+                        width: '19px'
+                    },
+                    '& path': {
+                        fill: '#AD66D5'
+                    }
+                },
+                background: (props => props.isFavorite ? 'linear-gradient(49.94deg, #675EAA 19.03%, #AD66D5 72.72%)' : '#fff'),
                 '&:hover': {
                     background:
                         'linear-gradient(49.94deg, #675EAA 19.03%, #AD66D5 72.72%)',
@@ -72,28 +83,25 @@ export const useStyles = makeStyles((theme) => ({
                     }
                 }
             },
-            '& svg': {
-                width: 30,
-                height: 'auto',
-                [theme.breakpoints.down('xs')]: {
-                    width: '19px'
-                },
-                '& path': {
-                    fill: '#fff'
-                }
-            },
-
-            '& div.share-favo-btns': {
+            '& .share-favo-btns': {
                 [theme.breakpoints.up('lg')]: {
                     width: '100%',
                     display: 'flex',
                     justifyContent: 'space-between'
                 },
                 '& .favorite-btn': {
-                    marginRight: '13px',
                     [theme.breakpoints.down('xs')]: {
                         marginRight: '8px'
                     }
+                },
+                '& .favorite-count': {
+                    width: '100%',
+                    marginTop: 20,
+                    padding: '0 5px',
+                    background: '#fff',
+                    borderRadius: '100px',
+                    display: 'flex',
+                    justifyContent: 'center'
                 }
             },
             '& .backspace-btn': {

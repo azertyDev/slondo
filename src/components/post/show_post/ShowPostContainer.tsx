@@ -28,13 +28,13 @@ export const ShowPostContainer: FC = () => {
     const router = useRouter();
     const dispatch = useDispatch();
     const {t} = useTranslation(['post']);
-
     const lang = i18n.language;
     const url = useRouter().query.url as string;
     const [postId] = url.split('-').splice(-1);
+    const theme = useTheme();
+    const isMdDown = useMediaQuery(theme.breakpoints.down('md'));
 
     const initValues = {id: null, name: ''};
-
     const initialPostData = {
         isFetch: false,
         error: null,
@@ -48,6 +48,7 @@ export const ShowPostContainer: FC = () => {
             expiration_at: null,
             number_of_views: null,
             sub_category_id: null,
+            favorite: false,
             creator: null,
             status: '',
             subscribed: null,
@@ -99,15 +100,17 @@ export const ShowPostContainer: FC = () => {
                 price_by_now: '',
                 price_buy_now_status: null,
                 offer_the_price: null
+            },
+            observer: {
+                number_of_views: null,
+                number_of_favorites: null
             }
         }
     };
-
     const initialAuctionBetsList = {
         isFetch: false,
         list: []
     };
-
     const initSlidersRefs: SlidersRefType = {
         slider1: useRef(),
         slider2: useRef(),
@@ -124,11 +127,10 @@ export const ShowPostContainer: FC = () => {
     const [auctionsBetsList, setAuctionBetsList] = useState(initialAuctionBetsList);
     const [lastPage, setLastPage] = useState(null);
     const [offerPrice, setOfferPrice] = useState({isFetch: false, price: null});
-
+    const [liked, setLiked] = useState(postData.data.favorite);
     const {data} = postData;
-
     const isAuction = data.ads_type.mark === 'auc' || data.ads_type.mark === 'exauc';
-
+    console.log(postData.data.favorite);
     const handleOpenModal = () => {
         setOpenModal(true);
     };
@@ -248,12 +250,19 @@ export const ShowPostContainer: FC = () => {
             });
         }
     };
-    console.log(postData);
     const handleFollow = (userId) => async () => {
         try {
             await userAPI.follow(userId);
         } catch (e) {
             dispatch(setErrorMsgAction(e));
+        }
+    };
+    const handleFavorite = async () => {
+        try {
+            await userAPI.favoriteAds(postData.data.id);
+            setLiked(!liked);
+        } catch (e) {
+            dispatch(setErrorMsgAction(e.message));
         }
     };
 
@@ -281,8 +290,7 @@ export const ShowPostContainer: FC = () => {
         />
     );
 
-    const theme = useTheme();
-    const isMdDown = useMediaQuery(theme.breakpoints.down('md'));
+
 
     useEffect(() => {
         setSlidersRefs(initSlidersRefs);
@@ -300,6 +308,10 @@ export const ShowPostContainer: FC = () => {
         const height = document.getElementById('post-description').clientHeight;
         setDescHeight(height);
     }, [postData]);
+
+    useEffect(() => {
+        setLiked(postData.data.favorite);
+    }, [postData.data.favorite]);
 
     const classes = useStyles();
     return (
@@ -329,6 +341,7 @@ export const ShowPostContainer: FC = () => {
                             descHeight={descHeight}
                             slidersRefs={slidersRefs}
                             auctionInfo={auctionInfo}
+                            handleFavorite={handleFavorite}
                         />
                     </Grid>
                     <Grid item lg={3} xs={12}>

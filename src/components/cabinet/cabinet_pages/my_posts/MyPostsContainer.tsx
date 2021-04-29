@@ -82,6 +82,8 @@ const MyPostsContainer: FC = () => {
                         id: null,
                         name: ''
                     }],
+                    available_start_time: '',
+                    available_end_time: '',
                     category: {
                         id: null,
                         name: ''

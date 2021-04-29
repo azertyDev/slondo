@@ -1,20 +1,24 @@
 import React, {FC} from 'react';
-import {Hidden, IconButton, useMediaQuery, useScrollTrigger, useTheme} from '@material-ui/core';
+import {Hidden, IconButton, Typography, useMediaQuery, useTheme} from '@material-ui/core';
 import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
 import {CustomSlider} from '@src/components/elements/custom_slider/CustomSlider';
 import {SlidersRefType} from '../../ShowPostContainer';
 import {useStyles} from './useStyles';
 import CustomTooltip from '@src/components/elements/custom_tooltip/CustomTooltip';
 import KeyboardBackspaceIcon from '@material-ui/icons/KeyboardBackspace';
+import Box from '@material-ui/core/Box';
 
 
 type SyncSlidersProps = {
     handleOpenModal: () => void;
     imgs: {
         alt: string;
-        url: { default: string };
+        url: {default: string};
     }[];
     slidersRefs: SlidersRefType;
+    handleFavorite: () => void;
+    isFavorite: boolean;
+    favoriteCount: number;
 };
 
 export const SyncSliders: FC<SyncSlidersProps> = (props) => {
@@ -22,7 +26,10 @@ export const SyncSliders: FC<SyncSlidersProps> = (props) => {
     const {
         imgs,
         handleOpenModal,
-        slidersRefs
+        slidersRefs,
+        handleFavorite,
+        isFavorite,
+        favoriteCount
     } = props;
 
     const {
@@ -41,7 +48,7 @@ export const SyncSliders: FC<SyncSlidersProps> = (props) => {
     const theme = useTheme();
     const isMdDown = useMediaQuery(theme.breakpoints.down('md'));
 
-    const classes = useStyles();
+    const classes = useStyles({isFavorite});
     return (
         <div className={classes.root}>
             <div className={classes.firstSlider}>
@@ -65,15 +72,22 @@ export const SyncSliders: FC<SyncSlidersProps> = (props) => {
                 <div className="icon-buttons">
                     <Hidden lgUp>
                         <IconButton className="backspace-btn">
-                            <KeyboardBackspaceIcon/>
+                            <KeyboardBackspaceIcon />
                         </IconButton>
                     </Hidden>
                     <div className='share-favo-btns'>
-                        <IconButton className="favorite-btn">
-                            <FavoriteBorderIcon/>
-                        </IconButton>
+                        <Box display='flex' alignItems='center' flexDirection='column'>
+                            <IconButton className="favorite-btn" onClick={handleFavorite}>
+                                <FavoriteBorderIcon />
+                            </IconButton>
+                            <div className='favorite-count'>
+                                <Typography variant='subtitle1'>
+                                    {favoriteCount}
+                                </Typography>
+                            </div>
+                        </Box>
                         <IconButton className="share-btn" onClick={copyUrl}>
-                            <CustomTooltip title={'Скопировано!'} arrow/>
+                            <CustomTooltip title={'Скопировано!'} arrow />
                         </IconButton>
                     </div>
                 </div>

@@ -108,14 +108,21 @@ export const useStyles = makeStyles((theme) => ({
                         '& > div': {
                             display: 'flex',
                             alignItems: 'center',
-                            '&.ancmnt-title': {
-                                width: '350px'
+                            '&.post-title': {
+                                width: '350px',
+                                '& a': {
+                                    textDecoration: 'none',
+                                    '&:hover': {
+                                        textDecoration: 'underline',
+                                        textDecorationColor: '#000'
+                                    },
+                                    '& .MuiTypography-subtitle1': {
+                                        fontSize: '18px',
+                                        lineHeight: '20px'
+                                    }
+                                }
                             },
-                            '& > h6.MuiTypography-subtitle1': {
-                                fontSize: '18px',
-                                lineHeight: '20px'
-                            },
-                            '& > h6.MuiTypography-subtitle2': {
+                            '& .MuiTypography-subtitle2': {
                                 borderBottom: '1px solid #838383',
                                 lineHeight: '20px',
                                 color: '#838383'
@@ -123,7 +130,7 @@ export const useStyles = makeStyles((theme) => ({
                             '&.card-btn': {
                                 position: 'absolute',
                                 top: 0,
-                                    right: 20,
+                                right: 20,
                                     '& > .favorite, & > .settings, .isFavorite': {
                                         background: '#F5F5F5',
                                         boxShadow: '0px 1px 2px rgba(0, 0, 0, 0.15)',

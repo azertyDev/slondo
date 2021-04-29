@@ -33,7 +33,7 @@ import {useStyles} from './useStyles';
 
 type PostContentTypes = {
     openSliderModal: boolean,
-    openModal: boolean
+    openModal: boolean,
 }
 
 export const PostContent: FC<WithT & any> = (props) => {
@@ -43,13 +43,15 @@ export const PostContent: FC<WithT & any> = (props) => {
         slidersRefs,
         parameters,
         descHeight,
-        auctionInfo
+        auctionInfo,
+        handleFavorite
     } = props;
 
     const theme = useTheme();
     const isMdDown = useMediaQuery(theme.breakpoints.down('md'));
     const isExAuc = data.ads_type.mark === 'exauc';
     const isAuction = data.ads_type.mark === 'auc' || isExAuc;
+
 
     const [state, setState] = useState<PostContentTypes>({openSliderModal: false, openModal: false});
     const {openModal, openSliderModal} = state;
@@ -175,6 +177,9 @@ export const PostContent: FC<WithT & any> = (props) => {
                     slidersRefs={slidersRefs}
                     imgs={data.images}
                     handleOpenModal={handleShowSliderModal(true)}
+                    handleFavorite={handleFavorite}
+                    isFavorite={data.favorite}
+                    favoriteCount={data.observer.number_of_favorites}
                 />
                 <Hidden lgUp>
                     <div className='post-type-adaptive'>
@@ -214,10 +219,10 @@ export const PostContent: FC<WithT & any> = (props) => {
                             Опубликовано: {formatted_date}
                         </Typography>
                         <Typography variant="subtitle1">
-                            Просмотров: {data.number_of_views}
+                            Просмотров: {data.observer.number_of_views}
                         </Typography>
                         <Typography variant="subtitle1" onClick={handleOpenModal}>
-                            Пожаловаться <WarningIcon/>
+                            Пожаловаться <WarningIcon />
                         </Typography>
                     </div>
                 </Hidden>

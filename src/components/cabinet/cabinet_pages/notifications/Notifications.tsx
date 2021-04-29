@@ -17,8 +17,6 @@ export const Notifications: FC<NotificationsPropsType> = (props) => {
         handleDeleteAllNotification
     } = props;
 
-    console.log(notifications);
-
     const title = 'Уведомления';
 
     const classes = useStyles();

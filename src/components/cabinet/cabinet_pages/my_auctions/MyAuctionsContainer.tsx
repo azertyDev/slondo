@@ -60,6 +60,8 @@ export const MyAuctionsContainer: FC = () => {
                         id: null,
                         name: ''
                     }],
+                    available_start_time: '',
+                    available_end_time: '',
                     category: initialValues,
                     city: initialValues,
                     created_at: '',

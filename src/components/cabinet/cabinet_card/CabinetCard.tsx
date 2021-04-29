@@ -12,7 +12,7 @@ import {
 } from '@src/components/elements/icons';
 import {BreadcrumbsComponent} from '@src/components/elements/breadcrumbs/Breadcrumbs';
 import Link from 'next/link';
-import {formatNumber, weekDaysHelper} from '@src/helpers';
+import {formatNumber, transformToCyrillic, weekDaysHelper} from '@src/helpers';
 import Countdown from 'react-countdown';
 import {useRouter} from 'next/router';
 import {useTranslation} from 'react-i18next';
@@ -31,6 +31,8 @@ export const CabinetCard: FC<CabinetCardPropsType> = (props) => {
         cardData,
         handleModalOpen
     } = props;
+
+    const translatedTitle = transformToCyrillic(cardData.title);
 
     const timer = ({days, hours, minutes, seconds, completed}) => (
         <Box display="flex">
@@ -108,22 +110,26 @@ export const CabinetCard: FC<CabinetCardPropsType> = (props) => {
                     </div>
                     <div className="content">
                         <div className="header">
-                            <div className="ancmnt-title">
-                                <Typography
-                                    noWrap
-                                    variant="subtitle1"
-                                    color="initial"
-                                >
-                                    {cardData.title}
-                                </Typography>
+                            <div className="post-title">
+                                <Link href={`/obyavlenie/${translatedTitle}-${cardData.id}`}>
+                                    <a target='_blank'>
+                                        <Typography
+                                            noWrap
+                                            variant="subtitle1"
+                                            color="initial"
+                                        >
+                                            {cardData.title}
+                                        </Typography>
+                                    </a>
+                                </Link>
                             </div>
                             <div className='card-btn'>
                                 {pathname?.includes('favorite')
-                                 ?
-                                 <div className='isFavorite' onClick={handleModalOpen(cardData.id)}>
-                                     <CloseIcon/>
-                                 </div>
-                                 : cardData.creator && cardData.ads_type === 'post' && (
+                                    ?
+                                    <div className='isFavorite' onClick={handleModalOpen(cardData.id)}>
+                                        <CloseIcon />
+                                    </div>
+                                    : cardData.creator && cardData.ads_type === 'post' && (
                                     <div className='settings' onClick={handleModalOpen(cardData.id, 1)}>
                                         <SettingsIcon />
                                     </div>
@@ -133,9 +139,10 @@ export const CabinetCard: FC<CabinetCardPropsType> = (props) => {
                         <div className="description">
                             {!!cardData.available_days && (
                                 <div className="available">
-                                    <PhoneIcon/>
+                                    <PhoneIcon />
                                     <Typography variant="body1" color="primary">
-                                        {weekDaysHelper(cardData.available_days, t)}
+                                        {weekDaysHelper(cardData.available_days, t)}{' '}
+                                        {`${cardData.available_start_time}-${cardData.available_end_time}`}
                                     </Typography>
                                 </div>
                             )}
