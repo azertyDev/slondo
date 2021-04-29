@@ -43,15 +43,7 @@ export type InnerCardData = {
     created_at: string;
     delivery: number;
     exchange: number;
-    accepted?: boolean;
-    expected?: boolean;
-    denied?: boolean;
-    promote?: boolean;
-    raise?: boolean;
-    raiseInRape?: boolean;
-    isModerated?: boolean;
-    follow?: boolean;
-    favorite?: boolean;
-    completePurchase?: boolean;
-    creator: UserInfo
+    favorite: boolean;
+    creator: boolean;
+    author: UserInfo
 };

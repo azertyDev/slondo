@@ -39,6 +39,8 @@ export type CardDataType = {
     },
     author: UserInfo,
     available_days: IdNameType[],
+    available_start_time: string,
+    available_end_time: string,
     category: InitValuesType,
     city: InitValuesType,
     created_at: string,

@@ -27,7 +27,8 @@ const initCard: InnerCardData = {
         name: ''
     },
     image: '',
-    creator: {
+    creator: false,
+    author: {
         id: null,
         name: '',
         surname: '',
@@ -43,7 +44,8 @@ const initCard: InnerCardData = {
     },
     delivery: null,
     exchange: null,
-    ads_type: ''
+    ads_type: '',
+    favorite: false
 };
 
 export const initCards = Array.from({length: ITEMS_PER_PAGE}).map(() => initCard);

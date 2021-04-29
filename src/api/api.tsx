@@ -154,7 +154,7 @@ export const userAPI = {
             });
     },
     getCards: (itemsPerPage: number, page: number, type: string): Promise<{ data: InnerCardData[]; total: number; }> => {
-        return instance.get(`post/all?itemsPerPage=${itemsPerPage}&page=${page}&type=${type}`)
+        return instance.get(`post/all?itemsPerPage=${itemsPerPage}&page=${page}&type=${type}`, setTokenToHeader())
             .then((res) => res.data)
             .catch((err) => {
                 throw err;
@@ -343,6 +343,20 @@ export const userAPI = {
     },
     getAllNotifications: (): Promise<any> => {
         return instance.get(`regular/user/notification`, setTokenToHeader())
+            .then(res => res.data)
+            .catch(err => {
+                throw err;
+            });
+    },
+    deleteUserNotification: (id: number): Promise<any> => {
+        return instance.delete(`regular/user/notification/${id}`, setTokenToHeader())
+            .then(res => res.data)
+            .catch(err => {
+                throw err;
+            });
+    },
+    deleteAllNotification: (user_id: number): Promise<any> => {
+        return instance.delete(`regular/user/notifications/${user_id}`, setTokenToHeader())
             .then(res => res.data)
             .catch(err => {
                 throw err;

@@ -1,15 +1,20 @@
 import React, {FC} from 'react';
-import {Grid} from '@material-ui/core';
 import {CabinetWrapper} from '@src/components/cabinet/CabinetWrapper';
 import {useStyles} from './useStyles';
+import {Notification} from '@src/components/cabinet/cabinet_pages/notifications/notification_card/Notification';
+import {ButtonComponent} from '@src/components/elements/button/Button';
 
 type NotificationsPropsType = {
-    notifications
+    notifications,
+    handleDeleteNotification: (id) => () => void,
+    handleDeleteAllNotification: () => void,
 }
 
 export const Notifications: FC<NotificationsPropsType> = (props) => {
     const {
-        notifications
+        notifications,
+        handleDeleteNotification,
+        handleDeleteAllNotification
     } = props;
 
     const title = 'Уведомления';
@@ -18,18 +23,18 @@ export const Notifications: FC<NotificationsPropsType> = (props) => {
     return (
         <div className={classes.root}>
             <CabinetWrapper headerTitle={title} title={title}>
-                <Grid item xs={10}>
-                    {
-                        notifications.map(notification => {
-                            return (
-                                <div>
-                                    <strong>{notification.id}</strong>
-                                    <p>{notification.message}</p>
-                                </div>
-                            );
-                        })
-                    }
-                </Grid>
+                <ButtonComponent onClick={handleDeleteAllNotification}>
+                    Удалить все уведомления
+                </ButtonComponent>
+                {notifications.data.map(notification => {
+                    return (
+                        <Notification
+                            key={notification.id}
+                            data={notification}
+                            handleDeleteNotification={handleDeleteNotification}
+                        />
+                    );
+                })}
             </CabinetWrapper>
         </div>
     );
