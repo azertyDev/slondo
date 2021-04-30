@@ -129,7 +129,7 @@ export const CabinetCard: FC<CabinetCardPropsType> = (props) => {
                                     <div className='isFavorite' onClick={handleModalOpen(cardData.id)}>
                                         <CloseIcon />
                                     </div>
-                                    : cardData.creator && cardData.ads_type === 'post' && (
+                                    : cardData.creator && (
                                     <div className='settings' onClick={handleModalOpen(cardData.id, 1)}>
                                         <SettingsIcon />
                                     </div>

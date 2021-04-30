@@ -12,7 +12,7 @@ const localServer = 'http://192.168.100.60/slondo/public/api/';
 
 const instance = Axios.create({
     withCredentials: true,
-    baseURL: uztelecom
+    baseURL: localServer
 });
 
 const setTokenToHeader = () => {
@@ -357,6 +357,13 @@ export const userAPI = {
     },
     deleteAllNotification: (user_id: number): Promise<any> => {
         return instance.delete(`regular/user/notifications/${user_id}`, setTokenToHeader())
+            .then(res => res.data)
+            .catch(err => {
+                throw err;
+            });
+    },
+    ricePostInTape: (post_id: number): Promise<any> => {
+        return instance.post(`regular/user/post/rise/${post_id}`, {}, setTokenToHeader())
             .then(res => res.data)
             .catch(err => {
                 throw err;

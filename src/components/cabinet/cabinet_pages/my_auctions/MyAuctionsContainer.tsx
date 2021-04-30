@@ -8,7 +8,7 @@ import {setErrorMsgAction} from '@root/src/redux/slices/errorSlice';
 import {useTranslation} from 'next-i18next';
 import {Box, Grid, IconButton, List, ListItem, ListItemText, Typography} from '@material-ui/core';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
-import {InitialCabinetCardState, InitValuesType, OffersStateType, TabsDataType} from '@root/interfaces/Cabinet.js';
+import {InitialCabinetCardState, OffersStateType, TabsDataType} from '@root/interfaces/Cabinet.js';
 import {UserInfo} from '@root/interfaces/Auth';
 import {useStyles} from './useStyles';
 import {UserInfoWithAvatar} from '@src/components/elements/user_info_with_avatar/UserInfoWithAvatar';
@@ -22,7 +22,6 @@ export const MyAuctionsContainer: FC = () => {
     const { t } = useTranslation('cabinet');
     const classes = useStyles();
 
-    const initialValues: InitValuesType = { id: null, name: '' };
     const initialUserInfo: UserInfo = {
         id: null,
         name: '',
@@ -149,9 +148,11 @@ export const MyAuctionsContainer: FC = () => {
             dispatch(setErrorMsgAction(e.message));
         }
     };
-    const riceInTape = async (post_id: number) => {
+    const riceInTape = (post_id: number) => async () => {
         try {
             await userAPI.ricePostInTape(post_id);
+            setOpenModal(false);
+            setModalContentIndex(1);
         } catch (e) {
             dispatch(setErrorMsgAction(e.message));
         }
@@ -190,7 +191,7 @@ export const MyAuctionsContainer: FC = () => {
                     >
                         <ListItem
                             button
-                            onClick={handleDeactivate(auctionId)}
+                            onClick={riceInTape(auctionId)}
                         >
                             <ListItemText
                                 primary='Да'

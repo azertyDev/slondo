@@ -6,7 +6,8 @@ import {userAPI} from '@src/api/api';
 import {CardData} from '@root/interfaces/CardData';
 import {initCards} from '../posts_slider/PostsSliderContainer';
 import {setErrorMsgAction} from "@src/redux/slices/errorSlice";
-import {useDispatch} from "react-redux";
+import {useDispatch, useSelector} from 'react-redux';
+import {RootState} from '@src/redux/rootReducer';
 
 
 const initCardData: CardData = {
@@ -21,6 +22,7 @@ const initCardData: CardData = {
 
 export const PostsTabsContainer: FC<WithT> = ({t}) => {
     const dispatch = useDispatch();
+    const {isAuth} = useSelector((store: RootState) => store.user);
 
     const [tabValue, setTabValue] = useState(0);
 
@@ -79,7 +81,7 @@ export const PostsTabsContainer: FC<WithT> = ({t}) => {
         auctionCurrentPage !== 1 && setAuctionCurrentPage(1);
         setCardData(postCardData, setPostCardData, 1, 'post');
         setCardData(auctionCardData, setAuctionCardData, 1, 'auc');
-    }, []);
+    }, [isAuth]);
 
     return (
         <PostsTabs

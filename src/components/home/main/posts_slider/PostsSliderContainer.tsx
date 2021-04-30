@@ -4,7 +4,8 @@ import {userAPI} from '@src/api/api';
 import {CardData, InnerCardData} from '@root/interfaces/CardData';
 import {PostsSlider} from './PostsSlider';
 import {setErrorMsgAction} from '@src/redux/slices/errorSlice';
-import {useDispatch} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
+import {RootState} from '@src/redux/rootReducer';
 
 
 const initCard: InnerCardData = {
@@ -61,6 +62,7 @@ const initCardData: CardData = {
 
 export const PostsSliderContainer: FC = () => {
     const dispatch = useDispatch();
+    const {isAuth} = useSelector((store: RootState) => store.user);
 
     const [currentPage, setCurrentPage] = useState(1);
     const [cardData, setCardData] = useState(initCardData);
@@ -93,7 +95,7 @@ export const PostsSliderContainer: FC = () => {
 
     useEffect(() => {
         setFetchedCardData();
-    }, [currentPage]);
+    }, [currentPage, isAuth]);
 
     return (
         <PostsSlider
