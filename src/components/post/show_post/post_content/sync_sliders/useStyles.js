@@ -55,6 +55,7 @@ export const useStyles = makeStyles((theme) => ({
             '& button': {
                 width: 50,
                 height: 50,
+                background: '#fff',
                 borderRadius: '100%',
                 [theme.breakpoints.down('xs')]: {
                     width: '32px',
@@ -70,10 +71,8 @@ export const useStyles = makeStyles((theme) => ({
                         fill: '#AD66D5'
                     }
                 },
-                background: (props => props.isFavorite ? 'linear-gradient(49.94deg, #675EAA 19.03%, #AD66D5 72.72%)' : '#fff'),
                 '&:hover': {
-                    background:
-                        'linear-gradient(49.94deg, #675EAA 19.03%, #AD66D5 72.72%)',
+                    background: 'linear-gradient(49.94deg, #675EAA 19.03%, #AD66D5 72.72%)',
                     '& svg': {
                         transform: 'scale(1.1)',
                         transition: 'transform .3s cubic-bezier(.5,0,.5,3)',
@@ -89,9 +88,13 @@ export const useStyles = makeStyles((theme) => ({
                     display: 'flex',
                     justifyContent: 'space-between'
                 },
-                '& .favorite-btn': {
+                '& button.favorite-btn': {
+                    background: ({isFavorite}) => isFavorite && 'linear-gradient(49.94deg, #675EAA 19.03%, #AD66D5 72.72%)',
                     [theme.breakpoints.down('xs')]: {
                         marginRight: '8px'
+                    },
+                    '& svg path': {
+                        fill: ({isFavorite}) => isFavorite && '#fff'
                     }
                 },
                 '& .favorite-count': {

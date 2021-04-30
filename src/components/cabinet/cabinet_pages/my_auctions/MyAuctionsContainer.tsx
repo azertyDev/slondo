@@ -38,53 +38,7 @@ export const MyAuctionsContainer: FC = () => {
         isFetch: false,
         myPosts: {
             total: 0,
-            data: [
-                {
-                    ads_type: '',
-                    adsable: {
-                        id: null,
-                        sub_category: initialValues,
-                        type: initialValues
-                    },
-                    auction: {
-                        id: null,
-                        winner: initialUserInfo,
-                        number_of_bets: null,
-                        is_accepted: null,
-                        winner_id: null,
-                        number_of_offers: null,
-                        offer: null
-                    },
-                    author: initialUserInfo,
-                    available_days: [{
-                        id: null,
-                        name: ''
-                    }],
-                    available_start_time: '',
-                    available_end_time: '',
-                    category: initialValues,
-                    city: initialValues,
-                    created_at: '',
-                    creator: false,
-                    currency: initialValues,
-                    delivery: null,
-                    description: '',
-                    district: initialValues,
-                    exchange: null,
-                    expiration_at: '',
-                    favorite: false,
-                    id: null,
-                    image: '',
-                    number_of_views: null,
-                    price: null,
-                    region: initialValues,
-                    safe_deal: null,
-                    status: '',
-                    subscribed: false,
-                    title: '',
-                    user_id: null
-                }
-            ]
+            data: []
         }
     };
     const initialOffersState: OffersStateType = {
@@ -195,6 +149,13 @@ export const MyAuctionsContainer: FC = () => {
             dispatch(setErrorMsgAction(e.message));
         }
     };
+    const riceInTape = async (post_id: number) => {
+        try {
+            await userAPI.ricePostInTape(post_id);
+        } catch (e) {
+            dispatch(setErrorMsgAction(e.message));
+        }
+    };
 
     const getModalContent = () => {
         switch (modalContentIndex) {
@@ -211,8 +172,10 @@ export const MyAuctionsContainer: FC = () => {
                             onClick={handleModalContentIndex(2)}
                         >
                             <ListItemText
-                                primary='Деактивировать'
-                                primaryTypographyProps={{ variant: 'subtitle1' }}
+                                primary="Поднять в ленте"
+                                primaryTypographyProps={{variant: 'subtitle1'}}
+                                secondary="(можно использовать 1 раз в 3 дня)"
+                                secondaryTypographyProps={{variant: 'subtitle2'}}
                             />
                         </ListItem>
                     </List>
@@ -240,10 +203,9 @@ export const MyAuctionsContainer: FC = () => {
                         >
                             <ListItemText
                                 primary='Нет'
-                                primaryTypographyProps={{ variant: 'subtitle1' }}
+                                primaryTypographyProps={{variant: 'subtitle1'}}
                             />
                         </ListItem>
-
                     </List>
                 </>;
             case 10:

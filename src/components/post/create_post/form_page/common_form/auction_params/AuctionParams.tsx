@@ -1,10 +1,10 @@
-import React, {FC} from 'react';
+import {FC} from 'react';
 import {WithT} from 'i18next';
 import {Checkbox, Grid, Typography} from '@material-ui/core';
 import {DropDownSelect} from '@src/components/elements/drop_down_select/DropDownSelect';
 import {CustomFormikField} from '@src/components/elements/custom_formik_field/CustomFormikField';
-import {useStyles} from './useStyles';
 import {getErrorMsg} from '@src/helpers';
+import {useStyles} from './useStyles';
 
 
 type AuctionParamsPropsType = {

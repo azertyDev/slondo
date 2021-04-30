@@ -1,4 +1,4 @@
-import {FC, useState} from 'react';
+import {FC, MutableRefObject, useEffect, useRef, useState} from 'react';
 import {WithT} from 'i18next';
 import Link from 'next/link';
 import {
@@ -28,50 +28,75 @@ import {numberPrettier, weekDaysHelper} from '@src/helpers';
 import {ButtonComponent} from '@src/components/elements/button/Button';
 import {RenewalIcon} from '@src/components/elements/icons';
 import {months} from '@src/common_data/common';
+import {AuctionInfo} from '@src/components/post/show_post/owner_auction_info/auction_info/AuctionInfo';
+import {userAPI} from '@src/api/api';
+import {setErrorMsgAction} from '@root/src/redux/slices/errorSlice';
+import {useDispatch} from 'react-redux';
 import {useStyles} from './useStyles';
 
 
 type PostContentTypes = {
-    openSliderModal: boolean,
-    openModal: boolean,
-}
+    data
+} & WithT;
 
-export const PostContent: FC<WithT & any> = (props) => {
+export type SlidersRefType = {
+    slider1?: MutableRefObject<any>;
+    slider2?: MutableRefObject<any>;
+    slider3?: MutableRefObject<any>;
+    slider4?: MutableRefObject<any>;
+};
+
+export const PostContent: FC<PostContentTypes> = (props) => {
     const {
         t,
-        data,
-        slidersRefs,
-        parameters,
-        descHeight,
-        auctionInfo,
-        handleFavorite
+        data
     } = props;
 
-    const theme = useTheme();
-    const isMdDown = useMediaQuery(theme.breakpoints.down('md'));
+    const dispatch = useDispatch();
+    const isMdDown = useMediaQuery(useTheme().breakpoints.down('md'));
     const isExAuc = data.ads_type.mark === 'exauc';
     const isAuction = data.ads_type.mark === 'auc' || isExAuc;
 
+    const {
+        model,
+        observer: {number_of_favorites, number_of_views}
+    } = data;
 
-    const [state, setState] = useState<PostContentTypes>({openSliderModal: false, openModal: false});
-    const {openModal, openSliderModal} = state;
+    const initSlidersRefs: SlidersRefType = {
+        slider1: useRef(),
+        slider2: useRef(),
+        slider3: useRef(),
+        slider4: useRef()
+    };
+
+    const [favorite, setFavorite] = useState(false);
+    const [favCount, setFavCount] = useState(0);
+    const [descHeight, setDescHeight] = useState(0);
+    const [slidersRefs, setSlidersRefs] = useState(initSlidersRefs);
+    const [modalsState, setModalsState] = useState({openSliderModal: false, openComplaintModal: false});
+    const {openComplaintModal, openSliderModal} = modalsState;
+
     const date = new Date(data.created_at);
     const formatted_date = `${date.getDate()} ${months[date.getMonth()]} ${date.getFullYear()}`;
 
-    const handleShowSliderModal = value => () => setState({...state, openSliderModal: value});
-    const handleOpenModal = () => {
-        setState({...state, openModal: true});
-    };
-    const handleCloseModal = () => {
-        setState({...state, openModal: false});
+    const handleShowSliderModal = value => () => setModalsState({...modalsState, openSliderModal: value});
+    const handleComplaintModal = value => () => setModalsState({...modalsState, openComplaintModal: value});
+    const handleFavorite = () => {
+        try {
+            setFavorite(!favorite);
+            setFavCount(favorite ? favCount - 1 : favCount + 1);
+            userAPI.favoriteAds(data.id);
+        } catch (e) {
+            dispatch(setErrorMsgAction(e.message));
+        }
     };
 
-    const parameterItems = Object.keys(parameters).reduce((items, key, i) => {
-        if (Array.isArray(parameters[key]) && parameters[key].length !== 0) {
+    const parameterItems = Object.keys(model ?? {}).reduce((items, key, i) => {
+        if (Array.isArray(model[key]) && model[key].length !== 0) {
             const params = (
                 <li>
                     <Typography variant="subtitle1" className="value">
-                        {parameters[key]
+                        {model[key]
                             .map((param) => param.name)
                             .join(', ')}
                     </Typography>
@@ -85,16 +110,16 @@ export const PostContent: FC<WithT & any> = (props) => {
                     <ul>{params}</ul>
                 </div>
             );
-        } else if (!Array.isArray(parameters[key])) {
+        } else if (!Array.isArray(model[key])) {
             items.push(
                 <li key={key}>
                     <Typography variant="subtitle1" className="key">
                         {t(key)}
                     </Typography>
-                    {parameters[key]?.hex_color_code && (
+                    {model[key]?.hex_color_code && (
                         <span
                             style={{
-                                backgroundColor: `${parameters[key]?.hex_color_code}`,
+                                backgroundColor: `${model[key]?.hex_color_code}`,
                                 width: 24,
                                 height: 24,
                                 boxShadow: '0px 0px 4px rgba(0, 0, 0, 0.25)',
@@ -104,15 +129,25 @@ export const PostContent: FC<WithT & any> = (props) => {
                         />
                     )}
                     <Typography variant="subtitle1" className="value">
-                        {typeof parameters[key] === 'string' || typeof parameters[key] === 'number'
-                            ? parameters[key]
-                            : parameters[key]?.name}
+                        {typeof model[key] === 'string' || typeof model[key] === 'number'
+                         ? model[key]
+                         : model[key]?.name}
                     </Typography>
                 </li>
             );
         }
         return items;
     }, []);
+
+    useEffect(() => {
+        setSlidersRefs(initSlidersRefs);
+    }, []);
+
+    useEffect(() => {
+        setFavorite(data.favorite);
+        !!number_of_favorites && setFavCount(number_of_favorites);
+        setDescHeight(document.getElementById('post-description').clientHeight);
+    }, [data]);
 
     const classes = useStyles();
     return (
@@ -174,12 +209,13 @@ export const PostContent: FC<WithT & any> = (props) => {
             </Hidden>
             <div className="slider-wrapper">
                 <SyncSliders
-                    slidersRefs={slidersRefs}
+                    isCreator={data.creator}
                     imgs={data.images}
-                    handleOpenModal={handleShowSliderModal(true)}
+                    isFavorite={favorite}
+                    slidersRefs={slidersRefs}
+                    favoriteCount={favCount}
                     handleFavorite={handleFavorite}
-                    isFavorite={data.favorite}
-                    favoriteCount={data.observer.number_of_favorites}
+                    handleOpenModal={handleShowSliderModal(true)}
                 />
                 <Hidden lgUp>
                     <div className='post-type-adaptive'>
@@ -219,10 +255,10 @@ export const PostContent: FC<WithT & any> = (props) => {
                             Опубликовано: {formatted_date}
                         </Typography>
                         <Typography variant="subtitle1">
-                            Просмотров: {data.observer.number_of_views}
+                            Просмотров: {number_of_views}
                         </Typography>
-                        <Typography variant="subtitle1" onClick={handleOpenModal}>
-                            Пожаловаться <WarningIcon />
+                        <Typography variant="subtitle1" onClick={handleComplaintModal(true)}>
+                            Пожаловаться <WarningIcon/>
                         </Typography>
                     </div>
                 </Hidden>
@@ -284,7 +320,10 @@ export const PostContent: FC<WithT & any> = (props) => {
                     </div>
                     {isAuction && (
                         <div>
-                            {auctionInfo}
+                            <AuctionInfo
+                                t={t}
+                                data={data}
+                            />
                         </div>
                     )}
                 </Hidden>
@@ -295,15 +334,15 @@ export const PostContent: FC<WithT & any> = (props) => {
                         </Typography>
                     </Hidden>
                     {data.region.name || data.city.name || data.district.name
-                        ? <div className='location-text'>
-                            <LocationIcon/>
-                            <Typography variant="subtitle1">
-                                {`${data.region.name ?? ''}`}
-                                {data.city.name ? `, ${data.city.name}` : ''}
-                                {data.district.name ? `, ${data.district.name}` : ''}
-                            </Typography>
-                        </div>
-                        : <Typography variant="subtitle1">Не указано</Typography>}
+                     ? <div className='location-text'>
+                         <LocationIcon/>
+                         <Typography variant="subtitle1">
+                             {`${data.region.name ?? ''}`}
+                             {data.city.name ? `, ${data.city.name}` : ''}
+                             {data.district.name ? `, ${data.district.name}` : ''}
+                         </Typography>
+                     </div>
+                     : <Typography variant="subtitle1">Не указано</Typography>}
                 </div>
                 <Hidden mdDown>
                     <div className="post-category">
@@ -313,8 +352,8 @@ export const PostContent: FC<WithT & any> = (props) => {
                         <div>
                             <Typography variant="subtitle1" color="initial">
                                 {data.category.name}
-                                {<>&nbsp;- {data.adsable.sub_category.name}</>}
-                                {parameters.type && <>&nbsp;- <span>{parameters.type.name}</span></>}
+                                &nbsp;-{data.adsable.sub_category.name}
+                                {model?.type && <span>&nbsp;-{model.type.name}</span>}
                             </Typography>
                         </div>
                     </div>
@@ -372,35 +411,33 @@ export const PostContent: FC<WithT & any> = (props) => {
                                 </Typography>
                             </Hidden>
                             <Typography variant="subtitle1">
-                                Просмотров: {data.number_of_views}
+                                Просмотров: {number_of_views}
                             </Typography>
                             <Hidden mdDown>
-                                <Typography variant="subtitle1" onClick={handleOpenModal}>
+                                <Typography variant="subtitle1" onClick={handleComplaintModal(true)}>
                                     Пожаловаться <WarningIcon/>
                                 </Typography>
                             </Hidden>
                         </div>
-                        <ButtonComponent className="btn-report" onClick={handleOpenModal}>
+                        <ButtonComponent className="btn-report" onClick={handleComplaintModal(true)}>
                             Пожаловаться
                         </ButtonComponent>
                     </div>
                 </Hidden>
                 <ModalSyncSliders
-                    slidersRefs={slidersRefs}
-                    open={openSliderModal}
-                    title={data.title}
                     imgs={data.images}
+                    title={data.title}
+                    open={openSliderModal}
+                    slidersRefs={slidersRefs}
                     onClose={handleShowSliderModal(false)}
                 />
             </Container>
             <Modal
                 className={classes.modal}
-                open={openModal}
-                onClose={handleCloseModal}
+                open={openComplaintModal}
                 BackdropComponent={Backdrop}
-                BackdropProps={{
-                    timeout: 200
-                }}
+                BackdropProps={{timeout: 200}}
+                onClose={handleComplaintModal(false)}
             >
                 <div className={classes.modalBody}>
                     <Typography variant='h6'>

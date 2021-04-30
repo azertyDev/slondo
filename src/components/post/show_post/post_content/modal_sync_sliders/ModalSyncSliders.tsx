@@ -1,10 +1,10 @@
-import React, {FC, useState} from 'react';
+import {FC, useState} from 'react';
 import InnerImageZoom from 'react-inner-image-zoom';
 import {CustomSlider} from '@src/components/elements/custom_slider/CustomSlider';
 import {Container, IconButton, Modal, Typography, useMediaQuery, useTheme} from '@material-ui/core';
 import {ButtonComponent} from '@src/components/elements/button/Button';
 import {CloseIcon} from '@root/src/components/elements/icons';
-import {SlidersRefType} from '../../ShowPostContainer';
+import {SlidersRefType} from '../PostContent';
 import {useStyles} from './useStyles';
 
 
@@ -36,8 +36,7 @@ export const ModalSyncSliders: FC<SyncSlidersProps> = (props) => {
 
     const imgsCount = !!imgs?.length ? imgs?.length : 1;
 
-    const theme = useTheme();
-    const isMdDown = useMediaQuery(theme.breakpoints.down('md'));
+    const isMdDown = useMediaQuery(useTheme().breakpoints.down('md'));
 
     const [curState, setCurState] = useState(1);
 
@@ -56,10 +55,10 @@ export const ModalSyncSliders: FC<SyncSlidersProps> = (props) => {
     const classes = useStyles({isMdDown});
     return (
         <Modal
+            keepMounted
             open={open}
             onClose={onClose}
             className={classes.modal}
-            keepMounted
         >
             <div className={classes.root}>
                 <div className='close-title'>
