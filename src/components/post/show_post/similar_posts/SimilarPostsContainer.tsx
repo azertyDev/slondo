@@ -1,4 +1,4 @@
-import React, {FC, useEffect, useState} from 'react';
+import {FC, useEffect, useState} from 'react';
 import {ITEMS_PER_PAGE} from '@src/constants';
 import {userAPI} from '@src/api/api';
 import {CardData, InnerCardData} from '@root/interfaces/CardData';

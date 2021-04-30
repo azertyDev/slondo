@@ -4,10 +4,13 @@ import {KeyboardBackspace, FavoriteBorder} from '@material-ui/icons';
 import {CustomSlider} from '@src/components/elements/custom_slider/CustomSlider';
 import {SlidersRefType} from '../PostContent';
 import CustomTooltip from '@src/components/elements/custom_tooltip/CustomTooltip';
+import {useSelector} from 'react-redux';
+import {RootState} from '@src/redux/rootReducer';
 import {useStyles} from './useStyles';
 
 
 type SyncSlidersProps = {
+    isCreator: boolean,
     handleOpenModal: () => void;
     imgs: {
         alt: string;
@@ -21,6 +24,7 @@ type SyncSlidersProps = {
 
 export const SyncSliders: FC<SyncSlidersProps> = (props) => {
     const {
+        isCreator,
         imgs = [],
         handleOpenModal,
         slidersRefs,
@@ -36,13 +40,13 @@ export const SyncSliders: FC<SyncSlidersProps> = (props) => {
     } = slidersRefs;
 
     const imgsCount = !!imgs.length ? imgs.length : 1;
+    const isMdDown = useMediaQuery(useTheme().breakpoints.down('md'));
+    const isAuth = useSelector((store: RootState) => store.user.isAuth);
 
     const copyUrl = () => {
         const copiedUrl = window.location.href;
         navigator.clipboard.writeText(copiedUrl);
     };
-
-    const isMdDown = useMediaQuery(useTheme().breakpoints.down('md'));
 
     const classes = useStyles({isFavorite});
     return (
@@ -72,16 +76,18 @@ export const SyncSliders: FC<SyncSlidersProps> = (props) => {
                         </IconButton>
                     </Hidden>
                     <div className='share-favo-btns'>
-                        <Box display='flex' alignItems='center' flexDirection='column'>
-                            <IconButton className="favorite-btn" onClick={handleFavorite}>
-                                <FavoriteBorder/>
-                            </IconButton>
-                            <div className='favorite-count'>
-                                <Typography variant='subtitle1'>
-                                    {favoriteCount}
-                                </Typography>
-                            </div>
-                        </Box>
+                        {isAuth && !isCreator && (
+                            <Box display='flex' alignItems='center' flexDirection='column'>
+                                <IconButton className="favorite-btn" onClick={handleFavorite}>
+                                    <FavoriteBorder/>
+                                </IconButton>
+                                <div className='favorite-count'>
+                                    <Typography variant='subtitle1'>
+                                        {favoriteCount}
+                                    </Typography>
+                                </div>
+                            </Box>
+                        )}
                         <IconButton className="share-btn" onClick={copyUrl}>
                             <CustomTooltip title={'Скопировано!'} arrow/>
                         </IconButton>

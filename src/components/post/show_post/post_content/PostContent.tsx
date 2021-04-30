@@ -57,7 +57,10 @@ export const PostContent: FC<PostContentTypes> = (props) => {
     const isExAuc = data.ads_type.mark === 'exauc';
     const isAuction = data.ads_type.mark === 'auc' || isExAuc;
 
-    const {model} = data;
+    const {
+        model,
+        observer: {number_of_favorites, number_of_views}
+    } = data;
 
     const initSlidersRefs: SlidersRefType = {
         slider1: useRef(),
@@ -66,7 +69,7 @@ export const PostContent: FC<PostContentTypes> = (props) => {
         slider4: useRef()
     };
 
-    const [favorite, setFavorite] = useState(data.favorite);
+    const [favorite, setFavorite] = useState(false);
     const [favCount, setFavCount] = useState(0);
     const [descHeight, setDescHeight] = useState(0);
     const [slidersRefs, setSlidersRefs] = useState(initSlidersRefs);
@@ -80,9 +83,8 @@ export const PostContent: FC<PostContentTypes> = (props) => {
     const handleComplaintModal = value => () => setModalsState({...modalsState, openComplaintModal: value});
     const handleFavorite = () => {
         try {
-            const count = favorite ? favCount - 1 : favCount + 1;
             setFavorite(!favorite);
-            setFavCount(count);
+            setFavCount(favorite ? favCount - 1 : favCount + 1);
             userAPI.favoriteAds(data.id);
         } catch (e) {
             dispatch(setErrorMsgAction(e.message));
@@ -143,12 +145,8 @@ export const PostContent: FC<PostContentTypes> = (props) => {
 
     useEffect(() => {
         setFavorite(data.favorite);
-        setFavCount(data.observer.number_of_favorites);
-    }, [data]);
-
-    useEffect(() => {
-        const height = document.getElementById('post-description').clientHeight;
-        setDescHeight(height);
+        !!number_of_favorites && setFavCount(number_of_favorites);
+        setDescHeight(document.getElementById('post-description').clientHeight);
     }, [data]);
 
     const classes = useStyles();
@@ -211,6 +209,7 @@ export const PostContent: FC<PostContentTypes> = (props) => {
             </Hidden>
             <div className="slider-wrapper">
                 <SyncSliders
+                    isCreator={data.creator}
                     imgs={data.images}
                     isFavorite={favorite}
                     slidersRefs={slidersRefs}
@@ -256,7 +255,7 @@ export const PostContent: FC<PostContentTypes> = (props) => {
                             Опубликовано: {formatted_date}
                         </Typography>
                         <Typography variant="subtitle1">
-                            Просмотров: {data.number_of_views}
+                            Просмотров: {number_of_views}
                         </Typography>
                         <Typography variant="subtitle1" onClick={handleComplaintModal(true)}>
                             Пожаловаться <WarningIcon/>
@@ -412,7 +411,7 @@ export const PostContent: FC<PostContentTypes> = (props) => {
                                 </Typography>
                             </Hidden>
                             <Typography variant="subtitle1">
-                                Просмотров: {data.number_of_views}
+                                Просмотров: {number_of_views}
                             </Typography>
                             <Hidden mdDown>
                                 <Typography variant="subtitle1" onClick={handleComplaintModal(true)}>
@@ -426,21 +425,19 @@ export const PostContent: FC<PostContentTypes> = (props) => {
                     </div>
                 </Hidden>
                 <ModalSyncSliders
-                    slidersRefs={slidersRefs}
-                    open={openSliderModal}
-                    title={data.title}
                     imgs={data.images}
+                    title={data.title}
+                    open={openSliderModal}
+                    slidersRefs={slidersRefs}
                     onClose={handleShowSliderModal(false)}
                 />
             </Container>
             <Modal
                 className={classes.modal}
                 open={openComplaintModal}
-                onClose={handleComplaintModal(false)}
                 BackdropComponent={Backdrop}
-                BackdropProps={{
-                    timeout: 200
-                }}
+                BackdropProps={{timeout: 200}}
+                onClose={handleComplaintModal(false)}
             >
                 <div className={classes.modalBody}>
                     <Typography variant='h6'>

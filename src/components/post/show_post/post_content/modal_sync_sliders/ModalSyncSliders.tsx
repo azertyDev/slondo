@@ -36,8 +36,7 @@ export const ModalSyncSliders: FC<SyncSlidersProps> = (props) => {
 
     const imgsCount = !!imgs?.length ? imgs?.length : 1;
 
-    const theme = useTheme();
-    const isMdDown = useMediaQuery(theme.breakpoints.down('md'));
+    const isMdDown = useMediaQuery(useTheme().breakpoints.down('md'));
 
     const [curState, setCurState] = useState(1);
 
@@ -56,10 +55,10 @@ export const ModalSyncSliders: FC<SyncSlidersProps> = (props) => {
     const classes = useStyles({isMdDown});
     return (
         <Modal
+            keepMounted
             open={open}
             onClose={onClose}
             className={classes.modal}
-            keepMounted
         >
             <div className={classes.root}>
                 <div className='close-title'>
