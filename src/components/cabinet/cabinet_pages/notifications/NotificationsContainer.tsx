@@ -24,14 +24,21 @@ type initialStateType = {
 
 const NotificationsContainer: FC = () => {
     const dispatch = useDispatch();
-    const userInfo = useSelector((store:  RootState) => store.user.info )
+    const userInfo = useSelector((store: RootState) => store.user.info);
     const initialState: initialStateType = {
         isFetch: false,
         data: []
     };
 
     const [notifications, setNotifications] = useState(initialState);
+    const [openModal, setOpenModal] = useState(false);
 
+    const handleOpenModal = () => {
+        setOpenModal(true);
+    };
+    const handleCloseModal = () => {
+        setOpenModal(false);
+    };
     const fetchAllNotification = async () => {
         try {
             setNotifications({...notifications, isFetch: true});
@@ -41,7 +48,6 @@ const NotificationsContainer: FC = () => {
             dispatch(setErrorMsgAction(e.message));
         }
     };
-
     const handleDeleteNotification = (id) => async () => {
         try {
             setNotifications({...notifications, isFetch: true});
@@ -52,7 +58,6 @@ const NotificationsContainer: FC = () => {
             dispatch(setErrorMsgAction(e.message));
         }
     };
-
     const handleDeleteAllNotification = async () => {
         try {
             setNotifications({...notifications, isFetch: true});
@@ -68,11 +73,14 @@ const NotificationsContainer: FC = () => {
         fetchAllNotification();
     }, []);
 
-
     return <Notifications
         notifications={notifications}
+        isFetch={notifications.isFetch}
         handleDeleteNotification={handleDeleteNotification}
         handleDeleteAllNotification={handleDeleteAllNotification}
+        openModal={openModal}
+        handleOpenModal={handleOpenModal}
+        handleCloseModal={handleCloseModal}
     />;
 };
 

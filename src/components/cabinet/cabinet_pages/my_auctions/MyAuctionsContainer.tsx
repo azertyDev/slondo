@@ -22,17 +22,6 @@ export const MyAuctionsContainer: FC = () => {
     const { t } = useTranslation('cabinet');
     const classes = useStyles();
 
-    const initialUserInfo: UserInfo = {
-        id: null,
-        name: '',
-        surname: '',
-        phone: '',
-        avatar: '',
-        created_at: '',
-        available_days: '',
-        available_start_time: '',
-        available_end_time: '',
-    };
     const initialState: InitialCabinetCardState = {
         isFetch: false,
         myPosts: {
@@ -43,14 +32,7 @@ export const MyAuctionsContainer: FC = () => {
     const initialOffersState: OffersStateType = {
         isFetch: false,
         total: null,
-        data: [{
-            id: null,
-            auction_id: null,
-            price: null,
-            offer_price_status: false,
-            created_at: '',
-            user: initialUserInfo
-        }]
+        data: []
     };
     const [auctionData, setAuctionData] = useState(initialState);
     const [participatingData, setParticipatingData] = useState(initialState);
@@ -175,7 +157,7 @@ export const MyAuctionsContainer: FC = () => {
                             <ListItemText
                                 primary="Поднять в ленте"
                                 primaryTypographyProps={{variant: 'subtitle1'}}
-                                secondary="(можно использовать 1 раз в 3 дня)"
+                                secondary="(можно использовать 3 раз в неделю)"
                                 secondaryTypographyProps={{variant: 'subtitle2'}}
                             />
                         </ListItem>
