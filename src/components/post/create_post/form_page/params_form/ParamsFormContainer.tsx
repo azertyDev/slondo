@@ -21,8 +21,8 @@ import {RegularParams} from '@src/components/post/create_post/form_page/params_f
 import {setErrorMsgAction} from '@root/src/redux/slices/errorSlice';
 import {CarParams} from '@src/components/post/create_post/form_page/params_form/params_forms/car_params/CarParams';
 import {numericFields, optionKeys} from '@src/common_data/form_fields';
-import {useStyles} from './useStyles';
 import {numberRegEx} from '@src/common_data/reg_exs';
+import {useStyles} from './useStyles';
 
 
 type RegularFormPropsType = {
@@ -57,8 +57,8 @@ export const ParamsFormContainer: FC<RegularFormPropsType> = (props) => {
 
     const dispatch = useDispatch();
 
-    const isCar = categoryName === 'car';
-    const isEstate = categoryName === 'estate';
+    const isCarCtgr = categoryName === 'car';
+    const isEstateCtgr = categoryName === 'estate';
 
     const isMadeInUzb = subCategory.name === 'madeInUzb';
     const isApartments = subCategory.name === 'apartments';
@@ -66,8 +66,8 @@ export const ParamsFormContainer: FC<RegularFormPropsType> = (props) => {
 
     const titleTxtLimit = 70;
 
-    const additionalIcon = isEstate ? <FlatIcon/> : <CarIcon/>;
-    const paramsIcon = isEstate ? <FlatIcon/> : <ParametersIcon/>;
+    const additionalIcon = isEstateCtgr ? <FlatIcon/> : <CarIcon/>;
+    const paramsIcon = isEstateCtgr ? <FlatIcon/> : <ParametersIcon/>;
 
     const additionalTitle = t(`categories:${categoryName}`);
     const paramsFormTitle = isExtendSubCtgr ? t('parameters') : t(`categories:${subCategory.name}`);
@@ -93,7 +93,7 @@ export const ParamsFormContainer: FC<RegularFormPropsType> = (props) => {
 
     const initVals: any = {title: ''};
 
-    if (isCar) {
+    if (isCarCtgr) {
         initVals.broken = false;
         initVals.mileage = '';
         initVals.engine_capacity = '';
@@ -251,7 +251,7 @@ export const ParamsFormContainer: FC<RegularFormPropsType> = (props) => {
                     setTouched({});
                 }
             }
-            if (name === 'manufacturer') newVals = {...newVals, model: null};
+            if (isCarCtgr && name === 'manufacturer') newVals = {...newVals, model: null};
             setValues(newVals);
         } catch (e) {
             dispatch(setErrorMsgAction(e.message));
