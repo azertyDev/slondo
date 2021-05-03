@@ -14,7 +14,7 @@ export const cookieOpts = {path: '/'};
 export const isRequired = (field: string): boolean =>
     requireFields.some(reqField => reqField === field);
 
-export const phoneFormat = (phone: string): string => phone.replace(/[\s+()]/g, '');
+export const phonePrepare = (phone: string): string => phone.replace(/[\s+()]/g, '');
 
 export const transformToCyrillic = (title: string, reverse?: boolean): string => {
     const transform = reverse ? new CyrillicToTranslit().reverse : new CyrillicToTranslit().transform;

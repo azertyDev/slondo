@@ -1,4 +1,9 @@
 {
+  "exchange": "Almashish imkoni bor",
+  "safe_deal": "Xavfsiz sotib olish",
+  "safe_deal_rules": "Xavfsiz sotib olish qoidalari",
+  "delivery": "Etkazib borish bor",
+  "delivery_rules": "Etkazib borish qoidalari",
   "cancel": "Bekor kilish",
   "showMore": "Yana korsatish",
   "hide": "Bekitish",
@@ -12,12 +17,12 @@
   "selectGeolocation": "Joylashuvni tanlang",
   "weInSocial": "Biz ijtimoiy tarmoqlarda",
   "youLookingFor": "Siz izlayotgan edingiz",
+  "call_times": "Qong'iroq qilish vaqti",
   "Mo": "Du",
   "Tu": "Se",
   "We": "Cho",
   "Th": "Pa",
   "Fr": "Ju",
   "Sa": "Sha",
-  "Su": "Ya",
-  "callTimes": "Qong'iroq qilish vaqti"
+  "Su": "Ya"
 }

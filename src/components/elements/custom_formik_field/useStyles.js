@@ -11,6 +11,12 @@ export const useStyles = makeStyles((theme) => ({
                 padding: '11.5px 14px',
                 fontSize: 'calc(14px + 2 * (100vw / 1280))'
             }
+        },
+        '& div.helpers-content': {
+            display: 'flex',
+            '& div.limit-txt > h6': {
+                textAlign: 'end'
+            }
         }
     }
 }));

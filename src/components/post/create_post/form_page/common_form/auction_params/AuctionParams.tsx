@@ -67,8 +67,8 @@ export const AuctionParams: FC<AuctionParamsPropsType> = (props) => {
                                 t={t}
                                 name='reserve_price'
                                 labelText='reserve_price'
-                                value={values.reserve_price}
                                 onChange={handleInput}
+                                value={auction.reserve_price}
                             />
                         </Grid>
                     )}
@@ -81,7 +81,7 @@ export const AuctionParams: FC<AuctionParamsPropsType> = (props) => {
                     />
                     <Typography variant="subtitle1">
                         <strong>
-                            {t('offerPrice')}
+                            {t('filters:offer_price')}
                         </strong>
                     </Typography>
                 </Grid>
@@ -96,7 +96,7 @@ export const AuctionParams: FC<AuctionParamsPropsType> = (props) => {
                                 />
                                 <Typography variant="subtitle1">
                                     <strong>
-                                        {t('buyNow')}
+                                        {t('filters:buy_now')}
                                     </strong>
                                 </Typography>
                             </Grid>
@@ -119,7 +119,7 @@ export const AuctionParams: FC<AuctionParamsPropsType> = (props) => {
                             />
                             <Typography variant="subtitle1">
                                 <strong>
-                                    {t('autoRenewal')}
+                                    {t('filters:auto_renewal')}
                                 </strong>
                             </Typography>
                         </Grid>

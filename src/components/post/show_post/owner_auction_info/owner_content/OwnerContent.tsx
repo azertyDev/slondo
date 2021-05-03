@@ -1,4 +1,4 @@
-import React, {useState, FC} from 'react';
+import {FC} from 'react';
 import {Hidden, Typography} from '@material-ui/core';
 import {ButtonComponent} from '@src/components/elements/button/Button';
 import {SafeIcon} from '@root/src/components/elements/icons';
@@ -10,16 +10,18 @@ import {useStyles} from './useStyles';
 
 type OwnerPropsType = {
     data,
-    authorPhones: {phone: string, additional_number: string},
+    isFetch: boolean,
+    authorPhones: { phone: string, additional_number: string },
     handleFollow: (userId) => () => void,
     showPhone: boolean,
     handleShowPhone: () => void
 } & WithT;
 
-export const OwnerInfo: FC<OwnerPropsType> = (props) => {
+export const OwnerContent: FC<OwnerPropsType> = (props) => {
     const {
         t,
         data,
+        isFetch,
         authorPhones,
         handleFollow,
         showPhone,
@@ -38,10 +40,15 @@ export const OwnerInfo: FC<OwnerPropsType> = (props) => {
     const classes = useStyles();
     return (
         <div className={classes.root}>
-            <UserInfoWithAvatar subscribed={subscribed} isOwner={creator} owner={author} handleFollow={handleFollow}/>
+            <UserInfoWithAvatar
+                subscribed={subscribed}
+                isOwner={creator}
+                owner={author}
+                handleFollow={handleFollow}
+            />
             <Hidden mdDown>
                 <div className="contact-buttons">
-                    <ButtonComponent color="primary" onClick={handleShowPhone}>
+                    <ButtonComponent color="primary" disabled={isFetch} onClick={handleShowPhone}>
                         <Typography variant="subtitle1" color="initial">
                             <span>{t(showPhoneTxt)}</span>
                             {showPhone && authorPhones.additional_number && (
@@ -54,7 +61,10 @@ export const OwnerInfo: FC<OwnerPropsType> = (props) => {
                     </ButtonComponent>
                     {!creator && (
                         <>
-                            <ButtonComponent color="primary" className='contact-btn'>
+                            <ButtonComponent
+                                color="primary"
+                                className='contact-btn'
+                            >
                                 <Typography variant="subtitle1" color="initial">
                                     Написать продавцу
                                 </Typography>

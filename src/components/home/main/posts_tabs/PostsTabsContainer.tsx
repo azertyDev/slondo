@@ -5,8 +5,9 @@ import {ITEMS_PER_PAGE} from '@src/constants';
 import {userAPI} from '@src/api/api';
 import {CardData} from '@root/interfaces/CardData';
 import {initCards} from '../posts_slider/PostsSliderContainer';
-import {setErrorMsgAction} from "@src/redux/slices/errorSlice";
-import {useDispatch} from "react-redux";
+import {setErrorMsgAction} from '@src/redux/slices/errorSlice';
+import {useDispatch, useSelector} from 'react-redux';
+import {RootState} from '@src/redux/rootReducer';
 
 
 const initCardData: CardData = {
@@ -15,12 +16,13 @@ const initCardData: CardData = {
     error: null,
     data: {
         cards: initCards,
-        total: null,
+        total: null
     }
 };
 
 export const PostsTabsContainer: FC<WithT> = ({t}) => {
     const dispatch = useDispatch();
+    const {isAuth} = useSelector((store: RootState) => store.user);
 
     const [tabValue, setTabValue] = useState(0);
 
@@ -35,7 +37,7 @@ export const PostsTabsContainer: FC<WithT> = ({t}) => {
             setState({
                 ...state,
                 isFetch: !isShowMore,
-                isShowMoreFetch: true,
+                isShowMoreFetch: true
             });
 
             const newData = await userAPI.getCards(ITEMS_PER_PAGE, currentPage, type);
@@ -46,14 +48,14 @@ export const PostsTabsContainer: FC<WithT> = ({t}) => {
                 isShowMoreFetch: false,
                 data: {
                     cards: isShowMore ? [...state.data.cards, ...newData.data] : newData.data,
-                    total: newData.total,
+                    total: newData.total
                 }
             });
         } catch (e) {
             dispatch(setErrorMsgAction(e.message));
             setState({
                 ...state,
-                error: e.message,
+                error: e.message
             });
         }
     };
@@ -79,7 +81,7 @@ export const PostsTabsContainer: FC<WithT> = ({t}) => {
         auctionCurrentPage !== 1 && setAuctionCurrentPage(1);
         setCardData(postCardData, setPostCardData, 1, 'post');
         setCardData(auctionCardData, setAuctionCardData, 1, 'auc');
-    }, []);
+    }, [isAuth]);
 
     return (
         <PostsTabs

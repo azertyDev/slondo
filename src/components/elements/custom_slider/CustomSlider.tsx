@@ -17,5 +17,5 @@ export const CustomSlider = forwardRef<any, PropsWithChildren<Settings>>(
                 {props.children}
             </SlickSlider>
         );
-    },
+    }
 );

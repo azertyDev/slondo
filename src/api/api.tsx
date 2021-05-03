@@ -12,7 +12,7 @@ const localServer = 'http://192.168.100.60/slondo/public/api/';
 
 const instance = Axios.create({
     withCredentials: true,
-    baseURL: uztelecom
+    baseURL: localServer
 });
 
 const setTokenToHeader = () => {
@@ -177,20 +177,20 @@ export const userAPI = {
                 throw err;
             });
     },
-    createPost: (values: any): Promise<string> => {
-        return instance.post(`regular/post/new`, values, setTokenToHeader())
+    createPost: (form: FormData): Promise<string> => {
+        return instance.post(`regular/post/new`, form, setTokenToHeader())
             .then(res => res.data)
             .catch(err => {
                 throw err;
             });
     },
-    uploadPhotos: (form: FormData): Promise<any> => {
-        return instance.post(`regular/post/imageUpload`, form, setTokenToHeader())
-            .then(res => res.data)
-            .catch(err => {
-                throw err;
-            });
-    },
+    // uploadPhotos: (form: FormData): Promise<any> => {
+    //     return instance.post(`regular/post/imageUpload`, form, setTokenToHeader())
+    //         .then(res => res.data)
+    //         .catch(err => {
+    //             throw err;
+    //         });
+    // },
     betAuction: (bet: string, id: string): Promise<AuctionsDataTypes> => {
         const form = new FormData();
         form.set('auction_id', id);

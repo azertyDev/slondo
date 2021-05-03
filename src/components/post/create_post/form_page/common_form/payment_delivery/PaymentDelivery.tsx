@@ -1,4 +1,4 @@
-import React, {FC} from "react";
+import {FC} from "react";
 import {Checkbox, Grid, Typography} from "@material-ui/core";
 import {Help} from "@material-ui/icons";
 import {WithT} from "i18next";
@@ -33,7 +33,7 @@ export const PaymentDelivery: FC<PaymentDeliveryPropsType> = (props) => {
                         <Grid item xs={2}>
                             <Typography variant="subtitle1">
                                 <strong>
-                                    {t('safeDeal')}
+                                    {t('common:safe_deal')}
                                 </strong>
                             </Typography>
                         </Grid>
@@ -54,7 +54,7 @@ export const PaymentDelivery: FC<PaymentDeliveryPropsType> = (props) => {
                                 услуги составляет n%.&nbsp;
                                 <a href="#">
                             <span className="safe-auction-rules">
-                                {t('safeDealRules')}
+                                {t('common:safe_deal_rules')}
                             </span>
                                 </a>
                             </Typography>
@@ -69,7 +69,7 @@ export const PaymentDelivery: FC<PaymentDeliveryPropsType> = (props) => {
                         <Grid item xs={2}>
                             <Typography variant="subtitle1">
                                 <strong>
-                                    {t('exchange')}
+                                    {t('common:exchange')}
                                 </strong>
                             </Typography>
                         </Grid>
@@ -101,7 +101,7 @@ export const PaymentDelivery: FC<PaymentDeliveryPropsType> = (props) => {
                 <Grid item xs={2}>
                     <Typography variant="subtitle1">
                         <strong>
-                            {t('delivery')}
+                            {t('common:delivery')}
                         </strong>
                     </Typography>
                 </Grid>
@@ -122,7 +122,7 @@ export const PaymentDelivery: FC<PaymentDeliveryPropsType> = (props) => {
                         Вы можете быть заблокированы.&nbsp;
                         <a href="#">
                             <span className="safe-auction-rules">
-                                {t('deliveryRules')}
+                                {t('common:delivery_rules')}
                             </span>
                         </a>
                     </Typography>

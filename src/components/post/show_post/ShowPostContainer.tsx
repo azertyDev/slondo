@@ -4,7 +4,7 @@ import {useRouter} from 'next/router';
 import {useTranslation} from 'next-i18next';
 import {userAPI} from '@src/api/api';
 import {setErrorMsgAction} from '@src/redux/slices/errorSlice';
-import {useDispatch} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import {Container, Grid, Hidden, useMediaQuery, useTheme} from '@material-ui/core';
 import {PostContent} from '@src/components/post/show_post/post_content/PostContent';
 import {Banner} from '@src/components/elements/banner/Banner';
@@ -12,6 +12,7 @@ import {Header} from '@src/components/header/Header';
 import {Footer} from '@src/components/footer/Footer';
 import {ErrorModal} from '@src/components/error_modal/ErrorModal';
 import {OwnerAuctionInfo} from '@src/components/post/show_post/owner_auction_info/OwnerAuctionInfo';
+import {RootState} from '@src/redux/rootReducer';
 import {useStyles} from './useStyles';
 
 
@@ -21,6 +22,7 @@ export const ShowPostContainer: FC = () => {
 
     const url = useRouter().query.url as string;
     const [postId] = url.split('-').splice(-1);
+    const {isAuth} = useSelector((store: RootState) => store.user);
 
     const initValues = {id: null, name: ''};
     const initialPostData = {
@@ -142,7 +144,7 @@ export const ShowPostContainer: FC = () => {
 
     useEffect(() => {
         fetchPostData();
-    }, []);
+    }, [isAuth]);
 
     const classes = useStyles();
     return (

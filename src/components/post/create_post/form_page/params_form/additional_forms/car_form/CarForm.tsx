@@ -5,7 +5,7 @@ import {DropDownSelect} from '@src/components/elements/drop_down_select/DropDown
 import {FormikType} from '@root/interfaces/Formik';
 import {getErrorMsg} from '@src/helpers';
 import {PreviewValues} from '../../PreviewValues';
-import {BodySelect} from '../../../../../../elements/body_select/BodySelect';
+import {BodySelect} from '@src/components/elements/body_select/BodySelect';
 import {CustomFormikField} from '@src/components/elements/custom_formik_field/CustomFormikField';
 import {CheckboxSelect} from '@src/components/elements/checkbox_select/CheckboxSelect';
 import {useStyles} from './useStyles';
@@ -19,6 +19,7 @@ type HousesCottagesPropsType = {
     formik: FormikType<any>,
     handleCheckbox: (e) => void,
     handleSelect: (k, v) => void
+    handleInput: (e) => void
 } & WithT;
 
 export const CarForm: FC<HousesCottagesPropsType> = (props) => {
@@ -30,7 +31,8 @@ export const CarForm: FC<HousesCottagesPropsType> = (props) => {
         filters,
         valuesByYear,
         handleCheckbox,
-        handleSelect
+        handleSelect,
+        handleInput
     } = props;
 
     const {
@@ -203,6 +205,7 @@ export const CarForm: FC<HousesCottagesPropsType> = (props) => {
                                              name='engine_capacity'
                                              labelText='engine_capacity'
                                              value={values.engine_capacity}
+                                             onChange={handleInput}
                                              errorMsg={getErrorMsg(errors.engine_capacity, touched.engine_capacity, t)}
                                          />
                                      </Grid>
@@ -217,6 +220,7 @@ export const CarForm: FC<HousesCottagesPropsType> = (props) => {
                                              name='mileage'
                                              labelText='mileage'
                                              value={values.mileage ?? ''}
+                                             onChange={handleInput}
                                              errorMsg={getErrorMsg(errors.mileage, touched.mileage, t)}
                                          />
                                      </Grid>

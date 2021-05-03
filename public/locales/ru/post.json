@@ -1,7 +1,6 @@
 {
   "number_not_available": "Сейчас номер недоступен",
   "show_phone": "Показать номер",
-  "safe_deal": "Безопасная покупка",
   "category": "Категория",
   "searchCategory": "Поиск категорий",
   "selectCategory": "Выберите категорию",
@@ -21,5 +20,6 @@
   "next": "Далее",
   "photos": "Фотографии",
   "congratulations": "Поздравляем!",
-  "automobile": "Автомобиль"
+  "automobile": "Автомобиль",
+  "publish": "Опубликовать"
 }

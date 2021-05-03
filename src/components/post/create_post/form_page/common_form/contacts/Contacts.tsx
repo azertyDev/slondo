@@ -1,7 +1,7 @@
-import React, {FC} from "react";
-import {Checkbox, Typography} from "@material-ui/core";
-import {CustomFormikField} from "@src/components/elements/custom_formik_field/CustomFormikField";
-import {WithT} from "i18next";
+import {FC} from 'react';
+import {Checkbox, Typography} from '@material-ui/core';
+import {CustomFormikField} from '@src/components/elements/custom_formik_field/CustomFormikField';
+import {WithT} from 'i18next';
 import {useStyles} from './useStyles';
 
 
@@ -30,35 +30,34 @@ export const Contacts: FC<ContactsPropsType> = (props) => {
                 <div className='display-phone'>
                     <Checkbox
                         color='primary'
-                        checked={values.display_phone}
+                        checked={values.auction.display_phone}
                         onChange={handleCheckboxChange('display_phone')}
                     />
                     <Typography variant="subtitle1">
-                        {t('displayPhone')}
+                        {t('filters:display_phone')}
                     </Typography>
                 </div>
             )}
             <div>
                 <Typography variant="subtitle1">
-                    <strong>{t('ownPhone')}:&nbsp;</strong>
+                    <strong>{t('filters:own_phone')}:&nbsp;</strong>
                     <span>+{ownerPhone}</span>
                 </Typography>
             </div>
             <div>
                 <Typography variant="subtitle1">
                     <strong>
-                        {t('additionalPhone')}:
+                        {t('filters:additional_phone')}:
                     </strong>
                 </Typography>
                 <CustomFormikField
                     t={t}
                     type="tel"
                     name="phone"
-                    placeholder="+998 (__) ___ __ __"
                     value={values.phone}
                     onChange={handleInput}
                 />
             </div>
         </div>
-    )
+    );
 };

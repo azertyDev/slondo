@@ -19,7 +19,7 @@ type AuctionInfoPropsType = {
     data,
 } & WithT;
 
-export const AuctionInfo: FC<AuctionInfoPropsType> = (props) => {
+export const AuctionContent: FC<AuctionInfoPropsType> = (props) => {
     const {
         t,
         data
@@ -29,7 +29,6 @@ export const AuctionInfo: FC<AuctionInfoPropsType> = (props) => {
     const dispatch = useDispatch();
     const date = new Date(data.expiration_at).getTime();
     const isExAuc = data.ads_type.mark === 'exauc';
-    const hasBuyNow = !!data.auction.price_buy_now;
     const hasOfferPrice = !!data.auction.offer_the_price;
 
     const initAuctionsBets = {
@@ -43,6 +42,10 @@ export const AuctionInfo: FC<AuctionInfoPropsType> = (props) => {
     const [offerPrice, setOfferPrice] = useState({isFetch: false, price: null});
     const [page, setPage] = useState(1);
     const [auctionsBets, setAuctionBets] = useState(initAuctionsBets);
+    const [lastBet] = auctionsBets.list;
+
+    const hasReservePrice = data.auction?.reserve_price > lastBet?.bet;
+    const hasBuyNow = !!data.auction?.price_buy_now && data.auction.price_buy_now > lastBet?.bet;
 
     const handleModalBuyNow = (value) => () => {
         setOpenBuyNow(value);
@@ -128,7 +131,7 @@ export const AuctionInfo: FC<AuctionInfoPropsType> = (props) => {
     return (
         <div className={classes.root}>
             <div className="lot-info">
-                {data.auction && data.auction.reserve_price > auctionsBets[0]?.bet && (
+                {hasReservePrice && (
                     <div className="reserve-price">
                         <LockIcon/>
                         <div>
@@ -226,7 +229,7 @@ export const AuctionInfo: FC<AuctionInfoPropsType> = (props) => {
                         <AuctionForm
                             t={t}
                             handleBet={handleBet}
-                            auctionsBets={auctionsBets.list}
+                            lastBet={lastBet}
                         />
                         {hasBuyNow && (
                             <div>

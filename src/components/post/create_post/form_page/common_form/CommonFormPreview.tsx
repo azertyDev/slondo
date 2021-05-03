@@ -1,8 +1,8 @@
-import React, {FC} from "react";
-import {WithT} from "i18next";
-import {Help} from "@material-ui/icons";
-import {Checkbox, Typography} from "@material-ui/core";
-import {numberPrettier, weekDaysHelper} from "@src/helpers";
+import React, {FC} from 'react';
+import {WithT} from 'i18next';
+import {Help} from '@material-ui/icons';
+import {Checkbox, Typography} from '@material-ui/core';
+import {numberPrettier, weekDaysHelper} from '@src/helpers';
 import {useStyles} from './useStyles';
 
 
@@ -26,7 +26,7 @@ export const CommonFormPreview: FC<DefaultParamsPropsType> = (props) => {
 
     const {auction, avalTime} = values;
     const locationText = location
-                         ? `${t(`locations:${location.region.name}`)}${location.city ? `, ${t(`locations:${location.city.name}`)}` : ''}${location.district ? `, ${t(`locations:${location.district.name}`)}` : ''}`
+                         ? `${t(`locations:${location.region.name}`)}${location.city ? `, ${t(`locations:${location.city.name}`)}` : ''}${location.district ? `, ${t(`filters:locations:${location.district.name}`)}` : ''}`
                          : '';
 
     const classes = useStyles();
@@ -36,13 +36,13 @@ export const CommonFormPreview: FC<DefaultParamsPropsType> = (props) => {
              ? <div>
                  <Typography variant="subtitle1">
                      <strong>
-                         {t('startPrice')}:&nbsp;
+                         {t('filters:start_price')}:&nbsp;
                      </strong>
                      {numberPrettier(values.price)}
                  </Typography>
                  <Typography variant="subtitle1">
                      <strong>
-                         {t('auctionDuration')}:&nbsp;
+                         {t('filters:auction_duration')}:&nbsp;
                      </strong>
                      {auction.duration.hours}
                  </Typography>
@@ -50,14 +50,14 @@ export const CommonFormPreview: FC<DefaultParamsPropsType> = (props) => {
                      <div>
                          <Typography variant="subtitle1">
                              <strong>
-                                 {t('reservePrice')}:&nbsp;
+                                 {t('filters:reserve_price')}:&nbsp;
                              </strong>
                              {auction.reserve_price}
                          </Typography>
                          {auction.price_buy_now.value && (
                              <Typography variant="subtitle1">
                                  <strong>
-                                     {t('buyNow')}:&nbsp;
+                                     {t('filters:buy_now')}:&nbsp;
                                  </strong>
                                  {auction.price_buy_now.value}
                              </Typography>
@@ -70,7 +70,7 @@ export const CommonFormPreview: FC<DefaultParamsPropsType> = (props) => {
                                      checked={auction.auto_renewal}
                                  />
                                  <Typography variant="subtitle1">
-                                     {t('autoRenewal')}
+                                     {t('filters:auto_renewal')}
                                  </Typography>
                              </div>
                          )}
@@ -82,7 +82,7 @@ export const CommonFormPreview: FC<DefaultParamsPropsType> = (props) => {
                                      checked={auction.offer_the_price}
                                  />
                                  <Typography variant="subtitle1">
-                                     {t('offerPrice')}
+                                     {t('filters:offer_price')}
                                  </Typography>
                              </div>
                          )}
@@ -91,7 +91,7 @@ export const CommonFormPreview: FC<DefaultParamsPropsType> = (props) => {
              </div>
              : <Typography variant="subtitle1">
                  <strong>
-                     {t('price')}:&nbsp;
+                     {t('filters:price')}:&nbsp;
                  </strong>
                  {numberPrettier(values.price)}&nbsp;
                  {values.currency.name}
@@ -101,7 +101,7 @@ export const CommonFormPreview: FC<DefaultParamsPropsType> = (props) => {
                     <div>
                         <Typography variant="subtitle1">
                             <strong>
-                                {t('safeDeal')}:&nbsp;
+                                {t('filters:safe_deal')}:&nbsp;
                             </strong>
                         </Typography>
                         <Checkbox
@@ -116,7 +116,7 @@ export const CommonFormPreview: FC<DefaultParamsPropsType> = (props) => {
                             услуги составляет n%.&nbsp;
                             <a href="#">
                                 <span className="safe-auction-rules">
-                                    {t('safeDealRules')}
+                                    {t('filters:safe_deal_rules')}
                                 </span>
                             </a>
                         </Typography>
@@ -126,7 +126,7 @@ export const CommonFormPreview: FC<DefaultParamsPropsType> = (props) => {
                     <div>
                         <Typography variant="subtitle1">
                             <strong>
-                                {t('delivery')}:&nbsp;
+                                {t('filters:delivery')}:&nbsp;
                             </strong>
                         </Typography>
                         <Checkbox
@@ -141,7 +141,7 @@ export const CommonFormPreview: FC<DefaultParamsPropsType> = (props) => {
                             Вы можете быть заблокированы.&nbsp;
                             <a href="#">
                                 <span className="safe-auction-rules">
-                                    {t('deliveryRules')}
+                                    {t('filters:delivery_rules')}
                                 </span>
                             </a>
                         </Typography>
@@ -151,7 +151,7 @@ export const CommonFormPreview: FC<DefaultParamsPropsType> = (props) => {
                     <div>
                         <Typography variant="subtitle1">
                             <strong>
-                                {t('exchange')}:&nbsp;
+                                {t('filters:exchange')}:&nbsp;
                             </strong>
                         </Typography>
                         <Checkbox
@@ -178,7 +178,7 @@ export const CommonFormPreview: FC<DefaultParamsPropsType> = (props) => {
             <div className='description-wrapper'>
                 <Typography variant="subtitle1">
                     <strong>
-                        {t('description')}:&nbsp;
+                        {t('filters:description')}:&nbsp;
                     </strong>
                 </Typography>
                 <Typography>
@@ -188,14 +188,14 @@ export const CommonFormPreview: FC<DefaultParamsPropsType> = (props) => {
             <div>
                 <Typography variant="subtitle1">
                     <strong>
-                        {t('ownPhone')}:&nbsp;
+                        {t('filters:own_phone')}:&nbsp;
                     </strong>
                     +{ownerPhone}
                 </Typography>
-                {values.phone && (
+                {!!values.phone && !RegExp(/_/g).test(values.phone) && (
                     <Typography variant="subtitle1">
                         <strong>
-                            {t('additionalPhone')}:&nbsp;
+                            {t('filters:additional_phone')}:&nbsp;
                         </strong>
                         {values.phone}
                     </Typography>
@@ -205,7 +205,7 @@ export const CommonFormPreview: FC<DefaultParamsPropsType> = (props) => {
                 <div>
                     <Typography variant="subtitle1">
                         <strong>
-                            {t('callTimes')}:&nbsp;
+                            {t('common:call_times')}:&nbsp;
                         </strong>
                         {`${avalTime.time.start_time} - ${avalTime.time.end_time}`}&nbsp;
                         ({weekDaysHelper(avalTime.time.week_days, t)})

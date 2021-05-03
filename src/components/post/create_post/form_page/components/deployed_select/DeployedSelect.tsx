@@ -1,8 +1,8 @@
-import React, {FC} from "react";
-import {ButtonComponent} from "@src/components/elements/button/Button";
-import {Typography} from "@material-ui/core";
-import {WithT} from "i18next";
-import {isRequired} from "@src/helpers";
+import {FC} from 'react';
+import {ButtonComponent} from '@src/components/elements/button/Button';
+import {Typography} from '@material-ui/core';
+import {WithT} from 'i18next';
+import {isRequired} from '@src/helpers';
 import {useStyles} from './useStyles';
 
 
@@ -27,7 +27,7 @@ export const DeployedSelect: FC<SelectOptionsPropsType> = (props) => {
     } = props;
 
     const handleClick = (item) => () => {
-        handleSelect(name, item)
+        handleSelect(name, item);
     };
 
     const classes = useStyles();
@@ -35,7 +35,7 @@ export const DeployedSelect: FC<SelectOptionsPropsType> = (props) => {
         <div className={classes.root}>
             <Typography variant="subtitle1">
                 <strong>
-                    {t(name)}
+                    {t(`filters:${name}`)}
                     {isRequired(name) && <span className='error-text'>*&nbsp;</span>}
                 </strong>
             </Typography>
@@ -57,5 +57,5 @@ export const DeployedSelect: FC<SelectOptionsPropsType> = (props) => {
                 )}
             </Typography>
         </div>
-    )
+    );
 };

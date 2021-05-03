@@ -1,15 +1,9 @@
-import {string, object, ref} from "yup";
-import {fieldIsRequired} from "@src/common_data/form_fields";
+import {string, object, ref} from 'yup';
+import {fieldIsRequired} from '@src/common_data/form_fields';
 
 const wrongNumberFormat = 'wrongNumberFormat';
 const passwordMin = 'passwordMustMinEightChars';
 const passwordsDifferent = 'passwordsDifferent';
-
-export const authSchema = object({
-    password: string().required(fieldIsRequired),
-    phone: string().required(fieldIsRequired)
-        .test('len', wrongNumberFormat, val => val?.length === 16)
-});
 
 export const passwordSchema = object({
     password: string().required(fieldIsRequired)
@@ -17,12 +11,14 @@ export const passwordSchema = object({
 
 export const phoneSchema = object({
     phone: string().required(fieldIsRequired)
-        .test('len', wrongNumberFormat, val => val?.length === 16)
+        .test('len', wrongNumberFormat, val => !RegExp(/_/g).test(val))
 });
 
 export const codeSchema = object({
     code: string().required(fieldIsRequired)
 });
+
+export const authSchema = object().concat(phoneSchema).concat(passwordSchema);
 
 export const passwordConfirmSchema = object({
     newPassword: string().required(fieldIsRequired).min(8, passwordMin),

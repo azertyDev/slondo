@@ -1,6 +1,6 @@
-import {object, string, array, lazy} from "yup";
-import {fieldIsRequired} from "@src/common_data/form_fields";
-import {isRequired} from "@root/src/helpers";
+import {object, string, array, lazy} from 'yup';
+import {fieldIsRequired} from '@src/common_data/form_fields';
+import {isRequired} from '@root/src/helpers';
 
 export const paramsFormSchema = lazy(
     (value) => object({
@@ -15,6 +15,14 @@ export const paramsFormSchema = lazy(
                                 '',
                                 fieldIsRequired,
                                 value => !!value && !!value.id
+                            );
+                    } else if (key === 'engine_capacity') {
+                        acc[key] = string()
+                            .required(fieldIsRequired)
+                            .test(
+                                '',
+                                'value not must be less than 0.8',
+                                value => +value >= 0.8
                             );
                     } else {
                         acc[key] = string().required(fieldIsRequired);

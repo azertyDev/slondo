@@ -1,12 +1,12 @@
-import React, {Dispatch, FC, SetStateAction} from 'react';
+import {Dispatch, FC, SetStateAction} from 'react';
 import {WithT} from 'i18next';
-import {Tab, Tabs, Typography} from '@material-ui/core'
-import {useRouter} from "next/router";
-import {AuthForm} from "@src/components/header/auth_reg_page/auth_reg_form/auth_form/AuthForm";
-import {AgreementsTxt} from "@src/components/header/auth_reg_page/auth_reg_form/AgreementsTxt";
-import {CustomTabPanel} from "@src/components/elements/custom_tab_panel/CustomTabPanel";
-import {RegForm} from "./reg_form/RegForm";
-import {RecoveryContainer} from "./recovery_form/RecoveryContainer";
+import {Tab, Tabs, Typography} from '@material-ui/core';
+import {useRouter} from 'next/router';
+import {AuthForm} from '@src/components/header/auth_reg_page/auth_reg_form/auth_form/AuthForm';
+import {AgreementsTxt} from '@src/components/header/auth_reg_page/auth_reg_form/AgreementsTxt';
+import {CustomTabPanel} from '@src/components/elements/custom_tab_panel/CustomTabPanel';
+import {RegForm} from './reg_form/RegForm';
+import {RecoveryContainer} from './recovery_form/RecoveryContainer';
 import {useStyles} from './useStyles';
 
 
@@ -100,22 +100,22 @@ export const AuthRegContainer: FC<AuthRegContainerPropsType> = (props) => {
                             className="reg-panel"
                         >
                             {isRecoveryPswd
-                                ? <RecoveryContainer
-                                    t={t}
-                                    timer={timer}
-                                    activeTimer={activeTimer}
-                                    setErrorMsg={setErrorMsg}
-                                    handleCancel={handleCancel}
-                                    handleCloseModal={handleCloseModal}
-                                    handleActiveTimer={handleActiveTimer}
-                                />
-                                : <div className='reg-form'>
-                                    <RegForm
-                                        t={t}
-                                        setErrorMsg={setErrorMsg}
-                                        handleCancel={handleCancel}
-                                    />
-                                </div>}
+                             ? <RecoveryContainer
+                                 t={t}
+                                 timer={timer}
+                                 activeTimer={activeTimer}
+                                 setErrorMsg={setErrorMsg}
+                                 handleCancel={handleCancel}
+                                 handleCloseModal={handleCloseModal}
+                                 handleActiveTimer={handleActiveTimer}
+                             />
+                             : <div className='reg-form'>
+                                 <RegForm
+                                     t={t}
+                                     setErrorMsg={setErrorMsg}
+                                     handleCancel={handleCancel}
+                                 />
+                             </div>}
                         </CustomTabPanel>
                     </div>
                 </div>
@@ -124,5 +124,5 @@ export const AuthRegContainer: FC<AuthRegContainerPropsType> = (props) => {
                 </div>
             </div>
         </div>
-    )
+    );
 };

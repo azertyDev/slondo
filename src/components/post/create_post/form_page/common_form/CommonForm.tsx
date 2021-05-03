@@ -12,7 +12,7 @@ import {FormikProvider, useFormik} from 'formik';
 import {CustomAccordion} from '@src/components/post/create_post/form_page/components/accordion/CustomAccordion';
 import {numericFields} from '@src/common_data/form_fields';
 import {auctionParamsSchema, defaultParamsSchema} from '@root/validation_schemas/createPostSchemas';
-import {clearWhiteSpaces, getErrorMsg, numberPrettier} from '@src/helpers';
+import {clearWhiteSpaces, getErrorMsg, numberPrettier, phonePrepare} from '@src/helpers';
 import {RootState} from '@src/redux/rootReducer';
 import {PostType} from '@root/interfaces/Post';
 import {WEEK_DAYS} from '@src/common_data/common';
@@ -52,6 +52,7 @@ export const CommonForm: FC<DefaultParamsPropsType> = (props) => {
     const isAuction = postType.name === 'auc' || isAdvanceAuction;
 
     const {locations} = useSelector((store: RootState) => store);
+    const descTxtLimit = 9000;
 
     const initForm = {
         safe_deal: false,
@@ -75,7 +76,7 @@ export const CommonForm: FC<DefaultParamsPropsType> = (props) => {
             reserve_price: '',
             offer_the_price: false,
             auto_renewal: false,
-            display_phone: false,
+            display_phone: true,
             price_buy_now: {
                 isActive: false,
                 value: ''
@@ -91,6 +92,10 @@ export const CommonForm: FC<DefaultParamsPropsType> = (props) => {
             auction,
             currency,
             location,
+            phone,
+            safe_deal,
+            delivery,
+            exchange,
             avalTime: {isActive, time},
             ...otherData
         } = createData;
@@ -143,9 +148,10 @@ export const CommonForm: FC<DefaultParamsPropsType> = (props) => {
             otherData.week_days = week_days.map(({id}) => ({id}));
         }
 
-        !otherData.safe_deal && delete otherData.safe_deal;
-        !otherData.delivery && delete otherData.delivery;
-        !otherData.exchange && delete otherData.exchange;
+        if (!!phone && !RegExp(/_/g).test(phone)) otherData.phone = phonePrepare(phone);
+        if (safe_deal) otherData.safe_deal = safe_deal;
+        if (delivery) otherData.delivery = delivery;
+        if (exchange) otherData.exchange = exchange;
 
         setPost({
             ...post,
@@ -182,11 +188,10 @@ export const CommonForm: FC<DefaultParamsPropsType> = (props) => {
         }
         setValues({...values});
     };
-
     const handleInput = ({target: {name, value}}) => {
         const isNumericField = numericFields.some((n => n === name));
         if (isNumericField) {
-            if (numberRegEx.test(value)) {
+            if (RegExp(numberRegEx).test(value)) {
                 const number = numberPrettier(value);
                 if (name === 'reserve_price') {
                     setValues({
@@ -209,15 +214,15 @@ export const CommonForm: FC<DefaultParamsPropsType> = (props) => {
                 }
             }
         } else {
-            setValues({...values, [name]: value});
+            if (name !== 'description' || descTxtLimit >= value.length) {
+                setValues({...values, [name]: value});
+            }
         }
     };
-
     const handleLocation = (_, location) => {
         values.location = location;
         setValues({...values});
     };
-
     const handleCheckboxChange = name => ({target}) => {
         const auctionOptionsList = [
             'price_buy_now',
@@ -239,12 +244,10 @@ export const CommonForm: FC<DefaultParamsPropsType> = (props) => {
         }
         setValues({...values});
     };
-
     const handleSwitch = (_, value) => {
         avalTime.isActive = value;
         setValues({...values});
     };
-
     const handleAvalDays = day => () => {
         const isExstDay = avalTime.time.week_days.some(({id}) => id === day.id);
         if (isExstDay) {
@@ -258,9 +261,8 @@ export const CommonForm: FC<DefaultParamsPropsType> = (props) => {
         }
         setValues({...values});
     };
-
     const handleTime = ({target: {value, name}}) => {
-        if (timeRegEx.test(value)) {
+        if (RegExp(timeRegEx).test(value)) {
             value = value.replace(/^:(.+)/, m => `00${m}`).replace(/(.+):$/, m => `${m}00`);
             avalTime.time = {...avalTime.time, [name]: value};
             setValues({...values});
@@ -305,7 +307,7 @@ export const CommonForm: FC<DefaultParamsPropsType> = (props) => {
                                       handleCheckboxChange={handleCheckboxChange}
                                   />
                               </div>
-                              : <Grid container alignItems='center'>
+                              : <Grid container spacing={1} alignItems='center'>
                                   <Grid item xs={3}>
                                       <CustomFormikField
                                           t={t}
@@ -313,7 +315,6 @@ export const CommonForm: FC<DefaultParamsPropsType> = (props) => {
                                           labelText='price'
                                           value={values.price}
                                           onChange={handleInput}
-                                          style={{width: '270px'}}
                                           errorMsg={getErrorMsg(errors.price, touched.price, t)}
                                       />
                                   </Grid>
@@ -348,10 +349,11 @@ export const CommonForm: FC<DefaultParamsPropsType> = (props) => {
                              </div>
                              <div>
                                  <Description
-                                     label='description'
+                                     limit={descTxtLimit}
                                      handleInput={handleInput}
                                      handleBlur={handleBlur}
                                      description={values.description}
+                                     labelTxt={t('filters:description')}
                                      errorMsg={getErrorMsg(errors.description, touched.description, t)}
                                  />
                              </div>

@@ -4,7 +4,7 @@
   "unauthorised": "Telefon raqami yoki parol noto'g'ri kiritilgan.",
   "server_error": "Serverda xatolik, keyinroq urinib ko'ring",
   "fieldIsRequired": "Maydon toldirilishi shart",
-  "wrongNumberFormat": "Raqam farmati notog'ri",
+  "wrongNumberFormat": "Notog'ri farmat",
   "passwordMustMinEightChars": "Parol kamida 8 shartli belgi",
   "passwordsDifferent": "Parollar xar-xil",
   "addPhotos": "Iltimos, rasm qo'shing"
