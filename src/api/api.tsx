@@ -184,13 +184,6 @@ export const userAPI = {
                 throw err;
             });
     },
-    // uploadPhotos: (form: FormData): Promise<any> => {
-    //     return instance.post(`regular/post/imageUpload`, form, setTokenToHeader())
-    //         .then(res => res.data)
-    //         .catch(err => {
-    //             throw err;
-    //         });
-    // },
     betAuction: (bet: string, id: string): Promise<AuctionsDataTypes> => {
         const form = new FormData();
         form.set('auction_id', id);
