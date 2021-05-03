@@ -20,12 +20,11 @@ export const Notification: FC<NotificationDataType> = (props) => {
         message,
         subTitle = 'test',
         ads_id,
-        created_at
+        created_at,
+        go_to_type
     } = data;
 
     const date = new Date(created_at);
-
-    console.log(date.toLocaleDateString());
 
     const classes = useStyles();
     return (
@@ -47,7 +46,13 @@ export const Notification: FC<NotificationDataType> = (props) => {
                 </Box>
                 <div>
                     <Typography variant="h6" color="initial" noWrap>
-                        {message} {ads_id}
+                        {message}
+                        {/*{*/}
+                        {/*    go_to_type === 'go_to_my_auction'*/}
+                        {/*    go_to_type === 'go_to_my_post'*/}
+                        {/*    go_to_type === 'go_to_user'*/}
+                        {/*}*/}
+                        {ads_id}
                     </Typography>
                     <Typography variant="subtitle1" color="initial" noWrap>
                         {subTitle}

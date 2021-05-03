@@ -6,6 +6,7 @@ import {ButtonComponent} from '@src/components/elements/button/Button';
 import {CircularProgress, Typography} from '@material-ui/core';
 import {CustomModal} from '@src/components/elements/custom_modal/CustomModal';
 import Box from '@material-ui/core/Box';
+import {CustomSnackbar} from '@src/components/elements/snackbar/Snackbar';
 
 type NotificationsPropsType = {
     notifications,
@@ -14,7 +15,11 @@ type NotificationsPropsType = {
     handleDeleteAllNotification: () => void,
     openModal: boolean,
     handleOpenModal: () => void,
-    handleCloseModal: () => void
+    handleCloseModal: () => void,
+    message?: string,
+    openSnackbar?: boolean,
+    handleCloseSnackbar?
+    setOpenSnackbar,
 }
 
 export const Notifications: FC<NotificationsPropsType> = (props) => {
@@ -25,7 +30,10 @@ export const Notifications: FC<NotificationsPropsType> = (props) => {
         handleDeleteAllNotification,
         openModal,
         handleOpenModal,
-        handleCloseModal
+        handleCloseModal,
+        message,
+        openSnackbar,
+        setOpenSnackbar
     } = props;
 
     const title = 'Уведомления';
@@ -42,15 +50,13 @@ export const Notifications: FC<NotificationsPropsType> = (props) => {
                 </ButtonComponent>)}
                 {isFetch
                     ? <CircularProgress />
-                    : notifications.data.map(notification => {
-                        return (
-                            <Notification
-                                key={notification.id}
-                                data={notification}
-                                handleDeleteNotification={handleDeleteNotification}
-                            />
-                        );
-                    })}
+                    : notifications.data.map(notification =>
+                        <Notification
+                            key={notification.id}
+                            data={notification}
+                            handleDeleteNotification={handleDeleteNotification}
+                        />
+                    )}
             </CabinetWrapper>
             <CustomModal handleModalClose={handleCloseModal} openModal={openModal}>
                 <Typography variant='subtitle1'>
@@ -67,6 +73,12 @@ export const Notifications: FC<NotificationsPropsType> = (props) => {
                     <ButtonComponent onClick={handleCloseModal}>Нет</ButtonComponent>
                 </Box>
             </CustomModal>
+            <CustomSnackbar
+                message={message}
+                openSnackbar={openSnackbar}
+                setOpenSnackbar={setOpenSnackbar}
+                severity="success"
+            />
         </div>
     );
 };

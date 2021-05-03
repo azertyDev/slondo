@@ -32,6 +32,8 @@ const NotificationsContainer: FC = () => {
 
     const [notifications, setNotifications] = useState(initialState);
     const [openModal, setOpenModal] = useState(false);
+    const [openSnackbar, setOpenSnackbar] = React.useState(false);
+    const [message, setMessage] = useState('');
 
     const handleOpenModal = () => {
         setOpenModal(true);
@@ -51,9 +53,11 @@ const NotificationsContainer: FC = () => {
     const handleDeleteNotification = (id) => async () => {
         try {
             setNotifications({...notifications, isFetch: true});
-            await userAPI.deleteUserNotification(id);
+            const {message} = await userAPI.deleteUserNotification(id);
             const {data} = await userAPI.getAllNotifications();
             setNotifications({...notifications, data, isFetch: false});
+            setOpenSnackbar(true);
+            setMessage(message);
         } catch (e) {
             dispatch(setErrorMsgAction(e.message));
         }
@@ -76,9 +80,12 @@ const NotificationsContainer: FC = () => {
     return <Notifications
         notifications={notifications}
         isFetch={notifications.isFetch}
+        openModal={openModal}
+        openSnackbar={openSnackbar}
+        message={message}
+        setOpenSnackbar={setOpenSnackbar}
         handleDeleteNotification={handleDeleteNotification}
         handleDeleteAllNotification={handleDeleteAllNotification}
-        openModal={openModal}
         handleOpenModal={handleOpenModal}
         handleCloseModal={handleCloseModal}
     />;

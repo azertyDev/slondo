@@ -26,6 +26,5 @@ export const Archive: FC<MyArchivePropsType> = (props) => {
                 <ModalContent />
             </CustomModal>
         </>
-
     );
 };
