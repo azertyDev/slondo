@@ -1,6 +1,6 @@
-import React, {FC, useEffect, useState} from 'react';
+import {FC, useEffect, useState} from 'react';
 import {WithT} from 'i18next';
-import {Typography} from '@material-ui/core';
+import {Grid, Typography} from '@material-ui/core';
 import {FormikProvider, useFormik} from 'formik';
 import {userAPI} from '@src/api/api';
 import {useDispatch} from 'react-redux';
@@ -20,8 +20,9 @@ import {CommercialPropertyParams} from '@src/components/post/create_post/form_pa
 import {RegularParams} from '@src/components/post/create_post/form_page/params_form/params_forms/regular_params/RegularParams';
 import {setErrorMsgAction} from '@root/src/redux/slices/errorSlice';
 import {CarParams} from '@src/components/post/create_post/form_page/params_form/params_forms/car_params/CarParams';
+import {numericFields, optionKeys} from '@src/common_data/form_fields';
 import {useStyles} from './useStyles';
-import {optionKeys} from '@src/common_data/form_fields';
+import {numberRegEx} from '@src/common_data/reg_exs';
 
 
 type RegularFormPropsType = {
@@ -62,6 +63,8 @@ export const ParamsFormContainer: FC<RegularFormPropsType> = (props) => {
     const isMadeInUzb = subCategory.name === 'madeInUzb';
     const isApartments = subCategory.name === 'apartments';
     const isHousesCottages = subCategory.name === 'housesCottages';
+
+    const titleTxtLimit = 70;
 
     const additionalIcon = isEstate ? <FlatIcon/> : <CarIcon/>;
     const paramsIcon = isEstate ? <FlatIcon/> : <ParametersIcon/>;
@@ -123,7 +126,19 @@ export const ParamsFormContainer: FC<RegularFormPropsType> = (props) => {
     } = formik;
 
     const handleInput = ({target: {name, value}}) => {
-        setValues({...values, [name]: value});
+        const isNumericField = numericFields.some((n => n === name));
+        if (
+            (isNumericField && RegExp(numberRegEx).test(value))
+            ||
+            (!isNumericField && (name !== 'title' || titleTxtLimit >= value.length))
+        ) {
+            if ((name !== 'engine_capacity') || (name === 'engine_capacity' && value.length < 4)) {
+                if (name === 'engine_capacity' && value.length === 2 && value[1] !== '.') {
+                    value = value.replace(/(?<=^.{1})./, `.${value[1]}`);
+                }
+                setValues({...values, [name]: value});
+            }
+        }
     };
 
     const handleSelect = async (name, value) => {
@@ -236,6 +251,7 @@ export const ParamsFormContainer: FC<RegularFormPropsType> = (props) => {
                     setTouched({});
                 }
             }
+            if (name === 'manufacturer') newVals = {...newVals, model: null};
             setValues(newVals);
         } catch (e) {
             dispatch(setErrorMsgAction(e.message));
@@ -269,6 +285,7 @@ export const ParamsFormContainer: FC<RegularFormPropsType> = (props) => {
                     formik={formik}
                     filters={filters}
                     isPreview={isPreview}
+                    handleInput={handleInput}
                     handleSelect={handleSelect}
                     handleCheckbox={handleCheckbox}
                 />;
@@ -290,6 +307,7 @@ export const ParamsFormContainer: FC<RegularFormPropsType> = (props) => {
                     formik={formik}
                     filters={filters}
                     valuesByYear={valuesByYear}
+                    handleInput={handleInput}
                     handleSelect={handleSelect}
                     handleCheckbox={handleCheckbox}
                 />;
@@ -414,20 +432,24 @@ export const ParamsFormContainer: FC<RegularFormPropsType> = (props) => {
                                     {isPreview
                                      ? <Typography variant="subtitle1">
                                          <strong>
-                                             {t('title')}:&nbsp;
+                                             {t('filters:title')}:&nbsp;
                                          </strong>
                                          {values.title}
                                      </Typography>
-                                     : <CustomFormikField
-                                         t={t}
-                                         name='title'
-                                         labelText='title'
-                                         value={values.title}
-                                         onChange={handleInput}
-                                         style={{width: '50%'}}
-                                         placeholder={t('filters:example_title')}
-                                         errorMsg={getErrorMsg(errors.title, touched.title, t)}
-                                     />}
+                                     : <Grid container className='title-wrapper'>
+                                         <Grid item xs={6}>
+                                             <CustomFormikField
+                                                 t={t}
+                                                 name='title'
+                                                 labelText='title'
+                                                 limit={titleTxtLimit}
+                                                 value={values.title}
+                                                 onChange={handleInput}
+                                                 placeholder={t('filters:example_title')}
+                                                 errorMsg={getErrorMsg(errors.title, touched.title, t)}
+                                             />
+                                         </Grid>
+                                     </Grid>}
                                 </div>
                                 {getAdditionalForm()}
                             </CustomAccordion>
@@ -443,25 +465,27 @@ export const ParamsFormContainer: FC<RegularFormPropsType> = (props) => {
                         isEditable={currentFormIndex < 3}
                     >
                         {!isExtendSubCtgr && (
-                            <div className='title-wrapper'>
-                                {isPreview
-                                 ? <Typography variant="subtitle1">
-                                     <strong>
-                                         {t('title')}:&nbsp;
-                                     </strong>
-                                     {values.title}
-                                 </Typography>
-                                 : <CustomFormikField
-                                     t={t}
-                                     name='title'
-                                     labelText='title'
-                                     value={values.title}
-                                     onChange={handleInput}
-                                     style={{width: '50%'}}
-                                     placeholder={t('filters:example_title')}
-                                     errorMsg={getErrorMsg(errors.title, touched.title, t)}
-                                 />}
-                            </div>
+                            <Grid container className='title-wrapper'>
+                                <Grid item xs={6}>
+                                    {isPreview
+                                     ? <Typography variant="subtitle1">
+                                         <strong>
+                                             {t('title')}:&nbsp;
+                                         </strong>
+                                         {values.title}
+                                     </Typography>
+                                     : <CustomFormikField
+                                         t={t}
+                                         name='title'
+                                         labelText='title'
+                                         limit={titleTxtLimit}
+                                         value={values.title}
+                                         onChange={handleInput}
+                                         placeholder={t('filters:example_title')}
+                                         errorMsg={getErrorMsg(errors.title, touched.title, t)}
+                                     />}
+                                </Grid>
+                            </Grid>
                         )}
                         {getParamsForm()}
                     </CustomAccordion>

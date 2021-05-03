@@ -1,4 +1,4 @@
-import React, {FC} from 'react';
+import {FC} from 'react';
 import {Grid} from '@material-ui/core';
 import {WithT} from 'i18next';
 import {DropDownSelect} from '@src/components/elements/drop_down_select/DropDownSelect';

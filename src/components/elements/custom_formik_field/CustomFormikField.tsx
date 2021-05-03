@@ -1,15 +1,22 @@
-import React, {FC} from 'react';
+import {FC} from 'react';
 import {Field} from 'formik';
-import {TextField, Typography} from '@material-ui/core';
-import {TextFieldProps} from "@material-ui/core/TextField/TextField";
-import {isRequired} from "@src/helpers";
 import {WithT} from 'i18next';
+import ReactInputMask from 'react-input-mask';
+import {Grid, TextField, Typography} from '@material-ui/core';
+import {isRequired} from '@src/helpers';
 import {useStyles} from './useStyles';
 
 type CustomFormikFieldPropsType = {
+    limit?: number,
+    style?,
+    name?: string,
+    type?: string,
+    placeholder?: string,
     errorMsg?: string,
-    labelText?: string
-} & TextFieldProps & WithT;
+    labelText?: string,
+    value?: string
+    onChange?: (e) => void
+} & WithT;
 
 export const CustomFormikField: FC<CustomFormikFieldPropsType> = (props) => {
     const {
@@ -17,6 +24,7 @@ export const CustomFormikField: FC<CustomFormikFieldPropsType> = (props) => {
         name,
         errorMsg,
         labelText,
+        limit,
         ...otherProps
     } = props;
 
@@ -35,21 +43,47 @@ export const CustomFormikField: FC<CustomFormikFieldPropsType> = (props) => {
                             </Typography>
                         )}
                     </div>
-                    <TextField
-                        fullWidth
-                        focused={false}
-                        variant="outlined"
-                        {...field}
-                        {...otherProps}
-                        className={errorMsg ? 'error-border' : ''}
-                    />
-                    {errorMsg && (
-                        <Typography variant="subtitle1">
-                            <span className='error-text'>
-                                {errorMsg}
-                            </span>
-                        </Typography>
-                    )}
+                    {props.type === 'tel'
+                     ? <ReactInputMask
+                         alwaysShowMask
+                         {...field}
+                         mask='+\9\98(99) 999 99 99'
+                     >
+                         {() => <TextField
+                             fullWidth
+                             name={name}
+                             focused={false}
+                             variant="outlined"
+                             className={errorMsg ? 'error-border' : ''}
+                         />}
+                     </ReactInputMask>
+                     : <TextField
+                         fullWidth
+                         name={name}
+                         {...field}
+                         {...otherProps}
+                         focused={false}
+                         variant="outlined"
+                         className={errorMsg ? 'error-border' : ''}
+                     />}
+                    <Grid container className='helpers-content'>
+                        {errorMsg && (
+                            <Grid item xs={limit ? 6 : 12}>
+                                <Typography variant="subtitle1">
+                                    <span className='error-text'>
+                                        {errorMsg}
+                                    </span>
+                                </Typography>
+                            </Grid>
+                        )}
+                        {!!limit && (
+                            <Grid item xs={errorMsg ? 6 : 12} className='limit-txt'>
+                                <Typography variant="subtitle1">
+                                    {`${otherProps.value.length}/${limit}`}
+                                </Typography>
+                            </Grid>
+                        )}
+                    </Grid>
                 </div>}
         </Field>
     );

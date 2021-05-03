@@ -32,7 +32,7 @@ export const OptionsSelect: FC<OptionsSectionPropsType> = (props) => {
             {name && (
                 <Typography variant='subtitle1'>
                     <strong>
-                        {t(name)}
+                        {t(`filters:${name}`)}
                     </strong>
                 </Typography>
             )}
@@ -55,7 +55,7 @@ export const OptionsSelect: FC<OptionsSectionPropsType> = (props) => {
                                 onChange={onClick(item)}
                             />
                             <Typography>
-                                {t(item.name)}
+                                {t(`filters:${item.name}`)}
                             </Typography>
                         </Grid>
                     );

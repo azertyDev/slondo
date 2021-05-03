@@ -5,7 +5,7 @@ import {CustomFormikField} from "@src/components/elements/custom_formik_field/Cu
 import {phoneSchema} from '@root/validation_schemas/authRegSchema';
 import {ButtonComponent} from "@src/components/elements/button/Button";
 import {userAPI} from "@src/api/api";
-import {getErrorMsg, phoneFormat} from '@src/helpers';
+import {getErrorMsg, phonePrepare} from '@src/helpers';
 
 
 type ConfirmAuthPropsType = {
@@ -24,7 +24,7 @@ export const PhoneForm: FC<ConfirmAuthPropsType> = (props) => {
 
     const initialInputsVals = {
         isFetch: false,
-        phone: '+(998) '
+        phone: ''
     };
 
     const formik = useFormik({
@@ -47,7 +47,7 @@ export const PhoneForm: FC<ConfirmAuthPropsType> = (props) => {
     };
 
     async function onSubmit(values) {
-        const phone = phoneFormat(values.phone);
+        const phone = phonePrepare(values.phone);
         try {
             await setValues({...values, isFetch: true});
             await userAPI.getSmsCode(phone);
@@ -68,7 +68,6 @@ export const PhoneForm: FC<ConfirmAuthPropsType> = (props) => {
                     type="tel"
                     name="phone"
                     labelText='enter_phone'
-                    placeholder={t('filters:enter_phone')}
                     onChange={handlePhoneInput}
                     errorMsg={getErrorMsg(errors.phone, touched.phone, t)}
                 />

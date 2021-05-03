@@ -1,6 +1,6 @@
-import React, {FC, useEffect, useState} from 'react';
+import {FC, useEffect, useState} from 'react';
 import {Grid, Hidden, IconButton, Modal, Typography} from '@material-ui/core';
-import {useTranslation} from "next-i18next";
+import {useTranslation} from 'next-i18next';
 import {
     AdsIcon,
     BonusIcon,
@@ -9,14 +9,14 @@ import {
     RatingIcon,
     SafeBuyingIcon,
     TorgIcon
-} from "@src/components/elements/icons";
-import {AuthRegContainer} from "@src/components/header/auth_reg_page/auth_reg_form/AuthRegContainer";
-import {ButtonComponent} from "@src/components/elements/button/Button";
-import {CustomSlider} from "@src/components/elements/custom_slider/CustomSlider";
-import {CustomList} from "@src/components/elements/custom_list/CustomList";
+} from '@src/components/elements/icons';
+import {AuthRegContainer} from '@src/components/header/auth_reg_page/auth_reg_form/AuthRegContainer';
+import {ButtonComponent} from '@src/components/elements/button/Button';
+import {CustomSlider} from '@src/components/elements/custom_slider/CustomSlider';
+import {CustomList} from '@src/components/elements/custom_list/CustomList';
 import {useStyles} from './useStyles';
-import {setIsAuthModalOpen} from "@src/redux/slices/userSlice";
-import {useDispatch} from "react-redux";
+import {setIsAuthModalOpen} from '@src/redux/slices/userSlice';
+import {useDispatch} from 'react-redux';
 
 
 const settings = {
@@ -64,7 +64,7 @@ export const AuthRegPage: FC<AuthRegPageType> = (props) => {
 
     const [isAuthRegClicked, setIsAuthRegClicked] = useState(false);
     const [tabIndex, setTabIndex] = useState(0);
-    const [errorMsg, setErrorMsg] = useState("");
+    const [errorMsg, setErrorMsg] = useState('');
     const [isRecoveryPswd, setIsRecoveryPswd] = useState(false);
     const [activeTimer, setActiveTimer] = useState(false);
     const [timer, setTimer] = useState(initSeconds);
@@ -199,62 +199,62 @@ export const AuthRegPage: FC<AuthRegPageType> = (props) => {
                 {/*--------------------------------> Mobile <------------------------------------------*/}
                 <Hidden mdUp>
                     {isAuthRegClicked
-                        ? <div className={classes.authForm}>
-                            <div className='btns-wrapper'>
-                                <PrevArrowIcon onClick={handleBack}/>
-                                {/*<CloseIcon onClick={handleCloseModal}/>*/}
-                            </div>
-                            <AuthRegContainer
-                                t={t}
-                                timer={timer}
-                                activeTimer={activeTimer}
-                                tabIndex={tabIndex}
-                                errorMsg={errorMsg}
-                                setErrorMsg={setErrorMsg}
-                                isRecoveryPswd={isRecoveryPswd}
-                                isSignInTab={isSignInTab}
-                                handleCancel={handleCancel}
-                                handleForgetPass={handleForgetPass}
-                                tabsHandler={tabsHandler}
-                                handleActiveTimer={handleActiveTimer}
-                                handleCloseModal={handleCloseModal}
-                            />
-                        </div>
-                        : <div className={classes.authRegMenu}>
-                            <div className='close-modal-block'>
-                                {/*<CloseIcon onClick={handleCloseModal}/>*/}
-                            </div>
-                            <div className='welcome-block'>
-                                <Typography variant='h6'>
-                                    {t('welcome')}
-                                </Typography>
-                            </div>
-                            <div className='auth-site-txt'>
-                                <Typography variant="subtitle1" color="initial">
-                                    {t('authSite')}
-                                </Typography>
-                            </div>
-                            <div className='auth-reg-btn'>
-                                <ButtonComponent onClick={authRegClickHandler(true)}>
-                                    <Typography>
-                                        {t('signInAndReg')}
-                                    </Typography>
-                                </ButtonComponent>
-                            </div>
-                            <div className='slider-block'>
-                                <CustomSlider {...settings}>
-                                    <img src={"img/bonus_img.png"} alt="bonus_img"/>
-                                    <img src={"img/bonus_img.png"} alt="bonus_img"/>
-                                    <img src={"img/bonus_img.png"} alt="bonus_img"/>
-                                    <img src={"img/bonus_img.png"} alt="bonus_img"/>
-                                </CustomSlider>
-                            </div>
-                            <div className='list-block'>
-                                <CustomList list={list}/>
-                            </div>
-                        </div>}
+                     ? <div className={classes.authForm}>
+                         <div className='btns-wrapper'>
+                             <PrevArrowIcon onClick={handleBack}/>
+                             {/*<CloseIcon onClick={handleCloseModal}/>*/}
+                         </div>
+                         <AuthRegContainer
+                             t={t}
+                             timer={timer}
+                             activeTimer={activeTimer}
+                             tabIndex={tabIndex}
+                             errorMsg={errorMsg}
+                             setErrorMsg={setErrorMsg}
+                             isRecoveryPswd={isRecoveryPswd}
+                             isSignInTab={isSignInTab}
+                             handleCancel={handleCancel}
+                             handleForgetPass={handleForgetPass}
+                             tabsHandler={tabsHandler}
+                             handleActiveTimer={handleActiveTimer}
+                             handleCloseModal={handleCloseModal}
+                         />
+                     </div>
+                     : <div className={classes.authRegMenu}>
+                         <div className='close-modal-block'>
+                             {/*<CloseIcon onClick={handleCloseModal}/>*/}
+                         </div>
+                         <div className='welcome-block'>
+                             <Typography variant='h6'>
+                                 {t('welcome')}
+                             </Typography>
+                         </div>
+                         <div className='auth-site-txt'>
+                             <Typography variant="subtitle1" color="initial">
+                                 {t('authSite')}
+                             </Typography>
+                         </div>
+                         <div className='auth-reg-btn'>
+                             <ButtonComponent onClick={authRegClickHandler(true)}>
+                                 <Typography>
+                                     {t('signInAndReg')}
+                                 </Typography>
+                             </ButtonComponent>
+                         </div>
+                         <div className='slider-block'>
+                             <CustomSlider {...settings}>
+                                 <img src={'img/bonus_img.png'} alt="bonus_img"/>
+                                 <img src={'img/bonus_img.png'} alt="bonus_img"/>
+                                 <img src={'img/bonus_img.png'} alt="bonus_img"/>
+                                 <img src={'img/bonus_img.png'} alt="bonus_img"/>
+                             </CustomSlider>
+                         </div>
+                         <div className='list-block'>
+                             <CustomList list={list}/>
+                         </div>
+                     </div>}
                 </Hidden>
             </div>
         </Modal>
-    )
-}
+    );
+};

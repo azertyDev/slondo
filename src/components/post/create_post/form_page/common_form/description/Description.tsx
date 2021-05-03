@@ -1,12 +1,13 @@
-import React, {FC} from "react";
-import {Typography} from "@material-ui/core";
-import {CustomFormikTextarea} from "@src/components/elements/custom_formik_textarea/CustomFormikTextarea";
+import React, {FC} from 'react';
+import {Typography} from '@material-ui/core';
+import {CustomFormikTextarea} from '@src/components/elements/custom_formik_textarea/CustomFormikTextarea';
 import {useStyles} from './useStyles';
 
 
 type DescriptionPropsType = {
+    limit: number,
     errorMsg: string,
-    label: string,
+    labelTxt: string,
     handleInput,
     handleBlur,
     description
@@ -14,7 +15,8 @@ type DescriptionPropsType = {
 
 export const Description: FC<DescriptionPropsType> = (props) => {
     const {
-        label,
+        limit,
+        labelTxt,
         errorMsg,
         handleInput,
         handleBlur,
@@ -26,7 +28,7 @@ export const Description: FC<DescriptionPropsType> = (props) => {
         <div className={classes.root}>
             <Typography variant="subtitle1">
                 <strong>
-                    {label}
+                    {labelTxt}
                     <span className='error-text'>*</span>
                 </strong>
                 {errorMsg && <span className='error-text'>&nbsp;{errorMsg}</span>}
@@ -39,6 +41,11 @@ export const Description: FC<DescriptionPropsType> = (props) => {
                 onChange={handleInput}
                 className={`description-area ${errorMsg ? 'error-border' : ''}`}
             />
+            <div className='limit-txt'>
+                <Typography variant="subtitle1">
+                    {`${description.length}/${limit}`}
+                </Typography>
+            </div>
         </div>
-    )
-}
+    );
+};

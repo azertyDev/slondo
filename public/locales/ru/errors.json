@@ -4,7 +4,7 @@
   "unauthorised": "Неверный номер телефона или пароль.",
   "server_error": "Ошибка сервера, попробуйте позже",
   "fieldIsRequired": "Поле обязательно для заполнения",
-  "wrongNumberFormat": "Неверный формат номера",
+  "wrongNumberFormat": "Неверный формат",
   "passwordMustMinEightChars": "Пароль должен быть не менее 8 символов",
   "passwordsDifferent": "Пароли не совпадают",
   "addPhotos": "Пожалуйста добавьте фотографию"

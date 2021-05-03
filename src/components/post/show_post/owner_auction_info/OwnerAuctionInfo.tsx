@@ -2,8 +2,8 @@ import {FC, useState} from 'react';
 import {WithT} from 'i18next';
 import {Hidden, Typography} from '@material-ui/core';
 import {numberPrettier} from '@src/helpers';
-import {AuctionInfo} from '@src/components/post/show_post/owner_auction_info/auction_info/AuctionInfo';
-import {OwnerInfo} from '@src/components/post/show_post/owner_auction_info/owner_info/OwnerInfo';
+import {AuctionContent} from '@src/components/post/show_post/owner_auction_info/auction_content/AuctionContent';
+import {OwnerContent} from '@src/components/post/show_post/owner_auction_info/owner_content/OwnerContent';
 import {userAPI} from '@src/api/api';
 import {setErrorMsgAction} from '@src/redux/slices/errorSlice';
 import {useDispatch} from 'react-redux';
@@ -23,13 +23,14 @@ export const OwnerAuctionInfo: FC<OwnerAuctionInfoPropsType> = (props) => {
     const isAuction = data.ads_type.mark === 'auc' || data.ads_type.mark === 'exauc';
 
     const initAuthorPhones = {
+        showPhone: false,
         phone: null,
         additional_number: null
     };
 
+    const [isFetch, setIsFetch] = useState(false);
     const [authorPhones, setAuthorPhones] = useState(initAuthorPhones);
-    const [showPhone, setShowPhone] = useState(false);
-
+    const {showPhone} = authorPhones;
     const handleFollow = (userId) => async () => {
         try {
             await userAPI.follow(userId);
@@ -40,18 +41,25 @@ export const OwnerAuctionInfo: FC<OwnerAuctionInfoPropsType> = (props) => {
 
     const handleShowPhone = async () => {
         try {
-            if (!authorPhones.phone) {
-                const phones = await userAPI.getPostAuthorPhones(data.id);
-                setAuthorPhones(phones);
-            }
+            setIsFetch(true);
+            const phones = !showPhone ? await userAPI.getPostAuthorPhones(data.id) : initAuthorPhones;
+            setIsFetch(false);
+            setAuthorPhones({
+                ...authorPhones,
+                ...phones,
+                showPhone: !showPhone
+            });
         } catch ({response: {data}}) {
-            if (data.message === 'forbidden:') {
-                setAuthorPhones(initAuthorPhones);
-            } else {
+            setIsFetch(false);
+            if (data.message !== 'forbidden:') {
                 dispatch(setErrorMsgAction(data.message));
+            } else {
+                setAuthorPhones({
+                    ...initAuthorPhones,
+                    showPhone: !showPhone
+                });
             }
         }
-        setShowPhone(!showPhone);
     };
 
     const classes = useStyles();
@@ -68,17 +76,18 @@ export const OwnerAuctionInfo: FC<OwnerAuctionInfoPropsType> = (props) => {
                 </Hidden>
                 {isAuction && (
                     <Hidden mdDown>
-                        <AuctionInfo
+                        <AuctionContent
                             t={t}
                             data={data}
                         />
                     </Hidden>
                 )}
-                <OwnerInfo
+                <OwnerContent
                     t={t}
                     data={data}
-                    authorPhones={authorPhones}
+                    isFetch={isFetch}
                     showPhone={showPhone}
+                    authorPhones={authorPhones}
                     handleFollow={handleFollow}
                     handleShowPhone={handleShowPhone}
                 />

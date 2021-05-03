@@ -1,4 +1,4 @@
-import React, {FC} from 'react';
+import {FC} from 'react';
 import {WithT} from 'i18next';
 import {Grid} from '@material-ui/core';
 import {DropDownSelect} from '@src/components/elements/drop_down_select/DropDownSelect';
@@ -17,6 +17,7 @@ type ApartmentsPropsType = {
     filters,
     isPreview: boolean,
     formik: FormikType<any>,
+    handleInput: (e) => void,
     handleCheckbox: (e) => void,
     handleSelect: (k, v) => void,
 } & WithT;
@@ -29,7 +30,8 @@ export const ApartmentsForm: FC<ApartmentsPropsType> = (props) => {
         formik,
         isPreview,
         handleCheckbox,
-        handleSelect
+        handleSelect,
+        handleInput
     } = props;
 
     const isDailyRent = type.name === 'dailyRent';
@@ -83,7 +85,7 @@ export const ApartmentsForm: FC<ApartmentsPropsType> = (props) => {
                                  <CheckboxSelect
                                      t={t}
                                      name='furnished'
-                                     labelText='furnished'
+                                     labelText={t('filters:furnished')}
                                      checked={values.furnished}
                                      onChange={handleCheckbox}
                                  />
@@ -107,7 +109,7 @@ export const ApartmentsForm: FC<ApartmentsPropsType> = (props) => {
                                      <CheckboxSelect
                                          t={t}
                                          name='utilities'
-                                         labelText='utilities'
+                                         labelText={t('filters:utilities')}
                                          checked={values.utilities}
                                          onChange={handleCheckbox}
                                      />
@@ -116,7 +118,7 @@ export const ApartmentsForm: FC<ApartmentsPropsType> = (props) => {
                                      <CheckboxSelect
                                          t={t}
                                          name='with_pledge'
-                                         labelText='with_pledge'
+                                         labelText={t('filters:with_pledge')}
                                          checked={values.with_pledge}
                                          onChange={handleCheckbox}
                                      />
@@ -161,8 +163,9 @@ export const ApartmentsForm: FC<ApartmentsPropsType> = (props) => {
                          <CustomFormikField
                              t={t}
                              name='area'
-                             labelText='area'
+                             labelText={t('filters:area')}
                              value={values.area ?? ''}
+                             onChange={handleInput}
                              errorMsg={getErrorMsg(errors.area, touched.area, t)}
                          />
                      </Grid>
@@ -170,8 +173,9 @@ export const ApartmentsForm: FC<ApartmentsPropsType> = (props) => {
                          <CustomFormikField
                              t={t}
                              name='living_area'
-                             labelText='living_area'
+                             labelText={t('filters:living_area')}
                              value={values.living_area ?? ''}
+                             onChange={handleInput}
                              errorMsg={getErrorMsg(errors.living_area, touched.living_area, t)}
                          />
                      </Grid>
@@ -179,8 +183,9 @@ export const ApartmentsForm: FC<ApartmentsPropsType> = (props) => {
                          <CustomFormikField
                              t={t}
                              name='kitchen_area'
-                             labelText='kitchen_area'
+                             labelText={t('filters:kitchen_area')}
                              value={values.kitchen_area ?? ''}
+                             onChange={handleInput}
                              errorMsg={getErrorMsg(errors.kitchen_area, touched.kitchen_area, t)}
                          />
                      </Grid>
@@ -188,8 +193,9 @@ export const ApartmentsForm: FC<ApartmentsPropsType> = (props) => {
                          <CustomFormikField
                              t={t}
                              name='ceiling_height'
-                             labelText='ceiling_height'
+                             labelText={t('filters:ceiling_height')}
                              value={values.ceiling_height ?? ''}
+                             onChange={handleInput}
                              errorMsg={getErrorMsg(errors.ceiling_height, touched.ceiling_height, t)}
                          />
                      </Grid>

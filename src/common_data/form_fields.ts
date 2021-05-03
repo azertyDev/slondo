@@ -53,7 +53,9 @@ export const numericFields = [
     'living_area',
     'land_area',
     'number_of_floors',
-    'number_of_bedrooms'
+    'number_of_bedrooms',
+    'engine_capacity',
+    'mileage'
 ];
 
 export const optionKeys = [

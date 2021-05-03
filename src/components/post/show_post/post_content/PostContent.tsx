@@ -28,7 +28,7 @@ import {numberPrettier, weekDaysHelper} from '@src/helpers';
 import {ButtonComponent} from '@src/components/elements/button/Button';
 import {RenewalIcon} from '@src/components/elements/icons';
 import {months} from '@src/common_data/common';
-import {AuctionInfo} from '@src/components/post/show_post/owner_auction_info/auction_info/AuctionInfo';
+import {AuctionContent} from '@src/components/post/show_post/owner_auction_info/auction_content/AuctionContent';
 import {userAPI} from '@src/api/api';
 import {setErrorMsgAction} from '@root/src/redux/slices/errorSlice';
 import {useDispatch} from 'react-redux';
@@ -319,12 +319,10 @@ export const PostContent: FC<PostContentTypes> = (props) => {
                         </ButtonComponent>
                     </div>
                     {isAuction && (
-                        <div>
-                            <AuctionInfo
-                                t={t}
-                                data={data}
-                            />
-                        </div>
+                        <AuctionContent
+                            t={t}
+                            data={data}
+                        />
                     )}
                 </Hidden>
                 <div className="post-location">

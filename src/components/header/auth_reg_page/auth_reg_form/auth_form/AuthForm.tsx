@@ -1,20 +1,20 @@
-import React, {Dispatch, FC, SetStateAction} from 'react';
+import {Dispatch, FC, SetStateAction} from 'react';
 import {WithT} from 'i18next';
 import {userAPI} from '@src/api/api';
 import {useDispatch} from 'react-redux';
-import {Typography} from '@material-ui/core'
+import {Typography} from '@material-ui/core';
 import {Form, FormikProvider, useFormik} from 'formik';
 import {CustomFormikField} from '@src/components/elements/custom_formik_field/CustomFormikField';
 import {ButtonComponent} from '@src/components/elements/button/Button';
 import {authSchema} from '@root/validation_schemas/authRegSchema';
 import {signInAction} from '@src/redux/slices/userSlice';
-import {cookies, cookieOpts, phoneFormat, getErrorMsg} from '@src/helpers';
+import {cookies, cookieOpts, phonePrepare, getErrorMsg} from '@src/helpers';
 
 
 const initialInputsVals = {
     isFetch: false,
     error: null,
-    phone: '+(998) ',
+    phone: '',
     password: '',
     code: ''
 };
@@ -35,26 +35,17 @@ export const AuthForm: FC<AuthFormPropsType> = (props) => {
 
     const dispatch = useDispatch();
 
-    const handlePhoneInput = ({target: {value, name}}) => {
-        if (value.length >= 7) {
-            setValues({...values, [name]: value});
-        }
-    };
-
-    const handlePasswordInput = ({target: {value, name}}) => {
-        setValues({...values, [name]: value});
-    };
-
     const onSubmit = async (values) => {
-        const phone = phoneFormat(values.phone);
-        const data = {...values, phone};
-
         try {
+            const phone = phonePrepare(values.phone);
+
             await setValues({...values, isFetch: true});
-            const {token, user} = await userAPI.login(data.phone, data.password);
+            const {token, user} = await userAPI.login(phone, values.password);
+            await setValues({...values, isFetch: false});
+
             cookies.set('slondo_user', user, cookieOpts);
             cookies.set('slondo_auth', token, cookieOpts);
-            await setValues({...values, isFetch: false});
+
             handleCloseModal();
             dispatch(signInAction(user));
         } catch (e) {
@@ -71,6 +62,10 @@ export const AuthForm: FC<AuthFormPropsType> = (props) => {
 
     const {values, setValues, errors, touched} = formik;
 
+    const handleInput = ({target: {value, name}}) => {
+        setValues({...values, [name]: value});
+    };
+
     return (
         <FormikProvider value={formik}>
             <Form onSubmit={formik.handleSubmit}>
@@ -79,24 +74,24 @@ export const AuthForm: FC<AuthFormPropsType> = (props) => {
                     type="tel"
                     name="phone"
                     labelText='enter_phone'
-                    placeholder={t('filters:enter_phone')}
-                    onChange={handlePhoneInput}
+                    value={values.phone}
+                    onChange={handleInput}
                     errorMsg={getErrorMsg(errors.phone, touched.phone, t)}
                 />
                 <CustomFormikField
                     t={t}
-                    name="password"
                     type="password"
+                    name="password"
                     labelText='enter_password'
-                    placeholder={t('filters:enter_password')}
-                    onChange={handlePasswordInput}
+                    value={values.password}
+                    onChange={handleInput}
                     errorMsg={getErrorMsg(errors.password, touched.password, t)}
                 />
                 <div className='forget-password'>
                     <Typography
                         variant="subtitle1"
                         onClick={handleForgetPass}
-                        style={{cursor: "pointer"}}
+                        style={{cursor: 'pointer'}}
                     >
                         {t('forget_password')}
                     </Typography>
@@ -108,5 +103,5 @@ export const AuthForm: FC<AuthFormPropsType> = (props) => {
                 </div>
             </Form>
         </FormikProvider>
-    )
+    );
 };

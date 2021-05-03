@@ -7,6 +7,9 @@ export const useStyles = makeStyles(() => ({
             maxHeight: '230px',
             minHeight: '230px',
             padding: '10px',
+        },
+        '& div.limit-txt > h6':{
+            textAlign: 'end'
         }
     }
 }))

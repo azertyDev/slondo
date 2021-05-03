@@ -1,9 +1,9 @@
-import React, {FC, useState} from "react";
+import {FC, useState} from "react";
 import {WithT} from "i18next";
 import {TextField, Typography} from "@material-ui/core";
 import {numberRegEx} from "@src/common_data/reg_exs";
-import {useStyles} from './useStyles';
 import {isRequired} from "@src/helpers";
+import {useStyles} from './useStyles';
 
 
 type FloorsPropsType = {
@@ -49,7 +49,7 @@ export const NumberSelect: FC<FloorsPropsType> = (props) => {
         <div className={classes.root}>
             <Typography variant="subtitle1">
                 <strong>
-                    {t(name)}
+                    {t(`filters:${name}`)}
                     {isRequired(name) && <span className='error-text'>*&nbsp;</span>}
                 </strong>
             </Typography>

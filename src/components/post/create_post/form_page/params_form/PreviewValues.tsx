@@ -1,4 +1,4 @@
-import React, {FC} from 'react';
+import {FC} from 'react';
 import {Grid, Typography} from '@material-ui/core';
 import {WithT} from 'i18next';
 import {CheckboxSelect} from '@src/components/elements/checkbox_select/CheckboxSelect';
@@ -11,18 +11,18 @@ type PreviewValuesPropsType = {
 
 export const PreviewValues: FC<PreviewValuesPropsType> = (props) => {
     const {t, values} = props;
-
     return (
         <Grid item container>
             {Object.keys(values)
                 .map(key => {
                         let value;
-                        const isExcludeKey = excludedKeys.some(k => k === key);
-                        const isBoolean = typeof values[key] === 'boolean';
                         const isString = typeof values[key] === 'string';
+                        const isBoolean = typeof values[key] === 'boolean';
+                        const isOptions = Array.isArray(values[key]);
+                        const isExcludeKey = excludedKeys.some(k => k === key);
 
-                        if (values[key] && !isExcludeKey) {
-                            if (Array.isArray(values[key])) {
+                        if ((!!values[key] && !isExcludeKey && !isOptions) || (isOptions && !!values[key].length)) {
+                            if (isOptions) {
                                 value = values[key].map(val => val.name).join(', ');
                             } else if (isString) {
                                 value = values[key];
@@ -47,7 +47,7 @@ export const PreviewValues: FC<PreviewValuesPropsType> = (props) => {
                                      />
                                      : <Typography variant="subtitle1">
                                          <strong>
-                                             {t(key)}:&nbsp;
+                                             {t(`filters:${key}`)}:&nbsp;
                                          </strong>
                                          {value}
                                      </Typography>}

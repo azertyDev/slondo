@@ -1,4 +1,4 @@
-import React, {FC} from "react";
+import {FC} from "react";
 import {Checkbox, Paper, Switch, TextField, Typography} from "@material-ui/core";
 import {WEEK_DAYS} from "@src/common_data/common";
 import {WithT} from "i18next";

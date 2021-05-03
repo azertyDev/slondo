@@ -1,4 +1,4 @@
-import React, {FC, useEffect, useState} from 'react';
+import {FC, useEffect, useState} from 'react';
 import {useRouter} from 'next/router';
 import {Typography} from '@material-ui/core';
 import {useTranslation} from 'next-i18next';
@@ -33,7 +33,7 @@ export type DataForCrtPostType = {
 export const FormPage: FC = () => {
     const dispatch = useDispatch();
 
-    const {t} = useTranslation(['post', 'errors']);
+    const {t} = useTranslation('post');
     const {phone} = useSelector((store: RootState) => store.user.info);
 
     const {asPath, query, push} = useRouter();
@@ -157,14 +157,13 @@ export const FormPage: FC = () => {
 
             setPost({...post, isFetch: true});
 
-            const postId = await userAPI.createPost(data);
-
-            form.append('ads_id', postId);
+            form.append('data', JSON.stringify(data));
             photos.forEach(photo => form.append('files[]', photo.file));
-            await userAPI.uploadPhotos(form);
 
-            setPost({...post, isFetch: false});
+            await userAPI.createPost(form);
+
             setIsSuccess(true);
+            setPost({...post, isFetch: false});
         } catch (e) {
             setPost({...post, isFetch: false});
             dispatch(setErrorMsgAction(e.message));

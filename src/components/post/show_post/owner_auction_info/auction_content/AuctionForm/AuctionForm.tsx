@@ -12,29 +12,28 @@ import {useStyles} from './useStyles';
 
 type AuctionFromPropsType = {
     handleBet: (bet: string) => void,
-    auctionsBets
+    lastBet
 } & WithT;
 
 export const AuctionForm: FC<AuctionFromPropsType> = (props) => {
     const {
         t,
         handleBet,
-        auctionsBets
+        lastBet
     } = props;
 
     const isMdDown = useMediaQuery(useTheme().breakpoints.down('md'));
 
-    const [firstBet] = auctionsBets;
-
-    const onSubmit = ({bet}) => {
+    const onSubmit = ({bet}, actions) => {
         bet = bet.replace(whiteSpacesRegEx, '');
         handleBet(bet);
+        actions.resetForm();
     };
 
     const formik = useFormik({
         onSubmit,
         initialValues: {bet: ''},
-        validationSchema: firstBet ? getAuctionSchema(firstBet.min_bet, firstBet.max_bet) : null
+        validationSchema: lastBet ? getAuctionSchema(lastBet.min_bet, lastBet.max_bet) : null
     });
 
     const {
@@ -62,7 +61,7 @@ export const AuctionForm: FC<AuctionFromPropsType> = (props) => {
                                     name="bet"
                                     onChange={handleInput}
                                     errorMsg={getErrorMsg(errors.bet, touched.bet, t)}
-                                    placeholder={`Мин. ставка: ${numberPrettier(firstBet?.min_bet)} сум`}
+                                    placeholder={`Мин. ставка: ${numberPrettier(lastBet?.min_bet)} сум`}
                                 />
                             </Grid>
                             <Grid item xs={isMdDown ? 5 : 12}>
@@ -82,7 +81,7 @@ export const AuctionForm: FC<AuctionFromPropsType> = (props) => {
                                 Максимально возможная ставка:
                             </Typography>
                             <Typography variant="subtitle2" color="initial">
-                                {numberPrettier(auctionsBets[0]?.max_bet)} сум
+                                {numberPrettier(lastBet?.max_bet)} сум
                             </Typography>
                         </div>
                     </div>

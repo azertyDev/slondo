@@ -5,8 +5,7 @@ import {Form, FormikProvider, useFormik} from 'formik';
 import {CustomFormikField} from '@src/components/elements/custom_formik_field/CustomFormikField';
 import {phoneSchema} from '@root/validation_schemas/authRegSchema';
 import {ButtonComponent} from '@src/components/elements/button/Button';
-import {getErrorMsg, phoneFormat} from '@src/helpers';
-import {Description} from '@src/components/post/create_post/form_page/common_form/description/Description';
+import {getErrorMsg, phonePrepare} from '@src/helpers';
 
 
 type RegFormPropsType = {
@@ -17,7 +16,7 @@ type RegFormPropsType = {
 const initialInputsVals = {
     isFetch: false,
     error: null,
-    phone: '+(998) ',
+    phone: '',
     code: ''
 };
 
@@ -35,7 +34,7 @@ export const RegForm: FC<RegFormPropsType> = (props) => {
     };
 
     const onSubmit = async (values) => {
-        const phone = phoneFormat(values.phone);
+        const phone = phonePrepare(values.phone);
         try {
             await setValues({...values, isFetch: true});
             await userAPI.register(phone);
@@ -63,7 +62,6 @@ export const RegForm: FC<RegFormPropsType> = (props) => {
                     type="tel"
                     name="phone"
                     labelText='enter_phone'
-                    placeholder="+(998) __ _______"
                     onChange={handlePhoneInput}
                     errorMsg={getErrorMsg(errors.phone, touched.phone, t)}
                 />
