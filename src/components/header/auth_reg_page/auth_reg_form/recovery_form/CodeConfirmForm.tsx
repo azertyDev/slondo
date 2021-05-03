@@ -66,7 +66,6 @@ export const CodeConfirmForm: FC<ConfirmAuthPropsType> = (props) => {
                 <div>
                     <CustomFormikField
                         t={t}
-                        type="tel"
                         name="code"
                         labelText='enter_sms'
                         placeholder={t('filters:enter_sms')}
