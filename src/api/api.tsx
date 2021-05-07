@@ -249,13 +249,6 @@ export const userAPI = {
                 throw err;
             });
     },
-    raiseInTape: (ads_id: number): Promise<AuctionsDataTypes> => {
-        return instance.post(`regular/user/post/rise/${ads_id}`, setTokenToHeader())
-            .then(res => res.data)
-            .catch(err => {
-                throw err;
-            });
-    },
     restoreFromArchive: (ads_id: number): Promise<any> => {
         return instance.post(`regular/user/post/restore/${ads_id}`, {}, setTokenToHeader())
             .then(res => res.data)
@@ -263,7 +256,7 @@ export const userAPI = {
                 throw err;
             });
     },
-    deleteArchivePost: (ads_id: number): Promise<any> => {
+    deleteArchivePost: (ads_id: number): Promise<{message: string}> => {
         return instance.delete(`regular/post/delete/${ads_id}`, setTokenToHeader())
             .then(res => res.data)
             .catch(err => {
@@ -344,7 +337,7 @@ export const userAPI = {
                 throw err;
             });
     },
-    deleteUserNotification: (id: number): Promise<any> => {
+    deleteUserNotification: (id: number): Promise<{message?: string}> => {
         return instance.delete(`regular/user/notification/${id}`, setTokenToHeader())
             .then(res => res.data)
             .catch(err => {
@@ -353,6 +346,20 @@ export const userAPI = {
     },
     deleteAllNotification: (user_id: number): Promise<any> => {
         return instance.delete(`regular/user/notifications/${user_id}`, setTokenToHeader())
+            .then(res => res.data)
+            .catch(err => {
+                throw err;
+            });
+    },
+    ricePostInTape: (post_id: number): Promise<any> => {
+        return instance.post(`regular/user/post/rise/${post_id}`, {}, setTokenToHeader())
+            .then(res => res.data)
+            .catch(err => {
+                throw err;
+            });
+    },
+    getPhoneByUserId: (user_id: number): Promise<any> => {
+        return instance.get(`regular/user/phone/${user_id}`, setTokenToHeader())
             .then(res => res.data)
             .catch(err => {
                 throw err;

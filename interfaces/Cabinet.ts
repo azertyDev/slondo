@@ -67,14 +67,14 @@ export type CardDataType = {
 export type OffersStateType = {
     isFetch: boolean,
     total: number,
-    data: [{
+    data: {
         id: number,
         auction_id: number,
         price: number,
         created_at: string,
         offer_price_status: boolean,
         user: UserInfo
-    }]
+    }[]
 }
 
 export type initialUserStateType = {

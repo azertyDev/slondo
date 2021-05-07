@@ -129,7 +129,7 @@ export const CabinetCard: FC<CabinetCardPropsType> = (props) => {
                                     <div className='isFavorite' onClick={handleModalOpen(cardData.id)}>
                                         <CloseIcon />
                                     </div>
-                                    : cardData.creator && cardData.ads_type === 'post' && (
+                                    : cardData.creator && cardData.status !== 'accepted' && (
                                     <div className='settings' onClick={handleModalOpen(cardData.id, 1)}>
                                         <SettingsIcon />
                                     </div>
@@ -220,15 +220,21 @@ export const CabinetCard: FC<CabinetCardPropsType> = (props) => {
     );
 
     function getStatus(postStatus: string, auction): string {
-        return postStatus;
-        // switch (postStatus) {
-        //     case 'new':
-        //         return 'public';
-        //     case 'suspend':
-        //         return 'suspend';
-        //     case 'expired':
-        //         auction.winner === null
-        //         ? ''
-        // }
+        switch (postStatus) {
+            case 'new':
+                return 'new';
+            case 'suspend':
+                return 'suspend';
+            case 'success':
+                return 'success';
+            case 'accepted':
+                return 'accepted';
+            case 'reject':
+                return 'reject';
+            case 'sold':
+                return 'sold';
+            default:
+                return postStatus;
+        }
     }
 };

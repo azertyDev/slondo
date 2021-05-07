@@ -224,7 +224,7 @@ const MyPostsContainer: FC = () => {
                             <ListItemText
                                 primary="Поднять в ленте"
                                 primaryTypographyProps={{variant: 'subtitle1'}}
-                                secondary="(можно использовать 1 раз в 3 дня)"
+                                secondary="(можно использовать 3 раза неделю)"
                                 secondaryTypographyProps={{variant: 'subtitle2'}}
                             />
                         </ListItem>

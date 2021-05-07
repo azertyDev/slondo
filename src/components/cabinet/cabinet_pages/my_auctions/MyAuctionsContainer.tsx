@@ -8,8 +8,7 @@ import {setErrorMsgAction} from '@root/src/redux/slices/errorSlice';
 import {useTranslation} from 'next-i18next';
 import {Box, Grid, IconButton, List, ListItem, ListItemText, Typography} from '@material-ui/core';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
-import {InitialCabinetCardState, InitValuesType, OffersStateType, TabsDataType} from '@root/interfaces/Cabinet.js';
-import {UserInfo} from '@root/interfaces/Auth';
+import {InitialCabinetCardState, OffersStateType, TabsDataType} from '@root/interfaces/Cabinet.js';
 import {useStyles} from './useStyles';
 import {UserInfoWithAvatar} from '@src/components/elements/user_info_with_avatar/UserInfoWithAvatar';
 import {ButtonComponent} from '@src/components/elements/button/Button';
@@ -22,82 +21,17 @@ export const MyAuctionsContainer: FC = () => {
     const { t } = useTranslation('cabinet');
     const classes = useStyles();
 
-    const initialValues: InitValuesType = { id: null, name: '' };
-    const initialUserInfo: UserInfo = {
-        id: null,
-        name: '',
-        surname: '',
-        phone: '',
-        avatar: '',
-        created_at: '',
-        available_days: '',
-        available_start_time: '',
-        available_end_time: '',
-    };
     const initialState: InitialCabinetCardState = {
         isFetch: false,
         myPosts: {
             total: 0,
-            data: [
-                {
-                    ads_type: '',
-                    adsable: {
-                        id: null,
-                        sub_category: initialValues,
-                        type: initialValues
-                    },
-                    auction: {
-                        id: null,
-                        winner: initialUserInfo,
-                        number_of_bets: null,
-                        is_accepted: null,
-                        winner_id: null,
-                        number_of_offers: null,
-                        offer: null
-                    },
-                    author: initialUserInfo,
-                    available_days: [{
-                        id: null,
-                        name: ''
-                    }],
-                    available_start_time: '',
-                    available_end_time: '',
-                    category: initialValues,
-                    city: initialValues,
-                    created_at: '',
-                    creator: false,
-                    currency: initialValues,
-                    delivery: null,
-                    description: '',
-                    district: initialValues,
-                    exchange: null,
-                    expiration_at: '',
-                    favorite: false,
-                    id: null,
-                    image: '',
-                    number_of_views: null,
-                    price: null,
-                    region: initialValues,
-                    safe_deal: null,
-                    status: '',
-                    subscribed: false,
-                    title: '',
-                    user_id: null
-                }
-            ]
+            data: []
         }
     };
     const initialOffersState: OffersStateType = {
         isFetch: false,
         total: null,
-        data: [{
-            id: null,
-            auction_id: null,
-            price: null,
-            offer_price_status: false,
-            created_at: '',
-            user: initialUserInfo
-        }]
+        data: []
     };
     const [auctionData, setAuctionData] = useState(initialState);
     const [participatingData, setParticipatingData] = useState(initialState);
@@ -195,6 +129,15 @@ export const MyAuctionsContainer: FC = () => {
             dispatch(setErrorMsgAction(e.message));
         }
     };
+    const riceInTape = (post_id: number) => async () => {
+        try {
+            await userAPI.ricePostInTape(post_id);
+            setOpenModal(false);
+            setModalContentIndex(1);
+        } catch (e) {
+            dispatch(setErrorMsgAction(e.message));
+        }
+    };
 
     const getModalContent = () => {
         switch (modalContentIndex) {
@@ -208,11 +151,22 @@ export const MyAuctionsContainer: FC = () => {
                     >
                         <ListItem
                             button
+                            onClick={handleModalContentIndex(3)}
+                        >
+                            <ListItemText
+                                primary="Деактивировать"
+                                primaryTypographyProps={{variant: 'subtitle1'}}
+                            />
+                        </ListItem>
+                        <ListItem
+                            button
                             onClick={handleModalContentIndex(2)}
                         >
                             <ListItemText
-                                primary='Деактивировать'
-                                primaryTypographyProps={{ variant: 'subtitle1' }}
+                                primary="Поднять в ленте"
+                                primaryTypographyProps={{variant: 'subtitle1'}}
+                                secondary="(можно использовать 3 раза в неделю)"
+                                secondaryTypographyProps={{variant: 'subtitle2'}}
                             />
                         </ListItem>
                     </List>
@@ -227,7 +181,7 @@ export const MyAuctionsContainer: FC = () => {
                     >
                         <ListItem
                             button
-                            onClick={handleDeactivate(auctionId)}
+                            onClick={riceInTape(auctionId)}
                         >
                             <ListItemText
                                 primary='Да'
@@ -240,10 +194,37 @@ export const MyAuctionsContainer: FC = () => {
                         >
                             <ListItemText
                                 primary='Нет'
-                                primaryTypographyProps={{ variant: 'subtitle1' }}
+                                primaryTypographyProps={{variant: 'subtitle1'}}
                             />
                         </ListItem>
-
+                    </List>
+                </>;
+            case 3:
+                return <>
+                    <List
+                        component="nav"
+                        aria-label="main"
+                        className={classes.settingsList}
+                        disablePadding
+                    >
+                        <ListItem
+                            button
+                            onClick={handleDeactivate(auctionId)}
+                        >
+                            <ListItemText
+                                primary='Да'
+                                primaryTypographyProps={{variant: 'subtitle1'}}
+                            />
+                        </ListItem>
+                        <ListItem
+                            button
+                            onClick={handlePrevMenu}
+                        >
+                            <ListItemText
+                                primary='Нет'
+                                primaryTypographyProps={{variant: 'subtitle1'}}
+                            />
+                        </ListItem>
                     </List>
                 </>;
             case 10:
@@ -337,7 +318,7 @@ export const MyAuctionsContainer: FC = () => {
                         cardData={data}
                         handleModalOpen={handleOpenModal}
                     />
-                    {data.auction.winner && data.status === 'success' && (
+                    {data.creator && data.status === 'accepted' && (
                         <Box mt={1}>
                             <ButtonComponent className='end-auction' onClick={handleDeactivate(data.id)}>
                                 <Typography variant='subtitle1'>

@@ -4,7 +4,7 @@ import Pagination from '@material-ui/lab/Pagination';
 
 export type CustomPaginationTypes = {
     pageCount: number;
-    currentPage: number;
+    currentPage?: number;
     handlePaginationPage: (_: unknown, pageNumber: number) => void;
 };
 
@@ -21,6 +21,7 @@ export const CustomPagination: FC<CustomPaginationTypes> = (props) => {
             page={currentPage}
             onChange={handlePaginationPage}
             shape="rounded"
+            variant="outlined"
         />
     );
 }

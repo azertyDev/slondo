@@ -93,14 +93,14 @@ const ArchiveContainer: FC = () => {
                         disablePadding
                     >
                         <ListItem
-                                button
-                                onClick={handleModalContentIndex(5)}
-                            >
-                                <ListItemText
-                                    primary='Удалить'
-                                    primaryTypographyProps={{ variant: 'subtitle1' }}
-                                />
-                            </ListItem>
+                            button
+                            onClick={handleModalContentIndex(5)}
+                        >
+                            <ListItemText
+                                primary='Удалить'
+                                primaryTypographyProps={{variant: 'subtitle1'}}
+                            />
+                        </ListItem>
                     </List>
                 </>;
             case 2:

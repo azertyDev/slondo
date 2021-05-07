@@ -1,15 +1,12 @@
 import React, {FC} from 'react';
-import {Backdrop, Fade, IconButton, Modal, Typography} from '@material-ui/core';
+import {Backdrop, Fade, IconButton, Modal} from '@material-ui/core';
 import {CloseIcon} from '@src/components/elements/icons';
-import {ButtonComponent} from '@src/components/elements/button/Button';
-import Link from 'next/link';
 import {useStyles} from './useStyles';
 
 type ModalPropsType = {
     handleModalClose: () => void,
     openModal: boolean,
-    handleSubmit?: () => void,
-    handleRemoveFavorite?: () => void
+    handleRemoveFavorite?: () => void,
 }
 
 export const CustomModal: FC<ModalPropsType> = (props) => {
@@ -18,8 +15,8 @@ export const CustomModal: FC<ModalPropsType> = (props) => {
         handleModalClose,
         openModal
     } = props;
-    const classes = useStyles();
 
+    const classes = useStyles();
     return (
         <>
             <Modal

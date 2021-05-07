@@ -1,22 +1,37 @@
 import React from 'react';
-import Button from '@material-ui/core/Button';
 import Snackbar from '@material-ui/core/Snackbar';
-import Grow from '@material-ui/core/Grow';
-import {TransitionProps} from '@material-ui/core/transitions';
+import Alert from '@material-ui/lab/Alert';
 
-function GrowTransition(props: TransitionProps) {
-    return <Grow {...props} />;
-}
+export const CustomSnackbar = (props) => {
+    const {
+        message,
+        openSnackbar,
+        severity,
+        setOpenSnackbar
+    } = props;
 
-export const CustomSnackbar = ({ message, handleSnackbarClick, handleSnackbarClose, openSnackbar }) => {
+    const handleClose = (event, reason) => {
+        if (reason === 'clickaway') {
+            return;
+        }
+        setOpenSnackbar(false);
+    };
+
     return (
-        <div>
-            <Button onClick={handleSnackbarClick(GrowTransition)}>Grow Transition</Button>
+        <>
             <Snackbar
+                key={message ? message : undefined}
                 open={openSnackbar}
-                onClose={handleSnackbarClose}
-                message={message}
-            />
-        </div>
+                onClose={handleClose}
+                autoHideDuration={1000}
+                anchorOrigin={{
+                    vertical: 'top', horizontal: 'right'
+                }}
+            >
+                <Alert severity={severity} variant='filled'>
+                    {message ? message : undefined}
+                </Alert>
+            </Snackbar>
+        </>
     );
 };

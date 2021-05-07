@@ -2,21 +2,22 @@ import makeStyles from '@material-ui/core/styles/makeStyles';
 
 export const useStyles = makeStyles((theme) => ({
     root: {
-        padding: '15px',
-        background: '#F8F8F8',
-        borderRadius: '8px',
+        display: 'flex',
+        padding: '10px 15px',
+        background: '#F2F2F2',
+        borderRadius: '10px',
         boxShadow: '0px 1px 2px rgba(0, 0, 0, 0.1)',
         position: 'relative',
-        marginBottom: 20,
-        width: '80%',
         minWidth: 0,
+        '& a': {
+            textDecoration: 'none'
+        },
         '& > div': {
-            '& > h5.MuiTypography-h5': {
-                fontWeight: '600'
+            '& .MuiTypography-h6': {
+                fontWeight: '600',
+                marginBottom: 5
             },
             '& > h6.MuiTypography-subtitle1': {
-                margin: '20px 0',
-                lineHeight: '15px',
                 color: '#838383'
             },
             '& > a': {
@@ -29,33 +30,28 @@ export const useStyles = makeStyles((theme) => ({
                 }
             }
         },
-        '& > div.image': {
-            position: 'absolute',
-            bottom: '-10px',
-            right: '-10px',
-            '& > svg': {}
+        '& .forward-to-btn': {
+            '& svg': {
+                background: '#fff',
+                marginRight: '10px',
+                padding: 3,
+                borderRadius: '100%'
+            }
         },
-        '& > button': {
-            width: '30px',
-            height: '30px',
+        '& .MuiIconButton-root': {
             position: 'absolute',
-            top: '10px',
-            right: '10px'
-        },
-        '& > button.MuiIconButton-root': {
-            position: 'absolute',
-            right: '9px',
-            top: '12px',
-            width: '24px',
-            height: '24px',
+            right: '-5px',
+            top: '-5px',
+            width: '20px',
+            height: '20px',
             padding: '5px',
-            background: '#EBEBF0',
+            background: '#E0E0E0',
             borderRadius: '100%',
             '& svg': {
                 height: 10,
                 '& > path': {
-                    fill: '#28293D',
-                },
+                    fill: '#28293D'
+                }
             },
             '&:hover': {
                 background: '#F08F8F',
