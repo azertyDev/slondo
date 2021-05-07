@@ -10,10 +10,9 @@ import {ButtonComponent} from '@src/components/elements/button/Button';
 import {CustomModal} from '@src/components/elements/custom_modal/CustomModal';
 import {socket, userAPI} from '@src/api/api';
 import {setErrorMsgAction} from '@src/redux/slices/errorSlice';
-import {useDispatch, useSelector} from 'react-redux';
+import {useDispatch} from 'react-redux';
 import {useRouter} from 'next/router';
 import {useStyles} from './useStyles';
-import {RootState} from '@src/redux/rootReducer';
 
 
 type AuctionInfoPropsType = {
@@ -26,7 +25,6 @@ export const AuctionContent: FC<AuctionInfoPropsType> = (props) => {
         data
     } = props;
 
-    const userInfo = useSelector((store: RootState) => store.user.info);
     const router = useRouter();
     const dispatch = useDispatch();
     const date = new Date(data.expiration_at).getTime();
@@ -52,6 +50,7 @@ export const AuctionContent: FC<AuctionInfoPropsType> = (props) => {
     const handleModalBuyNow = (value) => () => {
         setOpenBuyNow(value);
     };
+
     const handleModalOfferPrice = (value) => () => {
         setOpenOfferPrice(value);
     };
@@ -70,8 +69,6 @@ export const AuctionContent: FC<AuctionInfoPropsType> = (props) => {
     const handleBet = async (bet) => {
         try {
             await userAPI.betAuction(bet, data.auction.id);
-            const bets = await userAPI.getAuctionBets(data.auction.id, 1);
-            setAuctionBets({...auctionsBets, list: bets.data});
         } catch (e) {
             dispatch(
                 setErrorMsgAction(t(`errors:${e.response.data.message}`))
@@ -131,19 +128,21 @@ export const AuctionContent: FC<AuctionInfoPropsType> = (props) => {
             dispatch(setErrorMsgAction(e.message));
         }
     };
-
-    useEffect(() => {
-        userInfo.id && socket.on('connect', () => {
-            socket.emit('user_connected', userInfo.id);
-        });
-        socket.on('bet-channel', () => {
-            handleRefreshBets();
-        });
-    }, [userInfo]);
+    console.log('auctionsBets', auctionsBets);
 
     useEffect(() => {
         auctionBetsPagination();
-    }, [page]);
+    }, []);
+
+    useEffect(() => {
+        socket.on('bet-channel', (lastBet) => {
+            console.log('lastBet', lastBet);
+            setAuctionBets({
+                ...auctionsBets,
+                list: [...auctionsBets.list, lastBet]
+            });
+        });
+    }, []);
 
     const classes = useStyles();
     return (
