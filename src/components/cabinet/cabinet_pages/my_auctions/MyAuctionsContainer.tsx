@@ -9,7 +9,6 @@ import {useTranslation} from 'next-i18next';
 import {Box, Grid, IconButton, List, ListItem, ListItemText, Typography} from '@material-ui/core';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import {InitialCabinetCardState, OffersStateType, TabsDataType} from '@root/interfaces/Cabinet.js';
-import {UserInfo} from '@root/interfaces/Auth';
 import {useStyles} from './useStyles';
 import {UserInfoWithAvatar} from '@src/components/elements/user_info_with_avatar/UserInfoWithAvatar';
 import {ButtonComponent} from '@src/components/elements/button/Button';
@@ -152,12 +151,21 @@ export const MyAuctionsContainer: FC = () => {
                     >
                         <ListItem
                             button
+                            onClick={handleModalContentIndex(3)}
+                        >
+                            <ListItemText
+                                primary="Деактивировать"
+                                primaryTypographyProps={{variant: 'subtitle1'}}
+                            />
+                        </ListItem>
+                        <ListItem
+                            button
                             onClick={handleModalContentIndex(2)}
                         >
                             <ListItemText
                                 primary="Поднять в ленте"
                                 primaryTypographyProps={{variant: 'subtitle1'}}
-                                secondary="(можно использовать 3 раз в неделю)"
+                                secondary="(можно использовать 3 раза в неделю)"
                                 secondaryTypographyProps={{variant: 'subtitle2'}}
                             />
                         </ListItem>
@@ -178,6 +186,34 @@ export const MyAuctionsContainer: FC = () => {
                             <ListItemText
                                 primary='Да'
                                 primaryTypographyProps={{ variant: 'subtitle1' }}
+                            />
+                        </ListItem>
+                        <ListItem
+                            button
+                            onClick={handlePrevMenu}
+                        >
+                            <ListItemText
+                                primary='Нет'
+                                primaryTypographyProps={{variant: 'subtitle1'}}
+                            />
+                        </ListItem>
+                    </List>
+                </>;
+            case 3:
+                return <>
+                    <List
+                        component="nav"
+                        aria-label="main"
+                        className={classes.settingsList}
+                        disablePadding
+                    >
+                        <ListItem
+                            button
+                            onClick={handleDeactivate(auctionId)}
+                        >
+                            <ListItemText
+                                primary='Да'
+                                primaryTypographyProps={{variant: 'subtitle1'}}
                             />
                         </ListItem>
                         <ListItem
@@ -282,7 +318,7 @@ export const MyAuctionsContainer: FC = () => {
                         cardData={data}
                         handleModalOpen={handleOpenModal}
                     />
-                    {data.auction.winner && data.status === 'success' && (
+                    {data.creator && data.status === 'accepted' && (
                         <Box mt={1}>
                             <ButtonComponent className='end-auction' onClick={handleDeactivate(data.id)}>
                                 <Typography variant='subtitle1'>

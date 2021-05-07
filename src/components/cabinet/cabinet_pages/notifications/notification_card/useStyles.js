@@ -5,13 +5,17 @@ export const useStyles = makeStyles((theme) => ({
         display: 'flex',
         padding: '10px 15px',
         background: '#F2F2F2',
-        borderRadius: '8px',
+        borderRadius: '10px',
         boxShadow: '0px 1px 2px rgba(0, 0, 0, 0.1)',
         position: 'relative',
         minWidth: 0,
+        '& a': {
+            textDecoration: 'none'
+        },
         '& > div': {
             '& .MuiTypography-h6': {
-                fontWeight: '600'
+                fontWeight: '600',
+                marginBottom: 5
             },
             '& > h6.MuiTypography-subtitle1': {
                 color: '#838383'
@@ -26,23 +30,18 @@ export const useStyles = makeStyles((theme) => ({
                 }
             }
         },
-        '& > div.image': {
-            position: 'absolute',
-            bottom: '-10px',
-            right: '-10px',
-            '& > svg': {}
+        '& .forward-to-btn': {
+            '& svg': {
+                background: '#fff',
+                marginRight: '10px',
+                padding: 3,
+                borderRadius: '100%'
+            }
         },
-        '& > button': {
-            width: '30px',
-            height: '30px',
+        '& .MuiIconButton-root': {
             position: 'absolute',
-            top: '10px',
-            right: '10px'
-        },
-        '& > button.MuiIconButton-root': {
-            position: 'absolute',
-            right: '10px',
-            top: '10px',
+            right: '-5px',
+            top: '-5px',
             width: '20px',
             height: '20px',
             padding: '5px',

@@ -28,7 +28,7 @@ export const CustomSnackbar = (props) => {
                     vertical: 'top', horizontal: 'right'
                 }}
             >
-                <Alert severity={severity} variant='outlined'>
+                <Alert severity={severity} variant='filled'>
                     {message ? message : undefined}
                 </Alert>
             </Snackbar>

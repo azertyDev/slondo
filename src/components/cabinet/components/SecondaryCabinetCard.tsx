@@ -36,6 +36,7 @@ export const SecondaryCabinetCard: FC<CabinetCardPropsType> = (props) => {
     return (
         <div className={classes.root}>
             <>
+                {/*Продавец*/}
                 {user.author && user.status === 'success' && (
                     <div className="profile-form">
                         <div className="extreme-rate">
@@ -81,11 +82,12 @@ export const SecondaryCabinetCard: FC<CabinetCardPropsType> = (props) => {
                         </div>
                     </div>
                 )}
+                {/*Покупатель*/}
                 {user.auction?.winner && (
                     <div className="profile-form">
                         <div className="extreme-rate">
                             <Typography variant="subtitle1" color="initial">
-                                Покупатель
+                                Победитель
                             </Typography>
                             <ButtonComponent>
                                 <Typography
@@ -136,7 +138,8 @@ export const SecondaryCabinetCard: FC<CabinetCardPropsType> = (props) => {
                         </div>
                     </div>
                 )}
-                {user.auction?.offer && !user.auction.is_accepted && (
+                {/*Предложенная цена*/}
+                {user.auction?.offer && !user.auction?.winner && (
                     <div className="offers-card">
                         <div className="extreme-rate">
                             <Typography variant="subtitle1" color="initial">
@@ -196,6 +199,7 @@ export const SecondaryCabinetCard: FC<CabinetCardPropsType> = (props) => {
                         </div>
                     </div>
                 )}
+                {/*Поздравляем! Вы победили в аукционе*/}
                 {user.status === 'suspended' && user.auction.winner_id === id && (
                     <Box className='profile-form'>
                         <Box display='flex' className='congrat'>
