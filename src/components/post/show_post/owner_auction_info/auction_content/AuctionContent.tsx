@@ -8,11 +8,12 @@ import {numberPrettier} from '@root/src/helpers';
 import {AuctionForm} from './AuctionForm/AuctionForm';
 import {ButtonComponent} from '@src/components/elements/button/Button';
 import {CustomModal} from '@src/components/elements/custom_modal/CustomModal';
-import {userAPI} from '@src/api/api';
+import {socket, userAPI} from '@src/api/api';
 import {setErrorMsgAction} from '@src/redux/slices/errorSlice';
-import {useDispatch} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import {useRouter} from 'next/router';
 import {useStyles} from './useStyles';
+import {RootState} from '@src/redux/rootReducer';
 
 
 type AuctionInfoPropsType = {
@@ -25,6 +26,7 @@ export const AuctionContent: FC<AuctionInfoPropsType> = (props) => {
         data
     } = props;
 
+    const userInfo = useSelector((store: RootState) => store.user.info);
     const router = useRouter();
     const dispatch = useDispatch();
     const date = new Date(data.expiration_at).getTime();
@@ -77,8 +79,8 @@ export const AuctionContent: FC<AuctionInfoPropsType> = (props) => {
         }
     };
 
-    const handleScroll = (e) => {
-        const isScrollBottom = e.target.scrollHeight - e.target.scrollTop === e.target.clientHeight;
+    const handleScroll = ({target}) => {
+        const isScrollBottom = target.scrollHeight - target.scrollTop === target.clientHeight;
         if (isScrollBottom) {
             setPage(prev => prev + 1);
         }
@@ -129,6 +131,15 @@ export const AuctionContent: FC<AuctionInfoPropsType> = (props) => {
             dispatch(setErrorMsgAction(e.message));
         }
     };
+
+    useEffect(() => {
+        userInfo.id && socket.on('connect', () => {
+            socket.emit('user_connected', userInfo.id);
+        });
+        socket.on('bet-channel', () => {
+            handleRefreshBets();
+        });
+    }, [userInfo]);
 
     useEffect(() => {
         auctionBetsPagination();
