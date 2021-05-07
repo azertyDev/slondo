@@ -5,18 +5,14 @@ import ReactInputMask from 'react-input-mask';
 import {Grid, TextField, Typography} from '@material-ui/core';
 import {isRequired} from '@src/helpers';
 import {useStyles} from './useStyles';
+import {TextFieldProps} from '@material-ui/core/TextField/TextField';
 
 type CustomFormikFieldPropsType = {
     limit?: number,
-    style?,
-    name?: string,
-    type?: string,
-    placeholder?: string,
     errorMsg?: string,
     labelText?: string,
-    value?: string
-    onChange?: (e) => void
-} & WithT;
+    value?: any
+} & TextFieldProps & WithT;
 
 export const FormikField: FC<CustomFormikFieldPropsType> = (props) => {
     const {

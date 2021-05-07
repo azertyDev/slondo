@@ -46,7 +46,6 @@ export const SettingsForm: FC<SettingsFormPropsType> = (props) => {
         handleChange,
         isSubmitting,
         handleBlur,
-        handleReset
     } = formik;
 
     const classes = useStyles({ props });
@@ -89,12 +88,12 @@ export const SettingsForm: FC<SettingsFormPropsType> = (props) => {
                             <FormikField
                                 t={t}
                                 name='phone'
+                                size='small'
                                 labelText={t('post:phoneNumber')}
                                 value={values.phone}
                                 onChange={handleChange}
                                 disabled
                                 errorMsg={getErrorMsg(errors.phone, touched.phone, t)}
-                                size='small'
                             />
                         </Grid>
                         <Grid item xs={12}>
