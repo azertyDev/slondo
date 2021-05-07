@@ -1,6 +1,6 @@
 import React, {FC} from 'react';
 import {Typography} from '@material-ui/core';
-import {CustomFormikTextarea} from '@src/components/elements/custom_formik_textarea/CustomFormikTextarea';
+import {FormikTextarea} from '@src/components/elements/formik_textarea/FormikTextarea';
 import {useStyles} from './useStyles';
 
 
@@ -33,7 +33,7 @@ export const Description: FC<DescriptionPropsType> = (props) => {
                 </strong>
                 {errorMsg && <span className='error-text'>&nbsp;{errorMsg}</span>}
             </Typography>
-            <CustomFormikTextarea
+            <FormikTextarea
                 rowsMin={15}
                 name='description'
                 value={description}

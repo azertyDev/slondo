@@ -107,26 +107,6 @@ export const addParentsToCtgrs = (categoriesList: CategoryType[]): CategoryType[
     }
 };
 
-export const prepareDataForCreate = (data, filters) => (
-    Object.keys(data).reduce<any>((acc, key) => {
-        const isArray = Array.isArray(data[key]);
-        if (data[key] && key !== 'title') {
-            if (typeof data[key] !== 'object' || isArray && data[key].length) {
-                if (isArray) {
-                    acc[key] = data[key].map(({id}) => ({id}));
-                } else if (key === 'engine_capacity') {
-                    acc.engine_capacity_id = filters.engine_capacity.find(v => v.name === data[key]).id;
-                } else {
-                    acc[key] = data[key];
-                }
-            } else if (typeof data[key] === 'object' && !isArray) {
-                acc[`${key}_id`] = data[key].id;
-            }
-        }
-        return acc;
-    }, {})
-);
-
 export const dataForCrtPostNormalize = (data: any, type?) => {
     if (!!data) {
         data = Object.keys(data).reduce((acc: any, key) => {

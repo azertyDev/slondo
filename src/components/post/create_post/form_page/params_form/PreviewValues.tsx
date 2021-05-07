@@ -2,7 +2,7 @@ import {FC} from 'react';
 import {Grid, Typography} from '@material-ui/core';
 import {WithT} from 'i18next';
 import {CheckboxSelect} from '@src/components/elements/checkbox_select/CheckboxSelect';
-import {excludedKeys} from '@src/common_data/form_fields';
+import {excludeFields} from '@src/common_data/form_fields';
 
 
 type PreviewValuesPropsType = {
@@ -19,7 +19,7 @@ export const PreviewValues: FC<PreviewValuesPropsType> = (props) => {
                         const isString = typeof values[key] === 'string';
                         const isBoolean = typeof values[key] === 'boolean';
                         const isOptions = Array.isArray(values[key]);
-                        const isExcludeKey = excludedKeys.some(k => k === key);
+                        const isExcludeKey = excludeFields.some(k => k === key);
 
                         if ((!!values[key] && !isExcludeKey && !isOptions) || (isOptions && !!values[key].length)) {
                             if (isOptions) {

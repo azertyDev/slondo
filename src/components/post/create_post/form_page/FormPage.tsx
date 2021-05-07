@@ -18,13 +18,6 @@ import {RootState} from '@src/redux/rootReducer';
 import {useStyles} from './useStyles';
 
 
-const extendSubCtgrs = [
-    'apartments',
-    'housesCottages',
-    'madeInUzb',
-    'foreignCars'
-];
-
 export type DataForCrtPostType = {
     isFetch: boolean;
     data: any;
@@ -48,7 +41,6 @@ export const FormPage: FC = () => {
     );
 
     const isCtgrAnimalFishes = category.name === 'animal' && subCategory.name === 'fishes';
-    const isExtendSubCtgr = extendSubCtgrs.some(ctgr => ctgr === subCategory.name);
 
     const title = `${t(`categories:${category.name}`)}
         ${subCategory ? ` - ${t(`categories:${subCategory.name}`)}` : ''}
@@ -80,7 +72,7 @@ export const FormPage: FC = () => {
     const [post, setPost] = useState(initPost);
     const [filters, setFilters] = useState(initFilters);
     const {colors, ...filtersData} = filters.data;
-    const [currentFormIndex, setCurrentFormIndex] = useState(isExtendSubCtgr ? 4 : 3);
+    const [currentFormIndex, setCurrentFormIndex] = useState(3);
 
     const handleNextFormOpen = () => {
         setCurrentFormIndex(currentFormIndex - 1);
@@ -201,7 +193,6 @@ export const FormPage: FC = () => {
                          isPreview={isPreview}
                          subCategory={subCategory}
                          categoryName={categoryName}
-                         isExtendSubCtgr={isExtendSubCtgr}
                          currentFormIndex={currentFormIndex}
                          handleFormOpen={handleFormOpen}
                          handleNextFormOpen={handleNextFormOpen}
@@ -229,6 +220,7 @@ export const FormPage: FC = () => {
                              setPost={setPost}
                              isPreview={isPreview}
                              setIsPreview={setIsPreview}
+                             categoryName={categoryName}
                              currentFormIndex={currentFormIndex}
                          />
                      </div>

@@ -1,6 +1,6 @@
-import React, {FC} from 'react';
+import {FC} from 'react';
 import {WithT} from 'i18next';
-import {NativeSelect, Typography} from '@material-ui/core';
+import {Checkbox, FormControl, InputLabel, MenuItem, Select, Typography} from '@material-ui/core';
 import {isRequired} from '@src/helpers';
 import {useStyles} from './useStyles';
 
@@ -8,10 +8,11 @@ import {useStyles} from './useStyles';
 type CustomSelectPropsType = {
     name: string;
     labelTxt?: string,
+    multiple?: boolean,
     values,
     onBlur,
     items: any[];
-    handleSelect: (k, v) => void;
+    handleSelect: (k, v) => void,
     errorMsg?: string
 } & WithT;
 
@@ -20,62 +21,82 @@ export const DropDownSelect: FC<CustomSelectPropsType> = (props) => {
         t,
         name,
         labelTxt,
+        multiple,
         items = [],
-        handleSelect,
         onBlur,
         values,
-        errorMsg
+        errorMsg,
+        handleSelect
     } = props;
 
     const isCurrency = name === 'currency';
     const optionKey = name === 'duration' ? 'hours' : 'name';
 
-    const onChange = ({target: {name, value}}) => {
+    const onChange = ({target}) => {
+        const {name, value} = target;
         const selectedItem = items.find(item => item.id === +value) || null;
-        handleSelect(name, selectedItem);
+        multiple ? handleSelect(name, value) : handleSelect(name, selectedItem);
+    };
+
+    const selectedHandle = (selected: any) => {
+        if (multiple) {
+            selected = selected.map(item => item.name).join(', ');
+        } else {
+            const selectedItem = items.find(item => item.id === +selected) || null;
+            selected = selected ? t(`filters:${selectedItem[optionKey]}`) : t('filters:noSelect');
+        }
+        return selected;
     };
 
     const classes = useStyles();
     return (
-        <div className={classes.root}>
-            <Typography variant="subtitle1">
-                {!isCurrency && (
-                    <strong>
-                        {t(`filters:${labelTxt ?? name}`)}
-                        {isRequired(name) && <span className='error-text'>*&nbsp;</span>}
-                    </strong>
-                )}
-            </Typography>
-            <NativeSelect
-                disableUnderline
-                disabled={!items.length}
+        <FormControl className={classes.root}>
+            {multiple
+             ? <InputLabel>
+                 {t(`filters:${labelTxt ?? name}`)}
+             </InputLabel>
+             : <Typography variant="subtitle1">
+                 {!isCurrency && (
+                     <strong>
+                         {t(`filters:${labelTxt ?? name}`)}
+                         {isRequired(name) && <span className='error-text'>*&nbsp;</span>}
+                     </strong>
+                 )}
+             </Typography>}
+            <Select
                 name={name}
                 onBlur={onBlur}
+                multiple={multiple}
+                disabled={!items.length}
                 onChange={onChange}
-                value={values[name]?.id ?? 0}
+                renderValue={selectedHandle}
+                variant='outlined'
+                label={<Typography>test</Typography>}
                 className={'select-wrapper' + `${errorMsg ? ' error-border' : ''}`}
+                value={multiple ? values[name] || [] : values[name]?.id ?? 0}
             >
-                {!isCurrency && (
-                    <option value={0}>
+                {!multiple && !isCurrency && (
+                    <MenuItem value={0}>
                         {t('filters:noSelect')}
-                    </option>
+                    </MenuItem>
                 )}
-                {items.map(item =>
-                    <option
+                {items.map(item => (
+                    <MenuItem
                         key={item.id}
-                        value={item.id}
+                        value={multiple ? item : item.id}
                     >
-                        {name === 'currency' ? t(`filters:${item.name}`) : item[optionKey]}
-                    </option>
-                )}
-            </NativeSelect>
+                        {multiple && <Checkbox checked={!!values[name]?.some(el => el.id === item.id)}/>}
+                        {t(`filters:${item[optionKey]}`)}
+                    </MenuItem>
+                ))}
+            </Select>
             <Typography variant="subtitle1">
                 {errorMsg && (
                     <span className='error-text'>
-                        {errorMsg}
-                    </span>
+                            {errorMsg}
+                        </span>
                 )}
             </Typography>
-        </div>
+        </FormControl>
     );
 };

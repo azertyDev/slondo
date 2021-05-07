@@ -1,7 +1,7 @@
 import {FC, Fragment} from 'react';
 import {WithT} from 'i18next';
 import {Grid, Typography} from '@material-ui/core';
-import {excludedKeys, optionKeys} from '@src/common_data/form_fields';
+import {excludeFields, optionFields} from '@src/common_data/form_fields';
 import {DropDownSelect} from '@src/components/elements/drop_down_select/DropDownSelect';
 import {getErrorMsg} from '@src/helpers';
 import {OptionsSelect} from '@src/components/post/create_post/form_page/components/options_select/OptionsSelect';
@@ -68,9 +68,9 @@ export const RegularParams: FC<RegularFormPropsType> = (props) => {
 
     function getFields(filters) {
         return Object.keys(filters).map(key => {
-            const isExcludeValue = excludedKeys.some(k => k === key);
+            const isExcludeValue = excludeFields.some(k => k === key);
             const isNoEmptyArray = Array.isArray(filters[key]) && !!filters[key].length;
-            const isOptionKey = optionKeys.some(optKey => optKey === key);
+            const isOptionKey = optionFields.some(optKey => optKey === key);
 
             if (!isExcludeValue && isNoEmptyArray) {
                 return (

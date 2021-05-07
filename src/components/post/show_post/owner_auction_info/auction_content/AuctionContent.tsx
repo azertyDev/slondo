@@ -53,6 +53,7 @@ export const AuctionContent: FC<AuctionInfoPropsType> = (props) => {
     const handleModalOfferPrice = (value) => () => {
         setOpenOfferPrice(value);
     };
+
     const handleBuyNow = async () => {
         try {
             await userAPI.buyNow(data.auction.id, data.id);
@@ -63,6 +64,7 @@ export const AuctionContent: FC<AuctionInfoPropsType> = (props) => {
             );
         }
     };
+
     const handleBet = async (bet) => {
         try {
             await userAPI.betAuction(bet, data.auction.id);
@@ -74,12 +76,14 @@ export const AuctionContent: FC<AuctionInfoPropsType> = (props) => {
             );
         }
     };
+
     const handleScroll = (e) => {
         const isScrollBottom = e.target.scrollHeight - e.target.scrollTop === e.target.clientHeight;
         if (isScrollBottom) {
             setPage(prev => prev + 1);
         }
     };
+
     const handleOfferPrice = async () => {
         try {
             setOfferPrice({...offerPrice, isFetch: true});
@@ -90,9 +94,11 @@ export const AuctionContent: FC<AuctionInfoPropsType> = (props) => {
             dispatch(setErrorMsgAction(e.message));
         }
     };
+
     const handleTextField = ({target}) => {
         setOfferPrice({...offerPrice, price: target.value});
     };
+
     const handleRefreshBets = async () => {
         try {
             setAuctionBets({
@@ -109,6 +115,7 @@ export const AuctionContent: FC<AuctionInfoPropsType> = (props) => {
             dispatch(setErrorMsgAction(e.message));
         }
     };
+
     const auctionBetsPagination = async () => {
         try {
             setAuctionBets({...auctionsBets, isFetch: true});

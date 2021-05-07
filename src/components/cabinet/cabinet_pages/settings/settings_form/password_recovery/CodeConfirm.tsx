@@ -1,7 +1,7 @@
 import {Dispatch, FC, SetStateAction} from 'react';
 import {WithT} from 'i18next';
 import {Form, FormikProvider, useFormik} from 'formik';
-import {CustomFormikField} from '@src/components/elements/custom_formik_field/CustomFormikField';
+import {FormikField} from '@src/components/elements/formik_field/FormikField';
 import {codeSchema} from '@root/validation_schemas/authRegSchema';
 import {ButtonComponent} from '@src/components/elements/button/Button';
 import {userAPI} from '@src/api/api';
@@ -66,14 +66,14 @@ export const CodeConfirm: FC<CodeConfirmPropsType> = (props) => {
         <FormikProvider value={formik}>
             <Form onSubmit={handleSubmit} className='auth-form'>
                 <div>
-                    <CustomFormikField
+                    <FormikField
                         t={t}
                         disabled
                         type="tel"
                         value={phone}
                         labelText='phone_number'
                     />
-                    <CustomFormikField
+                    <FormikField
                         t={t}
                         type="text"
                         name="code"

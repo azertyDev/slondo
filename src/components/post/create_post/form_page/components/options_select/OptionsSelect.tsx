@@ -36,13 +36,12 @@ export const OptionsSelect: FC<OptionsSectionPropsType> = (props) => {
                     </strong>
                 </Typography>
             )}
-            <Grid container>
+            <Grid container direction='column'>
                 {options.map(item => {
                     const checked = !!values[name]?.some(({id}) => id === item.id);
                     return (
                         <Grid
                             item
-                            sm={4}
                             xs={12}
                             container
                             key={item.id}

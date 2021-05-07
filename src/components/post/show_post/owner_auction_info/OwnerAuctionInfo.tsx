@@ -31,6 +31,7 @@ export const OwnerAuctionInfo: FC<OwnerAuctionInfoPropsType> = (props) => {
     const [isFetch, setIsFetch] = useState(false);
     const [authorPhones, setAuthorPhones] = useState(initAuthorPhones);
     const {showPhone} = authorPhones;
+
     const handleFollow = (userId) => async () => {
         try {
             await userAPI.follow(userId);

@@ -79,7 +79,7 @@ export const NumberSelect: FC<FloorsPropsType> = (props) => {
                          variant='subtitle1'
                          onClick={handleOther}
                      >
-                         {t('other')}
+                         {t('filters:other')}
                      </Typography>}
                 </div>
             </div>

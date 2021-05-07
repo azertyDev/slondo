@@ -2,7 +2,7 @@ import React, {Dispatch, FC, SetStateAction} from 'react';
 import {WithT} from 'i18next';
 import {userAPI} from '@src/api/api';
 import {Form, FormikProvider, useFormik} from 'formik';
-import {CustomFormikField} from '@src/components/elements/custom_formik_field/CustomFormikField';
+import {FormikField} from '@src/components/elements/formik_field/FormikField';
 import {phoneSchema} from '@root/validation_schemas/authRegSchema';
 import {ButtonComponent} from '@src/components/elements/button/Button';
 import {getErrorMsg, phonePrepare} from '@src/helpers';
@@ -57,7 +57,7 @@ export const RegForm: FC<RegFormPropsType> = (props) => {
     return (
         <FormikProvider value={formik}>
             <Form onSubmit={formik.handleSubmit} className='auth-form'>
-                <CustomFormikField
+                <FormikField
                     t={t}
                     type="tel"
                     name="phone"

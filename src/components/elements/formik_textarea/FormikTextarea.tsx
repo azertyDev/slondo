@@ -3,7 +3,7 @@ import {TextareaAutosize, TextareaAutosizeProps} from "@material-ui/core";
 import {Field} from "formik";
 
 
-export const CustomFormikTextarea: FC<TextareaAutosizeProps> = (props) => {
+export const FormikTextarea: FC<TextareaAutosizeProps> = (props) => {
     return (
         <Field {...props}>
             {

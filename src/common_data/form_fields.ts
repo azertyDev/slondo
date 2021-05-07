@@ -32,7 +32,7 @@ export const requireFields = [
     'user_name'
 ];
 
-export const excludedKeys = [
+export const excludeFields = [
     'title',
     'id',
     'name',
@@ -55,10 +55,16 @@ export const numericFields = [
     'number_of_floors',
     'number_of_bedrooms',
     'engine_capacity',
-    'mileage'
+    'mileage',
+    'ceiling_height'
 ];
 
-export const optionKeys = [
+export const fractionalFields = [
+    'engine_capacity',
+    'ceiling_height'
+];
+
+export const optionFields = [
     'mount',
     'properties',
     'power_windows',
@@ -72,6 +78,8 @@ export const optionKeys = [
     'power_windows',
     'seat_heating',
     'steering',
-    'view',
-    'other'
+    'other',
+    'comfort',
+    'safety',
+    'view'
 ];

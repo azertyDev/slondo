@@ -5,7 +5,7 @@ import {Footer} from '../footer/Footer';
 import {Container} from '@material-ui/core';
 import {ErrorModal} from '@src/components/error_modal/ErrorModal';
 import {useRouter} from 'next/router';
-import {SEOTextComponent} from '@src/components/elements/seo_text/SEOTextComponent';
+import {SEOTextComponent} from '@src/components/elements/seo_text_component/SEOTextComponent';
 
 
 type MainLayoutPropsType = {

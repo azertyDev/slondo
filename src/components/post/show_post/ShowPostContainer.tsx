@@ -154,6 +154,11 @@ export const ShowPostContainer: FC = () => {
                 <meta property="og:site_name" content="Slondo"/>
                 <meta property="og:type" content="website"/>
                 <meta property="og:title" content={data.title} key="ogtitle"/>
+                <script
+                    src="https://cdn.socket.io/3.1.3/socket.io.min.js"
+                    integrity="sha384-cPwlPLvBTa3sKAgddT6krw0cJat7egBga3DJepJyrLl4Q9/5WLra3rrnMcyTyOnh"
+                    crossOrigin="anonymous"
+                />
                 <title>{data.title}</title>
             </Head>
             <Hidden mdDown>

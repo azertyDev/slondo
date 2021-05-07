@@ -18,7 +18,7 @@ type CustomFormikFieldPropsType = {
     onChange?: (e) => void
 } & WithT;
 
-export const CustomFormikField: FC<CustomFormikFieldPropsType> = (props) => {
+export const FormikField: FC<CustomFormikFieldPropsType> = (props) => {
     const {
         t,
         name,

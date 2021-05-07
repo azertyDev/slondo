@@ -2,7 +2,7 @@ import {FC} from 'react';
 import {WithT} from 'i18next';
 import {Checkbox, Grid, Typography} from '@material-ui/core';
 import {DropDownSelect} from '@src/components/elements/drop_down_select/DropDownSelect';
-import {CustomFormikField} from '@src/components/elements/custom_formik_field/CustomFormikField';
+import {FormikField} from '@src/components/elements/formik_field/FormikField';
 import {getErrorMsg} from '@src/helpers';
 import {useStyles} from './useStyles';
 
@@ -52,7 +52,7 @@ export const AuctionParams: FC<AuctionParamsPropsType> = (props) => {
                         />
                     </Grid>
                     <Grid item xs={3}>
-                        <CustomFormikField
+                        <FormikField
                             t={t}
                             name='price'
                             labelText='start_price'
@@ -63,7 +63,7 @@ export const AuctionParams: FC<AuctionParamsPropsType> = (props) => {
                     </Grid>
                     {isAdvanceAuction && (
                         <Grid item xs={2}>
-                            <CustomFormikField
+                            <FormikField
                                 t={t}
                                 name='reserve_price'
                                 labelText='reserve_price'
@@ -102,7 +102,7 @@ export const AuctionParams: FC<AuctionParamsPropsType> = (props) => {
                             </Grid>
                             {auction.price_buy_now.isActive && (
                                 <Grid item xs={3}>
-                                    <CustomFormikField
+                                    <FormikField
                                         t={t}
                                         name='price_buy_now'
                                         onChange={handleInput}

@@ -1,7 +1,7 @@
 import React, {Dispatch, FC, SetStateAction} from 'react';
 import {WithT} from 'i18next';
 import {Form, FormikProvider, useFormik} from 'formik';
-import {CustomFormikField} from '@src/components/elements/custom_formik_field/CustomFormikField';
+import {FormikField} from '@src/components/elements/formik_field/FormikField';
 import {passwordConfirmSchema} from '@root/validation_schemas/authRegSchema';
 import {ButtonComponent} from '@src/components/elements/button/Button';
 import {userAPI} from '@src/api/api';
@@ -64,7 +64,7 @@ export const PasswordConfirmForm: FC<ConfirmAuthPropsType> = (props) => {
         <FormikProvider value={formik}>
             <Form onSubmit={formik.handleSubmit} className='auth-form'>
                 <div>
-                    <CustomFormikField
+                    <FormikField
                         t={t}
                         type="password"
                         name="newPassword"
@@ -72,7 +72,7 @@ export const PasswordConfirmForm: FC<ConfirmAuthPropsType> = (props) => {
                         placeholder={t('filters:enter_new_password')}
                         errorMsg={getErrorMsg(errors.code, touched.code, t)}
                     />
-                    <CustomFormikField
+                    <FormikField
                         t={t}
                         type="password"
                         name="newPassword_confirm"
