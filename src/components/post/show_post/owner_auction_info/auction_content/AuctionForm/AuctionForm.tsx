@@ -24,10 +24,9 @@ export const AuctionForm: FC<AuctionFromPropsType> = (props) => {
 
     const isMdDown = useMediaQuery(useTheme().breakpoints.down('md'));
 
-    const onSubmit = ({bet}, actions) => {
-        bet = bet.replace(whiteSpacesRegEx, '');
-        handleBet(bet);
-        actions.resetForm();
+    const onSubmit = ({bet}, {resetForm}) => {
+        resetForm();
+        handleBet(bet.replace(whiteSpacesRegEx, ''));
     };
 
     const formik = useFormik({
@@ -37,6 +36,7 @@ export const AuctionForm: FC<AuctionFromPropsType> = (props) => {
     });
 
     const {
+        values,
         setValues,
         errors,
         touched,
@@ -69,6 +69,7 @@ export const AuctionForm: FC<AuctionFromPropsType> = (props) => {
                                     type="submit"
                                     color="secondary"
                                     className="btn-bet"
+                                    disabled={!values.bet}
                                 >
                                     <Typography variant="subtitle1" color="initial">
                                         Сделать ставку

@@ -79,13 +79,13 @@ export const OwnerAuctionInfo: FC<OwnerAuctionInfoPropsType> = (props) => {
                     <Hidden mdDown>
                         <AuctionContent
                             t={t}
-                            data={data}
+                            postData={data}
                         />
                     </Hidden>
                 )}
                 <OwnerContent
                     t={t}
-                    data={data}
+                    postData={data}
                     isFetch={isFetch}
                     showPhone={showPhone}
                     authorPhones={authorPhones}

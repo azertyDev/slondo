@@ -16,7 +16,7 @@ const instance = Axios.create({
     baseURL: localServer
 });
 
-export const socket = socketIOClient('http://192.168.100.60:8005');
+export const socketIO = socketIOClient('http://192.168.100.60:8005');
 
 const setTokenToHeader = () => {
     const token = cookies.get('slondo_auth');
@@ -273,7 +273,7 @@ export const userAPI = {
                 throw err;
             });
     },
-    offerThePrice: (auction_id: number, price: number): Promise<any> => {
+    offerThePrice: (auction_id: number, price: string): Promise<any> => {
         return instance.post(`regular/auction/offerThePrice`, {
             auction_id,
             price

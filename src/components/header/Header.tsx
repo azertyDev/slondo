@@ -11,13 +11,13 @@ import {fetchLocations} from '@src/redux/slices/locationsSlice';
 import {cookies} from '@src/helpers';
 import {useRouter} from 'next/router';
 import {useStyles} from './useStyles';
-import {socket} from '@src/api/api';
+// import {socketIO} from '@src/api/api';
 
 
 export const Header: FC = () => {
     const {locale} = useRouter();
     const dispatch = useDispatch();
-    const {t} = useTranslation(['header']);
+    const {t} = useTranslation('header');
 
     const userFromCookie = cookies.get('slondo_user');
     const user = useSelector((store: RootState) => store.user);
@@ -37,9 +37,9 @@ export const Header: FC = () => {
         !user.isAuth
         && !!userFromCookie
         && dispatch(signInAction(userFromCookie));
-        !!userId && socket.on('connect', () => {
-            socket.emit('user_connected', userId);
-        });
+        // !!userId && socketIO.on('connect', () => {
+        //     socketIO.emit('user_connected', userId);
+        // });
     }, [isAuth]);
 
     const classes = useStyles();
@@ -61,9 +61,7 @@ export const Header: FC = () => {
                     </div>
                 </Container>
                 <div className={classes.modalDialog}>
-                    <AuthRegPage
-                        isOpen={user.isAuthModalOpen}
-                    />
+                    <AuthRegPage isOpen={user.isAuthModalOpen}/>
                 </div>
             </div>
         </header>
