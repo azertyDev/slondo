@@ -1,18 +1,20 @@
 import React, {FC} from 'react';
-import {Box, Paper, Tooltip, Typography} from '@material-ui/core';
+import {Box, IconButton, Paper, Tooltip, Typography} from '@material-ui/core';
 import {
     CloseIcon,
     DeliveryIcon,
     EyeIcon,
     LocationIcon,
+    NotificationIcon,
     PhoneIcon,
+    RenewalIcon,
     SafeIcon,
     SettingsIcon,
     SwapIcon
 } from '@src/components/elements/icons';
 import {BreadcrumbsComponent} from '@src/components/elements/breadcrumbs/Breadcrumbs';
 import Link from 'next/link';
-import {formatNumber, transformToCyrillic, weekDaysHelper} from '@src/helpers';
+import {formatNumber, numberPrettier, transformToCyrillic, weekDaysHelper} from '@src/helpers';
 import Countdown from 'react-countdown';
 import {useRouter} from 'next/router';
 import {useTranslation} from 'react-i18next';
@@ -37,16 +39,19 @@ export const CabinetCard: FC<CabinetCardPropsType> = (props) => {
     const timer = ({days, hours, minutes, seconds, completed}) => (
         <Box display="flex">
             <Typography variant="caption" color="initial" className="timer-title">
-                {completed ? 'Торги окончены' : 'Окончание торгов через'}&nbsp;-&nbsp;
+                {completed ? 'Торги окончены' : 'Окончание торгов через - '}&nbsp;
             </Typography>
-            <Box display="flex">
-                <Typography variant="caption" className="timer">
-                    {formatNumber(days)}д
-                    : {formatNumber(hours)}ч
-                    : {formatNumber(minutes)}м
-                    : {formatNumber(seconds)}с
-                </Typography>
-            </Box>
+            {
+                !completed &&
+                <Box display="flex">
+                    <Typography variant="caption" className="timer">
+                        {formatNumber(days)}д
+                        : {formatNumber(hours)}ч
+                        : {formatNumber(minutes)}м
+                        : {formatNumber(seconds)}с
+                    </Typography>
+                </Box>
+            }
         </Box>
     );
 
@@ -126,13 +131,22 @@ export const CabinetCard: FC<CabinetCardPropsType> = (props) => {
                             <div className='card-btn'>
                                 {pathname?.includes('favorite')
                                     ?
-                                    <div className='isFavorite' onClick={handleModalOpen(cardData.id)}>
+                                    <IconButton className='favorite' onClick={handleModalOpen(cardData.id)}>
                                         <CloseIcon />
-                                    </div>
+                                    </IconButton>
                                     : cardData.creator && cardData.status !== 'accepted' && (
-                                    <div className='settings' onClick={handleModalOpen(cardData.id, 1)}>
-                                        <SettingsIcon />
-                                    </div>
+                                    <>
+                                        <IconButton className='notifications'>
+                                            <NotificationIcon />
+                                        </IconButton>
+                                        {
+                                            cardData.status !== 'accepted' && (
+                                                <IconButton className='settings' onClick={handleModalOpen(cardData.id, 1)}>
+                                                    <SettingsIcon />
+                                                </IconButton>
+                                            )
+                                        }
+                                    </>
                                 )}
                             </div>
                         </div>
@@ -166,9 +180,17 @@ export const CabinetCard: FC<CabinetCardPropsType> = (props) => {
                             )}
                             {!!cardData.safe_deal && (
                                 <div className="safe_deal">
-                                    <SafeIcon/>
+                                    <SafeIcon />
                                     <Typography variant="body1">
                                         Безопасная покупка
+                                    </Typography>
+                                </div>
+                            )}
+                            {!!cardData.auction?.auto_renewal && (
+                                <div className="safe_deal">
+                                    <RenewalIcon />
+                                    <Typography variant="body1">
+                                        Автопродление
                                     </Typography>
                                 </div>
                             )}
@@ -204,12 +226,21 @@ export const CabinetCard: FC<CabinetCardPropsType> = (props) => {
                                     {cardData.district?.name}
                                 </Typography>
                             </div>
-                            <div>
+                            <div className='priceAndBet'>
+                                {!!cardData.auction?.bet && (
+                                    <Typography variant='subtitle1'>
+                                        Текущая ставка
+                                    </Typography>
+                                )}
                                 <Typography
-                                    variant="h5"
+                                    variant="h6"
                                     color="initial"
                                 >
-                                    {cardData.price + ' ' + t(cardData.currency.name)}
+                                    {
+                                        (!!cardData.auction?.bet
+                                                ? numberPrettier(cardData.auction.bet.bet)
+                                                : numberPrettier(cardData.price)
+                                        ) + ' ' + t(cardData.currency.name)}
                                 </Typography>
                             </div>
                         </div>

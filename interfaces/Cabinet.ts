@@ -31,10 +31,17 @@ export type CardDataType = {
         winner_id: number,
         number_of_bets: number,
         number_of_offers?: number,
+        auto_renewal?: number,
         offer?: {
             id: number,
             price: number,
             user: UserInfo
+        },
+        bet: {
+            auction_id: number
+            bet: number
+            id: number
+            number_of_bets: number
         }
     },
     author: UserInfo,

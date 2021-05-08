@@ -38,7 +38,7 @@ export const useStyles = makeStyles((theme) => ({
         '& .MuiPaper-root': {
             border: 0,
             boxShadow: '0px 0px 15px rgba(0, 0, 0, 0.1)',
-            borderRadius: '10px 10px 0 0',
+            borderRadius: '5px',
             zIndex: 20,
             '& div.card-data': {
                 display: 'flex',
@@ -53,7 +53,7 @@ export const useStyles = makeStyles((theme) => ({
                     backgroundRepeat: 'no-repeat',
                     position: 'relative',
                     '& > img': {
-                        borderRadius: '10px 0px 0px 0px',
+                        borderRadius: '5px 0px 0px 5px',
                         height: '100%',
                         width: '100%',
                         objectFit: 'cover'
@@ -131,57 +131,31 @@ export const useStyles = makeStyles((theme) => ({
                                 position: 'absolute',
                                 top: 0,
                                 right: 20,
-                                    '& > .favorite, & > .settings, .isFavorite': {
-                                        background: '#F5F5F5',
-                                        boxShadow: '0px 1px 2px rgba(0, 0, 0, 0.15)',
-                                        borderRadius: '0px 0px 10px 10px',
-                                        display: 'flex',
-                                        alignItems: 'center'
-                                    },
-                                    '& > .favorite': {
-                                        marginRight: 20,
-                                        padding: '11px 12px',
-                                        '& > a': {
-                                            marginLeft: '7px',
-                                            '&.favorite-icon': {
-                                                '& svg': {
-                                                    '& defs': {
-                                                        '& linearGradient': {
-                                                            '& > stop': {
-                                                                '&:first-child': {
-                                                                    stopColor:
-                                                                        '#675EAA !important'
-                                                                },
-                                                                '&:last-child': {
-                                                                    stopColor:
-                                                                        '#AD66D5'
-                                                                }
-                                                            }
-                                                        }
-                                                    }
-                                                }
-                                            }
+                                '& .settings, .favorite, .notifications': {
+                                    background: '#F5F5F5',
+                                    boxShadow: '0px 1px 2px rgba(0, 0, 0, 0.15)',
+                                    borderRadius: '0px 0px 10px 10px',
+                                    display: 'flex',
+                                    alignItems: 'center',
+                                    marginRight: 20,
+                                    padding: '11px 12px',
+                                    '& svg': {
+                                        height: '18px',
+                                        '& path': {
+                                            fill: '#4E4E4E'
                                         }
                                     },
-                                    '& > .settings, .isFavorite': {
-                                        padding: '11px 12px',
-                                        '& > svg': {
+                                    '&:hover': {
+                                        cursor: 'pointer',
+                                        background: '#EB5757',
+                                        '& svg': {
                                             height: '18px',
                                             '& path': {
-                                                fill: '#4E4E4E'
-                                            }
-                                        },
-                                        '&:hover': {
-                                            cursor: 'pointer',
-                                            background: '#EB5757',
-                                            '& > svg': {
-                                                height: '18px',
-                                                '& path': {
-                                                    fill: '#fff'
-                                                }
+                                                fill: '#fff'
                                             }
                                         }
                                     }
+                                }
                             }
                         }
                     }
@@ -230,36 +204,40 @@ export const useStyles = makeStyles((theme) => ({
                                     fill: '#695EAE'
                                 }
                             }
-                            },
-                            '&.exchange': {
-                                '& svg': {
-                                    '& path': {
-                                        fill: '#4e4e4e'
-                                    }
+                        },
+                        '&.exchange': {
+                            '& svg': {
+                                '& path': {
+                                    fill: '#4e4e4e'
                                 }
                             }
                         }
-                    },
-                    '& > div > div.location': {
+                    }
+                },
+                '& .location': {
+                    display: 'flex',
+                    justifyContent: 'space-between',
+                    '& > div:first-child': {
                         display: 'flex',
-                        justifyContent: 'space-between',
-                        '& > div:first-child': {
+                        alignItems: 'center',
+                        justifyContent: 'flex-start',
+                        width: '60%',
+                        '& > a': {
                             display: 'flex',
-                            alignItems: 'center',
-                            justifyContent: 'flex-start',
-                            width: '60%',
-                            '& > a': {
-                                display: 'flex',
-                                marginRight: '10px'
-                            }
-                        },
-                        '& > div': {
-                            display: 'flex',
-                            alignItems: 'center',
-                            justifyContent: 'flex-end',
-                            width: '40%'
+                            marginRight: '10px'
                         }
                     },
+                    '& .priceAndBet': {
+                        display: 'flex',
+                        flexDirection: 'column',
+                        alignItems: 'flex-end',
+                        width: '40%',
+                        '& .MuiTypography-subtitle1': {
+                            fontSize: '0.875rem',
+                            color: '#BDBDBD'
+                        }
+                    }
+                },
                 '& .timer-title': {
                     color: '#838383'
                 },

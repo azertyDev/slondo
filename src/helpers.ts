@@ -51,7 +51,7 @@ export const getCtgrsByCyrillicNames = (categoryName: string, subCtgrName: strin
     }, []);
 };
 
-export const numberPrettier = (price: string): string => {
+export const numberPrettier = (price: string | number): string => {
     return !!price
            ? price.toString()
                .replace(/\s/g, '')
