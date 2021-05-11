@@ -13,7 +13,7 @@ const localServer = 'http://192.168.100.60/slondo/public/api/';
 
 const instance = Axios.create({
     withCredentials: true,
-    baseURL: uztelecom
+    baseURL: localServer
 });
 
 // export const socketIO = socketIOClient('http://192.168.100.60:8005');

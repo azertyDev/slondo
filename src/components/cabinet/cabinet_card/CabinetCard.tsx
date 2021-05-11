@@ -17,21 +17,21 @@ import Link from 'next/link';
 import {formatNumber, numberPrettier, transformToCyrillic, weekDaysHelper} from '@src/helpers';
 import Countdown from 'react-countdown';
 import {useRouter} from 'next/router';
-import {useTranslation} from 'react-i18next';
 import {CardDataType} from '@root/interfaces/Cabinet';
 import {useStyles} from './useStyles';
+import {WithT} from 'i18next';
 
 type CabinetCardPropsType = {
     cardData: CardDataType,
     handleModalOpen?: (id: number, index?: number) => () => void,
     handleOpenDialog?: () => void,
     fetchAuctionNotifications?: (post) => () => void
-}
+} & WithT
 
 export const CabinetCard: FC<CabinetCardPropsType> = (props) => {
     const {pathname} = useRouter();
-    const {t} = useTranslation(['common', 'categories', 'notifications']);
     const {
+        t,
         cardData,
         handleModalOpen,
         handleOpenDialog,
@@ -41,14 +41,14 @@ export const CabinetCard: FC<CabinetCardPropsType> = (props) => {
     const translatedTitle = transformToCyrillic(cardData.title);
 
     const timer = ({days, hours, minutes, seconds, completed}) => (
-        <Box display="flex">
+        <Box display="flex" alignItems='center'>
             <Typography variant="caption" color="initial" className="timer-title">
                 {completed ? 'Торги окончены' : 'Окончание торгов через - '}&nbsp;
             </Typography>
             {
                 !completed &&
                 <Box display="flex">
-                    <Typography variant="caption" className="timer">
+                    <Typography variant="subtitle1" className="timer" color='primary'>
                         {formatNumber(days)}д
                         : {formatNumber(hours)}ч
                         : {formatNumber(minutes)}м
@@ -58,6 +58,8 @@ export const CabinetCard: FC<CabinetCardPropsType> = (props) => {
             }
         </Box>
     );
+
+    console.log(cardData);
 
     const classes = useStyles();
     return (
@@ -83,7 +85,7 @@ export const CabinetCard: FC<CabinetCardPropsType> = (props) => {
                 <Box display='flex' alignItems='center'>
                     <Typography variant="subtitle1" color="initial">
                         <span className={cardData.ads_type}>
-                            {t(cardData.ads_type)} №:&nbsp;
+                            {t(`common:${cardData.ads_type}`)} №:&nbsp;
                         </span>
                         {cardData.id}
                     </Typography>
@@ -104,7 +106,7 @@ export const CabinetCard: FC<CabinetCardPropsType> = (props) => {
                             color="initial"
                             className={cardData.ads_type}
                         >
-                            {t(cardData.ads_type)}
+                            {t(`common:${cardData.ads_type}`)}
                         </Typography>
                         <span>
                             <EyeIcon/>
@@ -220,7 +222,7 @@ export const CabinetCard: FC<CabinetCardPropsType> = (props) => {
                                     renderer={timer}
                                 />
                                 <div>
-                                    <Typography variant='caption'>
+                                    <Typography variant='subtitle1'>
                                         Ставки: {cardData.auction?.number_of_bets}
                                     </Typography>
                                 </div>
@@ -228,15 +230,15 @@ export const CabinetCard: FC<CabinetCardPropsType> = (props) => {
                         )}
                         <div className="location">
                             <div>
-                                <LocationIcon/>
+                                <LocationIcon />
                                 <Typography
                                     variant="caption"
                                     color="initial"
                                     noWrap
                                 >
-                                    {cardData.region?.name},{' '}
-                                    {cardData.city?.name},{' '}
-                                    {cardData.district?.name}
+                                    {t(`locations:${cardData.region?.name}`)},{' '}
+                                    {t(`locations:${cardData.city?.name}`)}
+                                    {cardData?.district?.name && ', ' + t(`locations:${cardData?.district?.name}`)}
                                 </Typography>
                             </div>
                             <div className='priceAndBet'>
@@ -253,7 +255,7 @@ export const CabinetCard: FC<CabinetCardPropsType> = (props) => {
                                         (!!cardData.auction?.bet
                                                 ? numberPrettier(cardData.auction.bet.bet)
                                                 : numberPrettier(cardData.price)
-                                        ) + ' ' + t(cardData.currency.name)}
+                                        ) + ' ' + t(`common:${cardData.currency.name}`)}
                                 </Typography>
                             </div>
                         </div>

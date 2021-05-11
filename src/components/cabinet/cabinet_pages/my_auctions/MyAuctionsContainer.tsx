@@ -16,10 +16,12 @@ import {CloseIcon, DoneAllIcon} from '@src/components/elements/icons';
 import {CabinetCard} from '@src/components/cabinet/cabinet_card/CabinetCard';
 import {SecondaryCabinetCard} from '@src/components/cabinet/components/SecondaryCabinetCard';
 import {initialStateType} from '@src/components/cabinet/cabinet_pages/notifications/NotificationsContainer';
+import {ITEMS_PER_PAGE} from '@src/constants';
+import {CustomPagination} from '@src/components/elements/custom_pagination/CustomPagination';
 
 export const MyAuctionsContainer: FC = () => {
     const dispatch = useDispatch();
-    const {t} = useTranslation(['cabinet', 'notifications']);
+    const {t} = useTranslation(['cabinet', 'notifications','categories', 'common', 'locations']);
     const classes = useStyles();
 
     const initialState: InitialCabinetCardState = {
@@ -133,11 +135,19 @@ export const MyAuctionsContainer: FC = () => {
     const [notification, setNotification] = useState(initialNotificationState);
     const [phone, setPhone] = useState(null);
     const [openDialog, setOpenDialog] = React.useState(false);
+    const [page, setPage] = useState(1);
+    const [pageCount, setPageCount] = useState(0);
 
+    const indexOfLastPost = page * ITEMS_PER_PAGE;
+    const indexOfFirstPost = indexOfLastPost - ITEMS_PER_PAGE;
+    const currentNotifications = notification.data.slice(indexOfFirstPost, indexOfLastPost);
+
+    const handlePaginationPage = (event, value) => {
+        setPage(value);
+    };
     const handleOpenDialog = () => {
         setOpenDialog(true);
     };
-
     const fetchAuctionNotifications = (post) => async () => {
         try {
             if (post.id !== selectedAuction.id) {
@@ -145,6 +155,7 @@ export const MyAuctionsContainer: FC = () => {
                 const {data} = await userAPI.getNotificationById(post.id);
                 setNotification({...notification, data, isFetch: false});
                 setSelectedAuction({...selectedAuction, ...post});
+                setPageCount(Math.ceil(data.length / ITEMS_PER_PAGE) || 1);
             }
         } catch (e) {
             dispatch(setErrorMsgAction(e.message));
@@ -264,7 +275,6 @@ export const MyAuctionsContainer: FC = () => {
             dispatch(setErrorMsgAction(e.message));
         }
     };
-
     const getModalContent = () => {
         switch (modalContentIndex) {
             case 1:
@@ -436,11 +446,20 @@ export const MyAuctionsContainer: FC = () => {
         fetchAuctionData();
     }, []);
 
+    const pagination = (
+        <CustomPagination
+            pageCount={pageCount}
+            currentPage={page}
+            handlePaginationPage={handlePaginationPage}
+        />
+    );
+
     const creatorAuctionCards = auctionData.myPosts.data.map(data => (
         <Box mb={3} key={data.id}>
             <Grid container>
                 <Grid item xs={9}>
                     <CabinetCard
+                        t={t}
                         cardData={data}
                         handleModalOpen={handleOpenModal}
                         handleOpenDialog={handleOpenDialog}
@@ -475,6 +494,7 @@ export const MyAuctionsContainer: FC = () => {
             <Grid container>
                 <Grid item xs={9}>
                     <CabinetCard
+                        t={t}
                         cardData={data}
                         handleModalOpen={handleOpenModal}
                     />
@@ -521,7 +541,8 @@ export const MyAuctionsContainer: FC = () => {
                     phone={phone}
                     openDialog={openDialog}
                     setOpenDialog={setOpenDialog}
-                    notificationData={notification}
+                    pagination={pagination}
+                    currentNotifications={currentNotifications}
                 />
         },
         {

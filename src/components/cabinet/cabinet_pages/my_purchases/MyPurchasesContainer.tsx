@@ -12,7 +12,7 @@ export type TabsDataType = {
 }[];
 
 const MyPurchasesContainer: FC = () => {
-    const { t } = useTranslation('cabinet');
+    const {t} = useTranslation(['cabinet', 'notifications','categories', 'common', 'locations']);
     const [tabIndex, setTabIndex] = useState(0);
 
     const handleTabChange = (event, newValue) => {

@@ -4,7 +4,7 @@ import {withAuthRedirect} from "@src/hoc/withAuthRedirect";
 import {useTranslation} from "react-i18next";
 
 export const MessagesContainer: FC = () => {
-    const {t} = useTranslation(['cabinet']);
+    const {t} = useTranslation(['cabinet', 'notifications','categories', 'common', 'locations']);
 
     return (
         <Messages t={t}/>

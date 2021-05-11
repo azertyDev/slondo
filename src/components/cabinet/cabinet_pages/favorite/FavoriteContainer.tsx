@@ -14,7 +14,7 @@ import {CabinetCard} from '@src/components/cabinet/cabinet_card/CabinetCard';
 
 const FavoriteContainer: FC = () => {
     const dispatch = useDispatch();
-    const { t } = useTranslation('cabinet');
+    const {t} = useTranslation(['cabinet', 'notifications','categories', 'common', 'locations']);
     const classes = useStyles();
 
     const initialFavoriteState: InitialCabinetCardState = {
@@ -140,6 +140,7 @@ const FavoriteContainer: FC = () => {
             <Grid container>
                 <Grid item xs={9}>
                     <CabinetCard
+                        t={t}
                         cardData={data}
                         handleModalOpen={handleModalOpen}
                     />
@@ -153,6 +154,7 @@ const FavoriteContainer: FC = () => {
             <Grid container>
                 <Grid item xs={9}>
                     <CabinetCard
+                        t={t}
                         cardData={data}
                         handleModalOpen={handleModalOpen}
                     />

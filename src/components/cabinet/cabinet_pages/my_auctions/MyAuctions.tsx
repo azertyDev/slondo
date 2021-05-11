@@ -2,7 +2,6 @@ import React, {FC, ReactElement, ReactNode} from 'react';
 import {CustomModal} from '@src/components/elements/custom_modal/CustomModal';
 import {Box, CircularProgress, FormControlLabel, Switch, Typography} from '@material-ui/core';
 import {ResponsiveDialog} from '@root/src/components/elements/responsive_dialog/ResponsiveDialog';
-import {initialStateType} from '@src/components/cabinet/cabinet_pages/notifications/NotificationsContainer';
 import {numberPrettier} from '@root/src/helpers';
 import {Notification} from '@src/components/cabinet/cabinet_pages/notifications/notification_card/Notification';
 import {WithT} from 'i18next';
@@ -13,13 +12,14 @@ type MyAuctionsPropsType = {
     openModal: boolean,
     ModalContent: () => ReactElement,
     auctionCards: ReactNode,
-    notificationData?: initialStateType,
     handleDeleteNotification?: (id: number, ads_id: number) => () => void,
     fetchUserPhone?: (user_id: number) => () => void,
     phone?: number,
     openDialog?,
     setOpenDialog?,
-    selectedAuction?
+    selectedAuction?,
+    pagination?: ReactElement,
+    currentNotifications?
 } & WithT
 
 export const MyAuctions: FC<MyAuctionsPropsType> = (props) => {
@@ -30,13 +30,14 @@ export const MyAuctions: FC<MyAuctionsPropsType> = (props) => {
         ModalContent,
         auctionCards,
         isFetch,
-        notificationData,
         handleDeleteNotification,
         fetchUserPhone,
         phone,
         openDialog,
         setOpenDialog,
-        selectedAuction
+        selectedAuction,
+        pagination,
+        currentNotifications
     } = props;
 
     return (
@@ -70,7 +71,7 @@ export const MyAuctions: FC<MyAuctionsPropsType> = (props) => {
                         Текущая ставка: {numberPrettier(selectedAuction?.auction?.bet?.bet) || 0} {t('common:sum')}
                     </Typography>
                     <Typography>
-                        Аукцион №: {selectedAuction.id}
+                        Аукцион №: {selectedAuction?.id}
                     </Typography>
                     <FormControlLabel
                         control={
@@ -84,7 +85,7 @@ export const MyAuctions: FC<MyAuctionsPropsType> = (props) => {
                     />
                 </Box>
                 {
-                    notificationData?.data.map(notification =>
+                    currentNotifications?.map(notification =>
                         <Box
                             key={notification.id}
                             mb={1}
@@ -99,6 +100,11 @@ export const MyAuctions: FC<MyAuctionsPropsType> = (props) => {
                         </Box>
                     )
                 }
+                {!!currentNotifications?.length && (
+                    <Box display='flex' justifyContent='center'>
+                        {pagination}
+                    </Box>
+                )}
             </ResponsiveDialog>
         </>
     );

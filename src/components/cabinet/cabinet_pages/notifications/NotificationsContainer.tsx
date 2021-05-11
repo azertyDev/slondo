@@ -27,7 +27,7 @@ export type initialStateType = {
 
 const NotificationsContainer: FC = () => {
     const dispatch = useDispatch();
-    const {t} = useTranslation('notifications');
+    const {t} = useTranslation(['cabinet', 'notifications','categories', 'common', 'locations']);
     const userInfo = useSelector((store: RootState) => store.user.info);
     const initialState: initialStateType = {
         isFetch: false,
@@ -41,6 +41,10 @@ const NotificationsContainer: FC = () => {
     const [message, setMessage] = useState('');
     const [page, setPage] = useState(1);
     const [pageCount, setPageCount] = useState(0);
+
+    const indexOfLastPost = page * ITEMS_PER_PAGE;
+    const indexOfFirstPost = indexOfLastPost - ITEMS_PER_PAGE;
+    const currentPosts = notifications.data.slice(indexOfFirstPost, indexOfLastPost);
 
     const handleOpenModal = () => {
         setOpenModal(true);
@@ -88,11 +92,6 @@ const NotificationsContainer: FC = () => {
             dispatch(setErrorMsgAction(e.message));
         }
     };
-
-    const indexOfLastPost = page * ITEMS_PER_PAGE;
-    const indexOfFirstPost = indexOfLastPost - ITEMS_PER_PAGE;
-    const currentPosts = notifications.data.slice(indexOfFirstPost, indexOfLastPost);
-
     const handlePaginationPage = (event, value) => {
         setPage(value);
     };

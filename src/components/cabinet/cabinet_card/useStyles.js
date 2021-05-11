@@ -244,7 +244,7 @@ export const useStyles = makeStyles((theme) => ({
                     color: '#838383'
                 },
                 '& .timer': {
-                    color: theme.palette.primary.aucBgColor
+                    fontSize: '0.875rem'
                 }
             }
         },

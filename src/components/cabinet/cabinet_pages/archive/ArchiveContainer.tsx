@@ -16,7 +16,7 @@ import {ButtonComponent} from '@src/components/elements/button/Button';
 
 const ArchiveContainer: FC = () => {
     const dispatch = useDispatch();
-    const {t} = useTranslation('cabinet');
+    const {t} = useTranslation(['cabinet', 'notifications','categories', 'common', 'locations']);
     const classes = useStyles();
 
     const initialArchiveState: InitialCabinetCardState = {
@@ -195,6 +195,7 @@ const ArchiveContainer: FC = () => {
             <Grid container>
                 <Grid item xs={9}>
                     <CabinetCard
+                        t={t}
                         cardData={data}
                         handleModalOpen={handleOpenModal}
                     />
@@ -220,6 +221,7 @@ const ArchiveContainer: FC = () => {
             <Grid container>
                 <Grid item xs={9}>
                     <CabinetCard
+                        t={t}
                         cardData={data}
                         handleModalOpen={handleOpenModal}
                     />
