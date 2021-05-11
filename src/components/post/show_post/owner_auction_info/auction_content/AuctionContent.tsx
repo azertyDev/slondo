@@ -8,7 +8,7 @@ import {numberPrettier} from '@root/src/helpers';
 import {AuctionForm} from './AuctionForm/AuctionForm';
 import {ButtonComponent} from '@src/components/elements/button/Button';
 import {CustomModal} from '@src/components/elements/custom_modal/CustomModal';
-import {socketIO, userAPI} from '@src/api/api';
+import {userAPI} from '@src/api/api';
 import {setErrorMsgAction} from '@src/redux/slices/errorSlice';
 import {useDispatch} from 'react-redux';
 import {useStyles} from './useStyles';
@@ -34,7 +34,7 @@ export const AuctionContent: FC<AuctionInfoPropsType> = (props) => {
     const [openBuyNow, setOpenBuyNow] = useState(false);
     const [openOfferPrice, setOpenOfferPrice] = useState(false);
     const [offerPrice, setOfferPrice] = useState('');
-    const [page, setPage] = useState(1);
+    const [page, setPage] = useState({currentPage: 1, lastPage: 1});
     const [bets, setBets] = useState([]);
     const betsRef = useRef(bets);
     const [lastBet] = bets;
@@ -90,9 +90,9 @@ export const AuctionContent: FC<AuctionInfoPropsType> = (props) => {
     };
 
     const handleScroll = ({target}) => {
-        const isScrollBottom = target.scrollHeight - target.scrollTop === target.clientHeight;
-        if (isScrollBottom) {
-            setPage(prev => prev + 1);
+        const isBottom = target.scrollHeight - target.scrollTop === target.clientHeight;
+        if (isBottom && page.lastPage > page.currentPage) {
+            setPage(prev => ({...prev, currentPage: prev.currentPage + 1}));
         }
     };
 
@@ -104,7 +104,7 @@ export const AuctionContent: FC<AuctionInfoPropsType> = (props) => {
         try {
             setIsFetch(true);
             const bets = await userAPI.getAuctionBets(postData.auction.id, 1);
-            setBets(bets.postData);
+            setBets(bets.data);
             setIsFetch(false);
         } catch (e) {
             setIsFetch(false);
@@ -114,10 +114,13 @@ export const AuctionContent: FC<AuctionInfoPropsType> = (props) => {
 
     const auctionBetsPagination = async () => {
         try {
-            setIsFetch(true);
-            const {data} = await userAPI.getAuctionBets(postData.auction.id, page);
-            setBets([...bets, ...data]);
-            setIsFetch(false);
+            if (page.lastPage >= page.currentPage) {
+                setIsFetch(true);
+                const {total, data} = await userAPI.getAuctionBets(postData.auction.id, page.currentPage);
+                setBets([...bets, ...data]);
+                setPage({...page, lastPage: Math.ceil(total / 25)});
+                setIsFetch(false);
+            }
         } catch (e) {
             setIsFetch(false);
             dispatch(setErrorMsgAction(e.message));
@@ -130,17 +133,15 @@ export const AuctionContent: FC<AuctionInfoPropsType> = (props) => {
 
     useEffect(() => {
         auctionBetsPagination();
-    }, [page]);
+    }, [page.currentPage]);
 
-    useEffect(() => {
-        socketIO.on('bet-channel', async (lastBet) => {
-            setBets([lastBet, ...betsRef.current]);
-        });
-        () => socketIO.off('bet-channel');
-    }, []);
+    // useEffect(() => {
+    //     socketIO.on('bet-channel', async (lastBet) => {
+    //         setBets([lastBet, ...betsRef.current]);
+    //     });
+    //     () => socketIO.off('bet-channel');
+    // }, []);
 
-    // console.log('bets', bets);
-    // console.log('betsRef', betsRef.current);
     const classes = useStyles();
     return (
         <div className={classes.root}>

@@ -13,17 +13,17 @@ const localServer = 'http://192.168.100.60/slondo/public/api/';
 
 const instance = Axios.create({
     withCredentials: true,
-    baseURL: localServer
+    baseURL: uztelecom
 });
 
-export const socketIO = socketIOClient('http://192.168.100.60:8005');
+// export const socketIO = socketIOClient('http://192.168.100.60:8005');
 
 const setTokenToHeader = () => {
     const token = cookies.get('slondo_auth');
     if (token) {
         return {
             headers: {
-                'Cross-Origin-Embedder-Policy': 'require-corp',
+                'Cross-Origin-Embedder-Polichrcy': 'require-corp',
                 'Cross-Origin-Opener-Policy': 'same-origin',
                 'Content-Type': 'application/json',
                 'Authorization': `Bearer ${token}`
@@ -33,6 +33,14 @@ const setTokenToHeader = () => {
 };
 
 export const userAPI = {
+    getPostsByFilters: (filters: any): Promise<any> => {
+        return instance
+            .get('posts/filter', {params: filters})
+            .then((res) => res.data)
+            .catch(({response}) => {
+                throw response.data;
+            });
+    },
     login: (phone: string, password: string): Promise<{ token: string, user: UserInfo }> => {
         const form = new FormData();
         form.set('phone', phone);
@@ -256,7 +264,7 @@ export const userAPI = {
                 throw err;
             });
     },
-    deleteArchivePost: (ads_id: number): Promise<{message: string}> => {
+    deleteArchivePost: (ads_id: number): Promise<{ message: string }> => {
         return instance.delete(`regular/post/delete/${ads_id}`, setTokenToHeader())
             .then(res => res.data)
             .catch(err => {
@@ -337,7 +345,7 @@ export const userAPI = {
                 throw err;
             });
     },
-    deleteUserNotification: (id: number): Promise<{message?: string}> => {
+    deleteUserNotification: (id: number): Promise<{ message?: string }> => {
         return instance.delete(`regular/user/notification/${id}`, setTokenToHeader())
             .then(res => res.data)
             .catch(err => {

@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import Link from 'next/link';
 import {AppBar, Avatar, Container, Grid, Hidden, Typography} from '@material-ui/core';
 import {ButtonComponent} from '@src/components/elements/button/Button';
-import {SearchForm} from '@src/components/elements/search_form/SearchForm';
+import {SearchForm} from '@src/components/header/bottom/search_form/SearchForm';
 import {withScrollThreshold} from '@src/hoc/withScrollThreshold';
 import {Logo} from '@src/components/elements/icons';
 import {AddIcon} from '@src/components/elements/icons/AddIcon';
