@@ -23,15 +23,19 @@ import {useStyles} from './useStyles';
 
 type CabinetCardPropsType = {
     cardData: CardDataType,
-    handleModalOpen?: (id: number, index?: number) => () => void
+    handleModalOpen?: (id: number, index?: number) => () => void,
+    handleOpenDialog?: () => void,
+    fetchAuctionNotifications?: (post) => () => void
 }
 
 export const CabinetCard: FC<CabinetCardPropsType> = (props) => {
     const {pathname} = useRouter();
-    const {t} = useTranslation(['common', 'categories']);
+    const {t} = useTranslation(['common', 'categories', 'notifications']);
     const {
         cardData,
-        handleModalOpen
+        handleModalOpen,
+        handleOpenDialog,
+        fetchAuctionNotifications
     } = props;
 
     const translatedTitle = transformToCyrillic(cardData.title);
@@ -85,7 +89,7 @@ export const CabinetCard: FC<CabinetCardPropsType> = (props) => {
                     </Typography>
                     <div className='status'>
                         <Typography variant='subtitle2' className='waiting'>
-                            {getStatus(cardData.status, cardData.auction)}
+                            {getStatus(cardData.status)}
                         </Typography>
                     </div>
                 </Box>
@@ -136,12 +140,21 @@ export const CabinetCard: FC<CabinetCardPropsType> = (props) => {
                                     </IconButton>
                                     : cardData.creator && cardData.status !== 'accepted' && (
                                     <>
-                                        <IconButton className='notifications'>
-                                            <NotificationIcon />
-                                        </IconButton>
+                                        {cardData.ads_type !== 'post' && (
+                                            <IconButton
+                                                className='notifications'
+                                                onClick={handleOpenDialog}
+                                                onMouseEnter={fetchAuctionNotifications(cardData)}
+                                            >
+                                                <NotificationIcon />
+                                            </IconButton>)
+                                        }
                                         {
                                             cardData.status !== 'accepted' && (
-                                                <IconButton className='settings' onClick={handleModalOpen(cardData.id, 1)}>
+                                                <IconButton
+                                                    className='settings'
+                                                    onClick={handleModalOpen(cardData.id, 1)}
+                                                >
                                                     <SettingsIcon />
                                                 </IconButton>
                                             )
@@ -250,7 +263,7 @@ export const CabinetCard: FC<CabinetCardPropsType> = (props) => {
         </Box>
     );
 
-    function getStatus(postStatus: string, auction): string {
+    function getStatus(postStatus: string): string {
         switch (postStatus) {
             case 'new':
                 return 'new';

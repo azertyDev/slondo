@@ -21,8 +21,8 @@ export type CardDataType = {
     ads_type: string,
     adsable: {
         id: number,
-        sub_category: InitValuesType,
-        type: InitValuesType
+        sub_category: IdNameType,
+        type: IdNameType
     }
     auction: {
         id: number,
@@ -37,7 +37,7 @@ export type CardDataType = {
             price: number,
             user: UserInfo
         },
-        bet: {
+        bet?: {
             auction_id: number
             bet: number
             id: number
@@ -48,14 +48,14 @@ export type CardDataType = {
     available_days: IdNameType[],
     available_start_time: string,
     available_end_time: string,
-    category: InitValuesType,
-    city: InitValuesType,
+    category: IdNameType,
+    city: IdNameType,
     created_at: string,
     creator: boolean,
-    currency: InitValuesType,
+    currency: IdNameType,
     delivery: number,
     description: string,
-    district: InitValuesType,
+    district: IdNameType,
     exchange: number,
     expiration_at: string,
     favorite: boolean,
@@ -63,7 +63,7 @@ export type CardDataType = {
     image: string,
     number_of_views: number,
     price: number,
-    region: InitValuesType,
+    region: IdNameType,
     safe_deal: number,
     status: string,
     subscribed: boolean,
@@ -89,4 +89,3 @@ export type initialUserStateType = {
     user: UserInfo
 }
 
-export type InitValuesType = { id: number, name: string }

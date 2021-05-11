@@ -9,7 +9,7 @@ import {useTranslation} from 'next-i18next';
 import {ITEMS_PER_PAGE} from '@src/constants';
 import {CustomPagination} from '@root/src/components/elements/custom_pagination/CustomPagination';
 
-type initialStateType = {
+export type initialStateType = {
     isFetch: boolean,
     data: {
         id: number,

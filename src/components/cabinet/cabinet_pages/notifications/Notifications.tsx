@@ -60,14 +60,16 @@ export const Notifications: FC<NotificationsPropsType> = (props) => {
                 {isFetch
                     ? <CircularProgress />
                     : notifications.map(notification =>
-                        <Notification
-                            t={t}
-                            key={notification.id}
-                            data={notification}
-                            phone={phone}
-                            handleDeleteNotification={handleDeleteNotification}
-                            fetchUserPhone={fetchUserPhone}
-                        />
+                        <Box mb={3} width='90%'>
+                            <Notification
+                                t={t}
+                                key={notification.id}
+                                data={notification}
+                                phone={phone}
+                                handleDeleteNotification={handleDeleteNotification}
+                                fetchUserPhone={fetchUserPhone}
+                            />
+                        </Box>
                     )}
                 {!!notifications.length && (
                     <Box display='flex' justifyContent='center'>

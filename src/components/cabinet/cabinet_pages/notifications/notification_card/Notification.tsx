@@ -9,7 +9,7 @@ import {Phone} from '@material-ui/icons';
 
 export type NotificationDataType = {
     data,
-    handleDeleteNotification: (id) => () => void,
+    handleDeleteNotification: (id: number, ads_id: number) => () => void,
     fetchUserPhone: (user_id) => () => void,
     phone: number
 } & WithT;
@@ -36,7 +36,7 @@ export const Notification: FC<NotificationDataType> = (props) => {
 
     const classes = useStyles();
     return (
-        <Box mb={3} width='90%'>
+        <>
             <Typography variant='subtitle1' gutterBottom>
                 {date.toLocaleDateString()}
             </Typography>
@@ -56,10 +56,10 @@ export const Notification: FC<NotificationDataType> = (props) => {
                 <Box width='100%'>
                     <Box>
                         <Typography variant="h6" color="initial">
-                            {t(`${message}.title`, {id: ads_id, user_id: go_to})}
+                            {t(`notifications:${message}.title`, {id: ads_id, user_id: go_to})}
                         </Typography>
                         <Typography variant="subtitle1" color="initial">
-                            {t(`${message}.desc`, {user_id: go_to})}
+                            {t(`notifications:${message}.desc`, {user_id: go_to})}
                         </Typography>
                     </Box>
                     <Box display='flex' justifyContent='flex-end'>
@@ -94,11 +94,11 @@ export const Notification: FC<NotificationDataType> = (props) => {
                         }
                     </Box>
                 </Box>
-                <IconButton onClick={handleDeleteNotification(id)}>
+                <IconButton onClick={handleDeleteNotification(id, ads_id)}>
                     <CloseIcon />
                 </IconButton>
             </Paper>
-        </Box>
+        </>
     );
 
     function forwardTo(type: string) {
@@ -115,6 +115,8 @@ export const Notification: FC<NotificationDataType> = (props) => {
                         <Typography variant='subtitle1' color="secondary">Перейти</Typography>
                     </a>
                 </Link>;
+            case 'get_bet':
+                return;
             case 'go_to_my_archive':
                 return <Link href='/cabinet/archive'>
                     <a>

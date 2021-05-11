@@ -8,17 +8,18 @@ import {setErrorMsgAction} from '@root/src/redux/slices/errorSlice';
 import {useTranslation} from 'next-i18next';
 import {Box, Grid, IconButton, List, ListItem, ListItemText, Typography} from '@material-ui/core';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
-import {InitialCabinetCardState, OffersStateType, TabsDataType} from '@root/interfaces/Cabinet.js';
+import {CardDataType, InitialCabinetCardState, OffersStateType, TabsDataType} from '@root/interfaces/Cabinet.js';
 import {useStyles} from './useStyles';
 import {UserInfoWithAvatar} from '@src/components/elements/user_info_with_avatar/UserInfoWithAvatar';
 import {ButtonComponent} from '@src/components/elements/button/Button';
 import {CloseIcon, DoneAllIcon} from '@src/components/elements/icons';
 import {CabinetCard} from '@src/components/cabinet/cabinet_card/CabinetCard';
 import {SecondaryCabinetCard} from '@src/components/cabinet/components/SecondaryCabinetCard';
+import {initialStateType} from '@src/components/cabinet/cabinet_pages/notifications/NotificationsContainer';
 
 export const MyAuctionsContainer: FC = () => {
     const dispatch = useDispatch();
-    const { t } = useTranslation('cabinet');
+    const {t} = useTranslation(['cabinet', 'notifications']);
     const classes = useStyles();
 
     const initialState: InitialCabinetCardState = {
@@ -28,6 +29,94 @@ export const MyAuctionsContainer: FC = () => {
             data: []
         }
     };
+    const initialNotificationState: initialStateType = {
+        isFetch: false,
+        data: []
+    };
+    const initialSelectedAuction = {
+        id: null,
+        ads_type: '',
+        adsable: {
+            id: null,
+            sub_category: {id: null, name: ''},
+            type: {id: null, name: ''}
+        },
+        auction: {
+            id: null,
+            is_accepted: null,
+            winner: {
+                id: null,
+                name: '',
+                surname: '',
+                phone: '',
+                avatar: '',
+                created_at: '',
+                available_days: '',
+                available_start_time: '',
+                available_end_time: ''
+            },
+            winner_id: null,
+            number_of_bets: null,
+            number_of_offers: null,
+            auto_renewal: null,
+            offer: {
+                id: null,
+                price: null,
+                user: {
+                    id: null,
+                    name: '',
+                    surname: '',
+                    phone: '',
+                    avatar: '',
+                    created_at: '',
+                    available_days: '',
+                    available_start_time: '',
+                    available_end_time: ''
+                }
+            },
+            bet: {
+                auction_id: null,
+                bet: null,
+                id: null,
+                number_of_bets: null
+            }
+        },
+        author: {
+            id: null,
+            name: '',
+            surname: '',
+            phone: '',
+            avatar: '',
+            created_at: '',
+            available_days: '',
+            available_start_time: '',
+            available_end_time: ''
+        },
+        available_days: [],
+        available_start_time: '',
+        available_end_time: '',
+        category: {id: null, name: ''},
+        city: {id: null, name: ''},
+        created_at: '',
+        creator: false,
+        currency: {id: null, name: ''},
+        delivery: null,
+        description: '',
+        district: {id: null, name: ''},
+        exchange: null,
+        expiration_at: '',
+        favorite: false,
+        image: '',
+        number_of_views: null,
+        price: null,
+        region: {id: null, name: ''},
+        safe_deal: null,
+        status: '',
+        subscribed: false,
+        title: '',
+        user_id: null
+    };
+
     const initialOffersState: OffersStateType = {
         isFetch: false,
         total: null,
@@ -36,12 +125,31 @@ export const MyAuctionsContainer: FC = () => {
     const [auctionData, setAuctionData] = useState(initialState);
     const [participatingData, setParticipatingData] = useState(initialState);
     const [offersData, setOffersData] = useState(initialOffersState);
-    const [auctionId, setAuctionId] = useState(null);
+    const [selectedAuction, setSelectedAuction] = useState<CardDataType>(initialSelectedAuction);
     const [openModal, setOpenModal] = useState(false);
     const [tabIndex, setTabIndex] = useState(0);
     const [modalContentIndex, setModalContentIndex] = useState(1);
     const [showPhone, setShowPhone] = React.useState(false);
+    const [notification, setNotification] = useState(initialNotificationState);
+    const [phone, setPhone] = useState(null);
+    const [openDialog, setOpenDialog] = React.useState(false);
 
+    const handleOpenDialog = () => {
+        setOpenDialog(true);
+    };
+
+    const fetchAuctionNotifications = (post) => async () => {
+        try {
+            if (post.id !== selectedAuction.id) {
+                setNotification({...notification, isFetch: true});
+                const {data} = await userAPI.getNotificationById(post.id);
+                setNotification({...notification, data, isFetch: false});
+                setSelectedAuction({...selectedAuction, ...post});
+            }
+        } catch (e) {
+            dispatch(setErrorMsgAction(e.message));
+        }
+    };
     const handleShowPhone = () => {
         setShowPhone(!showPhone);
     };
@@ -50,7 +158,7 @@ export const MyAuctionsContainer: FC = () => {
     };
     const handleOpenModal = (auction_id) => () => {
         setOpenModal(true);
-        auction_id && setAuctionId(auction_id);
+        auction_id && setSelectedAuction({...selectedAuction, id: auction_id});
         setModalContentIndex(1);
     };
     const handleModalClose = () => {
@@ -92,13 +200,13 @@ export const MyAuctionsContainer: FC = () => {
         try {
             const isCreatedAuction = type === 'auc';
             if (isCreatedAuction) {
-                setAuctionData({ ...auctionData, isFetch: true });
-                const { data, total } = await userAPI.getMyPosts({ type, onlySecure: 0 });
-                setAuctionData({ myPosts: { data, total }, isFetch: false });
+                setAuctionData({...auctionData, isFetch: true});
+                const {data, total} = await userAPI.getMyPosts({type, onlySecure: 0});
+                setAuctionData({myPosts: {data, total}, isFetch: false});
             } else {
-                setParticipatingData({ ...auctionData, isFetch: true });
-                const { data, total, message } = await userAPI.getAuctionSubs();
-                !message && setParticipatingData({ myPosts: { data, total }, isFetch: false });
+                setParticipatingData({...auctionData, isFetch: true});
+                const {data, total, message} = await userAPI.getAuctionSubs();
+                !message && setParticipatingData({myPosts: {data, total}, isFetch: false});
             }
         } catch (e) {
             dispatch(setErrorMsgAction(e));
@@ -106,12 +214,12 @@ export const MyAuctionsContainer: FC = () => {
     };
     const fetchAllOffers = (auction_id: number) => async () => {
         try {
-            auction_id && setAuctionId(auction_id);
+            auction_id && setSelectedAuction({...selectedAuction, id: auction_id});
             setOpenModal(true);
             setModalContentIndex(10);
-            setOffersData({ ...offersData, isFetch: true });
-            const { data, total } = await userAPI.getAllOffersById(auction_id);
-            setOffersData({ ...offersData, data, total, isFetch: false });
+            setOffersData({...offersData, isFetch: true});
+            const {data, total} = await userAPI.getAllOffersById(auction_id);
+            setOffersData({...offersData, data, total, isFetch: false});
         } catch (e) {
             dispatch(setErrorMsgAction(e.message));
         }
@@ -134,6 +242,24 @@ export const MyAuctionsContainer: FC = () => {
             await userAPI.ricePostInTape(post_id);
             setOpenModal(false);
             setModalContentIndex(1);
+        } catch (e) {
+            dispatch(setErrorMsgAction(e.message));
+        }
+    };
+    const handleDeleteNotification = (id, ads_id) => async () => {
+        try {
+            setNotification({...notification, isFetch: true});
+            await userAPI.deleteUserNotification(id);
+            const {data} = await userAPI.getNotificationById(ads_id);
+            setNotification({...notification, data, isFetch: false});
+        } catch (e) {
+            dispatch(setErrorMsgAction(e.message));
+        }
+    };
+    const fetchUserPhone = (user_id) => async () => {
+        try {
+            const {phone} = await userAPI.getPhoneByUserId(user_id);
+            setPhone(phone);
         } catch (e) {
             dispatch(setErrorMsgAction(e.message));
         }
@@ -181,7 +307,7 @@ export const MyAuctionsContainer: FC = () => {
                     >
                         <ListItem
                             button
-                            onClick={riceInTape(auctionId)}
+                            onClick={riceInTape(selectedAuction.id)}
                         >
                             <ListItemText
                                 primary='Да'
@@ -209,7 +335,7 @@ export const MyAuctionsContainer: FC = () => {
                     >
                         <ListItem
                             button
-                            onClick={handleDeactivate(auctionId)}
+                            onClick={handleDeactivate(selectedAuction.id)}
                         >
                             <ListItemText
                                 primary='Да'
@@ -231,7 +357,7 @@ export const MyAuctionsContainer: FC = () => {
                 return <Box className='offers-info'>
                     <Box>
                         <Typography variant='h6'>Все предложения</Typography>
-                        <Typography variant='subtitle2'>Аукцион №: {auctionId}</Typography>
+                        <Typography variant='subtitle2'>Аукцион №: {selectedAuction.id}</Typography>
                     </Box>
                     <Box width={1}>
                         {offersData.data.map(offer => {
@@ -288,7 +414,7 @@ export const MyAuctionsContainer: FC = () => {
         <>
             {modalContentIndex === 1
                 ? <Typography className="title" variant="h6">
-                    Аукцион №: {auctionId}
+                    Аукцион №: {selectedAuction.id}
                 </Typography>
                 : (modalContentIndex !== 10 && (
                         <IconButton
@@ -317,6 +443,8 @@ export const MyAuctionsContainer: FC = () => {
                     <CabinetCard
                         cardData={data}
                         handleModalOpen={handleOpenModal}
+                        handleOpenDialog={handleOpenDialog}
+                        fetchAuctionNotifications={fetchAuctionNotifications}
                     />
                     {data.creator && data.status === 'accepted' && (
                         <Box mt={1}>
@@ -381,11 +509,19 @@ export const MyAuctionsContainer: FC = () => {
             total: auctionData.myPosts.total,
             component:
                 <MyAuctions
+                    t={t}
+                    selectedAuction={selectedAuction}
                     isFetch={auctionData.isFetch}
                     openModal={openModal}
                     ModalContent={ModalContent}
                     handleClose={handleModalClose}
                     auctionCards={creatorAuctionCards}
+                    handleDeleteNotification={handleDeleteNotification}
+                    fetchUserPhone={fetchUserPhone}
+                    phone={phone}
+                    openDialog={openDialog}
+                    setOpenDialog={setOpenDialog}
+                    notificationData={notification}
                 />
         },
         {
@@ -394,6 +530,7 @@ export const MyAuctionsContainer: FC = () => {
             total: participatingData.myPosts.total,
             component:
                 <MyAuctions
+                    t={t}
                     isFetch={auctionData.isFetch}
                     openModal={openModal}
                     ModalContent={ModalContent}

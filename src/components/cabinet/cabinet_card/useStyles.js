@@ -137,7 +137,6 @@ export const useStyles = makeStyles((theme) => ({
                                     borderRadius: '0px 0px 10px 10px',
                                     display: 'flex',
                                     alignItems: 'center',
-                                    marginRight: 20,
                                     padding: '11px 12px',
                                     '& svg': {
                                         height: '18px',
@@ -155,6 +154,9 @@ export const useStyles = makeStyles((theme) => ({
                                             }
                                         }
                                     }
+                                },
+                                '& .notifications': {
+                                    marginRight: 10
                                 }
                             }
                         }

@@ -361,5 +361,19 @@ export const userAPI = {
             .catch(err => {
                 throw err;
             });
-    }
+    },
+    getNotificationById: (ads_id: number): Promise<any> => {
+        return instance.get(`regular/post/notifications?itemsPerPage=25&ads_id=${ads_id}`, setTokenToHeader())
+            .then(res => res.data)
+            .catch(err => {
+                throw err;
+            });
+    },
+    getUserObserver: (): Promise<any> => {
+        return instance.get(`regular/user/observer`, setTokenToHeader())
+            .then(res => res.data)
+            .catch(err => {
+                throw err;
+            });
+    },
 };
