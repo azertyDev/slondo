@@ -1,9 +1,9 @@
-import React, {Dispatch, FC, SetStateAction} from 'react';
+import {Dispatch, FC, SetStateAction} from 'react';
 import {WithT} from 'i18next';
 import {useSelector} from 'react-redux';
 import {Grid} from '@material-ui/core';
 import {AuctionParams} from './auction_params/AuctionParams';
-import {PaymentDelivery} from './payment_delivery/PaymentDelivery';
+import {SiteServices} from './site_services/SiteServices';
 import {Description} from './description/Description';
 import {Contacts} from './contacts/Contacts';
 import {AvailableDays} from './available_days/AvailableDays';
@@ -20,7 +20,7 @@ import {StateIcon} from '@src/components/elements/icons';
 import {LocationAutocomplete} from '@src/components/post/create_post/form_page/common_form/location/LocationAutocomplete';
 import {DropDownSelect} from '@src/components/elements/drop_down_select/DropDownSelect';
 import {CommonFormPreview} from '@src/components/post/create_post/form_page/common_form/CommonFormPreview';
-import {CustomFormikField} from '@src/components/elements/custom_formik_field/CustomFormikField';
+import {FormikField} from '@src/components/elements/formik_field/FormikField';
 import {useStyles} from './useStyles';
 
 
@@ -29,8 +29,9 @@ type DefaultParamsPropsType = {
     currentFormIndex: number,
     asPath: string,
     post,
-    setPost,
+    setPost: Dispatch<SetStateAction<any>>,
     isPreview: boolean,
+    categoryName: string,
     setIsPreview: Dispatch<SetStateAction<boolean>>
     ownerPhone: string
 } & WithT;
@@ -44,6 +45,7 @@ export const CommonForm: FC<DefaultParamsPropsType> = (props) => {
         postType,
         post,
         setPost,
+        categoryName,
         ownerPhone
     } = props;
 
@@ -51,8 +53,8 @@ export const CommonForm: FC<DefaultParamsPropsType> = (props) => {
     const isAdvanceAuction = postType.name === 'exauc';
     const isAuction = postType.name === 'auc' || isAdvanceAuction;
 
+    const descTxtLimit = 3000;
     const {locations} = useSelector((store: RootState) => store);
-    const descTxtLimit = 9000;
 
     const initForm = {
         safe_deal: false,
@@ -309,7 +311,7 @@ export const CommonForm: FC<DefaultParamsPropsType> = (props) => {
                               </div>
                               : <Grid container spacing={1} alignItems='center'>
                                   <Grid item xs={3}>
-                                      <CustomFormikField
+                                      <FormikField
                                           t={t}
                                           name='price'
                                           labelText='price'
@@ -330,10 +332,11 @@ export const CommonForm: FC<DefaultParamsPropsType> = (props) => {
                                   </Grid>
                               </Grid>}
                              <div>
-                                 <PaymentDelivery
+                                 <SiteServices
                                      t={t}
                                      values={values}
                                      isAuction={isAuction}
+                                     categoryName={categoryName}
                                      handleCheckboxChange={handleCheckboxChange}
                                  />
                              </div>

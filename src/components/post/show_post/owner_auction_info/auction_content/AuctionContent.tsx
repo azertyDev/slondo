@@ -1,4 +1,4 @@
-import {FC, useEffect, useState} from 'react';
+import {FC, useEffect, useRef, useState} from 'react';
 import Link from 'next/link';
 import {WithT} from 'i18next';
 import {Grid, Hidden, TextField, Typography} from '@material-ui/core';
@@ -11,121 +11,136 @@ import {CustomModal} from '@src/components/elements/custom_modal/CustomModal';
 import {userAPI} from '@src/api/api';
 import {setErrorMsgAction} from '@src/redux/slices/errorSlice';
 import {useDispatch} from 'react-redux';
-import {useRouter} from 'next/router';
 import {useStyles} from './useStyles';
 
 
 type AuctionInfoPropsType = {
-    data,
+    postData,
 } & WithT;
 
 export const AuctionContent: FC<AuctionInfoPropsType> = (props) => {
     const {
         t,
-        data
+        postData
     } = props;
 
-    const router = useRouter();
     const dispatch = useDispatch();
-    const date = new Date(data.expiration_at).getTime();
-    const isExAuc = data.ads_type.mark === 'exauc';
-    const hasOfferPrice = !!data.auction.offer_the_price;
+    const date = new Date(postData.expiration_at).getTime();
+    const isExAuc = postData.ads_type.mark === 'exauc';
+    const hasOfferPrice = !!postData.auction.offer_the_price;
 
-    const initAuctionsBets = {
-        isFetch: false,
-        list: []
-    };
-
+    const [isFetch, setIsFetch] = useState(false);
     const [showAll, setShowAll] = useState(false);
     const [openBuyNow, setOpenBuyNow] = useState(false);
     const [openOfferPrice, setOpenOfferPrice] = useState(false);
-    const [offerPrice, setOfferPrice] = useState({isFetch: false, price: null});
-    const [page, setPage] = useState(1);
-    const [auctionsBets, setAuctionBets] = useState(initAuctionsBets);
-    const [lastBet] = auctionsBets.list;
+    const [offerPrice, setOfferPrice] = useState('');
+    const [page, setPage] = useState({currentPage: 1, lastPage: 1});
+    const [bets, setBets] = useState([]);
+    const betsRef = useRef(bets);
+    const [lastBet] = bets;
 
-    const hasReservePrice = data.auction?.reserve_price > lastBet?.bet;
-    const hasBuyNow = !!data.auction?.price_buy_now && data.auction.price_buy_now > lastBet?.bet;
+    const hasReservePrice = postData.auction?.reserve_price > lastBet?.bet;
+    const hasBuyNow = !!postData.auction?.price_buy_now && postData.auction.price_buy_now > lastBet?.bet;
 
-    const handleModalBuyNow = (value) => () => {
+    const handleModalBuyNow = value => () => {
         setOpenBuyNow(value);
     };
-    const handleModalOfferPrice = (value) => () => {
+
+    const handleModalOfferPrice = value => () => {
         setOpenOfferPrice(value);
     };
+
+    const handleOfferPrice = async () => {
+        try {
+            setIsFetch(true);
+            await userAPI.offerThePrice(postData.auction.id, offerPrice);
+            setOfferPrice('');
+            setIsFetch(false);
+            setOpenOfferPrice(false);
+        } catch (e) {
+            setIsFetch(false);
+            dispatch(setErrorMsgAction(e.message));
+        }
+    };
+
     const handleBuyNow = async () => {
         try {
-            await userAPI.buyNow(data.auction.id, data.id);
-            router.push('/');
+            setIsFetch(true);
+            await userAPI.buyNow(postData.auction.id, postData.id);
+            setIsFetch(false);
         } catch ({response}) {
+            setIsFetch(false);
             dispatch(
                 setErrorMsgAction(t(`errors:${response.data.message}`))
             );
         }
     };
+
     const handleBet = async (bet) => {
         try {
-            await userAPI.betAuction(bet, data.auction.id);
-            const bets = await userAPI.getAuctionBets(data.auction.id, 1);
-            setAuctionBets({...auctionsBets, list: bets.data});
-        } catch (e) {
+            setIsFetch(true);
+            await userAPI.betAuction(bet, postData.auction.id);
+            setIsFetch(false);
+        } catch ({response}) {
+            setIsFetch(false);
             dispatch(
-                setErrorMsgAction(t(`errors:${e.response.data.message}`))
+                setErrorMsgAction(t(`errors:${response.data.message}`))
             );
         }
     };
-    const handleScroll = (e) => {
-        const isScrollBottom = e.target.scrollHeight - e.target.scrollTop === e.target.clientHeight;
-        if (isScrollBottom) {
-            setPage(prev => prev + 1);
+
+    const handleScroll = ({target}) => {
+        const isBottom = target.scrollHeight - target.scrollTop === target.clientHeight;
+        if (isBottom && page.lastPage > page.currentPage) {
+            setPage(prev => ({...prev, currentPage: prev.currentPage + 1}));
         }
     };
-    const handleOfferPrice = async () => {
-        try {
-            setOfferPrice({...offerPrice, isFetch: true});
-            await userAPI.offerThePrice(data.auction.id, offerPrice.price);
-            setOfferPrice({price: null, isFetch: false});
-            setOpenOfferPrice(false);
-        } catch (e) {
-            dispatch(setErrorMsgAction(e.message));
-        }
+
+    const handleOfferPriceInput = ({target}) => {
+        setOfferPrice(target.value);
     };
-    const handleTextField = ({target}) => {
-        setOfferPrice({...offerPrice, price: target.value});
-    };
+
     const handleRefreshBets = async () => {
         try {
-            setAuctionBets({
-                ...auctionsBets,
-                isFetch: true
-            });
-            const bets = await userAPI.getAuctionBets(data.auction.id, 1);
-            setAuctionBets({
-                ...auctionsBets,
-                isFetch: false,
-                list: bets.data
-            });
+            setIsFetch(true);
+            const bets = await userAPI.getAuctionBets(postData.auction.id, 1);
+            setBets(bets.data);
+            setIsFetch(false);
         } catch (e) {
+            setIsFetch(false);
             dispatch(setErrorMsgAction(e.message));
         }
     };
+
     const auctionBetsPagination = async () => {
         try {
-            setAuctionBets({...auctionsBets, isFetch: true});
-            const bets = await userAPI.getAuctionBets(data.auction.id, page);
-            setAuctionBets({
-                ...auctionsBets,
-                isFetch: false,
-                list: [...auctionsBets.list, ...bets.data]
-            });
+            if (page.lastPage >= page.currentPage) {
+                setIsFetch(true);
+                const {total, data} = await userAPI.getAuctionBets(postData.auction.id, page.currentPage);
+                setBets([...bets, ...data]);
+                setPage({...page, lastPage: Math.ceil(total / 25)});
+                setIsFetch(false);
+            }
         } catch (e) {
+            setIsFetch(false);
             dispatch(setErrorMsgAction(e.message));
         }
     };
 
     useEffect(() => {
+        betsRef.current = bets;
+    });
+
+    useEffect(() => {
         auctionBetsPagination();
-    }, [page]);
+    }, [page.currentPage]);
+
+    // useEffect(() => {
+    //     socketIO.on('bet-channel', async (lastBet) => {
+    //         setBets([lastBet, ...betsRef.current]);
+    //     });
+    //     () => socketIO.off('bet-channel');
+    // }, []);
 
     const classes = useStyles();
     return (
@@ -139,8 +154,8 @@ export const AuctionContent: FC<AuctionInfoPropsType> = (props) => {
                                 Резервная цена:
                             </Typography>
                             <Typography variant="h6" color="initial">
-                                {numberPrettier(data.auction.reserve_price)}{' '}
-                                {data.currency.name}
+                                {numberPrettier(postData.auction.reserve_price)}{' '}
+                                {postData.currency.name}
                             </Typography>
                         </div>
                     </div>
@@ -166,7 +181,7 @@ export const AuctionContent: FC<AuctionInfoPropsType> = (props) => {
                         onScroll={handleScroll}
                     >
                         <ul>
-                            {auctionsBets.list.map((item) => (
+                            {bets.map((item) => (
                                 <li key={item.id}>
                                     <div>
                                         <div className="participant-name">
@@ -224,7 +239,7 @@ export const AuctionContent: FC<AuctionInfoPropsType> = (props) => {
                         Все ставки
                     </Typography>
                 </div>
-                {!data.creator && (
+                {!postData.creator && (
                     <>
                         <AuctionForm
                             t={t}
@@ -236,7 +251,7 @@ export const AuctionContent: FC<AuctionInfoPropsType> = (props) => {
                                 <Hidden mdDown>
                                     <div className="buy-now">
                                         <Typography variant="subtitle1" color="initial">
-                                            {numberPrettier(data.auction.price_buy_now)} сум
+                                            {numberPrettier(postData.auction.price_buy_now)} сум
                                         </Typography>
                                         <ButtonComponent onClick={handleModalBuyNow(true)}>
                                             <Typography variant="subtitle1" color="initial">
@@ -256,7 +271,7 @@ export const AuctionContent: FC<AuctionInfoPropsType> = (props) => {
                                         >
                                             Нажимая кнопку “Купить сейчас” вы выкупаете лот на сумму&nbsp;
                                             <span className='buy-now-price'>
-                                                {numberPrettier(data.auction.price_buy_now)}
+                                                {numberPrettier(postData.auction.price_buy_now)}
                                             </span>
                                             сум и соглашаетесь с &nbsp;
                                             <span className='condition'>
@@ -327,7 +342,7 @@ export const AuctionContent: FC<AuctionInfoPropsType> = (props) => {
                                         label="Outlined"
                                         variant="outlined"
                                         placeholder='Впишите сумму'
-                                        onChange={handleTextField}
+                                        onChange={handleOfferPriceInput}
                                     />
                                     <ButtonComponent onClick={handleOfferPrice}>
                                         Предложить

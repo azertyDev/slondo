@@ -11,17 +11,19 @@ import {fetchLocations} from '@src/redux/slices/locationsSlice';
 import {cookies} from '@src/helpers';
 import {useRouter} from 'next/router';
 import {useStyles} from './useStyles';
+// import {socketIO} from '@src/api/api';
 
 
 export const Header: FC = () => {
-    const { locale } = useRouter();
+    const {locale} = useRouter();
     const dispatch = useDispatch();
-    const { t } = useTranslation(['header']);
+    const {t} = useTranslation('header');
 
     const userFromCookie = cookies.get('slondo_user');
-    const userFromStore = useSelector((store: RootState) => store.user);
+    const user = useSelector((store: RootState) => store.user);
+    const userId = user.info.id;
 
-    const isAuth = userFromStore.isAuth || !!userFromCookie;
+    const isAuth = user.isAuth || !!userFromCookie;
 
     const handleOpenModal = () => {
         dispatch(setIsAuthModalOpen(true));
@@ -32,9 +34,12 @@ export const Header: FC = () => {
     }, [locale]);
 
     useEffect(() => {
-        !userFromStore.isAuth
+        !user.isAuth
         && !!userFromCookie
         && dispatch(signInAction(userFromCookie));
+        // !!userId && socketIO.on('connect', () => {
+        //     socketIO.emit('user_connected', userId);
+        // });
     }, [isAuth]);
 
     const classes = useStyles();
@@ -50,17 +55,15 @@ export const Header: FC = () => {
                         <Bottom
                             t={t}
                             isAuth={isAuth}
-                            avatar={userFromStore.info.avatar}
+                            avatar={user.info.avatar}
                             handleOpenModal={handleOpenModal}
                         />
                     </div>
                 </Container>
                 <div className={classes.modalDialog}>
-                    <AuthRegPage
-                        isOpen={userFromStore.isAuthModalOpen}
-                    />
+                    <AuthRegPage isOpen={user.isAuthModalOpen}/>
                 </div>
             </div>
         </header>
-    )
+    );
 };

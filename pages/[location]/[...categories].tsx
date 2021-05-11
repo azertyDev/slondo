@@ -1,5 +1,5 @@
 import {FC} from 'react';
-import {SearchContainer} from '@src/components/search/SearchContainer';
+import {SearchPostsByFilters} from '@src/components/search_posts_by_filters/SearchPostsByFilters';
 import {GetStaticPaths, GetStaticProps} from 'next';
 import {serverSideTranslations} from 'next-i18next/serverSideTranslations';
 import {useRouter} from 'next/router';
@@ -17,7 +17,7 @@ const SearchPage: FC = () => {
 
     return is404
            ? <PageNotFound/>
-           : <SearchContainer
+           : <SearchPostsByFilters
                locale={locale}
                query={query}
                ctgrsByQuery={ctgrsByCyrillicName}

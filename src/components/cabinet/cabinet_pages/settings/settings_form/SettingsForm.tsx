@@ -2,7 +2,7 @@ import {FC, ReactNode} from 'react';
 import {Form, FormikContextType, FormikProvider} from 'formik';
 import {getErrorMsg} from '@src/helpers';
 import {Box, Button, CircularProgress, FormControlLabel, Grid, Typography} from '@material-ui/core';
-import {CustomFormikField} from '@src/components/elements/custom_formik_field/CustomFormikField';
+import {FormikField} from '@src/components/elements/formik_field/FormikField';
 import {WithT} from 'i18next';
 import {
     NotificationSwitcher,
@@ -46,7 +46,6 @@ export const SettingsForm: FC<SettingsFormPropsType> = (props) => {
         handleChange,
         isSubmitting,
         handleBlur,
-        handleReset
     } = formik;
 
     const classes = useStyles({ props });
@@ -63,7 +62,7 @@ export const SettingsForm: FC<SettingsFormPropsType> = (props) => {
                             {uploadAvatarForm}
                         </Grid>
                         <Grid item xs={12} md={6}>
-                            <CustomFormikField
+                            <FormikField
                                 t={t}
                                 name='user_name'
                                 labelText='user_name'
@@ -75,7 +74,7 @@ export const SettingsForm: FC<SettingsFormPropsType> = (props) => {
                             />
                         </Grid>
                         <Grid item xs={12} md={6}>
-                            <CustomFormikField
+                            <FormikField
                                 t={t}
                                 name='user_surname'
                                 labelText='user_surname'
@@ -86,15 +85,15 @@ export const SettingsForm: FC<SettingsFormPropsType> = (props) => {
                             />
                         </Grid>
                         <Grid item xs={12} md={6}>
-                            <CustomFormikField
+                            <FormikField
                                 t={t}
                                 name='phone'
+                                size='small'
                                 labelText={t('post:phoneNumber')}
                                 value={values.phone}
                                 onChange={handleChange}
                                 disabled
                                 errorMsg={getErrorMsg(errors.phone, touched.phone, t)}
-                                size='small'
                             />
                         </Grid>
                         <Grid item xs={12}>

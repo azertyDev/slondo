@@ -1,7 +1,7 @@
-import React, {FC, useState} from 'react';
+import {FC, useState} from 'react';
 import {Hidden, NativeSelect, Typography} from '@material-ui/core';
 import {FilterIcon, Search_icon} from '@src/components/elements/icons';
-import {ButtonComponent} from '../button/Button';
+import {ButtonComponent} from '../../../elements/button/Button';
 import {useTranslation} from 'next-i18next';
 import {useStyles} from './useStyles';
 
@@ -12,7 +12,7 @@ export const SearchForm: FC = () => {
     const [postType, setPostType] = useState(1);
 
     const handleSelect = ({target}) => {
-        setPostType(target.value)
+        setPostType(target.value);
     };
 
     const classes = useStyles();
@@ -45,5 +45,5 @@ export const SearchForm: FC = () => {
                 <FilterIcon/>
             </Hidden>
         </form>
-    )
+    );
 };

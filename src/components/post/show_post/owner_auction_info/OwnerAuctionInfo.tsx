@@ -31,6 +31,7 @@ export const OwnerAuctionInfo: FC<OwnerAuctionInfoPropsType> = (props) => {
     const [isFetch, setIsFetch] = useState(false);
     const [authorPhones, setAuthorPhones] = useState(initAuthorPhones);
     const {showPhone} = authorPhones;
+
     const handleFollow = (userId) => async () => {
         try {
             await userAPI.follow(userId);
@@ -78,13 +79,13 @@ export const OwnerAuctionInfo: FC<OwnerAuctionInfoPropsType> = (props) => {
                     <Hidden mdDown>
                         <AuctionContent
                             t={t}
-                            data={data}
+                            postData={data}
                         />
                     </Hidden>
                 )}
                 <OwnerContent
                     t={t}
-                    data={data}
+                    postData={data}
                     isFetch={isFetch}
                     showPhone={showPhone}
                     authorPhones={authorPhones}

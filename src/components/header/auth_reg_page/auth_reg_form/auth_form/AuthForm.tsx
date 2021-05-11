@@ -4,7 +4,7 @@ import {userAPI} from '@src/api/api';
 import {useDispatch} from 'react-redux';
 import {Typography} from '@material-ui/core';
 import {Form, FormikProvider, useFormik} from 'formik';
-import {CustomFormikField} from '@src/components/elements/custom_formik_field/CustomFormikField';
+import {FormikField} from '@src/components/elements/formik_field/FormikField';
 import {ButtonComponent} from '@src/components/elements/button/Button';
 import {authSchema} from '@root/validation_schemas/authRegSchema';
 import {signInAction} from '@src/redux/slices/userSlice';
@@ -69,7 +69,7 @@ export const AuthForm: FC<AuthFormPropsType> = (props) => {
     return (
         <FormikProvider value={formik}>
             <Form onSubmit={formik.handleSubmit}>
-                <CustomFormikField
+                <FormikField
                     t={t}
                     type="tel"
                     name="phone"
@@ -78,7 +78,7 @@ export const AuthForm: FC<AuthFormPropsType> = (props) => {
                     onChange={handleInput}
                     errorMsg={getErrorMsg(errors.phone, touched.phone, t)}
                 />
-                <CustomFormikField
+                <FormikField
                     t={t}
                     type="password"
                     name="password"

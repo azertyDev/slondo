@@ -1,6 +1,6 @@
 import {FC} from 'react';
 import {Checkbox, Typography} from '@material-ui/core';
-import {CustomFormikField} from '@src/components/elements/custom_formik_field/CustomFormikField';
+import {FormikField} from '@src/components/elements/formik_field/FormikField';
 import {WithT} from 'i18next';
 import {useStyles} from './useStyles';
 
@@ -50,7 +50,7 @@ export const Contacts: FC<ContactsPropsType> = (props) => {
                         {t('filters:additional_phone')}:
                     </strong>
                 </Typography>
-                <CustomFormikField
+                <FormikField
                     t={t}
                     type="tel"
                     name="phone"

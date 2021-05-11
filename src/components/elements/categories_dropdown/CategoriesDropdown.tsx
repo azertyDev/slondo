@@ -1,30 +1,27 @@
 import {FC, useState} from 'react';
-import {Collapse, List, ListItem, ListItemText, Typography, ClickAwayListener} from '@material-ui/core';
-import {ArrowRight, ArrowDropDown, ArrowDropUp} from '@material-ui/icons';
 import {WithT} from 'i18next';
+import {ArrowRight, ArrowDropDown, ArrowDropUp} from '@material-ui/icons';
+import {Collapse, List, ListItem, ListItemText, Typography, ClickAwayListener} from '@material-ui/core';
 import {useStyles} from './useStyles';
 
 
 type NestedDropdownPropsType = {
     name: string,
-    labelTxt: string,
-    list,
-    values,
+    filters,
+    category,
     handleSelect
 } & WithT;
 
-export const NestedDropdown: FC<NestedDropdownPropsType> = (props) => {
+export const CategoriesDropdown: FC<NestedDropdownPropsType> = (props) => {
     const {
         t,
         name,
-        labelTxt,
-        values,
-        list,
+        filters,
+        category,
         handleSelect
     } = props;
 
-    const selectedCtgr = values[name];
-    const [mainCtgr, subCtgr] = selectedCtgr.parents ?? [];
+    const [mainCtgr] = category?.parents ?? [category];
 
     const [open, setOpen] = useState(false);
     const [subCtgrs, setSubCtgrs] = useState([]);
@@ -33,13 +30,8 @@ export const NestedDropdown: FC<NestedDropdownPropsType> = (props) => {
         setOpen(!open);
     };
 
-    const handleOnMouse = (item) => () => {
+    const handleOnMouse = item => () => {
         setSubCtgrs(item);
-    };
-
-    const handleClose = () => {
-        setOpen(false);
-        setSubCtgrs([]);
     };
 
     const handleClick = (name, value) => () => {
@@ -47,36 +39,42 @@ export const NestedDropdown: FC<NestedDropdownPropsType> = (props) => {
         handleSelect(name, value);
     };
 
-    // console.log('list', list);
-    // console.log('values', values);
+    const handleClose = () => {
+        setOpen(false);
+        setSubCtgrs([]);
+    };
+
+    console.log('subCtgrs', subCtgrs);
+    console.log('category', category);
+
     const classes = useStyles({open});
     return (
         <div className={classes.root}>
             <Typography variant="subtitle1">
                 <strong>
-                    {t(labelTxt)}
+                    {t(name)}
                 </strong>
             </Typography>
             <ClickAwayListener onClickAway={handleClose}>
                 <div>
                     <ListItem
                         button
-                        onClick={handleSwitchOpen}
                         className='selected-item'
+                        onClick={handleSwitchOpen}
                     >
-                        <ListItemText primary={t(`categories:${selectedCtgr.name}`)}/>
+                        <ListItemText primary={t(`categories:${category.name}`)}/>
                         {open ? <ArrowDropUp/> : <ArrowDropDown/>}
                     </ListItem>
-                    <div className='lists-wrapper'>
-                        <List className='ctgrs-list'>
+                    <div className='filters-wrapper'>
+                        <List className='ctgrs'>
                             <Collapse in={open} timeout={0} unmountOnExit>
-                                {list.map(item =>
+                                {filters.map(item =>
                                     <ListItem
                                         button
                                         key={item.id}
                                         onClick={handleClick(name, item)}
                                         onMouseEnter={handleOnMouse(item.subCategory)}
-                                        className={(mainCtgr?.name || selectedCtgr.name) === item.name ? classes.selected : ''}
+                                        className={mainCtgr?.name === item.name ? classes.selected : ''}
                                     >
                                         <ListItemText primary={t(`categories:${item.name}`)}/>
                                         <ArrowRight/>
@@ -85,14 +83,14 @@ export const NestedDropdown: FC<NestedDropdownPropsType> = (props) => {
                             </Collapse>
                         </List>
                         {!!subCtgrs.length && (
-                            <List className='sub-ctgrs-list'>
+                            <List className='sub-ctgrs'>
                                 <Collapse in={open} timeout={0} unmountOnExit>
                                     {subCtgrs.map(item =>
                                         <ListItem
                                             button
                                             key={item.id}
                                             onClick={handleClick(name, item)}
-                                            className={(subCtgr?.name || selectedCtgr.name) === item.name && (subCtgr?.id || selectedCtgr.id) === item.id ? classes.selected : ''}
+                                            className={category?.name === item.name && category?.id === item.id ? classes.selected : ''}
                                         >
                                             <ListItemText primary={t(`categories:${item.name}`)}/>
                                         </ListItem>

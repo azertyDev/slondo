@@ -24,10 +24,10 @@ export const useStyles = makeStyles((theme) => ({
             borderBottom: ({open}) => open && 0,
             borderRadius: ({open}) => open ? '5px 5px 0 0' : '5px'
         },
-        '& div.lists-wrapper': {
+        '& div.filters-wrapper': {
             position: 'absolute',
             display: 'flex',
-            '& ul.sub-ctgrs-list': {
+            '& ul.sub-ctgrs': {
                 height: '442px',
                 borderLeft: 0,
                 '& div.MuiCollapse-container': {
@@ -36,7 +36,7 @@ export const useStyles = makeStyles((theme) => ({
                     borderLeft: 0
                 }
             },
-            '& ul.ctgrs-list': {
+            '& ul.ctgrs': {
                 '& div.MuiCollapse-container': {
                     borderTop: 0,
                     borderRadius: '0 0 0 5px'

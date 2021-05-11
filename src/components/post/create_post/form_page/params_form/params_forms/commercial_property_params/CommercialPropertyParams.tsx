@@ -4,7 +4,7 @@ import {Grid} from "@material-ui/core";
 import {getErrorMsg} from "@src/helpers";
 import {FormikType} from "@root/interfaces/Formik";
 import {DropDownSelect} from "@src/components/elements/drop_down_select/DropDownSelect";
-import {CustomFormikField} from "@src/components/elements/custom_formik_field/CustomFormikField";
+import {FormikField} from "@src/components/elements/formik_field/FormikField";
 import {OptionsSelect} from "@src/components/post/create_post/form_page/components/options_select/OptionsSelect";
 import {PreviewValues} from "@src/components/post/create_post/form_page/params_form/PreviewValues";
 import {DeployedSelect} from "@src/components/post/create_post/form_page/components/deployed_select/DeployedSelect";
@@ -79,7 +79,7 @@ export const CommercialPropertyParams: FC<CommercialPropertyPropsType> = (props)
                          </Grid>
                      )}
                      <Grid item container xs={4}>
-                         <CustomFormikField
+                         <FormikField
                              t={t}
                              name='area'
                              labelText='area'

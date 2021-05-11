@@ -9,7 +9,7 @@ import {useStyles} from './useStyles';
 
 
 type OwnerPropsType = {
-    data,
+    postData,
     isFetch: boolean,
     authorPhones: { phone: string, additional_number: string },
     handleFollow: (userId) => () => void,
@@ -20,7 +20,7 @@ type OwnerPropsType = {
 export const OwnerContent: FC<OwnerPropsType> = (props) => {
     const {
         t,
-        data,
+        postData,
         isFetch,
         authorPhones,
         handleFollow,
@@ -33,7 +33,7 @@ export const OwnerContent: FC<OwnerPropsType> = (props) => {
         author,
         creator,
         subscribed
-    } = data;
+    } = postData;
 
     const showPhoneTxt = showPhone ? authorPhones.phone || 'number_not_available' : 'show_phone';
 

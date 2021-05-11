@@ -2,7 +2,7 @@ import {FC} from 'react';
 import {Grid, Typography} from '@material-ui/core';
 import {Form, FormikProvider, useFormik} from 'formik';
 import {filterInputSchema} from '@root/validation_schemas/filterInputSchema';
-import {CustomFormikField} from '@src/components/elements/custom_formik_field/CustomFormikField';
+import {FormikField} from '@src/components/elements/formik_field/FormikField';
 import {ButtonComponent} from '@src/components/elements/button/Button';
 import {useTranslation} from 'react-i18next';
 import {useStyles} from './useStyles';
@@ -33,7 +33,7 @@ export const Feedback: FC = () => {
                 <FormikProvider value={formik}>
                     <Form onSubmit={formik.handleSubmit}>
                         <div>
-                            <CustomFormikField
+                            <FormikField
                                 t={t}
                                 labelText='*Персональные данные'
                                 placeholder="Введите Имя"
@@ -42,7 +42,7 @@ export const Feedback: FC = () => {
                                     shrink: true
                                 }}
                             />
-                            <CustomFormikField
+                            <FormikField
                                 t={t}
                                 labelText='*Почта'
                                 placeholder="example@gmail.com"
@@ -51,7 +51,7 @@ export const Feedback: FC = () => {
                                     shrink: true
                                 }}
                             />
-                            <CustomFormikField
+                            <FormikField
                                 t={t}
                                 labelText='*Номер телефона'
                                 placeholder="+998  "
@@ -63,7 +63,7 @@ export const Feedback: FC = () => {
                         </div>
                         <div>
                             <label>*Сообщение</label>
-                            <CustomFormikField
+                            <FormikField
                                 t={t}
                                 multiline
                                 rows={10}

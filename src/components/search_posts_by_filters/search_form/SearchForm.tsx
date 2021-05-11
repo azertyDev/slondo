@@ -2,7 +2,7 @@ import {FC} from 'react';
 import {WithT} from 'i18next';
 import {Grid} from '@material-ui/core';
 import {Form, FormikContextType, FormikProvider} from 'formik';
-import {NestedDropdown} from '@src/components/elements/nested_dropdown/NestedDropdown';
+import {CategoriesDropdown} from '@src/components/elements/categories_dropdown/CategoriesDropdown';
 import {DropDownSelect} from '@src/components/elements/drop_down_select/DropDownSelect';
 import {useStyles} from './useStyles';
 
@@ -29,25 +29,24 @@ export const SearchForm: FC<SearchFormPropsType> = (props) => {
             <Form className={classes.root}>
                 <Grid container spacing={1}>
                     <Grid item xs={4}>
-                        <NestedDropdown
+                        <CategoriesDropdown
                             t={t}
-                            values={values}
                             name='category'
-                            labelTxt='category'
                             handleSelect={handleSelect}
-                            list={filters.categories}
+                            filters={filters.categories}
+                            category={values.category}
                         />
                     </Grid>
                     {!!values.category.type && (
                         <Grid item xs={4}>
                             <DropDownSelect
                                 t={t}
-                                name='typeCategory'
+                                name='type'
                                 labelTxt='good_type'
                                 values={values}
+                                items={values.category.type}
                                 onBlur={handleBlur}
                                 handleSelect={handleSelect}
-                                items={values.category.type}
                             />
                         </Grid>
                     )}

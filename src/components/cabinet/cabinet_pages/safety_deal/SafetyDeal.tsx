@@ -11,7 +11,7 @@ import {
     Typography,
 } from '@material-ui/core';
 import {CabinetWrapper} from '@src/components/cabinet/CabinetWrapper';
-import {CustomFormikField} from '@src/components/elements/custom_formik_field/CustomFormikField';
+import {FormikField} from '@src/components/elements/formik_field/FormikField';
 import {Form, FormikProvider, useFormik} from 'formik';
 import {ButtonComponent} from '@root/src/components/elements/button/Button';
 import {getErrorMsg} from '@src/helpers';
@@ -57,7 +57,7 @@ export const SafetyDeal: FC = () => {
                                         />
                                     </FormGroup>
                                 </FormControl>
-                                <CustomFormikField
+                                <FormikField
                                     t={t}
                                     name="firstName"
                                     type="text"
@@ -65,14 +65,14 @@ export const SafetyDeal: FC = () => {
                                     placeholder="Имя"
                                     errorMsg={getErrorMsg(errors.firstName, touched.firstName, t)}
                                 />
-                                <CustomFormikField
+                                <FormikField
                                     t={t}
                                     name="secondName"
                                     type="text"
                                     placeholder="Фамилия"
                                     errorMsg={getErrorMsg(errors.secondName, touched.secondName, t)}
                                 />
-                                <CustomFormikField
+                                <FormikField
                                     t={t}
                                     name="phone"
                                     type="tel"
@@ -80,7 +80,7 @@ export const SafetyDeal: FC = () => {
                                     placeholder="+998"
                                     value="+998 90 908 0880"
                                 />
-                                <CustomFormikField
+                                <FormikField
                                     t={t}
                                     name="backupPhoneNumber"
                                     type="tel"
@@ -110,25 +110,25 @@ export const SafetyDeal: FC = () => {
                                             Номер карты
                                         </Typography>
                                         <div>
-                                            <CustomFormikField
+                                            <FormikField
                                                 t={t}
                                                 name="card-number"
                                                 type="text"
                                                 placeholder="XXXX"
                                             />
-                                            <CustomFormikField
+                                            <FormikField
                                                 t={t}
                                                 name="card-number"
                                                 type="text"
                                                 placeholder="XXXX"
                                             />
-                                            <CustomFormikField
+                                            <FormikField
                                                 t={t}
                                                 name="card-number"
                                                 type="text"
                                                 placeholder="XXXX"
                                             />
-                                            <CustomFormikField
+                                            <FormikField
                                                 t={t}
                                                 name="card-number"
                                                 type="text"
@@ -142,7 +142,7 @@ export const SafetyDeal: FC = () => {
                                             Срок действия
                                         </Typography>
                                         <div>
-                                            <CustomFormikField
+                                            <FormikField
                                                 t={t}
                                                 name="card-number"
                                                 type="text"

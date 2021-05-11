@@ -1,4 +1,4 @@
-import React, {FC, FocusEvent} from 'react';
+import {FC, FocusEvent} from 'react';
 import {Autocomplete} from '@material-ui/lab';
 import {TextField, Typography} from '@material-ui/core';
 import {LocationsDataTypes} from '@root/interfaces/Locations';
@@ -26,7 +26,7 @@ export const LocationAutocomplete: FC<AddressAutocompleteType> = (props) => {
         disabled
     } = props;
 
-    const {t} = useTranslation(['locations', 'post']);
+    const {t} = useTranslation('locations');
 
     const optionSelected = (option, value) => {
         return value
@@ -65,7 +65,7 @@ export const LocationAutocomplete: FC<AddressAutocompleteType> = (props) => {
                 getOptionLabel={option}
                 options={locationsNormalize(locations)}
                 getOptionSelected={optionSelected}
-                noOptionsText={t('post:cityOrRegionNotFound')}
+                noOptionsText={t('filters:cityOrRegionNotFound')}
                 renderInput={params =>
                     <TextField
                         {...params}
@@ -74,7 +74,7 @@ export const LocationAutocomplete: FC<AddressAutocompleteType> = (props) => {
                         fullWidth
                         focused={false}
                         variant='outlined'
-                        placeholder={t('post:choiceLocation')}
+                        placeholder={t('filters:choiceLocation')}
                         className={errorMsg !== '' ? 'error-border' : ''}
                     />}
             />

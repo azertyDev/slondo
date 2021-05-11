@@ -31,7 +31,7 @@ export const AvailableDays: FC<AvailableDaysPropsType> = (props) => {
             <div className='switcher'>
                 <Typography variant="subtitle1">
                     <strong>
-                        {t('common:callTimes')}
+                        {t('common:call_times')}
                     </strong>
                 </Typography>
                 <Switch

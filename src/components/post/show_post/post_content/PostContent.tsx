@@ -321,7 +321,7 @@ export const PostContent: FC<PostContentTypes> = (props) => {
                     {isAuction && (
                         <AuctionContent
                             t={t}
-                            data={data}
+                            postData={data}
                         />
                     )}
                 </Hidden>

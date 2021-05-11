@@ -4,14 +4,11 @@ import {Grid, Typography} from '@material-ui/core';
 import {FormikProvider, useFormik} from 'formik';
 import {userAPI} from '@src/api/api';
 import {useDispatch} from 'react-redux';
-import {getErrorMsg, isRequired, prepareDataForCreate} from '@src/helpers';
+import {getErrorMsg, isRequired} from '@src/helpers';
 import {paramsFormSchema} from '@root/validation_schemas/createPostSchemas';
-import {ApartmentsForm} from '@src/components/post/create_post/form_page/params_form/additional_forms/apartments_form/ApartmentsForm';
-import {HousesCottagesForm} from '@src/components/post/create_post/form_page/params_form/additional_forms/houses_cottages_form/HousesCottagesForm';
-import {CarForm} from '@src/components/post/create_post/form_page/params_form/additional_forms/car_form/CarForm';
 import {CustomAccordion} from '@src/components/post/create_post/form_page/components/accordion/CustomAccordion';
-import {CarIcon, FlatIcon, ParametersIcon} from '@src/components/elements/icons';
-import {CustomFormikField} from '@src/components/elements/custom_formik_field/CustomFormikField';
+import {ParametersIcon} from '@src/components/elements/icons';
+import {FormikField} from '@src/components/elements/formik_field/FormikField';
 import {ApartmentsParams} from '@src/components/post/create_post/form_page/params_form/params_forms/apartments_params/ApartmentsParams';
 import {HousesCottagesParams} from '@src/components/post/create_post/form_page/params_form/params_forms/houses_cotteges_params/HousesCottagesParams';
 import {LandParams} from '@src/components/post/create_post/form_page/params_form/params_forms/land_params/LandParams';
@@ -20,9 +17,9 @@ import {CommercialPropertyParams} from '@src/components/post/create_post/form_pa
 import {RegularParams} from '@src/components/post/create_post/form_page/params_form/params_forms/regular_params/RegularParams';
 import {setErrorMsgAction} from '@root/src/redux/slices/errorSlice';
 import {CarParams} from '@src/components/post/create_post/form_page/params_form/params_forms/car_params/CarParams';
-import {numericFields, optionKeys} from '@src/common_data/form_fields';
-import {useStyles} from './useStyles';
+import {fractionalFields, numericFields, optionFields} from '@src/common_data/form_fields';
 import {numberRegEx} from '@src/common_data/reg_exs';
+import {useStyles} from './useStyles';
 
 
 type RegularFormPropsType = {
@@ -33,7 +30,6 @@ type RegularFormPropsType = {
     categoryName: string,
     subCategory,
     isPreview: boolean,
-    isExtendSubCtgr: boolean,
     currentFormIndex: number,
     handleNextFormOpen: () => void,
     handleFormOpen: (k) => () => void,
@@ -49,7 +45,6 @@ export const ParamsFormContainer: FC<RegularFormPropsType> = (props) => {
         categoryName,
         type,
         subCategory,
-        isExtendSubCtgr,
         currentFormIndex,
         handleFormOpen,
         handleNextFormOpen
@@ -57,35 +52,30 @@ export const ParamsFormContainer: FC<RegularFormPropsType> = (props) => {
 
     const dispatch = useDispatch();
 
-    const isCar = categoryName === 'car';
-    const isEstate = categoryName === 'estate';
+    const isCarCtgr = categoryName === 'car';
 
     const isMadeInUzb = subCategory.name === 'madeInUzb';
     const isApartments = subCategory.name === 'apartments';
     const isHousesCottages = subCategory.name === 'housesCottages';
 
-    const titleTxtLimit = 70;
-
-    const additionalIcon = isEstate ? <FlatIcon/> : <CarIcon/>;
-    const paramsIcon = isEstate ? <FlatIcon/> : <ParametersIcon/>;
-
-    const additionalTitle = t(`categories:${categoryName}`);
-    const paramsFormTitle = isExtendSubCtgr ? t('parameters') : t(`categories:${subCategory.name}`);
+    const titleTxtLimit = 50;
 
     const [valuesByYear, setValuesByYear] = useState<any>({});
 
     const onSubmit = (values) => {
         if (currentFormIndex === 3) {
-            const preparedValues = prepareDataForCreate({...values}, filters);
+            const preparedValues = prepareParamsData({...values});
+
             post.title = values.title;
             post[categoryName] = {
-                ...post[categoryName],
                 ...preparedValues,
                 [`${categoryName}_id`]: subCategory.id
             };
+
             if (type) {
                 post[categoryName].type_id = type.id ?? preparedValues.type_id;
             }
+
             setPost({...post});
         }
         handleNextFormOpen();
@@ -93,7 +83,9 @@ export const ParamsFormContainer: FC<RegularFormPropsType> = (props) => {
 
     const initVals: any = {title: ''};
 
-    if (isCar) {
+    if (isCarCtgr) {
+        initVals.model = null;
+        initVals.year = null;
         initVals.broken = false;
         initVals.mileage = '';
         initVals.engine_capacity = '';
@@ -125,15 +117,19 @@ export const ParamsFormContainer: FC<RegularFormPropsType> = (props) => {
         handleSubmit
     } = formik;
 
+    const handleTitle = ({target: {name, value}}) => {
+        if (titleTxtLimit >= value.length) {
+            setValues({...values, [name]: value});
+        }
+    };
+
     const handleInput = ({target: {name, value}}) => {
         const isNumericField = numericFields.some((n => n === name));
-        if (
-            (isNumericField && RegExp(numberRegEx).test(value))
-            ||
-            (!isNumericField && (name !== 'title' || titleTxtLimit >= value.length))
-        ) {
-            if ((name !== 'engine_capacity') || (name === 'engine_capacity' && value.length < 4)) {
-                if (name === 'engine_capacity' && value.length === 2 && value[1] !== '.') {
+        const isFractionalField = fractionalFields.some((n => n === name));
+
+        if (isNumericField && RegExp(numberRegEx).test(value)) {
+            if ((!isFractionalField) || (isFractionalField && value.length < 4)) {
+                if (isFractionalField && value.length === 2 && value[1] !== '.') {
                     value = value.replace(/(?<=^.{1})./, `.${value[1]}`);
                 }
                 setValues({...values, [name]: value});
@@ -196,7 +192,7 @@ export const ParamsFormContainer: FC<RegularFormPropsType> = (props) => {
                                 Object.keys(pos).forEach(k => {
                                     if (Array.isArray(pos[k]) && !!pos[k].length) {
                                         const [valKey] = Object.keys(pos[k][0]);
-                                        const isOptionKey = optionKeys.some(optKey => optKey === valKey);
+                                        const isOptionKey = optionFields.some(optKey => optKey === valKey);
                                         vals[valKey] = isOptionKey
                                                        ? pos[k].map(opt => opt[valKey])
                                                        : pos[k][0][valKey];
@@ -218,12 +214,17 @@ export const ParamsFormContainer: FC<RegularFormPropsType> = (props) => {
                     }
                     if (name === 'position') {
                         const valsByPosition = {};
+
                         if (value) {
-                            Object.keys(value).forEach(key =>
-                                valsByPosition[key] = key === 'engine_capacity'
-                                                      ? value[key].name
-                                                      : value[key]
-                            );
+                            Object.keys(value).forEach(key => {
+                                if (Array.isArray(value[key])) {
+                                    valsByPosition[key] = [...value[key]];
+                                } else if (typeof value[key] === 'object') {
+                                    if (key === 'engine_capacity') valsByPosition[key] = value[key].name;
+                                    else valsByPosition[key] = {...value[key]};
+                                }
+                            });
+
                             newVals = {
                                 ...initVals,
                                 ...valsByPosition,
@@ -236,6 +237,7 @@ export const ParamsFormContainer: FC<RegularFormPropsType> = (props) => {
                                 mileage: values.mileage,
                                 broken: values.broken
                             };
+
                         } else {
                             // Reset values by position
                             newVals = {
@@ -251,7 +253,6 @@ export const ParamsFormContainer: FC<RegularFormPropsType> = (props) => {
                     setTouched({});
                 }
             }
-            if (name === 'manufacturer') newVals = {...newVals, model: null};
             setValues(newVals);
         } catch (e) {
             dispatch(setErrorMsgAction(e.message));
@@ -276,72 +277,43 @@ export const ParamsFormContainer: FC<RegularFormPropsType> = (props) => {
         setValues({...values});
     };
 
-    const getAdditionalForm = () => {
-        switch (subCategory.name) {
-            case 'apartments':
-                return <ApartmentsForm
-                    t={t}
-                    type={type}
-                    formik={formik}
-                    filters={filters}
-                    isPreview={isPreview}
-                    handleInput={handleInput}
-                    handleSelect={handleSelect}
-                    handleCheckbox={handleCheckbox}
-                />;
-            case 'housesCottages':
-                return <HousesCottagesForm
-                    t={t}
-                    type={type}
-                    formik={formik}
-                    filters={filters}
-                    isPreview={isPreview}
-                    handleSelect={handleSelect}
-                    handleCheckbox={handleCheckbox}
-                />;
-            default:
-                return <CarForm
-                    t={t}
-                    isMadeInUzb={isMadeInUzb}
-                    isPreview={isPreview}
-                    formik={formik}
-                    filters={filters}
-                    valuesByYear={valuesByYear}
-                    handleInput={handleInput}
-                    handleSelect={handleSelect}
-                    handleCheckbox={handleCheckbox}
-                />;
-        }
-    };
-
     const getParamsForm = () => {
         switch (subCategory.name) {
             case 'foreignCars':
             case 'madeInUzb':
                 return <CarParams
                     t={t}
+                    isMadeInUzb={isMadeInUzb}
                     formik={formik}
                     filters={filters}
                     isPreview={isPreview}
+                    valuesByYear={valuesByYear}
                     handleSelect={handleSelect}
+                    handleInput={handleInput}
+                    handleCheckbox={handleCheckbox}
                     handleOptionCheckbox={handleOptionCheckbox}
                 />;
             case 'apartments':
                 return <ApartmentsParams
                     t={t}
+                    type={type}
                     formik={formik}
                     filters={filters}
                     isPreview={isPreview}
+                    handleInput={handleInput}
                     handleSelect={handleSelect}
+                    handleCheckbox={handleCheckbox}
                     handleOptionCheckbox={handleOptionCheckbox}
                 />;
             case 'housesCottages':
                 return <HousesCottagesParams
                     t={t}
+                    type={type}
                     formik={formik}
                     filters={filters}
                     isPreview={isPreview}
                     handleSelect={handleSelect}
+                    handleCheckbox={handleCheckbox}
                     handleOptionCheckbox={handleOptionCheckbox}
                 />;
             case 'land':
@@ -384,23 +356,16 @@ export const ParamsFormContainer: FC<RegularFormPropsType> = (props) => {
     };
 
     const setRequireVals = () => {
+        const reqVals: any = {...values};
         const isHousesCottages = subCategory.name === 'housesCottages';
 
-        const reqVals: any = {...values};
-
         Object.keys(filters).forEach(k => {
-            if (!values[k] && k !== 'engine_capacity') {
-                if (isRequired(k)) {
+            if (!values[k]) {
+                if (typeof values[k] !== 'string' && isRequired(k)) {
                     if (k === 'area') {
+                        if (!isHousesCottages) reqVals.area = null;
                         reqVals.area_id = filters[k][0].id || null;
-                        if (!isHousesCottages) {
-                            reqVals.area = null;
-                        }
-                    } else {
-                        reqVals[k] = null;
-                    }
-                } else if (k === 'infrastructure' || k === 'amenities') {
-                    reqVals[k] = [];
+                    } else reqVals[k] = null;
                 }
             }
         });
@@ -412,81 +377,43 @@ export const ParamsFormContainer: FC<RegularFormPropsType> = (props) => {
         setRequireVals();
     }, [filters]);
 
+    console.log('filters', filters);
+    console.log('values', values);
     const classes = useStyles();
     return (
         <div className={classes.root}>
             <FormikProvider value={formik}>
                 <form onSubmit={handleSubmit}>
-                    {isExtendSubCtgr && (
-                        <div className='acc-wrapper'>
-                            <CustomAccordion
-                                icon={additionalIcon}
-                                title={additionalTitle}
-                                isPreview={isPreview}
-                                open={currentFormIndex === 4}
-                                isEditable={currentFormIndex < 4}
-                                handleEdit={handleFormOpen(4)}
-                                nextButtonTxt={t('parameters')}
-                            >
-                                <div className='title-wrapper'>
-                                    {isPreview
-                                     ? <Typography variant="subtitle1">
-                                         <strong>
-                                             {t('filters:title')}:&nbsp;
-                                         </strong>
-                                         {values.title}
-                                     </Typography>
-                                     : <Grid container className='title-wrapper'>
-                                         <Grid item xs={6}>
-                                             <CustomFormikField
-                                                 t={t}
-                                                 name='title'
-                                                 labelText='title'
-                                                 limit={titleTxtLimit}
-                                                 value={values.title}
-                                                 onChange={handleInput}
-                                                 placeholder={t('filters:example_title')}
-                                                 errorMsg={getErrorMsg(errors.title, touched.title, t)}
-                                             />
-                                         </Grid>
-                                     </Grid>}
-                                </div>
-                                {getAdditionalForm()}
-                            </CustomAccordion>
-                        </div>
-                    )}
                     <CustomAccordion
-                        icon={paramsIcon}
-                        title={paramsFormTitle}
+                        icon={<ParametersIcon/>}
+                        title={t('parameters')}
                         isPreview={isPreview}
                         nextButtonTxt={t('appearance')}
                         open={currentFormIndex === 3}
                         handleEdit={handleFormOpen(3)}
                         isEditable={currentFormIndex < 3}
                     >
-                        {!isExtendSubCtgr && (
-                            <Grid container className='title-wrapper'>
-                                <Grid item xs={6}>
-                                    {isPreview
-                                     ? <Typography variant="subtitle1">
-                                         <strong>
-                                             {t('title')}:&nbsp;
-                                         </strong>
-                                         {values.title}
-                                     </Typography>
-                                     : <CustomFormikField
-                                         t={t}
-                                         name='title'
-                                         labelText='title'
-                                         limit={titleTxtLimit}
-                                         value={values.title}
-                                         onChange={handleInput}
-                                         placeholder={t('filters:example_title')}
-                                         errorMsg={getErrorMsg(errors.title, touched.title, t)}
-                                     />}
-                                </Grid>
+                        <Grid container className='title-wrapper'>
+                            <Grid item xs={6}>
+                                {isPreview
+                                 ? <Typography variant="subtitle1">
+                                     <strong>
+                                         {t('title')}:&nbsp;
+                                     </strong>
+                                     {values.title}
+                                 </Typography>
+                                 : <FormikField
+                                     t={t}
+                                     name='title'
+                                     labelText='title'
+                                     limit={titleTxtLimit}
+                                     value={values.title}
+                                     onChange={handleTitle}
+                                     placeholder={t('filters:example_title')}
+                                     errorMsg={getErrorMsg(errors.title, touched.title, t)}
+                                 />}
                             </Grid>
-                        )}
+                        </Grid>
                         {getParamsForm()}
                     </CustomAccordion>
                 </form>
@@ -494,3 +421,26 @@ export const ParamsFormContainer: FC<RegularFormPropsType> = (props) => {
         </div>
     );
 };
+
+function prepareParamsData(data) {
+    return Object.keys(data).reduce<any>((acc, key) => {
+        const isArray = Array.isArray(data[key]);
+        const isStrOrBool = typeof data[key] === 'string' || typeof data[key] === 'boolean';
+        const isFracField = fractionalFields.some(val => val === key);
+        const isZeroField = isFracField && RegExp(/0$|0?\.0?$/).test(data[key]);
+
+        if (data[key] !== undefined && key !== 'title') {
+            if (isArray) {
+                if (data[key].length) {
+                    acc[key] = data[key].map(({id}) => ({id}));
+                }
+            } else if (isStrOrBool && !isZeroField) {
+                acc[key] = data[key];
+            } else if (typeof data[key] === 'object') {
+                acc[`${key}_id`] = data[key].id;
+            }
+        }
+
+        return acc;
+    }, {});
+}
