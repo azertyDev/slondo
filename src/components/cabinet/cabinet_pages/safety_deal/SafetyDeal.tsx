@@ -13,7 +13,7 @@ import {
 import {CabinetWrapper} from '@src/components/cabinet/CabinetWrapper';
 import {FormikField} from '@src/components/elements/formik_field/FormikField';
 import {Form, FormikProvider, useFormik} from 'formik';
-import {ButtonComponent} from '@root/src/components/elements/button/Button';
+import {CustomButton} from '@src/components/elements/custom_button/CustomButton';
 import {getErrorMsg} from '@src/helpers';
 import {useTranslation} from 'react-i18next';
 import {useStyles} from './useStyles';
@@ -149,14 +149,14 @@ export const SafetyDeal: FC = () => {
                                                 placeholder="xx/xx"
                                                 helperText="месяц / год"
                                             />
-                                            <ButtonComponent disabled>
+                                            <CustomButton disabled>
                                                 Сохранить
-                                            </ButtonComponent>
+                                            </CustomButton>
                                         </div>
                                     </Card>
                                 </div>
                                 <div className='submit-part'>
-                                    <ButtonComponent>Применить</ButtonComponent>
+                                    <CustomButton>Применить</CustomButton>
                                     <Typography variant="subtitle1" color="initial">Нажимая кнопку “Сохранить” вы
                                         принимаете публичную оферту “Безопасной покупки”</Typography>
                                 </div>

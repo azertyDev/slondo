@@ -7,7 +7,7 @@ import {categorySearchHelper, categoriesByType, addParentsToCtgrs} from '@src/he
 import {SubCategoryType} from '@root/interfaces/Categories';
 import {Grid, InputBase, List, ListItem, Typography} from "@material-ui/core";
 import {BackspaceIcon, Search_icon} from "@src/components/elements/icons";
-import {ButtonComponent} from "@src/components/elements/button/Button";
+import {CustomButton} from "@src/components/elements/custom_button/CustomButton";
 import {IdNameType} from "@root/interfaces/Post";
 import {useStyles} from "./useStyles";
 
@@ -148,12 +148,12 @@ export const CategoriesPage: FC = () => {
                          ? <List disablePadding>
                              {subCtgrs[0].parents.length === 2 && subCategoryName && (
                                  <ListItem onClick={handleBackSubCtgr}>
-                                     <ButtonComponent className="back-btn">
+                                     <CustomButton className="back-btn">
                                          <BackspaceIcon/>
                                          <Typography variant="subtitle1">
                                              {t(`categories:${subCategoryName}`)}
                                          </Typography>
-                                     </ButtonComponent>
+                                     </CustomButton>
                                  </ListItem>
                              )}
                              {subCtgrs.map((ctgr, i) =>

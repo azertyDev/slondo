@@ -1,6 +1,6 @@
 import {FC} from 'react';
 import {Hidden, Typography} from '@material-ui/core';
-import {ButtonComponent} from '@src/components/elements/button/Button';
+import {CustomButton} from '@src/components/elements/custom_button/CustomButton';
 import {SafeIcon} from '@root/src/components/elements/icons';
 import {UserInfoWithAvatar} from '@src/components/elements/user_info_with_avatar/UserInfoWithAvatar';
 import {SocialsBlock} from '@root/src/components/elements/socials_block/SocialsBlock';
@@ -48,7 +48,7 @@ export const OwnerContent: FC<OwnerPropsType> = (props) => {
             />
             <Hidden mdDown>
                 <div className="contact-buttons">
-                    <ButtonComponent color="primary" disabled={isFetch} onClick={handleShowPhone}>
+                    <CustomButton color="primary" disabled={isFetch} onClick={handleShowPhone}>
                         <Typography variant="subtitle1" color="initial">
                             <span>{t(showPhoneTxt)}</span>
                             {showPhone && authorPhones.additional_number && (
@@ -58,19 +58,19 @@ export const OwnerContent: FC<OwnerPropsType> = (props) => {
                                 </>
                             )}
                         </Typography>
-                    </ButtonComponent>
+                    </CustomButton>
                     {!creator && (
                         <>
-                            <ButtonComponent
+                            <CustomButton
                                 color="primary"
                                 className='contact-btn'
                             >
                                 <Typography variant="subtitle1" color="initial">
                                     Написать продавцу
                                 </Typography>
-                            </ButtonComponent>
+                            </CustomButton>
                             {!!safe_deal && (
-                                <ButtonComponent
+                                <CustomButton
                                     color="primary"
                                     className="safe-shopping-btn"
                                 >
@@ -78,7 +78,7 @@ export const OwnerContent: FC<OwnerPropsType> = (props) => {
                                     <Typography variant="subtitle1" color="initial">
                                         Безопасная покупка
                                     </Typography>
-                                </ButtonComponent>
+                                </CustomButton>
                             )}
                         </>
                     )}
@@ -95,9 +95,9 @@ export const OwnerContent: FC<OwnerPropsType> = (props) => {
                                 за 420 000 сум
                             </Typography>
                         </div>
-                        <ButtonComponent>
+                        <CustomButton>
                             Купить
-                        </ButtonComponent>
+                        </CustomButton>
                     </div>
                 )}
             </Hidden>

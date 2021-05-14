@@ -1,6 +1,6 @@
 import React, {FC, useEffect} from 'react';
 import {Grid, Typography, Paper} from '@material-ui/core';
-import {ButtonComponent} from '@src/components/elements/button/Button';
+import {CustomButton} from '@src/components/elements/custom_button/CustomButton';
 import CheckCircleOutlineIcon from '@material-ui/icons/CheckCircleOutline';
 import {useTranslation} from 'next-i18next';
 import Link from 'next/link';
@@ -50,18 +50,18 @@ export const SuccessPage: FC = () => {
                     <Grid item xs={6} sm={2}>
                         <Link href="/create/type/select" shallow>
                             <a>
-                                <ButtonComponent style={{color: '#fff'}}>
+                                <CustomButton style={{color: '#fff'}}>
                                     Создать еще
-                                </ButtonComponent>
+                                </CustomButton>
                             </a>
                         </Link>
                     </Grid>
                     <Grid item xs={6} sm={2}>
                         <Link href="/">
                             <a>
-                                <ButtonComponent style={{color: '#fff'}}>
+                                <CustomButton style={{color: '#fff'}}>
                                     На главную
-                                </ButtonComponent>
+                                </CustomButton>
                             </a>
                         </Link>
                     </Grid>

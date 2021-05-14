@@ -5,7 +5,7 @@ import {useDispatch} from 'react-redux';
 import {Typography} from '@material-ui/core';
 import {Form, FormikProvider, useFormik} from 'formik';
 import {FormikField} from '@src/components/elements/formik_field/FormikField';
-import {ButtonComponent} from '@src/components/elements/button/Button';
+import {CustomButton} from '@src/components/elements/custom_button/CustomButton';
 import {authSchema} from '@root/validation_schemas/authRegSchema';
 import {signInAction} from '@src/redux/slices/userSlice';
 import {cookies, cookieOpts, phonePrepare, getErrorMsg} from '@src/helpers';
@@ -97,9 +97,9 @@ export const AuthForm: FC<AuthFormPropsType> = (props) => {
                     </Typography>
                 </div>
                 <div className='auth-btns'>
-                    <ButtonComponent type="submit">
+                    <CustomButton type="submit">
                         {t('signIn')}
-                    </ButtonComponent>
+                    </CustomButton>
                 </div>
             </Form>
         </FormikProvider>

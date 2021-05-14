@@ -1,4 +1,7 @@
 {
+  "select": "Tanlash",
+  "searchText": "E'lon uchun qidiruv",
+  "searchBtn": "Qidiruv",
   "exchange": "Almashish imkoni bor",
   "safe_deal": "Xavfsiz sotib olish",
   "safe_deal_rules": "Xavfsiz sotib olish qoidalari",

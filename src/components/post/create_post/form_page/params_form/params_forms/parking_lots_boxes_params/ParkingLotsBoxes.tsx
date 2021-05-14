@@ -1,10 +1,10 @@
-import React, {FC} from "react";
+import {FC} from "react";
 import {Grid} from "@material-ui/core";
 import {WithT} from "i18next";
 import {DropDownSelect} from "@src/components/elements/drop_down_select/DropDownSelect";
 import {FormikField} from "@src/components/elements/formik_field/FormikField";
 import {FormikType} from "@root/interfaces/Formik";
-import {DeployedSelect} from "@src/components/post/create_post/form_page/components/deployed_select/DeployedSelect";
+import {DeployedSelect} from "@src/components/elements/deployed_select/DeployedSelect";
 import {PreviewValues} from "@src/components/post/create_post/form_page/params_form/PreviewValues";
 import {getErrorMsg} from "@src/helpers";
 import {useStyles} from './useStyles';
@@ -45,9 +45,7 @@ export const ParkingLotsBoxes: FC<ParkingLotsAndBoxesPropsType> = (props) => {
                      <Grid item container xs={12} alignItems='center'>
                          <DeployedSelect
                              t={t}
-                             errors={errors}
-                             touched={touched}
-                             values={values}
+                             formik={formik}
                              name='estate_type'
                              options={filters.estate_type}
                              handleSelect={handleSelect}

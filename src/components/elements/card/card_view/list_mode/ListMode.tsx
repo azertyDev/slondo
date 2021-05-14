@@ -14,7 +14,7 @@ import {
     SettingsIcon,
     SwapIcon
 } from '@src/components/elements/icons';
-import {ButtonComponent} from '@src/components/elements/button/Button';
+import {CustomButton} from '@src/components/elements/custom_button/CustomButton';
 import {BreadcrumbsComponent} from '@src/components/elements/breadcrumbs/Breadcrumbs';
 import {ViewPropsType} from '@src/components/elements/card/card_view/CardView';
 import {UserAvatarComponent} from '@src/components/elements/user_info_with_avatar/avatar/UserAvatarComponent';
@@ -302,14 +302,14 @@ export const ListMode: FC<ViewPropsType> = ({list, handleModalOpen}) => {
                                             >
                                                 Продавец
                                             </Typography> */}
-                                            <ButtonComponent>
+                                            <CustomButton>
                                                 <Typography
                                                     variant="subtitle1"
                                                     color="initial"
                                                 >
                                                     ?
                                                 </Typography>
-                                            </ButtonComponent>
+                                            </CustomButton>
                                         </div>
                                         <div className="profile-data">
                                             <UserAvatarComponent avatar={el.creator.avatar}/>
@@ -320,7 +320,7 @@ export const ListMode: FC<ViewPropsType> = ({list, handleModalOpen}) => {
                                                 Имя Фамилия
                                             </Typography>
                                             <Rating card/>
-                                            <ButtonComponent className='write'>
+                                            <CustomButton className='write'>
                                                 <LetterIcon/>
                                                 <Typography
                                                     variant="subtitle1"
@@ -328,17 +328,17 @@ export const ListMode: FC<ViewPropsType> = ({list, handleModalOpen}) => {
                                                 >
                                                     Написать
                                                 </Typography>
-                                            </ButtonComponent>
+                                            </CustomButton>
                                         </div>
                                         <div>
-                                            <ButtonComponent className="show-phone-btn">
+                                            <CustomButton className="show-phone-btn">
                                                 <Typography
                                                     variant="subtitle2"
                                                     color="initial"
                                                 >
                                                     Показать номер
                                                 </Typography>
-                                            </ButtonComponent>
+                                            </CustomButton>
                                             {/* <Typography
                                             variant="subtitle2"
                                             color="initial"

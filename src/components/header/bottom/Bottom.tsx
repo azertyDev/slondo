@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import Link from 'next/link';
 import {AppBar, Avatar, Container, Grid, Hidden, Typography} from '@material-ui/core';
-import {ButtonComponent} from '@src/components/elements/button/Button';
+import {CustomButton} from '@src/components/elements/custom_button/CustomButton';
 import {SearchForm} from '@src/components/header/bottom/search_form/SearchForm';
 import {withScrollThreshold} from '@src/hoc/withScrollThreshold';
 import {Logo} from '@src/components/elements/icons';
@@ -65,7 +65,7 @@ const Bottom = (props) => {
                                     justify="flex-end"
                                     className="category-menu"
                                 >
-                                    <ButtonComponent
+                                    <CustomButton
                                         color="primary"
                                         className="bottom-category-button header-button"
                                         onClick={toggleDrawer('left', true)}
@@ -74,7 +74,7 @@ const Bottom = (props) => {
                                             {t('header:categories')}
                                         </Typography>
                                         <CategorySortIcon/>
-                                    </ButtonComponent>
+                                    </CustomButton>
                                 </Grid>
                             </Grid>
                             <Grid
@@ -91,7 +91,7 @@ const Bottom = (props) => {
                             <Grid item md={2}>
                                 <Link href="/create/type/select">
                                     <a className='create-post-link'>
-                                        <ButtonComponent
+                                        <CustomButton
                                             color="primary"
                                             className="header-button"
                                         >
@@ -99,7 +99,7 @@ const Bottom = (props) => {
                                                 {t('header:createPost')}
                                             </Typography>
                                             <AddIcon/>
-                                        </ButtonComponent>
+                                        </CustomButton>
                                     </a>
                                 </Link>
                             </Grid>
@@ -116,7 +116,7 @@ const Bottom = (props) => {
                                          <Avatar alt="Remy Sharp" src={avatar}/>
                                      </a>
                                  </Link>
-                                 : <ButtonComponent
+                                 : <CustomButton
                                      className="bottom-sign-button header-button"
                                      onClick={handleOpenModal}
                                  >
@@ -124,7 +124,7 @@ const Bottom = (props) => {
                                          {t('auth_reg:signIn')}
                                      </Typography>
                                      <SignIcon/>
-                                 </ButtonComponent>}
+                                 </CustomButton>}
                             </Grid>
                         </Grid>
                     </Container>

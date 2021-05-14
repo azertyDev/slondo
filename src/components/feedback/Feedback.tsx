@@ -3,7 +3,7 @@ import {Grid, Typography} from '@material-ui/core';
 import {Form, FormikProvider, useFormik} from 'formik';
 import {filterInputSchema} from '@root/validation_schemas/filterInputSchema';
 import {FormikField} from '@src/components/elements/formik_field/FormikField';
-import {ButtonComponent} from '@src/components/elements/button/Button';
+import {CustomButton} from '@src/components/elements/custom_button/CustomButton';
 import {useTranslation} from 'react-i18next';
 import {useStyles} from './useStyles';
 
@@ -79,9 +79,9 @@ export const Feedback: FC = () => {
                                     type='file'
                                 />
                             </label>
-                            <ButtonComponent>
+                            <CustomButton>
                                 Отправить
-                            </ButtonComponent>
+                            </CustomButton>
                         </div>
                     </Form>
                 </FormikProvider>

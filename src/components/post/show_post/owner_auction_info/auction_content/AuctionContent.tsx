@@ -6,7 +6,7 @@ import {LockIcon, RefreshIcon} from '@src/components/elements/icons';
 import {AuctionTimer} from './AuctionTimer';
 import {numberPrettier} from '@root/src/helpers';
 import {AuctionForm} from './AuctionForm/AuctionForm';
-import {ButtonComponent} from '@src/components/elements/button/Button';
+import {CustomButton} from '@src/components/elements/custom_button/CustomButton';
 import {CustomModal} from '@src/components/elements/custom_modal/CustomModal';
 import {userAPI} from '@src/api/api';
 import {setErrorMsgAction} from '@src/redux/slices/errorSlice';
@@ -253,11 +253,11 @@ export const AuctionContent: FC<AuctionInfoPropsType> = (props) => {
                                         <Typography variant="subtitle1" color="initial">
                                             {numberPrettier(postData.auction.price_buy_now)} сум
                                         </Typography>
-                                        <ButtonComponent onClick={handleModalBuyNow(true)}>
+                                        <CustomButton onClick={handleModalBuyNow(true)}>
                                             <Typography variant="subtitle1" color="initial">
                                                 Купить сейчас
                                             </Typography>
-                                        </ButtonComponent>
+                                        </CustomButton>
                                     </div>
                                 </Hidden>
                                 <CustomModal handleModalClose={handleModalBuyNow(false)} openModal={openBuyNow}>
@@ -282,14 +282,14 @@ export const AuctionContent: FC<AuctionInfoPropsType> = (props) => {
                                             сайта
                                         </Typography>
                                         <div className='confirm'>
-                                            <ButtonComponent
+                                            <CustomButton
                                                 className='submit'
                                                 onClick={handleBuyNow}
                                             >
                                                 <Typography variant='subtitle1'>
                                                     Купить сейчас
                                                 </Typography>
-                                            </ButtonComponent>
+                                            </CustomButton>
                                         </div>
                                     </>
                                 </CustomModal>
@@ -303,18 +303,18 @@ export const AuctionContent: FC<AuctionInfoPropsType> = (props) => {
                                             item xs={isExAuc && hasBuyNow ? 6 : 12}
                                             className='suggest_price'
                                         >
-                                            <ButtonComponent onClick={handleModalOfferPrice(true)}>
+                                            <CustomButton onClick={handleModalOfferPrice(true)}>
                                                 <Typography variant="subtitle1" color="initial">
                                                     Предложить цену
                                                 </Typography>
-                                            </ButtonComponent>
+                                            </CustomButton>
                                         </Grid>
                                     )}
                                     {isExAuc && hasBuyNow && (
                                         <Grid item xs={6} className="btn-buy-now">
-                                            <ButtonComponent>
+                                            <CustomButton>
                                                 <Typography variant='subtitle2'>Купить сейчас</Typography>
-                                            </ButtonComponent>
+                                            </CustomButton>
                                         </Grid>
                                     )}
                                 </Grid>
@@ -322,11 +322,11 @@ export const AuctionContent: FC<AuctionInfoPropsType> = (props) => {
                             {hasOfferPrice && (
                                 <Hidden mdDown>
                                     <div className='suggest_price'>
-                                        <ButtonComponent onClick={handleModalOfferPrice(true)}>
+                                        <CustomButton onClick={handleModalOfferPrice(true)}>
                                             <Typography variant="subtitle1" color="initial">
                                                 Предложить цену
                                             </Typography>
-                                        </ButtonComponent>
+                                        </CustomButton>
                                     </div>
                                 </Hidden>
                             )}
@@ -344,9 +344,9 @@ export const AuctionContent: FC<AuctionInfoPropsType> = (props) => {
                                         placeholder='Впишите сумму'
                                         onChange={handleOfferPriceInput}
                                     />
-                                    <ButtonComponent onClick={handleOfferPrice}>
+                                    <CustomButton onClick={handleOfferPrice}>
                                         Предложить
-                                    </ButtonComponent>
+                                    </CustomButton>
                                 </div>
                             </CustomModal>
                         </div>

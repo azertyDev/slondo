@@ -44,9 +44,6 @@ export const CategoriesDropdown: FC<NestedDropdownPropsType> = (props) => {
         setSubCtgrs([]);
     };
 
-    console.log('subCtgrs', subCtgrs);
-    console.log('category', category);
-
     const classes = useStyles({open});
     return (
         <div className={classes.root}>
@@ -68,7 +65,7 @@ export const CategoriesDropdown: FC<NestedDropdownPropsType> = (props) => {
                     <div className='filters-wrapper'>
                         <List className='ctgrs'>
                             <Collapse in={open} timeout={0} unmountOnExit>
-                                {filters.map(item =>
+                                {filters.map(item => (
                                     <ListItem
                                         button
                                         key={item.id}
@@ -79,7 +76,7 @@ export const CategoriesDropdown: FC<NestedDropdownPropsType> = (props) => {
                                         <ListItemText primary={t(`categories:${item.name}`)}/>
                                         <ArrowRight/>
                                     </ListItem>
-                                )}
+                                ))}
                             </Collapse>
                         </List>
                         {!!subCtgrs.length && (

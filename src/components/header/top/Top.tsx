@@ -1,4 +1,7 @@
-import React, {FC, useState} from 'react';
+import {FC, useState} from 'react';
+import Link from 'next/link';
+import {WithT} from 'i18next';
+import {useRouter} from 'next/router';
 import {
     Grid,
     Hidden,
@@ -7,26 +10,29 @@ import {
     Toolbar,
     IconButton
 } from '@material-ui/core';
-import {TopHeaderPropsType} from '@src/components/header/top/TopContainer';
-import Link from 'next/link';
-import {useRouter} from 'next/router';
 import {LeftDrawer} from './drawer/Drawer';
 import {Localization} from './localization/Localization';
 import {
-    QuestionIcon,
-    LocationIcon,
-    SurpriseIcon,
     Logo,
+    QuestionIcon,
+    SurpriseIcon,
     SubstractIcon,
     UserAvatarIcon
 } from '@src/components/elements/icons';
+import {Location} from '@src/components/elements/location/Location';
 import {useStyles} from './useStyles';
 
 
+type TopHeaderPropsType = {
+    handleOpenModal: () => void;
+} & WithT;
+
 export const Top: FC<TopHeaderPropsType> = (props) => {
-    const [isOpen, setIsOpen] = useState(false);
     const {t, handleOpenModal} = props;
+
     const {pathname} = useRouter();
+
+    const [isOpen, setIsOpen] = useState(false);
 
     const classes = useStyles();
     return (
@@ -34,20 +40,15 @@ export const Top: FC<TopHeaderPropsType> = (props) => {
             <Grid container justify="space-between" alignItems="center">
                 <Hidden mdDown>
                     <Grid item md={6}>
-                        <div className="location">
-                            <LocationIcon/>
-                            <Typography variant="subtitle1">
-                                {t(`common:location`)}
-                            </Typography>
-                        </div>
+                        <Location t={t}/>
                     </Grid>
                     <Grid
                         item
+                        md={6}
                         container
                         alignItems="center"
                         justify="flex-end"
                         className='multiple-actions'
-                        md={6}
                     >
                         <Grid item md={2}>
                             <Link href="/promotions">
@@ -124,5 +125,5 @@ export const Top: FC<TopHeaderPropsType> = (props) => {
                 <LeftDrawer isOpen={isOpen} setIsOpen={setIsOpen}/>
             </Hidden>
         </div>
-    )
-}
+    );
+};

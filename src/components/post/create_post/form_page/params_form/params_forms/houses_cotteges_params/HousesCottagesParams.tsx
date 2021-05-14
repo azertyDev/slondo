@@ -5,15 +5,15 @@ import {DropDownSelect} from '@src/components/elements/drop_down_select/DropDown
 import {
     HandleOptionCheckboxType,
     OptionsSelect
-} from '@src/components/post/create_post/form_page/components/options_select/OptionsSelect';
+} from '@src/components/elements/options_select/OptionsSelect';
 import {PreviewValues} from '../../PreviewValues';
 import {FormikType} from '@root/interfaces/Formik';
 import {getErrorMsg} from '@src/helpers';
-import {useStyles} from './useStyles';
-import {DeployedSelect} from '@src/components/post/create_post/form_page/components/deployed_select/DeployedSelect';
+import {DeployedSelect} from '@src/components/elements/deployed_select/DeployedSelect';
 import {CheckboxSelect} from '@src/components/elements/checkbox_select/CheckboxSelect';
-import {NumberSelect} from '@src/components/post/create_post/form_page/components/number_select/NumberSelect';
+import {NumberSelect} from '@src/components/elements/number_select/NumberSelect';
 import {FormikField} from '@src/components/elements/formik_field/FormikField';
+import {useStyles} from './useStyles';
 
 
 type RegularFormPropsType = {
@@ -59,9 +59,7 @@ export const HousesCottagesParams: FC<RegularFormPropsType> = (props) => {
                          <Grid item container xs={4}>
                              <DeployedSelect
                                  t={t}
-                                 errors={errors}
-                                 touched={touched}
-                                 values={values}
+                                 formik={formik}
                                  name='estate_type'
                                  options={filters.estate_type}
                                  handleSelect={handleSelect}
@@ -70,9 +68,7 @@ export const HousesCottagesParams: FC<RegularFormPropsType> = (props) => {
                          <Grid item container xs={2}>
                              <DeployedSelect
                                  t={t}
-                                 errors={errors}
-                                 touched={touched}
-                                 values={values}
+                                 formik={formik}
                                  name='location'
                                  options={filters.location}
                                  handleSelect={handleSelect}

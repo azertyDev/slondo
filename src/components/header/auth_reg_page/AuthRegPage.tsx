@@ -11,7 +11,7 @@ import {
     TorgIcon
 } from '@src/components/elements/icons';
 import {AuthRegContainer} from '@src/components/header/auth_reg_page/auth_reg_form/AuthRegContainer';
-import {ButtonComponent} from '@src/components/elements/button/Button';
+import {CustomButton} from '@src/components/elements/custom_button/CustomButton';
 import {CustomSlider} from '@src/components/elements/custom_slider/CustomSlider';
 import {CustomList} from '@src/components/elements/custom_list/CustomList';
 import {useStyles} from './useStyles';
@@ -235,11 +235,11 @@ export const AuthRegPage: FC<AuthRegPageType> = (props) => {
                              </Typography>
                          </div>
                          <div className='auth-reg-btn'>
-                             <ButtonComponent onClick={authRegClickHandler(true)}>
+                             <CustomButton onClick={authRegClickHandler(true)}>
                                  <Typography>
                                      {t('signInAndReg')}
                                  </Typography>
-                             </ButtonComponent>
+                             </CustomButton>
                          </div>
                          <div className='slider-block'>
                              <CustomSlider {...settings}>

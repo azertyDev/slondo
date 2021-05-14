@@ -5,7 +5,7 @@ export const useStyles = makeStyles((theme) => ({
         color: (props) =>
             props.color === 'primary'
                 ? theme.palette.primary.createAdBtnColor
-                : theme.palette.primary.black,
+                : theme.palette.primary.white,
         padding: '12px',
         background: (props) =>
             props.color === 'primary'

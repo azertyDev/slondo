@@ -6,7 +6,7 @@ import {userAPI} from '@src/api/api';
 import {useDispatch} from 'react-redux';
 import {getErrorMsg, isRequired} from '@src/helpers';
 import {paramsFormSchema} from '@root/validation_schemas/createPostSchemas';
-import {CustomAccordion} from '@src/components/post/create_post/form_page/components/accordion/CustomAccordion';
+import {CustomAccordion} from '@src/components/elements/accordion/CustomAccordion';
 import {ParametersIcon} from '@src/components/elements/icons';
 import {FormikField} from '@src/components/elements/formik_field/FormikField';
 import {ApartmentsParams} from '@src/components/post/create_post/form_page/params_form/params_forms/apartments_params/ApartmentsParams';

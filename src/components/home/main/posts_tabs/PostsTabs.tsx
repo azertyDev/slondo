@@ -11,7 +11,7 @@ import {CustomTabPanel} from '@src/components/elements/custom_tab_panel/CustomTa
 import {CardData} from '@root/interfaces/CardData';
 import {useStyles} from './useStyles';
 import {CardView} from '@src/components/elements/card/card_view/CardView';
-import {ButtonComponent} from '@root/src/components/elements/button/Button';
+import {CustomButton} from '@src/components/elements/custom_button/CustomButton';
 
 
 type MainContentProps = {
@@ -83,11 +83,11 @@ export const PostsTabs: FC<MainContentProps> = (props) => {
                 <Grid item xs={12} className="show-more-block">
                     {postCardData.isShowMoreFetch || auctionCardData.isShowMoreFetch
                         ? <CircularProgress size={25}/>
-                        : <ButtonComponent onClick={handleShowMore}>
+                        : <CustomButton onClick={handleShowMore}>
                             <Typography variant="subtitle2" color="initial">
                                 {t('showMore')}
                             </Typography>
-                        </ButtonComponent>}
+                        </CustomButton>}
                 </Grid>
             </Grid>}
         </div>

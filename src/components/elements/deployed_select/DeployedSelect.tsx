@@ -1,5 +1,5 @@
 import {FC} from 'react';
-import {ButtonComponent} from '@src/components/elements/button/Button';
+import {CustomButton} from '@src/components/elements/custom_button/CustomButton';
 import {Typography} from '@material-ui/core';
 import {WithT} from 'i18next';
 import {isRequired} from '@src/helpers';
@@ -8,9 +8,7 @@ import {useStyles} from './useStyles';
 
 type SelectOptionsPropsType = {
     name: string,
-    values,
-    errors,
-    touched,
+    formik,
     handleSelect: (n, v) => void,
     options: any[]
 } & WithT;
@@ -19,12 +17,16 @@ export const DeployedSelect: FC<SelectOptionsPropsType> = (props) => {
     const {
         t,
         name,
-        values,
-        errors,
-        touched,
+        formik,
         handleSelect,
         options = []
     } = props;
+
+    const {
+        values,
+        errors,
+        touched
+    } = formik;
 
     const handleClick = (item) => () => {
         handleSelect(name, item);
@@ -41,13 +43,14 @@ export const DeployedSelect: FC<SelectOptionsPropsType> = (props) => {
             </Typography>
             <div className='options'>
                 {options.map(item =>
-                    <ButtonComponent
+                    <CustomButton
                         key={item.id}
                         onClick={handleClick(item)}
                         className={values[name]?.id === item.id ? 'selected' : ''}
                     >
                         {item.name}
-                    </ButtonComponent>)}
+                    </CustomButton>
+                )}
             </div>
             <Typography variant="subtitle1">
                 {errors[name] && touched[name] && (

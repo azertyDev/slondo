@@ -8,7 +8,7 @@ import {useDispatch} from 'react-redux';
 import {Avatar, Box, Grid, IconButton, List, ListItem, ListItemText, TextField, Typography} from '@material-ui/core';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import {useTranslation} from 'next-i18next';
-import {ButtonComponent} from '@src/components/elements/button/Button';
+import {CustomButton} from '@src/components/elements/custom_button/CustomButton';
 import {useStyles} from './useStyles';
 import {InitialCabinetCardState, initialUserStateType, TabsDataType} from '@root/interfaces/Cabinet';
 import {CabinetCard} from '@src/components/cabinet/cabinet_card/CabinetCard';
@@ -301,9 +301,9 @@ const MyPostsContainer: FC = () => {
                         mt={1}
                         width='100%'
                     >
-                        <ButtonComponent onClick={handleDeactivate} className={classes.submitBtn}>
+                        <CustomButton onClick={handleDeactivate} className={classes.submitBtn}>
                             <Typography variant='subtitle1'>Отправить</Typography>
-                        </ButtonComponent>
+                        </CustomButton>
                     </Box>
                 </>;
             case 5:
@@ -312,8 +312,8 @@ const MyPostsContainer: FC = () => {
                         Вы уверены что хотите <br/>добавить объявление в архив?
                     </Typography>
                     <Box display='flex' flexDirection='column'>
-                        <ButtonComponent onClick={handleDeactivate}>Да</ButtonComponent>
-                        <ButtonComponent onClick={handlePrevMenu}>Вернуться</ButtonComponent>
+                        <CustomButton onClick={handleDeactivate}>Да</CustomButton>
+                        <CustomButton onClick={handlePrevMenu}>Вернуться</CustomButton>
                     </Box>
                 </>;
         }

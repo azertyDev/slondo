@@ -5,14 +5,14 @@ import {DropDownSelect} from '@src/components/elements/drop_down_select/DropDown
 import {
     HandleOptionCheckboxType,
     OptionsSelect
-} from '@src/components/post/create_post/form_page/components/options_select/OptionsSelect';
+} from '@src/components/elements/options_select/OptionsSelect';
 import {PreviewValues} from '../../PreviewValues';
 import {FormikType} from '@root/interfaces/Formik';
 import {getErrorMsg} from '@src/helpers';
 import {useStyles} from './useStyles';
-import {DeployedSelect} from '@src/components/post/create_post/form_page/components/deployed_select/DeployedSelect';
+import {DeployedSelect} from '@src/components/elements/deployed_select/DeployedSelect';
 import {CheckboxSelect} from '@src/components/elements/checkbox_select/CheckboxSelect';
-import {NumberSelect} from '@src/components/post/create_post/form_page/components/number_select/NumberSelect';
+import {NumberSelect} from '@src/components/elements/number_select/NumberSelect';
 import {FormikField} from '@src/components/elements/formik_field/FormikField';
 
 
@@ -75,9 +75,7 @@ export const ApartmentsParams: FC<RegularFormPropsType> = (props) => {
                              <Grid item container xs={4} alignItems='center'>
                                  <DeployedSelect
                                      t={t}
-                                     values={values}
-                                     errors={errors}
-                                     touched={touched}
+                                     formik={formik}
                                      name='estate_type'
                                      handleSelect={handleSelect}
                                      options={filters.estate_type}

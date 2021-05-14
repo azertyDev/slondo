@@ -3,16 +3,6 @@ import {makeStyles} from '@material-ui/core/styles';
 
 export const useStyles = makeStyles((theme) => ({
     root: {
-        '& div.location': {
-            display: 'flex',
-            alignItems: 'center',
-            '& > h6.MuiTypography-subtitle1': {
-                textDecoration: 'underline',
-            },
-            '& > svg': {
-                marginRight: '12px',
-            },
-        },
         '& div.social-icons > a': {
             display: 'flex',
             alignItems: 'center',

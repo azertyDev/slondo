@@ -1,4 +1,4 @@
-import React, {FC, useEffect, useState} from 'react';
+import {FC, useEffect, useState} from 'react';
 import {TabsContent} from '@src/components/cabinet/cabinet_pages/TabsContent';
 import {Archive} from '@src/components/cabinet/cabinet_pages/archive/Archive';
 import {withAuthRedirect} from '@src/hoc/withAuthRedirect';
@@ -12,7 +12,7 @@ import {useStyles} from '@src/components/cabinet/cabinet_pages/archive/useStyles
 import {InitialCabinetCardState, TabsDataType} from '@root/interfaces/Cabinet';
 import {CabinetCard} from '@src/components/cabinet/cabinet_card/CabinetCard';
 import {SecondaryCabinetCard} from '@src/components/cabinet/components/SecondaryCabinetCard';
-import {ButtonComponent} from '@src/components/elements/button/Button';
+import {CustomButton} from '@src/components/elements/custom_button/CustomButton';
 
 const ArchiveContainer: FC = () => {
     const dispatch = useDispatch();
@@ -201,14 +201,14 @@ const ArchiveContainer: FC = () => {
                     />
                     {data.status !== 'sold' && (
                         <Box mt={1}>
-                            <ButtonComponent
+                            <CustomButton
                                 className={classes.submitBtn}
                                 onClick={handleOpenModal(data.id, 2)}
                             >
                                 <Typography variant='subtitle1'>
                                     Восстановить объявление
                                 </Typography>
-                            </ButtonComponent>
+                            </CustomButton>
                         </Box>
                     )}
                 </Grid>

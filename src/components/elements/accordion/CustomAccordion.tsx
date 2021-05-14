@@ -1,6 +1,6 @@
 import React, {FC} from "react";
 import {Accordion, AccordionDetails, AccordionSummary, Typography} from '@material-ui/core';
-import {ButtonComponent} from "@src/components/elements/button/Button";
+import {CustomButton} from "@src/components/elements/custom_button/CustomButton";
 import {useTranslation} from "next-i18next";
 import {useStyles} from './useStyles';
 
@@ -51,7 +51,7 @@ export const CustomAccordion: FC<AccordionComponentPropsType> = (props) => {
                     </div>
                     {!isPreview && (
                         <div className='next-button-wrapper'>
-                            <ButtonComponent
+                            <CustomButton
                                 type='submit'
                                 disabled={isFetch}
                                 className='nav-button'
@@ -59,7 +59,7 @@ export const CustomAccordion: FC<AccordionComponentPropsType> = (props) => {
                                 <Typography>
                                     {nextButtonTxt}
                                 </Typography>
-                            </ButtonComponent>
+                            </CustomButton>
                         </div>
                     )}
                 </AccordionDetails>

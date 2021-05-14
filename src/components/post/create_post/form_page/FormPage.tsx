@@ -11,7 +11,7 @@ import {AppearanceForm} from './appearance_form/AppearanceForm';
 import {CommonForm} from './common_form/CommonForm';
 import {setErrorMsgAction} from '@root/src/redux/slices/errorSlice';
 import {dataForCrtPostNormalize, getCategoriesByParams, CategoriesParamsType} from '@src/helpers';
-import {ButtonComponent} from '@src/components/elements/button/Button';
+import {CustomButton} from '@src/components/elements/custom_button/CustomButton';
 import {SuccessPage} from '@src/components/post/create_post/form_page/success_page/SuccessPage';
 import {ParamsFormContainer} from './params_form/ParamsFormContainer';
 import {RootState} from '@src/redux/rootReducer';
@@ -226,11 +226,11 @@ export const FormPage: FC = () => {
                      </div>
                      {isPreview && (
                          <div className='publish-button-wrapper'>
-                             <ButtonComponent disabled={post.isFetch} onClick={toPublish}>
+                             <CustomButton disabled={post.isFetch} onClick={toPublish}>
                                  <Typography variant='subtitle1'>
                                      {t('publish')}
                                  </Typography>
-                             </ButtonComponent>
+                             </CustomButton>
                          </div>
                      )}
                  </div>

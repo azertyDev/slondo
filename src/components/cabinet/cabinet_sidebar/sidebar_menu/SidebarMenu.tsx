@@ -3,7 +3,7 @@ import {Typography} from '@material-ui/core';
 import {useRouter} from 'next/router';
 import {WithT} from "i18next";
 import {cookies} from '@src/helpers';
-import {ButtonComponent} from '@src/components/elements/button/Button';
+import {CustomButton} from '@src/components/elements/custom_button/CustomButton';
 import {CustomBadge} from '@src/components/elements/custom_budge/CustomBadge';
 import {NotesIcon} from '@src/components/elements/icons/NotesIcon';
 import {GavelIcon} from '@src/components/elements/icons/GavelIcon';
@@ -44,19 +44,19 @@ export const SidebarMenu: FC<WithT> = ({t}) => {
             <div className="menu-item">
                 <div>
                     <CustomBadge badgeContent={2} style={{width: '100%'}}>
-                        <ButtonComponent
+                        <CustomButton
                             className={pathname === '/cabinet/not-moderated' ? 'selected' : ''}
                         >
                             <Typography variant="subtitle1">
                                 {t('cabinet:nonModerated')}
                             </Typography>
-                        </ButtonComponent>
+                        </CustomButton>
                     </CustomBadge>
                 </div>
             </div>
             <div className="menu-item">
                 <div>
-                    <ButtonComponent
+                    <CustomButton
                         className={pathname === '/cabinet/posts' ? 'selected' : ''}
                         onClick={onButtonClick('posts')}
                     >
@@ -64,10 +64,10 @@ export const SidebarMenu: FC<WithT> = ({t}) => {
                         <Typography variant="subtitle1">
                             {t('cabinet:myPosts')}
                         </Typography>
-                    </ButtonComponent>
+                    </CustomButton>
                 </div>
                 <div>
-                    <ButtonComponent
+                    <CustomButton
                         className={pathname === '/cabinet/auctions' ? 'selected' : ''}
                         onClick={onButtonClick('auctions')}
                     >
@@ -75,10 +75,10 @@ export const SidebarMenu: FC<WithT> = ({t}) => {
                         <Typography variant="subtitle1">
                             {t('cabinet:myAuctions')}
                         </Typography>
-                    </ButtonComponent>
+                    </CustomButton>
                 </div>
                 <div>
-                    <ButtonComponent
+                    <CustomButton
                         className={pathname === '/cabinet/favorite' ? 'selected' : ''}
                         onClick={onButtonClick('favorite')}
                     >
@@ -86,11 +86,11 @@ export const SidebarMenu: FC<WithT> = ({t}) => {
                         <Typography variant="subtitle1">
                             {t('cabinet:favorite')}
                         </Typography>
-                    </ButtonComponent>
+                    </CustomButton>
                 </div>
                 <div>
                     <CustomBadge badgeContent={4}>
-                        <ButtonComponent
+                        <CustomButton
                             className={pathname === '/cabinet/purchases' ? 'selected' : ''}
                             onClick={onButtonClick('purchases')}
                         >
@@ -98,9 +98,9 @@ export const SidebarMenu: FC<WithT> = ({t}) => {
                             <Typography variant="subtitle1">
                                 {t('cabinet:myPurchases')}
                             </Typography>
-                        </ButtonComponent>
+                        </CustomButton>
                     </CustomBadge>
-                    <ButtonComponent
+                    <CustomButton
                         className={pathname === '/cabinet/archive' ? 'selected' : ''}
                         onClick={onButtonClick('archive')}
                     >
@@ -108,13 +108,13 @@ export const SidebarMenu: FC<WithT> = ({t}) => {
                         <Typography variant="subtitle1">
                             {t('cabinet:archive')}
                         </Typography>
-                    </ButtonComponent>
+                    </CustomButton>
                 </div>
             </div>
             <div className="menu-item">
                 <div>
                     <CustomBadge badgeContent={4}>
-                        <ButtonComponent
+                        <CustomButton
                             className={pathname === '/cabinet/notifications' ? 'selected' : ''}
                             onClick={onButtonClick('notifications')}
                         >
@@ -122,10 +122,10 @@ export const SidebarMenu: FC<WithT> = ({t}) => {
                             <Typography variant="subtitle1">
                                 {t('cabinet:notifications')}
                             </Typography>
-                        </ButtonComponent>
+                        </CustomButton>
                     </CustomBadge>
                     <CustomBadge badgeContent={8}>
-                        <ButtonComponent
+                        <CustomButton
                             className={pathname === '/cabinet/messages' ? 'selected' : ''}
                             onClick={onButtonClick('messages')}
                         >
@@ -133,13 +133,13 @@ export const SidebarMenu: FC<WithT> = ({t}) => {
                             <Typography variant="subtitle1">
                                 {t('cabinet:messages')}
                             </Typography>
-                        </ButtonComponent>
+                        </CustomButton>
                     </CustomBadge>
                 </div>
             </div>
             <div className="menu-item">
                 <div>
-                    <ButtonComponent
+                    <CustomButton
                         className={pathname === '/cabinet/safetyDeal' ? 'selected' : ''}
                         onClick={onButtonClick('safetyDeal')}
                     >
@@ -147,22 +147,22 @@ export const SidebarMenu: FC<WithT> = ({t}) => {
                         <Typography variant="subtitle1">
                             {t('cabinet:safeShopping')}
                         </Typography>
-                    </ButtonComponent>
+                    </CustomButton>
                 </div>
             </div>
             <div className="menu-item">
                 <div>
-                    <ButtonComponent
+                    <CustomButton
                         className={pathname === '/cabinet/paidServices' ? 'selected' : ''}
                     >
                         <WalletIcon/>
                         <Typography variant="subtitle1">
                             {t('cabinet:paidServices')}
                         </Typography>
-                    </ButtonComponent>
+                    </CustomButton>
                 </div>
                 <div>
-                    <ButtonComponent
+                    <CustomButton
                         className={pathname === '/cabinet/statistics' ? 'selected' : ''}
                         disabled
                     >
@@ -170,8 +170,8 @@ export const SidebarMenu: FC<WithT> = ({t}) => {
                         <Typography variant="subtitle1">
                             {t('cabinet:statistics')}
                         </Typography>
-                    </ButtonComponent>
-                    <ButtonComponent
+                    </CustomButton>
+                    <CustomButton
                         className={pathname === '/cabinet/rating' ? 'selected' : ''}
                         onClick={onButtonClick('rating')}
                     >
@@ -179,12 +179,12 @@ export const SidebarMenu: FC<WithT> = ({t}) => {
                         <Typography variant="subtitle1">
                             {t('cabinet:rating')}
                         </Typography>
-                    </ButtonComponent>
+                    </CustomButton>
                 </div>
             </div>
             <div className="menu-item">
                 <div>
-                    <ButtonComponent
+                    <CustomButton
                         className={pathname === '/cabinet/settings' ? 'selected' : ''}
                         onClick={onButtonClick('settings')}
                     >
@@ -192,8 +192,8 @@ export const SidebarMenu: FC<WithT> = ({t}) => {
                         <Typography variant="subtitle1">
                             {t('cabinet:settings')}
                         </Typography>
-                    </ButtonComponent>
-                    <ButtonComponent
+                    </CustomButton>
+                    <CustomButton
                         className={pathname === '/cabinet/exit' ? 'selected' : ''}
                         onClick={signOut}
                     >
@@ -201,7 +201,7 @@ export const SidebarMenu: FC<WithT> = ({t}) => {
                         <Typography variant="subtitle1">
                             {t('cabinet:exit')}
                         </Typography>
-                    </ButtonComponent>
+                    </CustomButton>
                 </div>
             </div>
         </div>

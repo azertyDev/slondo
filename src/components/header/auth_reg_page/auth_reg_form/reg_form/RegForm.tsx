@@ -4,7 +4,7 @@ import {userAPI} from '@src/api/api';
 import {Form, FormikProvider, useFormik} from 'formik';
 import {FormikField} from '@src/components/elements/formik_field/FormikField';
 import {phoneSchema} from '@root/validation_schemas/authRegSchema';
-import {ButtonComponent} from '@src/components/elements/button/Button';
+import {CustomButton} from '@src/components/elements/custom_button/CustomButton';
 import {getErrorMsg, phonePrepare} from '@src/helpers';
 
 
@@ -66,9 +66,9 @@ export const RegForm: FC<RegFormPropsType> = (props) => {
                     errorMsg={getErrorMsg(errors.phone, touched.phone, t)}
                 />
                 <div className='auth-btns'>
-                    <ButtonComponent type="submit">
+                    <CustomButton type="submit">
                         {t('signUp')}
-                    </ButtonComponent>
+                    </CustomButton>
                 </div>
             </Form>
         </FormikProvider>

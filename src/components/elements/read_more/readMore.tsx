@@ -1,6 +1,6 @@
 import React, {FC, useState} from "react";
 import {Typography, useMediaQuery, useTheme} from "@material-ui/core";
-import {ButtonComponent} from "@src/components/elements/button/Button";
+import {CustomButton} from "@src/components/elements/custom_button/CustomButton";
 import {WithT} from "i18next";
 import {useStyles} from './useStyles';
 
@@ -17,7 +17,7 @@ export const ReadMore: FC<any & WithT> = ({t, descHeight, children}) => {
         <div className={classes.root}>
             <div className={isHidden ? classes.hidden : ''}>{children}</div>
             {descHeight >= heightLimit && (
-                <ButtonComponent
+                <CustomButton
                     disableRipple
                     onClick={() => setIsHidden(!isHidden)}
                     className='show-more-button'
@@ -37,7 +37,7 @@ export const ReadMore: FC<any & WithT> = ({t, descHeight, children}) => {
                                 <path d="M13 6H0L6.5 0L13 6Z" fill="#675EAA"/>
                             </svg>
                         </Typography>}
-                </ButtonComponent>
+                </CustomButton>
             )}
         </div>
     );

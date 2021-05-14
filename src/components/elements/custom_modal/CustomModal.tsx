@@ -1,4 +1,4 @@
-import React, {FC} from 'react';
+import {FC} from 'react';
 import {Backdrop, Fade, IconButton, Modal} from '@material-ui/core';
 import {CloseIcon} from '@src/components/elements/icons';
 import {useStyles} from './useStyles';
@@ -22,14 +22,12 @@ export const CustomModal: FC<ModalPropsType> = (props) => {
             <Modal
                 aria-labelledby="transition-modal-title"
                 aria-describedby="transition-modal-description"
-                className={classes.modal}
-                open={openModal}
-                onClose={handleModalClose}
                 closeAfterTransition
+                open={openModal}
+                className={classes.modal}
+                onClose={handleModalClose}
                 BackdropComponent={Backdrop}
-                BackdropProps={{
-                    timeout: 300
-                }}
+                BackdropProps={{timeout: 300}}
             >
                 <Fade in={openModal}>
                     <div className={classes.paper}>
@@ -37,12 +35,12 @@ export const CustomModal: FC<ModalPropsType> = (props) => {
                             onClick={handleModalClose}
                             className={classes.closeBtn}
                         >
-                            <CloseIcon />
+                            <CloseIcon/>
                         </IconButton>
                         {children}
                     </div>
                 </Fade>
             </Modal>
         </>
-    )
-}
+    );
+};

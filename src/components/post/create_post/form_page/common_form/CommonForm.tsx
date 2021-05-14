@@ -9,7 +9,7 @@ import {Contacts} from './contacts/Contacts';
 import {AvailableDays} from './available_days/AvailableDays';
 import {numberRegEx, timeRegEx} from '@src/common_data/reg_exs';
 import {FormikProvider, useFormik} from 'formik';
-import {CustomAccordion} from '@src/components/post/create_post/form_page/components/accordion/CustomAccordion';
+import {CustomAccordion} from '@src/components/elements/accordion/CustomAccordion';
 import {numericFields} from '@src/common_data/form_fields';
 import {auctionParamsSchema, defaultParamsSchema} from '@root/validation_schemas/createPostSchemas';
 import {clearWhiteSpaces, getErrorMsg, numberPrettier, phonePrepare} from '@src/helpers';

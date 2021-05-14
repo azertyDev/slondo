@@ -41,8 +41,8 @@ export const CustomDrawer: FC<any> = ({toggleDrawer, position}) => {
             <List>
                 {addParentsToCtgrs(categories_list).map((ctgr) =>
                     <ListItem
-                        key={ctgr.id}
                         button
+                        key={ctgr.id}
                         disableGutters
                         onMouseEnter={handleCategory(ctgr)}
                     >

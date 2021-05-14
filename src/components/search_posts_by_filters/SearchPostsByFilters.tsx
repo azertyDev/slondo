@@ -50,7 +50,10 @@ export const SearchPostsByFilters: FC<SearchContainerPropsType> = (props) => {
     const initValues: any = {
         category: subCtgr ?? ctgr,
         type: typeCtgr ?? '',
-        filter: {}
+        price: {
+            from: '',
+            to: ''
+        }
     };
 
     const [posts, setPosts] = useState([]);
@@ -93,6 +96,17 @@ export const SearchPostsByFilters: FC<SearchContainerPropsType> = (props) => {
         }
     };
 
+    const handleInput = ({target}) => {
+        const {name, value} = target;
+        if (name === 'price_from') {
+            setValues({...values, price: {...values.price, from: value}});
+        } else if (name === 'price_to') {
+            setValues({...values, price: {...values.price, to: value}});
+        } else {
+            setValues({...values, [name]: value});
+        }
+    };
+
     // useEffect(() => {
     //     getPostsByFilters();
     // }, []);
@@ -101,9 +115,9 @@ export const SearchPostsByFilters: FC<SearchContainerPropsType> = (props) => {
         setValues(initValues);
     }, [ctgr, subCtgr, typeCtgr]);
 
-    console.log('posts', posts);
-    console.log('values', values);
-    console.log('filters', filters);
+    // console.log('posts', posts);
+    // console.log('values', values);
+    // console.log('filters', filters);
 
     const classes = useStyles();
     return (
@@ -118,6 +132,7 @@ export const SearchPostsByFilters: FC<SearchContainerPropsType> = (props) => {
                             t={t}
                             formik={formik}
                             filters={filters}
+                            handleInput={handleInput}
                             handleSelect={handleSelect}
                         />
                         <SearchResult resultList={[]}/>

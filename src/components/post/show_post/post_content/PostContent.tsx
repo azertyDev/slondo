@@ -25,7 +25,7 @@ import {SyncSliders} from './sync_sliders/SyncSliders';
 import {ModalSyncSliders} from './modal_sync_sliders/ModalSyncSliders';
 import {BreadcrumbsComponent} from '@src/components/elements/breadcrumbs/Breadcrumbs';
 import {numberPrettier, weekDaysHelper} from '@src/helpers';
-import {ButtonComponent} from '@src/components/elements/button/Button';
+import {CustomButton} from '@src/components/elements/custom_button/CustomButton';
 import {RenewalIcon} from '@src/components/elements/icons';
 import {months} from '@src/common_data/common';
 import {AuctionContent} from '@src/components/post/show_post/owner_auction_info/auction_content/AuctionContent';
@@ -311,12 +311,12 @@ export const PostContent: FC<PostContentTypes> = (props) => {
                 </div>
                 <Hidden lgUp>
                     <div className="contact">
-                        <ButtonComponent>
+                        <CustomButton>
                             <Typography variant='subtitle1'>Позвонить</Typography>
-                        </ButtonComponent>
-                        <ButtonComponent>
+                        </CustomButton>
+                        <CustomButton>
                             <Typography variant='subtitle1'>Написать</Typography>
-                        </ButtonComponent>
+                        </CustomButton>
                     </div>
                     {isAuction && (
                         <AuctionContent
@@ -417,9 +417,9 @@ export const PostContent: FC<PostContentTypes> = (props) => {
                                 </Typography>
                             </Hidden>
                         </div>
-                        <ButtonComponent className="btn-report" onClick={handleComplaintModal(true)}>
+                        <CustomButton className="btn-report" onClick={handleComplaintModal(true)}>
                             Пожаловаться
-                        </ButtonComponent>
+                        </CustomButton>
                     </div>
                 </Hidden>
                 <ModalSyncSliders
@@ -469,11 +469,11 @@ export const PostContent: FC<PostContentTypes> = (props) => {
                             variant="outlined"
                         />
                     </div>
-                    <ButtonComponent>
+                    <CustomButton>
                         <Typography variant='subtitle1'>
                             Отправить
                         </Typography>
-                    </ButtonComponent>
+                    </CustomButton>
                 </div>
             </Modal>
         </div>

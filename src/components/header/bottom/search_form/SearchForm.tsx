@@ -1,19 +1,13 @@
-import {FC, useState} from 'react';
-import {Hidden, NativeSelect, Typography} from '@material-ui/core';
+import {FC} from 'react';
+import {Hidden, Typography} from '@material-ui/core';
 import {FilterIcon, Search_icon} from '@src/components/elements/icons';
-import {ButtonComponent} from '../../../elements/button/Button';
+import {CustomButton} from '@src/components/elements/custom_button/CustomButton';
 import {useTranslation} from 'next-i18next';
 import {useStyles} from './useStyles';
 
 
 export const SearchForm: FC = () => {
-    const {t} = useTranslation(['header']);
-
-    const [postType, setPostType] = useState(1);
-
-    const handleSelect = ({target}) => {
-        setPostType(target.value);
-    };
+    const {t} = useTranslation('common');
 
     const classes = useStyles();
     return (
@@ -24,22 +18,12 @@ export const SearchForm: FC = () => {
                 className="search-input"
                 placeholder={t('searchText')}
             />
-            <NativeSelect
-                value={postType}
-                onChange={handleSelect}
-                className="select-type"
-                disableUnderline
-            >
-                <option value={1}>Все объявления</option>
-                <option value={2}>Объявления</option>
-                <option value={3}>Аукционы</option>
-            </NativeSelect>
             <Hidden smDown>
-                <ButtonComponent className="search-button">
+                <CustomButton className="search-button">
                     <Typography variant="subtitle2">
                         {t('searchBtn')}
                     </Typography>
-                </ButtonComponent>
+                </CustomButton>
             </Hidden>
             <Hidden mdUp>
                 <FilterIcon/>

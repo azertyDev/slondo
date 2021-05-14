@@ -5,7 +5,7 @@ import { RootState } from '@src/redux/rootReducer';
 import { resetErrorAction } from '@src/redux/slices/errorSlice';
 import { useStyles } from './useStyles';
 import { CloseIcon } from '@src/components/elements/icons';
-import { ButtonComponent } from '../elements/button/Button';
+import { CustomButton } from '../elements/custom_button/CustomButton';
 
 export const ErrorModal: FC = () => {
     const { isError, errorMsg } = useSelector(
@@ -34,11 +34,11 @@ export const ErrorModal: FC = () => {
                     Свяжитесь с <span>службой поддержки</span> если у вас есть
                     вопросы
                 </Typography>
-                <ButtonComponent onClick={onClose}>
+                <CustomButton onClick={onClose}>
                     <Typography variant="subtitle1" color="initial">
                         Ок
                     </Typography>
-                </ButtonComponent>
+                </CustomButton>
             </div>
         </Modal>
     );

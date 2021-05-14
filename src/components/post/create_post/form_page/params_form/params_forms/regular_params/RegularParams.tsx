@@ -4,7 +4,7 @@ import {Grid, Typography} from '@material-ui/core';
 import {excludeFields, optionFields} from '@src/common_data/form_fields';
 import {DropDownSelect} from '@src/components/elements/drop_down_select/DropDownSelect';
 import {getErrorMsg} from '@src/helpers';
-import {OptionsSelect} from '@src/components/post/create_post/form_page/components/options_select/OptionsSelect';
+import {OptionsSelect} from '@src/components/elements/options_select/OptionsSelect';
 import {useStyles} from './useStyles';
 
 

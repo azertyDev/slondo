@@ -5,7 +5,7 @@ import {DropDownSelect} from '@src/components/elements/drop_down_select/DropDown
 import {
     HandleOptionCheckboxType,
     OptionsSelect
-} from '@src/components/post/create_post/form_page/components/options_select/OptionsSelect';
+} from '@src/components/elements/options_select/OptionsSelect';
 import {PreviewValues} from '../../PreviewValues';
 import {FormikType} from '@root/interfaces/Formik';
 import {getErrorMsg} from '@src/helpers';

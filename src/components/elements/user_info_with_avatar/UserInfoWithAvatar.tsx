@@ -4,7 +4,7 @@ import {Rating} from '@src/components/elements/rating/Rating';
 import {UserAvatarComponent} from '@src/components/elements/user_info_with_avatar/avatar/UserAvatarComponent';
 import {useTranslation} from 'react-i18next';
 import {UserInfo} from '@root/interfaces/Auth';
-import {ButtonComponent} from '@src/components/elements/button/Button';
+import {CustomButton} from '@src/components/elements/custom_button/CustomButton';
 import {useStyles} from './useStyles';
 
 type UserInfoWithAvatarPropsType = {
@@ -43,11 +43,11 @@ export const UserInfoWithAvatar: FC<UserInfoWithAvatarPropsType> = (props) => {
                     </Typography>
                     <Rating card={false}/>
                     {!isOwner && (
-                        <ButtonComponent onClick={handleFollow(owner.id)}>
+                        <CustomButton onClick={handleFollow(owner.id)}>
                             <Typography variant="subtitle2">
                                 {!subscribed ? 'Подписаться' : 'Отписаться'}
                             </Typography>
-                        </ButtonComponent>
+                        </CustomButton>
                     )}
                 </div>
             </div>

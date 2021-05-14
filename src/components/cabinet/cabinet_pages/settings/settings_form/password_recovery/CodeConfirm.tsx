@@ -3,7 +3,7 @@ import {WithT} from 'i18next';
 import {Form, FormikProvider, useFormik} from 'formik';
 import {FormikField} from '@src/components/elements/formik_field/FormikField';
 import {codeSchema} from '@root/validation_schemas/authRegSchema';
-import {ButtonComponent} from '@src/components/elements/button/Button';
+import {CustomButton} from '@src/components/elements/custom_button/CustomButton';
 import {userAPI} from '@src/api/api';
 import {getErrorMsg} from '@src/helpers';
 import {Typography} from '@material-ui/core';
@@ -89,9 +89,9 @@ export const CodeConfirm: FC<CodeConfirmPropsType> = (props) => {
                     <span>{timer}</span>
                 </div>
                 <div className='auth-btns'>
-                    <ButtonComponent type="submit" disabled={isSubmitting}>
+                    <CustomButton type="submit" disabled={isSubmitting}>
                         Далее
-                    </ButtonComponent>
+                    </CustomButton>
                 </div>
             </Form>
         </FormikProvider>

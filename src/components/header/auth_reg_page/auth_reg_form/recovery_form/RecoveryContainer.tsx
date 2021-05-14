@@ -1,6 +1,6 @@
 import React, {Dispatch, FC, SetStateAction, useState} from 'react';
 import {WithT} from "i18next";
-import {ButtonComponent} from "@src/components/elements/button/Button";
+import {CustomButton} from "@src/components/elements/custom_button/CustomButton";
 import {PasswordConfirmForm} from "@src/components/header/auth_reg_page/auth_reg_form/recovery_form/PasswordConfirmForm";
 import {CodeConfirmForm} from "@src/components/header/auth_reg_page/auth_reg_form/recovery_form/CodeConfirmForm";
 import {PhoneForm} from "@src/components/header/auth_reg_page/auth_reg_form/recovery_form/PhoneForm";
@@ -72,9 +72,9 @@ export const RecoveryContainer: FC<ConfirmAuthPropsType> = (props) => {
                         />
                     </div>}
             <div className='auth-btns'>
-                <ButtonComponent onClick={handleCancel}>
+                <CustomButton onClick={handleCancel}>
                     {t('common:cancel')}
-                </ButtonComponent>
+                </CustomButton>
             </div>
         </div>
     )

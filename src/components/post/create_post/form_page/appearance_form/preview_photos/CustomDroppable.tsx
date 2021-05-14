@@ -1,7 +1,7 @@
 import React, {FC, Fragment} from "react";
 import {Grid} from "@material-ui/core";
 import {Draggable, Droppable} from "react-beautiful-dnd";
-import {ButtonComponent} from "@src/components/elements/button/Button";
+import {CustomButton} from "@src/components/elements/custom_button/CustomButton";
 import {FileType} from "@root/interfaces/Post";
 
 
@@ -58,9 +58,9 @@ export const CustomDroppable: FC<CustomDroppableProps> = (props) => {
                                                 }}
                                                 alt={file.name}
                                             />
-                                            <ButtonComponent
+                                            <CustomButton
                                                 onClick={removeFile(url)}
-                                            >X</ButtonComponent>
+                                            >X</CustomButton>
                                         </Grid>
                                     }
                                 </Draggable>

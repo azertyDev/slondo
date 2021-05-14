@@ -4,7 +4,7 @@ import Grid from '@material-ui/core/Grid';
 import {FormikProvider, useFormik} from 'formik';
 import {getErrorMsg, numberPrettier} from '@src/helpers';
 import {Typography, useMediaQuery, useTheme} from '@material-ui/core';
-import {ButtonComponent} from '@src/components/elements/button/Button';
+import {CustomButton} from '@src/components/elements/custom_button/CustomButton';
 import {getAuctionSchema} from '@root/validation_schemas/auctionSchema';
 import {numberRegEx, whiteSpacesRegEx} from '@src/common_data/reg_exs';
 import {FormikField} from '@src/components/elements/formik_field/FormikField';
@@ -65,7 +65,7 @@ export const AuctionForm: FC<AuctionFromPropsType> = (props) => {
                                 />
                             </Grid>
                             <Grid item xs={isMdDown ? 5 : 12}>
-                                <ButtonComponent
+                                <CustomButton
                                     type="submit"
                                     color="secondary"
                                     className="btn-bet"
@@ -74,7 +74,7 @@ export const AuctionForm: FC<AuctionFromPropsType> = (props) => {
                                     <Typography variant="subtitle1" color="initial">
                                         Сделать ставку
                                     </Typography>
-                                </ButtonComponent>
+                                </CustomButton>
                             </Grid>
                         </Grid>
                         <div className="max-bet">

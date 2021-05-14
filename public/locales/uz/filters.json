@@ -1,6 +1,12 @@
 {
+  "cost": "Narxi",
+  "post_type": "E'lon turi",
+  "from": "Dan",
+  "to": "Gacha",
+  "apply": "Qabul qilish",
+  "reset": "Qaytarish",
   "view": "Turi",
-  "car_view": "Y'oritkichlar",
+  "car_view": "Yoritkichlar",
   "headlight": "Chiroqlar",
   "anti_theft": "O'g'rilikka qarshi tizim",
   "assistance": "Yordamchi",

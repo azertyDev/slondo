@@ -5,7 +5,7 @@ import Paper from "@material-ui/core/Paper";
 import Popper from "@material-ui/core/Popper";
 import MenuItem from "@material-ui/core/MenuItem";
 import MenuList from "@material-ui/core/MenuList";
-import {ButtonComponent} from "@src/components/elements/button/Button";
+import {CustomButton} from "@src/components/elements/custom_button/CustomButton";
 import {useStyles} from './useStyles'
 
 
@@ -46,14 +46,14 @@ export const MenuComponent = () => {
     return (
         <div className={classes.root}>
             <div>
-                <ButtonComponent
+                <CustomButton
                     ref={anchorRef}
                     aria-controls={open ? "menu-list-grow" : undefined}
                     aria-haspopup="true"
                     onClick={handleToggle}
                 >
                     Toggle Menu Grow
-                </ButtonComponent>
+                </CustomButton>
                 <Popper
                     open={open}
                     anchorEl={anchorRef.current}

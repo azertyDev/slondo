@@ -2,7 +2,7 @@ import {FC, useEffect} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import {Container} from '@material-ui/core';
 import {useTranslation} from 'next-i18next';
-import Top from './top/TopContainer';
+import {Top} from './top/Top';
 import Bottom from './bottom/Bottom';
 import {AuthRegPage} from './auth_reg_page/AuthRegPage';
 import {setIsAuthModalOpen, signInAction} from '@src/redux/slices/userSlice';

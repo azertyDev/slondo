@@ -2,7 +2,7 @@ import React, {FC, useState} from "react";
 import {WithT} from "i18next";
 import {FormikTouched} from "formik";
 import {Menu, MenuItem, Typography} from "@material-ui/core";
-import {ButtonComponent} from "@src/components/elements/button/Button";
+import {CustomButton} from "@src/components/elements/custom_button/CustomButton";
 
 
 type CustomMenuProps = {
@@ -52,7 +52,7 @@ export const CustomMenu: FC<CustomMenuProps & WithT> = (props) => {
 
     return (
         <div className={props.className}>
-            <ButtonComponent
+            <CustomButton
                 name={name}
                 // onBlur={onBlur}
                 onClick={handleMenuOpen}
@@ -65,7 +65,7 @@ export const CustomMenu: FC<CustomMenuProps & WithT> = (props) => {
                 <Typography style={{color: '#4e4e4e'}}>
                     {isCurrency ? t(`common:${valueName}`) : t(valueName)}
                 </Typography>
-            </ButtonComponent>
+            </CustomButton>
             <Menu
                 anchorEl={anchor}
                 open={Boolean(anchor)}

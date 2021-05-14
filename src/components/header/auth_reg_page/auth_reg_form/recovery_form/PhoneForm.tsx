@@ -3,7 +3,7 @@ import {WithT} from "i18next";
 import {Form, FormikProvider, useFormik} from "formik";
 import {FormikField} from "@src/components/elements/formik_field/FormikField";
 import {phoneSchema} from '@root/validation_schemas/authRegSchema';
-import {ButtonComponent} from "@src/components/elements/button/Button";
+import {CustomButton} from "@src/components/elements/custom_button/CustomButton";
 import {userAPI} from "@src/api/api";
 import {getErrorMsg, phonePrepare} from '@src/helpers';
 
@@ -72,9 +72,9 @@ export const PhoneForm: FC<ConfirmAuthPropsType> = (props) => {
                     errorMsg={getErrorMsg(errors.phone, touched.phone, t)}
                 />
                 <div className='auth-btns'>
-                    <ButtonComponent type="submit" disabled={values.isFetch}>
+                    <CustomButton type="submit" disabled={values.isFetch}>
                         {t('recoverPassword')}
-                    </ButtonComponent>
+                    </CustomButton>
                 </div>
             </Form>
         </FormikProvider>

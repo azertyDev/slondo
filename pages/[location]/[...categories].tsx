@@ -1,8 +1,8 @@
 import {FC} from 'react';
-import {SearchPostsByFilters} from '@src/components/search_posts_by_filters/SearchPostsByFilters';
-import {GetStaticPaths, GetStaticProps} from 'next';
-import {serverSideTranslations} from 'next-i18next/serverSideTranslations';
 import {useRouter} from 'next/router';
+import {GetStaticPaths, GetStaticProps} from 'next';
+import {SearchPostsByFilters} from '@src/components/search_posts_by_filters/SearchPostsByFilters';
+import {serverSideTranslations} from 'next-i18next/serverSideTranslations';
 import {getCtgrsByCyrillicNames} from '@src/helpers';
 import {PageNotFound} from '@src/components/page_not_found/PageNotFound';
 

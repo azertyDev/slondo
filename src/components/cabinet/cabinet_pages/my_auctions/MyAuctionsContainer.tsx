@@ -11,7 +11,7 @@ import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import {CardDataType, InitialCabinetCardState, OffersStateType, TabsDataType} from '@root/interfaces/Cabinet.js';
 import {useStyles} from './useStyles';
 import {UserInfoWithAvatar} from '@src/components/elements/user_info_with_avatar/UserInfoWithAvatar';
-import {ButtonComponent} from '@src/components/elements/button/Button';
+import {CustomButton} from '@src/components/elements/custom_button/CustomButton';
 import {CloseIcon, DoneAllIcon} from '@src/components/elements/icons';
 import {CabinetCard} from '@src/components/cabinet/cabinet_card/CabinetCard';
 import {SecondaryCabinetCard} from '@src/components/cabinet/components/SecondaryCabinetCard';
@@ -387,7 +387,7 @@ export const MyAuctionsContainer: FC = () => {
                                             {offer.price}
                                         </div>
                                         <div>
-                                            <ButtonComponent
+                                            <CustomButton
                                                 className='accept'
                                                 onClick={acceptOfferThePrice(offer.id, true)}
                                             >
@@ -398,8 +398,8 @@ export const MyAuctionsContainer: FC = () => {
                                                 >
                                                     Принять
                                                 </Typography>
-                                            </ButtonComponent>
-                                            <ButtonComponent
+                                            </CustomButton>
+                                            <CustomButton
                                                 className='decline'
                                                 onClick={acceptOfferThePrice(offer.id, false)}
                                             >
@@ -410,7 +410,7 @@ export const MyAuctionsContainer: FC = () => {
                                                 >
                                                     Отказать
                                                 </Typography>
-                                            </ButtonComponent>
+                                            </CustomButton>
                                         </div>
                                     </Box>
                                 </Box>
@@ -467,11 +467,11 @@ export const MyAuctionsContainer: FC = () => {
                     />
                     {data.creator && data.status === 'accepted' && (
                         <Box mt={1}>
-                            <ButtonComponent className='end-auction' onClick={handleDeactivate(data.id)}>
+                            <CustomButton className='end-auction' onClick={handleDeactivate(data.id)}>
                                 <Typography variant='subtitle1'>
                                     Завершить аукцион
                                 </Typography>
-                            </ButtonComponent>
+                            </CustomButton>
                         </Box>
                     )}
                 </Grid>
@@ -500,12 +500,12 @@ export const MyAuctionsContainer: FC = () => {
                     />
                     {!data.creator && data.status === 'suspended' && (
                         <Box mt={1}>
-                            <ButtonComponent onClick={handleAcceptVictory(data.auction.id, true)}>
+                            <CustomButton onClick={handleAcceptVictory(data.auction.id, true)}>
                                 <Typography variant='subtitle1'>Принять</Typography>
-                            </ButtonComponent>
-                            <ButtonComponent onClick={handleAcceptVictory(data.auction.id, false)}>
+                            </CustomButton>
+                            <CustomButton onClick={handleAcceptVictory(data.auction.id, false)}>
                                 <Typography variant='subtitle1'>Отказать</Typography>
-                            </ButtonComponent>
+                            </CustomButton>
                         </Box>
                     )}
                 </Grid>

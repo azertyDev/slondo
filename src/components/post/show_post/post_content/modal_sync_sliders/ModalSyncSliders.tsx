@@ -2,7 +2,7 @@ import {FC, useState} from 'react';
 import InnerImageZoom from 'react-inner-image-zoom';
 import {CustomSlider} from '@src/components/elements/custom_slider/CustomSlider';
 import {Container, IconButton, Modal, Typography, useMediaQuery, useTheme} from '@material-ui/core';
-import {ButtonComponent} from '@src/components/elements/button/Button';
+import {CustomButton} from '@src/components/elements/custom_button/CustomButton';
 import {CloseIcon} from '@root/src/components/elements/icons';
 import {SlidersRefType} from '../PostContent';
 import {useStyles} from './useStyles';
@@ -106,11 +106,11 @@ export const ModalSyncSliders: FC<SyncSlidersProps> = (props) => {
                             )}
                         </CustomSlider>
                         <div className="slider-counter">
-                            <ButtonComponent onClick={prev}>&lt;</ButtonComponent>
+                            <CustomButton onClick={prev}>&lt;</CustomButton>
                             <Typography variant="subtitle1">
                                 {curState} / {imgsCount}
                             </Typography>
-                            <ButtonComponent onClick={next}>&gt;</ButtonComponent>
+                            <CustomButton onClick={next}>&gt;</CustomButton>
                         </div>
                     </Container>
                 )}
