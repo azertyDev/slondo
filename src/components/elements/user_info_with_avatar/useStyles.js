@@ -28,6 +28,12 @@ export const useStyles = makeStyles((theme) => ({
         '& div.user-info': {
             display: 'flex',
             width: '100%',
+            [theme.breakpoints.down('md')]: {
+                marginLeft: '24px'
+            },
+            [theme.breakpoints.down('xs')]: {
+                marginLeft: '16px'
+            },
             '& > div:first-child': {
                 display: 'flex',
                 alignItems: 'center',

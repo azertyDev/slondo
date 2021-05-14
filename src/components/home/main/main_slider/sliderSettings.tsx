@@ -23,6 +23,7 @@ export const settings = {
         {
             breakpoint: 992,
             settings: {
+                arrows: false,
                 slidesToShow: 2,
                 centerMode: false,
             }

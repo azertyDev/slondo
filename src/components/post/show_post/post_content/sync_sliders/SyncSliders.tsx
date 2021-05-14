@@ -77,11 +77,11 @@ export const SyncSliders: FC<SyncSlidersProps> = (props) => {
                     </Hidden>
                     <div className='share-favo-btns'>
                         {isAuth && !isCreator && (
-                            <Box display='flex' alignItems='center' flexDirection='column'>
+                            <Box className="favorite-count">
                                 <IconButton className="favorite-btn" onClick={handleFavorite}>
                                     <FavoriteBorder/>
                                 </IconButton>
-                                <div className='favorite-count'>
+                                <div>
                                     <Typography variant='subtitle1'>
                                         {favoriteCount}
                                     </Typography>
