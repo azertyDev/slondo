@@ -33,6 +33,7 @@ import {userAPI} from '@src/api/api';
 import {setErrorMsgAction} from '@root/src/redux/slices/errorSlice';
 import {useDispatch} from 'react-redux';
 import {useStyles} from './useStyles';
+import useModal from '@src/hooks/useModal';
 
 
 type PostContentTypes = {
@@ -73,19 +74,18 @@ export const PostContent: FC<PostContentTypes> = (props) => {
     const [favCount, setFavCount] = useState(0);
     const [descHeight, setDescHeight] = useState(0);
     const [slidersRefs, setSlidersRefs] = useState(initSlidersRefs);
-    const [modalsState, setModalsState] = useState({openSliderModal: false, openComplaintModal: false});
-    const {openComplaintModal, openSliderModal} = modalsState;
+
+    const {handleModalOpen: handleOpenSlider, handleModalClose: handleCloseSlider, modalOpen: openSliderModal} = useModal();
+    const {handleModalOpen: handleOpenComplaint, handleModalClose: handleCloseComplaint, modalOpen: openComplaintModal} = useModal();
 
     const date = new Date(data.created_at);
     const formatted_date = `${date.getDate()} ${months[date.getMonth()]} ${date.getFullYear()}`;
 
-    const handleShowSliderModal = value => () => setModalsState({...modalsState, openSliderModal: value});
-    const handleComplaintModal = value => () => setModalsState({...modalsState, openComplaintModal: value});
-    const handleFavorite = () => {
+    const handleFavorite = async () => {
         try {
             setFavorite(!favorite);
             setFavCount(favorite ? favCount - 1 : favCount + 1);
-            userAPI.favoriteAds(data.id);
+            await userAPI.favoriteAds(data.id);
         } catch (e) {
             dispatch(setErrorMsgAction(e.message));
         }
@@ -215,7 +215,7 @@ export const PostContent: FC<PostContentTypes> = (props) => {
                     slidersRefs={slidersRefs}
                     favoriteCount={favCount}
                     handleFavorite={handleFavorite}
-                    handleOpenModal={handleShowSliderModal(true)}
+                    handleOpenModal={handleOpenSlider}
                 />
                 <Hidden lgUp>
                     <div className='post-type-adaptive'>
@@ -257,7 +257,7 @@ export const PostContent: FC<PostContentTypes> = (props) => {
                         <Typography variant="subtitle1">
                             Просмотров: {number_of_views}
                         </Typography>
-                        <Typography variant="subtitle1" onClick={handleComplaintModal(true)}>
+                        <Typography variant="subtitle1" onClick={handleOpenComplaint}>
                             Пожаловаться <WarningIcon/>
                         </Typography>
                     </div>
@@ -412,12 +412,12 @@ export const PostContent: FC<PostContentTypes> = (props) => {
                                 Просмотров: {number_of_views}
                             </Typography>
                             <Hidden mdDown>
-                                <Typography variant="subtitle1" onClick={handleComplaintModal(true)}>
+                                <Typography variant="subtitle1" onClick={handleOpenComplaint}>
                                     Пожаловаться <WarningIcon/>
                                 </Typography>
                             </Hidden>
                         </div>
-                        <ButtonComponent className="btn-report" onClick={handleComplaintModal(true)}>
+                        <ButtonComponent className="btn-report" onClick={handleOpenComplaint}>
                             Пожаловаться
                         </ButtonComponent>
                     </div>
@@ -427,7 +427,7 @@ export const PostContent: FC<PostContentTypes> = (props) => {
                     title={data.title}
                     open={openSliderModal}
                     slidersRefs={slidersRefs}
-                    onClose={handleShowSliderModal(false)}
+                    onClose={handleCloseSlider}
                 />
             </Container>
             <Modal
@@ -435,7 +435,7 @@ export const PostContent: FC<PostContentTypes> = (props) => {
                 open={openComplaintModal}
                 BackdropComponent={Backdrop}
                 BackdropProps={{timeout: 200}}
-                onClose={handleComplaintModal(false)}
+                onClose={handleCloseComplaint}
             >
                 <div className={classes.modalBody}>
                     <Typography variant='h6'>

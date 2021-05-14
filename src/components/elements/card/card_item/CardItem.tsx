@@ -118,16 +118,6 @@ export const CardItem: FC<CardItemProps> = (props) => {
                                                 </span>
                                             </Tooltip>
                                         )}
-                                        {!!safe_deal && (
-                                            <Tooltip
-                                                title="Безопасная покупка"
-                                                arrow
-                                            >
-                                                <span>
-                                                    <SafeIcon/>
-                                                </span>
-                                            </Tooltip>
-                                        )}
                                         {!!exchange && (
                                             <Tooltip
                                                 title="Возможен обмен"
