@@ -77,4 +77,5 @@ export {RefreshIcon} from './RefreshIcon';
 export {CrackerIcon} from './CrackerIcon';
 export {RenewalIcon} from './social_icons/Renewal';
 export {RocketIcon} from './RocketIcon';
+export {ChevronRight} from './ChevronRight';
 

@@ -259,7 +259,7 @@ export const CabinetCard: FC<CabinetCardPropsType> = (props) => {
                             </div>
                         </div>
                         <Tooltip title='Рекламировать' arrow>
-                            <IconButton className='advertise'>
+                            <IconButton className='advertise' onClick={handleModalOpen(cardData.id, 11)}>
                                 <RocketIcon />
                             </IconButton>
                         </Tooltip>

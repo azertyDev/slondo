@@ -6,13 +6,13 @@ import {userAPI} from '@src/api/api';
 import {useDispatch} from 'react-redux';
 import {setErrorMsgAction} from '@root/src/redux/slices/errorSlice';
 import {useTranslation} from 'next-i18next';
-import {Box, Grid, IconButton, List, ListItem, ListItemText, Typography} from '@material-ui/core';
+import {Box, Grid, IconButton, List, ListItem, ListItemText, Paper, Typography} from '@material-ui/core';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import {CardDataType, InitialCabinetCardState, OffersStateType, TabsDataType} from '@root/interfaces/Cabinet.js';
 import {useStyles} from './useStyles';
 import {UserInfoWithAvatar} from '@src/components/elements/user_info_with_avatar/UserInfoWithAvatar';
 import {ButtonComponent} from '@src/components/elements/button/Button';
-import {CloseIcon, DoneAllIcon} from '@src/components/elements/icons';
+import {ChevronRight, CloseIcon, DoneAllIcon} from '@src/components/elements/icons';
 import {CabinetCard} from '@src/components/cabinet/cabinet_card/CabinetCard';
 import {SecondaryCabinetCard} from '@src/components/cabinet/components/SecondaryCabinetCard';
 import {initialStateType} from '@src/components/cabinet/cabinet_pages/notifications/NotificationsContainer';
@@ -167,10 +167,10 @@ export const MyAuctionsContainer: FC = () => {
     const handleTabChange = (event, newValue) => {
         setTabIndex(newValue);
     };
-    const handleOpenModal = (auction_id) => () => {
+    const handleOpenModal = (auction_id: number, index?: number) => () => {
         setOpenModal(true);
         auction_id && setSelectedAuction({...selectedAuction, id: auction_id});
-        setModalContentIndex(1);
+        setModalContentIndex(index);
     };
     const handleModalClose = () => {
         setOpenModal(false);
@@ -367,7 +367,7 @@ export const MyAuctionsContainer: FC = () => {
                 return <Box className='offers-info'>
                     <Box>
                         <Typography variant='h6'>Все предложения</Typography>
-                        <Typography variant='subtitle2'>Аукцион №: {selectedAuction.id}</Typography>
+                        <Typography variant='subtitle2'>{`Аукцион №: ${selectedAuction.id}`}</Typography>
                     </Box>
                     <Box width={1}>
                         {offersData.data.map(offer => {
@@ -418,6 +418,34 @@ export const MyAuctionsContainer: FC = () => {
                         })}
                     </Box>
                 </Box>;
+            case 11:
+                return <Box className={classes.promoteInfo}>
+                    <Box mb='20px' textAlign='center'>
+                        <Typography variant='h6'>Рекламировать объявление</Typography>
+                        <Typography variant='subtitle2'>{`Аукцион №: ${selectedAuction.id}`}</Typography>
+                    </Box>
+                    <Box mb='20px'>
+                        <Paper className='promote-item'>
+                            <Box maxWidth='180px'>
+                                <Typography variant='h6' gutterBottom>Поднять в топ</Typography>
+                                <Typography variant='subtitle1'>Действует 3 дня</Typography>
+                                <Typography variant='subtitle2'>
+                                    Объявление появляется в ленте в 40 чаще и выделяется анимацией.
+                                </Typography>
+                                <Typography variant='h5'>60 000 сум</Typography>
+                            </Box>
+                            <Box display='flex' alignItems='flex-end' width='180px'>
+                                <ButtonComponent>
+                                    <Typography variant='subtitle1'>Поднять в ТОП</Typography>
+                                    <ChevronRight width='20px' height='20px' />
+                                </ButtonComponent>
+                                <img src={'/img/promote-img.jpg'} alt="promote-img" />
+                            </Box>
+                        </Paper>
+                    </Box>
+                </Box>;
+            default:
+                return modalContentIndex;
         }
     };
     const ModalContent = () => (
@@ -426,7 +454,7 @@ export const MyAuctionsContainer: FC = () => {
                 ? <Typography className="title" variant="h6">
                     Аукцион №: {selectedAuction.id}
                 </Typography>
-                : (modalContentIndex !== 10 && (
+                : (modalContentIndex !== 10 || 11 && (
                         <IconButton
                             className='prev-btn'
                             aria-label="back"

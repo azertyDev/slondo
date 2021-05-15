@@ -60,5 +60,34 @@ export const useStyles = makeStyles(() => ({
             borderRadius: '3px',
             textAlign: 'center'
         }
+    },
+    promoteInfo: {
+        '& .promote-item': {
+            display: 'flex',
+            padding: '50px 40px 15px',
+            '& .MuiTypography-h6, .MuiTypography-h5': {
+                fontWeight: '600'
+            },
+            '& .MuiTypography-subtitle1, .MuiTypography-h5, .MuiTypography-subtitle2': {marginBottom: '20px'},
+            '& img': {
+                position: 'absolute',
+                bottom: '-15px',
+                right: 25,
+                zIndex: 0
+            },
+            '& > div + div': {
+                position: 'relative',
+                '& button': {
+                    width: '100%',
+                    zIndex: 1,
+                    background: '#2F80ED',
+                    borderRadius: '5px',
+                    '& .MuiTypography-subtitle1': {
+                        margin: 0,
+                        color: '#fff'
+                    }
+                }
+            }
+        }
     }
 }))
