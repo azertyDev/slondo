@@ -10,6 +10,8 @@ import {CategorySortIcon} from '@src/components/elements/icons/CategorySortIcon'
 import {SignIcon} from '@src/components/elements/icons/SignIcon';
 import {CustomDrawer} from '@src/components/header/bottom/custom_drawer/CustomDrawer';
 import {useStyles} from './useStyles';
+import {Location} from '@src/components/elements/location/Location';
+import {Localization} from '@src/components/header/top/localization/Localization';
 
 
 const Bottom = (props) => {
@@ -111,28 +113,32 @@ const Bottom = (props) => {
                                 xs={1}
                             >
                                 {isAuth
-                                 ? <Link href='/cabinet/posts'>
-                                     <a>
-                                         <Avatar alt="Remy Sharp" src={avatar}/>
-                                     </a>
-                                 </Link>
-                                 : <CustomButton
-                                     className="bottom-sign-button header-button"
-                                     onClick={handleOpenModal}
-                                 >
-                                     <Typography variant="subtitle2">
-                                         {t('auth_reg:signIn')}
-                                     </Typography>
-                                     <SignIcon/>
-                                 </CustomButton>}
+                                    ? <Link href='/cabinet/posts'>
+                                        <a>
+                                            <Avatar alt="Remy Sharp" src={avatar}/>
+                                        </a>
+                                    </Link>
+                                    : <CustomButton
+                                        className="bottom-sign-button header-button"
+                                        onClick={handleOpenModal}
+                                    >
+                                        <Typography variant="subtitle2">
+                                            {t('auth_reg:signIn')}
+                                        </Typography>
+                                        <SignIcon/>
+                                    </CustomButton>}
                             </Grid>
                         </Grid>
                     </Container>
                 </AppBar>
             </Hidden>
             <Hidden lgUp>
-                <div className="select-local">
+                <div className="search-input">
                     <SearchForm/>
+                </div>
+                <div className="translate-local">
+                    <Location t={t}/>
+                    <Localization/>
                 </div>
             </Hidden>
             <CustomDrawer

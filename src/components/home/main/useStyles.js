@@ -4,11 +4,17 @@ export const useStyles = makeStyles((theme) => ({
     root: {
         paddingTop: '48px',
         '& div.main-slider-wrapper': {
-            marginBottom: '40px'
+            marginBottom: '40px',
+            [theme.breakpoints.down('md')]: {
+                marginBottom: '16px'
+            }
         },
         '& div.content-wrapper': {
             '& div.categories-slider-wrapper': {
-                marginBottom: '40px'
+                marginBottom: '40px',
+                [theme.breakpoints.down('md')]: {
+                    marginBottom: '16px'
+                }
             },
             '& div.main-content': {
                 '& section.posts-slider-wrapper': {

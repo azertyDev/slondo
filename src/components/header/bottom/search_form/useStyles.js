@@ -1,6 +1,6 @@
-import makeStyles from '@material-ui/core/styles/makeStyles'
+import makeStyles from '@material-ui/core/styles/makeStyles';
 
-export const useStyles = makeStyles(() => ({
+export const useStyles = makeStyles((theme) => ({
     root: {
         width: '100%',
         height: 38,
@@ -12,14 +12,20 @@ export const useStyles = makeStyles(() => ({
             top: 'calc(50% - 10px)'
         },
         '& > svg': {
-            left: '10px'
-        },
-        '& > img.filter-icon': {
-            right: '10px'
+            left: '10px',
+            [theme.breakpoints.down('md')]: {
+                '& path': {
+                    fill: '#838383'
+                }
+            }
         },
         '& > input.search-input': {
             padding: '8px 230px 8px 35px',
             width: '100%',
+            [theme.breakpoints.down('md')]: {
+                width: '60%',
+                padding: '8px 0px 8px 35px'
+            },
             borderRadius: '7px',
             border: '1px solid #ccc',
             fontSize: '0.87rem'
@@ -37,4 +43,4 @@ export const useStyles = makeStyles(() => ({
             lineHeight: '1.65'
         }
     }
-}))
+}));

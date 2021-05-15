@@ -25,9 +25,6 @@ export const SearchForm: FC = () => {
                     </Typography>
                 </CustomButton>
             </Hidden>
-            <Hidden mdUp>
-                <FilterIcon/>
-            </Hidden>
         </form>
     );
 };

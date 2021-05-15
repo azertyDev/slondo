@@ -5,7 +5,7 @@ import {
     Tabs,
     Tab,
     Grid,
-    CircularProgress,
+    CircularProgress, Hidden
 } from '@material-ui/core';
 import {CustomTabPanel} from '@src/components/elements/custom_tab_panel/CustomTabPanel';
 import {CardData} from '@root/interfaces/CardData';
@@ -29,7 +29,7 @@ export const PostsTabs: FC<MainContentProps> = (props) => {
         handleTabChange,
         handleShowMore,
         postCardData,
-        auctionCardData,
+        auctionCardData
     } = props;
 
     const isAncmntsExist = postCardData.data.total > postCardData.data.cards.length && tabValue === 0;
@@ -38,9 +38,11 @@ export const PostsTabs: FC<MainContentProps> = (props) => {
     const classes = useStyles();
     return (
         <div className={classes.root}>
-            <Typography className="title" variant="h2">
-                {t('allPosts')}
-            </Typography>
+            <Hidden mdDown>
+                <Typography className="title" variant="h2">
+                    {t('allPosts')}
+                </Typography>
+            </Hidden>
             <Tabs
                 value={tabValue}
                 onChange={handleTabChange}

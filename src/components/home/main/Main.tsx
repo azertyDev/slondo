@@ -36,9 +36,11 @@ export const Main: FC = () => {
                     </div>
                     <Grid container>
                         <Grid item lg={9} xs={12} className='main-content'>
-                            <section className='posts-slider-wrapper'>
-                                <PostsSliderContainer/>
-                            </section>
+                            <Hidden mdDown>
+                                <section className='posts-slider-wrapper'>
+                                    <PostsSliderContainer/>
+                                </section>
+                            </Hidden>
                             <section>
                                 <PostsTabsContainer t={t}/>
                             </section>
