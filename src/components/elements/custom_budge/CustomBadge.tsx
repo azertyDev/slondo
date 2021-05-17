@@ -6,7 +6,14 @@ import {useStyles} from './useStyles';
 export const CustomBadge: FC<any> = (props) => {
     const classes = useStyles();
     return (
-        <Badge {...props} className={classes.root}>
+        <Badge
+            {...props}
+            className={classes.root}
+            anchorOrigin={{
+                vertical: 'top',
+                horizontal: 'right'
+            }}
+        >
             {props.children}
         </Badge>
     );

@@ -387,4 +387,11 @@ export const userAPI = {
                 throw err;
             });
     },
+    getUserRating: (): Promise<any> => {
+        return instance.get(`user/rating`, setTokenToHeader())
+            .then(res => res.data)
+            .catch(err => {
+                throw err;
+            });
+    },
 };

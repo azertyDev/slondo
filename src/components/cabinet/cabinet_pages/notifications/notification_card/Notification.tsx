@@ -135,6 +135,8 @@ export const Notification: FC<NotificationDataType> = (props) => {
                         <Typography variant='subtitle1' color="secondary">Перейти</Typography>
                     </a>
                 </Link>;
+            case 'nowhere':
+                return;
             default:
                 return type;
         }
