@@ -11,8 +11,7 @@ import {IdNameType} from '@root/interfaces/Post';
 export const cookies = new Cookies();
 export const cookieOpts = {path: '/'};
 
-export const isRequired = (field: string): boolean =>
-    requireFields.some(reqField => reqField === field);
+export const isRequired = (field: string): boolean => requireFields.some(reqField => reqField === field);
 
 export const phonePrepare = (phone: string): string => phone.replace(/[\s+()]/g, '');
 

@@ -115,10 +115,6 @@ export const SearchPostsByFilters: FC<SearchContainerPropsType> = (props) => {
         setValues(initValues);
     }, [ctgr, subCtgr, typeCtgr]);
 
-    // console.log('posts', posts);
-    // console.log('values', values);
-    // console.log('filters', filters);
-
     const classes = useStyles();
     return (
         <MainLayout title={title} description={description} seoTxt={seoTxt}>
