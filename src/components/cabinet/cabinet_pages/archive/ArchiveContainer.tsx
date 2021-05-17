@@ -1,7 +1,7 @@
 import {FC, useEffect, useState} from 'react';
 import {TabsContent} from '@src/components/cabinet/cabinet_pages/TabsContent';
 import {Archive} from '@src/components/cabinet/cabinet_pages/archive/Archive';
-import {withAuthRedirect} from '@src/hoc/withAuthRedirect';
+import {withAuthRedirect} from '@src/hocs/withAuthRedirect';
 import {userAPI} from '@src/api/api';
 import {setErrorMsgAction} from '@src/redux/slices/errorSlice';
 import {useDispatch} from 'react-redux';

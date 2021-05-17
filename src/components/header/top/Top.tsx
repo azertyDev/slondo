@@ -40,7 +40,7 @@ export const Top: FC<TopHeaderPropsType> = (props) => {
             <Grid container justify="space-between" alignItems="center">
                 <Hidden mdDown>
                     <Grid item md={6}>
-                        <Location t={t}/>
+                        <Location/>
                     </Grid>
                     <Grid
                         item

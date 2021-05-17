@@ -3,7 +3,7 @@ import Link from 'next/link';
 import {AppBar, Avatar, Container, Grid, Hidden, Typography} from '@material-ui/core';
 import {CustomButton} from '@src/components/elements/custom_button/CustomButton';
 import {SearchForm} from '@src/components/header/bottom/search_form/SearchForm';
-import {withScrollThreshold} from '@src/hoc/withScrollThreshold';
+import {withScrollThreshold} from '@src/hocs/withScrollThreshold';
 import {Logo} from '@src/components/elements/icons';
 import {AddIcon} from '@src/components/elements/icons/AddIcon';
 import {CategorySortIcon} from '@src/components/elements/icons/CategorySortIcon';

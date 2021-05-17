@@ -1,6 +1,6 @@
 import React, {FC, useEffect, useState} from 'react';
 import {Notifications} from '@src/components/cabinet/cabinet_pages/notifications/Notifications';
-import {withAuthRedirect} from '@src/hoc/withAuthRedirect';
+import {withAuthRedirect} from '@src/hocs/withAuthRedirect';
 import {useDispatch, useSelector} from 'react-redux';
 import {setErrorMsgAction} from '@src/redux/slices/errorSlice';
 import {userAPI} from '@src/api/api';
