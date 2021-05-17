@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import Link from 'next/link';
-import {AppBar, Avatar, Container, Grid, Hidden, Typography} from '@material-ui/core';
+import {AppBar, Avatar, Container, Grid, Hidden, IconButton, Typography} from '@material-ui/core';
 import {CustomButton} from '@src/components/elements/custom_button/CustomButton';
 import {SearchForm} from '@src/components/header/bottom/search_form/SearchForm';
 import {withScrollThreshold} from '@src/hoc/withScrollThreshold';
@@ -78,6 +78,18 @@ const Bottom = (props) => {
                                         <CategorySortIcon/>
                                     </CustomButton>
                                 </Grid>
+                            </Grid>
+                            <Grid>
+                                <IconButton
+                                    size="small"
+                                    // onClick={() => setIsOpen(true)}  =====================================================================
+                                >
+                                    <div className="burger-menu">
+                                        <div/>
+                                        <div/>
+                                        <div/>
+                                    </div>
+                                </IconButton>
                             </Grid>
                             <Grid
                                 item

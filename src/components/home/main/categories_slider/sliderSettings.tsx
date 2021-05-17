@@ -32,15 +32,15 @@ export const settings = {
             settings: {
                 arrows: false,
                 slidesToShow: 3,
-                slidesToScroll: 3
+                slidesToScroll: 1
             }
         },
         {
             breakpoint: 450,
             settings: {
                 arrows: false,
-                slidesToShow: 2,
-                slidesToScroll: 2
+                slidesToShow: 3,
+                slidesToScroll: 1
             }
         }
     ]

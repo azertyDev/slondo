@@ -122,6 +122,14 @@ export const useStyles = makeStyles((theme) => ({
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'space-between'
+        },
+        '& div.burger-menu': {
+            width: '35px',
+            '& > div': {
+                height: '4px',
+                backgroundColor: '#675EAA',
+                margin: '4px 0'
+            }
         }
     }
 }));

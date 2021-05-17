@@ -1,11 +1,11 @@
-import React, {FC} from 'react';
+import React, {FC, useState} from 'react';
 import {
     Hidden,
     Slide,
     Typography,
     useScrollTrigger,
     Grid,
-    Container
+    Container, IconButton
 } from '@material-ui/core';
 import {MainSlider} from './main_slider/MainSlider';
 import {CategoriesSlider} from './categories_slider/CategoriesSlider';
@@ -24,6 +24,7 @@ export const Main: FC = () => {
     const trigger = useScrollTrigger();
 
     const classes = useStyles();
+
     return (
         <main>
             <div className={classes.root}>

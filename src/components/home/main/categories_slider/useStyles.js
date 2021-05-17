@@ -57,7 +57,10 @@ export const useStyles = makeStyles((theme) => ({
                     color: theme.palette.primary.black,
                     '& > span.category-name': {
                         textAlign: 'center',
-                        fontSize: '1.125rem'
+                        fontSize: '1.125rem',
+                        [theme.breakpoints.down('xs')]: {
+                            fontSize: 'calc(12px + 6 * (100vw / 1280))'
+                        }
                     },
                     '& div.bg-layer': {
                         width: '140px',
@@ -68,7 +71,11 @@ export const useStyles = makeStyles((theme) => ({
                         marginBottom: '20px',
                         background:
                             'linear-gradient(90deg, #f0f0f0 0%, #eaeaeb 67.06%, #e4e4e6 100%)',
-                        borderRadius: '100px'
+                        borderRadius: '100px',
+                        [theme.breakpoints.down('xs')]: {
+                            width: '80px',
+                            height: '80px'
+                        }
                     },
                     '& div.medium': {
                         background:
@@ -79,6 +86,10 @@ export const useStyles = makeStyles((theme) => ({
                         '& > img': {
                             height: '100%',
                             objectFit: 'contain'
+                        },
+                        [theme.breakpoints.down('xs')]: {
+                            width: '77px',
+                            height: '77px'
                         }
                     }
                 }
