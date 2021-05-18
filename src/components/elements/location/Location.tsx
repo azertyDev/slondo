@@ -1,37 +1,117 @@
-import {FC, useState} from 'react';
-import {WithT} from 'i18next';
+import {FC, useEffect, useState} from 'react';
 import {Typography} from '@material-ui/core';
 import {LocationIcon} from '@src/components/elements/icons';
 import {LocationModal} from './LocationModal';
+import {useTranslation} from 'next-i18next';
+import {cookieOpts, cookies} from '@src/helpers';
+import {useSelector} from 'react-redux';
+import {RootState} from '@src/redux/rootReducer';
 import {useStyles} from './useStyles';
 
-type LocationPropsType = any & WithT;
 
-export const Location: FC<LocationPropsType> = (props) => {
-    const {
-        t
-    } = props;
+export const Location: FC = () => {
+    const {t} = useTranslation('locations');
+    const userLocation = cookies.get('user_location');
+
+    const initLocation = {
+        region: null,
+        city: null,
+        district: null
+    };
+
+    const locationsFromStore = useSelector((store: RootState) => store.locations.data);
+    const separatedLocations = separateByThree(locationsFromStore);
 
     const [open, setOpen] = useState(false);
+    const [locations, setLocations] = useState([]);
+    const [selectedLocation, setSelectedLocation] = useState(initLocation);
+    const {region, city, district} = selectedLocation;
 
-    const handleModal = (value) => () => {
-        setOpen(value);
+    const locationsTxt = `${t(region?.name) ?? ''}${city ? `, ${t(city?.name)}` : ''}${district ? `, ${t(district?.name)}` : ''}`;
+    const prevLocation = !!region
+                         ? `<-- ${t(`${city?.district.length ? city.name : region.name}`)}`
+                         : t(`${district?.name ?? city?.name ?? region?.name ?? 'allUzb'}`);
+
+    const handleLocation = loc => () => {
+        const value = loc.cities ? {region: loc} : loc.district ? {city: loc} : {district: loc};
+        setSelectedLocation({...selectedLocation, ...value});
+        (loc.cities || loc.district?.length) && setLocations(separateByThree(loc.cities ?? loc.district));
     };
+
+    const handleModalOpen = () => {
+        setOpen(true);
+        region && (
+            setLocations(separateByThree(city?.district.length ? city.district : region.cities))
+        );
+    };
+
+    const handleClose = () => {
+        setOpen(false);
+        if (userLocation) {
+            setSelectedLocation(userLocation);
+        } else {
+            setLocations(separatedLocations);
+            setSelectedLocation(initLocation);
+        }
+    };
+
+    const handleChoiceLocation = () => {
+        if (region) {
+            cookies.set('user_location', selectedLocation, cookieOpts);
+        } else {
+            cookies.remove('user_location', {path: '/'});
+        }
+        setOpen(false);
+    };
+
+    const toPrevLocation = () => {
+        if (city?.district.length) {
+            setLocations(separateByThree(region.cities));
+            setSelectedLocation({...selectedLocation, city: null, district: null});
+        } else if (region) {
+            setLocations(separatedLocations);
+            setSelectedLocation(initLocation);
+        }
+    };
+
+    useEffect(() => {
+        userLocation && setSelectedLocation(userLocation);
+    }, []);
+
+    useEffect(() => {
+        setLocations(separatedLocations);
+    }, [locationsFromStore]);
 
     const classes = useStyles();
     return (
         <div className={classes.root}>
             <div className='location-wrapper'>
                 <LocationIcon/>
-                <Typography variant="subtitle1" onClick={handleModal(true)}>
-                    {t(`common:location`)}
+                <Typography variant="subtitle1" onClick={handleModalOpen}>
+                    {t(locationsTxt || 'location')}
                 </Typography>
             </div>
             <LocationModal
                 t={t}
                 open={open}
-                handleModalClose={handleModal(false)}
+                locations={locations}
+                prevLocation={prevLocation}
+                locationInputTxt={locationsTxt}
+                handleClose={handleClose}
+                handleLocation={handleLocation}
+                toPrevLocation={toPrevLocation}
+                handleChoiceLocation={handleChoiceLocation}
             />
         </div>
     );
+
+    function separateByThree(locations): any {
+        return Array.from({length: 3}).reduce((acc: any, _, i) => {
+            const columnLen = Math.ceil(locations.length / 3);
+            const endThreshold = columnLen * (i + 1);
+            const startThreshold = endThreshold - columnLen;
+            acc.push([...locations.slice(startThreshold, endThreshold)]);
+            return acc;
+        }, []);
+    }
 };

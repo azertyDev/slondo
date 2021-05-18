@@ -1,6 +1,6 @@
 import React, {FC} from 'react';
 import {Messages} from "@src/components/cabinet/cabinet_pages/messages/Messages";
-import {withAuthRedirect} from "@src/hoc/withAuthRedirect";
+import {withAuthRedirect} from "@src/hocs/withAuthRedirect";
 import {useTranslation} from "react-i18next";
 
 export const MessagesContainer: FC = () => {

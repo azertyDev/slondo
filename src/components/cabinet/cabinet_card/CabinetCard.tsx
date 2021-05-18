@@ -8,6 +8,7 @@ import {
     NotificationIcon,
     PhoneIcon,
     RenewalIcon,
+    RocketIcon,
     SafeIcon,
     SettingsIcon,
     SwapIcon
@@ -58,8 +59,6 @@ export const CabinetCard: FC<CabinetCardPropsType> = (props) => {
             }
         </Box>
     );
-
-    console.log(cardData);
 
     const classes = useStyles();
     return (
@@ -259,6 +258,11 @@ export const CabinetCard: FC<CabinetCardPropsType> = (props) => {
                                 </Typography>
                             </div>
                         </div>
+                        <Tooltip title='Рекламировать' arrow>
+                            <IconButton className='advertise' onClick={handleModalOpen(cardData.id, 11)}>
+                                <RocketIcon />
+                            </IconButton>
+                        </Tooltip>
                     </div>
                 </Box>
             </Paper>

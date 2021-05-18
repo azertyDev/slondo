@@ -1,4 +1,4 @@
-import React, {FC, useEffect, useMemo, useState} from 'react';
+import {FC, useEffect, useMemo, useState} from 'react';
 import {Steps} from '../steps/Steps';
 import {useRouter} from "next/router";
 import {useTranslation} from 'next-i18next';

@@ -1,39 +1,10 @@
 import {FC} from 'react';
-import {Checkbox, Grid, Typography} from '@material-ui/core';
-import {Help} from '@material-ui/icons';
 import {WithT} from 'i18next';
+import {Help} from '@material-ui/icons';
+import {Checkbox, Grid, Typography} from '@material-ui/core';
+import {site_services} from '@src/common_data/site_services';
 import {useStyles} from './useStyles';
 
-
-const site_services = {
-    safe_deal: {
-        parts: true,
-        goods: true,
-        home: true,
-        electronics: true,
-        hobbies: true,
-        animal: true
-    },
-    exchange: {
-        car: true,
-        transport: true,
-        parts: true,
-        estate: true,
-        goods: true,
-        home: true,
-        electronics: true,
-        hobbies: true,
-        animal: true
-    },
-    delivery: {
-        parts: true,
-        goods: true,
-        home: true,
-        electronics: true,
-        hobbies: true,
-        animal: true
-    }
-};
 
 type PaymentDeliveryPropsType = {
     values,

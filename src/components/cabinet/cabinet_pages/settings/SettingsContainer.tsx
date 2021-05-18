@@ -1,6 +1,6 @@
 import {FC, useEffect, useState} from 'react';
 import {useTranslation} from 'react-i18next';
-import {withAuthRedirect} from '@src/hoc/withAuthRedirect';
+import {withAuthRedirect} from '@src/hocs/withAuthRedirect';
 import {Settings} from '@src/components/cabinet/cabinet_pages/settings/Settings';
 import {useDispatch, useSelector} from 'react-redux';
 import {RootState} from '@src/redux/rootReducer';

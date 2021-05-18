@@ -100,7 +100,7 @@ export const useStyles = makeStyles((theme) => ({
                     flexDirection: 'column',
                     justifyContent: 'space-between',
                     position: 'relative',
-                    '& > div.header': {
+                    '& .header': {
                         display: 'flex',
                         justifyContent: 'space-between',
                         width: '100%',
@@ -160,11 +160,22 @@ export const useStyles = makeStyles((theme) => ({
                                 }
                             }
                         }
+                    },
+                    '& .advertise': {
+                        position: 'absolute',
+                        top: '70px',
+                        right: 0,
+                        padding: '9px 20px',
+                        borderRadius: '100px 0px 0px 100px',
+                        boxShadow: '0px 1px 2px rgba(0, 0, 0, 0.1)',
+                        background: 'linear-gradient(182.42deg, #675EAA 2.73%, #AD66D5 97.1%)'
                     }
                 },
                 '& .description': {
                     display: 'flex',
                     flexFlow: 'row wrap',
+                    maxWidth: '85%',
+                    position: 'relative',
                     '& > div': {
                         height: '26px',
                         display: 'flex',
