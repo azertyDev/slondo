@@ -1,6 +1,6 @@
 import {FC} from 'react';
 import {Hidden, Typography} from '@material-ui/core';
-import {FilterIcon, Search_icon} from '@src/components/elements/icons';
+import {Search_icon} from '@src/components/elements/icons';
 import {CustomButton} from '@src/components/elements/custom_button/CustomButton';
 import {useTranslation} from 'next-i18next';
 import {useStyles} from './useStyles';
@@ -18,7 +18,7 @@ export const SearchForm: FC = () => {
                 className="search-input"
                 placeholder={t('searchText')}
             />
-            <Hidden smDown>
+            <Hidden mdDown>
                 <CustomButton className="search-button">
                     <Typography variant="subtitle2">
                         {t('searchBtn')}

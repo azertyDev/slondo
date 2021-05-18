@@ -105,31 +105,11 @@ export const useStyles = makeStyles((theme) => ({
 
         /* Aadaptive ======================================================================*/
 
-        '& div.search-input': {
-            padding: '10px 0',
-            marginTop: '100px',
-            '& > form': {
-                width: '100%',
-                '& > div': {
-                    padding: '8px 36px',
-                    '& > h6': {
-                        textAlign: 'center'
-                    }
-                }
-            }
-        },
         '& div.translate-local': {
+            marginTop: '100px',
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'space-between'
-        },
-        '& div.burger-menu': {
-            width: '35px',
-            '& > div': {
-                height: '4px',
-                backgroundColor: '#675EAA',
-                margin: '4px 0'
-            }
         }
     }
 }));

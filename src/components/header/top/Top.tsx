@@ -1,4 +1,4 @@
-import {FC, useState} from 'react';
+import React, {FC, useState} from 'react';
 import Link from 'next/link';
 import {WithT} from 'i18next';
 import {useRouter} from 'next/router';
@@ -21,6 +21,7 @@ import {
 } from '@src/components/elements/icons';
 import {Location} from '@src/components/elements/location/Location';
 import {useStyles} from './useStyles';
+import {SearchForm} from '@src/components/header/bottom/search_form/SearchForm';
 
 
 type TopHeaderPropsType = {
@@ -121,6 +122,9 @@ export const Top: FC<TopHeaderPropsType> = (props) => {
                             </Grid>
                         </Grid>
                     </Toolbar>
+                    <div className="search-adaptive-input">
+                        <SearchForm/>
+                    </div>
                 </AppBar>
                 <LeftDrawer isOpen={isOpen} setIsOpen={setIsOpen}/>
             </Hidden>

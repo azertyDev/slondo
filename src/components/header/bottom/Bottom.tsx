@@ -79,18 +79,6 @@ const Bottom = (props) => {
                                     </CustomButton>
                                 </Grid>
                             </Grid>
-                            <Grid>
-                                <IconButton
-                                    size="small"
-                                    // onClick={() => setIsOpen(true)}  =====================================================================
-                                >
-                                    <div className="burger-menu">
-                                        <div/>
-                                        <div/>
-                                        <div/>
-                                    </div>
-                                </IconButton>
-                            </Grid>
                             <Grid
                                 item
                                 container
@@ -145,9 +133,6 @@ const Bottom = (props) => {
                 </AppBar>
             </Hidden>
             <Hidden lgUp>
-                <div className="search-input">
-                    <SearchForm/>
-                </div>
                 <div className="translate-local">
                     <Location t={t}/>
                     <Localization/>

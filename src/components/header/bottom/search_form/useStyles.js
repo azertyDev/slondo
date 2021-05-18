@@ -4,6 +4,9 @@ export const useStyles = makeStyles((theme) => ({
     root: {
         width: '100%',
         height: 38,
+        [theme.breakpoints.down('md')]: {
+            height: 32
+        },
         position: 'relative',
         display: 'flex',
         '& > svg, & > img.filter-icon': {
@@ -15,19 +18,18 @@ export const useStyles = makeStyles((theme) => ({
             left: '10px',
             [theme.breakpoints.down('md')]: {
                 '& path': {
-                    fill: '#838383'
+                    fill: '#BDBDBD'
                 }
             }
         },
         '& > input.search-input': {
             padding: '8px 230px 8px 35px',
             width: '100%',
-            [theme.breakpoints.down('md')]: {
-                width: '60%',
-                padding: '8px 0px 8px 35px'
-            },
             borderRadius: '7px',
-            border: '1px solid #ccc',
+            [theme.breakpoints.down('md')]: {
+                border: ' 1px solid #DFDFDF',
+                borderRadius: '100px'
+            },
             fontSize: '0.87rem'
         },
         '& > button.search-button': {
