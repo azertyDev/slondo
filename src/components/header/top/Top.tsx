@@ -8,7 +8,7 @@ import {
     Typography,
     AppBar,
     Toolbar,
-    IconButton
+    IconButton, Box, useMediaQuery, useTheme
 } from '@material-ui/core';
 import {LeftDrawer} from './drawer/Drawer';
 import {Localization} from './localization/Localization';
@@ -22,6 +22,7 @@ import {
 import {Location} from '@src/components/elements/location/Location';
 import {useStyles} from './useStyles';
 import {SearchForm} from '@src/components/header/bottom/search_form/SearchForm';
+import {width} from '@material-ui/system';
 
 
 type TopHeaderPropsType = {
@@ -34,6 +35,8 @@ export const Top: FC<TopHeaderPropsType> = (props) => {
     const {pathname} = useRouter();
 
     const [isOpen, setIsOpen] = useState(false);
+
+    const isXsDown = useMediaQuery(useTheme().breakpoints.down('xs'));
 
     const classes = useStyles();
     return (
@@ -122,9 +125,9 @@ export const Top: FC<TopHeaderPropsType> = (props) => {
                             </Grid>
                         </Grid>
                     </Toolbar>
-                    <div className="search-adaptive-input">
+                    <Box px={isXsDown ? '12px' : '24px'}>
                         <SearchForm/>
-                    </div>
+                    </Box>
                 </AppBar>
                 <LeftDrawer isOpen={isOpen} setIsOpen={setIsOpen}/>
             </Hidden>

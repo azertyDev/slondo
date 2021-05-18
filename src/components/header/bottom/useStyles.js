@@ -4,6 +4,10 @@ export const useStyles = makeStyles((theme) => ({
     root: {
         position: 'relative',
         height: '50px',
+        [theme.breakpoints.down('md')]: {
+            height: '30px',
+            marginBottom: '15px'
+        },
         '& header.MuiAppBar-root': {
             background: '#fafafa',
             '& > div.MuiContainer-root': {
@@ -103,10 +107,14 @@ export const useStyles = makeStyles((theme) => ({
             }
         },
 
-        /* Aadaptive ======================================================================*/
-
         '& div.translate-local': {
-            marginTop: '100px',
+            [theme.breakpoints.down('md')]: {
+                marginTop: '103px'
+            },
+            [theme.breakpoints.down('xs')]: {
+                marginTop: '96px'
+            },
+            marginTop: '103px',
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'space-between'

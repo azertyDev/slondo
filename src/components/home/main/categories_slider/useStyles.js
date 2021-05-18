@@ -69,8 +69,7 @@ export const useStyles = makeStyles((theme) => ({
                         alignItems: 'center',
                         justifyContent: 'center',
                         marginBottom: '20px',
-                        background:
-                            'linear-gradient(90deg, #f0f0f0 0%, #eaeaeb 67.06%, #e4e4e6 100%)',
+                        background: 'linear-gradient(90deg, #f0f0f0 0%, #eaeaeb 67.06%, #e4e4e6 100%)',
                         borderRadius: '100px',
                         [theme.breakpoints.down('xs')]: {
                             width: '80px',

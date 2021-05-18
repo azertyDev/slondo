@@ -3,6 +3,9 @@ import {makeStyles} from '@material-ui/core/styles';
 export const useStyles = makeStyles((theme) => ({
     root: {
         paddingTop: '48px',
+        [theme.breakpoints.down('md')]: {
+            paddingTop: 0
+        },
         '& div.main-slider-wrapper': {
             marginBottom: '40px',
             [theme.breakpoints.down('md')]: {

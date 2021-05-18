@@ -75,25 +75,24 @@ export const useStyles = makeStyles((theme) => ({
 
         // ------------> adaptive <--------------- //
         '& div.top-header-logo > a > img': {
-            height: '50px',
+            height: '31px',
             width: '145px'
         },
         '& div.burger-menu': {
-            width: '35px',
+            width: '26px',
             '& > div': {
                 height: '4px',
-                backgroundColor: '#675EAA',
-                margin: '4px 0'
+                backgroundColor: '#494A61',
+                margin: '4px 0',
+                borderRadius: '1px'
+            },
+            '& div:nth-child(2)': {
+                width: '18px'
+            },
+            '& div:nth-child(3)': {
+                width: '9px'
             }
-        },
-        '& div.search-adaptive-input': {
-            padding: '0 24px',
-            width: '100%',
-            '& > form > div': {
-                '& > h6': {
-                    textAlign: 'center'
-                }
-            }
+
         }
     },
     avatarBlock: {

@@ -5,7 +5,8 @@ export const useStyles = makeStyles((theme) => ({
         width: '100%',
         height: 38,
         [theme.breakpoints.down('md')]: {
-            height: 32
+            height: 32,
+            marginBottom: '10px'
         },
         position: 'relative',
         display: 'flex',
@@ -26,9 +27,11 @@ export const useStyles = makeStyles((theme) => ({
             padding: '8px 230px 8px 35px',
             width: '100%',
             borderRadius: '7px',
+            border: '1px solid #ccc',
             [theme.breakpoints.down('md')]: {
-                border: ' 1px solid #DFDFDF',
-                borderRadius: '100px'
+                border: '1px solid #DFDFDF',
+                borderRadius: '100px',
+                padding: '8px 8px 8px 35px'
             },
             fontSize: '0.87rem'
         },

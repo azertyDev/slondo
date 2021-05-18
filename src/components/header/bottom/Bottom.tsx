@@ -134,7 +134,7 @@ const Bottom = (props) => {
             </Hidden>
             <Hidden lgUp>
                 <div className="translate-local">
-                    <Location t={t}/>
+                    <Location/>
                     <Localization/>
                 </div>
             </Hidden>
