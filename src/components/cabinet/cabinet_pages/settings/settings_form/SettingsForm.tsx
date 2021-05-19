@@ -180,43 +180,48 @@ export const SettingsForm: FC<SettingsFormPropsType> = (props) => {
                             </Box>
                         </Grid>
                     </Grid>
-                    <Grid
-                        item
-                        xs={6}
-                        container
-                        className={classes.wrapper}
-                        justify='space-evenly'
-                        spacing={2}
-                    >
-                        <Grid item xs={6} container justify='center'>
-                            <SettingsButton
-                                type='submit'
-                                disabled={isSubmitting || formDisable}
-                                color='primary'
-                                size="large"
-                                disableElevation
-                                startIcon={isSubmitting && <CircularProgress size={24} className={classes.progress} />}
-                                className={classes.button}
+                    {
+                        !formDisable && (
+                            <Grid
+                                item
+                                xs={6}
+                                container
+                                className={classes.wrapper}
+                                justify='space-evenly'
+                                spacing={2}
                             >
-                                <Typography variant='subtitle1'>
-                                    Применить
-                                </Typography>
-                            </SettingsButton>
-                        </Grid>
-                        <Grid item xs={6} container justify='center'>
-                            <SettingsButton
-                                disableElevation
-                                color='secondary'
-                                disabled={formDisable}
-                                className={classes.button}
-                                onClick={handleCancel}
-                            >
-                                <Typography variant='subtitle1'>
-                                    Отменить
-                                </Typography>
-                            </SettingsButton>
-                        </Grid>
-                    </Grid>
+                                <Grid item xs={6} container justify='center'>
+                                    <SettingsButton
+                                        type='submit'
+                                        disabled={isSubmitting || formDisable}
+                                        color='primary'
+                                        size="large"
+                                        disableElevation
+                                        startIcon={isSubmitting &&
+                                        <CircularProgress size={24} className={classes.progress} />}
+                                        className={classes.button}
+                                    >
+                                        <Typography variant='subtitle1'>
+                                            Применить
+                                        </Typography>
+                                    </SettingsButton>
+                                </Grid>
+                                <Grid item xs={6} container justify='center'>
+                                    <SettingsButton
+                                        disableElevation
+                                        color='secondary'
+                                        disabled={formDisable}
+                                        className={classes.button}
+                                        onClick={handleCancel}
+                                    >
+                                        <Typography variant='subtitle1'>
+                                            Отменить
+                                        </Typography>
+                                    </SettingsButton>
+                                </Grid>
+                            </Grid>
+                        )
+                    }
                 </Form>
             </FormikProvider>
         </>

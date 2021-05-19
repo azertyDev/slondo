@@ -1,4 +1,4 @@
-import React, {FC} from 'react';
+import {FC} from 'react';
 import {Tab, Tabs, Typography} from '@material-ui/core';
 import {CustomTabPanel} from '@src/components/elements/custom_tab_panel/CustomTabPanel';
 import {CabinetMenuPropsType, CabinetWrapper} from '@src/components/cabinet/CabinetWrapper';
@@ -19,7 +19,6 @@ export const TabsContent: FC<TabsContentPropsType> = (props) => {
     const {t} = useTranslation('cabinet');
     const {pathname} = useRouter();
 
-    console.log(pathname);
     const classes = useStyles({pathname, tabIndex});
     return (
         <div className={classes.root}>

@@ -10,7 +10,10 @@ export const MainSlider: FC = () => {
         <div className={classes.root}>
             <CustomSlider {...settings}>
                 <div>
-                    <img src={`img/slider-img.jpg`} alt='img'/>
+                    <img src={`img/slide1.png`} alt='img' />
+                </div>
+                <div>
+                    <img src={`img/slide2.png`} alt='img' />
                 </div>
                 <div>
                     <img src={`img/slider-img.jpg`} alt='img'/>
@@ -19,10 +22,7 @@ export const MainSlider: FC = () => {
                     <img src={`img/slider-img.jpg`} alt='img'/>
                 </div>
                 <div>
-                    <img src={`img/slider-img.jpg`} alt='img'/>
-                </div>
-                <div>
-                    <img src={`img/slider-img.jpg`} alt='img'/>
+                    <img src={`img/slide3.png`} alt='img' />
                 </div>
             </CustomSlider>
         </div>

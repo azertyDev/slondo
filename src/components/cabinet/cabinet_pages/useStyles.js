@@ -5,18 +5,6 @@ export const useStyles = makeStyles((theme) => ({
     cabinetTabs: {
         marginBottom: 15,
         height: 28,
-        '& .MuiTab-root:hover': {
-            '& h6.MuiTypography-subtitle1': {
-                color: (props) =>
-                    props.pathname === '/cabinet/auctions'
-                        ? theme.palette.primary.lotBgColor
-                        : props.pathname === '/cabinet/posts' || props.pathname === '/cabinet/purchases'
-                        ? theme.palette.primary.createAdBtnColor
-                        : props.pathname === '/cabinet/favorite' && props.tabIndex === 0
-                            ? theme.palette.primary.createAdBtnColor
-                            : theme.palette.primary.lotBgColor
-            }
-        },
         '& .MuiTabs-indicator': {
             display: 'flex',
             justifyContent: 'center',

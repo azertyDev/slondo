@@ -1,5 +1,5 @@
 import React, {FC} from 'react';
-import {Box, Typography} from '@material-ui/core';
+import {Box, Tooltip, Typography} from '@material-ui/core';
 import {CloseIcon, CrackerIcon, DoneAllIcon, LetterIcon} from '@src/components/elements/icons';
 import {useTranslation} from 'react-i18next';
 import {OffersStateType} from '@root/interfaces/Cabinet';
@@ -22,8 +22,8 @@ type CabinetCardPropsType = {
 }
 
 export const SecondaryCabinetCard: FC<CabinetCardPropsType> = (props) => {
-    const { info: { id } } = useSelector((store: RootState) => store.user);
-    const { t } = useTranslation(['common', 'categories']);
+    const {info: {id}} = useSelector((store: RootState) => store.user);
+    const {t} = useTranslation(['common', 'categories']);
     const {
         user,
         handleShowPhone,
@@ -31,6 +31,8 @@ export const SecondaryCabinetCard: FC<CabinetCardPropsType> = (props) => {
         acceptOfferThePrice,
         fetchAllOffers
     } = props;
+
+    const tooltipText = 'Доставка осуществляется за Ваш счет. В случае невыполнения доставки, Вы можете быть заблокированы. Ознакомиться с правилами «Есть доставка»';
 
     const classes = useStyles();
     return (
@@ -89,14 +91,17 @@ export const SecondaryCabinetCard: FC<CabinetCardPropsType> = (props) => {
                             <Typography variant="subtitle1" color="initial">
                                 Победитель
                             </Typography>
-                            <ButtonComponent>
-                                <Typography
-                                    variant="subtitle1"
-                                    color="initial"
-                                >
-                                    ?
-                                </Typography>
-                            </ButtonComponent>
+                            <Tooltip title={tooltipText} placement="left">
+                                <ButtonComponent>
+                                    <Typography
+                                        variant="subtitle1"
+                                        color="initial"
+                                    >
+                                        ?
+                                    </Typography>
+                                </ButtonComponent>
+                            </Tooltip>
+
                         </div>
                         <div className="profile-user">
                             <UserAvatarComponent avatar={user.auction.winner.avatar} />

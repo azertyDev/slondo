@@ -1,4 +1,4 @@
-import React, {FC, useEffect, useState} from 'react';
+import {FC, useEffect, useState} from 'react';
 import {TabsContent} from '@src/components/cabinet/cabinet_pages/TabsContent';
 import {MyAuctions} from '@src/components/cabinet/cabinet_pages/my_auctions/MyAuctions';
 import {withAuthRedirect} from '@src/hoc/withAuthRedirect';
@@ -6,7 +6,19 @@ import {userAPI} from '@src/api/api';
 import {useDispatch} from 'react-redux';
 import {setErrorMsgAction} from '@root/src/redux/slices/errorSlice';
 import {useTranslation} from 'next-i18next';
-import {Box, Grid, IconButton, List, ListItem, ListItemText, Paper, Typography} from '@material-ui/core';
+import {
+    Box,
+    CircularProgress,
+    Grid,
+    IconButton,
+    List,
+    ListItem,
+    ListItemText,
+    Paper,
+    Tab,
+    Tabs,
+    Typography
+} from '@material-ui/core';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import {CardDataType, InitialCabinetCardState, OffersStateType, TabsDataType} from '@root/interfaces/Cabinet.js';
 import {useStyles} from './useStyles';
@@ -18,6 +30,7 @@ import {SecondaryCabinetCard} from '@src/components/cabinet/components/Secondary
 import {initialStateType} from '@src/components/cabinet/cabinet_pages/notifications/NotificationsContainer';
 import {ITEMS_PER_PAGE} from '@src/constants';
 import {CustomPagination} from '@src/components/elements/custom_pagination/CustomPagination';
+import {CustomTabPanel} from '@src/components/elements/custom_tab_panel/CustomTabPanel';
 
 export const MyAuctionsContainer: FC = () => {
     const dispatch = useDispatch();
@@ -131,17 +144,21 @@ export const MyAuctionsContainer: FC = () => {
     const [openModal, setOpenModal] = useState(false);
     const [tabIndex, setTabIndex] = useState(0);
     const [modalContentIndex, setModalContentIndex] = useState(1);
-    const [showPhone, setShowPhone] = React.useState(false);
+    const [showPhone, setShowPhone] = useState(false);
     const [notification, setNotification] = useState(initialNotificationState);
     const [phone, setPhone] = useState(null);
-    const [openDialog, setOpenDialog] = React.useState(false);
+    const [openDialog, setOpenDialog] = useState(false);
     const [page, setPage] = useState(1);
     const [pageCount, setPageCount] = useState(0);
 
     const indexOfLastPost = page * ITEMS_PER_PAGE;
     const indexOfFirstPost = indexOfLastPost - ITEMS_PER_PAGE;
     const currentNotifications = notification.data.slice(indexOfFirstPost, indexOfLastPost);
+    const [childTabValue, setChildTabValue] = useState(0);
 
+    const handleChildTabChange = (event, newValue) => {
+        setChildTabValue(newValue);
+    };
     const handlePaginationPage = (event, value) => {
         setPage(value);
     };
@@ -217,12 +234,15 @@ export const MyAuctionsContainer: FC = () => {
             } else {
                 setParticipatingData({...auctionData, isFetch: true});
                 const {data, total, message} = await userAPI.getAuctionSubs();
-                !message && setParticipatingData({myPosts: {data, total}, isFetch: false});
+                message
+                    ? setParticipatingData(initialState)
+                    : setParticipatingData({myPosts: {data, total}, isFetch: false});
             }
         } catch (e) {
             dispatch(setErrorMsgAction(e));
         }
     };
+
     const fetchAllOffers = (auction_id: number) => async () => {
         try {
             auction_id && setSelectedAuction({...selectedAuction, id: auction_id});
@@ -469,11 +489,6 @@ export const MyAuctionsContainer: FC = () => {
         </>
     );
 
-    useEffect(() => {
-        fetchAuctionData('auc');
-        fetchAuctionData();
-    }, []);
-
     const pagination = (
         <CustomPagination
             pageCount={pageCount}
@@ -550,6 +565,79 @@ export const MyAuctionsContainer: FC = () => {
         </Box>
     ));
 
+    const createdAuctionTabs = (
+        <>
+            <Tabs
+                value={childTabValue}
+                onChange={handleChildTabChange}
+                aria-label="tabs"
+                className={classes.childTabs}
+                TabIndicatorProps={{
+                    style: {
+                        display: 'none'
+                    }
+                }}
+            >
+                <Tab
+                    label={
+                        <Typography variant="subtitle1">
+                            Активные
+                        </Typography>
+                    }
+                />
+                <Tab
+                    label={
+                        <Typography variant="subtitle1">
+                            Архивные
+                        </Typography>
+                    }
+                />
+            </Tabs>
+            <CustomTabPanel value={childTabValue} index={0}>
+                {auctionData.isFetch ? <CircularProgress color="primary" /> : creatorAuctionCards}
+            </CustomTabPanel>
+            <CustomTabPanel value={childTabValue} index={1}>
+
+            </CustomTabPanel>
+        </>
+    );
+
+    const participatingAuctionTabs = (
+        <>
+            <Tabs
+                value={childTabValue}
+                onChange={handleChildTabChange}
+                aria-label="tabs"
+                className={classes.childTabs}
+                TabIndicatorProps={{
+                    style: {
+                        display: 'none'
+                    }
+                }}
+            >
+                <Tab
+                    label={
+                        <Typography variant="subtitle1">
+                            Активные
+                        </Typography>
+                    }
+                />
+                <Tab
+                    label={
+                        <Typography variant="subtitle1">
+                            Завершенные
+                        </Typography>
+                    }
+                />
+            </Tabs>
+            <CustomTabPanel value={childTabValue} index={0}>
+                {participatingData.isFetch ? <CircularProgress color="primary" /> : participantsAuctionCards}
+            </CustomTabPanel>
+            <CustomTabPanel value={childTabValue} index={1}>
+            </CustomTabPanel>
+        </>
+    );
+
     const tabsData: TabsDataType = [
         {
             id: 0,
@@ -558,12 +646,11 @@ export const MyAuctionsContainer: FC = () => {
             component:
                 <MyAuctions
                     t={t}
+                    auctionTabs={createdAuctionTabs}
                     selectedAuction={selectedAuction}
-                    isFetch={auctionData.isFetch}
                     openModal={openModal}
                     ModalContent={ModalContent}
                     handleClose={handleModalClose}
-                    auctionCards={creatorAuctionCards}
                     handleDeleteNotification={handleDeleteNotification}
                     fetchUserPhone={fetchUserPhone}
                     phone={phone}
@@ -580,24 +667,26 @@ export const MyAuctionsContainer: FC = () => {
             component:
                 <MyAuctions
                     t={t}
-                    isFetch={auctionData.isFetch}
+                    auctionTabs={participatingAuctionTabs}
                     openModal={openModal}
                     ModalContent={ModalContent}
                     handleClose={handleModalClose}
-                    auctionCards={participantsAuctionCards}
                 />
         }
     ];
 
-    const title = t('myAuctions');
+    useEffect(() => {
+        fetchAuctionData('auc');
+        fetchAuctionData();
+    }, []);
 
     return (
         <TabsContent
             tabIndex={tabIndex}
             handleTabChange={handleTabChange}
-            title={title}
+            title={t('myAuctions')}
             tabsData={tabsData}
-            headerTitle={title}
+            headerTitle={t('myAuctions')}
         />
     );
 };

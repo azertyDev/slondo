@@ -107,7 +107,6 @@ const SettingsContainer: FC = () => {
     const handleDisableTimer = () => {
         setActiveTimer(false);
     };
-
     const handleOpenModal = async () => {
         try {
             setFetchingSmsCode(true);
@@ -121,32 +120,25 @@ const SettingsContainer: FC = () => {
             setFetchingSmsCode(false);
         }
     };
-
     const handleModalClose = () => {
         setOpenModal(false);
         setIsPassConfirm(false);
     };
-
     const handlePassConfirm = () => {
         setIsPassConfirm(true);
     };
-
     const handleAllowEdit = () => {
         setFormDisable(!formDisable);
     };
-
     const handleUpload = (event) => {
         setValues({...values, avatar: event.target.files[0]});
     };
-
     const handleDeleteAvatar = () => {
         setValues({...values, avatar: ''});
     };
-
     const handleSwitch = (_, value) => {
         setValues({...values, avalTime: {...avalTime, isActive: value}});
     };
-
     const handleAvalDays = day => () => {
         const isExstDay = avalTime.time.week_days.some(({id}) => id === day.id);
         const week_days = [...avalTime.time.week_days];
@@ -170,7 +162,6 @@ const SettingsContainer: FC = () => {
             }
         });
     };
-
     const handleTime = ({target: {value, name}}) => {
         if (timeRegEx.test(value)) {
             value = value.replace(/^:(.+)/, m => `00${m}`).replace(/(.+):$/, m => `${m}00`);
@@ -179,15 +170,12 @@ const SettingsContainer: FC = () => {
             setValues({...values, avalTime: {...avalTime, time}});
         }
     };
-
     const handleSignIn = (user) => () => {
         dispatch(signInAction(user));
     };
-
     const errorHandle = (errMsg) => {
         setErrorMsg(errMsg);
     };
-
     const runTimer = () => {
         if (activeTimer) {
             if (timer > 0) {
@@ -260,6 +248,7 @@ const SettingsContainer: FC = () => {
         <Settings
             handleAllowEdit={handleAllowEdit}
             settingsForm={settingsForm}
+            formDisable={formDisable}
             openModal={openModal}
             modalContent={ModalContent}
             handleClose={handleModalClose}

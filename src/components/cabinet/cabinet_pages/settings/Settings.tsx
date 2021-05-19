@@ -11,6 +11,7 @@ type SettingsPropsType = {
     openModal: boolean,
     handleClose: () => void,
     modalContent: ReactElement,
+    formDisable: boolean,
 }
 
 export const Settings: FC<SettingsPropsType> = (props) => {
@@ -19,7 +20,8 @@ export const Settings: FC<SettingsPropsType> = (props) => {
         handleAllowEdit,
         openModal,
         handleClose,
-        modalContent
+        modalContent,
+        formDisable
     } = props;
     const title = 'Настройки';
 
@@ -41,10 +43,12 @@ export const Settings: FC<SettingsPropsType> = (props) => {
                             variant='text'
                             className={classes.editButton}
                             onClick={handleAllowEdit}
-                            startIcon={<EditIcon fontSize='small' />}
+                            startIcon={formDisable && <EditIcon fontSize='small' />}
                         >
                             <Typography variant='subtitle1'>
-                                Редактировать
+                                {
+                                    formDisable ? 'Редактировать' : 'Отменить'
+                                }
                             </Typography>
                         </Button>
                     </Box>

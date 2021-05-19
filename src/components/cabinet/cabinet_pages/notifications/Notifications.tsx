@@ -51,10 +51,13 @@ export const Notifications: FC<NotificationsPropsType> = (props) => {
             <CabinetWrapper headerTitle={title} title={title}>
                 {!!notifications.length && (
                     <ButtonComponent
+                        color='primary'
                         className='delete-notifications'
                         onClick={handleOpenModal}
                     >
-                        Удалить все уведомления
+                        <Typography variant='subtitle1'>
+                            Удалить все уведомления
+                        </Typography>
                     </ButtonComponent>
                 )}
                 {isFetch

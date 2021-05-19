@@ -1,18 +1,15 @@
-import React, {FC, ReactElement, ReactNode} from 'react';
+import {FC, ReactElement} from 'react';
 import {CustomModal} from '@src/components/elements/custom_modal/CustomModal';
-import {Box, CircularProgress, FormControlLabel, Switch, Tab, Tabs, Typography} from '@material-ui/core';
+import {Box, FormControlLabel, Switch, Typography} from '@material-ui/core';
 import {ResponsiveDialog} from '@root/src/components/elements/responsive_dialog/ResponsiveDialog';
 import {numberPrettier} from '@root/src/helpers';
 import {Notification} from '@src/components/cabinet/cabinet_pages/notifications/notification_card/Notification';
 import {WithT} from 'i18next';
-import {CustomTabPanel} from '@src/components/elements/custom_tab_panel/CustomTabPanel';
 
 type MyAuctionsPropsType = {
-    isFetch: boolean
     handleClose: () => void,
     openModal: boolean,
     ModalContent: () => ReactElement,
-    auctionCards: ReactNode,
     handleDeleteNotification?: (id: number, ads_id: number) => () => void,
     fetchUserPhone?: (user_id: number) => () => void,
     phone?: number,
@@ -20,24 +17,16 @@ type MyAuctionsPropsType = {
     setOpenDialog?,
     selectedAuction?,
     pagination?: ReactElement,
+    auctionTabs: ReactElement,
     currentNotifications?
 } & WithT
 
 export const MyAuctions: FC<MyAuctionsPropsType> = (props) => {
-
-    const [tabValue, setTabValue] = React.useState(0);
-
-    const handleChange = (event, newValue) => {
-        setTabValue(newValue);
-    };
-
     const {
         t,
         handleClose,
         openModal,
         ModalContent,
-        auctionCards,
-        isFetch,
         handleDeleteNotification,
         fetchUserPhone,
         phone,
@@ -45,28 +34,14 @@ export const MyAuctions: FC<MyAuctionsPropsType> = (props) => {
         setOpenDialog,
         selectedAuction,
         pagination,
-        currentNotifications
+        currentNotifications,
+        auctionTabs
     } = props;
 
-    function a11yProps(index) {
-        return {
-            id: `simple-tab-${index}`,
-            'aria-controls': `simple-tabpanel-${index}`
-        };
-    }
 
     return (
         <>
-            <Tabs value={tabValue} onChange={handleChange} aria-label="tabs">
-                <Tab label="Активные" {...a11yProps(0)} />
-                <Tab label="Архивные" {...a11yProps(1)} />
-            </Tabs>
-            <CustomTabPanel value={tabValue} index={0}>
-                {isFetch ? <CircularProgress color="secondary" /> : auctionCards}
-            </CustomTabPanel>
-            <CustomTabPanel value={tabValue} index={1}>
-            </CustomTabPanel>
-
+            {auctionTabs}
             <CustomModal
                 handleModalClose={handleClose}
                 openModal={openModal}
