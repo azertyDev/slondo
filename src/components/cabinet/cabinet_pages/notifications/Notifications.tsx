@@ -1,8 +1,8 @@
-import React, {FC, ReactElement} from 'react';
+import {FC, ReactElement} from 'react';
 import {CabinetWrapper} from '@src/components/cabinet/CabinetWrapper';
 import {useStyles} from './useStyles';
 import {Notification} from '@src/components/cabinet/cabinet_pages/notifications/notification_card/Notification';
-import {ButtonComponent} from '@src/components/elements/button/Button';
+import {CustomButton} from '@src/components/elements/custom_button/CustomButton';
 import {CircularProgress, Typography} from '@material-ui/core';
 import {CustomModal} from '@src/components/elements/custom_modal/CustomModal';
 import Box from '@material-ui/core/Box';
@@ -50,7 +50,7 @@ export const Notifications: FC<NotificationsPropsType> = (props) => {
         <div className={classes.root}>
             <CabinetWrapper headerTitle={title} title={title}>
                 {!!notifications.length && (
-                    <ButtonComponent
+                    <CustomButton
                         color='primary'
                         className='delete-notifications'
                         onClick={handleOpenModal}
@@ -58,7 +58,7 @@ export const Notifications: FC<NotificationsPropsType> = (props) => {
                         <Typography variant='subtitle1'>
                             Удалить все уведомления
                         </Typography>
-                    </ButtonComponent>
+                    </CustomButton>
                 )}
                 {isFetch
                     ? <CircularProgress />
@@ -91,8 +91,8 @@ export const Notifications: FC<NotificationsPropsType> = (props) => {
                     alignItems='center'
                     className={classes.modal}
                 >
-                    <ButtonComponent onClick={handleDeleteAllNotification}>Да</ButtonComponent>
-                    <ButtonComponent onClick={handleCloseModal}>Нет</ButtonComponent>
+                    <CustomButton onClick={handleDeleteAllNotification}>Да</CustomButton>
+                    <CustomButton onClick={handleCloseModal}>Нет</CustomButton>
                 </Box>
             </CustomModal>
             <CustomSnackbar
