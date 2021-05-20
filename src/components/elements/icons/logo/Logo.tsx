@@ -1,10 +1,12 @@
 import React from 'react';
+import {useMediaQuery, useTheme} from '@material-ui/core';
 
 export const Logo = () => {
+    const isXsDown = useMediaQuery(useTheme().breakpoints.down('xs'));
     return (
         <svg
             width="148"
-            height="39"
+            height={isXsDown ? '30px' : '39px'}
             viewBox="0 0 148 39"
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
@@ -62,10 +64,10 @@ export const Logo = () => {
                     y2="-37.875"
                     gradientUnits="userSpaceOnUse"
                 >
-                    <stop stopColor="#675EAA" />
-                    <stop offset="0.145098" stopColor="#835CAA" />
-                    <stop offset="0.290196" stopColor="#855CAC" />
-                    <stop offset="1" stopColor="#A05AA9" />
+                    <stop stopColor="#675EAA"/>
+                    <stop offset="0.145098" stopColor="#835CAA"/>
+                    <stop offset="0.290196" stopColor="#855CAC"/>
+                    <stop offset="1" stopColor="#A05AA9"/>
                 </linearGradient>
             </defs>
         </svg>

@@ -8,7 +8,7 @@ import {
     Typography,
     AppBar,
     Toolbar,
-    IconButton, Box, useMediaQuery, useTheme
+    IconButton, Box, useMediaQuery, useTheme, Slide, useScrollTrigger
 } from '@material-ui/core';
 import {LeftDrawer} from './drawer/Drawer';
 import {Localization} from './localization/Localization';
@@ -22,15 +22,19 @@ import {
 import {Location} from '@src/components/elements/location/Location';
 import {useStyles} from './useStyles';
 import {SearchForm} from '@src/components/header/bottom/search_form/SearchForm';
-import {width} from '@material-ui/system';
+import {CustomButton} from '@src/components/elements/custom_button/CustomButton';
+
 
 
 type TopHeaderPropsType = {
+    isAuth: boolean,
     handleOpenModal: () => void;
 } & WithT;
 
 export const Top: FC<TopHeaderPropsType> = (props) => {
-    const {t, handleOpenModal} = props;
+    const {t, handleOpenModal, isAuth} = props;
+
+    const trigger = useScrollTrigger();
 
     const {pathname} = useRouter();
 
@@ -92,43 +96,63 @@ export const Top: FC<TopHeaderPropsType> = (props) => {
             </Grid>
             {/*    Adaptive   */}
             <Hidden lgUp>
-                <AppBar position={'fixed'} color={'inherit'} elevation={0}>
-                    <Toolbar>
-                        <Grid
-                            container
-                            justify="space-between"
-                            alignItems="center"
-                        >
-                            <Grid>
-                                <IconButton
-                                    size="small"
-                                    onClick={() => setIsOpen(true)}
-                                >
-                                    <div className="burger-menu">
-                                        <div/>
-                                        <div/>
-                                        <div/>
-                                    </div>
-                                </IconButton>
+                <Slide
+                    appear={false}
+                    direction="down"
+                    in={!trigger}
+                >
+                    <AppBar position={'fixed'} color={'inherit'} elevation={0}>
+                        <Toolbar>
+                            <Grid
+                                container
+                                justify="space-between"
+                                alignItems="center"
+                            >
+                                <Grid>
+                                    <IconButton
+                                        size="small"
+                                        onClick={() => setIsOpen(true)}
+                                    >
+                                        <div className="burger-menu">
+                                            <div/>
+                                            <div/>
+                                            <div/>
+                                        </div>
+                                    </IconButton>
+                                </Grid>
+                                <Grid className="top-header-logo">
+                                    <Link href="/">
+                                        <a>
+                                            <Logo/>
+                                        </a>
+                                    </Link>
+                                </Grid>
+                                {isAuth
+                                    ? <Link href='/cabinet/posts'>
+                                        <a>
+                                            <div className={classes.avatarBlock}>
+                                                <IconButton onClick={handleOpenModal}>
+                                                    <UserAvatarIcon/>
+                                                </IconButton>
+                                            </div>
+                                        </a>
+                                    </Link>
+                                    : <CustomButton
+                                        className="btn-sign-mobile"
+                                        onClick={handleOpenModal}
+                                    >
+                                        <Typography variant="subtitle2">
+                                            {t('auth_reg:signIn')}
+                                        </Typography>
+                                    </CustomButton>}
                             </Grid>
-                            <Grid className="top-header-logo">
-                                <Link href="/">
-                                    <a>
-                                        <Logo/>
-                                    </a>
-                                </Link>
-                            </Grid>
-                            <Grid className={classes.avatarBlock}>
-                                <IconButton onClick={handleOpenModal}>
-                                    <UserAvatarIcon/>
-                                </IconButton>
-                            </Grid>
-                        </Grid>
-                    </Toolbar>
-                    <Box px={isXsDown ? '12px' : '24px'}>
-                        <SearchForm/>
-                    </Box>
-                </AppBar>
+                        </Toolbar>
+                        <Box px={isXsDown ? '12px' : '24px'}>
+                            <SearchForm/>
+                        </Box>
+                    </AppBar>
+                </Slide>
+
                 <LeftDrawer isOpen={isOpen} setIsOpen={setIsOpen}/>
             </Hidden>
         </div>

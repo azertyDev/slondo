@@ -9,7 +9,7 @@ export const useStyles = makeStyles((theme) => ({
             marginBottom: '21px',
             [theme.breakpoints.down('md')]: {
                 fontWeight: '600',
-                fontSize: 'calc(14px + 15 * (100vw / 1280))',
+                fontSize: 'calc(14px + 10 * (100vw / 1280))',
                 marginBottom: '10px'
             }
         },

@@ -92,7 +92,15 @@ export const useStyles = makeStyles((theme) => ({
             '& div:nth-child(3)': {
                 width: '9px'
             }
-
+        },
+        '& button.btn-sign-mobile': {
+            background: 'inherit',
+            padding: 0,
+            '& h6': {
+                color: '#4E4E4E',
+                fontSize: 'calc(14px + 2 * (100vw / 1280))',
+                fontWeight: '400'
+            }
         }
     },
     avatarBlock: {
@@ -100,7 +108,11 @@ export const useStyles = makeStyles((theme) => ({
             padding: 0,
             '& svg': {
                 width: '40px',
-                height: '40px'
+                height: '40px',
+                [theme.breakpoints.down('xs')]: {
+                    width: '34px',
+                    height: '34px'
+                }
             }
         }
     }

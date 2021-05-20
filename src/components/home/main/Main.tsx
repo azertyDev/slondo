@@ -1,11 +1,11 @@
-import React, {FC, useState} from 'react';
+import React, {FC,} from 'react';
 import {
     Hidden,
     Slide,
     Typography,
     useScrollTrigger,
     Grid,
-    Container, IconButton
+    Container,
 } from '@material-ui/core';
 import {MainSlider} from './main_slider/MainSlider';
 import {CategoriesSlider} from './categories_slider/CategoriesSlider';

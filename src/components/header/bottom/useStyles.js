@@ -112,7 +112,7 @@ export const useStyles = makeStyles((theme) => ({
                 marginTop: '103px'
             },
             [theme.breakpoints.down('xs')]: {
-                marginTop: '96px'
+                marginTop: '97px'
             },
             marginTop: '103px',
             display: 'flex',

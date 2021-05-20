@@ -49,6 +49,7 @@ export const Header: FC = () => {
                 <Container maxWidth="xl">
                     <Top
                         t={t}
+                        isAuth={isAuth}
                         handleOpenModal={handleOpenModal}
                     />
                     <div>

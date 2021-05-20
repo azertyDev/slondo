@@ -4,11 +4,6 @@ export const useStyles = makeStyles((theme) => ({
     root: {
         display: 'flex',
         justifyContent: 'center',
-        [theme.breakpoints.down('md')]: {
-            background: '#F5F5F5',
-            padding: '7px',
-            borderRadius: '100px'
-        },
         '& a': {
             textDecoration: 'none'
         },
