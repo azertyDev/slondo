@@ -1,12 +1,13 @@
 import {FC} from 'react';
 import {WithT} from 'i18next';
+import {Typography} from '@material-ui/core';
 import {FormikField} from '@src/components/elements/formik_field/FormikField';
 import {useStyles} from './useStyles';
-import {Typography} from '@material-ui/core';
 
 type PriceFromToPropsType = {
     name: string,
     values,
+    disabled: boolean,
     handleInput: (e) => void
 } & WithT;
 
@@ -15,10 +16,11 @@ export const PriceFromTo: FC<PriceFromToPropsType> = (props) => {
         t,
         name,
         values,
+        disabled,
         handleInput
     } = props;
 
-    const {price} = values;
+    const {price_from, price_to} = values;
 
     const classes = useStyles();
     return (
@@ -31,19 +33,21 @@ export const PriceFromTo: FC<PriceFromToPropsType> = (props) => {
             <div className='price-from-to'>
                 <FormikField
                     t={t}
-                    name='price_from'
-                    placeholder={t('filters:from')}
-                    value={price.from}
-                    onChange={handleInput}
                     size='small'
+                    name='price_from'
+                    disabled={disabled}
+                    value={price_from}
+                    onChange={handleInput}
+                    placeholder={t('filters:from')}
                 />
                 <FormikField
                     t={t}
-                    name='price_to'
-                    placeholder={t('filters:to')}
-                    value={price.to}
-                    onChange={handleInput}
                     size='small'
+                    name='price_to'
+                    disabled={disabled}
+                    value={price_to}
+                    onChange={handleInput}
+                    placeholder={t('filters:to')}
                 />
             </div>
         </div>

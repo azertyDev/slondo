@@ -6,8 +6,9 @@ export {QuestionIcon} from './QuestionIcon';
 export {LocationIcon} from './LocationIcon';
 export {FavoriteIcon} from './FavoriteIcon';
 export {FavoriteBorderIcon} from './FavoriteBorderIcon';
-export {DeliveryIcon} from './DeliveryIcon';
-export {SafeIcon} from './SafeIcon';
+export {SafeIcon} from './services_icons/SafeIcon';
+export {DeliveryIcon} from './services_icons/DeliveryIcon';
+export {ExchangeIcon} from './services_icons/ExchangeIcon';
 export {SwapIcon} from './SwapIcon';
 export {LockIcon} from './LockIcon';
 export {MegaphoneIcon} from './MegaphoneIcon';
@@ -78,4 +79,3 @@ export {CrackerIcon} from './CrackerIcon';
 export {RenewalIcon} from './social_icons/Renewal';
 export {RocketIcon} from './RocketIcon';
 export {ChevronRight} from './ChevronRight';
-

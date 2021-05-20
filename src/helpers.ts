@@ -106,7 +106,7 @@ export const addParentsToCtgrs = (categoriesList: CategoryType[]): CategoryType[
     }
 };
 
-export const dataForCrtPostNormalize = (data: any, type?) => {
+export const normalizeFiltersByCategory = (data: any, type?) => {
     if (!!data) {
         data = Object.keys(data).reduce((acc: any, key) => {
             if (Array.isArray(data[key]) && !!data[key].length) {
@@ -116,7 +116,7 @@ export const dataForCrtPostNormalize = (data: any, type?) => {
                 } else if (key === 'type') {
                     acc = {
                         ...acc,
-                        ...dataForCrtPostNormalize(data[key][0])
+                        ...normalizeFiltersByCategory(data[key][0])
                     };
                 }
             }

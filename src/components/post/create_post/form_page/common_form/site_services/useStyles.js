@@ -27,6 +27,10 @@ export const useStyles = makeStyles(() => ({
             '& span.safe-auction-rules': {
                 color: '#9a64d0'
             }
+        },
+        '& div.icon-wrapper': {
+            display: 'flex',
+            alignItems: 'center'
         }
     }
 }))

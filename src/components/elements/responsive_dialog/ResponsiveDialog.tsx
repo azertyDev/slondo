@@ -1,16 +1,21 @@
-import React from 'react';
+import {Dispatch, FC, SetStateAction} from 'react';
 import Dialog from '@material-ui/core/Dialog';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 import {useTheme} from '@material-ui/core/styles';
 import {useStyles} from './useStyles';
 
-export const ResponsiveDialog = (props) => {
+type ResponsiveDialogPropsType = {
+    openDialog: boolean,
+    setOpenDialog: Dispatch<SetStateAction<boolean>>
+};
+
+export const ResponsiveDialog: FC<ResponsiveDialogPropsType> = (props) => {
     const {
         openDialog,
         setOpenDialog
     } = props;
-    const theme = useTheme();
-    const fullScreen = useMediaQuery(theme.breakpoints.down('md'));
+
+    const fullScreen = useMediaQuery(useTheme().breakpoints.down('md'));
 
     const classes = useStyles();
 
@@ -19,18 +24,16 @@ export const ResponsiveDialog = (props) => {
     };
 
     return (
-        <>
-            <Dialog
-                fullScreen={fullScreen}
-                maxWidth='md'
-                fullWidth
-                open={openDialog}
-                onClose={handleClose}
-                aria-labelledby="responsive-dialog-title"
-                className={classes.root}
-            >
-                {props.children}
-            </Dialog>
-        </>
+        <Dialog
+            fullScreen={fullScreen}
+            maxWidth='md'
+            fullWidth
+            open={openDialog}
+            onClose={handleClose}
+            aria-labelledby="responsive-dialog-title"
+            className={classes.root}
+        >
+            {props.children}
+        </Dialog>
     );
 };

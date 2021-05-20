@@ -27,6 +27,8 @@ export const useStyles = makeStyles((theme) => ({
         '& div.filters-wrapper': {
             position: 'absolute',
             display: 'flex',
+            backgroundColor: theme.palette.primary.white,
+            zIndex: 100,
             '& ul.sub-ctgrs': {
                 height: '442px',
                 borderLeft: 0,

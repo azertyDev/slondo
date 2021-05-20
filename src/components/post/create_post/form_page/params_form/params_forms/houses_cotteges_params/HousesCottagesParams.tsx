@@ -1,30 +1,26 @@
 import {FC} from 'react';
 import {Grid} from '@material-ui/core';
-import {WithT} from 'i18next';
 import {DropDownSelect} from '@src/components/elements/drop_down_select/DropDownSelect';
 import {
     HandleOptionCheckboxType,
     OptionsSelect
 } from '@src/components/elements/options_select/OptionsSelect';
 import {PreviewValues} from '../../PreviewValues';
-import {FormikType} from '@root/interfaces/Formik';
 import {getErrorMsg} from '@src/helpers';
 import {DeployedSelect} from '@src/components/elements/deployed_select/DeployedSelect';
 import {CheckboxSelect} from '@src/components/elements/checkbox_select/CheckboxSelect';
 import {NumberSelect} from '@src/components/elements/number_select/NumberSelect';
 import {FormikField} from '@src/components/elements/formik_field/FormikField';
+import {CategoriesCommonType} from '../../ParamsFormContainer';
 import {useStyles} from './useStyles';
 
 
 type RegularFormPropsType = {
     type,
-    isPreview: boolean,
-    filters,
-    formik: FormikType<any>,
     handleSelect: (k, v) => void,
     handleCheckbox: (e) => void,
     handleOptionCheckbox: HandleOptionCheckboxType
-} & WithT;
+} & CategoriesCommonType;
 
 export const HousesCottagesParams: FC<RegularFormPropsType> = (props) => {
     const {

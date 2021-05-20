@@ -1,22 +1,18 @@
 import {FC} from "react";
-import {WithT} from "i18next";
 import {Grid} from "@material-ui/core";
 import {DropDownSelect} from "@src/components/elements/drop_down_select/DropDownSelect";
 import {FormikField} from "@src/components/elements/formik_field/FormikField";
-import {FormikType} from "@root/interfaces/Formik";
-import {useStyles} from './useStyles';
 import {DeployedSelect} from "@src/components/elements/deployed_select/DeployedSelect";
 import {PreviewValues} from "@src/components/post/create_post/form_page/params_form/PreviewValues";
+import {CategoriesCommonType} from '../../ParamsFormContainer';
 import {getErrorMsg} from "@src/helpers";
+import {useStyles} from './useStyles';
 
 
 type LandPropsType = {
-    isPreview: boolean,
-    filters,
     type,
-    formik: FormikType<any>,
     handleSelect: (k, v) => void
-} & WithT;
+} & CategoriesCommonType;
 
 export const LandParams: FC<LandPropsType> = (props) => {
     const {

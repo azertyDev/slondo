@@ -48,7 +48,7 @@ export const DeployedSelect: FC<SelectOptionsPropsType> = (props) => {
                         onClick={handleClick(item)}
                         className={values[name]?.id === item.id ? 'selected' : ''}
                     >
-                        {item.name}
+                        {t(`filters:${item.name}`)}
                     </CustomButton>
                 )}
             </div>

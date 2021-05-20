@@ -1,19 +1,16 @@
 import {FC, Fragment} from 'react';
-import {WithT} from 'i18next';
 import {Grid, Typography} from '@material-ui/core';
 import {excludeFields, optionFields} from '@src/common_data/form_fields';
 import {DropDownSelect} from '@src/components/elements/drop_down_select/DropDownSelect';
 import {getErrorMsg} from '@src/helpers';
 import {OptionsSelect} from '@src/components/elements/options_select/OptionsSelect';
+import {CategoriesCommonType} from '../../ParamsFormContainer';
 import {useStyles} from './useStyles';
 
 
 type RegularFormPropsType = {
-    isPreview: boolean,
-    filters,
-    formik,
     handleSelect: (k, v) => void,
-} & WithT;
+} & CategoriesCommonType;
 
 export const RegularParams: FC<RegularFormPropsType> = (props) => {
     const {

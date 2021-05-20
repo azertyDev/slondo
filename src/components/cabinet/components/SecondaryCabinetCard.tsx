@@ -4,12 +4,12 @@ import {CloseIcon, CrackerIcon, DoneAllIcon, LetterIcon} from '@src/components/e
 import {OffersStateType} from '@root/interfaces/Cabinet';
 import {useSelector} from 'react-redux';
 import {RootState} from '@src/redux/rootReducer';
-import {ButtonComponent} from '@src/components/elements/button/Button';
+import {CustomButton} from '@src/components/elements/custom_button/CustomButton';
 import {Rating} from '@src/components/elements/rating/Rating';
 import {UserAvatarComponent} from '@src/components/elements/user_info_with_avatar/avatar/UserAvatarComponent';
 import StarIcon from '@material-ui/icons/Star';
-import {useStyles} from './useStyles';
 import {WithT} from 'i18next';
+import {useStyles} from './useStyles';
 
 type CabinetCardPropsType = {
     user?,
@@ -47,14 +47,14 @@ export const SecondaryCabinetCard: FC<CabinetCardPropsType> = (props) => {
                             <Typography variant="subtitle1" color="initial">
                                 Продавец
                             </Typography>
-                            <ButtonComponent>
+                            <CustomButton>
                                 <Typography
                                     variant="subtitle1"
                                     color="initial"
                                 >
                                     ?
                                 </Typography>
-                            </ButtonComponent>
+                            </CustomButton>
                         </div>
                         <div className="profile-user">
                             <UserAvatarComponent avatar={user.author.avatar} />
@@ -65,7 +65,7 @@ export const SecondaryCabinetCard: FC<CabinetCardPropsType> = (props) => {
                                 {user.author.name}
                             </Typography>
                             <Rating card />
-                            <ButtonComponent className='rate' onClick={handleOpenDialog}>
+                            <CustomButton className='rate' onClick={handleOpenDialog}>
                                 <StarIcon />
                                 <Typography
                                     variant="subtitle2"
@@ -73,7 +73,7 @@ export const SecondaryCabinetCard: FC<CabinetCardPropsType> = (props) => {
                                 >
                                     Оценить
                                 </Typography>
-                            </ButtonComponent>
+                            </CustomButton>
                         </div>
                         <div>
                             <Typography
@@ -113,7 +113,7 @@ export const SecondaryCabinetCard: FC<CabinetCardPropsType> = (props) => {
                                 {user.auction.winner.name}
                             </Typography>
                             <Rating card />
-                            <ButtonComponent className='write'>
+                            <CustomButton className='write'>
                                 <LetterIcon />
                                 <Typography
                                     variant="subtitle2"
@@ -121,10 +121,10 @@ export const SecondaryCabinetCard: FC<CabinetCardPropsType> = (props) => {
                                 >
                                     Написать
                                 </Typography>
-                            </ButtonComponent>
+                            </CustomButton>
                         </div>
                         <div>
-                            <ButtonComponent className="show-phone-btn" onClick={handleShowPhone}>
+                            <CustomButton className="show-phone-btn" onClick={handleShowPhone}>
                                 <Typography
                                     variant="subtitle2"
                                     color="initial"
@@ -133,7 +133,7 @@ export const SecondaryCabinetCard: FC<CabinetCardPropsType> = (props) => {
                                         ? user.auction.winner.phone
                                         : 'Показать номер'}
                                 </Typography>
-                            </ButtonComponent>
+                            </CustomButton>
                             {/* <Typography
                                     variant="subtitle2"
                                     color="initial"
@@ -151,14 +151,14 @@ export const SecondaryCabinetCard: FC<CabinetCardPropsType> = (props) => {
                             <Typography variant="subtitle1" color="initial">
                                 Предложенная цена ({user.auction.number_of_offers})
                             </Typography>
-                            <ButtonComponent>
+                            <CustomButton>
                                 <Typography
                                     variant="subtitle1"
                                     color="initial"
                                 >
                                     ?
                                 </Typography>
-                            </ButtonComponent>
+                            </CustomButton>
                         </div>
                         <div className="profile-user">
                             <UserAvatarComponent
@@ -172,7 +172,7 @@ export const SecondaryCabinetCard: FC<CabinetCardPropsType> = (props) => {
                             </Typography>
                             <Rating card />
                             <Typography variant='h6'>{user.auction.offer.price} сум</Typography>
-                            <ButtonComponent className='accept'
+                            <CustomButton className='accept'
                                              onClick={acceptOfferThePrice(user.auction.offer.id, true)}>
                                 <DoneAllIcon />
                                 <Typography
@@ -181,8 +181,8 @@ export const SecondaryCabinetCard: FC<CabinetCardPropsType> = (props) => {
                                 >
                                     Принять
                                 </Typography>
-                            </ButtonComponent>
-                            <ButtonComponent
+                            </CustomButton>
+                            <CustomButton
                                 className='decline'
                                 onClick={acceptOfferThePrice(user.auction.offer.id, false)}
                             >
@@ -193,7 +193,7 @@ export const SecondaryCabinetCard: FC<CabinetCardPropsType> = (props) => {
                                 >
                                     Отказать
                                 </Typography>
-                            </ButtonComponent>
+                            </CustomButton>
                         </div>
                         <div>
                             <Typography

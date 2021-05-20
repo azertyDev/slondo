@@ -10,7 +10,7 @@ import {MainLayout} from '@src/components/main_layout/MainLayout';
 import {AppearanceForm} from './appearance_form/AppearanceForm';
 import {CommonForm} from './common_form/CommonForm';
 import {setErrorMsgAction} from '@root/src/redux/slices/errorSlice';
-import {dataForCrtPostNormalize, getCategoriesByParams, CategoriesParamsType} from '@src/helpers';
+import {normalizeFiltersByCategory, getCategoriesByParams, CategoriesParamsType} from '@src/helpers';
 import {CustomButton} from '@src/components/elements/custom_button/CustomButton';
 import {SuccessPage} from '@src/components/post/create_post/form_page/success_page/SuccessPage';
 import {ParamsFormContainer} from './params_form/ParamsFormContainer';
@@ -82,8 +82,8 @@ export const FormPage: FC = () => {
         setCurrentFormIndex(formIndex);
     };
 
-    const manufacturersDataNormalize = (data) => {
-        return data.manufacturers.map(({manufacturer}) => {
+    const manufacturersDataNormalize = data => (
+        data.manufacturers.map(({manufacturer}) => {
             manufacturer = {
                 id: manufacturer.id,
                 name: manufacturer.name,
@@ -97,8 +97,8 @@ export const FormPage: FC = () => {
                 })
             };
             return manufacturer;
-        });
-    };
+        })
+    );
 
     const fetchFilters = async () => {
         try {
@@ -125,7 +125,7 @@ export const FormPage: FC = () => {
 
             setFilters({
                 isFetch: false,
-                data: dataForCrtPostNormalize(fetchedData, type)
+                data: normalizeFiltersByCategory(fetchedData, type)
             });
         } catch (e) {
             dispatch(setErrorMsgAction(e.message));
@@ -187,10 +187,10 @@ export const FormPage: FC = () => {
                      <ParamsFormContainer
                          t={t}
                          type={type}
-                         filters={filtersData}
                          post={post}
                          setPost={setPost}
                          isPreview={isPreview}
+                         filters={filtersData}
                          subCategory={subCategory}
                          categoryName={categoryName}
                          currentFormIndex={currentFormIndex}
