@@ -163,7 +163,7 @@ export const MyAuctionsContainer: FC = () => {
         setPage(value);
     };
     const handleOpenDialog = () => {
-        setOpenDialog(true);
+        setOpenDialog(!openDialog);
     };
     const fetchAuctionNotifications = (post) => async () => {
         try {
@@ -242,7 +242,6 @@ export const MyAuctionsContainer: FC = () => {
             dispatch(setErrorMsgAction(e));
         }
     };
-
     const fetchAllOffers = (auction_id: number) => async () => {
         try {
             auction_id && setSelectedAuction({...selectedAuction, id: auction_id});
@@ -520,6 +519,7 @@ export const MyAuctionsContainer: FC = () => {
                 </Grid>
                 <Grid item xs={3}>
                     <SecondaryCabinetCard
+                        t={t}
                         user={data}
                         offersData={offersData}
                         acceptOfferThePrice={acceptOfferThePrice}
@@ -554,7 +554,9 @@ export const MyAuctionsContainer: FC = () => {
                 </Grid>
                 <Grid item xs={3}>
                     <SecondaryCabinetCard
+                        t={t}
                         user={data}
+                        handleOpenDialog={handleOpenDialog}
                         handleShowPhone={handleShowPhone}
                         showPhone={showPhone}
                         acceptOfferThePrice={acceptOfferThePrice}

@@ -375,6 +375,7 @@ const MyPostsContainer: FC = () => {
                 </Grid>
                 <Grid item xs={3}>
                     <SecondaryCabinetCard
+                        t={t}
                         user={data}
                         handleShowPhone={handleShowPhone}
                         showPhone={showPhone}
