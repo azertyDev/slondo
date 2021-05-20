@@ -38,7 +38,6 @@ export const MyAuctions: FC<MyAuctionsPropsType> = (props) => {
         auctionTabs
     } = props;
 
-
     return (
         <>
             {auctionTabs}
@@ -49,7 +48,7 @@ export const MyAuctions: FC<MyAuctionsPropsType> = (props) => {
                 <ModalContent />
             </CustomModal>
             <ResponsiveDialog
-                openDialog={openDialog}
+                openDialog={openDialog ?? false}
                 setOpenDialog={setOpenDialog}
             >
                 <Box

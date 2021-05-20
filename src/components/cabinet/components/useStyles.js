@@ -22,14 +22,17 @@ export const useStyles = makeStyles(() => ({
                 '& > h6.MuiTypography-subtitle1': {
                     fontSize: '0.75rem'
                 },
-                '& > button': {
+                '& > div.question-mark': {
+                    display: 'flex',
+                    justifyContent: 'center',
+                    alignItems: 'center',
                     width: '20px',
                     height: '20px',
                     borderRadius: '50%',
-                    background:
-                        'linear-gradient(49.94deg, rgb(103, 94, 170) 19.03%, rgb(173, 102, 213) 72.72%)',
+                    background: 'linear-gradient(49.94deg, rgb(103, 94, 170) 19.03%, rgb(173, 102, 213) 72.72%)',
                     fontSize: '0.75rem',
                     padding: '0',
+                    cursor: 'default',
                     '& > h6.MuiTypography-subtitle1': {
                         fontSize: '0.875rem',
                         color: '#fff'

@@ -1,7 +1,6 @@
-import React, {FC} from 'react';
+import {FC} from 'react';
 import {Box, Tooltip, Typography} from '@material-ui/core';
 import {CloseIcon, CrackerIcon, DoneAllIcon, LetterIcon} from '@src/components/elements/icons';
-import {useTranslation} from 'react-i18next';
 import {OffersStateType} from '@root/interfaces/Cabinet';
 import {useSelector} from 'react-redux';
 import {RootState} from '@src/redux/rootReducer';
@@ -10,6 +9,7 @@ import {Rating} from '@src/components/elements/rating/Rating';
 import {UserAvatarComponent} from '@src/components/elements/user_info_with_avatar/avatar/UserAvatarComponent';
 import StarIcon from '@material-ui/icons/Star';
 import {useStyles} from './useStyles';
+import {WithT} from 'i18next';
 
 type CabinetCardPropsType = {
     user?,
@@ -18,18 +18,20 @@ type CabinetCardPropsType = {
     acceptOfferThePrice?: (offer_id, is_accepted) => () => void,
     fetchAllOffers?: (auction_id) => () => void,
     handleShowPhone?: () => void,
+    handleOpenDialog?: () => void,
     showPhone?: boolean
-}
+} & WithT
 
 export const SecondaryCabinetCard: FC<CabinetCardPropsType> = (props) => {
-    const {info: {id}} = useSelector((store: RootState) => store.user);
-    const {t} = useTranslation(['common', 'categories']);
+    const userId = useSelector((store: RootState) => store.user.info.id);
     const {
+        t,
         user,
-        handleShowPhone,
-        showPhone,
+        fetchAllOffers,
         acceptOfferThePrice,
-        fetchAllOffers
+        showPhone,
+        handleOpenDialog,
+        handleShowPhone
     } = props;
 
     const tooltipText = 'Доставка осуществляется за Ваш счет. В случае невыполнения доставки, Вы можете быть заблокированы. Ознакомиться с правилами «Есть доставка»';
@@ -63,7 +65,7 @@ export const SecondaryCabinetCard: FC<CabinetCardPropsType> = (props) => {
                                 {user.author.name}
                             </Typography>
                             <Rating card />
-                            <ButtonComponent className='rate'>
+                            <ButtonComponent className='rate' onClick={handleOpenDialog}>
                                 <StarIcon />
                                 <Typography
                                     variant="subtitle2"
@@ -92,16 +94,15 @@ export const SecondaryCabinetCard: FC<CabinetCardPropsType> = (props) => {
                                 Победитель
                             </Typography>
                             <Tooltip title={tooltipText} placement="left">
-                                <ButtonComponent>
+                                <div className='question-mark'>
                                     <Typography
                                         variant="subtitle1"
                                         color="initial"
                                     >
                                         ?
                                     </Typography>
-                                </ButtonComponent>
+                                </div>
                             </Tooltip>
-
                         </div>
                         <div className="profile-user">
                             <UserAvatarComponent avatar={user.auction.winner.avatar} />
@@ -205,7 +206,7 @@ export const SecondaryCabinetCard: FC<CabinetCardPropsType> = (props) => {
                     </div>
                 )}
                 {/*Поздравляем! Вы победили в аукционе*/}
-                {user.status === 'suspended' && user.auction.winner_id === id && (
+                {user.status === 'suspended' && user.auction.winner_id === userId && (
                     <Box className='profile-form'>
                         <Box display='flex' className='congrat'>
                             <div className='cracker-icon'>

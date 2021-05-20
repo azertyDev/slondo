@@ -16,13 +16,13 @@ export const MainSlider: FC = () => {
                     <img src={`img/slide2.png`} alt='img' />
                 </div>
                 <div>
-                    <img src={`img/slider-img.jpg`} alt='img'/>
-                </div>
-                <div>
-                    <img src={`img/slider-img.jpg`} alt='img'/>
-                </div>
-                <div>
                     <img src={`img/slide3.png`} alt='img' />
+                </div>
+                <div>
+                    <img src={`img/slide5.png`} alt='img' />
+                </div>
+                <div>
+                    <img src={`img/slide4.png`} alt='img' />
                 </div>
             </CustomSlider>
         </div>
