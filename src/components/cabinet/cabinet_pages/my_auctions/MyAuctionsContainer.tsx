@@ -1,23 +1,36 @@
-import React, {FC, useEffect, useState} from 'react';
+import {FC, useEffect, useState} from 'react';
 import {TabsContent} from '@src/components/cabinet/cabinet_pages/TabsContent';
 import {MyAuctions} from '@src/components/cabinet/cabinet_pages/my_auctions/MyAuctions';
-import {withAuthRedirect} from '@src/hocs/withAuthRedirect';
+import {withAuthRedirect} from '@src/hoc/withAuthRedirect';
 import {userAPI} from '@src/api/api';
 import {useDispatch} from 'react-redux';
 import {setErrorMsgAction} from '@root/src/redux/slices/errorSlice';
 import {useTranslation} from 'next-i18next';
-import {Box, Grid, IconButton, List, ListItem, ListItemText, Typography} from '@material-ui/core';
+import {
+    Box,
+    CircularProgress,
+    Grid,
+    IconButton,
+    List,
+    ListItem,
+    ListItemText,
+    Paper,
+    Tab,
+    Tabs,
+    Typography
+} from '@material-ui/core';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import {CardDataType, InitialCabinetCardState, OffersStateType, TabsDataType} from '@root/interfaces/Cabinet.js';
 import {useStyles} from './useStyles';
 import {UserInfoWithAvatar} from '@src/components/elements/user_info_with_avatar/UserInfoWithAvatar';
-import {CustomButton} from '@src/components/elements/custom_button/CustomButton';
-import {CloseIcon, DoneAllIcon} from '@src/components/elements/icons';
+import {ButtonComponent} from '@src/components/elements/button/Button';
+import {ChevronRight, CloseIcon, DoneAllIcon} from '@src/components/elements/icons';
 import {CabinetCard} from '@src/components/cabinet/cabinet_card/CabinetCard';
 import {SecondaryCabinetCard} from '@src/components/cabinet/components/SecondaryCabinetCard';
 import {initialStateType} from '@src/components/cabinet/cabinet_pages/notifications/NotificationsContainer';
 import {ITEMS_PER_PAGE} from '@src/constants';
 import {CustomPagination} from '@src/components/elements/custom_pagination/CustomPagination';
+import {CustomTabPanel} from '@src/components/elements/custom_tab_panel/CustomTabPanel';
 
 export const MyAuctionsContainer: FC = () => {
     const dispatch = useDispatch();
@@ -131,17 +144,21 @@ export const MyAuctionsContainer: FC = () => {
     const [openModal, setOpenModal] = useState(false);
     const [tabIndex, setTabIndex] = useState(0);
     const [modalContentIndex, setModalContentIndex] = useState(1);
-    const [showPhone, setShowPhone] = React.useState(false);
+    const [showPhone, setShowPhone] = useState(false);
     const [notification, setNotification] = useState(initialNotificationState);
     const [phone, setPhone] = useState(null);
-    const [openDialog, setOpenDialog] = React.useState(false);
+    const [openDialog, setOpenDialog] = useState(false);
     const [page, setPage] = useState(1);
     const [pageCount, setPageCount] = useState(0);
 
     const indexOfLastPost = page * ITEMS_PER_PAGE;
     const indexOfFirstPost = indexOfLastPost - ITEMS_PER_PAGE;
     const currentNotifications = notification.data.slice(indexOfFirstPost, indexOfLastPost);
+    const [childTabValue, setChildTabValue] = useState(0);
 
+    const handleChildTabChange = (event, newValue) => {
+        setChildTabValue(newValue);
+    };
     const handlePaginationPage = (event, value) => {
         setPage(value);
     };
@@ -167,10 +184,10 @@ export const MyAuctionsContainer: FC = () => {
     const handleTabChange = (event, newValue) => {
         setTabIndex(newValue);
     };
-    const handleOpenModal = (auction_id) => () => {
+    const handleOpenModal = (auction_id: number, index?: number) => () => {
         setOpenModal(true);
         auction_id && setSelectedAuction({...selectedAuction, id: auction_id});
-        setModalContentIndex(1);
+        setModalContentIndex(index);
     };
     const handleModalClose = () => {
         setOpenModal(false);
@@ -217,12 +234,15 @@ export const MyAuctionsContainer: FC = () => {
             } else {
                 setParticipatingData({...auctionData, isFetch: true});
                 const {data, total, message} = await userAPI.getAuctionSubs();
-                !message && setParticipatingData({myPosts: {data, total}, isFetch: false});
+                message
+                    ? setParticipatingData(initialState)
+                    : setParticipatingData({myPosts: {data, total}, isFetch: false});
             }
         } catch (e) {
             dispatch(setErrorMsgAction(e));
         }
     };
+
     const fetchAllOffers = (auction_id: number) => async () => {
         try {
             auction_id && setSelectedAuction({...selectedAuction, id: auction_id});
@@ -367,7 +387,7 @@ export const MyAuctionsContainer: FC = () => {
                 return <Box className='offers-info'>
                     <Box>
                         <Typography variant='h6'>Все предложения</Typography>
-                        <Typography variant='subtitle2'>Аукцион №: {selectedAuction.id}</Typography>
+                        <Typography variant='subtitle2'>{`Аукцион №: ${selectedAuction.id}`}</Typography>
                     </Box>
                     <Box width={1}>
                         {offersData.data.map(offer => {
@@ -387,7 +407,7 @@ export const MyAuctionsContainer: FC = () => {
                                             {offer.price}
                                         </div>
                                         <div>
-                                            <CustomButton
+                                            <ButtonComponent
                                                 className='accept'
                                                 onClick={acceptOfferThePrice(offer.id, true)}
                                             >
@@ -398,8 +418,8 @@ export const MyAuctionsContainer: FC = () => {
                                                 >
                                                     Принять
                                                 </Typography>
-                                            </CustomButton>
-                                            <CustomButton
+                                            </ButtonComponent>
+                                            <ButtonComponent
                                                 className='decline'
                                                 onClick={acceptOfferThePrice(offer.id, false)}
                                             >
@@ -410,7 +430,7 @@ export const MyAuctionsContainer: FC = () => {
                                                 >
                                                     Отказать
                                                 </Typography>
-                                            </CustomButton>
+                                            </ButtonComponent>
                                         </div>
                                     </Box>
                                 </Box>
@@ -418,6 +438,34 @@ export const MyAuctionsContainer: FC = () => {
                         })}
                     </Box>
                 </Box>;
+            case 11:
+                return <Box className={classes.promoteInfo}>
+                    <Box mb='20px' textAlign='center'>
+                        <Typography variant='h6'>Рекламировать объявление</Typography>
+                        <Typography variant='subtitle2'>{`Аукцион №: ${selectedAuction.id}`}</Typography>
+                    </Box>
+                    <Box mb='20px'>
+                        <Paper className='promote-item'>
+                            <Box maxWidth='180px'>
+                                <Typography variant='h6' gutterBottom>Поднять в топ</Typography>
+                                <Typography variant='subtitle1'>Действует 3 дня</Typography>
+                                <Typography variant='subtitle2'>
+                                    Объявление появляется в ленте в 40 чаще и выделяется анимацией.
+                                </Typography>
+                                <Typography variant='h5'>60 000 сум</Typography>
+                            </Box>
+                            <Box display='flex' alignItems='flex-end' width='180px'>
+                                <ButtonComponent>
+                                    <Typography variant='subtitle1'>Поднять в ТОП</Typography>
+                                    <ChevronRight width='20px' height='20px' />
+                                </ButtonComponent>
+                                <img src={'/img/promote-img.jpg'} alt="promote-img" />
+                            </Box>
+                        </Paper>
+                    </Box>
+                </Box>;
+            default:
+                return modalContentIndex;
         }
     };
     const ModalContent = () => (
@@ -426,7 +474,7 @@ export const MyAuctionsContainer: FC = () => {
                 ? <Typography className="title" variant="h6">
                     Аукцион №: {selectedAuction.id}
                 </Typography>
-                : (modalContentIndex !== 10 && (
+                : (modalContentIndex !== 10 || 11 && (
                         <IconButton
                             className='prev-btn'
                             aria-label="back"
@@ -440,11 +488,6 @@ export const MyAuctionsContainer: FC = () => {
             {getModalContent()}
         </>
     );
-
-    useEffect(() => {
-        fetchAuctionData('auc');
-        fetchAuctionData();
-    }, []);
 
     const pagination = (
         <CustomPagination
@@ -467,11 +510,11 @@ export const MyAuctionsContainer: FC = () => {
                     />
                     {data.creator && data.status === 'accepted' && (
                         <Box mt={1}>
-                            <CustomButton className='end-auction' onClick={handleDeactivate(data.id)}>
+                            <ButtonComponent className='end-auction' onClick={handleDeactivate(data.id)}>
                                 <Typography variant='subtitle1'>
                                     Завершить аукцион
                                 </Typography>
-                            </CustomButton>
+                            </ButtonComponent>
                         </Box>
                     )}
                 </Grid>
@@ -500,12 +543,12 @@ export const MyAuctionsContainer: FC = () => {
                     />
                     {!data.creator && data.status === 'suspended' && (
                         <Box mt={1}>
-                            <CustomButton onClick={handleAcceptVictory(data.auction.id, true)}>
+                            <ButtonComponent onClick={handleAcceptVictory(data.auction.id, true)}>
                                 <Typography variant='subtitle1'>Принять</Typography>
-                            </CustomButton>
-                            <CustomButton onClick={handleAcceptVictory(data.auction.id, false)}>
+                            </ButtonComponent>
+                            <ButtonComponent onClick={handleAcceptVictory(data.auction.id, false)}>
                                 <Typography variant='subtitle1'>Отказать</Typography>
-                            </CustomButton>
+                            </ButtonComponent>
                         </Box>
                     )}
                 </Grid>
@@ -522,6 +565,79 @@ export const MyAuctionsContainer: FC = () => {
         </Box>
     ));
 
+    const createdAuctionTabs = (
+        <>
+            <Tabs
+                value={childTabValue}
+                onChange={handleChildTabChange}
+                aria-label="tabs"
+                className={classes.childTabs}
+                TabIndicatorProps={{
+                    style: {
+                        display: 'none'
+                    }
+                }}
+            >
+                <Tab
+                    label={
+                        <Typography variant="subtitle1">
+                            Активные
+                        </Typography>
+                    }
+                />
+                <Tab
+                    label={
+                        <Typography variant="subtitle1">
+                            Архивные
+                        </Typography>
+                    }
+                />
+            </Tabs>
+            <CustomTabPanel value={childTabValue} index={0}>
+                {auctionData.isFetch ? <CircularProgress color="primary" /> : creatorAuctionCards}
+            </CustomTabPanel>
+            <CustomTabPanel value={childTabValue} index={1}>
+
+            </CustomTabPanel>
+        </>
+    );
+
+    const participatingAuctionTabs = (
+        <>
+            <Tabs
+                value={childTabValue}
+                onChange={handleChildTabChange}
+                aria-label="tabs"
+                className={classes.childTabs}
+                TabIndicatorProps={{
+                    style: {
+                        display: 'none'
+                    }
+                }}
+            >
+                <Tab
+                    label={
+                        <Typography variant="subtitle1">
+                            Активные
+                        </Typography>
+                    }
+                />
+                <Tab
+                    label={
+                        <Typography variant="subtitle1">
+                            Завершенные
+                        </Typography>
+                    }
+                />
+            </Tabs>
+            <CustomTabPanel value={childTabValue} index={0}>
+                {participatingData.isFetch ? <CircularProgress color="primary" /> : participantsAuctionCards}
+            </CustomTabPanel>
+            <CustomTabPanel value={childTabValue} index={1}>
+            </CustomTabPanel>
+        </>
+    );
+
     const tabsData: TabsDataType = [
         {
             id: 0,
@@ -530,12 +646,11 @@ export const MyAuctionsContainer: FC = () => {
             component:
                 <MyAuctions
                     t={t}
+                    auctionTabs={createdAuctionTabs}
                     selectedAuction={selectedAuction}
-                    isFetch={auctionData.isFetch}
                     openModal={openModal}
                     ModalContent={ModalContent}
                     handleClose={handleModalClose}
-                    auctionCards={creatorAuctionCards}
                     handleDeleteNotification={handleDeleteNotification}
                     fetchUserPhone={fetchUserPhone}
                     phone={phone}
@@ -552,24 +667,26 @@ export const MyAuctionsContainer: FC = () => {
             component:
                 <MyAuctions
                     t={t}
-                    isFetch={auctionData.isFetch}
+                    auctionTabs={participatingAuctionTabs}
                     openModal={openModal}
                     ModalContent={ModalContent}
                     handleClose={handleModalClose}
-                    auctionCards={participantsAuctionCards}
                 />
         }
     ];
 
-    const title = t('myAuctions');
+    useEffect(() => {
+        fetchAuctionData('auc');
+        fetchAuctionData();
+    }, []);
 
     return (
         <TabsContent
             tabIndex={tabIndex}
             handleTabChange={handleTabChange}
-            title={title}
+            title={t('myAuctions')}
             tabsData={tabsData}
-            headerTitle={title}
+            headerTitle={t('myAuctions')}
         />
     );
 };

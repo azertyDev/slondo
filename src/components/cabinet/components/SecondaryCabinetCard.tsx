@@ -1,11 +1,11 @@
 import React, {FC} from 'react';
-import {Box, Typography} from '@material-ui/core';
+import {Box, Tooltip, Typography} from '@material-ui/core';
 import {CloseIcon, CrackerIcon, DoneAllIcon, LetterIcon} from '@src/components/elements/icons';
 import {useTranslation} from 'react-i18next';
 import {OffersStateType} from '@root/interfaces/Cabinet';
 import {useSelector} from 'react-redux';
 import {RootState} from '@src/redux/rootReducer';
-import {CustomButton} from '@src/components/elements/custom_button/CustomButton';
+import {ButtonComponent} from '@src/components/elements/button/Button';
 import {Rating} from '@src/components/elements/rating/Rating';
 import {UserAvatarComponent} from '@src/components/elements/user_info_with_avatar/avatar/UserAvatarComponent';
 import StarIcon from '@material-ui/icons/Star';
@@ -22,8 +22,8 @@ type CabinetCardPropsType = {
 }
 
 export const SecondaryCabinetCard: FC<CabinetCardPropsType> = (props) => {
-    const { info: { id } } = useSelector((store: RootState) => store.user);
-    const { t } = useTranslation(['common', 'categories']);
+    const {info: {id}} = useSelector((store: RootState) => store.user);
+    const {t} = useTranslation(['common', 'categories']);
     const {
         user,
         handleShowPhone,
@@ -31,6 +31,8 @@ export const SecondaryCabinetCard: FC<CabinetCardPropsType> = (props) => {
         acceptOfferThePrice,
         fetchAllOffers
     } = props;
+
+    const tooltipText = 'Доставка осуществляется за Ваш счет. В случае невыполнения доставки, Вы можете быть заблокированы. Ознакомиться с правилами «Есть доставка»';
 
     const classes = useStyles();
     return (
@@ -43,14 +45,14 @@ export const SecondaryCabinetCard: FC<CabinetCardPropsType> = (props) => {
                             <Typography variant="subtitle1" color="initial">
                                 Продавец
                             </Typography>
-                            <CustomButton>
+                            <ButtonComponent>
                                 <Typography
                                     variant="subtitle1"
                                     color="initial"
                                 >
                                     ?
                                 </Typography>
-                            </CustomButton>
+                            </ButtonComponent>
                         </div>
                         <div className="profile-user">
                             <UserAvatarComponent avatar={user.author.avatar} />
@@ -61,7 +63,7 @@ export const SecondaryCabinetCard: FC<CabinetCardPropsType> = (props) => {
                                 {user.author.name}
                             </Typography>
                             <Rating card />
-                            <CustomButton className='rate'>
+                            <ButtonComponent className='rate'>
                                 <StarIcon />
                                 <Typography
                                     variant="subtitle2"
@@ -69,7 +71,7 @@ export const SecondaryCabinetCard: FC<CabinetCardPropsType> = (props) => {
                                 >
                                     Оценить
                                 </Typography>
-                            </CustomButton>
+                            </ButtonComponent>
                         </div>
                         <div>
                             <Typography
@@ -89,14 +91,17 @@ export const SecondaryCabinetCard: FC<CabinetCardPropsType> = (props) => {
                             <Typography variant="subtitle1" color="initial">
                                 Победитель
                             </Typography>
-                            <CustomButton>
-                                <Typography
-                                    variant="subtitle1"
-                                    color="initial"
-                                >
-                                    ?
-                                </Typography>
-                            </CustomButton>
+                            <Tooltip title={tooltipText} placement="left">
+                                <ButtonComponent>
+                                    <Typography
+                                        variant="subtitle1"
+                                        color="initial"
+                                    >
+                                        ?
+                                    </Typography>
+                                </ButtonComponent>
+                            </Tooltip>
+
                         </div>
                         <div className="profile-user">
                             <UserAvatarComponent avatar={user.auction.winner.avatar} />
@@ -107,7 +112,7 @@ export const SecondaryCabinetCard: FC<CabinetCardPropsType> = (props) => {
                                 {user.auction.winner.name}
                             </Typography>
                             <Rating card />
-                            <CustomButton className='write'>
+                            <ButtonComponent className='write'>
                                 <LetterIcon />
                                 <Typography
                                     variant="subtitle2"
@@ -115,10 +120,10 @@ export const SecondaryCabinetCard: FC<CabinetCardPropsType> = (props) => {
                                 >
                                     Написать
                                 </Typography>
-                            </CustomButton>
+                            </ButtonComponent>
                         </div>
                         <div>
-                            <CustomButton className="show-phone-btn" onClick={handleShowPhone}>
+                            <ButtonComponent className="show-phone-btn" onClick={handleShowPhone}>
                                 <Typography
                                     variant="subtitle2"
                                     color="initial"
@@ -127,7 +132,7 @@ export const SecondaryCabinetCard: FC<CabinetCardPropsType> = (props) => {
                                         ? user.auction.winner.phone
                                         : 'Показать номер'}
                                 </Typography>
-                            </CustomButton>
+                            </ButtonComponent>
                             {/* <Typography
                                     variant="subtitle2"
                                     color="initial"
@@ -145,14 +150,14 @@ export const SecondaryCabinetCard: FC<CabinetCardPropsType> = (props) => {
                             <Typography variant="subtitle1" color="initial">
                                 Предложенная цена ({user.auction.number_of_offers})
                             </Typography>
-                            <CustomButton>
+                            <ButtonComponent>
                                 <Typography
                                     variant="subtitle1"
                                     color="initial"
                                 >
                                     ?
                                 </Typography>
-                            </CustomButton>
+                            </ButtonComponent>
                         </div>
                         <div className="profile-user">
                             <UserAvatarComponent
@@ -166,8 +171,8 @@ export const SecondaryCabinetCard: FC<CabinetCardPropsType> = (props) => {
                             </Typography>
                             <Rating card />
                             <Typography variant='h6'>{user.auction.offer.price} сум</Typography>
-                            <CustomButton className='accept'
-                                          onClick={acceptOfferThePrice(user.auction.offer.id, true)}>
+                            <ButtonComponent className='accept'
+                                             onClick={acceptOfferThePrice(user.auction.offer.id, true)}>
                                 <DoneAllIcon />
                                 <Typography
                                     variant="subtitle2"
@@ -175,8 +180,8 @@ export const SecondaryCabinetCard: FC<CabinetCardPropsType> = (props) => {
                                 >
                                     Принять
                                 </Typography>
-                            </CustomButton>
-                            <CustomButton
+                            </ButtonComponent>
+                            <ButtonComponent
                                 className='decline'
                                 onClick={acceptOfferThePrice(user.auction.offer.id, false)}
                             >
@@ -187,7 +192,7 @@ export const SecondaryCabinetCard: FC<CabinetCardPropsType> = (props) => {
                                 >
                                     Отказать
                                 </Typography>
-                            </CustomButton>
+                            </ButtonComponent>
                         </div>
                         <div>
                             <Typography
