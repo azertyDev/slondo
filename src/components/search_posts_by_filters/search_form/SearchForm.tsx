@@ -1,4 +1,4 @@
-import {FC} from 'react';
+import {FC, ReactNode} from 'react';
 import {WithT} from 'i18next';
 import {Grid} from '@material-ui/core';
 import {Form, FormikContextType, FormikProvider} from 'formik';
@@ -8,14 +8,21 @@ import {CustomButton} from '@src/components/elements/custom_button/CustomButton'
 import {postTypes} from '@src/common_data/post_types';
 import {PriceFromTo} from '@src/components/elements/price_from_to/PriceFromTo';
 import {DeployedSelect} from '@src/components/elements/deployed_select/DeployedSelect';
+import {SiteServices} from '@src/components/post/create_post/form_page/common_form/site_services/SiteServices';
+import {CheckboxSelect} from '@src/components/elements/checkbox_select/CheckboxSelect';
 import {useStyles} from './useStyles';
 
 
 type SearchFormPropsType = {
     filters,
+    categoryName: string,
     formik: FormikContextType<any>,
     handleInput: (e) => void,
     handleSelect: (name, value) => void
+    handlePostType: (_, v) => void,
+    handleReset: () => void,
+    handleCheckbox: (name) => (e) => void,
+    getFiltersByCtgr: () => ReactNode
 } & WithT;
 
 export const SearchForm: FC<SearchFormPropsType> = (props) => {
@@ -23,11 +30,17 @@ export const SearchForm: FC<SearchFormPropsType> = (props) => {
         t,
         formik,
         filters,
+        categoryName,
         handleInput,
-        handleSelect
+        handleSelect,
+        handleReset,
+        handlePostType,
+        handleCheckbox,
+        getFiltersByCtgr
     } = props;
 
     const {values, handleBlur} = formik;
+    const postTypesFilter = [postTypes[0], postTypes[1]];
 
     const classes = useStyles();
     return (
@@ -61,8 +74,8 @@ export const SearchForm: FC<SearchFormPropsType> = (props) => {
                             t={t}
                             formik={formik}
                             name='post_type'
-                            options={postTypes}
-                            handleSelect={handleSelect}
+                            options={postTypesFilter}
+                            handleSelect={handlePostType}
                         />
                     </Grid>
                     <Grid item xs={4}>
@@ -70,12 +83,32 @@ export const SearchForm: FC<SearchFormPropsType> = (props) => {
                             t={t}
                             name='cost'
                             values={values}
+                            disabled={values.free}
                             handleInput={handleInput}
                         />
                     </Grid>
+                    <Grid item container alignItems='center' xs={2}>
+                        <CheckboxSelect
+                            t={t}
+                            name='free'
+                            checked={values.free}
+                            onChange={handleCheckbox('free')}
+                        />
+                    </Grid>
+                    <Grid item xs={12}>
+                        <SiteServices
+                            t={t}
+                            iconMode
+                            isAuction={false}
+                            values={values}
+                            categoryName={categoryName}
+                            handleCheckbox={handleCheckbox}
+                        />
+                    </Grid>
                 </Grid>
-                <div className='submit-btns'>
-                    <CustomButton>{t('filters:reset')}</CustomButton>
+                {getFiltersByCtgr()}
+                <div className='actions-btns'>
+                    <CustomButton onClick={handleReset}>{t('filters:reset')}</CustomButton>
                     <CustomButton>{t('filters:apply')}</CustomButton>
                 </div>
             </Form>

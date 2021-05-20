@@ -1,4 +1,4 @@
-import React, {FC, ReactElement} from 'react';
+import {FC, ReactElement} from 'react';
 import {CabinetWrapper} from '@src/components/cabinet/CabinetWrapper';
 import {useStyles} from './useStyles';
 import {Notification} from '@src/components/cabinet/cabinet_pages/notifications/notification_card/Notification';
@@ -51,10 +51,13 @@ export const Notifications: FC<NotificationsPropsType> = (props) => {
             <CabinetWrapper headerTitle={title} title={title}>
                 {!!notifications.length && (
                     <CustomButton
+                        color='primary'
                         className='delete-notifications'
                         onClick={handleOpenModal}
                     >
-                        Удалить все уведомления
+                        <Typography variant='subtitle1'>
+                            Удалить все уведомления
+                        </Typography>
                     </CustomButton>
                 )}
                 {isFetch

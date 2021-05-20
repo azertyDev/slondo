@@ -28,20 +28,28 @@ export const Location: FC = () => {
     const {region, city, district} = selectedLocation;
 
     const locationsTxt = `${t(region?.name) ?? ''}${city ? `, ${t(city?.name)}` : ''}${district ? `, ${t(district?.name)}` : ''}`;
-    const prevLocation = !!region
-                         ? `<-- ${t(`${city?.district.length ? city.name : region.name}`)}`
-                         : t(`${district?.name ?? city?.name ?? region?.name ?? 'allUzb'}`);
+    const prevLocation = !!region ? `<-- ${t(`${city?.name ?? region.name}`)}` : t(`allUzb`);
 
     const handleLocation = loc => () => {
-        const value = loc.cities ? {region: loc} : loc.district ? {city: loc} : {district: loc};
+        const value = loc.cities
+                      ? {region: {id: loc.id, name: loc.name}}
+                      : loc.district
+                        ? {city: {id: loc.id, name: loc.name}}
+                        : {district: {id: loc.id, name: loc.name}};
         setSelectedLocation({...selectedLocation, ...value});
         (loc.cities || loc.district?.length) && setLocations(separateByThree(loc.cities ?? loc.district));
     };
 
     const handleModalOpen = () => {
         setOpen(true);
+
+        const cities = locationsFromStore.find(loc => loc.id === region?.id)?.cities;
+        const districts = cities?.find(({id, district}) => {
+            if (district.length) return id === city?.id;
+        })?.district;
+
         region && (
-            setLocations(separateByThree(city?.district.length ? city.district : region.cities))
+            setLocations(separateByThree(districts ?? cities ?? locationsFromStore))
         );
     };
 
@@ -65,10 +73,15 @@ export const Location: FC = () => {
     };
 
     const toPrevLocation = () => {
-        if (city?.district.length) {
-            setLocations(separateByThree(region.cities));
-            setSelectedLocation({...selectedLocation, city: null, district: null});
-        } else if (region) {
+        if (city || district) {
+            const cities = separateByThree(locationsFromStore.find(loc => loc.id === region.id).cities);
+            setLocations(cities);
+            setSelectedLocation({
+                ...selectedLocation,
+                city: null,
+                district: null
+            });
+        } else {
             setLocations(separatedLocations);
             setSelectedLocation(initLocation);
         }

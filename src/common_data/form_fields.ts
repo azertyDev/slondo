@@ -45,6 +45,8 @@ export const numericFields = [
     'price',
     'reserve_price',
     'price_buy_now',
+    'price_from',
+    'price_to',
     'year',
     'area',
     'floor',

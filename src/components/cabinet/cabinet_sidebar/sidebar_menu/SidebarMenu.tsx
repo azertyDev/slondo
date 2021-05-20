@@ -9,7 +9,7 @@ import {GavelIcon} from '@src/components/elements/icons/GavelIcon';
 import {FavoriteBorderIcon} from '@src/components/elements/icons/FavoriteBorderIcon';
 import {NotificationIcon} from '@src/components/elements/icons/NotificationIcon';
 import {LetterIcon} from '@src/components/elements/icons/LetterIcon';
-import {SafeIcon} from '@src/components/elements/icons/SafeIcon';
+import {SafeIcon} from '@src/components/elements/icons/services_icons/SafeIcon';
 import {WalletIcon} from '@src/components/elements/icons/WalletIcon';
 import {ShoppingIcon} from '@src/components/elements/icons/ShoppingIcon';
 import {SettingsIcon} from '@src/components/elements/icons/SettingsIcon';

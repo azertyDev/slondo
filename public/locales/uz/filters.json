@@ -1,8 +1,10 @@
 {
+  "post": "E'lonlar",
+  "auc": "Auksionlar",
   "cost": "Narxi",
   "post_type": "E'lon turi",
-  "from": "Dan",
-  "to": "Gacha",
+  "from": "Dan (sum)",
+  "to": "Gacha (sum)",
   "apply": "Qabul qilish",
   "reset": "Qaytarish",
   "view": "Turi",

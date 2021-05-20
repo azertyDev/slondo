@@ -1,29 +1,44 @@
+enum SafeDeal {
+    parts = 1,
+    goods,
+    home,
+    electronics,
+    hobbies,
+    animal
+}
+
+enum Exchange {
+    car = 1,
+    transport,
+    parts,
+    estate,
+    goods,
+    home,
+    electronics,
+    hobbies,
+    animal
+}
+
+enum Delivery {
+    parts = 1,
+    goods,
+    home,
+    electronics,
+    hobbies,
+    animal
+}
+
 export const site_services = {
-    safe_deal: {
-        parts: true,
-        goods: true,
-        home: true,
-        electronics: true,
-        hobbies: true,
-        animal: true
-    },
-    exchange: {
-        car: true,
-        transport: true,
-        parts: true,
-        estate: true,
-        goods: true,
-        home: true,
-        electronics: true,
-        hobbies: true,
-        animal: true
-    },
-    delivery: {
-        parts: true,
-        goods: true,
-        home: true,
-        electronics: true,
-        hobbies: true,
-        animal: true
-    }
+    safe_deal: SafeDeal,
+    exchange: Exchange,
+    delivery: Delivery
 };
+
+export enum HasAuction {
+    parts = 1,
+    goods,
+    home,
+    electronics,
+    hobbies,
+    animal
+}

@@ -1,4 +1,4 @@
-import React, {FC} from 'react';
+import {FC} from 'react';
 import {Tab, Tabs, Typography} from '@material-ui/core';
 import {CustomTabPanel} from '@src/components/elements/custom_tab_panel/CustomTabPanel';
 import {CabinetMenuPropsType, CabinetWrapper} from '@src/components/cabinet/CabinetWrapper';
@@ -6,6 +6,7 @@ import {MyPurchases} from '@src/components/cabinet/cabinet_pages/my_purchases/My
 import {useTranslation} from 'react-i18next';
 import {useStyles} from './useStyles';
 import {TabsDataType} from '@root/interfaces/Cabinet';
+import {useRouter} from 'next/router';
 
 type TabsContentPropsType = {
     tabIndex: number,
@@ -14,10 +15,11 @@ type TabsContentPropsType = {
 } & CabinetMenuPropsType;
 
 export const TabsContent: FC<TabsContentPropsType> = (props) => {
-    const { tabsData, headerTitle, title, tabIndex, handleTabChange } = props;
-    const { t } = useTranslation('cabinet');
+    const {tabsData, headerTitle, title, tabIndex, handleTabChange} = props;
+    const {t} = useTranslation('cabinet');
+    const {pathname} = useRouter();
 
-    const classes = useStyles();
+    const classes = useStyles({pathname, tabIndex});
     return (
         <div className={classes.root}>
             <CabinetWrapper headerTitle={headerTitle} title={title}>
@@ -50,7 +52,6 @@ export const TabsContent: FC<TabsContentPropsType> = (props) => {
                                 onChange={handleTabChange}
                                 variant="fullWidth"
                                 className={classes.cabinetTabs}
-                                indicatorColor={tabIndex === 1 ? 'primary' : 'secondary'}
                             >
                                 <Tab
                                     label={
@@ -70,7 +71,6 @@ export const TabsContent: FC<TabsContentPropsType> = (props) => {
                                     value={1}
                                     textColor='inherit'
                                     selected={true}
-
                                 />
                             </Tabs>
                             <CustomTabPanel value={tabIndex} index={0}>

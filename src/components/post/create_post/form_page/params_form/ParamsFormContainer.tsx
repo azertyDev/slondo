@@ -1,5 +1,6 @@
 import {FC, useEffect, useState} from 'react';
 import {WithT} from 'i18next';
+import {FormikType} from '@root/interfaces/Formik';
 import {Grid, Typography} from '@material-ui/core';
 import {FormikProvider, useFormik} from 'formik';
 import {userAPI} from '@src/api/api';
@@ -21,6 +22,12 @@ import {fractionalFields, numericFields, optionFields} from '@src/common_data/fo
 import {numberRegEx} from '@src/common_data/reg_exs';
 import {useStyles} from './useStyles';
 
+
+export type CategoriesCommonType = {
+    isPreview?: boolean,
+    filters,
+    formik: FormikType<any>,
+} & WithT;
 
 type RegularFormPropsType = {
     filters,
@@ -377,8 +384,6 @@ export const ParamsFormContainer: FC<RegularFormPropsType> = (props) => {
         setRequireVals();
     }, [filters]);
 
-    console.log('filters', filters);
-    console.log('values', values);
     const classes = useStyles();
     return (
         <div className={classes.root}>

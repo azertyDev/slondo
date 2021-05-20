@@ -1,4 +1,4 @@
-import React, {FC} from 'react';
+import {FC} from 'react';
 import {Box, IconButton, Paper, Tooltip, Typography} from '@material-ui/core';
 import {
     CloseIcon,
@@ -258,11 +258,11 @@ export const CabinetCard: FC<CabinetCardPropsType> = (props) => {
                                 </Typography>
                             </div>
                         </div>
-                        <Tooltip title='Рекламировать' arrow>
+                        {cardData.creator && cardData.status === 'new' && (<Tooltip title='Рекламировать' arrow>
                             <IconButton className='advertise' onClick={handleModalOpen(cardData.id, 11)}>
                                 <RocketIcon />
                             </IconButton>
-                        </Tooltip>
+                        </Tooltip>)}
                     </div>
                 </Box>
             </Paper>

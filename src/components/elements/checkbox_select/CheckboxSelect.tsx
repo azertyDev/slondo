@@ -9,7 +9,7 @@ type CheckboxPropsType = {
     disabled?: boolean,
     checked: boolean,
     name: string,
-    labelText: string,
+    labelText?: string,
     onChange?: SwitchBaseProps['onChange']
 } & WithT;
 
@@ -28,7 +28,7 @@ export const CheckboxSelect: FC<CheckboxPropsType> = (props) => {
         <div className={classes.root}>
             <Typography>
                 <strong>
-                    {t(`filters:${labelText}`)}
+                    {t(`filters:${labelText ?? name}`)}
                 </strong>
             </Typography>
             <Checkbox

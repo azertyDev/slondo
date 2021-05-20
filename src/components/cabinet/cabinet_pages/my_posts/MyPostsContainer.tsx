@@ -1,4 +1,4 @@
-import {FC, useEffect, useState} from 'react';
+import React, {FC, useEffect, useState} from 'react';
 import {TabsContent} from '@src/components/cabinet/cabinet_pages/TabsContent';
 import {MyPosts} from '@src/components/cabinet/cabinet_pages/my_posts/MyPosts';
 import {withAuthRedirect} from '@src/hocs/withAuthRedirect';
@@ -135,7 +135,11 @@ const MyPostsContainer: FC = () => {
     const [postId, setPostId] = useState(null);
     const [errorMsg, setErrMsg] = useState('');
     const [showPhone, setShowPhone] = useState(false);
+    const [openDialog, setOpenDialog] = React.useState(false);
 
+    const handleOpenDialog = () => {
+        setOpenDialog(true);
+    };
     const handleShowPhone = () => {
         setShowPhone(!showPhone);
     };
@@ -371,6 +375,7 @@ const MyPostsContainer: FC = () => {
                 </Grid>
                 <Grid item xs={3}>
                     <SecondaryCabinetCard
+                        t={t}
                         user={data}
                         handleShowPhone={handleShowPhone}
                         showPhone={showPhone}

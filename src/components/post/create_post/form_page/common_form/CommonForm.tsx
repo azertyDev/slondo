@@ -190,6 +190,7 @@ export const CommonForm: FC<DefaultParamsPropsType> = (props) => {
         }
         setValues({...values});
     };
+
     const handleInput = ({target: {name, value}}) => {
         const isNumericField = numericFields.some((n => n === name));
         if (isNumericField) {
@@ -221,10 +222,12 @@ export const CommonForm: FC<DefaultParamsPropsType> = (props) => {
             }
         }
     };
+
     const handleLocation = (_, location) => {
         values.location = location;
         setValues({...values});
     };
+
     const handleCheckboxChange = name => ({target}) => {
         const auctionOptionsList = [
             'price_buy_now',
@@ -246,10 +249,12 @@ export const CommonForm: FC<DefaultParamsPropsType> = (props) => {
         }
         setValues({...values});
     };
+
     const handleSwitch = (_, value) => {
         avalTime.isActive = value;
         setValues({...values});
     };
+
     const handleAvalDays = day => () => {
         const isExstDay = avalTime.time.week_days.some(({id}) => id === day.id);
         if (isExstDay) {
@@ -263,6 +268,7 @@ export const CommonForm: FC<DefaultParamsPropsType> = (props) => {
         }
         setValues({...values});
     };
+
     const handleTime = ({target: {value, name}}) => {
         if (RegExp(timeRegEx).test(value)) {
             value = value.replace(/^:(.+)/, m => `00${m}`).replace(/(.+):$/, m => `${m}00`);
@@ -337,7 +343,7 @@ export const CommonForm: FC<DefaultParamsPropsType> = (props) => {
                                      values={values}
                                      isAuction={isAuction}
                                      categoryName={categoryName}
-                                     handleCheckboxChange={handleCheckboxChange}
+                                     handleCheckbox={handleCheckboxChange}
                                  />
                              </div>
                              <div className='location-wrapper'>

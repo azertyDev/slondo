@@ -1,6 +1,6 @@
 import React, {FC, ReactElement, ReactNode} from 'react';
 import {CustomModal} from '@src/components/elements/custom_modal/CustomModal';
-import {Typography} from '@material-ui/core';
+import {CircularProgress} from '@material-ui/core';
 
 type MyPostsPropsType = {
     isFetch: boolean,
@@ -21,7 +21,7 @@ export const MyPosts: FC<MyPostsPropsType> = (props) => {
 
     return (
         <>
-            {isFetch ? <Typography>...Loading</Typography> : myPostCards}
+            {isFetch ? <CircularProgress color="secondary" /> : myPostCards}
             <CustomModal
                 handleModalClose={handleModalClose}
                 openModal={openModal}

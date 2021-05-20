@@ -168,7 +168,7 @@ export const useStyles = makeStyles((theme) => ({
                         padding: '9px 20px',
                         borderRadius: '100px 0px 0px 100px',
                         boxShadow: '0px 1px 2px rgba(0, 0, 0, 0.1)',
-                        background: 'linear-gradient(182.42deg, #675EAA 2.73%, #AD66D5 97.1%)'
+                        background: 'linear-gradient(90.62deg, #F38522 0.56%, #FFB800 99.49%)'
                     }
                 },
                 '& .description': {
