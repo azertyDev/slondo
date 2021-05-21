@@ -109,15 +109,17 @@ export const useStyles = makeStyles((theme) => ({
 
         '& div.translate-local': {
             [theme.breakpoints.down('md')]: {
-                marginTop: '103px'
+                marginTop: '111px'
             },
             [theme.breakpoints.down('xs')]: {
-                marginTop: '97px'
+                marginTop: '104px'
             },
-            marginTop: '103px',
             display: 'flex',
             alignItems: 'center',
-            justifyContent: 'space-between'
+            justifyContent: 'space-between',
+            '& div:last-child': {
+                marginRight: '10px'
+            }
         }
     }
 }));

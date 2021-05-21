@@ -6,6 +6,9 @@ export const useStyles = makeStyles((theme) => ({
         position: 'relative',
         maxWidth: '1920px',
         padding: '0 19px',
+        [theme.breakpoints.down('md')]: {
+            padding: '0 16px'
+        },
         margin: '0 auto',
         '& div.slick-slider': {
             '& img': {
@@ -37,7 +40,7 @@ export const useStyles = makeStyles((theme) => ({
             }
         },
         '& button span svg:hover': {
-            fill: '#a153ff',
+            fill: '#a153ff'
         },
         '& div.slider-arrows-container': {
             position: 'absolute',
