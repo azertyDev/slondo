@@ -1,11 +1,11 @@
-import React, {FC,} from 'react';
+import React, {FC} from 'react';
 import {
     Hidden,
     Slide,
     Typography,
     useScrollTrigger,
     Grid,
-    Container,
+    Container
 } from '@material-ui/core';
 import {MainSlider} from './main_slider/MainSlider';
 import {CategoriesSlider} from './categories_slider/CategoriesSlider';
@@ -31,10 +31,10 @@ export const Main: FC = () => {
                 <div className="main-slider-wrapper">
                     <MainSlider/>
                 </div>
+                <div className="categories-slider-wrapper">
+                    <CategoriesSlider t={t}/>
+                </div>
                 <Container maxWidth="xl" className="content-wrapper">
-                    <div className="categories-slider-wrapper">
-                        <CategoriesSlider t={t}/>
-                    </div>
                     <Grid container>
                         <Grid item lg={9} xs={12} className='main-content'>
                             <Hidden mdDown>

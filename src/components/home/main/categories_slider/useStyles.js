@@ -6,11 +6,15 @@ export const useStyles = makeStyles((theme) => ({
             textDecoration: 'none'
         },
         '& > h2.title': {
+            padding: '0 24px',
             marginBottom: '21px',
             [theme.breakpoints.down('md')]: {
                 fontWeight: '600',
                 fontSize: 'calc(14px + 10 * (100vw / 1280))',
                 marginBottom: '10px'
+            },
+            [theme.breakpoints.down('xs')]: {
+                padding: '0 16px'
             }
         },
         '& div.category-slider': {
@@ -25,10 +29,10 @@ export const useStyles = makeStyles((theme) => ({
                     top: '23%'
                 },
                 '& button.slick-prev': {
-                    left: '-12px'
+                    left: '10px'
                 },
                 '& button.slick-next': {
-                    right: '-12px'
+                    right: '10px'
                 },
                 '& div.slick-slide img': {
                     width: '100%'

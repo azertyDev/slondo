@@ -7,7 +7,7 @@ export const useStyles = makeStyles((theme) => ({
         maxWidth: '1920px',
         padding: '0 19px',
         [theme.breakpoints.down('md')]: {
-            padding: '0 16px'
+            padding: 0
         },
         margin: '0 auto',
         '& div.slick-slider': {

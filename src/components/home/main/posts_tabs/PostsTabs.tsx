@@ -32,7 +32,7 @@ export const PostsTabs: FC<MainContentProps> = (props) => {
         auctionCardData
     } = props;
 
-    const isAncmntsExist = postCardData.data.total > postCardData.data.cards.length && tabValue === 0;
+    const isPostsExist = postCardData.data.total > postCardData.data.cards.length && tabValue === 0;
     const isAuctionsExist = auctionCardData.data.total > auctionCardData.data.cards.length && tabValue === 1;
 
     const classes = useStyles();
@@ -80,7 +80,7 @@ export const PostsTabs: FC<MainContentProps> = (props) => {
                         />}
                 </CustomTabPanel>
             </div>
-            {(isAncmntsExist || isAuctionsExist)
+            {(isPostsExist || isAuctionsExist)
             && <Grid container className={classes.showMoreContainer}>
                 <Grid item xs={12} className="show-more-block">
                     {postCardData.isShowMoreFetch || auctionCardData.isShowMoreFetch

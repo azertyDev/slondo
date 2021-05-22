@@ -71,8 +71,9 @@ export const useStyles = makeStyles((theme) => ({
                     fontSize: '1rem'
                 }
             }
-        },
-
+        }
+    },
+    adaptive: {
         // ------------> adaptive <--------------- //
         '& div.top-header-logo > a > img': {
             height: '31px',

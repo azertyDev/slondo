@@ -117,8 +117,8 @@ export const useStyles = makeStyles((theme) => ({
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'space-between',
-            '& div:last-child': {
-                marginRight: '10px'
+            '& div:first-child': {
+                marginLeft: '-2px'
             }
         }
     }
