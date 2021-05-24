@@ -4,6 +4,9 @@ export const useStyles = makeStyles((theme) => ({
     root: {
         position: 'relative',
         height: '345px',
+        [theme.breakpoints.down('xs')]: {
+            height: '233px'
+        },
         '& a': {
             textDecoration: 'none'
         },
@@ -64,6 +67,9 @@ export const useStyles = makeStyles((theme) => ({
             },
             '& button.MuiCardActionArea-root': {
                 height: '105px',
+                [theme.breakpoints.down('xs')]: {
+                    height: '80px'
+                },
                 '& > div.MuiCardContent-root': {
                     height: 'inherit',
                     display: 'flex',
@@ -73,13 +79,16 @@ export const useStyles = makeStyles((theme) => ({
             },
             '& > div.card-media': {
                 height: '240px',
+                [theme.breakpoints.down('xs')]: {
+                    height: '153px'
+                },
                 '& > div.card-header': {
                     width: '100%',
                     height: '100%',
                     display: 'flex',
                     flexDirection: 'column',
                     justifyContent: 'space-between',
-                    padding: '10px',
+                    padding: '10px 10px 3px 3px',
                     '& > div.title': {
                         display: 'inline-flex',
                         '& > h6': {
@@ -124,16 +133,34 @@ export const useStyles = makeStyles((theme) => ({
             '& h6.MuiTypography-subtitle1': {
                 [theme.breakpoints.down('sm')]: {
                     fontSize: '1.2rem'
+                },
+                [theme.breakpoints.down('xs')]: {
+                    fontSize: '12px',
+                    lineHeight: '12px'
                 }
             },
             '& > button': {
                 '& > div.MuiCardContent-root': {
                     padding: '10px 15px',
+                    [theme.breakpoints.down('xs')]: {
+                        padding: '2px 2px 8px 8px'
+                    },
                     '& > h5.MuiTypography-h5': {
-                        lineHeight: '29px'
+                        lineHeight: '29px',
+                        [theme.breakpoints.down('xs')]: {
+                            fontSize: '1rem',
+                            lineHeight: '24px',
+                            fontWeight: '500'
+                        }
                     },
                     '& > span.MuiTypography-caption': {
-                        color: '#838383'
+                        color: '#838383',
+                        [theme.breakpoints.down('xs')]: {
+                            fontSize: '0.625rem',
+                            '&:last-child': {
+                                fontSize: '0.5rem'
+                            }
+                        }
                     }
                 }
             }
@@ -142,4 +169,4 @@ export const useStyles = makeStyles((theme) => ({
     skeleton: {
         height: '240px'
     }
-}))
+}));

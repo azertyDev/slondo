@@ -11,7 +11,7 @@ export const useStyles = makeStyles((theme) => ({
             minHeight: 'auto',
             marginBottom: '33px',
             [theme.breakpoints.down('md')]: {
-                marginBottom: '8px'
+                marginBottom: '20px'
             },
             '& div.MuiTabs-flexContainer': {
                 borderBottom: `1px solid ${theme.palette.common.tab}`,
@@ -45,7 +45,10 @@ export const useStyles = makeStyles((theme) => ({
                 width: 'calc(100% + 14px)',
                 margin: '-7px',
                 '& div.MuiGrid-item': {
-                    padding: '7px'
+                    padding: '7px',
+                    [theme.breakpoints.down('xs')]: {
+                        padding: '4px'
+                    }
                 }
             }
         },

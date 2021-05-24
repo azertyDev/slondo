@@ -1,6 +1,6 @@
 import {makeStyles} from '@material-ui/core/styles';
 
-export const useStyles = makeStyles(() => ({
+export const useStyles = makeStyles((theme) => ({
     root: {
         '& div.location-wrapper': {
             display: 'flex',
@@ -10,7 +10,10 @@ export const useStyles = makeStyles(() => ({
                 textDecoration: 'underline'
             },
             '& > svg': {
-                marginRight: '12px'
+                marginRight: '12px',
+                [theme.breakpoints.down('md')]: {
+                    marginRight: '5px'
+                }
             }
         }
     },
