@@ -59,7 +59,7 @@ export const CategoriesDropdown: FC<NestedDropdownPropsType> = (props) => {
                         className='selected-item'
                         onClick={handleSwitchOpen}
                     >
-                        <ListItemText primary={t(`categories:${category.name}`)}/>
+                        <ListItemText primary={category ? t(`categories:${category.name}`) : t('filters:noSelect')}/>
                         {open ? <ArrowDropUp/> : <ArrowDropDown/>}
                     </ListItem>
                     <div className='filters-wrapper'>

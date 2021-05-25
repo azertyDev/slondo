@@ -4,18 +4,59 @@ import {CategoryType, SubCategoryType, TypeCtgr} from '@root/interfaces/Categori
 import CyrillicToTranslit from 'cyrillic-to-translit-js';
 import {punctuationMarksRegEx} from '@src/common_data/reg_exs';
 import {categories_list} from '@src/common_data/categories_list';
-import {requireFields} from '@src/common_data/form_fields';
+import {fractionalFields, requireFields} from '@src/common_data/form_fields';
 import {IdNameType} from '@root/interfaces/Post';
 
 
 export const cookies = new Cookies();
 export const cookieOpts = {path: '/'};
 
+export const setRequireVals = (values, setValues, filters, subCategoryName) => {
+    const reqVals: any = {...values};
+    const isHousesCottages = subCategoryName === 'housesCottages';
+
+    Object.keys(filters).forEach(k => {
+        if (!values[k]) {
+            if (typeof values[k] !== 'string' && isRequired(k)) {
+                if (k === 'area') {
+                    if (!isHousesCottages) reqVals.area = null;
+                    reqVals.area_id = filters[k][0].id || null;
+                } else reqVals[k] = null;
+            }
+        }
+    });
+
+    setValues(reqVals);
+};
+
+export const prepareParamsData = (data) => {
+    return Object.keys(data).reduce<any>((acc, key) => {
+        const isArray = Array.isArray(data[key]);
+        const isStrOrBool = typeof data[key] === 'string' || typeof data[key] === 'boolean';
+        const isFracField = fractionalFields.some(val => val === key);
+        const isZeroField = isFracField && RegExp(/0$|0?\.0?$/).test(data[key]);
+
+        if (data[key] !== undefined) {
+            if (isArray) {
+                if (data[key].length) {
+                    acc[key] = data[key].map(({id}) => ({id}));
+                }
+            } else if (isStrOrBool && !isZeroField) {
+                acc[key] = data[key];
+            } else if (typeof data[key] === 'object') {
+                acc[`${key}_id`] = data[key].id;
+            }
+        }
+
+        return acc;
+    }, {});
+}
+
 export const isRequired = (field: string): boolean => requireFields.some(reqField => reqField === field);
 
 export const phonePrepare = (phone: string): string => phone.replace(/[\s+()]/g, '');
 
-export const transformToCyrillic = (title: string, reverse?: boolean): string => {
+export const transformCyrillic = (title: string, reverse?: boolean): string => {
     const transform = reverse ? new CyrillicToTranslit().reverse : new CyrillicToTranslit().transform;
 
     if (reverse) {
@@ -31,14 +72,14 @@ export const transformToCyrillic = (title: string, reverse?: boolean): string =>
 export type CtgrsByCyrillicNameType = [CategoryType, SubCategoryType, TypeCtgr?];
 export const getCtgrsByCyrillicNames = (categoryName: string, subCtgrName: string, typeCtgrName?: string): CtgrsByCyrillicNameType => {
     return addParentsToCtgrs(categories_list).reduce((acc: any, ctgr) => {
-        if (transformToCyrillic(ctgr.ru_name) === categoryName) {
+        if (transformCyrillic(ctgr.ru_name) === categoryName) {
             acc.push(ctgr);
             ctgr.subCategory.forEach(subCtgr => {
-                if (transformToCyrillic(subCtgr.ru_name) === subCtgrName) {
+                if (transformCyrillic(subCtgr.ru_name) === subCtgrName) {
                     acc.push(subCtgr);
                     if (typeCtgrName) {
                         subCtgr.type?.forEach(type => {
-                            if (transformToCyrillic(type.ru_name) === typeCtgrName) {
+                            if (transformCyrillic(type.ru_name) === typeCtgrName) {
                                 acc.push(type);
                             }
                         });

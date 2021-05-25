@@ -1,16 +1,22 @@
-import React, {FC} from 'react';
+import {FC} from 'react';
+import {CardView} from '@src/components/elements/card/card_view/CardView';
 
 
 type SearchResultPropsType = {
-    resultList
+    posts
 };
 
 export const SearchResult: FC<SearchResultPropsType> = (props) => {
-    const {resultList} = props;
+    const {
+        posts
+    } = props;
 
     return (
         <div>
-            Result
+            <CardView
+                listMode
+                list={posts}
+            />
         </div>
     );
 };

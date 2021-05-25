@@ -2,12 +2,12 @@ import {FC} from 'react';
 import {Field} from 'formik';
 import {WithT} from 'i18next';
 import ReactInputMask from 'react-input-mask';
-import {Grid, TextField, Typography} from '@material-ui/core';
+import {Grid, TextField, TextFieldProps, Typography} from '@material-ui/core';
 import {isRequired} from '@src/helpers';
 import {useStyles} from './useStyles';
-import {TextFieldProps} from '@material-ui/core/TextField/TextField';
 
 type CustomFormikFieldPropsType = {
+    disableRequire?: boolean,
     limit?: number,
     errorMsg?: string,
     labelText?: string,
@@ -21,6 +21,7 @@ export const FormikField: FC<CustomFormikFieldPropsType> = (props) => {
         errorMsg,
         labelText,
         limit,
+        disableRequire,
         ...otherProps
     } = props;
 
@@ -34,7 +35,7 @@ export const FormikField: FC<CustomFormikFieldPropsType> = (props) => {
                             <Typography variant="subtitle1">
                                 <strong>
                                     {t(`filters:${labelText}`)}
-                                    {isRequired(name) && <span className='error-text'>*</span>}&nbsp;
+                                    {!disableRequire && isRequired(name) && <span className='error-text'>*</span>}&nbsp;
                                 </strong>
                             </Typography>
                         )}

@@ -1,4 +1,4 @@
-import React, {FC} from 'react';
+import {FC} from 'react';
 import {WithT} from 'i18next';
 import {Help} from '@material-ui/icons';
 import {Checkbox, Typography} from '@material-ui/core';
@@ -116,7 +116,7 @@ export const CommonFormPreview: FC<DefaultParamsPropsType> = (props) => {
                             услуги составляет n%.&nbsp;
                             <a href="#">
                                 <span className="safe-auction-rules">
-                                    {t('filters:safe_deal_rules')}
+                                    {t('common:safe_deal_rules')}
                                 </span>
                             </a>
                         </Typography>
@@ -141,7 +141,7 @@ export const CommonFormPreview: FC<DefaultParamsPropsType> = (props) => {
                             Вы можете быть заблокированы.&nbsp;
                             <a href="#">
                                 <span className="safe-auction-rules">
-                                    {t('filters:delivery_rules')}
+                                    {t('common:delivery_rules')}
                                 </span>
                             </a>
                         </Typography>
@@ -170,7 +170,7 @@ export const CommonFormPreview: FC<DefaultParamsPropsType> = (props) => {
             <div className='location-wrapper'>
                 <Typography variant="subtitle1">
                     <strong>
-                        {t('common:location')}:&nbsp;
+                        {t('locations:location')}:&nbsp;
                     </strong>
                     {locationText}
                 </Typography>

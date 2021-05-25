@@ -15,7 +15,7 @@ import {
 } from '@src/components/elements/icons';
 import {BreadcrumbsComponent} from '@src/components/elements/breadcrumbs/Breadcrumbs';
 import Link from 'next/link';
-import {formatNumber, numberPrettier, transformToCyrillic, weekDaysHelper} from '@src/helpers';
+import {formatNumber, numberPrettier, transformCyrillic, weekDaysHelper} from '@src/helpers';
 import Countdown from 'react-countdown';
 import {useRouter} from 'next/router';
 import {CardDataType} from '@root/interfaces/Cabinet';
@@ -39,7 +39,7 @@ export const CabinetCard: FC<CabinetCardPropsType> = (props) => {
         fetchAuctionNotifications
     } = props;
 
-    const translatedTitle = transformToCyrillic(cardData.title);
+    const translatedTitle = transformCyrillic(cardData.title);
 
     const timer = ({days, hours, minutes, seconds, completed}) => (
         <Box display="flex" alignItems='center'>

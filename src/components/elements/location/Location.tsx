@@ -30,6 +30,11 @@ export const Location: FC = () => {
     const locationsTxt = `${t(region?.name) ?? ''}${city ? `, ${t(city?.name)}` : ''}${district ? `, ${t(district?.name)}` : ''}`;
     const prevLocation = !!region ? `<-- ${t(`${city?.name ?? region.name}`)}` : t(`allUzb`);
 
+    const currentCities = locationsFromStore.find(loc => loc.id === region?.id)?.cities;
+    const currentDistricts = currentCities?.find(({id, district}) => {
+        if (district.length) return id === city?.id;
+    })?.district;
+
     const handleLocation = loc => () => {
         const value = loc.cities
                       ? {region: {id: loc.id, name: loc.name}}
@@ -42,14 +47,8 @@ export const Location: FC = () => {
 
     const handleModalOpen = () => {
         setOpen(true);
-
-        const cities = locationsFromStore.find(loc => loc.id === region?.id)?.cities;
-        const districts = cities?.find(({id, district}) => {
-            if (district.length) return id === city?.id;
-        })?.district;
-
         region && (
-            setLocations(separateByThree(districts ?? cities ?? locationsFromStore))
+            setLocations(separateByThree(currentDistricts ?? currentCities ?? locationsFromStore))
         );
     };
 
@@ -73,7 +72,7 @@ export const Location: FC = () => {
     };
 
     const toPrevLocation = () => {
-        if (city || district) {
+        if (currentDistricts) {
             const cities = separateByThree(locationsFromStore.find(loc => loc.id === region.id).cities);
             setLocations(cities);
             setSelectedLocation({

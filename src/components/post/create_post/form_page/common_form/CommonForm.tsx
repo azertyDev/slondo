@@ -8,7 +8,7 @@ import {Description} from './description/Description';
 import {Contacts} from './contacts/Contacts';
 import {AvailableDays} from './available_days/AvailableDays';
 import {numberRegEx, timeRegEx} from '@src/common_data/reg_exs';
-import {FormikProvider, useFormik} from 'formik';
+import {useFormik} from 'formik';
 import {CustomAccordion} from '@src/components/elements/accordion/CustomAccordion';
 import {numericFields} from '@src/common_data/form_fields';
 import {auctionParamsSchema, defaultParamsSchema} from '@root/validation_schemas/createPostSchemas';
@@ -21,6 +21,8 @@ import {LocationAutocomplete} from '@src/components/post/create_post/form_page/c
 import {DropDownSelect} from '@src/components/elements/drop_down_select/DropDownSelect';
 import {CommonFormPreview} from '@src/components/post/create_post/form_page/common_form/CommonFormPreview';
 import {FormikField} from '@src/components/elements/formik_field/FormikField';
+import {CustomFormikProvider} from '@src/components/elements/custom_formik_provider/CustomFormikProvider';
+import {FormikTextarea} from '@src/components/elements/formik_textarea/FormikTextarea';
 import {useStyles} from './useStyles';
 
 
@@ -28,11 +30,10 @@ type DefaultParamsPropsType = {
     postType: PostType,
     currentFormIndex: number,
     asPath: string,
-    post,
-    setPost: Dispatch<SetStateAction<any>>,
     isPreview: boolean,
     categoryName: string,
-    setIsPreview: Dispatch<SetStateAction<boolean>>
+    setIsPreview: Dispatch<SetStateAction<boolean>>,
+    handleSubmit: (v) => void,
     ownerPhone: string
 } & WithT;
 
@@ -43,8 +44,7 @@ export const CommonForm: FC<DefaultParamsPropsType> = (props) => {
         setIsPreview,
         currentFormIndex,
         postType,
-        post,
-        setPost,
+        handleSubmit,
         categoryName,
         ownerPhone
     } = props;
@@ -155,12 +155,13 @@ export const CommonForm: FC<DefaultParamsPropsType> = (props) => {
         if (delivery) otherData.delivery = delivery;
         if (exchange) otherData.exchange = exchange;
 
-        setPost({
-            ...post,
+        const commonParams = {
             ...address,
             ...otherData,
             currency_id: currency.id
-        });
+        };
+
+        handleSubmit({commonParams});
 
         setIsPreview(true);
     };
@@ -176,7 +177,6 @@ export const CommonForm: FC<DefaultParamsPropsType> = (props) => {
         setValues,
         errors,
         touched,
-        handleSubmit,
         handleBlur
     } = formik;
 
@@ -279,126 +279,126 @@ export const CommonForm: FC<DefaultParamsPropsType> = (props) => {
 
     const classes = useStyles();
     return (
-        <FormikProvider value={formik}>
-            <form onSubmit={handleSubmit}>
-                <CustomAccordion
-                    icon={<StateIcon/>}
-                    isPreview={isPreview}
-                    open={currentFormIndex === formIndex}
-                    isEditable={currentFormIndex < formIndex}
-                    nextButtonTxt={t('next')}
-                    title={t('priceDescContacts')}
-                >
-                    <div className={classes.root}>
-                        {isPreview
-                         ? <CommonFormPreview
-                             t={t}
-                             values={values}
-                             isAuction={isAuction}
-                             ownerPhone={ownerPhone}
-                             location={location}
-                             isAdvanceAuction={isAdvanceAuction}
-                         />
-                         : <div>
-                             {isAuction
-                              ? <div>
-                                  <AuctionParams
+        <CustomFormikProvider formik={formik}>
+            <CustomAccordion
+                submitTxt='next'
+                title={t('priceDescContacts')}
+                icon={<StateIcon/>}
+                isPreview={isPreview}
+                open={currentFormIndex === formIndex}
+                isEditable={currentFormIndex < formIndex}
+            >
+                <div className={classes.root}>
+                    {isPreview
+                     ? <CommonFormPreview
+                         t={t}
+                         values={values}
+                         isAuction={isAuction}
+                         ownerPhone={ownerPhone}
+                         location={location}
+                         isAdvanceAuction={isAdvanceAuction}
+                     />
+                     : <div>
+                         {isAuction
+                          ? <div>
+                              <AuctionParams
+                                  t={t}
+                                  values={values}
+                                  errors={errors}
+                                  touched={touched}
+                                  postType={postType}
+                                  handleBlur={handleBlur}
+                                  handleInput={handleInput}
+                                  handleSelect={handleSelect}
+                                  isAdvanceAuction={isAdvanceAuction}
+                                  handleCheckboxChange={handleCheckboxChange}
+                              />
+                          </div>
+                          : <Grid container spacing={1} alignItems='center'>
+                              <Grid item xs={3}>
+                                  <FormikField
                                       t={t}
-                                      values={values}
-                                      errors={errors}
-                                      touched={touched}
-                                      postType={postType}
-                                      handleBlur={handleBlur}
-                                      handleInput={handleInput}
-                                      handleSelect={handleSelect}
-                                      isAdvanceAuction={isAdvanceAuction}
-                                      handleCheckboxChange={handleCheckboxChange}
+                                      name='price'
+                                      labelText='price'
+                                      value={values.price}
+                                      onChange={handleInput}
+                                      errorMsg={getErrorMsg(errors.price, touched.price, t)}
                                   />
-                              </div>
-                              : <Grid container spacing={1} alignItems='center'>
-                                  <Grid item xs={3}>
-                                      <FormikField
-                                          t={t}
-                                          name='price'
-                                          labelText='price'
-                                          value={values.price}
-                                          onChange={handleInput}
-                                          errorMsg={getErrorMsg(errors.price, touched.price, t)}
-                                      />
-                                  </Grid>
-                                  <Grid item xs={1}>
-                                      <DropDownSelect
-                                          t={t}
-                                          name='currency'
-                                          values={values}
-                                          onBlur={handleBlur}
-                                          items={postType.currency}
-                                          handleSelect={handleSelect}
-                                      />
-                                  </Grid>
-                              </Grid>}
-                             <div>
-                                 <SiteServices
+                              </Grid>
+                              <Grid item xs={1}>
+                                  <DropDownSelect
+                                      t={t}
+                                      name='currency'
+                                      values={values}
+                                      onBlur={handleBlur}
+                                      items={postType.currency}
+                                      handleSelect={handleSelect}
+                                  />
+                              </Grid>
+                          </Grid>}
+                         <div>
+                             <SiteServices
+                                 t={t}
+                                 values={values}
+                                 isAuction={isAuction}
+                                 categoryName={categoryName}
+                                 handleCheckbox={handleCheckboxChange}
+                             />
+                         </div>
+                         <div className='location-wrapper'>
+                             <LocationAutocomplete
+                                 name='location'
+                                 value={values.location}
+                                 locations={locations.data}
+                                 onBlur={handleBlur}
+                                 onChange={handleLocation}
+                                 errorMsg={getErrorMsg(errors.location, touched.location, t)}
+                             />
+                         </div>
+                         <div>
+                             <FormikTextarea
+                                 rowsMin={15}
+                                 name='description'
+                                 value={values.description}
+                                 onBlur={handleBlur}
+                                 labelTxt={t('filters:description')}
+                                 onChange={handleInput}
+                                 errorMsg={getErrorMsg(errors.description, touched.description, t)}
+                                 limit={descTxtLimit}
+                             />
+                         </div>
+                         <Grid
+                             item
+                             container
+                             spacing={1}
+                             justify='space-between'
+                         >
+                             <Grid item xs={6}>
+                                 <Contacts
                                      t={t}
                                      values={values}
                                      isAuction={isAuction}
-                                     categoryName={categoryName}
-                                     handleCheckbox={handleCheckboxChange}
-                                 />
-                             </div>
-                             <div className='location-wrapper'>
-                                 <LocationAutocomplete
-                                     name='location'
-                                     value={values.location}
-                                     locations={locations.data}
-                                     onBlur={handleBlur}
-                                     onChange={handleLocation}
-                                     errorMsg={getErrorMsg(errors.location, touched.location, t)}
-                                 />
-                             </div>
-                             <div>
-                                 <Description
-                                     limit={descTxtLimit}
+                                     ownerPhone={ownerPhone}
                                      handleInput={handleInput}
-                                     handleBlur={handleBlur}
-                                     description={values.description}
-                                     labelTxt={t('filters:description')}
-                                     errorMsg={getErrorMsg(errors.description, touched.description, t)}
+                                     handleCheckboxChange={handleCheckboxChange}
                                  />
-                             </div>
-                             <Grid
-                                 item
-                                 container
-                                 spacing={1}
-                                 justify='space-between'
-                             >
+                             </Grid>
+                             {!isAuction && (
                                  <Grid item xs={6}>
-                                     <Contacts
+                                     <AvailableDays
                                          t={t}
-                                         values={values}
-                                         isAuction={isAuction}
-                                         ownerPhone={ownerPhone}
-                                         handleInput={handleInput}
-                                         handleCheckboxChange={handleCheckboxChange}
+                                         avalTime={values.avalTime}
+                                         handleBlur={handleBlur}
+                                         handleTime={handleTime}
+                                         handleSwitch={handleSwitch}
+                                         handleAvalDays={handleAvalDays}
                                      />
                                  </Grid>
-                                 {!isAuction && (
-                                     <Grid item xs={6}>
-                                         <AvailableDays
-                                             t={t}
-                                             avalTime={values.avalTime}
-                                             handleBlur={handleBlur}
-                                             handleTime={handleTime}
-                                             handleSwitch={handleSwitch}
-                                             handleAvalDays={handleAvalDays}
-                                         />
-                                     </Grid>
-                                 )}
-                             </Grid>
-                         </div>}
-                    </div>
-                </CustomAccordion>
-            </form>
-        </FormikProvider>
+                             )}
+                         </Grid>
+                     </div>}
+                </div>
+            </CustomAccordion>
+        </CustomFormikProvider>
     );
 };

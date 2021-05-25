@@ -1,4 +1,4 @@
-import React, {FC} from 'react';
+import {FC} from 'react';
 import {WithT} from 'i18next';
 import {Checkbox, Grid, Typography} from '@material-ui/core';
 import {useStyles} from '../deployed_select/useStyles';

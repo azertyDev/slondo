@@ -1,13 +1,12 @@
 import {FC, ReactElement} from 'react';
+import {WithT} from 'i18next';
 import {CabinetWrapper} from '@src/components/cabinet/CabinetWrapper';
-import {useStyles} from './useStyles';
 import {Notification} from '@src/components/cabinet/cabinet_pages/notifications/notification_card/Notification';
 import {CustomButton} from '@src/components/elements/custom_button/CustomButton';
-import {CircularProgress, Typography} from '@material-ui/core';
+import {CircularProgress, Typography, Box} from '@material-ui/core';
 import {CustomModal} from '@src/components/elements/custom_modal/CustomModal';
-import Box from '@material-ui/core/Box';
 import {CustomSnackbar} from '@src/components/elements/snackbar/Snackbar';
-import {WithT} from 'i18next';
+import {useStyles} from './useStyles';
 
 type NotificationsPropsType = {
     notifications,

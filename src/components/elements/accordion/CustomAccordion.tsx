@@ -1,34 +1,32 @@
-import React, {FC} from "react";
+import {FC} from 'react';
+import {useTranslation} from 'next-i18next';
 import {Accordion, AccordionDetails, AccordionSummary, Typography} from '@material-ui/core';
-import {CustomButton} from "@src/components/elements/custom_button/CustomButton";
-import {useTranslation} from "next-i18next";
+import {CustomButton} from '@src/components/elements/custom_button/CustomButton';
 import {useStyles} from './useStyles';
 
 
 type AccordionComponentPropsType = {
-    isFetch?: boolean,
     open: boolean,
     isPreview: boolean,
     icon: any,
     title: string,
-    nextButtonTxt: string,
     handleEdit?: () => void,
     isEditable: boolean,
+    submitTxt: string
 };
 
 export const CustomAccordion: FC<AccordionComponentPropsType> = (props) => {
     const {
         open,
         icon,
-        isFetch,
         isPreview,
         title,
-        nextButtonTxt,
         handleEdit,
-        isEditable
+        isEditable,
+        submitTxt
     } = props;
 
-    const {t} = useTranslation(['common']);
+    const {t} = useTranslation('common');
 
     const classes = useStyles();
     return (
@@ -48,22 +46,21 @@ export const CustomAccordion: FC<AccordionComponentPropsType> = (props) => {
                 <AccordionDetails>
                     <div className='acc-content'>
                         {props.children}
+                        {!isPreview && (
+                            <div className='submit-button-wrapper'>
+                                <CustomButton
+                                    type='submit'
+                                    className='nav-button'
+                                >
+                                    <Typography>
+                                        {t(`post:${submitTxt}`)}
+                                    </Typography>
+                                </CustomButton>
+                            </div>
+                        )}
                     </div>
-                    {!isPreview && (
-                        <div className='next-button-wrapper'>
-                            <CustomButton
-                                type='submit'
-                                disabled={isFetch}
-                                className='nav-button'
-                            >
-                                <Typography>
-                                    {nextButtonTxt}
-                                </Typography>
-                            </CustomButton>
-                        </div>
-                    )}
                 </AccordionDetails>
             </Accordion>
         </div>
-    )
+    );
 };

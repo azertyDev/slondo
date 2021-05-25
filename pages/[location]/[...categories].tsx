@@ -8,7 +8,7 @@ import {PageNotFound} from '@src/components/page_not_found/PageNotFound';
 
 const SearchPage: FC = () => {
     const {query, locale} = useRouter();
-    const {categories} = query;
+    const {location, categories, ...urlParams} = query;
     const [categoryName, subCtgrName, typeCtgrName] = categories as string[];
     const ctgrsByCyrillicName = getCtgrsByCyrillicNames(categoryName, subCtgrName, typeCtgrName);
     const [ctgr, subCtgr, typeCtgr] = ctgrsByCyrillicName;
@@ -19,7 +19,8 @@ const SearchPage: FC = () => {
            ? <PageNotFound/>
            : <SearchPostsByFilters
                locale={locale}
-               query={query}
+               location={location}
+               urlParams={urlParams}
                ctgrsByQuery={ctgrsByCyrillicName}
            />;
 };

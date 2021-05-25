@@ -13,7 +13,6 @@ import {
 } from '@src/components/elements/icons';
 import {CategoryType} from '@root/interfaces/Categories';
 
-
 const Car = '/img/categories_img/car.png';
 const Transport = '/img/categories_img/transport.png';
 const Parts = '/img/categories_img/parts.png';

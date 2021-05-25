@@ -1,20 +1,20 @@
-import React, {FC, useEffect} from 'react';
+import {FC, useEffect} from 'react';
 import {WithT} from 'i18next';
-import {FormikProvider, useFormik} from 'formik';
+import {useFormik} from 'formik';
 import {Typography} from '@material-ui/core';
 import {PreviewPhotos} from './preview_photos/PreviewPhotos';
 import {CustomAccordion} from '../../../../elements/accordion/CustomAccordion';
 import {IdNameType} from '@root/interfaces/Post';
 import {ViewIcon} from '@src/components/elements/icons';
 import {appearanceSchema} from '@root/validation_schemas/createPostSchemas';
+import {CustomFormikProvider} from '@src/components/elements/custom_formik_provider/CustomFormikProvider';
+import {CustomButton} from '@src/components/elements/custom_button/CustomButton';
 import {useStyles} from './useStyles';
 
 
 type AppearanceFormPropsType = {
-    categoryName: string,
     colors: (IdNameType & { hex_color_code: string })[],
-    post,
-    setPost,
+    handleSubmit: (v) => void,
     isPreview: boolean,
     currentFormIndex: number,
     handleFormOpen: (i) => () => void,
@@ -25,10 +25,8 @@ export const AppearanceForm: FC<AppearanceFormPropsType> = (props) => {
     const {
         t,
         currentFormIndex,
-        categoryName,
         colors,
-        post,
-        setPost,
+        handleSubmit,
         isPreview,
         handleFormOpen,
         handleNextFormOpen
@@ -37,16 +35,13 @@ export const AppearanceForm: FC<AppearanceFormPropsType> = (props) => {
     const formIndex = 2;
 
     const onSubmit = ({files, color}) => {
-        const photos = files.filter(({file}) => file);
+        const appearance: { photos: any, color_id?: number } = {
+            photos: files.filter(({file}) => file)
+        };
 
-        if (color) {
-            post[categoryName] = {
-                ...post[categoryName],
-                color_id: color.id
-            };
-        }
+        if (color) appearance.color_id = color.id;
 
-        setPost({...post, photos});
+        handleSubmit({appearance});
         handleNextFormOpen();
     };
 
@@ -63,8 +58,7 @@ export const AppearanceForm: FC<AppearanceFormPropsType> = (props) => {
         values,
         setValues,
         errors,
-        touched,
-        handleSubmit
+        touched
     } = formik;
 
     const {color, files} = values;
@@ -91,100 +85,98 @@ export const AppearanceForm: FC<AppearanceFormPropsType> = (props) => {
 
     const classes = useStyles();
     return (
-        <FormikProvider value={formik}>
-            <form onSubmit={handleSubmit}>
-                <CustomAccordion
-                    icon={<ViewIcon/>}
-                    isPreview={isPreview}
-                    open={currentFormIndex === formIndex}
-                    isEditable={currentFormIndex < formIndex}
-                    handleEdit={handleFormOpen(formIndex)}
-                    title={t('appearance')}
-                    nextButtonTxt={t('priceDescContacts')}
-                >
-                    <div className={classes.root}>
-                        {isPreview
-                            ? <div className='preview'>
-                                {!!color && (
-                                    <div className='color-preview'>
-                                        <Typography variant="subtitle1">
-                                            <strong>
-                                                {t('colors')}:
-                                            </strong>
-                                        </Typography>
-                                        <div
-                                            className='color'
-                                            style={{backgroundColor: values.color.hex_color_code}}
-                                        />
-                                    </div>)}
-                                <div className='photos-preview'>
-                                    <Typography variant="subtitle1">
-                                        <strong>
-                                            {t('photos')}:
-                                        </strong>
-                                    </Typography>
-                                    {files.map((photo, i) =>
-                                        <img
-                                            key={i}
-                                            alt="photo"
-                                            src={photo.url}
-                                        />
-                                    )}
-                                </div>
-                            </div>
-                            : <div>
-                                {!!colors && (
-                                    <>
-                                        <Typography variant="subtitle1">
-                                            <strong>
-                                                {t('colors')}
-                                                {<span className='error-text'>*&nbsp;</span>}
-                                            </strong>
-                                            {
-                                                errors.color
-                                                && touched.color
-                                                && <span className='error-text'>
-                                                        {t(errors.color as string)}
-                                                    </span>
-                                            }
-                                        </Typography>
-                                        <div className='color-wrapper'>
-                                            {colors.map(clr =>
-                                                <div
-                                                    key={clr.id}
-                                                    onClick={handleColor(clr)}
-                                                    className={!!color && clr.id === color.id ? 'selected-color' : ''}
-                                                    style={{
-                                                        width: '50px',
-                                                        height: '50px',
-                                                        backgroundColor: clr.hex_color_code
-                                                    }}
-                                                />
-                                            )}
-                                        </div>
-                                    </>
-                                )}
-                                <div className='photos-wrapper'>
-                                    <Typography variant="subtitle1">
-                                        <strong>
-                                            {t('photos')}
-                                            {<span className='error-text'>*</span>}
-                                        </strong>
-                                        {errors.files && touched.files && (
-                                            <span className='error-text'>
-                                                &nbsp;{t(`errors:${errors.files as string}`)}
-                                            </span>
-                                        )}
-                                    </Typography>
-                                    <PreviewPhotos
-                                        values={values}
-                                        setValues={setValues}
-                                    />
-                                </div>
-                            </div>}
-                    </div>
-                </CustomAccordion>
-            </form>
-        </FormikProvider>
-    )
+        <CustomFormikProvider formik={formik}>
+            <CustomAccordion
+                icon={<ViewIcon/>}
+                isPreview={isPreview}
+                open={currentFormIndex === formIndex}
+                isEditable={currentFormIndex < formIndex}
+                handleEdit={handleFormOpen(formIndex)}
+                title={t('appearance')}
+                submitTxt='priceDescContacts'
+            >
+                <div className={classes.root}>
+                    {isPreview
+                     ? <div className='preview'>
+                         {!!color && (
+                             <div className='color-preview'>
+                                 <Typography variant="subtitle1">
+                                     <strong>
+                                         {t('colors')}:
+                                     </strong>
+                                 </Typography>
+                                 <div
+                                     className='color'
+                                     style={{backgroundColor: values.color.hex_color_code}}
+                                 />
+                             </div>)}
+                         <div className='photos-preview'>
+                             <Typography variant="subtitle1">
+                                 <strong>
+                                     {t('photos')}:
+                                 </strong>
+                             </Typography>
+                             {files.map((photo, i) =>
+                                 <img
+                                     key={i}
+                                     alt="photo"
+                                     src={photo.url}
+                                 />
+                             )}
+                         </div>
+                     </div>
+                     : <div>
+                         {!!colors && (
+                             <>
+                                 <Typography variant="subtitle1">
+                                     <strong>
+                                         {t('colors')}
+                                         {<span className='error-text'>*&nbsp;</span>}
+                                     </strong>
+                                     {
+                                         errors.color
+                                         && touched.color
+                                         && <span className='error-text'>
+                                             {t(errors.color as string)}
+                                         </span>
+                                     }
+                                 </Typography>
+                                 <div className='color-wrapper'>
+                                     {colors.map(clr =>
+                                         <div
+                                             key={clr.id}
+                                             onClick={handleColor(clr)}
+                                             className={!!color && clr.id === color.id ? 'selected-color' : ''}
+                                             style={{
+                                                 width: '50px',
+                                                 height: '50px',
+                                                 backgroundColor: clr.hex_color_code
+                                             }}
+                                         />
+                                     )}
+                                 </div>
+                             </>
+                         )}
+                         <div className='photos-wrapper'>
+                             <Typography variant="subtitle1">
+                                 <strong>
+                                     {t('photos')}
+                                     {<span className='error-text'>*</span>}
+                                 </strong>
+                                 {errors.files && touched.files && (
+                                     <span className='error-text'>
+                                             &nbsp;{t(`errors:${errors.files as string}`)}
+                                         </span>
+                                 )}
+                             </Typography>
+                             <PreviewPhotos
+                                 values={values}
+                                 setValues={setValues}
+                             />
+                         </div>
+                     </div>}
+                </div>
+            </CustomAccordion>
+        </CustomFormikProvider>
+    );
 };
