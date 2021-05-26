@@ -60,6 +60,9 @@ export const useStyles = makeStyles((theme) => ({
             position: 'relative',
             borderRadius: '7px',
             filter: 'drop-shadow(0px 2px 4px rgba(132, 92, 171, 0.2))',
+            [theme.breakpoints.down('xs')]: {
+                filter: 'drop-shadow(0px 1px 2px rgba(0, 0, 0, 0.25))'
+            },
             height: '100%',
             '&:hover': {
                 boxShadow: 'rgba(0, 0, 0, 0.08) 0px 8px 16px 0px',
@@ -101,9 +104,9 @@ export const useStyles = makeStyles((theme) => ({
                             backgroundColor: ({ads_type}) => (
                                 ads_type === 'post'
                                     ? 'rgba(136, 202, 236, .65)'
-                                    : ads_type === 'auc'
-                                    ? 'rgba(173, 102, 213, .65)'
-                                    : 'rgba(242, 153, 74, .65)'
+                                    : ads_type === 'exauc'
+                                    ? 'rgba(242, 153, 74, .65)'
+                                    : 'rgba(173, 102, 213, 0.65)'
                             )
                         }
                     },
@@ -135,8 +138,8 @@ export const useStyles = makeStyles((theme) => ({
                     fontSize: '1.2rem'
                 },
                 [theme.breakpoints.down('xs')]: {
-                    fontSize: '12px',
-                    lineHeight: '12px'
+                    fontSize: '14px',
+                    lineHeight: '14px'
                 }
             },
             '& > button': {
@@ -149,16 +152,16 @@ export const useStyles = makeStyles((theme) => ({
                         lineHeight: '29px',
                         [theme.breakpoints.down('xs')]: {
                             fontSize: '1rem',
-                            lineHeight: '24px',
-                            fontWeight: '500'
+                            lineHeight: '20px',
+                            fontWeight: '600'
                         }
                     },
                     '& > span.MuiTypography-caption': {
                         color: '#838383',
                         [theme.breakpoints.down('xs')]: {
-                            fontSize: '0.625rem',
+                            fontSize: '12px',
                             '&:last-child': {
-                                fontSize: '0.5rem'
+                                fontSize: '10px'
                             }
                         }
                     }

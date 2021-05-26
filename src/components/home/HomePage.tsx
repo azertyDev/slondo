@@ -15,7 +15,7 @@ export const HomePage: FC = () => {
             </Head>
             <Header/>
             <Main/>
-            {/*<Footer/>*/}
+            <Footer/>
             <ErrorModal/>
         </>
     );

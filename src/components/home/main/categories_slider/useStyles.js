@@ -2,16 +2,22 @@ import {makeStyles} from '@material-ui/core/styles';
 
 export const useStyles = makeStyles((theme) => ({
     root: {
+        [theme.breakpoints.up('lg')]: {
+            margin: '0 auto',
+            maxWidth: '1280px',
+            marginBottom: '40px',
+            padding: '0 24px'
+        },
         '& a': {
             textDecoration: 'none'
         },
         '& > h2.title': {
-            padding: '0 24px',
             marginBottom: '21px',
             [theme.breakpoints.down('md')]: {
                 fontWeight: '600',
                 fontSize: 'calc(14px + 10 * (100vw / 1280))',
-                marginBottom: '10px'
+                marginBottom: '10px',
+                padding: '0 24px'
             },
             [theme.breakpoints.down('xs')]: {
                 padding: '0 16px'
@@ -63,7 +69,8 @@ export const useStyles = makeStyles((theme) => ({
                         textAlign: 'center',
                         fontSize: '1.125rem',
                         [theme.breakpoints.down('xs')]: {
-                            fontSize: 'calc(12px + 6 * (100vw / 1280))'
+                            fontSize: 'calc(12px + 6 * (100vw / 1280))',
+                            lineHeight: '16px'
                         }
                     },
                     '& div.bg-layer': {
