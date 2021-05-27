@@ -134,7 +134,9 @@ export const useStyles = makeStyles((theme) => ({
                     objectFit: 'contain',
                     cursor: 'pointer',
                     [theme.breakpoints.down('md')]: {
-                        height: '260px'
+                        height: '260px',
+                        width: '100% !important',
+                        objectFit: 'cover'
                     }
                 }
             }

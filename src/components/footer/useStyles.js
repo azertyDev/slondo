@@ -6,17 +6,21 @@ export const useStyles = makeStyles((theme) => ({
         '& > div.footer-wrapper': {
             backgroundColor: '#F2F2F2',
             borderRadius: '100px 100px 0px 0px',
+            [theme.breakpoints.down('sm')]: {
+                borderRadius: '30px 30px 0px 0px'
+            },
             '& div.footer-content': {
                 padding: '60px 0',
-                [theme.breakpoints.down('xs')]: {
-                    padding: '24px 0'
+                [theme.breakpoints.down('sm')]: {
+                    padding: '24px 0 12px',
+                    textAlign: 'center'
                 },
                 '& > div': {
                     '&.footer-top': {
                         paddingBottom: 90,
                         mixBlendMode: 'normal',
-                        [theme.breakpoints.down('xs')]: {
-                            paddingBottom: '22px'
+                        [theme.breakpoints.down('sm')]: {
+                            paddingBottom: '14px'
                         }
                     },
                     '& > div > ul': {
@@ -44,18 +48,25 @@ export const useStyles = makeStyles((theme) => ({
                     }
                 },
                 '& div.adaptive': {
-                    paddingBottom: '24px'
+                    paddingBottom: '12px'
                 }
             },
             '& div.footer-bottom': {
                 position: 'relative',
                 display: 'flex',
                 paddingTop: '25px',
+                [theme.breakpoints.down('sm')]: {
+                    display: 'block',
+                    paddingTop: '16px'
+                },
                 '& div': {
                     '&:nth-child(2)': {
                         '& h6.MuiTypography-subtitle1': {
                             opacity: 0.6,
                             lineHeight: '15px'
+                        },
+                        [theme.breakpoints.down('sm')]: {
+                            padding: '10px 0 12px'
                         }
                     },
                     '& h6.MuiTypography-subtitle1': {
@@ -73,9 +84,11 @@ export const useStyles = makeStyles((theme) => ({
                     top: 0,
                     left: '50px',
                     [theme.breakpoints.down('md')]: {
-                        left: '7.5%'
+                        left: '7.5%',
+                        height: 1
                     }
                 }
+
             }
         }
     }

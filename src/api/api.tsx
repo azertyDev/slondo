@@ -393,5 +393,5 @@ export const userAPI = {
             .catch(err => {
                 throw err;
             });
-    },
+    }
 };

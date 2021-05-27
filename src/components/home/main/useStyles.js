@@ -37,19 +37,21 @@ export const useStyles = makeStyles((theme) => ({
         bottom: 0,
         display: 'flex',
         justifyContent: 'center',
+
         width: '100%',
         zIndex: 30,
         '& > a': {
             textDecoration: 'none',
             '& > div': {
-                width: '235px',
-                padding: '10px 25px',
+                width: '268px',
+                padding: '15px 25px',
                 marginBottom: '8px',
                 color: theme.palette.primary.white,
                 backgroundColor: theme.palette.primary.createAdBtnColor,
                 borderRadius: '12px',
                 '& > h6': {
-                    fontSize: '1.15rem',
+                    // fontSize: '1.15rem',
+                    fontSize: '18px',
                     textAlign: 'center',
                     color: '#fff'
                 }

@@ -16,6 +16,10 @@ export const useStyles = makeStyles((theme) => ({
             right: '10px',
             padding: '0',
             zIndex: 10,
+            [theme.breakpoints.down('xs')]: {
+                top: '5px',
+                right: '5px'
+            },
             '& svg': {
                 '& defs': {
                     '&.def1 stop': {
@@ -91,7 +95,10 @@ export const useStyles = makeStyles((theme) => ({
                     display: 'flex',
                     flexDirection: 'column',
                     justifyContent: 'space-between',
-                    padding: '10px 10px 3px 3px',
+                    padding: '10px',
+                    [theme.breakpoints.down('xs')]: {
+                        padding: '5px 0 3px 5px'
+                    },
                     '& > div.title': {
                         display: 'inline-flex',
                         '& > h6': {
@@ -146,7 +153,7 @@ export const useStyles = makeStyles((theme) => ({
                 '& > div.MuiCardContent-root': {
                     padding: '10px 15px',
                     [theme.breakpoints.down('xs')]: {
-                        padding: '2px 2px 8px 8px'
+                        padding: '8px 2px 8px 8px'
                     },
                     '& > h5.MuiTypography-h5': {
                         lineHeight: '29px',

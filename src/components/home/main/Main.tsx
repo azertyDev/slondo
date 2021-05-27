@@ -52,27 +52,27 @@ export const Main: FC = () => {
                             </Grid>
                         </Hidden>
                     </Grid>
-                    <Hidden lgUp>
-                        <div className={classes.createAdBlock}>
-                            <Link href={'/post/create'}>
-                                <a>
-                                    <Slide
-                                        appear={false}
-                                        direction="up"
-                                        in={!trigger}
-                                    >
-                                        <div>
-                                            <Typography variant="h6">
-                                                {t('header:createPost')}
-                                            </Typography>
-                                        </div>
-                                    </Slide>
-                                </a>
-                            </Link>
-                        </div>
-                    </Hidden>
                     <SEOTextComponent/>
                 </Container>
+                <Hidden lgUp>
+                    <div className={classes.createAdBlock}>
+                        <Link href={'/post/create'}>
+                            <a>
+                                <Slide
+                                    appear={false}
+                                    direction="up"
+                                    in={!trigger}
+                                >
+                                    <div>
+                                        <Typography variant="h6">
+                                            {t('header:createPost')}
+                                        </Typography>
+                                    </div>
+                                </Slide>
+                            </a>
+                        </Link>
+                    </div>
+                </Hidden>
             </div>
         </main>
     );

@@ -5,7 +5,7 @@ export const useStyles = makeStyles((theme) => ({
         position: 'relative',
         height: '50px',
         [theme.breakpoints.down('md')]: {
-            height: '30px',
+            height: '19px',
             marginBottom: '10px'
         },
         '& header.MuiAppBar-root': {
@@ -109,10 +109,10 @@ export const useStyles = makeStyles((theme) => ({
 
         '& div.translate-local': {
             [theme.breakpoints.down('md')]: {
-                marginTop: '111px'
+                marginTop: '112px'
             },
             [theme.breakpoints.down('xs')]: {
-                marginTop: '103px'
+                marginTop: '104px'
             },
             display: 'flex',
             alignItems: 'center',

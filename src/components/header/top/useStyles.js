@@ -75,9 +75,8 @@ export const useStyles = makeStyles((theme) => ({
     },
     adaptive: {
         // ------------> adaptive <--------------- //
-        '& div.top-header-logo > a > img': {
-            height: '31px',
-            width: '145px'
+        '& div.top-header-logo': {
+            height: '30px'
         },
         '& div.burger-menu': {
             width: '26px',
