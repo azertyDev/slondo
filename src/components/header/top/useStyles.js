@@ -81,7 +81,7 @@ export const useStyles = makeStyles((theme) => ({
         '& div.burger-menu': {
             width: '26px',
             '& > div': {
-                height: '4px',
+                height: '3px',
                 backgroundColor: '#494A61',
                 margin: '4px 0',
                 borderRadius: '1px'

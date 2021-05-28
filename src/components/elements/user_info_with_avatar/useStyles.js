@@ -9,7 +9,7 @@ export const useStyles = makeStyles((theme) => ({
             '&:before': {
                 position: 'absolute',
                 left: 0,
-                top: '-17px',
+                top: '-16px',
                 content: '""',
                 width: '100%',
                 height: '0.8px',
@@ -18,7 +18,7 @@ export const useStyles = makeStyles((theme) => ({
             '&:after': {
                 position: 'absolute',
                 left: 0,
-                bottom: '-17px',
+                bottom: '96px',
                 content: '""',
                 width: '100%',
                 height: '0.8px',
@@ -29,7 +29,8 @@ export const useStyles = makeStyles((theme) => ({
             display: 'flex',
             width: '100%',
             [theme.breakpoints.down('md')]: {
-                marginLeft: '24px'
+                marginLeft: '24px',
+                marginBottom: '112px'
             },
             [theme.breakpoints.down('xs')]: {
                 marginLeft: '16px'
@@ -59,7 +60,6 @@ export const useStyles = makeStyles((theme) => ({
                     }
                 },
                 '& > div > div': {
-                    // '&:last-child > h6': {},
                     [theme.breakpoints.down('md')]: {
                         margin: 0
                     }

@@ -4,11 +4,14 @@ export const useStyles = makeStyles((theme) => ({
     root: {
         marginBottom: 60,
         [theme.breakpoints.down('md')]: {
-            marginBottom: 30
+            marginBottom: '16px'
         },
         '& div.lot-info': {
             '& > div': {
-                marginBottom: 20,
+                marginBottom: '20px',
+                [theme.breakpoints.down('md')]: {
+                    marginBottom: '16px'
+                },
                 '&:last-child': {
                     margin: 0
                 }
@@ -54,10 +57,10 @@ export const useStyles = makeStyles((theme) => ({
                 display: 'flex',
                 flexDirection: 'column',
                 [theme.breakpoints.down('md')]: {
-                    background: '#F5F5F5',
+                    background: '#FFF',
                     boxShadow: '0px 1px 2px rgba(0, 0, 0, 0.15)',
                     borderRadius: '10px',
-                    paddingBottom: '20px'
+                    paddingBottom: '10px'
                 },
                 '& > h6.MuiTypography-subtitle1': {
                     fontSize: '1.125rem',
@@ -69,6 +72,11 @@ export const useStyles = makeStyles((theme) => ({
                         textDecorationLine: 'underline',
                         [theme.breakpoints.down('md')]: {
                             textDecorationLine: 'none'
+                        }
+                    },
+                    '& div:last-child': {
+                        [theme.breakpoints.down('md')]: {
+                            height: '21px'
                         }
                     }
                 },
@@ -88,6 +96,9 @@ export const useStyles = makeStyles((theme) => ({
                             justifyContent: 'space-between',
                             position: 'relative',
                             padding: '10px 0',
+                            [theme.breakpoints.down('md')]: {
+                                padding: '0'
+                            },
                             '& > div': {
                                 '&:first-child': {
                                     display: 'flex',
@@ -214,7 +225,7 @@ export const useStyles = makeStyles((theme) => ({
         }
     },
     lotTimer: {
-        padding: '15px 30px 8px 30px',
+        padding: '8px 30px',
         boxShadow: '0px 0px 8px rgba(103, 94, 170, 0.25)',
         borderRadius: '3px',
         '& > h6.MuiTypography-subtitle1': {
@@ -228,7 +239,7 @@ export const useStyles = makeStyles((theme) => ({
             flexDirection: 'column',
             '& div.timer-title': {
                 textAlign: 'center',
-                marginBottom: 10,
+                marginBottom: '8px',
                 '& span.MuiTypography-button': {}
             },
             '& > span': {
@@ -247,7 +258,12 @@ export const useStyles = makeStyles((theme) => ({
                     }
                 },
                 '& > div': {
-                    textAlign: 'center',
+                    display: 'flex',
+                    alignItems: 'center',
+                    flexDirection: 'column',
+                    '& .MuiTypography-caption': {
+                        marginTop: '5px'
+                    },
                     '& span': {
                         '&:first-child': {
                             display: 'flex',

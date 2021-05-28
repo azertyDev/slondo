@@ -120,7 +120,8 @@ export const useStyles = makeStyles((theme) => ({
             '& .backspace-btn': {
                 background: 'none',
                 '& span > svg ': {
-                    filter: 'drop-shadow( 0px 1px 1px rgba(0, 0, 0, .25))'
+                    filter: 'drop-shadow( 0px 1px 1px rgba(0, 0, 0, .25))',
+                    width: '32px'
                 }
             }
         },
@@ -128,15 +129,20 @@ export const useStyles = makeStyles((theme) => ({
             display: 'flex',
             justifyContent: 'center',
             '& div.slick-slide': {
+                [theme.breakpoints.down('md')]: {
+                    width: '100%'
+                },
                 '& img': {
                     width: 'auto !important',
                     height: '518px',
                     objectFit: 'contain',
                     cursor: 'pointer',
                     [theme.breakpoints.down('md')]: {
-                        height: '260px',
                         width: '100% !important',
                         objectFit: 'cover'
+                    },
+                    [theme.breakpoints.down('sm')]: {
+                        height: '260px'
                     }
                 }
             }

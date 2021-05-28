@@ -10,7 +10,7 @@ export const useStyles = makeStyles((theme) => ({
                 padding: '16px 12px 8px'
             },
             '& .input-btn': {
-                marginBottom: '9px'
+                marginBottom: '4px'
             },
             '& .btn-bet': {
                 border: '1px solid #675EAA',
