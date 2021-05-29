@@ -17,7 +17,7 @@ export const useStyles = makeStyles((theme) => ({
             '& > h6.MuiTypography-subtitle1': {
                 color: '#675EAA',
                 '& > svg': {
-                    marginLeft: '20px',
+                    marginLeft: '9px',
                 }
             }
         }

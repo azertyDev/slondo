@@ -403,7 +403,7 @@ export const useStyles = makeStyles((theme) => ({
                 alignItems: 'center',
                 '& > svg': {
                     [theme.breakpoints.down('md')]: {
-                        marginLeft: '-7px'
+                        marginLeft: '-6px'
                     }
                 },
                 '& > h6': {

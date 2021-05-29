@@ -68,20 +68,25 @@ export const useStyles = makeStyles((theme) => ({
                     fontWeight: '600',
                     '&:last-child': {
                         padding: '10px 15px 0',
-                        color: '#675EAA',
-                        textDecorationLine: 'underline',
-                        [theme.breakpoints.down('md')]: {
-                            textDecorationLine: 'none'
+                        '& h6.show-hide-all-bet': {
+                            fontSize: '1.125rem',
+                            fontWeight: '400',
+                            color: '#675EAA',
+                            textDecorationLine: 'underline',
+                            [theme.breakpoints.down('md')]: {
+                                textDecorationLine: 'none',
+                                fontSize: 'calc(14px + 4 * (100vw / 1280))'
+                            }
                         }
                     },
                     '& div:last-child': {
                         [theme.breakpoints.down('md')]: {
                             height: '21px'
                         }
+                    },
+                    '& svg': {
+                        marginLeft: '9px'
                     }
-                },
-                '& h6.all-bets': {
-                    fontWeight: '400'
                 },
                 '& > div.participants': {
                     padding: '15px',
@@ -124,7 +129,7 @@ export const useStyles = makeStyles((theme) => ({
                                             color: '#2F80ED',
                                             fontSize: '0.875rem',
                                             [theme.breakpoints.down('md')]: {
-                                                marginRight: '30px'
+                                                marginRight: '25px'
                                             }
                                         },
                                         '& > h6.bet-date': {
