@@ -1,9 +1,9 @@
 import Cookies from 'universal-cookie';
 import {TFunction} from 'next-i18next';
-import {CategoryType, SubCategoryType, TypeCtgr} from '@root/interfaces/Categories';
 import CyrillicToTranslit from 'cyrillic-to-translit-js';
-import {punctuationMarksRegEx} from '@src/common_data/reg_exs';
-import {categories_list} from '@src/common_data/categories_list';
+import {CategoryType, SubCategoryType, TypeCategory} from '@root/interfaces/Categories';
+import {fracFieldRegEx, punctuationMarksRegEx, searchTxtRegEx} from '@src/common_data/reg_exs';
+import {siteCategories} from '@src/common_data/siteCategories';
 import {fractionalFields, requireFields} from '@src/common_data/form_fields';
 import {IdNameType} from '@root/interfaces/Post';
 
@@ -11,7 +11,40 @@ import {IdNameType} from '@root/interfaces/Post';
 export const cookies = new Cookies();
 export const cookieOpts = {path: '/'};
 
-export const setRequireVals = (values, setValues, filters, subCategoryName) => {
+export const toUrlParams = (params) => {
+    let url = '';
+
+    Object.keys(params).forEach(key => {
+        if (key !== 'location') {
+            const isBoolTrue = typeof params[key] === 'boolean' && params[key];
+            const isNoEmptyString = typeof params[key] === 'string' && params[key];
+            const isObject = !isNoEmptyString && params[key] && !!Object.keys(params[key]).length;
+            const isNoEmptyArray = Array.isArray(params[key]) && params[key].length;
+
+            if (isObject) {
+                url = url.concat(`&${key}=${params[key].id}`);
+            }
+
+            if (isNoEmptyString || isBoolTrue) {
+                url = url.concat(`&${key}=${params[key]}`);
+            }
+
+            if (isNoEmptyArray) {
+                url = url.concat(`&${key}=${params[key].join('-')}`);
+            }
+        }
+    });
+
+    if (url !== '') url = `?${url}`;
+
+    return url;
+};
+
+export const getSearchTxt = (data: string[] = []): string => (
+    data?.find(txt => searchTxtRegEx.test(txt))?.replace(searchTxtRegEx, '') || ''
+);
+
+export const setRequireParamsVals = (values, setValues, filters, subCategoryName: string) => {
     const reqVals: any = {...values};
     const isHousesCottages = subCategoryName === 'housesCottages';
 
@@ -32,16 +65,15 @@ export const setRequireVals = (values, setValues, filters, subCategoryName) => {
 export const prepareParamsData = (data) => {
     return Object.keys(data).reduce<any>((acc, key) => {
         const isArray = Array.isArray(data[key]);
-        const isStrOrBool = typeof data[key] === 'string' || typeof data[key] === 'boolean';
-        const isFracField = fractionalFields.some(val => val === key);
-        const isZeroField = isFracField && RegExp(/0$|0?\.0?$/).test(data[key]);
+        const isStrOrBoolTrue = typeof data[key] === 'string' || (typeof data[key] === 'boolean' && data[key]);
+        const isZeroField = fractionalFields.some(val => val === key) && fracFieldRegEx.test(data[key]);
 
         if (data[key] !== undefined) {
             if (isArray) {
                 if (data[key].length) {
                     acc[key] = data[key].map(({id}) => ({id}));
                 }
-            } else if (isStrOrBool && !isZeroField) {
+            } else if (isStrOrBoolTrue && !isZeroField) {
                 acc[key] = data[key];
             } else if (typeof data[key] === 'object') {
                 acc[`${key}_id`] = data[key].id;
@@ -50,7 +82,7 @@ export const prepareParamsData = (data) => {
 
         return acc;
     }, {});
-}
+};
 
 export const isRequired = (field: string): boolean => requireFields.some(reqField => reqField === field);
 
@@ -69,26 +101,31 @@ export const transformCyrillic = (title: string, reverse?: boolean): string => {
         .replace(/\s+/g, '-');
 };
 
-export type CtgrsByCyrillicNameType = [CategoryType, SubCategoryType, TypeCtgr?];
-export const getCtgrsByCyrillicNames = (categoryName: string, subCtgrName: string, typeCtgrName?: string): CtgrsByCyrillicNameType => {
-    return addParentsToCtgrs(categories_list).reduce((acc: any, ctgr) => {
-        if (transformCyrillic(ctgr.ru_name) === categoryName) {
-            acc.push(ctgr);
-            ctgr.subCategory.forEach(subCtgr => {
-                if (transformCyrillic(subCtgr.ru_name) === subCtgrName) {
-                    acc.push(subCtgr);
-                    if (typeCtgrName) {
-                        subCtgr.type?.forEach(type => {
-                            if (transformCyrillic(type.ru_name) === typeCtgrName) {
-                                acc.push(type);
-                            }
-                        });
+export type CtgrsByCyrillicNameType = [CategoryType, SubCategoryType, TypeCategory?];
+
+export const getCtgrsByCyrillicNames = (categories: string[] = []): CtgrsByCyrillicNameType | [] => {
+    if (categories.length) {
+        const [categoryName, subCtgrName, typeCtgrName] = categories;
+        return siteCategories.reduce((acc: any, ctgr) => {
+            if (transformCyrillic(ctgr.ru_name) === categoryName) {
+                acc.push(ctgr);
+                ctgr.subCategory.forEach(subCtgr => {
+                    if (transformCyrillic(subCtgr.ru_name) === subCtgrName) {
+                        acc.push(subCtgr);
+                        if (typeCtgrName) {
+                            subCtgr.type?.forEach(type => {
+                                if (transformCyrillic(type.ru_name) === typeCtgrName) {
+                                    acc.push(type);
+                                }
+                            });
+                        }
                     }
-                }
-            });
-        }
-        return acc;
-    }, []);
+                });
+            }
+            return acc;
+        }, []);
+    }
+    return [];
 };
 
 export const numberPrettier = (price: string | number): string => {
@@ -101,50 +138,6 @@ export const numberPrettier = (price: string | number): string => {
 
 export const clearWhiteSpaces = (txt: string): string => {
     return txt.replace(/\s+/g, '');
-};
-
-export const addParentsToCtgrs = (categoriesList: CategoryType[]): CategoryType[] => {
-    return categoriesList.map(ctgry => {
-        if (ctgry.subCategory) {
-            const subCategory = addParents(
-                ctgry.subCategory,
-                [{
-                    id: ctgry.id,
-                    name: ctgry.name
-                }]
-            );
-            return {...ctgry, subCategory};
-        } else {
-            return ctgry;
-        }
-    });
-
-    function addParents(list, parents) {
-        return list.map(ctgry => {
-            if (ctgry.type) {
-                const type = addParents(
-                    ctgry.type,
-                    [
-                        ...parents,
-                        {
-                            id: ctgry.id,
-                            name: ctgry.name
-                        }
-                    ]
-                );
-                return {
-                    ...ctgry,
-                    type,
-                    parents
-                };
-            } else {
-                return {
-                    ...ctgry,
-                    parents
-                };
-            }
-        });
-    }
 };
 
 export const normalizeFiltersByCategory = (data: any, type?) => {
@@ -218,7 +211,7 @@ export const weekDaysHelper = (days: IdNameType[], t: TFunction): string => {
 };
 
 export const categoriesByType = (postType: string): CategoryType[] => {
-    return categories_list.reduce((acc, ctgry) => {
+    return siteCategories.reduce((acc, ctgry) => {
         if (postType === 'post' || ctgry.has_auction) {
             acc.push(ctgry);
         }
@@ -234,7 +227,7 @@ export type CategoriesParamsType = {
 
 export const getCategoriesByParams = (params: CategoriesParamsType) => {
     const {categoryName, subCategoryName, typeName} = params;
-    return categories_list.reduce((acc: any, ctgry) => {
+    return siteCategories.reduce((acc: any, ctgry) => {
         if (ctgry.name === categoryName) {
             acc.category = {id: ctgry.id, name: ctgry.name};
             if (subCategoryName && ctgry.subCategory) {

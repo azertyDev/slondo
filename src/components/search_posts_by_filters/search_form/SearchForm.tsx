@@ -1,7 +1,8 @@
-import {FC, ReactNode, useEffect} from 'react';
+import {FC, ReactNode, useEffect, useState} from 'react';
 import {WithT} from 'i18next';
 import {Grid} from '@material-ui/core';
 import {useFormik} from 'formik';
+import {useRouter} from 'next/router';
 import {CategoriesDropdown} from '@src/components/elements/categories_dropdown/CategoriesDropdown';
 import {DropDownSelect} from '@src/components/elements/drop_down_select/DropDownSelect';
 import {CustomButton} from '@src/components/elements/custom_button/CustomButton';
@@ -10,7 +11,13 @@ import {PriceFromTo} from '@src/components/elements/price_from_to/PriceFromTo';
 import {DeployedSelect} from '@src/components/elements/deployed_select/DeployedSelect';
 import {SiteServices} from '@src/components/post/create_post/form_page/common_form/site_services/SiteServices';
 import {CheckboxSelect} from '@src/components/elements/checkbox_select/CheckboxSelect';
-import {cookies, CtgrsByCyrillicNameType, transformCyrillic} from '@src/helpers';
+import {
+    cookies,
+    CtgrsByCyrillicNameType,
+    normalizeFiltersByCategory,
+    toUrlParams,
+    transformCyrillic
+} from '@src/helpers';
 import {useHandlers} from '@src/hooks/useHandlers';
 import {CustomFormikProvider} from '@src/components/elements/custom_formik_provider/CustomFormikProvider';
 import {CarForm} from '@src/components/search_posts_by_filters/categories_forms/car_form/CarForm';
@@ -20,10 +27,13 @@ import {LandParams} from '@src/components/post/create_post/form_page/params_form
 import {ParkingLotsBoxes} from '@src/components/post/create_post/form_page/params_form/params_forms/parking_lots_boxes_params/ParkingLotsBoxes';
 import {CommercialPropertyParams} from '@src/components/post/create_post/form_page/params_form/params_forms/commercial_property_params/CommercialPropertyParams';
 import {RegularForm} from '@src/components/search_posts_by_filters/categories_forms/regular_form/RegularForm';
-import {useStyles} from './useStyles';
-import {useRouter} from 'next/router';
 import {transformLocations} from '@src/common_data/locations';
-import {categories_list} from '@src/common_data/categories_list';
+import {siteCategories} from '@src/common_data/siteCategories';
+import {useDispatch, useSelector} from 'react-redux';
+import {RootState} from '@src/redux/rootReducer';
+import {userAPI} from '@src/api/api';
+import {setErrorMsgAction} from '@src/redux/slices/errorSlice';
+import {useStyles} from './useStyles';
 
 
 export type CommonFiltersType = {
@@ -35,22 +45,29 @@ export type CommonFiltersType = {
 };
 
 type SearchFormPropsType = {
-    filters,
-    categoryName: string,
-    ctgrsByQuery: CtgrsByCyrillicNameType,
+    urlParams,
+    categories: CtgrsByCyrillicNameType | [],
 } & WithT;
 
 export const SearchForm: FC<SearchFormPropsType> = (props) => {
     const {
         t,
-        filters,
-        categoryName,
-        ctgrsByQuery
+        urlParams,
+        categories
     } = props;
 
-    const postTypesList = [postTypes[0], postTypes[1]];
+    const [ctgr, subCtgr, typeCtgr] = categories;
+    const {
+        post_type,
+        price_from,
+        price_to,
+        safe_deal,
+        exchange,
+        delivery,
+        ...urlFiltersParams
+    } = urlParams;
 
-    const [ctgr, subCtgr, typeCtgr = null] = ctgrsByQuery;
+    const postTypesList = [postTypes[0], postTypes[1]];
 
     const initVals: any = {
         category: null,
@@ -58,17 +75,34 @@ export const SearchForm: FC<SearchFormPropsType> = (props) => {
         post_type: null,
         price_from: '',
         price_to: '',
-        free: false,
         safe_deal: false,
         exchange: false,
         delivery: false
     };
 
-    const {push} = useRouter();
+    const initFilters = {
+        categories: siteCategories,
+        subCategories: ctgr?.subCategory || [],
+        typeCategories: subCtgr?.type || [],
+        filtersByCtgr: {}
+    };
 
-    const onSubmit = (values) => {
-        const url = generateUrlByParams(values);
-        push(url);
+    if (ctgr?.name === 'car') {
+        initVals.year = '';
+        initVals.mileage = '';
+        initVals.engine_capacity = '';
+    }
+
+    const dispatch = useDispatch();
+    const {push} = useRouter();
+    const searchTxt = useSelector((store: RootState) => store.searchTxt);
+
+    const [filters, setFilters] = useState(initFilters);
+    const {filtersByCtgr} = filters;
+
+
+    const onSubmit = () => {
+        push(urlByParams());
     };
 
     const formik = useFormik({
@@ -82,7 +116,23 @@ export const SearchForm: FC<SearchFormPropsType> = (props) => {
         handleBlur
     } = formik;
 
+    const {category, type, ...otherVals} = values;
+    const mainCategoryName: string = category?.parents?.[0].name ?? category?.name ?? '';
+
+
     const {handleInput, handleOptionCheckbox} = useHandlers(values, setValues);
+    const [free, setFree] = useState(false);
+
+    const handleFree = ({target}) => {
+        setFree(target.checked);
+        if (target.checked) {
+            setValues({
+                ...values,
+                price_from: '0',
+                price_to: ''
+            });
+        }
+    };
 
     const handleCheckbox = (name) => ({target}) => {
         setValues({...values, [name]: target.checked});
@@ -92,16 +142,22 @@ export const SearchForm: FC<SearchFormPropsType> = (props) => {
         setValues(initVals);
     };
 
-    const handleSelect = (name, value) => {
+    const handleMainCtgrSelect = (name, value) => {
         if (name === 'category') {
             setValues({
                 ...initVals,
-                type: null,
-                [name]: value
+                category: value
             });
         } else {
             setValues({...values, [name]: value});
         }
+    };
+
+    const handleParamsSelect = (name, value) => {
+        setValues({
+            ...values,
+            [name]: value
+        });
     };
 
     const handlePostType = (_, value) => {
@@ -110,14 +166,14 @@ export const SearchForm: FC<SearchFormPropsType> = (props) => {
     };
 
     const getFiltersByCtgr = (): ReactNode => {
-        switch (values.category?.name) {
+        switch (mainCategoryName) {
             case 'foreignCars':
             case 'madeInUzb':
                 return <CarForm
                     formik={formik}
                     handleInput={handleInput}
-                    handleSelect={handleSelect}
-                    filters={filters.filtersByCtgr}
+                    handleSelect={handleParamsSelect}
+                    filters={filtersByCtgr}
                 />;
             // case 'apartments':
             //     return <ApartmentsParams
@@ -158,17 +214,18 @@ export const SearchForm: FC<SearchFormPropsType> = (props) => {
                 return <RegularForm
                     formik={formik}
                     handleInput={handleInput}
-                    handleSelect={handleSelect}
-                    filters={filters.filtersByCtgr}
+                    handleSelect={handleParamsSelect}
+                    filters={filtersByCtgr}
                     handleOptionCheckbox={handleOptionCheckbox}
                 />;
         }
     };
 
-    function generateUrlByParams(params): string {
+    function urlByParams(): string {
         let url = '/';
         const location = cookies.get('user_location');
-        const {category, type, ...otherParams} = params;
+
+        const params = toUrlParams(otherVals);
 
         if (location) {
             const {city, region} = location;
@@ -179,52 +236,79 @@ export const SearchForm: FC<SearchFormPropsType> = (props) => {
         }
 
         if (category) {
-            let transformedCategoryName = transformCyrillic(category.ru_name);
+            let categoryName = `${transformCyrillic(category.ru_name)}/`;
             if (category.parents) {
-                const parentCtgrRuName = categories_list.find(ctgr => ctgr.name === category.parents[0].name).ru_name;
-                transformedCategoryName = `${transformCyrillic(parentCtgrRuName)}/${transformedCategoryName}/`;
+                const parentCtgrRuName = siteCategories.find(ctgr => ctgr.name === category.parents[0].name).ru_name;
+                categoryName = `${transformCyrillic(parentCtgrRuName)}/${categoryName}`;
             }
-            url = url.concat(transformedCategoryName);
+            url = url.concat(categoryName);
         }
 
-        if (type) {
-            url = url.concat(`${transformCyrillic(type.ru_name)}/`);
-        }
+        if (type) url = url.concat(`${transformCyrillic(type.ru_name)}/`);
+        if (searchTxt) url = url.concat(`q-${searchTxt}/`);
+        if (params) url = url.concat(params);
 
-        // Object.keys(params).forEach(k => {
-        //
-        // });
-        console.log(url);
         return url;
     }
 
-    const setInitVals = () => {
-        let vals: any = {
-            category: subCtgr ?? ctgr
-        };
+    const setFiltersByCtgr = async () => {
+        try {
+            if (category) {
+                const ctgr = category?.parents?.[0] || category;
+                const subCtgr = category.parents ? category : null;
 
-        if (ctgr.name === 'car') {
-            vals = {
-                ...vals,
-                year: '',
-                engine_capacity: '',
-                mileage: ''
-            };
+                let filtersByCtgr = await userAPI.getFiltersByCtgr(ctgr.id, subCtgr?.id, type?.id);
+                if (filtersByCtgr.default_param) filtersByCtgr = filtersByCtgr.default_param;
+                filtersByCtgr = normalizeFiltersByCategory(filtersByCtgr, typeCtgr);
+
+                setFilters({
+                    ...filters,
+                    filtersByCtgr
+                });
+            } else {
+                setFilters({
+                    ...filters,
+                    filtersByCtgr: {}
+                });
+            }
+        } catch (e) {
+            dispatch(setErrorMsgAction(e.message));
         }
+    };
 
-        if (typeCtgr) {
-            vals.type = typeCtgr;
-        }
+    const setValsByParams = () => {
+        const vals: any = {};
 
-        setValues({...values, ...vals});
+        Object.keys(urlFiltersParams).forEach(k => {
+            if (filtersByCtgr[k]) {
+                vals[k] = filtersByCtgr[k].find(v => v.id === +urlFiltersParams[k]);
+            }
+        });
+
+        setValues({
+            ...values,
+            ...vals,
+            category: subCtgr || ctgr || null,
+            type: typeCtgr || null,
+            post_type: postTypesList.find(type => type.id === +post_type) || null,
+            price_from: price_from || '',
+            price_to: price_to || '',
+            safe_deal: !!safe_deal,
+            exchange: !!exchange,
+            delivery: !!delivery
+        });
     };
 
     useEffect(() => {
-        setInitVals();
-    }, []);
+        setValsByParams();
+    }, [urlParams, filtersByCtgr]);
+
+    useEffect(() => {
+        setFiltersByCtgr();
+    }, [category, type]);
 
     console.log('values', values);
-    console.log('filters', filters);
+    console.log('urlParams', urlParams);
     const classes = useStyles();
     return (
         <div className={classes.root}>
@@ -234,7 +318,7 @@ export const SearchForm: FC<SearchFormPropsType> = (props) => {
                         <CategoriesDropdown
                             t={t}
                             name='category'
-                            handleSelect={handleSelect}
+                            handleSelect={handleMainCtgrSelect}
                             filters={filters.categories}
                             category={values.category}
                         />
@@ -249,7 +333,7 @@ export const SearchForm: FC<SearchFormPropsType> = (props) => {
                                 values={values}
                                 onBlur={handleBlur}
                                 items={values.category.type}
-                                handleSelect={handleSelect}
+                                handleSelect={handleMainCtgrSelect}
                             />
                         </Grid>
                     )}
@@ -268,7 +352,7 @@ export const SearchForm: FC<SearchFormPropsType> = (props) => {
                                 t={t}
                                 name='cost'
                                 values={values}
-                                disabled={values.free}
+                                disabled={free}
                                 handleInput={handleInput}
                             />
                         </Grid>
@@ -276,22 +360,26 @@ export const SearchForm: FC<SearchFormPropsType> = (props) => {
                             <CheckboxSelect
                                 t={t}
                                 name='free'
-                                checked={values.free}
-                                onChange={handleCheckbox('free')}
+                                checked={free}
+                                onChange={handleFree}
                             />
                         </Grid>
                     </Grid>
-                    <Grid item xs={12}>
-                        <SiteServices
-                            t={t}
-                            iconMode
-                            isAuction={false}
-                            values={values}
-                            categoryName={categoryName}
-                            handleCheckbox={handleCheckbox}
-                        />
-                    </Grid>
-                    {getFiltersByCtgr()}
+                    {mainCategoryName !== '' && (
+                        <>
+                            <Grid item xs={12}>
+                                <SiteServices
+                                    t={t}
+                                    iconMode
+                                    isAuction={false}
+                                    values={values}
+                                    handleCheckbox={handleCheckbox}
+                                    mainCategoryName={mainCategoryName}
+                                />
+                            </Grid>
+                            {getFiltersByCtgr()}
+                        </>
+                    )}
                 </Grid>
                 <div className='actions-btns'>
                     <CustomButton onClick={handleReset}>{t('filters:reset')}</CustomButton>

@@ -13,7 +13,7 @@ const localServer = 'http://192.168.100.60/slondo/public/api/';
 
 const instance = Axios.create({
     withCredentials: true,
-    baseURL: localServer
+    baseURL: uztelecom
 });
 
 // export const socketIO = socketIOClient('http://192.168.100.60:8005');
@@ -144,13 +144,13 @@ export const userAPI = {
                 throw err;
             });
     },
-    getDataForCreatePost: (
+    getFiltersByCtgr: (
         fstCtgrId: number,
         secCtgrId: number,
         trdCtgrId: number
     ): Promise<any> => {
         return instance.get(
-            `subcategory?category_id=${fstCtgrId}&sub_category_id=${secCtgrId}&type_id=${trdCtgrId ?? ''}`
+            `subcategory?category_id=${fstCtgrId}&sub_category_id=${secCtgrId ?? ''}&type_id=${trdCtgrId ?? ''}`
         )
             .then(res => res.data)
             .catch(err => {

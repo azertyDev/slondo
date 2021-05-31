@@ -2,7 +2,7 @@ import {useState} from 'react';
 import Link from 'next/link';
 import {AppBar, Avatar, Container, Grid, Hidden, Typography} from '@material-ui/core';
 import {CustomButton} from '@src/components/elements/custom_button/CustomButton';
-import {SearchForm} from '@src/components/header/bottom/search_form/SearchForm';
+import {HeaderSearchForm} from '@src/components/header/bottom/header_search_form/HeaderSearchForm';
 import {withScrollThreshold} from '@src/hocs/withScrollThreshold';
 import {Logo} from '@src/components/elements/icons';
 import {AddIcon} from '@src/components/elements/icons/AddIcon';
@@ -85,7 +85,7 @@ const Bottom = (props) => {
                                 className="search-block"
                             >
                                 <Grid item xs>
-                                    <SearchForm/>
+                                    <HeaderSearchForm/>
                                 </Grid>
                             </Grid>
                             <Grid item md={2}>
@@ -132,7 +132,7 @@ const Bottom = (props) => {
             </Hidden>
             <Hidden lgUp>
                 <div className="select-local">
-                    <SearchForm/>
+                    <HeaderSearchForm/>
                 </div>
             </Hidden>
             <CustomDrawer

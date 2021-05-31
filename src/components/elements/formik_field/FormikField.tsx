@@ -27,7 +27,7 @@ export const FormikField: FC<CustomFormikFieldPropsType> = (props) => {
 
     const classes = useStyles();
     return (
-        <Field name={name} {...otherProps} >
+        <Field name={name} {...otherProps}>
             {({field}) =>
                 <div className={classes.root}>
                     <div className='label-wrapper'>

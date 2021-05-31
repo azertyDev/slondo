@@ -103,7 +103,7 @@ export const FormPage: FC = () => {
 
             setIsFetch(true);
 
-            let fetchedData = await userAPI.getDataForCreatePost(category.id, subCtgrId, typeId);
+            let fetchedData = await userAPI.getFiltersByCtgr(category.id, subCtgrId, typeId);
 
             if (categoryName === 'car') {
                 if (subCategoryName === 'madeInUzb') {

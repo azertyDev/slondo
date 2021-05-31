@@ -55,7 +55,7 @@ export const HousesCottagesParams: FC<CommonParamsPropsType> = (props) => {
     const classes = useStyles();
     return (
         <div className={classes.root}>
-            <CustomFormikProvider formik={formik} submitTxt={!isSearch ? 'appearance' : null}>
+            <CustomFormikProvider formik={formik} isPreview={isPreview}>
                 {!isSearch && (
                     <Grid item xs={6}>
                         <PostTitle isPreview={isPreview} title={values.title} formik={formik} t={t}/>
