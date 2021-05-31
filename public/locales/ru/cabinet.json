@@ -16,7 +16,7 @@
     "myPurchases": "Мои покупки",
     "settings": "Настройки",
     "exit": "Выход",
-    "nonModerated": "Не прошло модерацию",
+    "bannedPosts": "Не прошло модерацию",
     "created_at": "На Slondo с {{created_at}}",
     "cabinet": "Продал на Slondo",
     "sold_on_slondo": "Продал на SLONDO",

@@ -49,8 +49,14 @@ export const CardItem: FC<CardItemProps> = (props) => {
     const [liked, setLiked] = useState(favorite);
 
     const date = new Date(created_at);
+    function checkTime(i) {
+        if (i < 10) {
+            i = "0" + i;
+        }
+        return i;
+    }
 
-    const formatted_date = `${date.getDate()} ${months[date.getMonth()]} ${date.getHours() + ':' + date.getMinutes()}`;
+    const formatted_date = `${date.getDate()} ${months[date.getMonth()]} ${date.getHours() + ':' + checkTime(date.getMinutes())}`;
 
     const handleFavorite = async () => {
         try {

@@ -29,7 +29,8 @@ export const requireFields = [
     'engine_type',
     'engine_capacity',
     'drive',
-    'user_name'
+    'user_name',
+    'comment'
 ];
 
 export const excludeFields = [

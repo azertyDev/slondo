@@ -1,62 +1,58 @@
-import React, { FC } from 'react';
+import {ChangeEvent, FC} from 'react';
 import {Box, Hidden, Typography} from '@material-ui/core';
 import CustomRating from '@material-ui/lab/Rating';
-
 // styles
-import { useStyles } from './useStyles';
+import {useStyles} from './useStyles';
 
 type RatingPropsType = {
-    card: boolean;
-};
-
-const labels = {
-    0.5: '0.5',
-    1: '1.0',
-    1.5: '1.5',
-    2: '2.0',
-    2.5: '2.5',
-    3: '3.0',
-    3.5: '3.5',
-    4: '4.0',
-    4.5: '4.5',
-    5: '5.0',
+    card?: boolean,
+    readOnly?: boolean,
+    className?,
+    ratingValue?: string,
+    ratingCount?: number,
+    name?: string,
+    onChangeRating?: (event: ChangeEvent<{}>, value: number | null) => void,
 };
 
 export const Rating: FC<RatingPropsType> = (props) => {
-    const [value, setValue] = React.useState(3.5);
-    const [hover, setHover] = React.useState(-1);
-
+    const {
+        card,
+        name,
+        readOnly,
+        className,
+        ratingValue,
+        ratingCount,
+        onChangeRating
+    } = props;
     const classes = useStyles();
     return (
-        <div className={classes.root}>
+        <div className={`${classes.root} ${className}`}>
             <div>
                 <CustomRating
-                    name="hover-feedback"
-                    readOnly
-                    value={value}
-                    precision={0.5}
-                    onChange={(event, newValue) => {
-                        setValue(newValue);
-                    }}
-                    onChangeActive={(event, newHover) => {
-                        setHover(newHover);
-                    }}
+                    name={name}
+                    readOnly={readOnly ?? true}
+                    value={parseInt(ratingValue)}
+                    precision={1}
+                    onChange={onChangeRating}
+                    {...props}
                 />
-                {value !== null && (
-                    <Box>
+                {ratingValue !== null
+                    ? (<Box>
                         <Typography variant="subtitle1">
-                            {labels[hover !== -1 ? hover : value]}
+                            {ratingValue}
                         </Typography>
-                    </Box>
-                )}
+                    </Box>)
+                    : 0
+                }
             </div>
             <Hidden mdDown>
-                {!props.card && (
+                {!card && (
                     <div>
-                        <Typography variant="subtitle1">(200 оценок)</Typography>
+                        <Typography variant="subtitle1">{`(${ratingCount} оценок)`}</Typography>
                     </div>
                 )}
             </Hidden>
         </div>
     );
 };
+

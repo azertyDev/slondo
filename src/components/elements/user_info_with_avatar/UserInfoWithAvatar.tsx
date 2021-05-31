@@ -41,8 +41,13 @@ export const UserInfoWithAvatar: FC<UserInfoWithAvatarPropsType> = (props) => {
                             created_at: formatted_date?.toString()
                         })}
                     </Typography>
-                    <Rating card={false}/>
-                    {!isOwner && (
+                    <Rating
+                        card={false}
+                        readOnly
+                        ratingValue={owner.rating?.slice(0, 3)}
+                        ratingCount={owner.observer?.number_of_ratings}
+                    />
+                    {isOwner && (
                         <CustomButton onClick={handleFollow(owner.id)}>
                             <Typography variant="subtitle2">
                                 {!subscribed ? 'Подписаться' : 'Отписаться'}

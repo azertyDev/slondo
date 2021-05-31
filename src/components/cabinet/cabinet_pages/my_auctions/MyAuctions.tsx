@@ -7,14 +7,15 @@ import {Notification} from '@src/components/cabinet/cabinet_pages/notifications/
 import {WithT} from 'i18next';
 
 type MyAuctionsPropsType = {
+    data?: any,
     handleClose: () => void,
     openModal: boolean,
     ModalContent: () => ReactElement,
     handleDeleteNotification?: (id: number, ads_id: number) => () => void,
     fetchUserPhone?: (user_id: number) => () => void,
-    phone?: number,
     openDialog?,
-    setOpenDialog?,
+    closeDialog?: () => void,
+    phone?: number,
     selectedAuction?,
     pagination?: ReactElement,
     auctionTabs: ReactElement,
@@ -24,18 +25,18 @@ type MyAuctionsPropsType = {
 export const MyAuctions: FC<MyAuctionsPropsType> = (props) => {
     const {
         t,
-        handleClose,
         openModal,
+        auctionTabs,
         ModalContent,
-        handleDeleteNotification,
-        fetchUserPhone,
         phone,
         openDialog,
-        setOpenDialog,
+        currentNotifications,
         selectedAuction,
         pagination,
-        currentNotifications,
-        auctionTabs
+        fetchUserPhone,
+        handleClose,
+        closeDialog,
+        handleDeleteNotification
     } = props;
 
     return (
@@ -49,7 +50,8 @@ export const MyAuctions: FC<MyAuctionsPropsType> = (props) => {
             </CustomModal>
             <ResponsiveDialog
                 openDialog={openDialog ?? false}
-                setOpenDialog={setOpenDialog}
+                handleCloseDialog={closeDialog}
+                maxWidth='md'
             >
                 <Box
                     display='flex'
@@ -82,22 +84,20 @@ export const MyAuctions: FC<MyAuctionsPropsType> = (props) => {
                         labelPlacement="start"
                     />
                 </Box>
-                {
-                    currentNotifications?.map(notification =>
-                        <Box
-                            key={notification.id}
-                            mb={1}
-                        >
-                            <Notification
-                                t={t}
-                                data={notification}
-                                handleDeleteNotification={handleDeleteNotification}
-                                fetchUserPhone={fetchUserPhone}
-                                phone={phone}
-                            />
-                        </Box>
-                    )
-                }
+                {currentNotifications?.map(notification => (
+                    <Box
+                        key={notification.id}
+                        mb={1}
+                    >
+                        <Notification
+                            t={t}
+                            data={notification}
+                            handleDeleteNotification={handleDeleteNotification}
+                            fetchUserPhone={fetchUserPhone}
+                            phone={phone}
+                        />
+                    </Box>
+                ))}
                 {!!currentNotifications?.length && (
                     <Box display='flex' justifyContent='center'>
                         {pagination}

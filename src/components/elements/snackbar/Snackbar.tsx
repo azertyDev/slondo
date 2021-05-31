@@ -7,14 +7,13 @@ export const CustomSnackbar = (props) => {
         message,
         openSnackbar,
         severity,
-        setOpenSnackbar
+        handleCloseSnackbar
     } = props;
 
     const handleClose = (event, reason) => {
         if (reason === 'clickaway') {
-            return;
+            handleCloseSnackbar();
         }
-        setOpenSnackbar(false);
     };
 
     return (

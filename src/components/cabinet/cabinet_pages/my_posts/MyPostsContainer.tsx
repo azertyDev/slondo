@@ -109,7 +109,6 @@ const MyPostsContainer: FC = () => {
                     favorite: false,
                     id: null,
                     image: '',
-                    number_of_views: null,
                     price: null,
                     region: {
                         id: null,
@@ -134,15 +133,7 @@ const MyPostsContainer: FC = () => {
     const [reasonId, setReasonId] = useState(null);
     const [postId, setPostId] = useState(null);
     const [errorMsg, setErrMsg] = useState('');
-    const [showPhone, setShowPhone] = useState(false);
-    const [openDialog, setOpenDialog] = React.useState(false);
 
-    const handleOpenDialog = () => {
-        setOpenDialog(true);
-    };
-    const handleShowPhone = () => {
-        setShowPhone(!showPhone);
-    };
     const handleOpenModal = (postId) => () => {
         setOpenModal(true);
         postId && setPostId(postId);
@@ -204,7 +195,6 @@ const MyPostsContainer: FC = () => {
             dispatch(setErrorMsgAction(e.message));
         }
     };
-
     const getModalContent = () => {
         switch (modalContentIndex) {
             case 1:
@@ -322,7 +312,6 @@ const MyPostsContainer: FC = () => {
                 </>;
         }
     };
-
     const ModalContent = () => (
         <>
             {modalContentIndex === 1
@@ -377,8 +366,6 @@ const MyPostsContainer: FC = () => {
                     <SecondaryCabinetCard
                         t={t}
                         user={data}
-                        handleShowPhone={handleShowPhone}
-                        showPhone={showPhone}
                     />
                 </Grid>
             </Grid>

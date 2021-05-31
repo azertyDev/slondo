@@ -1,5 +1,4 @@
 import Axios from 'axios';
-import socketIOClient from 'socket.io-client';
 import {LocationsDataTypes} from '@root/interfaces/Locations';
 import {CategoryType} from '@root/interfaces/Categories';
 import {InnerCardData} from '@root/interfaces/CardData';
@@ -388,6 +387,38 @@ export const userAPI = {
             });
     },
     getUserRating: (): Promise<any> => {
+        return instance.get(`user/rating`, setTokenToHeader())
+            .then(res => res.data)
+            .catch(err => {
+                throw err;
+            });
+    },
+    setUserRating: (rating: number, comment: string, receiver_id: number): Promise<any> => {
+        return instance.post('regular/user/rating', {
+            rating,
+            comment,
+            receiver_id
+        }, setTokenToHeader())
+            .then(res => res.data)
+            .catch(err => {
+                throw err;
+            });
+    },
+    getBannedPosts: (type: string): Promise<any> => {
+        return instance.get(`regular/post/returned?itemsPerPage=25&page=1&type=${type}`, setTokenToHeader())
+            .then(res => res.data)
+            .catch(err => {
+                throw err;
+            });
+    },
+    deleteBlockedPost: (postId: number): Promise<any> => {
+        return instance.delete(`regular/post/returned/${postId}`, setTokenToHeader())
+            .then(res => res.data)
+            .catch(err => {
+                throw err;
+            });
+    },
+    getAllUserRating: (): Promise<any> => {
         return instance.get(`user/rating`, setTokenToHeader())
             .then(res => res.data)
             .catch(err => {

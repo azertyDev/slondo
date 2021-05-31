@@ -1,8 +1,9 @@
-import {FC} from 'react';
+import {FC, memo} from 'react';
 import {Box, IconButton, Paper, Tooltip, Typography} from '@material-ui/core';
 import {
     CloseIcon,
     DeliveryIcon,
+    ExchangeIcon,
     EyeIcon,
     LocationIcon,
     NotificationIcon,
@@ -10,8 +11,7 @@ import {
     RenewalIcon,
     RocketIcon,
     SafeIcon,
-    SettingsIcon,
-    SwapIcon
+    SettingsIcon
 } from '@src/components/elements/icons';
 import {BreadcrumbsComponent} from '@src/components/elements/breadcrumbs/Breadcrumbs';
 import Link from 'next/link';
@@ -29,7 +29,7 @@ type CabinetCardPropsType = {
     fetchAuctionNotifications?: (post) => () => void
 } & WithT
 
-export const CabinetCard: FC<CabinetCardPropsType> = (props) => {
+export const CabinetCard: FC<CabinetCardPropsType> = memo((props) => {
     const {pathname} = useRouter();
     const {
         t,
@@ -98,7 +98,7 @@ export const CabinetCard: FC<CabinetCardPropsType> = (props) => {
             <Paper variant="outlined" elevation={2}>
                 <Box className="card-data">
                     <div className="img">
-                        <img src={cardData.image} alt={cardData.title}/>
+                        <img src={cardData.image} alt={cardData.title} />
                         <Typography
                             noWrap
                             variant="caption"
@@ -107,14 +107,15 @@ export const CabinetCard: FC<CabinetCardPropsType> = (props) => {
                         >
                             {t(`common:${cardData.ads_type}`)}
                         </Typography>
+
                         <span>
-                            <EyeIcon/>
+                            <EyeIcon />
                             <Typography
                                 noWrap
                                 variant="caption"
                                 color="initial"
                             >
-                                {cardData.number_of_views}
+                                {cardData.observer?.number_of_views}
                             </Typography>
                         </span>
                     </div>
@@ -141,7 +142,7 @@ export const CabinetCard: FC<CabinetCardPropsType> = (props) => {
                                     </IconButton>
                                     : cardData.creator && cardData.status !== 'accepted' && (
                                     <>
-                                        {cardData.ads_type !== 'post' && (
+                                        {cardData.ads_type !== 'post' && !!cardData.observer?.number_of_notifications && (
                                             <IconButton
                                                 className='notifications'
                                                 onClick={handleOpenDialog}
@@ -168,7 +169,7 @@ export const CabinetCard: FC<CabinetCardPropsType> = (props) => {
                             {!!cardData.available_days && (
                                 <div className="available">
                                     <PhoneIcon />
-                                    <Typography variant="body1" color="primary">
+                                    <Typography variant="body1">
                                         {weekDaysHelper(cardData.available_days, t)}{' '}
                                         {`${cardData.available_start_time}-${cardData.available_end_time}`}
                                     </Typography>
@@ -177,7 +178,7 @@ export const CabinetCard: FC<CabinetCardPropsType> = (props) => {
                             {!!cardData.exchange && (
                                 <Tooltip title='Возможен обмен' arrow>
                                     <div className="exchange">
-                                        <SwapIcon/>
+                                        <ExchangeIcon />
                                         <Typography variant="body1">
                                             Возможен обмен
                                         </Typography>
@@ -287,4 +288,4 @@ export const CabinetCard: FC<CabinetCardPropsType> = (props) => {
                 return postStatus;
         }
     }
-};
+});

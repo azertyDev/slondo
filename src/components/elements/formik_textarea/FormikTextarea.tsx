@@ -1,5 +1,5 @@
 import {FC} from 'react';
-import {TextareaAutosize, TextareaAutosizeProps, Typography} from '@material-ui/core';
+import {TextareaAutosizeProps, TextField, Typography} from '@material-ui/core';
 import {Field} from 'formik';
 import {useStyles} from './useStyles';
 
@@ -36,17 +36,16 @@ export const FormikTextarea: FC<FormikTextareaPropsType> = (props) => {
                             {errorMsg && <span className='error-text'>&nbsp;{errorMsg}</span>}
                         </Typography>
                     )}
-                    <TextareaAutosize
+                    <TextField
                         name={name}
                         {...field}
                         {...textareaProps}
+                        fullWidth
                         className={`description-area ${errorMsg ? 'error-border' : ''}`}
+                        helperText={`${textareaProps.value.length}/${limit}`}
+                        variant="outlined"
+                        multiline
                     />
-                    <div className='limit-txt'>
-                        <Typography variant="subtitle1">
-                            {`${textareaProps.value.length}/${limit}`}
-                        </Typography>
-                    </div>
                 </div>
             )}
         </Field>

@@ -1,4 +1,4 @@
-import {FC, useEffect, useState} from 'react';
+import React, {FC, useEffect, useState} from 'react';
 import {TabsContent} from '@src/components/cabinet/cabinet_pages/TabsContent';
 import {MyAuctions} from '@src/components/cabinet/cabinet_pages/my_auctions/MyAuctions';
 import {withAuthRedirect} from '@src/hocs/withAuthRedirect';
@@ -31,11 +31,11 @@ import {initialStateType} from '@src/components/cabinet/cabinet_pages/notificati
 import {ITEMS_PER_PAGE} from '@src/constants';
 import {CustomPagination} from '@src/components/elements/custom_pagination/CustomPagination';
 import {CustomTabPanel} from '@src/components/elements/custom_tab_panel/CustomTabPanel';
+import useModal from '@src/hooks/useModal';
 
 export const MyAuctionsContainer: FC = () => {
     const dispatch = useDispatch();
-    const {t} = useTranslation(['cabinet', 'notifications','categories', 'common', 'locations']);
-    const classes = useStyles();
+    const {t} = useTranslation('cabinet');
 
     const initialState: InitialCabinetCardState = {
         isFetch: false,
@@ -48,7 +48,7 @@ export const MyAuctionsContainer: FC = () => {
         isFetch: false,
         data: []
     };
-    const initialSelectedAuction = {
+    const initialSelectedAuction: CardDataType = {
         id: null,
         ads_type: '',
         adsable: {
@@ -107,6 +107,11 @@ export const MyAuctionsContainer: FC = () => {
             available_start_time: '',
             available_end_time: ''
         },
+        observer: {
+            number_of_notifications: null,
+            number_of_favorites: null,
+            number_of_views: null
+        },
         available_days: [],
         available_start_time: '',
         available_end_time: '',
@@ -122,7 +127,6 @@ export const MyAuctionsContainer: FC = () => {
         expiration_at: '',
         favorite: false,
         image: '',
-        number_of_views: null,
         price: null,
         region: {id: null, name: ''},
         safe_deal: null,
@@ -131,39 +135,35 @@ export const MyAuctionsContainer: FC = () => {
         title: '',
         user_id: null
     };
-
     const initialOffersState: OffersStateType = {
         isFetch: false,
         total: null,
         data: []
     };
+
     const [auctionData, setAuctionData] = useState(initialState);
     const [participatingData, setParticipatingData] = useState(initialState);
     const [offersData, setOffersData] = useState(initialOffersState);
     const [selectedAuction, setSelectedAuction] = useState<CardDataType>(initialSelectedAuction);
-    const [openModal, setOpenModal] = useState(false);
     const [tabIndex, setTabIndex] = useState(0);
     const [modalContentIndex, setModalContentIndex] = useState(1);
-    const [showPhone, setShowPhone] = useState(false);
     const [notification, setNotification] = useState(initialNotificationState);
     const [phone, setPhone] = useState(null);
-    const [openDialog, setOpenDialog] = useState(false);
     const [page, setPage] = useState(1);
     const [pageCount, setPageCount] = useState(0);
+    const [childTabValue, setChildTabValue] = useState(0);
+    const {modalOpen: openDialog, handleModalOpen: handleOpenDialog, handleModalClose: handleCloseDialog} = useModal();
+    const {modalOpen, handleModalOpen, handleModalClose} = useModal();
 
     const indexOfLastPost = page * ITEMS_PER_PAGE;
     const indexOfFirstPost = indexOfLastPost - ITEMS_PER_PAGE;
     const currentNotifications = notification.data.slice(indexOfFirstPost, indexOfLastPost);
-    const [childTabValue, setChildTabValue] = useState(0);
 
     const handleChildTabChange = (event, newValue) => {
         setChildTabValue(newValue);
     };
     const handlePaginationPage = (event, value) => {
         setPage(value);
-    };
-    const handleOpenDialog = () => {
-        setOpenDialog(!openDialog);
     };
     const fetchAuctionNotifications = (post) => async () => {
         try {
@@ -178,19 +178,13 @@ export const MyAuctionsContainer: FC = () => {
             dispatch(setErrorMsgAction(e.message));
         }
     };
-    const handleShowPhone = () => {
-        setShowPhone(!showPhone);
-    };
     const handleTabChange = (event, newValue) => {
         setTabIndex(newValue);
     };
     const handleOpenModal = (auction_id: number, index?: number) => () => {
-        setOpenModal(true);
+        handleModalOpen();
         auction_id && setSelectedAuction({...selectedAuction, id: auction_id});
         setModalContentIndex(index);
-    };
-    const handleModalClose = () => {
-        setOpenModal(false);
     };
     const handlePrevMenu = () => {
         const backValue = modalContentIndex === 5 ? 3 : 1;
@@ -202,7 +196,7 @@ export const MyAuctionsContainer: FC = () => {
     const handleDeactivate = (ads_id?: number) => async () => {
         try {
             await userAPI.deactivateById(ads_id);
-            setOpenModal(false);
+            handleModalClose();
             if (tabIndex === 0) {
                 await fetchAuctionData('auc');
             } else {
@@ -245,7 +239,7 @@ export const MyAuctionsContainer: FC = () => {
     const fetchAllOffers = (auction_id: number) => async () => {
         try {
             auction_id && setSelectedAuction({...selectedAuction, id: auction_id});
-            setOpenModal(true);
+            handleModalOpen();
             setModalContentIndex(10);
             setOffersData({...offersData, isFetch: true});
             const {data, total} = await userAPI.getAllOffersById(auction_id);
@@ -256,7 +250,7 @@ export const MyAuctionsContainer: FC = () => {
     };
     const acceptOfferThePrice = (offer_id: number, is_accepted: boolean) => async () => {
         try {
-            setOpenModal(false);
+            handleModalClose();
             await userAPI.acceptOfferThePrice(offer_id, is_accepted);
             if (tabIndex === 0) {
                 await fetchAuctionData('auc');
@@ -270,7 +264,7 @@ export const MyAuctionsContainer: FC = () => {
     const riceInTape = (post_id: number) => async () => {
         try {
             await userAPI.ricePostInTape(post_id);
-            setOpenModal(false);
+            handleModalClose();
             setModalContentIndex(1);
         } catch (e) {
             dispatch(setErrorMsgAction(e.message));
@@ -294,6 +288,8 @@ export const MyAuctionsContainer: FC = () => {
             dispatch(setErrorMsgAction(e.message));
         }
     };
+
+    const classes = useStyles();
     const getModalContent = () => {
         switch (modalContentIndex) {
             case 1:
@@ -393,7 +389,7 @@ export const MyAuctionsContainer: FC = () => {
                             return (
                                 <Box px={5} py={2} display='flex' key={offer.id}>
                                     <Box>
-                                        <UserInfoWithAvatar owner={offer.user} isOwner={true}/>
+                                        <UserInfoWithAvatar owner={offer.user} isOwner={false} />
                                     </Box>
                                     <Box>
                                         <Typography variant='subtitle2'>
@@ -473,11 +469,11 @@ export const MyAuctionsContainer: FC = () => {
                 ? <Typography className="title" variant="h6">
                     Аукцион №: {selectedAuction.id}
                 </Typography>
-                : (modalContentIndex !== 10 || 11 && (
+                : (modalContentIndex !== 10 && modalContentIndex !== 11 && (
                         <IconButton
-                            className='prev-btn'
-                            aria-label="back"
                             size="medium"
+                            aria-label="back"
+                            className='prev-btn'
                             onClick={handlePrevMenu}
                         >
                             <ArrowBackIcon fontSize="inherit" />
@@ -487,7 +483,6 @@ export const MyAuctionsContainer: FC = () => {
             {getModalContent()}
         </>
     );
-
     const pagination = (
         <CustomPagination
             pageCount={pageCount}
@@ -522,10 +517,8 @@ export const MyAuctionsContainer: FC = () => {
                         t={t}
                         user={data}
                         offersData={offersData}
-                        acceptOfferThePrice={acceptOfferThePrice}
                         fetchAllOffers={fetchAllOffers}
-                        handleShowPhone={handleShowPhone}
-                        showPhone={showPhone}
+                        acceptOfferThePrice={acceptOfferThePrice}
                     />
                 </Grid>
             </Grid>
@@ -556,9 +549,6 @@ export const MyAuctionsContainer: FC = () => {
                     <SecondaryCabinetCard
                         t={t}
                         user={data}
-                        handleOpenDialog={handleOpenDialog}
-                        handleShowPhone={handleShowPhone}
-                        showPhone={showPhone}
                         acceptOfferThePrice={acceptOfferThePrice}
                         fetchAllOffers={fetchAllOffers}
                     />
@@ -648,18 +638,18 @@ export const MyAuctionsContainer: FC = () => {
             component:
                 <MyAuctions
                     t={t}
+                    phone={phone}
+                    openModal={modalOpen}
+                    openDialog={openDialog}
+                    pagination={pagination}
                     auctionTabs={createdAuctionTabs}
                     selectedAuction={selectedAuction}
-                    openModal={openModal}
+                    currentNotifications={currentNotifications}
                     ModalContent={ModalContent}
                     handleClose={handleModalClose}
                     handleDeleteNotification={handleDeleteNotification}
                     fetchUserPhone={fetchUserPhone}
-                    phone={phone}
-                    openDialog={openDialog}
-                    setOpenDialog={setOpenDialog}
-                    pagination={pagination}
-                    currentNotifications={currentNotifications}
+                    closeDialog={handleCloseDialog}
                 />
         },
         {
@@ -669,8 +659,10 @@ export const MyAuctionsContainer: FC = () => {
             component:
                 <MyAuctions
                     t={t}
+                    openModal={modalOpen}
+                    openDialog={openDialog}
                     auctionTabs={participatingAuctionTabs}
-                    openModal={openModal}
+                    closeDialog={handleCloseDialog}
                     ModalContent={ModalContent}
                     handleClose={handleModalClose}
                 />
@@ -678,8 +670,8 @@ export const MyAuctionsContainer: FC = () => {
     ];
 
     useEffect(() => {
-        fetchAuctionData('auc');
         fetchAuctionData();
+        fetchAuctionData('auc');
     }, []);
 
     return (

@@ -86,7 +86,6 @@ const SettingsContainer: FC = () => {
             dispatch(setErrorMsgAction(e.message));
         }
     };
-
     const handleCancel = () => {
         setValues(initUserInfo);
         setFormDisable(true);

@@ -8,6 +8,7 @@ import {RootState} from '@src/redux/rootReducer';
 import {useTranslation} from 'next-i18next';
 import {ITEMS_PER_PAGE} from '@src/constants';
 import {CustomPagination} from '@root/src/components/elements/custom_pagination/CustomPagination';
+import useModal from '@src/hooks/useModal';
 
 export type initialStateType = {
     isFetch: boolean,
@@ -27,8 +28,10 @@ export type initialStateType = {
 
 const NotificationsContainer: FC = () => {
     const dispatch = useDispatch();
-    const {t} = useTranslation(['cabinet', 'notifications','categories', 'common', 'locations']);
+    const {t} = useTranslation(['cabinet', 'notifications', 'categories', 'common', 'locations']);
     const userInfo = useSelector((store: RootState) => store.user.info);
+    const {modalOpen: openSnackbar, handleModalOpen: handleOpenSnackbar, handleModalClose: handleCloseSnackbar} = useModal();
+
     const initialState: initialStateType = {
         isFetch: false,
         data: []
@@ -37,7 +40,6 @@ const NotificationsContainer: FC = () => {
     const [notifications, setNotifications] = useState(initialState);
     const [phone, setPhone] = useState(null);
     const [openModal, setOpenModal] = useState(false);
-    const [openSnackbar, setOpenSnackbar] = React.useState(false);
     const [message, setMessage] = useState('');
     const [page, setPage] = useState(1);
     const [pageCount, setPageCount] = useState(0);
@@ -68,7 +70,7 @@ const NotificationsContainer: FC = () => {
             const {message} = await userAPI.deleteUserNotification(id);
             const {data} = await userAPI.getAllNotifications();
             setNotifications({...notifications, data, isFetch: false});
-            setOpenSnackbar(true);
+            handleOpenSnackbar();
             setMessage(message);
         } catch (e) {
             dispatch(setErrorMsgAction(e.message));
@@ -116,12 +118,12 @@ const NotificationsContainer: FC = () => {
         openSnackbar={openSnackbar}
         message={message}
         phone={phone}
-        setOpenSnackbar={setOpenSnackbar}
         fetchUserPhone={fetchUserPhone}
         handleDeleteNotification={handleDeleteNotification}
         handleDeleteAllNotification={handleDeleteAllNotification}
         handleOpenModal={handleOpenModal}
         handleCloseModal={handleCloseModal}
+        handleCloseSnackbar={handleCloseSnackbar}
         pagination={pagination}
     />;
 };
