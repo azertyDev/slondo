@@ -43,7 +43,6 @@ export const AuthRegContainer: FC<AuthRegContainerPropsType> = (props) => {
     } = props;
 
     const {locale} = useRouter();
-
     const classes = useStyles();
     return (
         <div className={classes.root}>
@@ -100,22 +99,22 @@ export const AuthRegContainer: FC<AuthRegContainerPropsType> = (props) => {
                             className="reg-panel"
                         >
                             {isRecoveryPswd
-                             ? <RecoveryContainer
-                                 t={t}
-                                 timer={timer}
-                                 activeTimer={activeTimer}
-                                 setErrorMsg={setErrorMsg}
-                                 handleCancel={handleCancel}
-                                 handleCloseModal={handleCloseModal}
-                                 handleActiveTimer={handleActiveTimer}
-                             />
-                             : <div className='reg-form'>
-                                 <RegForm
-                                     t={t}
-                                     setErrorMsg={setErrorMsg}
-                                     handleCancel={handleCancel}
-                                 />
-                             </div>}
+                                ? <RecoveryContainer
+                                    t={t}
+                                    timer={timer}
+                                    activeTimer={activeTimer}
+                                    setErrorMsg={setErrorMsg}
+                                    handleCancel={handleCancel}
+                                    handleCloseModal={handleCloseModal}
+                                    handleActiveTimer={handleActiveTimer}
+                                />
+                                : <div className='reg-form'>
+                                    <RegForm
+                                        t={t}
+                                        setErrorMsg={setErrorMsg}
+                                        handleCancel={handleCancel}
+                                    />
+                                </div>}
                         </CustomTabPanel>
                     </div>
                 </div>

@@ -1,7 +1,8 @@
 import {makeStyles} from '@material-ui/core/styles';
 
-export const useStyles = makeStyles(({palette}) => ({
+export const useStyles = makeStyles(({palette, breakpoints}) => ({
     root: {
+        [breakpoints.down('sm')]: {},
         marginBottom: '20px',
         '& div.form-block': {
             '& div.server-error': {
@@ -94,4 +95,5 @@ export const useStyles = makeStyles(({palette}) => ({
             }
         }
     }
+
 }));

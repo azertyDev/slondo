@@ -11,12 +11,10 @@ import {
     TorgIcon
 } from '@src/components/elements/icons';
 import {AuthRegContainer} from '@src/components/header/auth_reg_page/auth_reg_form/AuthRegContainer';
-import {CustomButton} from '@src/components/elements/custom_button/CustomButton';
-import {CustomSlider} from '@src/components/elements/custom_slider/CustomSlider';
-import {CustomList} from '@src/components/elements/custom_list/CustomList';
 import {useStyles} from './useStyles';
 import {setIsAuthModalOpen} from '@src/redux/slices/userSlice';
 import {useDispatch} from 'react-redux';
+import {ResponsiveDialog} from '@src/components/elements/responsive_dialog/ResponsiveDialog';
 
 
 const settings = {
@@ -49,12 +47,14 @@ const list = [
 ];
 
 type AuthRegPageType = {
-    isOpen: boolean
+    modalOpen: boolean,
+    handleModalClose: () => void
 };
 
 export const AuthRegPage: FC<AuthRegPageType> = (props) => {
     const {
-        isOpen
+        modalOpen,
+        handleModalClose
     } = props;
 
     const initSeconds = 60;
@@ -121,9 +121,9 @@ export const AuthRegPage: FC<AuthRegPageType> = (props) => {
 
     const classes = useStyles();
     return (
-        <Modal
-            open={isOpen}
-            onClose={handleCloseModal}
+        <ResponsiveDialog
+            openDialog={modalOpen}
+            handleCloseDialog={handleModalClose}
         >
             <div className={classes.root}>
                 <Hidden smDown>
@@ -198,63 +198,28 @@ export const AuthRegPage: FC<AuthRegPageType> = (props) => {
                 </Hidden>
                 {/*--------------------------------> Mobile <------------------------------------------*/}
                 <Hidden mdUp>
-                    {isAuthRegClicked
-                     ? <div className={classes.authForm}>
-                         <div className='btns-wrapper'>
-                             <PrevArrowIcon onClick={handleBack}/>
-                             {/*<CloseIcon onClick={handleCloseModal}/>*/}
-                         </div>
-                         <AuthRegContainer
-                             t={t}
-                             timer={timer}
-                             activeTimer={activeTimer}
-                             tabIndex={tabIndex}
-                             errorMsg={errorMsg}
-                             setErrorMsg={setErrorMsg}
-                             isRecoveryPswd={isRecoveryPswd}
-                             isSignInTab={isSignInTab}
-                             handleCancel={handleCancel}
-                             handleForgetPass={handleForgetPass}
-                             tabsHandler={tabsHandler}
-                             handleActiveTimer={handleActiveTimer}
-                             handleCloseModal={handleCloseModal}
-                         />
-                     </div>
-                     : <div className={classes.authRegMenu}>
-                         <div className='close-modal-block'>
-                             {/*<CloseIcon onClick={handleCloseModal}/>*/}
-                         </div>
-                         <div className='welcome-block'>
-                             <Typography variant='h6'>
-                                 {t('welcome')}
-                             </Typography>
-                         </div>
-                         <div className='auth-site-txt'>
-                             <Typography variant="subtitle1" color="initial">
-                                 {t('authSite')}
-                             </Typography>
-                         </div>
-                         <div className='auth-reg-btn'>
-                             <CustomButton onClick={authRegClickHandler(true)}>
-                                 <Typography>
-                                     {t('signInAndReg')}
-                                 </Typography>
-                             </CustomButton>
-                         </div>
-                         <div className='slider-block'>
-                             <CustomSlider {...settings}>
-                                 <img src={'img/bonus_img.png'} alt="bonus_img"/>
-                                 <img src={'img/bonus_img.png'} alt="bonus_img"/>
-                                 <img src={'img/bonus_img.png'} alt="bonus_img"/>
-                                 <img src={'img/bonus_img.png'} alt="bonus_img"/>
-                             </CustomSlider>
-                         </div>
-                         <div className='list-block'>
-                             <CustomList list={list}/>
-                         </div>
-                     </div>}
+                    <div className='welcome-block'>
+                        <Typography variant="h6" color="initial">
+                            {t('welcome')}
+                        </Typography>
+                    </div>
+                    <AuthRegContainer
+                        t={t}
+                        timer={timer}
+                        activeTimer={activeTimer}
+                        tabIndex={tabIndex}
+                        errorMsg={errorMsg}
+                        setErrorMsg={setErrorMsg}
+                        isRecoveryPswd={isRecoveryPswd}
+                        isSignInTab={isSignInTab}
+                        handleCancel={handleCancel}
+                        handleForgetPass={handleForgetPass}
+                        tabsHandler={tabsHandler}
+                        handleActiveTimer={handleActiveTimer}
+                        handleCloseModal={handleCloseModal}
+                    />
                 </Hidden>
             </div>
-        </Modal>
+        </ResponsiveDialog>
     );
 };

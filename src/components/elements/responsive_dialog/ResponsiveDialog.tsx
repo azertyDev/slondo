@@ -25,6 +25,7 @@ export const ResponsiveDialog: FC<ResponsiveDialogPropsType> = (props) => {
         <Dialog
             fullScreen={fullScreen}
             fullWidth
+            maxWidth='md'
             open={openDialog}
             onClose={handleCloseDialog}
             aria-labelledby="responsive-dialog-title"
