@@ -94,19 +94,19 @@ export const ListMode: FC<ViewPropsType> = ({list, handleModalOpen}) => {
                                             </div>
                                             <div className='card-btn'>
                                                 {pathname?.includes('favorite') ?
-                                                    <div
-                                                        className='isFavorite'
-                                                        onClick={() => handleModalOpen('disableFavorite', el.id)}
-                                                    >
-                                                        <CloseIcon/>
-                                                    </div>
-                                                    :
-                                                    <div
-                                                        className='settings'
-                                                        onClick={() => handleModalOpen('settings')}
-                                                    >
-                                                        <SettingsIcon/>
-                                                    </div>}
+                                                 <div
+                                                     className='isFavorite'
+                                                     onClick={() => handleModalOpen('disableFavorite', el.id)}
+                                                 >
+                                                     <CloseIcon/>
+                                                 </div>
+                                                                                :
+                                                 <div
+                                                     className='settings'
+                                                     onClick={() => handleModalOpen('settings')}
+                                                 >
+                                                     <SettingsIcon/>
+                                                 </div>}
                                             </div>
                                         </div>
                                         <div className="description">
@@ -145,11 +145,7 @@ export const ListMode: FC<ViewPropsType> = ({list, handleModalOpen}) => {
                                         </div>
                                         <div className="location">
                                             <div>
-                                                <Link href="#">
-                                                    <a>
-                                                        <LocationIcon/>
-                                                    </a>
-                                                </Link>
+                                                <LocationIcon/>
                                                 <Typography
                                                     variant="caption"
                                                     color="initial"
@@ -319,7 +315,7 @@ export const ListMode: FC<ViewPropsType> = ({list, handleModalOpen}) => {
                                             >
                                                 Имя Фамилия
                                             </Typography>
-                                            <Rating card/>
+                                            <Rating card readOnly/>
                                             <CustomButton className='write'>
                                                 <LetterIcon/>
                                                 <Typography
@@ -352,8 +348,8 @@ export const ListMode: FC<ViewPropsType> = ({list, handleModalOpen}) => {
                             </Grid>
                         </Hidden>
                     </Grid>
-                )
+                );
             })}
         </div>
-    )
-}
+    );
+};

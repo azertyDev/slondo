@@ -1,10 +1,11 @@
-import React, {FC} from 'react';
+import {FC} from 'react';
 import {Typography} from '@material-ui/core';
 import {WithT} from 'i18next';
 import {useStyles} from './useStyles';
 
 
 type BodyTypesProps = {
+    disableRequire?: boolean,
     bodies,
     values,
     errorMsg: string,
@@ -17,7 +18,8 @@ export const BodySelect: FC<BodyTypesProps> = (props) => {
         values,
         bodies,
         errorMsg,
-        handleSelect
+        handleSelect,
+        disableRequire
     } = props;
 
     const classes = useStyles();
@@ -26,7 +28,7 @@ export const BodySelect: FC<BodyTypesProps> = (props) => {
             <Typography variant='subtitle1' className='title'>
                 <strong>
                     {t('filters:body')}
-                    <span className='error-text'>*&nbsp;</span>
+                    {!disableRequire && <span className='error-text'>*&nbsp;</span>}
                 </strong>
                 {errorMsg && (
                     <span className='error-text'>

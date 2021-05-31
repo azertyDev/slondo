@@ -3,11 +3,12 @@ import {Steps} from '../steps/Steps';
 import {useRouter} from "next/router";
 import {useTranslation} from 'next-i18next';
 import {MainLayout} from '@src/components/main_layout/MainLayout';
-import {categorySearchHelper, categoriesByType, addParentsToCtgrs} from '@src/helpers';
+import {categorySearchHelper, categoriesByType} from '@src/helpers';
 import {SubCategoryType} from '@root/interfaces/Categories';
 import {Grid, InputBase, List, ListItem, Typography} from "@material-ui/core";
 import {BackspaceIcon, Search_icon} from "@src/components/elements/icons";
 import {CustomButton} from "@src/components/elements/custom_button/CustomButton";
+import {addParentsToCtgrs} from '@src/common_data/siteCategories';
 import {IdNameType} from "@root/interfaces/Post";
 import {useStyles} from "./useStyles";
 

@@ -13,7 +13,6 @@ import {
 } from '@src/components/elements/icons';
 import {CategoryType} from '@root/interfaces/Categories';
 
-
 const Car = '/img/categories_img/car.png';
 const Transport = '/img/categories_img/transport.png';
 const Parts = '/img/categories_img/parts.png';
@@ -26,7 +25,7 @@ const Electronics = '/img/categories_img/electronics.png';
 const Hobbies = '/img/categories_img/hobbies.png';
 const Animal = '/img/categories_img/animal.png';
 
-export const categories_list: CategoryType[] = [
+const categories_list: CategoryType[] = [
     {
         id: 1,
         name: 'car',
@@ -93,7 +92,7 @@ export const categories_list: CategoryType[] = [
                     {
                         id: 7,
                         name: 'other',
-                        ru_name: "Другое"
+                        ru_name: 'Другое'
                     }
                 ]
             },
@@ -150,7 +149,7 @@ export const categories_list: CategoryType[] = [
                     {
                         id: 17,
                         name: 'other',
-                        ru_name: "Другое"
+                        ru_name: 'Другое'
                     }
                 ]
             },
@@ -469,17 +468,17 @@ export const categories_list: CategoryType[] = [
                     {
                         id: 1,
                         name: 'sale',
-                        ru_name: "Продажа"
+                        ru_name: 'Продажа'
                     },
                     {
                         id: 2,
                         name: 'longTermRent',
-                        ru_name: "Аренда на длительное время"
+                        ru_name: 'Аренда на длительное время'
                     },
                     {
                         id: 3,
                         name: 'dailyRent',
-                        ru_name: "Аренда по суточно"
+                        ru_name: 'Аренда по суточно'
                     }
                 ]
             },
@@ -491,12 +490,12 @@ export const categories_list: CategoryType[] = [
                     {
                         id: 1,
                         name: 'sale',
-                        ru_name: "Продажа"
+                        ru_name: 'Продажа'
                     },
                     {
                         id: 2,
                         name: 'longTermRent',
-                        ru_name: "Аренда на длительное время"
+                        ru_name: 'Аренда на длительное время'
                     }
                 ]
             },
@@ -508,12 +507,12 @@ export const categories_list: CategoryType[] = [
                     {
                         id: 1,
                         name: 'sale',
-                        ru_name: "Продажа"
+                        ru_name: 'Продажа'
                     },
                     {
                         id: 2,
                         name: 'longTermRent',
-                        ru_name: "Аренда на длительное время"
+                        ru_name: 'Аренда на длительное время'
                     }
                 ]
             },
@@ -525,12 +524,12 @@ export const categories_list: CategoryType[] = [
                     {
                         id: 1,
                         name: 'sale',
-                        ru_name: "Продажа"
+                        ru_name: 'Продажа'
                     },
                     {
                         id: 2,
                         name: 'longTermRent',
-                        ru_name: "Аренда на длительное время"
+                        ru_name: 'Аренда на длительное время'
                     }
                 ]
             }
@@ -708,153 +707,153 @@ export const categories_list: CategoryType[] = [
                 type: [
                     {
                         id: 31,
-                        name: "Автобизнес",
-                        ru_name: "Автобизнес"
+                        name: 'Автобизнес',
+                        ru_name: 'Автобизнес'
                     },
                     {
                         id: 32,
-                        name: "Безопасность и охрана",
-                        ru_name: "Безопасность и охрана"
+                        name: 'Безопасность и охрана',
+                        ru_name: 'Безопасность и охрана'
                     },
                     {
                         id: 33,
-                        name: "Офисный персонал",
-                        ru_name: "Офисный персонал"
+                        name: 'Офисный персонал',
+                        ru_name: 'Офисный персонал'
                     },
                     {
                         id: 34,
-                        name: "Высший менеджмент",
-                        ru_name: "Высший менеджмент"
+                        name: 'Высший менеджмент',
+                        ru_name: 'Высший менеджмент'
                     },
                     {
                         id: 35,
-                        name: "Добыча сырья, энергетика",
-                        ru_name: "Добыча сырья, энергетика"
+                        name: 'Добыча сырья, энергетика',
+                        ru_name: 'Добыча сырья, энергетика'
                     },
                     {
                         id: 36,
-                        name: "Домашний персонал",
-                        ru_name: "Домашний персонал"
+                        name: 'Домашний персонал',
+                        ru_name: 'Домашний персонал'
                     },
                     {
                         id: 37,
-                        name: "Издательства и СМИ",
-                        ru_name: "Издательства и СМИ"
+                        name: 'Издательства и СМИ',
+                        ru_name: 'Издательства и СМИ'
                     },
                     {
                         id: 38,
-                        name: "Информационные технологии",
-                        ru_name: "Информационные технологии"
+                        name: 'Информационные технологии',
+                        ru_name: 'Информационные технологии'
                     },
                     {
                         id: 39,
-                        name: "Искусство и развлечения",
-                        ru_name: "Искусство и развлечения"
+                        name: 'Искусство и развлечения',
+                        ru_name: 'Искусство и развлечения'
                     },
                     {
                         id: 40,
-                        name: "Закупки",
-                        ru_name: "Закупки"
+                        name: 'Закупки',
+                        ru_name: 'Закупки'
                     },
                     {
                         id: 41,
-                        name: "Маркетинг и реклама",
-                        ru_name: "Маркетинг и реклама"
+                        name: 'Маркетинг и реклама',
+                        ru_name: 'Маркетинг и реклама'
                     },
                     {
                         id: 42,
-                        name: "Медицина и фармацевтика",
-                        ru_name: "Медицина и фармацевтика"
+                        name: 'Медицина и фармацевтика',
+                        ru_name: 'Медицина и фармацевтика'
                     },
                     {
                         id: 43,
-                        name: "Начало карьеры / без опыта работы",
-                        ru_name: "Начало карьеры / без опыта работы"
+                        name: 'Начало карьеры / без опыта работы',
+                        ru_name: 'Начало карьеры / без опыта работы'
                     },
                     {
                         id: 44,
-                        name: "Образование и наука",
-                        ru_name: "Образование и наука"
+                        name: 'Образование и наука',
+                        ru_name: 'Образование и наука'
                     },
                     {
                         id: 45,
-                        name: "Разнорабочие",
-                        ru_name: "Разнорабочие"
+                        name: 'Разнорабочие',
+                        ru_name: 'Разнорабочие'
                     },
                     {
                         id: 46,
-                        name: "Логистика и транспорт",
-                        ru_name: "Логистика и транспорт"
+                        name: 'Логистика и транспорт',
+                        ru_name: 'Логистика и транспорт'
                     },
                     {
                         id: 47,
-                        name: "Продажи",
-                        ru_name: "Продажи"
+                        name: 'Продажи',
+                        ru_name: 'Продажи'
                     },
                     {
                         id: 48,
-                        name: "Производство",
-                        ru_name: "Производство"
+                        name: 'Производство',
+                        ru_name: 'Производство'
                     },
                     {
                         id: 49,
-                        name: "Рестораны и общепит",
-                        ru_name: "Рестораны и общепит"
+                        name: 'Рестораны и общепит',
+                        ru_name: 'Рестораны и общепит'
                     },
                     {
                         id: 50,
-                        name: "Сельское хозяйство",
-                        ru_name: "Сельское хозяйство"
+                        name: 'Сельское хозяйство',
+                        ru_name: 'Сельское хозяйство'
                     },
                     {
                         id: 51,
-                        name: "Спорт и красота",
-                        ru_name: "Спорт и красота"
+                        name: 'Спорт и красота',
+                        ru_name: 'Спорт и красота'
                     },
                     {
                         id: 52,
-                        name: "Страхование",
-                        ru_name: "Страхование"
+                        name: 'Страхование',
+                        ru_name: 'Страхование'
                     },
                     {
                         id: 53,
-                        name: "Строительство и ремонт",
-                        ru_name: "Строительство и ремонт"
+                        name: 'Строительство и ремонт',
+                        ru_name: 'Строительство и ремонт'
                     },
                     {
                         id: 54,
-                        name: "Туризм и гостиницы",
-                        ru_name: "Туризм и гостиницы"
+                        name: 'Туризм и гостиницы',
+                        ru_name: 'Туризм и гостиницы'
                     },
                     {
                         id: 55,
-                        name: "Недвижимость",
-                        ru_name: "Недвижимость"
+                        name: 'Недвижимость',
+                        ru_name: 'Недвижимость'
                     },
                     {
                         id: 56,
-                        name: "Бухгалтерия и финансы",
-                        ru_name: "Бухгалтерия и финансы"
+                        name: 'Бухгалтерия и финансы',
+                        ru_name: 'Бухгалтерия и финансы'
                     },
                     {
                         id: 57,
-                        name: "Банковская сфера",
-                        ru_name: "Банковская сфера"
+                        name: 'Банковская сфера',
+                        ru_name: 'Банковская сфера'
                     },
                     {
                         id: 58,
-                        name: "Управление персоналом",
-                        ru_name: "Управление персоналом"
+                        name: 'Управление персоналом',
+                        ru_name: 'Управление персоналом'
                     },
                     {
                         id: 59,
-                        name: "Юриспруденция",
-                        ru_name: "Юриспруденция"
+                        name: 'Юриспруденция',
+                        ru_name: 'Юриспруденция'
                     },
                     {
                         id: 60,
-                        name: "other",
-                        ru_name: "Другое"
+                        name: 'other',
+                        ru_name: 'Другое'
                     }
                 ]
             }
@@ -871,1024 +870,1024 @@ export const categories_list: CategoryType[] = [
             {
                 id: 1,
                 name: 'repairAndConstruction',
-                ru_name: "Ремонт и строительство",
+                ru_name: 'Ремонт и строительство',
                 type: [
                     {
                         id: 1,
                         name: 'improvementGarbageDisposal',
-                        ru_name: "Благоустройство, вывоз мусора"
+                        ru_name: 'Благоустройство, вывоз мусора'
                     },
                     {
                         id: 2,
-                        name: "highWork",
-                        ru_name: "Высотные работы"
+                        name: 'highWork',
+                        ru_name: 'Высотные работы'
                     },
                     {
                         id: 3,
-                        name: "designAndArchitecture",
-                        ru_name: "Дизайн и архитектура"
+                        name: 'designAndArchitecture',
+                        ru_name: 'Дизайн и архитектура'
                     },
                     {
                         id: 4,
-                        name: "dismantlingStructures",
-                        ru_name: "Демонтаж сооружений и конструкций"
+                        name: 'dismantlingStructures',
+                        ru_name: 'Демонтаж сооружений и конструкций'
                     },
                     {
                         id: 5,
-                        name: "complexRenovation",
-                        ru_name: "Комплексный ремонт"
+                        name: 'complexRenovation',
+                        ru_name: 'Комплексный ремонт'
                     },
                     {
                         id: 6,
-                        name: "roofing",
-                        ru_name: "Кровельные работы"
+                        name: 'roofing',
+                        ru_name: 'Кровельные работы'
                     },
                     {
                         id: 7,
-                        name: "paintingWorks",
-                        ru_name: "Малярные работы"
+                        name: 'paintingWorks',
+                        ru_name: 'Малярные работы'
                     },
                     {
                         id: 8,
-                        name: "windowsAndDoors",
-                        ru_name: "Окна и двери"
+                        name: 'windowsAndDoors',
+                        ru_name: 'Окна и двери'
                     },
                     {
                         id: 9,
-                        name: "finishingAndRenovation",
-                        ru_name: "Отделка и ремонт"
+                        name: 'finishingAndRenovation',
+                        ru_name: 'Отделка и ремонт'
                     },
                     {
                         id: 10,
-                        name: "stovesAndFireplaces",
-                        ru_name: "Печи и камины"
+                        name: 'stovesAndFireplaces',
+                        ru_name: 'Печи и камины'
                     },
                     {
                         id: 11,
-                        name: "Plumbing",
-                        ru_name: "Сантехника"
+                        name: 'Plumbing',
+                        ru_name: 'Сантехника'
                     },
                     {
                         id: 12,
-                        name: "weldingWorks",
-                        ru_name: "Сварочные работы"
+                        name: 'weldingWorks',
+                        ru_name: 'Сварочные работы'
                     },
                     {
                         id: 13,
-                        name: "constructionWorks",
-                        ru_name: "Строительные работы"
+                        name: 'constructionWorks',
+                        ru_name: 'Строительные работы'
                     },
                     {
                         id: 14,
-                        name: "layingAndRenovationTiles",
-                        ru_name: "Укладка и ремонт плитки"
+                        name: 'layingAndRenovationTiles',
+                        ru_name: 'Укладка и ремонт плитки'
                     },
                     {
                         id: 15,
-                        name: "handymanServices",
-                        ru_name: "Услуги разнорабочих"
+                        name: 'handymanServices',
+                        ru_name: 'Услуги разнорабочих'
                     },
                     {
                         id: 16,
-                        name: "facadeWorks",
-                        ru_name: "Фасадные работы"
+                        name: 'facadeWorks',
+                        ru_name: 'Фасадные работы'
                     },
                     {
                         id: 17,
-                        name: "plasteringWorks",
-                        ru_name: "Штукатурные работы"
+                        name: 'plasteringWorks',
+                        ru_name: 'Штукатурные работы'
                     },
                     {
                         id: 18,
-                        name: "electrician",
-                        ru_name: "Электрика"
+                        name: 'electrician',
+                        ru_name: 'Электрика'
                     },
                     {
                         id: 19,
-                        name: "otherServices",
-                        ru_name: "Другие услуги"
+                        name: 'otherServices',
+                        ru_name: 'Другие услуги'
                     }
                 ]
             },
             {
                 id: 2,
-                name: "masterForAnHour",
-                ru_name: "Мастер на час",
+                name: 'masterForAnHour',
+                ru_name: 'Мастер на час',
                 type: [
                     {
                         id: 20,
-                        name: "pickingLocks",
-                        ru_name: "Вскрытие замков"
+                        name: 'pickingLocks',
+                        ru_name: 'Вскрытие замков'
                     },
                     {
                         id: 21,
-                        name: "masterForAnHour",
-                        ru_name: "Мастер на час"
+                        name: 'masterForAnHour',
+                        ru_name: 'Мастер на час'
                     },
                     {
                         id: 22,
-                        name: "productionOfKeys",
-                        ru_name: "Изготовление ключей"
+                        name: 'productionOfKeys',
+                        ru_name: 'Изготовление ключей'
                     },
                     {
                         id: 23,
-                        name: "furnitureAssemblyAndRepair",
-                        ru_name: "Сборка и ремонт мебели"
+                        name: 'furnitureAssemblyAndRepair',
+                        ru_name: 'Сборка и ремонт мебели'
                     },
                     {
                         id: 24,
-                        name: "otherServices",
-                        ru_name: "Другие услуги"
+                        name: 'otherServices',
+                        ru_name: 'Другие услуги'
                     }
                 ]
             },
             {
                 id: 3,
-                name: "babysittersAndNurses",
-                ru_name: "Няни и сиделки",
+                name: 'babysittersAndNurses',
+                ru_name: 'Няни и сиделки',
                 type: [
                     {
                         id: 25,
-                        name: "babysittingAndGoverness",
-                        ru_name: "Няни, гувернантки"
+                        name: 'babysittingAndGoverness',
+                        ru_name: 'Няни, гувернантки'
                     },
                     {
                         id: 26,
-                        name: "nurses",
-                        ru_name: "Сиделки"
+                        name: 'nurses',
+                        ru_name: 'Сиделки'
                     }
                 ]
             },
             {
                 id: 4,
-                name: "transportation",
-                ru_name: "Перевозки",
+                name: 'transportation',
+                ru_name: 'Перевозки',
                 type: [
                     {
                         id: 27,
-                        name: "rentCar",
-                        ru_name: "Аренда авто"
+                        name: 'rentCar',
+                        ru_name: 'Аренда авто'
                     },
                     {
                         id: 28,
-                        name: "rentSpecialTech",
-                        ru_name: "Аренда спецтехники"
+                        name: 'rentSpecialTech',
+                        ru_name: 'Аренда спецтехники'
                     },
                     {
                         id: 29,
-                        name: "garbageRemoval",
-                        ru_name: "Вывоз мусора"
+                        name: 'garbageRemoval',
+                        ru_name: 'Вывоз мусора'
                     },
                     {
                         id: 30,
-                        name: "cargoTransportation",
-                        ru_name: "Грузоперевозки"
+                        name: 'cargoTransportation',
+                        ru_name: 'Грузоперевозки'
                     },
                     {
                         id: 31,
-                        name: "courier",
-                        ru_name: "Курьер"
+                        name: 'courier',
+                        ru_name: 'Курьер'
                     },
                     {
                         id: 32,
-                        name: "movers",
-                        ru_name: "Грузчики"
+                        name: 'movers',
+                        ru_name: 'Грузчики'
                     },
                     {
                         id: 33,
-                        name: "distillation",
-                        ru_name: "Перегон"
+                        name: 'distillation',
+                        ru_name: 'Перегон'
                     },
                     {
                         id: 34,
-                        name: "passengerTransportation",
-                        ru_name: "Пассажирские перевозки"
+                        name: 'passengerTransportation',
+                        ru_name: 'Пассажирские перевозки'
                     },
                     {
                         id: 35,
-                        name: "driverServices",
-                        ru_name: "Услуги водителя"
+                        name: 'driverServices',
+                        ru_name: 'Услуги водителя'
                     },
                     {
                         id: 36,
-                        name: "towTruckServices",
-                        ru_name: "Услуги эвакуатора"
+                        name: 'towTruckServices',
+                        ru_name: 'Услуги эвакуатора'
                     },
                     {
                         id: 37,
                         name: 'otherServices',
-                        ru_name: "Другие услуги"
+                        ru_name: 'Другие услуги'
                     }
                 ]
             },
             {
                 id: 5,
-                name: "beautyAndHealth",
-                ru_name: "Красота и здоровье",
+                name: 'beautyAndHealth',
+                ru_name: 'Красота и здоровье',
                 type: [
                     {
                         id: 38,
-                        name: "depilationAndSugaring",
-                        ru_name: "Депиляция и шугаринг Селект"
+                        name: 'depilationAndSugaring',
+                        ru_name: 'Депиляция и шугаринг Селект'
                     },
                     {
                         id: 39,
-                        name: "makeup",
-                        ru_name: "Макияж"
+                        name: 'makeup',
+                        ru_name: 'Макияж'
                     },
                     {
                         id: 40,
-                        name: "manicureAndPedicure",
-                        ru_name: "Маникюр и педикюр"
+                        name: 'manicureAndPedicure',
+                        ru_name: 'Маникюр и педикюр'
                     },
                     {
                         id: 41,
-                        name: "tan",
-                        ru_name: "Загар"
+                        name: 'tan',
+                        ru_name: 'Загар'
                     },
                     {
                         id: 42,
-                        name: "hairTreatment",
-                        ru_name: "Лечение волос"
+                        name: 'hairTreatment',
+                        ru_name: 'Лечение волос'
                     },
                     {
                         id: 43,
-                        name: "massage",
-                        ru_name: "Массаж"
+                        name: 'massage',
+                        ru_name: 'Массаж'
                     },
                     {
                         id: 44,
-                        name: "hairExtension",
-                        ru_name: "Наращивание волос"
+                        name: 'hairExtension',
+                        ru_name: 'Наращивание волос'
                     },
                     {
                         id: 45,
-                        name: "eyelashExtensionEyebrowServices",
-                        ru_name: "Наращивание ресниц, услуги бровиста"
+                        name: 'eyelashExtensionEyebrowServices',
+                        ru_name: 'Наращивание ресниц, услуги бровиста'
                     },
                     {
                         id: 46,
-                        name: "piercing",
-                        ru_name: "Пирсинг"
+                        name: 'piercing',
+                        ru_name: 'Пирсинг'
                     },
                     {
                         id: 47,
-                        name: "stylist",
-                        ru_name: "Стилист"
+                        name: 'stylist',
+                        ru_name: 'Стилист'
                     },
                     {
                         id: 48,
-                        name: "spaServices",
-                        ru_name: "СПА-услуги"
+                        name: 'spaServices',
+                        ru_name: 'СПА-услуги'
                     },
                     {
                         id: 49,
-                        name: "tattooAndPiercing",
-                        ru_name: "Тату и пирсинг"
+                        name: 'tattooAndPiercing',
+                        ru_name: 'Тату и пирсинг'
                     },
                     {
                         id: 50,
-                        name: "tattoo",
-                        ru_name: "Татуаж"
+                        name: 'tattoo',
+                        ru_name: 'Татуаж'
                     },
                     {
                         id: 51,
-                        name: "nursingServices",
-                        ru_name: "Услуги медсестер"
+                        name: 'nursingServices',
+                        ru_name: 'Услуги медсестер'
                     },
                     {
                         id: 52,
-                        name: "hairdresserServices",
-                        ru_name: "Услуги парикмахера"
+                        name: 'hairdresserServices',
+                        ru_name: 'Услуги парикмахера'
                     },
                     {
                         id: 53,
-                        name: "otherServices",
-                        ru_name: "Другие услуги"
+                        name: 'otherServices',
+                        ru_name: 'Другие услуги'
                     }
                 ]
             },
             {
                 id: 6,
                 name: 'computerServices',
-                ru_name: "Компьютерные услуги",
+                ru_name: 'Компьютерные услуги',
                 type: [
                     {
                         id: 54,
-                        name: "ITOutsourcing",
-                        ru_name: "IT аутсорсинг"
+                        name: 'ITOutsourcing',
+                        ru_name: 'IT аутсорсинг'
                     },
                     {
                         id: 55,
-                        name: "webDesignBrandArt",
-                        ru_name: "Веб-Дизайн, бренд, арт"
+                        name: 'webDesignBrandArt',
+                        ru_name: 'Веб-Дизайн, бренд, арт'
                     },
                     {
                         id: 56,
-                        name: "layoutDesigner",
-                        ru_name: "Верстальщик"
+                        name: 'layoutDesigner',
+                        ru_name: 'Верстальщик'
                     },
                     {
                         id: 57,
-                        name: "designers",
-                        ru_name: "Дизайнеры"
+                        name: 'designers',
+                        ru_name: 'Дизайнеры'
                     },
                     {
                         id: 58,
-                        name: "computerHelpAndPCSetup",
-                        ru_name: "Компьютерная помощь и настройка ПК"
+                        name: 'computerHelpAndPCSetup',
+                        ru_name: 'Компьютерная помощь и настройка ПК'
                     },
                     {
                         id: 59,
-                        name: "typingDataEntry",
-                        ru_name: "Набор текста, ввод данных"
+                        name: 'typingDataEntry',
+                        ru_name: 'Набор текста, ввод данных'
                     },
                     {
                         id: 60,
-                        name: "PCAssembly",
-                        ru_name: "Сборка ПК"
+                        name: 'PCAssembly',
+                        ru_name: 'Сборка ПК'
                     },
                     {
                         id: 61,
-                        name: "internetConnection",
-                        ru_name: "Подключение Интернета"
+                        name: 'internetConnection',
+                        ru_name: 'Подключение Интернета'
                     },
                     {
                         id: 62,
-                        name: "programmer",
-                        ru_name: "Программист"
+                        name: 'programmer',
+                        ru_name: 'Программист'
                     },
                     {
                         id: 63,
-                        name: "workingWithTexts",
-                        ru_name: "Работа с текстами"
+                        name: 'workingWithTexts',
+                        ru_name: 'Работа с текстами'
                     },
                     {
                         id: 64,
-                        name: "webProgrammer",
-                        ru_name: "Веб-программист"
+                        name: 'webProgrammer',
+                        ru_name: 'Веб-программист'
                     },
                     {
                         id: 65,
-                        name: "websiteDevelopmentAndPromotion",
-                        ru_name: "Создание и продвижение сайтов"
+                        name: 'websiteDevelopmentAndPromotion',
+                        ru_name: 'Создание и продвижение сайтов'
                     },
                     {
                         id: 66,
-                        name: "systemAdministrator",
-                        ru_name: "Системный администратор"
+                        name: 'systemAdministrator',
+                        ru_name: 'Системный администратор'
                     },
                     {
                         id: 67,
-                        name: "installingSoftware",
-                        ru_name: "Установка ПО"
+                        name: 'installingSoftware',
+                        ru_name: 'Установка ПО'
                     },
                     {
                         id: 68,
                         name: 'otherServices',
-                        ru_name: "Другие услуги"
+                        ru_name: 'Другие услуги'
                     }
                 ]
             },
             {
                 id: 7,
                 name: 'carServices',
-                ru_name: "Автоуслуги",
+                ru_name: 'Автоуслуги',
                 type: [
                     {
                         id: 69,
-                        name: "installingAudioSystem",
-                        ru_name: "Установка аудио системы"
+                        name: 'installingAudioSystem',
+                        ru_name: 'Установка аудио системы'
                     },
                     {
                         id: 70,
-                        name: "autoGlassAndMirrors",
-                        ru_name: "Автостекла и зеркала"
+                        name: 'autoGlassAndMirrors',
+                        ru_name: 'Автостекла и зеркала'
                     },
                     {
                         id: 71,
-                        name: "autoElectrician",
-                        ru_name: "Автоэлектрика"
+                        name: 'autoElectrician',
+                        ru_name: 'Автоэлектрика'
                     },
                     {
                         id: 72,
-                        name: "exhaustSystem",
-                        ru_name: "Выхлопная система"
+                        name: 'exhaustSystem',
+                        ru_name: 'Выхлопная система'
                     },
                     {
                         id: 73,
-                        name: "carDiagnostics",
-                        ru_name: "Диагностика авто"
+                        name: 'carDiagnostics',
+                        ru_name: 'Диагностика авто'
                     },
                     {
                         id: 74,
-                        name: "detailing",
-                        ru_name: "Детейлинг"
+                        name: 'detailing',
+                        ru_name: 'Детейлинг'
                     },
                     {
                         id: 75,
-                        name: "bodyworkAndCarPainting",
-                        ru_name: "Кузовные работы и покраска автомобиля"
+                        name: 'bodyworkAndCarPainting',
+                        ru_name: 'Кузовные работы и покраска автомобиля'
                     },
                     {
                         id: 76,
-                        name: "airConditionersAndHeating",
-                        ru_name: "Кондиционеры и обогрев"
+                        name: 'airConditionersAndHeating',
+                        ru_name: 'Кондиционеры и обогрев'
                     },
                     {
                         id: 77,
-                        name: "fluidChange",
-                        ru_name: "Замена жидкостей"
+                        name: 'fluidChange',
+                        ru_name: 'Замена жидкостей'
                     },
                     {
                         id: 78,
-                        name: "carPainting",
-                        ru_name: "Покраска авто"
+                        name: 'carPainting',
+                        ru_name: 'Покраска авто'
                     },
                     {
                         id: 79,
-                        name: "engineAndChassisRepair",
-                        ru_name: "Ремонт двигателя и ходовой"
+                        name: 'engineAndChassisRepair',
+                        ru_name: 'Ремонт двигателя и ходовой'
                     },
                     {
                         id: 80,
-                        name: "repairMotorVehicles",
-                        ru_name: "Ремонт мототехники"
+                        name: 'repairMotorVehicles',
+                        ru_name: 'Ремонт мототехники'
                     },
                     {
                         id: 81,
-                        name: "steeringRepair",
-                        ru_name: "Ремонт рулевого управления"
+                        name: 'steeringRepair',
+                        ru_name: 'Ремонт рулевого управления'
                     },
                     {
                         id: 82,
-                        name: "fuelSystemRepair",
-                        ru_name: "Ремонт топливной системы"
+                        name: 'fuelSystemRepair',
+                        ru_name: 'Ремонт топливной системы'
                     },
                     {
                         id: 83,
-                        name: "tuning",
-                        ru_name: "Тюнинг и установка доп. оборудования"
+                        name: 'tuning',
+                        ru_name: 'Тюнинг и установка доп. оборудования'
                     },
                     {
                         id: 84,
-                        name: "maintenance",
-                        ru_name: "Техническое обслуживание"
+                        name: 'maintenance',
+                        ru_name: 'Техническое обслуживание'
                     },
                     {
                         id: 85,
-                        name: "dryCleaningAndCarWash",
-                        ru_name: "Химчистка, полировка и мойка авто"
+                        name: 'dryCleaningAndCarWash',
+                        ru_name: 'Химчистка, полировка и мойка авто'
                     },
                     {
                         id: 86,
-                        name: "tireServiceAndWheelRepair",
-                        ru_name: "Шиномонтаж и ремонт дисков"
+                        name: 'tireServiceAndWheelRepair',
+                        ru_name: 'Шиномонтаж и ремонт дисков'
                     },
                     {
                         id: 87,
-                        name: "electricalEquipment",
-                        ru_name: "Электрооборудование"
+                        name: 'electricalEquipment',
+                        ru_name: 'Электрооборудование'
                     },
                     {
                         id: 88,
-                        name: "otherServices",
-                        ru_name: "Другие услуги"
+                        name: 'otherServices',
+                        ru_name: 'Другие услуги'
                     }
                 ]
             },
             {
                 id: 8,
                 name: 'repairEquipment',
-                ru_name: "Ремонт техники",
+                ru_name: 'Ремонт техники',
                 type: [
                     {
                         id: 89,
-                        name: "gasEquipmentRepair",
-                        ru_name: "Ремонт газового оборудования"
+                        name: 'gasEquipmentRepair',
+                        ru_name: 'Ремонт газового оборудования'
                     },
                     {
                         id: 90,
-                        name: "repairComputersAndLaptops",
-                        ru_name: "Ремонт компьютеров и ноутбуков"
+                        name: 'repairComputersAndLaptops',
+                        ru_name: 'Ремонт компьютеров и ноутбуков'
                     },
                     {
                         id: 91,
-                        name: "repairSmartphonesAndPhones",
-                        ru_name: "Ремонт смартфонов, телефонов"
+                        name: 'repairSmartphonesAndPhones',
+                        ru_name: 'Ремонт смартфонов, телефонов'
                     },
                     {
                         id: 92,
-                        name: "repairAudioAndVideoEquipment",
-                        ru_name: "Ремонт телевизоров, аудио и видеотехники"
+                        name: 'repairAudioAndVideoEquipment',
+                        ru_name: 'Ремонт телевизоров, аудио и видеотехники'
                     },
                     {
                         id: 93,
-                        name: "repairOfMedicalEquipment",
-                        ru_name: "Ремонт медицинского оборудования"
+                        name: 'repairOfMedicalEquipment',
+                        ru_name: 'Ремонт медицинского оборудования'
                     },
                     {
                         id: 94,
-                        name: "photoEquipmentRepair",
-                        ru_name: "Ремонт фототехники"
+                        name: 'photoEquipmentRepair',
+                        ru_name: 'Ремонт фототехники'
                     },
                     {
                         id: 95,
-                        name: "repairOfMusicalInstruments",
-                        ru_name: "Ремонт музыкальных инструментов"
+                        name: 'repairOfMusicalInstruments',
+                        ru_name: 'Ремонт музыкальных инструментов'
                     },
                     {
                         id: 96,
-                        name: "repairOfOpticalDevices",
-                        ru_name: "Ремонт оптических приборов"
+                        name: 'repairOfOpticalDevices',
+                        ru_name: 'Ремонт оптических приборов'
                     },
                     {
                         id: 97,
-                        name: "repairOfSportsEquipment",
-                        ru_name: "Ремонт спортинвентаря"
+                        name: 'repairOfSportsEquipment',
+                        ru_name: 'Ремонт спортинвентаря'
                     },
                     {
                         id: 98,
-                        name: "watchRepair",
-                        ru_name: "Ремонт часов"
+                        name: 'watchRepair',
+                        ru_name: 'Ремонт часов'
                     },
                     {
                         id: 99,
-                        name: "installationAndRepairAirConditioners",
-                        ru_name: "Установка и ремонт кондиционеров"
+                        name: 'installationAndRepairAirConditioners',
+                        ru_name: 'Установка и ремонт кондиционеров'
                     },
                     {
                         id: 100,
-                        name: "installationSecuritySystems",
-                        ru_name: "Установка систем безопасности"
+                        name: 'installationSecuritySystems',
+                        ru_name: 'Установка систем безопасности'
                     },
                     {
                         id: 101,
-                        name: "installationAndRepairHouseholdAppliances",
-                        ru_name: "Установка и ремонт бытовой техники"
+                        name: 'installationAndRepairHouseholdAppliances',
+                        ru_name: 'Установка и ремонт бытовой техники'
                     },
                     {
                         id: 102,
-                        name: "otherServices",
-                        ru_name: "Другие услуги"
+                        name: 'otherServices',
+                        ru_name: 'Другие услуги'
                     }
                 ]
             },
             {
                 id: 9,
-                name: "training",
-                ru_name: "Обучение",
+                name: 'training',
+                ru_name: 'Обучение',
                 type: [
                     {
                         id: 103,
-                        name: "preSchoolDevelopment",
-                        ru_name: "Дошкольное развитие"
+                        name: 'preSchoolDevelopment',
+                        ru_name: 'Дошкольное развитие'
                     },
                     {
                         id: 104,
-                        name: "masterClassesAndTrainings",
-                        ru_name: "Мастер-классы и тренинги"
+                        name: 'masterClassesAndTrainings',
+                        ru_name: 'Мастер-классы и тренинги'
                     },
                     {
                         id: 105,
-                        name: "drivingTraining",
-                        ru_name: "Обучение вождению"
+                        name: 'drivingTraining',
+                        ru_name: 'Обучение вождению'
                     },
                     {
                         id: 106,
-                        name: "languageTeaching",
-                        ru_name: "Обучение языкам"
+                        name: 'languageTeaching',
+                        ru_name: 'Обучение языкам'
                     },
                     {
                         id: 107,
-                        name: "preparationForExams",
-                        ru_name: "Подготовка к экзаменам"
+                        name: 'preparationForExams',
+                        ru_name: 'Подготовка к экзаменам'
                     },
                     {
                         id: 108,
-                        name: "professionalEducation",
-                        ru_name: "Профессиональное обучение"
+                        name: 'professionalEducation',
+                        ru_name: 'Профессиональное обучение'
                     },
                     {
                         id: 109,
-                        name: "musicAndTheaterLessons",
-                        ru_name: "Уроки музыки и театрального мастерства"
+                        name: 'musicAndTheaterLessons',
+                        ru_name: 'Уроки музыки и театрального мастерства'
                     },
                     {
                         id: 110,
-                        name: "drawingDesignAndHandicraftLessons",
-                        ru_name: "Уроки рисования, дизайна и рукоделия"
+                        name: 'drawingDesignAndHandicraftLessons',
+                        ru_name: 'Уроки рисования, дизайна и рукоделия'
                     },
                     {
                         id: 111,
-                        name: "speechTherapistAndDefectologist",
-                        ru_name: "Логопед и дефектолог"
+                        name: 'speechTherapistAndDefectologist',
+                        ru_name: 'Логопед и дефектолог'
                     },
                     {
                         id: 112,
-                        name: "dancing",
-                        ru_name: "Танцы"
+                        name: 'dancing',
+                        ru_name: 'Танцы'
                     },
                     {
                         id: 113,
-                        name: "psychologists",
-                        ru_name: "Психологи"
+                        name: 'psychologists',
+                        ru_name: 'Психологи'
                     },
                     {
                         id: 114,
-                        name: "tutors",
-                        ru_name: "Репетиторы"
+                        name: 'tutors',
+                        ru_name: 'Репетиторы'
                     },
                     {
                         id: 115,
-                        name: "trainerServices",
-                        ru_name: "Услуги тренера"
+                        name: 'trainerServices',
+                        ru_name: 'Услуги тренера'
                     },
                     {
                         id: 116,
-                        name: "otherServices",
-                        ru_name: "Другие услуги"
+                        name: 'otherServices',
+                        ru_name: 'Другие услуги'
                     }
                 ]
             },
             {
                 id: 10,
-                name: "businessServices",
-                ru_name: "Деловые услуги",
+                name: 'businessServices',
+                ru_name: 'Деловые услуги',
                 type: [
                     {
                         id: 117,
-                        name: "lawyer",
-                        ru_name: "Адвокаты"
+                        name: 'lawyer',
+                        ru_name: 'Адвокаты'
                     },
                     {
                         id: 118,
-                        name: "marriageAgencies",
-                        ru_name: "Брачные агентства"
+                        name: 'marriageAgencies',
+                        ru_name: 'Брачные агентства'
                     },
                     {
                         id: 119,
-                        name: "businessConsulting",
-                        ru_name: "Бизнес-консультирование"
+                        name: 'businessConsulting',
+                        ru_name: 'Бизнес-консультирование'
                     },
                     {
                         id: 120,
-                        name: "brokers",
-                        ru_name: "Брокеры"
+                        name: 'brokers',
+                        ru_name: 'Брокеры'
                     },
                     {
                         id: 121,
-                        name: "accountingAndFinance",
-                        ru_name: "Бухгалтерия и финансы"
+                        name: 'accountingAndFinance',
+                        ru_name: 'Бухгалтерия и финансы'
                     },
                     {
                         id: 122,
-                        name: "announcers",
-                        ru_name: "Дикторы"
+                        name: 'announcers',
+                        ru_name: 'Дикторы'
                     },
                     {
                         id: 123,
-                        name: "foreignEconomicActivityConsulting",
-                        ru_name: "Консультирование ВЭД"
+                        name: 'foreignEconomicActivityConsulting',
+                        ru_name: 'Консультирование ВЭД'
                     },
                     {
                         id: 124,
-                        name: "productionOfSignsAndAdvertisements",
-                        ru_name: "Изготовление вывесок и рекламы"
+                        name: 'productionOfSignsAndAdvertisements',
+                        ru_name: 'Изготовление вывесок и рекламы'
                     },
                     {
                         id: 125,
-                        name: "marketingAdvertisingPR",
-                        ru_name: "Маркетинг, реклама, PR"
+                        name: 'marketingAdvertisingPR',
+                        ru_name: 'Маркетинг, реклама, PR'
                     },
                     {
                         id: 126,
-                        name: "logisticians",
-                        ru_name: "Логисты"
+                        name: 'logisticians',
+                        ru_name: 'Логисты'
                     },
                     {
                         id: 127,
-                        name: "occupationalSafetyAndHealth",
-                        ru_name: "Охрана труда"
+                        name: 'occupationalSafetyAndHealth',
+                        ru_name: 'Охрана труда'
                     },
                     {
                         id: 128,
-                        name: "valuer",
-                        ru_name: "Оценщик"
+                        name: 'valuer',
+                        ru_name: 'Оценщик'
                     },
                     {
                         id: 129,
-                        name: "simultaneousTranslation",
-                        ru_name: "Синхронный перевод"
+                        name: 'simultaneousTranslation',
+                        ru_name: 'Синхронный перевод'
                     },
                     {
                         id: 130,
-                        name: "translationOfTexts",
-                        ru_name: "Перевод текстов"
+                        name: 'translationOfTexts',
+                        ru_name: 'Перевод текстов'
                     },
                     {
                         id: 131,
-                        name: "polygraphyPrintingDesign",
-                        ru_name: "Полиграфия, печать, дизайн"
+                        name: 'polygraphyPrintingDesign',
+                        ru_name: 'Полиграфия, печать, дизайн'
                     },
                     {
                         id: 132,
-                        name: "realEstateServices",
-                        ru_name: "Риэлторские услуги"
+                        name: 'realEstateServices',
+                        ru_name: 'Риэлторские услуги'
                     },
                     {
                         id: 133,
-                        name: "HR",
-                        ru_name: "HR"
+                        name: 'HR',
+                        ru_name: 'HR'
                     },
                     {
                         id: 134,
-                        name: "certification",
-                        ru_name: "Сертификация"
+                        name: 'certification',
+                        ru_name: 'Сертификация'
                     },
                     {
                         id: 135,
-                        name: "legalServices",
-                        ru_name: "Юридические услуги"
+                        name: 'legalServices',
+                        ru_name: 'Юридические услуги'
                     },
                     {
                         id: 136,
-                        name: "otherServices",
-                        ru_name: "Другие услуги"
+                        name: 'otherServices',
+                        ru_name: 'Другие услуги'
                     }
                 ]
             },
             {
                 id: 11,
-                name: "equipmentAndAttractionsRental",
-                ru_name: "Организация праздников",
+                name: 'equipmentAndAttractionsRental',
+                ru_name: 'Организация праздников',
                 type: [
                     {
                         id: 137,
-                        name: "equipmentAndAttractionsRental",
-                        ru_name: "Аренда оборудования и аттракционов"
+                        name: 'equipmentAndAttractionsRental',
+                        ru_name: 'Аренда оборудования и аттракционов'
                     },
                     {
                         id: 138,
-                        name: "leaseSite",
-                        ru_name: "Аренда площадки"
+                        name: 'leaseSite',
+                        ru_name: 'Аренда площадки'
                     },
                     {
                         id: 139,
-                        name: "presentersMusiciansAndArtists",
-                        ru_name: "Ведущие, музыканты и артисты"
+                        name: 'presentersMusiciansAndArtists',
+                        ru_name: 'Ведущие, музыканты и артисты'
                     },
                     {
                         id: 140,
-                        name: "DJs",
-                        ru_name: "Диджеи"
+                        name: 'DJs',
+                        ru_name: 'Диджеи'
                     },
                     {
                         id: 141,
-                        name: "organizationEvents",
-                        ru_name: "Организация мероприятий"
+                        name: 'organizationEvents',
+                        ru_name: 'Организация мероприятий'
                     },
                     {
                         id: 142,
-                        name: "foodPreparationAndCatering",
-                        ru_name: "Приготовление еды и кейтеринг"
+                        name: 'foodPreparationAndCatering',
+                        ru_name: 'Приготовление еды и кейтеринг'
                     },
                     {
                         id: 143,
-                        name: "suitRental",
-                        ru_name: "Прокат костюмов"
+                        name: 'suitRental',
+                        ru_name: 'Прокат костюмов'
                     },
                     {
                         id: 144,
-                        name: "promotersAndModels",
-                        ru_name: "Промоутеры и модели"
+                        name: 'promotersAndModels',
+                        ru_name: 'Промоутеры и модели'
                     },
                     {
                         id: 145,
-                        name: "flowersDecor",
-                        ru_name: "Цветы и декор"
+                        name: 'flowersDecor',
+                        ru_name: 'Цветы и декор'
                     },
                     {
                         id: 146,
-                        name: "otherServices",
-                        ru_name: "Другие услуги"
+                        name: 'otherServices',
+                        ru_name: 'Другие услуги'
                     }
                 ]
             },
             {
                 id: 12,
-                name: "photoAndVideoFilming",
-                ru_name: "Фото и видеосъемка",
+                name: 'photoAndVideoFilming',
+                ru_name: 'Фото и видеосъемка',
                 type: [
                     {
                         id: 147,
-                        name: "videoEditor",
-                        ru_name: "Видеомонтажер"
+                        name: 'videoEditor',
+                        ru_name: 'Видеомонтажер'
                     },
                     {
                         id: 148,
-                        name: "videoOperators",
-                        ru_name: "Видео операторы"
+                        name: 'videoOperators',
+                        ru_name: 'Видео операторы'
                     },
                     {
                         id: 149,
-                        name: "photographers",
-                        ru_name: "Фотографы"
+                        name: 'photographers',
+                        ru_name: 'Фотографы'
                     },
                     {
                         id: 150,
-                        name: "albumAndPhotobookPrinting",
-                        ru_name: "Печать альбомов и фотокниг"
+                        name: 'albumAndPhotobookPrinting',
+                        ru_name: 'Печать альбомов и фотокниг'
                     },
                     {
                         id: 151,
-                        name: "advertisingPhotography",
-                        ru_name: "Рекламная фотосъемка"
+                        name: 'advertisingPhotography',
+                        ru_name: 'Рекламная фотосъемка'
                     },
                     {
                         id: 152,
-                        name: "promotionalVideo",
-                        ru_name: "Рекламное видео"
+                        name: 'promotionalVideo',
+                        ru_name: 'Рекламное видео'
                     },
                     {
                         id: 153,
-                        name: "photoRetouchingAndRestoration",
-                        ru_name: "Ретушь и восстановление фото"
+                        name: 'photoRetouchingAndRestoration',
+                        ru_name: 'Ретушь и восстановление фото'
                     },
                     {
                         id: 154,
-                        name: "weddingPhotographers",
-                        ru_name: "Свадебные фотографы"
+                        name: 'weddingPhotographers',
+                        ru_name: 'Свадебные фотографы'
                     },
                     {
                         id: 155,
-                        name: "studioPhotography",
-                        ru_name: "Студийная фотосъемка"
+                        name: 'studioPhotography',
+                        ru_name: 'Студийная фотосъемка'
                     },
                     {
                         id: 156,
-                        name: "other",
-                        ru_name: "Другое"
+                        name: 'other',
+                        ru_name: 'Другое'
                     }
                 ]
             },
             {
                 id: 13,
-                name: "cleaning",
-                ru_name: "Уборка",
+                name: 'cleaning',
+                ru_name: 'Уборка',
                 type: [
                     {
                         id: 157,
-                        name: "washingWindowsAndBalconies",
-                        ru_name: "Мойка окон и балконов"
+                        name: 'washingWindowsAndBalconies',
+                        ru_name: 'Мойка окон и балконов'
                     },
                     {
                         id: 158,
-                        name: "workInTheGarden",
-                        ru_name: "Работы в саду, на участке"
+                        name: 'workInTheGarden',
+                        ru_name: 'Работы в саду, на участке'
                     },
                     {
                         id: 159,
-                        name: "cleaningOfApartmentsAndHouses",
-                        ru_name: "Уборка квартир и домов"
+                        name: 'cleaningOfApartmentsAndHouses',
+                        ru_name: 'Уборка квартир и домов'
                     },
                     {
                         id: 160,
-                        name: "housekeepingServices",
-                        ru_name: "Услуги домработницы"
+                        name: 'housekeepingServices',
+                        ru_name: 'Услуги домработницы'
                     },
                     {
                         id: 161,
-                        name: "dryCleaningWashingAndIroning",
-                        ru_name: "Химчистка, стирка и глажка"
+                        name: 'dryCleaningWashingAndIroning',
+                        ru_name: 'Химчистка, стирка и глажка'
                     },
                     {
                         id: 162,
-                        name: "disinfection",
-                        ru_name: "Дезинфекция"
+                        name: 'disinfection',
+                        ru_name: 'Дезинфекция'
                     },
                     {
                         id: 163,
-                        name: "otherServices",
-                        ru_name: "Другие услуги"
+                        name: 'otherServices',
+                        ru_name: 'Другие услуги'
                     }
                 ]
             },
             {
                 id: 14,
-                name: "manufacturingToOrder",
-                ru_name: "Изготовление на заказ",
+                name: 'manufacturingToOrder',
+                ru_name: 'Изготовление на заказ',
                 type: [
                     {
                         id: 164,
-                        name: "manufactureAndRepairClothesAccessories",
-                        ru_name: "Изготовление и ремонт одежды, обуви, аксессуаров"
+                        name: 'manufactureAndRepairClothesAccessories',
+                        ru_name: 'Изготовление и ремонт одежды, обуви, аксессуаров'
                     },
                     {
                         id: 165,
-                        name: "forgedProductsToOrder",
-                        ru_name: "Кованые изделия на заказ"
+                        name: 'forgedProductsToOrder',
+                        ru_name: 'Кованые изделия на заказ'
                     },
                     {
                         id: 166,
-                        name: "customMadeFurniture",
-                        ru_name: "Мебель на заказ"
+                        name: 'customMadeFurniture',
+                        ru_name: 'Мебель на заказ'
                     },
                     {
                         id: 167,
-                        name: "musicPoetryAndVoiceActingToOrder",
-                        ru_name: "Музыка, стихи и озвучка на заказ"
+                        name: 'musicPoetryAndVoiceActingToOrder',
+                        ru_name: 'Музыка, стихи и озвучка на заказ'
                     },
                     {
                         id: 168,
-                        name: "customSealsAndStamps",
-                        ru_name: "Печати и штампы на заказ"
+                        name: 'customSealsAndStamps',
+                        ru_name: 'Печати и штампы на заказ'
                     },
                     {
                         id: 169,
-                        name: "drawingPaintingAndGraphicsToOrder",
-                        ru_name: "Рисунок, живопись и графика на заказ"
+                        name: 'drawingPaintingAndGraphicsToOrder',
+                        ru_name: 'Рисунок, живопись и графика на заказ'
                     },
                     {
                         id: 170,
-                        name: "souvenirProductsAndPrinting",
-                        ru_name: "Сувенирная продукция и полиграфия"
+                        name: 'souvenirProductsAndPrinting',
+                        ru_name: 'Сувенирная продукция и полиграфия'
                     },
                     {
                         id: 171,
-                        name: "jewelryServices",
-                        ru_name: "Ювелирные услуги"
+                        name: 'jewelryServices',
+                        ru_name: 'Ювелирные услуги'
                     },
                     {
                         id: 172,
-                        name: "otherServices",
-                        ru_name: "Другие услуги"
+                        name: 'otherServices',
+                        ru_name: 'Другие услуги'
                     }
                 ]
             },
             {
                 id: 15,
-                name: "food",
-                ru_name: "Продукты питания",
+                name: 'food',
+                ru_name: 'Продукты питания',
                 type: [
                     {
                         id: 173,
-                        name: "bakingAndCakesToOrder",
-                        ru_name: "Выпечка и торты на заказ"
+                        name: 'bakingAndCakesToOrder',
+                        ru_name: 'Выпечка и торты на заказ'
                     },
                     {
                         id: 174,
-                        name: "foodToOrder",
-                        ru_name: "Еда на заказ"
+                        name: 'foodToOrder',
+                        ru_name: 'Еда на заказ'
                     },
                     {
                         id: 175,
-                        name: "cookServices",
-                        ru_name: "Услуги повара"
+                        name: 'cookServices',
+                        ru_name: 'Услуги повара'
                     },
                     {
                         id: 176,
-                        name: "otherServices",
-                        ru_name: "Другие услуги"
+                        name: 'otherServices',
+                        ru_name: 'Другие услуги'
                     }
                 ]
             },
             {
                 id: 16,
-                name: "animalCare",
-                ru_name: "Уход за животными",
+                name: 'animalCare',
+                ru_name: 'Уход за животными',
                 type: [
                     {
                         id: 177,
-                        name: "knitting",
-                        ru_name: "Вязка"
+                        name: 'knitting',
+                        ru_name: 'Вязка'
                     },
                     {
                         id: 178,
-                        name: "trainingAndWalking",
-                        ru_name: "Дрессировка и выгул"
+                        name: 'trainingAndWalking',
+                        ru_name: 'Дрессировка и выгул'
                     },
                     {
                         id: 179,
-                        name: "overexposure",
-                        ru_name: "Передержка"
+                        name: 'overexposure',
+                        ru_name: 'Передержка'
                     },
                     {
                         id: 180,
-                        name: "animalGroomingAndGrooming",
-                        ru_name: "Стрижка и уход за животными"
+                        name: 'animalGroomingAndGrooming',
+                        ru_name: 'Стрижка и уход за животными'
                     },
                     {
                         id: 181,
-                        name: "otherServices",
-                        ru_name: "Другие услуги"
+                        name: 'otherServices',
+                        ru_name: 'Другие услуги'
                     }
                 ]
             },
             {
                 id: 17,
-                name: "other",
-                ru_name: "Другое"
+                name: 'other',
+                ru_name: 'Другое'
             }
         ]
     },
@@ -2575,8 +2574,8 @@ export const categories_list: CategoryType[] = [
                     },
                     {
                         id: 36,
-                        name: "Seedling",
-                        ru_name: "Рассада"
+                        name: 'Seedling',
+                        ru_name: 'Рассада'
                     },
                     {
                         id: 37,
@@ -2585,7 +2584,7 @@ export const categories_list: CategoryType[] = [
                     },
                     {
                         id: 38,
-                        name: "soil",
+                        name: 'soil',
                         ru_name: 'Почва'
                     },
                     {
@@ -2627,8 +2626,8 @@ export const categories_list: CategoryType[] = [
                     },
                     {
                         id: 4,
-                        name: "eBooks",
-                        ru_name: "Электронные книги"
+                        name: 'eBooks',
+                        ru_name: 'Электронные книги'
                     },
                     {
                         id: 5,
@@ -2637,8 +2636,8 @@ export const categories_list: CategoryType[] = [
                     },
                     {
                         id: 6,
-                        name: "walkieTalkiesAndSatellitePhones",
-                        ru_name: "Рации и спутниковые телефоны"
+                        name: 'walkieTalkiesAndSatellitePhones',
+                        ru_name: 'Рации и спутниковые телефоны'
                     },
                     {
                         id: 7,
@@ -2977,13 +2976,13 @@ export const categories_list: CategoryType[] = [
                     },
                     {
                         id: 67,
-                        name: "computerGames",
-                        ru_name: "Компьютерные игры"
+                        name: 'computerGames',
+                        ru_name: 'Компьютерные игры'
                     },
                     {
                         id: 68,
-                        name: "programs",
-                        ru_name: "Программы"
+                        name: 'programs',
+                        ru_name: 'Программы'
                     },
                     {
                         id: 69,
@@ -3024,152 +3023,152 @@ export const categories_list: CategoryType[] = [
                 type: [
                     {
                         id: 21,
-                        name: "antique_furniture_tableware",
+                        name: 'antique_furniture_tableware',
                         ru_name: 'Антикварная мебель, посуда'
                     },
                     {
                         id: 22,
-                        name: "banknotes",
+                        name: 'banknotes',
                         ru_name: 'Банкноты'
                     },
                     {
                         id: 23,
-                        name: "tickets",
+                        name: 'tickets',
                         ru_name: 'Билеты'
                     },
                     {
                         id: 24,
-                        name: "things_celebrities_autographs",
+                        name: 'things_celebrities_autographs',
                         ru_name: 'Вещи знаменитостей, автографы'
                     },
                     {
                         id: 25,
-                        name: "vinyl_records",
+                        name: 'vinyl_records',
                         ru_name: 'Виниловые пластинки'
                     },
                     {
                         id: 26,
-                        name: "inserts_stickers",
+                        name: 'inserts_stickers',
                         ru_name: 'Вкладыши, наклейки'
                     },
                     {
                         id: 27,
-                        name: "military_stuff",
+                        name: 'military_stuff',
                         ru_name: 'Военные вещи'
                     },
                     {
                         id: 28,
-                        name: "documents",
+                        name: 'documents',
                         ru_name: 'Документы'
                     },
                     {
                         id: 29,
-                        name: "tokens_medals_badges",
+                        name: 'tokens_medals_badges',
                         ru_name: 'Жетоны, медали, значки'
                     },
                     {
                         id: 30,
-                        name: "calendars",
+                        name: 'calendars',
                         ru_name: 'Календари'
                     },
                     {
                         id: 31,
-                        name: "kinder_surprises",
+                        name: 'kinder_surprises',
                         ru_name: 'Киндер-сюрпризы'
                     },
                     {
                         id: 32,
-                        name: "books_magazines_manuscripts",
+                        name: 'books_magazines_manuscripts',
                         ru_name: 'Книги, журналы, рукописи'
                     },
                     {
                         id: 33,
-                        name: "envelopes_postcards",
+                        name: 'envelopes_postcards',
                         ru_name: 'Конверты, открытки'
                     },
                     {
                         id: 34,
-                        name: "piggy_banks",
+                        name: 'piggy_banks',
                         ru_name: 'Копилки'
                     },
                     {
                         id: 35,
-                        name: "dolls_toys",
+                        name: 'dolls_toys',
                         ru_name: 'Куклы, игрушки'
                     },
                     {
                         id: 36,
-                        name: "magnets",
+                        name: 'magnets',
                         ru_name: 'Магниты'
                     },
                     {
                         id: 37,
-                        name: "stamps",
+                        name: 'stamps',
                         ru_name: 'Марки'
                     },
                     {
                         id: 38,
-                        name: "models",
+                        name: 'models',
                         ru_name: 'Модели'
                     },
                     {
                         id: 39,
-                        name: "coins_numismatics",
+                        name: 'coins_numismatics',
                         ru_name: 'Монеты, нумизматика'
                     },
                     {
                         id: 40,
-                        name: "musical_instruments",
+                        name: 'musical_instruments',
                         ru_name: 'Музыкальные инструменты'
                     },
                     {
                         id: 41,
-                        name: "ashtrays_lighters",
+                        name: 'ashtrays_lighters',
                         ru_name: 'Пепельницы, зажигалки'
                     },
                     {
                         id: 42,
-                        name: "plastic_cards",
+                        name: 'plastic_cards',
                         ru_name: 'Пластиковые карточки'
                     },
                     {
                         id: 43,
-                        name: "art_objects_paintings",
+                        name: 'art_objects_paintings',
                         ru_name: 'Предметы искусства, картины'
                     },
                     {
                         id: 44,
-                        name: "figurines_figurines",
+                        name: 'figurines_figurines',
                         ru_name: 'Статуэтки, фигурки'
                     },
                     {
                         id: 45,
-                        name: "jewelry_accessories",
+                        name: 'jewelry_accessories',
                         ru_name: 'Украшения, аксессуары'
                     },
                     {
                         id: 46,
-                        name: "photos_letters",
+                        name: 'photos_letters',
                         ru_name: 'Фотографии, письма'
                     },
                     {
                         id: 47,
-                        name: "chess_games",
+                        name: 'chess_games',
                         ru_name: 'Шахматы, игры'
                     },
                     {
                         id: 48,
-                        name: "jewelry_boxes",
+                        name: 'jewelry_boxes',
                         ru_name: 'Шкатулки'
                     },
                     {
                         id: 49,
-                        name: "labels_bottles_corks",
+                        name: 'labels_bottles_corks',
                         ru_name: 'Этикетки, бутылки, пробки'
                     },
                     {
                         id: 50,
-                        name: "other",
+                        name: 'other',
                         ru_name: 'Другое'
                     }
                 ]
@@ -3191,77 +3190,77 @@ export const categories_list: CategoryType[] = [
                 type: [
                     {
                         id: 67,
-                        name: "accordion_accordion_accordion",
+                        name: 'accordion_accordion_accordion',
                         ru_name: 'Аккордеон, гармони, баяны'
                     },
                     {
                         id: 68,
-                        name: "acoustic_guitars",
+                        name: 'acoustic_guitars',
                         ru_name: 'Акустические гитары'
                     },
                     {
                         id: 69,
-                        name: "classical_guitars",
+                        name: 'classical_guitars',
                         ru_name: 'Классические гитары'
                     },
                     {
                         id: 70,
-                        name: "bass_guitars",
+                        name: 'bass_guitars',
                         ru_name: 'Бас-гитары'
                     },
                     {
                         id: 71,
-                        name: "electric_guitars",
+                        name: 'electric_guitars',
                         ru_name: 'Электрогитары'
                     },
                     {
                         id: 72,
-                        name: "guitar_gain",
+                        name: 'guitar_gain',
                         ru_name: 'Гитарное усиление'
                     },
                     {
                         id: 73,
-                        name: "wind_instruments",
+                        name: 'wind_instruments',
                         ru_name: 'Духовые инструменты'
                     },
                     {
                         id: 74,
-                        name: "keyboards",
+                        name: 'keyboards',
                         ru_name: 'Клавишные'
                     },
                     {
                         id: 75,
-                        name: "mixing_consoles",
+                        name: 'mixing_consoles',
                         ru_name: 'Микшерные пульты'
                     },
                     {
                         id: 76,
-                        name: "folk_instruments",
+                        name: 'folk_instruments',
                         ru_name: 'Народные инструменты'
                     },
                     {
                         id: 77,
-                        name: "effect_pedals",
+                        name: 'effect_pedals',
                         ru_name: 'Педали эффектов'
                     },
                     {
                         id: 78,
-                        name: "violins_bowed",
+                        name: 'violins_bowed',
                         ru_name: 'Скрипки, смычковые'
                     },
                     {
                         id: 79,
-                        name: "percussion_instruments",
+                        name: 'percussion_instruments',
                         ru_name: 'Ударные инструменты'
                     },
                     {
                         id: 80,
-                        name: "accessories",
+                        name: 'accessories',
                         ru_name: 'Аксессуары'
                     },
                     {
                         id: 81,
-                        name: "other",
+                        name: 'other',
                         ru_name: 'Другое'
                     }
                 ]
@@ -3278,77 +3277,77 @@ export const categories_list: CategoryType[] = [
                 type: [
                     {
                         id: 98,
-                        name: "sports_protection",
+                        name: 'sports_protection',
                         ru_name: 'Спортивная защита'
                     },
                     {
                         id: 99,
-                        name: "bicycles",
+                        name: 'bicycles',
                         ru_name: 'Велосипеды'
                     },
                     {
                         id: 100,
-                        name: "roller_skates_and_skateboarding",
+                        name: 'roller_skates_and_skateboarding',
                         ru_name: 'Ролики и скейтбординг'
                     },
                     {
                         id: 101,
-                        name: "scooters_and_gyrometer",
+                        name: 'scooters_and_gyrometer',
                         ru_name: 'Самокаты и гироскутеры'
                     },
                     {
                         id: 102,
-                        name: "billiards_and_bowling",
+                        name: 'billiards_and_bowling',
                         ru_name: 'Бильярд и боулинг'
                     },
                     {
                         id: 103,
-                        name: "water_sports",
+                        name: 'water_sports',
                         ru_name: 'Водные виды спорта'
                     },
                     {
                         id: 104,
-                        name: "martial_arts",
+                        name: 'martial_arts',
                         ru_name: 'Единоборства'
                     },
                     {
                         id: 105,
-                        name: "winter_sports",
+                        name: 'winter_sports',
                         ru_name: 'Зимние виды спорта'
                     },
                     {
                         id: 106,
-                        name: "ball_games",
+                        name: 'ball_games',
                         ru_name: 'Игры с мячом'
                     },
                     {
                         id: 107,
-                        name: "hunting_and_fishing",
+                        name: 'hunting_and_fishing',
                         ru_name: 'Охота и рыбалка'
                     },
                     {
                         id: 108,
-                        name: "tourism_and_outdoor_recreation",
+                        name: 'tourism_and_outdoor_recreation',
                         ru_name: 'Туризм и отдых на природе'
                     },
                     {
                         id: 109,
-                        name: "tennis_badminton_darts",
+                        name: 'tennis_badminton_darts',
                         ru_name: 'Теннис, бадминтон, дартс'
                     },
                     {
                         id: 110,
-                        name: "exercise_machines_and_fitness_equipment",
+                        name: 'exercise_machines_and_fitness_equipment',
                         ru_name: 'Тренажеры и фитнес'
                     },
                     {
                         id: 111,
-                        name: "sports_nutrition",
+                        name: 'sports_nutrition',
                         ru_name: 'Спортивное питание'
                     },
                     {
                         id: 112,
-                        name: "other",
+                        name: 'other',
                         ru_name: 'Другое'
                     }
                 ]
@@ -3406,3 +3405,49 @@ export const categories_list: CategoryType[] = [
         ]
     }
 ];
+
+export const addParentsToCtgrs = (categoriesList: CategoryType[]): CategoryType[] => {
+    return categoriesList.map(ctgry => {
+        if (ctgry.subCategory) {
+            const subCategory = addParents(
+                ctgry.subCategory,
+                [{
+                    id: ctgry.id,
+                    name: ctgry.name
+                }]
+            );
+            return {...ctgry, subCategory};
+        } else {
+            return ctgry;
+        }
+    });
+
+    function addParents(list, parents) {
+        return list.map(ctgry => {
+            if (ctgry.type) {
+                const type = addParents(
+                    ctgry.type,
+                    [
+                        ...parents,
+                        {
+                            id: ctgry.id,
+                            name: ctgry.name
+                        }
+                    ]
+                );
+                return {
+                    ...ctgry,
+                    type,
+                    parents
+                };
+            } else {
+                return {
+                    ...ctgry,
+                    parents
+                };
+            }
+        });
+    }
+};
+
+export const siteCategories = addParentsToCtgrs(categories_list);

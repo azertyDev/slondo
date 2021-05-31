@@ -40,7 +40,7 @@ export const useStyles = makeStyles((theme) => ({
             boxShadow: '0px 0px 15px rgba(0, 0, 0, 0.1)',
             borderRadius: '5px',
             zIndex: 20,
-            '& div.card-data': {
+            '& .card-data': {
                 display: 'flex',
                 height: 200,
                 position: 'relative',
@@ -184,46 +184,16 @@ export const useStyles = makeStyles((theme) => ({
                         padding: '0 15px',
                         margin: '2px 10px 2px 0',
                         borderRadius: '100px',
-                        boxShadow: '0px 0px 15px rgba(0, 0, 0, 0.1)',
                         cursor: 'default',
                         userSelect: 'none',
+                        background: '#F5F5F5',
                         '& p.MuiTypography-body1': {
-                            fontSize: '12px',
-                            color: '#838383',
-                            lineHeight: '15px'
+                            fontSize: '12px'
                         },
                         '& svg': {
-                            width: '15px',
-                            height: '15px',
+                            width: '20px',
+                            height: '20px',
                             marginRight: '15px'
-                        },
-                        '&.available': {
-                            '& > svg': {
-                                '& > defs > linearGradient': {
-                                    '& > stop': {
-                                        '&:first-child': {
-                                            stopColor: '#30AB7C !important'
-                                        },
-                                        '&:last-child': {
-                                            stopColor: '#75BE55'
-                                        }
-                                    }
-                                }
-                            }
-                        },
-                        '&.delivery': {
-                            '& svg': {
-                                '& path': {
-                                    fill: '#695EAE'
-                                }
-                            }
-                        },
-                        '&.exchange': {
-                            '& svg': {
-                                '& path': {
-                                    fill: '#4e4e4e'
-                                }
-                            }
                         }
                     }
                 },
@@ -244,6 +214,7 @@ export const useStyles = makeStyles((theme) => ({
                         display: 'flex',
                         flexDirection: 'column',
                         alignItems: 'flex-end',
+                        justifyContent: 'center',
                         width: '40%',
                         '& .MuiTypography-subtitle1': {
                             fontSize: '0.875rem',
@@ -257,6 +228,20 @@ export const useStyles = makeStyles((theme) => ({
                 '& .timer': {
                     fontSize: '0.875rem'
                 }
+            },
+            '& .accordion': {
+                border: '1px solid rgba(0, 0, 0, .125)',
+                boxShadow: 'none',
+                '&:not(:last-child)': {
+                    borderBottom: 0
+                },
+                '&:before': {
+                    display: 'none'
+                },
+                '&$expanded': {
+                    margin: 'auto'
+                },
+                expanded: {}
             }
         },
         '& .status-buttons': {
@@ -274,6 +259,6 @@ export const useStyles = makeStyles((theme) => ({
                     width: '100%'
                 }
             }
-        }
-    }
+        },
+    },
 }));

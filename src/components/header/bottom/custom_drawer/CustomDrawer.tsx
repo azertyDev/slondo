@@ -1,11 +1,11 @@
-import React, {FC, useState} from 'react';
+import {FC, useState} from 'react';
 import Link from 'next/link';
 import Drawer from '@material-ui/core/Drawer';
 import {InputAdornment, List, ListItem, TextField, Typography} from '@material-ui/core';
-import {categories_list} from '@src/common_data/categories_list';
+import {siteCategories} from '@src/common_data/siteCategories';
 import {useTranslation} from 'next-i18next';
 import {Search_icon} from '@src/components/elements/icons';
-import {addParentsToCtgrs, transformToCyrillic} from '@src/helpers';
+import {transformCyrillic} from '@src/helpers';
 import {useStyles} from './useStyles';
 
 
@@ -39,7 +39,7 @@ export const CustomDrawer: FC<any> = ({toggleDrawer, position}) => {
                 placeholder="Поиск категорий"
             />
             <List>
-                {addParentsToCtgrs(categories_list).map((ctgr) =>
+                {siteCategories.map((ctgr) =>
                     <ListItem
                         button
                         key={ctgr.id}
@@ -88,8 +88,8 @@ export const CustomDrawer: FC<any> = ({toggleDrawer, position}) => {
                 <h1 onClick={() => setHoverCategory(initHoverCtgr)} style={{cursor: 'pointer'}}>X</h1>
                 {hoverCtgr.subCategory.map(subCategory => {
                     const location = 'tashkent';
-                    const categoryName = transformToCyrillic(hoverCtgr.ru_name);
-                    const subCategoryName = transformToCyrillic(subCategory.ru_name);
+                    const categoryName = transformCyrillic(hoverCtgr.ru_name);
+                    const subCategoryName = transformCyrillic(subCategory.ru_name);
                     const type = subCategory.type;
                     const url = `/${location}/${categoryName}/${subCategoryName}`;
 
@@ -105,7 +105,7 @@ export const CustomDrawer: FC<any> = ({toggleDrawer, position}) => {
                                      </a>
                                  </Link>
                                  {type.map(type => {
-                                     const typeName = transformToCyrillic(type.ru_name);
+                                     const typeName = transformCyrillic(type.ru_name);
                                      return (
                                          <Link key={type.id} href={url + `/${typeName}`}>
                                              <a>

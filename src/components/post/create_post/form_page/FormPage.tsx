@@ -49,30 +49,26 @@ export const FormPage: FC = () => {
     const postType = postTypes.find(type => type.name === postTypeName);
 
     const initPost = {
-        isFetch: false,
         ads_type_id: postType.id,
         category_id: category.id,
         sub_category_id: subCategory?.id,
-        photos: []
+        params: {
+            title: ''
+        },
+        appearance: {
+            color: null,
+            photos: []
+        },
+        commonParams: {}
     };
 
-    if (isCtgrAnimalFishes) {
-        initPost[categoryName] = {
-            [`${categoryName}_id`]: subCategory.id
-        };
-    }
-
-    const initFilters: { isFetch: boolean, data: any } = {
-        isFetch: false,
-        data: {}
-    };
-
+    const [isFetch, setIsFetch] = useState(false);
     const [isSuccess, setIsSuccess] = useState(false);
     const [isPreview, setIsPreview] = useState(false);
     const [post, setPost] = useState(initPost);
-    const [filters, setFilters] = useState(initFilters);
-    const {colors, ...filtersData} = filters.data;
     const [currentFormIndex, setCurrentFormIndex] = useState(3);
+    const [filters, setFilters] = useState<any>({});
+    const {colors, ...filtersData} = filters;
 
     const handleNextFormOpen = () => {
         setCurrentFormIndex(currentFormIndex - 1);
@@ -105,12 +101,9 @@ export const FormPage: FC = () => {
             const subCtgrId = subCategory?.id ?? '';
             const typeId = type?.id ?? '';
 
-            setFilters({
-                ...filters,
-                isFetch: true
-            });
+            setIsFetch(true);
 
-            let fetchedData = await userAPI.getDataForCreatePost(category.id, subCtgrId, typeId);
+            let fetchedData = await userAPI.getFiltersByCtgr(category.id, subCtgrId, typeId);
 
             if (categoryName === 'car') {
                 if (subCategoryName === 'madeInUzb') {
@@ -123,10 +116,8 @@ export const FormPage: FC = () => {
                 }
             }
 
-            setFilters({
-                isFetch: false,
-                data: normalizeFiltersByCategory(fetchedData, type)
-            });
+            setIsFetch(false);
+            setFilters(normalizeFiltersByCategory(fetchedData, type));
         } catch (e) {
             dispatch(setErrorMsgAction(e.message));
         }
@@ -142,22 +133,48 @@ export const FormPage: FC = () => {
         );
     };
 
+    const handleSubmit = (values) => {
+        setPost({...post, ...values});
+    };
+
     const toPublish = async () => {
         try {
             const form = new FormData();
-            const {isFetch, photos, ...data} = post;
+            const {
+                params,
+                commonParams,
+                appearance,
+                ...postData
+            } = post;
 
-            setPost({...post, isFetch: true});
+            const {title, ...otherParams} = params;
+            const {photos, color} = appearance;
+
+            const data = {
+                title,
+                ...postData,
+                ...commonParams,
+                [categoryName]: {
+                    [`${categoryName}_id`]: subCategory.id,
+                    ...otherParams
+                }
+            };
+
+            if (type) data[categoryName].type_id = type.id;
+            if (color) data[categoryName].color_id = color.id;
+
+            setIsFetch(true);
 
             form.append('data', JSON.stringify(data));
             photos.forEach(photo => form.append('files[]', photo.file));
 
             await userAPI.createPost(form);
 
+            console.log(form);
             setIsSuccess(true);
-            setPost({...post, isFetch: false});
+            setIsFetch(false);
         } catch (e) {
-            setPost({...post, isFetch: false});
+            setIsFetch(false);
             dispatch(setErrorMsgAction(e.message));
         }
     };
@@ -167,9 +184,7 @@ export const FormPage: FC = () => {
     }, [asPath, post]);
 
     useEffect(() => {
-        if (!isCtgrAnimalFishes && !!category) {
-            fetchFilters();
-        }
+        !isCtgrAnimalFishes && !!category && fetchFilters();
     }, []);
 
     const classes = useStyles();
@@ -186,14 +201,11 @@ export const FormPage: FC = () => {
                  <div className={classes.root}>
                      <ParamsFormContainer
                          t={t}
-                         type={type}
-                         post={post}
-                         setPost={setPost}
-                         isPreview={isPreview}
                          filters={filtersData}
+                         isPreview={isPreview}
                          subCategory={subCategory}
-                         categoryName={categoryName}
                          currentFormIndex={currentFormIndex}
+                         handleSubmit={handleSubmit}
                          handleFormOpen={handleFormOpen}
                          handleNextFormOpen={handleNextFormOpen}
                      />
@@ -201,11 +213,9 @@ export const FormPage: FC = () => {
                          <AppearanceForm
                              t={t}
                              colors={colors}
-                             post={post}
-                             setPost={setPost}
                              isPreview={isPreview}
-                             categoryName={categoryName}
                              currentFormIndex={currentFormIndex}
+                             handleSubmit={handleSubmit}
                              handleFormOpen={handleFormOpen}
                              handleNextFormOpen={handleNextFormOpen}
                          />
@@ -213,20 +223,19 @@ export const FormPage: FC = () => {
                      <div>
                          <CommonForm
                              t={t}
-                             post={post}
                              ownerPhone={phone}
                              asPath={asPath}
                              postType={postType}
-                             setPost={setPost}
                              isPreview={isPreview}
                              setIsPreview={setIsPreview}
                              categoryName={categoryName}
+                             handleSubmit={handleSubmit}
                              currentFormIndex={currentFormIndex}
                          />
                      </div>
                      {isPreview && (
                          <div className='publish-button-wrapper'>
-                             <CustomButton disabled={post.isFetch} onClick={toPublish}>
+                             <CustomButton disabled={isFetch} onClick={toPublish}>
                                  <Typography variant='subtitle1'>
                                      {t('publish')}
                                  </Typography>

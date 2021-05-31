@@ -1,4 +1,4 @@
-import React, {FC} from 'react';
+import {FC} from 'react';
 import {Container, Grid, Hidden, Typography} from '@material-ui/core';
 import {SocialsBlock} from '@src/components/elements/socials_block/SocialsBlock';
 import {useTranslation} from 'next-i18next';
@@ -8,7 +8,7 @@ import {useStyles} from './useStyles';
 
 
 export const Footer: FC = () => {
-    const {t} = useTranslation(['footer']);
+    const {t} = useTranslation('footer');
 
     const classes = useStyles();
     return (
@@ -18,7 +18,7 @@ export const Footer: FC = () => {
                     <Grid container className="footer-content" justify="center">
                         <Grid container className="footer-top">
                             <Hidden mdUp>
-                                <Grid container xs={12} justify="center">
+                                <Grid item container xs={12} justify="center">
                                     <div className="social-icons adaptive">
                                         <SocialsBlock/>
                                     </div>
@@ -185,7 +185,7 @@ export const Footer: FC = () => {
                                 </Grid>
                             </Hidden>
                             <Hidden smDown>
-                                <Grid container xs={12} md={3}>
+                                <Grid container item xs={12} md={3}>
                                     <div className="social-icons">
                                         <SocialsBlock/>
                                     </div>

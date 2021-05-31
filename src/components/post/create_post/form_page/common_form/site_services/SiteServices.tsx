@@ -2,8 +2,8 @@ import {FC} from 'react';
 import {WithT} from 'i18next';
 import {Help} from '@material-ui/icons';
 import {Checkbox, Grid, Typography} from '@material-ui/core';
-import {site_services} from '@src/common_data/site_services';
 import {DeliveryIcon, SafeIcon, ExchangeIcon} from '@src/components/elements/icons';
+import {site_services} from '@src/common_data/site_services';
 import {useStyles} from './useStyles';
 
 
@@ -11,8 +11,8 @@ type PaymentDeliveryPropsType = {
     values,
     iconMode?: boolean,
     isAuction: boolean,
-    categoryName: string,
-    handleCheckbox
+    handleCheckbox,
+    mainCategoryName: string
 } & WithT;
 
 export const SiteServices: FC<PaymentDeliveryPropsType> = (props) => {
@@ -21,13 +21,13 @@ export const SiteServices: FC<PaymentDeliveryPropsType> = (props) => {
         values,
         iconMode,
         isAuction,
-        categoryName,
-        handleCheckbox
+        handleCheckbox,
+        mainCategoryName
     } = props;
 
-    const hasSafeDeal = !!site_services.safe_deal[categoryName];
-    const hasExchange = !!site_services.exchange[categoryName];
-    const hasDelivery = !!site_services.delivery[categoryName];
+    const hasSafeDeal = !!site_services.safe_deal[mainCategoryName];
+    const hasExchange = !!site_services.exchange[mainCategoryName];
+    const hasDelivery = !!site_services.delivery[mainCategoryName];
 
     const classes = useStyles();
     return (

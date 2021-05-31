@@ -13,6 +13,7 @@ type CustomSelectPropsType = {
     onBlur,
     items: any[];
     handleSelect: (k, v) => void,
+    disableRequire?: boolean,
     errorMsg?: string
 } & WithT;
 
@@ -20,6 +21,7 @@ export const DropDownSelect: FC<CustomSelectPropsType> = (props) => {
     const {
         t,
         name,
+        disableRequire,
         labelTxt,
         multiple,
         items = [],
@@ -39,13 +41,16 @@ export const DropDownSelect: FC<CustomSelectPropsType> = (props) => {
     };
 
     const selectedHandle = (selected: any) => {
+        let value = t('filters:noSelect');
+
         if (multiple) {
-            selected = selected.map(item => item.name).join(', ');
-        } else {
+            value = selected.map(item => item.name).join(', ');
+        } else if (selected) {
             const selectedItem = items.find(item => item.id === +selected) || null;
-            selected = selected ? t(`filters:${selectedItem[optionKey]}`) : t('filters:noSelect');
+            if (selectedItem !== null) value = t(`filters:${selectedItem[optionKey]}`);
         }
-        return selected;
+
+        return value;
     };
 
     const classes = useStyles();
@@ -59,7 +64,7 @@ export const DropDownSelect: FC<CustomSelectPropsType> = (props) => {
                  {!isCurrency && (
                      <strong>
                          {t(`filters:${labelTxt ?? name}`)}
-                         {isRequired(name) && <span className='error-text'>*&nbsp;</span>}
+                         {!disableRequire && isRequired(name) && <span className='error-text'>*&nbsp;</span>}
                      </strong>
                  )}
              </Typography>}
@@ -93,8 +98,8 @@ export const DropDownSelect: FC<CustomSelectPropsType> = (props) => {
             <Typography variant="subtitle1">
                 {errorMsg && (
                     <span className='error-text'>
-                            {errorMsg}
-                        </span>
+                        {errorMsg}
+                    </span>
                 )}
             </Typography>
         </FormControl>

@@ -31,6 +31,7 @@ export const useStyles = makeStyles((theme) => ({
                     : theme.palette.primary.black
         },
         '&:disabled': {
+            backgroundColor: theme.palette.primary.gray,
             '& > h6.MuiTypography-subtitle1': {
                 color: '#ccc'
             },

@@ -133,7 +133,7 @@
   "requireField": "Поле обязательно к заполнению",
   "cityOrRegionNotFound": "Адрес не найден",
   "choiceLocation": "Выберите местоположение",
-  "safeDeal": "Безопастная сделка",
+  "safe_deal": "Безопастная сделка",
   "delivery": "Доставка",
   "exchange": "Возможен обмен",
   "description": "Описание",
