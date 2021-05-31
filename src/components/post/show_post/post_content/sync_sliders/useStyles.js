@@ -1,4 +1,5 @@
 import {makeStyles} from '@material-ui/core/styles';
+import {Box} from '@material-ui/core';
 
 export const useStyles = makeStyles((theme) => ({
     root: {
@@ -55,7 +56,7 @@ export const useStyles = makeStyles((theme) => ({
             '& button': {
                 width: 50,
                 height: 50,
-                background: '#fff',
+                background: 'rgba(0, 0, 0, 0.5)',
                 borderRadius: '100%',
                 [theme.breakpoints.down('xs')]: {
                     width: '32px',
@@ -68,7 +69,7 @@ export const useStyles = makeStyles((theme) => ({
                         width: '19px'
                     },
                     '& path': {
-                        fill: '#AD66D5'
+                        fill: '#fff'
                     }
                 },
                 '&:hover': {
@@ -83,34 +84,44 @@ export const useStyles = makeStyles((theme) => ({
                 }
             },
             '& .share-favo-btns': {
+                display: 'flex',
                 [theme.breakpoints.up('lg')]: {
                     width: '100%',
-                    display: 'flex',
                     justifyContent: 'space-between'
                 },
                 '& button.favorite-btn': {
                     background: ({isFavorite}) => isFavorite && 'linear-gradient(49.94deg, #675EAA 19.03%, #AD66D5 72.72%)',
-                    [theme.breakpoints.down('xs')]: {
-                        marginRight: '8px'
-                    },
                     '& svg path': {
                         fill: ({isFavorite}) => isFavorite && '#fff'
                     }
                 },
                 '& .favorite-count': {
-                    width: '100%',
-                    marginTop: 20,
-                    padding: '0 5px',
-                    background: '#fff',
-                    borderRadius: '100px',
                     display: 'flex',
-                    justifyContent: 'center'
+                    alignItems: 'center',
+                    flexDirection: 'column',
+                    [theme.breakpoints.down('md')]: {
+                        marginRight: '8px'
+                    },
+                    '& > div:last-child': {
+                        width: '100%',
+                        marginTop: 20,
+                        padding: '0 5px',
+                        background: '#fff',
+                        borderRadius: '100px',
+                        display: 'flex',
+                        justifyContent: 'center',
+                        [theme.breakpoints.down('md')]: {
+                            padding: 0,
+                            marginTop: '5px'
+                        }
+                    }
                 }
             },
             '& .backspace-btn': {
                 background: 'none',
                 '& span > svg ': {
-                    filter: 'drop-shadow( 0px 1px 1px rgba(0, 0, 0, .25))'
+                    filter: 'drop-shadow( 0px 1px 1px rgba(0, 0, 0, .25))',
+                    width: '32px'
                 }
             }
         },
@@ -118,12 +129,19 @@ export const useStyles = makeStyles((theme) => ({
             display: 'flex',
             justifyContent: 'center',
             '& div.slick-slide': {
+                [theme.breakpoints.down('md')]: {
+                    width: '100%'
+                },
                 '& img': {
                     width: 'auto !important',
                     height: '518px',
                     objectFit: 'contain',
                     cursor: 'pointer',
                     [theme.breakpoints.down('md')]: {
+                        width: '100% !important',
+                        objectFit: 'cover'
+                    },
+                    [theme.breakpoints.down('sm')]: {
                         height: '260px'
                     }
                 }

@@ -18,5 +18,5 @@ export const HomePage: FC = () => {
             <Footer/>
             <ErrorModal/>
         </>
-    )
+    );
 };

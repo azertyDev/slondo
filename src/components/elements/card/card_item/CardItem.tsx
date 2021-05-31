@@ -100,7 +100,7 @@ export const CardItem: FC<CardItemProps> = (props) => {
                                 <div className="card-header">
                                     <div className="title">
                                         <Typography variant="subtitle2">
-                                            {t(ads_type)}
+                                            {t(ads_type === 'exauc' ? 'auc' : ads_type)}
                                         </Typography>
                                     </div>
                                     <div className="icons">

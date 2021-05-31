@@ -10,20 +10,33 @@ export const useStyles = makeStyles((theme) => ({
             width: '100%',
             minHeight: 'auto',
             marginBottom: '33px',
+            [theme.breakpoints.down('md')]: {
+                marginBottom: '20px'
+            },
             '& div.MuiTabs-flexContainer': {
                 borderBottom: `1px solid ${theme.palette.common.tab}`,
                 '& h6': {
                     textTransform: 'uppercase',
                     color: theme.palette.common.tab,
+                    [theme.breakpoints.down('md')]: {
+                        textTransform: 'none',
+                        color: '#838383 !important'
+                    }
                 }
             },
             '& button.Mui-selected': {
                 '& h6.MuiTypography-h6': {
-                    color: theme.palette.common.activeTab
+                    color: theme.palette.common.activeTab,
+                    [theme.breakpoints.down('md')]: {
+                        color: '#4E4E4E !important'
+                    }
                 }
             },
             '& span.MuiTabs-indicator': {
-                backgroundColor: theme.palette.common.activeTab
+                backgroundColor: theme.palette.common.activeTab,
+                [theme.breakpoints.down('md')]: {
+                    backgroundColor: `#675EAA`
+                }
             }
         },
         '& div.tabs-content': {
@@ -32,19 +45,22 @@ export const useStyles = makeStyles((theme) => ({
                 width: 'calc(100% + 14px)',
                 margin: '-7px',
                 '& div.MuiGrid-item': {
-                    padding: '7px'
+                    padding: '7px',
+                    [theme.breakpoints.down('xs')]: {
+                        padding: '4px'
+                    }
                 }
             }
         },
         '& div.pagination': {
             display: 'flex',
-            justifyContent: 'center',
+            justifyContent: 'center'
         }
     },
     showMoreContainer: {
         marginTop: '40px',
         [theme.breakpoints.down('md')]: {
-            marginTop: '30px',
+            marginTop: '30px'
         },
         '& div.show-more-block': {
             position: 'relative',
@@ -61,7 +77,7 @@ export const useStyles = makeStyles((theme) => ({
                 zIndex: 1,
                 '& > h6.MuiTypography-subtitle2': {
                     lineHeight: '17px',
-                    letterSpacing: '0.25px',
+                    letterSpacing: '0.25px'
                 }
             }
         }

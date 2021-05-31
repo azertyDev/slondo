@@ -4,6 +4,9 @@ export const useStyles = makeStyles((theme) => ({
     root: {
         position: 'relative',
         height: '345px',
+        [theme.breakpoints.down('xs')]: {
+            height: '233px'
+        },
         '& a': {
             textDecoration: 'none'
         },
@@ -13,6 +16,10 @@ export const useStyles = makeStyles((theme) => ({
             right: '10px',
             padding: '0',
             zIndex: 10,
+            [theme.breakpoints.down('xs')]: {
+                top: '5px',
+                right: '5px'
+            },
             '& svg': {
                 '& defs': {
                     '&.def1 stop': {
@@ -57,6 +64,9 @@ export const useStyles = makeStyles((theme) => ({
             position: 'relative',
             borderRadius: '7px',
             filter: 'drop-shadow(0px 2px 4px rgba(132, 92, 171, 0.2))',
+            [theme.breakpoints.down('xs')]: {
+                filter: 'drop-shadow(0px 1px 2px rgba(0, 0, 0, 0.25))'
+            },
             height: '100%',
             '&:hover': {
                 boxShadow: 'rgba(0, 0, 0, 0.08) 0px 8px 16px 0px',
@@ -64,6 +74,9 @@ export const useStyles = makeStyles((theme) => ({
             },
             '& button.MuiCardActionArea-root': {
                 height: '105px',
+                [theme.breakpoints.down('xs')]: {
+                    height: '80px'
+                },
                 '& > div.MuiCardContent-root': {
                     height: 'inherit',
                     display: 'flex',
@@ -73,6 +86,9 @@ export const useStyles = makeStyles((theme) => ({
             },
             '& > div.card-media': {
                 height: '240px',
+                [theme.breakpoints.down('xs')]: {
+                    height: '153px'
+                },
                 '& > div.card-header': {
                     width: '100%',
                     height: '100%',
@@ -80,6 +96,9 @@ export const useStyles = makeStyles((theme) => ({
                     flexDirection: 'column',
                     justifyContent: 'space-between',
                     padding: '10px',
+                    [theme.breakpoints.down('xs')]: {
+                        padding: '5px 0 3px 5px'
+                    },
                     '& > div.title': {
                         display: 'inline-flex',
                         '& > h6': {
@@ -92,9 +111,9 @@ export const useStyles = makeStyles((theme) => ({
                             backgroundColor: ({ads_type}) => (
                                 ads_type === 'post'
                                     ? 'rgba(136, 202, 236, .65)'
-                                    : ads_type === 'auc'
-                                    ? 'rgba(173, 102, 213, .65)'
-                                    : 'rgba(242, 153, 74, .65)'
+                                    : ads_type === 'exauc'
+                                    ? 'rgba(242, 153, 74, .65)'
+                                    : 'rgba(173, 102, 213, 0.65)'
                             )
                         }
                     },
@@ -124,16 +143,34 @@ export const useStyles = makeStyles((theme) => ({
             '& h6.MuiTypography-subtitle1': {
                 [theme.breakpoints.down('sm')]: {
                     fontSize: '1.2rem'
+                },
+                [theme.breakpoints.down('xs')]: {
+                    fontSize: '14px',
+                    lineHeight: '14px'
                 }
             },
             '& > button': {
                 '& > div.MuiCardContent-root': {
                     padding: '10px 15px',
+                    [theme.breakpoints.down('xs')]: {
+                        padding: '8px 2px 8px 8px'
+                    },
                     '& > h5.MuiTypography-h5': {
-                        lineHeight: '29px'
+                        lineHeight: '29px',
+                        [theme.breakpoints.down('xs')]: {
+                            fontSize: '1rem',
+                            lineHeight: '20px',
+                            fontWeight: '600'
+                        }
                     },
                     '& > span.MuiTypography-caption': {
-                        color: '#838383'
+                        color: '#838383',
+                        [theme.breakpoints.down('xs')]: {
+                            fontSize: '12px',
+                            '&:last-child': {
+                                fontSize: '10px'
+                            }
+                        }
                     }
                 }
             }
@@ -142,4 +179,4 @@ export const useStyles = makeStyles((theme) => ({
     skeleton: {
         height: '240px'
     }
-}))
+}));

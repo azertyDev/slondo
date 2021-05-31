@@ -8,36 +8,64 @@ export const settings = {
             breakpoint: 1200,
             settings: {
                 slidesToShow: 6,
-                slidesToScroll: 6,
+                slidesToScroll: 6
             }
         },
         {
             breakpoint: 1000,
             settings: {
+                arrows: false,
                 slidesToShow: 5,
-                slidesToScroll: 5,
+                slidesToScroll: 1
             }
         },
         {
-            breakpoint: 800,
+            breakpoint: 780,
             settings: {
-                slidesToShow: 4,
-                slidesToScroll: 4,
+                arrows: false,
+                slidesToShow: 4.4,
+                slidesToScroll: 1
             }
         },
         {
-            breakpoint: 650,
+            breakpoint: 630,
             settings: {
-                slidesToShow: 3,
-                slidesToScroll: 3,
+                arrows: false,
+                slidesToShow: 3.5,
+                slidesToScroll: 1
             }
         },
         {
-            breakpoint: 450,
+            breakpoint: 575,
             settings: {
-                slidesToShow: 2,
-                slidesToScroll: 2,
+                arrows: false,
+                slidesToShow: 5,
+                slidesToScroll: 1
+            }
+        },
+        {
+            breakpoint: 490,
+            settings: {
+                arrows: false,
+                slidesToShow: 4.4,
+                slidesToScroll: 1
+            }
+        },
+        {
+            breakpoint: 420,
+            settings: {
+                arrows: false,
+                slidesToShow: 3.6,
+                slidesToScroll: 1
+            }
+        },
+        {
+            breakpoint: 360,
+            settings: {
+                arrows: false,
+                slidesToShow: 3.3,
+                slidesToScroll: 1
             }
         }
     ]
-}
+};

@@ -1,4 +1,4 @@
-import {FC, useEffect, useRef, useState} from 'react';
+import React, {FC, useEffect, useRef, useState} from 'react';
 import Link from 'next/link';
 import {WithT} from 'i18next';
 import {Grid, Hidden, TextField, Typography} from '@material-ui/core';
@@ -221,8 +221,8 @@ export const AuctionContent: FC<AuctionInfoPropsType> = (props) => {
                                             className="per-bet"
                                         >
                                             {item.outbid === 0
-                                             ? <span className='started-price'>Стартовая цена</span>
-                                             : `+ ${numberPrettier(item.outbid)}`}
+                                                ? <span className='started-price'>Стартовая цена</span>
+                                                : `+ ${numberPrettier(item.outbid)}`}
                                         </Typography>
                                     </div>
                                 </li>
@@ -232,11 +232,27 @@ export const AuctionContent: FC<AuctionInfoPropsType> = (props) => {
                     <Typography
                         variant="subtitle1"
                         color="initial"
-                        className="all-bets"
                         style={{cursor: 'pointer'}}
                         onClick={() => setShowAll(!showAll)}
                     >
-                        Все ставки
+                        {!showAll
+                            ?
+                            <Typography variant="subtitle1" className="show-hide-all-bet">
+                                {t('auction:allBets')}
+                                <svg width="13" height="8" viewBox="0 0 13 6" fill="none"
+                                     xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M0 0H13L6.5 6L0 0Z" fill="#675EAA"/>
+                                </svg>
+                            </Typography>
+                            :
+                            <Typography variant="subtitle1" className="show-hide-all-bet">
+                                {t('main:hide')}
+                                <svg width="13" height="8" viewBox="0 0 13 6" fill="none"
+                                     xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M13 6H0L6.5 0L13 6Z" fill="#675EAA"/>
+                                </svg>
+                            </Typography>
+                        }
                     </Typography>
                 </div>
                 {!postData.creator && (

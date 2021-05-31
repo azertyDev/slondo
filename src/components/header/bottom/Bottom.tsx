@@ -1,8 +1,8 @@
 import {useState} from 'react';
 import Link from 'next/link';
-import {AppBar, Avatar, Container, Grid, Hidden, Typography} from '@material-ui/core';
+import {AppBar, Avatar, Container, Grid, Hidden, IconButton, Typography} from '@material-ui/core';
 import {CustomButton} from '@src/components/elements/custom_button/CustomButton';
-import {HeaderSearchForm} from '@src/components/header/bottom/header_search_form/HeaderSearchForm';
+import {SearchForm} from '@src/components/header/bottom/search_form/SearchForm';
 import {withScrollThreshold} from '@src/hocs/withScrollThreshold';
 import {Logo} from '@src/components/elements/icons';
 import {AddIcon} from '@src/components/elements/icons/AddIcon';
@@ -10,6 +10,8 @@ import {CategorySortIcon} from '@src/components/elements/icons/CategorySortIcon'
 import {SignIcon} from '@src/components/elements/icons/SignIcon';
 import {CustomDrawer} from '@src/components/header/bottom/custom_drawer/CustomDrawer';
 import {useStyles} from './useStyles';
+import {Location} from '@src/components/elements/location/Location';
+import {Localization} from '@src/components/header/top/localization/Localization';
 
 
 const Bottom = (props) => {
@@ -85,7 +87,7 @@ const Bottom = (props) => {
                                 className="search-block"
                             >
                                 <Grid item xs>
-                                    <HeaderSearchForm/>
+                                    <SearchForm/>
                                 </Grid>
                             </Grid>
                             <Grid item md={2}>
@@ -111,28 +113,29 @@ const Bottom = (props) => {
                                 xs={1}
                             >
                                 {isAuth
-                                 ? <Link href='/cabinet/posts'>
-                                     <a>
-                                         <Avatar alt="Remy Sharp" src={avatar}/>
-                                     </a>
-                                 </Link>
-                                 : <CustomButton
-                                     className="bottom-sign-button header-button"
-                                     onClick={handleOpenModal}
-                                 >
-                                     <Typography variant="subtitle2">
-                                         {t('auth_reg:signIn')}
-                                     </Typography>
-                                     <SignIcon/>
-                                 </CustomButton>}
+                                    ? <Link href='/cabinet/posts'>
+                                        <a>
+                                            <Avatar alt="Remy Sharp" src={avatar}/>
+                                        </a>
+                                    </Link>
+                                    : <CustomButton
+                                        className="bottom-sign-button header-button"
+                                        onClick={handleOpenModal}
+                                    >
+                                        <Typography variant="subtitle2">
+                                            {t('auth_reg:signIn')}
+                                        </Typography>
+                                        <SignIcon/>
+                                    </CustomButton>}
                             </Grid>
                         </Grid>
                     </Container>
                 </AppBar>
             </Hidden>
             <Hidden lgUp>
-                <div className="select-local">
-                    <HeaderSearchForm/>
+                <div className="translate-local">
+                    <Location/>
+                    <Localization/>
                 </div>
             </Hidden>
             <CustomDrawer

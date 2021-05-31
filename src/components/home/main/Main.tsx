@@ -24,21 +24,24 @@ export const Main: FC = () => {
     const trigger = useScrollTrigger();
 
     const classes = useStyles();
+
     return (
         <main>
             <div className={classes.root}>
                 <div className="main-slider-wrapper">
                     <MainSlider/>
                 </div>
+                <div className="categories-slider-wrapper">
+                    <CategoriesSlider t={t}/>
+                </div>
                 <Container maxWidth="xl" className="content-wrapper">
-                    <div className="categories-slider-wrapper">
-                        <CategoriesSlider t={t}/>
-                    </div>
                     <Grid container>
                         <Grid item lg={9} xs={12} className='main-content'>
-                            <section className='posts-slider-wrapper'>
-                                <PostsSliderContainer/>
-                            </section>
+                            <Hidden mdDown>
+                                <section className='posts-slider-wrapper'>
+                                    <PostsSliderContainer/>
+                                </section>
+                            </Hidden>
                             <section>
                                 <PostsTabsContainer t={t}/>
                             </section>
@@ -49,27 +52,27 @@ export const Main: FC = () => {
                             </Grid>
                         </Hidden>
                     </Grid>
-                    <Hidden lgUp>
-                        <div className={classes.createAdBlock}>
-                            <Link href={'/post/create'}>
-                                <a>
-                                    <Slide
-                                        appear={false}
-                                        direction="up"
-                                        in={!trigger}
-                                    >
-                                        <div>
-                                            <Typography variant="h6">
-                                                {t('header:createPost')}
-                                            </Typography>
-                                        </div>
-                                    </Slide>
-                                </a>
-                            </Link>
-                        </div>
-                    </Hidden>
                     <SEOTextComponent/>
                 </Container>
+                <Hidden lgUp>
+                    <div className={classes.createAdBlock}>
+                        <Link href={'/post/create'}>
+                            <a>
+                                <Slide
+                                    appear={false}
+                                    direction="up"
+                                    in={!trigger}
+                                >
+                                    <div>
+                                        <Typography variant="h6">
+                                            {t('header:createPost')}
+                                        </Typography>
+                                    </div>
+                                </Slide>
+                            </a>
+                        </Link>
+                    </div>
+                </Hidden>
             </div>
         </main>
     );

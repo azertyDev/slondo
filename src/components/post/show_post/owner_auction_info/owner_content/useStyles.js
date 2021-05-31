@@ -44,14 +44,23 @@ export const useStyles = makeStyles((theme) => ({
                 display: 'flex',
                 alignItems: 'center',
                 width: '50%',
-                fontSize: 'calc(14px + 2 * (100vw / 1280))',
                 '& svg': {
-                    marginRight: '18px'
+                    marginRight: '18px',
+                    width: '18px',
+                    height: '22px',
+                    '& path': {
+                        fill: '#E88F00'
+                    }
                 }
             },
             '& h6': {
                 color: '#FFFFFF',
-                fontSize: 'calc(10px + 6 * (100vw / 1280))'
+                fontWeight: '700',
+                fontSize: '14px'
+            },
+            '& button': {
+                fontSize: '14px',
+                fontWeight: '500'
             }
         }
     }
