@@ -285,9 +285,12 @@ export const SearchForm: FC<SearchFormPropsType> = (props) => {
             }
         });
 
+        setValues({...values, ...vals});
+    };
+
+    const setInitVals = () => {
         setValues({
             ...values,
-            ...vals,
             category: subCtgr || ctgr || null,
             type: typeCtgr || null,
             post_type: postTypesList.find(type => type.id === +post_type) || null,
@@ -300,8 +303,12 @@ export const SearchForm: FC<SearchFormPropsType> = (props) => {
     };
 
     useEffect(() => {
+        setInitVals();
+    }, []);
+
+    useEffect(() => {
         setValsByParams();
-    }, [urlParams, filtersByCtgr]);
+    }, [filtersByCtgr]);
 
     useEffect(() => {
         setFiltersByCtgr();

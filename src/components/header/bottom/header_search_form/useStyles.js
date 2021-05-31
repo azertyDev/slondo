@@ -1,12 +1,15 @@
 import makeStyles from '@material-ui/core/styles/makeStyles'
 
-export const useStyles = makeStyles(() => ({
+export const useStyles = makeStyles((theme) => ({
     root: {
         '& form': {
             display: 'flex',
             position: 'relative',
             width: '100%',
             height: 38,
+            [theme.breakpoints.down('md')]: {
+                marginBottom: '10px'
+            },
             '& > div': {
                 height: '100%'
             },
@@ -17,7 +20,12 @@ export const useStyles = makeStyles(() => ({
             },
             '& > svg': {
                 left: '10px',
-                zIndex: 100
+                zIndex: 100,
+                [theme.breakpoints.down('md')]: {
+                    '& path': {
+                        fill: '#BDBDBD'
+                    }
+                }
             },
             '& img.filter-icon': {
                 right: '10px'

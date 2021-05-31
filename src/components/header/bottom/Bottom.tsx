@@ -1,17 +1,17 @@
 import {useState} from 'react';
 import Link from 'next/link';
-import {AppBar, Avatar, Container, Grid, Hidden, IconButton, Typography} from '@material-ui/core';
+import {AppBar, Avatar, Container, Grid, Hidden, Typography} from '@material-ui/core';
 import {CustomButton} from '@src/components/elements/custom_button/CustomButton';
-import {SearchForm} from '@src/components/header/bottom/search_form/SearchForm';
 import {withScrollThreshold} from '@src/hocs/withScrollThreshold';
 import {Logo} from '@src/components/elements/icons';
 import {AddIcon} from '@src/components/elements/icons/AddIcon';
 import {CategorySortIcon} from '@src/components/elements/icons/CategorySortIcon';
 import {SignIcon} from '@src/components/elements/icons/SignIcon';
 import {CustomDrawer} from '@src/components/header/bottom/custom_drawer/CustomDrawer';
-import {useStyles} from './useStyles';
 import {Location} from '@src/components/elements/location/Location';
 import {Localization} from '@src/components/header/top/localization/Localization';
+import {HeaderSearchForm} from '@src/components/header/bottom/header_search_form/HeaderSearchForm';
+import {useStyles} from './useStyles';
 
 
 const Bottom = (props) => {
@@ -87,7 +87,7 @@ const Bottom = (props) => {
                                 className="search-block"
                             >
                                 <Grid item xs>
-                                    <SearchForm/>
+                                    <HeaderSearchForm/>
                                 </Grid>
                             </Grid>
                             <Grid item md={2}>

@@ -1,4 +1,4 @@
-import React, {FC, useState} from 'react';
+import {FC, useState} from 'react';
 import Link from 'next/link';
 import {WithT} from 'i18next';
 import {useRouter} from 'next/router';
@@ -20,9 +20,9 @@ import {
     UserAvatarIcon
 } from '@src/components/elements/icons';
 import {Location} from '@src/components/elements/location/Location';
-import {useStyles} from './useStyles';
-import {SearchForm} from '@src/components/header/bottom/search_form/SearchForm';
 import {CustomButton} from '@src/components/elements/custom_button/CustomButton';
+import {HeaderSearchForm} from '@src/components/header/bottom/header_search_form/HeaderSearchForm';
+import {useStyles} from './useStyles';
 
 
 type TopHeaderPropsType = {
@@ -150,7 +150,7 @@ export const Top: FC<TopHeaderPropsType> = (props) => {
                                 </Grid>
                             </Toolbar>
                             <Box px={isXsDown ? '16px' : '24px'}>
-                                <SearchForm/>
+                                <HeaderSearchForm/>
                             </Box>
                         </AppBar>
                     </Slide>

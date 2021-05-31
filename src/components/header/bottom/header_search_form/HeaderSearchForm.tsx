@@ -1,7 +1,7 @@
 import {FC, useEffect} from 'react';
 import {useFormik} from 'formik';
 import {Hidden, Typography} from '@material-ui/core';
-import {FilterIcon, Search_icon} from '@src/components/elements/icons';
+import {Search_icon} from '@src/components/elements/icons';
 import {CustomButton} from '@src/components/elements/custom_button/CustomButton';
 import {useTranslation} from 'next-i18next';
 import {useRouter} from 'next/router';
@@ -68,15 +68,12 @@ export const HeaderSearchForm: FC = () => {
                     onChange={handleChange}
                     value={values.searchTxt}
                 />
-                <Hidden smDown>
+                <Hidden mdDown>
                     <CustomButton type='submit' className="search-button">
                         <Typography variant="subtitle2">
                             {t('searchBtn')}
                         </Typography>
                     </CustomButton>
-                </Hidden>
-                <Hidden mdUp>
-                    <FilterIcon/>
                 </Hidden>
             </CustomFormikProvider>
         </div>

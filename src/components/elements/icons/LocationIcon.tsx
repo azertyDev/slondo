@@ -1,9 +1,7 @@
-import React from 'react';
-
 export const LocationIcon = () => {
     return (
         <svg width="22" height="18" viewBox="0 0 21 18" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path fill-rule="evenodd" clip-rule="evenodd" d="M10.5 18L20.7887 13.7401H0L10.5 18Z"
+            <path fillRule="evenodd" clipRule="evenodd" d="M10.5 18L20.7887 13.7401H0L10.5 18Z"
                   fill="url(#paint778877_linear)"/>
             <path
                 d="M9.04847 7.51339C9.45232 7.91518 9.93189 8.11607 10.4872 8.11607C11.0425 8.11607 11.5094 7.91518 11.888 7.51339C12.2919 7.08482 12.4938 6.57589 12.4938 5.98661C12.4938 5.39732 12.2919 4.90179 11.888 4.5C11.5094 4.07143 11.0425 3.85714 10.4872 3.85714C9.93189 3.85714 9.45232 4.07143 9.04847 4.5C8.66987 4.90179 8.48056 5.39732 8.48056 5.98661C8.48056 6.57589 8.66987 7.08482 9.04847 7.51339ZM6.47395 1.76786C7.58453 0.589286 8.92227 0 10.4872 0C12.0521 0 13.3772 0.589286 14.4625 1.76786C15.5731 2.91964 16.1284 4.32589 16.1284 5.98661C16.1284 6.81696 15.9265 7.76786 15.5226 8.83929C15.144 9.91071 14.6771 10.9152 14.1218 11.8527C13.5665 12.7902 13.0112 13.6741 12.4559 14.5045C11.9259 15.308 11.4715 15.9509 11.0929 16.433L10.4872 17.1161C10.3357 16.9286 10.1338 16.6875 9.8814 16.3929C9.629 16.0714 9.17467 15.4554 8.51842 14.5446C7.86217 13.6071 7.28164 12.7098 6.77684 11.8527C6.29727 10.9688 5.85556 9.97768 5.45172 8.87946C5.04787 7.78125 4.84595 6.81696 4.84595 5.98661C4.84595 4.32589 5.38862 2.91964 6.47395 1.76786Z"
@@ -11,15 +9,15 @@ export const LocationIcon = () => {
             <defs>
                 <linearGradient id="paint778877_linear" x1="10.3943" y1="18.296" x2="10.3943" y2="13.7401"
                                 gradientUnits="userSpaceOnUse">
-                    <stop stop-color="#AD66D5"/>
-                    <stop offset="0.0117647" stop-color="#C492E0"/>
-                    <stop offset="0.258824" stop-color="#CFB6DC"/>
-                    <stop offset="1" stop-color="#F5F5F5"/>
+                    <stop stopColor="#AD66D5"/>
+                    <stop offset="0.0117647" stopColor="#C492E0"/>
+                    <stop offset="0.258824" stopColor="#CFB6DC"/>
+                    <stop offset="1" stopColor="#F5F5F5"/>
                 </linearGradient>
                 <linearGradient id="paint778888_linear" x1="4.84595" y1="9.98437" x2="13.3766" y2="5.2567"
                                 gradientUnits="userSpaceOnUse">
-                    <stop stop-color="#675EAA"/>
-                    <stop offset="1" stop-color="#AD66D5"/>
+                    <stop stopColor="#675EAA"/>
+                    <stop offset="1" stopColor="#AD66D5"/>
                 </linearGradient>
             </defs>
         </svg>
