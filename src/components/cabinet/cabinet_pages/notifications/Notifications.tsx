@@ -3,7 +3,7 @@ import {WithT} from 'i18next';
 import {CabinetWrapper} from '@src/components/cabinet/CabinetWrapper';
 import {Notification} from '@src/components/cabinet/cabinet_pages/notifications/notification_card/Notification';
 import {CustomButton} from '@src/components/elements/custom_button/CustomButton';
-import {CircularProgress, Typography, Box} from '@material-ui/core';
+import {Box, CircularProgress, Typography} from '@material-ui/core';
 import {CustomModal} from '@src/components/elements/custom_modal/CustomModal';
 import {CustomSnackbar} from '@src/components/elements/snackbar/Snackbar';
 import {useStyles} from './useStyles';
@@ -16,9 +16,9 @@ type NotificationsPropsType = {
     openModal: boolean,
     handleOpenModal: () => void,
     handleCloseModal: () => void,
+    handleCloseSnackbar: () => void,
     message?: string,
     openSnackbar?: boolean,
-    setOpenSnackbar,
     fetchUserPhone: (user_id) => () => void,
     phone: number,
     pagination: ReactElement
@@ -31,16 +31,17 @@ export const Notifications: FC<NotificationsPropsType> = (props) => {
         isFetch,
         handleDeleteNotification,
         handleDeleteAllNotification,
+        handleCloseSnackbar,
         openModal,
         fetchUserPhone,
         handleOpenModal,
         handleCloseModal,
         message,
         openSnackbar,
-        setOpenSnackbar,
         phone,
         pagination
     } = props;
+
 
     const title = 'Уведомления';
 
@@ -97,8 +98,8 @@ export const Notifications: FC<NotificationsPropsType> = (props) => {
             <CustomSnackbar
                 message={t(message)}
                 openSnackbar={openSnackbar}
-                setOpenSnackbar={setOpenSnackbar}
                 severity="success"
+                handleCloseSnackbar={handleCloseSnackbar}
             />
         </div>
     );

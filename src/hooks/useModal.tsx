@@ -1,7 +1,7 @@
 import {useState} from 'react';
 
-export default () => {
-    const [modalOpen, setModalOpen] = useState(false);
+export default (initState?) => {
+    const [modalOpen, setModalOpen] = useState(!!initState);
 
     const handleModalOpen = () => {
         setModalOpen(true);

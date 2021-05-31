@@ -44,6 +44,17 @@ export type CardDataType = {
             number_of_bets: number
         }
     },
+    observer?: {
+        number_of_views: number,
+        number_of_favorites: number,
+        number_of_notifications: number
+    },
+    reasons?: [
+        {
+            created_at: string,
+            reason: IdNameType
+        }
+    ]
     author: UserInfo,
     available_days: IdNameType[],
     available_start_time: string,
@@ -61,7 +72,6 @@ export type CardDataType = {
     favorite: boolean,
     id: number,
     image: string,
-    number_of_views: number,
     price: number,
     region: IdNameType,
     safe_deal: number,

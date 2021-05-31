@@ -170,6 +170,7 @@ export const FormPage: FC = () => {
 
             await userAPI.createPost(form);
 
+            console.log(form);
             setIsSuccess(true);
             setIsFetch(false);
         } catch (e) {

@@ -315,7 +315,7 @@ export const ListMode: FC<ViewPropsType> = ({list, handleModalOpen}) => {
                                             >
                                                 Имя Фамилия
                                             </Typography>
-                                            <Rating card/>
+                                            <Rating card readOnly/>
                                             <CustomButton className='write'>
                                                 <LetterIcon/>
                                                 <Typography

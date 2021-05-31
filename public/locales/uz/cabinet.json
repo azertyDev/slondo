@@ -16,7 +16,7 @@
     "myPurchases": "Buyurtmalarim",
     "settings": "Sozlamalar",
     "exit": "Chiqish",
-    "nonModerated": "Moderatsiyadan o'tmagan",
+    "bannedPosts": "Moderatsiyadan o'tmagan",
     "created_at": "Slondoda {{created_at}} yildan buyon",
     "sold_on_slondo": "Slondoda sotildi",
     "addToArchive": "Аrxivga qo'shish",

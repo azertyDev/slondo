@@ -6,7 +6,7 @@ export const useStyles = makeStyles((theme) => ({
             width: '100%',
             height: '38px',
         },
-        '& div.user-menu-wrapper': {
+        '& .user-menu-wrapper': {
             '& > div': {
                 marginBottom: '15px',
             },

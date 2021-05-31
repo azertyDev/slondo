@@ -357,7 +357,7 @@ export const CommonForm: FC<DefaultParamsPropsType> = (props) => {
                          </div>
                          <div>
                              <FormikTextarea
-                                 rowsMin={15}
+                                 rows={15}
                                  name='description'
                                  value={values.description}
                                  onBlur={handleBlur}

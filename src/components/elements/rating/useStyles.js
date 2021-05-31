@@ -1,6 +1,6 @@
-import { makeStyles, withStyles } from '@material-ui/core/styles'
-import Rating from '@material-ui/lab/Rating'
-import theme from '@src/theme'
+import {makeStyles, withStyles} from '@material-ui/core/styles';
+import Rating from '@material-ui/lab/Rating';
+import theme from '@src/theme';
 
 export const useStyles = makeStyles({
     root: {
@@ -10,15 +10,13 @@ export const useStyles = makeStyles({
             display: 'flex',
             alignItems: 'center',
             flexDirection: 'row-reverse',
-            '& > span.MuiRating-root': {
-                fontSize: '1rem',
+            '& .MuiRating-root': {
+                fontSize: '1rem'
             },
-            '& div.MuiBox-root': {
-                '& > h6.MuiTypography-subtitle1': {
-                    marginRight: '5px',
-                    fontWeight: 600,
-                },
-            },
+            '& .MuiTypography-subtitle1': {
+                marginRight: '5px',
+                fontWeight: 600
+            }
         },
         '& > div:last-child': {
             marginLeft: theme.spacing(1),

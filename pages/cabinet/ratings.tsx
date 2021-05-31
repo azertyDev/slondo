@@ -1,9 +1,9 @@
 import React, {FC} from 'react';
-import RatingContainer from "@src/components/cabinet/cabinet_pages/rating/RatingContainer";
+import RatingsContainer from "@src/components/cabinet/cabinet_pages/rating/RatingsContainer";
 import {GetStaticProps} from "next";
 import {serverSideTranslations} from "next-i18next/serverSideTranslations";
 
-const Rating: FC = () => <RatingContainer/>;
+const Ratings: FC = () => <RatingsContainer/>;
 
 export const getStaticProps: GetStaticProps = async ({locale}) => ({
     props: {
@@ -14,4 +14,4 @@ export const getStaticProps: GetStaticProps = async ({locale}) => ({
     }
 });
 
-export default Rating;
+export default Ratings;
