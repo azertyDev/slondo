@@ -2,11 +2,16 @@ import {makeStyles} from '@material-ui/core/styles';
 
 export const useStyles = makeStyles(({palette, breakpoints}) => ({
     root: {
-        [breakpoints.down('sm')]: {},
+        [breakpoints.down('sm')]: {
+            marginBottom: 0
+        },
         marginBottom: '20px',
         '& div.form-block': {
             '& div.server-error': {
                 margin: '20px 0',
+                [breakpoints.down('sm')]: {
+                    margin: '30px 0'
+                },
                 '& p': {
                     textAlign: 'center',
                     fontSize: '0.875rem'
@@ -15,6 +20,9 @@ export const useStyles = makeStyles(({palette, breakpoints}) => ({
             '& div.tabs-container': {
                 '& div.tabs': {
                     width: '100%',
+                    [breakpoints.down('sm')]: {
+                        marginBottom: '15px'
+                    },
                     '& div.MuiTabs-flexContainer': {
                         justifyContent: 'center'
                     },
@@ -72,6 +80,10 @@ export const useStyles = makeStyles(({palette, breakpoints}) => ({
             display: 'flex',
             justifyContent: 'center',
             marginTop: '30px !important',
+            [breakpoints.down('sm')]: {
+                marginTop: '43px !important',
+                marginBottom: '17px'
+            },
             '& button': {
                 color: '#fff',
                 background: 'linear-gradient(49.94deg, #675EAA 19.03%, #AD66D5 72.72%)',
@@ -88,6 +100,9 @@ export const useStyles = makeStyles(({palette, breakpoints}) => ({
                 fontSize: '0.875rem',
                 lineHeight: '16px',
                 padding: '0 20px',
+                [breakpoints.down('sm')]: {
+                    padding: 0
+                },
                 '& > a': {
                     color: palette.primary.main,
                     textDecoration: 'none'

@@ -17,7 +17,7 @@ export const ResponsiveDialog: FC<ResponsiveDialogPropsType> = (props) => {
         handleCloseDialog,
     } = props;
 
-    const fullScreen = useMediaQuery(useTheme().breakpoints.down('sm'));
+    const fullScreen = useMediaQuery(useTheme().breakpoints.down('xs'));
 
     const classes = useStyles();
 

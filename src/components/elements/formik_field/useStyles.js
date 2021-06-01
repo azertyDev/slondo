@@ -6,10 +6,23 @@ export const useStyles = makeStyles((theme) => ({
         height: '72px',
         [theme.breakpoints.down('md')]: {
             height: '100%',
-            // width: '97%',
             '& input': {
                 padding: '11.5px 14px',
                 fontSize: 'calc(14px + 2 * (100vw / 1280))'
+            }
+        },
+        [theme.breakpoints.down('sm')]: {
+            '& div.label-wrapper > h6 > strong': {
+                fontWeight: '400'
+            },
+            '& div.label-wrapper': {
+                marginBottom: '6px'
+            },
+            '&:first-child': {
+                marginBottom: '30px'
+            },
+            '&:nth-child(2)': {
+                marginBottom: '6px'
             }
         },
         '& div.helpers-content': {

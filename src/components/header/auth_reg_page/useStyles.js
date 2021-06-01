@@ -48,12 +48,14 @@ export const useStyles = makeStyles((theme) => ({
             borderBottomRightRadius: '10px',
             position: 'relative',
             padding: '19px 16px',
+            [theme.breakpoints.down('md')]: {
+                padding: '50px 16px 0'
+            },
             height: '100%',
             '& > div.close-btn-wrapper': {
                 position: 'absolute',
-                right: '-10px',
-                top: '-10px',
-                background: '#EB5757',
+                right: '15px',
+                top: '15px',
                 borderRadius: '100%',
                 padding: '6px',
                 width: '24px',
@@ -62,7 +64,10 @@ export const useStyles = makeStyles((theme) => ({
                 alignItems: 'center',
                 justifyContent: 'center',
                 '& > button.MuiIconButton-root': {
-                    padding: '5px'
+                    padding: '5px',
+                    '& span > svg > path': {
+                        fill: '#494A61'
+                    }
 
                 },
                 '&:hover': {
@@ -77,9 +82,10 @@ export const useStyles = makeStyles((theme) => ({
         },
 
         // Adaptive =============================================================================
-
-        '& div.welcome-block': {
-            textAlign: 'center'
+        '& div.welcome-block > h6': {
+            textAlign: 'center',
+            fontSize: '22px',
+            lineHeight: '24px'
         }
     }
 }));

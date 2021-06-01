@@ -1,5 +1,5 @@
 import {FC, useEffect, useState} from 'react';
-import {Grid, Hidden, IconButton, Modal, Typography} from '@material-ui/core';
+import {Container, Grid, Hidden, IconButton, Modal, Typography} from '@material-ui/core';
 import {useTranslation} from 'next-i18next';
 import {
     AdsIcon,
@@ -198,26 +198,33 @@ export const AuthRegPage: FC<AuthRegPageType> = (props) => {
                 </Hidden>
                 {/*--------------------------------> Mobile <------------------------------------------*/}
                 <Hidden mdUp>
-                    <div className='welcome-block'>
-                        <Typography variant="h6" color="initial">
-                            {t('welcome')}
-                        </Typography>
+                    <div className='auth-reg-block'>
+                        <div className='close-btn-wrapper' onClick={handleCloseModal}>
+                            <IconButton>
+                                <CloseIcon/>
+                            </IconButton>
+                        </div>
+                        <div className='welcome-block'>
+                            <Typography variant="h6" color="initial">
+                                {t('welcome')}
+                            </Typography>
+                        </div>
+                        <AuthRegContainer
+                            t={t}
+                            activeTimer={activeTimer}
+                            timer={timer}
+                            tabIndex={tabIndex}
+                            errorMsg={errorMsg}
+                            setErrorMsg={setErrorMsg}
+                            isRecoveryPswd={isRecoveryPswd}
+                            isSignInTab={isSignInTab}
+                            handleCancel={handleCancel}
+                            handleForgetPass={handleForgetPass}
+                            tabsHandler={tabsHandler}
+                            handleActiveTimer={handleActiveTimer}
+                            handleCloseModal={handleCloseModal}
+                        />
                     </div>
-                    <AuthRegContainer
-                        t={t}
-                        timer={timer}
-                        activeTimer={activeTimer}
-                        tabIndex={tabIndex}
-                        errorMsg={errorMsg}
-                        setErrorMsg={setErrorMsg}
-                        isRecoveryPswd={isRecoveryPswd}
-                        isSignInTab={isSignInTab}
-                        handleCancel={handleCancel}
-                        handleForgetPass={handleForgetPass}
-                        tabsHandler={tabsHandler}
-                        handleActiveTimer={handleActiveTimer}
-                        handleCloseModal={handleCloseModal}
-                    />
                 </Hidden>
             </div>
         </ResponsiveDialog>
