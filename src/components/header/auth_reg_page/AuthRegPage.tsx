@@ -1,11 +1,10 @@
 import {FC, useEffect, useState} from 'react';
-import {Container, Grid, Hidden, IconButton, Modal, Typography} from '@material-ui/core';
+import {Grid, Hidden, IconButton, Typography} from '@material-ui/core';
 import {useTranslation} from 'next-i18next';
 import {
     AdsIcon,
     BonusIcon,
     CloseIcon,
-    PrevArrowIcon,
     RatingIcon,
     SafeBuyingIcon,
     TorgIcon
@@ -16,35 +15,6 @@ import {setIsAuthModalOpen} from '@src/redux/slices/userSlice';
 import {useDispatch} from 'react-redux';
 import {ResponsiveDialog} from '@src/components/elements/responsive_dialog/ResponsiveDialog';
 
-
-const settings = {
-    arrows: false,
-    slidesToShow: 3,
-    slidesToScroll: 1,
-    centerMode: true,
-    swipeToSlide: true,
-    responsive: [
-        {
-            breakpoint: 650,
-            settings: {
-                slidesToShow: 2
-            }
-        },
-        {
-            breakpoint: 480,
-            settings: {
-                slidesToShow: 1
-            }
-        }
-    ]
-};
-
-const list = [
-    {name: 'Акции и бонусы'},
-    {name: 'Помощь'},
-    {name: 'Служба поддержки'},
-    {name: 'Политика конфидециальности'}
-];
 
 type AuthRegPageType = {
     modalOpen: boolean,
@@ -62,7 +32,7 @@ export const AuthRegPage: FC<AuthRegPageType> = (props) => {
 
     const {t} = useTranslation('auth_reg');
 
-    const [isAuthRegClicked, setIsAuthRegClicked] = useState(false);
+    const [setIsAuthRegClicked] = useState(false);
     const [tabIndex, setTabIndex] = useState(0);
     const [errorMsg, setErrorMsg] = useState('');
     const [isRecoveryPswd, setIsRecoveryPswd] = useState(false);
@@ -89,14 +59,6 @@ export const AuthRegPage: FC<AuthRegPageType> = (props) => {
     const handleForgetPass = () => {
         setTabIndex(1);
         setIsRecoveryPswd(true);
-    };
-
-    const authRegClickHandler = (value) => () => {
-        setIsAuthRegClicked(value);
-    };
-
-    const handleBack = () => {
-        setIsAuthRegClicked(false);
     };
 
     const handleActiveTimer = (value: boolean) => () => {
@@ -164,7 +126,7 @@ export const AuthRegPage: FC<AuthRegPageType> = (props) => {
                         </Grid>
                         <Grid item xs={7}>
                             <div className='auth-reg-block'>
-                                <div className='close-btn-wrapper' onClick={handleCloseModal}>
+                                <div className='close-btn-wrapper' onClick={handleModalClose}>
                                     <IconButton>
                                         <CloseIcon/>
                                     </IconButton>
@@ -198,12 +160,12 @@ export const AuthRegPage: FC<AuthRegPageType> = (props) => {
                 </Hidden>
                 {/*--------------------------------> Mobile <------------------------------------------*/}
                 <Hidden mdUp>
+                    <div className='close-btn-wrapper' onClick={handleModalClose}>
+                        <IconButton>
+                            <CloseIcon/>
+                        </IconButton>
+                    </div>
                     <div className='auth-reg-block'>
-                        <div className='close-btn-wrapper' onClick={handleCloseModal}>
-                            <IconButton>
-                                <CloseIcon/>
-                            </IconButton>
-                        </div>
                         <div className='welcome-block'>
                             <Typography variant="h6" color="initial">
                                 {t('welcome')}

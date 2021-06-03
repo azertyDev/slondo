@@ -69,24 +69,26 @@ export const AuthForm: FC<AuthFormPropsType> = (props) => {
     return (
         <FormikProvider value={formik}>
             <Form onSubmit={formik.handleSubmit}>
-                <FormikField
-                    t={t}
-                    type="tel"
-                    name="phone"
-                    labelText='enter_phone'
-                    value={values.phone}
-                    onChange={handleInput}
-                    errorMsg={getErrorMsg(errors.phone, touched.phone, t)}
-                />
-                <FormikField
-                    t={t}
-                    type="password"
-                    name="password"
-                    labelText='enter_password'
-                    value={values.password}
-                    onChange={handleInput}
-                    errorMsg={getErrorMsg(errors.password, touched.password, t)}
-                />
+                <div className="formik-num-pass">
+                    <FormikField
+                        t={t}
+                        type="tel"
+                        name="phone"
+                        labelText='enter_phone'
+                        value={values.phone}
+                        onChange={handleInput}
+                        errorMsg={getErrorMsg(errors.phone, touched.phone, t)}
+                    />
+                    <FormikField
+                        t={t}
+                        type="password"
+                        name="password"
+                        labelText='enter_password'
+                        value={values.password}
+                        onChange={handleInput}
+                        errorMsg={getErrorMsg(errors.password, touched.password, t)}
+                    />
+                </div>
                 <div className='forget-password'>
                     <Typography
                         variant="subtitle1"
@@ -96,7 +98,7 @@ export const AuthForm: FC<AuthFormPropsType> = (props) => {
                         {t('forget_password')}
                     </Typography>
                 </div>
-                <div className='auth-btns'>
+                <div className='auth-btns sing-in'>
                     <CustomButton type="submit">
                         {t('signIn')}
                     </CustomButton>

@@ -14,8 +14,7 @@ export const useStyles = makeStyles((theme) => ({
             flexDirection: 'column',
             height: '100%',
             padding: '45px 0',
-            backgroundImage:
-                'linear-gradient(rgba(0,0,0,.6), rgba(0,0,0,.6)), url("/img/modal-image.jpg")',
+            backgroundImage: 'linear-gradient(rgba(0,0,0,.6), rgba(0,0,0,.6)), url("/img/modal-image.jpg")',
             backgroundSize: 'cover',
             '& svg': {
                 marginRight: 20,
@@ -48,44 +47,63 @@ export const useStyles = makeStyles((theme) => ({
             borderBottomRightRadius: '10px',
             position: 'relative',
             padding: '19px 16px',
-            [theme.breakpoints.down('md')]: {
-                padding: '50px 16px 0'
+            [theme.breakpoints.down('sm')]: {
+                padding: '50px 16px 0',
+                height: '500px'
+            },
+            [theme.breakpoints.down('xs')]: {
+                height: '548px'
             },
             height: '100%',
-            '& > div.close-btn-wrapper': {
-                position: 'absolute',
-                right: '15px',
-                top: '15px',
-                borderRadius: '100%',
-                padding: '6px',
-                width: '24px',
-                height: '24px',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                '& > button.MuiIconButton-root': {
-                    padding: '5px',
-                    '& span > svg > path': {
-                        fill: '#494A61'
-                    }
-
-                },
-                '&:hover': {
-                    cursor: 'pointer'
-                }
-            },
             '& > div.welcome-block > h6.MuiTypography-subtitle1': {
                 color: 'rgba(49, 49, 49, 0.6)',
                 paddingRight: '100px',
                 marginTop: '8px'
             }
         },
-
+        '& div.close-btn-wrapper': {
+            position: 'absolute',
+            right: '15px',
+            top: '15px',
+            borderRadius: '100%',
+            padding: '6px',
+            width: '24px',
+            height: '24px',
+            zIndex: '1000',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            '& > button.MuiIconButton-root': {
+                padding: '5px',
+                '& span > svg > path': {
+                    fill: '#494A61'
+                }
+            },
+            '&:hover': {
+                cursor: 'pointer'
+            }
+        },
+        '& div.rec-pass': {
+            justifyContent: 'space-between',
+            '& button': {
+                width: '49%',
+                '&:first-child': {
+                    color: '#4E4E4E',
+                    background: '#FFFFFF',
+                    boxShadow: '0px 1px 2px rgba(0, 0, 0, 0.25)'
+                },
+                '&:last-child': {
+                    fontSize: '13px'
+                }
+            }
+        },
         // Adaptive =============================================================================
         '& div.welcome-block > h6': {
-            textAlign: 'center',
-            fontSize: '22px',
-            lineHeight: '24px'
+            [theme.breakpoints.down('sm')]: {
+                textAlign: 'center',
+                fontSize: '22px',
+                lineHeight: '24px'
+            }
         }
     }
 }));

@@ -69,13 +69,9 @@ export const RecoveryContainer: FC<ConfirmAuthPropsType> = (props) => {
                             setPhone={setPhone}
                             setErrorMsg={setErrorMsg}
                             activateTimer={handleActiveTimer(true)}
+                            handleRecoveryCancel={handleCancel}
                         />
                     </div>}
-            <div className='auth-btns'>
-                <CustomButton onClick={handleCancel}>
-                    {t('common:cancel')}
-                </CustomButton>
-            </div>
         </div>
     )
 };
