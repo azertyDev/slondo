@@ -15,14 +15,13 @@ export type CommonParamsPropsType = {
     type?,
     filters,
     isPreview?: boolean,
-    isSearch?: boolean,
     onSubmit: (v) => void,
     currentFormIndex: number,
     handleFormOpen: (k) => () => void
 } & WithT;
 
 type ParamsFormPropsType = {
-    type?,
+    type,
     filters,
     isPreview?: boolean,
     currentFormIndex: number,
@@ -87,6 +86,7 @@ export const ParamsFormContainer: FC<ParamsFormPropsType> = (props) => {
             case 'land':
                 return <LandParams
                     t={t}
+                    type={type}
                     isPreview={isPreview}
                     filters={filters}
                     onSubmit={onSubmit}
@@ -96,6 +96,7 @@ export const ParamsFormContainer: FC<ParamsFormPropsType> = (props) => {
             case 'parkingLotsAndBoxes':
                 return <ParkingLotsBoxes
                     t={t}
+                    type={type}
                     isPreview={isPreview}
                     filters={filters}
                     onSubmit={onSubmit}
@@ -105,6 +106,7 @@ export const ParamsFormContainer: FC<ParamsFormPropsType> = (props) => {
             case 'commercialProperty':
                 return <CommercialPropertyParams
                     t={t}
+                    type={type}
                     filters={filters}
                     isPreview={isPreview}
                     onSubmit={onSubmit}

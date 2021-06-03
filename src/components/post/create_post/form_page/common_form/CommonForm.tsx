@@ -4,7 +4,6 @@ import {useSelector} from 'react-redux';
 import {Grid} from '@material-ui/core';
 import {AuctionParams} from './auction_params/AuctionParams';
 import {SiteServices} from './site_services/SiteServices';
-import {Description} from './description/Description';
 import {Contacts} from './contacts/Contacts';
 import {AvailableDays} from './available_days/AvailableDays';
 import {numberRegEx, timeRegEx} from '@src/common_data/reg_exs';
@@ -341,7 +340,7 @@ export const CommonForm: FC<DefaultParamsPropsType> = (props) => {
                                  t={t}
                                  values={values}
                                  isAuction={isAuction}
-                                 categoryName={categoryName}
+                                 mainCategoryName={categoryName}
                                  handleCheckbox={handleCheckboxChange}
                              />
                          </div>

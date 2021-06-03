@@ -6,22 +6,30 @@ import {getErrorMsg} from '@src/helpers';
 import {BodySelect} from '@src/components/elements/body_select/BodySelect';
 import {FormikField} from '@src/components/elements/formik_field/FormikField';
 import {CommonFiltersType} from '@src/components/search_posts_by_filters/search_form/SearchForm';
+import {useFormik} from 'formik';
+import {useHandlers} from '@src/hooks/useHandlers';
 
 
 export const CarForm: FC<CommonFiltersType> = (props) => {
     const {
-        formik,
+        onSubmit,
         filters,
-        handleInput,
-        handleSelect
     } = props;
+
+    const formik = useFormik<any>({
+        initialValues: {},
+        onSubmit
+    });
 
     const {
         values,
+        setValues,
         errors,
         touched,
         handleBlur
     } = formik;
+
+    const {handleSelect, handleInput} = useHandlers(values, setValues);
 
     const {t} = useTranslation('filters');
 

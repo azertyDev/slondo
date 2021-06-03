@@ -10,7 +10,7 @@ type CustomSelectPropsType = {
     labelTxt?: string,
     multiple?: boolean,
     values,
-    onBlur,
+    onBlur?,
     items: any[];
     handleSelect: (k, v) => void,
     disableRequire?: boolean,
@@ -69,14 +69,13 @@ export const DropDownSelect: FC<CustomSelectPropsType> = (props) => {
                  )}
              </Typography>}
             <Select
+                variant='outlined'
                 name={name}
                 onBlur={onBlur}
                 multiple={multiple}
                 disabled={!items.length}
                 onChange={onChange}
                 renderValue={selectedHandle}
-                variant='outlined'
-                label={<Typography>test</Typography>}
                 className={'select-wrapper' + `${errorMsg ? ' error-border' : ''}`}
                 value={multiple ? values[name] || [] : values[name]?.id ?? 0}
             >

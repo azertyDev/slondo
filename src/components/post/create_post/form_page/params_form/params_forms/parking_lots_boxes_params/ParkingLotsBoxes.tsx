@@ -11,21 +11,26 @@ import {useFormik} from 'formik';
 import {paramsFormSchema} from '@root/validation_schemas/createPostSchemas';
 import {PostTitle} from '@src/components/post/create_post/form_page/params_form/post_title/PostTitle';
 import {CustomFormikProvider} from '@src/components/elements/custom_formik_provider/CustomFormikProvider';
+import {CustomAccordion} from '@src/components/elements/accordion/CustomAccordion';
+import {ParametersIcon} from '@src/components/elements/icons';
 import {useStyles} from './useStyles';
 
 
 export const ParkingLotsBoxes: FC<CommonParamsPropsType> = (props) => {
     const {
-        isSearch,
         t,
         filters,
         type,
         onSubmit,
-        isPreview
+        isPreview,
+        currentFormIndex,
+        handleFormOpen
     } = props;
 
-    const initVals: any = {};
-    if (!isSearch) initVals.title = '';
+    const initVals: any = {
+        title: '',
+        estate_type: null
+    };
 
     const formik = useFormik({
         onSubmit,
@@ -46,72 +51,81 @@ export const ParkingLotsBoxes: FC<CommonParamsPropsType> = (props) => {
     const classes = useStyles();
     return (
         <div className={classes.root}>
-            <CustomFormikProvider formik={formik} submitTxt={!isSearch ? 'appearance' : null}>
-                {!isSearch && (
+            <CustomFormikProvider formik={formik}>
+                <CustomAccordion
+                    submitTxt='appearance'
+                    icon={<ParametersIcon/>}
+                    isPreview={isPreview}
+                    title={t('parameters')}
+                    open={currentFormIndex === 3}
+                    isEditable={currentFormIndex < 3}
+                    handleEdit={handleFormOpen(3)}
+                >
                     <Grid item xs={6}>
                         <PostTitle isPreview={isPreview} title={values.title} formik={formik} t={t}/>
                     </Grid>
-                )}
-                {isPreview
-                 ? <PreviewValues t={t} values={values}/>
-                 : <>
-                     <Grid container spacing={2}>
-                         <Grid item container xs={12} alignItems='center'>
-                             <DeployedSelect
-                                 t={t}
-                                 formik={formik}
-                                 name='estate_type'
-                                 options={filters.estate_type}
-                                 handleSelect={handleSelect}
-                             />
-                         </Grid>
-                         <Grid item container xs={4}>
-                             <FormikField
-                                 t={t}
-                                 name='area'
-                                 labelText='area'
-                                 value={values.area ?? ''}
-                                 errorMsg={getErrorMsg(errors.area, touched.area, t)}
-                             />
-                         </Grid>
-                         <Grid item container xs={4}>
-                             <FormikField
-                                 t={t}
-                                 name='parking_spaces'
-                                 labelText='parking_spaces'
-                                 value={values.parking_spaces ?? ''}
-                                 errorMsg={getErrorMsg(errors.parking_spaces, touched.parking_spaces, t)}
-                             />
-                         </Grid>
-                         {type.id !== 1 && (
+                    {isPreview
+                     ? <PreviewValues t={t} values={values}/>
+                     : <>
+                         <Grid container spacing={2}>
+                             <Grid item container xs={12} alignItems='center'>
+                                 <DeployedSelect
+                                     t={t}
+                                     values={values}
+                                     name='estate_type'
+                                     options={filters.estate_type}
+                                     handleSelect={handleSelect}
+                                     errorMsg={getErrorMsg(errors.estate_type, touched.estate_type, t)}
+                                 />
+                             </Grid>
                              <Grid item container xs={4}>
+                                 <FormikField
+                                     t={t}
+                                     name='area'
+                                     labelText='area'
+                                     value={values.area ?? ''}
+                                     errorMsg={getErrorMsg(errors.area, touched.area, t)}
+                                 />
+                             </Grid>
+                             <Grid item container xs={4}>
+                                 <FormikField
+                                     t={t}
+                                     name='parking_spaces'
+                                     labelText='parking_spaces'
+                                     value={values.parking_spaces ?? ''}
+                                     errorMsg={getErrorMsg(errors.parking_spaces, touched.parking_spaces, t)}
+                                 />
+                             </Grid>
+                             {type.id !== 1 && (
+                                 <Grid item container xs={4}>
+                                     <DropDownSelect
+                                         t={t}
+                                         name='payments'
+                                         items={filters.payments}
+                                         values={values}
+                                         onBlur={handleBlur}
+                                         handleSelect={handleSelect}
+                                     />
+                                 </Grid>)}
+                             <Grid
+                                 item
+                                 container
+                                 sm={4}
+                                 xs={12}
+                             >
                                  <DropDownSelect
                                      t={t}
-                                     name='payments'
-                                     items={filters.payments}
+                                     name='posted'
                                      values={values}
                                      onBlur={handleBlur}
+                                     items={filters.posted}
                                      handleSelect={handleSelect}
+                                     errorMsg={getErrorMsg(errors.posted, touched.posted, t)}
                                  />
-                             </Grid>)}
-                         <Grid
-                             item
-                             container
-                             sm={4}
-                             xs={12}
-                         >
-                             <DropDownSelect
-                                 t={t}
-                                 name='posted'
-                                 values={values}
-                                 onBlur={handleBlur}
-                                 items={filters.posted}
-                                 handleSelect={handleSelect}
-                                 errorMsg={getErrorMsg(errors.posted, touched.posted, t)}
-                             />
+                             </Grid>
                          </Grid>
-                     </Grid>
-                 </>}
+                     </>}
+                </CustomAccordion>
             </CustomFormikProvider>
         </div>
     );

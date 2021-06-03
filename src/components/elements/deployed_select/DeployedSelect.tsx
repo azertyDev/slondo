@@ -8,7 +8,9 @@ import {useStyles} from './useStyles';
 
 type SelectOptionsPropsType = {
     name: string,
-    formik,
+    disableRequire?: boolean,
+    values,
+    errorMsg?: string,
     handleSelect: (n, v) => void,
     options: any[]
 } & WithT;
@@ -17,16 +19,12 @@ export const DeployedSelect: FC<SelectOptionsPropsType> = (props) => {
     const {
         t,
         name,
-        formik,
+        values,
+        disableRequire,
         handleSelect,
+        errorMsg,
         options = []
     } = props;
-
-    const {
-        values,
-        errors,
-        touched
-    } = formik;
 
     const handleClick = (item) => () => {
         handleSelect(name, item);
@@ -38,7 +36,7 @@ export const DeployedSelect: FC<SelectOptionsPropsType> = (props) => {
             <Typography variant="subtitle1">
                 <strong>
                     {t(`filters:${name}`)}
-                    {isRequired(name) && <span className='error-text'>*&nbsp;</span>}
+                    {!disableRequire && isRequired(name) && <span className='error-text'>*&nbsp;</span>}
                 </strong>
             </Typography>
             <div className='options'>
@@ -52,13 +50,13 @@ export const DeployedSelect: FC<SelectOptionsPropsType> = (props) => {
                     </CustomButton>
                 )}
             </div>
-            <Typography variant="subtitle1">
-                {errors[name] && touched[name] && (
-                    <span className='error-text'>
-                        {t(`errors:${errors[name]}`)}
+            {errorMsg !== '' && (
+                <Typography variant="subtitle1">
+                        <span className='error-text'>
+                        {errorMsg}
                     </span>
-                )}
-            </Typography>
+                </Typography>
+            )}
         </div>
     );
 };

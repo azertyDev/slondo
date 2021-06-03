@@ -170,7 +170,6 @@ export const FormPage: FC = () => {
 
             await userAPI.createPost(form);
 
-            console.log(form);
             setIsSuccess(true);
             setIsFetch(false);
         } catch (e) {
@@ -203,6 +202,7 @@ export const FormPage: FC = () => {
                          t={t}
                          filters={filtersData}
                          isPreview={isPreview}
+                         type={type}
                          subCategory={subCategory}
                          currentFormIndex={currentFormIndex}
                          handleSubmit={handleSubmit}
