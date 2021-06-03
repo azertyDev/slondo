@@ -155,10 +155,6 @@ export const MyAuctionsContainer: FC = () => {
     const {modalOpen: openDialog, handleModalOpen: handleOpenDialog, handleModalClose: handleCloseDialog} = useModal();
     const {modalOpen, handleModalOpen, handleModalClose} = useModal();
 
-    const indexOfLastPost = page * ITEMS_PER_PAGE;
-    const indexOfFirstPost = indexOfLastPost - ITEMS_PER_PAGE;
-    const currentNotifications = notification.data.slice(indexOfFirstPost, indexOfLastPost);
-
     const handleChildTabChange = (event, newValue) => {
         setChildTabValue(newValue);
     };
@@ -167,11 +163,16 @@ export const MyAuctionsContainer: FC = () => {
         setPage(value);
     };
 
-    const fetchAuctionNotifications = (post) => async () => {
+    const fetchAuctionNotifications = post => async () => {
         try {
             if (post.id !== selectedAuction.id) {
+                const params = {
+                    page,
+                    itemsPerPage: ITEMS_PER_PAGE,
+                    ads_id: post.id
+                };
                 setNotification({...notification, isFetch: true});
-                const {data, total} = await userAPI.getNotificationById(post.id);
+                const {data, total} = await userAPI.getNotificationById(params);
                 setPageCount(total);
                 setSelectedAuction({...selectedAuction, ...post});
                 setNotification({...notification, data, isFetch: false});
@@ -658,7 +659,7 @@ export const MyAuctionsContainer: FC = () => {
                     pagination={pagination}
                     auctionTabs={createdAuctionTabs}
                     selectedAuction={selectedAuction}
-                    currentNotifications={currentNotifications}
+                    currentNotifications={notification.data}
                     ModalContent={ModalContent}
                     handleClose={handleModalClose}
                     handleDeleteNotification={handleDeleteNotification}

@@ -19,8 +19,8 @@ import {formatNumber, numberPrettier, transformCyrillic, weekDaysHelper} from '@
 import Countdown from 'react-countdown';
 import {useRouter} from 'next/router';
 import {CardDataType} from '@root/interfaces/Cabinet';
-import {useStyles} from './useStyles';
 import {WithT} from 'i18next';
+import {useStyles} from './useStyles';
 
 type CabinetCardPropsType = {
     cardData: CardDataType,
