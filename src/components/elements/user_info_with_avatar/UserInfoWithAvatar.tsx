@@ -42,9 +42,9 @@ export const UserInfoWithAvatar: FC<UserInfoWithAvatarPropsType> = (props) => {
                         })}
                     </Typography>
                     <Rating
-                        card={false}
                         readOnly
-                        ratingValue={owner.rating?.slice(0, 3)}
+                        card='false'
+                        ratingValue={Math.round(owner.rating)}
                         ratingCount={owner.observer?.number_of_ratings}
                     />
                     {isOwner && (

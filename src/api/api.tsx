@@ -426,5 +426,22 @@ export const userAPI = {
             .catch(err => {
                 throw err;
             });
+    },
+    setReplyComment: (comment_id: number, comment: string): Promise<{message: string}> => {
+        return instance.post('regular/user/comment', {
+            comment_id,
+            comment
+        }, setTokenToHeader())
+            .then(res => res.data)
+            .catch(err => {
+                throw err;
+            });
+    },
+    getUserInfoById: (user_id: string): Promise<any> => {
+        return instance.get(`user/${user_id}`, setTokenToHeader())
+            .then(res => res.data)
+            .catch(err => {
+                throw err;
+            });
     }
 };
