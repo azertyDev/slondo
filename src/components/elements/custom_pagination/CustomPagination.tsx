@@ -1,27 +1,29 @@
-import React, {FC} from 'react';
+import {FC} from 'react';
 import Pagination from '@material-ui/lab/Pagination';
 
 
 export type CustomPaginationTypes = {
-    pageCount: number;
-    currentPage?: number;
-    handlePaginationPage: (_: unknown, pageNumber: number) => void;
+    pageCount: number,
+    currentPage?: number,
+    itemsPerPage: number,
+    handlePagePagination: (_: unknown, pageNumber: number) => void
 };
 
 export const CustomPagination: FC<CustomPaginationTypes> = (props) => {
     const {
         pageCount,
+        itemsPerPage,
         currentPage,
-        handlePaginationPage
+        handlePagePagination
     } = props;
 
     return (
         <Pagination
-            count={pageCount}
+            count={Math.ceil(pageCount / itemsPerPage)}
             page={currentPage}
-            onChange={handlePaginationPage}
+            onChange={handlePagePagination}
             shape="rounded"
             variant="outlined"
         />
     );
-}
+};

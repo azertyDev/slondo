@@ -1,7 +1,6 @@
 import {FC} from 'react';
 import {WithT} from 'i18next';
-import {Typography} from '@material-ui/core';
-import {FormikField} from '@src/components/elements/formik_field/FormikField';
+import {TextField, Typography} from '@material-ui/core';
 import {useStyles} from './useStyles';
 
 type PriceFromToPropsType = {
@@ -31,19 +30,19 @@ export const PriceFromTo: FC<PriceFromToPropsType> = (props) => {
                 </strong>
             </Typography>
             <div className='price-from-to'>
-                <FormikField
-                    t={t}
+                <TextField
                     size='small'
                     name='price_from'
+                    variant='outlined'
                     disabled={disabled}
                     value={price_from}
                     onChange={handleInput}
                     placeholder={t('filters:from')}
                 />
-                <FormikField
-                    t={t}
+                <TextField
                     size='small'
                     name='price_to'
+                    variant='outlined'
                     disabled={disabled}
                     value={price_to}
                     onChange={handleInput}

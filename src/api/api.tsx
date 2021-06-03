@@ -32,9 +32,9 @@ const setTokenToHeader = () => {
 };
 
 export const userAPI = {
-    getPostsByFilters: (filters: any): Promise<any> => {
+    getPostsByFilters: (params): Promise<any> => {
         return instance
-            .get('posts/filter', {params: filters})
+            .get('posts/filter', {params})
             .then((res) => res.data)
             .catch(({response}) => {
                 throw response.data;
@@ -143,13 +143,13 @@ export const userAPI = {
                 throw err;
             });
     },
-    getDataForCreatePost: (
+    getFiltersByCtgr: (
         fstCtgrId: number,
         secCtgrId: number,
         trdCtgrId: number
     ): Promise<any> => {
         return instance.get(
-            `subcategory?category_id=${fstCtgrId}&sub_category_id=${secCtgrId}&type_id=${trdCtgrId ?? ''}`
+            `subcategory?category_id=${fstCtgrId}&sub_category_id=${secCtgrId ?? ''}&type_id=${trdCtgrId ?? ''}`
         )
             .then(res => res.data)
             .catch(err => {
@@ -337,8 +337,8 @@ export const userAPI = {
                 throw err;
             });
     },
-    getAllNotifications: (): Promise<any> => {
-        return instance.get(`regular/user/notification`, setTokenToHeader())
+    getAllNotifications: (params?): Promise<any> => {
+        return instance.get(`regular/user/notification`, {...setTokenToHeader(), params})
             .then(res => res.data)
             .catch(err => {
                 throw err;
@@ -372,8 +372,10 @@ export const userAPI = {
                 throw err;
             });
     },
-    getNotificationById: (ads_id: number): Promise<any> => {
-        return instance.get(`regular/post/notifications?itemsPerPage=25&ads_id=${ads_id}`, setTokenToHeader())
+    getNotificationById: (params): Promise<any> => {
+        return instance.get(
+            `regular/post/notifications`,
+            {...setTokenToHeader(), params})
             .then(res => res.data)
             .catch(err => {
                 throw err;
@@ -420,23 +422,6 @@ export const userAPI = {
     },
     getAllUserRating: (): Promise<any> => {
         return instance.get(`user/rating`, setTokenToHeader())
-            .then(res => res.data)
-            .catch(err => {
-                throw err;
-            });
-    },
-    setReplyComment: (comment_id: number, comment: string): Promise<{message: string}> => {
-        return instance.post('regular/user/comment', {
-            comment_id,
-            comment
-        }, setTokenToHeader())
-            .then(res => res.data)
-            .catch(err => {
-                throw err;
-            });
-    },
-    getUserInfoById: (user_id: string): Promise<any> => {
-        return instance.get(`user/${user_id}`)
             .then(res => res.data)
             .catch(err => {
                 throw err;

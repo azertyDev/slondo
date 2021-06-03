@@ -9,16 +9,16 @@ import {Rating} from '@src/components/elements/rating/Rating';
 import {UserAvatarComponent} from '@src/components/elements/user_info_with_avatar/avatar/UserAvatarComponent';
 import StarIcon from '@material-ui/icons/Star';
 import {WithT} from 'i18next';
-import {useStyles} from './useStyles';
 import {UserInfoWithAvatar} from '@src/components/elements/user_info_with_avatar/UserInfoWithAvatar';
 import {ResponsiveDialog} from '@src/components/elements/responsive_dialog/ResponsiveDialog';
-import useModal from '@src/hooks/useModal';
+import {useModal} from '@src/hooks/useModal';
 import {Form, FormikProvider, useFormik} from 'formik';
 import {regularFormSchema} from '@root/validation_schemas/createPostSchemas';
 import {userAPI} from '@src/api/api';
 import {FormikTextarea} from '../../elements/formik_textarea/FormikTextarea';
 import {getErrorMsg} from '@src/helpers';
 import {CustomSnackbar} from '@src/components/elements/snackbar/Snackbar';
+import {useStyles} from './useStyles';
 
 type CabinetCardPropsType = {
     user?,

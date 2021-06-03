@@ -6,22 +6,30 @@ import {getErrorMsg} from '@src/helpers';
 import {BodySelect} from '@src/components/elements/body_select/BodySelect';
 import {FormikField} from '@src/components/elements/formik_field/FormikField';
 import {CommonFiltersType} from '@src/components/search_posts_by_filters/search_form/SearchForm';
+import {useFormik} from 'formik';
+import {useHandlers} from '@src/hooks/useHandlers';
 
 
 export const CarForm: FC<CommonFiltersType> = (props) => {
     const {
-        formik,
+        onSubmit,
         filters,
-        handleInput,
-        handleSelect
     } = props;
+
+    const formik = useFormik<any>({
+        initialValues: {},
+        onSubmit
+    });
 
     const {
         values,
+        setValues,
         errors,
         touched,
         handleBlur
     } = formik;
+
+    const {handleSelect, handleInput} = useHandlers(values, setValues);
 
     const {t} = useTranslation('filters');
 
@@ -70,9 +78,9 @@ export const CarForm: FC<CommonFiltersType> = (props) => {
                 <DropDownSelect
                     t={t}
                     name='year'
+                    disableRequire
                     values={values}
                     onBlur={handleBlur}
-                    disableRequire
                     handleSelect={handleSelect}
                     errorMsg={getErrorMsg(errors.year, touched.year, t)}
                     items={filters.years}
@@ -85,9 +93,9 @@ export const CarForm: FC<CommonFiltersType> = (props) => {
             >
                 <BodySelect
                     t={t}
+                    disableRequire
                     values={values}
                     bodies={filters.body}
-                    disableRequire
                     handleSelect={handleSelect}
                     errorMsg={getErrorMsg(errors.body, touched.body, t)}
                 />
@@ -100,12 +108,12 @@ export const CarForm: FC<CommonFiltersType> = (props) => {
             >
                 <DropDownSelect
                     t={t}
+                    disableRequire
                     name='transmission'
                     values={values}
                     onBlur={handleBlur}
-                    items={filters.transmission}
-                    disableRequire
                     handleSelect={handleSelect}
+                    items={filters.transmission}
                     errorMsg={getErrorMsg(errors.transmission, touched.transmission, t)}
                 />
             </Grid>
@@ -118,10 +126,10 @@ export const CarForm: FC<CommonFiltersType> = (props) => {
                 <DropDownSelect
                     t={t}
                     name='drive'
+                    disableRequire
                     values={values}
                     onBlur={handleBlur}
                     items={filters.drive}
-                    disableRequire
                     handleSelect={handleSelect}
                     errorMsg={getErrorMsg(errors.drive, touched.drive, t)}
                 />
@@ -134,11 +142,11 @@ export const CarForm: FC<CommonFiltersType> = (props) => {
             >
                 <DropDownSelect
                     t={t}
+                    disableRequire
                     name='engine_type'
                     values={values}
                     onBlur={handleBlur}
                     items={filters.engine_type}
-                    disableRequire
                     handleSelect={handleSelect}
                     errorMsg={getErrorMsg(errors.engine_type, touched.engine_type, t)}
                 />
@@ -154,9 +162,9 @@ export const CarForm: FC<CommonFiltersType> = (props) => {
                     size='small'
                     name='engine_capacity'
                     labelText='engine_capacity'
-                    value={values.engine_capacity}
                     disableRequire
                     onChange={handleInput}
+                    value={values.engine_capacity}
                     errorMsg={getErrorMsg(errors.engine_capacity, touched.engine_capacity, t)}
                 />
             </Grid>
@@ -171,9 +179,9 @@ export const CarForm: FC<CommonFiltersType> = (props) => {
                     size='small'
                     name='mileage'
                     labelText='mileage'
-                    value={values.mileage ?? ''}
                     disableRequire
                     onChange={handleInput}
+                    value={values.mileage ?? ''}
                     errorMsg={getErrorMsg(errors.mileage, touched.mileage, t)}
                 />
             </Grid>

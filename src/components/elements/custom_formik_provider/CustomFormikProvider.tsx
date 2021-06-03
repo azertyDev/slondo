@@ -2,7 +2,6 @@ import {FC} from 'react';
 import {FormikProvider} from 'formik';
 
 type CustomFormikProviderPropsType = {
-    isPreview?: boolean,
     formik
 };
 

@@ -1,11 +1,11 @@
-import React, {FC, useState} from 'react';
+import {FC, useState} from 'react';
 import Link from 'next/link';
 import Drawer from '@material-ui/core/Drawer';
 import {InputAdornment, List, ListItem, TextField, Typography} from '@material-ui/core';
-import {categories_list} from '@src/common_data/categories_list';
+import {siteCategories} from '@src/common_data/siteCategories';
 import {useTranslation} from 'next-i18next';
 import {Search_icon} from '@src/components/elements/icons';
-import {addParentsToCtgrs, transformCyrillic} from '@src/helpers';
+import {transformCyrillic} from '@src/helpers';
 import {useStyles} from './useStyles';
 
 
@@ -39,7 +39,7 @@ export const CustomDrawer: FC<any> = ({toggleDrawer, position}) => {
                 placeholder="Поиск категорий"
             />
             <List>
-                {addParentsToCtgrs(categories_list).map((ctgr) =>
+                {siteCategories.map((ctgr) =>
                     <ListItem
                         button
                         key={ctgr.id}

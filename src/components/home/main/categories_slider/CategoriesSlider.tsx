@@ -4,7 +4,7 @@ import Link from 'next/link';
 import {Typography} from '@material-ui/core';
 import {CustomSlider} from '@src/components/elements/custom_slider/CustomSlider';
 import {settings} from './sliderSettings';
-import {categories_list} from "@src/common_data/categories_list";
+import {siteCategories} from "@src/common_data/siteCategories";
 import {useStyles} from './useStyles';
 
 
@@ -17,7 +17,7 @@ export const CategoriesSlider: FC<WithT> = ({t}) => {
             </Typography>
             <div className="category-slider">
                 <CustomSlider {...settings}>
-                    {categories_list.map((category) => (
+                    {siteCategories.map((category) => (
                         <Link href={`/categories/${category.name}?categoryID=${category.id}`} key={category.id}>
                             <a title={t(`categories:${category.name}`)}>
                                 <div className="category">

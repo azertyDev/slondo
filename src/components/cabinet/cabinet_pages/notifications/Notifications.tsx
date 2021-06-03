@@ -63,7 +63,7 @@ export const Notifications: FC<NotificationsPropsType> = (props) => {
                 {isFetch
                     ? <CircularProgress />
                     : notifications.map(notification =>
-                        <Box mb={3} width='90%'>
+                        <Box mb={3} width='90%' key={notification.id}>
                             <Notification
                                 t={t}
                                 key={notification.id}

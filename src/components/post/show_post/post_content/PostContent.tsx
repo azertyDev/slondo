@@ -130,8 +130,8 @@ export const PostContent: FC<PostContentTypes> = (props) => {
                     )}
                     <Typography variant="subtitle1" className="value">
                         {typeof model[key] === 'string' || typeof model[key] === 'number'
-                         ? model[key]
-                         : model[key]?.name}
+                            ? model[key]
+                            : model[key]?.name}
                     </Typography>
                 </li>
             );
@@ -332,15 +332,15 @@ export const PostContent: FC<PostContentTypes> = (props) => {
                         </Typography>
                     </Hidden>
                     {data.region.name || data.city.name || data.district.name
-                     ? <div className='location-text'>
-                         <LocationIcon/>
-                         <Typography variant="subtitle1">
-                             {`${data.region.name ?? ''}`}
-                             {data.city.name ? `, ${data.city.name}` : ''}
-                             {data.district.name ? `, ${data.district.name}` : ''}
-                         </Typography>
-                     </div>
-                     : <Typography variant="subtitle1">Не указано</Typography>}
+                        ? <div className='location-text'>
+                            <LocationIcon/>
+                            <Typography variant="subtitle1">
+                                {`${data.region.name ?? ''}`}
+                                {data.city.name ? `, ${data.city.name}` : ''}
+                                {data.district.name ? `, ${data.district.name}` : ''}
+                            </Typography>
+                        </div>
+                        : <Typography variant="subtitle1">Не указано</Typography>}
                 </div>
                 <Hidden mdDown>
                     <div className="post-category">
@@ -357,11 +357,9 @@ export const PostContent: FC<PostContentTypes> = (props) => {
                     </div>
                 </Hidden>
                 <div className="post-description">
-                    <Hidden mdDown>
-                        <Typography variant="button" color="initial">
-                            Описание
-                        </Typography>
-                    </Hidden>
+                    <Typography variant="button" color="initial">
+                        Описание
+                    </Typography>
                     <ReadMore t={t} descHeight={descHeight}>
                         <Typography
                             className='description'
@@ -384,11 +382,9 @@ export const PostContent: FC<PostContentTypes> = (props) => {
                 )}
                 {!!parameterItems.length && (
                     <div className="post-parameters">
-                        <Hidden mdDown>
-                            <Typography variant="button" color="initial">
-                                Параметры
-                            </Typography>
-                        </Hidden>
+                        <Typography variant="button" color="initial">
+                            Параметры
+                        </Typography>
                         <ul>{parameterItems}</ul>
                     </div>
                 )}

@@ -64,7 +64,11 @@ export const Location: FC = () => {
 
     const handleChoiceLocation = () => {
         if (region) {
-            cookies.set('user_location', selectedLocation, cookieOpts);
+            const userLocation: any = {region};
+            if (city) userLocation.city = city;
+            if (district) userLocation.district = district;
+
+            cookies.set('user_location', userLocation, cookieOpts);
         } else {
             cookies.remove('user_location', {path: '/'});
         }

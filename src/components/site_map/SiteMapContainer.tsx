@@ -1,10 +1,10 @@
 import React, {FC} from 'react'
 import {MainLayout} from '@src/components/main_layout/MainLayout'
 import {SiteMapComponent} from './SiteMapComponent'
-import {categories_list} from '@src/common_data/categories_list'
+import {siteCategories} from '@src/common_data/siteCategories'
 
 export const SiteMapContainer: FC = () => {
-    const categories = categories_list.map((category) => {
+    const categories = siteCategories.map((category) => {
         return category
     })
 

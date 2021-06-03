@@ -64,7 +64,8 @@ export const useStyles = makeStyles((theme) => ({
                 alignItems: 'center'
             },
             [theme.breakpoints.down('md')]: {
-                flexDirection: 'column'
+                flexDirection: 'column',
+                marginBottom: '16px'
             },
             '& div.post-type': {
                 '& .MuiTypography-h6': {
@@ -164,7 +165,8 @@ export const useStyles = makeStyles((theme) => ({
             margin: '20px 0',
             [theme.breakpoints.down('md')]: {
                 background: 'inherit',
-                margin: '0 0 30px'
+                margin: '0 0 32px',
+                padding: '0'
             },
             [theme.breakpoints.up('lg')]: {
                 display: 'flex',
@@ -189,25 +191,10 @@ export const useStyles = makeStyles((theme) => ({
             '& div.info-wrapper': {
                 display: 'flex',
                 justifyContent: 'space-between',
+                marginBottom: '16px',
                 '& > h6': {
-                    [theme.breakpoints.down('md')]: {
-                        color: '#838383',
-                        fontSize: 'calc(10px + 6 * (100vw / 1280))'
-                    }
-                },
-                '& > a': {
-                    textDecorationLine: 'underline'
-                },
-                '& > h6.MuiTypography-subtitle1:first-child': {
-                    '& > span': {
-                        color: '#2F80ED',
-                        [theme.breakpoints.down('md')]: {
-                            color: '#838383'
-                        }
-                    }
-                },
-                [theme.breakpoints.down('md')]: {
-                    marginBottom: '12px'
+                    color: '#838383',
+                    fontSize: 'calc(10px + 6 * (100vw / 1280))'
                 }
             },
             '& button.btn-report': {
@@ -235,6 +222,7 @@ export const useStyles = makeStyles((theme) => ({
                 boxShadow: '0px 0px 15px rgba(0, 0, 0, 0.1)',
                 marginBottom: '12px',
                 [theme.breakpoints.down('md')]: {
+                    marginBottom: '16px',
                     marginRight: '8px',
                     padding: '5px 10px',
                     background: '#F2F2F2',
@@ -347,7 +335,7 @@ export const useStyles = makeStyles((theme) => ({
         },
         '& div.contact': {
             display: 'flex',
-            marginBottom: '30px',
+            marginBottom: '32px',
             position: 'relative',
             '& button': {
                 marginRight: '6px',
@@ -415,7 +403,7 @@ export const useStyles = makeStyles((theme) => ({
                 alignItems: 'center',
                 '& > svg': {
                     [theme.breakpoints.down('md')]: {
-                        marginLeft: '-7px'
+                        marginLeft: '-6px'
                     }
                 },
                 '& > h6': {
@@ -429,6 +417,7 @@ export const useStyles = makeStyles((theme) => ({
                 }
             },
             [theme.breakpoints.down('md')]: {
+                marginBottom: '32px',
                 '&:after': {
                     position: 'absolute',
                     bottom: '-16px',
@@ -444,7 +433,10 @@ export const useStyles = makeStyles((theme) => ({
             position: 'relative',
             marginBottom: '36px',
             '& p.MuiTypography-button': {
-                marginBottom: 15
+                marginBottom: '15px',
+                [theme.breakpoints.down('md')]: {
+                    marginBottom: '8px'
+                }
             },
             '& h6.description': {
                 fontSize: '1.125rem',
@@ -484,6 +476,7 @@ export const useStyles = makeStyles((theme) => ({
                 }
             },
             [theme.breakpoints.down('md')]: {
+                marginBottom: '32px',
                 '&:after': {
                     position: 'absolute',
                     bottom: '-16px',
@@ -516,8 +509,14 @@ export const useStyles = makeStyles((theme) => ({
         },
         '& div.started-price': {
             marginBottom: '40px',
+            [theme.breakpoints.down('md')]: {
+                marginBottom: '16px'
+            },
             '& p.MuiTypography-button': {
-                marginBottom: '22px'
+                marginBottom: '22px',
+                [theme.breakpoints.down('md')]: {
+                    marginBottom: '16px'
+                }
             },
             '& span': {
                 display: 'inline-block',
@@ -528,9 +527,12 @@ export const useStyles = makeStyles((theme) => ({
         },
         '& div.post-parameters': {
             position: 'relative',
-            marginBottom: '35px',
+            marginBottom: '32px',
             '& p.MuiTypography-button': {
-                marginBottom: '30px'
+                marginBottom: '30px',
+                [theme.breakpoints.down('md')]: {
+                    marginBottom: '8px'
+                }
             },
             '& > ul > div.params-list': {
                 display: 'flex',
@@ -613,7 +615,7 @@ export const useStyles = makeStyles((theme) => ({
             [theme.breakpoints.down('md')]: {
                 '&:after': {
                     position: 'absolute',
-                    bottom: '-24px',
+                    bottom: '-16px',
                     left: 0,
                     content: '""',
                     width: '100%',

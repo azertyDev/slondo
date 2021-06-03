@@ -5,7 +5,7 @@ import {Grid, Typography} from '@material-ui/core';
 import {DropDownSelect} from '@src/components/elements/drop_down_select/DropDownSelect';
 import {OptionsSelect} from '@src/components/elements/options_select/OptionsSelect';
 import {PreviewValues} from '../../PreviewValues';
-import {getErrorMsg, setRequireVals} from '@src/helpers';
+import {getErrorMsg, setRequireParamsVals} from '@src/helpers';
 import {BodySelect} from '@src/components/elements/body_select/BodySelect';
 import {FormikField} from '@src/components/elements/formik_field/FormikField';
 import {CheckboxSelect} from '@src/components/elements/checkbox_select/CheckboxSelect';
@@ -184,7 +184,7 @@ export const CarParams: FC<CarParamsPropsType> = (props) => {
     };
 
     useEffect(() => {
-        setRequireVals(
+        setRequireParamsVals(
             values,
             setValues,
             filters,

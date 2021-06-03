@@ -34,9 +34,9 @@ export type CategoryType = IdNameType & {
 
 export type SubCategoryType = IdNameType & {
     parents?: IdNameType[],
-    type?: TypeCtgr[]
+    type?: TypeCategory[]
 };
 
-export type TypeCtgr = IdNameType & {
+export type TypeCategory = IdNameType & {
     parents?: IdNameType[]
 };

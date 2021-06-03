@@ -103,7 +103,7 @@ export const FormPage: FC = () => {
 
             setIsFetch(true);
 
-            let fetchedData = await userAPI.getDataForCreatePost(category.id, subCtgrId, typeId);
+            let fetchedData = await userAPI.getFiltersByCtgr(category.id, subCtgrId, typeId);
 
             if (categoryName === 'car') {
                 if (subCategoryName === 'madeInUzb') {
@@ -170,7 +170,6 @@ export const FormPage: FC = () => {
 
             await userAPI.createPost(form);
 
-            console.log(form);
             setIsSuccess(true);
             setIsFetch(false);
         } catch (e) {
@@ -203,6 +202,7 @@ export const FormPage: FC = () => {
                          t={t}
                          filters={filtersData}
                          isPreview={isPreview}
+                         type={type}
                          subCategory={subCategory}
                          currentFormIndex={currentFormIndex}
                          handleSubmit={handleSubmit}

@@ -1,45 +1,39 @@
-import {makeStyles} from '@material-ui/core/styles';
+import makeStyles from '@material-ui/core/styles/makeStyles'
 
 export const useStyles = makeStyles((theme) => ({
     root: {
-        '& div.location-wrapper': {
+        '& form': {
             display: 'flex',
-            alignItems: 'center',
-            '& > h6.MuiTypography-subtitle1': {
-                cursor: 'pointer',
-                textDecoration: 'underline'
-            },
-            '& > svg': {
-                marginRight: '12px',
-                [theme.breakpoints.down('md')]: {
-                    marginRight: '5px'
-                }
-            }
-        }
-    },
-    locationModal: {
-        width: '960px',
-        '& > div.locations-input': {
+            position: 'relative',
             width: '100%',
             height: 38,
-            position: 'relative',
-            display: 'flex',
+            [theme.breakpoints.down('md')]: {
+                marginBottom: '10px'
+            },
+            '& > div': {
+                height: '100%'
+            },
             '& > svg, & > img.filter-icon': {
                 position: 'absolute',
-                height: '20px',
-                top: 'calc(50% - 10px)'
+                top: 'calc(50% - 10px)',
+                height: '20px'
             },
             '& > svg': {
-                left: '10px'
+                left: '10px',
+                zIndex: 100,
+                [theme.breakpoints.down('md')]: {
+                    '& path': {
+                        fill: '#BDBDBD'
+                    }
+                }
             },
-            '& > img.filter-icon': {
+            '& img.filter-icon': {
                 right: '10px'
             },
-            '& > input.search-input': {
-                padding: '8px 230px 8px 35px',
+            '& input': {
+                padding: '10px 70px 10px 35px',
                 width: '100%',
                 borderRadius: '7px',
-                border: '1px solid #ccc',
                 fontSize: '0.87rem'
             },
             '& > button.search-button': {
@@ -56,4 +50,4 @@ export const useStyles = makeStyles((theme) => ({
             }
         }
     }
-}));
+}))

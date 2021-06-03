@@ -4,7 +4,6 @@ import {Header} from '../header/Header';
 import {Footer} from '../footer/Footer';
 import {Container} from '@material-ui/core';
 import {ErrorModal} from '@src/components/error_modal/ErrorModal';
-import {useRouter} from 'next/router';
 import {SEOTextComponent} from '@src/components/elements/seo_text_component/SEOTextComponent';
 
 
@@ -14,23 +13,9 @@ type MainLayoutPropsType = {
     seoTxt?: string
 };
 
-const defaultSEOContent = {
-    ru: {
-        title: 'Slondo',
-        description: '',
-        text: 'В своём стремлении улучшить пользовательский опыт мы упускаем, что диаграммы связей неоднозначны предоставлены сами себе.'
-    },
-    uz: {
-        title: 'Slondo',
-        description: '',
-        text: 'В своём стремлении улучшить пользовательский опыт мы упускаем, что диаграммы связей неоднозначны предоставлены сами себе.'
-    }
-};
-
 export const MainLayout: FC<MainLayoutPropsType> = (props) => {
-    const {locale} = useRouter();
-    const title = props.title ?? defaultSEOContent[locale].title;
-    const description = props.description ?? defaultSEOContent[locale].description;
+    const title = props.title;
+    const description = props.description;
 
     const {
         children,
