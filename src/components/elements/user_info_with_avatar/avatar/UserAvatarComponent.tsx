@@ -4,10 +4,12 @@ import {StyledBadge, useStyles} from './useStyles';
 
 type UserAvatarComponentTypes = {
     avatar?: string
+    width?: string
+    height?: string
 };
 
-export const UserAvatarComponent: FC<UserAvatarComponentTypes> = ({avatar}) => {
-    const classes = useStyles();
+export const UserAvatarComponent: FC<UserAvatarComponentTypes> = ({avatar, width, height}) => {
+    const classes = useStyles({width, height});
     return (
         <div className={classes.root}>
             <StyledBadge

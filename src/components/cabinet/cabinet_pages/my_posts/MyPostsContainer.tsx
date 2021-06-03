@@ -407,7 +407,8 @@ const MyPostsContainer: FC = () => {
         <TabsContent
             tabIndex={tabIndex}
             handleTabChange={handleTabChange}
-            title={title} tabsData={tabsData}
+            title={title}
+            tabsData={tabsData}
             headerTitle={title}
         />
     );

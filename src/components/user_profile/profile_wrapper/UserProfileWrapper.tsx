@@ -1,18 +1,18 @@
-import React, {FC} from 'react';
+import {FC} from 'react';
 import {Grid, Typography} from '@material-ui/core';
 import {MainLayout} from '@src/components/main_layout/MainLayout';
-import {CabinetSidebar} from './cabinet_sidebar/CabinetSidebar';
+import {ProfileSidebar} from '../profile_sidebar/ProfileSidebar';
 import {useStyles} from './useStyles';
-import {useSelector} from 'react-redux';
-import {RootState} from '@src/redux/rootReducer';
+import {UserInfo} from '@root/interfaces/Auth';
+import {WithT} from 'i18next';
 
-export type CabinetMenuPropsType = {
+export type UserProfileWrapperPropsType = {
     title: string;
     headerTitle: string;
-};
+    user?: UserInfo
+} & WithT;
 
-export const CabinetWrapper: FC<CabinetMenuPropsType> = ({children, title, headerTitle}) => {
-    const {info} = useSelector((store: RootState) => store.user);
+export const UserProfileWrapper: FC<UserProfileWrapperPropsType> = ({t, children, title, headerTitle, user}) => {
 
     const classes = useStyles();
     return (
@@ -20,7 +20,7 @@ export const CabinetWrapper: FC<CabinetMenuPropsType> = ({children, title, heade
             <div className={classes.root}>
                 <Grid container spacing={2}>
                     <Grid item xs={3}>
-                        <CabinetSidebar user={info}/>
+                        <ProfileSidebar t={t} user={user} />
                     </Grid>
                     <Grid item xs={9} container direction='column'>
                         <Typography variant="h6" className="menu-title">
@@ -31,5 +31,5 @@ export const CabinetWrapper: FC<CabinetMenuPropsType> = ({children, title, heade
                 </Grid>
             </div>
         </MainLayout>
-    )
+    );
 };

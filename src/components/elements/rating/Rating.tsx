@@ -39,7 +39,7 @@ export const Rating: FC<RatingPropsType> = (props) => {
                 {ratingValue !== null
                     ? (<Box>
                         <Typography variant="subtitle1">
-                            {ratingValue}
+                            {ratingValue ?? 0}
                         </Typography>
                     </Box>)
                     : 0
