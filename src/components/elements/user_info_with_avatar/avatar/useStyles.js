@@ -1,5 +1,5 @@
 import Badge from '@material-ui/core/Badge';
-import { makeStyles, withStyles } from '@material-ui/core/styles';
+import {makeStyles, withStyles} from '@material-ui/core/styles';
 
 export const StyledBadge = withStyles((theme) => ({
     badge: {
@@ -35,8 +35,8 @@ export const useStyles = makeStyles(() => ({
     root: {
         display: 'flex',
         '& span > div.MuiAvatar-root': {
-            width: '80px',
-            height: '80px',
+            width: props => props.width ?? '80px',
+            height: props => props.height ?? '80px'
         },
     },
 }));

@@ -40,7 +40,7 @@ export const SecondaryCabinetCard: FC<CabinetCardPropsType> = (props) => {
     const {modalOpen: openSnackbar, handleModalOpen: handleOpenSnackbar, handleModalClose: handleCloseSnackbar} = useModal();
     const userId = useSelector((store: RootState) => store.user.info.id);
     const [showPhone, setShowOpen] = useState(false);
-    const txtLimit = 500;
+    const txtLimit = 3000;
 
     const onChangeRating = (event, rating) => {
         setValues({...values, rating});
@@ -228,10 +228,12 @@ export const SecondaryCabinetCard: FC<CabinetCardPropsType> = (props) => {
                             >
                                 {user.auction.offer.user.name}
                             </Typography>
-                            <Rating card ratingValue={user.author.rating} />
+                            <Rating card ratingValue={user.author?.rating} />
                             <Typography variant='h6'>{user.auction.offer.price} сум</Typography>
-                            <CustomButton className='accept'
-                                             onClick={acceptOfferThePrice(user.auction.offer.id, true)}>
+                            <CustomButton
+                                className='accept'
+                                onClick={acceptOfferThePrice(user.auction.offer.id, true)}
+                            >
                                 <DoneAllIcon />
                                 <Typography
                                     variant="subtitle2"
