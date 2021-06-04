@@ -12,10 +12,10 @@ type SidebarMenuPropsType = {
 } & WithT
 
 export const SidebarMenu: FC<SidebarMenuPropsType> = ({t}) => {
-    const {push, pathname, query} = useRouter();
+    const {push, pathname, query: {user_id}} = useRouter();
 
     const handleListItemClick = (url) => async () => {
-        await push(`/profile/${url}`);
+        await push(`${user_id}/${url}`);
     };
 
     const classes = useStyles();
@@ -38,12 +38,12 @@ export const SidebarMenu: FC<SidebarMenuPropsType> = ({t}) => {
             <List disablePadding component="nav" aria-label="cabinet menu" className='menu-item'>
                 <ListItem
                     button
-                    selected={pathname === '/profile/posts'}
+                    selected={pathname === '/posts'}
                     onClick={handleListItemClick('posts')}
                     disableGutters
                 >
                     <NotesIcon />
-                    <ListItemText primary={t('cabinet:myPosts')} />
+                    <ListItemText primary={t('main:posts')} />
                 </ListItem>
                 <ListItem
                     button

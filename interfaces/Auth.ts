@@ -8,7 +8,7 @@ export interface UserInfo {
     available_days: string,
     available_start_time?: string,
     available_end_time?: string,
-    rating?: string,
+    rating?: number,
     observer?: {
         number_of_reviews: number,
         number_of_purchase: number,

@@ -16,7 +16,7 @@ export const UserProfileWrapper: FC<UserProfileWrapperPropsType> = ({t, children
 
     const classes = useStyles();
     return (
-        <MainLayout title={`Мой кабинет | ${title}`}>
+        <MainLayout title={title}>
             <div className={classes.root}>
                 <Grid container spacing={2}>
                     <Grid item xs={3}>

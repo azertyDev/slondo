@@ -7,7 +7,15 @@ export const getStaticProps: GetStaticProps = async ({locale}) => ({
         ...await serverSideTranslations(
             locale,
             [
-                'cabinet'
+                'cabinet',
+                'main',
+                'header',
+                'footer',
+                'common',
+                'auth_reg',
+                'notifications',
+                'categories',
+                'locations'
             ]
         )
     }

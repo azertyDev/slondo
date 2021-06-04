@@ -443,5 +443,12 @@ export const userAPI = {
             .catch(err => {
                 throw err;
             });
+    },
+    getUserPosts: (user_id, post_type = 'post') => {
+        return instance.get(`post?user_id=${user_id}&type=${post_type}`)
+            .then(res => res.data)
+            .catch(err => {
+                throw err;
+            });
     }
 };

@@ -5,10 +5,10 @@ import CustomRating from '@material-ui/lab/Rating';
 import {useStyles} from './useStyles';
 
 type RatingPropsType = {
-    card?: boolean,
+    card?: string,
     readOnly?: boolean,
     className?,
-    ratingValue?: string,
+    ratingValue?: number,
     ratingCount?: number,
     name?: string,
     onChangeRating?: (event: ChangeEvent<{}>, value: number | null) => void,
@@ -31,19 +31,18 @@ export const Rating: FC<RatingPropsType> = (props) => {
                 <CustomRating
                     name={name}
                     readOnly={readOnly ?? true}
-                    value={parseInt(ratingValue)}
+                    value={Math.round(ratingValue)}
                     precision={1}
                     onChange={onChangeRating}
                     {...props}
                 />
-                {ratingValue !== null
-                    ? (<Box>
+                {ratingValue && (
+                    <Box>
                         <Typography variant="subtitle1">
-                            {ratingValue ?? 0}
+                            {ratingValue}
                         </Typography>
-                    </Box>)
-                    : 0
-                }
+                    </Box>
+                )}
             </div>
             <Hidden mdDown>
                 {card && (
