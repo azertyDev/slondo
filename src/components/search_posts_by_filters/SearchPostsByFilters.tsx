@@ -2,29 +2,38 @@ import {FC} from 'react';
 import {useTranslation} from 'react-i18next';
 import {MainLayout} from '@src/components/main_layout/MainLayout';
 import {getSEOContent} from '@src/common_data/seo_content';
-import {
-    cookies,
-    getSearchTxt,
-    getCtgrsByCyrillicNames
-} from '@src/helpers';
+import {getSearchTxt} from '@src/helpers';
 import {SearchForm} from '@src/components/search_posts_by_filters/search_form/SearchForm';
 import {SearchResult} from '@src/components/search_posts_by_filters/search_result/SearchResult';
 import {Grid, Hidden, Typography} from '@material-ui/core';
 import {HomeSidebar} from '@src/components/home/main/home_sidebar/HomeSideBar';
-import {useRouter} from 'next/router';
 import {useStyles} from './useStyles';
 
+type SearchPostsByFiltersPropsType = {
+    locale: string,
+    initPosts,
+    initTotal: number,
+    userLocation,
+    categories,
+    urlParams
+};
 
-export const SearchPostsByFilters: FC = () => {
-    const {query, locale} = useRouter();
+export const SearchPostsByFilters: FC<SearchPostsByFiltersPropsType> = (props) => {
+    const {
+        locale,
+        initPosts,
+        initTotal,
+        userLocation,
+        categories,
+        urlParams
+    } = props;
+
     const {t} = useTranslation('filters');
-    const {location, categories, ...urlParams} = query;
-    const userLocation = cookies.get('user_location');
+
     const translatedLocation = t(`locations:${userLocation?.city?.name ?? userLocation?.region?.name ?? 'uzbekistan'}`);
 
+    const [ctgr, subCtgr, typeCtgr] = categories;
     const searchTxtFromUrl = getSearchTxt(categories as string[]);
-    const ctgrsByCyrillicName = getCtgrsByCyrillicNames(categories as string[]);
-    const [ctgr, subCtgr, typeCtgr] = ctgrsByCyrillicName;
 
     // SEO
     const seoContent = getSEOContent(ctgr, subCtgr, typeCtgr, translatedLocation, locale);
@@ -51,14 +60,15 @@ export const SearchPostsByFilters: FC = () => {
                         <SearchForm
                             t={t}
                             urlParams={urlParams}
-                            categories={ctgrsByCyrillicName}
+                            categories={categories}
                         />
                         <SearchResult
                             t={t}
-                            query={query}
+                            categories={categories}
                             urlParams={urlParams}
+                            initPosts={initPosts}
+                            initTotal={initTotal}
                             searchTxtFromUrl={searchTxtFromUrl}
-                            categories={ctgrsByCyrillicName}
                         />
                     </Grid>
                     <Hidden mdDown>

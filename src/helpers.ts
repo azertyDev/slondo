@@ -20,7 +20,7 @@ export const toUrlParams = (params) => {
             const isBoolTrue = val && typeof val === 'boolean';
             const isNoEmptyString = val && typeof val === 'string';
             const isNoEmptyArray = Array.isArray(val) && val.length;
-            const isObject = val && !isNoEmptyArray && typeof val === 'object' && !!Object.keys(val).length;
+            const isObject = val && !Array.isArray(val) && typeof val === 'object' && !!Object.keys(val).length;
 
             if (isBoolTrue) {
                 url = url.concat(`&${key}=${+params[key]}`);
@@ -39,7 +39,7 @@ export const toUrlParams = (params) => {
             }
         }
     });
-    console.log(url);
+
     if (url !== '') url = `?${url}`;
 
     return url;

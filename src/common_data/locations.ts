@@ -1,9 +1,10 @@
 export const transformLocations = {
-    regions: {
-        andijan_region: 'andijanskaya-oblast',
-        tashkent_region: 'tashkentskaya-oblast'
+    andijan_region: {
+        name: 'andijanskaya-oblast',
+        andijan_city: 'andijan'
     },
-    cities: {
+    tashkent_region: {
+        name: 'tashkentskaya-oblast',
         tashkent_city: 'tashkent'
     }
 };

@@ -1,4 +1,5 @@
 import {FC, useEffect, useState} from 'react';
+import {ITEMS_PER_PAGE_FILTERS} from '@src/constants';
 import {CardView} from '@src/components/elements/card/card_view/CardView';
 import {Typography} from '@material-ui/core';
 import {WithT} from 'i18next';
@@ -10,30 +11,31 @@ import {CustomPagination} from '@src/components/elements/custom_pagination/Custo
 import {useStyles} from './useStyles';
 
 type SearchResultPropsType = {
-    query,
-    urlParams,
+    initPosts,
+    initTotal: number,
+    searchTxtFromUrl: string,
     categories,
-    searchTxtFromUrl: string
+    urlParams
 } & WithT;
 
 export const SearchResult: FC<SearchResultPropsType> = (props) => {
     const {
         t,
-        query,
-        urlParams,
+        initPosts,
+        searchTxtFromUrl,
+        initTotal,
         categories,
-        searchTxtFromUrl
+        urlParams
     } = props;
 
     const dispatch = useDispatch();
+
     const [ctgr, subCtgr, typeCtgr] = categories;
 
-    const [posts, setPosts] = useState([]);
-    const [isNotFound, setIsNotFound] = useState(false);
+    const [posts, setPosts] = useState(initPosts);
+    const [isNotFound, setIsNotFound] = useState(!initTotal);
     const [page, setPage] = useState(1);
-    const [totalPages, setTotalPages] = useState(0);
-
-    const itemsPerPage = 40;
+    const [totalPages, setTotalPages] = useState(initTotal);
 
     const handlePagePagination = (_, pageNum) => {
         setPage(pageNum);
@@ -45,23 +47,30 @@ export const SearchResult: FC<SearchResultPropsType> = (props) => {
 
             const query: any = {
                 page,
-                itemsPerPage,
+                itemsPerPage: ITEMS_PER_PAGE_FILTERS,
                 ...urlParams
             };
 
             if (userLocation) {
-                Object.keys(userLocation).forEach(key => {
-                    query[`${key}_id`] = userLocation[key].id;
-                });
+                const {region, city, district} = userLocation;
+
+                if (district) {
+                    query.district_id = district.id;
+                } else if (city) {
+                    query.city_id = city.id;
+                } else {
+                    query.region_id = region.id;
+                }
             }
+
             if (searchTxtFromUrl) query.title = searchTxtFromUrl;
             if (ctgr) query.category_id = ctgr.id;
             if (subCtgr) query.sub_category_id = subCtgr.id;
             if (typeCtgr) query.type_id = typeCtgr.id;
 
-            const {data, total} = (await userAPI.getPostsByFilters(query));
+            const {data, total} = await userAPI.getPostsByFilters(query);
 
-            if (data.length) {
+            if (total) {
                 setPosts(data);
                 setTotalPages(total);
                 isNotFound && setIsNotFound(false);
@@ -75,7 +84,7 @@ export const SearchResult: FC<SearchResultPropsType> = (props) => {
 
     useEffect(() => {
         getPostsByFilters();
-    }, [query, page]);
+    }, [page]);
 
     const classes = useStyles();
     return (
@@ -91,7 +100,7 @@ export const SearchResult: FC<SearchResultPropsType> = (props) => {
                      <CustomPagination
                          currentPage={page}
                          pageCount={totalPages}
-                         itemsPerPage={itemsPerPage}
+                         itemsPerPage={ITEMS_PER_PAGE_FILTERS}
                          handlePagePagination={handlePagePagination}
                      />
                  </div>

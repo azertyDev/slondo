@@ -24,10 +24,14 @@ export const HeaderSearchForm: FC = () => {
 
     const handleSubmit = ({searchTxt}) => {
         const userLocation = cookies.get('user_location');
-        const location = userLocation === undefined
-                         ? 'uzbekistan'
-                         : transformLocations.cities[userLocation?.city?.name]
-                             ?? transformLocations.regions[userLocation.region.name];
+        let location = 'uzbekistan';
+
+        if (userLocation) {
+            const {region, city} = userLocation;
+            location = city
+                       ? transformLocations[region.name][city.name]
+                       : transformLocations[region.name].name;
+        }
 
         const url = `/${location}${searchTxt !== '' ? `/q-${searchTxt}` : ''}`;
 

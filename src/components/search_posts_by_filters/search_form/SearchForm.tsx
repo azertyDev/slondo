@@ -53,6 +53,8 @@ export const SearchForm: FC<SearchFormPropsType> = (props) => {
         post_type,
         price_from,
         price_to,
+        free,
+        archive,
         safe_deal,
         exchange,
         delivery,
@@ -61,12 +63,14 @@ export const SearchForm: FC<SearchFormPropsType> = (props) => {
 
     const postTypesList = [postTypes[0], postTypes[1]];
 
-    const initVals: any = {
+    const initVals = {
         category: null,
         type: null,
         post_type: null,
         price_from: '',
         price_to: '',
+        free: false,
+        archive: false,
         safe_deal: false,
         exchange: false,
         delivery: false
@@ -78,12 +82,6 @@ export const SearchForm: FC<SearchFormPropsType> = (props) => {
         typeCategories: subCtgr?.type || [],
         filtersByCtgr: {}
     };
-
-    if (ctgr?.name === 'car') {
-        initVals.year = '';
-        initVals.mileage = '';
-        initVals.engine_capacity = '';
-    }
 
     const dispatch = useDispatch();
     const {push} = useRouter();
@@ -105,21 +103,17 @@ export const SearchForm: FC<SearchFormPropsType> = (props) => {
     const typeLabel = mainCategoryName === 'service' ? 'service_type' : isJobCtgr ? 'job_type' : 'good_type';
 
     const {handleInput} = useHandlers(values, setValues);
-    const [free, setFree] = useState(false);
-
-    const handleFree = ({target}) => {
-        setFree(target.checked);
-        if (target.checked) {
-            setValues({
-                ...values,
-                price_from: '0',
-                price_to: ''
-            });
-        }
-    };
 
     const handleCheckbox = (name) => ({target}) => {
-        setValues({...values, [name]: target.checked});
+        let vals: any = {...values, [name]: target.checked};
+        if (name === 'free') {
+            vals = {
+                ...vals,
+                price_from: '',
+                price_to: ''
+            };
+        }
+        setValues(vals);
     };
 
     const handleSelect = (name, value) => {
@@ -164,13 +158,14 @@ export const SearchForm: FC<SearchFormPropsType> = (props) => {
 
     function urlByParams(values): string {
         let url = '/';
-        const location = cookies.get('user_location');
+        const userLocation = cookies.get('user_location');
         const params = toUrlParams({...commonVals, ...values});
 
-        if (location) {
-            const {city, region} = location;
-            const {cities, regions} = transformLocations;
-            url = url.concat(city ? `${cities[city.name]}/` : `${regions[region.name]}/`);
+        if (userLocation) {
+            const {city} = userLocation;
+            const region = transformLocations[userLocation.region.name];
+
+            url = url.concat(city ? `${region[city.name]}/` : `${region.name}/`);
         } else {
             url = url.concat(`uzbekistan/`);
         }
@@ -215,12 +210,18 @@ export const SearchForm: FC<SearchFormPropsType> = (props) => {
     };
 
     const setInitVals = () => {
+        const postType = !!archive
+                         ? postTypesList[1]
+                         : postTypesList.find(type => type.id === +post_type) || null;
+
         const vals: any = {
             category: subCtgr || ctgr || null,
             type: typeCtgr || null,
-            post_type: postTypesList.find(type => type.id === +post_type) || null,
+            post_type: postType,
             price_from: price_from || '',
             price_to: price_to || '',
+            free: !!free,
+            archive: !!archive,
             safe_deal: !!safe_deal,
             exchange: !!exchange,
             delivery: !!delivery
@@ -273,13 +274,23 @@ export const SearchForm: FC<SearchFormPropsType> = (props) => {
                         handleSelect={handlePostType}
                     />
                 </Grid>
+                {values.post_type?.name === 'auc' && (
+                    <Grid item container alignItems='center' xs={2}>
+                        <CheckboxSelect
+                            t={t}
+                            name='archive'
+                            checked={values.archive}
+                            onChange={handleCheckbox('archive')}
+                        />
+                    </Grid>
+                )}
                 <Grid container item xs={12}>
                     <Grid item xs={4}>
                         <PriceFromTo
                             t={t}
                             name={isJobCtgr ? 'salary' : 'cost'}
                             values={values}
-                            disabled={free}
+                            disabled={values.free}
                             handleInput={handleInput}
                         />
                     </Grid>
@@ -287,8 +298,8 @@ export const SearchForm: FC<SearchFormPropsType> = (props) => {
                         <CheckboxSelect
                             t={t}
                             name='free'
-                            checked={free}
-                            onChange={handleFree}
+                            checked={values.free}
+                            onChange={handleCheckbox('free')}
                         />
                     </Grid>
                 </Grid>
