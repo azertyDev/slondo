@@ -16,7 +16,7 @@ export const RegularForm: FC<CommonFiltersType> = (props) => {
         onSubmit,
         filters,
         urlParams,
-        handleResetMainParams
+        handleResetParams
     } = props;
 
     const {t} = useTranslation('filters');
@@ -50,7 +50,7 @@ export const RegularForm: FC<CommonFiltersType> = (props) => {
 
     const handleReset = () => {
         setValues({});
-        handleResetMainParams();
+        handleResetParams();
     };
 
     useEffect(() => {

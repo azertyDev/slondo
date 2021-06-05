@@ -11,8 +11,6 @@ import {CustomPagination} from '@src/components/elements/custom_pagination/Custo
 import {useStyles} from './useStyles';
 
 type SearchResultPropsType = {
-    initPosts,
-    initTotal: number,
     searchTxtFromUrl: string,
     categories,
     urlParams
@@ -21,9 +19,7 @@ type SearchResultPropsType = {
 export const SearchResult: FC<SearchResultPropsType> = (props) => {
     const {
         t,
-        initPosts,
         searchTxtFromUrl,
-        initTotal,
         categories,
         urlParams
     } = props;
@@ -32,10 +28,10 @@ export const SearchResult: FC<SearchResultPropsType> = (props) => {
 
     const [ctgr, subCtgr, typeCtgr] = categories;
 
-    const [posts, setPosts] = useState(initPosts);
-    const [isNotFound, setIsNotFound] = useState(!initTotal);
+    const [posts, setPosts] = useState([]);
+    const [isNotFound, setIsNotFound] = useState(false);
     const [page, setPage] = useState(1);
-    const [totalPages, setTotalPages] = useState(initTotal);
+    const [totalPages, setTotalPages] = useState(0);
 
     const handlePagePagination = (_, pageNum) => {
         setPage(pageNum);
@@ -84,7 +80,7 @@ export const SearchResult: FC<SearchResultPropsType> = (props) => {
 
     useEffect(() => {
         getPostsByFilters();
-    }, [page]);
+    }, [urlParams, page]);
 
     const classes = useStyles();
     return (

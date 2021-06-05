@@ -11,10 +11,9 @@ import {SiteServices} from '@src/components/post/create_post/form_page/common_fo
 import {CheckboxSelect} from '@src/components/elements/checkbox_select/CheckboxSelect';
 import {
     cookies,
-    CtgrsByCyrillicNameType,
-    normalizeFiltersByCategory,
     toUrlParams,
-    transformCyrillic
+    transformCyrillic,
+    normalizeFiltersByCategory
 } from '@src/helpers';
 import {useHandlers} from '@src/hooks/useHandlers';
 import {CarForm} from '@src/components/search_posts_by_filters/categories_forms/car_form/CarForm';
@@ -32,12 +31,12 @@ export type CommonFiltersType = {
     onSubmit,
     filters,
     urlParams,
-    handleResetMainParams: () => void
+    handleResetParams: () => void
 };
 
 type SearchFormPropsType = {
     urlParams,
-    categories: CtgrsByCyrillicNameType | [],
+    categories
 } & WithT;
 
 export const SearchForm: FC<SearchFormPropsType> = (props) => {
@@ -62,18 +61,21 @@ export const SearchForm: FC<SearchFormPropsType> = (props) => {
     } = urlParams;
 
     const postTypesList = [postTypes[0], postTypes[1]];
+    const postType = !!archive
+                     ? postTypesList[1]
+                     : postTypesList.find(type => type.id === +post_type) || null;
 
     const initVals = {
-        category: null,
-        type: null,
-        post_type: null,
-        price_from: '',
-        price_to: '',
-        free: false,
-        archive: false,
-        safe_deal: false,
-        exchange: false,
-        delivery: false
+        category: subCtgr || ctgr || null,
+        type: typeCtgr || null,
+        post_type: postType,
+        price_from: price_from || '',
+        price_to: price_to || '',
+        free: !!free,
+        archive: !!archive,
+        safe_deal: !!safe_deal,
+        exchange: !!exchange,
+        delivery: !!delivery
     };
 
     const initFilters = {
@@ -119,8 +121,16 @@ export const SearchForm: FC<SearchFormPropsType> = (props) => {
     const handleSelect = (name, value) => {
         if (name === 'category') {
             setValues({
-                ...initVals,
-                category: value
+                category: value,
+                type: null,
+                post_type: null,
+                price_from: '',
+                price_to: '',
+                free: false,
+                archive: false,
+                safe_deal: false,
+                exchange: false,
+                delivery: false
             });
         } else {
             setValues({...values, [name]: value});
@@ -132,26 +142,25 @@ export const SearchForm: FC<SearchFormPropsType> = (props) => {
         setValues({...values, post_type: value});
     };
 
-    const handleResetMainParams = () => {
+    const handleResetParams = () => {
         setValues(initVals);
     };
 
     const getFiltersByCtgr = (): ReactNode => {
         switch (mainCategoryName) {
-            case 'foreignCars':
-            case 'madeInUzb':
+            case 'car':
                 return <CarForm
                     onSubmit={onSubmit}
                     filters={filtersByCtgr}
                     urlParams={urlFiltersParams}
-                    handleResetMainParams={handleResetMainParams}
+                    handleResetParams={handleResetParams}
                 />;
             default:
                 return <RegularForm
                     onSubmit={onSubmit}
                     filters={filtersByCtgr}
                     urlParams={urlFiltersParams}
-                    handleResetMainParams={handleResetMainParams}
+                    handleResetParams={handleResetParams}
                 />;
         }
     };
@@ -178,6 +187,7 @@ export const SearchForm: FC<SearchFormPropsType> = (props) => {
             }
             url = url.concat(categoryName);
         }
+
         if (type) url = url.concat(`${transformCyrillic(type.ru_name)}/`);
         if (searchTxt) url = url.concat(`q-${searchTxt}/`);
         if (params) url = url.concat(params);
@@ -208,31 +218,6 @@ export const SearchForm: FC<SearchFormPropsType> = (props) => {
             dispatch(setErrorMsgAction(e.message));
         }
     };
-
-    const setInitVals = () => {
-        const postType = !!archive
-                         ? postTypesList[1]
-                         : postTypesList.find(type => type.id === +post_type) || null;
-
-        const vals: any = {
-            category: subCtgr || ctgr || null,
-            type: typeCtgr || null,
-            post_type: postType,
-            price_from: price_from || '',
-            price_to: price_to || '',
-            free: !!free,
-            archive: !!archive,
-            safe_deal: !!safe_deal,
-            exchange: !!exchange,
-            delivery: !!delivery
-        };
-
-        setValues(vals);
-    };
-
-    useEffect(() => {
-        setInitVals();
-    }, [urlParams]);
 
     useEffect(() => {
         setFiltersByCtgr();

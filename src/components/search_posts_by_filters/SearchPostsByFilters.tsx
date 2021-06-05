@@ -2,7 +2,7 @@ import {FC} from 'react';
 import {useTranslation} from 'react-i18next';
 import {MainLayout} from '@src/components/main_layout/MainLayout';
 import {getSEOContent} from '@src/common_data/seo_content';
-import {getSearchTxt} from '@src/helpers';
+import {getCtgrsByCyrillicNames, getSearchTxt} from '@src/helpers';
 import {SearchForm} from '@src/components/search_posts_by_filters/search_form/SearchForm';
 import {SearchResult} from '@src/components/search_posts_by_filters/search_result/SearchResult';
 import {Grid, Hidden, Typography} from '@material-ui/core';
@@ -10,38 +10,39 @@ import {HomeSidebar} from '@src/components/home/main/home_sidebar/HomeSideBar';
 import {useStyles} from './useStyles';
 
 type SearchPostsByFiltersPropsType = {
+    query,
     locale: string,
-    initPosts,
-    initTotal: number,
     userLocation,
-    categories,
-    urlParams
 };
 
 export const SearchPostsByFilters: FC<SearchPostsByFiltersPropsType> = (props) => {
     const {
+        query,
         locale,
-        initPosts,
-        initTotal,
         userLocation,
-        categories,
-        urlParams
     } = props;
 
     const {t} = useTranslation('filters');
+    const {location, categories, ...urlParams} = query;
 
     const translatedLocation = t(`locations:${userLocation?.city?.name ?? userLocation?.region?.name ?? 'uzbekistan'}`);
 
-    const [ctgr, subCtgr, typeCtgr] = categories;
+    const categoriesByCyrillicNames = getCtgrsByCyrillicNames(categories as string[]);
+    const [ctgr, subCtgr, typeCtgr] = categoriesByCyrillicNames;
+
     const searchTxtFromUrl = getSearchTxt(categories as string[]);
 
     // SEO
     const seoContent = getSEOContent(ctgr, subCtgr, typeCtgr, translatedLocation, locale);
+
     const seoTxt = seoContent.text;
+
     const description = searchTxtFromUrl
                         ? `${searchTxtFromUrl} ${locale === 'ru' ? 'в' : ''} ${translatedLocation}${locale === 'uz' ? 'da' : ''} SLONDO.uz`
                         : seoContent.description;
+
     let title = searchTxtFromUrl ? `${searchTxtFromUrl} - SLONDO.uz` : seoContent.title;
+
     if (ctgr) {
         title = searchTxtFromUrl
                 ? `${searchTxtFromUrl} - ${t(`categories:${typeCtgr?.name ?? subCtgr?.name ?? ctgr?.name ?? ''}`)} - SLONDO.uz`
@@ -60,15 +61,13 @@ export const SearchPostsByFilters: FC<SearchPostsByFiltersPropsType> = (props) =
                         <SearchForm
                             t={t}
                             urlParams={urlParams}
-                            categories={categories}
+                            categories={categoriesByCyrillicNames}
                         />
                         <SearchResult
                             t={t}
-                            categories={categories}
                             urlParams={urlParams}
-                            initPosts={initPosts}
-                            initTotal={initTotal}
                             searchTxtFromUrl={searchTxtFromUrl}
+                            categories={categoriesByCyrillicNames}
                         />
                     </Grid>
                     <Hidden mdDown>
