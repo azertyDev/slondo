@@ -3,14 +3,15 @@ import {SubscriptionItem} from '@src/components/cabinet/cabinet_pages/user_socia
 import {useStyles} from './useStyles';
 
 export const UserSubscriptions: FC<any> = ({ subscriptions, handleFollow }) => {
+
     const classes = useStyles();
     return (
         <div className={classes.root}>
-            {subscriptions.map(subscription => (
+            {subscriptions.map(({id, subscription}) => (
                 <SubscriptionItem
-                    {...subscription}
-                    key={subscription.id}
+                    key={id}
                     handleFollow={handleFollow}
+                    user={subscription}
                 />)
             )}
         </div>

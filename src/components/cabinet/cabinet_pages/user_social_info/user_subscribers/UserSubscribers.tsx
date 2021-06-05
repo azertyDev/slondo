@@ -6,11 +6,11 @@ export const UserSubscribers: FC<any> = ({ subscribers , handleFollow}) => {
     const classes = useStyles();
     return (
         <div className={classes.root}>
-            {subscribers.map(subscriber => (
+            {subscribers.map(({id, subscriber}) => (
                 <SubscriptionItem
-                    {...subscriber}
-                    key={subscriber.id}
+                    key={id}
                     handleFollow={handleFollow}
+                    user={subscriber}
                 />)
             )}
         </div>

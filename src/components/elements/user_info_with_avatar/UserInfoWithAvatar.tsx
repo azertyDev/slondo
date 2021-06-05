@@ -1,5 +1,5 @@
-import React, {FC} from 'react';
-import {Typography} from '@material-ui/core';
+import React, {Dispatch, FC, SetStateAction} from 'react';
+import {Box, Typography} from '@material-ui/core';
 import {Rating} from '@src/components/elements/rating/Rating';
 import {UserAvatarComponent} from '@src/components/elements/user_info_with_avatar/avatar/UserAvatarComponent';
 import {useTranslation} from 'react-i18next';
@@ -30,10 +30,10 @@ export const UserInfoWithAvatar: FC<UserInfoWithAvatarPropsType> = (props) => {
     return (
         <div className={classes.root}>
             <div className="user-info">
-                <div>
+                <Box>
                     <UserAvatarComponent avatar={owner.avatar} />
-                </div>
-                <div>
+                </Box>
+                <Box>
                     <Link href={`/user/${owner.id}`}>
                         <a>
                             <Typography color="initial" variant='subtitle1'>
@@ -59,7 +59,7 @@ export const UserInfoWithAvatar: FC<UserInfoWithAvatarPropsType> = (props) => {
                             </Typography>
                         </CustomButton>
                     )}
-                </div>
+                </Box>
             </div>
         </div>
     );

@@ -5,7 +5,7 @@ import {ViewPropsType} from "@src/components/elements/card/card_view/CardView";
 
 
 const GridModeView: FC<ViewPropsType> = (props) => {
-    const {isFetch, list,} = props;
+    const {isFetch, list} = props;
 
     return (
         <Grid container spacing={2}>

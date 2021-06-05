@@ -40,7 +40,7 @@ export const UserSocialInfo: FC<UserSocialInfoPropsType> = ({t, user}) => {
                 className={pathname === '/cabinet/subscribe' ? 'selected' : ''}
             >
                 <Typography variant="subtitle1">
-                    {t('cabinet:subscriptionsAndSubscribers')}
+                    {t('cabinet:follows')}
                 </Typography>
             </CustomButton>
         </List>

@@ -450,5 +450,19 @@ export const userAPI = {
             .catch(err => {
                 throw err;
             });
+    },
+    getUserSubscribers: (params) => {
+        return instance.get(`user/subscribers/byUserId`, {params})
+            .then(res => res.data)
+            .catch(err => {
+                throw err;
+            });
+    },
+    getUserSubscriptions: (params) => {
+        return instance.get(`user/subscriptions/byUserId`, {params})
+            .then(res => res.data)
+            .catch(err => {
+                throw err;
+            });
     }
 };
