@@ -9,7 +9,7 @@ import {WithT} from 'i18next';
 import {ProfileTabsContent} from '@src/components/user_profile/tabs/ProfileTabsContent';
 import {CircularProgress} from '@material-ui/core';
 
-export const UserPostsContainer: FC<WithT> = ({t}) => {
+export const UserPosts: FC<WithT> = ({t}) => {
     const dispatch = useDispatch();
     const {user_id} = useRouter().query;
 

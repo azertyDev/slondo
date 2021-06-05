@@ -1,4 +1,4 @@
-import React, {FC, useEffect, useState} from 'react';
+import React, {FC, useState} from 'react';
 import {TabsDataType} from '@root/interfaces/Cabinet';
 import {WithT} from 'i18next';
 import {ProfileTabsContent} from '@src/components/user_profile/tabs/ProfileTabsContent';
@@ -7,8 +7,9 @@ import {userAPI} from '@src/api/api';
 import {setErrorMsgAction} from '@src/redux/slices/errorSlice';
 import {useRouter} from 'next/router';
 import {SubscriptionItem} from '@src/components/cabinet/cabinet_pages/user_social_info/subscription_item/SubscriptionItem';
+import {ITEMS_PER_PAGE_SUBS} from '@src/constants';
 
-export const UserFollowsListContainer: FC<WithT> = ({t}) => {
+export const UserFollowsList: FC<WithT> = ({t}) => {
     const dispatch = useDispatch();
     const {query: {user_id}} = useRouter();
     const initialSubs = {
@@ -30,7 +31,7 @@ export const UserFollowsListContainer: FC<WithT> = ({t}) => {
             const fetchParams = {
                 user_id,
                 page,
-                itemsPerPage: 1
+                itemsPerPage: ITEMS_PER_PAGE_SUBS
             };
             setIsFetch(true);
 
@@ -78,7 +79,7 @@ export const UserFollowsListContainer: FC<WithT> = ({t}) => {
             id: 0,
             title: t('Подписки'),
             total: subscriptions.total,
-            itemsPerPage: 1,
+            itemsPerPage: ITEMS_PER_PAGE_SUBS,
             handleFetchByPage: fetchSubsByPage('subscriptions'),
             component: <div>{subscriptionsList}</div>
         },
@@ -86,7 +87,7 @@ export const UserFollowsListContainer: FC<WithT> = ({t}) => {
             id: 1,
             title: t('Подписчики'),
             total: subscribers.total,
-            itemsPerPage: 1,
+            itemsPerPage: ITEMS_PER_PAGE_SUBS,
             handleFetchByPage: fetchSubsByPage('subscribers'),
             component: <div>{subscribersList}</div>
         }

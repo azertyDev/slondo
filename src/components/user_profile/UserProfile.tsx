@@ -4,9 +4,9 @@ import {MainLayout} from '@src/components/main_layout/MainLayout';
 import {UserInfo} from '@root/interfaces/Auth';
 import {SidebarMenu} from '@src/components/user_profile/sidebar_menu/SidebarMenu';
 import {UserInfoWithAvatar} from '@src/components/elements/user_info_with_avatar/UserInfoWithAvatar';
-import {UserPostsContainer} from '@src/components/user_profile/pages/posts/UserPostsContainer';
+import {UserPosts} from '@src/components/user_profile/pages/posts/UserPosts';
 import {UserRatingsContainer} from '@src/components/user_profile/pages/ratings/UserRatingsContainer';
-import {UserFollowsListContainer} from '@src/components/user_profile/pages/follows_list/UserFollowsListContainer';
+import {UserFollowsList} from '@src/components/user_profile/pages/follows_list/UserFollowsList';
 import {useStyles} from './useStyles';
 import {userAPI} from '@src/api/api';
 import {setErrorMsgAction} from '@src/redux/slices/errorSlice';
@@ -47,11 +47,11 @@ export const UserProfile: FC = () => {
     const getPageContent = () => {
         switch (pageName) {
             case 'profile_posts':
-                return <UserPostsContainer t={t} />;
+                return <UserPosts t={t} />;
             case 'profile_ratings':
                 return <UserRatingsContainer t={t} />;
             case 'profile_follows':
-                return <UserFollowsListContainer t={t} />;
+                return <UserFollowsList t={t} />;
         }
     };
 
