@@ -36,8 +36,9 @@ export const HousesCottagesParams: FC<CommonParamsPropsType> = (props) => {
         title: '',
         rooms: null,
         number_of_floors: null,
-        floor: null,
-        estate_type: null
+        estate_type: null,
+        general_area: '',
+        land_area: ''
     };
 
     const formik = useFormik({
@@ -55,7 +56,8 @@ export const HousesCottagesParams: FC<CommonParamsPropsType> = (props) => {
     } = formik;
 
     const {handleCheckbox, handleOptionCheckbox, handleSelect} = useHandlers(values, setValues);
-
+    console.log(values);
+    console.log(errors);
     const classes = useStyles();
     return (
         <div className={classes.root}>
