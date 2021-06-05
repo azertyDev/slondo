@@ -11,10 +11,9 @@ import {SiteServices} from '@src/components/post/create_post/form_page/common_fo
 import {CheckboxSelect} from '@src/components/elements/checkbox_select/CheckboxSelect';
 import {
     cookies,
-    CtgrsByCyrillicNameType,
-    normalizeFiltersByCategory,
     toUrlParams,
-    transformCyrillic
+    transformCyrillic,
+    normalizeFiltersByCategory
 } from '@src/helpers';
 import {useHandlers} from '@src/hooks/useHandlers';
 import {CarForm} from '@src/components/search_posts_by_filters/categories_forms/car_form/CarForm';
@@ -32,12 +31,12 @@ export type CommonFiltersType = {
     onSubmit,
     filters,
     urlParams,
-    handleResetMainParams: () => void
+    handleResetParams: () => void
 };
 
 type SearchFormPropsType = {
     urlParams,
-    categories: CtgrsByCyrillicNameType | [],
+    categories
 } & WithT;
 
 export const SearchForm: FC<SearchFormPropsType> = (props) => {
@@ -53,6 +52,8 @@ export const SearchForm: FC<SearchFormPropsType> = (props) => {
         post_type,
         price_from,
         price_to,
+        free,
+        archive,
         safe_deal,
         exchange,
         delivery,
@@ -60,16 +61,21 @@ export const SearchForm: FC<SearchFormPropsType> = (props) => {
     } = urlParams;
 
     const postTypesList = [postTypes[0], postTypes[1]];
+    const postType = !!archive
+                     ? postTypesList[1]
+                     : postTypesList.find(type => type.id === +post_type) || null;
 
-    const initVals: any = {
-        category: null,
-        type: null,
-        post_type: null,
-        price_from: '',
-        price_to: '',
-        safe_deal: false,
-        exchange: false,
-        delivery: false
+    const initVals = {
+        category: subCtgr || ctgr || null,
+        type: typeCtgr || null,
+        post_type: postType,
+        price_from: price_from || '',
+        price_to: price_to || '',
+        free: !!free,
+        archive: !!archive,
+        safe_deal: !!safe_deal,
+        exchange: !!exchange,
+        delivery: !!delivery
     };
 
     const initFilters = {
@@ -78,12 +84,6 @@ export const SearchForm: FC<SearchFormPropsType> = (props) => {
         typeCategories: subCtgr?.type || [],
         filtersByCtgr: {}
     };
-
-    if (ctgr?.name === 'car') {
-        initVals.year = '';
-        initVals.mileage = '';
-        initVals.engine_capacity = '';
-    }
 
     const dispatch = useDispatch();
     const {push} = useRouter();
@@ -105,28 +105,32 @@ export const SearchForm: FC<SearchFormPropsType> = (props) => {
     const typeLabel = mainCategoryName === 'service' ? 'service_type' : isJobCtgr ? 'job_type' : 'good_type';
 
     const {handleInput} = useHandlers(values, setValues);
-    const [free, setFree] = useState(false);
-
-    const handleFree = ({target}) => {
-        setFree(target.checked);
-        if (target.checked) {
-            setValues({
-                ...values,
-                price_from: '0',
-                price_to: ''
-            });
-        }
-    };
 
     const handleCheckbox = (name) => ({target}) => {
-        setValues({...values, [name]: target.checked});
+        let vals: any = {...values, [name]: target.checked};
+        if (name === 'free') {
+            vals = {
+                ...vals,
+                price_from: '',
+                price_to: ''
+            };
+        }
+        setValues(vals);
     };
 
     const handleSelect = (name, value) => {
         if (name === 'category') {
             setValues({
-                ...initVals,
-                category: value
+                category: value,
+                type: null,
+                post_type: null,
+                price_from: '',
+                price_to: '',
+                free: false,
+                archive: false,
+                safe_deal: false,
+                exchange: false,
+                delivery: false
             });
         } else {
             setValues({...values, [name]: value});
@@ -138,39 +142,39 @@ export const SearchForm: FC<SearchFormPropsType> = (props) => {
         setValues({...values, post_type: value});
     };
 
-    const handleResetMainParams = () => {
+    const handleResetParams = () => {
         setValues(initVals);
     };
 
     const getFiltersByCtgr = (): ReactNode => {
         switch (mainCategoryName) {
-            case 'foreignCars':
-            case 'madeInUzb':
+            case 'car':
                 return <CarForm
                     onSubmit={onSubmit}
                     filters={filtersByCtgr}
                     urlParams={urlFiltersParams}
-                    handleResetMainParams={handleResetMainParams}
+                    handleResetParams={handleResetParams}
                 />;
             default:
                 return <RegularForm
                     onSubmit={onSubmit}
                     filters={filtersByCtgr}
                     urlParams={urlFiltersParams}
-                    handleResetMainParams={handleResetMainParams}
+                    handleResetParams={handleResetParams}
                 />;
         }
     };
 
     function urlByParams(values): string {
         let url = '/';
-        const location = cookies.get('user_location');
+        const userLocation = cookies.get('user_location');
         const params = toUrlParams({...commonVals, ...values});
 
-        if (location) {
-            const {city, region} = location;
-            const {cities, regions} = transformLocations;
-            url = url.concat(city ? `${cities[city.name]}/` : `${regions[region.name]}/`);
+        if (userLocation) {
+            const {city} = userLocation;
+            const region = transformLocations[userLocation.region.name];
+
+            url = url.concat(city ? `${region[city.name]}/` : `${region.name}/`);
         } else {
             url = url.concat(`uzbekistan/`);
         }
@@ -183,6 +187,7 @@ export const SearchForm: FC<SearchFormPropsType> = (props) => {
             }
             url = url.concat(categoryName);
         }
+
         if (type) url = url.concat(`${transformCyrillic(type.ru_name)}/`);
         if (searchTxt) url = url.concat(`q-${searchTxt}/`);
         if (params) url = url.concat(params);
@@ -213,25 +218,6 @@ export const SearchForm: FC<SearchFormPropsType> = (props) => {
             dispatch(setErrorMsgAction(e.message));
         }
     };
-
-    const setInitVals = () => {
-        const vals: any = {
-            category: subCtgr || ctgr || null,
-            type: typeCtgr || null,
-            post_type: postTypesList.find(type => type.id === +post_type) || null,
-            price_from: price_from || '',
-            price_to: price_to || '',
-            safe_deal: !!safe_deal,
-            exchange: !!exchange,
-            delivery: !!delivery
-        };
-
-        setValues(vals);
-    };
-
-    useEffect(() => {
-        setInitVals();
-    }, [urlParams]);
 
     useEffect(() => {
         setFiltersByCtgr();
@@ -273,13 +259,23 @@ export const SearchForm: FC<SearchFormPropsType> = (props) => {
                         handleSelect={handlePostType}
                     />
                 </Grid>
+                {values.post_type?.name === 'auc' && (
+                    <Grid item container alignItems='center' xs={2}>
+                        <CheckboxSelect
+                            t={t}
+                            name='archive'
+                            checked={values.archive}
+                            onChange={handleCheckbox('archive')}
+                        />
+                    </Grid>
+                )}
                 <Grid container item xs={12}>
                     <Grid item xs={4}>
                         <PriceFromTo
                             t={t}
                             name={isJobCtgr ? 'salary' : 'cost'}
                             values={values}
-                            disabled={free}
+                            disabled={values.free}
                             handleInput={handleInput}
                         />
                     </Grid>
@@ -287,8 +283,8 @@ export const SearchForm: FC<SearchFormPropsType> = (props) => {
                         <CheckboxSelect
                             t={t}
                             name='free'
-                            checked={free}
-                            onChange={handleFree}
+                            checked={values.free}
+                            onChange={handleCheckbox('free')}
                         />
                     </Grid>
                 </Grid>

@@ -23,7 +23,6 @@ export const ApartmentsParams: FC<CommonParamsPropsType> = (props) => {
     const {
         t,
         type,
-        isSearch,
         filters,
         isPreview,
         onSubmit,
@@ -71,11 +70,9 @@ export const ApartmentsParams: FC<CommonParamsPropsType> = (props) => {
                     isEditable={currentFormIndex < 3}
                     handleEdit={handleFormOpen(3)}
                 >
-                    {!isSearch && (
-                        <Grid item xs={6}>
-                            <PostTitle isPreview={isPreview} title={values.title} formik={formik} t={t}/>
-                        </Grid>
-                    )}
+                    <Grid item xs={6}>
+                        <PostTitle isPreview={isPreview} title={values.title} formik={formik} t={t}/>
+                    </Grid>
                     <Grid container spacing={2}>
                         {isPreview
                          ? <PreviewValues t={t} values={values}/>

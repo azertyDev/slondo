@@ -1,8 +1,8 @@
-import {FC, Fragment} from 'react';
+import {FC, Fragment, useEffect} from 'react';
 import {Grid, Typography} from '@material-ui/core';
 import {excludeFields, optionFields} from '@src/common_data/form_fields';
 import {DropDownSelect} from '@src/components/elements/drop_down_select/DropDownSelect';
-import {getErrorMsg} from '@src/helpers';
+import {getErrorMsg, isRequired} from '@src/helpers';
 import {OptionsSelect} from '@src/components/elements/options_select/OptionsSelect';
 import {CommonParamsPropsType} from '../../ParamsFormContainer';
 import {useHandlers} from '@src/hooks/useHandlers';
@@ -44,6 +44,18 @@ export const RegularParams: FC<CommonParamsPropsType> = (props) => {
     } = formik;
 
     const {handleSelect} = useHandlers(values, setValues);
+
+    const setRequireVals = () => {
+        const reqVals = {};
+        Object.keys(filters).forEach(k => {
+            if (isRequired(k)) reqVals[k] = null;
+        });
+        setValues({...values, ...reqVals});
+    };
+
+    useEffect(() => {
+        setRequireVals();
+    }, [filters]);
 
     const classes = useStyles();
     return (

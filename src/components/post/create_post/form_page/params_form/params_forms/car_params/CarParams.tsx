@@ -28,7 +28,6 @@ type CarParamsPropsType = {
 export const CarParams: FC<CarParamsPropsType> = (props) => {
     const {
         t,
-        isSearch,
         onSubmit,
         subCategoryName,
         isPreview,
@@ -41,6 +40,7 @@ export const CarParams: FC<CarParamsPropsType> = (props) => {
     const isMadeInUzb = subCategoryName === 'madeInUzb';
 
     const initVals: any = {
+        title: '',
         manufacturer: null,
         model: null,
         year: null,
@@ -53,7 +53,6 @@ export const CarParams: FC<CarParamsPropsType> = (props) => {
         broken: false
     };
 
-    if (!isSearch) initVals.title = '';
     if (isMadeInUzb) initVals.position = null;
 
     const dispatch = useDispatch();
@@ -205,11 +204,9 @@ export const CarParams: FC<CarParamsPropsType> = (props) => {
                     isEditable={currentFormIndex < 3}
                     handleEdit={handleFormOpen(3)}
                 >
-                    {!isSearch && (
-                        <Grid item xs={6}>
-                            <PostTitle isPreview={isPreview} title={values.title} formik={formik} t={t}/>
-                        </Grid>
-                    )}
+                    <Grid item xs={6}>
+                        <PostTitle isPreview={isPreview} title={values.title} formik={formik} t={t}/>
+                    </Grid>
                     <Grid container spacing={2}>
                         {isPreview
                          ? <PreviewValues t={t} values={values}/>
@@ -226,7 +223,6 @@ export const CarParams: FC<CarParamsPropsType> = (props) => {
                                      values={values}
                                      onBlur={handleBlur}
                                      items={filters.manufacturer}
-                                     disableRequire={isSearch}
                                      handleSelect={handleSelect}
                                      errorMsg={getErrorMsg(errors.manufacturer, touched.manufacturer, t)}
                                  />
@@ -243,7 +239,6 @@ export const CarParams: FC<CarParamsPropsType> = (props) => {
                                      values={values}
                                      onBlur={handleBlur}
                                      items={values.manufacturer?.models}
-                                     disableRequire={isSearch}
                                      handleSelect={handleSelect}
                                      errorMsg={getErrorMsg(errors.model, touched.model, t)}
                                  />
@@ -259,7 +254,6 @@ export const CarParams: FC<CarParamsPropsType> = (props) => {
                                      name='year'
                                      values={values}
                                      onBlur={handleBlur}
-                                     disableRequire={isSearch}
                                      handleSelect={handleSelect}
                                      errorMsg={getErrorMsg(errors.year, touched.year, t)}
                                      items={isMadeInUzb ? values.model?.years : filters.years}
@@ -276,7 +270,6 @@ export const CarParams: FC<CarParamsPropsType> = (props) => {
                                              t={t}
                                              values={values}
                                              bodies={filters.body}
-                                             disableRequire={isSearch}
                                              handleSelect={handleSelect}
                                              errorMsg={getErrorMsg(errors.body, touched.body, t)}
                                          />
@@ -294,7 +287,6 @@ export const CarParams: FC<CarParamsPropsType> = (props) => {
                                                  values={values}
                                                  onBlur={handleBlur}
                                                  items={valuesByYear.positions}
-                                                 disableRequire={isSearch}
                                                  handleSelect={handleSelect}
                                                  errorMsg={getErrorMsg(errors.position, touched.position, t)}
                                              />
@@ -314,7 +306,6 @@ export const CarParams: FC<CarParamsPropsType> = (props) => {
                                                      values={values}
                                                      onBlur={handleBlur}
                                                      items={filters.transmission}
-                                                     disableRequire={isSearch}
                                                      handleSelect={handleSelect}
                                                      errorMsg={getErrorMsg(errors.transmission, touched.transmission, t)}
                                                  />
@@ -331,7 +322,6 @@ export const CarParams: FC<CarParamsPropsType> = (props) => {
                                                      values={values}
                                                      onBlur={handleBlur}
                                                      items={filters.drive}
-                                                     disableRequire={isSearch}
                                                      handleSelect={handleSelect}
                                                      errorMsg={getErrorMsg(errors.drive, touched.drive, t)}
                                                  />
@@ -348,7 +338,6 @@ export const CarParams: FC<CarParamsPropsType> = (props) => {
                                                      values={values}
                                                      onBlur={handleBlur}
                                                      items={filters.engine_type}
-                                                     disableRequire={isSearch}
                                                      handleSelect={handleSelect}
                                                      errorMsg={getErrorMsg(errors.engine_type, touched.engine_type, t)}
                                                  />
@@ -365,7 +354,6 @@ export const CarParams: FC<CarParamsPropsType> = (props) => {
                                                      name='engine_capacity'
                                                      labelText='engine_capacity'
                                                      value={values.engine_capacity}
-                                                     disableRequire={isSearch}
                                                      onChange={handleInput}
                                                      errorMsg={getErrorMsg(errors.engine_capacity, touched.engine_capacity, t)}
                                                  />
@@ -382,7 +370,6 @@ export const CarParams: FC<CarParamsPropsType> = (props) => {
                                                      name='mileage'
                                                      labelText='mileage'
                                                      value={values.mileage ?? ''}
-                                                     disableRequire={isSearch}
                                                      onChange={handleInput}
                                                      errorMsg={getErrorMsg(errors.mileage, touched.mileage, t)}
                                                  />
