@@ -13,6 +13,7 @@ import {CustomFormikProvider} from '@src/components/elements/custom_formik_provi
 import {ParametersIcon} from '@src/components/elements/icons';
 import {CustomAccordion} from '@src/components/elements/accordion/CustomAccordion';
 import {useStyles} from './useStyles';
+import {keys} from '@material-ui/core/styles/createBreakpoints';
 
 
 export const RegularParams: FC<CommonParamsPropsType> = (props) => {
@@ -48,7 +49,7 @@ export const RegularParams: FC<CommonParamsPropsType> = (props) => {
     const setRequireVals = () => {
         const reqVals = {};
         Object.keys(filters).forEach(k => {
-            if (isRequired(k)) reqVals[k] = null;
+            if (isRequired(k) && !values[k]) reqVals[k] = null;
         });
         setValues({...values, ...reqVals});
     };
