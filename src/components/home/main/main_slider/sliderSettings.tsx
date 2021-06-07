@@ -6,6 +6,7 @@ export const settings = {
     dots: false,
     infinite: true,
     centerMode: true,
+    adaptiveHeight: true,
     centerPadding: '0px',
     slidesToShow: 4,
     slidesToScroll: 1,

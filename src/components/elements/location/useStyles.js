@@ -1,24 +1,22 @@
 import {makeStyles} from '@material-ui/core/styles';
 
 export const useStyles = makeStyles((theme) => ({
-    root: {
-        '& div.location-wrapper': {
-            display: 'flex',
-            alignItems: 'center',
-            '& > h6.MuiTypography-subtitle1': {
-                cursor: 'pointer',
-                textDecoration: 'underline'
-            },
-            '& > svg': {
-                marginRight: '12px',
-                [theme.breakpoints.down('md')]: {
-                    marginRight: '5px'
-                }
+    location: {
+        display: 'flex',
+        alignItems: 'center',
+        '& > h6.MuiTypography-subtitle1': {
+            cursor: 'pointer',
+            textDecoration: 'underline'
+        },
+        '& > svg': {
+            marginRight: '12px',
+            [theme.breakpoints.down('md')]: {
+                marginRight: '5px'
             }
         }
     },
     locationModal: {
-        width: '960px',
+        padding: '40px 25px',
         '& > div.locations-input': {
             width: '100%',
             height: 38,
@@ -37,6 +35,9 @@ export const useStyles = makeStyles((theme) => ({
             },
             '& > input.search-input': {
                 padding: '8px 230px 8px 35px',
+                [theme.breakpoints.down('xs')]: {
+                    padding: '8px 0 8px 12px'
+                },
                 width: '100%',
                 borderRadius: '7px',
                 border: '1px solid #ccc',
@@ -45,15 +46,28 @@ export const useStyles = makeStyles((theme) => ({
             '& > button.search-button': {
                 width: 88,
                 marginLeft: '-70px',
-                color: '#000',
-                border: '1px solid #C0C0C0',
                 borderBottomRightRadius: '7px',
                 borderTopRightRadius: '7px',
                 borderBottomLeftRadius: '0',
                 borderTopLeftRadius: '0',
-                backgroundColor: '#E9E9E9',
-                lineHeight: '1.65'
+                backgroundColor: 'rgba(125, 188, 246, 1)',
+                lineHeight: '1.65',
+                '& h6': {
+                    color: '#fff'
+                }
+            }
+        },
+        '& div.locations-table': {
+            '& > div:first-child': {
+                '& p': {
+                    fontWeight: '600'
+                },
+                padding: '32px 0 16px '
+            },
+            '& div > div': {
+                padding: '16px 0'
             }
         }
     }
+
 }));

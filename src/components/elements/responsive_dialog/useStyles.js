@@ -4,7 +4,6 @@ export const useStyles = makeStyles((theme) => ({
     root: {
         '& div.MuiDialog-paperFullScreen': {
             [theme.breakpoints.down('sm')]: {
-                flexDirection: 'row',
                 alignItems: 'center',
                 maxWidth: '576px'
             }
