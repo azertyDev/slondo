@@ -6,15 +6,14 @@ import {useStyles} from './useStyles';
 import {SubscriberType} from '@root/interfaces/Auth';
 
 
-export const SubscriptionItem: FC<SubscriberType> = ({  user, user_id, handleFollow }) => {
-
+export const SubscriptionItem: FC<SubscriberType> = ({user, handleFollow}) => {
     const classes = useStyles();
     return (
         <Grid item xs={9} className={classes.root}>
-            <UserInfoWithAvatar isOwner={true} owner={user} handleFollow={handleFollow}/>
-            <CustomButton onClick={handleFollow(user_id)}>
+            <UserInfoWithAvatar isOwner={true} owner={user} handleFollow={handleFollow} />
+            <CustomButton onClick={handleFollow(user.id)}>
                 <Typography variant="subtitle2">
-                    {user_id}
+                    {user.id}
                 </Typography>
             </CustomButton>
         </Grid>

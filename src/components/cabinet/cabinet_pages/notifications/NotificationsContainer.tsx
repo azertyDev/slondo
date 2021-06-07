@@ -1,4 +1,4 @@
-import React, {FC, useEffect, useState} from 'react';
+import {FC, useEffect, useState} from 'react';
 import {Notifications} from '@src/components/cabinet/cabinet_pages/notifications/Notifications';
 import {withAuthRedirect} from '@src/hocs/withAuthRedirect';
 import {useDispatch, useSelector} from 'react-redux';
@@ -8,7 +8,7 @@ import {RootState} from '@src/redux/rootReducer';
 import {useTranslation} from 'next-i18next';
 import {ITEMS_PER_PAGE} from '@src/constants';
 import {CustomPagination} from '@root/src/components/elements/custom_pagination/CustomPagination';
-import useModal from '@src/hooks/useModal';
+import {useModal} from '@src/hooks/useModal';
 
 export type initialStateType = {
     isFetch: boolean,
@@ -44,26 +44,25 @@ const NotificationsContainer: FC = () => {
     const [page, setPage] = useState(1);
     const [pageCount, setPageCount] = useState(0);
 
-    const indexOfLastPost = page * ITEMS_PER_PAGE;
-    const indexOfFirstPost = indexOfLastPost - ITEMS_PER_PAGE;
-    const currentPosts = notifications.data.slice(indexOfFirstPost, indexOfLastPost);
-
     const handleOpenModal = () => {
         setOpenModal(true);
     };
+
     const handleCloseModal = () => {
         setOpenModal(false);
     };
+
     const fetchAllNotification = async () => {
         try {
             setNotifications({...notifications, isFetch: true});
-            const {data} = await userAPI.getAllNotifications();
+            const {data, total} = await userAPI.getAllNotifications({page, itemsPerPage: ITEMS_PER_PAGE});
             setNotifications({...notifications, data, isFetch: false});
-            setPageCount(Math.ceil(data.length / ITEMS_PER_PAGE) || 1);
+            setPageCount(total);
         } catch (e) {
             dispatch(setErrorMsgAction(e.message));
         }
     };
+
     const handleDeleteNotification = (id) => async () => {
         try {
             setNotifications({...notifications, isFetch: true});
@@ -76,6 +75,7 @@ const NotificationsContainer: FC = () => {
             dispatch(setErrorMsgAction(e.message));
         }
     };
+
     const handleDeleteAllNotification = async () => {
         try {
             setNotifications({...notifications, isFetch: true});
@@ -86,6 +86,7 @@ const NotificationsContainer: FC = () => {
             dispatch(setErrorMsgAction(e.message));
         }
     };
+
     const fetchUserPhone = (user_id) => async () => {
         try {
             const {phone} = await userAPI.getPhoneByUserId(user_id);
@@ -94,25 +95,27 @@ const NotificationsContainer: FC = () => {
             dispatch(setErrorMsgAction(e.message));
         }
     };
-    const handlePaginationPage = (event, value) => {
-        setPage(value);
+
+    const handlePagePagination = (_, pageNum) => {
+        setPage(pageNum);
     };
+
+    const pagination = (
+        <CustomPagination
+            currentPage={page}
+            pageCount={pageCount}
+            itemsPerPage={ITEMS_PER_PAGE}
+            handlePagePagination={handlePagePagination}
+        />
+    );
 
     useEffect(() => {
         fetchAllNotification();
     }, [page]);
 
-    const pagination = (
-        <CustomPagination
-            pageCount={pageCount}
-            currentPage={page}
-            handlePaginationPage={handlePaginationPage}
-        />
-    );
-
     return <Notifications
         t={t}
-        notifications={currentPosts}
+        notifications={notifications.data}
         isFetch={notifications.isFetch}
         openModal={openModal}
         openSnackbar={openSnackbar}

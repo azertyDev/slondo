@@ -1,7 +1,11 @@
 {
+  "salary": "Ish haqi",
+  "post_not_found": "Bunday parametrlarga ega e'lon topilmadi",
   "post": "E'lonlar",
   "auc": "Auksionlar",
   "cost": "Narxi",
+  "job_type": "Ish turi",
+  "service_type": "Xizmat turi",
   "post_type": "E'lon turi",
   "from": "Dan (sum)",
   "to": "Gacha (sum)",

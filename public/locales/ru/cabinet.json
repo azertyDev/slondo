@@ -5,9 +5,10 @@
     "rating": "Рейтинг",
     "favorite": "Избранное",
     "reviews": "Отзывы",
-    "subscriptionsAndSubscribers": "Подписки/подписчики",
+    "follows": "Подписки/подписчики",
     "subscribers": "Подписчики",
     "subscriptions": "Подписки",
+    "subscribe": "Подписаться",
     "notifications": "Уведомления",
     "messages": "Сообщения",
     "safeShopping": "Безопасная покупка",
@@ -28,5 +29,8 @@
     "auctions": "Аукционы",
     "editAvatar": "Изменить фото",
     "addAvatar": "Добавить фото",
-    "deleteAvatar": "Удалить фото"
+    "deleteAvatar": "Удалить фото",
+    "profile_ratings": "Рейтинг",
+    "profile_follows": "Подписки/подписчики",
+    "profile_posts": "Объявления"
 }

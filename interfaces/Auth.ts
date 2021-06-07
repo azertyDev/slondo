@@ -8,7 +8,7 @@ export interface UserInfo {
     available_days: string,
     available_start_time?: string,
     available_end_time?: string,
-    rating?: string,
+    rating?: number,
     observer?: {
         number_of_reviews: number,
         number_of_purchase: number,
@@ -19,9 +19,7 @@ export interface UserInfo {
 }
 
 export type SubscriberType = {
-    id: number,
-    subscriber_id: number,
-    user_id: number,
+    user_id?: number,
     user?: UserInfo,
     handleFollow: (user_id) => () => void,
 }

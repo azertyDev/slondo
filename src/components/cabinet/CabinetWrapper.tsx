@@ -5,7 +5,6 @@ import {CabinetSidebar} from './cabinet_sidebar/CabinetSidebar';
 import {useStyles} from './useStyles';
 import {useSelector} from 'react-redux';
 import {RootState} from '@src/redux/rootReducer';
-import {useRouter} from 'next/router';
 
 export type CabinetMenuPropsType = {
     title: string;

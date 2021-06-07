@@ -1,4 +1,4 @@
-import React, {FC, useEffect, useState} from 'react';
+import {FC, useEffect, useState} from 'react';
 import {TabsContent} from '@src/components/cabinet/cabinet_pages/TabsContent';
 import {withAuthRedirect} from '@root/src/hocs/withAuthRedirect';
 import {userAPI} from '@src/api/api';
@@ -10,9 +10,9 @@ import {InitialCabinetCardState, TabsDataType} from '@root/interfaces/Cabinet';
 import {useTranslation} from 'next-i18next';
 import {CabinetCard} from '@src/components/cabinet/cabinet_card/CabinetCard';
 import {BannedPosts} from '@src/components/cabinet/cabinet_pages/banned_posts/BannedPosts';
-import {useStyles} from './useStyles';
 import {CustomButton} from '@src/components/elements/custom_button/CustomButton';
-import useModal from '@src/hooks/useModal';
+import {useModal} from '@src/hooks/useModal';
+import {useStyles} from './useStyles';
 
 const BannedPostsContainer: FC = () => {
     const dispatch = useDispatch();

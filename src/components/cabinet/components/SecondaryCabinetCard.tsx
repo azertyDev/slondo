@@ -9,16 +9,16 @@ import {Rating} from '@src/components/elements/rating/Rating';
 import {UserAvatarComponent} from '@src/components/elements/user_info_with_avatar/avatar/UserAvatarComponent';
 import StarIcon from '@material-ui/icons/Star';
 import {WithT} from 'i18next';
-import {useStyles} from './useStyles';
 import {UserInfoWithAvatar} from '@src/components/elements/user_info_with_avatar/UserInfoWithAvatar';
 import {ResponsiveDialog} from '@src/components/elements/responsive_dialog/ResponsiveDialog';
-import useModal from '@src/hooks/useModal';
+import {useModal} from '@src/hooks/useModal';
 import {Form, FormikProvider, useFormik} from 'formik';
 import {regularFormSchema} from '@root/validation_schemas/createPostSchemas';
 import {userAPI} from '@src/api/api';
 import {FormikTextarea} from '../../elements/formik_textarea/FormikTextarea';
 import {getErrorMsg} from '@src/helpers';
 import {CustomSnackbar} from '@src/components/elements/snackbar/Snackbar';
+import {useStyles} from './useStyles';
 
 type CabinetCardPropsType = {
     user?,
@@ -40,7 +40,7 @@ export const SecondaryCabinetCard: FC<CabinetCardPropsType> = (props) => {
     const {modalOpen: openSnackbar, handleModalOpen: handleOpenSnackbar, handleModalClose: handleCloseSnackbar} = useModal();
     const userId = useSelector((store: RootState) => store.user.info.id);
     const [showPhone, setShowOpen] = useState(false);
-    const txtLimit = 500;
+    const txtLimit = 3000;
 
     const onChangeRating = (event, rating) => {
         setValues({...values, rating});
@@ -228,10 +228,12 @@ export const SecondaryCabinetCard: FC<CabinetCardPropsType> = (props) => {
                             >
                                 {user.auction.offer.user.name}
                             </Typography>
-                            <Rating card ratingValue={user.author.rating} />
+                            <Rating card ratingValue={user.author?.rating} />
                             <Typography variant='h6'>{user.auction.offer.price} сум</Typography>
-                            <CustomButton className='accept'
-                                             onClick={acceptOfferThePrice(user.auction.offer.id, true)}>
+                            <CustomButton
+                                className='accept'
+                                onClick={acceptOfferThePrice(user.auction.offer.id, true)}
+                            >
                                 <DoneAllIcon />
                                 <Typography
                                     variant="subtitle2"

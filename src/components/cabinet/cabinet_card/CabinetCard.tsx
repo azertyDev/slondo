@@ -19,8 +19,8 @@ import {formatNumber, numberPrettier, transformCyrillic, weekDaysHelper} from '@
 import Countdown from 'react-countdown';
 import {useRouter} from 'next/router';
 import {CardDataType} from '@root/interfaces/Cabinet';
-import {useStyles} from './useStyles';
 import {WithT} from 'i18next';
+import {useStyles} from './useStyles';
 
 type CabinetCardPropsType = {
     cardData: CardDataType,
@@ -98,7 +98,7 @@ export const CabinetCard: FC<CabinetCardPropsType> = memo((props) => {
             <Paper variant="outlined" elevation={2}>
                 <Box className="card-data">
                     <div className="img">
-                        <img src={cardData.image} alt={cardData.title} />
+                        <img src={cardData.image} alt={cardData.title}/>
                         <Typography
                             noWrap
                             variant="caption"
@@ -107,9 +107,8 @@ export const CabinetCard: FC<CabinetCardPropsType> = memo((props) => {
                         >
                             {t(`common:${cardData.ads_type}`)}
                         </Typography>
-
                         <span>
-                            <EyeIcon />
+                            <EyeIcon/>
                             <Typography
                                 noWrap
                                 variant="caption"
@@ -136,11 +135,10 @@ export const CabinetCard: FC<CabinetCardPropsType> = memo((props) => {
                             </div>
                             <div className='card-btn'>
                                 {pathname?.includes('favorite')
-                                    ?
-                                    <IconButton className='favorite' onClick={handleModalOpen(cardData.id)}>
-                                        <CloseIcon />
-                                    </IconButton>
-                                    : cardData.creator && cardData.status !== 'accepted' && (
+                                 ? <IconButton className='favorite' onClick={handleModalOpen(cardData.id)}>
+                                     <CloseIcon/>
+                                 </IconButton>
+                                 : cardData.creator && cardData.status !== 'accepted' && (
                                     <>
                                         {cardData.ads_type !== 'post' && !!cardData.observer?.number_of_notifications && (
                                             <IconButton
@@ -148,19 +146,16 @@ export const CabinetCard: FC<CabinetCardPropsType> = memo((props) => {
                                                 onClick={handleOpenDialog}
                                                 onMouseEnter={fetchAuctionNotifications(cardData)}
                                             >
-                                                <NotificationIcon />
-                                            </IconButton>)
-                                        }
-                                        {
-                                            cardData.status !== 'accepted' && (
-                                                <IconButton
-                                                    className='settings'
-                                                    onClick={handleModalOpen(cardData.id, 1)}
-                                                >
-                                                    <SettingsIcon />
-                                                </IconButton>
-                                            )
-                                        }
+                                                <NotificationIcon/>
+                                            </IconButton>)}
+                                        {cardData.status !== 'accepted' && (
+                                            <IconButton
+                                                className='settings'
+                                                onClick={handleModalOpen(cardData.id, 1)}
+                                            >
+                                                <SettingsIcon/>
+                                            </IconButton>
+                                        )}
                                     </>
                                 )}
                             </div>
@@ -168,7 +163,7 @@ export const CabinetCard: FC<CabinetCardPropsType> = memo((props) => {
                         <div className="description">
                             {!!cardData.available_days && (
                                 <div className="available">
-                                    <PhoneIcon />
+                                    <PhoneIcon/>
                                     <Typography variant="body1">
                                         {weekDaysHelper(cardData.available_days, t)}{' '}
                                         {`${cardData.available_start_time}-${cardData.available_end_time}`}
@@ -178,7 +173,7 @@ export const CabinetCard: FC<CabinetCardPropsType> = memo((props) => {
                             {!!cardData.exchange && (
                                 <Tooltip title='Возможен обмен' arrow>
                                     <div className="exchange">
-                                        <ExchangeIcon />
+                                        <ExchangeIcon/>
                                         <Typography variant="body1">
                                             Возможен обмен
                                         </Typography>
@@ -195,7 +190,7 @@ export const CabinetCard: FC<CabinetCardPropsType> = memo((props) => {
                             )}
                             {!!cardData.safe_deal && (
                                 <div className="safe_deal">
-                                    <SafeIcon />
+                                    <SafeIcon/>
                                     <Typography variant="body1">
                                         Безопасная покупка
                                     </Typography>
@@ -203,7 +198,7 @@ export const CabinetCard: FC<CabinetCardPropsType> = memo((props) => {
                             )}
                             {!!cardData.auction?.auto_renewal && (
                                 <div className="safe_deal">
-                                    <RenewalIcon />
+                                    <RenewalIcon/>
                                     <Typography variant="body1">
                                         Автопродление
                                     </Typography>
@@ -230,7 +225,7 @@ export const CabinetCard: FC<CabinetCardPropsType> = memo((props) => {
                         )}
                         <div className="location">
                             <div>
-                                <LocationIcon />
+                                <LocationIcon/>
                                 <Typography
                                     variant="caption"
                                     color="initial"
@@ -253,15 +248,15 @@ export const CabinetCard: FC<CabinetCardPropsType> = memo((props) => {
                                 >
                                     {
                                         (!!cardData.auction?.bet
-                                                ? numberPrettier(cardData.auction.bet.bet)
-                                                : numberPrettier(cardData.price)
+                                         ? numberPrettier(cardData.auction.bet.bet)
+                                         : numberPrettier(cardData.price)
                                         ) + ' ' + t(`common:${cardData.currency.name}`)}
                                 </Typography>
                             </div>
                         </div>
                         {cardData.creator && cardData.status === 'new' && (<Tooltip title='Рекламировать' arrow>
                             <IconButton className='advertise' onClick={handleModalOpen(cardData.id, 11)}>
-                                <RocketIcon />
+                                <RocketIcon/>
                             </IconButton>
                         </Tooltip>)}
                     </div>

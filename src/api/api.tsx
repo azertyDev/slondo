@@ -12,7 +12,7 @@ const localServer = 'http://192.168.100.60/slondo/public/api/';
 
 const instance = Axios.create({
     withCredentials: true,
-    baseURL: uztelecom
+    baseURL: localServer
 });
 
 // export const socketIO = socketIOClient('http://192.168.100.60:8005');
@@ -32,9 +32,9 @@ const setTokenToHeader = () => {
 };
 
 export const userAPI = {
-    getPostsByFilters: (filters: any): Promise<any> => {
+    getPostsByFilters: (params): Promise<any> => {
         return instance
-            .get('posts/filter', {params: filters})
+            .get('posts/filter', {params})
             .then((res) => res.data)
             .catch(({response}) => {
                 throw response.data;
@@ -337,8 +337,8 @@ export const userAPI = {
                 throw err;
             });
     },
-    getAllNotifications: (): Promise<any> => {
-        return instance.get(`regular/user/notification`, setTokenToHeader())
+    getAllNotifications: (params?): Promise<any> => {
+        return instance.get(`regular/user/notification`, {...setTokenToHeader(), params})
             .then(res => res.data)
             .catch(err => {
                 throw err;
@@ -372,8 +372,10 @@ export const userAPI = {
                 throw err;
             });
     },
-    getNotificationById: (ads_id: number): Promise<any> => {
-        return instance.get(`regular/post/notifications?itemsPerPage=25&ads_id=${ads_id}`, setTokenToHeader())
+    getNotificationById: (params): Promise<any> => {
+        return instance.get(
+            `regular/post/notifications`,
+            {...setTokenToHeader(), params})
             .then(res => res.data)
             .catch(err => {
                 throw err;
@@ -425,4 +427,42 @@ export const userAPI = {
                 throw err;
             });
     },
+    setReplyComment: (comment_id: number, comment: string): Promise<{message: string}> => {
+        return instance.post('regular/user/comment', {
+            comment_id,
+            comment
+        }, setTokenToHeader())
+            .then(res => res.data)
+            .catch(err => {
+                throw err;
+            });
+    },
+    getUserInfoById: (user_id: string): Promise<any> => {
+        return instance.get(`user/${user_id}`, setTokenToHeader())
+            .then(res => res.data)
+            .catch(err => {
+                throw err;
+            });
+    },
+    getUserPosts: (user_id, post_type = 'post') => {
+        return instance.get(`post?user_id=${user_id}&type=${post_type}`)
+            .then(res => res.data)
+            .catch(err => {
+                throw err;
+            });
+    },
+    getUserSubscribers: (params) => {
+        return instance.get(`user/subscribers/byUserId`, {params})
+            .then(res => res.data)
+            .catch(err => {
+                throw err;
+            });
+    },
+    getUserSubscriptions: (params) => {
+        return instance.get(`user/subscriptions/byUserId`, {params})
+            .then(res => res.data)
+            .catch(err => {
+                throw err;
+            });
+    }
 };

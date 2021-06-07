@@ -16,21 +16,26 @@ export const toUrlParams = (params) => {
 
     Object.keys(params).forEach(key => {
         if (key !== 'location') {
-            const isBoolTrue = typeof params[key] === 'boolean' && params[key];
-            const isNoEmptyString = typeof params[key] === 'string' && params[key];
-            const isObject = !isNoEmptyString && params[key] && !!Object.keys(params[key]).length;
-            const isNoEmptyArray = Array.isArray(params[key]) && params[key].length;
+            const val = params[key];
+            const isBoolTrue = val && typeof val === 'boolean';
+            const isNoEmptyString = val && typeof val === 'string';
+            const isNoEmptyArray = Array.isArray(val) && val.length;
+            const isObject = val && !Array.isArray(val) && typeof val === 'object' && !!Object.keys(val).length;
 
-            if (isObject) {
-                url = url.concat(`&${key}=${params[key].id}`);
+            if (isBoolTrue) {
+                url = url.concat(`&${key}=${+params[key]}`);
             }
 
-            if (isNoEmptyString || isBoolTrue) {
+            if (isNoEmptyString) {
                 url = url.concat(`&${key}=${params[key]}`);
             }
 
             if (isNoEmptyArray) {
-                url = url.concat(`&${key}=${params[key].join('-')}`);
+                url = url.concat(`&${key}=${params[key].map(p => p.id).join(',')}`);
+            }
+
+            if (isObject) {
+                url = url.concat(`&${key}=${params[key].id}`);
             }
         }
     });

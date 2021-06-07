@@ -155,7 +155,7 @@ export const FormPage: FC = () => {
                 ...postData,
                 ...commonParams,
                 [categoryName]: {
-                    [`${categoryName}_id`]: subCategory.id,
+                    sub_category_id: subCategory.id,
                     ...otherParams
                 }
             };
@@ -170,7 +170,6 @@ export const FormPage: FC = () => {
 
             await userAPI.createPost(form);
 
-            console.log(form);
             setIsSuccess(true);
             setIsFetch(false);
         } catch (e) {
@@ -180,12 +179,14 @@ export const FormPage: FC = () => {
     };
 
     useEffect(() => {
-        window.scrollTo(0, 0);
-    }, [asPath, post]);
+        !isCtgrAnimalFishes
+        && !!category
+        && fetchFilters();
+    }, []);
 
     useEffect(() => {
-        !isCtgrAnimalFishes && !!category && fetchFilters();
-    }, []);
+        window.scrollTo(0, 0);
+    }, [asPath, post]);
 
     const classes = useStyles();
     return (
@@ -201,6 +202,7 @@ export const FormPage: FC = () => {
                  <div className={classes.root}>
                      <ParamsFormContainer
                          t={t}
+                         type={type}
                          filters={filtersData}
                          isPreview={isPreview}
                          subCategory={subCategory}

@@ -5,7 +5,9 @@ import {IdNameType} from '@root/interfaces/Post';
 export type TabsDataType = {
     id: number,
     title: string,
-    total?: number,
+    total: number,
+    itemsPerPage: number,
+    handleFetchByPage: (page: number) => void,
     component: ReactElement,
 }[];
 

@@ -1,4 +1,4 @@
-import React, {FC, useEffect, useState} from 'react';
+import {FC, useEffect, useState} from 'react';
 import {TabsContent} from '@src/components/cabinet/cabinet_pages/TabsContent';
 import {MyAuctions} from '@src/components/cabinet/cabinet_pages/my_auctions/MyAuctions';
 import {withAuthRedirect} from '@src/hocs/withAuthRedirect';
@@ -21,7 +21,6 @@ import {
 } from '@material-ui/core';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import {CardDataType, InitialCabinetCardState, OffersStateType, TabsDataType} from '@root/interfaces/Cabinet.js';
-import {useStyles} from './useStyles';
 import {UserInfoWithAvatar} from '@src/components/elements/user_info_with_avatar/UserInfoWithAvatar';
 import {CustomButton} from '@src/components/elements/custom_button/CustomButton';
 import {ChevronRight, CloseIcon, DoneAllIcon} from '@src/components/elements/icons';
@@ -31,7 +30,8 @@ import {initialStateType} from '@src/components/cabinet/cabinet_pages/notificati
 import {ITEMS_PER_PAGE} from '@src/constants';
 import {CustomPagination} from '@src/components/elements/custom_pagination/CustomPagination';
 import {CustomTabPanel} from '@src/components/elements/custom_tab_panel/CustomTabPanel';
-import useModal from '@src/hooks/useModal';
+import {useModal} from '@src/hooks/useModal';
+import {useStyles} from './useStyles';
 
 export const MyAuctionsContainer: FC = () => {
     const dispatch = useDispatch();
@@ -155,44 +155,52 @@ export const MyAuctionsContainer: FC = () => {
     const {modalOpen: openDialog, handleModalOpen: handleOpenDialog, handleModalClose: handleCloseDialog} = useModal();
     const {modalOpen, handleModalOpen, handleModalClose} = useModal();
 
-    const indexOfLastPost = page * ITEMS_PER_PAGE;
-    const indexOfFirstPost = indexOfLastPost - ITEMS_PER_PAGE;
-    const currentNotifications = notification.data.slice(indexOfFirstPost, indexOfLastPost);
-
     const handleChildTabChange = (event, newValue) => {
         setChildTabValue(newValue);
     };
-    const handlePaginationPage = (event, value) => {
+
+    const handlePagePagination = (event, value) => {
         setPage(value);
     };
-    const fetchAuctionNotifications = (post) => async () => {
+
+    const fetchAuctionNotifications = post => async () => {
         try {
             if (post.id !== selectedAuction.id) {
+                const params = {
+                    page,
+                    itemsPerPage: ITEMS_PER_PAGE,
+                    ads_id: post.id
+                };
                 setNotification({...notification, isFetch: true});
-                const {data} = await userAPI.getNotificationById(post.id);
-                setNotification({...notification, data, isFetch: false});
+                const {data, total} = await userAPI.getNotificationById(params);
+                setPageCount(total);
                 setSelectedAuction({...selectedAuction, ...post});
-                setPageCount(Math.ceil(data.length / ITEMS_PER_PAGE) || 1);
+                setNotification({...notification, data, isFetch: false});
             }
         } catch (e) {
             dispatch(setErrorMsgAction(e.message));
         }
     };
+
     const handleTabChange = (event, newValue) => {
         setTabIndex(newValue);
     };
+
     const handleOpenModal = (auction_id: number, index?: number) => () => {
         handleModalOpen();
         auction_id && setSelectedAuction({...selectedAuction, id: auction_id});
         setModalContentIndex(index);
     };
+
     const handlePrevMenu = () => {
         const backValue = modalContentIndex === 5 ? 3 : 1;
         setModalContentIndex(modalContentIndex - backValue);
     };
+
     const handleModalContentIndex = (index) => () => {
         setModalContentIndex(index);
     };
+
     const handleDeactivate = (ads_id?: number) => async () => {
         try {
             await userAPI.deactivateById(ads_id);
@@ -206,6 +214,7 @@ export const MyAuctionsContainer: FC = () => {
             dispatch(setErrorMsgAction(e.message));
         }
     };
+
     const handleAcceptVictory = (auction_id, is_accepted) => async () => {
         try {
             await userAPI.acceptVictory(auction_id, is_accepted);
@@ -218,6 +227,7 @@ export const MyAuctionsContainer: FC = () => {
             dispatch(setErrorMsgAction(e.message));
         }
     };
+
     const fetchAuctionData = async (type?: string) => {
         try {
             const isCreatedAuction = type === 'auc';
@@ -229,13 +239,14 @@ export const MyAuctionsContainer: FC = () => {
                 setParticipatingData({...auctionData, isFetch: true});
                 const {data, total, message} = await userAPI.getAuctionSubs();
                 message
-                    ? setParticipatingData(initialState)
-                    : setParticipatingData({myPosts: {data, total}, isFetch: false});
+                ? setParticipatingData(initialState)
+                : setParticipatingData({myPosts: {data, total}, isFetch: false});
             }
         } catch (e) {
             dispatch(setErrorMsgAction(e));
         }
     };
+
     const fetchAllOffers = (auction_id: number) => async () => {
         try {
             auction_id && setSelectedAuction({...selectedAuction, id: auction_id});
@@ -248,6 +259,7 @@ export const MyAuctionsContainer: FC = () => {
             dispatch(setErrorMsgAction(e.message));
         }
     };
+
     const acceptOfferThePrice = (offer_id: number, is_accepted: boolean) => async () => {
         try {
             handleModalClose();
@@ -261,6 +273,7 @@ export const MyAuctionsContainer: FC = () => {
             dispatch(setErrorMsgAction(e.message));
         }
     };
+
     const riceInTape = (post_id: number) => async () => {
         try {
             await userAPI.ricePostInTape(post_id);
@@ -270,6 +283,7 @@ export const MyAuctionsContainer: FC = () => {
             dispatch(setErrorMsgAction(e.message));
         }
     };
+
     const handleDeleteNotification = (id, ads_id) => async () => {
         try {
             setNotification({...notification, isFetch: true});
@@ -280,6 +294,7 @@ export const MyAuctionsContainer: FC = () => {
             dispatch(setErrorMsgAction(e.message));
         }
     };
+
     const fetchUserPhone = (user_id) => async () => {
         try {
             const {phone} = await userAPI.getPhoneByUserId(user_id);
@@ -336,7 +351,7 @@ export const MyAuctionsContainer: FC = () => {
                         >
                             <ListItemText
                                 primary='Да'
-                                primaryTypographyProps={{ variant: 'subtitle1' }}
+                                primaryTypographyProps={{variant: 'subtitle1'}}
                             />
                         </ListItem>
                         <ListItem
@@ -389,7 +404,7 @@ export const MyAuctionsContainer: FC = () => {
                             return (
                                 <Box px={5} py={2} display='flex' key={offer.id}>
                                     <Box>
-                                        <UserInfoWithAvatar owner={offer.user} isOwner={false} />
+                                        <UserInfoWithAvatar owner={offer.user} isOwner={false}/>
                                     </Box>
                                     <Box>
                                         <Typography variant='subtitle2'>
@@ -406,7 +421,7 @@ export const MyAuctionsContainer: FC = () => {
                                                 className='accept'
                                                 onClick={acceptOfferThePrice(offer.id, true)}
                                             >
-                                                <DoneAllIcon />
+                                                <DoneAllIcon/>
                                                 <Typography
                                                     variant="subtitle2"
                                                     color="initial"
@@ -418,7 +433,7 @@ export const MyAuctionsContainer: FC = () => {
                                                 className='decline'
                                                 onClick={acceptOfferThePrice(offer.id, false)}
                                             >
-                                                <CloseIcon />
+                                                <CloseIcon/>
                                                 <Typography
                                                     variant="subtitle2"
                                                     color="initial"
@@ -452,9 +467,9 @@ export const MyAuctionsContainer: FC = () => {
                             <Box display='flex' alignItems='flex-end' width='180px'>
                                 <CustomButton>
                                     <Typography variant='subtitle1'>Поднять в ТОП</Typography>
-                                    <ChevronRight width='20px' height='20px' />
+                                    <ChevronRight width='20px' height='20px'/>
                                 </CustomButton>
-                                <img src={'/img/promote-img.jpg'} alt="promote-img" />
+                                <img src={'/img/promote-img.jpg'} alt="promote-img"/>
                             </Box>
                         </Paper>
                     </Box>
@@ -466,28 +481,29 @@ export const MyAuctionsContainer: FC = () => {
     const ModalContent = () => (
         <>
             {modalContentIndex === 1
-                ? <Typography className="title" variant="h6">
-                    Аукцион №: {selectedAuction.id}
-                </Typography>
-                : (modalContentIndex !== 10 && modalContentIndex !== 11 && (
+             ? <Typography className="title" variant="h6">
+                 Аукцион №: {selectedAuction.id}
+             </Typography>
+             : (modalContentIndex !== 10 && modalContentIndex !== 11 && (
                         <IconButton
                             size="medium"
                             aria-label="back"
                             className='prev-btn'
                             onClick={handlePrevMenu}
                         >
-                            <ArrowBackIcon fontSize="inherit" />
+                            <ArrowBackIcon fontSize="inherit"/>
                         </IconButton>
                     )
-                )}
+             )}
             {getModalContent()}
         </>
     );
     const pagination = (
         <CustomPagination
-            pageCount={pageCount}
             currentPage={page}
-            handlePaginationPage={handlePaginationPage}
+            pageCount={pageCount}
+            itemsPerPage={ITEMS_PER_PAGE}
+            handlePagePagination={handlePagePagination}
         />
     );
 
@@ -586,10 +602,9 @@ export const MyAuctionsContainer: FC = () => {
                 />
             </Tabs>
             <CustomTabPanel value={childTabValue} index={0}>
-                {auctionData.isFetch ? <CircularProgress color="primary" /> : creatorAuctionCards}
+                {auctionData.isFetch ? <CircularProgress color="primary"/> : creatorAuctionCards}
             </CustomTabPanel>
             <CustomTabPanel value={childTabValue} index={1}>
-
             </CustomTabPanel>
         </>
     );
@@ -623,7 +638,7 @@ export const MyAuctionsContainer: FC = () => {
                 />
             </Tabs>
             <CustomTabPanel value={childTabValue} index={0}>
-                {participatingData.isFetch ? <CircularProgress color="primary" /> : participantsAuctionCards}
+                {participatingData.isFetch ? <CircularProgress color="primary"/> : participantsAuctionCards}
             </CustomTabPanel>
             <CustomTabPanel value={childTabValue} index={1}>
             </CustomTabPanel>
@@ -644,7 +659,7 @@ export const MyAuctionsContainer: FC = () => {
                     pagination={pagination}
                     auctionTabs={createdAuctionTabs}
                     selectedAuction={selectedAuction}
-                    currentNotifications={currentNotifications}
+                    currentNotifications={notification.data}
                     ModalContent={ModalContent}
                     handleClose={handleModalClose}
                     handleDeleteNotification={handleDeleteNotification}

@@ -1,11 +1,12 @@
-import React, {FC} from 'react';
-import {Typography} from '@material-ui/core';
+import React, {Dispatch, FC, SetStateAction} from 'react';
+import {Box, Typography} from '@material-ui/core';
 import {Rating} from '@src/components/elements/rating/Rating';
 import {UserAvatarComponent} from '@src/components/elements/user_info_with_avatar/avatar/UserAvatarComponent';
 import {useTranslation} from 'react-i18next';
 import {UserInfo} from '@root/interfaces/Auth';
 import {CustomButton} from '@src/components/elements/custom_button/CustomButton';
 import {useStyles} from './useStyles';
+import Link from 'next/link';
 
 type UserInfoWithAvatarPropsType = {
     owner: UserInfo,
@@ -29,32 +30,36 @@ export const UserInfoWithAvatar: FC<UserInfoWithAvatarPropsType> = (props) => {
     return (
         <div className={classes.root}>
             <div className="user-info">
-                <div>
-                    <UserAvatarComponent avatar={owner.avatar}/>
-                </div>
-                <div>
-                    <Typography color="initial" variant='subtitle1'>
-                        {`${owner.name ?? ''} ${owner.surname ?? ''}`}
-                    </Typography>
+                <Box>
+                    <UserAvatarComponent avatar={owner.avatar} />
+                </Box>
+                <Box>
+                    <Link href={`/user/${owner.id}`}>
+                        <a>
+                            <Typography color="initial" variant='subtitle1'>
+                                {`${owner.name ?? ''} ${owner.surname ?? ''}`}
+                            </Typography>
+                        </a>
+                    </Link>
                     <Typography variant="subtitle1" color="initial">
                         {t('created_at', {
                             created_at: formatted_date?.toString()
                         })}
                     </Typography>
                     <Rating
-                        card={false}
                         readOnly
-                        ratingValue={owner.rating?.slice(0, 3)}
+                        card='false'
+                        ratingValue={owner.rating}
                         ratingCount={owner.observer?.number_of_ratings}
                     />
-                    {isOwner && (
+                    {!isOwner && (
                         <CustomButton onClick={handleFollow(owner.id)}>
                             <Typography variant="subtitle2">
                                 {!subscribed ? 'Подписаться' : 'Отписаться'}
                             </Typography>
                         </CustomButton>
                     )}
-                </div>
+                </Box>
             </div>
         </div>
     );
