@@ -1,10 +1,9 @@
 import {FC, useEffect, useState} from 'react';
-import {Grid, Hidden, IconButton, Typography} from '@material-ui/core';
+import {Grid, Hidden, Typography} from '@material-ui/core';
 import {useTranslation} from 'next-i18next';
 import {
     AdsIcon,
     BonusIcon,
-    CloseIcon,
     RatingIcon,
     SafeBuyingIcon,
     TorgIcon
@@ -126,11 +125,6 @@ export const AuthRegPage: FC<AuthRegPageType> = (props) => {
                         </Grid>
                         <Grid item xs={7}>
                             <div className='auth-reg-block'>
-                                <div className='close-btn-wrapper' onClick={handleModalClose}>
-                                    <IconButton>
-                                        <CloseIcon/>
-                                    </IconButton>
-                                </div>
                                 <div className='welcome-block'>
                                     <Typography variant="h6" color="initial">
                                         {t('welcome')}
@@ -160,11 +154,6 @@ export const AuthRegPage: FC<AuthRegPageType> = (props) => {
                 </Hidden>
                 {/*--------------------------------> Mobile <------------------------------------------*/}
                 <Hidden mdUp>
-                    <div className='close-btn-wrapper' onClick={handleModalClose}>
-                        <IconButton>
-                            <CloseIcon/>
-                        </IconButton>
-                    </div>
                     <div className='auth-reg-block'>
                         <div className='welcome-block'>
                             <Typography variant="h6" color="initial">

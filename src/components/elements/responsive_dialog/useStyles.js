@@ -21,15 +21,24 @@ export const useStyles = makeStyles((theme) => ({
         }
     },
     closeBtn: {
-        width: 24,
-        height: 24,
-        padding: 7,
-        backgroundColor: '#EBEBF0',
+        width: '24px',
+        height: '24px',
+        padding: 0,
         position: 'absolute',
         top: '25px',
         right: '25px',
+        zIndex: '1000',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        [theme.breakpoints.down('xs')]: {
+            top: '15px',
+            right: '15px',
+            width: '17px',
+            height: '17px'
+        },
         '& path': {
-            fill: '#28293D'
+            fill: '#494A61'
         },
         '&:hover': {
             backgroundColor: '#EB5757',

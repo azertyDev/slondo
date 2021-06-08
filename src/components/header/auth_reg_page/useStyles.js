@@ -61,28 +61,6 @@ export const useStyles = makeStyles((theme) => ({
                 marginTop: '8px'
             }
         },
-        '& div.close-btn-wrapper': {
-            position: 'absolute',
-            right: '15px',
-            top: '15px',
-            borderRadius: '100%',
-            padding: '6px',
-            width: '24px',
-            height: '24px',
-            zIndex: '1000',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            '& > button.MuiIconButton-root': {
-                padding: '5px',
-                '& span > svg > path': {
-                    fill: '#494A61'
-                }
-            },
-            '&:hover': {
-                cursor: 'pointer'
-            }
-        },
         '& div.rec-pass': {
             justifyContent: 'space-between',
             '& button': {

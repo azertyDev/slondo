@@ -65,7 +65,7 @@ export const PostsTabs: FC<MainContentProps> = (props) => {
                             {postCardData.error}
                         </Typography>
                         : <CardView
-                            list={postCardData.data.cards}
+                            data={postCardData.data.cards}
                             isFetch={postCardData.isFetch}
                         />}
                 </CustomTabPanel>
@@ -75,7 +75,7 @@ export const PostsTabs: FC<MainContentProps> = (props) => {
                             {auctionCardData.error}
                         </Typography>
                         : <CardView
-                            list={auctionCardData.data.cards}
+                            data={auctionCardData.data.cards}
                             isFetch={auctionCardData.isFetch}
                         />}
                 </CustomTabPanel>

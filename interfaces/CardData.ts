@@ -1,11 +1,12 @@
 import {UserInfo} from '@root/interfaces/Auth';
+import {CardDataType} from '@root/interfaces/Cabinet';
 
 export interface CardData {
     isFetch: boolean;
     isShowMoreFetch?: boolean;
     error?: unknown;
     data: {
-        cards: InnerCardData[];
+        cards: CardDataType[];
         total: number;
     };
 }
