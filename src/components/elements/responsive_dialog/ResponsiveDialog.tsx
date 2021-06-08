@@ -7,30 +7,28 @@ import {useStyles} from './useStyles';
 type ResponsiveDialogPropsType = {
     openDialog: boolean,
     handleCloseDialog: () => void,
-    maxWidth?,
-    className?
+    maxWidth?
 };
 
 export const ResponsiveDialog: FC<ResponsiveDialogPropsType> = (props) => {
     const {
         openDialog,
         handleCloseDialog,
+        maxWidth = 'md'
     } = props;
 
     const fullScreen = useMediaQuery(useTheme().breakpoints.down('xs'));
 
     const classes = useStyles();
-
     return (
         <Dialog
             fullScreen={fullScreen}
             fullWidth
-            maxWidth='md'
+            maxWidth={maxWidth}
             open={openDialog}
             onClose={handleCloseDialog}
             aria-labelledby="responsive-dialog-title"
             className={classes.root}
-            {...props}
         >
             {props.children}
         </Dialog>

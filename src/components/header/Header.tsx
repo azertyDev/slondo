@@ -11,7 +11,7 @@ import {fetchLocations} from '@src/redux/slices/locationsSlice';
 import {cookies} from '@src/helpers';
 import {useRouter} from 'next/router';
 import {useStyles} from './useStyles';
-import useModal from '@src/hooks/useModal';
+import {useModal} from '@src/hooks/useModal';
 // import {socketIO} from '@src/api/api';
 
 

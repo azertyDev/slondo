@@ -6,8 +6,8 @@ import {useTranslation} from 'next-i18next';
 import {cookieOpts, cookies} from '@src/helpers';
 import {useSelector} from 'react-redux';
 import {RootState} from '@src/redux/rootReducer';
+import {useModal} from '@src/hooks/useModal';
 import {useStyles} from './useStyles';
-import useModal from '@src/hooks/useModal';
 
 
 export const Location: FC = () => {
@@ -28,8 +28,9 @@ export const Location: FC = () => {
     const [selectedLocation, setSelectedLocation] = useState(initLocation);
     const {region, city, district} = selectedLocation;
 
+    const hasRegion = !!region;
     const locationsTxt = `${t(region?.name) ?? ''}${city ? `, ${t(city?.name)}` : ''}${district ? `, ${t(district?.name)}` : ''}`;
-    const prevLocation = !!region ? `<-- ${t(`${city?.name ?? region.name}`)}` : t(`allUzb`);
+    const prevLocation = hasRegion ? `${t(`${city?.name ?? region.name}`)}` : t(`allUzb`);
 
     const currentCities = locationsFromStore.find(loc => loc.id === region?.id)?.cities;
     const currentDistricts = currentCities?.find(({id, district}) => {
@@ -110,6 +111,7 @@ export const Location: FC = () => {
             </div>
             <LocationModal
                 t={t}
+                hasRegion={hasRegion}
                 modalOpen={locationModalOpen}
                 locations={locations}
                 prevLocation={prevLocation}
