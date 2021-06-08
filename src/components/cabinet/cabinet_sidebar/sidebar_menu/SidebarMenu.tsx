@@ -115,8 +115,9 @@ export const SidebarMenu: FC<SidebarMenuPropsType> = ({t, user}) => {
                 <CustomBadge badgeContent={number_of_messages} color='error'>
                     <ListItem
                         button
-                        selected={pathname === '/cabinet/messages'}
-                        onClick={handleListItemClick('messages')}
+                        // selected={pathname === '/cabinet/messages'}
+                        // onClick={handleListItemClick('messages')}
+                        disabled
                         disableGutters
                     >
                         <LetterIcon />

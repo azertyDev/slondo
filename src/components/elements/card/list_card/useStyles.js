@@ -80,82 +80,19 @@ export const useStyles = makeStyles((theme) => ({
                         }
                     }
                 },
-                '& .MuiTypography-subtitle2': {
-                    borderBottom: '1px solid #838383',
-                    lineHeight: '20px',
-                    color: '#838383'
-                },
-                '&.card-btn': {
-                    position: 'absolute',
-                    top: 0,
-                    right: 20,
-                    '& .settings, .favorite, .notifications': {
-                        background: '#F5F5F5',
-                        boxShadow: '0px 1px 2px rgba(0, 0, 0, 0.15)',
-                        borderRadius: '0px 0px 10px 10px',
-                        display: 'flex',
-                        alignItems: 'center',
-                        padding: '11px 12px',
-                        '& svg': {
-                            height: '18px',
-                            '& path': {
-                                fill: '#4E4E4E'
-                            }
-                        },
-                        '&:hover': {
-                            cursor: 'pointer',
-                            background: '#EB5757',
-                            '& svg': {
-                                height: '18px',
-                                '& path': {
-                                    fill: '#fff'
-                                }
-                            }
-                        }
-                    },
-                    '& .notifications': {
-                        marginRight: 10
-                    }
-                },
-                '& .advertise': {
-                    position: 'absolute',
-                    top: '70px',
-                    right: 0,
-                    padding: '9px 20px',
-                    borderRadius: '100px 0px 0px 100px',
-                    boxShadow: '0px 1px 2px rgba(0, 0, 0, 0.1)',
-                    background: 'linear-gradient(90.62deg, #F38522 0.56%, #FFB800 99.49%)'
-                }
             },
             '& .description': {
-                display: 'flex',
-                flexFlow: 'row wrap',
-                maxWidth: '85%',
-                position: 'relative',
-                '& > div': {
-                    height: '26px',
-                    display: 'flex',
-                    alignItems: 'center',
-                    flexDirection: 'row',
-                    padding: '0 15px',
-                    margin: '2px 10px 2px 0',
-                    borderRadius: '100px',
-                    cursor: 'default',
-                    userSelect: 'none',
-                    background: '#F5F5F5',
-                    '& p.MuiTypography-body1': {
-                        fontSize: '12px'
-                    },
-                    '& svg': {
-                        width: '20px',
-                        height: '20px',
-                        marginRight: '15px'
-                    }
-                }
+                width: '450px',
+                maxWidth: '65%',
+                display: '-webkit-box',
+                WebkitLineClamp: 5,
+                overflow: 'hidden',
+                WebkitBoxOrient: 'vertical'
             },
             '& .priceAndBet': {
                 display: 'flex',
                 alignSelf: 'flex-end',
+                alignItems: 'center',
                 justifyContent: 'center',
                 '& .MuiTypography-subtitle1': {
                     fontSize: '0.875rem',

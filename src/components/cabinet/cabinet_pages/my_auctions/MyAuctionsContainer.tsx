@@ -602,6 +602,8 @@ export const MyAuctionsContainer: FC = () => {
             id: 0,
             title: t('createdAuc'),
             total: auctionData.myPosts.total,
+            itemsPerPage: ITEMS_PER_PAGE,
+            handleFetchByPage: null,
             component:
                 <MyAuctions
                     t={t}
@@ -623,6 +625,8 @@ export const MyAuctionsContainer: FC = () => {
             id: 1,
             title: t('participatingAuc'),
             total: participatingData.myPosts.total,
+            itemsPerPage: ITEMS_PER_PAGE,
+            handleFetchByPage: null,
             component:
                 <MyAuctions
                     t={t}

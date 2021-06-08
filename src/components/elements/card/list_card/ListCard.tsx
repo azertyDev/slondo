@@ -77,7 +77,7 @@ export const ListCard: FC<ListCardPropsType> = ({cardData}) => {
                     </div>
                     <div className="description">
                         {cardData.description && (
-                            <Typography noWrap variant='subtitle1'>
+                            <Typography noWrap variant='subtitle2'>
                                 {cardData.description}
                             </Typography>
                         )}

@@ -5,6 +5,9 @@ import {useStyles} from './useStyles';
 import {BreadcrumbsComponent} from '@src/components/elements/breadcrumbs/Breadcrumbs';
 import {ListCard} from '@src/components/elements/card/list_card/ListCard';
 import {useTranslation} from 'react-i18next';
+import {CloseIcon, NotificationIcon, SettingsIcon} from '@src/components/elements/icons';
+import {useRouter} from 'next/router';
+import {CustomButton} from '@src/components/elements/custom_button/CustomButton';
 
 type CabinetCardPropsType = {
     cardData: CardDataType,
@@ -14,6 +17,7 @@ type CabinetCardPropsType = {
 }
 
 export const CabinetCard: FC<CabinetCardPropsType> = (props) => {
+    const {pathname} = useRouter();
     const {t} = useTranslation('common');
     const {
         cardData,
@@ -55,8 +59,29 @@ export const CabinetCard: FC<CabinetCardPropsType> = (props) => {
                     </Box>
                 </div>
             </Box>
-            <Box >
+            <Box position='relative'>
                 <ListCard cardData={cardData} />
+                <div className='card-btn'>
+                    {pathname?.includes('favorite')
+                        ?
+                        <CustomButton className='isFavorite' onClick={handleModalOpen(cardData.id)}>
+                            <CloseIcon />
+                        </CustomButton>
+                        : cardData.creator && (
+                        <>
+                            <CustomButton
+                                className='notifications'
+                                onClick={handleOpenDialog}
+                                onMouseEnter={fetchAuctionNotifications(cardData)}
+                            >
+                                <NotificationIcon />
+                            </CustomButton>
+                            <CustomButton className='settings' onClick={handleModalOpen(cardData.id, 1)}>
+                                <SettingsIcon />
+                            </CustomButton>
+                        </>
+                    )}
+                </div>
             </Box>
         </Box>
     );
