@@ -1,10 +1,10 @@
-import React, {FC, useEffect, useState} from 'react';
+import {FC, useEffect, useState} from 'react';
 import Link from 'next/link';
 import {useTranslation} from 'react-i18next';
 import {Card, CardActionArea, CardContent, CardMedia, IconButton, Tooltip, Typography} from '@material-ui/core';
 import Skeleton from '@material-ui/lab/Skeleton';
 import {DeliveryIcon, SafeIcon, SwapIcon} from '@src/components/elements/icons';
-import {InnerCardData} from '@root/interfaces/CardData';
+import {CardDataType} from '@root/interfaces/CardData';
 import {numberPrettier, transformCyrillic} from '@src/helpers';
 import {userAPI} from '@src/api/api';
 import {useDispatch, useSelector} from 'react-redux';
@@ -17,7 +17,7 @@ import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
 
 type CardItemProps = {
     isFetch: boolean;
-} & InnerCardData;
+} & CardDataType;
 
 export const CardItem: FC<CardItemProps> = (props) => {
     const dispatch = useDispatch();

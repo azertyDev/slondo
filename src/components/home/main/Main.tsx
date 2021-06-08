@@ -1,4 +1,4 @@
-import React, {FC} from 'react';
+import {FC} from 'react';
 import {
     Hidden,
     Slide,
@@ -19,12 +19,11 @@ import {useStyles} from './useStyles';
 
 
 export const Main: FC = () => {
-    const {t} = useTranslation(['main']);
+    const {t} = useTranslation('main');
 
     const trigger = useScrollTrigger();
 
     const classes = useStyles();
-
     return (
         <main>
             <div className={classes.root}>

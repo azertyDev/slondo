@@ -1,15 +1,13 @@
-import React, {FC} from 'react';
-import {CardView, ViewPropsType} from '@root/src/components/elements/card/card_view/CardView';
+import {FC} from 'react';
 import {useStyles} from './useStyles';
 
 
-export const MyPurchases: FC<ViewPropsType> = (props) => {
-    const { isFetch, list } = props;
+export const MyPurchases: FC = () => {
     const classes = useStyles();
 
     return (
         <div className={classes.root}>
-            <CardView listMode={true} list={list} isFetch={isFetch} />
+            My Purchases
         </div>
     );
 };

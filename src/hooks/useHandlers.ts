@@ -1,5 +1,5 @@
 import {Dispatch, SetStateAction} from 'react';
-import {fractionalFields, numericFields} from '@src/common_data/form_fields';
+import {fractionalFields, numericFields, singleFields} from '@src/common_data/form_fields';
 import {numberRegEx} from '@src/common_data/reg_exs';
 
 export const useHandlers = (values: any, setValues: Dispatch<SetStateAction<any>>) => {
@@ -17,12 +17,15 @@ export const useHandlers = (values: any, setValues: Dispatch<SetStateAction<any>
                 }
             }
         },
+
         handleSelect: (name, value) => {
             setValues({...values, [name]: value});
         },
+
         handleCheckbox: ({target}) => {
             setValues({...values, [target.name]: target.checked});
         },
+
         handleOptionCheckbox: (name, item) => {
             if (values[name]) {
                 const isExst = values[name].some(({id}) => id === item.id);
@@ -35,6 +38,26 @@ export const useHandlers = (values: any, setValues: Dispatch<SetStateAction<any>
                 values[name] = [item];
             }
             setValues({...values});
+        },
+
+        setValsByParams: (urlParams, filters) => {
+            const vals: any = {};
+
+            Object.keys(urlParams).forEach(k => {
+                if (filters[k]) {
+                    if (singleFields.some(f => f === k)) {
+                        vals[k] = filters[k].find(v => v.id === +urlParams[k]);
+                    } else {
+                        vals[k] = filters[k].filter(v => urlParams[k].split(',').some(p => +p === v.id));
+                    }
+                }
+            });
+
+            if (vals?.manufacturer?.models) {
+                vals.model = vals.manufacturer.models.find(m => m.id === +urlParams.model);
+            }
+
+            setValues({...values, ...vals});
         }
     };
 };

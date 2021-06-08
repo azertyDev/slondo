@@ -86,3 +86,7 @@ export const optionFields = [
     'safety',
     'view'
 ];
+
+export const singleFields = [
+    'manufacturer'
+];

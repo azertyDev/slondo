@@ -2,22 +2,21 @@ import {FC, ReactNode, useEffect, useState} from 'react';
 import {WithT} from 'i18next';
 import {Grid} from '@material-ui/core';
 import {useRouter} from 'next/router';
-import {CategoriesDropdown} from '@src/components/elements/categories_dropdown/CategoriesDropdown';
 import {DropDownSelect} from '@src/components/elements/drop_down_select/DropDownSelect';
 import {postTypes} from '@src/common_data/post_types';
-import {PriceFromTo} from '@src/components/elements/price_from_to/PriceFromTo';
 import {DeployedSelect} from '@src/components/elements/deployed_select/DeployedSelect';
 import {SiteServices} from '@src/components/post/create_post/form_page/common_form/site_services/SiteServices';
 import {CheckboxSelect} from '@src/components/elements/checkbox_select/CheckboxSelect';
+import {FromToInputs} from '@src/components/elements/from_to_inputs/FromToInputs';
 import {
     cookies,
     toUrlParams,
     transformCyrillic,
-    normalizeFiltersByCategory
+    normalizeFiltersByCategory, manufacturersDataNormalize
 } from '@src/helpers';
 import {useHandlers} from '@src/hooks/useHandlers';
-import {CarForm} from '@src/components/search_posts_by_filters/categories_forms/car_form/CarForm';
-import {RegularForm} from '@src/components/search_posts_by_filters/categories_forms/regular_form/RegularForm';
+import {CarParams} from '@src/components/search_posts/categories_forms/car_form/CarParams';
+import {RegularParams} from '@src/components/search_posts/categories_forms/regular_form/RegularParams';
 import {transformLocations} from '@src/common_data/locations';
 import {siteCategories} from '@src/common_data/siteCategories';
 import {useDispatch, useSelector} from 'react-redux';
@@ -31,7 +30,7 @@ export type CommonFiltersType = {
     onSubmit,
     filters,
     urlParams,
-    handleResetParams: () => void
+    handleReset: () => void
 };
 
 type SearchFormPropsType = {
@@ -46,7 +45,7 @@ export const SearchForm: FC<SearchFormPropsType> = (props) => {
         categories
     } = props;
 
-    const [ctgr, subCtgr, typeCtgr] = categories;
+    const [ctgr, subctgr, typeCtgr] = categories;
 
     const {
         post_type,
@@ -66,22 +65,23 @@ export const SearchForm: FC<SearchFormPropsType> = (props) => {
                      : postTypesList.find(type => type.id === +post_type) || null;
 
     const initVals = {
-        category: subCtgr || ctgr || null,
-        type: typeCtgr || null,
-        post_type: postType,
-        price_from: price_from || '',
-        price_to: price_to || '',
-        free: !!free,
-        archive: !!archive,
-        safe_deal: !!safe_deal,
-        exchange: !!exchange,
-        delivery: !!delivery
+        category: null,
+        subcategory: null,
+        type: null,
+        post_type: null,
+        price_from: '',
+        price_to: '',
+        free: false,
+        archive: false,
+        safe_deal: false,
+        exchange: false,
+        delivery: false
     };
 
     const initFilters = {
         categories: siteCategories,
-        subCategories: ctgr?.subCategory || [],
-        typeCategories: subCtgr?.type || [],
+        subcategories: ctgr?.subcategory || [],
+        typeCategories: subctgr?.type || [],
         filtersByCtgr: {}
     };
 
@@ -97,11 +97,11 @@ export const SearchForm: FC<SearchFormPropsType> = (props) => {
         push(urlByParams(values));
     };
 
-    const {category, type, ...commonVals} = values;
-    const mainCategoryName: string = category?.parents?.[0].name ?? category?.name ?? '';
+    const {category, subcategory, type, ...commonVals} = values;
+    const mainCategoryName: string = category?.name ?? '';
+    const subcategoryName: string = subcategory?.name ?? '';
 
     const isJobCtgr = mainCategoryName === 'job';
-
     const typeLabel = mainCategoryName === 'service' ? 'service_type' : isJobCtgr ? 'job_type' : 'good_type';
 
     const {handleInput} = useHandlers(values, setValues);
@@ -120,18 +120,7 @@ export const SearchForm: FC<SearchFormPropsType> = (props) => {
 
     const handleSelect = (name, value) => {
         if (name === 'category') {
-            setValues({
-                category: value,
-                type: null,
-                post_type: null,
-                price_from: '',
-                price_to: '',
-                free: false,
-                archive: false,
-                safe_deal: false,
-                exchange: false,
-                delivery: false
-            });
+            setValues({...initVals, category: value});
         } else {
             setValues({...values, [name]: value});
         }
@@ -142,25 +131,28 @@ export const SearchForm: FC<SearchFormPropsType> = (props) => {
         setValues({...values, post_type: value});
     };
 
-    const handleResetParams = () => {
+    const handleReset = () => {
         setValues(initVals);
+        setFilters(initFilters);
     };
 
     const getFiltersByCtgr = (): ReactNode => {
-        switch (mainCategoryName) {
-            case 'car':
-                return <CarForm
+        switch (subcategoryName) {
+            case 'madeInUzb':
+            case 'foreignCars':
+                return <CarParams
                     onSubmit={onSubmit}
                     filters={filtersByCtgr}
+                    handleReset={handleReset}
                     urlParams={urlFiltersParams}
-                    handleResetParams={handleResetParams}
+                    subcategoryName={subcategoryName}
                 />;
             default:
-                return <RegularForm
+                return <RegularParams
                     onSubmit={onSubmit}
                     filters={filtersByCtgr}
+                    handleReset={handleReset}
                     urlParams={urlFiltersParams}
-                    handleResetParams={handleResetParams}
                 />;
         }
     };
@@ -181,9 +173,9 @@ export const SearchForm: FC<SearchFormPropsType> = (props) => {
 
         if (category) {
             let categoryName = `${transformCyrillic(category.ru_name)}/`;
-            if (category.parents) {
-                const parentCtgrRuName = siteCategories.find(ctgr => ctgr.name === category.parents[0].name).ru_name;
-                categoryName = `${transformCyrillic(parentCtgrRuName)}/${categoryName}`;
+            if (subcategory) {
+                const subcategoryName = `${transformCyrillic(subcategory.ru_name)}/`;
+                categoryName = `${categoryName}${subcategoryName}`;
             }
             url = url.concat(categoryName);
         }
@@ -197,11 +189,20 @@ export const SearchForm: FC<SearchFormPropsType> = (props) => {
 
     const setFiltersByCtgr = async () => {
         try {
-            if (category?.parents) {
-                const ctgr = category.parents[0];
+            if (subcategory) {
+                let filtersByCtgr = await userAPI.getFiltersByCtgr(category.id, subcategory?.id, type?.id);
 
-                let filtersByCtgr = await userAPI.getFiltersByCtgr(ctgr.id, category.id, type?.id);
-                if (filtersByCtgr.default_param) filtersByCtgr = filtersByCtgr.default_param;
+                if (category.name === 'car') {
+                    if (subcategory.name === 'madeInUzb') {
+                        filtersByCtgr = {
+                            ...filtersByCtgr.default_param,
+                            manufacturer: manufacturersDataNormalize(filtersByCtgr)
+                        };
+                    } else {
+                        filtersByCtgr = {...filtersByCtgr.default_param};
+                    }
+                }
+
                 filtersByCtgr = normalizeFiltersByCategory(filtersByCtgr, type);
 
                 setFilters({
@@ -219,32 +220,66 @@ export const SearchForm: FC<SearchFormPropsType> = (props) => {
         }
     };
 
+    const setInitVals = () => {
+        const vals = {
+            category: ctgr || null,
+            subcategory: subctgr || null,
+            type: typeCtgr || null,
+            post_type: postType,
+            price_from: price_from || '',
+            price_to: price_to || '',
+            free: !!free,
+            archive: !!archive,
+            safe_deal: !!safe_deal,
+            exchange: !!exchange,
+            delivery: !!delivery
+        };
+        setValues(vals);
+    };
+
+    useEffect(() => {
+        setInitVals();
+    }, []);
+
     useEffect(() => {
         setFiltersByCtgr();
-    }, [category, type]);
+    }, [category, subcategory, type]);
 
     const classes = useStyles();
     return (
         <div className={classes.root}>
             <Grid container spacing={1}>
                 <Grid item xs={4}>
-                    <CategoriesDropdown
+                    <DropDownSelect
                         t={t}
                         name='category'
+                        disableRequire
+                        values={values}
+                        items={filters.categories}
                         handleSelect={handleSelect}
-                        filters={filters.categories}
-                        category={values.category}
                     />
                 </Grid>
-                {!!values.category?.type && (
+                {!!values.category?.subcategory && (
+                    <Grid item xs={4}>
+                        <DropDownSelect
+                            t={t}
+                            name='subcategory'
+                            disableRequire
+                            values={values}
+                            items={values.category.subcategory}
+                            handleSelect={handleSelect}
+                        />
+                    </Grid>
+                )}
+                {!!values.subcategory?.type && (
                     <Grid item xs={4}>
                         <DropDownSelect
                             t={t}
                             name='type'
-                            labelTxt={typeLabel}
                             disableRequire
                             values={values}
-                            items={values.category.type}
+                            labelTxt={typeLabel}
+                            items={values.subcategory.type}
                             handleSelect={handleSelect}
                         />
                     </Grid>
@@ -259,24 +294,22 @@ export const SearchForm: FC<SearchFormPropsType> = (props) => {
                         handleSelect={handlePostType}
                     />
                 </Grid>
-                {values.post_type?.name === 'auc' && (
-                    <Grid item container alignItems='center' xs={2}>
-                        <CheckboxSelect
-                            t={t}
-                            name='archive'
-                            checked={values.archive}
-                            onChange={handleCheckbox('archive')}
-                        />
-                    </Grid>
-                )}
                 <Grid container item xs={12}>
                     <Grid item xs={4}>
-                        <PriceFromTo
-                            t={t}
-                            name={isJobCtgr ? 'salary' : 'cost'}
-                            values={values}
+                        <FromToInputs
                             disabled={values.free}
                             handleInput={handleInput}
+                            labelTxt={t(isJobCtgr ? 'salary' : 'cost')}
+                            firstInputProps={{
+                                value: values.price_from,
+                                name: 'price_from',
+                                placeholder: t(`filters:price_from`)
+                            }}
+                            secondInputProps={{
+                                value: values.price_to,
+                                name: 'price_to',
+                                placeholder: t(`filters:price_to`)
+                            }}
                         />
                     </Grid>
                     <Grid item container alignItems='center' xs={2}>
@@ -287,8 +320,18 @@ export const SearchForm: FC<SearchFormPropsType> = (props) => {
                             onChange={handleCheckbox('free')}
                         />
                     </Grid>
+                    {values.post_type?.name === 'auc' && (
+                        <Grid item container alignItems='center' xs={2}>
+                            <CheckboxSelect
+                                t={t}
+                                name='archive'
+                                checked={values.archive}
+                                onChange={handleCheckbox('archive')}
+                            />
+                        </Grid>
+                    )}
                 </Grid>
-                {mainCategoryName !== '' && (
+                {!!mainCategoryName && (
                     <Grid item xs={12}>
                         <SiteServices
                             t={t}

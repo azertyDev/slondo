@@ -1,4 +1,4 @@
-import React, {FC} from 'react';
+import {FC} from 'react';
 import {WithT} from 'i18next';
 import {
     Typography,
@@ -9,9 +9,9 @@ import {
 } from '@material-ui/core';
 import {CustomTabPanel} from '@src/components/elements/custom_tab_panel/CustomTabPanel';
 import {CardData} from '@root/interfaces/CardData';
-import {useStyles} from './useStyles';
 import {CardView} from '@src/components/elements/card/card_view/CardView';
 import {CustomButton} from '@src/components/elements/custom_button/CustomButton';
+import {useStyles} from './useStyles';
 
 
 type MainContentProps = {
@@ -61,37 +61,38 @@ export const PostsTabs: FC<MainContentProps> = (props) => {
             <div className="tabs-content">
                 <CustomTabPanel value={tabValue} index={0}>
                     {postCardData.error
-                        ? <Typography variant="subtitle1" className="error-text">
-                            {postCardData.error}
-                        </Typography>
-                        : <CardView
-                            list={postCardData.data.cards}
-                            isFetch={postCardData.isFetch}
-                        />}
+                     ? <Typography variant="subtitle1" className="error-text">
+                         {postCardData.error}
+                     </Typography>
+                     : <CardView
+                         data={postCardData.data.cards}
+                         isFetch={postCardData.isFetch}
+                     />}
                 </CustomTabPanel>
                 <CustomTabPanel value={tabValue} index={1}>
                     {auctionCardData.error
-                        ? <Typography variant="subtitle1" className="error-text">
-                            {auctionCardData.error}
-                        </Typography>
-                        : <CardView
-                            list={auctionCardData.data.cards}
-                            isFetch={auctionCardData.isFetch}
-                        />}
+                     ? <Typography variant="subtitle1" className="error-text">
+                         {auctionCardData.error}
+                     </Typography>
+                     : <CardView
+                         data={auctionCardData.data.cards}
+                         isFetch={auctionCardData.isFetch}
+                     />}
                 </CustomTabPanel>
             </div>
-            {(isPostsExist || isAuctionsExist)
-            && <Grid container className={classes.showMoreContainer}>
-                <Grid item xs={12} className="show-more-block">
-                    {postCardData.isShowMoreFetch || auctionCardData.isShowMoreFetch
-                        ? <CircularProgress size={25}/>
-                        : <CustomButton onClick={handleShowMore}>
-                            <Typography variant="subtitle2" color="initial">
-                                {t('showMore')}
-                            </Typography>
-                        </CustomButton>}
+            {(isPostsExist || isAuctionsExist) && (
+                <Grid container className={classes.showMoreContainer}>
+                    <Grid item xs={12} className="show-more-block">
+                        {postCardData.isShowMoreFetch || auctionCardData.isShowMoreFetch
+                         ? <CircularProgress size={25}/>
+                         : <CustomButton onClick={handleShowMore}>
+                             <Typography variant="subtitle2" color="initial">
+                                 {t('showMore')}
+                             </Typography>
+                         </CustomButton>}
+                    </Grid>
                 </Grid>
-            </Grid>}
+            )}
         </div>
     );
 };

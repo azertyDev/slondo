@@ -1,4 +1,4 @@
-import {FC, useEffect, useState} from 'react';
+import React, {FC, useEffect, useState} from 'react';
 import {ITEMS_PER_PAGE_FILTERS} from '@src/constants';
 import {CardView} from '@src/components/elements/card/card_view/CardView';
 import {Typography} from '@material-ui/core';
@@ -9,6 +9,7 @@ import {setErrorMsgAction} from '@src/redux/slices/errorSlice';
 import {useDispatch} from 'react-redux';
 import {CustomPagination} from '@src/components/elements/custom_pagination/CustomPagination';
 import {useStyles} from './useStyles';
+import {ListMode} from '@src/components/elements/card/card_view/list_mode/ListMode';
 
 type SearchResultPropsType = {
     searchTxtFromUrl: string,
@@ -90,7 +91,7 @@ export const SearchResult: FC<SearchResultPropsType> = (props) => {
              : <>
                  <CardView
                      listMode
-                     list={posts}
+                     data={posts}
                  />
                  <div className='pagination-wrapper'>
                      <CustomPagination

@@ -33,7 +33,7 @@ const categories_list: CategoryType[] = [
         has_auction: false,
         icon: {url: Car},
         smallIcon: <CarIcon/>,
-        subCategory: [
+        subcategory: [
             {
                 id: 1,
                 name: 'madeInUzb',
@@ -53,7 +53,7 @@ const categories_list: CategoryType[] = [
         has_auction: false,
         icon: {url: Transport},
         smallIcon: <SpecTechIcon/>,
-        subCategory: [
+        subcategory: [
             {
                 id: 1,
                 name: 'motorcyclesAndMotorTech',
@@ -261,7 +261,7 @@ const categories_list: CategoryType[] = [
         has_auction: true,
         icon: {url: Parts},
         smallIcon: <PartsIcon/>,
-        subCategory: [
+        subcategory: [
             {
                 id: 1,
                 name: 'forCars',
@@ -437,7 +437,7 @@ const categories_list: CategoryType[] = [
         has_auction: false,
         icon: {url: Estate},
         smallIcon: <ApartmentsIcon/>,
-        subCategory: [
+        subcategory: [
             {
                 id: 1,
                 name: 'apartments',
@@ -542,7 +542,7 @@ const categories_list: CategoryType[] = [
         has_auction: false,
         icon: {url: Job},
         smallIcon: <JobIcon/>,
-        subCategory: [
+        subcategory: [
             {
                 id: 1,
                 name: 'vacancies',
@@ -866,7 +866,7 @@ const categories_list: CategoryType[] = [
         has_auction: false,
         icon: {url: Service},
         smallIcon: <ServicesIcon/>,
-        subCategory: [
+        subcategory: [
             {
                 id: 1,
                 name: 'repairAndConstruction',
@@ -1898,7 +1898,7 @@ const categories_list: CategoryType[] = [
         has_auction: true,
         icon: {url: Goods},
         smallIcon: <HangerIcon/>,
-        subCategory: [
+        subcategory: [
             {
                 id: 1,
                 name: 'womenWardrobe',
@@ -2365,7 +2365,7 @@ const categories_list: CategoryType[] = [
         has_auction: true,
         icon: {url: Home},
         smallIcon: <SofaIcon/>,
-        subCategory: [
+        subcategory: [
             {
                 id: 1,
                 name: 'furnitureAndInterior',
@@ -2603,7 +2603,7 @@ const categories_list: CategoryType[] = [
         has_auction: true,
         icon: {url: Electronics},
         smallIcon: <ElectronicIcon/>,
-        subCategory: [
+        subcategory: [
             {
                 id: 1,
                 name: 'phonesAndTablets',
@@ -3000,7 +3000,7 @@ const categories_list: CategoryType[] = [
         has_auction: true,
         icon: {url: Hobbies},
         smallIcon: <HobbyIcon/>,
-        subCategory: [
+        subcategory: [
             {
                 id: 1,
                 name: 'tickets',
@@ -3361,7 +3361,7 @@ const categories_list: CategoryType[] = [
         has_auction: true,
         icon: {url: Animal},
         smallIcon: <AnimalsIcon/>,
-        subCategory: [
+        subcategory: [
             {
                 id: 1,
                 name: 'dogs',
@@ -3408,15 +3408,15 @@ const categories_list: CategoryType[] = [
 
 export const addParentsToCtgrs = (categoriesList: CategoryType[]): CategoryType[] => {
     return categoriesList.map(ctgry => {
-        if (ctgry.subCategory) {
-            const subCategory = addParents(
-                ctgry.subCategory,
+        if (ctgry.subcategory) {
+            const subcategory = addParents(
+                ctgry.subcategory,
                 [{
                     id: ctgry.id,
                     name: ctgry.name
                 }]
             );
-            return {...ctgry, subCategory};
+            return {...ctgry, subcategory};
         } else {
             return ctgry;
         }

@@ -10,7 +10,12 @@ import {MainLayout} from '@src/components/main_layout/MainLayout';
 import {AppearanceForm} from './appearance_form/AppearanceForm';
 import {CommonForm} from './common_form/CommonForm';
 import {setErrorMsgAction} from '@root/src/redux/slices/errorSlice';
-import {normalizeFiltersByCategory, getCategoriesByParams, CategoriesParamsType} from '@src/helpers';
+import {
+    normalizeFiltersByCategory,
+    getCategoriesByParams,
+    CategoriesParamsType,
+    manufacturersDataNormalize
+} from '@src/helpers';
 import {CustomButton} from '@src/components/elements/custom_button/CustomButton';
 import {SuccessPage} from '@src/components/post/create_post/form_page/success_page/SuccessPage';
 import {ParamsFormContainer} from './params_form/ParamsFormContainer';
@@ -30,20 +35,20 @@ export const FormPage: FC = () => {
     const {phone} = useSelector((store: RootState) => store.user.info);
 
     const {asPath, query, push} = useRouter();
-    const [postTypeName, categoryName, subCategoryName, typeName] = query.slug as string[];
+    const [postTypeName, categoryName, subcategoryName, typeName] = query.slug as string[];
 
-    const {category, subCategory, type} = getCategoriesByParams(
+    const {category, subcategory, type} = getCategoriesByParams(
         {
             categoryName,
-            subCategoryName,
+            subcategoryName,
             typeName
         } as CategoriesParamsType
     );
 
-    const isCtgrAnimalFishes = category.name === 'animal' && subCategory.name === 'fishes';
+    const isCtgrAnimalFishes = category.name === 'animal' && subcategory.name === 'fishes';
 
     const title = `${t(`categories:${category.name}`)}
-        ${subCategory ? ` - ${t(`categories:${subCategory.name}`)}` : ''}
+        ${subcategory ? ` - ${t(`categories:${subcategory.name}`)}` : ''}
         ${type ? ` - ${t(`categories:${type.name}`)}` : ''}`;
 
     const postType = postTypes.find(type => type.name === postTypeName);
@@ -51,7 +56,7 @@ export const FormPage: FC = () => {
     const initPost = {
         ads_type_id: postType.id,
         category_id: category.id,
-        sub_category_id: subCategory?.id,
+        sub_category_id: subcategory?.id,
         params: {
             title: ''
         },
@@ -78,27 +83,9 @@ export const FormPage: FC = () => {
         setCurrentFormIndex(formIndex);
     };
 
-    const manufacturersDataNormalize = data => (
-        data.manufacturers.map(({manufacturer}) => {
-            manufacturer = {
-                id: manufacturer.id,
-                name: manufacturer.name,
-                models: manufacturer.separate_models.map(({model}) => {
-                    model = {
-                        id: model.id,
-                        name: model.name,
-                        years: model.years.map(({year}) => year)
-                    };
-                    return model;
-                })
-            };
-            return manufacturer;
-        })
-    );
-
     const fetchFilters = async () => {
         try {
-            const subCtgrId = subCategory?.id ?? '';
+            const subCtgrId = subcategory?.id ?? '';
             const typeId = type?.id ?? '';
 
             setIsFetch(true);
@@ -106,7 +93,7 @@ export const FormPage: FC = () => {
             let fetchedData = await userAPI.getFiltersByCtgr(category.id, subCtgrId, typeId);
 
             if (categoryName === 'car') {
-                if (subCategoryName === 'madeInUzb') {
+                if (subcategoryName === 'madeInUzb') {
                     fetchedData = {
                         ...fetchedData.default_param,
                         manufacturer: manufacturersDataNormalize(fetchedData)
@@ -127,7 +114,7 @@ export const FormPage: FC = () => {
         isPreview
         ? setIsPreview(false)
         : push(
-            `/create/type/${postTypeName}/${categoryName}/${subCategoryName}`,
+            `/create/type/${postTypeName}/${categoryName}/${subcategoryName}`,
             undefined,
             {shallow: true}
         );
@@ -155,7 +142,7 @@ export const FormPage: FC = () => {
                 ...postData,
                 ...commonParams,
                 [categoryName]: {
-                    sub_category_id: subCategory.id,
+                    sub_category_id: subcategory.id,
                     ...otherParams
                 }
             };
@@ -205,7 +192,7 @@ export const FormPage: FC = () => {
                          type={type}
                          filters={filtersData}
                          isPreview={isPreview}
-                         subCategory={subCategory}
+                         subcategory={subcategory}
                          currentFormIndex={currentFormIndex}
                          handleSubmit={handleSubmit}
                          handleFormOpen={handleFormOpen}

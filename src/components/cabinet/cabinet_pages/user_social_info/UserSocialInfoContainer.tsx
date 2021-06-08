@@ -1,10 +1,12 @@
-import React, {FC, useEffect, useState} from 'react';
+import {FC, useEffect, useState} from 'react';
 import {TabsContent} from '@src/components/cabinet/cabinet_pages/TabsContent';
 import {UserSubscribers} from '@src/components/cabinet/cabinet_pages/user_social_info/user_subscribers/UserSubscribers';
 import {UserSubscriptions} from '@src/components/cabinet/cabinet_pages/user_social_info/user_subscribes/UserSubscriptions';
 import {userAPI} from '@src/api/api';
 import {useDispatch} from 'react-redux';
 import {setErrorMsgAction} from '@src/redux/slices/errorSlice';
+import {TabsDataType} from '@root/interfaces/Cabinet';
+import {ITEMS_PER_PAGE_SUBS} from '@src/constants';
 
 export const UserSocialInfoContainer: FC = () => {
     const dispatch = useDispatch();
@@ -29,11 +31,11 @@ export const UserSocialInfoContainer: FC = () => {
 
     const fetchSubs = async (param) => {
         try {
-            const { subscribers, subscriptions } = subs;
+            const {subscribers, subscriptions} = subs;
             const isSubscribers = param === 'subscribers';
 
             subs.isFetch = true;
-            setSubs({ ...subs });
+            setSubs({...subs});
 
             const subsData = await userAPI.getSubs(param);
             subs.isFetch = false;
@@ -45,7 +47,7 @@ export const UserSocialInfoContainer: FC = () => {
                 subscriptions.total = subsData.total;
             }
 
-            setSubs({ ...subs });
+            setSubs({...subs});
         } catch (e) {
             dispatch(setErrorMsgAction(e.message));
         }
@@ -64,17 +66,21 @@ export const UserSocialInfoContainer: FC = () => {
         fetchSubs('subscriptions');
     }, []);
 
-    const tabsData = [
+    const tabsData: TabsDataType = [
         {
             id: 0,
             title: 'Подписки',
             total: subs.subscriptions.total,
-            component: <UserSubscriptions subscriptions={subs.subscriptions.data} handleFollow={handleFollow} />
+            itemsPerPage: ITEMS_PER_PAGE_SUBS,
+            handleFetchByPage: null,
+            component: <UserSubscriptions subscriptions={subs.subscriptions.data} handleFollow={handleFollow}/>
         },
         {
             id: 1,
             title: 'Подписчики',
             total: subs.subscribers.total,
+            itemsPerPage: ITEMS_PER_PAGE_SUBS,
+            handleFetchByPage: null,
             component: <UserSubscribers subscribers={subs.subscribers.data} handleFollow={handleFollow}/>
         }
     ];

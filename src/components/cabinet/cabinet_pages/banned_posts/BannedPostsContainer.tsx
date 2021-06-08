@@ -12,8 +12,8 @@ import {CabinetCard} from '@src/components/cabinet/cabinet_card/CabinetCard';
 import {BannedPosts} from '@src/components/cabinet/cabinet_pages/banned_posts/BannedPosts';
 import {CustomButton} from '@src/components/elements/custom_button/CustomButton';
 import {useModal} from '@src/hooks/useModal';
-import {useStyles} from './useStyles';
 import {ITEMS_PER_PAGE} from '@src/constants';
+import {useStyles} from './useStyles';
 
 const BannedPostsContainer: FC = () => {
     const dispatch = useDispatch();
@@ -155,7 +155,6 @@ const BannedPostsContainer: FC = () => {
             <Grid container>
                 <Grid item xs={9}>
                     <CabinetCard
-                        t={t}
                         cardData={data}
                         handleModalOpen={handleModalOpen}
                     />
@@ -169,7 +168,6 @@ const BannedPostsContainer: FC = () => {
             <Grid container>
                 <Grid item xs={9}>
                     <CabinetCard
-                        t={t}
                         cardData={data}
                         handleModalOpen={handleModalOpen}
                     />
@@ -184,6 +182,7 @@ const BannedPostsContainer: FC = () => {
             title: t('posts'),
             total: postData.myPosts.total,
             itemsPerPage: ITEMS_PER_PAGE,
+            handleFetchByPage: null,
             component: (
                 <BannedPosts
                     t={t}
@@ -202,6 +201,7 @@ const BannedPostsContainer: FC = () => {
             title: t('auctions'),
             total: aucData.myPosts.total,
             itemsPerPage: ITEMS_PER_PAGE,
+            handleFetchByPage: null,
             component: (
                 <BannedPosts
                     t={t}

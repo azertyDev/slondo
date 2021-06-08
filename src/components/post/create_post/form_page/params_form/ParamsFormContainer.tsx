@@ -25,7 +25,7 @@ type ParamsFormPropsType = {
     filters,
     isPreview?: boolean,
     currentFormIndex: number,
-    subCategory,
+    subcategory,
     handleFormOpen: (k) => () => void,
     handleSubmit: (v) => void,
     handleNextFormOpen?: () => void
@@ -38,7 +38,7 @@ export const ParamsFormContainer: FC<ParamsFormPropsType> = (props) => {
         filters,
         handleSubmit,
         type,
-        subCategory,
+        subcategory,
         currentFormIndex,
         handleFormOpen,
         handleNextFormOpen
@@ -51,25 +51,25 @@ export const ParamsFormContainer: FC<ParamsFormPropsType> = (props) => {
     };
 
     const getParamsForm = () => {
-        switch (subCategory.name) {
+        switch (subcategory.name) {
             case 'foreignCars':
             case 'madeInUzb':
                 return <CarParams
                     t={t}
                     filters={filters}
+                    onSubmit={onSubmit}
                     isPreview={isPreview}
                     handleFormOpen={handleFormOpen}
                     currentFormIndex={currentFormIndex}
-                    subCategoryName={subCategory.name}
-                    onSubmit={onSubmit}
+                    subcategoryName={subcategory.name}
                 />;
             case 'apartments':
                 return <ApartmentsParams
                     t={t}
                     type={type}
                     filters={filters}
-                    isPreview={isPreview}
                     onSubmit={onSubmit}
+                    isPreview={isPreview}
                     handleFormOpen={handleFormOpen}
                     currentFormIndex={currentFormIndex}
                 />;
@@ -78,8 +78,8 @@ export const ParamsFormContainer: FC<ParamsFormPropsType> = (props) => {
                     t={t}
                     type={type}
                     filters={filters}
-                    isPreview={isPreview}
                     onSubmit={onSubmit}
+                    isPreview={isPreview}
                     handleFormOpen={handleFormOpen}
                     currentFormIndex={currentFormIndex}
                 />;
@@ -87,9 +87,9 @@ export const ParamsFormContainer: FC<ParamsFormPropsType> = (props) => {
                 return <LandParams
                     t={t}
                     type={type}
-                    isPreview={isPreview}
                     filters={filters}
                     onSubmit={onSubmit}
+                    isPreview={isPreview}
                     handleFormOpen={handleFormOpen}
                     currentFormIndex={currentFormIndex}
                 />;
@@ -97,9 +97,9 @@ export const ParamsFormContainer: FC<ParamsFormPropsType> = (props) => {
                 return <ParkingLotsBoxes
                     t={t}
                     type={type}
-                    isPreview={isPreview}
                     filters={filters}
                     onSubmit={onSubmit}
+                    isPreview={isPreview}
                     handleFormOpen={handleFormOpen}
                     currentFormIndex={currentFormIndex}
                 />;
@@ -108,8 +108,8 @@ export const ParamsFormContainer: FC<ParamsFormPropsType> = (props) => {
                     t={t}
                     type={type}
                     filters={filters}
-                    isPreview={isPreview}
                     onSubmit={onSubmit}
+                    isPreview={isPreview}
                     handleFormOpen={handleFormOpen}
                     currentFormIndex={currentFormIndex}
                 />;
@@ -117,8 +117,8 @@ export const ParamsFormContainer: FC<ParamsFormPropsType> = (props) => {
                 return <RegularParams
                     t={t}
                     filters={filters}
-                    isPreview={isPreview}
                     onSubmit={onSubmit}
+                    isPreview={isPreview}
                     handleFormOpen={handleFormOpen}
                     currentFormIndex={currentFormIndex}
                 />;

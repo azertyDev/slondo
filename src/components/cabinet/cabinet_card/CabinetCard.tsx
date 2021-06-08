@@ -1,10 +1,10 @@
 import {FC} from 'react';
 import {Box, Typography} from '@material-ui/core';
-import {CardDataType} from '@root/interfaces/Cabinet';
 import {useStyles} from './useStyles';
 import {BreadcrumbsComponent} from '@src/components/elements/breadcrumbs/Breadcrumbs';
 import {ListCard} from '@src/components/elements/card/list_card/ListCard';
 import {useTranslation} from 'react-i18next';
+import {CardDataType} from '@root/interfaces/CardData';
 
 type CabinetCardPropsType = {
     cardData: CardDataType,

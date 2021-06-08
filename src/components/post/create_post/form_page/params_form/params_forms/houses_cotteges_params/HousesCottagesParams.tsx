@@ -56,8 +56,7 @@ export const HousesCottagesParams: FC<CommonParamsPropsType> = (props) => {
     } = formik;
 
     const {handleCheckbox, handleOptionCheckbox, handleSelect} = useHandlers(values, setValues);
-    console.log(values);
-    console.log(errors);
+
     const classes = useStyles();
     return (
         <div className={classes.root}>

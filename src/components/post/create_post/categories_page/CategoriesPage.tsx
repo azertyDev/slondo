@@ -4,7 +4,7 @@ import {useRouter} from "next/router";
 import {useTranslation} from 'next-i18next';
 import {MainLayout} from '@src/components/main_layout/MainLayout';
 import {categorySearchHelper, categoriesByType} from '@src/helpers';
-import {SubCategoryType} from '@root/interfaces/Categories';
+import {SubcategoryType} from '@root/interfaces/Categories';
 import {Grid, InputBase, List, ListItem, Typography} from "@material-ui/core";
 import {BackspaceIcon, Search_icon} from "@src/components/elements/icons";
 import {CustomButton} from "@src/components/elements/custom_button/CustomButton";
@@ -14,14 +14,14 @@ import {useStyles} from "./useStyles";
 
 
 type CategoryStateType = {
-    subCategory: IdNameType
+    subcategory: IdNameType
 } & IdNameType;
 
 export const CategoriesPage: FC = () => {
     const initCategory: CategoryStateType = {
         id: null,
         name: '',
-        subCategory: {
+        subcategory: {
             id: null,
             name: ''
         }
@@ -30,13 +30,13 @@ export const CategoriesPage: FC = () => {
 
     const shallow = {shallow: true};
     const {locale, query, push} = useRouter();
-    const [postTypeName, categoryName, subCategoryName] = query.slug as string[];
+    const [postTypeName, categoryName, subcategoryName] = query.slug as string[];
 
     const categories = useMemo(() => addParentsToCtgrs(categoriesByType(postTypeName as string)), [locale]);
 
     const [searchTxt, setSearchTxt] = useState('');
     const [category, setCategory] = useState(initCategory);
-    const [subCtgrs, setSubCtgrs] = useState<SubCategoryType[]>([]);
+    const [subCtgrs, setSubCtgrs] = useState<SubcategoryType[]>([]);
 
     const handleCategory = (ctgr) => async () => {
         const url = `/create/type/${postTypeName}/${ctgr.name}`;
@@ -71,16 +71,16 @@ export const CategoriesPage: FC = () => {
 
     const setSubLvlCtgrs = () => {
         if (categoryName) {
-            categories.forEach(({id, name, subCategory}) => {
+            categories.forEach(({id, name, subcategory}) => {
                 if (name === categoryName) {
-                    if (subCategoryName) {
-                        subCategory.forEach(({name, type}) => {
-                            if (name === subCategoryName) {
-                                type ? setSubCtgrs(type) : setSubCtgrs(subCategory);
+                    if (subcategoryName) {
+                        subcategory.forEach(({name, type}) => {
+                            if (name === subcategoryName) {
+                                type ? setSubCtgrs(type) : setSubCtgrs(subcategory);
                             }
                         });
                     } else {
-                        setSubCtgrs(subCategory);
+                        setSubCtgrs(subcategory);
                     }
                     setCategory({...category, id, name});
                 }
@@ -106,7 +106,7 @@ export const CategoriesPage: FC = () => {
 
     useEffect(() => {
         setSubLvlCtgrs();
-    }, [categoryName, subCategoryName, locale]);
+    }, [categoryName, subcategoryName, locale]);
 
     const classes = useStyles();
     return (
@@ -147,12 +147,12 @@ export const CategoriesPage: FC = () => {
                         </div>
                         {!!subCtgrs.length
                          ? <List disablePadding>
-                             {subCtgrs[0].parents.length === 2 && subCategoryName && (
+                             {subCtgrs[0].parents.length === 2 && subcategoryName && (
                                  <ListItem onClick={handleBackSubCtgr}>
                                      <CustomButton className="back-btn">
                                          <BackspaceIcon/>
                                          <Typography variant="subtitle1">
-                                             {t(`categories:${subCategoryName}`)}
+                                             {t(`categories:${subcategoryName}`)}
                                          </Typography>
                                      </CustomButton>
                                  </ListItem>

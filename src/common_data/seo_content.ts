@@ -1,4 +1,4 @@
-import {CategoryType, SubCategoryType, TypeCategory} from '@root/interfaces/Categories';
+import {CategoryType, SubcategoryType, TypeCategory} from '@root/interfaces/Categories';
 
 const defaultSEOContent = {
     ru: {
@@ -13,7 +13,7 @@ const defaultSEOContent = {
     }
 };
 
-export const getSEOContent = (category: CategoryType, subCtgr: SubCategoryType, typeCtgr: TypeCategory, location: string, locale: string) => {
+export const getSEOContent = (category: CategoryType, subCtgr: SubcategoryType, typeCtgr: TypeCategory, location: string, locale: string) => {
     const seoContent = {
         electronics: {
             phonesAndTablets: {

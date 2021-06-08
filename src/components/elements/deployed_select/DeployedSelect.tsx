@@ -1,6 +1,6 @@
 import {FC} from 'react';
 import {CustomButton} from '@src/components/elements/custom_button/CustomButton';
-import {Typography} from '@material-ui/core';
+import {FormControl, InputLabel, Typography} from '@material-ui/core';
 import {WithT} from 'i18next';
 import {isRequired} from '@src/helpers';
 import {useStyles} from './useStyles';
@@ -32,13 +32,13 @@ export const DeployedSelect: FC<SelectOptionsPropsType> = (props) => {
 
     const classes = useStyles();
     return (
-        <div className={classes.root}>
-            <Typography variant="subtitle1">
-                <strong>
+        <FormControl className={classes.root}>
+            <InputLabel>
+                <>
                     {t(`filters:${name}`)}
                     {!disableRequire && isRequired(name) && <span className='error-text'>*&nbsp;</span>}
-                </strong>
-            </Typography>
+                </>
+            </InputLabel>
             <div className='options'>
                 {options.map(item =>
                     <CustomButton
@@ -57,6 +57,6 @@ export const DeployedSelect: FC<SelectOptionsPropsType> = (props) => {
                     </span>
                 </Typography>
             )}
-        </div>
+        </FormControl>
     );
 };
