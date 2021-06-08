@@ -8,7 +8,7 @@ import {RootState} from '@src/redux/rootReducer';
 import {Rating} from '@src/components/elements/rating/Rating';
 import {months} from '@src/common_data/common';
 import {ResponsiveDialog} from '@src/components/elements/responsive_dialog/ResponsiveDialog';
-import useModal from '@src/hooks/useModal';
+import {useModal} from '@src/hooks/useModal';
 import {userAPI} from '@src/api/api';
 import {Form, FormikProvider, useFormik} from 'formik';
 import {regularFormSchema} from '@root/validation_schemas/createPostSchemas';
@@ -100,7 +100,7 @@ export const Ratings: FC<RatingsPropsType> = (props) => {
                     >
                         <Rating
                             name="rating"
-                            ratingValue={rating?.slice(0, 3)}
+                            ratingValue={rating}
                             ratingCount={number_of_ratings}
                         />
                     </Box>
@@ -116,13 +116,6 @@ export const Ratings: FC<RatingsPropsType> = (props) => {
                                         const {comment, creator, created_at, author} = commentData;
                                         const date = new Date(created_at);
                                         const formatted_date = `${date.getDate()} ${months[date.getMonth()]} ${date.getFullYear()}`;
-                                        // const authorInfo = {
-                                        //     name: creator ? userName : author.name,
-                                        //     surname: creator ? userSurname : author.surname,
-                                        //     avatar: creator ? null : author.avatar,
-                                        //     created_at: creator ? null : author.created_at,
-                                        //     rating: creator ? null : author.rating
-                                        // };
                                         return (
                                             <>
                                                 <Box className='review-item'>

@@ -129,7 +129,7 @@ export const userAPI = {
                 throw err;
             });
     },
-    follow: (id: number): Promise<{ message: string }> => {
+    follow: (id): Promise<{ message: string }> => {
         return instance.post(`regular/user/subscribe?user_id=${id}`, {}, setTokenToHeader())
             .then(res => res.data)
             .catch(err => {
@@ -446,6 +446,20 @@ export const userAPI = {
     },
     getUserPosts: (user_id, post_type = 'post') => {
         return instance.get(`post?user_id=${user_id}&type=${post_type}`)
+            .then(res => res.data)
+            .catch(err => {
+                throw err;
+            });
+    },
+    getUserSubscribers: (params) => {
+        return instance.get(`user/subscribers/byUserId`, {params})
+            .then(res => res.data)
+            .catch(err => {
+                throw err;
+            });
+    },
+    getUserSubscriptions: (params) => {
+        return instance.get(`user/subscriptions/byUserId`, {params})
             .then(res => res.data)
             .catch(err => {
                 throw err;

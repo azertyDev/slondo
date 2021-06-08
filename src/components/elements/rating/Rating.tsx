@@ -34,10 +34,9 @@ export const Rating: FC<RatingPropsType> = (props) => {
                     value={Math.round(ratingValue)}
                     precision={1}
                     onChange={onChangeRating}
-                    {...props}
                 />
                 {ratingValue && (
-                    <Box>
+                    <Box mr={1}>
                         <Typography variant="subtitle1">
                             {ratingValue}
                         </Typography>

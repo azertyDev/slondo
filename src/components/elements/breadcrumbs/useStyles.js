@@ -1,11 +1,11 @@
-import { makeStyles } from '@material-ui/core/styles'
+import {makeStyles} from '@material-ui/core/styles';
 
 export const useStyles = makeStyles((theme) => ({
     root: {
         '& a': {
             fontSize: '14px',
             textDecoration: 'none',
-            color: '#675EAA'
+            color: '#838383'
         },
         '& p': {
             fontSize: '14px',

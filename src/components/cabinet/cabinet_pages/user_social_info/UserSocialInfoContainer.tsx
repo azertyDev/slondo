@@ -36,7 +36,6 @@ export const UserSocialInfoContainer: FC = () => {
             setSubs({ ...subs });
 
             const subsData = await userAPI.getSubs(param);
-
             subs.isFetch = false;
             if (isSubscribers) {
                 subscribers.data = subsData.data;
@@ -55,7 +54,6 @@ export const UserSocialInfoContainer: FC = () => {
     const handleFollow = (userId) => async () => {
         try {
             await userAPI.follow(userId);
-            console.log('follow successful');
         } catch (e) {
             dispatch(setErrorMsgAction(e.message));
         }

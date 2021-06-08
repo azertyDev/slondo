@@ -4,7 +4,7 @@ import Pagination from '@material-ui/lab/Pagination';
 
 export type CustomPaginationTypes = {
     pageCount: number,
-    currentPage?: number,
+    currentPage: number,
     itemsPerPage: number,
     handlePagePagination: (_: unknown, pageNumber: number) => void
 };

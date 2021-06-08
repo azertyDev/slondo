@@ -5,7 +5,9 @@ import {IdNameType} from '@root/interfaces/Post';
 export type TabsDataType = {
     id: number,
     title: string,
-    total?: number,
+    total: number,
+    itemsPerPage: number,
+    handleFetchByPage: (page: number) => void,
     component: ReactElement,
 }[];
 
@@ -72,7 +74,7 @@ export type CardDataType = {
     favorite: boolean,
     id: number,
     image: string,
-    price: number,
+    price: string,
     region: IdNameType,
     safe_deal: number,
     status: string,

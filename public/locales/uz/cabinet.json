@@ -5,7 +5,7 @@
     "rating": "Reyting",
     "favorite": "Sevimli",
     "reviews": "Sharhlar",
-    "subscriptionsAndSubscribers": "Obunachilar/obunalar",
+    "follows": "Obunachilar/obunalar",
     "subscribers": "Obunachilar",
     "subscriptions": "Obunalar",
     "subscribe": "Obuna bo'lish",
@@ -28,5 +28,8 @@
     "auctions": "Auksion",
     "editAvatar": "Rasm o'zgartirish",
     "addAvatar": "Rasm qo'shish",
-    "deleteAvatar": "O'chirish"
+    "deleteAvatar": "O'chirish",
+    "profile_ratings": "Reyting",
+    "profile_follows": "Obunachilar/obunalar",
+    "profile_posts": "E'lonlar"
 }
