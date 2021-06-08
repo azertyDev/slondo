@@ -3,6 +3,8 @@ import Dialog from '@material-ui/core/Dialog';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 import {useTheme} from '@material-ui/core/styles';
 import {useStyles} from './useStyles';
+import {CloseIcon} from '@src/components/elements/icons';
+import {IconButton} from '@material-ui/core';
 
 type ResponsiveDialogPropsType = {
     openDialog: boolean,
@@ -30,6 +32,12 @@ export const ResponsiveDialog: FC<ResponsiveDialogPropsType> = (props) => {
             aria-labelledby="responsive-dialog-title"
             className={classes.root}
         >
+            <IconButton
+                onClick={handleCloseDialog}
+                className={classes.closeBtn}
+            >
+                <CloseIcon/>
+            </IconButton>
             {props.children}
         </Dialog>
     );

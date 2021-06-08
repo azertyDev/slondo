@@ -129,7 +129,7 @@ export const userAPI = {
                 throw err;
             });
     },
-    follow: (id: number): Promise<{ message: string }> => {
+    follow: (id): Promise<{ message: string }> => {
         return instance.post(`regular/user/subscribe?user_id=${id}`, {}, setTokenToHeader())
             .then(res => res.data)
             .catch(err => {

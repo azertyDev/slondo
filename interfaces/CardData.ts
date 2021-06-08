@@ -36,7 +36,6 @@ export type InnerCardData = {
     category?: {
         id: number;
         name: string;
-        mark: string;
     };
     sub_category_id?: number;
     ads_type: string;

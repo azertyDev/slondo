@@ -13,6 +13,7 @@ import {BannedPosts} from '@src/components/cabinet/cabinet_pages/banned_posts/Ba
 import {CustomButton} from '@src/components/elements/custom_button/CustomButton';
 import {useModal} from '@src/hooks/useModal';
 import {useStyles} from './useStyles';
+import {ITEMS_PER_PAGE} from '@src/constants';
 
 const BannedPostsContainer: FC = () => {
     const dispatch = useDispatch();
@@ -182,6 +183,7 @@ const BannedPostsContainer: FC = () => {
             id: 0,
             title: t('posts'),
             total: postData.myPosts.total,
+            itemsPerPage: ITEMS_PER_PAGE,
             component: (
                 <BannedPosts
                     t={t}
@@ -199,6 +201,7 @@ const BannedPostsContainer: FC = () => {
             id: 1,
             title: t('auctions'),
             total: aucData.myPosts.total,
+            itemsPerPage: ITEMS_PER_PAGE,
             component: (
                 <BannedPosts
                     t={t}

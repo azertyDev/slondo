@@ -1,4 +1,4 @@
-import React, {Dispatch, FC, SetStateAction} from 'react';
+import React, {FC} from 'react';
 import {Box, Typography} from '@material-ui/core';
 import {Rating} from '@src/components/elements/rating/Rating';
 import {UserAvatarComponent} from '@src/components/elements/user_info_with_avatar/avatar/UserAvatarComponent';
