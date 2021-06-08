@@ -4,6 +4,11 @@ import {WithT} from 'i18next';
 import {NotesIcon} from '@src/components/elements/icons/NotesIcon';
 import {useStyles} from './useStyles';
 import {UserInfo} from '@root/interfaces/Auth';
+import {userAPI} from '@src/api/api';
+import {setErrorMsgAction} from '@src/redux/slices/errorSlice';
+import {useDispatch} from 'react-redux';
+import {useRouter} from 'next/router';
+import {LetterIcon} from '@src/components/elements/icons';
 
 type SidebarMenuPropsType = {
     user: UserInfo,
@@ -12,9 +17,19 @@ type SidebarMenuPropsType = {
 } & WithT
 
 export const SidebarMenu: FC<SidebarMenuPropsType> = ({t, pageName, setPageName}) => {
+    const dispatch = useDispatch();
+    const {user_id} = useRouter().query;
 
     const handleListItemClick = (pageName) => () => {
         setPageName(pageName);
+    };
+
+    const handleFollow = async () => {
+        try {
+            await userAPI.follow(user_id);
+        } catch (e) {
+            dispatch(setErrorMsgAction(e.message));
+        }
     };
 
     const classes = useStyles();
@@ -41,6 +56,15 @@ export const SidebarMenu: FC<SidebarMenuPropsType> = ({t, pageName, setPageName}
             <List disablePadding component="nav" aria-label="cabinet menu" className='menu-item'>
                 <ListItem
                     button
+                    disableGutters
+                    disabled
+                >
+                    <LetterIcon />
+                    <ListItemText primary={t('cabinet:messages')} />
+                </ListItem>
+
+                <ListItem
+                    button
                     selected={pageName === 'profile_posts'}
                     onClick={handleListItemClick('profile_posts')}
                     disableGutters
@@ -53,6 +77,7 @@ export const SidebarMenu: FC<SidebarMenuPropsType> = ({t, pageName, setPageName}
                 <ListItem
                     button
                     disableGutters
+                    onClick={handleFollow}
                 >
                     <ListItemText primary={t('cabinet:subscribe')} />
                 </ListItem>

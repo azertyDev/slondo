@@ -8,6 +8,7 @@ import {setErrorMsgAction} from '@src/redux/slices/errorSlice';
 import {useRouter} from 'next/router';
 import {SubscriptionItem} from '@src/components/cabinet/cabinet_pages/user_social_info/subscription_item/SubscriptionItem';
 import {ITEMS_PER_PAGE_SUBS} from '@src/constants';
+import {CustomLoader} from '@src/components/elements/custom_loader/CustomLoader';
 
 export const UserFollowsList: FC<WithT> = ({t}) => {
     const dispatch = useDispatch();
@@ -81,7 +82,7 @@ export const UserFollowsList: FC<WithT> = ({t}) => {
             total: subscriptions.total,
             itemsPerPage: ITEMS_PER_PAGE_SUBS,
             handleFetchByPage: fetchSubsByPage('subscriptions'),
-            component: <div>{subscriptionsList}</div>
+            component: <div>{isFetch ? <CustomLoader color='secondary' /> : subscriptionsList}</div>
         },
         {
             id: 1,
@@ -89,7 +90,7 @@ export const UserFollowsList: FC<WithT> = ({t}) => {
             total: subscribers.total,
             itemsPerPage: ITEMS_PER_PAGE_SUBS,
             handleFetchByPage: fetchSubsByPage('subscribers'),
-            component: <div>{subscribersList}</div>
+            component: <div>{isFetch ? <CustomLoader /> : subscribersList}</div>
         }
     ];
 

@@ -5,14 +5,14 @@ import {withAuthRedirect} from '@src/hocs/withAuthRedirect';
 import {userAPI} from '@src/api/api';
 import {setErrorMsgAction} from '@src/redux/slices/errorSlice';
 import {useDispatch} from 'react-redux';
-import {Avatar, Box, Grid, IconButton, List, ListItem, ListItemText, TextField, Typography} from '@material-ui/core';
+import {Avatar, Box, IconButton, List, ListItem, ListItemText, TextField, Typography} from '@material-ui/core';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import {useTranslation} from 'next-i18next';
 import {CustomButton} from '@src/components/elements/custom_button/CustomButton';
 import {useStyles} from './useStyles';
 import {InitialCabinetCardState, initialUserStateType, TabsDataType} from '@root/interfaces/Cabinet';
 import {CabinetCard} from '@src/components/cabinet/cabinet_card/CabinetCard';
-import {SecondaryCabinetCard} from '@src/components/cabinet/components/SecondaryCabinetCard';
+import {ITEMS_PER_PAGE} from '@src/constants';
 
 const MyPostsContainer: FC = () => {
     const dispatch = useDispatch();
@@ -338,37 +338,21 @@ const MyPostsContainer: FC = () => {
         fetchPostData(1);
     }, []);
 
-    const myPostCards = postData.myPosts.data.map(data => (
+    const myPostCards = postData.myPosts.data.map((data) => (
         <Box mb={3} key={data.id}>
-            <Grid container key={data.id}>
-                <Grid item xs={9}>
-                    <CabinetCard
-                        t={t}
-                        cardData={data}
-                        handleModalOpen={handleOpenModal}
-                    />
-                </Grid>
-            </Grid>
+            <CabinetCard
+                cardData={data}
+                handleModalOpen={handleOpenModal}
+            />
         </Box>
     ));
 
-    const securePostCards = securePosts.myPosts.data.map(data => (
-        <Box key={data.id} mb={3}>
-            <Grid container>
-                <Grid item xs={9}>
-                    <CabinetCard
-                        t={t}
-                        cardData={data}
-                        handleModalOpen={handleOpenModal}
-                    />
-                </Grid>
-                <Grid item xs={3}>
-                    <SecondaryCabinetCard
-                        t={t}
-                        user={data}
-                    />
-                </Grid>
-            </Grid>
+    const securePostCards = securePosts.myPosts.data.map((data) => (
+        <Box mb={3} key={data.id}>
+            <CabinetCard
+                cardData={data}
+                handleModalOpen={handleOpenModal}
+            />
         </Box>
     ));
 
@@ -377,6 +361,8 @@ const MyPostsContainer: FC = () => {
             id: 0,
             title: t('posts'),
             total: postData.myPosts.total,
+            itemsPerPage: ITEMS_PER_PAGE,
+            handleFetchByPage: null,
             component:
                 <MyPosts
                     isFetch={postData.isFetch}
@@ -390,6 +376,8 @@ const MyPostsContainer: FC = () => {
             id: 1,
             title: t('securePosts'),
             total: securePosts.myPosts.total,
+            itemsPerPage: ITEMS_PER_PAGE,
+            handleFetchByPage: null,
             component:
                 <MyPosts
                     isFetch={securePosts.isFetch}

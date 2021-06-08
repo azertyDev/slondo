@@ -9,7 +9,6 @@ import {useTranslation} from 'next-i18next';
 import {
     Box,
     CircularProgress,
-    Grid,
     IconButton,
     List,
     ListItem,
@@ -25,7 +24,6 @@ import {UserInfoWithAvatar} from '@src/components/elements/user_info_with_avatar
 import {CustomButton} from '@src/components/elements/custom_button/CustomButton';
 import {ChevronRight, CloseIcon, DoneAllIcon} from '@src/components/elements/icons';
 import {CabinetCard} from '@src/components/cabinet/cabinet_card/CabinetCard';
-import {SecondaryCabinetCard} from '@src/components/cabinet/components/SecondaryCabinetCard';
 import {initialStateType} from '@src/components/cabinet/cabinet_pages/notifications/NotificationsContainer';
 import {ITEMS_PER_PAGE} from '@src/constants';
 import {CustomPagination} from '@src/components/elements/custom_pagination/CustomPagination';
@@ -509,67 +507,21 @@ export const MyAuctionsContainer: FC = () => {
 
     const creatorAuctionCards = auctionData.myPosts.data.map(data => (
         <Box mb={3} key={data.id}>
-            <Grid container>
-                <Grid item xs={9}>
-                    <CabinetCard
-                        t={t}
-                        cardData={data}
-                        handleModalOpen={handleOpenModal}
-                        handleOpenDialog={handleOpenDialog}
-                        fetchAuctionNotifications={fetchAuctionNotifications}
-                    />
-                    {data.creator && data.status === 'accepted' && (
-                        <Box mt={1}>
-                            <CustomButton className='end-auction' onClick={handleDeactivate(data.id)}>
-                                <Typography variant='subtitle1'>
-                                    Завершить аукцион
-                                </Typography>
-                            </CustomButton>
-                        </Box>
-                    )}
-                </Grid>
-                <Grid item xs={3}>
-                    <SecondaryCabinetCard
-                        t={t}
-                        user={data}
-                        offersData={offersData}
-                        fetchAllOffers={fetchAllOffers}
-                        acceptOfferThePrice={acceptOfferThePrice}
-                    />
-                </Grid>
-            </Grid>
+            <CabinetCard
+                cardData={data}
+                handleModalOpen={handleOpenModal}
+                handleOpenDialog={handleOpenDialog}
+                fetchAuctionNotifications={fetchAuctionNotifications}
+            />
         </Box>
     ));
 
     const participantsAuctionCards = participatingData.myPosts.data.map(data => (
         <Box mb={3} key={data.id}>
-            <Grid container>
-                <Grid item xs={9}>
-                    <CabinetCard
-                        t={t}
-                        cardData={data}
-                        handleModalOpen={handleOpenModal}
-                    />
-                    {!data.creator && data.status === 'suspended' && (
-                        <Box mt={1}>
-                            <CustomButton onClick={handleAcceptVictory(data.auction.id, true)}>
-                                <Typography variant='subtitle1'>Принять</Typography>
-                            </CustomButton>
-                            <CustomButton onClick={handleAcceptVictory(data.auction.id, false)}>
-                                <Typography variant='subtitle1'>Отказать</Typography>
-                            </CustomButton>
-                        </Box>
-                    )}
-                </Grid>
-                <Grid item xs={3}>
-                    <SecondaryCabinetCard
-                        t={t}
-                        user={data}
-                        acceptOfferThePrice={acceptOfferThePrice}
-                        fetchAllOffers={fetchAllOffers}
-                    />
-                </Grid>
-            </Grid>
+            <CabinetCard
+                cardData={data}
+                handleModalOpen={handleOpenModal}
+            />
         </Box>
     ));
 
