@@ -43,15 +43,13 @@ export const LocationModal: FC<LocationModalPropsType> = (props) => {
         >
             <div className={classes.locationModal}>
                 <div className='modal-top'>
-                    <CloseBtn handleClose={handleModalClose}/>
-                </div>
-                <Hidden smUp>
                     <div className="location-header-wrapper">
                         <Typography variant="subtitle1">
                             {t('location')}
                         </Typography>
                     </div>
-                </Hidden>
+                    <CloseBtn handleClose={handleModalClose}/>
+                </div>
                 <div className='local-modal-container'>
                     <div className='locals-input'>
                         <Hidden xsDown>
@@ -95,9 +93,11 @@ export const LocationModal: FC<LocationModalPropsType> = (props) => {
                                             <Typography>
                                                 <span>{t(`${loc.name}`)}</span>
                                             </Typography>
-                                            <Hidden smUp>
-                                                <KeyboardArrowRightIcon/>
-                                            </Hidden>
+                                            {(!!loc?.cities || !!loc?.district?.length) && (
+                                                <Hidden smUp>
+                                                    <KeyboardArrowRightIcon/>
+                                                </Hidden>
+                                            )}
                                         </Grid>
                                     ))}
                                 </Grid>

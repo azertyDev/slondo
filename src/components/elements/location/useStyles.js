@@ -21,22 +21,32 @@ export const useStyles = makeStyles((theme) => ({
     locationModal: {
         width: '100%',
         '& div.modal-top': {
+            padding: '20px 35px',
             display: 'flex',
-            justifyContent: 'flex-end'
+            justifyContent: 'space-between',
+            alignItems: 'center',
+            [theme.breakpoints.down('sm')]: {
+                padding: '25px 20px 20px'
+            },
+            [theme.breakpoints.down('xs')]: {
+                padding: '16px 15px',
+                boxShadow: '0px 1px 2px rgb(0 0 0 / 15%)',
+            }
         },
         '& div.location-header-wrapper': {
             '& h6': {
                 textAlign: 'center',
                 width: '100%',
-                padding: '16px 0',
                 fontWeight: '600',
-                boxShadow: '0px 1px 2px rgb(0 0 0 / 15%)'
+                [theme.breakpoints.down('xs')]: {
+
+                }
             }
         },
         '& div.local-modal-container': {
-            padding: '35px',
+            padding: '0 35px 35px',
             [theme.breakpoints.down('sm')]: {
-                padding: '40px 20px 10px'
+                padding: '0 20px 10px'
             },
             [theme.breakpoints.down('xs')]: {
                 padding: '0px 15px'

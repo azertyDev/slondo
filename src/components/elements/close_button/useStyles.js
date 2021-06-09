@@ -1,4 +1,4 @@
-import {makeStyles} from '@material-ui/core/styles'
+import {makeStyles} from '@material-ui/core/styles';
 
 export const useStyles = makeStyles((theme) => ({
     root: {
@@ -10,10 +10,8 @@ export const useStyles = makeStyles((theme) => ({
         padding: 0,
         zIndex: '1000',
         [theme.breakpoints.down('xs')]: {
-            top: '15px',
-            right: '15px',
-            width: '17px',
-            height: '17px'
+            width: '20px',
+            height: '20px'
         },
         '& path': {
             fill: '#494A61'
