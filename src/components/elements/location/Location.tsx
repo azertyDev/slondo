@@ -29,7 +29,7 @@ export const Location: FC = () => {
     const {region, city, district} = selectedLocation;
 
     const hasRegion = !!region;
-    const locationsTxt = `${t(region?.name) ?? ''}${city ? `, ${t(city?.name)}` : ''}${district ? `, ${t(district?.name)}` : ''}`;
+    const locationsTxt = `${district ? `${t(district.name)}` : ''}${city ? district ? `, ${t(city.name)}` : t(city.name) : ''}${region ? city ? `, ${t(region.name)}` : t(region.name) : ''}`;
     const prevLocation = hasRegion ? `${t(`${city?.name ?? region.name}`)}` : t(`allUzb`);
 
     const currentCities = locationsFromStore.find(loc => loc.id === region?.id)?.cities;
@@ -39,10 +39,11 @@ export const Location: FC = () => {
 
     const handleLocation = loc => () => {
         const value = loc.cities
-            ? {region: {id: loc.id, name: loc.name}}
-            : loc.district
-                ? {city: {id: loc.id, name: loc.name}}
-                : {district: {id: loc.id, name: loc.name}};
+                      ? {region: {id: loc.id, name: loc.name}}
+                      : loc.district
+                        ? {city: {id: loc.id, name: loc.name}}
+                        : {district: {id: loc.id, name: loc.name}};
+
         setSelectedLocation({...selectedLocation, ...value});
         (loc.cities || loc.district?.length) && setLocations(separateByThree(loc.cities ?? loc.district));
     };
