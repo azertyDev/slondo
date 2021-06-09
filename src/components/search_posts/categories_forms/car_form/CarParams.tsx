@@ -9,17 +9,14 @@ import {useHandlers} from '@src/hooks/useHandlers';
 import {CustomFormikProvider} from '@src/components/elements/custom_formik_provider/CustomFormikProvider';
 import {CustomButton} from '@src/components/elements/custom_button/CustomButton';
 import {FromToInputs} from '@src/components/elements/from_to_inputs/FromToInputs';
+import {ShowHide} from '@src/components/elements/show_hide/ShowHide';
 
-type CarFormPropsType = {
-    subcategoryName: string
-} & CommonFiltersType;
 
-export const CarParams: FC<CarFormPropsType> = (props) => {
+export const CarParams: FC<CommonFiltersType> = (props) => {
     const {
         onSubmit,
         filters,
         handleReset,
-        subcategoryName,
         urlParams
     } = props;
 
@@ -95,26 +92,6 @@ export const CarParams: FC<CarFormPropsType> = (props) => {
                         errorMsg={getErrorMsg(errors.model, touched.model, t)}
                     />
                 </Grid>
-                {subcategoryName === 'madeInUzb' && (
-                    <Grid
-                        item
-                        container
-                        sm={4}
-                        xs={12}
-                    >
-                        <DropDownSelect
-                            t={t}
-                            multiple
-                            disableRequire
-                            name='position'
-                            values={values}
-                            onBlur={handleBlur}
-                            items={filters.positions}
-                            handleSelect={handleSelect}
-                            errorMsg={getErrorMsg(errors.position, touched.position, t)}
-                        />
-                    </Grid>
-                )}
                 <Grid
                     item
                     container
@@ -174,6 +151,14 @@ export const CarParams: FC<CarFormPropsType> = (props) => {
                         items={filters.transmission}
                         errorMsg={getErrorMsg(errors.transmission, touched.transmission, t)}
                     />
+                </Grid>
+                <Grid item container xs={12}>
+                    <ShowHide
+                        showTxt={t('common:externalParams')}
+                        hideTxt={t('common:hide')}
+                    >
+                        <div>Parameters</div>
+                    </ShowHide>
                 </Grid>
                 <Grid item container justify='flex-end' xs={12} className='actions-btns'>
                     <CustomButton onClick={handleReset}>{t('filters:reset')}</CustomButton>
