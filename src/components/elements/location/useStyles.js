@@ -19,6 +19,11 @@ export const useStyles = makeStyles((theme) => ({
         }
     },
     locationModal: {
+        width: '100%',
+        '& div.modal-top': {
+            display: 'flex',
+            justifyContent: 'flex-end'
+        },
         '& div.location-header-wrapper': {
             '& h6': {
                 textAlign: 'center',
@@ -29,22 +34,23 @@ export const useStyles = makeStyles((theme) => ({
             }
         },
         '& div.local-modal-container': {
-            padding: '40px',
+            padding: '35px',
             [theme.breakpoints.down('sm')]: {
                 padding: '40px 20px 10px'
             },
             [theme.breakpoints.down('xs')]: {
                 padding: '0px 15px'
             },
-            '& > div.locations-input': {
-                [theme.breakpoints.down('xs')]: {
-                    marginTop: '16px'
-                },
-                width: '100%',
-                height: 38,
+            '& > div.locals-input': {
                 position: 'relative',
                 display: 'flex',
                 justifyContent: 'space-between',
+                width: '100%',
+                height: '38px',
+                marginBottom: '20px',
+                [theme.breakpoints.down('xs')]: {
+                    marginTop: '16px'
+                },
                 '& > svg, & > img.filter-icon': {
                     position: 'absolute',
                     height: '20px',
@@ -61,22 +67,24 @@ export const useStyles = makeStyles((theme) => ({
                 },
                 '& > input.search-input': {
                     padding: '8px 0 8px 35px',
+                    width: '70%',
+                    borderRadius: '7px',
+                    border: '1px solid #ccc',
+                    fontSize: '0.87rem',
                     [theme.breakpoints.down('sm')]: {
                         padding: '8px 0 8px 30px',
                         textOverflow: 'ellipsis'
                     },
-                    width: '70%',
                     [theme.breakpoints.down('xs')]: {
                         width: '75%',
                         padding: '8px 0 8px 11px'
-                    },
-                    borderRadius: '7px',
-                    border: '1px solid #ccc',
-                    fontSize: '0.87rem'
+                    }
                 },
                 '& > button.search-button': {
                     width: '27%',
                     borderRadius: '5px',
+                    backgroundColor: 'rgba(125, 188, 246, 1)',
+                    lineHeight: '1.65',
                     [theme.breakpoints.down('xs')]: {
                         marginLeft: '-5px',
                         borderBottomRightRadius: '7px',
@@ -84,52 +92,58 @@ export const useStyles = makeStyles((theme) => ({
                         borderBottomLeftRadius: '0',
                         borderTopLeftRadius: '0'
                     },
-                    backgroundColor: 'rgba(125, 188, 246, 1)',
-                    lineHeight: '1.65',
                     '& h6': {
                         color: '#fff'
                     }
                 }
             },
-            '& div.locations-table': {
-                '& > div:first-child': {
-                    padding: '32px 0 16px ',
-                    display: 'flex',
-                    alignItems: 'center',
+            '& div.locals-wrapper': {
+                '& p > span': {
+                    cursor: 'pointer'
+                },
+                '& > div.locals-title': {
+                    marginBottom: '16px ',
                     [theme.breakpoints.down('xs')]: {
                         fontSize: '14px',
                         borderBottom: '1px solid #F2F2F2',
                         padding: '32px 10px 16px '
                     },
-                    '& svg': {
-                        cursor: 'pointer',
-                        marginRight: '20px',
-                        width: '20px',
-                        height: '20px',
-                        '& path': {
-                            fill: '#666666'
-                        }
-                    },
                     '& p': {
+                        display: 'flex',
+                        alignItems: 'center',
                         fontWeight: '600',
-                        color: '#666666',
-                        cursor: 'pointer'
+                        color: '#666',
+                        '& svg': {
+                            cursor: 'pointer',
+                            width: '20px',
+                            height: '20px',
+                            '& path': {
+                                fill: '#666'
+                            }
+                        },
+                        '& span': {
+                            paddingLeft: ({hasRegion}) => hasRegion && '20px'
+                        }
                     }
                 },
-                '& div > div': {
-                    '& p': {
-                        cursor: 'pointer'
+                '& div.locals-table': {
+                    display: 'flex',
+                    width: '100%',
+                    '& div.locals-col > div.MuiGrid-item': {
+                        paddingBottom: '16px',
+                        '& svg > path': {
+                            fill: '#828282'
+                        },
+                        [theme.breakpoints.down('xs')]: {
+                            padding: '16px 10px',
+                            display: 'flex',
+                            justifyContent: 'space-between',
+                            alignItems: 'center',
+                            borderBottom: '1px solid #F2F2F2'
+                        }
                     },
-                    '& svg > path': {
-                        fill: '#828282'
-                    },
-                    padding: '16px 0',
                     [theme.breakpoints.down('xs')]: {
-                        padding: '16px 10px',
-                        display: 'flex',
-                        justifyContent: 'space-between',
-                        alignItems: 'center',
-                        borderBottom: '1px solid #F2F2F2'
+                        flexDirection: 'column'
                     }
                 }
             }
