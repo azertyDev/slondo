@@ -1,15 +1,15 @@
-import makeStyles from '@material-ui/core/styles/makeStyles'
+import makeStyles from '@material-ui/core/styles/makeStyles';
 
 export const useStyles = makeStyles((theme) => ({
     root: {
+        [theme.breakpoints.down('md')]: {
+            marginBottom: '10px'
+        },
         '& form': {
             display: 'flex',
             position: 'relative',
             width: '100%',
             height: 38,
-            [theme.breakpoints.down('md')]: {
-                marginBottom: '10px'
-            },
             '& > div': {
                 height: '100%'
             },
@@ -50,4 +50,4 @@ export const useStyles = makeStyles((theme) => ({
             }
         }
     }
-}))
+}));

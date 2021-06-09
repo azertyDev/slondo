@@ -5,7 +5,7 @@ export const useStyles = makeStyles((theme) => ({
         position: 'relative',
         height: '50px',
         [theme.breakpoints.down('md')]: {
-            height: '19px',
+            height: '100%',
             marginBottom: '10px'
         },
         '& header.MuiAppBar-root': {

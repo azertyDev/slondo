@@ -63,7 +63,7 @@ export const PasswordConfirmForm: FC<ConfirmAuthPropsType> = (props) => {
     return (
         <FormikProvider value={formik}>
             <Form onSubmit={formik.handleSubmit} className='auth-form'>
-                <div>
+                <div className="formik-num-pass">
                     <FormikField
                         t={t}
                         type="password"

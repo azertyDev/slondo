@@ -6,6 +6,7 @@ import {useTranslation} from 'next-i18next';
 import {cookieOpts, cookies} from '@src/helpers';
 import {useSelector} from 'react-redux';
 import {RootState} from '@src/redux/rootReducer';
+import {useModal} from '@src/hooks/useModal';
 import {useStyles} from './useStyles';
 
 
@@ -21,14 +22,15 @@ export const Location: FC = () => {
 
     const locationsFromStore = useSelector((store: RootState) => store.locations.data);
     const separatedLocations = separateByThree(locationsFromStore);
+    const {modalOpen: locationModalOpen, handleModalOpen: handleLocationModalOpen, handleModalClose: handleLocationModalClose} = useModal();
 
-    const [open, setOpen] = useState(false);
     const [locations, setLocations] = useState([]);
     const [selectedLocation, setSelectedLocation] = useState(initLocation);
     const {region, city, district} = selectedLocation;
 
+    const hasRegion = !!region;
     const locationsTxt = `${t(region?.name) ?? ''}${city ? `, ${t(city?.name)}` : ''}${district ? `, ${t(district?.name)}` : ''}`;
-    const prevLocation = !!region ? `<-- ${t(`${city?.name ?? region.name}`)}` : t(`allUzb`);
+    const prevLocation = hasRegion ? `${t(`${city?.name ?? region.name}`)}` : t(`allUzb`);
 
     const currentCities = locationsFromStore.find(loc => loc.id === region?.id)?.cities;
     const currentDistricts = currentCities?.find(({id, district}) => {
@@ -37,29 +39,29 @@ export const Location: FC = () => {
 
     const handleLocation = loc => () => {
         const value = loc.cities
-                      ? {region: {id: loc.id, name: loc.name}}
-                      : loc.district
-                        ? {city: {id: loc.id, name: loc.name}}
-                        : {district: {id: loc.id, name: loc.name}};
+            ? {region: {id: loc.id, name: loc.name}}
+            : loc.district
+                ? {city: {id: loc.id, name: loc.name}}
+                : {district: {id: loc.id, name: loc.name}};
         setSelectedLocation({...selectedLocation, ...value});
         (loc.cities || loc.district?.length) && setLocations(separateByThree(loc.cities ?? loc.district));
     };
 
     const handleModalOpen = () => {
-        setOpen(true);
         region && (
             setLocations(separateByThree(currentDistricts ?? currentCities ?? locationsFromStore))
         );
+        handleLocationModalOpen();
     };
 
     const handleClose = () => {
-        setOpen(false);
         if (userLocation) {
             setSelectedLocation(userLocation);
         } else {
             setLocations(separatedLocations);
             setSelectedLocation(initLocation);
         }
+        handleLocationModalClose();
     };
 
     const handleChoiceLocation = () => {
@@ -72,7 +74,7 @@ export const Location: FC = () => {
         } else {
             cookies.remove('user_location', {path: '/'});
         }
-        setOpen(false);
+        handleLocationModalClose();
     };
 
     const toPrevLocation = () => {
@@ -100,8 +102,8 @@ export const Location: FC = () => {
 
     const classes = useStyles();
     return (
-        <div className={classes.root}>
-            <div className='location-wrapper'>
+        <div>
+            <div className={classes.location}>
                 <LocationIcon/>
                 <Typography variant="subtitle1" onClick={handleModalOpen}>
                     {t(locationsTxt || 'location')}
@@ -109,11 +111,12 @@ export const Location: FC = () => {
             </div>
             <LocationModal
                 t={t}
-                open={open}
+                hasRegion={hasRegion}
+                modalOpen={locationModalOpen}
                 locations={locations}
                 prevLocation={prevLocation}
                 locationInputTxt={locationsTxt}
-                handleClose={handleClose}
+                handleModalClose={handleClose}
                 handleLocation={handleLocation}
                 toPrevLocation={toPrevLocation}
                 handleChoiceLocation={handleChoiceLocation}

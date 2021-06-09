@@ -65,7 +65,7 @@ export const RegForm: FC<RegFormPropsType> = (props) => {
                     onChange={handlePhoneInput}
                     errorMsg={getErrorMsg(errors.phone, touched.phone, t)}
                 />
-                <div className='auth-btns'>
+                <div className='auth-btns sing-up'>
                     <CustomButton type="submit">
                         {t('signUp')}
                     </CustomButton>
