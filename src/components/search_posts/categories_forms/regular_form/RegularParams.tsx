@@ -3,7 +3,7 @@ import {Grid} from '@material-ui/core';
 import {excludeFields, optionFields} from '@src/common_data/form_fields';
 import {DropDownSelect} from '@src/components/elements/drop_down_select/DropDownSelect';
 import {getErrorMsg} from '@src/helpers';
-import {CommonFiltersType} from '@src/components/search_posts_by_filters/search_form/SearchForm';
+import {CommonFiltersType} from '@src/components/search_posts/search_form/SearchForm';
 import {useTranslation} from 'react-i18next';
 import {useFormik} from 'formik';
 import {useHandlers} from '@src/hooks/useHandlers';
@@ -11,12 +11,12 @@ import {CustomFormikProvider} from '@src/components/elements/custom_formik_provi
 import {CustomButton} from '@src/components/elements/custom_button/CustomButton';
 
 
-export const RegularForm: FC<CommonFiltersType> = (props) => {
+export const RegularParams: FC<CommonFiltersType> = (props) => {
     const {
         onSubmit,
         filters,
         urlParams,
-        handleResetParams
+        handleReset
     } = props;
 
     const {t} = useTranslation('filters');
@@ -34,28 +34,15 @@ export const RegularForm: FC<CommonFiltersType> = (props) => {
         handleBlur
     } = formik;
 
-    const {handleSelect} = useHandlers(values, setValues);
-
-    const setValsByParams = () => {
-        const vals: any = {};
-
-        Object.keys(urlParams).forEach(k => {
-            if (filters[k]) {
-                vals[k] = filters[k].filter(v => urlParams[k].split(',').some(p => +p === v.id));
-            }
-        });
-
-        setValues(vals);
-    };
-
-    const handleReset = () => {
-        setValues({});
-        handleResetParams();
-    };
+    const {handleSelect, setValsByParams} = useHandlers(values, setValues);
 
     useEffect(() => {
-        setValsByParams();
+        setValsByParams(urlParams, filters);
     }, [filters]);
+
+    console.log('urlParams', urlParams);
+    console.log('filters', filters);
+    console.log(values);
 
     return (
         <CustomFormikProvider formik={formik}>

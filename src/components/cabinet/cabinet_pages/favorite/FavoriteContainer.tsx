@@ -1,4 +1,4 @@
-import React, {FC, useEffect, useState} from 'react';
+import {FC, useEffect, useState} from 'react';
 import {TabsContent} from '@src/components/cabinet/cabinet_pages/TabsContent';
 import {Favorite} from '@src/components/cabinet/cabinet_pages/favorite/Favorite';
 import {withAuthRedirect} from '@root/src/hocs/withAuthRedirect';
@@ -7,14 +7,15 @@ import {useDispatch} from 'react-redux';
 import {setErrorMsgAction} from '@src/redux/slices/errorSlice';
 import {Box, Grid, IconButton, List, ListItem, ListItemText, Typography} from '@material-ui/core';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
-import {useStyles} from './useStyles';
 import {InitialCabinetCardState, TabsDataType} from '@root/interfaces/Cabinet';
 import {useTranslation} from 'next-i18next';
 import {CabinetCard} from '@src/components/cabinet/cabinet_card/CabinetCard';
+import {useStyles} from './useStyles';
+import {ITEMS_PER_PAGE} from '@src/constants';
 
 const FavoriteContainer: FC = () => {
     const dispatch = useDispatch();
-    const {t} = useTranslation(['cabinet', 'notifications','categories', 'common', 'locations']);
+    const {t} = useTranslation(['cabinet', 'notifications', 'categories', 'common', 'locations']);
     const classes = useStyles();
 
     const initialFavoriteState: InitialCabinetCardState = {
@@ -49,13 +50,13 @@ const FavoriteContainer: FC = () => {
         try {
             const isPost = type === 'post';
             if (isPost) {
-                setFavoritePostData({ ...favoritePostData, isFetch: true });
-                const { data, total } = await userAPI.getFavorites({type});
-                setFavoritePostData({ myPosts: { data, total }, isFetch: false });
+                setFavoritePostData({...favoritePostData, isFetch: true});
+                const {data, total} = await userAPI.getFavorites({type});
+                setFavoritePostData({myPosts: {data, total}, isFetch: false});
             } else {
-                setFavoriteAucData({ ...favoriteAucData, isFetch: true });
-                const { data, total } = await userAPI.getFavorites({ type });
-                setFavoriteAucData({ myPosts: { data, total }, isFetch: false });
+                setFavoriteAucData({...favoriteAucData, isFetch: true});
+                const {data, total} = await userAPI.getFavorites({type});
+                setFavoriteAucData({myPosts: {data, total}, isFetch: false});
             }
         } catch (e) {
             dispatch(setErrorMsgAction(e.message));
@@ -93,7 +94,7 @@ const FavoriteContainer: FC = () => {
                         >
                             <ListItemText
                                 primary='Да'
-                                primaryTypographyProps={{ variant: 'subtitle1' }}
+                                primaryTypographyProps={{variant: 'subtitle1'}}
                             />
                         </ListItem>
                         <ListItem
@@ -102,7 +103,7 @@ const FavoriteContainer: FC = () => {
                         >
                             <ListItemText
                                 primary='Нет'
-                                primaryTypographyProps={{ variant: 'subtitle1' }}
+                                primaryTypographyProps={{variant: 'subtitle1'}}
                             />
                         </ListItem>
                     </List>
@@ -112,19 +113,19 @@ const FavoriteContainer: FC = () => {
     const ModalContent = () => (
         <>
             {modalContentIndex === 1
-                ? <Typography className="title" variant="h6">
-                    Объявление № {selectedFavoriteId}
-                </Typography>
-                : modalContentIndex === 5
-                    ? null
-                    : <IconButton
-                        className='prev-btn'
-                        aria-label="back"
-                        size="medium"
-                        onClick={handlePrevMenu}
-                    >
-                        <ArrowBackIcon fontSize="inherit" />
-                    </IconButton>
+             ? <Typography className="title" variant="h6">
+                 Объявление № {selectedFavoriteId}
+             </Typography>
+             : modalContentIndex === 5
+               ? null
+               : <IconButton
+                   className='prev-btn'
+                   aria-label="back"
+                   size="medium"
+                   onClick={handlePrevMenu}
+               >
+                   <ArrowBackIcon fontSize="inherit"/>
+               </IconButton>
             }
             {getModalContent()}
         </>
@@ -140,7 +141,6 @@ const FavoriteContainer: FC = () => {
             <Grid container>
                 <Grid item xs={9}>
                     <CabinetCard
-                        t={t}
                         cardData={data}
                         handleModalOpen={handleModalOpen}
                     />
@@ -154,7 +154,6 @@ const FavoriteContainer: FC = () => {
             <Grid container>
                 <Grid item xs={9}>
                     <CabinetCard
-                        t={t}
                         cardData={data}
                         handleModalOpen={handleModalOpen}
                     />
@@ -168,6 +167,8 @@ const FavoriteContainer: FC = () => {
             id: 0,
             title: t('posts'),
             total: favoritePostData.myPosts.total,
+            itemsPerPage: ITEMS_PER_PAGE,
+            handleFetchByPage: null,
             component: (
                 <Favorite
                     favoriteCards={favoritePostCards}
@@ -182,6 +183,8 @@ const FavoriteContainer: FC = () => {
             id: 1,
             title: t('auctions'),
             total: favoriteAucData.myPosts.total,
+            itemsPerPage: ITEMS_PER_PAGE,
+            handleFetchByPage: null,
             component: (
                 <Favorite
                     favoriteCards={favoriteAucCards}

@@ -1,6 +1,6 @@
 import Cookies from 'universal-cookie';
 import {GetServerSideProps} from 'next';
-import {SearchPostsByFilters} from '@src/components/search_posts_by_filters/SearchPostsByFilters';
+import {SearchPosts} from '@src/components/search_posts/SearchPosts';
 import {serverSideTranslations} from 'next-i18next/serverSideTranslations';
 
 export const getServerSideProps: GetServerSideProps = async ({locale, query, req}) => {
@@ -30,4 +30,4 @@ export const getServerSideProps: GetServerSideProps = async ({locale, query, req
     });
 };
 
-export default SearchPostsByFilters;
+export default SearchPosts;

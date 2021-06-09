@@ -22,22 +22,22 @@ import {CustomAccordion} from '@src/components/elements/accordion/CustomAccordio
 import {useStyles} from './useStyles';
 
 type CarParamsPropsType = {
-    subCategoryName: string
+    subcategoryName: string
 } & CommonParamsPropsType;
 
 export const CarParams: FC<CarParamsPropsType> = (props) => {
     const {
         t,
         onSubmit,
-        subCategoryName,
+        subcategoryName,
         isPreview,
         filters,
         currentFormIndex,
         handleFormOpen
     } = props;
 
-    const isForeignCars = subCategoryName === 'foreignCars';
-    const isMadeInUzb = subCategoryName === 'madeInUzb';
+    const isForeignCars = subcategoryName === 'foreignCars';
+    const isMadeInUzb = subcategoryName === 'madeInUzb';
 
     const initVals: any = {
         title: '',
@@ -187,7 +187,7 @@ export const CarParams: FC<CarParamsPropsType> = (props) => {
             values,
             setValues,
             filters,
-            subCategoryName
+            subcategoryName
         );
     }, [filters]);
 

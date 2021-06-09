@@ -19,7 +19,7 @@ import {
     Typography
 } from '@material-ui/core';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
-import {CardDataType, InitialCabinetCardState, OffersStateType, TabsDataType} from '@root/interfaces/Cabinet.js';
+import {InitialCabinetCardState, OffersStateType, TabsDataType} from '@root/interfaces/Cabinet.js';
 import {UserInfoWithAvatar} from '@src/components/elements/user_info_with_avatar/UserInfoWithAvatar';
 import {CustomButton} from '@src/components/elements/custom_button/CustomButton';
 import {ChevronRight, CloseIcon, DoneAllIcon} from '@src/components/elements/icons';
@@ -30,6 +30,7 @@ import {CustomPagination} from '@src/components/elements/custom_pagination/Custo
 import {CustomTabPanel} from '@src/components/elements/custom_tab_panel/CustomTabPanel';
 import {useModal} from '@src/hooks/useModal';
 import {useStyles} from './useStyles';
+import {CardDataType} from '@root/interfaces/CardData';
 
 export const MyAuctionsContainer: FC = () => {
     const dispatch = useDispatch();

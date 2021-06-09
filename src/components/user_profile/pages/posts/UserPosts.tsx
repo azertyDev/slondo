@@ -55,7 +55,7 @@ export const UserPosts: FC<WithT> = ({t}) => {
         postData.isFetch
             ? <CircularProgress color="secondary" />
             : <CardView
-                list={postData.myPosts.data}
+                data={postData.myPosts.data}
                 isFetch={postData.isFetch}
                 listMode={false}
             />
@@ -64,7 +64,7 @@ export const UserPosts: FC<WithT> = ({t}) => {
         aucData.isFetch
             ? <CircularProgress color="primary" />
             : <CardView
-                list={aucData.myPosts.data}
+                data={aucData.myPosts.data}
                 isFetch={aucData.isFetch}
                 listMode={false}
             />

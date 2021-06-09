@@ -1,7 +1,7 @@
 import Cookies from 'universal-cookie';
 import {TFunction} from 'next-i18next';
 import CyrillicToTranslit from 'cyrillic-to-translit-js';
-import {CategoryType, SubCategoryType, TypeCategory} from '@root/interfaces/Categories';
+import {CategoryType, SubcategoryType, TypeCategory} from '@root/interfaces/Categories';
 import {fracFieldRegEx, punctuationMarksRegEx, searchTxtRegEx} from '@src/common_data/reg_exs';
 import {siteCategories} from '@src/common_data/siteCategories';
 import {fractionalFields, requireFields} from '@src/common_data/form_fields';
@@ -49,9 +49,9 @@ export const getSearchTxt = (data: string[] = []): string => (
     data?.find(txt => searchTxtRegEx.test(txt))?.replace(searchTxtRegEx, '') || ''
 );
 
-export const setRequireParamsVals = (values, setValues, filters, subCategoryName: string) => {
+export const setRequireParamsVals = (values, setValues, filters, subcategoryName: string) => {
     const reqVals: any = {...values};
-    const isHousesCottages = subCategoryName === 'housesCottages';
+    const isHousesCottages = subcategoryName === 'housesCottages';
 
     Object.keys(filters).forEach(k => {
         if (!values[k]) {
@@ -93,12 +93,8 @@ export const isRequired = (field: string): boolean => requireFields.some(reqFiel
 
 export const phonePrepare = (phone: string): string => phone.replace(/[\s+()]/g, '');
 
-export const transformCyrillic = (title: string, reverse?: boolean): string => {
-    const transform = reverse ? new CyrillicToTranslit().reverse : new CyrillicToTranslit().transform;
-
-    if (reverse) {
-        return transform(title);
-    }
+export const transformCyrillic = (title: string): string => {
+    const transform = new CyrillicToTranslit().transform;
 
     return transform(title)
         .toLowerCase()
@@ -106,7 +102,7 @@ export const transformCyrillic = (title: string, reverse?: boolean): string => {
         .replace(/\s+/g, '-');
 };
 
-export type CtgrsByCyrillicNameType = [CategoryType, SubCategoryType, TypeCategory?];
+export type CtgrsByCyrillicNameType = [CategoryType, SubcategoryType, TypeCategory?];
 
 export const getCtgrsByCyrillicNames = (categories: string[] = []): CtgrsByCyrillicNameType | [] => {
     if (categories.length) {
@@ -114,11 +110,11 @@ export const getCtgrsByCyrillicNames = (categories: string[] = []): CtgrsByCyril
         return siteCategories.reduce((acc: any, ctgr) => {
             if (transformCyrillic(ctgr.ru_name) === categoryName) {
                 acc.push(ctgr);
-                ctgr.subCategory.forEach(subCtgr => {
-                    if (transformCyrillic(subCtgr.ru_name) === subCtgrName) {
-                        acc.push(subCtgr);
+                ctgr.subcategory.forEach(subctgr => {
+                    if (transformCyrillic(subctgr.ru_name) === subCtgrName) {
+                        acc.push(subctgr);
                         if (typeCtgrName) {
-                            subCtgr.type?.forEach(type => {
+                            subctgr.type?.forEach(type => {
                                 if (transformCyrillic(type.ru_name) === typeCtgrName) {
                                     acc.push(type);
                                 }
@@ -145,6 +141,24 @@ export const clearWhiteSpaces = (txt: string): string => {
     return txt.replace(/\s+/g, '');
 };
 
+export const manufacturersDataNormalize = data => (
+    data.manufacturers.map(({manufacturer}) => {
+        manufacturer = {
+            id: manufacturer.id,
+            name: manufacturer.name,
+            models: manufacturer.separate_models.map(({model}) => {
+                model = {
+                    id: model.id,
+                    name: model.name,
+                    years: model.years.map(({year}) => year)
+                };
+                return model;
+            })
+        };
+        return manufacturer;
+    })
+);
+
 export const normalizeFiltersByCategory = (data: any, type?) => {
     if (!!data) {
         data = Object.keys(data).reduce((acc: any, key) => {
@@ -167,10 +181,10 @@ export const normalizeFiltersByCategory = (data: any, type?) => {
     return data;
 };
 
-export const categorySearchHelper = (txt: string, categoryList: CategoryType[], t: TFunction): SubCategoryType[] => {
+export const categorySearchHelper = (txt: string, categoryList: CategoryType[], t: TFunction): SubcategoryType[] => {
     return categoryList
         .reduce((list, category) => {
-            list = [...list, ...getMatchedCtgrs(txt, category.subCategory)];
+            list = [...list, ...getMatchedCtgrs(txt, category.subcategory)];
             return list;
         }, []);
 
@@ -226,20 +240,20 @@ export const categoriesByType = (postType: string): CategoryType[] => {
 
 export type CategoriesParamsType = {
     categoryName: string,
-    subCategoryName: string,
+    subcategoryName: string,
     typeName: string
 };
 
 export const getCategoriesByParams = (params: CategoriesParamsType) => {
-    const {categoryName, subCategoryName, typeName} = params;
+    const {categoryName, subcategoryName, typeName} = params;
     return siteCategories.reduce((acc: any, ctgry) => {
         if (ctgry.name === categoryName) {
             acc.category = {id: ctgry.id, name: ctgry.name};
-            if (subCategoryName && ctgry.subCategory) {
-                const subCategory = ctgry.subCategory.find(({name}) => name === subCategoryName);
-                if (subCategory) {
-                    const {id, name, type} = subCategory;
-                    acc.subCategory = {id, name};
+            if (subcategoryName && ctgry.subcategory) {
+                const subcategory = ctgry.subcategory.find(({name}) => name === subcategoryName);
+                if (subcategory) {
+                    const {id, name, type} = subcategory;
+                    acc.subcategory = {id, name};
                     if (typeName && type) {
                         const typeCtgr = type.find(({name}) => name === typeName);
                         if (typeCtgr) {

@@ -1,43 +1,15 @@
 import {FC, useEffect, useState} from 'react';
 import {ITEMS_PER_PAGE} from '@src/constants';
 import {userAPI} from '@src/api/api';
-import {CardData, InnerCardData} from '@root/interfaces/CardData';
+import {CardData, CardDataType} from '@root/interfaces/CardData';
 import {SimilarPosts} from './SimilarPosts';
+import {initCardData} from '@src/common_data/common';
 
 
-const initCard: InnerCardData = {
-    id: null,
-    title: '',
-    safe_deal: null,
-    price: null,
-    currency: {
-        id: null,
-        name: ''
-    },
-    creator: false,
-    favorite: false,
-    author: {
-        id: null,
-        name: '',
-        surname: '',
-        phone: '',
-        avatar: '',
-        created_at: '',
-        available_days: ''
-    },
-    created_at: '',
-    image: '',
-    region: null,
-    city: null,
-    delivery: null,
-    exchange: null,
-    ads_type: ''
-};
-
-const initCards: InnerCardData[] = [];
+const initCards: CardDataType[] = [];
 
 for (let i = 1; i <= 16; i++) {
-    initCards.push(initCard);
+    initCards.push(initCardData);
 }
 
 const initialCardData: CardData = {

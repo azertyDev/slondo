@@ -56,18 +56,16 @@ export const DropDownSelect: FC<CustomSelectPropsType> = (props) => {
     const classes = useStyles();
     return (
         <FormControl className={classes.root}>
-            {multiple
-             ? <InputLabel>
-                 {t(`filters:${labelTxt ?? name}`)}
-             </InputLabel>
-             : <Typography variant="subtitle1">
-                 {!isCurrency && (
-                     <strong>
-                         {t(`filters:${labelTxt ?? name}`)}
-                         {!disableRequire && isRequired(name) && <span className='error-text'>*&nbsp;</span>}
-                     </strong>
-                 )}
-             </Typography>}
+            <InputLabel>
+                {multiple
+                 ? t(`filters:${labelTxt ?? name}`)
+                 : !isCurrency && (
+                    <>
+                        {t(`filters:${labelTxt ?? name}`)}
+                        {!disableRequire && isRequired(name) && <span className='error-text'>*&nbsp;</span>}
+                    </>
+                )}
+            </InputLabel>
             <Select
                 variant='outlined'
                 name={name}

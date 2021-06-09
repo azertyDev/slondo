@@ -48,7 +48,7 @@ export const RegularParams: FC<CommonParamsPropsType> = (props) => {
     const setRequireVals = () => {
         const reqVals = {};
         Object.keys(filters).forEach(k => {
-            if (isRequired(k)) reqVals[k] = null;
+            if (isRequired(k) && !values[k]) reqVals[k] = null;
         });
         setValues({...values, ...reqVals});
     };

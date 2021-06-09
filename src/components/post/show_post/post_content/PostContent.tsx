@@ -1,6 +1,5 @@
 import {FC, MutableRefObject, useEffect, useRef, useState} from 'react';
 import {WithT} from 'i18next';
-import Link from 'next/link';
 import {
     Backdrop,
     Container,
@@ -130,8 +129,8 @@ export const PostContent: FC<PostContentTypes> = (props) => {
                     )}
                     <Typography variant="subtitle1" className="value">
                         {typeof model[key] === 'string' || typeof model[key] === 'number'
-                            ? model[key]
-                            : model[key]?.name}
+                         ? model[key]
+                         : model[key]?.name}
                     </Typography>
                 </li>
             );
@@ -154,35 +153,11 @@ export const PostContent: FC<PostContentTypes> = (props) => {
         <div className={classes.root}>
             <Hidden mdDown>
                 <div className="breadcrumbs">
-                    <BreadcrumbsComponent>
-                        {data.category && (
-                            <Link href={`/categories/${data.category.mark}`}>
-                                <a>
-                                    <Typography variant="subtitle1" noWrap>
-                                        {t(`categories:${data.category.name}`)}
-                                    </Typography>
-                                </a>
-                            </Link>
-                        )}
-                        {data.adsable?.sub_category && (
-                            <Link href={`/categories/${data.category.mark}`}>
-                                <a>
-                                    <Typography variant="subtitle1" noWrap>
-                                        {t(`categories:${data.adsable.sub_category.name}`)}
-                                    </Typography>
-                                </a>
-                            </Link>
-                        )}
-                        {data.adsable?.type && (
-                            <Link href="#">
-                                <a>
-                                    <Typography variant="subtitle1" noWrap>
-                                        {t(`categories:${data.adsable.type.name}`)}
-                                    </Typography>
-                                </a>
-                            </Link>
-                        )}
-                    </BreadcrumbsComponent>
+                    <BreadcrumbsComponent
+                        category={data.category}
+                        subcategory={data.adsable?.sub_category}
+                        type={data.adsable?.type}
+                    />
                 </div>
             </Hidden>
             <Hidden mdDown>
@@ -332,15 +307,15 @@ export const PostContent: FC<PostContentTypes> = (props) => {
                         </Typography>
                     </Hidden>
                     {data.region.name || data.city.name || data.district.name
-                        ? <div className='location-text'>
-                            <LocationIcon/>
-                            <Typography variant="subtitle1">
-                                {`${data.region.name ?? ''}`}
-                                {data.city.name ? `, ${data.city.name}` : ''}
-                                {data.district.name ? `, ${data.district.name}` : ''}
-                            </Typography>
-                        </div>
-                        : <Typography variant="subtitle1">Не указано</Typography>}
+                     ? <div className='location-text'>
+                         <LocationIcon/>
+                         <Typography variant="subtitle1">
+                             {`${data.region.name ?? ''}`}
+                             {data.city.name ? `, ${data.city.name}` : ''}
+                             {data.district.name ? `, ${data.district.name}` : ''}
+                         </Typography>
+                     </div>
+                     : <Typography variant="subtitle1">Не указано</Typography>}
                 </div>
                 <Hidden mdDown>
                     <div className="post-category">

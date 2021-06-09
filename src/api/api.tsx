@@ -1,7 +1,7 @@
 import Axios from 'axios';
 import {LocationsDataTypes} from '@root/interfaces/Locations';
 import {CategoryType} from '@root/interfaces/Categories';
-import {InnerCardData} from '@root/interfaces/CardData';
+import {CardDataType} from '@root/interfaces/CardData';
 import {AuctionsDataTypes} from '@root/interfaces/Auctions';
 import {UserInfo} from '@root/interfaces/Auth';
 import {cookies} from '@src/helpers';
@@ -163,7 +163,7 @@ export const userAPI = {
                 throw err;
             });
     },
-    getCards: (itemsPerPage: number, page: number, type: string): Promise<{ data: InnerCardData[]; total: number; }> => {
+    getCards: (itemsPerPage: number, page: number, type: string): Promise<{ data: CardDataType[]; total: number; }> => {
         return instance.get(`post/all?itemsPerPage=${itemsPerPage}&page=${page}&type=${type}`, setTokenToHeader())
             .then((res) => res.data)
             .catch((err) => {

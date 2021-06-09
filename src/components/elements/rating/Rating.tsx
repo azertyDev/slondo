@@ -11,7 +11,7 @@ type RatingPropsType = {
     ratingValue?: number,
     ratingCount?: number,
     name?: string,
-    onChangeRating?: (event: ChangeEvent<{}>, value: number | null) => void,
+    onChangeRating?: (event: ChangeEvent<any>, value: number | null) => void,
 };
 
 export const Rating: FC<RatingPropsType> = (props) => {

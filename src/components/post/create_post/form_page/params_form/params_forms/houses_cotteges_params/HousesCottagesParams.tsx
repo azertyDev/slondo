@@ -36,8 +36,9 @@ export const HousesCottagesParams: FC<CommonParamsPropsType> = (props) => {
         title: '',
         rooms: null,
         number_of_floors: null,
-        floor: null,
-        estate_type: null
+        estate_type: null,
+        general_area: '',
+        land_area: ''
     };
 
     const formik = useFormik({

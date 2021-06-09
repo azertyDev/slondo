@@ -1,57 +1,17 @@
-import React, {FC, useEffect, useState} from 'react';
+import {FC, useEffect, useState} from 'react';
 import {ITEMS_PER_PAGE} from '@src/constants';
 import {userAPI} from '@src/api/api';
-import {CardData, InnerCardData} from '@root/interfaces/CardData';
+import {CardData} from '@root/interfaces/CardData';
 import {PostsSlider} from './PostsSlider';
 import {setErrorMsgAction} from '@src/redux/slices/errorSlice';
 import {useDispatch, useSelector} from 'react-redux';
 import {RootState} from '@src/redux/rootReducer';
+import {initCardData} from '@src/common_data/common';
 
 
-const initCard: InnerCardData = {
-    id: null,
-    title: '',
-    safe_deal: null,
-    price: null,
-    sub_category_id: null,
-    currency: {
-        id: null,
-        name: ''
-    },
-    created_at: '',
-    region: {
-        id: null,
-        name: ''
-    },
-    city: {
-        id: null,
-        name: ''
-    },
-    image: '',
-    creator: false,
-    author: {
-        id: null,
-        name: '',
-        surname: '',
-        phone: '',
-        avatar: '',
-        created_at: '',
-        available_days: ''
-    },
-    category: {
-        id: null,
-        name: '',
-        mark: ''
-    },
-    delivery: null,
-    exchange: null,
-    ads_type: '',
-    favorite: false
-};
+export const initCards = Array.from({length: ITEMS_PER_PAGE}).map(() => initCardData);
 
-export const initCards = Array.from({length: ITEMS_PER_PAGE}).map(() => initCard);
-
-const initCardData: CardData = {
+const initData: CardData = {
     isFetch: false,
     error: null,
     data: {
@@ -65,7 +25,7 @@ export const PostsSliderContainer: FC = () => {
     const {isAuth} = useSelector((store: RootState) => store.user);
 
     const [currentPage, setCurrentPage] = useState(1);
-    const [cardData, setCardData] = useState(initCardData);
+    const [cardData, setCardData] = useState(initData);
 
     const setFetchedCardData = async () => {
         try {

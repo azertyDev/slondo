@@ -1,15 +1,15 @@
-import React, {FC} from 'react';
+import {FC} from 'react';
 import {Breadcrumbs} from '@material-ui/core';
 // styles
-import {useStyles} from './useStyles';
 import Link from 'next/link';
 import {useTranslation} from 'react-i18next';
+import {useStyles} from './useStyles';
 
 
 type BreadcrumbsPropsType = {
     category: string,
     subcategory: string,
-    type?: string
+    type: string
 }
 
 export const BreadcrumbsComponent: FC<BreadcrumbsPropsType> = ({category, subcategory, type}) => {

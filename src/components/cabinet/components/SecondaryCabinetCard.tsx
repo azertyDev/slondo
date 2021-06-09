@@ -121,7 +121,7 @@ export const SecondaryCabinetCard: FC<CabinetCardPropsType> = (props) => {
                             >
                                 {user.author.name}
                             </Typography>
-                            <Rating card readOnly ratingValue={user.author.rating?.slice(0, 3)} />
+                            <Rating readOnly ratingValue={user.author.rating?.slice(0, 3)} />
                             <CustomButton className='rate' onClick={openRatingDialog}>
                                 <StarIcon />
                                 <Typography
@@ -168,7 +168,7 @@ export const SecondaryCabinetCard: FC<CabinetCardPropsType> = (props) => {
                             >
                                 {user.auction.winner.name}
                             </Typography>
-                            <Rating card />
+                            <Rating />
                             <CustomButton className='write'>
                                 <LetterIcon />
                                 <Typography
@@ -228,7 +228,7 @@ export const SecondaryCabinetCard: FC<CabinetCardPropsType> = (props) => {
                             >
                                 {user.auction.offer.user.name}
                             </Typography>
-                            <Rating card ratingValue={user.author?.rating} />
+                            <Rating ratingValue={user.author?.rating} />
                             <Typography variant='h6'>{user.auction.offer.price} сум</Typography>
                             <CustomButton
                                 className='accept'
@@ -319,7 +319,6 @@ export const SecondaryCabinetCard: FC<CabinetCardPropsType> = (props) => {
                             flexDirection='column'
                         >
                             <Rating
-                                card
                                 readOnly={false}
                                 name="rating"
                                 className={classes.ratingComponent}
