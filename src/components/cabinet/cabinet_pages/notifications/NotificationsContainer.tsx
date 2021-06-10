@@ -10,7 +10,7 @@ import {ITEMS_PER_PAGE} from '@src/constants';
 import {CustomPagination} from '@root/src/components/elements/custom_pagination/CustomPagination';
 import {useModal} from '@src/hooks/useModal';
 
-export type initialStateType = {
+export type initialNotificationType = {
     isFetch: boolean,
     data: {
         id: number,
@@ -32,7 +32,7 @@ const NotificationsContainer: FC = () => {
     const userInfo = useSelector((store: RootState) => store.user.info);
     const {modalOpen: openSnackbar, handleModalOpen: handleOpenSnackbar, handleModalClose: handleCloseSnackbar} = useModal();
 
-    const initialState: initialStateType = {
+    const initialState: initialNotificationType = {
         isFetch: false,
         data: []
     };

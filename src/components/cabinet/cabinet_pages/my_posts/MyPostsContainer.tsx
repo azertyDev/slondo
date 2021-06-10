@@ -10,14 +10,16 @@ import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import {useTranslation} from 'next-i18next';
 import {CustomButton} from '@src/components/elements/custom_button/CustomButton';
 import {useStyles} from './useStyles';
-import {CardDataType, InitialCabinetCardState, initialUserStateType, TabsDataType} from '@root/interfaces/Cabinet';
+import {InitialCabinetCardState, initialUserStateType, TabsDataType} from '@root/interfaces/Cabinet';
+import {CardDataType} from '@root/interfaces/CardData';
 import {CabinetCard} from '@src/components/cabinet/cabinet_card/CabinetCard';
 import {ITEMS_PER_PAGE} from '@src/constants';
-import {initialStateType} from '@src/components/cabinet/cabinet_pages/notifications/NotificationsContainer';
+import {initialNotificationType} from '@src/components/cabinet/cabinet_pages/notifications/NotificationsContainer';
+import {useModal} from '@src/hooks/useModal';
 
 const MyPostsContainer: FC = () => {
     const dispatch = useDispatch();
-    const {t} = useTranslation(['cabinet', 'notifications','categories', 'common', 'locations']);
+    const {t} = useTranslation(['cabinet', 'notifications', 'categories', 'common', 'locations']);
     const classes = useStyles();
 
     const deactivateReasons = {
@@ -124,7 +126,7 @@ const MyPostsContainer: FC = () => {
             ]
         }
     };
-    const initialNotificationState: initialStateType = {
+    const initialNotificationState: initialNotificationType = {
         isFetch: false,
         data: []
     };
@@ -221,7 +223,6 @@ const MyPostsContainer: FC = () => {
     const [securePosts, setSecurePosts] = useState(initialPostsState);
     const [notification, setNotification] = useState(initialNotificationState);
     const [tabIndex, setTabIndex] = useState(0);
-    const [openModal, setOpenModal] = useState(false);
     const [modalContentIndex, setModalContentIndex] = useState(1);
     const [reasonId, setReasonId] = useState(null);
     const [postId, setPostId] = useState(null);
@@ -229,13 +230,14 @@ const MyPostsContainer: FC = () => {
     const [selectedAuction, setSelectedAuction] = useState(initialSelectedAuction);
     const [page, setPage] = useState(1);
     const [pageCount, setPageCount] = useState(0);
+    const {modalOpen, handleModalClose, handleModalOpen} = useModal();
 
     const handleOpenModal = (postId) => () => {
-        setOpenModal(true);
+        handleModalOpen();
         postId && setPostId(postId);
     };
     const handleCloseModal = () => {
-        setOpenModal(false);
+        handleModalClose();
         setModalContentIndex(1);
     };
     const handleModalContentIndex = (index, reasonId?) => () => {
@@ -298,7 +300,7 @@ const MyPostsContainer: FC = () => {
     const handleDeactivate = async () => {
         try {
             await userAPI.deactivateById(postId, reasonId);
-            setOpenModal(false);
+            handleModalClose();
             setModalContentIndex(1);
             if (tabIndex === 0) {
                 await fetchPostData(0);
@@ -456,6 +458,8 @@ const MyPostsContainer: FC = () => {
         <Box mb={3} key={data.id}>
             <CabinetCard
                 cardData={data}
+                openModal={modalOpen}
+                handleModalClose={handleCloseModal}
                 handleModalOpen={handleOpenModal}
                 fetchAuctionNotifications={fetchNotifications}
             />
@@ -466,6 +470,8 @@ const MyPostsContainer: FC = () => {
         <Box mb={3} key={data.id}>
             <CabinetCard
                 cardData={data}
+                openModal={modalOpen}
+                handleModalClose={handleCloseModal}
                 handleModalOpen={handleOpenModal}
                 fetchAuctionNotifications={fetchNotifications}
             />
@@ -484,7 +490,7 @@ const MyPostsContainer: FC = () => {
                     isFetch={postData.isFetch}
                     ModalContent={ModalContent}
                     handleModalClose={handleCloseModal}
-                    openModal={openModal}
+                    openModal={modalOpen}
                     myPostCards={myPostCards}
                 />
         },
@@ -497,10 +503,10 @@ const MyPostsContainer: FC = () => {
             component:
                 <MyPosts
                     isFetch={securePosts.isFetch}
+                    myPostCards={securePostCards}
+                    openModal={modalOpen}
                     ModalContent={ModalContent}
                     handleModalClose={handleCloseModal}
-                    openModal={openModal}
-                    myPostCards={securePostCards}
                 />
         }
     ];

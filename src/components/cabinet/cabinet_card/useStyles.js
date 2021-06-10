@@ -2,6 +2,12 @@ import {makeStyles} from '@material-ui/core/styles';
 
 export const useStyles = makeStyles((theme) => ({
     root: {
+        '& .unfold-btn': {
+            background: '#ccc',
+            borderRadius: '0px 0px 5px 5px',
+            height: '32px',
+            width: '100%'
+        },
         '& .breadcrumbs': {
             display: 'flex',
             justifyContent: 'space-between',
