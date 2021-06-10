@@ -10,7 +10,7 @@ type ResponsiveDialogPropsType = {
     maxWidth?
 };
 
-export const ResponsiveDialog: FC<ResponsiveDialogPropsType> = (props) => {
+export const ResponsiveModal: FC<ResponsiveDialogPropsType> = (props) => {
     const {
         openDialog,
         handleCloseDialog,

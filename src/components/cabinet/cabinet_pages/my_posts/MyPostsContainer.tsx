@@ -1,4 +1,4 @@
-import {FC, useEffect, useState} from 'react';
+import React, {FC, useEffect, useState} from 'react';
 import {TabsContent} from '@src/components/cabinet/cabinet_pages/TabsContent';
 import {MyPosts} from '@src/components/cabinet/cabinet_pages/my_posts/MyPosts';
 import {withAuthRedirect} from '@src/hocs/withAuthRedirect';
@@ -16,6 +16,8 @@ import {CabinetCard} from '@src/components/cabinet/cabinet_card/CabinetCard';
 import {ITEMS_PER_PAGE} from '@src/constants';
 import {initialNotificationType} from '@src/components/cabinet/cabinet_pages/notifications/NotificationsContainer';
 import {useModal} from '@src/hooks/useModal';
+import {DetailedPostView} from '@src/components/cabinet/components/detailed_post_view/DetailedPostView';
+import {ResponsiveModal} from '@src/components/elements/responsive_modal/ResponsiveModal';
 
 const MyPostsContainer: FC = () => {
     const dispatch = useDispatch();
@@ -130,7 +132,7 @@ const MyPostsContainer: FC = () => {
         isFetch: false,
         data: []
     };
-    const initialSelectedAuction: CardDataType = {
+    const initialSelectedPost: CardDataType = {
         id: null,
         ads_type: '',
         adsable: {
@@ -227,18 +229,27 @@ const MyPostsContainer: FC = () => {
     const [reasonId, setReasonId] = useState(null);
     const [postId, setPostId] = useState(null);
     const [errorMsg, setErrMsg] = useState('');
-    const [selectedAuction, setSelectedAuction] = useState(initialSelectedAuction);
+    const [selectedPost, setSelectedPost] = useState(initialSelectedPost);
     const [page, setPage] = useState(1);
     const [pageCount, setPageCount] = useState(0);
-    const {modalOpen, handleModalClose, handleModalOpen} = useModal();
+    const {modalOpen: settingsModalOpen, handleModalClose: closeSettingsModal, handleModalOpen: openSettingsModal} = useModal();
+    // const {modalOpen: notificationsOpen, handleModalClose: closeNotificationsModal, handleModalOpen: openNotificationsModal} = useModal();
+    const {modalOpen: detailedModalOpen, handleModalClose: closeDetailedModal, handleModalOpen: openDetailedModal} = useModal();
 
-    const handleOpenModal = (postId) => () => {
-        handleModalOpen();
+    const handleSettingsOpen = (postId: number, post, index: number) => () => {
+        openSettingsModal();
         postId && setPostId(postId);
+        setModalContentIndex(index);
+        setSelectedPost(post);
     };
-    const handleCloseModal = () => {
-        handleModalClose();
+    const handleSettingsClose = () => {
+        closeSettingsModal();
         setModalContentIndex(1);
+    };
+    const handleDetailedOpen = (postId: number, post) => () => {
+        openDetailedModal();
+        postId && setPostId(postId);
+        setSelectedPost(post);
     };
     const handleModalContentIndex = (index, reasonId?) => () => {
         setModalContentIndex(index);
@@ -281,7 +292,7 @@ const MyPostsContainer: FC = () => {
     };
     const fetchNotifications = post => async () => {
         try {
-            if (post.id !== selectedAuction.id) {
+            if (post.id !== selectedPost.id) {
                 const params = {
                     page,
                     itemsPerPage: ITEMS_PER_PAGE,
@@ -290,7 +301,7 @@ const MyPostsContainer: FC = () => {
                 setNotification({...notification, isFetch: true});
                 const {data, total} = await userAPI.getNotificationById(params);
                 setPageCount(total);
-                setSelectedAuction({...selectedAuction, ...post});
+                setSelectedPost({...selectedPost, ...post});
                 setNotification({...notification, data, isFetch: false});
             }
         } catch (e) {
@@ -300,7 +311,7 @@ const MyPostsContainer: FC = () => {
     const handleDeactivate = async () => {
         try {
             await userAPI.deactivateById(postId, reasonId);
-            handleModalClose();
+            closeSettingsModal();
             setModalContentIndex(1);
             if (tabIndex === 0) {
                 await fetchPostData(0);
@@ -458,9 +469,8 @@ const MyPostsContainer: FC = () => {
         <Box mb={3} key={data.id}>
             <CabinetCard
                 cardData={data}
-                openModal={modalOpen}
-                handleModalClose={handleCloseModal}
-                handleModalOpen={handleOpenModal}
+                handleSettingsOpen={handleSettingsOpen}
+                handleDetailedOpen={handleDetailedOpen}
                 fetchAuctionNotifications={fetchNotifications}
             />
         </Box>
@@ -470,9 +480,8 @@ const MyPostsContainer: FC = () => {
         <Box mb={3} key={data.id}>
             <CabinetCard
                 cardData={data}
-                openModal={modalOpen}
-                handleModalClose={handleCloseModal}
-                handleModalOpen={handleOpenModal}
+                handleSettingsOpen={handleSettingsOpen}
+                handleDetailedOpen={handleDetailedOpen}
                 fetchAuctionNotifications={fetchNotifications}
             />
         </Box>
@@ -488,9 +497,6 @@ const MyPostsContainer: FC = () => {
             component:
                 <MyPosts
                     isFetch={postData.isFetch}
-                    ModalContent={ModalContent}
-                    handleModalClose={handleCloseModal}
-                    openModal={modalOpen}
                     myPostCards={myPostCards}
                 />
         },
@@ -504,23 +510,31 @@ const MyPostsContainer: FC = () => {
                 <MyPosts
                     isFetch={securePosts.isFetch}
                     myPostCards={securePostCards}
-                    openModal={modalOpen}
-                    ModalContent={ModalContent}
-                    handleModalClose={handleCloseModal}
                 />
         }
     ];
 
-    const title = t('myPosts');
-
     return (
-        <TabsContent
-            tabIndex={tabIndex}
-            handleTabChange={handleTabChange}
-            title={title}
-            tabsData={tabsData}
-            headerTitle={title}
-        />
+        <>
+            <TabsContent
+                tabIndex={tabIndex}
+                handleTabChange={handleTabChange}
+                title={t('myPosts')}
+                tabsData={tabsData}
+                headerTitle={t('myPosts')}
+            />
+            <ResponsiveModal
+                openDialog={settingsModalOpen}
+                handleCloseDialog={handleSettingsClose}
+            >
+                <ModalContent />
+            </ResponsiveModal>
+            <DetailedPostView
+                data={selectedPost}
+                detailedModalOpen={detailedModalOpen}
+                handleDetailedClose={closeDetailedModal}
+            />
+        </>
     );
 };
 

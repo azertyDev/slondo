@@ -5,13 +5,14 @@ import {withAuthRedirect} from '@root/src/hocs/withAuthRedirect';
 import {userAPI} from '@src/api/api';
 import {useDispatch} from 'react-redux';
 import {setErrorMsgAction} from '@src/redux/slices/errorSlice';
-import {Box, Grid, IconButton, List, ListItem, ListItemText, Typography} from '@material-ui/core';
+import {Box, IconButton, List, ListItem, ListItemText, Typography} from '@material-ui/core';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import {InitialCabinetCardState, TabsDataType} from '@root/interfaces/Cabinet';
 import {useTranslation} from 'next-i18next';
 import {CabinetCard} from '@src/components/cabinet/cabinet_card/CabinetCard';
 import {useStyles} from './useStyles';
 import {ITEMS_PER_PAGE} from '@src/constants';
+import {useModal} from '@src/hooks/useModal';
 
 const FavoriteContainer: FC = () => {
     const dispatch = useDispatch();
@@ -27,20 +28,17 @@ const FavoriteContainer: FC = () => {
     };
     const [favoritePostData, setFavoritePostData] = useState(initialFavoriteState);
     const [favoriteAucData, setFavoriteAucData] = useState(initialFavoriteState);
-    const [selectedFavoriteId, setSelectedFavoriteId] = useState<number>(null);
-    const [openModal, setOpenModal] = useState(false);
+    const [postId, setPostId] = useState<number>(null);
     const [tabIndex, setTabIndex] = useState(0);
     const [modalContentIndex, setModalContentIndex] = useState(1);
+    const {modalOpen, handleModalOpen, handleModalClose} = useModal();
 
     const handleTabChange = (event, newValue) => {
         setTabIndex(newValue);
     };
-    const handleModalOpen = (id: number) => () => {
-        setOpenModal(true);
-        setSelectedFavoriteId(id);
-    };
-    const handleModalClose = () => {
-        setOpenModal(false);
+    const handleOpenModal = (id: number) => () => {
+        handleModalOpen();
+        setPostId(id);
     };
     const handlePrevMenu = () => {
         const backValue = modalContentIndex === 5 ? 3 : 1;
@@ -64,7 +62,7 @@ const FavoriteContainer: FC = () => {
     };
     const handleRemoveFavorite = async () => {
         try {
-            await userAPI.favoriteAds(selectedFavoriteId);
+            await userAPI.favoriteAds(postId);
             if (tabIndex === 0) {
                 await fetchFavoriteData('post');
             } else {
@@ -73,7 +71,7 @@ const FavoriteContainer: FC = () => {
         } catch (e) {
             dispatch(setErrorMsgAction(e.message));
         }
-        setOpenModal(false);
+        handleModalClose();
     };
     const getModalContent = () => {
         switch (modalContentIndex) {
@@ -114,8 +112,8 @@ const FavoriteContainer: FC = () => {
         <>
             {modalContentIndex === 1
              ? <Typography className="title" variant="h6">
-                 Объявление № {selectedFavoriteId}
-             </Typography>
+                    Объявление № {postId}
+                </Typography>
              : modalContentIndex === 5
                ? null
                : <IconButton
@@ -138,27 +136,19 @@ const FavoriteContainer: FC = () => {
 
     const favoritePostCards = favoritePostData.myPosts.data.map(data => (
         <Box mb={3} key={data.id}>
-            <Grid container>
-                <Grid item xs={9}>
-                    <CabinetCard
-                        cardData={data}
-                        handleModalOpen={handleModalOpen}
-                    />
-                </Grid>
-            </Grid>
+            <CabinetCard
+                cardData={data}
+                handleOpenModal={handleOpenModal}
+            />
         </Box>
     ));
 
     const favoriteAucCards = favoriteAucData.myPosts.data.map(data => (
         <Box mb={3} key={data.id}>
-            <Grid container>
-                <Grid item xs={9}>
-                    <CabinetCard
-                        cardData={data}
-                        handleModalOpen={handleModalOpen}
-                    />
-                </Grid>
-            </Grid>
+            <CabinetCard
+                cardData={data}
+                handleOpenModal={handleOpenModal}
+            />
         </Box>
     ));
 
@@ -171,11 +161,11 @@ const FavoriteContainer: FC = () => {
             handleFetchByPage: null,
             component: (
                 <Favorite
+                    openModal={modalOpen}
                     favoriteCards={favoritePostCards}
-                    handleClose={handleModalClose}
-                    handleModalOpen={handleModalOpen}
-                    openModal={openModal}
                     ModalContent={ModalContent}
+                    handleModalOpen={handleOpenModal}
+                    handleClose={handleModalClose}
                 />
             )
         },
@@ -189,8 +179,8 @@ const FavoriteContainer: FC = () => {
                 <Favorite
                     favoriteCards={favoriteAucCards}
                     handleClose={handleModalClose}
-                    handleModalOpen={handleModalOpen}
-                    openModal={openModal}
+                    handleModalOpen={handleOpenModal}
+                    openModal={modalOpen}
                     ModalContent={ModalContent}
                 />
             )

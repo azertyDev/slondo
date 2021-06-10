@@ -58,5 +58,10 @@ export const useStyles = makeStyles(() => ({
             borderRadius: '3px',
             textAlign: 'center'
         }
+    },
+    paper: {
+        background: '#F9F9F9',
+        boxShadow: '0px 1px 2px rgba(0, 0, 0, 0.15)',
+        borderRadius: 5
     }
 }))

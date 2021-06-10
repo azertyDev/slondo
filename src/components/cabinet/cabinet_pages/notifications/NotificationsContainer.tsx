@@ -47,11 +47,9 @@ const NotificationsContainer: FC = () => {
     const handleOpenModal = () => {
         setOpenModal(true);
     };
-
     const handleCloseModal = () => {
         setOpenModal(false);
     };
-
     const fetchAllNotification = async () => {
         try {
             setNotifications({...notifications, isFetch: true});
@@ -62,7 +60,6 @@ const NotificationsContainer: FC = () => {
             dispatch(setErrorMsgAction(e.message));
         }
     };
-
     const handleDeleteNotification = (id) => async () => {
         try {
             setNotifications({...notifications, isFetch: true});
@@ -75,7 +72,6 @@ const NotificationsContainer: FC = () => {
             dispatch(setErrorMsgAction(e.message));
         }
     };
-
     const handleDeleteAllNotification = async () => {
         try {
             setNotifications({...notifications, isFetch: true});
@@ -86,7 +82,6 @@ const NotificationsContainer: FC = () => {
             dispatch(setErrorMsgAction(e.message));
         }
     };
-
     const fetchUserPhone = (user_id) => async () => {
         try {
             const {phone} = await userAPI.getPhoneByUserId(user_id);
@@ -95,7 +90,6 @@ const NotificationsContainer: FC = () => {
             dispatch(setErrorMsgAction(e.message));
         }
     };
-
     const handlePagePagination = (_, pageNum) => {
         setPage(pageNum);
     };

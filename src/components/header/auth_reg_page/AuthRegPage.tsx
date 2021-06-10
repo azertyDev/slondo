@@ -11,7 +11,7 @@ import {
 import {AuthRegContainer} from '@src/components/header/auth_reg_page/auth_reg_form/AuthRegContainer';
 import {setIsAuthModalOpen} from '@src/redux/slices/userSlice';
 import {useDispatch} from 'react-redux';
-import {ResponsiveDialog} from '@src/components/elements/responsive_dialog/ResponsiveDialog';
+import {ResponsiveModal} from '@src/components/elements/responsive_modal/ResponsiveModal';
 import {useStyles} from './useStyles';
 
 
@@ -81,7 +81,7 @@ export const AuthRegPage: FC<AuthRegPageType> = (props) => {
 
     const classes = useStyles();
     return (
-        <ResponsiveDialog
+        <ResponsiveModal
             openDialog={modalOpen}
             handleCloseDialog={handleModalClose}
         >
@@ -177,6 +177,6 @@ export const AuthRegPage: FC<AuthRegPageType> = (props) => {
                     </div>
                 </Hidden>
             </div>
-        </ResponsiveDialog>
+        </ResponsiveModal>
     );
 };

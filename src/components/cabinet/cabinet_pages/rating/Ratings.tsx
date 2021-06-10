@@ -7,7 +7,7 @@ import {useSelector} from 'react-redux';
 import {RootState} from '@src/redux/rootReducer';
 import {Rating} from '@src/components/elements/rating/Rating';
 import {months} from '@src/common_data/common';
-import {ResponsiveDialog} from '@src/components/elements/responsive_dialog/ResponsiveDialog';
+import {ResponsiveDialog} from '@src/components/elements/responsive_modal/ResponsiveDialog';
 import {useModal} from '@src/hooks/useModal';
 import {userAPI} from '@src/api/api';
 import {Form, FormikProvider, useFormik} from 'formik';

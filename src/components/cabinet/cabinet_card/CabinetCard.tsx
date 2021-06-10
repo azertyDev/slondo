@@ -9,13 +9,12 @@ import {CloseIcon, NotificationIcon, SettingsIcon} from '@src/components/element
 import {useRouter} from 'next/router';
 import {CustomButton} from '@src/components/elements/custom_button/CustomButton';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
-import {ResponsiveDialog} from '@src/components/elements/responsive_dialog/ResponsiveDialog';
 
 type CabinetCardPropsType = {
     cardData: CardDataType,
-    handleModalOpen?: (id: number, index?: number) => () => void,
-    openModal: boolean,
-    handleModalClose: () => void,
+    handleSettingsOpen?: (id: number, post?, index?: number) => () => void,
+    handleDetailedOpen?: (id: number, post) => () => void,
+    handleOpenModal?: (id: number) => () => void,
     handleOpenDialog?: () => void,
     fetchAuctionNotifications?: (post) => () => void
 }
@@ -23,9 +22,9 @@ type CabinetCardPropsType = {
 export const CabinetCard: FC<CabinetCardPropsType> = (props) => {
     const {
         cardData,
-        openModal,
-        handleModalOpen,
-        handleModalClose,
+        handleSettingsOpen,
+        handleDetailedOpen,
+        handleOpenModal,
         handleOpenDialog,
         fetchAuctionNotifications
     } = props;
@@ -67,17 +66,19 @@ export const CabinetCard: FC<CabinetCardPropsType> = (props) => {
             </Box>
             <Box position='relative'>
                 <ListCard cardData={cardData} />
-                <CustomButton className='unfold-btn' onClick={handleModalOpen(id)}>
-                    <Typography variant='subtitle1'>
-                        Раскрыть объявление
-                    </Typography>
-                    &nbsp;
-                    <ChevronRightIcon />
-                </CustomButton>
+                {cardData.creator && (
+                    <CustomButton className='unfold-btn' onClick={handleDetailedOpen(id, cardData)}>
+                        <Typography variant='subtitle1'>
+                            Раскрыть объявление
+                        </Typography>
+                        &nbsp;
+                        <ChevronRightIcon color='action' />
+                    </CustomButton>
+                )}
                 <div className='card-btn'>
                     {pathname?.includes('favorite')
                         ?
-                        <CustomButton className='isFavorite' onClick={handleModalOpen(cardData.id)}>
+                        <CustomButton className='isFavorite' onClick={handleOpenModal(id)}>
                             <CloseIcon />
                         </CustomButton>
                         : cardData.creator && (
@@ -89,16 +90,13 @@ export const CabinetCard: FC<CabinetCardPropsType> = (props) => {
                             >
                                 <NotificationIcon />
                             </CustomButton>
-                            <CustomButton className='settings' onClick={handleModalOpen(cardData.id, 1)}>
+                            <CustomButton className='settings' onClick={handleSettingsOpen(cardData.id, null, 1)}>
                                 <SettingsIcon />
                             </CustomButton>
                         </>
                     )}
                 </div>
             </Box>
-            <ResponsiveDialog openDialog={openModal} handleCloseDialog={handleModalClose}>
-                {id}
-            </ResponsiveDialog>
         </Box>
     );
     function getStatus(postStatus: string): string {

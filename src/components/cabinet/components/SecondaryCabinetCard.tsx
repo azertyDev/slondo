@@ -10,7 +10,7 @@ import {UserAvatarComponent} from '@src/components/elements/user_info_with_avata
 import StarIcon from '@material-ui/icons/Star';
 import {WithT} from 'i18next';
 import {UserInfoWithAvatar} from '@src/components/elements/user_info_with_avatar/UserInfoWithAvatar';
-import {ResponsiveDialog} from '@src/components/elements/responsive_dialog/ResponsiveDialog';
+import {ResponsiveDialog} from '@src/components/elements/responsive_modal/ResponsiveDialog';
 import {useModal} from '@src/hooks/useModal';
 import {Form, FormikProvider, useFormik} from 'formik';
 import {regularFormSchema} from '@root/validation_schemas/createPostSchemas';
