@@ -1,10 +1,10 @@
 import React, {Dispatch, FC, SetStateAction} from 'react';
-import {WithT} from "i18next";
-import {Form, FormikProvider, useFormik} from "formik";
-import {FormikField} from "@src/components/elements/formik_field/FormikField";
+import {WithT} from 'i18next';
+import {Form, FormikProvider, useFormik} from 'formik';
+import {FormikField} from '@src/components/elements/formik_field/FormikField';
 import {phoneSchema} from '@root/validation_schemas/authRegSchema';
-import {CustomButton} from "@src/components/elements/custom_button/CustomButton";
-import {userAPI} from "@src/api/api";
+import {CustomButton} from '@src/components/elements/custom_button/CustomButton';
+import {userAPI} from '@src/api/api';
 import {getErrorMsg, phonePrepare} from '@src/helpers';
 
 
@@ -12,6 +12,7 @@ type ConfirmAuthPropsType = {
     activateTimer: () => void,
     setErrorMsg: Dispatch<SetStateAction<string>>
     setPhone: Dispatch<SetStateAction<string>>
+    handleRecoveryCancel
 } & WithT;
 
 export const PhoneForm: FC<ConfirmAuthPropsType> = (props) => {
@@ -19,7 +20,8 @@ export const PhoneForm: FC<ConfirmAuthPropsType> = (props) => {
         t,
         activateTimer,
         setErrorMsg,
-        setPhone
+        setPhone,
+        handleRecoveryCancel
     } = props;
 
     const initialInputsVals = {
@@ -50,9 +52,9 @@ export const PhoneForm: FC<ConfirmAuthPropsType> = (props) => {
         const phone = phonePrepare(values.phone);
         try {
             await setValues({...values, isFetch: true});
-            await userAPI.getSmsCode(phone);
+            // await userAPI.getSmsCode(phone);
             await setValues({...values, isFetch: false});
-            setPhone(phone)
+            setPhone(phone);
             activateTimer();
         } catch (e) {
             setErrorMsg(e.error);
@@ -71,12 +73,15 @@ export const PhoneForm: FC<ConfirmAuthPropsType> = (props) => {
                     onChange={handlePhoneInput}
                     errorMsg={getErrorMsg(errors.phone, touched.phone, t)}
                 />
-                <div className='auth-btns'>
+                <div className='auth-btns rec-pass'>
+                    <CustomButton onClick={handleRecoveryCancel}>
+                        {t('common:cancel')}
+                    </CustomButton>
                     <CustomButton type="submit" disabled={values.isFetch}>
                         {t('recoverPassword')}
                     </CustomButton>
                 </div>
             </Form>
         </FormikProvider>
-    )
+    );
 };

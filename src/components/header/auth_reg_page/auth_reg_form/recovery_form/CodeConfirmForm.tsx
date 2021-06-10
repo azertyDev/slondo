@@ -1,11 +1,12 @@
 import React, {Dispatch, FC, SetStateAction} from 'react';
-import {WithT} from "i18next";
-import {Form, FormikProvider, useFormik} from "formik";
-import {FormikField} from "@src/components/elements/formik_field/FormikField";
+import {WithT} from 'i18next';
+import {Form, FormikProvider, useFormik} from 'formik';
+import {FormikField} from '@src/components/elements/formik_field/FormikField';
 import {codeSchema} from '@root/validation_schemas/authRegSchema';
-import {CustomButton} from "@src/components/elements/custom_button/CustomButton";
-import {userAPI} from "@src/api/api";
+import {CustomButton} from '@src/components/elements/custom_button/CustomButton';
+import {userAPI} from '@src/api/api';
 import {getErrorMsg} from '@src/helpers';
+import {Typography} from '@material-ui/core';
 
 
 type ConfirmAuthPropsType = {
@@ -63,7 +64,7 @@ export const CodeConfirmForm: FC<ConfirmAuthPropsType> = (props) => {
     return (
         <FormikProvider value={formik}>
             <Form onSubmit={formik.handleSubmit} className='auth-form'>
-                <div>
+                <div className="formik-code-confirm">
                     <FormikField
                         t={t}
                         name="code"
@@ -71,14 +72,16 @@ export const CodeConfirmForm: FC<ConfirmAuthPropsType> = (props) => {
                         placeholder={t('filters:enter_sms')}
                         errorMsg={getErrorMsg(errors.code, touched.code, t)}
                     />
-                    <span>{timer}</span>
+                    <Typography variant="subtitle2" className="resendTxt">{t(`auth_reg:resendSms`, {timer: timer})}</Typography>
                 </div>
-                <div className='auth-btns'>
+                <div className='auth-btns '>
                     <CustomButton type="submit" disabled={values.isFetch}>
-                        {t('send')}
+                        <Typography variant="subtitle2">
+                            {t('send')}
+                        </Typography>
                     </CustomButton>
                 </div>
             </Form>
         </FormikProvider>
-    )
+    );
 };

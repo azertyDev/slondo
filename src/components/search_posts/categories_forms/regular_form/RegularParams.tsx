@@ -40,10 +40,6 @@ export const RegularParams: FC<CommonFiltersType> = (props) => {
         setValsByParams(urlParams, filters);
     }, [filters]);
 
-    console.log('urlParams', urlParams);
-    console.log('filters', filters);
-    console.log(values);
-
     return (
         <CustomFormikProvider formik={formik}>
             <Grid container spacing={1}>

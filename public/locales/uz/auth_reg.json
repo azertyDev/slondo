@@ -26,5 +26,6 @@
     "thirdPart": "va",
     "fourthPart": "maxfiylik siyosati",
     "fifthPart": "shartlarini qabul qilasiz."
-  }
+  },
+  "resendSms": "{{timer}} soniyadan so'ng smsni qayta jo'natish mumkin"
 }

@@ -133,7 +133,7 @@ export const Top: FC<TopHeaderPropsType> = (props) => {
                                         ? <Link href='/cabinet/posts'>
                                             <a>
                                                 <div className={classes.avatarBlock}>
-                                                    <IconButton onClick={handleOpenModal}>
+                                                    <IconButton>
                                                         <UserAvatarIcon/>
                                                     </IconButton>
                                                 </div>
