@@ -9,10 +9,10 @@ import {
     TorgIcon
 } from '@src/components/elements/icons';
 import {AuthRegContainer} from '@src/components/header/auth_reg_page/auth_reg_form/AuthRegContainer';
-import {useStyles} from './useStyles';
 import {setIsAuthModalOpen} from '@src/redux/slices/userSlice';
 import {useDispatch} from 'react-redux';
 import {ResponsiveDialog} from '@src/components/elements/responsive_dialog/ResponsiveDialog';
+import {useStyles} from './useStyles';
 
 
 type AuthRegPageType = {
@@ -31,7 +31,6 @@ export const AuthRegPage: FC<AuthRegPageType> = (props) => {
 
     const {t} = useTranslation('auth_reg');
 
-    const [setIsAuthRegClicked] = useState(false);
     const [tabIndex, setTabIndex] = useState(0);
     const [errorMsg, setErrorMsg] = useState('');
     const [isRecoveryPswd, setIsRecoveryPswd] = useState(false);

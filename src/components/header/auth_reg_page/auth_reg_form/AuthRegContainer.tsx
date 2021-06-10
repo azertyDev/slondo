@@ -43,6 +43,7 @@ export const AuthRegContainer: FC<AuthRegContainerPropsType> = (props) => {
     } = props;
 
     const {locale} = useRouter();
+
     const classes = useStyles();
     return (
         <div className={classes.root}>

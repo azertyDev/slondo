@@ -145,7 +145,6 @@ export const SearchForm: FC<SearchFormPropsType> = (props) => {
                     filters={filtersByCtgr}
                     handleReset={handleReset}
                     urlParams={urlFiltersParams}
-                    subcategoryName={subcategoryName}
                 />;
             default:
                 return <RegularParams

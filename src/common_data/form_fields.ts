@@ -59,7 +59,13 @@ export const numericFields = [
     'number_of_bedrooms',
     'engine_capacity',
     'mileage',
-    'ceiling_height'
+    'ceiling_height',
+    'year_from',
+    'year_to',
+    'mileage_from',
+    'mileage_to',
+    'engine_capacity_from',
+    'engine_capacity_to'
 ];
 
 export const fractionalFields = [
@@ -89,4 +95,13 @@ export const optionFields = [
 
 export const singleFields = [
     'manufacturer'
+];
+
+export const stringFields = [
+    'year_from',
+    'year_to',
+    'mileage_from',
+    'mileage_to',
+    'engine_capacity_from',
+    'engine_capacity_to'
 ];

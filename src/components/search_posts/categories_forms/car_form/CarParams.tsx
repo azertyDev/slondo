@@ -10,7 +10,7 @@ import {CustomFormikProvider} from '@src/components/elements/custom_formik_provi
 import {CustomButton} from '@src/components/elements/custom_button/CustomButton';
 import {FromToInputs} from '@src/components/elements/from_to_inputs/FromToInputs';
 import {ShowHide} from '@src/components/elements/show_hide/ShowHide';
-
+import {useStyles} from './useStyles';
 
 export const CarParams: FC<CommonFiltersType> = (props) => {
     const {
@@ -27,7 +27,9 @@ export const CarParams: FC<CommonFiltersType> = (props) => {
         year_from: '',
         year_to: '',
         mileage_from: '',
-        mileage_to: ''
+        mileage_to: '',
+        engine_capacity_from: '',
+        engine_capacity_to: ''
     };
 
     const formik = useFormik<any>({
@@ -51,10 +53,8 @@ export const CarParams: FC<CommonFiltersType> = (props) => {
         setValsByParams(urlParams, filters);
     }, [filters]);
 
-    console.log('urlParams', urlParams);
-    console.log('filters', filters);
     console.log('values', values);
-
+    const classes = useStyles();
     return (
         <CustomFormikProvider formik={formik}>
             <Grid item container spacing={2}>
@@ -102,12 +102,12 @@ export const CarParams: FC<CommonFiltersType> = (props) => {
                         handleInput={handleInput}
                         labelTxt={t('year')}
                         firstInputProps={{
-                            value: values.mileage_from,
+                            value: values.year_from,
                             name: 'year_from',
                             placeholder: t(`filters:from`)
                         }}
                         secondInputProps={{
-                            value: values.mileage_to,
+                            value: values.year_to,
                             name: 'year_to',
                             placeholder: t(`filters:to`)
                         }}
@@ -152,18 +152,130 @@ export const CarParams: FC<CommonFiltersType> = (props) => {
                         errorMsg={getErrorMsg(errors.transmission, touched.transmission, t)}
                     />
                 </Grid>
-                <Grid item container xs={12}>
-                    <ShowHide
-                        showTxt={t('common:externalParams')}
-                        hideTxt={t('common:hide')}
+            </Grid>
+            <ShowHide
+                className={classes.addParams}
+                showTxt={t('common:externalParams')}
+                hideTxt={t('common:hide')}
+            >
+                <Grid item container spacing={2} xs={12}>
+                    <Grid
+                        item
+                        container
+                        sm={4}
+                        xs={12}
                     >
-                        <div>Parameters</div>
-                    </ShowHide>
+                        <DropDownSelect
+                            t={t}
+                            multiple
+                            disableRequire
+                            name='body'
+                            values={values}
+                            onBlur={handleBlur}
+                            handleSelect={handleSelect}
+                            items={filters.body}
+                            errorMsg={getErrorMsg(errors.body, touched.body, t)}
+                        />
+                    </Grid>
+                    <Grid
+                        item
+                        container
+                        sm={4}
+                        xs={12}
+                    >
+                        <DropDownSelect
+                            t={t}
+                            multiple
+                            disableRequire
+                            name='engine_type'
+                            values={values}
+                            onBlur={handleBlur}
+                            handleSelect={handleSelect}
+                            items={filters.engine_type}
+                            errorMsg={getErrorMsg(errors.engine_type, touched.engine_type, t)}
+                        />
+                    </Grid>
+                    <Grid
+                        item
+                        container
+                        sm={4}
+                        xs={12}
+                    >
+                        <FromToInputs
+                            handleInput={handleInput}
+                            labelTxt={t('engine_capacity')}
+                            firstInputProps={{
+                                value: values.engine_capacity_from,
+                                name: 'engine_capacity_from',
+                                placeholder: t(`filters:from`)
+                            }}
+                            secondInputProps={{
+                                value: values.engine_capacity_to,
+                                name: 'engine_capacity_to',
+                                placeholder: t(`filters:to`)
+                            }}
+                        />
+                    </Grid>
+                    <Grid
+                        item
+                        container
+                        sm={4}
+                        xs={12}
+                    >
+                        <DropDownSelect
+                            t={t}
+                            multiple
+                            disableRequire
+                            name='drive'
+                            values={values}
+                            onBlur={handleBlur}
+                            handleSelect={handleSelect}
+                            items={filters.drive}
+                            errorMsg={getErrorMsg(errors.drive, touched.drive, t)}
+                        />
+                    </Grid>
+                    <Grid
+                        item
+                        container
+                        sm={4}
+                        xs={12}
+                    >
+                        <DropDownSelect
+                            t={t}
+                            multiple
+                            disableRequire
+                            name='color'
+                            values={values}
+                            onBlur={handleBlur}
+                            handleSelect={handleSelect}
+                            items={filters.colors}
+                            errorMsg={getErrorMsg(errors.color, touched.color, t)}
+                        />
+                    </Grid>
+                    <Grid
+                        item
+                        container
+                        sm={4}
+                        xs={12}
+                    >
+                        <DropDownSelect
+                            t={t}
+                            multiple
+                            disableRequire
+                            labelTxt={t('additional')}
+                            name='other'
+                            values={values}
+                            onBlur={handleBlur}
+                            handleSelect={handleSelect}
+                            items={filters.other}
+                            errorMsg={getErrorMsg(errors.other, touched.other, t)}
+                        />
+                    </Grid>
                 </Grid>
-                <Grid item container justify='flex-end' xs={12} className='actions-btns'>
-                    <CustomButton onClick={handleReset}>{t('filters:reset')}</CustomButton>
-                    <CustomButton type='submit'>{t('filters:apply')}</CustomButton>
-                </Grid>
+            </ShowHide>
+            <Grid item container justify='flex-end' xs={12} className='actions-btns'>
+                <CustomButton onClick={handleReset}>{t('filters:reset')}</CustomButton>
+                <CustomButton type='submit'>{t('filters:apply')}</CustomButton>
             </Grid>
         </CustomFormikProvider>
     );
