@@ -24,12 +24,12 @@ export const ShowHide: FC<ShowHide> = (props) => {
     const classes = useStyles();
     return (
         <div className={`${classes.root} ${className}`}>
-            {show && children}
-            <div>
-                <span className='show-hide-txt' onClick={handleShow}>
+            <div className='show-hide-txt'>
+                <span onClick={handleShow}>
                     {show ? hideTxt : showTxt}
                 </span>
             </div>
+            {show && children}
         </div>
     );
 };

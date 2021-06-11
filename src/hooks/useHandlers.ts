@@ -1,5 +1,5 @@
 import {Dispatch, SetStateAction} from 'react';
-import {fractionalFields, numericFields, singleFields, stringFields} from '@src/common_data/form_fields';
+import {booleanFields, fractionalFields, numericFields, singleFields, stringFields} from '@src/common_data/form_fields';
 import {numberRegEx} from '@src/common_data/reg_exs';
 
 export const useHandlers = (values: any, setValues: Dispatch<SetStateAction<any>>) => {
@@ -45,6 +45,7 @@ export const useHandlers = (values: any, setValues: Dispatch<SetStateAction<any>
             Object.keys(urlParams).forEach(k => {
                 const isSingleField = singleFields.some(f => f === k);
                 const isStringField = stringFields.some(f => f === k);
+                const isBooleanField = booleanFields.some(f => f === k);
 
                 if (filters[k]) {
                     if (isSingleField) {
@@ -52,10 +53,8 @@ export const useHandlers = (values: any, setValues: Dispatch<SetStateAction<any>
                     } else {
                         vals[k] = filters[k].filter(v => urlParams[k].split(',').some(p => +p === v.id));
                     }
-                }
-
-                if (isStringField && values[k] === '') {
-                    vals[k] = urlParams[k];
+                } else if ((isStringField && values[k] === '') || isBooleanField) {
+                    vals[k] = isBooleanField || urlParams[k];
                 }
             });
 

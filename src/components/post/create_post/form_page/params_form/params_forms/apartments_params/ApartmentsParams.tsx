@@ -35,7 +35,7 @@ export const ApartmentsParams: FC<CommonParamsPropsType> = (props) => {
 
     const initVals: any = {
         title: '',
-        rooms: null,
+        room: null,
         number_of_floors: null,
         floor: null,
         estate_type: null
@@ -157,14 +157,14 @@ export const ApartmentsParams: FC<CommonParamsPropsType> = (props) => {
                                  />
                              </Grid>
                              <Grid item container xs={4}>
-                                 <NumberSelect
+                                 <DropDownSelect
                                      t={t}
-                                     count={5}
-                                     name='rooms'
-                                     errors={errors}
-                                     touched={touched}
+                                     name='room'
                                      values={values}
-                                     setValues={setValues}
+                                     onBlur={handleBlur}
+                                     items={filters.room}
+                                     handleSelect={handleSelect}
+                                     errorMsg={getErrorMsg(errors.room, touched.room, t)}
                                  />
                              </Grid>
                              <Grid item xs={4}>
@@ -336,6 +336,7 @@ export const ApartmentsParams: FC<CommonParamsPropsType> = (props) => {
                                  />
                              </Grid>
                              <OptionsSelect
+                                 row
                                  t={t}
                                  name='amenities'
                                  values={values}
@@ -343,6 +344,7 @@ export const ApartmentsParams: FC<CommonParamsPropsType> = (props) => {
                                  handleOptionCheckbox={handleOptionCheckbox}
                              />
                              <OptionsSelect
+                                 row
                                  t={t}
                                  name='infrastructure'
                                  values={values}

@@ -1,35 +1,43 @@
 import {FC, useEffect} from 'react';
-import {useTranslation} from 'react-i18next';
-import {Grid} from '@material-ui/core';
-import {DropDownSelect} from '@src/components/elements/drop_down_select/DropDownSelect';
-import {getErrorMsg} from '@src/helpers';
-import {CommonFiltersType} from '@src/components/search_posts/search_form/SearchForm';
 import {useFormik} from 'formik';
+import {Grid} from '@material-ui/core';
+import {getErrorMsg} from '@src/helpers';
+import {useTranslation} from 'react-i18next';
+import {DropDownSelect} from '@src/components/elements/drop_down_select/DropDownSelect';
+import {CommonFiltersType} from '@src/components/search_posts/search_form/SearchForm';
 import {useHandlers} from '@src/hooks/useHandlers';
 import {CustomFormikProvider} from '@src/components/elements/custom_formik_provider/CustomFormikProvider';
 import {CustomButton} from '@src/components/elements/custom_button/CustomButton';
 import {FromToInputs} from '@src/components/elements/from_to_inputs/FromToInputs';
 import {ShowHide} from '@src/components/elements/show_hide/ShowHide';
-import {useStyles} from './useStyles';
+import {CheckboxSelect} from '@src/components/elements/checkbox_select/CheckboxSelect';
 
-export const CarParams: FC<CommonFiltersType> = (props) => {
+type SearchApartmentsPropsType = {
+    type
+} & CommonFiltersType;
+
+export const SearchHousesCottages: FC<SearchApartmentsPropsType> = (props) => {
     const {
+        type,
         onSubmit,
         filters,
         handleReset,
         urlParams
     } = props;
 
+    const isRent = type?.id === 2 || type?.id === 3;
+
     const initVals = {
-        manufacturer: null,
-        model: null,
-        transmission: [],
-        year_from: '',
-        year_to: '',
-        mileage_from: '',
-        mileage_to: '',
-        engine_capacity_from: '',
-        engine_capacity_to: ''
+        room: null,
+        general_area_from: '',
+        general_area_to: '',
+        land_area_from: '',
+        land_area_to: '',
+        material: [],
+        metro: [],
+        repair: [],
+        furnished: false,
+        with_pledge: false
     };
 
     const formik = useFormik<any>({
@@ -45,7 +53,7 @@ export const CarParams: FC<CommonFiltersType> = (props) => {
         handleBlur
     } = formik;
 
-    const {handleSelect, handleInput, setValsByParams} = useHandlers(values, setValues);
+    const {handleSelect, handleInput, setValsByParams, handleCheckbox} = useHandlers(values, setValues);
 
     const {t} = useTranslation('filters');
 
@@ -53,87 +61,9 @@ export const CarParams: FC<CommonFiltersType> = (props) => {
         setValsByParams(urlParams, filters);
     }, [filters]);
 
-    console.log('values', values);
-    const classes = useStyles();
     return (
         <CustomFormikProvider formik={formik}>
-            <Grid item container spacing={2}>
-                <Grid
-                    item
-                    container
-                    sm={4}
-                    xs={12}
-                >
-                    <DropDownSelect
-                        t={t}
-                        name='manufacturer'
-                        disableRequire
-                        values={values}
-                        onBlur={handleBlur}
-                        items={filters.manufacturer}
-                        handleSelect={handleSelect}
-                        errorMsg={getErrorMsg(errors.manufacturer, touched.manufacturer, t)}
-                    />
-                </Grid>
-                <Grid
-                    item
-                    container
-                    sm={4}
-                    xs={12}
-                >
-                    <DropDownSelect
-                        t={t}
-                        name='model'
-                        disableRequire
-                        values={values}
-                        onBlur={handleBlur}
-                        handleSelect={handleSelect}
-                        items={values.manufacturer?.models}
-                        errorMsg={getErrorMsg(errors.model, touched.model, t)}
-                    />
-                </Grid>
-                <Grid
-                    item
-                    container
-                    sm={4}
-                    xs={12}
-                >
-                    <FromToInputs
-                        handleInput={handleInput}
-                        labelTxt={t('year')}
-                        firstInputProps={{
-                            value: values.year_from,
-                            name: 'year_from',
-                            placeholder: t(`filters:from`)
-                        }}
-                        secondInputProps={{
-                            value: values.year_to,
-                            name: 'year_to',
-                            placeholder: t(`filters:to`)
-                        }}
-                    />
-                </Grid>
-                <Grid
-                    item
-                    container
-                    sm={4}
-                    xs={12}
-                >
-                    <FromToInputs
-                        handleInput={handleInput}
-                        labelTxt={t('mileage')}
-                        firstInputProps={{
-                            value: values.mileage_from,
-                            name: 'mileage_from',
-                            placeholder: t(`filters:from`)
-                        }}
-                        secondInputProps={{
-                            value: values.mileage_to,
-                            name: 'mileage_to',
-                            placeholder: t(`filters:to`)
-                        }}
-                    />
-                </Grid>
+            <Grid className='main-params' item container spacing={1}>
                 <Grid
                     item
                     container
@@ -144,21 +74,80 @@ export const CarParams: FC<CommonFiltersType> = (props) => {
                         t={t}
                         multiple
                         disableRequire
-                        name='transmission'
+                        name='estate_type'
                         values={values}
                         onBlur={handleBlur}
                         handleSelect={handleSelect}
-                        items={filters.transmission}
-                        errorMsg={getErrorMsg(errors.transmission, touched.transmission, t)}
+                        items={filters.estate_type}
+                        errorMsg={getErrorMsg(errors.estate_type, touched.estate_type, t)}
+                    />
+                </Grid>
+                <Grid
+                    item
+                    container
+                    sm={4}
+                    xs={12}
+                >
+                    <DropDownSelect
+                        t={t}
+                        name='room'
+                        disableRequire
+                        values={values}
+                        onBlur={handleBlur}
+                        items={filters.room}
+                        handleSelect={handleSelect}
+                        errorMsg={getErrorMsg(errors.room, touched.room, t)}
+                    />
+                </Grid>
+                <Grid
+                    item
+                    container
+                    sm={4}
+                    xs={12}
+                >
+                    <FromToInputs
+                        handleInput={handleInput}
+                        labelTxt={t('general_area')}
+                        firstInputProps={{
+                            value: values.general_area_from,
+                            name: 'general_area_from',
+                            placeholder: t(`filters:from`)
+                        }}
+                        secondInputProps={{
+                            value: values.general_area_to,
+                            name: 'general_area_to',
+                            placeholder: t(`filters:to`)
+                        }}
+                    />
+                </Grid>
+                <Grid
+                    item
+                    container
+                    sm={4}
+                    xs={12}
+                >
+                    <FromToInputs
+                        handleInput={handleInput}
+                        labelTxt={t('land_area')}
+                        firstInputProps={{
+                            value: values.land_area_from,
+                            name: 'land_area_from',
+                            placeholder: t(`filters:from`)
+                        }}
+                        secondInputProps={{
+                            value: values.land_area_to,
+                            name: 'land_area_to',
+                            placeholder: t(`filters:to`)
+                        }}
                     />
                 </Grid>
             </Grid>
             <ShowHide
-                className={classes.addParams}
+                className='add-params'
+                hideTxt={t('common:externalParams')}
                 showTxt={t('common:externalParams')}
-                hideTxt={t('common:hide')}
             >
-                <Grid item container spacing={2} xs={12}>
+                <Grid item container spacing={1} xs={12}>
                     <Grid
                         item
                         container
@@ -169,51 +158,12 @@ export const CarParams: FC<CommonFiltersType> = (props) => {
                             t={t}
                             multiple
                             disableRequire
-                            name='body'
+                            name='material'
                             values={values}
                             onBlur={handleBlur}
                             handleSelect={handleSelect}
-                            items={filters.body}
-                            errorMsg={getErrorMsg(errors.body, touched.body, t)}
-                        />
-                    </Grid>
-                    <Grid
-                        item
-                        container
-                        sm={4}
-                        xs={12}
-                    >
-                        <DropDownSelect
-                            t={t}
-                            multiple
-                            disableRequire
-                            name='engine_type'
-                            values={values}
-                            onBlur={handleBlur}
-                            handleSelect={handleSelect}
-                            items={filters.engine_type}
-                            errorMsg={getErrorMsg(errors.engine_type, touched.engine_type, t)}
-                        />
-                    </Grid>
-                    <Grid
-                        item
-                        container
-                        sm={4}
-                        xs={12}
-                    >
-                        <FromToInputs
-                            handleInput={handleInput}
-                            labelTxt={t('engine_capacity')}
-                            firstInputProps={{
-                                value: values.engine_capacity_from,
-                                name: 'engine_capacity_from',
-                                placeholder: t(`filters:from`)
-                            }}
-                            secondInputProps={{
-                                value: values.engine_capacity_to,
-                                name: 'engine_capacity_to',
-                                placeholder: t(`filters:to`)
-                            }}
+                            items={filters.material}
+                            errorMsg={getErrorMsg(errors.material, touched.material, t)}
                         />
                     </Grid>
                     <Grid
@@ -226,12 +176,12 @@ export const CarParams: FC<CommonFiltersType> = (props) => {
                             t={t}
                             multiple
                             disableRequire
-                            name='drive'
+                            name='metro'
                             values={values}
                             onBlur={handleBlur}
                             handleSelect={handleSelect}
-                            items={filters.drive}
-                            errorMsg={getErrorMsg(errors.drive, touched.drive, t)}
+                            items={filters.metro}
+                            errorMsg={getErrorMsg(errors.metro, touched.metro, t)}
                         />
                     </Grid>
                     <Grid
@@ -244,12 +194,12 @@ export const CarParams: FC<CommonFiltersType> = (props) => {
                             t={t}
                             multiple
                             disableRequire
-                            name='color'
+                            name='repair'
                             values={values}
                             onBlur={handleBlur}
                             handleSelect={handleSelect}
-                            items={filters.colors}
-                            errorMsg={getErrorMsg(errors.color, touched.color, t)}
+                            items={filters.repair}
+                            errorMsg={getErrorMsg(errors.repair, touched.repair, t)}
                         />
                     </Grid>
                     <Grid
@@ -262,15 +212,34 @@ export const CarParams: FC<CommonFiltersType> = (props) => {
                             t={t}
                             multiple
                             disableRequire
-                            labelTxt={t('additional')}
-                            name='other'
+                            name='heating'
                             values={values}
                             onBlur={handleBlur}
                             handleSelect={handleSelect}
-                            items={filters.other}
-                            errorMsg={getErrorMsg(errors.other, touched.other, t)}
+                            items={filters.heating}
+                            errorMsg={getErrorMsg(errors.heating, touched.heating, t)}
                         />
                     </Grid>
+                    <Grid item container xs={2} alignItems='center'>
+                        <CheckboxSelect
+                            t={t}
+                            name='furnished'
+                            labelText={t('filters:furnished')}
+                            checked={values.furnished}
+                            onChange={handleCheckbox}
+                        />
+                    </Grid>
+                    {isRent && (
+                        <Grid item container xs={4} alignItems='center'>
+                            <CheckboxSelect
+                                t={t}
+                                name='with_pledge'
+                                labelText={t('filters:with_pledge')}
+                                checked={values.with_pledge}
+                                onChange={handleCheckbox}
+                            />
+                        </Grid>
+                    )}
                 </Grid>
             </ShowHide>
             <Grid item container justify='flex-end' xs={12} className='actions-btns'>

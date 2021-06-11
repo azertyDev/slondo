@@ -7,6 +7,9 @@ export const useStyles = makeStyles((theme) => ({
         '& div.label-wrapper > h6': {
             marginBottom: '5px'
         },
+        '& label.MuiInputLabel-formControl': {
+            top: '-40px'
+        },
         [theme.breakpoints.down('md')]: {
             '& input': {
                 padding: '11.5px 14px',

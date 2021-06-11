@@ -2,6 +2,7 @@ import {FC, ReactNode, useEffect, useState} from 'react';
 import {WithT} from 'i18next';
 import {Grid} from '@material-ui/core';
 import {useRouter} from 'next/router';
+import {HasAuction} from '@src/common_data/site_services';
 import {DropDownSelect} from '@src/components/elements/drop_down_select/DropDownSelect';
 import {postTypes} from '@src/common_data/post_types';
 import {DeployedSelect} from '@src/components/elements/deployed_select/DeployedSelect';
@@ -15,15 +16,17 @@ import {
     normalizeFiltersByCategory, manufacturersDataNormalize
 } from '@src/helpers';
 import {useHandlers} from '@src/hooks/useHandlers';
-import {CarParams} from '@src/components/search_posts/categories_forms/car_form/CarParams';
-import {RegularParams} from '@src/components/search_posts/categories_forms/regular_form/RegularParams';
+import {SearchCar} from '@src/components/search_posts/categories_forms/search_car/SearchCar';
+import {SearchRegular} from '@src/components/search_posts/categories_forms/search_regular/SearchRegular';
 import {transformLocations} from '@src/common_data/locations';
 import {siteCategories} from '@src/common_data/siteCategories';
 import {useDispatch, useSelector} from 'react-redux';
 import {RootState} from '@src/redux/rootReducer';
 import {userAPI} from '@src/api/api';
 import {setErrorMsgAction} from '@src/redux/slices/errorSlice';
+import {SearchApartments} from '@src/components/search_posts/categories_forms/search_apartments/SearchApartments';
 import {useStyles} from './useStyles';
+import {SearchHousesCottages} from '@src/components/search_posts/categories_forms/search_houses_cottages/SearchHousesCottages';
 
 
 export type CommonFiltersType = {
@@ -98,11 +101,11 @@ export const SearchForm: FC<SearchFormPropsType> = (props) => {
     };
 
     const {category, subcategory, type, ...commonVals} = values;
+
     const mainCategoryName: string = category?.name ?? '';
     const subcategoryName: string = subcategory?.name ?? '';
 
-    const isJobCtgr = mainCategoryName === 'job';
-    const typeLabel = mainCategoryName === 'service' ? 'service_type' : isJobCtgr ? 'job_type' : 'good_type';
+    const hasAuction = !!HasAuction[mainCategoryName];
 
     const {handleInput} = useHandlers(values, setValues);
 
@@ -140,19 +143,48 @@ export const SearchForm: FC<SearchFormPropsType> = (props) => {
         switch (subcategoryName) {
             case 'madeInUzb':
             case 'foreignCars':
-                return <CarParams
+                return <SearchCar
+                    onSubmit={onSubmit}
+                    filters={filtersByCtgr}
+                    handleReset={handleReset}
+                    urlParams={urlFiltersParams}
+                />;
+            case 'apartments':
+                return <SearchApartments
+                    type={type}
+                    onSubmit={onSubmit}
+                    filters={filtersByCtgr}
+                    handleReset={handleReset}
+                    urlParams={urlFiltersParams}
+                />;
+            case 'housesCottages':
+                return <SearchHousesCottages
+                    type={type}
                     onSubmit={onSubmit}
                     filters={filtersByCtgr}
                     handleReset={handleReset}
                     urlParams={urlFiltersParams}
                 />;
             default:
-                return <RegularParams
+                return <SearchRegular
                     onSubmit={onSubmit}
                     filters={filtersByCtgr}
                     handleReset={handleReset}
                     urlParams={urlFiltersParams}
                 />;
+        }
+    };
+
+    const getTypeLabelByCtgr = () => {
+        switch (mainCategoryName) {
+            case 'estate':
+                return 'type';
+            case 'service':
+                return 'service_type';
+            case 'job':
+                return 'job_type';
+            default:
+                return 'good_type';
         }
     };
 
@@ -277,28 +309,30 @@ export const SearchForm: FC<SearchFormPropsType> = (props) => {
                             name='type'
                             disableRequire
                             values={values}
-                            labelTxt={typeLabel}
+                            labelTxt={getTypeLabelByCtgr()}
                             items={values.subcategory.type}
                             handleSelect={handleSelect}
                         />
                     </Grid>
                 )}
-                <Grid item xs={4}>
-                    <DeployedSelect
-                        t={t}
-                        disableRequire
-                        values={values}
-                        name='post_type'
-                        options={postTypesList}
-                        handleSelect={handlePostType}
-                    />
-                </Grid>
+                {hasAuction && (
+                    <Grid item xs={4}>
+                        <DeployedSelect
+                            t={t}
+                            disableRequire
+                            values={values}
+                            name='post_type'
+                            options={postTypesList}
+                            handleSelect={handlePostType}
+                        />
+                    </Grid>
+                )}
                 <Grid container item xs={12}>
                     <Grid item xs={4}>
                         <FromToInputs
                             disabled={values.free}
                             handleInput={handleInput}
-                            labelTxt={t(isJobCtgr ? 'salary' : 'cost')}
+                            labelTxt={t(mainCategoryName === 'job' ? 'salary' : 'cost')}
                             firstInputProps={{
                                 value: values.price_from,
                                 name: 'price_from',

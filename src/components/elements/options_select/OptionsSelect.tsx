@@ -3,11 +3,11 @@ import {WithT} from 'i18next';
 import {Checkbox, Grid, Typography} from '@material-ui/core';
 import {useStyles} from '../deployed_select/useStyles';
 
-
 export type HandleOptionCheckboxType = (name: string, value) => void;
 
 type OptionsSectionPropsType = {
     name?: string,
+    row?: boolean,
     values,
     options: any[],
     handleOptionCheckbox: HandleOptionCheckboxType
@@ -17,6 +17,7 @@ export const OptionsSelect: FC<OptionsSectionPropsType> = (props) => {
     const {
         t,
         name,
+        row,
         values,
         options = [],
         handleOptionCheckbox
@@ -36,7 +37,7 @@ export const OptionsSelect: FC<OptionsSectionPropsType> = (props) => {
                     </strong>
                 </Typography>
             )}
-            <Grid container direction='column'>
+            <Grid container direction={row ? 'row' : 'column'}>
                 {options.map(item => {
                     const checked = !!values[name]?.some(({id}) => id === item.id);
                     return (
