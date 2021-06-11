@@ -3,7 +3,7 @@ import {makeStyles} from '@material-ui/core/styles';
 export const useStyles = makeStyles((theme) => ({
     root: {
         '& .unfold-btn': {
-            background: '#ccc',
+            background: '#EEE',
             borderRadius: '0px 0px 5px 5px',
             height: '32px',
             width: '100%'
@@ -40,7 +40,7 @@ export const useStyles = makeStyles((theme) => ({
             position: 'absolute',
             top: 0,
             right: 20,
-            '& .settings, .isFavorite, .notifications': {
+            '& button': {
                 background: '#F5F5F5',
                 boxShadow: '0px 1px 2px rgba(0, 0, 0, 0.15)',
                 borderRadius: '0px 0px 10px 10px',
@@ -48,34 +48,25 @@ export const useStyles = makeStyles((theme) => ({
                 alignItems: 'center',
                 padding: '11px 12px',
                 '& svg': {
-                    height: '18px',
-                    '& path': {
-                        fill: '#4E4E4E'
-                    }
+                    height: '18px'
                 },
                 '&:hover': {
                     cursor: 'pointer',
-                    background: '#EB5757',
+                    background: '#E0E0E0',
                     '& svg': {
-                        height: '18px',
-                        '& path': {
-                            fill: '#fff'
-                        }
+                        height: '18px'
                     }
+                },
+                '& .MuiTypography-subtitle1': {
+                    fontSize: theme.typography.caption.fontSize,
+                    color: theme.palette.common.tab
+                },
+                '&.settings': {},
+                '&.delete_favorite': {},
+                '&.notifications, &.advertise': {
+                    marginRight: 10
                 }
-            },
-            '& .notifications': {
-                marginRight: 10
             }
-        },
-        '& .advertise': {
-            position: 'absolute',
-            top: '70px',
-            right: 0,
-            padding: '9px 20px',
-            borderRadius: '100px 0px 0px 100px',
-            boxShadow: '0px 1px 2px rgba(0, 0, 0, 0.1)',
-            background: 'linear-gradient(90.62deg, #F38522 0.56%, #FFB800 99.49%)'
-        },
-    },
+        }
+    }
 }));

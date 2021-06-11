@@ -12,7 +12,7 @@ import {CustomButton} from '@src/components/elements/custom_button/CustomButton'
 import {useStyles} from './useStyles';
 import {InitialCabinetCardState, initialUserStateType, TabsDataType} from '@root/interfaces/Cabinet';
 import {CardDataType} from '@root/interfaces/CardData';
-import {CabinetCard} from '@src/components/cabinet/cabinet_card/CabinetCard';
+import {CabinetCard} from '@src/components/cabinet/components/cabinet_card/CabinetCard';
 import {ITEMS_PER_PAGE} from '@src/constants';
 import {initialNotificationType} from '@src/components/cabinet/cabinet_pages/notifications/NotificationsContainer';
 import {useModal} from '@src/hooks/useModal';
@@ -192,9 +192,9 @@ const MyPostsContainer: FC = () => {
             available_end_time: ''
         },
         observer: {
-            number_of_notifications: null,
-            number_of_favorites: null,
-            number_of_views: null
+            number_of_notifications: 0,
+            number_of_favorites: 0,
+            number_of_views: 0
         },
         available_days: [],
         available_start_time: '',
@@ -526,6 +526,8 @@ const MyPostsContainer: FC = () => {
             <ResponsiveModal
                 openDialog={settingsModalOpen}
                 handleCloseDialog={handleSettingsClose}
+                maxWidth={false}
+                fullWidth={false}
             >
                 <ModalContent />
             </ResponsiveModal>

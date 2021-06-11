@@ -7,14 +7,16 @@ import {useStyles} from './useStyles';
 type ResponsiveDialogPropsType = {
     openDialog: boolean,
     handleCloseDialog: () => void,
-    maxWidth?
+    maxWidth?,
+    fullWidth?: boolean
 };
 
 export const ResponsiveModal: FC<ResponsiveDialogPropsType> = (props) => {
     const {
         openDialog,
         handleCloseDialog,
-        maxWidth = 'md'
+        maxWidth = 'md',
+        fullWidth = true
     } = props;
 
     const fullScreen = useMediaQuery(useTheme().breakpoints.down('xs'));
@@ -22,7 +24,7 @@ export const ResponsiveModal: FC<ResponsiveDialogPropsType> = (props) => {
     const classes = useStyles();
     return (
         <Dialog
-            fullWidth
+            fullWidth={fullWidth}
             open={openDialog}
             maxWidth={maxWidth}
             fullScreen={fullScreen}

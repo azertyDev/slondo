@@ -9,7 +9,7 @@ import {Box, IconButton, List, ListItem, ListItemText, Typography} from '@materi
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import {InitialCabinetCardState, TabsDataType} from '@root/interfaces/Cabinet';
 import {useTranslation} from 'next-i18next';
-import {CabinetCard} from '@src/components/cabinet/cabinet_card/CabinetCard';
+import {CabinetCard} from '@src/components/cabinet/components/cabinet_card/CabinetCard';
 import {useStyles} from './useStyles';
 import {ITEMS_PER_PAGE} from '@src/constants';
 import {useModal} from '@src/hooks/useModal';

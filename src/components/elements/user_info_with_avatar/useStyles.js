@@ -4,6 +4,7 @@ export const useStyles = makeStyles((theme) => ({
     root: {
         position: 'relative',
         display: 'flex',
+        height: '100%',
         [theme.breakpoints.down('md')]: {
             '&:before': {
                 position: 'absolute',

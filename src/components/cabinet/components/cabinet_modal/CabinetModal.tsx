@@ -7,14 +7,16 @@ import {useStyles} from './useStyles';
 type CabinetModalPropsType = {
     openDialog: boolean,
     handleCloseDialog: () => void,
-    maxWidth?
+    maxWidth?: string,
+    fullWidth?: boolean
 };
 
 export const CabinetModal: FC<CabinetModalPropsType> = (props) => {
     const {
         openDialog,
         handleCloseDialog,
-        maxWidth
+        maxWidth,
+        fullWidth
     } = props;
 
     const classes = useStyles();
@@ -23,6 +25,7 @@ export const CabinetModal: FC<CabinetModalPropsType> = (props) => {
             openDialog={openDialog}
             handleCloseDialog={handleCloseDialog}
             maxWidth={maxWidth}
+            fullWidth={fullWidth}
         >
             <Box p={4} position='relative'>
                 <IconButton

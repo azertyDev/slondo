@@ -10,7 +10,7 @@ type MyAuctionsPropsType = {
     data?: any,
     handleClose: () => void,
     openModal: boolean,
-    ModalContent: () => ReactElement,
+    ModalContent?: () => ReactElement,
     handleDeleteNotification?: (id: number, ads_id: number) => () => void,
     fetchUserPhone?: (user_id: number) => () => void,
     openDialog?,
@@ -42,68 +42,68 @@ export const MyAuctions: FC<MyAuctionsPropsType> = (props) => {
     return (
         <>
             {auctionTabs}
-            <CustomModal
-                handleModalClose={handleClose}
-                openModal={openModal}
-            >
-                <ModalContent />
-            </CustomModal>
-            <ResponsiveModal
-                openDialog={openDialog ?? false}
-                handleCloseDialog={closeDialog}
-                maxWidth='md'
-            >
-                <Box
-                    display='flex'
-                    justifyContent='center'
-                >
-                    <Typography variant='subtitle1'>
-                        Уведомления (история)
-                    </Typography>
-                </Box>
-                <Box
-                    display='flex'
-                    flexDirection='row'
-                    justifyContent='space-between'
-                    alignItems='center'
-                >
-                    <Typography>
-                        Текущая ставка: {numberPrettier(selectedAuction?.auction?.bet?.bet) || 0} {t('common:sum')}
-                    </Typography>
-                    <Typography>
-                        Аукцион №: {selectedAuction?.id}
-                    </Typography>
-                    <FormControlLabel
-                        control={
-                            <Switch
-                                // checked={state.checkedA}
-                                // onChange={handleChange}
-                                name="checkedA" />
-                        }
-                        label="Уведомлять меня"
-                        labelPlacement="start"
-                    />
-                </Box>
-                {currentNotifications?.map(notification => (
-                    <Box
-                        key={notification.id}
-                        mb={1}
-                    >
-                        <Notification
-                            t={t}
-                            data={notification}
-                            handleDeleteNotification={handleDeleteNotification}
-                            fetchUserPhone={fetchUserPhone}
-                            phone={phone}
-                        />
-                    </Box>
-                ))}
-                {!!currentNotifications?.length && (
-                    <Box display='flex' justifyContent='center'>
-                        {pagination}
-                    </Box>
-                )}
-            </ResponsiveModal>
+            {/*<CustomModal*/}
+            {/*    handleModalClose={handleClose}*/}
+            {/*    openModal={openModal}*/}
+            {/*>*/}
+            {/*    <ModalContent />*/}
+            {/*</CustomModal>*/}
+            {/*<ResponsiveModal*/}
+            {/*    openDialog={openDialog ?? false}*/}
+            {/*    handleCloseDialog={closeDialog}*/}
+            {/*    maxWidth='md'*/}
+            {/*>*/}
+            {/*    <Box*/}
+            {/*        display='flex'*/}
+            {/*        justifyContent='center'*/}
+            {/*    >*/}
+            {/*        <Typography variant='subtitle1'>*/}
+            {/*            Уведомления (история)*/}
+            {/*        </Typography>*/}
+            {/*    </Box>*/}
+            {/*    <Box*/}
+            {/*        display='flex'*/}
+            {/*        flexDirection='row'*/}
+            {/*        justifyContent='space-between'*/}
+            {/*        alignItems='center'*/}
+            {/*    >*/}
+            {/*        <Typography>*/}
+            {/*            Текущая ставка: {numberPrettier(selectedAuction?.auction?.bet?.bet) || 0} {t('common:sum')}*/}
+            {/*        </Typography>*/}
+            {/*        <Typography>*/}
+            {/*            Аукцион №: {selectedAuction?.id}*/}
+            {/*        </Typography>*/}
+            {/*        <FormControlLabel*/}
+            {/*            control={*/}
+            {/*                <Switch*/}
+            {/*                    // checked={state.checkedA}*/}
+            {/*                    // onChange={handleChange}*/}
+            {/*                    name="checkedA" />*/}
+            {/*            }*/}
+            {/*            label="Уведомлять меня"*/}
+            {/*            labelPlacement="start"*/}
+            {/*        />*/}
+            {/*    </Box>*/}
+            {/*    {currentNotifications?.map(notification => (*/}
+            {/*        <Box*/}
+            {/*            key={notification.id}*/}
+            {/*            mb={1}*/}
+            {/*        >*/}
+            {/*            <Notification*/}
+            {/*                t={t}*/}
+            {/*                data={notification}*/}
+            {/*                handleDeleteNotification={handleDeleteNotification}*/}
+            {/*                fetchUserPhone={fetchUserPhone}*/}
+            {/*                phone={phone}*/}
+            {/*            />*/}
+            {/*        </Box>*/}
+            {/*    ))}*/}
+            {/*    {!!currentNotifications?.length && (*/}
+            {/*        <Box display='flex' justifyContent='center'>*/}
+            {/*            {pagination}*/}
+            {/*        </Box>*/}
+            {/*    )}*/}
+            {/*</ResponsiveModal>*/}
         </>
     );
 };

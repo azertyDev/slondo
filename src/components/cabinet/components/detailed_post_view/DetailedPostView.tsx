@@ -2,11 +2,24 @@ import {FC} from 'react';
 import {CardDataType} from '@root/interfaces/CardData';
 import {ListCard} from '@src/components/elements/card/list_card/ListCard';
 import {Box, Grid, Paper, Typography} from '@material-ui/core';
-import {DeliveryIcon, ExchangeIcon, PhoneIcon, RenewalIcon, RocketIcon, SafeIcon} from '@src/components/elements/icons';
+import {
+    DeliveryIcon,
+    ExchangeIcon,
+    LetterIcon,
+    LocationIcon,
+    PhoneIcon,
+    RenewalIcon,
+    RocketIcon,
+    SafeIcon
+} from '@src/components/elements/icons';
 import {CustomButton} from '@src/components/elements/custom_button/CustomButton';
 import {CabinetModal} from '@src/components/cabinet/components/cabinet_modal/CabinetModal';
 import {useStyles} from './useStyles';
 import {useTranslation} from 'next-i18next';
+import ChevronRightIcon from '@material-ui/icons/ChevronRight';
+import {UserInfoWithAvatar} from '@src/components/elements/user_info_with_avatar/UserInfoWithAvatar';
+import {useSelector} from 'react-redux';
+import {RootState} from '@src/redux/rootReducer';
 
 type DetailedPostViewPropsType = {
     data: CardDataType,
@@ -15,7 +28,8 @@ type DetailedPostViewPropsType = {
 }
 
 export const DetailedPostView: FC<DetailedPostViewPropsType> = (props) => {
-    const {t} = useTranslation('common');
+    const userInfo = useSelector((store: RootState) => store.user.info);
+    const {t} = useTranslation(['common', 'locations']);
     const {
         data,
         detailedModalOpen,
@@ -46,7 +60,7 @@ export const DetailedPostView: FC<DetailedPostViewPropsType> = (props) => {
                 <Grid item xs={12}>
                     <ListCard cardData={data} />
                 </Grid>
-                <Grid item xs={6}>
+                <Grid item xs={12} md={6}>
                     <Paper className={classes.paper}>
                         {!!data.available_days && (
                             <div className="bonus_item">
@@ -101,9 +115,9 @@ export const DetailedPostView: FC<DetailedPostViewPropsType> = (props) => {
                         )}
                     </Paper>
                 </Grid>
-                <Grid item xs={6}>
+                <Grid item xs={12} md={6}>
                     <CustomButton
-                        className={classes.advertise}
+                        className={classes.btn}
                         disabled
                     >
                         <RocketIcon />
@@ -113,6 +127,82 @@ export const DetailedPostView: FC<DetailedPostViewPropsType> = (props) => {
                         </Typography>
                     </CustomButton>
                 </Grid>
+                <Grid item xs={12} md={6}>
+                    <Paper className={classes.paper}>
+                        <Box className='location' width={1}>
+                            <LocationIcon />
+                            <Typography
+                                variant="subtitle1"
+                                color="initial"
+                                noWrap
+                            >
+                                {`${t(`locations:${data.region?.name ?? ''}`)}`}
+                                {`, ${t(`locations:${data.city?.name ?? ''}`)}`}
+                                {`, ${t(`locations:${data.district?.name ?? ''}`)}`}
+                            </Typography>
+                        </Box>
+                    </Paper>
+                </Grid>
+                <Grid item xs={12} md={6}>
+                    <CustomButton
+                        className={classes.btn}
+                        disabled={!data.observer.number_of_notifications}
+                    >
+                        <Typography
+                            variant="subtitle1"
+                            color="initial"
+                            noWrap
+                        >
+                            Уведомления/ История
+                        </Typography>
+                        <ChevronRightIcon color='action' />
+                    </CustomButton>
+                </Grid>
+                {data.ads_type === 'post' && (
+                    <Grid item xs={12} md={6}>
+                        <Typography variant='subtitle2' gutterBottom>
+                            Крайние ставки
+                        </Typography>
+                        <Paper className={classes.paper}>
+
+                        </Paper>
+                    </Grid>
+                )}
+                <Grid item xs={12} md={6}>
+                    <Typography variant='subtitle2' gutterBottom>
+                        Победитель аукциона
+                    </Typography>
+                    <Paper className={classes.paper}>
+                        {/*   Менять данные пользователя на победителя (АУКЦИОН)   */}
+                        <Box className={classes.userInfo}>
+                            <UserInfoWithAvatar
+                                owner={userInfo}
+                                isOwner={true}
+                                width='50px'
+                                height='50px'
+                            />
+                        </Box>
+                        <Box ml={2} width='40%'>
+                            <CustomButton>
+                                <PhoneIcon />
+                                <Typography variant='subtitle2'>
+                                    Написать
+                                </Typography>
+                            </CustomButton>
+                            <CustomButton>
+                                <LetterIcon />
+                                <Typography variant='subtitle2'>
+                                    Написать
+                                </Typography>
+                            </CustomButton>
+                        </Box>
+                    </Paper>
+                </Grid>
+                {data.ads_type !== 'post' && (
+                    <Grid item xs={12} md={6}>
+                        {/*<BetsList bets={} showAll={} setShowAll={} handleScroll={} handleRefreshBets={} />*/}
+                    </Grid>
+                )}
             </Grid>
         </CabinetModal>
     );

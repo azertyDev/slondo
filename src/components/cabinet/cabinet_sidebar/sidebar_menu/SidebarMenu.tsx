@@ -35,7 +35,6 @@ export const SidebarMenu: FC<SidebarMenuPropsType> = ({t, user}) => {
     const handleListItemClick = (url) => async () => {
         await push(`/cabinet/${url}`);
     };
-
     const signOut = async () => {
         dispatch(signOutAction());
         cookies.remove('slondo_auth', {path: '/'});

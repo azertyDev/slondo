@@ -2,7 +2,7 @@ import React, {FC, useEffect, useRef, useState} from 'react';
 import Link from 'next/link';
 import {WithT} from 'i18next';
 import {Grid, Hidden, TextField, Typography} from '@material-ui/core';
-import {LockIcon, RefreshIcon} from '@src/components/elements/icons';
+import {LockIcon} from '@src/components/elements/icons';
 import {AuctionTimer} from './AuctionTimer';
 import {numberPrettier} from '@root/src/helpers';
 import {AuctionForm} from './AuctionForm/AuctionForm';
@@ -12,6 +12,7 @@ import {userAPI} from '@src/api/api';
 import {setErrorMsgAction} from '@src/redux/slices/errorSlice';
 import {useDispatch} from 'react-redux';
 import {useStyles} from './useStyles';
+import {BetsList} from '@src/components/elements/bets_list/BetsList';
 
 
 type AuctionInfoPropsType = {
@@ -30,7 +31,6 @@ export const AuctionContent: FC<AuctionInfoPropsType> = (props) => {
     const hasOfferPrice = !!postData.auction.offer_the_price;
 
     const [isFetch, setIsFetch] = useState(false);
-    const [showAll, setShowAll] = useState(false);
     const [openBuyNow, setOpenBuyNow] = useState(false);
     const [openOfferPrice, setOpenOfferPrice] = useState(false);
     const [offerPrice, setOfferPrice] = useState('');
@@ -45,11 +45,9 @@ export const AuctionContent: FC<AuctionInfoPropsType> = (props) => {
     const handleModalBuyNow = value => () => {
         setOpenBuyNow(value);
     };
-
     const handleModalOfferPrice = value => () => {
         setOpenOfferPrice(value);
     };
-
     const handleOfferPrice = async () => {
         try {
             setIsFetch(true);
@@ -62,7 +60,6 @@ export const AuctionContent: FC<AuctionInfoPropsType> = (props) => {
             dispatch(setErrorMsgAction(e.message));
         }
     };
-
     const handleBuyNow = async () => {
         try {
             setIsFetch(true);
@@ -75,7 +72,6 @@ export const AuctionContent: FC<AuctionInfoPropsType> = (props) => {
             );
         }
     };
-
     const handleBet = async (bet) => {
         try {
             setIsFetch(true);
@@ -88,30 +84,9 @@ export const AuctionContent: FC<AuctionInfoPropsType> = (props) => {
             );
         }
     };
-
-    const handleScroll = ({target}) => {
-        const isBottom = target.scrollHeight - target.scrollTop === target.clientHeight;
-        if (isBottom && page.lastPage > page.currentPage) {
-            setPage(prev => ({...prev, currentPage: prev.currentPage + 1}));
-        }
-    };
-
     const handleOfferPriceInput = ({target}) => {
         setOfferPrice(target.value);
     };
-
-    const handleRefreshBets = async () => {
-        try {
-            setIsFetch(true);
-            const bets = await userAPI.getAuctionBets(postData.auction.id, 1);
-            setBets(bets.data);
-            setIsFetch(false);
-        } catch (e) {
-            setIsFetch(false);
-            dispatch(setErrorMsgAction(e.message));
-        }
-    };
-
     const auctionBetsPagination = async () => {
         try {
             if (page.lastPage >= page.currentPage) {
@@ -161,100 +136,11 @@ export const AuctionContent: FC<AuctionInfoPropsType> = (props) => {
                     </div>
                 )}
                 <div className="lot-timer">
-                    {!!date && <AuctionTimer date={date}/>}
+                    {!!date && <AuctionTimer date={date} />}
                 </div>
-                <div className="lot-participants-block">
-                    <Typography
-                        variant="subtitle1" color="initial"
-                        style={{display: 'flex', justifyContent: 'space-between'}}
-                    >
-                        <div>
-                            Текущие ставки
-                        </div>
-                        <div onClick={handleRefreshBets} style={{cursor: 'pointer'}}>
-                            <RefreshIcon/>
-                        </div>
-                    </Typography>
-                    <div
-                        className="participants"
-                        style={{height: showAll ? 400 : 200, overflow: showAll ? 'auto' : 'hidden'}}
-                        onScroll={handleScroll}
-                    >
-                        <ul>
-                            {bets.map((item) => (
-                                <li key={item.id}>
-                                    <div>
-                                        <div className="participant-name">
-                                            <Typography variant="subtitle1" noWrap>
-                                                {item.user.name}
-                                                {item.number_of_bets && <span>({item.number_of_bets})</span>}
-                                            </Typography>
-                                        </div>
-                                        <div className="dateAndTime">
-                                            <Typography
-                                                noWrap
-                                                variant="subtitle1"
-                                                className="bet-time"
-                                            >
-                                                {item.created_at?.slice(11, 16)}
-                                            </Typography>
-                                            <Typography
-                                                noWrap
-                                                variant="subtitle1"
-                                                className="bet-date"
-                                            >
-                                                {item.created_at?.slice(0, 10)}
-                                            </Typography>
-                                        </div>
-                                    </div>
-                                    <div className="bet">
-                                        <Typography
-                                            noWrap
-                                            variant="subtitle1"
-                                            className="final-bet"
-                                        >
-                                            {numberPrettier(item.bet)}
-                                        </Typography>
-                                        <Typography
-                                            noWrap
-                                            variant="subtitle1"
-                                            className="per-bet"
-                                        >
-                                            {item.outbid === 0
-                                                ? <span className='started-price'>Стартовая цена</span>
-                                                : `+ ${numberPrettier(item.outbid)}`}
-                                        </Typography>
-                                    </div>
-                                </li>
-                            ))}
-                        </ul>
-                    </div>
-                    <Typography
-                        variant="subtitle1"
-                        color="initial"
-                        style={{cursor: 'pointer'}}
-                        onClick={() => setShowAll(!showAll)}
-                    >
-                        {!showAll
-                            ?
-                            <Typography variant="subtitle1" className="show-hide-all-bet">
-                                {t('auction:allBets')}
-                                <svg width="13" height="8" viewBox="0 0 13 6" fill="none"
-                                     xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M0 0H13L6.5 6L0 0Z" fill="#675EAA"/>
-                                </svg>
-                            </Typography>
-                            :
-                            <Typography variant="subtitle1" className="show-hide-all-bet">
-                                {t('main:hide')}
-                                <svg width="13" height="8" viewBox="0 0 13 6" fill="none"
-                                     xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M13 6H0L6.5 0L13 6Z" fill="#675EAA"/>
-                                </svg>
-                            </Typography>
-                        }
-                    </Typography>
-                </div>
+                <BetsList
+                    bets={bets}
+                />
                 {!postData.creator && (
                     <>
                         <AuctionForm

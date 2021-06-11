@@ -67,7 +67,7 @@ export const useStyles = makeStyles((theme) => ({
                 justifyContent: 'space-between',
                 position: 'relative',
                 '& .post-title': {
-                    width: '350px',
+                    width: '380px',
                     '& a': {
                         textDecoration: 'none',
                         '&:hover': {
