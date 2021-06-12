@@ -109,7 +109,7 @@ export const CarParams: FC<CarParamsPropsType> = (props) => {
                             body: valsByYear.body
                         };
 
-                        // normalize positions structure
+                        // Normalize positions structure
                         valsByYear.positions = valsByYear.positions.map(pos => {
                             const vals = {id: pos.id, name: pos.name};
                             Object.keys(pos).forEach(k => {

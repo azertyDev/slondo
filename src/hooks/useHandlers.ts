@@ -1,5 +1,5 @@
 import {Dispatch, SetStateAction} from 'react';
-import {fractionalFields, numericFields, singleFields} from '@src/common_data/form_fields';
+import {booleanFields, fractionalFields, numericFields, singleFields, stringFields} from '@src/common_data/form_fields';
 import {numberRegEx} from '@src/common_data/reg_exs';
 
 export const useHandlers = (values: any, setValues: Dispatch<SetStateAction<any>>) => {
@@ -7,7 +7,6 @@ export const useHandlers = (values: any, setValues: Dispatch<SetStateAction<any>
         handleInput: ({target: {name, value}}) => {
             const isNumericField = numericFields.some((n => n === name));
             const isFractionalField = fractionalFields.some((n => n === name));
-
             if (isNumericField && RegExp(numberRegEx).test(value)) {
                 if ((!isFractionalField) || (isFractionalField && value.length < 4)) {
                     if (isFractionalField && value.length === 2 && value[1] !== '.') {
@@ -44,16 +43,22 @@ export const useHandlers = (values: any, setValues: Dispatch<SetStateAction<any>
             const vals: any = {};
 
             Object.keys(urlParams).forEach(k => {
+                const isSingleField = singleFields.some(f => f === k);
+                const isStringField = stringFields.some(f => f === k);
+                const isBooleanField = booleanFields.some(f => f === k);
+
                 if (filters[k]) {
-                    if (singleFields.some(f => f === k)) {
+                    if (isSingleField) {
                         vals[k] = filters[k].find(v => v.id === +urlParams[k]);
                     } else {
                         vals[k] = filters[k].filter(v => urlParams[k].split(',').some(p => +p === v.id));
                     }
+                } else if ((isStringField && values[k] === '') || isBooleanField) {
+                    vals[k] = isBooleanField || urlParams[k];
                 }
             });
 
-            if (vals?.manufacturer?.models) {
+            if (urlParams.model && vals?.manufacturer?.models) {
                 vals.model = vals.manufacturer.models.find(m => m.id === +urlParams.model);
             }
 

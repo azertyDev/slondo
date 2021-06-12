@@ -61,7 +61,7 @@ export const FormPage: FC = () => {
             title: ''
         },
         appearance: {
-            color: null,
+            color_id: null,
             photos: []
         },
         commonParams: {}
@@ -135,7 +135,7 @@ export const FormPage: FC = () => {
             } = post;
 
             const {title, ...otherParams} = params;
-            const {photos, color} = appearance;
+            const {photos, color_id} = appearance;
 
             const data = {
                 title,
@@ -148,7 +148,7 @@ export const FormPage: FC = () => {
             };
 
             if (type) data[categoryName].type_id = type.id;
-            if (color) data[categoryName].color_id = color.id;
+            if (color_id) data[categoryName].color_id = color_id;
 
             setIsFetch(true);
 

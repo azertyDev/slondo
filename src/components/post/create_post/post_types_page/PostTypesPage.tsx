@@ -1,4 +1,4 @@
-import React, {FC} from 'react';
+import {FC} from 'react';
 import {Grid, Typography} from '@material-ui/core';
 import {useTranslation} from 'next-i18next';
 import Link from 'next/link';

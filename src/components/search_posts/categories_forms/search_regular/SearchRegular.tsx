@@ -11,7 +11,7 @@ import {CustomFormikProvider} from '@src/components/elements/custom_formik_provi
 import {CustomButton} from '@src/components/elements/custom_button/CustomButton';
 
 
-export const RegularParams: FC<CommonFiltersType> = (props) => {
+export const SearchRegular: FC<CommonFiltersType> = (props) => {
     const {
         onSubmit,
         filters,
@@ -39,10 +39,6 @@ export const RegularParams: FC<CommonFiltersType> = (props) => {
     useEffect(() => {
         setValsByParams(urlParams, filters);
     }, [filters]);
-
-    console.log('urlParams', urlParams);
-    console.log('filters', filters);
-    console.log(values);
 
     return (
         <CustomFormikProvider formik={formik}>

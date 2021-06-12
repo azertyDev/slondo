@@ -20,7 +20,7 @@ export const requireFields = [
     'estate_type',
     'floor',
     'number_of_floors',
-    'rooms',
+    'room',
     'area',
     'land_area',
     'general_area',
@@ -43,6 +43,12 @@ export const excludeFields = [
 ];
 
 export const numericFields = [
+    'land_area_from',
+    'land_area_to',
+    'general_area_from',
+    'general_area_to',
+    'number_of_floors_from',
+    'number_of_floors_to',
     'price',
     'reserve_price',
     'price_buy_now',
@@ -59,11 +65,23 @@ export const numericFields = [
     'number_of_bedrooms',
     'engine_capacity',
     'mileage',
-    'ceiling_height'
+    'ceiling_height',
+    'year_from',
+    'year_to',
+    'mileage_from',
+    'mileage_to',
+    'engine_capacity_from',
+    'engine_capacity_to',
+    'area_from',
+    'area_to',
+    'floor_from',
+    'floor_to'
 ];
 
 export const fractionalFields = [
     'engine_capacity',
+    'engine_capacity_from',
+    'engine_capacity_to',
     'ceiling_height'
 ];
 
@@ -88,5 +106,27 @@ export const optionFields = [
 ];
 
 export const singleFields = [
-    'manufacturer'
+    'manufacturer',
+];
+
+export const stringFields = [
+    'land_area_from',
+    'land_area_to',
+    'general_area_from',
+    'general_area_to',
+    'year_from',
+    'year_to',
+    'mileage_from',
+    'mileage_to',
+    'engine_capacity_from',
+    'engine_capacity_to',
+    'area_from',
+    'area_to',
+    'floor_from',
+    'floor_to'
+];
+
+export const booleanFields = [
+    'furnished',
+    'with_pledge'
 ];

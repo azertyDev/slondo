@@ -18,7 +18,6 @@ import {ParametersIcon} from '@src/components/elements/icons';
 import {CustomAccordion} from '@src/components/elements/accordion/CustomAccordion';
 import {useStyles} from './useStyles';
 
-
 export const HousesCottagesParams: FC<CommonParamsPropsType> = (props) => {
     const {
         t,
@@ -34,7 +33,7 @@ export const HousesCottagesParams: FC<CommonParamsPropsType> = (props) => {
 
     const initVals: any = {
         title: '',
-        rooms: null,
+        room: null,
         number_of_floors: null,
         estate_type: null,
         general_area: '',
@@ -155,23 +154,23 @@ export const HousesCottagesParams: FC<CommonParamsPropsType> = (props) => {
                                  <Grid item container xs={4}>
                                      <NumberSelect
                                          t={t}
-                                         count={9}
-                                         name='rooms'
-                                         errors={errors}
-                                         touched={touched}
-                                         values={values}
-                                         setValues={setValues}
-                                     />
-                                 </Grid>
-                                 <Grid item container xs={4}>
-                                     <NumberSelect
-                                         t={t}
                                          count={5}
                                          name='number_of_bedrooms'
                                          values={values}
                                          setValues={setValues}
                                          errors={errors}
                                          touched={touched}
+                                     />
+                                 </Grid>
+                                 <Grid item container xs={4}>
+                                     <DropDownSelect
+                                         t={t}
+                                         name='room'
+                                         values={values}
+                                         onBlur={handleBlur}
+                                         items={filters.room}
+                                         handleSelect={handleSelect}
+                                         errorMsg={getErrorMsg(errors.room, touched.room, t)}
                                      />
                                  </Grid>
                              </Grid>

@@ -8,7 +8,6 @@ import {IdNameType} from '@root/interfaces/Post';
 import {ViewIcon} from '@src/components/elements/icons';
 import {appearanceSchema} from '@root/validation_schemas/createPostSchemas';
 import {CustomFormikProvider} from '@src/components/elements/custom_formik_provider/CustomFormikProvider';
-import {CustomButton} from '@src/components/elements/custom_button/CustomButton';
 import {useStyles} from './useStyles';
 
 
