@@ -27,6 +27,7 @@ import {setErrorMsgAction} from '@src/redux/slices/errorSlice';
 import {SearchApartments} from '@src/components/search_posts/categories_forms/search_apartments/SearchApartments';
 import {useStyles} from './useStyles';
 import {SearchHousesCottages} from '@src/components/search_posts/categories_forms/search_houses_cottages/SearchHousesCottages';
+import {SearchLand} from '@src/components/search_posts/categories_forms/search_land/SearchLand';
 
 
 export type CommonFiltersType = {
@@ -159,6 +160,14 @@ export const SearchForm: FC<SearchFormPropsType> = (props) => {
                 />;
             case 'housesCottages':
                 return <SearchHousesCottages
+                    type={type}
+                    onSubmit={onSubmit}
+                    filters={filtersByCtgr}
+                    handleReset={handleReset}
+                    urlParams={urlFiltersParams}
+                />;
+            case 'land':
+                return <SearchLand
                     type={type}
                     onSubmit={onSubmit}
                     filters={filtersByCtgr}

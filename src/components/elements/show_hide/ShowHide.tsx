@@ -3,14 +3,12 @@ import {useStyles} from './useStyles';
 
 type ShowHide = {
     showTxt: string,
-    hideTxt: string,
     className?: string
 };
 
 export const ShowHide: FC<ShowHide> = (props) => {
     const {
         showTxt,
-        hideTxt,
         children,
         className = ''
     } = props;
@@ -26,7 +24,7 @@ export const ShowHide: FC<ShowHide> = (props) => {
         <div className={`${classes.root} ${className}`}>
             <div className='show-hide-txt'>
                 <span onClick={handleShow}>
-                    {show ? hideTxt : showTxt}
+                    {showTxt}
                 </span>
             </div>
             {show && children}

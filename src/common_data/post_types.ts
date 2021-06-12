@@ -16,7 +16,7 @@ export const postTypes: PostType[] = [
             }
         ],
         image: {
-            url: '/img/adv-background.png'
+            url: '/img/crt_post.png'
         },
         guide: 'howToCreatePost'
     },
@@ -45,7 +45,7 @@ export const postTypes: PostType[] = [
             }
         ],
         image: {
-            url: '/img/lot-background.png'
+            url: '/img/crt_auc.png'
         },
         guide: 'howToCreateAuc'
     },
@@ -74,7 +74,7 @@ export const postTypes: PostType[] = [
             }
         ],
         image: {
-            url: '/img/advanced-lot-background.png'
+            url: '/img/crt_exauc.png'
         },
         guide: 'howToCreateExAuc'
     }

@@ -107,7 +107,6 @@ export const optionFields = [
 
 export const singleFields = [
     'manufacturer',
-    'room'
 ];
 
 export const stringFields = [

@@ -28,7 +28,8 @@ export const SearchHousesCottages: FC<SearchApartmentsPropsType> = (props) => {
     const isRent = type?.id === 2 || type?.id === 3;
 
     const initVals = {
-        room: null,
+        estate_type: null,
+        room: [],
         general_area_from: '',
         general_area_to: '',
         land_area_from: '',
@@ -90,6 +91,7 @@ export const SearchHousesCottages: FC<SearchApartmentsPropsType> = (props) => {
                 >
                     <DropDownSelect
                         t={t}
+                        multiple
                         name='room'
                         disableRequire
                         values={values}
@@ -144,7 +146,6 @@ export const SearchHousesCottages: FC<SearchApartmentsPropsType> = (props) => {
             </Grid>
             <ShowHide
                 className='add-params'
-                hideTxt={t('common:externalParams')}
                 showTxt={t('common:externalParams')}
             >
                 <Grid item container spacing={1} xs={12}>
