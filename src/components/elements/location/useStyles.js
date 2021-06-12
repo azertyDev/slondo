@@ -8,7 +8,8 @@ export const useStyles = makeStyles((theme) => ({
             cursor: 'pointer',
             textDecoration: 'underline',
             [theme.breakpoints.down('xs')]: {
-                width: '80%'
+                width: '80%',
+                fontSize: '14px'
             }
         },
         '& > svg': {
@@ -29,8 +30,14 @@ export const useStyles = makeStyles((theme) => ({
                 padding: '25px 20px 20px'
             },
             [theme.breakpoints.down('xs')]: {
+                position: 'fixed',
+                width: '100%',
+                top: 0,
+                left: 0,
+                background: '#f9f9f9',
+                zIndex: '5',
                 padding: '16px 15px',
-                boxShadow: '0px 1px 2px rgb(0 0 0 / 15%)',
+                boxShadow: '0px 1px 2px rgb(0 0 0 / 15%)'
             }
         },
         '& div.location-header-wrapper': {
@@ -38,9 +45,7 @@ export const useStyles = makeStyles((theme) => ({
                 textAlign: 'center',
                 width: '100%',
                 fontWeight: '600',
-                [theme.breakpoints.down('xs')]: {
-
-                }
+                [theme.breakpoints.down('xs')]: {}
             }
         },
         '& div.local-modal-container': {
@@ -49,7 +54,7 @@ export const useStyles = makeStyles((theme) => ({
                 padding: '0 20px 10px'
             },
             [theme.breakpoints.down('xs')]: {
-                padding: '0px 15px'
+                padding: '106px 15px 0'
             },
             '& > div.locals-input': {
                 position: 'relative',
@@ -59,7 +64,13 @@ export const useStyles = makeStyles((theme) => ({
                 height: '38px',
                 marginBottom: '20px',
                 [theme.breakpoints.down('xs')]: {
-                    marginTop: '16px'
+                    left: 0,
+                    top: '52px',
+                    padding: '16px 15px',
+                    height: '70px',
+                    marginBottom: 0,
+                    position: 'fixed',
+                    background: '#f9f9f9'
                 },
                 '& > svg, & > img.filter-icon': {
                     position: 'absolute',
@@ -116,7 +127,8 @@ export const useStyles = makeStyles((theme) => ({
                     [theme.breakpoints.down('xs')]: {
                         fontSize: '14px',
                         borderBottom: '1px solid #F2F2F2',
-                        padding: '32px 10px 16px '
+                        padding: '32px 10px 16px ',
+                        marginBottom: 0
                     },
                     '& p': {
                         display: 'flex',
@@ -139,6 +151,9 @@ export const useStyles = makeStyles((theme) => ({
                 '& div.locals-table': {
                     display: 'flex',
                     width: '100%',
+                    [theme.breakpoints.down('xs')]: {
+                        flexDirection: 'column'
+                    },
                     '& div.locals-col > div.MuiGrid-item': {
                         paddingBottom: '16px',
                         '& svg > path': {
@@ -149,11 +164,11 @@ export const useStyles = makeStyles((theme) => ({
                             display: 'flex',
                             justifyContent: 'space-between',
                             alignItems: 'center',
-                            borderBottom: '1px solid #F2F2F2'
+                            borderBottom: '1px solid #F2F2F2',
+                            '&:active': {
+                                background: '#F2F2F2'
+                            }
                         }
-                    },
-                    [theme.breakpoints.down('xs')]: {
-                        flexDirection: 'column'
                     }
                 }
             }
