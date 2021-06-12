@@ -36,7 +36,7 @@ export const useStyles = makeStyles((theme) => ({
                 marginLeft: '9px'
             }
         },
-        '& > div.participants': {
+        '& .participants': {
             padding: '15px',
             borderTop: '1px solid rgba(103, 94, 170, 0.5)',
             borderBottom: '1px solid rgba(103, 94, 170, 0.5)',
@@ -141,6 +141,22 @@ export const useStyles = makeStyles((theme) => ({
                     }
                 }
             }
+        }
+    },
+    showMore: {
+        background: '#F9F9F9',
+        boxShadow: '0px 1px 2px rgba(0, 0, 0, 0.15)',
+        borderRadius: 5,
+        '& svg': {
+            fill: '#4E4E4E'
+        }
+    },
+    closeBtn: {
+        position: 'absolute',
+        top: 10,
+        right: 10,
+        '& path': {
+            fill: '#28293D'
         }
     }
 }));

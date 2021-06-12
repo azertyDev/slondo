@@ -13,6 +13,7 @@ import {setErrorMsgAction} from '@src/redux/slices/errorSlice';
 import {useDispatch} from 'react-redux';
 import {useStyles} from './useStyles';
 import {BetsList} from '@src/components/elements/bets_list/BetsList';
+import {ITEMS_PER_PAGE} from '@src/constants';
 
 
 type AuctionInfoPropsType = {
@@ -91,7 +92,7 @@ export const AuctionContent: FC<AuctionInfoPropsType> = (props) => {
         try {
             if (page.lastPage >= page.currentPage) {
                 setIsFetch(true);
-                const {total, data} = await userAPI.getAuctionBets(postData.auction.id, page.currentPage);
+                const {total, data} = await userAPI.getAuctionBets(postData.auction.id, page.currentPage, ITEMS_PER_PAGE);
                 setBets([...bets, ...data]);
                 setPage({...page, lastPage: Math.ceil(total / 25)});
                 setIsFetch(false);
@@ -140,6 +141,9 @@ export const AuctionContent: FC<AuctionInfoPropsType> = (props) => {
                 </div>
                 <BetsList
                     bets={bets}
+                    title={t('auction:allBets')}
+                    auctionId={postData.auction.id}
+                    showBetsCount={5}
                 />
                 {!postData.creator && (
                     <>

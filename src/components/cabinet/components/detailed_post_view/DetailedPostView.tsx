@@ -20,6 +20,7 @@ import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import {UserInfoWithAvatar} from '@src/components/elements/user_info_with_avatar/UserInfoWithAvatar';
 import {useSelector} from 'react-redux';
 import {RootState} from '@src/redux/rootReducer';
+import {BetsList} from '@src/components/elements/bets_list/BetsList';
 
 type DetailedPostViewPropsType = {
     data: CardDataType,
@@ -35,6 +36,8 @@ export const DetailedPostView: FC<DetailedPostViewPropsType> = (props) => {
         detailedModalOpen,
         handleDetailedClose
     } = props;
+
+    const isAuction = data.ads_type === 'auc' || data.ads_type === 'exauc';
 
     const classes = useStyles();
     return (
@@ -60,6 +63,7 @@ export const DetailedPostView: FC<DetailedPostViewPropsType> = (props) => {
                 <Grid item xs={12}>
                     <ListCard cardData={data} />
                 </Grid>
+                {/*{!!data.available_days && !!data.exchange && !!data.delivery && !!data.delivery && !!data.safe_deal && (*/}
                 <Grid item xs={12} md={6}>
                     <Paper className={classes.paper}>
                         {!!data.available_days && (
@@ -115,6 +119,7 @@ export const DetailedPostView: FC<DetailedPostViewPropsType> = (props) => {
                         )}
                     </Paper>
                 </Grid>
+                {/*)}*/}
                 <Grid item xs={12} md={6}>
                     <CustomButton
                         className={classes.btn}
@@ -198,9 +203,13 @@ export const DetailedPostView: FC<DetailedPostViewPropsType> = (props) => {
                         </Box>
                     </Paper>
                 </Grid>
-                {data.ads_type !== 'post' && (
+                {isAuction && (
                     <Grid item xs={12} md={6}>
-                        {/*<BetsList bets={} showAll={} setShowAll={} handleScroll={} handleRefreshBets={} />*/}
+                        {/*<BetsList*/}
+                        {/*    title={t('auction:extremeRates')}*/}
+                        {/*    auctionId={data.id}*/}
+                        {/*    showBetsCount={2}*/}
+                        {/*/>*/}
                     </Grid>
                 )}
             </Grid>
