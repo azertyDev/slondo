@@ -1,63 +1,59 @@
-import {makeStyles} from '@material-ui/core/styles'
+import {makeStyles} from '@material-ui/core/styles';
 
 export const useStyles = makeStyles((theme) => ({
     root: {
         marginBottom: '30px',
         '& div.MuiGrid-item': {
-            '& > a': {
-                '&.post': {
-                    background: 'linear-gradient(49.94deg, #dcf3fc 19.03%, #a9bdf2 72.72%)'
-                },
-                '&.auc': {
-                    background: 'linear-gradient(49.94deg, #c18dde 19.03%, #8880c9 72.72%)'
-                },
-                height: '613px',
+            '& div.post': {
+                background: 'linear-gradient(270deg, rgba(47, 196, 243, 0.2) 0%, rgba(58, 76, 233, 0.2) 100%)'
+            },
+            '& div.auc': {
+                background: 'linear-gradient(49.94deg, rgba(125, 228, 242, 0.2) 19.03%, rgba(186, 96, 208, 0.2) 72.72%)'
+            },
+            '& div.exauc': {
+                background: 'linear-gradient(49.94deg, rgba(185, 130, 225, 0.2) 19.03%, rgba(208, 130, 96, 0.2) 72.72%)'
+            },
+            '& div.post-wrapper': {
                 display: 'flex',
-                marginBottom: 30,
                 flexDirection: 'column',
                 justifyContent: 'space-between',
                 alignItems: 'center',
+                height: '613px',
+                marginBottom: 30,
                 borderRadius: '25px',
                 boxShadow: '0px 2px 8px rgba(0, 0, 0, 0.2)',
                 textDecoration: 'none',
-                '& > div.post': {
-                    backgroundPosition: 'bottom',
-                    backgroundRepeat: 'no-repeat'
-                },
-                '& > div.auc': {
-                    backgroundPosition: '0px 300px',
-                    backgroundRepeat: 'no-repeat'
-                },
-                '& > div.exauc': {
+                '& div': {
                     backgroundPosition: 'center',
-                    backgroundRepeat: 'no-repeat'
-                },
-                '& > div': {
+                    backgroundRepeat: 'no-repeat',
                     textAlign: 'center',
-                    height: '100%',
+                    height: '89%',
+                    width: '80%',
                     backgroundSize: 'contain',
                     '& h6.MuiTypography-subtitle1': {
                         marginTop: '35px',
-                        fontSize: '1.875rem',
-                        color: '#fff',
-                        fontWeight: '600',
+                        fontSize: '1.75rem',
+                        color: '#4E4E4E',
+                        fontWeight: '500',
                         marginBottom: '10px'
                     },
                     '& p.MuiTypography-body2': {
                         fontSize: '1.125rem',
-                        color: 'rgba(255, 255, 255, 0.85)',
-                        fontWeight: '600',
-                        padding: '0 55px'
+                        color: 'rgba(49, 49, 49, 0.5)',
+                        fontWeight: '400',
+                        padding: '0 30px'
                     }
                 },
-                '& > button': {
+                '& button': {
                     background: '#fff',
                     borderRadius: '100px',
-                    width: '76%',
-                    margin: '0 55px 35px',
+                    width: '81%',
+                    marginBottom: '24px',
                     boxShadow: '0px 2px 2px rgba(0, 0, 0, 0.15)',
-                    border: 'none'
+                    border: 'none',
+                    color: '#4E4E4E'
                 }
+                // MuiButtonBase-root
             },
             '& > div.guide': {
                 textAlign: 'center',
@@ -86,4 +82,4 @@ export const useStyles = makeStyles((theme) => ({
             }
         }
     }
-}))
+}));

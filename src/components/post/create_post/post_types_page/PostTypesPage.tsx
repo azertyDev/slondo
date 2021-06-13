@@ -1,15 +1,21 @@
 import {FC} from 'react';
 import {Grid, Typography} from '@material-ui/core';
 import {useTranslation} from 'next-i18next';
-import Link from 'next/link';
-import {postTypes} from "@src/common_data/post_types";
+import {postTypes} from '@src/common_data/post_types';
 import {MainLayout} from '@src/components/main_layout/MainLayout';
-import {Steps} from "@src/components/post/create_post/steps/Steps";
+import {Steps} from '@src/components/post/create_post/steps/Steps';
+import {useRouter} from 'next/router';
+import {CustomButton} from '@src/components/elements/custom_button/CustomButton';
 import {useStyles} from './useStyles';
 
 
 export const PostTypesPage: FC = () => {
-    const {t} = useTranslation(['post']);
+    const {t} = useTranslation('post');
+    const {push} = useRouter();
+
+    const handlePostType = (url: string) => () => {
+        push(url, null, {shallow: true});
+    };
 
     const classes = useStyles();
     return (
@@ -18,22 +24,30 @@ export const PostTypesPage: FC = () => {
             <div className={classes.root}>
                 <Grid container spacing={2}>
                     {postTypes.map((postType, i) =>
-                        <Grid item xs={4} key={i}>
-                            <Link href={`/create/type/${postType.name}`} shallow>
-                                <a className={postType.name}>
-                                    <div
-                                        className={postType.name}
-                                        style={{backgroundImage: `url(${postType.image.url})`}}
-                                    >
-                                        <Typography variant="subtitle1">
-                                            {t(`common:${postType.name}`)}
-                                        </Typography>
-                                        <Typography variant="body2">
-                                            {t(postType.subtitle)}
-                                        </Typography>
-                                    </div>
-                                </a>
-                            </Link>
+                        <Grid
+                            item
+                            xs={4}
+                            key={i}
+                        >
+                            <div
+                                className={`${postType.name} post-wrapper`}
+                            >
+                                <div
+                                    style={{backgroundImage: `url(${postType.image.url})`}}
+                                >
+                                    <Typography variant="subtitle1">
+                                        {t(`common:${postType.name}`)}
+                                    </Typography>
+                                    <Typography variant="body2">
+                                        {t(postType.subtitle)}
+                                    </Typography>
+                                </div>
+                                <CustomButton
+                                    onClick={handlePostType(`/create/type/${postType.name}`)}
+                                >
+                                    {t(`create_${postType.name}`)}
+                                </CustomButton>
+                            </div>
                             <div className="guide">
                                 <a href="#">
                                     <Typography

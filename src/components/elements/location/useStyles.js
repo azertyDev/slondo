@@ -36,8 +36,8 @@ export const useStyles = makeStyles((theme) => ({
                 left: 0,
                 background: '#f9f9f9',
                 zIndex: '5',
-                padding: '16px 15px',
-                boxShadow: '0px 1px 2px rgb(0 0 0 / 15%)'
+                padding: '16px 15px'
+
             }
         },
         '& div.location-header-wrapper': {
@@ -70,6 +70,7 @@ export const useStyles = makeStyles((theme) => ({
                     height: '70px',
                     marginBottom: 0,
                     position: 'fixed',
+                    boxShadow: '0px 1px 2px rgb(0 0 0 / 15%)',
                     background: '#f9f9f9'
                 },
                 '& > svg, & > img.filter-icon': {
