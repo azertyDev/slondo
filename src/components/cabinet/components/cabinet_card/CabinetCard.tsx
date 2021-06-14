@@ -14,8 +14,8 @@ type CabinetCardPropsType = {
     cardData: CardDataType,
     handleSettingsOpen?: (id: number, post?, index?: number) => () => void,
     handleDetailedOpen?: (id: number, post) => () => void,
+    handleNotificationsOpen?: (id: number) => () => void,
     handleOpenModal?: (id: number) => () => void,
-    handleOpenDialog?: () => void,
     fetchAuctionNotifications?: (post) => () => void
 }
 
@@ -24,10 +24,11 @@ export const CabinetCard: FC<CabinetCardPropsType> = (props) => {
         cardData,
         handleSettingsOpen,
         handleDetailedOpen,
+        handleNotificationsOpen,
         handleOpenModal,
-        handleOpenDialog,
         fetchAuctionNotifications
     } = props;
+
     const {pathname} = useRouter();
     const {t} = useTranslation('common');
 
@@ -91,11 +92,12 @@ export const CabinetCard: FC<CabinetCardPropsType> = (props) => {
                             </CustomButton>
                             <CustomButton
                                 className='notifications'
+                                onClick={handleNotificationsOpen(id)}
                                 onMouseEnter={fetchAuctionNotifications(cardData)}
                             >
                                 <NotificationIcon />
                             </CustomButton>
-                            <CustomButton className='settings' onClick={handleSettingsOpen(cardData.id, cardData, 1)}>
+                            <CustomButton className='settings' onClick={handleSettingsOpen(id, cardData, 1)}>
                                 <SettingsIcon />
                             </CustomButton>
                         </>

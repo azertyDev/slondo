@@ -1,19 +1,8 @@
-import React, {FC, useEffect, useRef, useState} from 'react';
-import Link from 'next/link';
+import {FC} from 'react';
 import {WithT} from 'i18next';
-import {Grid, Hidden, TextField, Typography} from '@material-ui/core';
-import {LockIcon} from '@src/components/elements/icons';
 import {AuctionTimer} from './AuctionTimer';
-import {numberPrettier} from '@root/src/helpers';
-import {AuctionForm} from './AuctionForm/AuctionForm';
-import {CustomButton} from '@src/components/elements/custom_button/CustomButton';
-import {CustomModal} from '@src/components/elements/custom_modal/CustomModal';
-import {userAPI} from '@src/api/api';
-import {setErrorMsgAction} from '@src/redux/slices/errorSlice';
-import {useDispatch} from 'react-redux';
 import {useStyles} from './useStyles';
 import {BetsList} from '@src/components/elements/bets_list/BetsList';
-import {ITEMS_PER_PAGE} from '@src/constants';
 
 
 type AuctionInfoPropsType = {
@@ -26,90 +15,54 @@ export const AuctionContent: FC<AuctionInfoPropsType> = (props) => {
         postData
     } = props;
 
-    const dispatch = useDispatch();
     const date = new Date(postData.expiration_at).getTime();
-    const isExAuc = postData.ads_type.mark === 'exauc';
-    const hasOfferPrice = !!postData.auction.offer_the_price;
+    // const dispatch = useDispatch();
+    // const isExAuc = postData.ads_type.mark === 'exauc';
+    // const hasOfferPrice = !!postData.auction.offer_the_price;
+    //
+    // const [isFetch, setIsFetch] = useState(false);
+    // const [openBuyNow, setOpenBuyNow] = useState(false);
+    // const [openOfferPrice, setOpenOfferPrice] = useState(false);
+    // const [offerPrice, setOfferPrice] = useState('');
 
-    const [isFetch, setIsFetch] = useState(false);
-    const [openBuyNow, setOpenBuyNow] = useState(false);
-    const [openOfferPrice, setOpenOfferPrice] = useState(false);
-    const [offerPrice, setOfferPrice] = useState('');
-    const [page, setPage] = useState({currentPage: 1, lastPage: 1});
-    const [bets, setBets] = useState([]);
-    const betsRef = useRef(bets);
-    const [lastBet] = bets;
+    // const hasReservePrice = postData.auction?.reserve_price > lastBet?.bet;
+    // const hasBuyNow = !!postData.auction?.price_buy_now && postData.auction.price_buy_now > lastBet?.bet;
+    //
+    // const handleModalBuyNow = value => () => {
+    //     setOpenBuyNow(value);
+    // };
+    // const handleModalOfferPrice = value => () => {
+    //     setOpenOfferPrice(value);
+    // };
+    // const handleOfferPrice = async () => {
+    //     try {
+    //         setIsFetch(true);
+    //         await userAPI.offerThePrice(postData.auction.id, offerPrice);
+    //         setOfferPrice('');
+    //         setIsFetch(false);
+    //         setOpenOfferPrice(false);
+    //     } catch (e) {
+    //         setIsFetch(false);
+    //         dispatch(setErrorMsgAction(e.message));
+    //     }
+    // };
+    // const handleBuyNow = async () => {
+    //     try {
+    //         setIsFetch(true);
+    //         await userAPI.buyNow(postData.auction.id, postData.id);
+    //         setIsFetch(false);
+    //     } catch ({response}) {
+    //         setIsFetch(false);
+    //         dispatch(
+    //             setErrorMsgAction(t(`errors:${response.data.message}`))
+    //         );
+    //     }
+    // };
+    //
+    // const handleOfferPriceInput = ({target}) => {
+    //     setOfferPrice(target.value);
+    // };
 
-    const hasReservePrice = postData.auction?.reserve_price > lastBet?.bet;
-    const hasBuyNow = !!postData.auction?.price_buy_now && postData.auction.price_buy_now > lastBet?.bet;
-
-    const handleModalBuyNow = value => () => {
-        setOpenBuyNow(value);
-    };
-    const handleModalOfferPrice = value => () => {
-        setOpenOfferPrice(value);
-    };
-    const handleOfferPrice = async () => {
-        try {
-            setIsFetch(true);
-            await userAPI.offerThePrice(postData.auction.id, offerPrice);
-            setOfferPrice('');
-            setIsFetch(false);
-            setOpenOfferPrice(false);
-        } catch (e) {
-            setIsFetch(false);
-            dispatch(setErrorMsgAction(e.message));
-        }
-    };
-    const handleBuyNow = async () => {
-        try {
-            setIsFetch(true);
-            await userAPI.buyNow(postData.auction.id, postData.id);
-            setIsFetch(false);
-        } catch ({response}) {
-            setIsFetch(false);
-            dispatch(
-                setErrorMsgAction(t(`errors:${response.data.message}`))
-            );
-        }
-    };
-    const handleBet = async (bet) => {
-        try {
-            setIsFetch(true);
-            await userAPI.betAuction(bet, postData.auction.id);
-            setIsFetch(false);
-        } catch ({response}) {
-            setIsFetch(false);
-            dispatch(
-                setErrorMsgAction(t(`errors:${response.data.message}`))
-            );
-        }
-    };
-    const handleOfferPriceInput = ({target}) => {
-        setOfferPrice(target.value);
-    };
-    const auctionBetsPagination = async () => {
-        try {
-            if (page.lastPage >= page.currentPage) {
-                setIsFetch(true);
-                const {total, data} = await userAPI.getAuctionBets(postData.auction.id, page.currentPage, ITEMS_PER_PAGE);
-                setBets([...bets, ...data]);
-                setPage({...page, lastPage: Math.ceil(total / 25)});
-                setIsFetch(false);
-            }
-        } catch (e) {
-            setIsFetch(false);
-            dispatch(setErrorMsgAction(e.message));
-        }
-    };
-
-    useEffect(() => {
-        betsRef.current = bets;
-    });
-
-    useEffect(() => {
-        auctionBetsPagination();
-    }, [page.currentPage]);
 
     // useEffect(() => {
     //     socketIO.on('bet-channel', async (lastBet) => {
@@ -122,142 +75,140 @@ export const AuctionContent: FC<AuctionInfoPropsType> = (props) => {
     return (
         <div className={classes.root}>
             <div className="lot-info">
-                {hasReservePrice && (
-                    <div className="reserve-price">
-                        <LockIcon/>
-                        <div>
-                            <Typography variant="subtitle2" color="initial">
-                                Резервная цена:
-                            </Typography>
-                            <Typography variant="h6" color="initial">
-                                {numberPrettier(postData.auction.reserve_price)}{' '}
-                                {postData.currency.name}
-                            </Typography>
-                        </div>
-                    </div>
-                )}
+                {/*{hasReservePrice && (*/}
+                {/*    <div className="reserve-price">*/}
+                {/*        <LockIcon/>*/}
+                {/*        <div>*/}
+                {/*            <Typography variant="subtitle2" color="initial">*/}
+                {/*                Резервная цена:*/}
+                {/*            </Typography>*/}
+                {/*            <Typography variant="h6" color="initial">*/}
+                {/*                {numberPrettier(postData.auction.reserve_price)}{' '}*/}
+                {/*                {postData.currency.name}*/}
+                {/*            </Typography>*/}
+                {/*        </div>*/}
+                {/*    </div>*/}
+                {/*)}*/}
                 <div className="lot-timer">
                     {!!date && <AuctionTimer date={date} />}
                 </div>
                 <BetsList
-                    bets={bets}
-                    title={t('auction:allBets')}
+                    title={t('auction:currentRates')}
                     auctionId={postData.auction.id}
                     showBetsCount={5}
                 />
-                {!postData.creator && (
-                    <>
-                        <AuctionForm
-                            t={t}
-                            handleBet={handleBet}
-                            lastBet={lastBet}
-                        />
-                        {hasBuyNow && (
-                            <div>
-                                <Hidden mdDown>
-                                    <div className="buy-now">
-                                        <Typography variant="subtitle1" color="initial">
-                                            {numberPrettier(postData.auction.price_buy_now)} сум
-                                        </Typography>
-                                        <CustomButton onClick={handleModalBuyNow(true)}>
-                                            <Typography variant="subtitle1" color="initial">
-                                                Купить сейчас
-                                            </Typography>
-                                        </CustomButton>
-                                    </div>
-                                </Hidden>
-                                <CustomModal handleModalClose={handleModalBuyNow(false)} openModal={openBuyNow}>
-                                    <>
-                                        <Typography className="title" variant="h6">
-                                            Купить сейчас
-                                        </Typography>
-                                        <Typography
-                                            variant='subtitle1'
-                                            className='subtitle'
-                                        >
-                                            Нажимая кнопку “Купить сейчас” вы выкупаете лот на сумму&nbsp;
-                                            <span className='buy-now-price'>
-                                                {numberPrettier(postData.auction.price_buy_now)}
-                                            </span>
-                                            сум и соглашаетесь с &nbsp;
-                                            <span className='condition'>
-                                                <Link href="#">
-                                                    <a>условиями&nbsp;</a>
-                                                </Link>
-                                            </span>
-                                            сайта
-                                        </Typography>
-                                        <div className='confirm'>
-                                            <CustomButton
-                                                className='submit'
-                                                onClick={handleBuyNow}
-                                            >
-                                                <Typography variant='subtitle1'>
-                                                    Купить сейчас
-                                                </Typography>
-                                            </CustomButton>
-                                        </div>
-                                    </>
-                                </CustomModal>
-                            </div>
-                        )}
-                        <div>
-                            <Hidden lgUp>
-                                <Grid container spacing={1}>
-                                    {hasOfferPrice && (
-                                        <Grid
-                                            item xs={isExAuc && hasBuyNow ? 6 : 12}
-                                            className='suggest_price'
-                                        >
-                                            <CustomButton onClick={handleModalOfferPrice(true)}>
-                                                <Typography variant="subtitle1" color="initial">
-                                                    Предложить цену
-                                                </Typography>
-                                            </CustomButton>
-                                        </Grid>
-                                    )}
-                                    {isExAuc && hasBuyNow && (
-                                        <Grid item xs={6} className="btn-buy-now">
-                                            <CustomButton>
-                                                <Typography variant='subtitle2'>Купить сейчас</Typography>
-                                            </CustomButton>
-                                        </Grid>
-                                    )}
-                                </Grid>
-                            </Hidden>
-                            {hasOfferPrice && (
-                                <Hidden mdDown>
-                                    <div className='suggest_price'>
-                                        <CustomButton onClick={handleModalOfferPrice(true)}>
-                                            <Typography variant="subtitle1" color="initial">
-                                                Предложить цену
-                                            </Typography>
-                                        </CustomButton>
-                                    </div>
-                                </Hidden>
-                            )}
-                            <CustomModal handleModalClose={handleModalOfferPrice(false)} openModal={openOfferPrice}>
-                                Предложить цену
-                                <Typography variant='subtitle1'>
-                                    Предложенная стоимость не может быть <br/>
-                                    меньше стартовой цены или сделанной ставки
-                                </Typography>
-                                <div style={{display: 'flex', flexDirection: 'column'}}>
-                                    <TextField
-                                        id="outlined-basic"
-                                        label="Outlined"
-                                        variant="outlined"
-                                        placeholder='Впишите сумму'
-                                        onChange={handleOfferPriceInput}
-                                    />
-                                    <CustomButton onClick={handleOfferPrice}>
-                                        Предложить
-                                    </CustomButton>
-                                </div>
-                            </CustomModal>
-                        </div>
-                    </>
-                )}
+                {/*{!postData.creator && (*/}
+                {/*    <>*/}
+                {/*        <AuctionForm*/}
+                {/*            t={t}*/}
+                {/*            auctionId={postData.auction.id}*/}
+                {/*        />*/}
+                {/*        {hasBuyNow && (*/}
+                {/*            <div>*/}
+                {/*                <Hidden mdDown>*/}
+                {/*                    <div className="buy-now">*/}
+                {/*                        <Typography variant="subtitle1" color="initial">*/}
+                {/*                            {numberPrettier(postData.auction.price_buy_now)} сум*/}
+                {/*                        </Typography>*/}
+                {/*                        <CustomButton onClick={handleModalBuyNow(true)}>*/}
+                {/*                            <Typography variant="subtitle1" color="initial">*/}
+                {/*                                Купить сейчас*/}
+                {/*                            </Typography>*/}
+                {/*                        </CustomButton>*/}
+                {/*                    </div>*/}
+                {/*                </Hidden>*/}
+                {/*                <CustomModal handleModalClose={handleModalBuyNow(false)} openModal={openBuyNow}>*/}
+                {/*                    <>*/}
+                {/*                        <Typography className="title" variant="h6">*/}
+                {/*                            Купить сейчас*/}
+                {/*                        </Typography>*/}
+                {/*                        <Typography*/}
+                {/*                            variant='subtitle1'*/}
+                {/*                            className='subtitle'*/}
+                {/*                        >*/}
+                {/*                            Нажимая кнопку “Купить сейчас” вы выкупаете лот на сумму&nbsp;*/}
+                {/*                            <span className='buy-now-price'>*/}
+                {/*                                {numberPrettier(postData.auction.price_buy_now)}*/}
+                {/*                            </span>*/}
+                {/*                            сум и соглашаетесь с &nbsp;*/}
+                {/*                            <span className='condition'>*/}
+                {/*                                <Link href="#">*/}
+                {/*                                    <a>условиями&nbsp;</a>*/}
+                {/*                                </Link>*/}
+                {/*                            </span>*/}
+                {/*                            сайта*/}
+                {/*                        </Typography>*/}
+                {/*                        <div className='confirm'>*/}
+                {/*                            <CustomButton*/}
+                {/*                                className='submit'*/}
+                {/*                                onClick={handleBuyNow}*/}
+                {/*                            >*/}
+                {/*                                <Typography variant='subtitle1'>*/}
+                {/*                                    Купить сейчас*/}
+                {/*                                </Typography>*/}
+                {/*                            </CustomButton>*/}
+                {/*                        </div>*/}
+                {/*                    </>*/}
+                {/*                </CustomModal>*/}
+                {/*            </div>*/}
+                {/*        )}*/}
+                {/*        <div>*/}
+                {/*            <Hidden lgUp>*/}
+                {/*                <Grid container spacing={1}>*/}
+                {/*                    {hasOfferPrice && (*/}
+                {/*                        <Grid*/}
+                {/*                            item xs={isExAuc && hasBuyNow ? 6 : 12}*/}
+                {/*                            className='suggest_price'*/}
+                {/*                        >*/}
+                {/*                            <CustomButton onClick={handleModalOfferPrice(true)}>*/}
+                {/*                                <Typography variant="subtitle1" color="initial">*/}
+                {/*                                    Предложить цену*/}
+                {/*                                </Typography>*/}
+                {/*                            </CustomButton>*/}
+                {/*                        </Grid>*/}
+                {/*                    )}*/}
+                {/*                    {isExAuc && hasBuyNow && (*/}
+                {/*                        <Grid item xs={6} className="btn-buy-now">*/}
+                {/*                            <CustomButton>*/}
+                {/*                                <Typography variant='subtitle2'>Купить сейчас</Typography>*/}
+                {/*                            </CustomButton>*/}
+                {/*                        </Grid>*/}
+                {/*                    )}*/}
+                {/*                </Grid>*/}
+                {/*            </Hidden>*/}
+                {/*            {hasOfferPrice && (*/}
+                {/*                <Hidden mdDown>*/}
+                {/*                    <div className='suggest_price'>*/}
+                {/*                        <CustomButton onClick={handleModalOfferPrice(true)}>*/}
+                {/*                            <Typography variant="subtitle1" color="initial">*/}
+                {/*                                Предложить цену*/}
+                {/*                            </Typography>*/}
+                {/*                        </CustomButton>*/}
+                {/*                    </div>*/}
+                {/*                </Hidden>*/}
+                {/*            )}*/}
+                {/*            <CustomModal handleModalClose={handleModalOfferPrice(false)} openModal={openOfferPrice}>*/}
+                {/*                Предложить цену*/}
+                {/*                <Typography variant='subtitle1'>*/}
+                {/*                    Предложенная стоимость не может быть <br/>*/}
+                {/*                    меньше стартовой цены или сделанной ставки*/}
+                {/*                </Typography>*/}
+                {/*                <div style={{display: 'flex', flexDirection: 'column'}}>*/}
+                {/*                    <TextField*/}
+                {/*                        id="outlined-basic"*/}
+                {/*                        label="Outlined"*/}
+                {/*                        variant="outlined"*/}
+                {/*                        placeholder='Впишите сумму'*/}
+                {/*                        onChange={handleOfferPriceInput}*/}
+                {/*                    />*/}
+                {/*                    <CustomButton onClick={handleOfferPrice}>*/}
+                {/*                        Предложить*/}
+                {/*                    </CustomButton>*/}
+                {/*                </div>*/}
+                {/*            </CustomModal>*/}
+                {/*        </div>*/}
+                {/*    </>*/}
+                {/*)}*/}
             </div>
         </div>
     );

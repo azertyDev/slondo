@@ -1,11 +1,22 @@
-import React, {FC, useEffect, useState} from 'react';
+import {FC, useEffect, useState} from 'react';
 import {TabsContent} from '@src/components/cabinet/cabinet_pages/TabsContent';
 import {MyPosts} from '@src/components/cabinet/cabinet_pages/my_posts/MyPosts';
 import {withAuthRedirect} from '@src/hocs/withAuthRedirect';
 import {userAPI} from '@src/api/api';
 import {setErrorMsgAction} from '@src/redux/slices/errorSlice';
 import {useDispatch} from 'react-redux';
-import {Avatar, Box, IconButton, List, ListItem, ListItemText, TextField, Typography} from '@material-ui/core';
+import {
+    Avatar,
+    Box,
+    FormControlLabel,
+    IconButton,
+    List,
+    ListItem,
+    ListItemText,
+    Switch,
+    TextField,
+    Typography
+} from '@material-ui/core';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import {useTranslation} from 'next-i18next';
 import {CustomButton} from '@src/components/elements/custom_button/CustomButton';
@@ -17,7 +28,9 @@ import {ITEMS_PER_PAGE} from '@src/constants';
 import {initialNotificationType} from '@src/components/cabinet/cabinet_pages/notifications/NotificationsContainer';
 import {useModal} from '@src/hooks/useModal';
 import {DetailedPostView} from '@src/components/cabinet/components/detailed_post_view/DetailedPostView';
-import {ResponsiveModal} from '@src/components/elements/responsive_modal/ResponsiveModal';
+import {CabinetModal} from '@src/components/cabinet/components/cabinet_modal/CabinetModal';
+import {Notification} from '@src/components/cabinet/cabinet_pages/notifications/notification_card/Notification';
+import {CustomPagination} from '@src/components/elements/custom_pagination/CustomPagination';
 
 const MyPostsContainer: FC = () => {
     const dispatch = useDispatch();
@@ -228,12 +241,13 @@ const MyPostsContainer: FC = () => {
     const [modalContentIndex, setModalContentIndex] = useState(1);
     const [reasonId, setReasonId] = useState(null);
     const [postId, setPostId] = useState(null);
+    const [phone, setPhone] = useState(null);
     const [errorMsg, setErrMsg] = useState('');
     const [selectedPost, setSelectedPost] = useState(initialSelectedPost);
     const [page, setPage] = useState(1);
     const [pageCount, setPageCount] = useState(0);
     const {modalOpen: settingsModalOpen, handleModalClose: closeSettingsModal, handleModalOpen: openSettingsModal} = useModal();
-    // const {modalOpen: notificationsOpen, handleModalClose: closeNotificationsModal, handleModalOpen: openNotificationsModal} = useModal();
+    const {modalOpen: notificationsOpen, handleModalClose: closeNotificationsModal, handleModalOpen: openNotificationsModal} = useModal();
     const {modalOpen: detailedModalOpen, handleModalClose: closeDetailedModal, handleModalOpen: openDetailedModal} = useModal();
 
     const handleSettingsOpen = (postId: number, post, index: number) => () => {
@@ -247,9 +261,13 @@ const MyPostsContainer: FC = () => {
         setModalContentIndex(1);
     };
     const handleDetailedOpen = (postId: number, post) => () => {
-        openDetailedModal();
         postId && setPostId(postId);
         setSelectedPost(post);
+        openDetailedModal();
+    };
+    const handleNotificationsOpen = (postId: number) => () => {
+        postId && setPostId(postId);
+        openNotificationsModal();
     };
     const handleModalContentIndex = (index, reasonId?) => () => {
         setModalContentIndex(index);
@@ -258,6 +276,9 @@ const MyPostsContainer: FC = () => {
     const handlePrevMenu = () => {
         const backValue = modalContentIndex === 5 ? 3 : 1;
         setModalContentIndex(modalContentIndex - backValue);
+    };
+    const handlePagePagination = (event, value) => {
+        setPage(value);
     };
     const handleTabChange = (event, newValue) => {
         setTabIndex(newValue);
@@ -308,6 +329,16 @@ const MyPostsContainer: FC = () => {
             dispatch(setErrorMsgAction(e.message));
         }
     };
+    const handleDeleteNotification = (id, ads_id) => async () => {
+        try {
+            setNotification({...notification, isFetch: true});
+            await userAPI.deleteUserNotification(id);
+            const {data} = await userAPI.getNotificationById(ads_id);
+            setNotification({...notification, data, isFetch: false});
+        } catch (e) {
+            dispatch(setErrorMsgAction(e.message));
+        }
+    };
     const handleDeactivate = async () => {
         try {
             await userAPI.deactivateById(postId, reasonId);
@@ -318,6 +349,14 @@ const MyPostsContainer: FC = () => {
             } else {
                 await fetchPostData(1);
             }
+        } catch (e) {
+            dispatch(setErrorMsgAction(e.message));
+        }
+    };
+    const fetchUserPhone = (user_id) => async () => {
+        try {
+            const {phone} = await userAPI.getPhoneByUserId(user_id);
+            setPhone(phone);
         } catch (e) {
             dispatch(setErrorMsgAction(e.message));
         }
@@ -443,7 +482,7 @@ const MyPostsContainer: FC = () => {
         <>
             {modalContentIndex === 1
              ? <Typography className="title" variant="h6">
-                 Объявление № {postId}
+                    {`${t(`common:${selectedPost.ads_type}`)} №: ${selectedPost.id}`}
              </Typography>
              : modalContentIndex === 5
                ? null
@@ -471,6 +510,7 @@ const MyPostsContainer: FC = () => {
                 cardData={data}
                 handleSettingsOpen={handleSettingsOpen}
                 handleDetailedOpen={handleDetailedOpen}
+                handleNotificationsOpen={handleNotificationsOpen}
                 fetchAuctionNotifications={fetchNotifications}
             />
         </Box>
@@ -482,10 +522,20 @@ const MyPostsContainer: FC = () => {
                 cardData={data}
                 handleSettingsOpen={handleSettingsOpen}
                 handleDetailedOpen={handleDetailedOpen}
+                handleNotificationsOpen={handleNotificationsOpen}
                 fetchAuctionNotifications={fetchNotifications}
             />
         </Box>
     ));
+
+    const pagination = (
+        <CustomPagination
+            currentPage={page}
+            pageCount={pageCount}
+            itemsPerPage={ITEMS_PER_PAGE}
+            handlePagePagination={handlePagePagination}
+        />
+    );
 
     const tabsData: TabsDataType = [
         {
@@ -523,19 +573,71 @@ const MyPostsContainer: FC = () => {
                 tabsData={tabsData}
                 headerTitle={t('myPosts')}
             />
-            <ResponsiveModal
+            {/* Modals */}
+            <CabinetModal
                 openDialog={settingsModalOpen}
                 handleCloseDialog={handleSettingsClose}
-                maxWidth={false}
+                maxWidth='xs'
                 fullWidth={false}
             >
                 <ModalContent />
-            </ResponsiveModal>
+            </CabinetModal>
             <DetailedPostView
                 data={selectedPost}
                 detailedModalOpen={detailedModalOpen}
                 handleDetailedClose={closeDetailedModal}
             />
+            <CabinetModal openDialog={notificationsOpen} handleCloseDialog={closeNotificationsModal}>
+                <Box
+                    display='flex'
+                    justifyContent='center'
+                >
+                    <Typography variant='subtitle1'>
+                        Уведомления (история)
+                    </Typography>
+                </Box>
+                <Box
+                    display='flex'
+                    flexDirection='row'
+                    justifyContent='space-between'
+                    alignItems='center'
+                >
+                    <Typography>
+                        {`${t(`common:${selectedPost.ads_type}`)} №: ${selectedPost.id}`}
+                    </Typography>
+                    <FormControlLabel
+                        control={
+                            <Switch
+                                // checked={state.checkedA}
+                                // onChange={handleChange}
+                                name="checkedA"
+                                color='secondary'
+                            />
+                        }
+                        label="Уведомлять меня"
+                        labelPlacement="start"
+                    />
+                </Box>
+                {notification.data?.map(notification => (
+                    <Box
+                        key={notification.id}
+                        mb={1}
+                    >
+                        <Notification
+                            t={t}
+                            data={notification}
+                            handleDeleteNotification={handleDeleteNotification}
+                            fetchUserPhone={fetchUserPhone}
+                            phone={phone}
+                        />
+                    </Box>
+                ))}
+                {!!notification.data?.length && (
+                    <Box display='flex' justifyContent='center'>
+                        {pagination}
+                    </Box>
+                )}
+            </CabinetModal>
         </>
     );
 };

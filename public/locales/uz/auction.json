@@ -1,5 +1,13 @@
 {
-    "youCanNotBeatYourBet": "Siz o'zingizning stavkangizni qayta oshira olmaysiz!",
-    "invalidBed" : "Auksion narxi oshirilgan, ro'yxatni yangilang!",
-    "allBets": "Barcha garovlar"
+  "youCanNotBeatYourBet": "Siz o'zingizning stavkangizni qayta oshira olmaysiz!",
+  "invalidBed": "Auksion narxi oshirilgan, ro'yxatni yangilang!",
+  "allBets": "Barcha narxlar",
+  "currentRates": "Xozirgi narxlar",
+  "extremeRates": "So'nggi narxlar",
+  "player": "Ishtirokchi",
+  "date": "Sana",
+  "time": "Vaqt",
+  "difference": "Farqi",
+  "bet": "Stavka",
+  "numberOfLines": "Qatorlar soni"
 }

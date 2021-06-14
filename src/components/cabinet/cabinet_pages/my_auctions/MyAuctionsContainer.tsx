@@ -6,7 +6,19 @@ import {userAPI} from '@src/api/api';
 import {useDispatch} from 'react-redux';
 import {setErrorMsgAction} from '@root/src/redux/slices/errorSlice';
 import {useTranslation} from 'next-i18next';
-import {Box, CircularProgress, Tab, Tabs, Typography} from '@material-ui/core';
+import {
+    Box,
+    CircularProgress,
+    FormControlLabel,
+    IconButton,
+    List,
+    ListItem,
+    ListItemText,
+    Switch,
+    Tab,
+    Tabs,
+    Typography
+} from '@material-ui/core';
 import {InitialCabinetCardState, OffersStateType, TabsDataType} from '@root/interfaces/Cabinet.js';
 import {CabinetCard} from '@src/components/cabinet/components/cabinet_card/CabinetCard';
 import {initialNotificationType} from '@src/components/cabinet/cabinet_pages/notifications/NotificationsContainer';
@@ -17,10 +29,14 @@ import {useModal} from '@src/hooks/useModal';
 import {useStyles} from './useStyles';
 import {CardDataType} from '@root/interfaces/CardData';
 import {DetailedPostView} from '@src/components/cabinet/components/detailed_post_view/DetailedPostView';
+import {CabinetModal} from '@src/components/cabinet/components/cabinet_modal/CabinetModal';
+import ArrowBackIcon from '@material-ui/icons/ArrowBack';
+import {numberPrettier} from '@src/helpers';
+import {Notification} from '@src/components/cabinet/cabinet_pages/notifications/notification_card/Notification';
 
 export const MyAuctionsContainer: FC = () => {
     const dispatch = useDispatch();
-    const {t} = useTranslation('cabinet');
+    const {t} = useTranslation(['cabinet', 'common']);
 
     const initialState: InitialCabinetCardState = {
         isFetch: false,
@@ -141,15 +157,9 @@ export const MyAuctionsContainer: FC = () => {
     const {modalOpen: openDialog, handleModalOpen: handleOpenDialog, handleModalClose: handleCloseDialog} = useModal();
 
     const {modalOpen: settingsModalOpen, handleModalClose: closeSettingsModal, handleModalOpen: openSettingsModal} = useModal();
-    // const {modalOpen: notificationsOpen, handleModalClose: closeNotificationsModal, handleModalOpen: openNotificationsModal} = useModal();
+    const {modalOpen: notificationsOpen, handleModalClose: closeNotificationsModal, handleModalOpen: openNotificationsModal} = useModal();
     const {modalOpen: detailedModalOpen, handleModalClose: closeDetailedModal, handleModalOpen: openDetailedModal} = useModal();
 
-    // const handleSettingsOpen = (postId: number, post, index: number) => () => {
-    //     openSettingsModal();
-    //     postId && setAuctionId(postId);
-    //     setModalContentIndex(index);
-    //     setSelectedAuction(post);
-    // };
     const handleSettingsClose = () => {
         closeSettingsModal();
         setModalContentIndex(1);
@@ -158,6 +168,10 @@ export const MyAuctionsContainer: FC = () => {
         openDetailedModal();
         auctionId && setAuctionId(postId);
         setSelectedAuction(post);
+    };
+    const handleNotificationsOpen = (postId: number) => () => {
+        postId && setAuctionId(postId);
+        openNotificationsModal();
     };
     const handleChildTabChange = (event, newValue) => {
         setChildTabValue(newValue);
@@ -186,10 +200,10 @@ export const MyAuctionsContainer: FC = () => {
     const handleTabChange = (event, newValue) => {
         setTabIndex(newValue);
     };
-    const handleSettingsOpen = (auction_id: number, index?: number) => () => {
+    const handleSettingsOpen = (auction_id: number) => () => {
         openSettingsModal();
         auction_id && setSelectedAuction({...selectedAuction, id: auction_id});
-        setModalContentIndex(index);
+        setModalContentIndex(1);
     };
     const handlePrevMenu = () => {
         const backValue = modalContentIndex === 5 ? 3 : 1;
@@ -198,19 +212,19 @@ export const MyAuctionsContainer: FC = () => {
     const handleModalContentIndex = (index) => () => {
         setModalContentIndex(index);
     };
-    // const handleDeactivate = (ads_id?: number) => async () => {
-    //     try {
-    //         await userAPI.deactivateById(ads_id);
-    //         handleModalClose();
-    //         if (tabIndex === 0) {
-    //             await fetchAuctionData('auc');
-    //         } else {
-    //             await fetchAuctionData();
-    //         }
-    //     } catch (e) {
-    //         dispatch(setErrorMsgAction(e.message));
-    //     }
-    // };
+    const handleDeactivate = (ads_id?: number) => async () => {
+        try {
+            await userAPI.deactivateById(ads_id);
+            handleCloseDialog();
+            if (tabIndex === 0) {
+                await fetchAuctionData('auc');
+            } else {
+                await fetchAuctionData();
+            }
+        } catch (e) {
+            dispatch(setErrorMsgAction(e.message));
+        }
+    };
     const handleAcceptVictory = (auction_id, is_accepted) => async () => {
         try {
             await userAPI.acceptVictory(auction_id, is_accepted);
@@ -241,40 +255,40 @@ export const MyAuctionsContainer: FC = () => {
             dispatch(setErrorMsgAction(e));
         }
     };
-    // const fetchAllOffers = (auction_id: number) => async () => {
-    //     try {
-    //         auction_id && setSelectedAuction({...selectedAuction, id: auction_id});
-    //         handleModalOpen();
-    //         setModalContentIndex(10);
-    //         setOffersData({...offersData, isFetch: true});
-    //         const {data, total} = await userAPI.getAllOffersById(auction_id);
-    //         setOffersData({...offersData, data, total, isFetch: false});
-    //     } catch (e) {
-    //         dispatch(setErrorMsgAction(e.message));
-    //     }
-    // };
-    // const acceptOfferThePrice = (offer_id: number, is_accepted: boolean) => async () => {
-    //     try {
-    //         handleModalClose();
-    //         await userAPI.acceptOfferThePrice(offer_id, is_accepted);
-    //         if (tabIndex === 0) {
-    //             await fetchAuctionData('auc');
-    //         } else {
-    //             await fetchAuctionData();
-    //         }
-    //     } catch (e) {
-    //         dispatch(setErrorMsgAction(e.message));
-    //     }
-    // };
-    // const riceInTape = (post_id: number) => async () => {
-    //     try {
-    //         await userAPI.ricePostInTape(post_id);
-    //         handleModalClose();
-    //         setModalContentIndex(1);
-    //     } catch (e) {
-    //         dispatch(setErrorMsgAction(e.message));
-    //     }
-    // };
+    const fetchAllOffers = (auction_id: number) => async () => {
+        try {
+            auction_id && setSelectedAuction({...selectedAuction, id: auction_id});
+            handleOpenDialog();
+            setModalContentIndex(10);
+            setOffersData({...offersData, isFetch: true});
+            const {data, total} = await userAPI.getAllOffersById(auction_id);
+            setOffersData({...offersData, data, total, isFetch: false});
+        } catch (e) {
+            dispatch(setErrorMsgAction(e.message));
+        }
+    };
+    const acceptOfferThePrice = (offer_id: number, is_accepted: boolean) => async () => {
+        try {
+            handleCloseDialog();
+            await userAPI.acceptOfferThePrice(offer_id, is_accepted);
+            if (tabIndex === 0) {
+                await fetchAuctionData('auc');
+            } else {
+                await fetchAuctionData();
+            }
+        } catch (e) {
+            dispatch(setErrorMsgAction(e.message));
+        }
+    };
+    const riceInTape = (post_id: number) => async () => {
+        try {
+            await userAPI.ricePostInTape(post_id);
+            setModalContentIndex(1);
+            closeSettingsModal();
+        } catch (e) {
+            dispatch(setErrorMsgAction(e.message));
+        }
+    };
     const handleDeleteNotification = (id, ads_id) => async () => {
         try {
             setNotification({...notification, isFetch: true});
@@ -295,200 +309,200 @@ export const MyAuctionsContainer: FC = () => {
     };
 
     const classes = useStyles();
-
-    // const getModalContent = () => {
-    //     switch (modalContentIndex) {
-    //         case 1:
-    //             return <>
-    //                 <List
-    //                     component="nav"
-    //                     aria-label="main"
-    //                     className={classes.settingsList}
-    //                     disablePadding
-    //                 >
-    //                     <ListItem
-    //                         button
-    //                         onClick={handleModalContentIndex(3)}
-    //                     >
-    //                         <ListItemText
-    //                             primary="Деактивировать"
-    //                             primaryTypographyProps={{variant: 'subtitle1'}}
-    //                         />
-    //                     </ListItem>
-    //                     <ListItem
-    //                         button
-    //                         onClick={handleModalContentIndex(2)}
-    //                     >
-    //                         <ListItemText
-    //                             primary="Поднять в ленте"
-    //                             primaryTypographyProps={{variant: 'subtitle1'}}
-    //                             secondary="(можно использовать 3 раза в неделю)"
-    //                             secondaryTypographyProps={{variant: 'subtitle2'}}
-    //                         />
-    //                     </ListItem>
-    //                 </List>
-    //             </>;
-    //         case 2:
-    //             return <>
-    //                 <List
-    //                     component="nav"
-    //                     aria-label="main"
-    //                     className={classes.settingsList}
-    //                     disablePadding
-    //                 >
-    //                     <ListItem
-    //                         button
-    //                         onClick={riceInTape(selectedAuction.id)}
-    //                     >
-    //                         <ListItemText
-    //                             primary='Да'
-    //                             primaryTypographyProps={{variant: 'subtitle1'}}
-    //                         />
-    //                     </ListItem>
-    //                     <ListItem
-    //                         button
-    //                         onClick={handlePrevMenu}
-    //                     >
-    //                         <ListItemText
-    //                             primary='Нет'
-    //                             primaryTypographyProps={{variant: 'subtitle1'}}
-    //                         />
-    //                     </ListItem>
-    //                 </List>
-    //             </>;
-    //         case 3:
-    //             return <>
-    //                 <List
-    //                     component="nav"
-    //                     aria-label="main"
-    //                     className={classes.settingsList}
-    //                     disablePadding
-    //                 >
-    //                     <ListItem
-    //                         button
-    //                         onClick={handleDeactivate(selectedAuction.id)}
-    //                     >
-    //                         <ListItemText
-    //                             primary='Да'
-    //                             primaryTypographyProps={{variant: 'subtitle1'}}
-    //                         />
-    //                     </ListItem>
-    //                     <ListItem
-    //                         button
-    //                         onClick={handlePrevMenu}
-    //                     >
-    //                         <ListItemText
-    //                             primary='Нет'
-    //                             primaryTypographyProps={{variant: 'subtitle1'}}
-    //                         />
-    //                     </ListItem>
-    //                 </List>
-    //             </>;
-    //         case 10:
-    //             return <Box className='offers-info'>
-    //                 <Box>
-    //                     <Typography variant='h6'>Все предложения</Typography>
-    //                     <Typography variant='subtitle2'>{`Аукцион №: ${selectedAuction.id}`}</Typography>
-    //                 </Box>
-    //                 <Box width={1}>
-    //                     {offersData.data.map(offer => {
-    //                         return (
-    //                             <Box px={5} py={2} display='flex' key={offer.id}>
-    //                                 <Box>
-    //                                     <UserInfoWithAvatar owner={offer.user} isOwner={false}/>
-    //                                 </Box>
-    //                                 <Box>
-    //                                     <Typography variant='subtitle2'>
-    //                                         {offer.created_at}
-    //                                     </Typography>
-    //                                     <div>
-    //                                         <Typography variant='subtitle2'>
-    //                                             Предложенная цена
-    //                                         </Typography>
-    //                                         {offer.price}
-    //                                     </div>
-    //                                     <div>
-    //                                         <CustomButton
-    //                                             className='accept'
-    //                                             onClick={acceptOfferThePrice(offer.id, true)}
-    //                                         >
-    //                                             <DoneAllIcon/>
-    //                                             <Typography
-    //                                                 variant="subtitle2"
-    //                                                 color="initial"
-    //                                             >
-    //                                                 Принять
-    //                                             </Typography>
-    //                                         </CustomButton>
-    //                                         <CustomButton
-    //                                             className='decline'
-    //                                             onClick={acceptOfferThePrice(offer.id, false)}
-    //                                         >
-    //                                             <CloseIcon/>
-    //                                             <Typography
-    //                                                 variant="subtitle2"
-    //                                                 color="initial"
-    //                                             >
-    //                                                 Отказать
-    //                                             </Typography>
-    //                                         </CustomButton>
-    //                                     </div>
-    //                                 </Box>
-    //                             </Box>
-    //                         );
-    //                     })}
-    //                 </Box>
-    //             </Box>;
-    //         case 11:
-    //             return <Box className={classes.promoteInfo}>
-    //                 <Box mb='20px' textAlign='center'>
-    //                     <Typography variant='h6'>Рекламировать объявление</Typography>
-    //                     <Typography variant='subtitle2'>{`Аукцион №: ${selectedAuction.id}`}</Typography>
-    //                 </Box>
-    //                 <Box mb='20px'>
-    //                     <Paper className='promote-item'>
-    //                         <Box maxWidth='180px'>
-    //                             <Typography variant='h6' gutterBottom>Поднять в топ</Typography>
-    //                             <Typography variant='subtitle1'>Действует 3 дня</Typography>
-    //                             <Typography variant='subtitle2'>
-    //                                 Объявление появляется в ленте в 40 чаще и выделяется анимацией.
-    //                             </Typography>
-    //                             <Typography variant='h5'>60 000 сум</Typography>
-    //                         </Box>
-    //                         <Box display='flex' alignItems='flex-end' width='180px'>
-    //                             <CustomButton>
-    //                                 <Typography variant='subtitle1'>Поднять в ТОП</Typography>
-    //                                 <ChevronRight width='20px' height='20px'/>
-    //                             </CustomButton>
-    //                             <img src={'/img/promote-img.jpg'} alt="promote-img"/>
-    //                         </Box>
-    //                     </Paper>
-    //                 </Box>
-    //             </Box>;
-    //         default:
-    //             return modalContentIndex;
-    //     }
-    // };
-    // const ModalContent = () => (
-    //     <>
-    //         {modalContentIndex === 1
-    //          ? <Typography className="title" variant="h6">
-    //              Аукцион №: {selectedAuction.id}
-    //          </Typography>
-    //          : (modalContentIndex !== 10 && modalContentIndex !== 11 && (
-    //                     <IconButton
-    //                         size="medium"
-    //                         aria-label="back"
-    //                         className='prev-btn'
-    //                         onClick={handlePrevMenu}
-    //                     >
-    //                         <ArrowBackIcon fontSize="inherit"/>
-    //                     </IconButton>
-    //                 )
-    //          )}
-    //         {getModalContent()}
-    //     </>
-    // );
+    const getModalContent = () => {
+        switch (modalContentIndex) {
+            case 1:
+                return <>
+                    <List
+                        component="nav"
+                        aria-label="main"
+                        className={classes.settingsList}
+                        disablePadding
+                    >
+                        <ListItem
+                            button
+                            onClick={handleModalContentIndex(3)}
+                        >
+                            <ListItemText
+                                primary="Деактивировать"
+                                primaryTypographyProps={{variant: 'subtitle1'}}
+                            />
+                        </ListItem>
+                        <ListItem
+                            button
+                            onClick={handleModalContentIndex(2)}
+                        >
+                            <ListItemText
+                                primary="Поднять в ленте"
+                                primaryTypographyProps={{variant: 'subtitle1'}}
+                                secondary="(можно использовать 3 раза в неделю)"
+                                secondaryTypographyProps={{variant: 'subtitle2'}}
+                            />
+                        </ListItem>
+                    </List>
+                </>;
+            case 2:
+                return <>
+                    <List
+                        component="nav"
+                        aria-label="main"
+                        className={classes.settingsList}
+                        disablePadding
+                    >
+                        <ListItem
+                            button
+                            onClick={riceInTape(selectedAuction.id)}
+                        >
+                            <ListItemText
+                                primary='Да'
+                                primaryTypographyProps={{variant: 'subtitle1'}}
+                            />
+                        </ListItem>
+                        <ListItem
+                            button
+                            onClick={handlePrevMenu}
+                        >
+                            <ListItemText
+                                primary='Нет'
+                                primaryTypographyProps={{variant: 'subtitle1'}}
+                            />
+                        </ListItem>
+                    </List>
+                </>;
+            case 3:
+                return <>
+                    <List
+                        component="nav"
+                        aria-label="main"
+                        className={classes.settingsList}
+                        disablePadding
+                    >
+                        <ListItem
+                            button
+                            onClick={handleDeactivate(selectedAuction.id)}
+                        >
+                            <ListItemText
+                                primary='Да'
+                                primaryTypographyProps={{variant: 'subtitle1'}}
+                            />
+                        </ListItem>
+                        <ListItem
+                            button
+                            onClick={handlePrevMenu}
+                        >
+                            <ListItemText
+                                primary='Нет'
+                                primaryTypographyProps={{variant: 'subtitle1'}}
+                            />
+                        </ListItem>
+                    </List>
+                </>;
+            // case 10:
+            //     return <Box className='offers-info'>
+            //         <Box>
+            //             <Typography variant='h6'>Все предложения</Typography>
+            //             <Typography variant='subtitle2'>{`Аукцион №: ${selectedAuction.id}`}</Typography>
+            //         </Box>
+            //         <Box width={1}>
+            //             {offersData.data.map(offer => {
+            //                 return (
+            //                     <Box px={5} py={2} display='flex' key={offer.id}>
+            //                         <Box>
+            //                             <UserInfoWithAvatar owner={offer.user} isOwner={false} />
+            //                         </Box>
+            //                         <Box>
+            //                             <Typography variant='subtitle2'>
+            //                                 {offer.created_at}
+            //                             </Typography>
+            //                             <div>
+            //                                 <Typography variant='subtitle2'>
+            //                                     Предложенная цена
+            //                                 </Typography>
+            //                                 {offer.price}
+            //                             </div>
+            //                             <div>
+            //                                 <CustomButton
+            //                                     className='accept'
+            //                                     onClick={acceptOfferThePrice(offer.id, true)}
+            //                                 >
+            //                                     <DoneAllIcon />
+            //                                     <Typography
+            //                                         variant="subtitle2"
+            //                                         color="initial"
+            //                                     >
+            //                                         Принять
+            //                                     </Typography>
+            //                                 </CustomButton>
+            //                                 <CustomButton
+            //                                     className='decline'
+            //                                     onClick={acceptOfferThePrice(offer.id, false)}
+            //                                 >
+            //                                     <CloseIcon />
+            //                                     <Typography
+            //                                         variant="subtitle2"
+            //                                         color="initial"
+            //                                     >
+            //                                         Отказать
+            //                                     </Typography>
+            //                                 </CustomButton>
+            //                             </div>
+            //                         </Box>
+            //                     </Box>
+            //                 );
+            //             })}
+            //         </Box>
+            //     </Box>;
+            // case 11:
+            //     return <Box className={classes.promoteInfo}>
+            //         <Box mb='20px' textAlign='center'>
+            //             <Typography variant='h6'>Рекламировать объявление</Typography>
+            //             <Typography variant='subtitle2'>{`Аукцион №: ${selectedAuction.id}`}</Typography>
+            //         </Box>
+            //         <Box mb='20px'>
+            //             <Paper className='promote-item'>
+            //                 <Box maxWidth='180px'>
+            //                     <Typography variant='h6' gutterBottom>Поднять в топ</Typography>
+            //                     <Typography variant='subtitle1'>Действует 3 дня</Typography>
+            //                     <Typography variant='subtitle2'>
+            //                         Объявление появляется в ленте в 40 чаще и выделяется анимацией.
+            //                     </Typography>
+            //                     <Typography variant='h5'>60 000 сум</Typography>
+            //                 </Box>
+            //                 <Box display='flex' alignItems='flex-end' width='180px'>
+            //                     <CustomButton>
+            //                         <Typography variant='subtitle1'>Поднять в ТОП</Typography>
+            //                         <ChevronRight width='20px' height='20px' />
+            //                     </CustomButton>
+            //                     <img src={'/img/promote-img.jpg'} alt="promote-img" />
+            //                 </Box>
+            //             </Paper>
+            //         </Box>
+            //     </Box>;
+            default:
+                return modalContentIndex;
+        }
+    };
+    const ModalContent = () => (
+        <>
+            {modalContentIndex === 1
+                ? <Typography className="title" variant="h6">
+                    {`${t(`common:${selectedAuction.ads_type}`)} №: ${selectedAuction.id}`}
+                </Typography>
+                : (modalContentIndex !== 10 && modalContentIndex !== 11 && (
+                        <IconButton
+                            size="medium"
+                            aria-label="back"
+                            className='prev-btn'
+                            onClick={handlePrevMenu}
+                        >
+                            <ArrowBackIcon fontSize="inherit" />
+                        </IconButton>
+                    )
+                )
+            }
+            {getModalContent()}
+        </>
+    );
 
     const pagination = (
         <CustomPagination
@@ -506,6 +520,7 @@ export const MyAuctionsContainer: FC = () => {
                 fetchAuctionNotifications={fetchAuctionNotifications}
                 handleDetailedOpen={handleDetailedOpen}
                 handleSettingsOpen={handleSettingsOpen}
+                handleNotificationsOpen={handleNotificationsOpen}
             />
         </Box>
     ));
@@ -516,6 +531,7 @@ export const MyAuctionsContainer: FC = () => {
                 cardData={data}
                 handleDetailedOpen={handleDetailedOpen}
                 handleSettingsOpen={handleSettingsOpen}
+                handleNotificationsOpen={handleNotificationsOpen}
             />
         </Box>
     ));
@@ -601,19 +617,7 @@ export const MyAuctionsContainer: FC = () => {
             handleFetchByPage: null,
             component:
                 <MyAuctions
-                    t={t}
-                    phone={phone}
-                    openModal={settingsModalOpen}
-                    openDialog={openDialog}
-                    pagination={pagination}
                     auctionTabs={createdAuctionTabs}
-                    selectedAuction={selectedAuction}
-                    currentNotifications={notification.data}
-                    // ModalContent={ModalContent}
-                    handleClose={handleSettingsClose}
-                    handleDeleteNotification={handleDeleteNotification}
-                    fetchUserPhone={fetchUserPhone}
-                    closeDialog={handleCloseDialog}
                 />
         },
         {
@@ -624,13 +628,7 @@ export const MyAuctionsContainer: FC = () => {
             handleFetchByPage: null,
             component:
                 <MyAuctions
-                    t={t}
-                    openModal={settingsModalOpen}
-                    openDialog={openDialog}
                     auctionTabs={participatingAuctionTabs}
-                    closeDialog={handleCloseDialog}
-                    // ModalContent={ModalContent}
-                    handleClose={closeSettingsModal}
                 />
         }
     ];
@@ -654,6 +652,68 @@ export const MyAuctionsContainer: FC = () => {
                 handleDetailedClose={closeDetailedModal}
                 data={selectedAuction}
             />
+            <CabinetModal
+                openDialog={settingsModalOpen}
+                handleCloseDialog={closeSettingsModal}
+                maxWidth='xs'
+            >
+                <ModalContent />
+            </CabinetModal>
+            <CabinetModal openDialog={notificationsOpen} handleCloseDialog={closeNotificationsModal}>
+                <Box
+                    display='flex'
+                    alignItems='center'
+                    flexDirection='column'
+                >
+                    <Typography variant='subtitle1' gutterBottom>
+                        {t('common:notificationsStories')}
+                    </Typography>
+                    <Typography variant='caption'>
+                        {`${t(`common:${selectedAuction.ads_type}`)} №: ${selectedAuction.id}`}
+                    </Typography>
+                </Box>
+                <Box
+                    display='flex'
+                    flexDirection='row'
+                    justifyContent='space-between'
+                    alignItems='center'
+                >
+                    <Typography>
+                        {`${t('common:extremeRate')}: ${numberPrettier(selectedAuction?.auction?.bet?.bet) || 0} ${t('common:sum')}`}
+                    </Typography>
+                    <FormControlLabel
+                        control={
+                            <Switch
+                                // checked={state.checkedA}
+                                // onChange={handleChange}
+                                name="checkedA"
+                                color='primary'
+                            />
+                        }
+                        label={t('common:notifyMe')}
+                        labelPlacement="start"
+                    />
+                </Box>
+                {notification.data?.map(notification => (
+                    <Box
+                        key={notification.id}
+                        mb={1}
+                    >
+                        <Notification
+                            t={t}
+                            data={notification}
+                            handleDeleteNotification={handleDeleteNotification}
+                            fetchUserPhone={fetchUserPhone}
+                            phone={phone}
+                        />
+                    </Box>
+                ))}
+                {!!notification.data?.length && (
+                    <Box display='flex' justifyContent='center'>
+                        {pagination}
+                    </Box>
+                )}
+            </CabinetModal>
         </>
     )
 };

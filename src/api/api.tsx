@@ -12,7 +12,7 @@ const localServer = 'http://192.168.100.60/slondo/public/api/';
 
 const instance = Axios.create({
     withCredentials: true,
-    baseURL: localServer
+    baseURL: uztelecom
 });
 
 // export const socketIO = socketIOClient('http://192.168.100.60:8005');
@@ -204,8 +204,8 @@ export const userAPI = {
                 throw err;
             });
     },
-    getAuctionBets: (id: string, page: number, itemsPerPage: number): Promise<any> => {
-        return instance.get(`auction/allBets?auction_id=${id}&page=${page}&per_page=${itemsPerPage}`)
+    getAuctionBets: (id: number): Promise<any> => {
+        return instance.get(`auction/allBets?auction_id=${id}`)
             .then(res => res.data)
             .catch(err => {
                 throw err;

@@ -2,6 +2,9 @@ import {makeStyles} from '@material-ui/core/styles';
 
 export const useStyles = makeStyles((theme) => ({
     root: {
+        '& div.bets-table': {
+            marginBottom: 10
+        },
         display: 'flex',
         flexDirection: 'column',
         [theme.breakpoints.down('md')]: {
@@ -12,8 +15,6 @@ export const useStyles = makeStyles((theme) => ({
         },
         '& > h6.MuiTypography-subtitle1': {
             fontSize: '1.125rem',
-            padding: '10px 15px',
-            fontWeight: '600',
             '&:last-child': {
                 padding: '10px 15px 0',
                 '& h6.show-hide-all-bet': {

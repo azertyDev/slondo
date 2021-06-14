@@ -33,7 +33,7 @@ export const BetsListModal: FC<BetsListPropsType> = (props) => {
         modalOpen,
         handleModalClose
     } = props;
-    const {t} = useTranslation(['auction', 'main']);
+    const {t} = useTranslation('auction');
 
     const [page, setPage] = useState(0);
     const [rowsPerPage, setRowsPerPage] = useState(10);
@@ -72,7 +72,7 @@ export const BetsListModal: FC<BetsListPropsType> = (props) => {
                     textAlign='center'
                 >
                     <Typography variant='h6' gutterBottom>
-                        <strong>Ставки</strong>
+                        <strong>{t('allBets')}</strong>
                     </Typography>
                     <Typography variant='subtitle2'>
                         {`${t(`auc`)} №: ${auctionId}`}
@@ -82,11 +82,11 @@ export const BetsListModal: FC<BetsListPropsType> = (props) => {
                     <Table size='medium'>
                         <TableHead>
                             <TableRow>
-                                <TableCell align="center">Игрок</TableCell>
-                                <TableCell align="center">Дата</TableCell>
-                                <TableCell align="center">Время</TableCell>
-                                <TableCell align="center">Разница</TableCell>
-                                <TableCell align="center">Ставка</TableCell>
+                                <TableCell align="center">{t('player')}</TableCell>
+                                <TableCell align="center">{t('date')}</TableCell>
+                                <TableCell align="center">{t('time')}</TableCell>
+                                <TableCell align="center">{t('difference')}</TableCell>
+                                <TableCell align="center">{t('bet')}</TableCell>
                             </TableRow>
                         </TableHead>
                         <TableBody>
@@ -94,8 +94,8 @@ export const BetsListModal: FC<BetsListPropsType> = (props) => {
                                     ? bets.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                                     : bets
                             ).map((bet) => (
-                                <TableRow key={bet.name}>
-                                    <TableCell component="th" align="center">
+                                <TableRow key={bet.id}>
+                                    <TableCell component="td" align="center">
                                         <Typography variant="subtitle1" noWrap>
                                             {bet.user.name}
                                             {bet.number_of_bets && <span>({bet.number_of_bets})</span>}
@@ -145,6 +145,12 @@ export const BetsListModal: FC<BetsListPropsType> = (props) => {
                         <TableFooter>
                             <TableRow>
                                 <TablePagination
+                                    rowsPerPageOptions={[5, 10]}
+                                    labelRowsPerPage={
+                                        <Typography variant='subtitle1'>
+                                            {t('numberOfLines')}
+                                        </Typography>
+                                    }
                                     page={page}
                                     count={bets.length}
                                     rowsPerPage={rowsPerPage}

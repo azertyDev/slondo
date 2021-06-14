@@ -30,7 +30,7 @@ type DetailedPostViewPropsType = {
 
 export const DetailedPostView: FC<DetailedPostViewPropsType> = (props) => {
     const userInfo = useSelector((store: RootState) => store.user.info);
-    const {t} = useTranslation(['common', 'locations']);
+    const {t} = useTranslation(['auction', 'common', 'locations']);
     const {
         data,
         detailedModalOpen,
@@ -56,7 +56,8 @@ export const DetailedPostView: FC<DetailedPostViewPropsType> = (props) => {
                 >
                     <Typography variant='h6'>
                         <strong>
-                            {t(data.ads_type)} №: {data.id}
+                            {/*{t(`common:${data.ads_type}`)} №: {data.id}*/}
+                            {`${t(`common:${data.ads_type}`)} №: ${data.id}`}
                         </strong>
                     </Typography>
                 </Box>
@@ -163,14 +164,13 @@ export const DetailedPostView: FC<DetailedPostViewPropsType> = (props) => {
                         <ChevronRightIcon color='action' />
                     </CustomButton>
                 </Grid>
-                {data.ads_type === 'post' && (
+                {isAuction && (
                     <Grid item xs={12} md={6}>
-                        <Typography variant='subtitle2' gutterBottom>
-                            Крайние ставки
-                        </Typography>
-                        <Paper className={classes.paper}>
-
-                        </Paper>
+                        <BetsList
+                            title={t('auction:extremeRates')}
+                            auctionId={data.auction.id}
+                            showBetsCount={2}
+                        />
                     </Grid>
                 )}
                 <Grid item xs={12} md={6}>

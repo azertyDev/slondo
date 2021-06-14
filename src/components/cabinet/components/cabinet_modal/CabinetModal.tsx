@@ -36,7 +36,6 @@ export const CabinetModal: FC<CabinetModalPropsType> = (props) => {
                     <CloseIcon />
                 </IconButton>
                 {props.children}
-
             </Box>
         </ResponsiveModal>
     );
