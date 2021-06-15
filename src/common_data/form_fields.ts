@@ -74,6 +74,7 @@ export const fractionalFields = [
 ];
 
 export const optionFields = [
+    'function',
     'mount',
     'properties',
     'power_windows',

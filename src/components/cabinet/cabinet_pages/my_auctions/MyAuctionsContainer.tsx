@@ -648,14 +648,15 @@ export const MyAuctionsContainer: FC = () => {
                 headerTitle={t('myAuctions')}
             />
             <DetailedPostView
+                data={selectedAuction}
                 detailedModalOpen={detailedModalOpen}
                 handleDetailedClose={closeDetailedModal}
-                data={selectedAuction}
+                handleNotificationsOpen={handleNotificationsOpen}
             />
             <CabinetModal
-                openDialog={settingsModalOpen}
-                handleCloseDialog={closeSettingsModal}
                 maxWidth='xs'
+                openDialog={settingsModalOpen}
+                handleCloseDialog={handleSettingsClose}
             >
                 <ModalContent />
             </CabinetModal>

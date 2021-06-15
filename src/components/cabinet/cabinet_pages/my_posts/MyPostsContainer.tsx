@@ -586,6 +586,7 @@ const MyPostsContainer: FC = () => {
                 data={selectedPost}
                 detailedModalOpen={detailedModalOpen}
                 handleDetailedClose={closeDetailedModal}
+                handleNotificationsOpen={handleNotificationsOpen}
             />
             <CabinetModal openDialog={notificationsOpen} handleCloseDialog={closeNotificationsModal}>
                 <Box

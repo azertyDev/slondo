@@ -56,7 +56,7 @@ export const BetsList: FC<BetsListPropsType> = (props) => {
                     <TableBody>
                         {bets.map((bet, index) => (
                             (index + 1) <= showBetsCount && (
-                                <TableRow key={bet.name}>
+                                <TableRow key={index}>
                                     <TableCell component="td" align="left" padding='none'>
                                         <Typography variant="subtitle1" noWrap>
                                             {bet.user.name}

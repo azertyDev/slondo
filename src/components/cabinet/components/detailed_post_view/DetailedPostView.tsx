@@ -25,7 +25,8 @@ import {BetsList} from '@src/components/elements/bets_list/BetsList';
 type DetailedPostViewPropsType = {
     data: CardDataType,
     detailedModalOpen: boolean,
-    handleDetailedClose: () => void
+    handleDetailedClose: () => void,
+    handleNotificationsOpen: (id: number) => () => void
 }
 
 export const DetailedPostView: FC<DetailedPostViewPropsType> = (props) => {
@@ -34,7 +35,8 @@ export const DetailedPostView: FC<DetailedPostViewPropsType> = (props) => {
     const {
         data,
         detailedModalOpen,
-        handleDetailedClose
+        handleDetailedClose,
+        handleNotificationsOpen
     } = props;
 
     const isAuction = data.ads_type === 'auc' || data.ads_type === 'exauc';
@@ -123,7 +125,7 @@ export const DetailedPostView: FC<DetailedPostViewPropsType> = (props) => {
                 {/*)}*/}
                 <Grid item xs={12} md={6}>
                     <CustomButton
-                        className={classes.btn}
+                        className={`${classes.btn} advertise`}
                         disabled
                     >
                         <RocketIcon />
@@ -151,8 +153,9 @@ export const DetailedPostView: FC<DetailedPostViewPropsType> = (props) => {
                 </Grid>
                 <Grid item xs={12} md={6}>
                     <CustomButton
-                        className={classes.btn}
-                        disabled={!data.observer.number_of_notifications}
+                        className={`${classes.btn} notification`}
+                        // disabled={!data.observer.number_of_notifications}
+                        onClick={handleNotificationsOpen(data.id)}
                     >
                         <Typography
                             variant="subtitle1"

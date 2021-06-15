@@ -6,11 +6,16 @@ export const useStyles = makeStyles((theme) => ({
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
-        backgroundColor: '#FFF7E0',
         height: '100%',
         width: '100%',
         boxShadow: '0px 1px 2px rgba(0, 0, 0, 0.15)',
         borderRadius: 5,
+        '&.notification': {
+            backgroundColor: '#F9F9F9'
+        },
+        '&.advertise': {
+            backgroundColor: '#FFF7E0'
+        },
         '& .MuiTypography-subtitle1': {
             color: '#FFB800'
         },
