@@ -1,6 +1,5 @@
 import {FC, useEffect, useState} from 'react';
 import {TabsContent} from '@src/components/cabinet/cabinet_pages/TabsContent';
-import {MyPosts} from '@src/components/cabinet/cabinet_pages/my_posts/MyPosts';
 import {withAuthRedirect} from '@src/hocs/withAuthRedirect';
 import {userAPI} from '@src/api/api';
 import {setErrorMsgAction} from '@src/redux/slices/errorSlice';
@@ -8,12 +7,15 @@ import {useDispatch} from 'react-redux';
 import {
     Avatar,
     Box,
+    CircularProgress,
     FormControlLabel,
     IconButton,
     List,
     ListItem,
     ListItemText,
     Switch,
+    Tab,
+    Tabs,
     TextField,
     Typography
 } from '@material-ui/core';
@@ -31,6 +33,7 @@ import {DetailedPostView} from '@src/components/cabinet/components/detailed_post
 import {CabinetModal} from '@src/components/cabinet/components/cabinet_modal/CabinetModal';
 import {Notification} from '@src/components/cabinet/cabinet_pages/notifications/notification_card/Notification';
 import {CustomPagination} from '@src/components/elements/custom_pagination/CustomPagination';
+import {CustomTabPanel} from '@src/components/elements/custom_tab_panel/CustomTabPanel';
 
 const MyPostsContainer: FC = () => {
     const dispatch = useDispatch();
@@ -236,6 +239,8 @@ const MyPostsContainer: FC = () => {
     const [userPhone, setUserPhone] = useState('998');
     const [postData, setPostData] = useState(initialPostsState);
     const [securePosts, setSecurePosts] = useState(initialPostsState);
+    const [archiveSecurePostData, setArchiveSecurePostData] = useState(initialPostsState);
+    const [archivePostData, setArchivePostData] = useState(initialPostsState);
     const [notification, setNotification] = useState(initialNotificationState);
     const [tabIndex, setTabIndex] = useState(0);
     const [modalContentIndex, setModalContentIndex] = useState(1);
@@ -246,6 +251,8 @@ const MyPostsContainer: FC = () => {
     const [selectedPost, setSelectedPost] = useState(initialSelectedPost);
     const [page, setPage] = useState(1);
     const [pageCount, setPageCount] = useState(0);
+    const [childTabValue, setChildTabValue] = useState(0);
+
     const {modalOpen: settingsModalOpen, handleModalClose: closeSettingsModal, handleModalOpen: openSettingsModal} = useModal();
     const {modalOpen: notificationsOpen, handleModalClose: closeNotificationsModal, handleModalOpen: openNotificationsModal} = useModal();
     const {modalOpen: detailedModalOpen, handleModalClose: closeDetailedModal, handleModalOpen: openDetailedModal} = useModal();
@@ -264,6 +271,9 @@ const MyPostsContainer: FC = () => {
         postId && setPostId(postId);
         setSelectedPost(post);
         openDetailedModal();
+    };
+    const handleChildTabChange = (event, newValue) => {
+        setChildTabValue(newValue);
     };
     const handleNotificationsOpen = (postId: number) => () => {
         postId && setPostId(postId);
@@ -306,6 +316,21 @@ const MyPostsContainer: FC = () => {
                 setPostData({...postData, isFetch: true});
                 const {data, total} = await userAPI.getMyPosts({type: 'post', onlySecure});
                 setPostData({myPosts: {data, total}, isFetch: false});
+            }
+        } catch (e) {
+            dispatch(setErrorMsgAction(e.message));
+        }
+    };
+    const fetchArchivePosts = async (onlySecure) => {
+        try {
+            if (onlySecure) {
+                setArchiveSecurePostData({...archiveSecurePostData, isFetch: true});
+                const {data, total} = await userAPI.getUserArchivePosts({type: 'post', onlySecure});
+                setArchiveSecurePostData({myPosts: {data, total}, isFetch: false});
+            } else {
+                setArchivePostData({...archivePostData, isFetch: true});
+                const {data, total} = await userAPI.getUserArchivePosts({type: 'post', onlySecure});
+                setArchivePostData({myPosts: {data, total}, isFetch: false});
             }
         } catch (e) {
             dispatch(setErrorMsgAction(e.message));
@@ -502,6 +527,8 @@ const MyPostsContainer: FC = () => {
     useEffect(() => {
         fetchPostData(0);
         fetchPostData(1);
+        fetchArchivePosts(0);
+        fetchArchivePosts(1);
     }, []);
 
     const myPostCards = postData.myPosts.data.map((data) => (
@@ -528,6 +555,105 @@ const MyPostsContainer: FC = () => {
         </Box>
     ));
 
+    const archivePostCards = archivePostData.myPosts.data.map((data) => (
+        <Box mb={3} key={data.id}>
+            <CabinetCard
+                cardData={data}
+                handleSettingsOpen={handleSettingsOpen}
+                handleDetailedOpen={handleDetailedOpen}
+                handleNotificationsOpen={handleNotificationsOpen}
+                fetchAuctionNotifications={fetchNotifications}
+            />
+        </Box>
+    ));
+
+    const archiveSecurePostCards = archiveSecurePostData.myPosts.data.map((data) => (
+        <Box mb={3} key={data.id}>
+            <CabinetCard
+                cardData={data}
+                handleSettingsOpen={handleSettingsOpen}
+                handleDetailedOpen={handleDetailedOpen}
+                handleNotificationsOpen={handleNotificationsOpen}
+                fetchAuctionNotifications={fetchNotifications}
+            />
+        </Box>
+    ));
+
+    const postTabs = (
+        <>
+            <Tabs
+                value={childTabValue}
+                onChange={handleChildTabChange}
+                aria-label="tabs"
+                className={classes.childTabs}
+                TabIndicatorProps={{
+                    style: {
+                        display: 'none'
+                    }
+                }}
+            >
+                <Tab
+                    label={
+                        <Typography variant="subtitle1">
+                            Активные
+                        </Typography>
+                    }
+                />
+                <Tab
+                    label={
+                        <Typography variant="subtitle1">
+                            Архивные
+                        </Typography>
+                    }
+                />
+            </Tabs>
+            <CustomTabPanel value={childTabValue} index={0}>
+                {postData.isFetch ? <CircularProgress color="primary" /> : myPostCards}
+            </CustomTabPanel>
+            <CustomTabPanel value={childTabValue} index={1}>
+                {archivePostData.isFetch ? <CircularProgress color="primary" /> : archivePostCards}
+            </CustomTabPanel>
+        </>
+    );
+
+    const securePostTabs = (
+        <>
+            <Tabs
+                value={childTabValue}
+                onChange={handleChildTabChange}
+                aria-label="tabs"
+                className={classes.childTabs}
+                TabIndicatorProps={{
+                    style: {
+                        display: 'none'
+                    }
+                }}
+            >
+                <Tab
+                    label={
+                        <Typography variant="subtitle1">
+                            Активные
+                        </Typography>
+                    }
+                />
+                <Tab
+                    label={
+                        <Typography variant="subtitle1">
+                            Архивные
+                        </Typography>
+                    }
+                />
+            </Tabs>
+            <CustomTabPanel value={childTabValue} index={0}>
+                {securePosts.isFetch ? <CircularProgress color="primary" /> : securePostCards}
+            </CustomTabPanel>
+            <CustomTabPanel value={childTabValue} index={1}>
+                {archiveSecurePostData.isFetch ? <CircularProgress color="primary" /> : archiveSecurePostCards}
+            </CustomTabPanel>
+        </>
+    );
+
+
     const pagination = (
         <CustomPagination
             currentPage={page}
@@ -544,11 +670,11 @@ const MyPostsContainer: FC = () => {
             total: postData.myPosts.total,
             itemsPerPage: ITEMS_PER_PAGE,
             handleFetchByPage: null,
-            component:
-                <MyPosts
-                    isFetch={postData.isFetch}
-                    myPostCards={myPostCards}
-                />
+            component: postTabs
+            // <MyPosts
+            //     isFetch={postData.isFetch}
+            //     myPostCards={myPostCards}
+            // />
         },
         {
             id: 1,
@@ -556,11 +682,11 @@ const MyPostsContainer: FC = () => {
             total: securePosts.myPosts.total,
             itemsPerPage: ITEMS_PER_PAGE,
             handleFetchByPage: null,
-            component:
-                <MyPosts
-                    isFetch={securePosts.isFetch}
-                    myPostCards={securePostCards}
-                />
+            component: securePostTabs
+            // <MyPosts
+            //     isFetch={securePosts.isFetch}
+            //     myPostCards={securePostCards}
+            // />
         }
     ];
 

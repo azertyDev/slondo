@@ -12,7 +12,7 @@ const localServer = 'http://192.168.100.60/slondo/public/api/';
 
 const instance = Axios.create({
     withCredentials: true,
-    baseURL: uztelecom
+    baseURL: localServer
 });
 
 // export const socketIO = socketIOClient('http://192.168.100.60:8005');
@@ -239,9 +239,9 @@ export const userAPI = {
                 throw err;
             });
     },
-    getUserArchivePosts: ({type = 'post'}: { type?: string }): Promise<any> => {
+    getUserArchivePosts: ({type = 'post', onlySecure}: { type?: string, onlySecure: number }): Promise<any> => {
         return instance.get(
-            `regular/user/archivePosts?itemsPerPage=25&page=1&type=${type}`,
+            `regular/user/archivePosts?itemsPerPage=25&page=1&type=${type}&secure=${onlySecure}`,
             setTokenToHeader()
         )
             .then(res => res.data)
