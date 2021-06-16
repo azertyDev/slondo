@@ -177,10 +177,10 @@ export const userAPI = {
                 throw err;
             });
     },
-    getPostById: (post_id: string): Promise<any> => {
+    getPostById: (params): Promise<any> => {
         return instance.get(
-            `getPostById?id=${post_id}`,
-            setTokenToHeader()
+            `getPostById`,
+            {...setTokenToHeader(), params}
         )
             .then((res) => res.data)
             .catch((err) => {
@@ -434,7 +434,7 @@ export const userAPI = {
                 throw err;
             });
     },
-    setReplyComment: (comment_id: number, comment: string): Promise<{message: string}> => {
+    setReplyComment: (comment_id: number, comment: string): Promise<{ message: string }> => {
         return instance.post('regular/user/comment', {
             comment_id,
             comment

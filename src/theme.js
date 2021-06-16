@@ -95,6 +95,12 @@ const theme = createMuiTheme({
         MuiCssBaseline: {
             '@global': {
                 '@font-face': [calibri],
+                '*::-webkit-scrollbar': {
+                    width: '6px'
+                },
+                '*::-webkit-scrollbar-thumb': {
+                    backgroundColor: 'rgba(0,0,0,.1)',
+                },
                 ':focus': {
                     outline: 0
                 },
@@ -120,7 +126,7 @@ const theme = createMuiTheme({
                     }
                 },
                 input: {
-                    WebkitBoxShadow: "0 0 0 1000px white inset"
+                    WebkitBoxShadow: '0 0 0 1000px white inset'
                 }
             }
         },

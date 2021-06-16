@@ -1,11 +1,11 @@
-import React, {Dispatch, FC, SetStateAction} from 'react';
+import {Dispatch, FC, SetStateAction} from 'react';
 import {WithT} from 'i18next';
 import {Form, FormikProvider, useFormik} from 'formik';
 import {FormikField} from '@src/components/elements/formik_field/FormikField';
 import {phoneSchema} from '@root/validation_schemas/authRegSchema';
 import {CustomButton} from '@src/components/elements/custom_button/CustomButton';
-import {userAPI} from '@src/api/api';
 import {getErrorMsg, phonePrepare} from '@src/helpers';
+import {userAPI} from '@src/api/api';
 
 
 type ConfirmAuthPropsType = {
@@ -52,7 +52,7 @@ export const PhoneForm: FC<ConfirmAuthPropsType> = (props) => {
         const phone = phonePrepare(values.phone);
         try {
             await setValues({...values, isFetch: true});
-            // await userAPI.getSmsCode(phone);
+            await userAPI.getSmsCode(phone);
             await setValues({...values, isFetch: false});
             setPhone(phone);
             activateTimer();

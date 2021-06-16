@@ -4,15 +4,13 @@ import {useRouter} from 'next/router';
 import {useTranslation} from 'next-i18next';
 import {userAPI} from '@src/api/api';
 import {setErrorMsgAction} from '@src/redux/slices/errorSlice';
-import {useDispatch, useSelector} from 'react-redux';
+import {useDispatch} from 'react-redux';
 import {Container, Grid, Hidden, useMediaQuery, useTheme} from '@material-ui/core';
 import {PostContent} from '@src/components/post/show_post/post_content/PostContent';
 import {Banner} from '@src/components/elements/banner/Banner';
 import {Header} from '@src/components/header/Header';
-import {Footer} from '@src/components/footer/Footer';
 import {ErrorModal} from '@src/components/error_modal/ErrorModal';
 import {OwnerAuctionInfo} from '@src/components/post/show_post/owner_auction_info/OwnerAuctionInfo';
-import {RootState} from '@src/redux/rootReducer';
 import {useStyles} from './useStyles';
 
 
@@ -20,9 +18,9 @@ export const ShowPostContainer: FC = () => {
     const dispatch = useDispatch();
     const {t} = useTranslation('post');
 
-    const url = useRouter().query.url as string;
-    const [postId] = url.split('-').splice(-1);
-    const {isAuth} = useSelector((store: RootState) => store.user);
+    const {url, archive} = useRouter().query;
+    const postUrl = url as string;
+    const [postId] = postUrl.split('-').splice(-1);
 
     const initValues = {id: null, name: ''};
     const initialPostData = {
@@ -111,7 +109,7 @@ export const ShowPostContainer: FC = () => {
                 district,
                 available_days,
                 ...otherData
-            } = await userAPI.getPostById(postId);
+            } = await userAPI.getPostById({id: postId, archive: archive ?? 0});
 
             if (available_days) {
                 otherData.available_days = available_days.map(day => {
@@ -144,7 +142,7 @@ export const ShowPostContainer: FC = () => {
 
     useEffect(() => {
         fetchPostData();
-    }, [isAuth]);
+    }, []);
 
     const classes = useStyles();
     return (

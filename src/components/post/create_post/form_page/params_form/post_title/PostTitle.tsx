@@ -44,7 +44,6 @@ export const PostTitle: FC<PostTitlePropsType> = (props) => {
              </Typography>
              : <FormikField
                  t={t}
-                 size='small'
                  name='title'
                  labelText='title'
                  limit={50}

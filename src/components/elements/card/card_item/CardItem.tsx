@@ -9,11 +9,11 @@ import {numberPrettier, transformCyrillic} from '@src/helpers';
 import {userAPI} from '@src/api/api';
 import {useDispatch, useSelector} from 'react-redux';
 import {RootState} from '@src/redux/rootReducer';
-import {useStyles} from './useStyles';
 import {setErrorMsgAction} from '@src/redux/slices/errorSlice';
 import {months} from '@src/common_data/common';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
+import {useStyles} from './useStyles';
 
 type CardItemProps = {
     isFetch: boolean;
@@ -41,7 +41,7 @@ export const CardItem: FC<CardItemProps> = (props) => {
 
     const isFavorite = true;
 
-    const {t} = useTranslation(['common']);
+    const {t} = useTranslation('common');
     const translatedTitle = transformCyrillic(title);
 
     const {isAuth} = useSelector((store: RootState) => store.user);

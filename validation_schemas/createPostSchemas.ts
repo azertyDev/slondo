@@ -1,5 +1,5 @@
 import {object, string, array, lazy} from 'yup';
-import {fieldIsRequired} from '@src/common_data/form_fields';
+import {fieldIsRequired} from '@src/common_data/fields_keys';
 import {isRequired} from '@root/src/helpers';
 
 export const paramsFormSchema = lazy(
@@ -23,6 +23,29 @@ export const paramsFormSchema = lazy(
                                 '',
                                 'value not must be less than 0.8',
                                 value => +value >= 0.8
+                            );
+                    } else {
+                        acc[key] = string().required(fieldIsRequired);
+                    }
+                }
+                return acc;
+            }, {})
+    })
+);
+
+export const transportParamsSchema = lazy(
+    (value) => object({
+        title: string().required(fieldIsRequired),
+        ...Object.entries(value)
+            .reduce((acc, [key]) => {
+                if (isRequired(key)) {
+                    if (typeof value[key] === 'object') {
+                        acc[key] = object<{ id: number }>()
+                            .nullable()
+                            .test(
+                                '',
+                                fieldIsRequired,
+                                value => !!value && !!value.id
                             );
                     } else {
                         acc[key] = string().required(fieldIsRequired);

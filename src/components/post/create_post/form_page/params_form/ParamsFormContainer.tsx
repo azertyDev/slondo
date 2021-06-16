@@ -1,20 +1,20 @@
 import {FC} from 'react';
 import {WithT} from 'i18next';
-import {ApartmentsParams} from '@src/components/post/create_post/form_page/params_form/params_forms/apartments_params/ApartmentsParams';
-import {HousesCottagesParams} from '@src/components/post/create_post/form_page/params_form/params_forms/houses_cotteges_params/HousesCottagesParams';
-import {LandParams} from '@src/components/post/create_post/form_page/params_form/params_forms/land_params/LandParams';
-import {ParkingLotsBoxes} from '@src/components/post/create_post/form_page/params_form/params_forms/parking_lots_boxes_params/ParkingLotsBoxes';
-import {CommercialPropertyParams} from '@src/components/post/create_post/form_page/params_form/params_forms/commercial_property_params/CommercialPropertyParams';
-import {RegularParams} from '@src/components/post/create_post/form_page/params_form/params_forms/regular_params/RegularParams';
-import {CarParams} from '@src/components/post/create_post/form_page/params_form/params_forms/car_params/CarParams';
+import {useTranslation} from 'next-i18next';
+import {RegularParams} from '@src/components/post/create_post/form_page/params_form/categories_forms/regular_params/RegularParams';
+import {CarParams} from '@src/components/post/create_post/form_page/params_form/categories_forms/car_params/CarParams';
 import {prepareParamsData} from '@src/helpers';
+import {EstateParams} from '@src/components/post/create_post/form_page/params_form/categories_forms/estate_params/EstateParams';
+import {TransportParams} from '@src/components/post/create_post/form_page/params_form/categories_forms/transport_params/TransportParams';
+import {JobParams} from '@src/components/post/create_post/form_page/params_form/categories_forms/job_params/JobParams';
 import {useStyles} from './useStyles';
 
 
 export type CommonParamsPropsType = {
     type?,
-    filters,
+    subcategoryName?: string,
     isPreview?: boolean,
+    filters,
     onSubmit: (v) => void,
     currentFormIndex: number,
     handleFormOpen: (k) => () => void
@@ -22,27 +22,30 @@ export type CommonParamsPropsType = {
 
 type ParamsFormPropsType = {
     type,
+    category,
+    subcategory,
     filters,
     isPreview?: boolean,
     currentFormIndex: number,
-    subcategory,
     handleFormOpen: (k) => () => void,
     handleSubmit: (v) => void,
     handleNextFormOpen?: () => void
-} & WithT;
+};
 
 export const ParamsFormContainer: FC<ParamsFormPropsType> = (props) => {
     const {
-        t,
         isPreview,
         filters,
         handleSubmit,
         type,
+        category,
         subcategory,
         currentFormIndex,
         handleFormOpen,
         handleNextFormOpen
     } = props;
+
+    const {t} = useTranslation('post');
 
     const onSubmit = (values) => {
         const params = prepareParamsData({...values});
@@ -51,66 +54,47 @@ export const ParamsFormContainer: FC<ParamsFormPropsType> = (props) => {
     };
 
     const getParamsForm = () => {
-        switch (subcategory.name) {
-            case 'foreignCars':
-            case 'madeInUzb':
+        switch (category.name) {
+            case 'car':
                 return <CarParams
                     t={t}
                     filters={filters}
                     onSubmit={onSubmit}
                     isPreview={isPreview}
                     handleFormOpen={handleFormOpen}
-                    currentFormIndex={currentFormIndex}
                     subcategoryName={subcategory.name}
+                    currentFormIndex={currentFormIndex}
                 />;
-            case 'apartments':
-                return <ApartmentsParams
+            case 'transport':
+                return <TransportParams
                     t={t}
-                    type={type}
                     filters={filters}
                     onSubmit={onSubmit}
+                    type={type}
+                    subcategoryName={subcategory.name}
                     isPreview={isPreview}
                     handleFormOpen={handleFormOpen}
                     currentFormIndex={currentFormIndex}
                 />;
-            case 'housesCottages':
-                return <HousesCottagesParams
+            case 'estate':
+                return <EstateParams
                     t={t}
                     type={type}
-                    filters={filters}
                     onSubmit={onSubmit}
+                    filters={filters}
                     isPreview={isPreview}
                     handleFormOpen={handleFormOpen}
+                    subcategoryName={subcategory.name}
                     currentFormIndex={currentFormIndex}
                 />;
-            case 'land':
-                return <LandParams
+            case 'job':
+                return <JobParams
                     t={t}
-                    type={type}
-                    filters={filters}
                     onSubmit={onSubmit}
+                    filters={filters}
                     isPreview={isPreview}
                     handleFormOpen={handleFormOpen}
-                    currentFormIndex={currentFormIndex}
-                />;
-            case 'parkingLotsAndBoxes':
-                return <ParkingLotsBoxes
-                    t={t}
-                    type={type}
-                    filters={filters}
-                    onSubmit={onSubmit}
-                    isPreview={isPreview}
-                    handleFormOpen={handleFormOpen}
-                    currentFormIndex={currentFormIndex}
-                />;
-            case 'commercialProperty':
-                return <CommercialPropertyParams
-                    t={t}
-                    type={type}
-                    filters={filters}
-                    onSubmit={onSubmit}
-                    isPreview={isPreview}
-                    handleFormOpen={handleFormOpen}
+                    subcategoryName={subcategory.name}
                     currentFormIndex={currentFormIndex}
                 />;
             default:
@@ -120,6 +104,7 @@ export const ParamsFormContainer: FC<ParamsFormPropsType> = (props) => {
                     onSubmit={onSubmit}
                     isPreview={isPreview}
                     handleFormOpen={handleFormOpen}
+                    subcategoryName={subcategory.name}
                     currentFormIndex={currentFormIndex}
                 />;
         }

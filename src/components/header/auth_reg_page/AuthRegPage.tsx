@@ -26,7 +26,7 @@ export const AuthRegPage: FC<AuthRegPageType> = (props) => {
         handleModalClose
     } = props;
 
-    const initSeconds = 60;
+    const initSeconds = 120;
     const dispatch = useDispatch();
 
     const {t} = useTranslation('auth_reg');
@@ -69,6 +69,8 @@ export const AuthRegPage: FC<AuthRegPageType> = (props) => {
                 setTimeout(() => {
                     setTimer(timer - 1);
                 }, 1000);
+            } else {
+                setActiveTimer(false);
             }
         } else {
             setTimer(initSeconds);

@@ -1,5 +1,4 @@
 import {Dispatch, FC, SetStateAction} from 'react';
-import {WithT} from 'i18next';
 import {useSelector} from 'react-redux';
 import {Grid} from '@material-ui/core';
 import {AuctionParams} from './auction_params/AuctionParams';
@@ -9,7 +8,7 @@ import {AvailableDays} from './available_days/AvailableDays';
 import {numberRegEx, timeRegEx} from '@src/common_data/reg_exs';
 import {useFormik} from 'formik';
 import {CustomAccordion} from '@src/components/elements/accordion/CustomAccordion';
-import {numericFields} from '@src/common_data/form_fields';
+import {numericFields} from '@src/common_data/fields_keys';
 import {auctionParamsSchema, defaultParamsSchema} from '@root/validation_schemas/createPostSchemas';
 import {clearWhiteSpaces, getErrorMsg, numberPrettier, phonePrepare} from '@src/helpers';
 import {RootState} from '@src/redux/rootReducer';
@@ -23,6 +22,7 @@ import {FormikField} from '@src/components/elements/formik_field/FormikField';
 import {CustomFormikProvider} from '@src/components/elements/custom_formik_provider/CustomFormikProvider';
 import {FormikTextarea} from '@src/components/elements/formik_textarea/FormikTextarea';
 import {useStyles} from './useStyles';
+import {useTranslation} from 'next-i18next';
 
 
 type DefaultParamsPropsType = {
@@ -34,11 +34,10 @@ type DefaultParamsPropsType = {
     setIsPreview: Dispatch<SetStateAction<boolean>>,
     handleSubmit: (v) => void,
     ownerPhone: string
-} & WithT;
+};
 
 export const CommonForm: FC<DefaultParamsPropsType> = (props) => {
     const {
-        t,
         isPreview,
         setIsPreview,
         currentFormIndex,
@@ -48,9 +47,12 @@ export const CommonForm: FC<DefaultParamsPropsType> = (props) => {
         ownerPhone
     } = props;
 
+    const {t} = useTranslation('post');
+
     const formIndex = 1;
     const isAdvanceAuction = postType.name === 'exauc';
     const isAuction = postType.name === 'auc' || isAdvanceAuction;
+    const priceLabel = categoryName === 'job' ? 'salary' : 'price';
 
     const descTxtLimit = 3000;
     const {locations} = useSelector((store: RootState) => store);
@@ -292,9 +294,10 @@ export const CommonForm: FC<DefaultParamsPropsType> = (props) => {
                      ? <CommonFormPreview
                          t={t}
                          values={values}
-                         isAuction={isAuction}
                          ownerPhone={ownerPhone}
                          location={location}
+                         priceLabel={priceLabel}
+                         isAuction={isAuction}
                          isAdvanceAuction={isAdvanceAuction}
                      />
                      : <div>
@@ -313,12 +316,12 @@ export const CommonForm: FC<DefaultParamsPropsType> = (props) => {
                                   handleCheckboxChange={handleCheckboxChange}
                               />
                           </div>
-                          : <Grid container spacing={1} alignItems='center'>
+                          : <Grid container spacing={1}>
                               <Grid item xs={3}>
                                   <FormikField
                                       t={t}
                                       name='price'
-                                      labelText='price'
+                                      labelText={priceLabel}
                                       value={values.price}
                                       onChange={handleInput}
                                       errorMsg={getErrorMsg(errors.price, touched.price, t)}
@@ -326,7 +329,6 @@ export const CommonForm: FC<DefaultParamsPropsType> = (props) => {
                               </Grid>
                               <Grid item xs={1}>
                                   <DropDownSelect
-                                      t={t}
                                       name='currency'
                                       values={values}
                                       onBlur={handleBlur}

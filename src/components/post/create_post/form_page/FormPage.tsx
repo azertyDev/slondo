@@ -57,11 +57,9 @@ export const FormPage: FC = () => {
         ads_type_id: postType.id,
         category_id: category.id,
         sub_category_id: subcategory?.id,
-        params: {
-            title: ''
-        },
+        params: {title: ''},
         appearance: {
-            color: null,
+            color_id: null,
             photos: []
         },
         commonParams: {}
@@ -73,7 +71,7 @@ export const FormPage: FC = () => {
     const [post, setPost] = useState(initPost);
     const [currentFormIndex, setCurrentFormIndex] = useState(3);
     const [filters, setFilters] = useState<any>({});
-    const {colors, ...filtersData} = filters;
+    const {colors, color, ...filtersData} = filters;
 
     const handleNextFormOpen = () => {
         setCurrentFormIndex(currentFormIndex - 1);
@@ -135,7 +133,7 @@ export const FormPage: FC = () => {
             } = post;
 
             const {title, ...otherParams} = params;
-            const {photos, color} = appearance;
+            const {photos, color_id} = appearance;
 
             const data = {
                 title,
@@ -148,7 +146,7 @@ export const FormPage: FC = () => {
             };
 
             if (type) data[categoryName].type_id = type.id;
-            if (color) data[categoryName].color_id = color.id;
+            if (color_id) data[categoryName].color_id = color_id;
 
             setIsFetch(true);
 
@@ -188,10 +186,10 @@ export const FormPage: FC = () => {
                  />
                  <div className={classes.root}>
                      <ParamsFormContainer
-                         t={t}
                          type={type}
                          filters={filtersData}
                          isPreview={isPreview}
+                         category={category}
                          subcategory={subcategory}
                          currentFormIndex={currentFormIndex}
                          handleSubmit={handleSubmit}
@@ -200,8 +198,7 @@ export const FormPage: FC = () => {
                      />
                      <div>
                          <AppearanceForm
-                             t={t}
-                             colors={colors}
+                             colors={colors || color}
                              isPreview={isPreview}
                              currentFormIndex={currentFormIndex}
                              handleSubmit={handleSubmit}
@@ -211,7 +208,6 @@ export const FormPage: FC = () => {
                      </div>
                      <div>
                          <CommonForm
-                             t={t}
                              ownerPhone={phone}
                              asPath={asPath}
                              postType={postType}

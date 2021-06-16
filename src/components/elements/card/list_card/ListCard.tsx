@@ -9,10 +9,11 @@ import {CardDataType} from '@root/interfaces/CardData';
 import {useStyles} from './useStyles';
 
 type ListCardPropsType = {
+    archive?: boolean,
     cardData: CardDataType
 }
 
-export const ListCard: FC<ListCardPropsType> = ({cardData}) => {
+export const ListCard: FC<ListCardPropsType> = ({cardData, archive}) => {
     const {t} = useTranslation('common');
 
     const timer = ({days, hours, minutes, seconds, completed}) => (
@@ -35,6 +36,10 @@ export const ListCard: FC<ListCardPropsType> = ({cardData}) => {
 
     const translatedTitle = transformCyrillic(cardData.title);
 
+    let url = `/obyavlenie/${translatedTitle}-${cardData.id}`;
+
+    if (archive) url = `${url}?archive=1`;
+
     const classes = useStyles();
     return (
         <Paper variant="outlined" elevation={2} className={classes.root}>
@@ -43,8 +48,8 @@ export const ListCard: FC<ListCardPropsType> = ({cardData}) => {
                     <img src={cardData.image} alt={cardData.title}/>
                     <Typography
                         noWrap
-                        variant="caption"
                         color="initial"
+                        variant="caption"
                         className={cardData.ads_type}
                     >
                         {t(`common:${cardData.ads_type}`)}
@@ -62,7 +67,7 @@ export const ListCard: FC<ListCardPropsType> = ({cardData}) => {
                 </div>
                 <div className="content">
                     <div className="post-title">
-                        <Link href={`/obyavlenie/${translatedTitle}-${cardData.id}`}>
+                        <Link href={url}>
                             <a target='_blank'>
                                 <Typography
                                     noWrap

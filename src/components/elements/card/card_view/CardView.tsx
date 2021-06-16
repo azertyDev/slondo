@@ -1,19 +1,39 @@
-import {CardDataType} from '@root/interfaces/CardData';
 import {FC} from 'react';
-import {GridMode} from './grid_mode/GridMode';
-import {ListMode} from './list_mode/ListMode';
+import {Box, Grid} from '@material-ui/core';
+import {CardDataType} from '@root/interfaces/CardData';
+import {ListCard} from '@src/components/elements/card/list_card/ListCard';
+import {CardItem} from '@src/components/elements/card/card_item/CardItem';
 
 export type ViewPropsType = {
-    isFetch?: boolean;
-    listMode?: boolean;
-    data?: CardDataType[];
+    isFetch?: boolean,
+    listMode?: boolean,
+    archive?: boolean,
+    data?: CardDataType[],
     handleModalOpen?: (value?, id?) => void
 };
 
 export const CardView: FC<ViewPropsType> = (props) => {
-    const {listMode = false, data, isFetch} = props;
+    const {listMode, archive, data, isFetch} = props;
 
-    return listMode
-           ? <ListMode data={data} isFetch={isFetch}/>
-           : <GridMode data={data} isFetch={isFetch}/>;
+    return (
+        listMode
+        ? <div>
+            {data.map(cardData =>
+                <Box mb={2} key={cardData.id}>
+                    <ListCard archive={archive} cardData={cardData}/>
+                </Box>
+            )}
+        </div>
+        : <Grid container spacing={2}>
+            {data.map((cardData) => (
+                <Grid key={cardData.id} xs={6} sm={6} md={4} lg={3} item>
+                    <CardItem
+                        {...cardData}
+                        isFetch={isFetch}
+                    />
+                </Grid>
+            ))}
+        </Grid>
+    );
+
 };

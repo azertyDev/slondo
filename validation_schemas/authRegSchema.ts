@@ -1,5 +1,5 @@
 import {string, object, ref} from 'yup';
-import {fieldIsRequired} from '@src/common_data/form_fields';
+import {fieldIsRequired} from '@src/common_data/fields_keys';
 
 const wrongNumberFormat = 'wrongNumberFormat';
 const passwordMin = 'passwordMustMinEightChars';
