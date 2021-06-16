@@ -1,5 +1,4 @@
 import {FC, useEffect} from 'react';
-import {WithT} from 'i18next';
 import {useFormik} from 'formik';
 import {Typography} from '@material-ui/core';
 import {PreviewPhotos} from './preview_photos/PreviewPhotos';
@@ -8,6 +7,7 @@ import {IdNameType} from '@root/interfaces/Post';
 import {ViewIcon} from '@src/components/elements/icons';
 import {appearanceSchema} from '@root/validation_schemas/createPostSchemas';
 import {CustomFormikProvider} from '@src/components/elements/custom_formik_provider/CustomFormikProvider';
+import {useTranslation} from 'react-i18next';
 import {useStyles} from './useStyles';
 
 
@@ -18,11 +18,10 @@ type AppearanceFormPropsType = {
     currentFormIndex: number,
     handleFormOpen: (i) => () => void,
     handleNextFormOpen: () => void
-} & WithT;
+};
 
 export const AppearanceForm: FC<AppearanceFormPropsType> = (props) => {
     const {
-        t,
         currentFormIndex,
         colors,
         handleSubmit,
@@ -32,6 +31,8 @@ export const AppearanceForm: FC<AppearanceFormPropsType> = (props) => {
     } = props;
 
     const formIndex = 2;
+
+    const {t} = useTranslation('filters');
 
     const onSubmit = ({files, color}) => {
         const appearance: { photos: any, color_id?: number } = {
@@ -91,7 +92,7 @@ export const AppearanceForm: FC<AppearanceFormPropsType> = (props) => {
                 open={currentFormIndex === formIndex}
                 isEditable={currentFormIndex < formIndex}
                 handleEdit={handleFormOpen(formIndex)}
-                title={t('appearance')}
+                title={t('post:appearance')}
                 submitTxt='priceDescContacts'
             >
                 <div className={classes.root}>
@@ -101,7 +102,7 @@ export const AppearanceForm: FC<AppearanceFormPropsType> = (props) => {
                              <div className='color-preview'>
                                  <Typography variant="subtitle1">
                                      <strong>
-                                         {t('colors')}:
+                                         {t('color')}:
                                      </strong>
                                  </Typography>
                                  <div
@@ -112,7 +113,7 @@ export const AppearanceForm: FC<AppearanceFormPropsType> = (props) => {
                          <div className='photos-preview'>
                              <Typography variant="subtitle1">
                                  <strong>
-                                     {t('photos')}:
+                                     {t('post:photos')}:
                                  </strong>
                              </Typography>
                              {files.map((photo, i) =>
@@ -129,7 +130,7 @@ export const AppearanceForm: FC<AppearanceFormPropsType> = (props) => {
                              <>
                                  <Typography variant="subtitle1">
                                      <strong>
-                                         {t('colors')}
+                                         {t('color')}
                                          {<span className='error-text'>*&nbsp;</span>}
                                      </strong>
                                      {
@@ -159,7 +160,7 @@ export const AppearanceForm: FC<AppearanceFormPropsType> = (props) => {
                          <div className='photos-wrapper'>
                              <Typography variant="subtitle1">
                                  <strong>
-                                     {t('photos')}
+                                     {t('post:photos')}
                                      {<span className='error-text'>*</span>}
                                  </strong>
                                  {errors.files && touched.files && (

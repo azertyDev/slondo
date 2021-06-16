@@ -1,4 +1,4 @@
-import React, {Dispatch} from "react"
+import {Dispatch} from "react"
 import Link from 'next/link'
 import Drawer from '@material-ui/core/Drawer'
 import {Typography} from "@material-ui/core"

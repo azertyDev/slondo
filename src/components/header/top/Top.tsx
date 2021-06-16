@@ -8,7 +8,12 @@ import {
     Typography,
     AppBar,
     Toolbar,
-    IconButton, Box, useMediaQuery, useTheme, Slide, useScrollTrigger
+    IconButton,
+    Box,
+    useMediaQuery,
+    useTheme,
+    Slide,
+    useScrollTrigger
 } from '@material-ui/core';
 import {LeftDrawer} from './drawer/Drawer';
 import {Localization} from './localization/Localization';

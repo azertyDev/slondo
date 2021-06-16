@@ -1,50 +1,61 @@
 import {FC, useState} from 'react';
 import Link from 'next/link';
 import Drawer from '@material-ui/core/Drawer';
-import {InputAdornment, List, ListItem, TextField, Typography} from '@material-ui/core';
-import {siteCategories} from '@src/common_data/siteCategories';
+import {List, ListItem, Typography} from '@material-ui/core';
+import {site_categories} from '@src/common_data/site_categories';
 import {useTranslation} from 'next-i18next';
-import {Search_icon} from '@src/components/elements/icons';
 import {transformCyrillic} from '@src/helpers';
+import {CloseBtn} from '@src/components/elements/close_button/CloseBtn';
 import {useStyles} from './useStyles';
 
 
-export const CustomDrawer: FC<any> = ({toggleDrawer, position}) => {
+type CustomDrawerPropsType = {
+    position: 'top' | 'right' | 'bottom' | 'left',
+    open: boolean,
+    onClose: () => void
+};
+
+export const CustomDrawer: FC<CustomDrawerPropsType> = (props) => {
+    const {
+        open,
+        onClose,
+        position
+    } = props;
+
     const {t} = useTranslation('categories');
 
-    const initHoverCtgr = {
-        subCategory: []
+    const initHoveredCtgr = {
+        subcategory: []
     };
-    const [hoverCtgr, setHoverCategory] = useState<any>(initHoverCtgr);
+
+    const [hoveredCtgr, setHoveredCtgr] = useState<any>(initHoveredCtgr);
+    const {subcategory} = hoveredCtgr;
 
     const handleCategory = (ctgr) => () => {
-        setHoverCategory(ctgr ?? initHoverCtgr);
+        setHoveredCtgr(ctgr ?? initHoveredCtgr);
     };
 
-    const list = () => (
-        <div
-            className={classes.drawerList}
-            role="presentation"
+    const handleClose = () => {
+        onClose();
+        setHoveredCtgr(initHoveredCtgr);
+    };
+
+    const classes = useStyles();
+    return (
+        <Drawer
+            open={open}
+            onClose={handleClose}
+            anchor={position}
+            classes={{paper: classes.drawerPaper}}
         >
-            <TextField
-                className={classes.searchInput}
-                InputProps={{
-                    startAdornment: (
-                        <InputAdornment position="start">
-                            <Search_icon/>
-                        </InputAdornment>
-                    )
-                }}
-                variant="outlined"
-                placeholder="Поиск категорий"
-            />
-            <List>
-                {siteCategories.map((ctgr) =>
+            <div className={classes.drawerList}>
+                {site_categories.map((ctgr) =>
                     <ListItem
                         button
                         key={ctgr.id}
                         disableGutters
                         onMouseEnter={handleCategory(ctgr)}
+                        className={ctgr.name === hoveredCtgr[0]?.parents[0].name ? 'hovered' : ''}
                     >
                         <div className='icon'>
                             {ctgr.smallIcon}
@@ -57,77 +68,51 @@ export const CustomDrawer: FC<any> = ({toggleDrawer, position}) => {
                         </Typography>
                     </ListItem>
                 )}
-            </List>
-        </div>
-    );
-
-    const classes = useStyles();
-    return (
-        <div style={{position: 'relative'}}>
-            <Drawer
-                anchor='left'
-                open={position['left']}
-                onClose={toggleDrawer('left', false)}
-                BackdropProps={{invisible: true}}
-            >
-                {list()}
-            </Drawer>
-            <div
-                style={{
-                    display: hoverCtgr.subCategory.length === 0 ? 'none' : '',
-                    height: '100vh',
-                    width: '100%',
-                    background: 'white',
-                    position: 'absolute',
-                    zIndex: 99999,
-                    left: '120px',
-                    top: -35,
-                    overflowY: 'auto'
-                }}
-            >
-                <h1 onClick={() => setHoverCategory(initHoverCtgr)} style={{cursor: 'pointer'}}>X</h1>
-                {hoverCtgr.subCategory.map(subCategory => {
-                    const location = 'tashkent';
-                    const categoryName = transformCyrillic(hoverCtgr.ru_name);
-                    const subCategoryName = transformCyrillic(subCategory.ru_name);
-                    const type = subCategory.type;
-                    const url = `/${location}/${categoryName}/${subCategoryName}`;
-
-                    return (
-                        <div key={subCategory.id}>
-                            {type
-                             ? <div>
-                                 <Link key={type.id} href={url}>
-                                     <a>
-                                         <Typography variant="h6" gutterBottom color="secondary">
-                                             {subCategory.name}
-                                         </Typography>
-                                     </a>
-                                 </Link>
-                                 {type.map(type => {
-                                     const typeName = transformCyrillic(type.ru_name);
-                                     return (
-                                         <Link key={type.id} href={url + `/${typeName}`}>
-                                             <a>
-                                                 <Typography variant="body2" key={type.id}>
-                                                     {type.name}
-                                                 </Typography>
-                                             </a>
-                                         </Link>
-                                     );
-                                 })}
-                             </div>
-                             : <Link href={url}>
-                                 <a>
-                                     <Typography variant="h6" gutterBottom color="secondary">
-                                         {subCategory.name}
-                                     </Typography>
-                                 </a>
-                             </Link>}
-                        </div>
-                    );
-                })}
             </div>
-        </div>
+            {!!subcategory.length && (
+                <div className={classes.drawerContent}>
+                    <div className='close-btn-wrapper'>
+                        <CloseBtn handleClose={handleClose}/>
+                    </div>
+                    <div>
+                        {subcategory.map(subctgr => {
+                            const location = 'tashkent';
+                            const categoryName = transformCyrillic(hoveredCtgr.ru_name);
+                            const subcategoryName = transformCyrillic(subctgr.ru_name);
+                            const type = subctgr.type || [];
+                            const url = `/${location}/${categoryName}/${subcategoryName}`;
+
+                            return (
+                                <div key={subctgr.id}>
+                                    <List>
+                                        <Link href={url}>
+                                            <a onClick={handleClose}>
+                                                <Typography variant="h6" gutterBottom color="secondary">
+                                                    {t(subctgr.name)}
+                                                </Typography>
+                                            </a>
+                                        </Link>
+                                        {type.map(type => {
+                                            const typeName = transformCyrillic(type.ru_name);
+                                            return (
+                                                <ListItem key={type.id}>
+                                                    <Link href={url + `/${typeName}`}>
+                                                        <a onClick={handleClose}>
+                                                            <Typography variant="body2" key={type.id}>
+                                                                {t(type.name)}
+                                                            </Typography>
+                                                        </a>
+                                                    </Link>
+                                                </ListItem>
+                                            );
+                                        })}
+                                    </List>
+                                </div>
+                            );
+                        })}
+                    </div>
+                </div>
+            )}
+        </Drawer>
     );
 };

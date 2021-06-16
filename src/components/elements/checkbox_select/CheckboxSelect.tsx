@@ -1,21 +1,22 @@
 import {FC} from "react";
 import {Checkbox, Typography} from "@material-ui/core";
 import {SwitchBaseProps} from "@material-ui/core/internal/SwitchBase";
-import {WithT} from 'i18next';
+import {useTranslation} from 'react-i18next';
 import {useStyles} from './useStyles'
 
 
 type CheckboxPropsType = {
+    ns?: string,
     disabled?: boolean,
     checked: boolean,
     name: string,
     labelText?: string,
     onChange?: SwitchBaseProps['onChange']
-} & WithT;
+};
 
 export const CheckboxSelect: FC<CheckboxPropsType> = (props) => {
     const {
-        t,
+        ns = 'filters',
         name,
         labelText,
         disabled,
@@ -23,12 +24,14 @@ export const CheckboxSelect: FC<CheckboxPropsType> = (props) => {
         onChange
     } = props;
 
+    const {t} = useTranslation(ns);
+
     const classes = useStyles();
     return (
         <div className={classes.root}>
             <Typography>
                 <strong>
-                    {t(`filters:${labelText ?? name}`)}
+                    {t(`${labelText ?? name}`)}
                 </strong>
             </Typography>
             <Checkbox

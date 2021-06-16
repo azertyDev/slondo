@@ -1,9 +1,9 @@
 import {FC} from 'react';
 import {CustomButton} from '@src/components/elements/custom_button/CustomButton';
 import {FormControl, InputLabel, Typography} from '@material-ui/core';
-import {WithT} from 'i18next';
 import {isRequired} from '@src/helpers';
 import {useStyles} from './useStyles';
+import {useTranslation} from 'react-i18next';
 
 
 type SelectOptionsPropsType = {
@@ -13,11 +13,10 @@ type SelectOptionsPropsType = {
     errorMsg?: string,
     handleSelect: (n, v) => void,
     options: any[]
-} & WithT;
+};
 
 export const DeployedSelect: FC<SelectOptionsPropsType> = (props) => {
     const {
-        t,
         name,
         values,
         disableRequire,
@@ -25,6 +24,8 @@ export const DeployedSelect: FC<SelectOptionsPropsType> = (props) => {
         errorMsg,
         options = []
     } = props;
+
+    const {t} = useTranslation('filters');
 
     const handleClick = (item) => () => {
         handleSelect(name, item);

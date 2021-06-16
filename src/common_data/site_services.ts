@@ -33,12 +33,3 @@ export const site_services = {
     exchange: Exchange,
     delivery: Delivery
 };
-
-export enum HasAuction {
-    parts = 1,
-    goods,
-    home,
-    electronics,
-    hobbies,
-    animal
-}

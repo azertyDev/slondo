@@ -1,11 +1,12 @@
 import {FC} from 'react';
-import {WithT} from 'i18next';
+import {useTranslation} from 'react-i18next';
 import {Checkbox, FormControl, InputLabel, MenuItem, Select, Typography} from '@material-ui/core';
 import {isRequired} from '@src/helpers';
 import {useStyles} from './useStyles';
 
 
 type CustomSelectPropsType = {
+    ns?: string,
     name: string;
     labelTxt?: string,
     multiple?: boolean,
@@ -15,11 +16,11 @@ type CustomSelectPropsType = {
     handleSelect: (k, v) => void,
     disableRequire?: boolean,
     errorMsg?: string
-} & WithT;
+};
 
 export const DropDownSelect: FC<CustomSelectPropsType> = (props) => {
     const {
-        t,
+        ns = 'filters',
         name,
         disableRequire,
         labelTxt,
@@ -30,6 +31,8 @@ export const DropDownSelect: FC<CustomSelectPropsType> = (props) => {
         errorMsg,
         handleSelect
     } = props;
+
+    const {t} = useTranslation(ns);
 
     const isCurrency = name === 'currency';
     const optionKey = name === 'duration' ? 'hours' : 'name';
@@ -47,7 +50,7 @@ export const DropDownSelect: FC<CustomSelectPropsType> = (props) => {
             value = selected.map(item => item.name).join(', ');
         } else if (selected) {
             const selectedItem = items.find(item => item.id === +selected) || null;
-            if (selectedItem !== null) value = t(`filters:${selectedItem[optionKey]}`);
+            if (selectedItem !== null) value = t(`${selectedItem[optionKey]}`);
         }
 
         return value;
@@ -88,7 +91,7 @@ export const DropDownSelect: FC<CustomSelectPropsType> = (props) => {
                         value={multiple ? item : item.id}
                     >
                         {multiple && <Checkbox checked={!!values[name]?.some(el => el.id === item.id)}/>}
-                        {t(`filters:${item[optionKey]}`)}
+                        {t(`${item[optionKey]}`)}
                     </MenuItem>
                 ))}
             </Select>

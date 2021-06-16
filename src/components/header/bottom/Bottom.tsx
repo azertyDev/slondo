@@ -16,13 +16,10 @@ import {useStyles} from './useStyles';
 
 const Bottom = (props) => {
     const {isScrollBreak, handleOpenModal, isAuth, t, avatar} = props;
-    const [drawerPosition, setDrawerPosition] = useState({left: false});
+    const [drawerOpen, setDrawerOpen] = useState(false);
 
-    const toggleDrawer = (anchor, open) => (event) => {
-        if (event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
-            return;
-        }
-        setDrawerPosition({...drawerPosition, [anchor]: open});
+    const handleDrawerShow = (value) => () => {
+        setDrawerOpen(value);
     };
 
     const classes = useStyles(props);
@@ -70,7 +67,7 @@ const Bottom = (props) => {
                                     <CustomButton
                                         color="primary"
                                         className="bottom-category-button header-button"
-                                        onClick={toggleDrawer('left', true)}
+                                        onClick={handleDrawerShow(true)}
                                     >
                                         <Typography variant="subtitle2">
                                             {t('header:categories')}
@@ -113,20 +110,20 @@ const Bottom = (props) => {
                                 xs={1}
                             >
                                 {isAuth
-                                    ? <Link href='/cabinet/posts'>
-                                        <a>
-                                            <Avatar alt="Remy Sharp" src={avatar}/>
-                                        </a>
-                                    </Link>
-                                    : <CustomButton
-                                        className="bottom-sign-button header-button"
-                                        onClick={handleOpenModal}
-                                    >
-                                        <Typography variant="subtitle2">
-                                            {t('auth_reg:signIn')}
-                                        </Typography>
-                                        <SignIcon/>
-                                    </CustomButton>}
+                                 ? <Link href='/cabinet/posts'>
+                                     <a>
+                                         <Avatar alt="Remy Sharp" src={avatar}/>
+                                     </a>
+                                 </Link>
+                                 : <CustomButton
+                                     className="bottom-sign-button header-button"
+                                     onClick={handleOpenModal}
+                                 >
+                                     <Typography variant="subtitle2">
+                                         {t('auth_reg:signIn')}
+                                     </Typography>
+                                     <SignIcon/>
+                                 </CustomButton>}
                             </Grid>
                         </Grid>
                     </Container>
@@ -139,8 +136,9 @@ const Bottom = (props) => {
                 </div>
             </Hidden>
             <CustomDrawer
-                toggleDrawer={toggleDrawer}
-                position={drawerPosition}
+                position='left'
+                open={drawerOpen}
+                onClose={handleDrawerShow(false)}
             />
         </div>
     );

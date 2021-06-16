@@ -28,7 +28,6 @@ export type CategoryType = IdNameType & {
     ru_name: string;
     smallIcon: any;
     subcategory?: SubcategoryType[];
-    has_auction: boolean;
 };
 
 export type SubcategoryType = IdNameType & {

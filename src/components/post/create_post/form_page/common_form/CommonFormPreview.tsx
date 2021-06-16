@@ -10,6 +10,7 @@ type DefaultParamsPropsType = {
     values,
     isAuction: boolean,
     isAdvanceAuction: boolean,
+    priceLabel: string,
     location,
     ownerPhone: string
 } & WithT;
@@ -18,10 +19,11 @@ export const CommonFormPreview: FC<DefaultParamsPropsType> = (props) => {
     const {
         t,
         values,
+        location,
         isAuction,
+        priceLabel,
         ownerPhone,
-        isAdvanceAuction,
-        location
+        isAdvanceAuction
     } = props;
 
     const {auction, avalTime} = values;
@@ -91,7 +93,7 @@ export const CommonFormPreview: FC<DefaultParamsPropsType> = (props) => {
              </div>
              : <Typography variant="subtitle1">
                  <strong>
-                     {t('filters:price')}:&nbsp;
+                     {t(`filters:${priceLabel}`)}:&nbsp;
                  </strong>
                  {numberPrettier(values.price)}&nbsp;
                  {values.currency.name}

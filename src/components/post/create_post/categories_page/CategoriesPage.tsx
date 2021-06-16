@@ -1,16 +1,15 @@
-import {FC, useEffect, useMemo, useState} from 'react';
+import {FC, useEffect, useState} from 'react';
 import {Steps} from '../steps/Steps';
-import {useRouter} from "next/router";
+import {useRouter} from 'next/router';
 import {useTranslation} from 'next-i18next';
 import {MainLayout} from '@src/components/main_layout/MainLayout';
 import {categorySearchHelper, categoriesByType} from '@src/helpers';
 import {SubcategoryType} from '@root/interfaces/Categories';
-import {Grid, InputBase, List, ListItem, Typography} from "@material-ui/core";
-import {BackspaceIcon, Search_icon} from "@src/components/elements/icons";
-import {CustomButton} from "@src/components/elements/custom_button/CustomButton";
-import {addParentsToCtgrs} from '@src/common_data/siteCategories';
-import {IdNameType} from "@root/interfaces/Post";
-import {useStyles} from "./useStyles";
+import {Grid, InputBase, List, ListItem, Typography} from '@material-ui/core';
+import {BackspaceIcon, Search_icon} from '@src/components/elements/icons';
+import {CustomButton} from '@src/components/elements/custom_button/CustomButton';
+import {IdNameType} from '@root/interfaces/Post';
+import {useStyles} from './useStyles';
 
 
 type CategoryStateType = {
@@ -32,11 +31,11 @@ export const CategoriesPage: FC = () => {
     const {locale, query, push} = useRouter();
     const [postTypeName, categoryName, subcategoryName] = query.slug as string[];
 
-    const categories = useMemo(() => addParentsToCtgrs(categoriesByType(postTypeName as string)), [locale]);
-
     const [searchTxt, setSearchTxt] = useState('');
     const [category, setCategory] = useState(initCategory);
     const [subCtgrs, setSubCtgrs] = useState<SubcategoryType[]>([]);
+
+    const categories = categoriesByType(postTypeName);
 
     const handleCategory = (ctgr) => async () => {
         const url = `/create/type/${postTypeName}/${ctgr.name}`;

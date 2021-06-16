@@ -57,9 +57,7 @@ export const FormPage: FC = () => {
         ads_type_id: postType.id,
         category_id: category.id,
         sub_category_id: subcategory?.id,
-        params: {
-            title: ''
-        },
+        params: {title: ''},
         appearance: {
             color_id: null,
             photos: []
@@ -73,7 +71,7 @@ export const FormPage: FC = () => {
     const [post, setPost] = useState(initPost);
     const [currentFormIndex, setCurrentFormIndex] = useState(3);
     const [filters, setFilters] = useState<any>({});
-    const {colors, ...filtersData} = filters;
+    const {colors, color, ...filtersData} = filters;
 
     const handleNextFormOpen = () => {
         setCurrentFormIndex(currentFormIndex - 1);
@@ -188,10 +186,10 @@ export const FormPage: FC = () => {
                  />
                  <div className={classes.root}>
                      <ParamsFormContainer
-                         t={t}
                          type={type}
                          filters={filtersData}
                          isPreview={isPreview}
+                         category={category}
                          subcategory={subcategory}
                          currentFormIndex={currentFormIndex}
                          handleSubmit={handleSubmit}
@@ -200,8 +198,7 @@ export const FormPage: FC = () => {
                      />
                      <div>
                          <AppearanceForm
-                             t={t}
-                             colors={colors}
+                             colors={colors || color}
                              isPreview={isPreview}
                              currentFormIndex={currentFormIndex}
                              handleSubmit={handleSubmit}
@@ -211,7 +208,6 @@ export const FormPage: FC = () => {
                      </div>
                      <div>
                          <CommonForm
-                             t={t}
                              ownerPhone={phone}
                              asPath={asPath}
                              postType={postType}

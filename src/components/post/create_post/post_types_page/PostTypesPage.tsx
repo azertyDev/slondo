@@ -9,7 +9,7 @@ import {useStyles} from './useStyles';
 
 
 export const PostTypesPage: FC = () => {
-    const {t} = useTranslation(['post']);
+    const {t} = useTranslation('post');
 
     const classes = useStyles();
     return (

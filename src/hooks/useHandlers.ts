@@ -1,6 +1,7 @@
 import {Dispatch, SetStateAction} from 'react';
-import {booleanFields, fractionalFields, numericFields, singleFields, stringFields} from '@src/common_data/form_fields';
+import {booleanFields, fractionalFields, numericFields, singleFields, stringFields} from '@src/common_data/fields_keys';
 import {numberRegEx} from '@src/common_data/reg_exs';
+import {isRequired} from '@src/helpers';
 
 export const useHandlers = (values: any, setValues: Dispatch<SetStateAction<any>>) => {
     return {
@@ -39,7 +40,7 @@ export const useHandlers = (values: any, setValues: Dispatch<SetStateAction<any>
             setValues({...values});
         },
 
-        setValsByParams: (urlParams, filters) => {
+        handleSetValsByParams: (urlParams, filters) => {
             const vals: any = {};
 
             Object.keys(urlParams).forEach(k => {
@@ -53,7 +54,7 @@ export const useHandlers = (values: any, setValues: Dispatch<SetStateAction<any>
                     } else {
                         vals[k] = filters[k].filter(v => urlParams[k].split(',').some(p => +p === v.id));
                     }
-                } else if ((isStringField && values[k] === '') || isBooleanField) {
+                } else if ((isStringField && values[k] === '') || isBooleanField && values[k] === '') {
                     vals[k] = isBooleanField || urlParams[k];
                 }
             });
@@ -63,6 +64,15 @@ export const useHandlers = (values: any, setValues: Dispatch<SetStateAction<any>
             }
 
             setValues({...values, ...vals});
+        },
+
+        handleSetRequireVals: (filters) => {
+            const reqVals = {};
+
+            Object.keys(filters).forEach(k => {
+                if (isRequired(k) && !values[k]) reqVals[k] = null;
+            });
+            setValues({...values, ...reqVals});
         }
     };
 };
