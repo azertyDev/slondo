@@ -325,11 +325,11 @@ const MyPostsContainer: FC = () => {
         try {
             if (onlySecure) {
                 setArchiveSecurePostData({...archiveSecurePostData, isFetch: true});
-                const {data, total} = await userAPI.getUserArchivePosts({type: 'post', onlySecure});
+                const {data, total} = await userAPI.getUserArchivePosts({type: 'post', secure: 1});
                 setArchiveSecurePostData({myPosts: {data, total}, isFetch: false});
             } else {
                 setArchivePostData({...archivePostData, isFetch: true});
-                const {data, total} = await userAPI.getUserArchivePosts({type: 'post', onlySecure});
+                const {data, total} = await userAPI.getUserArchivePosts({type: 'post', secure: 0});
                 setArchivePostData({myPosts: {data, total}, isFetch: false});
             }
         } catch (e) {

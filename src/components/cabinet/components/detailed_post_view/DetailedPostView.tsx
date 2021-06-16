@@ -25,6 +25,7 @@ import {BetsList} from '@src/components/elements/bets_list/BetsList';
 type DetailedPostViewPropsType = {
     data: CardDataType,
     detailedModalOpen: boolean,
+    handleDeactivate?: (auction_id: number) => () => void,
     handleDetailedClose: () => void,
     handleNotificationsOpen: (id: number) => () => void,
     handleRejectVictory?: (auction_id: number) => () => void
@@ -35,13 +36,17 @@ export const DetailedPostView: FC<DetailedPostViewPropsType> = (props) => {
     const {t} = useTranslation(['auction', 'common', 'locations']);
     const {
         data,
+        handleDeactivate,
         detailedModalOpen,
         handleDetailedClose,
         handleNotificationsOpen,
         handleRejectVictory
     } = props;
 
+
     const isAuction = data.ads_type === 'auc' || data.ads_type === 'exauc';
+    const isWinner = userInfo.id === data.auction?.winner_id;
+    const isOwner = userInfo.id === data.author?.id;
 
     const classes = useStyles();
     return (
@@ -127,14 +132,32 @@ export const DetailedPostView: FC<DetailedPostViewPropsType> = (props) => {
                 {/*)}*/}
                 <Grid item xs={12} md={6}>
                     <CustomButton
-                        className={`${classes.btn} advertise`}
-                        disabled
+                        className={`${classes.btn} notification`}
+                        // disabled={!data.observer.number_of_notifications}
+                        onClick={handleNotificationsOpen(data.id)}
                     >
-                        <RocketIcon />
-                        &nbsp;
-                        <Typography variant='subtitle1'>
-                            Рекламировать
+                        <Typography
+                            variant="subtitle1"
+                            color="initial"
+                            noWrap
+                        >
+                            Уведомления/ История
                         </Typography>
+                        <ChevronRightIcon color='action' />
+                    </CustomButton>
+                    <CustomButton
+                        className={`${classes.btn} settings`}
+                        // disabled={!data.observer.number_of_notifications}
+                        // onClick={}
+                    >
+                        <Typography
+                            variant="subtitle1"
+                            color="initial"
+                            noWrap
+                        >
+                            Настройки
+                        </Typography>
+                        <ChevronRightIcon color='action' />
                     </CustomButton>
                 </Grid>
                 <Grid item xs={12} md={6}>
@@ -155,18 +178,14 @@ export const DetailedPostView: FC<DetailedPostViewPropsType> = (props) => {
                 </Grid>
                 <Grid item xs={12} md={6}>
                     <CustomButton
-                        className={`${classes.btn} notification`}
-                        // disabled={!data.observer.number_of_notifications}
-                        onClick={handleNotificationsOpen(data.id)}
+                        className={`${classes.btn} advertise`}
+                        disabled
                     >
-                        <Typography
-                            variant="subtitle1"
-                            color="initial"
-                            noWrap
-                        >
-                            Уведомления/ История
+                        <RocketIcon />
+                        &nbsp;
+                        <Typography variant='subtitle1'>
+                            Рекламировать
                         </Typography>
-                        <ChevronRightIcon color='action' />
                     </CustomButton>
                 </Grid>
                 {isAuction && (
@@ -185,16 +204,27 @@ export const DetailedPostView: FC<DetailedPostViewPropsType> = (props) => {
                     <Paper className={classes.paper}>
                         {/*   Менять данные пользователя на победителя (АУКЦИОН)   */}
                         <Box className={classes.userInfo}>
-                            <UserInfoWithAvatar
-                                owner={userInfo}
-                                isOwner={true}
-                                width='50px'
-                                height='50px'
-                            />
+                            {isWinner && (
+                                <UserInfoWithAvatar
+                                    owner={data.auction.winner}
+                                    isOwner={true}
+                                    width='50px'
+                                    height='50px'
+                                />
+                            )}
+                            {isOwner && (
+                                <UserInfoWithAvatar
+                                    owner={data.author}
+                                    isOwner={true}
+                                    width='50px'
+                                    height='50px'
+                                />
+                            )}
+
                             <Box>
-                                {data.creator && data.status === 'suspended' && (
+                                {data.creator && (data.status === 'suspended') && (
                                     <div className="status-buttons">
-                                        <CustomButton className='end-auction'>
+                                        <CustomButton className='end-auction' onClick={handleDeactivate(data.id)}>
                                             <Typography variant='subtitle1'>
                                                 Завершить аукцион
                                             </Typography>
@@ -214,7 +244,7 @@ export const DetailedPostView: FC<DetailedPostViewPropsType> = (props) => {
                             <CustomButton>
                                 <PhoneIcon />
                                 <Typography variant='subtitle2'>
-                                    Написать
+                                    Позвонить
                                 </Typography>
                             </CustomButton>
                             <CustomButton>

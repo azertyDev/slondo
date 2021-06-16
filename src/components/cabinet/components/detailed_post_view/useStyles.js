@@ -6,12 +6,15 @@ export const useStyles = makeStyles((theme) => ({
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
-        height: '100%',
         width: '100%',
         boxShadow: '0px 1px 2px rgba(0, 0, 0, 0.15)',
         borderRadius: 5,
         '&.notification': {
-            backgroundColor: '#F9F9F9'
+            backgroundColor: '#F9F9F9',
+            marginBottom: 8
+        },
+        '&.settings': {
+            backgroundColor: '#F9F9F9',
         },
         '&.advertise': {
             backgroundColor: '#FFF7E0'
@@ -27,6 +30,7 @@ export const useStyles = makeStyles((theme) => ({
         display: 'flex',
         justifyContent: 'space-evenly',
         background: '#F9F9F9',
+        height: '100%',
         padding: '15px',
         boxShadow: '0px 1px 2px rgba(0, 0, 0, 0.15)',
         borderRadius: 5,

@@ -162,6 +162,11 @@ export const MyAuctionsContainer: FC = () => {
     const {modalOpen: notificationsOpen, handleModalClose: closeNotificationsModal, handleModalOpen: openNotificationsModal} = useModal();
     const {modalOpen: detailedModalOpen, handleModalClose: closeDetailedModal, handleModalOpen: openDetailedModal} = useModal();
 
+    const handleSettingsOpen = (auction_id: number) => () => {
+        openSettingsModal();
+        auction_id && setSelectedAuction({...selectedAuction, id: auction_id});
+        setModalContentIndex(1);
+    };
     const handleSettingsClose = () => {
         closeSettingsModal();
         setModalContentIndex(1);
@@ -175,49 +180,26 @@ export const MyAuctionsContainer: FC = () => {
         postId && setAuctionId(postId);
         openNotificationsModal();
     };
-    const handleChildTabChange = (event, newValue) => {
-        setChildTabValue(newValue);
-    };
-    const handlePagePagination = (event, value) => {
-        setPage(value);
-    };
-    const fetchAuctionNotifications = post => async () => {
-        try {
-            if (post.id !== selectedAuction.id) {
-                const params = {
-                    page,
-                    itemsPerPage: ITEMS_PER_PAGE,
-                    ads_id: post.id
-                };
-                setNotification({...notification, isFetch: true});
-                const {data, total} = await userAPI.getNotificationById(params);
-                setItemsCount(total);
-                setSelectedAuction({...selectedAuction, ...post});
-                setNotification({...notification, data, isFetch: false});
-            }
-        } catch (e) {
-            dispatch(setErrorMsgAction(e.message));
-        }
-    };
     const handleTabChange = (event, newValue) => {
         setTabIndex(newValue);
     };
-    const handleSettingsOpen = (auction_id: number) => () => {
-        openSettingsModal();
-        auction_id && setSelectedAuction({...selectedAuction, id: auction_id});
-        setModalContentIndex(1);
+    const handleChildTabChange = (event, newValue) => {
+        setChildTabValue(newValue);
+    };
+    const handleModalContentIndex = (index) => () => {
+        setModalContentIndex(index);
+    };
+    const handlePagePagination = (event, value) => {
+        setPage(value);
     };
     const handlePrevMenu = () => {
         const backValue = modalContentIndex === 5 ? 3 : 1;
         setModalContentIndex(modalContentIndex - backValue);
     };
-    const handleModalContentIndex = (index) => () => {
-        setModalContentIndex(index);
-    };
     const handleDeactivate = (ads_id?: number) => async () => {
         try {
             await userAPI.deactivateById(ads_id);
-            handleCloseDialog();
+            closeDetailedModal();
             if (tabIndex === 0) {
                 await fetchAuctionData('auc');
             } else {
@@ -234,6 +216,24 @@ export const MyAuctionsContainer: FC = () => {
                 await fetchAuctionData('auc');
             } else {
                 await fetchAuctionData();
+            }
+        } catch (e) {
+            dispatch(setErrorMsgAction(e.message));
+        }
+    };
+    const fetchAuctionNotifications = post => async () => {
+        try {
+            if (post.id !== selectedAuction.id) {
+                const params = {
+                    page,
+                    itemsPerPage: ITEMS_PER_PAGE,
+                    ads_id: post.id
+                };
+                setNotification({...notification, isFetch: true});
+                const {data, total} = await userAPI.getNotificationById(params);
+                setItemsCount(total);
+                setSelectedAuction({...selectedAuction, ...post});
+                setNotification({...notification, data, isFetch: false});
             }
         } catch (e) {
             dispatch(setErrorMsgAction(e.message));
@@ -263,6 +263,7 @@ export const MyAuctionsContainer: FC = () => {
             if (isCreatedAuction) {
                 const params = {
                     type,
+                    secure: 0,
                     page: 1,
                     itemsPerPage: ITEMS_PER_PAGE
                 };
@@ -288,6 +289,14 @@ export const MyAuctionsContainer: FC = () => {
             setOffersData({...offersData, isFetch: true});
             const {data, total} = await userAPI.getAllOffersById(auction_id);
             setOffersData({...offersData, data, total, isFetch: false});
+        } catch (e) {
+            dispatch(setErrorMsgAction(e.message));
+        }
+    };
+    const fetchUserPhone = (user_id) => async () => {
+        try {
+            const {phone} = await userAPI.getPhoneByUserId(user_id);
+            setPhone(phone);
         } catch (e) {
             dispatch(setErrorMsgAction(e.message));
         }
@@ -320,14 +329,6 @@ export const MyAuctionsContainer: FC = () => {
             await userAPI.deleteUserNotification(id);
             const {data} = await userAPI.getNotificationById(ads_id);
             setNotification({...notification, data, isFetch: false});
-        } catch (e) {
-            dispatch(setErrorMsgAction(e.message));
-        }
-    };
-    const fetchUserPhone = (user_id) => async () => {
-        try {
-            const {phone} = await userAPI.getPhoneByUserId(user_id);
-            setPhone(phone);
         } catch (e) {
             dispatch(setErrorMsgAction(e.message));
         }
@@ -702,6 +703,7 @@ export const MyAuctionsContainer: FC = () => {
             />
             <DetailedPostView
                 data={selectedAuction}
+                handleDeactivate={handleDeactivate}
                 detailedModalOpen={detailedModalOpen}
                 handleDetailedClose={closeDetailedModal}
                 handleNotificationsOpen={handleNotificationsOpen}
