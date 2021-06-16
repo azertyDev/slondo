@@ -105,11 +105,12 @@ export const ListCard: FC<ListCardPropsType> = ({cardData}) => {
                             color="initial"
                         >
                             {(!!cardData.auction?.bet
-                              ? numberPrettier(cardData.auction.bet.bet)
-                              : numberPrettier(cardData.price)
+                                    ? numberPrettier(cardData.auction.bet.bet)
+                                    : numberPrettier(cardData.price)
                             )}
-                        </Typography>&nbsp;
-                        <span>{t(`common:${cardData.currency.name}`)}</span>
+                            &nbsp;
+                            <span>{t(`common:${cardData.currency.name}`)}</span>
+                        </Typography>
                     </div>
                 </div>
             </Box>

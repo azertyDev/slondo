@@ -67,7 +67,7 @@ export const CabinetCard: FC<CabinetCardPropsType> = (props) => {
             </Box>
             <Box position='relative'>
                 <ListCard cardData={cardData} />
-                {cardData.creator && (
+                {/*{cardData.creator && (*/}
                     <CustomButton className='unfold-btn' onClick={handleDetailedOpen(id, cardData)}>
                         <Typography variant='subtitle1'>
                             Раскрыть объявление
@@ -75,7 +75,7 @@ export const CabinetCard: FC<CabinetCardPropsType> = (props) => {
                         &nbsp;
                         <ChevronRightIcon color='action' />
                     </CustomButton>
-                )}
+                {/*)}*/}
                 <div className='card-btn'>
                     {pathname?.includes('favorite')
                         ?
@@ -84,12 +84,14 @@ export const CabinetCard: FC<CabinetCardPropsType> = (props) => {
                         </CustomButton>
                         : cardData.creator && (
                         <>
-                            <CustomButton className='advertise'>
-                                <RocketIcon />
-                                <Typography variant='subtitle1'>
-                                    Рекламировать
-                                </Typography>
-                            </CustomButton>
+                            {cardData.status !== 'history' && (
+                                <CustomButton className='advertise'>
+                                    <RocketIcon />
+                                    <Typography variant='subtitle1'>
+                                        Рекламировать
+                                    </Typography>
+                                </CustomButton>
+                            )}
                             <CustomButton
                                 className='notifications'
                                 onClick={handleNotificationsOpen(id)}
@@ -97,9 +99,11 @@ export const CabinetCard: FC<CabinetCardPropsType> = (props) => {
                             >
                                 <NotificationIcon />
                             </CustomButton>
-                            <CustomButton className='settings' onClick={handleSettingsOpen(id, cardData, 1)}>
-                                <SettingsIcon />
-                            </CustomButton>
+                            {cardData.status !== 'history' && (
+                                <CustomButton className='settings' onClick={handleSettingsOpen(id, cardData, 1)}>
+                                    <SettingsIcon />
+                                </CustomButton>
+                            )}
                         </>
                     )}
                 </div>
@@ -107,21 +111,22 @@ export const CabinetCard: FC<CabinetCardPropsType> = (props) => {
         </Box>
     );
     function getStatus(postStatus: string): string {
-        switch (postStatus) {
-            case 'new':
-                return 'new';
-            case 'suspend':
-                return 'suspend';
-            case 'success':
-                return 'success';
-            case 'accepted':
-                return 'accepted';
-            case 'reject':
-                return 'reject';
-            case 'sold':
-                return 'sold';
-            default:
-                return postStatus;
-        }
+        return postStatus;
+        // switch (postStatus) {
+        //     case 'new':
+        //         return 'new';
+        //     case 'suspend':
+        //         return 'suspend';
+        //     case 'success':
+        //         return 'success';
+        //     case 'accepted':
+        //         return 'accepted';
+        //     case 'reject':
+        //         return 'reject';
+        //     case 'sold':
+        //         return 'sold';
+        //     default:
+        //         return postStatus;
+        // }
     }
 };

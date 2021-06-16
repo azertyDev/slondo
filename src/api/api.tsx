@@ -122,6 +122,13 @@ export const userAPI = {
                 throw err;
             });
     },
+    getAuctionSubArchive: () => {
+        return instance.get(`regular/user/archiveAuctions/participating`, setTokenToHeader())
+            .then(res => res.data)
+            .catch(err => {
+                throw err;
+            });
+    },
     getSubs: (param) => {
         return instance.get(`regular/user/${param}/all`, setTokenToHeader())
             .then(res => res.data)

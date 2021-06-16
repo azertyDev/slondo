@@ -144,6 +144,8 @@ export const MyAuctionsContainer: FC = () => {
 
     const [auctionData, setAuctionData] = useState(initialState);
     const [participatingData, setParticipatingData] = useState(initialState);
+    const [auctionArchiveData, setAuctionArchiveData] = useState(initialState);
+    const [participatingArchiveData, setParticipatingArchiveData] = useState(initialState);
     const [offersData, setOffersData] = useState(initialOffersState);
     const [selectedAuction, setSelectedAuction] = useState<CardDataType>(initialSelectedAuction);
     const [tabIndex, setTabIndex] = useState(0);
@@ -250,6 +252,24 @@ export const MyAuctionsContainer: FC = () => {
                 message
                     ? setParticipatingData(initialState)
                     : setParticipatingData({myPosts: {data, total}, isFetch: false});
+            }
+        } catch (e) {
+            dispatch(setErrorMsgAction(e));
+        }
+    };
+    const fetchAuctionArchiveData = async (type?: string) => {
+        try {
+            const isCreatedAuction = type === 'auc';
+            if (isCreatedAuction) {
+                setAuctionArchiveData({...auctionArchiveData, isFetch: true});
+                const {data, total} = await userAPI.getUserArchivePosts({type, onlySecure: 0});
+                setAuctionArchiveData({myPosts: {data, total}, isFetch: false});
+            } else {
+                setParticipatingArchiveData({...participatingArchiveData, isFetch: true});
+                const {data, total, message} = await userAPI.getAuctionSubArchive();
+                message
+                    ? setParticipatingArchiveData(initialState)
+                    : setParticipatingArchiveData({myPosts: {data, total}, isFetch: false});
             }
         } catch (e) {
             dispatch(setErrorMsgAction(e));
@@ -536,6 +556,29 @@ export const MyAuctionsContainer: FC = () => {
         </Box>
     ));
 
+    const archiveAuctionCards = auctionArchiveData.myPosts.data.map(data => (
+        <Box mb={3} key={data.id}>
+            <CabinetCard
+                cardData={data}
+                fetchAuctionNotifications={fetchAuctionNotifications}
+                handleDetailedOpen={handleDetailedOpen}
+                handleSettingsOpen={handleSettingsOpen}
+                handleNotificationsOpen={handleNotificationsOpen}
+            />
+        </Box>
+    ));
+
+    const participatingArchiveAuctionCards = participatingArchiveData.myPosts.data.map(data => (
+        <Box mb={3} key={data.id}>
+            <CabinetCard
+                cardData={data}
+                handleDetailedOpen={handleDetailedOpen}
+                handleSettingsOpen={handleSettingsOpen}
+                handleNotificationsOpen={handleNotificationsOpen}
+            />
+        </Box>
+    ));
+
     const createdAuctionTabs = (
         <>
             <Tabs
@@ -568,6 +611,7 @@ export const MyAuctionsContainer: FC = () => {
                 {auctionData.isFetch ? <CircularProgress color="primary"/> : creatorAuctionCards}
             </CustomTabPanel>
             <CustomTabPanel value={childTabValue} index={1}>
+                {auctionArchiveData.isFetch ? <CircularProgress color="primary" /> : archiveAuctionCards}
             </CustomTabPanel>
         </>
     );
@@ -604,6 +648,7 @@ export const MyAuctionsContainer: FC = () => {
                 {participatingData.isFetch ? <CircularProgress color="primary"/> : participantsAuctionCards}
             </CustomTabPanel>
             <CustomTabPanel value={childTabValue} index={1}>
+                {participatingArchiveData.isFetch ? <CircularProgress color="primary" /> : participatingArchiveAuctionCards}
             </CustomTabPanel>
         </>
     );
@@ -636,6 +681,8 @@ export const MyAuctionsContainer: FC = () => {
     useEffect(() => {
         fetchAuctionData();
         fetchAuctionData('auc');
+        fetchAuctionArchiveData();
+        fetchAuctionArchiveData('auc');
     }, []);
 
     return (
