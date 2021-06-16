@@ -19,39 +19,100 @@ export const useStyles = makeStyles((theme) => ({
                 justifyContent: 'space-between',
                 alignItems: 'center',
                 height: '613px',
-                marginBottom: 30,
+                marginBottom: '30px',
                 borderRadius: '25px',
                 boxShadow: '0px 2px 8px rgba(0, 0, 0, 0.2)',
                 textDecoration: 'none',
-                '& div': {
-                    backgroundPosition: 'center',
-                    backgroundRepeat: 'no-repeat',
+                [theme.breakpoints.down('md')]: {
+                    height: '450px'
+                },
+                [theme.breakpoints.down('sm')]: {
+                    height: '360px',
+                    borderRadius: '10px'
+                },
+                [theme.breakpoints.down('xs')]: {
+                    background: '#F9F9F9',
+                    height: '196px',
+                    marginBottom: 0
+                },
+                '& div.post-title-text': {
                     textAlign: 'center',
-                    height: '89%',
-                    width: '80%',
-                    backgroundSize: 'contain',
+                    borderRadius: '18px',
+                    margin: '6px',
+                    width: '98%',
+                    height: '120px',
+                    background: 'rgba(255, 255, 255, 0.25)',
+                    boxShadow: 'inset 0px 1px 4px rgba(0, 0, 0, 0.15)',
+                    [theme.breakpoints.down('md')]: {
+                        background: 'none',
+                        boxShadow: 'none',
+                        height: '58px',
+                        width: '100%',
+                        margin: 0
+                    },
                     '& h6.MuiTypography-subtitle1': {
-                        marginTop: '35px',
+                        margin: '24px 0 10px',
                         fontSize: '1.75rem',
                         color: '#4E4E4E',
                         fontWeight: '500',
-                        marginBottom: '10px'
+                        [theme.breakpoints.down('md')]: {
+                            fontSize: '24px'
+                        }
                     },
                     '& p.MuiTypography-body2': {
                         fontSize: '1.125rem',
                         color: 'rgba(49, 49, 49, 0.5)',
                         fontWeight: '400',
-                        padding: '0 30px'
+                        padding: '0 50px 24px'
+                    }
+                },
+                '& div.post-img': {
+                    width: '82%',
+                    height: '100%',
+                    backgroundPosition: 'center',
+                    backgroundRepeat: 'no-repeat',
+                    backgroundSize: 'contain',
+                    [theme.breakpoints.down('sm')]: {
+                        width: '50%',
+                        height: '70%',
+                        margin: 'auto',
+                        backgroundPosition: 'center',
+                        backgroundRepeat: 'no-repeat',
+                        backgroundSize: 'contain'
+                    },
+                    [theme.breakpoints.down('xs')]: {
+                        height: '75%'
+                    }
+                },
+                '& div.post-bottom': {
+                    marginBottom: '28px',
+                    [theme.breakpoints.down('sm')]: {
+                        width: '100%',
+                        height: '100%',
+                        display: 'flex',
+                        marginBottom: 0
+                    },
+                    '& div.options-wrapper': {
+                        width: '50%',
+                        margin: 'auto'
                     }
                 },
                 '& button': {
                     background: '#fff',
                     borderRadius: '100px',
-                    width: '81%',
+                    width: '82%',
                     marginBottom: '24px',
                     boxShadow: '0px 2px 2px rgba(0, 0, 0, 0.15)',
                     border: 'none',
-                    color: '#4E4E4E'
+                    color: '#4E4E4E',
+                    [theme.breakpoints.down('sm')]: {
+                        width: '97%',
+                        borderRadius: '8px',
+                        marginBottom: '14px'
+                    },
+                    [theme.breakpoints.down('xs')]: {
+                        marginBottom: '6px'
+                    }
                 }
                 // MuiButtonBase-root
             },
