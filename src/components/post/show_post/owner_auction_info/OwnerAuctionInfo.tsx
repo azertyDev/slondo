@@ -11,12 +11,14 @@ import {useStyles} from './useStyles';
 
 type OwnerAuctionInfoPropsType = {
     data: any
+    archive: number
 } & WithT;
 
 export const OwnerAuctionInfo: FC<OwnerAuctionInfoPropsType> = (props) => {
     const {
         t,
-        data
+        data,
+        archive
     } = props;
 
     const dispatch = useDispatch();
@@ -80,6 +82,7 @@ export const OwnerAuctionInfo: FC<OwnerAuctionInfoPropsType> = (props) => {
                         <AuctionContent
                             t={t}
                             postData={data}
+                            archive={archive}
                         />
                     </Hidden>
                 )}

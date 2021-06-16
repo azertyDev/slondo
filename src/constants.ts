@@ -1,5 +1,6 @@
 export const SERVER_URL = `${process.env.SERVER_URL}:${process.env.PORT}`;
 export const ITEMS_PER_PAGE = 16;
+export const BETS_PER_PAGE = 25;
 export const ITEMS_PER_PAGE_SUBS = 10;
 export const ITEMS_PER_PAGE_FILTERS = 40;
 export const TOTAL_FILES_LIMIT = 12;

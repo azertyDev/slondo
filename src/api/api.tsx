@@ -204,8 +204,8 @@ export const userAPI = {
                 throw err;
             });
     },
-    getAuctionBets: (id: string, page: number): Promise<any> => {
-        return instance.get(`auction/allBets?auction_id=${id}&page=${page}&per_page=25`)
+    getAuctionBets: (params): Promise<any> => {
+        return instance.get(`auction/allBets`, {params})
             .then(res => res.data)
             .catch(err => {
                 throw err;

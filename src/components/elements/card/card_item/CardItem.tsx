@@ -16,12 +16,14 @@ import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
 import {useStyles} from './useStyles';
 
 type CardItemProps = {
-    isFetch: boolean;
+    isFetch: boolean,
+    archive: boolean
 } & CardDataType;
 
 export const CardItem: FC<CardItemProps> = (props) => {
     const dispatch = useDispatch();
     const {
+        archive,
         id,
         isFetch,
         image,
@@ -49,14 +51,17 @@ export const CardItem: FC<CardItemProps> = (props) => {
     const [liked, setLiked] = useState(favorite);
 
     const date = new Date(created_at);
+
     function checkTime(i) {
         if (i < 10) {
-            i = "0" + i;
+            i = '0' + i;
         }
         return i;
     }
 
     const formatted_date = `${date.getDate()} ${months[date.getMonth()]} ${date.getHours() + ':' + checkTime(date.getMinutes())}`;
+
+    const url = `/obyavlenie/${translatedTitle}-${id}${archive ? '?archive=1' : ''}`;
 
     const handleFavorite = async () => {
         try {
@@ -68,7 +73,7 @@ export const CardItem: FC<CardItemProps> = (props) => {
     };
 
     useEffect(() => {
-        setLiked(favorite)
+        setLiked(favorite);
     }, [favorite]);
 
     const classes = useStyles({ads_type, isFavorite});
@@ -79,104 +84,102 @@ export const CardItem: FC<CardItemProps> = (props) => {
                     className="favorite-btn" onClick={handleFavorite}
                 >
                     {liked
-                        ? <FavoriteIcon />
-                        : <FavoriteBorderIcon />
+                     ? <FavoriteIcon/>
+                     : <FavoriteBorderIcon/>
                     }
                 </IconButton>
             )}
-            <Link href={`/obyavlenie/${translatedTitle}-${id}`}>
+            <Link href={url}>
                 <a target='_blank'>
                     <Card elevation={0} title={title}>
-                        {isFetch ? (
-                            <Skeleton
-                                variant="rect"
-                                className={classes.skeleton}
-                            />
-                        ) : (
-                            <CardMedia
-                                className="card-media"
-                                image={image ?? '/img/card-logo.png'}
-                            >
-                                <div className="card-header">
-                                    <div className="title">
-                                        <Typography variant="subtitle2">
-                                            {t(ads_type === 'exauc' ? 'auc' : ads_type)}
-                                        </Typography>
-                                    </div>
-                                    <div className="icons">
-                                        {!!delivery && (
-                                            <Tooltip
-                                                title="Есть доставка"
-                                                arrow
-                                            >
+                        {isFetch
+                         ? <Skeleton
+                             variant="rect"
+                             className={classes.skeleton}
+                         />
+                         : <CardMedia
+                             className="card-media"
+                             image={image ?? '/img/card-logo.png'}
+                         >
+                             <div className="card-header">
+                                 <div className="title">
+                                     <Typography variant="subtitle2">
+                                         {t(ads_type === 'exauc' ? 'auc' : ads_type)}
+                                     </Typography>
+                                 </div>
+                                 <div className="icons">
+                                     {!!delivery && (
+                                         <Tooltip
+                                             title="Есть доставка"
+                                             arrow
+                                         >
                                                 <span>
                                                     <DeliveryIcon/>
                                                 </span>
-                                            </Tooltip>
-                                        )}
-                                        {!!safe_deal && (
-                                            <Tooltip
-                                                title="Безопасная покупка"
-                                                arrow
-                                            >
+                                         </Tooltip>
+                                     )}
+                                     {!!safe_deal && (
+                                         <Tooltip
+                                             title="Безопасная покупка"
+                                             arrow
+                                         >
                                                 <span>
                                                     <SafeIcon/>
                                                 </span>
-                                            </Tooltip>
-                                        )}
-                                        {!!exchange && (
-                                            <Tooltip
-                                                title="Возможен обмен"
-                                                arrow
-                                            >
+                                         </Tooltip>
+                                     )}
+                                     {!!exchange && (
+                                         <Tooltip
+                                             title="Возможен обмен"
+                                             arrow
+                                         >
                                                 <span>
                                                     <SwapIcon/>
                                                 </span>
-                                            </Tooltip>
-                                        )}
-                                    </div>
-                                </div>
-                            </CardMedia>
-                        )}
+                                         </Tooltip>
+                                     )}
+                                 </div>
+                             </div>
+                         </CardMedia>}
                         <CardActionArea>
                             <CardContent>
                                 {isFetch
-                                    ? <>
-                                        <Skeleton variant="rect"/>
-                                        <Skeleton variant="rect"/>
-                                        <Skeleton variant="rect"/>
-                                        <br/>
-                                        <Skeleton variant="rect"/>
-                                    </>
-                                    : <>
-                                        <Typography
-                                            variant="subtitle1"
-                                            color="initial"
-                                            noWrap
-                                        >
-                                            {title}
-                                        </Typography>
-                                        <Typography
-                                            variant="h5"
-                                            color="initial"
-                                        >
-                                            {numberPrettier(price)}
-                                            <span> {t(currency.name)}</span>
-                                        </Typography>
-                                        <Typography variant="caption" noWrap>
-                                            {`${region.name}, ${city.name}`}
-                                        </Typography>
-                                        <Typography variant="caption">
-                                            {formatted_date}
-                                        </Typography>
-                                    </>}
+                                 ? <>
+                                     <Skeleton variant="rect"/>
+                                     <Skeleton variant="rect"/>
+                                     <Skeleton variant="rect"/>
+                                     <br/>
+                                     <Skeleton variant="rect"/>
+                                 </>
+                                 : <>
+                                     <Typography
+                                         variant="subtitle1"
+                                         color="initial"
+                                         noWrap
+                                     >
+                                         {title}
+                                     </Typography>
+                                     <Typography
+                                         variant="h5"
+                                         color="initial"
+                                     >
+                                         {numberPrettier(price)}
+                                         <span> {t(currency.name)}</span>
+                                     </Typography>
+                                     <Typography variant="caption" noWrap>
+                                         {`${region.name}, ${city.name}`}
+                                     </Typography>
+                                     <Typography variant="caption">
+                                         {formatted_date}
+                                     </Typography>
+                                 </>}
                             </CardContent>
                         </CardActionArea>
                     </Card>
                 </a>
             </Link>
         </div>
-    )
-}
+    );
+};
 
 

@@ -18,7 +18,7 @@ export const ShowPostContainer: FC = () => {
     const dispatch = useDispatch();
     const {t} = useTranslation('post');
 
-    const {url, archive} = useRouter().query;
+    const {url, archive = 0} = useRouter().query;
     const postUrl = url as string;
     const [postId] = postUrl.split('-').splice(-1);
 
@@ -109,7 +109,7 @@ export const ShowPostContainer: FC = () => {
                 district,
                 available_days,
                 ...otherData
-            } = await userAPI.getPostById({id: postId, archive: archive ?? 0});
+            } = await userAPI.getPostById({id: postId, archive});
 
             if (available_days) {
                 otherData.available_days = available_days.map(day => {
@@ -174,6 +174,7 @@ export const ShowPostContainer: FC = () => {
                         <OwnerAuctionInfo
                             t={t}
                             data={data}
+                            archive={+archive}
                         />
                         <Hidden mdDown>
                             <div className={classes.adBanner}>

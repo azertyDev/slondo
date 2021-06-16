@@ -36,9 +36,7 @@ export const ListCard: FC<ListCardPropsType> = ({cardData, archive}) => {
 
     const translatedTitle = transformCyrillic(cardData.title);
 
-    let url = `/obyavlenie/${translatedTitle}-${cardData.id}`;
-
-    if (archive) url = `${url}?archive=1`;
+    const url = `/obyavlenie/${translatedTitle}-${cardData.id}${archive ? '?archive=1' : ''}`;
 
     const classes = useStyles();
     return (

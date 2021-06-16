@@ -1,4 +1,4 @@
-import React, {FC, useEffect, useRef, useState} from 'react';
+import {FC, useEffect, useRef, useState} from 'react';
 import Link from 'next/link';
 import {WithT} from 'i18next';
 import {Grid, Hidden, TextField, Typography} from '@material-ui/core';
@@ -11,17 +11,20 @@ import {CustomModal} from '@src/components/elements/custom_modal/CustomModal';
 import {userAPI} from '@src/api/api';
 import {setErrorMsgAction} from '@src/redux/slices/errorSlice';
 import {useDispatch} from 'react-redux';
+import {BETS_PER_PAGE} from '@src/constants';
 import {useStyles} from './useStyles';
 
 
 type AuctionInfoPropsType = {
     postData,
+    archive
 } & WithT;
 
 export const AuctionContent: FC<AuctionInfoPropsType> = (props) => {
     const {
         t,
-        postData
+        postData,
+        archive
     } = props;
 
     const dispatch = useDispatch();
@@ -102,8 +105,17 @@ export const AuctionContent: FC<AuctionInfoPropsType> = (props) => {
 
     const handleRefreshBets = async () => {
         try {
+            const params = {
+                archive,
+                auction_id: postData.auction.id,
+                page: page.currentPage,
+                per_page: BETS_PER_PAGE
+            };
+
             setIsFetch(true);
-            const bets = await userAPI.getAuctionBets(postData.auction.id, 1);
+
+            const bets = await userAPI.getAuctionBets(params);
+
             setBets(bets.data);
             setIsFetch(false);
         } catch (e) {
@@ -115,8 +127,17 @@ export const AuctionContent: FC<AuctionInfoPropsType> = (props) => {
     const auctionBetsPagination = async () => {
         try {
             if (page.lastPage >= page.currentPage) {
+                const params = {
+                    archive,
+                    auction_id: postData.auction.id,
+                    page: page.currentPage,
+                    per_page: BETS_PER_PAGE
+                };
+
                 setIsFetch(true);
-                const {total, data} = await userAPI.getAuctionBets(postData.auction.id, page.currentPage);
+
+                const {total, data} = await userAPI.getAuctionBets(params);
+
                 setBets([...bets, ...data]);
                 setPage({...page, lastPage: Math.ceil(total / 25)});
                 setIsFetch(false);
@@ -221,8 +242,8 @@ export const AuctionContent: FC<AuctionInfoPropsType> = (props) => {
                                             className="per-bet"
                                         >
                                             {item.outbid === 0
-                                                ? <span className='started-price'>Стартовая цена</span>
-                                                : `+ ${numberPrettier(item.outbid)}`}
+                                             ? <span className='started-price'>Стартовая цена</span>
+                                             : `+ ${numberPrettier(item.outbid)}`}
                                         </Typography>
                                     </div>
                                 </li>
@@ -236,26 +257,27 @@ export const AuctionContent: FC<AuctionInfoPropsType> = (props) => {
                         onClick={() => setShowAll(!showAll)}
                     >
                         {!showAll
-                            ?
-                            <Typography variant="subtitle1" className="show-hide-all-bet">
-                                {t('auction:allBets')}
-                                <svg width="13" height="8" viewBox="0 0 13 6" fill="none"
-                                     xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M0 0H13L6.5 6L0 0Z" fill="#675EAA"/>
-                                </svg>
-                            </Typography>
-                            :
-                            <Typography variant="subtitle1" className="show-hide-all-bet">
-                                {t('main:hide')}
-                                <svg width="13" height="8" viewBox="0 0 13 6" fill="none"
-                                     xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M13 6H0L6.5 0L13 6Z" fill="#675EAA"/>
-                                </svg>
-                            </Typography>
-                        }
+                         ? <Typography variant="subtitle1" className="show-hide-all-bet">
+                             {t('auction:allBets')}
+                             <svg
+                                 width="13" height="8" viewBox="0 0 13 6" fill="none"
+                                 xmlns="http://www.w3.org/2000/svg"
+                             >
+                                 <path d="M0 0H13L6.5 6L0 0Z" fill="#675EAA"/>
+                             </svg>
+                         </Typography>
+                         : <Typography variant="subtitle1" className="show-hide-all-bet">
+                             {t('main:hide')}
+                             <svg
+                                 width="13" height="8" viewBox="0 0 13 6" fill="none"
+                                 xmlns="http://www.w3.org/2000/svg"
+                             >
+                                 <path d="M13 6H0L6.5 0L13 6Z" fill="#675EAA"/>
+                             </svg>
+                         </Typography>}
                     </Typography>
                 </div>
-                {!postData.creator && (
+                {!postData.creator && !archive && (
                     <>
                         <AuctionForm
                             t={t}

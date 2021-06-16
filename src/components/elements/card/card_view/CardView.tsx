@@ -25,10 +25,11 @@ export const CardView: FC<ViewPropsType> = (props) => {
             )}
         </div>
         : <Grid container spacing={2}>
-            {data.map((cardData) => (
-                <Grid key={cardData.id} xs={6} sm={6} md={4} lg={3} item>
+            {data.map((cardData, i) => (
+                <Grid key={i} xs={6} sm={6} md={4} lg={3} item>
                     <CardItem
                         {...cardData}
+                        archive={archive}
                         isFetch={isFetch}
                     />
                 </Grid>
