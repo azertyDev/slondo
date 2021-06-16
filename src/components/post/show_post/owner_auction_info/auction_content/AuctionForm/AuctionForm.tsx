@@ -1,4 +1,4 @@
-import {FC, useState} from 'react';
+import {FC, useEffect, useState} from 'react';
 import {WithT} from 'i18next';
 import Grid from '@material-ui/core/Grid';
 import {FormikProvider, useFormik} from 'formik';
@@ -8,10 +8,10 @@ import {CustomButton} from '@src/components/elements/custom_button/CustomButton'
 import {getAuctionSchema} from '@root/validation_schemas/auctionSchema';
 import {numberRegEx, whiteSpacesRegEx} from '@src/common_data/reg_exs';
 import {FormikField} from '@src/components/elements/formik_field/FormikField';
-import {useStyles} from './useStyles';
 import {userAPI} from '@src/api/api';
 import {setErrorMsgAction} from '@src/redux/slices/errorSlice';
 import {useDispatch} from 'react-redux';
+import {useStyles} from './useStyles';
 
 type AuctionFromPropsType = {
     auctionId: string
@@ -20,11 +20,18 @@ type AuctionFromPropsType = {
 export const AuctionForm: FC<AuctionFromPropsType> = (props) => {
     const {
         t,
-        auctionId,
+        auctionId
     } = props;
+
+    const initLastBet = {
+        min_bet: 0,
+        max_bet: 0
+    };
 
     const dispatch = useDispatch();
     const [isFetch, setIsFetch] = useState(false);
+    const [lastBet, setLastBet] = useState(initLastBet);
+
     const isMdDown = useMediaQuery(useTheme().breakpoints.down('md'));
 
     const handleBet = async (bet) => {
@@ -63,6 +70,31 @@ export const AuctionForm: FC<AuctionFromPropsType> = (props) => {
         touched,
         handleSubmit
     } = formik;
+
+    const setFetchedBets = async () => {
+        try {
+            const params = {
+                auction_id: auctionId,
+                page: 1,
+                per_page: 1,
+                archive: 0
+            };
+
+            setIsFetch(true);
+
+            const [lastBet] = (await userAPI.getAuctionBets(params)).data;
+
+            setLastBet(lastBet);
+            setIsFetch(false);
+        } catch (e) {
+            setIsFetch(false);
+            dispatch(setErrorMsgAction(e.message));
+        }
+    };
+
+    useEffect(() => {
+       setFetchedBets();
+    }, []);
 
     const classes = useStyles({isMdDown});
     return (

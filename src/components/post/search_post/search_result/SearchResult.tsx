@@ -1,5 +1,5 @@
 import {FC, useEffect, useState} from 'react';
-import {ITEMS_PER_PAGE_FILTERS} from '@src/constants';
+import {FILTERS_PER_PAGE} from '@src/constants';
 import {CardView} from '@src/components/elements/card/card_view/CardView';
 import {Typography} from '@material-ui/core';
 import {WithT} from 'i18next';
@@ -31,7 +31,7 @@ export const SearchResult: FC<SearchResultPropsType> = (props) => {
     const [posts, setPosts] = useState([]);
     const [isNotFound, setIsNotFound] = useState(false);
     const [page, setPage] = useState(1);
-    const [totalPages, setTotalPages] = useState(0);
+    const [itemsCount, setItemsCount] = useState(0);
 
     const handlePagePagination = (_, pageNum) => {
         setPage(pageNum);
@@ -43,7 +43,7 @@ export const SearchResult: FC<SearchResultPropsType> = (props) => {
 
             const query: any = {
                 page,
-                itemsPerPage: ITEMS_PER_PAGE_FILTERS,
+                itemsPerPage: FILTERS_PER_PAGE,
                 ...urlParams
             };
 
@@ -68,7 +68,7 @@ export const SearchResult: FC<SearchResultPropsType> = (props) => {
 
             if (total) {
                 setPosts(data);
-                setTotalPages(total);
+                setItemsCount(total);
                 isNotFound && setIsNotFound(false);
             } else {
                 setIsNotFound(true);
@@ -81,7 +81,7 @@ export const SearchResult: FC<SearchResultPropsType> = (props) => {
     useEffect(() => {
         getPostsByFilters();
     }, [urlParams, page]);
-    console.log('urlParams', !!urlParams.archive);
+
     const classes = useStyles();
     return (
         <div className={classes.root}>
@@ -96,8 +96,8 @@ export const SearchResult: FC<SearchResultPropsType> = (props) => {
                  <div className='pagination-wrapper'>
                      <CustomPagination
                          currentPage={page}
-                         pageCount={totalPages}
-                         itemsPerPage={ITEMS_PER_PAGE_FILTERS}
+                         totalItems={itemsCount}
+                         itemsPerPage={FILTERS_PER_PAGE}
                          handlePagePagination={handlePagePagination}
                      />
                  </div>

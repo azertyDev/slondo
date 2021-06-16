@@ -35,7 +35,8 @@ import {useStyles} from './useStyles';
 
 
 type PostContentTypes = {
-    data
+    data,
+    archive: number
 } & WithT;
 
 export type SlidersRefType = {
@@ -48,7 +49,8 @@ export type SlidersRefType = {
 export const PostContent: FC<PostContentTypes> = (props) => {
     const {
         t,
-        data
+        data,
+        archive
     } = props;
 
     const dispatch = useDispatch();
@@ -297,6 +299,7 @@ export const PostContent: FC<PostContentTypes> = (props) => {
                         <AuctionContent
                             t={t}
                             postData={data}
+                            archive={archive}
                         />
                     )}
                 </Hidden>

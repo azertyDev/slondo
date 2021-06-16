@@ -144,6 +144,10 @@ export const useStyles = makeStyles((theme) => ({
             }
         }
     },
+    pagination: {
+        display: 'flex',
+        justifyContent: 'center'
+    },
     showMore: {
         background: '#F9F9F9',
         boxShadow: '0px 1px 2px rgba(0, 0, 0, 0.15)',

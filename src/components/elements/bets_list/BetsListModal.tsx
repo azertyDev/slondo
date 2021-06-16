@@ -1,4 +1,4 @@
-import {FC, useState} from 'react';
+import {FC, useEffect, useState} from 'react';
 import {
     Box,
     IconButton,
@@ -9,43 +9,56 @@ import {
     TableContainer,
     TableFooter,
     TableHead,
-    TablePagination,
     TableRow,
     Typography
 } from '@material-ui/core';
-import {useStyles} from './useStyles';
 import {useTranslation} from 'react-i18next';
 import {ResponsiveModal} from '@src/components/elements/responsive_modal/ResponsiveModal';
 import {numberPrettier} from '@src/helpers';
 import {CloseIcon} from '@src/components/elements/icons';
+import {BETS_PER_PAGE} from '@src/constants';
+import {CustomPagination} from '@src/components/elements/custom_pagination/CustomPagination';
+import {useStyles} from './useStyles';
 
 type BetsListPropsType = {
-    bets,
     auctionId: number,
     modalOpen: boolean,
+    getBetsByPage: (page: number, per_page: number) => any,
     handleModalClose: () => void
 }
 
 export const BetsListModal: FC<BetsListPropsType> = (props) => {
     const {
-        bets,
         auctionId,
         modalOpen,
+        getBetsByPage,
         handleModalClose
     } = props;
     const {t} = useTranslation('auction');
 
-    const [page, setPage] = useState(0);
-    const [rowsPerPage, setRowsPerPage] = useState(10);
+    const [isFetch, isFetFetch] = useState(false);
+    const [bets, setBets] = useState([]);
+    const [page, setPage] = useState(1);
+    const [itemsCount, setItemsCount] = useState(0);
 
-    const handleChangePage = (event, newPage) => {
-        setPage(newPage);
+    const handlePagePagination = (_, pageNum) => {
+        setPage(pageNum);
     };
 
-    const handleChangeRowsPerPage = (event) => {
-        setRowsPerPage(parseInt(event.target.value, 10));
-        setPage(0);
+    const setFetchedBets = async () => {
+        isFetFetch(true);
+
+        const {data, total} = await getBetsByPage(page, BETS_PER_PAGE);
+
+        setBets(data);
+        setItemsCount(total);
+
+        isFetFetch(false);
     };
+
+    useEffect(() => {
+        setFetchedBets();
+    }, [page]);
 
     const classes = useStyles();
     return (
@@ -59,7 +72,7 @@ export const BetsListModal: FC<BetsListPropsType> = (props) => {
                 className={classes.closeBtn}
                 size='small'
             >
-                <CloseIcon />
+                <CloseIcon/>
             </IconButton>
             <Box
                 p={3}
@@ -90,10 +103,7 @@ export const BetsListModal: FC<BetsListPropsType> = (props) => {
                             </TableRow>
                         </TableHead>
                         <TableBody>
-                            {(rowsPerPage > 0
-                                    ? bets.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                                    : bets
-                            ).map((bet) => (
+                            {bets.map(bet => (
                                 <TableRow key={bet.id}>
                                     <TableCell component="td" align="center">
                                         <Typography variant="subtitle1" noWrap>
@@ -126,8 +136,8 @@ export const BetsListModal: FC<BetsListPropsType> = (props) => {
                                             className="per-bet"
                                         >
                                             {bet.outbid === 0
-                                                ? <span className='started-price'>Стартовая цена</span>
-                                                : `+ ${numberPrettier(bet.outbid)}`}
+                                             ? <span className='started-price'>Стартовая цена</span>
+                                             : `+ ${numberPrettier(bet.outbid)}`}
                                         </Typography>
                                     </TableCell>
                                     <TableCell align="center">
@@ -142,25 +152,16 @@ export const BetsListModal: FC<BetsListPropsType> = (props) => {
                                 </TableRow>
                             ))}
                         </TableBody>
-                        <TableFooter>
-                            <TableRow>
-                                <TablePagination
-                                    rowsPerPageOptions={[5, 10]}
-                                    labelRowsPerPage={
-                                        <Typography variant='subtitle1'>
-                                            {t('numberOfLines')}
-                                        </Typography>
-                                    }
-                                    page={page}
-                                    count={bets.length}
-                                    rowsPerPage={rowsPerPage}
-                                    onChangePage={handleChangePage}
-                                    onChangeRowsPerPage={handleChangeRowsPerPage}
-                                />
-                            </TableRow>
-                        </TableFooter>
                     </Table>
                 </TableContainer>
+                <div className={classes.pagination}>
+                    <CustomPagination
+                        currentPage={page}
+                        totalItems={itemsCount}
+                        itemsPerPage={BETS_PER_PAGE}
+                        handlePagePagination={handlePagePagination}
+                    />
+                </div>
             </Box>
         </ResponsiveModal>
     );

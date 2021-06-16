@@ -6,7 +6,7 @@ import {userAPI} from '@src/api/api';
 import {useDispatch} from 'react-redux';
 import {setErrorMsgAction} from '@src/redux/slices/errorSlice';
 import {TabsDataType} from '@root/interfaces/Cabinet';
-import {ITEMS_PER_PAGE_SUBS} from '@src/constants';
+import {SUBS_PER_PAGE} from '@src/constants';
 
 export const UserSocialInfoContainer: FC = () => {
     const dispatch = useDispatch();
@@ -71,7 +71,7 @@ export const UserSocialInfoContainer: FC = () => {
             id: 0,
             title: 'Подписки',
             total: subs.subscriptions.total,
-            itemsPerPage: ITEMS_PER_PAGE_SUBS,
+            itemsPerPage: SUBS_PER_PAGE,
             handleFetchByPage: null,
             component: <UserSubscriptions subscriptions={subs.subscriptions.data} handleFollow={handleFollow}/>
         },
@@ -79,7 +79,7 @@ export const UserSocialInfoContainer: FC = () => {
             id: 1,
             title: 'Подписчики',
             total: subs.subscribers.total,
-            itemsPerPage: ITEMS_PER_PAGE_SUBS,
+            itemsPerPage: SUBS_PER_PAGE,
             handleFetchByPage: null,
             component: <UserSubscribers subscribers={subs.subscribers.data} handleFollow={handleFollow}/>
         }

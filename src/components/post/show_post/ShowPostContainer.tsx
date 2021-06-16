@@ -168,6 +168,7 @@ export const ShowPostContainer: FC = () => {
                         <PostContent
                             t={t}
                             data={data}
+                            archive={+archive}
                         />
                     </Grid>
                     <Grid item lg={3} xs={12}>

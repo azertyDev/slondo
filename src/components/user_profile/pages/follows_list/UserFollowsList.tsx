@@ -7,7 +7,7 @@ import {userAPI} from '@src/api/api';
 import {setErrorMsgAction} from '@src/redux/slices/errorSlice';
 import {useRouter} from 'next/router';
 import {SubscriptionItem} from '@src/components/cabinet/cabinet_pages/user_social_info/subscription_item/SubscriptionItem';
-import {ITEMS_PER_PAGE_SUBS} from '@src/constants';
+import {SUBS_PER_PAGE} from '@src/constants';
 import {CustomLoader} from '@src/components/elements/custom_loader/CustomLoader';
 
 export const UserFollowsList: FC<WithT> = ({t}) => {
@@ -32,7 +32,7 @@ export const UserFollowsList: FC<WithT> = ({t}) => {
             const fetchParams = {
                 user_id,
                 page,
-                itemsPerPage: ITEMS_PER_PAGE_SUBS
+                itemsPerPage: SUBS_PER_PAGE
             };
             setIsFetch(true);
 
@@ -80,7 +80,7 @@ export const UserFollowsList: FC<WithT> = ({t}) => {
             id: 0,
             title: t('Подписки'),
             total: subscriptions.total,
-            itemsPerPage: ITEMS_PER_PAGE_SUBS,
+            itemsPerPage: SUBS_PER_PAGE,
             handleFetchByPage: fetchSubsByPage('subscriptions'),
             component: <div>{isFetch ? <CustomLoader color='secondary' /> : subscriptionsList}</div>
         },
@@ -88,7 +88,7 @@ export const UserFollowsList: FC<WithT> = ({t}) => {
             id: 1,
             title: t('Подписчики'),
             total: subscribers.total,
-            itemsPerPage: ITEMS_PER_PAGE_SUBS,
+            itemsPerPage: SUBS_PER_PAGE,
             handleFetchByPage: fetchSubsByPage('subscribers'),
             component: <div>{isFetch ? <CustomLoader /> : subscribersList}</div>
         }

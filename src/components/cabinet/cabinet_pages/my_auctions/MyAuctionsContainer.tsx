@@ -26,13 +26,13 @@ import {ITEMS_PER_PAGE} from '@src/constants';
 import {CustomPagination} from '@src/components/elements/custom_pagination/CustomPagination';
 import {CustomTabPanel} from '@src/components/elements/custom_tab_panel/CustomTabPanel';
 import {useModal} from '@src/hooks/useModal';
-import {useStyles} from './useStyles';
 import {CardDataType} from '@root/interfaces/CardData';
 import {DetailedPostView} from '@src/components/cabinet/components/detailed_post_view/DetailedPostView';
 import {CabinetModal} from '@src/components/cabinet/components/cabinet_modal/CabinetModal';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import {numberPrettier} from '@src/helpers';
 import {Notification} from '@src/components/cabinet/cabinet_pages/notifications/notification_card/Notification';
+import {useStyles} from './useStyles';
 
 export const MyAuctionsContainer: FC = () => {
     const dispatch = useDispatch();
@@ -154,7 +154,7 @@ export const MyAuctionsContainer: FC = () => {
     const [auctionId, setAuctionId] = useState(null);
     const [phone, setPhone] = useState(null);
     const [page, setPage] = useState(1);
-    const [pageCount, setPageCount] = useState(0);
+    const [itemsCount, setItemsCount] = useState(0);
     const [childTabValue, setChildTabValue] = useState(0);
     const {modalOpen: openDialog, handleModalOpen: handleOpenDialog, handleModalClose: handleCloseDialog} = useModal();
 
@@ -191,7 +191,7 @@ export const MyAuctionsContainer: FC = () => {
                 };
                 setNotification({...notification, isFetch: true});
                 const {data, total} = await userAPI.getNotificationById(params);
-                setPageCount(total);
+                setItemsCount(total);
                 setSelectedAuction({...selectedAuction, ...post});
                 setNotification({...notification, data, isFetch: false});
             }
@@ -250,8 +250,8 @@ export const MyAuctionsContainer: FC = () => {
                 setParticipatingData({...auctionData, isFetch: true});
                 const {data, total, message} = await userAPI.getAuctionSubs();
                 message
-                    ? setParticipatingData(initialState)
-                    : setParticipatingData({myPosts: {data, total}, isFetch: false});
+                ? setParticipatingData(initialState)
+                : setParticipatingData({myPosts: {data, total}, isFetch: false});
             }
         } catch (e) {
             dispatch(setErrorMsgAction(e));
@@ -261,15 +261,20 @@ export const MyAuctionsContainer: FC = () => {
         try {
             const isCreatedAuction = type === 'auc';
             if (isCreatedAuction) {
+                const params = {
+                    type,
+                    page: 1,
+                    itemsPerPage: ITEMS_PER_PAGE
+                };
                 setAuctionArchiveData({...auctionArchiveData, isFetch: true});
-                const {data, total} = await userAPI.getUserArchivePosts({type, onlySecure: 0});
+                const {data, total} = await userAPI.getUserArchivePosts(params);
                 setAuctionArchiveData({myPosts: {data, total}, isFetch: false});
             } else {
                 setParticipatingArchiveData({...participatingArchiveData, isFetch: true});
                 const {data, total, message} = await userAPI.getAuctionSubArchive();
                 message
-                    ? setParticipatingArchiveData(initialState)
-                    : setParticipatingArchiveData({myPosts: {data, total}, isFetch: false});
+                ? setParticipatingArchiveData(initialState)
+                : setParticipatingArchiveData({myPosts: {data, total}, isFetch: false});
             }
         } catch (e) {
             dispatch(setErrorMsgAction(e));
@@ -505,20 +510,20 @@ export const MyAuctionsContainer: FC = () => {
     const ModalContent = () => (
         <>
             {modalContentIndex === 1
-                ? <Typography className="title" variant="h6">
-                    {`${t(`common:${selectedAuction.ads_type}`)} №: ${selectedAuction.id}`}
-                </Typography>
-                : (modalContentIndex !== 10 && modalContentIndex !== 11 && (
+             ? <Typography className="title" variant="h6">
+                 {`${t(`common:${selectedAuction.ads_type}`)} №: ${selectedAuction.id}`}
+             </Typography>
+             : (modalContentIndex !== 10 && modalContentIndex !== 11 && (
                         <IconButton
                             size="medium"
                             aria-label="back"
                             className='prev-btn'
                             onClick={handlePrevMenu}
                         >
-                            <ArrowBackIcon fontSize="inherit" />
+                            <ArrowBackIcon fontSize="inherit"/>
                         </IconButton>
                     )
-                )
+             )
             }
             {getModalContent()}
         </>
@@ -527,7 +532,7 @@ export const MyAuctionsContainer: FC = () => {
     const pagination = (
         <CustomPagination
             currentPage={page}
-            pageCount={pageCount}
+            totalItems={itemsCount}
             itemsPerPage={ITEMS_PER_PAGE}
             handlePagePagination={handlePagePagination}
         />
@@ -611,7 +616,7 @@ export const MyAuctionsContainer: FC = () => {
                 {auctionData.isFetch ? <CircularProgress color="primary"/> : creatorAuctionCards}
             </CustomTabPanel>
             <CustomTabPanel value={childTabValue} index={1}>
-                {auctionArchiveData.isFetch ? <CircularProgress color="primary" /> : archiveAuctionCards}
+                {auctionArchiveData.isFetch ? <CircularProgress color="primary"/> : archiveAuctionCards}
             </CustomTabPanel>
         </>
     );
@@ -648,7 +653,8 @@ export const MyAuctionsContainer: FC = () => {
                 {participatingData.isFetch ? <CircularProgress color="primary"/> : participantsAuctionCards}
             </CustomTabPanel>
             <CustomTabPanel value={childTabValue} index={1}>
-                {participatingArchiveData.isFetch ? <CircularProgress color="primary" /> : participatingArchiveAuctionCards}
+                {participatingArchiveData.isFetch ?
+                 <CircularProgress color="primary"/> : participatingArchiveAuctionCards}
             </CustomTabPanel>
         </>
     );
@@ -706,7 +712,7 @@ export const MyAuctionsContainer: FC = () => {
                 openDialog={settingsModalOpen}
                 handleCloseDialog={handleSettingsClose}
             >
-                <ModalContent />
+                <ModalContent/>
             </CabinetModal>
             <CabinetModal openDialog={notificationsOpen} handleCloseDialog={closeNotificationsModal}>
                 <Box
@@ -764,7 +770,7 @@ export const MyAuctionsContainer: FC = () => {
                 )}
             </CabinetModal>
         </>
-    )
+    );
 };
 
 export default withAuthRedirect(MyAuctionsContainer);

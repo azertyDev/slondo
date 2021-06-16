@@ -63,7 +63,7 @@ export const ProfileTabsContent: FC<TabsContentPropsType> = (props) => {
                 {firstTabData.component}
                 <CustomPagination
                     currentPage={firstTabPage}
-                    pageCount={firstTabData.total}
+                    totalItems={firstTabData.total}
                     itemsPerPage={firstTabData.itemsPerPage}
                     handlePagePagination={handlePagePagination(setFirstTabPage)}
                 />
@@ -72,7 +72,7 @@ export const ProfileTabsContent: FC<TabsContentPropsType> = (props) => {
                 {secondTabData.component}
                 <CustomPagination
                     currentPage={secondTabPage}
-                    pageCount={secondTabData.total}
+                    totalItems={secondTabData.total}
                     itemsPerPage={secondTabData.itemsPerPage}
                     handlePagePagination={handlePagePagination(setSecondTabPage)}
                 />

@@ -250,7 +250,7 @@ const MyPostsContainer: FC = () => {
     const [errorMsg, setErrMsg] = useState('');
     const [selectedPost, setSelectedPost] = useState(initialSelectedPost);
     const [page, setPage] = useState(1);
-    const [pageCount, setPageCount] = useState(0);
+    const [itemsCount, setItemsCount] = useState(0);
     const [childTabValue, setChildTabValue] = useState(0);
 
     const {modalOpen: settingsModalOpen, handleModalClose: closeSettingsModal, handleModalOpen: openSettingsModal} = useModal();
@@ -346,7 +346,7 @@ const MyPostsContainer: FC = () => {
                 };
                 setNotification({...notification, isFetch: true});
                 const {data, total} = await userAPI.getNotificationById(params);
-                setPageCount(total);
+                setItemsCount(total);
                 setSelectedPost({...selectedPost, ...post});
                 setNotification({...notification, data, isFetch: false});
             }
@@ -657,7 +657,7 @@ const MyPostsContainer: FC = () => {
     const pagination = (
         <CustomPagination
             currentPage={page}
-            pageCount={pageCount}
+            totalItems={itemsCount}
             itemsPerPage={ITEMS_PER_PAGE}
             handlePagePagination={handlePagePagination}
         />

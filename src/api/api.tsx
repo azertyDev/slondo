@@ -204,6 +204,13 @@ export const userAPI = {
                 throw err;
             });
     },
+    getAuctionSubArchive: () => {
+        return instance.get(`regular/user/archiveAuctions/participating`, setTokenToHeader())
+            .then(res => res.data)
+            .catch(err => {
+                throw err;
+            });
+    },
     getAuctionBets: (params): Promise<any> => {
         return instance.get(`auction/allBets`, {params})
             .then(res => res.data)
@@ -239,10 +246,10 @@ export const userAPI = {
                 throw err;
             });
     },
-    getUserArchivePosts: ({type = 'post'}: { type?: string }): Promise<any> => {
+    getUserArchivePosts: (params): Promise<any> => {
         return instance.get(
-            `regular/user/archivePosts?itemsPerPage=25&page=1&type=${type}`,
-            setTokenToHeader()
+            `regular/user/archivePosts`,
+            {params, ...setTokenToHeader()}
         )
             .then(res => res.data)
             .catch(err => {
@@ -270,10 +277,9 @@ export const userAPI = {
                 throw err;
             });
     },
-    acceptVictory: (auction_id: number, is_accepted: boolean): Promise<any> => {
-        return instance.post(`regular/auction/accept`, {
-            auction_id,
-            is_accepted
+    rejectVictory: (auction_id: number): Promise<any> => {
+        return instance.post(`regular/auction/reject`, {
+            auction_id
         }, setTokenToHeader())
             .then(res => res.data)
             .catch(err => {
