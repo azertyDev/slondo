@@ -1,5 +1,13 @@
 {
   "youCanNotBeatYourBet": "Вы не сможете поднять свою ставку!",
   "invalidBed": "Ставка была уже повыщена, обновите лист!",
-  "allBets": "Все ставки"
+  "allBets": "Все ставки",
+  "currentRates": "Текущие ставки",
+  "extremeRates": "Крайние ставки",
+  "player": "Игрок",
+  "date": "Дата",
+  "time": "Время",
+  "difference": "Разница",
+  "bet": "Ставка",
+  "numberOfLines": "Количество строк"
 }

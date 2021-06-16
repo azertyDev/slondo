@@ -3,7 +3,7 @@ import {WithT} from 'i18next';
 import {Grid, Hidden, Typography} from '@material-ui/core';
 import {LocationIcon} from '@src/components/elements/icons';
 import {CustomButton} from '@src/components/elements/custom_button/CustomButton';
-import {ResponsiveDialog} from '@src/components/elements/responsive_dialog/ResponsiveDialog';
+import {ResponsiveModal} from '@src/components/elements/responsive_modal/ResponsiveModal';
 import KeyboardArrowRightIcon from '@material-ui/icons/KeyboardArrowRight';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import {CloseBtn} from '@src/components/elements/close_button/CloseBtn';
@@ -37,7 +37,7 @@ export const LocationModal: FC<LocationModalPropsType> = (props) => {
 
     const classes = useStyles({hasRegion});
     return (
-        <ResponsiveDialog
+        <ResponsiveModal
             openDialog={modalOpen}
             handleCloseDialog={handleModalClose}
         >
@@ -106,6 +106,6 @@ export const LocationModal: FC<LocationModalPropsType> = (props) => {
                     </Grid>
                 </div>
             </div>
-        </ResponsiveDialog>
+        </ResponsiveModal>
     );
 };

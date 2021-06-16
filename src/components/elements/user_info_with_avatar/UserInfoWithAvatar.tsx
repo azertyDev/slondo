@@ -12,7 +12,9 @@ type UserInfoWithAvatarPropsType = {
     owner: UserInfo,
     isOwner?: boolean,
     handleFollow?: (userId) => () => void,
-    subscribed?: boolean
+    subscribed?: boolean,
+    width?: string,
+    height?: string
 };
 
 export const UserInfoWithAvatar: FC<UserInfoWithAvatarPropsType> = (props) => {
@@ -20,7 +22,9 @@ export const UserInfoWithAvatar: FC<UserInfoWithAvatarPropsType> = (props) => {
         isOwner,
         owner,
         subscribed,
-        handleFollow
+        handleFollow,
+        width,
+        height
     } = props;
     const {t} = useTranslation('cabinet');
     const date = new Date(owner.created_at);
@@ -31,7 +35,11 @@ export const UserInfoWithAvatar: FC<UserInfoWithAvatarPropsType> = (props) => {
         <div className={classes.root}>
             <div className="user-info">
                 <Box>
-                    <UserAvatarComponent avatar={owner.avatar} />
+                    <UserAvatarComponent
+                        avatar={owner.avatar}
+                        width={width}
+                        height={height}
+                    />
                 </Box>
                 <Box>
                     <Link href={`/user/${owner.id}`}>

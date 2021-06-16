@@ -35,7 +35,6 @@ export const SidebarMenu: FC<SidebarMenuPropsType> = ({t, user}) => {
     const handleListItemClick = (url) => async () => {
         await push(`/cabinet/${url}`);
     };
-
     const signOut = async () => {
         dispatch(signOutAction());
         cookies.remove('slondo_auth', {path: '/'});
@@ -115,8 +114,9 @@ export const SidebarMenu: FC<SidebarMenuPropsType> = ({t, user}) => {
                 <CustomBadge badgeContent={number_of_messages} color='error'>
                     <ListItem
                         button
-                        selected={pathname === '/cabinet/messages'}
-                        onClick={handleListItemClick('messages')}
+                        // selected={pathname === '/cabinet/messages'}
+                        // onClick={handleListItemClick('messages')}
+                        disabled
                         disableGutters
                     >
                         <LetterIcon />

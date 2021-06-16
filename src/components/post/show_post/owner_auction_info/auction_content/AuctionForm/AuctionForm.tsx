@@ -1,4 +1,4 @@
-import {FC} from 'react';
+import {FC, useState} from 'react';
 import {WithT} from 'i18next';
 import Grid from '@material-ui/core/Grid';
 import {FormikProvider, useFormik} from 'formik';
@@ -9,20 +9,41 @@ import {getAuctionSchema} from '@root/validation_schemas/auctionSchema';
 import {numberRegEx, whiteSpacesRegEx} from '@src/common_data/reg_exs';
 import {FormikField} from '@src/components/elements/formik_field/FormikField';
 import {useStyles} from './useStyles';
+import {userAPI} from '@src/api/api';
+import {setErrorMsgAction} from '@src/redux/slices/errorSlice';
+import {useDispatch} from 'react-redux';
 
 type AuctionFromPropsType = {
-    handleBet: (bet: string) => void,
-    lastBet
+    auctionId: string
 } & WithT;
 
 export const AuctionForm: FC<AuctionFromPropsType> = (props) => {
     const {
         t,
-        handleBet,
-        lastBet
+        auctionId,
     } = props;
 
+    const dispatch = useDispatch();
+    const [isFetch, setIsFetch] = useState(false);
     const isMdDown = useMediaQuery(useTheme().breakpoints.down('md'));
+
+    const handleBet = async (bet) => {
+        try {
+            setIsFetch(true);
+            await userAPI.betAuction(bet, auctionId);
+            setIsFetch(false);
+        } catch ({response}) {
+            setIsFetch(false);
+            dispatch(
+                setErrorMsgAction(t(`errors:${response.data.message}`))
+            );
+        }
+    };
+
+    const handleInput = ({target: {value}}) => {
+        const regex = new RegExp(numberRegEx);
+        regex.test(value) && setValues({bet: numberPrettier(value)});
+    };
 
     const onSubmit = ({bet}, {resetForm}) => {
         resetForm();
@@ -42,11 +63,6 @@ export const AuctionForm: FC<AuctionFromPropsType> = (props) => {
         touched,
         handleSubmit
     } = formik;
-
-    const handleInput = ({target: {value}}) => {
-        const regex = new RegExp(numberRegEx);
-        regex.test(value) && setValues({bet: numberPrettier(value)});
-    };
 
     const classes = useStyles({isMdDown});
     return (
@@ -69,7 +85,7 @@ export const AuctionForm: FC<AuctionFromPropsType> = (props) => {
                                     type="submit"
                                     color="secondary"
                                     className="btn-bet"
-                                    disabled={!values.bet}
+                                    disabled={!values.bet && isFetch}
                                 >
                                     <Typography variant="subtitle1" color="initial">
                                         Сделать ставку

@@ -79,7 +79,7 @@ export const ListCard: FC<ListCardPropsType> = ({cardData, archive}) => {
                     </div>
                     <div className="description">
                         {cardData.description && (
-                            <Typography noWrap variant='subtitle1'>
+                            <Typography noWrap variant='subtitle2'>
                                 {cardData.description}
                             </Typography>
                         )}
@@ -108,11 +108,12 @@ export const ListCard: FC<ListCardPropsType> = ({cardData, archive}) => {
                             color="initial"
                         >
                             {(!!cardData.auction?.bet
-                              ? numberPrettier(cardData.auction.bet.bet)
-                              : numberPrettier(cardData.price)
+                                    ? numberPrettier(cardData.auction.bet.bet)
+                                    : numberPrettier(cardData.price)
                             )}
-                        </Typography>&nbsp;
-                        <span>{t(`common:${cardData.currency.name}`)}</span>
+                            &nbsp;
+                            <span>{t(`common:${cardData.currency.name}`)}</span>
+                        </Typography>
                     </div>
                 </div>
             </Box>
