@@ -277,10 +277,9 @@ export const userAPI = {
                 throw err;
             });
     },
-    acceptVictory: (auction_id: number, is_accepted: boolean): Promise<any> => {
-        return instance.post(`regular/auction/accept`, {
-            auction_id,
-            is_accepted
+    rejectVictory: (auction_id: number): Promise<any> => {
+        return instance.post(`regular/auction/reject`, {
+            auction_id
         }, setTokenToHeader())
             .then(res => res.data)
             .catch(err => {

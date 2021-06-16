@@ -227,9 +227,9 @@ export const MyAuctionsContainer: FC = () => {
             dispatch(setErrorMsgAction(e.message));
         }
     };
-    const handleAcceptVictory = (auction_id, is_accepted) => async () => {
+    const handleRejectVictory = (auction_id) => async () => {
         try {
-            await userAPI.acceptVictory(auction_id, is_accepted);
+            await userAPI.rejectVictory(auction_id);
             if (tabIndex === 0) {
                 await fetchAuctionData('auc');
             } else {
@@ -699,6 +699,7 @@ export const MyAuctionsContainer: FC = () => {
                 detailedModalOpen={detailedModalOpen}
                 handleDetailedClose={closeDetailedModal}
                 handleNotificationsOpen={handleNotificationsOpen}
+                handleRejectVictory={handleRejectVictory}
             />
             <CabinetModal
                 maxWidth='xs'

@@ -26,7 +26,8 @@ type DetailedPostViewPropsType = {
     data: CardDataType,
     detailedModalOpen: boolean,
     handleDetailedClose: () => void,
-    handleNotificationsOpen: (id: number) => () => void
+    handleNotificationsOpen: (id: number) => () => void,
+    handleRejectVictory?: (auction_id: number) => () => void
 }
 
 export const DetailedPostView: FC<DetailedPostViewPropsType> = (props) => {
@@ -36,7 +37,8 @@ export const DetailedPostView: FC<DetailedPostViewPropsType> = (props) => {
         data,
         detailedModalOpen,
         handleDetailedClose,
-        handleNotificationsOpen
+        handleNotificationsOpen,
+        handleRejectVictory
     } = props;
 
     const isAuction = data.ads_type === 'auc' || data.ads_type === 'exauc';
@@ -66,7 +68,7 @@ export const DetailedPostView: FC<DetailedPostViewPropsType> = (props) => {
                 <Grid item xs={12}>
                     <ListCard cardData={data} />
                 </Grid>
-                {/*{!!data.available_days && !!data.exchange && !!data.delivery && !!data.delivery && !!data.safe_deal && (*/}
+                {/*{!!data.available_days && !!data.exchange && !!data.ddataivery && !!data.ddataivery && !!data.safe_deal && (*/}
                 <Grid item xs={12} md={6}>
                     <Paper className={classes.paper}>
                         {!!data.available_days && (
@@ -75,7 +77,7 @@ export const DetailedPostView: FC<DetailedPostViewPropsType> = (props) => {
                                         <PhoneIcon />
                                     </span>
                                 <Typography variant="body1">
-                                    {/*{weekDaysHelper(data.available_days, t)}&nbsp;*/}
+                                    {/*{weekDaysHdataper(data.available_days, t)}&nbsp;*/}
                                     {`${data.available_start_time}-${data.available_end_time}`}
                                 </Typography>
                             </div>
@@ -189,6 +191,24 @@ export const DetailedPostView: FC<DetailedPostViewPropsType> = (props) => {
                                 width='50px'
                                 height='50px'
                             />
+                            <Box>
+                                {data.creator && data.status === 'suspended' && (
+                                    <div className="status-buttons">
+                                        <CustomButton className='end-auction'>
+                                            <Typography variant='subtitle1'>
+                                                Завершить аукцион
+                                            </Typography>
+                                        </CustomButton>
+                                    </div>
+                                )}
+                                {((data.status === 'suspended') && !data.creator && (userInfo.id === data.auction.winner_id)) && (
+                                    <div className="status-buttons">
+                                        <CustomButton onClick={handleRejectVictory(data.auction.id)}>
+                                            <Typography variant='subtitle1'>Отказать</Typography>
+                                        </CustomButton>
+                                    </div>
+                                )}
+                            </Box>
                         </Box>
                         <Box ml={2} width='40%'>
                             <CustomButton>
