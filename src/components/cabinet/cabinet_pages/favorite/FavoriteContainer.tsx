@@ -13,6 +13,8 @@ import {CabinetCard} from '@src/components/cabinet/components/cabinet_card/Cabin
 import {useStyles} from './useStyles';
 import {ITEMS_PER_PAGE} from '@src/constants';
 import {useModal} from '@src/hooks/useModal';
+import {CardDataType} from '@root/interfaces/CardData';
+import {DetailedPostView} from '@src/components/cabinet/components/detailed_post_view/DetailedPostView';
 
 const FavoriteContainer: FC = () => {
     const dispatch = useDispatch();
@@ -26,13 +28,107 @@ const FavoriteContainer: FC = () => {
             data: []
         }
     };
+    const initialSelectedPost: CardDataType = {
+        id: null,
+        ads_type: '',
+        adsable: {
+            id: null,
+            sub_category: {id: null, name: ''},
+            type: {id: null, name: ''}
+        },
+        auction: {
+            id: null,
+            is_accepted: null,
+            winner: {
+                id: null,
+                name: '',
+                surname: '',
+                phone: '',
+                avatar: '',
+                created_at: '',
+                available_days: '',
+                available_start_time: '',
+                available_end_time: ''
+            },
+            winner_id: null,
+            number_of_bets: null,
+            number_of_offers: null,
+            auto_renewal: null,
+            offer: {
+                id: null,
+                price: null,
+                user: {
+                    id: null,
+                    name: '',
+                    surname: '',
+                    phone: '',
+                    avatar: '',
+                    created_at: '',
+                    available_days: '',
+                    available_start_time: '',
+                    available_end_time: ''
+                }
+            },
+            bet: {
+                auction_id: null,
+                bet: null,
+                id: null,
+                number_of_bets: null
+            }
+        },
+        author: {
+            id: null,
+            name: '',
+            surname: '',
+            phone: '',
+            avatar: '',
+            created_at: '',
+            available_days: '',
+            available_start_time: '',
+            available_end_time: ''
+        },
+        observer: {
+            number_of_notifications: 0,
+            number_of_favorites: 0,
+            number_of_views: 0
+        },
+        available_days: [],
+        available_start_time: '',
+        available_end_time: '',
+        category: {id: null, name: ''},
+        city: {id: null, name: ''},
+        created_at: '',
+        creator: false,
+        currency: {id: null, name: ''},
+        delivery: null,
+        description: '',
+        district: {id: null, name: ''},
+        exchange: null,
+        expiration_at: '',
+        favorite: false,
+        image: '',
+        price: null,
+        region: {id: null, name: ''},
+        safe_deal: null,
+        status: '',
+        subscribed: false,
+        title: '',
+        user_id: null
+    };
     const [favoritePostData, setFavoritePostData] = useState(initialFavoriteState);
     const [favoriteAucData, setFavoriteAucData] = useState(initialFavoriteState);
     const [postId, setPostId] = useState<number>(null);
     const [tabIndex, setTabIndex] = useState(0);
+    const [selectedPost, setSelectedPost] = useState(initialSelectedPost);
     const [modalContentIndex, setModalContentIndex] = useState(1);
     const {modalOpen, handleModalOpen, handleModalClose} = useModal();
+    const {modalOpen: detailedModalOpen, handleModalClose: closeDetailedModal, handleModalOpen: openDetailedModal} = useModal();
 
+    const handleDetailedOpen = (postId: number, post) => () => {
+        postId && setPostId(postId);
+        setSelectedPost(post);
+        openDetailedModal();
+    };
     const handleTabChange = (event, newValue) => {
         setTabIndex(newValue);
     };
@@ -139,6 +235,7 @@ const FavoriteContainer: FC = () => {
             <CabinetCard
                 cardData={data}
                 handleOpenModal={handleOpenModal}
+                handleDetailedOpen={handleDetailedOpen}
             />
         </Box>
     ));
@@ -148,6 +245,7 @@ const FavoriteContainer: FC = () => {
             <CabinetCard
                 cardData={data}
                 handleOpenModal={handleOpenModal}
+                handleDetailedOpen={handleDetailedOpen}
             />
         </Box>
     ));
@@ -190,13 +288,21 @@ const FavoriteContainer: FC = () => {
     const title = t('favorite');
 
     return (
-        <TabsContent
-            title={title}
-            handleTabChange={handleTabChange}
-            tabIndex={tabIndex}
-            tabsData={tabsData}
-            headerTitle={title}
-        />
+        <>
+            <TabsContent
+                title={title}
+                handleTabChange={handleTabChange}
+                tabIndex={tabIndex}
+                tabsData={tabsData}
+                headerTitle={title}
+            />
+            // Modals
+            <DetailedPostView
+                data={selectedPost}
+                detailedModalOpen={detailedModalOpen}
+                handleDetailedClose={closeDetailedModal}
+            />
+        </>
     );
 };
 

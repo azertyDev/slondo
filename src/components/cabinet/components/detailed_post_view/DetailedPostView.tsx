@@ -27,7 +27,7 @@ type DetailedPostViewPropsType = {
     detailedModalOpen: boolean,
     handleDeactivate?: (auction_id: number) => () => void,
     handleDetailedClose: () => void,
-    handleNotificationsOpen: (id: number) => () => void,
+    handleNotificationsOpen?: (id: number) => () => void,
     handleRejectVictory?: (auction_id: number) => () => void
 }
 
@@ -133,7 +133,7 @@ export const DetailedPostView: FC<DetailedPostViewPropsType> = (props) => {
                 <Grid item xs={12} md={6}>
                     <CustomButton
                         className={`${classes.btn} notification`}
-                        // disabled={!data.observer.number_of_notifications}
+                        disabled={!data.observer?.number_of_notifications}
                         onClick={handleNotificationsOpen(data.id)}
                     >
                         <Typography
@@ -194,6 +194,7 @@ export const DetailedPostView: FC<DetailedPostViewPropsType> = (props) => {
                             title={t('auction:extremeRates')}
                             auctionId={data.auction.id}
                             showBetsCount={2}
+                            archive={0}
                         />
                     </Grid>
                 )}
@@ -256,15 +257,6 @@ export const DetailedPostView: FC<DetailedPostViewPropsType> = (props) => {
                         </Box>
                     </Paper>
                 </Grid>
-                {isAuction && (
-                    <Grid item xs={12} md={6}>
-                        {/*<BetsList*/}
-                        {/*    title={t('auction:extremeRates')}*/}
-                        {/*    auctionId={data.id}*/}
-                        {/*    showBetsCount={2}*/}
-                        {/*/>*/}
-                    </Grid>
-                )}
             </Grid>
         </CabinetModal>
     );
