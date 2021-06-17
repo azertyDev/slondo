@@ -41,10 +41,10 @@ export const BetsList: FC<BetsListPropsType> = (props) => {
                     {title}
                 </div>
                 <div onClick={handleRefresh} style={{cursor: 'pointer'}}>
-                    <RefreshIcon/>
+                    <RefreshIcon />
                 </div>
             </Typography>
-            <TableContainer component={Paper} className='bets-table'>
+            <TableContainer className='bets-table'>
                 <Table>
                     <TableBody>
                         {bets.map((bet, index) => (

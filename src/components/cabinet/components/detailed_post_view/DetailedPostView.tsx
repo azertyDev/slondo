@@ -28,7 +28,8 @@ type DetailedPostViewPropsType = {
     detailedModalOpen: boolean,
     handleDetailedClose: () => void,
     handleNotificationsOpen: (id: number) => () => void,
-    handleRejectVictory?: (auction_id: number) => () => void
+    handleRejectVictory?: (auction_id: number) => () => void,
+    handleDeactivate
 }
 
 export const DetailedPostView: FC<DetailedPostViewPropsType> = (props) => {
@@ -44,6 +45,10 @@ export const DetailedPostView: FC<DetailedPostViewPropsType> = (props) => {
     const {t} = useTranslation(['auction', 'common', 'locations']);
 
     const isAuction = data.ads_type === 'auc' || data.ads_type === 'exauc';
+    const isWinner = data.auction.winner_id === userInfo.id;
+    const isOwner = data.author?.id === userInfo.id;
+    const isSuspend = data.status === 'suspended';
+
     const auctionId = data.auction.id;
 
     const {bets, betsCount, setFetchedBetsData} = useBetsData(
@@ -55,8 +60,8 @@ export const DetailedPostView: FC<DetailedPostViewPropsType> = (props) => {
     );
 
     useEffect(() => {
-        setFetchedBetsData();
-    }, []);
+        !!auctionId && setFetchedBetsData();
+    }, [auctionId]);
 
     const classes = useStyles();
     return (
@@ -203,46 +208,58 @@ export const DetailedPostView: FC<DetailedPostViewPropsType> = (props) => {
                     <Paper className={classes.paper}>
                         {/*   Менять данные пользователя на победителя (АУКЦИОН)   */}
                         <Box className={classes.userInfo}>
-                            <UserInfoWithAvatar
-                                owner={userInfo}
-                                isOwner={true}
-                                width='50px'
-                                height='50px'
-                            />
-                            <Box>
-                                {data.creator && data.status === 'suspended' && (
-                                    <div className="status-buttons">
-                                        <CustomButton className='end-auction'>
-                                            <Typography variant='subtitle1'>
-                                                Завершить аукцион
-                                            </Typography>
-                                        </CustomButton>
-                                    </div>
-                                )}
-                                {((data.status === 'suspended') && !data.creator && (userInfo.id === data.auction.winner_id)) && (
-                                    <div className="status-buttons">
-                                        <CustomButton onClick={handleRejectVictory(data.auction.id)}>
-                                            <Typography variant='subtitle1'>Отказать</Typography>
-                                        </CustomButton>
-                                    </div>
-                                )}
-                            </Box>
+                            {isWinner && (
+                                <UserInfoWithAvatar
+                                    owner={data.auction.winner}
+                                    isOwner={true}
+                                    width='50px'
+                                    height='50px'
+                                />
+                            )}
+
+                            {isOwner && data.creator && (
+                                <UserInfoWithAvatar
+                                    owner={userInfo}
+                                    isOwner={true}
+                                    width='50px'
+                                    height='50px'
+                                />
+                            )}
+
                         </Box>
                         <Box ml={2} width='40%'>
                             <CustomButton>
-                                <PhoneIcon/>
+                                <PhoneIcon />
                                 <Typography variant='subtitle2'>
                                     Написать
                                 </Typography>
                             </CustomButton>
                             <CustomButton>
-                                <LetterIcon/>
+                                <LetterIcon />
                                 <Typography variant='subtitle2'>
                                     Написать
                                 </Typography>
                             </CustomButton>
                         </Box>
                     </Paper>
+                    <Box>
+                        {data.creator && isSuspend && (
+                            <div className="status-buttons">
+                                <CustomButton className='end-auction'>
+                                    <Typography variant='subtitle1'>
+                                        Завершить аукцион
+                                    </Typography>
+                                </CustomButton>
+                            </div>
+                        )}
+                        {isSuspend && !data.creator && isWinner && (
+                            <div className="status-buttons">
+                                <CustomButton onClick={handleRejectVictory(data.auction.id)}>
+                                    <Typography variant='subtitle1'>Отказать</Typography>
+                                </CustomButton>
+                            </div>
+                        )}
+                    </Box>
                 </Grid>
                 {isAuction && (
                     <Grid item xs={12} md={6}>
