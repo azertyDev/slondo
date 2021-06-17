@@ -1,4 +1,4 @@
-import {FC} from 'react';
+import {FC, useEffect} from 'react';
 import {CardDataType} from '@root/interfaces/CardData';
 import {ListCard} from '@src/components/elements/card/list_card/ListCard';
 import {Box, Grid, Paper, Typography} from '@material-ui/core';
@@ -14,13 +14,14 @@ import {
 } from '@src/components/elements/icons';
 import {CustomButton} from '@src/components/elements/custom_button/CustomButton';
 import {CabinetModal} from '@src/components/cabinet/components/cabinet_modal/CabinetModal';
-import {useStyles} from './useStyles';
 import {useTranslation} from 'next-i18next';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import {UserInfoWithAvatar} from '@src/components/elements/user_info_with_avatar/UserInfoWithAvatar';
 import {useSelector} from 'react-redux';
 import {RootState} from '@src/redux/rootReducer';
 import {BetsList} from '@src/components/elements/bets_list/BetsList';
+import {useBetsData} from '@src/hooks/useBetsData';
+import {useStyles} from './useStyles';
 
 type DetailedPostViewPropsType = {
     data: CardDataType,
@@ -31,8 +32,6 @@ type DetailedPostViewPropsType = {
 }
 
 export const DetailedPostView: FC<DetailedPostViewPropsType> = (props) => {
-    const userInfo = useSelector((store: RootState) => store.user.info);
-    const {t} = useTranslation(['auction', 'common', 'locations']);
     const {
         data,
         detailedModalOpen,
@@ -41,7 +40,23 @@ export const DetailedPostView: FC<DetailedPostViewPropsType> = (props) => {
         handleRejectVictory
     } = props;
 
+    const userInfo = useSelector((store: RootState) => store.user.info);
+    const {t} = useTranslation(['auction', 'common', 'locations']);
+
     const isAuction = data.ads_type === 'auc' || data.ads_type === 'exauc';
+    const auctionId = data.auction.id;
+
+    const {bets, betsCount, setFetchedBetsData} = useBetsData(
+        {
+            auction_id: auctionId,
+            page: 1,
+            itemsPerPage: 2
+        }
+    );
+
+    useEffect(() => {
+        setFetchedBetsData();
+    }, []);
 
     const classes = useStyles();
     return (
@@ -66,7 +81,7 @@ export const DetailedPostView: FC<DetailedPostViewPropsType> = (props) => {
                     </Typography>
                 </Box>
                 <Grid item xs={12}>
-                    <ListCard cardData={data} />
+                    <ListCard cardData={data}/>
                 </Grid>
                 {/*{!!data.available_days && !!data.exchange && !!data.ddataivery && !!data.ddataivery && !!data.safe_deal && (*/}
                 <Grid item xs={12} md={6}>
@@ -74,7 +89,7 @@ export const DetailedPostView: FC<DetailedPostViewPropsType> = (props) => {
                         {!!data.available_days && (
                             <div className="bonus_item">
                                     <span className='icon-bg'>
-                                        <PhoneIcon />
+                                        <PhoneIcon/>
                                     </span>
                                 <Typography variant="body1">
                                     {/*{weekDaysHdataper(data.available_days, t)}&nbsp;*/}
@@ -85,7 +100,7 @@ export const DetailedPostView: FC<DetailedPostViewPropsType> = (props) => {
                         {!!data.exchange && (
                             <div className="bonus_item">
                                     <span className='icon-bg'>
-                                    <ExchangeIcon />
+                                    <ExchangeIcon/>
                                     </span>
                                 <Typography variant="body1">
                                     Возможен обмен
@@ -95,7 +110,7 @@ export const DetailedPostView: FC<DetailedPostViewPropsType> = (props) => {
                         {!!data.delivery && (
                             <div className="bonus_item">
                                     <span className='icon-bg'>
-                                        <DeliveryIcon />
+                                        <DeliveryIcon/>
                                     </span>
                                 <Typography variant="body1">
                                     Есть доставка
@@ -105,7 +120,7 @@ export const DetailedPostView: FC<DetailedPostViewPropsType> = (props) => {
                         {!!data.safe_deal && (
                             <div className="bonus_item">
                                     <span className='icon-bg'>
-                                        <SafeIcon />
+                                        <SafeIcon/>
                                     </span>
                                 <Typography variant="body1">
                                     Безопасная покупка
@@ -115,7 +130,7 @@ export const DetailedPostView: FC<DetailedPostViewPropsType> = (props) => {
                         {!!data.auction?.auto_renewal && (
                             <div className="bonus_item">
                                     <span className='icon-bg'>
-                                        <RenewalIcon />
+                                        <RenewalIcon/>
                                     </span>
                                 <Typography variant="body1">
                                     Автопродление
@@ -130,7 +145,7 @@ export const DetailedPostView: FC<DetailedPostViewPropsType> = (props) => {
                         className={`${classes.btn} advertise`}
                         disabled
                     >
-                        <RocketIcon />
+                        <RocketIcon/>
                         &nbsp;
                         <Typography variant='subtitle1'>
                             Рекламировать
@@ -140,7 +155,7 @@ export const DetailedPostView: FC<DetailedPostViewPropsType> = (props) => {
                 <Grid item xs={12} md={6}>
                     <Paper className={classes.paper}>
                         <Box className='location' width={1}>
-                            <LocationIcon />
+                            <LocationIcon/>
                             <Typography
                                 variant="subtitle1"
                                 color="initial"
@@ -166,15 +181,18 @@ export const DetailedPostView: FC<DetailedPostViewPropsType> = (props) => {
                         >
                             Уведомления/ История
                         </Typography>
-                        <ChevronRightIcon color='action' />
+                        <ChevronRightIcon color='action'/>
                     </CustomButton>
                 </Grid>
                 {isAuction && (
                     <Grid item xs={12} md={6}>
                         <BetsList
-                            title={t('auction:extremeRates')}
-                            auctionId={data.auction.id}
+                            bets={bets}
+                            betsCount={betsCount}
+                            auctionId={auctionId}
                             showBetsCount={2}
+                            handleRefresh={setFetchedBetsData}
+                            title={t('auction:extremeRates')}
                         />
                     </Grid>
                 )}
@@ -212,13 +230,13 @@ export const DetailedPostView: FC<DetailedPostViewPropsType> = (props) => {
                         </Box>
                         <Box ml={2} width='40%'>
                             <CustomButton>
-                                <PhoneIcon />
+                                <PhoneIcon/>
                                 <Typography variant='subtitle2'>
                                     Написать
                                 </Typography>
                             </CustomButton>
                             <CustomButton>
-                                <LetterIcon />
+                                <LetterIcon/>
                                 <Typography variant='subtitle2'>
                                     Написать
                                 </Typography>

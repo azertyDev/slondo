@@ -1,4 +1,4 @@
-import {FC, useState} from 'react';
+import {FC, useEffect, useState} from 'react';
 import {WithT} from 'i18next';
 import Link from 'next/link';
 import {userAPI} from '@src/api/api';
@@ -12,6 +12,7 @@ import {CustomButton} from '@src/components/elements/custom_button/CustomButton'
 import {AuctionForm} from '@src/components/post/show_post/owner_auction_info/auction_content/AuctionForm/AuctionForm';
 import {useDispatch} from 'react-redux';
 import {setErrorMsgAction} from '@root/src/redux/slices/errorSlice';
+import {useBetsData} from '@src/hooks/useBetsData';
 import {useStyles} from './useStyles';
 
 
@@ -27,25 +28,39 @@ export const AuctionContent: FC<AuctionInfoPropsType> = (props) => {
         postData
     } = props;
 
-    const date = new Date(postData.expiration_at).getTime();
+    const auctionId = postData.auction.id;
+
     const dispatch = useDispatch();
+    const date = new Date(postData.expiration_at).getTime();
     const isExAuc = postData.ads_type.mark === 'exauc';
     const hasOfferPrice = !!postData.auction.offer_the_price;
-    //
+
     const [isFetch, setIsFetch] = useState(false);
     const [openBuyNow, setOpenBuyNow] = useState(false);
     const [openOfferPrice, setOpenOfferPrice] = useState(false);
     const [offerPrice, setOfferPrice] = useState('');
 
-    const hasReservePrice = postData.auction?.reserve_price > 0;
-    const hasBuyNow = !!postData.auction?.price_buy_now && postData.auction.price_buy_now > 0;
+    const {bets, betsCount, setFetchedBetsData} = useBetsData(
+        {
+            auction_id: auctionId,
+            page: 1,
+            itemsPerPage: 5,
+            archive
+        }
+    );
+    const [lastBet] = bets;
+
+    const hasReservePrice = postData.auction?.reserve_price > lastBet?.bet;
+    const hasBuyNow = !!postData.auction?.price_buy_now && postData.auction.price_buy_now > lastBet?.bet;
 
     const handleModalBuyNow = value => () => {
         setOpenBuyNow(value);
     };
+
     const handleModalOfferPrice = value => () => {
         setOpenOfferPrice(value);
     };
+
     const handleOfferPrice = async () => {
         try {
             setIsFetch(true);
@@ -58,6 +73,7 @@ export const AuctionContent: FC<AuctionInfoPropsType> = (props) => {
             dispatch(setErrorMsgAction(e.message));
         }
     };
+
     const handleBuyNow = async () => {
         try {
             setIsFetch(true);
@@ -75,13 +91,16 @@ export const AuctionContent: FC<AuctionInfoPropsType> = (props) => {
         setOfferPrice(target.value);
     };
 
-
     // useEffect(() => {
     //     socketIO.on('bet-channel', async (lastBet) => {
     //         setBets([lastBet, ...betsRef.current]);
     //     });
     //     () => socketIO.off('bet-channel');
     // }, []);
+
+    useEffect(() => {
+        setFetchedBetsData();
+    }, []);
 
     const classes = useStyles();
     return (
@@ -105,16 +124,21 @@ export const AuctionContent: FC<AuctionInfoPropsType> = (props) => {
                     {!!date && <AuctionTimer date={date}/>}
                 </div>
                 <BetsList
+                    bets={bets}
                     showBetsCount={5}
                     archive={archive}
-                    auctionId={postData.auction.id}
+                    auctionId={auctionId}
+                    betsCount={betsCount}
+                    handleRefresh={setFetchedBetsData}
                     title={t('auction:currentRates')}
                 />
                 {!postData.creator && !archive && (
                     <>
                         <AuctionForm
                             t={t}
-                            auctionId={postData.auction.id}
+                            lastBet={lastBet}
+                            auctionId={auctionId}
+                            handleRefresh={setFetchedBetsData}
                         />
                         {hasBuyNow && (
                             <div>

@@ -1,73 +1,48 @@
-import {FC, useEffect, useState} from 'react';
-import {Box, Paper, Table, TableBody, TableCell, TableContainer, TableRow, Typography} from '@material-ui/core';
+import {FC} from 'react';
 import {useTranslation} from 'react-i18next';
+import {Box, Paper, Table, TableBody, TableCell, TableContainer, TableRow, Typography} from '@material-ui/core';
 import {CustomButton} from '@src/components/elements/custom_button/CustomButton';
 import {useModal} from '@src/hooks/useModal';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import {BetsListModal} from '@src/components/elements/bets_list/BetsListModal';
-import {userAPI} from '@src/api/api';
-import {setErrorMsgAction} from '@src/redux/slices/errorSlice';
-import {useDispatch} from 'react-redux';
 import {numberPrettier} from '@src/helpers';
+import {RefreshIcon} from '@src/components/elements/icons';
 import {useStyles} from './useStyles';
 
 type BetsListPropsType = {
-    archive: number,
+    bets,
+    betsCount: number,
+    archive?: number,
     title: string,
     auctionId: number,
     showBetsCount: number,
+    handleRefresh: () => void
 }
 
 export const BetsList: FC<BetsListPropsType> = (props) => {
     const {
+        bets,
+        betsCount,
         title,
         archive,
         auctionId,
-        showBetsCount
+        showBetsCount,
+        handleRefresh
     } = props;
-
-    const dispatch = useDispatch();
 
     const {t} = useTranslation('auction');
     const {modalOpen, handleModalOpen, handleModalClose} = useModal();
-    const [isFetch, isFetFetch] = useState(false);
-    const [bets, setBets] = useState([]);
-    const [itemsCount, setItemsCount] = useState(0);
-
-    const getBetsByPage = async (page, per_page) => {
-        try {
-            const params = {
-                auction_id: auctionId,
-                page,
-                per_page,
-                archive
-            };
-            return await userAPI.getAuctionBets(params);
-        } catch (e) {
-            dispatch(setErrorMsgAction(e.message));
-        }
-    };
-
-    const setFetchedBets = async () => {
-        isFetFetch(true);
-
-        const {data, total} = await getBetsByPage(1, showBetsCount);
-
-        setBets(data);
-        setItemsCount(total);
-
-        isFetFetch(false);
-    };
-
-    useEffect(() => {
-        setFetchedBets();
-    }, []);
 
     const classes = useStyles();
     return (
         <div className={classes.root}>
-            <Typography variant="subtitle2" color="initial" gutterBottom>
-                {title}
+            <Typography className='bets-header' variant="subtitle2" color="initial" gutterBottom>
+                <div>
+                    {title}
+                </div>
+                <div onClick={handleRefresh} style={{cursor: 'pointer'}}>
+                    <RefreshIcon/>
+                </div>
             </Typography>
             <TableContainer component={Paper} className='bets-table'>
                 <Table>
@@ -121,7 +96,7 @@ export const BetsList: FC<BetsListPropsType> = (props) => {
                     </TableBody>
                 </Table>
             </TableContainer>
-            {itemsCount > showBetsCount && (
+            {betsCount > showBetsCount && (
                 <CustomButton
                     onClick={handleModalOpen}
                     className={classes.showMore}
@@ -133,9 +108,9 @@ export const BetsList: FC<BetsListPropsType> = (props) => {
                 </CustomButton>
             )}
             <BetsListModal
+                archive={archive}
                 auctionId={auctionId}
                 modalOpen={modalOpen}
-                getBetsByPage={getBetsByPage}
                 handleModalClose={handleModalClose}
             />
         </div>
