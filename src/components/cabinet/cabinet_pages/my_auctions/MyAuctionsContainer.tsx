@@ -164,6 +164,7 @@ export const MyAuctionsContainer: FC = () => {
 
     const handleSettingsOpen = (auction_id: number) => () => {
         openSettingsModal();
+        closeDetailedModal();
         auction_id && setSelectedAuction({...selectedAuction, id: auction_id});
         setModalContentIndex(1);
     };
@@ -695,28 +696,32 @@ export const MyAuctionsContainer: FC = () => {
     return (
         <>
             <TabsContent
-                tabIndex={tabIndex}
-                handleTabChange={handleTabChange}
-                title={t('myAuctions')}
                 tabsData={tabsData}
+                tabIndex={tabIndex}
+                title={t('myAuctions')}
                 headerTitle={t('myAuctions')}
+                handleTabChange={handleTabChange}
             />
             <DetailedPostView
                 data={selectedAuction}
                 handleDeactivate={handleDeactivate}
                 detailedModalOpen={detailedModalOpen}
+                handleSettingsOpen={handleSettingsOpen}
                 handleDetailedClose={closeDetailedModal}
-                handleNotificationsOpen={handleNotificationsOpen}
                 handleRejectVictory={handleRejectVictory}
+                handleNotificationsOpen={handleNotificationsOpen}
             />
             <CabinetModal
                 maxWidth='xs'
                 openDialog={settingsModalOpen}
                 handleCloseDialog={handleSettingsClose}
             >
-                <ModalContent/>
+                <ModalContent />
             </CabinetModal>
-            <CabinetModal openDialog={notificationsOpen} handleCloseDialog={closeNotificationsModal}>
+            <CabinetModal
+                openDialog={notificationsOpen}
+                handleCloseDialog={closeNotificationsModal}
+            >
                 <Box
                     display='flex'
                     alignItems='center'

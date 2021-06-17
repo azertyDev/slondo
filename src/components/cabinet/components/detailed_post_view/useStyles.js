@@ -30,7 +30,6 @@ export const useStyles = makeStyles((theme) => ({
         display: 'flex',
         justifyContent: 'space-evenly',
         background: '#F9F9F9',
-        height: '100%',
         padding: '15px',
         boxShadow: '0px 1px 2px rgba(0, 0, 0, 0.15)',
         borderRadius: 5,
@@ -84,6 +83,15 @@ export const useStyles = makeStyles((theme) => ({
             width: 50,
             height: 50
         }
+    },
+    actionButtons: {
+        '& button': {
+            width: '100%',
+            marginTop: 8,
+            '&.reject-btn': {
+                background: '#F9F9F9',
+                boxShadow: '0px 1px 2px rgba(0, 0, 0, 0.25)'
+            }
+        }
     }
 }));
-
