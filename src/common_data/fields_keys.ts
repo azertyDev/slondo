@@ -87,6 +87,7 @@ export const fractionalFields = [
 ];
 
 export const optionFields = [
+    'regulation',
     'function',
     'overview',
     'properties',
@@ -129,5 +130,7 @@ export const stringFields = [
 
 export const booleanFields = [
     'furnished',
-    'with_pledge'
+    'with_pledge',
+    'utilities',
+    'urgent_work'
 ];
