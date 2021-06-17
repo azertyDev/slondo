@@ -7,7 +7,6 @@ import {
     TableBody,
     TableCell,
     TableContainer,
-    TableFooter,
     TableHead,
     TableRow,
     Typography
@@ -18,46 +17,41 @@ import {numberPrettier} from '@src/helpers';
 import {CloseIcon} from '@src/components/elements/icons';
 import {BETS_PER_PAGE} from '@src/constants';
 import {CustomPagination} from '@src/components/elements/custom_pagination/CustomPagination';
+import {useBetsData} from '@src/hooks/useBetsData';
 import {useStyles} from './useStyles';
 
 type BetsListPropsType = {
+    archive?: number,
     auctionId: number,
     modalOpen: boolean,
-    getBetsByPage: (page: number, per_page: number) => any,
     handleModalClose: () => void
 }
 
 export const BetsListModal: FC<BetsListPropsType> = (props) => {
     const {
+        archive,
         auctionId,
         modalOpen,
-        getBetsByPage,
         handleModalClose
     } = props;
-    const {t} = useTranslation('auction');
 
-    const [isFetch, isFetFetch] = useState(false);
-    const [bets, setBets] = useState([]);
+    const {t} = useTranslation('auction');
     const [page, setPage] = useState(1);
-    const [itemsCount, setItemsCount] = useState(0);
+    const {bets, betsCount, isBetsFetch, setFetchedBetsData} = useBetsData(
+        {
+            auction_id: auctionId,
+            page: page,
+            itemsPerPage: BETS_PER_PAGE,
+            archive
+        }
+    );
 
     const handlePagePagination = (_, pageNum) => {
         setPage(pageNum);
     };
 
-    const setFetchedBets = async () => {
-        isFetFetch(true);
-
-        const {data, total} = await getBetsByPage(page, BETS_PER_PAGE);
-
-        setBets(data);
-        setItemsCount(total);
-
-        isFetFetch(false);
-    };
-
     useEffect(() => {
-        setFetchedBets();
+        setFetchedBetsData();
     }, [page]);
 
     const classes = useStyles();
@@ -157,7 +151,7 @@ export const BetsListModal: FC<BetsListPropsType> = (props) => {
                 <div className={classes.pagination}>
                     <CustomPagination
                         currentPage={page}
-                        totalItems={itemsCount}
+                        totalItems={betsCount}
                         itemsPerPage={BETS_PER_PAGE}
                         handlePagePagination={handlePagePagination}
                     />

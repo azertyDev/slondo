@@ -1,4 +1,4 @@
-import {FC, useEffect, useState} from 'react';
+import {FC, useState} from 'react';
 import {WithT} from 'i18next';
 import Grid from '@material-ui/core/Grid';
 import {FormikProvider, useFormik} from 'formik';
@@ -14,23 +14,21 @@ import {useDispatch} from 'react-redux';
 import {useStyles} from './useStyles';
 
 type AuctionFromPropsType = {
-    auctionId: string
+    lastBet,
+    auctionId: string,
+    handleRefresh: () => void
 } & WithT;
 
 export const AuctionForm: FC<AuctionFromPropsType> = (props) => {
     const {
         t,
-        auctionId
+        lastBet,
+        auctionId,
+        handleRefresh
     } = props;
-
-    const initLastBet = {
-        min_bet: 0,
-        max_bet: 0
-    };
 
     const dispatch = useDispatch();
     const [isFetch, setIsFetch] = useState(false);
-    const [lastBet, setLastBet] = useState(initLastBet);
 
     const isMdDown = useMediaQuery(useTheme().breakpoints.down('md'));
 
@@ -41,9 +39,7 @@ export const AuctionForm: FC<AuctionFromPropsType> = (props) => {
             setIsFetch(false);
         } catch ({response}) {
             setIsFetch(false);
-            dispatch(
-                setErrorMsgAction(t(`errors:${response.data.message}`))
-            );
+            dispatch(setErrorMsgAction(t(`errors:${response.data.message}`)));
         }
     };
 
@@ -54,6 +50,7 @@ export const AuctionForm: FC<AuctionFromPropsType> = (props) => {
 
     const onSubmit = ({bet}, {resetForm}) => {
         resetForm();
+        handleRefresh();
         handleBet(bet.replace(whiteSpacesRegEx, ''));
     };
 
@@ -70,31 +67,6 @@ export const AuctionForm: FC<AuctionFromPropsType> = (props) => {
         touched,
         handleSubmit
     } = formik;
-
-    const setFetchedBets = async () => {
-        try {
-            const params = {
-                auction_id: auctionId,
-                page: 1,
-                per_page: 1,
-                archive: 0
-            };
-
-            setIsFetch(true);
-
-            const [lastBet] = (await userAPI.getAuctionBets(params)).data;
-
-            setLastBet(lastBet);
-            setIsFetch(false);
-        } catch (e) {
-            setIsFetch(false);
-            dispatch(setErrorMsgAction(e.message));
-        }
-    };
-
-    useEffect(() => {
-       setFetchedBets();
-    }, []);
 
     const classes = useStyles({isMdDown});
     return (
