@@ -1,4 +1,4 @@
-import {PostType} from "@root/interfaces/Post";
+import {PostType} from '@root/interfaces/Post';
 
 export const postTypes: PostType[] = [
     {
@@ -18,7 +18,13 @@ export const postTypes: PostType[] = [
         image: {
             url: '/img/crt_post.png'
         },
-        guide: 'howToCreatePost'
+        guide: 'howToCreatePost',
+        services: {
+            safe_deal: true,
+            delivery: true,
+            time_settings: true,
+            exchange: true
+        }
     },
     {
         id: 2,
@@ -47,7 +53,13 @@ export const postTypes: PostType[] = [
         image: {
             url: '/img/crt_auc.png'
         },
-        guide: 'howToCreateAuc'
+        guide: 'howToCreateAuc',
+        services: {
+            delivery: true,
+            buy_now: true,
+            reserve_price: false,
+            auto_renewal: false
+        }
     },
     {
         id: 3,
@@ -76,6 +88,12 @@ export const postTypes: PostType[] = [
         image: {
             url: '/img/crt_exauc.png'
         },
-        guide: 'howToCreateExAuc'
+        guide: 'howToCreateExAuc',
+        services: {
+            delivery: true,
+            buy_now: true,
+            reserve_price: true,
+            auto_renewal: true
+        }
     }
 ];

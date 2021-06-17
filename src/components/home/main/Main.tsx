@@ -55,7 +55,7 @@ export const Main: FC = () => {
                 </Container>
                 <Hidden lgUp>
                     <div className={classes.createAdBlock}>
-                        <Link href={'/post/create'}>
+                        <Link href={'/create/type/select'} shallow>
                             <a>
                                 <Slide
                                     appear={false}

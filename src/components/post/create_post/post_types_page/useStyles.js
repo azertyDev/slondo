@@ -1,63 +1,120 @@
-import {makeStyles} from '@material-ui/core/styles'
+import {makeStyles} from '@material-ui/core/styles';
 
 export const useStyles = makeStyles((theme) => ({
     root: {
         marginBottom: '30px',
         '& div.MuiGrid-item': {
-            '& > a': {
-                '&.post': {
-                    background: 'linear-gradient(49.94deg, #dcf3fc 19.03%, #a9bdf2 72.72%)'
-                },
-                '&.auc': {
-                    background: 'linear-gradient(49.94deg, #c18dde 19.03%, #8880c9 72.72%)'
-                },
-                height: '613px',
+            '& div.post': {
+                background: 'linear-gradient(270deg, rgba(47, 196, 243, 0.2) 0%, rgba(58, 76, 233, 0.2) 100%)'
+            },
+            '& div.auc': {
+                background: 'linear-gradient(49.94deg, rgba(125, 228, 242, 0.2) 19.03%, rgba(186, 96, 208, 0.2) 72.72%)'
+            },
+            '& div.exauc': {
+                background: 'linear-gradient(49.94deg, rgba(185, 130, 225, 0.2) 19.03%, rgba(208, 130, 96, 0.2) 72.72%)'
+            },
+            '& div.post-wrapper': {
                 display: 'flex',
-                marginBottom: 30,
                 flexDirection: 'column',
                 justifyContent: 'space-between',
                 alignItems: 'center',
+                height: '613px',
+                marginBottom: '30px',
                 borderRadius: '25px',
                 boxShadow: '0px 2px 8px rgba(0, 0, 0, 0.2)',
                 textDecoration: 'none',
-                '& > div.post': {
-                    backgroundPosition: 'bottom',
-                    backgroundRepeat: 'no-repeat'
+                [theme.breakpoints.down('md')]: {
+                    height: '450px'
                 },
-                '& > div.auc': {
-                    backgroundPosition: '0px 300px',
-                    backgroundRepeat: 'no-repeat'
+                [theme.breakpoints.down('sm')]: {
+                    height: '360px',
+                    borderRadius: '10px'
                 },
-                '& > div.exauc': {
-                    backgroundPosition: 'center',
-                    backgroundRepeat: 'no-repeat'
+                [theme.breakpoints.down('xs')]: {
+                    background: '#F9F9F9',
+                    height: '196px',
+                    marginBottom: 0
                 },
-                '& > div': {
+                '& div.post-title-text': {
                     textAlign: 'center',
-                    height: '100%',
-                    backgroundSize: 'contain',
+                    borderRadius: '18px',
+                    margin: '6px',
+                    width: '98%',
+                    height: '120px',
+                    background: 'rgba(255, 255, 255, 0.25)',
+                    boxShadow: 'inset 0px 1px 4px rgba(0, 0, 0, 0.15)',
+                    [theme.breakpoints.down('md')]: {
+                        background: 'none',
+                        boxShadow: 'none',
+                        height: '58px',
+                        width: '100%',
+                        margin: 0
+                    },
                     '& h6.MuiTypography-subtitle1': {
-                        marginTop: '35px',
-                        fontSize: '1.875rem',
-                        color: '#fff',
-                        fontWeight: '600',
-                        marginBottom: '10px'
+                        margin: '24px 0 10px',
+                        fontSize: '1.75rem',
+                        color: '#4E4E4E',
+                        fontWeight: '500',
+                        [theme.breakpoints.down('md')]: {
+                            fontSize: '24px'
+                        }
                     },
                     '& p.MuiTypography-body2': {
                         fontSize: '1.125rem',
-                        color: 'rgba(255, 255, 255, 0.85)',
-                        fontWeight: '600',
-                        padding: '0 55px'
+                        color: 'rgba(49, 49, 49, 0.5)',
+                        fontWeight: '400',
+                        padding: '0 50px 24px'
                     }
                 },
-                '& > button': {
+                '& div.post-img': {
+                    width: '82%',
+                    height: '100%',
+                    backgroundPosition: 'center',
+                    backgroundRepeat: 'no-repeat',
+                    backgroundSize: 'contain',
+                    [theme.breakpoints.down('sm')]: {
+                        width: '50%',
+                        height: '70%',
+                        margin: 'auto',
+                        backgroundPosition: 'center',
+                        backgroundRepeat: 'no-repeat',
+                        backgroundSize: 'contain'
+                    },
+                    [theme.breakpoints.down('xs')]: {
+                        height: '75%'
+                    }
+                },
+                '& div.post-bottom': {
+                    marginBottom: '28px',
+                    [theme.breakpoints.down('sm')]: {
+                        width: '100%',
+                        height: '100%',
+                        display: 'flex',
+                        marginBottom: 0
+                    },
+                    '& div.options-wrapper': {
+                        width: '50%',
+                        margin: 'auto'
+                    }
+                },
+                '& button': {
                     background: '#fff',
                     borderRadius: '100px',
-                    width: '76%',
-                    margin: '0 55px 35px',
+                    width: '82%',
+                    marginBottom: '24px',
                     boxShadow: '0px 2px 2px rgba(0, 0, 0, 0.15)',
-                    border: 'none'
+                    border: 'none',
+                    color: '#4E4E4E',
+                    [theme.breakpoints.down('sm')]: {
+                        width: '97%',
+                        borderRadius: '8px',
+                        marginBottom: '14px'
+                    },
+                    [theme.breakpoints.down('xs')]: {
+                        marginBottom: '6px'
+                    }
                 }
+                // MuiButtonBase-root
             },
             '& > div.guide': {
                 textAlign: 'center',
@@ -86,4 +143,4 @@ export const useStyles = makeStyles((theme) => ({
             }
         }
     }
-}))
+}));
