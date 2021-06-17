@@ -50,8 +50,7 @@ export const JobParams: FC<CommonParamsPropsType> = (props) => {
             urgent_work: target.checked ? filters.urgent_work[0] : null
         });
     };
-    console.log(values);
-    console.log(filters);
+
     return (
         <CustomFormikProvider formik={formik}>
             <CustomAccordion

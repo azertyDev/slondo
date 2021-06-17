@@ -32,6 +32,7 @@ import {userAPI} from '@src/api/api';
 import {setErrorMsgAction} from '@root/src/redux/slices/errorSlice';
 import {useDispatch} from 'react-redux';
 import {useStyles} from './useStyles';
+import {booleanFields} from '@src/common_data/fields_keys';
 
 
 type PostContentTypes = {
@@ -93,29 +94,40 @@ export const PostContent: FC<PostContentTypes> = (props) => {
     };
 
     const parameterItems = Object.keys(model ?? {}).reduce((items, key, i) => {
-        if (Array.isArray(model[key]) && model[key].length !== 0) {
+        const isBooleanKey = booleanFields.some(f => f === key);
+
+        if (Array.isArray(model[key]) && model[key].length) {
             const params = (
-                <li>
-                    <Typography variant="subtitle1" className="value">
-                        {model[key]
-                            .map((param) => param.name)
-                            .join(', ')}
-                    </Typography>
-                </li>
+                <Typography variant="subtitle1" className="value">
+                    {model[key]
+                        .map((param) => param.name)
+                        .join(', ')}
+                </Typography>
             );
             items.push(
-                <div key={i} className="params-list">
+                <li key={i} className="params-list">
                     <Typography variant="subtitle1" className="key">
-                        {key}
+                        {t(`filters:${key}`)}
                     </Typography>
-                    <ul>{params}</ul>
-                </div>
+                    {params}
+                </li>
+            );
+        } else if (isBooleanKey) {
+            items.push(
+                <li key={key}>
+                    <Typography variant="subtitle1" className="key">
+                        {t(`filters:${key}`)}
+                    </Typography>
+                    <Typography variant="subtitle1" className="value">
+                        {t('common:yes')}
+                    </Typography>
+                </li>
             );
         } else if (!Array.isArray(model[key])) {
             items.push(
                 <li key={key}>
                     <Typography variant="subtitle1" className="key">
-                        {t(key)}
+                        {t(`filters:${key}`)}
                     </Typography>
                     {model[key]?.hex_color_code && (
                         <span

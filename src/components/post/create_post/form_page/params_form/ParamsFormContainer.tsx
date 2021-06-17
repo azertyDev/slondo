@@ -8,6 +8,7 @@ import {EstateParams} from '@src/components/post/create_post/form_page/params_fo
 import {TransportParams} from '@src/components/post/create_post/form_page/params_form/categories_forms/transport_params/TransportParams';
 import {JobParams} from '@src/components/post/create_post/form_page/params_form/categories_forms/job_params/JobParams';
 import {useStyles} from './useStyles';
+import {ElectronicsParams} from '@src/components/post/create_post/form_page/params_form/categories_forms/electronics_params/ElectronicsParams';
 
 
 export type CommonParamsPropsType = {
@@ -96,6 +97,15 @@ export const ParamsFormContainer: FC<ParamsFormPropsType> = (props) => {
                     handleFormOpen={handleFormOpen}
                     subcategoryName={subcategory.name}
                     currentFormIndex={currentFormIndex}
+                />;
+            case 'electronics':
+                return <ElectronicsParams
+                    t={t}
+                    type={type}
+                    filters={filters}
+                    onSubmit={onSubmit}
+                    currentFormIndex={currentFormIndex}
+                    handleFormOpen={handleFormOpen}
                 />;
             default:
                 return <RegularParams

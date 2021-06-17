@@ -4368,7 +4368,7 @@ export const getSEOContent = (category: CategoryType, subCtgr: SubcategoryType, 
 
             }
         },
-        services: {
+        service: {
             repairAndConstruction: {
                 ru: {
                     title: `Ремонт квартир и строительство домов в ${location} – все виды услуг под ключ`,

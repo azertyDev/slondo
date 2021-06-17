@@ -16,7 +16,7 @@ type CheckboxPropsType = {
 
 export const CheckboxSelect: FC<CheckboxPropsType> = (props) => {
     const {
-        ns = 'filters',
+        ns,
         name,
         labelText,
         disabled,
@@ -24,7 +24,7 @@ export const CheckboxSelect: FC<CheckboxPropsType> = (props) => {
         onChange
     } = props;
 
-    const {t} = useTranslation(ns);
+    const {t} = useTranslation(ns || 'filters');
 
     const classes = useStyles();
     return (
