@@ -63,6 +63,14 @@ export const useStyles = makeStyles((theme) => ({
                     [theme.breakpoints.down('md')]: {
                         margin: 0
                     }
+                },
+                '& a': {
+                    display: 'inline-block',
+                    textDecoration: 'none',
+                    '&:hover': {
+                        textDecoration: 'underline',
+                        textDecorationColor: '#000'
+                    }
                 }
             },
             '& button': {

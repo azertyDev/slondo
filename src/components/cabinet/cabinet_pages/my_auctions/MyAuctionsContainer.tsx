@@ -180,6 +180,7 @@ export const MyAuctionsContainer: FC = () => {
     const handleNotificationsOpen = (postId: number) => () => {
         postId && setAuctionId(postId);
         openNotificationsModal();
+        closeDetailedModal();
     };
     const handleTabChange = (event, newValue) => {
         setTabIndex(newValue);

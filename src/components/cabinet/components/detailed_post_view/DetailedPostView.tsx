@@ -22,6 +22,7 @@ import {RootState} from '@src/redux/rootReducer';
 import {BetsList} from '@src/components/elements/bets_list/BetsList';
 import {useBetsData} from '@src/hooks/useBetsData';
 import {useStyles} from './useStyles';
+import {numberPrettier} from '@src/helpers';
 
 type DetailedPostViewPropsType = {
     data: CardDataType,
@@ -47,16 +48,13 @@ export const DetailedPostView: FC<DetailedPostViewPropsType> = (props) => {
     const userInfo = useSelector((store: RootState) => store.user.info);
     const {t} = useTranslation(['auction', 'common', 'locations']);
 
-    const auctionId = data.auction.id;
+    const auctionId = data.auction?.id;
     const isAuction = data.ads_type === 'auc' || data.ads_type === 'exauc';
     const isSuspend = data.status === 'suspended';
     const isSold = data.status === 'sold';
     const isPublic = data.status === 'public';
-    const isWinner = data.auction.winner_id === userInfo.id;
+    const isWinner = data.auction?.winner_id === userInfo.id;
     const isCreator = data.creator;
-
-    console.log(isWinner);
-
 
     const {bets, betsCount, setFetchedBetsData} = useBetsData(
         {
@@ -222,13 +220,13 @@ export const DetailedPostView: FC<DetailedPostViewPropsType> = (props) => {
                 <Grid item xs={12} md={6}>
                     <Typography variant='subtitle2' gutterBottom>
                         {isWinner ? 'Продавец' : 'Победитель аукциона'}
+                        {isCreator ? 'Предложенная цена' : null}
                     </Typography>
                     <Paper className={classes.paper}>
                         <Box className={classes.userInfo}>
-                            {/* Если я победитель показать продавца */}
                             {/* Если я не победитель и если я не создатель то отображать последнюю свою ставку */}
                             {/* Если я не победитель и если я создатель и статус 'suspend' или 'sold' то отображать победителя */}
-                            {isCreator && isSuspend || isSold && (
+                            {isAuction && isCreator && isSuspend || isSold && (
                                 <UserInfoWithAvatar
                                     owner={data.auction?.winner}
                                     isOwner
@@ -236,18 +234,34 @@ export const DetailedPostView: FC<DetailedPostViewPropsType> = (props) => {
                                     height='50px'
                                 />
                             )}
-                            {/* Если я создатель и статус 'public' то ничего не отображать */}
-                            {isCreator && isPublic && null}
-                            {/* Если я не создатель то отображать последнюю свою ставку */}
-                            {!isCreator && !isWinner }
+                            {/* Если я создатель и статус 'public' то ничего не отображать но если есть предложенные */}
+                            {isAuction && isCreator && isPublic && !!data.auction?.offer && (
+                                <Box>
+                                    <UserInfoWithAvatar
+                                        owner={data.auction?.offer?.user}
+                                        isOwner
+                                        width='50px'
+                                        height='50px'
+                                    />
+                                    <Box>
+                                        <Typography variant='h5'>
+                                            {`${numberPrettier(data.auction?.offer?.price)} сум`}
+                                        </Typography>
+                                        <Typography variant='subtitle2'>
+                                            Все предложения ({data.auction?.number_of_offers})
+                                        </Typography>
+                                    </Box>
+                                </Box>
+                            )}
+                            {/*Если я не создатель то отображать последнюю свою ставку */}
 
-
-                            {/*<UserInfoWithAvatar*/}
-                            {/*    owner={isWinner ? data?.author : data.auction?.winner}*/}
-                            {/*    isOwner*/}
-                            {/*    width='50px'*/}
-                            {/*    height='50px'*/}
-                            {/*/>*/}
+                            {/* Если я победитель показать продавца или если я продавец то победителя*/}
+                            <UserInfoWithAvatar
+                                owner={isWinner ? data?.author : data.auction?.winner}
+                                isOwner
+                                width='50px'
+                                height='50px'
+                            />
                         </Box>
                         <Box ml={2} width='40%'>
                             <CustomButton>

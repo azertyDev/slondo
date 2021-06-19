@@ -279,6 +279,7 @@ const MyPostsContainer: FC = () => {
     const handleNotificationsOpen = (postId: number) => () => {
         postId && setPostId(postId);
         openNotificationsModal();
+        closeDetailedModal();
     };
     const handleModalContentIndex = (index, reasonId?) => () => {
         setModalContentIndex(index);
