@@ -22,6 +22,7 @@ import {RootState} from '@src/redux/rootReducer';
 import {BetsList} from '@src/components/elements/bets_list/BetsList';
 import {useBetsData} from '@src/hooks/useBetsData';
 import {useStyles} from './useStyles';
+import {numberPrettier} from '@src/helpers';
 
 type DetailedPostViewPropsType = {
     data: CardDataType,
@@ -29,7 +30,8 @@ type DetailedPostViewPropsType = {
     handleDetailedClose: () => void,
     handleNotificationsOpen: (id: number) => () => void,
     handleRejectVictory?: (auction_id: number) => () => void,
-    handleDeactivate
+    handleDeactivate?,
+    handleSettingsOpen?: (postId: number, post, index: number) => () => void
 }
 
 export const DetailedPostView: FC<DetailedPostViewPropsType> = (props) => {
@@ -38,18 +40,21 @@ export const DetailedPostView: FC<DetailedPostViewPropsType> = (props) => {
         detailedModalOpen,
         handleDetailedClose,
         handleNotificationsOpen,
-        handleRejectVictory
+        handleRejectVictory,
+        handleDeactivate,
+        handleSettingsOpen
     } = props;
 
     const userInfo = useSelector((store: RootState) => store.user.info);
     const {t} = useTranslation(['auction', 'common', 'locations']);
 
+    const auctionId = data.auction?.id;
     const isAuction = data.ads_type === 'auc' || data.ads_type === 'exauc';
-    const isWinner = data.auction.winner_id === userInfo.id;
-    const isOwner = data.author?.id === userInfo.id;
     const isSuspend = data.status === 'suspended';
-
-    const auctionId = data.auction.id;
+    const isSold = data.status === 'sold';
+    const isPublic = data.status === 'public';
+    const isWinner = data.auction?.winner_id === userInfo.id;
+    const isCreator = data.creator;
 
     const {bets, betsCount, setFetchedBetsData} = useBetsData(
         {
@@ -88,7 +93,6 @@ export const DetailedPostView: FC<DetailedPostViewPropsType> = (props) => {
                 <Grid item xs={12}>
                     <ListCard cardData={data}/>
                 </Grid>
-                {/*{!!data.available_days && !!data.exchange && !!data.ddataivery && !!data.ddataivery && !!data.safe_deal && (*/}
                 <Grid item xs={12} md={6}>
                     <Paper className={classes.paper}>
                         {!!data.available_days && (
@@ -144,23 +148,39 @@ export const DetailedPostView: FC<DetailedPostViewPropsType> = (props) => {
                         )}
                     </Paper>
                 </Grid>
-                {/*)}*/}
                 <Grid item xs={12} md={6}>
                     <CustomButton
-                        className={`${classes.btn} advertise`}
-                        disabled
+                        className={`${classes.btn} notification`}
+                        // disabled={!data.observer.number_of_notifications}
+                        onClick={handleNotificationsOpen(data.id)}
                     >
-                        <RocketIcon/>
-                        &nbsp;
-                        <Typography variant='subtitle1'>
-                            Рекламировать
+                        <Typography
+                            variant="subtitle1"
+                            color="initial"
+                            noWrap
+                        >
+                            Уведомления/ История
                         </Typography>
+                        <ChevronRightIcon color='action' />
                     </CustomButton>
+                    {
+                        isCreator && (
+                            <CustomButton
+                                className={`${classes.btn} settings`}
+                                onClick={handleSettingsOpen(data.id, data, 1)}
+                            >
+                                <Typography variant='subtitle1'>
+                                    Настройки
+                                </Typography>
+                                <ChevronRightIcon color='action' />
+                            </CustomButton>
+                        )
+                    }
                 </Grid>
                 <Grid item xs={12} md={6}>
                     <Paper className={classes.paper}>
                         <Box className='location' width={1}>
-                            <LocationIcon/>
+                            <LocationIcon />
                             <Typography
                                 variant="subtitle1"
                                 color="initial"
@@ -175,18 +195,14 @@ export const DetailedPostView: FC<DetailedPostViewPropsType> = (props) => {
                 </Grid>
                 <Grid item xs={12} md={6}>
                     <CustomButton
-                        className={`${classes.btn} notification`}
-                        // disabled={!data.observer.number_of_notifications}
-                        onClick={handleNotificationsOpen(data.id)}
+                        className={`${classes.btn} advertise`}
+                        disabled
                     >
-                        <Typography
-                            variant="subtitle1"
-                            color="initial"
-                            noWrap
-                        >
-                            Уведомления/ История
+                        <RocketIcon />
+                        &nbsp;
+                        <Typography variant='subtitle1'>
+                            Рекламировать
                         </Typography>
-                        <ChevronRightIcon color='action'/>
                     </CustomButton>
                 </Grid>
                 {isAuction && (
@@ -203,35 +219,55 @@ export const DetailedPostView: FC<DetailedPostViewPropsType> = (props) => {
                 )}
                 <Grid item xs={12} md={6}>
                     <Typography variant='subtitle2' gutterBottom>
-                        Победитель аукциона
+                        {isWinner ? 'Продавец' : 'Победитель аукциона'}
+                        {isCreator ? 'Предложенная цена' : null}
                     </Typography>
                     <Paper className={classes.paper}>
-                        {/*   Менять данные пользователя на победителя (АУКЦИОН)   */}
                         <Box className={classes.userInfo}>
-                            {isWinner && (
+                            {/* Если я не победитель и если я не создатель то отображать последнюю свою ставку */}
+                            {/* Если я не победитель и если я создатель и статус 'suspend' или 'sold' то отображать победителя */}
+                            {isAuction && isCreator && isSuspend || isSold && (
                                 <UserInfoWithAvatar
-                                    owner={data.auction.winner}
-                                    isOwner={true}
+                                    owner={data.auction?.winner}
+                                    isOwner
                                     width='50px'
                                     height='50px'
                                 />
                             )}
-
-                            {isOwner && data.creator && (
-                                <UserInfoWithAvatar
-                                    owner={userInfo}
-                                    isOwner={true}
-                                    width='50px'
-                                    height='50px'
-                                />
+                            {/* Если я создатель и статус 'public' то ничего не отображать но если есть предложенные */}
+                            {isAuction && isCreator && isPublic && !!data.auction?.offer && (
+                                <Box>
+                                    <UserInfoWithAvatar
+                                        owner={data.auction?.offer?.user}
+                                        isOwner
+                                        width='50px'
+                                        height='50px'
+                                    />
+                                    <Box>
+                                        <Typography variant='h5'>
+                                            {`${numberPrettier(data.auction?.offer?.price)} сум`}
+                                        </Typography>
+                                        <Typography variant='subtitle2'>
+                                            Все предложения ({data.auction?.number_of_offers})
+                                        </Typography>
+                                    </Box>
+                                </Box>
                             )}
+                            {/*Если я не создатель то отображать последнюю свою ставку */}
 
+                            {/* Если я победитель показать продавца или если я продавец то победителя*/}
+                            <UserInfoWithAvatar
+                                owner={isWinner ? data?.author : data.auction?.winner}
+                                isOwner
+                                width='50px'
+                                height='50px'
+                            />
                         </Box>
                         <Box ml={2} width='40%'>
                             <CustomButton>
                                 <PhoneIcon />
                                 <Typography variant='subtitle2'>
-                                    Написать
+                                    Позвонить
                                 </Typography>
                             </CustomButton>
                             <CustomButton>
@@ -243,33 +279,24 @@ export const DetailedPostView: FC<DetailedPostViewPropsType> = (props) => {
                         </Box>
                     </Paper>
                     <Box>
-                        {data.creator && isSuspend && (
-                            <div className="status-buttons">
-                                <CustomButton className='end-auction'>
+                        {isCreator && isSuspend && (
+                            <div className={classes.actionButtons}>
+                                <CustomButton color='primary'>
                                     <Typography variant='subtitle1'>
                                         Завершить аукцион
                                     </Typography>
                                 </CustomButton>
                             </div>
                         )}
-                        {isSuspend && !data.creator && isWinner && (
-                            <div className="status-buttons">
-                                <CustomButton onClick={handleRejectVictory(data.auction.id)}>
+                        {isWinner && isSuspend && !isCreator && (
+                            <div className={classes.actionButtons}>
+                                <CustomButton className='reject-btn' onClick={handleRejectVictory(data.auction.id)}>
                                     <Typography variant='subtitle1'>Отказать</Typography>
                                 </CustomButton>
                             </div>
                         )}
                     </Box>
                 </Grid>
-                {isAuction && (
-                    <Grid item xs={12} md={6}>
-                        {/*<BetsList*/}
-                        {/*    title={t('auction:extremeRates')}*/}
-                        {/*    auctionId={data.id}*/}
-                        {/*    showBetsCount={2}*/}
-                        {/*/>*/}
-                    </Grid>
-                )}
             </Grid>
         </CabinetModal>
     );

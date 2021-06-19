@@ -69,6 +69,7 @@ export const useStyles = makeStyles((theme) => ({
                 '& .post-title': {
                     width: '380px',
                     '& a': {
+                        display: 'inline-block',
                         textDecoration: 'none',
                         '&:hover': {
                             textDecoration: 'underline',

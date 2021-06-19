@@ -259,6 +259,7 @@ const MyPostsContainer: FC = () => {
 
     const handleSettingsOpen = (postId: number, post, index: number) => () => {
         openSettingsModal();
+        closeDetailedModal();
         postId && setPostId(postId);
         setModalContentIndex(index);
         setSelectedPost(post);
@@ -278,6 +279,7 @@ const MyPostsContainer: FC = () => {
     const handleNotificationsOpen = (postId: number) => () => {
         postId && setPostId(postId);
         openNotificationsModal();
+        closeDetailedModal();
     };
     const handleModalContentIndex = (index, reasonId?) => () => {
         setModalContentIndex(index);
@@ -693,28 +695,32 @@ const MyPostsContainer: FC = () => {
     return (
         <>
             <TabsContent
-                tabIndex={tabIndex}
-                handleTabChange={handleTabChange}
-                title={t('myPosts')}
                 tabsData={tabsData}
+                tabIndex={tabIndex}
+                title={t('myPosts')}
                 headerTitle={t('myPosts')}
+                handleTabChange={handleTabChange}
             />
             {/* Modals */}
             <CabinetModal
-                openDialog={settingsModalOpen}
-                handleCloseDialog={handleSettingsClose}
                 maxWidth='xs'
                 fullWidth={false}
+                openDialog={settingsModalOpen}
+                handleCloseDialog={handleSettingsClose}
             >
                 <ModalContent />
             </CabinetModal>
             <DetailedPostView
                 data={selectedPost}
                 detailedModalOpen={detailedModalOpen}
+                handleSettingsOpen={handleSettingsOpen}
                 handleDetailedClose={closeDetailedModal}
                 handleNotificationsOpen={handleNotificationsOpen}
             />
-            <CabinetModal openDialog={notificationsOpen} handleCloseDialog={closeNotificationsModal}>
+            <CabinetModal
+                openDialog={notificationsOpen}
+                handleCloseDialog={closeNotificationsModal}
+            >
                 <Box
                     display='flex'
                     justifyContent='center'
