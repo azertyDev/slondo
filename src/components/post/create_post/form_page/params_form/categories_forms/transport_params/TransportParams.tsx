@@ -57,7 +57,7 @@ export const TransportParams: FC<CommonParamsPropsType> = (props) => {
         touched
     } = formik;
 
-    const {handleSelect, handleInput, handleSetRequireVals} = useHandlers(values, setValues);
+    const {handleSelect, handleNumericInput, handleSetRequireVals} = useHandlers(values, setValues);
 
     useEffect(() => {
         handleSetRequireVals(filters);
@@ -111,7 +111,7 @@ export const TransportParams: FC<CommonParamsPropsType> = (props) => {
                                      name='engine_capacity'
                                      labelText='engine_capacity'
                                      value={values.engine_capacity}
-                                     onChange={handleInput}
+                                     onChange={handleNumericInput}
                                      errorMsg={getErrorMsg(errors.engine_capacity, touched.engine_capacity, t)}
                                  />}
                             </Grid>
@@ -135,7 +135,7 @@ export const TransportParams: FC<CommonParamsPropsType> = (props) => {
                                      name='year'
                                      labelText='year'
                                      value={values.year}
-                                     onChange={handleInput}
+                                     onChange={handleNumericInput}
                                      errorMsg={getErrorMsg(errors.year, touched.year, t)}
                                  />}
                             </Grid>
@@ -159,7 +159,7 @@ export const TransportParams: FC<CommonParamsPropsType> = (props) => {
                                      name='mileage'
                                      labelText='mileage'
                                      value={values.mileage}
-                                     onChange={handleInput}
+                                     onChange={handleNumericInput}
                                      errorMsg={getErrorMsg(errors.mileage, touched.mileage, t)}
                                  />}
                             </Grid>

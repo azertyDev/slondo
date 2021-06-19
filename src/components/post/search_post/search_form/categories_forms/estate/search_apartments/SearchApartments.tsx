@@ -48,7 +48,7 @@ export const SearchApartments: FC<CommonFiltersType> = (props) => {
         handleBlur
     } = formik;
 
-    const {handleSelect, handleInput, handleSetValsByParams, handleCheckbox} = useHandlers(values, setValues);
+    const {handleSelect, handleNumericInput, handleSetValsByParams, handleCheckbox} = useHandlers(values, setValues);
 
     const {t} = useTranslation('filters');
 
@@ -98,7 +98,7 @@ export const SearchApartments: FC<CommonFiltersType> = (props) => {
                     xs={12}
                 >
                     <FromToInputs
-                        handleInput={handleInput}
+                        handleInput={handleNumericInput}
                         labelTxt={t('area')}
                         firstInputProps={{
                             value: values.area_from,
@@ -119,7 +119,7 @@ export const SearchApartments: FC<CommonFiltersType> = (props) => {
                     xs={12}
                 >
                     <FromToInputs
-                        handleInput={handleInput}
+                        handleInput={handleNumericInput}
                         labelTxt={t('floor')}
                         firstInputProps={{
                             value: values.floor_from,
@@ -146,7 +146,7 @@ export const SearchApartments: FC<CommonFiltersType> = (props) => {
                         xs={12}
                     >
                         <FromToInputs
-                            handleInput={handleInput}
+                            handleInput={handleNumericInput}
                             labelTxt={t('number_of_floors')}
                             firstInputProps={{
                                 value: values.number_of_floors_from,

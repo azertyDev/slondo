@@ -37,7 +37,7 @@ export const SearchParkingLotsBoxes: FC<CommonFiltersType> = (props) => {
         handleBlur
     } = formik;
 
-    const {handleSelect, handleInput, handleSetValsByParams} = useHandlers(values, setValues);
+    const {handleSelect, handleNumericInput, handleSetValsByParams} = useHandlers(values, setValues);
 
     const {t} = useTranslation('filters');
 
@@ -71,7 +71,7 @@ export const SearchParkingLotsBoxes: FC<CommonFiltersType> = (props) => {
                     xs={12}
                 >
                     <FromToInputs
-                        handleInput={handleInput}
+                        handleInput={handleNumericInput}
                         labelTxt={t('parking_spaces')}
                         firstInputProps={{
                             value: values.parking_spaces_from,
@@ -92,7 +92,7 @@ export const SearchParkingLotsBoxes: FC<CommonFiltersType> = (props) => {
                     xs={12}
                 >
                     <FromToInputs
-                        handleInput={handleInput}
+                        handleInput={handleNumericInput}
                         labelTxt={t('area')}
                         firstInputProps={{
                             value: values.area_from,

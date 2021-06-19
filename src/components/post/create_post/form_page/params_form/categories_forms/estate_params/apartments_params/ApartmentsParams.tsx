@@ -55,7 +55,7 @@ export const ApartmentsParams: FC<CommonParamsPropsType> = (props) => {
         handleBlur
     } = formik;
 
-    const {handleInput, handleCheckbox, handleOptionCheckbox, handleSelect} = useHandlers(values, setValues);
+    const {handleNumericInput, handleCheckbox, handleOptionCheckbox, handleSelect} = useHandlers(values, setValues);
 
     const classes = useStyles();
     return (
@@ -164,7 +164,7 @@ export const ApartmentsParams: FC<CommonParamsPropsType> = (props) => {
                                      name='area'
                                      labelText={t('filters:area')}
                                      value={values.area ?? ''}
-                                     onChange={handleInput}
+                                     onChange={handleNumericInput}
                                      errorMsg={getErrorMsg(errors.area, touched.area, t)}
                                  />
                              </Grid>
@@ -174,7 +174,7 @@ export const ApartmentsParams: FC<CommonParamsPropsType> = (props) => {
                                      name='living_area'
                                      labelText={t('filters:living_area')}
                                      value={values.living_area ?? ''}
-                                     onChange={handleInput}
+                                     onChange={handleNumericInput}
                                      errorMsg={getErrorMsg(errors.living_area, touched.living_area, t)}
                                  />
                              </Grid>
@@ -184,7 +184,7 @@ export const ApartmentsParams: FC<CommonParamsPropsType> = (props) => {
                                      name='kitchen_area'
                                      labelText={t('filters:kitchen_area')}
                                      value={values.kitchen_area ?? ''}
-                                     onChange={handleInput}
+                                     onChange={handleNumericInput}
                                      errorMsg={getErrorMsg(errors.kitchen_area, touched.kitchen_area, t)}
                                  />
                              </Grid>
@@ -194,7 +194,7 @@ export const ApartmentsParams: FC<CommonParamsPropsType> = (props) => {
                                      name='ceiling_height'
                                      labelText={t('filters:ceiling_height')}
                                      value={values.ceiling_height ?? ''}
-                                     onChange={handleInput}
+                                     onChange={handleNumericInput}
                                      errorMsg={getErrorMsg(errors.ceiling_height, touched.ceiling_height, t)}
                                  />
                              </Grid>

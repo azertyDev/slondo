@@ -1,7 +1,7 @@
 import {FC} from 'react';
 import {Typography} from '@material-ui/core';
 import {CustomSlider} from '@src/components/elements/custom_slider/CustomSlider';
-import {CardItem} from '@src/components/elements/card/card_item/CardItem';
+import {GridCard} from '@src/components/elements/card/grid_card/GridCard';
 import {CardData} from '@root/interfaces/CardData';
 import {settings} from './sliderSettings';
 import {useStyles} from './useStyles';
@@ -23,7 +23,7 @@ export const PostsSlider: FC<{ title: string; cardData: CardData }> = ({cardData
                     </div>
                     : <CustomSlider {...settings}>
                         {cards.map(card =>
-                            <CardItem
+                            <GridCard
                                 isFetch={isFetch}
                                 key={card.id}
                                 {...card}

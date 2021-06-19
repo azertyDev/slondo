@@ -110,7 +110,7 @@ export const SearchForm: FC<SearchFormPropsType> = (props) => {
 
     const hasAuction = !!HasAuction[mainCategoryName];
 
-    const {handleInput} = useHandlers(values, setValues);
+    const {handleNumericInput} = useHandlers(values, setValues);
 
     const handleCheckbox = (name) => ({target}) => {
         let vals: any = {...values, [name]: target.checked};
@@ -354,7 +354,7 @@ export const SearchForm: FC<SearchFormPropsType> = (props) => {
                     <Grid item xs={4}>
                         <FromToInputs
                             disabled={values.free}
-                            handleInput={handleInput}
+                            handleInput={handleNumericInput}
                             labelTxt={t(mainCategoryName === 'job' ? 'salary' : 'cost')}
                             firstInputProps={{
                                 value: values.price_from,

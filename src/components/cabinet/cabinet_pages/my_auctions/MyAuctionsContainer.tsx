@@ -689,8 +689,8 @@ export const MyAuctionsContainer: FC = () => {
 
     useEffect(() => {
         fetchAuctionData();
-        fetchAuctionData('auc');
         fetchAuctionArchiveData();
+        fetchAuctionData('auc');
         fetchAuctionArchiveData('auc');
     }, []);
 

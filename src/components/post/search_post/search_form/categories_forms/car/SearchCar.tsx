@@ -41,7 +41,7 @@ export const SearchCar: FC<CommonFiltersType> = (props) => {
         handleBlur
     } = formik;
 
-    const {handleSelect, handleInput, handleSetValsByParams} = useHandlers(values, setValues);
+    const {handleSelect, handleNumericInput, handleSetValsByParams} = useHandlers(values, setValues);
 
     const {t} = useTranslation('filters');
 
@@ -89,7 +89,7 @@ export const SearchCar: FC<CommonFiltersType> = (props) => {
                     xs={12}
                 >
                     <FromToInputs
-                        handleInput={handleInput}
+                        handleInput={handleNumericInput}
                         labelTxt={t('year')}
                         firstInputProps={{
                             value: values.year_from,
@@ -110,7 +110,7 @@ export const SearchCar: FC<CommonFiltersType> = (props) => {
                     xs={12}
                 >
                     <FromToInputs
-                        handleInput={handleInput}
+                        handleInput={handleNumericInput}
                         labelTxt={t('mileage')}
                         firstInputProps={{
                             value: values.mileage_from,
@@ -185,7 +185,7 @@ export const SearchCar: FC<CommonFiltersType> = (props) => {
                         xs={12}
                     >
                         <FromToInputs
-                            handleInput={handleInput}
+                            handleInput={handleNumericInput}
                             labelTxt={t('engine_capacity')}
                             firstInputProps={{
                                 value: values.engine_capacity_from,

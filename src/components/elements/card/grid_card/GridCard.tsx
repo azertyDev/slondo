@@ -20,7 +20,7 @@ type CardItemProps = {
     archive: boolean
 } & CardDataType;
 
-export const CardItem: FC<CardItemProps> = (props) => {
+export const GridCard: FC<CardItemProps> = (props) => {
     const dispatch = useDispatch();
     const {
         archive,
