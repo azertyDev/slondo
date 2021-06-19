@@ -37,7 +37,7 @@ export const BetsListModal: FC<BetsListPropsType> = (props) => {
 
     const {t} = useTranslation('auction');
     const [page, setPage] = useState(1);
-    const {bets, betsCount, isBetsFetch, setFetchedBetsData} = useBetsData(
+    const {bets, betsCount, setFetchedBetsData} = useBetsData(
         {
             auction_id: auctionId,
             page: page,
@@ -97,7 +97,7 @@ export const BetsListModal: FC<BetsListPropsType> = (props) => {
                             </TableRow>
                         </TableHead>
                         <TableBody>
-                            {bets.map(bet => (
+                            {bets.map((bet, index) => (
                                 <TableRow key={bet.id}>
                                     <TableCell component="td" align="center">
                                         <Typography variant="subtitle1" noWrap>
@@ -129,7 +129,7 @@ export const BetsListModal: FC<BetsListPropsType> = (props) => {
                                             variant="subtitle1"
                                             className="per-bet"
                                         >
-                                            {bet.outbid === 0
+                                            {(index + 1) === betsCount
                                              ? <span className='started-price'>Стартовая цена</span>
                                              : `+ ${numberPrettier(bet.outbid)}`}
                                         </Typography>

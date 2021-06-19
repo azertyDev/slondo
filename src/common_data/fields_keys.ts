@@ -87,6 +87,8 @@ export const fractionalFields = [
 ];
 
 export const optionFields = [
+    'specialization',
+    'regulation',
     'function',
     'overview',
     'properties',
@@ -103,7 +105,7 @@ export const optionFields = [
     'steering',
     'other',
     'comfort',
-    'safety',
+    'safety'
 ];
 
 export const singleFields = [
@@ -128,6 +130,10 @@ export const stringFields = [
 ];
 
 export const booleanFields = [
+    'usb_connector',
+    'build_in_speakers',
     'furnished',
-    'with_pledge'
+    'with_pledge',
+    'utilities',
+    'urgent_work'
 ];

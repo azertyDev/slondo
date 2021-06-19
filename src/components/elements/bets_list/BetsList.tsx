@@ -1,6 +1,6 @@
 import {FC} from 'react';
 import {useTranslation} from 'react-i18next';
-import {Box, Paper, Table, TableBody, TableCell, TableContainer, TableRow, Typography} from '@material-ui/core';
+import {Box, Table, TableBody, TableCell, TableContainer, TableRow, Typography} from '@material-ui/core';
 import {CustomButton} from '@src/components/elements/custom_button/CustomButton';
 import {useModal} from '@src/hooks/useModal';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
@@ -86,7 +86,7 @@ export const BetsList: FC<BetsListPropsType> = (props) => {
                                         variant="subtitle1"
                                         className="per-bet"
                                     >
-                                        {bet.outbid === 0
+                                        {(index + 1) === betsCount
                                          ? <span className='started-price'>Стартовая цена</span>
                                          : `+ ${numberPrettier(bet.outbid)}`}
                                     </Typography>

@@ -12,6 +12,7 @@ import {useStyles} from './useStyles';
 
 
 type AppearanceFormPropsType = {
+    categoryName: string,
     colors: (IdNameType & { hex_color_code: string })[],
     handleSubmit: (v) => void,
     isPreview: boolean,
@@ -22,6 +23,7 @@ type AppearanceFormPropsType = {
 
 export const AppearanceForm: FC<AppearanceFormPropsType> = (props) => {
     const {
+        categoryName,
         currentFormIndex,
         colors,
         handleSubmit,
@@ -31,6 +33,7 @@ export const AppearanceForm: FC<AppearanceFormPropsType> = (props) => {
     } = props;
 
     const formIndex = 2;
+    const isJob = categoryName === 'job';
 
     const {t} = useTranslation('filters');
 
@@ -51,7 +54,7 @@ export const AppearanceForm: FC<AppearanceFormPropsType> = (props) => {
             color: null,
             files: []
         },
-        validationSchema: appearanceSchema
+        validationSchema: !isJob ? appearanceSchema : null
     });
 
     const {
@@ -129,17 +132,17 @@ export const AppearanceForm: FC<AppearanceFormPropsType> = (props) => {
                          {!!colors && (
                              <>
                                  <Typography variant="subtitle1">
-                                     <strong>
-                                         {t('color')}
-                                         {<span className='error-text'>*&nbsp;</span>}
-                                     </strong>
-                                     {
-                                         errors.color
-                                         && touched.color
-                                         && <span className='error-text'>
+                                     {!isJob && (
+                                         <strong>
+                                             {t('color')}
+                                             {<span className='error-text'>*&nbsp;</span>}
+                                         </strong>
+                                     )}
+                                     {errors.color
+                                     && touched.color
+                                     && <span className='error-text'>
                                              {t(errors.color as string)}
-                                         </span>
-                                     }
+                                         </span>}
                                  </Typography>
                                  <div className='color-wrapper'>
                                      {colors.map(clr =>
@@ -161,7 +164,9 @@ export const AppearanceForm: FC<AppearanceFormPropsType> = (props) => {
                              <Typography variant="subtitle1">
                                  <strong>
                                      {t('post:photos')}
-                                     {<span className='error-text'>*</span>}
+                                     {!isJob && (
+                                         <span className='error-text'>*</span>
+                                     )}
                                  </strong>
                                  {errors.files && touched.files && (
                                      <span className='error-text'>

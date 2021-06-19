@@ -91,7 +91,6 @@ export const ApartmentsParams: FC<CommonParamsPropsType> = (props) => {
                                      <Grid item container xs={2} alignItems='center'>
                                          <CheckboxSelect
                                              name='furnished'
-                                             labelText={t('filters:furnished')}
                                              checked={values.furnished}
                                              onChange={handleCheckbox}
                                          />
@@ -113,7 +112,6 @@ export const ApartmentsParams: FC<CommonParamsPropsType> = (props) => {
                                          <Grid item container xs={4} alignItems='center'>
                                              <CheckboxSelect
                                                  name='utilities'
-                                                 labelText={t('filters:utilities')}
                                                  checked={values.utilities}
                                                  onChange={handleCheckbox}
                                              />
@@ -121,7 +119,6 @@ export const ApartmentsParams: FC<CommonParamsPropsType> = (props) => {
                                          <Grid item container xs={4} alignItems='center'>
                                              <CheckboxSelect
                                                  name='with_pledge'
-                                                 labelText={t('filters:with_pledge')}
                                                  checked={values.with_pledge}
                                                  onChange={handleCheckbox}
                                              />

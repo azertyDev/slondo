@@ -1,10 +1,19 @@
-import {ReactNode} from "react";
+import {ReactNode} from 'react';
 
 export type PostType = IdNameType & {
     currency: IdNameType[];
     expired?: { id: number, hours: number }[];
     image: { url: string },
     guide: string,
+    services: {
+        safe_deal?: boolean,
+        time_settings?: boolean,
+        exchange?: boolean,
+        delivery?: boolean,
+        buy_now?: boolean,
+        reserve_price?: boolean,
+        auto_renewal?: boolean
+    }
     subtitle: string
 };
 

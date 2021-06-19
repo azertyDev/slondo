@@ -342,7 +342,7 @@ export const CommonForm: FC<DefaultParamsPropsType> = (props) => {
                                  t={t}
                                  values={values}
                                  isAuction={isAuction}
-                                 mainCategoryName={categoryName}
+                                 categoryName={categoryName}
                                  handleCheckbox={handleCheckboxChange}
                              />
                          </div>

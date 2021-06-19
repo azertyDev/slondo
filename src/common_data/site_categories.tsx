@@ -865,7 +865,7 @@ const categories_list: CategoryType[] = [
     },
     {
         id: 6,
-        name: 'services',
+        name: 'service',
         ru_name: 'Услуги',
         icon: {url: Service},
         smallIcon: <ServicesIcon/>,
@@ -1129,11 +1129,6 @@ const categories_list: CategoryType[] = [
                         ru_name: 'Наращивание ресниц, услуги бровиста'
                     },
                     {
-                        id: 46,
-                        name: 'piercing',
-                        ru_name: 'Пирсинг'
-                    },
-                    {
                         id: 47,
                         name: 'stylist',
                         ru_name: 'Стилист'
@@ -1301,11 +1296,6 @@ const categories_list: CategoryType[] = [
                         id: 77,
                         name: 'fluidChange',
                         ru_name: 'Замена жидкостей'
-                    },
-                    {
-                        id: 78,
-                        name: 'carPainting',
-                        ru_name: 'Покраска авто'
                     },
                     {
                         id: 79,
@@ -1622,7 +1612,7 @@ const categories_list: CategoryType[] = [
             },
             {
                 id: 11,
-                name: 'equipmentAndAttractionsRental',
+                name: 'organizationHolidays',
                 ru_name: 'Организация праздников',
                 type: [
                     {

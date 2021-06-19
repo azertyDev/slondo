@@ -106,15 +106,17 @@ export const HousesCottagesParams: FC<CommonParamsPropsType> = (props) => {
                              </Grid>
                              {isRent && (
                                  <>
-                                     <Grid item container xs={4}>
-                                         <DropDownSelect
-                                             name='payments'
-                                             items={filters.payments}
-                                             values={values}
-                                             onBlur={handleBlur}
-                                             handleSelect={handleSelect}
-                                         />
-                                     </Grid>
+                                     {!!filters?.payment?.length && (
+                                         <Grid item container xs={4}>
+                                             <DropDownSelect
+                                                 name='payment'
+                                                 items={filters.payment}
+                                                 values={values}
+                                                 onBlur={handleBlur}
+                                                 handleSelect={handleSelect}
+                                             />
+                                         </Grid>
+                                     )}
                                      <Grid item container xs={4} alignItems='center'>
                                          <CheckboxSelect
                                              name='utilities'
