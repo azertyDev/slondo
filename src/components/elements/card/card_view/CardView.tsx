@@ -2,7 +2,7 @@ import {FC} from 'react';
 import {Box, Grid} from '@material-ui/core';
 import {CardDataType} from '@root/interfaces/CardData';
 import {ListCard} from '@src/components/elements/card/list_card/ListCard';
-import {CardItem} from '@src/components/elements/card/card_item/CardItem';
+import {GridCard} from '@src/components/elements/card/grid_card/GridCard';
 
 export type ViewPropsType = {
     isFetch?: boolean,
@@ -27,7 +27,7 @@ export const CardView: FC<ViewPropsType> = (props) => {
         : <Grid container spacing={2}>
             {data.map((cardData, i) => (
                 <Grid key={i} xs={6} sm={6} md={4} lg={3} item>
-                    <CardItem
+                    <GridCard
                         {...cardData}
                         archive={archive}
                         isFetch={isFetch}

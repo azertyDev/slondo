@@ -5,7 +5,7 @@ import {isRequired} from '@src/helpers';
 
 export const useHandlers = (values: any, setValues: Dispatch<SetStateAction<any>>) => {
     return {
-        handleInput: ({target: {name, value}}) => {
+        handleNumericInput: ({target: {name, value}}) => {
             const isNumericField = numericFields.some((n => n === name));
             const isFractionalField = fractionalFields.some((n => n === name));
             if (isNumericField && RegExp(numberRegEx).test(value)) {
@@ -17,15 +17,15 @@ export const useHandlers = (values: any, setValues: Dispatch<SetStateAction<any>
                 }
             }
         },
-
+        handleInput: ({target: {name, value}}) => {
+            setValues({...values, [name]: value});
+        },
         handleSelect: (name, value) => {
             setValues({...values, [name]: value});
         },
-
         handleCheckbox: ({target}) => {
             setValues({...values, [target.name]: target.checked});
         },
-
         handleOptionCheckbox: (name, item) => {
             if (values[name]) {
                 const isExst = values[name].some(({id}) => id === item.id);
@@ -39,7 +39,6 @@ export const useHandlers = (values: any, setValues: Dispatch<SetStateAction<any>
             }
             setValues({...values});
         },
-
         handleSetValsByParams: (urlParams, filters) => {
             const vals: any = {};
 
@@ -65,7 +64,6 @@ export const useHandlers = (values: any, setValues: Dispatch<SetStateAction<any>
 
             setValues({...values, ...vals});
         },
-
         handleSetRequireVals: (filters) => {
             const reqVals = {};
 

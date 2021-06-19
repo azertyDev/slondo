@@ -91,8 +91,8 @@ export const ParamsFormContainer: FC<ParamsFormPropsType> = (props) => {
             case 'job':
                 return <JobParams
                     t={t}
-                    onSubmit={onSubmit}
                     filters={filters}
+                    onSubmit={onSubmit}
                     isPreview={isPreview}
                     handleFormOpen={handleFormOpen}
                     subcategoryName={subcategory.name}
@@ -104,6 +104,7 @@ export const ParamsFormContainer: FC<ParamsFormPropsType> = (props) => {
                     type={type}
                     filters={filters}
                     onSubmit={onSubmit}
+                    isPreview={isPreview}
                     currentFormIndex={currentFormIndex}
                     handleFormOpen={handleFormOpen}
                 />;

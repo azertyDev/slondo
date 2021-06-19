@@ -16,9 +16,9 @@ export const ElectronicsParams: FC<CommonParamsPropsType> = (props) => {
     const {
         t,
         type,
-        onSubmit,
         filters,
         isPreview,
+        onSubmit,
         currentFormIndex,
         handleFormOpen
     } = props;
@@ -84,8 +84,8 @@ export const ElectronicsParams: FC<CommonParamsPropsType> = (props) => {
                             sm={4}
                         >
                             <CheckboxSelect
-                                checked={values.build_in_speakers}
                                 name='build_in_speakers'
+                                checked={values.build_in_speakers}
                                 onChange={handleCheckbox}
                             />
                         </Grid>

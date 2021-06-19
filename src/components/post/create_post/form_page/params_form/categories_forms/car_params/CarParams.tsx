@@ -73,7 +73,7 @@ export const CarParams: FC<CarParamsPropsType> = (props) => {
     } = formik;
 
     const [valuesByYear, setValuesByYear] = useState<any>({});
-    const {handleInput, handleCheckbox, handleOptionCheckbox} = useHandlers(values, setValues);
+    const {handleNumericInput, handleCheckbox, handleOptionCheckbox} = useHandlers(values, setValues);
 
     const handleSelect = async (name, value) => {
         try {
@@ -347,7 +347,7 @@ export const CarParams: FC<CarParamsPropsType> = (props) => {
                                                      name='engine_capacity'
                                                      labelText='engine_capacity'
                                                      value={values.engine_capacity}
-                                                     onChange={handleInput}
+                                                     onChange={handleNumericInput}
                                                      errorMsg={getErrorMsg(errors.engine_capacity, touched.engine_capacity, t)}
                                                  />
                                              </Grid>
@@ -363,7 +363,7 @@ export const CarParams: FC<CarParamsPropsType> = (props) => {
                                                      name='mileage'
                                                      labelText='mileage'
                                                      value={values.mileage ?? ''}
-                                                     onChange={handleInput}
+                                                     onChange={handleNumericInput}
                                                      errorMsg={getErrorMsg(errors.mileage, touched.mileage, t)}
                                                  />
                                              </Grid>

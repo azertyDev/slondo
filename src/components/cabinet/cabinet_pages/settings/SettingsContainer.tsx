@@ -14,7 +14,7 @@ import {UploadAvatarForm} from '@src/components/cabinet/cabinet_pages/settings/s
 import {timeRegEx} from '@src/common_data/reg_exs';
 import {CodeConfirm} from '@src/components/cabinet/cabinet_pages/settings/settings_form/password_recovery/CodeConfirm';
 import {regularFormSchema} from '@root/validation_schemas/createPostSchemas';
-import {PasswordConfirmForm} from '@root/src/components/header/auth_reg_page/auth_reg_form/recovery_form/PasswordConfirmForm';
+import {PasswordConfirmForm} from '@root/src/components/header/auth_reg_page/auth_reg_forms/recovery_form/PasswordConfirmForm';
 
 const SettingsContainer: FC = () => {
     const dispatch = useDispatch();

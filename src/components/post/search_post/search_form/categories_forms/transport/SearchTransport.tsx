@@ -61,7 +61,7 @@ export const SearchTransport: FC<SearchRegularPropsType> = (props) => {
         resetForm
     } = formik;
 
-    const {handleSelect, handleSetValsByParams, handleInput} = useHandlers(values, setValues);
+    const {handleSelect, handleSetValsByParams, handleNumericInput} = useHandlers(values, setValues);
 
     useEffect(() => {
         handleSetValsByParams(urlParams, filters);
@@ -91,7 +91,7 @@ export const SearchTransport: FC<SearchRegularPropsType> = (props) => {
                         sm={4}
                     >
                         <FromToInputs
-                            handleInput={handleInput}
+                            handleInput={handleNumericInput}
                             labelTxt={t('engine_capacity')}
                             firstInputProps={{
                                 value: values.engine_capacity_from,
@@ -114,7 +114,7 @@ export const SearchTransport: FC<SearchRegularPropsType> = (props) => {
                         sm={4}
                     >
                         <FromToInputs
-                            handleInput={handleInput}
+                            handleInput={handleNumericInput}
                             labelTxt={t('year')}
                             firstInputProps={{
                                 value: values.year_from,
@@ -137,7 +137,7 @@ export const SearchTransport: FC<SearchRegularPropsType> = (props) => {
                         sm={4}
                     >
                         <FromToInputs
-                            handleInput={handleInput}
+                            handleInput={handleNumericInput}
                             labelTxt={t('mileage')}
                             firstInputProps={{
                                 value: values.mileage_from,
