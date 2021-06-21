@@ -121,5 +121,20 @@ export const useStyles = makeStyles((theme) => ({
                 marginLeft: '-2px'
             }
         }
+    },
+    menu: {
+        '& .MuiPaper-root': {
+            width: '290px',
+            padding: '10px'
+        },
+        '& .menu-item': {
+            padding: '5px',
+            marginBottom: '0px',
+            borderRadius: '0px',
+            backgroundColor: '#fff',
+            '& .MuiListItem-root': {
+                background: '#f2f2f2'
+            }
+        }
     }
 }));

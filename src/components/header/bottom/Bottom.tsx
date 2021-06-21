@@ -6,6 +6,7 @@ import {
     Container,
     Grid,
     Hidden,
+    Popover,
     Typography
 } from '@material-ui/core';
 import {CustomButton} from '@src/components/elements/custom_button/CustomButton';
@@ -18,20 +19,25 @@ import {CustomDrawer} from '@src/components/header/bottom/custom_drawer/CustomDr
 import {Location} from '@src/components/elements/location/Location';
 import {Localization} from '@src/components/header/top/localization/Localization';
 import {HeaderSearchForm} from '@src/components/header/bottom/header_search_form/HeaderSearchForm';
+import { SidebarMenu } from '@src/components/cabinet/cabinet_sidebar/sidebar_menu/SidebarMenu';
 import {useStyles} from './useStyles';
-import {HeaderAuthMenu} from '@src/components/header/bottom/header_auth_menu/HeaderAuthMenu';
 
 const Bottom = (props) => {
     const {isScrollBreak, handleOpenModal, isAuth, t, avatar} = props;
     const [drawerOpen, setDrawerOpen] = useState(false);
-    const [open, setOpen] = useState(null);
 
-    const handleOpenMenu = (event) => {
-        setOpen(event.currentTarget);
+    const [anchorEl, setAnchorEl] = useState<HTMLButtonElement | null>(null);
+
+    const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+        setAnchorEl(event.currentTarget);
     };
-    const handleCloseMenu = () => {
-        setOpen(null);
+
+    const handleClose = () => {
+        setAnchorEl(null);
     };
+
+    const open = Boolean(anchorEl);
+    const id = open ? 'simple-popover' : undefined;
 
     const handleDrawerShow = (value) => () => {
         setDrawerOpen(value);
@@ -125,7 +131,9 @@ const Bottom = (props) => {
                                 xs={1}
                             >
                                 {isAuth
-                                    ? <Avatar alt="Remy Sharp" src={avatar} onClick={handleOpenMenu} />
+                                    ? <span onClick={handleClick} >
+                                        <Avatar alt="Avatar" src={avatar} />
+                                    </span>
                                     : <CustomButton
                                         className="bottom-sign-button header-button"
                                         onClick={handleOpenModal}
@@ -134,7 +142,8 @@ const Bottom = (props) => {
                                             {t('auth_reg:signIn')}
                                         </Typography>
                                         <SignIcon />
-                                    </CustomButton>}
+                                    </CustomButton>
+                                }
                             </Grid>
                         </Grid>
                     </Container>
@@ -151,7 +160,20 @@ const Bottom = (props) => {
                 open={drawerOpen}
                 onClose={handleDrawerShow(false)}
             />
-            <HeaderAuthMenu open={open} handleClose={handleCloseMenu} />
+
+            <Popover
+                id={id}
+                open={open}
+                anchorEl={anchorEl}
+                onClose={handleClose}
+                className={classes.menu}
+                anchorOrigin={{
+                    vertical: 'top',
+                    horizontal: 'center',
+                }}
+            >
+                <SidebarMenu />
+            </Popover>
         </div>
     );
 };

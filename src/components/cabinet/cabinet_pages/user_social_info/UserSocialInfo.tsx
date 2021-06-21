@@ -1,5 +1,5 @@
 import React, {FC} from 'react';
-import {List, Typography} from '@material-ui/core';
+import {List, ListItem, ListItemText, Typography} from '@material-ui/core';
 import {useRouter} from 'next/router';
 import {CustomButton} from '@src/components/elements/custom_button/CustomButton';
 import {CustomBadge} from '@src/components/elements/custom_budge/CustomBadge';
@@ -24,25 +24,40 @@ export const UserSocialInfo: FC<UserSocialInfoPropsType> = ({t, user}) => {
 
     const classes = useStyles();
     return (
-        <List className={classes.root} disablePadding>
-            <CustomBadge badgeContent={number_of_reviews}>
+        <>
+            <List className={classes.root} disablePadding>
+                <CustomBadge badgeContent={number_of_reviews}>
+                    <CustomButton
+                        onClick={onButtonClick('ratings')}
+                        className={pathname === '/cabinet/ratings' ? 'selected' : ''}
+                    >
+                        <Typography variant="subtitle1">
+                            {t('cabinet:rating')}
+                        </Typography>
+                    </CustomButton>
+                </CustomBadge>
                 <CustomButton
-                    onClick={onButtonClick('ratings')}
-                    className={pathname === '/cabinet/ratings' ? 'selected' : ''}
+                    onClick={onButtonClick('subscribe')}
+                    className={pathname === '/cabinet/subscribe' ? 'selected' : ''}
                 >
                     <Typography variant="subtitle1">
-                        {t('cabinet:rating')}
+                        {t('cabinet:follows')}
                     </Typography>
                 </CustomButton>
-            </CustomBadge>
-            <CustomButton
-                onClick={onButtonClick('subscribe')}
-                className={pathname === '/cabinet/subscribe' ? 'selected' : ''}
-            >
-                <Typography variant="subtitle1">
-                    {t('cabinet:follows')}
-                </Typography>
-            </CustomButton>
-        </List>
+            </List>
+
+            <List component="nav" aria-label="cabinet menu" className='menu-item' disablePadding>
+                <CustomBadge badgeContent={0} color='error'>
+                    <ListItem
+                        button
+                        selected={pathname === '/cabinet/bannedPosts'}
+                        onClick={onButtonClick('bannedPosts')}
+                        disableGutters
+                    >
+                        <ListItemText primary={t('cabinet:bannedPosts')} />
+                    </ListItem>
+                </CustomBadge>
+            </List>
+        </>
     )
 }

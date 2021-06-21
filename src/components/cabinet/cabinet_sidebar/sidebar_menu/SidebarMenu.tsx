@@ -44,18 +44,6 @@ export const SidebarMenu: FC = () => {
     const classes = useStyles();
     return (
         <div className={classes.root}>
-            <List component="nav" aria-label="cabinet menu" className='menu-item' disablePadding>
-                <CustomBadge badgeContent={0} color='error'>
-                    <ListItem
-                        button
-                        selected={pathname === '/cabinet/bannedPosts'}
-                        onClick={handleListItemClick('bannedPosts')}
-                        disableGutters
-                    >
-                        <ListItemText primary={t('cabinet:bannedPosts')} />
-                    </ListItem>
-                </CustomBadge>
-            </List>
             <List disablePadding component="nav" aria-label="cabinet menu" className='menu-item'>
                 <ListItem
                     button
@@ -98,7 +86,7 @@ export const SidebarMenu: FC = () => {
                     </ListItem>
                 </CustomBadge>
             </List>
-            <List disablePadding component="nav" aria-label="cabinet menu" className='menu-item'>
+            <List disablePadding component="nav" aria-label="cabinet menu" className='menu-item row'>
                 <CustomBadge badgeContent={number_of_notifications} color='error'>
                     <ListItem
                         button
