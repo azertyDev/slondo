@@ -1,6 +1,6 @@
 import {FC} from 'react';
 import {Box, Hidden, IconButton, Typography, useMediaQuery, useTheme} from '@material-ui/core';
-import {KeyboardBackspace, FavoriteBorder} from '@material-ui/icons';
+import {FavoriteBorder, KeyboardBackspace} from '@material-ui/icons';
 import {CustomSlider} from '@src/components/elements/custom_slider/CustomSlider';
 import {SlidersRefType} from '../PostContent';
 import CustomTooltip from '@src/components/elements/custom_tooltip/CustomTooltip';
@@ -14,7 +14,10 @@ type SyncSlidersProps = {
     handleOpenModal: () => void;
     imgs: {
         alt: string;
-        url: { default: string };
+        url: {
+            default: string,
+            extra: string,
+        };
     }[];
     slidersRefs: SlidersRefType;
     handleFavorite: () => void;
@@ -64,7 +67,7 @@ export const SyncSliders: FC<SyncSlidersProps> = (props) => {
                         <img
                             key={i}
                             alt={img.alt}
-                            src={img.url.default}
+                            src={img.url.extra}
                             onClick={handleOpenModal}
                         />
                     )}

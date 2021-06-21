@@ -14,7 +14,10 @@ type SyncSlidersProps = {
     onClose: () => void;
     imgs: {
         alt: string;
-        url: { default: string };
+        url: {
+            default: string,
+            extra: string
+        };
     }[];
     slidersRefs: SlidersRefType;
 };
@@ -84,7 +87,7 @@ export const ModalSyncSliders: FC<SyncSlidersProps> = (props) => {
                                 key={i}
                                 moveType="drag"
                                 zoomScale={1.7}
-                                src={img.url.default}
+                                src={img.url.extra}
                                 className="image-zoom"
                                 fullscreenOnMobile={true}
                             />

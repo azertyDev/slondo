@@ -91,14 +91,14 @@ export const DetailedPostView: FC<DetailedPostViewPropsType> = (props) => {
                     </Typography>
                 </Box>
                 <Grid item xs={12}>
-                    <ListCard cardData={data}/>
+                    <ListCard cardData={data} />
                 </Grid>
                 <Grid item xs={12} md={6}>
                     <Paper className={classes.paper}>
                         {!!data.available_days && (
                             <div className="bonus_item">
                                     <span className='icon-bg'>
-                                        <PhoneIcon/>
+                                        <PhoneIcon />
                                     </span>
                                 <Typography variant="body1">
                                     {/*{weekDaysHdataper(data.available_days, t)}&nbsp;*/}
@@ -109,7 +109,7 @@ export const DetailedPostView: FC<DetailedPostViewPropsType> = (props) => {
                         {!!data.exchange && (
                             <div className="bonus_item">
                                     <span className='icon-bg'>
-                                    <ExchangeIcon/>
+                                    <ExchangeIcon />
                                     </span>
                                 <Typography variant="body1">
                                     Возможен обмен
@@ -119,7 +119,7 @@ export const DetailedPostView: FC<DetailedPostViewPropsType> = (props) => {
                         {!!data.delivery && (
                             <div className="bonus_item">
                                     <span className='icon-bg'>
-                                        <DeliveryIcon/>
+                                        <DeliveryIcon />
                                     </span>
                                 <Typography variant="body1">
                                     Есть доставка
@@ -129,7 +129,7 @@ export const DetailedPostView: FC<DetailedPostViewPropsType> = (props) => {
                         {!!data.safe_deal && (
                             <div className="bonus_item">
                                     <span className='icon-bg'>
-                                        <SafeIcon/>
+                                        <SafeIcon />
                                     </span>
                                 <Typography variant="body1">
                                     Безопасная покупка
@@ -139,7 +139,7 @@ export const DetailedPostView: FC<DetailedPostViewPropsType> = (props) => {
                         {!!data.auction?.auto_renewal && (
                             <div className="bonus_item">
                                     <span className='icon-bg'>
-                                        <RenewalIcon/>
+                                        <RenewalIcon />
                                     </span>
                                 <Typography variant="body1">
                                     Автопродление

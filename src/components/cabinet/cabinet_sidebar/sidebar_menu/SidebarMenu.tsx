@@ -1,7 +1,6 @@
 import React, {FC} from 'react';
 import {List, ListItem, ListItemText} from '@material-ui/core';
 import {useRouter} from 'next/router';
-import {WithT} from 'i18next';
 import {cookies} from '@src/helpers';
 import {CustomBadge} from '@src/components/elements/custom_budge/CustomBadge';
 import {NotesIcon} from '@src/components/elements/icons/NotesIcon';
@@ -14,21 +13,21 @@ import {WalletIcon} from '@src/components/elements/icons/WalletIcon';
 import {ShoppingIcon} from '@src/components/elements/icons/ShoppingIcon';
 import {SettingsIcon} from '@src/components/elements/icons/SettingsIcon';
 import {PowerIcon} from '@src/components/elements/icons/PowerIcon';
-import {useDispatch} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import {signOutAction} from '@src/redux/slices/userSlice';
 import {useStyles} from './useStyles';
-import {UserInfo} from '@root/interfaces/Auth';
+import {RootState} from '@src/redux/rootReducer';
+import {useTranslation} from 'next-i18next';
 
-type SidebarMenuPropsType = {
-    user: UserInfo
-} & WithT
-
-export const SidebarMenu: FC<SidebarMenuPropsType> = ({t, user}) => {
+export const SidebarMenu: FC = () => {
+    const {t} = useTranslation('cabinet');
     const {
-        number_of_messages,
-        number_of_notifications,
-        number_of_purchase
-    } = user.observer;
+        observer: {
+            number_of_messages,
+            number_of_notifications,
+            number_of_purchase
+        }
+    } = useSelector((store: RootState) => store.user.info);
     const dispatch = useDispatch();
     const {push, pathname} = useRouter();
 

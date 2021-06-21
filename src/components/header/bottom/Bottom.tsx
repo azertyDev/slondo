@@ -1,6 +1,13 @@
 import {useState} from 'react';
 import Link from 'next/link';
-import {AppBar, Avatar, Container, Grid, Hidden, Typography} from '@material-ui/core';
+import {
+    AppBar,
+    Avatar,
+    Container,
+    Grid,
+    Hidden,
+    Typography
+} from '@material-ui/core';
 import {CustomButton} from '@src/components/elements/custom_button/CustomButton';
 import {withScrollThreshold} from '@src/hocs/withScrollThreshold';
 import {Logo} from '@src/components/elements/icons';
@@ -12,11 +19,19 @@ import {Location} from '@src/components/elements/location/Location';
 import {Localization} from '@src/components/header/top/localization/Localization';
 import {HeaderSearchForm} from '@src/components/header/bottom/header_search_form/HeaderSearchForm';
 import {useStyles} from './useStyles';
-
+import {HeaderAuthMenu} from '@src/components/header/bottom/header_auth_menu/HeaderAuthMenu';
 
 const Bottom = (props) => {
     const {isScrollBreak, handleOpenModal, isAuth, t, avatar} = props;
     const [drawerOpen, setDrawerOpen] = useState(false);
+    const [open, setOpen] = useState(null);
+
+    const handleOpenMenu = (event) => {
+        setOpen(event.currentTarget);
+    };
+    const handleCloseMenu = () => {
+        setOpen(null);
+    };
 
     const handleDrawerShow = (value) => () => {
         setDrawerOpen(value);
@@ -110,20 +125,16 @@ const Bottom = (props) => {
                                 xs={1}
                             >
                                 {isAuth
-                                 ? <Link href='/cabinet/posts'>
-                                     <a>
-                                         <Avatar alt="Remy Sharp" src={avatar}/>
-                                     </a>
-                                 </Link>
-                                 : <CustomButton
-                                     className="bottom-sign-button header-button"
-                                     onClick={handleOpenModal}
-                                 >
-                                     <Typography variant="subtitle2">
-                                         {t('auth_reg:signIn')}
-                                     </Typography>
-                                     <SignIcon/>
-                                 </CustomButton>}
+                                    ? <Avatar alt="Remy Sharp" src={avatar} onClick={handleOpenMenu} />
+                                    : <CustomButton
+                                        className="bottom-sign-button header-button"
+                                        onClick={handleOpenModal}
+                                    >
+                                        <Typography variant="subtitle2">
+                                            {t('auth_reg:signIn')}
+                                        </Typography>
+                                        <SignIcon />
+                                    </CustomButton>}
                             </Grid>
                         </Grid>
                     </Container>
@@ -131,8 +142,8 @@ const Bottom = (props) => {
             </Hidden>
             <Hidden lgUp>
                 <div className="translate-local">
-                    <Location/>
-                    <Localization/>
+                    <Location />
+                    <Localization />
                 </div>
             </Hidden>
             <CustomDrawer
@@ -140,6 +151,7 @@ const Bottom = (props) => {
                 open={drawerOpen}
                 onClose={handleDrawerShow(false)}
             />
+            <HeaderAuthMenu open={open} handleClose={handleCloseMenu} />
         </div>
     );
 };

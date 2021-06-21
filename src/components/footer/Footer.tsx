@@ -1,10 +1,13 @@
-import {FC} from 'react';
+import {FC, useEffect} from 'react';
 import {Container, Grid, Hidden, Typography} from '@material-ui/core';
 import {SocialsBlock} from '@src/components/elements/socials_block/SocialsBlock';
 import {useTranslation} from 'next-i18next';
 import Link from 'next/link';
 import {Logo} from '@src/components/elements/icons/logo/Logo';
 import {useStyles} from './useStyles';
+import {fetchLocations} from '@src/redux/slices/locationsSlice';
+import {useRouter} from 'next/router';
+import {useDispatch} from 'react-redux';
 
 
 export const Footer: FC = () => {
@@ -46,7 +49,7 @@ export const Footer: FC = () => {
                                                         variant="subtitle1"
                                                         color="initial"
                                                     >
-                                                        Помощь
+                                                        {t('help')}
                                                     </Typography>
                                                 </a>
                                             </Link>
@@ -58,7 +61,7 @@ export const Footer: FC = () => {
                                                         variant="subtitle1"
                                                         color="initial"
                                                     >
-                                                        Безопасность
+                                                        {t('security')}
                                                     </Typography>
                                                 </a>
                                             </Link>
@@ -70,7 +73,7 @@ export const Footer: FC = () => {
                                                         variant="subtitle1"
                                                         color="initial"
                                                     >
-                                                        Ваш отзыв о Slondo
+                                                        {t('yourReview')}
                                                     </Typography>
                                                 </a>
                                             </Link>
@@ -87,7 +90,7 @@ export const Footer: FC = () => {
                                                     variant="subtitle1"
                                                     color="initial"
                                                 >
-                                                    Обратная связь
+                                                    {t('feedback')}
                                                 </Typography>
                                             </a>
                                         </Link>
@@ -99,7 +102,7 @@ export const Footer: FC = () => {
                                                     variant="subtitle1"
                                                     color="initial"
                                                 >
-                                                    Как разместить объявление
+                                                    {t('howToAddPost')}
                                                 </Typography>
                                             </a>
                                         </Link>
@@ -111,7 +114,7 @@ export const Footer: FC = () => {
                                                     variant="subtitle1"
                                                     color="initial"
                                                 >
-                                                    Безопасная покупка
+                                                    {t('safe_shopping')}
                                                 </Typography>
                                             </a>
                                         </Link>
@@ -123,7 +126,7 @@ export const Footer: FC = () => {
                                                     variant="subtitle1"
                                                     color="initial"
                                                 >
-                                                    Карта сайта
+                                                    {t('sitemap')}
                                                 </Typography>
                                             </a>
                                         </Link>
@@ -140,7 +143,7 @@ export const Footer: FC = () => {
                                                         variant="subtitle1"
                                                         color="initial"
                                                     >
-                                                        Акции
+                                                        {t('promotions')}
                                                     </Typography>
                                                 </a>
                                             </Link>
@@ -152,7 +155,7 @@ export const Footer: FC = () => {
                                                         variant="subtitle1"
                                                         color="initial"
                                                     >
-                                                        Бонусы
+                                                        {t('bonuses')}
                                                     </Typography>
                                                 </a>
                                             </Link>
@@ -164,7 +167,7 @@ export const Footer: FC = () => {
                                                         variant="subtitle1"
                                                         color="initial"
                                                     >
-                                                        Правила аукциона
+                                                        {t('auctionRules')}
                                                     </Typography>
                                                 </a>
                                             </Link>
@@ -176,7 +179,7 @@ export const Footer: FC = () => {
                                                         variant="subtitle1"
                                                         color="initial"
                                                     >
-                                                        Лицензионное соглашение
+                                                        {t('licenseAgreement')}
                                                     </Typography>
                                                 </a>
                                             </Link>
@@ -198,11 +201,7 @@ export const Footer: FC = () => {
                             </Grid>
                             <Grid item container justify="center" alignItems='center'>
                                 <Typography variant="subtitle1" color="initial">
-                                    Использование материалов сайта разрешено только с
-                                    письменного разрешения. Цитирование материалов сайта
-                                    допускается, при этом ссылка на источник должна
-                                    содержать указание на slondo.uz и являться
-                                    гиперссылкой.
+                                    {t('termsOfUse')}
                                 </Typography>
                             </Grid>
                             <Grid item container justify="center" alignItems='center'>
