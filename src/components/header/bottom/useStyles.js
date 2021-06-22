@@ -57,6 +57,9 @@ export const useStyles = makeStyles((theme) => ({
                 }
             }
         },
+        '& span.avatar': {
+            cursor: 'pointer'
+        },
         '& button.bottom-sign-button': {
             color: '#000',
             backgroundColor: '#F2F2F2',
@@ -125,13 +128,15 @@ export const useStyles = makeStyles((theme) => ({
     menu: {
         '& .MuiPaper-root': {
             width: '290px',
-            padding: '10px'
+            padding: '10px',
+            backgroundColor: theme.palette.primary.white
+            // left: "1250px !important"
         },
         '& .menu-item': {
             padding: '5px',
             marginBottom: '0px',
             borderRadius: '0px',
-            backgroundColor: '#fff',
+            backgroundColor: 'inherit',
             '& .MuiListItem-root': {
                 background: '#f2f2f2'
             }

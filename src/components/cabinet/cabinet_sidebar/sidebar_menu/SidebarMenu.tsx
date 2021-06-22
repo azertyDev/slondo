@@ -128,6 +128,7 @@ export const SidebarMenu: FC = () => {
                         button
                         // selected={pathname === '/cabinet/paidServices'}
                         // onClick={handleListItemClick('paidServices')}
+                        disabled
                         disableGutters
                     >
                         <WalletIcon />
@@ -135,12 +136,13 @@ export const SidebarMenu: FC = () => {
                     </ListItem>
                 </CustomBadge>
             </List>
-            <List disablePadding component="nav" aria-label="cabinet menu" className='menu-item'>
+            <List disablePadding component="nav" aria-label="cabinet menu" className='menu-item row'>
                 <ListItem
                     button
                     selected={pathname === '/cabinet/settings'}
                     onClick={handleListItemClick('settings')}
                     disableGutters
+                    className='list-item'
                 >
                     <SettingsIcon />
                     <ListItemText primary={t('cabinet:settings')} />
@@ -149,6 +151,7 @@ export const SidebarMenu: FC = () => {
                     button
                     onClick={signOut}
                     disableGutters
+                    className='list-item'
                 >
                     <PowerIcon />
                     <ListItemText primary={t('cabinet:exit')} />

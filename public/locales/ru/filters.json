@@ -644,5 +644,7 @@
   "operating_systems": "Операционные системы",
   "office_programs": "Офисные программы",
   "enterprise_management": "Управление предприятием",
-  "utilities_drivers": "Утилиты, драйверы"
+  "utilities_drivers": "Утилиты, драйверы",
+  "free": "Отдам даром",
+  "archive": "Архив"
 }

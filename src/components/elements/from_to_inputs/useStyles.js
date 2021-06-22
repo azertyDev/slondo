@@ -2,8 +2,8 @@ import {makeStyles} from '@material-ui/core/styles';
 
 export const useStyles = makeStyles(() => ({
     root: {
-        '& label.MuiInputLabel-formControl': {
-            top: '-40px'
+        '& label': {
+
         },
         '& div.from-to-wrapper': {
             display: 'flex',

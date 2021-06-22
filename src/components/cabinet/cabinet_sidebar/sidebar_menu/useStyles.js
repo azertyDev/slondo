@@ -52,7 +52,13 @@ export const useStyles = makeStyles({
             display: 'flex',
             flexDirection: 'row',
             '& .MuiBadge-root': {
-                width: '50%',
+                width: '49%',
+                '&:first-child': {
+                    marginRight: '5px'
+                }
+            },
+            '& .list-item': {
+                width: '49%',
                 '&:first-child': {
                     marginRight: '5px'
                 }

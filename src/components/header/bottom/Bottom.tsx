@@ -1,4 +1,4 @@
-import {useState} from 'react';
+import {useState, MouseEvent} from 'react';
 import Link from 'next/link';
 import {
     AppBar,
@@ -28,7 +28,7 @@ const Bottom = (props) => {
 
     const [anchorEl, setAnchorEl] = useState<HTMLButtonElement | null>(null);
 
-    const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+    const handleClick = (event: MouseEvent<HTMLButtonElement>) => {
         setAnchorEl(event.currentTarget);
     };
 
@@ -131,7 +131,7 @@ const Bottom = (props) => {
                                 xs={1}
                             >
                                 {isAuth
-                                    ? <span onClick={handleClick} >
+                                    ? <span onClick={handleClick} className='avatar'>
                                         <Avatar alt="Avatar" src={avatar} />
                                     </span>
                                     : <CustomButton
@@ -160,7 +160,6 @@ const Bottom = (props) => {
                 open={drawerOpen}
                 onClose={handleDrawerShow(false)}
             />
-
             <Popover
                 id={id}
                 open={open}
@@ -168,8 +167,12 @@ const Bottom = (props) => {
                 onClose={handleClose}
                 className={classes.menu}
                 anchorOrigin={{
-                    vertical: 'top',
-                    horizontal: 'center',
+                    vertical: 'bottom',
+                    horizontal: 'left'
+                }}
+                transformOrigin={{
+                    vertical: 'bottom',
+                    horizontal: 'left'
                 }}
             >
                 <SidebarMenu />

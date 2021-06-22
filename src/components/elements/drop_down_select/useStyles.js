@@ -9,17 +9,6 @@ export const useStyles = makeStyles(() => ({
         },
         '& label': {
             fontWeight: '600',
-            '&.MuiInputLabel-root': {
-                top: '-13px',
-                left: '9px'
-            },
-            '&.MuiInputLabel-shrink': {
-                left: 0,
-                transform: 'translate(0, -3px) scale(1)'
-            },
-            '&.MuiFormLabel-root.Mui-focused': {
-                color: 'inherit'
-            }
         },
         '& div.select-wrapper': {
             width: '100%',

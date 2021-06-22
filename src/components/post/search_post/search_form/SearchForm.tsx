@@ -1,12 +1,11 @@
 import {FC, ReactNode, useEffect, useState} from 'react';
 import {WithT} from 'i18next';
-import {Grid} from '@material-ui/core';
+import {Checkbox, FormControlLabel, Grid} from '@material-ui/core';
 import {useRouter} from 'next/router';
 import {DropDownSelect} from '@src/components/elements/drop_down_select/DropDownSelect';
 import {postTypes} from '@src/common_data/post_types';
 import {DeployedSelect} from '@src/components/elements/deployed_select/DeployedSelect';
 import {SiteServices} from '@src/components/post/create_post/form_page/common_form/site_services/SiteServices';
-import {CheckboxSelect} from '@src/components/elements/checkbox_select/CheckboxSelect';
 import {FromToInputs} from '@src/components/elements/from_to_inputs/FromToInputs';
 import {
     cookies,
@@ -350,7 +349,7 @@ export const SearchForm: FC<SearchFormPropsType> = (props) => {
                         />
                     </Grid>
                 )}
-                <Grid container item xs={12}>
+                <Grid container item xs={12} spacing={1}>
                     <Grid item xs={4}>
                         <FromToInputs
                             disabled={values.free}
@@ -368,20 +367,33 @@ export const SearchForm: FC<SearchFormPropsType> = (props) => {
                             }}
                         />
                     </Grid>
-                    <Grid item container alignItems='center' xs={2}>
-                        <CheckboxSelect
-                            name='free'
-                            checked={values.free}
-                            onChange={handleCheckbox('free')}
-                        />
+                    <Grid item container alignItems='flex-end' xs={2}>
+                        <span className='checkbox'>
+                            <FormControlLabel
+                                control={
+                                    <Checkbox
+                                        name='free'
+                                        checked={values.free}
+                                        onChange={handleCheckbox('free')} />
+                                }
+                                label={t('free')}
+                            />
+                        </span>
                     </Grid>
                     {values.post_type?.name === 'auc' && (
-                        <Grid item container alignItems='center' xs={2}>
-                            <CheckboxSelect
-                                name='archive'
-                                checked={values.archive}
-                                onChange={handleCheckbox('archive')}
-                            />
+                        <Grid item container alignItems='flex-end' xs={2}>
+                            <span className='checkbox'>
+                                <FormControlLabel
+                                    control={
+                                        <Checkbox
+                                            name='archive'
+                                            checked={values.archive}
+                                            onChange={handleCheckbox('archive')}
+                                        />
+                                    }
+                                    label={t('archive')}
+                                />
+                            </span>
                         </Grid>
                     )}
                 </Grid>
@@ -393,7 +405,7 @@ export const SearchForm: FC<SearchFormPropsType> = (props) => {
                             isAuction={false}
                             values={values}
                             handleCheckbox={handleCheckbox}
-                            mainCategoryName={mainCategoryName}
+                            categoryName={mainCategoryName}
                         />
                     </Grid>
                 )}

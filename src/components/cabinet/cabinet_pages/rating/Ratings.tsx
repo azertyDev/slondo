@@ -7,7 +7,7 @@ import {useSelector} from 'react-redux';
 import {RootState} from '@src/redux/rootReducer';
 import {Rating} from '@src/components/elements/rating/Rating';
 import {months} from '@src/common_data/common';
-import {ResponsiveDialog} from '@src/components/elements/responsive_modal/ResponsiveDialog';
+import {ResponsiveModal} from '@src/components/elements/responsive_modal/ResponsiveModal';
 import {useModal} from '@src/hooks/useModal';
 import {userAPI} from '@src/api/api';
 import {Form, FormikProvider, useFormik} from 'formik';
@@ -159,7 +159,7 @@ export const Ratings: FC<RatingsPropsType> = (props) => {
                         })}
                     </Box>
                 </Grid>
-                <ResponsiveDialog
+                <ResponsiveModal
                     openDialog={modalOpen}
                     handleCloseDialog={handleModalClose}
                 >
@@ -200,7 +200,7 @@ export const Ratings: FC<RatingsPropsType> = (props) => {
                             </Form>
                         </FormikProvider>
                     </Box>
-                </ResponsiveDialog>
+                </ResponsiveModal>
             </CabinetWrapper>
         </div>
     );
