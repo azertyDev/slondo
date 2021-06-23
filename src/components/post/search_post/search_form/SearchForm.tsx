@@ -26,6 +26,7 @@ import {SearchEstate} from '@src/components/post/search_post/search_form/categor
 import {SearchTransport} from '@src/components/post/search_post/search_form/categories_forms/transport/SearchTransport';
 import {SearchJob} from '@src/components/post/search_post/search_form/categories_forms/job/SearchJob';
 import {useStyles} from './useStyles';
+import {CheckboxSelect} from '@src/components/elements/checkbox_select/CheckboxSelect';
 
 
 export type CommonFiltersType = {
@@ -368,32 +369,21 @@ export const SearchForm: FC<SearchFormPropsType> = (props) => {
                         />
                     </Grid>
                     <Grid item container alignItems='flex-end' xs={2}>
-                        <span className='checkbox'>
-                            <FormControlLabel
-                                control={
-                                    <Checkbox
-                                        name='free'
-                                        checked={values.free}
-                                        onChange={handleCheckbox('free')} />
-                                }
-                                label={t('free')}
-                            />
-                        </span>
+                        <CheckboxSelect
+                            labelText={t('free')}
+                            checked={values.free}
+                            onChange={handleCheckbox('free')}
+                            name='free'
+                        />
                     </Grid>
                     {values.post_type?.name === 'auc' && (
                         <Grid item container alignItems='flex-end' xs={2}>
-                            <span className='checkbox'>
-                                <FormControlLabel
-                                    control={
-                                        <Checkbox
-                                            name='archive'
-                                            checked={values.archive}
-                                            onChange={handleCheckbox('archive')}
-                                        />
-                                    }
-                                    label={t('archive')}
-                                />
-                            </span>
+                            <CheckboxSelect
+                                labelText={t('archive')}
+                                checked={values.archive}
+                                onChange={handleCheckbox('archive')}
+                                name='archive'
+                            />
                         </Grid>
                     )}
                 </Grid>

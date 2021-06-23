@@ -165,9 +165,9 @@ export const SiteServices: FC<PaymentDeliveryPropsType> = (props) => {
                                 за Ваш счет. В случае невыполнения доставки,
                                 Вы можете быть заблокированы.&nbsp;
                                 <a href="#">
-                                <span className="safe-auction-rules">
-                                    {t('common:delivery_rules')}
-                                </span>
+                                    <span className="safe-auction-rules">
+                                        {t('common:delivery_rules')}
+                                    </span>
                                 </a>
                             </Typography>
                         </Grid>
