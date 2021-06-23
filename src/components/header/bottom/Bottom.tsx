@@ -63,7 +63,7 @@ const Bottom = (props) => {
                                 container
                                 item
                                 xs={3}
-                                spacing={1}
+                                spacing={2}
                                 alignItems="center"
                             >
                                 <Grid

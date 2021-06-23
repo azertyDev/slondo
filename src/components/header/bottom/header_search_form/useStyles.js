@@ -31,7 +31,7 @@ export const useStyles = makeStyles((theme) => ({
                 right: '10px'
             },
             '& input': {
-                padding: '10px 70px 10px 35px',
+                padding: '12px 70px 10px 35px',
                 width: '100%',
                 borderRadius: '7px',
                 fontSize: '0.87rem'

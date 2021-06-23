@@ -23,11 +23,6 @@ import {RootState} from '@src/redux/rootReducer';
 import {useStyles} from './useStyles';
 
 
-export type DataForCrtPostType = {
-    isFetch: boolean;
-    data: any;
-};
-
 export const FormPage: FC = () => {
     const dispatch = useDispatch();
 

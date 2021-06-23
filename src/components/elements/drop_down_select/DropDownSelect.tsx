@@ -3,6 +3,7 @@ import {useTranslation} from 'react-i18next';
 import {Checkbox, FormControl, InputLabel, MenuItem, Select, Typography} from '@material-ui/core';
 import {isRequired} from '@src/helpers';
 import {useStyles} from './useStyles';
+import {WithT} from 'i18next';
 
 
 type CustomSelectPropsType = {
