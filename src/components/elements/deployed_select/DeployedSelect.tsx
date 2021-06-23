@@ -34,12 +34,12 @@ export const DeployedSelect: FC<SelectOptionsPropsType> = (props) => {
     const classes = useStyles();
     return (
         <FormControl className={classes.root}>
-            <InputLabel>
-                <>
+            <label>
+                <Typography variant='subtitle1' gutterBottom>
                     {t(`filters:${name}`)}
                     {!disableRequire && isRequired(name) && <span className='error-text'>*&nbsp;</span>}
-                </>
-            </InputLabel>
+                </Typography>
+            </label>
             <div className='options'>
                 {options.map(item =>
                     <CustomButton
@@ -47,7 +47,9 @@ export const DeployedSelect: FC<SelectOptionsPropsType> = (props) => {
                         onClick={handleClick(item)}
                         className={values[name]?.id === item.id ? 'selected' : ''}
                     >
-                        {t(`filters:${item.name}`)}
+                        <Typography variant='subtitle1'>
+                            {t(`filters:${item.name}`)}
+                        </Typography>
                     </CustomButton>
                 )}
             </div>

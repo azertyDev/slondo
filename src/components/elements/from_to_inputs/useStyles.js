@@ -7,7 +7,12 @@ export const useStyles = makeStyles(() => ({
         },
         '& div.from-to-wrapper': {
             display: 'flex',
-            justifyContent: 'flex-end'
+            justifyContent: 'flex-end',
+            '& div.MuiTextField-root': {
+                '&:first-child': {
+                    marginRight: '8px'
+                }
+            }
         }
     }
 }));
