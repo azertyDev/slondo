@@ -31,39 +31,39 @@ export const FormikField: FC<CustomFormikFieldPropsType> = (props) => {
             <Field name={name} {...otherProps}>
                 {({field}) =>
                     <div>
-                        <div className='label-wrapper'>
-                            {labelText && (
-                                <InputLabel>
-                                    {t(`filters:${labelText}`)}
-                                    {!disableRequire && isRequired(name) && <span className='error-text'>*</span>}&nbsp;
-                                </InputLabel>
-                            )}
-                        </div>
+                        {labelText && (
+                            <label>
+                                <Typography variant='subtitle1' gutterBottom>
+                                    {t(`filters:${labelText}`)}&nbsp;
+                                    {!disableRequire && isRequired(name) && <span className='error-text'>*</span>}
+                                </Typography>
+                            </label>
+                        )}
                         {props.type === 'tel'
-                         ? <ReactInputMask
-                             alwaysShowMask
-                             {...field}
-                             mask='+\9\98(99) 999 99 99'
-                         >
-                             {() => <TextField
-                                 fullWidth
-                                 name={name}
-                                 focused={false}
-                                 variant="outlined"
-                                 size='small'
-                                 className={errorMsg ? 'error-border' : ''}
-                             />}
-                         </ReactInputMask>
-                         : <TextField
-                             fullWidth
-                             name={name}
-                             {...field}
-                             {...otherProps}
-                             focused={false}
-                             variant="outlined"
-                             size='small'
-                             className={errorMsg ? 'error-border' : ''}
-                         />}
+                            ? <ReactInputMask
+                                alwaysShowMask
+                                {...field}
+                                mask='+\9\98(99) 999 99 99'
+                            >
+                                {() => <TextField
+                                    fullWidth
+                                    name={name}
+                                    focused={false}
+                                    variant="outlined"
+                                    size='small'
+                                    className={errorMsg ? 'error-border' : ''}
+                                />}
+                            </ReactInputMask>
+                            : <TextField
+                                fullWidth
+                                name={name}
+                                {...field}
+                                {...otherProps}
+                                focused={false}
+                                variant="outlined"
+                                size='small'
+                                className={errorMsg ? 'error-border' : ''}
+                            />}
                         <Grid container className='helpers-content'>
                             {errorMsg && (
                                 <Grid item xs={limit ? 6 : 12}>
@@ -72,6 +72,7 @@ export const FormikField: FC<CustomFormikFieldPropsType> = (props) => {
                                         {errorMsg}
                                     </span>
                                     </Typography>
+
                                 </Grid>
                             )}
                             {!!limit && (
