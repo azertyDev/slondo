@@ -1,7 +1,9 @@
 {
+  "code_has_already_been_sent": "Kod yuborilgan. Iltimos keyinroq harakat kilib ko'ring",
+  "incorrect_code": "Noto'g'ri kod",
   "pageNotFound": "Sahifa topilmadi",
   "user_already_registered": "Ro'yxatdan o'tish xatosi, ehtimol siz allaqachon tizimda ro'yxatdan o'tgansiz",
-  "unauthorised": "Telefon raqami yoki parol noto'g'ri kiritilgan.",
+  "unauthorised": "Avtorizatsiya xatosi",
   "server_error": "Serverda xatolik, keyinroq urinib ko'ring",
   "fieldIsRequired": "Maydon toldirilishi shart",
   "wrongNumberFormat": "Notog'ri farmat",

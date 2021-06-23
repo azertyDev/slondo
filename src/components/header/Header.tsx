@@ -11,25 +11,22 @@ import {fetchLocations} from '@src/redux/slices/locationsSlice';
 import {cookies} from '@src/helpers';
 import {useRouter} from 'next/router';
 import {useStyles} from './useStyles';
-import {useModal} from '@src/hooks/useModal';
 // import {socketIO} from '@src/api/api';
 
 
 export const Header: FC = () => {
     const {locale} = useRouter();
     const dispatch = useDispatch();
-    const {t} = useTranslation('header');
+    const {t} = useTranslation(['header', 'cabinet']);
 
     const userFromCookie = cookies.get('slondo_user');
     const user = useSelector((store: RootState) => store.user);
-    const {modalOpen, handleModalClose, handleModalOpen} = useModal();
-    const userId = user.info.id;
+    // const userId = user.info.id;
 
     const isAuth = user.isAuth || !!userFromCookie;
 
     const handleOpenModal = () => {
         dispatch(setIsAuthModalOpen(true));
-        handleModalOpen();
     };
 
     useEffect(() => {
@@ -60,15 +57,12 @@ export const Header: FC = () => {
                             t={t}
                             isAuth={isAuth}
                             avatar={user.info.avatar}
-                            handleOpenModal={handleModalOpen}
+                            handleOpenModal={handleOpenModal}
                         />
                     </div>
                 </Container>
                 <div className={classes.modalDialog}>
-                    <AuthRegPage
-                        modalOpen={modalOpen}
-                        handleModalClose={handleModalClose}
-                    />
+                    <AuthRegPage/>
                 </div>
             </div>
         </header>

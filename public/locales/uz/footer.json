@@ -1,3 +1,15 @@
 {
-  "aboutSlondo": "Slondo haqida"
+  "aboutSlondo": "Slondo haqida",
+  "termsOfUse": "Sayt materiallaridan faqat yozma tarzda foydalanishga ruxsat beriladi. Sayt materiallarining havolasida slondo.uz ko'rsatmasi va gipermatnga egaligi shartlari bilan foydalanishka ruxsat beriladi."
+  "help": "Yordam",
+  "security": "Xavfsizlik",
+  "yourReview": "Slondo xaqida fikringiz",
+  "feedback": "Qayta aloqa",
+  "howToAddPost": "E'lon joylashtirish yo'riqnomasi",
+  "safe_shopping": "Xavfsiz xarid",
+  "sitemap": "Sayt xaritasi",
+  "promotions": "Aksiyalar",
+  "bonuses": "Bonuslar",
+  "auctionRules": "Auksion qoidalari",
+  "licenseAgreement": "Litsenzion shartnomalar"
 }

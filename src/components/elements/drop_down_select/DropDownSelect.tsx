@@ -59,17 +59,20 @@ export const DropDownSelect: FC<CustomSelectPropsType> = (props) => {
     const classes = useStyles();
     return (
         <FormControl className={classes.root}>
-            <InputLabel>
-                {multiple
-                 ? t(`filters:${labelTxt ?? name}`)
-                 : !isCurrency && (
-                    <>
-                        {t(`filters:${labelTxt ?? name}`)}
-                        {!disableRequire && isRequired(name) && <span className='error-text'>*&nbsp;</span>}
-                    </>
-                )}
-            </InputLabel>
+            <label htmlFor={name}>
+                <Typography variant='subtitle1' gutterBottom>
+                    {multiple
+                        ? t(`filters:${labelTxt ?? name}`)
+                        : !isCurrency && (
+                        <>
+                            {t(`filters:${labelTxt ?? name}`)}
+                            {!disableRequire && isRequired(name) && <span className='error-text'>*&nbsp;</span>}
+                        </>
+                    )}
+                </Typography>
+            </label>
             <Select
+                labelId={name}
                 variant='outlined'
                 name={name}
                 onBlur={onBlur}
@@ -90,18 +93,18 @@ export const DropDownSelect: FC<CustomSelectPropsType> = (props) => {
                         key={item.id}
                         value={multiple ? item : item.id}
                     >
-                        {multiple && <Checkbox checked={!!values[name]?.some(el => el.id === item.id)}/>}
+                        {multiple && <Checkbox checked={!!values[name]?.some(el => el.id === item.id)} />}
                         {t(`${item[optionKey]}`)}
                     </MenuItem>
                 ))}
             </Select>
-            <Typography variant="subtitle1">
-                {errorMsg && (
+            {errorMsg && (
+                <Typography variant="subtitle1">
                     <span className='error-text'>
                         {errorMsg}
                     </span>
-                )}
-            </Typography>
+                </Typography>
+            )}
         </FormControl>
     );
 };

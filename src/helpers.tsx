@@ -14,6 +14,13 @@ import {WithT} from 'i18next';
 export const cookies = new Cookies();
 export const cookieOpts = {path: '/'};
 
+export const getAuthErrorMsg = (msg: string, t: TFunction) => {
+    switch (msg) {
+        case 'incorrect code':
+            return ''
+    }
+}
+
 type GetFieldsByFiltersProps = {
     isPreview?: boolean,
     filters,

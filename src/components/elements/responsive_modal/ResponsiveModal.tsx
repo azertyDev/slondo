@@ -9,25 +9,27 @@ type ResponsiveDialogPropsType = {
     handleCloseDialog: () => void,
     maxWidth?,
     fullWidth?: boolean
+    fullScreen?: boolean
 };
 
 export const ResponsiveModal: FC<ResponsiveDialogPropsType> = (props) => {
     const {
         openDialog,
         handleCloseDialog,
+        fullScreen,
         maxWidth = 'md',
         fullWidth = true
     } = props;
 
-    const fullScreen = useMediaQuery(useTheme().breakpoints.down('xs'));
+    const defaultFullScreen = useMediaQuery(useTheme().breakpoints.down('xs'));
 
     const classes = useStyles();
     return (
         <Dialog
-            fullWidth={fullWidth}
             open={openDialog}
             maxWidth={maxWidth}
-            fullScreen={fullScreen}
+            fullWidth={fullWidth}
+            fullScreen={fullScreen || defaultFullScreen}
             className={classes.root}
             onClose={handleCloseDialog}
             aria-labelledby="responsive-dialog-title"

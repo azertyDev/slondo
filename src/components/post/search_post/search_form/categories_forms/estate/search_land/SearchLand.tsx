@@ -39,7 +39,7 @@ export const SearchLand: FC<CommonFiltersType> = (props) => {
         handleBlur
     } = formik;
 
-    const {handleSelect, handleInput, handleSetValsByParams} = useHandlers(values, setValues);
+    const {handleSelect, handleNumericInput, handleSetValsByParams} = useHandlers(values, setValues);
 
     const {t} = useTranslation('filters');
 
@@ -89,7 +89,7 @@ export const SearchLand: FC<CommonFiltersType> = (props) => {
                     xs={12}
                 >
                     <FromToInputs
-                        handleInput={handleInput}
+                        handleInput={handleNumericInput}
                         labelTxt={t('area_in_hundred')}
                         firstInputProps={{
                             value: values.area_from,

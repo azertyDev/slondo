@@ -193,6 +193,7 @@ export const FormPage: FC = () => {
                      />
                      <div>
                          <AppearanceForm
+                             categoryName={categoryName}
                              colors={colors || color}
                              isPreview={isPreview}
                              currentFormIndex={currentFormIndex}

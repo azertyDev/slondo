@@ -15,7 +15,8 @@ export const getStaticProps: GetStaticProps = async ({locale}) => ({
                 'errors',
                 'auth_reg',
                 'categories',
-                'common'
+                'common',
+                'cabinet'
             ]
         )
     }

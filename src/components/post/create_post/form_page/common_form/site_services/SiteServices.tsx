@@ -12,7 +12,7 @@ type PaymentDeliveryPropsType = {
     iconMode?: boolean,
     isAuction: boolean,
     handleCheckbox,
-    mainCategoryName: string
+    categoryName: string
 } & WithT;
 
 export const SiteServices: FC<PaymentDeliveryPropsType> = (props) => {
@@ -22,12 +22,12 @@ export const SiteServices: FC<PaymentDeliveryPropsType> = (props) => {
         iconMode,
         isAuction,
         handleCheckbox,
-        mainCategoryName
+        categoryName
     } = props;
 
-    const hasSafeDeal = !!site_services.safe_deal[mainCategoryName];
-    const hasExchange = !!site_services.exchange[mainCategoryName];
-    const hasDelivery = !!site_services.delivery[mainCategoryName];
+    const hasSafeDeal = !!site_services.safe_deal[categoryName];
+    const hasExchange = !!site_services.exchange[categoryName];
+    const hasDelivery = !!site_services.delivery[categoryName];
 
     const classes = useStyles();
     return (

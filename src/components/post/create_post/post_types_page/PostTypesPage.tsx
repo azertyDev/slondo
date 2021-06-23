@@ -1,5 +1,5 @@
 import {FC} from 'react';
-import {Box, Grid, Hidden, Typography} from '@material-ui/core';
+import {Grid, Hidden, Typography} from '@material-ui/core';
 import {useTranslation} from 'next-i18next';
 import {postTypes} from '@src/common_data/post_types';
 import {MainLayout} from '@src/components/main_layout/MainLayout';
@@ -11,7 +11,7 @@ import {ServiceItem} from '@src/components/elements/service_item/ServiceItem';
 
 
 export const PostTypesPage: FC = () => {
-    const {t} = useTranslation(['post', 'common']);
+    const {t} = useTranslation('post');
     const {push} = useRouter();
 
     const handlePostType = (url: string) => () => {

@@ -1,4 +1,10 @@
 {
+  "bayonet": "Bayonet",
+  "usb_connector": "USB ulagichi",
+  "build_in_speakers": "Ichki dinamiklar",
+  "kid_body": "Body",
+  "ws_body": "Body",
+  "for_body": "Tana uchun",
   "number_of_seats": "O'rindiqlar soni",
   "urgent_work": "Tezkor ish",
   "additional": "Qo'shimcha",
@@ -30,7 +36,7 @@
   "power_steering": "Rul kuchaytirgichi",
   "climate": "Iqlim",
   "send_again": "Parolni qayta yuborish",
-  "enter_sms": "SMS dan kelgan ko'dni kiriting",
+  "enter_sms": "Qabul qilingan ko'dni kiriting",
   "enter_phone": "Telefon raqamingizni kiriting",
   "enter_name": "Ismingizni kiriting",
   "enter_password": "Parolni kiriting",
@@ -111,7 +117,7 @@
   "wheels": "G'ildiraklar turi",
   "properties": "Xususiyatlari",
   "regulation": "Sozlash",
-  "os": "Operatsion tizim",
+  "os": "Operatsion tizimi",
   "memory": "Qurilgan xotira",
   "function": "Funksiyalari",
   "connector": "Ulagich",
@@ -636,5 +642,7 @@
   "operating_systems": "Operatsion tizimlar",
   "office_programs": "Ofis dasturlari",
   "enterprise_management": "Korxonani boshqarish",
-  "utilities_drivers": "Utilitlar, drayverlar"
+  "utilities_drivers": "Utilitlar, drayverlar",
+  "free": "Bepul",
+  "archive": "Arxiv"
 }

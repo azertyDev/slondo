@@ -103,7 +103,7 @@ export const Location: FC = () => {
 
     const classes = useStyles();
     return (
-        <div>
+        <>
             <div className={classes.location}>
                 <LocationIcon/>
                 <Typography variant="subtitle1" onClick={handleModalOpen}>
@@ -122,7 +122,7 @@ export const Location: FC = () => {
                 toPrevLocation={toPrevLocation}
                 handleChoiceLocation={handleChoiceLocation}
             />
-        </div>
+        </>
     );
 
     function separateByThree(locations): any {

@@ -48,10 +48,10 @@ export const AuctionForm: FC<AuctionFromPropsType> = (props) => {
         regex.test(value) && setValues({bet: numberPrettier(value)});
     };
 
-    const onSubmit = ({bet}, {resetForm}) => {
+    const onSubmit = async ({bet}, {resetForm}) => {
+        await handleBet(bet.replace(whiteSpacesRegEx, ''));
         resetForm();
         handleRefresh();
-        handleBet(bet.replace(whiteSpacesRegEx, ''));
     };
 
     const formik = useFormik({

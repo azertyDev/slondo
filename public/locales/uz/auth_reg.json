@@ -7,6 +7,7 @@
   "signInTitle": "Kirish",
   "signUpTitle": "Ro'yxat",
   "send": "Uborish",
+  "cancel": "Bekor kilish",
   "recoverPassword": "Parolni qayta tiklash",
   "bonus": "Ro'yxatdan o'tish, e'lonlar yoki savdo yaratish uchun bonuslarni oling.",
   "safeBuying": "Xavfsiz xariddan foydalaning. Mahsulotingizni eshigizni tagiga yetkazamiz.",
@@ -21,11 +22,9 @@
   "forget_password": "Parolni unutdingizmi?",
   "confirm": "Tasdiqlash",
   "agreement": {
+    "zeroPart": "qweqweqweqwe qweqweqweqweew",
     "firstPart": "Saytda ro'yxatdan o'tish orqali siz",
-    "secondPart": "litsenziya shartnomasi",
-    "thirdPart": "va",
-    "fourthPart": "maxfiylik siyosati",
-    "fifthPart": "shartlarini qabul qilasiz."
+    "secondPart": "foydalanuvchi shartnomasi"
   },
   "resendSms": "{{timer}} soniyadan so'ng smsni qayta jo'natish mumkin"
 }
