@@ -1,6 +1,6 @@
 import {FC} from 'react';
 import {useTranslation} from 'next-i18next';
-import {Accordion, AccordionDetails, AccordionSummary, Typography} from '@material-ui/core';
+import {Accordion, AccordionDetails, AccordionSummary, Grid, Typography} from '@material-ui/core';
 import {CustomButton} from '@src/components/elements/custom_button/CustomButton';
 import {useStyles} from './useStyles';
 
@@ -44,10 +44,10 @@ export const CustomAccordion: FC<AccordionComponentPropsType> = (props) => {
                     )}
                 </AccordionSummary>
                 <AccordionDetails>
-                    <div className='acc-content'>
+                    <Grid container spacing={2}>
                         {props.children}
                         {!isPreview && (
-                            <div className='submit-button-wrapper'>
+                            <Grid item xs={12} container justify='flex-end'>
                                 <CustomButton
                                     type='submit'
                                     className='nav-button'
@@ -56,9 +56,9 @@ export const CustomAccordion: FC<AccordionComponentPropsType> = (props) => {
                                         {t(`post:${submitTxt}`)}
                                     </Typography>
                                 </CustomButton>
-                            </div>
+                            </Grid>
                         )}
-                    </div>
+                    </Grid>
                 </AccordionDetails>
             </Accordion>
         </div>
