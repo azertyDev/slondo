@@ -1,13 +1,15 @@
 import {makeStyles} from '@material-ui/core/styles'
 
-export const useStyles = makeStyles(() => ({
+export const useStyles = makeStyles((theme) => ({
     root: {
         background: '#FFFFFF',
-        border: '1px solid #F2F2F2',
-        borderRadius: '5px',
         padding: 8,
+        height: 'fit-content',
+        borderRadius: '5px',
+        boxShadow: '0px 0px 15px rgba(0, 0, 0, 0.1)',
         '& .MuiFormControlLabel-root': {
             margin: 0,
+            userSelect: 'none',
             '& .MuiButtonBase-root': {
                 padding: 0,
                 marginRight: 5

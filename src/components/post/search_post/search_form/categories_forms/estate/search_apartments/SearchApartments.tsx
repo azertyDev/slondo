@@ -10,6 +10,7 @@ import {CustomButton} from '@src/components/elements/custom_button/CustomButton'
 import {FromToInputs} from '@src/components/elements/from_to_inputs/FromToInputs';
 import {ShowHide} from '@src/components/elements/show_hide/ShowHide';
 import {CheckboxSelect} from '@src/components/elements/checkbox_select/CheckboxSelect';
+import {ActionButtons} from '@src/components/post/search_post/search_form/ActionButtons';
 
 
 export const SearchApartments: FC<CommonFiltersType> = (props) => {
@@ -208,7 +209,7 @@ export const SearchApartments: FC<CommonFiltersType> = (props) => {
                             items={filters.repair}
                         />
                     </Grid>
-                    <Grid item container xs={2} alignItems='center'>
+                    <Grid item container xs={2} alignItems='flex-end'>
                         <CheckboxSelect
                             name='furnished'
                             labelText={t('filters:furnished')}
@@ -217,7 +218,7 @@ export const SearchApartments: FC<CommonFiltersType> = (props) => {
                         />
                     </Grid>
                     {isRent && (
-                        <Grid item container xs={4} alignItems='center'>
+                        <Grid item container xs={4} alignItems='flex-end'>
                             <CheckboxSelect
                                 name='with_pledge'
                                 labelText={t('filters:with_pledge')}
@@ -228,9 +229,8 @@ export const SearchApartments: FC<CommonFiltersType> = (props) => {
                     )}
                 </Grid>
             </ShowHide>
-            <Grid item container justify='flex-end' xs={12} className='actions-btns'>
-                <CustomButton onClick={handleReset}>{t('filters:reset')}</CustomButton>
-                <CustomButton type='submit'>{t('filters:apply')}</CustomButton>
+            <Grid item container justify='flex-end' xs={12}>
+                <ActionButtons handleReset={handleReset}/>
             </Grid>
         </CustomFormikProvider>
     );

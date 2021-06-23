@@ -1,5 +1,5 @@
 import {FC} from 'react';
-import {Checkbox, FormControlLabel, Typography} from '@material-ui/core';
+import {Checkbox, FormControlLabel} from '@material-ui/core';
 import {SwitchBaseProps} from '@material-ui/core/internal/SwitchBase';
 import {useTranslation} from 'react-i18next';
 import {useStyles} from './useStyles';

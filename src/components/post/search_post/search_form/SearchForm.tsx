@@ -1,6 +1,6 @@
 import {FC, ReactNode, useEffect, useState} from 'react';
 import {WithT} from 'i18next';
-import {Checkbox, FormControlLabel, Grid} from '@material-ui/core';
+import {Grid} from '@material-ui/core';
 import {useRouter} from 'next/router';
 import {DropDownSelect} from '@src/components/elements/drop_down_select/DropDownSelect';
 import {postTypes} from '@src/common_data/post_types';

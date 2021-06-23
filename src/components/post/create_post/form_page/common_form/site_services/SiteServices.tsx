@@ -1,7 +1,7 @@
 import {FC} from 'react';
 import {WithT} from 'i18next';
 import {Help} from '@material-ui/icons';
-import {Checkbox, Grid, Typography} from '@material-ui/core';
+import {Checkbox, Chip, Grid, Typography} from '@material-ui/core';
 import {DeliveryIcon, SafeIcon, ExchangeIcon} from '@src/components/elements/icons';
 import {site_services} from '@src/common_data/site_services';
 import {useStyles} from './useStyles';

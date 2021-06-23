@@ -14,5 +14,20 @@ export const useStyles = makeStyles(() => ({
         '& div.add-params': {
             width: 'calc(100% + 8px)'
         }
+    },
+    actionButtons: {
+        '& button': {
+            width: '140px',
+            '&:first-child': {
+                marginRight: 20,
+                background: '#7DBCF6',
+                '& .MuiTypography-subtitle1': {
+                    color: '#fff'
+                }
+            },
+            '&:last-child': {
+                background: '#c9c9c9'
+            }
+        }
     }
 }));

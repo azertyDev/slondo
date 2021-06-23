@@ -14,6 +14,7 @@ export const useStyles = makeStyles((theme) => ({
             }
         },
         '& div.options': {
+            display: 'flex',
             background: '#FFFFFF',
             boxShadow: '0px 1px 2px rgba(0, 0, 0, 0.1)',
             borderRadius: '5px'

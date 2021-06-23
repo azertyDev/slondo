@@ -9,6 +9,9 @@ export const useStyles = makeStyles(() => ({
             display: 'flex',
             justifyContent: 'flex-end',
             '& div.MuiTextField-root': {
+                '& input': {
+                    borderRadius: '5px'
+                },
                 '&:first-child': {
                     marginRight: '8px'
                 }
