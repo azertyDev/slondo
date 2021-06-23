@@ -42,7 +42,7 @@ const Bottom = (props) => {
                                 container
                                 item
                                 xs={3}
-                                spacing={1}
+                                spacing={2}
                                 alignItems="center"
                             >
                                 <Grid
@@ -110,20 +110,20 @@ const Bottom = (props) => {
                                 xs={1}
                             >
                                 {isAuth
-                                 ? <Link href='/cabinet/posts'>
-                                     <a>
-                                         <Avatar alt="Remy Sharp" src={avatar}/>
-                                     </a>
-                                 </Link>
-                                 : <CustomButton
-                                     className="bottom-sign-button header-button"
-                                     onClick={handleOpenModal}
-                                 >
-                                     <Typography variant="subtitle2">
-                                         {t('auth_reg:signIn')}
-                                     </Typography>
-                                     <SignIcon/>
-                                 </CustomButton>}
+                                    ? <Link href='/cabinet/posts'>
+                                        <a>
+                                            <Avatar alt="Remy Sharp" src={avatar}/>
+                                        </a>
+                                    </Link>
+                                    : <CustomButton
+                                        className="bottom-sign-button header-button"
+                                        onClick={handleOpenModal}
+                                    >
+                                        <Typography variant="subtitle2">
+                                            {t('auth_reg:signIn')}
+                                        </Typography>
+                                        <SignIcon/>
+                                    </CustomButton>}
                             </Grid>
                         </Grid>
                     </Container>

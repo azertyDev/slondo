@@ -35,8 +35,8 @@ export const Steps: FC<AncmntAuctionTopPropsType> = (props) => {
             container
             className={classes.root}
         >
-            <Hidden smDown>
-                <Grid item xs={8}>
+            <Hidden xsDown>
+                <Grid item sm={6} md={8}>
                     {!isPostTypeStep && <div className='menu-header'>
                         <IconButton className="back-btn" onClick={handleBack}>
                             <BackspaceIcon/>
@@ -50,7 +50,7 @@ export const Steps: FC<AncmntAuctionTopPropsType> = (props) => {
                         </Typography>
                     </div>}
                 </Grid>
-                <Grid item xs={4}>
+                <Grid item sm={6} md={4}>
                     <Stepper activeStep={activeStep} alternativeLabel>
                         {steps.map(label =>
                             <Step key={label}>

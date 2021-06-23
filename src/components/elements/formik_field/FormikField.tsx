@@ -40,30 +40,30 @@ export const FormikField: FC<CustomFormikFieldPropsType> = (props) => {
                             )}
                         </div>
                         {props.type === 'tel'
-                         ? <ReactInputMask
-                             alwaysShowMask
-                             {...field}
-                             mask='+\9\98(99) 999 99 99'
-                         >
-                             {() => <TextField
-                                 fullWidth
-                                 name={name}
-                                 focused={false}
-                                 variant="outlined"
-                                 size='small'
-                                 className={errorMsg ? 'error-border' : ''}
-                             />}
-                         </ReactInputMask>
-                         : <TextField
-                             fullWidth
-                             name={name}
-                             {...field}
-                             {...otherProps}
-                             focused={false}
-                             variant="outlined"
-                             size='small'
-                             className={errorMsg ? 'error-border' : ''}
-                         />}
+                            ? <ReactInputMask
+                                alwaysShowMask
+                                {...field}
+                                mask='+\9\98(99) 999 99 99'
+                            >
+                                {() => <TextField
+                                    fullWidth
+                                    name={name}
+                                    focused={false}
+                                    variant="outlined"
+                                    size='small'
+                                    className={errorMsg ? 'error-border' : ''}
+                                />}
+                            </ReactInputMask>
+                            : <TextField
+                                fullWidth
+                                name={name}
+                                {...field}
+                                {...otherProps}
+                                focused={false}
+                                variant="outlined"
+                                size='small'
+                                className={errorMsg ? 'error-border' : ''}
+                            />}
                         <Grid container className='helpers-content'>
                             {errorMsg && (
                                 <Grid item xs={limit ? 6 : 12}>
