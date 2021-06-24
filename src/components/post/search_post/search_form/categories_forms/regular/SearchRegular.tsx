@@ -38,10 +38,10 @@ export const SearchRegular: FC<SearchRegularPropsType> = (props) => {
         resetForm
     } = formik;
 
-    const {handleSelect, handleSetValsByParams} = useHandlers(values, setValues);
+    const {handleSelect, setValsByParams} = useHandlers(values, setValues);
 
     useEffect(() => {
-        handleSetValsByParams(urlParams, filters);
+        setValsByParams(urlParams, filters);
     }, [filters]);
 
     useEffect(() => {

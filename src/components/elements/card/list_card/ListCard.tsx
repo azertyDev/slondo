@@ -16,6 +16,9 @@ type ListCardPropsType = {
 export const ListCard: FC<ListCardPropsType> = ({cardData, archive}) => {
     const {t} = useTranslation('common');
 
+    const isAuction = cardData.ads_type === 'auc' || cardData.ads_type === 'exauc';
+    const hasBet = !!cardData.auction?.number_of_bets;
+
     const timer = ({days, hours, minutes, seconds, completed}) => (
         <Box display="flex" alignItems='center'>
             <Typography variant="caption" color="initial" className="timer-title">
@@ -98,22 +101,26 @@ export const ListCard: FC<ListCardPropsType> = ({cardData, archive}) => {
                         </Box>
                     )}
                     <div className='priceAndBet'>
-                        {!!cardData.auction?.bet && (
+                        {isAuction
+                         ? hasBet && <>
                             <Typography variant='subtitle1'>
                                 Текущая ставка
                             </Typography>
-                        )}
-                        <Typography
-                            variant="h6"
-                            color="initial"
-                        >
-                            {(!!cardData.auction?.bet
-                                    ? numberPrettier(cardData.auction.bet.bet)
-                                    : numberPrettier(cardData.price)
-                            )}
-                            &nbsp;
-                            <span>{t(`common:${cardData.currency.name}`)}</span>
-                        </Typography>
+                            <Typography
+                                variant="h6"
+                                color="initial"
+                            >
+                                {numberPrettier(cardData.auction?.bet?.bet)}&nbsp;
+                                <span>{t(`common:${cardData.currency.name}`)}</span>
+                            </Typography>
+                        </>
+                         : <Typography
+                             variant="h6"
+                             color="initial"
+                         >
+                             {numberPrettier(cardData.price)}&nbsp;
+                             <span>{t(`common:${cardData.currency.name}`)}</span>
+                         </Typography>}
                     </div>
                 </div>
             </Box>

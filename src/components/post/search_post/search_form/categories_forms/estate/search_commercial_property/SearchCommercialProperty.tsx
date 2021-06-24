@@ -40,12 +40,12 @@ export const SearchCommercialProperty: FC<CommonFiltersType> = (props) => {
         handleBlur
     } = formik;
 
-    const {handleSelect, handleNumericInput, handleSetValsByParams} = useHandlers(values, setValues);
+    const {handleSelect, handleNumericInput, setValsByParams} = useHandlers(values, setValues);
 
     const {t} = useTranslation('filters');
 
     useEffect(() => {
-        handleSetValsByParams(urlParams, filters);
+        setValsByParams(urlParams, filters);
     }, [filters]);
 
     return (

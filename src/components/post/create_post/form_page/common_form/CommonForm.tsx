@@ -1,6 +1,6 @@
 import {Dispatch, FC, SetStateAction} from 'react';
-import {useSelector} from 'react-redux';
-import {Grid} from '@material-ui/core';
+import {useTranslation} from 'next-i18next';
+import {Grid, Typography} from '@material-ui/core';
 import {AuctionParams} from './auction_params/AuctionParams';
 import {SiteServices} from './site_services/SiteServices';
 import {Contacts} from './contacts/Contacts';
@@ -11,18 +11,16 @@ import {CustomAccordion} from '@src/components/elements/accordion/CustomAccordio
 import {numericFields} from '@src/common_data/fields_keys';
 import {auctionParamsSchema, defaultParamsSchema} from '@root/validation_schemas/createPostSchemas';
 import {clearWhiteSpaces, getErrorMsg, numberPrettier, phonePrepare} from '@src/helpers';
-import {RootState} from '@src/redux/rootReducer';
 import {PostType} from '@root/interfaces/Post';
 import {WEEK_DAYS} from '@src/common_data/common';
 import {StateIcon} from '@src/components/elements/icons';
-import {LocationAutocomplete} from '@src/components/post/create_post/form_page/common_form/location/LocationAutocomplete';
 import {DropDownSelect} from '@src/components/elements/drop_down_select/DropDownSelect';
 import {CommonFormPreview} from '@src/components/post/create_post/form_page/common_form/CommonFormPreview';
 import {FormikField} from '@src/components/elements/formik_field/FormikField';
 import {CustomFormikProvider} from '@src/components/elements/custom_formik_provider/CustomFormikProvider';
 import {FormikTextarea} from '@src/components/elements/formik_textarea/FormikTextarea';
+import {Location} from '@src/components/elements/location/Location';
 import {useStyles} from './useStyles';
-import {useTranslation} from 'next-i18next';
 
 
 type DefaultParamsPropsType = {
@@ -55,7 +53,6 @@ export const CommonForm: FC<DefaultParamsPropsType> = (props) => {
     const priceLabel = categoryName === 'job' ? 'salary' : 'price';
 
     const descTxtLimit = 3000;
-    const {locations} = useSelector((store: RootState) => store);
 
     const initForm = {
         safe_deal: false,
@@ -224,9 +221,8 @@ export const CommonForm: FC<DefaultParamsPropsType> = (props) => {
         }
     };
 
-    const handleLocation = (_, location) => {
-        values.location = location;
-        setValues({...values});
+    const handleLocation = (location) => {
+        setValues({...values, location});
     };
 
     const handleCheckboxChange = name => ({target}) => {
@@ -277,7 +273,7 @@ export const CommonForm: FC<DefaultParamsPropsType> = (props) => {
             setValues({...values});
         }
     };
-
+    console.log(values);
     const classes = useStyles();
     return (
         <CustomFormikProvider formik={formik}>
@@ -347,14 +343,15 @@ export const CommonForm: FC<DefaultParamsPropsType> = (props) => {
                              />
                          </div>
                          <div className='location-wrapper'>
-                             <LocationAutocomplete
-                                 name='location'
-                                 value={values.location}
-                                 locations={locations.data}
-                                 onBlur={handleBlur}
-                                 onChange={handleLocation}
-                                 errorMsg={getErrorMsg(errors.location, touched.location, t)}
-                             />
+                             <div>
+                                 <Location handleSelectLocation={handleLocation}/>
+                                 <span className='error-text'>*</span>
+                             </div>
+                             {errors.location && touched.location && (
+                                 <span className='error-text'>
+                                     &nbsp;{t(`errors:${errors.location}`)}
+                                 </span>
+                             )}
                          </div>
                          <div>
                              <FormikTextarea
@@ -362,10 +359,10 @@ export const CommonForm: FC<DefaultParamsPropsType> = (props) => {
                                  name='description'
                                  value={values.description}
                                  onBlur={handleBlur}
-                                 labelTxt={t('filters:description')}
-                                 onChange={handleInput}
-                                 errorMsg={getErrorMsg(errors.description, touched.description, t)}
                                  limit={descTxtLimit}
+                                 onChange={handleInput}
+                                 labelTxt={t('filters:description')}
+                                 errorMsg={getErrorMsg(errors.description, touched.description, t)}
                              />
                          </div>
                          <Grid

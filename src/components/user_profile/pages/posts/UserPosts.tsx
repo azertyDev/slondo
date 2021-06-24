@@ -2,7 +2,7 @@ import {FC, useEffect, useState} from 'react';
 import {userAPI} from '@src/api/api';
 import {setErrorMsgAction} from '@src/redux/slices/errorSlice';
 import {InitialCabinetCardState, TabsDataType} from '@root/interfaces/Cabinet';
-import {CardView} from '@src/components/elements/card/card_view/CardView';
+import {CardView} from '@src/components/elements/card/CardView';
 import {useDispatch} from 'react-redux';
 import {useRouter} from 'next/router';
 import {WithT} from 'i18next';

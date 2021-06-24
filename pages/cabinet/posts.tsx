@@ -1,5 +1,5 @@
 import React, {FC} from 'react';
-import MyPostsContainer from "@src/components/cabinet/cabinet_pages/my_posts/MyPostsContainer";
+import MyPostsContainer from "@src/components/cabinet/cabinet_pages/my_posts/MyPosts";
 import {GetStaticProps} from "next";
 import {serverSideTranslations} from "next-i18next/serverSideTranslations";
 

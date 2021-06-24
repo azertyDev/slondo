@@ -1,15 +1,23 @@
-import React, {FC} from 'react';
-import SafetyDealContainer from "@src/components/cabinet/cabinet_pages/safety_deal/SafetyDealContainer";
-import {GetStaticProps} from "next";
-import {serverSideTranslations} from "next-i18next/serverSideTranslations";
-
-const SafetyDeal: FC = () => <SafetyDealContainer/>;
+import {SafetyDeal} from '@src/components/cabinet/cabinet_pages/safety_deal/SafetyDeal';
+import {GetStaticProps} from 'next';
+import {serverSideTranslations} from 'next-i18next/serverSideTranslations';
 
 export const getStaticProps: GetStaticProps = async ({locale}) => ({
     props: {
         ...await serverSideTranslations(
             locale,
-            ['cabinet', 'header', 'footer', 'common', 'auth_reg', 'notifications', 'categories', 'common', 'locations']
+            [
+                'cabinet',
+                'filters',
+                'header',
+                'footer',
+                'common',
+                'auth_reg',
+                'notifications',
+                'categories',
+                'common',
+                'locations'
+            ]
         )
     }
 });

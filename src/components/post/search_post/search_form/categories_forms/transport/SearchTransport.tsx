@@ -61,10 +61,10 @@ export const SearchTransport: FC<SearchRegularPropsType> = (props) => {
         resetForm
     } = formik;
 
-    const {handleSelect, handleSetValsByParams, handleNumericInput} = useHandlers(values, setValues);
+    const {handleSelect, setValsByParams, handleNumericInput} = useHandlers(values, setValues);
 
     useEffect(() => {
-        handleSetValsByParams(urlParams, filters);
+        setValsByParams(urlParams, filters);
     }, [filters]);
 
     useEffect(() => {

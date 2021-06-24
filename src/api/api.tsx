@@ -22,12 +22,47 @@ const setTokenToHeader = () => {
     if (token) {
         return {
             headers: {
-                'Cross-Origin-Embedder-Polichrcy': 'require-corp',
+                'Cross-Origin-Embedder-Policy': 'require-corp',
                 'Cross-Origin-Opener-Policy': 'same-origin',
                 'Content-Type': 'application/json',
                 'Authorization': `Bearer ${token}`
             }
         };
+    }
+};
+
+export const uzCardAPI = {
+    createCard: (cardData: string): Promise<any> => {
+        return instance
+            .post(`uzcard/card/create`, cardData, setTokenToHeader())
+            .then((res) => res.data)
+            .catch(({response}) => {
+                throw response.data;
+            });
+    },
+    confirmSmsCode: (data: string): Promise<any> => {
+        return instance
+            .post(`uzcard/card/confirm`, data, setTokenToHeader())
+            .then((res) => res.data)
+            .catch(({response}) => {
+                throw response.data;
+            });
+    },
+    getUserCards: (): Promise<any> => {
+        return instance
+            .get(`uzcard/cards/all`, setTokenToHeader())
+            .then((res) => res.data)
+            .catch(({response}) => {
+                throw response.data;
+            });
+    },
+    removeUserCard: (cardId: number): Promise<any> => {
+        return instance
+            .delete(`uzcard/card/delete/${cardId}`, setTokenToHeader())
+            .then((res) => res.data)
+            .catch(({response}) => {
+                throw response.data;
+            });
     }
 };
 
@@ -108,8 +143,11 @@ export const userAPI = {
                 throw err;
             });
     },
-    getMyPosts: ({type, onlySecure}: { type: string, onlySecure: number }): Promise<any> => {
-        return instance.get(`regular/user/posts?type=${type}&secure=${onlySecure}`, setTokenToHeader())
+    getMyPosts: (params: { type: string, archive: number, secure: number }): Promise<any> => {
+        return instance.get(`regular/user/posts`, {
+            params,
+            ...setTokenToHeader()
+        })
             .then(res => res.data)
             .catch(err => {
                 throw err;
@@ -241,16 +279,6 @@ export const userAPI = {
             reason_id,
             to_archive
         }, setTokenToHeader())
-            .then(res => res.data)
-            .catch(err => {
-                throw err;
-            });
-    },
-    getUserArchivePosts: (params): Promise<any> => {
-        return instance.get(
-            `regular/user/archivePosts`,
-            {params, ...setTokenToHeader()}
-        )
             .then(res => res.data)
             .catch(err => {
                 throw err;

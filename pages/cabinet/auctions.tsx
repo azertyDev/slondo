@@ -1,5 +1,5 @@
 import React, {FC} from 'react';
-import MyAuctionsContainer from "@root/src/components/cabinet/cabinet_pages/my_auctions/MyAuctionsContainer";
+import MyAuctionsContainer from "@src/components/cabinet/cabinet_pages/my_auctions/MyAuctions";
 import {GetStaticProps} from "next";
 import {serverSideTranslations} from "next-i18next/serverSideTranslations";
 

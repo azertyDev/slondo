@@ -11,19 +11,16 @@ import {CustomPagination} from '@root/src/components/elements/custom_pagination/
 import {useModal} from '@src/hooks/useModal';
 
 export type initialNotificationType = {
-    isFetch: boolean,
-    data: {
-        id: number,
-        ads_id: number,
-        status: string,
-        receiver_id: number,
-        type: string,
-        message: string,
-        go_to: number,
-        go_to_type: string,
-        updated_at: string,
-        created_at: string
-    }[],
+    id: number,
+    ads_id: number,
+    status: string,
+    receiver_id: number,
+    type: string,
+    message: string,
+    go_to: number,
+    go_to_type: string,
+    updated_at: string,
+    created_at: string
 }
 
 const NotificationsContainer: FC = () => {
@@ -32,12 +29,8 @@ const NotificationsContainer: FC = () => {
     const userInfo = useSelector((store: RootState) => store.user.info);
     const {modalOpen: openSnackbar, handleModalOpen: handleOpenSnackbar, handleModalClose: handleCloseSnackbar} = useModal();
 
-    const initialState: initialNotificationType = {
-        isFetch: false,
-        data: []
-    };
-
-    const [notifications, setNotifications] = useState(initialState);
+    const [isFetch, setIsFetch] = useState(false);
+    const [notifications, setNotifications] = useState<initialNotificationType[]>([]);
     const [phone, setPhone] = useState(null);
     const [openModal, setOpenModal] = useState(false);
     const [message, setMessage] = useState('');
@@ -54,9 +47,10 @@ const NotificationsContainer: FC = () => {
 
     const fetchAllNotification = async () => {
         try {
-            setNotifications({...notifications, isFetch: true});
+            setIsFetch(true);
             const {data, total} = await userAPI.getAllNotifications({page, itemsPerPage: ITEMS_PER_PAGE});
-            setNotifications({...notifications, data, isFetch: false});
+            setIsFetch(false);
+            setNotifications(data);
             setItemsCount(total);
         } catch (e) {
             dispatch(setErrorMsgAction(e.message));
@@ -65,12 +59,15 @@ const NotificationsContainer: FC = () => {
 
     const handleDeleteNotification = (id) => async () => {
         try {
-            setNotifications({...notifications, isFetch: true});
+            setIsFetch(true);
+
             const {message} = await userAPI.deleteUserNotification(id);
             const {data} = await userAPI.getAllNotifications();
-            setNotifications({...notifications, data, isFetch: false});
-            handleOpenSnackbar();
+
+            setNotifications(data);
             setMessage(message);
+            handleOpenSnackbar();
+            setIsFetch(false);
         } catch (e) {
             dispatch(setErrorMsgAction(e.message));
         }
@@ -78,10 +75,13 @@ const NotificationsContainer: FC = () => {
 
     const handleDeleteAllNotification = async () => {
         try {
-            setNotifications({...notifications, isFetch: true});
+            setIsFetch(true);
+
             await userAPI.deleteAllNotification(userInfo.id);
             const {data} = await userAPI.getAllNotifications();
-            setNotifications({...notifications, data, isFetch: false});
+
+            setNotifications(data);
+            setIsFetch(true);
         } catch (e) {
             dispatch(setErrorMsgAction(e.message));
         }
@@ -89,8 +89,10 @@ const NotificationsContainer: FC = () => {
 
     const fetchUserPhone = (user_id) => async () => {
         try {
+            setIsFetch(true);
             const {phone} = await userAPI.getPhoneByUserId(user_id);
             setPhone(phone);
+            setIsFetch(false);
         } catch (e) {
             dispatch(setErrorMsgAction(e.message));
         }
@@ -115,8 +117,8 @@ const NotificationsContainer: FC = () => {
 
     return <Notifications
         t={t}
-        notifications={notifications.data}
-        isFetch={notifications.isFetch}
+        notifications={notifications}
+        isFetch={isFetch}
         openModal={openModal}
         openSnackbar={openSnackbar}
         message={message}

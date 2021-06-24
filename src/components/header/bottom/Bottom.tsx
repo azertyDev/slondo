@@ -11,6 +11,7 @@ import {CustomDrawer} from '@src/components/header/bottom/custom_drawer/CustomDr
 import {Location} from '@src/components/elements/location/Location';
 import {Localization} from '@src/components/header/top/localization/Localization';
 import {HeaderSearchForm} from '@src/components/header/bottom/header_search_form/HeaderSearchForm';
+import {cookieOpts, cookies} from '@src/helpers';
 import {useStyles} from './useStyles';
 
 
@@ -20,6 +21,17 @@ const Bottom = (props) => {
 
     const handleDrawerShow = (value) => () => {
         setDrawerOpen(value);
+    };
+
+    const handleSelectLocation = ({region, city, district}) => {
+        if (region) {
+            const userLocation: any = {region};
+            if (city) userLocation.city = city;
+            if (district) userLocation.district = district;
+            cookies.set('user_location', userLocation, cookieOpts);
+        } else {
+            cookies.remove('user_location', {path: '/'});
+        }
     };
 
     const classes = useStyles(props);
@@ -131,7 +143,7 @@ const Bottom = (props) => {
             </Hidden>
             <Hidden lgUp>
                 <div className="translate-local">
-                    <Location/>
+                    <Location handleSelectLocation={handleSelectLocation}/>
                     <Localization/>
                 </div>
             </Hidden>

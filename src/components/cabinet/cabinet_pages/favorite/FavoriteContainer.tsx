@@ -10,11 +10,11 @@ import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import {InitialCabinetCardState, TabsDataType} from '@root/interfaces/Cabinet';
 import {useTranslation} from 'next-i18next';
 import {CabinetCard} from '@src/components/cabinet/components/cabinet_card/CabinetCard';
-import {useStyles} from './useStyles';
 import {ITEMS_PER_PAGE} from '@src/constants';
 import {useModal} from '@src/hooks/useModal';
-import {CardDataType} from '@root/interfaces/CardData';
 import {DetailedPostView} from '@src/components/cabinet/components/detailed_post_view/DetailedPostView';
+import {initialCardData} from '@src/components/cabinet/cabinet_pages/my_posts/MyPosts';
+import {useStyles} from './useStyles';
 
 const FavoriteContainer: FC = () => {
     const dispatch = useDispatch();
@@ -22,104 +22,16 @@ const FavoriteContainer: FC = () => {
     const classes = useStyles();
 
     const initialFavoriteState: InitialCabinetCardState = {
-        isFetch: false,
-        myPosts: {
-            total: 0,
-            data: []
-        }
+        total: 0,
+        data: []
     };
-    const initialSelectedPost: CardDataType = {
-        id: null,
-        ads_type: '',
-        adsable: {
-            id: null,
-            sub_category: {id: null, name: ''},
-            type: {id: null, name: ''}
-        },
-        auction: {
-            id: null,
-            is_accepted: null,
-            winner: {
-                id: null,
-                name: '',
-                surname: '',
-                phone: '',
-                avatar: '',
-                created_at: '',
-                available_days: '',
-                available_start_time: '',
-                available_end_time: ''
-            },
-            winner_id: null,
-            number_of_bets: null,
-            number_of_offers: null,
-            auto_renewal: null,
-            offer: {
-                id: null,
-                price: null,
-                user: {
-                    id: null,
-                    name: '',
-                    surname: '',
-                    phone: '',
-                    avatar: '',
-                    created_at: '',
-                    available_days: '',
-                    available_start_time: '',
-                    available_end_time: ''
-                }
-            },
-            bet: {
-                auction_id: null,
-                bet: null,
-                id: null,
-                number_of_bets: null
-            }
-        },
-        author: {
-            id: null,
-            name: '',
-            surname: '',
-            phone: '',
-            avatar: '',
-            created_at: '',
-            available_days: '',
-            available_start_time: '',
-            available_end_time: ''
-        },
-        observer: {
-            number_of_notifications: 0,
-            number_of_favorites: 0,
-            number_of_views: 0
-        },
-        available_days: [],
-        available_start_time: '',
-        available_end_time: '',
-        category: {id: null, name: ''},
-        city: {id: null, name: ''},
-        created_at: '',
-        creator: false,
-        currency: {id: null, name: ''},
-        delivery: null,
-        description: '',
-        district: {id: null, name: ''},
-        exchange: null,
-        expiration_at: '',
-        favorite: false,
-        image: '',
-        price: null,
-        region: {id: null, name: ''},
-        safe_deal: null,
-        status: '',
-        subscribed: false,
-        title: '',
-        user_id: null
-    };
+
+    const [isFetch, setIsFetch] = useState(false);
     const [favoritePostData, setFavoritePostData] = useState(initialFavoriteState);
     const [favoriteAucData, setFavoriteAucData] = useState(initialFavoriteState);
     const [postId, setPostId] = useState<number>(null);
     const [tabIndex, setTabIndex] = useState(0);
-    const [selectedPost, setSelectedPost] = useState(initialSelectedPost);
+    const [selectedPost, setSelectedPost] = useState(initialCardData);
     const [modalContentIndex, setModalContentIndex] = useState(1);
     const {modalOpen, handleModalOpen, handleModalClose} = useModal();
     const {modalOpen: detailedModalOpen, handleModalClose: closeDetailedModal, handleModalOpen: openDetailedModal} = useModal();
@@ -143,14 +55,15 @@ const FavoriteContainer: FC = () => {
     const fetchFavoriteData = async (type) => {
         try {
             const isPost = type === 'post';
+            setIsFetch(true);
             if (isPost) {
-                setFavoritePostData({...favoritePostData, isFetch: true});
+                setFavoritePostData(favoritePostData);
                 const {data, total} = await userAPI.getFavorites({type});
-                setFavoritePostData({myPosts: {data, total}, isFetch: false});
+                setFavoritePostData({data, total});
             } else {
-                setFavoriteAucData({...favoriteAucData, isFetch: true});
+                setFavoriteAucData(favoriteAucData);
                 const {data, total} = await userAPI.getFavorites({type});
-                setFavoriteAucData({myPosts: {data, total}, isFetch: false});
+                setFavoriteAucData({data, total});
             }
         } catch (e) {
             dispatch(setErrorMsgAction(e.message));
@@ -168,6 +81,10 @@ const FavoriteContainer: FC = () => {
             dispatch(setErrorMsgAction(e.message));
         }
         handleModalClose();
+    };
+    const handleNotificationsOpen = (postId: number) => () => {
+        postId && setPostId(postId);
+        closeDetailedModal();
     };
     const getModalContent = () => {
         switch (modalContentIndex) {
@@ -208,8 +125,8 @@ const FavoriteContainer: FC = () => {
         <>
             {modalContentIndex === 1
              ? <Typography className="title" variant="h6">
-                    Объявление № {postId}
-                </Typography>
+                 Объявление № {postId}
+             </Typography>
              : modalContentIndex === 5
                ? null
                : <IconButton
@@ -230,7 +147,7 @@ const FavoriteContainer: FC = () => {
         fetchFavoriteData('auc');
     }, []);
 
-    const favoritePostCards = favoritePostData.myPosts.data.map(data => (
+    const favoritePostCards = favoritePostData.data.map(data => (
         <Box mb={3} key={data.id}>
             <CabinetCard
                 cardData={data}
@@ -240,7 +157,7 @@ const FavoriteContainer: FC = () => {
         </Box>
     ));
 
-    const favoriteAucCards = favoriteAucData.myPosts.data.map(data => (
+    const favoriteAucCards = favoriteAucData.data.map(data => (
         <Box mb={3} key={data.id}>
             <CabinetCard
                 cardData={data}
@@ -254,7 +171,7 @@ const FavoriteContainer: FC = () => {
         {
             id: 0,
             title: t('posts'),
-            total: favoritePostData.myPosts.total,
+            total: favoritePostData.total,
             itemsPerPage: ITEMS_PER_PAGE,
             handleFetchByPage: null,
             component: (
@@ -270,7 +187,7 @@ const FavoriteContainer: FC = () => {
         {
             id: 1,
             title: t('auctions'),
-            total: favoriteAucData.myPosts.total,
+            total: favoriteAucData.total,
             itemsPerPage: ITEMS_PER_PAGE,
             handleFetchByPage: null,
             component: (
@@ -296,11 +213,11 @@ const FavoriteContainer: FC = () => {
                 tabsData={tabsData}
                 headerTitle={title}
             />
-            // Modals
             <DetailedPostView
                 data={selectedPost}
                 detailedModalOpen={detailedModalOpen}
                 handleDetailedClose={closeDetailedModal}
+                handleNotificationsOpen={handleNotificationsOpen}
             />
         </>
     );

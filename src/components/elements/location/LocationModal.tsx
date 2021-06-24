@@ -35,6 +35,8 @@ export const LocationModal: FC<LocationModalPropsType> = (props) => {
         handleModalClose
     } = props;
 
+    const separatedLocations = separateByThree(locations);
+
     const classes = useStyles({hasRegion});
     return (
         <ResponsiveModal
@@ -77,7 +79,7 @@ export const LocationModal: FC<LocationModalPropsType> = (props) => {
                             </Typography>
                         </Grid>
                         <Grid container className='locals-table'>
-                            {locations.map((col, i) => (
+                            {separatedLocations.map((col, i) => (
                                 <Grid
                                     item
                                     key={i}
@@ -108,4 +110,14 @@ export const LocationModal: FC<LocationModalPropsType> = (props) => {
             </div>
         </ResponsiveModal>
     );
+
+    function separateByThree(locations): any {
+        return Array.from({length: 3}).reduce((acc: any, _, i) => {
+            const columnLen = Math.ceil(locations.length / 3);
+            const endThreshold = columnLen * (i + 1);
+            const startThreshold = endThreshold - columnLen;
+            acc.push([...locations.slice(startThreshold, endThreshold)]);
+            return acc;
+        }, []);
+    }
 };

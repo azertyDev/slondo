@@ -393,7 +393,7 @@ export const SearchForm: FC<SearchFormPropsType> = (props) => {
                             isAuction={false}
                             values={values}
                             handleCheckbox={handleCheckbox}
-                            mainCategoryName={mainCategoryName}
+                            categoryName={mainCategoryName}
                         />
                     </Grid>
                 )}

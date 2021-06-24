@@ -1,4 +1,4 @@
-import React, {FC} from 'react';
+import {FC} from 'react';
 import {List, ListItem, ListItemText} from '@material-ui/core';
 import {useRouter} from 'next/router';
 import {WithT} from 'i18next';
@@ -16,8 +16,8 @@ import {SettingsIcon} from '@src/components/elements/icons/SettingsIcon';
 import {PowerIcon} from '@src/components/elements/icons/PowerIcon';
 import {useDispatch} from 'react-redux';
 import {signOutAction} from '@src/redux/slices/userSlice';
-import {useStyles} from './useStyles';
 import {UserInfo} from '@root/interfaces/Auth';
+import {useStyles} from './useStyles';
 
 type SidebarMenuPropsType = {
     user: UserInfo

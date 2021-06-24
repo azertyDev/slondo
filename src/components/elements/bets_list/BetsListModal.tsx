@@ -51,7 +51,7 @@ export const BetsListModal: FC<BetsListPropsType> = (props) => {
     };
 
     useEffect(() => {
-        setFetchedBetsData();
+        modalOpen && setFetchedBetsData();
     }, [page]);
 
     const classes = useStyles();

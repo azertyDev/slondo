@@ -26,7 +26,7 @@ export const SearchJob: FC<SearchRegularPropsType> = (props) => {
         handleReset
     } = props;
 
-    const isVacancy = subcategory.name === 'vacancies';
+    const isVacancy = subcategory?.name === 'vacancies';
 
     const {t} = useTranslation('filters');
 
@@ -48,7 +48,7 @@ export const SearchJob: FC<SearchRegularPropsType> = (props) => {
         resetForm
     } = formik;
 
-    const {handleSelect, handleSetValsByParams} = useHandlers(values, setValues);
+    const {handleSelect, setValsByParams} = useHandlers(values, setValues);
 
     const handleCheckbox = ({target}) => {
         setValues({
@@ -58,13 +58,13 @@ export const SearchJob: FC<SearchRegularPropsType> = (props) => {
     };
 
     useEffect(() => {
-        handleSetValsByParams(urlParams, filters);
+        setValsByParams(urlParams, filters);
     }, [filters]);
 
     useEffect(() => {
         resetForm();
     }, [category, subcategory, type]);
-
+    console.log(values);
     return (
         <CustomFormikProvider formik={formik}>
             <Grid container spacing={1}>

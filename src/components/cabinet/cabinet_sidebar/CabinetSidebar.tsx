@@ -15,7 +15,7 @@ export const CabinetSidebar: FC<{ user: UserInfo }> = ({user}) => {
     return (
         <div className={classes.root}>
             <Grid item xs={12} className="user-menu-wrapper">
-                <UserInfoWithAvatar isOwner={true} owner={user}/>
+                <UserInfoWithAvatar isOwner owner={user}/>
                 <UserSocialInfo t={t} user={user}/>
                 <SidebarMenu t={t} user={user}/>
             </Grid>

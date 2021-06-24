@@ -1,5 +1,4 @@
 import {FC, useState} from 'react';
-import {useStyles} from './useStyles';
 import {Box, Divider, Grid, Typography} from '@material-ui/core';
 import {CabinetWrapper} from '@src/components/cabinet/CabinetWrapper';
 import {WithT} from 'i18next';
@@ -7,7 +6,6 @@ import {useSelector} from 'react-redux';
 import {RootState} from '@src/redux/rootReducer';
 import {Rating} from '@src/components/elements/rating/Rating';
 import {months} from '@src/common_data/common';
-import {ResponsiveDialog} from '@src/components/elements/responsive_modal/ResponsiveDialog';
 import {useModal} from '@src/hooks/useModal';
 import {userAPI} from '@src/api/api';
 import {Form, FormikProvider, useFormik} from 'formik';
@@ -16,7 +14,9 @@ import {UserAvatarComponent} from '@src/components/elements/user_info_with_avata
 import {CustomButton} from '@src/components/elements/custom_button/CustomButton';
 import {UserInfoWithAvatar} from '@src/components/elements/user_info_with_avatar/UserInfoWithAvatar';
 import {FormikTextarea} from '@src/components/elements/formik_textarea/FormikTextarea';
+import {ResponsiveModal} from '@src/components/elements/responsive_modal/ResponsiveModal';
 import {getErrorMsg} from '@src/helpers';
+import {useStyles} from './useStyles';
 
 type RatingsPropsType = {
     data,
@@ -159,7 +159,7 @@ export const Ratings: FC<RatingsPropsType> = (props) => {
                         })}
                     </Box>
                 </Grid>
-                <ResponsiveDialog
+                <ResponsiveModal
                     openDialog={modalOpen}
                     handleCloseDialog={handleModalClose}
                 >
@@ -200,7 +200,7 @@ export const Ratings: FC<RatingsPropsType> = (props) => {
                             </Form>
                         </FormikProvider>
                     </Box>
-                </ResponsiveDialog>
+                </ResponsiveModal>
             </CabinetWrapper>
         </div>
     );

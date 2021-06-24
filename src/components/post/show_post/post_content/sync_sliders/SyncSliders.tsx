@@ -14,7 +14,7 @@ type SyncSlidersProps = {
     handleOpenModal: () => void;
     imgs: {
         alt: string;
-        url: { default: string };
+        url: { default: string, extra: string };
     }[];
     slidersRefs: SlidersRefType;
     handleFavorite: () => void;
@@ -64,7 +64,7 @@ export const SyncSliders: FC<SyncSlidersProps> = (props) => {
                         <img
                             key={i}
                             alt={img.alt}
-                            src={img.url.default}
+                            src={img.url.extra}
                             onClick={handleOpenModal}
                         />
                     )}
@@ -104,7 +104,7 @@ export const SyncSliders: FC<SyncSlidersProps> = (props) => {
                         arrows={false}
                     >
                         {imgs.map(({url, alt}, i) =>
-                            <img key={i} alt={alt} src={url.default}/>
+                            <img key={i} alt={alt} src={url.extra}/>
                         )}
                     </CustomSlider>
                 </div>

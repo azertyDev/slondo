@@ -49,19 +49,19 @@ export const FormikField: FC<CustomFormikFieldPropsType> = (props) => {
                                  fullWidth
                                  name={name}
                                  focused={false}
-                                 variant="outlined"
                                  size='small'
+                                 variant="outlined"
                                  className={errorMsg ? 'error-border' : ''}
                              />}
                          </ReactInputMask>
                          : <TextField
+                             size='small'
                              fullWidth
                              name={name}
                              {...field}
                              {...otherProps}
                              focused={false}
                              variant="outlined"
-                             size='small'
                              className={errorMsg ? 'error-border' : ''}
                          />}
                         <Grid container className='helpers-content'>

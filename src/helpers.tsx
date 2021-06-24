@@ -17,9 +17,9 @@ export const cookieOpts = {path: '/'};
 export const getAuthErrorMsg = (msg: string, t: TFunction) => {
     switch (msg) {
         case 'incorrect code':
-            return ''
+            return '';
     }
-}
+};
 
 type GetFieldsByFiltersProps = {
     isPreview?: boolean,
@@ -130,7 +130,7 @@ export const toUrlParams = (params) => {
             url = url.concat(`&${key}=${params[key]}`);
         } else if (isNoEmptyArray) {
             url = url.concat(`&${key}=${params[key].map(p => p.id).join(',')}`);
-        } else if (isObject) {
+        } else if (isObject && !!params[key].id) {
             url = url.concat(`&${key}=${params[key].id}`);
         }
     });

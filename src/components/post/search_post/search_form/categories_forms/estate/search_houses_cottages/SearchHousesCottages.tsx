@@ -46,12 +46,12 @@ export const SearchHousesCottages: FC<CommonFiltersType> = (props) => {
         handleBlur
     } = formik;
 
-    const {handleSelect, handleNumericInput, handleSetValsByParams, handleCheckbox} = useHandlers(values, setValues);
+    const {handleSelect, handleNumericInput, setValsByParams, handleCheckbox} = useHandlers(values, setValues);
 
     const {t} = useTranslation('filters');
 
     useEffect(() => {
-        handleSetValsByParams(urlParams, filters);
+        setValsByParams(urlParams, filters);
     }, [filters]);
 
     return (
