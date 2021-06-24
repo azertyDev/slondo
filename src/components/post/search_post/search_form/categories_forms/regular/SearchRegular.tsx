@@ -6,7 +6,6 @@ import {useTranslation} from 'react-i18next';
 import {useFormik} from 'formik';
 import {useHandlers} from '@src/hooks/useHandlers';
 import {CustomFormikProvider} from '@src/components/elements/custom_formik_provider/CustomFormikProvider';
-import {CustomButton} from '@src/components/elements/custom_button/CustomButton';
 import {ActionButtons} from '@src/components/post/search_post/search_form/ActionButtons';
 
 type SearchRegularPropsType = {
@@ -23,7 +22,8 @@ export const SearchRegular: FC<SearchRegularPropsType> = (props) => {
         onSubmit,
         filters,
         urlParams,
-        handleReset
+        handleReset,
+        sameWithUrlCtgr
     } = props;
 
     const {t} = useTranslation('filters');
@@ -42,7 +42,7 @@ export const SearchRegular: FC<SearchRegularPropsType> = (props) => {
     const {handleSelect, setValsByParams} = useHandlers(values, setValues);
 
     useEffect(() => {
-        setValsByParams(urlParams, filters);
+        sameWithUrlCtgr && setValsByParams(urlParams, filters);
     }, [filters]);
 
     useEffect(() => {

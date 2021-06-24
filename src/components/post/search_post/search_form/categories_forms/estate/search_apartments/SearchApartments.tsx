@@ -6,7 +6,6 @@ import {DropDownSelect} from '@src/components/elements/drop_down_select/DropDown
 import {CommonFiltersType} from '@src/components/post/search_post/search_form/SearchForm';
 import {useHandlers} from '@src/hooks/useHandlers';
 import {CustomFormikProvider} from '@src/components/elements/custom_formik_provider/CustomFormikProvider';
-import {CustomButton} from '@src/components/elements/custom_button/CustomButton';
 import {FromToInputs} from '@src/components/elements/from_to_inputs/FromToInputs';
 import {ShowHide} from '@src/components/elements/show_hide/ShowHide';
 import {CheckboxSelect} from '@src/components/elements/checkbox_select/CheckboxSelect';
@@ -19,7 +18,8 @@ export const SearchApartments: FC<CommonFiltersType> = (props) => {
         onSubmit,
         filters,
         handleReset,
-        urlParams
+        urlParams,
+        sameWithUrlCtgr
     } = props;
 
     const initVals = {
@@ -54,7 +54,7 @@ export const SearchApartments: FC<CommonFiltersType> = (props) => {
     const {t} = useTranslation('filters');
 
     useEffect(() => {
-        setValsByParams(urlParams, filters);
+        sameWithUrlCtgr && setValsByParams(urlParams, filters);
     }, [filters]);
 
     return (

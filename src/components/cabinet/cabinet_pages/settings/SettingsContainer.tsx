@@ -6,7 +6,7 @@ import {useDispatch, useSelector} from 'react-redux';
 import {RootState} from '@src/redux/rootReducer';
 import {userAPI} from '@src/api/api';
 import {signInAction} from '@src/redux/slices/userSlice';
-import {cookieOpts, cookies} from '@src/helpers';
+import {cookieOpts, cookies, getErrorMsg} from '@src/helpers';
 import {setErrorMsgAction} from '@src/redux/slices/errorSlice';
 import {useFormik} from 'formik';
 import {SettingsForm} from '@src/components/cabinet/cabinet_pages/settings/settings_form/SettingsForm';
@@ -14,7 +14,7 @@ import {UploadAvatarForm} from '@src/components/cabinet/cabinet_pages/settings/s
 import {timeRegEx} from '@src/common_data/reg_exs';
 import {CodeConfirm} from '@src/components/cabinet/cabinet_pages/settings/settings_form/password_recovery/CodeConfirm';
 import {regularFormSchema} from '@root/validation_schemas/createPostSchemas';
-import {PasswordConfirmForm} from '@root/src/components/header/auth_reg_page/auth_reg_forms/recovery_form/PasswordConfirmForm';
+import {FormikField} from '@src/components/elements/formik_field/FormikField';
 
 const SettingsContainer: FC = () => {
     const dispatch = useDispatch();
@@ -99,13 +99,16 @@ const SettingsContainer: FC = () => {
 
     const {
         values,
-        setValues
+        setValues,
+        errors,
+        touched
     } = formik;
     const {avalTime} = values;
 
     const handleDisableTimer = () => {
         setActiveTimer(false);
     };
+
     const handleOpenModal = async () => {
         try {
             setFetchingSmsCode(true);
@@ -119,25 +122,32 @@ const SettingsContainer: FC = () => {
             setFetchingSmsCode(false);
         }
     };
+
     const handleModalClose = () => {
         setOpenModal(false);
         setIsPassConfirm(false);
     };
+
     const handlePassConfirm = () => {
         setIsPassConfirm(true);
     };
+
     const handleAllowEdit = () => {
         setFormDisable(!formDisable);
     };
+
     const handleUpload = (event) => {
         setValues({...values, avatar: event.target.files[0]});
     };
+
     const handleDeleteAvatar = () => {
         setValues({...values, avatar: ''});
     };
+
     const handleSwitch = (_, value) => {
         setValues({...values, avalTime: {...avalTime, isActive: value}});
     };
+
     const handleAvalDays = day => () => {
         const isExstDay = avalTime.time.week_days.some(({id}) => id === day.id);
         const week_days = [...avalTime.time.week_days];
@@ -161,6 +171,7 @@ const SettingsContainer: FC = () => {
             }
         });
     };
+
     const handleTime = ({target: {value, name}}) => {
         if (timeRegEx.test(value)) {
             value = value.replace(/^:(.+)/, m => `00${m}`).replace(/(.+):$/, m => `${m}00`);
@@ -169,12 +180,11 @@ const SettingsContainer: FC = () => {
             setValues({...values, avalTime: {...avalTime, time}});
         }
     };
+
     const handleSignIn = (user) => () => {
         dispatch(signInAction(user));
     };
-    const errorHandle = (errMsg) => {
-        setErrorMsg(errMsg);
-    };
+
     const runTimer = () => {
         if (activeTimer) {
             if (timer > 0) {
@@ -189,14 +199,26 @@ const SettingsContainer: FC = () => {
 
     const ModalContent = (
         isPassConfirm
-        ? <PasswordConfirmForm
-            t={t}
-            phone={values.phone}
-            code={code}
-            setErrorMsg={errorHandle}
-            handleCloseModal={handleModalClose}
-            handleSignIn={handleSignIn}
-        />
+        ? <div className="formik-num-pass">
+            {/*<FormikField*/}
+            {/*    t={t}*/}
+            {/*    type="password"*/}
+            {/*    name="password"*/}
+            {/*    labelText='enter_new_password'*/}
+            {/*    placeholder={t('filters:enter_new_password')}*/}
+            {/*    onChange={handleInput}*/}
+            {/*    errorMsg={getErrorMsg(errors.password, touched.password, t)}*/}
+            {/*/>*/}
+            {/*<FormikField*/}
+            {/*    t={t}*/}
+            {/*    type="password"*/}
+            {/*    name="password_confirm"*/}
+            {/*    labelText='repeat_new_password'*/}
+            {/*    placeholder={t('filters:repeat_new_password')}*/}
+            {/*    onChange={handleInput}*/}
+            {/*    errorMsg={getErrorMsg(errors.password_confirm, touched.password_confirm, t)}*/}
+            {/*/>*/}
+        </div>
         : <CodeConfirm
             t={t}
             timer={timer}

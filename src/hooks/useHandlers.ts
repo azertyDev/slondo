@@ -55,7 +55,7 @@ export const useHandlers = (values: any, setValues: Dispatch<SetStateAction<any>
                     } else {
                         vals[k] = filters[k].filter(v => urlParams[k].split(',').some(p => +p === v.id));
                     }
-                } else if ((isStringField && values[k] === '') || isBooleanField && values[k] === '') {
+                } else if ((isBooleanField || isStringField) && values[k] === '') {
                     vals[k] = isBooleanField || urlParams[k];
                 }
             });
@@ -68,7 +68,6 @@ export const useHandlers = (values: any, setValues: Dispatch<SetStateAction<any>
         },
         setRequireVals: (filters) => {
             const reqVals = {};
-
             Object.keys(filters).forEach(k => {
                 if (isRequired(k) && !values[k]) reqVals[k] = null;
             });

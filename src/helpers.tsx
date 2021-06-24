@@ -5,7 +5,7 @@ import CyrillicToTranslit from 'cyrillic-to-translit-js';
 import {CategoryType, SubcategoryType, TypeCategory} from '@root/interfaces/Categories';
 import {fracFieldRegEx, punctuationMarksRegEx, searchTxtRegEx} from '@src/common_data/reg_exs';
 import {HasAuction, site_categories} from '@src/common_data/site_categories';
-import {excludeFields, fractionalFields, optionFields, requireFields} from '@src/common_data/fields_keys';
+import {excludeFields, fractionalFields, optionFields, requireFields, singleFields} from '@src/common_data/fields_keys';
 import {IdNameType} from '@root/interfaces/Post';
 import {Grid, Typography} from '@material-ui/core';
 import {DropDownSelect} from '@src/components/elements/drop_down_select/DropDownSelect';
@@ -28,7 +28,7 @@ type GetFieldsByFiltersProps = {
     handleSelect,
 } & WithT;
 
-export const getFieldsByFilters = (props: GetFieldsByFiltersProps, multiple?: boolean) => {
+export const getFieldsByFilters = (props: GetFieldsByFiltersProps, multiple? = false) => {
     const {
         t,
         isPreview,
@@ -76,6 +76,7 @@ export const getFieldsByFilters = (props: GetFieldsByFiltersProps, multiple?: bo
             const isExcludeValue = excludeFields.some(k => k === key);
             const isNoEmptyArray = Array.isArray(filters[key]) && !!filters[key].length;
             const isOptionKey = optionFields.some(optKey => optKey === key);
+            const isSingleField = singleFields.some(f => f === key);
 
             if (!isExcludeValue && isNoEmptyArray) {
                 return (
@@ -93,8 +94,9 @@ export const getFieldsByFilters = (props: GetFieldsByFiltersProps, multiple?: bo
                                 values={values}
                                 onBlur={handleBlur}
                                 items={filters[key]}
-                                multiple={isOptionKey || multiple}
+                                disableRequire={multiple}
                                 handleSelect={handleSelect}
+                                multiple={!isSingleField && (isOptionKey || multiple)}
                                 errorMsg={getErrorMsg(errors[key], touched[key], t)}
                             />
                         </Grid>

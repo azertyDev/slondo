@@ -1,9 +1,9 @@
-import React, {FC, ReactElement, ReactNode} from 'react';
+import {FC, ReactElement, ReactNode} from 'react';
 import {Box, Button, Grid, Typography} from '@material-ui/core';
 import {CabinetWrapper} from '@src/components/cabinet/CabinetWrapper';
-import {useStyles} from './useStyles';
 import EditIcon from '@material-ui/icons/Edit';
 import {CustomModal} from '@src/components/elements/custom_modal/CustomModal';
+import {useStyles} from './useStyles';
 
 type SettingsPropsType = {
     settingsForm: ReactNode,
@@ -46,9 +46,7 @@ export const Settings: FC<SettingsPropsType> = (props) => {
                             startIcon={formDisable && <EditIcon fontSize='small' />}
                         >
                             <Typography variant='subtitle1'>
-                                {
-                                    formDisable ? 'Редактировать' : 'Отменить'
-                                }
+                                {formDisable ? 'Редактировать' : 'Отменить'}
                             </Typography>
                         </Button>
                     </Box>

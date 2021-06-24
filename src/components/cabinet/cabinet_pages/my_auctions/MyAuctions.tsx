@@ -18,7 +18,7 @@ import {
     Tabs,
     Typography
 } from '@material-ui/core';
-import {InitialCabinetCardState, OffersStateType, TabsDataType} from '@root/interfaces/Cabinet.js';
+import {InitialCabinetCardState, TabsDataType} from '@root/interfaces/Cabinet.js';
 import {CabinetCard} from '@src/components/cabinet/components/cabinet_card/CabinetCard';
 import {initialNotificationType} from '@src/components/cabinet/cabinet_pages/notifications/NotificationsContainer';
 import {ITEMS_PER_PAGE} from '@src/constants';
@@ -181,7 +181,7 @@ export const MyAuctions: FC = () => {
             setIsFetch(false);
         } catch (e) {
             setIsFetch(false);
-            dispatch(setErrorMsgAction(e));
+            dispatch(setErrorMsgAction(e.message));
         }
     };
     const fetchAuctionArchiveData = async (type?: string) => {
@@ -208,7 +208,7 @@ export const MyAuctions: FC = () => {
             setIsFetch(false);
         } catch (e) {
             setIsFetch(false);
-            dispatch(setErrorMsgAction(e));
+            dispatch(setErrorMsgAction(e.message));
         }
     };
     const handleDeleteNotification = (id, ads_id) => async () => {
@@ -465,11 +465,7 @@ export const MyAuctions: FC = () => {
                 onChange={handleChildTabChange}
                 aria-label="tabs"
                 className={classes.childTabs}
-                TabIndicatorProps={{
-                    style: {
-                        display: 'none'
-                    }
-                }}
+                TabIndicatorProps={{style: {display: 'none'}}}
             >
                 <Tab
                     label={

@@ -14,7 +14,6 @@ import {useDispatch, useSelector} from 'react-redux';
 import {ResponsiveModal} from '@src/components/elements/responsive_modal/ResponsiveModal';
 import {useTheme} from '@material-ui/core/styles';
 import {CustomTabPanel} from '@src/components/elements/custom_tab_panel/CustomTabPanel';
-import {useRouter} from 'next/router';
 import {RootState} from '@src/redux/rootReducer';
 import {Form, FormikProvider, useFormik} from 'formik';
 import {cookieOpts, cookies, getErrorMsg, phonePrepare} from '@src/helpers';
@@ -34,7 +33,6 @@ enum FormStatuses {
 
 export const AuthRegPage: FC = () => {
     const initSeconds = 120;
-    const {locale} = useRouter();
     const dispatch = useDispatch();
     const {t} = useTranslation('auth_reg');
     const fullScreen = useMediaQuery(useTheme().breakpoints.down('sm'));

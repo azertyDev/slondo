@@ -5,7 +5,6 @@ import {useTranslation} from 'react-i18next';
 import {useFormik} from 'formik';
 import {useHandlers} from '@src/hooks/useHandlers';
 import {CustomFormikProvider} from '@src/components/elements/custom_formik_provider/CustomFormikProvider';
-import {CustomButton} from '@src/components/elements/custom_button/CustomButton';
 import {CheckboxSelect} from '@src/components/elements/checkbox_select/CheckboxSelect';
 import {DropDownSelect} from '@src/components/elements/drop_down_select/DropDownSelect';
 import {ActionButtons} from '@src/components/post/search_post/search_form/ActionButtons';
@@ -24,7 +23,8 @@ export const SearchJob: FC<SearchRegularPropsType> = (props) => {
         onSubmit,
         filters,
         urlParams,
-        handleReset
+        handleReset,
+        sameWithUrlCtgr
     } = props;
 
     const isVacancy = subcategory?.name === 'vacancies';
@@ -59,13 +59,13 @@ export const SearchJob: FC<SearchRegularPropsType> = (props) => {
     };
 
     useEffect(() => {
-        setValsByParams(urlParams, filters);
+        sameWithUrlCtgr && setValsByParams(urlParams, filters);
     }, [filters]);
 
     useEffect(() => {
         resetForm();
     }, [category, subcategory, type]);
-    console.log(values);
+
     return (
         <CustomFormikProvider formik={formik}>
             <Grid container spacing={1}>
