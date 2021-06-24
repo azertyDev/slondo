@@ -102,7 +102,7 @@ export const Location: FC<LocationProps> = ({handleSelectLocation}) => {
 
     const classes = useStyles();
     return (
-        <div>
+        <>
             <div className={classes.location}>
                 <LocationIcon/>
                 <Typography variant="subtitle1" onClick={handleModalOpen}>
@@ -121,6 +121,6 @@ export const Location: FC<LocationProps> = ({handleSelectLocation}) => {
                 toPrevLocation={toPrevLocation}
                 handleChoiceLocation={handleChoiceLocation}
             />
-        </div>
+        </>
     );
 };

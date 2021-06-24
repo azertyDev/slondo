@@ -47,6 +47,22 @@ export const useStyles = makeStyles({
                     marginRight: 10
                 }
             }
+        },
+        '& .row': {
+            display: 'flex',
+            flexDirection: 'row',
+            '& .MuiBadge-root': {
+                width: '49%',
+                '&:first-child': {
+                    marginRight: '5px'
+                }
+            },
+            '& .list-item': {
+                width: '49%',
+                '&:first-child': {
+                    marginRight: '5px'
+                }
+            }
         }
     }
 });

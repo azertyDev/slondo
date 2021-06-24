@@ -1,4 +1,4 @@
-import {makeStyles} from '@material-ui/core/styles'
+import {makeStyles} from '@material-ui/core/styles';
 
 
 export const useStyles = makeStyles((theme) => ({
@@ -29,8 +29,6 @@ export const useStyles = makeStyles((theme) => ({
                     '& div.submit-button-wrapper': {
                         display: 'flex',
                         justifyContent: 'flex-end',
-                        width: '100%',
-                        marginTop: '20px',
                         '& button.nav-button': {
                             width: '250px',
                             [theme.breakpoints.down('sm')]: {

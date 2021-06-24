@@ -1,4 +1,5 @@
 import {FC, useState} from 'react';
+import {Box, Typography} from '@material-ui/core';
 import {useStyles} from './useStyles';
 
 type ShowHide = {
@@ -21,13 +22,13 @@ export const ShowHide: FC<ShowHide> = (props) => {
 
     const classes = useStyles();
     return (
-        <div className={`${classes.root} ${className}`}>
+        <Box my={2} className={`${classes.root} ${className}`}>
             <div className='show-hide-txt'>
-                <span onClick={handleShow}>
+                <Typography variant='subtitle1' onClick={handleShow}>
                     {showTxt}
-                </span>
+                </Typography>
             </div>
             {show && children}
-        </div>
+        </Box>
     );
 };

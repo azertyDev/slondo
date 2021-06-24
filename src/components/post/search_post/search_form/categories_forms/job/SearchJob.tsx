@@ -8,6 +8,7 @@ import {CustomFormikProvider} from '@src/components/elements/custom_formik_provi
 import {CustomButton} from '@src/components/elements/custom_button/CustomButton';
 import {CheckboxSelect} from '@src/components/elements/checkbox_select/CheckboxSelect';
 import {DropDownSelect} from '@src/components/elements/drop_down_select/DropDownSelect';
+import {ActionButtons} from '@src/components/post/search_post/search_form/ActionButtons';
 
 type SearchRegularPropsType = {
     type,
@@ -123,9 +124,8 @@ export const SearchJob: FC<SearchRegularPropsType> = (props) => {
                         onChange={handleCheckbox}
                     />
                 </Grid>
-                <Grid item container justify='flex-end' xs={12} className='actions-btns'>
-                    <CustomButton onClick={handleReset}>{t('filters:reset')}</CustomButton>
-                    <CustomButton type='submit'>{t('filters:apply')}</CustomButton>
+                <Grid item container justify='flex-end' xs={12}>
+                    <ActionButtons handleReset={handleReset}/>
                 </Grid>
             </Grid>
         </CustomFormikProvider>

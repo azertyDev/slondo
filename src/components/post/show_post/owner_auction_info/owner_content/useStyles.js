@@ -63,5 +63,14 @@ export const useStyles = makeStyles((theme) => ({
                 fontWeight: '500'
             }
         }
+    },
+    safeDealDrawer: {
+        '& .MuiPaper-root': {
+            width: '100%'
+        },
+        '& div.safe-deal-block': {
+            background: '#F1F1F1',
+            borderRadius: '10px'
+        }
     }
 }));

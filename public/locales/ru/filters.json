@@ -36,7 +36,7 @@
   "power_steering": "Усилитель руля",
   "climate": "Климат",
   "send_again": "Запросить пароль еще раз",
-  "enter_sms": "Введите проверочный код из SMS",
+  "enter_sms": "Введите полученный код",
   "enter_phone": "Введите номер телефона",
   "enter_name": "Введите имя",
   "enter_password": "Пароль",
@@ -644,5 +644,7 @@
   "operating_systems": "Операционные системы",
   "office_programs": "Офисные программы",
   "enterprise_management": "Управление предприятием",
-  "utilities_drivers": "Утилиты, драйверы"
+  "utilities_drivers": "Утилиты, драйверы",
+  "free": "Отдам даром",
+  "archive": "Архив"
 }

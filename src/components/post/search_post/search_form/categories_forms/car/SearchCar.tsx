@@ -6,9 +6,9 @@ import {CommonFiltersType} from '@src/components/post/search_post/search_form/Se
 import {useFormik} from 'formik';
 import {useHandlers} from '@src/hooks/useHandlers';
 import {CustomFormikProvider} from '@src/components/elements/custom_formik_provider/CustomFormikProvider';
-import {CustomButton} from '@src/components/elements/custom_button/CustomButton';
 import {FromToInputs} from '@src/components/elements/from_to_inputs/FromToInputs';
 import {ShowHide} from '@src/components/elements/show_hide/ShowHide';
+import {ActionButtons} from '@src/components/post/search_post/search_form/ActionButtons';
 
 export const SearchCar: FC<CommonFiltersType> = (props) => {
     const {
@@ -250,9 +250,8 @@ export const SearchCar: FC<CommonFiltersType> = (props) => {
                     </Grid>
                 </Grid>
             </ShowHide>
-            <Grid item container justify='flex-end' xs={12} className='actions-btns'>
-                <CustomButton onClick={handleReset}>{t('filters:reset')}</CustomButton>
-                <CustomButton type='submit'>{t('filters:apply')}</CustomButton>
+            <Grid item container justify='flex-end' xs={12} >
+                <ActionButtons handleReset={handleReset}/>
             </Grid>
         </CustomFormikProvider>
     );

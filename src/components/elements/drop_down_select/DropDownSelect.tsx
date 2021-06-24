@@ -1,6 +1,6 @@
 import {FC} from 'react';
 import {useTranslation} from 'react-i18next';
-import {Checkbox, FormControl, InputLabel, MenuItem, Select, Typography} from '@material-ui/core';
+import {Checkbox, FormControl, MenuItem, Select, Typography} from '@material-ui/core';
 import {isRequired} from '@src/helpers';
 import {useStyles} from './useStyles';
 
@@ -59,17 +59,20 @@ export const DropDownSelect: FC<CustomSelectPropsType> = (props) => {
     const classes = useStyles();
     return (
         <FormControl className={classes.root}>
-            <InputLabel>
-                {multiple
-                 ? t(`filters:${labelTxt ?? name}`)
-                 : !isCurrency && (
-                    <>
-                        {t(`filters:${labelTxt ?? name}`)}
-                        {!disableRequire && isRequired(name) && <span className='error-text'>*&nbsp;</span>}
-                    </>
-                )}
-            </InputLabel>
+            <label htmlFor={name}>
+                <Typography variant='subtitle1' gutterBottom>
+                    {multiple
+                        ? t(`filters:${labelTxt ?? name}`)
+                        : !isCurrency && (
+                        <>
+                            {t(`filters:${labelTxt ?? name}`)}
+                            {!disableRequire && isRequired(name) && <span className='error-text'>*&nbsp;</span>}
+                        </>
+                    )}
+                </Typography>
+            </label>
             <Select
+                labelId={name}
                 variant='outlined'
                 name={name}
                 onBlur={onBlur}
@@ -81,7 +84,9 @@ export const DropDownSelect: FC<CustomSelectPropsType> = (props) => {
                 value={multiple ? values[name] || [] : values[name]?.id ?? 0}
             >
                 {!multiple && !isCurrency && (
-                    <MenuItem value={0}>
+                    <MenuItem
+                        value={0}
+                    >
                         {t('filters:noSelect')}
                     </MenuItem>
                 )}
@@ -90,18 +95,22 @@ export const DropDownSelect: FC<CustomSelectPropsType> = (props) => {
                         key={item.id}
                         value={multiple ? item : item.id}
                     >
-                        {multiple && <Checkbox checked={!!values[name]?.some(el => el.id === item.id)}/>}
+                        {multiple && <Checkbox
+                            size="small"
+                            checked={!!values[name]?.some(el => el.id === item.id)}
+                            style={{padding: 0, marginRight: 5}}
+                        />}
                         {t(`${item[optionKey]}`)}
                     </MenuItem>
                 ))}
             </Select>
-            <Typography variant="subtitle1">
-                {errorMsg && (
+            {errorMsg && (
+                <Typography variant="subtitle1">
                     <span className='error-text'>
                         {errorMsg}
                     </span>
-                )}
-            </Typography>
+                </Typography>
+            )}
         </FormControl>
     );
 };

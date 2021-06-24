@@ -3,19 +3,21 @@ import {makeStyles} from '@material-ui/core/styles';
 
 export const useStyles = makeStyles((theme) => ({
     root: {
-        width: '100%',
-        '& label.MuiInputLabel-formControl': {
-            top: '-40px'
-        },
         '& button': {
-            color: theme.palette.primary.white,
-            backgroundColor: theme.palette.common.activeTab,
+            color: theme.palette.common.tab,
+            background: 'none',
             '&.selected': {
-                border: `3px solid ${theme.palette.primary.exAucBgColor}`
+                '& h6.MuiTypography-subtitle1': {
+                    color: theme.palette.primary.white
+                },
+                background: theme.palette.primary.createAdBtnColor
             }
         },
         '& div.options': {
-            display: 'flex'
+            display: 'flex',
+            background: '#FFFFFF',
+            boxShadow: '0px 1px 2px rgba(0, 0, 0, 0.1)',
+            borderRadius: '5px'
         }
     }
 }));

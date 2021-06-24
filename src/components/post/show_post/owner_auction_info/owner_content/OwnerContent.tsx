@@ -1,11 +1,12 @@
-import {FC} from 'react';
-import {Hidden, Typography} from '@material-ui/core';
+import {FC, useState} from 'react';
+import {Box, Container, Divider, Drawer, Grid, Hidden, Typography} from '@material-ui/core';
 import {CustomButton} from '@src/components/elements/custom_button/CustomButton';
 import {SafeIcon} from '@root/src/components/elements/icons';
 import {UserInfoWithAvatar} from '@src/components/elements/user_info_with_avatar/UserInfoWithAvatar';
 import {SocialsBlock} from '@root/src/components/elements/socials_block/SocialsBlock';
 import {WithT} from 'i18next';
 import {useStyles} from './useStyles';
+import {log} from 'util';
 
 
 type OwnerPropsType = {
@@ -36,7 +37,11 @@ export const OwnerContent: FC<OwnerPropsType> = (props) => {
     } = postData;
 
     const showPhoneTxt = showPhone ? authorPhones.phone || 'number_not_available' : 'show_phone';
+    const [drawerOpen, setDrawerOpen] = useState(false);
 
+    const handleDrawerShow = (value) => () => {
+        setDrawerOpen(value);
+    };
     const classes = useStyles();
     return (
         <div className={classes.root}>
@@ -73,6 +78,7 @@ export const OwnerContent: FC<OwnerPropsType> = (props) => {
                                 <CustomButton
                                     color="primary"
                                     className="safe-shopping-btn"
+                                    onClick={handleDrawerShow(true)}
                                 >
                                     <SafeIcon/>
                                     <Typography variant="subtitle1" color="initial">
@@ -89,9 +95,9 @@ export const OwnerContent: FC<OwnerPropsType> = (props) => {
                 {!creator && !!safe_deal && (
                     <div className='fixed-bet-safe-deal floating'>
                         <div className="floating-text">
-                            <SafeIcon/>
+                            <SafeIcon />
                             <Typography variant='subtitle2'>
-                                Безопасная покупка <br/>
+                                Безопасная покупка <br />
                                 за 420 000 сум
                             </Typography>
                         </div>
@@ -101,6 +107,27 @@ export const OwnerContent: FC<OwnerPropsType> = (props) => {
                     </div>
                 )}
             </Hidden>
+
+            <Drawer
+                anchor='right'
+                open={drawerOpen}
+                onClose={handleDrawerShow(false)}
+                className={classes.safeDealDrawer}
+            >
+                <Container maxWidth='xl'>
+                    <Box className='safe-deal-block' p='30px'>
+                        <Grid container justify='space-between'>
+                            <Grid item xs={6}>
+                                Grid 5
+                            </Grid>
+                            <Divider orientation="vertical" flexItem />
+                            <Grid item xs={6}>
+                                Grid 5
+                            </Grid>
+                        </Grid>
+                    </Box>
+                </Container>
+            </Drawer>
         </div>
     );
 };

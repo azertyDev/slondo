@@ -1,14 +1,17 @@
-import { makeStyles } from '@material-ui/core/styles';
+import {makeStyles} from '@material-ui/core/styles';
 
 export const useStyles = makeStyles((theme) => ({
     root: {
+        '& div.success-title': {
+            textAlign: 'center'
+        },
         '& h5.MuiTypography-h5': {
-            fontWeight: 600,
+            fontWeight: 600
         },
         '& a': {
             textDecoration: 'none',
-            color: theme.palette.primary.secondary,
-        },
+            color: theme.palette.primary.secondary
+        }
     },
     paper: {
         display: 'flex',
@@ -16,26 +19,49 @@ export const useStyles = makeStyles((theme) => ({
         justifyContent: 'center',
         minHeight: '200px',
         marginBottom: '30px',
-        '& h6.MuiTypography-subtitle2': {
-            fontSize: '1rem',
+        [theme.breakpoints.down('xs')]: {
+            textAlign: 'center',
+            minHeight: 0,
+            padding: '25px 0'
         },
+        '& h6.MuiTypography-subtitle2': {
+            fontSize: '1rem'
+        }
     },
     successInfo: {
         display: 'flex',
         flexDirection: 'row',
+        [theme.breakpoints.down('xs')]: {
+            alignItems: 'center'
+        }
     },
     successIcon: {
         fontSize: 30,
         marginRight: 25,
         '& > path': {
-            fill: '#27AE60',
-        },
+            fill: '#27AE60'
+        }
     },
     buttonBlock: {
+        display: 'flex',
+        justifyContent: 'center',
+        '& div': {
+            margin: '5px',
+            width: '20%',
+            [theme.breakpoints.down('md')]: {
+                width: '28%'
+            },
+            [theme.breakpoints.down('sm')]: {
+                width: '40%'
+            },
+            [theme.breakpoints.down('xs')]: {
+                width: '50%'
+            }
+        },
         '& button.MuiButtonBase-root': {
             width: '100%',
             borderRadius: 5,
-            background: theme.palette.primary.createAdBtnColor,
-        },
-    },
+            background: theme.palette.primary.createAdBtnColor
+        }
+    }
 }));

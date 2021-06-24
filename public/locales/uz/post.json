@@ -1,16 +1,19 @@
 {
   "number_not_available": "Hozir raqam mavjud emas",
-  "show_phone": "Raqamni korsatish",
+  "show_phone": "Raqamni ko'rsatish",
   "category": "Toifa",
   "searchCategory": "Toifani qidirish",
   "selectCategory": "Toifani tanlang",
   "howToCreatePost": "E'lon yaratish",
   "howToCreateAuc": "Auksion yaratish",
   "howToCreateExAuc": "Kengaytirilgan auksion yaratish",
+  "create_post": "E'lon yaratish",
+  "create_auc": "Auksion yaratish",
+  "create_exauc": "Kengaytirilgan auksion yaratish",
   "trainingVideo": "O'quv videosi",
-  "maxFunctionality": "Maksimal funktsional imkoniyatlaridan foydalaning",
+  "maxFunctionality": "Maksimal funksional imkoniyatlaridan foydalaning",
   "tradeToGetBetter": "O'zingiz uchun yaxshiroq narxni olish uchun savdo qiling",
-  "postFree": "Mahsulotlarni yoki xizmatlarni bepul joylashtiring",
+  "postFree": "Maxsulot yoki xizmatlarni bepul joylashtiring",
   "postType": "E'lon turi",
   "fill": "To'ldirish",
   "check": "Tekshirish",
@@ -19,7 +22,7 @@
   "priceDescContacts": "Narxi, tavsif va aloqalar",
   "next": "Keyingi",
   "photos": "Rasmlar",
-  "congratulations": "Tabriklimiz!",
+  "congratulations": "Tabriklaymiz!",
   "automobile": "Avtomobil",
-  "publish": "Nashr qilmoq"
+  "publish": "E'lon berish"
 }

@@ -1,6 +1,6 @@
 import {FC} from 'react';
 import {useStyles} from './useStyles';
-import {FormControl, InputLabel, TextField} from '@material-ui/core';
+import {FormControl, InputLabel, TextField, Typography} from '@material-ui/core';
 
 type FromToInputsPropsType = {
     labelTxt: string,
@@ -30,12 +30,15 @@ export const FromToInputs: FC<FromToInputsPropsType> = (props) => {
     const classes = useStyles();
     return (
         <FormControl className={classes.root}>
-            <InputLabel>
-                {labelTxt}
-            </InputLabel>
+            <label>
+                <Typography variant='subtitle1' gutterBottom>
+                    {labelTxt}
+                </Typography>
+            </label>
             <div className='from-to-wrapper'>
                 <TextField
                     size='small'
+                    color='secondary'
                     variant='outlined'
                     disabled={disabled}
                     onChange={handleInput}
@@ -45,6 +48,7 @@ export const FromToInputs: FC<FromToInputsPropsType> = (props) => {
                 />
                 <TextField
                     size='small'
+                    color='secondary'
                     variant='outlined'
                     disabled={disabled}
                     onChange={handleInput}

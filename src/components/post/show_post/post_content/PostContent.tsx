@@ -93,6 +93,10 @@ export const PostContent: FC<PostContentTypes> = (props) => {
         }
     };
 
+    const handleDrawerShow = (value) => () => {
+        setDrawerOpen(value);
+    };
+
     const parameterItems = Object.keys(model ?? {}).reduce((items, key, i) => {
         const isBooleanKey = booleanFields.some(f => f === key);
 

@@ -9,6 +9,7 @@ import {CustomFormikProvider} from '@src/components/elements/custom_formik_provi
 import {CustomButton} from '@src/components/elements/custom_button/CustomButton';
 import {excludeCtgrsForYear} from '@src/components/post/create_post/form_page/params_form/categories_forms/transport_params/TransportParams';
 import {FromToInputs} from '@src/components/elements/from_to_inputs/FromToInputs';
+import {ActionButtons} from '@src/components/post/search_post/search_form/ActionButtons';
 
 type SearchRegularPropsType = {
     type,
@@ -152,9 +153,8 @@ export const SearchTransport: FC<SearchRegularPropsType> = (props) => {
                         />
                     </Grid>
                 )}
-                <Grid item container justify='flex-end' xs={12} className='actions-btns'>
-                    <CustomButton onClick={handleReset}>{t('filters:reset')}</CustomButton>
-                    <CustomButton type='submit'>{t('filters:apply')}</CustomButton>
+                <Grid item container justify='flex-end' xs={12}>
+                    <ActionButtons handleReset={handleReset}/>
                 </Grid>
             </Grid>
         </CustomFormikProvider>

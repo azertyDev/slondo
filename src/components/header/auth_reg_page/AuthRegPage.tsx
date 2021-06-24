@@ -410,28 +410,18 @@ export const AuthRegPage: FC = () => {
                                     </div>
                                     <div className='agreements-txt'>
                                         {!isSignInTab
-                                         ? <Typography className="reg-agreement" variant="body2">
-                                             {`${t('agreement.firstPart')} `}
-                                             <Link href="#">
-                                                 <a>{`${t('agreement.secondPart')} `}</a>
-                                             </Link>
-                                             {`${t('agreement.thirdPart')} `}
-                                             <Link href="#">
-                                                 <a>{`${t('agreement.fourthPart')}`}</a>
-                                             </Link>
-                                             {locale === 'uz' && ` ${t('agreement.fifthPart')}`}
-                                         </Typography>
-                                         : <Typography className="reg-agreement" variant="body2">
-                                             Нажимая кнопку Войти вы принимаете условия {' '}
-                                             <Link href="#">
-                                                 <a>лицензионного соглашения</a>
-                                             </Link>
-                                             {` ${t('agreement.thirdPart')} `}
-                                             <Link href="#">
-                                                 <a>политики конфиденциальности</a>
-                                             </Link>
-                                             {locale === 'uz' && ` ${t('agreement.fifthPart')}`}
-                                         </Typography>}
+                                            ? <Typography className="reg-agreement" variant="body2">
+                                                {`${t('agreement.firstPart')} `}
+                                                <Link href="#">
+                                                    <a>{`${t('agreement.secondPart')} `}</a>
+                                                </Link>
+                                            </Typography>
+                                            : <Typography className="reg-agreement" variant="body2">
+                                                {t('agreement.zeroPart')}{' '}
+                                                <Link href="#">
+                                                    <a>{`${t('agreement.secondPart')} `}</a>
+                                                </Link>
+                                            </Typography>}
                                     </div>
                                 </div>
                             </div>
