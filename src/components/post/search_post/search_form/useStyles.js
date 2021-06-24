@@ -1,4 +1,4 @@
-import {makeStyles} from '@material-ui/core/styles'
+import {makeStyles} from '@material-ui/core/styles';
 
 export const useStyles = makeStyles(() => ({
     root: {
@@ -16,17 +16,22 @@ export const useStyles = makeStyles(() => ({
         }
     },
     actionButtons: {
+        width: '100%',
+        display: 'flex',
+        justifyContent: props => props.isXs ? 'center' : 'flex-end',
+        marginTop: '20px',
         '& button': {
-            width: '140px',
+            width: props => props.isXs ? '100px' : '140px',
             '&:first-child': {
                 marginRight: 20,
+                background: '#c9c9c9'
+
+            },
+            '&:last-child': {
                 background: '#7DBCF6',
                 '& .MuiTypography-subtitle1': {
                     color: '#fff'
                 }
-            },
-            '&:last-child': {
-                background: '#c9c9c9'
             }
         }
     }

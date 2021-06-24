@@ -350,25 +350,25 @@ export const SearchForm: FC<SearchFormPropsType> = (props) => {
                         />
                     </Grid>
                 )}
-                <Grid container item xs={12} spacing={1}>
-                    <Grid item xs={4}>
-                        <FromToInputs
-                            disabled={values.free}
-                            handleInput={handleNumericInput}
-                            labelTxt={t(mainCategoryName === 'job' ? 'salary' : 'cost')}
-                            firstInputProps={{
-                                value: values.price_from,
-                                name: 'price_from',
-                                placeholder: t(`filters:price_from`)
-                            }}
-                            secondInputProps={{
-                                value: values.price_to,
-                                name: 'price_to',
-                                placeholder: t(`filters:price_to`)
-                            }}
-                        />
-                    </Grid>
-                    <Grid item container alignItems='flex-end' xs={2}>
+                <Grid item xs={12} sm={6} md={4}>
+                    <FromToInputs
+                        disabled={values.free}
+                        handleInput={handleNumericInput}
+                        labelTxt={t(mainCategoryName === 'job' ? 'salary' : 'cost')}
+                        firstInputProps={{
+                            value: values.price_from,
+                            name: 'price_from',
+                            placeholder: t(`filters:price_from`)
+                        }}
+                        secondInputProps={{
+                            value: values.price_to,
+                            name: 'price_to',
+                            placeholder: t(`filters:price_to`)
+                        }}
+                    />
+                </Grid>
+                <Grid container item xs={12} sm={4} spacing={1}>
+                    <Grid item container alignItems='flex-end' xs={8}>
                         <CheckboxSelect
                             labelText={t('free')}
                             checked={values.free}
@@ -377,7 +377,7 @@ export const SearchForm: FC<SearchFormPropsType> = (props) => {
                         />
                     </Grid>
                     {values.post_type?.name === 'auc' && (
-                        <Grid item container alignItems='flex-end' xs={2}>
+                        <Grid item container alignItems='flex-end' xs={5}>
                             <CheckboxSelect
                                 labelText={t('archive')}
                                 checked={values.archive}

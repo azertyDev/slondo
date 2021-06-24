@@ -209,28 +209,30 @@ export const SearchApartments: FC<CommonFiltersType> = (props) => {
                             items={filters.repair}
                         />
                     </Grid>
-                    <Grid item container xs={2} alignItems='flex-end'>
-                        <CheckboxSelect
-                            name='furnished'
-                            labelText={t('filters:furnished')}
-                            checked={values.furnished}
-                            onChange={handleCheckbox}
-                        />
-                    </Grid>
-                    {isRent && (
-                        <Grid item container xs={4} alignItems='flex-end'>
+                    <Grid item container xs={12} sm={8} spacing={1}>
+                        {isRent && (
+                            <Grid item container xs={6} md={4} alignItems='flex-end'>
+                                <CheckboxSelect
+                                    name='with_pledge'
+                                    labelText={t('filters:with_pledge')}
+                                    checked={values.with_pledge}
+                                    onChange={handleCheckbox}
+                                />
+                            </Grid>
+                        )}
+                        <Grid item container xs={6} md={4} alignItems='flex-end'>
                             <CheckboxSelect
-                                name='with_pledge'
-                                labelText={t('filters:with_pledge')}
-                                checked={values.with_pledge}
+                                name='furnished'
+                                labelText={t('filters:furnished')}
+                                checked={values.furnished}
                                 onChange={handleCheckbox}
                             />
                         </Grid>
-                    )}
+                    </Grid>
                 </Grid>
             </ShowHide>
-            <Grid item container justify='flex-end' xs={12}>
-                <ActionButtons handleReset={handleReset}/>
+            <Grid item container xs={12}>
+                <ActionButtons handleReset={handleReset} />
             </Grid>
         </CustomFormikProvider>
     );

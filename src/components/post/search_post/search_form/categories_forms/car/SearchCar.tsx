@@ -250,8 +250,8 @@ export const SearchCar: FC<CommonFiltersType> = (props) => {
                     </Grid>
                 </Grid>
             </ShowHide>
-            <Grid item container justify='flex-end' xs={12} >
-                <ActionButtons handleReset={handleReset}/>
+            <Grid item container xs={12}>
+                <ActionButtons handleReset={handleReset} />
             </Grid>
         </CustomFormikProvider>
     );

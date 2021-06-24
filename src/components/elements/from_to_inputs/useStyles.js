@@ -2,18 +2,14 @@ import {makeStyles} from '@material-ui/core/styles';
 
 export const useStyles = makeStyles(() => ({
     root: {
-        '& label': {
-
-        },
+        width: '100%',
         '& div.from-to-wrapper': {
             display: 'flex',
-            justifyContent: 'flex-end',
+            justifyContent: 'space-between',
             '& div.MuiTextField-root': {
+                width: '49%',
                 '& input': {
                     borderRadius: '5px'
-                },
-                '&:first-child': {
-                    marginRight: '8px'
                 }
             }
         }

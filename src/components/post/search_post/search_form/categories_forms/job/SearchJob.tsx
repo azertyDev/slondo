@@ -27,7 +27,7 @@ export const SearchJob: FC<SearchRegularPropsType> = (props) => {
         handleReset
     } = props;
 
-    const isVacancy = subcategory.name === 'vacancies';
+    const isVacancy = subcategory?.name === 'vacancies';
 
     const {t} = useTranslation('filters');
 
@@ -124,8 +124,8 @@ export const SearchJob: FC<SearchRegularPropsType> = (props) => {
                         onChange={handleCheckbox}
                     />
                 </Grid>
-                <Grid item container justify='flex-end' xs={12}>
-                    <ActionButtons handleReset={handleReset}/>
+                <Grid item container xs={12}>
+                    <ActionButtons handleReset={handleReset} />
                 </Grid>
             </Grid>
         </CustomFormikProvider>

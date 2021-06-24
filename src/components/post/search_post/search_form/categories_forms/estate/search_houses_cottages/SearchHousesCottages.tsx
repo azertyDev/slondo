@@ -202,28 +202,30 @@ export const SearchHousesCottages: FC<CommonFiltersType> = (props) => {
                             items={filters.heating}
                         />
                     </Grid>
-                    <Grid item container xs={2} alignItems='center'>
-                        <CheckboxSelect
-                            name='furnished'
-                            labelText={t('filters:furnished')}
-                            checked={values.furnished}
-                            onChange={handleCheckbox}
-                        />
-                    </Grid>
-                    {isRent && (
-                        <Grid item container xs={4} alignItems='center'>
+                    <Grid item container xs={12} sm={8} spacing={1}>
+                        {isRent && (
+                            <Grid item container xs={12} sm={4} alignItems='flex-end'>
+                                <CheckboxSelect
+                                    name='with_pledge'
+                                    labelText={t('filters:with_pledge')}
+                                    checked={values.with_pledge}
+                                    onChange={handleCheckbox}
+                                />
+                            </Grid>
+                        )}
+                        <Grid item container xs={12} sm={8} alignItems='flex-end'>
                             <CheckboxSelect
-                                name='with_pledge'
-                                labelText={t('filters:with_pledge')}
-                                checked={values.with_pledge}
+                                name='furnished'
+                                labelText={t('filters:furnished')}
+                                checked={values.furnished}
                                 onChange={handleCheckbox}
                             />
                         </Grid>
-                    )}
+                    </Grid>
                 </Grid>
             </ShowHide>
-            <Grid item container justify='flex-end' xs={12}>
-                <ActionButtons handleReset={handleReset}/>
+            <Grid item container xs={12}>
+                <ActionButtons handleReset={handleReset} />
             </Grid>
         </CustomFormikProvider>
     );

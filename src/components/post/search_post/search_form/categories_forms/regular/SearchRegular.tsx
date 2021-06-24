@@ -60,8 +60,8 @@ export const SearchRegular: FC<SearchRegularPropsType> = (props) => {
                     },
                     true
                 )}
-                <Grid item container justify='flex-end' xs={12}>
-                    <ActionButtons handleReset={handleReset}/>
+                <Grid item container xs={12}>
+                    <ActionButtons handleReset={handleReset} />
                 </Grid>
             </Grid>
         </CustomFormikProvider>

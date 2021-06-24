@@ -39,83 +39,43 @@ export const SiteServices: FC<PaymentDeliveryPropsType> = (props) => {
             spacing={1}
             className={classes.root}
         >
+            <Grid item xs={12}>
+                <Typography variant='subtitle1'>
+                    Сервис
+                </Typography>
+            </Grid>
             {!isAuction && (
                 <>
                     {hasSafeDeal && (
                         <Grid
                             item
+                            xs={12}
+                            sm={4}
                             container
                             alignItems="center"
-                            xs={iconMode ? 4 : 12}
                         >
-                            <Grid
-                                item
-                                xs={iconMode ? 12 : 3}
-                                container
-                                alignItems="center"
-                                justify='center'
-                            >
-                                <ServiceItem
-                                    icon={<SafeIcon />}
-                                    serviceText={t('common:safe_deal')}
-                                    handleCheckbox={handleCheckbox('safe_deal')}
-                                    checked={values.safe_deal}
-                                />
-                            </Grid>
-                            {!iconMode && (
-                                <Grid
-                                    item
-                                    xs={9}
-                                    className='payment-delivery'
-                                >
-                                    <Help className="question-mark"/>
-                                    <Typography variant="subtitle2">
-                                        Примечание: При подключении услуги «Безопасный
-                                        торг». Ваша сделка защищена. Стоимость
-                                        услуги составляет n%.&nbsp;
-                                        <a href="#">
-                                        <span className="safe-auction-rules">
-                                            {t('common:safe_deal_rules')}
-                                        </span>
-                                        </a>
-                                    </Typography>
-                                </Grid>
-                            )}
+                            <ServiceItem
+                                icon={<SafeIcon />}
+                                serviceText={t('common:safe_deal')}
+                                handleCheckbox={handleCheckbox('safe_deal')}
+                                checked={values.safe_deal}
+                            />
                         </Grid>
                     )}
                     {hasExchange && (
                         <Grid
-                            container
                             item
+                            xs={12}
+                            sm={4}
+                            container
                             alignItems="center"
-                            xs={iconMode ? 4 : 12}
                         >
-                            <Grid
-                                item
-                                xs={iconMode ? 12 : 3}
-                                container
-                                alignItems="center"
-                            >
-                                <ServiceItem
-                                    icon={<ExchangeIcon />}
-                                    serviceText={t('common:exchange')}
-                                    checked={values.exchange}
-                                    handleCheckbox={handleCheckbox('exchange')}
-                                />
-                            </Grid>
-                            {!iconMode && (
-                                <Grid
-                                    item
-                                    xs={9}
-                                    className='payment-delivery'
-                                >
-                                    <Help className="question-mark"/>
-                                    <Typography variant="subtitle2">
-                                        Примечание: Вы принимаете предложения от
-                                        других пользователей на обмен.
-                                    </Typography>
-                                </Grid>
-                            )}
+                            <ServiceItem
+                                icon={<ExchangeIcon />}
+                                serviceText={t('common:exchange')}
+                                checked={values.exchange}
+                                handleCheckbox={handleCheckbox('exchange')}
+                            />
                         </Grid>
                     )}
                 </>
@@ -123,44 +83,17 @@ export const SiteServices: FC<PaymentDeliveryPropsType> = (props) => {
             {hasDelivery && (
                 <Grid
                     item
+                    xs={12}
+                    sm={4}
                     container
                     alignItems="center"
-                    xs={iconMode ? 4 : 12}
                 >
-                    <Grid
-                        item
-                        xs={iconMode ? 12 : 3}
-                        container
-                        alignItems="center"
-                    >
-                        <ServiceItem
-                            icon={<DeliveryIcon />}
-                            serviceText={t('common:delivery')}
-                            checked={values.delivery}
-                            handleCheckbox={handleCheckbox('delivery')}
-                        />
-                    </Grid>
-                    {!iconMode && (
-                        <Grid
-                            item
-                            xs={9}
-                            className='payment-delivery'
-                        >
-                            <Help className="question-mark" />
-                            <Typography variant="subtitle2">
-                                Примечание: Доставка осуществляется
-                                за Ваш счет. В случае невыполнения доставки,
-                                Вы можете быть заблокированы.&nbsp;
-                                <Link href="#">
-                                    <a>
-                                    <span className="safe-auction-rules">
-                                        {t('common:delivery_rules')}
-                                    </span>
-                                    </a>
-                                </Link>
-                            </Typography>
-                        </Grid>
-                    )}
+                    <ServiceItem
+                        icon={<DeliveryIcon />}
+                        serviceText={t('common:delivery')}
+                        checked={values.delivery}
+                        handleCheckbox={handleCheckbox('delivery')}
+                    />
                 </Grid>
             )}
         </Grid>
