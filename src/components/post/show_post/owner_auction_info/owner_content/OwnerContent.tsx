@@ -117,11 +117,11 @@ export const OwnerContent: FC<OwnerPropsType> = (props) => {
                 <Container maxWidth='xl'>
                     <Box className='safe-deal-block' p='30px'>
                         <Grid container justify='space-between'>
-                            <Grid item xs={5}>
+                            <Grid item xs={6}>
                                 Grid 5
                             </Grid>
                             <Divider orientation="vertical" flexItem />
-                            <Grid item xs={5}>
+                            <Grid item xs={6}>
                                 Grid 5
                             </Grid>
                         </Grid>

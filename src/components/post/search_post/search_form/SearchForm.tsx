@@ -304,7 +304,7 @@ export const SearchForm: FC<SearchFormPropsType> = (props) => {
     return (
         <div className={classes.root}>
             <Grid container spacing={1}>
-                <Grid item xs={4}>
+                <Grid item xs={12} sm={6} md={4}>
                     <DropDownSelect
                         ns='categories'
                         name='category'
@@ -315,7 +315,7 @@ export const SearchForm: FC<SearchFormPropsType> = (props) => {
                     />
                 </Grid>
                 {!!values.category?.subcategory && (
-                    <Grid item xs={4}>
+                    <Grid item xs={12} sm={6} md={4}>
                         <DropDownSelect
                             ns='categories'
                             name='subcategory'
@@ -327,7 +327,7 @@ export const SearchForm: FC<SearchFormPropsType> = (props) => {
                     </Grid>
                 )}
                 {!!values.subcategory?.type && (
-                    <Grid item xs={4}>
+                    <Grid item xs={12} sm={6} md={4}>
                         <DropDownSelect
                             ns='categories'
                             name='type'
@@ -340,7 +340,7 @@ export const SearchForm: FC<SearchFormPropsType> = (props) => {
                     </Grid>
                 )}
                 {hasAuction && (
-                    <Grid item xs={4}>
+                    <Grid item xs={12} sm={6} md={4}>
                         <DeployedSelect
                             disableRequire
                             values={values}
@@ -388,16 +388,14 @@ export const SearchForm: FC<SearchFormPropsType> = (props) => {
                     )}
                 </Grid>
                 {!!mainCategoryName && (
-                    <Grid item xs={12}>
-                        <SiteServices
-                            t={t}
-                            iconMode
-                            isAuction={false}
-                            values={values}
-                            handleCheckbox={handleCheckbox}
-                            categoryName={mainCategoryName}
-                        />
-                    </Grid>
+                    <SiteServices
+                        t={t}
+                        iconMode
+                        isAuction={false}
+                        values={values}
+                        handleCheckbox={handleCheckbox}
+                        categoryName={mainCategoryName}
+                    />
                 )}
                 {getFiltersByCtgr()}
             </Grid>

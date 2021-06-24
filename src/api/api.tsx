@@ -12,7 +12,7 @@ const localServer = 'http://192.168.100.60/slondo/public/api/';
 
 const instance = Axios.create({
     withCredentials: true,
-    baseURL: localServer
+    baseURL: uztelecom
 });
 
 // export const socketIO = socketIOClient('http://192.168.100.60:8005');
@@ -22,7 +22,7 @@ const setTokenToHeader = () => {
     if (token) {
         return {
             headers: {
-                'Cross-Origin-Embedder-Polichrcy': 'require-corp',
+                'Cross-Origin-Embedder-Policy': 'require-corp',
                 'Cross-Origin-Opener-Policy': 'same-origin',
                 'Content-Type': 'application/json',
                 'Authorization': `Bearer ${token}`

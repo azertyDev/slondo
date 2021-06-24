@@ -54,7 +54,7 @@ export const SearchPost: FC<SearchPostsByFiltersPropsType> = (props) => {
         <MainLayout title={title} description={description} seoTxt={seoTxt}>
             <div className={classes.root}>
                 <Grid container spacing={2}>
-                    <Grid item xs={12} md={9}>
+                    <Grid item xs={12} sm={12} lg={9} zeroMinWidth>
                         {/*<Typography variant='h5'>*/}
                         {/*    {t('common:youLookingFor')}*/}
                         {/*</Typography>*/}

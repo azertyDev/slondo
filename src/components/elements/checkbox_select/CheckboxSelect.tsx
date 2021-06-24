@@ -34,7 +34,9 @@ export const CheckboxSelect: FC<CheckboxPropsType> = (props) => {
                     <Checkbox
                         name={name}
                         checked={checked}
-                        onChange={onChange} />
+                        onChange={onChange}
+                        color='secondary'
+                    />
                 }
                 disabled={disabled}
                 label={t(`${labelText ?? name}`)}

@@ -38,6 +38,7 @@ export const FromToInputs: FC<FromToInputsPropsType> = (props) => {
             <div className='from-to-wrapper'>
                 <TextField
                     size='small'
+                    color='secondary'
                     variant='outlined'
                     disabled={disabled}
                     onChange={handleInput}
@@ -47,6 +48,7 @@ export const FromToInputs: FC<FromToInputsPropsType> = (props) => {
                 />
                 <TextField
                     size='small'
+                    color='secondary'
                     variant='outlined'
                     disabled={disabled}
                     onChange={handleInput}

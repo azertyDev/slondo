@@ -1,10 +1,12 @@
 import {FC} from 'react';
 import {WithT} from 'i18next';
 import {Help} from '@material-ui/icons';
-import {Checkbox, Chip, Grid, Typography} from '@material-ui/core';
+import {Grid, Typography} from '@material-ui/core';
 import {DeliveryIcon, SafeIcon, ExchangeIcon} from '@src/components/elements/icons';
 import {site_services} from '@src/common_data/site_services';
 import {useStyles} from './useStyles';
+import {ServiceItem} from '@src/components/post/create_post/form_page/common_form/site_services/ServiceItem';
+import Link from 'next/link';
 
 
 type PaymentDeliveryPropsType = {
@@ -31,7 +33,12 @@ export const SiteServices: FC<PaymentDeliveryPropsType> = (props) => {
 
     const classes = useStyles();
     return (
-        <Grid container className={classes.root}>
+        <Grid
+            item
+            container
+            spacing={1}
+            className={classes.root}
+        >
             {!isAuction && (
                 <>
                     {hasSafeDeal && (
@@ -46,20 +53,14 @@ export const SiteServices: FC<PaymentDeliveryPropsType> = (props) => {
                                 xs={iconMode ? 12 : 3}
                                 container
                                 alignItems="center"
+                                justify='center'
                             >
-                                <Checkbox
-                                    color='primary'
+                                <ServiceItem
+                                    icon={<SafeIcon />}
+                                    serviceText={t('common:safe_deal')}
+                                    handleCheckbox={handleCheckbox('safe_deal')}
                                     checked={values.safe_deal}
-                                    onChange={handleCheckbox('safe_deal')}
                                 />
-                                <div className='icon-wrapper'>
-                                    <SafeIcon/>
-                                    <Typography variant="subtitle1">
-                                        <strong>
-                                            {t('common:safe_deal')}
-                                        </strong>
-                                    </Typography>
-                                </div>
                             </Grid>
                             {!iconMode && (
                                 <Grid
@@ -95,19 +96,12 @@ export const SiteServices: FC<PaymentDeliveryPropsType> = (props) => {
                                 container
                                 alignItems="center"
                             >
-                                <Checkbox
-                                    color='primary'
+                                <ServiceItem
+                                    icon={<ExchangeIcon />}
+                                    serviceText={t('common:exchange')}
                                     checked={values.exchange}
-                                    onChange={handleCheckbox('exchange')}
+                                    handleCheckbox={handleCheckbox('exchange')}
                                 />
-                                <div className='icon-wrapper'>
-                                    <ExchangeIcon/>
-                                    <Typography variant="subtitle1">
-                                        <strong>
-                                            {t('common:exchange')}
-                                        </strong>
-                                    </Typography>
-                                </div>
                             </Grid>
                             {!iconMode && (
                                 <Grid
@@ -139,19 +133,12 @@ export const SiteServices: FC<PaymentDeliveryPropsType> = (props) => {
                         container
                         alignItems="center"
                     >
-                        <Checkbox
-                            color='primary'
+                        <ServiceItem
+                            icon={<DeliveryIcon />}
+                            serviceText={t('common:delivery')}
                             checked={values.delivery}
-                            onChange={handleCheckbox('delivery')}
+                            handleCheckbox={handleCheckbox('delivery')}
                         />
-                        <div className='icon-wrapper'>
-                            <DeliveryIcon/>
-                            <Typography variant="subtitle1">
-                                <strong>
-                                    {t('common:delivery')}
-                                </strong>
-                            </Typography>
-                        </div>
                     </Grid>
                     {!iconMode && (
                         <Grid
@@ -159,16 +146,18 @@ export const SiteServices: FC<PaymentDeliveryPropsType> = (props) => {
                             xs={9}
                             className='payment-delivery'
                         >
-                            <Help className="question-mark"/>
+                            <Help className="question-mark" />
                             <Typography variant="subtitle2">
                                 Примечание: Доставка осуществляется
                                 за Ваш счет. В случае невыполнения доставки,
                                 Вы можете быть заблокированы.&nbsp;
-                                <a href="#">
+                                <Link href="#">
+                                    <a>
                                     <span className="safe-auction-rules">
                                         {t('common:delivery_rules')}
                                     </span>
-                                </a>
+                                    </a>
+                                </Link>
                             </Typography>
                         </Grid>
                     )}
