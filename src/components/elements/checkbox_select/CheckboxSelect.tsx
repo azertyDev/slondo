@@ -1,5 +1,5 @@
 import {FC} from 'react';
-import {Checkbox, FormControlLabel} from '@material-ui/core';
+import {Checkbox, FormControlLabel, Typography} from '@material-ui/core';
 import {SwitchBaseProps} from '@material-ui/core/internal/SwitchBase';
 import {useTranslation} from 'react-i18next';
 import {useStyles} from './useStyles';
@@ -26,7 +26,7 @@ export const CheckboxSelect: FC<CheckboxPropsType> = (props) => {
 
     const {t} = useTranslation(ns || 'filters');
 
-    const classes = useStyles();
+    const classes = useStyles({checked});
     return (
         <div className={classes.root}>
             <FormControlLabel
@@ -39,7 +39,11 @@ export const CheckboxSelect: FC<CheckboxPropsType> = (props) => {
                     />
                 }
                 disabled={disabled}
-                label={t(`${labelText ?? name}`)}
+                label={
+                    <Typography variant='subtitle1'>
+                        {t(`${labelText ?? name}`)}
+                    </Typography>
+                }
             />
         </div>
     )

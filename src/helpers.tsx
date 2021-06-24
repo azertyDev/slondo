@@ -55,9 +55,10 @@ export const getFieldsByFilters = (props: GetFieldsByFiltersProps, multiple?: bo
                         return (
                             <Grid
                                 item
-                                key={key}
-                                sm={4}
                                 xs={12}
+                                sm={6}
+                                md={4}
+                                key={key}
                             >
                                 <Typography variant="subtitle1">
                                     <strong>
@@ -81,9 +82,10 @@ export const getFieldsByFilters = (props: GetFieldsByFiltersProps, multiple?: bo
                     <Fragment key={key}>
                         <Grid
                             item
-                            container
                             xs={12}
-                            sm={4}
+                            sm={6}
+                            md={4}
+                            container
                         >
                             <DropDownSelect
                                 name={key}

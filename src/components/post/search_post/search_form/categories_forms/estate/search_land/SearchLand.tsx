@@ -169,7 +169,7 @@ export const SearchLand: FC<CommonFiltersType> = (props) => {
                     />
                 </Grid>
             </Grid>
-            <Grid item container justify='flex-end' xs={12}>
+            <Grid item container xs={12}>
                 <ActionButtons handleReset={handleReset} />
             </Grid>
         </CustomFormikProvider>

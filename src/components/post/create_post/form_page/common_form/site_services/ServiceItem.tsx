@@ -25,7 +25,7 @@ export const ServiceItem: FC<ServiceItemPropsType> = (props) => {
                 <Checkbox
                     checked={checked}
                     onChange={handleCheckbox}
-                    color="secondary"
+                    color="primary"
                 />
             }
             label={

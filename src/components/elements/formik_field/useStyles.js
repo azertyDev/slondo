@@ -3,7 +3,6 @@ import {makeStyles} from '@material-ui/core/styles';
 export const useStyles = makeStyles((theme) => ({
     root: {
         width: '100%',
-        height: '55px',
         [theme.breakpoints.down('md')]: {
             '& input': {
                 padding: '11.5px 14px',

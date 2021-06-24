@@ -31,23 +31,33 @@ export const useStyles = makeStyles(() => ({
         }
     },
     serviceItem: {
+        margin: 0,
         padding: '8px',
         userSelect: 'none',
-        height: 'fit-content',
         background: '#FFFFFF',
-        boxShadow: '0px 0px 15px rgb(0 0 0 / 10%)',
+        height: 'fit-content',
         borderRadius: '100px',
-        margin: 0,
-        border: `1px solid ${props => props.checked ? '#AD66D5' : 'none'}`,
-        borderStyle: 'inset',
+        boxShadow: '0px 0px 15px rgb(0 0 0 / 10%)',
+        border: props => props.checked && '1px solid',
+        borderColor: props => props.checked && '#AD66D5',
         '& .MuiButtonBase-root': {
-            padding: 0
+            padding: 0,
+            '& svg path': {
+                fill: props => props.checked && '#AD66D5'
+            }
         },
         '& .MuiTypography-root': {
             display: 'flex',
             alignItems: 'center',
+            color:
+                props => props.checked && '#AD66D5',
             '& svg': {
-                margin: '0 5px'
+                margin: '0 5px',
+                width: 20,
+                height: 20,
+                '& path': {
+                    fill: props => props.checked && '#AD66D5'
+                }
             }
         }
     }

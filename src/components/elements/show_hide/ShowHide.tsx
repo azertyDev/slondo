@@ -22,7 +22,7 @@ export const ShowHide: FC<ShowHide> = (props) => {
 
     const classes = useStyles();
     return (
-        <Box my={2} className={`${classes.root} ${className}`}>
+        <Box mt={2} className={`${classes.root} ${className}`}>
             <div className='show-hide-txt'>
                 <Typography variant='subtitle1' onClick={handleShow}>
                     {showTxt}
