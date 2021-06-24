@@ -19,27 +19,15 @@ export const useStyles = makeStyles((theme) => ({
                 '&:hover:not(.Mui-disabled)': {
                     cursor: 'default'
                 }
+            }
+        },
+        '& button.nav-button': {
+            width: '250px',
+            [theme.breakpoints.down('sm')]: {
+                padding: '10px 50px'
             },
-            '& div.MuiAccordionDetails-root': {
-                display: 'block',
-                '& div.acc-content': {
-                    display: 'flex',
-                    flexDirection: 'column',
-                    marginBottom: '30px',
-                    '& div.submit-button-wrapper': {
-                        display: 'flex',
-                        justifyContent: 'flex-end',
-                        '& button.nav-button': {
-                            width: '250px',
-                            [theme.breakpoints.down('sm')]: {
-                                padding: '10px 50px'
-                            },
-                            '& > p': {
-                                color: theme.palette.primary.white
-                            }
-                        }
-                    }
-                }
+            '& > p': {
+                color: theme.palette.primary.white
             }
         }
     }
