@@ -2,7 +2,7 @@ import {FC} from 'react';
 import {Field} from 'formik';
 import {WithT} from 'i18next';
 import ReactInputMask from 'react-input-mask';
-import {FormControl, Grid, InputLabel, TextField, TextFieldProps, Typography} from '@material-ui/core';
+import {FormControl, Grid, TextField, TextFieldProps, Typography} from '@material-ui/core';
 import {isRequired} from '@src/helpers';
 import {useStyles} from './useStyles';
 
