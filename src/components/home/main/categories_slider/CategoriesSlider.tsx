@@ -24,7 +24,7 @@ export const CategoriesSlider: FC<WithT> = ({t}) => {
                         const categoryName = transformCyrillic(category.ru_name);
 
                             return (
-                                <Link href={`${location}/${categoryName}`}>
+                                <Link href={`${location}/${categoryName}`} key={category.id}>
                                 <a title={t(`categories:${category.name}`)}>
                                     <div className="category">
                                         <div className="bg-layer">

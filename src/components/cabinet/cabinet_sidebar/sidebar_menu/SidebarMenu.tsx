@@ -1,7 +1,6 @@
-import {FC} from 'react';
+import React, {FC} from 'react';
 import {List, ListItem, ListItemText} from '@material-ui/core';
 import {useRouter} from 'next/router';
-import {WithT} from 'i18next';
 import {cookies} from '@src/helpers';
 import {CustomBadge} from '@src/components/elements/custom_budge/CustomBadge';
 import {NotesIcon} from '@src/components/elements/icons/NotesIcon';
@@ -14,21 +13,21 @@ import {WalletIcon} from '@src/components/elements/icons/WalletIcon';
 import {ShoppingIcon} from '@src/components/elements/icons/ShoppingIcon';
 import {SettingsIcon} from '@src/components/elements/icons/SettingsIcon';
 import {PowerIcon} from '@src/components/elements/icons/PowerIcon';
-import {useDispatch} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import {signOutAction} from '@src/redux/slices/userSlice';
-import {UserInfo} from '@root/interfaces/Auth';
+import {RootState} from '@src/redux/rootReducer';
+import {useTranslation} from 'next-i18next';
 import {useStyles} from './useStyles';
 
-type SidebarMenuPropsType = {
-    user: UserInfo
-} & WithT
-
-export const SidebarMenu: FC<SidebarMenuPropsType> = ({t, user}) => {
+export const SidebarMenu: FC = () => {
+    const {t} = useTranslation('cabinet');
     const {
-        number_of_messages,
-        number_of_notifications,
-        number_of_purchase
-    } = user.observer;
+        observer: {
+            number_of_messages,
+            number_of_notifications,
+            number_of_purchase
+        }
+    } = useSelector((store: RootState) => store.user.info);
     const dispatch = useDispatch();
     const {push, pathname} = useRouter();
 
@@ -45,18 +44,6 @@ export const SidebarMenu: FC<SidebarMenuPropsType> = ({t, user}) => {
     const classes = useStyles();
     return (
         <div className={classes.root}>
-            <List component="nav" aria-label="cabinet menu" className='menu-item' disablePadding>
-                <CustomBadge badgeContent={0} color='error'>
-                    <ListItem
-                        button
-                        selected={pathname === '/cabinet/bannedPosts'}
-                        onClick={handleListItemClick('bannedPosts')}
-                        disableGutters
-                    >
-                        <ListItemText primary={t('cabinet:bannedPosts')} />
-                    </ListItem>
-                </CustomBadge>
-            </List>
             <List disablePadding component="nav" aria-label="cabinet menu" className='menu-item'>
                 <ListItem
                     button
@@ -99,7 +86,7 @@ export const SidebarMenu: FC<SidebarMenuPropsType> = ({t, user}) => {
                     </ListItem>
                 </CustomBadge>
             </List>
-            <List disablePadding component="nav" aria-label="cabinet menu" className='menu-item'>
+            <List disablePadding component="nav" aria-label="cabinet menu" className='menu-item row'>
                 <CustomBadge badgeContent={number_of_notifications} color='error'>
                     <ListItem
                         button
@@ -141,6 +128,7 @@ export const SidebarMenu: FC<SidebarMenuPropsType> = ({t, user}) => {
                         button
                         // selected={pathname === '/cabinet/paidServices'}
                         // onClick={handleListItemClick('paidServices')}
+                        disabled
                         disableGutters
                     >
                         <WalletIcon />
@@ -148,12 +136,13 @@ export const SidebarMenu: FC<SidebarMenuPropsType> = ({t, user}) => {
                     </ListItem>
                 </CustomBadge>
             </List>
-            <List disablePadding component="nav" aria-label="cabinet menu" className='menu-item'>
+            <List disablePadding component="nav" aria-label="cabinet menu" className='menu-item row'>
                 <ListItem
                     button
                     selected={pathname === '/cabinet/settings'}
                     onClick={handleListItemClick('settings')}
                     disableGutters
+                    className='list-item'
                 >
                     <SettingsIcon />
                     <ListItemText primary={t('cabinet:settings')} />
@@ -162,6 +151,7 @@ export const SidebarMenu: FC<SidebarMenuPropsType> = ({t, user}) => {
                     button
                     onClick={signOut}
                     disableGutters
+                    className='list-item'
                 >
                     <PowerIcon />
                     <ListItemText primary={t('cabinet:exit')} />

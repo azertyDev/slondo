@@ -22,7 +22,7 @@ export const SearchPost: FC<SearchPostsByFiltersPropsType> = (props) => {
         userLocation,
     } = props;
 
-    const {t} = useTranslation('filters');
+    const {t} = useTranslation(['filters', 'common']);
     const {user_location, categories, ...urlParams} = query;
 
     const translatedLocation = t(`locations:${userLocation?.city?.name ?? userLocation?.region?.name ?? 'uzbekistan'}`);

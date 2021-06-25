@@ -102,7 +102,7 @@ export const Top: FC<TopHeaderPropsType> = (props) => {
                                     </a>
                                 </Link>
                             </Grid>
-                            <Grid item md={2}>
+                            <Grid item md={2} container justify='center'>
                                 <Localization/>
                             </Grid>
                         </Grid>

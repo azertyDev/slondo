@@ -2,8 +2,9 @@ import makeStyles from '@material-ui/core/styles/makeStyles';
 
 export const useStyles = makeStyles((theme) => ({
     root: {
-        display: 'flex',
+        display: 'inline-flex',
         justifyContent: 'center',
+        height: 'fit-content',
         '& a': {
             textDecoration: 'none'
         },
