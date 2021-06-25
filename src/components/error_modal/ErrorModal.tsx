@@ -1,17 +1,15 @@
-import React, { FC } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { Modal, Typography, IconButton } from '@material-ui/core';
-import { RootState } from '@src/redux/rootReducer';
-import { resetErrorAction } from '@src/redux/slices/errorSlice';
-import { useStyles } from './useStyles';
-import { CloseIcon } from '@src/components/elements/icons';
-import { CustomButton } from '../elements/custom_button/CustomButton';
+import {FC} from 'react';
+import {useDispatch, useSelector} from 'react-redux';
+import {Modal, Typography, IconButton} from '@material-ui/core';
+import {RootState} from '@src/redux/rootReducer';
+import {resetErrorAction} from '@src/redux/slices/errorSlice';
+import {CloseIcon} from '@src/components/elements/icons';
+import {CustomButton} from '../elements/custom_button/CustomButton';
+import {useStyles} from './useStyles';
 
 export const ErrorModal: FC = () => {
-    const { isError, errorMsg } = useSelector(
-        (store: RootState) => store.error,
-    );
     const dispatch = useDispatch();
+    const {isError, errorMsg} = useSelector((store: RootState) => store.error);
 
     const onClose = () => {
         dispatch(resetErrorAction());
@@ -23,14 +21,14 @@ export const ErrorModal: FC = () => {
             <div className={classes.root}>
                 <div className="close-btn-wrapper" onClick={onClose}>
                     <IconButton>
-                        <CloseIcon />
+                        <CloseIcon/>
                     </IconButton>
                 </div>
                 <Typography className="error-text" variant="h6">
                     {errorMsg}
                 </Typography>
                 <Typography variant="subtitle1" color="initial">
-                    Что-то пошло не так... <br />
+                    Что-то пошло не так... <br/>
                     Свяжитесь с <span>службой поддержки</span> если у вас есть
                     вопросы
                 </Typography>

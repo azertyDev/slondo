@@ -97,7 +97,7 @@ export const defaultParamsSchema = object({
         .test(
             '',
             fieldIsRequired,
-            location => !!location && !!location.city.id
+            location => !!location && !!location?.city?.id
         )
 });
 

@@ -27,6 +27,7 @@ import {
 import {Location} from '@src/components/elements/location/Location';
 import {CustomButton} from '@src/components/elements/custom_button/CustomButton';
 import {HeaderSearchForm} from '@src/components/header/bottom/header_search_form/HeaderSearchForm';
+import {cookieOpts, cookies} from '@src/helpers';
 import {useStyles} from './useStyles';
 
 
@@ -39,12 +40,20 @@ export const Top: FC<TopHeaderPropsType> = (props) => {
     const {t, handleOpenModal, isAuth} = props;
 
     const trigger = useScrollTrigger();
-
     const {pathname} = useRouter();
-
     const [isOpen, setIsOpen] = useState(false);
-
     const isXsDown = useMediaQuery(useTheme().breakpoints.down('xs'));
+
+    const handleSelectLocation = ({region, city, district}) => {
+        if (region) {
+            const userLocation: any = {region};
+            if (city) userLocation.city = city;
+            if (district) userLocation.district = district;
+            cookies.set('user_location', userLocation, cookieOpts);
+        } else {
+            cookies.remove('user_location', {path: '/'});
+        }
+    };
 
     const classes = useStyles();
     return (
@@ -53,7 +62,7 @@ export const Top: FC<TopHeaderPropsType> = (props) => {
                 <div className={classes.root}>
                     <Grid container justify="space-between" alignItems="center">
                         <Grid item md={6}>
-                            <Location/>
+                            <Location handleSelectLocation={handleSelectLocation}/>
                         </Grid>
                         <Grid
                             item

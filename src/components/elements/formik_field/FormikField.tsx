@@ -2,7 +2,7 @@ import {FC} from 'react';
 import {Field} from 'formik';
 import {WithT} from 'i18next';
 import ReactInputMask from 'react-input-mask';
-import {FormControl, Grid, InputLabel, TextField, TextFieldProps, Typography} from '@material-ui/core';
+import {FormControl, Grid, TextField, TextFieldProps, Typography} from '@material-ui/core';
 import {isRequired} from '@src/helpers';
 import {useStyles} from './useStyles';
 
@@ -40,30 +40,30 @@ export const FormikField: FC<CustomFormikFieldPropsType> = (props) => {
                             </label>
                         )}
                         {props.type === 'tel'
-                            ? <ReactInputMask
-                                alwaysShowMask
-                                {...field}
-                                mask='+\9\98(99) 999 99 99'
-                            >
-                                {() => <TextField
-                                    fullWidth
-                                    name={name}
-                                    focused={false}
-                                    variant="outlined"
-                                    size='small'
-                                    className={errorMsg ? 'error-border' : ''}
-                                />}
-                            </ReactInputMask>
-                            : <TextField
-                                fullWidth
-                                name={name}
-                                {...field}
-                                {...otherProps}
-                                focused={false}
-                                variant="outlined"
-                                size='small'
-                                className={errorMsg ? 'error-border' : ''}
-                            />}
+                         ? <ReactInputMask
+                             alwaysShowMask
+                             {...field}
+                             mask='+\9\98(99) 999 99 99'
+                         >
+                             {() => <TextField
+                                 fullWidth
+                                 name={name}
+                                 focused={false}
+                                 variant="outlined"
+                                 size='small'
+                                 className={errorMsg ? 'error-border' : ''}
+                             />}
+                         </ReactInputMask>
+                         : <TextField
+                             fullWidth
+                             name={name}
+                             {...field}
+                             {...otherProps}
+                             focused={false}
+                             variant="outlined"
+                             size='small'
+                             className={errorMsg ? 'error-border' : ''}
+                         />}
                         <Grid container className='helpers-content'>
                             {errorMsg && (
                                 <Grid item xs={limit ? 6 : 12}>

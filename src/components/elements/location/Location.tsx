@@ -3,16 +3,20 @@ import {Typography} from '@material-ui/core';
 import {LocationIcon} from '@src/components/elements/icons';
 import {LocationModal} from './LocationModal';
 import {useTranslation} from 'next-i18next';
-import {cookieOpts, cookies} from '@src/helpers';
+import {cookies} from '@src/helpers';
 import {useSelector} from 'react-redux';
 import {RootState} from '@src/redux/rootReducer';
 import {useModal} from '@src/hooks/useModal';
 import {useStyles} from './useStyles';
 
+type LocationProps = {
+    handleSelectLocation: (loc) => void
+};
 
-export const Location: FC = () => {
+export const Location: FC<LocationProps> = ({handleSelectLocation}) => {
     const {t} = useTranslation('locations');
     const userLocation = cookies.get('user_location');
+    const allLocations = useSelector((store: RootState) => store.locations.data);
 
     const initLocation = {
         region: null,
@@ -20,9 +24,11 @@ export const Location: FC = () => {
         district: null
     };
 
-    const locationsFromStore = useSelector((store: RootState) => store.locations.data);
-    const separatedLocations = separateByThree(locationsFromStore);
-    const {modalOpen: locationModalOpen, handleModalOpen: handleLocationModalOpen, handleModalClose: handleLocationModalClose} = useModal();
+    const {
+        modalOpen: locationModalOpen,
+        handleModalOpen: handleLocationModalOpen,
+        handleModalClose: handleLocationModalClose
+    } = useModal();
 
     const [locations, setLocations] = useState([]);
     const [selectedLocation, setSelectedLocation] = useState(initLocation);
@@ -32,7 +38,7 @@ export const Location: FC = () => {
     const locationsTxt = `${district ? `${t(district.name)}` : ''}${city ? district ? `, ${t(city.name)}` : t(city.name) : ''}${region ? city ? `, ${t(region.name)}` : t(region.name) : ''}`;
     const prevLocation = hasRegion ? `${t(`${city?.name ?? region.name}`)}` : t(`allUzb`);
 
-    const currentCities = locationsFromStore.find(loc => loc.id === region?.id)?.cities;
+    const currentCities = allLocations.find(loc => loc.id === region?.id)?.cities;
     const currentDistricts = currentCities?.find(({id, district}) => {
         if (district.length) return id === city?.id;
     })?.district;
@@ -45,42 +51,32 @@ export const Location: FC = () => {
                         : {district: {id: loc.id, name: loc.name}};
 
         setSelectedLocation({...selectedLocation, ...value});
-        (loc.cities || loc.district?.length) && setLocations(separateByThree(loc.cities ?? loc.district));
+        (loc.cities || loc.district?.length) && setLocations(loc.cities ?? loc.district);
     };
 
     const handleModalOpen = () => {
-        region && (
-            setLocations(separateByThree(currentDistricts ?? currentCities ?? locationsFromStore))
-        );
         handleLocationModalOpen();
+        region && setLocations(currentDistricts ?? currentCities ?? allLocations);
     };
 
     const handleClose = () => {
         if (userLocation) {
             setSelectedLocation(userLocation);
         } else {
-            setLocations(separatedLocations);
+            setLocations(allLocations);
             setSelectedLocation(initLocation);
         }
         handleLocationModalClose();
     };
 
     const handleChoiceLocation = () => {
-        if (region) {
-            const userLocation: any = {region};
-            if (city) userLocation.city = city;
-            if (district) userLocation.district = district;
-
-            cookies.set('user_location', userLocation, cookieOpts);
-        } else {
-            cookies.remove('user_location', {path: '/'});
-        }
+        handleSelectLocation(selectedLocation);
         handleLocationModalClose();
     };
 
     const toPrevLocation = () => {
         if (currentDistricts) {
-            const cities = separateByThree(locationsFromStore.find(loc => loc.id === region.id).cities);
+            const cities = allLocations.find(loc => loc.id === region.id).cities;
             setLocations(cities);
             setSelectedLocation({
                 ...selectedLocation,
@@ -88,18 +84,21 @@ export const Location: FC = () => {
                 district: null
             });
         } else {
-            setLocations(separatedLocations);
+            setLocations(allLocations);
             setSelectedLocation(initLocation);
         }
     };
 
     useEffect(() => {
-        userLocation && setSelectedLocation(userLocation);
+        if (userLocation && !(region || city || district)) {
+            setSelectedLocation(userLocation);
+            handleSelectLocation(userLocation);
+        }
     }, []);
 
     useEffect(() => {
-        setLocations(separatedLocations);
-    }, [locationsFromStore]);
+        setLocations(allLocations);
+    }, [allLocations]);
 
     const classes = useStyles();
     return (
@@ -124,14 +123,4 @@ export const Location: FC = () => {
             />
         </>
     );
-
-    function separateByThree(locations): any {
-        return Array.from({length: 3}).reduce((acc: any, _, i) => {
-            const columnLen = Math.ceil(locations.length / 3);
-            const endThreshold = columnLen * (i + 1);
-            const startThreshold = endThreshold - columnLen;
-            acc.push([...locations.slice(startThreshold, endThreshold)]);
-            return acc;
-        }, []);
-    }
 };

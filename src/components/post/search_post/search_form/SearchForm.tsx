@@ -34,7 +34,8 @@ export type CommonFiltersType = {
     filters,
     urlParams,
     isRent?: boolean,
-    handleReset?: () => void
+    handleReset: () => void,
+    sameWithUrlCtgr: boolean
 };
 
 type SearchFormPropsType = {
@@ -103,6 +104,8 @@ export const SearchForm: FC<SearchFormPropsType> = (props) => {
 
     const {category, subcategory, type, ...commonVals} = values;
 
+    const sameWithUrlCtgr = category?.name === ctgr?.name && subcategory?.name === subctgr?.name && type?.name === typeCtgr?.name;
+
     const isRent = type?.id === 2 || type?.id === 3;
 
     const mainCategoryName: string = category?.name ?? '';
@@ -156,16 +159,18 @@ export const SearchForm: FC<SearchFormPropsType> = (props) => {
                     filters={filtersByCtgr}
                     handleReset={handleReset}
                     urlParams={urlFiltersParams}
+                    sameWithUrlCtgr={sameWithUrlCtgr}
                 />;
             case 'transport':
                 return <SearchTransport
                     type={type}
                     category={category}
                     subcategory={subcategory}
-                    onSubmit={onSubmit}
                     filters={filtersByCtgr}
                     urlParams={urlFiltersParams}
+                    onSubmit={onSubmit}
                     handleReset={handleReset}
+                    sameWithUrlCtgr={sameWithUrlCtgr}
                 />;
             case 'estate':
                 return <SearchEstate
@@ -175,6 +180,7 @@ export const SearchForm: FC<SearchFormPropsType> = (props) => {
                     handleReset={handleReset}
                     urlParams={urlFiltersParams}
                     subcategoryName={subcategoryName}
+                    sameWithUrlCtgr={sameWithUrlCtgr}
                 />;
             case 'job':
                 return <SearchJob
@@ -185,6 +191,7 @@ export const SearchForm: FC<SearchFormPropsType> = (props) => {
                     filters={filtersByCtgr}
                     urlParams={urlFiltersParams}
                     handleReset={handleReset}
+                    sameWithUrlCtgr={sameWithUrlCtgr}
                 />;
             default:
                 return <SearchRegular
@@ -195,6 +202,7 @@ export const SearchForm: FC<SearchFormPropsType> = (props) => {
                     filters={filtersByCtgr}
                     handleReset={handleReset}
                     urlParams={urlFiltersParams}
+                    sameWithUrlCtgr={sameWithUrlCtgr}
                 />;
         }
     };
@@ -367,8 +375,8 @@ export const SearchForm: FC<SearchFormPropsType> = (props) => {
                         }}
                     />
                 </Grid>
-                <Grid container item xs={12} sm={6} spacing={1}>
-                    <Grid item container alignItems='flex-end' xs={4}>
+                <Grid container item xs={12} sm={4} spacing={1}>
+                    <Grid item container alignItems='flex-end' xs={8}>
                         <CheckboxSelect
                             labelText={t('free')}
                             checked={values.free}
@@ -377,7 +385,7 @@ export const SearchForm: FC<SearchFormPropsType> = (props) => {
                         />
                     </Grid>
                     {values.post_type?.name === 'auc' && (
-                        <Grid item container alignItems='flex-end' xs={4}>
+                        <Grid item container alignItems='flex-end' xs={5}>
                             <CheckboxSelect
                                 labelText={t('archive')}
                                 checked={values.archive}

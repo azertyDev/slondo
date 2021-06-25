@@ -10,6 +10,8 @@ import {RootState} from '@src/redux/rootReducer';
 import {fetchLocations} from '@src/redux/slices/locationsSlice';
 import {cookies} from '@src/helpers';
 import {useRouter} from 'next/router';
+import {uzCardAPI} from '@src/api/api';
+import {setUserCardAction, resetUserCardAction} from '@src/redux/slices/userCardSlice';
 import {useStyles} from './useStyles';
 // import {socketIO} from '@src/api/api';
 
@@ -29,6 +31,24 @@ export const Header: FC = () => {
         dispatch(setIsAuthModalOpen(true));
     };
 
+    const getUserCards = async () => {
+        try {
+            const [card] = (await uzCardAPI.getUserCards()).cards;
+
+            !!card && dispatch(setUserCardAction({
+                cardId: card.id,
+                cardName: card.cardName,
+                owner: card.owner,
+                balance: card.balance,
+                expireDate: card.expireDate,
+                number: card.number
+            }));
+
+        } catch {
+            dispatch(resetUserCardAction());
+        }
+    };
+
     useEffect(() => {
         dispatch(fetchLocations(locale));
     }, [locale]);
@@ -37,6 +57,7 @@ export const Header: FC = () => {
         !user.isAuth
         && !!userFromCookie
         && dispatch(signInAction(userFromCookie));
+        !!userFromCookie && getUserCards();
         // !!userId && socketIO.on('connect', () => {
         //     socketIO.emit('user_connected', userId);
         // });

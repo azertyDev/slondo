@@ -35,7 +35,7 @@ export const useStyles = makeStyles((theme) => ({
                 }
             }
         },
-        '& .card-btn': {
+        '& .card-btns': {
             display: 'flex',
             position: 'absolute',
             top: 0,
@@ -57,7 +57,7 @@ export const useStyles = makeStyles((theme) => ({
                         height: '18px'
                     }
                 },
-                '& .MuiTypography-subtitle1': {
+                '&.MuiTypography-subtitle1': {
                     fontSize: theme.typography.caption.fontSize,
                     color: theme.palette.common.tab
                 },

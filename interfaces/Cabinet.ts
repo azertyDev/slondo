@@ -12,15 +12,11 @@ export type TabsDataType = {
 }[];
 
 export interface InitialCabinetCardState {
-    isFetch: boolean,
-    myPosts: {
-        total: number,
-        data: CardDataType[]
-    }
+    total: number,
+    data: CardDataType[]
 }
 
 export type OffersStateType = {
-    isFetch: boolean,
     total: number,
     data: {
         id: number,
@@ -30,10 +26,5 @@ export type OffersStateType = {
         offer_price_status: boolean,
         user: UserInfo
     }[]
-}
-
-export type initialUserStateType = {
-    isFetch: boolean,
-    user: UserInfo
 }
 

@@ -57,10 +57,10 @@ export const TransportParams: FC<CommonParamsPropsType> = (props) => {
         touched
     } = formik;
 
-    const {handleSelect, handleNumericInput, handleSetRequireVals} = useHandlers(values, setValues);
+    const {handleSelect, handleNumericInput, setRequireVals} = useHandlers(values, setValues);
 
     useEffect(() => {
-        handleSetRequireVals(filters);
+        setRequireVals(filters);
     }, [filters]);
 
     const classes = useStyles();

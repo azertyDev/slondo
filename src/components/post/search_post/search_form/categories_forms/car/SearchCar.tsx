@@ -15,7 +15,8 @@ export const SearchCar: FC<CommonFiltersType> = (props) => {
         onSubmit,
         filters,
         handleReset,
-        urlParams
+        urlParams,
+        sameWithUrlCtgr
     } = props;
 
     const initVals = {
@@ -41,12 +42,12 @@ export const SearchCar: FC<CommonFiltersType> = (props) => {
         handleBlur
     } = formik;
 
-    const {handleSelect, handleNumericInput, handleSetValsByParams} = useHandlers(values, setValues);
+    const {handleSelect, handleNumericInput, setValsByParams} = useHandlers(values, setValues);
 
     const {t} = useTranslation('filters');
 
     useEffect(() => {
-        handleSetValsByParams(urlParams, filters);
+        sameWithUrlCtgr && setValsByParams(urlParams, filters);
     }, [filters]);
 
     return (
@@ -251,7 +252,7 @@ export const SearchCar: FC<CommonFiltersType> = (props) => {
                 </Grid>
             </ShowHide>
             <Grid item container xs={12}>
-                <ActionButtons handleReset={handleReset} />
+                <ActionButtons handleReset={handleReset}/>
             </Grid>
         </CustomFormikProvider>
     );

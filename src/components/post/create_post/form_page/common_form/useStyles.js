@@ -19,8 +19,12 @@ export const useStyles = makeStyles(() => ({
             }
         },
         '& div.location-wrapper': {
+            display: 'flex',
             width: '50%',
-            marginBottom: '20px'
+            marginBottom: '20px',
+            '& > div': {
+                display: 'flex'
+            }
         },
         '& div.description-wrapper': {
             '& p': {

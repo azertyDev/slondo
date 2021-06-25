@@ -18,14 +18,16 @@ import {useStyles} from './useStyles';
 
 type AuctionInfoPropsType = {
     postData,
-    archive: number
+    archive: number,
+    setFetchedPostData: () => Promise<void>
 } & WithT;
 
 export const AuctionContent: FC<AuctionInfoPropsType> = (props) => {
     const {
         t,
         archive,
-        postData
+        postData,
+        setFetchedPostData
     } = props;
 
     const auctionId = postData.auction.id;
@@ -78,6 +80,8 @@ export const AuctionContent: FC<AuctionInfoPropsType> = (props) => {
         try {
             setIsFetch(true);
             await userAPI.buyNow(postData.auction.id, postData.id);
+            await setFetchedPostData();
+            setOpenBuyNow(false);
             setIsFetch(false);
         } catch ({response}) {
             setIsFetch(false);

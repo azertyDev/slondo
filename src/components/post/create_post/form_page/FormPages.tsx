@@ -23,7 +23,12 @@ import {RootState} from '@src/redux/rootReducer';
 import {useStyles} from './useStyles';
 
 
-export const FormPage: FC = () => {
+export type DataForCrtPostType = {
+    isFetch: boolean;
+    data: any;
+};
+
+export const FormPages: FC = () => {
     const dispatch = useDispatch();
 
     const {t} = useTranslation('post');
@@ -64,7 +69,7 @@ export const FormPage: FC = () => {
     const [isSuccess, setIsSuccess] = useState(false);
     const [isPreview, setIsPreview] = useState(false);
     const [post, setPost] = useState(initPost);
-    const [currentFormIndex, setCurrentFormIndex] = useState(3);
+    const [currentFormIndex, setCurrentFormIndex] = useState(1);
     const [filters, setFilters] = useState<any>({});
     const {colors, color, ...filtersData} = filters;
 

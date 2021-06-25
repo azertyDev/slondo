@@ -9,7 +9,7 @@ import {
 } from '@material-ui/core';
 import {CustomTabPanel} from '@src/components/elements/custom_tab_panel/CustomTabPanel';
 import {CardData} from '@root/interfaces/CardData';
-import {CardView} from '@src/components/elements/card/card_view/CardView';
+import {CardView} from '@src/components/elements/card/CardView';
 import {CustomButton} from '@src/components/elements/custom_button/CustomButton';
 import {useStyles} from './useStyles';
 

@@ -95,7 +95,7 @@ export const ShowPostContainer: FC = () => {
     const [postData, setPostData] = useState(initialPostData);
     const {data} = postData;
 
-    const fetchPostData = async () => {
+    const setFetchedPostData = async () => {
         try {
             setPostData({...postData, isFetch: true});
             const {
@@ -141,7 +141,7 @@ export const ShowPostContainer: FC = () => {
     const isMdDown = useMediaQuery(useTheme().breakpoints.down('md'));
 
     useEffect(() => {
-        fetchPostData();
+        setFetchedPostData();
     }, []);
 
     const classes = useStyles();
@@ -176,6 +176,7 @@ export const ShowPostContainer: FC = () => {
                             t={t}
                             data={data}
                             archive={+archive}
+                            setFetchedPostData={setFetchedPostData}
                         />
                         <Hidden mdDown>
                             <div className={classes.adBanner}>

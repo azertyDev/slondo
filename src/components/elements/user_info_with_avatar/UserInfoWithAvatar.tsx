@@ -1,4 +1,5 @@
-import React, {FC} from 'react';
+import {FC} from 'react';
+import Link from 'next/link';
 import {Box, Typography} from '@material-ui/core';
 import {Rating} from '@src/components/elements/rating/Rating';
 import {UserAvatarComponent} from '@src/components/elements/user_info_with_avatar/avatar/UserAvatarComponent';
@@ -6,7 +7,6 @@ import {useTranslation} from 'react-i18next';
 import {UserInfo} from '@root/interfaces/Auth';
 import {CustomButton} from '@src/components/elements/custom_button/CustomButton';
 import {useStyles} from './useStyles';
-import Link from 'next/link';
 
 type UserInfoWithAvatarPropsType = {
     owner: UserInfo,
@@ -26,10 +26,11 @@ export const UserInfoWithAvatar: FC<UserInfoWithAvatarPropsType> = (props) => {
         width,
         height
     } = props;
+
     const {t} = useTranslation('cabinet');
     const date = new Date(owner.created_at);
-
     const formatted_date = `${date.getDate()}.${date.getMonth() + 1}.${date.getFullYear()}`;
+
     const classes = useStyles();
     return (
         <div className={classes.root}>
@@ -56,11 +57,10 @@ export const UserInfoWithAvatar: FC<UserInfoWithAvatarPropsType> = (props) => {
                     </Typography>
                     <Rating
                         readOnly
-                        card='false'
                         ratingValue={owner.rating}
                         ratingCount={owner.observer?.number_of_ratings}
                     />
-                    {!isOwner && (
+                    {!isOwner && !!handleFollow && (
                         <CustomButton onClick={handleFollow(owner.id)}>
                             <Typography variant="subtitle2">
                                 {!subscribed ? 'Подписаться' : 'Отписаться'}

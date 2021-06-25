@@ -42,6 +42,8 @@ export const excludeFields = [
 ];
 
 export const numericFields = [
+    'cardNumber',
+    'expireDate',
     'parking_spaces_from',
     'parking_spaces_to',
     'land_area_from',

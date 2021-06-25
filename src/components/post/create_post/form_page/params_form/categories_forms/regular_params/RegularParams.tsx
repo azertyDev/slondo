@@ -37,10 +37,10 @@ export const RegularParams: FC<CommonParamsPropsType> = (props) => {
         setValues
     } = formik;
 
-    const {handleSelect, handleSetRequireVals} = useHandlers(values, setValues);
+    const {handleSelect, setRequireVals} = useHandlers(values, setValues);
 
     useEffect(() => {
-        handleSetRequireVals(filters);
+        setRequireVals(filters);
     }, [filters]);
 
     const classes = useStyles();

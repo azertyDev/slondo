@@ -1,14 +1,6 @@
-import {useState, MouseEvent} from 'react';
+import {useState} from 'react';
 import Link from 'next/link';
-import {
-    AppBar,
-    Avatar,
-    Container,
-    Grid,
-    Hidden,
-    Popover,
-    Typography
-} from '@material-ui/core';
+import {AppBar, Avatar, Container, Grid, Hidden, Typography} from '@material-ui/core';
 import {CustomButton} from '@src/components/elements/custom_button/CustomButton';
 import {withScrollThreshold} from '@src/hocs/withScrollThreshold';
 import {Logo} from '@src/components/elements/icons';
@@ -19,28 +11,27 @@ import {CustomDrawer} from '@src/components/header/bottom/custom_drawer/CustomDr
 import {Location} from '@src/components/elements/location/Location';
 import {Localization} from '@src/components/header/top/localization/Localization';
 import {HeaderSearchForm} from '@src/components/header/bottom/header_search_form/HeaderSearchForm';
-import { SidebarMenu } from '@src/components/cabinet/cabinet_sidebar/sidebar_menu/SidebarMenu';
+import {cookieOpts, cookies} from '@src/helpers';
 import {useStyles} from './useStyles';
+
 
 const Bottom = (props) => {
     const {isScrollBreak, handleOpenModal, isAuth, t, avatar} = props;
     const [drawerOpen, setDrawerOpen] = useState(false);
 
-    const [anchorEl, setAnchorEl] = useState<HTMLButtonElement | null>(null);
-
-    const handleClick = (event: MouseEvent<HTMLButtonElement>) => {
-        setAnchorEl(event.currentTarget);
-    };
-
-    const handleClose = () => {
-        setAnchorEl(null);
-    };
-
-    const open = Boolean(anchorEl);
-    const id = open ? 'simple-popover' : undefined;
-
     const handleDrawerShow = (value) => () => {
         setDrawerOpen(value);
+    };
+
+    const handleSelectLocation = ({region, city, district}) => {
+        if (region) {
+            const userLocation: any = {region};
+            if (city) userLocation.city = city;
+            if (district) userLocation.district = district;
+            cookies.set('user_location', userLocation, cookieOpts);
+        } else {
+            cookies.remove('user_location', {path: '/'});
+        }
     };
 
     const classes = useStyles(props);
@@ -63,7 +54,7 @@ const Bottom = (props) => {
                                 container
                                 item
                                 xs={3}
-                                spacing={2}
+                                spacing={1}
                                 alignItems="center"
                             >
                                 <Grid
@@ -131,19 +122,20 @@ const Bottom = (props) => {
                                 xs={1}
                             >
                                 {isAuth
-                                    ? <span onClick={handleClick} className='avatar'>
-                                        <Avatar alt="Avatar" src={avatar} />
-                                    </span>
-                                    : <CustomButton
-                                        className="bottom-sign-button header-button"
-                                        onClick={handleOpenModal}
-                                    >
-                                        <Typography variant="subtitle2">
-                                            {t('auth_reg:signIn')}
-                                        </Typography>
-                                        <SignIcon />
-                                    </CustomButton>
-                                }
+                                 ? <Link href='/cabinet/posts'>
+                                     <a>
+                                         <Avatar alt="Remy Sharp" src={avatar}/>
+                                     </a>
+                                 </Link>
+                                 : <CustomButton
+                                     className="bottom-sign-button header-button"
+                                     onClick={handleOpenModal}
+                                 >
+                                     <Typography variant="subtitle2">
+                                         {t('auth_reg:signIn')}
+                                     </Typography>
+                                     <SignIcon/>
+                                 </CustomButton>}
                             </Grid>
                         </Grid>
                     </Container>
@@ -151,8 +143,8 @@ const Bottom = (props) => {
             </Hidden>
             <Hidden lgUp>
                 <div className="translate-local">
-                    <Location />
-                    <Localization />
+                    <Location handleSelectLocation={handleSelectLocation}/>
+                    <Localization/>
                 </div>
             </Hidden>
             <CustomDrawer
@@ -160,23 +152,6 @@ const Bottom = (props) => {
                 open={drawerOpen}
                 onClose={handleDrawerShow(false)}
             />
-            <Popover
-                id={id}
-                open={open}
-                anchorEl={anchorEl}
-                onClose={handleClose}
-                className={classes.menu}
-                anchorOrigin={{
-                    vertical: 'bottom',
-                    horizontal: 'left'
-                }}
-                transformOrigin={{
-                    vertical: 'bottom',
-                    horizontal: 'left'
-                }}
-            >
-                <SidebarMenu />
-            </Popover>
         </div>
     );
 };

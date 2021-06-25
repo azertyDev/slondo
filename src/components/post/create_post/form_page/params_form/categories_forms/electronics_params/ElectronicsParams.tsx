@@ -1,4 +1,4 @@
-import {FC} from 'react';
+import {FC, useEffect} from 'react';
 import {Grid} from '@material-ui/core';
 import {useFormik} from 'formik';
 import {useHandlers} from '@src/hooks/useHandlers';
@@ -45,7 +45,11 @@ export const ElectronicsParams: FC<CommonParamsPropsType> = (props) => {
         setValues
     } = formik;
 
-    const {handleSelect, handleCheckbox} = useHandlers(values, setValues);
+    const {handleSelect, handleCheckbox, setRequireVals} = useHandlers(values, setValues);
+
+    useEffect(() => {
+        setRequireVals(filters);
+    }, [filters]);
 
     return (
         <CustomFormikProvider formik={formik}>

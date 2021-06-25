@@ -31,8 +31,8 @@ import {AuctionContent} from '@src/components/post/show_post/owner_auction_info/
 import {userAPI} from '@src/api/api';
 import {setErrorMsgAction} from '@root/src/redux/slices/errorSlice';
 import {useDispatch} from 'react-redux';
-import {useStyles} from './useStyles';
 import {booleanFields} from '@src/common_data/fields_keys';
+import {useStyles} from './useStyles';
 
 
 type PostContentTypes = {

@@ -1,11 +1,10 @@
 import {ChangeEvent, FC} from 'react';
 import {Box, Hidden, Typography} from '@material-ui/core';
 import CustomRating from '@material-ui/lab/Rating';
-// styles
 import {useStyles} from './useStyles';
 
 type RatingPropsType = {
-    card?: string,
+    card?: boolean,
     readOnly?: boolean,
     className?,
     ratingValue?: number,
@@ -24,6 +23,7 @@ export const Rating: FC<RatingPropsType> = (props) => {
         ratingCount,
         onChangeRating
     } = props;
+
     const classes = useStyles();
     return (
         <div className={`${classes.root} ${className}`}>
@@ -43,13 +43,13 @@ export const Rating: FC<RatingPropsType> = (props) => {
                     </Box>
                 )}
             </div>
-            <Hidden mdDown>
-                {card && (
+            {card && (
+                <Hidden mdDown>
                     <div>
                         <Typography variant="subtitle1">{`(${ratingCount} оценок)`}</Typography>
                     </div>
-                )}
-            </Hidden>
+                </Hidden>
+            )}
         </div>
     );
 };

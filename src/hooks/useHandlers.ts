@@ -1,14 +1,13 @@
 import {Dispatch, SetStateAction} from 'react';
-import {booleanFields, fractionalFields, numericFields, singleFields, stringFields} from '@src/common_data/fields_keys';
+import {booleanFields, fractionalFields, singleFields, stringFields} from '@src/common_data/fields_keys';
 import {numberRegEx} from '@src/common_data/reg_exs';
 import {isRequired} from '@src/helpers';
 
 export const useHandlers = (values: any, setValues: Dispatch<SetStateAction<any>>) => {
     return {
         handleNumericInput: ({target: {name, value}}) => {
-            const isNumericField = numericFields.some((n => n === name));
             const isFractionalField = fractionalFields.some((n => n === name));
-            if (isNumericField && RegExp(numberRegEx).test(value)) {
+            if (RegExp(numberRegEx).test(value)) {
                 if ((!isFractionalField) || (isFractionalField && value.length < 4)) {
                     if (isFractionalField && value.length === 2 && value[1] !== '.') {
                         value = value.replace(/(?<=^.{1})./, `.${value[1]}`);
@@ -16,6 +15,9 @@ export const useHandlers = (values: any, setValues: Dispatch<SetStateAction<any>
                     setValues({...values, [name]: value});
                 }
             }
+        },
+        handleSwitch: ({target}, checked) => {
+            setValues({...values, [target.name]: checked});
         },
         handleInput: ({target: {name, value}}) => {
             setValues({...values, [name]: value});
@@ -39,7 +41,7 @@ export const useHandlers = (values: any, setValues: Dispatch<SetStateAction<any>
             }
             setValues({...values});
         },
-        handleSetValsByParams: (urlParams, filters) => {
+        setValsByParams: (urlParams, filters) => {
             const vals: any = {};
 
             Object.keys(urlParams).forEach(k => {
@@ -53,7 +55,7 @@ export const useHandlers = (values: any, setValues: Dispatch<SetStateAction<any>
                     } else {
                         vals[k] = filters[k].filter(v => urlParams[k].split(',').some(p => +p === v.id));
                     }
-                } else if ((isStringField && values[k] === '') || isBooleanField && values[k] === '') {
+                } else if ((isBooleanField || isStringField) && values[k] === '') {
                     vals[k] = isBooleanField || urlParams[k];
                 }
             });
@@ -64,9 +66,8 @@ export const useHandlers = (values: any, setValues: Dispatch<SetStateAction<any>
 
             setValues({...values, ...vals});
         },
-        handleSetRequireVals: (filters) => {
+        setRequireVals: (filters) => {
             const reqVals = {};
-
             Object.keys(filters).forEach(k => {
                 if (isRequired(k) && !values[k]) reqVals[k] = null;
             });

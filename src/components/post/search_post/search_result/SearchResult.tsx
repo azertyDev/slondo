@@ -1,7 +1,7 @@
 import {FC, useEffect, useState} from 'react';
 import {FILTERS_PER_PAGE} from '@src/constants';
-import {CardView} from '@src/components/elements/card/card_view/CardView';
 import {Box, Typography} from '@material-ui/core';
+import {CardView} from '@src/components/elements/card/CardView';
 import {WithT} from 'i18next';
 import {cookies} from '@src/helpers';
 import {userAPI} from '@src/api/api';

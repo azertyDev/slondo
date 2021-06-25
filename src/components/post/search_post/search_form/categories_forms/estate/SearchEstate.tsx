@@ -4,6 +4,7 @@ import {SearchHousesCottages} from '@src/components/post/search_post/search_form
 import {SearchCommercialProperty} from '@src/components/post/search_post/search_form/categories_forms/estate/search_commercial_property/SearchCommercialProperty';
 import {SearchLand} from '@src/components/post/search_post/search_form/categories_forms/estate/search_land/SearchLand';
 import {SearchParkingLotsBoxes} from '@src/components/post/search_post/search_form/categories_forms/estate/search_parking_lots_boxes/SearchParkingLotsBoxes';
+import {CommonFiltersType} from '@src/components/post/search_post/search_form/SearchForm';
 import {ActionButtons} from '@src/components/post/search_post/search_form/ActionButtons';
 import {Grid} from '@material-ui/core';
 
@@ -14,7 +15,7 @@ type SearchEstatePropsType = {
     filters,
     handleReset: () => void,
     urlParams
-};
+} & CommonFiltersType;
 
 export const SearchEstate: FC<SearchEstatePropsType> = (props) => {
     const {
@@ -23,7 +24,8 @@ export const SearchEstate: FC<SearchEstatePropsType> = (props) => {
         onSubmit,
         filters,
         handleReset,
-        urlParams
+        urlParams,
+        sameWithUrlCtgr
     } = props;
 
     const getFiltersByCtgr = (): ReactNode => {
@@ -33,33 +35,43 @@ export const SearchEstate: FC<SearchEstatePropsType> = (props) => {
                     isRent={isRent}
                     onSubmit={onSubmit}
                     filters={filters}
+                    handleReset={handleReset}
                     urlParams={urlParams}
+                    sameWithUrlCtgr={sameWithUrlCtgr}
                 />;
             case 'housesCottages':
                 return <SearchHousesCottages
                     isRent={isRent}
                     onSubmit={onSubmit}
                     filters={filters}
+                    handleReset={handleReset}
                     urlParams={urlParams}
+                    sameWithUrlCtgr={sameWithUrlCtgr}
                 />;
             case 'commercialProperty':
                 return <SearchCommercialProperty
                     isRent={isRent}
                     onSubmit={onSubmit}
                     filters={filters}
+                    handleReset={handleReset}
                     urlParams={urlParams}
+                    sameWithUrlCtgr={sameWithUrlCtgr}
                 />;
             case 'land':
                 return <SearchLand
                     onSubmit={onSubmit}
                     filters={filters}
+                    handleReset={handleReset}
                     urlParams={urlParams}
+                    sameWithUrlCtgr={sameWithUrlCtgr}
                 />;
             case 'parkingLotsAndBoxes':
                 return <SearchParkingLotsBoxes
                     onSubmit={onSubmit}
                     filters={filters}
+                    handleReset={handleReset}
                     urlParams={urlParams}
+                    sameWithUrlCtgr={sameWithUrlCtgr}
                 />;
         }
     };

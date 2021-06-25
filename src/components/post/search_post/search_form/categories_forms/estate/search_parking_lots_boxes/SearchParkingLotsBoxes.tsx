@@ -6,16 +6,16 @@ import {DropDownSelect} from '@src/components/elements/drop_down_select/DropDown
 import {CommonFiltersType} from '@src/components/post/search_post/search_form/SearchForm';
 import {useHandlers} from '@src/hooks/useHandlers';
 import {CustomFormikProvider} from '@src/components/elements/custom_formik_provider/CustomFormikProvider';
-import {CustomButton} from '@src/components/elements/custom_button/CustomButton';
 import {FromToInputs} from '@src/components/elements/from_to_inputs/FromToInputs';
-import {ActionButtons} from '@src/components/post/search_post/search_form/ActionButtons';
 
 
 export const SearchParkingLotsBoxes: FC<CommonFiltersType> = (props) => {
     const {
         onSubmit,
         filters,
-        urlParams
+        handleReset,
+        urlParams,
+        sameWithUrlCtgr
     } = props;
 
     const initVals = {
@@ -37,12 +37,12 @@ export const SearchParkingLotsBoxes: FC<CommonFiltersType> = (props) => {
         handleBlur
     } = formik;
 
-    const {handleSelect, handleNumericInput, handleSetValsByParams} = useHandlers(values, setValues);
+    const {handleSelect, handleNumericInput, setValsByParams} = useHandlers(values, setValues);
 
     const {t} = useTranslation('filters');
 
     useEffect(() => {
-        handleSetValsByParams(urlParams, filters);
+        sameWithUrlCtgr && setValsByParams(urlParams, filters);
     }, [filters]);
 
     return (
