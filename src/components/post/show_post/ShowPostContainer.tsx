@@ -16,7 +16,7 @@ import {useStyles} from './useStyles';
 
 export const ShowPostContainer: FC = () => {
     const dispatch = useDispatch();
-    const {t} = useTranslation('post');
+    const {t} = useTranslation(['post', 'common']);
 
     const {url, archive = 0} = useRouter().query;
     const postUrl = url as string;

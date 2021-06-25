@@ -6,6 +6,7 @@ import {CustomSlider} from '@src/components/elements/custom_slider/CustomSlider'
 import {settings} from './sliderSettings';
 import {site_categories} from "@src/common_data/site_categories";
 import {useStyles} from './useStyles';
+import { transformCyrillic } from '@root/src/helpers';
 
 
 export const CategoriesSlider: FC<WithT> = ({t}) => {
@@ -18,25 +19,30 @@ export const CategoriesSlider: FC<WithT> = ({t}) => {
             </Typography>
             <div className="category-slider">
                 <CustomSlider {...settings}>
-                    {site_categories.map((category) => (
-                        <Link href={`/categories/${category.name}?category_id=${category.id}`} key={category.id}>
-                            <a title={t(`categories:${category.name}`)}>
-                                <div className="category">
-                                    <div className="bg-layer">
-                                        <div className="medium">
-                                            <img
-                                                src={category.icon.url}
-                                                alt={category.name}
-                                            />
+                    {site_categories.map((category) =>{
+                        const location = 'uzbekistan';
+                        const categoryName = transformCyrillic(category.ru_name);
+
+                            return (
+                                <Link href={`${location}/${categoryName}`}>
+                                <a title={t(`categories:${category.name}`)}>
+                                    <div className="category">
+                                        <div className="bg-layer">
+                                            <div className="medium">
+                                                <img
+                                                    src={category.icon.url}
+                                                    alt={category.name}
+                                                />
+                                            </div>
                                         </div>
+                                        <span className="category-name">
+                                            {t(`categories:${category.name}`)}
+                                        </span>
                                     </div>
-                                    <span className="category-name">
-                                        {t(`categories:${category.name}`)}
-                                    </span>
-                                </div>
-                            </a>
-                        </Link>
-                    ))}
+                                </a>
+                            </Link>
+                        )}
+                    )}
                 </CustomSlider>
             </div>
         </div>

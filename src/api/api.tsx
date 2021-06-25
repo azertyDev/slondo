@@ -8,7 +8,7 @@ import {cookies} from '@src/helpers';
 
 
 const uztelecom = 'https://backend.testb.uz/api/';
-const localServer = 'http://192.168.100.60/slondo/public/api/';
+const localServer = 'http://192.168.43.235/slondo/public/api/';
 
 const instance = Axios.create({
     withCredentials: true,
@@ -46,6 +46,14 @@ export const userAPI = {
         form.set('password', password);
         return instance
             .post(`login`, form)
+            .then((res) => res.data)
+            .catch(({response}) => {
+                throw response.data;
+            });
+    },
+    getMainSliderData: (params): Promise<any> => {
+        return instance
+            .get('slider/main', {params})
             .then((res) => res.data)
             .catch(({response}) => {
                 throw response.data;

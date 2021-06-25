@@ -242,7 +242,7 @@ export const PostContent: FC<PostContentTypes> = (props) => {
                 <Hidden mdDown>
                     <div className="post-info">
                         <Typography variant="subtitle1">
-                            <span>Объявление №:</span> {data.id}
+                            <span>{t('common:post')} №:</span> {data.id}
                         </Typography>
                         <Typography variant="subtitle1">
                             Опубликовано: {formatted_date}
@@ -260,7 +260,7 @@ export const PostContent: FC<PostContentTypes> = (props) => {
                         <span className="delivery">
                         <DeliveryIcon/>
                             <Typography variant="subtitle1">
-                            Есть доставка
+                            {t('common:delivery')}
                         </Typography>
                     </span>
                     )}
@@ -268,7 +268,7 @@ export const PostContent: FC<PostContentTypes> = (props) => {
                         <span className="safe_deal">
                         <SafeIcon/>
                             <Typography variant="subtitle1">
-                            Безопасная покупка
+                            {t('common:safeDeal')}
                         </Typography>
                     </span>
                     )}
@@ -276,7 +276,7 @@ export const PostContent: FC<PostContentTypes> = (props) => {
                         <span className="exchange">
                         <SwapIcon/>
                             <Typography variant="subtitle1">
-                            Возможен обмен
+                            {t('common:exchange')}
                         </Typography>
                     </span>
                     )}
@@ -297,7 +297,7 @@ export const PostContent: FC<PostContentTypes> = (props) => {
                         <span className="auto-renewal">
                             <RenewalIcon/>
                             <Typography variant="subtitle1">
-                            Автопродление
+                            {t('auto_ren')}
                         </Typography>
                     </span>
                     )}
@@ -377,7 +377,7 @@ export const PostContent: FC<PostContentTypes> = (props) => {
                 {!!parameterItems.length && (
                     <div className="post-parameters">
                         <Typography variant="button" color="initial">
-                            Параметры
+                            {t('post:parameters')}
                         </Typography>
                         <ul>{parameterItems}</ul>
                     </div>
