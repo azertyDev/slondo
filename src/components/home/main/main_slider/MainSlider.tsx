@@ -7,19 +7,23 @@ import { useRouter } from 'next/router';
 import {Typography, Box} from '@material-ui/core'
 
 export const MainSlider: FC = () => {
-    const { locale} = useRouter();
+    const {locale} = useRouter();
 
-    const [sliderData, setSliderData] = useState([]);
+    const [sliderData, setSliderData] = useState({
+        isFetch: false,
+        data: []
+    });
 
     const getSliderData = async () => {
         try {
             const params = {
                 lang: locale
-            }
+            };
+            setSliderData({...sliderData, isFetch: true});
             const data = await userAPI.getMainSliderData(params);
-            setSliderData(data)
+            setSliderData({...sliderData, data, isFetch: false});
         } catch (error) {
-            
+            setSliderData({...sliderData, isFetch: false});
         }
     }
 
@@ -34,7 +38,7 @@ export const MainSlider: FC = () => {
         <div className={classes.root}>
             <CustomSlider {...settings}>
                 {
-                    sliderData.map(({ id, img, title, description }) => {
+                    sliderData.data.map(({ id, img, title, description }) => {
                         return (
                             <Box key={id} position='relative'>
                                 <img src={img} alt={title} />
