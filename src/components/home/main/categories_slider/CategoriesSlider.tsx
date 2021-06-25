@@ -10,6 +10,7 @@ import {useStyles} from './useStyles';
 
 export const CategoriesSlider: FC<WithT> = ({t}) => {
     const classes = useStyles();
+
     return (
         <div className={classes.root}>
             <Typography className="title" variant="h2">
@@ -18,7 +19,7 @@ export const CategoriesSlider: FC<WithT> = ({t}) => {
             <div className="category-slider">
                 <CustomSlider {...settings}>
                     {site_categories.map((category) => (
-                        <Link href={`/categories/${category.name}?categoryID=${category.id}`} key={category.id}>
+                        <Link href={`/categories/${category.name}?category_id=${category.id}`} key={category.id}>
                             <a title={t(`categories:${category.name}`)}>
                                 <div className="category">
                                     <div className="bg-layer">

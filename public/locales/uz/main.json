@@ -5,5 +5,10 @@
   "posts": "E'lonlar",
   "auctions": "Auksionlar",
   "showMore": "Batafsil ma'lumot",
-  "hide": "Yashirish"
+  "hide": "Yashirish",
+  "faq": "Ko'p beraladigan savollar",
+  "how_to_register": "Qanday ro'yxatdan o'taman?",
+  "how_do_create_auction": "Auksionni qanday yarataman?",
+  "how_do_create_ad": "E'lonni qanday yarataman?",
+  "how_do_participate_auction": "Auksionda qanday ishtirok etaman?"
 }

@@ -9,12 +9,12 @@ import {useStyles} from './useStyles';
 
 
 export const HomeSidebar: FC = () => {
-    const {t} = useTranslation('common');
+    const {t} = useTranslation(['common', 'main']);
     const classes = useStyles();
     return (
         <div className={classes.root}>
             <section className="faq-wrapper">
-                <FaqComponent/>
+                <FaqComponent t={t} />
                 <Typography variant="subtitle1" color="initial">
                     {t('weInSocial')}:
                 </Typography>

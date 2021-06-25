@@ -156,9 +156,6 @@ export const SearchCommercialProperty: FC<CommonFiltersType> = (props) => {
                     />
                 </Grid>
             </Grid>
-            <Grid item container xs={12}>
-                <ActionButtons handleReset={handleReset} />
-            </Grid>
         </CustomFormikProvider>
     );
 };

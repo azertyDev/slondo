@@ -15,7 +15,6 @@ export const SearchParkingLotsBoxes: FC<CommonFiltersType> = (props) => {
     const {
         onSubmit,
         filters,
-        handleReset,
         urlParams
     } = props;
 
@@ -107,9 +106,6 @@ export const SearchParkingLotsBoxes: FC<CommonFiltersType> = (props) => {
                         }}
                     />
                 </Grid>
-            </Grid>
-            <Grid item container xs={12}>
-                <ActionButtons handleReset={handleReset} />
             </Grid>
         </CustomFormikProvider>
     );

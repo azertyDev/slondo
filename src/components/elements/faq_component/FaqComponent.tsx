@@ -6,14 +6,17 @@ import {GavelIcon} from '@src/components/elements/icons/GavelIcon';
 import {NotesIcon} from '@src/components/elements/icons/NotesIcon';
 import {ShoppingIcon} from '@src/components/elements/icons/ShoppingIcon';
 import {useStyles} from './useStyles';
+import {WithT} from 'i18next';
 
 
-export const FaqComponent: FC = () => {
+export const FaqComponent: FC<WithT> = (props) => {
+    const {t} = props;
+
     const classes = useStyles();
     return (
         <div className={classes.root}>
             <Typography variant="subtitle1">
-                Часто задаваемые вопросы
+                {t('main:faq')}
             </Typography>
             <Paper elevation={0}>
                 <ul>
@@ -24,7 +27,7 @@ export const FaqComponent: FC = () => {
                                     <SignIcon/>
                                 </span>
                                 <Typography variant="subtitle1" color="initial">
-                                    Как зарегистрироваться?
+                                    {t('main:how_to_register')}
                                 </Typography>
                             </a>
                         </Link>
@@ -36,7 +39,7 @@ export const FaqComponent: FC = () => {
                                     <GavelIcon/>
                                 </span>
                                 <Typography variant="subtitle1" color="initial">
-                                    Как создать аукцион?
+                                    {t('main:how_do_create_auction')}
                                 </Typography>
                             </a>
                         </Link>
@@ -48,7 +51,7 @@ export const FaqComponent: FC = () => {
                                     <NotesIcon/>
                                 </span>
                                 <Typography variant="subtitle1" color="initial">
-                                    Как создать объявление?
+                                    {t('main:how_do_create_ad')}
                                 </Typography>
                             </a>
                         </Link>
@@ -60,7 +63,7 @@ export const FaqComponent: FC = () => {
                                     <ShoppingIcon/>
                                 </span>
                                 <Typography variant="subtitle1" color="initial">
-                                    Как учавствовать в аукционе?
+                                    {t('main:how_do_participate_auction')}
                                 </Typography>
                             </a>
                         </Link>

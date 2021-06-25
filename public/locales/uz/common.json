@@ -38,5 +38,17 @@
   "Th": "Pa",
   "Fr": "Ju",
   "Sa": "Sha",
-  "Su": "Ya"
+  "Su": "Ya",
+  "january": "yanvar",
+  "february": "fevral",
+  "march": "mart",
+  "april": "aprel",
+  "may": "may",
+  "june": "iyun",
+  "july": "iyul",
+  "august": "avgust",
+  "september": "sentyabr",
+  "october": "oktyabr",
+  "november": "noyabr",
+  "december": "dekabr"
 }

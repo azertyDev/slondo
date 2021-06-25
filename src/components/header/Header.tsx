@@ -17,7 +17,7 @@ import {useStyles} from './useStyles';
 export const Header: FC = () => {
     const {locale} = useRouter();
     const dispatch = useDispatch();
-    const {t} = useTranslation(['header', 'cabinet']);
+    const {t} = useTranslation(['header', 'cabinet', 'common']);
 
     const userFromCookie = cookies.get('slondo_user');
     const user = useSelector((store: RootState) => store.user);

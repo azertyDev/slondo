@@ -6,7 +6,6 @@ export const useStyles = makeStyles(() => ({
         flexDirection: 'row'
     },
     drawerList: {
-        width: '400px',
         padding: '20px 10px',
         borderRight: '.5px solid',
         '& > div.MuiListItem-button': {
@@ -25,7 +24,7 @@ export const useStyles = makeStyles(() => ({
                     height: '24px'
                 }
             },
-            '&.hovered': {
+            '&:hover': {
                 background: 'linear-gradient(49.94deg, #675EAA 19.03%, #AD66D5 72.72%)',
                 borderRadius: 100,
                 '& > h6.MuiTypography-subtitle1': {
@@ -52,6 +51,22 @@ export const useStyles = makeStyles(() => ({
         '& div.close-btn-wrapper': {
             display: 'flex',
             justifyContent: 'flex-end'
+        },
+        '& a': {
+            textDecoration: 'none'
+        },
+        '& .MuiTypography-h6': {
+            color: 'rgb(51, 51, 51)',
+            '&:hover': {
+                color: '#675EAA',
+            }
+        },
+        '& .MuiTypography-subtitle1': {
+            color: 'rgba(49, 49, 49, 0,6)',
+            '&:hover': {
+                color: '#AD66D5',
+                opacity: '72.72%'
+            }
         }
     }
 }))

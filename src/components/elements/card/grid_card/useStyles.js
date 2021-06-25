@@ -155,8 +155,7 @@ export const useStyles = makeStyles((theme) => ({
                     [theme.breakpoints.down('xs')]: {
                         padding: '8px 2px 8px 8px'
                     },
-                    '& > h5.MuiTypography-h5': {
-                        lineHeight: '29px',
+                    '& > h5.MuiTypography-h6': {
                         [theme.breakpoints.down('xs')]: {
                             fontSize: '1rem',
                             lineHeight: '20px',

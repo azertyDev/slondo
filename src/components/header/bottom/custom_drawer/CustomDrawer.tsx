@@ -98,7 +98,7 @@ export const CustomDrawer: FC<CustomDrawerPropsType> = (props) => {
                                                 <ListItem key={type.id}>
                                                     <Link href={url + `/${typeName}`}>
                                                         <a onClick={handleClose}>
-                                                            <Typography variant="body2" key={type.id}>
+                                                            <Typography variant="subtitle1" key={type.id}>
                                                                 {t(type.name)}
                                                             </Typography>
                                                         </a>

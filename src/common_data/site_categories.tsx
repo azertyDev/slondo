@@ -674,7 +674,7 @@ const categories_list: CategoryType[] = [
                     },
                     {
                         id: 25,
-                        name: 'Property',
+                        name: 'property',
                         ru_name: 'Недвижимость'
                     },
                     {
@@ -831,7 +831,7 @@ const categories_list: CategoryType[] = [
                     },
                     {
                         id: 55,
-                        name: 'Property',
+                        name: 'property',
                         ru_name: 'Недвижимость'
                     },
                     {
@@ -927,7 +927,7 @@ const categories_list: CategoryType[] = [
                     },
                     {
                         id: 11,
-                        name: 'Plumbing',
+                        name: 'plumbing',
                         ru_name: 'Сантехника'
                     },
                     {
@@ -2082,7 +2082,7 @@ const categories_list: CategoryType[] = [
                     },
                     {
                         id: 35,
-                        name: 'blousesAndShirts',
+                        name: 'blouses_shirts',
                         ru_name: 'Блузы и рубашки'
                     },
                     {
@@ -2565,7 +2565,7 @@ const categories_list: CategoryType[] = [
                     },
                     {
                         id: 36,
-                        name: 'Seedling',
+                        name: 'seedling',
                         ru_name: 'Рассада'
                     },
                     {

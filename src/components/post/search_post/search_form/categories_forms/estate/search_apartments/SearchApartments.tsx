@@ -18,7 +18,6 @@ export const SearchApartments: FC<CommonFiltersType> = (props) => {
         isRent,
         onSubmit,
         filters,
-        handleReset,
         urlParams
     } = props;
 
@@ -231,9 +230,6 @@ export const SearchApartments: FC<CommonFiltersType> = (props) => {
                     </Grid>
                 </Grid>
             </ShowHide>
-            <Grid item container xs={12}>
-                <ActionButtons handleReset={handleReset} />
-            </Grid>
         </CustomFormikProvider>
     );
 };

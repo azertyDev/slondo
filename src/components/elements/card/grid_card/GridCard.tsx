@@ -43,7 +43,7 @@ export const GridCard: FC<CardItemProps> = (props) => {
 
     const isFavorite = true;
 
-    const {t} = useTranslation('common');
+    const {t} = useTranslation(['common', 'locations']);
     const translatedTitle = transformCyrillic(title);
 
     const {isAuth} = useSelector((store: RootState) => store.user);
@@ -59,7 +59,7 @@ export const GridCard: FC<CardItemProps> = (props) => {
         return i;
     }
 
-    const formatted_date = `${date.getDate()} ${months[date.getMonth()]} ${date.getHours() + ':' + checkTime(date.getMinutes())}`;
+    const formatted_date = `${date.getDate()} ${t(`common:${months[date.getMonth()]}`)} ${date.getHours() + ':' + checkTime(date.getMinutes())}`;
 
     const url = `/obyavlenie/${translatedTitle}-${id}${archive ? '?archive=1' : ''}`;
 
@@ -104,13 +104,13 @@ export const GridCard: FC<CardItemProps> = (props) => {
                              <div className="card-header">
                                  <div className="title">
                                      <Typography variant="subtitle2">
-                                         {t(ads_type === 'exauc' ? 'auc' : ads_type)}
+                                         {t(ads_type === 'common:exauc' ? 'common:auc' : ads_type)}
                                      </Typography>
                                  </div>
                                  <div className="icons">
                                      {!!delivery && (
                                          <Tooltip
-                                             title="Есть доставка"
+                                             title={t('common:delivery')}
                                              arrow
                                          >
                                                 <span>
@@ -120,7 +120,7 @@ export const GridCard: FC<CardItemProps> = (props) => {
                                      )}
                                      {!!safe_deal && (
                                          <Tooltip
-                                             title="Безопасная покупка"
+                                             title={t('common:safe_deal')}
                                              arrow
                                          >
                                                 <span>
@@ -130,7 +130,7 @@ export const GridCard: FC<CardItemProps> = (props) => {
                                      )}
                                      {!!exchange && (
                                          <Tooltip
-                                             title="Возможен обмен"
+                                             title={t('common:exchange')}
                                              arrow
                                          >
                                                 <span>
@@ -160,14 +160,14 @@ export const GridCard: FC<CardItemProps> = (props) => {
                                          {title}
                                      </Typography>
                                      <Typography
-                                         variant="h5"
+                                         variant="h6"
                                          color="initial"
                                      >
                                          {numberPrettier(price)}
-                                         <span> {t(currency.name)}</span>
+                                         <span> {t(`common:${currency.name}`)}</span>
                                      </Typography>
                                      <Typography variant="caption" noWrap>
-                                         {`${region.name}, ${city.name}`}
+                                         {`${t(`locations:${region.name}`)}, ${t(`locations:${city.name}`)}`}
                                      </Typography>
                                      <Typography variant="caption">
                                          {formatted_date}

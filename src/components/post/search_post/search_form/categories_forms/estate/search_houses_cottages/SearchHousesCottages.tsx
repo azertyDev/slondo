@@ -224,9 +224,6 @@ export const SearchHousesCottages: FC<CommonFiltersType> = (props) => {
                     </Grid>
                 </Grid>
             </ShowHide>
-            <Grid item container xs={12}>
-                <ActionButtons handleReset={handleReset} />
-            </Grid>
         </CustomFormikProvider>
     );
 };

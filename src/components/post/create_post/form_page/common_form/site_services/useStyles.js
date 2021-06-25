@@ -32,10 +32,10 @@ export const useStyles = makeStyles(() => ({
     },
     serviceItem: {
         margin: 0,
+        height: 40,
         padding: '8px',
         userSelect: 'none',
         background: '#FFFFFF',
-        height: 'fit-content',
         borderRadius: '100px',
         boxShadow: '0px 0px 15px rgb(0 0 0 / 10%)',
         border: props => props.checked && '1px solid',
