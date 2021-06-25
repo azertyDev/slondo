@@ -34,7 +34,7 @@ export type CommonFiltersType = {
     filters,
     urlParams,
     isRent?: boolean,
-    handleReset: () => void,
+    handleReset?: () => void,
     sameWithUrlCtgr: boolean
 };
 

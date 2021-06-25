@@ -13,7 +13,6 @@ export const SearchParkingLotsBoxes: FC<CommonFiltersType> = (props) => {
     const {
         onSubmit,
         filters,
-        handleReset,
         urlParams,
         sameWithUrlCtgr
     } = props;

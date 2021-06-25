@@ -9,7 +9,6 @@ import {CustomFormikProvider} from '@src/components/elements/custom_formik_provi
 import {FromToInputs} from '@src/components/elements/from_to_inputs/FromToInputs';
 import {ShowHide} from '@src/components/elements/show_hide/ShowHide';
 import {CheckboxSelect} from '@src/components/elements/checkbox_select/CheckboxSelect';
-import {ActionButtons} from '@src/components/post/search_post/search_form/ActionButtons';
 
 
 export const SearchHousesCottages: FC<CommonFiltersType> = (props) => {
@@ -17,7 +16,6 @@ export const SearchHousesCottages: FC<CommonFiltersType> = (props) => {
         isRent,
         onSubmit,
         filters,
-        handleReset,
         urlParams,
         sameWithUrlCtgr
     } = props;

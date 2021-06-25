@@ -7,14 +7,12 @@ import {CommonFiltersType} from '@src/components/post/search_post/search_form/Se
 import {useHandlers} from '@src/hooks/useHandlers';
 import {CustomFormikProvider} from '@src/components/elements/custom_formik_provider/CustomFormikProvider';
 import {FromToInputs} from '@src/components/elements/from_to_inputs/FromToInputs';
-import {ActionButtons} from '@src/components/post/search_post/search_form/ActionButtons';
 
 
 export const SearchLand: FC<CommonFiltersType> = (props) => {
     const {
         onSubmit,
         filters,
-        handleReset,
         urlParams,
         sameWithUrlCtgr
     } = props;
