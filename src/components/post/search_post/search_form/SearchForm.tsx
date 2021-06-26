@@ -375,8 +375,8 @@ export const SearchForm: FC<SearchFormPropsType> = (props) => {
                         }}
                     />
                 </Grid>
-                <Grid container item xs={12} sm={4} spacing={1}>
-                    <Grid item container alignItems='flex-end' xs={8}>
+                <Grid container item xs={12} sm={6} spacing={1}>
+                    <Grid item container alignItems='flex-end' xs={7} sm={6}>
                         <CheckboxSelect
                             labelText={t('free')}
                             checked={values.free}
@@ -385,7 +385,7 @@ export const SearchForm: FC<SearchFormPropsType> = (props) => {
                         />
                     </Grid>
                     {values.post_type?.name === 'auc' && (
-                        <Grid item container alignItems='flex-end' xs={5}>
+                        <Grid item container alignItems='flex-end' xs={5} sm={5}>
                             <CheckboxSelect
                                 labelText={t('archive')}
                                 checked={values.archive}

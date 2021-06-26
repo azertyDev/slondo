@@ -9,7 +9,7 @@
   "urgent_work": "Tezkor ish",
   "additional": "Qo'shimcha",
   "salary": "Ish haqi",
-  "post_not_found": "Bunday parametrlarga ega e'lon topilmadi",
+  "post_not_found": "«{{searchText}}» so'rovi bo'yicha ma'lumot topilmadi. Qidiruv shartlarini o'zgartirib ko'ring.",
   "post": "E'lonlar",
   "auc": "Auksionlar",
   "cost": "Narxi",

@@ -514,5 +514,12 @@ export const userAPI = {
             .catch(err => {
                 throw err;
             });
+    },
+    getPopular: (params) => {
+        return instance.get(`post/popular`, {...setTokenToHeader(), params})
+            .then(res => res.data)
+            .catch(err => {
+                throw err;
+            });
     }
 };

@@ -7,6 +7,7 @@ import {setErrorMsgAction} from '@src/redux/slices/errorSlice';
 import {useDispatch, useSelector} from 'react-redux';
 import {RootState} from '@src/redux/rootReducer';
 import {initCardData} from '@src/common_data/common';
+import {useTranslation} from 'next-i18next';
 
 
 export const initCards = Array.from({length: ITEMS_PER_PAGE}).map(() => initCardData);
@@ -23,21 +24,26 @@ const initData: CardData = {
 export const PostsSliderContainer: FC = () => {
     const dispatch = useDispatch();
     const {isAuth} = useSelector((store: RootState) => store.user);
+    const {t} = useTranslation('main');
 
     const [currentPage, setCurrentPage] = useState(1);
-    const [cardData, setCardData] = useState(initData);
+    const [popularPosts, setPopularPosts] = useState(initData);
 
     const setFetchedCardData = async () => {
         try {
-            setCardData({
-                ...cardData,
+            const params = {
+                itemsPerPage: ITEMS_PER_PAGE,
+                page: currentPage
+            };
+            setPopularPosts({
+                ...popularPosts,
                 isFetch: true
             });
 
-            const {data, total} = await userAPI.getCards(ITEMS_PER_PAGE, currentPage, 'auc');
+            const {data, total} = await userAPI.getPopular(params);
 
-            setCardData({
-                ...cardData,
+            setPopularPosts({
+                ...popularPosts,
                 isFetch: false,
                 data: {
                     cards: data,
@@ -46,8 +52,8 @@ export const PostsSliderContainer: FC = () => {
             });
         } catch (e) {
             dispatch(setErrorMsgAction(e.message));
-            setCardData({
-                ...cardData,
+            setPopularPosts({
+                ...popularPosts,
                 error: e.message
             });
         }
@@ -57,10 +63,11 @@ export const PostsSliderContainer: FC = () => {
         setFetchedCardData();
     }, [currentPage, isAuth]);
 
+    console.log(popularPosts.data);
     return (
         <PostsSlider
-            title={'Телефоны и планшеты'}
-            cardData={cardData}
+            title={t('popularPosts')}
+            cardData={popularPosts}
         />
     );
 };
