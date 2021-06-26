@@ -17,6 +17,12 @@ export const useStyles = makeStyles((theme) => ({
             '& div.limit-txt > h6': {
                 textAlign: 'end'
             }
+        },
+        '& h6.error-text': {
+            [theme.breakpoints.down('xs')]: {
+                fontSize: '13px',
+                textAlign: 'start'
+            }
         }
     }
 }));

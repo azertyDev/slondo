@@ -56,22 +56,24 @@ export const RegularParams: FC<CommonParamsPropsType> = (props) => {
                     isEditable={currentFormIndex < 3}
                     handleEdit={handleFormOpen(3)}
                 >
-                    <Grid item xs={6}>
-                        <PostTitle
-                            t={t}
-                            formik={formik}
-                            isPreview={isPreview}
-                            title={values.title}
-                        />
-                    </Grid>
-                    <Grid item container spacing={2}>
-                        {getFieldsByFilters({
-                            t,
-                            isPreview,
-                            filters,
-                            formik,
-                            handleSelect
-                        })}
+                    <Grid container spacing={2}>
+                        <Grid item xs={12} md={6}>
+                            <PostTitle
+                                t={t}
+                                formik={formik}
+                                isPreview={isPreview}
+                                title={values.title}
+                            />
+                        </Grid>
+                        <Grid item container spacing={2}>
+                            {getFieldsByFilters({
+                                t,
+                                isPreview,
+                                filters,
+                                formik,
+                                handleSelect
+                            })}
+                        </Grid>
                     </Grid>
                 </CustomAccordion>
             </CustomFormikProvider>

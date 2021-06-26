@@ -105,8 +105,8 @@ export const DropDownSelect: FC<CustomSelectPropsType> = (props) => {
                 ))}
             </Select>
             {errorMsg && (
-                <Typography variant="subtitle1">
-                    <span className='error-text'>
+                <Typography variant="subtitle1" className='error-text'>
+                    <span>
                         {errorMsg}
                     </span>
                 </Typography>

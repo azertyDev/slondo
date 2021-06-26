@@ -23,8 +23,8 @@ export const useStyles = makeStyles((theme) => ({
         },
         '& button.nav-button': {
             width: '250px',
-            [theme.breakpoints.down('sm')]: {
-                padding: '10px 50px'
+            [theme.breakpoints.down('xs')]: {
+                marginTop: '10px'
             },
             '& > p': {
                 color: theme.palette.primary.white

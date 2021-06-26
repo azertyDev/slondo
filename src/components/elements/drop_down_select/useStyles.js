@@ -1,7 +1,7 @@
-import {makeStyles} from '@material-ui/core/styles'
+import {makeStyles} from '@material-ui/core/styles';
 
 
-export const useStyles = makeStyles(() => ({
+export const useStyles = makeStyles((theme) => ({
     root: {
         width: '100%',
         '& .checkbox': {
@@ -30,6 +30,12 @@ export const useStyles = makeStyles(() => ({
             '& svg.MuiSvgIcon-root': {
                 right: '7px'
             }
+        },
+        '& h6.error-text': {
+            [theme.breakpoints.down('xs')]: {
+                fontSize: '13px',
+                textAlign: 'start'
+            },
         }
     }
 }));
