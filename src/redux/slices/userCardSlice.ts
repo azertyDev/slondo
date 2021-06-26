@@ -1,19 +1,21 @@
 import {createSlice} from '@reduxjs/toolkit';
 
 type UserCardType = {
+    id: number,
+    cardId: number,
     cardName: string,
     owner: string,
     balance: number,
-    cardId: number,
     expireDate: number,
     number: number
 }
 
 const initialState: UserCardType = {
+    id: null,
+    cardId: null,
     cardName: '',
     owner: '',
     balance: 0,
-    cardId: null,
     expireDate: null,
     number: null
 };

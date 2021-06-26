@@ -9,11 +9,10 @@ import {CardDataType} from '@root/interfaces/CardData';
 import {useStyles} from './useStyles';
 
 type ListCardPropsType = {
-    archive?: boolean,
     cardData: CardDataType
 }
 
-export const ListCard: FC<ListCardPropsType> = ({cardData, archive}) => {
+export const ListCard: FC<ListCardPropsType> = ({cardData}) => {
     const {t} = useTranslation('common');
 
     const isAuction = cardData.ads_type === 'auc' || cardData.ads_type === 'exauc';
@@ -39,7 +38,7 @@ export const ListCard: FC<ListCardPropsType> = ({cardData, archive}) => {
 
     const translatedTitle = transformCyrillic(cardData.title);
 
-    const url = `/obyavlenie/${translatedTitle}-${cardData.id}${archive ? '?archive=1' : ''}`;
+    const url = `/obyavlenie/${translatedTitle}-${cardData.id}`;
 
     const classes = useStyles();
     return (

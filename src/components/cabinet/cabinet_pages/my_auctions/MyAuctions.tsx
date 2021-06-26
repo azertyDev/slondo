@@ -163,13 +163,13 @@ export const MyAuctions: FC = () => {
     const fetchAuctionData = async (type?: string) => {
         try {
             setIsFetch(true);
-            const isCreatedAuction = type === 'auc';
+            const isAuction = type === 'auc';
             const params = {
                 type, archive: 0,
                 secure: 0
             };
 
-            if (isCreatedAuction) {
+            if (isAuction) {
                 const {data, total} = await userAPI.getMyPosts(params);
                 setAuctionData({data, total});
             } else {
@@ -187,8 +187,8 @@ export const MyAuctions: FC = () => {
     const fetchAuctionArchiveData = async (type?: string) => {
         try {
             setIsFetch(true);
-            const isCreatedAuction = type === 'auc';
-            if (isCreatedAuction) {
+            const isAuction = type === 'auc';
+            if (isAuction) {
                 const params = {
                     type,
                     archive: 1,
@@ -529,7 +529,7 @@ export const MyAuctions: FC = () => {
             <DetailedPostView
                 data={selectedAuction}
                 detailedModalOpen={detailedModalOpen}
-                fetchAuctionData={fetchAuctionData}
+                fetchPostData={fetchAuctionData}
                 handleSettingsOpen={handleSettingsOpen}
                 handleDetailedClose={closeDetailedModal}
                 handleRejectVictory={handleRejectVictory}

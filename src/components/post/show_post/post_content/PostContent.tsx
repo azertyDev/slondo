@@ -37,7 +37,7 @@ import {useStyles} from './useStyles';
 
 type PostContentTypes = {
     data,
-    archive: number
+    setFetchedPostData: () => Promise<void>
 } & WithT;
 
 export type SlidersRefType = {
@@ -51,7 +51,7 @@ export const PostContent: FC<PostContentTypes> = (props) => {
     const {
         t,
         data,
-        archive
+        setFetchedPostData
     } = props;
 
     const dispatch = useDispatch();
@@ -91,10 +91,6 @@ export const PostContent: FC<PostContentTypes> = (props) => {
         } catch (e) {
             dispatch(setErrorMsgAction(e.message));
         }
-    };
-
-    const handleDrawerShow = (value) => () => {
-        setDrawerOpen(value);
     };
 
     const parameterItems = Object.keys(model ?? {}).reduce((items, key, i) => {
@@ -315,7 +311,7 @@ export const PostContent: FC<PostContentTypes> = (props) => {
                         <AuctionContent
                             t={t}
                             postData={data}
-                            archive={archive}
+                            setFetchedPostData={setFetchedPostData}
                         />
                     )}
                 </Hidden>

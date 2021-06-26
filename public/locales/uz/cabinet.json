@@ -1,4 +1,8 @@
 {
+  "sms_code": "Sms kod",
+  "type_sms_code": "Kodni kiriting",
+  "buy_safe_deal": "Xavfsiz xarid qilmo'qchimisiz?",
+  "add_card_for_safe_deal": "Xavfsiz xarid uchun siz to'lov kartasini ulashingiz kerak",
   "cardName": "Karta no'mi",
   "turn_on_editable": "Tahrirlashni yoqish",
   "card_remove_txt": "kartani o'chirishni xohlaysizmi?",
@@ -19,7 +23,8 @@
   "safeShopping": "Xavfsiz xarid",
   "paidServices": "Pullik xizmatlar",
   "statistics": "Statistika",
-  "myPurchases": "Buyurtmalarim",
+  "purchases": "Xaridlar",
+  "myPurchases": "Xaridlarim",
   "settings": "Sozlamalar",
   "exit": "Chiqish",
   "bannedPosts": "Moderatsiyadan o'tmagan",

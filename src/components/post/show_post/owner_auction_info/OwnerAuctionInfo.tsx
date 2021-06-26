@@ -11,7 +11,6 @@ import {useStyles} from './useStyles';
 
 type OwnerAuctionInfoPropsType = {
     data: any
-    archive: number,
     setFetchedPostData: () => Promise<void>
 } & WithT;
 
@@ -19,7 +18,6 @@ export const OwnerAuctionInfo: FC<OwnerAuctionInfoPropsType> = (props) => {
     const {
         t,
         data,
-        archive,
         setFetchedPostData
     } = props;
 
@@ -84,7 +82,6 @@ export const OwnerAuctionInfo: FC<OwnerAuctionInfoPropsType> = (props) => {
                         <AuctionContent
                             t={t}
                             postData={data}
-                            archive={archive}
                             setFetchedPostData={setFetchedPostData}
                         />
                     </Hidden>
@@ -92,7 +89,6 @@ export const OwnerAuctionInfo: FC<OwnerAuctionInfoPropsType> = (props) => {
                 <OwnerContent
                     t={t}
                     postData={data}
-                    isFetch={isFetch}
                     showPhone={showPhone}
                     authorPhones={authorPhones}
                     handleFollow={handleFollow}

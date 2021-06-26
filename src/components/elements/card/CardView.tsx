@@ -7,20 +7,19 @@ import {GridCard} from '@src/components/elements/card/grid_card/GridCard';
 export type ViewPropsType = {
     isFetch?: boolean,
     listMode?: boolean,
-    archive?: boolean,
     data?: CardDataType[],
     handleModalOpen?: (value?, id?) => void
 };
 
 export const CardView: FC<ViewPropsType> = (props) => {
-    const {listMode, archive, data, isFetch} = props;
+    const {listMode, data, isFetch} = props;
 
     return (
         listMode
         ? <div>
             {data.map(cardData =>
                 <Box mb={2} key={cardData.id}>
-                    <ListCard archive={archive} cardData={cardData}/>
+                    <ListCard cardData={cardData}/>
                 </Box>
             )}
         </div>
@@ -29,7 +28,6 @@ export const CardView: FC<ViewPropsType> = (props) => {
                 <Grid key={i} xs={6} sm={6} md={4} lg={3} item>
                     <GridCard
                         {...cardData}
-                        archive={archive}
                         isFetch={isFetch}
                     />
                 </Grid>

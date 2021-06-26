@@ -1,5 +1,5 @@
 import {CustomSlider} from '@src/components/elements/custom_slider/CustomSlider';
-import {FC, useState, useEffect, Fragment} from 'react';
+import {FC, useState, useEffect} from 'react';
 import {settings} from './sliderSettings';
 import {userAPI} from '@src/api/api';
 import {useStyles} from './useStyles';
@@ -28,43 +28,37 @@ export const MainSlider: FC = () => {
         } catch (error) {
             setSliderData({...sliderData, isFetch: false});
         }
-    }
+    };
 
     useEffect(() => {
         getSliderData();
-    }, [locale])
+    }, [locale]);
 
     const classes = useStyles();
     return (
         <div className={classes.root}>
             <CustomSlider {...settings}>
-                {
-                    sliderData.isFetch ?
-                        Array.from({length: 4}, () => (
-                            <Skeleton animation="wave" width="100%" />
-                        ))
-                        : sliderData.data.map(({id, img, title, description}) => {
-                            return (
-                                <Box key={id} position='relative'>
-                                    <img src={img} alt={title} />
-                                    <Box
-                                        position='absolute'
-                                        top={isXs ? '25%' : '30%'}
-                                        left='10px'
-                                        width='60%'
-                                        className={classes.content}
-                                    >
-                                        <Typography variant='h4' color="initial" gutterBottom>
-                                            {title}
-                                        </Typography>
-                                        <Typography variant="subtitle1" color="initial">
-                                            {description}
-                                        </Typography>
-                                    </Box>
-                                </Box>
-                            );
-                        })
-                }
+                {sliderData.isFetch
+                 ? Array.from({length: 4}, (_, k) => <Skeleton key={k} animation="wave" width="100%"/>)
+                 : sliderData.data.map(({id, img, title, description}) => (
+                        <Box key={id} position='relative'>
+                            <img src={img} alt={title}/>
+                            <Box
+                                left='10px'
+                                width='60%'
+                                position='absolute'
+                                top={isXs ? '25%' : '30%'}
+                                className={classes.content}
+                            >
+                                <Typography variant='h4' color="initial" gutterBottom>
+                                    {title}
+                                </Typography>
+                                <Typography variant="subtitle1" color="initial">
+                                    {description}
+                                </Typography>
+                            </Box>
+                        </Box>
+                    ))}
             </CustomSlider>
         </div>
     );

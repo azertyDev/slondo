@@ -10,7 +10,7 @@ import {RootState} from '@src/redux/rootReducer';
 import {fetchLocations} from '@src/redux/slices/locationsSlice';
 import {cookies} from '@src/helpers';
 import {useRouter} from 'next/router';
-import {uzCardAPI} from '@src/api/api';
+import {myUzCardAPI} from '@src/api/api';
 import {setUserCardAction, resetUserCardAction} from '@src/redux/slices/userCardSlice';
 import {useStyles} from './useStyles';
 // import {socketIO} from '@src/api/api';
@@ -19,7 +19,7 @@ import {useStyles} from './useStyles';
 export const Header: FC = () => {
     const {locale} = useRouter();
     const dispatch = useDispatch();
-    const {t} = useTranslation(['header', 'cabinet', 'common']);
+    const {t} = useTranslation('header');
 
     const userFromCookie = cookies.get('slondo_user');
     const user = useSelector((store: RootState) => store.user);
@@ -33,17 +33,17 @@ export const Header: FC = () => {
 
     const getUserCards = async () => {
         try {
-            const [card] = (await uzCardAPI.getUserCards()).cards;
+            const [card] = (await myUzCardAPI.getUserCards()).cards;
 
             !!card && dispatch(setUserCardAction({
-                cardId: card.id,
+                id: card.id,
+                cardId: card.cardId,
                 cardName: card.cardName,
                 owner: card.owner,
                 balance: card.balance,
                 expireDate: card.expireDate,
                 number: card.number
             }));
-
         } catch {
             dispatch(resetUserCardAction());
         }

@@ -15,6 +15,7 @@ export const getStaticProps: GetStaticProps = async ({locale}) => ({
             locale,
             [
                 'post',
+                'cabinet',
                 'filters',
                 'locations',
                 'categories',

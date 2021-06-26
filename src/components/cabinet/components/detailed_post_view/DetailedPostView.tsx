@@ -30,7 +30,7 @@ import {useStyles} from './useStyles';
 type DetailedPostViewPropsType = {
     data: CardDataType,
     detailedModalOpen: boolean,
-    fetchAuctionData: (t?: string) => Promise<void>,
+    fetchPostData?: (t?: string) => Promise<void>,
     handleDetailedClose: () => void,
     handleNotificationsOpen: (id: number) => () => void,
     handleRejectVictory?: (auction_id: number) => () => void,
@@ -41,7 +41,7 @@ type DetailedPostViewPropsType = {
 export const DetailedPostView: FC<DetailedPostViewPropsType> = (props) => {
     const {
         data,
-        fetchAuctionData,
+        fetchPostData,
         detailedModalOpen,
         handleDetailedClose,
         handleNotificationsOpen,
@@ -92,7 +92,7 @@ export const DetailedPostView: FC<DetailedPostViewPropsType> = (props) => {
             setIsFetch(true);
 
             await userAPI.acceptOfferThePrice(offer_id, accept);
-            await Promise.all([fetchAuctionData(), fetchAuctionData('auc')]);
+            fetchPostData && await Promise.all([fetchPostData(), fetchPostData('auc')]);
 
             setIsFetch(false);
         } catch (e) {

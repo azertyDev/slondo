@@ -273,7 +273,7 @@ export const CommonForm: FC<DefaultParamsPropsType> = (props) => {
             setValues({...values});
         }
     };
-    console.log(values);
+
     const classes = useStyles();
     return (
         <CustomFormikProvider formik={formik}>

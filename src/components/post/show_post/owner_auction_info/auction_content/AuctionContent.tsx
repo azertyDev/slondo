@@ -18,14 +18,12 @@ import {useStyles} from './useStyles';
 
 type AuctionInfoPropsType = {
     postData,
-    archive: number,
     setFetchedPostData: () => Promise<void>
 } & WithT;
 
 export const AuctionContent: FC<AuctionInfoPropsType> = (props) => {
     const {
         t,
-        archive,
         postData,
         setFetchedPostData
     } = props;
@@ -47,7 +45,7 @@ export const AuctionContent: FC<AuctionInfoPropsType> = (props) => {
             auction_id: auctionId,
             page: 1,
             itemsPerPage: 5,
-            archive
+            archive: 0
         }
     );
     const [lastBet] = bets;
@@ -130,13 +128,12 @@ export const AuctionContent: FC<AuctionInfoPropsType> = (props) => {
                 <BetsList
                     bets={bets}
                     showBetsCount={5}
-                    archive={archive}
                     auctionId={auctionId}
                     betsCount={betsCount}
                     handleRefresh={setFetchedBetsData}
                     title={t('auction:currentRates')}
                 />
-                {!postData.creator && !archive && (
+                {!postData.creator && (
                     <>
                         <AuctionForm
                             t={t}

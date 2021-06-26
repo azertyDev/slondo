@@ -1,11 +1,11 @@
 import {FC, useState} from 'react';
 import {WithT} from 'i18next';
+import Link from 'next/link';
 import {Help} from '@material-ui/icons';
 import {Grid, Typography} from '@material-ui/core';
 import {DeliveryIcon, SafeIcon, ExchangeIcon} from '@src/components/elements/icons';
 import {site_services} from '@src/common_data/site_services';
 import {ServiceItem} from '@src/components/post/create_post/form_page/common_form/site_services/ServiceItem';
-import Link from 'next/link';
 import {SafeDealDrawer} from '@src/components/elements/safe_deal_drawer/SafeDealDrawer';
 import {useSelector} from 'react-redux';
 import {RootState} from '@src/redux/rootReducer';
@@ -41,9 +41,9 @@ export const SiteServices: FC<PaymentDeliveryPropsType> = (props) => {
 
     const handleSafeDealCheckBox = () => {
         if (hasCard) {
-            handleCheckbox('safe_deal');
+            return handleCheckbox('safe_deal');
         } else {
-            setDrawerOpen(true);
+            return () => setDrawerOpen(true);
         }
     };
 
@@ -79,7 +79,7 @@ export const SiteServices: FC<PaymentDeliveryPropsType> = (props) => {
                                     icon={<SafeIcon/>}
                                     serviceText={t('common:safe_deal')}
                                     checked={values.safe_deal}
-                                    handleCheckbox={handleSafeDealCheckBox}
+                                    handleCheckbox={handleSafeDealCheckBox()}
                                 />
                             </Grid>
                             {!iconMode && (

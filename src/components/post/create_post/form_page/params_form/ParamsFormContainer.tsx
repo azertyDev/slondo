@@ -7,8 +7,8 @@ import {prepareParamsData} from '@src/helpers';
 import {EstateParams} from '@src/components/post/create_post/form_page/params_form/categories_forms/estate_params/EstateParams';
 import {TransportParams} from '@src/components/post/create_post/form_page/params_form/categories_forms/transport_params/TransportParams';
 import {JobParams} from '@src/components/post/create_post/form_page/params_form/categories_forms/job_params/JobParams';
-import {useStyles} from './useStyles';
 import {ElectronicsParams} from '@src/components/post/create_post/form_page/params_form/categories_forms/electronics_params/ElectronicsParams';
+import {useStyles} from './useStyles';
 
 
 export type CommonParamsPropsType = {
@@ -105,8 +105,8 @@ export const ParamsFormContainer: FC<ParamsFormPropsType> = (props) => {
                     filters={filters}
                     onSubmit={onSubmit}
                     isPreview={isPreview}
-                    currentFormIndex={currentFormIndex}
                     handleFormOpen={handleFormOpen}
+                    currentFormIndex={currentFormIndex}
                 />;
             default:
                 return <RegularParams

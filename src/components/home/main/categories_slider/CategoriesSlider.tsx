@@ -1,17 +1,18 @@
-import React, {FC} from 'react';
+import {FC} from 'react';
 import {WithT} from 'i18next';
 import Link from 'next/link';
 import {Typography} from '@material-ui/core';
 import {CustomSlider} from '@src/components/elements/custom_slider/CustomSlider';
 import {settings} from './sliderSettings';
-import {site_categories} from "@src/common_data/site_categories";
+import {site_categories} from '@src/common_data/site_categories';
+import {transformCyrillic} from '@root/src/helpers';
 import {useStyles} from './useStyles';
-import { transformCyrillic } from '@root/src/helpers';
 
 
 export const CategoriesSlider: FC<WithT> = ({t}) => {
-    const classes = useStyles();
+    const location = 'uzbekistan';
 
+    const classes = useStyles();
     return (
         <div className={classes.root}>
             <Typography className="title" variant="h2">
@@ -19,30 +20,25 @@ export const CategoriesSlider: FC<WithT> = ({t}) => {
             </Typography>
             <div className="category-slider">
                 <CustomSlider {...settings}>
-                    {site_categories.map((category) =>{
-                        const location = 'uzbekistan';
-                        const categoryName = transformCyrillic(category.ru_name);
-
-                            return (
-                                <Link href={`${location}/${categoryName}`} key={category.id}>
-                                <a title={t(`categories:${category.name}`)}>
-                                    <div className="category">
-                                        <div className="bg-layer">
-                                            <div className="medium">
-                                                <img
-                                                    src={category.icon.url}
-                                                    alt={category.name}
-                                                />
-                                            </div>
+                    {site_categories.map((category) => (
+                        <Link href={`/${location}/${transformCyrillic(category.ru_name)}`} key={category.id}>
+                            <a title={t(`categories:${category.name}`)}>
+                                <div className="category">
+                                    <div className="bg-layer">
+                                        <div className="medium">
+                                            <img
+                                                src={category.icon.url}
+                                                alt={category.name}
+                                            />
                                         </div>
-                                        <span className="category-name">
-                                            {t(`categories:${category.name}`)}
-                                        </span>
                                     </div>
-                                </a>
-                            </Link>
-                        )}
-                    )}
+                                    <span className="category-name">
+                                        {t(`categories:${category.name}`)}
+                                    </span>
+                                </div>
+                            </a>
+                        </Link>
+                    ))}
                 </CustomSlider>
             </div>
         </div>

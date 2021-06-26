@@ -12,7 +12,7 @@ const localServer = 'http://192.168.100.60/slondo/public/api/';
 
 const instance = Axios.create({
     withCredentials: true,
-    baseURL: uztelecom
+    baseURL: localServer
 });
 
 // export const socketIO = socketIOClient('http://192.168.100.60:8005');
@@ -27,11 +27,19 @@ const setTokenToHeader = () => {
                 'Content-Type': 'application/json',
                 'Authorization': `Bearer ${token}`
             }
-        };
+        }
     }
 };
 
-export const uzCardAPI = {
+export const myUzCardAPI = {
+    p2pHold: (paymentData: string): Promise<any> => {
+        return instance
+            .post(`uzcard/p2p/createHold`, paymentData, setTokenToHeader())
+            .then((res) => res.data)
+            .catch(({response}) => {
+                throw response.data;
+            });
+    },
     createCard: (cardData: string): Promise<any> => {
         return instance
             .post(`uzcard/card/create`, cardData, setTokenToHeader())

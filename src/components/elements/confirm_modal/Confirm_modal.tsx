@@ -1,7 +1,6 @@
 import {FC} from 'react';
 import {CustomModal} from '@src/components/elements/custom_modal/CustomModal';
 import {CustomButton} from '@src/components/elements/custom_button/CustomButton';
-import {useTranslation} from 'next-i18next';
 
 type ConfirmModalPropsType = {
     title: string,
@@ -22,8 +21,6 @@ export const ConfirmModal: FC<ConfirmModalPropsType> = (props) => {
         handleConfirm
     } = props;
 
-    const {t} = useTranslation('common');
-
     return (
         <CustomModal
             openModal={open}
@@ -35,10 +32,10 @@ export const ConfirmModal: FC<ConfirmModalPropsType> = (props) => {
                 </div>
                 <div className='action-btns'>
                     <CustomButton onClick={handleClose}>
-                        {t(cancelTxt)}
+                        {cancelTxt}
                     </CustomButton>
                     <CustomButton onClick={handleConfirm}>
-                        {t(confirmTxt)}
+                        {confirmTxt}
                     </CustomButton>
                 </div>
             </div>

@@ -6,12 +6,18 @@ import {UserInfoWithAvatar} from '@src/components/elements/user_info_with_avatar
 import {SocialsBlock} from '@root/src/components/elements/socials_block/SocialsBlock';
 import {WithT} from 'i18next';
 import {SafeDealDrawer} from '@src/components/elements/safe_deal_drawer/SafeDealDrawer';
+import {useDispatch, useSelector} from 'react-redux';
+import {RootState} from '@src/redux/rootReducer';
+import {myUzCardAPI} from '@src/api/api';
+import {setErrorMsgAction} from '@root/src/redux/slices/errorSlice';
+import {setIsAuthModalOpen} from '@root/src/redux/slices/userSlice';
+import {ConfirmModal} from '@src/components/elements/confirm_modal/Confirm_modal';
+import {useModal} from '@src/hooks/useModal';
 import {useStyles} from './useStyles';
 
 
 type OwnerPropsType = {
     postData,
-    isFetch: boolean,
     authorPhones: { phone: string, additional_number: string },
     handleFollow: (userId) => () => void,
     showPhone: boolean,
@@ -22,7 +28,6 @@ export const OwnerContent: FC<OwnerPropsType> = (props) => {
     const {
         t,
         postData,
-        isFetch,
         authorPhones,
         handleFollow,
         showPhone,
@@ -36,11 +41,49 @@ export const OwnerContent: FC<OwnerPropsType> = (props) => {
         subscribed
     } = postData;
 
-    const showPhoneTxt = showPhone ? authorPhones.phone || 'number_not_available' : 'show_phone';
-    const [drawerOpen, setDrawerOpen] = useState(false);
+    const dispatch = useDispatch();
+    const {userCard, user} = useSelector((store: RootState) => store);
+    const isAuth = user.isAuth;
+    const hasCard = !!userCard.cardId;
 
-    const handleDrawerShow = (value) => () => {
-        setDrawerOpen(value);
+    const showPhoneTxt = showPhone ? authorPhones.phone || 'number_not_available' : 'show_phone';
+
+    const [isFetch, setIsFetch] = useState(false);
+    const [drawerOpen, setDrawerOpen] = useState(false);
+    const {modalOpen: safeDealOpen, handleModalOpen: handleOpenSafeDeal, handleModalClose: handleCloseSafeDeal} = useModal();
+
+    const payment = async () => {
+        try {
+            const p2pData = JSON.stringify({
+                amount: postData.price,
+                extraId: postData.id
+            });
+
+            setIsFetch(true);
+
+            await myUzCardAPI.p2pHold(p2pData);
+
+            handleCloseSafeDeal();
+            setIsFetch(false);
+        } catch (e) {
+            setIsFetch(false);
+            handleCloseSafeDeal();
+            dispatch(setErrorMsgAction(e.message));
+        }
+    };
+
+    const handleSafeDeal = () => {
+        if (!isAuth) {
+            dispatch(setIsAuthModalOpen(true));
+        } else if (hasCard) {
+            handleOpenSafeDeal();
+        } else {
+            setDrawerOpen(true);
+        }
+    };
+
+    const handleCloseDrawer = () => {
+        setDrawerOpen(false);
     };
 
     const classes = useStyles();
@@ -79,7 +122,7 @@ export const OwnerContent: FC<OwnerPropsType> = (props) => {
                                 <CustomButton
                                     color="primary"
                                     className="safe-shopping-btn"
-                                    onClick={handleDrawerShow(true)}
+                                    onClick={handleSafeDeal}
                                 >
                                     <SafeIcon/>
                                     <Typography variant="subtitle1" color="initial">
@@ -108,9 +151,17 @@ export const OwnerContent: FC<OwnerPropsType> = (props) => {
                     </div>
                 )}
             </Hidden>
+            <ConfirmModal
+                title={t('buy_safe_deal')}
+                open={safeDealOpen}
+                cancelTxt={t('common:cancel')}
+                confirmTxt={t('common:yes')}
+                handleConfirm={payment}
+                handleClose={handleCloseSafeDeal}
+            />
             <SafeDealDrawer
                 open={drawerOpen}
-                handleClose={handleDrawerShow(false)}
+                handleClose={handleCloseDrawer}
             />
         </div>
     );

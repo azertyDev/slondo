@@ -21,7 +21,7 @@ export const SearchCommercialProperty: FC<CommonFiltersType> = (props) => {
     const initVals = {
         estate_type: null,
         location: null,
-        payment: null,
+        p2pHold: null,
         repair: null,
         posted: null,
         area_from: '',

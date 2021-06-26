@@ -16,14 +16,12 @@ import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
 import {useStyles} from './useStyles';
 
 type CardItemProps = {
-    isFetch: boolean,
-    archive: boolean
+    isFetch: boolean
 } & CardDataType;
 
 export const GridCard: FC<CardItemProps> = (props) => {
     const dispatch = useDispatch();
     const {
-        archive,
         id,
         isFetch,
         image,
@@ -61,7 +59,7 @@ export const GridCard: FC<CardItemProps> = (props) => {
 
     const formatted_date = `${date.getDate()} ${t(`common:${months[date.getMonth()]}`)} ${date.getHours() + ':' + checkTime(date.getMinutes())}`;
 
-    const url = `/obyavlenie/${translatedTitle}-${id}${archive ? '?archive=1' : ''}`;
+    const url = `/obyavlenie/${translatedTitle}-${id}`;
 
     const handleFavorite = async () => {
         try {
