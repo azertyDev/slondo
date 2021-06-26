@@ -14,14 +14,18 @@ const MyPurchases: FC = () => {
         setTabIndex(newValue);
     };
 
+    const purchases = (
+        <div>Purchases</div>
+    );
+
     const tabsData: TabsDataType = [
         {
             id: 0,
-            title: t('purchases'),
             total: 0,
+            title: t('purchases'),
             itemsPerPage: ITEMS_PER_PAGE,
-            handleFetchByPage: null,
-            component: null
+            handleFetchByPage: () => console.log(),
+            component: purchases
         }
     ];
 
@@ -35,7 +39,7 @@ const MyPurchases: FC = () => {
             tabsData={tabsData}
             handleTabChange={handleTabChange}
         />
-    )
-}
+    );
+};
 
-export default withAuthRedirect(MyPurchases)
+export default withAuthRedirect(MyPurchases);

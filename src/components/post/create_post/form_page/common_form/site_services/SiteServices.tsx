@@ -7,8 +7,7 @@ import {DeliveryIcon, SafeIcon, ExchangeIcon} from '@src/components/elements/ico
 import {site_services} from '@src/common_data/site_services';
 import {ServiceItem} from '@src/components/post/create_post/form_page/common_form/site_services/ServiceItem';
 import {SafeDealDrawer} from '@src/components/elements/safe_deal_drawer/SafeDealDrawer';
-import {useSelector} from 'react-redux';
-import {RootState} from '@src/redux/rootReducer';
+import {useUserCard} from '@src/hooks/useUserCard';
 import {useStyles} from './useStyles';
 
 
@@ -34,21 +33,20 @@ export const SiteServices: FC<PaymentDeliveryPropsType> = (props) => {
     const hasExchange = !!site_services.exchange[categoryName];
     const hasDelivery = !!site_services.delivery[categoryName];
 
-    const {cardId} = useSelector((store: RootState) => store.userCard);
-    const hasCard = !!cardId;
-
+    const {userCard, setFetchedUserCard} = useUserCard();
     const [drawerOpen, setDrawerOpen] = useState(false);
 
     const handleSafeDealCheckBox = () => {
-        if (hasCard) {
+        if (!!userCard.cardId) {
             return handleCheckbox('safe_deal');
         } else {
             return () => setDrawerOpen(true);
         }
     };
 
-    const handleDrawerShow = (value) => () => {
-        setDrawerOpen(value);
+    const handleCloseDrawer = () => {
+        setDrawerOpen(false);
+        setFetchedUserCard();
     };
 
     const classes = useStyles();
@@ -185,7 +183,7 @@ export const SiteServices: FC<PaymentDeliveryPropsType> = (props) => {
             )}
             <SafeDealDrawer
                 open={drawerOpen}
-                handleClose={handleDrawerShow(false)}
+                handleClose={handleCloseDrawer}
             />
         </Grid>
     );

@@ -12,16 +12,23 @@ import {useHandlers} from '@src/hooks/useHandlers';
 import {phonePrepare} from '@src/helpers';
 import {myUzCardAPI} from '@src/api/api';
 import {setErrorMsgAction} from '@src/redux/slices/errorSlice';
-import {resetUserCardAction, setUserCardAction} from '@src/redux/slices/userCardSlice';
+import {useUserCard} from '@src/hooks/useUserCard';
+import {CustomCircularProgress} from '@src/components/elements/custom_circular_progress/CustomCircularProgress';
 import {useStyles} from './useStyles';
-
 
 export const UserPaymentCard: FC = () => {
     const {t} = useTranslation('cabinet');
 
     const dispatch = useDispatch();
-    const {user, userCard} = useSelector((store: RootState) => store);
-    const userId = user.info.id;
+
+    const {user} = useSelector((store: RootState) => store);
+
+    const {
+        userCard,
+        isFetchUserCard,
+        setFetchedUserCard,
+        handleResetUserCard
+    } = useUserCard();
     const hasCard = !!userCard.cardId;
 
     const [isFetch, setIsFetch] = useState(false);
@@ -64,7 +71,7 @@ export const UserPaymentCard: FC = () => {
             const phoneLastNine = phonePrepare(phone).slice(3);
 
             const cardData = JSON.stringify({
-                userId,
+                userId: user.info.id,
                 expireDate,
                 cardLastSix,
                 phoneLastNine
@@ -74,7 +81,7 @@ export const UserPaymentCard: FC = () => {
 
             const {session} = await myUzCardAPI.createCard(cardData);
 
-            setValues({...values, session});
+            await setValues({...values, session});
             setIsSmsConfirm(true);
             setIsFetch(false);
         } catch (e) {
@@ -94,17 +101,8 @@ export const UserPaymentCard: FC = () => {
 
             setIsFetch(true);
 
-            const {card} = (await myUzCardAPI.confirmSmsCode(data)).result;
-
-            dispatch(setUserCardAction({
-                id: card.id,
-                cardId: card.cardId,
-                cardName: card.cardName,
-                owner: card.owner,
-                balance: card.balance,
-                expireDate: card.expireDate,
-                number: card.number
-            }));
+            await myUzCardAPI.confirmSmsCode(data);
+            await setFetchedUserCard();
 
             setIsFetch(false);
             setIsSmsConfirm(false);
@@ -120,9 +118,9 @@ export const UserPaymentCard: FC = () => {
 
             await myUzCardAPI.removeUserCard(userCard.id);
 
+            handleResetUserCard();
             handleModalClose();
             setValues(initVals);
-            dispatch(resetUserCardAction());
             setIsFetch(false);
         } catch (e) {
             setIsFetch(false);
@@ -145,124 +143,128 @@ export const UserPaymentCard: FC = () => {
         <div className={classes.root}>
             <FormikProvider value={formik}>
                 <Form onSubmit={formik.handleSubmit}>
-                    {!hasCard && (
-                        <div className='safe-deal-title'>
-                            <Typography variant='subtitle1'>
-                                {t('add_card_for_safe_deal')}
-                            </Typography>
-                        </div>
-                    )}
-                    <Card className={classes.paymentCard}>
-                        <Grid container spacing={1} className='card-info'>
-                            {isSmsConfirm
-                             ? <>
-                                 <Grid
-                                     item
-                                     xs={5}
-                                 >
-                                     <FormikField
-                                         t={t}
-                                         name="confirm_code"
-                                         value={confirm_code}
-                                         labelText={t('sms_code')}
-                                         placeholder={t('type_sms_code')}
-                                         onChange={handleNumericInput}
-                                     />
-                                 </Grid>
-                             </>
-                             : <>
-                                 <Grid item container xs={12}>
-                                     <Grid
-                                         item
-                                         xs={12}
-                                         lg={6}
-                                         className='card-name-wrapper'
-                                     >
-                                         {hasCard
-                                          ? <Typography variant='subtitle1'>
-                                              {userCard.cardName}
-                                          </Typography>
-                                          : <FormikField
+                    {isFetchUserCard
+                     ? <CustomCircularProgress/>
+                     : <>
+                         {!hasCard && (
+                             <div className='safe-deal-title'>
+                                 <Typography variant='subtitle1'>
+                                     {t('add_card_for_safe_deal')}
+                                 </Typography>
+                             </div>
+                         )}
+                         <Card className={classes.paymentCard}>
+                             <Grid container spacing={1} className='card-info'>
+                                 {isSmsConfirm
+                                  ? <>
+                                      <Grid
+                                          item
+                                          xs={5}
+                                      >
+                                          <FormikField
                                               t={t}
-                                              name="cardName"
-                                              value={cardName}
+                                              name="confirm_code"
+                                              value={confirm_code}
+                                              labelText={t('sms_code')}
+                                              placeholder={t('type_sms_code')}
+                                              onChange={handleNumericInput}
+                                          />
+                                      </Grid>
+                                  </>
+                                  : <>
+                                      <Grid item container xs={12}>
+                                          <Grid
+                                              item
+                                              xs={12}
+                                              lg={6}
+                                              className='card-name-wrapper'
+                                          >
+                                              {hasCard
+                                               ? <Typography variant='subtitle1'>
+                                                   {userCard.cardName}
+                                               </Typography>
+                                               : <FormikField
+                                                   t={t}
+                                                   name="cardName"
+                                                   value={cardName}
+                                                   disabled={hasCard}
+                                                   placeholder={t('cardName')}
+                                                   labelText={t('cardName')}
+                                                   onChange={handleInput}
+                                               />}
+                                          </Grid>
+                                      </Grid>
+                                      <Grid
+                                          item
+                                          xs={12}
+                                          lg={6}
+                                          className='card-number-input'
+                                      >
+                                          <FormikField
+                                              t={t}
+                                              value={cardNumber}
                                               disabled={hasCard}
-                                              placeholder={t('cardName')}
-                                              labelText={t('cardName')}
-                                              onChange={handleInput}
-                                          />}
-                                     </Grid>
-                                 </Grid>
-                                 <Grid
-                                     item
-                                     xs={12}
-                                     lg={6}
-                                     className='card-number-input'
+                                              name="cardNumber"
+                                              placeholder="XXXX  XXXX  XXXX  XXXX"
+                                              labelText={t('card_number')}
+                                              onChange={handleNumericInput}
+                                          />
+                                      </Grid>
+                                      <Grid
+                                          item
+                                          xs={3}
+                                          lg={2}
+                                          className='expire-date-input'
+                                      >
+                                          <FormikField
+                                              t={t}
+                                              value={expireDate}
+                                              disabled={hasCard}
+                                              name="expireDate"
+                                              placeholder="xx/xx"
+                                              labelText={t('expiration_date')}
+                                              onChange={handleNumericInput}
+                                          />
+                                      </Grid>
+                                      {hasCard && (
+                                          <Grid
+                                              item
+                                              xs={4}
+                                          >
+                                              <Typography variant='subtitle1'>
+                                                  {userCard.balance}&nbsp;
+                                                  <span>{t('sum')}</span>
+                                              </Typography>
+                                          </Grid>
+                                      )}
+                                      <Grid
+                                          item
+                                          xs={hasCard ? 12 : 4}
+                                      >
+                                          {hasCard
+                                           ? <Typography>{userCard.owner}</Typography>
+                                           : <FormikField
+                                               t={t}
+                                               type='tel'
+                                               name="phone"
+                                               disabled={hasCard}
+                                               value={expireDate}
+                                               labelText={t('phone')}
+                                               onChange={handleNumericInput}
+                                           />}
+                                      </Grid>
+                                  </>}
+                             </Grid>
+                             <div className='save-btn-wrapper'>
+                                 <CustomButton
+                                     type='submit'
+                                     disabled={isFetch}
                                  >
-                                     <FormikField
-                                         t={t}
-                                         value={cardNumber}
-                                         disabled={hasCard}
-                                         name="cardNumber"
-                                         placeholder="XXXX  XXXX  XXXX  XXXX"
-                                         labelText={t('card_number')}
-                                         onChange={handleNumericInput}
-                                     />
-                                 </Grid>
-                                 <Grid
-                                     item
-                                     xs={3}
-                                     lg={2}
-                                     className='expire-date-input'
-                                 >
-                                     <FormikField
-                                         t={t}
-                                         value={expireDate}
-                                         disabled={hasCard}
-                                         name="expireDate"
-                                         placeholder="xx/xx"
-                                         labelText={t('expiration_date')}
-                                         onChange={handleNumericInput}
-                                     />
-                                 </Grid>
-                                 {hasCard && (
-                                     <Grid
-                                         item
-                                         xs={4}
-                                     >
-                                         <Typography variant='subtitle1'>
-                                             {userCard.balance}&nbsp;
-                                             <span>{t('sum')}</span>
-                                         </Typography>
-                                     </Grid>
-                                 )}
-                                 <Grid
-                                     item
-                                     xs={hasCard ? 12 : 4}
-                                 >
-                                     {hasCard
-                                      ? <Typography>{userCard.owner}</Typography>
-                                      : <FormikField
-                                          t={t}
-                                          type='tel'
-                                          name="phone"
-                                          disabled={hasCard}
-                                          value={expireDate}
-                                          labelText={t('phone')}
-                                          onChange={handleNumericInput}
-                                      />}
-                                 </Grid>
-                             </>}
-                        </Grid>
-                        <div className='save-btn-wrapper'>
-                            <CustomButton
-                                type='submit'
-                                disabled={isFetch}
-                            >
-                                {t(`common:${hasCard ? 'remove' : isSmsConfirm ? 'send' : 'save'}`)}
-                            </CustomButton>
-                        </div>
-                    </Card>
+                                     {t(`common:${hasCard ? 'remove' : isSmsConfirm ? 'send' : 'save'}`)}
+                                 </CustomButton>
+                             </div>
+                         </Card>
+                     </>}
                 </Form>
             </FormikProvider>
             <ConfirmModal
