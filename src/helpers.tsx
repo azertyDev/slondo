@@ -28,7 +28,7 @@ type GetFieldsByFiltersProps = {
     handleSelect,
 } & WithT;
 
-export const getFieldsByFilters = (props: GetFieldsByFiltersProps, multiple? = false) => {
+export const getFieldsByFilters = (props: GetFieldsByFiltersProps, multiple = false) => {
     const {
         t,
         isPreview,

@@ -1,11 +1,6 @@
-import React, {FC} from 'react';
-import MyPostsContainer from "@src/components/cabinet/cabinet_pages/my_posts/MyPosts";
-import {GetStaticProps} from "next";
-import {serverSideTranslations} from "next-i18next/serverSideTranslations";
-
-const Posts: FC = () => {
-    return <MyPostsContainer/>;
-};
+import MyPosts from '@src/components/cabinet/cabinet_pages/my_posts/MyPosts';
+import {GetStaticProps} from 'next';
+import {serverSideTranslations} from 'next-i18next/serverSideTranslations';
 
 export const getStaticProps: GetStaticProps = async ({locale}) => ({
     props: {
@@ -16,4 +11,4 @@ export const getStaticProps: GetStaticProps = async ({locale}) => ({
     }
 });
 
-export default Posts;
+export default MyPosts;

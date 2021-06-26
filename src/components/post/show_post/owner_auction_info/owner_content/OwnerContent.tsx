@@ -14,6 +14,7 @@ import {setIsAuthModalOpen} from '@root/src/redux/slices/userSlice';
 import {ConfirmModal} from '@src/components/elements/confirm_modal/Confirm_modal';
 import {useModal} from '@src/hooks/useModal';
 import {useStyles} from './useStyles';
+import {useUserCard} from '@src/hooks/useUserCard';
 
 
 type OwnerPropsType = {
@@ -42,7 +43,9 @@ export const OwnerContent: FC<OwnerPropsType> = (props) => {
     } = postData;
 
     const dispatch = useDispatch();
-    const {userCard, user} = useSelector((store: RootState) => store);
+    const {user} = useSelector((store: RootState) => store);
+    const {userCard} = useUserCard();
+
     const isAuth = user.isAuth;
     const hasCard = !!userCard.cardId;
 

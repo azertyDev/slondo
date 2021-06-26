@@ -1,8 +1,7 @@
-import React, {ComponentType, useEffect} from "react";
+import {ComponentType, useEffect} from "react";
 import {useDispatch} from "react-redux";
 import {cookies} from "@src/helpers";
 import {setIsAuthModalOpen} from "../redux/slices/userSlice";
-
 
 export const withAuthRedirect = (Component: ComponentType<any>) => () => {
     const dispatch = useDispatch();

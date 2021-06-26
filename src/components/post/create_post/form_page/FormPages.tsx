@@ -155,8 +155,8 @@ export const FormPages: FC = () => {
 
             await userAPI.createPost(form);
 
-            setIsSuccess(true);
             setIsFetch(false);
+            setIsSuccess(true);
         } catch (e) {
             setIsFetch(false);
             dispatch(setErrorMsgAction(e.message));

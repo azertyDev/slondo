@@ -2,9 +2,9 @@ import {FC} from 'react';
 import {Grid, Typography} from '@material-ui/core';
 import {MainLayout} from '@src/components/main_layout/MainLayout';
 import {CabinetSidebar} from './cabinet_sidebar/CabinetSidebar';
-import {useStyles} from './useStyles';
 import {useSelector} from 'react-redux';
 import {RootState} from '@src/redux/rootReducer';
+import {useStyles} from './useStyles';
 
 export type CabinetMenuPropsType = {
     title: string;
