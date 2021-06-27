@@ -6,7 +6,6 @@ import {ParkingLotsBoxes} from '@src/components/post/create_post/form_page/param
 import {CommercialPropertyParams} from '@src/components/post/create_post/form_page/params_form/categories_forms/estate_params/commercial_property_params/CommercialPropertyParams';
 import {CommonParamsPropsType} from '@src/components/post/create_post/form_page/params_form/ParamsFormContainer';
 
-
 export const EstateParams: FC<CommonParamsPropsType> = (props) => {
     const {
         t,

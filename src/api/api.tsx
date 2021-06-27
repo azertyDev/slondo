@@ -12,7 +12,7 @@ const localServer = 'http://192.168.100.60/slondo/public/api/';
 
 const instance = Axios.create({
     withCredentials: true,
-    baseURL: localServer
+    baseURL: uztelecom
 });
 
 // export const socketIO = socketIOClient('http://192.168.100.60:8005');
@@ -27,7 +27,7 @@ const setTokenToHeader = () => {
                 'Content-Type': 'application/json',
                 'Authorization': `Bearer ${token}`
             }
-        }
+        };
     }
 };
 
@@ -35,6 +35,14 @@ export const myUzCardAPI = {
     p2pHold: (paymentData: string): Promise<any> => {
         return instance
             .post(`uzcard/p2p/createHold`, paymentData, setTokenToHeader())
+            .then((res) => res.data)
+            .catch(({response}) => {
+                throw response.data;
+            });
+    },
+    performDismiss: (postId, isPerform = false): Promise<any> => {
+        return instance
+            .post(`uzcard/p2p/${isPerform ? 'performHold' : 'dismissHold'}`, postId, setTokenToHeader())
             .then((res) => res.data)
             .catch(({response}) => {
                 throw response.data;
@@ -67,6 +75,17 @@ export const myUzCardAPI = {
     removeUserCard: (cardId: number): Promise<any> => {
         return instance
             .delete(`uzcard/card/delete/${cardId}`, setTokenToHeader())
+            .then((res) => res.data)
+            .catch(({response}) => {
+                throw response.data;
+            });
+    }
+};
+
+export const userCabinetAPI = {
+    getMyPurchases: (params): Promise<any> => {
+        return instance
+            .get('regular/post/purchased', {params, ...setTokenToHeader()})
             .then((res) => res.data)
             .catch(({response}) => {
                 throw response.data;

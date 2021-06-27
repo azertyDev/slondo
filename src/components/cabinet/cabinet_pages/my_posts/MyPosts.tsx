@@ -601,7 +601,7 @@ const MyPosts: FC = () => {
             title: t('posts'),
             total: postData.total,
             itemsPerPage: ITEMS_PER_PAGE,
-            handleFetchByPage: null,
+            handleFetchByTab: null,
             component: postTabs
             // <MyPosts
             //     isFetch={postData.isFetch}
@@ -613,7 +613,7 @@ const MyPosts: FC = () => {
             title: t('securePosts'),
             total: securePosts.total,
             itemsPerPage: ITEMS_PER_PAGE,
-            handleFetchByPage: null,
+            handleFetchByTab: null,
             component: securePostTabs
             // <MyPosts
             //     isFetch={securePosts.isFetch}

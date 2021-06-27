@@ -173,7 +173,7 @@ const FavoriteContainer: FC = () => {
             title: t('posts'),
             total: favoritePostData.total,
             itemsPerPage: ITEMS_PER_PAGE,
-            handleFetchByPage: null,
+            handleFetchByTab: null,
             component: (
                 <Favorite
                     openModal={modalOpen}
@@ -189,7 +189,7 @@ const FavoriteContainer: FC = () => {
             title: t('auctions'),
             total: favoriteAucData.total,
             itemsPerPage: ITEMS_PER_PAGE,
-            handleFetchByPage: null,
+            handleFetchByTab: null,
             component: (
                 <Favorite
                     favoriteCards={favoriteAucCards}

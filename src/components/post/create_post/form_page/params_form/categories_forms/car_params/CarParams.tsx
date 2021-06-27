@@ -343,7 +343,6 @@ export const CarParams: FC<CarParamsPropsType> = (props) => {
                                              >
                                                  <FormikField
                                                      t={t}
-                                                     size='small'
                                                      name='engine_capacity'
                                                      labelText='engine_capacity'
                                                      value={values.engine_capacity}
@@ -359,7 +358,6 @@ export const CarParams: FC<CarParamsPropsType> = (props) => {
                                              >
                                                  <FormikField
                                                      t={t}
-                                                     size='small'
                                                      name='mileage'
                                                      labelText='mileage'
                                                      value={values.mileage ?? ''}
@@ -370,15 +368,15 @@ export const CarParams: FC<CarParamsPropsType> = (props) => {
                                              <Grid
                                                  item
                                                  container
-                                                 justify='flex-start'
+                                                 alignItems='flex-end'
                                                  sm={4}
                                                  xs={12}
                                              >
                                                  <CheckboxSelect
                                                      name='broken'
-                                                     labelText='broken'
+                                                     labelTxt={t('filters:broken')}
                                                      checked={values.broken}
-                                                     onChange={handleCheckbox}
+                                                     handleCheckbox={handleCheckbox}
                                                  />
                                              </Grid>
                                              <Grid
@@ -386,7 +384,7 @@ export const CarParams: FC<CarParamsPropsType> = (props) => {
                                                  xs={12}
                                              >
                                                  <Typography variant='h5'>
-                                                     <strong>{t('filters:comfort_title')}</strong>
+                                                     <strong>{t('filters:comfort_salon_title')}</strong>
                                                  </Typography>
                                              </Grid>
                                              <Grid
@@ -417,64 +415,6 @@ export const CarParams: FC<CarParamsPropsType> = (props) => {
                                                      handleSelect={handleSelect}
                                                  />
                                              </Grid>
-                                             <Grid item container xs={12}>
-                                                 <Grid
-                                                     item
-                                                     container
-                                                     sm={4}
-                                                     xs={12}
-                                                 >
-                                                     <OptionsSelect
-                                                         t={t}
-                                                         name='power_windows'
-                                                         values={values}
-                                                         options={filters.power_windows}
-                                                         handleOptionCheckbox={handleOptionCheckbox}
-                                                     />
-                                                 </Grid>
-                                                 <Grid
-                                                     item
-                                                     container
-                                                     sm={4}
-                                                     xs={12}
-                                                 >
-                                                     <OptionsSelect
-                                                         t={t}
-                                                         name='steering'
-                                                         values={values}
-                                                         options={filters.steering}
-                                                         handleOptionCheckbox={handleOptionCheckbox}
-                                                     />
-                                                 </Grid>
-                                                 <Grid
-                                                     item
-                                                     container
-                                                     sm={4}
-                                                     xs={12}
-                                                 >
-                                                     <OptionsSelect
-                                                         t={t}
-                                                         name='seat_heating'
-                                                         values={values}
-                                                         options={filters.seat_heating}
-                                                         handleOptionCheckbox={handleOptionCheckbox}
-                                                     />
-                                                 </Grid>
-                                                 <Grid
-                                                     item
-                                                     container
-                                                     sm={4}
-                                                     xs={12}
-                                                 >
-                                                     <OptionsSelect
-                                                         t={t}
-                                                         name='adjustable_seats'
-                                                         values={values}
-                                                         options={filters.adjustable_seats}
-                                                         handleOptionCheckbox={handleOptionCheckbox}
-                                                     />
-                                                 </Grid>
-                                             </Grid>
                                              <Grid
                                                  item
                                                  container
@@ -491,13 +431,63 @@ export const CarParams: FC<CarParamsPropsType> = (props) => {
                                                      handleSelect={handleSelect}
                                                  />
                                              </Grid>
-                                             <Grid
-                                                 item
-                                                 xs={12}
-                                             >
-                                                 <Typography variant='h5'>
-                                                     <strong>{t('filters:salon')}</strong>
-                                                 </Typography>
+                                             <Grid item container xs={12}>
+                                                 <Grid
+                                                     item
+                                                     container
+                                                     sm={3}
+                                                     xs={12}
+                                                 >
+                                                     <OptionsSelect
+                                                         t={t}
+                                                         name='power_windows'
+                                                         values={values}
+                                                         options={filters.power_windows}
+                                                         handleOptionCheckbox={handleOptionCheckbox}
+                                                     />
+                                                 </Grid>
+                                                 <Grid
+                                                     item
+                                                     container
+                                                     sm={3}
+                                                     xs={12}
+                                                 >
+                                                     <OptionsSelect
+                                                         t={t}
+                                                         name='steering'
+                                                         values={values}
+                                                         options={filters.steering}
+                                                         handleOptionCheckbox={handleOptionCheckbox}
+                                                     />
+                                                 </Grid>
+                                                 <Grid
+                                                     item
+                                                     container
+                                                     sm={3}
+                                                     xs={12}
+                                                 >
+                                                     <OptionsSelect
+                                                         t={t}
+                                                         name='seat_heating'
+                                                         values={values}
+                                                         options={filters.seat_heating}
+                                                         handleOptionCheckbox={handleOptionCheckbox}
+                                                     />
+                                                 </Grid>
+                                                 <Grid
+                                                     item
+                                                     container
+                                                     sm={3}
+                                                     xs={12}
+                                                 >
+                                                     <OptionsSelect
+                                                         t={t}
+                                                         name='adjustable_seats'
+                                                         values={values}
+                                                         options={filters.adjustable_seats}
+                                                         handleOptionCheckbox={handleOptionCheckbox}
+                                                     />
+                                                 </Grid>
                                              </Grid>
                                              <Grid
                                                  item
@@ -548,7 +538,7 @@ export const CarParams: FC<CarParamsPropsType> = (props) => {
                                                  xs={12}
                                              >
                                                  <Typography variant='h5'>
-                                                     <strong>{t('filters:driving_assistance')}</strong>
+                                                     <strong>{t('filters:driving_assistance_safety_title')}</strong>
                                                  </Typography>
                                              </Grid>
                                              <Grid
@@ -566,27 +556,6 @@ export const CarParams: FC<CarParamsPropsType> = (props) => {
                                                      items={filters.assistance}
                                                      handleSelect={handleSelect}
                                                  />
-                                             </Grid>
-                                             <Grid
-                                                 item
-                                                 container
-                                                 xs={12}
-                                             >
-                                                 <OptionsSelect
-                                                     t={t}
-                                                     name='parking'
-                                                     values={values}
-                                                     options={filters.parking}
-                                                     handleOptionCheckbox={handleOptionCheckbox}
-                                                 />
-                                             </Grid>
-                                             <Grid
-                                                 item
-                                                 xs={12}
-                                             >
-                                                 <Typography variant='h5'>
-                                                     <strong>{t('filters:safety_title')}</strong>
-                                                 </Typography>
                                              </Grid>
                                              <Grid
                                                  item
@@ -623,7 +592,20 @@ export const CarParams: FC<CarParamsPropsType> = (props) => {
                                              <Grid
                                                  item
                                                  container
-                                                 xs={12}
+                                                 xs={4}
+                                             >
+                                                 <OptionsSelect
+                                                     t={t}
+                                                     name='parking'
+                                                     values={values}
+                                                     options={filters.parking}
+                                                     handleOptionCheckbox={handleOptionCheckbox}
+                                                 />
+                                             </Grid>
+                                             <Grid
+                                                 item
+                                                 container
+                                                 xs={4}
                                              >
                                                  <OptionsSelect
                                                      t={t}

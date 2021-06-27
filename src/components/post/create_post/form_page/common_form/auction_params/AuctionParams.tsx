@@ -42,7 +42,6 @@ export const AuctionParams: FC<AuctionParamsPropsType> = (props) => {
                 <Grid item container spacing={2} xs={12}>
                     <Grid item container xs={4}>
                         <DropDownSelect
-                            t={t}
                             name='duration'
                             values={auction}
                             onBlur={handleBlur}
@@ -88,7 +87,7 @@ export const AuctionParams: FC<AuctionParamsPropsType> = (props) => {
                 {isAdvanceAuction && (
                     <>
                         <Grid container item xs={12} direction='column' className='buy-now-wrapper'>
-                            <Grid container item xs={12} alignItems='center'>
+                            <Grid container item xs={4} alignItems='center'>
                                 <Checkbox
                                     color='primary'
                                     checked={auction.price_buy_now.isActive}

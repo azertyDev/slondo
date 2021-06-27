@@ -118,14 +118,13 @@ export const SearchJob: FC<SearchRegularPropsType> = (props) => {
                     sm={4}
                 >
                     <CheckboxSelect
-                        name='urgent_work'
-                        labelText={t('filters:urgent_work')}
                         checked={!!values.urgent.id}
-                        onChange={handleCheckbox}
+                        labelTxt={t('urgent_work')}
+                        handleCheckbox={handleCheckbox}
                     />
                 </Grid>
                 <Grid item container xs={12}>
-                    <ActionButtons handleReset={handleReset} />
+                    <ActionButtons handleReset={handleReset}/>
                 </Grid>
             </Grid>
         </CustomFormikProvider>

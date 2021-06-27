@@ -1,4 +1,4 @@
-export const SERVER_URL = `${process.env.SERVER_URL}:${process.env.PORT}`;
+export const SERVER_URL = `${process.env.SERVER_URL || 'localhost'}:${process.env.PORT || 3317}`;
 export const ITEMS_PER_PAGE = 16;
 export const BETS_PER_PAGE = 10;
 export const SUBS_PER_PAGE = 10;

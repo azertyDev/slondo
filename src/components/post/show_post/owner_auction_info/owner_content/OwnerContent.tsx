@@ -1,4 +1,4 @@
-import {FC, useState} from 'react';
+import {FC, useEffect, useState} from 'react';
 import {Hidden, Typography} from '@material-ui/core';
 import {CustomButton} from '@src/components/elements/custom_button/CustomButton';
 import {SafeIcon} from '@root/src/components/elements/icons';
@@ -44,7 +44,7 @@ export const OwnerContent: FC<OwnerPropsType> = (props) => {
 
     const dispatch = useDispatch();
     const {user} = useSelector((store: RootState) => store);
-    const {userCard} = useUserCard();
+    const {userCard, fetchUserCard} = useUserCard();
 
     const isAuth = user.isAuth;
     const hasCard = !!userCard.cardId;
@@ -88,6 +88,10 @@ export const OwnerContent: FC<OwnerPropsType> = (props) => {
     const handleCloseDrawer = () => {
         setDrawerOpen(false);
     };
+
+    useEffect(() => {
+        fetchUserCard();
+    }, []);
 
     const classes = useStyles();
     return (

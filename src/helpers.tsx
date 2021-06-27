@@ -12,14 +12,7 @@ import {DropDownSelect} from '@src/components/elements/drop_down_select/DropDown
 import {WithT} from 'i18next';
 
 export const cookies = new Cookies();
-export const cookieOpts = {path: '/'};
-
-export const getAuthErrorMsg = (msg: string, t: TFunction) => {
-    switch (msg) {
-        case 'incorrect code':
-            return '';
-    }
-};
+export const cookieOpts: {path: string, sameSite: boolean | 'none' | 'lax' | 'strict'} = {path: '/', sameSite: 'lax'};
 
 type GetFieldsByFiltersProps = {
     isPreview?: boolean,
@@ -144,8 +137,8 @@ export const toUrlParams = (params) => {
     return url;
 };
 
-export const getSearchTxt = (data: string[] = []): string => (
-    data?.find(txt => searchTxtRegEx.test(txt))?.replace(searchTxtRegEx, '') || ''
+export const getSearchTxt = (queryData: string[] = []): string => (
+    queryData?.find(txt => searchTxtRegEx.test(txt))?.replace(searchTxtRegEx, '') || ''
 );
 
 export const setRequireParamsVals = (values, setValues, filters, subcategoryName: string) => {

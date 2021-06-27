@@ -1,9 +1,9 @@
 import {FC, useEffect, useState} from 'react';
 import {Tab, Tabs, Typography} from '@material-ui/core';
 import {CustomTabPanel} from '@src/components/elements/custom_tab_panel/CustomTabPanel';
-import {useStyles} from './useStyles';
 import {TabsDataType} from '@root/interfaces/Cabinet';
 import {CustomPagination} from '@src/components/elements/custom_pagination/CustomPagination';
+import {useStyles} from './useStyles';
 
 type TabsContentPropsType = {
     tabIndex: number,
@@ -23,12 +23,10 @@ export const ProfileTabsContent: FC<TabsContentPropsType> = (props) => {
     };
 
     useEffect(() => {
-        firstTabData.handleFetchByPage(firstTabPage);
-    }, [firstTabPage]);
-
-    useEffect(() => {
-        secondTabData.handleFetchByPage(secondTabPage);
-    }, [secondTabPage]);
+        firstTabPage
+        ? firstTabData.handleFetchByTab(firstTabPage)
+        : secondTabData.handleFetchByTab(secondTabPage);
+    }, [firstTabPage, secondTabPage]);
 
     const classes = useStyles({tabIndex});
     return (

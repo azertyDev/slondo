@@ -2,30 +2,33 @@ import {FC, ReactElement} from 'react';
 import {Checkbox, FormControlLabel, Typography} from '@material-ui/core';
 import {useStyles} from './useStyles';
 
-
 type ServiceItemPropsType = {
-    icon: ReactElement,
+    icon?: ReactElement,
     serviceText: string,
     handleCheckbox,
-    checked
+    checked,
+    name?: string
 }
 
 export const ServiceItem: FC<ServiceItemPropsType> = (props) => {
     const {
-        icon,
+        name,
+        icon = null,
         serviceText,
         checked,
         handleCheckbox
     } = props;
+
     const classes = useStyles({checked});
     return (
         <FormControlLabel
             className={classes.serviceItem}
             control={
                 <Checkbox
+                    name={name}
+                    color="primary"
                     checked={checked}
                     onChange={handleCheckbox}
-                    color="primary"
                 />
             }
             label={

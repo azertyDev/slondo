@@ -1,7 +1,8 @@
-import {FC} from 'react';
+import {FC, useEffect, useState} from 'react';
 import {Tab, Tabs, Typography} from '@material-ui/core';
 import {CustomTabPanel} from '@src/components/elements/custom_tab_panel/CustomTabPanel';
 import {CabinetMenuPropsType, CabinetWrapper} from '@src/components/cabinet/CabinetWrapper';
+import {CustomPagination} from '@src/components/elements/custom_pagination/CustomPagination';
 import {TabsDataType} from '@root/interfaces/Cabinet';
 import {useRouter} from 'next/router';
 import {useStyles} from './useStyles';
@@ -13,8 +14,29 @@ type TabsContentPropsType = {
 } & CabinetMenuPropsType;
 
 export const TabsContent: FC<TabsContentPropsType> = (props) => {
-    const {tabsData, headerTitle, title, tabIndex, handleTabChange} = props;
+    const {
+        tabsData,
+        headerTitle,
+        title,
+        tabIndex,
+        handleTabChange
+    } = props;
+
     const {pathname} = useRouter();
+    const [firstTabData, secondTabData] = tabsData;
+
+    const [firstTabPage, setFirstTabPage] = useState(1);
+    const [secondTabPage, setSecondTabPage] = useState(1);
+
+    const handlePagePagination = (setPage) => (_, pageNum) => {
+        setPage(pageNum);
+    };
+
+    useEffect(() => {
+        firstTabPage
+        ? firstTabData.handleFetchByTab(firstTabPage)
+        : secondTabData.handleFetchByTab(secondTabPage);
+    }, [firstTabPage, secondTabPage]);
 
     const classes = useStyles({pathname, tabIndex});
     return (
@@ -35,7 +57,7 @@ export const TabsContent: FC<TabsContentPropsType> = (props) => {
                         value={0}
                         textColor='inherit'
                     />
-                    {tabsData[1] && (
+                    {secondTabData && (
                         <Tab
                             label={
                                 <Typography variant="subtitle1">
@@ -49,11 +71,23 @@ export const TabsContent: FC<TabsContentPropsType> = (props) => {
                     )}
                 </Tabs>
                 <CustomTabPanel value={tabIndex} index={0}>
-                    {tabsData[0].component}
+                    {firstTabData.component}
+                    <CustomPagination
+                        currentPage={firstTabPage}
+                        totalItems={firstTabData.total}
+                        itemsPerPage={firstTabData.itemsPerPage}
+                        handlePagePagination={handlePagePagination(setFirstTabPage)}
+                    />
                 </CustomTabPanel>
-                {tabsData[1] && (
+                {secondTabData && (
                     <CustomTabPanel value={tabIndex} index={1}>
-                        {tabsData[1].component}
+                        {secondTabData.component}
+                        <CustomPagination
+                            currentPage={secondTabPage}
+                            totalItems={secondTabData.total}
+                            itemsPerPage={secondTabData.itemsPerPage}
+                            handlePagePagination={handlePagePagination(setSecondTabPage)}
+                        />
                     </CustomTabPanel>
                 )}
             </CabinetWrapper>

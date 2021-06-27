@@ -6,8 +6,8 @@ import {MainLayout} from '@src/components/main_layout/MainLayout';
 import {Steps} from '@src/components/post/create_post/steps/Steps';
 import {useRouter} from 'next/router';
 import {CustomButton} from '@src/components/elements/custom_button/CustomButton';
+import {DoubleCheckIcon} from '@src/components/elements/icons';
 import {useStyles} from './useStyles';
-import {ServiceItem} from '@src/components/elements/service_item/ServiceItem';
 
 
 export const PostTypesPage: FC = () => {
@@ -47,13 +47,16 @@ export const PostTypesPage: FC = () => {
                                     </div>
                                     <div style={{backgroundImage: `url(${postType.image.url})`}} className='post-img'/>
                                     <div className='post-bottom'>
-                                        {
-                                            Object.entries(postType.services).map(([key, value]) => {
-                                                return (
-                                                    <ServiceItem text={t(`common:${key}`)} value={value} key={key}/>
-                                                );
-                                            })
-                                        }
+                                        {Object.entries(postType.services).map(([key, value]) => (
+                                            <div className={classes.postType} key={key}>
+                                                <DoubleCheckIcon checked={value}/>
+                                                <Typography
+                                                    style={{color: value ? '#828282' : '#E0E0E0'}} variant="subtitle2"
+                                                >
+                                                    {t(`common:${key}`)}
+                                                </Typography>
+                                            </div>
+                                        ))}
                                     </div>
                                 </Hidden>
                                 <Hidden mdUp>
@@ -65,16 +68,19 @@ export const PostTypesPage: FC = () => {
                                         </div>
                                     </Hidden>
                                     <div className='post-bottom'>
-                                        <div style={{backgroundImage: `url(${postType.image.url})`}}
-                                             className='post-img'/>
+                                        <div
+                                            style={{backgroundImage: `url(${postType.image.url})`}}
+                                            className='post-img'
+                                        />
                                         <div className='options-wrapper'>
-                                            {
-                                                Object.entries(postType.services).map(([key, value]) => {
-                                                    return (
-                                                        <ServiceItem text={t(`common:${key}`)} value={value} key={key}/>
-                                                    );
-                                                })
-                                            }
+                                            {Object.entries(postType.services).map(([key, value]) => (
+                                                <div className={classes.postType} key={key}>
+                                                    <DoubleCheckIcon checked={value}/>
+                                                    <Typography variant="subtitle2">
+                                                        {t(`common:${key}`)}
+                                                    </Typography>
+                                                </div>
+                                            ))}
                                         </div>
                                     </div>
                                 </Hidden>

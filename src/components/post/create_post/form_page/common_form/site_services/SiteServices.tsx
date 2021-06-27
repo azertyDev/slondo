@@ -1,4 +1,4 @@
-import {FC, useState} from 'react';
+import {FC, useEffect, useState} from 'react';
 import {WithT} from 'i18next';
 import Link from 'next/link';
 import {Help} from '@material-ui/icons';
@@ -13,10 +13,11 @@ import {useStyles} from './useStyles';
 
 type PaymentDeliveryPropsType = {
     values,
+    handleCheckbox,
+    categoryName: string,
     iconMode?: boolean,
     isAuction: boolean,
-    handleCheckbox,
-    categoryName: string
+    isCommonForm?: boolean
 } & WithT;
 
 export const SiteServices: FC<PaymentDeliveryPropsType> = (props) => {
@@ -26,18 +27,20 @@ export const SiteServices: FC<PaymentDeliveryPropsType> = (props) => {
         iconMode,
         isAuction,
         handleCheckbox,
-        categoryName
+        categoryName,
+        isCommonForm
     } = props;
 
-    const hasSafeDeal = !!site_services.safe_deal[categoryName];
-    const hasExchange = !!site_services.exchange[categoryName];
-    const hasDelivery = !!site_services.delivery[categoryName];
+    const hasSafeDeal = !!site_services.safe_deal[categoryName] || !categoryName;
+    const hasExchange = !!site_services.exchange[categoryName] || !categoryName;
+    const hasDelivery = !!site_services.delivery[categoryName] || !categoryName;
 
-    const {userCard, setFetchedUserCard} = useUserCard();
+    const {userCard, fetchUserCard} = useUserCard();
+    const hasCard = !!userCard.cardId;
     const [drawerOpen, setDrawerOpen] = useState(false);
 
     const handleSafeDealCheckBox = () => {
-        if (!!userCard.cardId) {
+        if (!isCommonForm || hasCard) {
             return handleCheckbox('safe_deal');
         } else {
             return () => setDrawerOpen(true);
@@ -46,8 +49,12 @@ export const SiteServices: FC<PaymentDeliveryPropsType> = (props) => {
 
     const handleCloseDrawer = () => {
         setDrawerOpen(false);
-        setFetchedUserCard();
+        fetchUserCard();
     };
+
+    useEffect(() => {
+        isCommonForm && fetchUserCard();
+    }, []);
 
     const classes = useStyles();
     return (

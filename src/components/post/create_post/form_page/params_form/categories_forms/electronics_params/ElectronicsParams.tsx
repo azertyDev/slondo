@@ -89,8 +89,9 @@ export const ElectronicsParams: FC<CommonParamsPropsType> = (props) => {
                         >
                             <CheckboxSelect
                                 name='build_in_speakers'
+                                labelTxt={t('build_in_speakers')}
                                 checked={values.build_in_speakers}
-                                onChange={handleCheckbox}
+                                handleCheckbox={handleCheckbox}
                             />
                         </Grid>
                         <Grid
@@ -101,8 +102,9 @@ export const ElectronicsParams: FC<CommonParamsPropsType> = (props) => {
                         >
                             <CheckboxSelect
                                 name='usb_connector'
+                                labelTxt={t('usb_connector')}
                                 checked={values.usb_connector}
-                                onChange={handleCheckbox}
+                                handleCheckbox={handleCheckbox}
                             />
                         </Grid>
                     </Grid>

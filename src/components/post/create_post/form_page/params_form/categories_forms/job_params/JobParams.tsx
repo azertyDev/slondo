@@ -137,9 +137,9 @@ export const JobParams: FC<CommonParamsPropsType> = (props) => {
                          >
                              <CheckboxSelect
                                  name='urgent_work'
-                                 labelText={t('filters:urgent_work')}
+                                 labelTxt={t('filters:urgent_work')}
                                  checked={!!values?.urgent_work?.id}
-                                 onChange={handleCheckbox}
+                                 handleCheckbox={handleCheckbox}
                              />
                          </Grid>
                      </>}

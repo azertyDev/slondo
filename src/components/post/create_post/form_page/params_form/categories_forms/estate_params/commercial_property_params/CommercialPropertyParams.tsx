@@ -16,7 +16,6 @@ import {CustomAccordion} from '@src/components/elements/accordion/CustomAccordio
 import {ParametersIcon} from '@src/components/elements/icons';
 import {useStyles} from './useStyles';
 
-
 export const CommercialPropertyParams: FC<CommonParamsPropsType> = (props) => {
     const {
         t,
@@ -69,7 +68,7 @@ export const CommercialPropertyParams: FC<CommonParamsPropsType> = (props) => {
                         {isPreview
                          ? <PreviewValues t={t} values={values}/>
                          : <>
-                             <Grid item container xs={12} alignItems='center'>
+                             <Grid item container xs={12}>
                                  <DeployedSelect
                                      name='estate_type'
                                      values={values}

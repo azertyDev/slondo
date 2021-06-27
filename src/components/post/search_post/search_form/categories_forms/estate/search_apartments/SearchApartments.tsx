@@ -1,45 +1,21 @@
 import {FC, useEffect} from 'react';
-import {useFormik} from 'formik';
 import {Grid} from '@material-ui/core';
 import {useTranslation} from 'react-i18next';
 import {DropDownSelect} from '@src/components/elements/drop_down_select/DropDownSelect';
-import {CommonFiltersType} from '@src/components/post/search_post/search_form/SearchForm';
 import {useHandlers} from '@src/hooks/useHandlers';
-import {CustomFormikProvider} from '@src/components/elements/custom_formik_provider/CustomFormikProvider';
 import {FromToInputs} from '@src/components/elements/from_to_inputs/FromToInputs';
 import {ShowHide} from '@src/components/elements/show_hide/ShowHide';
 import {CheckboxSelect} from '@src/components/elements/checkbox_select/CheckboxSelect';
+import {SubcategoryFormTypes} from '@src/components/post/search_post/search_form/categories_forms/estate/SearchEstate';
 
-
-export const SearchApartments: FC<CommonFiltersType> = (props) => {
+export const SearchApartments: FC<SubcategoryFormTypes> = (props) => {
     const {
         isRent,
-        onSubmit,
+        formik,
         filters,
         urlParams,
         sameWithUrlCtgr
     } = props;
-
-    const initVals = {
-        estate_type: null,
-        room: [],
-        area_from: '',
-        area_to: '',
-        floor_from: '',
-        floor_to: '',
-        number_of_floors_from: '',
-        number_of_floors_to: '',
-        material: [],
-        metro: [],
-        repair: [],
-        furnished: false,
-        with_pledge: false
-    };
-
-    const formik = useFormik<any>({
-        initialValues: initVals,
-        onSubmit
-    });
 
     const {
         values,
@@ -56,7 +32,7 @@ export const SearchApartments: FC<CommonFiltersType> = (props) => {
     }, [filters]);
 
     return (
-        <CustomFormikProvider formik={formik}>
+        <>
             <Grid className='main-params' item container spacing={1}>
                 <Grid
                     item
@@ -212,23 +188,23 @@ export const SearchApartments: FC<CommonFiltersType> = (props) => {
                             <Grid item container xs={6} md={4} alignItems='flex-end'>
                                 <CheckboxSelect
                                     name='with_pledge'
-                                    labelText={t('filters:with_pledge')}
+                                    labelTxt={t('filters:with_pledge')}
                                     checked={values.with_pledge}
-                                    onChange={handleCheckbox}
+                                    handleCheckbox={handleCheckbox}
                                 />
                             </Grid>
                         )}
                         <Grid item container xs={6} md={4} alignItems='flex-end'>
                             <CheckboxSelect
                                 name='furnished'
-                                labelText={t('filters:furnished')}
+                                labelTxt={t('filters:furnished')}
                                 checked={values.furnished}
-                                onChange={handleCheckbox}
+                                handleCheckbox={handleCheckbox}
                             />
                         </Grid>
                     </Grid>
                 </Grid>
             </ShowHide>
-        </CustomFormikProvider>
+        </>
     );
 };
