@@ -1,19 +1,17 @@
 import {FC} from 'react';
-import {List, ListItem, ListItemText, Typography} from '@material-ui/core';
 import {useRouter} from 'next/router';
+import {List, ListItem, ListItemText, Typography} from '@material-ui/core';
+import {useTranslation} from 'next-i18next';
 import {CustomBadge} from '@src/components/elements/custom_budge/CustomBadge';
-import {useStyles} from './useStyles';
-import {WithT} from 'i18next';
 import {UserInfo} from '@root/interfaces/Auth';
+import {useStyles} from './useStyles';
 
 type UserSocialInfoPropsType = {
     user: UserInfo
-} & WithT
+}
 
-export const UserSocialInfo: FC<UserSocialInfoPropsType> = ({t, user}) => {
-    const {
-        number_of_reviews
-    } = user.observer;
+export const UserSocialInfo: FC<UserSocialInfoPropsType> = ({user}) => {
+    const {t} = useTranslation('cabinet');
 
     const {pathname, push} = useRouter();
 
@@ -25,7 +23,7 @@ export const UserSocialInfo: FC<UserSocialInfoPropsType> = ({t, user}) => {
     return (
         <div className={classes.root}>
             <List component="nav" className='menu-item row' disablePadding>
-                <CustomBadge badgeContent={number_of_reviews}>
+                <CustomBadge badgeContent={user.observer.number_of_reviews}>
                     <ListItem
                         button
                         onClick={onButtonClick('ratings')}
@@ -48,7 +46,6 @@ export const UserSocialInfo: FC<UserSocialInfoPropsType> = ({t, user}) => {
                     </Typography>
                 </ListItem>
             </List>
-
             <List component="nav" aria-label="cabinet menu" className='menu-item' disablePadding>
                 <CustomBadge badgeContent={0} color='error'>
                     <ListItem
@@ -57,10 +54,10 @@ export const UserSocialInfo: FC<UserSocialInfoPropsType> = ({t, user}) => {
                         onClick={onButtonClick('bannedPosts')}
                         disableGutters
                     >
-                        <ListItemText primary={t('cabinet:bannedPosts')} />
+                        <ListItemText primary={t('cabinet:bannedPosts')}/>
                     </ListItem>
                 </CustomBadge>
             </List>
         </div>
-    )
-}
+    );
+};

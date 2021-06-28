@@ -1,4 +1,4 @@
-import {FC, useState} from 'react';
+import {FC, useEffect, useState} from 'react';
 import {Hidden, Typography} from '@material-ui/core';
 import {CustomButton} from '@src/components/elements/custom_button/CustomButton';
 import {SafeIcon} from '@root/src/components/elements/icons';
@@ -14,6 +14,7 @@ import {setIsAuthModalOpen} from '@root/src/redux/slices/userSlice';
 import {ConfirmModal} from '@src/components/elements/confirm_modal/Confirm_modal';
 import {useModal} from '@src/hooks/useModal';
 import {useStyles} from './useStyles';
+import {useUserCard} from '@src/hooks/useUserCard';
 
 
 type OwnerPropsType = {
@@ -42,7 +43,9 @@ export const OwnerContent: FC<OwnerPropsType> = (props) => {
     } = postData;
 
     const dispatch = useDispatch();
-    const {userCard, user} = useSelector((store: RootState) => store);
+    const {user} = useSelector((store: RootState) => store);
+    const {userCard, fetchUserCard} = useUserCard();
+
     const isAuth = user.isAuth;
     const hasCard = !!userCard.cardId;
 
@@ -85,6 +88,10 @@ export const OwnerContent: FC<OwnerPropsType> = (props) => {
     const handleCloseDrawer = () => {
         setDrawerOpen(false);
     };
+
+    useEffect(() => {
+        fetchUserCard();
+    }, []);
 
     const classes = useStyles();
     return (

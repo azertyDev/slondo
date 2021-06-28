@@ -21,13 +21,11 @@ const BannedPostsContainer: FC = () => {
     const classes = useStyles();
 
     const initialBannedPostsState: InitialCabinetCardState = {
-        isFetch: false,
-        myPosts: {
-            total: 0,
-            data: []
-        }
+        total: 0,
+        data: []
     };
 
+    const [isFetch, setIsFetch] = useState(false);
     const [postData, setPostData] = useState(initialBannedPostsState);
     const [aucData, setAucData] = useState(initialBannedPostsState);
     const [selectedPostId, setSelectedPostId] = useState<number>(null);
@@ -56,17 +54,12 @@ const BannedPostsContainer: FC = () => {
     };
     const fetchBannedPostsData = async (type: string) => {
         try {
-            const isPost = type === 'post';
-            if (isPost) {
-                setPostData({...postData, isFetch: true});
-                const {data, total} = await userAPI.getBannedPosts(type);
-                setPostData({myPosts: {data, total}, isFetch: false});
-            } else {
-                setAucData({...aucData, isFetch: true});
-                const {data, total} = await userAPI.getBannedPosts(type);
-                setAucData({myPosts: {data, total}, isFetch: false});
-            }
+            setIsFetch(true);
+            const {data, total} = await userAPI.getBannedPosts(type);
+            type === 'post' ? setPostData({data, total}) : setAucData({data, total});
+            setIsFetch(false);
         } catch (e) {
+            setIsFetch(false);
             dispatch(setErrorMsgAction(e.message));
         }
     };
@@ -127,19 +120,19 @@ const BannedPostsContainer: FC = () => {
     const ModalContent = () => (
         <>
             {modalContentIndex === 1
-                ? <Typography className="title" variant="h6">
-                    Объявление № {selectedPostId}
-                </Typography>
-                : modalContentIndex === 5
-                    ? null
-                    : <IconButton
-                        className='prev-btn'
-                        aria-label="back"
-                        size="medium"
-                        onClick={handlePrevMenu}
-                    >
-                        <ArrowBackIcon fontSize="inherit" />
-                    </IconButton>
+             ? <Typography className="title" variant="h6">
+                 Объявление № {selectedPostId}
+             </Typography>
+             : modalContentIndex === 5
+               ? null
+               : <IconButton
+                   className='prev-btn'
+                   aria-label="back"
+                   size="medium"
+                   onClick={handlePrevMenu}
+               >
+                   <ArrowBackIcon fontSize="inherit"/>
+               </IconButton>
             }
             {getModalContent()}
         </>
@@ -150,26 +143,26 @@ const BannedPostsContainer: FC = () => {
         fetchBannedPostsData('auc');
     }, []);
 
-    const bannedPostCards = postData.myPosts.data.map(data => (
+    const bannedPostCards = postData.data.map(data => (
         <Box mb={3} key={data.id}>
             <Grid container>
                 <Grid item xs={9}>
                     <CabinetCard
                         cardData={data}
-                        handleModalOpen={handleModalOpen}
+                        handleOpenModal={handleModalOpen}
                     />
                 </Grid>
             </Grid>
         </Box>
     ));
 
-    const bannedAucCards = aucData.myPosts.data.map(data => (
+    const bannedAucCards = aucData.data.map(data => (
         <Box mb={3} key={data.id}>
             <Grid container>
                 <Grid item xs={9}>
                     <CabinetCard
                         cardData={data}
-                        handleModalOpen={handleModalOpen}
+                        handleOpenModal={handleModalOpen}
                     />
                 </Grid>
             </Grid>
@@ -180,9 +173,9 @@ const BannedPostsContainer: FC = () => {
         {
             id: 0,
             title: t('posts'),
-            total: postData.myPosts.total,
+            total: postData.total,
             itemsPerPage: ITEMS_PER_PAGE,
-            handleFetchByPage: null,
+            handleFetchByTab: null,
             component: (
                 <BannedPosts
                     t={t}
@@ -199,9 +192,9 @@ const BannedPostsContainer: FC = () => {
         {
             id: 1,
             title: t('auctions'),
-            total: aucData.myPosts.total,
+            total: aucData.total,
             itemsPerPage: ITEMS_PER_PAGE,
-            handleFetchByPage: null,
+            handleFetchByTab: null,
             component: (
                 <BannedPosts
                     t={t}

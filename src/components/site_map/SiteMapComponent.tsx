@@ -1,11 +1,11 @@
-import React, {FC} from 'react';
-import {Grid, Typography} from '@material-ui/core';
+import {FC} from 'react';
 import Link from 'next/link';
-import {useStyles} from './useStyles';
+import {Grid, Typography} from '@material-ui/core';
 import {useTranslation} from "react-i18next";
+import {site_categories} from '@src/common_data/site_categories';
+import {useStyles} from './useStyles';
 
-
-export const SiteMapComponent: FC<any> = ({categories}) => {
+export const SiteMapComponent: FC = () => {
     const {t} = useTranslation(['categories']);
     const classes = useStyles();
     return (
@@ -14,9 +14,9 @@ export const SiteMapComponent: FC<any> = ({categories}) => {
                 Карта сайта (Категории)
             </Typography>
             <Grid container justify="center">
-                {categories.map((el) => (
+                {site_categories.map((el) => (
                     <Grid item xs={9} className={classes.row} key={el.id}>
-                        <div className='category-icon'>{el.colorIcon}</div>
+                        <div className='category-icon'>{el.icon}</div>
                         <div>
                             <Typography variant="h6" color="initial">
                                 {t(`categories:${el.name}`)}

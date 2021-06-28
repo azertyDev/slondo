@@ -1,5 +1,5 @@
 import {FC} from 'react';
-import {GridMode} from '@src/components/elements/card/card_view/grid_mode/GridMode';
+import {GridCard} from '@src/components/elements/card/grid_card/GridCard';
 import Typography from '@material-ui/core/Typography';
 import {useStyles} from './useStyles';
 
@@ -19,7 +19,7 @@ export const SimilarPosts: FC<SimilarPostsPropsType> = (props) => {
             <Typography variant="subtitle1" color="initial">
                 Похожие объявления
             </Typography>
-            <GridMode isFetch={isFetch} data={list}/>
+            <GridCard isFetch={isFetch} {...list}/>
         </div>
     );
 };

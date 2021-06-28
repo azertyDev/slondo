@@ -1,6 +1,6 @@
-import MyPurchasesContainer from '@src/components/cabinet/cabinet_pages/my_purchases/MyPurchases'
-import {GetStaticProps} from "next";
-import {serverSideTranslations} from "next-i18next/serverSideTranslations";
+import MyPurchases from '@src/components/cabinet/cabinet_pages/my_purchases/MyPurchases';
+import {GetStaticProps} from 'next';
+import {serverSideTranslations} from 'next-i18next/serverSideTranslations';
 
 export const getStaticProps: GetStaticProps = async ({locale}) => ({
     props: {
@@ -11,4 +11,4 @@ export const getStaticProps: GetStaticProps = async ({locale}) => ({
     }
 });
 
-export default MyPurchasesContainer
+export default MyPurchases;

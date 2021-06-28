@@ -69,12 +69,14 @@ export const CabinetCard: FC<CabinetCardPropsType> = (props) => {
             </Box>
             <Box position='relative'>
                 <ListCard cardData={cardData}/>
-                <CustomButton className='unfold-btn' onClick={handleDetailedOpen(id, cardData)}>
-                    <Typography variant='subtitle1'>
-                        Раскрыть объявление
-                    </Typography>&nbsp;
-                    <ChevronRight color='action'/>
-                </CustomButton>
+                {handleDetailedOpen && (
+                    <CustomButton className='unfold-btn' onClick={handleDetailedOpen(id, cardData)}>
+                        <Typography variant='subtitle1'>
+                            Раскрыть объявление
+                        </Typography>&nbsp;
+                        <ChevronRight color='action'/>
+                    </CustomButton>
+                )}
                 <div className='card-btns'>
                     {pathname?.includes('favorite')
                      ? <CustomButton className='delete_favorite' onClick={handleOpenModal(id)}>

@@ -1,6 +1,6 @@
 import {Dispatch, FC, SetStateAction} from 'react';
 import {useTranslation} from 'next-i18next';
-import {Grid, Typography} from '@material-ui/core';
+import {Grid} from '@material-ui/core';
 import {AuctionParams} from './auction_params/AuctionParams';
 import {SiteServices} from './site_services/SiteServices';
 import {Contacts} from './contacts/Contacts';
@@ -336,6 +336,7 @@ export const CommonForm: FC<DefaultParamsPropsType> = (props) => {
                             <div>
                                 <SiteServices
                                     t={t}
+                                    isCommonForm
                                     values={values}
                                     isAuction={isAuction}
                                     categoryName={categoryName}

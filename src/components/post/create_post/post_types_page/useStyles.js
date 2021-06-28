@@ -114,7 +114,6 @@ export const useStyles = makeStyles((theme) => ({
                         marginBottom: '6px'
                     }
                 }
-                // MuiButtonBase-root
             },
             '& > div.guide': {
                 textAlign: 'center',
@@ -141,6 +140,28 @@ export const useStyles = makeStyles((theme) => ({
                     color: 'rgba(49, 49, 49, 0.6)'
                 }
             }
+        }
+    },
+    postType: {
+        display: 'flex',
+        marginBottom: '5px',
+        [theme.breakpoints.down('sm')]: {
+            marginBottom: '25px'
+        },
+        [theme.breakpoints.down('xs')]: {
+            marginBottom: '15px'
+        },
+        '&:last-child': {
+            marginBottom: 0
+        },
+        alignItems: 'center',
+        '& h6.MuiTypography-subtitle2': {
+            [theme.breakpoints.down('xs')]: {
+                fontSize: '10px'
+            }
+        },
+        '& svg': {
+            marginRight: '9px'
         }
     }
 }));

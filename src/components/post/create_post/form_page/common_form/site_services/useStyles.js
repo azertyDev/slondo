@@ -33,12 +33,12 @@ export const useStyles = makeStyles(() => ({
     serviceItem: {
         margin: 0,
         height: 40,
-        padding: '8px',
+        padding: '7px 20px',
         userSelect: 'none',
         background: '#FFFFFF',
         borderRadius: '100px',
         boxShadow: '0px 0px 15px rgb(0 0 0 / 10%)',
-        border: props => props.checked && '1px solid',
+        border: '1px solid #4e4e4e',
         borderColor: props => props.checked && '#AD66D5',
         '& .MuiButtonBase-root': {
             padding: 0,

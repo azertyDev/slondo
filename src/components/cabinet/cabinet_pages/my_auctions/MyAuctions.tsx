@@ -497,7 +497,7 @@ export const MyAuctions: FC = () => {
             title: t('createdAuc'),
             total: auctionData.total,
             itemsPerPage: ITEMS_PER_PAGE,
-            handleFetchByPage: null,
+            handleFetchByTab: null,
             component: createdAuctionTabs
         },
         {
@@ -505,7 +505,7 @@ export const MyAuctions: FC = () => {
             title: t('participatingAuc'),
             total: participatingData.total,
             itemsPerPage: ITEMS_PER_PAGE,
-            handleFetchByPage: null,
+            handleFetchByTab: null,
             component: participatingAuctionTabs
         }
     ];

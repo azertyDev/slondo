@@ -71,8 +71,6 @@ export const SearchTransport: FC<SearchRegularPropsType> = (props) => {
         resetForm();
     }, [category, subcategory, type]);
 
-    console.log(sameWithUrlCtgr);
-    console.log(values);
     return (
         <CustomFormikProvider formik={formik}>
             <Grid container spacing={1}>

@@ -1,4 +1,4 @@
-import {FC, ReactNode} from 'react';
+import {FC, ReactNode, useEffect} from 'react';
 import {SearchApartments} from '@src/components/post/search_post/search_form/categories_forms/estate/search_apartments/SearchApartments';
 import {SearchHousesCottages} from '@src/components/post/search_post/search_form/categories_forms/estate/search_houses_cottages/SearchHousesCottages';
 import {SearchCommercialProperty} from '@src/components/post/search_post/search_form/categories_forms/estate/search_commercial_property/SearchCommercialProperty';
@@ -7,6 +7,8 @@ import {SearchParkingLotsBoxes} from '@src/components/post/search_post/search_fo
 import {CommonFiltersType} from '@src/components/post/search_post/search_form/SearchForm';
 import {ActionButtons} from '@src/components/post/search_post/search_form/ActionButtons';
 import {Grid} from '@material-ui/core';
+import {CustomFormikProvider} from '@src/components/elements/custom_formik_provider/CustomFormikProvider';
+import {useFormik} from 'formik';
 
 type SearchEstatePropsType = {
     subcategoryName: string,
@@ -15,6 +17,10 @@ type SearchEstatePropsType = {
     filters,
     handleReset: () => void,
     urlParams
+} & CommonFiltersType;
+
+export type SubcategoryFormTypes = {
+    formik
 } & CommonFiltersType;
 
 export const SearchEstate: FC<SearchEstatePropsType> = (props) => {
@@ -28,12 +34,46 @@ export const SearchEstate: FC<SearchEstatePropsType> = (props) => {
         sameWithUrlCtgr
     } = props;
 
-    const getFiltersByCtgr = (): ReactNode => {
+    const initialValues = {
+        estate_type: null,
+        room: [],
+        area_from: '',
+        area_to: '',
+        floor_from: '',
+        floor_to: '',
+        number_of_floors_from: '',
+        number_of_floors_to: '',
+        material: [],
+        metro: [],
+        repair: [],
+        furnished: false,
+        with_pledge: false,
+        general_area_from: '',
+        general_area_to: '',
+        land_area_from: '',
+        land_area_to: '',
+        location: null,
+        p2pHold: null,
+        posted: null,
+        electricity: null,
+        sewerage: null,
+        gas: null,
+        water: null,
+        parking_spaces_from: '',
+        parking_spaces_to: ''
+    };
+
+    const formik = useFormik<any>({
+        initialValues: initialValues,
+        onSubmit
+    });
+
+    function getFormByCtgr(): ReactNode {
         switch (subcategoryName) {
             case 'apartments':
                 return <SearchApartments
+                    formik={formik}
                     isRent={isRent}
-                    onSubmit={onSubmit}
                     filters={filters}
                     handleReset={handleReset}
                     urlParams={urlParams}
@@ -41,8 +81,8 @@ export const SearchEstate: FC<SearchEstatePropsType> = (props) => {
                 />;
             case 'housesCottages':
                 return <SearchHousesCottages
+                    formik={formik}
                     isRent={isRent}
-                    onSubmit={onSubmit}
                     filters={filters}
                     handleReset={handleReset}
                     urlParams={urlParams}
@@ -50,8 +90,8 @@ export const SearchEstate: FC<SearchEstatePropsType> = (props) => {
                 />;
             case 'commercialProperty':
                 return <SearchCommercialProperty
+                    formik={formik}
                     isRent={isRent}
-                    onSubmit={onSubmit}
                     filters={filters}
                     handleReset={handleReset}
                     urlParams={urlParams}
@@ -59,7 +99,7 @@ export const SearchEstate: FC<SearchEstatePropsType> = (props) => {
                 />;
             case 'land':
                 return <SearchLand
-                    onSubmit={onSubmit}
+                    formik={formik}
                     filters={filters}
                     handleReset={handleReset}
                     urlParams={urlParams}
@@ -67,21 +107,25 @@ export const SearchEstate: FC<SearchEstatePropsType> = (props) => {
                 />;
             case 'parkingLotsAndBoxes':
                 return <SearchParkingLotsBoxes
-                    onSubmit={onSubmit}
+                    formik={formik}
                     filters={filters}
                     handleReset={handleReset}
                     urlParams={urlParams}
                     sameWithUrlCtgr={sameWithUrlCtgr}
                 />;
         }
-    };
+    }
+
+    useEffect(() => {
+        formik.setValues(initialValues);
+    }, [subcategoryName]);
 
     return (
-        <>
-            {getFiltersByCtgr()}
+        <CustomFormikProvider formik={formik}>
+            {!!subcategoryName && getFormByCtgr()}
             <Grid item container xs={12}>
-                <ActionButtons handleReset={handleReset} />
+                <ActionButtons handleReset={handleReset}/>
             </Grid>
-        </>
+        </CustomFormikProvider>
     );
 };

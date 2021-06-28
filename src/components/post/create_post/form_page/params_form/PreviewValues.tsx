@@ -12,7 +12,7 @@ type PreviewValuesPropsType = {
 export const PreviewValues: FC<PreviewValuesPropsType> = (props) => {
     const {t, values} = props;
     return (
-        <Grid item container>
+        <Grid container>
             {Object.keys(values).map(key => {
                     let value;
                     const isString = typeof values[key] === 'string';
@@ -41,7 +41,8 @@ export const PreviewValues: FC<PreviewValuesPropsType> = (props) => {
                                      disabled
                                      checked
                                      name={key}
-                                     labelText={key}
+                                     labelTxt={key}
+                                     handleCheckbox={null}
                                  />
                                  : <Typography variant="subtitle1">
                                      <strong>

@@ -1,5 +1,7 @@
 {
+  "perform": "Tastiqlash",
   "yes": "Ha",
+  "no": "Yo'q",
   "reject": "Rad etish",
   "accept": "Qabul qilish",
   "send": "Yuborish",

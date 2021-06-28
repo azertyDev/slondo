@@ -5,7 +5,6 @@ import {CardData, CardDataType} from '@root/interfaces/CardData';
 import {SimilarPosts} from './SimilarPosts';
 import {initCardData} from '@src/common_data/common';
 
-
 const initCards: CardDataType[] = [];
 
 for (let i = 1; i <= 16; i++) {

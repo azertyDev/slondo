@@ -29,7 +29,12 @@ export const OptionsSelect: FC<OptionsSectionPropsType> = (props) => {
 
     const classes = useStyles();
     return (
-        <div className={classes.root}>
+        <Grid
+            item
+            container
+            xs={12}
+            className={classes.root}
+        >
             {name && (
                 <Typography variant='subtitle1'>
                     <strong>
@@ -37,15 +42,15 @@ export const OptionsSelect: FC<OptionsSectionPropsType> = (props) => {
                     </strong>
                 </Typography>
             )}
-            <Grid container direction={row ? 'row' : 'column'}>
+            <Grid item container>
                 {options.map(item => {
                     const checked = !!values[name]?.some(({id}) => id === item.id);
                     return (
                         <Grid
                             item
-                            xs={12}
                             container
                             key={item.id}
+                            xs={row ? 4 : 12}
                             alignItems='center'
                         >
                             <Checkbox
@@ -61,6 +66,6 @@ export const OptionsSelect: FC<OptionsSectionPropsType> = (props) => {
                     );
                 })}
             </Grid>
-        </div>
+        </Grid>
     );
 };

@@ -7,7 +7,7 @@ export type TabsDataType = {
     title: string,
     total: number,
     itemsPerPage: number,
-    handleFetchByPage: (page: number) => void,
+    handleFetchByTab: (page: number) => void,
     component: ReactElement,
 }[];
 

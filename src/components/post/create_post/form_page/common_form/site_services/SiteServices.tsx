@@ -1,4 +1,4 @@
-import {FC, useState} from 'react';
+import {FC, useEffect, useState} from 'react';
 import {WithT} from 'i18next';
 import Link from 'next/link';
 import {Help} from '@material-ui/icons';
@@ -7,17 +7,17 @@ import {DeliveryIcon, SafeIcon, ExchangeIcon} from '@src/components/elements/ico
 import {site_services} from '@src/common_data/site_services';
 import {ServiceItem} from '@src/components/post/create_post/form_page/common_form/site_services/ServiceItem';
 import {SafeDealDrawer} from '@src/components/elements/safe_deal_drawer/SafeDealDrawer';
-import {useSelector} from 'react-redux';
-import {RootState} from '@src/redux/rootReducer';
+import {useUserCard} from '@src/hooks/useUserCard';
 import {useStyles} from './useStyles';
 
 
 type PaymentDeliveryPropsType = {
     values,
+    handleCheckbox,
+    categoryName: string,
     iconMode?: boolean,
     isAuction: boolean,
-    handleCheckbox,
-    categoryName: string
+    isCommonForm?: boolean
 } & WithT;
 
 export const SiteServices: FC<PaymentDeliveryPropsType> = (props) => {
@@ -27,29 +27,34 @@ export const SiteServices: FC<PaymentDeliveryPropsType> = (props) => {
         iconMode,
         isAuction,
         handleCheckbox,
-        categoryName
+        categoryName,
+        isCommonForm
     } = props;
 
-    const hasSafeDeal = !!site_services.safe_deal[categoryName];
-    const hasExchange = !!site_services.exchange[categoryName];
-    const hasDelivery = !!site_services.delivery[categoryName];
+    const hasSafeDeal = !!site_services.safe_deal[categoryName] || !categoryName;
+    const hasExchange = !!site_services.exchange[categoryName] || !categoryName;
+    const hasDelivery = !!site_services.delivery[categoryName] || !categoryName;
 
-    const {cardId} = useSelector((store: RootState) => store.userCard);
-    const hasCard = !!cardId;
-
+    const {userCard, fetchUserCard} = useUserCard();
+    const hasCard = !!userCard.cardId;
     const [drawerOpen, setDrawerOpen] = useState(false);
 
     const handleSafeDealCheckBox = () => {
-        if (hasCard) {
+        if (!isCommonForm || hasCard) {
             return handleCheckbox('safe_deal');
         } else {
             return () => setDrawerOpen(true);
         }
     };
 
-    const handleDrawerShow = (value) => () => {
-        setDrawerOpen(value);
+    const handleCloseDrawer = () => {
+        setDrawerOpen(false);
+        fetchUserCard();
     };
+
+    useEffect(() => {
+        isCommonForm && fetchUserCard();
+    }, []);
 
     const classes = useStyles();
     return (
@@ -185,7 +190,7 @@ export const SiteServices: FC<PaymentDeliveryPropsType> = (props) => {
             )}
             <SafeDealDrawer
                 open={drawerOpen}
-                handleClose={handleDrawerShow(false)}
+                handleClose={handleCloseDrawer}
             />
         </Grid>
     );
