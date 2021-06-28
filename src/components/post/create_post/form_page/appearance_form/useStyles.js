@@ -1,6 +1,6 @@
-import {makeStyles} from '@material-ui/core/styles'
+import {makeStyles} from '@material-ui/core/styles';
 
-export const useStyles = makeStyles(() => ({
+export const useStyles = makeStyles((theme) => ({
     root: {
         '& div.preview': {
             '& div.color-preview': {
@@ -20,15 +20,44 @@ export const useStyles = makeStyles(() => ({
                 }
             }
         },
-        '& div.color-wrapper': {
+        '& div.color-select': {
             display: 'flex',
-            marginBottom: '20px',
-            '& div.selected-color': {
-                border: `3px solid #AD66D5`
+            flexWrap: 'wrap',
+            [theme.breakpoints.down('xs')]: {
+                display: 'block'
+            },
+            '& div.color-wrapper': {
+                display: 'flex',
+                padding: '10px 0',
+                alignItems: 'center',
+                [theme.breakpoints.down('xs')]: {
+                    borderBottom: '1px solid #F2F2F2',
+                    '&:last-child': {
+                        borderBottom: 'none'
+                    }
+                },
+                '& div': {
+                    width: '50px',
+                    height: '50px',
+                    [theme.breakpoints.down('xs')]: {
+                        marginRight: '20px',
+                        width: '32px',
+                        height: '32px',
+                        borderRadius: '50%'
+                    }
+                }
             }
         },
-        '& div.photos-wrapper': {
-            marginBottom: '20px'
+        '& div.selected-color': {
+            border: `3px solid #AD66D5`
         },
+        '& div.photos-wrapper': {
+            '& h6': {
+                [theme.breakpoints.down('xs')]: {
+                    marginBottom: '10px'
+                }
+            },
+            marginBottom: '20px'
+        }
     }
-}))
+}));
