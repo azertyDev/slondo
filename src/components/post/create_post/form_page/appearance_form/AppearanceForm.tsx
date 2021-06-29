@@ -130,7 +130,7 @@ export const AppearanceForm: FC<AppearanceFormPropsType> = (props) => {
                         </div>
                         : <div>
                             {!!colors && (
-                                <div className='color-select'>
+                                <div>
                                     <Typography variant="subtitle1">
                                         {!isJob && (
                                             <strong>
@@ -144,25 +144,25 @@ export const AppearanceForm: FC<AppearanceFormPropsType> = (props) => {
                                              {t(errors.color as string)}
                                          </span>}
                                     </Typography>
-                                    {colors.map(clr =>
-                                        <div
-                                            key={clr.id}
-                                            onClick={handleColor(clr)}
-                                            className='color-wrapper'
-                                        >
+                                    <div className='color-select'>
+                                        {colors.map(clr =>
                                             <div
-                                                className={!!color && clr.id === color.id ? 'selected-color' : ''}
-                                                style={{
-                                                    backgroundColor: clr.hex_color_code
-                                                }}
-                                            />
-                                            <Hidden smUp>
+                                                key={clr.id}
+                                                onClick={handleColor(clr)}
+                                                className='color-wrapper'
+                                            >
+                                                <div
+                                                    className={!!color && clr.id === color.id ? 'selected-color' : ''}
+                                                    style={{
+                                                        backgroundColor: clr.hex_color_code
+                                                    }}
+                                                />
                                                 <Typography variant='subtitle2'>
                                                     {t(clr.name)}
                                                 </Typography>
-                                            </Hidden>
-                                        </div>
-                                    )}
+                                            </div>
+                                        )}
+                                    </div>
                                 </div>
                             )}
                             <div className='photos-wrapper'>

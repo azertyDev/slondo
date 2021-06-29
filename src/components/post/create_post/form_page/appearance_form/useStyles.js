@@ -20,17 +20,25 @@ export const useStyles = makeStyles((theme) => ({
                 }
             }
         },
+        // '& span.error-text': {
+        //     [theme.breakpoints.down('sm')]: {
+        //         fontSize: '10px'
+        //     }
+        // },
         '& div.color-select': {
             display: 'flex',
             flexWrap: 'wrap',
-            [theme.breakpoints.down('xs')]: {
+            [theme.breakpoints.down('sm')]: {
                 display: 'block'
             },
             '& div.color-wrapper': {
                 display: 'flex',
-                padding: '10px 0',
+                padding: '7px 10px',
                 alignItems: 'center',
-                [theme.breakpoints.down('xs')]: {
+                flexDirection: 'column',
+                [theme.breakpoints.down('sm')]: {
+                    flexDirection: 'row',
+                    padding: '10px 0',
                     borderBottom: '1px solid #F2F2F2',
                     '&:last-child': {
                         borderBottom: 'none'
@@ -39,22 +47,27 @@ export const useStyles = makeStyles((theme) => ({
                 '& div': {
                     width: '50px',
                     height: '50px',
-                    [theme.breakpoints.down('xs')]: {
+                    marginBottom: '10px',
+                    borderRadius: '50%',
+                    [theme.breakpoints.down('sm')]: {
                         marginRight: '20px',
+                        marginBottom: 0
+                    },
+                    [theme.breakpoints.down('xs')]: {
                         width: '32px',
-                        height: '32px',
-                        borderRadius: '50%'
+                        height: '32px'
                     }
                 }
             }
         },
         '& div.selected-color': {
-            border: `3px solid #AD66D5`
+            boxShadow: '0px 0px 15px #AD66D5'
         },
         '& div.photos-wrapper': {
             '& h6': {
-                [theme.breakpoints.down('xs')]: {
-                    marginBottom: '10px'
+                margin: '10px 0',
+                [theme.breakpoints.down('sm')]: {
+                    margin: '0 0 10px'
                 }
             },
             marginBottom: '20px'
