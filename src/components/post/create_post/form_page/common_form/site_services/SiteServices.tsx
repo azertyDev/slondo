@@ -72,10 +72,13 @@ export const SiteServices: FC<PaymentDeliveryPropsType> = (props) => {
                             container
                             alignItems="center"
                             xs={iconMode ? 4 : 12}
+                            spacing={iconMode ? 0 : 1}
                         >
                             <Grid
                                 item
-                                xs={iconMode ? 12 : 3}
+                                xs={12}
+                                sm={6}
+                                md={3}
                                 container
                                 alignItems="center"
                                 justify='flex-start'
@@ -90,7 +93,9 @@ export const SiteServices: FC<PaymentDeliveryPropsType> = (props) => {
                             {!iconMode && (
                                 <Grid
                                     item
-                                    xs={9}
+                                    xs={12}
+                                    sm={6}
+                                    md={9}
                                     className='payment-delivery'
                                 >
                                     <Help className="question-mark"/>
@@ -114,10 +119,13 @@ export const SiteServices: FC<PaymentDeliveryPropsType> = (props) => {
                             item
                             alignItems="center"
                             xs={iconMode ? 4 : 12}
+                            spacing={iconMode ? 0 : 1}
                         >
                             <Grid
                                 item
-                                xs={iconMode ? 12 : 3}
+                                xs={12}
+                                sm={6}
+                                md={3}
                                 container
                                 alignItems="center"
                             >
@@ -131,7 +139,9 @@ export const SiteServices: FC<PaymentDeliveryPropsType> = (props) => {
                             {!iconMode && (
                                 <Grid
                                     item
-                                    xs={9}
+                                    xs={12}
+                                    sm={6}
+                                    md={9}
                                     className='payment-delivery'
                                 >
                                     <Help className="question-mark"/>
@@ -151,10 +161,13 @@ export const SiteServices: FC<PaymentDeliveryPropsType> = (props) => {
                     container
                     alignItems="center"
                     xs={iconMode ? 4 : 12}
+                    spacing={iconMode ? 0 : 1}
                 >
                     <Grid
                         item
-                        xs={iconMode ? 12 : 3}
+                        xs={12}
+                        sm={6}
+                        md={3}
                         container
                         alignItems="center"
                     >
@@ -168,7 +181,9 @@ export const SiteServices: FC<PaymentDeliveryPropsType> = (props) => {
                     {!iconMode && (
                         <Grid
                             item
-                            xs={9}
+                            xs={12}
+                            sm={6}
+                            md={9}
                             className='payment-delivery'
                         >
                             <Help className="question-mark"/>
