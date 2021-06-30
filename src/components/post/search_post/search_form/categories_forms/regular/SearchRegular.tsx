@@ -19,6 +19,7 @@ export const SearchRegular: FC<SearchRegularPropsType> = (props) => {
         type,
         category,
         subcategory,
+        categoryName,
         onSubmit,
         filters,
         urlParams,
@@ -58,10 +59,10 @@ export const SearchRegular: FC<SearchRegularPropsType> = (props) => {
                         filters,
                         handleSelect
                     },
-                    true
+                    categoryName, true
                 )}
                 <Grid item container xs={12}>
-                    <ActionButtons handleReset={handleReset} />
+                    <ActionButtons handleReset={handleReset}/>
                 </Grid>
             </Grid>
         </CustomFormikProvider>

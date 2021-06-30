@@ -88,7 +88,6 @@ export const UserFollowsList: FC<WithT> = ({t}) => {
         {
             id: 0,
             title: t('subscriptions'),
-            total: subscriptions.total,
             itemsPerPage: SUBS_PER_PAGE,
             handleFetchByTab: fetchSubsByPage('subscriptions'),
             component: isFetch ? <CustomCircularProgress/> : subscriptionsList
@@ -96,7 +95,6 @@ export const UserFollowsList: FC<WithT> = ({t}) => {
         {
             id: 1,
             title: t('subscribers'),
-            total: subscribers.total,
             itemsPerPage: SUBS_PER_PAGE,
             handleFetchByTab: fetchSubsByPage('subscribers'),
             component: isFetch ? <CustomCircularProgress/> : subscribersList

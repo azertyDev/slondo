@@ -1,6 +1,6 @@
 {
-  "perform_purchase": "Подтвердить покупку",
-  "dismiss_purchase": "Отменить покупку",
+  "perform_purchase": "Подтвердить покупку?",
+  "dismiss_purchase": "Отменить покупку?",
   "sms_code": "Смс код",
   "type_sms_code": "Введите код",
   "buy_safe_deal": "Купить по безопасной сделке?",

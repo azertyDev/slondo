@@ -7,12 +7,13 @@ import {UserInfo} from '@root/interfaces/Auth';
 import {cookies} from '@src/helpers';
 
 
+const productionBackend = 'https://backend.slondo.uz/api/';
 const uztelecom = 'https://backend.testb.uz/api/';
-const localServer = 'http://192.168.100.60/slondo/public/api/';
+const local = 'http://192.168.100.60/slondo/public/api/';
 
 const instance = Axios.create({
     withCredentials: true,
-    baseURL: uztelecom
+    baseURL: productionBackend
 });
 
 // export const socketIO = socketIOClient('http://192.168.100.60:8005');
@@ -178,7 +179,7 @@ export const userAPI = {
                 throw err;
             });
     },
-    getMyPosts: (params: { type: string, archive: number, secure: number }): Promise<any> => {
+    getMyPosts: (params): Promise<any> => {
         return instance.get(`regular/user/posts`, {
             params,
             ...setTokenToHeader()
@@ -188,8 +189,11 @@ export const userAPI = {
                 throw err;
             });
     },
-    getAuctionSubs: () => {
-        return instance.get(`regular/user/auctions/participating`, setTokenToHeader())
+    getAuctionSubs: (params) => {
+        return instance.get(`regular/user/auctions/participating`, {
+            params,
+            ...setTokenToHeader()
+        })
             .then(res => res.data)
             .catch(err => {
                 throw err;
@@ -277,8 +281,11 @@ export const userAPI = {
                 throw err;
             });
     },
-    getAuctionSubArchive: () => {
-        return instance.get(`regular/user/archiveAuctions/participating`, setTokenToHeader())
+    getAuctionSubArchive: (params) => {
+        return instance.get(`regular/user/archiveAuctions/participating`, {
+            params,
+            ...setTokenToHeader()
+        })
             .then(res => res.data)
             .catch(err => {
                 throw err;

@@ -46,6 +46,7 @@ export const SearchApartments: FC<SubcategoryFormTypes> = (props) => {
                         name='estate_type'
                         values={values}
                         onBlur={handleBlur}
+                        labelTxt={t('estate_type')}
                         handleSelect={handleSelect}
                         items={filters.estate_type}
                     />
@@ -63,6 +64,7 @@ export const SearchApartments: FC<SubcategoryFormTypes> = (props) => {
                         values={values}
                         onBlur={handleBlur}
                         items={filters.room}
+                        labelTxt={t('room')}
                         handleSelect={handleSelect}
                     />
                 </Grid>
@@ -147,8 +149,9 @@ export const SearchApartments: FC<SubcategoryFormTypes> = (props) => {
                             name='material'
                             values={values}
                             onBlur={handleBlur}
-                            handleSelect={handleSelect}
                             items={filters.material}
+                            labelTxt={t('material')}
+                            handleSelect={handleSelect}
                         />
                     </Grid>
                     <Grid
@@ -163,8 +166,9 @@ export const SearchApartments: FC<SubcategoryFormTypes> = (props) => {
                             name='metro'
                             values={values}
                             onBlur={handleBlur}
-                            handleSelect={handleSelect}
                             items={filters.metro}
+                            labelTxt={t('metro')}
+                            handleSelect={handleSelect}
                         />
                     </Grid>
                     <Grid
@@ -179,8 +183,9 @@ export const SearchApartments: FC<SubcategoryFormTypes> = (props) => {
                             name='repair'
                             values={values}
                             onBlur={handleBlur}
-                            handleSelect={handleSelect}
                             items={filters.repair}
+                            labelTxt={t('repair')}
+                            handleSelect={handleSelect}
                         />
                     </Grid>
                     <Grid item container xs={12} sm={8} spacing={1}>

@@ -28,7 +28,7 @@ import {CabinetCard} from '@src/components/cabinet/components/cabinet_card/Cabin
 import {ITEMS_PER_PAGE} from '@src/constants';
 import {initialNotificationType} from '@src/components/cabinet/cabinet_pages/notifications/NotificationsContainer';
 import {useModal} from '@src/hooks/useModal';
-import {DetailedPostView} from '@src/components/cabinet/components/detailed_post_view/DetailedPostView';
+import {DetailedPostModal} from '@src/components/cabinet/components/detailed_post_modal/DetailedPostModal';
 import {CabinetModal} from '@src/components/cabinet/components/cabinet_modal/CabinetModal';
 import {Notification} from '@src/components/cabinet/cabinet_pages/notifications/notification_card/Notification';
 import {CustomPagination} from '@src/components/elements/custom_pagination/CustomPagination';
@@ -126,8 +126,7 @@ export const initialCardData: CardDataType = {
 
 const MyPosts: FC = () => {
     const dispatch = useDispatch();
-    const {t} = useTranslation(['cabinet', 'notifications', 'categories', 'common', 'locations']);
-    const classes = useStyles();
+    const {t} = useTranslation('cabinet');
 
     const deactivateReasons = {
         soldOnSlondoId: 1,
@@ -316,6 +315,15 @@ const MyPosts: FC = () => {
             dispatch(setErrorMsgAction(e.message));
         }
     };
+
+    const handleRefresh = () => {
+        fetchPostData(0);
+        fetchPostData(1);
+        fetchArchivePosts(0);
+        fetchArchivePosts(1);
+    };
+
+    const classes = useStyles();
     const getModalContent = () => {
         switch (modalContentIndex) {
             case 1:
@@ -439,77 +447,19 @@ const MyPosts: FC = () => {
              ? <Typography className="title" variant="h6">
                  {`${t(`common:${selectedPost.ads_type}`)} №: ${selectedPost.id}`}
              </Typography>
-             : modalContentIndex === 5
-               ? null
-               : <IconButton
-                   className='prev-btn'
-                   aria-label="back"
-                   size="medium"
-                   onClick={handlePrevMenu}
-               >
-                   <ArrowBackIcon fontSize="inherit"/>
-               </IconButton>
-            }
+             : modalContentIndex !== 5 && (
+                <IconButton
+                    className='prev-btn'
+                    aria-label="back"
+                    size="medium"
+                    onClick={handlePrevMenu}
+                >
+                    <ArrowBackIcon fontSize="inherit"/>
+                </IconButton>
+            )}
             {getModalContent()}
         </>
     );
-
-    useEffect(() => {
-        fetchPostData(0);
-        fetchPostData(1);
-        fetchArchivePosts(0);
-        fetchArchivePosts(1);
-    }, []);
-
-    const myPostCards = postData.data.map((data) => (
-        <Box mb={3} key={data.id}>
-            <CabinetCard
-                cardData={data}
-                handleSettingsOpen={handleSettingsOpen}
-                handleDetailedOpen={handleDetailedOpen}
-                handleNotificationsOpen={handleNotificationsOpen}
-                fetchAuctionNotifications={fetchNotifications}
-            />
-        </Box>
-    ));
-
-    const securePostCards = securePosts.data.map((data) => (
-        <Box mb={3} key={data.id}>
-            <CabinetCard
-                cardData={data}
-                handleSettingsOpen={handleSettingsOpen}
-                handleDetailedOpen={handleDetailedOpen}
-                handleNotificationsOpen={handleNotificationsOpen}
-                fetchAuctionNotifications={fetchNotifications}
-            />
-        </Box>
-    ));
-
-    const archivePostCards = archivePostData.data.map((data) => (
-        <Box mb={3} key={data.id}>
-            <CabinetCard
-                archive
-                cardData={data}
-                handleSettingsOpen={handleSettingsOpen}
-                handleDetailedOpen={handleDetailedOpen}
-                handleNotificationsOpen={handleNotificationsOpen}
-                fetchAuctionNotifications={fetchNotifications}
-            />
-        </Box>
-    ));
-
-    const archiveSecurePostCards = archiveSecurePostData.data.map((data) => (
-        <Box mb={3} key={data.id}>
-            <CabinetCard
-                archive
-                cardData={data}
-                handleSettingsOpen={handleSettingsOpen}
-                handleDetailedOpen={handleDetailedOpen}
-                handleNotificationsOpen={handleNotificationsOpen}
-                fetchAuctionNotifications={fetchNotifications}
-            />
-        </Box>
-    ));
 
     const postTabs = (
         <>
@@ -518,11 +468,7 @@ const MyPosts: FC = () => {
                 onChange={handleChildTabChange}
                 aria-label="tabs"
                 className={classes.childTabs}
-                TabIndicatorProps={{
-                    style: {
-                        display: 'none'
-                    }
-                }}
+                TabIndicatorProps={{style: {display: 'none'}}}
             >
                 <Tab
                     label={
@@ -540,10 +486,31 @@ const MyPosts: FC = () => {
                 />
             </Tabs>
             <CustomTabPanel value={childTabValue} index={0}>
-                {isFetch ? <CircularProgress color="primary"/> : myPostCards}
+                {isFetch
+                 ? <CircularProgress color="primary"/>
+                 : postData.data.map((data) => (
+                        <Box mb={3} key={data.id}>
+                            <CabinetCard
+                                cardData={data}
+                                handleDetailedOpen={handleDetailedOpen}
+                                handleNotificationsOpen={handleNotificationsOpen}
+                            />
+                        </Box>
+                    ))}
             </CustomTabPanel>
             <CustomTabPanel value={childTabValue} index={1}>
-                {isFetch ? <CircularProgress color="primary"/> : archivePostCards}
+                {isFetch
+                 ? <CircularProgress color="primary"/>
+                 : archivePostData.data.map((data) => (
+                        <Box mb={3} key={data.id}>
+                            <CabinetCard
+                                archive
+                                cardData={data}
+                                handleDetailedOpen={handleDetailedOpen}
+                                handleNotificationsOpen={handleNotificationsOpen}
+                            />
+                        </Box>
+                    ))}
             </CustomTabPanel>
         </>
     );
@@ -577,14 +544,34 @@ const MyPosts: FC = () => {
                 />
             </Tabs>
             <CustomTabPanel value={childTabValue} index={0}>
-                {isFetch ? <CircularProgress color="primary"/> : securePostCards}
+                {isFetch
+                 ? <CircularProgress color="primary"/>
+                 : securePosts.data.map((data) => (
+                        <Box mb={3} key={data.id}>
+                            <CabinetCard
+                                cardData={data}
+                                handleDetailedOpen={handleDetailedOpen}
+                                handleNotificationsOpen={handleNotificationsOpen}
+                            />
+                        </Box>
+                    ))}
             </CustomTabPanel>
             <CustomTabPanel value={childTabValue} index={1}>
-                {isFetch ? <CircularProgress color="primary"/> : archiveSecurePostCards}
+                {isFetch
+                 ? <CircularProgress color="primary"/>
+                 : archiveSecurePostData.data.map((data) => (
+                        <Box mb={3} key={data.id}>
+                            <CabinetCard
+                                archive
+                                cardData={data}
+                                handleDetailedOpen={handleDetailedOpen}
+                                handleNotificationsOpen={handleNotificationsOpen}
+                            />
+                        </Box>
+                    ))}
             </CustomTabPanel>
         </>
     );
-
 
     const pagination = (
         <CustomPagination
@@ -599,28 +586,22 @@ const MyPosts: FC = () => {
         {
             id: 0,
             title: t('posts'),
-            total: postData.total,
             itemsPerPage: ITEMS_PER_PAGE,
-            handleFetchByTab: null,
+            handleFetchByTab: () => '',
             component: postTabs
-            // <MyPosts
-            //     isFetch={postData.isFetch}
-            //     myPostCards={myPostCards}
-            // />
         },
         {
             id: 1,
             title: t('securePosts'),
-            total: securePosts.total,
             itemsPerPage: ITEMS_PER_PAGE,
-            handleFetchByTab: null,
+            handleFetchByTab: () => '',
             component: securePostTabs
-            // <MyPosts
-            //     isFetch={securePosts.isFetch}
-            //     myPostCards={securePostCards}
-            // />
         }
     ];
+
+    useEffect(() => {
+        handleRefresh();
+    }, []);
 
     return (
         <>
@@ -632,6 +613,13 @@ const MyPosts: FC = () => {
                 handleTabChange={handleTabChange}
             />
             {/* Modals */}
+            <DetailedPostModal
+                post={selectedPost}
+                open={detailedModalOpen}
+                onClose={closeDetailedModal}
+                handleRefresh={handleRefresh}
+                handleNotificationsOpen={handleNotificationsOpen}
+            />
             <CabinetModal
                 maxWidth='xs'
                 fullWidth={false}
@@ -640,13 +628,6 @@ const MyPosts: FC = () => {
             >
                 <ModalContent/>
             </CabinetModal>
-            <DetailedPostView
-                data={selectedPost}
-                detailedModalOpen={detailedModalOpen}
-                handleSettingsOpen={handleSettingsOpen}
-                handleDetailedClose={closeDetailedModal}
-                handleNotificationsOpen={handleNotificationsOpen}
-            />
             <CabinetModal
                 openDialog={notificationsOpen}
                 handleCloseDialog={closeNotificationsModal}

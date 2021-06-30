@@ -1,11 +1,11 @@
 import {FC, useEffect} from 'react';
 import {Grid} from '@material-ui/core';
 import {CommonFiltersType} from '@src/components/post/search_post/search_form/SearchForm';
-import {useTranslation} from 'react-i18next';
+// import {useTranslation} from 'react-i18next';
 import {useFormik} from 'formik';
 import {useHandlers} from '@src/hooks/useHandlers';
 import {CustomFormikProvider} from '@src/components/elements/custom_formik_provider/CustomFormikProvider';
-import {CheckboxSelect} from '@src/components/elements/checkbox_select/CheckboxSelect';
+// import {CheckboxSelect} from '@src/components/elements/checkbox_select/CheckboxSelect';
 import {DropDownSelect} from '@src/components/elements/drop_down_select/DropDownSelect';
 import {ActionButtons} from '@src/components/post/search_post/search_form/ActionButtons';
 
@@ -29,7 +29,7 @@ export const SearchJob: FC<SearchRegularPropsType> = (props) => {
 
     const isVacancy = subcategory?.name === 'vacancies';
 
-    const {t} = useTranslation('filters');
+    // const {t} = useTranslation('filters');
 
     const initVals: any = {
         employment: [],
@@ -51,12 +51,12 @@ export const SearchJob: FC<SearchRegularPropsType> = (props) => {
 
     const {handleSelect, setValsByParams} = useHandlers(values, setValues);
 
-    const handleCheckbox = ({target}) => {
-        setValues({
-            ...values,
-            urgent: {id: target.checked ? 1 : null}
-        });
-    };
+    // const handleCheckbox = ({target}) => {
+    //     setValues({
+    //         ...values,
+    //         urgent: {id: target.checked ? 1 : null}
+    //     });
+    // };
 
     useEffect(() => {
         sameWithUrlCtgr && setValsByParams(urlParams, filters);
@@ -91,7 +91,8 @@ export const SearchJob: FC<SearchRegularPropsType> = (props) => {
                 >
                     <DropDownSelect
                         multiple
-                        name={isVacancy ? 'require_experience' : 'experience'}
+                        name='experience'
+                        labelTxt={isVacancy ? 'require_experience' : 'experience'}
                         values={values}
                         items={filters.experience}
                         handleSelect={handleSelect}
@@ -111,18 +112,18 @@ export const SearchJob: FC<SearchRegularPropsType> = (props) => {
                         handleSelect={handleSelect}
                     />
                 </Grid>
-                <Grid
-                    item
-                    container
-                    xs={12}
-                    sm={4}
-                >
-                    <CheckboxSelect
-                        checked={!!values.urgent.id}
-                        labelTxt={t('urgent_work')}
-                        handleCheckbox={handleCheckbox}
-                    />
-                </Grid>
+                {/*<Grid*/}
+                {/*    item*/}
+                {/*    container*/}
+                {/*    xs={12}*/}
+                {/*    sm={4}*/}
+                {/*>*/}
+                {/*    <CheckboxSelect*/}
+                {/*        checked={!!values.urgent.id}*/}
+                {/*        labelTxt={t('urgent_work')}*/}
+                {/*        handleCheckbox={handleCheckbox}*/}
+                {/*    />*/}
+                {/*</Grid>*/}
                 <Grid item container xs={12}>
                     <ActionButtons handleReset={handleReset}/>
                 </Grid>

@@ -44,6 +44,7 @@ export const SearchHousesCottages: FC<SubcategoryFormTypes> = (props) => {
                         multiple
                         disableRequire
                         name='estate_type'
+                        labelTxt={t('estate_type')}
                         values={values}
                         onBlur={handleBlur}
                         handleSelect={handleSelect}
@@ -59,6 +60,7 @@ export const SearchHousesCottages: FC<SubcategoryFormTypes> = (props) => {
                     <DropDownSelect
                         multiple
                         name='room'
+                        labelTxt={t('room')}
                         disableRequire
                         values={values}
                         onBlur={handleBlur}
@@ -126,6 +128,7 @@ export const SearchHousesCottages: FC<SubcategoryFormTypes> = (props) => {
                             name='material'
                             values={values}
                             onBlur={handleBlur}
+                            labelTxt={t('material')}
                             handleSelect={handleSelect}
                             items={filters.material}
                         />
@@ -142,6 +145,7 @@ export const SearchHousesCottages: FC<SubcategoryFormTypes> = (props) => {
                             name='metro'
                             values={values}
                             onBlur={handleBlur}
+                            labelTxt={t('metro')}
                             handleSelect={handleSelect}
                             items={filters.metro}
                         />
@@ -158,6 +162,7 @@ export const SearchHousesCottages: FC<SubcategoryFormTypes> = (props) => {
                             name='repair'
                             values={values}
                             onBlur={handleBlur}
+                            labelTxt={t('repair')}
                             handleSelect={handleSelect}
                             items={filters.repair}
                         />
@@ -174,6 +179,7 @@ export const SearchHousesCottages: FC<SubcategoryFormTypes> = (props) => {
                             name='heating'
                             values={values}
                             onBlur={handleBlur}
+                            labelTxt={t('heating')}
                             handleSelect={handleSelect}
                             items={filters.heating}
                         />

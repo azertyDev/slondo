@@ -38,7 +38,11 @@ const MyPurchases: FC = () => {
         });
     };
 
-    const setFetchedPurchases = () => async (page) => {
+    const confirmModalClose = () => {
+        setConfirmOpen(false);
+    };
+
+    const setFetchedPurchases = async (page) => {
         try {
             const params = {
                 page,
@@ -61,7 +65,8 @@ const MyPurchases: FC = () => {
             setIsFetch(true);
             const post_id = JSON.stringify({post_id: purchase.id});
             await myUzCardAPI.performDismiss(post_id, purchase.perform);
-            await setFetchedPurchases()(1);
+            await setFetchedPurchases(1);
+            confirmModalClose();
             setIsFetch(false);
         } catch (e) {
             setIsFetch(false);
@@ -92,10 +97,10 @@ const MyPurchases: FC = () => {
             ))}
             <ConfirmModal
                 open={confirmOpen}
-                title={modalTitle}
+                title={t(modalTitle)}
                 cancelTxt={t('common:no')}
                 confirmTxt={t('common:yes')}
-                handleClose={handlePerformDismiss}
+                handleClose={confirmModalClose}
                 handleConfirm={handlePerformDismiss}
             />
         </div>
@@ -104,10 +109,9 @@ const MyPurchases: FC = () => {
     const tabsData: TabsDataType = [
         {
             id: 0,
-            total,
             title: t('purchases'),
             itemsPerPage: ITEMS_PER_PAGE,
-            handleFetchByTab: setFetchedPurchases(),
+            handleFetchByTab: setFetchedPurchases,
             component: isFetch ? <CustomCircularProgress/> : purchasesList
         }
     ];
