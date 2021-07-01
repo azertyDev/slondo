@@ -1,5 +1,4 @@
 import {FC} from 'react';
-import {WithT} from 'i18next';
 import {
     Typography,
     Tabs,
@@ -7,8 +6,9 @@ import {
     Grid,
     CircularProgress, Hidden
 } from '@material-ui/core';
-import {CustomTabPanel} from '@src/components/elements/custom_tab_panel/CustomTabPanel';
+import {useTranslation} from 'next-i18next';
 import {CardData} from '@root/interfaces/CardData';
+import {CustomTabPanel} from '@src/components/elements/custom_tab_panel/CustomTabPanel';
 import {CardView} from '@src/components/elements/card/CardView';
 import {CustomButton} from '@src/components/elements/custom_button/CustomButton';
 import {useStyles} from './useStyles';
@@ -20,17 +20,18 @@ type MainContentProps = {
     handleShowMore: () => void;
     postCardData: CardData;
     auctionCardData: CardData;
-} & WithT;
+};
 
 export const PostsTabs: FC<MainContentProps> = (props) => {
     const {
-        t,
         tabValue,
         handleTabChange,
         handleShowMore,
         postCardData,
         auctionCardData
     } = props;
+
+    const {t} = useTranslation('main');
 
     const isPostsExist = postCardData.data.total > postCardData.data.cards.length && tabValue === 0;
     const isAuctionsExist = auctionCardData.data.total > auctionCardData.data.cards.length && tabValue === 1;

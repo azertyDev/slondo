@@ -1,5 +1,4 @@
-import React, {FC, useEffect, useState} from 'react';
-import {WithT} from 'i18next';
+import {FC, useEffect, useState} from 'react';
 import {PostsTabs} from './PostsTabs';
 import {ITEMS_PER_PAGE} from '@src/constants';
 import {userAPI} from '@src/api/api';
@@ -8,7 +7,6 @@ import {initCards} from '../posts_slider/PostsSliderContainer';
 import {setErrorMsgAction} from '@src/redux/slices/errorSlice';
 import {useDispatch, useSelector} from 'react-redux';
 import {RootState} from '@src/redux/rootReducer';
-
 
 const initCardData: CardData = {
     isFetch: false,
@@ -20,7 +18,7 @@ const initCardData: CardData = {
     }
 };
 
-export const PostsTabsContainer: FC<WithT> = ({t}) => {
+export const PostsTabsContainer: FC = () => {
     const dispatch = useDispatch();
     const {isAuth} = useSelector((store: RootState) => store.user);
 
@@ -85,7 +83,6 @@ export const PostsTabsContainer: FC<WithT> = ({t}) => {
 
     return (
         <PostsTabs
-            t={t}
             tabValue={tabValue}
             postCardData={postCardData}
             auctionCardData={auctionCardData}

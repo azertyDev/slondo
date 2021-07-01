@@ -1,7 +1,6 @@
 import {FC} from 'react';
 import Pagination from '@material-ui/lab/Pagination';
 
-
 export type CustomPaginationTypes = {
     totalItems: number,
     currentPage: number,

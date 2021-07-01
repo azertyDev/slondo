@@ -1,14 +1,14 @@
-import React, {FC, useState} from 'react';
-import {TabsDataType} from '@root/interfaces/Cabinet';
+import {FC, useState} from 'react';
 import {WithT} from 'i18next';
+import {SUBS_PER_PAGE} from '@src/constants';
+import {TabsDataType} from '@root/interfaces/Cabinet';
 import {ProfileTabsContent} from '@src/components/user_profile/tabs/ProfileTabsContent';
 import {useDispatch} from 'react-redux';
 import {userAPI} from '@src/api/api';
 import {setErrorMsgAction} from '@src/redux/slices/errorSlice';
 import {useRouter} from 'next/router';
 import {SubscriptionItem} from '@src/components/cabinet/cabinet_pages/user_social_info/subscription_item/SubscriptionItem';
-import {SUBS_PER_PAGE} from '@src/constants';
-import {CustomLoader} from '@src/components/elements/custom_loader/CustomLoader';
+import {CustomCircularProgress} from '@src/components/elements/custom_circular_progress/CustomCircularProgress';
 
 export const UserFollowsList: FC<WithT> = ({t}) => {
     const dispatch = useDispatch();
@@ -23,7 +23,7 @@ export const UserFollowsList: FC<WithT> = ({t}) => {
     const [subscriptions, setSubscriptions] = useState(initialSubs);
     const [subscribers, setSubscribers] = useState(initialSubs);
 
-    const handleTabChange = (event, newValue) => {
+    const handleTabChange = (_, newValue) => {
         setTabIndex(newValue);
     };
 
@@ -39,7 +39,8 @@ export const UserFollowsList: FC<WithT> = ({t}) => {
             if (subType === 'subscriptions') {
                 const subscriptions = await userAPI.getUserSubscriptions(fetchParams);
                 setSubscriptions({data: subscriptions.data, total: subscriptions.total});
-            } else if (subType === 'subscribers') {
+            }
+            if (subType === 'subscribers') {
                 const subscribers = await userAPI.getUserSubscribers(fetchParams);
                 setSubscribers({data: subscribers.data, total: subscribers.total});
             }
@@ -59,38 +60,44 @@ export const UserFollowsList: FC<WithT> = ({t}) => {
         }
     };
 
-    const subscribersList = subscribers.data.map(({id, subscriber}) => (
-        <SubscriptionItem
-            key={id}
-            user={subscriber}
-            handleFollow={handleFollow}
-        />
-    ));
+    const subscribersList = (
+        <div>
+            {subscribers.data.map(({id, subscriber}) =>
+                <SubscriptionItem
+                    key={id}
+                    user={subscriber}
+                    handleFollow={handleFollow}
+                />
+            )}
+        </div>
+    );
 
-    const subscriptionsList = subscriptions.data.map(({id, subscription}) => (
-        <SubscriptionItem
-            key={id}
-            user={subscription}
-            handleFollow={handleFollow}
-        />
-    ));
+    const subscriptionsList = (
+        <div>
+            {subscriptions.data.map(({id, subscription}) =>
+                <SubscriptionItem
+                    key={id}
+                    user={subscription}
+                    handleFollow={handleFollow}
+                />
+            )}
+        </div>
+    );
 
     const tabsData: TabsDataType = [
         {
             id: 0,
-            title: t('Подписки'),
-            total: subscriptions.total,
+            title: t('subscriptions'),
             itemsPerPage: SUBS_PER_PAGE,
-            handleFetchByPage: fetchSubsByPage('subscriptions'),
-            component: <div>{isFetch ? <CustomLoader color='secondary' /> : subscriptionsList}</div>
+            handleFetchByTab: fetchSubsByPage('subscriptions'),
+            component: isFetch ? <CustomCircularProgress/> : subscriptionsList
         },
         {
             id: 1,
-            title: t('Подписчики'),
-            total: subscribers.total,
+            title: t('subscribers'),
             itemsPerPage: SUBS_PER_PAGE,
-            handleFetchByPage: fetchSubsByPage('subscribers'),
-            component: <div>{isFetch ? <CustomLoader /> : subscribersList}</div>
+            handleFetchByTab: fetchSubsByPage('subscribers'),
+            component: isFetch ? <CustomCircularProgress/> : subscribersList
         }
     ];
 

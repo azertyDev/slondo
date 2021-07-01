@@ -70,17 +70,15 @@ export const UserSocialInfoContainer: FC = () => {
         {
             id: 0,
             title: 'Подписки',
-            total: subs.subscriptions.total,
             itemsPerPage: SUBS_PER_PAGE,
-            handleFetchByPage: null,
+            handleFetchByTab: null,
             component: <UserSubscriptions subscriptions={subs.subscriptions.data} handleFollow={handleFollow}/>
         },
         {
             id: 1,
             title: 'Подписчики',
-            total: subs.subscribers.total,
             itemsPerPage: SUBS_PER_PAGE,
-            handleFetchByPage: null,
+            handleFetchByTab: null,
             component: <UserSubscribers subscribers={subs.subscribers.data} handleFollow={handleFollow}/>
         }
     ];

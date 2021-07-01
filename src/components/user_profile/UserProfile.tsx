@@ -7,12 +7,12 @@ import {UserInfoWithAvatar} from '@src/components/elements/user_info_with_avatar
 import {UserPosts} from '@src/components/user_profile/pages/posts/UserPosts';
 import {UserRatingsContainer} from '@src/components/user_profile/pages/ratings/UserRatingsContainer';
 import {UserFollowsList} from '@src/components/user_profile/pages/follows_list/UserFollowsList';
-import {useStyles} from './useStyles';
 import {userAPI} from '@src/api/api';
 import {setErrorMsgAction} from '@src/redux/slices/errorSlice';
 import {useDispatch} from 'react-redux';
 import {useRouter} from 'next/router';
 import {useTranslation} from 'next-i18next';
+import {useStyles} from './useStyles';
 
 
 export const UserProfile: FC = () => {

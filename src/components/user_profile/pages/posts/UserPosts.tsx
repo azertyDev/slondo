@@ -14,12 +14,11 @@ export const UserPosts: FC<WithT> = ({t}) => {
     const {user_id} = useRouter().query;
 
     const initialUserPostsState: InitialCabinetCardState = {
-        isFetch: false,
-        myPosts: {
-            total: 0,
-            data: []
-        }
+        total: 0,
+        data: []
     };
+
+    const [isFetch, setIsFetch] = useState(false);
     const [postData, setPostData] = useState(initialUserPostsState);
     const [aucData, setAucData] = useState(initialUserPostsState);
 
@@ -32,15 +31,15 @@ export const UserPosts: FC<WithT> = ({t}) => {
     const fetchUserPosts = async (post_type) => {
         try {
             const isPost = post_type === 'post';
+            setIsFetch(true);
             if (isPost) {
-                setPostData({...postData, isFetch: true});
                 const {data, total} = await userAPI.getUserPosts(user_id, post_type);
-                setPostData({myPosts: {data, total}, isFetch: false});
+                setPostData({data, total});
             } else {
-                setAucData({...aucData, isFetch: true});
                 const {data, total} = await userAPI.getUserPosts(user_id, post_type);
-                setAucData({myPosts: {data, total}, isFetch: false});
+                setAucData({data, total});
             }
+            setIsFetch(false);
         } catch (e) {
             dispatch(setErrorMsgAction(e.message));
         }
@@ -52,22 +51,22 @@ export const UserPosts: FC<WithT> = ({t}) => {
     }, []);
 
     const userPostCards = (
-        postData.isFetch
-            ? <CircularProgress color="secondary" />
-            : <CardView
-                data={postData.myPosts.data}
-                isFetch={postData.isFetch}
-                listMode={false}
-            />
+        isFetch
+        ? <CircularProgress color="secondary"/>
+        : <CardView
+            data={postData.data}
+            isFetch={isFetch}
+            listMode={false}
+        />
     );
     const userAucCards = (
-        aucData.isFetch
-            ? <CircularProgress color="primary" />
-            : <CardView
-                data={aucData.myPosts.data}
-                isFetch={aucData.isFetch}
-                listMode={false}
-            />
+        isFetch
+        ? <CircularProgress color="primary"/>
+        : <CardView
+            data={aucData.data}
+            isFetch={isFetch}
+            listMode={false}
+        />
     );
 
     // const tabsData: TabsDataType = [

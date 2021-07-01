@@ -31,7 +31,7 @@ export const Main: FC = () => {
                     <MainSlider/>
                 </div>
                 <div className="categories-slider-wrapper">
-                    <CategoriesSlider t={t}/>
+                    <CategoriesSlider />
                 </div>
                 <Container maxWidth="xl" className="content-wrapper">
                     <Grid container>
@@ -42,7 +42,7 @@ export const Main: FC = () => {
                                 </section>
                             </Hidden>
                             <section>
-                                <PostsTabsContainer t={t}/>
+                                <PostsTabsContainer />
                             </section>
                         </Grid>
                         <Hidden mdDown>

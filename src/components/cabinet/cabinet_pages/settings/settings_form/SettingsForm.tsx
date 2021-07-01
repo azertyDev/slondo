@@ -9,7 +9,7 @@ import {
     SettingsButton,
     useStyles
 } from '@src/components/cabinet/cabinet_pages/settings/settings_form/useStyles';
-import {AvailableDays} from '@src/components/post/create_post/form_page/common_form/available_days/AvailableDays';
+import {AvailableDays} from '@src/components/post/create_post/third_step/common_form/available_days/AvailableDays';
 
 type SettingsFormPropsType = {
     formDisable: boolean,

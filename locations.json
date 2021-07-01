@@ -1,0 +1,1081 @@
+[
+  {
+    "id": 11,
+    "name": "tashkent_region",
+    "cities": [
+      {
+        "id": 152,
+        "name": "tashkent_city",
+        "district": [
+          {
+            "id": 1,
+            "city_id": 152,
+            "name": "bektemir_district"
+          },
+          {
+            "id": 2,
+            "city_id": 152,
+            "name": "ulugbek_district"
+          },
+          {
+            "id": 3,
+            "city_id": 152,
+            "name": "mirabad_district"
+          },
+          {
+            "id": 4,
+            "city_id": 152,
+            "name": "almazar_district"
+          },
+          {
+            "id": 5,
+            "city_id": 152,
+            "name": "sergeli_district"
+          },
+          {
+            "id": 6,
+            "city_id": 152,
+            "name": "uchtepa_district"
+          },
+          {
+            "id": 7,
+            "city_id": 152,
+            "name": "yashnobodsky_district"
+          },
+          {
+            "id": 8,
+            "city_id": 152,
+            "name": "chilanzar_district"
+          },
+          {
+            "id": 9,
+            "city_id": 152,
+            "name": "shaykhantakhur_district"
+          },
+          {
+            "id": 10,
+            "city_id": 152,
+            "name": "yunusabad_district"
+          },
+          {
+            "id": 11,
+            "city_id": 152,
+            "name": "yakkasaray_district"
+          }
+        ]
+      },
+      {
+        "id": 139,
+        "name": "city_angren",
+        "district": []
+      },
+      {
+        "id": 140,
+        "name": "bekabad_district",
+        "district": []
+      },
+      {
+        "id": 141,
+        "name": "city_bekabad",
+        "district": []
+      },
+      {
+        "id": 142,
+        "name": "bukinskiy_district",
+        "district": []
+      },
+      {
+        "id": 143,
+        "name": "bostanlyk_district",
+        "district": []
+      },
+      {
+        "id": 144,
+        "name": "zangiata_district",
+        "district": []
+      },
+      {
+        "id": 145,
+        "name": "kibrai_district",
+        "district": []
+      },
+      {
+        "id": 146,
+        "name": "kuyichirchik_district",
+        "district": []
+      },
+      {
+        "id": 147,
+        "name": "akkurgansky_district",
+        "district": []
+      },
+      {
+        "id": 148,
+        "name": "almalyk_city",
+        "district": []
+      },
+      {
+        "id": 149,
+        "name": "akhangaran_district",
+        "district": []
+      },
+      {
+        "id": 150,
+        "name": "parkent_district",
+        "district": []
+      },
+      {
+        "id": 151,
+        "name": "pskentsky_district",
+        "district": []
+      },
+      {
+        "id": 153,
+        "name": "urtachirchik_district",
+        "district": []
+      },
+      {
+        "id": 154,
+        "name": "chinaz_district",
+        "district": []
+      },
+      {
+        "id": 155,
+        "name": "chirchik_city",
+        "district": []
+      },
+      {
+        "id": 156,
+        "name": "uukorichirchik_district",
+        "district": []
+      },
+      {
+        "id": 157,
+        "name": "yangiyul_district",
+        "district": []
+      }
+    ]
+  },
+  {
+    "id": 8,
+    "name": "samarkand_region",
+    "cities": [
+      {
+        "id": 97,
+        "name": "bulungur_district",
+        "district": []
+      },
+      {
+        "id": 98,
+        "name": "jambay_district",
+        "district": []
+      },
+      {
+        "id": 99,
+        "name": "ishtykhansky_district",
+        "district": []
+      },
+      {
+        "id": 100,
+        "name": "kattakurgan_district",
+        "district": []
+      },
+      {
+        "id": 101,
+        "name": "kattakurgan_city",
+        "district": []
+      },
+      {
+        "id": 102,
+        "name": "koshrabad_district",
+        "district": []
+      },
+      {
+        "id": 103,
+        "name": "narpaysky_district",
+        "district": []
+      },
+      {
+        "id": 104,
+        "name": "nurabad_district",
+        "district": []
+      },
+      {
+        "id": 105,
+        "name": "akdarya_district",
+        "district": []
+      },
+      {
+        "id": 106,
+        "name": "payaryk_district",
+        "district": []
+      },
+      {
+        "id": 107,
+        "name": "pastdargom_district",
+        "district": []
+      },
+      {
+        "id": 108,
+        "name": "pakhtachi_district",
+        "district": []
+      },
+      {
+        "id": 109,
+        "name": "samarkand_district",
+        "district": []
+      },
+      {
+        "id": 110,
+        "name": "city_samarkand",
+        "district": []
+      },
+      {
+        "id": 111,
+        "name": "tailak_district",
+        "district": []
+      },
+      {
+        "id": 112,
+        "name": "urgut_district",
+        "district": []
+      }
+    ]
+  },
+  {
+    "id": 1,
+    "name": "andijan_region",
+    "cities": [
+      {
+        "id": 1,
+        "name": "andijan_city",
+        "district": []
+      },
+      {
+        "id": 2,
+        "name": "andijan_district",
+        "district": []
+      },
+      {
+        "id": 3,
+        "name": "asaka_city",
+        "district": []
+      },
+      {
+        "id": 4,
+        "name": "asaka_district",
+        "district": []
+      },
+      {
+        "id": 5,
+        "name": "balykchinsky_district",
+        "district": []
+      },
+      {
+        "id": 6,
+        "name": "bulakbashinsky_district",
+        "district": []
+      },
+      {
+        "id": 7,
+        "name": "boz_district",
+        "district": []
+      },
+      {
+        "id": 8,
+        "name": "jalakuduk_district",
+        "district": []
+      },
+      {
+        "id": 9,
+        "name": "izbaskansky_district",
+        "district": []
+      },
+      {
+        "id": 10,
+        "name": "karasuv_city",
+        "district": []
+      },
+      {
+        "id": 11,
+        "name": "kurgantepa_district",
+        "district": []
+      },
+      {
+        "id": 12,
+        "name": "marhamat_district",
+        "district": []
+      },
+      {
+        "id": 13,
+        "name": "altynkul_district",
+        "district": []
+      },
+      {
+        "id": 14,
+        "name": "pakhtaabad_district",
+        "district": []
+      },
+      {
+        "id": 15,
+        "name": "ulugnor_district",
+        "district": []
+      },
+      {
+        "id": 16,
+        "name": "city_khanabad",
+        "district": []
+      },
+      {
+        "id": 17,
+        "name": "khojaabad_district",
+        "district": []
+      },
+      {
+        "id": 18,
+        "name": "shakhrikhansky_district",
+        "district": []
+      }
+    ]
+  },
+  {
+    "id": 2,
+    "name": "bukhara_region",
+    "cities": [
+      {
+        "id": 19,
+        "name": "city_bukhara",
+        "district": []
+      },
+      {
+        "id": 20,
+        "name": "bukhara_district",
+        "district": []
+      },
+      {
+        "id": 21,
+        "name": "vabkent_district",
+        "district": []
+      },
+      {
+        "id": 22,
+        "name": "gijduvan_district",
+        "district": []
+      },
+      {
+        "id": 23,
+        "name": "zhondorsky_district",
+        "district": []
+      },
+      {
+        "id": 24,
+        "name": "kagansky_district",
+        "district": []
+      },
+      {
+        "id": 25,
+        "name": "kagan_city",
+        "district": []
+      },
+      {
+        "id": 26,
+        "name": "karakul_district",
+        "district": []
+      },
+      {
+        "id": 27,
+        "name": "karaulbazar_district",
+        "district": []
+      },
+      {
+        "id": 28,
+        "name": "alatsky_district",
+        "district": []
+      },
+      {
+        "id": 29,
+        "name": "peshkun_district",
+        "district": []
+      },
+      {
+        "id": 30,
+        "name": "romitansky_district",
+        "district": []
+      },
+      {
+        "id": 31,
+        "name": "shafirkan_district",
+        "district": []
+      }
+    ]
+  },
+  {
+    "id": 3,
+    "name": "jizzakh_region",
+    "cities": [
+      {
+        "id": 32,
+        "name": "arnasay_district",
+        "district": []
+      },
+      {
+        "id": 33,
+        "name": "bakhmal_district",
+        "district": []
+      },
+      {
+        "id": 34,
+        "name": "galliaralsky_district",
+        "district": []
+      },
+      {
+        "id": 35,
+        "name": "dustliksky_district",
+        "district": []
+      },
+      {
+        "id": 36,
+        "name": "sharaf_rashidovsky_district",
+        "district": []
+      },
+      {
+        "id": 37,
+        "name": "jizzakh_city",
+        "district": []
+      },
+      {
+        "id": 38,
+        "name": "zarbdar_district",
+        "district": []
+      },
+      {
+        "id": 39,
+        "name": "zafarabad_district",
+        "district": []
+      },
+      {
+        "id": 40,
+        "name": "zaamin_district",
+        "district": []
+      },
+      {
+        "id": 41,
+        "name": "mirzachul_district",
+        "district": []
+      },
+      {
+        "id": 42,
+        "name": "pakhtakor_district",
+        "district": []
+      },
+      {
+        "id": 43,
+        "name": "farish_district",
+        "district": []
+      },
+      {
+        "id": 44,
+        "name": "yangiabad_district",
+        "district": []
+      }
+    ]
+  },
+  {
+    "id": 4,
+    "name": "republic_karakalpakstan",
+    "cities": [
+      {
+        "id": 45,
+        "name": "amu_darya_district",
+        "district": []
+      },
+      {
+        "id": 46,
+        "name": "beruniysky_district",
+        "district": []
+      },
+      {
+        "id": 47,
+        "name": "kegeyli_district",
+        "district": []
+      },
+      {
+        "id": 48,
+        "name": "kanlykul_district",
+        "district": []
+      },
+      {
+        "id": 49,
+        "name": "karauzyak_district",
+        "district": []
+      },
+      {
+        "id": 50,
+        "name": "kungradsky_district",
+        "district": []
+      },
+      {
+        "id": 51,
+        "name": "muynak_district",
+        "district": []
+      },
+      {
+        "id": 52,
+        "name": "nukus_district",
+        "district": []
+      },
+      {
+        "id": 53,
+        "name": "nukus_city",
+        "district": []
+      },
+      {
+        "id": 54,
+        "name": "takhtakupyrsky_district",
+        "district": []
+      },
+      {
+        "id": 55,
+        "name": "takhiatash_district",
+        "district": []
+      },
+      {
+        "id": 56,
+        "name": "turtkul_district",
+        "district": []
+      },
+      {
+        "id": 57,
+        "name": "khojeyli_district",
+        "district": []
+      },
+      {
+        "id": 58,
+        "name": "chimbay_district",
+        "district": []
+      },
+      {
+        "id": 59,
+        "name": "shumanai_district",
+        "district": []
+      },
+      {
+        "id": 60,
+        "name": "ellikkalinsky_district",
+        "district": []
+      }
+    ]
+  },
+  {
+    "id": 5,
+    "name": "kashkadarya_region",
+    "cities": [
+      {
+        "id": 61,
+        "name": "guzar_district",
+        "district": []
+      },
+      {
+        "id": 62,
+        "name": "dehkanabad_district",
+        "district": []
+      },
+      {
+        "id": 63,
+        "name": "kamashinsky_district",
+        "district": []
+      },
+      {
+        "id": 64,
+        "name": "karshi_district",
+        "district": []
+      },
+      {
+        "id": 65,
+        "name": "karshi_city",
+        "district": []
+      },
+      {
+        "id": 66,
+        "name": "kasbiysky_district",
+        "district": []
+      },
+      {
+        "id": 67,
+        "name": "kitab_district",
+        "district": []
+      },
+      {
+        "id": 68,
+        "name": "kasansky_district",
+        "district": []
+      },
+      {
+        "id": 69,
+        "name": "mirishkor_district",
+        "district": []
+      },
+      {
+        "id": 70,
+        "name": "mubarek_district",
+        "district": []
+      },
+      {
+        "id": 71,
+        "name": "nishan_district",
+        "district": []
+      },
+      {
+        "id": 72,
+        "name": "сhirakchinsky_district",
+        "district": []
+      },
+      {
+        "id": 73,
+        "name": "shakhrisabz_district",
+        "district": []
+      },
+      {
+        "id": 74,
+        "name": "yakkabag_district",
+        "district": []
+      }
+    ]
+  },
+  {
+    "id": 6,
+    "name": "navoi_region",
+    "cities": [
+      {
+        "id": 75,
+        "name": "zarafshan_city",
+        "district": []
+      },
+      {
+        "id": 76,
+        "name": "Karmaninsky district",
+        "district": []
+      },
+      {
+        "id": 77,
+        "name": "kyzyltepa_district",
+        "district": []
+      },
+      {
+        "id": 78,
+        "name": "kanimekhsky_district",
+        "district": []
+      },
+      {
+        "id": 79,
+        "name": "navbahor_district",
+        "district": []
+      },
+      {
+        "id": 80,
+        "name": "navoi_city",
+        "district": []
+      },
+      {
+        "id": 81,
+        "name": "nuratinsky_district",
+        "district": []
+      },
+      {
+        "id": 82,
+        "name": "tamdyn_district",
+        "district": []
+      },
+      {
+        "id": 83,
+        "name": "uchkuduk_district",
+        "district": []
+      },
+      {
+        "id": 84,
+        "name": "khatyrchinsky_district",
+        "district": []
+      }
+    ]
+  },
+  {
+    "id": 7,
+    "name": "namangan_region",
+    "cities": [
+      {
+        "id": 85,
+        "name": "kasansai_district",
+        "district": []
+      },
+      {
+        "id": 86,
+        "name": "mingbulak_district",
+        "district": []
+      },
+      {
+        "id": 87,
+        "name": "namangan_district",
+        "district": []
+      },
+      {
+        "id": 88,
+        "name": "namangan_city",
+        "district": []
+      },
+      {
+        "id": 89,
+        "name": "naryn_district",
+        "district": []
+      },
+      {
+        "id": 90,
+        "name": "papal_district",
+        "district": []
+      },
+      {
+        "id": 91,
+        "name": "turakurgan_district",
+        "district": []
+      },
+      {
+        "id": 92,
+        "name": "uychinsky_district",
+        "district": []
+      },
+      {
+        "id": 93,
+        "name": "uchkurgansky_district",
+        "district": []
+      },
+      {
+        "id": 94,
+        "name": "chartaksky_district",
+        "district": []
+      },
+      {
+        "id": 95,
+        "name": "chust_district",
+        "district": []
+      },
+      {
+        "id": 96,
+        "name": "yangikurgan_district",
+        "district": []
+      }
+    ]
+  },
+  {
+    "id": 9,
+    "name": "surkhandarya_region",
+    "cities": [
+      {
+        "id": 113,
+        "name": "angora_district",
+        "district": []
+      },
+      {
+        "id": 114,
+        "name": "bandikhan_district",
+        "district": []
+      },
+      {
+        "id": 115,
+        "name": "baysun_district",
+        "district": []
+      },
+      {
+        "id": 116,
+        "name": "denau_district",
+        "district": []
+      },
+      {
+        "id": 117,
+        "name": "jarkurgan_district",
+        "district": []
+      },
+      {
+        "id": 118,
+        "name": "kiziriksky_district",
+        "district": []
+      },
+      {
+        "id": 119,
+        "name": "kumkurgan_district",
+        "district": []
+      },
+      {
+        "id": 120,
+        "name": "muzrabad_district",
+        "district": []
+      },
+      {
+        "id": 121,
+        "name": "altynsay_district",
+        "district": []
+      },
+      {
+        "id": 122,
+        "name": "sariasi_district",
+        "district": []
+      },
+      {
+        "id": 123,
+        "name": "termez_district",
+        "district": []
+      },
+      {
+        "id": 124,
+        "name": "city_termez",
+        "district": []
+      },
+      {
+        "id": 125,
+        "name": "uzun_district",
+        "district": []
+      },
+      {
+        "id": 126,
+        "name": "sherabad_district",
+        "district": []
+      },
+      {
+        "id": 127,
+        "name": "shurchinsky_district",
+        "district": []
+      }
+    ]
+  },
+  {
+    "id": 10,
+    "name": "syrdarya_region",
+    "cities": [
+      {
+        "id": 128,
+        "name": "bayautsky_district",
+        "district": []
+      },
+      {
+        "id": 129,
+        "name": "gulistan_district",
+        "district": []
+      },
+      {
+        "id": 130,
+        "name": "gulistan_city",
+        "district": []
+      },
+      {
+        "id": 131,
+        "name": "mirzaabad_district",
+        "district": []
+      },
+      {
+        "id": 132,
+        "name": "akaltynsky_district",
+        "district": []
+      },
+      {
+        "id": 133,
+        "name": "saikhunabad_district",
+        "district": []
+      },
+      {
+        "id": 134,
+        "name": "sardob_district",
+        "district": []
+      },
+      {
+        "id": 135,
+        "name": "syrdarya_district",
+        "district": []
+      },
+      {
+        "id": 136,
+        "name": "khavast_district",
+        "district": []
+      },
+      {
+        "id": 137,
+        "name": "city_shirin",
+        "district": []
+      },
+      {
+        "id": 138,
+        "name": "yangier_city",
+        "district": []
+      }
+    ]
+  },
+  {
+    "id": 12,
+    "name": "ferghana_region",
+    "cities": [
+      {
+        "id": 158,
+        "name": "besharyk_district",
+        "district": []
+      },
+      {
+        "id": 159,
+        "name": "baghdad_district",
+        "district": []
+      },
+      {
+        "id": 160,
+        "name": "buwaydinsky_district",
+        "district": []
+      },
+      {
+        "id": 161,
+        "name": "dangarinsky_district",
+        "district": []
+      },
+      {
+        "id": 162,
+        "name": "yazyavansky_district",
+        "district": []
+      },
+      {
+        "id": 163,
+        "name": "kuvinsky_district",
+        "district": []
+      },
+      {
+        "id": 164,
+        "name": "kuvasay_city",
+        "district": []
+      },
+      {
+        "id": 165,
+        "name": "kokand_city",
+        "district": []
+      },
+      {
+        "id": 166,
+        "name": "kushtepinsky_district",
+        "district": []
+      },
+      {
+        "id": 167,
+        "name": "city_margilan",
+        "district": []
+      },
+      {
+        "id": 168,
+        "name": "altyaryk_district",
+        "district": []
+      },
+      {
+        "id": 169,
+        "name": "rishtan_district",
+        "district": []
+      },
+      {
+        "id": 170,
+        "name": "sokhsky_district",
+        "district": []
+      },
+      {
+        "id": 171,
+        "name": "tashlak_district",
+        "district": []
+      },
+      {
+        "id": 172,
+        "name": "uchkuprik_district",
+        "district": []
+      },
+      {
+        "id": 173,
+        "name": "uzbekistan_district",
+        "district": []
+      },
+      {
+        "id": 174,
+        "name": "fergana_district",
+        "district": []
+      },
+      {
+        "id": 175,
+        "name": "fergana_city",
+        "district": []
+      },
+      {
+        "id": 176,
+        "name": "furkatsky_district",
+        "district": []
+      }
+    ]
+  },
+  {
+    "id": 13,
+    "name": "khorezm_region",
+    "cities": [
+      {
+        "id": 177,
+        "name": "bagatsky_district",
+        "district": []
+      },
+      {
+        "id": 178,
+        "name": "gurlensky_district",
+        "district": []
+      },
+      {
+        "id": 179,
+        "name": "koshkupyrsky_district",
+        "district": []
+      },
+      {
+        "id": 180,
+        "name": "urgench_district",
+        "district": []
+      },
+      {
+        "id": 181,
+        "name": "urgench_city",
+        "district": []
+      },
+      {
+        "id": 182,
+        "name": "khiva_district",
+        "district": []
+      },
+      {
+        "id": 183,
+        "name": "khazarasp_district",
+        "district": []
+      },
+      {
+        "id": 184,
+        "name": "khankinsky_district",
+        "district": []
+      },
+      {
+        "id": 185,
+        "name": "shavatsky_district",
+        "district": []
+      },
+      {
+        "id": 186,
+        "name": "yangiaryk_district",
+        "district": []
+      },
+      {
+        "id": 187,
+        "name": "yangibazar_district",
+        "district": []
+      },
+      {
+        "id": 188,
+        "name": "khiva_city",
+        "district": []
+      },
+      {
+        "id": 189,
+        "name": "dustlik_city",
+        "district": []
+      }
+    ]
+  }
+]

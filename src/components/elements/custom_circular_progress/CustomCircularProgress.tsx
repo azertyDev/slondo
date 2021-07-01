@@ -1,8 +1,12 @@
 import {FC} from 'react';
 import {CircularProgress} from '@material-ui/core';
 
-export const CustomCircularProgress: FC = () => {
+type CustomCircularProgressProps = {
+    color?: 'primary' | 'secondary' | 'inherit'
+}
+
+export const CustomCircularProgress: FC<CustomCircularProgressProps> = ({color = 'primary'}) => {
     return (
-        <CircularProgress color='primary'/>
+        <CircularProgress color={color}/>
     );
 };

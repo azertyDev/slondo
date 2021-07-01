@@ -8,7 +8,7 @@ import {userAPI} from '@src/api/api';
 
 const RatingsContainer: FC = () => {
     const dispatch = useDispatch();
-    const {t} = useTranslation(['cabinet']);
+    const {t} = useTranslation('cabinet');
 
     const initialUserRatingState = {
         isFetch: false,

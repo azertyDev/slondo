@@ -5,7 +5,7 @@ import {useRouter} from 'next/router';
 import {DropDownSelect} from '@src/components/elements/drop_down_select/DropDownSelect';
 import {postTypes} from '@src/common_data/post_types';
 import {DeployedSelect} from '@src/components/elements/deployed_select/DeployedSelect';
-import {SiteServices} from '@src/components/post/create_post/form_page/common_form/site_services/SiteServices';
+import {SiteServices} from '@src/components/post/create_post/third_step/common_form/site_services/SiteServices';
 import {FromToInputs} from '@src/components/elements/from_to_inputs/FromToInputs';
 import {
     cookies,
@@ -25,15 +25,15 @@ import {setErrorMsgAction} from '@src/redux/slices/errorSlice';
 import {SearchEstate} from '@src/components/post/search_post/search_form/categories_forms/estate/SearchEstate';
 import {SearchTransport} from '@src/components/post/search_post/search_form/categories_forms/transport/SearchTransport';
 import {SearchJob} from '@src/components/post/search_post/search_form/categories_forms/job/SearchJob';
-import {useStyles} from './useStyles';
 import {CheckboxSelect} from '@src/components/elements/checkbox_select/CheckboxSelect';
-
+import {useStyles} from './useStyles';
 
 export type CommonFiltersType = {
-    onSubmit,
+    onSubmit?,
     filters,
     urlParams,
     isRent?: boolean,
+    categoryName: string,
     handleReset?: () => void,
     sameWithUrlCtgr: boolean
 };
@@ -51,6 +51,7 @@ export const SearchForm: FC<SearchFormPropsType> = (props) => {
     } = props;
 
     const [ctgr, subctgr, typeCtgr] = categories;
+    const categoryName = ctgr?.name;
 
     const {
         post_type,
@@ -106,6 +107,9 @@ export const SearchForm: FC<SearchFormPropsType> = (props) => {
 
     const sameWithUrlCtgr = category?.name === ctgr?.name && subcategory?.name === subctgr?.name && type?.name === typeCtgr?.name;
 
+    const isJob = category?.name === 'job';
+    const isService = category?.name === 'service';
+
     const isRent = type?.id === 2 || type?.id === 3;
 
     const mainCategoryName: string = category?.name ?? '';
@@ -159,6 +163,7 @@ export const SearchForm: FC<SearchFormPropsType> = (props) => {
                     filters={filtersByCtgr}
                     handleReset={handleReset}
                     urlParams={urlFiltersParams}
+                    categoryName={categoryName}
                     sameWithUrlCtgr={sameWithUrlCtgr}
                 />;
             case 'transport':
@@ -170,6 +175,7 @@ export const SearchForm: FC<SearchFormPropsType> = (props) => {
                     urlParams={urlFiltersParams}
                     onSubmit={onSubmit}
                     handleReset={handleReset}
+                    categoryName={categoryName}
                     sameWithUrlCtgr={sameWithUrlCtgr}
                 />;
             case 'estate':
@@ -179,6 +185,7 @@ export const SearchForm: FC<SearchFormPropsType> = (props) => {
                     filters={filtersByCtgr}
                     handleReset={handleReset}
                     urlParams={urlFiltersParams}
+                    categoryName={categoryName}
                     subcategoryName={subcategoryName}
                     sameWithUrlCtgr={sameWithUrlCtgr}
                 />;
@@ -191,6 +198,7 @@ export const SearchForm: FC<SearchFormPropsType> = (props) => {
                     filters={filtersByCtgr}
                     urlParams={urlFiltersParams}
                     handleReset={handleReset}
+                    categoryName={categoryName}
                     sameWithUrlCtgr={sameWithUrlCtgr}
                 />;
             default:
@@ -202,23 +210,24 @@ export const SearchForm: FC<SearchFormPropsType> = (props) => {
                     filters={filtersByCtgr}
                     handleReset={handleReset}
                     urlParams={urlFiltersParams}
+                    categoryName={categoryName}
                     sameWithUrlCtgr={sameWithUrlCtgr}
                 />;
         }
     };
 
-    const getTypeLabelByCtgr = () => {
-        switch (mainCategoryName) {
-            case 'estate':
-                return 'type';
-            case 'service':
-                return 'service_type';
-            case 'job':
-                return 'job_type';
-            default:
-                return 'good_type';
-        }
-    };
+    // const getTypeLabelByCtgr = () => {
+    //     switch (mainCategoryName) {
+    //         case 'estate':
+    //             return 'type';
+    //         case 'service':
+    //             return 'service_type';
+    //         case 'job':
+    //             return 'job_type';
+    //         default:
+    //             return 'good_type';
+    //     }
+    // };
 
     function urlByParams(values): string {
         let url = '/';
@@ -311,43 +320,45 @@ export const SearchForm: FC<SearchFormPropsType> = (props) => {
     const classes = useStyles();
     return (
         <div className={classes.root}>
-            <Grid container spacing={1}>
+            <Grid container spacing={2}>
                 <Grid item xs={12} sm={6} md={4}>
                     <DropDownSelect
-                        ns='categories'
                         name='category'
                         disableRequire
                         values={values}
                         items={filters.categories}
                         handleSelect={handleSelect}
+                        transKey='categories:'
+                        labelTxt={t(`category`)}
                     />
                 </Grid>
                 {!!values.category?.subcategory && (
                     <Grid item xs={12} sm={6} md={4}>
                         <DropDownSelect
-                            ns='categories'
                             name='subcategory'
                             disableRequire
                             values={values}
-                            items={values.category.subcategory}
                             handleSelect={handleSelect}
+                            items={values.category?.subcategory}
+                            labelTxt={t(`subcategory`)}
+                            transKey={`categories:${category?.name}.`}
                         />
                     </Grid>
                 )}
                 {!!values.subcategory?.type && (
                     <Grid item xs={12} sm={6} md={4}>
                         <DropDownSelect
-                            ns='categories'
                             name='type'
                             disableRequire
                             values={values}
-                            labelTxt={getTypeLabelByCtgr()}
-                            items={values.subcategory.type}
                             handleSelect={handleSelect}
+                            items={values.subcategory.type}
+                            labelTxt={t('type')}
+                            transKey={`categories:${category?.name}.${subcategory?.name}.`}
                         />
                     </Grid>
                 )}
-                {hasAuction && (
+                {(!mainCategoryName || hasAuction) && (
                     <Grid item xs={12} sm={6} md={4}>
                         <DeployedSelect
                             disableRequire
@@ -375,36 +386,32 @@ export const SearchForm: FC<SearchFormPropsType> = (props) => {
                         }}
                     />
                 </Grid>
-                <Grid container item xs={12} sm={6} spacing={1}>
-                    <Grid item container alignItems='flex-end' xs={7} sm={6}>
+                {!isJob && !isService && (
+                    <Grid item container alignItems='flex-end' xs={3}>
                         <CheckboxSelect
-                            labelText={t('free')}
                             checked={values.free}
-                            onChange={handleCheckbox('free')}
-                            name='free'
+                            labelTxt={t('free')}
+                            handleCheckbox={handleCheckbox('free')}
                         />
                     </Grid>
-                    {values.post_type?.name === 'auc' && (
-                        <Grid item container alignItems='flex-end' xs={5} sm={5}>
-                            <CheckboxSelect
-                                labelText={t('archive')}
-                                checked={values.archive}
-                                onChange={handleCheckbox('archive')}
-                                name='archive'
-                            />
-                        </Grid>
-                    )}
-                </Grid>
-                {!!mainCategoryName && (
-                    <SiteServices
-                        t={t}
-                        iconMode
-                        isAuction={false}
-                        values={values}
-                        handleCheckbox={handleCheckbox}
-                        categoryName={mainCategoryName}
-                    />
                 )}
+                {values.post_type?.name === 'auc' && (
+                    <Grid item container alignItems='flex-end' xs={3}>
+                        <CheckboxSelect
+                            checked={values.archive}
+                            labelTxt={t('archive')}
+                            handleCheckbox={handleCheckbox('archive')}
+                        />
+                    </Grid>
+                )}
+                <SiteServices
+                    t={t}
+                    iconMode
+                    values={values}
+                    isAuction={false}
+                    handleCheckbox={handleCheckbox}
+                    categoryName={mainCategoryName}
+                />
                 {getFiltersByCtgr()}
             </Grid>
         </div>

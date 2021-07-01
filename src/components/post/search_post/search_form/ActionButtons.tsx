@@ -1,8 +1,8 @@
 import {FC} from 'react';
 import {CustomButton} from '@src/components/elements/custom_button/CustomButton';
 import {useTranslation} from 'next-i18next';
-import {useStyles} from './useStyles';
 import {Box, Typography, useMediaQuery, useTheme} from '@material-ui/core';
+import {useStyles} from './useStyles';
 
 type ActionButtonsPropsType = {
     handleReset

@@ -1,4 +1,6 @@
 {
+  "perform_purchase": "Xaridni tastiqlash",
+  "dismiss_purchase": "Xaridni bekor qilish",
   "sms_code": "Sms kod",
   "type_sms_code": "Kodni kiriting",
   "buy_safe_deal": "Xavfsiz xarid qilmo'qchimisiz?",

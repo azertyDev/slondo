@@ -1,6 +1,6 @@
 import {FC} from 'react';
 import {CustomButton} from '@src/components/elements/custom_button/CustomButton';
-import {FormControl, InputLabel, Typography} from '@material-ui/core';
+import {FormControl, Typography} from '@material-ui/core';
 import {isRequired} from '@src/helpers';
 import {useTranslation} from 'react-i18next';
 import {useStyles} from './useStyles';

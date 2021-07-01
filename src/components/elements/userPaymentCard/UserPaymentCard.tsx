@@ -26,9 +26,10 @@ export const UserPaymentCard: FC = () => {
     const {
         userCard,
         isFetchUserCard,
-        setFetchedUserCard,
+        fetchUserCard,
         handleResetUserCard
     } = useUserCard();
+
     const hasCard = !!userCard.cardId;
 
     const [isFetch, setIsFetch] = useState(false);
@@ -67,13 +68,11 @@ export const UserPaymentCard: FC = () => {
 
     const setCard = async ({cardNumber, expireDate, phone}) => {
         try {
-            const cardLastSix = cardNumber.slice(10);
             const phoneLastNine = phonePrepare(phone).slice(3);
-
             const cardData = JSON.stringify({
                 userId: user.info.id,
                 expireDate,
-                cardLastSix,
+                cardNumber,
                 phoneLastNine
             });
 
@@ -102,7 +101,7 @@ export const UserPaymentCard: FC = () => {
             setIsFetch(true);
 
             await myUzCardAPI.confirmSmsCode(data);
-            await setFetchedUserCard();
+            await fetchUserCard();
 
             setIsFetch(false);
             setIsSmsConfirm(false);
@@ -128,6 +127,10 @@ export const UserPaymentCard: FC = () => {
             dispatch(setErrorMsgAction(e.message));
         }
     };
+
+    useEffect(() => {
+        fetchUserCard();
+    }, []);
 
     useEffect(() => {
         hasCard && setValues({

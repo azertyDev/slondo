@@ -3,7 +3,7 @@ import Link from 'next/link';
 import {AppBar, Avatar, Container, Grid, Hidden, Popover, Typography} from '@material-ui/core';
 import {CustomButton} from '@src/components/elements/custom_button/CustomButton';
 import {withScrollThreshold} from '@src/hocs/withScrollThreshold';
-import {Logo} from '@src/components/elements/icons';
+import {Logo, QuestionIcon, SubstractIcon, SurpriseIcon} from '@src/components/elements/icons';
 import {AddIcon} from '@src/components/elements/icons/AddIcon';
 import {CategorySortIcon} from '@src/components/elements/icons/CategorySortIcon';
 import {SignIcon} from '@src/components/elements/icons/SignIcon';
@@ -13,13 +13,15 @@ import {Localization} from '@src/components/header/top/localization/Localization
 import {HeaderSearchForm} from '@src/components/header/bottom/header_search_form/HeaderSearchForm';
 import {cookieOpts, cookies} from '@src/helpers';
 import {useStyles} from './useStyles';
-import { SidebarMenu } from '@src/components/cabinet/cabinet_sidebar/sidebar_menu/SidebarMenu';
+import {SidebarMenu} from '@src/components/cabinet/cabinet_sidebar/sidebar_menu/SidebarMenu';
+import {useRouter} from 'next/router';
 
 
 const Bottom = (props) => {
     const {isScrollBreak, handleOpenModal, isAuth, t, avatar} = props;
     const [drawerOpen, setDrawerOpen] = useState(false);
     const [anchorEl, setAnchorEl] = useState<HTMLButtonElement | null>(null);
+    const {pathname} = useRouter();
 
     const handleDrawerShow = (value) => () => {
         setDrawerOpen(value);
@@ -136,7 +138,7 @@ const Bottom = (props) => {
                             >
                                 {isAuth
                                     ? <span onClick={handleClick} className='avatar'>
-                                        <Avatar alt="Avatar" src={avatar} />
+                                        <Avatar alt="Avatar" src={avatar}/>
                                     </span>
                                     : <CustomButton
                                         className="bottom-sign-button header-button"
@@ -145,18 +147,61 @@ const Bottom = (props) => {
                                         <Typography variant="subtitle2">
                                             {t('auth_reg:signIn')}
                                         </Typography>
-                                        <SignIcon />
+                                        <SignIcon/>
                                     </CustomButton>}
                             </Grid>
                         </Grid>
                     </Container>
                 </AppBar>
             </Hidden>
+            {/* ========================== Adaptive ======================= */}
             <Hidden lgUp>
                 <div className="translate-local">
                     <Location handleSelectLocation={handleSelectLocation}/>
                     <Localization/>
                 </div>
+                <Grid
+                    item
+                    container
+                    alignItems="center"
+                    justify="space-between"
+                    className='multi-actions'
+                    md={7}
+                    sm={6}
+                    xs={12}
+                >
+                    <Grid item md={2}>
+                        <Link href="/promotions">
+                            <a>
+                                <SurpriseIcon/>
+                                <Typography variant="subtitle1">
+                                    {t('actions')}
+                                </Typography>
+                            </a>
+                        </Link>
+                    </Grid>
+                    <Grid item md={2}>
+                        <Link href="#">
+                            <a>
+                                <SubstractIcon/>
+                                <Typography variant="subtitle1">
+                                    {t('bonus')}
+                                </Typography>
+                            </a>
+                        </Link>
+                    </Grid>
+                    <Grid item md={2}>
+                        <Link href="/help">
+
+                            <a className={pathname === '/help' ? 'selected' : ''}>
+                                <QuestionIcon/>
+                                <Typography variant="subtitle1">
+                                    {t('help')}
+                                </Typography>
+                            </a>
+                        </Link>
+                    </Grid>
+                </Grid>
             </Hidden>
             <CustomDrawer
                 position='left'
@@ -178,7 +223,7 @@ const Bottom = (props) => {
                     horizontal: 'left'
                 }}
             >
-                <SidebarMenu />
+                <SidebarMenu/>
             </Popover>
         </div>
     );

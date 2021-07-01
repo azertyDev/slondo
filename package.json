@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "build": "next build",
-    "start": "node server.js"
+    "start": "node --max-old-space-size=4096 server.js"
   },
   "dependencies": {
     "@material-ui/core": "^4.11.3",

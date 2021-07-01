@@ -1,10 +1,10 @@
 enum SafeDeal {
     parts = 1,
     goods,
-    home,
+    for_homes_cottages,
     electronics,
     hobbies,
-    animal
+    animals
 }
 
 enum Exchange {
@@ -13,19 +13,19 @@ enum Exchange {
     parts,
     estate,
     goods,
-    home,
+    for_homes_cottages,
     electronics,
     hobbies,
-    animal
+    animals
 }
 
 enum Delivery {
     parts = 1,
     goods,
-    home,
+    for_homes_cottages,
     electronics,
     hobbies,
-    animal
+    animals
 }
 
 export const site_services = {

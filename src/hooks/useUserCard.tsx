@@ -1,4 +1,4 @@
-import {useEffect, useState} from 'react';
+import {useState} from 'react';
 import {myUzCardAPI} from '@src/api/api';
 
 export const useUserCard = () => {
@@ -25,7 +25,7 @@ export const useUserCard = () => {
     const [isFetchUserCard, setIsFetchUserCard] = useState(false);
     const [userCard, setUserCard] = useState(initUserCard);
 
-    const setFetchedUserCard = async () => {
+    const fetchUserCard = async () => {
         try {
             setIsFetchUserCard(true);
             const [card] = (await myUzCardAPI.getUserCards()).cards;
@@ -49,14 +49,10 @@ export const useUserCard = () => {
         setUserCard(initUserCard);
     };
 
-    useEffect(() => {
-        setFetchedUserCard();
-    }, []);
-
     return {
         userCard,
         isFetchUserCard,
-        setFetchedUserCard,
+        fetchUserCard,
         handleResetUserCard
     };
 };

@@ -1,4 +1,4 @@
-import React, {FC} from 'react';
+import {FC} from 'react';
 import {List, ListItem, ListItemText} from '@material-ui/core';
 import {useRouter} from 'next/router';
 import {cookies} from '@src/helpers';

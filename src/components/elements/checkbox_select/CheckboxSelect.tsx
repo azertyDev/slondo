@@ -1,50 +1,49 @@
-import {FC} from 'react';
+import {FC, ReactElement} from 'react';
 import {Checkbox, FormControlLabel, Typography} from '@material-ui/core';
-import {SwitchBaseProps} from '@material-ui/core/internal/SwitchBase';
-import {useTranslation} from 'react-i18next';
 import {useStyles} from './useStyles';
 
+type ServiceItemPropsType = {
+    disabled?:boolean,
+    icon?: ReactElement,
+    labelTxt: string,
+    handleCheckbox,
+    checked,
+    name?: string
+}
 
-type CheckboxPropsType = {
-    ns?: string,
-    disabled?: boolean,
-    checked: boolean,
-    name: string,
-    labelText?: string,
-    onChange?: SwitchBaseProps['onChange']
-};
-
-export const CheckboxSelect: FC<CheckboxPropsType> = (props) => {
+export const CheckboxSelect: FC<ServiceItemPropsType> = (props) => {
     const {
-        ns,
-        name,
-        labelText,
         disabled,
-        checked = false,
-        onChange
+        name,
+        icon = null,
+        labelTxt,
+        checked,
+        handleCheckbox
     } = props;
-
-    const {t} = useTranslation(ns || 'filters');
 
     const classes = useStyles({checked});
     return (
-        <div className={classes.root}>
-            <FormControlLabel
-                control={
-                    <Checkbox
-                        name={name}
-                        checked={checked}
-                        onChange={onChange}
-                        color='secondary'
-                    />
-                }
-                disabled={disabled}
-                label={
-                    <Typography variant='subtitle1'>
-                        {t(`${labelText ?? name}`)}
-                    </Typography>
-                }
-            />
-        </div>
-    )
+        <FormControlLabel
+            className={classes.serviceItem}
+            control={
+                <Checkbox
+                    name={name}
+                    color="primary"
+                    checked={checked}
+                    disabled={disabled}
+                    onChange={handleCheckbox}
+                />
+            }
+            label={
+                <>
+                    {icon}
+                    <strong>
+                        <Typography variant='subtitle1'>
+                            {labelTxt}
+                        </Typography>
+                    </strong>
+                </>
+            }
+        />
+    );
 };

@@ -5,7 +5,7 @@ import {CardDataType} from '@root/interfaces/CardData';
 import {BreadcrumbsComponent} from '@src/components/elements/breadcrumbs/Breadcrumbs';
 import {ListCard} from '@src/components/elements/card/list_card/ListCard';
 import {useTranslation} from 'react-i18next';
-import {CloseIcon, NotificationIcon, RocketIcon, SettingsIcon} from '@src/components/elements/icons';
+import {CloseIcon, NotificationIcon, RocketIcon} from '@src/components/elements/icons';
 import {useRouter} from 'next/router';
 import {CustomButton} from '@src/components/elements/custom_button/CustomButton';
 import {useStyles} from './useStyles';
@@ -13,22 +13,18 @@ import {useStyles} from './useStyles';
 type CabinetCardPropsType = {
     archive?: boolean,
     cardData: CardDataType,
-    handleSettingsOpen?: (id: number, post?, index?: number) => () => void,
     handleDetailedOpen?: (id: number, post) => () => void,
     handleNotificationsOpen?: (id: number) => () => void,
-    handleOpenModal?: (id: number) => () => void,
-    fetchAuctionNotifications?: (post) => () => void
+    handleOpenModal?: (id: number) => () => void
 }
 
 export const CabinetCard: FC<CabinetCardPropsType> = (props) => {
     const {
         cardData,
         archive = false,
-        handleSettingsOpen,
         handleDetailedOpen,
         handleNotificationsOpen,
-        handleOpenModal,
-        fetchAuctionNotifications
+        handleOpenModal
     } = props;
 
     const {pathname} = useRouter();
@@ -69,12 +65,14 @@ export const CabinetCard: FC<CabinetCardPropsType> = (props) => {
             </Box>
             <Box position='relative'>
                 <ListCard cardData={cardData}/>
-                <CustomButton className='unfold-btn' onClick={handleDetailedOpen(id, cardData)}>
-                    <Typography variant='subtitle1'>
-                        Раскрыть объявление
-                    </Typography>&nbsp;
-                    <ChevronRight color='action'/>
-                </CustomButton>
+                {handleDetailedOpen && (
+                    <CustomButton className='unfold-btn' onClick={handleDetailedOpen(id, cardData)}>
+                        <Typography variant='subtitle1'>
+                            Раскрыть объявление
+                        </Typography>&nbsp;
+                        <ChevronRight color='action'/>
+                    </CustomButton>
+                )}
                 <div className='card-btns'>
                     {pathname?.includes('favorite')
                      ? <CustomButton className='delete_favorite' onClick={handleOpenModal(id)}>
@@ -83,22 +81,16 @@ export const CabinetCard: FC<CabinetCardPropsType> = (props) => {
                      : cardData.creator && (
                         <>
                             {!archive && (
-                                <>
-                                    <CustomButton className='advertise'>
-                                        <RocketIcon/>
-                                        <Typography variant='subtitle1'>
-                                            Рекламировать
-                                        </Typography>
-                                    </CustomButton>
-                                    <CustomButton className='settings' onClick={handleSettingsOpen(id, cardData, 1)}>
-                                        <SettingsIcon/>
-                                    </CustomButton>
-                                </>
+                                <CustomButton className='advertise'>
+                                    <RocketIcon/>
+                                    <Typography variant='subtitle1'>
+                                        Рекламировать
+                                    </Typography>
+                                </CustomButton>
                             )}
                             <CustomButton
                                 className='notifications'
                                 onClick={handleNotificationsOpen(id)}
-                                onMouseEnter={fetchAuctionNotifications(cardData)}
                             >
                                 <NotificationIcon/>
                             </CustomButton>

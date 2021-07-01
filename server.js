@@ -4,8 +4,8 @@ const {createServer} = require('http');
 const {parse} = require('url');
 const next = require('next');
 
-const port = process.env.PORT || 3317;
-const serverUrl = process.env.SERVER_URL || 'http://localhost';
+const port = 3317;
+const serverUrl = 'http://localhost';
 const dev = process.env.NODE_ENV !== 'production';
 const app = next({dev});
 const handle = app.getRequestHandler();

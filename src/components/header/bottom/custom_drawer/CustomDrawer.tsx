@@ -64,7 +64,7 @@ export const CustomDrawer: FC<CustomDrawerPropsType> = (props) => {
                             variant="subtitle1"
                             color="initial"
                         >
-                            {t(ctgr.name)}
+                            {t(`${ctgr.name}.name`)}
                         </Typography>
                     </ListItem>
                 )}
@@ -81,25 +81,25 @@ export const CustomDrawer: FC<CustomDrawerPropsType> = (props) => {
                             const subcategoryName = transformCyrillic(subctgr.ru_name);
                             const type = subctgr.type || [];
                             const url = `/${location}/${categoryName}/${subcategoryName}`;
-
                             return (
                                 <div key={subctgr.id}>
                                     <List>
                                         <Link href={url}>
                                             <a onClick={handleClose}>
                                                 <Typography variant="h6" gutterBottom color="secondary">
-                                                    {t(subctgr.name)}
+                                                    {t(`${hoveredCtgr.name}.${subctgr.name}.name`)}
                                                 </Typography>
                                             </a>
                                         </Link>
                                         {type.map(type => {
                                             const typeName = transformCyrillic(type.ru_name);
+                                            const typeCtgrTrans = t(`${hoveredCtgr.name}.${subctgr.name}.${type.name}.name`);
                                             return (
                                                 <ListItem key={type.id}>
                                                     <Link href={url + `/${typeName}`}>
                                                         <a onClick={handleClose}>
                                                             <Typography variant="subtitle1" key={type.id}>
-                                                                {t(type.name)}
+                                                                {typeCtgrTrans}
                                                             </Typography>
                                                         </a>
                                                     </Link>
