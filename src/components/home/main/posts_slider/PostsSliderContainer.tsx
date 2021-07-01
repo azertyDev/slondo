@@ -63,7 +63,6 @@ export const PostsSliderContainer: FC = () => {
         setFetchedCardData();
     }, [currentPage, isAuth]);
 
-    console.log(popularPosts.data);
     return (
         <PostsSlider
             title={t('popularPosts')}
