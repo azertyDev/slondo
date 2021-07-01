@@ -1,10 +1,10 @@
 import {FC, useEffect, useState} from 'react';
 import Link from 'next/link';
 import {useTranslation} from 'next-i18next';
-import {Grid, Hidden, Tab, Tabs, Typography, useMediaQuery} from '@material-ui/core';
+import {Grid, Hidden, IconButton, Tab, Tabs, Typography, useMediaQuery} from '@material-ui/core';
 import {
     AdsIcon,
-    BonusIcon,
+    BonusIcon, CloseIcon,
     RatingIcon,
     SafeBuyingIcon,
     TorgIcon
@@ -44,6 +44,7 @@ export const AuthRegPage: FC = () => {
         password: '',
         password_confirm: ''
     };
+
 
     const [tabIndex, setTabIndex] = useState(0);
     const [errorMsg, setErrorMsg] = useState('');
@@ -394,7 +395,7 @@ export const AuthRegPage: FC = () => {
                                                     </CustomTabPanel>
                                                     <div className='auth-btns'>
                                                         {!isSignInTab && (
-                                                            <CustomButton onClick={handleCancel}>
+                                                            <CustomButton onClick={handleCancel} className='cancel-btn'>
                                                                 {t('cancel')}
                                                             </CustomButton>
                                                         )}
@@ -427,6 +428,13 @@ export const AuthRegPage: FC = () => {
                     </Grid>
                 </Grid>
             </div>
+            <IconButton
+                onClick={handleCloseModal}
+                className={classes.closeBtn}
+                size='medium'
+            >
+                <CloseIcon/>
+            </IconButton>
         </ResponsiveModal>
     );
 };
