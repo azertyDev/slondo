@@ -84,14 +84,17 @@ export const useStyles = makeStyles(({breakpoints, palette}) => ({
         [breakpoints.down('sm')]: {
             marginBottom: 0
         },
-        [breakpoints.down('sm')]: {
-            '& div.formik-num-pass': {
-                '& > div:first-child': {
-                    marginBottom: '30px'
-                }
+        '& div.formik-num-pass': {
+            '& > div:first-child': {
+                marginBottom: '10px'
             },
-            '& div.forget-password': {
-                marginTop: '6px'
+            '& > div:nth-child(2)': {
+                marginBottom: '5px'
+            },
+            [breakpoints.down('sm')]: {
+                '& div.forget-password': {
+                    marginTop: '6px'
+                }
             }
         },
         '& div.form-block': {
@@ -182,12 +185,22 @@ export const useStyles = makeStyles(({breakpoints, palette}) => ({
                 background: 'linear-gradient(49.94deg, #675EAA 19.03%, #AD66D5 72.72%)',
                 borderRadius: '3px',
                 padding: '15px 0',
-                width: '58.2%',
+                width: '50%',
+                margin: '0 5px',
                 borderStyle: 'none',
                 letterSpacing: '0.25px',
+                [breakpoints.down('xs')]: {
+                    width: '100%',
+                    fontSize: '12px'
+                },
                 '& h6': {
                     color: '#fff'
                 }
+            },
+            '& .cancel-btn': {
+                boxShadow: '0px 2px 2px rgba(0, 0, 0, 0.15)',
+                background: '#fff',
+                color: '#000'
             }
         },
         '& .resendTxt': {
@@ -214,6 +227,15 @@ export const useStyles = makeStyles(({breakpoints, palette}) => ({
                     textDecoration: 'none'
                 }
             }
+        }
+    },
+    closeBtn: {
+        position: 'absolute',
+        top: 10,
+        right: 10,
+        padding: 5,
+        '& path': {
+            fill: '#28293D'
         }
     }
 }));
