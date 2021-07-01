@@ -1,10 +1,10 @@
 import {FC, ReactNode} from 'react';
 import Link from 'next/link';
 import {WithT} from 'i18next';
-import {Grid, Hidden, Tab, Tabs, Typography, useMediaQuery} from '@material-ui/core';
+import {Grid, Hidden, IconButton, Tab, Tabs, Typography, useMediaQuery} from '@material-ui/core';
 import {
     AdsIcon,
-    BonusIcon,
+    BonusIcon, CloseIcon,
     RatingIcon,
     SafeBuyingIcon,
     TorgIcon
@@ -206,7 +206,7 @@ export const AuthModal: FC<AuthRegPageModalProps> = (props) => {
                                                     </CustomTabPanel>
                                                     <div className='auth-btns'>
                                                         {!isSignInTab && (
-                                                            <CustomButton onClick={handleCancel}>
+                                                            <CustomButton onClick={handleCancel} className='cancel-btn'>
                                                                 {t('cancel')}
                                                             </CustomButton>
                                                         )}
@@ -220,18 +220,18 @@ export const AuthModal: FC<AuthRegPageModalProps> = (props) => {
                                     </div>
                                     <div className='agreements-txt'>
                                         {!isSignInTab
-                                         ? <Typography className="reg-agreement" variant="body2">
-                                             {`${t('agreement.firstPart')} `}
-                                             <Link href="#">
-                                                 <a>{`${t('agreement.secondPart')} `}</a>
-                                             </Link>
-                                         </Typography>
-                                         : <Typography className="reg-agreement" variant="body2">
-                                             {t('agreement.zeroPart')}{' '}
-                                             <Link href="#">
-                                                 <a>{`${t('agreement.secondPart')} `}</a>
-                                             </Link>
-                                         </Typography>}
+                                            ? <Typography className="reg-agreement" variant="body2">
+                                                {`${t('agreement.firstPart')} `}
+                                                <Link href="#">
+                                                    <a>{`${t('agreement.secondPart')} `}</a>
+                                                </Link>
+                                            </Typography>
+                                            : <Typography className="reg-agreement" variant="body2">
+                                                {t('agreement.zeroPart')}{' '}
+                                                <Link href="#">
+                                                    <a>{`${t('agreement.secondPart')} `}</a>
+                                                </Link>
+                                            </Typography>}
                                     </div>
                                 </div>
                             </div>
@@ -239,6 +239,13 @@ export const AuthModal: FC<AuthRegPageModalProps> = (props) => {
                     </Grid>
                 </Grid>
             </div>
+            <IconButton
+                onClick={handleCloseModal}
+                className={classes.closeBtn}
+                size='medium'
+            >
+                <CloseIcon/>
+            </IconButton>
         </ResponsiveModal>
     );
 };
