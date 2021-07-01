@@ -112,16 +112,78 @@ export const useStyles = makeStyles((theme) => ({
 
         '& div.translate-local': {
             [theme.breakpoints.down('md')]: {
-                marginTop: '112px'
+                margin: '112px 0 10px'
             },
             [theme.breakpoints.down('xs')]: {
-                marginTop: '104px'
+                margin: '104px 0 10px'
             },
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'space-between',
             '& div:first-child': {
                 marginLeft: '-2px'
+            }
+        },
+        '& div.multi-actions': {
+            [theme.breakpoints.up('md')]: {
+                justifyContent: 'left'
+            },
+            '& div.MuiGrid-item': {
+                '& > a': {
+                    display: 'flex',
+                    textDecoration: 'none',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    '&.selected': {
+                        '& > h6.MuiTypography-subtitle1': {
+                            backgroundImage:
+                                'linear-gradient(49.94deg, #675EAA 19.03%, #AD66D5 72.72%)',
+                            WebkitBackgroundClip: 'text',
+                            WebkitTextFillColor: 'transparent'
+                        },
+                        '& svg': {
+                            marginLeft: '5px',
+                            '& > defs > linearGradient > stop': {
+                                '&:first-child': {
+                                    stopColor: '#675EAA'
+                                },
+                                '&:last-child': {
+                                    stopColor: '#AD66D5'
+                                }
+                            }
+                        }
+                    },
+                    '& > h6.MuiTypography-subtitle1': {
+                        color: 'rgba(49, 49, 49, 0.7)',
+                        letterSpacing: '0.4px'
+                    },
+                    '& > svg': {
+                        marginRight: '5px',
+                        height: '20px',
+                        [theme.breakpoints.down('lg')]: {
+                            width: '16px'
+                        },
+                        [theme.breakpoints.up('lg')]: {
+                            width: '16px'
+                        }
+                    },
+                    '&:hover': {
+                        '& > h6.MuiTypography-subtitle1': {
+                            color: '#AD66D5'
+                        },
+                        '& > svg > path': {
+                            fill: '#AD66D5'
+                        }
+                    }
+                }
+            },
+            '& h6': {
+                [theme.breakpoints.down('lg')]: {
+                    fontSize: '.85rem'
+                },
+                [theme.breakpoints.up('lg')]: {
+                    fontSize: '1rem'
+                }
             }
         }
     },

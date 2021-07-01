@@ -1,6 +1,6 @@
-import {makeStyles} from '@material-ui/core/styles'
+import {makeStyles} from '@material-ui/core/styles';
 
-export const useStyles = makeStyles(() => ({
+export const useStyles = makeStyles((theme) => ({
     root: {
         '& span.MuiCheckbox-root': {
             marginLeft: '-9px'
@@ -21,6 +21,9 @@ export const useStyles = makeStyles(() => ({
         '& div.location-wrapper': {
             display: 'flex',
             width: '50%',
+            [theme.breakpoints.down('xs')]: {
+                width: '100%'
+            },
             marginBottom: '20px',
             '& > div': {
                 display: 'flex'
@@ -32,4 +35,4 @@ export const useStyles = makeStyles(() => ({
             }
         }
     }
-}))
+}));

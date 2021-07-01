@@ -1,6 +1,14 @@
 import {FC} from 'react';
 import {useTranslation} from 'next-i18next';
-import {Accordion, AccordionDetails, AccordionSummary, Grid, Typography} from '@material-ui/core';
+import {
+    Accordion,
+    AccordionDetails,
+    AccordionSummary,
+    Grid,
+    Typography,
+    useMediaQuery,
+    useTheme
+} from '@material-ui/core';
 import {CustomButton} from '@src/components/elements/custom_button/CustomButton';
 import {useStyles} from './useStyles';
 
@@ -27,6 +35,7 @@ export const CustomAccordion: FC<AccordionComponentPropsType> = (props) => {
     } = props;
 
     const {t} = useTranslation('common');
+    const isXsDown = useMediaQuery(useTheme().breakpoints.down('xs'));
 
     const classes = useStyles();
     return (
@@ -44,7 +53,7 @@ export const CustomAccordion: FC<AccordionComponentPropsType> = (props) => {
                     )}
                 </AccordionSummary>
                 <AccordionDetails>
-                    <Grid container spacing={2}>
+                    <Grid container spacing={isXsDown ? 0 : 2}>
                         {props.children}
                         {!isPreview && (
                             <Grid item xs={12} container justify='flex-end'>

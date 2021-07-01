@@ -313,7 +313,7 @@ export const CommonForm: FC<DefaultParamsPropsType> = (props) => {
                                     />
                                 </div>
                                 : <Grid container spacing={1}>
-                                    <Grid item xs={3}>
+                                    <Grid item xs={8} sm={5} md={3}>
                                         <FormikField
                                             t={t}
                                             name='price'
@@ -323,7 +323,7 @@ export const CommonForm: FC<DefaultParamsPropsType> = (props) => {
                                             errorMsg={getErrorMsg(errors.price, touched.price, t)}
                                         />
                                     </Grid>
-                                    <Grid item xs={1}>
+                                    <Grid item xs={4} md={2}>
                                         <DropDownSelect
                                             name='currency'
                                             values={values}
@@ -344,14 +344,12 @@ export const CommonForm: FC<DefaultParamsPropsType> = (props) => {
                                 />
                             </div>
                             <div className='location-wrapper'>
-                                <div>
-                                    <Location handleSelectLocation={handleLocation}/>
-                                    <span className='error-text'>*</span>
-                                </div>
+                                <Location handleSelectLocation={handleLocation}/>
+                                <span className='error-text'>*</span>
                                 {errors.location && touched.location && (
                                     <span className='error-text'>
                                      &nbsp;{t(`errors:${errors.location}`)}
-                                 </span>
+                                    </span>
                                 )}
                             </div>
                             <div>
@@ -372,7 +370,7 @@ export const CommonForm: FC<DefaultParamsPropsType> = (props) => {
                                 spacing={1}
                                 justify='space-between'
                             >
-                                <Grid item xs={6}>
+                                <Grid item xs={12} sm={6}>
                                     <Contacts
                                         t={t}
                                         values={values}
@@ -383,7 +381,7 @@ export const CommonForm: FC<DefaultParamsPropsType> = (props) => {
                                     />
                                 </Grid>
                                 {!isAuction && (
-                                    <Grid item xs={6}>
+                                    <Grid item xs={12} sm={6}>
                                         <AvailableDays
                                             t={t}
                                             avalTime={values.avalTime}

@@ -1,6 +1,6 @@
-import {makeStyles} from '@material-ui/core/styles'
+import {makeStyles} from '@material-ui/core/styles';
 
-export const useStyles = makeStyles(() => ({
+export const useStyles = makeStyles((theme) => ({
     root: {
         '& div.preview': {
             '& div.color-preview': {
@@ -20,15 +20,57 @@ export const useStyles = makeStyles(() => ({
                 }
             }
         },
-        '& div.color-wrapper': {
+        // '& span.error-text': {
+        //     [theme.breakpoints.down('sm')]: {
+        //         fontSize: '10px'
+        //     }
+        // },
+        '& div.color-select': {
             display: 'flex',
-            marginBottom: '20px',
-            '& div.selected-color': {
-                border: `3px solid #AD66D5`
+            flexWrap: 'wrap',
+            [theme.breakpoints.down('sm')]: {
+                display: 'block'
+            },
+            '& div.color-wrapper': {
+                display: 'flex',
+                padding: '7px 10px',
+                alignItems: 'center',
+                flexDirection: 'column',
+                [theme.breakpoints.down('sm')]: {
+                    flexDirection: 'row',
+                    padding: '10px 0',
+                    borderBottom: '1px solid #F2F2F2',
+                    '&:last-child': {
+                        borderBottom: 'none'
+                    }
+                },
+                '& div': {
+                    width: '50px',
+                    height: '50px',
+                    marginBottom: '10px',
+                    borderRadius: '50%',
+                    [theme.breakpoints.down('sm')]: {
+                        marginRight: '20px',
+                        marginBottom: 0
+                    },
+                    [theme.breakpoints.down('xs')]: {
+                        width: '32px',
+                        height: '32px'
+                    }
+                }
             }
         },
-        '& div.photos-wrapper': {
-            marginBottom: '20px'
+        '& div.selected-color': {
+            boxShadow: '0px 0px 15px #AD66D5'
         },
+        '& div.photos-wrapper': {
+            '& h6': {
+                margin: '10px 0',
+                [theme.breakpoints.down('sm')]: {
+                    margin: '0 0 10px'
+                }
+            },
+            marginBottom: '20px'
+        }
     }
-}))
+}));
