@@ -173,9 +173,8 @@ const BannedPostsContainer: FC = () => {
         {
             id: 0,
             title: t('posts'),
-            total: postData.total,
             itemsPerPage: ITEMS_PER_PAGE,
-            handleFetchByTab: null,
+            handleFetchByTab: () => '',
             component: (
                 <BannedPosts
                     t={t}
@@ -192,9 +191,8 @@ const BannedPostsContainer: FC = () => {
         {
             id: 1,
             title: t('auctions'),
-            total: aucData.total,
             itemsPerPage: ITEMS_PER_PAGE,
-            handleFetchByTab: null,
+            handleFetchByTab: () => '',
             component: (
                 <BannedPosts
                     t={t}

@@ -68,13 +68,11 @@ export const UserPaymentCard: FC = () => {
 
     const setCard = async ({cardNumber, expireDate, phone}) => {
         try {
-            const cardLastSix = cardNumber.slice(10);
             const phoneLastNine = phonePrepare(phone).slice(3);
-
             const cardData = JSON.stringify({
                 userId: user.info.id,
                 expireDate,
-                cardLastSix,
+                cardNumber,
                 phoneLastNine
             });
 

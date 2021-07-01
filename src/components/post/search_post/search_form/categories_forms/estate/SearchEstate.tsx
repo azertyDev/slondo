@@ -25,6 +25,7 @@ export type SubcategoryFormTypes = {
 
 export const SearchEstate: FC<SearchEstatePropsType> = (props) => {
     const {
+        categoryName,
         subcategoryName,
         isRent,
         onSubmit,
@@ -70,22 +71,24 @@ export const SearchEstate: FC<SearchEstatePropsType> = (props) => {
 
     function getFormByCtgr(): ReactNode {
         switch (subcategoryName) {
-            case 'apartments':
+            case 'flat':
                 return <SearchApartments
                     formik={formik}
                     isRent={isRent}
                     filters={filters}
                     handleReset={handleReset}
                     urlParams={urlParams}
+                    categoryName={categoryName}
                     sameWithUrlCtgr={sameWithUrlCtgr}
                 />;
-            case 'housesCottages':
+            case 'houses_cottages':
                 return <SearchHousesCottages
                     formik={formik}
                     isRent={isRent}
                     filters={filters}
                     handleReset={handleReset}
                     urlParams={urlParams}
+                    categoryName={categoryName}
                     sameWithUrlCtgr={sameWithUrlCtgr}
                 />;
             case 'commercialProperty':
@@ -95,6 +98,7 @@ export const SearchEstate: FC<SearchEstatePropsType> = (props) => {
                     filters={filters}
                     handleReset={handleReset}
                     urlParams={urlParams}
+                    categoryName={categoryName}
                     sameWithUrlCtgr={sameWithUrlCtgr}
                 />;
             case 'land':
@@ -103,6 +107,7 @@ export const SearchEstate: FC<SearchEstatePropsType> = (props) => {
                     filters={filters}
                     handleReset={handleReset}
                     urlParams={urlParams}
+                    categoryName={categoryName}
                     sameWithUrlCtgr={sameWithUrlCtgr}
                 />;
             case 'parkingLotsAndBoxes':
@@ -111,6 +116,7 @@ export const SearchEstate: FC<SearchEstatePropsType> = (props) => {
                     filters={filters}
                     handleReset={handleReset}
                     urlParams={urlParams}
+                    categoryName={categoryName}
                     sameWithUrlCtgr={sameWithUrlCtgr}
                 />;
         }

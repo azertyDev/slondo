@@ -12,7 +12,7 @@ import {DropDownSelect} from '@src/components/elements/drop_down_select/DropDown
 import {WithT} from 'i18next';
 
 export const cookies = new Cookies();
-export const cookieOpts: {path: string, sameSite: boolean | 'none' | 'lax' | 'strict'} = {path: '/', sameSite: 'lax'};
+export const cookieOpts: { path: string, sameSite: boolean | 'none' | 'lax' | 'strict' } = {path: '/', sameSite: 'lax'};
 
 type GetFieldsByFiltersProps = {
     isPreview?: boolean,
@@ -21,7 +21,7 @@ type GetFieldsByFiltersProps = {
     handleSelect,
 } & WithT;
 
-export const getFieldsByFilters = (props: GetFieldsByFiltersProps, multiple = false) => {
+export const getFieldsByFilters = (props: GetFieldsByFiltersProps, categoryName: string, multiple = false) => {
     const {
         t,
         isPreview,
@@ -83,12 +83,13 @@ export const getFieldsByFilters = (props: GetFieldsByFiltersProps, multiple = fa
                         >
                             <DropDownSelect
                                 name={key}
-                                labelTxt={key}
+                                labelTxt={t(key)}
                                 values={values}
                                 onBlur={handleBlur}
                                 items={filters[key]}
                                 disableRequire={multiple}
                                 handleSelect={handleSelect}
+                                transKey={`${categoryName}.`}
                                 multiple={!isSingleField && (isOptionKey || multiple)}
                                 errorMsg={getErrorMsg(errors[key], touched[key], t)}
                             />
@@ -102,6 +103,7 @@ export const getFieldsByFilters = (props: GetFieldsByFiltersProps, multiple = fa
                                 filters: values[key],
                                 handleSelect
                             },
+                            categoryName,
                             multiple
                         )}
                     </Fragment>

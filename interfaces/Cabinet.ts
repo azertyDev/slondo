@@ -5,7 +5,6 @@ import {CardDataType} from '@root/interfaces/CardData';
 export type TabsDataType = {
     id: number,
     title: string,
-    total: number,
     itemsPerPage: number,
     handleFetchByTab: (page: number) => void,
     component: ReactElement,

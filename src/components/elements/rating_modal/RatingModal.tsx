@@ -6,7 +6,6 @@ import {Form, FormikProvider, useFormik} from 'formik';
 import {FormikTextarea} from '@src/components/elements/formik_textarea/FormikTextarea';
 import {CustomButton} from '@src/components/elements/custom_button/CustomButton';
 import {getErrorMsg} from '@src/helpers';
-// import {regularFormSchema} from '@root/validation_schemas/createPostSchemas';
 import {userAPI} from '@src/api/api';
 import {Rating} from '@src/components/elements/rating/Rating';
 import {useTranslation} from 'next-i18next';

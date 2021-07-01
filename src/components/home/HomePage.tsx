@@ -1,4 +1,4 @@
-import React, {FC} from 'react';
+import {FC} from 'react';
 import Head from 'next/head';
 import {Header} from '@src/components/header/Header';
 import {Main} from './main/Main';

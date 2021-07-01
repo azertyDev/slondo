@@ -111,7 +111,8 @@ export const optionFields = [
 ];
 
 export const singleFields = [
-    'manufacturer'
+    'manufacturer',
+    'monitor3d'
 ];
 
 export const stringFields = [

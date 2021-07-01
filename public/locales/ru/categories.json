@@ -1,576 +1,1931 @@
 {
-  "car": "Легковые автомобили",
-  "madeInUzb": "Сделано в Узбекистане",
-  "foreignCars": "Иномарки",
-  "transport": "Спецтехника и транспорт",
-  "specTech": "Спецтехника",
-  "motorcyclesAndMotorTech": "Мотоциклы и мототехника",
-  "busesAndTrucks": "Автобусы и грузовики",
-  "motorcycles": "Мотоциклы",
-  "mopedsAndScooters": "Мопеды и скутеры",
-  "quadBikes": "Квадроциклы",
-  "carting": "Картинг",
-  "snowmobiles": "Снегоходы",
-  "buggy": "Багги",
-  "buses": "Автобусы",
-  "minibuses": "Микроавтобусы",
-  "refrigeratedTruck": "Авторефрижераторы",
-  "motorHomes": "Автодома",
-  "trucks": "Грузовики",
-  "commercialTransport": "Легкий коммерческий транспорт",
-  "trailers": "Прицепы",
-  "tractorUnits": "Тягачи",
-  "foodTruck": "Фудтраки",
-  "aerialPlatform": "Автовышки",
-  "truckCranes": "Автокраны",
-  "bulldozers": "Бульдозеры",
-  "utilityTechnology": "Коммунальная техника",
-  "loaders": "Погрузчики",
-  "agriculturalMachinery": "Сельхозтехника",
-  "constructionMachinery": "Строительная техника",
-  "forestryEquipment": "Лесозаготовочная техника",
-  "excavators": "Экскаваторы",
-  "others": "Другие",
-  "waterTransport": "Водный транспорт",
-  "rowingBoats": "Весельные лодки",
-  "jetSkis": "Гидроциклы",
-  "boatsAndYachts": "Катера и яхты",
-  "kayaksAndCanoes": "Каяки и каноэ",
-  "motorBoats": "Моторные лодки",
-  "inflatableBoat": "Надувные лодки",
-  "parts": "Запчасти и аксессуары",
-  "forCars": "Для легковых автомобилей",
-  "forMotorcyclesAndMotortech": "Для мотоциклов и мототехники",
-  "forWaterTransport": "Для водного транспорта",
-  "forBusesAndTrucks": "Для автобусов и грузовиков",
-  "forSpecialTech": "Для спецтехники",
-  "estate": "Недвижимость",
-  "apartments": "Квартиры",
-  "sale": "Продажа",
-  "longTermRent": "Аренда на длительное время",
-  "dailyRent": "Аренда по суточно",
-  "housesCottages": "Дома, дачи и коттеджи",
-  "land": "Земельные участки",
-  "parkingLotsAndBoxes": "Подземные стоянки и боксы",
-  "commercialProperty": "Коммерческая недвижимость",
-  "job": "Работа",
-  "vacancies": "Вакансия",
-  "autoBusiness": "Автобизнес",
-  "safetyAndSecurity": "Безопасность и охрана",
-  "officeStaff": "Офисный персонал",
-  "topManagement": "Высший менеджмент",
-  "extractionMaterials": "Добыча сырья, энергетика",
-  "homeStaff": "Домашний персонал",
-  "publishersAndMedia": "Издательства и СМИ",
-  "informationTechnology": "Информационные технологии",
-  "artsAndEntertainment": "Искусство и развлечения",
-  "procurement": "Закупки",
-  "marketingAndAdvertising": "Маркетинг и реклама",
-  "medicineAndPharmaceuticals": "Медицина и фармацевтика",
-  "careerStart": "Начало карьеры / без опыта работы",
-  "educationAndScience": "Образование и наука",
-  "handymen": "Разнорабочие",
-  "logisticians": "Логистика и транспорт",
-  "sales": "Продажи",
-  "production": "Производство",
-  "restaurantsAndCatering": "Рестораны и общепит",
-  "agriculture": "Сельское хозяйство",
-  "sportsAndBeauty": "Спорт и красота",
-  "insurance": "Страхование",
-  "constructionAndRepair": "Строительство и ремонт",
-  "tourismAndHotels": "Туризм и гостиницы",
-  "property": "Недвижимость",
-  "accountingAndFinance": "Бухгалтерия и финансы",
-  "bankingSector": "Банковская сфера",
-  "personnelManagement": "Управление персоналом",
-  "jurisprudence": "Юриспруденция",
-  "resume": "Резюме",
-  "service": "Услуги",
-  "repairAndConstruction": "Ремонт и строительство",
-  "interiorDesign": "Дизайн интерьера",
-  "housesAndCottages": "Дома и коттеджи",
-  "roofing": "Кровельные работы",
-  "paintingWorks": "Малярные работы",
-  "minorRepairs": "Мелкий ремонт",
-  "stretchCeiling": "Натяжные потолки",
-  "apartmentRenovation": "Отделка квартир",
-  "glazingAndWindowRepair": "Остекление и ремонт окон",
-  "designWork": "Проектные работы",
-  "renovationOfApartments": "Ремонт квартир",
-  "furnitureAssembly": "Сборка мебели",
-  "weldingWorks": "Сварочные работы",
-  "layingAndRepairingTiles": "Укладка и ремонт плитки",
-  "carpenters": "Плотники",
-  "plumbers": "Сантехники",
-  "electricians": "Электрики",
-  "installationAndRepairDoors": "Установка и ремонт дверей",
-  "plasteringWorks": "Штукатурные работы",
-  "pickingLocks": "Вскрытие замков",
-  "masterForAnHour": "Мастер на час",
-  "disinfection": "Дезинфекция и дезинсекция",
-  "babysittingAndGoverness": "Услуги няни и гувернантки",
-  "babysittersAndNurses": "Няни и сиделки",
-  "nursingServices": "Услуги медсестры",
-  "nurses": "Сиделки",
-  "transportation": "Перевозки",
-  "rentCar": "Аренда авто",
-  "rentSpecialTech": "Аренда спецтехники",
-  "garbageRemoval": "Вывоз мусора",
-  "cargoTransportation": "Грузоперевозки",
-  "movers": "Грузчики",
-  "distillation": "Перегон",
-  "passengerTransportation": "Пассажирские перевозки",
-  "driverServices": "Услуги водителя",
-  "towTruckServices": "Услуги эвакуатора",
-  "beautyAndHealth": "Красота и здоровье",
-  "depilationAndSugaring": "Депиляция и шугаринг",
-  "massage": "Массаж",
-  "hairExtension": "Наращивание волос",
-  "eyelashExtensionEyebrowServices": "Наращивание ресниц, услуги бровиста",
-  "spaServices": "СПА-услуги",
-  "tattooAndPiercing": "Тату и пирсинг",
-  "hairdresserServices": "Услуги парикмахера",
-  "computerServices": "Компьютерные услуги",
-  "webDesign": "Веб-Дизайн",
-  "computerHelpAndPCSetup": "Компьютерная помощь и настройка ПК",
-  "typing": "Набор текста",
-  "PCAssembly": "Сборка ПК",
-  "internetConnection": "Подключение Интернета",
-  "websiteDevelopmentAndPromotion": "Создание и продвижение сайтов",
-  "installingSoftware": "Установка ПО",
-  "carServices": "Автоуслуги",
-  "installingAudioSystem": "Установка аудио системы",
-  "autoGlassAndMirrors": "Автостекла и зеркала",
-  "autoElectrician": "Автоэлектрика",
-  "carDiagnostics": "Диагностика авто",
-  "bodyworkAndCarPainting": "Кузовные работы и покраска автомобиля",
-  "airConditionersAndHeating": "Кондиционеры и обогрев",
-  "carPainting": "Покраска авто",
-  "engineAndChassisRepair": "Ремонт двигателя и ходовой",
-  "repairMotorVehicles": "Ремонт мототехники",
-  "steeringRepair": "Ремонт рулевого управления",
-  "fuelSystemRepair": "Ремонт топливной системы",
-  "tuning": "Тюнинг и установка доп. оборудования",
-  "maintenance": "Техническое обслуживание",
-  "dryCleaningAndCarWash": "Химчистка, полировка и мойка авто",
-  "tireServiceAndWheelRepair": "Шиномонтаж и ремонт дисков",
-  "electricalEquipment": "Электрооборудование",
-  "repairEquipment": "Ремонт техники",
-  "gasEquipmentRepair": "Ремонт газового оборудования",
-  "repairComputersAndLaptops": "Ремонт компьютеров и ноутбуков",
-  "repairSmartphonesAndPhones": "Ремонт смартфонов и телефонов",
-  "repairAudioAndVideoEquipment": "Ремонт телевизоров, аудио и -видеотехники",
-  "photoEquipmentRepair": "Ремонт фототехники",
-  "watchRepair": "Ремонт часов",
-  "installationAndRepairAirConditioners": "Установка и ремонт кондиционеров",
-  "installationSecuritySystems": "Установка систем безопасности",
-  "installationAndRepairHouseholdAppliances": "Установка и ремонт бытовой техники",
-  "training": "Обучение",
-  "preSchoolDevelopment": "Дошкольное развитие",
-  "masterClassesAndTrainings": "Мастер-классы и тренинги",
-  "drivingTraining": "Обучение вождению",
-  "languageTeaching": "Обучение языкам",
-  "preparationForExams": "Подготовка к экзаменам",
-  "professionalEducation": "Профессиональное обучение",
-  "musicAndTheaterLessons": "Уроки музыки и театрального мастерства",
-  "drawingDesignAndHandicraftLessons": "Уроки рисования, дизайна и рукоделия",
-  "speechTherapistAndDefectologist": "Логопед и дефектолог",
-  "dancing": "Танцы",
-  "psychologists": "Психологи",
-  "tutors": "Репетиторы",
-  "trainerServices": "Услуги тренера",
-  "businessServices": "Деловые услуги",
-  "businessConsulting": "Бизнес-консультирование",
-  "foreignEconomicActivityConsulting": "Консультирование ВЭД",
-  "productionSignsAndAdvertisements": "Изготовление вывесок и рекламы",
-  "translationTexts": "Перевод текстов",
-  "polygraphyPrintingDesign": "Полиграфия",
-  "realtor": "Риэлторские услуги",
-  "composing": "Составление я",
-  "legalServices": "Юридические услуги",
-  "organizationHolidays": "Организация праздников",
-  "equipmentAndAttractionsRental": "Аренда оборудования и аттракционов",
-  "leaseSite": "Аренда площадки",
-  "presentersMusiciansAndArtists": "Ведущие, музыканты и артисты",
-  "DJs": "Диджеи",
-  "organizationEvents": "Организация мероприятий",
-  "foodPreparationAndCatering": "Приготовление еды и кейтеринг",
-  "suitRental": "Прокат костюмов",
-  "promotersAndModels": "Промоутеры и модели",
-  "tourismRest": "Туризм и отдых",
-  "flowersDecor": "Цветы и декор",
-  "photoAndVideoFilming": "Фото и видеосъемка",
-  "videoEditor": "Видеомонтажер",
-  "cleaning": "Уборка",
-  "washingWindowsAndBalconies": "Мойка окон и балконов",
-  "cleaningApartments": "Уборка квартир",
-  "houseCleaning": "Уборка домов",
-  "housekeepingServices": "Услуги домработницы",
-  "dryCleaningWashingAndIroning": "Химчистка, стирка и глажка",
-  "manufacturingToOrder": "Изготовление на заказ",
-  "manufactureAndRepairClothesAccessories": "Изготовление и ремонт одежды, обуви, аксессуаров",
-  "forgedProductsToOrder": "Кованые изделия на заказ",
-  "customMadeFurniture": "Мебель на заказ",
-  "musicPoetryAndVoiceActingToOrder": "Музыка, стихи и озвучка на заказ",
-  "customSealsAndStamps": "Печати и штампы на заказ",
-  "drawingPaintingAndGraphicsToOrder": "Рисунок, живопись и графика на заказ",
-  "souvenirProductsAndPrinting": "Сувенирная продукция и полиграфия",
-  "jewelryServices": "Ювелирные услуги",
-  "food": "Продукты питания",
-  "bakingAndCakesToOrder": "Выпечка и торты на заказ",
-  "cookServices": "Услуги повара",
-  "teaAndCoffee": "Чай и кофе",
-  "animalCare": "Уход за животными",
-  "knitting": "Вязка",
-  "trainingAndWalking": "Дрессировка и выгул",
-  "overexposure": "Передержка",
-  "animalGroomingAndGrooming": "Стрижка и уход за животными",
-  "otherServices": "Другие услуги",
-  "goods": "Вещи, Детские товары и украшения",
-  "womenWardrobe": "Женский гардероб",
-  "accessories": "Аксессуары",
-  "for_expectant_m": "Будущим мамам",
-  "outerwear": "Верхняя одежда",
-  "hats": "Головные уборы",
-  "homeClothes": "Домашняя одежда",
-  "overalls": "Комбинезоны",
-  "swimwear": "Купальники",
-  "underwear": "Нижнее белье",
-  "footwear": "Обувь",
-  "blazersAndSuits": "Пиджаки и костюмы",
-  "dressesAndSkirts": "Платья и юбки",
-  "sweatersHoodies": "Свитеры и толстовки",
-  "overalls_and_un": "Спецодежда и униформа",
-  "sportswear": "Спортивная одежда",
-  "tShirtsAndTops": "Футболки и топы",
-  "pantsShorts": "Штаны и шорты",
-  "handbags": "Сумки",
-  "decorations": "Украшения",
-  "blouses_shirts": "Блузы и рубашки",
-  "mansWardrobe": "Мужской гардероб",
-  "tShirtsAndPolos": "Футболки и поло",
-  "pantsAndShorts": "Штаны и шорты",
-  "babyClothes": "Детская одежда",
-  "jumpsuitsBodysuits": "Комбинезоны и боди",
-  "envelopes": "Конверты",
-  "romperAndUndershirts": "Ползунки и распашонки",
-  "tShirts": "Футболки",
-  "productsForChildren": "Товары для детей и игрушки",
-  "carSeats": "Автокресла",
-  "healthAndCare": "Здоровье и уход",
-  "toysAndGames": "Игрушки и игры",
-  "strollers": "Коляски",
-  "feedingAndNutrition": "Кормление и питание",
-  "bathing": "Купание",
-  "arrangementNursery": "Обустройство детской",
-  "diapersAndPots": "Подгузники и горшки",
-  "radioAndVideoBabyMonitors": "Радио- и видеоняни",
-  "productsForMothers": "Товары для мам",
-  "goodsForStudy": "Товары для учебы",
-  "handmade": "Хэндмейд",
-  "cosmetics": "Косметика",
-  "dollsAndToys": "Куклы и игрушки",
-  "interiorDecoration": "Оформление интерьера",
-  "holidaysDecoration": "Оформление праздников",
-  "chancery": "Канцелярия",
-  "dishes": "Посуда",
-  "makeup": "Макияж",
-  "manicureAndPedicure": "Маникюр и педикюр",
-  "healthProducts": "Товары для здоровья",
-  "perfumery": "Парфюмерия",
-  "haircutAndHairRemoval": "Стрижка и удаление волос",
-  "hairCare": "Уход за волосами",
-  "skinCare": "Уход за кожей",
-  "hairDryersAndStyling": "Фены и укладка",
-  "tattooPermanentMakeup": "Тату и татуаж",
-  "tattoo": "Татуаж",
-  "solariumsAndTanning": "Солярии и загар",
-  "hygieneProducts": "Средства для гигиены",
-  "other": "Другое",
-  "home": "Для дома и дачи",
-  "furnitureAndInterior": "Мебель и интерьер",
-  "sofasAndArmchairs": "Диваны и кресла",
-  "bedsAndMattresses": "Кровати и матрасы",
-  "kitchenSets": "Кухонные гарнитуры",
-  "lighting": "Освещение",
-  "securityAndAlarms": "Охрана и сигнализации",
-  "standsAndPedestals": "Подставки и тумбы",
-  "gardenFurniture": "Садовая мебель",
-  "tablesAndChairs": "Столы и стулья",
-  "textilesAndCarpets": "Текстиль и ковры",
-  "wardrobesAndDressers": "Шкафы и комоды",
-  "householdChemicals": "Бытовая химия",
-  "garden": "Сад и огород",
-  "dishesAndGoodsForKitchen": "Посуда и товары для кухни",
-  "kitchenGoods": "Товары для кухни",
-  "doors": "Двери",
-  "measuringTools": "Измерительные инструменты",
-  "window": "Окна",
-  "heatingAndVentilation": "Отопление и вентиляция",
-  "ceilings": "Потолки",
-  "handTools": "Ручные инструменты",
-  "plumbingAndWaterSupply": "Сантехника и водоснабжение",
-  "plumbing": "Сантехника",
-  "buildingMaterials": "Стройматериалы",
-  "electrician": "Электрика",
-  "powerTools": "Электроинструменты",
-  "plants": "Растения",
-  "seedlingAccessories": "Аксессуары для рассады",
-  "plantPots": "Горшки для растений",
-  "houseplants": "Комнатные растения",
-  "gardenPlants": "Садовые растения",
-  "seedsAndSeedlings": "Семена и саженцы",
-  "plantShelves": "Полки для растений",
-  "plantStands": "Подставки для растений",
-  "chemistryForPlants": "Химия для растений",
-  "soil": "Почва",
-  "electronics": "Электроника",
-  "phonesAndTablets": "Телефоны и планшеты",
-  "mobilePhones": "Мобильные телефоны",
-  "tablets": "Планшеты",
-  "smartWatchesAndBracelets": "Умные часы и браслеты",
-  "landlineTelephones": "Стационарные телефоны",
-  "spareParts": "Запчасти",
-  "externalBatteries": "Внешние аккумуляторы",
-  "chargingDevice": "Зарядные устройства",
-  "covers": "Чехлы",
-  "photoAndVideoCameras": "Фото и видеокамеры",
-  "cameras": "Фотоаппараты",
-  "camcorders": "Видеокамеры",
-  "cctv": "Видеонаблюдение",
-  "lenses": "Объективы",
-  "photoFlashes": "Фотовспышки",
-  "tripodsAndStabilizers": "Штативы и стабилизаторы",
-  "studioEquipment": "Студийное оборудование",
-  "digitalPhotoFrames": "Цифровые фоторамки",
-  "compactPhotoPrinters": "Компактные фотопринтеры",
-  "binocularsAndOpticalInstruments": "Бинокли и оптические приборы",
-  "tvAudioVideo": "Тв, аудио, видео",
-  "tvSets": "Телевизоры",
-  "projectors": "Проекторы",
-  "acousticsSpeakersSubwoofers": "Акустика, колонки, сабвуферы",
-  "homeCinemas": "Домашние кинотеатры",
-  "dvdBlurayAndMediaPlayers": "DVD, Blu-ray и медиаплееры",
-  "musicCentersAndRadioTapeRecorders": "Музыкальные центры и магнитолы",
-  "mp3PlayersAndPortableAudio": "MP3-плееры и портативное аудио",
-  "eBooks": "Электронные книги",
-  "satelliteAndDigitalTv": "Спутниковое и цифровое ТВ",
-  "audioAmplifiersAndReceivers": "Аудиоусилители и ресиверы",
-  "headphones": "Наушники",
-  "microphones": "Микрофоны",
-  "appliances": "Бытовая техника",
-  "libra": "Весы",
-  "hoods": "Вытяжки",
-  "grindingAndMixing": "Измельчение и смешивание",
-  "airConditioningEquipment": "Климатическая техника",
-  "coolersAndWaterFilters": "Кулеры и фильтры для воды",
-  "stovesAndOvens": "Плиты и духовые шкафы",
-  "dishwashers": "Посудомоечные машины",
-  "cooking": "Приготовление еды",
-  "preparationDrinks": "Приготовление напитков",
-  "vacuumCleanersAndSteamCleaners": "Пылесосы и пароочистители",
-  "washingMachines": "Стиральные машины",
-  "ironsAndGarmentCare": "Утюги и уход за одеждой",
-  "refrigerators": "Холодильники",
-  "sewingMachines": "Швейное оборудование",
-  "computerTechnology": "Компьютерная техника",
-  "laptops": "Ноутбуки",
-  "computers": "Компьютеры",
-  "monitors": "Мониторы",
-  "keyboardsAndMice": "Клавиатуры и мыши",
-  "officeEquipmentAndConsumables": "Оргтехника и расходники",
-  "networkHardware": "Сетевое оборудование",
-  "multimedia": "Мультимедиа",
-  "dataStorageDevicesAndCardReaders": "Накопители данных и картридеры",
-  "software": "Программное обеспечение",
-  "steeringWheelsJoysticksGamepads": "Рули, джойстики, геймпады",
-  "componentsAndSpareParts": "Комплектующие и запчасти",
-  "gamesConsolesAndPrograms": "Игры, приставки и программы",
-  "discs": "Диски",
-  "albumAndPhotobookPrinting": "Печать альбомов и фотокниг",
-  "programs": "Программы",
-  "gamingConsoles": "Игровые приставки",
-  "gamesForConsolesAndPc": "Игры для приставок и ПК",
-  "hobbies": "Хобби, спорт и отдых",
-  "tickets": "Билеты",
-  "sportsAndRecreation": "Спорт и отдых",
-  "sports_protection": "Спортивная защита",
-  "bicycles": "Велосипеды",
-  "rollersAndSkateboarding": "Ролики и скейтбординг",
-  "scooters_and_gyrometer": "Самокаты и гироскутеры",
-  "billiardsAndBowling": "Бильярд и боулинг",
-  "waterSports": "Водные виды спорта",
-  "martialArts": "Единоборства",
-  "winterSports": "Зимние виды спорта",
-  "ballGames": "Игры с мячом",
-  "huntingAndFishing": "Охота и рыбалка",
-  "tourismAndOutdoorRecreation": "Туризм и отдых на природе",
-  "tennisBadmintonDarts": "Теннис, бадминтон, дартс",
-  "exerciseEquipmentAndFitness": "Тренажеры и фитнес",
-  "sportsNutrition": "Спортивное питание",
-  "videoFilms": "Видеофильмы",
-  "booksAndMagazines": "Книги и журналы",
-  "collecting": "Коллекционирование",
-  "antiqueFurnitureDishes": "Антикварная мебель, посуда",
-  "banknotes": "Банкноты",
-  "celebrityThingsAutographs": "Вещи знаменитостей, автографы",
-  "vinylRecords": "Виниловые пластинки",
-  "insertsStickers": "Вкладыши, наклейки",
-  "militaryStuff": "Военные вещи",
-  "documents": "Документы",
-  "tokensMedalsBadges": "Жетоны, медали, значки",
-  "calendars": "Календари",
-  "kinderSurprises": "Киндер-сюрпризы",
-  "booksMagazinesManuscripts": "Книги, журналы, рукописи",
-  "envelopesPostcards": "Конверты, открытки",
-  "piggyBanks": "Копилки",
-  "dollsToys": "Куклы, игрушки",
-  "magnets": "Магниты",
-  "stamps": "Марки",
-  "models": "Модели",
-  "coinsNumismatics": "Монеты, нумизматика",
-  "ashtraysLighters": "Пепельницы, зажигалки",
-  "plasticCards": "Пластиковые карточки",
-  "artObjectsPaintings": "Предметы искусства, картины",
-  "figurinesFigurines": "Статуэтки, фигурки",
-  "jewelryAccessories": "Украшения, аксессуары",
-  "photosLetters": "Фотографии, письма",
-  "chessGames": "Шахматы, игры",
-  "caskets": "Шкатулки",
-  "labelsBottlesCorks": "Этикетки, бутылки, пробки",
-  "materialsForCreativity": "Материалы для творчества",
-  "music": "Музыка",
-  "accordionButtonAccordions": "Аккордеон, гармони, баяны",
-  "classicalGuitars": "Классические гитары",
-  "acousticGuitars": "Акустические гитары",
-  "bassGuitars": "Бас-гитары",
-  "electricGuitars": "Электрогитары",
-  "guitarAmplification": "Гитарное усиление",
-  "windInstruments": "Духовые инструменты",
-  "keyboards": "Клавишные",
-  "mixingConsoles": "Микшерные пульты",
-  "folkInstruments": "Народные инструменты",
-  "effectsPedals": "Педали эффектов",
-  "violinsBowed": "Скрипки, смычковые",
-  "percussionInstruments": "Ударные инструменты",
-  "boardGames": "Настольные игры",
-  "animal": "Животные",
-  "dogs": "Собаки",
-  "cats": "Кошки",
-  "birds": "Птицы",
-  "rodents": "Грызуны",
-  "fishes": "Рыбки",
-  "farmAnimals": "Сельскохозяйственные животные",
-  "otherAnimals": "Другие животные",
-  "goodsForPets": "Товары для животных",
-  "free": "Отдам даром",
-  "improvementGarbageDisposal": "Благоустройство, вывоз мусора",
-  "highWork": "Высотные работы",
-  "designAndArchitecture": "Дизайн и архитектура",
-  "dismantlingStructures": "Демонтаж сооружений и конструкций",
-  "complexRenovation": "Комплексный ремонт",
-  "windowsAndDoors": "Окна и двери",
-  "finishingAndRenovation": "Отделка и ремонт",
-  "stovesAndFireplaces": "Печи и камины",
-  "constructionWorks": "Строительные работы",
-  "layingAndRenovationTiles": "Укладка и ремонт плитки",
-  "handymanServices": "Услуги разнорабочих",
-  "facadeWorks": "Фасадные работы",
-  "productionOfKeys": "Изготовление ключей",
-  "furnitureAssemblyAndRepair": "Сборка и ремонт мебели",
-  "tan": "Загар",
-  "hairTreatment": "Лечение волос",
-  "stylist": "Стилист",
-  "courier": "Курьер",
-  "ITOutsourcing": "IT аутсорсинг",
-  "webDesignBrandArt": "Веб-Дизайн, бренд, арт",
-  "layoutDesigner": "Верстальщик",
-  "designers": "Дизайнеры",
-  "typingDataEntry": "Набор текста, ввод данных",
-  "programmer": "Программист",
-  "workingWithTexts": "Работа с текстами",
-  "webProgrammer": "Веб-программист",
-  "systemAdministrator": "Системный администратор",
-  "exhaustSystem": "Выхлопная система",
-  "detailing": "Детейлинг",
-  "fluidChange": "Замена жидкостей",
-  "repairOfMedicalEquipment": "Ремонт медицинского оборудования",
-  "repairOfMusicalInstruments": "Ремонт музыкальных инструментов",
-  "musicalInstruments": "Музыкальные инструменты",
-  "repairOfOpticalDevices": "Ремонт оптических приборов",
-  "logisticsAndTransport": "Логистика и транспорт",
-  "repairOfSportsEquipment": "Ремонт спортинвентаря",
-  "lawyer": "Адвокаты",
-  "marriageAgencies": "Брачные агентства",
-  "brokers": "Брокеры",
-  "announcers": "Дикторы",
-  "productionOfSignsAndAdvertisements": "Изготовление вывесок и рекламы",
-  "marketingAdvertisingPR": "Маркетинг, реклама, PR",
-  "occupationalSafetyAndHealth": "Охрана труда",
-  "valuer": "Оценщик",
-  "simultaneousTranslation": "Синхронный перевод",
-  "translationOfTexts": "Перевод текстов",
-  "realEstateServices": "Риэлторские услуги",
-  "certification": "Сертификация",
-  "HR": "HR",
-  "videoOperators": "Видео операторы",
-  "photographers": "Фотографы",
-  "advertisingPhotography": "Рекламная фотосъемка",
-  "promotionalVideo": "Рекламное видео",
-  "photoRetouchingAndRestoration": "Ретушь и восстановление фото",
-  "weddingPhotographers": "Свадебные фотографы",
-  "studioPhotography": "Студийная фотосъемка",
-  "workInTheGarden": "Работы в саду, на участке",
-  "cleaningOfApartmentsAndHouses": "Уборка квартир и домов",
-  "foodToOrder": "Еда на заказ",
-  "shirts": "Рубашки",
-  "overallsAndUn": "Спецодежда",
-  "seedling": "Рассада",
-  "walkieTalkiesAndSatellitePhones": "Рации и спутниковые телефоны",
-  "computerGames": "Компьютерные игры",
-  "antique_furniture_tableware": "Антикварная мебель, посуда",
-  "things_celebrities_autographs": "Вещи знаменитостей, автографы",
-  "vinyl_records": "Виниловые пластинки",
-  "inserts_stickers": "Вкладыши, наклейки",
-  "military_stuff": "Военные вещи",
-  "tokens_medals_badges": "Жетоны, медали, значки",
-  "kinder_surprises": "Киндер-сюрпризы",
-  "books_magazines_manuscripts": "Книги, журналы, рукописи",
-  "envelopes_postcards": "Конверты, открытки",
-  "piggy_banks": "Копилки",
-  "dolls_toys": "Куклы, игрушки",
-  "coins_numismatics": "Монеты, нумизматика",
-  "musical_instruments": "Музыкальные инструменты",
-  "ashtrays_lighters": "Пепельницы, зажигалки",
-  "plastic_cards": "Пластиковые карточки",
-  "art_objects_paintings": "Предметы искусства, картины",
-  "figurines_figurines": "Статуэтки, фигурки",
-  "jewelry_accessories": "Украшения, аксессуары",
-  "photos_letters": "Фотографии, письма",
-  "chess_games": "Шахматы, игры",
-  "jewelry_boxes": "Шкатулки",
-  "labels_bottles_corks": "Этикетки, бутылки, пробки",
-  "accordion_accordion_accordion": "Аккордеон, гармони, баяны",
-  "acoustic_guitars": "Акустические гитары",
-  "classical_guitars": "Классические гитары",
-  "bass_guitars": "Бас-гитары",
-  "electric_guitars": "Электрогитары",
-  "guitar_gain": "Гитарное усиление",
-  "wind_instruments": "Духовые инструменты",
-  "mixing_consoles": "Микшерные пульты",
-  "folk_instruments": "Народные инструменты",
-  "effect_pedals": "Педали эффектов",
-  "violins_bowed": "Скрипки, смычковые",
-  "percussion_instruments": "Ударные инструменты",
-  "roller_skates_and_skateboarding": "Ролики и скейтбординг",
-  "billiards_and_bowling": "Бильярд и боулинг",
-  "water_sports": "Водные виды спорта",
-  "martial_arts": "Водные виды спорта",
-  "winter_sports": "Зимние виды спорта",
-  "ball_games": "Игры с мячом",
-  "hunting_and_fishing": "Охота и рыбалка",
-  "tourism_and_outdoor_recreation": "Туризм и отдых на природе",
-  "tennis_badminton_darts": "Теннис, бадминтон, дартс",
-  "exercise_machines_and_fitness_equipment": "Тренажеры и фитнес",
-  "sports_nutrition": "Спортивное питание"
+  "car": {
+    "name": "Автомобили",
+    "made_uzbekistan": {
+      "name": "Сделано в Узбекистане"
+    },
+    "foreign_cars": {
+      "name": "Иномарки"
+    }
+  },
+  "transport": {
+    "name": "Спецтехника и транспорт",
+    "motorcycles_motor_vehicles": {
+      "name": "Мотоциклы и мототехника",
+      "motorcycles": {
+        "name": "Мотоциклы"
+      },
+      "mopeds_scooters": {
+        "name": "Мопеды и скутеры"
+      },
+      "atvs": {
+        "name": "Квадрациклы"
+      },
+      "go_karting": {
+        "name": "Картинг"
+      },
+      "snowmobiles": {
+        "name": "Снегоходы"
+      },
+      "buggy": {
+        "name": "Багги"
+      },
+      "other": {
+        "name": "Другое"
+      }
+    },
+    "buses_trucks": {
+      "name": "Автобусы и грузовики",
+      "buses": {
+        "name": "Автобусы"
+      },
+      "minibuses": {
+        "name": "Микроавтобусы"
+      },
+      "refrigerator_truck": {
+        "name": "Авторефрижератор"
+      },
+      "motorhome": {
+        "name": "Автодома"
+      },
+      "trucks": {
+        "name": "Грузовики"
+      },
+      "light_commercial_transport": {
+        "name": "Легкий коммерческий транспорт"
+      },
+      "trailers": {
+        "name": "Прицепы"
+      },
+      "tractor_units": {
+        "name": "Тягачи"
+      },
+      "food_truck": {
+        "name": "Фудтрак"
+      },
+      "other": {
+        "name": "Другое"
+      }
+    },
+    "special_equipment": {
+      "name": "Спецтехника",
+      "car_towers": {
+        "name": "Автовышки"
+      },
+      "truck_cranes": {
+        "name": "Автокраны"
+      },
+      "bulldozers": {
+        "name": "Бульдозеры"
+      },
+      "utility_equipment": {
+        "name": "Коммунальная техника"
+      },
+      "loaders": {
+        "name": "Погрузчики"
+      },
+      "agricultural_machinery": {
+        "name": "Сельхозтехника"
+      },
+      "construction_equipment": {
+        "name": "Строительная техника"
+      },
+      "logging_equipment": {
+        "name": "Лесозаготовочная техника"
+      },
+      "excavators": {
+        "name": "Экскаваторы"
+      },
+      "other": {
+        "name": "Другое"
+      }
+    },
+    "water_transport": {
+      "name": "Водный транспорт",
+      "rowing_boats": {
+        "name": "Вёсельные лодки"
+      },
+      "jet_skis": {
+        "name": "Гидроциклы"
+      },
+      "boats_yachts": {
+        "name": "Катера и яхты"
+      },
+      "kayaks_canoes": {
+        "name": "Каяки и каноэ"
+      },
+      "motor_boats": {
+        "name": "Моторные лодки"
+      },
+      "inflatable_boats": {
+        "name": "Надувные лодки"
+      },
+      "other": {
+        "name": "Другое"
+      }
+    }
+  },
+  "parts": {
+    "name": "Запчасти и аксессуары",
+    "for_passenger_cars": {
+      "name": "Для легковых автомобилей"
+    },
+    "for_motorcycles_motor_vehicles": {
+      "name": "Для мотоциклов и мототехники",
+      "motorcycles": {
+        "name": "Мотоциклы"
+      },
+      "mopeds_scooters": {
+        "name": "Мопеды и скутеры"
+      },
+      "atvs": {
+        "name": "Квадроциклы"
+      },
+      "go_karting": {
+        "name": "Картинг"
+      },
+      "snowmobiles": {
+        "name": "Снегоходы"
+      },
+      "buggy": {
+        "name": "Багги"
+      },
+      "other": {
+        "name": "Другое"
+      }
+    },
+    "for_buses_trucks": {
+      "name": "Для автобусов и грузовиков",
+      "buses": {
+        "name": "Автобусы"
+      },
+      "minibuses": {
+        "name": "Микроавтобусы"
+      },
+      "refrigerator_truck": {
+        "name": "Авторефрижератор"
+      },
+      "motorhome": {
+        "name": "Автодома"
+      },
+      "trucks": {
+        "name": "Грузовики"
+      },
+      "light_commercial_transport": {
+        "name": "Легкий коммерческий транспорт"
+      },
+      "trailers": {
+        "name": "Прицепы"
+      },
+      "tractor_units": {
+        "name": "Тягачи"
+      },
+      "food_truck": {
+        "name": "Фудтрак"
+      },
+      "other": {
+        "name": "Другое"
+      }
+    },
+    "for_special_equipment": {
+      "name": "Для спецтехники",
+      "car_towers": {
+        "name": "Автовышки"
+      },
+      "truck_cranes": {
+        "name": "Автокраны"
+      },
+      "bulldozers": {
+        "name": "Бульдозеры"
+      },
+      "utility_equipment": {
+        "name": "Коммунальная техника"
+      },
+      "loaders": {
+        "name": "Погрузчики"
+      },
+      "agricultural_machinery": {
+        "name": "Сельхозтехника"
+      },
+      "construction_equipment": {
+        "name": "Строительная техника"
+      },
+      "logging_equipment": {
+        "name": "Лесозаготовочная техника"
+      },
+      "excavators": {
+        "name": "Экскаваторы"
+      },
+      "other": {
+        "name": "Другое"
+      }
+    },
+    "for_water_transport": {
+      "name": "Для водного транспорта"
+    }
+  },
+  "estate": {
+    "name": "Недвижимость",
+    "flat": {
+      "name": "Квартиры",
+      "sale": {
+        "name": "Продажа"
+      },
+      "long_term_rental": {
+        "name": "Аренда на длительное время"
+      },
+      "rent_daily_basis": {
+        "name": "Аренда посуточно"
+      }
+    },
+    "houses_cottages": {
+      "name": "Дома, дачи, коттеджи",
+      "sale": {
+        "name": "Продажа"
+      },
+      "long_term_rental": {
+        "name": "Аренда на длительное время"
+      },
+      "rent_daily_basis": {
+        "name": "Аренда посуточно"
+      }
+    },
+    "land_plots": {
+      "name": "Земельные участки",
+      "sale": {
+        "name": "Продажа"
+      },
+      "long_term_rental": {
+        "name": "Аренда на длительное время"
+      }
+    },
+    "underground_parking_lots_boxes": {
+      "name": "Подземные стоянки и боксы",
+      "sale": {
+        "name": "Продажа"
+      },
+      "long_term_rental": {
+        "name": "Аренда на длительное время"
+      }
+    },
+    "commercial_real_estate": {
+      "name": "Коммерческая недвижимость",
+      "sale": {
+        "name": "Продажа"
+      },
+      "long_term_rental": {
+        "name": "Аренда на длительное время"
+      }
+    }
+  },
+  "job_type": {
+    "name": "Работа",
+    "vacancy": {
+      "name": "Вакансии",
+      "auto_business": {
+        "name": "Автобизнес"
+      },
+      "safety_security": {
+        "name": "Безопасность и охрана"
+      },
+      "office_staff": {
+        "name": "Офисный персонал"
+      },
+      "senior_management": {
+        "name": "Высший менеджмент"
+      },
+      "production_of_raw_materials_energy": {
+        "name": "Добыча сырья, энергетика"
+      },
+      "home_staff": {
+        "name": "Домашний персонал"
+      },
+      "publishing_houses_mass_media": {
+        "name": "Издательства и СМИ"
+      },
+      "information_technology": {
+        "name": "Информационные технологии"
+      },
+      "arts_entertainment": {
+        "name": "Искусство и развлечения"
+      },
+      "purchases": {
+        "name": "Закупки"
+      },
+      "marketing_advertising": {
+        "name": "Маркетинг и реклама"
+      },
+      "medicine_pharmaceuticals": {
+        "name": "Медицина и фармацевтика"
+      },
+      "early_career": {
+        "name": "Начало карьеры / без опыта работы"
+      },
+      "education_science": {
+        "name": "Образование и наука"
+      },
+      "handymen": {
+        "name": "Разнорабочие"
+      },
+      "logistics_transport": {
+        "name": "Логистика и транспорт"
+      },
+      "sales": {
+        "name": "Продажи"
+      },
+      "production": {
+        "name": "Производство"
+      },
+      "restaurants_catering": {
+        "name": "Рестораны и общепит"
+      },
+      "agricultural_industry": {
+        "name": "Сельское хозяйство"
+      },
+      "sports_beauty": {
+        "name": "Спорт и красота"
+      },
+      "insurance": {
+        "name": "Страхование"
+      },
+      "construction_repair": {
+        "name": "Строительство и ремонт"
+      },
+      "tourism_hotels": {
+        "name": "Туризм и гостиницы"
+      },
+      "estate": {
+        "name": "Недвижимость"
+      },
+      "accounting_finance": {
+        "name": "Бухгалтерия и финансы"
+      },
+      "banking_sector": {
+        "name": "Банковская сфера"
+      },
+      "management": {
+        "name": "Управление персоналом"
+      },
+      "jurisprudence": {
+        "name": "Юриспруденция"
+      },
+      "other": {
+        "name": "Другое"
+      }
+    },
+    "resume": {
+      "name": "Резюме",
+      "auto_business": {
+        "name": "Автобизнес"
+      },
+      "safety_security": {
+        "name": "Безопасность и охрана"
+      },
+      "office_staff": {
+        "name": "Офисный персонал"
+      },
+      "senior_management": {
+        "name": "Высший менеджмент"
+      },
+      "production_of_raw_materials_energy": {
+        "name": "Добыча сырья, энергетика"
+      },
+      "home_staff": {
+        "name": "Домашний персонал"
+      },
+      "publishing_houses_mass_media": {
+        "name": "Издательства и СМИ"
+      },
+      "information_technology": {
+        "name": "Информационные технологии"
+      },
+      "arts_entertainment": {
+        "name": "Искусство и развлечения"
+      },
+      "purchases": {
+        "name": "Закупки"
+      },
+      "marketing_advertising": {
+        "name": "Маркетинг и реклама"
+      },
+      "medicine_pharmaceuticals": {
+        "name": "Медицина и фармацевтика"
+      },
+      "early_career": {
+        "name": "Начало карьеры / без опыта работы"
+      },
+      "education_science": {
+        "name": "Образование и наука"
+      },
+      "handymen": {
+        "name": "Разнорабочие"
+      },
+      "logistics_transport": {
+        "name": "Логистика и транспорт"
+      },
+      "sales": {
+        "name": "Продажи"
+      },
+      "production": {
+        "name": "Производство"
+      },
+      "restaurants_catering": {
+        "name": "Рестораны и общепит"
+      },
+      "agricultural_industry": {
+        "name": "Сельское хозяйство"
+      },
+      "sports_beauty": {
+        "name": "Спорт и красота"
+      },
+      "insurance": {
+        "name": "Страхование"
+      },
+      "construction_repair": {
+        "name": "Строительство и ремонт"
+      },
+      "tourism_hotels": {
+        "name": "Туризм и гостиницы"
+      },
+      "estate": {
+        "name": "Недвижимость"
+      },
+      "accounting_finance": {
+        "name": "Бухгалтерия и финансы"
+      },
+      "banking_sector": {
+        "name": "Банковская сфера"
+      },
+      "management": {
+        "name": "Управление персоналом"
+      },
+      "jurisprudence": {
+        "name": "Юриспруденция"
+      },
+      "other": {
+        "name": "Другое"
+      }
+    }
+  },
+  "service": {
+    "name": "Услуги",
+    "repair_construction": {
+      "name": "Ремонт и строительство",
+      "landscaping_garbage_collection": {
+        "name": "Благоустройство, вывоз мусора"
+      },
+      "high_rise_works": {
+        "name": "Высотные работы"
+      },
+      "design_architecture": {
+        "name": "Дизайн и архитектура"
+      },
+      "dismantling_structures": {
+        "name": "Демонтаж сооружений и конструкций"
+      },
+      "comprehensive_repairs": {
+        "name": "Комплексный ремонт"
+      },
+      "roofing_works": {
+        "name": "Кровельные работы"
+      },
+      "painting_works": {
+        "name": "Малярные работы"
+      },
+      "windows_doors": {
+        "name": "Окна и двери"
+      },
+      "finishing_repair": {
+        "name": "Отделка и ремонт"
+      },
+      "stoves_fireplaces": {
+        "name": "Печи и камины"
+      },
+      "plumbing": {
+        "name": "Сантехника"
+      },
+      "welding_work": {
+        "name": "Сварочные работы"
+      },
+      "construction_works": {
+        "name": "Строительные работы"
+      },
+      "laying_repair_tiles": {
+        "name": "Укладка и ремонт плитки"
+      },
+      "handyman_services": {
+        "name": "Услуги разнорабочих"
+      },
+      "facade_works": {
+        "name": "Фасадные работы"
+      },
+      "plaster_works": {
+        "name": "Штукатурные работы"
+      },
+      "electrician": {
+        "name": "Электрика"
+      },
+      "other_services": {
+        "name": "Другие услуги"
+      }
+    },
+    "master_hour": {
+      "name": "Мастер на час",
+      "opening_locks": {
+        "name": "Вскрытие замков"
+      },
+      "master_hour": {
+        "name": "Мастер на час"
+      },
+      "key_making": {
+        "name": "Изготовление ключей"
+      },
+      "furniture_assembly_repair": {
+        "name": "Сборка и ремонт мебели"
+      },
+      "other_services": {
+        "name": "Другие услуги"
+      }
+    },
+    "nannies_nurses": {
+      "name": "Няни и сиделки",
+      "nannies_governesses": {
+        "name": "Няни, гувернантки"
+      },
+      "nurses": {
+        "name": "Сиделки"
+      }
+    },
+    "transportation_services": {
+      "name": "Перевозки",
+      "rent_car": {
+        "name": "Аренда авто"
+      },
+      "rent_transport": {
+        "name": "Аренда спецтехники"
+      },
+      "garbage_collection": {
+        "name": "Вывоз мусора"
+      },
+      "cargo_transportation": {
+        "name": "Грузоперевозки"
+      },
+      "courier": {
+        "name": "Курьер"
+      },
+      "loader": {
+        "name": "Грузчики"
+      },
+      "distillation": {
+        "name": "Перегон"
+      },
+      "passenger_transport": {
+        "name": "Пассажирские перевозки"
+      },
+      "driver_services": {
+        "name": "Услуги водителя"
+      },
+      "tow_truck_services": {
+        "name": "Услуги эвакуатора"
+      },
+      "other_services": {
+        "name": "Другие услуги"
+      }
+    },
+    "beauty_health": {
+      "name": "Красота и здоровье",
+      "depilation_sugaring": {
+        "name": "Депиляция и шугаринг"
+      },
+      "makeup": {
+        "name": "Макияж"
+      },
+      "manicure_pedicure": {
+        "name": "Маникюр и педикюр"
+      },
+      "tan": {
+        "name": "Загар"
+      },
+      "hair_treatment": {
+        "name": "Лечение волос"
+      },
+      "massage": {
+        "name": "Массаж"
+      },
+      "hair_extensions": {
+        "name": "Наращивание волос"
+      },
+      "eyelash_extensions": {
+        "name": "Наращивание ресниц, услуги бровиста"
+      },
+      "stylist": {
+        "name": "Стилист"
+      },
+      "spa_services": {
+        "name": "СПА-услуги"
+      },
+      "tattooing_piercing": {
+        "name": "Тату и пирсинг"
+      },
+      "tattooing": {
+        "name": "Татуаж"
+      },
+      "nursing_services": {
+        "name": "Услуги медсестер"
+      },
+      "hair_services": {
+        "name": "Услуги парикмахера"
+      },
+      "other_services": {
+        "name": "Другие услуги"
+      }
+    },
+    "computer_services": {
+      "name": "Компьютерные услуги",
+      "it_outsourcing": {
+        "name": "IT аутсорсинг"
+      },
+      "web_designer": {
+        "name": "Веб-Дизайн, бренд, арт"
+      },
+      "layout_designer": {
+        "name": "Верстальщик"
+      },
+      "designer": {
+        "name": "Дизайнеры"
+      },
+      "setting_pc": {
+        "name": "Компьютерная помощь и настройка ПК"
+      },
+      "typing_data_entry": {
+        "name": "Набор текста, ввод данных"
+      },
+      "building_pc": {
+        "name": "Сборка ПК"
+      },
+      "connecting_internet": {
+        "name": "Подключение Интернета"
+      },
+      "coder": {
+        "name": "Программист"
+      },
+      "work_text": {
+        "name": "Работа с текстами"
+      },
+      "web_coder": {
+        "name": "Веб-программист"
+      },
+      "creating_promoting_websites": {
+        "name": "Создание и продвижение сайтов"
+      },
+      "system_admin": {
+        "name": "Системный администратор"
+      },
+      "software_installation": {
+        "name": "Установка ПО"
+      },
+      "other_services": {
+        "name": "Другие услуги"
+      }
+    },
+    "auto_services": {
+      "name": "Автоуслуги",
+      "installing_audio_system": {
+        "name": "Установка аудио системы"
+      },
+      "glass_mirrors": {
+        "name": "Автостекла и зеркала"
+      },
+      "autoelectrics": {
+        "name": "Автоэлектрика"
+      },
+      "exhaust_system": {
+        "name": "Выхлопная система"
+      },
+      "auto_diagnostics": {
+        "name": "Диагностика авто"
+      },
+      "detaling": {
+        "name": "Детейлинг"
+      },
+      "bodywork_works": {
+        "name": "Кузовные работы и покраска автомобиля"
+      },
+      "conditioning_heating": {
+        "name": "Кондиционеры и обогрев"
+      },
+      "replacement_liquids": {
+        "name": "Замена жидкостей"
+      },
+      "repair_engine": {
+        "name": "Ремонт двигателя и ходовой"
+      },
+      "repair_moto": {
+        "name": "Ремонт мототехники"
+      },
+      "steering_system_repair": {
+        "name": "Ремонт рулевого управления"
+      },
+      "fuel_system_repair": {
+        "name": "Ремонт топливной системы"
+      },
+      "tuning_installation": {
+        "name": "Тюнинг и установка доп. оборудования"
+      },
+      "technical_maintenance": {
+        "name": "Техническое обслуживание"
+      },
+      "cleaning_polishing": {
+        "name": "Химчистка, полировка и мойка авто"
+      },
+      "disk_repair": {
+        "name": "Шиномонтаж и ремонт дисков"
+      },
+      "electrical_equipment": {
+        "name": "Электрооборудование"
+      },
+      "other_services": {
+        "name": "Другие услуги"
+      }
+    },
+    "repair_of_equipment": {
+      "name": "Ремонт техники",
+      "repair_gas_equipment": {
+        "name": "Ремонт газового оборудования"
+      },
+      "repair_computers_laptops": {
+        "name": "Ремонт компьютеров и ноутбуков"
+      },
+      "repair_smartphones_phones": {
+        "name": "Ремонт смартфонов, телефонов"
+      },
+      "repair_tv_sets_audio": {
+        "name": "Ремонт телевизоров, аудио и видеотехники"
+      },
+      "repair_medical_equipment": {
+        "name": "Ремонт медицинского оборудования"
+      },
+      "photo_equipment_repair": {
+        "name": "Ремонт фототехники"
+      },
+      "repair_musical_instruments": {
+        "name": "Ремонт музыкальных инструментов"
+      },
+      "repair_optical_devices": {
+        "name": "Ремонт оптических приборов"
+      },
+      "sports_equipment_repair": {
+        "name": "Ремонт спортинвентаря"
+      },
+      "watch_repair": {
+        "name": "Ремонт часов"
+      },
+      "installation_repair_conditioners": {
+        "name": "Установка и ремонт кондиционеров"
+      },
+      "installing_security_systems": {
+        "name": "Установка систем безопасности"
+      },
+      "installation_repair_household_appliances": {
+        "name": "Установка и ремонт бытовой техники"
+      },
+      "other_services": {
+        "name": "Другие услуги"
+      }
+    },
+    "training": {
+      "name": "Обучение",
+      "preschool_development": {
+        "name": "Дошкольное развитие"
+      },
+      "master_classes_trainings": {
+        "name": "Мастер-классы и тренинги"
+      },
+      "driving_training": {
+        "name": "Обучение вождению"
+      },
+      "language_training": {
+        "name": "Обучение языкам"
+      },
+      "exam_preparation": {
+        "name": "Подготовка к экзаменам"
+      },
+      "professional_training": {
+        "name": "Профессиональное обучение"
+      },
+      "music_theater_lessons": {
+        "name": "Уроки музыки и театрального мастерства"
+      },
+      "drawing_design_needlework_lessons": {
+        "name": "Уроки рисования, дизайна и рукоделия"
+      },
+      "speech_therapist": {
+        "name": "Логопед и дефектолог"
+      },
+      "dances": {
+        "name": "Танцы"
+      },
+      "psychologists": {
+        "name": "Психологи"
+      },
+      "tutors": {
+        "name": "Репетиторы"
+      },
+      "coach_services": {
+        "name": "Услуги тренера"
+      },
+      "other_services": {
+        "name": "Другие услуги"
+      }
+    },
+    "business_services": {
+      "name": "Деловые услуги",
+      "lawyers": {
+        "name": "Адвокаты"
+      },
+      "marriage_agencies": {
+        "name": "Брачные агентства"
+      },
+      "business_consulting": {
+        "name": "Бизнес-консультирование"
+      },
+      "brokers": {
+        "name": "Брокеры"
+      },
+      "accounting_finance": {
+        "name": "Бухгалтерия и финансы"
+      },
+      "speaker": {
+        "name": "Дикторы"
+      },
+      "consulting_economic": {
+        "name": "Консультирование ВЭД"
+      },
+      "production_signage_advertising": {
+        "name": "Изготовление вывесок и рекламы"
+      },
+      "marketing_advertising_pr": {
+        "name": "Маркетинг, реклама, PR"
+      },
+      "logist": {
+        "name": "Логисты"
+      },
+      "labor_protection": {
+        "name": "Охрана труда"
+      },
+      "appraiser": {
+        "name": "Оценщик"
+      },
+      "simultaneous_translation": {
+        "name": "Синхронный перевод"
+      },
+      "text_translation": {
+        "name": "Перевод текстов"
+      },
+      "printing_printing_design": {
+        "name": "Полиграфия, печать, дизайн"
+      },
+      "realtor": {
+        "name": "Риэлторские услуги"
+      },
+      "HR": {
+        "name": "HR"
+      },
+      "certification": {
+        "name": "Сертификация"
+      },
+      "legal_services": {
+        "name": "Юридические услуги"
+      },
+      "other_services": {
+        "name": "Другие услуги"
+      }
+    },
+    "organization_holidays": {
+      "name": "Организация праздников",
+      "rental_equipment_attractions": {
+        "name": "Аренда оборудования и аттракционов"
+      },
+      "site_rental": {
+        "name": "Аренда площадки"
+      },
+      "presenters_musicians_artists": {
+        "name": "Ведущие, музыканты и артисты"
+      },
+      "djs": {
+        "name": "Диджеи"
+      },
+      "organization_events": {
+        "name": "Организация мероприятий"
+      },
+      "food_preparation_catering": {
+        "name": "Приготовление еды и кейтеринг"
+      },
+      "costume_rental": {
+        "name": "Прокат костюмов"
+      },
+      "promoters_models": {
+        "name": "Промоутеры и модели"
+      },
+      "flowers_decor": {
+        "name": "Цветы и декор"
+      },
+      "other_services": {
+        "name": "Другие услуги"
+      }
+    },
+    "photo_video_shooting": {
+      "name": "Фото и видеосъемка",
+      "video_editor": {
+        "name": "Видеомонтажер"
+      },
+      "video_operators": {
+        "name": "Видео операторы"
+      },
+      "photographer": {
+        "name": "Фотографы"
+      },
+      "print_albums_photo": {
+        "name": "Печать альбомов и фотокниг"
+      },
+      "advertising_photography": {
+        "name": "Рекламная фотосъемка"
+      },
+      "advertising_video": {
+        "name": "Рекламное видео"
+      },
+      "retouching_restoring_photos": {
+        "name": "Ретушь и восстановление фото"
+      },
+      "wedding_photographers": {
+        "name": "Свадебные фотографы"
+      },
+      "studio_photography": {
+        "name": "Студийная фотосъемка"
+      },
+      "other": {
+        "name": "Другое"
+      }
+    },
+    "cleaning_service": {
+      "name": "Уборка",
+      "washing_windows_balconies": {
+        "name": "Мойка окон и балконов"
+      },
+      "work_garden_plot": {
+        "name": "Работы в саду, на участке"
+      },
+      "cleaning_apartments_houses": {
+        "name": "Уборка квартир и домов"
+      },
+      "housekeeper_services": {
+        "name": "Услуги домработницы"
+      },
+      "cleaning_laundry_ironing": {
+        "name": "Химчистка, стирка и глажка"
+      },
+      "disinfection": {
+        "name": "Дезинфекция"
+      },
+      "other_services": {
+        "name": "Другие услуги"
+      }
+    },
+    "custom_manufacturing": {
+      "name": "Изготовление на заказ",
+      "manufacture_repair_clothing_shoes_accessories": {
+        "name": "Изготовление и ремонт одежды, обуви, аксессуаров"
+      },
+      "custom_forged_products": {
+        "name": "Кованые изделия на заказ"
+      },
+      "custom_furniture": {
+        "name": "Мебель на заказ"
+      },
+      "music_poetry_voice_acting": {
+        "name": "Музыка, стихи и озвучка на заказ"
+      },
+      "custom_seals_stamps": {
+        "name": "Печати и штампы на заказ"
+      },
+      "drawing_painting_drawing": {
+        "name": "Рисунок, живопись и графика на заказ"
+      },
+      "souvenir_products_printing": {
+        "name": "Сувенирная продукция и полиграфия"
+      },
+      "jewelry_services": {
+        "name": "Ювелирные услуги"
+      },
+      "other_services": {
+        "name": "Другие услуги"
+      }
+    },
+    "food_products": {
+      "name": "Продукты питания",
+      "baked_goods_cakes": {
+        "name": "Выпечка и торты на заказ"
+      },
+      "food_order": {
+        "name": "Еда на заказ"
+      },
+      "cook_services": {
+        "name": "Услуги повара"
+      },
+      "other_services": {
+        "name": "Другие услуги"
+      }
+    },
+    "animal_care": {
+      "name": "Уход за животными",
+      "knit": {
+        "name": "Вязка"
+      },
+      "training_walking": {
+        "name": "Дрессировка и выгул"
+      },
+      "overexposure": {
+        "name": "Передержка"
+      },
+      "grooming_animal_care": {
+        "name": "Стрижка и уход за животными"
+      },
+      "other_services": {
+        "name": "Другие услуги"
+      }
+    },
+    "other": {
+      "name": "Другое"
+    }
+  },
+  "goods": {
+    "name": "Вещи, детские товары и украшения",
+    "womens_wardrobe": {
+      "name": "Женский гардероб",
+      "accessories": {
+        "name": "Аксессуары"
+      },
+      "blouses_shirts": {
+        "name": "Блузы и рубашки"
+      },
+      "for_expectant_m": {
+        "name": "Будущим мамам"
+      },
+      "outerwear": {
+        "name": "Верхняя одежда"
+      },
+      "hats": {
+        "name": "Головные уборы"
+      },
+      "home_clothes": {
+        "name": "Домашняя одежда"
+      },
+      "overalls": {
+        "name": "Комбинезоны"
+      },
+      "swimwear": {
+        "name": "Купальники"
+      },
+      "underwear": {
+        "name": "Нижнее белье"
+      },
+      "footwear": {
+        "name": "Обувь"
+      },
+      "blazers_and_suits": {
+        "name": "Пиджаки и костюмы"
+      },
+      "dresses_and_skirts": {
+        "name": "Платья и юбки"
+      },
+      "sweaters_hoodies": {
+        "name": "Свитеры и толстовки"
+      },
+      "sportswear": {
+        "name": "Спортивная одежда"
+      },
+      "overalls_and_uniforms": {
+        "name": "Спецодежда и униформа"
+      },
+      "tshirts_and_tops": {
+        "name": "Футболки и топы"
+      },
+      "pants_and_shorts": {
+        "name": "Штаны и шорты"
+      },
+      "other": {
+        "name": "Другое"
+      }
+    },
+    "mens_wardrobe": {
+      "name": "Мужской гардероб",
+      "accessories": {
+        "name": "Аксессуары"
+      },
+      "outerwear": {
+        "name": "Верхняя одежда"
+      },
+      "hats": {
+        "name": "Головные уборы"
+      },
+      "home_clothes": {
+        "name": "Домашняя одежда"
+      },
+      "overalls": {
+        "name": "Комбинезоны"
+      },
+      "underwear": {
+        "name": "Нижнее белье"
+      },
+      "footwear": {
+        "name": "Обувь"
+      },
+      "blazers_and_suits": {
+        "name": "Пиджаки и костюмы"
+      },
+      "shirts": {
+        "name": "Рубашки"
+      },
+      "sweaters_hoodies": {
+        "name": "Свитеры и толстовки"
+      },
+      "overalls_and_uniforms": {
+        "name": "Спецодежда"
+      },
+      "sportswear": {
+        "name": "Спортивная одежда"
+      },
+      "tshirts_and_polos": {
+        "name": "Футболки и поло"
+      },
+      "pants_shorts": {
+        "name": "Штаны и шорты"
+      },
+      "other": {
+        "name": "Другое"
+      }
+    },
+    "childrens_clothing": {
+      "name": "Детская одежда",
+      "accessories": {
+        "name": "Аксессуары"
+      },
+      "blouses_shirts": {
+        "name": "Блузы и рубашки"
+      },
+      "outerwear": {
+        "name": "Верхняя одежда"
+      },
+      "hats": {
+        "name": "Головные уборы"
+      },
+      "home_clothes": {
+        "name": "Домашняя одежда"
+      },
+      "jumpsuits_bodysuits": {
+        "name": "Комбинезоны и боди"
+      },
+      "envelopes": {
+        "name": "Конверты"
+      },
+      "underwear": {
+        "name": "Нижнее белье"
+      },
+      "footwear": {
+        "name": "Обувь"
+      },
+      "blazers_suits": {
+        "name": "Пиджаки и костюмы"
+      },
+      "dresses_skirts": {
+        "name": "Платья и юбки"
+      },
+      "romper_undershirts": {
+        "name": "Ползунки и распашонки"
+      },
+      "sweaters_hoodies": {
+        "name": "Свитеры и толстовки"
+      },
+      "sportswear": {
+        "name": "Спортивная одежда"
+      },
+      "t_shirts": {
+        "name": "Футболки"
+      },
+      "pants_shorts": {
+        "name": "Штаны и шорты"
+      },
+      "other": {
+        "name": "Другое"
+      }
+    },
+    "products_children_toys": {
+      "name": "Товары для детей и игрушки",
+      "car_seats": {
+        "name": "Автокресла"
+      },
+      "health_and_care": {
+        "name": "Здоровье и уход"
+      },
+      "toys_and_games": {
+        "name": "Игрушки и игры"
+      },
+      "strollers_select": {
+        "name": "Коляски"
+      },
+      "feeding_and_nutrition": {
+        "name": "Кормление и питание"
+      },
+      "bathing": {
+        "name": "Купание"
+      },
+      "all_for_the_nur": {
+        "name": "Все для детской"
+      },
+      "nappies_pots": {
+        "name": "Подгузники и горшки"
+      },
+      "radio_video_baby_monitors": {
+        "name": "Радио и видеоняни"
+      },
+      "goods_for_moms": {
+        "name": "Товары для мам"
+      },
+      "goods_for_study": {
+        "name": "Товары для учебы"
+      },
+      "other": {
+        "name": "Другое"
+      }
+    },
+    "handmade": {
+      "name": "Хэндмейд",
+      "cosmetics": {
+        "name": "Косметика"
+      },
+      "decorations": {
+        "name": "Украшения"
+      },
+      "dolls_and_toys": {
+        "name": "Куклы и игрушки"
+      },
+      "decoration_of_an_interior": {
+        "name": "Оформление интерьера"
+      },
+      "accessories": {
+        "name": "Аксессуары"
+      },
+      "decoration_of_holidays": {
+        "name": "Оформление праздников"
+      },
+      "office": {
+        "name": "Канцелярия"
+      },
+      "dishes": {
+        "name": "Посуда"
+      },
+      "other": {
+        "name": "Другое"
+      }
+    },
+    "beauty_health": {
+      "name": "Красота и здоровье",
+      "makeup": {
+        "name": "Макияж"
+      },
+      "manicure_pedicure": {
+        "name": "Маникюр и педикюр"
+      },
+      "health_products": {
+        "name": "Товары для здоровья"
+      },
+      "perfumery": {
+        "name": "Парфюмерия"
+      },
+      "haircut_hair_removal": {
+        "name": "Стрижка и удаление волос"
+      },
+      "hair_care": {
+        "name": "Уход за волосами"
+      },
+      "skin_care": {
+        "name": "Уход за кожей"
+      },
+      "hair_dryers_styling": {
+        "name": "Фены и укладка"
+      },
+      "tattoo_permanent_makeup": {
+        "name": "Тату и татуаж"
+      },
+      "solariums_and_tanning": {
+        "name": "Солярии и загар"
+      },
+      "hygiene_products": {
+        "name": "Средства для гигиены"
+      },
+      "other": {
+        "name": "Другое"
+      }
+    }
+  },
+  "for_homes_cottages": {
+    "name": "Для дома и дачи",
+    "furniture_interior": {
+      "name": "Мебель и интерьер",
+      "sofas_armchairs": {
+        "name": "Диваны и кресла"
+      },
+      "beds_mattresses": {
+        "name": "Кровати и матрасы"
+      },
+      "kitchen_sets": {
+        "name": "Кухонные гарнитуры"
+      },
+      "lighting": {
+        "name": "Освещение"
+      },
+      "interior_design": {
+        "name": "Оформление интерьера"
+      },
+      "security_alarm_systems": {
+        "name": "Охрана и сигнализации"
+      },
+      "coasters_pedestals": {
+        "name": "Подставки и тумбы"
+      },
+      "garden_furniture": {
+        "name": "Садовая мебель"
+      },
+      "garden_vegetable_garden": {
+        "name": "Сад и огород"
+      },
+      "tables_chairs": {
+        "name": "Столы и стулья"
+      },
+      "textiles_carpets": {
+        "name": "Текстиль и ковры"
+      },
+      "cabinets_dressers": {
+        "name": "Шкафы и комоды"
+      },
+      "other": {
+        "name": "Другое"
+      }
+    },
+    "tableware_goods_kitchen": {
+      "name": "Посуда и товары для кухни",
+      "tableware": {
+        "name": "Посуда"
+      },
+      "products_kitchen": {
+        "name": "Товары для кухни"
+      },
+      "household_chemicals": {
+        "name": "Бытовая химия"
+      },
+      "other": {
+        "name": "Другое"
+      }
+    },
+    "food_products": {
+      "name": "Продукты питания"
+    },
+    "repair_construction": {
+      "name": "Ремонт и строительство",
+      "doors": {
+        "name": "Двери"
+      },
+      "measuring_instruments": {
+        "name": "Измерительные инструменты"
+      },
+      "windows": {
+        "name": "Окна"
+      },
+      "heating_and_ventilation": {
+        "name": "Отопление и вентиляция"
+      },
+      "ceilings": {
+        "name": "Потолки"
+      },
+      "hand_tools": {
+        "name": "Ручные инструменты"
+      },
+      "plumbing_and_water_supply": {
+        "name": "Сантехника и водоснабжение"
+      },
+      "building_materials": {
+        "name": "Стройматериалы"
+      },
+      "electrician": {
+        "name": "Электрика"
+      },
+      "power_tools": {
+        "name": "Электроинструменты"
+      },
+      "other": {
+        "name": "Другое"
+      }
+    },
+    "plants": {
+      "name": "Растения",
+      "accessories_seedlings": {
+        "name": "Аксессуары для рассады"
+      },
+      "plant_pots": {
+        "name": "Горшки для растений"
+      },
+      "indoor_plants": {
+        "name": "Комнатные растения"
+      },
+      "garden_plants": {
+        "name": "Садовые растения"
+      },
+      "seeds_seedlings": {
+        "name": "Семена и саженцы"
+      },
+      "shelves_plants": {
+        "name": "Полки для растений"
+      },
+      "plant_stands": {
+        "name": "Подставки для растений"
+      },
+      "seedlings": {
+        "name": "Рассада"
+      },
+      "chemistry_plants": {
+        "name": "Химия для растений"
+      },
+      "soil": {
+        "name": "Почва"
+      },
+      "other": {
+        "name": "Другое"
+      }
+    }
+  },
+  "electronics": {
+    "name": "Электроника",
+    "phones_tablets": {
+      "name": "Телефоны и планшеты",
+      "mobile_phones": {
+        "name": "Мобильные телефоны"
+      },
+      "tablets": {
+        "name": "Планшеты"
+      },
+      "smart_watches_and_wristbands": {
+        "name": "Умные часы и браслеты"
+      },
+      "e_books": {
+        "name": "Электронные книги"
+      },
+      "landlines": {
+        "name": "Стационарные телефоны"
+      },
+      "walkie_talkies_and_satellite_phones": {
+        "name": "Рации и спутниковые телефоны"
+      },
+      "spare_parts": {
+        "name": "Запчасти"
+      },
+      "external_batteries": {
+        "name": "Внешние аккумуляторы"
+      },
+      "chargers": {
+        "name": "Зарядные устройства"
+      },
+      "covers": {
+        "name": "Чехлы"
+      },
+      "accessories": {
+        "name": "Аксессуары"
+      },
+      "other": {
+        "name": "Другое"
+      }
+    },
+    "photo_video_cameras": {
+      "name": "Фото и видеокамеры",
+      "cameras": {
+        "name": "Фотоаппараты"
+      },
+      "video_cameras": {
+        "name": "Видеокамеры"
+      },
+      "video_surveillance": {
+        "name": "Видеонаблюдение"
+      },
+      "lenses": {
+        "name": "Объективы"
+      },
+      "flash": {
+        "name": "Фотовспышки"
+      },
+      "accessories": {
+        "name": "Аксессуары"
+      },
+      "tripods_and_stabilizers": {
+        "name": "Штативы и стабилизаторы"
+      },
+      "studio_equipment": {
+        "name": "Студийное оборудование"
+      },
+      "digital_cameras": {
+        "name": "Цифровые фоторамки"
+      },
+      "compact_photo_printers": {
+        "name": "Компактные фотопринтеры"
+      },
+      "binoculars_and_optical_instruments": {
+        "name": "Бинокли и оптические приборы"
+      },
+      "other": {
+        "name": "Другое"
+      }
+    },
+    "tv_audio_video": {
+      "name": "Тв, аудио, видео",
+      "tv_sets": {
+        "name": "Телевизоры"
+      },
+      "projectors": {
+        "name": "Проекторы"
+      },
+      "acoustics_speakers_subwoofers": {
+        "name": "Акустика, колонки, сабвуферы"
+      },
+      "home_theaters": {
+        "name": "Домашние кинотеатры"
+      },
+      "dvd_blu_ray_and_media_players": {
+        "name": "DVD, Blu-ray и медиаплееры"
+      },
+      "music_centers_and_tape_recorders": {
+        "name": "Музыкальные центры и магнитолы"
+      },
+      "mp3_players_and_portable_audio": {
+        "name": "MP3-плееры и портативное аудио"
+      },
+      "satellite_and_digital_tv": {
+        "name": "Спутниковое и цифровое ТВ"
+      },
+      "audio_amplifiers_and_receivers": {
+        "name": "Аудиоусилители и ресиверы"
+      },
+      "headphones": {
+        "name": "Наушники"
+      },
+      "microphones": {
+        "name": "Микрофоны"
+      },
+      "accessories": {
+        "name": "Аксессуары"
+      },
+      "other": {
+        "name": "Другое"
+      }
+    },
+    "appliances": {
+      "name": "Бытовая техника",
+      "scales": {
+        "name": "Весы"
+      },
+      "hoods": {
+        "name": "Вытяжки"
+      },
+      "grinding_and_mixing": {
+        "name": "Измельчение и смешивание"
+      },
+      "glimate_control_equipment": {
+        "name": "Климатическая техника"
+      },
+      "coolers_and_water_filters": {
+        "name": "Кулеры и фильтры для воды"
+      },
+      "stoves_and_ovens": {
+        "name": "Плиты и духовые шкафы"
+      },
+      "dishwashers": {
+        "name": "Посудомоечные машины"
+      },
+      "cooking_food": {
+        "name": "Приготовление еды"
+      },
+      "preparation_of_drinks": {
+        "name": "Приготовление напитков"
+      },
+      "vacuum_cleaners_and_steam_cleaners": {
+        "name": "Пылесосы и пароочистители"
+      },
+      "washing_machines": {
+        "name": "Стиральные машины"
+      },
+      "irons_and_clothing_care": {
+        "name": "Утюги и уход за одеждой"
+      },
+      "refrigerators": {
+        "name": "Холодильники"
+      },
+      "sewing_equipment": {
+        "name": "Швейное оборудование"
+      },
+      "other": {
+        "name": "Другое"
+      }
+    },
+    "computer_equipment": {
+      "name": "Компьютерная техника",
+      "laptops": {
+        "name": "Ноутбуки"
+      },
+      "computers": {
+        "name": "Компьютеры"
+      },
+      "monitors": {
+        "name": "Мониторы"
+      },
+      "keyboards_and_mice": {
+        "name": "Клавиатуры и мыши"
+      },
+      "office_equipment_and_consumables": {
+        "name": "Оргтехника и расходники"
+      },
+      "network_equipment": {
+        "name": "Сетевое оборудование"
+      },
+      "multimedia": {
+        "name": "Мультимедиа"
+      },
+      "data_storage_and_card_readers": {
+        "name": "Накопители данных и картридеры"
+      },
+      "steering_wheels_joysticks_gamepads": {
+        "name": "Рули, джойстики, геймпады"
+      },
+      "components_and_spare_parts": {
+        "name": "Комплектующие и запчасти"
+      },
+      "accessories": {
+        "name": "Аксессуары"
+      },
+      "other": {
+        "name": "Другое"
+      }
+    },
+    "games_consoles_software": {
+      "name": "Игры, приставки и программы",
+      "game_consoles_selector": {
+        "name": "Игровые приставки"
+      },
+      "games_for_consoles": {
+        "name": "Игры для приставок"
+      },
+      "computer_games": {
+        "name": "Компьютерные игры"
+      },
+      "programs": {
+        "name": "Программы"
+      },
+      "other": {
+        "name": "Другое"
+      }
+    }
+  },
+  "hobbies": {
+    "name": "Хобби и отдых",
+    "tickets": {
+      "name": "Билеты"
+    },
+    "videos": {
+      "name": "Видеофильмы"
+    },
+    "books_magazines": {
+      "name": "Книги и журналы"
+    },
+    "collectibles": {
+      "name": "Коллекционирование",
+      "antique_furniture_tableware": {
+        "name": "Антикварная мебель, посуда"
+      },
+      "banknotes": {
+        "name": "Банкноты"
+      },
+      "tickets": {
+        "name": "Билеты"
+      },
+      "things_celebrities_autographs": {
+        "name": "Вещи знаменитостей, автографы"
+      },
+      "vinyl_records": {
+        "name": "Виниловые пластинки"
+      },
+      "inserts_stickers": {
+        "name": "Вкладыши, наклейки"
+      },
+      "military_stuff": {
+        "name": "Военные вещи"
+      },
+      "documents": {
+        "name": "Документы"
+      },
+      "tokens_medals_badges": {
+        "name": "Жетоны, медали, значки"
+      },
+      "calendars": {
+        "name": "Календари"
+      },
+      "kinder_surprises": {
+        "name": "Киндер-сюрпризы"
+      },
+      "books_magazines_manuscripts": {
+        "name": "Книги, журналы, рукописи"
+      },
+      "envelopes_postcards": {
+        "name": "Конверты, открытки"
+      },
+      "piggy_banks": {
+        "name": "Копилки"
+      },
+      "dolls_toys": {
+        "name": "Куклы, игрушки"
+      },
+      "magnets": {
+        "name": "Магниты"
+      },
+      "stamps": {
+        "name": "Марки"
+      },
+      "models": {
+        "name": "Модели"
+      },
+      "coins_numismatics": {
+        "name": "Монеты, нумизматика"
+      },
+      "musical_instruments": {
+        "name": "Музыкальные инструменты"
+      },
+      "ashtrays_lighters": {
+        "name": "Пепельницы, зажигалки"
+      },
+      "plastic_cards": {
+        "name": "Пластиковые карточки"
+      },
+      "art_objects_paintings": {
+        "name": "Предметы искусства, картины"
+      },
+      "figurines_figurines": {
+        "name": "Статуэтки, фигурки"
+      },
+      "jewelry_accessories": {
+        "name": "Украшения, аксессуары"
+      },
+      "photos_letters": {
+        "name": "Фотографии, письма"
+      },
+      "chess_games": {
+        "name": "Шахматы, игры"
+      },
+      "jewelry_boxes": {
+        "name": "Шкатулки"
+      },
+      "labels_bottles_corks": {
+        "name": "Этикетки, бутылки, пробки"
+      },
+      "other": {
+        "name": "Другое"
+      }
+    },
+    "materials_creativity": {
+      "name": "Материалы для творчества"
+    },
+    "music": {
+      "name": "Музыка"
+    },
+    "musical_instruments": {
+      "name": "Музыкальные инструменты",
+      "accordion_accordion_accordion": {
+        "name": "Аккордеон, гармони, баяны"
+      },
+      "acoustic_guitars": {
+        "name": "Акустические гитары"
+      },
+      "classical_guitars": {
+        "name": "Классические гитары"
+      },
+      "bass_guitars": {
+        "name": "Бас-гитары"
+      },
+      "electric_guitars": {
+        "name": "Электрогитары"
+      },
+      "guitar_gain": {
+        "name": "Гитарное усиление"
+      },
+      "wind_instruments": {
+        "name": "Духовые инструменты"
+      },
+      "keyboards": {
+        "name": "Клавишные"
+      },
+      "mixing_consoles": {
+        "name": "Микшерные пульты"
+      },
+      "folk_instruments": {
+        "name": "Народные инструменты"
+      },
+      "effect_pedals": {
+        "name": "Педали эффектов"
+      },
+      "violins_bowed": {
+        "name": "Скрипки, смычковые"
+      },
+      "percussion_instruments": {
+        "name": "Ударные инструменты"
+      },
+      "accessories": {
+        "name": "Аксессуары"
+      },
+      "other": {
+        "name": "Другое"
+      }
+    },
+    "table_games": {
+      "name": "Настольные игры"
+    },
+    "sports_recreation": {
+      "name": "Спорт и отдых",
+      "sports_protection": {
+        "name": "Спортивная защита"
+      },
+      "bicycles": {
+        "name": "Велосипеды"
+      },
+      "roller_skates_and_skateboarding": {
+        "name": "Ролики и скейтбординг"
+      },
+      "scooters_and_gyrometer": {
+        "name": "Самокаты и гироскутеры"
+      },
+      "billiards_and_bowling": {
+        "name": "Бильярд и боулинг"
+      },
+      "water_sports": {
+        "name": "Водные виды спорта"
+      },
+      "martial_arts": {
+        "name": "Единоборства"
+      },
+      "winter_sports": {
+        "name": "Зимние виды спорта"
+      },
+      "ball_games": {
+        "name": "Игры с мячом"
+      },
+      "hunting_and_fishing": {
+        "name": "Охота и рыбалка"
+      },
+      "tourism_and_outdoor_recreation": {
+        "name": "Туризм и отдых на природе"
+      },
+      "tennis_badminton_darts": {
+        "name": "Теннис, бадминтон, дартс"
+      },
+      "exercise_machines_and_fitness_equipment": {
+        "name": "Тренажеры и фитнес"
+      },
+      "sports_nutrition": {
+        "name": "Спортивное питание"
+      },
+      "other": {
+        "name": "Другое"
+      }
+    }
+  },
+  "animal": {
+    "name": "Животные",
+    "dogs": {
+      "name": "Собаки"
+    },
+    "cats": {
+      "name": "Кошки"
+    },
+    "birds": {
+      "name": "Птицы"
+    },
+    "rodents": {
+      "name": "Грызуны"
+    },
+    "fish": {
+      "name": "Рыбки"
+    },
+    "farm_animals": {
+      "name": "Сельскохозяйственные животные"
+    },
+    "other_animals": {
+      "name": "Другие животные"
+    },
+    "pet_products": {
+      "name": "Товары для животных"
+    }
+  }
 }

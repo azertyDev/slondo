@@ -12,7 +12,7 @@ import {useTranslation} from 'next-i18next';
 import {CabinetCard} from '@src/components/cabinet/components/cabinet_card/CabinetCard';
 import {ITEMS_PER_PAGE} from '@src/constants';
 import {useModal} from '@src/hooks/useModal';
-import {DetailedPostView} from '@src/components/cabinet/components/detailed_post_view/DetailedPostView';
+import {DetailedPostModal} from '@src/components/cabinet/components/detailed_post_modal/DetailedPostModal';
 import {initialCardData} from '@src/components/cabinet/cabinet_pages/my_posts/MyPosts';
 import {useStyles} from './useStyles';
 
@@ -121,6 +121,11 @@ const FavoriteContainer: FC = () => {
                 </>;
         }
     };
+    const handleRefresh = () => {
+        fetchFavoriteData('post');
+        fetchFavoriteData('auc');
+    };
+
     const ModalContent = () => (
         <>
             {modalContentIndex === 1
@@ -143,8 +148,7 @@ const FavoriteContainer: FC = () => {
     );
 
     useEffect(() => {
-        fetchFavoriteData('post');
-        fetchFavoriteData('auc');
+        handleRefresh();
     }, []);
 
     const favoritePostCards = favoritePostData.data.map(data => (
@@ -171,32 +175,30 @@ const FavoriteContainer: FC = () => {
         {
             id: 0,
             title: t('posts'),
-            total: favoritePostData.total,
             itemsPerPage: ITEMS_PER_PAGE,
-            handleFetchByTab: null,
+            handleFetchByTab: () => '',
             component: (
                 <Favorite
                     openModal={modalOpen}
                     favoriteCards={favoritePostCards}
                     ModalContent={ModalContent}
-                    handleModalOpen={handleOpenModal}
                     handleClose={handleModalClose}
+                    handleModalOpen={handleOpenModal}
                 />
             )
         },
         {
             id: 1,
             title: t('auctions'),
-            total: favoriteAucData.total,
             itemsPerPage: ITEMS_PER_PAGE,
-            handleFetchByTab: null,
+            handleFetchByTab: () => '',
             component: (
                 <Favorite
+                    openModal={modalOpen}
                     favoriteCards={favoriteAucCards}
+                    ModalContent={ModalContent}
                     handleClose={handleModalClose}
                     handleModalOpen={handleOpenModal}
-                    openModal={modalOpen}
-                    ModalContent={ModalContent}
                 />
             )
         }
@@ -213,10 +215,11 @@ const FavoriteContainer: FC = () => {
                 tabsData={tabsData}
                 headerTitle={title}
             />
-            <DetailedPostView
-                data={selectedPost}
-                detailedModalOpen={detailedModalOpen}
-                handleDetailedClose={closeDetailedModal}
+            <DetailedPostModal
+                post={selectedPost}
+                open={detailedModalOpen}
+                onClose={closeDetailedModal}
+                handleRefresh={handleRefresh}
                 handleNotificationsOpen={handleNotificationsOpen}
             />
         </>

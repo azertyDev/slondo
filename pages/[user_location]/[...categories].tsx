@@ -23,6 +23,7 @@ export const getServerSideProps: GetServerSideProps = async ({locale, query, req
                     'footer',
                     'auth_reg',
                     'common',
+                    'main',
                     'errors'
                 ]
             )

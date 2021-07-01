@@ -1,16 +1,15 @@
 import {FC} from 'react';
-import {Box, Button, IconButton, Paper, Typography} from '@material-ui/core';
-import {useStyles} from './useStyles';
-import {CloseIcon} from '@src/components/elements/icons';
 import Link from 'next/link';
 import {WithT} from 'i18next';
-import ErrorIcon from '@material-ui/icons/Error';
-import {Phone} from '@material-ui/icons';
+import {Box, Button, IconButton, Paper, Typography} from '@material-ui/core';
+import {Phone, Error} from '@material-ui/icons';
+import {CloseIcon} from '@src/components/elements/icons';
+import {useStyles} from './useStyles';
 
 export type NotificationDataType = {
     data,
-    handleDeleteNotification: (id: number, ads_id: number) => () => void,
     fetchUserPhone: (user_id) => () => void,
+    handleDeleteNotification: (id: number, ads_id: number) => () => void,
     phone: number
 } & WithT;
 
@@ -48,7 +47,7 @@ export const Notification: FC<NotificationDataType> = (props) => {
                     alignItems='center'
                     justifyContent='center'
                 >
-                    <ErrorIcon color='secondary' />
+                    <Error color='secondary'/>
                     <Typography variant='caption'>
                         {`${date.getHours()}:${date.getMinutes()}`}
                     </Typography>
@@ -65,37 +64,37 @@ export const Notification: FC<NotificationDataType> = (props) => {
                     <Box display='flex' justifyContent='flex-end'>
                         {
                             go_to_type !== 'go_to_user'
-                                ? <Button
-                                    size="small"
-                                    color="secondary"
-                                    className='forward-to-btn'
-                                >
-                                    {forwardTo(go_to_type)}
-                                </Button>
-                                : phone
-                                ? <Button
-                                    size="small"
-                                    color="secondary"
-                                    className='forward-to-btn'
-                                >
-                                    <Typography variant='subtitle1' color="secondary">{phone}</Typography>
-                                </Button>
-                                : <Button
-                                    size="small"
-                                    color="secondary"
-                                    className='forward-to-btn'
-                                    onClick={fetchUserPhone(go_to)}
-                                >
-                                    <Phone className='phone-icon' />
-                                    <Typography variant='subtitle1' color="secondary">
-                                        Показать номер
-                                    </Typography>
-                                </Button>
+                            ? <Button
+                                size="small"
+                                color="secondary"
+                                className='forward-to-btn'
+                            >
+                                {forwardTo(go_to_type)}
+                            </Button>
+                            : phone
+                              ? <Button
+                                  size="small"
+                                  color="secondary"
+                                  className='forward-to-btn'
+                              >
+                                  <Typography variant='subtitle1' color="secondary">{phone}</Typography>
+                              </Button>
+                              : <Button
+                                  size="small"
+                                  color="secondary"
+                                  className='forward-to-btn'
+                                  onClick={fetchUserPhone(go_to)}
+                              >
+                                  <Phone className='phone-icon'/>
+                                  <Typography variant='subtitle1' color="secondary">
+                                      Показать номер
+                                  </Typography>
+                              </Button>
                         }
                     </Box>
                 </Box>
                 <IconButton onClick={handleDeleteNotification(id, ads_id)}>
-                    <CloseIcon />
+                    <CloseIcon/>
                 </IconButton>
             </Paper>
         </>

@@ -4,9 +4,8 @@ import {Checkbox, FormControl, MenuItem, Select, Typography} from '@material-ui/
 import {isRequired} from '@src/helpers';
 import {useStyles} from './useStyles';
 
-
 type CustomSelectPropsType = {
-    ns?: string,
+    transKey?: string,
     name: string;
     labelTxt?: string,
     multiple?: boolean,
@@ -20,11 +19,11 @@ type CustomSelectPropsType = {
 
 export const DropDownSelect: FC<CustomSelectPropsType> = (props) => {
     const {
-        ns = 'filters',
         name,
+        transKey,
+        multiple,
         disableRequire,
         labelTxt,
-        multiple,
         items = [],
         onBlur,
         values,
@@ -32,7 +31,7 @@ export const DropDownSelect: FC<CustomSelectPropsType> = (props) => {
         handleSelect
     } = props;
 
-    const {t} = useTranslation(ns);
+    const {t} = useTranslation('filters');
 
     const isCurrency = name === 'currency';
     const optionKey = name === 'duration' ? 'hours' : 'name';
@@ -44,16 +43,16 @@ export const DropDownSelect: FC<CustomSelectPropsType> = (props) => {
     };
 
     const selectedHandle = (selected: any) => {
-        let value = t('filters:noSelect');
+        let value = 'noSelect';
 
         if (multiple) {
             value = selected.map(item => item.name).join(', ');
         } else if (selected) {
             const selectedItem = items.find(item => item.id === +selected) || null;
-            if (selectedItem !== null) value = t(`${selectedItem[optionKey]}`);
+            if (selectedItem !== null) value = selectedItem[optionKey];
         }
 
-        return value;
+        return t(`${selected && transKey ? `${transKey}${value}.name` : value}`);
     };
 
     const classes = useStyles();
@@ -62,10 +61,10 @@ export const DropDownSelect: FC<CustomSelectPropsType> = (props) => {
             <label htmlFor={name}>
                 <Typography variant='subtitle1' gutterBottom>
                     {multiple
-                        ? t(`filters:${labelTxt ?? name}`)
-                        : !isCurrency && (
+                     ? labelTxt
+                     : !isCurrency && (
                         <>
-                            {t(`filters:${labelTxt ?? name}`)}
+                            {labelTxt}
                             {!disableRequire && isRequired(name) && <span className='error-text'>*&nbsp;</span>}
                         </>
                     )}
@@ -100,7 +99,9 @@ export const DropDownSelect: FC<CustomSelectPropsType> = (props) => {
                             checked={!!values[name]?.some(el => el.id === item.id)}
                             style={{padding: 0, marginRight: 5}}
                         />}
-                        {t(`${item[optionKey]}`)}
+                        {t(transKey
+                           ? `${transKey}${item[optionKey]}.name`
+                           : item[optionKey])}
                     </MenuItem>
                 ))}
             </Select>

@@ -1,13 +1,10 @@
-import {FC, useEffect} from 'react';
+import {FC} from 'react';
 import {Container, Grid, Hidden, Typography} from '@material-ui/core';
 import {SocialsBlock} from '@src/components/elements/socials_block/SocialsBlock';
 import {useTranslation} from 'next-i18next';
 import Link from 'next/link';
 import {Logo} from '@src/components/elements/icons/logo/Logo';
 import {useStyles} from './useStyles';
-import {fetchLocations} from '@src/redux/slices/locationsSlice';
-import {useRouter} from 'next/router';
-import {useDispatch} from 'react-redux';
 
 
 export const Footer: FC = () => {
@@ -37,7 +34,7 @@ export const Footer: FC = () => {
                                                         variant="subtitle1"
                                                         color="initial"
                                                     >
-                                                        {t('aboutSlondo')}
+                                                        {t('footer:aboutSlondo')}
                                                     </Typography>
                                                 </a>
                                             </Link>
@@ -49,7 +46,7 @@ export const Footer: FC = () => {
                                                         variant="subtitle1"
                                                         color="initial"
                                                     >
-                                                        {t('help')}
+                                                        {t('footer:help')}
                                                     </Typography>
                                                 </a>
                                             </Link>
@@ -61,7 +58,7 @@ export const Footer: FC = () => {
                                                         variant="subtitle1"
                                                         color="initial"
                                                     >
-                                                        {t('security')}
+                                                        {t('footer:security')}
                                                     </Typography>
                                                 </a>
                                             </Link>
@@ -73,7 +70,7 @@ export const Footer: FC = () => {
                                                         variant="subtitle1"
                                                         color="initial"
                                                     >
-                                                        {t('yourReview')}
+                                                        {t('footer:yourReview')}
                                                     </Typography>
                                                 </a>
                                             </Link>
@@ -90,7 +87,7 @@ export const Footer: FC = () => {
                                                     variant="subtitle1"
                                                     color="initial"
                                                 >
-                                                    {t('feedback')}
+                                                    {t('footer:feedback')}
                                                 </Typography>
                                             </a>
                                         </Link>
@@ -102,7 +99,7 @@ export const Footer: FC = () => {
                                                     variant="subtitle1"
                                                     color="initial"
                                                 >
-                                                    {t('howToAddPost')}
+                                                    {t('footer:howToAddPost')}
                                                 </Typography>
                                             </a>
                                         </Link>
@@ -114,7 +111,7 @@ export const Footer: FC = () => {
                                                     variant="subtitle1"
                                                     color="initial"
                                                 >
-                                                    {t('safe_shopping')}
+                                                    {t('footer:safe_shopping')}
                                                 </Typography>
                                             </a>
                                         </Link>
@@ -126,7 +123,7 @@ export const Footer: FC = () => {
                                                     variant="subtitle1"
                                                     color="initial"
                                                 >
-                                                    {t('sitemap')}
+                                                    {t('footer:sitemap')}
                                                 </Typography>
                                             </a>
                                         </Link>
@@ -143,7 +140,7 @@ export const Footer: FC = () => {
                                                         variant="subtitle1"
                                                         color="initial"
                                                     >
-                                                        {t('promotions')}
+                                                        {t('footer:promotions')}
                                                     </Typography>
                                                 </a>
                                             </Link>
@@ -155,7 +152,7 @@ export const Footer: FC = () => {
                                                         variant="subtitle1"
                                                         color="initial"
                                                     >
-                                                        {t('bonuses')}
+                                                        {t('footer:bonuses')}
                                                     </Typography>
                                                 </a>
                                             </Link>
@@ -167,7 +164,7 @@ export const Footer: FC = () => {
                                                         variant="subtitle1"
                                                         color="initial"
                                                     >
-                                                        {t('auctionRules')}
+                                                        {t('footer:auctionRules')}
                                                     </Typography>
                                                 </a>
                                             </Link>
@@ -179,7 +176,7 @@ export const Footer: FC = () => {
                                                         variant="subtitle1"
                                                         color="initial"
                                                     >
-                                                        {t('licenseAgreement')}
+                                                        {t('footer:licenseAgreement')}
                                                     </Typography>
                                                 </a>
                                             </Link>
@@ -201,7 +198,7 @@ export const Footer: FC = () => {
                             </Grid>
                             <Grid item container justify="center" alignItems='center'>
                                 <Typography variant="subtitle1" color="initial">
-                                    {t('termsOfUse')}
+                                    {t('footer:termsOfUse')}
                                 </Typography>
                             </Grid>
                             <Grid item container justify="center" alignItems='center'>

@@ -1,10 +1,10 @@
 import {FC, useEffect, useState} from 'react';
+import {WithT} from 'i18next';
 import {Hidden, Typography} from '@material-ui/core';
 import {CustomButton} from '@src/components/elements/custom_button/CustomButton';
 import {SafeIcon} from '@root/src/components/elements/icons';
 import {UserInfoWithAvatar} from '@src/components/elements/user_info_with_avatar/UserInfoWithAvatar';
 import {SocialsBlock} from '@root/src/components/elements/socials_block/SocialsBlock';
-import {WithT} from 'i18next';
 import {SafeDealDrawer} from '@src/components/elements/safe_deal_drawer/SafeDealDrawer';
 import {useDispatch, useSelector} from 'react-redux';
 import {RootState} from '@src/redux/rootReducer';
@@ -13,8 +13,8 @@ import {setErrorMsgAction} from '@root/src/redux/slices/errorSlice';
 import {setIsAuthModalOpen} from '@root/src/redux/slices/userSlice';
 import {ConfirmModal} from '@src/components/elements/confirm_modal/Confirm_modal';
 import {useModal} from '@src/hooks/useModal';
-import {useStyles} from './useStyles';
 import {useUserCard} from '@src/hooks/useUserCard';
+import {useStyles} from './useStyles';
 
 
 type OwnerPropsType = {
@@ -55,7 +55,7 @@ export const OwnerContent: FC<OwnerPropsType> = (props) => {
     const [drawerOpen, setDrawerOpen] = useState(false);
     const {modalOpen: safeDealOpen, handleModalOpen: handleOpenSafeDeal, handleModalClose: handleCloseSafeDeal} = useModal();
 
-    const payment = async () => {
+    const createP2pHold = async () => {
         try {
             const p2pData = JSON.stringify({
                 amount: postData.price,
@@ -148,8 +148,7 @@ export const OwnerContent: FC<OwnerPropsType> = (props) => {
                         <div className="floating-text">
                             <SafeIcon/>
                             <Typography variant='subtitle2'>
-                                Безопасная покупка <br/>
-                                за 420 000 сум
+                                Безопасная покупка
                             </Typography>
                         </div>
                         <CustomButton>
@@ -159,11 +158,11 @@ export const OwnerContent: FC<OwnerPropsType> = (props) => {
                 )}
             </Hidden>
             <ConfirmModal
-                title={t('buy_safe_deal')}
                 open={safeDealOpen}
-                cancelTxt={t('common:cancel')}
+                title={t('buy_safe_deal')}
                 confirmTxt={t('common:yes')}
-                handleConfirm={payment}
+                cancelTxt={t('common:no')}
+                handleConfirm={createP2pHold}
                 handleClose={handleCloseSafeDeal}
             />
             <SafeDealDrawer

@@ -4,7 +4,7 @@ import {Container} from '@material-ui/core';
 import {useTranslation} from 'next-i18next';
 import {Top} from './top/Top';
 import Bottom from './bottom/Bottom';
-import {AuthRegPage} from './auth_reg_page/AuthRegPage';
+import {AuthContainer} from './auth/AuthContainer';
 import {setIsAuthModalOpen, signInAction} from '@src/redux/slices/userSlice';
 import {RootState} from '@src/redux/rootReducer';
 import {fetchLocations} from '@src/redux/slices/locationsSlice';
@@ -62,7 +62,7 @@ export const Header: FC = () => {
                     </div>
                 </Container>
                 <div className={classes.modalDialog}>
-                    <AuthRegPage/>
+                    <AuthContainer/>
                 </div>
             </div>
         </header>
