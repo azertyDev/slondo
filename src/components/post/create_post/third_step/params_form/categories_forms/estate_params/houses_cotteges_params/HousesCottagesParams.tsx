@@ -370,7 +370,6 @@ export const HousesCottagesParams: FC<CommonParamsPropsType> = (props) => {
                      </Grid>}
                     <div className='options-select-wrapper'>
                         <OptionsSelect
-                            row
                             t={t}
                             name='amenities'
                             values={values}
@@ -378,7 +377,6 @@ export const HousesCottagesParams: FC<CommonParamsPropsType> = (props) => {
                             handleOptionCheckbox={handleOptionCheckbox}
                         />
                         <OptionsSelect
-                            row
                             t={t}
                             name='infrastructure'
                             values={values}

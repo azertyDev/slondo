@@ -24,8 +24,8 @@ import {useStyles} from './useStyles';
 
 
 export type DataForCrtPostType = {
-    isFetch: boolean;
-    data: any;
+    isFetch: boolean,
+    data: any
 };
 
 export const FormPages: FC = () => {
@@ -47,9 +47,9 @@ export const FormPages: FC = () => {
 
     const isCtgrAnimalFishes = category?.name === 'animal' && subcategory?.name === 'fishes';
 
-    const title = `${t(`categories:${category.name}`)}
-        ${subcategory ? ` - ${t(`categories:${subcategory.name}`)}` : ''}
-        ${type ? ` - ${t(`categories:${type.name}`)}` : ''}`;
+    const title = `${t(`categories:${category.name}.name`)}
+        ${subcategory ? ` - ${t(`categories:${category.name}.${subcategory.name}.name`)}` : ''}
+        ${type ? ` - ${t(`categories:${category.name}.${subcategory.name}.${type.name}.name`)}` : ''}`;
 
     const postType = postTypes.find(type => type.name === postTypeName);
 
@@ -112,7 +112,7 @@ export const FormPages: FC = () => {
         isPreview
         ? setIsPreview(false)
         : push(
-            `/create/type/${postTypeName}/${categoryName}/${subcategoryName}`,
+            `/create/type/${postTypeName}/${categoryName}${typeName ? `/${subcategoryName}` : ''}`,
             undefined,
             {shallow: true}
         );

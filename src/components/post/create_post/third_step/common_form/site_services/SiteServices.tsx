@@ -51,7 +51,7 @@ export const SiteServices: FC<PaymentDeliveryPropsType> = (props) => {
         setDrawerOpen(false);
         fetchUserCard();
     };
-    console.log(hasCard);
+
     useEffect(() => {
         isCommonForm && fetchUserCard();
     }, []);

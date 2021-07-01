@@ -72,8 +72,8 @@ export const CommercialPropertyParams: FC<CommonParamsPropsType> = (props) => {
                                  <DeployedSelect
                                      name='estate_type'
                                      values={values}
-                                     options={filters.estate_type}
                                      handleSelect={handleSelect}
+                                     options={filters.estate_type}
                                      errorMsg={getErrorMsg(errors.estate_type, touched.estate_type, t)}
                                  />
                              </Grid>
@@ -128,8 +128,8 @@ export const CommercialPropertyParams: FC<CommonParamsPropsType> = (props) => {
                                  t={t}
                                  name='amenities'
                                  values={values}
-                                 handleOptionCheckbox={handleOptionCheckbox}
                                  options={filters.amenities}
+                                 handleOptionCheckbox={handleOptionCheckbox}
                              />
                          </>}
                     </Grid>

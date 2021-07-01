@@ -7,7 +7,7 @@ export type HandleOptionCheckboxType = (name: string, value) => void;
 
 type OptionsSectionPropsType = {
     name?: string,
-    row?: boolean,
+    column?: boolean,
     values,
     options: any[],
     handleOptionCheckbox: HandleOptionCheckboxType
@@ -17,7 +17,7 @@ export const OptionsSelect: FC<OptionsSectionPropsType> = (props) => {
     const {
         t,
         name,
-        row,
+        column,
         values,
         options = [],
         handleOptionCheckbox
@@ -50,7 +50,7 @@ export const OptionsSelect: FC<OptionsSectionPropsType> = (props) => {
                             item
                             container
                             key={item.id}
-                            xs={row ? 4 : 12}
+                            xs={column ? 12 : 4}
                             alignItems='center'
                         >
                             <Checkbox

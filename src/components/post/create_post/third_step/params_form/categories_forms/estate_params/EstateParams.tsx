@@ -21,7 +21,7 @@ export const EstateParams: FC<CommonParamsPropsType> = (props) => {
 
     const getParamsForm = () => {
         switch (subcategoryName) {
-            case 'apartments':
+            case 'flat':
                 return <ApartmentsParams
                     t={t}
                     type={type}
@@ -32,7 +32,7 @@ export const EstateParams: FC<CommonParamsPropsType> = (props) => {
                     handleFormOpen={handleFormOpen}
                     currentFormIndex={currentFormIndex}
                 />;
-            case 'housesCottages':
+            case 'houses_cottages':
                 return <HousesCottagesParams
                     t={t}
                     type={type}
@@ -43,7 +43,7 @@ export const EstateParams: FC<CommonParamsPropsType> = (props) => {
                     handleFormOpen={handleFormOpen}
                     currentFormIndex={currentFormIndex}
                 />;
-            case 'land':
+            case 'land_plots':
                 return <LandParams
                     t={t}
                     type={type}
@@ -54,7 +54,7 @@ export const EstateParams: FC<CommonParamsPropsType> = (props) => {
                     handleFormOpen={handleFormOpen}
                     currentFormIndex={currentFormIndex}
                 />;
-            case 'parkingLotsAndBoxes':
+            case 'underground_parking_lots_boxes':
                 return <ParkingLotsBoxes
                     t={t}
                     filters={filters}
@@ -64,7 +64,7 @@ export const EstateParams: FC<CommonParamsPropsType> = (props) => {
                     handleFormOpen={handleFormOpen}
                     currentFormIndex={currentFormIndex}
                 />;
-            case 'commercialProperty':
+            case 'commercial_real_estate':
                 return <CommercialPropertyParams
                     t={t}
                     type={type}

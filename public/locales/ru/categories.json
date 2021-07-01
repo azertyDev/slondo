@@ -371,99 +371,99 @@
       },
       "other": {
         "name": "Другое"
+      }
+    },
+    "resume": {
+      "name": "Резюме",
+      "auto_business": {
+        "name": "Автобизнес"
       },
-      "resume": {
-        "name": "Резюме",
-        "auto_business": {
-          "name": "Автобизнес"
-        },
-        "safety_security": {
-          "name": "Безопасность и охрана"
-        },
-        "office_staff": {
-          "name": "Офисный персонал"
-        },
-        "senior_management": {
-          "name": "Высший менеджмент"
-        },
-        "production_of_raw_materials_energy": {
-          "name": "Добыча сырья, энергетика"
-        },
-        "home_staff": {
-          "name": "Домашний персонал"
-        },
-        "publishing_houses_mass_media": {
-          "name": "Издательства и СМИ"
-        },
-        "information_technology": {
-          "name": "Информационные технологии"
-        },
-        "arts_entertainment": {
-          "name": "Искусство и развлечения"
-        },
-        "purchases": {
-          "name": "Закупки"
-        },
-        "marketing_advertising": {
-          "name": "Маркетинг и реклама"
-        },
-        "medicine_pharmaceuticals": {
-          "name": "Медицина и фармацевтика"
-        },
-        "early_career": {
-          "name": "Начало карьеры / без опыта работы"
-        },
-        "education_science": {
-          "name": "Образование и наука"
-        },
-        "handymen": {
-          "name": "Разнорабочие"
-        },
-        "logistics_transport": {
-          "name": "Логистика и транспорт"
-        },
-        "sales": {
-          "name": "Продажи"
-        },
-        "production": {
-          "name": "Производство"
-        },
-        "restaurants_catering": {
-          "name": "Рестораны и общепит"
-        },
-        "agricultural_industry": {
-          "name": "Сельское хозяйство"
-        },
-        "sports_beauty": {
-          "name": "Спорт и красота"
-        },
-        "insurance": {
-          "name": "Страхование"
-        },
-        "construction_repair": {
-          "name": "Строительство и ремонт"
-        },
-        "tourism_hotels": {
-          "name": "Туризм и гостиницы"
-        },
-        "estate": {
-          "name": "Недвижимость"
-        },
-        "accounting_finance": {
-          "name": "Бухгалтерия и финансы"
-        },
-        "banking_sector": {
-          "name": "Банковская сфера"
-        },
-        "management": {
-          "name": "Управление персоналом"
-        },
-        "jurisprudence": {
-          "name": "Юриспруденция"
-        },
-        "other": {
-          "name": "Другое"
-        }
+      "safety_security": {
+        "name": "Безопасность и охрана"
+      },
+      "office_staff": {
+        "name": "Офисный персонал"
+      },
+      "senior_management": {
+        "name": "Высший менеджмент"
+      },
+      "production_of_raw_materials_energy": {
+        "name": "Добыча сырья, энергетика"
+      },
+      "home_staff": {
+        "name": "Домашний персонал"
+      },
+      "publishing_houses_mass_media": {
+        "name": "Издательства и СМИ"
+      },
+      "information_technology": {
+        "name": "Информационные технологии"
+      },
+      "arts_entertainment": {
+        "name": "Искусство и развлечения"
+      },
+      "purchases": {
+        "name": "Закупки"
+      },
+      "marketing_advertising": {
+        "name": "Маркетинг и реклама"
+      },
+      "medicine_pharmaceuticals": {
+        "name": "Медицина и фармацевтика"
+      },
+      "early_career": {
+        "name": "Начало карьеры / без опыта работы"
+      },
+      "education_science": {
+        "name": "Образование и наука"
+      },
+      "handymen": {
+        "name": "Разнорабочие"
+      },
+      "logistics_transport": {
+        "name": "Логистика и транспорт"
+      },
+      "sales": {
+        "name": "Продажи"
+      },
+      "production": {
+        "name": "Производство"
+      },
+      "restaurants_catering": {
+        "name": "Рестораны и общепит"
+      },
+      "agricultural_industry": {
+        "name": "Сельское хозяйство"
+      },
+      "sports_beauty": {
+        "name": "Спорт и красота"
+      },
+      "insurance": {
+        "name": "Страхование"
+      },
+      "construction_repair": {
+        "name": "Строительство и ремонт"
+      },
+      "tourism_hotels": {
+        "name": "Туризм и гостиницы"
+      },
+      "estate": {
+        "name": "Недвижимость"
+      },
+      "accounting_finance": {
+        "name": "Бухгалтерия и финансы"
+      },
+      "banking_sector": {
+        "name": "Банковская сфера"
+      },
+      "management": {
+        "name": "Управление персоналом"
+      },
+      "jurisprudence": {
+        "name": "Юриспруденция"
+      },
+      "other": {
+        "name": "Другое"
       }
     }
   },

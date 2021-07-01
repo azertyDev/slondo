@@ -79,8 +79,8 @@ export const ApartmentsParams: FC<CommonParamsPropsType> = (props) => {
                          <Grid container item spacing={2} xs={12}>
                              <Grid item xs={4}>
                                  <DeployedSelect
-                                     values={values}
                                      name='estate_type'
+                                     values={values}
                                      handleSelect={handleSelect}
                                      options={filters.estate_type}
                                      errorMsg={getErrorMsg(errors.estate_type, touched.estate_type, t)}
@@ -331,7 +331,6 @@ export const ApartmentsParams: FC<CommonParamsPropsType> = (props) => {
                      </Grid>}
                     <div className='options-select-wrapper'>
                         <OptionsSelect
-                            row
                             t={t}
                             name='amenities'
                             values={values}
@@ -339,7 +338,6 @@ export const ApartmentsParams: FC<CommonParamsPropsType> = (props) => {
                             handleOptionCheckbox={handleOptionCheckbox}
                         />
                         <OptionsSelect
-                            row
                             t={t}
                             name='infrastructure'
                             values={values}

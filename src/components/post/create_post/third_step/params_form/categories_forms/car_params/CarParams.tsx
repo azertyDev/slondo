@@ -1,6 +1,7 @@
 import {FC, useEffect, useState} from 'react';
 import {useFormik} from 'formik';
 import {useDispatch} from 'react-redux';
+import {userAPI} from '@src/api/api';
 import {Grid, Typography} from '@material-ui/core';
 import {DropDownSelect} from '@src/components/elements/drop_down_select/DropDownSelect';
 import {OptionsSelect} from '@src/components/elements/options_select/OptionsSelect';
@@ -11,14 +12,13 @@ import {FormikField} from '@src/components/elements/formik_field/FormikField';
 import {CheckboxSelect} from '@src/components/elements/checkbox_select/CheckboxSelect';
 import {CommonParamsPropsType} from '../../ParamsFormContainer';
 import {optionFields} from '@src/common_data/fields_keys';
-import {userAPI} from '@src/api/api';
 import {setErrorMsgAction} from '@src/redux/slices/errorSlice';
 import {useHandlers} from '@src/hooks/useHandlers';
 import {paramsFormSchema} from '@root/validation_schemas/createPostSchemas';
 import {CustomFormikProvider} from '@src/components/elements/custom_formik_provider/CustomFormikProvider';
-import {PostTitle} from '@src/components/post/create_post/form_page/params_form/post_title/PostTitle';
 import {ParametersIcon} from '@src/components/elements/icons';
 import {CustomAccordion} from '@src/components/elements/accordion/CustomAccordion';
+import {PostTitle} from '@src/components/post/create_post/third_step/params_form/post_title/PostTitle';
 import {useStyles} from './useStyles';
 
 type CarParamsPropsType = {
@@ -36,8 +36,8 @@ export const CarParams: FC<CarParamsPropsType> = (props) => {
         handleFormOpen
     } = props;
 
-    const isForeignCars = subcategoryName === 'foreignCars';
-    const isMadeInUzb = subcategoryName === 'madeInUzb';
+    const isForeignCars = subcategoryName === 'made_uzbekistan';
+    const isMadeInUzb = subcategoryName === 'foreign_cars';
 
     const initVals: any = {
         title: '',
@@ -445,6 +445,7 @@ export const CarParams: FC<CarParamsPropsType> = (props) => {
                                                             xs={12}
                                                         >
                                                             <OptionsSelect
+                                                                column
                                                                 t={t}
                                                                 name='power_windows'
                                                                 values={values}
@@ -459,6 +460,7 @@ export const CarParams: FC<CarParamsPropsType> = (props) => {
                                                             xs={12}
                                                         >
                                                             <OptionsSelect
+                                                                column
                                                                 t={t}
                                                                 name='steering'
                                                                 values={values}
@@ -480,6 +482,7 @@ export const CarParams: FC<CarParamsPropsType> = (props) => {
                                                             xs={12}
                                                         >
                                                             <OptionsSelect
+                                                                column
                                                                 t={t}
                                                                 name='seat_heating'
                                                                 values={values}
@@ -494,6 +497,7 @@ export const CarParams: FC<CarParamsPropsType> = (props) => {
                                                             xs={12}
                                                         >
                                                             <OptionsSelect
+                                                                column
                                                                 t={t}
                                                                 name='adjustable_seats'
                                                                 values={values}
@@ -611,6 +615,7 @@ export const CarParams: FC<CarParamsPropsType> = (props) => {
                                                     xs={12}
                                                 >
                                                     <OptionsSelect
+                                                        column
                                                         t={t}
                                                         name='parking'
                                                         values={values}
@@ -626,6 +631,7 @@ export const CarParams: FC<CarParamsPropsType> = (props) => {
                                                     xs={12}
                                                 >
                                                     <OptionsSelect
+                                                        column
                                                         t={t}
                                                         name='anti_theft'
                                                         values={values}

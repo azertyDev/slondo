@@ -549,7 +549,7 @@ const categories_list: CategoryType[] = [
         subcategory: [
             {
                 id: 1,
-                name: 'vacancies',
+                name: 'vacancy',
                 ru_name: 'Вакансии',
                 type: [
                     {

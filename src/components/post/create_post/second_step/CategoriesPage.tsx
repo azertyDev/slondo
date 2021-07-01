@@ -25,7 +25,7 @@ export const CategoriesPage: FC = () => {
             name: ''
         }
     };
-    const {t} = useTranslation('post');
+    const {t} = useTranslation('categories');
 
     const shallow = {shallow: true};
     const {locale, query, push} = useRouter();
@@ -33,14 +33,14 @@ export const CategoriesPage: FC = () => {
 
     const [searchTxt, setSearchTxt] = useState('');
     const [category, setCategory] = useState(initCategory);
-    const [subCtgrs, setSubCtgrs] = useState<SubcategoryType[]>([]);
+    const [subctgrs, setSubctgrs] = useState<SubcategoryType[]>([]);
 
     const categories = categoriesByType(postTypeName);
 
     const handleCategory = (ctgr) => async () => {
         const url = `/create/type/${postTypeName}/${ctgr.name}`;
         await push(url, undefined, shallow);
-        !!subCtgrs.length && setSubCtgrs([]);
+        !!subctgrs.length && setSubctgrs([]);
         setSearchTxt('');
     };
 
@@ -54,8 +54,10 @@ export const CategoriesPage: FC = () => {
     };
 
     const setMatchedCtgrs = () => {
-        const matchedCtgrs = searchTxt.length > 2 ? categorySearchHelper(searchTxt, categories, t) : [];
-        setSubCtgrs(matchedCtgrs);
+        const matchedCtgrs = searchTxt.length > 2
+                             ? categorySearchHelper(searchTxt, categories, t)
+                             : [];
+        setSubctgrs(matchedCtgrs);
     };
 
     const handleSearch = ({target: {value}}) => {
@@ -70,11 +72,11 @@ export const CategoriesPage: FC = () => {
                     if (subcategoryName) {
                         subcategory.forEach(({name, type}) => {
                             if (name === subcategoryName) {
-                                type ? setSubCtgrs(type) : setSubCtgrs(subcategory);
+                                type ? setSubctgrs(type) : setSubctgrs(subcategory);
                             }
                         });
                     } else {
-                        setSubCtgrs(subcategory);
+                        setSubctgrs(subcategory);
                     }
                     setCategory({...category, id, name});
                 }
@@ -125,7 +127,7 @@ export const CategoriesPage: FC = () => {
                                 >
                                     {ctgr.smallIcon}
                                     <Typography variant="subtitle1">
-                                        {t(`categories:${ctgr.name}`)}
+                                        {t(`${ctgr.name}.name`)}
                                     </Typography>
                                 </ListItem>)}
                         </List>
@@ -137,44 +139,47 @@ export const CategoriesPage: FC = () => {
                                 spellCheck={false}
                                 value={searchTxt}
                                 onChange={handleSearch}
-                                placeholder={t(`searchCategory`)}
+                                placeholder={t(`post:searchCategory`)}
                                 startAdornment={<Search_icon/>}
                             />
                         </div>
-                        {!!subCtgrs.length
+                        {!!subctgrs.length
                          ? <List disablePadding>
-                             {subCtgrs[0].parents.length === 2 && subcategoryName && (
+                             {subctgrs[0].parents.length === 2 && subcategoryName && (
                                  <ListItem onClick={handleBackSubCtgr}>
                                      <CustomButton className="back-btn">
                                          <BackspaceIcon/>
                                          <Typography variant="subtitle1">
-                                             {t(`categories:${subcategoryName}`)}
+                                             {t(`${categoryName}.${subcategoryName}.name`)}
                                          </Typography>
                                      </CustomButton>
                                  </ListItem>
                              )}
-                             {subCtgrs.map((ctgr, i) =>
-                                 <ListItem key={i} onClick={handleSubCategory(ctgr)}>
-                                     <div>
-                                         <Typography variant="subtitle1">
-                                             {t(`categories:${ctgr.name}`)}
-                                         </Typography>
-                                         {!!searchTxt && (
-                                             <Typography
-                                                 className="parent-category"
-                                                 variant="subtitle2"
-                                             >
-                                                 {t(`categories:${ctgr.parents[0].name}`)}
-                                                 {ctgr.parents[1] && ` - ${t(`categories:${ctgr.parents[1].name}`)}`}
+                             {subctgrs.map((typeCtgr, i) => {
+                                 const transCtgrName = t(`${categoryName}${subcategoryName ? `.${subcategoryName}` : ''}.${typeCtgr.name}.name`);
+                                 return (
+                                     <ListItem key={i} onClick={handleSubCategory(typeCtgr)}>
+                                         <div>
+                                             <Typography variant="subtitle1">
+                                                 {transCtgrName}
                                              </Typography>
-                                         )}
-                                     </div>
-                                 </ListItem>
-                             )}
+                                             {!!searchTxt && (
+                                                 <Typography
+                                                     className="parent-category"
+                                                     variant="subtitle2"
+                                                 >
+                                                     {t(`${typeCtgr.parents[0].name}`)}
+                                                     {typeCtgr.parents[1] && ` - ${t(`${typeCtgr.parents[1].name}`)}`}
+                                                 </Typography>
+                                             )}
+                                         </div>
+                                     </ListItem>
+                                 );
+                             })}
                          </List>
                          : <div className="sub-category-bg">
                              <Typography variant="h2">
-                                 {t('selectCategory')}
+                                 {t('post:selectCategory')}
                              </Typography>
                          </div>}
                     </Grid>
