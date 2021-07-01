@@ -2,7 +2,8 @@ import React, {Dispatch, FC} from 'react';
 import {DragDropContext, resetServerContext, DropResult} from 'react-beautiful-dnd';
 import {TOTAL_FILES_SIZE_LIMIT} from '@src/constants';
 import {FileType} from "@root/interfaces/Post";
-import {CustomDroppable} from "./CustomDroppable";
+import {CustomDroppable} from './CustomDroppable';
+import {useStyles} from './useStyles';
 
 
 type PreviewPhotosPropsType = {
@@ -76,13 +77,15 @@ export const PreviewPhotos: FC<PreviewPhotosPropsType> = (props) => {
         });
     };
 
+    const classes = useStyles();
     return (
-        <div>
+        <div className={classes.root}>
             <input
                 type='file'
                 onChange={handleUploadFile}
                 multiple={true}
                 accept="image/png,image/jpeg"
+                // className={classes.fileUpload}
             />
             <DragDropContext enableDefaultSensors={true} onDragEnd={handleOnDragEnd}>
                 <CustomDroppable

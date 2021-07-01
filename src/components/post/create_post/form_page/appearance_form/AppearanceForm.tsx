@@ -103,7 +103,7 @@ export const AppearanceForm: FC<AppearanceFormPropsType> = (props) => {
                      ? <div className='preview'>
                          {!!color && (
                              <div className='color-preview'>
-                                 <Typography variant="subtitle1">
+                                 <Typography variant="subtitle1" gutterBottom>
                                      <strong>
                                          {t('color')}:
                                      </strong>
@@ -114,7 +114,7 @@ export const AppearanceForm: FC<AppearanceFormPropsType> = (props) => {
                                  />
                              </div>)}
                          <div className='photos-preview'>
-                             <Typography variant="subtitle1">
+                             <Typography variant="subtitle1" gutterBottom>
                                  <strong>
                                      {t('post:photos')}:
                                  </strong>
@@ -131,7 +131,7 @@ export const AppearanceForm: FC<AppearanceFormPropsType> = (props) => {
                      : <div>
                          {!!colors && (
                              <>
-                                 <Typography variant="subtitle1">
+                                 <Typography variant="subtitle1" gutterBottom>
                                      {!isJob && (
                                          <strong>
                                              {t('color')}
@@ -161,7 +161,7 @@ export const AppearanceForm: FC<AppearanceFormPropsType> = (props) => {
                              </>
                          )}
                          <div className='photos-wrapper'>
-                             <Typography variant="subtitle1">
+                             <Typography variant="subtitle1" gutterBottom>
                                  <strong>
                                      {t('post:photos')}
                                      {!isJob && (
@@ -170,8 +170,8 @@ export const AppearanceForm: FC<AppearanceFormPropsType> = (props) => {
                                  </strong>
                                  {errors.files && touched.files && (
                                      <span className='error-text'>
-                                             &nbsp;{t(`errors:${errors.files as string}`)}
-                                         </span>
+                                         &nbsp;{t(`errors:${errors.files as string}`)}
+                                     </span>
                                  )}
                              </Typography>
                              <PreviewPhotos
