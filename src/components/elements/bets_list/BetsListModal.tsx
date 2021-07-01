@@ -62,9 +62,8 @@ export const BetsListModal: FC<BetsListPropsType> = (props) => {
             maxWidth='lg'
         >
             <IconButton
-                onClick={handleModalClose}
-                className={classes.closeBtn}
                 size='small'
+                onClick={handleModalClose}
             >
                 <CloseIcon/>
             </IconButton>
@@ -148,7 +147,7 @@ export const BetsListModal: FC<BetsListPropsType> = (props) => {
                         </TableBody>
                     </Table>
                 </TableContainer>
-                <div className={classes.pagination}>
+                <div>
                     <CustomPagination
                         currentPage={page}
                         totalItems={betsCount}
