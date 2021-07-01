@@ -1,17 +1,16 @@
-import {useState, cloneElement} from 'react'
-import { AppBar, Box, Container, Grid, Paper, Slide, Tab, Tabs, Toolbar, Typography, useScrollTrigger } from '@material-ui/core'
-import Link from 'next/link'
+import {useState, cloneElement} from 'react';
+import {AppBar, Box, Container, Grid, Paper, Tab, Tabs, Toolbar, Typography, useScrollTrigger} from '@material-ui/core';
+import Link from 'next/link';
 import { useStyles } from './useStyles'
 import { Logo } from '../elements/icons';
 import { Localization } from '../header/top/localization/Localization';
 import { CustomTabPanel } from '../elements/custom_tab_panel/CustomTabPanel';
-import { useTranslation } from 'react-i18next';
+import {useTranslation} from 'react-i18next';
+import Image from 'next/image';
 
 function HideOnScroll(props) {
     const { children, window } = props;
-    // Note that you normally won't need to set the window ref as useScrollTrigger
-    // will default to window.
-    // This is only being set here because the demo is in an iframe.
+
     const trigger = useScrollTrigger({
         disableHysteresis: true,
         threshold: 0,
@@ -136,12 +135,18 @@ export const SafeShoppingRules = (props) => {
                         <Paper elevation={1} className='paper'>
                             <Grid container>
                                 <Grid item xs={6} container justify='center'>
-                                    <img src="/img/safety.png" alt="safety-img" />
+                                    <img
+                                        src="/img/safety.png"
+                                        alt="safety-img"
+                                        className='safety-img'
+                                    />
                                 </Grid>
                                 <Grid item xs={6} container alignItems='center' zeroMinWidth>
                                     <Box className='main-title'>
-                                        <Typography variant='h3' gutterBottom className='fw600'>Безопасная покупка</Typography>
-                                        <Typography variant='h5'>Приобретайте товар, а платите после его получения!</Typography>
+                                        <Typography variant='h3' gutterBottom className='fw600'>Безопасная
+                                            покупка</Typography>
+                                        <Typography variant='h5'>Приобретайте товар, а платите после его
+                                            получения!</Typography>
                                     </Box>
                                 </Grid>
                             </Grid>

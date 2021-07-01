@@ -49,12 +49,12 @@ export const BetsList: FC<BetsListPropsType> = (props) => {
                     <TableBody>
                         {bets.map((bet, index) => (
                             <TableRow key={index}>
-                                <TableCell component="td" align="left" padding='none'>
-                                    <Typography variant="subtitle1" noWrap>
+                                <TableCell component="td" align="left">
+                                    <Typography variant="subtitle1" noWrap gutterBottom className='participant-name'>
                                         {bet.user.name}
                                         {bet.number_of_bets && <span>({bet.number_of_bets})</span>}
                                     </Typography>
-                                    <Box display='flex'>
+                                    <Box display='flex' className='dateAndTime'>
                                         <Box width={0.5}>
                                             <Typography
                                                 variant="subtitle2"
@@ -73,18 +73,19 @@ export const BetsList: FC<BetsListPropsType> = (props) => {
                                         </Box>
                                     </Box>
                                 </TableCell>
-                                <TableCell align="right" padding='none'>
+                                <TableCell align="right" className='bet'>
                                     <Typography
                                         noWrap
                                         variant="subtitle1"
-                                        className="final-bet"
+                                        className="per-bet"
+                                        gutterBottom
                                     >
                                         {numberPrettier(bet.bet)}
                                     </Typography>
                                     <Typography
                                         noWrap
-                                        variant="subtitle1"
-                                        className="per-bet"
+                                        variant="subtitle2"
+                                        className="outbid"
                                     >
                                         {(index + 1) === betsCount
                                          ? <span className='started-price'>Стартовая цена</span>

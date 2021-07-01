@@ -2,11 +2,12 @@ import { makeStyles } from '@material-ui/core/styles'
 
 export const useStyles = makeStyles((theme) => ({
     root: {
-        // '& .toolbar': {
-        //     backgroundColor: theme.palette.background.paper
-        // },
+        '& img.safety-img': {
+            width: '280px',
+            height: '280px'
+        },
         '& header.MuiAppBar-root': {
-            background: '#fafafa',
+            background: '#fafafa'
         },
         '& div.main-title': {
             '& .MuiTypography-h5': {
