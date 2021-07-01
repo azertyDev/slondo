@@ -51,7 +51,6 @@ export const useStyles = makeStyles((theme) => ({
             borderStyle: 'initial',
             height: '38px',
             '& > svg': {
-                marginLeft: '8px',
                 [theme.breakpoints.down(1200)]: {
                     display: 'none'
                 }
@@ -68,6 +67,9 @@ export const useStyles = makeStyles((theme) => ({
         },
         '& a.create-post-link': {
             textDecoration: 'none',
+            '& svg': {
+                marginLeft: '8px',
+            },
             '& button': {
                 width: '100%',
                 '& h6.MuiTypography-subtitle2': {
@@ -79,6 +81,10 @@ export const useStyles = makeStyles((theme) => ({
         },
         '& button.bottom-category-button': {
             width: '100%',
+            '& svg': {
+                width: 20,
+                marginRight: '8px',
+            },
             '& > h6.MuiTypography-subtitle2': {
                 lineHeight: '15px',
                 letterSpacing: '0.5px',
