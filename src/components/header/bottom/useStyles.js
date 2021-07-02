@@ -134,6 +134,14 @@ export const useStyles = makeStyles((theme) => ({
                     textDecoration: 'none',
                     alignItems: 'center',
                     justifyContent: 'center',
+                    padding: '6px 13px',
+                    borderRadius: '100px',
+                    background: '#F9F9F9',
+                    [theme.breakpoints.up('md')]: {
+                        padding: 0,
+                        borderRadius: 0,
+                        background: 'none'
+                    },
                     '&.selected': {
                         '& > h6.MuiTypography-subtitle1': {
                             backgroundImage:

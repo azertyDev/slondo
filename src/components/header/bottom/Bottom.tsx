@@ -192,7 +192,6 @@ const Bottom = (props) => {
                     </Grid>
                     <Grid item md={2}>
                         <Link href="/help">
-
                             <a className={pathname === '/help' ? 'selected' : ''}>
                                 <QuestionIcon/>
                                 <Typography variant="subtitle1">
