@@ -18,7 +18,7 @@ import {HomeSidebar} from '@src/components/home/main/home_sidebar/HomeSideBar';
 import {useStyles} from './useStyles';
 
 
-export const Main: FC = () => {
+export const Main: FC<{seoTxt: string}> = ({seoTxt}) => {
     const {t} = useTranslation('main');
 
     const trigger = useScrollTrigger();
@@ -31,7 +31,7 @@ export const Main: FC = () => {
                     <MainSlider/>
                 </div>
                 <div className="categories-slider-wrapper">
-                    <CategoriesSlider />
+                    <CategoriesSlider/>
                 </div>
                 <Container maxWidth="xl" className="content-wrapper">
                     <Grid container>
@@ -42,7 +42,7 @@ export const Main: FC = () => {
                                 </section>
                             </Hidden>
                             <section>
-                                <PostsTabsContainer />
+                                <PostsTabsContainer/>
                             </section>
                         </Grid>
                         <Hidden mdDown>
@@ -51,7 +51,7 @@ export const Main: FC = () => {
                             </Grid>
                         </Hidden>
                     </Grid>
-                    <SEOTextComponent/>
+                    <SEOTextComponent text={seoTxt}/>
                 </Container>
                 <Hidden lgUp>
                     <div className={classes.createAdBlock}>

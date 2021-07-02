@@ -1,15 +1,15 @@
 import {CategoryType, SubcategoryType, TypeCategory} from '@root/interfaces/Categories';
 
-const defaultSEOContent = {
+export const defaultSEOContent = {
     ru: {
-        title: 'Slondo',
-        description: 'В своём стремлении',
-        text: 'В своём стремлении улучшить пользовательский опыт мы упускаем, что диаграммы связей неоднозначны предоставлены сами себе.'
+        title: 'Slondo.uz – сайт частных объявлений и аукционов Узбекистана ',
+        description: 'На Slondo вы можете быстро купить или продать любой товар или услугу. Тысячи актуальных объявлений по всем категориям. Удобный интерфейс и умный поиск помогут найти нужное за минуту.',
+        text: 'Купить смартфон, снять квартиру или офис, продать автомобиль, найти мастера для ремонта и многое другое вы можете сделать, зарегистрировавшись и разместив объявление на Slondo. Покупайте безопасно – воспользуйтесь услугой безопасная покупка и оплачивайте товары через наш сайт, без риска передачи денег незнакомому человеку. Покупайте товары только у продавцов с высоким рейтингом, читайте отзывы всех предыдущих покупателей. Допустим, вы хотите купить бу смартфон, найдите подходящее объявление в вашем городе и прежде, чем связываться с продавцом посмотрите его рейтинг и отзывы. Если покупатели имели на него жалобы и ставили низкие оценки – возможно стоит поискать другое объявление. Покупайте и продавайте через онлайн аукцион slondo.uz. Хотите продать свой автомобиль, но не знаете точную цену? Выставьте его на аукцион, поставьте минимальную для вас цену и пусть люди ставят свои предложения. В конечном счете продажа будет по лучшей цене и для вас и для покупателя. Выберите «продвинутый аукцион», укажите «резервную цену» и, если ставки не достигнут указанной вами суммы, аукцион будет завершен без продажи товара. Вы максимально обезопасены от невыгодной продажи. Читайте подробнее обо всех возможностях аукциона.'
     },
     uz: {
-        title: 'Slondo',
-        description: 'В своём стремлении',
-        text: 'В своём стремлении улучшить пользовательский опыт мы упускаем, что диаграммы связей неоднозначны предоставлены сами себе.'
+        title: 'Slondo.uz - xususiy e’lonlar va auktsionlar saytidir',
+        description: "Slondo da Siz o’zingizga kerak bo'lgan buyum yoki xizmatni sotib olish yoki sotishingiz mumkin. Qulay interfeys va aqlli qidiruv tizimi Sizga kerakli  mahsulotni bir zumda topishga yordam beradi",
+        text: 'Smartfon sotib olish, kvartira yoki ofisni ijaraga olish, avtomobilni sotish, ta’mirlash uchun usta tanlash va boshqa ko’plab ishlarni bajarishingiz mumkin. Xavfsiz xarid xizmatidan foydalanib,Sizga notanish bo’lgan odamning qo’liga pul bermasdan, sayt orqali to’lovni amalga oshiring. Yuqori reytingga ega bo’lgan Sotuvchilardan mahsulot xarid qiling, oldingi barcha xaridorlar yozgan sharhlarni o’qib chiqing.Masalan, Siz smartfon sotib olmoqchisiz, shaxringizdagi ma’qul bo’lgan e’lonni toping va sotuvchi bilan bog’lanmay turib, uning reytingi va sharhlar bilan tanishing. Agar xaridorlar tomonidan bu sotuvchi to’g’risida shikoyat va past baho qo’ygan bo’lsa, unda boshqa e’lon qidirgan ma’qul. Slondo.uz onlayn Auktsioni orqali sotish va sotib olishni amalga oshiring. Avtomobilingizni sotmoqchimisiz,lekin aniq narxini bilmayapsizmi? Uni Sizga eng maqbul bo’lgan narx bilan Auktsionga qo’ying. Xaridorlar o’z narxlarini berib ko’rishsin. Savdo yakuni Siz uchun ham, Xaridor uchun ham foydali tugaydi. “Mukammal auktsion”ni tanlang va “zaxira narxi”ni ko’rsating. Agar narxlar “Zaxira narxi”ga yetmasa,mashina sotilmaydi va siz o’z avtomobilingizni zarariga sotilishidan saqlab qolasiz. Barcha Auktsionlar imkoniyati bilan tanishib chiqing.'
     }
 };
 
