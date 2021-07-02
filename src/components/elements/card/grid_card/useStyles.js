@@ -39,24 +39,24 @@ export const useStyles = makeStyles((theme) => ({
                 '& svg': {
                     transform: 'scale(1.1)',
                     transition: 'transform .3s cubic-bezier(.5,0,.5,3)',
-                    '& defs': {
-                        '&.def1 stop': {
-                            '&:first-child': {
-                                stopColor: '#675EAA'
-                            },
-                            '&:last-child': {
-                                stopColor: '#AD66D5'
-                            }
-                        },
-                        '&:last-child stop': {
-                            '&:first-child': {
-                                stopColor: '#fff'
-                            },
-                            '&:last-child': {
-                                stopColor: '#fff'
-                            }
-                        }
-                    }
+                    // '& defs': {
+                    //     '&.def1 stop': {
+                    //         '&:first-child': {
+                    //             stopColor: '#675EAA'
+                    //         },
+                    //         '&:last-child': {
+                    //             stopColor: '#AD66D5'
+                    //         }
+                    //     },
+                    //     '&:last-child stop': {
+                    //         '&:first-child': {
+                    //             stopColor: '#fff'
+                    //         },
+                    //         '&:last-child': {
+                    //             stopColor: '#fff'
+                    //         }
+                    //     }
+                    // }
                 }
             }
         },

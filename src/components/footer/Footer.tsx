@@ -1,10 +1,10 @@
 import {FC} from 'react';
 import {Container, Grid, Hidden, Typography} from '@material-ui/core';
 import {SocialsBlock} from '@src/components/elements/socials_block/SocialsBlock';
-import {useTranslation} from 'next-i18next';
 import Link from 'next/link';
 import {Logo} from '@src/components/elements/icons/logo/Logo';
 import {useStyles} from './useStyles';
+import {useTranslation} from 'next-i18next';
 
 
 export const Footer: FC = () => {
@@ -28,13 +28,10 @@ export const Footer: FC = () => {
                                 <Grid item xs={12} md={3} container justify="center">
                                     <ul>
                                         <li>
-                                            <Link href="#">
+                                            <Link href="/legal/userAgreements">
                                                 <a>
-                                                    <Typography
-                                                        variant="subtitle1"
-                                                        color="initial"
-                                                    >
-                                                        {t('footer:aboutSlondo')}
+                                                    <Typography variant="subtitle1" color="initial">
+                                                        {t('licenseAgreement')}
                                                     </Typography>
                                                 </a>
                                             </Link>
@@ -42,35 +39,8 @@ export const Footer: FC = () => {
                                         <li>
                                             <Link href="#">
                                                 <a>
-                                                    <Typography
-                                                        variant="subtitle1"
-                                                        color="initial"
-                                                    >
-                                                        {t('footer:help')}
-                                                    </Typography>
-                                                </a>
-                                            </Link>
-                                        </li>
-                                        <li>
-                                            <Link href="/security">
-                                                <a>
-                                                    <Typography
-                                                        variant="subtitle1"
-                                                        color="initial"
-                                                    >
-                                                        {t('footer:security')}
-                                                    </Typography>
-                                                </a>
-                                            </Link>
-                                        </li>
-                                        <li>
-                                            <Link href="#">
-                                                <a>
-                                                    <Typography
-                                                        variant="subtitle1"
-                                                        color="initial"
-                                                    >
-                                                        {t('footer:yourReview')}
+                                                    <Typography variant="subtitle1" color="initial">
+                                                        {t('advertise')}
                                                     </Typography>
                                                 </a>
                                             </Link>
@@ -83,47 +53,8 @@ export const Footer: FC = () => {
                                     <li>
                                         <Link href="#">
                                             <a>
-                                                <Typography
-                                                    variant="subtitle1"
-                                                    color="initial"
-                                                >
-                                                    {t('footer:feedback')}
-                                                </Typography>
-                                            </a>
-                                        </Link>
-                                    </li>
-                                    <li>
-                                        <Link href="#">
-                                            <a>
-                                                <Typography
-                                                    variant="subtitle1"
-                                                    color="initial"
-                                                >
-                                                    {t('footer:howToAddPost')}
-                                                </Typography>
-                                            </a>
-                                        </Link>
-                                    </li>
-                                    <li>
-                                        <Link href="#">
-                                            <a>
-                                                <Typography
-                                                    variant="subtitle1"
-                                                    color="initial"
-                                                >
-                                                    {t('footer:safe_shopping')}
-                                                </Typography>
-                                            </a>
-                                        </Link>
-                                    </li>
-                                    <li>
-                                        <Link href="/sitemap">
-                                            <a>
-                                                <Typography
-                                                    variant="subtitle1"
-                                                    color="initial"
-                                                >
-                                                    {t('footer:sitemap')}
+                                                <Typography variant="subtitle1" color="initial">
+                                                    {t('feedback')}
                                                 </Typography>
                                             </a>
                                         </Link>
@@ -136,51 +67,13 @@ export const Footer: FC = () => {
                                         <li>
                                             <Link href="#">
                                                 <a>
-                                                    <Typography
-                                                        variant="subtitle1"
-                                                        color="initial"
-                                                    >
-                                                        {t('footer:promotions')}
+                                                    <Typography variant="subtitle1" color="initial">
+                                                        {t('help')}
                                                     </Typography>
                                                 </a>
                                             </Link>
                                         </li>
-                                        <li>
-                                            <Link href="#">
-                                                <a>
-                                                    <Typography
-                                                        variant="subtitle1"
-                                                        color="initial"
-                                                    >
-                                                        {t('footer:bonuses')}
-                                                    </Typography>
-                                                </a>
-                                            </Link>
-                                        </li>
-                                        <li>
-                                            <Link href="#">
-                                                <a>
-                                                    <Typography
-                                                        variant="subtitle1"
-                                                        color="initial"
-                                                    >
-                                                        {t('footer:auctionRules')}
-                                                    </Typography>
-                                                </a>
-                                            </Link>
-                                        </li>
-                                        <li>
-                                            <Link href="/legal/userAgreements">
-                                                <a>
-                                                    <Typography
-                                                        variant="subtitle1"
-                                                        color="initial"
-                                                    >
-                                                        {t('footer:licenseAgreement')}
-                                                    </Typography>
-                                                </a>
-                                            </Link>
-                                        </li>
+
                                     </ul>
                                 </Grid>
                             </Hidden>
@@ -198,7 +91,7 @@ export const Footer: FC = () => {
                             </Grid>
                             <Grid item container justify="center" alignItems='center'>
                                 <Typography variant="subtitle1" color="initial">
-                                    {t('footer:termsOfUse')}
+                                    {t('termsOfUse')}
                                 </Typography>
                             </Grid>
                             <Grid item container justify="center" alignItems='center'>

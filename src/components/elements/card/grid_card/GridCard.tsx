@@ -3,7 +3,7 @@ import Link from 'next/link';
 import {useTranslation} from 'react-i18next';
 import {Card, CardActionArea, CardContent, CardMedia, IconButton, Tooltip, Typography} from '@material-ui/core';
 import Skeleton from '@material-ui/lab/Skeleton';
-import {DeliveryIcon, SafeIcon, SwapIcon} from '@src/components/elements/icons';
+import {DeliveryIcon, FavoriteIcon, SafeIcon, SwapIcon} from '@src/components/elements/icons';
 import {CardDataType} from '@root/interfaces/CardData';
 import {numberPrettier, transformCyrillic} from '@src/helpers';
 import {userAPI} from '@src/api/api';
@@ -11,9 +11,9 @@ import {useDispatch, useSelector} from 'react-redux';
 import {RootState} from '@src/redux/rootReducer';
 import {setErrorMsgAction} from '@src/redux/slices/errorSlice';
 import {months} from '@src/common_data/common';
-import FavoriteIcon from '@material-ui/icons/Favorite';
 import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
 import {useStyles} from './useStyles';
+import {FavoritedIcon} from '@src/components/elements/icons/FavoritedIcon';
 
 type CardItemProps = {
     isFetch: boolean
@@ -74,7 +74,7 @@ export const GridCard: FC<CardItemProps> = (props) => {
         setLiked(favorite);
     }, [favorite]);
 
-    const classes = useStyles({ads_type, isFavorite});
+    const classes = useStyles({ads_type, isFavorite, liked});
     return (
         <div className={classes.root}>
             {isAuth && !creator && (
@@ -82,8 +82,8 @@ export const GridCard: FC<CardItemProps> = (props) => {
                     className="favorite-btn" onClick={handleFavorite}
                 >
                     {liked
-                     ? <FavoriteIcon/>
-                     : <FavoriteBorderIcon/>
+                     ? <FavoritedIcon/>
+                     : <FavoriteIcon/>
                     }
                 </IconButton>
             )}

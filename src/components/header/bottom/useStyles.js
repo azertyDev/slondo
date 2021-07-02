@@ -25,7 +25,11 @@ export const useStyles = makeStyles((theme) => ({
                 '& a': {
                     width: '100%',
                     display: 'flex',
-                    alignItems: 'center'
+                    alignItems: 'center',
+                    '& svg': {
+                        width: '100%',
+                        height: '90%',
+                    }
                 }
             }
         },
@@ -60,6 +64,9 @@ export const useStyles = makeStyles((theme) => ({
             cursor: 'pointer'
         },
         '& button.bottom-sign-button': {
+            '& svg': {
+                marginLeft: 8
+            },
             color: '#000',
             backgroundColor: '#F2F2F2',
             boxShadow: '0px 1px 1px rgba(0, 0, 0, 0.15)',
@@ -94,7 +101,7 @@ export const useStyles = makeStyles((theme) => ({
         },
         // Adaptive
         '& div.bottom-logo > a': {
-            '& img': {
+            '& svg': {
                 [theme.breakpoints.down('lg')]: {
                     width: '125px',
                     height: '42px'
@@ -198,7 +205,6 @@ export const useStyles = makeStyles((theme) => ({
             width: '290px',
             padding: '10px',
             backgroundColor: theme.palette.primary.white
-            // left: "1250px !important"
         },
         '& .menu-item': {
             padding: '5px',
