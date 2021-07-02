@@ -8,7 +8,7 @@ import {useDispatch, useSelector} from 'react-redux';
 import {RootState} from '@src/redux/rootReducer';
 import {cookieOpts, cookies, getErrorMsg, phonePrepare} from '@src/helpers';
 import {useHandlers} from '@src/hooks/useHandlers';
-import {AuthModal} from '@src/components/header/auth/AuthModal';
+import {AuthModal} from './AuthModal';
 import {FormikField} from '@src/components/elements/formik_field/FormikField';
 import {authSchema, codeSchema, passwordConfirmSchema, phoneSchema} from '@root/validation_schemas/authRegSchema';
 
