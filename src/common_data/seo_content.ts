@@ -12497,7 +12497,6 @@ export const getSEOContent = (category: CategoryType, subCtgr: SubcategoryType, 
             }
         }
     };
-    console.log(category?.name, subCtgr?.name, typeCtgr?.name);
 
     if (typeCtgr) {
         return seoContent[category.name][subCtgr.name][locale][typeCtgr.name];

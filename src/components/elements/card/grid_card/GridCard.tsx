@@ -41,7 +41,7 @@ export const GridCard: FC<CardItemProps> = (props) => {
 
     const isFavorite = true;
 
-    const {t} = useTranslation(['common', 'locations']);
+    const {t} = useTranslation('common');
     const translatedTitle = transformCyrillic(title);
 
     const {isAuth} = useSelector((store: RootState) => store.user);

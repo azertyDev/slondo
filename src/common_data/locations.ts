@@ -1,14 +1,27 @@
 export const transformLocations = {
+    tashkent_city: {
+        name: 'tashkent',
+        almazar_district: 'almazarskiy-rayon',
+        bektemir_district: 'bektemirskiy-rayon',
+        mirabad_district: 'mirabadskiy-rayon',
+        mirzo_ulugbek_district: 'mirzo-ulugbekiy-rayon',
+        sergeli_district: 'sergelinskiy-rayon',
+        uchtepinsky_district: 'uchtepinskiy-rayon',
+        chilanzar_district: 'chilanzarskiy-rayon',
+        shaikhantakhur_district: 'shaikhantakhurskiy-rayon',
+        yunusabad_district: 'yunusabadskiy-rayon',
+        yakkasaraysky_district: 'yakkasarayskiy-rayon',
+        yashnobodsky_district: 'yashnobodskiy-rayon'
+    },
     tashkent_region: {
         name: 'tashkentskaya-oblast',
-        tashkent_city: 'tashkent',
         city_angren: 'angren',
         bekabad_district: 'bekabadskiy-rayon',
         city_bekabad: 'bekabad',
         bukinskiy_district: 'bukinskiy-rayon',
         bostanlyk_district: 'bostanlikskiy-rayon',
         zangiata_district: 'zangiatiyskiy-rayon',
-        kibrai_district:  'kibrayskiy-rayon',
+        kibrai_district: 'kibrayskiy-rayon',
         kuyichirchik_district: 'kuyichirchikskiy-rayon',
         akkurgansky_district: 'akkurganskiy-rayon',
         almalyk_city: 'almalik',
@@ -155,7 +168,7 @@ export const transformLocations = {
         uchkurgansky_district: 'uchkurganskiy-rayon',
         chartaksky_district: 'chartakskiy-rayon',
         chust_district: 'chustskiy-rayon',
-        yangikurgan_district: ' yangikurganskiy-rayon',
+        yangikurgan_district: ' yangikurganskiy-rayon'
     },
     surkhandarya_region: {
         name: 'surkhandaryinskaya-oblast',
@@ -187,7 +200,7 @@ export const transformLocations = {
         syrdarya_district: 'sirdaryinskiy-rayon',
         khavast_district: 'khavastskiy-rayon',
         city_shirin: 'shirin',
-        yangier_city: 'yangier',
+        yangier_city: 'yangier'
     },
     ferghana_region: {
         name: 'ferganskaya-oblast',
@@ -225,6 +238,6 @@ export const transformLocations = {
         yangiaryk_district: 'yangiarykskiy-rayon',
         yangibazar_district: 'yangibazarskiy-rayon',
         khiva_city: 'khiva',
-        dustlik_city: 'dustlik',
+        dustlik_city: 'dustlik'
     }
 };
