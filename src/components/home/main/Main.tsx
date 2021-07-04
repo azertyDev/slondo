@@ -22,7 +22,7 @@ export const Main: FC<{seoTxt: string}> = ({seoTxt}) => {
     const {t} = useTranslation('main');
 
     const trigger = useScrollTrigger();
-    console.log(t('footer:help'));
+
     const classes = useStyles();
     return (
         <main>
