@@ -27,7 +27,6 @@
     "react-input-mask": "^2.0.4",
     "react-redux": "^7.2.4",
     "react-slick": "^0.28.1",
-    "react-ssr-prepass": "npm:preact-ssr-prepass",
     "socket.io-client": "^4.0.2",
     "universal-cookie": "^4.0.4",
     "yup": "^0.29.3"
