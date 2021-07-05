@@ -1,5 +1,5 @@
 export const transformLocations = {
-    tashkent_city: {
+    city_tashkent: {
         name: 'tashkent',
         almazar_district: 'almazarskiy-rayon',
         bektemir_district: 'bektemirskiy-rayon',

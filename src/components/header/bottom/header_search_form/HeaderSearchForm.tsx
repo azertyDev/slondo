@@ -1,13 +1,10 @@
 import {FC, useEffect} from 'react';
 import {useFormik} from 'formik';
 import {
-    Box,
-    FormControl,
-    Hidden, IconButton,
-    InputAdornment,
+    Paper,
+    Hidden,
     InputBase,
-    OutlinedInput, Paper,
-    TextField,
+    IconButton,
     Typography
 } from '@material-ui/core';
 import {Search_icon} from '@src/components/elements/icons';
@@ -20,7 +17,6 @@ import {transformLocations} from '@src/common_data/locations';
 import {useDispatch} from 'react-redux';
 import {setSearchTxtAction} from '@root/src/redux/slices/searchSlice';
 import {useStyles} from './useStyles';
-
 
 export const HeaderSearchForm: FC = () => {
     const {push} = useRouter();
@@ -37,8 +33,8 @@ export const HeaderSearchForm: FC = () => {
         if (userLocation) {
             const {region, city} = userLocation;
             location = city
-                       ? transformLocations[region.name][city.name]
-                       : transformLocations[region.name].name;
+                ? transformLocations[region.name][city.name]
+                : transformLocations[region.name].name;
         }
 
         const url = `/${location}${searchTxt !== '' ? `/q-${searchTxt}` : ''}`;
@@ -76,15 +72,15 @@ export const HeaderSearchForm: FC = () => {
                         aria-label="search"
                         disabled
                     >
-                        <Search_icon />
+                        <Search_icon/>
                     </IconButton>
                     <InputBase
-                        inputProps={{'aria-label': 'search category'}}
                         id="input-base"
-                        value={values.searchTxt}
                         onChange={handleChange}
-                        placeholder={t('searchText')}
+                        value={values.searchTxt}
                         className={classes.input}
+                        placeholder={t('searchText')}
+                        inputProps={{'aria-label': 'search category'}}
                     />
                     <Hidden mdDown>
                         <CustomButton type='submit' className={classes.searchButton}>
