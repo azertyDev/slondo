@@ -166,8 +166,7 @@ const Bottom = (props) => {
                     alignItems="center"
                     justify="space-between"
                     className='multi-actions'
-                    md={7}
-                    sm={6}
+                    sm={7}
                     xs={12}
                 >
                     <Grid item md={2}>

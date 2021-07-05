@@ -136,7 +136,10 @@ export const useStyles = makeStyles((theme) => ({
                     justifyContent: 'center',
                     padding: '6px 13px',
                     borderRadius: '100px',
-                    background: '#F9F9F9',
+                    background: '#F5F5F5',
+                    [theme.breakpoints.down('xs')]: {
+                        justifyContent: 'space-between'
+                    },
                     [theme.breakpoints.up('md')]: {
                         padding: 0,
                         borderRadius: 0,
