@@ -1,4 +1,11 @@
 {
+  "send_again": "Запросить пароль еще раз",
+  "enter_sms": "Введите полученный код",
+  "enter_phone": "Введите номер телефона",
+  "enter_name": "Введите имя",
+  "enter_password": "Пароль",
+  "enter_new_password": "Введите новый пароль",
+  "repeat_new_password": "Введите пароль еще раз",
   "signIn": "Войти",
   "signOut": "Выйти",
   "signUp": "Зарегистрироваться",

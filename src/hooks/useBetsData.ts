@@ -7,7 +7,6 @@ type BetsStatesProps = {
     auction_id: number,
     page: number,
     itemsPerPage: number,
-    archive?: number
 };
 
 export const useBetsData = (props: BetsStatesProps) => {
@@ -15,7 +14,6 @@ export const useBetsData = (props: BetsStatesProps) => {
         auction_id,
         page,
         itemsPerPage,
-        archive = 0
     } = props;
 
     const dispatch = useDispatch();
@@ -28,8 +26,7 @@ export const useBetsData = (props: BetsStatesProps) => {
             const params = {
                 auction_id,
                 page,
-                itemsPerPage,
-                archive
+                itemsPerPage
             };
 
             setIsBetsFetch(true);

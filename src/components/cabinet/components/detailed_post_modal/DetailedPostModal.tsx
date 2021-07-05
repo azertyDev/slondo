@@ -55,7 +55,7 @@ export const DetailedPostModal: FC<DetailedPostViewPropsType> = (props) => {
     const auctionId = post.auction?.id;
     const isPublic = post.status === 'public';
     const isAuction = post.ads_type === 'auc' || post.ads_type === 'exauc';
-    const archive = post.status === 'archive' || post.status === 'history' ? 1 : 0;
+    const archive = post.status === 'archive' || post.status === 'history';
 
     const offer = post.auction?.offer;
     const offering = offer?.user;
@@ -81,7 +81,6 @@ export const DetailedPostModal: FC<DetailedPostViewPropsType> = (props) => {
         {
             page: 1,
             itemsPerPage: 2,
-            archive: archive,
             auction_id: auctionId
         }
     );
@@ -284,7 +283,6 @@ export const DetailedPostModal: FC<DetailedPostViewPropsType> = (props) => {
                                      : <BetsList
                                          bets={bets}
                                          showBetsCount={2}
-                                         archive={archive}
                                          betsCount={betsCount}
                                          auctionId={auctionId}
                                          handleRefresh={setFetchedBetsData}

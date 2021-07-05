@@ -187,7 +187,7 @@ export const AuthContainer: FC = () => {
                         t={t}
                         type="tel"
                         name="phone"
-                        labelText='enter_phone'
+                        labelText={t('enter_phone')}
                         onChange={handleNumericInput}
                         errorMsg={getErrorMsg(errors.phone, touched.phone, t)}
                     />
@@ -198,8 +198,8 @@ export const AuthContainer: FC = () => {
                         <FormikField
                             t={t}
                             name="code"
-                            labelText='enter_sms'
-                            placeholder={t('filters:enter_sms')}
+                            labelText={t('enter_sms')}
+                            placeholder={t('enter_sms')}
                             onChange={handleInput}
                             errorMsg={getErrorMsg(errors.code, touched.code, t)}
                         />
@@ -207,7 +207,7 @@ export const AuthContainer: FC = () => {
                             variant="subtitle2"
                             className="resendTxt"
                         >
-                            {t(`auth_reg:resendSms`, {timer: timer})}
+                            {t(`resendSms`, {timer: timer})}
                         </Typography>
                     </div>
                 </div>;
@@ -218,8 +218,8 @@ export const AuthContainer: FC = () => {
                             t={t}
                             type="password"
                             name="password"
-                            labelText='enter_new_password'
-                            placeholder={t('filters:enter_new_password')}
+                            labelText={t('enter_new_password')}
+                            placeholder={t('enter_new_password')}
                             onChange={handleInput}
                             errorMsg={getErrorMsg(errors.password, touched.password, t)}
                         />
@@ -227,8 +227,8 @@ export const AuthContainer: FC = () => {
                             t={t}
                             type="password"
                             name="password_confirm"
-                            labelText='repeat_new_password'
-                            placeholder={t('filters:repeat_new_password')}
+                            labelText={t('repeat_new_password')}
+                            placeholder={t('repeat_new_password')}
                             onChange={handleInput}
                             errorMsg={getErrorMsg(errors.password_confirm, touched.password_confirm, t)}
                         />

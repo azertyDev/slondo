@@ -278,7 +278,7 @@
       }
     }
   },
-  "job_type": {
+  "job": {
     "name": "Ish",
     "vacancy": {
       "name": "Vakansiya – Bo’sh ish o’rinlari",
@@ -465,1467 +465,1467 @@
           "name": "Boshqalar"
         }
       }
+    }
+  },
+  "service": {
+    "name": "Xizmatlar",
+    "repair_construction": {
+      "name": "Qurilish va ta’mirlash",
+      "landscaping_garbage_collection": {
+        "name": "Obodonlashtirish, chiqitlarni tashish"
+      },
+      "high_rise_works": {
+        "name": "Balandlikdagi ishlar"
+      },
+      "design_architecture": {
+        "name": "Dizayn va me’morchilik"
+      },
+      "dismantling_structures": {
+        "name": "Inshoot va binolarni buzish"
+      },
+      "comprehensive_repairs": {
+        "name": "Umumiy ta’mirlash"
+      },
+      "roofing_works": {
+        "name": "Tom yopish ishlari"
+      },
+      "painting_works": {
+        "name": "Boyoqchilik ishlari"
+      },
+      "windows_doors": {
+        "name": "Eshik va oynalar"
+      },
+      "finishing_repair": {
+        "name": "Suvash va ta’mirlash"
+      },
+      "stoves_fireplaces": {
+        "name": "Kamin va pechlar"
+      },
+      "plumbing": {
+        "name": "Santexnika"
+      },
+      "welding_work": {
+        "name": "Payvandlash ishlari"
+      },
+      "construction_works": {
+        "name": "Qurulish ishlari"
+      },
+      "laying_repair_tiles": {
+        "name": "Plitkalarni yotqizish va ta'mirlash"
+      },
+      "handyman_services": {
+        "name": "Oddiy ishchilar xizmati"
+      },
+      "facade_works": {
+        "name": "Fasad ishlari"
+      },
+      "plaster_works": {
+        "name": "Suvoq ishlari"
+      },
+      "electrician": {
+        "name": "Elektrika"
+      },
+      "other_services": {
+        "name": "Boshqa xizmatlar"
+      }
     },
-    "service": {
-      "name": "Xizmatlar",
-      "repair_construction": {
-        "name": "Qurilish va ta’mirlash",
-        "landscaping_garbage_collection": {
-          "name": "Obodonlashtirish, chiqitlarni tashish"
-        },
-        "high_rise_works": {
-          "name": "Balandlikdagi ishlar"
-        },
-        "design_architecture": {
-          "name": "Dizayn va me’morchilik"
-        },
-        "dismantling_structures": {
-          "name": "Inshoot va binolarni buzish"
-        },
-        "comprehensive_repairs": {
-          "name": "Umumiy ta’mirlash"
-        },
-        "roofing_works": {
-          "name": "Tom yopish ishlari"
-        },
-        "painting_works": {
-          "name": "Boyoqchilik ishlari"
-        },
-        "windows_doors": {
-          "name": "Eshik va oynalar"
-        },
-        "finishing_repair": {
-          "name": "Suvash va ta’mirlash"
-        },
-        "stoves_fireplaces": {
-          "name": "Kamin va pechlar"
-        },
-        "plumbing": {
-          "name": "Santexnika"
-        },
-        "welding_work": {
-          "name": "Payvandlash ishlari"
-        },
-        "construction_works": {
-          "name": "Qurulish ishlari"
-        },
-        "laying_repair_tiles": {
-          "name": "Plitkalarni yotqizish va ta'mirlash"
-        },
-        "handyman_services": {
-          "name": "Oddiy ishchilar xizmati"
-        },
-        "facade_works": {
-          "name": "Fasad ishlari"
-        },
-        "plaster_works": {
-          "name": "Suvoq ishlari"
-        },
-        "electrician": {
-          "name": "Elektrika"
-        },
-        "other_services": {
-          "name": "Boshqa xizmatlar"
-        }
+    "master_hour": {
+      "name": "Bir soatlik usta",
+      "opening_locks": {
+        "name": "Qulflarni ochish"
       },
       "master_hour": {
-        "name": "Bir soatlik usta",
-        "opening_locks": {
-          "name": "Qulflarni ochish"
-        },
-        "master_hour": {
-          "name": "Bir soatlik usta"
-        },
-        "key_making": {
-          "name": "Kalit yasash"
-        },
-        "furniture_assembly_repair": {
-          "name": "Mebel yig’ish va ta’mirlash"
-        },
-        "other_services": {
-          "name": "Boshqa xizmatlar"
-        }
+        "name": "Bir soatlik usta"
       },
-      "nannies_nurses": {
-        "name": "Enagalar va oqsochlar",
-        "nannies_governesses": {
-          "name": "Enagalar, guvernantkalar"
-        },
-        "nurses": {
-          "name": "Oqsochlar"
-        }
+      "key_making": {
+        "name": "Kalit yasash"
       },
-      "transportation_services": {
-        "name": "Tashish",
-        "rent_car": {
-          "name": "Avtomobil ijarasi"
-        },
-        "rent_transport": {
-          "name": "Maxsus texnika ijarasi"
-        },
-        "garbage_collection": {
-          "name": "Chiqindilarni olib ketish"
-        },
-        "cargo_transportation": {
-          "name": "Yuk tashish"
-        },
-        "courier": {
-          "name": "Tashuvchi, kur’er"
-        },
-        "loader": {
-          "name": "Yuk ortuvchilar"
-        },
-        "distillation": {
-          "name": "Boshqa joyga haydash"
-        },
-        "passenger_transport": {
-          "name": "Yo'lovchilarni tashish"
-        },
-        "driver_services": {
-          "name": "Haydovchi xizmatlari"
-        },
-        "tow_truck_services": {
-          "name": "Evakuator xizmati"
-        },
-        "other_services": {
-          "name": "Boshqa xizmatlar"
-        }
+      "furniture_assembly_repair": {
+        "name": "Mebel yig’ish va ta’mirlash"
       },
-      "beauty_health": {
-        "name": "Go’zallik va salomatlik",
-        "depilation_sugaring": {
-          "name": "Depilyatsiya va shugaring"
-        },
-        "makeup": {
-          "name": "Makiyaj"
-        },
-        "manicure_pedicure": {
-          "name": "Manikyur va pedikyur"
-        },
-        "tan": {
-          "name": "Toblanish"
-        },
-        "hair_treatment": {
-          "name": "Sochlarni davolash"
-        },
-        "massage": {
-          "name": "Massaj"
-        },
-        "hair_extensions": {
-          "name": "Soch o’stirish"
-        },
-        "eyelash_extensions": {
-          "name": "Kiprik o’stirish, qosh xizmatlari"
-        },
-        "stylist": {
-          "name": "Stilist"
-        },
-        "spa_services": {
-          "name": "SPA-xizmatlar"
-        },
-        "tattooing_piercing": {
-          "name": "Tatu va pirsing"
-        },
-        "tattooing": {
-          "name": "Tatuaj"
-        },
-        "nursing_services": {
-          "name": "Hamshiralar xizmati"
-        },
-        "hair_services": {
-          "name": "Sartarosh xizmatlari"
-        },
-        "other_services": {
-          "name": "Boshqa xizmatlar"
-        }
+      "other_services": {
+        "name": "Boshqa xizmatlar"
+      }
+    },
+    "nannies_nurses": {
+      "name": "Enagalar va oqsochlar",
+      "nannies_governesses": {
+        "name": "Enagalar, guvernantkalar"
       },
-      "computer_services": {
-        "name": "Kompyuter xizmatlari",
-        "it_outsourcing": {
-          "name": "IT autsorsing"
-        },
-        "web_designer": {
-          "name": "Web-Dizayn, brend, art"
-        },
-        "layout_designer": {
-          "name": "Sahifachi"
-        },
-        "designer": {
-          "name": "Dizaynerlar"
-        },
-        "setting_pc": {
-          "name": "Kompyuter yordami va Shaxsiy kompyuterni sozlash"
-        },
-        "typing_data_entry": {
-          "name": "Matn terish, ma’lumotlarni kirish"
-        },
-        "building_pc": {
-          "name": "Shaxsiy kompyuterni yig’ish"
-        },
-        "connecting_internet": {
-          "name": "Internetga ulanish"
-        },
-        "coder": {
-          "name": "Dasturchi"
-        },
-        "work_text": {
-          "name": "Matn bilan ishlash"
-        },
-        "web_coder": {
-          "name": "Veb-dasturchi"
-        },
-        "creating_promoting_websites": {
-          "name": "Saytlar yaratish va targ’ib qilish"
-        },
-        "system_admin": {
-          "name": "Tizim ma’muri"
-        },
-        "software_nstallation": {
-          "name": "Dasturiy ta’minot o’rnatish"
-        },
-        "other_services": {
-          "name": "Boshqa xizmatlar"
-        }
+      "nurses": {
+        "name": "Oqsochlar"
+      }
+    },
+    "transportation_services": {
+      "name": "Tashish",
+      "rent_car": {
+        "name": "Avtomobil ijarasi"
       },
-      "auto_services": {
-        "name": "Avtoxizmatlar",
-        "installing_audio_system": {
-          "name": "Audio tizim o’rnatish"
-        },
-        "glass_mirrors": {
-          "name": "Avtooyna va ko’zgular"
-        },
-        "autoelectrics": {
-          "name": "Avtomatik elektr"
-        },
-        "exhaust_system": {
-          "name": "Chiqarish tizimi"
-        },
-        "auto_diagnostics": {
-          "name": "Avto diagnostika"
-        },
-        "detaling": {
-          "name": "Deteyling"
-        },
-        "bodywork_works": {
-          "name": "Kuzov ishlari va avtomobilni bo’yash"
-        },
-        "conditioning_heating": {
-          "name": "Konditsioner va isitgichlar"
-        },
-        "replacement_liquids": {
-          "name": "Suyuqliklarni almashtirish"
-        },
-        "repair_engine": {
-          "name": "Dvigatel va xodovoyni ta’mirlash"
-        },
-        "repair_moto": {
-          "name": "Mototexnikani ta’mirlash"
-        },
-        "steering_system_repair": {
-          "name": "Rul boshqaruvini ta’mirlash"
-        },
-        "fuel_system_repair": {
-          "name": "Yoqilg'i tizimini ta'mirlash"
-        },
-        "tuning_installation": {
-          "name": "Tyuning va qo'shimcha jihozlar o'rnatish"
-        },
-        "technical_maintenance": {
-          "name": "Texnik xizmat ko’rsatish"
-        },
-        "cleaning_polishing": {
-          "name": "Avtomobilni kimyoviy tozalash, polirovkalash va yuvish"
-        },
-        "disk_repair": {
-          "name": "Shinomontaj va disklarni ta’mirlash"
-        },
-        "electrical_equipment": {
-          "name": "Elektr jihozlari"
-        },
-        "other_services": {
-          "name": "Boshqa xizmatlar"
-        }
+      "rent_transport": {
+        "name": "Maxsus texnika ijarasi"
       },
-      "repair_of_equipment": {
-        "name": "Texnikani ta’mirlash",
-        "repair_gas_equipment": {
-          "name": "Gaz uskunalarini ta'mirlash"
-        },
-        "repair_computers_laptops": {
-          "name": "Kompyuter va noutbuklarni ta’mirlash"
-        },
-        "repair_smartphones_phones": {
-          "name": "Smartfon va telefonlarni ta’mirlash"
-        },
-        "repair_tv_sets_audio": {
-          "name": "Televizor, audio va videotexnikani ta’mirlash"
-        },
-        "repair_medical_equipment": {
-          "name": "Tibbiyot dastgohlarini ta’mirlash"
-        },
-        "photo_equipment_repair": {
-          "name": "Fototexnikani ta’mirlash"
-        },
-        "repair_musical_instruments": {
-          "name": "Musiqa asboblarini ta’mirlash"
-        },
-        "repair_optical_devices": {
-          "name": "Optik uskunalarni ta’mirlash"
-        },
-        "sports_equipment_repair": {
-          "name": "Sport jihozlarini ta’mirlash"
-        },
-        "watch_repair": {
-          "name": "Soatlarni ta’mirlash"
-        },
-        "installation_repair_conditioners": {
-          "name": "Konditsionerlar o’rnatish va ta’mirlash"
-        },
-        "installing_security_systems": {
-          "name": "Xavfsizlik tizimini o’rnatish"
-        },
-        "installation_repair_household_appliances": {
-          "name": "Maishiy texnika o’rnatish va ta’mirlash"
-        },
-        "other_services": {
-          "name": "Boshqa xizmatlar"
-        }
+      "garbage_collection": {
+        "name": "Chiqindilarni olib ketish"
       },
-      "training": {
-        "name": "Ta’lim",
-        "preschool_development": {
-          "name": "Maktabgacha rivojlanish"
-        },
-        "master_classes_trainings": {
-          "name": "Mahorat darslari va treninglar"
-        },
-        "driving_training": {
-          "name": "Haydashni o'rganish"
-        },
-        "language_training": {
-          "name": "Tillarni o’rganish"
-        },
-        "exam_preparation": {
-          "name": "Imtihonlarga tayyorgarlik ko’rish"
-        },
-        "professional_training": {
-          "name": "Kasb ta’limi"
-        },
-        "music_theater_lessons": {
-          "name": "Musiqa va teatr mahorati darslari"
-        },
-        "drawing_design_needlework_lessons": {
-          "name": "Rasm, dizayn va chevarlik darslari"
-        },
-        "speech_therapist": {
-          "name": "Logoped va defektolog"
-        },
-        "dances": {
-          "name": "Raqslar"
-        },
-        "psychologists": {
-          "name": "Psixologlar"
-        },
-        "tutors": {
-          "name": "Repetitorlar"
-        },
-        "coach_services": {
-          "name": "Trener xizmatlari"
-        },
-        "other_services": {
-          "name": "Boshqa xizmatlar"
-        }
+      "cargo_transportation": {
+        "name": "Yuk tashish"
       },
-      "business_services": {
-        "name": "Biznes xizmatlari",
-        "lawyers": {
-          "name": "Himoyachilar"
-        },
-        "marriage_agencies": {
-          "name": "Nikoh agentligi"
-        },
-        "business_consulting": {
-          "name": "Biznes-maslahat"
-        },
-        "brokers": {
-          "name": "Brokerlar"
-        },
-        "accounting_finance": {
-          "name": "Buxgalteriya hisobi va moliya"
-        },
-        "speaker": {
-          "name": "Suhandonlar"
-        },
-        "consulting_economic": {
-          "name": "TIF bo'yicha maslahatlar"
-        },
-        "production_signage_advertising": {
-          "name": "Viveska va reklamalar tayyorlash"
-        },
-        "marketing_advertising_pr": {
-          "name": "Marketing, reklama va PR"
-        },
-        "logist": {
-          "name": "Logistlar"
-        },
-        "labor_protection": {
-          "name": "Mehnat muhofazasi"
-        },
-        "appraiser": {
-          "name": "Narxlovchi"
-        },
-        "simultaneous_translation": {
-          "name": "Sinxron tarjima"
-        },
-        "text_translation": {
-          "name": "Matnlarni tarjima qilish"
-        },
-        "printing_printing_design": {
-          "name": "Poligrafiya, taxrir, dizayn"
-        },
-        "realtor": {
-          "name": "Rieltorlik xizmatlari"
-        },
-        "HR": {
-          "name": "HR"
-        },
-        "certification": {
-          "name": "Sertifikatlash"
-        },
-        "legal_services": {
-          "name": "Yuridik xizmatlar"
-        },
-        "other_services": {
-          "name": "Boshqa xizmatlar"
-        }
+      "courier": {
+        "name": "Tashuvchi, kur’er"
       },
-      "organization_holidays": {
-        "name": "Bayramlarni tashkillashtirish",
-        "rental_equipment_attractions": {
-          "name": "Attraksion va jihozlarni ijaraga olish"
-        },
-        "site_rental": {
-          "name": "Maydonchani ujaraga olish"
-        },
-        "presenters_musicians_artists": {
-          "name": "Olib boruvchilar, musiqachilar va artistlar"
-        },
-        "djs": {
-          "name": "Didjeylar"
-        },
-        "organization_events": {
-          "name": "Tadbirlarni tashkil etish"
-        },
-        "food_preparation_catering": {
-          "name": "Taom tayyorlash va keytering"
-        },
-        "costume_rental": {
-          "name": "Kostyum – liboslarni prokatga olish"
-        },
-        "promoters_models": {
-          "name": "Promouterlar va modellar"
-        },
-        "flowers_decor": {
-          "name": "Gullar va dekor"
-        },
-        "other_services": {
-          "name": "Boshqa xizmatlar"
-        }
+      "loader": {
+        "name": "Yuk ortuvchilar"
       },
-      "photo_video_shooting": {
-        "name": "Foto va video suratga olish",
-        "video_editor": {
-          "name": "Videomontajchi"
-        },
-        "video_operators": {
-          "name": "Video operatorlar"
-        },
-        "photographer": {
-          "name": "Rasmchilar"
-        },
-        "print_albums_photo": {
-          "name": "Albom va fotokitoblarni chop etish"
-        },
-        "advertising_photography": {
-          "name": "Reklamali fototasvir olish"
-        },
-        "advertising_video": {
-          "name": "Reklamali video"
-        },
-        "retouching_restoring_photos": {
-          "name": "Fotorasmni qayta ishlash va tiklash"
-        },
-        "wedding_photographers": {
-          "name": "To’y fotograflari"
-        },
-        "studio_photography": {
-          "name": "Studiyada fototasvirga olish"
-        },
-        "other": {
-          "name": "Boshqalar"
-        }
+      "distillation": {
+        "name": "Boshqa joyga haydash"
       },
-      "cleaning_service": {
-        "name": "Tozalash",
-        "washing_windows_balconies": {
-          "name": "Deraza va balkonlarni yuvish"
-        },
-        "work_garden_plot": {
-          "name": "Bog’ va tomorqa ishlari"
-        },
-        "cleaning_apartments_houses": {
-          "name": "Uy va kvartira tozalish hizmatlari"
-        },
-        "housekeeper_services": {
-          "name": "Uy xodimining xizmatlari"
-        },
-        "cleaning_laundry_ironing": {
-          "name": "Quruq tozalash, yuvish va dazmollash"
-        },
-        "disinfection": {
-          "name": "Dezinfeksiya"
-        },
-        "other_services": {
-          "name": "Boshqa xizmatlar"
-        }
+      "passenger_transport": {
+        "name": "Yo'lovchilarni tashish"
       },
-      "custom_manufacturing": {
-        "name": "Buyurtma bo’yicha tayyorlash",
-        "manufacture_repair_clothing_shoes_accessories": {
-          "name": "Kiyim, poyafzal, aksessuarlar tayyorlash va ta’mirlash"
-        },
-        "custom_forged_products": {
-          "name": "Buyurtma bo’yicha bolg’alab yasalgan buyumlar"
-        },
-        "custom_furniture": {
-          "name": "Buyurtma bo’yicha mebel"
-        },
-        "music_poetry_voice_acting": {
-          "name": "Buyurtma bo’yicha musiqa, she’rlar va ovoz berish"
-        },
-        "custom_seals_stamps": {
-          "name": "Buyurtma bo’yicha muhr va shtamplar"
-        },
-        "drawing_painting_drawing": {
-          "name": "Buyurtma bo’yicha surat, rasm va grafika"
-        },
-        "souvenir_products_printing": {
-          "name": "Yodgorlik buyumlari va matbaa"
-        },
-        "jewelry_services": {
-          "name": "Zargarlik xizmatlari"
-        },
-        "other_services": {
-          "name": "Boshqa xizmatlar"
-        }
+      "driver_services": {
+        "name": "Haydovchi xizmatlari"
       },
-      "food_products": {
-        "name": "Oziq-ovqat mahsulotlari",
-        "baked_goods_cakes": {
-          "name": "Buyurtma bo’yicha pishiriq va tortlar"
-        },
-        "food_order": {
-          "name": "Buyurtmaga ovqat"
-        },
-        "cook_services": {
-          "name": "Oshpaz xizmatlari"
-        },
-        "other_services": {
-          "name": "Boshqa xizmatlar"
-        }
+      "tow_truck_services": {
+        "name": "Evakuator xizmati"
       },
-      "animal_care": {
-        "name": "Hayvonlarni parvarish qilish",
-        "knit": {
-          "name": "To’qish"
-        },
-        "training_walking": {
-          "name": "Hayvonlarni o’rgatish va semirtirish"
-        },
-        "overexposure": {
-          "name": "Ortiqcha ushlash"
-        },
-        "grooming_animal_care": {
-          "name": "Hayvonlarning sochini kesish va ularni parvarish qilish"
-        },
-        "other_services": {
-          "name": "Boshqa xizmatlar"
-        }
+      "other_services": {
+        "name": "Boshqa xizmatlar"
+      }
+    },
+    "beauty_health": {
+      "name": "Go’zallik va salomatlik",
+      "depilation_sugaring": {
+        "name": "Depilyatsiya va shugaring"
+      },
+      "makeup": {
+        "name": "Makiyaj"
+      },
+      "manicure_pedicure": {
+        "name": "Manikyur va pedikyur"
+      },
+      "tan": {
+        "name": "Toblanish"
+      },
+      "hair_treatment": {
+        "name": "Sochlarni davolash"
+      },
+      "massage": {
+        "name": "Massaj"
+      },
+      "hair_extensions": {
+        "name": "Soch o’stirish"
+      },
+      "eyelash_extensions": {
+        "name": "Kiprik o’stirish, qosh xizmatlari"
+      },
+      "stylist": {
+        "name": "Stilist"
+      },
+      "spa_services": {
+        "name": "SPA-xizmatlar"
+      },
+      "tattooing_piercing": {
+        "name": "Tatu va pirsing"
+      },
+      "tattooing": {
+        "name": "Tatuaj"
+      },
+      "nursing_services": {
+        "name": "Hamshiralar xizmati"
+      },
+      "hair_services": {
+        "name": "Sartarosh xizmatlari"
+      },
+      "other_services": {
+        "name": "Boshqa xizmatlar"
+      }
+    },
+    "computer_services": {
+      "name": "Kompyuter xizmatlari",
+      "it_outsourcing": {
+        "name": "IT autsorsing"
+      },
+      "web_designer": {
+        "name": "Web-Dizayn, brend, art"
+      },
+      "layout_designer": {
+        "name": "Sahifachi"
+      },
+      "designer": {
+        "name": "Dizaynerlar"
+      },
+      "setting_pc": {
+        "name": "Kompyuter yordami va Shaxsiy kompyuterni sozlash"
+      },
+      "typing_data_entry": {
+        "name": "Matn terish, ma’lumotlarni kirish"
+      },
+      "building_pc": {
+        "name": "Shaxsiy kompyuterni yig’ish"
+      },
+      "connecting_internet": {
+        "name": "Internetga ulanish"
+      },
+      "coder": {
+        "name": "Dasturchi"
+      },
+      "work_text": {
+        "name": "Matn bilan ishlash"
+      },
+      "web_coder": {
+        "name": "Veb-dasturchi"
+      },
+      "creating_promoting_websites": {
+        "name": "Saytlar yaratish va targ’ib qilish"
+      },
+      "system_admin": {
+        "name": "Tizim ma’muri"
+      },
+      "software_nstallation": {
+        "name": "Dasturiy ta’minot o’rnatish"
+      },
+      "other_services": {
+        "name": "Boshqa xizmatlar"
+      }
+    },
+    "auto_services": {
+      "name": "Avtoxizmatlar",
+      "installing_audio_system": {
+        "name": "Audio tizim o’rnatish"
+      },
+      "glass_mirrors": {
+        "name": "Avtooyna va ko’zgular"
+      },
+      "autoelectrics": {
+        "name": "Avtomatik elektr"
+      },
+      "exhaust_system": {
+        "name": "Chiqarish tizimi"
+      },
+      "auto_diagnostics": {
+        "name": "Avto diagnostika"
+      },
+      "detaling": {
+        "name": "Deteyling"
+      },
+      "bodywork_works": {
+        "name": "Kuzov ishlari va avtomobilni bo’yash"
+      },
+      "conditioning_heating": {
+        "name": "Konditsioner va isitgichlar"
+      },
+      "replacement_liquids": {
+        "name": "Suyuqliklarni almashtirish"
+      },
+      "repair_engine": {
+        "name": "Dvigatel va xodovoyni ta’mirlash"
+      },
+      "repair_moto": {
+        "name": "Mototexnikani ta’mirlash"
+      },
+      "steering_system_repair": {
+        "name": "Rul boshqaruvini ta’mirlash"
+      },
+      "fuel_system_repair": {
+        "name": "Yoqilg'i tizimini ta'mirlash"
+      },
+      "tuning_installation": {
+        "name": "Tyuning va qo'shimcha jihozlar o'rnatish"
+      },
+      "technical_maintenance": {
+        "name": "Texnik xizmat ko’rsatish"
+      },
+      "cleaning_polishing": {
+        "name": "Avtomobilni kimyoviy tozalash, polirovkalash va yuvish"
+      },
+      "disk_repair": {
+        "name": "Shinomontaj va disklarni ta’mirlash"
+      },
+      "electrical_equipment": {
+        "name": "Elektr jihozlari"
+      },
+      "other_services": {
+        "name": "Boshqa xizmatlar"
+      }
+    },
+    "repair_of_equipment": {
+      "name": "Texnikani ta’mirlash",
+      "repair_gas_equipment": {
+        "name": "Gaz uskunalarini ta'mirlash"
+      },
+      "repair_computers_laptops": {
+        "name": "Kompyuter va noutbuklarni ta’mirlash"
+      },
+      "repair_smartphones_phones": {
+        "name": "Smartfon va telefonlarni ta’mirlash"
+      },
+      "repair_tv_sets_audio": {
+        "name": "Televizor, audio va videotexnikani ta’mirlash"
+      },
+      "repair_medical_equipment": {
+        "name": "Tibbiyot dastgohlarini ta’mirlash"
+      },
+      "photo_equipment_repair": {
+        "name": "Fototexnikani ta’mirlash"
+      },
+      "repair_musical_instruments": {
+        "name": "Musiqa asboblarini ta’mirlash"
+      },
+      "repair_optical_devices": {
+        "name": "Optik uskunalarni ta’mirlash"
+      },
+      "sports_equipment_repair": {
+        "name": "Sport jihozlarini ta’mirlash"
+      },
+      "watch_repair": {
+        "name": "Soatlarni ta’mirlash"
+      },
+      "installation_repair_conditioners": {
+        "name": "Konditsionerlar o’rnatish va ta’mirlash"
+      },
+      "installing_security_systems": {
+        "name": "Xavfsizlik tizimini o’rnatish"
+      },
+      "installation_repair_household_appliances": {
+        "name": "Maishiy texnika o’rnatish va ta’mirlash"
+      },
+      "other_services": {
+        "name": "Boshqa xizmatlar"
+      }
+    },
+    "training": {
+      "name": "Ta’lim",
+      "preschool_development": {
+        "name": "Maktabgacha rivojlanish"
+      },
+      "master_classes_trainings": {
+        "name": "Mahorat darslari va treninglar"
+      },
+      "driving_training": {
+        "name": "Haydashni o'rganish"
+      },
+      "language_training": {
+        "name": "Tillarni o’rganish"
+      },
+      "exam_preparation": {
+        "name": "Imtihonlarga tayyorgarlik ko’rish"
+      },
+      "professional_training": {
+        "name": "Kasb ta’limi"
+      },
+      "music_theater_lessons": {
+        "name": "Musiqa va teatr mahorati darslari"
+      },
+      "drawing_design_needlework_lessons": {
+        "name": "Rasm, dizayn va chevarlik darslari"
+      },
+      "speech_therapist": {
+        "name": "Logoped va defektolog"
+      },
+      "dances": {
+        "name": "Raqslar"
+      },
+      "psychologists": {
+        "name": "Psixologlar"
+      },
+      "tutors": {
+        "name": "Repetitorlar"
+      },
+      "coach_services": {
+        "name": "Trener xizmatlari"
+      },
+      "other_services": {
+        "name": "Boshqa xizmatlar"
+      }
+    },
+    "business_services": {
+      "name": "Biznes xizmatlari",
+      "lawyers": {
+        "name": "Himoyachilar"
+      },
+      "marriage_agencies": {
+        "name": "Nikoh agentligi"
+      },
+      "business_consulting": {
+        "name": "Biznes-maslahat"
+      },
+      "brokers": {
+        "name": "Brokerlar"
+      },
+      "accounting_finance": {
+        "name": "Buxgalteriya hisobi va moliya"
+      },
+      "speaker": {
+        "name": "Suhandonlar"
+      },
+      "consulting_economic": {
+        "name": "TIF bo'yicha maslahatlar"
+      },
+      "production_signage_advertising": {
+        "name": "Viveska va reklamalar tayyorlash"
+      },
+      "marketing_advertising_pr": {
+        "name": "Marketing, reklama va PR"
+      },
+      "logist": {
+        "name": "Logistlar"
+      },
+      "labor_protection": {
+        "name": "Mehnat muhofazasi"
+      },
+      "appraiser": {
+        "name": "Narxlovchi"
+      },
+      "simultaneous_translation": {
+        "name": "Sinxron tarjima"
+      },
+      "text_translation": {
+        "name": "Matnlarni tarjima qilish"
+      },
+      "printing_printing_design": {
+        "name": "Poligrafiya, taxrir, dizayn"
+      },
+      "realtor": {
+        "name": "Rieltorlik xizmatlari"
+      },
+      "HR": {
+        "name": "HR"
+      },
+      "certification": {
+        "name": "Sertifikatlash"
+      },
+      "legal_services": {
+        "name": "Yuridik xizmatlar"
+      },
+      "other_services": {
+        "name": "Boshqa xizmatlar"
+      }
+    },
+    "organization_holidays": {
+      "name": "Bayramlarni tashkillashtirish",
+      "rental_equipment_attractions": {
+        "name": "Attraksion va jihozlarni ijaraga olish"
+      },
+      "site_rental": {
+        "name": "Maydonchani ujaraga olish"
+      },
+      "presenters_musicians_artists": {
+        "name": "Olib boruvchilar, musiqachilar va artistlar"
+      },
+      "djs": {
+        "name": "Didjeylar"
+      },
+      "organization_events": {
+        "name": "Tadbirlarni tashkil etish"
+      },
+      "food_preparation_catering": {
+        "name": "Taom tayyorlash va keytering"
+      },
+      "costume_rental": {
+        "name": "Kostyum – liboslarni prokatga olish"
+      },
+      "promoters_models": {
+        "name": "Promouterlar va modellar"
+      },
+      "flowers_decor": {
+        "name": "Gullar va dekor"
+      },
+      "other_services": {
+        "name": "Boshqa xizmatlar"
+      }
+    },
+    "photo_video_shooting": {
+      "name": "Foto va video suratga olish",
+      "video_editor": {
+        "name": "Videomontajchi"
+      },
+      "video_operators": {
+        "name": "Video operatorlar"
+      },
+      "photographer": {
+        "name": "Rasmchilar"
+      },
+      "print_albums_photo": {
+        "name": "Albom va fotokitoblarni chop etish"
+      },
+      "advertising_photography": {
+        "name": "Reklamali fototasvir olish"
+      },
+      "advertising_video": {
+        "name": "Reklamali video"
+      },
+      "retouching_restoring_photos": {
+        "name": "Fotorasmni qayta ishlash va tiklash"
+      },
+      "wedding_photographers": {
+        "name": "To’y fotograflari"
+      },
+      "studio_photography": {
+        "name": "Studiyada fototasvirga olish"
       },
       "other": {
         "name": "Boshqalar"
       }
     },
-    "goods": {
-      "name": "Buyumlar, bolalar tovarlari va bezak buyumlar",
-      "womens_wardrobe": {
-        "name": "Ayollar garderobi",
-        "accessories": {
-          "name": "Aksessuarlar"
-        },
-        "blouses_shirts": {
-          "name": "Bluzalar va ko’ylaklar "
-        },
-        "for_expectant_m": {
-          "name": "Bo’lajak onalarga"
-        },
-        "outerwear": {
-          "name": "Ustki kiyimlar"
-        },
-        "hats": {
-          "name": "Bosh kiyimlari"
-        },
-        "home_clothes": {
-          "name": "Uyda kiyiladigan kiyimlar"
-        },
-        "overalls": {
-          "name": "Kombinezonlar"
-        },
-        "swimwear": {
-          "name": "Cho’milish kiyimlari - kupalniklar"
-        },
-        "underwear": {
-          "name": "Ichki kiyimlar"
-        },
-        "footwear": {
-          "name": "Poyafzal"
-        },
-        "blazers_and_suits": {
-          "name": "Pidjak va kostyumlar"
-        },
-        "dresses_and_skirts": {
-          "name": "Ko’ylak va yubkalar"
-        },
-        "sweaters_hoodies": {
-          "name": "Sviter va tolstovkalar"
-        },
-        "sportswear": {
-          "name": "Sport kiyimlari"
-        },
-        "overalls_and_uniforms": {
-          "name": "Maxsus kiyim va uniforma"
-        },
-        "tshirts_and_tops": {
-          "name": "Futbolka va toplar"
-        },
-        "pants_and_shorts": {
-          "name": "Ishton va shortiklar"
-        },
-        "other": {
-          "name": "Boshqalar"
-        }
+    "cleaning_service": {
+      "name": "Tozalash",
+      "washing_windows_balconies": {
+        "name": "Deraza va balkonlarni yuvish"
       },
-      "mens_wardrobe": {
-        "name": "Erkaklar garderobi",
-        "accessories": {
-          "name": "Aksessuarlar"
-        },
-        "outerwear": {
-          "name": "Ustki kiyimlar"
-        },
-        "hats": {
-          "name": "Bosh kiyimlar"
-        },
-        "home_clothes": {
-          "name": "Uyda kiyiladigan kiyim"
-        },
-        "overalls": {
-          "name": "Kombinezonlar"
-        },
-        "underwear": {
-          "name": "Ichki kiyim"
-        },
-        "footwear": {
-          "name": "Poyafzal"
-        },
-        "blazers_and_suits": {
-          "name": "Pidjak va kostyumlar"
-        },
-        "shirts": {
-          "name": "Ko’ylaklar"
-        },
-        "sweaters_hoodies": {
-          "name": "Sviter va tolstovkalar"
-        },
-        "overalls_and_uniforms": {
-          "name": "Maxsus kiyim"
-        },
-        "sportswear": {
-          "name": "Sport kiyimi"
-        },
-        "tshirts_and_polos": {
-          "name": "Futbolkalar va polo"
-        },
-        "pants_shorts": {
-          "name": "Ishton va shortiklar"
-        },
-        "other": {
-          "name": "Boshqalar"
-        }
+      "work_garden_plot": {
+        "name": "Bog’ va tomorqa ishlari"
       },
-      "childrens_clothing": {
-        "name": "Bolalar kiyimlari",
-        "accessories": {
-          "name": "Aksessuarlar"
-        },
-        "blouses_shirts": {
-          "name": "Bluza va ko’ylaklar"
-        },
-        "outerwear": {
-          "name": "Ustki kiyimlar"
-        },
-        "hats": {
-          "name": "Bosh kiyimlar"
-        },
-        "home_clothes": {
-          "name": "Uyda kiyiladigan kiyimlar"
-        },
-        "jumpsuits_bodysuits": {
-          "name": "Kombinezonlar va bodi"
-        },
-        "envelopes": {
-          "name": "Konvertlar"
-        },
-        "underwear": {
-          "name": "Ichki kiyimlar"
-        },
-        "footwear": {
-          "name": "Poyafzal"
-        },
-        "blazers_suits": {
-          "name": "Pidjak va kostyumlar"
-        },
-        "dresses_skirts": {
-          "name": "Ko’ylak va yubkalar"
-        },
-        "romper_undershirts": {
-          "name": "Polzunka va raspashonkalar"
-        },
-        "sweaters_hoodies": {
-          "name": "Sviter va tolstovkalar"
-        },
-        "sportswear": {
-          "name": "Sport kiyimlari"
-        },
-        "t_shirts": {
-          "name": "Futbolkalar"
-        },
-        "pants_shorts": {
-          "name": "Ishton va shortiklar"
-        },
-        "other": {
-          "name": "Boshqalar"
-        }
+      "cleaning_apartments_houses": {
+        "name": "Uy va kvartira tozalish hizmatlari"
       },
-      "products_children_toys": {
-        "name": "Bolalar uchun tovarlar va o’yinchoqlar",
-        "car_seats": {
-          "name": "Avtokreslolar"
-        },
-        "health_and_care": {
-          "name": "Salomatlik va parvarish"
-        },
-        "toys_and_games": {
-          "name": "O’yinchoqlar va o’yinlar"
-        },
-        "strollers_select": {
-          "name": "Aravachalar"
-        },
-        "feeding_and_nutrition": {
-          "name": "Emizish va ovqatlantirish"
-        },
-        "bathing": {
-          "name": "Cho’miltirish"
-        },
-        "all_for_the_nur": {
-          "name": "Barchasi bolalar yotoqxonasi uchun"
-        },
-        "nappies_pots": {
-          "name": "Tagliklar va tuvaklar"
-        },
-        "radio_video_baby_monitors": {
-          "name": "Radio va video enagalar"
-        },
-        "goods_for_moms": {
-          "name": "Onalar uchun tovarlar"
-        },
-        "goods_for_study": {
-          "name": "O'qish uchun tovarlar"
-        },
-        "other": {
-          "name": "Boshqalar"
-        }
+      "housekeeper_services": {
+        "name": "Uy xodimining xizmatlari"
       },
-      "handmade": {
-        "name": "Xendmeyd",
-        "cosmetics": {
-          "name": "Kosmetika"
-        },
-        "decorations": {
-          "name": "Bezak buyumlari"
-        },
-        "dolls_and_toys": {
-          "name": "Qo’g’irchoq va o’yinchoqlar"
-        },
-        "decoration_of_an_interior": {
-          "name": "Interyerni bezatish"
-        },
-        "accessories": {
-          "name": "Aksessuarlar"
-        },
-        "decoration_of_holidays": {
-          "name": "Bayramlarni bezatish"
-        },
-        "office": {
-          "name": "Kanselyariya"
-        },
-        "dishes": {
-          "name": "Idishlar"
-        },
-        "other": {
-          "name": "Boshqalar"
-        }
+      "cleaning_laundry_ironing": {
+        "name": "Quruq tozalash, yuvish va dazmollash"
       },
-      "beauty_health": {
-        "name": "Go’zallik va salomatlik",
-        "makeup": {
-          "name": "Makiyaj"
-        },
-        "manicure_pedicure": {
-          "name": "Manikyur va pedikyur"
-        },
-        "health_products": {
-          "name": "Salomatlik uchun tovarlar"
-        },
-        "perfumery": {
-          "name": "Parfyumeriya"
-        },
-        "haircut_hair_removal": {
-          "name": "Soch kesish va soch olish"
-        },
-        "hair_care": {
-          "name": "Sochlarni parvarish qilish"
-        },
-        "skin_care": {
-          "name": "Terini parvarish qilish"
-        },
-        "hair_dryers_styling": {
-          "name": "Fen va sochni turmaklash"
-        },
-        "tattoo_permanent_makeup": {
-          "name": "Tatu va tatuaj"
-        },
-        "solariums_and_tanning": {
-          "name": "Solyariy va qorayish"
-        },
-        "hygiene_products": {
-          "name": "Gigiyena vositalari"
-        },
-        "other": {
-          "name": "Boshqalar"
-        }
+      "disinfection": {
+        "name": "Dezinfeksiya"
+      },
+      "other_services": {
+        "name": "Boshqa xizmatlar"
       }
     },
-    "for_homes_cottages": {
-      "name": "Uy va  dala hovli uchun",
-      "furniture_interior": {
-        "name": "Mebel va interyer",
-        "sofas_armchairs": {
-          "name": "Divan va kreslolar"
-        },
-        "beds_mattresses": {
-          "name": "Karavot va matraslar"
-        },
-        "kitchen_sets": {
-          "name": "Oshxona garnituri"
-        },
-        "lighting": {
-          "name": "Yoritish"
-        },
-        "interior_design": {
-          "name": "Interyerni bezatish"
-        },
-        "security_alarm_systems": {
-          "name": "Qo’riqlash va signalizatsiya"
-        },
-        "coasters_pedestals": {
-          "name": "Taglik va tumbalar"
-        },
-        "garden_furniture": {
-          "name": "Bog' mebeli"
-        },
-        "garden_vegetable_garden": {
-          "name": "Bog’ va tomorqa"
-        },
-        "tables_chairs": {
-          "name": "Stol va stullar"
-        },
-        "textiles_carpets": {
-          "name": "Tekstil va gilamlar"
-        },
-        "cabinets_dressers": {
-          "name": "Shkaf va komodlar"
-        },
-        "other": {
-          "name": "Boshqalar"
-        }
+    "custom_manufacturing": {
+      "name": "Buyurtma bo’yicha tayyorlash",
+      "manufacture_repair_clothing_shoes_accessories": {
+        "name": "Kiyim, poyafzal, aksessuarlar tayyorlash va ta’mirlash"
       },
-      "tableware_goods_kitchen": {
-        "name": "Oshxona uchun idish va tovarlar",
-        "tableware": {
-          "name": "Idishlar"
-        },
-        "products_kitchen": {
-          "name": "Oshxona uchun tovarlar"
-        },
-        "household_chemicals": {
-          "name": "Maishiy kimyo"
-        },
-        "other": {
-          "name": "Boshqalar"
-        }
+      "custom_forged_products": {
+        "name": "Buyurtma bo’yicha bolg’alab yasalgan buyumlar"
       },
-      "food_products": {
-        "name": "Oziq-ovqat mahsulotlari"
+      "custom_furniture": {
+        "name": "Buyurtma bo’yicha mebel"
       },
-      "repair_construction": {
-        "name": "Qurilish va ta’mirlash",
-        "doors": {
-          "name": "Eshiklar"
-        },
-        "measuring_instruments": {
-          "name": "O’lchov asboblari"
-        },
-        "windows": {
-          "name": "Deraza"
-        },
-        "heating_and_ventilation": {
-          "name": "Isitish va ventilyatsiya – shamollatish"
-        },
-        "ceilings": {
-          "name": "Shiftlar"
-        },
-        "hand_tools": {
-          "name": "Qo’l asboblari"
-        },
-        "plumbing_and_water_supply": {
-          "name": "Santexnika va suv ta’minoti"
-        },
-        "building_materials": {
-          "name": "Qurilish materiallari"
-        },
-        "electrician": {
-          "name": "Elektrika"
-        },
-        "power_tools": {
-          "name": "Elektr asboblar"
-        },
-        "other": {
-          "name": "Boshqalar"
-        }
+      "music_poetry_voice_acting": {
+        "name": "Buyurtma bo’yicha musiqa, she’rlar va ovoz berish"
       },
-      "plants": {
-        "name": "O’simliklar",
-        "accessories_seedlings": {
-          "name": "Ko’chat uchun aksessuarlar"
-        },
-        "plant_pots": {
-          "name": "O’simliklar uchun tuvaklar"
-        },
-        "indoor_plants": {
-          "name": "Xona o’simliklari"
-        },
-        "garden_plants": {
-          "name": "Bog’ o’simliklari"
-        },
-        "seeds_seedlings": {
-          "name": "Urug’ va ko’chatlar"
-        },
-        "shelves_plants": {
-          "name": "O’simliklar uchun tokchalar"
-        },
-        "plant_stands": {
-          "name": "O’simliklar uchun tagliklar"
-        },
-        "seedlings": {
-          "name": "Ko’chatlar"
-        },
-        "chemistry_plants": {
-          "name": "O’simliklar uchun kimyo"
-        },
-        "soil": {
-          "name": "Tuproq"
-        },
-        "other": {
-          "name": "Boshqalar"
-        }
+      "custom_seals_stamps": {
+        "name": "Buyurtma bo’yicha muhr va shtamplar"
+      },
+      "drawing_painting_drawing": {
+        "name": "Buyurtma bo’yicha surat, rasm va grafika"
+      },
+      "souvenir_products_printing": {
+        "name": "Yodgorlik buyumlari va matbaa"
+      },
+      "jewelry_services": {
+        "name": "Zargarlik xizmatlari"
+      },
+      "other_services": {
+        "name": "Boshqa xizmatlar"
       }
     },
-    "electronics": {
-      "name": "Elektronika",
-      "phones_tablets": {
-        "name": "Telefon va planshetlar",
-        "mobile_phones": {
-          "name": "Mobil telefonlar"
-        },
-        "tablets": {
-          "name": "Planshetlar"
-        },
-        "smart_watches_and_wristbands": {
-          "name": "Aqlli soat va brasletlar"
-        },
-        "e_books": {
-          "name": "Elektron kitoblar"
-        },
-        "landlines": {
-          "name": "Statsionar telefonlari"
-        },
-        "walkie_talkies_and_satellite_phones": {
-          "name": "Ratsiya va sputnik telefonlar"
-        },
-        "spare_parts": {
-          "name": "Ehtiyot qismlar"
-        },
-        "external_batteries": {
-          "name": "Tashqi akkumulyatorlar"
-        },
-        "chargers": {
-          "name": "Zaryadlash qurilmalari"
-        },
-        "covers": {
-          "name": "G’iloflar"
-        },
-        "accessories": {
-          "name": "Aksessuarlar"
-        },
-        "other": {
-          "name": "Boshqalar"
-        }
+    "food_products": {
+      "name": "Oziq-ovqat mahsulotlari",
+      "baked_goods_cakes": {
+        "name": "Buyurtma bo’yicha pishiriq va tortlar"
       },
-      "photo_video_cameras": {
-        "name": "Foto va videokameralar",
-        "cameras": {
-          "name": "Fotoapparatlar"
-        },
-        "video_cameras": {
-          "name": "Videokameralar"
-        },
-        "video_surveillance": {
-          "name": "Videokuzatuv"
-        },
-        "lenses": {
-          "name": "Obyektivlar"
-        },
-        "flash": {
-          "name": "Fotochaqnashlar"
-        },
-        "accessories": {
-          "name": "Aksessuarlar"
-        },
-        "tripods_and_stabilizers": {
-          "name": "Shtativ va stabilizatorlar"
-        },
-        "studio_equipment": {
-          "name": "Studiya jihozlari"
-        },
-        "digital_cameras": {
-          "name": "Raqamli fotoramkalar"
-        },
-        "compact_photo_printers": {
-          "name": "Kompakt fotoprinterlar"
-        },
-        "binoculars_and_optical_instruments": {
-          "name": "Binokl va optik asboblar"
-        },
-        "other": {
-          "name": "Boshqalar"
-        }
+      "food_order": {
+        "name": "Buyurtmaga ovqat"
       },
-      "tv_audio_video": {
-        "name": "Tv, audio, video",
-        "tv_sets": {
-          "name": "Televizorlar"
-        },
-        "projectors": {
-          "name": "Proyektorlar"
-        },
-        "acoustics_speakers_subwoofers": {
-          "name": "Akustika, kolonkalar, sabvuferlar"
-        },
-        "home_theaters": {
-          "name": "Uy kinoteatrlari"
-        },
-        "dvd_blu_ray_and_media_players": {
-          "name": "DVD, Blu-ray va mediapleerlar"
-        },
-        "music_centers_and_tape_recorders": {
-          "name": "Musiqa markazlari va magnitolalar"
-        },
-        "mp3_players_and_portable_audio": {
-          "name": "MP3-pleerlar va portativ audio"
-        },
-        "satellite_and_digital_tv": {
-          "name": "Sputnik – yo’ldosh va raqamli TV"
-        },
-        "audio_amplifiers_and_receivers": {
-          "name": "Audiokuchaytirgichlar va resiverlar"
-        },
-        "headphones": {
-          "name": "Naushnik – quloqchinlar"
-        },
-        "microphones": {
-          "name": "Mikrofonlar"
-        },
-        "accessories": {
-          "name": "Aksessuarlar"
-        },
-        "other": {
-          "name": "Boshqalar"
-        }
+      "cook_services": {
+        "name": "Oshpaz xizmatlari"
       },
-      "appliances": {
-        "name": "Maishiy texnika",
-        "scales": {
-          "name": "Tarozi"
-        },
-        "hoods": {
-          "name": "Vityajkalar – so’rib oluvchi qurilmalar"
-        },
-        "grinding_and_mixing": {
-          "name": "Maydalash va aralashtirish"
-        },
-        "glimate_control_equipment": {
-          "name": "Iqlim texnikasi"
-        },
-        "coolers_and_water_filters": {
-          "name": "Suv uchun kuler va filtrlar"
-        },
-        "stoves_and_ovens": {
-          "name": "Plita va duxovka shkaflari"
-        },
-        "dishwashers": {
-          "name": "Idish yuvish mashinalari"
-        },
-        "cooking_food": {
-          "name": "Ovqat tayyorlash"
-        },
-        "preparation_of_drinks": {
-          "name": "Ichimliklar tayyorlash"
-        },
-        "vacuum_cleaners_and_steam_cleaners": {
-          "name": "Changyutkichlar va bug'tozalagichlar"
-        },
-        "washing_machines": {
-          "name": "Kir yuvish mashinalari"
-        },
-        "irons_and_clothing_care": {
-          "name": "Dazmollar va kiyimlarni parvarish qilish"
-        },
-        "refrigerators": {
-          "name": "Muzlatgichlar"
-        },
-        "sewing_equipment": {
-          "name": "Tikuv uskunalari"
-        },
-        "other": {
-          "name": "Boshqalar"
-        }
-      },
-      "computer_equipment": {
-        "name": "Kompyuter texnikasi",
-        "laptops": {
-          "name": "Noutbuklar"
-        },
-        "computers": {
-          "name": "Kompyuterlar"
-        },
-        "monitors": {
-          "name": "Monitorlar"
-        },
-        "keyboards_and_mice": {
-          "name": "Klaviatura va mish - sichqonchalar"
-        },
-        "office_equipment_and_consumables": {
-          "name": "Ofis texnikasi va sarflovchi materiallar"
-        },
-        "network_equipment": {
-          "name": "Tarmoq jihozlari"
-        },
-        "multimedia": {
-          "name": "Multimedia"
-        },
-        "data_storage_and_card_readers": {
-          "name": "Ma'lumotlarni saqlash va kartriderlar"
-        },
-        "steering_wheels_joysticks_gamepads": {
-          "name": "Dasturiy ta’minot"
-        },
-        "components_and_spare_parts": {
-          "name": "To’ldiruvchi va ehtiyot qismlar"
-        },
-        "accessories": {
-          "name": "Aksessuarlar"
-        },
-        "other": {
-          "name": "Boshqalar"
-        }
-      },
-      "games_consoles_software": {
-        "name": "O’yinlar, konsollar va dasturlar",
-        "game_consoles_selector": {
-          "name": "O'yin konsollari"
-        },
-        "games_for_consoles": {
-          "name": "Konsollar uchun o'yinlar"
-        },
-        "computer_games": {
-          "name": "Kompyuterlar uchun o'yinlar"
-        },
-        "programs": {
-          "name": "Programmalar"
-        },
-        "other": {
-          "name": "Boshqalar"
-        }
+      "other_services": {
+        "name": "Boshqa xizmatlar"
       }
     },
-    "hobbies": {
-      "name": "Xobbi va dam olish",
+    "animal_care": {
+      "name": "Hayvonlarni parvarish qilish",
+      "knit": {
+        "name": "To’qish"
+      },
+      "training_walking": {
+        "name": "Hayvonlarni o’rgatish va semirtirish"
+      },
+      "overexposure": {
+        "name": "Ortiqcha ushlash"
+      },
+      "grooming_animal_care": {
+        "name": "Hayvonlarning sochini kesish va ularni parvarish qilish"
+      },
+      "other_services": {
+        "name": "Boshqa xizmatlar"
+      }
+    },
+    "other": {
+      "name": "Boshqalar"
+    }
+  },
+  "goods": {
+    "name": "Buyumlar, bolalar tovarlari va bezak buyumlar",
+    "womens_wardrobe": {
+      "name": "Ayollar garderobi",
+      "accessories": {
+        "name": "Aksessuarlar"
+      },
+      "blouses_shirts": {
+        "name": "Bluzalar va ko’ylaklar "
+      },
+      "for_expectant_m": {
+        "name": "Bo’lajak onalarga"
+      },
+      "outerwear": {
+        "name": "Ustki kiyimlar"
+      },
+      "hats": {
+        "name": "Bosh kiyimlari"
+      },
+      "home_clothes": {
+        "name": "Uyda kiyiladigan kiyimlar"
+      },
+      "overalls": {
+        "name": "Kombinezonlar"
+      },
+      "swimwear": {
+        "name": "Cho’milish kiyimlari - kupalniklar"
+      },
+      "underwear": {
+        "name": "Ichki kiyimlar"
+      },
+      "footwear": {
+        "name": "Poyafzal"
+      },
+      "blazers_and_suits": {
+        "name": "Pidjak va kostyumlar"
+      },
+      "dresses_and_skirts": {
+        "name": "Ko’ylak va yubkalar"
+      },
+      "sweaters_hoodies": {
+        "name": "Sviter va tolstovkalar"
+      },
+      "sportswear": {
+        "name": "Sport kiyimlari"
+      },
+      "overalls_and_uniforms": {
+        "name": "Maxsus kiyim va uniforma"
+      },
+      "tshirts_and_tops": {
+        "name": "Futbolka va toplar"
+      },
+      "pants_and_shorts": {
+        "name": "Ishton va shortiklar"
+      },
+      "other": {
+        "name": "Boshqalar"
+      }
+    },
+    "mens_wardrobe": {
+      "name": "Erkaklar garderobi",
+      "accessories": {
+        "name": "Aksessuarlar"
+      },
+      "outerwear": {
+        "name": "Ustki kiyimlar"
+      },
+      "hats": {
+        "name": "Bosh kiyimlar"
+      },
+      "home_clothes": {
+        "name": "Uyda kiyiladigan kiyim"
+      },
+      "overalls": {
+        "name": "Kombinezonlar"
+      },
+      "underwear": {
+        "name": "Ichki kiyim"
+      },
+      "footwear": {
+        "name": "Poyafzal"
+      },
+      "blazers_and_suits": {
+        "name": "Pidjak va kostyumlar"
+      },
+      "shirts": {
+        "name": "Ko’ylaklar"
+      },
+      "sweaters_hoodies": {
+        "name": "Sviter va tolstovkalar"
+      },
+      "overalls_and_uniforms": {
+        "name": "Maxsus kiyim"
+      },
+      "sportswear": {
+        "name": "Sport kiyimi"
+      },
+      "tshirts_and_polos": {
+        "name": "Futbolkalar va polo"
+      },
+      "pants_shorts": {
+        "name": "Ishton va shortiklar"
+      },
+      "other": {
+        "name": "Boshqalar"
+      }
+    },
+    "childrens_clothing": {
+      "name": "Bolalar kiyimlari",
+      "accessories": {
+        "name": "Aksessuarlar"
+      },
+      "blouses_shirts": {
+        "name": "Bluza va ko’ylaklar"
+      },
+      "outerwear": {
+        "name": "Ustki kiyimlar"
+      },
+      "hats": {
+        "name": "Bosh kiyimlar"
+      },
+      "home_clothes": {
+        "name": "Uyda kiyiladigan kiyimlar"
+      },
+      "jumpsuits_bodysuits": {
+        "name": "Kombinezonlar va bodi"
+      },
+      "envelopes": {
+        "name": "Konvertlar"
+      },
+      "underwear": {
+        "name": "Ichki kiyimlar"
+      },
+      "footwear": {
+        "name": "Poyafzal"
+      },
+      "blazers_suits": {
+        "name": "Pidjak va kostyumlar"
+      },
+      "dresses_skirts": {
+        "name": "Ko’ylak va yubkalar"
+      },
+      "romper_undershirts": {
+        "name": "Polzunka va raspashonkalar"
+      },
+      "sweaters_hoodies": {
+        "name": "Sviter va tolstovkalar"
+      },
+      "sportswear": {
+        "name": "Sport kiyimlari"
+      },
+      "t_shirts": {
+        "name": "Futbolkalar"
+      },
+      "pants_shorts": {
+        "name": "Ishton va shortiklar"
+      },
+      "other": {
+        "name": "Boshqalar"
+      }
+    },
+    "products_children_toys": {
+      "name": "Bolalar uchun tovarlar va o’yinchoqlar",
+      "car_seats": {
+        "name": "Avtokreslolar"
+      },
+      "health_and_care": {
+        "name": "Salomatlik va parvarish"
+      },
+      "toys_and_games": {
+        "name": "O’yinchoqlar va o’yinlar"
+      },
+      "strollers_select": {
+        "name": "Aravachalar"
+      },
+      "feeding_and_nutrition": {
+        "name": "Emizish va ovqatlantirish"
+      },
+      "bathing": {
+        "name": "Cho’miltirish"
+      },
+      "all_for_the_nur": {
+        "name": "Barchasi bolalar yotoqxonasi uchun"
+      },
+      "nappies_pots": {
+        "name": "Tagliklar va tuvaklar"
+      },
+      "radio_video_baby_monitors": {
+        "name": "Radio va video enagalar"
+      },
+      "goods_for_moms": {
+        "name": "Onalar uchun tovarlar"
+      },
+      "goods_for_study": {
+        "name": "O'qish uchun tovarlar"
+      },
+      "other": {
+        "name": "Boshqalar"
+      }
+    },
+    "handmade": {
+      "name": "Xendmeyd",
+      "cosmetics": {
+        "name": "Kosmetika"
+      },
+      "decorations": {
+        "name": "Bezak buyumlari"
+      },
+      "dolls_and_toys": {
+        "name": "Qo’g’irchoq va o’yinchoqlar"
+      },
+      "decoration_of_an_interior": {
+        "name": "Interyerni bezatish"
+      },
+      "accessories": {
+        "name": "Aksessuarlar"
+      },
+      "decoration_of_holidays": {
+        "name": "Bayramlarni bezatish"
+      },
+      "office": {
+        "name": "Kanselyariya"
+      },
+      "dishes": {
+        "name": "Idishlar"
+      },
+      "other": {
+        "name": "Boshqalar"
+      }
+    },
+    "beauty_health": {
+      "name": "Go’zallik va salomatlik",
+      "makeup": {
+        "name": "Makiyaj"
+      },
+      "manicure_pedicure": {
+        "name": "Manikyur va pedikyur"
+      },
+      "health_products": {
+        "name": "Salomatlik uchun tovarlar"
+      },
+      "perfumery": {
+        "name": "Parfyumeriya"
+      },
+      "haircut_hair_removal": {
+        "name": "Soch kesish va soch olish"
+      },
+      "hair_care": {
+        "name": "Sochlarni parvarish qilish"
+      },
+      "skin_care": {
+        "name": "Terini parvarish qilish"
+      },
+      "hair_dryers_styling": {
+        "name": "Fen va sochni turmaklash"
+      },
+      "tattoo_permanent_makeup": {
+        "name": "Tatu va tatuaj"
+      },
+      "solariums_and_tanning": {
+        "name": "Solyariy va qorayish"
+      },
+      "hygiene_products": {
+        "name": "Gigiyena vositalari"
+      },
+      "other": {
+        "name": "Boshqalar"
+      }
+    }
+  },
+  "home": {
+    "name": "Uy va  dala hovli uchun",
+    "furniture_interior": {
+      "name": "Mebel va interyer",
+      "sofas_armchairs": {
+        "name": "Divan va kreslolar"
+      },
+      "beds_mattresses": {
+        "name": "Karavot va matraslar"
+      },
+      "kitchen_sets": {
+        "name": "Oshxona garnituri"
+      },
+      "lighting": {
+        "name": "Yoritish"
+      },
+      "interior_design": {
+        "name": "Interyerni bezatish"
+      },
+      "security_alarm_systems": {
+        "name": "Qo’riqlash va signalizatsiya"
+      },
+      "coasters_pedestals": {
+        "name": "Taglik va tumbalar"
+      },
+      "garden_furniture": {
+        "name": "Bog' mebeli"
+      },
+      "garden_vegetable_garden": {
+        "name": "Bog’ va tomorqa"
+      },
+      "tables_chairs": {
+        "name": "Stol va stullar"
+      },
+      "textiles_carpets": {
+        "name": "Tekstil va gilamlar"
+      },
+      "cabinets_dressers": {
+        "name": "Shkaf va komodlar"
+      },
+      "other": {
+        "name": "Boshqalar"
+      }
+    },
+    "tableware_goods_kitchen": {
+      "name": "Oshxona uchun idish va tovarlar",
+      "tableware": {
+        "name": "Idishlar"
+      },
+      "products_kitchen": {
+        "name": "Oshxona uchun tovarlar"
+      },
+      "household_chemicals": {
+        "name": "Maishiy kimyo"
+      },
+      "other": {
+        "name": "Boshqalar"
+      }
+    },
+    "food_products": {
+      "name": "Oziq-ovqat mahsulotlari"
+    },
+    "repair_construction": {
+      "name": "Qurilish va ta’mirlash",
+      "doors": {
+        "name": "Eshiklar"
+      },
+      "measuring_instruments": {
+        "name": "O’lchov asboblari"
+      },
+      "windows": {
+        "name": "Deraza"
+      },
+      "heating_and_ventilation": {
+        "name": "Isitish va ventilyatsiya – shamollatish"
+      },
+      "ceilings": {
+        "name": "Shiftlar"
+      },
+      "hand_tools": {
+        "name": "Qo’l asboblari"
+      },
+      "plumbing_and_water_supply": {
+        "name": "Santexnika va suv ta’minoti"
+      },
+      "building_materials": {
+        "name": "Qurilish materiallari"
+      },
+      "electrician": {
+        "name": "Elektrika"
+      },
+      "power_tools": {
+        "name": "Elektr asboblar"
+      },
+      "other": {
+        "name": "Boshqalar"
+      }
+    },
+    "plants": {
+      "name": "O’simliklar",
+      "accessories_seedlings": {
+        "name": "Ko’chat uchun aksessuarlar"
+      },
+      "plant_pots": {
+        "name": "O’simliklar uchun tuvaklar"
+      },
+      "indoor_plants": {
+        "name": "Xona o’simliklari"
+      },
+      "garden_plants": {
+        "name": "Bog’ o’simliklari"
+      },
+      "seeds_seedlings": {
+        "name": "Urug’ va ko’chatlar"
+      },
+      "shelves_plants": {
+        "name": "O’simliklar uchun tokchalar"
+      },
+      "plant_stands": {
+        "name": "O’simliklar uchun tagliklar"
+      },
+      "seedlings": {
+        "name": "Ko’chatlar"
+      },
+      "chemistry_plants": {
+        "name": "O’simliklar uchun kimyo"
+      },
+      "soil": {
+        "name": "Tuproq"
+      },
+      "other": {
+        "name": "Boshqalar"
+      }
+    }
+  },
+  "electronics": {
+    "name": "Elektronika",
+    "phones_tablets": {
+      "name": "Telefon va planshetlar",
+      "mobile_phones": {
+        "name": "Mobil telefonlar"
+      },
+      "tablets": {
+        "name": "Planshetlar"
+      },
+      "smart_watches_and_wristbands": {
+        "name": "Aqlli soat va brasletlar"
+      },
+      "e_books": {
+        "name": "Elektron kitoblar"
+      },
+      "landlines": {
+        "name": "Statsionar telefonlari"
+      },
+      "walkie_talkies_and_satellite_phones": {
+        "name": "Ratsiya va sputnik telefonlar"
+      },
+      "spare_parts": {
+        "name": "Ehtiyot qismlar"
+      },
+      "external_batteries": {
+        "name": "Tashqi akkumulyatorlar"
+      },
+      "chargers": {
+        "name": "Zaryadlash qurilmalari"
+      },
+      "covers": {
+        "name": "G’iloflar"
+      },
+      "accessories": {
+        "name": "Aksessuarlar"
+      },
+      "other": {
+        "name": "Boshqalar"
+      }
+    },
+    "photo_video_cameras": {
+      "name": "Foto va videokameralar",
+      "cameras": {
+        "name": "Fotoapparatlar"
+      },
+      "video_cameras": {
+        "name": "Videokameralar"
+      },
+      "video_surveillance": {
+        "name": "Videokuzatuv"
+      },
+      "lenses": {
+        "name": "Obyektivlar"
+      },
+      "flash": {
+        "name": "Fotochaqnashlar"
+      },
+      "accessories": {
+        "name": "Aksessuarlar"
+      },
+      "tripods_and_stabilizers": {
+        "name": "Shtativ va stabilizatorlar"
+      },
+      "studio_equipment": {
+        "name": "Studiya jihozlari"
+      },
+      "digital_cameras": {
+        "name": "Raqamli fotoramkalar"
+      },
+      "compact_photo_printers": {
+        "name": "Kompakt fotoprinterlar"
+      },
+      "binoculars_and_optical_instruments": {
+        "name": "Binokl va optik asboblar"
+      },
+      "other": {
+        "name": "Boshqalar"
+      }
+    },
+    "tv_audio_video": {
+      "name": "Tv, audio, video",
+      "tv_sets": {
+        "name": "Televizorlar"
+      },
+      "projectors": {
+        "name": "Proyektorlar"
+      },
+      "acoustics_speakers_subwoofers": {
+        "name": "Akustika, kolonkalar, sabvuferlar"
+      },
+      "home_theaters": {
+        "name": "Uy kinoteatrlari"
+      },
+      "dvd_blu_ray_and_media_players": {
+        "name": "DVD, Blu-ray va mediapleerlar"
+      },
+      "music_centers_and_tape_recorders": {
+        "name": "Musiqa markazlari va magnitolalar"
+      },
+      "mp3_players_and_portable_audio": {
+        "name": "MP3-pleerlar va portativ audio"
+      },
+      "satellite_and_digital_tv": {
+        "name": "Sputnik – yo’ldosh va raqamli TV"
+      },
+      "audio_amplifiers_and_receivers": {
+        "name": "Audiokuchaytirgichlar va resiverlar"
+      },
+      "headphones": {
+        "name": "Naushnik – quloqchinlar"
+      },
+      "microphones": {
+        "name": "Mikrofonlar"
+      },
+      "accessories": {
+        "name": "Aksessuarlar"
+      },
+      "other": {
+        "name": "Boshqalar"
+      }
+    },
+    "appliances": {
+      "name": "Maishiy texnika",
+      "scales": {
+        "name": "Tarozi"
+      },
+      "hoods": {
+        "name": "Vityajkalar – so’rib oluvchi qurilmalar"
+      },
+      "grinding_and_mixing": {
+        "name": "Maydalash va aralashtirish"
+      },
+      "glimate_control_equipment": {
+        "name": "Iqlim texnikasi"
+      },
+      "coolers_and_water_filters": {
+        "name": "Suv uchun kuler va filtrlar"
+      },
+      "stoves_and_ovens": {
+        "name": "Plita va duxovka shkaflari"
+      },
+      "dishwashers": {
+        "name": "Idish yuvish mashinalari"
+      },
+      "cooking_food": {
+        "name": "Ovqat tayyorlash"
+      },
+      "preparation_of_drinks": {
+        "name": "Ichimliklar tayyorlash"
+      },
+      "vacuum_cleaners_and_steam_cleaners": {
+        "name": "Changyutkichlar va bug'tozalagichlar"
+      },
+      "washing_machines": {
+        "name": "Kir yuvish mashinalari"
+      },
+      "irons_and_clothing_care": {
+        "name": "Dazmollar va kiyimlarni parvarish qilish"
+      },
+      "refrigerators": {
+        "name": "Muzlatgichlar"
+      },
+      "sewing_equipment": {
+        "name": "Tikuv uskunalari"
+      },
+      "other": {
+        "name": "Boshqalar"
+      }
+    },
+    "computer_equipment": {
+      "name": "Kompyuter texnikasi",
+      "laptops": {
+        "name": "Noutbuklar"
+      },
+      "computers": {
+        "name": "Kompyuterlar"
+      },
+      "monitors": {
+        "name": "Monitorlar"
+      },
+      "keyboards_and_mice": {
+        "name": "Klaviatura va mish - sichqonchalar"
+      },
+      "office_equipment_and_consumables": {
+        "name": "Ofis texnikasi va sarflovchi materiallar"
+      },
+      "network_equipment": {
+        "name": "Tarmoq jihozlari"
+      },
+      "multimedia": {
+        "name": "Multimedia"
+      },
+      "data_storage_and_card_readers": {
+        "name": "Ma'lumotlarni saqlash va kartriderlar"
+      },
+      "steering_wheels_joysticks_gamepads": {
+        "name": "Dasturiy ta’minot"
+      },
+      "components_and_spare_parts": {
+        "name": "To’ldiruvchi va ehtiyot qismlar"
+      },
+      "accessories": {
+        "name": "Aksessuarlar"
+      },
+      "other": {
+        "name": "Boshqalar"
+      }
+    },
+    "games_consoles_software": {
+      "name": "O’yinlar, konsollar va dasturlar",
+      "game_consoles_selector": {
+        "name": "O'yin konsollari"
+      },
+      "games_for_consoles": {
+        "name": "Konsollar uchun o'yinlar"
+      },
+      "computer_games": {
+        "name": "Kompyuterlar uchun o'yinlar"
+      },
+      "programs": {
+        "name": "Programmalar"
+      },
+      "other": {
+        "name": "Boshqalar"
+      }
+    }
+  },
+  "hobbies": {
+    "name": "Xobbi va dam olish",
+    "tickets": {
+      "name": "Chiptalar"
+    },
+    "videos": {
+      "name": "Videofilmlar"
+    },
+    "books_magazines": {
+      "name": "Kitob va jurnallar"
+    },
+    "collectibles": {
+      "name": "Коlleksiyalash",
+      "antique_furniture_tableware": {
+        "name": "Antikvar mebel, idishlar"
+      },
+      "banknotes": {
+        "name": "Banknotlar"
+      },
       "tickets": {
         "name": "Chiptalar"
       },
-      "videos": {
-        "name": "Videofilmlar"
+      "things_celebrities_autographs": {
+        "name": "Mashhurlarning buyumlari, dastxatlari"
       },
-      "books_magazines": {
-        "name": "Kitob va jurnallar"
+      "vinyl_records": {
+        "name": "Vinil plastinkalar"
       },
-      "collectibles": {
-        "name": "Коlleksiyalash",
-        "antique_furniture_tableware": {
-          "name": "Antikvar mebel, idishlar"
-        },
-        "banknotes": {
-          "name": "Banknotlar"
-        },
-        "tickets": {
-          "name": "Chiptalar"
-        },
-        "things_celebrities_autographs": {
-          "name": "Mashhurlarning buyumlari, dastxatlari"
-        },
-        "vinyl_records": {
-          "name": "Vinil plastinkalar"
-        },
-        "inserts_stickers": {
-          "name": "Ilovalar, etiketkalar"
-        },
-        "military_stuff": {
-          "name": "Harbiy buyumlar"
-        },
-        "documents": {
-          "name": "Hujjatlar"
-        },
-        "tokens_medals_badges": {
-          "name": "Jetonlar, medullar, znachoklar"
-        },
-        "calendars": {
-          "name": "Taqvimlar"
-        },
-        "kinder_surprises": {
-          "name": "Kinder-syurprizlar"
-        },
-        "books_magazines_manuscripts": {
-          "name": "Kitoblar, jurnallar, qo’lyozmalar"
-        },
-        "envelopes_postcards": {
-          "name": "Konvertlar, otkritkalar"
-        },
-        "piggy_banks": {
-          "name": "Kopilkalar"
-        },
-        "dolls_toys": {
-          "name": "Qo’g’irchoqlar, o’yinchoqlar"
-        },
-        "magnets": {
-          "name": "Magnitlar"
-        },
-        "stamps": {
-          "name": "Markalar"
-        },
-        "models": {
-          "name": "Modellar"
-        },
-        "coins_numismatics": {
-          "name": "Tangalar, numizmatika"
-        },
-        "musical_instruments": {
-          "name": "Musiqa asboblari"
-        },
-        "ashtrays_lighters": {
-          "name": "Kuldonlar, zajigalkalar"
-        },
-        "plastic_cards": {
-          "name": "Plastik kartochkalar"
-        },
-        "art_objects_paintings": {
-          "name": "San’at asarlari, kartinalar"
-        },
-        "figurines_figurines": {
-          "name": "Haykalchalar, figurkalar"
-        },
-        "jewelry_accessories": {
-          "name": "Bezak buyumlari, aksessuarlar"
-        },
-        "photos_letters": {
-          "name": "Fotosuratlar, xatlar"
-        },
-        "chess_games": {
-          "name": "Shaxmat, o’yinlar"
-        },
-        "jewelry_boxes": {
-          "name": "Qutichalar"
-        },
-        "labels_bottles_corks": {
-          "name": "Etiketkalar, butilkalar, probkalar"
-        },
-        "other": {
-          "name": "Boshqalar"
-        }
+      "inserts_stickers": {
+        "name": "Ilovalar, etiketkalar"
       },
-      "materials_creativity": {
-        "name": "Ijod uchun materiallar"
+      "military_stuff": {
+        "name": "Harbiy buyumlar"
       },
-      "music": {
-        "name": "Мusiqa"
+      "documents": {
+        "name": "Hujjatlar"
+      },
+      "tokens_medals_badges": {
+        "name": "Jetonlar, medullar, znachoklar"
+      },
+      "calendars": {
+        "name": "Taqvimlar"
+      },
+      "kinder_surprises": {
+        "name": "Kinder-syurprizlar"
+      },
+      "books_magazines_manuscripts": {
+        "name": "Kitoblar, jurnallar, qo’lyozmalar"
+      },
+      "envelopes_postcards": {
+        "name": "Konvertlar, otkritkalar"
+      },
+      "piggy_banks": {
+        "name": "Kopilkalar"
+      },
+      "dolls_toys": {
+        "name": "Qo’g’irchoqlar, o’yinchoqlar"
+      },
+      "magnets": {
+        "name": "Magnitlar"
+      },
+      "stamps": {
+        "name": "Markalar"
+      },
+      "models": {
+        "name": "Modellar"
+      },
+      "coins_numismatics": {
+        "name": "Tangalar, numizmatika"
       },
       "musical_instruments": {
-        "name": "Musiqa asboblari",
-        "accordion_accordion_accordion": {
-          "name": "Akkordeon, garmon, bayanlar"
-        },
-        "acoustic_guitars": {
-          "name": "Akustik gitaralar"
-        },
-        "classical_guitars": {
-          "name": "Klassik gitaralar"
-        },
-        "bass_guitars": {
-          "name": "Bas-gitaralar"
-        },
-        "electric_guitars": {
-          "name": "Elektrogitaralar"
-        },
-        "guitar_gain": {
-          "name": "Gitarani kuchaytirish"
-        },
-        "wind_instruments": {
-          "name": "Puflab chalinadigan asboblar"
-        },
-        "keyboards": {
-          "name": "Klavishli asboblar"
-        },
-        "mixing_consoles": {
-          "name": "Miksher pultlar"
-        },
-        "folk_instruments": {
-          "name": "Xalq asboblari"
-        },
-        "effect_pedals": {
-          "name": "Ta'sir pedallari"
-        },
-        "violins_bowed": {
-          "name": "Skripkalar, kamonli asboblar"
-        },
-        "percussion_instruments": {
-          "name": "Urib chalinadigan asboblar"
-        },
-        "accessories": {
-          "name": "Aksessuarlar"
-        },
-        "other": {
-          "name": "Boshqalar"
-        }
+        "name": "Musiqa asboblari"
       },
-      "table_games": {
-        "name": "Stol o’yinlari"
+      "ashtrays_lighters": {
+        "name": "Kuldonlar, zajigalkalar"
       },
-      "sports_recreation": {
-        "name": "Sport va dam olish",
-        "sports_protection": {
-          "name": "Sport himoyasi"
-        },
-        "bicycles": {
-          "name": "Velosipedlar"
-        },
-        "roller_skates_and_skateboarding": {
-          "name": "Roliklar va skeytbording"
-        },
-        "scooters_and_gyrometer": {
-          "name": "Samokat va giroskuterlar"
-        },
-        "billiards_and_bowling": {
-          "name": "Bilyard va bouling"
-        },
-        "water_sports": {
-          "name": "Sportning suv turlari"
-        },
-        "martial_arts": {
-          "name": "Yakkama-yakka kurash"
-        },
-        "winter_sports": {
-          "name": "Sportning qishki turlari"
-        },
-        "ball_games": {
-          "name": "To’p bilan o’yinlar"
-        },
-        "hunting_and_fishing": {
-          "name": "Ov va baliq ovi"
-        },
-        "tourism_and_outdoor_recreation": {
-          "name": "Turizm va tabiat qo’ynida dam olish"
-        },
-        "tennis_badminton_darts": {
-          "name": "Tennis, badminton, darts"
-        },
-        "exercise_machines_and_fitness_equipment": {
-          "name": "Trenajyorlar va fitnes"
-        },
-        "sports_nutrition": {
-          "name": "Sport ozuqasi"
-        },
-        "other": {
-          "name": "Boshqalar"
-        }
+      "plastic_cards": {
+        "name": "Plastik kartochkalar"
+      },
+      "art_objects_paintings": {
+        "name": "San’at asarlari, kartinalar"
+      },
+      "figurines_figurines": {
+        "name": "Haykalchalar, figurkalar"
+      },
+      "jewelry_accessories": {
+        "name": "Bezak buyumlari, aksessuarlar"
+      },
+      "photos_letters": {
+        "name": "Fotosuratlar, xatlar"
+      },
+      "chess_games": {
+        "name": "Shaxmat, o’yinlar"
+      },
+      "jewelry_boxes": {
+        "name": "Qutichalar"
+      },
+      "labels_bottles_corks": {
+        "name": "Etiketkalar, butilkalar, probkalar"
+      },
+      "other": {
+        "name": "Boshqalar"
       }
     },
-    "animal": {
-      "name": "Hayvonlar",
-      "dogs": {
-        "name": "Itlar"
+    "materials_creativity": {
+      "name": "Ijod uchun materiallar"
+    },
+    "music": {
+      "name": "Мusiqa"
+    },
+    "musical_instruments": {
+      "name": "Musiqa asboblari",
+      "accordion_accordion_accordion": {
+        "name": "Akkordeon, garmon, bayanlar"
       },
-      "cats": {
-        "name": "Mushuklar"
+      "acoustic_guitars": {
+        "name": "Akustik gitaralar"
       },
-      "birds": {
-        "name": "Qushlar"
+      "classical_guitars": {
+        "name": "Klassik gitaralar"
       },
-      "rodents": {
-        "name": "Kemiruvchilar"
+      "bass_guitars": {
+        "name": "Bas-gitaralar"
       },
-      "fish": {
-        "name": "Baliqchalar"
+      "electric_guitars": {
+        "name": "Elektrogitaralar"
       },
-      "farm_animals": {
-        "name": "Qishloq xo'jalik hayvonlari"
+      "guitar_gain": {
+        "name": "Gitarani kuchaytirish"
       },
-      "other_animals": {
-        "name": "Boshqa hayvonlar"
+      "wind_instruments": {
+        "name": "Puflab chalinadigan asboblar"
       },
-      "pet_products": {
-        "name": "Hayvonlar uchun tovarlar"
+      "keyboards": {
+        "name": "Klavishli asboblar"
+      },
+      "mixing_consoles": {
+        "name": "Miksher pultlar"
+      },
+      "folk_instruments": {
+        "name": "Xalq asboblari"
+      },
+      "effect_pedals": {
+        "name": "Ta'sir pedallari"
+      },
+      "violins_bowed": {
+        "name": "Skripkalar, kamonli asboblar"
+      },
+      "percussion_instruments": {
+        "name": "Urib chalinadigan asboblar"
+      },
+      "accessories": {
+        "name": "Aksessuarlar"
+      },
+      "other": {
+        "name": "Boshqalar"
       }
+    },
+    "table_games": {
+      "name": "Stol o’yinlari"
+    },
+    "sports_recreation": {
+      "name": "Sport va dam olish",
+      "sports_protection": {
+        "name": "Sport himoyasi"
+      },
+      "bicycles": {
+        "name": "Velosipedlar"
+      },
+      "roller_skates_and_skateboarding": {
+        "name": "Roliklar va skeytbording"
+      },
+      "scooters_and_gyrometer": {
+        "name": "Samokat va giroskuterlar"
+      },
+      "billiards_and_bowling": {
+        "name": "Bilyard va bouling"
+      },
+      "water_sports": {
+        "name": "Sportning suv turlari"
+      },
+      "martial_arts": {
+        "name": "Yakkama-yakka kurash"
+      },
+      "winter_sports": {
+        "name": "Sportning qishki turlari"
+      },
+      "ball_games": {
+        "name": "To’p bilan o’yinlar"
+      },
+      "hunting_and_fishing": {
+        "name": "Ov va baliq ovi"
+      },
+      "tourism_and_outdoor_recreation": {
+        "name": "Turizm va tabiat qo’ynida dam olish"
+      },
+      "tennis_badminton_darts": {
+        "name": "Tennis, badminton, darts"
+      },
+      "exercise_machines_and_fitness_equipment": {
+        "name": "Trenajyorlar va fitnes"
+      },
+      "sports_nutrition": {
+        "name": "Sport ozuqasi"
+      },
+      "other": {
+        "name": "Boshqalar"
+      }
+    }
+  },
+  "animal": {
+    "name": "Hayvonlar",
+    "dogs": {
+      "name": "Itlar"
+    },
+    "cats": {
+      "name": "Mushuklar"
+    },
+    "birds": {
+      "name": "Qushlar"
+    },
+    "rodents": {
+      "name": "Kemiruvchilar"
+    },
+    "fish": {
+      "name": "Baliqchalar"
+    },
+    "farm_animals": {
+      "name": "Qishloq xo'jalik hayvonlari"
+    },
+    "other_animals": {
+      "name": "Boshqa hayvonlar"
+    },
+    "pet_products": {
+      "name": "Hayvonlar uchun tovarlar"
     }
   }
 }

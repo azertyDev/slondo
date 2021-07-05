@@ -61,8 +61,8 @@ export const RegularParams: FC<CommonParamsPropsType> = (props) => {
                             <PostTitle
                                 t={t}
                                 formik={formik}
-                                isPreview={isPreview}
                                 title={values.title}
+                                isPreview={isPreview}
                             />
                         </Grid>
                         <Grid item container spacing={2}>
