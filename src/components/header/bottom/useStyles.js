@@ -120,8 +120,10 @@ export const useStyles = makeStyles((theme) => ({
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'space-between',
-            '& div:first-child': {
-                marginLeft: '-2px'
+            '& div': {
+                borderRadius: '100px',
+                background: '#F5F5F5',
+                padding: '6px'
             }
         },
         '& div.multi-actions': {
@@ -137,9 +139,6 @@ export const useStyles = makeStyles((theme) => ({
                     padding: '6px 13px',
                     borderRadius: '100px',
                     background: '#F5F5F5',
-                    [theme.breakpoints.down('xs')]: {
-                        justifyContent: 'space-between'
-                    },
                     [theme.breakpoints.up('md')]: {
                         padding: 0,
                         borderRadius: 0,

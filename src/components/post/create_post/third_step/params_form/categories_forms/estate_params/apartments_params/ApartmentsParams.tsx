@@ -1,5 +1,5 @@
 import {FC} from 'react';
-import {Grid} from '@material-ui/core';
+import {Grid, useMediaQuery, useTheme} from '@material-ui/core';
 import {DropDownSelect} from '@src/components/elements/drop_down_select/DropDownSelect';
 import {OptionsSelect} from '@src/components/elements/options_select/OptionsSelect';
 import {PreviewValues} from '../../../PreviewValues';
@@ -56,6 +56,10 @@ export const ApartmentsParams: FC<CommonParamsPropsType> = (props) => {
     } = formik;
 
     const {handleNumericInput, handleCheckbox, handleOptionCheckbox, handleSelect} = useHandlers(values, setValues);
+    const isLgUp = useMediaQuery(useTheme().breakpoints.up('lg'));
+    const isMdDown = useMediaQuery(useTheme().breakpoints.down('md'));
+    const isXsDown = useMediaQuery(useTheme().breakpoints.down('xs'));
+
 
     const classes = useStyles();
     return (
@@ -70,14 +74,14 @@ export const ApartmentsParams: FC<CommonParamsPropsType> = (props) => {
                     isEditable={currentFormIndex < 3}
                     handleEdit={handleFormOpen(3)}
                 >
-                    <Grid item xs={6}>
+                    <Grid item xs={12} sm={6}>
                         <PostTitle isPreview={isPreview} title={values.title} formik={formik} t={t}/>
                     </Grid>
                     {isPreview
                         ? <PreviewValues t={t} values={values}/>
                         : <Grid className='grid-container' container spacing={2}>
                             <Grid container item spacing={2} xs={12}>
-                                <Grid item xs={4}>
+                                <Grid item xs={12} sm={5} md={4}>
                                     <DeployedSelect
                                         name='estate_type'
                                         values={values}
@@ -118,7 +122,7 @@ export const ApartmentsParams: FC<CommonParamsPropsType> = (props) => {
                                         </Grid>
                                     </>
                                 )}
-                                <Grid item container xs={4} alignItems='flex-end'>
+                                <Grid item container xs={12} sm={4} alignItems='flex-end'>
                                     <CheckboxSelect
                                         name='furnished'
                                         checked={values.furnished}
@@ -127,10 +131,10 @@ export const ApartmentsParams: FC<CommonParamsPropsType> = (props) => {
                                     />
                                 </Grid>
                             </Grid>
-                            <Grid item xs={4}>
+                            <Grid item xs={12} sm={6} md={4} lg={4}>
                                 <NumberSelect
                                     t={t}
-                                    count={5}
+                                    count={isLgUp ? 9 : 5}
                                     name='floor'
                                     errors={errors}
                                     touched={touched}
@@ -138,10 +142,10 @@ export const ApartmentsParams: FC<CommonParamsPropsType> = (props) => {
                                     setValues={setValues}
                                 />
                             </Grid>
-                            <Grid item container xs={5}>
+                            <Grid item container xs={12} sm={6} md={5} lg={6}>
                                 <NumberSelect
                                     t={t}
-                                    count={5}
+                                    count={isLgUp ? 9 : 5}
                                     name='number_of_floors'
                                     errors={errors}
                                     touched={touched}
@@ -149,7 +153,7 @@ export const ApartmentsParams: FC<CommonParamsPropsType> = (props) => {
                                     setValues={setValues}
                                 />
                             </Grid>
-                            <Grid item container xs={3}>
+                            <Grid item container xs={12} sm={4} md={3} lg={2}>
                                 <DropDownSelect
                                     name='room'
                                     values={values}
@@ -160,7 +164,7 @@ export const ApartmentsParams: FC<CommonParamsPropsType> = (props) => {
                                     errorMsg={getErrorMsg(errors.room, touched.room, t)}
                                 />
                             </Grid>
-                            <Grid item xs={4}>
+                            <Grid item xs={12} sm={4}>
                                 <FormikField
                                     t={t}
                                     name='area'
@@ -170,7 +174,7 @@ export const ApartmentsParams: FC<CommonParamsPropsType> = (props) => {
                                     errorMsg={getErrorMsg(errors.area, touched.area, t)}
                                 />
                             </Grid>
-                            <Grid item container xs={4}>
+                            <Grid item container xs={12} sm={4}>
                                 <FormikField
                                     t={t}
                                     name='living_area'
@@ -180,7 +184,7 @@ export const ApartmentsParams: FC<CommonParamsPropsType> = (props) => {
                                     errorMsg={getErrorMsg(errors.living_area, touched.living_area, t)}
                                 />
                             </Grid>
-                            <Grid item container xs={4}>
+                            <Grid item container xs={12} sm={4}>
                                 <FormikField
                                     t={t}
                                     name='kitchen_area'
@@ -190,7 +194,7 @@ export const ApartmentsParams: FC<CommonParamsPropsType> = (props) => {
                                     errorMsg={getErrorMsg(errors.kitchen_area, touched.kitchen_area, t)}
                                 />
                             </Grid>
-                            <Grid item container xs={4}>
+                            <Grid item container xs={12} sm={4}>
                                 <FormikField
                                     t={t}
                                     name='ceiling_height'

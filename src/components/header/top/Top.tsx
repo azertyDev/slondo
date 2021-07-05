@@ -163,7 +163,7 @@ export const Top: FC<TopHeaderPropsType> = (props) => {
                                         </CustomButton>}
                                 </Grid>
                             </Toolbar>
-                            <Box px={isXsDown ? '16px' : '24px'}>
+                            <Box px={isXsDown ? '16px' : '24px'} marginBottom='10px'>
                                 <HeaderSearchForm/>
                             </Box>
                         </AppBar>
