@@ -7,11 +7,11 @@ import {
     Grid,
     Container
 } from '@material-ui/core';
+import Link from 'next/link';
 import {MainSlider} from './main_slider/MainSlider';
 import {CategoriesSlider} from './categories_slider/CategoriesSlider';
 import {PostsSliderContainer} from './posts_slider/PostsSliderContainer';
 import {PostsTabsContainer} from './posts_tabs/PostsTabsContainer';
-import Link from 'next/link';
 import {useTranslation} from 'next-i18next';
 import {SEOTextComponent} from '@src/components/elements/seo_text_component/SEOTextComponent';
 import {HomeSidebar} from '@src/components/home/main/home_sidebar/HomeSideBar';

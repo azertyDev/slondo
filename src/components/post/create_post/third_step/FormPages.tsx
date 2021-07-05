@@ -91,7 +91,7 @@ export const FormPages: FC = () => {
             let fetchedData = await userAPI.getFiltersByCtgr(category.id, subCtgrId, typeId);
 
             if (categoryName === 'car') {
-                if (subcategoryName === 'madeInUzb') {
+                if (subcategoryName === 'made_uzbekistan') {
                     fetchedData = {
                         ...fetchedData.default_param,
                         manufacturer: manufacturersDataNormalize(fetchedData)

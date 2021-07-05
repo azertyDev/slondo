@@ -28,7 +28,7 @@ const Animal = '/img/categories_img/animal.png';
 export enum HasAuction {
     parts = 1,
     goods,
-    for_homes_cottages,
+    home,
     electronics,
     hobbies,
     animal
@@ -542,7 +542,7 @@ const categories_list: CategoryType[] = [
     },
     {
         id: 5,
-        name: 'job_type',
+        name: 'job',
         ru_name: 'Работа',
         icon: {url: Job},
         smallIcon: <JobIcon/>,
@@ -2352,7 +2352,7 @@ const categories_list: CategoryType[] = [
     },
     {
         id: 8,
-        name: 'for_homes_cottages',
+        name: 'home',
         ru_name: 'Для дома и дачи',
         icon: {url: Home},
         smallIcon: <SofaIcon/>,

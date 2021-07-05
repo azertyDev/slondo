@@ -10,7 +10,7 @@ export const useHandlers = (values: any, setValues: Dispatch<SetStateAction<any>
             if (RegExp(numberRegEx).test(value)) {
                 if ((!isFractionalField) || (isFractionalField && value.length < 4)) {
                     if (isFractionalField && value.length === 2 && value[1] !== '.') {
-                        value = value.replace(/(?<=^.{1})./, `.${value[1]}`);
+                        value = value.replace(/^[^\*]/, `${value[0]}.`);
                     }
                     setValues({...values, [name]: value});
                 }

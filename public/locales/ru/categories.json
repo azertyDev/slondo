@@ -278,7 +278,7 @@
       }
     }
   },
-  "job_type": {
+  "job": {
     "name": "Работа",
     "vacancy": {
       "name": "Вакансии",
@@ -1328,7 +1328,7 @@
       }
     }
   },
-  "for_homes_cottages": {
+  "home": {
     "name": "Для дома и дачи",
     "furniture_interior": {
       "name": "Мебель и интерьер",

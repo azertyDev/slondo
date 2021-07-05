@@ -92,13 +92,9 @@ export const appearanceSchema = object({
 export const defaultParamsSchema = object({
     price: string().required(fieldIsRequired),
     description: string().required(fieldIsRequired),
-    location: object<{ city: { id: number } }>()
+    location: object()
         .nullable()
-        .test(
-            '',
-            fieldIsRequired,
-            location => !!location && !!location?.city?.id
-        )
+        .required(fieldIsRequired)
 });
 
 export const auctionParamsSchema = defaultParamsSchema.shape({

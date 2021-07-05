@@ -55,7 +55,7 @@ export const getFieldsByFilters = (props: GetFieldsByFiltersProps, categoryName:
                             >
                                 <Typography variant="subtitle1">
                                     <strong>
-                                        {t(`filters:${key}`)}:&nbsp;
+                                        {t(`filters:${categoryName}.${key}`)}:&nbsp;
                                     </strong>
                                     {value}
                                 </Typography>
@@ -83,13 +83,13 @@ export const getFieldsByFilters = (props: GetFieldsByFiltersProps, categoryName:
                         >
                             <DropDownSelect
                                 name={key}
-                                labelTxt={t(key)}
                                 values={values}
                                 onBlur={handleBlur}
                                 items={filters[key]}
                                 disableRequire={multiple}
                                 handleSelect={handleSelect}
                                 transKey={`${categoryName}.`}
+                                labelTxt={t(`filters:${categoryName}.${key}`)}
                                 multiple={!isSingleField && (isOptionKey || multiple)}
                                 errorMsg={getErrorMsg(errors[key], touched[key], t)}
                             />

@@ -22,7 +22,6 @@ import {FormikTextarea} from '@src/components/elements/formik_textarea/FormikTex
 import {Location} from '@src/components/elements/location/Location';
 import {useStyles} from './useStyles';
 
-
 type DefaultParamsPropsType = {
     postType: PostType,
     currentFormIndex: number,
@@ -126,19 +125,15 @@ export const CommonForm: FC<DefaultParamsPropsType> = (props) => {
             otherData.auction = othersAuctionData;
         }
 
-        const {region, city, district} = location;
+        const {region, city} = location;
 
         const address: {
             region_id: number,
-            city_id: number,
-            district_id?: number
-        } = {
-            region_id: region.id,
-            city_id: city.id
-        };
+            city_id?: number
+        } = {region_id: region.id};
 
-        if (district) {
-            address.district_id = district.id;
+        if (city) {
+            address.city_id = city.id;
         }
 
         if (isActive) {
