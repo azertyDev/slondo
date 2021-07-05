@@ -141,6 +141,7 @@ export const DetailedPostModal: FC<DetailedPostViewPropsType> = (props) => {
     }, [auctionId, open]);
 
     console.log(post);
+    console.log(bets);
     const classes = useStyles();
     return (
         <div>
@@ -279,25 +280,25 @@ export const DetailedPostModal: FC<DetailedPostViewPropsType> = (props) => {
                             <>
                                 <Grid item xs={12} md={6}>
                                     {isBetsFetch
-                                     ? <CircularProgress color="primary"/>
-                                     : <BetsList
-                                         bets={bets}
-                                         showBetsCount={2}
-                                         betsCount={betsCount}
-                                         auctionId={auctionId}
-                                         handleRefresh={setFetchedBetsData}
-                                         title={t('auction:extremeRates')}
-                                     />}
+                                        ? <CircularProgress color="primary"/>
+                                        : <BetsList
+                                            bets={bets}
+                                            showBetsCount={2}
+                                            betsCount={betsCount}
+                                            auctionId={auctionId}
+                                            handleRefresh={setFetchedBetsData}
+                                            title={t('auction:extremeRates')}
+                                        />}
                                 </Grid>
                                 <Grid item xs={12} md={6} className={classes.userInfoWrapper}>
                                     <div className='user-info-title'>
                                         {(isUserWinner || isUserCreator) && userData && (
                                             <Typography variant='subtitle2' gutterBottom>
                                                 {isUserWinner
-                                                 ? 'Продавец'
-                                                 : offer && !winner
-                                                   ? 'Макс. предложенная цена:'
-                                                   : 'Победитель аукциона'}
+                                                    ? 'Продавец'
+                                                    : offer && !winner
+                                                        ? 'Макс. предложенная цена:'
+                                                        : 'Победитель аукциона'}
                                             </Typography>
                                         )}
                                         {isUserCreator && offer && (
@@ -313,29 +314,29 @@ export const DetailedPostModal: FC<DetailedPostViewPropsType> = (props) => {
                                     </div>
                                     <Paper className='paper-block'>
                                         {userData
-                                         ? <div className='user-info'>
-                                             <UserInfoWithAvatar
-                                                 isOwner
-                                                 width='50px'
-                                                 height='50px'
-                                                 owner={userData}
-                                             />
-                                             <div className='contacts-btns'>
-                                                 <CustomButton>
-                                                     <PhoneIcon/>
-                                                     <Typography variant='subtitle2'>
-                                                         Позвонить
-                                                     </Typography>
-                                                 </CustomButton>
-                                                 <CustomButton disabled>
-                                                     <LetterIcon/>
-                                                     <Typography variant='subtitle2'>
-                                                         Написать
-                                                     </Typography>
-                                                 </CustomButton>
-                                             </div>
-                                         </div>
-                                         : <div>{t(`last_bet`, lastBet?.bet)}</div>}
+                                            ? <div className='user-info'>
+                                                <UserInfoWithAvatar
+                                                    isOwner
+                                                    width='50px'
+                                                    height='50px'
+                                                    owner={userData}
+                                                />
+                                                <div className='contacts-btns'>
+                                                    <CustomButton>
+                                                        <PhoneIcon/>
+                                                        <Typography variant='subtitle2'>
+                                                            Позвонить
+                                                        </Typography>
+                                                    </CustomButton>
+                                                    <CustomButton disabled>
+                                                        <LetterIcon/>
+                                                        <Typography variant='subtitle2'>
+                                                            Написать
+                                                        </Typography>
+                                                    </CustomButton>
+                                                </div>
+                                            </div>
+                                            : <div>{t(`auction:last_bet`, {lastBet: lastBet?.bet})}</div>}
                                     </Paper>
                                     {(isUserCreator || isUserWinner) && !archive && (
                                         <Box>

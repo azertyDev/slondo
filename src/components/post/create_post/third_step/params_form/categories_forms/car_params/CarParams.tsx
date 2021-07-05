@@ -3,7 +3,7 @@ import {useFormik} from 'formik';
 import {useDispatch} from 'react-redux';
 import {userAPI} from '@src/api/api';
 import {Grid, Typography} from '@material-ui/core';
-import {DropDownSelect } from '@src/components/elements/drop_down_select/DropDownSelect';
+import {DropDownSelect} from '@src/components/elements/drop_down_select/DropDownSelect';
 import {OptionsSelect} from '@src/components/elements/options_select/OptionsSelect';
 import {PreviewValues} from '../../PreviewValues';
 import {getErrorMsg, setRequireParamsVals} from '@src/helpers';
@@ -37,8 +37,8 @@ export const CarParams: FC<CarParamsPropsType> = (props) => {
         handleFormOpen
     } = props;
 
-    const isForeignCars = subcategoryName === 'made_uzbekistan';
-    const isMadeInUzb = subcategoryName === 'foreign_cars';
+    const isForeignCars = subcategoryName === 'foreign_cars';
+    const isMadeInUzb = subcategoryName === 'made_uzbekistan';
 
     const initVals: any = {
         title: '',
