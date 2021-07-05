@@ -12,7 +12,6 @@ import {useStyles} from './useStyles';
 type BetsListPropsType = {
     bets,
     betsCount: number,
-    archive?: number,
     title: string,
     auctionId: number,
     showBetsCount: number,
@@ -24,7 +23,6 @@ export const BetsList: FC<BetsListPropsType> = (props) => {
         bets,
         betsCount,
         title,
-        archive,
         auctionId,
         showBetsCount,
         handleRefresh
@@ -109,7 +107,6 @@ export const BetsList: FC<BetsListPropsType> = (props) => {
                 </CustomButton>
             )}
             <BetsListModal
-                archive={archive}
                 auctionId={auctionId}
                 modalOpen={modalOpen}
                 handleModalClose={handleModalClose}

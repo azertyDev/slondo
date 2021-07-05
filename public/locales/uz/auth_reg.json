@@ -1,4 +1,11 @@
 {
+  "send_again": "Parolni qayta yuborish",
+  "enter_sms": "Qabul qilingan ko'dni kiriting",
+  "enter_phone": "Telefon raqamingizni kiriting",
+  "enter_name": "Ismingizni kiriting",
+  "enter_password": "Parolni kiriting",
+  "enter_new_password": "Yangi parolni kiriting",
+  "repeat_new_password": "Yangi parolni qayta kiriting",
   "signIn": "Kirish",
   "signOut": "Chiqish",
   "signUp": "Ro'yxatdan o'tish",

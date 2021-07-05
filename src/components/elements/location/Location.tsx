@@ -20,8 +20,7 @@ export const Location: FC<LocationProps> = ({handleSelectLocation}) => {
 
     const initLocation = {
         region: null,
-        city: null,
-        district: null
+        city: null
     };
 
     const {
@@ -31,67 +30,52 @@ export const Location: FC<LocationProps> = ({handleSelectLocation}) => {
     } = useModal();
 
     const [locations, setLocations] = useState([]);
-    const [selectedLocation, setSelectedLocation] = useState(initLocation);
-    const {region, city, district} = selectedLocation;
+    const [currentLocation, setCurrentLocation] = useState(initLocation);
+    const {region, city} = currentLocation;
 
     const hasRegion = !!region;
-    const locationsTxt = `${district ? `${t(district.name)}` : ''}${city ? district ? `, ${t(city.name)}` : t(city.name) : ''}${region ? city ? `, ${t(region.name)}` : t(region.name) : ''}`;
+    const locationsTxt = `${city ? t(city.name) : ''}${region ? city ? `, ${t(region.name)}` : t(region.name) : ''}`;
     const prevLocation = hasRegion ? `${t(`${city?.name ?? region.name}`)}` : t(`allUzb`);
 
     const currentCities = allLocations.find(loc => loc.id === region?.id)?.cities;
-    const currentDistricts = currentCities?.find(({id, district}) => {
-        if (district.length) return id === city?.id;
-    })?.district;
 
     const handleLocation = loc => () => {
         const value = loc.cities
-                      ? {region: {id: loc.id, name: loc.name}}
-                      : loc.district
-                        ? {city: {id: loc.id, name: loc.name}}
-                        : {district: {id: loc.id, name: loc.name}};
+            ? {region: {id: loc.id, name: loc.name}}
+            : {city: {id: loc.id, name: loc.name}};
 
-        setSelectedLocation({...selectedLocation, ...value});
-        (loc.cities || loc.district?.length) && setLocations(loc.cities ?? loc.district);
+        loc.cities && setLocations(loc.cities);
+        setCurrentLocation({...currentLocation, ...value});
     };
 
     const handleModalOpen = () => {
         handleLocationModalOpen();
-        region && setLocations(currentDistricts ?? currentCities ?? allLocations);
+        region && setLocations(currentCities ?? allLocations);
     };
 
     const handleClose = () => {
         if (userLocation) {
-            setSelectedLocation(userLocation);
+            setCurrentLocation(userLocation);
         } else {
             setLocations(allLocations);
-            setSelectedLocation(initLocation);
+            setCurrentLocation(initLocation);
         }
         handleLocationModalClose();
     };
 
     const handleChoiceLocation = () => {
-        handleSelectLocation(selectedLocation);
         handleLocationModalClose();
+        handleSelectLocation(currentLocation);
     };
 
     const toPrevLocation = () => {
-        if (currentDistricts) {
-            const cities = allLocations.find(loc => loc.id === region.id).cities;
-            setLocations(cities);
-            setSelectedLocation({
-                ...selectedLocation,
-                city: null,
-                district: null
-            });
-        } else {
-            setLocations(allLocations);
-            setSelectedLocation(initLocation);
-        }
+        setLocations(allLocations);
+        setCurrentLocation(initLocation);
     };
 
     useEffect(() => {
-        if (userLocation && !(region || city || district)) {
-            setSelectedLocation(userLocation);
+        if (userLocation && !region) {
+            setCurrentLocation(userLocation);
             handleSelectLocation(userLocation);
         }
     }, []);

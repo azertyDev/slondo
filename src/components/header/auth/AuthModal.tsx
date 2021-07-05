@@ -35,7 +35,7 @@ type AuthRegPageModalProps = {
     handleCancel: () => void,
     handleInput: (e) => void
     handleNumericInput: (e) => void
-} & WithT
+} & WithT;
 
 export const AuthModal: FC<AuthRegPageModalProps> = (props) => {
     const {
@@ -170,7 +170,7 @@ export const AuthModal: FC<AuthRegPageModalProps> = (props) => {
                                                                         t={t}
                                                                         type="tel"
                                                                         name="phone"
-                                                                        labelText='enter_phone'
+                                                                        labelText={t('enter_phone')}
                                                                         value={values.phone}
                                                                         onChange={handleNumericInput}
                                                                         errorMsg={getErrorMsg(errors.phone, touched.phone, t)}
@@ -179,7 +179,7 @@ export const AuthModal: FC<AuthRegPageModalProps> = (props) => {
                                                                         t={t}
                                                                         type="password"
                                                                         name="password"
-                                                                        labelText='enter_password'
+                                                                        labelText={t('enter_password')}
                                                                         value={values.password}
                                                                         onChange={handleInput}
                                                                         errorMsg={getErrorMsg(errors.password, touched.password, t)}

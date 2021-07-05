@@ -565,6 +565,12 @@
     }
   },
   "parts": {
+    "new": {
+      "name": "Новое"
+    },
+    "used": {
+      "name": "Б/У"
+    },
     "condition": {
       "name": "Состояние"
     },
@@ -6219,13 +6225,6 @@
   "seat_heating": "Подогрев сидений",
   "power_windows": "Электростеклоподъемники",
   "climate": "Климат",
-  "send_again": "Запросить пароль еще раз",
-  "enter_sms": "Введите полученный код",
-  "enter_phone": "Введите номер телефона",
-  "enter_name": "Введите имя",
-  "enter_password": "Пароль",
-  "enter_new_password": "Введите новый пароль",
-  "repeat_new_password": "Введите пароль еще раз",
   "user_name": "Имя",
   "user_surname": "Фамилия",
   "phone_number": "Номер телефона",
