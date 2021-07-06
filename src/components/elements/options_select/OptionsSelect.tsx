@@ -1,6 +1,6 @@
 import {FC} from 'react';
 import {WithT} from 'i18next';
-import {Checkbox, Grid, Typography} from '@material-ui/core';
+import {Checkbox, Grid, Typography, useMediaQuery, useTheme} from '@material-ui/core';
 import {useStyles} from '../deployed_select/useStyles';
 
 export type HandleOptionCheckboxType = (name: string, value) => void;
@@ -8,6 +8,7 @@ export type HandleOptionCheckboxType = (name: string, value) => void;
 type OptionsSectionPropsType = {
     name?: string,
     column?: boolean,
+    isApratment: boolean,
     values,
     options: any[],
     handleOptionCheckbox: HandleOptionCheckboxType
@@ -18,6 +19,7 @@ export const OptionsSelect: FC<OptionsSectionPropsType> = (props) => {
         t,
         name,
         column,
+        isApratment,
         values,
         options = [],
         handleOptionCheckbox
@@ -50,7 +52,7 @@ export const OptionsSelect: FC<OptionsSectionPropsType> = (props) => {
                             item
                             container
                             key={item.id}
-                            xs={column ? 12 : 4}
+                            xs={column ? 12 : isApratment ? 3 : 4}
                             alignItems='center'
                         >
                             <Checkbox

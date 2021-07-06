@@ -456,6 +456,7 @@ export const CarParams: FC<CarParamsPropsType> = (props) => {
                                                             xs={12}
                                                         >
                                                             <OptionsSelect
+                                                                isApratment={false}
                                                                 column
                                                                 t={t}
                                                                 name='power_windows'
@@ -471,6 +472,7 @@ export const CarParams: FC<CarParamsPropsType> = (props) => {
                                                             xs={12}
                                                         >
                                                             <OptionsSelect
+                                                                isApratment={false}
                                                                 column
                                                                 t={t}
                                                                 name='steering'
@@ -493,6 +495,7 @@ export const CarParams: FC<CarParamsPropsType> = (props) => {
                                                             xs={12}
                                                         >
                                                             <OptionsSelect
+                                                                isApratment={false}
                                                                 column
                                                                 t={t}
                                                                 name='seat_heating'
@@ -508,6 +511,7 @@ export const CarParams: FC<CarParamsPropsType> = (props) => {
                                                             xs={12}
                                                         >
                                                             <OptionsSelect
+                                                                isApratment={false}
                                                                 column
                                                                 t={t}
                                                                 name='adjustable_seats'
@@ -632,6 +636,7 @@ export const CarParams: FC<CarParamsPropsType> = (props) => {
                                                     xs={12}
                                                 >
                                                     <OptionsSelect
+                                                        isApratment={false}
                                                         column
                                                         t={t}
                                                         name='parking'
@@ -648,6 +653,7 @@ export const CarParams: FC<CarParamsPropsType> = (props) => {
                                                     xs={12}
                                                 >
                                                     <OptionsSelect
+                                                        isApratment={false}
                                                         column
                                                         t={t}
                                                         name='anti_theft'

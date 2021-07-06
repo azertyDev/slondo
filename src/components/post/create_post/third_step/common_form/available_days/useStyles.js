@@ -11,11 +11,17 @@ export const useStyles = makeStyles(() => ({
         '& div.scheduler': {
             width: '100%',
             height: '140px',
-            '& > div.week-days p.selected-day': {
-                color: '#fff',
-                backgroundColor: '#7DBCF6'
+            '& > div.week-days': {
+                margin: '0 10px',
+                '& p.selected-day': {
+                    color: '#fff',
+                    backgroundColor: '#7DBCF6',
+                    padding: '3px',
+                    borderRadius: '5px'
+                }
             },
             '& div.available-time': {
+                margin: '0 10px',
                 display: 'flex',
                 '& > div': {
                     display: 'flex',
@@ -26,7 +32,7 @@ export const useStyles = makeStyles(() => ({
         '& > a.settings': {
             textTransform: 'initial',
             textDecoration: 'none',
-            color: '#9b66d2',
+            color: '#9b66d2'
         }
     }
-}))
+}));

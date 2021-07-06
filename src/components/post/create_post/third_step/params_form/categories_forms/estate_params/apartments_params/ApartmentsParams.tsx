@@ -57,7 +57,6 @@ export const ApartmentsParams: FC<CommonParamsPropsType> = (props) => {
 
     const {handleNumericInput, handleCheckbox, handleOptionCheckbox, handleSelect} = useHandlers(values, setValues);
     const isLgUp = useMediaQuery(useTheme().breakpoints.up('lg'));
-    const isMdDown = useMediaQuery(useTheme().breakpoints.down('md'));
     const isXsDown = useMediaQuery(useTheme().breakpoints.down('xs'));
 
 
@@ -134,7 +133,7 @@ export const ApartmentsParams: FC<CommonParamsPropsType> = (props) => {
                             <Grid item xs={12} sm={6} md={4} lg={4}>
                                 <NumberSelect
                                     t={t}
-                                    count={isLgUp ? 9 : 5}
+                                    count={isLgUp ? 8 : 5}
                                     name='floor'
                                     errors={errors}
                                     touched={touched}
@@ -142,10 +141,10 @@ export const ApartmentsParams: FC<CommonParamsPropsType> = (props) => {
                                     setValues={setValues}
                                 />
                             </Grid>
-                            <Grid item container xs={12} sm={6} md={5} lg={6}>
+                            <Grid item container xs={12} sm={6} md={5} lg={5}>
                                 <NumberSelect
                                     t={t}
-                                    count={isLgUp ? 9 : 5}
+                                    count={isLgUp ? 8 : 5}
                                     name='number_of_floors'
                                     errors={errors}
                                     touched={touched}
@@ -153,7 +152,7 @@ export const ApartmentsParams: FC<CommonParamsPropsType> = (props) => {
                                     setValues={setValues}
                                 />
                             </Grid>
-                            <Grid item container xs={12} sm={4} md={3} lg={2}>
+                            <Grid item container xs={12} sm={4} md={3} lg={3}>
                                 <DropDownSelect
                                     name='room'
                                     values={values}
@@ -335,6 +334,8 @@ export const ApartmentsParams: FC<CommonParamsPropsType> = (props) => {
                         </Grid>}
                     <div className='options-select-wrapper'>
                         <OptionsSelect
+                            isApratment
+                            column={isXsDown}
                             t={t}
                             name='amenities'
                             values={values}
@@ -342,6 +343,8 @@ export const ApartmentsParams: FC<CommonParamsPropsType> = (props) => {
                             handleOptionCheckbox={handleOptionCheckbox}
                         />
                         <OptionsSelect
+                            isApratment
+                            column={isXsDown}
                             t={t}
                             name='infrastructure'
                             values={values}
