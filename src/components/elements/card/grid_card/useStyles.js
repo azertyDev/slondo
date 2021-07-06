@@ -20,43 +20,10 @@ export const useStyles = makeStyles((theme) => ({
                 top: '5px',
                 right: '5px'
             },
-            '& svg': {
-                '& defs': {
-                    '&.def1 stop': {
-                        stopColor: '#fff'
-                    },
-                    '&:last-child stop': {
-                        '&:first-child': {
-                            stopColor: '#675EAA'
-                        },
-                        '&:last-child': {
-                            stopColor: '#AD66D5'
-                        }
-                    }
-                }
-            },
             '&:hover': {
                 '& svg': {
                     transform: 'scale(1.1)',
-                    transition: 'transform .3s cubic-bezier(.5,0,.5,3)',
-                    '& defs': {
-                        '&.def1 stop': {
-                            '&:first-child': {
-                                stopColor: '#675EAA'
-                            },
-                            '&:last-child': {
-                                stopColor: '#AD66D5'
-                            }
-                        },
-                        '&:last-child stop': {
-                            '&:first-child': {
-                                stopColor: '#fff'
-                            },
-                            '&:last-child': {
-                                stopColor: '#fff'
-                            }
-                        }
-                    }
+                    transition: 'transform .3s cubic-bezier(.5,0,.5,3)'
                 }
             }
         },

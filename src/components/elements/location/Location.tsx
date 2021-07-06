@@ -34,8 +34,8 @@ export const Location: FC<LocationProps> = ({handleSelectLocation}) => {
     const {region, city} = currentLocation;
 
     const hasRegion = !!region;
-    const locationsTxt = `${city ? t(city.name) : ''}${region ? city ? `, ${t(region.name)}` : t(region.name) : ''}`;
-    const prevLocation = hasRegion ? `${t(`${city?.name ?? region.name}`)}` : t(`allUzb`);
+    const locationsTxt = `${city ? t(`${region.name}.${city.name}`) : ''}${region ? city ? `, ${t(`${region.name}.name`)}` : t(`${region.name}.name`) : ''}`;
+    const prevLocation = hasRegion ? `${t(`${city?.name ?? `${region.name}.name`}`)}` : t(`allUzb`);
 
     const currentCities = allLocations.find(loc => loc.id === region?.id)?.cities;
 
@@ -100,6 +100,7 @@ export const Location: FC<LocationProps> = ({handleSelectLocation}) => {
                 locations={locations}
                 prevLocation={prevLocation}
                 locationInputTxt={locationsTxt}
+                region={region}
                 handleModalClose={handleClose}
                 handleLocation={handleLocation}
                 toPrevLocation={toPrevLocation}

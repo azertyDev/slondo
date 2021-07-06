@@ -21,7 +21,6 @@ import {
     Logo,
     QuestionIcon,
     SurpriseIcon,
-    SubstractIcon,
     UserAvatarIcon
 } from '@src/components/elements/icons';
 import {Location} from '@src/components/elements/location/Location';
@@ -82,16 +81,16 @@ export const Top: FC<TopHeaderPropsType> = (props) => {
                                     </a>
                                 </Link>
                             </Grid>
-                            <Grid item md={2}>
-                                <Link href="#">
-                                    <a>
-                                        <Typography variant="subtitle1">
-                                            {t('bonus')}
-                                        </Typography>
-                                        <SubstractIcon/>
-                                    </a>
-                                </Link>
-                            </Grid>
+                            {/*<Grid item md={2}>*/}
+                            {/*    <Link href="#">*/}
+                            {/*        <a>*/}
+                            {/*            <Typography variant="subtitle1">*/}
+                            {/*                {t('bonus')}*/}
+                            {/*            </Typography>*/}
+                            {/*            <SubstractIcon/>*/}
+                            {/*        </a>*/}
+                            {/*    </Link>*/}
+                            {/*</Grid>*/}
                             <Grid item md={2}>
                                 <Link href="/help">
                                     <a className={pathname === '/help' ? 'selected' : ''}>

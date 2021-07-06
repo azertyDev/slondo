@@ -4,12 +4,12 @@ import {Grid, Hidden, Typography} from '@material-ui/core';
 import {LocationIcon} from '@src/components/elements/icons';
 import {CustomButton} from '@src/components/elements/custom_button/CustomButton';
 import {ResponsiveModal} from '@src/components/elements/responsive_modal/ResponsiveModal';
-import KeyboardArrowRightIcon from '@material-ui/icons/KeyboardArrowRight';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import {CloseBtn} from '@src/components/elements/close_button/CloseBtn';
 import {useStyles} from './useStyles';
 
 type LocationModalPropsType = {
+    region,
     hasRegion: boolean,
     prevLocation: string,
     locationInputTxt: string,
@@ -24,6 +24,7 @@ type LocationModalPropsType = {
 export const LocationModal: FC<LocationModalPropsType> = (props) => {
     const {
         t,
+        region,
         hasRegion,
         locations,
         prevLocation,
@@ -93,13 +94,8 @@ export const LocationModal: FC<LocationModalPropsType> = (props) => {
                                     {col.map(loc => (
                                         <Grid item key={loc.id} onClick={handleLocation(loc)}>
                                             <Typography>
-                                                <span>{t(`${loc.name}`)}</span>
+                                                <span>{t(loc.cities ? `${loc.name}.name` : `${region.name}.${loc.name}`)}</span>
                                             </Typography>
-                                            {(!!loc?.cities || !!loc?.district?.length) && (
-                                                <Hidden smUp>
-                                                    <KeyboardArrowRightIcon/>
-                                                </Hidden>
-                                            )}
                                         </Grid>
                                     ))}
                                 </Grid>

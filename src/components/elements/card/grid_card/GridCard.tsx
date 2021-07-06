@@ -11,9 +11,8 @@ import {useDispatch, useSelector} from 'react-redux';
 import {RootState} from '@src/redux/rootReducer';
 import {setErrorMsgAction} from '@src/redux/slices/errorSlice';
 import {months} from '@src/common_data/common';
-import FavoriteIcon from '@material-ui/icons/Favorite';
-import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
 import {useStyles} from './useStyles';
+import {FavoritedIcon, FavoriteIcon} from '@src/components/elements/icons';
 
 type CardItemProps = {
     isFetch: boolean
@@ -81,7 +80,10 @@ export const GridCard: FC<CardItemProps> = (props) => {
                 <IconButton
                     className="favorite-btn" onClick={handleFavorite}
                 >
-                    {liked ? <FavoriteIcon/> : <FavoriteBorderIcon/>}
+                    {liked
+                        ? <FavoriteIcon />
+                        : <FavoritedIcon />
+                    }
                 </IconButton>
             )}
             <Link href={url}>
@@ -162,7 +164,7 @@ export const GridCard: FC<CardItemProps> = (props) => {
                                             <span> {t(`common:${currency.name}`)}</span>
                                         </Typography>
                                         <Typography variant="caption" noWrap>
-                                            {`${city?.name ? `${t(`locations:${city.name}`)}, ` : ''} ${t(`locations:${region.name}`)}`}
+                                            {`${city?.name ? `${t(`locations:${region.name}.${city.name}`)}, ` : ''} ${t(`locations:${region.name}.name`)}`}
                                         </Typography>
                                         <Typography variant="caption">
                                             {formatted_date}

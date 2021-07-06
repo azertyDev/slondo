@@ -5,6 +5,7 @@ export {StoreIcon} from './StoreIcon';
 export {QuestionIcon} from './QuestionIcon';
 export {LocationIcon} from './LocationIcon';
 export {FavoriteIcon} from './FavoriteIcon';
+export {FavoritedIcon} from './FavoritedIcon';
 export {FavoriteBorderIcon} from './FavoriteBorderIcon';
 export {SafeIcon} from './services_icons/SafeIcon';
 export {DeliveryIcon} from './services_icons/DeliveryIcon';
