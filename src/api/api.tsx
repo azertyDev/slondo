@@ -6,7 +6,7 @@ import {AuctionsDataTypes} from '@root/interfaces/Auctions';
 import {UserInfo} from '@root/interfaces/Auth';
 import {cookies} from '@src/helpers';
 
-const productionBackend = 'https://backend.slondo.uz/api/';
+const production = 'https://backend.slondo.uz/api/';
 const uztelecom = 'https://backend.testb.uz/api/';
 const local = 'http://192.168.100.60/slondo/public/api/';
 

@@ -20,6 +20,7 @@ import {ParametersIcon} from '@src/components/elements/icons';
 import {CustomAccordion} from '@src/components/elements/accordion/CustomAccordion';
 import {PostTitle} from '@src/components/post/create_post/third_step/params_form/post_title/PostTitle';
 import {useStyles} from './useStyles';
+import {useTranslation} from "next-i18next";
 
 type CarParamsPropsType = {
     subcategoryName: string
@@ -27,7 +28,6 @@ type CarParamsPropsType = {
 
 export const CarParams: FC<CarParamsPropsType> = (props) => {
     const {
-        t,
         onSubmit,
         categoryName,
         subcategoryName,
@@ -36,6 +36,8 @@ export const CarParams: FC<CarParamsPropsType> = (props) => {
         currentFormIndex,
         handleFormOpen
     } = props;
+
+    const {t} = useTranslation('filters');
 
     const isForeignCars = subcategoryName === 'foreign_cars';
     const isMadeInUzb = subcategoryName === 'made_uzbekistan';
@@ -200,7 +202,7 @@ export const CarParams: FC<CarParamsPropsType> = (props) => {
                     submitTxt='appearance'
                     icon={<ParametersIcon/>}
                     isPreview={isPreview}
-                    title={t('parameters')}
+                    title={t('post:parameters')}
                     open={currentFormIndex === 3}
                     isEditable={currentFormIndex < 3}
                     handleEdit={handleFormOpen(3)}
@@ -219,12 +221,13 @@ export const CarParams: FC<CarParamsPropsType> = (props) => {
                                     xs={12}
                                 >
                                     <DropDownSelect
-                                        transKey={t(`${categoryName}`)}
                                         name='manufacturer'
                                         values={values}
                                         onBlur={handleBlur}
                                         handleSelect={handleSelect}
                                         items={filters.manufacturer}
+                                        transKey={t(`${categoryName}.`)}
+                                        labelTxt={t(`manufacturer`)}
                                         errorMsg={getErrorMsg(errors.manufacturer, touched.manufacturer, t)}
                                     />
                                 </Grid>
@@ -235,8 +238,9 @@ export const CarParams: FC<CarParamsPropsType> = (props) => {
                                     xs={12}
                                 >
                                     <DropDownSelect
-                                        transKey={t(`${categoryName}`)}
                                         name='model'
+                                        labelTxt={t(`model`)}
+                                        transKey={t(`${categoryName}`)}
                                         values={values}
                                         onBlur={handleBlur}
                                         handleSelect={handleSelect}
@@ -251,8 +255,9 @@ export const CarParams: FC<CarParamsPropsType> = (props) => {
                                     xs={12}
                                 >
                                     <DropDownSelect
-                                        transKey={t(`${categoryName}`)}
                                         name='year'
+                                        labelTxt={t(`year`)}
+                                        transKey={t(`${categoryName}.`)}
                                         values={values}
                                         onBlur={handleBlur}
                                         handleSelect={handleSelect}
@@ -268,7 +273,6 @@ export const CarParams: FC<CarParamsPropsType> = (props) => {
                                             xs={12}
                                         >
                                             <BodySelect
-                                                t={t}
                                                 values={values}
                                                 bodies={filters.body}
                                                 handleSelect={handleSelect}
@@ -283,8 +287,9 @@ export const CarParams: FC<CarParamsPropsType> = (props) => {
                                                 xs={12}
                                             >
                                                 <DropDownSelect
-                                                    transKey={t(`${categoryName}`)}
+                                                    transKey={t(`${categoryName}.`)}
                                                     name='position'
+                                                    labelTxt={t(`car.position.name`)}
                                                     values={values}
                                                     onBlur={handleBlur}
                                                     items={valuesByYear.positions}
@@ -302,8 +307,9 @@ export const CarParams: FC<CarParamsPropsType> = (props) => {
                                                     xs={12}
                                                 >
                                                     <DropDownSelect
-                                                        transKey={t(`${categoryName}`)}
+                                                        transKey={t(`${categoryName}.`)}
                                                         name='transmission'
+                                                        labelTxt={t(`car.transmission.name`)}
                                                         values={values}
                                                         onBlur={handleBlur}
                                                         items={filters.transmission}
@@ -318,8 +324,9 @@ export const CarParams: FC<CarParamsPropsType> = (props) => {
                                                     xs={12}
                                                 >
                                                     <DropDownSelect
-                                                        transKey={t(`${categoryName}`)}
+                                                        transKey={t(`${categoryName}.`)}
                                                         name='drive'
+                                                        labelTxt={t(`car.drive.name`)}
                                                         values={values}
                                                         onBlur={handleBlur}
                                                         items={filters.drive}
@@ -334,7 +341,8 @@ export const CarParams: FC<CarParamsPropsType> = (props) => {
                                                     xs={12}
                                                 >
                                                     <DropDownSelect
-                                                        transKey={t(`${categoryName}`)}
+                                                        transKey={t(`${categoryName}.`)}
+                                                        labelTxt={t(`car.engine_type.name`)}
                                                         name='engine_type'
                                                         values={values}
                                                         onBlur={handleBlur}
@@ -352,7 +360,7 @@ export const CarParams: FC<CarParamsPropsType> = (props) => {
                                                     <FormikField
                                                         t={t}
                                                         name='engine_capacity'
-                                                        labelText='engine_capacity'
+                                                        labelText={t('engine_capacity.name')}
                                                         value={values.engine_capacity}
                                                         onChange={handleNumericInput}
                                                         errorMsg={getErrorMsg(errors.engine_capacity, touched.engine_capacity, t)}
@@ -382,7 +390,7 @@ export const CarParams: FC<CarParamsPropsType> = (props) => {
                                                 >
                                                     <CheckboxSelect
                                                         name='broken'
-                                                        labelTxt={t('filters:broken')}
+                                                        labelTxt={t('broken')}
                                                         checked={values.broken}
                                                         handleCheckbox={handleCheckbox}
                                                     />
@@ -392,7 +400,7 @@ export const CarParams: FC<CarParamsPropsType> = (props) => {
                                                     xs={12}
                                                 >
                                                     <Typography variant='h5'>
-                                                        <strong>{t('filters:comfort_salon_title')}</strong>
+                                                        <strong>{t('comfort_salon_title')}</strong>
                                                     </Typography>
                                                 </Grid>
                                                 <Grid
@@ -402,12 +410,13 @@ export const CarParams: FC<CarParamsPropsType> = (props) => {
                                                     xs={12}
                                                 >
                                                     <DropDownSelect
-                                                        transKey={t(`${categoryName}`)}
                                                         name='climate'
                                                         values={values}
                                                         onBlur={handleBlur}
                                                         items={filters.climate}
                                                         handleSelect={handleSelect}
+                                                        labelTxt={t('car.climate.name')}
+                                                        transKey={t(`${categoryName}.`)}
                                                     />
                                                 </Grid>
                                                 <Grid
@@ -417,7 +426,8 @@ export const CarParams: FC<CarParamsPropsType> = (props) => {
                                                     xs={12}
                                                 >
                                                     <DropDownSelect
-                                                        transKey={t(`${categoryName}`)}
+                                                        transKey={t(`${categoryName}.`)}
+                                                        labelTxt={t('car.power_steering.name')}
                                                         name='power_steering'
                                                         values={values}
                                                         onBlur={handleBlur}
@@ -433,9 +443,10 @@ export const CarParams: FC<CarParamsPropsType> = (props) => {
                                                     alignItems='flex-end'
                                                 >
                                                     <DropDownSelect
-                                                        transKey={t(`${categoryName}`)}
+                                                        transKey={t(`${categoryName}.`)}
                                                         multiple
                                                         name='comfort'
+                                                        labelTxt={t('car.comfort.name')}
                                                         values={values}
                                                         onBlur={handleBlur}
                                                         items={filters.comfort}
@@ -525,7 +536,8 @@ export const CarParams: FC<CarParamsPropsType> = (props) => {
                                                     xs={12}
                                                 >
                                                     <DropDownSelect
-                                                        transKey={t(`${categoryName}`)}
+                                                        transKey={t(`${categoryName}.`)}
+                                                        labelTxt={t('car.seats.name')}
                                                         name='seats'
                                                         values={values}
                                                         onBlur={handleBlur}
@@ -540,7 +552,8 @@ export const CarParams: FC<CarParamsPropsType> = (props) => {
                                                     xs={12}
                                                 >
                                                     <DropDownSelect
-                                                        transKey={t(`${categoryName}`)}
+                                                        transKey={t(`${categoryName}.`)}
+                                                        labelTxt={t('car.seats.name')}
                                                         name='upholstery'
                                                         values={values}
                                                         onBlur={handleBlur}
@@ -556,7 +569,8 @@ export const CarParams: FC<CarParamsPropsType> = (props) => {
                                                     alignItems='flex-end'
                                                 >
                                                     <DropDownSelect
-                                                        transKey={t(`${categoryName}`)}
+                                                        transKey={t(`${categoryName}.`)}
+                                                        labelTxt={t('car.multimedia.name')}
                                                         multiple
                                                         name='multimedia'
                                                         values={values}
@@ -570,7 +584,7 @@ export const CarParams: FC<CarParamsPropsType> = (props) => {
                                                     xs={12}
                                                 >
                                                     <Typography variant='h5'>
-                                                        <strong>{t('filters:driving_assistance_safety_title')}</strong>
+                                                        <strong>{t('driving_assistance_safety_title')}</strong>
                                                     </Typography>
                                                 </Grid>
                                                 <Grid
@@ -581,7 +595,8 @@ export const CarParams: FC<CarParamsPropsType> = (props) => {
                                                     alignItems='flex-end'
                                                 >
                                                     <DropDownSelect
-                                                        transKey={t(`${categoryName}`)}
+                                                        transKey={t(`${categoryName}.`)}
+                                                        labelTxt={t('car.assistance.name')}
                                                         multiple
                                                         name='assistance'
                                                         values={values}
@@ -598,7 +613,8 @@ export const CarParams: FC<CarParamsPropsType> = (props) => {
                                                     alignItems='flex-end'
                                                 >
                                                     <DropDownSelect
-                                                        transKey={t(`${categoryName}`)}
+                                                        transKey={t(`${categoryName}.`)}
+                                                        labelTxt={t('car.airbags.name')}
                                                         multiple
                                                         name='airbags'
                                                         values={values}
@@ -615,7 +631,8 @@ export const CarParams: FC<CarParamsPropsType> = (props) => {
                                                     alignItems='flex-end'
                                                 >
                                                     <DropDownSelect
-                                                        transKey={t(`${categoryName}`)}
+                                                        transKey={t(`${categoryName}.`)}
+                                                        labelTxt={t('car.safety.name')}
                                                         multiple
                                                         name='safety'
                                                         values={values}
@@ -661,7 +678,7 @@ export const CarParams: FC<CarParamsPropsType> = (props) => {
                                                     xs={12}
                                                 >
                                                     <Typography variant='h5'>
-                                                        <strong>{t('filters:visibility')}</strong>
+                                                        <strong>{t('visibility')}</strong>
                                                     </Typography>
                                                 </Grid>
                                                 <Grid
@@ -671,7 +688,8 @@ export const CarParams: FC<CarParamsPropsType> = (props) => {
                                                     xs={12}
                                                 >
                                                     <DropDownSelect
-                                                        transKey={t(`${categoryName}`)}
+                                                        transKey={t(`${categoryName}.`)}
+                                                        labelTxt={t('car.headlight.name')}
                                                         name='headlight'
                                                         values={values}
                                                         onBlur={handleBlur}
@@ -687,7 +705,8 @@ export const CarParams: FC<CarParamsPropsType> = (props) => {
                                                     alignItems='flex-end'
                                                 >
                                                     <DropDownSelect
-                                                        transKey={t(`${categoryName}`)}
+                                                        transKey={t(`${categoryName}.`)}
+                                                        labelTxt={t('car.overview.name')}
                                                         multiple
                                                         name='overview'
                                                         values={values}
@@ -704,7 +723,8 @@ export const CarParams: FC<CarParamsPropsType> = (props) => {
                                                     alignItems='flex-end'
                                                 >
                                                     <DropDownSelect
-                                                        transKey={t(`${categoryName}`)}
+                                                        transKey={t(`${categoryName}.`)}
+                                                        labelTxt={t('car.other.name')}
                                                         multiple
                                                         name='other'
                                                         values={values}

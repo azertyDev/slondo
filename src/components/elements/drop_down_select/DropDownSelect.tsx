@@ -35,6 +35,7 @@ export const DropDownSelect: FC<CustomSelectPropsType> = (props) => {
 
     const isCurrency = name === 'currency';
     const optionKey = name === 'duration' ? 'hours' : 'name';
+    const noTranslatable = name === 'manufacturer' || name === 'model' || name === 'year';
 
     const onChange = ({target}) => {
         const {name, value} = target;
@@ -52,7 +53,7 @@ export const DropDownSelect: FC<CustomSelectPropsType> = (props) => {
             if (selectedItem !== null) value = selectedItem[optionKey];
         }
 
-        return t(`${selected && transKey ? `${transKey}${value}.name` : value}`);
+        return t(`${selected && transKey && !noTranslatable ? `${transKey}${value}.name` : value}`);
     };
 
     const classes = useStyles();
@@ -61,8 +62,8 @@ export const DropDownSelect: FC<CustomSelectPropsType> = (props) => {
             <label htmlFor={name}>
                 <Typography variant='subtitle1' gutterBottom>
                     {multiple
-                     ? labelTxt
-                     : !isCurrency && (
+                        ? labelTxt
+                        : !isCurrency && (
                         <>
                             {labelTxt}
                             {!disableRequire && isRequired(name) && <span className='error-text'>*&nbsp;</span>}
@@ -83,9 +84,7 @@ export const DropDownSelect: FC<CustomSelectPropsType> = (props) => {
                 value={multiple ? values[name] || [] : values[name]?.id ?? 0}
             >
                 {!multiple && !isCurrency && (
-                    <MenuItem
-                        value={0}
-                    >
+                    <MenuItem value={0}>
                         {t('filters:noSelect')}
                     </MenuItem>
                 )}
@@ -94,14 +93,16 @@ export const DropDownSelect: FC<CustomSelectPropsType> = (props) => {
                         key={item.id}
                         value={multiple ? item : item.id}
                     >
-                        {multiple && <Checkbox
-                            size="small"
-                            checked={!!values[name]?.some(el => el.id === item.id)}
-                            style={{padding: 0, marginRight: 5}}
-                        />}
-                        {t(transKey
-                           ? `${transKey}${item[optionKey]}.name`
-                           : item[optionKey])}
+                        {multiple && (
+                            <Checkbox
+                                size="small"
+                                checked={!!values[name]?.some(el => el.id === item.id)}
+                                style={{padding: 0, marginRight: 5}}
+                            />
+                        )}
+                        {t(transKey && !noTranslatable
+                            ? `${transKey}${item[optionKey]}`
+                            : item[optionKey])}
                     </MenuItem>
                 ))}
             </Select>

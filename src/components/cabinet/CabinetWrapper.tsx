@@ -1,10 +1,18 @@
 import {FC} from 'react';
+import {useSelector} from 'react-redux';
+import {useTranslation} from "next-i18next";
 import {Grid, Typography} from '@material-ui/core';
 import {MainLayout} from '@src/components/main_layout/MainLayout';
 import {CabinetSidebar} from './cabinet_sidebar/CabinetSidebar';
-import {useSelector} from 'react-redux';
 import {RootState} from '@src/redux/rootReducer';
 import {useStyles} from './useStyles';
+
+export type CommonModalType = {
+    post,
+    open: boolean,
+    onClose: () => void,
+    handleRefresh: () => void
+};
 
 export type CabinetMenuPropsType = {
     title: string;
@@ -12,11 +20,12 @@ export type CabinetMenuPropsType = {
 };
 
 export const CabinetWrapper: FC<CabinetMenuPropsType> = ({children, title, headerTitle}) => {
+    const {t} = useTranslation('cabinet');
     const {info} = useSelector((store: RootState) => store.user);
 
     const classes = useStyles();
     return (
-        <MainLayout title={`Мой кабинет | ${title}`}>
+        <MainLayout title={`${t('my_cabinet')} | ${title}`}>
             <div className={classes.root}>
                 <Grid container spacing={2}>
                     <Grid item xs={3}>

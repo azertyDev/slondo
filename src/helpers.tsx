@@ -224,7 +224,7 @@ export const getCtgrsByCyrillicNames = (categories: string[] = []): CtgrsByCyril
 };
 
 export const numberPrettier = (price: string | number): string => {
-    return !!price
+    return (price !== '' && price !== undefined && price !== null)
         ? price.toString()
             .replace(/\s/g, '')
             .replace(/\B(?=(\d{3})+(?!\d))/g, ' ')

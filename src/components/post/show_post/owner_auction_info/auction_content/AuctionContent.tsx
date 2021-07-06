@@ -45,7 +45,6 @@ export const AuctionContent: FC<AuctionInfoPropsType> = (props) => {
             auction_id: auctionId,
             page: 1,
             itemsPerPage: 5,
-            archive: 0
         }
     );
     const [lastBet] = bets;
@@ -164,16 +163,16 @@ export const AuctionContent: FC<AuctionInfoPropsType> = (props) => {
                                             variant='subtitle1'
                                             className='subtitle'
                                         >
-                                            Нажимая кнопку “Купить сейчас” вы выкупаете лот на сумму&nbsp;
-                                            <span className='buy-now-price'>
+                                            Нажимая кнопку “Купить сейчас” вы выкупаете лот на сумму
+                                            &nbsp;<span className='buy-now-price'>
                                                 {numberPrettier(postData.auction.price_buy_now)}
-                                            </span>
-                                            сум и соглашаетесь с &nbsp;
-                                            <span className='condition'>
+                                            </span>&nbsp;
+                                            сум и соглашаетесь с
+                                            &nbsp;<span className='condition'>
                                                 <Link href="#">
-                                                    <a>условиями&nbsp;</a>
+                                                    <a>условиями</a>
                                                 </Link>
-                                            </span>
+                                            </span>&nbsp;
                                             сайта
                                         </Typography>
                                         <div className='confirm'>

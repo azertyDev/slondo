@@ -1,27 +1,21 @@
 import {FC, useEffect, useState} from 'react';
-import {Box, FormControlLabel, Switch, Typography} from '@material-ui/core';
-import {numberPrettier} from '@src/helpers';
-import {Notification} from '@src/components/cabinet/cabinet_pages/notifications/notification_card/Notification';
-import {CustomPagination} from '@src/components/elements/custom_pagination/CustomPagination';
-import {ITEMS_PER_PAGE} from '@src/constants';
-import {CabinetModal} from '@src/components/cabinet/components/cabinet_modal/CabinetModal';
-import {useTranslation} from 'next-i18next';
 import {userAPI} from '@src/api/api';
-import {setErrorMsgAction} from '@src/redux/slices/errorSlice';
-import {initialNotificationType} from '@src/components/cabinet/cabinet_pages/notifications/NotificationsContainer';
 import {useDispatch} from 'react-redux';
+import {numberPrettier} from '@src/helpers';
+import {useTranslation} from 'next-i18next';
+import {ITEMS_PER_PAGE} from '@src/constants';
+import {setErrorMsgAction} from '@src/redux/slices/errorSlice';
+import {Box, FormControlLabel, Switch, Typography} from '@material-ui/core';
+import {CabinetModal} from '@src/components/cabinet/components/cabinet_modal/CabinetModal';
+import {initialNotificationType} from '@src/components/cabinet/cabinet_pages/notifications/NotificationsContainer';
+import {CommonModalType} from "@src/components/cabinet/CabinetWrapper";
 
-type NotificationModalPropsType = {
-    open: boolean,
-    onClose: () => void,
-    post
-};
-
-export const NotificationModal: FC<NotificationModalPropsType> = (props) => {
+export const NotificationModal: FC<CommonModalType> = (props) => {
     const {
+        post,
         open,
         onClose,
-        post
+        handleRefresh
     } = props;
 
     const dispatch = useDispatch();
@@ -72,7 +66,7 @@ export const NotificationModal: FC<NotificationModalPropsType> = (props) => {
         try {
 
         } catch (e) {
-            
+
         }
     };
 

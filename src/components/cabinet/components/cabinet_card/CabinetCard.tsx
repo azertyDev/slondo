@@ -13,8 +13,8 @@ import {useStyles} from './useStyles';
 type CabinetCardPropsType = {
     archive?: boolean,
     cardData: CardDataType,
-    handleDetailedOpen?: (id: number, post) => () => void,
-    handleNotificationsOpen?: (id: number) => () => void,
+    handleDetailedOpen?: (post) => () => void,
+    handleNotificationsOpen?: (post: CardDataType) => () => void,
     handleOpenModal?: (id: number) => () => void
 }
 
@@ -31,7 +31,7 @@ export const CabinetCard: FC<CabinetCardPropsType> = (props) => {
     const {t} = useTranslation('common');
 
     const {
-        id,
+        observer,
         category,
         adsable,
         ads_type,
@@ -45,15 +45,15 @@ export const CabinetCard: FC<CabinetCardPropsType> = (props) => {
                 <div className='breadcrumbs'>
                     <BreadcrumbsComponent
                         category={category.name}
-                        subcategory={adsable?.sub_category.name}
                         type={adsable?.type?.name}
+                        subcategory={adsable?.sub_category.name}
                     />
                     <Box display='flex' alignItems='center'>
                         <Typography variant="subtitle1" color="initial">
                         <span className={ads_type}>
                             {t(`common:${ads_type}`)} №:&nbsp;
                         </span>
-                            {id}
+                            {cardData.id}
                         </Typography>
                         <div className='status'>
                             <Typography variant='subtitle2'>
@@ -66,7 +66,10 @@ export const CabinetCard: FC<CabinetCardPropsType> = (props) => {
             <Box position='relative'>
                 <ListCard cardData={cardData}/>
                 {handleDetailedOpen && (
-                    <CustomButton className='unfold-btn' onClick={handleDetailedOpen(id, cardData)}>
+                    <CustomButton
+                        className='unfold-btn'
+                        onClick={handleDetailedOpen(cardData)}
+                    >
                         <Typography variant='subtitle1'>
                             Раскрыть объявление
                         </Typography>&nbsp;
@@ -75,13 +78,19 @@ export const CabinetCard: FC<CabinetCardPropsType> = (props) => {
                 )}
                 <div className='card-btns'>
                     {pathname?.includes('favorite')
-                     ? <CustomButton className='delete_favorite' onClick={handleOpenModal(id)}>
-                         <CloseIcon/>
-                     </CustomButton>
-                     : cardData.creator && (
+                        ? <CustomButton
+                            className='delete_favorite'
+                            onClick={handleOpenModal(cardData.id)}
+                        >
+                            <CloseIcon/>
+                        </CustomButton>
+                        : cardData.creator && (
                         <>
                             {!archive && (
-                                <CustomButton className='advertise'>
+                                <CustomButton
+                                    disabled
+                                    className='advertise'
+                                >
                                     <RocketIcon/>
                                     <Typography variant='subtitle1'>
                                         Рекламировать
@@ -90,7 +99,8 @@ export const CabinetCard: FC<CabinetCardPropsType> = (props) => {
                             )}
                             <CustomButton
                                 className='notifications'
-                                onClick={handleNotificationsOpen(id)}
+                                onClick={handleNotificationsOpen(cardData)}
+                                disabled={!observer.number_of_notifications}
                             >
                                 <NotificationIcon/>
                             </CustomButton>

@@ -1,4 +1,5 @@
 {
+  "my_cabinet": "Mening kabinetim",
   "perform_purchase": "Xaridni tastiqlash",
   "dismiss_purchase": "Xaridni bekor qilish",
   "sms_code": "Sms kod",
@@ -7,7 +8,7 @@
   "add_card_for_safe_deal": "Xavfsiz xarid uchun siz to'lov kartasini ulashingiz kerak",
   "cardName": "Karta no'mi",
   "turn_on_editable": "Tahrirlashni yoqish",
-  "card_remove_txt": "kartani o'chirishni xohlaysizmi?",
+  "card_remove_txt": "Kartani o'chirishni xohlaysizmi?",
   "card_number": "Karta raqami",
   "expiration_date": "Amal qilish muddati",
   "myPosts": "Mening e'lonlarim",

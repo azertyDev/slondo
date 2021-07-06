@@ -1,10 +1,19 @@
 {
   "car": {
+    "body_type": {
+      "name": "Kuzov turi"
+    },
+    "position": {
+      "name": "Pozitsiya"
+    },
+    "transmission": {
+      "name": "Transmisiya"
+    },
     "passenger": {
-      "name": "yo’lovchilarniki"
+      "name": "Yo’lovchilarniki"
     },
     "drivers": {
-      "name": "haydovchilarniki "
+      "name": "Haydovchilarniki "
     },
     "side_front": {
       "name": "Oldi yoni"
@@ -277,6 +286,9 @@
       "name": "Avtomatik parkovka tizimi"
     },
     "power_steering": {
+      "name": "Rul kuchaytirgich"
+    },
+    "hydro_power": {
       "name": "Gidravlik kuchaytirgich"
     },
     "electric_power": {

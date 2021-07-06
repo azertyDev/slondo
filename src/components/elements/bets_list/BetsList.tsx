@@ -39,7 +39,7 @@ export const BetsList: FC<BetsListPropsType> = (props) => {
                     {title}
                 </div>
                 <div onClick={handleRefresh} style={{cursor: 'pointer'}}>
-                    <RefreshIcon />
+                    <RefreshIcon/>
                 </div>
             </Typography>
             <TableContainer className='bets-table'>
@@ -85,9 +85,9 @@ export const BetsList: FC<BetsListPropsType> = (props) => {
                                         variant="subtitle2"
                                         className="outbid"
                                     >
-                                        {(index + 1) === betsCount
-                                         ? <span className='started-price'>Стартовая цена</span>
-                                         : `+ ${numberPrettier(bet.outbid)}`}
+                                        {index === betsCount - 1
+                                            ? <span className='started-price'>Стартовая цена</span>
+                                            : `+ ${numberPrettier(bet.outbid)}`}
                                     </Typography>
                                 </TableCell>
                             </TableRow>
