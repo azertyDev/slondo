@@ -1,7 +1,7 @@
 import {FC} from 'react';
 import {Typography} from '@material-ui/core';
-import {WithT} from 'i18next';
 import {useStyles} from './useStyles';
+import {useTranslation} from "react-i18next";
 
 
 type BodyTypesProps = {
@@ -10,11 +10,10 @@ type BodyTypesProps = {
     values,
     errorMsg: string,
     handleSelect: (k, v) => void
-} & WithT;
+};
 
 export const BodySelect: FC<BodyTypesProps> = (props) => {
     const {
-        t,
         values,
         bodies,
         errorMsg,
@@ -22,12 +21,14 @@ export const BodySelect: FC<BodyTypesProps> = (props) => {
         disableRequire
     } = props;
 
+    const {t} = useTranslation('filters');
+
     const classes = useStyles();
     return (
         <div className={classes.root}>
             <Typography variant='subtitle1' className='title'>
                 <strong>
-                    {t('filters:body')}
+                    {t('filters:car.body_type.name')}
                     {!disableRequire && <span className='error-text'>*&nbsp;</span>}
                 </strong>
                 {errorMsg && (

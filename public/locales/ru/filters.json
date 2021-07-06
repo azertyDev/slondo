@@ -1,5 +1,14 @@
 {
   "car": {
+    "body_type": {
+      "name": "Тип кузова"
+    },
+    "position": {
+      "name": "Позиция"
+    },
+    "transmission": {
+      "name": "Трансмиссия"
+    },
     "passenger": {
       "name": "Пассажирские"
     },
@@ -277,6 +286,9 @@
       "name": "Система автоматической парковки"
     },
     "power_steering": {
+      "name": "Уселитель руля"
+    },
+    "hydro_power": {
       "name": "Гидроусилитель"
     },
     "electric_power": {

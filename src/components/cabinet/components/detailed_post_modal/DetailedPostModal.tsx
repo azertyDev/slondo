@@ -24,10 +24,10 @@ import {useBetsData} from '@src/hooks/useBetsData';
 import {numberPrettier} from '@src/helpers';
 import {userAPI} from '@src/api/api';
 import {setErrorMsgAction} from '@src/redux/slices/errorSlice';
-import {OffersStateType} from '@root/interfaces/Cabinet';
 import {useModal} from '@src/hooks/useModal';
 import {RatingModal} from '@src/components/elements/rating_modal/RatingModal';
 import {SettingsModal} from '@src/components/cabinet/components/settings_modal/SettingsModal';
+import {OffersModal} from "@src/components/cabinet/components/offers_modal/OffersModal";
 import {useStyles} from './useStyles';
 
 type DetailedPostViewPropsType = {
@@ -35,11 +35,11 @@ type DetailedPostViewPropsType = {
     open: boolean,
     handleRefresh: () => void,
     onClose: () => void,
-    handleNotificationsOpen: (id: number) => () => void,
+    handleNotificationsOpen: (post: CardDataType) => () => void,
     handleDeactivate?: () => Promise<void>,
 }
-
 export const DetailedPostModal: FC<DetailedPostViewPropsType> = (props) => {
+
     const {
         open,
         onClose,
@@ -60,79 +60,72 @@ export const DetailedPostModal: FC<DetailedPostViewPropsType> = (props) => {
     const offer = post.auction?.offer;
     const offering = offer?.user;
     const author = post.author;
-    const winner = post.auction?.winner;
-    const isUserWinner = winner?.id === userInfo.id;
+    const hasWinner = post.auction?.winner;
+    const isUserWinner = hasWinner?.id === userInfo.id;
     const isUserCreator = author?.id === userInfo.id;
-    const userForRating = isUserWinner ? winner : author;
+    const userForRating = isUserWinner ? hasWinner : author;
+    const hasOffer = offering && isPublic;
 
-    const userData = (isUserWinner || !isUserCreator) ? author : winner ?? offering;
-
-    const initialOffersState: OffersStateType = {
-        total: null,
-        data: []
-    };
+    const userData = (isUserWinner || !isUserCreator) ? author : hasWinner ?? offering;
 
     const [isFetch, setIsFetch] = useState(false);
 
     const {modalOpen: ratingOpen, handleModalOpen: handleOpenRating, handleModalClose: handleCloseRating} = useModal();
-    const {modalOpen: settingsModalOpen, handleModalClose: closeSettingsModal, handleModalOpen: openSettingsModal} = useModal();
+    const {modalOpen: offersOpen, handleModalClose: handleCloseOffers, handleModalOpen: handleOpenOffers} = useModal();
+    const {modalOpen: settingsOpen, handleModalClose: handleCloseSettings, handleModalOpen: handleOpenSettings} = useModal();
 
-    const {bets, betsCount, isBetsFetch, setFetchedBetsData} = useBetsData(
-        {
-            page: 1,
-            itemsPerPage: 2,
-            auction_id: auctionId
-        }
-    );
+    const {bets, betsCount, isBetsFetch, setFetchedBetsData} = useBetsData({
+        page: 1,
+        itemsPerPage: 2,
+        auction_id: auctionId
+    });
 
     const [lastBet] = bets;
 
-    const acceptOfferThePrice = (offer_id: number, accept = false) => async () => {
-        try {
-            setIsFetch(true);
-
-            await userAPI.acceptOfferThePrice(offer_id, accept);
-
-            handleRefresh();
-            setIsFetch(false);
-        } catch (e) {
-            setIsFetch(false);
-            dispatch(setErrorMsgAction(e.message));
-        }
-    };
-
-    const handleDeactivate = async () => {
-        try {
-            setIsFetch(true);
-            await userAPI.deactivateById(post.id);
-            onClose();
-            handleOpenRating();
-            handleRefresh();
-            setIsFetch(false);
-        } catch (e) {
-            setIsFetch(false);
-            dispatch(setErrorMsgAction(e.message));
-        }
-    };
-
-    const handleSettingsClose = () => {
-        closeSettingsModal();
+    const handleOffersOpen = () => {
+        onClose();
+        handleOpenOffers();
     };
 
     const handleSettingsOpen = () => {
         onClose();
-        openSettingsModal();
+        handleOpenSettings();
     };
 
-    const handleRejectVictory = (auction_id) => async () => {
+    const handleReject = async () => {
         try {
             setIsFetch(true);
-            await userAPI.rejectVictory(auction_id);
+            if (isUserCreator) {
+                await userAPI.acceptOfferThePrice(offer.id, false);
+            } else {
+                await userAPI.rejectVictory(post.id);
+            }
+            onClose();
             handleRefresh();
             setIsFetch(false);
         } catch (e) {
             setIsFetch(false);
             dispatch(setErrorMsgAction(e.message));
+        }
+    };
+
+    const handleAccept = async () => {
+        if (isUserCreator) {
+            try {
+                setIsFetch(true);
+                if (hasWinner) {
+                    await userAPI.deactivateById(post.id);
+                    handleOpenRating();
+                } else if (hasOffer) {
+                    await userAPI.acceptOfferThePrice(offer.id, true);
+                }
+                onClose();
+                handleRefresh();
+                setIsFetch(false);
+            } catch (e) {
+                setIsFetch(false);
+                dispatch(setErrorMsgAction(e.message));
+            }
         }
     };
 
@@ -141,6 +134,7 @@ export const DetailedPostModal: FC<DetailedPostViewPropsType> = (props) => {
     }, [auctionId, open]);
 
     console.log(post);
+    console.log(bets);
     const classes = useStyles();
     return (
         <div>
@@ -224,8 +218,8 @@ export const DetailedPostModal: FC<DetailedPostViewPropsType> = (props) => {
                         <Grid item xs={12} md={6}>
                             <CustomButton
                                 className={`${classes.btn} notification`}
-                                // disabled={!data.observer.number_of_notifications}
-                                onClick={handleNotificationsOpen(post.id)}
+                                disabled={!post.observer.number_of_notifications}
+                                onClick={handleNotificationsOpen(post)}
                             >
                                 <Typography
                                     noWrap
@@ -238,8 +232,9 @@ export const DetailedPostModal: FC<DetailedPostViewPropsType> = (props) => {
                             </CustomButton>
                             {!archive && isUserCreator && (
                                 <CustomButton
-                                    className={`${classes.btn} settings`}
                                     onClick={handleSettingsOpen}
+                                    disabled={post.status !== 'public'}
+                                    className={`${classes.btn} settings`}
                                 >
                                     <Typography variant='subtitle1'>
                                         {t('settings')}
@@ -253,13 +248,12 @@ export const DetailedPostModal: FC<DetailedPostViewPropsType> = (props) => {
                                 <Box className='location' width={1}>
                                     <LocationIcon/>
                                     <Typography
-                                        variant="subtitle1"
-                                        color="initial"
                                         noWrap
+                                        color="initial"
+                                        variant="subtitle1"
                                     >
-                                        {`${t(`locations:${post.region?.name ?? ''}`)}`}
-                                        {`, ${t(`locations:${post.city?.name ?? ''}`)}`}
-                                        {`, ${t(`locations:${post.district?.name ?? ''}`)}`}
+                                        {t(`locations:${post.region?.name}`)}
+                                        {post.city?.name ? `, ${t(`locations:${post.city.name}`)}` : ''}
                                     </Typography>
                                 </Box>
                             </Paper>
@@ -279,25 +273,25 @@ export const DetailedPostModal: FC<DetailedPostViewPropsType> = (props) => {
                             <>
                                 <Grid item xs={12} md={6}>
                                     {isBetsFetch
-                                     ? <CircularProgress color="primary"/>
-                                     : <BetsList
-                                         bets={bets}
-                                         showBetsCount={2}
-                                         betsCount={betsCount}
-                                         auctionId={auctionId}
-                                         handleRefresh={setFetchedBetsData}
-                                         title={t('auction:extremeRates')}
-                                     />}
+                                        ? <CircularProgress color="primary"/>
+                                        : <BetsList
+                                            bets={bets}
+                                            showBetsCount={2}
+                                            betsCount={betsCount}
+                                            auctionId={auctionId}
+                                            handleRefresh={setFetchedBetsData}
+                                            title={t('auction:extremeRates')}
+                                        />}
                                 </Grid>
                                 <Grid item xs={12} md={6} className={classes.userInfoWrapper}>
                                     <div className='user-info-title'>
                                         {(isUserWinner || isUserCreator) && userData && (
                                             <Typography variant='subtitle2' gutterBottom>
                                                 {isUserWinner
-                                                 ? 'Продавец'
-                                                 : offer && !winner
-                                                   ? 'Макс. предложенная цена:'
-                                                   : 'Победитель аукциона'}
+                                                    ? 'Продавец'
+                                                    : offer && !hasWinner
+                                                        ? 'Макс. предложенная цена:'
+                                                        : 'Победитель аукциона'}
                                             </Typography>
                                         )}
                                         {isUserCreator && offer && (
@@ -305,7 +299,11 @@ export const DetailedPostModal: FC<DetailedPostViewPropsType> = (props) => {
                                                 &nbsp;<Typography variant='subtitle2'>
                                                 {`${numberPrettier(offer?.price)} сум`}
                                             </Typography>&nbsp;
-                                                <Typography className='all-offers' variant='subtitle2'>
+                                                <Typography
+                                                    variant='subtitle2'
+                                                    className='all-offers'
+                                                    onClick={handleOffersOpen}
+                                                >
                                                     Все предложения ({post.auction?.number_of_offers})
                                                 </Typography>
                                             </>
@@ -313,64 +311,52 @@ export const DetailedPostModal: FC<DetailedPostViewPropsType> = (props) => {
                                     </div>
                                     <Paper className='paper-block'>
                                         {userData
-                                         ? <div className='user-info'>
-                                             <UserInfoWithAvatar
-                                                 isOwner
-                                                 width='50px'
-                                                 height='50px'
-                                                 owner={userData}
-                                             />
-                                             <div className='contacts-btns'>
-                                                 <CustomButton>
-                                                     <PhoneIcon/>
-                                                     <Typography variant='subtitle2'>
-                                                         Позвонить
-                                                     </Typography>
-                                                 </CustomButton>
-                                                 <CustomButton disabled>
-                                                     <LetterIcon/>
-                                                     <Typography variant='subtitle2'>
-                                                         Написать
-                                                     </Typography>
-                                                 </CustomButton>
-                                             </div>
-                                         </div>
-                                         : <div>{t(`last_bet`, lastBet?.bet)}</div>}
+                                            ? <div className='user-info'>
+                                                <UserInfoWithAvatar
+                                                    isOwner
+                                                    width='50px'
+                                                    height='50px'
+                                                    owner={userData}
+                                                />
+                                                <div className='contacts-btns'>
+                                                    <CustomButton>
+                                                        <PhoneIcon/>
+                                                        <Typography variant='subtitle2'>
+                                                            Позвонить
+                                                        </Typography>
+                                                    </CustomButton>
+                                                    <CustomButton disabled>
+                                                        <LetterIcon/>
+                                                        <Typography variant='subtitle2'>
+                                                            Написать
+                                                        </Typography>
+                                                    </CustomButton>
+                                                </div>
+                                            </div>
+                                            : <div>{t(`auction:last_bet`, {lastBet: lastBet?.bet})}</div>}
                                     </Paper>
                                     {(isUserCreator || isUserWinner) && !archive && (
                                         <Box>
                                             <div className={classes.actionButtons}>
-                                                {isUserCreator && offering && isPublic && (
-                                                    <CustomButton
-                                                        disabled={isFetch}
-                                                        color='primary'
-                                                        className={isUserWinner ? 'reject-btn' : ''}
-                                                        onClick={acceptOfferThePrice(offer.id, true)}
-                                                    >
-                                                        <Typography variant='subtitle1'>
-                                                            {t('common:accept')}
-                                                        </Typography>
-                                                    </CustomButton>
-                                                )}
-                                                {(isUserWinner || offering) && (
+                                                {(isUserWinner || offering) && !hasWinner && (
                                                     <CustomButton
                                                         color='primary'
                                                         disabled={isFetch}
-                                                        onClick={acceptOfferThePrice(offer?.id)}
+                                                        onClick={handleReject}
                                                     >
                                                         <Typography variant='subtitle1'>
                                                             {t(`common:reject`)}
                                                         </Typography>
                                                     </CustomButton>
                                                 )}
-                                                {isUserCreator && winner && (
+                                                {(hasWinner || hasOffer) && isUserCreator && (
                                                     <CustomButton
-                                                        disabled={isFetch}
                                                         color='primary'
-                                                        onClick={handleDeactivate}
+                                                        disabled={isFetch}
+                                                        onClick={handleAccept}
                                                     >
                                                         <Typography variant='subtitle1'>
-                                                            {t(`finish`)}
+                                                            {t(`common:${hasWinner ? 'finish' : 'accept'}`)}
                                                         </Typography>
                                                     </CustomButton>
                                                 )}
@@ -390,9 +376,15 @@ export const DetailedPostModal: FC<DetailedPostViewPropsType> = (props) => {
             />
             <SettingsModal
                 post={post}
-                open={settingsModalOpen}
-                onClose={handleSettingsClose}
-                handleDeactivate={handleDeactivate}
+                open={settingsOpen}
+                handleRefresh={handleRefresh}
+                onClose={handleCloseSettings}
+            />
+            <OffersModal
+                post={post}
+                open={offersOpen}
+                onClose={handleCloseOffers}
+                handleRefresh={handleRefresh}
             />
         </div>
     );

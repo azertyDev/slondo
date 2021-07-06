@@ -237,7 +237,6 @@ export const SearchForm: FC<SearchFormPropsType> = (props) => {
         if (userLocation) {
             const {city} = userLocation;
             const region = transformLocations[userLocation.region.name];
-
             url = url.concat(city ? `${region[city.name]}/` : `${region.name}/`);
         } else {
             url = url.concat(`uzbekistan/`);

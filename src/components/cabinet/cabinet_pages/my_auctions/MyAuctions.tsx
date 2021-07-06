@@ -23,7 +23,6 @@ import {initialCardData} from '@src/components/cabinet/cabinet_pages/my_posts/My
 import {NotificationModal} from '@src/components/cabinet/components/notifation_modal/NotificationModal';
 import {useStyles} from './useStyles';
 
-
 export const MyAuctions: FC = () => {
         const dispatch = useDispatch();
         const {t} = useTranslation('cabinet');
@@ -41,22 +40,19 @@ export const MyAuctions: FC = () => {
         const [selectedAuction, setSelectedAuction] = useState<CardDataType>(initialCardData);
 
         const [tabIndex, setTabIndex] = useState(0);
-
-        const [auctionId, setAuctionId] = useState(null);
         const [childTabValue, setChildTabValue] = useState(0);
 
         const {modalOpen: detailedModalOpen, handleModalClose: closeDetailedModal, handleModalOpen: openDetailedModal} = useModal();
         const {modalOpen: notificationsOpen, handleModalClose: closeNotificationsModal, handleModalOpen: openNotificationsModal} = useModal();
 
-        const handleDetailedOpen = (postId: number, post) => () => {
+        const handleDetailedOpen = (post: CardDataType) => () => {
             openDetailedModal();
             setSelectedAuction(post);
-            auctionId && setAuctionId(postId);
         };
 
-        const handleNotificationsOpen = (postId: number) => () => {
+        const handleNotificationsOpen = (post: CardDataType) => () => {
             openNotificationsModal();
-            postId && setAuctionId(postId);
+            setSelectedAuction(post);
         };
 
         const handleTabChange = (setState) => (_, newValue) => {
@@ -267,8 +263,8 @@ export const MyAuctions: FC = () => {
                     handleTabChange={handleTabChange(setTabIndex)}
                 />
                 <DetailedPostModal
-                    open={detailedModalOpen}
                     post={selectedAuction}
+                    open={detailedModalOpen}
                     onClose={closeDetailedModal}
                     handleRefresh={handleRefresh}
                     handleNotificationsOpen={handleNotificationsOpen}
@@ -277,6 +273,7 @@ export const MyAuctions: FC = () => {
                 <NotificationModal
                     post={selectedAuction}
                     open={notificationsOpen}
+                    handleRefresh={handleRefresh}
                     onClose={closeNotificationsModal}
                 />
             </>

@@ -7,7 +7,6 @@ import theme from '@src/theme';
 import "../slick.min.css";
 import 'react-inner-image-zoom/lib/InnerImageZoom/styles.min.css';
 
-
 const App = (props) => {
     const {Component, pageProps} = props;
 

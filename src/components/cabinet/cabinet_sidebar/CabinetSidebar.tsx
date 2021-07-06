@@ -6,7 +6,6 @@ import {UserSocialInfo} from '@src/components/cabinet/cabinet_pages/user_social_
 import {UserInfo} from '@root/interfaces/Auth';
 import {useStyles} from './useStyles';
 
-
 export const CabinetSidebar: FC<{ user: UserInfo }> = ({user}) => {
     const classes = useStyles();
     return (

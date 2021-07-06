@@ -81,96 +81,93 @@ export const GridCard: FC<CardItemProps> = (props) => {
                 <IconButton
                     className="favorite-btn" onClick={handleFavorite}
                 >
-                    {liked
-                     ? <FavoriteIcon/>
-                     : <FavoriteBorderIcon/>
-                    }
+                    {liked ? <FavoriteIcon/> : <FavoriteBorderIcon/>}
                 </IconButton>
             )}
             <Link href={url}>
                 <a target='_blank'>
                     <Card elevation={0} title={title}>
                         {isFetch
-                         ? <Skeleton
-                             variant="rect"
-                             className={classes.skeleton}
-                         />
-                         : <CardMedia
-                             className="card-media"
-                             image={image ?? '/img/card-logo.png'}
-                         >
-                             <div className="card-header">
-                                 <div className="title">
-                                     <Typography variant="subtitle2">
-                                         {t(ads_type === 'common:exauc' ? 'common:auc' : ads_type)}
-                                     </Typography>
-                                 </div>
-                                 <div className="icons">
-                                     {!!delivery && (
-                                         <Tooltip
-                                             title={t('common:delivery')}
-                                             arrow
-                                         >
+                            ? <Skeleton
+                                variant="rect"
+                                className={classes.skeleton}
+                            />
+                            : <CardMedia
+                                className="card-media"
+                                image={image ?? '/img/card-logo.png'}
+                            >
+                                <div className="card-header">
+                                    <div className="title">
+                                        <Typography variant="subtitle2">
+                                            {t(ads_type === 'common:exauc' ? 'common:auc' : ads_type)}
+                                        </Typography>
+                                    </div>
+                                    <div className="icons">
+                                        {!!delivery && (
+                                            <Tooltip
+                                                title={t('common:delivery')}
+                                                arrow
+                                            >
                                                 <span>
                                                     <DeliveryIcon/>
                                                 </span>
-                                         </Tooltip>
-                                     )}
-                                     {!!safe_deal && (
-                                         <Tooltip
-                                             title={t('common:safe_deal')}
-                                             arrow
-                                         >
+                                            </Tooltip>
+                                        )}
+                                        {!!safe_deal && (
+                                            <Tooltip
+                                                title={t('common:safe_deal')}
+                                                arrow
+                                            >
                                                 <span>
                                                     <SafeIcon/>
                                                 </span>
-                                         </Tooltip>
-                                     )}
-                                     {!!exchange && (
-                                         <Tooltip
-                                             title={t('common:exchange')}
-                                             arrow
-                                         >
+                                            </Tooltip>
+                                        )}
+                                        {!!exchange && (
+                                            <Tooltip
+                                                title={t('common:exchange')}
+                                                arrow
+                                            >
                                                 <span>
                                                     <SwapIcon/>
                                                 </span>
-                                         </Tooltip>
-                                     )}
-                                 </div>
-                             </div>
-                         </CardMedia>}
+                                            </Tooltip>
+                                        )}
+                                    </div>
+                                </div>
+                            </CardMedia>}
                         <CardActionArea>
                             <CardContent>
                                 {isFetch
-                                 ? <>
-                                     <Skeleton variant="rect"/>
-                                     <Skeleton variant="rect"/>
-                                     <Skeleton variant="rect"/>
-                                     <br/>
-                                     <Skeleton variant="rect"/>
-                                 </>
-                                 : <>
-                                     <Typography
-                                         variant="subtitle1"
-                                         color="initial"
-                                         noWrap
-                                     >
-                                         {title}
-                                     </Typography>
-                                     <Typography
-                                         variant="h6"
-                                         color="initial"
-                                     >
-                                         {numberPrettier(price)}
-                                         <span> {t(`common:${currency.name}`)}</span>
-                                     </Typography>
-                                     <Typography variant="caption" noWrap>
-                                         {`${t(`locations:${region.name}`)}, ${t(`locations:${city.name}`)}`}
-                                     </Typography>
-                                     <Typography variant="caption">
-                                         {formatted_date}
-                                     </Typography>
-                                 </>}
+                                    ? <>
+                                        <Skeleton variant="rect"/>
+                                        <Skeleton variant="rect"/>
+                                        <Skeleton variant="rect"/>
+                                        <br/>
+                                        <Skeleton variant="rect"/>
+                                    </>
+                                    : <>
+                                        <Typography
+                                            variant="subtitle1"
+                                            color="initial"
+                                            noWrap
+                                        >
+                                            {title}
+                                        </Typography>
+                                        <Typography
+                                            variant="h6"
+                                            color="initial"
+                                        >
+                                            {numberPrettier(price)}
+                                            <span> {t(`common:${currency.name}`)}</span>
+                                        </Typography>
+                                        <Typography variant="caption" noWrap>
+                                            {`${city?.name ? `${t(`locations:${city.name}`)}, ` : ''} ${t(`locations:${region.name}`)}`}
+                                        </Typography>
+                                        <Typography variant="caption">
+                                            {formatted_date}
+                                        </Typography>
+                                    </>}
                             </CardContent>
                         </CardActionArea>
                     </Card>
