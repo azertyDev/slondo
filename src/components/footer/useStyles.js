@@ -77,12 +77,11 @@ export const useStyles = makeStyles((theme) => ({
                 '&:before': {
                     content: '""',
                     position: 'absolute',
-                    width: '90%',
+                    width: '100%',
                     height: 2,
                     background: '#E0E0E0',
                     borderRadius: '1px',
                     top: 0,
-                    left: '50px',
                     [theme.breakpoints.down('md')]: {
                         left: '7.5%',
                         height: 1

@@ -63,7 +63,7 @@ export const UserInfoWithAvatar: FC<UserInfoWithAvatarPropsType> = (props) => {
                     {!isOwner && !!handleFollow && (
                         <CustomButton onClick={handleFollow(owner.id)}>
                             <Typography variant="subtitle2">
-                                {!subscribed ? 'Подписаться' : 'Отписаться'}
+                                {!subscribed ? t('common:follow') : t('common:unFollow')}
                             </Typography>
                         </CustomButton>
                     )}

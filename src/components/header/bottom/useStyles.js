@@ -22,6 +22,7 @@ export const useStyles = makeStyles((theme) => ({
                 }
             },
             '& div.bottom-logo': {
+                // marginRight: '20px',
                 '& a': {
                     width: '100%',
                     display: 'flex',

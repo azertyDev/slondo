@@ -86,7 +86,7 @@ export const BetsList: FC<BetsListPropsType> = (props) => {
                                         className="outbid"
                                     >
                                         {index === betsCount - 1
-                                            ? <span className='started-price'>Стартовая цена</span>
+                                            ? <span className='started-price'>{t('post:startingPrice')}</span>
                                             : `+ ${numberPrettier(bet.outbid)}`}
                                     </Typography>
                                 </TableCell>

@@ -2,6 +2,7 @@
   "uzbekistan": "Узбекистан",
   "location": "Местоположение",
   "allUzb": "Весь Узбекистан",
+  "notIndicate": "Не указано",
   "city_tashkent": {
     "name": "г. Ташкент",
     "almazar_district": "Алмазарский р-н",
@@ -146,7 +147,7 @@
     "samarkand": "Самарканд",
     "aktau": "Акташ",
     "bulungur": "Булунгур",
-    "gazalkent": "Гузалкент",
+    "guzalkent": "Гузалкент",
     "gulabad": "Гулабад",
     "darband": "Дарбанд",
     "jambai": "Джамбай",
@@ -161,7 +162,7 @@
     "paishanba": "Пайшанба",
     "tailak": "Тайлак",
     "urgut": "Ургут",
-    "chilek": "Чилек"
+    "chilek": "Челак"
   },
   "surkhandarya_region": {
     "name": "Сурхандарьинская область",

@@ -30,20 +30,10 @@ export const useStyles = makeStyles((theme) => ({
         '& .subtitle': {
             marginBottom: 30,
             textAlign: 'center',
-            color: 'rgba(49, 49, 49, 0.6)',
+            color: 'rgba(49, 49, 49, 0.7)',
             lineHeight: '22px',
-            '& span': {
-                '&.buy-now-price': {
-                    color: theme.palette.common.activeTab
-                },
-                '&.condition': {
-                    '& a': {
-                        color: theme.palette.primary.lotBgColor
-                    }
-                },
-                '&.safe-deal': {
-                    color: theme.palette.primary.secondary
-                }
+            '& .buy-now-price': {
+                color: theme.palette.common.activeTab
             }
         },
         '& .confirm': {

@@ -24,14 +24,14 @@ export const BreadcrumbsComponent: FC<BreadcrumbsPropsType> = ({category, subcat
                 className='bc'
             >
                 <Link href="#">
-                    <a>{t(`categories:${category}`)}</a>
+                    <a>{t(`categories:${category}.name`)}</a>
                 </Link>
                 <Link href="#">
-                    <a>{t(`categories:${subcategory}`)}</a>
+                    <a>{t(`categories:${category}.${subcategory}.name`)}</a>
                 </Link>
                 {type && (
                     <Link href="#">
-                        <a>{t(`categories:${type}`)}</a>
+                        <a>{t(`categories:${category}.${subcategory}.${type}.name`)}</a>
                     </Link>
                 )}
             </Breadcrumbs>

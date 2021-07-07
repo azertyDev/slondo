@@ -1,5 +1,5 @@
 {
-  "buy_safe_deal": "Xavsiz xaridni tasdiqlaysizmi?",
+  "buy_safe_deal": "Xavfsiz xaridni tasdiqlaysizmi?",
   "number_not_available": "Hozir raqam mavjud emas",
   "show_phone": "Raqamni ko'rsatish",
   "category": "Toifa",
@@ -25,5 +25,26 @@
   "photos": "Rasmlar",
   "congratulations": "Tabriklaymiz!",
   "automobile": "Avtomobil",
-  "publish": "E'lon berish"
+  "publish": "E'lon berish",
+  "published": "Joylashtirildi",
+  "views": "Ko'rishlar soni",
+  "complain": "Shikoyat qilish",
+  "writeMessage": "Xabar qoldirish",
+  "description": "Tavsif",
+  "startingPrice": "Boshlang’ich narx",
+  "describeReason": "To'ldiring",
+  "indicateReason": "Shikoyat sababini keltiring",
+  "reservePrice": "Zaxira narxi",
+  "createBet": "Pul tikish",
+  "minBet": "Minimal narx",
+  "maxBet": "Maksimal narx",
+  "buyNow": "Xozir sotib olish",
+  "suggestPrice": "Narx taklif qilish",
+  "suggestPriceRule": "Taklif etilgan narx boshlang'ich narxdan yoki tikilgan narxdan kam bo'lmasligi kerak",
+  "suggest": "Taklif qilish",
+  "enterPrice": "Narxni kiriting",
+  "buyNowRule": {
+    "firstPart": "“Tasdiqlash” tugmasini bosgach, Siz tovarni",
+    "secondPart": "so'mga sotib olasiz"
+  }
 }
