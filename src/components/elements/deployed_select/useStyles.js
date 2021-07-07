@@ -2,10 +2,17 @@ import {makeStyles} from '@material-ui/core/styles';
 
 export const useStyles = makeStyles((theme) => ({
     root: {
+        width: '80%',
+        marginBottom: '10px',
+        [theme.breakpoints.down('md')]: {
+            width: '100%'
+        },
         '& button': {
             color: theme.palette.common.tab,
             background: 'none',
             borderRadius: '0px',
+            width: '100%',
+            height: '100%',
             '&:first-child': {
                 borderRadius: '5px 0px 0px 5px'
             },

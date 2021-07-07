@@ -23,6 +23,7 @@ export const ParkingLotsBoxes: FC<CommonParamsPropsType> = (props) => {
         onSubmit,
         isPreview,
         currentFormIndex,
+        categoryName,
         handleFormOpen
     } = props;
 
@@ -60,57 +61,58 @@ export const ParkingLotsBoxes: FC<CommonParamsPropsType> = (props) => {
                     isEditable={currentFormIndex < 3}
                     handleEdit={handleFormOpen(3)}
                 >
-                    <Grid item xs={6}>
+                    <Grid item xs={12} sm={6}>
                         <PostTitle isPreview={isPreview} title={values.title} formik={formik} t={t}/>
                     </Grid>
                     {isPreview
-                     ? <PreviewValues t={t} values={values}/>
-                     : <>
-                         <Grid container spacing={2}>
-                             <Grid item container xs={12} alignItems='center'>
-                                 <DeployedSelect
-                                     values={values}
-                                     name='estate_type'
-                                     options={filters.estate_type}
-                                     handleSelect={handleSelect}
-                                     errorMsg={getErrorMsg(errors.estate_type, touched.estate_type, t)}
-                                 />
-                             </Grid>
-                             <Grid item container xs={4}>
-                                 <FormikField
-                                     t={t}
-                                     name='area'
-                                     labelText='area'
-                                     value={values.area ?? ''}
-                                     errorMsg={getErrorMsg(errors.area, touched.area, t)}
-                                 />
-                             </Grid>
-                             <Grid item container xs={4}>
-                                 <FormikField
-                                     t={t}
-                                     name='parking_spaces'
-                                     labelText='parking_spaces'
-                                     value={values.parking_spaces ?? ''}
-                                     errorMsg={getErrorMsg(errors.parking_spaces, touched.parking_spaces, t)}
-                                 />
-                             </Grid>
-                             <Grid
-                                 item
-                                 container
-                                 sm={4}
-                                 xs={12}
-                             >
-                                 <DropDownSelect
-                                     name='posted'
-                                     values={values}
-                                     onBlur={handleBlur}
-                                     items={filters.posted}
-                                     handleSelect={handleSelect}
-                                     errorMsg={getErrorMsg(errors.posted, touched.posted, t)}
-                                 />
-                             </Grid>
-                         </Grid>
-                     </>}
+                        ? <PreviewValues t={t} values={values}/>
+                        : <>
+                            <Grid container spacing={2}>
+                                <Grid item container xs={12} alignItems='center'>
+                                    <DeployedSelect
+                                        categoryName={categoryName}
+                                        values={values}
+                                        name='estate_type'
+                                        options={filters.estate_type}
+                                        handleSelect={handleSelect}
+                                        errorMsg={getErrorMsg(errors.estate_type, touched.estate_type, t)}
+                                    />
+                                </Grid>
+                                <Grid item container xs={12} sm={4}>
+                                    <FormikField
+                                        t={t}
+                                        name='area'
+                                        labelText='area'
+                                        value={values.area ?? ''}
+                                        errorMsg={getErrorMsg(errors.area, touched.area, t)}
+                                    />
+                                </Grid>
+                                <Grid item container xs={12} sm={4}>
+                                    <FormikField
+                                        t={t}
+                                        name='parking_spaces'
+                                        labelText='parking_spaces'
+                                        value={values.parking_spaces ?? ''}
+                                        errorMsg={getErrorMsg(errors.parking_spaces, touched.parking_spaces, t)}
+                                    />
+                                </Grid>
+                                <Grid
+                                    item
+                                    container
+                                    sm={4}
+                                    xs={12}
+                                >
+                                    <DropDownSelect
+                                        name='posted'
+                                        values={values}
+                                        onBlur={handleBlur}
+                                        items={filters.posted}
+                                        handleSelect={handleSelect}
+                                        errorMsg={getErrorMsg(errors.posted, touched.posted, t)}
+                                    />
+                                </Grid>
+                            </Grid>
+                        </>}
                 </CustomAccordion>
             </CustomFormikProvider>
         </div>

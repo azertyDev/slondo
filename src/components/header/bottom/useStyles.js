@@ -136,7 +136,7 @@ export const useStyles = makeStyles((theme) => ({
                     textDecoration: 'none',
                     alignItems: 'center',
                     justifyContent: 'center',
-                    padding: '6px 13px',
+                    padding: '6px 12px',
                     borderRadius: '100px',
                     background: '#F5F5F5',
                     [theme.breakpoints.up('md')]: {

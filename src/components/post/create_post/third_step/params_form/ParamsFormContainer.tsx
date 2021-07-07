@@ -46,7 +46,7 @@ export const ParamsFormContainer: FC<ParamsFormPropsType> = (props) => {
         handleNextFormOpen
     } = props;
 
-    const {t} = useTranslation('post');
+    const {t} = useTranslation('filters');
     const categoryName = category.name;
 
     const onSubmit = (values) => {

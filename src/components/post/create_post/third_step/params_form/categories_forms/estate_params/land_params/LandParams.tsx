@@ -24,6 +24,7 @@ export const LandParams: FC<CommonParamsPropsType> = (props) => {
         onSubmit,
         filters,
         currentFormIndex,
+        categoryName,
         handleFormOpen
     } = props;
 
@@ -61,99 +62,101 @@ export const LandParams: FC<CommonParamsPropsType> = (props) => {
                     isEditable={currentFormIndex < 3}
                     handleEdit={handleFormOpen(3)}
                 >
-                    <Grid item xs={6}>
+                    <Grid item xs={12} sm={6}>
                         <PostTitle isPreview={isPreview} title={values.title} formik={formik} t={t}/>
                     </Grid>
                     <Grid container spacing={2}>
                         {isPreview
-                         ? <PreviewValues t={t} values={values}/>
-                         : <>
-                             <Grid item container xs={12} justify='space-between' alignItems='center'>
-                                 <Grid item xs={6}>
-                                     <DeployedSelect
-                                         values={values}
-                                         name='estate_type'
-                                         options={filters.estate_type}
-                                         handleSelect={handleSelect}
-                                         errorMsg={getErrorMsg(errors.estate_type, touched.estate_type, t)}
-                                     />
-                                 </Grid>
-                                 <Grid item xs={3}>
-                                     <DeployedSelect
-                                         values={values}
-                                         name='location'
-                                         options={filters.location}
-                                         handleSelect={handleSelect}
-                                         errorMsg={getErrorMsg(errors.location, touched.location, t)}
-                                     />
-                                 </Grid>
-                             </Grid>
-                             {type.id !== 1 && (
-                                 <Grid item container xs={4}>
-                                     <DropDownSelect
-                                         name='payments'
-                                         items={filters.payments}
-                                         values={values}
-                                         onBlur={handleBlur}
-                                         handleSelect={handleSelect}
-                                     />
-                                 </Grid>
-                             )}
-                             <Grid item xs={4}>
-                                 <FormikField
-                                     t={t}
-                                     name='area'
-                                     labelText='area_in_hundred'
-                                     value={values.area ?? ''}
-                                     errorMsg={getErrorMsg(errors.area, touched.area, t)}
-                                 />
-                             </Grid>
-                             <Grid item container xs={4}>
-                                 <DropDownSelect
-                                     name='electricity'
-                                     items={filters.electricity}
-                                     values={values}
-                                     onBlur={handleBlur}
-                                     handleSelect={handleSelect}
-                                 />
-                             </Grid>
-                             <Grid item container xs={4}>
-                                 <DropDownSelect
-                                     name='sewerage'
-                                     items={filters.sewerage}
-                                     values={values}
-                                     onBlur={handleBlur}
-                                     handleSelect={handleSelect}
-                                 />
-                             </Grid>
-                             <Grid item container xs={4}>
-                                 <DropDownSelect
-                                     name='gas'
-                                     items={filters.gas}
-                                     values={values}
-                                     onBlur={handleBlur}
-                                     handleSelect={handleSelect}
-                                 />
-                             </Grid>
-                             <Grid item container xs={4}>
-                                 <DropDownSelect
-                                     name='water'
-                                     items={filters.water}
-                                     values={values}
-                                     onBlur={handleBlur}
-                                     handleSelect={handleSelect}
-                                 />
-                             </Grid>
-                             <Grid item container xs={4}>
-                                 <DropDownSelect
-                                     name='posted'
-                                     items={filters.posted}
-                                     values={values}
-                                     onBlur={handleBlur}
-                                     handleSelect={handleSelect}
-                                 />
-                             </Grid>
-                         </>}
+                            ? <PreviewValues t={t} values={values}/>
+                            : <>
+                                <Grid item container xs={12} alignItems='center'>
+                                    <Grid item xs={12} md={7} lg={5}>
+                                        <DeployedSelect
+                                            categoryName={categoryName}
+                                            values={values}
+                                            name='estate_type'
+                                            options={filters.estate_type}
+                                            handleSelect={handleSelect}
+                                            errorMsg={getErrorMsg(errors.estate_type, touched.estate_type, t)}
+                                        />
+                                    </Grid>
+                                    <Grid item xs={12} md={3} lg={3}>
+                                        <DeployedSelect
+                                            categoryName={categoryName}
+                                            values={values}
+                                            name='location'
+                                            options={filters.location}
+                                            handleSelect={handleSelect}
+                                            errorMsg={getErrorMsg(errors.location, touched.location, t)}
+                                        />
+                                    </Grid>
+                                </Grid>
+                                {type.id !== 1 && (
+                                    <Grid item container xs={12} sm={4}>
+                                        <DropDownSelect
+                                            name='payments'
+                                            items={filters.payments}
+                                            values={values}
+                                            onBlur={handleBlur}
+                                            handleSelect={handleSelect}
+                                        />
+                                    </Grid>
+                                )}
+                                <Grid item xs={12} sm={4}>
+                                    <FormikField
+                                        t={t}
+                                        name='area'
+                                        labelText='area_in_hundred'
+                                        value={values.area ?? ''}
+                                        errorMsg={getErrorMsg(errors.area, touched.area, t)}
+                                    />
+                                </Grid>
+                                <Grid item container xs={12} sm={4}>
+                                    <DropDownSelect
+                                        name='electricity'
+                                        items={filters.electricity}
+                                        values={values}
+                                        onBlur={handleBlur}
+                                        handleSelect={handleSelect}
+                                    />
+                                </Grid>
+                                <Grid item container xs={12} sm={4}>
+                                    <DropDownSelect
+                                        name='sewerage'
+                                        items={filters.sewerage}
+                                        values={values}
+                                        onBlur={handleBlur}
+                                        handleSelect={handleSelect}
+                                    />
+                                </Grid>
+                                <Grid item container xs={12} sm={4}>
+                                    <DropDownSelect
+                                        name='gas'
+                                        items={filters.gas}
+                                        values={values}
+                                        onBlur={handleBlur}
+                                        handleSelect={handleSelect}
+                                    />
+                                </Grid>
+                                <Grid item container xs={12} sm={4}>
+                                    <DropDownSelect
+                                        name='water'
+                                        items={filters.water}
+                                        values={values}
+                                        onBlur={handleBlur}
+                                        handleSelect={handleSelect}
+                                    />
+                                </Grid>
+                                <Grid item container xs={12} sm={4}>
+                                    <DropDownSelect
+                                        name='posted'
+                                        items={filters.posted}
+                                        values={values}
+                                        onBlur={handleBlur}
+                                        handleSelect={handleSelect}
+                                    />
+                                </Grid>
+                            </>}
                     </Grid>
                 </CustomAccordion>
             </CustomFormikProvider>

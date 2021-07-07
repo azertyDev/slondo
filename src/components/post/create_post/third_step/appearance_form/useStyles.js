@@ -61,7 +61,7 @@ export const useStyles = makeStyles((theme) => ({
             }
         },
         '& div.selected-color': {
-            boxShadow: '0px 0px 15px #AD66D5'
+            boxShadow: '0px 0px 5px 5px #ccc'
         },
         '& div.photos-wrapper': {
             '& h6': {

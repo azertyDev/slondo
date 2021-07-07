@@ -68,7 +68,7 @@ export const ApartmentsParams: FC<CommonParamsPropsType> = (props) => {
                     submitTxt='appearance'
                     icon={<ParametersIcon/>}
                     isPreview={isPreview}
-                    title={t('parameters')}
+                    title={t('post:parameters')}
                     open={currentFormIndex === 3}
                     isEditable={currentFormIndex < 3}
                     handleEdit={handleFormOpen(3)}
@@ -79,10 +79,11 @@ export const ApartmentsParams: FC<CommonParamsPropsType> = (props) => {
                     {isPreview
                         ? <PreviewValues t={t} values={values}/>
                         : <Grid className='grid-container' container spacing={2}>
-                            <Grid container item spacing={2} xs={12}>
+                            <Grid container item spacing={2} xs={12} alignItems='center'>
                                 <Grid item xs={12} sm={5} md={4}>
                                     <DeployedSelect
                                         name='estate_type'
+                                        categoryName={categoryName}
                                         values={values}
                                         handleSelect={handleSelect}
                                         options={filters.estate_type}
@@ -92,7 +93,7 @@ export const ApartmentsParams: FC<CommonParamsPropsType> = (props) => {
                                 {isRent && (
                                     <>
                                         {!isDailyRent && (
-                                            <Grid item xs={4}>
+                                            <Grid item xs={12} sm={4}>
                                                 <DropDownSelect
                                                     name='payment'
                                                     values={values}
@@ -103,7 +104,7 @@ export const ApartmentsParams: FC<CommonParamsPropsType> = (props) => {
                                                 />
                                             </Grid>
                                         )}
-                                        <Grid item container xs={4} alignItems='flex-end'>
+                                        <Grid item container xs={12} sm={5} md={5} alignItems='flex-end'>
                                             <CheckboxSelect
                                                 name='utilities'
                                                 labelTxt={t('filters:utilities')}
@@ -111,7 +112,7 @@ export const ApartmentsParams: FC<CommonParamsPropsType> = (props) => {
                                                 handleCheckbox={handleCheckbox}
                                             />
                                         </Grid>
-                                        <Grid item container xs={4} alignItems='flex-end'>
+                                        <Grid item container xs={12} sm={3} alignItems='flex-end'>
                                             <CheckboxSelect
                                                 name='with_pledge'
                                                 labelTxt={t('filters:with_pledge')}
