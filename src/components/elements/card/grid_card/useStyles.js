@@ -94,14 +94,14 @@ export const useStyles = makeStyles((theme) => ({
                                 alignItems: 'center',
                                 justifyContent: 'center',
                                 padding: '5px',
-                                background: 'rgba(255, 255, 255, 0.8)',
+                                background: 'rgba(255, 255, 255, 0.6)',
                                 borderRadius: '100%',
                                 marginRight: '5px',
-                                '& > svg': {
-                                    '& > path': {
-                                        fill: '#838383'
-                                    }
-                                }
+                                // '& > svg': {
+                                //     '& > path': {
+                                //         fill: '#838383'
+                                //     }
+                                // }
                             }
                         }
                     }

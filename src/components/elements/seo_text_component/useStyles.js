@@ -5,7 +5,8 @@ export const useStyles = makeStyles(() => ({
         marginTop: 120,
         '& .MuiTypography-subtitle2': {
             color: 'rgba(49, 49, 49, 0.6)',
-            lineHeight: '17px'
+            lineHeight: '17px',
+            textIndent: '60px'
         }
     }
 }))

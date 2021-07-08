@@ -49,6 +49,7 @@ export const useStyles = makeStyles((theme) => ({
             }
         },
         '& div.slick-slide': {
+            marginTop: 10,
             '& > div': {
                 width: 'auto !important',
                 display: 'flex',
@@ -65,13 +66,26 @@ export const useStyles = makeStyles((theme) => ({
                     alignItems: 'center',
                     justifyContent: 'center',
                     color: theme.palette.primary.black,
-                    '& > span.category-name': {
-                        textAlign: 'center',
-                        fontSize: '1.125rem',
-                        [theme.breakpoints.down('xs')]: {
-                            fontSize: 'calc(12px + 6 * (100vw / 1280))',
-                            lineHeight: '16px'
+                    '&:hover': {
+                        '& > span.category-name': {
+                            background: '#F2F2F2'
+                        },
+                        '& div.bg-layer': {
+                            filter: 'drop-shadow(0px 0px 4px rgba(0, 0, 0, 0.05))'
                         }
+                    },
+                    '& > span.category-name': {
+                        padding: '5px',
+                        borderRadius: '100px',
+                        '& .MuiTypography-subtitle1': {
+                            textAlign: 'center',
+                            fontSize: '1.125rem',
+                            [theme.breakpoints.down('xs')]: {
+                                fontSize: 'calc(12px + 6 * (100vw / 1280))',
+                                lineHeight: '16px'
+                            }
+                        }
+
                     },
                     '& div.bg-layer': {
                         width: '140px',

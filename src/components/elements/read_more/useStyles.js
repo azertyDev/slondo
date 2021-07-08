@@ -7,17 +7,16 @@ export const useStyles = makeStyles((theme) => ({
         },
         '& button.show-more-button': {
             background: 'none',
-            width: '27%',
-            padding: '5px 0',
-            display: 'flex',
-            justifyContent: 'flex-start',
+            padding: '10px 0',
+            display: 'inline-block',
+            width: 'fit-content',
             [theme.breakpoints.down('md')]: {
-               width: 'auto'
+                width: 'auto'
             },
             '& > h6.MuiTypography-subtitle1': {
                 color: '#675EAA',
                 '& > svg': {
-                    marginLeft: '9px',
+                    marginLeft: '9px'
                 }
             }
         }

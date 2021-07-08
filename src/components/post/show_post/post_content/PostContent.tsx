@@ -1,13 +1,8 @@
 import {FC, MutableRefObject, useEffect, useRef, useState} from 'react';
 import {WithT} from 'i18next';
 import {
-    Backdrop,
     Container,
     Hidden,
-    List,
-    ListItem,
-    ListItemText,
-    Modal,
     TextField,
     Typography,
     useMediaQuery,
@@ -171,7 +166,7 @@ export const PostContent: FC<PostContentTypes> = (props) => {
                     <BreadcrumbsComponent
                         category={data.category.name}
                         subcategory={data.adsable?.sub_category.name}
-                        type={data.adsable?.type.name}
+                        type={data.adsable?.type?.name}
                     />
                 </div>
             </Hidden>
@@ -352,7 +347,10 @@ export const PostContent: FC<PostContentTypes> = (props) => {
                     <Typography variant="button" color="initial">
                         {t('post:description')}
                     </Typography>
-                    <ReadMore t={t} descHeight={descHeight}>
+                    <ReadMore
+                        descHeight={descHeight}
+                        heightLimit={isMdDown ? 75 : 110}
+                    >
                         <Typography
                             className='description'
                             variant="subtitle1"
