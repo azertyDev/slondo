@@ -122,7 +122,7 @@ export const OwnerContent: FC<OwnerPropsType> = (props) => {
                                 className='contact-btn'
                             >
                                 <Typography variant="subtitle1" color="initial">
-                                    Написать продавцу
+                                    {t('common:writeToSeller')}
                                 </Typography>
                             </CustomButton>
                             {!!safe_deal && (
@@ -133,7 +133,7 @@ export const OwnerContent: FC<OwnerPropsType> = (props) => {
                                 >
                                     <SafeIcon/>
                                     <Typography variant="subtitle1" color="initial">
-                                        Безопасная покупка
+                                        {t('common:safe_deal')}
                                     </Typography>
                                 </CustomButton>
                             )}
@@ -148,11 +148,11 @@ export const OwnerContent: FC<OwnerPropsType> = (props) => {
                         <div className="floating-text">
                             <SafeIcon/>
                             <Typography variant='subtitle2'>
-                                Безопасная покупка
+                                {t('common:safe_deal')}
                             </Typography>
                         </div>
                         <CustomButton>
-                            Купить
+                            {t('common:buy')}
                         </CustomButton>
                     </div>
                 )}

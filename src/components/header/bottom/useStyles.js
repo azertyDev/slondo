@@ -22,10 +22,15 @@ export const useStyles = makeStyles((theme) => ({
                 }
             },
             '& div.bottom-logo': {
+                // marginRight: '20px',
                 '& a': {
                     width: '100%',
                     display: 'flex',
-                    alignItems: 'center'
+                    alignItems: 'center',
+                    '& svg': {
+                        width: '100%',
+                        height: '90%',
+                    }
                 }
             }
         },
@@ -51,7 +56,6 @@ export const useStyles = makeStyles((theme) => ({
             borderStyle: 'initial',
             height: '38px',
             '& > svg': {
-                marginLeft: '8px',
                 [theme.breakpoints.down(1200)]: {
                     display: 'none'
                 }
@@ -61,6 +65,9 @@ export const useStyles = makeStyles((theme) => ({
             cursor: 'pointer'
         },
         '& button.bottom-sign-button': {
+            '& svg': {
+                marginLeft: 8
+            },
             color: '#000',
             backgroundColor: '#F2F2F2',
             boxShadow: '0px 1px 1px rgba(0, 0, 0, 0.15)',
@@ -68,6 +75,9 @@ export const useStyles = makeStyles((theme) => ({
         },
         '& a.create-post-link': {
             textDecoration: 'none',
+            '& svg': {
+                marginLeft: '8px',
+            },
             '& button': {
                 width: '100%',
                 '& h6.MuiTypography-subtitle2': {
@@ -79,6 +89,10 @@ export const useStyles = makeStyles((theme) => ({
         },
         '& button.bottom-category-button': {
             width: '100%',
+            '& svg': {
+                width: 20,
+                marginRight: '8px',
+            },
             '& > h6.MuiTypography-subtitle2': {
                 lineHeight: '15px',
                 letterSpacing: '0.5px',
@@ -88,7 +102,7 @@ export const useStyles = makeStyles((theme) => ({
         },
         // Adaptive
         '& div.bottom-logo > a': {
-            '& img': {
+            '& svg': {
                 [theme.breakpoints.down('lg')]: {
                     width: '125px',
                     height: '42px'
@@ -202,7 +216,6 @@ export const useStyles = makeStyles((theme) => ({
             width: '290px',
             padding: '10px',
             backgroundColor: theme.palette.primary.white
-            // left: "1250px !important"
         },
         '& .menu-item': {
             padding: '5px',

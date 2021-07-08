@@ -1,19 +1,18 @@
 import {FC, useEffect, useState} from 'react';
 import {WithT} from 'i18next';
-import Link from 'next/link';
 import {userAPI} from '@src/api/api';
 import {AuctionTimer} from './AuctionTimer';
 import {BetsList} from '@src/components/elements/bets_list/BetsList';
-import {Grid, Hidden, TextField, Typography} from '@material-ui/core';
+import {Box, Grid, Hidden, TextField, Typography} from '@material-ui/core';
 import {numberPrettier} from '@src/helpers';
 import {LockIcon} from '@src/components/elements/icons';
-import {CustomModal} from '@src/components/elements/custom_modal/CustomModal';
 import {CustomButton} from '@src/components/elements/custom_button/CustomButton';
 import {AuctionForm} from '@src/components/post/show_post/owner_auction_info/auction_content/AuctionForm/AuctionForm';
 import {useDispatch} from 'react-redux';
 import {setErrorMsgAction} from '@root/src/redux/slices/errorSlice';
 import {useBetsData} from '@src/hooks/useBetsData';
 import {useStyles} from './useStyles';
+import {ResponsiveModal} from '@src/components/elements/responsive_modal/ResponsiveModal';
 
 
 type AuctionInfoPropsType = {
@@ -112,11 +111,11 @@ export const AuctionContent: FC<AuctionInfoPropsType> = (props) => {
                         <LockIcon/>
                         <div>
                             <Typography variant="subtitle2" color="initial">
-                                Резервная цена:
+                                {t('post:reservePrice')}:
                             </Typography>
                             <Typography variant="h6" color="initial">
                                 {numberPrettier(postData.auction.reserve_price)}{' '}
-                                {postData.currency.name}
+                                {t(`common:${postData.currency.name}`)}
                             </Typography>
                         </div>
                     </div>
@@ -145,35 +144,38 @@ export const AuctionContent: FC<AuctionInfoPropsType> = (props) => {
                                 <Hidden mdDown>
                                     <div className="buy-now">
                                         <Typography variant="subtitle1" color="initial">
-                                            {numberPrettier(postData.auction.price_buy_now)} сум
+                                            {numberPrettier(postData.auction.price_buy_now)} {t('common:sum')}
                                         </Typography>
                                         <CustomButton onClick={handleModalBuyNow(true)}>
                                             <Typography variant="subtitle1" color="initial">
-                                                Купить сейчас
+                                                {t('post:buyNow')}
                                             </Typography>
                                         </CustomButton>
                                     </div>
                                 </Hidden>
-                                <CustomModal handleModalClose={handleModalBuyNow(false)} openModal={openBuyNow}>
-                                    <>
-                                        <Typography className="title" variant="h6">
-                                            Купить сейчас
+                                <ResponsiveModal
+                                    maxWidth='xs'
+                                    openDialog={openBuyNow}
+                                    handleCloseDialog={handleModalBuyNow(false)}
+                                >
+                                    <Box
+                                        p={3}
+                                        className={classes.buyNowModal}
+                                    >
+                                        <Typography className="title" variant="h6" gutterBottom>
+                                            {t('post:buyNow')}
                                         </Typography>
                                         <Typography
                                             variant='subtitle1'
                                             className='subtitle'
                                         >
-                                            Нажимая кнопку “Купить сейчас” вы выкупаете лот на сумму
-                                            &nbsp;<span className='buy-now-price'>
+                                            {t('post:buyNowRule.firstPart')}
+                                            &nbsp;<br />
+                                            <span className='buy-now-price'>
                                                 {numberPrettier(postData.auction.price_buy_now)}
-                                            </span>&nbsp;
-                                            сум и соглашаетесь с
-                                            &nbsp;<span className='condition'>
-                                                <Link href="#">
-                                                    <a>условиями</a>
-                                                </Link>
-                                            </span>&nbsp;
-                                            сайта
+                                            </span>
+                                            &nbsp;
+                                            {t('post:buyNowRule.secondPart')}
                                         </Typography>
                                         <div className='confirm'>
                                             <CustomButton
@@ -181,12 +183,12 @@ export const AuctionContent: FC<AuctionInfoPropsType> = (props) => {
                                                 onClick={handleBuyNow}
                                             >
                                                 <Typography variant='subtitle1'>
-                                                    Купить сейчас
+                                                    {t('common:perform')}
                                                 </Typography>
                                             </CustomButton>
                                         </div>
-                                    </>
-                                </CustomModal>
+                                    </Box>
+                                </ResponsiveModal>
                             </div>
                         )}
                         <div>
@@ -199,7 +201,7 @@ export const AuctionContent: FC<AuctionInfoPropsType> = (props) => {
                                         >
                                             <CustomButton onClick={handleModalOfferPrice(true)}>
                                                 <Typography variant="subtitle1" color="initial">
-                                                    Предложить цену
+                                                    {t('post:suggestPrice')}
                                                 </Typography>
                                             </CustomButton>
                                         </Grid>
@@ -207,7 +209,7 @@ export const AuctionContent: FC<AuctionInfoPropsType> = (props) => {
                                     {isExAuc && hasBuyNow && (
                                         <Grid item xs={6} className="btn-buy-now">
                                             <CustomButton>
-                                                <Typography variant='subtitle2'>Купить сейчас</Typography>
+                                                <Typography variant='subtitle2'>{t('post:buyNow')}</Typography>
                                             </CustomButton>
                                         </Grid>
                                     )}
@@ -218,31 +220,51 @@ export const AuctionContent: FC<AuctionInfoPropsType> = (props) => {
                                     <div className='suggest_price'>
                                         <CustomButton onClick={handleModalOfferPrice(true)}>
                                             <Typography variant="subtitle1" color="initial">
-                                                Предложить цену
+                                                {t('post:suggestPrice')}
                                             </Typography>
                                         </CustomButton>
                                     </div>
                                 </Hidden>
                             )}
-                            <CustomModal handleModalClose={handleModalOfferPrice(false)} openModal={openOfferPrice}>
-                                Предложить цену
-                                <Typography variant='subtitle1'>
-                                    Предложенная стоимость не может быть <br/>
-                                    меньше стартовой цены или сделанной ставки
-                                </Typography>
-                                <div style={{display: 'flex', flexDirection: 'column'}}>
-                                    <TextField
-                                        id="outlined-basic"
-                                        label="Outlined"
-                                        variant="outlined"
-                                        placeholder='Впишите сумму'
-                                        onChange={handleOfferPriceInput}
-                                    />
-                                    <CustomButton onClick={handleOfferPrice}>
-                                        Предложить
-                                    </CustomButton>
-                                </div>
-                            </CustomModal>
+                            <ResponsiveModal
+                                maxWidth='xs'
+                                openDialog={openOfferPrice}
+                                handleCloseDialog={handleModalOfferPrice(false)}
+                            >
+                                <Box
+                                    p={3}
+                                    display='flex'
+                                    alignItems='center'
+                                    flexDirection='column'
+                                    className={classes.suggestPriceModal}
+                                >
+                                    <Typography variant='button' gutterBottom>
+                                        {t('post:suggestPrice')}
+                                    </Typography>
+                                    <Typography variant='subtitle1'>
+                                        {t('post:suggestPriceRule')}
+                                    </Typography>
+                                    <Box
+                                        width="65%"
+                                        mt={2}
+                                        display='flex'
+                                        flexDirection='column'
+                                    >
+                                        <TextField
+                                            variant="outlined"
+                                            id="outlined-basic"
+                                            className='suggest-input'
+                                            onChange={handleOfferPriceInput}
+                                            placeholder={t('post:enterPrice')}
+                                        />
+                                        <CustomButton onClick={handleOfferPrice} className='suggest-btn'>
+                                            <Typography variant='subtitle1' color='initial'>
+                                                {t('post:suggest')}
+                                            </Typography>
+                                        </CustomButton>
+                                    </Box>
+                                </Box>
+                            </ResponsiveModal>
                         </div>
                     </>
                 )}

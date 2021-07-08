@@ -49,9 +49,6 @@ export const useStyles = makeStyles((theme) => ({
                         [theme.breakpoints.down('lg')]: {
                             width: '16px'
                         },
-                        [theme.breakpoints.up('lg')]: {
-                            width: '16px'
-                        }
                     },
                     '&:hover': {
                         '& > h6.MuiTypography-subtitle1': {

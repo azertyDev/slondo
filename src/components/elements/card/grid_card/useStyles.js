@@ -20,50 +20,17 @@ export const useStyles = makeStyles((theme) => ({
                 top: '5px',
                 right: '5px'
             },
-            '& svg': {
-                '& defs': {
-                    '&.def1 stop': {
-                        stopColor: '#fff'
-                    },
-                    '&:last-child stop': {
-                        '&:first-child': {
-                            stopColor: '#675EAA'
-                        },
-                        '&:last-child': {
-                            stopColor: '#AD66D5'
-                        }
-                    }
-                }
-            },
             '&:hover': {
                 '& svg': {
                     transform: 'scale(1.1)',
-                    transition: 'transform .3s cubic-bezier(.5,0,.5,3)',
-                    '& defs': {
-                        '&.def1 stop': {
-                            '&:first-child': {
-                                stopColor: '#675EAA'
-                            },
-                            '&:last-child': {
-                                stopColor: '#AD66D5'
-                            }
-                        },
-                        '&:last-child stop': {
-                            '&:first-child': {
-                                stopColor: '#fff'
-                            },
-                            '&:last-child': {
-                                stopColor: '#fff'
-                            }
-                        }
-                    }
+                    transition: 'transform .3s cubic-bezier(.5,0,.5,3)'
                 }
             }
         },
         '& div.MuiCard-root': {
             position: 'relative',
             borderRadius: '7px',
-            filter: 'drop-shadow(0px 2px 4px rgba(132, 92, 171, 0.2))',
+            filter: 'drop-shadow(0px 2px 4px rgba(0, 0, 0, 0.2))',
             [theme.breakpoints.down('xs')]: {
                 filter: 'drop-shadow(0px 1px 2px rgba(0, 0, 0, 0.25))'
             },
@@ -81,7 +48,7 @@ export const useStyles = makeStyles((theme) => ({
                     height: 'inherit',
                     display: 'flex',
                     flexDirection: 'column',
-                    justifyContent: 'space-around'
+                    justifyContent: 'space-between'
                 }
             },
             '& > div.card-media': {
@@ -127,14 +94,14 @@ export const useStyles = makeStyles((theme) => ({
                                 alignItems: 'center',
                                 justifyContent: 'center',
                                 padding: '5px',
-                                background: 'rgba(255, 255, 255, 0.8)',
+                                background: 'rgba(255, 255, 255, 0.6)',
                                 borderRadius: '100%',
                                 marginRight: '5px',
-                                '& > svg': {
-                                    '& > path': {
-                                        fill: '#838383'
-                                    }
-                                }
+                                // '& > svg': {
+                                //     '& > path': {
+                                //         fill: '#838383'
+                                //     }
+                                // }
                             }
                         }
                     }

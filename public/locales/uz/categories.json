@@ -280,6 +280,99 @@
   },
   "job": {
     "name": "Ish",
+    "resume": {
+      "name": "Rezyume",
+      "auto_business": {
+        "name": "Avtobiznes"
+      },
+      "safety_security": {
+        "name": "Xavfsizlik"
+      },
+      "office_staff": {
+        "name": "Ofis xodimlari"
+      },
+      "senior_management": {
+        "name": "Oliy menejment"
+      },
+      "production_of_raw_materials_energy": {
+        "name": "Xom ashyo ishlab chiqarish, energetika"
+      },
+      "home_staff": {
+        "name": "Uy xodimlari"
+      },
+      "publishing_houses_mass_media": {
+        "name": "Nashriyotlar va OAV"
+      },
+      "information_technology": {
+        "name": "Axborot texnologiyalari"
+      },
+      "arts_entertainment": {
+        "name": "San'at va o'yin-kulgi"
+      },
+      "purchases": {
+        "name": "Xarid qilish"
+      },
+      "marketing_advertising": {
+        "name": "Marketing va reklama"
+      },
+      "medicine_pharmaceuticals": {
+        "name": "Meditsina va farmatsevtika"
+      },
+      "early_career": {
+        "name": "Karyeraning boshlanishi / ish tajribasi yo'q"
+      },
+      "education_science": {
+        "name": "Ta’lim va fan"
+      },
+      "handymen": {
+        "name": "Oddiy ishchilar"
+      },
+      "logistics_transport": {
+        "name": "Logistika va transport"
+      },
+      "sales": {
+        "name": "Savdolar"
+      },
+      "production": {
+        "name": "Ishlab chiqarish"
+      },
+      "restaurants_catering": {
+        "name": "Restoran va umumiy ovqatlanish"
+      },
+      "agricultural_industry": {
+        "name": "Qishloq xo’jaligi"
+      },
+      "sports_beauty": {
+        "name": "Sport va go’zallik"
+      },
+      "insurance": {
+        "name": "Sug’urta"
+      },
+      "construction_repair": {
+        "name": "Qurilish va ta’mirlash"
+      },
+      "tourism_hotels": {
+        "name": "Turizm va mehmonxonalar"
+      },
+      "estate": {
+        "name": "Ko'chmas mulk"
+      },
+      "accounting_finance": {
+        "name": "Buxgalteriya hisobi va moliya"
+      },
+      "banking_sector": {
+        "name": "Bank sohasi"
+      },
+      "management": {
+        "name": "Xodimlarni boshqarish"
+      },
+      "jurisprudence": {
+        "name": "Yurisprudensiya"
+      },
+      "other": {
+        "name": "Boshqalar"
+      }
+    },
     "vacancy": {
       "name": "Vakansiya – Bo’sh ish o’rinlari",
       "auto_business": {
@@ -371,99 +464,6 @@
       },
       "other": {
         "name": "Boshqalar"
-      },
-      "resume": {
-        "name": "Rezyume",
-        "auto_business": {
-          "name": "Avtobiznes"
-        },
-        "safety_security": {
-          "name": "Xavfsizlik"
-        },
-        "office_staff": {
-          "name": "Ofis xodimlari"
-        },
-        "senior_management": {
-          "name": "Oliy menejment"
-        },
-        "production_of_raw_materials_energy": {
-          "name": "Xom ashyo ishlab chiqarish, energetika"
-        },
-        "home_staff": {
-          "name": "Uy xodimlari"
-        },
-        "publishing_houses_mass_media": {
-          "name": "Nashriyotlar va OAV"
-        },
-        "information_technology": {
-          "name": "Axborot texnologiyalari"
-        },
-        "arts_entertainment": {
-          "name": "San'at va o'yin-kulgi"
-        },
-        "purchases": {
-          "name": "Xarid qilish"
-        },
-        "marketing_advertising": {
-          "name": "Marketing va reklama"
-        },
-        "medicine_pharmaceuticals": {
-          "name": "Meditsina va farmatsevtika"
-        },
-        "early_career": {
-          "name": "Karyeraning boshlanishi / ish tajribasi yo'q"
-        },
-        "education_science": {
-          "name": "Ta’lim va fan"
-        },
-        "handymen": {
-          "name": "Oddiy ishchilar"
-        },
-        "logistics_transport": {
-          "name": "Logistika va transport"
-        },
-        "sales": {
-          "name": "Savdolar"
-        },
-        "production": {
-          "name": "Ishlab chiqarish"
-        },
-        "restaurants_catering": {
-          "name": "Restoran va umumiy ovqatlanish"
-        },
-        "agricultural_industry": {
-          "name": "Qishloq xo’jaligi"
-        },
-        "sports_beauty": {
-          "name": "Sport va go’zallik"
-        },
-        "insurance": {
-          "name": "Sug’urta"
-        },
-        "construction_repair": {
-          "name": "Qurilish va ta’mirlash"
-        },
-        "tourism_hotels": {
-          "name": "Turizm va mehmonxonalar"
-        },
-        "estate": {
-          "name": "Ko'chmas mulk"
-        },
-        "accounting_finance": {
-          "name": "Buxgalteriya hisobi va moliya"
-        },
-        "banking_sector": {
-          "name": "Bank sohasi"
-        },
-        "management": {
-          "name": "Xodimlarni boshqarish"
-        },
-        "jurisprudence": {
-          "name": "Yurisprudensiya"
-        },
-        "other": {
-          "name": "Boshqalar"
-        }
       }
     }
   },

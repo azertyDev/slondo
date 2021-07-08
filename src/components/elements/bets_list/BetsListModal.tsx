@@ -127,7 +127,7 @@ export const BetsListModal: FC<BetsListPropsType> = (props) => {
                                                 className="per-bet"
                                             >
                                                 {(index + 1) === betsCount
-                                                    ? <span className='started-price'>Стартовая цена</span>
+                                                    ? <span className='started-price'>{t('post:startingPrice')}</span>
                                                     : `+ ${numberPrettier(bet.outbid)}`}
                                             </Typography>
                                         </TableCell>

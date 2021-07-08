@@ -84,6 +84,23 @@ export const useStyles = makeStyles((theme) => ({
                         color: '#7DBCF6'
                     }
                 }
+            },
+        }
+    },
+    suggestPriceModal: {
+        '& .MuiTypography-subtitle1': {
+            textAlign: 'center',
+            [theme.breakpoints.down('md')]: {
+                fontSize: 'calc(14px + 2 * (100vw / 1280))',
+                whiteSpace: 'nowrap'
+            }
+        },
+        '& .suggest-input': {
+            marginBottom: '10px'
+        },
+        '& .suggest-btn': {
+            '& .MuiTypography-subtitle1': {
+                color: '#fff'
             }
         }
     },
@@ -188,6 +205,37 @@ export const useStyles = makeStyles((theme) => ({
                 marginBottom: 45,
                 '& .MuiTypography-subtitle1': {
                     color: '#fff'
+                }
+            }
+        }
+    },
+    buyNowModal: {
+        '& .MuiTypography-subtitle1, .MuiTypography-h6': {
+            textAlign: 'center',
+            '&.subtitle': {
+                marginBottom: 30,
+                color: 'rgba(49, 49, 49, 0.6)',
+                lineHeight: '22px'
+            },
+            '& .buy-now-price': {
+                color: theme.palette.common.activeTab
+            }
+        },
+        '& .confirm': {
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+            width: '100%',
+            '& button': {
+                width: '50%',
+                background: theme.palette.primary.red,
+
+                '& .MuiTypography-subtitle1': {
+                    color: '#fff'
+                },
+                '&.submit': {
+                    background: theme.palette.primary.createAdBtnColor,
+                    marginBottom: 10
                 }
             }
         }

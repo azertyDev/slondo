@@ -280,8 +280,8 @@
   },
   "job": {
     "name": "Работа",
-    "vacancy": {
-      "name": "Вакансии",
+    "resume": {
+      "name": "Резюме",
       "auto_business": {
         "name": "Автобизнес"
       },
@@ -373,8 +373,8 @@
         "name": "Другое"
       }
     },
-    "resume": {
-      "name": "Резюме",
+    "vacancy": {
+      "name": "Вакансии",
       "auto_business": {
         "name": "Автобизнес"
       },

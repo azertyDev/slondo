@@ -26,14 +26,14 @@ export const useStyles = makeStyles((theme) => ({
             },
             '& button.Mui-selected': {
                 '& h6.MuiTypography-h6': {
-                    color: theme.palette.common.activeTab,
+                    color: theme.palette.primary.secondary,
                     [theme.breakpoints.down('md')]: {
                         color: '#4E4E4E !important'
                     }
                 }
             },
             '& span.MuiTabs-indicator': {
-                backgroundColor: theme.palette.common.activeTab,
+                backgroundColor: theme.palette.primary.secondary,
                 [theme.breakpoints.down('md')]: {
                     backgroundColor: `#675EAA`
                 }

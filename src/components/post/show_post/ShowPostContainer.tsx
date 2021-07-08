@@ -12,6 +12,7 @@ import {Header} from '@src/components/header/Header';
 import {ErrorModal} from '@src/components/error_modal/ErrorModal';
 import {OwnerAuctionInfo} from '@src/components/post/show_post/owner_auction_info/OwnerAuctionInfo';
 import {useStyles} from './useStyles';
+import {Footer} from '@src/components/footer/Footer';
 
 
 export const ShowPostContainer: FC = () => {
@@ -179,13 +180,14 @@ export const ShowPostContainer: FC = () => {
                         />
                         <Hidden mdDown>
                             <div className={classes.adBanner}>
-                                <Banner height="424px"/>
+                                <Banner height="424px" />
                             </div>
                         </Hidden>
                     </Grid>
                 </Grid>
             </Container>
-            <ErrorModal/>
+            <Footer />
+            <ErrorModal />
         </>
     );
 };

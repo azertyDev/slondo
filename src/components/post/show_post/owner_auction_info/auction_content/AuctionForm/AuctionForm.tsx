@@ -81,7 +81,7 @@ export const AuctionForm: FC<AuctionFromPropsType> = (props) => {
                                     name="bet"
                                     onChange={handleInput}
                                     errorMsg={getErrorMsg(errors.bet, touched.bet, t)}
-                                    placeholder={`Мин. ставка: ${numberPrettier(lastBet?.min_bet)} сум`}
+                                    placeholder={`${t('post:minBet')}: ${numberPrettier(lastBet?.min_bet)} ${t('common:sum')}`}
                                 />
                             </Grid>
                             <Grid item xs={isMdDown ? 5 : 12}>
@@ -92,17 +92,17 @@ export const AuctionForm: FC<AuctionFromPropsType> = (props) => {
                                     disabled={!values.bet && isFetch}
                                 >
                                     <Typography variant="subtitle1" color="initial">
-                                        Сделать ставку
+                                        {t('post:createBet')}
                                     </Typography>
                                 </CustomButton>
                             </Grid>
                         </Grid>
                         <div className="max-bet">
                             <Typography variant="subtitle2" color="initial">
-                                Максимально возможная ставка:
+                                {t('post:maxBet')}
                             </Typography>
                             <Typography variant="subtitle2" color="initial">
-                                {numberPrettier(lastBet?.max_bet)} сум
+                                {numberPrettier(lastBet?.max_bet)} {t('common:sum')}
                             </Typography>
                         </div>
                     </div>

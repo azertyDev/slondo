@@ -1,13 +1,8 @@
 import {FC, MutableRefObject, useEffect, useRef, useState} from 'react';
 import {WithT} from 'i18next';
 import {
-    Backdrop,
     Container,
     Hidden,
-    List,
-    ListItem,
-    ListItemText,
-    Modal,
     TextField,
     Typography,
     useMediaQuery,
@@ -33,6 +28,7 @@ import {setErrorMsgAction} from '@root/src/redux/slices/errorSlice';
 import {useDispatch} from 'react-redux';
 import {booleanFields} from '@src/common_data/fields_keys';
 import {useStyles} from './useStyles';
+import {ResponsiveModal} from '@src/components/elements/responsive_modal/ResponsiveModal';
 
 
 type PostContentTypes = {
@@ -79,7 +75,7 @@ export const PostContent: FC<PostContentTypes> = (props) => {
     const {openComplaintModal, openSliderModal} = modalsState;
 
     const date = new Date(data.created_at);
-    const formatted_date = `${date.getDate()} ${months[date.getMonth()]} ${date.getFullYear()}`;
+    const formatted_date = `${date.getDate()} ${t(`common:${months[date.getMonth()]}`)} ${date.getFullYear()}`;
 
     const handleShowSliderModal = value => () => setModalsState({...modalsState, openSliderModal: value});
     const handleComplaintModal = value => () => setModalsState({...modalsState, openComplaintModal: value});
@@ -168,9 +164,9 @@ export const PostContent: FC<PostContentTypes> = (props) => {
             <Hidden mdDown>
                 <div className="breadcrumbs">
                     <BreadcrumbsComponent
-                        category={data.category}
-                        subcategory={data.adsable?.sub_category}
-                        type={data.adsable?.type}
+                        category={data.category.name}
+                        subcategory={data.adsable?.sub_category.name}
+                        type={data.adsable?.type?.name}
                     />
                 </div>
             </Hidden>
@@ -222,7 +218,7 @@ export const PostContent: FC<PostContentTypes> = (props) => {
                     <div className="post-header">
                         <div>
                             <Typography variant='h6' className="price">
-                                {numberPrettier(data.price) + ' ' + data.currency.name}
+                                {numberPrettier(data.price) + ' ' + t(`common:${data.currency.name}`)}
                                 {!data.condition.name && (
                                     <div className="condition">
                                         <Typography variant="h6">Новое</Typography>
@@ -241,13 +237,13 @@ export const PostContent: FC<PostContentTypes> = (props) => {
                             <span>{t('common:post')} №:</span> {data.id}
                         </Typography>
                         <Typography variant="subtitle1">
-                            Опубликовано: {formatted_date}
+                            {t('post:published')}: {formatted_date}
                         </Typography>
                         <Typography variant="subtitle1">
-                            Просмотров: {number_of_views}
+                            {t('post:views')}: {number_of_views}
                         </Typography>
                         <Typography variant="subtitle1" onClick={handleComplaintModal(true)}>
-                            Пожаловаться <WarningIcon/>
+                            {t('post:complain')} <WarningIcon />
                         </Typography>
                     </div>
                 </Hidden>
@@ -293,7 +289,7 @@ export const PostContent: FC<PostContentTypes> = (props) => {
                         <span className="auto-renewal">
                             <RenewalIcon/>
                             <Typography variant="subtitle1">
-                            {t('auto_ren')}
+                            {t('common:auto_ren')}
                         </Typography>
                     </span>
                     )}
@@ -301,10 +297,10 @@ export const PostContent: FC<PostContentTypes> = (props) => {
                 <Hidden lgUp>
                     <div className="contact">
                         <CustomButton>
-                            <Typography variant='subtitle1'>Позвонить</Typography>
+                            <Typography variant='subtitle1'>{t('post:show_phone')}</Typography>
                         </CustomButton>
                         <CustomButton>
-                            <Typography variant='subtitle1'>Написать</Typography>
+                            <Typography variant='subtitle1'>{t('post:writeMessage')}</Typography>
                         </CustomButton>
                     </div>
                     {isAuction && (
@@ -318,39 +314,43 @@ export const PostContent: FC<PostContentTypes> = (props) => {
                 <div className="post-location">
                     <Hidden mdDown>
                         <Typography variant="button" noWrap>
-                            Местоположение
+                            {t(`locations:location`)}
                         </Typography>
                     </Hidden>
                     {data.region.name || data.city.name || data.district.name
-                     ? <div className='location-text'>
-                         <LocationIcon/>
-                         <Typography variant="subtitle1">
-                             {`${data.region.name ?? ''}`}
-                             {data.city.name ? `, ${data.city.name}` : ''}
-                             {data.district.name ? `, ${data.district.name}` : ''}
-                         </Typography>
-                     </div>
-                     : <Typography variant="subtitle1">Не указано</Typography>}
+                        ? <div className='location-text'>
+                            <LocationIcon />
+                            <Typography variant="subtitle1">
+                                {`${t(`locations:${data.region.name}.name`) ?? ''}`}
+                                {data.city.name ? `, ${t(`locations:${data.region.name}.${data.city.name}`)}` : ''}
+                            </Typography>
+                        </div>
+                        : <Typography variant="subtitle1">{t(`locations:notIndicate`)}</Typography>}
                 </div>
                 <Hidden mdDown>
                     <div className="post-category">
-                        <Typography variant="button" color="initial">
-                            Категория
+                        <Typography variant="subtitle1" color="initial">
+                            {t(`categories:${data.category.name}.name`)}
+                            &nbsp;-&nbsp;
+                            {t(`categories:${data.category.name}.${data.adsable.sub_category.name}.name`)}
+                            {
+                                data.adsable?.type &&
+                                <span>
+                                    &nbsp;-&nbsp;
+                                    {t(`categories:${data.category.name}.${data.adsable.sub_category.name}.${data.adsable.type.name}.name`)}
+                                </span>
+                            }
                         </Typography>
-                        <div>
-                            <Typography variant="subtitle1" color="initial">
-                                {data.category.name}
-                                &nbsp;-{data.adsable.sub_category.name}
-                                {model?.type && <span>&nbsp;-{model.type.name}</span>}
-                            </Typography>
-                        </div>
                     </div>
                 </Hidden>
                 <div className="post-description">
                     <Typography variant="button" color="initial">
-                        Описание
+                        {t('post:description')}
                     </Typography>
-                    <ReadMore t={t} descHeight={descHeight}>
+                    <ReadMore
+                        descHeight={descHeight}
+                        heightLimit={isMdDown ? 75 : 110}
+                    >
                         <Typography
                             className='description'
                             variant="subtitle1"
@@ -362,10 +362,10 @@ export const PostContent: FC<PostContentTypes> = (props) => {
                 </div>
                 {isAuction && (
                     <div className="started-price">
-                        <Typography variant="button">Стартовая цена</Typography>
+                        <Typography variant="button">{t('post:startingPrice')}</Typography>
                         <span>
                         <Typography variant="body2">
-                            {numberPrettier(data.price)} {data.currency.name}
+                            {numberPrettier(data.price)} {t(`common:${data.currency.name}`)}
                         </Typography>
                     </span>
                     </div>
@@ -382,11 +382,11 @@ export const PostContent: FC<PostContentTypes> = (props) => {
                     <div className="post-info">
                         <div className='info-wrapper'>
                             <Typography variant="subtitle1">
-                                <span>Объяление №:</span> {data.id}
+                                <span>{t('common:post')} №:</span> {data.id}
                             </Typography>
                             <Hidden xsDown>
                                 <Typography variant="subtitle1">
-                                    Опубликовано: {formatted_date}
+                                    {t('post:published')}: {formatted_date}
                                 </Typography>
                             </Hidden>
                             <Hidden smUp>
@@ -395,16 +395,16 @@ export const PostContent: FC<PostContentTypes> = (props) => {
                                 </Typography>
                             </Hidden>
                             <Typography variant="subtitle1">
-                                Просмотров: {number_of_views}
+                                {t('post:views')}: {number_of_views}
                             </Typography>
                             <Hidden mdDown>
                                 <Typography variant="subtitle1" onClick={handleComplaintModal(true)}>
-                                    Пожаловаться <WarningIcon/>
+                                    {t('post:complain')} <WarningIcon />
                                 </Typography>
                             </Hidden>
                         </div>
                         <CustomButton className="btn-report" onClick={handleComplaintModal(true)}>
-                            Пожаловаться
+                            {t('post:complain')}
                         </CustomButton>
                     </div>
                 </Hidden>
@@ -416,52 +416,49 @@ export const PostContent: FC<PostContentTypes> = (props) => {
                     onClose={handleShowSliderModal(false)}
                 />
             </Container>
-            <Modal
-                className={classes.modal}
-                open={openComplaintModal}
-                BackdropComponent={Backdrop}
-                BackdropProps={{timeout: 200}}
-                onClose={handleComplaintModal(false)}
+            <ResponsiveModal
+                maxWidth='sm'
+                openDialog={openComplaintModal}
+                handleCloseDialog={handleComplaintModal(false)}
             >
                 <div className={classes.modalBody}>
                     <Typography variant='h6'>
-                        Выберите причину жалобы
+                        {t('post:indicateReason')}
                     </Typography>
-                    <List component="nav" disablePadding>
-                        <ListItem button disableGutters>
-                            <ListItemText primary="Столкнулся с мошенничеством и обманом."/>
-                        </ListItem>
-                        <ListItem button disableGutters>
-                            <ListItemText primary="Товар указан, но его нет в наличии."/>
-                        </ListItem>
-                        <ListItem button disableGutters>
-                            <ListItemText primary="Цена неактуальная."/>
-                        </ListItem>
-                        <ListItem button disableGutters>
-                            <ListItemText primary="Содержание нарушает правила сервиса."/>
-                        </ListItem>
-                        <ListItem button disableGutters>
-                            <ListItemText primary="Автор объявления вызывает подозрения."/>
-                        </ListItem>
-                    </List>
+                    {/*<List component="nav" disablePadding>*/}
+                    {/*    <ListItem button disableGutters>*/}
+                    {/*        <ListItemText primary="Столкнулся с мошенничеством и обманом."/>*/}
+                    {/*    </ListItem>*/}
+                    {/*    <ListItem button disableGutters>*/}
+                    {/*        <ListItemText primary="Товар указан, но его нет в наличии."/>*/}
+                    {/*    </ListItem>*/}
+                    {/*    <ListItem button disableGutters>*/}
+                    {/*        <ListItemText primary="Цена неактуальная."/>*/}
+                    {/*    </ListItem>*/}
+                    {/*    <ListItem button disableGutters>*/}
+                    {/*        <ListItemText primary="Содержание нарушает правила сервиса."/>*/}
+                    {/*    </ListItem>*/}
+                    {/*    <ListItem button disableGutters>*/}
+                    {/*        <ListItemText primary="Автор объявления вызывает подозрения."/>*/}
+                    {/*    </ListItem>*/}
+                    {/*</List>*/}
                     <div className='textarea'>
-                        <Typography variant='subtitle1'>Другое</Typography>
                         <TextField
                             fullWidth
                             multiline
                             rows={10}
-                            placeholder='Опишите причину'
+                            placeholder={t('post:describeReason')}
                             helperText='0/500'
                             variant="outlined"
                         />
                     </div>
                     <CustomButton>
                         <Typography variant='subtitle1'>
-                            Отправить
+                            {t('common:send')}
                         </Typography>
                     </CustomButton>
                 </div>
-            </Modal>
+            </ResponsiveModal>
         </div>
     );
 };

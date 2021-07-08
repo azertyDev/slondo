@@ -18,7 +18,7 @@ export const useStyles = makeStyles((theme) => ({
         },
         '& .paper': {
             background: '#fff',
-            padding: 20,
+            padding: '20px 20px 0 20px',
             marginBottom: 30
         },
         '& .tabs': {

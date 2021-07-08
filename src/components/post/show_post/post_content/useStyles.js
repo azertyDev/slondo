@@ -159,7 +159,7 @@ export const useStyles = makeStyles((theme) => ({
             }
         },
         '& div.post-info': {
-            padding: '13px 7px 12px',
+            padding: '11px 7px',
             background: '#F2F2F2',
             borderRadius: '5px',
             margin: '20px 0',
@@ -490,20 +490,15 @@ export const useStyles = makeStyles((theme) => ({
         },
         '& div.post-category': {
             marginBottom: '40px',
-            '& > p.MuiTypography-button': {
-                marginBottom: 22
-            },
-            '& > div': {
-                background: '#F2F2F2',
-                borderRadius: '10px',
-                display: 'inline-block',
-                padding: '10px 21px',
-                '& > h6.MuiTypography-subtitle1': {
-                    fontSize: '1.125rem',
-                    '& > span': {
-                        color: '#675EAA',
-                        fontWeight: '600'
-                    }
+            background: '#F2F2F2',
+            borderRadius: '10px',
+            display: 'inline-block',
+            padding: '10px 21px',
+            '& > h6.MuiTypography-subtitle1': {
+                fontSize: '1.125rem',
+                '& > span': {
+                    color: '#675EAA',
+                    fontWeight: '600'
                 }
             }
         },
@@ -527,7 +522,6 @@ export const useStyles = makeStyles((theme) => ({
         },
         '& div.post-parameters': {
             position: 'relative',
-            marginBottom: '32px',
             '& p.MuiTypography-button': {
                 marginBottom: '30px',
                 [theme.breakpoints.down('md')]: {

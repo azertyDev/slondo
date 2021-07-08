@@ -28,13 +28,15 @@ export const useStyles = makeStyles((theme) => ({
             height: 39,
             borderRadius: 10,
             paddingLeft: 30,
+            background: '#fff',
             '& input': {
                 padding: 10,
                 paddingLeft: 20,
+                borderRadius: 10,
             },
-            '& fieldset.MuiOutlinedInput-notchedOutline': {
-                border: 'none',
-            },
+            // '& fieldset.MuiOutlinedInput-notchedOutline': {
+            //     border: 'none',
+            // },
         },
     },
     preface: {

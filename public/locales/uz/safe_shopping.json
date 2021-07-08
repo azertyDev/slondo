@@ -1,20 +1,27 @@
 {
+    "hero": {
+        "title": "Xavfsiz xarid",
+        "description": "Mahsulotni sotib oling va uni olganingizdan so'ng pulini to'lang!"
+    },
+    "howItWorks": "Bu qanday ishlaydi?",
     "forSeller": {
-        "advice_1": "Avtorizatsiyadan o'ting va ......",
-        "advice_2": "Активируйте функцию, переключая ползунок вправо В первый раз необходимо заполнить личные данные и внести карту для оплаты Сохраните данные настройки",
-        "advice_3": "Теперь можно перейти к созданию объявления Заполните обязательные поля и во вкладке “Заголовок, описание и контакты” активируйте форму “Безопасная покупка”, после нажмите кнопку “Опубликовать”",
-        "advice_4": "После модерации объявление появится на сайте, пользователи смогут приобрести Ваш товар с “Безопасной покупкой”",
-        "advice_5": "Как только Ваш товар будет куплен, на номер телефона, указанный при регистрации, придет СМС оповещение о покупке товара",
-        "advice_6": "Свяжитесь с покупателем и договоритесь о встрече для передачи товара",
-        "advice_7": "Передавая товар дождитесь оповещения в личном кабинете о завершении Безопасной покупки, и смс о пополнении баланса"
+        "name": "Sotuvchilar uchun",
+        "advice_1": "Saytga kiring. Shaxsiy kabinetingizga kiring va «Xavfsiz xarid» bo’limini tanlang.",
+        "advice_2": "Shaxsiy kabinetingizga kiring va «Xavfsiz xarid» bo’limini tanlang. Polzunokni (surgichni) o’ngga surib, uni faollashtiring. Dastlab, shaxsiy ma’lumotlarni to’ldirish va to’lov kartasi raqamlarini kiritish zarur. Sozlangan  ma’lumotlarni saqlang.",
+        "advice_3": "Endi e’lonni yaratishingiz mumkin. Barcha zarur bo’lgan maydonchalarni to’ldiring va “Sarlavha, tavsif va aloqa uchun ma’lumotlar” bo’limidagi “Xavfsiz xarid” xizmatini faollashtiring, so’ngra, “Chop etish” tugmasini bosing.",
+        "advice_4": "Moderasiyadan so’ng, e’lon saytda ko’rinadi, foydalanuvchilar esa “Xavfsiz xarid” yordamida Sizning mahsulotingizni xarid qilish imkoniga ega bo’lishadi.",
+        "advice_5": "Mahsulotingiz sotilishi bilan,ro’yxatdan o’tish vaqtida ko’rsatgan telefon raqamingizga mahsulotingiz sotilgani to’g’risida SMS xabar keladi.",
+        "advice_6": "Xaridor bilan bog’laning va mahsulotni yetkazish bo’yicha kelishib oling.",
+        "advice_7": "Mahsulotni xaridor qo’liga topshirishdan oldin, shaxsiy kabinetingizga Xavfsiz xarid amalga oshganligi va balansingizga pul kelib tushganligi to’g’risida bildirgi kelishini kutib turing."
     },
     "forBuyer": {
-        "advice_1": "Avtorizatsiyadan o'ting va ......",
-        "advice_2": "Ознакомьтесь с описанием и нажмите на кнопку «Безопасная покупка»",
-        "advice_3": "В первый раз необходимо заполнить личные данные и внести карту для оплаты.  Привязка …",
-        "advice_4": "Нажмите кнопку «Купить товар» - теперь деньги заморозились на Вашем счету до завершения сделки",
-        "advice_5": "Свяжитесь с продавцом или дождитесь его звонка и договоритесь о встрече для передачи товара.",
-        "advice_6": "Внимательно проверьте товар и если все соответствует описанию нажмите кнопку «Завершить покупку» - после этого деньги списываются с карты и уходят продавцу.",
-        "advice_7": "Если товар не соответствует описанию нажмите кнопку «Отменить покупку» - сделка будет аннулирована и деньги разморозятся на Вашей карте."
+        "name": "Xaridorlar uchun",
+        "advice_1": "Mahsulotni sotib oling va uni olganingizdan so'ng pulini to'lang!",
+        "advice_2": "Tavsifni o'qing va “Xavfsiz xarid” tugmasini bosing.",
+        "advice_3": "Birinchi marta  shaxsiy ma'lumotlaringizni to'ldirishingiz va to'lov uchun kartanabgizni kiritishingiz kerak. Bog’lash..",
+        "advice_4": "“Sotib olish” tugmasini bosing – endi Sizning hisobingizdagi mablag’ savdo tugagunga qadar muzlatiladi.",
+        "advice_5": "Sotuvchi bilan bog’laning yoki uning qo'ng'irog'ini kuting va mahsulotni qabul qilib olish uchun uchrashuvni belgilang.",
+        "advice_6": "Mahsulotni yaxshilab tekshiring va agar hamma narsa tavsifga mos keladigan bo'lsa, “Xaridni tasdiqlang” tugmasini bosing - shundan so'ng pul kartangizdagi pul yechiladi va  sotuvchi hisobiga borib tushadi.",
+        "advice_7": "Agar mahsulot tavsifga mos kelmasa, “Xaridni bekor qilish” tugmasini bosing - tranzaksiya bekor qilinadi va pul kartangizga qaytariladi."
     }
 }

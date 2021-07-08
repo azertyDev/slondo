@@ -29,9 +29,9 @@ export const useStyles = makeStyles(() => ({
         backgroundColor: '#E9E9E9',
         borderLeft: '1px solid #D5D5D5',
         borderTopLeftRadius: '0',
-        borderTopRightRadius: '10px',
+        borderTopRightRadius: '9px',
         borderBottomLeftRadius: '0',
-        borderBottomRightRadius: '10px',
+        borderBottomRightRadius: '9px',
         '&:hover': {
             backgroundColor: '#ccc'
         }
