@@ -79,6 +79,9 @@ export const useStyles = makeStyles((theme) => ({
                 backgroundRepeat: 'no-repeat',
                 backgroundPosition: 'bottom left',
                 opacity: 0.8,
+                [theme.breakpoints.down('md')]: {
+                    height: '454px',
+                },
                 '& > h2.MuiTypography-h2': {
                     fontSize: '3.75rem',
                     textTransform: 'uppercase',

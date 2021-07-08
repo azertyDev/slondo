@@ -55,8 +55,8 @@ export const CategoriesPage: FC = () => {
 
     const setMatchedCtgrs = () => {
         const matchedCtgrs = searchTxt.length > 2
-                             ? categorySearchHelper(searchTxt, categories, t)
-                             : [];
+            ? categorySearchHelper(searchTxt, categories, t)
+            : [];
         setSubctgrs(matchedCtgrs);
     };
 
@@ -144,44 +144,48 @@ export const CategoriesPage: FC = () => {
                             />
                         </div>
                         {!!subctgrs.length
-                         ? <List disablePadding>
-                             {subctgrs[0].parents.length === 2 && subcategoryName && (
-                                 <ListItem onClick={handleBackSubCtgr}>
-                                     <CustomButton className="back-btn">
-                                         <BackspaceIcon/>
-                                         <Typography variant="subtitle1">
-                                             {t(`${categoryName}.${subcategoryName}.name`)}
-                                         </Typography>
-                                     </CustomButton>
-                                 </ListItem>
-                             )}
-                             {subctgrs.map((typeCtgr, i) => {
-                                 const transCtgrName = t(`${categoryName}${subcategoryName ? `.${subcategoryName}` : ''}.${typeCtgr.name}.name`);
-                                 return (
-                                     <ListItem key={i} onClick={handleSubCategory(typeCtgr)}>
-                                         <div>
-                                             <Typography variant="subtitle1">
-                                                 {transCtgrName}
-                                             </Typography>
-                                             {!!searchTxt && (
-                                                 <Typography
-                                                     className="parent-category"
-                                                     variant="subtitle2"
-                                                 >
-                                                     {t(`${typeCtgr.parents[0].name}`)}
-                                                     {typeCtgr.parents[1] && ` - ${t(`${typeCtgr.parents[1].name}`)}`}
-                                                 </Typography>
-                                             )}
-                                         </div>
-                                     </ListItem>
-                                 );
-                             })}
-                         </List>
-                         : <div className="sub-category-bg">
-                             <Typography variant="h2">
-                                 {t('post:selectCategory')}
-                             </Typography>
-                         </div>}
+                            ? <List disablePadding>
+                                {subctgrs[0].parents.length === 2 && subcategoryName && (
+                                    <ListItem onClick={handleBackSubCtgr}>
+                                        <CustomButton className="back-btn">
+                                            <BackspaceIcon/>
+                                            <Typography variant="subtitle1">
+                                                {t(`${categoryName}.${subcategoryName}.name`)}
+                                            </Typography>
+                                        </CustomButton>
+                                    </ListItem>
+                                )}
+                                {subctgrs.map((typeCtgr, i) => {
+                                    const transCtgrName = t(`${categoryName}${subcategoryName ? `.${subcategoryName}` : ''}.${typeCtgr.name}.name`);
+                                    return (
+                                        <ListItem key={i} onClick={handleSubCategory(typeCtgr)}>
+                                            <div>
+                                                <Typography variant="subtitle1">
+                                                    {transCtgrName}
+                                                </Typography>
+                                                {!!searchTxt && (
+                                                    <Typography
+                                                        className="parent-category"
+                                                        variant="subtitle2"
+                                                    >
+                                                        {t(`${typeCtgr.parents[0].name}`)}
+                                                        {typeCtgr.parents[1] && ` - ${t(`${typeCtgr.parents[1].name}`)}`}
+                                                    </Typography>
+                                                )}
+                                            </div>
+                                        </ListItem>
+                                    );
+                                })}
+                            </List>
+                            :
+                            <div className="sub-category-bg">
+                                <Hidden mdDown>
+                                    <Typography variant="h2">
+                                        {t('post:selectCategory')}
+                                    </Typography>
+                                </Hidden>
+                            </div>
+                        }
                     </Grid>
                 </Grid>
             </div>

@@ -29,7 +29,7 @@ export const useStyles = makeStyles((theme) => ({
                     alignItems: 'center',
                     '& svg': {
                         width: '100%',
-                        height: '90%',
+                        height: '90%'
                     }
                 }
             }
@@ -76,7 +76,7 @@ export const useStyles = makeStyles((theme) => ({
         '& a.create-post-link': {
             textDecoration: 'none',
             '& svg': {
-                marginLeft: '8px',
+                marginLeft: '8px'
             },
             '& button': {
                 width: '100%',
@@ -91,7 +91,7 @@ export const useStyles = makeStyles((theme) => ({
             width: '100%',
             '& svg': {
                 width: 20,
-                marginRight: '8px',
+                marginRight: '8px'
             },
             '& > h6.MuiTypography-subtitle2': {
                 lineHeight: '15px',
@@ -153,11 +153,6 @@ export const useStyles = makeStyles((theme) => ({
                     padding: '6px 12px',
                     borderRadius: '100px',
                     background: '#F5F5F5',
-                    [theme.breakpoints.up('md')]: {
-                        padding: 0,
-                        borderRadius: 0,
-                        background: 'none'
-                    },
                     '&.selected': {
                         '& > h6.MuiTypography-subtitle1': {
                             backgroundImage:
@@ -183,13 +178,7 @@ export const useStyles = makeStyles((theme) => ({
                     },
                     '& > svg': {
                         marginRight: '5px',
-                        height: '20px',
-                        [theme.breakpoints.down('lg')]: {
-                            width: '16px'
-                        },
-                        [theme.breakpoints.up('lg')]: {
-                            width: '16px'
-                        }
+                        height: '20px'
                     },
                     '&:hover': {
                         '& > h6.MuiTypography-subtitle1': {

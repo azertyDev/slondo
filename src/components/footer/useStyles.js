@@ -28,7 +28,6 @@ export const useStyles = makeStyles((theme) => ({
                         margin: 0,
                         listStyle: 'none',
                         '& > li': {
-                            marginBottom: 8,
                             '&:last-child': {
                                 marginBottom: 0
                             },
@@ -77,7 +76,7 @@ export const useStyles = makeStyles((theme) => ({
                 '&:before': {
                     content: '""',
                     position: 'absolute',
-                    width: '100%',
+                    width: '85%',
                     height: 2,
                     background: '#E0E0E0',
                     borderRadius: '1px',
