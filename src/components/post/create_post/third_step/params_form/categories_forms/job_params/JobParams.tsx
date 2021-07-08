@@ -58,7 +58,7 @@ export const JobParams: FC<CommonParamsPropsType> = (props) => {
                 submitTxt='appearance'
                 icon={<ParametersIcon/>}
                 isPreview={isPreview}
-                title={t('parameters')}
+                title={t('post:parameters')}
                 open={currentFormIndex === 3}
                 isEditable={currentFormIndex < 3}
                 handleEdit={handleFormOpen(3)}
@@ -88,6 +88,7 @@ export const JobParams: FC<CommonParamsPropsType> = (props) => {
                                         items={filters.position}
                                         handleSelect={handleSelect}
                                         transKey={`${categoryName}.`}
+                                        labelTxt={t(`${categoryName}.position.name`)}
                                     />
                                 </Grid>
                             )}

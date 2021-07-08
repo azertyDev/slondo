@@ -1,4 +1,5 @@
 import {FC, useState} from 'react';
+import {unstable_batchedUpdates} from "react-dom";
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import {CabinetModal} from '@src/components/cabinet/components/cabinet_modal/CabinetModal';
 import {IconButton, List, ListItem, ListItemText, Typography} from '@material-ui/core';
@@ -9,7 +10,6 @@ import {useTranslation} from 'next-i18next';
 import {CustomCircularProgress} from '@src/components/elements/custom_circular_progress/CustomCircularProgress';
 import {CommonModalType} from "@src/components/cabinet/CabinetWrapper";
 import {useStyles} from './useStyles';
-
 
 export const SettingsModal: FC<CommonModalType> = (props) => {
     const {
@@ -38,25 +38,33 @@ export const SettingsModal: FC<CommonModalType> = (props) => {
         try {
             setIsFetch(true);
             await userAPI.ricePostInTape(post_id);
-            onClose();
-            setIsFetch(false);
-            setModalContentIndex(1);
+            unstable_batchedUpdates(() => {
+                onClose();
+                setIsFetch(false);
+                setModalContentIndex(1);
+            });
         } catch (e) {
-            setIsFetch(false);
-            dispatch(setErrorMsgAction(e.message));
+            unstable_batchedUpdates(() => {
+                setIsFetch(false);
+                dispatch(setErrorMsgAction(e.message));
+            });
         }
     };
 
     const handleDeactivate = async () => {
         try {
             setIsFetch(true);
-            await userAPI.deactivateById(post.id);
-            onClose();
-            handleRefresh();
-            setIsFetch(false);
+            await userAPI.deactivatePost(post.id);
+            unstable_batchedUpdates(() => {
+                onClose();
+                handleRefresh();
+                setIsFetch(false);
+            });
         } catch (e) {
-            setIsFetch(false);
-            dispatch(setErrorMsgAction(e.message));
+            unstable_batchedUpdates(() => {
+                setIsFetch(false);
+                dispatch(setErrorMsgAction(e.message));
+            });
         }
     };
 

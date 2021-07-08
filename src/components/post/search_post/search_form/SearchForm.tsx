@@ -364,6 +364,7 @@ export const SearchForm: FC<SearchFormPropsType> = (props) => {
                             values={values}
                             name='post_type'
                             options={postTypesList}
+                            categoryName={categoryName}
                             handleSelect={handlePostType}
                         />
                     </Grid>

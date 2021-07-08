@@ -1,4 +1,10 @@
 {
+  "remove_notifications": "Barcha bildirgilarni ochirish",
+  "winner": "G'olib",
+  "seller": "Sotuvchi",
+  "maxOffer": "Eng katta taklif etilgan narx:",
+  "offer_price": "{{price}} so'm",
+  "all_offers": " Hamma takliflar ({{offers}})",
   "my_cabinet": "Mening kabinetim",
   "perform_purchase": "Xaridni tastiqlash",
   "dismiss_purchase": "Xaridni bekor qilish",

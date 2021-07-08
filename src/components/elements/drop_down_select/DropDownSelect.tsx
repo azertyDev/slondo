@@ -101,7 +101,7 @@ export const DropDownSelect: FC<CustomSelectPropsType> = (props) => {
                             />
                         )}
                         {t(transKey && !noTranslatable
-                            ? `${transKey}${item[optionKey]}`
+                            ? `${transKey}${item[optionKey]}.name`
                             : item[optionKey])}
                     </MenuItem>
                 ))}

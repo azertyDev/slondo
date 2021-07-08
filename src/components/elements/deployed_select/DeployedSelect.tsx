@@ -5,7 +5,6 @@ import {isRequired} from '@src/helpers';
 import {useTranslation} from 'react-i18next';
 import {useStyles} from './useStyles';
 
-
 type SelectOptionsPropsType = {
     name: string,
     categoryName: string,
@@ -42,9 +41,9 @@ export const DeployedSelect: FC<SelectOptionsPropsType> = (props) => {
                     {!disableRequire && isRequired(name) && <span className='error-text'>*&nbsp;</span>}
                 </Typography>
             </label>
-            <Grid container className='options' xs={12}>
+            <Grid container className='options'>
                 {options.map(item =>
-                    <Grid item xs={6}>
+                    <Grid key={item.id} item xs={6}>
                         <CustomButton
                             key={item.id}
                             onClick={handleClick(item)}

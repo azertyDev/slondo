@@ -1,4 +1,5 @@
 import {FC} from 'react';
+import {unstable_batchedUpdates} from "react-dom";
 import {ResponsiveModal} from '@src/components/elements/responsive_modal/ResponsiveModal';
 import {Box, Divider, Typography} from '@material-ui/core';
 import {UserInfoWithAvatar} from '@src/components/elements/user_info_with_avatar/UserInfoWithAvatar';
@@ -10,6 +11,8 @@ import {userAPI} from '@src/api/api';
 import {Rating} from '@src/components/elements/rating/Rating';
 import {useTranslation} from 'next-i18next';
 import {useStyles} from './useStyles';
+import {useDispatch} from "react-redux";
+import {setErrorMsgAction} from "@src/redux/slices/errorSlice";
 
 type RatingModalPropsType = {
     user,
@@ -25,19 +28,21 @@ export const RatingModal: FC<RatingModalPropsType> = (props) => {
     } = props;
 
     const txtLimit = 5000;
+    const dispatch = useDispatch();
     const {t} = useTranslation('cabinet');
 
-    const handleSubmitRating = async (values, {setSubmitting, setValues}) => {
-        const {rating, comment} = values;
+    const handleSubmitRating = async (values) => {
         try {
-            setSubmitting(true);
-            const {message} = await userAPI.setUserRating(rating, comment, user.id);
-            await userAPI.getUserInfo();
-            setSubmitting(false);
-            setValues({...values, message});
+            const {rating, comment} = values;
+            const params: any = {
+                rating,
+                receiver_id: user.id
+            };
+            if (comment !== '') params.comment = comment;
+            await userAPI.setUserRating(params);
             handleCloseRating();
         } catch ({message}) {
-            setValues({...values, message});
+            dispatch(setErrorMsgAction(message));
         }
     };
 
@@ -72,9 +77,9 @@ export const RatingModal: FC<RatingModalPropsType> = (props) => {
             handleCloseDialog={handleCloseRating}
         >
             <Box
+                mb={1}
                 display='flex'
                 justifyContent='center'
-                mb={1}
             >
                 <Typography variant='h6'>
                     Рейтинг
@@ -85,9 +90,9 @@ export const RatingModal: FC<RatingModalPropsType> = (props) => {
             </Box>
             <Divider className={classes.divider}/>
             <Box
+                mb={1}
                 display='flex'
                 justifyContent='center'
-                mb={1}
             >
                 <Typography variant='h6'>
                     Оцените продавца

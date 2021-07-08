@@ -1,37 +1,72 @@
-import {FC} from 'react';
+import {FC, useState} from 'react';
 import Link from 'next/link';
-import {WithT} from 'i18next';
 import {Box, Button, IconButton, Paper, Typography} from '@material-ui/core';
 import {Phone, Error} from '@material-ui/icons';
 import {CloseIcon} from '@src/components/elements/icons';
 import {useStyles} from './useStyles';
+import {userAPI} from "@src/api/api";
+import {setErrorMsgAction} from "@src/redux/slices/errorSlice";
+import {useDispatch} from "react-redux";
+import {useTranslation} from "next-i18next";
 
 export type NotificationDataType = {
-    data,
-    fetchUserPhone: (user_id) => () => void,
-    handleDeleteNotification: (id: number, ads_id: number) => () => void,
-    phone: number
-} & WithT;
+    id: number,
+    message: string,
+    ads_id: number,
+    created_at: string,
+    go_to,
+    go_to_type,
+    handleRefresh: () => void
+};
 
-export const Notification: FC<NotificationDataType> = (props) => {
-    const {
-        t,
-        data,
-        handleDeleteNotification,
-        fetchUserPhone,
-        phone
-    } = props;
-
+export const NotificationCard: FC<NotificationDataType> = (props) => {
     const {
         id,
         message,
         ads_id,
         created_at,
         go_to,
-        go_to_type
-    } = data;
+        go_to_type,
+        handleRefresh
+    } = props;
 
+    const {t} = useTranslation('notifications');
+
+    const dispatch = useDispatch();
     const date = new Date(created_at);
+
+    const [isFetch, setIsFetch] = useState(false);
+    const [phone, setPhone] = useState(null);
+
+    const fetchUserPhone = async () => {
+        try {
+            setIsFetch(true);
+            const {phone} = await userAPI.getPhoneByUserId(ads_id);
+            setPhone(phone);
+            setIsFetch(false);
+        } catch (e) {
+            setIsFetch(false);
+            dispatch(setErrorMsgAction(e.message));
+        }
+    };
+
+    const handleDeleteNotification = async () => {
+        try {
+            setIsFetch(true);
+
+            const {message} = await userAPI.deleteUserNotification(id);
+            const {data} = await userAPI.getAllNotifications();
+
+            // setNotifications(data);
+            // setMessage(message);
+            // handleOpenSnackbar();
+            handleRefresh();
+            setIsFetch(false);
+        } catch (e) {
+            setIsFetch(false);
+            dispatch(setErrorMsgAction(e.message));
+        }
+    };
 
     const classes = useStyles();
     return (
@@ -43,8 +78,8 @@ export const Notification: FC<NotificationDataType> = (props) => {
                 <Box
                     mr={1}
                     display='flex'
-                    flexDirection='column'
                     alignItems='center'
+                    flexDirection='column'
                     justifyContent='center'
                 >
                     <Error color='secondary'/>
@@ -55,15 +90,14 @@ export const Notification: FC<NotificationDataType> = (props) => {
                 <Box width='100%'>
                     <Box>
                         <Typography variant="h6" color="initial">
-                            {t(`notifications:${message}.title`, {id: ads_id, user_id: go_to})}
+                            {t(`${message}.title`, {id: ads_id, user_id: go_to})}
                         </Typography>
                         <Typography variant="subtitle1" color="initial">
-                            {t(`notifications:${message}.desc`, {user_id: go_to})}
+                            {t(`${message}.desc`, {user_id: go_to})}
                         </Typography>
                     </Box>
                     <Box display='flex' justifyContent='flex-end'>
-                        {
-                            go_to_type !== 'go_to_user'
+                        {go_to_type !== 'go_to_user'
                             ? <Button
                                 size="small"
                                 color="secondary"
@@ -72,28 +106,33 @@ export const Notification: FC<NotificationDataType> = (props) => {
                                 {forwardTo(go_to_type)}
                             </Button>
                             : phone
-                              ? <Button
-                                  size="small"
-                                  color="secondary"
-                                  className='forward-to-btn'
-                              >
-                                  <Typography variant='subtitle1' color="secondary">{phone}</Typography>
-                              </Button>
-                              : <Button
-                                  size="small"
-                                  color="secondary"
-                                  className='forward-to-btn'
-                                  onClick={fetchUserPhone(go_to)}
-                              >
-                                  <Phone className='phone-icon'/>
-                                  <Typography variant='subtitle1' color="secondary">
-                                      Показать номер
-                                  </Typography>
-                              </Button>
-                        }
+                                ? <Button
+                                    size="small"
+                                    color="secondary"
+                                    className='forward-to-btn'
+                                >
+                                    <Typography variant='subtitle1' color="secondary">
+                                        {phone}
+                                    </Typography>
+                                </Button>
+                                : isFetch
+                                    ? <Typography variant='subtitle1' color="secondary">
+                                        ...Loading
+                                    </Typography>
+                                    : <Button
+                                        size="small"
+                                        color="secondary"
+                                        className='forward-to-btn'
+                                        onClick={fetchUserPhone}
+                                    >
+                                        <Phone className='phone-icon'/>
+                                        <Typography variant='subtitle1' color="secondary">
+                                            {t('show_phone')}
+                                        </Typography>
+                                    </Button>}
                     </Box>
                 </Box>
-                <IconButton onClick={handleDeleteNotification(id, ads_id)}>
+                <IconButton onClick={handleDeleteNotification}>
                     <CloseIcon/>
                 </IconButton>
             </Paper>
@@ -136,8 +175,6 @@ export const Notification: FC<NotificationDataType> = (props) => {
                 </Link>;
             case 'nowhere':
                 return;
-            default:
-                return type;
         }
     }
 

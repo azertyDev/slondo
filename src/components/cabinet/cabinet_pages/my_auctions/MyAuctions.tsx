@@ -7,10 +7,10 @@ import {setErrorMsgAction} from '@root/src/redux/slices/errorSlice';
 import {useTranslation} from 'next-i18next';
 import {
     Box,
-    CircularProgress,
     Tab,
     Tabs,
-    Typography
+    Typography,
+    CircularProgress
 } from '@material-ui/core';
 import {InitialCabinetCardState, TabsDataType} from '@root/interfaces/Cabinet.js';
 import {CabinetCard} from '@src/components/cabinet/components/cabinet_card/CabinetCard';
@@ -18,10 +18,11 @@ import {ITEMS_PER_PAGE} from '@src/constants';
 import {CustomTabPanel} from '@src/components/elements/custom_tab_panel/CustomTabPanel';
 import {useModal} from '@src/hooks/useModal';
 import {CardDataType} from '@root/interfaces/CardData';
-import {DetailedPostModal} from '@src/components/cabinet/components/detailed_post_modal/DetailedPostModal';
+import {DetailedPostContainerModal} from '@src/components/cabinet/components/detailed_post_modal/DetailedPostContainerModal';
 import {initialCardData} from '@src/components/cabinet/cabinet_pages/my_posts/MyPosts';
 import {NotificationModal} from '@src/components/cabinet/components/notifation_modal/NotificationModal';
 import {useStyles} from './useStyles';
+import {unstable_batchedUpdates} from "react-dom";
 
 export const MyAuctions: FC = () => {
         const dispatch = useDispatch();
@@ -62,7 +63,7 @@ export const MyAuctions: FC = () => {
         const handleDeactivate = (ads_id?: number) => async () => {
             try {
                 setIsFetch(true);
-                await userAPI.deactivateById(ads_id);
+                await userAPI.deactivatePost(ads_id);
                 closeDetailedModal();
                 await fetchAuctionData(1);
                 setIsFetch(false);
@@ -83,12 +84,17 @@ export const MyAuctions: FC = () => {
                     itemsPerPage: ITEMS_PER_PAGE
                 };
 
-                const [myPosts, myParticipating] = await Promise.all([userAPI.getMyPosts(params), userAPI.getAuctionSubs(params)]);
+                const [myAuctions, myParticipating] = await Promise.all([
+                    userAPI.getMyPosts(params),
+                    userAPI.getParticipatingAucs(params)
+                ]);
 
-                setAuctionData({data: myPosts.data, total: myPosts.total});
-                setParticipatingData({data: myParticipating.data, total: myParticipating.total});
+                unstable_batchedUpdates(() => {
+                    setIsFetch(false);
+                    setAuctionData({data: myAuctions.data, total: myAuctions.total});
+                    setParticipatingData({data: myParticipating.data, total: myParticipating.total});
+                });
 
-                setIsFetch(false);
             } catch (e) {
                 setIsFetch(false);
                 dispatch(setErrorMsgAction(e.message));
@@ -106,21 +112,29 @@ export const MyAuctions: FC = () => {
                     itemsPerPage: ITEMS_PER_PAGE
                 };
 
-                const [myPosts, auctionArchive] = await Promise.all([userAPI.getMyPosts(params), userAPI.getAuctionSubArchive(params)]);
+                const [myArchAucs, archParticipatingAucs] = await Promise.all([
+                    userAPI.getMyPosts(params),
+                    userAPI.getArchiveParticipatingAucs(params)
+                ]);
 
-                setAuctionArchiveData({data: myPosts.data, total: myPosts.total});
-                setParticipatingArchiveData({data: auctionArchive.data, total: auctionArchive.total});
-
-                setIsFetch(false);
+                unstable_batchedUpdates(() => {
+                    setIsFetch(false);
+                    setAuctionArchiveData({data: myArchAucs.data, total: myArchAucs.total});
+                    setParticipatingArchiveData({data: archParticipatingAucs.data, total: archParticipatingAucs.total});
+                });
             } catch (e) {
-                setIsFetch(false);
-                dispatch(setErrorMsgAction(e.message));
+                unstable_batchedUpdates(() => {
+                    setIsFetch(false);
+                    dispatch(setErrorMsgAction(e.message));
+                });
             }
         };
 
         const handleRefresh = () => {
-            fetchAuctionData(1);
-            fetchAuctionArchiveData(1);
+            unstable_batchedUpdates(() => {
+                fetchAuctionData(1);
+                fetchAuctionArchiveData(1);
+            });
         };
 
         const classes = useStyles();
@@ -150,8 +164,8 @@ export const MyAuctions: FC = () => {
                 </Tabs>
                 <CustomTabPanel value={childTabValue} index={0}>
                     {isFetch
-                     ? <CircularProgress color="primary"/>
-                     : auctionData.data.map(data => (
+                        ? <CircularProgress color="primary"/>
+                        : auctionData.data.map(data => (
                             <Box mb={3} key={data.id}>
                                 <CabinetCard
                                     cardData={data}
@@ -163,8 +177,8 @@ export const MyAuctions: FC = () => {
                 </CustomTabPanel>
                 <CustomTabPanel value={childTabValue} index={1}>
                     {isFetch
-                     ? <CircularProgress color="primary"/>
-                     : auctionArchiveData.data.map(data => (
+                        ? <CircularProgress color="primary"/>
+                        : auctionArchiveData.data.map(data => (
                             <Box mb={3} key={data.id}>
                                 <CabinetCard
                                     archive
@@ -204,8 +218,8 @@ export const MyAuctions: FC = () => {
                 </Tabs>
                 <CustomTabPanel value={childTabValue} index={0}>
                     {isFetch
-                     ? <CircularProgress color="primary"/>
-                     : participatingData.data.map(data => (
+                        ? <CircularProgress color="primary"/>
+                        : participatingData.data.map(data => (
                             <Box mb={3} key={data.id}>
                                 <CabinetCard
                                     cardData={data}
@@ -217,8 +231,8 @@ export const MyAuctions: FC = () => {
                 </CustomTabPanel>
                 <CustomTabPanel value={childTabValue} index={1}>
                     {isFetch
-                     ? <CircularProgress color="primary"/>
-                     : participatingArchiveData.data.map(data => (
+                        ? <CircularProgress color="primary"/>
+                        : participatingArchiveData.data.map(data => (
                             <Box mb={3} key={data.id}>
                                 <CabinetCard
                                     archive
@@ -262,7 +276,7 @@ export const MyAuctions: FC = () => {
                     headerTitle={t('myAuctions')}
                     handleTabChange={handleTabChange(setTabIndex)}
                 />
-                <DetailedPostModal
+                <DetailedPostContainerModal
                     post={selectedAuction}
                     open={detailedModalOpen}
                     onClose={closeDetailedModal}

@@ -18,6 +18,9 @@ export const OffersModal: FC<CommonModalType> = (props) => {
         handleRefresh
     } = props;
 
+    const isPublic = post.status === 'public';
+    const auctionId = post.auction.id;
+
     const dispatch = useDispatch();
     const [isFetch, setIsFetch] = useState(false);
     const [offers, setOffers] = useState([]);
@@ -25,7 +28,7 @@ export const OffersModal: FC<CommonModalType> = (props) => {
     const fetchOffers = async () => {
         try {
             setIsFetch(true);
-            const offers = (await userAPI.getAllOffersById(post.id)).data;
+            const offers = (await userAPI.getAllOffersById(auctionId)).data;
             setOffers(offers);
             setIsFetch(false);
         } catch (e) {
@@ -37,7 +40,7 @@ export const OffersModal: FC<CommonModalType> = (props) => {
     const handleOffer = (offerId, accept: boolean) => async () => {
         try {
             setIsFetch(true);
-            await userAPI.acceptOfferThePrice(offerId, accept);
+            await userAPI.acceptOffer(offerId, accept);
             handleRefresh();
             setIsFetch(false);
         } catch (e) {
@@ -47,9 +50,9 @@ export const OffersModal: FC<CommonModalType> = (props) => {
     };
 
     useEffect(() => {
-        post.id && fetchOffers();
-    }, [post.id]);
-    console.log(offers);
+        isPublic && fetchOffers();
+    }, []);
+
     const classes = useStyles();
     return (
         <CabinetModal

@@ -1,4 +1,4 @@
-import NotificationsContainer from "@src/components/cabinet/cabinet_pages/notifications/NotificationsContainer";
+import NotificationsContainer from "@src/components/cabinet/cabinet_pages/notifications/Notifications";
 import {GetStaticProps} from "next";
 import {serverSideTranslations} from "next-i18next/serverSideTranslations";
 

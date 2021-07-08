@@ -726,6 +726,12 @@
     }
   },
   "estate": {
+    "payment": {
+      "name": "Oldindan to'lov"
+    },
+    "room": {
+      "name": "Xonalar"
+    },
     "no_prepayment": {
       "name": "Oldindan to’lovsiz"
     },
@@ -1052,6 +1058,9 @@
     }
   },
   "job": {
+    "position": {
+      "name": "lavozim"
+    },
     "full": {
       "name": "To’liq"
     },
@@ -6278,7 +6287,6 @@
   "drive": "Uzatma",
   "condition": "Holati",
   "сleared": "Bojxona ruxsatnomasi olingan",
-  "room": "Xonalar",
   "rooms_count": "Xonalar soni",
   "balcony": "Balkon",
   "estate_sale": "Savdo turi",
@@ -6354,7 +6362,6 @@
   "auto_renewal": "Auksioni avtomatik chozish",
   "offer_price": "Narxni taklif qilish",
   "display_phone": "Telefon raqamingizni ko'rsatish",
-  "position": "lavozim",
   "furnished": "Jihozlangan",
   "house_furnished": "Jihozlangan",
   "area": "Maydon м²",
@@ -6367,7 +6374,6 @@
   "floor": "Qavat",
   "floors": "Qavatligi",
   "parking_spaces": "Mashina joylari",
-  "payment": "Oldindan to'lov",
   "posted": "E'lon egasi",
   "ceiling_height": "Shift balandligi metrda",
   "number_of_bedrooms": "Yotoq xonalar soni",

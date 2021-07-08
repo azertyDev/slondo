@@ -12,7 +12,7 @@ const local = 'http://192.168.100.60/slondo/public/api/';
 
 const instance = Axios.create({
     withCredentials: true,
-    baseURL: local
+    baseURL: production
 });
 
 // export const socketIO = socketIOClient('http://192.168.100.60:8005');
@@ -188,7 +188,7 @@ export const userAPI = {
                 throw err;
             });
     },
-    getAuctionSubs: (params) => {
+    getParticipatingAucs: (params) => {
         return instance.get(`regular/user/auctions/participating`, {
             params,
             ...setTokenToHeader()
@@ -280,7 +280,7 @@ export const userAPI = {
                 throw err;
             });
     },
-    getAuctionSubArchive: (params) => {
+    getArchiveParticipatingAucs: (params) => {
         return instance.get(`regular/user/archiveAuctions/participating`, {
             params,
             ...setTokenToHeader()
@@ -314,11 +314,17 @@ export const userAPI = {
                 throw err;
             });
     },
-    deactivateById: (ads_id: number, reason_id?: number, to_archive?: boolean): Promise<any> => {
+    deactivateAuction: (ads_id: number): Promise<any> => {
+        return instance.post(`regular/auction/deactivate`, {ads_id}, setTokenToHeader())
+            .then(res => res.data)
+            .catch(err => {
+                throw err;
+            });
+    },
+    deactivatePost: (ads_id: number, reason_id?: number): Promise<any> => {
         return instance.post(`regular/post/deactivate`, {
             ads_id,
-            reason_id,
-            to_archive
+            reason_id
         }, setTokenToHeader())
             .then(res => res.data)
             .catch(err => {
@@ -372,7 +378,7 @@ export const userAPI = {
                 throw err;
             });
     },
-    acceptOfferThePrice: (offer_id: number, is_accepted: boolean): Promise<any> => {
+    acceptOffer: (offer_id: number, is_accepted: boolean): Promise<any> => {
         return instance.post(`regular/auction/acceptOfferThePrice`, {
             offer_id,
             is_accepted
@@ -470,12 +476,8 @@ export const userAPI = {
                 throw err;
             });
     },
-    setUserRating: (rating: number, comment: string, receiver_id: number): Promise<any> => {
-        return instance.post('regular/user/rating', {
-            rating,
-            comment,
-            receiver_id
-        }, setTokenToHeader())
+    setUserRating: (data): Promise<any> => {
+        return instance.post('regular/user/rating', {...data}, setTokenToHeader())
             .then(res => res.data)
             .catch(err => {
                 throw err;

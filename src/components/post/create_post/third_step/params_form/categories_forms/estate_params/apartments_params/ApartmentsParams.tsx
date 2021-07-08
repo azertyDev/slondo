@@ -101,6 +101,7 @@ export const ApartmentsParams: FC<CommonParamsPropsType> = (props) => {
                                                     items={filters.payment}
                                                     handleSelect={handleSelect}
                                                     transKey={`${categoryName}.`}
+                                                    labelTxt={t(`${categoryName}.payment.name`)}
                                                 />
                                             </Grid>
                                         )}
@@ -153,13 +154,14 @@ export const ApartmentsParams: FC<CommonParamsPropsType> = (props) => {
                                     setValues={setValues}
                                 />
                             </Grid>
-                            <Grid item container xs={12} sm={4} md={3} lg={3}>
+                            <Grid item xs={12} sm={4} md={3} lg={3}>
                                 <DropDownSelect
                                     name='room'
                                     values={values}
                                     onBlur={handleBlur}
                                     items={filters.room}
                                     handleSelect={handleSelect}
+                                    labelTxt={t(`${categoryName}.room.name`)}
                                     transKey={`${categoryName}.`}
                                     errorMsg={getErrorMsg(errors.room, touched.room, t)}
                                 />
@@ -174,7 +176,7 @@ export const ApartmentsParams: FC<CommonParamsPropsType> = (props) => {
                                     errorMsg={getErrorMsg(errors.area, touched.area, t)}
                                 />
                             </Grid>
-                            <Grid item container xs={12} sm={4}>
+                            <Grid item xs={12} sm={4}>
                                 <FormikField
                                     t={t}
                                     name='living_area'
@@ -184,7 +186,7 @@ export const ApartmentsParams: FC<CommonParamsPropsType> = (props) => {
                                     errorMsg={getErrorMsg(errors.living_area, touched.living_area, t)}
                                 />
                             </Grid>
-                            <Grid item container xs={12} sm={4}>
+                            <Grid item xs={12} sm={4}>
                                 <FormikField
                                     t={t}
                                     name='kitchen_area'
@@ -194,7 +196,7 @@ export const ApartmentsParams: FC<CommonParamsPropsType> = (props) => {
                                     errorMsg={getErrorMsg(errors.kitchen_area, touched.kitchen_area, t)}
                                 />
                             </Grid>
-                            <Grid item container xs={12} sm={4}>
+                            <Grid item xs={12} sm={4}>
                                 <FormikField
                                     t={t}
                                     name='ceiling_height'
@@ -206,7 +208,6 @@ export const ApartmentsParams: FC<CommonParamsPropsType> = (props) => {
                             </Grid>
                             <Grid
                                 item
-                                container
                                 sm={4}
                                 xs={12}
                             >
@@ -222,7 +223,6 @@ export const ApartmentsParams: FC<CommonParamsPropsType> = (props) => {
                             </Grid>
                             <Grid
                                 item
-                                container
                                 sm={4}
                                 xs={12}
                             >
@@ -238,7 +238,6 @@ export const ApartmentsParams: FC<CommonParamsPropsType> = (props) => {
                             </Grid>
                             <Grid
                                 item
-                                container
                                 sm={4}
                                 xs={12}
                             >
@@ -254,7 +253,6 @@ export const ApartmentsParams: FC<CommonParamsPropsType> = (props) => {
                             </Grid>
                             <Grid
                                 item
-                                container
                                 sm={4}
                                 xs={12}
                             >
@@ -270,7 +268,6 @@ export const ApartmentsParams: FC<CommonParamsPropsType> = (props) => {
                             </Grid>
                             <Grid
                                 item
-                                container
                                 sm={4}
                                 xs={12}
                             >
@@ -286,7 +283,6 @@ export const ApartmentsParams: FC<CommonParamsPropsType> = (props) => {
                             </Grid>
                             <Grid
                                 item
-                                container
                                 sm={4}
                                 xs={12}
                             >
@@ -302,7 +298,6 @@ export const ApartmentsParams: FC<CommonParamsPropsType> = (props) => {
                             </Grid>
                             <Grid
                                 item
-                                container
                                 sm={4}
                                 xs={12}
                             >
@@ -318,7 +313,6 @@ export const ApartmentsParams: FC<CommonParamsPropsType> = (props) => {
                             </Grid>
                             <Grid
                                 item
-                                container
                                 sm={4}
                                 xs={12}
                             >

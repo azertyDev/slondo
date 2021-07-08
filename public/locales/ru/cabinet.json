@@ -1,4 +1,10 @@
 {
+  "remove_notifications": "Удалить увидомления?",
+  "winner": "Победитель",
+  "seller": "Продавец",
+  "maxOffer": "Макс. предложенная цена:",
+  "offer_price": "{{price}} сум",
+  "all_offers": " Все предложения ({{offers}})",
   "my_cabinet": "Мой кабинет",
   "perform_purchase": "Подтвердить покупку?",
   "dismiss_purchase": "Отменить покупку?",

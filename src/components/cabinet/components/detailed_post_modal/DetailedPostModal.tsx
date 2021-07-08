@@ -1,4 +1,5 @@
-import {FC, useEffect, useState} from 'react';
+import {FC} from 'react';
+import {WithT} from "i18next";
 import {CardDataType} from '@root/interfaces/CardData';
 import {ListCard} from '@src/components/elements/card/list_card/ListCard';
 import {Box, CircularProgress, Grid, Paper, Typography} from '@material-ui/core';
@@ -14,134 +15,83 @@ import {
 } from '@src/components/elements/icons';
 import {CustomButton} from '@src/components/elements/custom_button/CustomButton';
 import {CabinetModal} from '@src/components/cabinet/components/cabinet_modal/CabinetModal';
-import {useTranslation} from 'next-i18next';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import {UserInfoWithAvatar} from '@src/components/elements/user_info_with_avatar/UserInfoWithAvatar';
-import {useDispatch, useSelector} from 'react-redux';
-import {RootState} from '@src/redux/rootReducer';
 import {BetsList} from '@src/components/elements/bets_list/BetsList';
-import {useBetsData} from '@src/hooks/useBetsData';
 import {numberPrettier} from '@src/helpers';
-import {userAPI} from '@src/api/api';
-import {setErrorMsgAction} from '@src/redux/slices/errorSlice';
-import {useModal} from '@src/hooks/useModal';
-import {RatingModal} from '@src/components/elements/rating_modal/RatingModal';
-import {SettingsModal} from '@src/components/cabinet/components/settings_modal/SettingsModal';
-import {OffersModal} from "@src/components/cabinet/components/offers_modal/OffersModal";
+import {useSelector} from "react-redux";
+import {RootState} from "@src/redux/rootReducer";
 import {useStyles} from './useStyles';
 
 type DetailedPostViewPropsType = {
+    isFetch: boolean,
+    betsCount: number,
+    isBetsFetch: boolean,
     post: CardDataType,
     open: boolean,
-    handleRefresh: () => void,
-    onClose: () => void,
+    bets,
+    setFetchedBetsData,
+    phone: string,
     handleNotificationsOpen: (post: CardDataType) => () => void,
-    handleDeactivate?: () => Promise<void>,
-}
-export const DetailedPostModal: FC<DetailedPostViewPropsType> = (props) => {
+    fetchUserPhone: () => void,
+    handleOffersOpen: () => void,
+    handleSettingsOpen: () => void,
+    handleReject: () => void,
+    handleAccept: () => void,
+    handleCloseDetailModal: () => void
+} & WithT;
 
+export const DetailedPostModal: FC<DetailedPostViewPropsType> = (props) => {
     const {
+        t,
         open,
-        onClose,
         post,
-        handleRefresh,
-        handleNotificationsOpen
+        bets,
+        phone,
+        isFetch,
+        betsCount,
+        isBetsFetch,
+        setFetchedBetsData,
+        handleSettingsOpen,
+        handleNotificationsOpen,
+        handleCloseDetailModal,
+        handleOffersOpen,
+        fetchUserPhone,
+        handleAccept,
+        handleReject
     } = props;
 
-    const dispatch = useDispatch();
-    const {t} = useTranslation('cabinet');
+    const {
+        author,
+        ads_type,
+        status,
+        auction,
+        available_days,
+        exchange,
+        delivery,
+        safe_deal
+    } = post;
+
     const userInfo = useSelector((store: RootState) => store.user.info);
 
-    const auctionId = post.auction?.id;
-    const isPublic = post.status === 'public';
-    const isAuction = post.ads_type === 'auc' || post.ads_type === 'exauc';
-    const archive = post.status === 'archive' || post.status === 'history';
-
-    const offer = post.auction?.offer;
-    const offering = offer?.user;
-    const author = post.author;
-    const hasWinner = post.auction?.winner;
-    const isUserWinner = hasWinner?.id === userInfo.id;
+    const auctionId = auction?.id;
+    const offer = auction?.offer;
+    const offerUser = offer?.user;
+    const winner = auction?.winner;
+    const isUserWinner = winner?.id === userInfo.id;
     const isUserCreator = author?.id === userInfo.id;
-    const userForRating = isUserWinner ? hasWinner : author;
-    const hasOffer = offering && isPublic;
+    const hasOffer = offerUser && status === 'public';
+    const isAuction = ads_type === 'auc' || ads_type === 'exauc';
+    const inactive = status === 'archive' || status === 'history';
+    const userData = (isUserWinner || !isUserCreator) ? author : winner ?? offerUser;
 
-    const userData = (isUserWinner || !isUserCreator) ? author : hasWinner ?? offering;
-
-    const [isFetch, setIsFetch] = useState(false);
-
-    const {modalOpen: ratingOpen, handleModalOpen: handleOpenRating, handleModalClose: handleCloseRating} = useModal();
-    const {modalOpen: offersOpen, handleModalClose: handleCloseOffers, handleModalOpen: handleOpenOffers} = useModal();
-    const {modalOpen: settingsOpen, handleModalClose: handleCloseSettings, handleModalOpen: handleOpenSettings} = useModal();
-
-    const {bets, betsCount, isBetsFetch, setFetchedBetsData} = useBetsData({
-        page: 1,
-        itemsPerPage: 2,
-        auction_id: auctionId
-    });
-
-    const [lastBet] = bets;
-
-    const handleOffersOpen = () => {
-        onClose();
-        handleOpenOffers();
-    };
-
-    const handleSettingsOpen = () => {
-        onClose();
-        handleOpenSettings();
-    };
-
-    const handleReject = async () => {
-        try {
-            setIsFetch(true);
-            if (isUserCreator) {
-                await userAPI.acceptOfferThePrice(offer.id, false);
-            } else {
-                await userAPI.rejectVictory(post.id);
-            }
-            onClose();
-            handleRefresh();
-            setIsFetch(false);
-        } catch (e) {
-            setIsFetch(false);
-            dispatch(setErrorMsgAction(e.message));
-        }
-    };
-
-    const handleAccept = async () => {
-        if (isUserCreator) {
-            try {
-                setIsFetch(true);
-                if (hasWinner) {
-                    await userAPI.deactivateById(post.id);
-                    handleOpenRating();
-                } else if (hasOffer) {
-                    await userAPI.acceptOfferThePrice(offer.id, true);
-                }
-                onClose();
-                handleRefresh();
-                setIsFetch(false);
-            } catch (e) {
-                setIsFetch(false);
-                dispatch(setErrorMsgAction(e.message));
-            }
-        }
-    };
-
-    useEffect(() => {
-        open && !!auctionId && setFetchedBetsData();
-    }, [auctionId, open]);
-
-    console.log(post);
-    console.log(bets);
     const classes = useStyles();
     return (
         <div>
             <CabinetModal
                 maxWidth='lg'
                 openDialog={open}
-                handleCloseDialog={onClose}
+                handleCloseDialog={handleCloseDetailModal}
             >
                 <div className={classes.root}>
                     <Grid container spacing={2}>
@@ -154,72 +104,80 @@ export const DetailedPostModal: FC<DetailedPostViewPropsType> = (props) => {
                         >
                             <Typography variant='h6'>
                                 <strong>
-                                    {`${t(`common:${post.ads_type}`)} №: ${post.id}`}
+                                    {`${t(`common:${ads_type}`)} №: ${post.id}`}
                                 </strong>
                             </Typography>
                         </Box>
                         <Grid item xs={12}>
                             <ListCard cardData={post}/>
                         </Grid>
-                        <Grid item xs={12} md={6}>
-                            <Paper className='paper-block'>
-                                {!!post.available_days && (
-                                    <div className="bonus_item">
-                                    <span className='icon-bg'>
-                                        <PhoneIcon/>
-                                    </span>
-                                        <Typography variant="body1">
-                                            {`${post.available_start_time}-${post.available_end_time}`}
-                                        </Typography>
-                                    </div>
-                                )}
-                                {!!post.exchange && (
-                                    <div className="bonus_item">
-                                    <span className='icon-bg'>
-                                    <ExchangeIcon/>
-                                    </span>
-                                        <Typography variant="body1">
-                                            Возможен обмен
-                                        </Typography>
-                                    </div>
-                                )}
-                                {!!post.delivery && (
-                                    <div className="bonus_item">
-                                    <span className='icon-bg'>
-                                        <DeliveryIcon/>
-                                    </span>
-                                        <Typography variant="body1">
-                                            Есть доставка
-                                        </Typography>
-                                    </div>
-                                )}
-                                {!!post.safe_deal && (
-                                    <div className="bonus_item">
-                                    <span className='icon-bg'>
-                                        <SafeIcon/>
-                                    </span>
-                                        <Typography variant="body1">
-                                            Безопасная покупка
-                                        </Typography>
-                                    </div>
-                                )}
-                                {!!post.auction?.auto_renewal && (
-                                    <div className="bonus_item">
-                                    <span className='icon-bg'>
-                                        <RenewalIcon/>
-                                    </span>
-                                        <Typography variant="body1">
-                                            Автопродление
-                                        </Typography>
-                                    </div>
-                                )}
-                            </Paper>
-                        </Grid>
+                        {!!(
+                            available_days
+                            || exchange
+                            || delivery
+                            || safe_deal
+                            || auction?.auto_renewal
+                        ) && (
+                            <Grid item xs={12} md={6}>
+                                <Paper className='paper-block'>
+                                    {!!post.available_days && (
+                                        <div className="bonus_item">
+                                            <span className='icon-bg'>
+                                                <PhoneIcon/>
+                                            </span>
+                                            <Typography variant="body1">
+                                                {`${post.available_start_time}-${post.available_end_time}`}
+                                            </Typography>
+                                        </div>
+                                    )}
+                                    {!!post.exchange && (
+                                        <div className="bonus_item">
+                                            <span className='icon-bg'>
+                                                <ExchangeIcon/>
+                                            </span>
+                                            <Typography variant="body1">
+                                                Возможен обмен
+                                            </Typography>
+                                        </div>
+                                    )}
+                                    {!!post.delivery && (
+                                        <div className="bonus_item">
+                                        <span className='icon-bg'>
+                                            <DeliveryIcon/>
+                                        </span>
+                                            <Typography variant="body1">
+                                                Есть доставка
+                                            </Typography>
+                                        </div>
+                                    )}
+                                    {!!post.safe_deal && (
+                                        <div className="bonus_item">
+                                            <span className='icon-bg'>
+                                                <SafeIcon/>
+                                            </span>
+                                            <Typography variant="body1">
+                                                Безопасная покупка
+                                            </Typography>
+                                        </div>
+                                    )}
+                                    {!!auction?.auto_renewal && (
+                                        <div className="bonus_item">
+                                            <span className='icon-bg'>
+                                                <RenewalIcon/>
+                                            </span>
+                                            <Typography variant="body1">
+                                                Автопродление
+                                            </Typography>
+                                        </div>
+                                    )}
+                                </Paper>
+                            </Grid>
+                        )}
                         <Grid item xs={12} md={6}>
                             <CustomButton
+                                onClick={handleNotificationsOpen(post)}
                                 className={`${classes.btn} notification`}
                                 disabled={!post.observer.number_of_notifications}
-                                onClick={handleNotificationsOpen(post)}
                             >
                                 <Typography
                                     noWrap
@@ -230,10 +188,10 @@ export const DetailedPostModal: FC<DetailedPostViewPropsType> = (props) => {
                                 </Typography>
                                 <ChevronRightIcon color='action'/>
                             </CustomButton>
-                            {!archive && isUserCreator && (
+                            {!inactive && isUserCreator && (
                                 <CustomButton
                                     onClick={handleSettingsOpen}
-                                    disabled={post.status !== 'public'}
+                                    disabled={status !== 'public'}
                                     className={`${classes.btn} settings`}
                                 >
                                     <Typography variant='subtitle1'>
@@ -269,123 +227,114 @@ export const DetailedPostModal: FC<DetailedPostViewPropsType> = (props) => {
                                 </Typography>
                             </CustomButton>
                         </Grid>
-                        {isAuction && (
-                            <>
-                                <Grid item xs={12} md={6}>
-                                    {isBetsFetch
-                                        ? <CircularProgress color="primary"/>
-                                        : <BetsList
-                                            bets={bets}
-                                            showBetsCount={2}
-                                            betsCount={betsCount}
-                                            auctionId={auctionId}
-                                            handleRefresh={setFetchedBetsData}
-                                            title={t('auction:extremeRates')}
-                                        />}
-                                </Grid>
-                                <Grid item xs={12} md={6} className={classes.userInfoWrapper}>
-                                    <div className='user-info-title'>
-                                        {(isUserWinner || isUserCreator) && userData && (
-                                            <Typography variant='subtitle2' gutterBottom>
-                                                {isUserWinner
-                                                    ? 'Продавец'
-                                                    : offer && !hasWinner
-                                                        ? 'Макс. предложенная цена:'
-                                                        : 'Победитель аукциона'}
-                                            </Typography>
-                                        )}
-                                        {isUserCreator && offer && (
-                                            <>
-                                                &nbsp;<Typography variant='subtitle2'>
-                                                {`${numberPrettier(offer?.price)} сум`}
-                                            </Typography>&nbsp;
-                                                <Typography
-                                                    variant='subtitle2'
-                                                    className='all-offers'
-                                                    onClick={handleOffersOpen}
-                                                >
-                                                    Все предложения ({post.auction?.number_of_offers})
+                        <Grid container item spacing={2}>
+                            {isAuction && (
+                                <>
+                                    <Grid item xs={12} md={6}>
+                                        {isBetsFetch
+                                            ? <CircularProgress color="primary"/>
+                                            : <BetsList
+                                                bets={bets}
+                                                showBetsCount={2}
+                                                betsCount={betsCount}
+                                                auctionId={auctionId}
+                                                handleRefresh={setFetchedBetsData}
+                                                title={t('auction:extremeRates')}
+                                            />}
+                                    </Grid>
+                                    <Grid item xs={12} md={6} className={classes.userInfoWrapper}>
+                                        <div className='user-info-title'>
+                                            {(isUserWinner || isUserCreator) && userData && (
+                                                <Typography variant='subtitle2' gutterBottom>
+                                                    {t(isUserWinner
+                                                        ? 'seller'
+                                                        : offer && !winner
+                                                            ? 'maxOffer'
+                                                            : 'winner')}
                                                 </Typography>
-                                            </>
-                                        )}
-                                    </div>
-                                    <Paper className='paper-block'>
-                                        {userData
-                                            ? <div className='user-info'>
-                                                <UserInfoWithAvatar
-                                                    isOwner
-                                                    width='50px'
-                                                    height='50px'
-                                                    owner={userData}
-                                                />
-                                                <div className='contacts-btns'>
-                                                    <CustomButton>
-                                                        <PhoneIcon/>
-                                                        <Typography variant='subtitle2'>
-                                                            Позвонить
-                                                        </Typography>
-                                                    </CustomButton>
-                                                    <CustomButton disabled>
-                                                        <LetterIcon/>
-                                                        <Typography variant='subtitle2'>
-                                                            Написать
-                                                        </Typography>
-                                                    </CustomButton>
+                                            )}
+                                            {isUserCreator && offer && !winner && (
+                                                <>
+                                                    <Typography variant='subtitle2'>
+                                                        &nbsp;{t('offer_price', {price: numberPrettier(offer?.price)})}&nbsp;
+                                                    </Typography>
+                                                    <Typography
+                                                        variant='subtitle2'
+                                                        className='all-offers'
+                                                        onClick={handleOffersOpen}
+                                                    >
+                                                        {t('all_offers', {offers: auction?.number_of_offers})}
+                                                    </Typography>
+                                                </>
+                                            )}
+                                        </div>
+                                        <Paper className='paper-block'>
+                                            {userData
+                                                ? <div className='user-info'>
+                                                    <UserInfoWithAvatar
+                                                        isOwner
+                                                        width='50px'
+                                                        height='50px'
+                                                        owner={userData}
+                                                    />
+                                                    <div className='contacts-btns'>
+                                                        <CustomButton onClick={fetchUserPhone}>
+                                                            {phone
+                                                                ? <Typography variant='subtitle2'>
+                                                                    {phone}
+                                                                </Typography>
+                                                                : <>
+                                                                    <PhoneIcon/>
+                                                                    <Typography variant='subtitle2'>
+                                                                        Позвонить
+                                                                    </Typography>
+                                                                </>}
+                                                        </CustomButton>
+                                                        <CustomButton disabled>
+                                                            <LetterIcon/>
+                                                            <Typography variant='subtitle2'>
+                                                                Написать
+                                                            </Typography>
+                                                        </CustomButton>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                            : <div>{t(`auction:last_bet`, {lastBet: lastBet?.bet})}</div>}
-                                    </Paper>
-                                    {(isUserCreator || isUserWinner) && !archive && (
-                                        <Box>
-                                            <div className={classes.actionButtons}>
-                                                {(isUserWinner || offering) && !hasWinner && (
-                                                    <CustomButton
-                                                        color='primary'
-                                                        disabled={isFetch}
-                                                        onClick={handleReject}
-                                                    >
-                                                        <Typography variant='subtitle1'>
-                                                            {t(`common:reject`)}
-                                                        </Typography>
-                                                    </CustomButton>
-                                                )}
-                                                {(hasWinner || hasOffer) && isUserCreator && (
-                                                    <CustomButton
-                                                        color='primary'
-                                                        disabled={isFetch}
-                                                        onClick={handleAccept}
-                                                    >
-                                                        <Typography variant='subtitle1'>
-                                                            {t(`common:${hasWinner ? 'finish' : 'accept'}`)}
-                                                        </Typography>
-                                                    </CustomButton>
-                                                )}
-                                            </div>
-                                        </Box>
-                                    )}
-                                </Grid>
-                            </>
-                        )}
+                                                : <div>{t(`auction:last_bet`, {lastBet: bets[0]?.bet})}</div>}
+                                        </Paper>
+                                        {(isUserCreator || isUserWinner) && !inactive && (
+                                            <Box>
+                                                <div className={classes.actionButtons}>
+                                                    {(isUserWinner || (offerUser && !winner)) && (
+                                                        <CustomButton
+                                                            color='primary'
+                                                            disabled={isFetch}
+                                                            onClick={handleReject}
+                                                        >
+                                                            <Typography variant='subtitle1'>
+                                                                {t(`common:reject`)}
+                                                            </Typography>
+                                                        </CustomButton>
+                                                    )}
+                                                    {(winner || hasOffer) && isUserCreator && (
+                                                        <CustomButton
+                                                            color='primary'
+                                                            disabled={isFetch}
+                                                            onClick={handleAccept}
+                                                        >
+                                                            <Typography variant='subtitle1'>
+                                                                {t(`common:${winner ? 'finish' : 'accept'}`)}
+                                                            </Typography>
+                                                        </CustomButton>
+                                                    )}
+                                                </div>
+                                            </Box>
+                                        )}
+                                    </Grid>
+                                </>
+                            )}
+                        </Grid>
                     </Grid>
                 </div>
             </CabinetModal>
-            <RatingModal
-                open={ratingOpen}
-                user={userForRating}
-                handleCloseRating={handleCloseRating}
-            />
-            <SettingsModal
-                post={post}
-                open={settingsOpen}
-                handleRefresh={handleRefresh}
-                onClose={handleCloseSettings}
-            />
-            <OffersModal
-                post={post}
-                open={offersOpen}
-                onClose={handleCloseOffers}
-                handleRefresh={handleRefresh}
-            />
         </div>
     );
 };

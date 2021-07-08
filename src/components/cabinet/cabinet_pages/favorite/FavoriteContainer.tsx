@@ -12,9 +12,10 @@ import {useTranslation} from 'next-i18next';
 import {CabinetCard} from '@src/components/cabinet/components/cabinet_card/CabinetCard';
 import {ITEMS_PER_PAGE} from '@src/constants';
 import {useModal} from '@src/hooks/useModal';
-import {DetailedPostModal} from '@src/components/cabinet/components/detailed_post_modal/DetailedPostModal';
+import {DetailedPostContainerModal} from '@src/components/cabinet/components/detailed_post_modal/DetailedPostContainerModal';
 import {initialCardData} from '@src/components/cabinet/cabinet_pages/my_posts/MyPosts';
 import {useStyles} from './useStyles';
+import {CardDataType} from "@root/interfaces/CardData";
 
 const FavoriteContainer: FC = () => {
     const dispatch = useDispatch();
@@ -31,16 +32,11 @@ const FavoriteContainer: FC = () => {
     const [favoriteAucData, setFavoriteAucData] = useState(initialFavoriteState);
     const [postId, setPostId] = useState<number>(null);
     const [tabIndex, setTabIndex] = useState(0);
-    const [selectedPost, setSelectedPost] = useState(initialCardData);
+    const [selectedPost, setSelectedPost] = useState<CardDataType>(initialCardData);
     const [modalContentIndex, setModalContentIndex] = useState(1);
     const {modalOpen, handleModalOpen, handleModalClose} = useModal();
     const {modalOpen: detailedModalOpen, handleModalClose: closeDetailedModal, handleModalOpen: openDetailedModal} = useModal();
 
-    const handleDetailedOpen = (postId: number, post) => () => {
-        postId && setPostId(postId);
-        setSelectedPost(post);
-        openDetailedModal();
-    };
     const handleTabChange = (event, newValue) => {
         setTabIndex(newValue);
     };
@@ -82,9 +78,9 @@ const FavoriteContainer: FC = () => {
         }
         handleModalClose();
     };
-    const handleNotificationsOpen = (postId: number) => () => {
-        postId && setPostId(postId);
+    const handleNotificationsOpen = (post: CardDataType) => () => {
         closeDetailedModal();
+        setSelectedPost(post);
     };
     const getModalContent = () => {
         switch (modalContentIndex) {
@@ -129,19 +125,19 @@ const FavoriteContainer: FC = () => {
     const ModalContent = () => (
         <>
             {modalContentIndex === 1
-             ? <Typography className="title" variant="h6">
-                 Объявление № {postId}
-             </Typography>
-             : modalContentIndex === 5
-               ? null
-               : <IconButton
-                   className='prev-btn'
-                   aria-label="back"
-                   size="medium"
-                   onClick={handlePrevMenu}
-               >
-                   <ArrowBackIcon fontSize="inherit"/>
-               </IconButton>
+                ? <Typography className="title" variant="h6">
+                    Объявление № {postId}
+                </Typography>
+                : modalContentIndex === 5
+                    ? null
+                    : <IconButton
+                        className='prev-btn'
+                        aria-label="back"
+                        size="medium"
+                        onClick={handlePrevMenu}
+                    >
+                        <ArrowBackIcon fontSize="inherit"/>
+                    </IconButton>
             }
             {getModalContent()}
         </>
@@ -156,7 +152,6 @@ const FavoriteContainer: FC = () => {
             <CabinetCard
                 cardData={data}
                 handleOpenModal={handleOpenModal}
-                handleDetailedOpen={handleDetailedOpen}
             />
         </Box>
     ));
@@ -166,7 +161,6 @@ const FavoriteContainer: FC = () => {
             <CabinetCard
                 cardData={data}
                 handleOpenModal={handleOpenModal}
-                handleDetailedOpen={handleDetailedOpen}
             />
         </Box>
     ));
@@ -215,7 +209,7 @@ const FavoriteContainer: FC = () => {
                 tabsData={tabsData}
                 headerTitle={title}
             />
-            <DetailedPostModal
+            <DetailedPostContainerModal
                 post={selectedPost}
                 open={detailedModalOpen}
                 onClose={closeDetailedModal}

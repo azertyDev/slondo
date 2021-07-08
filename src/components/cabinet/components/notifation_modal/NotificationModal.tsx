@@ -7,16 +7,19 @@ import {ITEMS_PER_PAGE} from '@src/constants';
 import {setErrorMsgAction} from '@src/redux/slices/errorSlice';
 import {Box, FormControlLabel, Switch, Typography} from '@material-ui/core';
 import {CabinetModal} from '@src/components/cabinet/components/cabinet_modal/CabinetModal';
-import {initialNotificationType} from '@src/components/cabinet/cabinet_pages/notifications/NotificationsContainer';
+import {initialNotificationType} from '@src/components/cabinet/cabinet_pages/notifications/Notifications';
 import {CommonModalType} from "@src/components/cabinet/CabinetWrapper";
+import {CustomPagination} from "@src/components/elements/custom_pagination/CustomPagination";
+import {NotificationCard} from "@src/components/cabinet/cabinet_pages/notifications/notification_card/NotificationCard";
 
 export const NotificationModal: FC<CommonModalType> = (props) => {
     const {
         post,
         open,
-        onClose,
-        handleRefresh
+        onClose
     } = props;
+
+    const isActive = post.status === 'public' || post.status === 'suspend';
 
     const dispatch = useDispatch();
     const {t} = useTranslation('cabinet');
@@ -24,16 +27,16 @@ export const NotificationModal: FC<CommonModalType> = (props) => {
     const [isFetch, setIsFetch] = useState(false);
     const [itemsCount, setItemsCount] = useState(0);
     const [page, setPage] = useState(1);
-    const [phone, setPhone] = useState(null);
 
     const [notification, setNotification] = useState<initialNotificationType[]>([]);
 
-    const fetchAuctionNotifications = async (_, page) => {
+    const fetchNotifications = async () => {
         try {
             setIsFetch(true);
+
             const params = {
-                ads_id: post.id,
                 page,
+                ads_id: post.id,
                 itemsPerPage: ITEMS_PER_PAGE
             };
 
@@ -41,6 +44,7 @@ export const NotificationModal: FC<CommonModalType> = (props) => {
 
             setItemsCount(total);
             setNotification(data);
+
             setIsFetch(false);
         } catch (e) {
             setIsFetch(false);
@@ -48,95 +52,80 @@ export const NotificationModal: FC<CommonModalType> = (props) => {
         }
     };
 
-    const fetchUserPhone = (user_id) => async () => {
-        try {
-            setIsFetch(true);
-
-            const {phone} = await userAPI.getPhoneByUserId(user_id);
-
-            setPhone(phone);
-            setIsFetch(false);
-        } catch (e) {
-            setIsFetch(false);
-            dispatch(setErrorMsgAction(e.message));
-        }
-    };
-
-    const handleDeleteNotification = () => {
-        try {
-
-        } catch (e) {
-
-        }
+    const handlePagination = (_, page) => {
+        setPage(page);
     };
 
     useEffect(() => {
-        !!post.id && fetchAuctionNotifications(null, 1);
-    }, [post.id]);
+        isActive && !!post.id && fetchNotifications();
+    }, [page]);
 
     return (
         <CabinetModal
             openDialog={open}
             handleCloseDialog={onClose}
         >
-            <Box
-                display='flex'
-                alignItems='center'
-                flexDirection='column'
-            >
-                <Typography variant='subtitle1' gutterBottom>
-                    {t('common:notificationsStories')}
+            {isFetch
+                ? <Typography>
+                    ...Loading
                 </Typography>
-                <Typography variant='caption'>
-                    {`${t(`common:${post.ads_type}`)} №: ${post.id}`}
-                </Typography>
-            </Box>
-            <Box
-                display='flex'
-                flexDirection='row'
-                alignItems='center'
-                justifyContent='space-between'
-            >
-                <Typography>
-                    {`${t('common:extremeRate')}: ${numberPrettier(post?.auction?.bet?.bet) || 0} ${t('common:sum')}`}
-                </Typography>
-                <FormControlLabel
-                    control={
-                        <Switch
-                            // checked={state.checkedA}
-                            // onChange={handleChange}
-                            name="checkedA"
-                            color='primary'
+                : <>
+                    <Box
+                        display='flex'
+                        alignItems='center'
+                        flexDirection='column'
+                    >
+                        <Typography variant='subtitle1' gutterBottom>
+                            {t('common:notificationsStories')}
+                        </Typography>
+                        <Typography variant='caption'>
+                            {`${t(`common:${post.ads_type}`)} №: ${post.id}`}
+                        </Typography>
+                    </Box>
+                    <Box
+                        display='flex'
+                        flexDirection='row'
+                        alignItems='center'
+                        justifyContent='space-between'
+                    >
+                        <Typography>
+                            {`${t('common:extremeRate')}: ${numberPrettier(post?.auction?.bet?.bet) || 0} ${t('common:sum')}`}
+                        </Typography>
+                        <FormControlLabel
+                            control={
+                                <Switch
+                                    // checked={state.checkedA}
+                                    // onChange={handleChange}
+                                    name="checkedA"
+                                    color='primary'
+                                />
+                            }
+                            labelPlacement="start"
+                            label={t('common:notifyMe')}
                         />
-                    }
-                    label={t('common:notifyMe')}
-                    labelPlacement="start"
-                />
-            </Box>
-            {/*{notification.map(notification => (*/}
-            {/*    <Box*/}
-            {/*        mb={1}*/}
-            {/*        key={notification.id}*/}
-            {/*    >*/}
-            {/*        <Notification*/}
-            {/*            t={t}*/}
-            {/*            phone={phone}*/}
-            {/*            data={notification}*/}
-            {/*            fetchUserPhone={fetchUserPhone}*/}
-            {/*            handleDeleteNotification={handleDeleteNotification}*/}
-            {/*        />*/}
-            {/*    </Box>*/}
-            {/*))}*/}
-            {/*{notification.length > ITEMS_PER_PAGE && (*/}
-            {/*    <Box display='flex' justifyContent='center'>*/}
-            {/*        <CustomPagination*/}
-            {/*            currentPage={page}*/}
-            {/*            totalItems={itemsCount}*/}
-            {/*            itemsPerPage={ITEMS_PER_PAGE}*/}
-            {/*            handlePagePagination={handlePagePagination}*/}
-            {/*        />*/}
-            {/*    </Box>*/}
-            {/*)}*/}
+                    </Box>
+                    {notification.map(notification => (
+                        <Box
+                            mb={1}
+                            key={notification.id}
+                        >
+                            <NotificationCard
+                                {...notification}
+                                handleRefresh={fetchNotifications}
+                            />
+                        </Box>
+                    ))}
+                    {notification.length > ITEMS_PER_PAGE && (
+                        <Box display='flex' justifyContent='center'>
+                            <CustomPagination
+                                currentPage={page}
+                                totalItems={itemsCount}
+                                itemsPerPage={ITEMS_PER_PAGE}
+                                handlePagePagination={handlePagination}
+                            />
+                        </Box>
+                    )}
+                </>}
         </CabinetModal>
     );
 };

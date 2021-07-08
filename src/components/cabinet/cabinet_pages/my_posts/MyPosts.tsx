@@ -26,15 +26,16 @@ import {InitialCabinetCardState, TabsDataType} from '@root/interfaces/Cabinet';
 import {CardDataType} from '@root/interfaces/CardData';
 import {CabinetCard} from '@src/components/cabinet/components/cabinet_card/CabinetCard';
 import {ITEMS_PER_PAGE} from '@src/constants';
-import {initialNotificationType} from '@src/components/cabinet/cabinet_pages/notifications/NotificationsContainer';
+import {initialNotificationType} from '@src/components/cabinet/cabinet_pages/notifications/Notifications';
 import {useModal} from '@src/hooks/useModal';
-import {DetailedPostModal} from '@src/components/cabinet/components/detailed_post_modal/DetailedPostModal';
+import {DetailedPostContainerModal} from '@src/components/cabinet/components/detailed_post_modal/DetailedPostContainerModal';
 import {CabinetModal} from '@src/components/cabinet/components/cabinet_modal/CabinetModal';
-import {Notification} from '@src/components/cabinet/cabinet_pages/notifications/notification_card/Notification';
+import {NotificationCard} from '@src/components/cabinet/cabinet_pages/notifications/notification_card/NotificationCard';
 import {CustomPagination} from '@src/components/elements/custom_pagination/CustomPagination';
 import {CustomTabPanel} from '@src/components/elements/custom_tab_panel/CustomTabPanel';
 import {UserInfo} from '@root/interfaces/Auth';
 import {useStyles} from './useStyles';
+import {unstable_batchedUpdates} from "react-dom";
 
 export const initialCardData: CardDataType = {
     id: null,
@@ -54,6 +55,7 @@ export const initialCardData: CardDataType = {
             phone: '',
             avatar: '',
             created_at: '',
+            rating: null,
             available_days: '',
             available_start_time: '',
             available_end_time: ''
@@ -91,6 +93,7 @@ export const initialCardData: CardDataType = {
         phone: '',
         avatar: '',
         created_at: '',
+        rating: null,
         available_days: '',
         available_start_time: '',
         available_end_time: ''
@@ -189,10 +192,10 @@ const MyPosts: FC = () => {
     const handleChildTabChange = (event, newValue) => {
         setChildTabValue(newValue);
     };
-    const handleNotificationsOpen = (postId: number) => () => {
-        postId && setPostId(postId);
-        openNotificationsModal();
+    const handleNotificationsOpen = (post: CardDataType) => () => {
         closeDetailedModal();
+        setSelectedPost(post);
+        openNotificationsModal();
     };
     const handleModalContentIndex = (index, reasonId?) => () => {
         setModalContentIndex(index);
@@ -295,7 +298,7 @@ const MyPosts: FC = () => {
         try {
             setIsFetch(true);
 
-            await userAPI.deactivateById(postId, reasonId);
+            await userAPI.deactivatePost(postId, reasonId);
 
             closeSettingsModal();
             setModalContentIndex(1);
@@ -307,20 +310,14 @@ const MyPosts: FC = () => {
             dispatch(setErrorMsgAction(e.message));
         }
     };
-    const fetchUserPhone = (user_id) => async () => {
-        try {
-            const {phone} = await userAPI.getPhoneByUserId(user_id);
-            setPhone(phone);
-        } catch (e) {
-            dispatch(setErrorMsgAction(e.message));
-        }
-    };
 
     const handleRefresh = () => {
-        fetchPostData(0);
-        fetchPostData(1);
-        fetchArchivePosts(0);
-        fetchArchivePosts(1);
+        unstable_batchedUpdates(() => {
+            fetchPostData(0);
+            fetchPostData(1);
+            fetchArchivePosts(0);
+            fetchArchivePosts(1);
+        });
     };
 
     const classes = useStyles();
@@ -410,14 +407,14 @@ const MyPosts: FC = () => {
                         />
                         <Box className={classes.userData}>
                             {isFetch
-                             ? <Typography>loading...</Typography>
-                             : <>
-                                 <Avatar src={userData.avatar ?? ''}/>
-                                 <Typography variant='subtitle2' noWrap>
-                                     {userData.name}
-                                     {userData.surname}
-                                 </Typography>
-                             </>}
+                                ? <Typography>loading...</Typography>
+                                : <>
+                                    <Avatar src={userData.avatar ?? ''}/>
+                                    <Typography variant='subtitle2' noWrap>
+                                        {userData.name}
+                                        {userData.surname}
+                                    </Typography>
+                                </>}
                         </Box>
                     </Box>
                     <Box
@@ -444,10 +441,10 @@ const MyPosts: FC = () => {
     const ModalContent = () => (
         <>
             {modalContentIndex === 1
-             ? <Typography className="title" variant="h6">
-                 {`${t(`common:${selectedPost.ads_type}`)} №: ${selectedPost.id}`}
-             </Typography>
-             : modalContentIndex !== 5 && (
+                ? <Typography className="title" variant="h6">
+                    {`${t(`common:${selectedPost.ads_type}`)} №: ${selectedPost.id}`}
+                </Typography>
+                : modalContentIndex !== 5 && (
                 <IconButton
                     className='prev-btn'
                     aria-label="back"
@@ -487,27 +484,23 @@ const MyPosts: FC = () => {
             </Tabs>
             <CustomTabPanel value={childTabValue} index={0}>
                 {isFetch
-                 ? <CircularProgress color="primary"/>
-                 : postData.data.map((data) => (
+                    ? <CircularProgress color="primary"/>
+                    : postData.data.map((data) => (
                         <Box mb={3} key={data.id}>
                             <CabinetCard
                                 cardData={data}
-                                handleDetailedOpen={handleDetailedOpen}
-                                handleNotificationsOpen={handleNotificationsOpen}
                             />
                         </Box>
                     ))}
             </CustomTabPanel>
             <CustomTabPanel value={childTabValue} index={1}>
                 {isFetch
-                 ? <CircularProgress color="primary"/>
-                 : archivePostData.data.map((data) => (
+                    ? <CircularProgress color="primary"/>
+                    : archivePostData.data.map((data) => (
                         <Box mb={3} key={data.id}>
                             <CabinetCard
                                 archive
                                 cardData={data}
-                                handleDetailedOpen={handleDetailedOpen}
-                                handleNotificationsOpen={handleNotificationsOpen}
                             />
                         </Box>
                     ))}
@@ -545,27 +538,23 @@ const MyPosts: FC = () => {
             </Tabs>
             <CustomTabPanel value={childTabValue} index={0}>
                 {isFetch
-                 ? <CircularProgress color="primary"/>
-                 : securePosts.data.map((data) => (
+                    ? <CircularProgress color="primary"/>
+                    : securePosts.data.map((data) => (
                         <Box mb={3} key={data.id}>
                             <CabinetCard
                                 cardData={data}
-                                handleDetailedOpen={handleDetailedOpen}
-                                handleNotificationsOpen={handleNotificationsOpen}
                             />
                         </Box>
                     ))}
             </CustomTabPanel>
             <CustomTabPanel value={childTabValue} index={1}>
                 {isFetch
-                 ? <CircularProgress color="primary"/>
-                 : archiveSecurePostData.data.map((data) => (
+                    ? <CircularProgress color="primary"/>
+                    : archiveSecurePostData.data.map((data) => (
                         <Box mb={3} key={data.id}>
                             <CabinetCard
                                 archive
                                 cardData={data}
-                                handleDetailedOpen={handleDetailedOpen}
-                                handleNotificationsOpen={handleNotificationsOpen}
                             />
                         </Box>
                     ))}
@@ -613,7 +602,7 @@ const MyPosts: FC = () => {
                 handleTabChange={handleTabChange}
             />
             {/* Modals */}
-            <DetailedPostModal
+            <DetailedPostContainerModal
                 post={selectedPost}
                 open={detailedModalOpen}
                 onClose={closeDetailedModal}
@@ -667,12 +656,9 @@ const MyPosts: FC = () => {
                         key={notification.id}
                         mb={1}
                     >
-                        <Notification
-                            t={t}
-                            data={notification}
-                            handleDeleteNotification={handleDeleteNotification}
-                            fetchUserPhone={fetchUserPhone}
-                            phone={phone}
+                        <NotificationCard
+                            {...notification}
+                            handleRefresh={handleRefresh}
                         />
                     </Box>
                 ))}

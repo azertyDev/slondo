@@ -1,106 +1,155 @@
-import {FC, ReactElement} from 'react';
-import {WithT} from 'i18next';
-import {CabinetWrapper} from '@src/components/cabinet/CabinetWrapper';
-import {Notification} from '@src/components/cabinet/cabinet_pages/notifications/notification_card/Notification';
-import {CustomButton} from '@src/components/elements/custom_button/CustomButton';
-import {Box, CircularProgress, Typography} from '@material-ui/core';
-import {CustomModal} from '@src/components/elements/custom_modal/CustomModal';
-import {CustomSnackbar} from '@src/components/elements/snackbar/Snackbar';
+import {FC, useEffect, useState} from 'react';
+import {withAuthRedirect} from '@src/hocs/withAuthRedirect';
+import {useDispatch, useSelector} from 'react-redux';
+import {setErrorMsgAction} from '@src/redux/slices/errorSlice';
+import {userAPI} from '@src/api/api';
+import {RootState} from '@src/redux/rootReducer';
+import {useTranslation} from 'next-i18next';
+import {ITEMS_PER_PAGE} from '@src/constants';
+import {CustomPagination} from '@root/src/components/elements/custom_pagination/CustomPagination';
+import {useModal} from '@src/hooks/useModal';
+import {CabinetWrapper} from "@src/components/cabinet/CabinetWrapper";
+import {CustomButton} from "@src/components/elements/custom_button/CustomButton";
+import {Box, CircularProgress, Typography} from "@material-ui/core";
+import {NotificationCard} from "@src/components/cabinet/cabinet_pages/notifications/notification_card/NotificationCard";
+import {CustomModal} from "@src/components/elements/custom_modal/CustomModal";
+import {CustomSnackbar} from "@src/components/elements/snackbar/Snackbar";
 import {useStyles} from './useStyles';
 
-type NotificationsPropsType = {
-    notifications,
-    isFetch: boolean,
-    handleDeleteNotification: (id) => () => void,
-    handleDeleteAllNotification: () => void,
-    openModal: boolean,
-    handleOpenModal: () => void,
-    handleCloseModal: () => void,
-    handleCloseSnackbar: () => void,
-    message?: string,
-    openSnackbar?: boolean,
-    fetchUserPhone: (user_id) => () => void,
-    phone: number,
-    pagination: ReactElement
-} & WithT;
+export type initialNotificationType = {
+    id: number,
+    ads_id: number,
+    status: string,
+    receiver_id: number,
+    type: string,
+    message: string,
+    go_to: number,
+    go_to_type: string,
+    updated_at: string,
+    created_at: string
+}
 
-export const Notifications: FC<NotificationsPropsType> = (props) => {
-    const {
-        t,
-        notifications,
-        isFetch,
-        handleDeleteNotification,
-        handleDeleteAllNotification,
-        handleCloseSnackbar,
-        openModal,
-        fetchUserPhone,
-        handleOpenModal,
-        handleCloseModal,
-        message,
-        openSnackbar,
-        phone,
-        pagination
-    } = props;
+const Notifications: FC = () => {
+    const dispatch = useDispatch();
+    const {t} = useTranslation('cabinet');
+    const userInfo = useSelector((store: RootState) => store.user.info);
+    const {modalOpen: openSnackbar, handleModalOpen: handleOpenSnackbar, handleModalClose: handleCloseSnackbar} = useModal();
 
+    const [isFetch, setIsFetch] = useState(false);
+    const [notifications, setNotifications] = useState<initialNotificationType[]>([]);
+    const [openModal, setOpenModal] = useState(false);
+    const [message, setMessage] = useState('');
+    const [page, setPage] = useState(1);
+    const [itemsCount, setItemsCount] = useState(0);
 
-    const title = 'Уведомления';
+    const handleOpenModal = () => {
+        setOpenModal(true);
+    };
+
+    const handleCloseModal = () => {
+        setOpenModal(false);
+    };
+
+    const fetchAllNotification = async () => {
+        try {
+            setIsFetch(true);
+            const {data, total} = await userAPI.getAllNotifications({page, itemsPerPage: ITEMS_PER_PAGE});
+            setIsFetch(false);
+            setNotifications(data);
+            setItemsCount(total);
+        } catch (e) {
+            dispatch(setErrorMsgAction(e.message));
+        }
+    };
+
+    const handleDeleteAllNotification = async () => {
+        try {
+            setIsFetch(true);
+
+            await userAPI.deleteAllNotification(userInfo.id);
+            const {data} = await userAPI.getAllNotifications();
+
+            setNotifications(data);
+            setIsFetch(true);
+        } catch (e) {
+            dispatch(setErrorMsgAction(e.message));
+        }
+    };
+
+    const handlePagePagination = (_, pageNum) => {
+        setPage(pageNum);
+    };
+
+    const pagination = (
+        <CustomPagination
+            currentPage={page}
+            totalItems={itemsCount}
+            itemsPerPage={ITEMS_PER_PAGE}
+            handlePagePagination={handlePagePagination}
+        />
+    );
+
+    useEffect(() => {
+        fetchAllNotification();
+    }, [page]);
+
+    const title = t('notifications');
 
     const classes = useStyles();
-    return (
-        <div className={classes.root}>
-            <CabinetWrapper headerTitle={title} title={title}>
-                {!!notifications.length && (
-                    <CustomButton
-                        color='primary'
-                        className='delete-notifications'
-                        onClick={handleOpenModal}
-                    >
-                        <Typography variant='subtitle1'>
-                            Удалить все уведомления
-                        </Typography>
-                    </CustomButton>
-                )}
-                {isFetch
-                    ? <CircularProgress />
-                    : notifications.map(notification =>
-                        <Box mb={3} width='90%' key={notification.id}>
-                            <Notification
-                                t={t}
-                                key={notification.id}
-                                data={notification}
-                                phone={phone}
-                                handleDeleteNotification={handleDeleteNotification}
-                                fetchUserPhone={fetchUserPhone}
-                            />
-                        </Box>
-                    )}
-                {!!notifications.length && (
-                    <Box display='flex' justifyContent='center'>
-                        {pagination}
+    return <div className={classes.root}>
+        <CabinetWrapper
+            title={title}
+            headerTitle={title}
+        >
+            {!!notifications.length && (
+                <CustomButton
+                    color='primary'
+                    className='delete-notifications'
+                    onClick={handleOpenModal}
+                >
+                    <Typography variant='subtitle1'>
+                        {t('remove_all_notify')}
+                    </Typography>
+                </CustomButton>
+            )}
+            {isFetch
+                ? <CircularProgress/>
+                : notifications.map(notification =>
+                    <Box mb={3} width='90%' key={notification.id}>
+                        <NotificationCard
+                            {...notification}
+                            handleRefresh={fetchAllNotification}
+                        />
                     </Box>
                 )}
-            </CabinetWrapper>
-            <CustomModal handleModalClose={handleCloseModal} openModal={openModal}>
-                <Typography variant='subtitle1'>
-                    Окуел?
-                </Typography>
-                <Box
-                    mt={3}
-                    display='flex'
-                    flexDirection='column'
-                    alignItems='center'
-                    className={classes.modal}
-                >
-                    <CustomButton onClick={handleDeleteAllNotification}>Да</CustomButton>
-                    <CustomButton onClick={handleCloseModal}>Нет</CustomButton>
+            {!!notifications.length && (
+                <Box display='flex' justifyContent='center'>
+                    {pagination}
                 </Box>
-            </CustomModal>
-            <CustomSnackbar
-                message={t(message)}
-                openSnackbar={openSnackbar}
-                severity="success"
-                handleCloseSnackbar={handleCloseSnackbar}
-            />
-        </div>
-    );
+            )}
+        </CabinetWrapper>
+        <CustomModal handleModalClose={handleCloseModal} openModal={openModal}>
+            <Typography variant='subtitle1'>
+                {t('remove_notifications')}
+            </Typography>
+            <Box
+                mt={3}
+                display='flex'
+                alignItems='center'
+                flexDirection='column'
+                className={classes.modal}
+            >
+                <CustomButton onClick={handleDeleteAllNotification}>{t('common:yes')}</CustomButton>
+                <CustomButton onClick={handleCloseModal}>{t('common:no')}</CustomButton>
+            </Box>
+        </CustomModal>
+        <CustomSnackbar
+            severity="success"
+            message={t(message)}
+            openSnackbar={openSnackbar}
+            handleCloseSnackbar={handleCloseSnackbar}
+        />
+    </div>;
 };
+
+export default withAuthRedirect(Notifications);
