@@ -8,34 +8,27 @@ import {
     Avatar,
     Box,
     CircularProgress,
-    FormControlLabel,
-    IconButton,
     List,
     ListItem,
     ListItemText,
-    Switch,
     Tab,
     Tabs,
     TextField,
     Typography
 } from '@material-ui/core';
-import ArrowBackIcon from '@material-ui/icons/ArrowBack';
+import {unstable_batchedUpdates} from "react-dom";
 import {useTranslation} from 'next-i18next';
 import {CustomButton} from '@src/components/elements/custom_button/CustomButton';
 import {InitialCabinetCardState, TabsDataType} from '@root/interfaces/Cabinet';
 import {CardDataType} from '@root/interfaces/CardData';
 import {CabinetCard} from '@src/components/cabinet/components/cabinet_card/CabinetCard';
 import {ITEMS_PER_PAGE} from '@src/constants';
-import {initialNotificationType} from '@src/components/cabinet/cabinet_pages/notifications/Notifications';
 import {useModal} from '@src/hooks/useModal';
 import {DetailedPostContainerModal} from '@src/components/cabinet/components/detailed_post_modal/DetailedPostContainerModal';
-import {CabinetModal} from '@src/components/cabinet/components/cabinet_modal/CabinetModal';
-import {NotificationCard} from '@src/components/cabinet/cabinet_pages/notifications/notification_card/NotificationCard';
-import {CustomPagination} from '@src/components/elements/custom_pagination/CustomPagination';
 import {CustomTabPanel} from '@src/components/elements/custom_tab_panel/CustomTabPanel';
 import {UserInfo} from '@root/interfaces/Auth';
+import {NotificationModal} from "@src/components/cabinet/components/notifation_modal/NotificationModal";
 import {useStyles} from './useStyles';
-import {unstable_batchedUpdates} from "react-dom";
 
 export const initialCardData: CardDataType = {
     id: null,
@@ -157,60 +150,46 @@ const MyPosts: FC = () => {
     const [securePosts, setSecurePosts] = useState(initialPostsState);
     const [archiveSecurePostData, setArchiveSecurePostData] = useState(initialPostsState);
     const [archivePostData, setArchivePostData] = useState(initialPostsState);
-    const [notification, setNotification] = useState<initialNotificationType[]>([]);
     const [tabIndex, setTabIndex] = useState(0);
     const [modalContentIndex, setModalContentIndex] = useState(1);
     const [reasonId, setReasonId] = useState(null);
     const [postId, setPostId] = useState(null);
-    const [phone, setPhone] = useState(null);
     const [errorMsg, setErrMsg] = useState('');
     const [selectedPost, setSelectedPost] = useState(initialCardData);
-    const [page, setPage] = useState(1);
-    const [itemsCount, setItemsCount] = useState(0);
     const [childTabValue, setChildTabValue] = useState(0);
 
-    const {modalOpen: settingsModalOpen, handleModalClose: closeSettingsModal, handleModalOpen: openSettingsModal} = useModal();
     const {modalOpen: notificationsOpen, handleModalClose: closeNotificationsModal, handleModalOpen: openNotificationsModal} = useModal();
     const {modalOpen: detailedModalOpen, handleModalClose: closeDetailedModal, handleModalOpen: openDetailedModal} = useModal();
 
-    const handleSettingsOpen = (postId: number, post, index: number) => () => {
-        openSettingsModal();
-        closeDetailedModal();
-        postId && setPostId(postId);
-        setModalContentIndex(index);
-        setSelectedPost(post);
-    };
-    const handleSettingsClose = () => {
-        closeSettingsModal();
-        setModalContentIndex(1);
-    };
-    const handleDetailedOpen = (postId: number, post) => () => {
-        postId && setPostId(postId);
-        setSelectedPost(post);
+    const handleDetailedOpen = (post) => () => {
         openDetailedModal();
+        setSelectedPost(post);
     };
+
     const handleChildTabChange = (event, newValue) => {
         setChildTabValue(newValue);
     };
+
     const handleNotificationsOpen = (post: CardDataType) => () => {
         closeDetailedModal();
         setSelectedPost(post);
         openNotificationsModal();
     };
+
     const handleModalContentIndex = (index, reasonId?) => () => {
         setModalContentIndex(index);
         reasonId && setReasonId(reasonId);
     };
+
     const handlePrevMenu = () => {
         const backValue = modalContentIndex === 5 ? 3 : 1;
         setModalContentIndex(modalContentIndex - backValue);
     };
-    const handlePagePagination = (event, value) => {
-        setPage(value);
-    };
+
     const handleTabChange = (event, newValue) => {
         setTabIndex(newValue);
     };
+
     const handleTextField = async ({target}) => {
         const phone = target.value;
         setUserPhone(phone);
@@ -223,8 +202,10 @@ const MyPosts: FC = () => {
             }
         } catch (e) {
             setErrMsg(e.message);
+            setIsFetch(false);
         }
     };
+
     const fetchPostData = async (secure: number) => {
         try {
             const params = {
@@ -232,17 +213,16 @@ const MyPosts: FC = () => {
                 archive: 0,
                 secure
             };
-
             setIsFetch(true);
-
             const {data, total} = await userAPI.getMyPosts(params);
-
             secure ? setSecurePosts({data, total}) : setPostData({data, total});
             setIsFetch(false);
         } catch (e) {
+            setIsFetch(false);
             dispatch(setErrorMsgAction(e.message));
         }
     };
+
     const fetchArchivePosts = async (secure: number) => {
         try {
             const params = {
@@ -251,62 +231,24 @@ const MyPosts: FC = () => {
                 secure
             };
             setIsFetch(true);
-
             const {data, total} = await userAPI.getMyPosts(params);
-
             secure ? setArchiveSecurePostData({data, total}) : setArchivePostData({data, total});
             setIsFetch(false);
         } catch (e) {
-            dispatch(setErrorMsgAction(e.message));
-        }
-    };
-    const fetchNotifications = post => async () => {
-        try {
-            if (post.id !== selectedPost.id) {
-                const params = {
-                    page,
-                    itemsPerPage: ITEMS_PER_PAGE,
-                    ads_id: post.id
-                };
-                setIsFetch(true);
-
-                const {data, total} = await userAPI.getNotificationById(params);
-
-                setItemsCount(total);
-                setNotification(data);
-                setSelectedPost({...selectedPost, ...post});
-                setIsFetch(false);
-            }
-        } catch (e) {
-            dispatch(setErrorMsgAction(e.message));
-        }
-    };
-    const handleDeleteNotification = (id, ads_id) => async () => {
-        try {
-            setIsFetch(true);
-
-            await userAPI.deleteUserNotification(id);
-            const {data} = await userAPI.getNotificationById(ads_id);
-
-            setNotification(data);
             setIsFetch(false);
-        } catch (e) {
             dispatch(setErrorMsgAction(e.message));
         }
     };
+
     const handleDeactivate = async () => {
         try {
             setIsFetch(true);
-
             await userAPI.deactivatePost(postId, reasonId);
-
-            closeSettingsModal();
             setModalContentIndex(1);
-
             tabIndex === 0 ? await fetchPostData(0) : await fetchPostData(1);
-
             setIsFetch(false);
         } catch (e) {
+            setIsFetch(false);
             dispatch(setErrorMsgAction(e.message));
         }
     };
@@ -429,7 +371,7 @@ const MyPosts: FC = () => {
             case 5:
                 return <>
                     <Typography variant='h6' className="title">
-                        Вы уверены что хотите <br/>добавить объявление в архив?
+                        Вы уверены что хотите<br/>добавить объявление в архив?
                     </Typography>
                     <Box display='flex' flexDirection='column'>
                         <CustomButton onClick={handleDeactivate}>Да</CustomButton>
@@ -438,25 +380,6 @@ const MyPosts: FC = () => {
                 </>;
         }
     };
-    const ModalContent = () => (
-        <>
-            {modalContentIndex === 1
-                ? <Typography className="title" variant="h6">
-                    {`${t(`common:${selectedPost.ads_type}`)} №: ${selectedPost.id}`}
-                </Typography>
-                : modalContentIndex !== 5 && (
-                <IconButton
-                    className='prev-btn'
-                    aria-label="back"
-                    size="medium"
-                    onClick={handlePrevMenu}
-                >
-                    <ArrowBackIcon fontSize="inherit"/>
-                </IconButton>
-            )}
-            {getModalContent()}
-        </>
-    );
 
     const postTabs = (
         <>
@@ -489,6 +412,8 @@ const MyPosts: FC = () => {
                         <Box mb={3} key={data.id}>
                             <CabinetCard
                                 cardData={data}
+                                handleDetailedOpen={handleDetailedOpen}
+                                handleNotificationsOpen={handleNotificationsOpen}
                             />
                         </Box>
                     ))}
@@ -501,6 +426,8 @@ const MyPosts: FC = () => {
                             <CabinetCard
                                 archive
                                 cardData={data}
+                                handleDetailedOpen={handleDetailedOpen}
+                                handleNotificationsOpen={handleNotificationsOpen}
                             />
                         </Box>
                     ))}
@@ -543,6 +470,7 @@ const MyPosts: FC = () => {
                         <Box mb={3} key={data.id}>
                             <CabinetCard
                                 cardData={data}
+                                handleDetailedOpen={handleDetailedOpen}
                             />
                         </Box>
                     ))}
@@ -555,20 +483,13 @@ const MyPosts: FC = () => {
                             <CabinetCard
                                 archive
                                 cardData={data}
+                                handleDetailedOpen={handleDetailedOpen}
+                                handleNotificationsOpen={handleNotificationsOpen}
                             />
                         </Box>
                     ))}
             </CustomTabPanel>
         </>
-    );
-
-    const pagination = (
-        <CustomPagination
-            currentPage={page}
-            totalItems={itemsCount}
-            itemsPerPage={ITEMS_PER_PAGE}
-            handlePagePagination={handlePagePagination}
-        />
     );
 
     const tabsData: TabsDataType = [
@@ -601,7 +522,6 @@ const MyPosts: FC = () => {
                 headerTitle={t('myPosts')}
                 handleTabChange={handleTabChange}
             />
-            {/* Modals */}
             <DetailedPostContainerModal
                 post={selectedPost}
                 open={detailedModalOpen}
@@ -609,65 +529,12 @@ const MyPosts: FC = () => {
                 handleRefresh={handleRefresh}
                 handleNotificationsOpen={handleNotificationsOpen}
             />
-            <CabinetModal
-                maxWidth='xs'
-                fullWidth={false}
-                openDialog={settingsModalOpen}
-                handleCloseDialog={handleSettingsClose}
-            >
-                <ModalContent/>
-            </CabinetModal>
-            <CabinetModal
-                openDialog={notificationsOpen}
-                handleCloseDialog={closeNotificationsModal}
-            >
-                <Box
-                    display='flex'
-                    justifyContent='center'
-                >
-                    <Typography variant='subtitle1'>
-                        Уведомления (история)
-                    </Typography>
-                </Box>
-                <Box
-                    display='flex'
-                    flexDirection='row'
-                    justifyContent='space-between'
-                    alignItems='center'
-                >
-                    <Typography>
-                        {`${t(`common:${selectedPost.ads_type}`)} №: ${selectedPost.id}`}
-                    </Typography>
-                    <FormControlLabel
-                        control={
-                            <Switch
-                                // checked={state.checkedA}
-                                // onChange={handleChange}
-                                name="checkedA"
-                                color='secondary'
-                            />
-                        }
-                        label="Уведомлять меня"
-                        labelPlacement="start"
-                    />
-                </Box>
-                {notification?.map(notification => (
-                    <Box
-                        key={notification.id}
-                        mb={1}
-                    >
-                        <NotificationCard
-                            {...notification}
-                            handleRefresh={handleRefresh}
-                        />
-                    </Box>
-                ))}
-                {!!notification?.length && (
-                    <Box display='flex' justifyContent='center'>
-                        {pagination}
-                    </Box>
-                )}
-            </CabinetModal>
+            <NotificationModal
+                post={selectedPost}
+                open={notificationsOpen}
+                handleRefresh={handleRefresh}
+                onClose={closeNotificationsModal}
+            />
         </>
     );
 };

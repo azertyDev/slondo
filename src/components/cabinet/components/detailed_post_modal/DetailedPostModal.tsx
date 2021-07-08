@@ -10,7 +10,7 @@ import {
     LocationIcon,
     PhoneIcon,
     RenewalIcon,
-    RocketIcon,
+    // RocketIcon,
     SafeIcon
 } from '@src/components/elements/icons';
 import {CustomButton} from '@src/components/elements/custom_button/CustomButton';
@@ -210,23 +210,24 @@ export const DetailedPostModal: FC<DetailedPostViewPropsType> = (props) => {
                                         color="initial"
                                         variant="subtitle1"
                                     >
-                                        {t(`locations:${post.region?.name}`)}
-                                        {post.city?.name ? `, ${t(`locations:${post.city.name}`)}` : ''}
+                                        {post.city
+                                            ? `${t(`locations:${post.region.name}.${post.city.name}`)}, ${t(`locations:${post.region.name}.name`)}`
+                                            : t(`locations:${post.region.name}.name`)}
                                     </Typography>
                                 </Box>
                             </Paper>
                         </Grid>
-                        <Grid item xs={12} md={6}>
-                            <CustomButton
-                                disabled
-                                className={`${classes.btn} advertise`}
-                            >
-                                <RocketIcon/>&nbsp;
-                                <Typography variant='subtitle1'>
-                                    Рекламировать
-                                </Typography>
-                            </CustomButton>
-                        </Grid>
+                        {/*<Grid item xs={12} md={6}>*/}
+                        {/*    <CustomButton*/}
+                        {/*        disabled*/}
+                        {/*        className={`${classes.btn} advertise`}*/}
+                        {/*    >*/}
+                        {/*        <RocketIcon/>&nbsp;*/}
+                        {/*        <Typography variant='subtitle1'>*/}
+                        {/*            Рекламировать*/}
+                        {/*        </Typography>*/}
+                        {/*    </CustomButton>*/}
+                        {/*</Grid>*/}
                         <Grid container item spacing={2}>
                             {isAuction && (
                                 <>

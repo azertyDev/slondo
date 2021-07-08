@@ -14,8 +14,8 @@ type CabinetCardPropsType = {
     archive?: boolean,
     cardData: CardDataType,
     handleDetailedOpen?: (post) => () => void,
-    handleNotificationsOpen?: (post: CardDataType) => () => void,
-    handleOpenModal?: (id: number) => () => void
+    handleOpenModal?: (id: number) => () => void,
+    handleNotificationsOpen?: (post: CardDataType) => () => void
 }
 
 export const CabinetCard: FC<CabinetCardPropsType> = (props) => {

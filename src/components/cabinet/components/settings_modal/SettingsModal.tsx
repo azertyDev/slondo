@@ -23,6 +23,7 @@ export const SettingsModal: FC<CommonModalType> = (props) => {
     const {t} = useTranslation('cabinet');
 
     const [isFetch, setIsFetch] = useState(false);
+    const [status, setStatus] = useState('deactivate');
     const [modalContentIndex, setModalContentIndex] = useState(1);
 
     const handleModalContentIndex = (index) => () => {

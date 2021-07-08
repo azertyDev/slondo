@@ -199,8 +199,8 @@ export const DetailedPostContainerModal: FC<DetailedPostViewPropsType> = (props)
                 handleOffersOpen={handleOffersOpen}
                 handleSettingsOpen={handleSettingsOpen}
                 setFetchedBetsData={setFetchedBetsData}
-                handleNotificationsOpen={handleNotificationsOpen}
                 handleCloseDetailModal={handleCloseDetailModal}
+                handleNotificationsOpen={handleNotificationsOpen}
             />
             <ConfirmModal
                 title={t(confirmTxt)}
@@ -223,12 +223,14 @@ export const DetailedPostContainerModal: FC<DetailedPostViewPropsType> = (props)
                 handleRefresh={handleRefresh}
                 onClose={handleCloseSettings}
             />
-            <OffersModal
-                post={post}
-                open={offersOpen}
-                onClose={handleCloseOffers}
-                handleRefresh={handleRefresh}
-            />
+            {hasOffer && (
+                <OffersModal
+                    post={post}
+                    open={offersOpen}
+                    onClose={handleCloseOffers}
+                    handleRefresh={handleRefresh}
+                />
+            )}
         </>
     );
 };
