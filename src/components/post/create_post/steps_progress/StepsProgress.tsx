@@ -35,21 +35,21 @@ export const StepsProgress: FC<AncmntAuctionTopPropsType> = (props) => {
             container
             className={classes.root}
         >
+            <Grid item xs={12} sm={6} md={8}>
+                {!isPostTypeStep && <div className='menu-header'>
+                    <IconButton className="back-btn" onClick={handleBack}>
+                        <BackspaceIcon/>
+                    </IconButton>
+                    <Typography
+                        noWrap
+                        variant="h6"
+                        title={title}
+                    >
+                        {title}
+                    </Typography>
+                </div>}
+            </Grid>
             <Hidden xsDown>
-                <Grid item sm={6} md={8}>
-                    {!isPostTypeStep && <div className='menu-header'>
-                        <IconButton className="back-btn" onClick={handleBack}>
-                            <BackspaceIcon/>
-                        </IconButton>
-                        <Typography
-                            noWrap
-                            variant="h6"
-                            title={title}
-                        >
-                            {title}
-                        </Typography>
-                    </div>}
-                </Grid>
                 <Grid item sm={6} md={4}>
                     <Stepper activeStep={activeStep} alternativeLabel>
                         {steps.map(label =>

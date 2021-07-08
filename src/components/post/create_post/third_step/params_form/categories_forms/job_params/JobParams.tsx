@@ -63,7 +63,7 @@ export const JobParams: FC<CommonParamsPropsType> = (props) => {
                 isEditable={currentFormIndex < 3}
                 handleEdit={handleFormOpen(3)}
             >
-                <Grid item xs={6}>
+                <Grid item xs={12} sm={6}>
                     <PostTitle
                         t={t}
                         formik={formik}
@@ -73,82 +73,82 @@ export const JobParams: FC<CommonParamsPropsType> = (props) => {
                 </Grid>
                 <Grid container spacing={1}>
                     {isPreview
-                     ? <PreviewValues t={t} values={values}/>
-                     : <>
-                         {hasPosition && (
-                             <Grid
-                                 item
-                                 container
-                                 xs={12}
-                                 sm={4}
-                             >
-                                 <DropDownSelect
-                                     name='position'
-                                     values={values}
-                                     items={filters.position}
-                                     handleSelect={handleSelect}
-                                     transKey={`${categoryName}.`}
-                                 />
-                             </Grid>
-                         )}
-                         <Grid
-                             item
-                             container
-                             xs={12}
-                             sm={4}
-                         >
-                             <DropDownSelect
-                                 name='employment'
-                                 values={values}
-                                 items={filters.employment}
-                                 handleSelect={handleSelect}
-                                 transKey={`${categoryName}.`}
-                             />
-                         </Grid>
-                         <Grid
-                             item
-                             container
-                             xs={12}
-                             sm={4}
-                         >
-                             <DropDownSelect
-                                 name='experience'
-                                 labelTxt={isVacancy ? 'require_experience' : 'experience'}
-                                 values={values}
-                                 items={filters.experience}
-                                 transKey={`${categoryName}.`}
-                                 handleSelect={handleSelect}
-                             />
-                         </Grid>
-                         <Grid
-                             item
-                             container
-                             xs={12}
-                             sm={4}
-                         >
-                             <DropDownSelect
-                                 name='nature'
-                                 values={values}
-                                 items={filters.nature}
-                                 transKey={`${categoryName}.`}
-                                 handleSelect={handleSelect}
-                             />
-                         </Grid>
-                         <Grid
-                             item
-                             container
-                             xs={12}
-                             sm={4}
-                             alignItems='flex-end'
-                         >
-                             <CheckboxSelect
-                                 name='urgent_work'
-                                 labelTxt={t('filters:urgent_work')}
-                                 checked={!!values?.urgent_work?.id}
-                                 handleCheckbox={handleCheckbox}
-                             />
-                         </Grid>
-                     </>}
+                        ? <PreviewValues t={t} values={values}/>
+                        : <>
+                            {hasPosition && (
+                                <Grid
+                                    item
+                                    container
+                                    xs={12}
+                                    sm={4}
+                                >
+                                    <DropDownSelect
+                                        name='position'
+                                        values={values}
+                                        items={filters.position}
+                                        handleSelect={handleSelect}
+                                        transKey={`${categoryName}.`}
+                                    />
+                                </Grid>
+                            )}
+                            <Grid
+                                item
+                                container
+                                xs={12}
+                                sm={4}
+                            >
+                                <DropDownSelect
+                                    name='employment'
+                                    values={values}
+                                    items={filters.employment}
+                                    handleSelect={handleSelect}
+                                    transKey={`${categoryName}.`}
+                                />
+                            </Grid>
+                            <Grid
+                                item
+                                container
+                                xs={12}
+                                sm={4}
+                            >
+                                <DropDownSelect
+                                    name='experience'
+                                    labelTxt={isVacancy ? 'require_experience' : 'experience'}
+                                    values={values}
+                                    items={filters.experience}
+                                    transKey={`${categoryName}.`}
+                                    handleSelect={handleSelect}
+                                />
+                            </Grid>
+                            <Grid
+                                item
+                                container
+                                xs={12}
+                                sm={4}
+                            >
+                                <DropDownSelect
+                                    name='nature'
+                                    values={values}
+                                    items={filters.nature}
+                                    transKey={`${categoryName}.`}
+                                    handleSelect={handleSelect}
+                                />
+                            </Grid>
+                            <Grid
+                                item
+                                container
+                                xs={12}
+                                sm={4}
+                                alignItems='flex-end'
+                            >
+                                <CheckboxSelect
+                                    name='urgent_work'
+                                    labelTxt={t('filters:urgent_work')}
+                                    checked={!!values?.urgent_work?.id}
+                                    handleCheckbox={handleCheckbox}
+                                />
+                            </Grid>
+                        </>}
                 </Grid>
             </CustomAccordion>
         </CustomFormikProvider>
