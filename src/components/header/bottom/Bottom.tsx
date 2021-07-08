@@ -96,10 +96,10 @@ const Bottom = (props) => {
                                         className="bottom-category-button header-button"
                                         onClick={handleDrawerShow(true)}
                                     >
+                                        <CategorySortIcon/>
                                         <Typography variant="subtitle2">
                                             {t('header:categories')}
                                         </Typography>
-                                        <CategorySortIcon/>
                                     </CustomButton>
                                 </Grid>
                             </Grid>

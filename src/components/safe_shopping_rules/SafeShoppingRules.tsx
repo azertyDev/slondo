@@ -143,10 +143,12 @@ export const SafeShoppingRules = (props) => {
                                 </Grid>
                                 <Grid item xs={6} container alignItems='center' zeroMinWidth>
                                     <Box className='main-title'>
-                                        <Typography variant='h3' gutterBottom className='fw600'>Безопасная
-                                            покупка</Typography>
-                                        <Typography variant='h5'>Приобретайте товар, а платите после его
-                                            получения!</Typography>
+                                        <Typography variant='h3' gutterBottom className='fw600'>
+                                            {t('hero.title')}
+                                        </Typography>
+                                        <Typography variant='h5'>
+                                            {t('hero.description')}
+                                        </Typography>
                                     </Box>
                                 </Grid>
                             </Grid>
@@ -155,7 +157,7 @@ export const SafeShoppingRules = (props) => {
                     <Grid item xs={12} container>
                         <Grid item xs={6} container justify='center' alignItems='center'>
                             <Typography variant='h5' className='fw600'>
-                                Как это работает?
+                                {t('howItWorks')}
                             </Typography>
                         </Grid>
                         <Grid item xs={6}>
@@ -169,11 +171,11 @@ export const SafeShoppingRules = (props) => {
                                 TabIndicatorProps={{ style: { display: 'none' } }}
                             >
                                 <Tab
-                                    label={<Typography variant="subtitle1">Для продавцов</Typography>}
+                                    label={<Typography variant="subtitle1">{t('forSeller.name')}</Typography>}
                                     value={0}
                                 />
                                 <Tab
-                                    label={<Typography variant="subtitle1">Для покупателей</Typography>}
+                                    label={<Typography variant="subtitle1">{t('forBuyer.name')}</Typography>}
                                     value={1}
                                 />
                             </Tabs>
