@@ -42,11 +42,10 @@ export const Top: FC<TopHeaderPropsType> = (props) => {
     const [isOpen, setIsOpen] = useState(false);
     const isXsDown = useMediaQuery(useTheme().breakpoints.down('xs'));
 
-    const handleSelectLocation = ({region, city, district}) => {
+    const handleSelectLocation = ({region, city}) => {
         if (region) {
             const userLocation: any = {region};
             if (city) userLocation.city = city;
-            if (district) userLocation.district = district;
             cookies.set('user_location', userLocation, cookieOpts);
         } else {
             cookies.remove('user_location', {path: '/'});

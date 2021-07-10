@@ -30,22 +30,22 @@ export const SearchPost: FC<SearchPostsByFiltersPropsType> = (props) => {
     const categoriesByCyrillicNames = getCtgrsByCyrillicNames(categories as string[]);
     const [ctgr, subctgr, typeCtgr] = categoriesByCyrillicNames;
 
-    const searchTxtFromUrl = getSearchTxt(categories as string[]);
+    const searchTermFromUrl = getSearchTxt(categories as string[]);
 
     // SEO
     const seoContent = getSEOContent(ctgr, subctgr, typeCtgr, translatedLocation, locale);
 
     const seoTxt = seoContent.text;
 
-    const description = searchTxtFromUrl
-        ? `${searchTxtFromUrl} ${locale === 'ru' ? 'в' : ''} ${translatedLocation}${locale === 'uz' ? 'da' : 'е'} SLONDO.uz`
+    const description = searchTermFromUrl
+        ? `${searchTermFromUrl} ${locale === 'ru' ? 'в' : ''} ${translatedLocation}${locale === 'uz' ? 'da' : 'е'} SLONDO.uz`
         : seoContent.description;
 
-    let title = searchTxtFromUrl ? `${searchTxtFromUrl} - SLONDO.uz` : seoContent.title;
+    let title = searchTermFromUrl ? `${searchTermFromUrl} - SLONDO.uz` : seoContent.title;
 
     if (ctgr) {
-        title = searchTxtFromUrl
-            ? `${searchTxtFromUrl} - ${t(`site_categories:${typeCtgr?.name ?? subctgr?.name ?? ctgr?.name ?? ''}`)} - SLONDO.uz`
+        title = searchTermFromUrl
+            ? `${searchTermFromUrl} - ${t(`site_categories:${typeCtgr?.name ?? subctgr?.name ?? ctgr?.name ?? ''}`)} - SLONDO.uz`
             : seoContent.title;
     }
 
@@ -66,7 +66,7 @@ export const SearchPost: FC<SearchPostsByFiltersPropsType> = (props) => {
                         <SearchResult
                             t={t}
                             urlParams={urlParams}
-                            searchTxtFromUrl={searchTxtFromUrl}
+                            searchTermFromUrl={searchTermFromUrl}
                             categories={categoriesByCyrillicNames}
                         />
                     </Grid>

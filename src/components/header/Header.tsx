@@ -6,7 +6,6 @@ import Bottom from './bottom/Bottom';
 import {AuthContainer} from './auth/AuthContainer';
 import {cookies} from '@src/helpers';
 import {UserCtx, AuthCtx} from "@src/context";
-import {useSearch} from "@src/hooks";
 import {useStyles} from './useStyles';
 // import {socketIO} from '@src/api/api';
 

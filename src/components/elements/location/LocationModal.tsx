@@ -10,10 +10,11 @@ import {useStyles} from './useStyles';
 
 type LocationModalPropsType = {
     region,
+    isFetch: boolean,
+    locations,
     hasRegion: boolean,
     prevLocation: string,
     locationInputTxt: string,
-    locations,
     handleLocation,
     handleChoiceLocation,
     toPrevLocation,
@@ -25,8 +26,9 @@ export const LocationModal: FC<LocationModalPropsType> = (props) => {
     const {
         t,
         region,
-        hasRegion,
+        isFetch,
         locations,
+        hasRegion,
         prevLocation,
         toPrevLocation,
         handleLocation,
@@ -35,6 +37,7 @@ export const LocationModal: FC<LocationModalPropsType> = (props) => {
         modalOpen,
         handleModalClose
     } = props;
+
 
     const separatedLocations = separateByThree(locations);
 
@@ -45,64 +48,68 @@ export const LocationModal: FC<LocationModalPropsType> = (props) => {
             handleCloseDialog={handleModalClose}
         >
             <div className={classes.locationModal}>
-                <div className='modal-top'>
-                    <div className="location-header-wrapper">
-                        <Typography variant="subtitle1">
-                            {t('location')}
-                        </Typography>
-                    </div>
-                    <CloseBtn handleClose={handleModalClose}/>
-                </div>
-                <div className='local-modal-container'>
-                    <div className='locals-input'>
-                        <Hidden xsDown>
-                            <LocationIcon/>
-                        </Hidden>
-                        <input
-                            disabled
-                            value={locationInputTxt}
-                            className="search-input"
-                            placeholder={t('allUzb')}
-                        />
-                        <CustomButton className="search-button" onClick={handleChoiceLocation}>
-                            <Typography variant="subtitle2">
-                                {t('common:select')}
-                            </Typography>
-                        </CustomButton>
-                    </div>
-                    <Grid container className='locals-wrapper'>
-                        <Grid item xs={12} className='locals-title'>
-                            <Typography>
-                                {hasRegion && <ArrowBack onClick={toPrevLocation}/>}
-                                <span onClick={toPrevLocation}>
+                {isFetch
+                    ? <Typography>...Loading</Typography>
+                    : <>
+                        <div className='modal-top'>
+                            <div className="location-header-wrapper">
+                                <Typography variant="subtitle1">
+                                    {t('location')}
+                                </Typography>
+                            </div>
+                            <CloseBtn handleClose={handleModalClose}/>
+                        </div>
+                        <div className='local-modal-container'>
+                            <div className='locals-input'>
+                                <Hidden xsDown>
+                                    <LocationIcon/>
+                                </Hidden>
+                                <input
+                                    disabled
+                                    value={locationInputTxt}
+                                    className="search-input"
+                                    placeholder={t('allUzb')}
+                                />
+                                <CustomButton className="search-button" onClick={handleChoiceLocation}>
+                                    <Typography variant="subtitle2">
+                                        {t('common:select')}
+                                    </Typography>
+                                </CustomButton>
+                            </div>
+                            <Grid container className='locals-wrapper'>
+                                <Grid item xs={12} className='locals-title'>
+                                    <Typography>
+                                        {hasRegion && <ArrowBack onClick={toPrevLocation}/>}
+                                        <span onClick={toPrevLocation}>
                                     {prevLocation}
                                 </span>
-                            </Typography>
-                        </Grid>
-                        <Grid container className='locals-table'>
-                            {separatedLocations.map((col, i) => (
-                                <Grid
-                                    item
-                                    key={i}
-                                    container
-                                    direction='column'
-                                    className='locals-col'
-                                    sm={6}
-                                    md={4}
-                                    xs={12}
-                                >
-                                    {col.map(loc => (
-                                        <Grid item key={loc.id} onClick={handleLocation(loc)}>
-                                            <Typography>
-                                                <span>{t(loc.cities ? `${loc.name}.name` : `${region.name}.${loc.name}`)}</span>
-                                            </Typography>
+                                    </Typography>
+                                </Grid>
+                                <Grid container className='locals-table'>
+                                    {separatedLocations.map((col, i) => (
+                                        <Grid
+                                            item
+                                            key={i}
+                                            container
+                                            direction='column'
+                                            className='locals-col'
+                                            sm={6}
+                                            md={4}
+                                            xs={12}
+                                        >
+                                            {col.map(loc => (
+                                                <Grid item key={loc.id} onClick={handleLocation(loc)}>
+                                                    <Typography>
+                                                        <span>{t(loc.cities ? `${loc.name}.name` : `${region.name}.${loc.name}`)}</span>
+                                                    </Typography>
+                                                </Grid>
+                                            ))}
                                         </Grid>
                                     ))}
                                 </Grid>
-                            ))}
-                        </Grid>
-                    </Grid>
-                </div>
+                            </Grid>
+                        </div>
+                    </>}
             </div>
         </ResponsiveModal>
     );

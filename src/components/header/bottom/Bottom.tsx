@@ -37,11 +37,10 @@ const Bottom = (props) => {
     const open = Boolean(anchorEl);
     const id = open ? 'simple-popover' : undefined;
 
-    const handleSelectLocation = ({region, city, district}) => {
+    const handleSelectLocation = ({region, city}) => {
         if (region) {
             const userLocation: any = {region};
             if (city) userLocation.city = city;
-            if (district) userLocation.district = district;
             cookies.set('user_location', userLocation, cookieOpts);
         } else {
             cookies.remove('user_location', {path: '/'});

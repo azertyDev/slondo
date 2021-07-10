@@ -6,11 +6,11 @@ import {WithT} from 'i18next';
 import {cookies} from '@src/helpers';
 import {userAPI} from '@src/api/api';
 import {CustomPagination} from '@src/components/elements/custom_pagination/CustomPagination';
-import {useStyles} from './useStyles';
 import {ErrorCtx} from "@src/context";
+import {useStyles} from './useStyles';
 
 type SearchResultPropsType = {
-    searchTxtFromUrl: string,
+    searchTermFromUrl: string,
     categories,
     urlParams
 } & WithT;
@@ -18,7 +18,7 @@ type SearchResultPropsType = {
 export const SearchResult: FC<SearchResultPropsType> = (props) => {
     const {
         t,
-        searchTxtFromUrl,
+        searchTermFromUrl,
         categories,
         urlParams
     } = props;
@@ -48,7 +48,6 @@ export const SearchResult: FC<SearchResultPropsType> = (props) => {
 
             if (userLocation) {
                 const {region, city, district} = userLocation;
-
                 if (district) {
                     query.district_id = district.id;
                 } else if (city) {
@@ -58,7 +57,7 @@ export const SearchResult: FC<SearchResultPropsType> = (props) => {
                 }
             }
 
-            if (searchTxtFromUrl) query.title = searchTxtFromUrl;
+            if (searchTermFromUrl) query.title = searchTermFromUrl;
             if (ctgr) query.category_id = ctgr.id;
             if (subCtgr) query.sub_category_id = subCtgr.id;
             if (typeCtgr) query.type_id = typeCtgr.id;
@@ -85,7 +84,7 @@ export const SearchResult: FC<SearchResultPropsType> = (props) => {
     return (
         <div className={classes.root}>
             {isNotFound
-                ? <Typography>{t('post_not_found', {searchText: searchTxtFromUrl})}</Typography>
+                ? <Typography>{t('post_not_found', {searchText: searchTermFromUrl})}</Typography>
                 : <>
                     <CardView
                         listMode
