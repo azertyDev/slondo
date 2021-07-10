@@ -7,7 +7,7 @@ import {useStyles} from './useStyles';
 
 type SelectOptionsPropsType = {
     name: string,
-    categoryName: string,
+    categoryName?: string,
     disableRequire?: boolean,
     values,
     errorMsg?: string,
@@ -50,7 +50,7 @@ export const DeployedSelect: FC<SelectOptionsPropsType> = (props) => {
                             className={values[name]?.id === item.id ? 'selected' : ''}
                         >
                             <Typography variant='subtitle1'>
-                                {t(`${categoryName}.${item.name}.name`)}
+                                {t(categoryName ? `${categoryName}.${item.name}.name` : `${item.name}`)}
                             </Typography>
                         </CustomButton>
                     </Grid>

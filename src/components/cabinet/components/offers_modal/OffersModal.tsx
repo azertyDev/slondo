@@ -1,14 +1,13 @@
-import {FC, useEffect, useState} from 'react';
+import {FC, useContext, useEffect, useState} from 'react';
 import {userAPI} from "@src/api/api";
-import {useDispatch} from "react-redux";
 import {Box, Typography} from "@material-ui/core";
 import {UserInfoWithAvatar} from "@src/components/elements/user_info_with_avatar/UserInfoWithAvatar";
 import {CloseIcon, DoneAllIcon} from "@src/components/elements/icons";
 import {CustomButton} from "@src/components/elements/custom_button/CustomButton";
-import {setErrorMsgAction} from "@src/redux/slices/errorSlice";
 import {CabinetModal} from "@src/components/cabinet/components/cabinet_modal/CabinetModal";
 import {CommonModalType} from "@src/components/cabinet/CabinetWrapper";
 import {useStyles} from './useStyles';
+import {ErrorCtx} from "@src/context";
 
 export const OffersModal: FC<CommonModalType> = (props) => {
     const {
@@ -21,7 +20,7 @@ export const OffersModal: FC<CommonModalType> = (props) => {
     const isPublic = post.status === 'public';
     const auctionId = post.auction.id;
 
-    const dispatch = useDispatch();
+    const {setErrorMsg} = useContext(ErrorCtx);
     const [isFetch, setIsFetch] = useState(false);
     const [offers, setOffers] = useState([]);
 
@@ -33,7 +32,7 @@ export const OffersModal: FC<CommonModalType> = (props) => {
             setIsFetch(false);
         } catch (e) {
             setIsFetch(false);
-            dispatch(setErrorMsgAction(e.message));
+            setErrorMsg(e.message);
         }
     };
 
@@ -45,7 +44,7 @@ export const OffersModal: FC<CommonModalType> = (props) => {
             setIsFetch(false);
         } catch (e) {
             setIsFetch(false);
-            dispatch(setErrorMsgAction(e.message));
+            setErrorMsg(e.message);
         }
     };
 

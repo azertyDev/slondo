@@ -19,7 +19,7 @@ export const SearchPost: FC<SearchPostsByFiltersPropsType> = (props) => {
     const {
         query,
         locale,
-        userLocation,
+        userLocation
     } = props;
 
     const {t} = useTranslation('filters');
@@ -38,15 +38,15 @@ export const SearchPost: FC<SearchPostsByFiltersPropsType> = (props) => {
     const seoTxt = seoContent.text;
 
     const description = searchTxtFromUrl
-                        ? `${searchTxtFromUrl} ${locale === 'ru' ? 'в' : ''} ${translatedLocation}${locale === 'uz' ? 'da' : 'е'} SLONDO.uz`
-                        : seoContent.description;
+        ? `${searchTxtFromUrl} ${locale === 'ru' ? 'в' : ''} ${translatedLocation}${locale === 'uz' ? 'da' : 'е'} SLONDO.uz`
+        : seoContent.description;
 
     let title = searchTxtFromUrl ? `${searchTxtFromUrl} - SLONDO.uz` : seoContent.title;
 
     if (ctgr) {
         title = searchTxtFromUrl
-                ? `${searchTxtFromUrl} - ${t(`site_categories:${typeCtgr?.name ?? subctgr?.name ?? ctgr?.name ?? ''}`)} - SLONDO.uz`
-                : seoContent.title;
+            ? `${searchTxtFromUrl} - ${t(`site_categories:${typeCtgr?.name ?? subctgr?.name ?? ctgr?.name ?? ''}`)} - SLONDO.uz`
+            : seoContent.title;
     }
 
     const classes = useStyles();

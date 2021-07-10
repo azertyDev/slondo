@@ -1,16 +1,16 @@
-import {FC, ReactNode, useEffect, useState} from 'react';
+import {FC, ReactNode, useContext, useEffect, useState} from 'react';
+import {unstable_batchedUpdates} from 'react-dom';
 import {useFormik} from 'formik';
 import {userAPI} from '@src/api/api';
 import {useTranslation} from 'next-i18next';
 import {Typography} from '@material-ui/core';
-import {setIsAuthModalOpen, signInAction} from '@src/redux/slices/userSlice';
-import {useDispatch, useSelector} from 'react-redux';
-import {RootState} from '@src/redux/rootReducer';
 import {cookieOpts, cookies, getErrorMsg, phonePrepare} from '@src/helpers';
 import {useHandlers} from '@src/hooks/useHandlers';
 import {AuthModal} from './AuthModal';
 import {FormikField} from '@src/components/elements/formik_field/FormikField';
 import {authSchema, codeSchema, passwordConfirmSchema, phoneSchema} from '@root/validation_schemas/authRegSchema';
+import {UserCtx} from "@src/context/UserCtx";
+import {AuthCtx} from "@src/context/AuthCtx";
 
 export enum FormStatuses {
     reg,
@@ -21,9 +21,9 @@ export enum FormStatuses {
 
 export const AuthContainer: FC = () => {
     const initSeconds = 120;
-    const dispatch = useDispatch();
     const {t} = useTranslation('auth_reg');
-    const {isAuthModalOpen} = useSelector((store: RootState) => store.user);
+    const {setUser} = useContext(UserCtx);
+    const {auth: {authModalOpen}, setIsAuth, setAuthModalOpen} = useContext(AuthCtx);
 
     const initVals = {
         code: '',
@@ -33,39 +33,44 @@ export const AuthContainer: FC = () => {
     };
 
     const [tabIndex, setTabIndex] = useState(0);
+    const isSignInTab = tabIndex === 0;
     const [errorMsg, setErrorMsg] = useState('');
-
     const [isFetch, setIsFetch] = useState(false);
     const [timer, setTimer] = useState(initSeconds);
     const [activeTimer, setActiveTimer] = useState(false);
-
     const [formStatus, setFormStatus] = useState<keyof typeof FormStatuses>('reg');
 
-    const isSignInTab = tabIndex === 0;
-
     const tabsHandler = (_, newValue) => {
-        setTouched({});
-        setTabIndex(newValue);
+        unstable_batchedUpdates(() => {
+            setTouched({});
+            setTabIndex(newValue);
+        });
     };
 
     const handleCancel = () => {
-        setTabIndex(0);
-        setErrors({});
-        setTouched({});
-        setErrorMsg('');
-        setFormStatus('reg');
-        setActiveTimer(false);
+        unstable_batchedUpdates(() => {
+            setTabIndex(0);
+            setErrors({});
+            setTouched({});
+            setErrorMsg('');
+            setFormStatus('reg');
+            setActiveTimer(false);
+        });
     };
 
     const handleCloseModal = () => {
-        handleCancel();
-        setValues(initVals);
-        isAuthModalOpen && dispatch(setIsAuthModalOpen(false));
+        unstable_batchedUpdates(() => {
+            handleCancel();
+            setValues(initVals);
+            setAuthModalOpen(false);
+        });
     };
 
     const handleForgetPass = () => {
-        setTabIndex(1);
-        setFormStatus('rec');
+        unstable_batchedUpdates(() => {
+            setTabIndex(1);
+            setFormStatus('rec');
+        });
     };
 
     const runTimer = () => {
@@ -75,9 +80,11 @@ export const AuthContainer: FC = () => {
                     setTimer(timer - 1);
                 }, 1000);
             } else {
-                setErrorMsg('');
-                setFormStatus('rec');
-                setActiveTimer(false);
+                unstable_batchedUpdates(() => {
+                    setErrorMsg('');
+                    setFormStatus('rec');
+                    setActiveTimer(false);
+                });
             }
         } else {
             setTimer(initSeconds);
@@ -89,33 +96,44 @@ export const AuthContainer: FC = () => {
             const {phone, password, code} = values;
             const preparedPhone = phonePrepare(phone);
 
-            setErrorMsg('');
-            setTouched({});
-            setIsFetch(true);
+            unstable_batchedUpdates(() => {
+                setErrorMsg('');
+                setTouched({});
+                setIsFetch(true);
+            });
 
             if (isSignInTab) {
                 const {token, user} = await userAPI.login(preparedPhone, password);
-                cookies.set('slondo_user', user, cookieOpts);
-                cookies.set('slondo_auth', token, cookieOpts);
-                handleCloseModal();
-                dispatch(signInAction(user));
+                unstable_batchedUpdates(() => {
+                    setUser(user);
+                    setIsAuth(true);
+                    handleCloseModal();
+                    cookies.set('slondo_user', user, cookieOpts);
+                    cookies.set('slondo_auth', token, cookieOpts);
+                });
             } else {
                 if (formStatus === 'rec') {
                     await userAPI.getSmsCode(preparedPhone);
-                    setActiveTimer(true);
-                    setFormStatus('code');
+                    unstable_batchedUpdates(() => {
+                        setActiveTimer(true);
+                        setFormStatus('code');
+                    });
                 }
                 if (formStatus === 'code') {
                     await userAPI.confirmSmsCode(preparedPhone, code);
-                    setActiveTimer(false);
-                    setFormStatus('newPass');
+                    unstable_batchedUpdates(() => {
+                        setActiveTimer(false);
+                        setFormStatus('newPass');
+                    });
                 }
                 if (formStatus === 'newPass') {
                     const {token, user} = await userAPI.newPassword(preparedPhone, code, password);
-                    cookies.set('slondo_user', user, cookieOpts);
-                    cookies.set('slondo_auth', token, cookieOpts);
-                    handleCloseModal();
-                    dispatch(signInAction(user));
+                    unstable_batchedUpdates(() => {
+                        cookies.set('slondo_user', user, cookieOpts);
+                        cookies.set('slondo_auth', token, cookieOpts);
+                        handleCloseModal();
+                        setUser(user);
+                    });
                 }
                 if (formStatus === 'reg') {
                     await userAPI.register(preparedPhone);
@@ -125,12 +143,14 @@ export const AuthContainer: FC = () => {
 
             setIsFetch(false);
         } catch (e) {
-            setErrorMsg(e.message);
-            setIsFetch(false);
-            setValues({
-                ...values,
-                password: '',
-                password_confirm: ''
+            unstable_batchedUpdates(() => {
+                setErrorMsg(e.message);
+                setIsFetch(false);
+                setValues({
+                    ...values,
+                    password: '',
+                    password_confirm: ''
+                });
             });
         }
     };
@@ -249,7 +269,7 @@ export const AuthContainer: FC = () => {
             isFetch={isFetch}
             isSignInTab={isSignInTab}
             formik={formik}
-            open={isAuthModalOpen}
+            open={authModalOpen}
             errorMsg={errorMsg}
             form={getFormByStatus()}
             submitTxt={getSubmitTxt()}

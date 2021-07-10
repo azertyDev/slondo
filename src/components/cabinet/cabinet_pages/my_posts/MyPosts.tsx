@@ -1,24 +1,16 @@
-import {FC, useEffect, useState} from 'react';
+import {FC, useContext, useEffect, useState} from 'react';
 import {TabsContent} from '@src/components/cabinet/cabinet_pages/TabsContent';
 import {withAuthRedirect} from '@src/hocs/withAuthRedirect';
 import {userAPI} from '@src/api/api';
-import {setErrorMsgAction} from '@src/redux/slices/errorSlice';
-import {useDispatch} from 'react-redux';
 import {
-    Avatar,
     Box,
     CircularProgress,
-    List,
-    ListItem,
-    ListItemText,
     Tab,
     Tabs,
-    TextField,
     Typography
 } from '@material-ui/core';
 import {unstable_batchedUpdates} from "react-dom";
 import {useTranslation} from 'next-i18next';
-import {CustomButton} from '@src/components/elements/custom_button/CustomButton';
 import {InitialCabinetCardState, TabsDataType} from '@root/interfaces/Cabinet';
 import {CardDataType} from '@root/interfaces/CardData';
 import {CabinetCard} from '@src/components/cabinet/components/cabinet_card/CabinetCard';
@@ -26,9 +18,10 @@ import {ITEMS_PER_PAGE} from '@src/constants';
 import {useModal} from '@src/hooks/useModal';
 import {DetailedPostContainerModal} from '@src/components/cabinet/components/detailed_post_modal/DetailedPostContainerModal';
 import {CustomTabPanel} from '@src/components/elements/custom_tab_panel/CustomTabPanel';
-import {UserInfo} from '@root/interfaces/Auth';
 import {NotificationModal} from "@src/components/cabinet/components/notifation_modal/NotificationModal";
+import {SettingsModal} from "@src/components/cabinet/components/settings_modal/SettingsModal";
 import {useStyles} from './useStyles';
+import {ErrorCtx} from "@src/context";
 
 export const initialCardData: CardDataType = {
     id: null,
@@ -121,49 +114,34 @@ export const initialCardData: CardDataType = {
 };
 
 const MyPosts: FC = () => {
-    const dispatch = useDispatch();
     const {t} = useTranslation('cabinet');
+    const {setErrorMsg} = useContext(ErrorCtx);
 
-    const deactivateReasons = {
-        soldOnSlondoId: 1,
-        archiveId: 2
-    };
-    const {soldOnSlondoId, archiveId} = deactivateReasons;
-    const initialUserState: UserInfo = {
-        id: null,
-        name: '',
-        surname: '',
-        phone: '',
-        avatar: null,
-        created_at: '',
-        available_days: ''
-    };
     const initialPostsState: InitialCabinetCardState = {
         total: 0,
         data: []
     };
 
     const [isFetch, setIsFetch] = useState(false);
-    const [userData, setUserData] = useState(initialUserState);
-    const [userPhone, setUserPhone] = useState('998');
     const [postData, setPostData] = useState(initialPostsState);
     const [securePosts, setSecurePosts] = useState(initialPostsState);
     const [archiveSecurePostData, setArchiveSecurePostData] = useState(initialPostsState);
     const [archivePostData, setArchivePostData] = useState(initialPostsState);
     const [tabIndex, setTabIndex] = useState(0);
-    const [modalContentIndex, setModalContentIndex] = useState(1);
-    const [reasonId, setReasonId] = useState(null);
-    const [postId, setPostId] = useState(null);
-    const [errorMsg, setErrMsg] = useState('');
-    const [selectedPost, setSelectedPost] = useState(initialCardData);
     const [childTabValue, setChildTabValue] = useState(0);
+    const [selectedPost, setSelectedPost] = useState(initialCardData);
 
-    const {modalOpen: notificationsOpen, handleModalClose: closeNotificationsModal, handleModalOpen: openNotificationsModal} = useModal();
+    const {modalOpen: settingsOpen, handleModalClose: handleCloseSettings, handleModalOpen: handleOpenSettings} = useModal();
     const {modalOpen: detailedModalOpen, handleModalClose: closeDetailedModal, handleModalOpen: openDetailedModal} = useModal();
+    const {modalOpen: notificationsOpen, handleModalClose: closeNotificationsModal, handleModalOpen: openNotificationsModal} = useModal();
 
     const handleDetailedOpen = (post) => () => {
         openDetailedModal();
         setSelectedPost(post);
+    };
+
+    const handleTabChange = (event, newValue) => {
+        setTabIndex(newValue);
     };
 
     const handleChildTabChange = (event, newValue) => {
@@ -171,39 +149,13 @@ const MyPosts: FC = () => {
     };
 
     const handleNotificationsOpen = (post: CardDataType) => () => {
-        closeDetailedModal();
         setSelectedPost(post);
         openNotificationsModal();
     };
 
-    const handleModalContentIndex = (index, reasonId?) => () => {
-        setModalContentIndex(index);
-        reasonId && setReasonId(reasonId);
-    };
-
-    const handlePrevMenu = () => {
-        const backValue = modalContentIndex === 5 ? 3 : 1;
-        setModalContentIndex(modalContentIndex - backValue);
-    };
-
-    const handleTabChange = (event, newValue) => {
-        setTabIndex(newValue);
-    };
-
-    const handleTextField = async ({target}) => {
-        const phone = target.value;
-        setUserPhone(phone);
-        try {
-            if (phone.length === 12) {
-                setIsFetch(true);
-                const user = await userAPI.getUserByPhoneNumber(phone);
-                setUserData(user);
-                setIsFetch(false);
-            }
-        } catch (e) {
-            setErrMsg(e.message);
-            setIsFetch(false);
-        }
+    const handleSettingsOpen = (post: CardDataType) => () => {
+        handleOpenSettings();
+        setSelectedPost(post);
     };
 
     const fetchPostData = async (secure: number) => {
@@ -219,7 +171,7 @@ const MyPosts: FC = () => {
             setIsFetch(false);
         } catch (e) {
             setIsFetch(false);
-            dispatch(setErrorMsgAction(e.message));
+            setErrorMsg(e.message);
         }
     };
 
@@ -236,20 +188,7 @@ const MyPosts: FC = () => {
             setIsFetch(false);
         } catch (e) {
             setIsFetch(false);
-            dispatch(setErrorMsgAction(e.message));
-        }
-    };
-
-    const handleDeactivate = async () => {
-        try {
-            setIsFetch(true);
-            await userAPI.deactivatePost(postId, reasonId);
-            setModalContentIndex(1);
-            tabIndex === 0 ? await fetchPostData(0) : await fetchPostData(1);
-            setIsFetch(false);
-        } catch (e) {
-            setIsFetch(false);
-            dispatch(setErrorMsgAction(e.message));
+            setErrorMsg(e.message);
         }
     };
 
@@ -262,250 +201,79 @@ const MyPosts: FC = () => {
         });
     };
 
-    const classes = useStyles();
-    const getModalContent = () => {
-        switch (modalContentIndex) {
-            case 1:
-                return <>
-                    <List
-                        component="nav"
-                        aria-label="main"
-                        className={classes.settingsList}
-                        disablePadding
-                    >
-                        <ListItem
-                            button
-                            onClick={handleModalContentIndex(2)}
-                        >
-                            <ListItemText
-                                primary='Деактивировать'
-                                primaryTypographyProps={{variant: 'subtitle1'}}
-                            />
-                        </ListItem>
-                        <ListItem button>
-                            <ListItemText
-                                primary="Поднять в ленте"
-                                primaryTypographyProps={{variant: 'subtitle1'}}
-                                secondary="(можно использовать 3 раза неделю)"
-                                secondaryTypographyProps={{variant: 'subtitle2'}}
-                            />
-                        </ListItem>
-                    </List>
-                </>;
-            case 2:
-                return <>
-                    <Typography variant='h6' className="title">
-                        Деактивация
-                    </Typography>
-                    <List
-                        component="nav"
-                        aria-label="main"
-                        className={classes.settingsList}
-                        disablePadding
-                    >
-                        <ListItem
-                            button
-                            onClick={handleModalContentIndex(3, soldOnSlondoId)}
-                        >
-                            <ListItemText
-                                primary={t('sold_on_slondo')}
-                                primaryTypographyProps={{variant: 'subtitle1'}}
-                            />
-                        </ListItem>
-                        <ListItem
-                            button
-                            onClick={handleModalContentIndex(5, archiveId)}
-                        >
-                            <ListItemText
-                                primary={t('addToArchive')}
-                                primaryTypographyProps={{variant: 'subtitle1'}}
-                            />
-                        </ListItem>
-                    </List>
-                </>;
-            case 3:
-                return <>
-                    <Typography
-                        variant='h6'
-                        className="title"
-                        onClick={handleModalContentIndex(3)}
-                    >
-                        Продал на Slondo
-                    </Typography>
-                    <Box
-                        display='flex'
-                        justifyContent='space-between'
-                        className={classes.userPhoneAndData}
-                        mt={3}
-                        width='100%'
-                    >
-                        <TextField
-                            id="outlined-helperText"
-                            label="Номер покупателя"
-                            value={userPhone}
-                            onChange={handleTextField}
-                            helperText={errorMsg !== '' ? errorMsg : '(Нажмите отправить если не знаете номер)'}
-                            variant="outlined"
-                        />
-                        <Box className={classes.userData}>
-                            {isFetch
-                                ? <Typography>loading...</Typography>
-                                : <>
-                                    <Avatar src={userData.avatar ?? ''}/>
-                                    <Typography variant='subtitle2' noWrap>
-                                        {userData.name}
-                                        {userData.surname}
-                                    </Typography>
-                                </>}
-                        </Box>
-                    </Box>
-                    <Box
-                        mt={1}
-                        width='100%'
-                    >
-                        <CustomButton onClick={handleDeactivate} className={classes.submitBtn}>
-                            <Typography variant='subtitle1'>Отправить</Typography>
-                        </CustomButton>
-                    </Box>
-                </>;
-            case 5:
-                return <>
-                    <Typography variant='h6' className="title">
-                        Вы уверены что хотите<br/>добавить объявление в архив?
-                    </Typography>
-                    <Box display='flex' flexDirection='column'>
-                        <CustomButton onClick={handleDeactivate}>Да</CustomButton>
-                        <CustomButton onClick={handlePrevMenu}>Вернуться</CustomButton>
-                    </Box>
-                </>;
-        }
+    const tabsContent = (fstTabPosts: CardDataType[], secTabPosts: CardDataType[]) => {
+        return (
+            <>
+                <Tabs
+                    aria-label="tabs"
+                    value={childTabValue}
+                    onChange={handleChildTabChange}
+                    className={classes.childTabs}
+                    TabIndicatorProps={{style: {display: 'none'}}}
+                >
+                    <Tab
+                        label={
+                            <Typography variant="subtitle1">
+                                Активные
+                            </Typography>
+                        }
+                    />
+                    <Tab
+                        label={
+                            <Typography variant="subtitle1">
+                                Архивные
+                            </Typography>
+                        }
+                    />
+                </Tabs>
+                <CustomTabPanel value={childTabValue} index={0}>
+                    {isFetch
+                        ? <CircularProgress color="primary"/>
+                        : fstTabPosts.map((data) => (
+                            <Box mb={3} key={data.id}>
+                                <CabinetCard
+                                    cardData={data}
+                                    handleDetailedOpen={handleDetailedOpen(data)}
+                                    handleSettingsOpen={handleSettingsOpen(data)}
+                                    handleNotificationsOpen={handleNotificationsOpen(data)}
+                                />
+                            </Box>
+                        ))}
+                </CustomTabPanel>
+                <CustomTabPanel value={childTabValue} index={1}>
+                    {isFetch
+                        ? <CircularProgress color="primary"/>
+                        : secTabPosts.map((data) => (
+                            <Box mb={3} key={data.id}>
+                                <CabinetCard
+                                    cardData={data}
+                                    handleDetailedOpen={handleDetailedOpen(data)}
+                                    handleSettingsOpen={handleSettingsOpen(data)}
+                                    handleNotificationsOpen={handleNotificationsOpen(data)}
+
+                                />
+                            </Box>
+                        ))}
+                </CustomTabPanel>
+            </>
+        );
     };
 
-    const postTabs = (
-        <>
-            <Tabs
-                value={childTabValue}
-                onChange={handleChildTabChange}
-                aria-label="tabs"
-                className={classes.childTabs}
-                TabIndicatorProps={{style: {display: 'none'}}}
-            >
-                <Tab
-                    label={
-                        <Typography variant="subtitle1">
-                            Активные
-                        </Typography>
-                    }
-                />
-                <Tab
-                    label={
-                        <Typography variant="subtitle1">
-                            Архивные
-                        </Typography>
-                    }
-                />
-            </Tabs>
-            <CustomTabPanel value={childTabValue} index={0}>
-                {isFetch
-                    ? <CircularProgress color="primary"/>
-                    : postData.data.map((data) => (
-                        <Box mb={3} key={data.id}>
-                            <CabinetCard
-                                cardData={data}
-                                handleDetailedOpen={handleDetailedOpen}
-                                handleNotificationsOpen={handleNotificationsOpen}
-                            />
-                        </Box>
-                    ))}
-            </CustomTabPanel>
-            <CustomTabPanel value={childTabValue} index={1}>
-                {isFetch
-                    ? <CircularProgress color="primary"/>
-                    : archivePostData.data.map((data) => (
-                        <Box mb={3} key={data.id}>
-                            <CabinetCard
-                                archive
-                                cardData={data}
-                                handleDetailedOpen={handleDetailedOpen}
-                                handleNotificationsOpen={handleNotificationsOpen}
-                            />
-                        </Box>
-                    ))}
-            </CustomTabPanel>
-        </>
-    );
-
-    const securePostTabs = (
-        <>
-            <Tabs
-                value={childTabValue}
-                onChange={handleChildTabChange}
-                aria-label="tabs"
-                className={classes.childTabs}
-                TabIndicatorProps={{
-                    style: {
-                        display: 'none'
-                    }
-                }}
-            >
-                <Tab
-                    label={
-                        <Typography variant="subtitle1">
-                            Активные
-                        </Typography>
-                    }
-                />
-                <Tab
-                    label={
-                        <Typography variant="subtitle1">
-                            Архивные
-                        </Typography>
-                    }
-                />
-            </Tabs>
-            <CustomTabPanel value={childTabValue} index={0}>
-                {isFetch
-                    ? <CircularProgress color="primary"/>
-                    : securePosts.data.map((data) => (
-                        <Box mb={3} key={data.id}>
-                            <CabinetCard
-                                cardData={data}
-                                handleDetailedOpen={handleDetailedOpen}
-                            />
-                        </Box>
-                    ))}
-            </CustomTabPanel>
-            <CustomTabPanel value={childTabValue} index={1}>
-                {isFetch
-                    ? <CircularProgress color="primary"/>
-                    : archiveSecurePostData.data.map((data) => (
-                        <Box mb={3} key={data.id}>
-                            <CabinetCard
-                                archive
-                                cardData={data}
-                                handleDetailedOpen={handleDetailedOpen}
-                                handleNotificationsOpen={handleNotificationsOpen}
-                            />
-                        </Box>
-                    ))}
-            </CustomTabPanel>
-        </>
-    );
-
+    const classes = useStyles();
     const tabsData: TabsDataType = [
         {
             id: 0,
             title: t('posts'),
             itemsPerPage: ITEMS_PER_PAGE,
             handleFetchByTab: () => '',
-            component: postTabs
+            component: tabsContent(postData.data, archivePostData.data)
         },
         {
             id: 1,
             title: t('securePosts'),
             itemsPerPage: ITEMS_PER_PAGE,
             handleFetchByTab: () => '',
-            component: securePostTabs
+            component: tabsContent(securePosts.data, archiveSecurePostData.data)
         }
     ];
 
@@ -527,7 +295,12 @@ const MyPosts: FC = () => {
                 open={detailedModalOpen}
                 onClose={closeDetailedModal}
                 handleRefresh={handleRefresh}
-                handleNotificationsOpen={handleNotificationsOpen}
+            />
+            <SettingsModal
+                post={selectedPost}
+                open={settingsOpen}
+                handleRefresh={handleRefresh}
+                onClose={handleCloseSettings}
             />
             <NotificationModal
                 post={selectedPost}

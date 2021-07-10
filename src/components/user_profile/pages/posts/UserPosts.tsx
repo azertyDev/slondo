@@ -1,16 +1,15 @@
-import {FC, useEffect, useState} from 'react';
+import {FC, useContext, useEffect, useState} from 'react';
 import {userAPI} from '@src/api/api';
-import {setErrorMsgAction} from '@src/redux/slices/errorSlice';
-import {InitialCabinetCardState, TabsDataType} from '@root/interfaces/Cabinet';
+import {InitialCabinetCardState} from '@root/interfaces/Cabinet';
 import {CardView} from '@src/components/elements/card/CardView';
-import {useDispatch} from 'react-redux';
 import {useRouter} from 'next/router';
 import {WithT} from 'i18next';
-import {ProfileTabsContent} from '@src/components/user_profile/tabs/ProfileTabsContent';
+// import {ProfileTabsContent} from '@src/components/user_profile/tabs/ProfileTabsContent';
 import {CircularProgress} from '@material-ui/core';
+import {ErrorCtx} from "@src/context";
 
 export const UserPosts: FC<WithT> = ({t}) => {
-    const dispatch = useDispatch();
+    const {setErrorMsg} = useContext(ErrorCtx);
     const {user_id} = useRouter().query;
 
     const initialUserPostsState: InitialCabinetCardState = {
@@ -41,7 +40,7 @@ export const UserPosts: FC<WithT> = ({t}) => {
             }
             setIsFetch(false);
         } catch (e) {
-            dispatch(setErrorMsgAction(e.message));
+            setErrorMsg(e.message);
         }
     };
 

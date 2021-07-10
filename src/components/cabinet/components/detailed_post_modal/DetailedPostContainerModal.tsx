@@ -1,18 +1,16 @@
-import {FC, useEffect, useState} from 'react';
+import {FC, useContext, useEffect, useState} from 'react';
 import {CardDataType} from '@root/interfaces/CardData';
-import {useDispatch, useSelector} from 'react-redux';
-import {RootState} from '@src/redux/rootReducer';
 import {useBetsData} from '@src/hooks/useBetsData';
 import {userAPI} from '@src/api/api';
-import {setErrorMsgAction} from '@src/redux/slices/errorSlice';
 import {useModal} from '@src/hooks/useModal';
 import {unstable_batchedUpdates} from 'react-dom';
 import {DetailedPostModal} from "@src/components/cabinet/components/detailed_post_modal/DetailedPostModal";
 import {ConfirmModal} from "@src/components/elements/confirm_modal/Confirm_modal";
 import {RatingModal} from "@src/components/elements/rating_modal/RatingModal";
-import {SettingsModal} from "@src/components/cabinet/components/settings_modal/SettingsModal";
 import {OffersModal} from "@src/components/cabinet/components/offers_modal/OffersModal";
 import {useTranslation} from "next-i18next";
+import {UserCtx} from "@src/context/UserCtx";
+import {ErrorCtx} from "@src/context";
 
 enum ActionStatuses {
     'refusal_win',
@@ -27,20 +25,18 @@ type DetailedPostViewPropsType = {
     handleRefresh: () => void,
     onClose: () => void,
     handleDeactivate?: () => Promise<void>,
-    handleNotificationsOpen: (post: CardDataType) => () => void
 }
 export const DetailedPostContainerModal: FC<DetailedPostViewPropsType> = (props) => {
     const {
         open,
         onClose,
         post,
-        handleRefresh,
-        handleNotificationsOpen
+        handleRefresh
     } = props;
 
-    const dispatch = useDispatch();
     const {t} = useTranslation('cabinet');
-    const userInfo = useSelector((store: RootState) => store.user.info);
+    const {user} = useContext(UserCtx);
+    const {setErrorMsg} = useContext(ErrorCtx);
 
     const {
         author,
@@ -52,8 +48,8 @@ export const DetailedPostContainerModal: FC<DetailedPostViewPropsType> = (props)
     const offer = auction?.offer;
     const offerUser = offer?.user;
     const winner = auction?.winner;
-    const isUserWinner = winner?.id === userInfo.id;
-    const isUserCreator = author?.id === userInfo.id;
+    const isUserWinner = winner?.id === user.id;
+    const isUserCreator = author?.id === user.id;
     const hasOffer = offerUser && status === 'public';
     const userForRating = isUserWinner ? author : winner;
 
@@ -77,7 +73,6 @@ export const DetailedPostContainerModal: FC<DetailedPostViewPropsType> = (props)
 
     const {modalOpen: ratingOpen, handleModalOpen: handleOpenRating, handleModalClose: handleCloseRating} = useModal();
     const {modalOpen: offersOpen, handleModalClose: handleCloseOffers, handleModalOpen: handleOpenOffers} = useModal();
-    const {modalOpen: settingsOpen, handleModalClose: handleCloseSettings, handleModalOpen: handleOpenSettings} = useModal();
     const {modalOpen: confirmOpen, handleModalClose: handleConfirmClose, handleModalOpen: handleConfirmOpen} = useModal();
 
     const {bets, betsCount, isBetsFetch, setFetchedBetsData} = useBetsData({
@@ -99,7 +94,7 @@ export const DetailedPostContainerModal: FC<DetailedPostViewPropsType> = (props)
             } catch (e) {
                 unstable_batchedUpdates(() => {
                     setIsFetch(false);
-                    dispatch(setErrorMsgAction(e.message));
+                    setErrorMsg(e.message);
                 });
             }
         }
@@ -115,13 +110,6 @@ export const DetailedPostContainerModal: FC<DetailedPostViewPropsType> = (props)
     const handleOffersOpen = () => {
         unstable_batchedUpdates(() => {
             handleOpenOffers();
-            handleCloseDetailModal();
-        });
-    };
-
-    const handleSettingsOpen = () => {
-        unstable_batchedUpdates(() => {
-            handleOpenSettings();
             handleCloseDetailModal();
         });
     };
@@ -173,7 +161,7 @@ export const DetailedPostContainerModal: FC<DetailedPostViewPropsType> = (props)
             unstable_batchedUpdates(() => {
                 handleConfirmClose();
                 setIsFetch(false);
-                dispatch(setErrorMsgAction(e.message));
+                setErrorMsg(e.message);
             });
         }
     };
@@ -197,10 +185,8 @@ export const DetailedPostContainerModal: FC<DetailedPostViewPropsType> = (props)
                 handleAccept={handleAccept}
                 fetchUserPhone={fetchUserPhone}
                 handleOffersOpen={handleOffersOpen}
-                handleSettingsOpen={handleSettingsOpen}
                 setFetchedBetsData={setFetchedBetsData}
                 handleCloseDetailModal={handleCloseDetailModal}
-                handleNotificationsOpen={handleNotificationsOpen}
             />
             <ConfirmModal
                 title={t(confirmTxt)}
@@ -217,12 +203,6 @@ export const DetailedPostContainerModal: FC<DetailedPostViewPropsType> = (props)
                     handleCloseRating={handleCloseRating}
                 />
             )}
-            <SettingsModal
-                post={post}
-                open={settingsOpen}
-                handleRefresh={handleRefresh}
-                onClose={handleCloseSettings}
-            />
             {hasOffer && (
                 <OffersModal
                     post={post}

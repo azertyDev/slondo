@@ -1,13 +1,12 @@
-import {FC, useState} from 'react';
+import {FC, useContext, useState} from 'react';
 import Link from 'next/link';
 import {Box, Button, IconButton, Paper, Typography} from '@material-ui/core';
 import {Phone, Error} from '@material-ui/icons';
 import {CloseIcon} from '@src/components/elements/icons';
 import {useStyles} from './useStyles';
 import {userAPI} from "@src/api/api";
-import {setErrorMsgAction} from "@src/redux/slices/errorSlice";
-import {useDispatch} from "react-redux";
 import {useTranslation} from "next-i18next";
+import {ErrorCtx} from "@src/context";
 
 export type NotificationDataType = {
     id: number,
@@ -31,8 +30,8 @@ export const NotificationCard: FC<NotificationDataType> = (props) => {
     } = props;
 
     const {t} = useTranslation('notifications');
+    const {setErrorMsg} = useContext(ErrorCtx);
 
-    const dispatch = useDispatch();
     const date = new Date(created_at);
 
     const [isFetch, setIsFetch] = useState(false);
@@ -46,7 +45,7 @@ export const NotificationCard: FC<NotificationDataType> = (props) => {
             setIsFetch(false);
         } catch (e) {
             setIsFetch(false);
-            dispatch(setErrorMsgAction(e.message));
+            setErrorMsg(e.message);
         }
     };
 
@@ -64,7 +63,7 @@ export const NotificationCard: FC<NotificationDataType> = (props) => {
             setIsFetch(false);
         } catch (e) {
             setIsFetch(false);
-            dispatch(setErrorMsgAction(e.message));
+            setErrorMsg(e.message);
         }
     };
 

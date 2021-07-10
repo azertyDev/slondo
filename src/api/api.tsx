@@ -1,10 +1,10 @@
 import Axios from 'axios';
-import {LocationsDataTypes} from '@root/interfaces/Locations';
 import {CategoryType} from '@root/interfaces/Categories';
 import {CardDataType} from '@root/interfaces/CardData';
 import {AuctionsDataTypes} from '@root/interfaces/Auctions';
 import {UserInfo} from '@root/interfaces/Auth';
 import {cookies} from '@src/helpers';
+import {LocationsType} from "@src/hooks/useLocations";
 
 const production = 'https://backend.slondo.uz/api/';
 const uztelecom = 'https://backend.testb.uz/api/';
@@ -219,28 +219,22 @@ export const userAPI = {
                 throw err;
             });
     },
-    getFiltersByCtgr: (
-        fstCtgrId: number,
-        secCtgrId: number,
-        trdCtgrId: number
-    ): Promise<any> => {
-        return instance.get(
-            `subcategory?category_id=${fstCtgrId}&sub_category_id=${secCtgrId ?? ''}&type_id=${trdCtgrId ?? ''}`
-        )
+    getFiltersByCtgr: (params): Promise<any> => {
+        return instance.get(`subcategory`, {params})
             .then(res => res.data)
             .catch(err => {
                 throw err;
             });
     },
-    getCarDataByYear: (modelId: number, yearId: number): Promise<any> => {
-        return instance.get(`regular/cars/params/getByManufacturerYear?year_id=${yearId}&model_id=${modelId}`)
+    getCarDataByYear: (params): Promise<any> => {
+        return instance.get(`regular/cars/params/getByManufacturerYear`, {params})
             .then(res => res.data)
             .catch(err => {
                 throw err;
             });
     },
-    getCards: (itemsPerPage: number, page: number, type: string): Promise<{ data: CardDataType[]; total: number; }> => {
-        return instance.get(`post/all?itemsPerPage=${itemsPerPage}&page=${page}&type=${type}`, setTokenToHeader())
+    getCards: (params): Promise<{ data: CardDataType[]; total: number; }> => {
+        return instance.get(`post/all`, {params, ...setTokenToHeader()})
             .then((res) => res.data)
             .catch((err) => {
                 throw err;
@@ -256,7 +250,7 @@ export const userAPI = {
                 throw err;
             });
     },
-    getLocations: (): Promise<LocationsDataTypes> => {
+    getLocations: (): Promise<LocationsType[]> => {
         return instance.get(`location`)
             .then(res => res.data)
             .catch(err => {
@@ -321,11 +315,8 @@ export const userAPI = {
                 throw err;
             });
     },
-    deactivatePost: (ads_id: number, reason_id?: number): Promise<any> => {
-        return instance.post(`regular/post/deactivate`, {
-            ads_id,
-            reason_id
-        }, setTokenToHeader())
+    deactivatePost: (data): Promise<any> => {
+        return instance.post(`regular/post/deactivate`, data, setTokenToHeader())
             .then(res => res.data)
             .catch(err => {
                 throw err;

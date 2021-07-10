@@ -1,4 +1,4 @@
-import {FC, useEffect, useState} from 'react';
+import {FC, useContext, useEffect, useState} from 'react';
 import {WithT} from 'i18next';
 import {userAPI} from '@src/api/api';
 import {AuctionTimer} from './AuctionTimer';
@@ -8,12 +8,10 @@ import {numberPrettier} from '@src/helpers';
 import {LockIcon} from '@src/components/elements/icons';
 import {CustomButton} from '@src/components/elements/custom_button/CustomButton';
 import {AuctionForm} from '@src/components/post/show_post/owner_auction_info/auction_content/AuctionForm/AuctionForm';
-import {useDispatch} from 'react-redux';
-import {setErrorMsgAction} from '@root/src/redux/slices/errorSlice';
 import {useBetsData} from '@src/hooks/useBetsData';
 import {useStyles} from './useStyles';
 import {ResponsiveModal} from '@src/components/elements/responsive_modal/ResponsiveModal';
-
+import {ErrorCtx} from "@src/context";
 
 type AuctionInfoPropsType = {
     postData,
@@ -29,7 +27,7 @@ export const AuctionContent: FC<AuctionInfoPropsType> = (props) => {
 
     const auctionId = postData.auction.id;
 
-    const dispatch = useDispatch();
+    const {setErrorMsg} = useContext(ErrorCtx);
     const date = new Date(postData.expiration_at).getTime();
     const isExAuc = postData.ads_type.mark === 'exauc';
     const hasOfferPrice = !!postData.auction.offer_the_price;
@@ -68,7 +66,7 @@ export const AuctionContent: FC<AuctionInfoPropsType> = (props) => {
             setOpenOfferPrice(false);
         } catch (e) {
             setIsFetch(false);
-            dispatch(setErrorMsgAction(e.message));
+            setErrorMsg(e.message);
         }
     };
 
@@ -81,9 +79,7 @@ export const AuctionContent: FC<AuctionInfoPropsType> = (props) => {
             setIsFetch(false);
         } catch ({response}) {
             setIsFetch(false);
-            dispatch(
-                setErrorMsgAction(t(`errors:${response.data.message}`))
-            );
+            setErrorMsg(response.data.message);
         }
     };
 

@@ -1,14 +1,20 @@
 import {useEffect} from 'react';
-import {compose} from "redux";
 import {appWithTranslation} from 'next-i18next';
 import {ThemeProvider, CssBaseline} from '@material-ui/core';
-import {wrapper} from '@src/redux/store';
 import theme from '@src/theme';
+import {UserCtx, AuthCtx, ErrorCtx, LocationsCtx, SearchCtx} from "@src/context";
+import {useUser, useAuth, useError, useLocations, useSearch} from "@src/hooks";
 import "../slick.min.css";
 import 'react-inner-image-zoom/lib/InnerImageZoom/styles.min.css';
 
 const App = (props) => {
     const {Component, pageProps} = props;
+
+    const auth = useAuth();
+    const user = useUser();
+    const error = useError();
+    const locations = useLocations();
+    const search = useSearch();
 
     useEffect(() => {
         // Remove the server-side injected CSS.
@@ -19,10 +25,20 @@ const App = (props) => {
     }, []);
 
     return (
-        <ThemeProvider theme={theme}>
-            <CssBaseline/>
-            <Component {...pageProps} />
-        </ThemeProvider>
+        <ErrorCtx.Provider value={error}>
+            <AuthCtx.Provider value={auth}>
+                <SearchCtx.Provider value={search}>
+                    <LocationsCtx.Provider value={locations}>
+                        <UserCtx.Provider value={user}>
+                            <ThemeProvider theme={theme}>
+                                <CssBaseline/>
+                                <Component {...pageProps} />
+                            </ThemeProvider>
+                        </UserCtx.Provider>
+                    </LocationsCtx.Provider>
+                </SearchCtx.Provider>
+            </AuthCtx.Provider>
+        </ErrorCtx.Provider>
     );
 };
 
@@ -36,9 +52,4 @@ App.getInitialProps = async ({Component, ctx}) => {
     return {pageProps};
 };
 
-const withCompose = compose(
-    wrapper.withRedux,
-    appWithTranslation
-);
-
-export default withCompose(App);
+export default appWithTranslation(App);

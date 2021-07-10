@@ -1,4 +1,4 @@
-import {FC, ReactNode, useEffect, useState} from 'react';
+import {FC, ReactNode, useContext, useEffect, useState} from 'react';
 import {WithT} from 'i18next';
 import {Grid} from '@material-ui/core';
 import {useRouter} from 'next/router';
@@ -18,14 +18,12 @@ import {SearchCar} from '@src/components/post/search_post/search_form/categories
 import {SearchRegular} from '@src/components/post/search_post/search_form/categories_forms/regular/SearchRegular';
 import {transformLocations} from '@src/common_data/locations';
 import {HasAuction, site_categories} from '@src/common_data/site_categories';
-import {useDispatch, useSelector} from 'react-redux';
-import {RootState} from '@src/redux/rootReducer';
 import {userAPI} from '@src/api/api';
-import {setErrorMsgAction} from '@src/redux/slices/errorSlice';
 import {SearchEstate} from '@src/components/post/search_post/search_form/categories_forms/estate/SearchEstate';
 import {SearchTransport} from '@src/components/post/search_post/search_form/categories_forms/transport/SearchTransport';
 import {SearchJob} from '@src/components/post/search_post/search_form/categories_forms/job/SearchJob';
 import {CheckboxSelect} from '@src/components/elements/checkbox_select/CheckboxSelect';
+import {ErrorCtx, SearchCtx} from "@src/context";
 import {useStyles} from './useStyles';
 
 export type CommonFiltersType = {
@@ -67,8 +65,8 @@ export const SearchForm: FC<SearchFormPropsType> = (props) => {
 
     const postTypesList = [postTypes[0], postTypes[1]];
     const postType = !!archive
-                     ? postTypesList[1]
-                     : postTypesList.find(type => type.id === +post_type) || null;
+        ? postTypesList[1]
+        : postTypesList.find(type => type.id === +post_type) || null;
 
     const initVals = {
         category: null,
@@ -91,9 +89,9 @@ export const SearchForm: FC<SearchFormPropsType> = (props) => {
         filtersByCtgr: {}
     };
 
-    const dispatch = useDispatch();
     const {push} = useRouter();
-    const searchTxt = useSelector((store: RootState) => store.searchTxt);
+    const {setErrorMsg} = useContext(ErrorCtx);
+    const {term} = useContext(SearchCtx);
 
     const [values, setValues] = useState(initVals);
     const [filters, setFilters] = useState(initFilters);
@@ -252,7 +250,7 @@ export const SearchForm: FC<SearchFormPropsType> = (props) => {
         }
 
         if (type) url = url.concat(`${transformCyrillic(type.ru_name)}/`);
-        if (searchTxt) url = url.concat(`q-${searchTxt}/`);
+        if (term) url = url.concat(`q-${term}/`);
         if (params) url = url.concat(params);
 
         return url;
@@ -261,7 +259,14 @@ export const SearchForm: FC<SearchFormPropsType> = (props) => {
     const setFiltersByCtgr = async () => {
         try {
             if (subcategory) {
-                let filtersByCtgr = await userAPI.getFiltersByCtgr(category.id, subcategory?.id, type?.id);
+                const params: any = {
+                    category_id: category.id
+                };
+
+                if (subcategory?.id) params.sub_category_id = subcategory.id;
+                if (type?.id) params.type_id = type.id;
+
+                let filtersByCtgr = await userAPI.getFiltersByCtgr(params);
 
                 if (category.name === 'car') {
                     if (subcategory.name === 'madeInUzb') {
@@ -287,7 +292,7 @@ export const SearchForm: FC<SearchFormPropsType> = (props) => {
                 });
             }
         } catch (e) {
-            dispatch(setErrorMsgAction(e.message));
+            setErrorMsg(e.message);
         }
     };
 
@@ -364,7 +369,6 @@ export const SearchForm: FC<SearchFormPropsType> = (props) => {
                             values={values}
                             name='post_type'
                             options={postTypesList}
-                            categoryName={categoryName}
                             handleSelect={handlePostType}
                         />
                     </Grid>

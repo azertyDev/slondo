@@ -35,11 +35,13 @@ export const SimilarPostsContainer: FC<{ ancmntType: string }> = (props) => {
                 isFetch: true
             });
 
-            const newData = await userAPI.getCards(
-                ITEMS_PER_PAGE,
-                currentPage,
+            const params = {
+                itemsPerPage: ITEMS_PER_PAGE,
+                page: currentPage,
                 type
-            );
+            };
+
+            const newData = await userAPI.getCards(params);
 
             setCardData({
                 ...cardData,

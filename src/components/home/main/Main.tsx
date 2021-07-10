@@ -17,12 +17,9 @@ import {SEOTextComponent} from '@src/components/elements/seo_text_component/SEOT
 import {HomeSidebar} from '@src/components/home/main/home_sidebar/HomeSideBar';
 import {useStyles} from './useStyles';
 
-
 export const Main: FC<{seoTxt: string}> = ({seoTxt}) => {
     const {t} = useTranslation('main');
-
     const trigger = useScrollTrigger();
-
     const classes = useStyles();
     return (
         <main>

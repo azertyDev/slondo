@@ -1,9 +1,6 @@
-import {FC, useEffect, useState} from 'react';
+import {FC, useContext, useEffect, useState} from 'react';
 import {withAuthRedirect} from '@src/hocs/withAuthRedirect';
-import {useDispatch, useSelector} from 'react-redux';
-import {setErrorMsgAction} from '@src/redux/slices/errorSlice';
 import {userAPI} from '@src/api/api';
-import {RootState} from '@src/redux/rootReducer';
 import {useTranslation} from 'next-i18next';
 import {ITEMS_PER_PAGE} from '@src/constants';
 import {CustomPagination} from '@root/src/components/elements/custom_pagination/CustomPagination';
@@ -15,6 +12,7 @@ import {NotificationCard} from "@src/components/cabinet/cabinet_pages/notificati
 import {CustomModal} from "@src/components/elements/custom_modal/CustomModal";
 import {CustomSnackbar} from "@src/components/elements/snackbar/Snackbar";
 import {useStyles} from './useStyles';
+import {ErrorCtx, UserCtx} from "@src/context";
 
 export type initialNotificationType = {
     id: number,
@@ -30,9 +28,10 @@ export type initialNotificationType = {
 }
 
 const Notifications: FC = () => {
-    const dispatch = useDispatch();
     const {t} = useTranslation('cabinet');
-    const userInfo = useSelector((store: RootState) => store.user.info);
+    const {user} = useContext(UserCtx);
+    const {setErrorMsg} = useContext(ErrorCtx);
+
     const {modalOpen: openSnackbar, handleModalOpen: handleOpenSnackbar, handleModalClose: handleCloseSnackbar} = useModal();
 
     const [isFetch, setIsFetch] = useState(false);
@@ -58,7 +57,7 @@ const Notifications: FC = () => {
             setNotifications(data);
             setItemsCount(total);
         } catch (e) {
-            dispatch(setErrorMsgAction(e.message));
+            setErrorMsg(e.message);
         }
     };
 
@@ -66,13 +65,13 @@ const Notifications: FC = () => {
         try {
             setIsFetch(true);
 
-            await userAPI.deleteAllNotification(userInfo.id);
+            await userAPI.deleteAllNotification(user.id);
             const {data} = await userAPI.getAllNotifications();
 
             setNotifications(data);
             setIsFetch(true);
         } catch (e) {
-            dispatch(setErrorMsgAction(e.message));
+            setErrorMsg(e.message);
         }
     };
 

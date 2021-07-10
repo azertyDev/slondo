@@ -1,14 +1,12 @@
-import {FC, useEffect, useState} from 'react';
+import {FC, useContext, useEffect, useState} from 'react';
 import {ITEMS_PER_PAGE} from '@src/constants';
 import {userAPI} from '@src/api/api';
 import {CardData} from '@root/interfaces/CardData';
 import {PostsSlider} from './PostsSlider';
-import {setErrorMsgAction} from '@src/redux/slices/errorSlice';
-import {useDispatch, useSelector} from 'react-redux';
-import {RootState} from '@src/redux/rootReducer';
 import {initCardData} from '@src/common_data/common';
 import {useTranslation} from 'next-i18next';
-
+import {AuthCtx} from "@src/context/AuthCtx";
+import {ErrorCtx} from "@src/context";
 
 export const initCards = Array.from({length: ITEMS_PER_PAGE}).map(() => initCardData);
 
@@ -22,9 +20,9 @@ const initData: CardData = {
 };
 
 export const PostsSliderContainer: FC = () => {
-    const dispatch = useDispatch();
-    const {isAuth} = useSelector((store: RootState) => store.user);
     const {t} = useTranslation('main');
+    const {auth: {isAuth}} = useContext(AuthCtx);
+    const {setErrorMsg} = useContext(ErrorCtx);
 
     const [currentPage, setCurrentPage] = useState(1);
     const [popularPosts, setPopularPosts] = useState(initData);
@@ -51,7 +49,7 @@ export const PostsSliderContainer: FC = () => {
                 }
             });
         } catch (e) {
-            dispatch(setErrorMsgAction(e.message));
+            setErrorMsg(e.message);
             setPopularPosts({
                 ...popularPosts,
                 error: e.message

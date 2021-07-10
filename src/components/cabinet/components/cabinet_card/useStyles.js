@@ -61,9 +61,7 @@ export const useStyles = makeStyles((theme) => ({
                     fontSize: theme.typography.caption.fontSize,
                     color: theme.palette.common.tab
                 },
-                '&.settings': {},
-                '&.delete_favorite': {},
-                '&.notifications, &.advertise': {
+                '&.icons': {
                     marginRight: 10
                 }
             }

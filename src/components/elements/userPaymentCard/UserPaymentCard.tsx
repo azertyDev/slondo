@@ -1,27 +1,24 @@
-import {FC, useEffect, useState} from 'react';
+import {FC, useContext, useEffect, useState} from 'react';
 import {Form, FormikProvider, useFormik} from 'formik';
 import {Card, Grid, Typography} from '@material-ui/core';
 import {FormikField} from '@src/components/elements/formik_field/FormikField';
 import {CustomButton} from '@src/components/elements/custom_button/CustomButton';
 import {ConfirmModal} from '@src/components/elements/confirm_modal/Confirm_modal';
 import {useTranslation} from 'react-i18next';
-import {useDispatch, useSelector} from 'react-redux';
-import {RootState} from '@src/redux/rootReducer';
 import {useModal} from '@src/hooks/useModal';
 import {useHandlers} from '@src/hooks/useHandlers';
 import {phonePrepare} from '@src/helpers';
 import {myUzCardAPI} from '@src/api/api';
-import {setErrorMsgAction} from '@src/redux/slices/errorSlice';
 import {useUserCard} from '@src/hooks/useUserCard';
 import {CustomCircularProgress} from '@src/components/elements/custom_circular_progress/CustomCircularProgress';
+import {ErrorCtx, UserCtx} from "@src/context";
 import {useStyles} from './useStyles';
 
 export const UserPaymentCard: FC = () => {
     const {t} = useTranslation('cabinet');
 
-    const dispatch = useDispatch();
-
-    const {user} = useSelector((store: RootState) => store);
+    const {user} = useContext(UserCtx);
+    const {setErrorMsg} = useContext(ErrorCtx);
 
     const {
         userCard,
@@ -70,7 +67,7 @@ export const UserPaymentCard: FC = () => {
         try {
             const phoneLastNine = phonePrepare(phone).slice(3);
             const cardData = JSON.stringify({
-                userId: user.info.id,
+                userId: user.id,
                 expireDate,
                 cardNumber,
                 phoneLastNine
@@ -85,7 +82,7 @@ export const UserPaymentCard: FC = () => {
             setIsFetch(false);
         } catch (e) {
             setIsFetch(false);
-            dispatch(setErrorMsgAction(e.message));
+            setErrorMsg(e.message);
         }
     };
 
@@ -107,7 +104,7 @@ export const UserPaymentCard: FC = () => {
             setIsSmsConfirm(false);
         } catch (e) {
             setIsFetch(false);
-            dispatch(setErrorMsgAction(e.message));
+            setErrorMsg(e.message);
         }
     };
 
@@ -124,7 +121,7 @@ export const UserPaymentCard: FC = () => {
         } catch (e) {
             setIsFetch(false);
             handleModalClose();
-            dispatch(setErrorMsgAction(e.message));
+            setErrorMsg(e.message);
         }
     };
 

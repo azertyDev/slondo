@@ -1,13 +1,12 @@
-import {FC, useState} from 'react';
+import {FC, useContext, useState} from 'react';
 import {WithT} from 'i18next';
 import {Hidden, Typography} from '@material-ui/core';
 import {numberPrettier} from '@src/helpers';
 import {AuctionContent} from '@src/components/post/show_post/owner_auction_info/auction_content/AuctionContent';
 import {OwnerContent} from '@src/components/post/show_post/owner_auction_info/owner_content/OwnerContent';
 import {userAPI} from '@src/api/api';
-import {setErrorMsgAction} from '@src/redux/slices/errorSlice';
-import {useDispatch} from 'react-redux';
 import {useStyles} from './useStyles';
+import {ErrorCtx} from "@src/context";
 
 type OwnerAuctionInfoPropsType = {
     data: any
@@ -21,7 +20,7 @@ export const OwnerAuctionInfo: FC<OwnerAuctionInfoPropsType> = (props) => {
         setFetchedPostData
     } = props;
 
-    const dispatch = useDispatch();
+    const {setErrorMsg} = useContext(ErrorCtx);
     const isAuction = data.ads_type.mark === 'auc' || data.ads_type.mark === 'exauc';
 
     const initAuthorPhones = {
@@ -38,7 +37,7 @@ export const OwnerAuctionInfo: FC<OwnerAuctionInfoPropsType> = (props) => {
         try {
             await userAPI.follow(userId);
         } catch (e) {
-            dispatch(setErrorMsgAction(e));
+            setErrorMsg(e);
         }
     };
 
@@ -55,7 +54,7 @@ export const OwnerAuctionInfo: FC<OwnerAuctionInfoPropsType> = (props) => {
         } catch ({response: {data}}) {
             setIsFetch(false);
             if (data.message !== 'forbidden:') {
-                dispatch(setErrorMsgAction(data.message));
+                setErrorMsg(data.message);
             } else {
                 setAuthorPhones({
                     ...initAuthorPhones,

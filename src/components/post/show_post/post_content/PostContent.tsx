@@ -1,4 +1,4 @@
-import {FC, MutableRefObject, useEffect, useRef, useState} from 'react';
+import {FC, MutableRefObject, useContext, useEffect, useRef, useState} from 'react';
 import {WithT} from 'i18next';
 import {
     Container,
@@ -24,12 +24,10 @@ import {RenewalIcon} from '@src/components/elements/icons';
 import {months} from '@src/common_data/common';
 import {AuctionContent} from '@src/components/post/show_post/owner_auction_info/auction_content/AuctionContent';
 import {userAPI} from '@src/api/api';
-import {setErrorMsgAction} from '@root/src/redux/slices/errorSlice';
-import {useDispatch} from 'react-redux';
 import {booleanFields} from '@src/common_data/fields_keys';
 import {useStyles} from './useStyles';
 import {ResponsiveModal} from '@src/components/elements/responsive_modal/ResponsiveModal';
-
+import {ErrorCtx} from "@src/context";
 
 type PostContentTypes = {
     data,
@@ -50,7 +48,7 @@ export const PostContent: FC<PostContentTypes> = (props) => {
         setFetchedPostData
     } = props;
 
-    const dispatch = useDispatch();
+    const {setErrorMsg} = useContext(ErrorCtx);
     const isMdDown = useMediaQuery(useTheme().breakpoints.down('md'));
     const isExAuc = data.ads_type.mark === 'exauc';
     const isAuction = data.ads_type.mark === 'auc' || isExAuc;
@@ -85,7 +83,7 @@ export const PostContent: FC<PostContentTypes> = (props) => {
             setFavCount(favorite ? favCount - 1 : favCount + 1);
             userAPI.favoriteAds(data.id);
         } catch (e) {
-            dispatch(setErrorMsgAction(e.message));
+            setErrorMsg(e.message);
         }
     };
 

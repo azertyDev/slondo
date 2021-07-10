@@ -1,9 +1,7 @@
-import {FC, useEffect, useState} from 'react';
+import {FC, useContext, useEffect, useState} from 'react';
+import {userAPI} from '@src/api/api';
 import {TabsContent} from '@src/components/cabinet/cabinet_pages/TabsContent';
 import {withAuthRedirect} from '@root/src/hocs/withAuthRedirect';
-import {userAPI} from '@src/api/api';
-import {useDispatch} from 'react-redux';
-import {setErrorMsgAction} from '@src/redux/slices/errorSlice';
 import {Box, Grid, IconButton, List, ListItem, ListItemText, Typography} from '@material-ui/core';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import {InitialCabinetCardState, TabsDataType} from '@root/interfaces/Cabinet';
@@ -13,12 +11,12 @@ import {BannedPosts} from '@src/components/cabinet/cabinet_pages/banned_posts/Ba
 import {CustomButton} from '@src/components/elements/custom_button/CustomButton';
 import {useModal} from '@src/hooks/useModal';
 import {ITEMS_PER_PAGE} from '@src/constants';
+import {ErrorCtx} from "@src/context";
 import {useStyles} from './useStyles';
 
 const BannedPostsContainer: FC = () => {
-    const dispatch = useDispatch();
-    const {t} = useTranslation(['cabinet', 'notifications', 'categories', 'common', 'locations']);
-    const classes = useStyles();
+    const {t} = useTranslation('cabinet');
+    const {setErrorMsg} = useContext(ErrorCtx);
 
     const initialBannedPostsState: InitialCabinetCardState = {
         total: 0,
@@ -32,6 +30,7 @@ const BannedPostsContainer: FC = () => {
     const [tabIndex, setTabIndex] = useState(0);
     const [modalContentIndex, setModalContentIndex] = useState(1);
     const [message, setMessage] = useState('');
+
     const {modalOpen: bannedPostModal, handleModalOpen: openBannedPostModal, handleModalClose: closeBannedPostModal} = useModal();
     const {modalOpen: openSnackbar, handleModalOpen: handleOpenSnackbar, handleModalClose: handleCloseSnackbar} = useModal();
 
@@ -60,7 +59,7 @@ const BannedPostsContainer: FC = () => {
             setIsFetch(false);
         } catch (e) {
             setIsFetch(false);
-            dispatch(setErrorMsgAction(e.message));
+            setErrorMsg(e.message);
         }
     };
     const handleDelete = async () => {
@@ -76,9 +75,11 @@ const BannedPostsContainer: FC = () => {
                 await fetchBannedPostsData('auc');
             }
         } catch (e) {
-            dispatch(setErrorMsgAction(e.message));
+            setErrorMsg(e.message);
         }
     };
+
+    const classes = useStyles();
     const getModalContent = () => {
         switch (modalContentIndex) {
             case 1:
@@ -120,19 +121,19 @@ const BannedPostsContainer: FC = () => {
     const ModalContent = () => (
         <>
             {modalContentIndex === 1
-             ? <Typography className="title" variant="h6">
-                 Объявление № {selectedPostId}
-             </Typography>
-             : modalContentIndex === 5
-               ? null
-               : <IconButton
-                   className='prev-btn'
-                   aria-label="back"
-                   size="medium"
-                   onClick={handlePrevMenu}
-               >
-                   <ArrowBackIcon fontSize="inherit"/>
-               </IconButton>
+                ? <Typography className="title" variant="h6">
+                    Объявление № {selectedPostId}
+                </Typography>
+                : modalContentIndex === 5
+                    ? null
+                    : <IconButton
+                        className='prev-btn'
+                        aria-label="back"
+                        size="medium"
+                        onClick={handlePrevMenu}
+                    >
+                        <ArrowBackIcon fontSize="inherit"/>
+                    </IconButton>
             }
             {getModalContent()}
         </>
@@ -175,36 +176,32 @@ const BannedPostsContainer: FC = () => {
             title: t('posts'),
             itemsPerPage: ITEMS_PER_PAGE,
             handleFetchByTab: () => '',
-            component: (
-                <BannedPosts
-                    t={t}
-                    bannedPostCards={bannedPostCards}
-                    openModal={bannedPostModal}
-                    openSnackbar={openSnackbar}
-                    message={message}
-                    ModalContent={ModalContent}
-                    handleClose={handleModalClose}
-                    handleCloseSnackbar={handleCloseSnackbar}
-                />
-            )
+            component: <BannedPosts
+                t={t}
+                bannedPostCards={bannedPostCards}
+                openModal={bannedPostModal}
+                openSnackbar={openSnackbar}
+                message={message}
+                ModalContent={ModalContent}
+                handleClose={handleModalClose}
+                handleCloseSnackbar={handleCloseSnackbar}
+            />
         },
         {
             id: 1,
             title: t('auctions'),
             itemsPerPage: ITEMS_PER_PAGE,
             handleFetchByTab: () => '',
-            component: (
-                <BannedPosts
-                    t={t}
-                    bannedPostCards={bannedAucCards}
-                    openModal={bannedPostModal}
-                    openSnackbar={openSnackbar}
-                    message={message}
-                    ModalContent={ModalContent}
-                    handleClose={handleModalClose}
-                    handleCloseSnackbar={handleCloseSnackbar}
-                />
-            )
+            component: <BannedPosts
+                t={t}
+                bannedPostCards={bannedAucCards}
+                openModal={bannedPostModal}
+                openSnackbar={openSnackbar}
+                message={message}
+                ModalContent={ModalContent}
+                handleClose={handleModalClose}
+                handleCloseSnackbar={handleCloseSnackbar}
+            />
         }
     ];
 

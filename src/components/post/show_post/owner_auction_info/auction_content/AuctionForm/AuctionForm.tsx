@@ -1,4 +1,4 @@
-import {FC, useState} from 'react';
+import {FC, useContext, useState} from 'react';
 import {WithT} from 'i18next';
 import Grid from '@material-ui/core/Grid';
 import {FormikProvider, useFormik} from 'formik';
@@ -9,9 +9,8 @@ import {getAuctionSchema} from '@root/validation_schemas/auctionSchema';
 import {numberRegEx, whiteSpacesRegEx} from '@src/common_data/reg_exs';
 import {FormikField} from '@src/components/elements/formik_field/FormikField';
 import {userAPI} from '@src/api/api';
-import {setErrorMsgAction} from '@src/redux/slices/errorSlice';
-import {useDispatch} from 'react-redux';
 import {useStyles} from './useStyles';
+import {ErrorCtx} from "@src/context";
 
 type AuctionFromPropsType = {
     lastBet,
@@ -27,7 +26,7 @@ export const AuctionForm: FC<AuctionFromPropsType> = (props) => {
         handleRefresh
     } = props;
 
-    const dispatch = useDispatch();
+    const {setErrorMsg} = useContext(ErrorCtx);
     const [isFetch, setIsFetch] = useState(false);
 
     const isMdDown = useMediaQuery(useTheme().breakpoints.down('md'));
@@ -39,7 +38,7 @@ export const AuctionForm: FC<AuctionFromPropsType> = (props) => {
             setIsFetch(false);
         } catch ({response}) {
             setIsFetch(false);
-            dispatch(setErrorMsgAction(t(`errors:${response.data.message}`)));
+            setErrorMsg(response.data.message);
         }
     };
 

@@ -1,11 +1,10 @@
-import {FC} from 'react';
+import {FC, useContext} from 'react';
 import {Box, Hidden, IconButton, Typography, useMediaQuery, useTheme} from '@material-ui/core';
 import {KeyboardBackspace, FavoriteBorder} from '@material-ui/icons';
 import {CustomSlider} from '@src/components/elements/custom_slider/CustomSlider';
 import {SlidersRefType} from '../PostContent';
 import CustomTooltip from '@src/components/elements/custom_tooltip/CustomTooltip';
-import {useSelector} from 'react-redux';
-import {RootState} from '@src/redux/rootReducer';
+import {AuthCtx} from "@src/context/AuthCtx";
 import {useStyles} from './useStyles';
 
 
@@ -41,7 +40,7 @@ export const SyncSliders: FC<SyncSlidersProps> = (props) => {
 
     const imgsCount = !!imgs.length ? imgs.length : 1;
     const isMdDown = useMediaQuery(useTheme().breakpoints.down('md'));
-    const isAuth = useSelector((store: RootState) => store.user.isAuth);
+    const {isAuth} = useContext(AuthCtx).auth;
 
     const copyUrl = () => {
         const copiedUrl = window.location.href;

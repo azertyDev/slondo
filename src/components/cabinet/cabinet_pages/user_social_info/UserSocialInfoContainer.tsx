@@ -1,15 +1,13 @@
-import {FC, useEffect, useState} from 'react';
+import {FC, useContext, useEffect, useState} from 'react';
 import {TabsContent} from '@src/components/cabinet/cabinet_pages/TabsContent';
 import {UserSubscribers} from '@src/components/cabinet/cabinet_pages/user_social_info/user_subscribers/UserSubscribers';
 import {UserSubscriptions} from '@src/components/cabinet/cabinet_pages/user_social_info/user_subscribes/UserSubscriptions';
 import {userAPI} from '@src/api/api';
-import {useDispatch} from 'react-redux';
-import {setErrorMsgAction} from '@src/redux/slices/errorSlice';
 import {TabsDataType} from '@root/interfaces/Cabinet';
 import {SUBS_PER_PAGE} from '@src/constants';
+import {ErrorCtx} from "@src/context";
 
 export const UserSocialInfoContainer: FC = () => {
-    const dispatch = useDispatch();
     const initialState = {
         isFetch: false,
         subscribers: {
@@ -21,6 +19,8 @@ export const UserSocialInfoContainer: FC = () => {
             data: []
         }
     };
+
+    const {setErrorMsg} = useContext(ErrorCtx);
 
     const [subs, setSubs] = useState(initialState);
     const [tabIndex, setTabIndex] = useState(0);
@@ -49,7 +49,7 @@ export const UserSocialInfoContainer: FC = () => {
 
             setSubs({...subs});
         } catch (e) {
-            dispatch(setErrorMsgAction(e.message));
+            setErrorMsg(e.message);
         }
     };
 
@@ -57,7 +57,7 @@ export const UserSocialInfoContainer: FC = () => {
         try {
             await userAPI.follow(userId);
         } catch (e) {
-            dispatch(setErrorMsgAction(e.message));
+            setErrorMsg(e.message);
         }
     };
 

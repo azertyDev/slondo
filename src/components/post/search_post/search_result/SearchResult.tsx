@@ -1,14 +1,13 @@
-import {FC, useEffect, useState} from 'react';
+import {FC, useContext, useEffect, useState} from 'react';
 import {FILTERS_PER_PAGE} from '@src/constants';
 import {CardView} from '@src/components/elements/card/CardView';
 import {Box, Typography} from '@material-ui/core';
 import {WithT} from 'i18next';
 import {cookies} from '@src/helpers';
 import {userAPI} from '@src/api/api';
-import {setErrorMsgAction} from '@src/redux/slices/errorSlice';
-import {useDispatch} from 'react-redux';
 import {CustomPagination} from '@src/components/elements/custom_pagination/CustomPagination';
 import {useStyles} from './useStyles';
+import {ErrorCtx} from "@src/context";
 
 type SearchResultPropsType = {
     searchTxtFromUrl: string,
@@ -24,7 +23,7 @@ export const SearchResult: FC<SearchResultPropsType> = (props) => {
         urlParams
     } = props;
 
-    const dispatch = useDispatch();
+    const {setErrorMsg} = useContext(ErrorCtx);
 
     const [ctgr, subCtgr, typeCtgr] = categories;
 
@@ -74,7 +73,7 @@ export const SearchResult: FC<SearchResultPropsType> = (props) => {
                 setIsNotFound(true);
             }
         } catch (e) {
-            dispatch(setErrorMsgAction(e.message));
+            setErrorMsg(e.message);
         }
     };
 

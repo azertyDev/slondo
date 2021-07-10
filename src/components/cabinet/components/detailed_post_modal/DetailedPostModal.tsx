@@ -1,4 +1,4 @@
-import {FC} from 'react';
+import {FC, useContext} from 'react';
 import {WithT} from "i18next";
 import {CardDataType} from '@root/interfaces/CardData';
 import {ListCard} from '@src/components/elements/card/list_card/ListCard';
@@ -19,9 +19,8 @@ import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import {UserInfoWithAvatar} from '@src/components/elements/user_info_with_avatar/UserInfoWithAvatar';
 import {BetsList} from '@src/components/elements/bets_list/BetsList';
 import {numberPrettier} from '@src/helpers';
-import {useSelector} from "react-redux";
-import {RootState} from "@src/redux/rootReducer";
 import {useStyles} from './useStyles';
+import {UserCtx} from "@src/context/UserCtx";
 
 type DetailedPostViewPropsType = {
     isFetch: boolean,
@@ -32,10 +31,8 @@ type DetailedPostViewPropsType = {
     bets,
     setFetchedBetsData,
     phone: string,
-    handleNotificationsOpen: (post: CardDataType) => () => void,
     fetchUserPhone: () => void,
     handleOffersOpen: () => void,
-    handleSettingsOpen: () => void,
     handleReject: () => void,
     handleAccept: () => void,
     handleCloseDetailModal: () => void
@@ -52,8 +49,6 @@ export const DetailedPostModal: FC<DetailedPostViewPropsType> = (props) => {
         betsCount,
         isBetsFetch,
         setFetchedBetsData,
-        handleSettingsOpen,
-        handleNotificationsOpen,
         handleCloseDetailModal,
         handleOffersOpen,
         fetchUserPhone,
@@ -72,14 +67,14 @@ export const DetailedPostModal: FC<DetailedPostViewPropsType> = (props) => {
         safe_deal
     } = post;
 
-    const userInfo = useSelector((store: RootState) => store.user.info);
+    const {user} = useContext(UserCtx);
 
     const auctionId = auction?.id;
     const offer = auction?.offer;
     const offerUser = offer?.user;
     const winner = auction?.winner;
-    const isUserWinner = winner?.id === userInfo.id;
-    const isUserCreator = author?.id === userInfo.id;
+    const isUserWinner = winner?.id === user.id;
+    const isUserCreator = author?.id === user.id;
     const hasOffer = offerUser && status === 'public';
     const isAuction = ads_type === 'auc' || ads_type === 'exauc';
     const inactive = status === 'archive' || status === 'history';
@@ -173,34 +168,6 @@ export const DetailedPostModal: FC<DetailedPostViewPropsType> = (props) => {
                                 </Paper>
                             </Grid>
                         )}
-                        <Grid item xs={12} md={6}>
-                            <CustomButton
-                                onClick={handleNotificationsOpen(post)}
-                                className={`${classes.btn} notification`}
-                                disabled={!post.observer.number_of_notifications}
-                            >
-                                <Typography
-                                    noWrap
-                                    color="initial"
-                                    variant="subtitle1"
-                                >
-                                    Уведомления / История
-                                </Typography>
-                                <ChevronRightIcon color='action'/>
-                            </CustomButton>
-                            {!inactive && isUserCreator && (
-                                <CustomButton
-                                    onClick={handleSettingsOpen}
-                                    disabled={status !== 'public'}
-                                    className={`${classes.btn} settings`}
-                                >
-                                    <Typography variant='subtitle1'>
-                                        {t('settings')}
-                                    </Typography>
-                                    <ChevronRightIcon color='action'/>
-                                </CustomButton>
-                            )}
-                        </Grid>
                         <Grid item xs={12} md={6}>
                             <Paper className='paper-block'>
                                 <Box className='location' width={1}>

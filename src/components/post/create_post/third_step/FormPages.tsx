@@ -1,15 +1,13 @@
-import {FC, useEffect, useState} from 'react';
+import {FC, useContext, useEffect, useState} from 'react';
 import {useRouter} from 'next/router';
 import {Typography} from '@material-ui/core';
 import {useTranslation} from 'next-i18next';
-import {useDispatch, useSelector} from 'react-redux';
 import {userAPI} from '@src/api/api';
 import {StepsProgress} from '../steps_progress/StepsProgress';
 import {postTypes} from '@src/common_data/post_types';
 import {MainLayout} from '@src/components/main_layout/MainLayout';
 import {AppearanceForm} from './appearance_form/AppearanceForm';
 import {CommonForm} from './common_form/CommonForm';
-import {setErrorMsgAction} from '@root/src/redux/slices/errorSlice';
 import {
     normalizeFiltersByCategory,
     getCategoriesByParams,
@@ -19,20 +17,13 @@ import {
 import {CustomButton} from '@src/components/elements/custom_button/CustomButton';
 import {SuccessPage} from '@src/components/post/create_post/third_step/success_page/SuccessPage';
 import {ParamsFormContainer} from './params_form/ParamsFormContainer';
-import {RootState} from '@src/redux/rootReducer';
+import {ErrorCtx} from "@src/context";
 import {useStyles} from './useStyles';
 
 
-export type DataForCrtPostType = {
-    isFetch: boolean,
-    data: any
-};
-
 export const FormPages: FC = () => {
-    const dispatch = useDispatch();
-
     const {t} = useTranslation('post');
-    const {phone} = useSelector((store: RootState) => store.user.info);
+    const {setErrorMsg} = useContext(ErrorCtx);
 
     const {asPath, query, push} = useRouter();
     const [postTypeName, categoryName, subcategoryName, typeName] = query.slug as string[];
@@ -83,12 +74,16 @@ export const FormPages: FC = () => {
 
     const fetchFilters = async () => {
         try {
-            const subCtgrId = subcategory?.id ?? '';
-            const typeId = type?.id ?? '';
+            const subCtgrId = subcategory?.id;
+            const typeId = type?.id;
+            const params: any = {category_id: category.id};
+
+            if (subCtgrId) params.sub_category_id = subCtgrId;
+            if (typeId) params.type_id = typeId;
 
             setIsFetch(true);
 
-            let fetchedData = await userAPI.getFiltersByCtgr(category.id, subCtgrId, typeId);
+            let fetchedData = await userAPI.getFiltersByCtgr(params);
 
             if (categoryName === 'car') {
                 if (subcategoryName === 'made_uzbekistan') {
@@ -104,18 +99,18 @@ export const FormPages: FC = () => {
             setIsFetch(false);
             setFilters(normalizeFiltersByCategory(fetchedData, type));
         } catch (e) {
-            dispatch(setErrorMsgAction(e.message));
+            setErrorMsg(e.message);
         }
     };
 
     const handleBack = () => {
         isPreview
-        ? setIsPreview(false)
-        : push(
+            ? setIsPreview(false)
+            : push(
             `/create/type/${postTypeName}/${categoryName}${typeName ? `/${subcategoryName}` : ''}`,
             undefined,
             {shallow: true}
-        );
+            );
     };
 
     const handleSubmit = (values) => {
@@ -159,7 +154,7 @@ export const FormPages: FC = () => {
             setIsSuccess(true);
         } catch (e) {
             setIsFetch(false);
-            dispatch(setErrorMsgAction(e.message));
+            setErrorMsg(e.message);
         }
     };
 
@@ -177,59 +172,58 @@ export const FormPages: FC = () => {
     return (
         <MainLayout>
             {isSuccess
-             ? <SuccessPage/>
-             : <>
-                 <StepsProgress
-                     title={title}
-                     handleBack={handleBack}
-                     activeStep={isPreview ? 3 : 2}
-                 />
-                 <div className={classes.root}>
-                     <ParamsFormContainer
-                         type={type}
-                         filters={filtersData}
-                         isPreview={isPreview}
-                         category={category}
-                         subcategory={subcategory}
-                         currentFormIndex={currentFormIndex}
-                         handleSubmit={handleSubmit}
-                         handleFormOpen={handleFormOpen}
-                         handleNextFormOpen={handleNextFormOpen}
-                     />
-                     <div>
-                         <AppearanceForm
-                             categoryName={categoryName}
-                             colors={colors || color}
-                             isPreview={isPreview}
-                             currentFormIndex={currentFormIndex}
-                             handleSubmit={handleSubmit}
-                             handleFormOpen={handleFormOpen}
-                             handleNextFormOpen={handleNextFormOpen}
-                         />
-                     </div>
-                     <div>
-                         <CommonForm
-                             ownerPhone={phone}
-                             asPath={asPath}
-                             postType={postType}
-                             isPreview={isPreview}
-                             setIsPreview={setIsPreview}
-                             categoryName={categoryName}
-                             handleSubmit={handleSubmit}
-                             currentFormIndex={currentFormIndex}
-                         />
-                     </div>
-                     {isPreview && (
-                         <div className='publish-button-wrapper'>
-                             <CustomButton disabled={isFetch} onClick={toPublish}>
-                                 <Typography variant='subtitle1'>
-                                     {t('publish')}
-                                 </Typography>
-                             </CustomButton>
-                         </div>
-                     )}
-                 </div>
-             </>}
+                ? <SuccessPage/>
+                : <>
+                    <StepsProgress
+                        title={title}
+                        handleBack={handleBack}
+                        activeStep={isPreview ? 3 : 2}
+                    />
+                    <div className={classes.root}>
+                        <ParamsFormContainer
+                            type={type}
+                            filters={filtersData}
+                            isPreview={isPreview}
+                            category={category}
+                            subcategory={subcategory}
+                            currentFormIndex={currentFormIndex}
+                            handleSubmit={handleSubmit}
+                            handleFormOpen={handleFormOpen}
+                            handleNextFormOpen={handleNextFormOpen}
+                        />
+                        <div>
+                            <AppearanceForm
+                                categoryName={categoryName}
+                                colors={colors || color}
+                                isPreview={isPreview}
+                                currentFormIndex={currentFormIndex}
+                                handleSubmit={handleSubmit}
+                                handleFormOpen={handleFormOpen}
+                                handleNextFormOpen={handleNextFormOpen}
+                            />
+                        </div>
+                        <div>
+                            <CommonForm
+                                asPath={asPath}
+                                postType={postType}
+                                isPreview={isPreview}
+                                setIsPreview={setIsPreview}
+                                categoryName={categoryName}
+                                handleSubmit={handleSubmit}
+                                currentFormIndex={currentFormIndex}
+                            />
+                        </div>
+                        {isPreview && (
+                            <div className='publish-button-wrapper'>
+                                <CustomButton disabled={isFetch} onClick={toPublish}>
+                                    <Typography variant='subtitle1'>
+                                        {t('publish')}
+                                    </Typography>
+                                </CustomButton>
+                            </div>
+                        )}
+                    </div>
+                </>}
         </MainLayout>
     );
 };

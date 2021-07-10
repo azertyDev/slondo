@@ -12,10 +12,9 @@ import {Location} from '@src/components/elements/location/Location';
 import {Localization} from '@src/components/header/top/localization/Localization';
 import {HeaderSearchForm} from '@src/components/header/bottom/header_search_form/HeaderSearchForm';
 import {cookieOpts, cookies} from '@src/helpers';
-import {useStyles} from './useStyles';
 import {SidebarMenu} from '@src/components/cabinet/cabinet_sidebar/sidebar_menu/SidebarMenu';
 import {useRouter} from 'next/router';
-
+import {useStyles} from './useStyles';
 
 const Bottom = (props) => {
     const {isScrollBreak, handleOpenModal, isAuth, t, avatar} = props;
@@ -221,7 +220,7 @@ const Bottom = (props) => {
                     horizontal: 'left'
                 }}
             >
-                <SidebarMenu/>
+                <SidebarMenu clearAnchor={handleClose}/>
             </Popover>
         </div>
     );

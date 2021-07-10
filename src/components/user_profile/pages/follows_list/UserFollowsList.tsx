@@ -1,17 +1,16 @@
-import {FC, useState} from 'react';
+import {FC, useContext, useState} from 'react';
 import {WithT} from 'i18next';
 import {SUBS_PER_PAGE} from '@src/constants';
 import {TabsDataType} from '@root/interfaces/Cabinet';
 import {ProfileTabsContent} from '@src/components/user_profile/tabs/ProfileTabsContent';
-import {useDispatch} from 'react-redux';
 import {userAPI} from '@src/api/api';
-import {setErrorMsgAction} from '@src/redux/slices/errorSlice';
 import {useRouter} from 'next/router';
 import {SubscriptionItem} from '@src/components/cabinet/cabinet_pages/user_social_info/subscription_item/SubscriptionItem';
 import {CustomCircularProgress} from '@src/components/elements/custom_circular_progress/CustomCircularProgress';
+import {ErrorCtx} from "@src/context";
 
 export const UserFollowsList: FC<WithT> = ({t}) => {
-    const dispatch = useDispatch();
+    const {setErrorMsg} = useContext(ErrorCtx);
     const {query: {user_id}} = useRouter();
     const initialSubs = {
         total: 0,
@@ -47,7 +46,7 @@ export const UserFollowsList: FC<WithT> = ({t}) => {
 
             setIsFetch(false);
         } catch (e) {
-            dispatch(setErrorMsgAction(e.message));
+            setErrorMsg(e.message);
             setIsFetch(false);
         }
     };
@@ -56,7 +55,7 @@ export const UserFollowsList: FC<WithT> = ({t}) => {
         try {
             await userAPI.follow(userId);
         } catch (e) {
-            dispatch(setErrorMsgAction(e.message));
+            setErrorMsg(e.message);
         }
     };
 
