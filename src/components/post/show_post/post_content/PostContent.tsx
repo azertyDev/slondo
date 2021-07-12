@@ -96,14 +96,14 @@ export const PostContent: FC<PostContentTypes> = (props) => {
             const params = (
                 <Typography variant="subtitle1" className="value">
                     {model[key]
-                        .map((param) => param.name)
+                        .map((param) => t(`filters:${data.category.name}.${param.name}.name`))
                         .join(', ')}
                 </Typography>
             );
             items.push(
                 <li key={i} className="params-list">
                     <Typography variant="subtitle1" className="key">
-                        {t(`filters:${key}`)}
+                        {t(`filters:${data.category.name}.${key}.name`)}
                     </Typography>
                     {params}
                 </li>
@@ -112,7 +112,7 @@ export const PostContent: FC<PostContentTypes> = (props) => {
             items.push(
                 <li key={key}>
                     <Typography variant="subtitle1" className="key">
-                        {t(`filters:${key}`)}
+                        {t(`filters:${data.category.name}.${key}.name`)}
                     </Typography>
                     <Typography variant="subtitle1" className="value">
                         {t('common:yes')}
@@ -123,7 +123,7 @@ export const PostContent: FC<PostContentTypes> = (props) => {
             items.push(
                 <li key={key}>
                     <Typography variant="subtitle1" className="key">
-                        {t(`filters:${key}`)}
+                        {t(`filters:${data.category.name}.${key}.name`)}
                     </Typography>
                     {model[key]?.hex_color_code && (
                         <span
@@ -139,8 +139,8 @@ export const PostContent: FC<PostContentTypes> = (props) => {
                     )}
                     <Typography variant="subtitle1" className="value">
                         {typeof model[key] === 'string' || typeof model[key] === 'number'
-                         ? model[key]
-                         : model[key]?.name}
+                            ? model[key]
+                            : t(`filters:${data.category.name}.${model[key]?.name}.name`)}
                     </Typography>
                 </li>
             );
@@ -187,7 +187,7 @@ export const PostContent: FC<PostContentTypes> = (props) => {
                     </div>
                     {!data.condition.name && (
                         <div className="condition">
-                            <Typography variant="h6">Новое</Typography>
+                            <Typography variant="h6">{t(`post:${data.model?.condition?.name}`)}</Typography>
                         </div>
                     )}
                 </div>
@@ -221,7 +221,7 @@ export const PostContent: FC<PostContentTypes> = (props) => {
                                 {numberPrettier(data.price) + ' ' + t(`common:${data.currency.name}`)}
                                 {!data.condition.name && (
                                     <div className="condition">
-                                        <Typography variant="h6">Новое</Typography>
+                                        <Typography variant="h6">{t(`post:${data.model?.condition?.name}`)}</Typography>
                                     </div>
                                 )}
                             </Typography>

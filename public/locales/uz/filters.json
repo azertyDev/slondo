@@ -1,6 +1,6 @@
 {
   "car": {
-    "body_type": {
+    "body": {
       "name": "Kuzov turi"
     },
     "position": {
@@ -6446,5 +6446,5 @@
   "gray": "Kulrang",
   "pink": "Pushti",
   "multi-color": "Rang-barang",
-  "archive": "Arxiv"
+  "archive": "Arxiv",
 }

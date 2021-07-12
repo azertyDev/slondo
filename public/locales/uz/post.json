@@ -3,6 +3,8 @@
   "number_not_available": "Hozir raqam mavjud emas",
   "show_phone": "Raqamni ko'rsatish",
   "category": "Toifa",
+  "new": "Yangi",
+  "used": "Ishlatilgan",
   "searchCategory": "Toifani qidirish",
   "selectCategory": "Toifani tanlang",
   "howToCreatePost": "E'lon yaratish",

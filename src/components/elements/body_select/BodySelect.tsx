@@ -28,7 +28,7 @@ export const BodySelect: FC<BodyTypesProps> = (props) => {
         <div className={classes.root}>
             <Typography variant='subtitle1' className='title'>
                 <strong>
-                    {t('filters:car.body_type.name')}
+                    {t('car.body.name')}
                     {!disableRequire && <span className='error-text'>*&nbsp;</span>}
                 </strong>
                 {errorMsg && (
