@@ -4,7 +4,7 @@ import {CardDataType} from '@root/interfaces/CardData';
 import {AuctionsDataTypes} from '@root/interfaces/Auctions';
 import {UserInfo} from '@root/interfaces/Auth';
 import {cookies} from '@src/helpers';
-import {LocationsType} from "@src/hooks/useLocations";
+import {LocationsType} from "@root/interfaces/Locations";
 
 const production = 'https://backend.slondo.uz/api/';
 const uztelecom = 'https://backend.testb.uz/api/';
