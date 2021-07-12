@@ -1,5 +1,4 @@
-import {FC} from 'react';
-import {unstable_batchedUpdates} from "react-dom";
+import {FC, useContext} from 'react';
 import {ResponsiveModal} from '@src/components/elements/responsive_modal/ResponsiveModal';
 import {Box, Divider, Typography} from '@material-ui/core';
 import {UserInfoWithAvatar} from '@src/components/elements/user_info_with_avatar/UserInfoWithAvatar';
@@ -11,8 +10,7 @@ import {userAPI} from '@src/api/api';
 import {Rating} from '@src/components/elements/rating/Rating';
 import {useTranslation} from 'next-i18next';
 import {useStyles} from './useStyles';
-import {useDispatch} from "react-redux";
-import {setErrorMsgAction} from "@src/redux/slices/errorSlice";
+import {ErrorCtx} from "@src/context";
 
 type RatingModalPropsType = {
     user,
@@ -28,7 +26,7 @@ export const RatingModal: FC<RatingModalPropsType> = (props) => {
     } = props;
 
     const txtLimit = 5000;
-    const dispatch = useDispatch();
+    const {setErrorMsg} = useContext(ErrorCtx);
     const {t} = useTranslation('cabinet');
 
     const handleSubmitRating = async (values) => {
@@ -42,7 +40,7 @@ export const RatingModal: FC<RatingModalPropsType> = (props) => {
             await userAPI.setUserRating(params);
             handleCloseRating();
         } catch ({message}) {
-            dispatch(setErrorMsgAction(message));
+            setErrorMsg(message);
         }
     };
 

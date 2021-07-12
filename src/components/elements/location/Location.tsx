@@ -1,11 +1,10 @@
-import {FC, useEffect, useState} from 'react';
+import {FC, useContext, useEffect, useState} from 'react';
 import {Typography} from '@material-ui/core';
+import {LocationsCtx} from "@src/context";
 import {LocationIcon} from '@src/components/elements/icons';
 import {LocationModal} from './LocationModal';
 import {useTranslation} from 'next-i18next';
 import {cookies} from '@src/helpers';
-import {useSelector} from 'react-redux';
-import {RootState} from '@src/redux/rootReducer';
 import {useModal} from '@src/hooks/useModal';
 import {useStyles} from './useStyles';
 
@@ -16,7 +15,7 @@ type LocationProps = {
 export const Location: FC<LocationProps> = ({handleSelectLocation}) => {
     const {t} = useTranslation('locations');
     const userLocation = cookies.get('user_location');
-    const allLocations = useSelector((store: RootState) => store.locations.data);
+    const allLocations = useContext(LocationsCtx);
 
     const initLocation = {
         region: null,

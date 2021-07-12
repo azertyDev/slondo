@@ -1,12 +1,11 @@
-import {FC, useEffect, useState} from 'react';
+import {FC, useContext, useEffect, useState} from 'react';
 import {PostsTabs} from './PostsTabs';
 import {ITEMS_PER_PAGE} from '@src/constants';
 import {userAPI} from '@src/api/api';
 import {CardData} from '@root/interfaces/CardData';
 import {initCards} from '../posts_slider/PostsSliderContainer';
-import {setErrorMsgAction} from '@src/redux/slices/errorSlice';
-import {useDispatch, useSelector} from 'react-redux';
-import {RootState} from '@src/redux/rootReducer';
+import {AuthCtx} from "@src/context/AuthCtx";
+import {ErrorCtx} from "@src/context";
 
 const initCardData: CardData = {
     isFetch: false,
@@ -19,14 +18,12 @@ const initCardData: CardData = {
 };
 
 export const PostsTabsContainer: FC = () => {
-    const dispatch = useDispatch();
-    const {isAuth} = useSelector((store: RootState) => store.user);
+    const {auth: {isAuth}} = useContext(AuthCtx);
+    const {setErrorMsg} = useContext(ErrorCtx);
 
     const [tabValue, setTabValue] = useState(0);
-
     const [postCurrentPage, setPostCurrentPage] = useState(1);
     const [auctionCurrentPage, setAuctionCurrentPage] = useState(1);
-
     const [postCardData, setPostCardData] = useState(initCardData);
     const [auctionCardData, setAuctionCardData] = useState(initCardData);
 
@@ -38,7 +35,13 @@ export const PostsTabsContainer: FC = () => {
                 isShowMoreFetch: true
             });
 
-            const newData = await userAPI.getCards(ITEMS_PER_PAGE, currentPage, type);
+            const params = {
+                itemsPerPage: ITEMS_PER_PAGE,
+                page: currentPage,
+                type
+            };
+
+            const newData = await userAPI.getCards(params);
 
             setState({
                 ...state,
@@ -50,7 +53,7 @@ export const PostsTabsContainer: FC = () => {
                 }
             });
         } catch (e) {
-            dispatch(setErrorMsgAction(e.message));
+            setErrorMsg(e.message);
             setState({
                 ...state,
                 error: e.message

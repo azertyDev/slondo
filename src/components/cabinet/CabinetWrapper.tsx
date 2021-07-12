@@ -1,11 +1,10 @@
-import {FC} from 'react';
-import {useSelector} from 'react-redux';
+import {FC, useContext} from 'react';
 import {useTranslation} from "next-i18next";
 import {Grid, Typography} from '@material-ui/core';
 import {MainLayout} from '@src/components/main_layout/MainLayout';
 import {CabinetSidebar} from './cabinet_sidebar/CabinetSidebar';
-import {RootState} from '@src/redux/rootReducer';
 import {useStyles} from './useStyles';
+import {UserCtx} from "@src/context/UserCtx";
 
 export type CommonModalType = {
     post,
@@ -21,7 +20,8 @@ export type CabinetMenuPropsType = {
 
 export const CabinetWrapper: FC<CabinetMenuPropsType> = ({children, title, headerTitle}) => {
     const {t} = useTranslation('cabinet');
-    const {info} = useSelector((store: RootState) => store.user);
+    const {user}= useContext(UserCtx);
+
 
     const classes = useStyles();
     return (
@@ -29,7 +29,7 @@ export const CabinetWrapper: FC<CabinetMenuPropsType> = ({children, title, heade
             <div className={classes.root}>
                 <Grid container spacing={2}>
                     <Grid item xs={3}>
-                        <CabinetSidebar user={info}/>
+                        <CabinetSidebar user={user}/>
                     </Grid>
                     <Grid item xs={9} container direction='column'>
                         <Typography variant="h6" className="menu-title">

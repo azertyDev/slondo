@@ -1,38 +1,37 @@
-import {FC, useEffect, useState} from 'react';
+import {FC, useContext, useEffect, useState} from 'react';
 import {useTranslation} from 'react-i18next';
 import {withAuthRedirect} from '@src/hocs/withAuthRedirect';
 import {Settings} from '@src/components/cabinet/cabinet_pages/settings/Settings';
-import {useDispatch, useSelector} from 'react-redux';
-import {RootState} from '@src/redux/rootReducer';
 import {userAPI} from '@src/api/api';
-import {signInAction} from '@src/redux/slices/userSlice';
-import {cookieOpts, cookies, getErrorMsg} from '@src/helpers';
-import {setErrorMsgAction} from '@src/redux/slices/errorSlice';
+import {cookieOpts, cookies} from '@src/helpers';
 import {useFormik} from 'formik';
 import {SettingsForm} from '@src/components/cabinet/cabinet_pages/settings/settings_form/SettingsForm';
 import {UploadAvatarForm} from '@src/components/cabinet/cabinet_pages/settings/settings_form/upload_avatar_form/UploadAvatarForm';
 import {timeRegEx} from '@src/common_data/reg_exs';
 import {CodeConfirm} from '@src/components/cabinet/cabinet_pages/settings/settings_form/password_recovery/CodeConfirm';
 import {regularFormSchema} from '@root/validation_schemas/createPostSchemas';
-import {FormikField} from '@src/components/elements/formik_field/FormikField';
+import {UserCtx} from "@src/context/UserCtx";
+import {AuthCtx} from "@src/context/AuthCtx";
+import {ErrorCtx} from "@src/context";
 
 const SettingsContainer: FC = () => {
-    const dispatch = useDispatch();
     const {t} = useTranslation('cabinet');
-    const userInfo = useSelector((store: RootState) => store.user.info);
+    const {setIsAuth} = useContext(AuthCtx);
+    const {user, setUser} = useContext(UserCtx);
+    const {setErrorMsg} = useContext(ErrorCtx);
 
     const initSeconds = 60;
     const initUserInfo = {
-        user_name: userInfo.name,
-        user_surname: userInfo.surname ?? '',
-        phone: userInfo.phone,
-        avatar: userInfo.avatar,
+        user_name: user.name,
+        user_surname: user.surname ?? '',
+        phone: user.phone,
+        avatar: user.avatar,
         avalTime: {
             isActive: false,
             time: {
-                start_time: userInfo.available_start_time ?? '09:00',
-                end_time: userInfo.available_end_time ?? '18:00',
-                week_days: userInfo.available_days
+                start_time: user.available_start_time ?? '09:00',
+                end_time: user.available_end_time ?? '18:00',
+                week_days: user.available_days
             }
         }
     };
@@ -41,7 +40,7 @@ const SettingsContainer: FC = () => {
     const [formDisable, setFormDisable] = useState(true);
     const [openModal, setOpenModal] = useState(false);
     const [isPassConfirm, setIsPassConfirm] = useState(false);
-    const [errorMsg, setErrorMsg] = useState('');
+    const [codeError, setCodeError] = useState('');
     const [activeTimer, setActiveTimer] = useState(false);
     const [timer, setTimer] = useState(initSeconds);
     const [code, setCode] = useState('');
@@ -74,18 +73,20 @@ const SettingsContainer: FC = () => {
                 await userAPI.changeUserAvatar(formData);
             }
             if (avatar === '') {
-                await userAPI.deleteUserAvatar(userInfo.id);
+                await userAPI.deleteUserAvatar(user.id);
             }
-            await userAPI.changeUserInfo({...userInfo, ...otherData});
+            await userAPI.changeUserInfo({...user, ...otherData});
             const newUserInfo = await userAPI.getUserInfo();
 
+            setIsAuth(true);
+            setUser(newUserInfo);
             setFormDisable(true);
-            dispatch(signInAction(newUserInfo));
             cookies.set('slondo_user', newUserInfo, cookieOpts);
         } catch (e) {
-            dispatch(setErrorMsgAction(e.message));
+            setErrorMsg(e.message);
         }
     };
+
     const handleCancel = () => {
         setValues(initUserInfo);
         setFormDisable(true);
@@ -99,10 +100,11 @@ const SettingsContainer: FC = () => {
 
     const {
         values,
-        setValues,
-        errors,
-        touched
+        setValues
+        // errors,
+        // touched
     } = formik;
+
     const {avalTime} = values;
 
     const handleDisableTimer = () => {
@@ -112,13 +114,13 @@ const SettingsContainer: FC = () => {
     const handleOpenModal = async () => {
         try {
             setFetchingSmsCode(true);
-            await userAPI.getSmsCode(userInfo.phone);
+            await userAPI.getSmsCode(user.phone);
             setFetchingSmsCode(false);
             setOpenModal(true);
             setActiveTimer(true);
         } catch (e) {
             setOpenModal(false);
-            dispatch(setErrorMsgAction(e.message));
+            setCodeError(e.message);
             setFetchingSmsCode(false);
         }
     };
@@ -182,7 +184,7 @@ const SettingsContainer: FC = () => {
     };
 
     const handleSignIn = (user) => () => {
-        dispatch(signInAction(user));
+        setUser(user);
     };
 
     const runTimer = () => {
@@ -199,37 +201,37 @@ const SettingsContainer: FC = () => {
 
     const ModalContent = (
         isPassConfirm
-        ? <div className="formik-num-pass">
-            {/*<FormikField*/}
-            {/*    t={t}*/}
-            {/*    type="password"*/}
-            {/*    name="password"*/}
-            {/*    labelText='enter_new_password'*/}
-            {/*    placeholder={t('filters:enter_new_password')}*/}
-            {/*    onChange={handleInput}*/}
-            {/*    errorMsg={getErrorMsg(errors.password, touched.password, t)}*/}
-            {/*/>*/}
-            {/*<FormikField*/}
-            {/*    t={t}*/}
-            {/*    type="password"*/}
-            {/*    name="password_confirm"*/}
-            {/*    labelText='repeat_new_password'*/}
-            {/*    placeholder={t('filters:repeat_new_password')}*/}
-            {/*    onChange={handleInput}*/}
-            {/*    errorMsg={getErrorMsg(errors.password_confirm, touched.password_confirm, t)}*/}
-            {/*/>*/}
-        </div>
-        : <CodeConfirm
-            t={t}
-            timer={timer}
-            phone={userInfo.phone}
-            errorMsg={errorMsg}
-            setErrorMsg={setErrorMsg}
-            setCode={setCode}
-            handleDisableTimer={handleDisableTimer}
-            handlePassConfirm={handlePassConfirm}
-            setOpenModal={setOpenModal}
-        />
+            ? <div className="formik-num-pass">
+                {/*<FormikField*/}
+                {/*    t={t}*/}
+                {/*    type="password"*/}
+                {/*    name="password"*/}
+                {/*    labelText='enter_new_password'*/}
+                {/*    placeholder={t('filters:enter_new_password')}*/}
+                {/*    onChange={handleInput}*/}
+                {/*    errorMsg={getErrorMsg(errors.password, touched.password, t)}*/}
+                {/*/>*/}
+                {/*<FormikField*/}
+                {/*    t={t}*/}
+                {/*    type="password"*/}
+                {/*    name="password_confirm"*/}
+                {/*    labelText='repeat_new_password'*/}
+                {/*    placeholder={t('filters:repeat_new_password')}*/}
+                {/*    onChange={handleInput}*/}
+                {/*    errorMsg={getErrorMsg(errors.password_confirm, touched.password_confirm, t)}*/}
+                {/*/>*/}
+            </div>
+            : <CodeConfirm
+                t={t}
+                timer={timer}
+                phone={user.phone}
+                errorMsg={codeError}
+                setErrorMsg={setErrorMsg}
+                setCode={setCode}
+                handleDisableTimer={handleDisableTimer}
+                handlePassConfirm={handlePassConfirm}
+                setOpenModal={setOpenModal}
+            />
     );
 
     const uploadAvatarForm = (
@@ -263,7 +265,7 @@ const SettingsContainer: FC = () => {
 
     useEffect(() => {
         setValues(initUserInfo);
-    }, [userInfo]);
+    }, [user]);
 
     return (
         <Settings

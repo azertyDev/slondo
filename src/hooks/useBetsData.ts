@@ -1,7 +1,6 @@
-import {useState} from 'react';
+import {useContext, useState} from 'react';
 import {userAPI} from '@src/api/api';
-import {setErrorMsgAction} from '@src/redux/slices/errorSlice';
-import {useDispatch} from 'react-redux';
+import {ErrorCtx} from "@src/context";
 
 type BetsStatesProps = {
     auction_id: number,
@@ -16,7 +15,7 @@ export const useBetsData = (props: BetsStatesProps) => {
         itemsPerPage,
     } = props;
 
-    const dispatch = useDispatch();
+    const {setErrorMsg} = useContext(ErrorCtx);
     const [bets, setBets] = useState([]);
     const [betsCount, setBetsCount] = useState(0);
     const [isBetsFetch, setIsBetsFetch] = useState(false);
@@ -38,8 +37,8 @@ export const useBetsData = (props: BetsStatesProps) => {
             setBets(data);
             setBetsCount(total);
         } catch (e) {
+            setErrorMsg(e.message);
             setIsBetsFetch(false);
-            dispatch(setErrorMsgAction(e.message));
         }
     };
 

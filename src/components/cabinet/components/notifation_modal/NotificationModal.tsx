@@ -1,16 +1,15 @@
-import {FC, useEffect, useState} from 'react';
+import {FC, useContext, useEffect, useState} from 'react';
 import {userAPI} from '@src/api/api';
-import {useDispatch} from 'react-redux';
 import {numberPrettier} from '@src/helpers';
 import {useTranslation} from 'next-i18next';
 import {ITEMS_PER_PAGE} from '@src/constants';
-import {setErrorMsgAction} from '@src/redux/slices/errorSlice';
 import {Box, FormControlLabel, Switch, Typography} from '@material-ui/core';
 import {CabinetModal} from '@src/components/cabinet/components/cabinet_modal/CabinetModal';
 import {initialNotificationType} from '@src/components/cabinet/cabinet_pages/notifications/Notifications';
 import {CommonModalType} from "@src/components/cabinet/CabinetWrapper";
 import {CustomPagination} from "@src/components/elements/custom_pagination/CustomPagination";
 import {NotificationCard} from "@src/components/cabinet/cabinet_pages/notifications/notification_card/NotificationCard";
+import {ErrorCtx} from "@src/context";
 
 export const NotificationModal: FC<CommonModalType> = (props) => {
     const {
@@ -21,8 +20,8 @@ export const NotificationModal: FC<CommonModalType> = (props) => {
 
     const isActive = post.status === 'public' || post.status === 'suspend';
 
-    const dispatch = useDispatch();
     const {t} = useTranslation('cabinet');
+    const {setErrorMsg} = useContext(ErrorCtx);
 
     const [isFetch, setIsFetch] = useState(false);
     const [itemsCount, setItemsCount] = useState(0);
@@ -48,7 +47,7 @@ export const NotificationModal: FC<CommonModalType> = (props) => {
             setIsFetch(false);
         } catch (e) {
             setIsFetch(false);
-            dispatch(setErrorMsgAction(e.message));
+            setErrorMsg(e.message);
         }
     };
 

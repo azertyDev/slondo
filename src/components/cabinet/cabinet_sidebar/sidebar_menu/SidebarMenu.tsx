@@ -1,4 +1,5 @@
-import {FC} from 'react';
+import {FC, useContext} from 'react';
+import {unstable_batchedUpdates} from 'react-dom';
 import {List, ListItem, ListItemText} from '@material-ui/core';
 import {useRouter} from 'next/router';
 import {cookies} from '@src/helpers';
@@ -13,32 +14,39 @@ import {WalletIcon} from '@src/components/elements/icons/WalletIcon';
 import {ShoppingIcon} from '@src/components/elements/icons/ShoppingIcon';
 import {SettingsIcon} from '@src/components/elements/icons/SettingsIcon';
 import {PowerIcon} from '@src/components/elements/icons/PowerIcon';
-import {useDispatch, useSelector} from 'react-redux';
-import {signOutAction} from '@src/redux/slices/userSlice';
-import {RootState} from '@src/redux/rootReducer';
 import {useTranslation} from 'next-i18next';
+import {UserCtx} from "@src/context/UserCtx";
+import {AuthCtx} from "@src/context/AuthCtx";
 import {useStyles} from './useStyles';
 
-export const SidebarMenu: FC = () => {
+type SidebarMenuPropsType = {
+    clearAnchor?: () => void
+}
+
+export const SidebarMenu: FC<SidebarMenuPropsType> = ({clearAnchor}) => {
     const {t} = useTranslation('cabinet');
+    const {push, pathname} = useRouter();
+    const {setIsAuth} = useContext(AuthCtx);
+    const {user, clearUser} = useContext(UserCtx);
     const {
         observer: {
             number_of_messages,
             number_of_notifications,
             number_of_purchase
         }
-    } = useSelector((store: RootState) => store.user.info);
-    const dispatch = useDispatch();
-    const {push, pathname} = useRouter();
+    } = user;
 
     const handleListItemClick = (url) => async () => {
         await push(`/cabinet/${url}`);
     };
-    const signOut = async () => {
-        dispatch(signOutAction());
-        cookies.remove('slondo_auth', {path: '/'});
-        cookies.remove('slondo_user', {path: '/'});
-        await push('/');
+    const signout = async () => {
+        unstable_batchedUpdates(() => {
+            clearUser();
+            clearAnchor();
+            setIsAuth(false);
+            cookies.remove('slondo_auth', {path: '/'});
+            cookies.remove('slondo_user', {path: '/'});
+        });
     };
 
     const classes = useStyles();
@@ -51,8 +59,8 @@ export const SidebarMenu: FC = () => {
                     onClick={handleListItemClick('posts')}
                     disableGutters
                 >
-                    <NotesIcon />
-                    <ListItemText primary={t('cabinet:myPosts')} />
+                    <NotesIcon/>
+                    <ListItemText primary={t('cabinet:myPosts')}/>
                 </ListItem>
                 <ListItem
                     button
@@ -60,8 +68,8 @@ export const SidebarMenu: FC = () => {
                     onClick={handleListItemClick('auctions')}
                     disableGutters
                 >
-                    <GavelIcon />
-                    <ListItemText primary={t('cabinet:myAuctions')} />
+                    <GavelIcon/>
+                    <ListItemText primary={t('cabinet:myAuctions')}/>
                 </ListItem>
                 <CustomBadge badgeContent={number_of_purchase} color='error'>
                     <ListItem
@@ -70,8 +78,8 @@ export const SidebarMenu: FC = () => {
                         onClick={handleListItemClick('purchases')}
                         disableGutters
                     >
-                        <ShoppingIcon />
-                        <ListItemText primary={t('cabinet:myPurchases')} />
+                        <ShoppingIcon/>
+                        <ListItemText primary={t('cabinet:myPurchases')}/>
                     </ListItem>
                 </CustomBadge>
                 <CustomBadge badgeContent={0} color='error'>
@@ -81,8 +89,8 @@ export const SidebarMenu: FC = () => {
                         onClick={handleListItemClick('favorite')}
                         disableGutters
                     >
-                        <FavoriteBorderIcon />
-                        <ListItemText primary={t('cabinet:favorite')} />
+                        <FavoriteBorderIcon/>
+                        <ListItemText primary={t('cabinet:favorite')}/>
                     </ListItem>
                 </CustomBadge>
             </List>
@@ -94,8 +102,8 @@ export const SidebarMenu: FC = () => {
                         onClick={handleListItemClick('notifications')}
                         disableGutters
                     >
-                        <NotificationIcon />
-                        <ListItemText primary={t('cabinet:notifications')} />
+                        <NotificationIcon/>
+                        <ListItemText primary={t('cabinet:notifications')}/>
                     </ListItem>
                 </CustomBadge>
                 <CustomBadge badgeContent={number_of_messages} color='error'>
@@ -106,8 +114,8 @@ export const SidebarMenu: FC = () => {
                         disabled
                         disableGutters
                     >
-                        <LetterIcon />
-                        <ListItemText primary={t('cabinet:messages')} />
+                        <LetterIcon/>
+                        <ListItemText primary={t('cabinet:messages')}/>
                     </ListItem>
                 </CustomBadge>
             </List>
@@ -119,8 +127,8 @@ export const SidebarMenu: FC = () => {
                         onClick={handleListItemClick('safetyDeal')}
                         disableGutters
                     >
-                        <SafeIcon />
-                        <ListItemText primary={t('cabinet:safeShopping')} />
+                        <SafeIcon/>
+                        <ListItemText primary={t('cabinet:safeShopping')}/>
                     </ListItem>
                 </CustomBadge>
                 <CustomBadge badgeContent={0} color='error'>
@@ -131,8 +139,8 @@ export const SidebarMenu: FC = () => {
                         disabled
                         disableGutters
                     >
-                        <WalletIcon />
-                        <ListItemText primary={t('cabinet:paidServices')} />
+                        <WalletIcon/>
+                        <ListItemText primary={t('cabinet:paidServices')}/>
                     </ListItem>
                 </CustomBadge>
             </List>
@@ -144,17 +152,17 @@ export const SidebarMenu: FC = () => {
                     disableGutters
                     className='list-item'
                 >
-                    <SettingsIcon />
-                    <ListItemText primary={t('cabinet:settings')} />
+                    <SettingsIcon/>
+                    <ListItemText primary={t('cabinet:settings')}/>
                 </ListItem>
                 <ListItem
                     button
-                    onClick={signOut}
+                    onClick={signout}
                     disableGutters
                     className='list-item'
                 >
-                    <PowerIcon />
-                    <ListItemText primary={t('cabinet:exit')} />
+                    <PowerIcon/>
+                    <ListItemText primary={t('cabinet:exit')}/>
                 </ListItem>
             </List>
         </div>

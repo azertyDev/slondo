@@ -4,7 +4,6 @@ import {useStyles} from './useStyles';
 import {ReadMore} from '@src/components/elements/read_more/readMore';
 import {useTranslation} from 'next-i18next';
 
-
 export const SEOTextComponent: FC<{text: string}> = ({text}) => {
 
     const isMdDown = useMediaQuery(useTheme().breakpoints.down('md'));

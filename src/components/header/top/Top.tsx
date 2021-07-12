@@ -29,7 +29,6 @@ import {HeaderSearchForm} from '@src/components/header/bottom/header_search_form
 import {cookieOpts, cookies} from '@src/helpers';
 import {useStyles} from './useStyles';
 
-
 type TopHeaderPropsType = {
     isAuth: boolean,
     handleOpenModal: () => void;

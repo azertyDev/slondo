@@ -1,10 +1,10 @@
 import {FC} from 'react';
 import {WithT} from 'i18next';
 import {Grid, Hidden, Typography} from '@material-ui/core';
+import {ArrowBack} from '@material-ui/icons';
 import {LocationIcon} from '@src/components/elements/icons';
 import {CustomButton} from '@src/components/elements/custom_button/CustomButton';
 import {ResponsiveModal} from '@src/components/elements/responsive_modal/ResponsiveModal';
-import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import {CloseBtn} from '@src/components/elements/close_button/CloseBtn';
 import {useStyles} from './useStyles';
 
@@ -73,7 +73,7 @@ export const LocationModal: FC<LocationModalPropsType> = (props) => {
                     <Grid container className='locals-wrapper'>
                         <Grid item xs={12} className='locals-title'>
                             <Typography>
-                                {hasRegion && <ArrowBackIcon onClick={toPrevLocation}/>}
+                                {hasRegion && <ArrowBack onClick={toPrevLocation}/>}
                                 <span onClick={toPrevLocation}>
                                     {prevLocation}
                                 </span>

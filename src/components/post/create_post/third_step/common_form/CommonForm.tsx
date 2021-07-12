@@ -1,4 +1,4 @@
-import {Dispatch, FC, SetStateAction} from 'react';
+import {Dispatch, FC, SetStateAction, useContext} from 'react';
 import {useTranslation} from 'next-i18next';
 import {Grid} from '@material-ui/core';
 import {AuctionParams} from './auction_params/AuctionParams';
@@ -20,6 +20,7 @@ import {FormikField} from '@src/components/elements/formik_field/FormikField';
 import {CustomFormikProvider} from '@src/components/elements/custom_formik_provider/CustomFormikProvider';
 import {FormikTextarea} from '@src/components/elements/formik_textarea/FormikTextarea';
 import {Location} from '@src/components/elements/location/Location';
+import {UserCtx} from "@src/context/UserCtx";
 import {useStyles} from './useStyles';
 
 type DefaultParamsPropsType = {
@@ -29,8 +30,7 @@ type DefaultParamsPropsType = {
     isPreview: boolean,
     categoryName: string,
     setIsPreview: Dispatch<SetStateAction<boolean>>,
-    handleSubmit: (v) => void,
-    ownerPhone: string
+    handleSubmit: (v) => void
 };
 
 export const CommonForm: FC<DefaultParamsPropsType> = (props) => {
@@ -40,11 +40,11 @@ export const CommonForm: FC<DefaultParamsPropsType> = (props) => {
         currentFormIndex,
         postType,
         handleSubmit,
-        categoryName,
-        ownerPhone
+        categoryName
     } = props;
 
     const {t} = useTranslation('post');
+    const {phone: userPhone} = useContext(UserCtx).user;
 
     const formIndex = 1;
     const isAdvanceAuction = postType.name === 'exauc';
@@ -285,7 +285,7 @@ export const CommonForm: FC<DefaultParamsPropsType> = (props) => {
                         ? <CommonFormPreview
                             t={t}
                             values={values}
-                            ownerPhone={ownerPhone}
+                            userPhone={userPhone}
                             location={location}
                             priceLabel={priceLabel}
                             isAuction={isAuction}
@@ -370,7 +370,7 @@ export const CommonForm: FC<DefaultParamsPropsType> = (props) => {
                                         t={t}
                                         values={values}
                                         isAuction={isAuction}
-                                        ownerPhone={ownerPhone}
+                                        userPhone={userPhone}
                                         handleInput={handleInput}
                                         handleCheckboxChange={handleCheckboxChange}
                                     />

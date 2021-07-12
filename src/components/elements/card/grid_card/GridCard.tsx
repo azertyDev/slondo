@@ -1,4 +1,4 @@
-import {FC, useEffect, useState} from 'react';
+import {FC, useContext, useEffect, useState} from 'react';
 import Link from 'next/link';
 import {useTranslation} from 'react-i18next';
 import {Card, CardActionArea, CardContent, CardMedia, IconButton, Tooltip, Typography} from '@material-ui/core';
@@ -7,19 +7,17 @@ import {DeliveryIcon, SafeIcon, SwapIcon} from '@src/components/elements/icons';
 import {CardDataType} from '@root/interfaces/CardData';
 import {numberPrettier, transformCyrillic} from '@src/helpers';
 import {userAPI} from '@src/api/api';
-import {useDispatch, useSelector} from 'react-redux';
-import {RootState} from '@src/redux/rootReducer';
-import {setErrorMsgAction} from '@src/redux/slices/errorSlice';
 import {months} from '@src/common_data/common';
 import {useStyles} from './useStyles';
 import {FavoritedIcon, FavoriteIcon} from '@src/components/elements/icons';
+import {AuthCtx} from "@src/context/AuthCtx";
+import {ErrorCtx} from "@src/context";
 
 type CardItemProps = {
     isFetch: boolean
 } & CardDataType;
 
 export const GridCard: FC<CardItemProps> = (props) => {
-    const dispatch = useDispatch();
     const {
         id,
         isFetch,
@@ -41,10 +39,9 @@ export const GridCard: FC<CardItemProps> = (props) => {
     const isFavorite = true;
 
     const {t} = useTranslation('common');
+    const {setErrorMsg} = useContext(ErrorCtx);
+    const {auth: {isAuth}} = useContext(AuthCtx);
     const translatedTitle = transformCyrillic(title);
-
-    const {isAuth} = useSelector((store: RootState) => store.user);
-
     const [liked, setLiked] = useState(favorite);
 
     const date = new Date(created_at);
@@ -65,7 +62,7 @@ export const GridCard: FC<CardItemProps> = (props) => {
             await userAPI.favoriteAds(id);
             setLiked(!liked);
         } catch (e) {
-            dispatch(setErrorMsgAction(e.message));
+            setErrorMsg(e.message);
         }
     };
 
@@ -81,8 +78,8 @@ export const GridCard: FC<CardItemProps> = (props) => {
                     className="favorite-btn" onClick={handleFavorite}
                 >
                     {liked
-                        ? <FavoriteIcon />
-                        : <FavoritedIcon />
+                        ? <FavoriteIcon/>
+                        : <FavoritedIcon/>
                     }
                 </IconButton>
             )}

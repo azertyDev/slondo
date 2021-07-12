@@ -1,10 +1,8 @@
-import {FC, useEffect, useState} from 'react';
+import {FC, useContext, useEffect, useState} from 'react';
 import Head from 'next/head';
 import {useRouter} from 'next/router';
 import {useTranslation} from 'next-i18next';
 import {userAPI} from '@src/api/api';
-import {setErrorMsgAction} from '@src/redux/slices/errorSlice';
-import {useDispatch} from 'react-redux';
 import {Container, Grid, Hidden, useMediaQuery, useTheme} from '@material-ui/core';
 import {PostContent} from '@src/components/post/show_post/post_content/PostContent';
 import {Banner} from '@src/components/elements/banner/Banner';
@@ -13,11 +11,12 @@ import {ErrorModal} from '@src/components/error_modal/ErrorModal';
 import {OwnerAuctionInfo} from '@src/components/post/show_post/owner_auction_info/OwnerAuctionInfo';
 import {useStyles} from './useStyles';
 import {Footer} from '@src/components/footer/Footer';
+import {ErrorCtx} from "@src/context";
 
 
 export const ShowPostContainer: FC = () => {
-    const dispatch = useDispatch();
     const {t} = useTranslation('post');
+    const {setErrorMsg} = useContext(ErrorCtx);
 
     const {url} = useRouter().query;
     const postUrl = url as string;
@@ -135,7 +134,7 @@ export const ShowPostContainer: FC = () => {
                 }
             });
         } catch (e) {
-            dispatch(setErrorMsgAction(e.message));
+            setErrorMsg(e.message);
         }
     };
 

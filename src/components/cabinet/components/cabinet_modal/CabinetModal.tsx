@@ -29,9 +29,9 @@ export const CabinetModal: FC<CabinetModalPropsType> = (props) => {
         >
             <Box p={4} position='relative'>
                 <IconButton
+                    size='medium'
                     onClick={handleCloseDialog}
                     className={classes.closeBtn}
-                    size='medium'
                 >
                     <CloseIcon />
                 </IconButton>

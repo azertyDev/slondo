@@ -12,7 +12,6 @@ import {PostTitle} from '@src/components/post/create_post/third_step/params_form
 import {PreviewValues} from '@src/components/post/create_post/third_step/params_form/PreviewValues';
 import {paramsFormSchema} from '@root/validation_schemas/createPostSchemas';
 
-
 export const JobParams: FC<CommonParamsPropsType> = (props) => {
     const {
         t,

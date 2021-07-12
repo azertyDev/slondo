@@ -1,6 +1,5 @@
-import {FC, useEffect, useState} from 'react';
+import {FC, useContext, useEffect, useState} from 'react';
 import {useFormik} from 'formik';
-import {useDispatch} from 'react-redux';
 import {userAPI} from '@src/api/api';
 import {Grid, Typography} from '@material-ui/core';
 import {DropDownSelect} from '@src/components/elements/drop_down_select/DropDownSelect';
@@ -12,7 +11,6 @@ import {FormikField} from '@src/components/elements/formik_field/FormikField';
 import {CheckboxSelect} from '@src/components/elements/checkbox_select/CheckboxSelect';
 import {CommonParamsPropsType} from '../../ParamsFormContainer';
 import {optionFields} from '@src/common_data/fields_keys';
-import {setErrorMsgAction} from '@src/redux/slices/errorSlice';
 import {useHandlers} from '@src/hooks/useHandlers';
 import {paramsFormSchema} from '@root/validation_schemas/createPostSchemas';
 import {CustomFormikProvider} from '@src/components/elements/custom_formik_provider/CustomFormikProvider';
@@ -21,6 +19,7 @@ import {CustomAccordion} from '@src/components/elements/accordion/CustomAccordio
 import {PostTitle} from '@src/components/post/create_post/third_step/params_form/post_title/PostTitle';
 import {useStyles} from './useStyles';
 import {useTranslation} from "next-i18next";
+import {ErrorCtx} from "@src/context";
 
 type CarParamsPropsType = {
     subcategoryName: string
@@ -58,7 +57,7 @@ export const CarParams: FC<CarParamsPropsType> = (props) => {
 
     if (isMadeInUzb) initVals.position = null;
 
-    const dispatch = useDispatch();
+    const {setErrorMsg} = useContext(ErrorCtx);
 
     const formik = useFormik({
         onSubmit,
@@ -101,7 +100,12 @@ export const CarParams: FC<CarParamsPropsType> = (props) => {
                 }
                 if (name === 'year') {
                     if (value) {
-                        const [valsByYear] = (await userAPI.getCarDataByYear(values.model.id, value.id)).bodies;
+                        const params = {
+                            year_id: value.id,
+                            model_id: values.model.id
+                        };
+
+                        const [valsByYear] = (await userAPI.getCarDataByYear(params)).bodies;
 
                         newVals = {
                             ...initVals,
@@ -181,7 +185,7 @@ export const CarParams: FC<CarParamsPropsType> = (props) => {
             setValues(newVals);
             isMadeInUzb && setTouched({});
         } catch (e) {
-            dispatch(setErrorMsgAction(e.message));
+            setErrorMsg(e.message);
         }
     };
 

@@ -114,29 +114,32 @@ export const getFieldsByFilters = (props: GetFieldsByFiltersProps, categoryName:
 };
 
 export const toUrlParams = (params) => {
-    let url = '';
+    if (params) {
+        let url = '';
 
-    Object.keys(params).forEach(key => {
-        const val = params[key];
-        const isBoolTrue = val && typeof val === 'boolean';
-        const isNoEmptyString = val && typeof val === 'string';
-        const isNoEmptyArray = Array.isArray(val) && val.length;
-        const isObject = val && !Array.isArray(val) && typeof val === 'object' && !!Object.keys(val).length;
+        Object.keys(params).forEach(key => {
+            const val = params[key];
+            const isBoolTrue = val && typeof val === 'boolean';
+            const isNoEmptyString = val && typeof val === 'string';
+            const isNoEmptyArray = Array.isArray(val) && val.length;
+            const isObject = val && !Array.isArray(val) && typeof val === 'object' && !!Object.keys(val).length;
 
-        if (isBoolTrue) {
-            url = url.concat(`&${key}=${+params[key]}`);
-        } else if (isNoEmptyString) {
-            url = url.concat(`&${key}=${params[key]}`);
-        } else if (isNoEmptyArray) {
-            url = url.concat(`&${key}=${params[key].map(p => p.id).join(',')}`);
-        } else if (isObject && !!params[key].id) {
-            url = url.concat(`&${key}=${params[key].id}`);
-        }
-    });
+            if (isBoolTrue) {
+                url = url.concat(`&${key}=${+params[key]}`);
+            }
+            if (isNoEmptyString) {
+                url = url.concat(`&${key}=${params[key]}`);
+            }
+            if (isNoEmptyArray) {
+                url = url.concat(`&${key}=${params[key].map(p => p.id).join(',')}`);
+            }
+            if (isObject && !!params[key].id) {
+                url = url.concat(`&${key}=${params[key].id}`);
+            }
+        });
 
-    if (url !== '') url = `?${url}`;
-
-    return url;
+        return url.replace(/^&/, '?');
+    }
 };
 
 export const getSearchTxt = (queryData: string[] = []): string => (

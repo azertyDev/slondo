@@ -1,4 +1,4 @@
-import {FC, useEffect} from 'react';
+import {FC, useContext, useEffect} from 'react';
 import {useFormik} from 'formik';
 import {
     Paper,
@@ -7,6 +7,7 @@ import {
     IconButton,
     Typography
 } from '@material-ui/core';
+import {SearchCtx} from "@src/context";
 import {Search_icon} from '@src/components/elements/icons';
 import {CustomButton} from '@src/components/elements/custom_button/CustomButton';
 import {useTranslation} from 'next-i18next';
@@ -14,19 +15,16 @@ import {useRouter} from 'next/router';
 import {cookies, getSearchTxt} from '@src/helpers';
 import {CustomFormikProvider} from '@src/components/elements/custom_formik_provider/CustomFormikProvider';
 import {transformLocations} from '@src/common_data/locations';
-import {useDispatch} from 'react-redux';
-import {setSearchTxtAction} from '@root/src/redux/slices/searchSlice';
 import {useStyles} from './useStyles';
 
 export const HeaderSearchForm: FC = () => {
     const {push} = useRouter();
-    const dispatch = useDispatch();
     const {t} = useTranslation('common');
-
     const {categories} = useRouter().query;
-    const searchTxtFromUrl = getSearchTxt(categories as string[]);
+    const {setTerm} = useContext(SearchCtx);
+    const searchTermFromUrl = getSearchTxt(categories as string[]);
 
-    const handleSubmit = ({searchTxt}) => {
+    const handleSubmit = ({searchTerm}) => {
         const userLocation = cookies.get('user_location');
         let location = 'uzbekistan';
 
@@ -37,18 +35,18 @@ export const HeaderSearchForm: FC = () => {
                 : transformLocations[region.name].name;
         }
 
-        const url = `/${location}${searchTxt !== '' ? `/q-${searchTxt}` : ''}`;
+        const url = `/${location}${searchTerm !== '' ? `/q-${searchTerm}` : ''}`;
 
         push(url);
     };
 
     const handleChange = ({target: {value}}) => {
-        setValues({searchTxt: value});
-        dispatch(setSearchTxtAction(value));
+        setTerm(value);
+        setValues({searchTerm: value});
     };
 
     const formik = useFormik({
-        initialValues: {searchTxt: ''},
+        initialValues: {searchTerm: ''},
         onSubmit: handleSubmit
     });
 
@@ -58,8 +56,8 @@ export const HeaderSearchForm: FC = () => {
     } = formik;
 
     useEffect(() => {
-        setValues({searchTxt: searchTxtFromUrl});
-        dispatch(setSearchTxtAction(searchTxtFromUrl));
+        setTerm(searchTermFromUrl);
+        setValues({searchTerm: searchTermFromUrl});
     }, []);
 
     const classes = useStyles();
@@ -77,7 +75,7 @@ export const HeaderSearchForm: FC = () => {
                     <InputBase
                         id="input-base"
                         onChange={handleChange}
-                        value={values.searchTxt}
+                        value={values.searchTerm}
                         className={classes.input}
                         placeholder={t('searchText')}
                         inputProps={{'aria-label': 'search category'}}

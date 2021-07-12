@@ -12,7 +12,7 @@ type DefaultParamsPropsType = {
     isAdvanceAuction: boolean,
     priceLabel: string,
     location,
-    ownerPhone: string
+    userPhone: string
 } & WithT;
 
 export const CommonFormPreview: FC<DefaultParamsPropsType> = (props) => {
@@ -22,7 +22,7 @@ export const CommonFormPreview: FC<DefaultParamsPropsType> = (props) => {
         location,
         isAuction,
         priceLabel,
-        ownerPhone,
+        userPhone,
         isAdvanceAuction
     } = props;
 
@@ -192,7 +192,7 @@ export const CommonFormPreview: FC<DefaultParamsPropsType> = (props) => {
                     <strong>
                         {t('filters:own_phone')}:&nbsp;
                     </strong>
-                    +{ownerPhone}
+                    +{userPhone}
                 </Typography>
                 {!!values.phone && !RegExp(/_/g).test(values.phone) && (
                     <Typography variant="subtitle1">

@@ -10,7 +10,7 @@ type ContactsPropsType = {
     values,
     handleInput,
     handleCheckboxChange,
-    ownerPhone: string
+    userPhone: string
 } & WithT;
 
 export const Contacts: FC<ContactsPropsType> = (props) => {
@@ -19,7 +19,7 @@ export const Contacts: FC<ContactsPropsType> = (props) => {
         isAuction,
         values,
         handleInput,
-        ownerPhone,
+        userPhone,
         handleCheckboxChange
     } = props;
 
@@ -41,7 +41,7 @@ export const Contacts: FC<ContactsPropsType> = (props) => {
             <div>
                 <Typography variant="subtitle1">
                     <strong>{t('filters:own_phone')}:&nbsp;</strong>
-                    <span>+{ownerPhone}</span>
+                    <span>+{userPhone}</span>
                 </Typography>
             </div>
             <div>

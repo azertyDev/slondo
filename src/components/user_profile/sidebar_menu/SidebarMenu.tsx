@@ -1,14 +1,13 @@
-import React, {Dispatch, FC, SetStateAction} from 'react';
+import {Dispatch, FC, SetStateAction, useContext} from 'react';
 import {List, ListItem, ListItemText} from '@material-ui/core';
 import {WithT} from 'i18next';
 import {NotesIcon} from '@src/components/elements/icons/NotesIcon';
 import {useStyles} from './useStyles';
 import {UserInfo} from '@root/interfaces/Auth';
 import {userAPI} from '@src/api/api';
-import {setErrorMsgAction} from '@src/redux/slices/errorSlice';
-import {useDispatch} from 'react-redux';
 import {useRouter} from 'next/router';
 import {LetterIcon} from '@src/components/elements/icons';
+import {ErrorCtx} from "@src/context";
 
 type SidebarMenuPropsType = {
     user: UserInfo,
@@ -17,7 +16,7 @@ type SidebarMenuPropsType = {
 } & WithT
 
 export const SidebarMenu: FC<SidebarMenuPropsType> = ({t, pageName, setPageName}) => {
-    const dispatch = useDispatch();
+    const {setErrorMsg} = useContext(ErrorCtx);
     const {user_id} = useRouter().query;
 
     const handleListItemClick = (pageName) => () => {
@@ -28,7 +27,7 @@ export const SidebarMenu: FC<SidebarMenuPropsType> = ({t, pageName, setPageName}
         try {
             await userAPI.follow(user_id);
         } catch (e) {
-            dispatch(setErrorMsgAction(e.message));
+            setErrorMsg(e.message);
         }
     };
 

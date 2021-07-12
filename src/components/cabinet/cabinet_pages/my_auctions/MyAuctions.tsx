@@ -1,10 +1,9 @@
-import {FC, useEffect, useState} from 'react';
+import {FC, useContext, useEffect, useState} from 'react';
 import {TabsContent} from '@src/components/cabinet/cabinet_pages/TabsContent';
 import {withAuthRedirect} from '@src/hocs/withAuthRedirect';
 import {userAPI} from '@src/api/api';
-import {useDispatch} from 'react-redux';
-import {setErrorMsgAction} from '@root/src/redux/slices/errorSlice';
 import {useTranslation} from 'next-i18next';
+import {unstable_batchedUpdates} from "react-dom";
 import {
     Box,
     Tab,
@@ -21,12 +20,13 @@ import {CardDataType} from '@root/interfaces/CardData';
 import {DetailedPostContainerModal} from '@src/components/cabinet/components/detailed_post_modal/DetailedPostContainerModal';
 import {initialCardData} from '@src/components/cabinet/cabinet_pages/my_posts/MyPosts';
 import {NotificationModal} from '@src/components/cabinet/components/notifation_modal/NotificationModal';
+import {SettingsModal} from "@src/components/cabinet/components/settings_modal/SettingsModal";
 import {useStyles} from './useStyles';
-import {unstable_batchedUpdates} from "react-dom";
+import {ErrorCtx} from "@src/context";
 
 export const MyAuctions: FC = () => {
-        const dispatch = useDispatch();
         const {t} = useTranslation('cabinet');
+        const {setErrorMsg} = useContext(ErrorCtx);
 
         const initialState: InitialCabinetCardState = {
             total: 0,
@@ -43,6 +43,7 @@ export const MyAuctions: FC = () => {
         const [tabIndex, setTabIndex] = useState(0);
         const [childTabValue, setChildTabValue] = useState(0);
 
+        const {modalOpen: settingsOpen, handleModalClose: handleCloseSettings, handleModalOpen: handleOpenSettings} = useModal();
         const {modalOpen: detailedModalOpen, handleModalClose: closeDetailedModal, handleModalOpen: openDetailedModal} = useModal();
         const {modalOpen: notificationsOpen, handleModalClose: closeNotificationsModal, handleModalOpen: openNotificationsModal} = useModal();
 
@@ -56,8 +57,17 @@ export const MyAuctions: FC = () => {
             setSelectedAuction(post);
         };
 
-        const handleTabChange = (setState) => (_, newValue) => {
-            setState(newValue);
+        const handleSettingsOpen = (post: CardDataType) => () => {
+            handleOpenSettings();
+            setSelectedAuction(post);
+        };
+
+        const handleTabChange = (_, newValue) => {
+            setTabIndex(newValue);
+        };
+
+        const handleChildTabChange = (event, newValue) => {
+            setChildTabValue(newValue);
         };
 
         const handleDeactivate = (ads_id?: number) => async () => {
@@ -69,7 +79,7 @@ export const MyAuctions: FC = () => {
                 setIsFetch(false);
             } catch (e) {
                 setIsFetch(false);
-                dispatch(setErrorMsgAction(e.message));
+                setErrorMsg(e.message);
             }
         };
 
@@ -97,7 +107,7 @@ export const MyAuctions: FC = () => {
 
             } catch (e) {
                 setIsFetch(false);
-                dispatch(setErrorMsgAction(e.message));
+                setErrorMsg(e.message);
             }
         };
 
@@ -125,7 +135,7 @@ export const MyAuctions: FC = () => {
             } catch (e) {
                 unstable_batchedUpdates(() => {
                     setIsFetch(false);
-                    dispatch(setErrorMsgAction(e.message));
+                    setErrorMsg(e.message);
                 });
             }
         };
@@ -138,113 +148,62 @@ export const MyAuctions: FC = () => {
         };
 
         const classes = useStyles();
-        const createdAuctionTabs = (
-            <>
-                <Tabs
-                    value={childTabValue}
-                    onChange={handleTabChange(setChildTabValue)}
-                    aria-label="tabs"
-                    className={classes.childTabs}
-                    TabIndicatorProps={{style: {display: 'none'}}}
-                >
-                    <Tab
-                        label={
-                            <Typography variant="subtitle1">
-                                Активные
-                            </Typography>
-                        }
-                    />
-                    <Tab
-                        label={
-                            <Typography variant="subtitle1">
-                                Архивные
-                            </Typography>
-                        }
-                    />
-                </Tabs>
-                <CustomTabPanel value={childTabValue} index={0}>
-                    {isFetch
-                        ? <CircularProgress color="primary"/>
-                        : auctionData.data.map(data => (
-                            <Box mb={3} key={data.id}>
-                                <CabinetCard
-                                    cardData={data}
-                                    handleDetailedOpen={handleDetailedOpen}
-                                    handleNotificationsOpen={handleNotificationsOpen}
-                                />
-                            </Box>
-                        ))}
-                </CustomTabPanel>
-                <CustomTabPanel value={childTabValue} index={1}>
-                    {isFetch
-                        ? <CircularProgress color="primary"/>
-                        : auctionArchiveData.data.map(data => (
-                            <Box mb={3} key={data.id}>
-                                <CabinetCard
-                                    archive
-                                    cardData={data}
-                                    handleDetailedOpen={handleDetailedOpen}
-                                    handleNotificationsOpen={handleNotificationsOpen}
-                                />
-                            </Box>
-                        ))}
-                </CustomTabPanel>
-            </>
-        );
-
-        const participatingAuctionTabs = (
-            <>
-                <Tabs
-                    aria-label="tabs"
-                    value={childTabValue}
-                    onChange={handleTabChange(setChildTabValue)}
-                    className={classes.childTabs}
-                    TabIndicatorProps={{style: {display: 'none'}}}
-                >
-                    <Tab
-                        label={
-                            <Typography variant="subtitle1">
-                                Активные
-                            </Typography>
-                        }
-                    />
-                    <Tab
-                        label={
-                            <Typography variant="subtitle1">
-                                Завершенные
-                            </Typography>
-                        }
-                    />
-                </Tabs>
-                <CustomTabPanel value={childTabValue} index={0}>
-                    {isFetch
-                        ? <CircularProgress color="primary"/>
-                        : participatingData.data.map(data => (
-                            <Box mb={3} key={data.id}>
-                                <CabinetCard
-                                    cardData={data}
-                                    handleDetailedOpen={handleDetailedOpen}
-                                    handleNotificationsOpen={handleNotificationsOpen}
-                                />
-                            </Box>
-                        ))}
-                </CustomTabPanel>
-                <CustomTabPanel value={childTabValue} index={1}>
-                    {isFetch
-                        ? <CircularProgress color="primary"/>
-                        : participatingArchiveData.data.map(data => (
-                            <Box mb={3} key={data.id}>
-                                <CabinetCard
-                                    archive
-                                    cardData={data}
-                                    handleDetailedOpen={handleDetailedOpen}
-                                    handleNotificationsOpen={handleNotificationsOpen}
-                                />
-                            </Box>
-                        ))}
-                </CustomTabPanel>
-            </>
-        );
+        const tabsContent = (fstTabPosts: CardDataType[], secTabPosts: CardDataType[]) => {
+            return (
+                <>
+                    <Tabs
+                        aria-label="tabs"
+                        value={childTabValue}
+                        onChange={handleChildTabChange}
+                        className={classes.childTabs}
+                        TabIndicatorProps={{style: {display: 'none'}}}
+                    >
+                        <Tab
+                            label={
+                                <Typography variant="subtitle1">
+                                    Активные
+                                </Typography>
+                            }
+                        />
+                        <Tab
+                            label={
+                                <Typography variant="subtitle1">
+                                    Архивные
+                                </Typography>
+                            }
+                        />
+                    </Tabs>
+                    <CustomTabPanel value={childTabValue} index={0}>
+                        {isFetch
+                            ? <CircularProgress color="primary"/>
+                            : fstTabPosts.map(data => (
+                                <Box mb={3} key={data.id}>
+                                    <CabinetCard
+                                        cardData={data}
+                                        handleSettingsOpen={handleSettingsOpen(data)}
+                                        handleDetailedOpen={handleDetailedOpen(data)}
+                                        handleNotificationsOpen={handleNotificationsOpen(data)}
+                                    />
+                                </Box>
+                            ))}
+                    </CustomTabPanel>
+                    <CustomTabPanel value={childTabValue} index={1}>
+                        {isFetch
+                            ? <CircularProgress color="primary"/>
+                            : secTabPosts.map(data => (
+                                <Box mb={3} key={data.id}>
+                                    <CabinetCard
+                                        cardData={data}
+                                        handleSettingsOpen={handleSettingsOpen(data)}
+                                        handleDetailedOpen={handleDetailedOpen(data)}
+                                        handleNotificationsOpen={handleNotificationsOpen(data)}
+                                    />
+                                </Box>
+                            ))}
+                    </CustomTabPanel>
+                </>
+            );
+        };
 
         const tabsData: TabsDataType = [
             {
@@ -252,14 +211,14 @@ export const MyAuctions: FC = () => {
                 title: t('createdAuc'),
                 itemsPerPage: ITEMS_PER_PAGE,
                 handleFetchByTab: () => '',
-                component: createdAuctionTabs
+                component: tabsContent(auctionData.data, auctionArchiveData.data)
             },
             {
                 id: 1,
                 title: t('participatingAuc'),
                 itemsPerPage: ITEMS_PER_PAGE,
                 handleFetchByTab: () => '',
-                component: participatingAuctionTabs
+                component: tabsContent(participatingData.data, participatingArchiveData.data)
             }
         ];
 
@@ -274,15 +233,20 @@ export const MyAuctions: FC = () => {
                     tabIndex={tabIndex}
                     title={t('myAuctions')}
                     headerTitle={t('myAuctions')}
-                    handleTabChange={handleTabChange(setTabIndex)}
+                    handleTabChange={handleTabChange}
                 />
                 <DetailedPostContainerModal
                     post={selectedAuction}
                     open={detailedModalOpen}
                     onClose={closeDetailedModal}
                     handleRefresh={handleRefresh}
-                    handleNotificationsOpen={handleNotificationsOpen}
                     handleDeactivate={handleDeactivate(selectedAuction.id)}
+                />
+                <SettingsModal
+                    post={selectedAuction}
+                    open={settingsOpen}
+                    handleRefresh={handleRefresh}
+                    onClose={handleCloseSettings}
                 />
                 <NotificationModal
                     post={selectedAuction}

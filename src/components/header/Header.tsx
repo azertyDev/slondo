@@ -1,44 +1,41 @@
-import {FC, useEffect} from 'react';
-import {useDispatch, useSelector} from 'react-redux';
+import {FC, useContext, useEffect} from 'react';
 import {Container} from '@material-ui/core';
 import {useTranslation} from 'next-i18next';
 import {Top} from './top/Top';
 import Bottom from './bottom/Bottom';
 import {AuthContainer} from './auth/AuthContainer';
-import {setIsAuthModalOpen, signInAction} from '@src/redux/slices/userSlice';
-import {RootState} from '@src/redux/rootReducer';
-import {fetchLocations} from '@src/redux/slices/locationsSlice';
 import {cookies} from '@src/helpers';
-import {useRouter} from 'next/router';
+import {UserCtx, AuthCtx} from "@src/context";
+import {useSearch} from "@src/hooks";
 import {useStyles} from './useStyles';
 // import {socketIO} from '@src/api/api';
 
 
 export const Header: FC = () => {
-    const {locale} = useRouter();
-    const dispatch = useDispatch();
     const {t} = useTranslation('header');
 
     const userFromCookie = cookies.get('slondo_user');
-    const user = useSelector((store: RootState) => store.user);
-    // const userId = user.info.id;
 
-    const isAuth = user.isAuth || !!userFromCookie;
+    const {user, setUser} = useContext(UserCtx);
+    const {auth, setAuthModalOpen, setIsAuth} = useContext(AuthCtx);
+
+    const isAuth = auth.isAuth || !!userFromCookie;
 
     const handleOpenModal = () => {
-        dispatch(setIsAuthModalOpen(true));
+        setAuthModalOpen(true);
+    };
+
+    const handleSignin = () => {
+        setIsAuth(true);
+        setUser(userFromCookie);
     };
 
     useEffect(() => {
-        dispatch(fetchLocations(locale));
-    }, [locale]);
-
-    useEffect(() => {
-        !user.isAuth
+        !auth.isAuth
         && !!userFromCookie
-        && dispatch(signInAction(userFromCookie));
+        && handleSignin();
         // !!userId && socketIO.on('connect', () => {
-        //     socketIO.emit('user_connected', userId);
+        //     socketIO.emit('user_connected', user.id);
         // });
     }, [isAuth]);
 
@@ -56,7 +53,7 @@ export const Header: FC = () => {
                         <Bottom
                             t={t}
                             isAuth={isAuth}
-                            avatar={user.info.avatar}
+                            avatar={user.avatar}
                             handleOpenModal={handleOpenModal}
                         />
                     </div>

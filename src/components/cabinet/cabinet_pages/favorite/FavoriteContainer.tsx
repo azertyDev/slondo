@@ -1,10 +1,8 @@
-import {FC, useEffect, useState} from 'react';
+import {FC, useContext, useEffect, useState} from 'react';
 import {TabsContent} from '@src/components/cabinet/cabinet_pages/TabsContent';
 import {Favorite} from '@src/components/cabinet/cabinet_pages/favorite/Favorite';
 import {withAuthRedirect} from '@root/src/hocs/withAuthRedirect';
 import {userAPI} from '@src/api/api';
-import {useDispatch} from 'react-redux';
-import {setErrorMsgAction} from '@src/redux/slices/errorSlice';
 import {Box, IconButton, List, ListItem, ListItemText, Typography} from '@material-ui/core';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import {InitialCabinetCardState, TabsDataType} from '@root/interfaces/Cabinet';
@@ -14,13 +12,13 @@ import {ITEMS_PER_PAGE} from '@src/constants';
 import {useModal} from '@src/hooks/useModal';
 import {DetailedPostContainerModal} from '@src/components/cabinet/components/detailed_post_modal/DetailedPostContainerModal';
 import {initialCardData} from '@src/components/cabinet/cabinet_pages/my_posts/MyPosts';
-import {useStyles} from './useStyles';
 import {CardDataType} from "@root/interfaces/CardData";
+import {useStyles} from './useStyles';
+import {ErrorCtx} from "@src/context";
 
 const FavoriteContainer: FC = () => {
-    const dispatch = useDispatch();
-    const {t} = useTranslation(['cabinet', 'notifications', 'categories', 'common', 'locations']);
-    const classes = useStyles();
+    const {t} = useTranslation('cabinet');
+    const {setErrorMsg} = useContext(ErrorCtx);
 
     const initialFavoriteState: InitialCabinetCardState = {
         total: 0,
@@ -62,7 +60,7 @@ const FavoriteContainer: FC = () => {
                 setFavoriteAucData({data, total});
             }
         } catch (e) {
-            dispatch(setErrorMsgAction(e.message));
+            setErrorMsg(e.message);
         }
     };
     const handleRemoveFavorite = async () => {
@@ -74,7 +72,7 @@ const FavoriteContainer: FC = () => {
                 await fetchFavoriteData('auc');
             }
         } catch (e) {
-            dispatch(setErrorMsgAction(e.message));
+            setErrorMsg(e.message);
         }
         handleModalClose();
     };
@@ -82,6 +80,8 @@ const FavoriteContainer: FC = () => {
         closeDetailedModal();
         setSelectedPost(post);
     };
+
+    const classes = useStyles();
     const getModalContent = () => {
         switch (modalContentIndex) {
             case 1:
@@ -214,7 +214,6 @@ const FavoriteContainer: FC = () => {
                 open={detailedModalOpen}
                 onClose={closeDetailedModal}
                 handleRefresh={handleRefresh}
-                handleNotificationsOpen={handleNotificationsOpen}
             />
         </>
     );

@@ -1,4 +1,4 @@
-import React, {FC, useState} from 'react';
+import {FC, useState} from 'react';
 import {Typography} from '@material-ui/core';
 import {CustomButton} from '@src/components/elements/custom_button/CustomButton';
 import {useStyles} from './useStyles';

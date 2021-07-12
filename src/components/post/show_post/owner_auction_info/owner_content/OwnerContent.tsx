@@ -1,4 +1,4 @@
-import {FC, useEffect, useState} from 'react';
+import {FC, useContext, useEffect, useState} from 'react';
 import {WithT} from 'i18next';
 import {Hidden, Typography} from '@material-ui/core';
 import {CustomButton} from '@src/components/elements/custom_button/CustomButton';
@@ -6,23 +6,21 @@ import {SafeIcon} from '@root/src/components/elements/icons';
 import {UserInfoWithAvatar} from '@src/components/elements/user_info_with_avatar/UserInfoWithAvatar';
 import {SocialsBlock} from '@root/src/components/elements/socials_block/SocialsBlock';
 import {SafeDealDrawer} from '@src/components/elements/safe_deal_drawer/SafeDealDrawer';
-import {useDispatch, useSelector} from 'react-redux';
-import {RootState} from '@src/redux/rootReducer';
 import {myUzCardAPI} from '@src/api/api';
-import {setErrorMsgAction} from '@root/src/redux/slices/errorSlice';
-import {setIsAuthModalOpen} from '@root/src/redux/slices/userSlice';
 import {ConfirmModal} from '@src/components/elements/confirm_modal/Confirm_modal';
 import {useModal} from '@src/hooks/useModal';
 import {useUserCard} from '@src/hooks/useUserCard';
 import {useStyles} from './useStyles';
+import {AuthCtx} from "@src/context/AuthCtx";
+import {ErrorCtx} from "@src/context";
 
 
 type OwnerPropsType = {
     postData,
-    authorPhones: { phone: string, additional_number: string },
-    handleFollow: (userId) => () => void,
     showPhone: boolean,
-    handleShowPhone: () => void
+    handleShowPhone: () => void,
+    handleFollow: (userId) => () => void,
+    authorPhones: { phone: string, additional_number: string }
 } & WithT;
 
 export const OwnerContent: FC<OwnerPropsType> = (props) => {
@@ -42,11 +40,11 @@ export const OwnerContent: FC<OwnerPropsType> = (props) => {
         subscribed
     } = postData;
 
-    const dispatch = useDispatch();
-    const {user} = useSelector((store: RootState) => store);
+    const {setErrorMsg} = useContext(ErrorCtx);
+    const {auth: {isAuth}, setAuthModalOpen} = useContext(AuthCtx);
+
     const {userCard, fetchUserCard} = useUserCard();
 
-    const isAuth = user.isAuth;
     const hasCard = !!userCard.cardId;
 
     const showPhoneTxt = showPhone ? authorPhones.phone || 'number_not_available' : 'show_phone';
@@ -71,13 +69,13 @@ export const OwnerContent: FC<OwnerPropsType> = (props) => {
         } catch (e) {
             setIsFetch(false);
             handleCloseSafeDeal();
-            dispatch(setErrorMsgAction(e.message));
+            setErrorMsg(e.message);
         }
     };
 
     const handleSafeDeal = () => {
         if (!isAuth) {
-            dispatch(setIsAuthModalOpen(true));
+            setAuthModalOpen(true);
         } else if (hasCard) {
             handleOpenSafeDeal();
         } else {

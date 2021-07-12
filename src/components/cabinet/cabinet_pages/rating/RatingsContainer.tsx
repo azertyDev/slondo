@@ -1,14 +1,13 @@
-import React, {FC, useEffect, useState} from 'react';
+import {FC, useContext, useEffect, useState} from 'react';
 import {Ratings} from '@src/components/cabinet/cabinet_pages/rating/Ratings';
 import {useTranslation} from 'react-i18next';
 import {withAuthRedirect} from '@src/hocs/withAuthRedirect';
-import {useDispatch} from 'react-redux';
-import {setErrorMsgAction} from '@src/redux/slices/errorSlice';
 import {userAPI} from '@src/api/api';
+import {ErrorCtx} from "@src/context";
 
 const RatingsContainer: FC = () => {
-    const dispatch = useDispatch();
     const {t} = useTranslation('cabinet');
+    const {setErrorMsg} = useContext(ErrorCtx);
 
     const initialUserRatingState = {
         isFetch: false,
@@ -23,7 +22,7 @@ const RatingsContainer: FC = () => {
             const {data} = await userAPI.getAllUserRating();
             setUserRatings({...userRatings, data, isFetch: false});
         } catch (e) {
-            dispatch(setErrorMsgAction(e.message));
+            setErrorMsg(e.message);
         }
     };
 
@@ -32,7 +31,7 @@ const RatingsContainer: FC = () => {
             const {} = userAPI.setReplyComment(comment_id, comment);
             fetchUserRatings();
         } catch (e) {
-            dispatch(setErrorMsgAction(e.message));
+            setErrorMsg(e.message);
         }
     };
 

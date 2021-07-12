@@ -1,5 +1,4 @@
-import {FC, Fragment, useState} from 'react';
-import {useDispatch} from 'react-redux';
+import {FC, Fragment, useContext, useState} from 'react';
 import {unstable_batchedUpdates} from 'react-dom';
 import {TabsContent} from '@src/components/cabinet/cabinet_pages/TabsContent';
 import {withAuthRedirect} from '@src/hocs/withAuthRedirect';
@@ -10,14 +9,14 @@ import {myUzCardAPI, userCabinetAPI} from '@src/api/api';
 import {CustomCircularProgress} from '@src/components/elements/custom_circular_progress/CustomCircularProgress';
 import {CabinetCard} from '@src/components/cabinet/components/cabinet_card/CabinetCard';
 import {CustomButton} from '@src/components/elements/custom_button/CustomButton';
-import {setErrorMsgAction} from '@root/src/redux/slices/errorSlice';
 import {ConfirmModal} from '@src/components/elements/confirm_modal/Confirm_modal';
+import {ErrorCtx} from "@src/context";
 
 const MyPurchases: FC = () => {
     const {t} = useTranslation('cabinet');
     const title = t('myPurchases');
+    const {setErrorMsg} = useContext(ErrorCtx);
 
-    const dispatch = useDispatch();
     const [tabIndex, setTabIndex] = useState(0);
     const [total, setTotal] = useState(0);
     const [modalTitle, setModalTitle] = useState('');
@@ -70,7 +69,7 @@ const MyPurchases: FC = () => {
             setIsFetch(false);
         } catch (e) {
             setIsFetch(false);
-            dispatch(setErrorMsgAction(e.message));
+            setErrorMsg(e.message);
         }
     };
 

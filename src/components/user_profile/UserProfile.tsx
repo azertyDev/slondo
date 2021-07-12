@@ -1,4 +1,4 @@
-import {FC, useEffect, useState} from 'react';
+import {FC, useContext, useEffect, useState} from 'react';
 import {Box, Grid, Typography} from '@material-ui/core';
 import {MainLayout} from '@src/components/main_layout/MainLayout';
 import {UserInfo} from '@root/interfaces/Auth';
@@ -8,15 +8,13 @@ import {UserPosts} from '@src/components/user_profile/pages/posts/UserPosts';
 import {UserRatingsContainer} from '@src/components/user_profile/pages/ratings/UserRatingsContainer';
 import {UserFollowsList} from '@src/components/user_profile/pages/follows_list/UserFollowsList';
 import {userAPI} from '@src/api/api';
-import {setErrorMsgAction} from '@src/redux/slices/errorSlice';
-import {useDispatch} from 'react-redux';
 import {useRouter} from 'next/router';
 import {useTranslation} from 'next-i18next';
+import {ErrorCtx} from "@src/context";
 import {useStyles} from './useStyles';
 
-
 export const UserProfile: FC = () => {
-    const dispatch = useDispatch();
+    const {setErrorMsg} = useContext(ErrorCtx);
     const {user_id} = useRouter().query;
     const {t} = useTranslation('cabinet');
 
@@ -40,7 +38,7 @@ export const UserProfile: FC = () => {
             const userData = await userAPI.getUserInfoById(user_id as string);
             setUserInfo(userData);
         } catch (e) {
-            dispatch(setErrorMsgAction(e.message));
+            setErrorMsg(e.message);
         }
     };
 
