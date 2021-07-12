@@ -5,11 +5,10 @@ import {useStyles} from './useStyles';
 
 type ThemesMenuPropsType = {
     data: any[],
-    handleClick: (e) => void,
-    title: string
+    handleClick: (term) => () => void,
 };
 
-export const ThemesMenu: FC<ThemesMenuPropsType> = ({data, handleClick, title}) => {
+export const ThemesMenu: FC<ThemesMenuPropsType> = ({data, handleClick}) => {
     const [open, setOpen] = useState(false);
     const [isActive, setActive] = useState(false);
 
@@ -22,9 +21,6 @@ export const ThemesMenu: FC<ThemesMenuPropsType> = ({data, handleClick, title}) 
     const classes = useStyles();
     return (
         <Grid item xs={3} className={classes.root}>
-            <Typography variant="h6" color="initial">
-                {title}
-            </Typography>
             <List component="nav" className={classes.helpMenu}>
                 {
                     data.map((el) => {
@@ -32,7 +28,7 @@ export const ThemesMenu: FC<ThemesMenuPropsType> = ({data, handleClick, title}) 
                             <ListItem
                                 button
                                 key={el.id}
-                                onClick={() => handleClick(el.term)}
+                                onClick={handleClick(el.term)}
                                 className={term === `${el.term}` ? classes.active : ''}
                             >
                                 <ListItemText primary={el.title}/>
@@ -40,26 +36,7 @@ export const ThemesMenu: FC<ThemesMenuPropsType> = ({data, handleClick, title}) 
                         );
                     })
                 }
-                {/*<Collapse in={open} timeout="auto" unmountOnExit>*/}
-                {/*    <List component="div" disablePadding>*/}
-                {/*        <ListItem button onClick={handleChildClick}*/}
-                {/*            <ListItemText primary="Я хочу заказать услугу" />*/}
-                {/*        </ListItem>*/}
-                {/*        <ListItem button/>*/}
-                {/*            <ListItemText primary="Я хочу предложить услугу" />*/}
-                {/*        </ListItem>*/}
-                {/*    </List>*/}
-                {/*</Collapse>*/}
             </List>
-            {/*<List component="nav" className={classes.helpMenu + ' feedback'}>*/}
-            {/*    <Link href='/feedback'>*/}
-            {/*        <a>*/}
-            {/*            <ListItem button>*/}
-            {/*                <ListItemText primary={} />*/}
-            {/*            </ListItem>*/}
-            {/*        </a>*/}
-            {/*    </Link>*/}
-            {/*</List>*/}
         </Grid>
     );
 };

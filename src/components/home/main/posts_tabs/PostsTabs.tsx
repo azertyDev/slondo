@@ -88,7 +88,7 @@ export const PostsTabs: FC<MainContentProps> = (props) => {
                          ? <CircularProgress size={25}/>
                          : <CustomButton onClick={handleShowMore}>
                              <Typography variant="subtitle2" color="initial">
-                                 {t('showMore')}
+                                 {t('common:showMore')}
                              </Typography>
                          </CustomButton>}
                     </Grid>
