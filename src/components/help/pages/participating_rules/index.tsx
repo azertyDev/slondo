@@ -12,7 +12,7 @@ export const ParticipatingRules = () => {
     const classes = useStyles();
     return (
         <>
-            <Grid item xs={6}>
+            <Grid item xs={12}>
                 ParticipatingRules
             </Grid>
         </>

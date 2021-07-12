@@ -5,7 +5,7 @@ import Link from 'next/link'
 export const legal_docs = [
     {
         id: 1,
-        term: 'userAgreements',
+        term: 'user_agreements',
         title:
             <Typography variant='subtitle1'>
                 Пользовательское соглашение
@@ -14,7 +14,7 @@ export const legal_docs = [
             <Typography variant='subtitle1' className='preface'>Настоящее Пользовательское соглашение (далее –
                 Соглашение) регулирует отношения между ООО «BOOMERANG MEDIA» Республика Узбекистан, г. Ташкент,
                 Мирзо-Улугбекский район, 2 проезд Асака, дом 12, ИНН 307 114 152 (далее «Компания») и пользователями
-                сети Интернет которые могут быть физическими так и юридическими лицами (далее - «Пользователь») ,
+                сети Интернет которые могут быть физическими так и юридическими лицами (далее - «Пользователь»),
                 возникающие при использовании WEB-портала для ЭВМ и мобильных устройств, расположенного в сети интернет
                 SLONDO.UZ (далее – «Сервис SLONDO», «Сервис»), и является предложением ООО «BOOMERANG MEDIA» в адрес
                 Пользователя заключить договор на указанных в Пользовательском соглашении условиях. <br />
@@ -1562,7 +1562,7 @@ export const legal_docs = [
     },
     {
         id: 2,
-        term: 'privacyPolice',
+        term: 'privacy_police',
         title:
             <Typography variant='subtitle1'>
                 Политика конфиденциальности
@@ -2251,7 +2251,7 @@ export const legal_docs = [
     },
     {
         id: 3,
-        term: 'safeAuctionOffer',
+        term: 'safe_auction_offer',
         title: 'Оферта “Безопасный торг”',
         preface:
             <Typography variant='subtitle1' className='preface'>
@@ -2744,7 +2744,7 @@ export const legal_docs = [
             },
         ],
     },
-    { id: 4, term: 'topOffer', title: 'Оферта “Поднять в топ”', paragraphs: [] },
-    { id: 5, term: 'advancedAuctionOffer', title: 'Оферта “Продвинутый аукцион”', paragraphs: [] },
-    { id: 6, term: 'advertisingOffer', title: 'Оферта о размещение рекламы', paragraphs: [] },
+    { id: 4, term: 'top_offer', title: 'Оферта “Поднять в топ”', paragraphs: [] },
+    { id: 5, term: 'advanced_auction_offer', title: 'Оферта “Продвинутый аукцион”', paragraphs: [] },
+    { id: 6, term: 'advertising_offer', title: 'Оферта о размещение рекламы', paragraphs: [] },
 ]

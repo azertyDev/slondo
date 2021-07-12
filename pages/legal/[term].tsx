@@ -1,4 +1,4 @@
-import {LegalContainer} from '@src/components/legal/LegalContainer';
+import {LegalContainer} from '@src/components/help/pages/user_agreements/LegalContainer';
 import {serverSideTranslations} from 'next-i18next/serverSideTranslations';
 import {GetServerSideProps} from 'next';
 

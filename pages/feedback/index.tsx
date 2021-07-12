@@ -1,4 +1,4 @@
-import {FeedbackContainer} from '@src/components/feedback/FeedbackContainer';
+import {FeedbackContainer} from '@src/components/help/pages/feedback/FeedbackContainer';
 import {GetStaticProps} from 'next';
 import {serverSideTranslations} from 'next-i18next/serverSideTranslations';
 

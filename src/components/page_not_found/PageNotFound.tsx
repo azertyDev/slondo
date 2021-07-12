@@ -9,9 +9,9 @@ export const PageNotFound: FC = () => {
         <div>
             <Head>
                 <meta name="robots" content="noindex"/>
+                <meta name="description" content=''/>
                 <meta property="og:site_name" content="Slondo"/>
                 <meta property="og:type" content="website"/>
-                <meta name="description" content=''/>
                 <meta property="og:title" content={title} key="ogtitle"/>
                 <meta property="og:description" content='' key="ogdesc"/>
                 <title>{title}</title>

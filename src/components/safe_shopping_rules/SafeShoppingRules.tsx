@@ -6,7 +6,6 @@ import { Logo } from '../elements/icons';
 import { Localization } from '../header/top/localization/Localization';
 import { CustomTabPanel } from '../elements/custom_tab_panel/CustomTabPanel';
 import {useTranslation} from 'react-i18next';
-import Image from 'next/image';
 
 function HideOnScroll(props) {
     const { children, window } = props;

@@ -1,4 +1,4 @@
-import {HelpContainer} from '@src/components/help/HelpContainer';
+import {HelpContent} from '@src/components/help/HelpContent';
 import {serverSideTranslations} from 'next-i18next/serverSideTranslations';
 import {GetServerSideProps} from 'next';
 
@@ -23,5 +23,5 @@ export const getServerSideProps: GetServerSideProps = async ({locale}) => ({
     }
 });
 
-export default HelpContainer;
+export default HelpContent;
 

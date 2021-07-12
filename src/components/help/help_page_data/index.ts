@@ -1,27 +1,108 @@
-// export const data = [
-//     { id: 1, title: 'Заказ и предложение услуг' },
-//     { id: 2, title: 'Настройки аккаунта' },
-//     { id: 3, title: 'Доступ к Slondo' },
-//     { id: 4, title: 'Истории на Slondo' },
-//     { id: 5, title: 'Безопасная сделка' },
-//     { id: 6, title: 'Действия со своими объявлениями' },
-//     { id: 7, title: 'Уведомления в браузере' },
-//     { id: 8, title: 'Взаимодействие пользователей' },
-//     { id: 9, title: 'Бонусная система' },
-//     { id: 10, title: 'Услуга «Продать быстрее»' },
-//     { id: 11, title: 'Услуга «Пакеты объявлений»' },
-//     { id: 12, title: 'Тариф' },
-//     { id: 13, title: 'Slondo для бизнеса' },
-//     { id: 14, title: 'Требования к Магазинам' },
-//     { id: 15, title: 'Нарушение интеллектуальных прав' },
-//     { id: 16, title: 'Обратная связь' },
-// ]
+const data = [
+    {
+        id: 1,
+        section: 'Доступ к Slondo',
+        subSections: [
+            'Регистрация',
+            'Вход в аккаунт (Авторизация на сайте)',
+            'Забыл пароль',
+            'Сменить пароль'
+        ],
+        term: 'access_to_slondo'
+    },
+    {
+        id: 2,
+        section: 'Безопасность личных данных',
+        subSections: [
+            'Мой аккаунт заблокирован Администрацией сайта'
+        ],
+        term: 'personal_data_security'
+    },
+    {
+        id: 3,
+        section: 'Объявления',
+        subSections: [
+            'Создание объявлений',
+            'Редактирование объявлений',
+            'Как деактивировать объявление',
+            'Объявление отклонено'
+        ],
+        term: 'posts'
+    },
+    {
+        id: 4,
+        section: 'Правила сайта',
+        subSections: [
+            'Требования к фото – материалам SLONDO',
+            'Запрещено размещение на сервисе SLONDO',
+            'Требования к описанию товара,  аукциона или услуги',
+            'Требования к аккаунтам пользователей сервиса',
+            'Запрещенные товары и услуги'
+        ],
+        term: 'site_rules'
+    },
+    {
+        id: 5,
+        section: 'Аукцион',
+        subSections: [
+            'Простой аукцион',
+            'Продвинутый аукцион',
+            'Создание  аукциона',
+            'Завершение аукциона',
+            'Проведение  аукциона',
+            'Подача ставки'
+        ],
+        term: 'auction'
+    },
+    {
+        id: 6,
+        section: 'Безопасная покупка',
+        subSections: [
+            'Что такое безопасная покупка?',
+            'Как продать товар с помощью Безопасной покупки?',
+            'Как купить товар через безопасную покупку?'
+        ],
+        term: 'safe_shopping'
+    },
+    {
+        id: 7,
+        section: 'Взаимодействие пользователей',
+        subSections: [
+            'Чаты',
+            'Оценки и отзывы'
+        ],
+        term: 'user_interaction'
+    },
+    {
+        id: 8,
+        section: 'Поиск в сервисе',
+        term: 'search_in_service'
+    }
+];
 
-export const data = [
-    { id: 1, title: 'Как зарегистрироваться?', term: 'how_to_register' },
-    { id: 2, title: 'Как участвовать в аукционе?', term: 'how_to_participate' },
-    { id: 3, title: 'Как создать аукцион?', term: 'how_to_сreate_post' },
-    { id: 4, title: 'Как создать объявление?', term: 'how_to_create_auction' },
-    { id: 5, title: 'Обратная связь', term: 'feedback' },
-    { id: 6, title: 'Пользовательские соглашения', term: 'user_agreements' },
-]
+const data2 = [
+    {id: 1, section: 'Как зарегистрироваться?', term: 'how_to_register'},
+    {id: 2, section: 'Как участвовать в аукционе?', term: 'how_to_participate'},
+    {id: 3, section: 'Как создать аукцион?', term: 'how_to_create_post'},
+    {id: 4, section: 'Как создать объявление?', term: 'how_to_create_auction'}
+];
+
+const data3 = [
+    {id: 1, section: 'Пользовательское соглашение', term: 'user_agreements'},
+    {id: 2, section: 'Политика конфиденциальности', term: 'privacy_police'},
+    {id: 3, section: 'Оферта “Безопасный торг”', term: 'safe_auction_offer'},
+    {id: 4, section: 'Оферта “Поднять в топ”', term: 'top_offer'},
+    {id: 5, section: 'Оферта “Продвинутый аукцион”', term: 'advanced_auction_offer'},
+    {id: 6, section: 'Оферта о размещение рекламы', term: 'advertising_offer'}
+];
+
+const data4 = [
+    {id: 1, section: 'Обратная связь', term: 'feedback'}
+];
+
+export default [
+    data,
+    data2,
+    data3,
+    data4
+];
