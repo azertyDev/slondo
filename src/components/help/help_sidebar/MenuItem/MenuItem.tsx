@@ -19,26 +19,29 @@ export const MenuItem: FC<MenuItemPropsType> = ({data, handleClick}) => {
     const [open, setOpen] = useState(false);
     const {query: {term}} = useRouter();
 
-    const handleMenuOpen = () => {
-        handleClick(data.term);
+    const handleMenuOpen = (value) => () => {
+        handleClick(value);
         setOpen(!open);
     };
+
     const classes = useStyles();
     return (
         <>
             <ListItem
                 button
-                onClick={handleMenuOpen}
+                onClick={handleMenuOpen(data.term)}
                 selected={term === data.term}
             >
-                <ListItemText primary={
-                    <Typography
-                        variant="subtitle1"
-                        color="textPrimary"
-                    >
-                        {data.section}
-                    </Typography>
-                } />
+                <ListItemText
+                    primary={
+                        <Typography
+                            variant="subtitle1"
+                            color="textPrimary"
+                        >
+                            {data.section}
+                        </Typography>
+                    }
+                />
             </ListItem>
             {data.subSections && (<Collapse in={open} timeout="auto" unmountOnExit>
                 <List component="div" disablePadding>

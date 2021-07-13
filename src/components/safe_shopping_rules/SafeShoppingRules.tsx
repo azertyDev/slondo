@@ -1,11 +1,11 @@
 import {useState, cloneElement} from 'react';
 import {AppBar, Box, Container, Grid, Paper, Tab, Tabs, Toolbar, Typography, useScrollTrigger} from '@material-ui/core';
 import Link from 'next/link';
-import { useStyles } from './useStyles'
 import { Logo } from '../elements/icons';
 import { Localization } from '../header/top/localization/Localization';
 import { CustomTabPanel } from '../elements/custom_tab_panel/CustomTabPanel';
 import {useTranslation} from 'react-i18next';
+import { useStyles } from './useStyles'
 
 function HideOnScroll(props) {
     const { children, window } = props;

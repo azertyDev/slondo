@@ -1,4 +1,4 @@
-import {FC, useState} from 'react';
+import {cloneElement, FC, useState} from 'react';
 import Link from 'next/link';
 import {WithT} from 'i18next';
 import {useRouter} from 'next/router';
@@ -13,7 +13,8 @@ import {
     useMediaQuery,
     useTheme,
     Slide,
-    useScrollTrigger
+    useScrollTrigger,
+    Container
 } from '@material-ui/core';
 import {LeftDrawer} from './drawer/Drawer';
 import {Localization} from './localization/Localization';
@@ -34,10 +35,26 @@ type TopHeaderPropsType = {
     handleOpenModal: () => void;
 } & WithT;
 
+function ElevationScroll(props) {
+    const {children, window} = props;
+
+    const trigger = useScrollTrigger({
+        disableHysteresis: true,
+        threshold: 53,
+        target: window ? window() : undefined
+    });
+
+    return cloneElement(children, {
+        elevation: trigger ? 4 : 0
+    });
+}
+
 export const Top: FC<TopHeaderPropsType> = (props) => {
     const {t, handleOpenModal, isAuth} = props;
 
-    const trigger = useScrollTrigger();
+    const trigger = useScrollTrigger({
+        threshold: 53
+    });
     const {pathname} = useRouter();
     const [isOpen, setIsOpen] = useState(false);
     const isXsDown = useMediaQuery(useTheme().breakpoints.down('xs'));
@@ -54,12 +71,12 @@ export const Top: FC<TopHeaderPropsType> = (props) => {
 
     const classes = useStyles();
     return (
-        <div>
+        <>
             <Hidden mdDown>
-                <div className={classes.root}>
+                <Container maxWidth="xl" className={classes.root}>
                     <Grid container justify="space-between" alignItems="center">
                         <Grid item md={6}>
-                            <Location handleSelectLocation={handleSelectLocation}/>
+                            <Location handleSelectLocation={handleSelectLocation} />
                         </Grid>
                         <Grid
                             item
@@ -75,7 +92,7 @@ export const Top: FC<TopHeaderPropsType> = (props) => {
                                         <Typography variant="subtitle1">
                                             {t('actions')}
                                         </Typography>
-                                        <SurpriseIcon/>
+                                        <SurpriseIcon />
                                     </a>
                                 </Link>
                             </Grid>
@@ -95,16 +112,16 @@ export const Top: FC<TopHeaderPropsType> = (props) => {
                                         <Typography variant="subtitle1">
                                             {t('help')}
                                         </Typography>
-                                        <QuestionIcon/>
+                                        <QuestionIcon />
                                     </a>
                                 </Link>
                             </Grid>
                             <Grid item md={2} container justify='center'>
-                                <Localization/>
+                                <Localization />
                             </Grid>
                         </Grid>
                     </Grid>
-                </div>
+                </Container>
             </Hidden>
             {/*    Adaptive   */}
             <Hidden lgUp>
@@ -114,7 +131,11 @@ export const Top: FC<TopHeaderPropsType> = (props) => {
                         direction="down"
                         in={!trigger}
                     >
-                        <AppBar position={'fixed'} color={'inherit'} elevation={0}>
+                        <AppBar
+                            position='fixed'
+                            color='inherit'
+                            elevation={0}
+                        >
                             <Toolbar>
                                 <Grid
                                     container
@@ -127,9 +148,9 @@ export const Top: FC<TopHeaderPropsType> = (props) => {
                                             onClick={() => setIsOpen(true)}
                                         >
                                             <div className="burger-menu">
-                                                <div/>
-                                                <div/>
-                                                <div/>
+                                                <div />
+                                                <div />
+                                                <div />
                                             </div>
                                         </IconButton>
                                     </Grid>
@@ -161,13 +182,13 @@ export const Top: FC<TopHeaderPropsType> = (props) => {
                                 </Grid>
                             </Toolbar>
                             <Box px={isXsDown ? '16px' : '24px'} marginBottom='10px'>
-                                <HeaderSearchForm/>
+                                <HeaderSearchForm />
                             </Box>
                         </AppBar>
                     </Slide>
-                    <LeftDrawer isOpen={isOpen} setIsOpen={setIsOpen}/>
+                    <LeftDrawer isOpen={isOpen} setIsOpen={setIsOpen} />
                 </div>
             </Hidden>
-        </div>
+        </>
     );
 };

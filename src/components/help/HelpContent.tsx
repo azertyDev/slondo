@@ -1,4 +1,4 @@
-import {FC, useEffect, useState} from 'react';
+import React, {FC, useEffect, useState} from 'react';
 import {Grid, Typography} from '@material-ui/core';
 import {MainLayout} from '@src/components/main_layout/MainLayout';
 import {HelpSidebar} from '@src/components/help/help_sidebar/HelpSidebar';
@@ -10,26 +10,19 @@ import CreateAuctionRules from './pages/create_auction_rules';
 import {Feedback} from '@src/components/help/pages/feedback/Feedback';
 import {useRouter} from 'next/router';
 import {PageNotFound} from '@src/components/page_not_found/PageNotFound';
-import {HelpPage} from '@src/components/help/index';
 import {useStyles} from './useStyles';
 import {LegalComponent} from '@src/components/help/pages/user_agreements/LegalComponent';
 import {legal_docs} from '@src/components/help/pages/user_agreements/LegalDocs';
+import {useTranslation} from 'react-i18next';
 
 export const HelpContent: FC = () => {
-    const {push, query} = useRouter();
-    const {indexPage, term} = query;
-    const isIndexPage = indexPage === 'help';
+    const {t} = useTranslation();
+    const {push, query: {term}} = useRouter();
     const legalDoc = legal_docs.find(doc => doc.term === term);
     const [selectedDoc, setSelectedDoc] = useState(legalDoc);
 
     const handleClick = (value) => async () => {
         await push(`/help/${value}`);
-    };
-
-    const getIndexPage = () => {
-        return isIndexPage
-            ? <HelpPage />
-            : <PageNotFound />;
     };
 
     const getHelpPageContent = () => {
@@ -47,7 +40,7 @@ export const HelpContent: FC = () => {
             case 'user_agreements':
                 return <LegalComponent docs={selectedDoc} />;
             default:
-                return getIndexPage();
+                return <h1>{t('errors:pageNotFound')}</h1>;
         }
     };
 

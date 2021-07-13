@@ -3,6 +3,7 @@ import {makeStyles} from '@material-ui/core/styles';
 
 export const useStyles = makeStyles((theme) => ({
     root: {
+        marginBottom: 8,
         '& div.social-icons > a': {
             display: 'flex',
             alignItems: 'center',

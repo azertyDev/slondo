@@ -1,33 +1,45 @@
 import {makeStyles} from '@material-ui/core/styles';
 
-export const useStyles = makeStyles(() => ({
+export const useStyles = makeStyles((theme) => ({
     root: {
         position: 'relative',
-        background: '#fff',
-        borderRadius: '10px',
-        border: '1px solid #D5D5D5'
+        display: 'flex'
     },
     input: {
-        width: '75%',
+        borderRadius: '10px 0 0 10px',
+        border: '1px solid #D5D5D5',
+        borderRightWidth: 0,
+        background: '#fff',
+        width: '100%',
+        padding: '0px 40px',
+        [theme.breakpoints.down('md')]: {
+            height: 40,
+            borderRadius: '10px',
+            borderRightWidth: 1
+        },
         '& input': {
             padding: 0,
             fontFamily: 'inherit'
         }
     },
     iconButton: {
-        padding: '9px',
+        top: 0,
+        left: 0,
+        zIndex: 1,
+        padding: '11px',
+        position: 'absolute',
         '& svg path': {
             fill: '#666666'
         }
     },
     searchButton: {
-        position: 'absolute',
-        right: 0,
-        top: 0,
+        // position: 'absolute',
+        // right: 0,
+        // top: 0,
         width: '15%',
         height: '100%',
         backgroundColor: '#E9E9E9',
-        borderLeft: '1px solid #D5D5D5',
+        border: '1px solid #D5D5D5',
         borderTopLeftRadius: '0',
         borderTopRightRadius: '9px',
         borderBottomLeftRadius: '0',

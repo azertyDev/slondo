@@ -1,0 +1,24 @@
+{
+  "how_to_register": {
+    "name": "Qanday ro'yxatdan o'taman?",
+    "1": "Slondo.uz saytida ro'yxatdan o'tish uchun asosiy sahifaning yuqori o'ng burchagidagi “kirish“ tugmasini bosishingiz kerak.",
+    "2": "Ochilgan oynada telefon raqamingizni kiriting va “Keyingi“ tugmasini bosing.",
+    "3": "Telefoningizga kelgan parolni siz ekranda paydo bo'lgan “parol“ maydonchadiga yozishingiz va “Kirish“ tugmasini bosishingiz kerak. Agar barcha ma'lumotlar to'g'ri kiritilgan bo'lsa, Siz o’z akkauntingizga kira olasiz."
+  },
+  "how_to_participate": {
+    "name": "Auksionda qanday ishtirok etaman?"
+  },
+  "how_to_create_post": {
+    "name": "E'lonni qanday yarataman?",
+    "": "E’lon yaratish uchun Siz Slondo.uz asosiy sahifasining yuqori qismidagi “E’lon yaratish“ tugmasini bosing va ochilgan oynada “E’lon“ turini tanlang."
+  },
+  "how_to_create_auction": {
+    "name": "Auksionni qanday yarataman?"
+  },
+  "feedback": {
+    "name": ""
+  },
+  "user_agreements": {
+    "name": ""
+  }
+}

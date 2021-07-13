@@ -31,26 +31,24 @@ export const HelpSidebar: FC<ThemesMenuPropsType> = ({menuData, handleClick}) =>
                     }
                 />
             </FormControl>
-            {
-                menuData.map((data) => {
-                    return (
-                        <List component="nav" className={classes.helpMenu}>
-                            {
-                                data.map((el) => {
-                                    return (
-                                        <Fragment key={el.id}>
-                                            <MenuItem
-                                                handleClick={handleClick}
-                                                data={el}
-                                            />
-                                        </Fragment>
-                                    );
-                                })
-                            }
-                        </List>
-                    );
-                })
-            }
+            {menuData.map((data, index) => {
+                return (
+                    <List component="nav" className={classes.helpMenu} key={index}>
+                        {
+                            data.map((el) => {
+                                return (
+                                    <Fragment key={el.id}>
+                                        <MenuItem
+                                            handleClick={handleClick}
+                                            data={el}
+                                        />
+                                    </Fragment>
+                                );
+                            })
+                        }
+                    </List>
+                );
+            })}
         </Grid>
     );
 };

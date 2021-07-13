@@ -1,9 +1,9 @@
-import {useState} from 'react';
+import {cloneElement, useState} from 'react';
 import Link from 'next/link';
-import {AppBar, Avatar, Container, Grid, Hidden, Popover, Typography} from '@material-ui/core';
+import {AppBar, Avatar, Box, Container, Grid, Hidden, Popover, Typography, useScrollTrigger} from '@material-ui/core';
 import {CustomButton} from '@src/components/elements/custom_button/CustomButton';
 import {withScrollThreshold} from '@src/hocs/withScrollThreshold';
-import {Logo, QuestionIcon, SubstractIcon, SurpriseIcon} from '@src/components/elements/icons';
+import {Logo, QuestionIcon, SurpriseIcon} from '@src/components/elements/icons';
 import {AddIcon} from '@src/components/elements/icons/AddIcon';
 import {CategorySortIcon} from '@src/components/elements/icons/CategorySortIcon';
 import {SignIcon} from '@src/components/elements/icons/SignIcon';
@@ -15,6 +15,20 @@ import {cookieOpts, cookies} from '@src/helpers';
 import {SidebarMenu} from '@src/components/cabinet/cabinet_sidebar/sidebar_menu/SidebarMenu';
 import {useRouter} from 'next/router';
 import {useStyles} from './useStyles';
+
+function ElevationScroll(props) {
+    const {children, window} = props;
+
+    const trigger = useScrollTrigger({
+        disableHysteresis: true,
+        threshold: 0,
+        target: window ? window() : undefined
+    });
+
+    return cloneElement(children, {
+        elevation: trigger ? 4 : 0
+    });
+}
 
 const Bottom = (props) => {
     const {isScrollBreak, handleOpenModal, isAuth, t, avatar} = props;
@@ -49,155 +63,160 @@ const Bottom = (props) => {
 
     const classes = useStyles(props);
     return (
-        <div className={classes.root}>
+        <>
             <Hidden mdDown>
-                <AppBar
-                    color={'inherit'}
-                    elevation={isScrollBreak ? 1 : 0}
-                    position={isScrollBreak ? 'fixed' : 'absolute'}
-                >
-                    <Container maxWidth="xl">
-                        <Grid
-                            container
-                            justify="space-between"
-                            alignItems="center"
-                            spacing={2}
-                        >
+                <ElevationScroll {...props}>
+                    <AppBar
+                        elevation={0}
+                        color='inherit'
+                        className={classes.root}
+                        position={isScrollBreak ? 'fixed' : 'relative'}
+                    >
+                        <Container maxWidth="xl">
                             <Grid
                                 container
-                                item
-                                xs={3}
-                                spacing={1}
+                                justify="space-between"
                                 alignItems="center"
+                                spacing={2}
                             >
                                 <Grid
                                     container
                                     item
-                                    md={6}
-                                    className="bottom-logo"
+                                    xs={3}
+                                    spacing={1}
+                                    alignItems="center"
                                 >
-                                    <Link href="/">
-                                        <a>
-                                            <Logo/>
+                                    <Grid
+                                        container
+                                        item
+                                        md={6}
+                                        className="bottom-logo"
+                                    >
+                                        <Link href="/">
+                                            <a>
+                                                <Logo />
+                                            </a>
+                                        </Link>
+                                    </Grid>
+                                    <Grid
+                                        item
+                                        container
+                                        md={6}
+                                        justify="flex-end"
+                                        className="category-menu"
+                                    >
+                                        <CustomButton
+                                            color="primary"
+                                            className="bottom-category-button header-button"
+                                            onClick={handleDrawerShow(true)}
+                                        >
+                                            <CategorySortIcon />
+                                            <Typography variant="subtitle2">
+                                                {t('header:categories')}
+                                            </Typography>
+                                        </CustomButton>
+                                    </Grid>
+                                </Grid>
+                                <Grid
+                                    item
+                                    container
+                                    md={6}
+                                    alignItems="center"
+                                    className="search-block"
+                                >
+                                    <Grid item xs>
+                                        <HeaderSearchForm />
+                                    </Grid>
+                                </Grid>
+                                <Grid item md={2}>
+                                    <Link href="/create/type/select">
+                                        <a className='create-post-link'>
+                                            <CustomButton
+                                                color="primary"
+                                                className="header-button"
+                                            >
+                                                <Typography variant="subtitle2">
+                                                    {t('header:createPost')}
+                                                </Typography>
+                                                <AddIcon />
+                                            </CustomButton>
                                         </a>
                                     </Link>
                                 </Grid>
                                 <Grid
                                     item
                                     container
-                                    md={6}
-                                    justify="flex-end"
-                                    className="category-menu"
+                                    justify="center"
+                                    alignItems="center"
+                                    xs={1}
                                 >
-                                    <CustomButton
-                                        color="primary"
-                                        className="bottom-category-button header-button"
-                                        onClick={handleDrawerShow(true)}
-                                    >
-                                        <CategorySortIcon/>
-                                        <Typography variant="subtitle2">
-                                            {t('header:categories')}
-                                        </Typography>
-                                    </CustomButton>
-                                </Grid>
-                            </Grid>
-                            <Grid
-                                item
-                                container
-                                md={6}
-                                alignItems="center"
-                                className="search-block"
-                            >
-                                <Grid item xs>
-                                    <HeaderSearchForm/>
-                                </Grid>
-                            </Grid>
-                            <Grid item md={2}>
-                                <Link href="/create/type/select">
-                                    <a className='create-post-link'>
-                                        <CustomButton
-                                            color="primary"
-                                            className="header-button"
+                                    {isAuth
+                                        ? <span onClick={handleClick} className='avatar'>
+                                        <Avatar alt="Avatar" src={avatar} />
+                                    </span>
+                                        : <CustomButton
+                                            className="bottom-sign-button header-button"
+                                            onClick={handleOpenModal}
                                         >
                                             <Typography variant="subtitle2">
-                                                {t('header:createPost')}
+                                                {t('auth_reg:signIn')}
                                             </Typography>
-                                            <AddIcon/>
-                                        </CustomButton>
-                                    </a>
-                                </Link>
+                                            <SignIcon />
+                                        </CustomButton>}
+                                </Grid>
                             </Grid>
-                            <Grid
-                                item
-                                container
-                                justify="center"
-                                alignItems="center"
-                                xs={1}
-                            >
-                                {isAuth
-                                    ? <span onClick={handleClick} className='avatar'>
-                                        <Avatar alt="Avatar" src={avatar}/>
-                                    </span>
-                                    : <CustomButton
-                                        className="bottom-sign-button header-button"
-                                        onClick={handleOpenModal}
-                                    >
-                                        <Typography variant="subtitle2">
-                                            {t('auth_reg:signIn')}
-                                        </Typography>
-                                        <SignIcon/>
-                                    </CustomButton>}
-                            </Grid>
-                        </Grid>
-                    </Container>
-                </AppBar>
+                        </Container>
+                    </AppBar>
+                </ElevationScroll>
             </Hidden>
             {/* ========================== Adaptive ======================= */}
             <Hidden lgUp>
-                <div className="translate-local">
-                    <Location handleSelectLocation={handleSelectLocation}/>
-                    <Localization/>
-                </div>
-                <Grid
-                    item
-                    container
-                    alignItems="center"
-                    className='multi-actions'
-                    spacing={1}
-                    sm={7}
-                    xs={12}
-                >
-                    <Grid item sm={4} md={3}>
-                        <Link href="/promotions">
-                            <a>
-                                <SurpriseIcon/>
-                                <Typography variant="subtitle1">
-                                    {t('actions')}
-                                </Typography>
-                            </a>
-                        </Link>
+                <Box position='relative'>
+                    <div className="translate-local">
+                        <Location handleSelectLocation={handleSelectLocation}/>
+                        <Localization/>
+                    </div>
+                    <Grid
+                        item
+                        container
+                        alignItems="center"
+                        className='multi-actions'
+                        spacing={1}
+                        sm={7}
+                        xs={12}
+                    >
+                        <Grid item sm={4} md={3}>
+                            <Link href="/promotions">
+                                <a>
+                                    <SurpriseIcon/>
+                                    <Typography variant="subtitle1">
+                                        {t('actions')}
+                                    </Typography>
+                                </a>
+                            </Link>
+                        </Grid>
+                        {/*<Grid item md={2}>*/}
+                        {/*    <Link href="#">*/}
+                        {/*        <a>*/}
+                        {/*            <SubstractIcon/>*/}
+                        {/*            <Typography variant="subtitle1">*/}
+                        {/*                {t('bonus')}*/}
+                        {/*            </Typography>*/}
+                        {/*        </a>*/}
+                        {/*    </Link>*/}
+                        {/*</Grid>*/}
+                        <Grid item sm={4} md={3}>
+                            <Link href="/help">
+                                <a className={pathname === '/help' ? 'selected' : ''}>
+                                    <QuestionIcon/>
+                                    <Typography variant="subtitle1">
+                                        {t('help')}
+                                    </Typography>
+                                </a>
+                            </Link>
+                        </Grid>
                     </Grid>
-                    {/*<Grid item md={2}>*/}
-                    {/*    <Link href="#">*/}
-                    {/*        <a>*/}
-                    {/*            <SubstractIcon/>*/}
-                    {/*            <Typography variant="subtitle1">*/}
-                    {/*                {t('bonus')}*/}
-                    {/*            </Typography>*/}
-                    {/*        </a>*/}
-                    {/*    </Link>*/}
-                    {/*</Grid>*/}
-                    <Grid item sm={4} md={3}>
-                        <Link href="/help">
-                            <a className={pathname === '/help' ? 'selected' : ''}>
-                                <QuestionIcon/>
-                                <Typography variant="subtitle1">
-                                    {t('help')}
-                                </Typography>
-                            </a>
-                        </Link>
-                    </Grid>
-                </Grid>
+                </Box>
             </Hidden>
             <CustomDrawer
                 position='left'
@@ -221,7 +240,7 @@ const Bottom = (props) => {
             >
                 <SidebarMenu clearAnchor={handleClose}/>
             </Popover>
-        </div>
+        </>
     );
 };
 

@@ -42,23 +42,19 @@ export const Header: FC = () => {
     return (
         <header className={classes.root} id='back-to-top-anchor'>
             <div className='header-wrapper'>
-                <Container maxWidth="xl">
-                    <Top
-                        t={t}
-                        isAuth={isAuth}
-                        handleOpenModal={handleOpenModal}
-                    />
-                    <div>
-                        <Bottom
-                            t={t}
-                            isAuth={isAuth}
-                            avatar={user.avatar}
-                            handleOpenModal={handleOpenModal}
-                        />
-                    </div>
-                </Container>
+                <Top
+                    t={t}
+                    isAuth={isAuth}
+                    handleOpenModal={handleOpenModal}
+                />
+                <Bottom
+                    t={t}
+                    isAuth={isAuth}
+                    avatar={user.avatar}
+                    handleOpenModal={handleOpenModal}
+                />
                 <div className={classes.modalDialog}>
-                    <AuthContainer/>
+                    <AuthContainer />
                 </div>
             </div>
         </header>

@@ -68,10 +68,12 @@ export const useStyles = makeStyles((theme) => ({
                     color: theme.palette.primary.black,
                     '&:hover': {
                         '& > span.category-name': {
-                            background: '#F2F2F2'
+                            background: '#F2F2F2',
+                            transition: 'background 0.5s'
                         },
                         '& div.bg-layer': {
-                            filter: 'drop-shadow(0px 0px 4px rgba(0, 0, 0, 0.05))'
+                            boxShadow: '0px 0px 8px rgb(0 0 0 / 8%)',
+                            transition: 'box-shadow 0.5s'
                         }
                     },
                     '& > span.category-name': {

@@ -2,35 +2,35 @@ import {makeStyles} from '@material-ui/core/styles';
 
 export const useStyles = makeStyles((theme) => ({
     root: {
-        position: 'relative',
-        height: '50px',
+        transition: 'box-shadow 0.5s',
+        '&.MuiPaper-elevation4': {
+            WebkitBoxShadow: '0px 10px 16px -19px rgba(0, 0, 0, 0.6)',
+            MozBoxShadow: '0px 10px 16px -19px rgba(0, 0, 0, 0.6)',
+            boxShadow: '0px 10px 16px -19px rgba(0, 0, 0, 0.6)'
+        },
         [theme.breakpoints.down('md')]: {
             height: '100%',
             marginBottom: '10px'
         },
-        '& header.MuiAppBar-root': {
-            background: '#fafafa',
-            '& > div.MuiContainer-root': {
-                padding: ({isScrollBreak}) => !isScrollBreak && 0,
-                transition: 'padding .3s',
-                '& > div': {
-                    width: '100%',
-                    margin: 0,
-                    '& > div:first-child': {
-                        paddingLeft: 0
-                    }
+        '& > div.MuiContainer-root': {
+            // transition: 'padding .3s',
+            '& > div': {
+                width: '100%',
+                margin: 0,
+                '& > div:first-child': {
+                    paddingLeft: 0
                 }
-            },
-            '& div.bottom-logo': {
-                // marginRight: '20px',
-                '& a': {
+            }
+        },
+        '& div.bottom-logo': {
+            // marginRight: '20px',
+            '& a': {
+                width: '100%',
+                display: 'flex',
+                alignItems: 'center',
+                '& svg': {
                     width: '100%',
-                    display: 'flex',
-                    alignItems: 'center',
-                    '& svg': {
-                        width: '100%',
-                        height: '90%'
-                    }
+                    height: '90%'
                 }
             }
         },

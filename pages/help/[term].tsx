@@ -17,7 +17,8 @@ export const getServerSideProps: GetServerSideProps = async ({locale}) => ({
                 'footer',
                 'auth_reg',
                 'filters',
-                'errors'
+                'errors',
+                'help'
             ]
         )
     }
