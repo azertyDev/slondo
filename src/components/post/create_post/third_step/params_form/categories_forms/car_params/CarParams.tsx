@@ -20,7 +20,7 @@ import {ParametersIcon} from '@src/components/elements/icons';
 import {CustomAccordion} from '@src/components/elements/accordion/CustomAccordion';
 import {PostTitle} from '@src/components/post/create_post/third_step/params_form/post_title/PostTitle';
 import {useStyles} from './useStyles';
-import {useTranslation} from "next-i18next";
+import {useTranslation} from 'next-i18next';
 
 type CarParamsPropsType = {
     subcategoryName: string
@@ -193,6 +193,7 @@ export const CarParams: FC<CarParamsPropsType> = (props) => {
             subcategoryName
         );
     }, [filters]);
+
 
     const classes = useStyles();
     return (

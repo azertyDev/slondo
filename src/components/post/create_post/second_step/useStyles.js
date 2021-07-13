@@ -1,4 +1,4 @@
-import {makeStyles} from '@material-ui/core/styles'
+import {makeStyles} from '@material-ui/core/styles';
 
 export const useStyles = makeStyles((theme) => ({
     root: {
@@ -31,10 +31,13 @@ export const useStyles = makeStyles((theme) => ({
                     }
                 }
             }
-            
+
         },
         '& div.categories-menu': {
-            paddingRight: 20
+            paddingRight: 20,
+            [theme.breakpoints.down('xs')]: {
+                paddingRight: 0
+            }
         },
         '& div.sub-categories-menu': {
             '& div.search-block': {
@@ -80,7 +83,7 @@ export const useStyles = makeStyles((theme) => ({
                 backgroundPosition: 'bottom left',
                 opacity: 0.8,
                 [theme.breakpoints.down('md')]: {
-                    height: '454px',
+                    height: '454px'
                 },
                 '& > h2.MuiTypography-h2': {
                     fontSize: '3.75rem',
@@ -93,4 +96,4 @@ export const useStyles = makeStyles((theme) => ({
             }
         }
     }
-}))
+}));
