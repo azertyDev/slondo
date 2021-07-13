@@ -162,12 +162,12 @@ const Bottom = (props) => {
                     item
                     container
                     alignItems="center"
-                    justify="space-between"
                     className='multi-actions'
+                    spacing={1}
                     sm={7}
                     xs={12}
                 >
-                    <Grid item md={2}>
+                    <Grid item sm={4} md={3}>
                         <Link href="/promotions">
                             <a>
                                 <SurpriseIcon/>
@@ -177,17 +177,17 @@ const Bottom = (props) => {
                             </a>
                         </Link>
                     </Grid>
-                    <Grid item md={2}>
-                        <Link href="#">
-                            <a>
-                                <SubstractIcon/>
-                                <Typography variant="subtitle1">
-                                    {t('bonus')}
-                                </Typography>
-                            </a>
-                        </Link>
-                    </Grid>
-                    <Grid item md={2}>
+                    {/*<Grid item md={2}>*/}
+                    {/*    <Link href="#">*/}
+                    {/*        <a>*/}
+                    {/*            <SubstractIcon/>*/}
+                    {/*            <Typography variant="subtitle1">*/}
+                    {/*                {t('bonus')}*/}
+                    {/*            </Typography>*/}
+                    {/*        </a>*/}
+                    {/*    </Link>*/}
+                    {/*</Grid>*/}
+                    <Grid item sm={4} md={3}>
                         <Link href="/help">
                             <a className={pathname === '/help' ? 'selected' : ''}>
                                 <QuestionIcon/>

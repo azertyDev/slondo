@@ -23,36 +23,34 @@ export const Footer: FC = () => {
                                     </div>
                                 </Grid>
                             </Hidden>
-                            <Hidden smDown>
-                                <Grid item xs={12} md={3} container justify="center">
-                                    <ul>
-                                        <li>
-                                            <Link href="#">
-                                                <a>
-                                                    <Typography
-                                                        variant="subtitle1"
-                                                        color="initial"
-                                                    >
-                                                        {t('userAgreement')}
-                                                    </Typography>
-                                                </a>
-                                            </Link>
-                                        </li>
-                                        <li>
-                                            <Link href="#">
-                                                <a>
-                                                    <Typography
-                                                        variant="subtitle1"
-                                                        color="initial"
-                                                    >
-                                                        {t('advertise')}
-                                                    </Typography>
-                                                </a>
-                                            </Link>
-                                        </li>
-                                    </ul>
-                                </Grid>
-                            </Hidden>
+                            <Grid item xs={12} md={3} container justify="center">
+                                <ul>
+                                    <li>
+                                        <Link href="#">
+                                            <a>
+                                                <Typography
+                                                    variant="subtitle1"
+                                                    color="initial"
+                                                >
+                                                    {t('userAgreement')}
+                                                </Typography>
+                                            </a>
+                                        </Link>
+                                    </li>
+                                    <li>
+                                        <Link href="#">
+                                            <a>
+                                                <Typography
+                                                    variant="subtitle1"
+                                                    color="initial"
+                                                >
+                                                    {t('advertise')}
+                                                </Typography>
+                                            </a>
+                                        </Link>
+                                    </li>
+                                </ul>
+                            </Grid>
                             <Grid item xs={12} md={3} container justify="center">
                                 <ul>
                                     <li>
@@ -90,21 +88,21 @@ export const Footer: FC = () => {
                             <Hidden smDown>
                                 <Grid container item xs={12} md={3} justify='center'>
                                     <div className="social-icons">
-                                        <SocialsBlock />
+                                        <SocialsBlock/>
                                     </div>
                                 </Grid>
                             </Hidden>
                         </Grid>
-                        <Grid container  className="footer-bottom">
-                            <Grid item xs={3} container justify='center' alignItems='center'>
-                                <Logo />
+                        <Grid container className="footer-bottom">
+                            <Grid item xs={12} md={3} container justify='center' alignItems='center'>
+                                <Logo/>
                             </Grid>
-                            <Grid item xs={6} container justify="center" alignItems='center'>
+                            <Grid item xs={12} md={6} container justify="center" alignItems='center'>
                                 <Typography variant="subtitle1" color="initial">
                                     {t('termsOfUse')}
                                 </Typography>
                             </Grid>
-                            <Grid item xs={3} container justify="center" alignItems='center'>
+                            <Grid item xs={12} md={3} container justify="center" alignItems='center'>
                                 <Typography variant="subtitle1" color="initial">
                                     Copyright © 2020 Slondo.
                                 </Typography>

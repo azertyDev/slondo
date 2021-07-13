@@ -28,7 +28,6 @@ export const useStyles = makeStyles((theme) => ({
                         margin: 0,
                         listStyle: 'none',
                         '& > li': {
-                            marginBottom: 8,
                             '&:last-child': {
                                 marginBottom: 0
                             },
@@ -84,10 +83,10 @@ export const useStyles = makeStyles((theme) => ({
                     top: 0,
                     [theme.breakpoints.down('md')]: {
                         left: '7.5%',
-                        height: 1
+                        height: 1,
+                        width: '85%'
                     }
                 }
-
             }
         }
     }

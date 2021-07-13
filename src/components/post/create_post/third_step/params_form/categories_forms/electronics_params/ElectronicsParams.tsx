@@ -51,6 +51,7 @@ export const ElectronicsParams: FC<CommonParamsPropsType> = (props) => {
     useEffect(() => {
         setRequireVals(filters);
     }, [filters]);
+    // console.dir(values);
 
     return (
         <CustomFormikProvider formik={formik}>
