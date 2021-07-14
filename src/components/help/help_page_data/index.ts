@@ -83,8 +83,8 @@ const data = [
 const data2 = [
     {id: 1, section: 'Как зарегистрироваться?', term: 'how_to_register'},
     {id: 2, section: 'Как участвовать в аукционе?', term: 'how_to_participate'},
-    {id: 3, section: 'Как создать аукцион?', term: 'how_to_create_post'},
-    {id: 4, section: 'Как создать объявление?', term: 'how_to_create_auction'}
+    {id: 3, section: 'Как создать аукцион?', term: 'how_to_create_auction'},
+    {id: 4, section: 'Как создать объявление?', term: 'how_to_create_post'}
 ];
 
 const data3 = [

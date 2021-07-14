@@ -6,14 +6,52 @@
     "3": "Telefoningizga kelgan parolni siz ekranda paydo bo'lgan “parol“ maydonchadiga yozishingiz va “Kirish“ tugmasini bosishingiz kerak. Agar barcha ma'lumotlar to'g'ri kiritilgan bo'lsa, Siz o’z akkauntingizga kira olasiz."
   },
   "how_to_participate": {
-    "name": "Auksionda qanday ishtirok etaman?"
+    "name": "Auksionda qanday ishtirok etish mumkin?",
+    "1": "Auksion savdolarida ishtirok etish uchun Siz Slondo.uz saytida ro'yxatdan o'tishingiz kerak. Sizni qiziqtirgan mahsulotni toping, uning tavsifi va xususiyatlarini diqqat bilan o'qing. Agar kerak bo'lsa, sotuvchiga savollar bering.",
+    "section": {
+      "name": "Savdoda bir necha usulda ishtirok etishingiz mumkin:",
+      "1": "<0>Pul tikish</0> <1>- tizim avtomatik ravishda keyingi narx miqdorini hisoblaydi, siz uni qabul qilishingiz yoki oshirishingiz mumkin (avtomatik qo’yilgan narxdan past narx tikish mumkin emas). Maksimal narx ham tizim tomonidan hisoblab chiqilgan va “Pul tikish“ tugmasi ostida ko'rsatilgan.</1>",
+      "2": "<0>Narxni taklif qilish</0> <1>- agar sotuvchi ushbu parametrni yoqsa, Siz darhol sotib olish narxingizni taklif qilishingiz mumkin. Sotuvchi uni qabul qilishi mumkin (kim oshdi savdosi tugaydi) yoki rad etishi mumkin.</1>",
+      "3": "<0>Hozir sotib oling</0> <1>– agar sotuvchi ushbu parametrni yoqsa, siz “hozir sotib oling“ tugmasini bosishingiz mumkin va agar darhol sotib olish narxi Sizni qoniqtirsa,  mahsulotni sotib olasiz va  auktsion tugaydi.</1>"
+    },
+    "2": "Shunday qilib, agar siz bergan narx <0>Shaxsiy kabinetingizga</0> o'tkazilsa, <0>“Mening auktsionlarim“</0> - “ishtirok etish“yorlig’ida bildirishnoma keladi. Siz keyingi ishni bajarishingiz yoki rad etishingiz mumkin. Pul tikish auksionning butun muddati davomida ochiq turadi. Agar siz kim oshdi savdosi g'olibi bo'lsangiz, xabarnoma olasiz, tez orada sotuvchi siz bilan aloqaga chiqib, tovarni  topshirish bo’yicha kelishib olasiz."
   },
   "how_to_create_post": {
     "name": "E'lonni qanday yarataman?",
-    "": "E’lon yaratish uchun Siz Slondo.uz asosiy sahifasining yuqori qismidagi “E’lon yaratish“ tugmasini bosing va ochilgan oynada “E’lon“ turini tanlang."
+    "1": "E’lon yaratish uchun Siz Slondo.uz asosiy sahifasining yuqori qismidagi “E’lon yaratish“ tugmasini bosing va ochilgan oynada “E’lon“ turini tanlang.",
+    "section": {
+      "1": "Keyin “<0>*</0>“ belgisi bor maydonchalarni to'ldirish kerak:",
+      "2": "Toifasi, e'lon nomi, narxi, holati, manzili, rasmi, tavsifi.",
+      "3": "Har bir toifadagi qo'shimcha filtrlarga alohida e'tibor bering:",
+      "4": "Misol uchun, “Mobil telefonlar“ turkumidagi “Ishlab chiqaruvchi“ filtri foydalanuvchilarga faqat ularni qiziqtirgan modellarni izlashga yordam beradi. “Monitorlar“ turkumidagi “Ekran o’lchami“ filtri esa, foydalanuvchilarga keraksiz variantlarga vaqt sarflamaslikka yordam beradi.",
+      "5": "Zarurat tug’ilsa, quyidagi variantlarni belgilashingiz mumkin:",
+      "6": "<0>«Xavfsiz xarid» parametri</0> <1>- bu erda tasdiqlash belgisini qo'yib, mahsulotni xavfsiz xarid qilish xizmati orqali sotasiz, bu xizmat haqida ko'proq ma’lumotni <2>www.example.uz</2> ga kirib, bilib olishingiz mumkin.</1>",
+      "7": "<0>“Yetkazib berish“ parametri</0> <1>- bu erda tasdiq belgisini qo'yib, siz mahsulotni o'z hisobingizdan  xaridorga etkazishingizga kafolat berasiz. Sizning mahsulotingizga tegishli Yorliq beriladi, siz boshqa e’lonlar orasidan ajralib turasiz-shu sababli Siz sotish imkoniyatlarini oshirasiz.</1>",
+      "8": "<0>“Ayirboshlash mavjud“ parametri</0> <1>- bu erda tasdiqlash belgisini qo'yib, xaridorlarga mahsulotingizni boshqasiga almashtirish bo'yicha takliflarni ko'rib chiqish mumkinligini ko'rsatasiz. Ayrboshlash tafsilotlari e'lon ostidagi tavsifda ko'rsatilishi kerak.</1>",
+      "9": "<0>Qo’shimcha telefon</0> <1>– agar kerak bo'lsa, siz bilan bog'lanish uchun qo'shimcha telefon raqamini qo'shishingiz mumkin.</1>",
+      "10": "<0>Qo’ng’iroqlar vaqti</0> <1>- sizning telefon raqamingiz saytda ko'rinadigan kun va vaqtini belgilang. Boshqa paytda Siz bilan faqat ichki sayt orqali bog'lanish mumkin.</1>",
+      "11": "Barcha maydonchalarni to'ldirib bo’lgandan so'ng, “Keyingi“ tugmasini bosing, barcha maydonchalar to'g'ri to'ldirilganligini tekshiring va “nashr qilish“ tugmasini bosing – e’lon moderatsiyaga o'tadi va so’ngra saytda paydo bo'ladi.</1>"
+    }
   },
   "how_to_create_auction": {
-    "name": "Auksionni qanday yarataman?"
+    "name": "Auksionni qanday yarataman?",
+    "1": "Auktsionni yaratish uchun Siz Slondo.uz asosiy sahifasining yuqori qismidagi “E’lon yaratish“ tugmasini bosing va ochilgan oynada “Auktsion“ yoki “Mukammal auktsion“turini tanlang.",
+    "section": {
+      "0": "Keyin “<0>*</0>“ belgisi ostidagi maydonchalarni to'ldirishingiz kerak:",
+      "1": "Toifa, e'lon nomi, narxi, holati, manzili, rasmi, tavsifi.",
+      "2": "<0>Savdo muddati</0> - <1>sizning auktsioningiz bo’yicha  pul tikishga imkon beriladigan muddat.</1>",
+      "3": "<0>Boshlang'ich narxi</0> - <1>savdo boshlanishidagi dastlabki qiymat.</1>",
+      "4": "Agar kerak bo'lsa, quyidagi parametrlarni belgilashingiz mumkin:",
+      "5": "<0>“Avto-uzaytirish“</0> parametri - <1>agar birorta ham pul tikish amalga oshirilmasa, kim oshdi savdosining muhlatini yana 24 soatga avtomatik ravishda uzaytirish imkonini beradi.</1>",
+      "6": "<0>“Narx taklif qilish“</0> parametri - <1>tasdiq belgisini qo'yib, xaridorlarning darhol sotib olish takliflarini  ko'rib chiqishga roziligingizni bildirasiz.</1>",
+      "7": "<0>“Hozir sotib olish“</0> parametri  – <1>savdo tugashini kutmasdan, mahsulotingizni sotishga rozi bo’lgan narxni ko'rsating.</1> <2>(faqat mukammal kim oshdi savdosi uchun mavjud)</2>",
+      "8": "<0>“Zaxira narxi“</0> parametri - <1>mahsulotni aytilgan narxdan past sotishga  rozi bo'lmagan sug'urta narxini ko'rsating. Agar taklif qilinayotgan narx “zaxira narxi“ ga yetmasa, kim oshdi savdosi mahsulot sotilmasdan to’xtatiladi.</1>",
+      "9": "<0>“Yetkazib berish“</0> parametri - <1>bu erda tasdiqlash belgisini qo'yib, mahsulotni xaridorga o'z mablag'ingiz hisobidan  yetkazib berishga kafolat berasiz. Sizning mahsulotingizga tegishli Yorliq beriladi, Siz boshqa e’lonlar orasidan ajralib turasiz-shuning sabab Siz sotish imkoniyatlaringizni oshirasiz.</1>",
+      "10": "<0>Zaxira telefoni</0> – <1>agar kerak bo'lsa, siz bilan bog'lanish uchun qo'shimcha telefon raqamingizni kiritishingiz mumkin.</1>",
+      "11": "<0>Qo'ng'iroqlar vaqti</0> - <1>sizning telefon raqamingiz saytda ko'rsatiladigan kun va vaqtni belgilang. Qolgan vaqt oralig’ida Siz bilan ichki chat orqali bog'lanish mumkin bo’ladi.</1>",
+      "12": "Barcha maydonchalarni to'ldirgandan so'ng, “Keyingi“ tugmasini bosing, barcha maydonchalar to'g'ri to'ldirilganligini tekshiring va “Nashr qilish“ tugmasini bosing - auktsion moderatsiyaga o'tadi va keyin saytda paydo bo'ladi."
+    },
+    "2": "Barcha maydonchalarni to'ldirgandan so'ng, “Keyingi“ tugmasini bosing, barcha maydonchalar to'g'ri to'ldirilganligini tekshiring va “Nashr qilish“ tugmasini bosing - auktsion moderatsiyaga o'tadi va keyin saytda paydo bo'ladi."
   },
   "feedback": {
     "name": ""
