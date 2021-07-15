@@ -10,6 +10,7 @@ import {CustomAccordion} from '@src/components/elements/accordion/CustomAccordio
 import {ParametersIcon} from '@src/components/elements/icons';
 import {PostTitle} from '@src/components/post/create_post/third_step/params_form/post_title/PostTitle';
 import {FormikField} from '@src/components/elements/formik_field/FormikField';
+import {PreviewValues} from '@src/components/post/create_post/third_step/params_form/PreviewValues';
 import {useStyles} from './useStyles';
 
 export const excludeCtgrsForYear = [
@@ -85,87 +86,90 @@ export const TransportParams: FC<CommonParamsPropsType> = (props) => {
                             title={values.title}
                         />
                     </Grid>
-                    <Grid container spacing={2}>
-                        {getFieldsByFilters({
-                            t,
-                            isPreview,
-                            filters,
-                            formik,
-                            handleSelect
-                        }, categoryName)}
-                        {hasEngineCapacity && (
-                            <Grid
-                                item
-                                container
-                                xs={12}
-                                sm={4}
-                            >
-                                {isPreview
-                                 ? <Typography variant="subtitle1">
-                                     <strong>
-                                         {t('filters:engine_capacity')}:&nbsp;
-                                     </strong>
-                                     {values.engine_capacity}
-                                 </Typography>
-                                 : <FormikField
-                                     t={t}
-                                     name='engine_capacity'
-                                     labelText='engine_capacity'
-                                     value={values.engine_capacity}
-                                     onChange={handleNumericInput}
-                                     errorMsg={getErrorMsg(errors.engine_capacity, touched.engine_capacity, t)}
-                                 />}
+                    {isPreview
+                        ? <PreviewValues t={t} values={values}/>
+                        : <>
+                            <Grid container spacing={2}>
+                                {getFieldsByFilters({
+                                    t,
+                                    filters,
+                                    formik,
+                                    handleSelect
+                                }, categoryName)}
+                                {hasEngineCapacity && (
+                                    <Grid
+                                        item
+                                        container
+                                        xs={12}
+                                        sm={4}
+                                    >
+                                        {isPreview
+                                            ? <Typography variant="subtitle1">
+                                                <strong>
+                                                    {t('filters:engine_capacity')}:&nbsp;
+                                                </strong>
+                                                {values.engine_capacity}
+                                            </Typography>
+                                            : <FormikField
+                                                t={t}
+                                                name='engine_capacity'
+                                                labelText='engine_capacity'
+                                                value={values.engine_capacity}
+                                                onChange={handleNumericInput}
+                                                errorMsg={getErrorMsg(errors.engine_capacity, touched.engine_capacity, t)}
+                                            />}
+                                    </Grid>
+                                )}
+                                {!isYearExclude && (
+                                    <Grid
+                                        item
+                                        container
+                                        xs={12}
+                                        sm={4}
+                                    >
+                                        {isPreview
+                                            ? <Typography variant="subtitle1">
+                                                <strong>
+                                                    {t('filters:year')}:&nbsp;
+                                                </strong>
+                                                {values.year}
+                                            </Typography>
+                                            : <FormikField
+                                                t={t}
+                                                name='year'
+                                                labelText='year'
+                                                value={values.year}
+                                                onChange={handleNumericInput}
+                                                errorMsg={getErrorMsg(errors.year, touched.year, t)}
+                                            />}
+                                    </Grid>
+                                )}
+                                {hasMileage && (
+                                    <Grid
+                                        item
+                                        container
+                                        xs={12}
+                                        sm={4}
+                                    >
+                                        {isPreview
+                                            ? <Typography variant="subtitle1">
+                                                <strong>
+                                                    {t('filters:mileage')}:&nbsp;
+                                                </strong>
+                                                {values.mileage}
+                                            </Typography>
+                                            : <FormikField
+                                                t={t}
+                                                name='mileage'
+                                                labelText='mileage'
+                                                value={values.mileage}
+                                                onChange={handleNumericInput}
+                                                errorMsg={getErrorMsg(errors.mileage, touched.mileage, t)}
+                                            />}
+                                    </Grid>
+                                )}
                             </Grid>
-                        )}
-                        {!isYearExclude && (
-                            <Grid
-                                item
-                                container
-                                xs={12}
-                                sm={4}
-                            >
-                                {isPreview
-                                 ? <Typography variant="subtitle1">
-                                     <strong>
-                                         {t('filters:year')}:&nbsp;
-                                     </strong>
-                                     {values.year}
-                                 </Typography>
-                                 : <FormikField
-                                     t={t}
-                                     name='year'
-                                     labelText='year'
-                                     value={values.year}
-                                     onChange={handleNumericInput}
-                                     errorMsg={getErrorMsg(errors.year, touched.year, t)}
-                                 />}
-                            </Grid>
-                        )}
-                        {hasMileage && (
-                            <Grid
-                                item
-                                container
-                                xs={12}
-                                sm={4}
-                            >
-                                {isPreview
-                                 ? <Typography variant="subtitle1">
-                                     <strong>
-                                         {t('filters:mileage')}:&nbsp;
-                                     </strong>
-                                     {values.mileage}
-                                 </Typography>
-                                 : <FormikField
-                                     t={t}
-                                     name='mileage'
-                                     labelText='mileage'
-                                     value={values.mileage}
-                                     onChange={handleNumericInput}
-                                     errorMsg={getErrorMsg(errors.mileage, touched.mileage, t)}
-                                 />}
-                            </Grid>
-                        )}
-                    </Grid>
+                        </>}
                 </CustomAccordion>
             </CustomFormikProvider>
         </div>

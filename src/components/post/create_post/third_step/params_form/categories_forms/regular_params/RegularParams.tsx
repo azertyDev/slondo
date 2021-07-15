@@ -10,6 +10,7 @@ import {CustomFormikProvider} from '@src/components/elements/custom_formik_provi
 import {ParametersIcon} from '@src/components/elements/icons';
 import {CustomAccordion} from '@src/components/elements/accordion/CustomAccordion';
 import {useStyles} from './useStyles';
+import {PreviewValues} from '@src/components/post/create_post/third_step/params_form/PreviewValues';
 
 export const RegularParams: FC<CommonParamsPropsType> = (props) => {
     const {
@@ -65,15 +66,18 @@ export const RegularParams: FC<CommonParamsPropsType> = (props) => {
                                 isPreview={isPreview}
                             />
                         </Grid>
-                        <Grid item container spacing={2}>
-                            {getFieldsByFilters({
-                                t,
-                                isPreview,
-                                filters,
-                                formik,
-                                handleSelect
-                            }, categoryName)}
-                        </Grid>
+                        {isPreview
+                            ? <PreviewValues t={t} values={values}/>
+                            : <>
+                                <Grid item container spacing={2}>
+                                    {getFieldsByFilters({
+                                        t,
+                                        filters,
+                                        formik,
+                                        handleSelect
+                                    }, categoryName)}
+                                </Grid>
+                            </>}
                     </Grid>
                 </CustomAccordion>
             </CustomFormikProvider>

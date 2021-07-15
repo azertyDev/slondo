@@ -7,7 +7,7 @@ import {fracFieldRegEx, punctuationMarksRegEx, searchTxtRegEx} from '@src/common
 import {HasAuction, site_categories} from '@src/common_data/site_categories';
 import {excludeFields, fractionalFields, optionFields, requireFields, singleFields} from '@src/common_data/fields_keys';
 import {IdNameType} from '@root/interfaces/Post';
-import {Grid, Typography} from '@material-ui/core';
+import {Grid} from '@material-ui/core';
 import {DropDownSelect} from '@src/components/elements/drop_down_select/DropDownSelect';
 import {WithT} from 'i18next';
 
@@ -15,7 +15,6 @@ export const cookies = new Cookies();
 export const cookieOpts: { path: string, sameSite: boolean | 'none' | 'lax' | 'strict' } = {path: '/', sameSite: 'lax'};
 
 type GetFieldsByFiltersProps = {
-    isPreview?: boolean,
     filters,
     formik,
     handleSelect,
@@ -24,7 +23,6 @@ type GetFieldsByFiltersProps = {
 export const getFieldsByFilters = (props: GetFieldsByFiltersProps, categoryName: string, multiple = false) => {
     const {
         t,
-        isPreview,
         filters,
         formik,
         handleSelect
@@ -38,78 +36,50 @@ export const getFieldsByFilters = (props: GetFieldsByFiltersProps, categoryName:
     } = formik;
 
     return (
-        isPreview
-            ? Object.keys(values).map(key => {
-                if (!!values[key]) {
-                    let value = values[key];
-                    if (Object.keys(values[key]).length) {
-                        if (values[key].name) {
-                            value = values[key].name;
-                            return (
-                                <Grid
-                                    item
-                                    xs={12}
-                                    sm={6}
-                                    md={4}
-                                    key={key}
-                                >
-                                    <Typography variant="subtitle1">
-                                        <strong>
-                                            {t(`filters:${categoryName}.${key}.name`)}:&nbsp;
-                                        </strong>
-                                        {value}
-                                    </Typography>
-                                </Grid>
-                            );
-                        }
-                    }
-                }
-            })
-            : Object.keys(filters).map(key => {
-                const isExcludeValue = excludeFields.some(k => k === key);
-                const isNoEmptyArray = Array.isArray(filters[key]) && !!filters[key].length;
-                const isOptionKey = optionFields.some(optKey => optKey === key);
-                const isSingleField = singleFields.some(f => f === key);
+        Object.keys(filters).map(key => {
+            const isExcludeValue = excludeFields.some(k => k === key);
+            const isNoEmptyArray = Array.isArray(filters[key]) && !!filters[key].length;
+            const isOptionKey = optionFields.some(optKey => optKey === key);
+            const isSingleField = singleFields.some(f => f === key);
 
-                if (!isExcludeValue && isNoEmptyArray) {
-                    return (
-                        <Fragment key={key}>
-                            <Grid
-                                item
-                                xs={12}
-                                sm={6}
-                                md={4}
-                                container
-                            >
-                                <DropDownSelect
-                                    name={key}
-                                    values={values}
-                                    onBlur={handleBlur}
-                                    items={filters[key]}
-                                    disableRequire={multiple}
-                                    handleSelect={handleSelect}
-                                    transKey={`${categoryName}.`}
-                                    labelTxt={t(`filters:${categoryName}.${key}.name`)}
-                                    multiple={!isSingleField && (isOptionKey || multiple)}
-                                    errorMsg={getErrorMsg(errors[key], touched[key], t)}
-                                />
-                            </Grid>
-                            {!!values[key]
-                            && !!Object.keys(values[key]).length
-                            && (getFieldsByFilters({
-                                    t,
-                                    isPreview,
-                                    formik,
-                                    filters: values[key],
-                                    handleSelect
-                                },
-                                categoryName,
-                                multiple
-                            ))}
-                        </Fragment>
-                    );
-                }
-            })
+            if (!isExcludeValue && isNoEmptyArray) {
+                return (
+                    <Fragment key={key}>
+                        <Grid
+                            item
+                            xs={12}
+                            sm={6}
+                            md={4}
+                            container
+                        >
+                            <DropDownSelect
+                                name={key}
+                                values={values}
+                                onBlur={handleBlur}
+                                items={filters[key]}
+                                disableRequire={multiple}
+                                handleSelect={handleSelect}
+                                transKey={`${categoryName}.`}
+                                labelTxt={t(`filters:${categoryName}.${key}.name`)}
+                                multiple={!isSingleField && (isOptionKey || multiple)}
+                                errorMsg={getErrorMsg(errors[key], touched[key], t)}
+                            />
+                        </Grid>
+                        {!!values[key]
+                        && !!Object.keys(values[key]).length
+                        && (getFieldsByFilters({
+                                t,
+                                formik,
+                                filters: values[key],
+                                handleSelect
+                            },
+                            categoryName,
+                            multiple
+                        ))}
+                    </Fragment>
+                );
+            }
+        })
     );
 };
 

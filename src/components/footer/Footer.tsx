@@ -67,24 +67,22 @@ export const Footer: FC = () => {
                                     </li>
                                 </ul>
                             </Grid>
-                            <Hidden smDown>
-                                <Grid item xs={12} md={3} container justify="center">
-                                    <ul>
-                                        <li>
-                                            <Link href="#">
-                                                <a>
-                                                    <Typography
-                                                        variant="subtitle1"
-                                                        color="initial"
-                                                    >
-                                                        {t('help')}
-                                                    </Typography>
-                                                </a>
-                                            </Link>
-                                        </li>
-                                    </ul>
-                                </Grid>
-                            </Hidden>
+                            <Grid item xs={12} md={3} container justify="center">
+                                <ul>
+                                    <li>
+                                        <Link href="#">
+                                            <a>
+                                                <Typography
+                                                    variant="subtitle1"
+                                                    color="initial"
+                                                >
+                                                    {t('help')}
+                                                </Typography>
+                                            </a>
+                                        </Link>
+                                    </li>
+                                </ul>
+                            </Grid>
                             <Hidden smDown>
                                 <Grid container item xs={12} md={3} justify='center'>
                                     <div className="social-icons">

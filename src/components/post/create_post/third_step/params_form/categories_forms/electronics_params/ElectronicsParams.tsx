@@ -8,8 +8,9 @@ import {CustomAccordion} from '@src/components/elements/accordion/CustomAccordio
 import {ParametersIcon} from '@src/components/elements/icons';
 import {PostTitle} from '@src/components/post/create_post/third_step/params_form/post_title/PostTitle';
 import {paramsFormSchema} from '@root/validation_schemas/createPostSchemas';
-import {getFieldsByFilters} from '@src/helpers';
 import {CheckboxSelect} from '@src/components/elements/checkbox_select/CheckboxSelect';
+import {PreviewValues} from '@src/components/post/create_post/third_step/params_form/PreviewValues';
+import {getFieldsByFilters} from '@src/helpers';
 
 
 export const ElectronicsParams: FC<CommonParamsPropsType> = (props) => {
@@ -19,9 +20,9 @@ export const ElectronicsParams: FC<CommonParamsPropsType> = (props) => {
         filters,
         isPreview,
         onSubmit,
-        categoryName,
         currentFormIndex,
-        handleFormOpen
+        handleFormOpen,
+        categoryName
     } = props;
 
     const isMonitors = type.name === 'monitors';
@@ -51,7 +52,6 @@ export const ElectronicsParams: FC<CommonParamsPropsType> = (props) => {
     useEffect(() => {
         setRequireVals(filters);
     }, [filters]);
-    // console.dir(values);
 
     return (
         <CustomFormikProvider formik={formik}>
@@ -72,45 +72,48 @@ export const ElectronicsParams: FC<CommonParamsPropsType> = (props) => {
                         isPreview={isPreview}
                     />
                 </Grid>
-                <Grid container spacing={2}>
-                    {getFieldsByFilters({
-                        t,
-                        isPreview,
-                        filters,
-                        formik,
-                        handleSelect
-                    }, categoryName)}
-                </Grid>
-                {isMonitors && (
-                    <Grid container spacing={2}>
-                        <Grid
-                            item
-                            container
-                            xs={12}
-                            sm={4}
-                        >
-                            <CheckboxSelect
-                                name='build_in_speakers'
-                                labelTxt={t('build_in_speakers')}
-                                checked={values.build_in_speakers}
-                                handleCheckbox={handleCheckbox}
-                            />
+                {isPreview
+                    ? <PreviewValues t={t} values={values}/>
+                    : <>
+                        <Grid item container spacing={2}>
+                            {getFieldsByFilters({
+                                t,
+                                filters,
+                                formik,
+                                handleSelect
+                            }, categoryName)}
                         </Grid>
-                        <Grid
-                            item
-                            container
-                            xs={12}
-                            sm={4}
-                        >
-                            <CheckboxSelect
-                                name='usb_connector'
-                                labelTxt={t('usb_connector')}
-                                checked={values.usb_connector}
-                                handleCheckbox={handleCheckbox}
-                            />
-                        </Grid>
-                    </Grid>
-                )}
+                        {isMonitors && (
+                            <Grid container spacing={2}>
+                                <Grid
+                                    item
+                                    container
+                                    xs={12}
+                                    sm={4}
+                                >
+                                    <CheckboxSelect
+                                        name='build_in_speakers'
+                                        labelTxt={t('build_in_speakers')}
+                                        checked={values.build_in_speakers}
+                                        handleCheckbox={handleCheckbox}
+                                    />
+                                </Grid>
+                                <Grid
+                                    item
+                                    container
+                                    xs={12}
+                                    sm={4}
+                                >
+                                    <CheckboxSelect
+                                        name='usb_connector'
+                                        labelTxt={t('usb_connector')}
+                                        checked={values.usb_connector}
+                                        handleCheckbox={handleCheckbox}
+                                    />
+                                </Grid>
+                            </Grid>
+                        )}
+                    </>}
             </CustomAccordion>
         </CustomFormikProvider>
     );
