@@ -102,16 +102,7 @@ export const useStyles = makeStyles((theme) => ({
         },
         // Adaptive
         '& div.bottom-logo > a': {
-            '& svg': {
-                [theme.breakpoints.down('lg')]: {
-                    width: '125px',
-                    height: '42px'
-                },
-                [theme.breakpoints.up('lg')]: {
-                    width: '140px',
-                    height: '47px'
-                }
-            }
+            '& svg': {}
         },
         '& div.category-menu > button, & div.select-menu, & div.create-ad, button.bottom-sign-button': {
             '& h6': {
