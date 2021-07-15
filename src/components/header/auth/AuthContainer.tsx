@@ -196,7 +196,7 @@ export const AuthContainer: FC = () => {
         setTouched
     } = formik;
 
-    const {handleNumericInput, handleInput} = useHandlers(values, setValues);
+    const {handleInput} = useHandlers(values, setValues);
 
     const getFormByStatus = (): ReactNode => {
         switch (formStatus) {
@@ -208,7 +208,7 @@ export const AuthContainer: FC = () => {
                         type="tel"
                         name="phone"
                         labelText={t('enter_phone')}
-                        onChange={handleNumericInput}
+                        onChange={handleInput}
                         errorMsg={getErrorMsg(errors.phone, touched.phone, t)}
                     />
                 </div>;
@@ -274,11 +274,10 @@ export const AuthContainer: FC = () => {
             form={getFormByStatus()}
             submitTxt={getSubmitTxt()}
             tabsHandler={tabsHandler}
-            handleForgetPass={handleForgetPass}
-            handleCloseModal={handleCloseModal}
             handleInput={handleInput}
             handleCancel={handleCancel}
-            handleNumericInput={handleNumericInput}
+            handleForgetPass={handleForgetPass}
+            handleCloseModal={handleCloseModal}
         />
     );
 };

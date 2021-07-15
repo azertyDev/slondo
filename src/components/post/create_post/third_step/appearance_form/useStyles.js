@@ -2,6 +2,7 @@ import {makeStyles} from '@material-ui/core/styles';
 
 export const useStyles = makeStyles((theme) => ({
     root: {
+        width: '100%',
         '& div.preview': {
             '& div.color-preview': {
                 display: 'flex',
@@ -28,6 +29,7 @@ export const useStyles = makeStyles((theme) => ({
         '& div.color-select': {
             display: 'flex',
             flexWrap: 'wrap',
+            cursor: 'pointer',
             [theme.breakpoints.down('sm')]: {
                 display: 'block'
             },

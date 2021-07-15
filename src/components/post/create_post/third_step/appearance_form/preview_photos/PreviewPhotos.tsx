@@ -1,42 +1,57 @@
-import React, {Dispatch, FC} from 'react';
-import {DragDropContext, resetServerContext, DropResult} from 'react-beautiful-dnd';
-import {TOTAL_FILES_SIZE_LIMIT} from '@src/constants';
+import {Dispatch, FC} from 'react';
+import {Box, Grid} from "@material-ui/core";
+import {AddCircle} from '@material-ui/icons';
+import {DragDropContext, resetServerContext, DropResult, Draggable, Droppable} from 'react-beautiful-dnd';
+import {UPLOAD_FILES_LIMIT} from '@src/constants';
 import {FileType} from "@root/interfaces/Post";
-import {CustomDroppable} from './CustomDroppable';
+import {CustomButton} from "@src/components/elements/custom_button/CustomButton";
+import {CloseIcon} from "@src/components/elements/icons";
 import {useStyles} from './useStyles';
-
 
 type PreviewPhotosPropsType = {
     values: { files: FileType[] },
     setValues: Dispatch<unknown>
 };
 
-const sizeCounter = (files) => (
-    files.reduce(
-        (total, {size}) => {
-            if (size) {
-                total += total + size
-            }
-            return total;
-        },
-        0
-    )
-);
+// const sizeCounter = (files) => (
+//     files.reduce(
+//         (total, {size}) => {
+//             if (size) {
+//                 total += total + size;
+//             }
+//             return total;
+//         },
+//         0
+//     )
+// );
 
 export const PreviewPhotos: FC<PreviewPhotosPropsType> = (props) => {
     resetServerContext();
-
     const {values, setValues} = props;
     const {files} = values;
+
+    const reorder = (list, startIndex, endIndex) => {
+        const result = Array.from(list);
+        const [removed] = result.splice(startIndex, 1);
+        result.splice(endIndex, 0, removed);
+
+        return result;
+    };
+
+    const sortArray = function (arr) {
+        arr.forEach((item, i) => {
+            if (!item && arr[i + 1]) {
+                const [removedItem] = arr.splice(i + 1, 1);
+                arr.splice(i, 0, removedItem);
+            }
+        });
+        return arr;
+    };
 
     const handleOnDragEnd = ({destination, source}: DropResult): void => {
         if (!destination) return;
 
-        const items = files;
-
-        const [reorderedItem] = items.splice(source.index, 1);
-
-        items.splice(destination.index, 0, reorderedItem);
+        const items = sortArray(reorder(files, source.index, destination.index));
 
         setValues({
             ...values,
@@ -47,28 +62,30 @@ export const PreviewPhotos: FC<PreviewPhotosPropsType> = (props) => {
     const handleUploadFile = ({target}) => {
         let photos: any = Array.from(target.files);
 
-        const totalFilesSize = sizeCounter(files);
-        const selectedFilesSize = sizeCounter(photos);
+        photos = photos.map(photo => ({
+            file: photo,
+            url: URL.createObjectURL(photo)
+        }));
 
-        if ((totalFilesSize + selectedFilesSize) <= TOTAL_FILES_SIZE_LIMIT) {
-            photos = photos.map(photo => ({
-                file: photo,
-                url: URL.createObjectURL(photo)
-            }));
+        const dist = photos.length - UPLOAD_FILES_LIMIT;
+        const sum = files.length + dist;
 
-            files.splice((-photos.length), photos.length);
-
-            setValues({
-                ...values,
-                files: [...photos, ...files]
-            })
+        if (dist > 0) {
+            photos.splice(-dist, dist);
+        } else if (sum > 0) {
+            files.splice(-sum, sum);
         }
+
+        setValues({
+            ...values,
+            files: [...photos, ...files]
+        });
     };
 
     const removeFile = (url) => () => {
         files.map((item: FileType, index) => {
-            if (item.url === url) {
-                files.splice(index, 1);
+            if (item && (item.url === url)) {
+                files.splice(index, 1, null);
                 setValues({
                     ...values,
                     files
@@ -77,28 +94,83 @@ export const PreviewPhotos: FC<PreviewPhotosPropsType> = (props) => {
         });
     };
 
+    const getDndRow = (bottom = false) => {
+        return <Droppable
+            direction="horizontal"
+            droppableId={bottom ? 'bottom' : 'top'}
+        >
+            {provided =>
+                <Grid
+                    container
+                    spacing={1}
+                    ref={provided.innerRef}
+                    {...provided.droppableProps}
+                    className={classes.dropWrapper}
+                >
+                    {files.map((fileItem, index) => {
+                        const offset = (!bottom && index <= 5) || (bottom && index > 5);
+                        if (offset) {
+                            return <Draggable
+                                key={index}
+                                index={index}
+                                isDragDisabled={!fileItem}
+                                draggableId={index.toString()}
+                            >
+                                {provided => (
+                                    <Grid
+                                        item
+                                        xs={12}
+                                        sm={6}
+                                        md={3}
+                                        lg={2}
+                                        ref={provided.innerRef}
+                                        {...provided.draggableProps}
+                                        {...provided.dragHandleProps}
+                                        className={fileItem ? 'prev-img' : 'upload'}
+                                    >
+                                        {fileItem
+                                            ? <Box
+                                                position='relative'
+                                                width='fit-content'
+                                            >
+                                                <img
+                                                    alt={fileItem.file.name}
+                                                    src={fileItem.url as string}
+                                                />
+                                                <CustomButton onClick={removeFile(fileItem.url)}>
+                                                    <CloseIcon/>
+                                                </CustomButton>
+                                            </Box>
+                                            : <>
+                                                <label htmlFor={`upload-${index}`}>
+                                                    <AddCircle/>
+                                                </label>
+                                                <input
+                                                    type='file'
+                                                    multiple={true}
+                                                    id={`upload-${index}`}
+                                                    onChange={handleUploadFile}
+                                                    accept="image/png,image/jpeg"
+                                                />
+                                            </>}
+                                    </Grid>
+                                )}
+                            </Draggable>;
+                        }
+                    })}
+                    {provided.placeholder}
+                </Grid>}
+        </Droppable>;
+    };
+
+    console.log(files);
     const classes = useStyles();
     return (
         <div className={classes.root}>
-            <input
-                type='file'
-                onChange={handleUploadFile}
-                multiple={true}
-                accept="image/png,image/jpeg"
-                // className={classes.fileUpload}
-            />
             <DragDropContext enableDefaultSensors={true} onDragEnd={handleOnDragEnd}>
-                <CustomDroppable
-                    droppableId='firstRow'
-                    files={files}
-                    removeFile={removeFile}
-                />
-                <CustomDroppable
-                    droppableId='secondRow'
-                    files={files}
-                    removeFile={removeFile}
-                />
+                {getDndRow()}
+                {getDndRow(true)}
             </DragDropContext>
         </div>
-    )
+    );
 };

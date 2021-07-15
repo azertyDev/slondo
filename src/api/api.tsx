@@ -322,8 +322,11 @@ export const userAPI = {
                 throw err;
             });
     },
-    getUserByPhoneNumber: (phone: string): Promise<any> => {
-        return instance.get(`regular/user/byPhone?phone=${phone}`, setTokenToHeader())
+    getUserByPhoneNumber: (params: { phone: string }): Promise<any> => {
+        return instance.get(`regular/user/byPhone`, {
+            params,
+            ...setTokenToHeader()
+        })
             .then(res => res.data)
             .catch(err => {
                 throw err;

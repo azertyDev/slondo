@@ -5,7 +5,7 @@ import {TabsDataType} from '@root/interfaces/Cabinet';
 import {ProfileTabsContent} from '@src/components/user_profile/tabs/ProfileTabsContent';
 import {userAPI} from '@src/api/api';
 import {useRouter} from 'next/router';
-import {SubscriptionItem} from '@src/components/cabinet/cabinet_pages/user_social_info/subscription_item/SubscriptionItem';
+import {SubscriptionItem} from '@src/components/cabinet/cabinet_pages/subs/subscription_item/SubscriptionItem';
 import {CustomCircularProgress} from '@src/components/elements/custom_circular_progress/CustomCircularProgress';
 import {ErrorCtx} from "@src/context";
 

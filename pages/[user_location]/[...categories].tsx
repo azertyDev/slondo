@@ -1,7 +1,7 @@
 import Cookies from 'universal-cookie';
 import {GetServerSideProps} from 'next';
-import {SearchPost} from '@src/components/post/search_post/SearchPost';
 import {serverSideTranslations} from 'next-i18next/serverSideTranslations';
+import {SearchPost} from '@src/components/post/search_post/SearchPost';
 
 export const getServerSideProps: GetServerSideProps = async ({locale, query, req}) => {
     const cookies = new Cookies(req.headers.cookie);

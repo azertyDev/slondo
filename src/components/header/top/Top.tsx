@@ -52,6 +52,7 @@ function ElevationScroll(props) {
 export const Top: FC<TopHeaderPropsType> = (props) => {
     const {t, handleOpenModal, isAuth} = props;
 
+    const userLocation = cookies.get('user_location');
     const trigger = useScrollTrigger({
         threshold: 53
     });
@@ -76,7 +77,10 @@ export const Top: FC<TopHeaderPropsType> = (props) => {
                 <Container maxWidth="xl" className={classes.root}>
                     <Grid container justify="space-between" alignItems="center">
                         <Grid item md={6}>
-                            <Location handleSelectLocation={handleSelectLocation} />
+                            <Location
+                                userLocation={userLocation}
+                                handleSelectLocation={handleSelectLocation}
+                            />
                         </Grid>
                         <Grid
                             item

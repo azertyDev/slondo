@@ -85,7 +85,7 @@ export const PostTypesPage: FC = () => {
                                     </div>
                                 </Hidden>
                                 <CustomButton
-                                    onClick={handlePostType(`/create/type/${postType.name}`)}
+                                    onClick={handlePostType(`/create/${postType.name}`)}
                                 >
                                     {t(`create_${postType.name}`)}
                                 </CustomButton>

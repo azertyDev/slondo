@@ -248,7 +248,7 @@ export const normalizeFiltersByCategory = (data: any, type?) => {
     return data;
 };
 
-export const categorySearchHelper = (txt: string, categoryList: CategoryType[], t: TFunction): SubcategoryType[] => {
+export const searchCategory = (txt: string, categoryList: CategoryType[], t: TFunction): SubcategoryType[] => {
     return categoryList
         .reduce((list, category) => {
             list = [...list, ...getMatchedCtgrs(txt, category.subcategory)];

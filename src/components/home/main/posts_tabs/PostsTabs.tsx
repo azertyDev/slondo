@@ -13,7 +13,6 @@ import {CardView} from '@src/components/elements/card/CardView';
 import {CustomButton} from '@src/components/elements/custom_button/CustomButton';
 import {useStyles} from './useStyles';
 
-
 type MainContentProps = {
     tabValue: number;
     handleTabChange: (_: unknown, newValue: number) => void;

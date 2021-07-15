@@ -20,8 +20,8 @@ import {DetailedPostContainerModal} from '@src/components/cabinet/components/det
 import {CustomTabPanel} from '@src/components/elements/custom_tab_panel/CustomTabPanel';
 import {NotificationModal} from "@src/components/cabinet/components/notifation_modal/NotificationModal";
 import {SettingsModal} from "@src/components/cabinet/components/settings_modal/SettingsModal";
-import {useStyles} from './useStyles';
 import {ErrorCtx} from "@src/context";
+import {useStyles} from './useStyles';
 
 export const initialCardData: CardDataType = {
     id: null,

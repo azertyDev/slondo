@@ -5,7 +5,6 @@ import {Checkbox, Typography} from '@material-ui/core';
 import {numberPrettier, weekDaysHelper} from '@src/helpers';
 import {useStyles} from './useStyles';
 
-
 type DefaultParamsPropsType = {
     values,
     isAuction: boolean,
@@ -27,9 +26,7 @@ export const CommonFormPreview: FC<DefaultParamsPropsType> = (props) => {
     } = props;
 
     const {auction, avalTime} = values;
-    const locationText = location
-                         ? `${t(`locations:${location.region.name}`)}${location.city ? `, ${t(`locations:${location.city.name}`)}` : ''}${location.district ? `, ${t(`filters:locations:${location.district.name}`)}` : ''}`
-                         : '';
+    const locationText = `${t(`locations:${location.region.name}.name`)}${location.city ? `, ${t(`locations:${location.region.name}.${location.city.name}`)}` : ''}`;
 
     const classes = useStyles();
     return (

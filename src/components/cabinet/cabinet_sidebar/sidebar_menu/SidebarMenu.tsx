@@ -40,12 +40,13 @@ export const SidebarMenu: FC<SidebarMenuPropsType> = ({clearAnchor}) => {
         await push(`/cabinet/${url}`);
     };
     const signout = async () => {
-        unstable_batchedUpdates(() => {
-            clearUser();
-            clearAnchor();
-            setIsAuth(false);
+        unstable_batchedUpdates(async () => {
+            !!clearAnchor && clearAnchor();
             cookies.remove('slondo_auth', {path: '/'});
             cookies.remove('slondo_user', {path: '/'});
+            await push('/');
+            clearUser();
+            setIsAuth(false);
         });
     };
 

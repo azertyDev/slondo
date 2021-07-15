@@ -1,13 +1,14 @@
 import {FC, useContext, useEffect, useState} from 'react';
 import {TabsContent} from '@src/components/cabinet/cabinet_pages/TabsContent';
-import {UserSubscribers} from '@src/components/cabinet/cabinet_pages/user_social_info/user_subscribers/UserSubscribers';
-import {UserSubscriptions} from '@src/components/cabinet/cabinet_pages/user_social_info/user_subscribes/UserSubscriptions';
+import {Subscribers} from '@src/components/cabinet/cabinet_pages/subs/subscribers/Subscribers';
+import {Subscriptions} from '@src/components/cabinet/cabinet_pages/subs/subscriptions/Subscriptions';
 import {userAPI} from '@src/api/api';
 import {TabsDataType} from '@root/interfaces/Cabinet';
 import {SUBS_PER_PAGE} from '@src/constants';
 import {ErrorCtx} from "@src/context";
+import {withAuthRedirect} from "@src/hocs/withAuthRedirect";
 
-export const UserSocialInfoContainer: FC = () => {
+const SubsContainer: FC = () => {
     const initialState = {
         isFetch: false,
         subscribers: {
@@ -39,6 +40,7 @@ export const UserSocialInfoContainer: FC = () => {
 
             const subsData = await userAPI.getSubs(param);
             subs.isFetch = false;
+
             if (isSubscribers) {
                 subscribers.data = subsData.data;
                 subscribers.total = subsData.total;
@@ -71,15 +73,15 @@ export const UserSocialInfoContainer: FC = () => {
             id: 0,
             title: 'Подписки',
             itemsPerPage: SUBS_PER_PAGE,
-            handleFetchByTab: null,
-            component: <UserSubscriptions subscriptions={subs.subscriptions.data} handleFollow={handleFollow}/>
+            handleFetchByTab: () => '',
+            component: <Subscriptions subscriptions={subs.subscriptions.data} handleFollow={handleFollow}/>
         },
         {
             id: 1,
             title: 'Подписчики',
             itemsPerPage: SUBS_PER_PAGE,
-            handleFetchByTab: null,
-            component: <UserSubscribers subscribers={subs.subscribers.data} handleFollow={handleFollow}/>
+            handleFetchByTab: () => '',
+            component: <Subscribers subscribers={subs.subscribers.data} handleFollow={handleFollow}/>
         }
     ];
 
@@ -96,5 +98,6 @@ export const UserSocialInfoContainer: FC = () => {
     );
 };
 
+export default withAuthRedirect(SubsContainer);
 
 

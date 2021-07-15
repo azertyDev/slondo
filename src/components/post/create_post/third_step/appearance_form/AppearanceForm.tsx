@@ -1,15 +1,14 @@
 import {FC, useEffect} from 'react';
 import {useFormik} from 'formik';
-import {Box, Hidden, Typography} from '@material-ui/core';
+import {Typography} from '@material-ui/core';
 import {PreviewPhotos} from './preview_photos/PreviewPhotos';
-import {CustomAccordion} from '../../../../elements/accordion/CustomAccordion';
+import {CustomAccordion} from '@src/components/elements/accordion/CustomAccordion';
 import {IdNameType} from '@root/interfaces/Post';
 import {ViewIcon} from '@src/components/elements/icons';
 import {appearanceSchema} from '@root/validation_schemas/createPostSchemas';
 import {CustomFormikProvider} from '@src/components/elements/custom_formik_provider/CustomFormikProvider';
 import {useTranslation} from 'react-i18next';
 import {useStyles} from './useStyles';
-
 
 type AppearanceFormPropsType = {
     categoryName: string,
@@ -39,11 +38,9 @@ export const AppearanceForm: FC<AppearanceFormPropsType> = (props) => {
 
     const onSubmit = ({files, color}) => {
         const appearance: { photos: any, color_id?: number } = {
-            photos: files.filter(({file}) => file)
+            photos: files.filter(item => item?.file)
         };
-
         if (color) appearance.color_id = color.id;
-
         handleSubmit({appearance});
         handleNextFormOpen();
     };
@@ -52,7 +49,7 @@ export const AppearanceForm: FC<AppearanceFormPropsType> = (props) => {
         onSubmit,
         initialValues: {
             color: null,
-            files: []
+            files: Array.from({length: 12}).map(() => null)
         },
         validationSchema: !isJob ? appearanceSchema : null
     });
@@ -120,7 +117,7 @@ export const AppearanceForm: FC<AppearanceFormPropsType> = (props) => {
                                     </strong>
                                 </Typography>
                                 {files.map((photo, i) =>
-                                    <img
+                                    photo && <img
                                         key={i}
                                         alt="photo"
                                         src={photo.url}
@@ -169,9 +166,7 @@ export const AppearanceForm: FC<AppearanceFormPropsType> = (props) => {
                                 <Typography variant="subtitle1">
                                     <strong>
                                         {t('post:photos')}
-                                        {!isJob && (
-                                            <span className='error-text'>*</span>
-                                        )}
+                                        {!isJob && <span className='error-text'>*</span>}
                                     </strong>
                                     {errors.files && touched.files && (
                                         <span className='error-text'>

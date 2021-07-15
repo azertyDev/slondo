@@ -2,39 +2,50 @@ import {makeStyles} from '@material-ui/core/styles';
 
 export const useStyles = makeStyles(() => ({
     root: {
-        // display: 'flex',
-        // '& .MuiGrid-root': {
-        //     position: 'relative'
-        // },
+        position: 'relative',
+        minHeight: '216px',
+        '& input': {
+            display: 'none'
+        },
         '& button': {
-            width: 20,
-            height: 20,
             position: 'absolute',
-            top: '-10px',
-            right: '-10px',
-            borderRadius: '100%',
-            backgroundColor: '#EB5757'
+            top: '6px',
+            right: '6px',
+            padding: '7px',
+            borderRadius: '50%',
+            backgroundColor: '#EB5757',
+            '& > svg': {
+                width: '17px',
+                height: '17px'
+            }
+        }
+    },
+    dropWrapper: {
+        maxHeight: '111px',
+        '& div.prev-img': {
+            '& img': {
+                width: '100%',
+                height: '100px',
+                objectFit: 'cover',
+                borderRadius: '5px'
+            }
+        },
+        '& div.upload': {
+            width: '100%',
+            '& > label': {
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center',
+                height: '100px',
+                backgroundColor: '#fff',
+                borderRadius: '5px',
+                cursor: 'pointer',
+                '& svg': {
+                    width: '60px',
+                    height: '60px',
+                    color: '#7DBCF6'
+                }
+            }
         }
     }
-    // fileUpload: {
-    //     '&[type=file]': {
-    //         cursor: 'pointer',
-    //         width: '0',
-    //         height: '0',
-    //         overflow: 'hidden'
-    //     },
-    //     '&[type=file]:before': {
-    //         width: '158px',
-    //         height: '32px',
-    //         fontSize: '16px',
-    //         lineHeight: '32px',
-    //         display: 'inline-block',
-    //         background: 'white',
-    //         border: '1px solid #000',
-    //         padding: '0 10px'
-    //     },
-    //     '&[type=file]::-webkit-file-upload-button': {
-    //         visibility: 'hidden'
-    //     }
-    // }
 }));

@@ -10,7 +10,7 @@ type UserSocialInfoPropsType = {
     user: UserInfo
 }
 
-export const UserSocialInfo: FC<UserSocialInfoPropsType> = ({user}) => {
+export const Subs: FC<UserSocialInfoPropsType> = ({user}) => {
     const {t} = useTranslation('cabinet');
 
     const {pathname, push} = useRouter();

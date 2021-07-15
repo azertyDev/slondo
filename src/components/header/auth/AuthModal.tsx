@@ -34,7 +34,6 @@ type AuthRegPageModalProps = {
     formStatus: keyof typeof FormStatuses,
     handleCancel: () => void,
     handleInput: (e) => void
-    handleNumericInput: (e) => void
 } & WithT;
 
 export const AuthModal: FC<AuthRegPageModalProps> = (props) => {
@@ -53,7 +52,6 @@ export const AuthModal: FC<AuthRegPageModalProps> = (props) => {
         tabIndex,
         formStatus,
         handleCancel,
-        handleNumericInput,
         handleInput
     } = props;
 
@@ -172,7 +170,7 @@ export const AuthModal: FC<AuthRegPageModalProps> = (props) => {
                                                                         name="phone"
                                                                         labelText={t('enter_phone')}
                                                                         value={values.phone}
-                                                                        onChange={handleNumericInput}
+                                                                        onChange={handleInput}
                                                                         errorMsg={getErrorMsg(errors.phone, touched.phone, t)}
                                                                     />
                                                                     <FormikField

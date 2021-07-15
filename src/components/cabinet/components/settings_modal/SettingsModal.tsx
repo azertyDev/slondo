@@ -20,12 +20,13 @@ import {FormikField} from "@src/components/elements/formik_field/FormikField";
 import {CustomFormikProvider} from "@src/components/elements/custom_formik_provider/CustomFormikProvider";
 import {useFormik} from "formik";
 import {phoneSchema} from "@root/validation_schemas/authRegSchema";
-import {getErrorMsg} from "@src/helpers";
-import {useStyles} from './useStyles';
+import {getErrorMsg, phonePrepare} from "@src/helpers";
 import {ErrorCtx} from "@src/context";
+import {useStyles} from './useStyles';
 
 enum SettingsModalPropsType {
     'deactivate',
+    'deactivate_variants',
     'rise_in_tape',
     'confirm',
     'sold_on_slondo'
@@ -42,15 +43,29 @@ export const SettingsModal: FC<CommonModalType> = (props) => {
     const {setErrorMsg} = useContext(ErrorCtx);
     const {t} = useTranslation('cabinet');
     const isPost = post.ads_type === 'post';
-    const initBuyerState = {
+
+    const initBuyer = {
         name: '',
         surname: '',
         avatar: ''
     };
 
     const [isFetch, setIsFetch] = useState(false);
-    const [buyer, setBuyer] = useState(initBuyerState);
+    const [buyer, setBuyer] = useState(initBuyer);
     const [status, setStatus] = useState<keyof typeof SettingsModalPropsType>('deactivate');
+
+    const titleTxt = (() => {
+        switch (status) {
+            case 'sold_on_slondo':
+                return 'type_buyer_number';
+            case 'confirm':
+                return 'deactivate_post';
+            case 'rise_in_tape':
+                return isPost ? 'rise_post_in_tape' : 'rise_auction_in_tape';
+            default:
+                return '';
+        }
+    })();
 
     const reasons = {
         sold: 1,
@@ -61,13 +76,13 @@ export const SettingsModal: FC<CommonModalType> = (props) => {
         try {
             setIsFetch(true);
             switch (status) {
-                case 'deactivate':
+                case 'confirm':
                 case "sold_on_slondo":
                     const data = {
                         ads_id: post.id,
-                        reason_id: status === 'deactivate' ? reasons.archive : reasons.sold
+                        reason_id: status === 'confirm' ? reasons.archive : reasons.sold
                     };
-                    // await userAPI.deactivatePost(data);
+                    await userAPI.deactivatePost(data);
                     break;
                 case 'rise_in_tape':
                     await userAPI.ricePostInTape(post.id);
@@ -89,10 +104,29 @@ export const SettingsModal: FC<CommonModalType> = (props) => {
     const formik = useFormik({
         onSubmit,
         initialValues: {phone: ''},
-        validationSchema: phoneSchema
+        validationSchema: status === 'sold_on_slondo' ? phoneSchema : null
     });
 
-    const {values, errors, touched, handleReset} = formik;
+    const {values, setValues, errors, touched, handleReset} = formik;
+
+    const handleInput = async ({target: {value}}) => {
+        const regEx = new RegExp(/_/g);
+
+        if (!regEx.test(value)) {
+            try {
+                setIsFetch(true);
+                const params = {phone: phonePrepare(value)};
+                const user = await userAPI.getUserByPhoneNumber(params);
+                setBuyer(user);
+                setIsFetch(false);
+            } catch (e) {
+                setIsFetch(false);
+                setBuyer(null);
+            }
+        }
+
+        setValues({phone: value});
+    };
 
     const handleStatus = (status: keyof typeof SettingsModalPropsType) => () => {
         setStatus(status);
@@ -108,6 +142,7 @@ export const SettingsModal: FC<CommonModalType> = (props) => {
     const handleClose = () => {
         unstable_batchedUpdates(() => {
             onClose();
+            setBuyer(initBuyer);
             handleReset({phone: ''});
             setStatus('deactivate');
         });
@@ -118,18 +153,18 @@ export const SettingsModal: FC<CommonModalType> = (props) => {
         switch (status) {
             case 'deactivate':
                 return <List
+                    disablePadding
                     component="nav"
                     aria-label="main"
-                    disablePadding
                     className={classes.settingsList}
                 >
                     <ListItem
                         button
-                        onClick={handleStatus(isPost ? 'sold_on_slondo' : 'confirm')}
+                        onClick={handleStatus(isPost ? 'deactivate_variants' : 'confirm')}
                     >
                         <ListItemText
-                            primaryTypographyProps={{variant: 'subtitle1'}}
                             primary={t('deactivate')}
+                            primaryTypographyProps={{variant: 'subtitle1'}}
                         />
                     </ListItem>
                     <ListItem
@@ -144,38 +179,61 @@ export const SettingsModal: FC<CommonModalType> = (props) => {
                         />
                     </ListItem>
                 </List>;
+            case 'deactivate_variants':
+                return <List
+                    disablePadding
+                    component="nav"
+                    aria-label="main"
+                    className={classes.settingsList}
+                >
+                    <ListItem
+                        button
+                        onClick={handleStatus('sold_on_slondo')}
+                    >
+                        <ListItemText
+                            primary={t('sold_on_slondo')}
+                            primaryTypographyProps={{variant: 'subtitle1'}}
+                        />
+                    </ListItem>
+                    <ListItem
+                        button
+                        onClick={handleStatus('confirm')}
+                    >
+                        <ListItemText
+                            primary={t('to_archive')}
+                            primaryTypographyProps={{variant: 'subtitle1'}}
+                        />
+                    </ListItem>
+                </List>;
             case 'sold_on_slondo':
                 return <>
-                    <Typography
-                        variant='h6'
-                        className="title"
-                    >
-                        {t('sold_on_slondo')}
-                    </Typography>
                     <Box
+                        mt={3}
                         width='100%'
                         display='flex'
                         justifyContent='space-between'
                         className={classes.userPhoneAndData}
-                        mt={3}
                     >
                         <FormikField
                             t={t}
                             type='tel'
                             name='phone'
                             value={values.phone}
+                            onChange={handleInput}
                             errorMsg={getErrorMsg(errors.phone, touched.phone, t)}
                         />
                         <Box className={classes.userData}>
                             {isFetch
-                                ? <Typography>loading...</Typography>
-                                : <>
-                                    <Avatar src={buyer.avatar ?? ''}/>
-                                    <Typography variant='subtitle2' noWrap>
-                                        {buyer.name}
-                                        {buyer.surname}
-                                    </Typography>
-                                </>}
+                                ? <CustomCircularProgress/>
+                                : !!buyer
+                                    ? <>
+                                        <Avatar src={buyer.avatar ?? ''}/>
+                                        <Typography variant='subtitle2' noWrap>
+                                            {buyer.name}
+                                            {buyer.surname}
+                                        </Typography>
+                                    </>
+                                    : <Typography>{t('user_not_found')}</Typography>}
                         </Box>
                     </Box>
                     <Box
@@ -195,15 +253,12 @@ export const SettingsModal: FC<CommonModalType> = (props) => {
                     aria-label="main"
                     className={classes.settingsList}
                 >
-                    <ListItem
-                        button
-                        onClick={handlePrevMenu}
-                    >
+                    <CustomButton onClick={handlePrevMenu}>
                         <ListItemText
                             primary={t('common:no')}
                             primaryTypographyProps={{variant: 'subtitle1'}}
                         />
-                    </ListItem>
+                    </CustomButton>
                     <CustomButton type='submit'>
                         <ListItemText
                             primary={t('common:yes')}
@@ -235,6 +290,12 @@ export const SettingsModal: FC<CommonModalType> = (props) => {
                         >
                             <ArrowBack fontSize="inherit"/>
                         </IconButton>}
+                    <Typography
+                        variant='h6'
+                        className="title"
+                    >
+                        {t(titleTxt)}
+                    </Typography>
                     {getModalContent()}
                 </CustomFormikProvider>}
         </CabinetModal>

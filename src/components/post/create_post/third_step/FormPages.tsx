@@ -26,7 +26,7 @@ export const FormPages: FC = () => {
     const {setErrorMsg} = useContext(ErrorCtx);
 
     const {asPath, query, push} = useRouter();
-    const [postTypeName, categoryName, subcategoryName, typeName] = query.slug as string[];
+    const [_, postTypeName, categoryName, subcategoryName, typeName] = query.slug as string[];
 
     const {category, subcategory, type} = getCategoriesByParams(
         {
@@ -60,7 +60,7 @@ export const FormPages: FC = () => {
     const [isSuccess, setIsSuccess] = useState(false);
     const [isPreview, setIsPreview] = useState(false);
     const [post, setPost] = useState(initPost);
-    const [currentFormIndex, setCurrentFormIndex] = useState(3);
+    const [currentFormIndex, setCurrentFormIndex] = useState(2);
     const [filters, setFilters] = useState<any>({});
     const {colors, color, ...filtersData} = filters;
 
@@ -107,7 +107,7 @@ export const FormPages: FC = () => {
         isPreview
             ? setIsPreview(false)
             : push(
-            `/create/type/${postTypeName}/${categoryName}${typeName ? `/${subcategoryName}` : ''}`,
+            `/create/${postTypeName}/${categoryName}${typeName ? `/${subcategoryName}` : ''}`,
             undefined,
             {shallow: true}
             );

@@ -9,15 +9,18 @@ import {useModal} from '@src/hooks/useModal';
 import {userAPI} from "@src/api/api";
 import {ErrorCtx} from "@src/context";
 import {useStyles} from './useStyles';
+import {IdNameType} from "@root/interfaces/Post";
 
 type LocationProps = {
     handleSelectLocation: (loc) => void
+    userLocation?: {
+        region: IdNameType,
+        city?: IdNameType
+    }
 };
 
-export const Location: FC<LocationProps> = ({handleSelectLocation}) => {
+export const Location: FC<LocationProps> = ({handleSelectLocation, userLocation}) => {
     const {t} = useTranslation('locations');
-    const userLocation = cookies.get('user_location');
-
     const initLocation = {
         region: null,
         city: null

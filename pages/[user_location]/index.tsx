@@ -11,7 +11,7 @@ export const getServerSideProps: GetServerSideProps = async ({locale, query, req
         props: {
             query,
             locale,
-            userLocation,
+            // userLocation,
             ...await serverSideTranslations(
                 locale,
                 [

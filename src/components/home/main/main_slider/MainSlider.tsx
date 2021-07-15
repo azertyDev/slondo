@@ -1,5 +1,5 @@
-import {CustomSlider} from '@src/components/elements/custom_slider/CustomSlider';
 import {FC, useState, useEffect} from 'react';
+import {CustomSlider} from '@src/components/elements/custom_slider/CustomSlider';
 import {settings} from './sliderSettings';
 import {userAPI} from '@src/api/api';
 import {useStyles} from './useStyles';
@@ -39,8 +39,8 @@ export const MainSlider: FC = () => {
         <div className={classes.root}>
             <CustomSlider {...settings}>
                 {sliderData.isFetch
-                 ? Array.from({length: 4}, (_, k) => <Skeleton key={k} animation="wave" width="100%"/>)
-                 : sliderData.data.map(({id, img, title, description}) => (
+                    ? Array.from({length: 4}, (_, k) => <Skeleton key={k} animation="wave" width="100%"/>)
+                    : sliderData.data.map(({id, img, title, description}) => (
                         <Box key={id} position='relative'>
                             <img src={img} alt={title}/>
                             <Box

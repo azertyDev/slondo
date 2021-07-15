@@ -31,6 +31,7 @@ function ElevationScroll(props) {
 }
 
 const Bottom = (props) => {
+    const userLocation = cookies.get('user_location');
     const {isScrollBreak, handleOpenModal, isAuth, t, avatar} = props;
     const [drawerOpen, setDrawerOpen] = useState(false);
     const [anchorEl, setAnchorEl] = useState<HTMLButtonElement | null>(null);
@@ -217,6 +218,53 @@ const Bottom = (props) => {
                         </Grid>
                     </Grid>
                 </Box>
+                <div className="translate-local">
+                    <Location
+                        userLocation={userLocation}
+                        handleSelectLocation={handleSelectLocation}
+                    />
+                    <Localization/>
+                </div>
+                <Grid
+                    item
+                    container
+                    alignItems="center"
+                    justify="space-between"
+                    className='multi-actions'
+                    sm={7}
+                    xs={12}
+                >
+                    <Grid item md={2}>
+                        <Link href="/promotions">
+                            <a>
+                                <SurpriseIcon/>
+                                <Typography variant="subtitle1">
+                                    {t('actions')}
+                                </Typography>
+                            </a>
+                        </Link>
+                    </Grid>
+                    {/*<Grid item md={2}>*/}
+                    {/*    <Link href="#">*/}
+                    {/*        <a>*/}
+                    {/*            <SubstractIcon/>*/}
+                    {/*            <Typography variant="subtitle1">*/}
+                    {/*                {t('bonus')}*/}
+                    {/*            </Typography>*/}
+                    {/*        </a>*/}
+                    {/*    </Link>*/}
+                    {/*</Grid>*/}
+                    <Grid item md={2}>
+                        <Link href="/help">
+                            <a className={pathname === '/help' ? 'selected' : ''}>
+                                <QuestionIcon/>
+                                <Typography variant="subtitle1">
+                                    {t('help')}
+                                </Typography>
+                            </a>
+                        </Link>
+                    </Grid>
+                </Grid>
             </Hidden>
             <CustomDrawer
                 position='left'

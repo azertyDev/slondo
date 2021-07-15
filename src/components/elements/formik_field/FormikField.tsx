@@ -44,13 +44,14 @@ export const FormikField: FC<CustomFormikFieldPropsType> = (props) => {
                                 alwaysShowMask
                                 {...field}
                                 mask='+\9\98(99) 999 99 99'
+                                onChange={otherProps.onChange}
                             >
                                 {() => <TextField
                                     fullWidth
                                     name={name}
                                     focused={false}
-                                    variant="outlined"
                                     size='small'
+                                    variant="outlined"
                                     className={errorMsg ? 'error-border' : ''}
                                 />}
                             </ReactInputMask>
