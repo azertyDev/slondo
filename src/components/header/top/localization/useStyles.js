@@ -4,7 +4,8 @@ export const useStyles = makeStyles((theme) => ({
     root: {
         display: 'inline-flex',
         justifyContent: 'center',
-        height: 'fit-content',
+        height: '100%',
+        alignItems: 'center',
         '& a': {
             textDecoration: 'none'
         },

@@ -64,7 +64,7 @@ const Bottom = (props) => {
 
     const classes = useStyles(props);
     return (
-        <>
+        <div className={classes.root}>
             <Hidden mdDown>
                 <ElevationScroll {...props}>
                     <AppBar
@@ -172,99 +172,47 @@ const Bottom = (props) => {
             </Hidden>
             {/* ========================== Adaptive ======================= */}
             <Hidden lgUp>
-                <Box position='relative'>
-                    <div className="translate-local">
-                        <Location handleSelectLocation={handleSelectLocation}/>
-                        <Localization/>
-                    </div>
-                    <Grid
-                        item
-                        container
-                        alignItems="center"
-                        className='multi-actions'
-                        spacing={1}
-                        sm={7}
-                        xs={12}
-                    >
-                        <Grid item sm={4} md={3}>
-                            <Link href="/promotions">
-                                <a>
-                                    <SurpriseIcon/>
-                                    <Typography variant="subtitle1">
-                                        {t('actions')}
-                                    </Typography>
-                                </a>
-                            </Link>
+                <Container maxWidth='xl'>
+                    <Grid container spacing={1}>
+                        <Grid item xs={12} className="translate-local">
+                            <Location
+                                userLocation={userLocation}
+                                handleSelectLocation={handleSelectLocation}
+                            />
+                            <Localization />
                         </Grid>
-                        {/*<Grid item md={2}>*/}
-                        {/*    <Link href="#">*/}
-                        {/*        <a>*/}
-                        {/*            <SubstractIcon/>*/}
-                        {/*            <Typography variant="subtitle1">*/}
-                        {/*                {t('bonus')}*/}
-                        {/*            </Typography>*/}
-                        {/*        </a>*/}
-                        {/*    </Link>*/}
-                        {/*</Grid>*/}
-                        <Grid item sm={4} md={3}>
-                            <Link href="/help">
-                                <a className={pathname === '/help' ? 'selected' : ''}>
-                                    <QuestionIcon/>
-                                    <Typography variant="subtitle1">
-                                        {t('help')}
-                                    </Typography>
-                                </a>
-                            </Link>
+                        <Grid
+                            item
+                            container
+                            alignItems="center"
+                            className='multi-actions'
+                            spacing={1}
+                            xs={12}
+                            sm={7}
+                        >
+                            <Grid item sm={4} md={3}>
+                                <Link href="/promotions">
+                                    <a>
+                                        <SurpriseIcon />
+                                        <Typography variant="subtitle1">
+                                            {t('actions')}
+                                        </Typography>
+                                    </a>
+                                </Link>
+                            </Grid>
+                            <Grid item sm={4} md={3}>
+                                <Link href="/help">
+                                    <a className={pathname === '/help' ? 'selected' : ''}>
+                                        <QuestionIcon />
+                                        <Typography variant="subtitle1">
+                                            {t('help')}
+                                        </Typography>
+                                    </a>
+                                </Link>
+                            </Grid>
                         </Grid>
                     </Grid>
-                </Box>
-                <div className="translate-local">
-                    <Location
-                        userLocation={userLocation}
-                        handleSelectLocation={handleSelectLocation}
-                    />
-                    <Localization/>
-                </div>
-                <Grid
-                    item
-                    container
-                    alignItems="center"
-                    justify="space-between"
-                    className='multi-actions'
-                    sm={7}
-                    xs={12}
-                >
-                    <Grid item md={2}>
-                        <Link href="/promotions">
-                            <a>
-                                <SurpriseIcon/>
-                                <Typography variant="subtitle1">
-                                    {t('actions')}
-                                </Typography>
-                            </a>
-                        </Link>
-                    </Grid>
-                    {/*<Grid item md={2}>*/}
-                    {/*    <Link href="#">*/}
-                    {/*        <a>*/}
-                    {/*            <SubstractIcon/>*/}
-                    {/*            <Typography variant="subtitle1">*/}
-                    {/*                {t('bonus')}*/}
-                    {/*            </Typography>*/}
-                    {/*        </a>*/}
-                    {/*    </Link>*/}
-                    {/*</Grid>*/}
-                    <Grid item md={2}>
-                        <Link href="/help">
-                            <a className={pathname === '/help' ? 'selected' : ''}>
-                                <QuestionIcon/>
-                                <Typography variant="subtitle1">
-                                    {t('help')}
-                                </Typography>
-                            </a>
-                        </Link>
-                    </Grid>
-                </Grid>
+                </Container>
             </Hidden>
             <CustomDrawer
                 position='left'
@@ -286,9 +234,9 @@ const Bottom = (props) => {
                     horizontal: 'left'
                 }}
             >
-                <SidebarMenu clearAnchor={handleClose}/>
+                <SidebarMenu clearAnchor={handleClose} />
             </Popover>
-        </>
+        </div>
     );
 };
 

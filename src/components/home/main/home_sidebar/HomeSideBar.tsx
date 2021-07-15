@@ -21,7 +21,7 @@ export const HomeSidebar: FC = () => {
                 <SocialsBlock/>
             </section>
             <section className="banner-wrapper">
-                <Banner height="345px"/>
+                <Banner height="483px"/>
             </section>
             <ScrollTop/>
         </div>

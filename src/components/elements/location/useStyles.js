@@ -6,10 +6,14 @@ export const useStyles = makeStyles((theme) => ({
         alignItems: 'center',
         '& > h6.MuiTypography-subtitle1': {
             cursor: 'pointer',
-            textDecoration: 'underline',
+            fontWeight: 500,
+            color: '#838383',
             [theme.breakpoints.down('xs')]: {
-                width: '80%',
-                fontSize: '14px'
+                fontSize: '12px',
+                letterSpacing: '0.4px'
+            },
+            [theme.breakpoints.up('md')]: {
+                textDecoration: 'underline'
             }
         },
         '& > svg': {

@@ -5,11 +5,11 @@ export const useStyles = makeStyles(() => ({
         width: '100%',
         height: '100%',
         '& > div.MuiPaper-rounded': {
-            height: '100%',
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
-            background: '#F2F2F2',
+            background: 'url(/img/banner.png)',
+            backgroundRepeat: 'no-repeat',
             borderRadius: '10px',
             '& > h5.MuiTypography-h5': {
                 color: '#7DBCF6',

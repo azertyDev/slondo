@@ -8,9 +8,9 @@ export const Banner: FC<{ height?: string }> = ({height}) => {
     return (
         <div className={classes.root}>
             <Paper style={{height: height}} elevation={0}>
-                <Typography variant="h5" color="initial">
-                    Рекламный блок
-                </Typography>
+                {/*<Typography variant="h5" color="initial">*/}
+                {/*    Рекламный блок*/}
+                {/*</Typography>*/}
             </Paper>
         </div>
     );

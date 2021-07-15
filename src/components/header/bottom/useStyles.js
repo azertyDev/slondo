@@ -3,23 +3,23 @@ import {makeStyles} from '@material-ui/core/styles';
 export const useStyles = makeStyles((theme) => ({
     root: {
         transition: 'box-shadow 0.5s',
+        [theme.breakpoints.down('md')]: {
+            height: '100%',
+            marginBottom: '10px',
+            marginTop: '112px'
+        },
+        [theme.breakpoints.down('xs')]: {
+            marginTop: '104px'
+        },
         '&.MuiPaper-elevation4': {
             WebkitBoxShadow: '0px 10px 16px -19px rgba(0, 0, 0, 0.6)',
             MozBoxShadow: '0px 10px 16px -19px rgba(0, 0, 0, 0.6)',
             boxShadow: '0px 10px 16px -19px rgba(0, 0, 0, 0.6)'
         },
-        [theme.breakpoints.down('md')]: {
-            height: '100%',
-            marginBottom: '10px'
-        },
         '& > div.MuiContainer-root': {
-            // transition: 'padding .3s',
             '& > div': {
                 width: '100%',
-                margin: 0,
-                '& > div:first-child': {
-                    paddingLeft: 0
-                }
+                margin: 0
             }
         },
         '& div.bottom-logo': {
@@ -114,20 +114,12 @@ export const useStyles = makeStyles((theme) => ({
                 }
             }
         },
-
         '& div.translate-local': {
-            [theme.breakpoints.down('md')]: {
-                margin: '112px 0 10px'
-            },
-            [theme.breakpoints.down('xs')]: {
-                margin: '104px 0 10px'
-            },
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'space-between',
             '& div': {
                 borderRadius: '100px',
-                background: '#F5F5F5',
                 padding: '6px'
             }
         },
