@@ -2,7 +2,6 @@ import { makeStyles } from '@material-ui/core/styles'
 
 export const useStyles = makeStyles((theme) => ({
     root: {
-        paddingLeft: 20,
         '& h6': {
             lineHeight: '22px',
         },

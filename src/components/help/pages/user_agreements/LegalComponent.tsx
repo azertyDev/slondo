@@ -4,20 +4,21 @@ import {useStyles} from './useStyles';
 import { Search_icon } from '@src/components/elements/icons'
 
 export const LegalComponent: FC<any> = ({ docs }) => {
+
     const classes = useStyles()
     return (
-        <Grid item xs={9} className={classes.root}>
-            <FormControl fullWidth className={classes.searchInput} variant="outlined">
-                <OutlinedInput
-                    id="outlined-adornment-amount"
-                    placeholder="Поиск"
-                    startAdornment={
-                        <InputAdornment position="start">
-                            <Search_icon />
-                        </InputAdornment>
-                    }
-                />
-            </FormControl>
+        <Grid item xs={12} className={classes.root}>
+            {/*<FormControl fullWidth className={classes.searchInput} variant="outlined">*/}
+            {/*    <OutlinedInput*/}
+            {/*        id="outlined-adornment-amount"*/}
+            {/*        placeholder="Поиск"*/}
+            {/*        startAdornment={*/}
+            {/*            <InputAdornment position="start">*/}
+            {/*                <Search_icon />*/}
+            {/*            </InputAdornment>*/}
+            {/*        }*/}
+            {/*    />*/}
+            {/*</FormControl>*/}
             <div>
                 {docs.preface}
                 {
