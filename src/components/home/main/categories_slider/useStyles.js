@@ -14,7 +14,7 @@ export const useStyles = makeStyles((theme) => ({
         '& > h2.title': {
             marginBottom: '21px',
             [theme.breakpoints.down('md')]: {
-                fontWeight: '600',
+                fontWeight: '500',
                 fontSize: 'calc(14px + 10 * (100vw / 1280))',
                 marginBottom: '10px',
                 padding: '0 24px'
@@ -100,7 +100,8 @@ export const useStyles = makeStyles((theme) => ({
                         borderRadius: '100px',
                         [theme.breakpoints.down('xs')]: {
                             width: '94px',
-                            height: '94px'
+                            height: '94px',
+                            marginBottom: '6px'
                         }
                     },
                     '& div.medium': {

@@ -37,7 +37,6 @@ export const useStyles = makeStyles((theme) => ({
         bottom: 0,
         display: 'flex',
         justifyContent: 'center',
-
         width: '100%',
         zIndex: 30,
         '& > a': {
@@ -47,11 +46,10 @@ export const useStyles = makeStyles((theme) => ({
                 padding: '15px 25px',
                 marginBottom: '8px',
                 color: theme.palette.primary.white,
-                backgroundColor: theme.palette.primary.createAdBtnColor,
+                backgroundColor: '#2F80ED',
                 borderRadius: '12px',
                 '& > h6': {
-                    // fontSize: '1.15rem',
-                    fontSize: '18px',
+                    fontSize: '16px',
                     textAlign: 'center',
                     color: '#fff'
                 }

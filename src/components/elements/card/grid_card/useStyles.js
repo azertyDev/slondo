@@ -32,7 +32,7 @@ export const useStyles = makeStyles((theme) => ({
             borderRadius: '7px',
             filter: 'drop-shadow(0px 2px 4px rgba(0, 0, 0, 0.2))',
             [theme.breakpoints.down('xs')]: {
-                filter: 'drop-shadow(0px 1px 2px rgba(0, 0, 0, 0.25))'
+                filter: 'drop-shadow(0px 1px 4px rgba(0, 0, 0, 0.08))'
             },
             height: '100%',
             '&:hover': {
@@ -81,7 +81,12 @@ export const useStyles = makeStyles((theme) => ({
                                     : ads_type === 'exauc'
                                     ? 'rgba(242, 153, 74, .65)'
                                     : 'rgba(173, 102, 213, 0.65)'
-                            )
+                            ),
+                            [theme.breakpoints.down('xs')]: {
+                                height: '18px',
+                                display: 'flex',
+                                alignItems: 'center'
+                            }
                         }
                     },
                     '& > div.icons': {
@@ -96,7 +101,7 @@ export const useStyles = makeStyles((theme) => ({
                                 padding: '5px',
                                 background: 'rgba(255, 255, 255, 0.6)',
                                 borderRadius: '100%',
-                                marginRight: '5px',
+                                marginRight: '5px'
                                 // '& > svg': {
                                 //     '& > path': {
                                 //         fill: '#838383'

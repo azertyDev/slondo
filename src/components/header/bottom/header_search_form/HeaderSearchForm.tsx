@@ -5,9 +5,9 @@ import {
     Hidden,
     InputBase,
     IconButton,
-    Typography
+    Typography, useMediaQuery, useTheme
 } from '@material-ui/core';
-import {SearchCtx} from "@src/context";
+import {SearchCtx} from '@src/context';
 import {Search_icon} from '@src/components/elements/icons';
 import {CustomButton} from '@src/components/elements/custom_button/CustomButton';
 import {useTranslation} from 'next-i18next';
@@ -60,6 +60,8 @@ export const HeaderSearchForm: FC = () => {
         setValues({searchTerm: searchTermFromUrl});
     }, []);
 
+    const isMdDown = useMediaQuery(useTheme().breakpoints.down('md'));
+
     const classes = useStyles();
     return (
         <>
@@ -77,7 +79,7 @@ export const HeaderSearchForm: FC = () => {
                         onChange={handleChange}
                         value={values.searchTerm}
                         className={classes.input}
-                        placeholder={t('searchText')}
+                        placeholder={isMdDown ? '' : t('searchText')}
                         inputProps={{'aria-label': 'search category'}}
                     />
                     <Hidden mdDown>

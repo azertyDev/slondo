@@ -9,7 +9,8 @@ export const useStyles = makeStyles((theme) => ({
                 alignItems: 'center',
                 '& div.color': {
                     width: '50px',
-                    height: '50px'
+                    height: '50px',
+                    borderRadius: '100%'
                 }
             },
             '& div.photos-preview': {
