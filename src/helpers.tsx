@@ -260,13 +260,16 @@ export const searchCategory = (txt: string, categoryList: CategoryType[], t: TFu
         let matchedCtgrs = [];
 
         if (list !== undefined) {
-            list.forEach(ctgry => {
-                if (searchRegExp.test(t(`categories:${ctgry.name}`))) {
-                    matchedCtgrs.push(ctgry);
-                }
+            list.forEach(subctgr => {
+                const ctgrName = subctgr.parents.length === 2
+                    ? t(`categories:${subctgr.parents[0].name}.${subctgr.parents[1].name}.${subctgr.name}.name`)
+                    : t(`categories:${subctgr.parents[0].name}.${subctgr.name}.name`);
+
+                if (searchRegExp.test(ctgrName)) matchedCtgrs.push(subctgr);
+
                 matchedCtgrs = [
                     ...matchedCtgrs,
-                    ...getMatchedCtgrs(txt, ctgry.type)
+                    ...getMatchedCtgrs(txt, subctgr.type)
                 ];
             });
         }

@@ -22,11 +22,6 @@ export const useStyles = makeStyles((theme) => ({
                 }
             }
         },
-        // '& span.error-text': {
-        //     [theme.breakpoints.down('sm')]: {
-        //         fontSize: '10px'
-        //     }
-        // },
         '& div.color-select': {
             display: 'flex',
             flexWrap: 'wrap',

@@ -45,6 +45,7 @@ export const SettingsModal: FC<CommonModalType> = (props) => {
     const isPost = post.ads_type === 'post';
 
     const initBuyer = {
+        id: null,
         name: '',
         surname: '',
         avatar: ''
@@ -79,6 +80,7 @@ export const SettingsModal: FC<CommonModalType> = (props) => {
                 case 'confirm':
                 case "sold_on_slondo":
                     const data = {
+                        user_id: buyer.id,
                         ads_id: post.id,
                         reason_id: status === 'confirm' ? reasons.archive : reasons.sold
                     };

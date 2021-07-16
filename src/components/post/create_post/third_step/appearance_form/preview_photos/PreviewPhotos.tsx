@@ -163,7 +163,6 @@ export const PreviewPhotos: FC<PreviewPhotosPropsType> = (props) => {
         </Droppable>;
     };
 
-    console.log(files);
     const classes = useStyles();
     return (
         <div className={classes.root}>

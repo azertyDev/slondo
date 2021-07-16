@@ -2,7 +2,7 @@ import {makeStyles} from '@material-ui/core/styles';
 
 export const useStyles = makeStyles((theme) => ({
     root: {
-        '& div.categories-menu, & div.sub-categories-menu': {
+        '& div.categories-menu, & div.subcategories-menu': {
             '& > ul': {
                 background: '#F2F2F2',
                 borderRadius: '10px',
@@ -31,15 +31,14 @@ export const useStyles = makeStyles((theme) => ({
                     }
                 }
             }
-
         },
         '& div.categories-menu': {
             paddingRight: 20,
-            [theme.breakpoints.down('xs')]: {
+            [theme.breakpoints.down('sm')]: {
                 paddingRight: 0
             }
         },
-        '& div.sub-categories-menu': {
+        '& div.subcategories-menu': {
             '& div.search-block': {
                 boxShadow: '0px 1px 10px rgba(0, 0, 0, 0.1)',
                 borderRadius: 10,
@@ -52,6 +51,11 @@ export const useStyles = makeStyles((theme) => ({
                     '& > input.MuiInputBase-input': {
                         padding: '10px 0'
                     }
+                }
+            },
+            '& h6.subcategories-list-item': {
+                [theme.breakpoints.down('xs')]: {
+                    maxWidth: '220px'
                 }
             },
             '& button.back-btn': {
@@ -70,14 +74,13 @@ export const useStyles = makeStyles((theme) => ({
                     backgroundColor: theme.palette.primary.gray
                 }
             },
-            '& > div.sub-category-bg': {
-                width: '100%',
-                height: '500px',
+            '& > div.subcategory-bg': {
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'flex-end',
+                minHeight: '500px',
                 background: '#F2F2F2',
                 borderRadius: '10px',
-                display: 'flex',
-                justifyContent: 'flex-end',
-                alignItems: 'center',
                 backgroundImage: `url('/img/category-bg.png')`,
                 backgroundRepeat: 'no-repeat',
                 backgroundPosition: 'bottom left',
@@ -86,12 +89,11 @@ export const useStyles = makeStyles((theme) => ({
                     height: '454px'
                 },
                 '& > h2.MuiTypography-h2': {
-                    fontSize: '3.75rem',
+                    width: '50%',
+                    fontSize: '4vw',
                     textTransform: 'uppercase',
                     fontWeight: 600,
-                    color: theme.palette.common.tab,
-                    maxWidth: '318px',
-                    marginRight: '200px'
+                    color: theme.palette.common.tab
                 }
             }
         }

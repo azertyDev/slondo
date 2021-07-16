@@ -130,7 +130,7 @@ const Bottom = (props) => {
                                     </Grid>
                                 </Grid>
                                 <Grid item md={2}>
-                                    <Link href="/create/type/select">
+                                    <Link href="/create/type">
                                         <a className='create-post-link'>
                                             <CustomButton
                                                 color="primary"
@@ -146,10 +146,10 @@ const Bottom = (props) => {
                                 </Grid>
                                 <Grid
                                     item
+                                    xs={1}
                                     container
                                     justify="center"
                                     alignItems="center"
-                                    xs={1}
                                 >
                                     {isAuth
                                         ? <span onClick={handleClick} className='avatar'>

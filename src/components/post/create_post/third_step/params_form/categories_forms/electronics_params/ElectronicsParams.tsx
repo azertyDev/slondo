@@ -59,7 +59,7 @@ export const ElectronicsParams: FC<CommonParamsPropsType> = (props) => {
                 submitTxt='appearance'
                 icon={<ParametersIcon/>}
                 isPreview={isPreview}
-                title={t('parameters')}
+                title={t('post:parameters')}
                 open={currentFormIndex === 3}
                 isEditable={currentFormIndex < 3}
                 handleEdit={handleFormOpen(3)}

@@ -214,14 +214,14 @@ const MyPosts: FC = () => {
                     <Tab
                         label={
                             <Typography variant="subtitle1">
-                                Активные
+                                {t('active')}
                             </Typography>
                         }
                     />
                     <Tab
                         label={
                             <Typography variant="subtitle1">
-                                Архивные
+                                {t('archive')}
                             </Typography>
                         }
                     />

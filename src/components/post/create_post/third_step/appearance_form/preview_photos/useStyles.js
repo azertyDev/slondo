@@ -2,7 +2,6 @@ import {makeStyles} from '@material-ui/core/styles';
 
 export const useStyles = makeStyles(() => ({
     root: {
-        position: 'relative',
         minHeight: '216px',
         '& input': {
             display: 'none'
@@ -21,7 +20,6 @@ export const useStyles = makeStyles(() => ({
         }
     },
     dropWrapper: {
-        maxHeight: '111px',
         '& div.prev-img': {
             '& img': {
                 width: '100%',

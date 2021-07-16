@@ -92,8 +92,8 @@ export const AppearanceForm: FC<AppearanceFormPropsType> = (props) => {
                 open={currentFormIndex === formIndex}
                 isEditable={currentFormIndex < formIndex}
                 handleEdit={handleFormOpen(formIndex)}
-                title={t('post:appearance')}
                 submitTxt='priceDescContacts'
+                title={t('post:appearance')}
             >
                 <div className={classes.root}>
                     {isPreview
@@ -150,9 +150,7 @@ export const AppearanceForm: FC<AppearanceFormPropsType> = (props) => {
                                             >
                                                 <div
                                                     className={!!color && clr.id === color.id ? 'selected-color' : ''}
-                                                    style={{
-                                                        backgroundColor: clr.hex_color_code
-                                                    }}
+                                                    style={{backgroundColor: clr.hex_color_code}}
                                                 />
                                                 <Typography variant='subtitle2'>
                                                     {t(clr.name)}

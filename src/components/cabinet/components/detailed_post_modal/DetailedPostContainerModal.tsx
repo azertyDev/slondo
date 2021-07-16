@@ -1,9 +1,9 @@
 import {FC, useContext, useEffect, useState} from 'react';
+import {unstable_batchedUpdates} from 'react-dom';
+import {userAPI} from '@src/api/api';
 import {CardDataType} from '@root/interfaces/CardData';
 import {useBetsData} from '@src/hooks/useBetsData';
-import {userAPI} from '@src/api/api';
 import {useModal} from '@src/hooks/useModal';
-import {unstable_batchedUpdates} from 'react-dom';
 import {DetailedPostModal} from "@src/components/cabinet/components/detailed_post_modal/DetailedPostModal";
 import {ConfirmModal} from "@src/components/elements/confirm_modal/Confirm_modal";
 import {RatingModal} from "@src/components/elements/rating_modal/RatingModal";
@@ -53,9 +53,7 @@ export const DetailedPostContainerModal: FC<DetailedPostViewPropsType> = (props)
     const hasOffer = offerUser && status === 'public';
     const userForRating = isUserWinner ? author : winner;
 
-
     const [isFetch, setIsFetch] = useState(false);
-    const [phone, setPhone] = useState(null);
     const [actionStatus, setActionStatus] = useState<keyof typeof ActionStatuses>(null);
 
     const confirmTxt = (() => {
@@ -81,30 +79,8 @@ export const DetailedPostContainerModal: FC<DetailedPostViewPropsType> = (props)
         auction_id: auctionId
     });
 
-    const fetchUserPhone = async () => {
-        if (!phone) {
-            try {
-                const userId = isUserWinner ? author.id : winner.id;
-                setIsFetch(true);
-                const {phone} = await userAPI.getPhoneByUserId(userId);
-                unstable_batchedUpdates(() => {
-                    setPhone(phone);
-                    setIsFetch(false);
-                });
-            } catch (e) {
-                unstable_batchedUpdates(() => {
-                    setIsFetch(false);
-                    setErrorMsg(e.message);
-                });
-            }
-        }
-    };
-
     const handleCloseDetailModal = () => {
-        unstable_batchedUpdates(() => {
-            onClose();
-            setPhone(null);
-        });
+        onClose();
     };
 
     const handleOffersOpen = () => {
@@ -177,20 +153,18 @@ export const DetailedPostContainerModal: FC<DetailedPostViewPropsType> = (props)
                 bets={bets}
                 post={post}
                 open={open}
-                phone={phone}
                 isFetch={isFetch}
                 betsCount={betsCount}
                 isBetsFetch={isBetsFetch}
                 handleReject={handleReject}
                 handleAccept={handleAccept}
-                fetchUserPhone={fetchUserPhone}
                 handleOffersOpen={handleOffersOpen}
                 setFetchedBetsData={setFetchedBetsData}
                 handleCloseDetailModal={handleCloseDetailModal}
             />
             <ConfirmModal
-                title={t(confirmTxt)}
                 open={confirmOpen}
+                title={t(confirmTxt)}
                 handleConfirm={confirmHandle}
                 handleClose={handleConfirmClose}
                 cancelTxt={t('common:cancel')}

@@ -1,8 +1,4 @@
-import {useMediaQuery, useTheme} from '@material-ui/core';
-
 export const Logo = () => {
-    const isXsDown = useMediaQuery(useTheme().breakpoints.down('xs'));
-
     return (
         <svg xmlns="http://www.w3.org/2000/svg"
              width="120.945"

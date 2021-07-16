@@ -1,11 +1,11 @@
 import {FC, useEffect, useState} from 'react';
-import {StepsProgress} from '../steps_progress/StepsProgress';
 import {useRouter} from 'next/router';
 import {useTranslation} from 'next-i18next';
+import {StepsProgress} from '../steps_progress/StepsProgress';
 import {MainLayout} from '@src/components/main_layout/MainLayout';
 import {searchCategory, categoriesByType} from '@src/helpers';
 import {SubcategoryType} from '@root/interfaces/Categories';
-import {Grid, Hidden, InputBase, List, ListItem, Typography} from '@material-ui/core';
+import {Grid, Hidden, InputBase, List, ListItem, Typography, useTheme, useMediaQuery} from '@material-ui/core';
 import {BackspaceIcon, Search_icon} from '@src/components/elements/icons';
 import {CustomButton} from '@src/components/elements/custom_button/CustomButton';
 import {IdNameType} from '@root/interfaces/Post';
@@ -16,6 +16,8 @@ type CategoryStateType = {
 } & IdNameType;
 
 export const CategoriesPage: FC = () => {
+    const {t} = useTranslation('categories');
+
     const initCategory: CategoryStateType = {
         id: null,
         name: '',
@@ -24,7 +26,6 @@ export const CategoriesPage: FC = () => {
             name: ''
         }
     };
-    const {t} = useTranslation('categories');
 
     const shallow = {shallow: true};
     const {locale, query, push} = useRouter();
@@ -36,11 +37,9 @@ export const CategoriesPage: FC = () => {
 
     const categories = categoriesByType(postTypeName);
 
-    const handleCategory = (ctgr) => async () => {
-        const url = `/create/${postTypeName}/${ctgr.name}`;
-        await push(url, undefined, shallow);
-        !!subctgrs.length && setSubctgrs([]);
+    const handleCategory = (ctgr) => () => {
         setSearchTxt('');
+        push(`/create/${postTypeName}/${ctgr.name}`, undefined, shallow);
     };
 
     const handleSubCategory = (ctgr) => async () => {
@@ -48,8 +47,8 @@ export const CategoriesPage: FC = () => {
         const [mainCtgr, subCtgr] = parents;
         const url = `/create${!type || subCtgr ? '/form' : ''}/${postTypeName}/${mainCtgr.name}`;
 
-        push(`${url}/${subCtgr ? `${subCtgr.name}/${ctgr.name}` : ctgr.name}`, undefined, shallow);
         setSearchTxt('');
+        push(`${url}/${subCtgr ? `${subCtgr.name}/${ctgr.name}` : ctgr.name}`, undefined, shallow);
     };
 
     const setMatchedCtgrs = () => {
@@ -82,7 +81,9 @@ export const CategoriesPage: FC = () => {
     };
 
     const handleBackSubCtgr = async () => {
-        await push(`/create/type/${postTypeName}/${categoryName}`, undefined, shallow);
+        subcategoryName
+            ? await push(`/create/${postTypeName}/${categoryName}`, undefined, shallow)
+            : await push(`/create/${postTypeName}`, undefined, shallow);
     };
 
     const handleBack = async () => {
@@ -101,6 +102,9 @@ export const CategoriesPage: FC = () => {
         setSubLvlCtgrs();
     }, [categoryName, subcategoryName, locale]);
 
+    const isMdDown = useMediaQuery(useTheme().breakpoints.down('md'));
+    const isSmDown = useMediaQuery(useTheme().breakpoints.down('sm'));
+
     const classes = useStyles();
     return (
         <MainLayout>
@@ -113,73 +117,105 @@ export const CategoriesPage: FC = () => {
                     />
                 </Hidden>
                 <Grid container>
-                    <Grid item xs={12} sm={6} md={4} lg={3} className="categories-menu">
-                        <List disablePadding>
-                            {categories.map((ctgr, i) =>
-                                <ListItem
-                                    key={i}
-                                    disableGutters
-                                    onClick={handleCategory(ctgr)}
-                                    className={category.id === ctgr.id ? 'selected-category' : ''}
-                                >
-                                    {ctgr.smallIcon}
-                                    <Typography variant="subtitle1">
-                                        {t(`${ctgr.name}.name`)}
-                                    </Typography>
-                                </ListItem>)}
-                        </List>
-                    </Grid>
-                    <Grid item xs={12} sm={6} md={8} lg={9} className="sub-categories-menu">
-                        <div className="search-block">
-                            <InputBase
-                                fullWidth
-                                spellCheck={false}
-                                value={searchTxt}
-                                onChange={handleSearch}
-                                placeholder={t(`post:searchCategory`)}
-                                startAdornment={<Search_icon/>}
-                            />
-                        </div>
-                        {!!subctgrs.length
-                         ? <List disablePadding>
-                             {subctgrs[0].parents.length === 2 && subcategoryName && (
-                                 <ListItem onClick={handleBackSubCtgr}>
-                                     <CustomButton className="back-btn">
-                                         <BackspaceIcon/>
-                                         <Typography variant="subtitle1">
-                                             {t(`${categoryName}.${subcategoryName}.name`)}
-                                         </Typography>
-                                     </CustomButton>
-                                 </ListItem>
-                             )}
-                             {subctgrs.map((typeCtgr, i) => {
-                                 const transCtgrName = t(`${categoryName}${subcategoryName ? `.${subcategoryName}` : ''}.${typeCtgr.name}.name`);
-                                 return (
-                                     <ListItem key={i} onClick={handleSubCategory(typeCtgr)}>
-                                         <div>
-                                             <Typography variant="subtitle1">
-                                                 {transCtgrName}
-                                             </Typography>
-                                             {!!searchTxt && (
-                                                 <Typography
-                                                     className="parent-category"
-                                                     variant="subtitle2"
-                                                 >
-                                                     {t(`${typeCtgr.parents[0].name}`)}
-                                                     {typeCtgr.parents[1] && ` - ${t(`${typeCtgr.parents[1].name}`)}`}
-                                                 </Typography>
-                                             )}
-                                         </div>
-                                     </ListItem>
-                                 );
-                             })}
-                         </List>
-                         : <div className="sub-category-bg">
-                             <Typography variant="h2">
-                                 {t('post:selectCategory')}
-                             </Typography>
-                         </div>}
-                    </Grid>
+                    {!(categoryName && isSmDown) && (
+                        <Grid
+                            item
+                            xs={12}
+                            sm={12}
+                            md={5}
+                            className="categories-menu"
+                        >
+                            <List disablePadding>
+                                {categories.map((ctgr, i) =>
+                                    <ListItem
+                                        key={i}
+                                        disableGutters
+                                        onClick={handleCategory(ctgr)}
+                                        className={categoryName === ctgr.name ? 'selected-category' : ''}
+                                    >
+                                        {ctgr.smallIcon}
+                                        <Typography variant="subtitle1">
+                                            {t(`${ctgr.name}.name`)}
+                                        </Typography>
+                                    </ListItem>
+                                )}
+                            </List>
+                        </Grid>
+                    )}
+                    {((categoryName && isSmDown) || !isSmDown) && (
+                        <Grid
+                            item
+                            xs={12}
+                            md={7}
+                            className="subcategories-menu"
+                        >
+                            <div className="search-block">
+                                <InputBase
+                                    fullWidth
+                                    value={searchTxt}
+                                    spellCheck={false}
+                                    onChange={handleSearch}
+                                    startAdornment={<Search_icon/>}
+                                    placeholder={t(`post:searchCategory`)}
+                                />
+                            </div>
+                            {!!subctgrs.length
+                                ? <List disablePadding>
+                                    {subcategoryName
+                                        ? <ListItem onClick={handleBackSubCtgr}>
+                                            <CustomButton className="back-btn">
+                                                <BackspaceIcon/>
+                                                <Typography variant="subtitle1">
+                                                    {t(`${categoryName}.${subcategoryName}.name`)}
+                                                </Typography>
+                                            </CustomButton>
+                                        </ListItem>
+                                        : categoryName && isSmDown && (
+                                        <ListItem onClick={handleBackSubCtgr}>
+                                            <CustomButton className="back-btn">
+                                                <BackspaceIcon/>
+                                                <Typography variant="subtitle1">
+                                                    {t('common:back')}
+                                                </Typography>
+                                            </CustomButton>
+                                        </ListItem>
+                                    )}
+                                    {subctgrs.map((typeCtgr, i) => {
+                                        const [ctgr, subctgr] = typeCtgr.parents;
+                                        const transCtgrName = t(`${ctgr.name}${subctgr ? `.${subctgr.name}` : ''}.${typeCtgr.name}.name`);
+                                        return (
+                                            <ListItem key={i} onClick={handleSubCategory(typeCtgr)}>
+                                                <div>
+                                                    <Typography
+                                                        noWrap
+                                                        variant="subtitle1"
+                                                        className='subcategories-list-item'
+                                                    >
+                                                        {transCtgrName}
+                                                    </Typography>
+                                                    {!!searchTxt && (
+                                                        <Typography
+                                                            variant="subtitle2"
+                                                            className="parent-category"
+                                                        >
+                                                            {t(`categories:${typeCtgr.parents[0].name}.name`)}
+                                                            {typeCtgr.parents[1] && ` - ${t(`categories:${typeCtgr.parents[0].name}.${typeCtgr.parents[1].name}.name`)}`}
+                                                        </Typography>
+                                                    )}
+                                                </div>
+                                            </ListItem>
+                                        );
+                                    })}
+                                </List>
+                                : <div className="sub-category-bg">
+                                    {!isMdDown && (
+                                        <Typography variant="h2">
+                                            {t('post:selectCategory')}
+                                        </Typography>
+                                    )}
+                                </div>}
+                        </Grid>
+                    )}
                 </Grid>
             </div>
         </MainLayout>

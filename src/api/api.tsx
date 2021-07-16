@@ -12,7 +12,7 @@ const local = 'http://192.168.100.60/slondo/public/api/';
 
 const instance = Axios.create({
     withCredentials: true,
-    baseURL: local
+    baseURL: production
 });
 
 // export const socketIO = socketIOClient('http://192.168.100.60:8005');
@@ -83,14 +83,22 @@ export const myUzCardAPI = {
 };
 
 export const userCabinetAPI = {
-    getMyPurchases: (params): Promise<any> => {
+    getPurchases: (params): Promise<any> => {
         return instance
             .get('regular/post/purchased', {params, ...setTokenToHeader()})
             .then((res) => res.data)
             .catch(({response}) => {
                 throw response.data;
             });
-    }
+    },
+    getArchivePurchases: (params): Promise<any> => {
+        return instance
+            .get('regular/archivePost/purchased', {params, ...setTokenToHeader()})
+            .then((res) => res.data)
+            .catch(({response}) => {
+                throw response.data;
+            });
+    },
 };
 
 export const userAPI = {

@@ -10,17 +10,15 @@ import {
     LocationIcon,
     PhoneIcon,
     RenewalIcon,
-    // RocketIcon,
     SafeIcon
 } from '@src/components/elements/icons';
 import {CustomButton} from '@src/components/elements/custom_button/CustomButton';
 import {CabinetModal} from '@src/components/cabinet/components/cabinet_modal/CabinetModal';
-import ChevronRightIcon from '@material-ui/icons/ChevronRight';
-import {UserInfoWithAvatar} from '@src/components/elements/user_info_with_avatar/UserInfoWithAvatar';
 import {BetsList} from '@src/components/elements/bets_list/BetsList';
 import {numberPrettier} from '@src/helpers';
-import {useStyles} from './useStyles';
 import {UserCtx} from "@src/context/UserCtx";
+import {UserCard} from "@src/components/cabinet/components/user_card/UserCard";
+import {useStyles} from './useStyles';
 
 type DetailedPostViewPropsType = {
     isFetch: boolean,
@@ -30,8 +28,6 @@ type DetailedPostViewPropsType = {
     open: boolean,
     bets,
     setFetchedBetsData,
-    phone: string,
-    fetchUserPhone: () => void,
     handleOffersOpen: () => void,
     handleReject: () => void,
     handleAccept: () => void,
@@ -44,14 +40,12 @@ export const DetailedPostModal: FC<DetailedPostViewPropsType> = (props) => {
         open,
         post,
         bets,
-        phone,
         isFetch,
         betsCount,
         isBetsFetch,
         setFetchedBetsData,
         handleCloseDetailModal,
         handleOffersOpen,
-        fetchUserPhone,
         handleAccept,
         handleReject
     } = props;
@@ -184,17 +178,6 @@ export const DetailedPostModal: FC<DetailedPostViewPropsType> = (props) => {
                                 </Box>
                             </Paper>
                         </Grid>
-                        {/*<Grid item xs={12} md={6}>*/}
-                        {/*    <CustomButton*/}
-                        {/*        disabled*/}
-                        {/*        className={`${classes.btn} advertise`}*/}
-                        {/*    >*/}
-                        {/*        <RocketIcon/>&nbsp;*/}
-                        {/*        <Typography variant='subtitle1'>*/}
-                        {/*            Рекламировать*/}
-                        {/*        </Typography>*/}
-                        {/*    </CustomButton>*/}
-                        {/*</Grid>*/}
                         <Grid container item spacing={2}>
                             {isAuction && (
                                 <>
@@ -238,34 +221,7 @@ export const DetailedPostModal: FC<DetailedPostViewPropsType> = (props) => {
                                         </div>
                                         <Paper className='paper-block'>
                                             {userData
-                                                ? <div className='user-info'>
-                                                    <UserInfoWithAvatar
-                                                        isOwner
-                                                        width='50px'
-                                                        height='50px'
-                                                        owner={userData}
-                                                    />
-                                                    <div className='contacts-btns'>
-                                                        <CustomButton onClick={fetchUserPhone}>
-                                                            {phone
-                                                                ? <Typography variant='subtitle2'>
-                                                                    {phone}
-                                                                </Typography>
-                                                                : <>
-                                                                    <PhoneIcon/>
-                                                                    <Typography variant='subtitle2'>
-                                                                        Позвонить
-                                                                    </Typography>
-                                                                </>}
-                                                        </CustomButton>
-                                                        <CustomButton disabled>
-                                                            <LetterIcon/>
-                                                            <Typography variant='subtitle2'>
-                                                                Написать
-                                                            </Typography>
-                                                        </CustomButton>
-                                                    </div>
-                                                </div>
+                                                ? <UserCard userData={userData}/>
                                                 : <div>{t(`auction:last_bet`, {lastBet: bets[0]?.bet})}</div>}
                                         </Paper>
                                         {(isUserCreator || isUserWinner) && !inactive && (
