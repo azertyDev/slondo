@@ -20,7 +20,8 @@ export const useStyles = makeStyles((theme) => ({
                     color: theme.palette.common.tab,
                     [theme.breakpoints.down('md')]: {
                         textTransform: 'none',
-                        color: '#838383 !important'
+                        color: '#838383 !important',
+                        fontSize: '1rem'
                     }
                 }
             },
@@ -28,7 +29,7 @@ export const useStyles = makeStyles((theme) => ({
                 '& h6.MuiTypography-h6': {
                     color: theme.palette.primary.secondary,
                     [theme.breakpoints.down('md')]: {
-                        color: '#4E4E4E !important'
+                        color: '#4E4E4E !important',
                     }
                 }
             },
