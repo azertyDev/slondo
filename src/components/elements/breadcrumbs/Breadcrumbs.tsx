@@ -20,11 +20,13 @@ export const BreadcrumbsComponent: FC<BreadcrumbsPropsType> = ({category, subcat
     const [location, setLocation] = useState('uzbekistan');
 
     const mainCtgr = site_categories.find(ctgr => ctgr.name === category);
-    const subCtgr = mainCtgr.subcategory.find(subCtgr => subCtgr.name === subcategory);
-    const typeCtgr = subCtgr.type?.find(type => type.name === type);
+    const subCtgr = mainCtgr?.subcategory?.find(subCtgr => subCtgr.name === subcategory);
+    const typeCtgr = subCtgr?.type?.find(type => type.name === type);
 
-    const categoryName = transformCyrillic(mainCtgr.ru_name);
-    const subCategoryName = transformCyrillic(subCtgr.ru_name);
+    console.log(mainCtgr);
+
+    const categoryName = transformCyrillic(mainCtgr?.ru_name);
+    const subCategoryName = transformCyrillic(subCtgr?.ru_name);
     const typeName = transformCyrillic(typeCtgr?.ru_name);
 
     const categoryLink = `/${location}/${categoryName}`;
