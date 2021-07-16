@@ -153,8 +153,8 @@ const Bottom = (props) => {
                                 >
                                     {isAuth
                                         ? <span onClick={handleClick} className='avatar'>
-                                        <Avatar alt="Avatar" src={avatar} />
-                                    </span>
+                                            <Avatar alt="Avatar" src={avatar} />
+                                        </span>
                                         : <CustomButton
                                             className="bottom-sign-button header-button"
                                             onClick={handleOpenModal}
@@ -163,7 +163,8 @@ const Bottom = (props) => {
                                                 {t('auth_reg:signIn')}
                                             </Typography>
                                             <SignIcon />
-                                        </CustomButton>}
+                                        </CustomButton>
+                                    }
                                 </Grid>
                             </Grid>
                         </Container>
@@ -175,10 +176,12 @@ const Bottom = (props) => {
                 <Container maxWidth='xl'>
                     <Grid container spacing={1}>
                         <Grid item xs={12} className="translate-local">
-                            <Location
-                                userLocation={userLocation}
-                                handleSelectLocation={handleSelectLocation}
-                            />
+                            <Box width='80%'>
+                                <Location
+                                    userLocation={userLocation}
+                                    handleSelectLocation={handleSelectLocation}
+                                />
+                            </Box>
                             <Localization />
                         </Grid>
                         <Grid
@@ -223,15 +226,17 @@ const Bottom = (props) => {
                 id={id}
                 open={open}
                 anchorEl={anchorEl}
+                anchorReference="anchorPosition"
+                anchorPosition={{top: 110, left: 1560}}
                 onClose={handleClose}
                 className={classes.menu}
                 anchorOrigin={{
-                    vertical: 'bottom',
+                    vertical: 'top',
                     horizontal: 'left'
                 }}
                 transformOrigin={{
-                    vertical: 'bottom',
-                    horizontal: 'left'
+                    vertical: 'top',
+                    horizontal: 'right'
                 }}
             >
                 <SidebarMenu clearAnchor={handleClose} />

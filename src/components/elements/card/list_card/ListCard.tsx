@@ -45,7 +45,7 @@ export const ListCard: FC<ListCardPropsType> = ({cardData}) => {
         <Paper variant="outlined" elevation={2} className={classes.root}>
             <Box className="card-data">
                 <div className="img">
-                    <img src={cardData.image} alt={cardData.title}/>
+                    <img src={cardData.image ?? '/img/Vector.png'} alt={cardData.title}/>
                     <Typography
                         noWrap
                         color="initial"

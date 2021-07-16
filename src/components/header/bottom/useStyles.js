@@ -118,10 +118,7 @@ export const useStyles = makeStyles((theme) => ({
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'space-between',
-            '& div': {
-                borderRadius: '100px',
-                padding: '6px'
-            }
+            marginBottom: 12
         },
         '& div.multi-actions': {
             [theme.breakpoints.up('md')]: {
@@ -175,7 +172,7 @@ export const useStyles = makeStyles((theme) => ({
             },
             '& h6': {
                 [theme.breakpoints.down('lg')]: {
-                    fontSize: '.85rem'
+                    fontSize: '.75rem'
                 },
                 [theme.breakpoints.up('lg')]: {
                     fontSize: '1rem'
@@ -187,13 +184,13 @@ export const useStyles = makeStyles((theme) => ({
         '& .MuiPaper-root': {
             width: '290px',
             padding: '10px',
-            backgroundColor: theme.palette.primary.white
+            backgroundColor: '#fff'
         },
         '& .menu-item': {
             padding: '5px',
             marginBottom: '0px',
             borderRadius: '0px',
-            backgroundColor: '#fff',
+            background: 'none',
             '& .MuiListItem-root': {
                 background: '#f2f2f2'
             }

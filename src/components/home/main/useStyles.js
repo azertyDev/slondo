@@ -33,25 +33,21 @@ export const useStyles = makeStyles((theme) => ({
         }
     },
     createAdBlock: {
-        position: 'fixed',
         bottom: 0,
-        display: 'flex',
-        justifyContent: 'center',
-
-        width: '100%',
         zIndex: 30,
+        width: '100%',
+        display: 'flex',
+        position: 'fixed',
+        marginBottom: '8px',
+        justifyContent: 'center',
         '& > a': {
             textDecoration: 'none',
             '& > div': {
-                width: '268px',
-                padding: '15px 25px',
-                marginBottom: '8px',
+                padding: '10px 23px',
                 color: theme.palette.primary.white,
                 backgroundColor: theme.palette.primary.createAdBtnColor,
                 borderRadius: '12px',
                 '& > h6': {
-                    // fontSize: '1.15rem',
-                    fontSize: '18px',
                     textAlign: 'center',
                     color: '#fff'
                 }

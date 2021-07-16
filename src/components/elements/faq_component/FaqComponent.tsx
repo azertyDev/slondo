@@ -21,10 +21,10 @@ export const FaqComponent: FC<WithT> = (props) => {
             <Paper elevation={0}>
                 <ul>
                     <li>
-                        <Link href="#">
+                        <Link href="/help/how_to_register">
                             <a>
                                 <span>
-                                    <SignIcon/>
+                                    <SignIcon />
                                 </span>
                                 <Typography variant="subtitle1" color="initial">
                                     {t('main:how_to_register')}
@@ -33,10 +33,10 @@ export const FaqComponent: FC<WithT> = (props) => {
                         </Link>
                     </li>
                     <li>
-                        <Link href="#">
+                        <Link href="/help/how_to_create_auction">
                             <a>
                                 <span>
-                                    <GavelIcon/>
+                                    <GavelIcon />
                                 </span>
                                 <Typography variant="subtitle1" color="initial">
                                     {t('main:how_do_create_auction')}
@@ -45,10 +45,10 @@ export const FaqComponent: FC<WithT> = (props) => {
                         </Link>
                     </li>
                     <li>
-                        <Link href="#">
+                        <Link href="/help/how_to_create_post">
                             <a>
                                 <span>
-                                    <NotesIcon/>
+                                    <NotesIcon />
                                 </span>
                                 <Typography variant="subtitle1" color="initial">
                                     {t('main:how_do_create_ad')}
@@ -57,10 +57,10 @@ export const FaqComponent: FC<WithT> = (props) => {
                         </Link>
                     </li>
                     <li>
-                        <Link href="#">
+                        <Link href="/help/how_to_participate">
                             <a>
                                 <span>
-                                    <ShoppingIcon/>
+                                    <ShoppingIcon />
                                 </span>
                                 <Typography variant="subtitle1" color="initial">
                                     {t('main:how_do_participate_auction')}

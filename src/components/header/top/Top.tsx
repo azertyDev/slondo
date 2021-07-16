@@ -29,6 +29,7 @@ import {CustomButton} from '@src/components/elements/custom_button/CustomButton'
 import {HeaderSearchForm} from '@src/components/header/bottom/header_search_form/HeaderSearchForm';
 import {cookieOpts, cookies} from '@src/helpers';
 import {useStyles} from './useStyles';
+import {CategorySortIcon} from '@src/components/elements/icons/CategorySortIcon';
 
 type TopHeaderPropsType = {
     isAuth: boolean,
@@ -100,16 +101,6 @@ export const Top: FC<TopHeaderPropsType> = (props) => {
                                     </a>
                                 </Link>
                             </Grid>
-                            {/*<Grid item md={2}>*/}
-                            {/*    <Link href="#">*/}
-                            {/*        <a>*/}
-                            {/*            <Typography variant="subtitle1">*/}
-                            {/*                {t('bonus')}*/}
-                            {/*            </Typography>*/}
-                            {/*            <SubstractIcon/>*/}
-                            {/*        </a>*/}
-                            {/*    </Link>*/}
-                            {/*</Grid>*/}
                             <Grid item md={2}>
                                 <Link href="/help">
                                     <a className={pathname === '/help' ? 'selected' : ''}>
@@ -152,9 +143,7 @@ export const Top: FC<TopHeaderPropsType> = (props) => {
                                             onClick={() => setIsOpen(true)}
                                         >
                                             <div className="burger-menu">
-                                                <div />
-                                                <div />
-                                                <div />
+                                                <CategorySortIcon />
                                             </div>
                                         </IconButton>
                                     </Grid>

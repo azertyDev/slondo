@@ -60,7 +60,7 @@ export const Main: FC<{seoTxt: string}> = ({seoTxt}) => {
                                     in={!trigger}
                                 >
                                     <div>
-                                        <Typography variant="h6">
+                                        <Typography variant="subtitle1">
                                             {t('header:createPost')}
                                         </Typography>
                                     </div>

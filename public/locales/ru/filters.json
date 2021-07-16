@@ -2047,6 +2047,9 @@
     }
   },
   "service": {
+    "cost_indicated": {
+      "name": "Стоимость указана"
+    },
     "in_one_hour": {
       "name": "За 1 час"
     },
@@ -6293,7 +6296,6 @@
   "experience": "Опыт",
   "require_experience": "Требуемый опыт",
   "nature": "Характер работы",
-  "cost_indicated": "Стоимость указана",
   "place": "Место оказания",
   "specialization": "Специализация",
   "color": "Цвет",
@@ -6439,5 +6441,6 @@
   "gray": "Серый",
   "free": "Даром",
   "archive": "Архив",
+  "repair_construction": "Тестовый"
 }
 
