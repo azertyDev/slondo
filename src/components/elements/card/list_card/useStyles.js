@@ -8,22 +8,15 @@ export const useStyles = makeStyles((theme) => ({
         zIndex: 20,
         '& .card-data': {
             display: 'flex',
-            height: 192,
+            // height: 192,
             position: 'relative',
             '& .img': {
                 borderRadius: '10px 0px 0px 0px',
-                width: '27%',
-                height: 'auto',
-                backgroundPosition: 'center top',
+                backgroundImage: ({cardData}) => `url(${cardData.image ?? '/img/Vector.png'})`,
+                backgroundPosition: 'center',
                 backgroundSize: 'cover',
                 backgroundRepeat: 'no-repeat',
                 position: 'relative',
-                '& > img': {
-                    borderRadius: '5px 0px 0px 5px',
-                    height: '100%',
-                    width: '100%',
-                    objectFit: 'cover'
-                },
                 '& > span.MuiTypography-caption': {
                     position: 'absolute',
                     top: '3px',
@@ -42,49 +35,47 @@ export const useStyles = makeStyles((theme) => ({
                         backgroundColor: theme.palette.primary.exAucBgColor
                     }
                 },
-                '& > span:last-child': {
-                    position: 'absolute',
-                    bottom: '4px',
-                    left: '4px',
-                    display: 'flex',
-                    justifyContent: 'space-between',
-                    alignItems: 'center',
-                    padding: '3px',
-                    backgroundColor: 'rgba(255, 255, 255, 0.7)',
-                    borderRadius: '5px',
-                    '& > svg': {
-                        marginRight: '8px'
+                '& div.observer-block': {
+                    '& > span': {
+                        display: 'flex',
+                        justifyContent: 'space-between',
+                        alignItems: 'center',
+                        padding: '3px',
+                        backgroundColor: 'rgba(255, 255, 255, 0.7)',
+                        borderRadius: '5px',
+                        '& > svg': {
+                            marginRight: '5px'
+                        }
                     }
                 }
             },
             '& .content': {
-                width: '100%',
-                minWidth: 0,
                 padding: '10px 10px 10px 20px',
                 borderLeft: 0,
-                display: 'flex',
-                flexDirection: 'column',
-                justifyContent: 'space-between',
                 position: 'relative',
+
+                // minWidth: 0,
+                // width: '100%',
+                // display: 'flex',
+                // flexDirection: 'column',
+                // justifyContent: 'space-between',
                 '& .post-title': {
-                    width: '380px',
+                    height: 'min-content',
                     '& a': {
-                        display: 'inline-block',
                         textDecoration: 'none',
                         '&:hover': {
                             textDecoration: 'underline',
                             textDecorationColor: '#000'
                         },
                         '& .MuiTypography-subtitle1': {
-                            fontSize: '18px',
-                            lineHeight: '20px'
+                            fontSize: '18px'
                         }
                     }
                 },
             },
             '& .description': {
-                width: '450px',
-                maxWidth: '65%',
+                // width: '450px',
+                // maxWidth: '65%',
                 display: '-webkit-box',
                 WebkitLineClamp: 5,
                 overflow: 'hidden',

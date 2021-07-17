@@ -1,6 +1,6 @@
 import {cloneElement, useState} from 'react';
 import Link from 'next/link';
-import {AppBar, Avatar, Box, Container, Grid, Hidden, Popover, Typography, useScrollTrigger} from '@material-ui/core';
+import {AppBar, Avatar, Box, Container, Grid, Popover, Hidden, Typography, useScrollTrigger} from '@material-ui/core';
 import {CustomButton} from '@src/components/elements/custom_button/CustomButton';
 import {withScrollThreshold} from '@src/hocs/withScrollThreshold';
 import {Logo, QuestionIcon, SurpriseIcon} from '@src/components/elements/icons';

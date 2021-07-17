@@ -184,7 +184,19 @@ export const useStyles = makeStyles((theme) => ({
         '& .MuiPaper-root': {
             width: '290px',
             padding: '10px',
-            backgroundColor: '#fff'
+            backgroundColor: '#fff',
+            '&:before': {
+                content: '""',
+                position: 'absolute',
+                right: '20px',
+                top: '-10px',
+                width: 0,
+                height: 0,
+                zIndex: 0,
+                borderStyle: 'solid',
+                borderWidth: '0 17px 17px 17px',
+                borderColor: 'transparent transparent #000 transparent'
+            }
         },
         '& .menu-item': {
             padding: '5px',
@@ -195,5 +207,6 @@ export const useStyles = makeStyles((theme) => ({
                 background: '#f2f2f2'
             }
         }
+
     }
 }));
