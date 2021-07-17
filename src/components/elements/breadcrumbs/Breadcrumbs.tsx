@@ -23,8 +23,6 @@ export const BreadcrumbsComponent: FC<BreadcrumbsPropsType> = ({category, subcat
     const subCtgr = mainCtgr?.subcategory?.find(subCtgr => subCtgr.name === subcategory);
     const typeCtgr = subCtgr?.type?.find(type => type.name === type);
 
-    console.log(mainCtgr);
-
     const categoryName = transformCyrillic(mainCtgr?.ru_name);
     const subCategoryName = transformCyrillic(subCtgr?.ru_name);
     const typeName = transformCyrillic(typeCtgr?.ru_name);

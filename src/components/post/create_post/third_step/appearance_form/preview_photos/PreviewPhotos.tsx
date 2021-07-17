@@ -13,18 +13,6 @@ type PreviewPhotosPropsType = {
     setValues: Dispatch<unknown>
 };
 
-// const sizeCounter = (files) => (
-//     files.reduce(
-//         (total, {size}) => {
-//             if (size) {
-//                 total += total + size;
-//             }
-//             return total;
-//         },
-//         0
-//     )
-// );
-
 export const PreviewPhotos: FC<PreviewPhotosPropsType> = (props) => {
     resetServerContext();
     const {values, setValues} = props;
@@ -72,7 +60,8 @@ export const PreviewPhotos: FC<PreviewPhotosPropsType> = (props) => {
 
         if (dist > 0) {
             photos.splice(-dist, dist);
-        } else if (sum > 0) {
+        }
+        if (sum > 0) {
             files.splice(-sum, sum);
         }
 
@@ -108,7 +97,7 @@ export const PreviewPhotos: FC<PreviewPhotosPropsType> = (props) => {
                     className={classes.dropWrapper}
                 >
                     {files.map((fileItem, index) => {
-                        const offset = (!bottom && index <= 5) || (bottom && index > 5);
+                        const offset = (!bottom && index <= 3) || (bottom && index > 3);
                         if (offset) {
                             return <Draggable
                                 key={index}
@@ -119,10 +108,10 @@ export const PreviewPhotos: FC<PreviewPhotosPropsType> = (props) => {
                                 {provided => (
                                     <Grid
                                         item
-                                        xs={12}
-                                        sm={6}
+                                        xs={6}
+                                        sm={3}
                                         md={3}
-                                        lg={2}
+                                        lg={3}
                                         ref={provided.innerRef}
                                         {...provided.draggableProps}
                                         {...provided.dragHandleProps}

@@ -172,6 +172,7 @@ export const DetailedPostContainerModal: FC<DetailedPostViewPropsType> = (props)
             />
             {userForRating && (
                 <RatingModal
+                    title={t('rate_seller')}
                     open={ratingOpen}
                     user={userForRating}
                     handleCloseRating={handleCloseRating}

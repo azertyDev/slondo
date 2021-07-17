@@ -3,10 +3,14 @@ import {makeStyles} from '@material-ui/core/styles';
 export const useStyles = makeStyles(() => ({
     root: {
         display: 'flex',
-        flexDirection: 'column',
+        justifyContent: 'space-around',
+        width: '100%',
         '& div.contacts-btns': {
             display: 'flex',
-            justifyContent: 'space-between'
+            flexDirection: 'column',
+            '& svg': {
+                color: '#000'
+            }
         },
         '& .MuiAvatar-root': {
             width: 50,

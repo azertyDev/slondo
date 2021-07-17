@@ -79,7 +79,7 @@ export const regularFormSchema = lazy(
 );
 
 export const appearanceSchema = object({
-    files: array().required('addPhotos'),
+    files: array().compact(v => v === null).required('addPhotos'),
     color: object<{ id: number }>()
         .nullable()
         .test(

@@ -1,6 +1,7 @@
 import {FC, useEffect} from 'react';
 import {useFormik} from 'formik';
 import {Typography} from '@material-ui/core';
+import {UPLOAD_FILES_LIMIT} from "@src/constants";
 import {PreviewPhotos} from './preview_photos/PreviewPhotos';
 import {CustomAccordion} from '@src/components/elements/accordion/CustomAccordion';
 import {IdNameType} from '@root/interfaces/Post';
@@ -49,7 +50,7 @@ export const AppearanceForm: FC<AppearanceFormPropsType> = (props) => {
         onSubmit,
         initialValues: {
             color: null,
-            files: Array.from({length: 12}).map(() => null)
+            files: Array.from({length: UPLOAD_FILES_LIMIT}).map(() => null)
         },
         validationSchema: !isJob ? appearanceSchema : null
     });
