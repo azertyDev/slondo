@@ -4,9 +4,10 @@ import Link from 'next/link';
 import {formatNumber, numberPrettier, transformCyrillic} from '@src/helpers';
 import {useTranslation} from 'react-i18next';
 import Countdown from 'react-countdown';
-import {Box, Paper, Typography} from '@material-ui/core';
+import {Box, Grid, Paper, Typography} from '@material-ui/core';
 import {CardDataType} from '@root/interfaces/CardData';
 import {useStyles} from './useStyles';
+import image from 'next/image';
 
 type ListCardPropsType = {
     cardData: CardDataType
@@ -40,12 +41,11 @@ export const ListCard: FC<ListCardPropsType> = ({cardData}) => {
 
     const url = `/obyavlenie/${translatedTitle}-${cardData.id}`;
 
-    const classes = useStyles();
+    const classes = useStyles({cardData});
     return (
         <Paper variant="outlined" elevation={2} className={classes.root}>
-            <Box className="card-data">
-                <div className="img">
-                    <img src={cardData.image} alt={cardData.title}/>
+            <Grid container className="card-data">
+                <Grid item xs={5} sm={3} className="img">
                     <Typography
                         noWrap
                         color="initial"
@@ -54,19 +54,39 @@ export const ListCard: FC<ListCardPropsType> = ({cardData}) => {
                     >
                         {t(`common:${cardData.ads_type}`)}
                     </Typography>
-                    <span>
-                        <EyeIcon/>
-                        <Typography
-                            noWrap
-                            variant="caption"
-                            color="initial"
-                        >
-                            {cardData.observer?.number_of_views}
-                        </Typography>
+                    <Box
+                        width={1}
+                        bottom={0}
+                        display='flex'
+                        padding='5px'
+                        position='absolute'
+                        className='observer-block'
+                        justifyContent='space-between'
+                    >
+                        <span>
+                            <EyeIcon />
+                            <Typography
+                                noWrap
+                                variant="caption"
+                                color="initial"
+                            >
+                                {cardData.observer?.number_of_views}
+                            </Typography>
+                        </span>
+                        <span>
+                            <EyeIcon />
+                            <Typography
+                                noWrap
+                                variant="caption"
+                                color="initial"
+                            >
+                                {cardData.observer?.number_of_favorites}
+                            </Typography>
                     </span>
-                </div>
-                <div className="content">
-                    <div className="post-title">
+                    </Box>
+                </Grid>
+                <Grid item xs={7} sm={9} container className="content">
+                    <Grid xs={8} className="post-title">
                         <Link href={url}>
                             <a target='_blank'>
                                 <Typography
@@ -78,51 +98,51 @@ export const ListCard: FC<ListCardPropsType> = ({cardData}) => {
                                 </Typography>
                             </a>
                         </Link>
-                    </div>
-                    <div className="description">
-                        {cardData.description && (
-                            <Typography noWrap variant='subtitle2'>
-                                {cardData.description}
-                            </Typography>
-                        )}
-                    </div>
+                    </Grid>
+                    <Grid item xs={8} className="description">
+                        <Typography noWrap variant='subtitle2'>
+                            Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has
+                            been the industry's standard dummy text ever since the 1500s, when an unknown printer took a
+                            galley of type and scrambled it to make a type specimen book. It has survived not only five
+                            centuries, but also the leap into electronic typesetting, remaining essentially unchanged.
+                            It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum
+                            passages, and more recently with desktop publishing software like Aldus PageMaker including
+                            versions of Lorem Ipsum.
+                        </Typography>
+                        {/*{cardData.description && (*/}
+                        {/*    <Typography noWrap variant='subtitle2'>*/}
+                        {/*        {cardData.description}*/}
+                        {/*    </Typography>*/}
+                        {/*)}*/}
+                    </Grid>
                     {cardData.ads_type !== 'post' && (
-                        <Box display='flex' justifyContent='space-between'>
+                        <Grid item xs={8}>
                             <Countdown
                                 date={new Date(cardData.expiration_at).getTime()}
                                 renderer={timer}
                             />
-                            <div>
-                                <Typography variant='subtitle1'>
-                                    Ставки: {cardData.auction?.number_of_bets}
-                                </Typography>
-                            </div>
-                        </Box>
+                            <Typography variant='subtitle1'>
+                                Ставки: {cardData.auction?.number_of_bets || 0}
+                            </Typography>
+                        </Grid>
                     )}
-                    <div className='priceAndBet'>
-                        {isAuction
-                         ? hasBet && <>
+                    <Grid item xs={8} className='priceAndBet'>
+                        {isAuction && hasBet && <>
                             <Typography variant='subtitle1'>
                                 Текущая ставка
                             </Typography>
-                            <Typography
-                                variant="h6"
-                                color="initial"
-                            >
+                            <Typography variant="h6" color="initial">
                                 {numberPrettier(cardData.auction?.bet?.bet)}&nbsp;
                                 <span>{t(`common:${cardData.currency.name}`)}</span>
                             </Typography>
-                        </>
-                         : <Typography
-                             variant="h6"
-                             color="initial"
-                         >
-                             {numberPrettier(cardData.price)}&nbsp;
-                             <span>{t(`common:${cardData.currency.name}`)}</span>
-                         </Typography>}
-                    </div>
-                </div>
-            </Box>
+                        </>}
+                        <Typography variant="h6" color="initial">
+                            {numberPrettier(cardData.price)}&nbsp;
+                            <span>{t(`common:${cardData.currency.name}`)}</span>
+                        </Typography>
+                    </Grid>
+                </Grid>
+            </Grid>
         </Paper>
     );
 };

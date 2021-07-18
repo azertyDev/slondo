@@ -13,11 +13,9 @@ export const useStyles = makeStyles((theme) => ({
                 marginBottom: 0
             },
             '& .Mui-selected': {
-                backgroundColor: 'red',
                 border: '1px solid #AD66D5',
                 borderRadius: '5px',
-                '& .MuiTypography-body1': {
-                    color: 'red',
+                '& .MuiTypography-subtitle1': {
                     backgroundImage:
                         'linear-gradient(49.94deg, #675EAA 19.03%, #AD66D5 72.72%)',
                     WebkitBackgroundClip: 'text',

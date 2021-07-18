@@ -36,9 +36,8 @@ export const useStyles = makeStyles(() => ({
         padding: '7px 20px',
         userSelect: 'none',
         background: '#FFFFFF',
-        borderRadius: '100px',
-        boxShadow: '0px 0px 15px rgb(0 0 0 / 10%)',
-        border: '1px solid #4e4e4e',
+        borderRadius: '5px',
+        border: '1px solid #F2F2F2',
         borderColor: props => props.checked && '#AD66D5',
         '& span.MuiCheckbox-root, & svg': {
             marginRight: '5px'
@@ -55,8 +54,8 @@ export const useStyles = makeStyles(() => ({
             color:
                 props => props.checked && '#AD66D5',
             '& svg': {
-                width: 20,
-                height: 20,
+                margin: '0 10px 0 10px',
+                width: 25,
                 '& path': {
                     fill: props => props.checked && '#AD66D5'
                 }

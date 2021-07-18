@@ -14,7 +14,7 @@ export const useStyles = makeStyles((theme) => ({
         '& > h2.title': {
             marginBottom: '21px',
             [theme.breakpoints.down('md')]: {
-                fontWeight: '500',
+                fontWeight: '600',
                 fontSize: 'calc(14px + 10 * (100vw / 1280))',
                 marginBottom: '10px',
                 padding: '0 24px'
@@ -50,8 +50,8 @@ export const useStyles = makeStyles((theme) => ({
         },
         '& div.slick-slide': {
             marginTop: 10,
+            // width: '120px !important',
             '& > div': {
-                width: 'auto !important',
                 display: 'flex',
                 justifyContent: 'center',
                 '& div.category-skeleton': {
@@ -81,7 +81,6 @@ export const useStyles = makeStyles((theme) => ({
                         borderRadius: '100px',
                         '& .MuiTypography-subtitle1': {
                             textAlign: 'center',
-                            fontSize: '1.125rem',
                             [theme.breakpoints.down('xs')]: {
                                 fontSize: 'calc(12px + 6 * (100vw / 1280))',
                                 lineHeight: '16px'
@@ -90,8 +89,8 @@ export const useStyles = makeStyles((theme) => ({
 
                     },
                     '& div.bg-layer': {
-                        width: '140px',
-                        height: '140px',
+                        width: '105px',
+                        height: '105px',
                         display: 'flex',
                         alignItems: 'center',
                         justifyContent: 'center',
@@ -99,24 +98,23 @@ export const useStyles = makeStyles((theme) => ({
                         background: 'linear-gradient(90deg, #f0f0f0 0%, #eaeaeb 67.06%, #e4e4e6 100%)',
                         borderRadius: '100px',
                         [theme.breakpoints.down('xs')]: {
-                            width: '94px',
-                            height: '94px',
-                            marginBottom: '6px'
+                            width: '80px',
+                            height: '80px'
                         }
                     },
                     '& div.medium': {
                         background:
                             'linear-gradient(90deg, #d7d6e3 -18.43%, #fafafa 147.2%)',
-                        width: '132px',
-                        height: '132px',
+                        width: '101px',
+                        height: '101px',
                         borderRadius: '100px',
                         '& > img': {
                             height: '100%',
                             objectFit: 'contain'
                         },
                         [theme.breakpoints.down('xs')]: {
-                            width: '90px',
-                            height: '90px'
+                            width: '77px',
+                            height: '77px'
                         }
                     }
                 }

@@ -93,7 +93,7 @@ export const GridCard: FC<CardItemProps> = (props) => {
                             />
                             : <CardMedia
                                 className="card-media"
-                                image={image ?? '/img/card-logo.png'}
+                                image={image ?? '/img/Vector.png'}
                             >
                                 <div className="card-header">
                                     <div className="title">
@@ -128,13 +128,14 @@ export const GridCard: FC<CardItemProps> = (props) => {
                                                 arrow
                                             >
                                                 <span>
-                                                    <SwapIcon/>
+                                                    <SwapIcon />
                                                 </span>
                                             </Tooltip>
                                         )}
                                     </div>
                                 </div>
-                            </CardMedia>}
+                            </CardMedia>
+                        }
                         <CardActionArea>
                             <CardContent>
                                 {isFetch

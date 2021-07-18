@@ -95,7 +95,7 @@ export const Location: FC<LocationProps> = ({handleSelectLocation, userLocation}
         <>
             <div className={classes.location}>
                 <LocationIcon/>
-                <Typography variant="subtitle1" onClick={handleLocModalOpen}>
+                <Typography variant="subtitle1" onClick={handleLocModalOpen} noWrap>
                     {t(locationsTxt || 'location')}
                 </Typography>
             </div>

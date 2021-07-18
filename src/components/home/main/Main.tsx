@@ -25,7 +25,7 @@ export const Main: FC<{seoTxt: string}> = ({seoTxt}) => {
         <main>
             <div className={classes.root}>
                 <div className="main-slider-wrapper">
-                    <MainSlider/>
+                    {/*<MainSlider/>*/}
                 </div>
                 <div className="categories-slider-wrapper">
                     <CategoriesSlider/>
@@ -35,7 +35,7 @@ export const Main: FC<{seoTxt: string}> = ({seoTxt}) => {
                         <Grid item lg={9} xs={12} className='main-content'>
                             <Hidden mdDown>
                                 <section className='posts-slider-wrapper'>
-                                    <PostsSliderContainer/>
+                                    {/*<PostsSliderContainer/>*/}
                                 </section>
                             </Hidden>
                             <section>
@@ -60,7 +60,7 @@ export const Main: FC<{seoTxt: string}> = ({seoTxt}) => {
                                     in={!trigger}
                                 >
                                     <div>
-                                        <Typography variant="h6">
+                                        <Typography variant="subtitle1">
                                             {t('header:createPost')}
                                         </Typography>
                                     </div>

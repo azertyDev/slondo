@@ -24,7 +24,7 @@ export const useStyles = makeStyles(() => ({
             width: props => props.isXs ? '100px' : '140px',
             '&:first-child': {
                 marginRight: 20,
-                background: '#c9c9c9'
+                background: '#E5E5E5'
 
             },
             '&:last-child': {

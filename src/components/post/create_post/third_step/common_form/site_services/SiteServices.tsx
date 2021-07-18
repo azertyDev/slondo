@@ -61,7 +61,7 @@ export const SiteServices: FC<PaymentDeliveryPropsType> = (props) => {
         <Grid
             item
             container
-            spacing={1}
+            spacing={iconMode ? 2 : 1}
             className={classes.root}
         >
             {!isAuction && (
@@ -71,20 +71,21 @@ export const SiteServices: FC<PaymentDeliveryPropsType> = (props) => {
                             item
                             container
                             alignItems="center"
-                            xs={iconMode ? 4 : 12}
+                            xs={12}
+                            sm={iconMode ? 4 : 12}
                             spacing={iconMode ? 0 : 1}
                         >
                             <Grid
                                 item
                                 xs={12}
-                                sm={6}
-                                md={3}
+                                sm={!iconMode ? 6 : 12}
+                                md={!iconMode ? 3 : 12}
                                 container
                                 alignItems="center"
                                 justify='flex-start'
                             >
                                 <ServiceItem
-                                    icon={<SafeIcon/>}
+                                    icon={<SafeIcon />}
                                     serviceText={t('common:safe_deal')}
                                     checked={values.safe_deal}
                                     handleCheckbox={handleSafeDealCheckBox()}
@@ -118,19 +119,20 @@ export const SiteServices: FC<PaymentDeliveryPropsType> = (props) => {
                             container
                             item
                             alignItems="center"
-                            xs={iconMode ? 4 : 12}
+                            xs={12}
+                            sm={iconMode ? 4 : 12}
                             spacing={iconMode ? 0 : 1}
                         >
                             <Grid
                                 item
                                 xs={12}
-                                sm={6}
-                                md={3}
+                                sm={!iconMode ? 6 : 12}
+                                md={!iconMode ? 3 : 12}
                                 container
                                 alignItems="center"
                             >
                                 <ServiceItem
-                                    icon={<ExchangeIcon/>}
+                                    icon={<ExchangeIcon />}
                                     serviceText={t('common:exchange')}
                                     checked={values.exchange}
                                     handleCheckbox={handleCheckbox('exchange')}
@@ -160,19 +162,20 @@ export const SiteServices: FC<PaymentDeliveryPropsType> = (props) => {
                     item
                     container
                     alignItems="center"
-                    xs={iconMode ? 4 : 12}
+                    xs={12}
+                    sm={iconMode ? 4 : 12}
                     spacing={iconMode ? 0 : 1}
                 >
                     <Grid
                         item
                         xs={12}
-                        sm={6}
-                        md={3}
+                        sm={!iconMode ? 6 : 12}
+                        md={!iconMode ? 3 : 12}
                         container
                         alignItems="center"
                     >
                         <ServiceItem
-                            icon={<DeliveryIcon/>}
+                            icon={<DeliveryIcon />}
                             serviceText={t('common:delivery')}
                             checked={values.delivery}
                             handleCheckbox={handleCheckbox('delivery')}

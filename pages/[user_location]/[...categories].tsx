@@ -24,7 +24,8 @@ export const getServerSideProps: GetServerSideProps = async ({locale, query, req
                     'auth_reg',
                     'common',
                     'main',
-                    'errors'
+                    'errors',
+                    'cabinet'
                 ]
             )
         }

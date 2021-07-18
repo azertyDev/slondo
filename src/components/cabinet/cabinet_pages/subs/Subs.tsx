@@ -30,9 +30,11 @@ export const Subs: FC<UserSocialInfoPropsType> = ({user}) => {
                         selected={pathname === '/cabinet/ratings'}
                         disableGutters
                     >
-                        <Typography variant="subtitle1">
-                            {t('cabinet:rating')}
-                        </Typography>
+                        <ListItemText primary={
+                            <Typography variant="subtitle1">
+                                {t('cabinet:rating')}
+                            </Typography>
+                        } />
                     </ListItem>
                 </CustomBadge>
                 <ListItem
@@ -41,9 +43,11 @@ export const Subs: FC<UserSocialInfoPropsType> = ({user}) => {
                     selected={pathname === '/cabinet/subscribe'}
                     disableGutters
                 >
-                    <Typography variant="subtitle1">
-                        {t('cabinet:follows')}
-                    </Typography>
+                    <ListItemText primary={
+                        <Typography variant="subtitle1">
+                            {t('cabinet:follows')}
+                        </Typography>
+                    } />
                 </ListItem>
             </List>
             <List component="nav" aria-label="cabinet menu" className='menu-item' disablePadding>
