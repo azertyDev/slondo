@@ -63,13 +63,17 @@ const Cabinet: FC = () => {
             <div className={classes.root}>
                 <Grid container spacing={2}>
                     <Grid item xs={3}>
-                        <CabinetSidebar/>
+                        <CabinetSidebar />
                     </Grid>
-                    <Grid item xs={9} container direction='column'>
-                        <Typography variant="h6" className="menu-title">
-                            {t(page)}
-                        </Typography>
-                        {getPage()}
+                    <Grid item xs={9}>
+                        <Grid item xs={12}>
+                            <Typography variant="h6" className="menu-title">
+                                {t(page)}
+                            </Typography>
+                        </Grid>
+                        <Grid item xs={12}>
+                            {getPage()}
+                        </Grid>
                     </Grid>
                 </Grid>
             </div>

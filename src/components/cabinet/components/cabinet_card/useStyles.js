@@ -3,10 +3,12 @@ import {makeStyles} from '@material-ui/core/styles';
 export const useStyles = makeStyles((theme) => ({
     root: {
         '& .unfold-btn': {
+            marginTop: '10px',
             background: '#EEE',
-            borderRadius: '0px 0px 5px 5px',
+            borderRadius: '5px',
             height: '32px',
-            width: '100%'
+            width: '100%',
+            boxShadow: '0px 1px 2px 0px #00000026'
         },
         '& .breadcrumbs': {
             display: 'flex',
@@ -39,7 +41,7 @@ export const useStyles = makeStyles((theme) => ({
             display: 'flex',
             position: 'absolute',
             top: 0,
-            right: 20,
+            right: 15,
             '& button': {
                 background: '#F5F5F5',
                 boxShadow: '0px 1px 2px rgba(0, 0, 0, 0.15)',
@@ -62,7 +64,12 @@ export const useStyles = makeStyles((theme) => ({
                     color: theme.palette.common.tab
                 },
                 '&.icons': {
-                    marginRight: 10
+                    '&:not(:last-child)': {
+                        marginRight: 5
+                    },
+                    '& .MuiTypography-subtitle1': {
+                        fontSize: '12px'
+                    }
                 }
             }
         }

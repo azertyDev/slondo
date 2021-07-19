@@ -25,7 +25,8 @@ export const getServerSideProps: GetServerSideProps = async ({locale, query, req
                     'common',
                     'main',
                     'errors',
-                    'cabinet'
+                    'cabinet',
+                    'auction'
                 ]
             )
         }

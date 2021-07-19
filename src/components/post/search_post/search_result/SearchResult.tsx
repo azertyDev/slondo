@@ -6,8 +6,12 @@ import {WithT} from 'i18next';
 import {cookies} from '@src/helpers';
 import {userAPI} from '@src/api/api';
 import {CustomPagination} from '@src/components/elements/custom_pagination/CustomPagination';
-import {ErrorCtx} from "@src/context";
+import {ErrorCtx} from '@src/context';
 import {useStyles} from './useStyles';
+import {CustomButton} from '@src/components/elements/custom_button/CustomButton';
+import {
+    FavoriteBorderIcon
+} from '@src/components/elements/icons';
 
 type SearchResultPropsType = {
     searchTermFromUrl: string,
@@ -86,11 +90,13 @@ export const SearchResult: FC<SearchResultPropsType> = (props) => {
             {isNotFound
                 ? <Typography>{t('post_not_found', {searchText: searchTermFromUrl})}</Typography>
                 : <>
-                    <CardView
-                        listMode
-                        data={posts}
-                    />
-                    <Box display='flex' justifyContent='center'>
+                    <Box position='relative'>
+                        <CardView
+                            listMode
+                            data={posts}
+                        />
+                    </Box>
+                    <Box display='flex' justifyContent='center' mt='70px'>
                         <CustomPagination
                             currentPage={page}
                             totalItems={itemsCount}

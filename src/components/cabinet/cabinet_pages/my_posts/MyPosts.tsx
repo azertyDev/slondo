@@ -229,7 +229,7 @@ export const MyPosts: FC = () => {
                     {isFetch
                         ? <CircularProgress color="primary"/>
                         : fstTabPosts.map((data) => (
-                            <Box mb={3} key={data.id}>
+                            <Box mb={3} key={data.id} borderRadius='10px 10px 0px 0px'>
                                 <CabinetCard
                                     cardData={data}
                                     handleDetailedOpen={handleDetailedOpen(data)}
@@ -243,7 +243,7 @@ export const MyPosts: FC = () => {
                     {isFetch
                         ? <CircularProgress color="primary"/>
                         : secTabPosts.map((data) => (
-                            <Box mb={3} key={data.id}>
+                            <Box mb={3} key={data.id} borderRadius='10px 10px 0px 0px'>
                                 <CabinetCard
                                     cardData={data}
                                     handleDetailedOpen={handleDetailedOpen(data)}

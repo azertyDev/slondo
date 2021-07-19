@@ -1,11 +1,11 @@
 import {FC, useEffect, useState} from 'react';
-import {Tab, Tabs, Typography} from '@material-ui/core';
+import {Grid, Tab, Tabs, Typography} from '@material-ui/core';
 import {CustomTabPanel} from '@src/components/elements/custom_tab_panel/CustomTabPanel';
-// import {ITEMS_PER_PAGE} from '@src/constants';
-// import {CustomPagination} from '@src/components/elements/custom_pagination/CustomPagination';
 import {TabsDataType} from '@root/interfaces/Cabinet';
 import {useRouter} from 'next/router';
 import {useStyles} from './useStyles';
+// import {ITEMS_PER_PAGE} from '@src/constants';
+// import {CustomPagination} from '@src/components/elements/custom_pagination/CustomPagination';
 
 type TabsContentPropsType = {
     tabIndex: number,
@@ -38,7 +38,7 @@ export const TabsContent: FC<TabsContentPropsType> = (props) => {
 
     const classes = useStyles({pathname, tabIndex});
     return (
-        <div>
+        <>
             <Tabs
                 value={tabIndex}
                 onChange={handleTabChange}
@@ -91,6 +91,6 @@ export const TabsContent: FC<TabsContentPropsType> = (props) => {
                     {/*)}*/}
                 </CustomTabPanel>
             )}
-        </div>
+        </>
     );
 };
