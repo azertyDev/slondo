@@ -49,7 +49,7 @@ export const useStyles = makeStyles((theme) => ({
                         height: '20px',
                         [theme.breakpoints.down('lg')]: {
                             width: '16px'
-                        },
+                        }
                     },
                     '&:hover': {
                         '& > h6.MuiTypography-subtitle1': {
@@ -71,24 +71,16 @@ export const useStyles = makeStyles((theme) => ({
             }
         }
     },
+
+    // ------------> adaptive <--------------- //
+
     adaptive: {
-        // ------------> adaptive <--------------- //
         '& div.top-header-logo': {
             height: '30px'
         },
         '& div.burger-menu': {
-            width: '26px',
-            '& > div': {
-                height: '3px',
-                backgroundColor: '#494A61',
-                margin: '4px 0',
-                borderRadius: '1px'
-            },
-            '& div:nth-child(2)': {
-                width: '18px'
-            },
-            '& div:nth-child(3)': {
-                width: '9px'
+            '& svg > path': {
+                fill: '#4F4F4F'
             }
         },
         '& button.btn-sign-mobile': {

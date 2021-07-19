@@ -179,7 +179,7 @@ const Bottom = (props) => {
                                 userLocation={userLocation}
                                 handleSelectLocation={handleSelectLocation}
                             />
-                            <Localization />
+                            <Localization/>
                         </Grid>
                         <Grid
                             item

@@ -29,6 +29,7 @@ import {CustomButton} from '@src/components/elements/custom_button/CustomButton'
 import {HeaderSearchForm} from '@src/components/header/bottom/header_search_form/HeaderSearchForm';
 import {cookieOpts, cookies} from '@src/helpers';
 import {useStyles} from './useStyles';
+import {CategorySortIcon} from '@src/components/elements/icons/CategorySortIcon';
 
 type TopHeaderPropsType = {
     isAuth: boolean,
@@ -96,7 +97,7 @@ export const Top: FC<TopHeaderPropsType> = (props) => {
                                         <Typography variant="subtitle1">
                                             {t('actions')}
                                         </Typography>
-                                        <SurpriseIcon />
+                                        <SurpriseIcon/>
                                     </a>
                                 </Link>
                             </Grid>
@@ -116,12 +117,12 @@ export const Top: FC<TopHeaderPropsType> = (props) => {
                                         <Typography variant="subtitle1">
                                             {t('help')}
                                         </Typography>
-                                        <QuestionIcon />
+                                        <QuestionIcon/>
                                     </a>
                                 </Link>
                             </Grid>
                             <Grid item md={2} container justify='center'>
-                                <Localization />
+                                <Localization/>
                             </Grid>
                         </Grid>
                     </Grid>
@@ -148,13 +149,10 @@ export const Top: FC<TopHeaderPropsType> = (props) => {
                                 >
                                     <Grid>
                                         <IconButton
-                                            size="small"
                                             onClick={() => setIsOpen(true)}
                                         >
                                             <div className="burger-menu">
-                                                <div />
-                                                <div />
-                                                <div />
+                                                <CategorySortIcon/>
                                             </div>
                                         </IconButton>
                                     </Grid>
@@ -186,11 +184,11 @@ export const Top: FC<TopHeaderPropsType> = (props) => {
                                 </Grid>
                             </Toolbar>
                             <Box px={isXsDown ? '16px' : '24px'} marginBottom='10px'>
-                                <HeaderSearchForm />
+                                <HeaderSearchForm/>
                             </Box>
                         </AppBar>
                     </Slide>
-                    <LeftDrawer isOpen={isOpen} setIsOpen={setIsOpen} />
+                    <LeftDrawer isOpen={isOpen} setIsOpen={setIsOpen}/>
                 </div>
             </Hidden>
         </>
