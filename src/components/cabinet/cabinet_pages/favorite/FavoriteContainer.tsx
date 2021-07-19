@@ -1,7 +1,6 @@
 import {FC, useContext, useEffect, useState} from 'react';
 import {TabsContent} from '@src/components/cabinet/cabinet_pages/TabsContent';
 import {Favorite} from '@src/components/cabinet/cabinet_pages/favorite/Favorite';
-import {withAuthRedirect} from '@root/src/hocs/withAuthRedirect';
 import {userAPI} from '@src/api/api';
 import {Box, IconButton, List, ListItem, ListItemText, Typography} from '@material-ui/core';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
@@ -13,10 +12,10 @@ import {useModal} from '@src/hooks/useModal';
 import {DetailedPostContainerModal} from '@src/components/cabinet/components/detailed_post_modal/DetailedPostContainerModal';
 import {initialCardData} from '@src/components/cabinet/cabinet_pages/my_posts/MyPosts';
 import {CardDataType} from "@root/interfaces/CardData";
-import {useStyles} from './useStyles';
 import {ErrorCtx} from "@src/context";
+import {useStyles} from './useStyles';
 
-const FavoriteContainer: FC = () => {
+export const FavoriteContainer: FC = () => {
     const {t} = useTranslation('cabinet');
     const {setErrorMsg} = useContext(ErrorCtx);
 
@@ -198,16 +197,12 @@ const FavoriteContainer: FC = () => {
         }
     ];
 
-    const title = t('favorite');
-
     return (
         <>
             <TabsContent
-                title={title}
-                handleTabChange={handleTabChange}
                 tabIndex={tabIndex}
                 tabsData={tabsData}
-                headerTitle={title}
+                handleTabChange={handleTabChange}
             />
             <DetailedPostContainerModal
                 post={selectedPost}
@@ -218,5 +213,3 @@ const FavoriteContainer: FC = () => {
         </>
     );
 };
-
-export default withAuthRedirect(FavoriteContainer);

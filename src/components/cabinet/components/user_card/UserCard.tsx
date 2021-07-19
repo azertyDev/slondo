@@ -1,21 +1,26 @@
 import {FC, useContext, useState} from 'react';
 import {unstable_batchedUpdates} from "react-dom";
 import {Typography} from "@material-ui/core";
+import {Star} from '@material-ui/icons';
 import {userAPI} from "@src/api/api";
+import {ErrorCtx} from "@src/context";
 import {UserInfoWithAvatar} from "@src/components/elements/user_info_with_avatar/UserInfoWithAvatar";
 import {CustomButton} from "@src/components/elements/custom_button/CustomButton";
 import {CustomCircularProgress} from "@src/components/elements/custom_circular_progress/CustomCircularProgress";
 import {LetterIcon, PhoneIcon} from "@src/components/elements/icons";
-import {ErrorCtx} from "@src/context";
+import {WithT} from "i18next";
 import {useStyles} from './useStyles';
 
 type UserCardProps = {
-    userData
-}
+    userData,
+    handleOpenRating
+} & WithT;
 
 export const UserCard: FC<UserCardProps> = (props) => {
     const {
-        userData
+        t,
+        userData,
+        handleOpenRating
     } = props;
 
     const {setErrorMsg} = useContext(ErrorCtx);
@@ -69,6 +74,12 @@ export const UserCard: FC<UserCardProps> = (props) => {
                     <LetterIcon/>
                     <Typography variant='subtitle2'>
                         Написать
+                    </Typography>
+                </CustomButton>
+                <CustomButton onClick={handleOpenRating}>
+                    <Star/>
+                    <Typography variant='subtitle2'>
+                        {t('give_rating')}
                     </Typography>
                 </CustomButton>
             </div>

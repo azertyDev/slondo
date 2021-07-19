@@ -3,10 +3,10 @@ const data = [
         id: 1,
         section: 'Доступ к Slondo',
         subSections: [
-            'Регистрация',
-            'Вход в аккаунт (Авторизация на сайте)',
-            'Забыл пароль',
-            'Сменить пароль'
+            {section: 'Регистрация', term: 'registration'},
+            {section: 'Вход в аккаунт (Авторизация на сайте)'},
+            {section: 'Забыл пароль'},
+            {section: 'Сменить пароль'}
         ],
         term: 'access_to_slondo'
     },

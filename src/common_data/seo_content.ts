@@ -3439,7 +3439,7 @@ export const getSEOContent = (category: CategoryType, subCtgr: SubcategoryType, 
                 }
             }
         },
-        for_homes_cottages: {
+        home: {
             furniture_interior: {
                 ru: {
                     title: `Мебель в ${location} | кухни, кухонные гарнитуры, детская мебель, для спальни`,
@@ -4338,7 +4338,7 @@ export const getSEOContent = (category: CategoryType, subCtgr: SubcategoryType, 
                 }
             }
         },
-        job_type: {
+        job: {
             vacancy: {
                 ru: {
                     title: `Работа в ${location}: для женщин и мужчин | высокооплачиваемые вакансии`,

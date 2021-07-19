@@ -50,6 +50,7 @@ export type CardDataType = {
         }
     ]
     author: UserInfo,
+    buyer?: UserInfo,
     available_days: IdNameType[],
     available_start_time: string,
     available_end_time: string,

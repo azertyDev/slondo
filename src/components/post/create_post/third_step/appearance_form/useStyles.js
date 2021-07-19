@@ -62,13 +62,16 @@ export const useStyles = makeStyles((theme) => ({
             boxShadow: '0px 0px 5px 5px #ccc'
         },
         '& div.photos-wrapper': {
+            maxHeight: '270px',
+            [theme.breakpoints.down('xs')]: {
+                maxHeight: '473px'
+            },
             '& h6': {
                 margin: '10px 0',
                 [theme.breakpoints.down('sm')]: {
                     margin: '0 0 10px'
                 }
-            },
-            marginBottom: '20px'
+            }
         }
     }
 }));

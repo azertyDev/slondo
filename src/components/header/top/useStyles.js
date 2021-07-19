@@ -3,7 +3,7 @@ import {makeStyles} from '@material-ui/core/styles';
 
 export const useStyles = makeStyles((theme) => ({
     root: {
-        marginBottom: 8,
+        marginBottom: 12,
         '& div.social-icons > a': {
             display: 'flex',
             alignItems: 'center',
@@ -49,7 +49,7 @@ export const useStyles = makeStyles((theme) => ({
                         height: '20px',
                         [theme.breakpoints.down('lg')]: {
                             width: '16px'
-                        }
+                        },
                     },
                     '&:hover': {
                         '& > h6.MuiTypography-subtitle1': {
@@ -71,17 +71,19 @@ export const useStyles = makeStyles((theme) => ({
             }
         }
     },
-
-    // ------------> adaptive <--------------- //
-
     adaptive: {
+        // ------------> adaptive <--------------- //
         '& div.top-header-logo': {
             height: '30px'
         },
         '& div.burger-menu': {
-            '& svg > path': {
-                fill: '#4F4F4F'
+            '& svg': {
+                height: '100%',
+                '& path': {
+                    fill: '#4f4f4f'
+                }
             }
+
         },
         '& button.btn-sign-mobile': {
             background: 'inherit',

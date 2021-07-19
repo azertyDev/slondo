@@ -52,6 +52,7 @@ export const useStyles = makeStyles((theme) => ({
                 }
             },
             '& > div.card-media': {
+                backgroundColor: '#f2f2f2',
                 height: '240px',
                 [theme.breakpoints.down('xs')]: {
                     height: '153px'

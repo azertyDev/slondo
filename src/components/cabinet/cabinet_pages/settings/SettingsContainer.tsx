@@ -1,6 +1,5 @@
 import {FC, useContext, useEffect, useState} from 'react';
 import {useTranslation} from 'react-i18next';
-import {withAuthRedirect} from '@src/hocs/withAuthRedirect';
 import {Settings} from '@src/components/cabinet/cabinet_pages/settings/Settings';
 import {userAPI} from '@src/api/api';
 import {cookieOpts, cookies} from '@src/helpers';
@@ -14,7 +13,7 @@ import {UserCtx} from "@src/context/UserCtx";
 import {AuthCtx} from "@src/context/AuthCtx";
 import {ErrorCtx} from "@src/context";
 
-const SettingsContainer: FC = () => {
+export const SettingsContainer: FC = () => {
     const {t} = useTranslation('cabinet');
     const {setIsAuth} = useContext(AuthCtx);
     const {user, setUser} = useContext(UserCtx);
@@ -278,5 +277,3 @@ const SettingsContainer: FC = () => {
         />
     );
 };
-
-export default withAuthRedirect(SettingsContainer);

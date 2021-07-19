@@ -6,7 +6,7 @@ import {ITEMS_PER_PAGE} from '@src/constants';
 import {Box, FormControlLabel, Switch, Typography} from '@material-ui/core';
 import {CabinetModal} from '@src/components/cabinet/components/cabinet_modal/CabinetModal';
 import {initialNotificationType} from '@src/components/cabinet/cabinet_pages/notifications/Notifications';
-import {CommonModalType} from "@src/components/cabinet/CabinetWrapper";
+import {CommonModalType} from "@src/components/cabinet/Cabinet";
 import {CustomPagination} from "@src/components/elements/custom_pagination/CustomPagination";
 import {NotificationCard} from "@src/components/cabinet/cabinet_pages/notifications/notification_card/NotificationCard";
 import {ErrorCtx} from "@src/context";

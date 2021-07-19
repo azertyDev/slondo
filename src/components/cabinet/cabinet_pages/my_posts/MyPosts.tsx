@@ -1,6 +1,5 @@
 import {FC, useContext, useEffect, useState} from 'react';
 import {TabsContent} from '@src/components/cabinet/cabinet_pages/TabsContent';
-import {withAuthRedirect} from '@src/hocs/withAuthRedirect';
 import {userAPI} from '@src/api/api';
 import {
     Box,
@@ -113,7 +112,7 @@ export const initialCardData: CardDataType = {
     user_id: null
 };
 
-const MyPosts: FC = () => {
+export const MyPosts: FC = () => {
     const {t} = useTranslation('cabinet');
     const {setErrorMsg} = useContext(ErrorCtx);
 
@@ -286,8 +285,6 @@ const MyPosts: FC = () => {
             <TabsContent
                 tabsData={tabsData}
                 tabIndex={tabIndex}
-                title={t('myPosts')}
-                headerTitle={t('myPosts')}
                 handleTabChange={handleTabChange}
             />
             <DetailedPostContainerModal
@@ -311,5 +308,3 @@ const MyPosts: FC = () => {
         </>
     );
 };
-
-export default withAuthRedirect(MyPosts);

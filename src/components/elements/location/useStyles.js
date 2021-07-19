@@ -13,7 +13,7 @@ export const useStyles = makeStyles((theme) => ({
                 letterSpacing: '0.4px'
             },
             [theme.breakpoints.up('md')]: {
-                textDecoration: 'underline'
+                borderBottom: '1px solid #838383'
             }
         },
         '& > svg': {

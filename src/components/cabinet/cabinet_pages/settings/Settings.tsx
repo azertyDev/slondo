@@ -1,6 +1,5 @@
 import {FC, ReactElement, ReactNode} from 'react';
 import {Box, Button, Grid, Typography} from '@material-ui/core';
-import {CabinetWrapper} from '@src/components/cabinet/CabinetWrapper';
 import EditIcon from '@material-ui/icons/Edit';
 import {CustomModal} from '@src/components/elements/custom_modal/CustomModal';
 import {useStyles} from './useStyles';
@@ -23,38 +22,35 @@ export const Settings: FC<SettingsPropsType> = (props) => {
         modalContent,
         formDisable
     } = props;
-    const title = 'Настройки';
 
     const classes = useStyles();
     return (
         <>
-            <CabinetWrapper headerTitle={title} title={title}>
-                <Grid container className={classes.root} direction='column'>
-                    <Box
-                        display='flex'
-                        justifyContent='space-between'
-                        alignItems='center'
+            <Grid container className={classes.root} direction='column'>
+                <Box
+                    display='flex'
+                    justifyContent='space-between'
+                    alignItems='center'
+                >
+                    <Typography variant='subtitle1'>
+                        Личные данные
+                    </Typography>
+                    <Button
+                        color='secondary'
+                        variant='text'
+                        className={classes.editButton}
+                        onClick={handleAllowEdit}
+                        startIcon={formDisable && <EditIcon fontSize='small'/>}
                     >
                         <Typography variant='subtitle1'>
-                            Личные данные
+                            {formDisable ? 'Редактировать' : 'Отменить'}
                         </Typography>
-                        <Button
-                            color='secondary'
-                            variant='text'
-                            className={classes.editButton}
-                            onClick={handleAllowEdit}
-                            startIcon={formDisable && <EditIcon fontSize='small' />}
-                        >
-                            <Typography variant='subtitle1'>
-                                {formDisable ? 'Редактировать' : 'Отменить'}
-                            </Typography>
-                        </Button>
-                    </Box>
-                    <Grid item xs>
-                        {settingsForm}
-                    </Grid>
+                    </Button>
+                </Box>
+                <Grid item xs>
+                    {settingsForm}
                 </Grid>
-            </CabinetWrapper>
+            </Grid>
             <CustomModal
                 handleModalClose={handleClose}
                 openModal={openModal}
@@ -62,5 +58,5 @@ export const Settings: FC<SettingsPropsType> = (props) => {
                 {modalContent}
             </CustomModal>
         </>
-    )
-}
+    );
+};

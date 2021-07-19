@@ -9,12 +9,13 @@ import {getErrorMsg} from '@src/helpers';
 import {userAPI} from '@src/api/api';
 import {Rating} from '@src/components/elements/rating/Rating';
 import {useTranslation} from 'next-i18next';
-import {useStyles} from './useStyles';
 import {ErrorCtx} from "@src/context";
+import {useStyles} from './useStyles';
 
 type RatingModalPropsType = {
     user,
     open,
+    title: string,
     handleCloseRating
 };
 
@@ -22,6 +23,7 @@ export const RatingModal: FC<RatingModalPropsType> = (props) => {
     const {
         user,
         open,
+        title,
         handleCloseRating
     } = props;
 
@@ -93,7 +95,7 @@ export const RatingModal: FC<RatingModalPropsType> = (props) => {
                 justifyContent='center'
             >
                 <Typography variant='h6'>
-                    Оцените продавца
+                    {title}
                 </Typography>
             </Box>
             <FormikProvider value={formik}>

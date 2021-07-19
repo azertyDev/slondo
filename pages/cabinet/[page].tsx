@@ -1,8 +1,8 @@
-import MyPosts from '@src/components/cabinet/cabinet_pages/my_posts/MyPosts';
-import {GetStaticProps} from 'next';
+import {GetServerSideProps} from 'next';
+import Cabinet from '@src/components/cabinet/Cabinet';
 import {serverSideTranslations} from 'next-i18next/serverSideTranslations';
 
-export const getStaticProps: GetStaticProps = async ({locale}) => ({
+export const getServerSideProps: GetServerSideProps = async ({locale}) => ({
     props: {
         ...await serverSideTranslations(
             locale,
@@ -22,4 +22,4 @@ export const getStaticProps: GetStaticProps = async ({locale}) => ({
     }
 });
 
-export default MyPosts;
+export default Cabinet;

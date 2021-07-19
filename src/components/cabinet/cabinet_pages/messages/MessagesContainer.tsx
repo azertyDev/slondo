@@ -1,14 +1,11 @@
-import React, {FC} from 'react';
+import {FC} from 'react';
 import {Messages} from "@src/components/cabinet/cabinet_pages/messages/Messages";
-import {withAuthRedirect} from "@src/hocs/withAuthRedirect";
 import {useTranslation} from "react-i18next";
 
 export const MessagesContainer: FC = () => {
-    const {t} = useTranslation(['cabinet', 'notifications','categories', 'common', 'locations']);
+    const {t} = useTranslation('cabinet');
 
     return (
         <Messages t={t}/>
-    )
+    );
 };
-
-export default withAuthRedirect(MessagesContainer);

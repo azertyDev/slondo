@@ -1,18 +1,16 @@
 import {FC, useContext, useEffect, useState} from 'react';
-import {withAuthRedirect} from '@src/hocs/withAuthRedirect';
 import {userAPI} from '@src/api/api';
 import {useTranslation} from 'next-i18next';
 import {ITEMS_PER_PAGE} from '@src/constants';
 import {CustomPagination} from '@root/src/components/elements/custom_pagination/CustomPagination';
 import {useModal} from '@src/hooks/useModal';
-import {CabinetWrapper} from "@src/components/cabinet/CabinetWrapper";
 import {CustomButton} from "@src/components/elements/custom_button/CustomButton";
 import {Box, CircularProgress, Typography} from "@material-ui/core";
 import {NotificationCard} from "@src/components/cabinet/cabinet_pages/notifications/notification_card/NotificationCard";
 import {CustomModal} from "@src/components/elements/custom_modal/CustomModal";
 import {CustomSnackbar} from "@src/components/elements/snackbar/Snackbar";
-import {useStyles} from './useStyles';
 import {ErrorCtx, UserCtx} from "@src/context";
+import {useStyles} from './useStyles';
 
 export type initialNotificationType = {
     id: number,
@@ -27,7 +25,7 @@ export type initialNotificationType = {
     created_at: string
 }
 
-const Notifications: FC = () => {
+export const Notifications: FC = () => {
     const {t} = useTranslation('cabinet');
     const {user} = useContext(UserCtx);
     const {setErrorMsg} = useContext(ErrorCtx);
@@ -92,41 +90,34 @@ const Notifications: FC = () => {
         fetchAllNotification();
     }, [page]);
 
-    const title = t('notifications');
-
     const classes = useStyles();
     return <div className={classes.root}>
-        <CabinetWrapper
-            title={title}
-            headerTitle={title}
-        >
-            {!!notifications.length && (
-                <CustomButton
-                    color='primary'
-                    className='delete-notifications'
-                    onClick={handleOpenModal}
-                >
-                    <Typography variant='subtitle1'>
-                        {t('remove_all_notify')}
-                    </Typography>
-                </CustomButton>
-            )}
-            {isFetch
-                ? <CircularProgress/>
-                : notifications.map(notification =>
-                    <Box mb={3} width='90%' key={notification.id}>
-                        <NotificationCard
-                            {...notification}
-                            handleRefresh={fetchAllNotification}
-                        />
-                    </Box>
-                )}
-            {!!notifications.length && (
-                <Box display='flex' justifyContent='center'>
-                    {pagination}
+        {!!notifications.length && (
+            <CustomButton
+                color='primary'
+                className='delete-notifications'
+                onClick={handleOpenModal}
+            >
+                <Typography variant='subtitle1'>
+                    {t('remove_all_notify')}
+                </Typography>
+            </CustomButton>
+        )}
+        {isFetch
+            ? <CircularProgress/>
+            : notifications.map(notification =>
+                <Box mb={3} width='90%' key={notification.id}>
+                    <NotificationCard
+                        {...notification}
+                        handleRefresh={fetchAllNotification}
+                    />
                 </Box>
             )}
-        </CabinetWrapper>
+        {!!notifications.length && (
+            <Box display='flex' justifyContent='center'>
+                {pagination}
+            </Box>
+        )}
         <CustomModal handleModalClose={handleCloseModal} openModal={openModal}>
             <Typography variant='subtitle1'>
                 {t('remove_notifications')}
@@ -150,5 +141,3 @@ const Notifications: FC = () => {
         />
     </div>;
 };
-
-export default withAuthRedirect(Notifications);

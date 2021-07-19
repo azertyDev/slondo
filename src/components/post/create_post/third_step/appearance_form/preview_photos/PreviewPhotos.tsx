@@ -1,5 +1,5 @@
 import {Dispatch, FC} from 'react';
-import {Box, Grid} from "@material-ui/core";
+import {Box, Grid, useMediaQuery, useTheme} from "@material-ui/core";
 import {AddCircle} from '@material-ui/icons';
 import {DragDropContext, resetServerContext, DropResult, Draggable, Droppable} from 'react-beautiful-dnd';
 import {UPLOAD_FILES_LIMIT} from '@src/constants';
@@ -13,22 +13,12 @@ type PreviewPhotosPropsType = {
     setValues: Dispatch<unknown>
 };
 
-// const sizeCounter = (files) => (
-//     files.reduce(
-//         (total, {size}) => {
-//             if (size) {
-//                 total += total + size;
-//             }
-//             return total;
-//         },
-//         0
-//     )
-// );
-
 export const PreviewPhotos: FC<PreviewPhotosPropsType> = (props) => {
     resetServerContext();
     const {values, setValues} = props;
     const {files} = values;
+
+    const isXsDown = useMediaQuery(useTheme().breakpoints.down('xs'));
 
     const reorder = (list, startIndex, endIndex) => {
         const result = Array.from(list);
@@ -39,23 +29,17 @@ export const PreviewPhotos: FC<PreviewPhotosPropsType> = (props) => {
     };
 
     const sortArray = function (arr) {
-        arr.forEach((item, i) => {
-            if (!item && arr[i + 1]) {
-                const [removedItem] = arr.splice(i + 1, 1);
-                arr.splice(i, 0, removedItem);
-            }
-        });
-        return arr;
+        const sorted = arr.filter(item => !!item);
+        const nulls = Array.from({length: UPLOAD_FILES_LIMIT - sorted.length}).map(_ => null);
+        return [...sorted, ...nulls];
     };
 
-    const handleOnDragEnd = ({destination, source}: DropResult): void => {
+    const handleOnDragEnd = ({destination, source}: DropResult) => {
         if (!destination) return;
-
-        const items = sortArray(reorder(files, source.index, destination.index));
 
         setValues({
             ...values,
-            files: items
+            files: sortArray(reorder(files, source.index, destination.index))
         });
     };
 
@@ -72,7 +56,8 @@ export const PreviewPhotos: FC<PreviewPhotosPropsType> = (props) => {
 
         if (dist > 0) {
             photos.splice(-dist, dist);
-        } else if (sum > 0) {
+        }
+        if (sum > 0) {
             files.splice(-sum, sum);
         }
 
@@ -83,21 +68,18 @@ export const PreviewPhotos: FC<PreviewPhotosPropsType> = (props) => {
     };
 
     const removeFile = (url) => () => {
-        files.map((item: FileType, index) => {
-            if (item && (item.url === url)) {
-                files.splice(index, 1, null);
-                setValues({
-                    ...values,
-                    files
-                });
-            }
+        const sorted = files.filter((item: FileType) => item && item.url !== url);
+        const nulls = Array.from({length: UPLOAD_FILES_LIMIT - sorted.length}).map(_ => null);
+        setValues({
+            ...values,
+            files: [...sorted, ...nulls]
         });
     };
 
     const getDndRow = (bottom = false) => {
         return <Droppable
-            direction="horizontal"
             droppableId={bottom ? 'bottom' : 'top'}
+            direction={isXsDown ? 'vertical' : 'horizontal'}
         >
             {provided =>
                 <Grid
@@ -108,55 +90,47 @@ export const PreviewPhotos: FC<PreviewPhotosPropsType> = (props) => {
                     className={classes.dropWrapper}
                 >
                     {files.map((fileItem, index) => {
-                        const offset = (!bottom && index <= 5) || (bottom && index > 5);
-                        if (offset) {
-                            return <Draggable
-                                key={index}
-                                index={index}
-                                isDragDisabled={!fileItem}
-                                draggableId={index.toString()}
-                            >
-                                {provided => (
-                                    <Grid
-                                        item
-                                        xs={12}
-                                        sm={6}
-                                        md={3}
-                                        lg={2}
-                                        ref={provided.innerRef}
-                                        {...provided.draggableProps}
-                                        {...provided.dragHandleProps}
-                                        className={fileItem ? 'prev-img' : 'upload'}
-                                    >
-                                        {fileItem
-                                            ? <Box
-                                                position='relative'
-                                                width='fit-content'
-                                            >
-                                                <img
-                                                    alt={fileItem.file.name}
-                                                    src={fileItem.url as string}
-                                                />
-                                                <CustomButton onClick={removeFile(fileItem.url)}>
-                                                    <CloseIcon/>
-                                                </CustomButton>
-                                            </Box>
-                                            : <>
-                                                <label htmlFor={`upload-${index}`}>
-                                                    <AddCircle/>
-                                                </label>
-                                                <input
-                                                    type='file'
-                                                    multiple={true}
-                                                    id={`upload-${index}`}
-                                                    onChange={handleUploadFile}
-                                                    accept="image/png,image/jpeg"
-                                                />
-                                            </>}
-                                    </Grid>
-                                )}
-                            </Draggable>;
-                        }
+                        return <Draggable
+                            key={index}
+                            index={index}
+                            isDragDisabled={!fileItem}
+                            draggableId={index.toString()}
+                        >
+                            {provided => (
+                                <Grid
+                                    item
+                                    xs={6}
+                                    sm={3}
+                                    ref={provided.innerRef}
+                                    {...provided.draggableProps}
+                                    {...provided.dragHandleProps}
+                                    className={fileItem ? 'prev-img' : 'upload'}
+                                >
+                                    {fileItem
+                                        ? <Box position='relative'>
+                                            <img
+                                                alt={fileItem.file.name}
+                                                src={fileItem.url as string}
+                                            />
+                                            <CustomButton onClick={removeFile(fileItem.url)}>
+                                                <CloseIcon/>
+                                            </CustomButton>
+                                        </Box>
+                                        : <>
+                                            <label htmlFor={`upload-${index}`}>
+                                                <AddCircle/>
+                                            </label>
+                                            <input
+                                                type='file'
+                                                multiple={true}
+                                                id={`upload-${index}`}
+                                                onChange={handleUploadFile}
+                                                accept="image/png,image/jpeg"
+                                            />
+                                        </>}
+                                </Grid>
+                            )}
+                        </Draggable>;
                     })}
                     {provided.placeholder}
                 </Grid>}
@@ -168,7 +142,6 @@ export const PreviewPhotos: FC<PreviewPhotosPropsType> = (props) => {
         <div className={classes.root}>
             <DragDropContext enableDefaultSensors={true} onDragEnd={handleOnDragEnd}>
                 {getDndRow()}
-                {getDndRow(true)}
             </DragDropContext>
         </div>
     );

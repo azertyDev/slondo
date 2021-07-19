@@ -45,10 +45,10 @@ export const SettingsForm: FC<SettingsFormPropsType> = (props) => {
         handleSubmit,
         handleChange,
         isSubmitting,
-        handleBlur,
+        handleBlur
     } = formik;
 
-    const classes = useStyles({ props });
+    const classes = useStyles({props});
     return (
         <>
             <FormikProvider value={formik}>
@@ -125,7 +125,7 @@ export const SettingsForm: FC<SettingsFormPropsType> = (props) => {
                         <Grid item xs={12} md={6}>
                             <FormControlLabel
                                 control={
-                                    <NotificationSwitcher onChange={handleChange} />
+                                    <NotificationSwitcher onChange={handleChange}/>
                                 }
                                 label="Сообщения"
                                 disabled={formDisable}
@@ -134,7 +134,7 @@ export const SettingsForm: FC<SettingsFormPropsType> = (props) => {
                         <Grid item xs={12} md={6}>
                             <FormControlLabel
                                 control={
-                                    <NotificationSwitcher onChange={handleChange} name="checkedA" />
+                                    <NotificationSwitcher onChange={handleChange} name="checkedA"/>
                                 }
                                 label="Избранное"
                                 disabled={formDisable}
@@ -143,7 +143,7 @@ export const SettingsForm: FC<SettingsFormPropsType> = (props) => {
                         <Grid item xs={12} md={6}>
                             <FormControlLabel
                                 control={
-                                    <NotificationSwitcher onChange={handleChange} name="checkedA" />
+                                    <NotificationSwitcher onChange={handleChange} name="checkedA"/>
                                 }
                                 label="Мои объявления"
                                 disabled={formDisable}
@@ -152,7 +152,7 @@ export const SettingsForm: FC<SettingsFormPropsType> = (props) => {
                         <Grid item xs={12} md={6}>
                             <FormControlLabel
                                 control={
-                                    <NotificationSwitcher onChange={handleChange} name="checkedA" />
+                                    <NotificationSwitcher onChange={handleChange} name="checkedA"/>
                                 }
                                 label="Объявления в подписках"
                                 disabled={formDisable}
@@ -161,7 +161,7 @@ export const SettingsForm: FC<SettingsFormPropsType> = (props) => {
                         <Grid item xs={12} md={6}>
                             <FormControlLabel
                                 control={
-                                    <NotificationSwitcher onChange={handleChange} name="checkedA" />
+                                    <NotificationSwitcher onChange={handleChange} name="checkedA"/>
                                 }
                                 label="Интерес покупателей"
                                 disabled={formDisable}
@@ -192,22 +192,6 @@ export const SettingsForm: FC<SettingsFormPropsType> = (props) => {
                             >
                                 <Grid item xs={6} container justify='center'>
                                     <SettingsButton
-                                        type='submit'
-                                        disabled={isSubmitting || formDisable}
-                                        color='primary'
-                                        size="large"
-                                        disableElevation
-                                        startIcon={isSubmitting &&
-                                        <CircularProgress size={24} className={classes.progress} />}
-                                        className={classes.button}
-                                    >
-                                        <Typography variant='subtitle1'>
-                                            Применить
-                                        </Typography>
-                                    </SettingsButton>
-                                </Grid>
-                                <Grid item xs={6} container justify='center'>
-                                    <SettingsButton
                                         disableElevation
                                         color='secondary'
                                         disabled={formDisable}
@@ -215,7 +199,23 @@ export const SettingsForm: FC<SettingsFormPropsType> = (props) => {
                                         onClick={handleCancel}
                                     >
                                         <Typography variant='subtitle1'>
-                                            Отменить
+                                            {t('common:cancel')}
+                                        </Typography>
+                                    </SettingsButton>
+                                </Grid>
+                                <Grid item xs={6} container justify='center'>
+                                    <SettingsButton
+                                        type='submit'
+                                        disabled={isSubmitting || formDisable}
+                                        color='primary'
+                                        size="large"
+                                        disableElevation
+                                        startIcon={isSubmitting &&
+                                        <CircularProgress size={24} className={classes.progress}/>}
+                                        className={classes.button}
+                                    >
+                                        <Typography variant='subtitle1'>
+                                            {t('common:accept')}
                                         </Typography>
                                     </SettingsButton>
                                 </Grid>

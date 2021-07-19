@@ -52,7 +52,7 @@ export const useStyles = makeStyles({
             display: 'flex',
             flexDirection: 'row',
             '& .MuiBadge-root': {
-                width: '49%',
+                width: '27%',
                 '&:first-child': {
                     marginRight: '5px'
                 }

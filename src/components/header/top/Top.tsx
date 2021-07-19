@@ -97,32 +97,22 @@ export const Top: FC<TopHeaderPropsType> = (props) => {
                                         <Typography variant="subtitle1">
                                             {t('actions')}
                                         </Typography>
-                                        <SurpriseIcon/>
+                                        <SurpriseIcon />
                                     </a>
                                 </Link>
                             </Grid>
-                            {/*<Grid item md={2}>*/}
-                            {/*    <Link href="#">*/}
-                            {/*        <a>*/}
-                            {/*            <Typography variant="subtitle1">*/}
-                            {/*                {t('bonus')}*/}
-                            {/*            </Typography>*/}
-                            {/*            <SubstractIcon/>*/}
-                            {/*        </a>*/}
-                            {/*    </Link>*/}
-                            {/*</Grid>*/}
                             <Grid item md={2}>
                                 <Link href="/help">
                                     <a className={pathname === '/help' ? 'selected' : ''}>
                                         <Typography variant="subtitle1">
                                             {t('help')}
                                         </Typography>
-                                        <QuestionIcon/>
+                                        <QuestionIcon />
                                     </a>
                                 </Link>
                             </Grid>
                             <Grid item md={2} container justify='center'>
-                                <Localization/>
+                                <Localization />
                             </Grid>
                         </Grid>
                     </Grid>
@@ -149,10 +139,11 @@ export const Top: FC<TopHeaderPropsType> = (props) => {
                                 >
                                     <Grid>
                                         <IconButton
+                                            size="small"
                                             onClick={() => setIsOpen(true)}
                                         >
                                             <div className="burger-menu">
-                                                <CategorySortIcon/>
+                                                <CategorySortIcon />
                                             </div>
                                         </IconButton>
                                     </Grid>
@@ -184,11 +175,11 @@ export const Top: FC<TopHeaderPropsType> = (props) => {
                                 </Grid>
                             </Toolbar>
                             <Box px={isXsDown ? '16px' : '24px'} marginBottom='10px'>
-                                <HeaderSearchForm/>
+                                <HeaderSearchForm />
                             </Box>
                         </AppBar>
                     </Slide>
-                    <LeftDrawer isOpen={isOpen} setIsOpen={setIsOpen}/>
+                    <LeftDrawer isOpen={isOpen} setIsOpen={setIsOpen} />
                 </div>
             </Hidden>
         </>

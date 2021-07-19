@@ -19,6 +19,8 @@ import {numberPrettier} from '@src/helpers';
 import {UserCtx} from "@src/context/UserCtx";
 import {UserCard} from "@src/components/cabinet/components/user_card/UserCard";
 import {useStyles} from './useStyles';
+import {RatingModal} from "@src/components/elements/rating_modal/RatingModal";
+import {useModal} from "@src/hooks";
 
 type DetailedPostViewPropsType = {
     isFetch: boolean,
@@ -51,6 +53,7 @@ export const DetailedPostModal: FC<DetailedPostViewPropsType> = (props) => {
     } = props;
 
     const {
+        buyer,
         author,
         ads_type,
         status,
@@ -63,17 +66,29 @@ export const DetailedPostModal: FC<DetailedPostViewPropsType> = (props) => {
 
     const {user} = useContext(UserCtx);
 
+    const {modalOpen: ratingOpen, handleModalOpen: handleOpenRating, handleModalClose: handleCloseRating} = useModal();
+
     const auctionId = auction?.id;
     const offer = auction?.offer;
     const offerUser = offer?.user;
     const winner = auction?.winner;
     const isUserWinner = winner?.id === user.id;
     const isUserCreator = author?.id === user.id;
+    const hasBuyer = !!buyer;
     const hasOffer = offerUser && status === 'public';
     const isAuction = ads_type === 'auc' || ads_type === 'exauc';
     const inactive = status === 'archive' || status === 'history';
-    const userData = (isUserWinner || !isUserCreator) ? author : winner ?? offerUser;
+    let userData = (isUserWinner || !isUserCreator) ? author : winner ?? offerUser;
 
+    const userInfoTitle = hasBuyer
+        ? isUserCreator ? 'buyer' : 'seller'
+        : isUserWinner ? 'seller' : offer && !winner ? 'maxOffer' : isAuction ? 'winner' : '';
+
+    if (hasBuyer) {
+        userData = buyer;
+    }
+
+    console.log(post);
     const classes = useStyles();
     return (
         <div>
@@ -180,83 +195,87 @@ export const DetailedPostModal: FC<DetailedPostViewPropsType> = (props) => {
                         </Grid>
                         <Grid container item spacing={2}>
                             {isAuction && (
-                                <>
-                                    <Grid item xs={12} md={6}>
-                                        {isBetsFetch
-                                            ? <CircularProgress color="primary"/>
-                                            : <BetsList
-                                                bets={bets}
-                                                showBetsCount={2}
-                                                betsCount={betsCount}
-                                                auctionId={auctionId}
-                                                handleRefresh={setFetchedBetsData}
-                                                title={t('auction:extremeRates')}
-                                            />}
-                                    </Grid>
-                                    <Grid item xs={12} md={6} className={classes.userInfoWrapper}>
-                                        <div className='user-info-title'>
-                                            {(isUserWinner || isUserCreator) && userData && (
-                                                <Typography variant='subtitle2' gutterBottom>
-                                                    {t(isUserWinner
-                                                        ? 'seller'
-                                                        : offer && !winner
-                                                            ? 'maxOffer'
-                                                            : 'winner')}
-                                                </Typography>
+                                <Grid item xs={12} md={6}>
+                                    {isBetsFetch
+                                        ? <CircularProgress color="primary"/>
+                                        : <BetsList
+                                            bets={bets}
+                                            showBetsCount={2}
+                                            betsCount={betsCount}
+                                            auctionId={auctionId}
+                                            handleRefresh={setFetchedBetsData}
+                                            title={t('auction:extremeRates')}
+                                        />}
+                                </Grid>
+                            )}
+                            <Grid item xs={12} md={6} className={classes.userInfoWrapper}>
+                                <div className='user-info-title'>
+                                    {(isUserWinner || isUserCreator || hasBuyer) && userData && (
+                                        <Typography variant='subtitle2' gutterBottom>
+                                            {t(userInfoTitle)}
+                                        </Typography>
+                                    )}
+                                    {isUserCreator && offer && !winner && (
+                                        <>
+                                            <Typography variant='subtitle2'>
+                                                &nbsp;{t('offer_price', {price: numberPrettier(offer?.price)})}&nbsp;
+                                            </Typography>
+                                            <Typography
+                                                variant='subtitle2'
+                                                className='all-offers'
+                                                onClick={handleOffersOpen}
+                                            >
+                                                {t('all_offers', {offers: auction?.number_of_offers})}
+                                            </Typography>
+                                        </>
+                                    )}
+                                </div>
+                                <Paper className='paper-block'>
+                                    {userData
+                                        ? <UserCard
+                                            t={t}
+                                            userData={userData}
+                                            handleOpenRating={handleOpenRating}
+                                        />
+                                        : <div>{t(`auction:last_bet`, {lastBet: bets[0]?.bet})}</div>}
+                                </Paper>
+                                {(isUserCreator || isUserWinner) && !inactive && (
+                                    <Box>
+                                        <div className={classes.actionButtons}>
+                                            {(isUserWinner || (offerUser && !winner)) && (
+                                                <CustomButton
+                                                    color='primary'
+                                                    disabled={isFetch}
+                                                    onClick={handleReject}
+                                                >
+                                                    <Typography variant='subtitle1'>
+                                                        {t(`common:reject`)}
+                                                    </Typography>
+                                                </CustomButton>
                                             )}
-                                            {isUserCreator && offer && !winner && (
-                                                <>
-                                                    <Typography variant='subtitle2'>
-                                                        &nbsp;{t('offer_price', {price: numberPrettier(offer?.price)})}&nbsp;
+                                            {(winner || hasOffer) && isUserCreator && (
+                                                <CustomButton
+                                                    color='primary'
+                                                    disabled={isFetch}
+                                                    onClick={handleAccept}
+                                                >
+                                                    <Typography variant='subtitle1'>
+                                                        {t(`common:${winner ? 'finish' : 'accept'}`)}
                                                     </Typography>
-                                                    <Typography
-                                                        variant='subtitle2'
-                                                        className='all-offers'
-                                                        onClick={handleOffersOpen}
-                                                    >
-                                                        {t('all_offers', {offers: auction?.number_of_offers})}
-                                                    </Typography>
-                                                </>
+                                                </CustomButton>
                                             )}
                                         </div>
-                                        <Paper className='paper-block'>
-                                            {userData
-                                                ? <UserCard userData={userData}/>
-                                                : <div>{t(`auction:last_bet`, {lastBet: bets[0]?.bet})}</div>}
-                                        </Paper>
-                                        {(isUserCreator || isUserWinner) && !inactive && (
-                                            <Box>
-                                                <div className={classes.actionButtons}>
-                                                    {(isUserWinner || (offerUser && !winner)) && (
-                                                        <CustomButton
-                                                            color='primary'
-                                                            disabled={isFetch}
-                                                            onClick={handleReject}
-                                                        >
-                                                            <Typography variant='subtitle1'>
-                                                                {t(`common:reject`)}
-                                                            </Typography>
-                                                        </CustomButton>
-                                                    )}
-                                                    {(winner || hasOffer) && isUserCreator && (
-                                                        <CustomButton
-                                                            color='primary'
-                                                            disabled={isFetch}
-                                                            onClick={handleAccept}
-                                                        >
-                                                            <Typography variant='subtitle1'>
-                                                                {t(`common:${winner ? 'finish' : 'accept'}`)}
-                                                            </Typography>
-                                                        </CustomButton>
-                                                    )}
-                                                </div>
-                                            </Box>
-                                        )}
-                                    </Grid>
-                                </>
-                            )}
+                                    </Box>
+                                )}
+                            </Grid>
                         </Grid>
                     </Grid>
+                    <RatingModal
+                        open={ratingOpen}
+                        user={userData}
+                        title={t('rate_buyer')}
+                        handleCloseRating={handleCloseRating}
+                    />
                 </div>
             </CabinetModal>
         </div>

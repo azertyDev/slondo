@@ -1,12 +1,13 @@
 {
-  "code_has_already_been_sent": "Kod yuborilgan. Iltimos keyinroq harakat kilib ko'ring",
+  "code_has_already_been_sent": "Kod yuborilgan. Iltimos keyinroq harakat qilib ko'ring",
   "incorrect_code": "Noto'g'ri kod",
+  "incorrect_pwd": "Noto'g'ri parol",
   "pageNotFound": "Sahifa topilmadi",
   "user_already_registered": "Ro'yxatdan o'tish xatosi, ehtimol siz allaqachon tizimda ro'yxatdan o'tgansiz",
   "unauthorised": "Avtorizatsiya xatosi",
   "server_error": "Serverda xatolik, keyinroq urinib ko'ring",
-  "fieldIsRequired": "Maydon toldirilishi shart",
-  "wrongNumberFormat": "Notog'ri farmat",
+  "fieldIsRequired": "Maydon to'ldirilishi shart",
+  "wrongNumberFormat": "Noto'g'ri farmat",
   "passwordMustMinEightChars": "Parol kamida 8 shartli belgi",
   "passwordsDifferent": "Parollar xar-xil",
   "addPhotos": "Iltimos, rasm qo'shing"

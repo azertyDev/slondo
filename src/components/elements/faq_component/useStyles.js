@@ -49,11 +49,12 @@ export const useStyles = makeStyles(() => ({
                             background: '#F6F3F8',
                             borderRadius: '13px',
                             padding: 11,
-                            marginRight: 10,
+                            marginRight: 10
                         },
                     },
                 },
             },
         },
     },
-}));
+    }))
+;

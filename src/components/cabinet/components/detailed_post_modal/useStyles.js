@@ -46,9 +46,6 @@ export const useStyles = makeStyles((theme) => ({
                 boxShadow: '0px 1px 2px rgba(0, 0, 0, 0.15)',
                 borderRadius: 5,
                 backgroundColor: theme.palette.background.paper,
-                '&:last-child': {
-                    marginTop: '5px'
-                },
                 '& svg': {
                     marginRight: 10
                 }

@@ -13,7 +13,7 @@
       "name": "Yo’lovchilarniki"
     },
     "drivers": {
-      "name": "Haydovchilarniki "
+      "name": "Haydovchilarniki"
     },
     "side_front": {
       "name": "Oldi yoni"
@@ -2047,6 +2047,9 @@
     }
   },
   "service": {
+    "cost_indicated": {
+      "name": "Qiymati ko'rsatilgan"
+    },
     "in_one_hour": {
       "name": "1 soat uchun"
     },
@@ -6302,7 +6305,6 @@
   "experience": "Tajriba",
   "require_experience": "Talab qilinadigan tajriba",
   "nature": "Ishning tabiati",
-  "cost_indicated": "Qiymati ko'rsatilgan",
   "place": "Xizmat ko'rsatish joyi",
   "specialization": "Ixtisosligi",
   "color": "Rangi",
@@ -6447,4 +6449,5 @@
   "pink": "Pushti",
   "multi-color": "Rang-barang",
   "archive": "Arxiv",
+  "repair_construction": "Testoviy"
 }

@@ -6,7 +6,7 @@ export const useStyles = makeStyles(() => ({
         '& .MuiTypography-subtitle2': {
             color: 'rgba(49, 49, 49, 0.6)',
             lineHeight: '17px',
-            textIndent: '60px'
+            textIndent: '30px'
         }
     }
 }))
