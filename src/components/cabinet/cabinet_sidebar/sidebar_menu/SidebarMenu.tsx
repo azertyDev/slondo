@@ -1,6 +1,6 @@
 import {FC, useContext} from 'react';
 import {unstable_batchedUpdates} from 'react-dom';
-import {List, ListItem, ListItemText} from '@material-ui/core';
+import {List, ListItem, ListItemText, Typography} from '@material-ui/core';
 import {useRouter} from 'next/router';
 import {cookies} from '@src/helpers';
 import {CustomBadge} from '@src/components/elements/custom_budge/CustomBadge';
@@ -15,9 +15,9 @@ import {ShoppingIcon} from '@src/components/elements/icons/ShoppingIcon';
 import {SettingsIcon} from '@src/components/elements/icons/SettingsIcon';
 import {PowerIcon} from '@src/components/elements/icons/PowerIcon';
 import {useTranslation} from 'next-i18next';
-import {UserCtx} from "@src/context/UserCtx";
 import {AuthCtx} from "@src/context/AuthCtx";
 import {useStyles} from './useStyles';
+import {UserCtx} from "@src/context";
 
 type SidebarMenuPropsType = {
     clearAnchor?: () => void
@@ -25,9 +25,10 @@ type SidebarMenuPropsType = {
 
 export const SidebarMenu: FC<SidebarMenuPropsType> = ({clearAnchor}) => {
     const {t} = useTranslation('cabinet');
-    const {push, pathname} = useRouter();
+    const {push, query: {page}} = useRouter();
     const {setIsAuth} = useContext(AuthCtx);
     const {user, clearUser} = useContext(UserCtx);
+
     const {
         observer: {
             number_of_messages,
@@ -39,6 +40,11 @@ export const SidebarMenu: FC<SidebarMenuPropsType> = ({clearAnchor}) => {
     const handleListItemClick = (url) => async () => {
         await push(`/cabinet/${url}`);
     };
+
+    const onButtonClick = (url) => () => {
+        push(`/cabinet/${url}`);
+    };
+
     const signout = async () => {
         unstable_batchedUpdates(async () => {
             !!clearAnchor && clearAnchor();
@@ -53,70 +59,106 @@ export const SidebarMenu: FC<SidebarMenuPropsType> = ({clearAnchor}) => {
     const classes = useStyles();
     return (
         <div className={classes.root}>
+            <List component="nav" className='menu-item row' disablePadding>
+                <CustomBadge badgeContent={user.observer.number_of_reviews}>
+                    <ListItem
+                        button
+                        onClick={onButtonClick('rating')}
+                        selected={page === 'rating'}
+                        disableGutters
+                    >
+                        <Typography variant="subtitle1">
+                            {t('cabinet:rating')}
+                        </Typography>
+                    </ListItem>
+                </CustomBadge>
+                <ListItem
+                    button
+                    disableGutters
+                    onClick={onButtonClick('subs')}
+                    selected={page === 'subs'}
+                >
+                    <Typography variant="subtitle1">
+                        {t('cabinet:subs')}
+                    </Typography>
+                </ListItem>
+            </List>
+            <List component="nav" aria-label="cabinet menu" className='menu-item' disablePadding>
+                <CustomBadge badgeContent={0} color='error'>
+                    <ListItem
+                        button
+                        disableGutters
+                        onClick={onButtonClick('banned')}
+                        selected={page === 'banned'}
+                    >
+                        <ListItemText primary={t('cabinet:banned')}/>
+                    </ListItem>
+                </CustomBadge>
+            </List>
             <List disablePadding component="nav" aria-label="cabinet menu" className='menu-item'>
                 <ListItem
                     button
-                    selected={pathname === '/cabinet/posts'}
+                    selected={page === 'posts'}
                     onClick={handleListItemClick('posts')}
                     disableGutters
                 >
                     <NotesIcon/>
-                    <ListItemText primary={t('cabinet:myPosts')}/>
+                    <ListItemText primary={t('myPosts')}/>
                 </ListItem>
                 <ListItem
                     button
-                    selected={pathname === '/cabinet/auctions'}
+                    selected={page === 'auctions'}
                     onClick={handleListItemClick('auctions')}
                     disableGutters
                 >
                     <GavelIcon/>
-                    <ListItemText primary={t('cabinet:myAuctions')}/>
+                    <ListItemText primary={t('myAuctions')}/>
                 </ListItem>
                 <CustomBadge badgeContent={number_of_purchase} color='error'>
                     <ListItem
                         button
-                        selected={pathname === '/cabinet/purchases'}
+                        selected={page === 'purchases'}
                         onClick={handleListItemClick('purchases')}
                         disableGutters
                     >
                         <ShoppingIcon/>
-                        <ListItemText primary={t('cabinet:myPurchases')}/>
+                        <ListItemText primary={t('myPurchases')}/>
                     </ListItem>
                 </CustomBadge>
                 <CustomBadge badgeContent={0} color='error'>
                     <ListItem
                         button
-                        selected={pathname === '/cabinet/favorite'}
+                        selected={page === 'favorite'}
                         onClick={handleListItemClick('favorite')}
                         disableGutters
                     >
                         <FavoriteBorderIcon/>
-                        <ListItemText primary={t('cabinet:favorite')}/>
+                        <ListItemText primary={t('favorite')}/>
                     </ListItem>
                 </CustomBadge>
             </List>
-            <List disablePadding component="nav" aria-label="cabinet menu" className='menu-item row'>
+            <List disablePadding component="nav" aria-label="cabinet menu" className='menu-item'>
                 <CustomBadge badgeContent={number_of_notifications} color='error'>
                     <ListItem
                         button
-                        selected={pathname === '/cabinet/notifications'}
+                        selected={page === 'notifications'}
                         onClick={handleListItemClick('notifications')}
                         disableGutters
                     >
                         <NotificationIcon/>
-                        <ListItemText primary={t('cabinet:notifications')}/>
+                        <ListItemText primary={t('notifications')}/>
                     </ListItem>
                 </CustomBadge>
                 <CustomBadge badgeContent={number_of_messages} color='error'>
                     <ListItem
                         button
-                        // selected={pathname === '/cabinet/messages'}
-                        // onClick={handleListItemClick('messages')}
                         disabled
                         disableGutters
+                        selected={page === 'messages'}
+                        onClick={handleListItemClick('messages')}
                     >
                         <LetterIcon/>
-                        <ListItemText primary={t('cabinet:messages')}/>
+                        <ListItemText primary={t('messages')}/>
                     </ListItem>
                 </CustomBadge>
             </List>
@@ -124,46 +166,46 @@ export const SidebarMenu: FC<SidebarMenuPropsType> = ({clearAnchor}) => {
                 <CustomBadge badgeContent={0} color='error'>
                     <ListItem
                         button
-                        selected={pathname === '/cabinet/safetyDeal'}
-                        onClick={handleListItemClick('safetyDeal')}
                         disableGutters
+                        selected={page === 'safe_deal'}
+                        onClick={handleListItemClick('safe_deal')}
                     >
                         <SafeIcon/>
-                        <ListItemText primary={t('cabinet:safeShopping')}/>
+                        <ListItemText primary={t('safe_deal')}/>
                     </ListItem>
                 </CustomBadge>
                 <CustomBadge badgeContent={0} color='error'>
                     <ListItem
                         button
-                        // selected={pathname === '/cabinet/paidServices'}
+                        // selected={page === 'paidServices'}
                         // onClick={handleListItemClick('paidServices')}
                         disabled
                         disableGutters
                     >
                         <WalletIcon/>
-                        <ListItemText primary={t('cabinet:paidServices')}/>
+                        <ListItemText primary={t('paidServices')}/>
                     </ListItem>
                 </CustomBadge>
             </List>
             <List disablePadding component="nav" aria-label="cabinet menu" className='menu-item row'>
                 <ListItem
                     button
-                    selected={pathname === '/cabinet/settings'}
+                    selected={page === 'settings'}
                     onClick={handleListItemClick('settings')}
                     disableGutters
                     className='list-item'
                 >
                     <SettingsIcon/>
-                    <ListItemText primary={t('cabinet:settings')}/>
+                    <ListItemText primary={t('settings')}/>
                 </ListItem>
                 <ListItem
                     button
-                    onClick={signout}
                     disableGutters
+                    onClick={signout}
                     className='list-item'
                 >
                     <PowerIcon/>
-                    <ListItemText primary={t('cabinet:exit')}/>
+                    <ListItemText primary={t('exit')}/>
                 </ListItem>
             </List>
         </div>

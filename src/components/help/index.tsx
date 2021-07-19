@@ -1,18 +1,14 @@
 import {FC} from 'react';
-import {Box, Grid, Typography} from '@material-ui/core';
 import Link from 'next/link';
-import {useStyles} from './useStyles';
+import {Box, Grid, Typography} from '@material-ui/core';
 import {HelpSidebar} from '@src/components/help/help_sidebar/HelpSidebar';
-import menuData from '@src/components/help/help_page_data';
+import menuStruct from '@src/components/help/menu_struct';
 import {MainLayout} from '@src/components/main_layout/MainLayout';
-import {useRouter} from 'next/router';
+import {useTranslation} from "react-i18next";
+import {useStyles} from './useStyles';
 
 export const HelpPage: FC = () => {
-    const {push} = useRouter();
-
-    const handleClick = (value) => async () => {
-        await push(`/help/${value}`);
-    };
+    const {t} = useTranslation('help');
 
     const classes = useStyles();
     return (
@@ -21,7 +17,7 @@ export const HelpPage: FC = () => {
                 Помощь
             </Typography>
             <Grid container spacing={2}>
-                <HelpSidebar handleClick={handleClick} menuData={menuData} />
+                <HelpSidebar menuStruct={menuStruct}/>
                 <Grid container item xs={9}>
                     <Box>
                         <Typography variant='subtitle1' gutterBottom>
@@ -32,7 +28,7 @@ export const HelpPage: FC = () => {
                             на кнопку &nbsp;
                             <Link href='/help/feedback'>
                                 <a className={classes.link}>
-                                    “Обратная связь”
+                                    {t('feedback')}
                                 </a>
                             </Link>
                         </Typography>

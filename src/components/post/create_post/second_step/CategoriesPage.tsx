@@ -122,7 +122,7 @@ export const CategoriesPage: FC = () => {
                             item
                             xs={12}
                             sm={12}
-                            md={5}
+                            md={4}
                             className="categories-menu"
                         >
                             <List disablePadding>
@@ -146,7 +146,7 @@ export const CategoriesPage: FC = () => {
                         <Grid
                             item
                             xs={12}
-                            md={7}
+                            md={8}
                             className="subcategories-menu"
                         >
                             <div className="search-block">
@@ -207,7 +207,7 @@ export const CategoriesPage: FC = () => {
                                         );
                                     })}
                                 </List>
-                                : <div className="sub-category-bg">
+                                : <div className="subcategory-bg">
                                     {!isMdDown && (
                                         <Typography variant="h2">
                                             {t('post:selectCategory')}

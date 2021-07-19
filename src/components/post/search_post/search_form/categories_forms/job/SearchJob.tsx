@@ -1,13 +1,14 @@
 import {FC, useEffect} from 'react';
+import {useFormik} from 'formik';
 import {Grid} from '@material-ui/core';
 import {CommonFiltersType} from '@src/components/post/search_post/search_form/SearchForm';
 // import {useTranslation} from 'react-i18next';
-import {useFormik} from 'formik';
+// import {CheckboxSelect} from '@src/components/elements/checkbox_select/CheckboxSelect';
 import {useHandlers} from '@src/hooks/useHandlers';
 import {CustomFormikProvider} from '@src/components/elements/custom_formik_provider/CustomFormikProvider';
-// import {CheckboxSelect} from '@src/components/elements/checkbox_select/CheckboxSelect';
 import {DropDownSelect} from '@src/components/elements/drop_down_select/DropDownSelect';
 import {ActionButtons} from '@src/components/post/search_post/search_form/ActionButtons';
+import {useTranslation} from "react-i18next";
 
 type SearchRegularPropsType = {
     type,
@@ -27,9 +28,9 @@ export const SearchJob: FC<SearchRegularPropsType> = (props) => {
         sameWithUrlCtgr
     } = props;
 
+    const {t} = useTranslation('filters');
+    const categoryName = category.name;
     const isVacancy = subcategory?.name === 'vacancies';
-
-    // const {t} = useTranslation('filters');
 
     const initVals: any = {
         employment: [],
@@ -69,49 +70,54 @@ export const SearchJob: FC<SearchRegularPropsType> = (props) => {
     return (
         <CustomFormikProvider formik={formik}>
             <Grid container spacing={1}>
-                <Grid
-                    item
-                    container
-                    xs={12}
-                    sm={4}
-                >
-                    <DropDownSelect
-                        multiple
-                        name='employment'
-                        values={values}
-                        items={filters.employment}
-                        handleSelect={handleSelect}
-                    />
-                </Grid>
-                <Grid
-                    item
-                    container
-                    xs={12}
-                    sm={4}
-                >
-                    <DropDownSelect
-                        multiple
-                        name='experience'
-                        labelTxt={isVacancy ? 'require_experience' : 'experience'}
-                        values={values}
-                        items={filters.experience}
-                        handleSelect={handleSelect}
-                    />
-                </Grid>
-                <Grid
-                    item
-                    container
-                    xs={12}
-                    sm={4}
-                >
-                    <DropDownSelect
-                        multiple
-                        name='nature'
-                        values={values}
-                        items={filters.nature}
-                        handleSelect={handleSelect}
-                    />
-                </Grid>
+                {!!subcategory && <>
+                    <Grid
+                        item
+                        container
+                        xs={12}
+                        sm={4}
+                    >
+                        <DropDownSelect
+                            multiple
+                            name='employment'
+                            values={values}
+                            transKey={`${categoryName}.`}
+                            items={filters.employment}
+                            handleSelect={handleSelect}
+                            labelTxt={t(`${categoryName}.employment`)}
+                        />
+                    </Grid>
+                    <Grid
+                        item
+                        container
+                        xs={12}
+                        sm={4}
+                    >
+                        <DropDownSelect
+                            multiple
+                            name='experience'
+                            values={values}
+                            items={filters.experience}
+                            handleSelect={handleSelect}
+                            labelTxt={t(`${categoryName}.${isVacancy ? 'require_experience' : 'experience'}`)}
+                        />
+                    </Grid>
+                    <Grid
+                        item
+                        container
+                        xs={12}
+                        sm={4}
+                    >
+                        <DropDownSelect
+                            multiple
+                            name='nature'
+                            values={values}
+                            items={filters.nature}
+                            handleSelect={handleSelect}
+                            labelTxt={t(`${categoryName}.nature`)}
+                        />
+                    </Grid>
+                </>}
                 {/*<Grid*/}
                 {/*    item*/}
                 {/*    container*/}

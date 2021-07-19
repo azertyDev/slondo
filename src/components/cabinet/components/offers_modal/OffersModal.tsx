@@ -5,7 +5,7 @@ import {UserInfoWithAvatar} from "@src/components/elements/user_info_with_avatar
 import {CloseIcon, DoneAllIcon} from "@src/components/elements/icons";
 import {CustomButton} from "@src/components/elements/custom_button/CustomButton";
 import {CabinetModal} from "@src/components/cabinet/components/cabinet_modal/CabinetModal";
-import {CommonModalType} from "@src/components/cabinet/CabinetWrapper";
+import {CommonModalType} from "@src/components/cabinet/Cabinet";
 import {useStyles} from './useStyles';
 import {ErrorCtx} from "@src/context";
 

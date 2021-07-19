@@ -1,67 +1,95 @@
-import {FC} from 'react';
-import {useRouter} from 'next/router';
-import {List, ListItem, ListItemText, Typography} from '@material-ui/core';
-import {useTranslation} from 'next-i18next';
-import {CustomBadge} from '@src/components/elements/custom_budge/CustomBadge';
-import {UserInfo} from '@root/interfaces/Auth';
-import {useStyles} from './useStyles';
+import {FC, useContext, useEffect, useState} from 'react';
+import {TabsContent} from '@src/components/cabinet/cabinet_pages/TabsContent';
+import {Subscribers} from '@src/components/cabinet/cabinet_pages/subs/subscribers/Subscribers';
+import {Subscriptions} from '@src/components/cabinet/cabinet_pages/subs/subscriptions/Subscriptions';
+import {userAPI} from '@src/api/api';
+import {TabsDataType} from '@root/interfaces/Cabinet';
+import {SUBS_PER_PAGE} from '@src/constants';
+import {ErrorCtx} from "@src/context";
 
-type UserSocialInfoPropsType = {
-    user: UserInfo
-}
-
-export const Subs: FC<UserSocialInfoPropsType> = ({user}) => {
-    const {t} = useTranslation('cabinet');
-
-    const {pathname, push} = useRouter();
-
-    const onButtonClick = (url) => () => {
-        push(`/cabinet/${url}`);
+export const Subs: FC = () => {
+    const initialState = {
+        isFetch: false,
+        subscribers: {
+            total: 0,
+            data: []
+        },
+        subscriptions: {
+            total: 0,
+            data: []
+        }
     };
 
-    const classes = useStyles();
+    const {setErrorMsg} = useContext(ErrorCtx);
+
+    const [subs, setSubs] = useState(initialState);
+    const [tabIndex, setTabIndex] = useState(0);
+
+    const handleTabChange = (event, newValue) => {
+        setTabIndex(newValue);
+    };
+
+    const fetchSubs = async (param) => {
+        try {
+            const {subscribers, subscriptions} = subs;
+            const isSubscribers = param === 'subscribers';
+
+            subs.isFetch = true;
+            setSubs({...subs});
+
+            const subsData = await userAPI.getSubs(param);
+            subs.isFetch = false;
+
+            if (isSubscribers) {
+                subscribers.data = subsData.data;
+                subscribers.total = subsData.total;
+            } else {
+                subscriptions.data = subsData.data;
+                subscriptions.total = subsData.total;
+            }
+
+            setSubs({...subs});
+        } catch (e) {
+            setErrorMsg(e.message);
+        }
+    };
+
+    const handleFollow = (userId) => async () => {
+        try {
+            await userAPI.follow(userId);
+        } catch (e) {
+            setErrorMsg(e.message);
+        }
+    };
+
+    useEffect(() => {
+        fetchSubs('subscribers');
+        fetchSubs('subscriptions');
+    }, []);
+
+    const tabsData: TabsDataType = [
+        {
+            id: 0,
+            title: 'Подписки',
+            itemsPerPage: SUBS_PER_PAGE,
+            handleFetchByTab: () => '',
+            component: <Subscriptions subscriptions={subs.subscriptions.data} handleFollow={handleFollow}/>
+        },
+        {
+            id: 1,
+            title: 'Подписчики',
+            itemsPerPage: SUBS_PER_PAGE,
+            handleFetchByTab: () => '',
+            component: <Subscribers subscribers={subs.subscribers.data} handleFollow={handleFollow}/>
+        }
+    ];
+
     return (
-        <div className={classes.root}>
-            <List component="nav" className='menu-item row' disablePadding>
-                <CustomBadge badgeContent={user.observer.number_of_reviews}>
-                    <ListItem
-                        button
-                        onClick={onButtonClick('ratings')}
-                        selected={pathname === '/cabinet/ratings'}
-                        disableGutters
-                    >
-                        <ListItemText primary={
-                            <Typography variant="subtitle1">
-                                {t('cabinet:rating')}
-                            </Typography>
-                        } />
-                    </ListItem>
-                </CustomBadge>
-                <ListItem
-                    button
-                    onClick={onButtonClick('subscribe')}
-                    selected={pathname === '/cabinet/subscribe'}
-                    disableGutters
-                >
-                    <ListItemText primary={
-                        <Typography variant="subtitle1">
-                            {t('cabinet:follows')}
-                        </Typography>
-                    } />
-                </ListItem>
-            </List>
-            <List component="nav" aria-label="cabinet menu" className='menu-item' disablePadding>
-                <CustomBadge badgeContent={0} color='error'>
-                    <ListItem
-                        button
-                        selected={pathname === '/cabinet/bannedPosts'}
-                        onClick={onButtonClick('bannedPosts')}
-                        disableGutters
-                    >
-                        <ListItemText primary={t('cabinet:bannedPosts')}/>
-                    </ListItem>
-                </CustomBadge>
-            </List>
-        </div>
+        <TabsContent
+            tabIndex={tabIndex}
+            handleTabChange={handleTabChange}
+            tabsData={tabsData}
+        />
     );
 };
+

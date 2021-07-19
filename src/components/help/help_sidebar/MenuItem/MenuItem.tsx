@@ -1,4 +1,4 @@
-import {FC, useState} from 'react';
+import {FC} from 'react';
 import {
     Collapse,
     List,
@@ -11,17 +11,15 @@ import {useStyles} from '../useStyles';
 
 type MenuItemPropsType = {
     data: any,
-    handleClick: (term) => () => void,
 };
 
-export const MenuItem: FC<MenuItemPropsType> = ({data, handleClick}) => {
+export const MenuItem: FC<MenuItemPropsType> = ({data}) => {
+    const {push, query} = useRouter();
+    const [term, subTerm] = query.term as string[] || [];
+    const isOpen = term === data.term;
 
-    const [open, setOpen] = useState(false);
-    const {query: {term}} = useRouter();
-
-    const handleMenuOpen = (value) => () => {
-        handleClick(value);
-        setOpen(!open);
+    const handleClick = (subTerm?) => async () => {
+        await push(`/help/${data.term}/${subTerm ?? ''}`, undefined, {shallow: true});
     };
 
     const classes = useStyles();
@@ -29,7 +27,7 @@ export const MenuItem: FC<MenuItemPropsType> = ({data, handleClick}) => {
         <>
             <ListItem
                 button
-                onClick={handleMenuOpen(data.term)}
+                onClick={handleClick()}
                 selected={term === data.term}
             >
                 <ListItemText
@@ -43,24 +41,28 @@ export const MenuItem: FC<MenuItemPropsType> = ({data, handleClick}) => {
                     }
                 />
             </ListItem>
-            {data.subSections && (<Collapse in={open} timeout="auto" unmountOnExit>
+            {data.subSections && <Collapse in={isOpen} timeout="auto" unmountOnExit>
                 <List component="div" disablePadding>
-                    {data.subSections.map((subSection, index) => {
+                    {data.subSections.map((subData, index) => {
                         return (
-                            <ListItem button key={index}>
+                            <ListItem
+                                button
+                                key={index}
+                                selected={subTerm === subData.term}
+                                onClick={handleClick(subData.term)}>
                                 <ListItemText primary={
                                     <Typography
                                         variant="subtitle2"
                                         color="textPrimary"
                                     >
-                                        {subSection}
+                                        {subData.section}
                                     </Typography>
-                                } />
+                                }/>
                             </ListItem>
                         );
                     })}
                 </List>
-            </Collapse>)}
+            </Collapse>}
         </>
     );
 };

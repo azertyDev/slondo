@@ -3,7 +3,6 @@ import {unstable_batchedUpdates} from 'react-dom';
 import {ErrorCtx} from "@src/context";
 import {useModal} from "@src/hooks";
 import {TabsContent} from '@src/components/cabinet/cabinet_pages/TabsContent';
-import {withAuthRedirect} from '@src/hocs/withAuthRedirect';
 import {CircularProgress, Tab, Tabs, Typography} from "@material-ui/core";
 import {useTranslation} from 'react-i18next';
 import {ITEMS_PER_PAGE} from '@src/constants';
@@ -18,9 +17,8 @@ import {DetailedPostContainerModal} from "@src/components/cabinet/components/det
 import {initialCardData} from "@src/components/cabinet/cabinet_pages/my_posts/MyPosts";
 import {useStyles} from './useStyles';
 
-const MyPurchases: FC = () => {
+export const MyPurchases: FC = () => {
     const {t} = useTranslation('cabinet');
-    const title = t('myPurchases');
     const {setErrorMsg} = useContext(ErrorCtx);
 
     const [tabIndex, setTabIndex] = useState(0);
@@ -180,8 +178,6 @@ const MyPurchases: FC = () => {
     return (
         <>
             <TabsContent
-                title={title}
-                headerTitle={title}
                 tabIndex={tabIndex}
                 tabsData={tabsData}
                 handleTabChange={handleTabChange}
@@ -203,5 +199,3 @@ const MyPurchases: FC = () => {
         </>
     );
 };
-
-export default withAuthRedirect(MyPurchases);

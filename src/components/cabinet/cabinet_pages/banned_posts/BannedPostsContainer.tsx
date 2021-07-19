@@ -1,7 +1,6 @@
 import {FC, useContext, useEffect, useState} from 'react';
 import {userAPI} from '@src/api/api';
 import {TabsContent} from '@src/components/cabinet/cabinet_pages/TabsContent';
-import {withAuthRedirect} from '@root/src/hocs/withAuthRedirect';
 import {Box, Grid, IconButton, List, ListItem, ListItemText, Typography} from '@material-ui/core';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import {InitialCabinetCardState, TabsDataType} from '@root/interfaces/Cabinet';
@@ -14,7 +13,7 @@ import {ITEMS_PER_PAGE} from '@src/constants';
 import {ErrorCtx} from "@src/context";
 import {useStyles} from './useStyles';
 
-const BannedPostsContainer: FC = () => {
+export const BannedPostsContainer: FC = () => {
     const {t} = useTranslation('cabinet');
     const {setErrorMsg} = useContext(ErrorCtx);
 
@@ -139,11 +138,6 @@ const BannedPostsContainer: FC = () => {
         </>
     );
 
-    useEffect(() => {
-        fetchBannedPostsData('post');
-        fetchBannedPostsData('auc');
-    }, []);
-
     const bannedPostCards = postData.data.map(data => (
         <Box mb={3} key={data.id}>
             <Grid container>
@@ -205,17 +199,16 @@ const BannedPostsContainer: FC = () => {
         }
     ];
 
-    const title = t('bannedPosts');
+    useEffect(() => {
+        fetchBannedPostsData('post');
+        fetchBannedPostsData('auc');
+    }, []);
 
     return (
         <TabsContent
-            title={title}
-            handleTabChange={handleTabChange}
             tabIndex={tabIndex}
             tabsData={tabsData}
-            headerTitle={title}
+            handleTabChange={handleTabChange}
         />
     );
 };
-
-export default withAuthRedirect(BannedPostsContainer);

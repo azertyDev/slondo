@@ -14,7 +14,7 @@ import {
 import {userAPI} from '@src/api/api';
 import {useTranslation} from 'next-i18next';
 import {CustomCircularProgress} from '@src/components/elements/custom_circular_progress/CustomCircularProgress';
-import {CommonModalType} from "@src/components/cabinet/CabinetWrapper";
+import {CommonModalType} from "@src/components/cabinet/Cabinet";
 import {CustomButton} from "@src/components/elements/custom_button/CustomButton";
 import {FormikField} from "@src/components/elements/formik_field/FormikField";
 import {CustomFormikProvider} from "@src/components/elements/custom_formik_provider/CustomFormikProvider";

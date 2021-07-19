@@ -1,11 +1,10 @@
 import {FC, useContext, useEffect, useState} from 'react';
 import {Ratings} from '@src/components/cabinet/cabinet_pages/rating/Ratings';
 import {useTranslation} from 'react-i18next';
-import {withAuthRedirect} from '@src/hocs/withAuthRedirect';
 import {userAPI} from '@src/api/api';
 import {ErrorCtx} from "@src/context";
 
-const RatingsContainer: FC = () => {
+export const RatingsContainer: FC = () => {
     const {t} = useTranslation('cabinet');
     const {setErrorMsg} = useContext(ErrorCtx);
 
@@ -47,5 +46,3 @@ const RatingsContainer: FC = () => {
         />
     );
 };
-
-export default withAuthRedirect(RatingsContainer);
