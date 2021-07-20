@@ -13,7 +13,8 @@ export const useStyles = makeStyles((theme) => ({
             '& > div': {
                 display: 'flex',
                 alignItems: 'center'
-            }
+            },
+            margin: '11px 0'
         },
         '& div.location-wrapper': {
             display: 'flex',
@@ -27,9 +28,13 @@ export const useStyles = makeStyles((theme) => ({
             }
         },
         '& div.description-wrapper': {
+            marginBottom: '20px',
             '& p': {
                 wordBreak: 'break-all'
             }
+        },
+        '& div.phone-num': {
+            marginBottom: '20px'
         }
     }
 }));

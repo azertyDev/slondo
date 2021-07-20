@@ -1,7 +1,7 @@
 import {FC, useEffect} from 'react';
 import {useFormik} from 'formik';
 import {Typography} from '@material-ui/core';
-import {UPLOAD_FILES_LIMIT} from "@src/constants";
+import {UPLOAD_FILES_LIMIT} from '@src/constants';
 import {PreviewPhotos} from './preview_photos/PreviewPhotos';
 import {CustomAccordion} from '@src/components/elements/accordion/CustomAccordion';
 import {IdNameType} from '@root/interfaces/Post';
@@ -105,6 +105,9 @@ export const AppearanceForm: FC<AppearanceFormPropsType> = (props) => {
                                         <strong>
                                             {t('color')}:
                                         </strong>
+                                    </Typography>
+                                    <Typography variant='subtitle2'>
+                                        {t(values.color.name)}
                                     </Typography>
                                     <div
                                         className='color'
