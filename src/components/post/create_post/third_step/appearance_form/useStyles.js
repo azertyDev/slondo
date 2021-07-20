@@ -7,10 +7,27 @@ export const useStyles = makeStyles((theme) => ({
             '& div.color-preview': {
                 display: 'flex',
                 alignItems: 'center',
+                justifyContent: 'space-between',
+                padding: '7px 10px',
+                marginBottom: '25px',
+                background: '#FFFF',
+                borderRadius: '100px',
+                width: '25%',
+                '& h6 > strong': {
+                    fontWeight: '500'
+                },
                 '& div.color': {
-                    width: '50px',
-                    height: '50px',
-                    borderRadius: '100%'
+                    width: '38px',
+                    height: '38px',
+                    borderRadius: '100%',
+                    boxShadow: '0px 0px 4px rgba(0, 0, 0, 0.25)',
+                    [theme.breakpoints.down('sm')]: {
+                        width: '32px',
+                        height: '32px'
+                    }
+                },
+                [theme.breakpoints.down('sm')]: {
+                    width: '250px'
                 }
             },
             '& div.photos-preview': {
