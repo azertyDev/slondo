@@ -2,13 +2,18 @@ import {makeStyles} from '@material-ui/core/styles';
 
 export const useStyles = makeStyles((theme) => ({
     root: {
+        '& div.bottom-btns': {
+            marginTop: '10px'
+        },
         '& .unfold-btn': {
-            marginTop: '10px',
             background: '#EEE',
             borderRadius: '5px',
             height: '32px',
             width: '100%',
-            boxShadow: '0px 1px 2px 0px #00000026'
+            boxShadow: '0px 1px 2px 0px #00000026',
+            '& svg': {
+                fill: '#4e4e4e'
+            }
         },
         '& .breadcrumbs': {
             display: 'flex',

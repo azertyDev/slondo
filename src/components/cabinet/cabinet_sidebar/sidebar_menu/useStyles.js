@@ -40,6 +40,9 @@ export const useStyles = makeStyles({
                 borderRadius: 5,
                 marginBottom: 5,
                 boxShadow: '0px 1px 2px rgba(0, 0, 0, 0.25)',
+                '& .MuiTypography-body1': {
+                    fontSize: 'clamp(16px, 50%, 24px)',
+                },
                 '& .MuiListItemText-root': {
                     flex: 'none'
                 },

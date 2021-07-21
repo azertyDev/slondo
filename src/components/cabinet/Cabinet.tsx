@@ -29,7 +29,7 @@ export type CommonModalType = {
 const Cabinet: FC = () => {
     const {t} = useTranslation('cabinet');
     const {page} = useRouter().query;
-    const isMdDown = useMediaQuery(useTheme().breakpoints.down('md'));
+    const isSmDown = useMediaQuery(useTheme().breakpoints.down('sm'));
 
     const getPage = () => {
         switch (page) {
@@ -62,13 +62,13 @@ const Cabinet: FC = () => {
     return (
         <MainLayout title={`${t('my_cabinet')} | ${t(page)}`}>
             <div className={classes.root}>
-                <Grid container spacing={isMdDown ? 0 : 2}>
-                    <Hidden mdDown>
-                        <Grid item md={3}>
+                <Grid container spacing={isSmDown ? 0 : 2}>
+                    <Hidden smDown>
+                        <Grid item sm={5} md={3}>
                             <CabinetSidebar />
                         </Grid>
                     </Hidden>
-                    <Grid item xs={12} md={9}>
+                    <Grid item xs={12} sm={12} md={9}>
                         <Grid item xs={12}>
                             <Typography variant="h6" className="menu-title">
                                 {t(page)}

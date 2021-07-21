@@ -59,7 +59,6 @@ export const useStyles = makeStyles((theme) => ({
                 padding: '10px'
             },
             '& .post-title': {
-                height: 'min-content',
                 '& a': {
                     textDecoration: 'none',
                     '&:hover': {
@@ -67,7 +66,7 @@ export const useStyles = makeStyles((theme) => ({
                         textDecorationColor: '#4e4e4e'
                     },
                     '& h6': {
-                        [theme.breakpoints.down('md')]: {
+                        [theme.breakpoints.down('lg')]: {
                             fontSize: theme.typography.pxToRem(16)
                         },
                         [theme.breakpoints.down('sm')]: {

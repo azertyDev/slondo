@@ -1,5 +1,5 @@
 import {FC} from 'react';
-import {Box, Typography} from '@material-ui/core';
+import {Box, Grid, Hidden, Typography} from '@material-ui/core';
 import {ChevronRight} from '@material-ui/icons';
 import {CardDataType} from '@root/interfaces/CardData';
 import {BreadcrumbsComponent} from '@src/components/elements/breadcrumbs/Breadcrumbs';
@@ -66,52 +66,75 @@ export const CabinetCard: FC<CabinetCardPropsType> = (props) => {
                 </div>
             </Box>
             <Box position='relative'>
-                <ListCard cardData={cardData}/>
-                {handleDetailedOpen && (
-                    <CustomButton
-                        className='unfold-btn'
-                        onClick={handleDetailedOpen}
-                    >
-                        <Typography variant='subtitle1'>
-                            Раскрыть объявление
-                        </Typography>&nbsp;
-                        <ChevronRight color='action'/>
-                    </CustomButton>
-                )}
-                <div className='card-btns'>
-                    {pathname?.includes('favorite')
-                        ? <CustomButton
-                            onClick={handleOpenModal(cardData.id)}
-                        >
-                            <CloseIcon/>
-                        </CustomButton>
-                        : cardData.creator && isPublic && (
-                        <>
-                            <CustomButton
-                                disabled
-                                className='icons'
-                            >
-                                <RocketIcon/>
-                                <Typography variant='subtitle1'>
-                                    Рекламировать
-                                </Typography>
-                            </CustomButton>
+                <ListCard cardData={cardData} />
+                <Grid container className='bottom-btns'>
+                    <Hidden mdUp>
+                        <Grid item xs={5} sm={2}>
                             <CustomButton
                                 className='icons'
                                 onClick={handleNotificationsOpen}
                                 disabled={!observer.number_of_notifications}
                             >
-                                <NotificationIcon/>
+                                <NotificationIcon />
                             </CustomButton>
                             <CustomButton
                                 className='icons'
                                 onClick={handleSettingsOpen}
                             >
-                                <SettingsIcon/>
+                                <SettingsIcon />
                             </CustomButton>
-                        </>
-                    )}
-                </div>
+                        </Grid>
+                    </Hidden>
+                    <Grid item xs={7} sm={10} md={12}>
+                        {handleDetailedOpen && (
+                            <CustomButton
+                                className='unfold-btn'
+                                onClick={handleDetailedOpen}
+                            >
+                                <Typography variant='subtitle1'>
+                                    Раскрыть объявление
+                                </Typography>&nbsp;
+                                <ChevronRight color='action' />
+                            </CustomButton>
+                        )}
+                    </Grid>
+                </Grid>
+                <Hidden mdDown>
+                    <div className='card-btns'>
+                        {pathname?.includes('favorite')
+                            ? <CustomButton
+                                onClick={handleOpenModal(cardData.id)}
+                            >
+                                <CloseIcon />
+                            </CustomButton>
+                            : cardData.creator && isPublic && (
+                            <>
+                                <CustomButton
+                                    disabled
+                                    className='icons'
+                                >
+                                    <RocketIcon />
+                                    <Typography variant='subtitle1'>
+                                        Рекламировать
+                                    </Typography>
+                                </CustomButton>
+                                <CustomButton
+                                    className='icons'
+                                    onClick={handleNotificationsOpen}
+                                    disabled={!observer.number_of_notifications}
+                                >
+                                    <NotificationIcon />
+                                </CustomButton>
+                                <CustomButton
+                                    className='icons'
+                                    onClick={handleSettingsOpen}
+                                >
+                                    <SettingsIcon />
+                                </CustomButton>
+                            </>
+                        )}
+                    </div>
+                </Hidden>
             </Box>
         </Box>
     );

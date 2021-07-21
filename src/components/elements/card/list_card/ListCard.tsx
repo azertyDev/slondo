@@ -97,7 +97,7 @@ export const ListCard: FC<ListCardPropsType> = ({cardData}) => {
                 </Box>
             </Grid>
             <Grid item xs={6} sm={8} md={9} container alignContent='space-between' className="content">
-                <Grid item xs={12} sm={8} className="post-title">
+                <Grid item xs={12} sm={12} lg={7} className="post-title">
                     <Link href={url}>
                         <a target='_blank'>
                             <Typography
