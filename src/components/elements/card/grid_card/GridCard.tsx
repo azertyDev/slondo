@@ -1,7 +1,7 @@
 import {FC, useContext, useEffect, useState} from 'react';
 import Link from 'next/link';
 import {useTranslation} from 'react-i18next';
-import {Card, CardActionArea, CardContent, CardMedia, IconButton, Tooltip, Typography} from '@material-ui/core';
+import {Box, Card, CardActionArea, CardContent, CardMedia, IconButton, Tooltip, Typography} from '@material-ui/core';
 import Skeleton from '@material-ui/lab/Skeleton';
 import {DeliveryIcon, SafeIcon, SwapIcon} from '@src/components/elements/icons';
 import {CardDataType} from '@root/interfaces/CardData';
@@ -154,13 +154,14 @@ export const GridCard: FC<CardItemProps> = (props) => {
                                         >
                                             {title}
                                         </Typography>
-                                        <Typography
-                                            variant="h6"
-                                            color="initial"
+                                        <Box
+                                            component='span'
+                                            fontSize='1.25rem'
+                                            className='price'
                                         >
                                             {numberPrettier(price)}
                                             <span> {t(`common:${currency.name}`)}</span>
-                                        </Typography>
+                                        </Box>
                                         <Typography variant="caption" noWrap>
                                             {`${city?.name ? `${t(`locations:${region.name}.${city.name}`)}, ` : ''} ${t(`locations:${region.name}.name`)}`}
                                         </Typography>

@@ -1,8 +1,7 @@
 import {FC, useEffect, useState} from 'react';
-import {Typography, useMediaQuery, useTheme} from '@material-ui/core';
+import {Box, useMediaQuery, useTheme} from '@material-ui/core';
 import {useStyles} from './useStyles';
 import {ReadMore} from '@src/components/elements/read_more/readMore';
-import {useTranslation} from 'next-i18next';
 
 export const SEOTextComponent: FC<{text: string}> = ({text}) => {
 
@@ -18,9 +17,13 @@ export const SEOTextComponent: FC<{text: string}> = ({text}) => {
     return (
         <div className={classes.root}>
             <ReadMore descHeight={descHeight} heightLimit={isMdDown ? 50 : 85}>
-                <Typography variant='subtitle2' id="seo-content">
+                <Box
+                    component='p'
+                    fontSize='0.875rem'
+                    id="seo-content"
+                >
                     {text}
-                </Typography>
+                </Box>
             </ReadMore>
         </div>
     );

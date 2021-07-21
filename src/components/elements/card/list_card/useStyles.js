@@ -2,12 +2,16 @@ import {makeStyles} from '@material-ui/core/styles';
 
 export const useStyles = makeStyles((theme) => ({
     root: {
+        backgroundColor: '#FFF',
         border: 0,
         boxShadow: '0px 0px 15px rgba(0, 0, 0, 0.1)',
         borderRadius: '10px',
         zIndex: 20,
         position: 'relative',
         height: 176,
+        [theme.breakpoints.down('sm')]: {
+            height: 165
+        },
         '& .img': {
             borderRadius: '10px 0px 0px 10px',
             backgroundImage: ({cardData}) => `url(${cardData.image ?? '/img/Vector.png'})`,
@@ -42,7 +46,8 @@ export const useStyles = makeStyles((theme) => ({
                     backgroundColor: 'rgba(255, 255, 255, 0.7)',
                     borderRadius: '5px',
                     '& > svg': {
-                        marginRight: '5px'
+                        marginRight: '5px',
+                        height: '12px'
                     }
                 }
             }
@@ -59,43 +64,62 @@ export const useStyles = makeStyles((theme) => ({
                     textDecoration: 'none',
                     '&:hover': {
                         textDecoration: 'underline',
-                        textDecorationColor: '#000'
+                        textDecorationColor: '#4e4e4e'
                     },
-                    '& .MuiTypography-subtitle1': {
-                        fontSize: '18px'
+                    '& h6': {
+                        [theme.breakpoints.down('md')]: {
+                            fontSize: theme.typography.pxToRem(16)
+                        },
+                        [theme.breakpoints.down('sm')]: {
+                            fontSize: theme.typography.pxToRem(14)
+                        }
                     }
                 }
             }
         },
         '& .description': {
+            '& .MuiTypography-subtitle2': {
+                display: '-webkit-box',
+                WebkitLineClamp: 2,
+                overflow: 'hidden',
+                WebkitBoxOrient: 'vertical',
+            },
             '& div.services': {
                 '& div': {
-                    height: '26px',
+                    height: '25px',
                     display: 'flex',
                     alignItems: 'center',
                     flexDirection: 'row',
+                    justifyContent: 'center',
                     float: 'left',
                     padding: '0 15px',
                     borderRadius: '100px',
-                    backgroundColor: '#EEE',
+                    backgroundColor: '#F2F2F2',
                     cursor: 'default',
                     userSelect: 'none',
                     margin: '2px 10px 2px 0',
+                    [theme.breakpoints.down('xs')]: {
+                        padding: 0,
+                        width: 25
+                    },
                     '& p.MuiTypography-body1': {
                         marginLeft: '12px',
-                        fontSize: '12px'
-
+                        fontSize: theme.typography.pxToRem(12)
+                    },
+                    '& svg': {
+                        [theme.breakpoints.down('xs')]: {
+                            height: '12px'
+                        }
                     }
                 }
             }
         },
         '& .location': {
-            '& .MuiTypography-subtitle1': {
-                fontSize: '0.875rem',
+            '& .MuiTypography-subtitle2': {
                 color: '#838383'
             }
         },
-        '& .timer-title': {
+        '& .color-silver': {
             color: '#BDBDBD'
         }
     }

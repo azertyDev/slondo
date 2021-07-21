@@ -42,6 +42,7 @@ export const useStyles = makeStyles((theme) => ({
             position: 'absolute',
             top: 0,
             right: 15,
+            zIndex: 1000,
             '& button': {
                 background: '#F5F5F5',
                 boxShadow: '0px 1px 2px rgba(0, 0, 0, 0.15)',

@@ -67,9 +67,7 @@ export const SidebarMenu: FC<SidebarMenuPropsType> = ({clearAnchor}) => {
                         selected={page === 'rating'}
                         disableGutters
                     >
-                        <Typography variant="subtitle1">
-                            {t('cabinet:rating')}
-                        </Typography>
+                        <ListItemText primary={t('cabinet:rating')} />
                     </ListItem>
                 </CustomBadge>
                 <ListItem
@@ -78,9 +76,7 @@ export const SidebarMenu: FC<SidebarMenuPropsType> = ({clearAnchor}) => {
                     onClick={onButtonClick('subs')}
                     selected={page === 'subs'}
                 >
-                    <Typography variant="subtitle1">
-                        {t('cabinet:subs')}
-                    </Typography>
+                    <ListItemText primary={t('cabinet:subs')} />
                 </ListItem>
             </List>
             <List component="nav" aria-label="cabinet menu" className='menu-item' disablePadding>

@@ -39,7 +39,7 @@ export const PostsTabs: FC<MainContentProps> = (props) => {
     return (
         <div className={classes.root}>
             <Hidden mdDown>
-                <Typography className="title" variant="h2">
+                <Typography className="title" variant="h1">
                     {t('allPosts')}
                 </Typography>
             </Hidden>

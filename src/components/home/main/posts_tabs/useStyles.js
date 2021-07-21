@@ -2,8 +2,10 @@ import {makeStyles} from '@material-ui/core/styles';
 
 export const useStyles = makeStyles((theme) => ({
     root: {
-        '& > h2.title': {
-            marginBottom: '30px'
+        '& > h1.title': {
+            marginBottom: '30px',
+            fontSize: theme.typography.pxToRem(36),
+            fontWeight: 400
         },
         '& div.MuiTabs-root': {
             display: 'flex',
