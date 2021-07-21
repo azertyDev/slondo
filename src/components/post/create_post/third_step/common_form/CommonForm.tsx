@@ -20,7 +20,7 @@ import {FormikField} from '@src/components/elements/formik_field/FormikField';
 import {CustomFormikProvider} from '@src/components/elements/custom_formik_provider/CustomFormikProvider';
 import {FormikTextarea} from '@src/components/elements/formik_textarea/FormikTextarea';
 import {Location} from '@src/components/elements/location/Location';
-import {UserCtx} from "@src/context/UserCtx";
+import {UserCtx} from '@src/context/UserCtx';
 import {useStyles} from './useStyles';
 
 type DefaultParamsPropsType = {
@@ -365,7 +365,7 @@ export const CommonForm: FC<DefaultParamsPropsType> = (props) => {
                                 spacing={1}
                                 justify='space-between'
                             >
-                                <Grid item xs={12} sm={6}>
+                                <Grid item xs={12} sm={6} md={4} className='phone-block'>
                                     <Contacts
                                         t={t}
                                         values={values}
