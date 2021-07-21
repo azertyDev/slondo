@@ -14,9 +14,6 @@ export const PreviewValues: FC<PreviewValuesPropsType> = (props) => {
     const {t, values} = props;
 
     const classes = useStyles();
-
-    // const mockVals = {};
-
     return (
         <div className={classes.prevWrapper}>
             <Grid container spacing={2}>

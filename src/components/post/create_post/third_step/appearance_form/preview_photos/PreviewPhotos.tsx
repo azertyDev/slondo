@@ -1,6 +1,6 @@
 import {Dispatch, FC} from 'react';
-import {Box, Grid, useMediaQuery, useTheme} from "@material-ui/core";
 import {AddCircle} from '@material-ui/icons';
+import {Box, Grid, useMediaQuery, useTheme} from "@material-ui/core";
 import {DragDropContext, resetServerContext, DropResult, Draggable, Droppable} from 'react-beautiful-dnd';
 import {UPLOAD_FILES_LIMIT} from '@src/constants';
 import {FileType} from "@root/interfaces/Post";
@@ -28,7 +28,7 @@ export const PreviewPhotos: FC<PreviewPhotosPropsType> = (props) => {
         return result;
     };
 
-    const sortArray = function (arr) {
+    const sortArray = (arr) => {
         const sorted = arr.filter(item => !!item);
         const nulls = Array.from({length: UPLOAD_FILES_LIMIT - sorted.length}).map(_ => null);
         return [...sorted, ...nulls];
@@ -36,7 +36,6 @@ export const PreviewPhotos: FC<PreviewPhotosPropsType> = (props) => {
 
     const handleOnDragEnd = ({destination, source}: DropResult) => {
         if (!destination) return;
-
         setValues({
             ...values,
             files: sortArray(reorder(files, source.index, destination.index))
@@ -47,7 +46,6 @@ export const PreviewPhotos: FC<PreviewPhotosPropsType> = (props) => {
         let photos: any = Array.from(target.files);
 
         photos = photos.map(photo => ({
-            file: photo,
             url: URL.createObjectURL(photo)
         }));
 
@@ -89,11 +87,11 @@ export const PreviewPhotos: FC<PreviewPhotosPropsType> = (props) => {
                     {...provided.droppableProps}
                     className={classes.dropWrapper}
                 >
-                    {files.map((fileItem, index) => {
+                    {files.map((file, index) => {
                         return <Draggable
                             key={index}
                             index={index}
-                            isDragDisabled={!fileItem}
+                            isDragDisabled={!file}
                             draggableId={index.toString()}
                         >
                             {provided => (
@@ -104,15 +102,15 @@ export const PreviewPhotos: FC<PreviewPhotosPropsType> = (props) => {
                                     ref={provided.innerRef}
                                     {...provided.draggableProps}
                                     {...provided.dragHandleProps}
-                                    className={fileItem ? 'prev-img' : 'upload'}
+                                    className={file ? 'prev-img' : 'upload'}
                                 >
-                                    {fileItem
+                                    {file
                                         ? <Box position='relative'>
                                             <img
-                                                alt={fileItem.file.name}
-                                                src={fileItem.url as string}
+                                                alt={file.url as string}
+                                                src={file.url as string}
                                             />
-                                            <CustomButton onClick={removeFile(fileItem.url)}>
+                                            <CustomButton onClick={removeFile(file.url)}>
                                                 <CloseIcon/>
                                             </CustomButton>
                                         </Box>

@@ -20,13 +20,15 @@ import {FormikField} from "@src/components/elements/formik_field/FormikField";
 import {CustomFormikProvider} from "@src/components/elements/custom_formik_provider/CustomFormikProvider";
 import {useFormik} from "formik";
 import {phoneSchema} from "@root/validation_schemas/authRegSchema";
-import {getErrorMsg, phonePrepare} from "@src/helpers";
+import {getErrorMsg, phonePrepare, urlByParams} from "@src/helpers";
 import {ErrorCtx} from "@src/context";
 import {useStyles} from './useStyles';
+import {useRouter} from "next/router";
 
 enum SettingsModalPropsType {
     'deactivate',
     'deactivate_variants',
+    'edit_post',
     'rise_in_tape',
     'confirm',
     'sold_on_slondo'
@@ -40,8 +42,10 @@ export const SettingsModal: FC<CommonModalType> = (props) => {
         handleRefresh
     } = props;
 
-    const {setErrorMsg} = useContext(ErrorCtx);
+    const {push} = useRouter();
     const {t} = useTranslation('cabinet');
+    const {setErrorMsg} = useContext(ErrorCtx);
+
     const isPost = post.ads_type === 'post';
 
     const initBuyer = {
@@ -61,10 +65,10 @@ export const SettingsModal: FC<CommonModalType> = (props) => {
                 return 'type_buyer_number';
             case 'confirm':
                 return 'deactivate_post';
+            case 'edit_post':
+                return 'edit_post_confirm';
             case 'rise_in_tape':
                 return isPost ? 'rise_post_in_tape' : 'rise_auction_in_tape';
-            default:
-                return '';
         }
     })();
 
@@ -89,6 +93,14 @@ export const SettingsModal: FC<CommonModalType> = (props) => {
                 case 'rise_in_tape':
                     await userAPI.ricePostInTape(post.id);
                     break;
+                case "edit_post":
+                    const postData = await userAPI.getPostById({id: post.id});
+                    const postType = postData.ads_type.mark;
+                    const categoryName = postData.category.name;
+                    const subcategoryName = postData.adsable.sub_category.name;
+                    const type = postData.adsable.type ? `/${postData.adsable.type.name}` : '';
+                    push(`/create/form/${postType}/${categoryName}/${subcategoryName}${type}?post_id=${postData.id}${urlByParams(postData)}`);
+                    return;
             }
             unstable_batchedUpdates(() => {
                 handleClose();
@@ -169,6 +181,17 @@ export const SettingsModal: FC<CommonModalType> = (props) => {
                             primaryTypographyProps={{variant: 'subtitle1'}}
                         />
                     </ListItem>
+                    {isPost && (
+                        <ListItem
+                            button
+                            onClick={handleStatus('edit_post')}
+                        >
+                            <ListItemText
+                                primary={t('edit')}
+                                primaryTypographyProps={{variant: 'subtitle1'}}
+                            />
+                        </ListItem>
+                    )}
                     <ListItem
                         button
                         onClick={handleStatus('rise_in_tape')}
@@ -247,6 +270,7 @@ export const SettingsModal: FC<CommonModalType> = (props) => {
                         </CustomButton>
                     </Box>
                 </>;
+            case 'edit_post':
             case 'confirm':
             case 'rise_in_tape':
                 return <List

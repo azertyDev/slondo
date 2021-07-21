@@ -26,7 +26,7 @@ export const Footer: FC = () => {
                             <Grid item xs={12} md={3} container justify="center">
                                 <ul>
                                     <li>
-                                        <Link href="#">
+                                        <Link href="/">
                                             <a>
                                                 <Typography
                                                     variant="subtitle1"
@@ -38,7 +38,7 @@ export const Footer: FC = () => {
                                         </Link>
                                     </li>
                                     <li>
-                                        <Link href="#">
+                                        <Link href="/">
                                             <a>
                                                 <Typography
                                                     variant="subtitle1"
@@ -54,7 +54,7 @@ export const Footer: FC = () => {
                             <Grid item xs={12} md={3} container justify="center">
                                 <ul>
                                     <li>
-                                        <Link href="#">
+                                        <Link href="/">
                                             <a>
                                                 <Typography
                                                     variant="subtitle1"
@@ -70,7 +70,7 @@ export const Footer: FC = () => {
                             <Grid item xs={12} md={3} container justify="center">
                                 <ul>
                                     <li>
-                                        <Link href="#">
+                                        <Link href="/">
                                             <a>
                                                 <Typography
                                                     variant="subtitle1"

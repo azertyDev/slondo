@@ -95,7 +95,7 @@ const Bottom = (props) => {
                                     >
                                         <Link href="/">
                                             <a>
-                                                <Logo />
+                                                <Logo/>
                                             </a>
                                         </Link>
                                     </Grid>
@@ -111,7 +111,7 @@ const Bottom = (props) => {
                                             className="bottom-category-button header-button"
                                             onClick={handleDrawerShow(true)}
                                         >
-                                            <CategorySortIcon />
+                                            <CategorySortIcon/>
                                             <Typography variant="subtitle2">
                                                 {t('header:categories')}
                                             </Typography>
@@ -126,7 +126,7 @@ const Bottom = (props) => {
                                     className="search-block"
                                 >
                                     <Grid item xs>
-                                        <HeaderSearchForm />
+                                        <HeaderSearchForm/>
                                     </Grid>
                                 </Grid>
                                 <Grid item md={2}>
@@ -139,7 +139,7 @@ const Bottom = (props) => {
                                                 <Typography variant="subtitle2">
                                                     {t('header:createPost')}
                                                 </Typography>
-                                                <AddIcon />
+                                                <AddIcon/>
                                             </CustomButton>
                                         </a>
                                     </Link>
@@ -153,7 +153,7 @@ const Bottom = (props) => {
                                 >
                                     {isAuth
                                         ? <span onClick={handleClick} className='avatar'>
-                                            <Avatar alt="Avatar" src={avatar} />
+                                            <Avatar alt="Avatar" src={avatar}/>
                                         </span>
                                         : <CustomButton
                                             className="bottom-sign-button header-button"
@@ -162,7 +162,7 @@ const Bottom = (props) => {
                                             <Typography variant="subtitle2">
                                                 {t('auth_reg:signIn')}
                                             </Typography>
-                                            <SignIcon />
+                                            <SignIcon/>
                                         </CustomButton>
                                     }
                                 </Grid>
@@ -182,7 +182,7 @@ const Bottom = (props) => {
                                     handleSelectLocation={handleSelectLocation}
                                 />
                             </Box>
-                            <Localization />
+                            <Localization/>
                         </Grid>
                         <Grid
                             item
@@ -196,7 +196,7 @@ const Bottom = (props) => {
                             <Grid item sm={4} md={3}>
                                 <Link href="/promotions">
                                     <a>
-                                        <SurpriseIcon />
+                                        <SurpriseIcon/>
                                         <Typography variant="subtitle1">
                                             {t('actions')}
                                         </Typography>
@@ -206,7 +206,7 @@ const Bottom = (props) => {
                             <Grid item sm={4} md={3}>
                                 <Link href="/help">
                                     <a className={pathname === '/help' ? 'selected' : ''}>
-                                        <QuestionIcon />
+                                        <QuestionIcon/>
                                         <Typography variant="subtitle1">
                                             {t('help')}
                                         </Typography>
@@ -226,20 +226,18 @@ const Bottom = (props) => {
                 id={id}
                 open={open}
                 anchorEl={anchorEl}
-                anchorReference="anchorPosition"
-                anchorPosition={{top: 110, left: 1560}}
                 onClose={handleClose}
                 className={classes.menu}
                 anchorOrigin={{
-                    vertical: 'top',
-                    horizontal: 'left'
+                    vertical: 'bottom',
+                    horizontal: 'right'
                 }}
                 transformOrigin={{
                     vertical: 'top',
                     horizontal: 'right'
                 }}
             >
-                <SidebarMenu clearAnchor={handleClose} />
+                <SidebarMenu clearAnchor={handleClose}/>
             </Popover>
         </div>
     );

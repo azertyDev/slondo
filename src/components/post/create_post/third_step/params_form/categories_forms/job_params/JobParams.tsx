@@ -11,6 +11,7 @@ import {ParametersIcon} from '@src/components/elements/icons';
 import {PostTitle} from '@src/components/post/create_post/third_step/params_form/post_title/PostTitle';
 import {PreviewValues} from '@src/components/post/create_post/third_step/params_form/PreviewValues';
 import {paramsFormSchema} from '@root/validation_schemas/createPostSchemas';
+import {useRouter} from "next/router";
 
 export const JobParams: FC<CommonParamsPropsType> = (props) => {
     const {
@@ -27,9 +28,21 @@ export const JobParams: FC<CommonParamsPropsType> = (props) => {
     const isVacancy = subcategoryName === 'vacancies';
     const hasPosition = !!filters.position;
 
-    const initVals: any = {
-        title: ''
+    const {
+        title,
+        model
+    } = useRouter().query;
+
+    let initVals: any = {
+        title: title ? JSON.parse(title as string) : ''
     };
+
+    if (model) {
+        initVals = {
+            ...initVals,
+            ...JSON.parse(model as string)
+        };
+    }
 
     const formik = useFormik({
         onSubmit,

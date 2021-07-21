@@ -83,6 +83,35 @@ export const getFieldsByFilters = (props: GetFieldsByFiltersProps, categoryName:
     );
 };
 
+export const urlByParams = (postData) => {
+    let url = '';
+
+    const postVals = [
+        'title',
+        'region',
+        'city',
+        'delivery',
+        'exchange',
+        'safe_deal',
+        'currency',
+        'price',
+        'available_days',
+        'available_start_time',
+        'available_end_time',
+        'description',
+        'model',
+        'images'
+    ];
+
+    Object.keys(postData).forEach(key => {
+        if (!!postData[key] && postVals.some(k => k === key)) {
+            url = url.concat(`&${key}=${JSON.stringify(postData[key])}`);
+        }
+    });
+
+    return url;
+};
+
 export const toUrlParams = (params) => {
     if (params) {
         let url = '';

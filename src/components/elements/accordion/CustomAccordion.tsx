@@ -12,8 +12,8 @@ import {
 import {CustomButton} from '@src/components/elements/custom_button/CustomButton';
 import {useStyles} from './useStyles';
 
-
 type AccordionComponentPropsType = {
+    isFetch?: boolean,
     open: boolean,
     isPreview: boolean,
     icon: any,
@@ -25,6 +25,7 @@ type AccordionComponentPropsType = {
 
 export const CustomAccordion: FC<AccordionComponentPropsType> = (props) => {
     const {
+        isFetch,
         open,
         icon,
         isPreview,
@@ -58,6 +59,7 @@ export const CustomAccordion: FC<AccordionComponentPropsType> = (props) => {
                         {!isPreview && (
                             <Grid item xs={12} container justify='flex-end'>
                                 <CustomButton
+                                    disabled={isFetch}
                                     type='submit'
                                     className='nav-button'
                                 >

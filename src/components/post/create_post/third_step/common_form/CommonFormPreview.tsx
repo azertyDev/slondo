@@ -1,7 +1,7 @@
 import {FC} from 'react';
 import {WithT} from 'i18next';
 import {Help} from '@material-ui/icons';
-import {Checkbox, Typography} from '@material-ui/core';
+import {Checkbox, Hidden, Typography} from '@material-ui/core';
 import {numberPrettier, weekDaysHelper} from '@src/helpers';
 import {useStyles} from './useStyles';
 
@@ -32,69 +32,69 @@ export const CommonFormPreview: FC<DefaultParamsPropsType> = (props) => {
     return (
         <div className={classes.root}>
             {isAuction
-             ? <div>
-                 <Typography variant="subtitle1">
-                     <strong>
-                         {t('filters:start_price')}:&nbsp;
-                     </strong>
-                     {numberPrettier(values.price)}
-                 </Typography>
-                 <Typography variant="subtitle1">
-                     <strong>
-                         {t('filters:auction_duration')}:&nbsp;
-                     </strong>
-                     {auction.duration.hours}
-                 </Typography>
-                 {isAdvanceAuction && (
-                     <div>
-                         <Typography variant="subtitle1">
-                             <strong>
-                                 {t('filters:reserve_price')}:&nbsp;
-                             </strong>
-                             {auction.reserve_price}
-                         </Typography>
-                         {auction.price_buy_now.value && (
-                             <Typography variant="subtitle1">
-                                 <strong>
-                                     {t('filters:buy_now')}:&nbsp;
-                                 </strong>
-                                 {auction.price_buy_now.value}
-                             </Typography>
-                         )}
-                         {auction.auto_renewal && (
-                             <div className='auction-params'>
-                                 <Checkbox
-                                     disabled
-                                     color='primary'
-                                     checked={auction.auto_renewal}
-                                 />
-                                 <Typography variant="subtitle1">
-                                     {t('filters:auto_renewal')}
-                                 </Typography>
-                             </div>
-                         )}
-                         {auction.offer_the_price && (
-                             <div className='auction-params'>
-                                 <Checkbox
-                                     disabled
-                                     color='primary'
-                                     checked={auction.offer_the_price}
-                                 />
-                                 <Typography variant="subtitle1">
-                                     {t('filters:offer_price')}
-                                 </Typography>
-                             </div>
-                         )}
-                     </div>
-                 )}
-             </div>
-             : <Typography variant="subtitle1">
-                 <strong>
-                     {t(`filters:${priceLabel}`)}:&nbsp;
-                 </strong>
-                 {numberPrettier(values.price)}&nbsp;
-                 {values.currency.name}
-             </Typography>}
+                ? <div>
+                    <Typography variant="subtitle1">
+                        <strong>
+                            {t('filters:start_price')}:&nbsp;
+                        </strong>
+                        {numberPrettier(values.price)}
+                    </Typography>
+                    <Typography variant="subtitle1">
+                        <strong>
+                            {t('filters:auction_duration')}:&nbsp;
+                        </strong>
+                        {auction.duration.hours}
+                    </Typography>
+                    {isAdvanceAuction && (
+                        <div>
+                            <Typography variant="subtitle1">
+                                <strong>
+                                    {t('filters:reserve_price')}:&nbsp;
+                                </strong>
+                                {auction.reserve_price}
+                            </Typography>
+                            {auction.price_buy_now.value && (
+                                <Typography variant="subtitle1">
+                                    <strong>
+                                        {t('filters:buy_now')}:&nbsp;
+                                    </strong>
+                                    {auction.price_buy_now.value}
+                                </Typography>
+                            )}
+                            {auction.auto_renewal && (
+                                <div className='auction-params'>
+                                    <Checkbox
+                                        disabled
+                                        color='primary'
+                                        checked={auction.auto_renewal}
+                                    />
+                                    <Typography variant="subtitle1">
+                                        {t('filters:auto_renewal')}
+                                    </Typography>
+                                </div>
+                            )}
+                            {auction.offer_the_price && (
+                                <div className='auction-params'>
+                                    <Checkbox
+                                        disabled
+                                        color='primary'
+                                        checked={auction.offer_the_price}
+                                    />
+                                    <Typography variant="subtitle1">
+                                        {t('filters:offer_price')}
+                                    </Typography>
+                                </div>
+                            )}
+                        </div>
+                    )}
+                </div>
+                : <Typography variant="subtitle1">
+                    <strong>
+                        {t(`filters:${priceLabel}`)}:&nbsp;
+                    </strong>
+                    {numberPrettier(values.price)}&nbsp;
+                    {values.currency.name}
+                </Typography>}
             <div className='post-options'>
                 {values.safe_deal && (
                     <div>
@@ -108,17 +108,19 @@ export const CommonFormPreview: FC<DefaultParamsPropsType> = (props) => {
                             color='primary'
                             checked={values.safe_deal}
                         />
-                        <Help className="question-mark"/>
-                        <Typography variant="subtitle2">
-                            Примечание: При подключении услуги «Безопасный
-                            торг». Ваша сделка защищена. Стоимость
-                            услуги составляет n%.&nbsp;
-                            <a href="#">
+                        <Hidden xsDown>
+                            <Help className="question-mark"/>
+                            <Typography variant="subtitle2">
+                                Примечание: При подключении услуги «Безопасный
+                                торг». Ваша сделка защищена. Стоимость
+                                услуги составляет n%.&nbsp;
+                                <a href="#">
                                 <span className="safe-auction-rules">
                                     {t('common:safe_deal_rules')}
                                 </span>
-                            </a>
-                        </Typography>
+                                </a>
+                            </Typography>
+                        </Hidden>
                     </div>
                 )}
                 {values.delivery && (
@@ -133,17 +135,20 @@ export const CommonFormPreview: FC<DefaultParamsPropsType> = (props) => {
                             color='primary'
                             checked={values.delivery}
                         />
-                        <Help className="question-mark"/>
-                        <Typography variant="subtitle2">
-                            Примечание: Доставка осуществляется
-                            за Ваш счет. В случае невыполнения доставки,
-                            Вы можете быть заблокированы.&nbsp;
-                            <a href="#">
+                        <Hidden xsDown>
+                            <Help className="question-mark"/>
+                            <Typography variant="subtitle2">
+                                Примечание: Доставка осуществляется
+                                за Ваш счет. В случае невыполнения доставки,
+                                Вы можете быть заблокированы.&nbsp;
+                                <a href="#">
                                 <span className="safe-auction-rules">
                                     {t('common:delivery_rules')}
                                 </span>
-                            </a>
-                        </Typography>
+                                </a>
+                            </Typography>
+                        </Hidden>
+
                     </div>
                 )}
                 {values.exchange && (
@@ -158,11 +163,13 @@ export const CommonFormPreview: FC<DefaultParamsPropsType> = (props) => {
                             color='primary'
                             checked={values.exchange}
                         />
-                        <Help className="question-mark"/>
-                        <Typography variant="subtitle2">
-                            Примечание: Вы принимаете предложения от
-                            других пользователей на обмен.
-                        </Typography>
+                        <Hidden xsDown>
+                            <Help className="question-mark"/>
+                            <Typography variant="subtitle2">
+                                Примечание: Вы принимаете предложения от
+                                других пользователей на обмен.
+                            </Typography>
+                        </Hidden>
                     </div>
                 )}
             </div>
@@ -184,7 +191,7 @@ export const CommonFormPreview: FC<DefaultParamsPropsType> = (props) => {
                     {values.description}
                 </Typography>
             </div>
-            <div>
+            <div className='phone-num'>
                 <Typography variant="subtitle1">
                     <strong>
                         {t('filters:own_phone')}:&nbsp;

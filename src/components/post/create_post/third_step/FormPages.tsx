@@ -1,4 +1,5 @@
 import {FC, useContext, useEffect, useState} from 'react';
+import {unstable_batchedUpdates} from 'react-dom';
 import {useRouter} from 'next/router';
 import {Typography} from '@material-ui/core';
 import {useTranslation} from 'next-i18next';
@@ -25,6 +26,8 @@ export const FormPages: FC = () => {
     const {setErrorMsg} = useContext(ErrorCtx);
 
     const {asPath, query, push} = useRouter();
+
+    const {post_id} = query;
     const [_, postTypeName, categoryName, subcategoryName, typeName] = query.slug as string[];
 
     const {category, subcategory, type} = getCategoriesByParams(
@@ -59,7 +62,7 @@ export const FormPages: FC = () => {
     const [isSuccess, setIsSuccess] = useState(false);
     const [isPreview, setIsPreview] = useState(false);
     const [post, setPost] = useState(initPost);
-    const [currentFormIndex, setCurrentFormIndex] = useState(2);
+    const [currentFormIndex, setCurrentFormIndex] = useState(3);
     const [filters, setFilters] = useState<any>({});
     const {colors, color, ...filtersData} = filters;
 
@@ -95,10 +98,15 @@ export const FormPages: FC = () => {
                 }
             }
 
-            setIsFetch(false);
-            setFilters(normalizeFiltersByCategory(fetchedData, type));
+            unstable_batchedUpdates(() => {
+                setIsFetch(false);
+                setFilters(normalizeFiltersByCategory(fetchedData, type));
+            });
         } catch (e) {
-            setErrorMsg(e.message);
+            unstable_batchedUpdates(() => {
+                setIsFetch(false);
+                setErrorMsg(e.message);
+            });
         }
     };
 
@@ -145,15 +153,19 @@ export const FormPages: FC = () => {
             setIsFetch(true);
 
             form.append('data', JSON.stringify(data));
-            photos.forEach(photo => form.append('files[]', photo.file));
+            photos.forEach(photo => form.append('files[]', photo));
 
-            await userAPI.createPost(form);
+            post_id ? await userAPI.editPost(form, post_id) : await userAPI.createPost(form);
 
-            setIsFetch(false);
-            setIsSuccess(true);
+            unstable_batchedUpdates(() => {
+                setIsFetch(false);
+                setIsSuccess(true);
+            });
         } catch (e) {
-            setIsFetch(false);
-            setErrorMsg(e.message);
+            unstable_batchedUpdates(() => {
+                setIsFetch(false);
+                setErrorMsg(e.message);
+            });
         }
     };
 
@@ -203,7 +215,6 @@ export const FormPages: FC = () => {
                         </div>
                         <div>
                             <CommonForm
-                                asPath={asPath}
                                 postType={postType}
                                 isPreview={isPreview}
                                 setIsPreview={setIsPreview}

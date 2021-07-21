@@ -1,7 +1,8 @@
-import {FC, useEffect} from 'react';
+import {FC, useContext, useEffect, useState} from 'react';
+import axios from "axios";
 import {useFormik} from 'formik';
 import {Typography} from '@material-ui/core';
-import {UPLOAD_FILES_LIMIT} from "@src/constants";
+import {UPLOAD_FILES_LIMIT} from '@src/constants';
 import {PreviewPhotos} from './preview_photos/PreviewPhotos';
 import {CustomAccordion} from '@src/components/elements/accordion/CustomAccordion';
 import {IdNameType} from '@root/interfaces/Post';
@@ -9,6 +10,8 @@ import {ViewIcon} from '@src/components/elements/icons';
 import {appearanceSchema} from '@root/validation_schemas/createPostSchemas';
 import {CustomFormikProvider} from '@src/components/elements/custom_formik_provider/CustomFormikProvider';
 import {useTranslation} from 'react-i18next';
+import {useRouter} from "next/router";
+import {ErrorCtx} from "@src/context";
 import {useStyles} from './useStyles';
 
 type AppearanceFormPropsType = {
@@ -36,21 +39,52 @@ export const AppearanceForm: FC<AppearanceFormPropsType> = (props) => {
     const isJob = categoryName === 'job';
 
     const {t} = useTranslation('filters');
+    const {images} = useRouter().query;
+    const {setErrorMsg} = useContext(ErrorCtx);
 
-    const onSubmit = ({files, color}) => {
+    const [isFetch, setIsFetch] = useState(false);
+
+    const fetchFiles = (urls: { url: string }[]) => {
+        try {
+            return Promise.all(urls.filter(url => !!url).map(file =>
+                axios
+                    .get(file.url, {responseType: 'arraybuffer'})
+                    .then(res => new Blob([res.data]))
+                    .catch(({response}) => {
+                        throw (response.data.message);
+                    })
+            ));
+        } catch (e) {
+            setErrorMsg(e.message);
+        }
+    };
+
+    const onSubmit = async ({files, color}) => {
+        setIsFetch(true);
         const appearance: { photos: any, color_id?: number } = {
-            photos: files.filter(item => item?.file)
+            photos: await fetchFiles(files)
         };
+        setIsFetch(false);
         if (color) appearance.color_id = color.id;
         handleSubmit({appearance});
         handleNextFormOpen();
+    };
+
+    const initPhotos = () => {
+        if (images) {
+            const imgs = JSON.parse(images as string).map(img => ({url: img.url.default}));
+            const nulls = Array.from({length: UPLOAD_FILES_LIMIT - imgs.length}).map(_ => null);
+            return [...imgs, ...nulls];
+        } else {
+            return Array.from({length: UPLOAD_FILES_LIMIT}).map(_ => null);
+        }
     };
 
     const formik = useFormik({
         onSubmit,
         initialValues: {
             color: null,
-            files: Array.from({length: UPLOAD_FILES_LIMIT}).map(() => null)
+            files: initPhotos()
         },
         validationSchema: !isJob ? appearanceSchema : null
     });
@@ -88,6 +122,7 @@ export const AppearanceForm: FC<AppearanceFormPropsType> = (props) => {
     return (
         <CustomFormikProvider formik={formik}>
             <CustomAccordion
+                isFetch={isFetch}
                 icon={<ViewIcon/>}
                 isPreview={isPreview}
                 open={currentFormIndex === formIndex}
@@ -105,6 +140,9 @@ export const AppearanceForm: FC<AppearanceFormPropsType> = (props) => {
                                         <strong>
                                             {t('color')}:
                                         </strong>
+                                    </Typography>
+                                    <Typography variant='subtitle2'>
+                                        {t(values.color.name)}
                                     </Typography>
                                     <div
                                         className='color'

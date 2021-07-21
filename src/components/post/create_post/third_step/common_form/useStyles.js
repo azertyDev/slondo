@@ -2,6 +2,7 @@ import {makeStyles} from '@material-ui/core/styles';
 
 export const useStyles = makeStyles((theme) => ({
     root: {
+        width: '100%',
         '& div.auction-params': {
             display: 'flex',
             alignItems: 'center'
@@ -13,7 +14,8 @@ export const useStyles = makeStyles((theme) => ({
             '& > div': {
                 display: 'flex',
                 alignItems: 'center'
-            }
+            },
+            margin: '11px 0'
         },
         '& div.location-wrapper': {
             display: 'flex',
@@ -27,8 +29,18 @@ export const useStyles = makeStyles((theme) => ({
             }
         },
         '& div.description-wrapper': {
+            marginBottom: '20px',
             '& p': {
                 wordBreak: 'break-all'
+            }
+        },
+        '& div.phone-num': {
+            marginBottom: '20px'
+        },
+        '& div.phone-block': {
+            marginTop: '12px',
+            '& .MuiFormControl-fullWidth': {
+                width: '175px'
             }
         }
     }
