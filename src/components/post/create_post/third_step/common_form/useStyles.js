@@ -2,6 +2,7 @@ import {makeStyles} from '@material-ui/core/styles';
 
 export const useStyles = makeStyles((theme) => ({
     root: {
+        width: '100%',
         '& div.auction-params': {
             display: 'flex',
             alignItems: 'center'
@@ -35,6 +36,12 @@ export const useStyles = makeStyles((theme) => ({
         },
         '& div.phone-num': {
             marginBottom: '20px'
+        },
+        '& div.phone-block': {
+            marginTop: '12px',
+            '& .MuiFormControl-fullWidth': {
+                width: '170px'
+            }
         }
     }
 }));

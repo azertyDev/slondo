@@ -80,6 +80,7 @@ export const useStyles = makeStyles((theme) => ({
         },
         '& div.photos-wrapper': {
             maxHeight: '270px',
+            marginBottom: '15px',
             [theme.breakpoints.down('xs')]: {
                 maxHeight: '473px'
             },
