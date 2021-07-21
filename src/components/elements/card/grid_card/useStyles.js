@@ -146,6 +146,9 @@ export const useStyles = makeStyles((theme) => ({
                     }
                 }
             }
+        },
+        '& span.price': {
+            color: '#4e4e4e'
         }
     },
     skeleton: {

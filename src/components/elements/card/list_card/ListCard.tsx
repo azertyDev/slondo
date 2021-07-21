@@ -25,18 +25,19 @@ export const ListCard: FC<ListCardPropsType> = ({cardData}) => {
 
     const isAuction = cardData.ads_type === 'auc' || cardData.ads_type === 'exauc';
     const hasBet = !!cardData.auction?.number_of_bets;
+    const hasService = !!cardData.delivery || !!cardData.available_days || !!cardData.exchange || !!cardData.safe_deal || !!cardData.auction?.auto_renewal;
     const isXsDown = useMediaQuery(useTheme().breakpoints.down('xs'));
 
     const timer = ({days, hours, minutes, seconds, completed}) => (
         <Box>
-            <Typography variant="subtitle2" color="initial" className="timer-title">
+            <Typography variant="subtitle2" color="initial" className='color-silver'>
                 {completed ? 'Торги окончены' : 'Окончание торгов через: '}&nbsp;
             </Typography>
             {!completed && (
                 <Box display="flex">
                     <Typography variant="subtitle2" className="timer">
-                        {formatNumber(days)}д
-                        : {formatNumber(hours)}ч
+                        {formatNumber(days)}д &nbsp;
+                        {formatNumber(hours)}ч
                         : {formatNumber(minutes)}м
                         : {formatNumber(seconds)}с
                     </Typography>
@@ -55,7 +56,7 @@ export const ListCard: FC<ListCardPropsType> = ({cardData}) => {
     const classes = useStyles({cardData});
     return (
         <Grid container className={classes.root}>
-            <Grid item xs={5} sm={4} md={3} className="img">
+            <Grid item xs={6} sm={4} md={3} className="img">
                 <Typography
                     noWrap
                     color="initial"
@@ -95,13 +96,13 @@ export const ListCard: FC<ListCardPropsType> = ({cardData}) => {
                     </span>
                 </Box>
             </Grid>
-            <Grid item xs={7} sm={8} md={9} container alignContent='space-between' className="content">
-                <Grid item xs={8} className="post-title">
+            <Grid item xs={6} sm={8} md={9} container alignContent='space-between' className="content">
+                <Grid item xs={12} sm={8} className="post-title">
                     <Link href={url}>
                         <a target='_blank'>
                             <Typography
                                 noWrap
-                                variant="subtitle1"
+                                variant="h6"
                                 color="initial"
                             >
                                 {cardData.title}
@@ -110,59 +111,59 @@ export const ListCard: FC<ListCardPropsType> = ({cardData}) => {
                     </Link>
                 </Grid>
                 <Grid item xs={12} sm={8} className="description">
-                    <Box className='services'>
-                        {!!cardData.available_days && (
-                            <div className="available">
-                                <PhoneIcon />
-                                {!isXsDown && <Typography variant="body1">
-                                    {weekDaysHelper(cardData.available_days, t)}{' '}
-                                    {`${cardData.available_start_time}-${cardData.available_end_time}`}
-                                </Typography>}
-                            </div>
-                        )}
-                        {!!cardData.exchange && (
-                            <Tooltip title='Возможен обмен' arrow>
-                                <div className="exchange">
-                                    <SwapIcon />
+                    {!hasService
+                        ? <Typography variant='subtitle2'>
+                            {cardData.description}
+                        </Typography>
+                        : <Box className='services'>
+                            {!!cardData.delivery && (
+                                <div className="delivery">
+                                    <DeliveryIcon />
                                     {!isXsDown && <Typography variant="body1">
-                                        Возможен обмен
+                                        Есть доставка
                                     </Typography>}
                                 </div>
-                            </Tooltip>
-                        )}
-                        {!!cardData.delivery && (
-                            <div className="delivery">
-                                <DeliveryIcon />
-                                {!isXsDown && <Typography variant="body1">
-                                    Есть доставка
-                                </Typography>}
-                            </div>
-                        )}
-                        {!!cardData.safe_deal && (
-                            <div className="safe_deal">
-                                <SafeIcon />
-                                {!isXsDown && <Typography variant="body1">
-                                    Безопасная покупка
-                                </Typography>}
-                            </div>
-                        )}
-                        {!!cardData.auction?.auto_renewal && (
-                            <div className="safe_deal">
-                                <RenewalIcon />
-                                {!isXsDown && <Typography variant="body1">
-                                    Автопродление
-                                </Typography>}
-                            </div>
-                        )}
-                    </Box>
-                    {/*{cardData.description && (*/}
-                    {/*    <Typography noWrap variant='subtitle2'>*/}
-                    {/*        {cardData.description}*/}
-                    {/*    </Typography>*/}
-                    {/*)}*/}
+                            )}
+                            {!!cardData.available_days && (
+                                <div className="available">
+                                    <PhoneIcon />
+                                    {!isXsDown && <Typography variant="body1">
+                                        {weekDaysHelper(cardData.available_days, t)}{' '}
+                                        {`${cardData.available_start_time}-${cardData.available_end_time}`}
+                                    </Typography>}
+                                </div>
+                            )}
+                            {!!cardData.exchange && (
+                                <Tooltip title='Возможен обмен' arrow>
+                                    <div className="exchange">
+                                        <SwapIcon />
+                                        {!isXsDown && <Typography variant="body1">
+                                            Возможен обмен
+                                        </Typography>}
+                                    </div>
+                                </Tooltip>
+                            )}
+                            {!!cardData.safe_deal && (
+                                <div className="safe_deal">
+                                    <SafeIcon />
+                                    {!isXsDown && <Typography variant="body1">
+                                        Безопасная покупка
+                                    </Typography>}
+                                </div>
+                            )}
+                            {!!cardData.auction?.auto_renewal && (
+                                <div className="safe_deal">
+                                    <RenewalIcon />
+                                    {!isXsDown && <Typography variant="body1">
+                                        Автопродление
+                                    </Typography>}
+                                </div>
+                            )}
+                        </Box>
+                    }
                 </Grid>
-                {cardData.ads_type !== 'post' && (
-                    <Grid item xs={12} container>
+                {isAuction && (
+                    <Grid item xs={12} container spacing={isXsDown ? 1 : 0}>
                         <Grid item xs={12} sm={6} md={6}>
                             <Countdown
                                 date={new Date(cardData.expiration_at).getTime()}
@@ -170,38 +171,52 @@ export const ListCard: FC<ListCardPropsType> = ({cardData}) => {
                             />
                         </Grid>
                         <Grid
-                            item xs={12} sm={6} md={6}
                             container
-                            justify={isXsDown ? 'flex-start' : 'flex-end'}
                             alignItems='center'
+                            item xs={12} sm={6} md={6}
+                            justify={isXsDown ? 'flex-start' : 'flex-end'}
                         >
                             <Typography variant='subtitle2'>
-                                Ставки: {cardData.auction?.number_of_bets}
+                                <span className='color-silver'>
+                                    Ставок:
+                                </span>&nbsp;
+                                {cardData.auction?.number_of_bets}
                             </Typography>
                         </Grid>
                     </Grid>
                 )}
                 <Grid item xs={12} container>
-                    {
-                        !isXsDown &&
-                        <Grid item sm={6} direction='column' zeroMinWidth className='location'>
-                            <Typography variant='subtitle2' noWrap>
-                                {formatted_date}
-                            </Typography>
-                            <Typography
-                                variant="subtitle2"
-                                color="initial"
-                                noWrap
-                            >
-                                {`${t(`locations:${cardData.region.name}.name`) ?? ''}`}
-                                {cardData.city?.name ? `, ${t(`locations:${cardData.region.name}.${cardData.city.name}`)}` : ''}
-                            </Typography>
-                        </Grid>
+                    {!isXsDown &&
+                    <Grid
+                        item
+                        sm={6}
+                        container
+                        zeroMinWidth
+                        direction='column'
+                        className='location'
+                        justify='center'
+                    >
+                        <Typography variant='subtitle2' noWrap>
+                            {formatted_date}
+                        </Typography>
+                        <Typography
+                            variant="subtitle2"
+                            color="initial"
+                            noWrap
+                        >
+                            {`${t(`locations:${cardData.region.name}.name`) ?? ''}`}
+                            {cardData.city?.name ? `, ${t(`locations:${cardData.region.name}.${cardData.city.name}`)}` : ''}
+                        </Typography>
+                    </Grid>
                     }
-                    <Grid item xs={12} sm={6} container direction='column' alignItems='flex-end' zeroMinWidth>
+                    <Grid
+                        zeroMinWidth
+                        item xs={12} sm={6}
+                        container direction='column' alignItems={isXsDown ? 'flex-start' : 'flex-end'}
+                    >
                         {isAuction
                             ? hasBet && <>
-                            <Typography variant='subtitle1'>
+                            <Typography variant='subtitle1' className='color-silver'>
                                 {t('common:currentRate')}
                             </Typography>
                             <Typography

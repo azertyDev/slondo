@@ -79,8 +79,9 @@ export const useStyles = makeStyles((theme) => ({
                     '& > span.category-name': {
                         padding: '5px',
                         borderRadius: '100px',
-                        '& .MuiTypography-subtitle1': {
+                        '& .MuiTypography-h4': {
                             textAlign: 'center',
+                            fontSize: '1rem',
                             [theme.breakpoints.down('xs')]: {
                                 fontSize: 'calc(12px + 6 * (100vw / 1280))',
                                 lineHeight: '16px'

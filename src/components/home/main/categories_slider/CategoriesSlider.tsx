@@ -35,7 +35,7 @@ export const CategoriesSlider: FC = () => {
                                             </div>
                                         </div>
                                         <span className="category-name">
-                                            <Typography variant='subtitle1'>
+                                            <Typography variant='h4'>
                                                 {ctgrName}
                                             </Typography>
                                         </span>

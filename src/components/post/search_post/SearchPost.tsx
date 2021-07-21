@@ -5,7 +5,7 @@ import {getSEOContent} from '@src/common_data/seo_content';
 import {getCtgrsByCyrillicNames, getSearchTxt} from '@src/helpers';
 import {SearchForm} from '@src/components/post/search_post/search_form/SearchForm';
 import {SearchResult} from '@src/components/post/search_post/search_result/SearchResult';
-import {Grid, Hidden} from '@material-ui/core';
+import {Grid, Hidden, useMediaQuery, useTheme} from '@material-ui/core';
 import {HomeSidebar} from '@src/components/home/main/home_sidebar/HomeSideBar';
 import {useStyles} from './useStyles';
 
@@ -21,6 +21,9 @@ export const SearchPost: FC<SearchPostsByFiltersPropsType> = (props) => {
         locale,
         userLocation
     } = props;
+
+    const theme = useTheme();
+    const isSm = useMediaQuery(theme.breakpoints.down('sm'));
 
     const {t} = useTranslation('filters');
     const {user_location, categories, ...urlParams} = query;
@@ -53,7 +56,7 @@ export const SearchPost: FC<SearchPostsByFiltersPropsType> = (props) => {
     return (
         <MainLayout title={title} description={description} seoTxt={seoTxt}>
             <div className={classes.root}>
-                <Grid container spacing={2}>
+                <Grid container spacing={isSm ? 0 : 2}>
                     <Grid item xs={12} sm={12} lg={9} zeroMinWidth>
                         {/*<Typography variant='h5'>*/}
                         {/*    {t('common:youLookingFor')}*/}
