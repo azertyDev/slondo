@@ -146,6 +146,8 @@ export const DetailedPostContainerModal: FC<DetailedPostViewPropsType> = (props)
         open && !!auctionId && setFetchedBetsData();
     }, [auctionId, open]);
 
+    // console.log(isUserWinner);
+    // console.log(post);
     return (
         <>
             <DetailedPostModal
@@ -158,6 +160,7 @@ export const DetailedPostContainerModal: FC<DetailedPostViewPropsType> = (props)
                 isBetsFetch={isBetsFetch}
                 handleReject={handleReject}
                 handleAccept={handleAccept}
+                handleOpenRating={handleOpenRating}
                 handleOffersOpen={handleOffersOpen}
                 setFetchedBetsData={setFetchedBetsData}
                 handleCloseDetailModal={handleCloseDetailModal}
@@ -170,7 +173,7 @@ export const DetailedPostContainerModal: FC<DetailedPostViewPropsType> = (props)
                 cancelTxt={t('common:cancel')}
                 confirmTxt={t('common:perform')}
             />
-            {userForRating && (
+            {!!userForRating && (
                 <RatingModal
                     title={t('rate_seller')}
                     open={ratingOpen}

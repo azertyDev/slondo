@@ -11,6 +11,7 @@ import {paramsFormSchema} from '@root/validation_schemas/createPostSchemas';
 import {CheckboxSelect} from '@src/components/elements/checkbox_select/CheckboxSelect';
 import {PreviewValues} from '@src/components/post/create_post/third_step/params_form/PreviewValues';
 import {getFieldsByFilters} from '@src/helpers';
+import {useRouter} from "next/router";
 
 
 export const ElectronicsParams: FC<CommonParamsPropsType> = (props) => {
@@ -26,10 +27,25 @@ export const ElectronicsParams: FC<CommonParamsPropsType> = (props) => {
     } = props;
 
     const isMonitors = type.name === 'monitors';
+    const {
+        title,
+        model,
+        usb_connector,
+        build_in_speakers
+    } = useRouter().query;
 
-    const initVals: any = {
-        title: ''
+    let initVals: any = {
+        title: title ? JSON.parse(title as string) : '',
+        build_in_speakers: !!build_in_speakers,
+        usb_connector: !!usb_connector
     };
+
+    if (model) {
+        initVals = {
+            ...initVals,
+            ...JSON.parse(model as string)
+        };
+    }
 
     if (isMonitors) {
         initVals.build_in_speakers = false;
@@ -94,7 +110,7 @@ export const ElectronicsParams: FC<CommonParamsPropsType> = (props) => {
                                     <CheckboxSelect
                                         name='build_in_speakers'
                                         labelTxt={t('build_in_speakers')}
-                                        checked={values.build_in_speakers}
+                                        checked={!!values.build_in_speakers}
                                         handleCheckbox={handleCheckbox}
                                     />
                                 </Grid>
@@ -107,7 +123,7 @@ export const ElectronicsParams: FC<CommonParamsPropsType> = (props) => {
                                     <CheckboxSelect
                                         name='usb_connector'
                                         labelTxt={t('usb_connector')}
-                                        checked={values.usb_connector}
+                                        checked={!!values.usb_connector}
                                         handleCheckbox={handleCheckbox}
                                     />
                                 </Grid>

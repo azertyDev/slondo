@@ -244,13 +244,7 @@ export const MyPosts: FC = () => {
                         ? <CircularProgress color="primary"/>
                         : secTabPosts.map((data) => (
                             <Box mb={3} key={data.id} borderRadius='10px 10px 0px 0px'>
-                                <CabinetCard
-                                    cardData={data}
-                                    handleDetailedOpen={handleDetailedOpen(data)}
-                                    handleSettingsOpen={handleSettingsOpen(data)}
-                                    handleNotificationsOpen={handleNotificationsOpen(data)}
-
-                                />
+                                <CabinetCard cardData={data}/>
                             </Box>
                         ))}
                 </CustomTabPanel>

@@ -4,7 +4,7 @@ export const useStyles = makeStyles(() => ({
     root: {
         '& h6.menu-title': {
             fontWeight: '600',
-            margin: '0 0 30px 30px'
+            marginBottom: '30px'
         },
         '& div.MuiTabs-root': {
             minHeight: 28,

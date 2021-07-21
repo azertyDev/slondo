@@ -6,7 +6,6 @@ import {Box, CircularProgress, Grid, Paper, Typography} from '@material-ui/core'
 import {
     DeliveryIcon,
     ExchangeIcon,
-    LetterIcon,
     LocationIcon,
     PhoneIcon,
     RenewalIcon,
@@ -19,8 +18,6 @@ import {numberPrettier} from '@src/helpers';
 import {UserCtx} from "@src/context/UserCtx";
 import {UserCard} from "@src/components/cabinet/components/user_card/UserCard";
 import {useStyles} from './useStyles';
-import {RatingModal} from "@src/components/elements/rating_modal/RatingModal";
-import {useModal} from "@src/hooks";
 
 type DetailedPostViewPropsType = {
     isFetch: boolean,
@@ -33,6 +30,7 @@ type DetailedPostViewPropsType = {
     handleOffersOpen: () => void,
     handleReject: () => void,
     handleAccept: () => void,
+    handleOpenRating: () => void,
     handleCloseDetailModal: () => void
 } & WithT;
 
@@ -45,6 +43,7 @@ export const DetailedPostModal: FC<DetailedPostViewPropsType> = (props) => {
         isFetch,
         betsCount,
         isBetsFetch,
+        handleOpenRating,
         setFetchedBetsData,
         handleCloseDetailModal,
         handleOffersOpen,
@@ -66,8 +65,6 @@ export const DetailedPostModal: FC<DetailedPostViewPropsType> = (props) => {
 
     const {user} = useContext(UserCtx);
 
-    const {modalOpen: ratingOpen, handleModalOpen: handleOpenRating, handleModalClose: handleCloseRating} = useModal();
-
     const auctionId = auction?.id;
     const offer = auction?.offer;
     const offerUser = offer?.user;
@@ -88,7 +85,6 @@ export const DetailedPostModal: FC<DetailedPostViewPropsType> = (props) => {
         userData = buyer;
     }
 
-    console.log(post);
     const classes = useStyles();
     return (
         <div>
@@ -270,12 +266,6 @@ export const DetailedPostModal: FC<DetailedPostViewPropsType> = (props) => {
                             </Grid>
                         </Grid>
                     </Grid>
-                    <RatingModal
-                        open={ratingOpen}
-                        user={userData}
-                        title={t('rate_buyer')}
-                        handleCloseRating={handleCloseRating}
-                    />
                 </div>
             </CabinetModal>
         </div>

@@ -1,4 +1,4 @@
-import React, {FC, ReactElement, ReactNode} from 'react';
+import {FC, ReactElement, ReactNode} from 'react';
 import {useStyles} from './useStyles';
 import {CustomModal} from '@src/components/elements/custom_modal/CustomModal';
 import {CustomSnackbar} from '@src/components/elements/snackbar/Snackbar';

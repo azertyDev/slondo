@@ -7,12 +7,12 @@ import {cookies} from '@src/helpers';
 import {LocationsType} from "@root/interfaces/Locations";
 
 const production = 'https://backend.slondo.uz/api/';
-const uztelecom = 'https://backend.testb.uz/api/';
+const testb = 'https://backend.testb.uz/api/';
 const local = 'http://192.168.100.60/slondo/public/api/';
 
 const instance = Axios.create({
     withCredentials: true,
-    baseURL: uztelecom
+    baseURL: local
 });
 
 // export const socketIO = socketIOClient('http://192.168.100.60:8005');
@@ -267,6 +267,13 @@ export const userAPI = {
     },
     createPost: (form: FormData): Promise<string> => {
         return instance.post(`regular/post/new`, form, setTokenToHeader())
+            .then(res => res.data)
+            .catch(err => {
+                throw err;
+            });
+    },
+    editPost: (form: FormData, postId): Promise<string> => {
+        return instance.post(`regular/post/edit/${postId}`, form, setTokenToHeader())
             .then(res => res.data)
             .catch(err => {
                 throw err;

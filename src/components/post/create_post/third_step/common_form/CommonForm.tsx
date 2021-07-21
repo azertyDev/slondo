@@ -20,13 +20,13 @@ import {FormikField} from '@src/components/elements/formik_field/FormikField';
 import {CustomFormikProvider} from '@src/components/elements/custom_formik_provider/CustomFormikProvider';
 import {FormikTextarea} from '@src/components/elements/formik_textarea/FormikTextarea';
 import {Location} from '@src/components/elements/location/Location';
-import {UserCtx} from '@src/context/UserCtx';
+import {UserCtx} from "@src/context/UserCtx";
+import {useRouter} from "next/router";
 import {useStyles} from './useStyles';
 
 type DefaultParamsPropsType = {
     postType: PostType,
     currentFormIndex: number,
-    asPath: string,
     isPreview: boolean,
     categoryName: string,
     setIsPreview: Dispatch<SetStateAction<boolean>>,
@@ -43,31 +43,51 @@ export const CommonForm: FC<DefaultParamsPropsType> = (props) => {
         categoryName
     } = props;
 
+    const descTxtLimit = 3000;
     const {t} = useTranslation('post');
     const {phone: userPhone} = useContext(UserCtx).user;
+    const {
+        region,
+        city,
+        safe_deal,
+        delivery,
+        exchange,
+        description,
+        phone,
+        price,
+        currency,
+        available_days,
+        available_start_time,
+        available_end_time
+    } = useRouter().query;
 
     const formIndex = 1;
     const isAdvanceAuction = postType.name === 'exauc';
     const isAuction = postType.name === 'auc' || isAdvanceAuction;
     const priceLabel = categoryName === 'job' ? 'salary' : 'price';
 
-    const descTxtLimit = 3000;
+    const locationFromUrl = region
+        ? {
+            region: JSON.parse(region as string),
+            city: city ? JSON.parse(city as string) : null
+        }
+        : null;
 
     const initForm = {
-        safe_deal: false,
-        delivery: false,
-        exchange: false,
-        location: null,
-        description: '',
-        phone: '',
-        price: '',
-        currency: postType.currency[0],
+        safe_deal: !!safe_deal,
+        delivery: !!delivery,
+        exchange: !!exchange,
+        location: locationFromUrl,
+        description: description ? JSON.parse(description as string) : '',
+        phone: phone ?? '',
+        price: price ?? '',
+        currency: currency ? JSON.parse(currency as string) : postType.currency[0],
         avalTime: {
-            isActive: false,
+            isActive: !!available_start_time,
             time: {
-                start_time: '09:00',
-                end_time: '18:00',
-                week_days: [...WEEK_DAYS]
+                start_time: available_start_time ? JSON.parse(available_start_time as string) : '09:00',
+                end_time: available_end_time ? JSON.parse(available_end_time as string) : '18:00',
+                week_days: available_days ? JSON.parse(available_days as string) : [...WEEK_DAYS]
             }
         },
         auction: {
@@ -339,7 +359,10 @@ export const CommonForm: FC<DefaultParamsPropsType> = (props) => {
                                 />
                             </div>
                             <div className='location-wrapper'>
-                                <Location handleSelectLocation={handleLocation}/>
+                                <Location
+                                    handleSelectLocation={handleLocation}
+                                    userLocation={location}
+                                />
                                 <span className='error-text'>*</span>
                                 {errors.location && touched.location && (
                                     <span className='error-text'>

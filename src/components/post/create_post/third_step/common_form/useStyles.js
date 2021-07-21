@@ -40,7 +40,7 @@ export const useStyles = makeStyles((theme) => ({
         '& div.phone-block': {
             marginTop: '12px',
             '& .MuiFormControl-fullWidth': {
-                width: '170px'
+                width: '175px'
             }
         }
     }

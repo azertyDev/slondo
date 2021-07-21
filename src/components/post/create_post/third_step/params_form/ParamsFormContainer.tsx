@@ -28,9 +28,9 @@ type ParamsFormPropsType = {
     filters,
     isPreview?: boolean,
     currentFormIndex: number,
-    handleFormOpen: (k) => () => void,
     handleSubmit: (v) => void,
-    handleNextFormOpen?: () => void
+    handleNextFormOpen?: () => void,
+    handleFormOpen: (k) => () => void
 };
 
 export const ParamsFormContainer: FC<ParamsFormPropsType> = (props) => {

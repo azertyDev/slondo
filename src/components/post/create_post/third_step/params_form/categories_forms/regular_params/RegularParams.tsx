@@ -9,8 +9,9 @@ import {PostTitle} from '@src/components/post/create_post/third_step/params_form
 import {CustomFormikProvider} from '@src/components/elements/custom_formik_provider/CustomFormikProvider';
 import {ParametersIcon} from '@src/components/elements/icons';
 import {CustomAccordion} from '@src/components/elements/accordion/CustomAccordion';
-import {useStyles} from './useStyles';
 import {PreviewValues} from '@src/components/post/create_post/third_step/params_form/PreviewValues';
+import {useRouter} from "next/router";
+import {useStyles} from './useStyles';
 
 export const RegularParams: FC<CommonParamsPropsType> = (props) => {
     const {
@@ -23,9 +24,18 @@ export const RegularParams: FC<CommonParamsPropsType> = (props) => {
         handleFormOpen
     } = props;
 
-    const initVals: any = {
-        title: ''
+    const {title, model} = useRouter().query;
+
+    let initVals: any = {
+        title: title ? JSON.parse(title as string) : ''
     };
+
+    if (model) {
+        initVals = {
+            ...initVals,
+            ...JSON.parse(model as string)
+        };
+    }
 
     const formik = useFormik({
         onSubmit,

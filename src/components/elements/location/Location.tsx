@@ -4,7 +4,6 @@ import {Typography} from '@material-ui/core';
 import {LocationIcon} from '@src/components/elements/icons';
 import {LocationModal} from './LocationModal';
 import {useTranslation} from 'next-i18next';
-import {cookies} from '@src/helpers';
 import {useModal} from '@src/hooks/useModal';
 import {userAPI} from "@src/api/api";
 import {ErrorCtx} from "@src/context";
@@ -13,7 +12,7 @@ import {IdNameType} from "@root/interfaces/Post";
 
 type LocationProps = {
     handleSelectLocation: (loc) => void
-    userLocation?: {
+    userLocation: {
         region: IdNameType,
         city?: IdNameType
     }

@@ -1,10 +1,10 @@
 import {FC, useContext, useEffect, useState} from 'react';
 import {userAPI} from '@src/api/api';
+import {useTranslation} from 'next-i18next';
 import {TabsContent} from '@src/components/cabinet/cabinet_pages/TabsContent';
 import {Box, Grid, IconButton, List, ListItem, ListItemText, Typography} from '@material-ui/core';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import {InitialCabinetCardState, TabsDataType} from '@root/interfaces/Cabinet';
-import {useTranslation} from 'next-i18next';
 import {CabinetCard} from '@src/components/cabinet/components/cabinet_card/CabinetCard';
 import {BannedPosts} from '@src/components/cabinet/cabinet_pages/banned_posts/BannedPosts';
 import {CustomButton} from '@src/components/elements/custom_button/CustomButton';
