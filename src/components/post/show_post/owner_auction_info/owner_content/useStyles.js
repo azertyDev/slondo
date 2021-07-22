@@ -8,6 +8,26 @@ export const useStyles = makeStyles((theme) => ({
                 margin: 0
             }
         },
+        '& .owner': {
+            '&:before': {
+                position: 'absolute',
+                left: 0,
+                top: '0px',
+                content: '""',
+                width: '100%',
+                height: '0.8px',
+                background: 'linear-gradient(90deg, rgba(243, 243, 243, 0.15) -4.72%, rgba(204, 204, 204, 0.8) 47.81%, rgba(248, 248, 248, 0.15) 104.92%)'
+            },
+            '&:after': {
+                position: 'absolute',
+                left: 0,
+                bottom: '0px',
+                content: '""',
+                width: '100%',
+                height: '0.8px',
+                background: 'linear-gradient(90deg, rgba(243, 243, 243, 0.15) -4.72%, rgba(204, 204, 204, 0.8) 47.81%, rgba(248, 248, 248, 0.15) 104.92%)'
+            }
+        },
         '& div.contact-buttons': {
             '& button': {
                 width: '100%',

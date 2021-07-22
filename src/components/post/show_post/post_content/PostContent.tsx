@@ -1,6 +1,7 @@
 import {FC, MutableRefObject, useContext, useEffect, useRef, useState} from 'react';
 import {WithT} from 'i18next';
 import {
+    Box,
     Container,
     Hidden,
     TextField,
@@ -27,7 +28,8 @@ import {userAPI} from '@src/api/api';
 import {booleanFields} from '@src/common_data/fields_keys';
 import {useStyles} from './useStyles';
 import {ResponsiveModal} from '@src/components/elements/responsive_modal/ResponsiveModal';
-import {ErrorCtx} from "@src/context";
+import {ErrorCtx} from '@src/context';
+import {OwnerAuctionInfo} from '@src/components/post/show_post/owner_auction_info/OwnerAuctionInfo';
 
 type PostContentTypes = {
     data,
@@ -406,6 +408,13 @@ export const PostContent: FC<PostContentTypes> = (props) => {
                         </CustomButton>
                     </div>
                 </Hidden>
+                <Hidden lgUp>
+                    <OwnerAuctionInfo
+                        t={t}
+                        data={data}
+                        setFetchedPostData={setFetchedPostData}
+                    />
+                </Hidden>
                 <ModalSyncSliders
                     imgs={data.images}
                     title={data.title}
@@ -423,23 +432,6 @@ export const PostContent: FC<PostContentTypes> = (props) => {
                     <Typography variant='h6'>
                         {t('post:indicateReason')}
                     </Typography>
-                    {/*<List component="nav" disablePadding>*/}
-                    {/*    <ListItem button disableGutters>*/}
-                    {/*        <ListItemText primary="Столкнулся с мошенничеством и обманом."/>*/}
-                    {/*    </ListItem>*/}
-                    {/*    <ListItem button disableGutters>*/}
-                    {/*        <ListItemText primary="Товар указан, но его нет в наличии."/>*/}
-                    {/*    </ListItem>*/}
-                    {/*    <ListItem button disableGutters>*/}
-                    {/*        <ListItemText primary="Цена неактуальная."/>*/}
-                    {/*    </ListItem>*/}
-                    {/*    <ListItem button disableGutters>*/}
-                    {/*        <ListItemText primary="Содержание нарушает правила сервиса."/>*/}
-                    {/*    </ListItem>*/}
-                    {/*    <ListItem button disableGutters>*/}
-                    {/*        <ListItemText primary="Автор объявления вызывает подозрения."/>*/}
-                    {/*    </ListItem>*/}
-                    {/*</List>*/}
                     <div className='textarea'>
                         <TextField
                             fullWidth

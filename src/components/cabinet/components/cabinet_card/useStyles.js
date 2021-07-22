@@ -3,12 +3,21 @@ import {makeStyles} from '@material-ui/core/styles';
 export const useStyles = makeStyles((theme) => ({
     root: {
         '& div.bottom-btns': {
-            marginTop: '10px'
+            marginTop: '10px',
+            '& button': {
+                height: '32px',
+                padding: '2px 18px',
+                borderRadius: '10px',
+                background: '#F5F5F5',
+                boxShadow: '0px 1px 2px rgba(0, 0, 0, 0.15)',
+                '& svg': {
+                    height: '18px'
+                }
+            }
         },
         '& .unfold-btn': {
             background: '#EEE',
             borderRadius: '5px',
-            height: '32px',
             width: '100%',
             boxShadow: '0px 1px 2px 0px #00000026',
             '& svg': {
@@ -58,13 +67,6 @@ export const useStyles = makeStyles((theme) => ({
                 '& svg': {
                     height: '18px'
                 },
-                '&:hover': {
-                    cursor: 'pointer',
-                    background: '#E0E0E0',
-                    '& svg': {
-                        height: '18px'
-                    }
-                },
                 '&.MuiTypography-subtitle1': {
                     fontSize: theme.typography.caption.fontSize,
                     color: theme.palette.common.tab
@@ -75,6 +77,13 @@ export const useStyles = makeStyles((theme) => ({
                     },
                     '& .MuiTypography-subtitle1': {
                         fontSize: '12px'
+                    }
+                },
+                '&:hover': {
+                    cursor: 'pointer',
+                    background: '#E0E0E0',
+                    '& svg': {
+                        height: '18px'
                     }
                 }
             }

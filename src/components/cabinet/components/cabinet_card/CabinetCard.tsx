@@ -1,5 +1,5 @@
 import {FC} from 'react';
-import {Box, Grid, Hidden, Typography} from '@material-ui/core';
+import {Box, Grid, Hidden, Typography, useMediaQuery, useTheme} from '@material-ui/core';
 import {ChevronRight} from '@material-ui/icons';
 import {CardDataType} from '@root/interfaces/CardData';
 import {BreadcrumbsComponent} from '@src/components/elements/breadcrumbs/Breadcrumbs';
@@ -38,6 +38,7 @@ export const CabinetCard: FC<CabinetCardPropsType> = (props) => {
         status
     } = cardData;
 
+    const isXsDown = useMediaQuery(useTheme().breakpoints.down('xs'));
     const isPublic = status === 'public';
 
     const classes = useStyles();
@@ -45,12 +46,19 @@ export const CabinetCard: FC<CabinetCardPropsType> = (props) => {
         <Box className={classes.root}>
             <Box mb={1}>
                 <div className='breadcrumbs'>
-                    <BreadcrumbsComponent
-                        category={category.name}
-                        type={adsable?.type?.name}
-                        subcategory={adsable?.sub_category.name}
-                    />
-                    <Box display='flex' alignItems='center'>
+                    <Hidden xsDown>
+                        <BreadcrumbsComponent
+                            category={category.name}
+                            type={adsable?.type?.name}
+                            subcategory={adsable?.sub_category.name}
+                        />
+                    </Hidden>
+                    <Box
+                        display='flex'
+                        alignItems='center'
+                        justifyContent={isXsDown ? 'space-between' : ''}
+                        width={isXsDown ? 1 : 'auto'}
+                    >
                         <Typography variant="subtitle1" color="initial">
                         <span className={ads_type}>
                             {t(`common:${ads_type}`)} №:&nbsp;
@@ -67,13 +75,14 @@ export const CabinetCard: FC<CabinetCardPropsType> = (props) => {
             </Box>
             <Box position='relative'>
                 <ListCard cardData={cardData} />
-                <Grid container className='bottom-btns'>
+                <Grid container spacing={1} className='bottom-btns'>
                     <Hidden mdUp>
-                        <Grid item xs={5} sm={2}>
+                        <Grid item xs={5} sm={4} container justify='center'>
                             <CustomButton
                                 className='icons'
                                 onClick={handleNotificationsOpen}
                                 disabled={!observer.number_of_notifications}
+                                style={{marginRight: 10}}
                             >
                                 <NotificationIcon />
                             </CustomButton>
@@ -85,7 +94,7 @@ export const CabinetCard: FC<CabinetCardPropsType> = (props) => {
                             </CustomButton>
                         </Grid>
                     </Hidden>
-                    <Grid item xs={7} sm={10} md={12}>
+                    <Grid item xs={7} sm={8} md={12}>
                         {handleDetailedOpen && (
                             <CustomButton
                                 className='unfold-btn'

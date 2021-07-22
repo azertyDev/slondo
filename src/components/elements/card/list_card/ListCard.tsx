@@ -189,12 +189,11 @@ export const ListCard: FC<ListCardPropsType> = ({cardData}) => {
                     {!isXsDown &&
                     <Grid
                         item
-                        sm={6}
+                        sm={7}
                         container
-                        zeroMinWidth
+                        justify='center'
                         direction='column'
                         className='location'
-                        justify='center'
                     >
                         <Typography variant='subtitle2' noWrap>
                             {formatted_date}
@@ -211,7 +210,7 @@ export const ListCard: FC<ListCardPropsType> = ({cardData}) => {
                     }
                     <Grid
                         zeroMinWidth
-                        item xs={12} sm={6}
+                        item xs={12} sm={5}
                         container direction='column' alignItems={isXsDown ? 'flex-start' : 'flex-end'}
                     >
                         {isAuction

@@ -171,18 +171,18 @@ export const ShowPostContainer: FC = () => {
                             setFetchedPostData={setFetchedPostData}
                         />
                     </Grid>
-                    <Grid item lg={3} xs={12}>
-                        <OwnerAuctionInfo
-                            t={t}
-                            data={data}
-                            setFetchedPostData={setFetchedPostData}
-                        />
-                        <Hidden mdDown>
+                    <Hidden mdDown>
+                        <Grid item lg={3} xs={12}>
+                            <OwnerAuctionInfo
+                                t={t}
+                                data={data}
+                                setFetchedPostData={setFetchedPostData}
+                            />
                             <div className={classes.adBanner}>
                                 <Banner height="424px" />
                             </div>
-                        </Hidden>
-                    </Grid>
+                        </Grid>
+                    </Hidden>
                 </Grid>
             </Container>
             <Footer />

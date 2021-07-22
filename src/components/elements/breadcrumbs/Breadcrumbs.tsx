@@ -21,16 +21,18 @@ export const BreadcrumbsComponent: FC<BreadcrumbsPropsType> = ({category, subcat
 
     const mainCtgr = site_categories.find(ctgr => ctgr.name === category);
     const subCtgr = mainCtgr?.subcategory?.find(subCtgr => subCtgr.name === subcategory);
-    const typeCtgr = subCtgr?.type?.find(type => type.name === type);
+    const typeCtgr = subCtgr?.type?.find(typeCtgr => typeCtgr.name === type);
 
     const categoryName = transformCyrillic(mainCtgr?.ru_name);
     const subCategoryName = transformCyrillic(subCtgr?.ru_name);
     const typeName = transformCyrillic(typeCtgr?.ru_name);
 
     const categoryLink = `/${location}/${categoryName}`;
-    const subCategoryLink = `/${location}/${categoryName}/${subCategoryName}`;
-    const subCategoryTypeLink = `/${location}/${categoryName}/${subCategoryName}/${typeName}`;
+    const subCategoryLink = `${categoryLink}/${subCategoryName}`;
+    const subCategoryTypeLink = `${subCategoryLink}/${typeName}`;
 
+    // console.log(type);
+    // console.log(subCategoryTypeLink);
     useEffect(() => {
         if (userLocation) {
             const {region, city} = userLocation;

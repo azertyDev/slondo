@@ -46,7 +46,7 @@ export const Rating: FC<RatingPropsType> = (props) => {
             {card && (
                 <Hidden mdDown>
                     <div>
-                        <Typography variant="subtitle1">{`(${ratingCount} оценок)`}</Typography>
+                        <Typography variant="subtitle1" className='ratingCount'>{`(${ratingCount} оценок)`}</Typography>
                     </div>
                 </Hidden>
             )}

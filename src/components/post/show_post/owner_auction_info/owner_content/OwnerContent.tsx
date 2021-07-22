@@ -1,6 +1,6 @@
 import {FC, useContext, useEffect, useState} from 'react';
 import {WithT} from 'i18next';
-import {Hidden, Typography} from '@material-ui/core';
+import {Box, Hidden, Typography} from '@material-ui/core';
 import {CustomButton} from '@src/components/elements/custom_button/CustomButton';
 import {SafeIcon} from '@root/src/components/elements/icons';
 import {UserInfoWithAvatar} from '@src/components/elements/user_info_with_avatar/UserInfoWithAvatar';
@@ -94,12 +94,14 @@ export const OwnerContent: FC<OwnerPropsType> = (props) => {
     const classes = useStyles();
     return (
         <div className={classes.root}>
-            <UserInfoWithAvatar
-                subscribed={subscribed}
-                isOwner={creator}
-                owner={author}
-                handleFollow={handleFollow}
-            />
+            <Box padding='10px 0' className='owner' position='relative'>
+                <UserInfoWithAvatar
+                    subscribed={subscribed}
+                    isOwner={creator}
+                    owner={author}
+                    handleFollow={handleFollow}
+                />
+            </Box>
             <Hidden mdDown>
                 <div className="contact-buttons">
                     <CustomButton color="primary" disabled={isFetch} onClick={handleShowPhone}>
@@ -107,7 +109,7 @@ export const OwnerContent: FC<OwnerPropsType> = (props) => {
                             <span>{t(showPhoneTxt)}</span>
                             {showPhone && authorPhones.additional_number && (
                                 <>
-                                    <br/>
+                                    <br />
                                     <span>{t(authorPhones.additional_number)}</span>
                                 </>
                             )}

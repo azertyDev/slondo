@@ -1,6 +1,6 @@
 import {makeStyles} from '@material-ui/core/styles';
 
-export const useStyles = makeStyles(() => ({
+export const useStyles = makeStyles((theme) => ({
     root: {
         '& h6.menu-title': {
             fontWeight: '600',
@@ -10,11 +10,13 @@ export const useStyles = makeStyles(() => ({
             minHeight: 28,
             '& .MuiTab-root': {
                 borderBottom: '1px solid #838383',
-                width: '100%',
                 padding: '0',
                 minHeight: 28,
                 '& h6.MuiTypography-subtitle1': {
-                    textTransform: 'uppercase'
+                    textTransform: 'uppercase',
+                    [theme.breakpoints.down('xs')]: {
+                        fontSize: '0.875rem'
+                    }
                 }
             }
         }

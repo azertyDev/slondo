@@ -1,6 +1,6 @@
 import {makeStyles} from '@material-ui/core/styles';
 
-export const useStyles = makeStyles({
+export const useStyles = makeStyles((theme) => ({
     root: {
         '& .menu-item': {
             display: 'flex',
@@ -34,14 +34,22 @@ export const useStyles = makeStyles({
                     }
                 }
             },
+            '& .MuiBadge-root': {
+                width: '100%'
+            },
             '& .MuiListItem-root': {
+                borderRadius: 5,
                 background: '#fff',
                 justifyContent: 'center',
-                borderRadius: 5,
-                marginBottom: 5,
                 boxShadow: '0px 1px 2px rgba(0, 0, 0, 0.25)',
                 '& .MuiTypography-body1': {
-                    fontSize: 'clamp(16px, 50%, 24px)',
+                    fontSize: '1rem',
+                    [theme.breakpoints.down('md')]: {
+                        fontSize: 'calc(14px + (100vw - 992px) / 1280)'
+                    },
+                    [theme.breakpoints.down('sm')]: {
+                        fontSize: 'calc(12px + (100vw - 576px) / 1280)'
+                    }
                 },
                 '& .MuiListItemText-root': {
                     flex: 'none'
@@ -51,21 +59,5 @@ export const useStyles = makeStyles({
                 }
             }
         },
-        '& .row': {
-            display: 'flex',
-            flexDirection: 'row',
-            '& .MuiBadge-root': {
-                width: '27%',
-                '&:first-child': {
-                    marginRight: '5px'
-                }
-            },
-            '& .list-item': {
-                width: '49%',
-                '&:first-child': {
-                    marginRight: '5px'
-                }
-            }
-        }
     }
-});
+}));

@@ -159,18 +159,16 @@ export const useStyles = makeStyles((theme) => ({
             }
         },
         '& div.post-info': {
-            padding: '11px 7px',
-            background: '#F2F2F2',
-            borderRadius: '5px',
             margin: '20px 0',
+            borderRadius: '5px',
+            background: '#F2F2F2',
             [theme.breakpoints.down('md')]: {
-                background: 'inherit',
-                margin: '0 0 32px',
-                padding: '0'
+                background: 'inherit'
             },
             [theme.breakpoints.up('lg')]: {
                 display: 'flex',
-                justifyContent: 'space-around'
+                justifyContent: 'space-around',
+                padding: '10px 0'
             },
             '& > h6.MuiTypography-subtitle1:first-child': {
                 '& > span': {
@@ -522,6 +520,7 @@ export const useStyles = makeStyles((theme) => ({
         },
         '& div.post-parameters': {
             position: 'relative',
+            paddingBottom: '20px',
             '& p.MuiTypography-button': {
                 marginBottom: '30px',
                 [theme.breakpoints.down('md')]: {
@@ -609,7 +608,7 @@ export const useStyles = makeStyles((theme) => ({
             [theme.breakpoints.down('md')]: {
                 '&:after': {
                     position: 'absolute',
-                    bottom: '-16px',
+                    bottom: 0,
                     left: 0,
                     content: '""',
                     width: '100%',

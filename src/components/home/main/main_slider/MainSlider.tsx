@@ -44,7 +44,7 @@ export const MainSlider: FC = () => {
                         <Box key={id} position='relative'>
                             <img src={img} alt={title}/>
                             <Box
-                                left='10px'
+                                right='10px'
                                 width='60%'
                                 position='absolute'
                                 top={isXs ? '25%' : '30%'}

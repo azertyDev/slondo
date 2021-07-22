@@ -114,6 +114,7 @@ export const useStyles = makeStyles((theme) => ({
             }
         },
         '& .location': {
+            display: 'block',
             '& .MuiTypography-subtitle2': {
                 color: '#838383'
             }

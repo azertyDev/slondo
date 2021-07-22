@@ -3,7 +3,7 @@ import {TabsContent} from '@src/components/cabinet/cabinet_pages/TabsContent';
 import {userAPI} from '@src/api/api';
 import {
     Box,
-    CircularProgress,
+    CircularProgress, Grid,
     Tab,
     Tabs,
     Typography
@@ -227,7 +227,7 @@ export const MyPosts: FC = () => {
                 </Tabs>
                 <CustomTabPanel value={childTabValue} index={0}>
                     {isFetch
-                        ? <CircularProgress color="primary"/>
+                        ? <CircularProgress color="primary" />
                         : fstTabPosts.map((data) => (
                             <Box mb={3} key={data.id} borderRadius='10px 10px 0px 0px'>
                                 <CabinetCard

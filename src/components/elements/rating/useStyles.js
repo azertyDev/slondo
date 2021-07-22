@@ -18,9 +18,9 @@ export const useStyles = makeStyles({
                 fontWeight: 600
             }
         },
-        '& > div:last-child': {
-            marginLeft: theme.spacing(1),
-        },
+        '& div.ratingCount': {
+            marginLeft: theme.spacing(1)
+        }
     },
 })
 

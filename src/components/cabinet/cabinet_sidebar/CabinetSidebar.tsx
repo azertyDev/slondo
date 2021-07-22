@@ -12,7 +12,10 @@ export const CabinetSidebar: FC = () => {
     return (
         <div className={classes.root}>
             <Grid item xs={12} className="user-menu-wrapper">
-                <UserInfoWithAvatar isOwner owner={user}/>
+                <UserInfoWithAvatar
+                    isOwner
+                    owner={user}
+                />
                 <SidebarMenu />
             </Grid>
         </div>

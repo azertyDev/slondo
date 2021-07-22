@@ -66,34 +66,32 @@ export const OwnerAuctionInfo: FC<OwnerAuctionInfoPropsType> = (props) => {
 
     const classes = useStyles();
     return (
-        <div>
-            <div className={classes.root}>
+        <div className={classes.root}>
+            <Hidden mdDown>
+                <div className="price">
+                    <Typography variant="h4" color="initial">
+                        <span>{numberPrettier(data.price)}</span>&nbsp;
+                        {t(`common:${data.currency.name}`)}
+                    </Typography>
+                </div>
+            </Hidden>
+            {isAuction && (
                 <Hidden mdDown>
-                    <div className="price">
-                        <Typography variant="h4" color="initial">
-                            <span>{numberPrettier(data.price)}</span>&nbsp;
-                            {t(`common:${data.currency.name}`)}
-                        </Typography>
-                    </div>
+                    <AuctionContent
+                        t={t}
+                        postData={data}
+                        setFetchedPostData={setFetchedPostData}
+                    />
                 </Hidden>
-                {isAuction && (
-                    <Hidden mdDown>
-                        <AuctionContent
-                            t={t}
-                            postData={data}
-                            setFetchedPostData={setFetchedPostData}
-                        />
-                    </Hidden>
-                )}
-                <OwnerContent
-                    t={t}
-                    postData={data}
-                    showPhone={showPhone}
-                    authorPhones={authorPhones}
-                    handleFollow={handleFollow}
-                    handleShowPhone={handleShowPhone}
-                />
-            </div>
+            )}
+            <OwnerContent
+                t={t}
+                postData={data}
+                showPhone={showPhone}
+                authorPhones={authorPhones}
+                handleFollow={handleFollow}
+                handleShowPhone={handleShowPhone}
+            />
         </div>
     );
 };
