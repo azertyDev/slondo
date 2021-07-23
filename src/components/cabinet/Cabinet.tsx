@@ -52,7 +52,7 @@ const Cabinet: FC = () => {
                 return <SafetyDeal/>;
             case 'settings' :
                 return <SettingsContainer/>;
-            case 'subscribe':
+            case 'subs':
                 return <Subs/>;
         }
     };

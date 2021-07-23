@@ -65,15 +65,16 @@ export const ListCard: FC<ListCardPropsType> = ({cardData}) => {
                 >
                     {t(cardData.ads_type === 'exauc' && isXsDown ? 'common:auc' : cardData.ads_type)}
                 </Typography>
-                <Box
-                    width={1}
-                    bottom={0}
-                    display='flex'
-                    padding='5px'
-                    position='absolute'
-                    className='observer-block'
-                    justifyContent='space-between'
-                >
+                {cardData.observer && (
+                    <Box
+                        width={1}
+                        bottom={0}
+                        display='flex'
+                        padding='5px'
+                        position='absolute'
+                        className='observer-block'
+                        justifyContent='space-between'
+                    >
                         <span>
                             <EyeIcon />
                             <Typography
@@ -84,7 +85,7 @@ export const ListCard: FC<ListCardPropsType> = ({cardData}) => {
                                 {cardData.observer?.number_of_views}
                             </Typography>
                         </span>
-                    <span>
+                        <span>
                             <FavoriteBorderIcon />
                             <Typography
                                 noWrap
@@ -93,8 +94,9 @@ export const ListCard: FC<ListCardPropsType> = ({cardData}) => {
                             >
                                 {cardData.observer?.number_of_favorites}
                             </Typography>
-                    </span>
-                </Box>
+                        </span>
+                    </Box>)
+                }
             </Grid>
             <Grid item xs={6} sm={8} md={9} container alignContent='space-between' className="content">
                 <Grid item xs={12} sm={12} lg={7} className="post-title">

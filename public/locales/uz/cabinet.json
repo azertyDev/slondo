@@ -63,5 +63,21 @@
   "deleteAvatar": "O'chirish",
   "profile_ratings": "Reyting",
   "profile_follows": "Obunachilar/obunalar",
-  "profile_posts": "E'lonlar"
+  "profile_posts": "E'lonlar",
+  "empty": {
+    "post": "Siz xali xech qanday e'lon yaratmadingiz",
+    "auction": "Siz xali xech qanday auksion yaratmadingiz",
+    "archive": "Arxivingizda e'lon mavjud emas",
+    "favorite": {
+      "title": "E'lonlarni sevimliga qo'shish orqali kuzatib boring",
+      "action": "E'lon qidirish"
+    },
+    "rating": {
+      "title": "Sizni xali xech kim baxolamadi",
+      "subtitle": "Foydalanuvchilar sizni baxolashlari uchun, siz biror maxsulot sotib olishingiz yoki sotishingiz kerak",
+      "tutorial": "Baxolash tizimi qanday ishlaydi?"
+    },
+    "subscriber": "Sizda faol obunachilar mavjud emas",
+    "subscription": "Sizda faol obunalar mavjud emas"
+  }
 }

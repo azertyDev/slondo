@@ -140,27 +140,19 @@ export const BannedPostsContainer: FC = () => {
 
     const bannedPostCards = postData.data.map(data => (
         <Box mb={3} key={data.id}>
-            <Grid container>
-                <Grid item xs={9}>
-                    <CabinetCard
-                        cardData={data}
-                        handleOpenModal={handleModalOpen}
-                    />
-                </Grid>
-            </Grid>
+            <CabinetCard
+                cardData={data}
+                handleOpenModal={handleModalOpen}
+            />
         </Box>
     ));
 
     const bannedAucCards = aucData.data.map(data => (
         <Box mb={3} key={data.id}>
-            <Grid container>
-                <Grid item xs={9}>
-                    <CabinetCard
-                        cardData={data}
-                        handleOpenModal={handleModalOpen}
-                    />
-                </Grid>
-            </Grid>
+            <CabinetCard
+                cardData={data}
+                handleOpenModal={handleModalOpen}
+            />
         </Box>
     ));
 

@@ -77,22 +77,24 @@ export const CabinetCard: FC<CabinetCardPropsType> = (props) => {
                 <ListCard cardData={cardData} />
                 <Grid container spacing={1} className='bottom-btns'>
                     <Hidden mdUp>
-                        <Grid item xs={5} sm={4} container justify='center'>
-                            <CustomButton
-                                className='icons'
-                                onClick={handleNotificationsOpen}
-                                disabled={!observer.number_of_notifications}
-                                style={{marginRight: 10}}
-                            >
-                                <NotificationIcon />
-                            </CustomButton>
-                            <CustomButton
-                                className='icons'
-                                onClick={handleSettingsOpen}
-                            >
-                                <SettingsIcon />
-                            </CustomButton>
-                        </Grid>
+                        {cardData.creator && isPublic && (
+                            <Grid item xs={5} sm={4} container justify='center'>
+                                <CustomButton
+                                    className='icons'
+                                    onClick={handleNotificationsOpen}
+                                    disabled={!observer?.number_of_notifications}
+                                    style={{marginRight: 10}}
+                                >
+                                    <NotificationIcon />
+                                </CustomButton>
+                                <CustomButton
+                                    className='icons'
+                                    onClick={handleSettingsOpen}
+                                >
+                                    <SettingsIcon />
+                                </CustomButton>
+                            </Grid>)
+                        }
                     </Hidden>
                     <Grid item xs={7} sm={8} md={12}>
                         {handleDetailedOpen && (

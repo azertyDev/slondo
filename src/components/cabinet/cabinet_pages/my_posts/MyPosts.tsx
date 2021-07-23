@@ -21,6 +21,7 @@ import {NotificationModal} from "@src/components/cabinet/components/notifation_m
 import {SettingsModal} from "@src/components/cabinet/components/settings_modal/SettingsModal";
 import {ErrorCtx} from "@src/context";
 import {useStyles} from './useStyles';
+import {EmptyPage} from '@src/components/cabinet/components/empty_page/EmptyPage';
 
 export const initialCardData: CardDataType = {
     id: null,
@@ -228,25 +229,35 @@ export const MyPosts: FC = () => {
                 <CustomTabPanel value={childTabValue} index={0}>
                     {isFetch
                         ? <CircularProgress color="primary" />
-                        : fstTabPosts.map((data) => (
-                            <Box mb={3} key={data.id} borderRadius='10px 10px 0px 0px'>
-                                <CabinetCard
-                                    cardData={data}
-                                    handleDetailedOpen={handleDetailedOpen(data)}
-                                    handleSettingsOpen={handleSettingsOpen(data)}
-                                    handleNotificationsOpen={handleNotificationsOpen(data)}
-                                />
-                            </Box>
-                        ))}
+                        : fstTabPosts.length === 0
+                            ? <EmptyPage
+                                label={t('cabinet:empty.post')}
+                                action={t('header:createPost')}
+                                link={'/create/type'}
+                                tutorialLink={'#'}
+                                tutorialText={t('post:howToCreatePost')}
+                            />
+                            : fstTabPosts.map((data) => (
+                                <Box mb={3} key={data.id} borderRadius='10px 10px 0px 0px'>
+                                    <CabinetCard
+                                        cardData={data}
+                                        handleDetailedOpen={handleDetailedOpen(data)}
+                                        handleSettingsOpen={handleSettingsOpen(data)}
+                                        handleNotificationsOpen={handleNotificationsOpen(data)}
+                                    />
+                                </Box>
+                            ))}
                 </CustomTabPanel>
                 <CustomTabPanel value={childTabValue} index={1}>
                     {isFetch
-                        ? <CircularProgress color="primary"/>
-                        : secTabPosts.map((data) => (
-                            <Box mb={3} key={data.id} borderRadius='10px 10px 0px 0px'>
-                                <CabinetCard cardData={data}/>
-                            </Box>
-                        ))}
+                        ? <CircularProgress color="primary" />
+                        : fstTabPosts.length === 0
+                            ? <EmptyPage label={t('cabinet:empty.archive')} />
+                            : secTabPosts.map((data) => (
+                                <Box mb={3} key={data.id} borderRadius='10px 10px 0px 0px'>
+                                    <CabinetCard cardData={data} />
+                                </Box>
+                            ))}
                 </CustomTabPanel>
             </>
         );

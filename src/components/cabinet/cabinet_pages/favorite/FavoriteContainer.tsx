@@ -2,7 +2,7 @@ import {FC, useContext, useEffect, useState} from 'react';
 import {TabsContent} from '@src/components/cabinet/cabinet_pages/TabsContent';
 import {Favorite} from '@src/components/cabinet/cabinet_pages/favorite/Favorite';
 import {userAPI} from '@src/api/api';
-import {Box, IconButton, List, ListItem, ListItemText, Typography} from '@material-ui/core';
+import {Box, CircularProgress, IconButton, List, ListItem, ListItemText, Typography} from '@material-ui/core';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import {InitialCabinetCardState, TabsDataType} from '@root/interfaces/Cabinet';
 import {useTranslation} from 'next-i18next';
@@ -14,6 +14,7 @@ import {initialCardData} from '@src/components/cabinet/cabinet_pages/my_posts/My
 import {CardDataType} from "@root/interfaces/CardData";
 import {ErrorCtx} from "@src/context";
 import {useStyles} from './useStyles';
+import {EmptyPage} from '@src/components/cabinet/components/empty_page/EmptyPage';
 
 export const FavoriteContainer: FC = () => {
     const {t} = useTranslation('cabinet');
@@ -58,7 +59,9 @@ export const FavoriteContainer: FC = () => {
                 const {data, total} = await userAPI.getFavorites({type});
                 setFavoriteAucData({data, total});
             }
+            setIsFetch(false);
         } catch (e) {
+            setIsFetch(false);
             setErrorMsg(e.message);
         }
     };
@@ -146,23 +149,33 @@ export const FavoriteContainer: FC = () => {
         handleRefresh();
     }, []);
 
-    const favoritePostCards = favoritePostData.data.map(data => (
-        <Box mb={3} key={data.id}>
-            <CabinetCard
-                cardData={data}
-                handleOpenModal={handleOpenModal}
+    const favoritePostCards = isFetch ? <CircularProgress color="primary" />
+        : favoritePostData.data.length === 0
+            ? <EmptyPage
+                label={t('cabinet:empty.favorite.title')}
             />
-        </Box>
-    ));
+            : favoritePostData.data.map(data => (
+                <Box mb={3} key={data.id}>
+                    <CabinetCard
+                        cardData={data}
+                        handleOpenModal={handleOpenModal}
+                    />
+                </Box>
+            ));
 
-    const favoriteAucCards = favoriteAucData.data.map(data => (
-        <Box mb={3} key={data.id}>
-            <CabinetCard
-                cardData={data}
-                handleOpenModal={handleOpenModal}
+    const favoriteAucCards = isFetch ? <CircularProgress color="primary" />
+        : favoriteAucData.data.length === 0
+            ? <EmptyPage
+                label={t('cabinet:empty.favorite.title')}
             />
-        </Box>
-    ));
+            : favoriteAucData.data.map(data => (
+                <Box mb={3} key={data.id}>
+                    <CabinetCard
+                        cardData={data}
+                        handleOpenModal={handleOpenModal}
+                    />
+                </Box>
+            ));
 
     const tabsData: TabsDataType = [
         {

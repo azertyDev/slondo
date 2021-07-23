@@ -22,6 +22,7 @@ import {NotificationModal} from '@src/components/cabinet/components/notifation_m
 import {SettingsModal} from "@src/components/cabinet/components/settings_modal/SettingsModal";
 import {ErrorCtx} from "@src/context";
 import {useStyles} from './useStyles';
+import {EmptyPage} from '@src/components/cabinet/components/empty_page/EmptyPage';
 
 export const MyAuctions: FC = () => {
     const {t} = useTranslation('cabinet');
@@ -174,31 +175,42 @@ export const MyAuctions: FC = () => {
                 </Tabs>
                 <CustomTabPanel value={childTabValue} index={0}>
                     {isFetch
-                        ? <CircularProgress color="primary"/>
-                        : fstTabPosts.map(data => (
-                            <Box mb={3} key={data.id}>
-                                <CabinetCard
-                                    cardData={data}
-                                    handleSettingsOpen={handleSettingsOpen(data)}
-                                    handleDetailedOpen={handleDetailedOpen(data)}
-                                    handleNotificationsOpen={handleNotificationsOpen(data)}
-                                />
-                            </Box>
-                        ))}
+                        ? <CircularProgress color="primary" />
+                        : fstTabPosts.length === 0
+                            ? <EmptyPage
+                                label={t('cabinet:empty.auction')}
+                                action={t('header:createPost')}
+                                link={'/create/type'}
+                                tutorialLink={'#'}
+                                tutorialText={t('post:howToCreateAuc')}
+                            />
+                            : fstTabPosts.map(data => (
+                                <Box mb={3} key={data.id}>
+                                    <CabinetCard
+                                        cardData={data}
+                                        handleSettingsOpen={handleSettingsOpen(data)}
+                                        handleDetailedOpen={handleDetailedOpen(data)}
+                                        handleNotificationsOpen={handleNotificationsOpen(data)}
+                                    />
+                                </Box>
+                            ))
+                    }
                 </CustomTabPanel>
                 <CustomTabPanel value={childTabValue} index={1}>
                     {isFetch
-                        ? <CircularProgress color="primary"/>
-                        : secTabPosts.map(data => (
-                            <Box mb={3} key={data.id}>
-                                <CabinetCard
-                                    cardData={data}
-                                    handleSettingsOpen={handleSettingsOpen(data)}
-                                    handleDetailedOpen={handleDetailedOpen(data)}
-                                    handleNotificationsOpen={handleNotificationsOpen(data)}
-                                />
-                            </Box>
-                        ))}
+                        ? <CircularProgress color="primary" />
+                        : fstTabPosts.length === 0
+                            ? <EmptyPage label={t('cabinet:empty.archive')} />
+                            : secTabPosts.map(data => (
+                                <Box mb={3} key={data.id}>
+                                    <CabinetCard
+                                        cardData={data}
+                                        handleSettingsOpen={handleSettingsOpen(data)}
+                                        handleDetailedOpen={handleDetailedOpen(data)}
+                                        handleNotificationsOpen={handleNotificationsOpen(data)}
+                                    />
+                                </Box>
+                            ))}
                 </CustomTabPanel>
             </>
         );

@@ -9,7 +9,6 @@ import {ErrorCtx} from "@src/context";
 
 export const Subs: FC = () => {
     const initialState = {
-        isFetch: false,
         subscribers: {
             total: 0,
             data: []
@@ -23,6 +22,7 @@ export const Subs: FC = () => {
     const {setErrorMsg} = useContext(ErrorCtx);
 
     const [subs, setSubs] = useState(initialState);
+    const [isFetch, setIsFetch] = useState(false);
     const [tabIndex, setTabIndex] = useState(0);
 
     const handleTabChange = (event, newValue) => {
@@ -34,11 +34,11 @@ export const Subs: FC = () => {
             const {subscribers, subscriptions} = subs;
             const isSubscribers = param === 'subscribers';
 
-            subs.isFetch = true;
+            setIsFetch(true)
             setSubs({...subs});
 
             const subsData = await userAPI.getSubs(param);
-            subs.isFetch = false;
+            setIsFetch(false)
 
             if (isSubscribers) {
                 subscribers.data = subsData.data;
@@ -47,9 +47,9 @@ export const Subs: FC = () => {
                 subscriptions.data = subsData.data;
                 subscriptions.total = subsData.total;
             }
-
             setSubs({...subs});
         } catch (e) {
+            setIsFetch(false)
             setErrorMsg(e.message);
         }
     };
@@ -73,14 +73,14 @@ export const Subs: FC = () => {
             title: 'Подписки',
             itemsPerPage: SUBS_PER_PAGE,
             handleFetchByTab: () => '',
-            component: <Subscriptions subscriptions={subs.subscriptions.data} handleFollow={handleFollow}/>
+            component: <Subscriptions isFetch={isFetch} subscriptions={subs.subscriptions.data} handleFollow={handleFollow}/>
         },
         {
             id: 1,
             title: 'Подписчики',
             itemsPerPage: SUBS_PER_PAGE,
             handleFetchByTab: () => '',
-            component: <Subscribers subscribers={subs.subscribers.data} handleFollow={handleFollow}/>
+            component: <Subscribers isFetch={isFetch} subscribers={subs.subscribers.data} handleFollow={handleFollow}/>
         }
     ];
 
