@@ -22,8 +22,8 @@ import {useFormik} from "formik";
 import {phoneSchema} from "@root/validation_schemas/authRegSchema";
 import {getErrorMsg, phonePrepare, urlByParams} from "@src/helpers";
 import {ErrorCtx} from "@src/context";
-import {useStyles} from './useStyles';
 import {useRouter} from "next/router";
+import {useStyles} from './useStyles';
 
 enum SettingsModalPropsType {
     'deactivate',
@@ -86,7 +86,7 @@ export const SettingsModal: FC<CommonModalType> = (props) => {
                     const data = {
                         user_id: buyer.id,
                         ads_id: post.id,
-                        reason_id: status === 'confirm' ? reasons.archive : reasons.sold
+                        reason_id: status === 'sold_on_slondo' ? reasons.sold : reasons.archive
                     };
                     await userAPI.deactivatePost(data);
                     break;

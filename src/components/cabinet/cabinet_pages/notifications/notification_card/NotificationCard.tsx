@@ -1,34 +1,42 @@
 import {FC, useContext, useState} from 'react';
+import {unstable_batchedUpdates} from "react-dom";
 import Link from 'next/link';
 import {Box, Button, IconButton, Paper, Typography} from '@material-ui/core';
 import {Phone, Error} from '@material-ui/icons';
 import {CloseIcon} from '@src/components/elements/icons';
-import {useStyles} from './useStyles';
 import {userAPI} from "@src/api/api";
 import {useTranslation} from "next-i18next";
 import {ErrorCtx} from "@src/context";
+import {CustomCircularProgress} from "@src/components/elements/custom_circular_progress/CustomCircularProgress";
+import {ITEMS_PER_PAGE} from "@src/constants";
+import {useStyles} from './useStyles';
 
 export type NotificationDataType = {
     id: number,
+    title: string,
     message: string,
     ads_id: number,
     created_at: string,
     go_to,
     go_to_type,
-    handleRefresh: () => void
+    handleRefresh: () => void,
+    setNotifications,
+    handleOpenSnackbar
 };
 
 export const NotificationCard: FC<NotificationDataType> = (props) => {
     const {
         id,
+        title,
         message,
         ads_id,
         created_at,
-        go_to,
         go_to_type,
-        handleRefresh
+        handleRefresh,
+        setNotifications,
+        handleOpenSnackbar
     } = props;
-
+    console.log(props);
     const {t} = useTranslation('notifications');
     const {setErrorMsg} = useContext(ErrorCtx);
 
@@ -41,29 +49,39 @@ export const NotificationCard: FC<NotificationDataType> = (props) => {
         try {
             setIsFetch(true);
             const {phone} = await userAPI.getPhoneByUserId(ads_id);
-            setPhone(phone);
-            setIsFetch(false);
+            unstable_batchedUpdates(() => {
+                setPhone(phone);
+                setIsFetch(false);
+            });
         } catch (e) {
-            setIsFetch(false);
-            setErrorMsg(e.message);
+            unstable_batchedUpdates(() => {
+                setIsFetch(false);
+                setErrorMsg(e.message);
+            });
         }
     };
 
     const handleDeleteNotification = async () => {
         try {
             setIsFetch(true);
+            const params = {
+                page: 1,
+                itemsPerPage: ITEMS_PER_PAGE
+            };
+            await userAPI.deleteUserNotification(id);
+            const {data} = await userAPI.getAllNotifications(params);
 
-            const {message} = await userAPI.deleteUserNotification(id);
-            const {data} = await userAPI.getAllNotifications();
-
-            // setNotifications(data);
-            // setMessage(message);
-            // handleOpenSnackbar();
-            handleRefresh();
-            setIsFetch(false);
+            unstable_batchedUpdates(() => {
+                handleRefresh();
+                handleOpenSnackbar();
+                setNotifications(data);
+                setIsFetch(false);
+            });
         } catch (e) {
-            setIsFetch(false);
-            setErrorMsg(e.message);
+            unstable_batchedUpdates(() => {
+                setIsFetch(false);
+                setErrorMsg(e.message);
+            });
         }
     };
 
@@ -88,11 +106,13 @@ export const NotificationCard: FC<NotificationDataType> = (props) => {
                 </Box>
                 <Box width='100%'>
                     <Box>
-                        <Typography variant="h6" color="initial">
-                            {t(`${message}.title`, {id: ads_id, user_id: go_to})}
-                        </Typography>
+                        {!!title && (
+                            <Typography variant="h6" color="initial">
+                                {t(`titles.${title}`)}
+                            </Typography>
+                        )}
                         <Typography variant="subtitle1" color="initial">
-                            {t(`${message}.desc`, {user_id: go_to})}
+                            {t(`descriptions.${message}`, {ads_id})}
                         </Typography>
                     </Box>
                     <Box display='flex' justifyContent='flex-end'>
@@ -115,9 +135,7 @@ export const NotificationCard: FC<NotificationDataType> = (props) => {
                                     </Typography>
                                 </Button>
                                 : isFetch
-                                    ? <Typography variant='subtitle1' color="secondary">
-                                        ...Loading
-                                    </Typography>
+                                    ? <CustomCircularProgress/>
                                     : <Button
                                         size="small"
                                         color="secondary"
@@ -128,7 +146,8 @@ export const NotificationCard: FC<NotificationDataType> = (props) => {
                                         <Typography variant='subtitle1' color="secondary">
                                             {t('show_phone')}
                                         </Typography>
-                                    </Button>}
+                                    </Button>
+                        }
                     </Box>
                 </Box>
                 <IconButton onClick={handleDeleteNotification}>

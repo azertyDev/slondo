@@ -13,16 +13,32 @@ export default class MyDocument extends Document {
         return (
             <Html lang="ru">
                 <Head>
+                    <script
+                        async
+                        src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS}`}
+                    />
+                    <script
+                        dangerouslySetInnerHTML={{
+                            __html: `
+                            window.dataLayer = window.dataLayer || [];
+                            function gtag(){dataLayer.push(arguments);}
+                            gtag('js', new Date());
+                            gtag('config', '${process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS}', {
+                              page_path: window.location.pathname,
+                            });
+                          `
+                        }}
+                    />
                     <link
                         rel="icon"
-                        type="image/png"
                         sizes="54x54"
+                        type="image/png"
                         href="/img/favicon.png"
                     />
                 </Head>
                 <body>
-                    <Main/>
-                    <NextScript/>
+                <Main/>
+                <NextScript/>
                 </body>
             </Html>
         );

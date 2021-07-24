@@ -16,6 +16,7 @@ import {ParametersIcon} from '@src/components/elements/icons';
 import {CustomAccordion} from '@src/components/elements/accordion/CustomAccordion';
 import {DeployedSelect} from '@src/components/elements/deployed_select/DeployedSelect';
 import {CheckboxSelect} from '@src/components/elements/checkbox_select/CheckboxSelect';
+import {useUrlParams} from "@src/hooks";
 import {useStyles} from './useStyles';
 
 export const HousesCottagesParams: FC<CommonParamsPropsType> = (props) => {
@@ -31,15 +32,23 @@ export const HousesCottagesParams: FC<CommonParamsPropsType> = (props) => {
     } = props;
 
     const isRent = type.id === 2 || type.id === 3;
+    const {title, model} = useUrlParams();
 
-    const initVals: any = {
-        title: '',
+    let initVals: any = {
+        title,
         room: null,
         number_of_floors: null,
         estate_type: null,
         general_area: '',
         land_area: ''
     };
+
+    if (model) {
+        initVals = {
+            ...initVals,
+            ...model
+        };
+    }
 
     const formik = useFormik({
         onSubmit,

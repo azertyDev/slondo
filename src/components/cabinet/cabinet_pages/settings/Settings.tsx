@@ -1,27 +1,185 @@
-import {FC, ReactElement, ReactNode} from 'react';
-import {Box, Button, Grid, Typography} from '@material-ui/core';
-import EditIcon from '@material-ui/icons/Edit';
-import {CustomModal} from '@src/components/elements/custom_modal/CustomModal';
-import {useStyles} from './useStyles';
+import {FC, useContext, useEffect, useState} from 'react';
+import {unstable_batchedUpdates} from 'react-dom';
+import {useTranslation} from 'react-i18next';
+import {userAPI} from '@src/api/api';
+import {cookieOpts, cookies} from '@src/helpers';
+import {useFormik} from 'formik';
+import {SettingsForm} from '@src/components/cabinet/cabinet_pages/settings/settings_form/SettingsForm';
+import {UploadAvatarForm} from '@src/components/cabinet/cabinet_pages/settings/settings_form/upload_avatar_form/UploadAvatarForm';
+import {timeRegEx} from '@src/common_data/reg_exs';
+import {userInfoSchema} from '@root/validation_schemas/authRegSchema';
+import {UserCtx, AuthCtx, ErrorCtx} from "@src/context";
+import {Box, Button, Grid, Typography} from "@material-ui/core";
+import EditIcon from "@material-ui/icons/Edit";
+import {CustomModal} from "@src/components/elements/custom_modal/CustomModal";
+import {UserInfo} from "@root/interfaces/Auth";
+import {WEEK_DAYS} from "@src/common_data/common";
+import {PasswordRecovery} from "./settings_form/password_recovery/PasswordRecovery";
+import {useStyles} from "./useStyles";
 
-type SettingsPropsType = {
-    settingsForm: ReactNode,
-    handleAllowEdit: () => void,
-    openModal: boolean,
-    handleClose: () => void,
-    modalContent: ReactElement,
-    formDisable: boolean,
-}
+export const Settings: FC = () => {
+    const {t} = useTranslation('cabinet');
+    const {setIsAuth} = useContext(AuthCtx);
+    const {user, setUser} = useContext(UserCtx);
+    const {setErrorMsg} = useContext(ErrorCtx);
 
-export const Settings: FC<SettingsPropsType> = (props) => {
+    const initUserInfo = {
+        name: user.name,
+        surname: user.surname ?? '',
+        avatar: user.avatar,
+        phone: user.phone,
+        available_start_time: user.available_start_time ?? '09:00',
+        available_end_time: user.available_end_time ?? '18:00',
+        available_days: user.available_days ?? [...WEEK_DAYS]
+    };
+
+    const [isFetch, setIsFetch] = useState(false);
+    const [editable, setEditable] = useState(false);
+    const [avalTimeActive, setAvalTimeActive] = useState(false);
+    const [openModal, setOpenModal] = useState(false);
+
+    const onSubmit = async (values: UserInfo) => {
+        try {
+            const {
+                phone,
+                avatar,
+                ...otherData
+            } = values;
+
+            let newUserInfo: any = {
+                ...otherData
+            };
+
+            setIsFetch(true);
+
+            if (avatar !== null && typeof avatar === 'object') {
+                await userAPI.changeUserAvatar(avatar);
+            }
+
+            if (avatar === null) {
+                await userAPI.deleteUserAvatar(user.id);
+            }
+
+            const updatedUserInfo = await userAPI.changeUserInfo(newUserInfo);
+
+            cookies.set('slondo_user', updatedUserInfo, cookieOpts);
+            unstable_batchedUpdates(() => {
+                setIsAuth(true);
+                setUser(updatedUserInfo);
+                setEditable(false);
+                setIsFetch(false);
+                setAvalTimeActive(false);
+            });
+        } catch (e) {
+            unstable_batchedUpdates(() => {
+                setIsFetch(false);
+                setErrorMsg(e.message);
+            });
+        }
+    };
+
+    const handleCancel = () => {
+        unstable_batchedUpdates(() => {
+            setValues(initUserInfo);
+            setEditable(false);
+            setAvalTimeActive(false);
+        });
+    };
+
+    const formik = useFormik<UserInfo>({
+        initialValues: initUserInfo,
+        validationSchema: userInfoSchema,
+        onSubmit
+    });
+
     const {
-        settingsForm,
-        handleAllowEdit,
-        openModal,
-        handleClose,
-        modalContent,
-        formDisable
-    } = props;
+        values,
+        setValues
+    } = formik;
+
+    const {available_days} = values;
+
+    const handleOpenModal = async () => {
+        try {
+            setIsFetch(true);
+            await userAPI.getSmsCode(user.phone);
+            unstable_batchedUpdates(() => {
+                setIsFetch(false);
+                setOpenModal(true);
+            });
+        } catch (e) {
+            unstable_batchedUpdates(() => {
+                setOpenModal(false);
+                // setCodeError(e.message);
+                setIsFetch(false);
+            });
+        }
+    };
+
+    const handleModalClose = () => {
+        setOpenModal(false);
+    };
+
+    const handleAllowEdit = () => {
+        setEditable(!editable);
+    };
+
+    const handleUpload = (event) => {
+        setValues({...values, avatar: event.target.files[0]});
+    };
+
+    const handleDeleteAvatar = () => {
+        setValues({...values, avatar: null});
+    };
+
+    const switchAvalDaysActive = (_, val) => {
+        editable && setAvalTimeActive(val);
+    };
+
+    const handleAvalDays = day => () => {
+        const isExstDay = available_days.some(({id}) => id === day.id);
+        const days = [...available_days];
+
+        if (isExstDay) {
+            days.map(({id}, index) => {
+                if (id === day.id) {
+                    days.splice(index, 1);
+                }
+            });
+        } else {
+            days.push(day);
+        }
+
+        setValues({
+            ...values,
+            available_days: days
+        });
+    };
+
+    const handleTime = ({target: {value, name}}) => {
+        if (timeRegEx.test(value)) {
+            value = value.replace(/^:(.+)/, m => `00${m}`).replace(/(.+):$/, m => `${m}00`);
+            setValues({...values, [name]: value});
+        }
+    };
+
+    const handleSignIn = (user) => () => {
+        setUser(user);
+    };
+
+    const uploadAvatarForm = (
+        <UploadAvatarForm
+            t={t}
+            avatar={values.avatar}
+            editable={editable}
+            handleUpload={handleUpload}
+            handleDeleteAvatar={handleDeleteAvatar}
+        />
+    );
+
+    useEffect(() => {
+        setValues(initUserInfo);
+    }, [user]);
 
     const classes = useStyles();
     return (
@@ -29,33 +187,41 @@ export const Settings: FC<SettingsPropsType> = (props) => {
             <Grid container className={classes.root} direction='column'>
                 <Box
                     display='flex'
-                    justifyContent='space-between'
                     alignItems='center'
+                    justifyContent='flex-end'
                 >
-                    <Typography variant='subtitle1'>
-                        Личные данные
-                    </Typography>
                     <Button
                         color='secondary'
                         variant='text'
-                        className={classes.editButton}
                         onClick={handleAllowEdit}
-                        startIcon={formDisable && <EditIcon fontSize='small'/>}
+                        className={classes.editButton}
+                        startIcon={!editable && <EditIcon fontSize='small'/>}
                     >
                         <Typography variant='subtitle1'>
-                            {formDisable ? 'Редактировать' : 'Отменить'}
+                            {editable ? 'Отменить' : 'Редактировать'}
                         </Typography>
                     </Button>
                 </Box>
                 <Grid item xs>
-                    {settingsForm}
+                    <SettingsForm
+                        t={t}
+                        formik={formik}
+                        editable={editable}
+                        avalTimeActive={avalTimeActive}
+                        switchAvalDaysActive={switchAvalDaysActive}
+                        uploadAvatarForm={uploadAvatarForm}
+                        handleTime={handleTime}
+                        handleAvalDays={handleAvalDays}
+                        handleOpenModal={handleOpenModal}
+                        handleCancel={handleCancel}
+                    />
                 </Grid>
             </Grid>
             <CustomModal
-                handleModalClose={handleClose}
                 openModal={openModal}
+                handleModalClose={handleModalClose}
             >
-                {modalContent}
+                <PasswordRecovery/>
             </CustomModal>
         </>
     );

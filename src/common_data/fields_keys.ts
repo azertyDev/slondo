@@ -1,4 +1,4 @@
-export const fieldIsRequired = 'fieldIsRequired';
+export const fieldRequiredTxt = 'fieldIsRequired';
 
 export const requireFields = [
     'title',

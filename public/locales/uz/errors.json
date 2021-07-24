@@ -1,4 +1,6 @@
 {
+  "must_less_than_20": "{{value}} 20 ta belgidan oshmasligi kerak",
+  "must_more_than_3": "{{value}} kamida 3 ta belgidan iborat bo'lishi kerak",
   "code_has_already_been_sent": "Kod yuborilgan. Iltimos keyinroq harakat qilib ko'ring",
   "incorrect_code": "Noto'g'ri kod",
   "incorrect_pwd": "Noto'g'ri parol",

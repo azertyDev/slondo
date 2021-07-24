@@ -6,9 +6,9 @@ export const initUser: UserInfo = {
     name: '',
     surname: '',
     phone: '',
-    avatar: '',
+    avatar: null,
     created_at: '',
-    available_days: '',
+    available_days: [],
     available_start_time: '',
     available_end_time: '',
     observer: {

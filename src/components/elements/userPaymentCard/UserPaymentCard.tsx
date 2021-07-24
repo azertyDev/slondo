@@ -249,8 +249,8 @@ export const UserPaymentCard: FC = () => {
                                                name="phone"
                                                disabled={hasCard}
                                                value={expireDate}
-                                               labelText={t('phone')}
-                                               onChange={handleNumericInput}
+                                               onChange={handleInput}
+                                               labelText={t('auth_reg:enter_phone')}
                                            />}
                                       </Grid>
                                   </>}

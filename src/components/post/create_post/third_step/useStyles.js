@@ -13,9 +13,6 @@ export const useStyles = makeStyles((theme) => ({
         '& div.title-wrapper': {
             marginBottom: '15px'
         },
-        '& input.MuiOutlinedInput-input': {
-            padding: '10px 15px'
-        },
         '& > div': {
             marginBottom: '15px'
         },

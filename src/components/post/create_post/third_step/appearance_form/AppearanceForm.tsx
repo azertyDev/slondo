@@ -1,17 +1,16 @@
-import {FC, useContext, useEffect, useState} from 'react';
-import axios from "axios";
+import {FC, useEffect, useState} from 'react';
 import {useFormik} from 'formik';
 import {Typography} from '@material-ui/core';
 import {UPLOAD_FILES_LIMIT} from '@src/constants';
 import {PreviewPhotos} from './preview_photos/PreviewPhotos';
 import {CustomAccordion} from '@src/components/elements/accordion/CustomAccordion';
-import {IdNameType} from '@root/interfaces/Post';
+import {FileType, IdNameType} from '@root/interfaces/Post';
 import {ViewIcon} from '@src/components/elements/icons';
 import {appearanceSchema} from '@root/validation_schemas/createPostSchemas';
 import {CustomFormikProvider} from '@src/components/elements/custom_formik_provider/CustomFormikProvider';
 import {useTranslation} from 'react-i18next';
 import {useRouter} from "next/router";
-import {ErrorCtx} from "@src/context";
+import {DropResult} from "react-beautiful-dnd";
 import {useStyles} from './useStyles';
 
 type AppearanceFormPropsType = {
@@ -39,40 +38,37 @@ export const AppearanceForm: FC<AppearanceFormPropsType> = (props) => {
     const isJob = categoryName === 'job';
 
     const {t} = useTranslation('filters');
-    const {images} = useRouter().query;
-    const {setErrorMsg} = useContext(ErrorCtx);
+    const {images, model} = useRouter().query;
 
-    const [isFetch, setIsFetch] = useState(false);
-
-    const fetchFiles = (urls: { url: string }[]) => {
-        try {
-            return Promise.all(urls.filter(url => !!url).map(file =>
-                axios
-                    .get(file.url, {responseType: 'arraybuffer'})
-                    .then(res => new Blob([res.data]))
-                    .catch(({response}) => {
-                        throw (response.data.message);
-                    })
-            ));
-        } catch (e) {
-            setErrorMsg(e.message);
-        }
-    };
-
-    const onSubmit = async ({files, color}) => {
-        setIsFetch(true);
+    const onSubmit = ({files, color}) => {
         const appearance: { photos: any, color_id?: number } = {
-            photos: await fetchFiles(files)
+            photos: files.filter(f => !!f).map(f => f.id ?? f.file)
         };
-        setIsFetch(false);
         if (color) appearance.color_id = color.id;
         handleSubmit({appearance});
         handleNextFormOpen();
     };
 
+    const initColor = () => {
+        if (model) {
+            const color = JSON.parse(model as string).color;
+            if (color) {
+                return colors.find(clr => clr.id === color.id);
+            }
+        }
+        return {
+            id: null,
+            name: '',
+            hex_color_code: ''
+        };
+    };
+
     const initPhotos = () => {
         if (images) {
-            const imgs = JSON.parse(images as string).map(img => ({url: img.url.default}));
+            const imgs = JSON.parse(images as string).map(img => ({
+                id: img.id,
+                url: img.url.default
+            }));
             const nulls = Array.from({length: UPLOAD_FILES_LIMIT - imgs.length}).map(_ => null);
             return [...imgs, ...nulls];
         } else {
@@ -107,14 +103,65 @@ export const AppearanceForm: FC<AppearanceFormPropsType> = (props) => {
         setValues({...values});
     };
 
+    const reorder = (list, startIndex, endIndex) => {
+        const result = Array.from(list);
+        const [removed] = result.splice(startIndex, 1);
+        result.splice(endIndex, 0, removed);
+
+        return result;
+    };
+
+    const sortArray = (arr) => {
+        const sorted = arr.filter(item => !!item);
+        const nulls = Array.from({length: UPLOAD_FILES_LIMIT - sorted.length}).map(_ => null);
+        return [...sorted, ...nulls];
+    };
+
+    const handleOnDragEnd = ({destination, source}: DropResult) => {
+        if (!destination) return;
+        setValues({
+            ...values,
+            files: sortArray(reorder(files, source.index, destination.index))
+        });
+    };
+
+    const handleUploadFile = ({target}) => {
+        let photos: any = Array.from(target.files);
+
+        photos = photos.map(photo => ({
+            file: photo,
+            url: URL.createObjectURL(photo)
+        }));
+
+        const dist = photos.length - UPLOAD_FILES_LIMIT;
+        const sum = files.length + dist;
+
+        if (dist > 0) {
+            photos.splice(-dist, dist);
+        }
+        if (sum > 0) {
+            files.splice(-sum, sum);
+        }
+
+        setValues({
+            ...values,
+            files: [...photos, ...files]
+        });
+    };
+
+    const removeFile = (url) => () => {
+        const sorted = files.filter((item: FileType) => item && item.url !== url);
+        const nulls = Array.from({length: UPLOAD_FILES_LIMIT - sorted.length}).map(_ => null);
+        setValues({
+            ...values,
+            files: [...sorted, ...nulls]
+        });
+    };
+
     useEffect(() => {
         !!colors && setValues({
             ...values,
-            color: {
-                id: null,
-                name: '',
-                hex_color_code: ''
-            }
+            color: initColor()
         });
     }, [colors]);
 
@@ -122,7 +169,6 @@ export const AppearanceForm: FC<AppearanceFormPropsType> = (props) => {
     return (
         <CustomFormikProvider formik={formik}>
             <CustomAccordion
-                isFetch={isFetch}
                 icon={<ViewIcon/>}
                 isPreview={isPreview}
                 open={currentFormIndex === formIndex}
@@ -155,13 +201,13 @@ export const AppearanceForm: FC<AppearanceFormPropsType> = (props) => {
                                         {t('post:photos')}:
                                     </strong>
                                 </Typography>
-                                {files.map((photo, i) =>
-                                    photo && <img
+                                {files.map((photo, i) => (
+                                    !!photo && <img
                                         key={i}
                                         alt="photo"
                                         src={photo.url}
                                     />
-                                )}
+                                ))}
                             </div>
                         </div>
                         : <div>
@@ -212,8 +258,10 @@ export const AppearanceForm: FC<AppearanceFormPropsType> = (props) => {
                                     )}
                                 </Typography>
                                 <PreviewPhotos
-                                    values={values}
-                                    setValues={setValues}
+                                    files={files}
+                                    removeFile={removeFile}
+                                    handleUploadFile={handleUploadFile}
+                                    handleOnDragEnd={handleOnDragEnd}
                                 />
                             </div>
                         </div>}

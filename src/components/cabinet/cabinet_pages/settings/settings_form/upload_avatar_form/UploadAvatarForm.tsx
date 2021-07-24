@@ -1,36 +1,35 @@
-import {Avatar, Button} from '@material-ui/core';
-import React, {FC} from 'react';
-import {useStyles} from './useStyles';
-import AddCircleIcon from '@material-ui/icons/AddCircle';
-import CancelIcon from '@material-ui/icons/Cancel';
+import {FC} from 'react';
 import {WithT} from 'i18next';
+import {Avatar, Button} from '@material-ui/core';
+import {AddCircle, Cancel} from '@material-ui/icons';
+import {useStyles} from './useStyles';
 
 type UploadAvatarFormProps = {
     handleUpload: (event) => void,
     handleDeleteAvatar: () => void,
-    formDisable: boolean,
+    editable: boolean,
     avatar: string
 } & WithT;
 
 export const UploadAvatarForm: FC<UploadAvatarFormProps> = (props) => {
-
-    const classes = useStyles({ props });
     const {
         t,
         handleUpload,
-        formDisable,
+        editable,
         handleDeleteAvatar,
         avatar
     } = props;
+
+    const classes = useStyles({props});
     return (
         <div id="upload-box">
             <input
                 id="icon-button-file"
                 type="file"
-                style={{ display: 'none' }}
+                style={{display: 'none'}}
                 onChange={handleUpload}
                 accept='image/jpeg, image/png'
-                disabled={formDisable}
+                disabled={!editable}
             />
             <label htmlFor="icon-button-file">
                 <Button
@@ -38,23 +37,21 @@ export const UploadAvatarForm: FC<UploadAvatarFormProps> = (props) => {
                     color="secondary"
                     aria-label="upload picture"
                     component="span"
-                    disabled={formDisable}
-                    startIcon={<AddCircleIcon color='inherit' />}
+                    disabled={!editable}
+                    startIcon={<AddCircle color='inherit'/>}
                 >
-                    {
-                        avatar
-                            ? t('cabinet:editAvatar')
-                            : t('cabinet:addAvatar')
-                    }
+                    {avatar
+                        ? t('cabinet:editAvatar')
+                        : t('cabinet:addAvatar')}
                 </Button>
             </label>
             <Button
                 variant="contained"
                 color="default"
                 aria-label="upload picture"
-                disabled={formDisable || !avatar}
+                disabled={!editable || !avatar}
                 component="span"
-                startIcon={<CancelIcon color='error' fontSize='small' />}
+                startIcon={<Cancel color='error' fontSize='small'/>}
                 onClick={handleDeleteAvatar}
             >
                 {t('cabinet:deleteAvatar')}

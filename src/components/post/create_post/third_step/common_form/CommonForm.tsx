@@ -1,4 +1,5 @@
-import {Dispatch, FC, SetStateAction, useContext} from 'react';
+import {Dispatch, FC, SetStateAction, useContext, useState} from 'react';
+import Link from "next/link";
 import {useTranslation} from 'next-i18next';
 import {Grid} from '@material-ui/core';
 import {AuctionParams} from './auction_params/AuctionParams';
@@ -44,8 +45,11 @@ export const CommonForm: FC<DefaultParamsPropsType> = (props) => {
     } = props;
 
     const descTxtLimit = 3000;
+
     const {t} = useTranslation('post');
+
     const {phone: userPhone} = useContext(UserCtx).user;
+
     const {
         region,
         city,
@@ -83,12 +87,9 @@ export const CommonForm: FC<DefaultParamsPropsType> = (props) => {
         price: price ?? '',
         currency: currency ? JSON.parse(currency as string) : postType.currency[0],
         avalTime: {
-            isActive: !!available_start_time,
-            time: {
-                start_time: available_start_time ? JSON.parse(available_start_time as string) : '09:00',
-                end_time: available_end_time ? JSON.parse(available_end_time as string) : '18:00',
-                week_days: available_days ? JSON.parse(available_days as string) : [...WEEK_DAYS]
-            }
+            available_start_time: available_start_time ? JSON.parse(available_start_time as string) : '09:00',
+            available_end_time: available_end_time ? JSON.parse(available_end_time as string) : '18:00',
+            available_days: available_days ? JSON.parse(available_days as string) : [...WEEK_DAYS]
         },
         auction: {
             duration: null,
@@ -103,6 +104,8 @@ export const CommonForm: FC<DefaultParamsPropsType> = (props) => {
         }
     };
 
+    const [avalTimeActive, setAvalTimeActive] = useState(!!available_start_time);
+
     const onSubmit = (values) => {
         const createData = {...values};
         createData.price = Number.parseInt(clearWhiteSpaces(createData.price));
@@ -115,7 +118,7 @@ export const CommonForm: FC<DefaultParamsPropsType> = (props) => {
             safe_deal,
             delivery,
             exchange,
-            avalTime: {isActive, time},
+            avalTime,
             ...otherData
         } = createData;
 
@@ -156,11 +159,11 @@ export const CommonForm: FC<DefaultParamsPropsType> = (props) => {
             address.city_id = city.id;
         }
 
-        if (isActive) {
-            const {week_days, start_time, end_time} = time;
-            otherData.start_time = start_time;
-            otherData.end_time = end_time;
-            otherData.week_days = week_days.map(({id}) => ({id}));
+        if (avalTimeActive) {
+            const {available_start_time, available_end_time, available_days} = avalTime;
+            otherData.available_start_time = available_start_time;
+            otherData.available_end_time = available_end_time;
+            otherData.available_days = available_days.map(({id}) => ({id}));
         }
 
         if (!!phone && !RegExp(/_/g).test(phone)) otherData.phone = phonePrepare(phone);
@@ -175,7 +178,6 @@ export const CommonForm: FC<DefaultParamsPropsType> = (props) => {
         };
 
         handleSubmit({commonParams});
-
         setIsPreview(true);
     };
 
@@ -262,21 +264,20 @@ export const CommonForm: FC<DefaultParamsPropsType> = (props) => {
         setValues({...values});
     };
 
-    const handleSwitch = (_, value) => {
-        avalTime.isActive = value;
-        setValues({...values});
+    const switchActive = (_, value) => {
+        setAvalTimeActive(value);
     };
 
     const handleAvalDays = day => () => {
-        const isExstDay = avalTime.time.week_days.some(({id}) => id === day.id);
+        const isExstDay = avalTime.available_days.some(({id}) => id === day.id);
         if (isExstDay) {
-            avalTime.time.week_days.map(({id}, index) => {
+            avalTime.available_days.map(({id}, index) => {
                 if (id === day.id) {
-                    avalTime.time.week_days.splice(index, 1);
+                    avalTime.available_days.splice(index, 1);
                 }
             });
         } else {
-            avalTime.time.week_days.push(day);
+            avalTime.available_days.push(day);
         }
         setValues({...values});
     };
@@ -284,8 +285,7 @@ export const CommonForm: FC<DefaultParamsPropsType> = (props) => {
     const handleTime = ({target: {value, name}}) => {
         if (RegExp(timeRegEx).test(value)) {
             value = value.replace(/^:(.+)/, m => `00${m}`).replace(/(.+):$/, m => `${m}00`);
-            avalTime.time = {...avalTime.time, [name]: value};
-            setValues({...values});
+            setValues({...values, avalTime: {...avalTime, [name]: value}});
         }
     };
 
@@ -307,8 +307,9 @@ export const CommonForm: FC<DefaultParamsPropsType> = (props) => {
                             values={values}
                             userPhone={userPhone}
                             location={location}
-                            priceLabel={priceLabel}
                             isAuction={isAuction}
+                            priceLabel={priceLabel}
+                            avalTimeActive={avalTimeActive}
                             isAdvanceAuction={isAdvanceAuction}
                         />
                         : <div>
@@ -370,7 +371,7 @@ export const CommonForm: FC<DefaultParamsPropsType> = (props) => {
                                     </span>
                                 )}
                             </div>
-                            <div>
+                            <div className='description-wrapper'>
                                 <FormikTextarea
                                     rows={15}
                                     name='description'
@@ -388,7 +389,13 @@ export const CommonForm: FC<DefaultParamsPropsType> = (props) => {
                                 spacing={1}
                                 justify='space-between'
                             >
-                                <Grid item xs={12} sm={6} md={4} className='phone-block'>
+                                <Grid
+                                    item
+                                    xs={12}
+                                    sm={6}
+                                    md={3}
+                                    className='phone-wrapper'
+                                >
                                     <Contacts
                                         t={t}
                                         values={values}
@@ -399,15 +406,26 @@ export const CommonForm: FC<DefaultParamsPropsType> = (props) => {
                                     />
                                 </Grid>
                                 {!isAuction && (
-                                    <Grid item xs={12} sm={6}>
-                                        <AvailableDays
-                                            t={t}
-                                            avalTime={values.avalTime}
-                                            handleBlur={handleBlur}
-                                            handleTime={handleTime}
-                                            handleSwitch={handleSwitch}
-                                            handleAvalDays={handleAvalDays}
-                                        />
+                                    <Grid
+                                        item
+                                        xs={12}
+                                        sm={6}
+                                        lg={4}
+                                    >
+                                        <div className='avail-days-wrapper'>
+                                            <AvailableDays
+                                                t={t}
+                                                time={values.avalTime}
+                                                handleBlur={handleBlur}
+                                                handleTime={handleTime}
+                                                switchActive={switchActive}
+                                                handleAvalDays={handleAvalDays}
+                                                isActive={avalTimeActive}
+                                            />
+                                            <Link href='/cabinet/settings'>
+                                                <a className='settings'>{t('configs')}</a>
+                                            </Link>
+                                        </div>
                                     </Grid>
                                 )}
                             </Grid>

@@ -153,7 +153,13 @@ export const FormPages: FC = () => {
             setIsFetch(true);
 
             form.append('data', JSON.stringify(data));
-            photos.forEach(photo => form.append('files[]', photo));
+            photos.forEach(photo => {
+                if (typeof photo === 'number') {
+                    form.append('images_id[]', photo.toString());
+                } else {
+                    form.append('files[]', photo);
+                }
+            });
 
             post_id ? await userAPI.editPost(form, post_id) : await userAPI.createPost(form);
 

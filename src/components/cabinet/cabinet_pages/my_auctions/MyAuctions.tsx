@@ -16,7 +16,7 @@ import {ITEMS_PER_PAGE} from '@src/constants';
 import {CustomTabPanel} from '@src/components/elements/custom_tab_panel/CustomTabPanel';
 import {useModal} from '@src/hooks/useModal';
 import {CardDataType} from '@root/interfaces/CardData';
-import {DetailedPostContainerModal} from '@src/components/cabinet/components/detailed_post_modal/DetailedPostContainerModal';
+import {DetailedPostModalContainer} from '@src/components/cabinet/components/detailed_post_modal/DetailedPostModalContainer';
 import {initialCardData} from '@src/components/cabinet/cabinet_pages/my_posts/MyPosts';
 import {NotificationModal} from '@src/components/cabinet/components/notifation_modal/NotificationModal';
 import {SettingsModal} from "@src/components/cabinet/components/settings_modal/SettingsModal";
@@ -246,7 +246,7 @@ export const MyAuctions: FC = () => {
                 // headerTitle={t('myAuctions')}
                 handleTabChange={handleTabChange}
             />
-            <DetailedPostContainerModal
+            <DetailedPostModalContainer
                 post={selectedAuction}
                 open={detailedModalOpen}
                 onClose={closeDetailedModal}

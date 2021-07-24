@@ -13,12 +13,12 @@ import {useStyles} from './useStyles';
 export const Header: FC = () => {
     const {t} = useTranslation('header');
 
-    const userFromCookie = cookies.get('slondo_user');
+    const userFromCookies = cookies.get('slondo_user');
 
     const {user, setUser} = useContext(UserCtx);
     const {auth, setAuthModalOpen, setIsAuth} = useContext(AuthCtx);
 
-    const isAuth = auth.isAuth || !!userFromCookie;
+    const isAuth = auth.isAuth || !!userFromCookies;
 
     const handleOpenModal = () => {
         setAuthModalOpen(true);
@@ -26,12 +26,12 @@ export const Header: FC = () => {
 
     const handleSignin = () => {
         setIsAuth(true);
-        setUser(userFromCookie);
+        setUser(userFromCookies);
     };
 
     useEffect(() => {
         !auth.isAuth
-        && !!userFromCookie
+        && !!userFromCookies
         && handleSignin();
         // !!userId && socketIO.on('connect', () => {
         //     socketIO.emit('user_connected', user.id);

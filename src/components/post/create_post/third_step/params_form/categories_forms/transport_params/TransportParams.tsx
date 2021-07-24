@@ -12,6 +12,7 @@ import {PostTitle} from '@src/components/post/create_post/third_step/params_form
 import {FormikField} from '@src/components/elements/formik_field/FormikField';
 import {PreviewValues} from '@src/components/post/create_post/third_step/params_form/PreviewValues';
 import {useStyles} from './useStyles';
+import {useUrlParams} from "@src/hooks";
 
 export const excludeCtgrsForYear = [
     'other',
@@ -37,10 +38,18 @@ export const TransportParams: FC<CommonParamsPropsType> = (props) => {
     const hasEngineCapacity = type.name === 'motorcycles' || type.name === 'mopedsAndScooters';
     const hasMileage = subcategoryName === 'motorcyclesAndMotorTech' || subcategoryName === 'busesAndTrucks';
 
+    const {title, model} = useUrlParams();
 
-    const initVals: any = {
-        title: ''
+    let initVals: any = {
+        title
     };
+
+    if (model) {
+        initVals = {
+            ...initVals,
+            ...model
+        };
+    }
 
     if (!isYearExclude) initVals.year = '';
     if (hasEngineCapacity) initVals.engine_capacity = '';
