@@ -2,10 +2,14 @@ import {makeStyles} from '@material-ui/core/styles';
 
 export const useStyles = makeStyles((theme) => ({
     root: {
-        borderRadius: '10px',
+        height: 220,
+        padding: 10,
+        borderRadius: 10,
         background: '#F2F2F2',
-        height: '220px',
         boxShadow: '0px 1px 2px rgba(0, 0, 0, 0.04), 1px 0px 2px rgba(0, 0, 0, 0.04)',
+        '& h6.MuiTypography-h6': {
+            textAlign: 'center'
+        },
         '& a': {
             textDecoration: 'none',
             '& h6': {
@@ -15,7 +19,7 @@ export const useStyles = makeStyles((theme) => ({
     },
     createPost: {
         background: '#2F80ED',
-        borderRadius: '10px',
+        borderRadius: 10,
         boxShadow: '0px 2px 2px 0px #00000026',
         '& .MuiTypography-subtitle1': {
             color: '#FFF !important'

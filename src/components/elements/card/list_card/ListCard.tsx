@@ -122,7 +122,7 @@ export const ListCard: FC<ListCardPropsType> = ({cardData}) => {
                                 <div className="delivery">
                                     <DeliveryIcon />
                                     {!isXsDown && <Typography variant="body1">
-                                        Есть доставка
+                                        {t('common:delivery')}
                                     </Typography>}
                                 </div>
                             )}
@@ -130,8 +130,8 @@ export const ListCard: FC<ListCardPropsType> = ({cardData}) => {
                                 <div className="available">
                                     <PhoneIcon />
                                     {!isXsDown && <Typography variant="body1">
-                                        {weekDaysHelper(cardData.available_days, t)}{' '}
-                                        {`${cardData.available_start_time}-${cardData.available_end_time}`}
+                                        {weekDaysHelper(cardData.available_days, t)}&nbsp;
+                                        {cardData.available_start_time || cardData.available_end_time && `${cardData.available_start_time}-${cardData.available_end_time}`}
                                     </Typography>}
                                 </div>
                             )}
@@ -140,7 +140,7 @@ export const ListCard: FC<ListCardPropsType> = ({cardData}) => {
                                     <div className="exchange">
                                         <SwapIcon />
                                         {!isXsDown && <Typography variant="body1">
-                                            Возможен обмен
+                                            {t('common:exchange')}
                                         </Typography>}
                                     </div>
                                 </Tooltip>
@@ -149,7 +149,7 @@ export const ListCard: FC<ListCardPropsType> = ({cardData}) => {
                                 <div className="safe_deal">
                                     <SafeIcon />
                                     {!isXsDown && <Typography variant="body1">
-                                        Безопасная покупка
+                                        {t('common:safe_deal')}
                                     </Typography>}
                                 </div>
                             )}
@@ -157,7 +157,7 @@ export const ListCard: FC<ListCardPropsType> = ({cardData}) => {
                                 <div className="safe_deal">
                                     <RenewalIcon />
                                     {!isXsDown && <Typography variant="body1">
-                                        Автопродление
+                                        {t('common:auto_ren')}
                                     </Typography>}
                                 </div>
                             )}
@@ -180,7 +180,7 @@ export const ListCard: FC<ListCardPropsType> = ({cardData}) => {
                         >
                             <Typography variant='subtitle2'>
                                 <span className='color-silver'>
-                                    Ставок:
+                                    {t('auction:bets')}:
                                 </span>&nbsp;
                                 {cardData.auction?.number_of_bets}
                             </Typography>

@@ -94,9 +94,10 @@ export const useStyles = makeStyles(() => ({
         marginBottom: 25,
         boxShadow: 'inset 0px -2px 0px 0px rgb(0 0 0 / 5%)',
         '& .MuiTab-root': {
+            width: '48%',
+            background: '#F2F2F2',
             minHeight: '36px !important',
             borderBottom: 'none !important',
-            background: '#F2F2F2',
             borderRadius: '5px 5px 0px 0px',
             '&:first-child': {
                 marginRight: 10

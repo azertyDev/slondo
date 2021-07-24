@@ -96,15 +96,15 @@ export const useStyles = makeStyles((theme) => ({
         }
     },
     avatarBlock: {
-        '& > button': {
-            padding: 0,
-            '& svg': {
-                width: '40px',
-                height: '40px',
-                [theme.breakpoints.down('xs')]: {
-                    width: '34px',
-                    height: '34px'
-                }
+        padding: 0,
+        background: 'none',
+        borderRadius: '100px',
+        '& svg': {
+            width: '40px',
+            height: '40px',
+            [theme.breakpoints.down('xs')]: {
+                width: '34px',
+                height: '34px'
             }
         }
     }

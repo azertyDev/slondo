@@ -64,9 +64,11 @@
   "profile_ratings": "Reyting",
   "profile_follows": "Obunachilar/obunalar",
   "profile_posts": "E'lonlar",
+  "unfold": "Batafsil ko'rish",
   "empty": {
     "post": "Siz xali xech qanday e'lon yaratmadingiz",
     "auction": "Siz xali xech qanday auksion yaratmadingiz",
+    "participate": "Siz xali xech qanday auksionda qatnashmagansiz",
     "archive": "Arxivingizda e'lon mavjud emas",
     "favorite": {
       "title": "E'lonlarni sevimliga qo'shish orqali kuzatib boring",

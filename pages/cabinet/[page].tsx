@@ -17,7 +17,8 @@ export const getServerSideProps: GetServerSideProps = async ({locale}) => ({
                 'common',
                 'locations',
                 'errors',
-                'post'
+                'post',
+                'auction'
             ]
         )
     }

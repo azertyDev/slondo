@@ -5,7 +5,7 @@ import {CircularProgress} from '@material-ui/core';
 import {EmptyPage} from '@src/components/cabinet/components/empty_page/EmptyPage';
 import {useTranslation} from 'next-i18next';
 
-export const Subscriptions: FC<any> = ({isFetch, subscriptions, handleFollow}) => {
+export const Subscriptions: FC<any> = ({isFetch, subscriptions, handleRefresh}) => {
     const {t} = useTranslation();
 
     const classes = useStyles();
@@ -19,8 +19,8 @@ export const Subscriptions: FC<any> = ({isFetch, subscriptions, handleFollow}) =
                     : subscriptions.map(({id, subscription}) => (
                         <SubscriptionItem
                             key={id}
-                            handleFollow={handleFollow}
                             user={subscription}
+                            handleRefresh={handleRefresh}
                         />)
                     )}
         </div>

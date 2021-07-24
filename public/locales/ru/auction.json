@@ -11,5 +11,6 @@
   "time": "Время",
   "difference": "Разница",
   "bet": "Ставка",
-  "numberOfLines": "Количество строк"
+  "numberOfLines": "Количество строк",
+  "bets": "Ставок"
 }

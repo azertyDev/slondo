@@ -20,6 +20,8 @@ export interface UserInfo {
 
 export type SubscriberType = {
     user_id?: number,
-    user?: UserInfo,
-    handleFollow: (user_id) => () => void,
+    user?: UserInfo & {
+        signed: boolean,
+    },
+    handleRefresh: () => void,
 }

@@ -96,14 +96,14 @@ export const CabinetCard: FC<CabinetCardPropsType> = (props) => {
                             </Grid>)
                         }
                     </Hidden>
-                    <Grid item xs={7} sm={8} md={12}>
+                    <Grid item xs={isPublic ? 7 : 12} sm={isPublic ? 8 : 12} md={12}>
                         {handleDetailedOpen && (
                             <CustomButton
                                 className='unfold-btn'
                                 onClick={handleDetailedOpen}
                             >
                                 <Typography variant='subtitle1'>
-                                    Раскрыть объявление
+                                    {t('cabinet:unfold')}
                                 </Typography>&nbsp;
                                 <ChevronRight color='action' />
                             </CustomButton>

@@ -28,17 +28,15 @@ export const Subs: FC = () => {
     const handleTabChange = (event, newValue) => {
         setTabIndex(newValue);
     };
-
     const fetchSubs = async (param) => {
         try {
             const {subscribers, subscriptions} = subs;
             const isSubscribers = param === 'subscribers';
 
-            setIsFetch(true)
+            setIsFetch(true);
             setSubs({...subs});
 
             const subsData = await userAPI.getSubs(param);
-            setIsFetch(false)
 
             if (isSubscribers) {
                 subscribers.data = subsData.data;
@@ -47,17 +45,12 @@ export const Subs: FC = () => {
                 subscriptions.data = subsData.data;
                 subscriptions.total = subsData.total;
             }
+
             setSubs({...subs});
+
+            setIsFetch(false);
         } catch (e) {
             setIsFetch(false)
-            setErrorMsg(e.message);
-        }
-    };
-
-    const handleFollow = (userId) => async () => {
-        try {
-            await userAPI.follow(userId);
-        } catch (e) {
             setErrorMsg(e.message);
         }
     };
@@ -73,14 +66,22 @@ export const Subs: FC = () => {
             title: 'Подписки',
             itemsPerPage: SUBS_PER_PAGE,
             handleFetchByTab: () => '',
-            component: <Subscriptions isFetch={isFetch} subscriptions={subs.subscriptions.data} handleFollow={handleFollow}/>
+            component: <Subscriptions
+                isFetch={isFetch}
+                subscriptions={subs.subscriptions.data}
+                handleRefresh={() => fetchSubs('subscriptions')}
+            />
         },
         {
             id: 1,
             title: 'Подписчики',
             itemsPerPage: SUBS_PER_PAGE,
             handleFetchByTab: () => '',
-            component: <Subscribers isFetch={isFetch} subscribers={subs.subscribers.data} handleFollow={handleFollow}/>
+            component: <Subscribers
+                isFetch={isFetch}
+                subscribers={subs.subscribers.data}
+                handleRefresh={() => fetchSubs('subscribers')}
+            />
         }
     ];
 

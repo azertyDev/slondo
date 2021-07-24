@@ -161,14 +161,14 @@ export const MyAuctions: FC = () => {
                     <Tab
                         label={
                             <Typography variant="subtitle1">
-                                Активные
+                                {t('cabinet:active')}
                             </Typography>
                         }
                     />
                     <Tab
                         label={
                             <Typography variant="subtitle1">
-                                Архивные
+                                {t('cabinet:archive')}
                             </Typography>
                         }
                     />
@@ -178,11 +178,7 @@ export const MyAuctions: FC = () => {
                         ? <CircularProgress color="primary" />
                         : fstTabPosts.length === 0
                             ? <EmptyPage
-                                label={t('cabinet:empty.auction')}
-                                action={t('header:createPost')}
-                                link={'/create/type'}
-                                tutorialLink={'#'}
-                                tutorialText={t('post:howToCreateAuc')}
+                                label={t('cabinet:empty.participate')}
                             />
                             : fstTabPosts.map(data => (
                                 <Box mb={3} key={data.id}>

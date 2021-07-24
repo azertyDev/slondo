@@ -47,7 +47,7 @@ export const MainSlider: FC = () => {
                                 right='10px'
                                 width='60%'
                                 position='absolute'
-                                top={isXs ? '25%' : '30%'}
+                                top={isXs ? '25%' : '20%'}
                                 className={classes.content}
                             >
                                 <Typography variant='h4' color="initial" gutterBottom>

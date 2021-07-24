@@ -1,4 +1,4 @@
-import {cloneElement, FC, useState} from 'react';
+import {cloneElement, FC, useContext, useState} from 'react';
 import Link from 'next/link';
 import {WithT} from 'i18next';
 import {useRouter} from 'next/router';
@@ -14,7 +14,7 @@ import {
     useTheme,
     Slide,
     useScrollTrigger,
-    Container
+    Container, Avatar, Drawer
 } from '@material-ui/core';
 import {LeftDrawer} from './drawer/Drawer';
 import {Localization} from './localization/Localization';
@@ -30,36 +30,25 @@ import {HeaderSearchForm} from '@src/components/header/bottom/header_search_form
 import {cookieOpts, cookies} from '@src/helpers';
 import {useStyles} from './useStyles';
 import {CategorySortIcon} from '@src/components/elements/icons/CategorySortIcon';
+import {UserCtx} from '@src/context';
+import {CustomDrawer} from '@src/components/header/bottom/custom_drawer/CustomDrawer';
 
 type TopHeaderPropsType = {
     isAuth: boolean,
     handleOpenModal: () => void;
 } & WithT;
 
-function ElevationScroll(props) {
-    const {children, window} = props;
-
-    const trigger = useScrollTrigger({
-        disableHysteresis: true,
-        threshold: 53,
-        target: window ? window() : undefined
-    });
-
-    return cloneElement(children, {
-        elevation: trigger ? 4 : 0
-    });
-}
-
 export const Top: FC<TopHeaderPropsType> = (props) => {
     const {t, handleOpenModal, isAuth} = props;
+    const {user: {avatar, name, surname}} = useContext(UserCtx);
 
     const userLocation = cookies.get('user_location');
     const trigger = useScrollTrigger({
         threshold: 53
     });
     const {pathname} = useRouter();
-    const [isOpen, setIsOpen] = useState(false);
     const isXsDown = useMediaQuery(useTheme().breakpoints.down('xs'));
+    const [isOpen, setIsOpen] = useState(false);
 
     const handleSelectLocation = ({region, city}) => {
         if (region) {
@@ -155,15 +144,9 @@ export const Top: FC<TopHeaderPropsType> = (props) => {
                                         </Link>
                                     </Grid>
                                     {isAuth
-                                        ? <Link href='/cabinet/posts'>
-                                            <a>
-                                                <div className={classes.avatarBlock}>
-                                                    <IconButton>
-                                                        <UserAvatarIcon/>
-                                                    </IconButton>
-                                                </div>
-                                            </a>
-                                        </Link>
+                                        ? <CustomButton className={classes.avatarBlock}>
+                                            <Avatar alt="Avatar" src={avatar} />
+                                        </CustomButton>
                                         : <CustomButton
                                             className="btn-sign-mobile"
                                             onClick={handleOpenModal}

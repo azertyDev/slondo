@@ -54,6 +54,8 @@ const Cabinet: FC = () => {
                 return <SettingsContainer/>;
             case 'subs':
                 return <Subs/>;
+            default:
+                return <div>Test</div>
         }
     };
 
@@ -63,11 +65,11 @@ const Cabinet: FC = () => {
             <div className={classes.root}>
                 <Grid container spacing={isSmDown ? 0 : 2}>
                     <Hidden smDown>
-                        <Grid item sm={5} md={3}>
+                        <Grid item sm={12} md={4} lg={3}>
                             <CabinetSidebar />
                         </Grid>
                     </Hidden>
-                    <Grid item xs={12} sm={12} md={9}>
+                    <Grid item xs={12} sm={12} md={8} lg={9}>
                         <Grid item xs={12}>
                             <Typography variant="h6" className="menu-title">
                                 {t(page)}
