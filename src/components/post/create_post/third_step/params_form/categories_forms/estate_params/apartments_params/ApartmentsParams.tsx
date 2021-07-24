@@ -17,6 +17,7 @@ import {CustomFormikProvider} from '@src/components/elements/custom_formik_provi
 import {ParametersIcon} from '@src/components/elements/icons';
 import {CustomAccordion} from '@src/components/elements/accordion/CustomAccordion';
 import {useStyles} from './useStyles';
+import {useUrlParams} from "@src/hooks";
 
 export const ApartmentsParams: FC<CommonParamsPropsType> = (props) => {
     const {
@@ -33,13 +34,22 @@ export const ApartmentsParams: FC<CommonParamsPropsType> = (props) => {
     const isDailyRent = type.name === 'dailyRent';
     const isRent = type.id === 2 || type.id === 3;
 
-    const initVals: any = {
-        title: '',
+    const {title, model} = useUrlParams();
+
+    let initVals: any = {
+        title,
         room: null,
         number_of_floors: null,
         floor: null,
         estate_type: null
     };
+
+    if (model) {
+        initVals = {
+            ...initVals,
+            ...model
+        };
+    }
 
     const formik = useFormik({
         onSubmit,

@@ -15,6 +15,7 @@ import {CustomFormikProvider} from '@src/components/elements/custom_formik_provi
 import {CustomAccordion} from '@src/components/elements/accordion/CustomAccordion';
 import {ParametersIcon} from '@src/components/elements/icons';
 import {useStyles} from './useStyles';
+import {useUrlParams} from "@src/hooks";
 
 export const CommercialPropertyParams: FC<CommonParamsPropsType> = (props) => {
     const {
@@ -28,10 +29,19 @@ export const CommercialPropertyParams: FC<CommonParamsPropsType> = (props) => {
         handleFormOpen
     } = props;
 
-    const initVals: any = {
-        title: '',
+    const {title, model} = useUrlParams();
+
+    let initVals: any = {
+        title,
         estate_type: null
     };
+
+    if (model) {
+        initVals = {
+            ...initVals,
+            ...model
+        };
+    }
 
     const formik = useFormik({
         onSubmit,

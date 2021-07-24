@@ -11,8 +11,7 @@ import {paramsFormSchema} from '@root/validation_schemas/createPostSchemas';
 import {CheckboxSelect} from '@src/components/elements/checkbox_select/CheckboxSelect';
 import {PreviewValues} from '@src/components/post/create_post/third_step/params_form/PreviewValues';
 import {getFieldsByFilters} from '@src/helpers';
-import {useRouter} from "next/router";
-
+import {useUrlParams} from "@src/hooks";
 
 export const ElectronicsParams: FC<CommonParamsPropsType> = (props) => {
     const {
@@ -27,23 +26,17 @@ export const ElectronicsParams: FC<CommonParamsPropsType> = (props) => {
     } = props;
 
     const isMonitors = type.name === 'monitors';
-    const {
-        title,
-        model,
-        usb_connector,
-        build_in_speakers
-    } = useRouter().query;
+    const {title, model} = useUrlParams();
+
 
     let initVals: any = {
-        title: title ? JSON.parse(title as string) : '',
-        build_in_speakers: !!build_in_speakers,
-        usb_connector: !!usb_connector
+        title
     };
 
     if (model) {
         initVals = {
             ...initVals,
-            ...JSON.parse(model as string)
+            ...model
         };
     }
 

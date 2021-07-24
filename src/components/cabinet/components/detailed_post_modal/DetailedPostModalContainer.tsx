@@ -26,7 +26,7 @@ type DetailedPostViewPropsType = {
     onClose: () => void,
     handleDeactivate?: () => Promise<void>,
 }
-export const DetailedPostContainerModal: FC<DetailedPostViewPropsType> = (props) => {
+export const DetailedPostModalContainer: FC<DetailedPostViewPropsType> = (props) => {
     const {
         open,
         onClose,

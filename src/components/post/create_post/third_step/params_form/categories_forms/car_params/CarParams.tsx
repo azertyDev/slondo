@@ -19,7 +19,7 @@ import {CustomAccordion} from '@src/components/elements/accordion/CustomAccordio
 import {PostTitle} from '@src/components/post/create_post/third_step/params_form/post_title/PostTitle';
 import {useTranslation} from "next-i18next";
 import {ErrorCtx} from "@src/context";
-import {useRouter} from "next/router";
+import {useUrlParams} from "@src/hooks";
 import {useStyles} from './useStyles';
 
 type CarParamsPropsType = {
@@ -38,39 +38,33 @@ export const CarParams: FC<CarParamsPropsType> = (props) => {
     } = props;
 
     const {t} = useTranslation('filters');
-    const {
-        title,
-        manufacturer,
-        model,
-        year,
-        position,
-        body,
-        transmission,
-        drive,
-        engine_type,
-        engine_capacity,
-        mileage,
-        broken
-    } = useRouter().query;
+    const {title, model} = useUrlParams();
 
     const isForeignCars = subcategoryName === 'foreign_cars';
     const isMadeInUzb = subcategoryName === 'made_uzbekistan';
 
-    const initVals: any = {
-        title: title ? JSON.parse(title as string) : '',
-        manufacturer: manufacturer ? JSON.parse(manufacturer as string) : null,
-        model: model ? JSON.parse(model as string) : null,
-        year: year ? JSON.parse(year as string) : null,
-        body: body ? JSON.parse(body as string) : null,
-        transmission: transmission ? JSON.parse(transmission as string) : null,
-        drive: drive ? JSON.parse(drive as string) : null,
-        engine_type: engine_type ? JSON.parse(engine_type as string) : null,
-        engine_capacity: engine_capacity ? JSON.parse(engine_capacity as string) : '',
-        mileage: mileage ? JSON.parse(mileage as string) : '',
-        broken: !!broken
+    let initVals: any = {
+        title: title,
+        manufacturer: null,
+        model: null,
+        year: null,
+        body: null,
+        transmission: null,
+        drive: null,
+        engine_type: null,
+        engine_capacity: '',
+        mileage: '',
+        broken: false
     };
 
-    if (isMadeInUzb) initVals.position = position ? JSON.parse(position as string) : null;
+    if (isMadeInUzb) initVals.position = null;
+
+    if (model) {
+        initVals = {
+            ...initVals,
+            ...model
+        };
+    }
 
     const {setErrorMsg} = useContext(ErrorCtx);
 
@@ -245,8 +239,8 @@ export const CarParams: FC<CarParamsPropsType> = (props) => {
                                         onBlur={handleBlur}
                                         handleSelect={handleSelect}
                                         items={filters.manufacturer}
-                                        transKey={t(`${categoryName}.`)}
                                         labelTxt={t(`manufacturer`)}
+                                        transKey={t(`${categoryName}.`)}
                                         errorMsg={getErrorMsg(errors.manufacturer, touched.manufacturer, t)}
                                     />
                                 </Grid>
@@ -306,13 +300,13 @@ export const CarParams: FC<CarParamsPropsType> = (props) => {
                                                 xs={12}
                                             >
                                                 <DropDownSelect
-                                                    transKey={t(`${categoryName}.`)}
                                                     name='position'
-                                                    labelTxt={t(`car.position.name`)}
                                                     values={values}
                                                     onBlur={handleBlur}
-                                                    items={valuesByYear.positions}
                                                     handleSelect={handleSelect}
+                                                    items={valuesByYear.positions}
+                                                    transKey={t(`${categoryName}.`)}
+                                                    labelTxt={t(`car.position.name`)}
                                                     errorMsg={getErrorMsg(errors.position, touched.position, t)}
                                                 />
                                             </Grid>

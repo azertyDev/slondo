@@ -1,11 +1,13 @@
 import {useEffect} from 'react';
 import {appWithTranslation} from 'next-i18next';
 import {ThemeProvider, CssBaseline} from '@material-ui/core';
-import theme from '@src/theme';
 import {UserCtx, AuthCtx, ErrorCtx, SearchCtx} from "@src/context";
 import {useUser, useAuth, useError, useSearch} from "@src/hooks";
-import "../slick.min.css";
+import {useRouter} from "next/router";
+import theme from '@src/theme';
+import * as ga from '../lib/ga/index'
 import 'react-inner-image-zoom/lib/InnerImageZoom/styles.min.css';
+import "../slick.min.css";
 
 const App = (props) => {
     const {Component, pageProps} = props;
@@ -14,6 +16,23 @@ const App = (props) => {
     const user = useUser();
     const error = useError();
     const search = useSearch();
+
+    const router = useRouter();
+
+    useEffect(() => {
+        const handleRouteChange = (url) => {
+            ga.pageview(url)
+        }
+        //When the component is mounted, subscribe to router changes
+        //and log those page views
+        router.events.on('routeChangeComplete', handleRouteChange)
+
+        // If the component is unmounted, unsubscribe
+        // from the event with the `off` method
+        return () => {
+            router.events.off('routeChangeComplete', handleRouteChange)
+        }
+    }, [router.events]);
 
     useEffect(() => {
         // Remove the server-side injected CSS.

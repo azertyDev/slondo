@@ -71,6 +71,7 @@ export const DetailedPostModal: FC<DetailedPostViewPropsType> = (props) => {
     const winner = auction?.winner;
     const isUserWinner = winner?.id === user.id;
     const isUserCreator = author?.id === user.id;
+    const isUserBuyer = buyer?.id === user.id;
     const hasBuyer = !!buyer;
     const hasOffer = offerUser && status === 'public';
     const isAuction = ads_type === 'auc' || ads_type === 'exauc';
@@ -82,7 +83,7 @@ export const DetailedPostModal: FC<DetailedPostViewPropsType> = (props) => {
         : isUserWinner ? 'seller' : offer && !winner ? 'maxOffer' : isAuction ? 'winner' : '';
 
     if (hasBuyer) {
-        userData = buyer;
+        userData = isUserBuyer ? author : buyer;
     }
 
     const classes = useStyles();
@@ -226,15 +227,17 @@ export const DetailedPostModal: FC<DetailedPostViewPropsType> = (props) => {
                                         </>
                                     )}
                                 </div>
-                                <Paper className='paper-block'>
-                                    {userData
-                                        ? <UserCard
-                                            t={t}
-                                            userData={userData}
-                                            handleOpenRating={handleOpenRating}
-                                        />
-                                        : <div>{t(`auction:last_bet`, {lastBet: bets[0]?.bet})}</div>}
-                                </Paper>
+                                {(isAuction || hasBuyer) && (
+                                    <Paper className='paper-block'>
+                                        {userData
+                                            ? <UserCard
+                                                t={t}
+                                                userData={userData}
+                                                handleOpenRating={handleOpenRating}
+                                            />
+                                            : <div>{t(`auction:last_bet`, {lastBet: bets[0]?.bet})}</div>}
+                                    </Paper>
+                                )}
                                 {(isUserCreator || isUserWinner) && !inactive && (
                                     <Box>
                                         <div className={classes.actionButtons}>

@@ -6,3 +6,4 @@ export {useModal} from './useModal';
 export {useUser} from './useUser';
 export {useUserCard} from './useUserCard';
 export {useSearch} from './useSearch';
+export {useUrlParams} from './useUrlParams';

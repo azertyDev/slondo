@@ -13,7 +13,7 @@ import {CabinetCard} from '@src/components/cabinet/components/cabinet_card/Cabin
 import {CustomButton} from '@src/components/elements/custom_button/CustomButton';
 import {ConfirmModal} from '@src/components/elements/confirm_modal/Confirm_modal';
 import {CustomTabPanel} from "@src/components/elements/custom_tab_panel/CustomTabPanel";
-import {DetailedPostContainerModal} from "@src/components/cabinet/components/detailed_post_modal/DetailedPostContainerModal";
+import {DetailedPostModalContainer} from "@src/components/cabinet/components/detailed_post_modal/DetailedPostModalContainer";
 import {initialCardData} from "@src/components/cabinet/cabinet_pages/my_posts/MyPosts";
 import {useStyles} from './useStyles';
 
@@ -182,7 +182,7 @@ export const MyPurchases: FC = () => {
                 tabsData={tabsData}
                 handleTabChange={handleTabChange}
             />
-            <DetailedPostContainerModal
+            <DetailedPostModalContainer
                 post={selectedPost}
                 open={detailedModalOpen}
                 onClose={closeDetailedModal}

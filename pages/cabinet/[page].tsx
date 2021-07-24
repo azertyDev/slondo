@@ -8,6 +8,8 @@ export const getServerSideProps: GetServerSideProps = async ({locale}) => ({
             locale,
             [
                 'cabinet',
+                'filters',
+                'auction',
                 'header',
                 'footer',
                 'common',

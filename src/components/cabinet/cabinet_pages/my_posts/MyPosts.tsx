@@ -3,7 +3,7 @@ import {TabsContent} from '@src/components/cabinet/cabinet_pages/TabsContent';
 import {userAPI} from '@src/api/api';
 import {
     Box,
-    CircularProgress, Grid,
+    CircularProgress,
     Tab,
     Tabs,
     Typography
@@ -15,13 +15,13 @@ import {CardDataType} from '@root/interfaces/CardData';
 import {CabinetCard} from '@src/components/cabinet/components/cabinet_card/CabinetCard';
 import {ITEMS_PER_PAGE} from '@src/constants';
 import {useModal} from '@src/hooks/useModal';
-import {DetailedPostContainerModal} from '@src/components/cabinet/components/detailed_post_modal/DetailedPostContainerModal';
+import {DetailedPostModalContainer} from '@src/components/cabinet/components/detailed_post_modal/DetailedPostModalContainer';
 import {CustomTabPanel} from '@src/components/elements/custom_tab_panel/CustomTabPanel';
 import {NotificationModal} from "@src/components/cabinet/components/notifation_modal/NotificationModal";
 import {SettingsModal} from "@src/components/cabinet/components/settings_modal/SettingsModal";
 import {ErrorCtx} from "@src/context";
-import {useStyles} from './useStyles';
 import {EmptyPage} from '@src/components/cabinet/components/empty_page/EmptyPage';
+import {useStyles} from './useStyles';
 
 export const initialCardData: CardDataType = {
     id: null,
@@ -42,7 +42,7 @@ export const initialCardData: CardDataType = {
             avatar: '',
             created_at: '',
             rating: null,
-            available_days: '',
+            available_days: [],
             available_start_time: '',
             available_end_time: ''
         },
@@ -60,7 +60,7 @@ export const initialCardData: CardDataType = {
                 phone: '',
                 avatar: '',
                 created_at: '',
-                available_days: '',
+                available_days: [],
                 available_start_time: '',
                 available_end_time: ''
             }
@@ -80,7 +80,7 @@ export const initialCardData: CardDataType = {
         avatar: '',
         created_at: '',
         rating: null,
-        available_days: '',
+        available_days: [],
         available_start_time: '',
         available_end_time: ''
     },
@@ -140,11 +140,11 @@ export const MyPosts: FC = () => {
         setSelectedPost(post);
     };
 
-    const handleTabChange = (event, newValue) => {
+    const handleTabChange = (_, newValue) => {
         setTabIndex(newValue);
     };
 
-    const handleChildTabChange = (event, newValue) => {
+    const handleChildTabChange = (_, newValue) => {
         setChildTabValue(newValue);
     };
 
@@ -158,46 +158,37 @@ export const MyPosts: FC = () => {
         setSelectedPost(post);
     };
 
-    const fetchPostData = async (secure: number) => {
+    const fetchPosts = async (secure: number, archive: number) => {
         try {
             const params = {
                 type: 'post',
-                archive: 0,
+                archive,
                 secure
             };
             setIsFetch(true);
             const {data, total} = await userAPI.getMyPosts(params);
-            secure ? setSecurePosts({data, total}) : setPostData({data, total});
-            setIsFetch(false);
-        } catch (e) {
-            setIsFetch(false);
-            setErrorMsg(e.message);
-        }
-    };
-
-    const fetchArchivePosts = async (secure: number) => {
-        try {
-            const params = {
-                type: 'post',
-                archive: 1,
+            unstable_batchedUpdates(() => {
                 secure
-            };
-            setIsFetch(true);
-            const {data, total} = await userAPI.getMyPosts(params);
-            secure ? setArchiveSecurePostData({data, total}) : setArchivePostData({data, total});
-            setIsFetch(false);
+                    ? archive ? setArchiveSecurePostData({data, total}) : setSecurePosts({data, total})
+                    : archive ? setArchivePostData({data, total}) : setPostData({data, total});
+                setIsFetch(false);
+            });
         } catch (e) {
-            setIsFetch(false);
-            setErrorMsg(e.message);
+            unstable_batchedUpdates(() => {
+                setIsFetch(false);
+                setErrorMsg(e.message);
+            });
         }
     };
 
     const handleRefresh = () => {
-        unstable_batchedUpdates(() => {
-            fetchPostData(0);
-            fetchPostData(1);
-            fetchArchivePosts(0);
-            fetchArchivePosts(1);
+        unstable_batchedUpdates(async () => {
+            await Promise.all([
+                fetchPosts(0, 0),
+                fetchPosts(0, 1),
+                fetchPosts(1, 0),
+                fetchPosts(1, 1)
+            ]);
         });
     };
 
@@ -228,7 +219,7 @@ export const MyPosts: FC = () => {
                 </Tabs>
                 <CustomTabPanel value={childTabValue} index={0}>
                     {isFetch
-                        ? <CircularProgress color="primary" />
+                        ? <CircularProgress/>
                         : fstTabPosts.length === 0
                             ? <EmptyPage
                                 label={t('cabinet:empty.post')}
@@ -250,12 +241,12 @@ export const MyPosts: FC = () => {
                 </CustomTabPanel>
                 <CustomTabPanel value={childTabValue} index={1}>
                     {isFetch
-                        ? <CircularProgress color="primary" />
-                        : fstTabPosts.length === 0
-                            ? <EmptyPage label={t('cabinet:empty.archive')} />
+                        ? <CircularProgress/>
+                        : secTabPosts.length === 0
+                            ? <EmptyPage label={t('cabinet:empty.archive')}/>
                             : secTabPosts.map((data) => (
                                 <Box mb={3} key={data.id} borderRadius='10px 10px 0px 0px'>
-                                    <CabinetCard cardData={data} />
+                                    <CabinetCard cardData={data}/>
                                 </Box>
                             ))}
                 </CustomTabPanel>
@@ -292,7 +283,7 @@ export const MyPosts: FC = () => {
                 tabIndex={tabIndex}
                 handleTabChange={handleTabChange}
             />
-            <DetailedPostContainerModal
+            <DetailedPostModalContainer
                 post={selectedPost}
                 open={detailedModalOpen}
                 onClose={closeDetailedModal}

@@ -1,29 +1,28 @@
 import {FC} from "react";
-import {Checkbox, Paper, Switch, TextField, Typography} from "@material-ui/core";
-import {WEEK_DAYS} from "@src/common_data/common";
 import {WithT} from "i18next";
+import {WEEK_DAYS} from "@src/common_data/common";
+import {Checkbox, Paper, Switch, TextField, Typography} from "@material-ui/core";
 import {useStyles} from './useStyles';
 
-
 type AvailableDaysPropsType = {
-    avalTime,
+    isActive: boolean,
+    time,
     handleTime,
     handleAvalDays,
-    handleBlur,
-    handleSwitch,
+    switchActive: (_, v) => void,
+    handleBlur
 } & WithT;
 
 export const AvailableDays: FC<AvailableDaysPropsType> = (props) => {
     const {
         t,
-        avalTime,
+        isActive,
+        time,
         handleTime,
         handleAvalDays,
-        handleBlur,
-        handleSwitch,
+        switchActive,
+        handleBlur
     } = props;
-
-    const {isActive, time} = avalTime;
 
     const classes = useStyles();
     return (
@@ -37,23 +36,23 @@ export const AvailableDays: FC<AvailableDaysPropsType> = (props) => {
                 <Switch
                     color='primary'
                     checked={isActive}
-                    onChange={handleSwitch}
+                    onChange={switchActive}
                 />
             </div>
             <Paper className='scheduler'>
                 <div className='week-days'>
                     {WEEK_DAYS.map(day =>
                         <Checkbox
-                            disabled={!isActive}
                             key={day.id}
-                            checked={isActive && time.week_days.some(({id}) => id === day.id)}
+                            disabled={!isActive}
+                            onChange={handleAvalDays(day)}
+                            icon={<Typography>{t(`common:${day.name}`)}</Typography>}
+                            checked={isActive && time.available_days.some(({id}) => id === day.id)}
                             checkedIcon={
                                 <Typography className='selected-day'>
                                     {t(`common:${day.name}`)}
                                 </Typography>
                             }
-                            icon={<Typography>{t(`common:${day.name}`)}</Typography>}
-                            onChange={handleAvalDays(day)}
                         />
                     )}
                 </div>
@@ -61,25 +60,24 @@ export const AvailableDays: FC<AvailableDaysPropsType> = (props) => {
                     <div>
                         <TextField
                             variant='outlined'
-                            name='start_time'
+                            name='available_start_time'
+                            disabled={!isActive}
                             onChange={handleTime}
                             onBlur={handleBlur}
-                            value={time.start_time}
-                            disabled={!isActive}
+                            value={time.available_start_time}
                         />
                         <span>&nbsp;-&nbsp;</span>
                         <TextField
-                            name='end_time'
+                            name='available_end_time'
                             variant='outlined'
+                            disabled={!isActive}
                             onBlur={handleBlur}
                             onChange={handleTime}
-                            value={time.end_time}
-                            disabled={!isActive}
+                            value={time.available_end_time}
                         />
                     </div>
                 </div>
             </Paper>
-            <a href="#" className='settings'>{t('common:configs')}</a>
         </div>
-    )
+    );
 };

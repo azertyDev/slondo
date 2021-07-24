@@ -1,95 +1,36 @@
 {
-  "successfully_removed": "Уведомление удалено!!!",
-  "registered_on_slondo": {
-    "title": "Поздравляем, Вы зарегистрировались на Slondo!",
-    "desc": "Пожалуйста, заполните данные о себе, что бы мы могли поставить Вам оценку 5 звезд."
+  "remove_all_notify": "Barcha bildirgilarni ochirish",
+  "remove_notifications": "Barcha bildirgilarni ochirmoqchimisiz?",
+  "successfully_removed": "Bildirgi ochirildi!",
+  "titles": {
+    "get_five_star": "Получите оценку 5 звезд",
+    "new_rating": "Новая оценка",
+    "service_activated": "Активирована услуга",
+    "post_passed_moderation": "Объявление прошло модерацию",
+    "post_rejected_moderation": "Объявление отклонено модерацией",
+    "post_expired": "Срок объявления завершился",
+    "post_deactivated": "Объявление деактивировано",
+    "secure_regular_post_published": "",
+    "secure_regular_post_deactivated": "",
+    "secure_regular_post_rejected_moderation": "",
+    "secure_purchase_paid": "Безопасная покупка оплачена",
+    "secure_purchase_rejected": "Безопасная покупка отклонена",
+    "secure_purchase_successfully": "Безопасная покупка завершена",
+    "auc_passed_moderation": "Аукцион прошел модерацию",
+    "auc_rejected_moderation": "Аукцион отклонен модерацией",
+    "auction_ended_without_winner": "Аукцион завершился без победителя",
+    "auction_ended_with_winner": "Аукцион завершился, победитель определен",
+    "winner_rejected_winner": "Победитель отклонил аукцион",
+    "reserve_price_not_reached": "Резервная цена по аукциону не достигнута",
+    "new_offer": "Новое предложение цены",
+    "offer_rejected": "Предложение цены отклонено",
+    "seller_accepted_offer_price": "Продавец принял предложение цены",
+    "auc_ended_buy_now_used": "Аукцион завершен, использована функция купить сейчас",
+    "auc_deactivated": "Аукцион деактивирован",
+    "auto_renewal_activated": "Сработала функция автопродление"
   },
-  "you_have_deactivated_auction": {
-    "title": "Ваше объявление №{{id}} было деактивировано",
-    "desc": "Срок объявления закончился, но вы можете просмотреть его в Архиве"
-  },
-  "": {
-    "title": "Поздравляем, Вы зарегистрировались на Slondo!",
-    "desc": "Пожалуйста, заполните данные о себе, что бы мы могли поставить Вам оценку 5 звезд."
-  },
-  "post_published": {
-    "title": "Поздравляем, Ваше объявление №{{id}} было опубликовано на Slondo.",
-    "desc": ""
-  },
-  "auction_published": {
-    "title": "Поздравляем, Аукцион №{{id}} был опубликован на Slondo.",
-    "desc": ""
-  },
-  "one_hour_left_end_auction": {
-    "title": "До завершения аукциона №{{id}} остался 1ч.",
-    "desc": ""
-  },
-  "winner_accepted_auction": {
-    "title": "Победитель принял Аукцион №{{id}}.",
-    "desc": "Пожалуйста свяжитесь с пользователем {{user_id}}"
-  },
-  "auction_ended_with_winner": {
-    "title": "Поздравляем! Аукцион №{{id}} завершился, победителем назначен {{user_id}}.",
-    "desc": "Ожидайте принятия Аукциона, победителем."
-  },
-  "secure_post_deactivated": {
-    "title": "Ваше объявление №{{id}} с безопасной покупкой было деактивировано, срок объявления закончился.",
-    "desc": "Вы можете просмотреть его в Архиве."
-  },
-  "post_deactivated": {
-    "title": "Объявление было деактивировано",
-    "desc": "Вы можете просмотреть его в Архиве."
-  },
-  "secure_post_published": {
-    "title": "Поздравляем, Ваше объявление №{{id}} с безопасной покупкой было опубликовано на Slondo.",
-    "desc": ""
-  },
-  "auction_auto_renewall": {
-    "title": "На Ваш аукцион №{{id}} не было сделано ставок, торги будут продлены на 24 часа в соответствии с функцией «автопродление»",
-    "desc": ""
-  },
-  "auction_extended": {
-    "title": "Ваш аукцион №{{id}} был продлен",
-    "desc": ""
-  },
-  "you_winner": {
-    "title": "Вы назначены победителем аукциона №{{id}}.",
-    "desc": "В течении 3 дней Вы с продавцом должны выйти на связь, получить товар и завершить сделку."
-  },
-  "seller_refused_offer": {
-    "title": "Продавец отклонил Ваше предложение на аукцион №{{id}}",
-    "desc": ""
-  },
-  "seller_accepted_offer": {
-    "title": "Продавец принял Ваше предложение на аукцион №{{id}}",
-    "desc": "В течении 3 дней Вы с продавцом должны выйти на связь, получить товар и завершить сделку."
-  },
-  "user_bought_product": {
-    "title": "Пользователь {{user_id}} купил Ваш товар по Аукциону №{{id}}.",
-    "desc": "У вас есть 3 дня чтобы связаться с покупателем"
-  },
-  "accepted_offer": {
-    "title": "Вы приняли предложение аукциону №{{id}} от пользователя {{user_id}}.",
-    "desc": "Аукцион завершен у Вас есть 3 дня чтобы связаться с покупателем."
-  },
-  "auction_ended_without_winner": {
-    "title": "Аукцион №{{id}} завершился, победитель не назначен. ",
-    "desc": "Аукцион будет перемещен в архив."
-  },
-  "auction_ended_reserve_price_not_reached": {
-    "title": "Аукцион №{{id}} завершился, резервная цена не достигнута, победитель не назначен.",
-    "desc": "Аукцион будет перемещен в архив."
-  },
-  "winner_refused_auction": {
-    "title": "Победитель отказался от Аукциона №{{id}}.",
-    "desc": "Вы можете Поставить ему оценку и написать отзыв на странице Мои аукционы "
-  },
-  "get_bet": {
-    "title": "Пользователь {{user_id}} сделал ставку",
-    "desc": ""
-  },
-  "offer_price": {
-    "title": "Пользователь {{user_id}} Предложил Вам цену",
-    "desc": ""
+  "descriptions": {
+    "registered_on_slondo": "Поздравляем, Вы зарегистрировались на Slondo!",
+    "activated_raise_tape": "Вы активировали услугу «Поднять в ленте» на объявление № {{ads_id}}"
   }
 }

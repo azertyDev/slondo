@@ -103,9 +103,14 @@ export const urlByParams = (postData) => {
         'images'
     ];
 
+    function replacer(this, k: string, v) {
+        if (k === 'hex_color_code') return;
+        return v;
+    }
+
     Object.keys(postData).forEach(key => {
         if (!!postData[key] && postVals.some(k => k === key)) {
-            url = url.concat(`&${key}=${JSON.stringify(postData[key])}`);
+            url = url.concat(`&${key}=${JSON.stringify(postData[key], replacer)}`);
         }
     });
 
@@ -371,6 +376,6 @@ export const formatNumber = (number: number): string => (
     number <= 9 ? `0${number}` : number.toString()
 );
 
-export const getErrorMsg = (errorMsg, touched, t: TFunction): string => {
-    return errorMsg && touched ? t(`errors:${errorMsg}`) : '';
+export const getErrorMsg = (errorMsg, touched, t: TFunction, value?): string => {
+    return errorMsg && touched ? t(`errors:${errorMsg}`, value) : '';
 };

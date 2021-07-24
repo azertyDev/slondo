@@ -10,7 +10,7 @@ import {CustomFormikProvider} from '@src/components/elements/custom_formik_provi
 import {ParametersIcon} from '@src/components/elements/icons';
 import {CustomAccordion} from '@src/components/elements/accordion/CustomAccordion';
 import {PreviewValues} from '@src/components/post/create_post/third_step/params_form/PreviewValues';
-import {useRouter} from "next/router";
+import {useUrlParams} from "@src/hooks";
 import {useStyles} from './useStyles';
 
 export const RegularParams: FC<CommonParamsPropsType> = (props) => {
@@ -24,16 +24,16 @@ export const RegularParams: FC<CommonParamsPropsType> = (props) => {
         handleFormOpen
     } = props;
 
-    const {title, model} = useRouter().query;
+    const {title, model} = useUrlParams();
 
     let initVals: any = {
-        title: title ? JSON.parse(title as string) : ''
+        title
     };
 
     if (model) {
         initVals = {
             ...initVals,
-            ...JSON.parse(model as string)
+            ...model
         };
     }
 

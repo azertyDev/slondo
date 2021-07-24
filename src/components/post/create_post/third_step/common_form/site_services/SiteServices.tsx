@@ -85,7 +85,7 @@ export const SiteServices: FC<PaymentDeliveryPropsType> = (props) => {
                                 justify='flex-start'
                             >
                                 <ServiceItem
-                                    icon={<SafeIcon />}
+                                    icon={<SafeIcon/>}
                                     serviceText={t('common:safe_deal')}
                                     checked={values.safe_deal}
                                     handleCheckbox={handleSafeDealCheckBox()}
@@ -104,11 +104,13 @@ export const SiteServices: FC<PaymentDeliveryPropsType> = (props) => {
                                         Примечание: При подключении услуги «Безопасный
                                         торг». Ваша сделка защищена. Стоимость
                                         услуги составляет n%.&nbsp;
-                                        <a href="#">
-                                        <span className="safe-auction-rules">
-                                            {t('common:safe_deal_rules')}
-                                        </span>
-                                        </a>
+                                        <Link href="/">
+                                            <a>
+                                                <span className="safe-auction-rules">
+                                                    {t('common:safe_deal_rules')}
+                                                </span>
+                                            </a>
+                                        </Link>
                                     </Typography>
                                 </Grid>
                             )}
@@ -132,7 +134,7 @@ export const SiteServices: FC<PaymentDeliveryPropsType> = (props) => {
                                 alignItems="center"
                             >
                                 <ServiceItem
-                                    icon={<ExchangeIcon />}
+                                    icon={<ExchangeIcon/>}
                                     serviceText={t('common:exchange')}
                                     checked={values.exchange}
                                     handleCheckbox={handleCheckbox('exchange')}
@@ -175,7 +177,7 @@ export const SiteServices: FC<PaymentDeliveryPropsType> = (props) => {
                         alignItems="center"
                     >
                         <ServiceItem
-                            icon={<DeliveryIcon />}
+                            icon={<DeliveryIcon/>}
                             serviceText={t('common:delivery')}
                             checked={values.delivery}
                             handleCheckbox={handleCheckbox('delivery')}
@@ -194,11 +196,11 @@ export const SiteServices: FC<PaymentDeliveryPropsType> = (props) => {
                                 Примечание: Доставка осуществляется
                                 за Ваш счет. В случае невыполнения доставки,
                                 Вы можете быть заблокированы.&nbsp;
-                                <Link href="#">
+                                <Link href='/'>
                                     <a>
-                                    <span className="safe-auction-rules">
-                                        {t('common:delivery_rules')}
-                                    </span>
+                                        <span className="safe-auction-rules">
+                                            {t('common:delivery_rules')}
+                                        </span>
                                     </a>
                                 </Link>
                             </Typography>

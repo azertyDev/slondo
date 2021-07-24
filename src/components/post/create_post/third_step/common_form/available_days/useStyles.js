@@ -2,14 +2,13 @@ import {makeStyles} from '@material-ui/core/styles';
 
 export const useStyles = makeStyles((theme) => ({
     root: {
+        maxWidth: '304px',
         '& > div.switcher': {
             display: 'flex',
             justifyContent: 'space-between',
-            alignItems: 'center',
-            width: '100%'
+            alignItems: 'center'
         },
         '& div.scheduler': {
-            width: '100%',
             height: '106px',
             [theme.breakpoints.down('sm')]: {
                 height: '96px'
@@ -37,13 +36,12 @@ export const useStyles = makeStyles((theme) => ({
                 '& > div': {
                     display: 'flex',
                     alignItems: 'center'
+                },
+                '& input.MuiOutlinedInput-input': {
+                    maxWidth: '40px',
+                    padding: '10px 15px'
                 }
             }
-        },
-        '& > a.settings': {
-            textTransform: 'initial',
-            textDecoration: 'none',
-            color: '#9b66d2'
         }
     }
 }));

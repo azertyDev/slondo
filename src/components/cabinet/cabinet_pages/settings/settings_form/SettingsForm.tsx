@@ -1,42 +1,38 @@
 import {FC, ReactNode} from 'react';
-import {Form, FormikContextType, FormikProvider} from 'formik';
-import {getErrorMsg} from '@src/helpers';
-import {Box, Button, CircularProgress, FormControlLabel, Grid, Typography} from '@material-ui/core';
-import {FormikField} from '@src/components/elements/formik_field/FormikField';
 import {WithT} from 'i18next';
-import {
-    NotificationSwitcher,
-    SettingsButton,
-    useStyles
-} from '@src/components/cabinet/cabinet_pages/settings/settings_form/useStyles';
+import {getErrorMsg} from '@src/helpers';
+import {Form, FormikContextType, FormikProvider} from 'formik';
+import {Box, Button, CircularProgress, Grid, Typography} from '@material-ui/core';
+import {FormikField} from '@src/components/elements/formik_field/FormikField';
 import {AvailableDays} from '@src/components/post/create_post/third_step/common_form/available_days/AvailableDays';
+import {SettingsButton, useStyles} from './useStyles';
+import {UserInfo} from "@root/interfaces/Auth";
 
 type SettingsFormPropsType = {
-    formDisable: boolean,
-    formik: FormikContextType<any>,
+    editable: boolean,
+    avalTimeActive: boolean,
+    formik: FormikContextType<UserInfo>,
     uploadAvatarForm: ReactNode,
     handleTime: (value, name) => void,
     handleAvalDays: (day) => () => void,
-    handleSwitch: (_, value) => void,
     handleOpenModal?: () => void,
     handleCancel: () => void,
-    fetchingSmsCode: boolean
+    switchAvalDaysActive: (_, v) => void,
 } & WithT;
 
 export const SettingsForm: FC<SettingsFormPropsType> = (props) => {
     const {
         t,
-        formDisable,
+        editable,
+        avalTimeActive,
+        switchAvalDaysActive,
         formik,
         uploadAvatarForm,
         handleTime,
         handleAvalDays,
-        handleSwitch,
         handleOpenModal,
-        fetchingSmsCode,
         handleCancel
     } = props;
-
 
     const {
         values,
@@ -48,6 +44,14 @@ export const SettingsForm: FC<SettingsFormPropsType> = (props) => {
         handleBlur
     } = formik;
 
+    const {
+        name,
+        surname,
+        available_days,
+        available_start_time,
+        available_end_time
+    } = values;
+
     const classes = useStyles({props});
     return (
         <>
@@ -55,8 +59,8 @@ export const SettingsForm: FC<SettingsFormPropsType> = (props) => {
                 <Form onSubmit={handleSubmit}>
                     <Grid
                         container
-                        className={classes.root}
                         spacing={3}
+                        className={classes.root}
                     >
                         <Grid item xs={12}>
                             {uploadAvatarForm}
@@ -64,164 +68,117 @@ export const SettingsForm: FC<SettingsFormPropsType> = (props) => {
                         <Grid item xs={12} md={6}>
                             <FormikField
                                 t={t}
-                                name='user_name'
+                                name='name'
                                 labelText='user_name'
-                                value={values.user_name}
+                                value={name}
                                 onChange={handleChange}
-                                disabled={formDisable}
-                                errorMsg={getErrorMsg(errors.user_name, touched.user_name, t)}
-                                size='small'
+                                disabled={!editable}
+                                errorMsg={getErrorMsg(
+                                    errors.name,
+                                    touched.name,
+                                    t,
+                                    {value: t('name_must')}
+                                )}
                             />
                         </Grid>
                         <Grid item xs={12} md={6}>
                             <FormikField
                                 t={t}
-                                name='user_surname'
+                                name='surname'
                                 labelText='user_surname'
-                                value={values.user_surname}
+                                value={surname}
                                 onChange={handleChange}
-                                disabled={formDisable}
-                                size='small'
+                                disabled={!editable}
+                                errorMsg={getErrorMsg(
+                                    errors.surname,
+                                    touched.surname,
+                                    t,
+                                    {value: t('surname_must')}
+                                )}
                             />
                         </Grid>
                         <Grid item xs={12} md={6}>
                             <FormikField
                                 t={t}
+                                disabled
                                 name='phone'
-                                size='small'
-                                labelText={t('post:phoneNumber')}
                                 value={values.phone}
                                 onChange={handleChange}
-                                disabled
-                                errorMsg={getErrorMsg(errors.phone, touched.phone, t)}
+                                labelText='phone_number'
                             />
                         </Grid>
                         <Grid item xs={12}>
                             <Button
-                                color='secondary'
                                 variant='text'
-                                className={classes.recoveryBtn}
+                                color='secondary'
+                                disabled={!editable}
                                 onClick={handleOpenModal}
-                                disabled={formDisable}
+                                className={classes.recoveryBtn}
                             >
                                 <Typography variant='subtitle1'>
-                                    {fetchingSmsCode
-                                        ? 'Loading'
-                                        : 'Сменить пароль'
-                                    }
+                                    {t('auth_reg:change_password')}
                                 </Typography>
                             </Button>
-                        </Grid>
-                        <Grid item xs={12}>
-                            <Box fontSize='1.2rem' fontWeight='600' my={2}>
-                                Общие настройки
-                            </Box>
-                        </Grid>
-                        <Grid item xs={12}>
-                            <Box fontSize='1rem' fontWeight='600'>
-                                Уведомления
-                            </Box>
-                        </Grid>
-                        <Grid item xs={12} md={6}>
-                            <FormControlLabel
-                                control={
-                                    <NotificationSwitcher onChange={handleChange}/>
-                                }
-                                label="Сообщения"
-                                disabled={formDisable}
-                            />
-                        </Grid>
-                        <Grid item xs={12} md={6}>
-                            <FormControlLabel
-                                control={
-                                    <NotificationSwitcher onChange={handleChange} name="checkedA"/>
-                                }
-                                label="Избранное"
-                                disabled={formDisable}
-                            />
-                        </Grid>
-                        <Grid item xs={12} md={6}>
-                            <FormControlLabel
-                                control={
-                                    <NotificationSwitcher onChange={handleChange} name="checkedA"/>
-                                }
-                                label="Мои объявления"
-                                disabled={formDisable}
-                            />
-                        </Grid>
-                        <Grid item xs={12} md={6}>
-                            <FormControlLabel
-                                control={
-                                    <NotificationSwitcher onChange={handleChange} name="checkedA"/>
-                                }
-                                label="Объявления в подписках"
-                                disabled={formDisable}
-                            />
-                        </Grid>
-                        <Grid item xs={12} md={6}>
-                            <FormControlLabel
-                                control={
-                                    <NotificationSwitcher onChange={handleChange} name="checkedA"/>
-                                }
-                                label="Интерес покупателей"
-                                disabled={formDisable}
-                            />
                         </Grid>
                         <Grid item xs={12}>
                             <Box width='50%'>
                                 <AvailableDays
                                     t={t}
-                                    avalTime={values.avalTime}
+                                    isActive={editable && avalTimeActive}
                                     handleTime={handleTime}
-                                    handleAvalDays={handleAvalDays}
                                     handleBlur={handleBlur}
-                                    handleSwitch={handleSwitch}
+                                    handleAvalDays={handleAvalDays}
+                                    switchActive={switchAvalDaysActive}
+                                    time={{
+                                        available_days,
+                                        available_start_time,
+                                        available_end_time
+                                    }}
                                 />
                             </Box>
                         </Grid>
                     </Grid>
-                    {
-                        !formDisable && (
-                            <Grid
-                                item
-                                xs={6}
-                                container
-                                className={classes.wrapper}
-                                justify='space-evenly'
-                                spacing={2}
-                            >
-                                <Grid item xs={6} container justify='center'>
-                                    <SettingsButton
-                                        disableElevation
-                                        color='secondary'
-                                        disabled={formDisable}
-                                        className={classes.button}
-                                        onClick={handleCancel}
-                                    >
-                                        <Typography variant='subtitle1'>
-                                            {t('common:cancel')}
-                                        </Typography>
-                                    </SettingsButton>
-                                </Grid>
-                                <Grid item xs={6} container justify='center'>
-                                    <SettingsButton
-                                        type='submit'
-                                        disabled={isSubmitting || formDisable}
-                                        color='primary'
-                                        size="large"
-                                        disableElevation
-                                        startIcon={isSubmitting &&
-                                        <CircularProgress size={24} className={classes.progress}/>}
-                                        className={classes.button}
-                                    >
-                                        <Typography variant='subtitle1'>
-                                            {t('common:accept')}
-                                        </Typography>
-                                    </SettingsButton>
-                                </Grid>
+                    {editable && (
+                        <Grid
+                            item
+                            xs={6}
+                            container
+                            spacing={2}
+                            justify='space-evenly'
+                            className={classes.wrapper}
+                        >
+                            <Grid item xs={6} container justify='center'>
+                                <SettingsButton
+                                    disableElevation
+                                    color='secondary'
+                                    disabled={!editable}
+                                    className={classes.button}
+                                    onClick={handleCancel}
+                                >
+                                    <Typography variant='subtitle1'>
+                                        {t('common:cancel')}
+                                    </Typography>
+                                </SettingsButton>
                             </Grid>
-                        )
-                    }
+                            <Grid item xs={6} container justify='center'>
+                                <SettingsButton
+                                    type='submit'
+                                    color='primary'
+                                    size="large"
+                                    disableElevation
+                                    className={classes.button}
+                                    disabled={isSubmitting || !editable}
+                                    startIcon={
+                                        isSubmitting &&
+                                        <CircularProgress size={24} className={classes.progress}/>
+                                    }
+                                >
+                                    <Typography variant='subtitle1'>
+                                        {t('common:accept')}
+                                    </Typography>
+                                </SettingsButton>
+                            </Grid>
+                        </Grid>)}
                 </Form>
             </FormikProvider>
         </>

@@ -13,7 +13,7 @@ import {Notifications} from '@src/components/cabinet/cabinet_pages/notifications
 import {MyPurchases} from '@src/components/cabinet/cabinet_pages/my_purchases/MyPurchases';
 import {RatingsContainer} from '@src/components/cabinet/cabinet_pages/rating/RatingsContainer';
 import {SafetyDeal} from '@src/components/cabinet/cabinet_pages/safety_deal/SafetyDeal';
-import {SettingsContainer} from '@src/components/cabinet/cabinet_pages/settings/SettingsContainer';
+import {Settings} from '@src/components/cabinet/cabinet_pages/settings/Settings';
 import {Subs} from '@src/components/cabinet/cabinet_pages/subs/Subs';
 import {withAuthRedirect} from '@src/hocs/withAuthRedirect';
 import {useStyles} from './useStyles';
@@ -51,7 +51,7 @@ const Cabinet: FC = () => {
             case 'safe_deal' :
                 return <SafetyDeal/>;
             case 'settings' :
-                return <SettingsContainer/>;
+                return <Settings/>;
             case 'subs':
                 return <Subs/>;
             default:

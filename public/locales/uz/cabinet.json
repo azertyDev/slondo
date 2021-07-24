@@ -1,4 +1,6 @@
 {
+  "name_must": "Ism",
+  "surname_must": "Familiya",
   "edit": "Tahrirlash",
   "edit_post_confirm": "E'loni tahrirlamoqchimisiz?",
   "safe_deal": "Xavfsiz xarid",
@@ -13,7 +15,6 @@
   "rise_post_in_tape": "E'loni lentada kotarmoqchimisiz?",
   "rise_auction_in_tape": "Auksionni lentada kotarmoqchimisiz?",
   "can_use_in_week": "Haftasiga uch marta ishlatsa boladi",
-  "remove_notifications": "Barcha bildirgilarni ochirish",
   "sold_on_slondo": "Slondoda sotildi",
   "winner": "G'olib",
   "seller": "Sotuvchi",

@@ -98,7 +98,7 @@ export const userCabinetAPI = {
             .catch(({response}) => {
                 throw response.data;
             });
-    },
+    }
 };
 
 export const userAPI = {
@@ -397,10 +397,8 @@ export const userAPI = {
                 throw err;
             });
     },
-    changeUserInfo: (createData): Promise<any> => {
-        return instance.post(`regular/user/info`, {
-            ...createData
-        }, setTokenToHeader())
+    changeUserInfo: (userInfo): Promise<any> => {
+        return instance.post(`regular/user/info`, userInfo, setTokenToHeader())
             .then(res => res.data)
             .catch(err => {
                 throw err;
@@ -414,7 +412,9 @@ export const userAPI = {
             });
     },
     changeUserAvatar: (avatar): Promise<any> => {
-        return instance.post(`regular/user/avatar`, avatar, setTokenToHeader())
+        const formData = new FormData();
+        formData.append('avatar', avatar);
+        return instance.post(`regular/user/avatar`, formData, setTokenToHeader())
             .then(res => res.data)
             .catch(err => {
                 throw err;
@@ -427,7 +427,7 @@ export const userAPI = {
                 throw err;
             });
     },
-    getAllNotifications: (params?): Promise<any> => {
+    getAllNotifications: (params): Promise<any> => {
         return instance.get(`regular/user/notification`, {...setTokenToHeader(), params})
             .then(res => res.data)
             .catch(err => {

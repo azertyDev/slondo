@@ -1,4 +1,5 @@
 import {FC, useContext, useEffect, useState} from 'react';
+import {unstable_batchedUpdates} from "react-dom";
 import {userAPI} from '@src/api/api';
 import {useTranslation} from 'next-i18next';
 import {ITEMS_PER_PAGE} from '@src/constants';
@@ -18,6 +19,7 @@ export type initialNotificationType = {
     status: string,
     receiver_id: number,
     type: string,
+    title: string,
     message: string,
     go_to: number,
     go_to_type: string,
@@ -26,7 +28,7 @@ export type initialNotificationType = {
 }
 
 export const Notifications: FC = () => {
-    const {t} = useTranslation('cabinet');
+    const {t} = useTranslation('notifications');
     const {user} = useContext(UserCtx);
     const {setErrorMsg} = useContext(ErrorCtx);
 
@@ -35,7 +37,6 @@ export const Notifications: FC = () => {
     const [isFetch, setIsFetch] = useState(false);
     const [notifications, setNotifications] = useState<initialNotificationType[]>([]);
     const [openModal, setOpenModal] = useState(false);
-    const [message, setMessage] = useState('');
     const [page, setPage] = useState(1);
     const [itemsCount, setItemsCount] = useState(0);
 
@@ -49,11 +50,17 @@ export const Notifications: FC = () => {
 
     const fetchAllNotification = async () => {
         try {
+            const params = {
+                page,
+                itemsPerPage: ITEMS_PER_PAGE
+            };
             setIsFetch(true);
-            const {data, total} = await userAPI.getAllNotifications({page, itemsPerPage: ITEMS_PER_PAGE});
-            setIsFetch(false);
-            setNotifications(data);
-            setItemsCount(total);
+            const {data, total} = await userAPI.getAllNotifications(params);
+            unstable_batchedUpdates(() => {
+                setIsFetch(false);
+                setNotifications(data);
+                setItemsCount(total);
+            });
         } catch (e) {
             setErrorMsg(e.message);
         }
@@ -62,12 +69,18 @@ export const Notifications: FC = () => {
     const handleDeleteAllNotification = async () => {
         try {
             setIsFetch(true);
+            const params = {
+                page: 1,
+                itemsPerPage: ITEMS_PER_PAGE
+            };
 
             await userAPI.deleteAllNotification(user.id);
-            const {data} = await userAPI.getAllNotifications();
+            const {data} = await userAPI.getAllNotifications(params);
 
-            setNotifications(data);
-            setIsFetch(true);
+            unstable_batchedUpdates(() => {
+                setNotifications(data);
+                setIsFetch(true);
+            });
         } catch (e) {
             setErrorMsg(e.message);
         }
@@ -109,11 +122,13 @@ export const Notifications: FC = () => {
                 <Box mb={3} width='90%' key={notification.id}>
                     <NotificationCard
                         {...notification}
+                        setNotifications={setNotifications}
                         handleRefresh={fetchAllNotification}
+                        handleOpenSnackbar={handleOpenSnackbar}
                     />
                 </Box>
             )}
-        {!!notifications.length && (
+        {notifications.length > ITEMS_PER_PAGE && (
             <Box display='flex' justifyContent='center'>
                 {pagination}
             </Box>
@@ -135,7 +150,7 @@ export const Notifications: FC = () => {
         </CustomModal>
         <CustomSnackbar
             severity="success"
-            message={t(message)}
+            message={t('successfully_removed')}
             openSnackbar={openSnackbar}
             handleCloseSnackbar={handleCloseSnackbar}
         />

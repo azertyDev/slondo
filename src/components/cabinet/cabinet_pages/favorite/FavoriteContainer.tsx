@@ -9,7 +9,7 @@ import {useTranslation} from 'next-i18next';
 import {CabinetCard} from '@src/components/cabinet/components/cabinet_card/CabinetCard';
 import {ITEMS_PER_PAGE} from '@src/constants';
 import {useModal} from '@src/hooks/useModal';
-import {DetailedPostContainerModal} from '@src/components/cabinet/components/detailed_post_modal/DetailedPostContainerModal';
+import {DetailedPostModalContainer} from '@src/components/cabinet/components/detailed_post_modal/DetailedPostModalContainer';
 import {initialCardData} from '@src/components/cabinet/cabinet_pages/my_posts/MyPosts';
 import {CardDataType} from "@root/interfaces/CardData";
 import {ErrorCtx} from "@src/context";
@@ -217,7 +217,7 @@ export const FavoriteContainer: FC = () => {
                 tabsData={tabsData}
                 handleTabChange={handleTabChange}
             />
-            <DetailedPostContainerModal
+            <DetailedPostModalContainer
                 post={selectedPost}
                 open={detailedModalOpen}
                 onClose={closeDetailedModal}

@@ -8,6 +8,7 @@ import {useStyles} from './useStyles';
 type DefaultParamsPropsType = {
     values,
     isAuction: boolean,
+    avalTimeActive: boolean,
     isAdvanceAuction: boolean,
     priceLabel: string,
     location,
@@ -22,6 +23,7 @@ export const CommonFormPreview: FC<DefaultParamsPropsType> = (props) => {
         isAuction,
         priceLabel,
         userPhone,
+        avalTimeActive,
         isAdvanceAuction
     } = props;
 
@@ -207,14 +209,14 @@ export const CommonFormPreview: FC<DefaultParamsPropsType> = (props) => {
                     </Typography>
                 )}
             </div>
-            {avalTime.isActive && (
+            {avalTimeActive && (
                 <div>
                     <Typography variant="subtitle1">
                         <strong>
                             {t('common:call_times')}:&nbsp;
                         </strong>
-                        {`${avalTime.time.start_time} - ${avalTime.time.end_time}`}&nbsp;
-                        ({weekDaysHelper(avalTime.time.week_days, t)})
+                        {`${avalTime.available_start_time} - ${avalTime.available_end_time}`}&nbsp;
+                        ({weekDaysHelper(avalTime.available_days, t)})
                     </Typography>
                 </div>
             )}

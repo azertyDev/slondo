@@ -34,13 +34,18 @@ export const useStyles = makeStyles((theme) => ({
                 wordBreak: 'break-all'
             }
         },
-        '& div.phone-num': {
-            marginBottom: '20px'
-        },
-        '& div.phone-block': {
+        '& div.phone-wrapper': {
             marginTop: '12px',
             '& .MuiFormControl-fullWidth': {
-                width: '175px'
+                width: '196px'
+            }
+        },
+        '& div.avail-days-wrapper': {
+            maxWidth: '304px',
+            marginLeft: 'auto',
+            '& > a.settings': {
+                textDecoration: 'none',
+                color: '#9b66d2'
             }
         }
     }
