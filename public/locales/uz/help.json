@@ -54,9 +54,13 @@
     "2": "Barcha maydonchalarni to'ldirgandan so'ng, “Keyingi“ tugmasini bosing, barcha maydonchalar to'g'ri to'ldirilganligini tekshiring va “Nashr qilish“ tugmasini bosing - auktsion moderatsiyaga o'tadi va keyin saytda paydo bo'ladi."
   },
   "feedback": {
-    "name": ""
+    "name": "Qayta a'loqa"
   },
   "user_agreements": {
-    "name": ""
+    "name": "Foydalanuvchi shartnomasi"
+  },
+  "main": {
+    "title": "Sizni qiziqtirgan bo'limni tanlang yoki qidiruv tizimidan foydalaning", 
+    "subtitle": "Agar sizda savollar tug'ilsa, ushbu tugmani bosing" 
   }
 }

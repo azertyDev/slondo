@@ -2,76 +2,76 @@ const data = [
     {
         id: 1,
         section: 'Доступ к Slondo',
+        term: 'access_to_slondo',
         subSections: [
             {section: 'Регистрация', term: 'registration'},
-            {section: 'Вход в аккаунт (Авторизация на сайте)'},
-            {section: 'Забыл пароль'},
-            {section: 'Сменить пароль'}
+            {section: 'Вход в аккаунт (Авторизация на сайте)', term: 'sign_in'},
+            {section: 'Забыл пароль', term: 'forgot_password'},
+            {section: 'Сменить пароль', term: 'change_password'}
         ],
-        term: 'access_to_slondo'
     },
     {
         id: 2,
         section: 'Безопасность личных данных',
+        term: 'personal_data_security',
         subSections: [
-            'Мой аккаунт заблокирован Администрацией сайта'
+            {section: 'Мой аккаунт заблокирован Администрацией сайта', term: 'account_has_been_blocked'}
         ],
-        term: 'personal_data_security'
     },
     {
         id: 3,
         section: 'Объявления',
+        term: 'posts',
         subSections: [
-            'Создание объявлений',
-            'Редактирование объявлений',
-            'Как деактивировать объявление',
-            'Объявление отклонено'
+            {section: 'Создание объявлений', term: 'create'},
+            {section: 'Редактирование объявлений', term: 'update'},
+            {section: 'Как деактивировать объявление', term: 'deactivate'},
+            {section: 'Объявление отклонено', term: 'reject'}
         ],
-        term: 'posts'
     },
     {
         id: 4,
         section: 'Правила сайта',
+        term: 'site_rules',
         subSections: [
-            'Требования к фото – материалам SLONDO',
-            'Запрещено размещение на сервисе SLONDO',
-            'Требования к описанию товара,  аукциона или услуги',
-            'Требования к аккаунтам пользователей сервиса',
-            'Запрещенные товары и услуги'
+            {section: 'Требования к фото – материалам SLONDO', term: 'material_requirements'},
+            {section: 'Запрещено размещение на сервисе SLONDO', term: 'forbidden_on_slondo'},
+            {section: 'Требования к описанию товара, аукциона или услуги', term: 'service_requirements'},
+            {section: 'Требования к аккаунтам пользователей сервиса', term: 'accounts_requirements'},
+            {section: 'Запрещенные товары и услуги', term: 'prohibited_services'}
         ],
-        term: 'site_rules'
     },
     {
         id: 5,
         section: 'Аукцион',
+        term: 'auction',
         subSections: [
-            'Простой аукцион',
-            'Продвинутый аукцион',
-            'Создание  аукциона',
-            'Завершение аукциона',
-            'Проведение  аукциона',
-            'Подача ставки'
+            {section: 'Простой аукцион', term: 'simple'},
+            {section: 'Продвинутый аукцион', term: 'advanced'},
+            {section: 'Создание  аукциона', term: 'create_auction'},
+            {section: 'Завершение аукциона', term: 'end'},
+            {section: 'Проведение  аукциона', term: 'holding'},
+            {section: 'Подача ставки', term: 'bet_submitting'}
         ],
-        term: 'auction'
     },
     {
         id: 6,
         section: 'Безопасная покупка',
+        term: 'safe_shopping',
         subSections: [
-            'Что такое безопасная покупка?',
-            'Как продать товар с помощью Безопасной покупки?',
-            'Как купить товар через безопасную покупку?'
+            {section: 'Что такое безопасная покупка?', term: 'concept'},
+            {section: 'Как продать товар с помощью Безопасной покупки?', term: 'sold'},
+            {section: 'Как купить товар через безопасную покупку?', term: 'buy'}
         ],
-        term: 'safe_shopping'
     },
     {
         id: 7,
         section: 'Взаимодействие пользователей',
+        term: 'user_interaction',
         subSections: [
-            'Чаты',
-            'Оценки и отзывы'
+            {section: 'Чаты', term: 'chat'},
+            {section: 'Оценки и отзывы', term: 'ratings_reviews'}
         ],
-        term: 'user_interaction'
     },
     {
         id: 8,

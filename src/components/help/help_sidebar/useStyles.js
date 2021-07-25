@@ -43,7 +43,7 @@ export const useStyles = makeStyles((theme) => ({
         padding: '15px',
         '& .Mui-selected': {
             border: '1px solid #AD66D5',
-            '& .MuiTypography-subtitle1': {
+            '& .MuiTypography-subtitle1, .MuiTypography-subtitle2': {
                 color: theme.palette.primary.secondary
             }
         },
@@ -86,6 +86,15 @@ export const useStyles = makeStyles((theme) => ({
                 WebkitTextFillColor: 'transparent',
             },
         },
+    },
+    subMenu: {
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'flex-end',
+        marginBottom: 10,
+        '& div.MuiListItem-button': {
+            width: '90%'
+        }
     },
     active: {
         border: '1px solid #AD66D5',

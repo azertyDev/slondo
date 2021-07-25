@@ -20,7 +20,7 @@ export const MenuItem: FC<MenuItemPropsType> = ({data}) => {
 
     const handleClick = (subTerm?) => async () => {
         await push(`/help/${data.term}/${subTerm ?? ''}`, undefined, {shallow: true});
-    };
+    };    
 
     const classes = useStyles();
     return (
@@ -42,8 +42,9 @@ export const MenuItem: FC<MenuItemPropsType> = ({data}) => {
                 />
             </ListItem>
             {data.subSections && <Collapse in={isOpen} timeout="auto" unmountOnExit>
-                <List component="div" disablePadding>
+                <List component="nav" disablePadding className={classes.subMenu}>
                     {data.subSections.map((subData, index) => {
+                        console.log(subData.term);
                         return (
                             <ListItem
                                 button

@@ -12,23 +12,22 @@ export const HelpPage: FC = () => {
 
     const classes = useStyles();
     return (
-        <MainLayout title="Помощь">
+        <MainLayout title={t('header:help')}>
             <Typography variant="h6" color="initial" className={classes.title}>
-                Помощь
+                {t('header:help')}
             </Typography>
             <Grid container spacing={2}>
                 <HelpSidebar menuStruct={menuStruct}/>
                 <Grid container item xs={9}>
                     <Box>
                         <Typography variant='subtitle1' gutterBottom>
-                            Выберите раздел который вас интересует или воспользуйтесь поиском
+                            {t('help:main.title')}
                         </Typography>
                         <Typography>
-                            Если у вас остались вопросы, можете связаться с нами нажав
-                            на кнопку &nbsp;
+                            {t('help:main.subtitle')}&nbsp;
                             <Link href='/help/feedback'>
                                 <a className={classes.link}>
-                                    {t('feedback')}
+                                    {t('help:feedback.name')}
                                 </a>
                             </Link>
                         </Typography>
