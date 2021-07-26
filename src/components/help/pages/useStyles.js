@@ -2,6 +2,12 @@ import { makeStyles } from '@material-ui/core/styles';
 
 export const useStyles = makeStyles((theme) => ({
     root: {
+        '& .title': {
+            fontWeight: 600
+        },
+        '& .MuiTypography-root': {
+            lineHeight: 'normal'
+        },
         '& .image': {
             width: '100%'
         },
@@ -33,9 +39,6 @@ export const useStyles = makeStyles((theme) => ({
         },
         '& .fs-18': {
             fontSize: '18px'
-        },
-        '& h6.MuiTypography-root': {
-            lineHeight: '22px'
         }
     }
 }));

@@ -1,16 +1,25 @@
 import {Box, Grid, Typography} from '@material-ui/core';
-// import {useStyles} from '../useStyles';
+import {useStyles} from '../../useStyles';
 import {useTranslation} from 'react-i18next';
 
-const Deactivate = () => {
+export const Deactivate = () => {
     const {t} = useTranslation('help');
 
-    // const classes = useStyles();
+    const classes = useStyles();
     return (
         <>
-            Deactivate
+            <Grid item xs={12} className={classes.root}>
+                <Box display='block' mb={2}>
+                    <Typography variant='h6' className='title'>
+                        {t('posts.deactivate.name')}
+                    </Typography>
+                </Box>
+                <Grid item xs={12}>
+                    <Typography variant='subtitle1' component='p' className='color-silver'>
+                        {t('posts.deactivate.description')}
+                    </Typography>
+                </Grid>
+            </Grid>
         </>
     );
 };
-
-export default Deactivate;

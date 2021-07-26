@@ -31,8 +31,6 @@ export const BreadcrumbsComponent: FC<BreadcrumbsPropsType> = ({category, subcat
     const subCategoryLink = `${categoryLink}/${subCategoryName}`;
     const subCategoryTypeLink = `${subCategoryLink}/${typeName}`;
 
-    // console.log(type);
-    // console.log(subCategoryTypeLink);
     useEffect(() => {
         if (userLocation) {
             const {region, city} = userLocation;

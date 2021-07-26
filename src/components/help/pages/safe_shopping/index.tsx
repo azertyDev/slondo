@@ -2,15 +2,24 @@ import {Box, Grid, Typography} from '@material-ui/core';
 import {useStyles} from '../useStyles';
 import {useTranslation} from 'react-i18next';
 
-const SafeShopping = () => {
+export const SafeShopping = () => {
     const {t} = useTranslation('help');
 
     const classes = useStyles();
     return (
         <>
-            SafeShopping
+            <Grid item xs={12} className={classes.root}>
+                <Box display='block' mb={2}>
+                    <Typography variant='h6' className='title'>
+                        {t('safe_shopping.name')}
+                    </Typography>
+                </Box>
+                <Grid item xs={12}>
+                    <Typography variant='subtitle1' component='p' className='color-silver'>
+                        {t('safe_shopping.description')}
+                    </Typography>
+                </Grid>
+            </Grid>
         </>
     );
 };
-
-export default SafeShopping;

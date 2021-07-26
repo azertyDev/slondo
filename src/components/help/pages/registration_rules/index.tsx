@@ -2,15 +2,15 @@ import {Box, Grid, Typography} from '@material-ui/core';
 import {useStyles} from '../useStyles';
 import {useTranslation} from 'react-i18next';
 
-const RegistrationRules = () => {
+export const RegistrationRules = () => {
     const {t} = useTranslation('help');
 
     const classes = useStyles();
     return (
         <>
             <Grid item xs={12} className={classes.root}>
-                <Box display='block' mb={2} padding='10px 0'>
-                    <Typography variant='h6'>
+                <Box display='block' mb={2}>
+                    <Typography variant='h6' className='title'>
                         {t('how_to_register.name')}
                     </Typography>
                 </Box>
@@ -50,5 +50,3 @@ const RegistrationRules = () => {
         </>
     );
 };
-
-export default RegistrationRules;

@@ -44,7 +44,6 @@ export const MenuItem: FC<MenuItemPropsType> = ({data}) => {
             {data.subSections && <Collapse in={isOpen} timeout="auto" unmountOnExit>
                 <List component="nav" disablePadding className={classes.subMenu}>
                     {data.subSections.map((subData, index) => {
-                        console.log(subData.term);
                         return (
                             <ListItem
                                 button

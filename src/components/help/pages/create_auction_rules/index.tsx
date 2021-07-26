@@ -2,15 +2,15 @@ import {Box, Grid, Typography} from '@material-ui/core';
 import {useTranslation, Trans} from 'react-i18next';
 import {useStyles} from '../useStyles';
 
-const CreateAuctionRules = () => {
+export const CreateAuctionRules = () => {
     const {t} = useTranslation('help');
 
     const classes = useStyles();
     return (
         <>
             <Grid item xs={12} className={classes.root}>
-                <Box display='block' mb={2} padding='10px 0'>
-                    <Typography variant='h6'>
+                <Box display='block' mb={2}>
+                    <Typography variant='h6' className='title'>
                         {t('how_to_create_auction.name')}
                     </Typography>
                 </Box>
@@ -187,5 +187,3 @@ const CreateAuctionRules = () => {
         </>
     );
 };
-
-export default CreateAuctionRules;

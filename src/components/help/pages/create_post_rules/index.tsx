@@ -19,8 +19,8 @@ export const CreatePostRules = () => {
     return (
         <>
             <Grid item xs={12} className={classes.root}>
-                <Box display='block' mb={2} padding='10px 0'>
-                    <Typography variant='h6'>
+                <Box display='block' mb={2}>
+                    <Typography variant='h6' className='title'>
                         {t('how_to_create_post.name')}
                     </Typography>
                 </Box>
@@ -174,5 +174,3 @@ export const CreatePostRules = () => {
         </>
     );
 };
-
-export default CreatePostRules;

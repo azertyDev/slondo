@@ -44,7 +44,10 @@ export const useStyles = makeStyles((theme) => ({
         '& .Mui-selected': {
             border: '1px solid #AD66D5',
             '& .MuiTypography-subtitle1, .MuiTypography-subtitle2': {
-                color: theme.palette.primary.secondary
+                backgroundImage:
+                    'linear-gradient(49.94deg, #675EAA 19.03%, #AD66D5 72.72%)',
+                WebkitBackgroundClip: 'text',
+                WebkitTextFillColor: 'transparent'
             }
         },
         '&:not(:last-child)': {
@@ -76,16 +79,6 @@ export const useStyles = makeStyles((theme) => ({
                 }
             }
         },
-        '& div.selected': {
-            border: '1px solid #AD66D5',
-            borderRadius: '5px',
-            '& > h6.MuiTypography-subtitle1': {
-                backgroundImage:
-                    'linear-gradient(49.94deg, #675EAA 19.03%, #AD66D5 72.72%)',
-                WebkitBackgroundClip: 'text',
-                WebkitTextFillColor: 'transparent',
-            },
-        },
     },
     subMenu: {
         display: 'flex',
@@ -93,7 +86,9 @@ export const useStyles = makeStyles((theme) => ({
         alignItems: 'flex-end',
         marginBottom: 10,
         '& div.MuiListItem-button': {
-            width: '90%'
+            width: '90%',
+            padding: '5px 10px',
+            height: 'auto'
         }
     },
     active: {
