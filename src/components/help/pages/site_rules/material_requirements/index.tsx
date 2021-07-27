@@ -15,7 +15,7 @@ export const MaterialRequirements = () => {
                     </Typography>
                 </Box>
                 <Grid item xs={12}>
-                    <ul>
+                    <ol>
                         <li>
                             <Typography variant='subtitle1' component='p' className='color-silver'>
                                 {t('site_rules.material_requirements.description.0')}
@@ -46,7 +46,7 @@ export const MaterialRequirements = () => {
                                 {t('site_rules.material_requirements.description.5')}
                             </Typography>
                         </li>
-                    </ul>
+                    </ol>
                 </Grid>
             </Grid>
         </>

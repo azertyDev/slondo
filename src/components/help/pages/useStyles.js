@@ -2,6 +2,19 @@ import { makeStyles } from '@material-ui/core/styles';
 
 export const useStyles = makeStyles((theme) => ({
     root: {
+        '& ol': {
+            listStyle: 'none',
+            counterReset: 'li',
+            '& p': {
+                display: 'inline'
+            }
+        },
+        '& li:before': {
+            counterIncrement: 'li',
+            content: 'counters(li, ".") ". "',
+            fontSize: '1rem',
+            color: '#838383'
+        },
         '& .title': {
             fontWeight: 600
         },

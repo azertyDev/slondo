@@ -16,8 +16,45 @@ export const SearchInService = () => {
                 </Box>
                 <Grid item xs={12}>
                     <Typography variant='subtitle1' component='p' className='color-silver'>
-                        {t('search_in_service.description')}
+                        {t('search_in_service.description.0')}
                     </Typography>
+                    <ol>
+                        <li>
+                            <Typography variant='subtitle1' component='p' className='color-silver'>
+                                {t('search_in_service.description.1')}
+                            </Typography>
+                        </li>
+                        <li>
+                            <Typography variant='subtitle1' component='p' className='color-silver'>
+                                {t('search_in_service.description.2')}
+                            </Typography>
+                        </li>
+                        <li>
+                            <Typography variant='subtitle1' component='p' className='color-silver'>
+                                {t('search_in_service.description.3')}
+                            </Typography>
+                        </li>
+                        <li>
+                            <Typography variant='subtitle1' component='p' className='color-silver'>
+                                {t('search_in_service.description.4')}
+                            </Typography>
+                        </li>
+                        <li>
+                            <Typography variant='subtitle1' component='p' className='color-silver'>
+                                {t('search_in_service.description.5')}
+                            </Typography>
+                        </li>
+                        <li>
+                            <Typography variant='subtitle1' component='p' className='color-silver'>
+                                {t('search_in_service.description.6')}
+                            </Typography>
+                        </li>
+                        <li>
+                            <Typography variant='subtitle1' component='p' className='color-silver'>
+                                {t('search_in_service.description.7')}
+                            </Typography>
+                        </li>
+                    </ol>
                 </Grid>
             </Grid>
         </>

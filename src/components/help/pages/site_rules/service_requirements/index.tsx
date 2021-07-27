@@ -15,9 +15,48 @@ export const ServiceRequirements = () => {
                     </Typography>
                 </Box>
                 <Grid item xs={12}>
-                    <Typography variant='subtitle1' component='p' className='color-silver'>
-                        {t('site_rules.service_requirements.description')}
-                    </Typography>
+                    <ol>
+                        <li>
+                            <Typography variant='subtitle1' component='p' className='color-silver'>
+                                {t('site_rules.service_requirements.description.0')}
+                            </Typography>
+                        </li>
+                        <li>
+                            <Typography variant='subtitle1' component='p' className='color-silver'>
+                                {t('site_rules.service_requirements.description.1')}
+                            </Typography>
+                        </li>
+                        <li>
+                            <Typography variant='subtitle1' component='p' className='color-silver'>
+                                {t('site_rules.service_requirements.description.2')}
+                            </Typography>
+                        </li>
+                        <li>
+                            <Typography variant='subtitle1' component='p' className='color-silver'>
+                                {t('site_rules.service_requirements.description.3')}
+                            </Typography>
+                        </li>
+                        <li>
+                            <Typography variant='subtitle1' component='p' className='color-silver'>
+                                {t('site_rules.service_requirements.description.4')}
+                            </Typography>
+                        </li>
+                        <li>
+                            <Typography variant='subtitle1' component='p' className='color-silver'>
+                                {t('site_rules.service_requirements.description.5')}
+                            </Typography>
+                        </li>
+                        <li>
+                            <Typography variant='subtitle1' component='p' className='color-silver'>
+                                {t('site_rules.service_requirements.description.6')}
+                            </Typography>
+                        </li>
+                        <li>
+                            <Typography variant='subtitle1' component='p' className='color-silver'>
+                                {t('site_rules.service_requirements.description.7')}
+                            </Typography>
+                        </li>
+                    </ol>
                 </Grid>
             </Grid>
         </>

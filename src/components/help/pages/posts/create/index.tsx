@@ -18,7 +18,7 @@ export const Create = () => {
                     <Typography variant='subtitle1' component='p' className='color-silver'>
                         {t('posts.create.description.name')}
                     </Typography>
-                    <ul>
+                    <ol>
                         <li>
                             <Typography variant='subtitle1' component='p' className='color-silver'>
                                 {t('posts.create.description.0')}
@@ -54,7 +54,7 @@ export const Create = () => {
                                 {t('posts.create.description.6')}
                             </Typography>
                         </li>
-                    </ul>
+                    </ol>
                     <Typography variant='subtitle1' component='p' className='color-silver'>
                         {t('posts.create.description.7')}
                     </Typography>

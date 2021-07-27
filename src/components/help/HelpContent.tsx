@@ -1,12 +1,10 @@
-import {FC, useEffect, useState} from 'react';
+import {FC} from 'react';
 import {useRouter} from 'next/router';
 import {Grid, Hidden, Typography, useMediaQuery, useTheme} from '@material-ui/core';
 import {MainLayout} from '@src/components/main_layout/MainLayout';
 import {HelpSidebar} from '@src/components/help/help_sidebar/HelpSidebar';
 import menuStruct from './menu_struct';
 import {Feedback} from '@src/components/help/pages/feedback/Feedback';
-import {LegalComponent} from '@src/components/help/pages/user_agreements/LegalComponent';
-import {legal_docs} from '@src/components/help/pages/user_agreements/LegalDocs';
 import {useStyles} from './useStyles';
 import { useTranslation } from 'next-i18next';
 import {
@@ -48,29 +46,35 @@ import {
     RatingsReviews,
     SearchInService
 } from './pages'
+import {LegalComponent} from '@src/components/help/pages/user_agreements/LegalComponent';
 
 export const HelpContent: FC = () => {
     const {t} = useTranslation();
     const [term, subTerm] = useRouter().query.term as string[];
-    const legalDoc = legal_docs.find(doc => doc.term === term);
-    const [selectedDoc, setSelectedDoc] = useState(legalDoc);
-
     const isMdDown = useMediaQuery(useTheme().breakpoints.down('md'));
 
     const getTermPage = () => {
         switch (term) {
             case 'how_to_register':
-                return <RegistrationRules/>;
+                return <RegistrationRules />;
             case 'how_to_participate':
-                return <ParticipatingRules/>;
+                return <ParticipatingRules />;
             case 'how_to_create_post':
-                return <CreatePostRules/>;
+                return <CreatePostRules />;
             case 'how_to_create_auction':
-                return <CreateAuctionRules/>;
+                return <CreateAuctionRules />;
             case 'feedback':
-                return <Feedback/>;
+                return <Feedback />;
             case 'user_agreements':
-                return <LegalComponent docs={selectedDoc}/>;
+                return <LegalComponent term={term} />;
+            case 'privacy_police':
+                return <LegalComponent term={term} />;
+            case 'safe_auction_offer':
+                return <LegalComponent term={term} />;
+            case 'top_offer':
+                return <LegalComponent term={term} />;
+            case 'advanced_auction_offer':
+                return <LegalComponent term={term} />;
             case 'access_to_slondo':
                 return <AccessToSlondo />;
             case 'personal_data_security':
@@ -144,10 +148,6 @@ export const HelpContent: FC = () => {
                 return <RatingsReviews/>;
         }
     };
-
-    useEffect(() => {
-        setSelectedDoc(legalDoc);
-    }, [term]);
 
     const classes = useStyles();
     return (
