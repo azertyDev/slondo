@@ -51,12 +51,9 @@ export const UserFollowsList: FC<WithT> = ({t}) => {
         }
     };
 
-    const handleFollow = (userId) => async () => {
-        try {
-            await userAPI.follow(userId);
-        } catch (e) {
-            setErrorMsg(e.message);
-        }
+    const handleRefresh = () => {
+        fetchSubsByPage('subscribers');
+        fetchSubsByPage('subscriptions');
     };
 
     const subscribersList = (
@@ -65,7 +62,7 @@ export const UserFollowsList: FC<WithT> = ({t}) => {
                 <SubscriptionItem
                     key={id}
                     user={subscriber}
-                    handleFollow={handleFollow}
+                    handleRefresh={handleRefresh}
                 />
             )}
         </div>
@@ -77,7 +74,7 @@ export const UserFollowsList: FC<WithT> = ({t}) => {
                 <SubscriptionItem
                     key={id}
                     user={subscription}
-                    handleFollow={handleFollow}
+                    handleRefresh={handleRefresh}
                 />
             )}
         </div>

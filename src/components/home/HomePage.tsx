@@ -14,7 +14,7 @@ export const HomePage: FC = () => {
         <>
             <Head>
                 <title>{seo.title}</title>
-                <meta name="robots" content="noindex"/>
+                {/*<meta name="robots" content="noindex"/>*/}
                 <meta name="description" content={seo.description}/>
                 <meta property="og:site_name" content="Slondo"/>
                 <meta property="og:type" content="website"/>

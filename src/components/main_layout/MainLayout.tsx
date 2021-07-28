@@ -26,7 +26,7 @@ export const MainLayout: FC<MainLayoutPropsType> = (props) => {
         <>
             <Head>
                 <title>{title}</title>
-                <meta name="robots" content="noindex"/>
+                {/*<meta name="robots" content="noindex"/>*/}
                 <meta name="description" content={description}/>
                 <meta property="og:site_name" content="Slondo"/>
                 <meta property="og:type" content="website"/>
