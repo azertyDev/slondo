@@ -4,8 +4,8 @@ module.exports = {
         locales: ['ru', 'uz'],
         localeSubpaths: {uz: 'uz'},
         otherLanguages: ['uz'],
-        // react: {
-        //     useSuspense: true
-        // }
+        react: {
+            useSuspense: false
+        }
     }
 };

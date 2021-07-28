@@ -4,7 +4,7 @@ import {Box, Grid, Typography} from '@material-ui/core';
 import {HelpSidebar} from '@src/components/help/help_sidebar/HelpSidebar';
 import menuStruct from '@src/components/help/menu_struct';
 import {MainLayout} from '@src/components/main_layout/MainLayout';
-import {useTranslation} from "react-i18next";
+import {useTranslation} from "next-i18next";
 import {useStyles} from './useStyles';
 
 export const HelpPage: FC = () => {

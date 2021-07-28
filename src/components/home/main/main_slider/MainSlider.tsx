@@ -6,10 +6,10 @@ import {useStyles} from './useStyles';
 import {useRouter} from 'next/router';
 import {Typography, Box, useTheme, useMediaQuery} from '@material-ui/core';
 import {Skeleton} from '@material-ui/lab';
+import Link from 'next/link';
 
 export const MainSlider: FC = () => {
     const {locale} = useRouter();
-
     const theme = useTheme();
     const isXs = useMediaQuery(theme.breakpoints.down('xs'));
     const [sliderData, setSliderData] = useState({
@@ -39,25 +39,29 @@ export const MainSlider: FC = () => {
         <div className={classes.root}>
             <CustomSlider {...settings}>
                 {sliderData.isFetch
-                    ? Array.from({length: 4}, (_, k) => <Skeleton key={k} animation="wave" width="100%"/>)
-                    : sliderData.data.map(({id, img, title, description}) => (
-                        <Box key={id} position='relative'>
-                            <img src={img} alt={title}/>
-                            <Box
-                                right='10px'
-                                width='60%'
-                                position='absolute'
-                                top={isXs ? '25%' : '20%'}
-                                className={classes.content}
-                            >
-                                <Typography variant='h4' color="initial" gutterBottom>
-                                    {title}
-                                </Typography>
-                                <Typography variant="subtitle1" color="initial">
-                                    {description}
-                                </Typography>
-                            </Box>
-                        </Box>
+                    ? Array.from({length: 4}, (_, k) => <Skeleton key={k} animation="wave" width="100%" />)
+                    : sliderData.data.map(({id, img, title, description, url}) => (
+                        <Link href={url}>
+                            <a target='_blank'>
+                                <Box key={id} position='relative'>
+                                    <img src={img} alt={title} />
+                                    <Box
+                                        right='10px'
+                                        width='60%'
+                                        position='absolute'
+                                        top={isXs ? '25%' : '20%'}
+                                        className={classes.content}
+                                    >
+                                        <Typography variant='h4' color="initial" gutterBottom>
+                                            {title}
+                                        </Typography>
+                                        <Typography variant="subtitle1" color="initial">
+                                            {description}
+                                        </Typography>
+                                    </Box>
+                                </Box>
+                            </a>
+                        </Link>
                     ))}
             </CustomSlider>
         </div>
