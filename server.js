@@ -11,7 +11,6 @@ const app = next({dev});
 const handle = app.getRequestHandler();
 
 console.log('dev mode: ' + dev);
-console.log(process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS);
 
 app.prepare().then(() => {
     createServer((req, res) => {
