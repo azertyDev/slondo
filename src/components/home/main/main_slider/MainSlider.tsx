@@ -11,7 +11,7 @@ import Link from 'next/link';
 export const MainSlider: FC = () => {
     const {locale} = useRouter();
     const theme = useTheme();
-    const isXs = useMediaQuery(theme.breakpoints.down('xs'));
+    const isXs = useMediaQuery(theme.breakpoints.down(375));
     const [sliderData, setSliderData] = useState({
         isFetch: false,
         data: []
@@ -41,15 +41,15 @@ export const MainSlider: FC = () => {
                 {sliderData.isFetch
                     ? Array.from({length: 4}, (_, k) => <Skeleton key={k} animation="wave" width="100%" />)
                     : sliderData.data.map(({id, img, title, description, url}) => (
-                        <Link href={url}>
+                        <Link href={url} key={id}>
                             <a target='_blank'>
-                                <Box key={id} position='relative'>
+                                <Box position='relative'>
                                     <img src={img} alt={title} />
                                     <Box
-                                        right='10px'
+                                        right={isXs ? 5 : 10}
                                         width='60%'
                                         position='absolute'
-                                        top={isXs ? '25%' : '20%'}
+                                        top={isXs ? '20%' : '25%'}
                                         className={classes.content}
                                     >
                                         <Typography variant='h4' color="initial" gutterBottom>

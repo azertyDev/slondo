@@ -8,8 +8,6 @@ export const settings = {
     centerPadding: '0px',
     slidesToShow: 4,
     slidesToScroll: 1,
-    speed: 500,
-    autoplaySpeed: 5000,
     prevArrow: <SliderArrow/>,
     nextArrow: <SliderArrow/>,
     responsive: [
@@ -32,7 +30,10 @@ export const settings = {
             settings: {
                 arrows: false,
                 centerPadding: '20px',
-                slidesToShow: 1
+                slidesToShow: 1,
+                autoplay: true,
+                speed: 500,
+                autoplaySpeed: 2000,
             }
         }
     ]
