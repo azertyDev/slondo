@@ -13,16 +13,16 @@ import {CustomSnackbar} from "@src/components/elements/snackbar/Snackbar";
 import {ErrorCtx, UserCtx} from "@src/context";
 import {useStyles} from './useStyles';
 
-export type initialNotificationType = {
+export type notificationType = {
     id: number,
     ads_id: number,
+    value: number,
+    user_name: string,
     status: string,
     receiver_id: number,
     type: string,
     title: string,
     message: string,
-    go_to: number,
-    go_to_type: string,
     updated_at: string,
     created_at: string
 }
@@ -35,7 +35,7 @@ export const Notifications: FC = () => {
     const {modalOpen: openSnackbar, handleModalOpen: handleOpenSnackbar, handleModalClose: handleCloseSnackbar} = useModal();
 
     const [isFetch, setIsFetch] = useState(false);
-    const [notifications, setNotifications] = useState<initialNotificationType[]>([]);
+    const [notifications, setNotifications] = useState<notificationType[]>([]);
     const [openModal, setOpenModal] = useState(false);
     const [page, setPage] = useState(1);
     const [itemsCount, setItemsCount] = useState(0);
@@ -122,6 +122,7 @@ export const Notifications: FC = () => {
                 <Box mb={3} width='90%' key={notification.id}>
                     <NotificationCard
                         {...notification}
+                        isPersonal
                         setNotifications={setNotifications}
                         handleRefresh={fetchAllNotification}
                         handleOpenSnackbar={handleOpenSnackbar}

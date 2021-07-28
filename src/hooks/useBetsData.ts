@@ -1,4 +1,5 @@
 import {useContext, useState} from 'react';
+import {unstable_batchedUpdates} from 'react-dom';
 import {userAPI} from '@src/api/api';
 import {ErrorCtx} from "@src/context";
 
@@ -12,7 +13,7 @@ export const useBetsData = (props: BetsStatesProps) => {
     const {
         auction_id,
         page,
-        itemsPerPage,
+        itemsPerPage
     } = props;
 
     const {setErrorMsg} = useContext(ErrorCtx);
@@ -29,16 +30,18 @@ export const useBetsData = (props: BetsStatesProps) => {
             };
 
             setIsBetsFetch(true);
-
             const {data, total} = await userAPI.getAuctionBets(params);
-
             setIsBetsFetch(false);
 
-            setBets(data);
-            setBetsCount(total);
+            unstable_batchedUpdates(() => {
+                setBets(data);
+                setBetsCount(total);
+            });
         } catch (e) {
-            setErrorMsg(e.message);
-            setIsBetsFetch(false);
+            unstable_batchedUpdates(() => {
+                setErrorMsg(e.message);
+                setIsBetsFetch(false);
+            });
         }
     };
 

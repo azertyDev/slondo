@@ -60,27 +60,41 @@ export const DetailedPostModal: FC<DetailedPostViewPropsType> = (props) => {
         available_days,
         exchange,
         delivery,
-        safe_deal
+        safe_deal,
+        reasons = []
     } = post;
 
     const {user} = useContext(UserCtx);
+
+
+    const isAuction = ads_type === 'auc' || ads_type === 'exauc';
+    const inactiveStatus = status === 'archive' || status === 'history';
+    const blockedStatus = status === 'blocked';
+
+    const reasonTxt = t(`${reasons[0]?.reason?.name}`);
 
     const auctionId = auction?.id;
     const offer = auction?.offer;
     const offerUser = offer?.user;
     const winner = auction?.winner;
+
     const isUserWinner = winner?.id === user.id;
     const isUserCreator = author?.id === user.id;
     const isUserBuyer = buyer?.id === user.id;
+
     const hasBuyer = !!buyer;
     const hasOffer = offerUser && status === 'public';
-    const isAuction = ads_type === 'auc' || ads_type === 'exauc';
-    const inactive = status === 'archive' || status === 'history';
+    const hasServices = !!(available_days || exchange || delivery || safe_deal || auction?.auto_renewal);
+    const hasUserForRating = !!((isUserWinner || isUserBuyer) ? author : winner ?? buyer ?? null);
+
     let userData = (isUserWinner || !isUserCreator) ? author : winner ?? offerUser;
 
-    const userInfoTitle = hasBuyer
-        ? isUserCreator ? 'buyer' : 'seller'
-        : isUserWinner ? 'seller' : offer && !winner ? 'maxOffer' : isAuction ? 'winner' : '';
+    const getUserInfoTitle = () => {
+        if (hasBuyer && isUserCreator) return 'buyer';
+        if (winner !== null && isUserCreator) return 'winner';
+        if (hasOffer && !winner && isUserCreator) return 'maxOffer';
+        return isUserCreator ? '' : 'seller';
+    };
 
     if (hasBuyer) {
         userData = isUserBuyer ? author : buyer;
@@ -112,13 +126,7 @@ export const DetailedPostModal: FC<DetailedPostViewPropsType> = (props) => {
                         <Grid item xs={12}>
                             <ListCard cardData={post}/>
                         </Grid>
-                        {!!(
-                            available_days
-                            || exchange
-                            || delivery
-                            || safe_deal
-                            || auction?.auto_renewal
-                        ) && (
+                        {hasServices && (
                             <Grid item xs={12} md={6}>
                                 <Paper className='paper-block'>
                                     {!!post.available_days && (
@@ -207,12 +215,10 @@ export const DetailedPostModal: FC<DetailedPostViewPropsType> = (props) => {
                             )}
                             <Grid item xs={12} md={6} className={classes.userInfoWrapper}>
                                 <div className='user-info-title'>
-                                    {(isUserWinner || isUserCreator || hasBuyer) && userData && (
-                                        <Typography variant='subtitle2' gutterBottom>
-                                            {t(userInfoTitle)}
-                                        </Typography>
-                                    )}
-                                    {isUserCreator && offer && !winner && (
+                                    <Typography variant='subtitle2' gutterBottom>
+                                        {t(getUserInfoTitle())}
+                                    </Typography>
+                                    {isUserCreator && hasOffer && !winner && (
                                         <>
                                             <Typography variant='subtitle2'>
                                                 &nbsp;{t('offer_price', {price: numberPrettier(offer?.price)})}&nbsp;
@@ -233,12 +239,13 @@ export const DetailedPostModal: FC<DetailedPostViewPropsType> = (props) => {
                                             ? <UserCard
                                                 t={t}
                                                 userData={userData}
+                                                hasUserForRating={hasUserForRating}
                                                 handleOpenRating={handleOpenRating}
                                             />
                                             : <div>{t(`auction:last_bet`, {lastBet: bets[0]?.bet})}</div>}
                                     </Paper>
                                 )}
-                                {(isUserCreator || isUserWinner) && !inactive && (
+                                {(isUserCreator || isUserWinner) && !inactiveStatus && (
                                     <Box>
                                         <div className={classes.actionButtons}>
                                             {(isUserWinner || (offerUser && !winner)) && (
@@ -268,6 +275,16 @@ export const DetailedPostModal: FC<DetailedPostViewPropsType> = (props) => {
                                 )}
                             </Grid>
                         </Grid>
+                        {blockedStatus && (
+                            <Grid container>
+                                <Grid item xs={12}>
+                                    <Typography>
+                                        {t('ban_reason')}:&nbsp;
+                                        {reasonTxt}
+                                    </Typography>
+                                </Grid>
+                            </Grid>
+                        )}
                     </Grid>
                 </div>
             </CabinetModal>

@@ -1,123 +1,25 @@
 import {FC, useContext, useEffect, useState} from 'react';
 import {TabsContent} from '@src/components/cabinet/cabinet_pages/TabsContent';
 import {userAPI} from '@src/api/api';
-import {
-    Box,
-    CircularProgress,
-    Tab,
-    Tabs,
-    Typography
-} from '@material-ui/core';
 import {unstable_batchedUpdates} from "react-dom";
 import {useTranslation} from 'next-i18next';
-import {InitialCabinetCardState, TabsDataType} from '@root/interfaces/Cabinet';
+import {InitPostsType, TabsDataType} from '@root/interfaces/Cabinet';
 import {CardDataType} from '@root/interfaces/CardData';
-import {CabinetCard} from '@src/components/cabinet/components/cabinet_card/CabinetCard';
 import {ITEMS_PER_PAGE} from '@src/constants';
 import {useModal} from '@src/hooks/useModal';
 import {DetailedPostModalContainer} from '@src/components/cabinet/components/detailed_post_modal/DetailedPostModalContainer';
-import {CustomTabPanel} from '@src/components/elements/custom_tab_panel/CustomTabPanel';
 import {NotificationModal} from "@src/components/cabinet/components/notifation_modal/NotificationModal";
 import {SettingsModal} from "@src/components/cabinet/components/settings_modal/SettingsModal";
 import {ErrorCtx} from "@src/context";
 import {EmptyPage} from '@src/components/cabinet/components/empty_page/EmptyPage';
-import {useStyles} from './useStyles';
-
-export const initialCardData: CardDataType = {
-    id: null,
-    ads_type: '',
-    adsable: {
-        id: null,
-        sub_category: {id: null, name: ''},
-        type: {id: null, name: ''}
-    },
-    auction: {
-        id: null,
-        is_accepted: null,
-        winner: {
-            id: null,
-            name: '',
-            surname: '',
-            phone: '',
-            avatar: '',
-            created_at: '',
-            rating: null,
-            available_days: [],
-            available_start_time: '',
-            available_end_time: ''
-        },
-        winner_id: null,
-        number_of_bets: null,
-        number_of_offers: null,
-        auto_renewal: null,
-        offer: {
-            id: null,
-            price: null,
-            user: {
-                id: null,
-                name: '',
-                surname: '',
-                phone: '',
-                avatar: '',
-                created_at: '',
-                available_days: [],
-                available_start_time: '',
-                available_end_time: ''
-            }
-        },
-        bet: {
-            auction_id: null,
-            bet: null,
-            id: null,
-            number_of_bets: null
-        }
-    },
-    author: {
-        id: null,
-        name: '',
-        surname: '',
-        phone: '',
-        avatar: '',
-        created_at: '',
-        rating: null,
-        available_days: [],
-        available_start_time: '',
-        available_end_time: ''
-    },
-    observer: {
-        number_of_notifications: 0,
-        number_of_favorites: 0,
-        number_of_views: 0
-    },
-    available_days: [],
-    available_start_time: '',
-    available_end_time: '',
-    category: {id: null, name: ''},
-    city: {id: null, name: ''},
-    created_at: '',
-    creator: false,
-    currency: {id: null, name: ''},
-    delivery: null,
-    description: '',
-    district: {id: null, name: ''},
-    exchange: null,
-    expiration_at: '',
-    favorite: false,
-    image: '',
-    price: null,
-    region: {id: null, name: ''},
-    safe_deal: null,
-    status: '',
-    subscribed: false,
-    title: '',
-    user_id: null
-};
+import {initCardData} from "@src/common_data/common";
+import {CabinetTabs} from "@src/components/cabinet/components/cabinet_tabs/CabinetTabs";
 
 export const MyPosts: FC = () => {
     const {t} = useTranslation('cabinet');
     const {setErrorMsg} = useContext(ErrorCtx);
 
-    const initialPostsState: InitialCabinetCardState = {
+    const initialPostsState: InitPostsType = {
         total: 0,
         data: []
     };
@@ -129,7 +31,7 @@ export const MyPosts: FC = () => {
     const [archivePostData, setArchivePostData] = useState(initialPostsState);
     const [tabIndex, setTabIndex] = useState(0);
     const [childTabValue, setChildTabValue] = useState(0);
-    const [selectedPost, setSelectedPost] = useState(initialCardData);
+    const [selectedPost, setSelectedPost] = useState(initCardData);
 
     const {modalOpen: settingsOpen, handleModalClose: handleCloseSettings, handleModalOpen: handleOpenSettings} = useModal();
     const {modalOpen: detailedModalOpen, handleModalClose: closeDetailedModal, handleModalOpen: openDetailedModal} = useModal();
@@ -169,8 +71,8 @@ export const MyPosts: FC = () => {
             const {data, total} = await userAPI.getMyPosts(params);
             unstable_batchedUpdates(() => {
                 secure
-                    ? archive ? setArchiveSecurePostData({data, total}) : setSecurePosts({data, total})
-                    : archive ? setArchivePostData({data, total}) : setPostData({data, total});
+                    ? !!archive ? setArchiveSecurePostData({data, total}) : setSecurePosts({data, total})
+                    : !!archive ? setArchivePostData({data, total}) : setPostData({data, total});
                 setIsFetch(false);
             });
         } catch (e) {
@@ -192,83 +94,66 @@ export const MyPosts: FC = () => {
         });
     };
 
-    const tabsContent = (fstTabPosts: CardDataType[], secTabPosts: CardDataType[]) => {
-        return (
-            <>
-                <Tabs
-                    aria-label="tabs"
-                    value={childTabValue}
-                    onChange={handleChildTabChange}
-                    className={classes.childTabs}
-                    TabIndicatorProps={{style: {display: 'none'}}}
-                >
-                    <Tab
-                        label={
-                            <Typography variant="subtitle1">
-                                {t('active')}
-                            </Typography>
-                        }
-                    />
-                    <Tab
-                        label={
-                            <Typography variant="subtitle1">
-                                {t('archive')}
-                            </Typography>
-                        }
-                    />
-                </Tabs>
-                <CustomTabPanel value={childTabValue} index={0}>
-                    {isFetch
-                        ? <CircularProgress/>
-                        : fstTabPosts.length === 0
-                            ? <EmptyPage
-                                label={t('cabinet:empty.post')}
-                                action={t('header:createPost')}
-                                link={'/create/type'}
-                                tutorialLink={'#'}
-                                tutorialText={t('post:howToCreatePost')}
-                            />
-                            : fstTabPosts.map((data) => (
-                                <Box mb={3} key={data.id} borderRadius='10px 10px 0px 0px'>
-                                    <CabinetCard
-                                        cardData={data}
-                                        handleDetailedOpen={handleDetailedOpen(data)}
-                                        handleSettingsOpen={handleSettingsOpen(data)}
-                                        handleNotificationsOpen={handleNotificationsOpen(data)}
-                                    />
-                                </Box>
-                            ))}
-                </CustomTabPanel>
-                <CustomTabPanel value={childTabValue} index={1}>
-                    {isFetch
-                        ? <CircularProgress/>
-                        : secTabPosts.length === 0
-                            ? <EmptyPage label={t('cabinet:empty.archive')}/>
-                            : secTabPosts.map((data) => (
-                                <Box mb={3} key={data.id} borderRadius='10px 10px 0px 0px'>
-                                    <CabinetCard cardData={data}/>
-                                </Box>
-                            ))}
-                </CustomTabPanel>
-            </>
-        );
-    };
-
-    const classes = useStyles();
     const tabsData: TabsDataType = [
         {
             id: 0,
             title: t('posts'),
             itemsPerPage: ITEMS_PER_PAGE,
             handleFetchByTab: () => '',
-            component: tabsContent(postData.data, archivePostData.data)
+            component: (
+                <CabinetTabs
+                    isFetch={isFetch}
+                    onChange={handleChildTabChange}
+                    fstTabData={{
+                        posts: postData.data,
+                        emptyPage: <EmptyPage
+                            tutorialLink={'#'}
+                            link={'/create/type'}
+                            label={t('cabinet:empty.post')}
+                            tutorialText={t('post:howToCreatePost')}
+                            action={t('cabinet:empty.create_post')}
+                        />
+                    }}
+                    secTabData={{
+                        posts: archivePostData.data,
+                        emptyPage: <EmptyPage label={t('empty.archive')}/>
+                    }}
+                    childTabValue={childTabValue}
+                    handleDetailedOpen={handleDetailedOpen}
+                    handleSettingsOpen={handleSettingsOpen}
+                    handleNotificationsOpen={handleNotificationsOpen}
+                />
+            )
         },
         {
             id: 1,
             title: t('securePosts'),
             itemsPerPage: ITEMS_PER_PAGE,
             handleFetchByTab: () => '',
-            component: tabsContent(securePosts.data, archiveSecurePostData.data)
+            component: (
+                <CabinetTabs
+                    isFetch={isFetch}
+                    onChange={handleChildTabChange}
+                    fstTabData={{
+                        posts: securePosts.data,
+                        emptyPage: <EmptyPage
+                            label={t('cabinet:empty.post')}
+                            action={t('header:createPost')}
+                            link={'/create/type'}
+                            tutorialLink={'#'}
+                            tutorialText={t('post:howToCreatePost')}
+                        />
+                    }}
+                    secTabData={{
+                        posts: archiveSecurePostData.data,
+                        emptyPage: <EmptyPage label={t('empty.archive')}/>
+                    }}
+                    childTabValue={childTabValue}
+                    handleDetailedOpen={handleDetailedOpen}
+                    handleSettingsOpen={handleSettingsOpen}
+                    handleNotificationsOpen={handleNotificationsOpen}
+                />
+            )
         }
     ];
 

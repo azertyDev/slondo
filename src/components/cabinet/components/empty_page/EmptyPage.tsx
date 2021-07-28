@@ -1,9 +1,8 @@
 import {FC} from 'react';
+import Link from 'next/link';
 import {useStyles} from './useStyles';
 import {Box, Typography} from '@material-ui/core';
 import {CustomButton} from '@src/components/elements/custom_button/CustomButton';
-import {AddIcon} from '@src/components/elements/icons/AddIcon';
-import Link from 'next/link';
 
 export const EmptyPage: FC<any> = (props) => {
     const {label, action, link, tutorialLink, tutorialText} = props;

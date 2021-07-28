@@ -4,23 +4,23 @@ import {Favorite} from '@src/components/cabinet/cabinet_pages/favorite/Favorite'
 import {userAPI} from '@src/api/api';
 import {Box, CircularProgress, IconButton, List, ListItem, ListItemText, Typography} from '@material-ui/core';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
-import {InitialCabinetCardState, TabsDataType} from '@root/interfaces/Cabinet';
+import {InitPostsType, TabsDataType} from '@root/interfaces/Cabinet';
 import {useTranslation} from 'next-i18next';
 import {CabinetCard} from '@src/components/cabinet/components/cabinet_card/CabinetCard';
 import {ITEMS_PER_PAGE} from '@src/constants';
 import {useModal} from '@src/hooks/useModal';
 import {DetailedPostModalContainer} from '@src/components/cabinet/components/detailed_post_modal/DetailedPostModalContainer';
-import {initialCardData} from '@src/components/cabinet/cabinet_pages/my_posts/MyPosts';
 import {CardDataType} from "@root/interfaces/CardData";
 import {ErrorCtx} from "@src/context";
-import {useStyles} from './useStyles';
 import {EmptyPage} from '@src/components/cabinet/components/empty_page/EmptyPage';
+import {initCardData} from "@src/common_data/common";
+import {useStyles} from './useStyles';
 
 export const FavoriteContainer: FC = () => {
     const {t} = useTranslation('cabinet');
     const {setErrorMsg} = useContext(ErrorCtx);
 
-    const initialFavoriteState: InitialCabinetCardState = {
+    const initialFavoriteState: InitPostsType = {
         total: 0,
         data: []
     };
@@ -30,8 +30,9 @@ export const FavoriteContainer: FC = () => {
     const [favoriteAucData, setFavoriteAucData] = useState(initialFavoriteState);
     const [postId, setPostId] = useState<number>(null);
     const [tabIndex, setTabIndex] = useState(0);
-    const [selectedPost, setSelectedPost] = useState<CardDataType>(initialCardData);
+    const [selectedPost, setSelectedPost] = useState<CardDataType>(initCardData);
     const [modalContentIndex, setModalContentIndex] = useState(1);
+
     const {modalOpen, handleModalOpen, handleModalClose} = useModal();
     const {modalOpen: detailedModalOpen, handleModalClose: closeDetailedModal, handleModalOpen: openDetailedModal} = useModal();
 

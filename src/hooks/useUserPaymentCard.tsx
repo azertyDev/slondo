@@ -1,7 +1,7 @@
 import {useState} from 'react';
 import {myUzCardAPI} from '@src/api/api';
 
-export const useUserCard = () => {
+export const useUserPaymentCard = () => {
     type UserCardType = {
         id: number,
         cardId: number,

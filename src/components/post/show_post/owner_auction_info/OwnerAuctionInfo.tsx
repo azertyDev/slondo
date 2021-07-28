@@ -5,8 +5,8 @@ import {numberPrettier} from '@src/helpers';
 import {AuctionContent} from '@src/components/post/show_post/owner_auction_info/auction_content/AuctionContent';
 import {OwnerContent} from '@src/components/post/show_post/owner_auction_info/owner_content/OwnerContent';
 import {userAPI} from '@src/api/api';
-import {useStyles} from './useStyles';
 import {ErrorCtx} from "@src/context";
+import {useStyles} from './useStyles';
 
 type OwnerAuctionInfoPropsType = {
     data: any

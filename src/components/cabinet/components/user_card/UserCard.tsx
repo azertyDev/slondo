@@ -13,13 +13,15 @@ import {useStyles} from './useStyles';
 
 type UserCardProps = {
     userData,
-    handleOpenRating
+    handleOpenRating,
+    hasUserForRating: boolean
 } & WithT;
 
 export const UserCard: FC<UserCardProps> = (props) => {
     const {
         t,
         userData,
+        hasUserForRating,
         handleOpenRating
     } = props;
 
@@ -76,12 +78,14 @@ export const UserCard: FC<UserCardProps> = (props) => {
                         Написать
                     </Typography>
                 </CustomButton>
-                <CustomButton onClick={handleOpenRating}>
-                    <Star/>
-                    <Typography variant='subtitle2'>
-                        {t('give_rating')}
-                    </Typography>
-                </CustomButton>
+                {hasUserForRating && (
+                    <CustomButton onClick={handleOpenRating}>
+                        <Star/>
+                        <Typography variant='subtitle2'>
+                            {t('give_rating')}
+                        </Typography>
+                    </CustomButton>
+                )}
             </div>
         </div>
     );

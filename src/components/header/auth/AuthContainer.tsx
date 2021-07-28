@@ -11,6 +11,7 @@ import {FormikField} from '@src/components/elements/formik_field/FormikField';
 import {authSchema, codeSchema, passwordConfirmSchema, phoneSchema} from '@root/validation_schemas/authRegSchema';
 import {UserCtx} from "@src/context/UserCtx";
 import {AuthCtx} from "@src/context/AuthCtx";
+import {CONFIRM_SECONDS} from "@src/constants";
 
 export enum FormStatuses {
     reg,
@@ -20,7 +21,6 @@ export enum FormStatuses {
 }
 
 export const AuthContainer: FC = () => {
-    const initSeconds = 120;
     const {t} = useTranslation('auth_reg');
     const {setUser} = useContext(UserCtx);
     const {auth: {authModalOpen}, setIsAuth, setAuthModalOpen} = useContext(AuthCtx);
@@ -36,7 +36,7 @@ export const AuthContainer: FC = () => {
     const isSignInTab = tabIndex === 0;
     const [errorMsg, setErrorMsg] = useState('');
     const [isFetch, setIsFetch] = useState(false);
-    const [timer, setTimer] = useState(initSeconds);
+    const [timer, setTimer] = useState(CONFIRM_SECONDS);
     const [activeTimer, setActiveTimer] = useState(false);
     const [formStatus, setFormStatus] = useState<keyof typeof FormStatuses>('reg');
 
@@ -87,7 +87,7 @@ export const AuthContainer: FC = () => {
                 });
             }
         } else {
-            setTimer(initSeconds);
+            setTimer(CONFIRM_SECONDS);
         }
     };
 

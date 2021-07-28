@@ -9,9 +9,9 @@ import {LockIcon} from '@src/components/elements/icons';
 import {CustomButton} from '@src/components/elements/custom_button/CustomButton';
 import {AuctionForm} from '@src/components/post/show_post/owner_auction_info/auction_content/AuctionForm/AuctionForm';
 import {useBetsData} from '@src/hooks/useBetsData';
-import {useStyles} from './useStyles';
 import {ResponsiveModal} from '@src/components/elements/responsive_modal/ResponsiveModal';
 import {ErrorCtx} from "@src/context";
+import {useStyles} from './useStyles';
 
 type AuctionInfoPropsType = {
     postData,
@@ -26,6 +26,7 @@ export const AuctionContent: FC<AuctionInfoPropsType> = (props) => {
     } = props;
 
     const auctionId = postData.auction.id;
+    const isPublic = postData.status === 'public';
 
     const {setErrorMsg} = useContext(ErrorCtx);
     const date = new Date(postData.expiration_at).getTime();
@@ -41,7 +42,7 @@ export const AuctionContent: FC<AuctionInfoPropsType> = (props) => {
         {
             auction_id: auctionId,
             page: 1,
-            itemsPerPage: 5,
+            itemsPerPage: 5
         }
     );
     const [lastBet] = bets;
@@ -127,7 +128,7 @@ export const AuctionContent: FC<AuctionInfoPropsType> = (props) => {
                     handleRefresh={setFetchedBetsData}
                     title={t('auction:currentRates')}
                 />
-                {!postData.creator && (
+                {isPublic && !postData.creator && (
                     <>
                         <AuctionForm
                             t={t}
@@ -166,7 +167,7 @@ export const AuctionContent: FC<AuctionInfoPropsType> = (props) => {
                                             className='subtitle'
                                         >
                                             {t('post:buyNowRule.firstPart')}
-                                            &nbsp;<br />
+                                            &nbsp;<br/>
                                             <span className='buy-now-price'>
                                                 {numberPrettier(postData.auction.price_buy_now)}
                                             </span>

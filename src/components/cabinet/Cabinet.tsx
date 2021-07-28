@@ -1,12 +1,12 @@
 import {FC} from 'react';
+import {useRouter} from 'next/router';
 import {useTranslation} from 'next-i18next';
-import { Grid, Hidden, Typography, useMediaQuery, useTheme} from '@material-ui/core';
+import {Grid, Typography, useMediaQuery, useTheme} from '@material-ui/core';
 import {MainLayout} from '@src/components/main_layout/MainLayout';
 import {CabinetSidebar} from './cabinet_sidebar/CabinetSidebar';
-import {useRouter} from 'next/router';
 import {MyPosts} from '@src/components/cabinet/cabinet_pages/my_posts/MyPosts';
 import {MyAuctions} from '@src/components/cabinet/cabinet_pages/my_auctions/MyAuctions';
-import {BannedPostsContainer} from '@src/components/cabinet/cabinet_pages/banned_posts/BannedPostsContainer';
+import {BannedPosts} from '@src/components/cabinet/cabinet_pages/banned_posts/BannedPosts';
 import {FavoriteContainer} from '@src/components/cabinet/cabinet_pages/favorite/FavoriteContainer';
 import {MessagesContainer} from '@src/components/cabinet/cabinet_pages/messages/MessagesContainer';
 import {Notifications} from '@src/components/cabinet/cabinet_pages/notifications/Notifications';
@@ -16,7 +16,22 @@ import {SafetyDeal} from '@src/components/cabinet/cabinet_pages/safety_deal/Safe
 import {Settings} from '@src/components/cabinet/cabinet_pages/settings/Settings';
 import {Subs} from '@src/components/cabinet/cabinet_pages/subs/Subs';
 import {withAuthRedirect} from '@src/hocs/withAuthRedirect';
+import PageNotFound from "../../../pages/404";
 import {useStyles} from './useStyles';
+
+enum Pages {
+    'posts',
+    'auctions',
+    'banned',
+    'favorite',
+    'messages',
+    'notifications',
+    'purchases',
+    'rating',
+    'safe_deal',
+    'settings',
+    'subs'
+}
 
 export type CommonModalType = {
     post,
@@ -30,16 +45,21 @@ const Cabinet: FC = () => {
     const {page} = useRouter().query;
     const isSmDown = useMediaQuery(useTheme().breakpoints.down('sm'));
 
+    const isRootPage = page === undefined;
+    const existPage = isRootPage || Pages[page as string] !== undefined;
+
+    const title = `${t('my_cabinet')} ${page ? `| ${t(page)}` : ''}`;
+
     const getPage = () => {
-        switch (page) {
+        switch (page as keyof typeof Pages) {
             case 'posts':
-                return <MyPosts />;
+                return <MyPosts/>;
             case 'auctions':
-                return <MyAuctions />;
+                return <MyAuctions/>;
             case 'banned':
-                return <BannedPostsContainer />;
+                return <BannedPosts/>;
             case 'favorite':
-                return <FavoriteContainer />;
+                return <FavoriteContainer/>;
             case 'messages':
                 return <MessagesContainer/>;
             case 'notifications':
@@ -54,34 +74,36 @@ const Cabinet: FC = () => {
                 return <Settings/>;
             case 'subs':
                 return <Subs/>;
-            default:
-                return <div>Test</div>
         }
     };
 
     const classes = useStyles();
     return (
-        <MainLayout title={`${t('my_cabinet')} | ${t(page)}`}>
-            <div className={classes.root}>
-                <Grid container spacing={isSmDown ? 0 : 2}>
-                    <Hidden smDown>
-                        <Grid item sm={12} md={4} lg={3}>
-                            <CabinetSidebar />
+        existPage
+            ? <MainLayout title={title}>
+                <div className={classes.root}>
+                    <Grid container spacing={isSmDown ? 0 : 2}>
+                        <Grid item sm={5} md={3}>
+                            <CabinetSidebar/>
                         </Grid>
-                    </Hidden>
-                    <Grid item xs={12} sm={12} md={8} lg={9}>
-                        <Grid item xs={12}>
-                            <Typography variant="h6" className="menu-title">
-                                {t(page)}
-                            </Typography>
-                        </Grid>
-                        <Grid item xs={12}>
-                            {getPage()}
+                        <Grid item xs={12} sm={12} md={9}>
+                            {isRootPage
+                                ? <div>{t('select_page')}</div>
+                                : <>
+                                    <Grid item xs={12}>
+                                        <Typography variant="h6" className="menu-title">
+                                            {t(page)}
+                                        </Typography>
+                                    </Grid>
+                                    <Grid item xs={12}>
+                                        {getPage()}
+                                    </Grid>
+                                </>}
                         </Grid>
                     </Grid>
-                </Grid>
-            </div>
-        </MainLayout>
+                </div>
+            </MainLayout>
+            : <PageNotFound/>
     );
 };
 

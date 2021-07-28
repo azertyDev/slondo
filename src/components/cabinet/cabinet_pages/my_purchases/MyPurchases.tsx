@@ -14,7 +14,8 @@ import {CustomButton} from '@src/components/elements/custom_button/CustomButton'
 import {ConfirmModal} from '@src/components/elements/confirm_modal/Confirm_modal';
 import {CustomTabPanel} from "@src/components/elements/custom_tab_panel/CustomTabPanel";
 import {DetailedPostModalContainer} from "@src/components/cabinet/components/detailed_post_modal/DetailedPostModalContainer";
-import {initialCardData} from "@src/components/cabinet/cabinet_pages/my_posts/MyPosts";
+import {initCardData} from "@src/common_data/common";
+import {NotificationModal} from "@src/components/cabinet/components/notifation_modal/NotificationModal";
 import {useStyles} from './useStyles';
 
 export const MyPurchases: FC = () => {
@@ -29,10 +30,11 @@ export const MyPurchases: FC = () => {
     const [purchases, setPurchases] = useState([]);
     const [archivePurchases, setArchPurchases] = useState([]);
     const [childTabValue, setChildTabValue] = useState(0);
-    const [selectedPost, setSelectedPost] = useState<CardDataType>(initialCardData);
+    const [selectedPost, setSelectedPost] = useState<CardDataType>(initCardData);
 
     const {modalOpen: confirmOpen, handleModalClose: handleConfirmClose, handleModalOpen: handleConfirmOpen} = useModal();
     const {modalOpen: detailedModalOpen, handleModalClose: closeDetailedModal, handleModalOpen: openDetailedModal} = useModal();
+    const {modalOpen: notificationsOpen, handleModalClose: closeNotificationsModal, handleModalOpen: openNotificationsModal} = useModal();
 
     const confirmTitle = isPerform ? 'perform_purchase' : 'dismiss_purchase';
 
@@ -47,6 +49,11 @@ export const MyPurchases: FC = () => {
     const handleDetailedOpen = (post) => () => {
         setSelectedPost(post);
         openDetailedModal();
+    };
+
+    const handleNotificationsOpen = (post: CardDataType) => () => {
+        setSelectedPost(post);
+        openNotificationsModal();
     };
 
     const confirmModalOpen = (post: CardDataType, perform = false) => () => {
@@ -128,7 +135,10 @@ export const MyPurchases: FC = () => {
                     ? <CircularProgress color="primary"/>
                     : purchases.map(post => (
                         <Fragment key={post.id}>
-                            <CabinetCard cardData={post}/>
+                            <CabinetCard
+                                cardData={post}
+                                handleNotificationsOpen={handleNotificationsOpen(post)}
+                            />
                             <div>
                                 <CustomButton
                                     disabled={isFetch}
@@ -195,6 +205,12 @@ export const MyPurchases: FC = () => {
                 confirmTxt={t('common:yes')}
                 handleClose={handleConfirmClose}
                 handleConfirm={handlePerformDismiss}
+            />
+            <NotificationModal
+                post={selectedPost}
+                open={notificationsOpen}
+                handleRefresh={handleRefresh}
+                onClose={closeNotificationsModal}
             />
         </>
     );

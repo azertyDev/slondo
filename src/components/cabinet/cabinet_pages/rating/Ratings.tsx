@@ -28,7 +28,7 @@ export const Ratings: FC<RatingsPropsType> = (props) => {
         handleReply
     } = props;
 
-    const initialCommentDataState = {
+    const initCommentData = {
         author: {
             id: null,
             name: '',
@@ -36,7 +36,7 @@ export const Ratings: FC<RatingsPropsType> = (props) => {
             phone: '',
             avatar: '',
             created_at: '',
-            available_days: ''
+            available_days: []
         },
         comment: {
             id: null,
@@ -46,7 +46,7 @@ export const Ratings: FC<RatingsPropsType> = (props) => {
 
     const {rating, observer: {number_of_ratings}} = useContext(UserCtx).user;
     const {modalOpen, handleModalOpen, handleModalClose} = useModal();
-    const [commentData, setCommentData] = useState(initialCommentDataState);
+    const [commentData, setCommentData] = useState(initCommentData);
 
     const onReplyBtnClick = (author, comment) => () => {
         setCommentData({author, comment});

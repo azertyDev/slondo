@@ -1,4 +1,5 @@
 import {FC, useContext} from 'react';
+import {unstable_batchedUpdates} from 'react-dom';
 import {ResponsiveModal} from '@src/components/elements/responsive_modal/ResponsiveModal';
 import {Box, Divider, Typography} from '@material-ui/core';
 import {UserInfoWithAvatar} from '@src/components/elements/user_info_with_avatar/UserInfoWithAvatar';
@@ -10,12 +11,13 @@ import {userAPI} from '@src/api/api';
 import {Rating} from '@src/components/elements/rating/Rating';
 import {useTranslation} from 'next-i18next';
 import {ErrorCtx} from "@src/context";
+import {initCardData} from "@src/common_data/common";
+import {TEXT_LIMIT} from "@src/constants";
 import {useStyles} from './useStyles';
 
 type RatingModalPropsType = {
     user,
     open,
-    title: string,
     handleCloseRating
 };
 
@@ -23,15 +25,19 @@ export const RatingModal: FC<RatingModalPropsType> = (props) => {
     const {
         user,
         open,
-        title,
         handleCloseRating
     } = props;
 
-    const txtLimit = 5000;
+    const initialValues = {
+        rating: 0,
+        comment: '',
+        message: ''
+    }
+
     const {setErrorMsg} = useContext(ErrorCtx);
     const {t} = useTranslation('cabinet');
 
-    const handleSubmitRating = async (values) => {
+    const onSubmit = async (values) => {
         try {
             const {rating, comment} = values;
             const params: any = {
@@ -40,7 +46,10 @@ export const RatingModal: FC<RatingModalPropsType> = (props) => {
             };
             if (comment !== '') params.comment = comment;
             await userAPI.setUserRating(params);
-            handleCloseRating();
+            unstable_batchedUpdates(() => {
+                setValues(initialValues);
+                handleCloseRating();
+            });
         } catch ({message}) {
             setErrorMsg(message);
         }
@@ -51,14 +60,11 @@ export const RatingModal: FC<RatingModalPropsType> = (props) => {
     };
 
     const formik = useFormik({
-        onSubmit: handleSubmitRating,
-        initialValues: {
-            rating: 0,
-            comment: '',
-            message: ''
-        },
+        onSubmit,
+        initialValues,
         validationSchema: null
     });
+
     const {
         handleSubmit,
         values,
@@ -82,7 +88,7 @@ export const RatingModal: FC<RatingModalPropsType> = (props) => {
                 justifyContent='center'
             >
                 <Typography variant='h6'>
-                    Рейтинг
+                    {t('rating')}
                 </Typography>
             </Box>
             <Box>
@@ -95,7 +101,7 @@ export const RatingModal: FC<RatingModalPropsType> = (props) => {
                 justifyContent='center'
             >
                 <Typography variant='h6'>
-                    {title}
+                    {t('give_rating')}
                 </Typography>
             </Box>
             <FormikProvider value={formik}>
@@ -107,28 +113,28 @@ export const RatingModal: FC<RatingModalPropsType> = (props) => {
                     >
                         <Rating
                             card
-                            readOnly={false}
                             name="rating"
-                            className={classes.ratingComponent}
+                            readOnly={false}
+                            ratingCount={user.rating}
                             ratingValue={values.rating}
                             onChangeRating={onChangeRating}
-                            ratingCount={user.rating}
+                            className={classes.ratingComponent}
                         />
                         <FormikTextarea
-                            placeholder='Поделитесь впечатлениями'
+                            rows={10}
                             name='comment'
                             disableRequire
-                            onChange={handleChange}
-                            rows={10}
-                            value={values.comment}
+                            limit={TEXT_LIMIT}
                             onBlur={handleBlur}
+                            value={values.comment}
+                            onChange={handleChange}
                             labelTxt={t('Оставьте коментарий')}
+                            placeholder={t('Поделитесь впечатлениями')}
                             errorMsg={getErrorMsg(errors.description, touched.description, t)}
-                            limit={txtLimit}
                         />
                         <CustomButton type='submit' disabled={values.rating === 0}>
                             <Typography variant='subtitle1'>
-                                Оценить продавца
+                                {t('common:send')}
                             </Typography>
                         </CustomButton>
                     </Box>

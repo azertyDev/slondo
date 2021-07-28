@@ -28,14 +28,15 @@ export const CabinetCard: FC<CabinetCardPropsType> = (props) => {
     } = props;
 
     const {pathname} = useRouter();
-    const {t} = useTranslation('common');
+    const {t} = useTranslation('cabinet');
 
     const {
         observer,
         category,
         adsable,
         ads_type,
-        status
+        status,
+        creator
     } = cardData;
 
     const isXsDown = useMediaQuery(useTheme().breakpoints.down('xs'));
@@ -67,34 +68,34 @@ export const CabinetCard: FC<CabinetCardPropsType> = (props) => {
                         </Typography>
                         <div className='status'>
                             <Typography variant='subtitle2'>
-                                {status}
+                                {t(status)}
                             </Typography>
                         </div>
                     </Box>
                 </div>
             </Box>
             <Box position='relative'>
-                <ListCard cardData={cardData} />
+                <ListCard cardData={cardData}/>
                 <Grid container spacing={1} className='bottom-btns'>
                     <Hidden mdUp>
-                        {cardData.creator && isPublic && (
-                            <Grid item xs={5} sm={4} container justify='center'>
-                                <CustomButton
-                                    className='icons'
-                                    onClick={handleNotificationsOpen}
-                                    disabled={!observer?.number_of_notifications}
-                                    style={{marginRight: 10}}
-                                >
-                                    <NotificationIcon />
-                                </CustomButton>
+                        {<Grid item xs={5} sm={4} container justify='center'>
+                            <CustomButton
+                                className='icons'
+                                onClick={handleNotificationsOpen}
+                                // disabled={!observer?.number_of_notifications}
+                                style={{marginRight: 10}}
+                            >
+                                <NotificationIcon/>
+                            </CustomButton>
+                            {creator && isPublic && (
                                 <CustomButton
                                     className='icons'
                                     onClick={handleSettingsOpen}
                                 >
-                                    <SettingsIcon />
+                                    <SettingsIcon/>
                                 </CustomButton>
-                            </Grid>)
-                        }
+                            )}
+                        </Grid>}
                     </Hidden>
                     <Grid item xs={isPublic ? 7 : 12} sm={isPublic ? 8 : 12} md={12}>
                         {handleDetailedOpen && (
@@ -105,7 +106,7 @@ export const CabinetCard: FC<CabinetCardPropsType> = (props) => {
                                 <Typography variant='subtitle1'>
                                     {t('cabinet:unfold')}
                                 </Typography>&nbsp;
-                                <ChevronRight color='action' />
+                                <ChevronRight color='action'/>
                             </CustomButton>
                         )}
                     </Grid>
@@ -116,34 +117,36 @@ export const CabinetCard: FC<CabinetCardPropsType> = (props) => {
                             ? <CustomButton
                                 onClick={handleOpenModal(cardData.id)}
                             >
-                                <CloseIcon />
+                                <CloseIcon/>
                             </CustomButton>
-                            : cardData.creator && isPublic && (
-                            <>
-                                <CustomButton
-                                    disabled
-                                    className='icons'
-                                >
-                                    <RocketIcon />
-                                    <Typography variant='subtitle1'>
-                                        Рекламировать
-                                    </Typography>
-                                </CustomButton>
+                            : <>
+                                {creator && isPublic && (
+                                    <>
+                                        <CustomButton
+                                            disabled
+                                            className='icons'
+                                        >
+                                            <RocketIcon/>
+                                            <Typography variant='subtitle1'>
+                                                Рекламировать
+                                            </Typography>
+                                        </CustomButton>
+                                        <CustomButton
+                                            className='icons'
+                                            onClick={handleSettingsOpen}
+                                        >
+                                            <SettingsIcon/>
+                                        </CustomButton>
+                                    </>
+                                )}
                                 <CustomButton
                                     className='icons'
                                     onClick={handleNotificationsOpen}
-                                    disabled={!observer.number_of_notifications}
+                                    // disabled={!observer.number_of_notifications}
                                 >
-                                    <NotificationIcon />
+                                    <NotificationIcon/>
                                 </CustomButton>
-                                <CustomButton
-                                    className='icons'
-                                    onClick={handleSettingsOpen}
-                                >
-                                    <SettingsIcon />
-                                </CustomButton>
-                            </>
-                        )}
+                            </>}
                     </div>
                 </Hidden>
             </Box>

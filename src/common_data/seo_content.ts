@@ -323,12 +323,12 @@ export const getSEOContent = (category: CategoryType, subCtgr: SubcategoryType, 
                         },
                         samsung: {
                             title: `Samsung telefonlar ${location} / sotib olish / Samsung galaxy smartfonlar narxini bilish`,
-                            description: `Samsung Galaxy smartfonlarining narxlarini ${location} da sotib oling yoki bilib oling.`,
+                            description: `Samsung Galaxy smartfonlarining narxlarini ${location}da sotib oling yoki bilib oling.`,
                             text: `Samsung smartfonlari o'zlarining arzon bahosi, yaxshi ishlashi va doimiy sifati bilan mashhur. Boshqacha qilib aytganda, Samsung telefonlari va Galaxy smartfonlarining butun qatori narx va sifatning ajoyib kombinatsiyasi. S10, s20, S50: katta qator bilan, albatta, har bir kishi Flagship smartfon uchun, byudjet A21, 51, 71, 10, 20, 20, 21, o'rtacha narxlari oralig'ida dan, o'zlari uchun eng yaxshi yechim topish mumkin bo'ladi. Bundan tashqari, xaridorlar kerakli xotira hajmini tanlaydilar va agar kerak bo'lsa, uni micro SD-kartalar bilan to'ldirishlari mumkin. Eng ommabop quyidagi konfiguratsiyalar: 16, 32, 64, 128 va 256 Gb. Narxlarni bilib oling, modellarni taqqoslang va ko'plab takliflarning eng yaxshisi uchun telefonni sotib oling, sizga yordam beradi slondo.uz`
                         },
                         xiaomi: {
-                            title: `${location} da Xiaomi telefonlar / sotib olish va smartfon ksiomi Redmi eslatma narxini bilish`,
-                            description: `Xiaomi redmi note telefonlarining narxlarini ${location} da sotib oling yoki bilib oling yangi va ishlatilgan. ksiomidan kredit olish va eng yaxshi narxlarda smartfonlar | Redmi yozuvlari slondo.uz`,
+                            title: `${location}da Xiaomi telefonlar / sotib olish va smartfon ksiomi Redmi eslatma narxini bilish`,
+                            description: `Xiaomi redmi note telefonlarining narxlarini ${location}da sotib oling yoki bilib oling yangi va ishlatilgan. ksiomidan kredit olish va eng yaxshi narxlarda smartfonlar | Redmi yozuvlari slondo.uz`,
                             text: `Xiaomi telefonlari bozorning barcha narx segmentlarini qamrab oladi: kompaniya turli xil konfiguratsiyalardagi smartfonlarni, eng ko'p byudjetdan flagman qurilmalarga chiqaradi. Yaxshi ishlashga va yaxshi tarkibiy qismlarga qaramasdan, ksiomi smartfonlari shunga o'xshash xususiyatlarga ega bo'lgan boshqa telefonlarga nisbatan kam xarajat bilan tanilgan. Shu kabi modellar uchun narxlarni Solishtiring va ko'plab takliflarning eng yaxshisini tanlang, sizga yordam beradi slondo.uz`
                         },
                         nokia: {
@@ -338,14 +338,14 @@ export const getSEOContent = (category: CategoryType, subCtgr: SubcategoryType, 
                         },
                         huawei: {
                             title: `Huawei telefonlari ${location} / "huavei" smartfonlarini sotib olish yoki topish`,
-                            description: `Huawei telefonlarini ${location} da sotib oling yoki bilib oling yangi va ishlatilgan huavey smartfonlari: pro, honor, P va boshqa modellar / kredit takliflari`,
+                            description: `Huawei telefonlarini ${location}da sotib oling yoki bilib oling yangi va ishlatilgan huavey smartfonlari: pro, honor, P va boshqa modellar / kredit takliflari`,
                             text: `Huawei telefonlari ko'plab foydalanuvchilar uchun samarali va arzon narxlardagi echimdir. Misol uchun, Honor smartfonlari liniyasi yaxshi narxga ega va Huawei p30, 40 – yaxshi xususiyatlarga ega. Shuni ham ta'kidlash joizki, dastlab Xitoy ishlab chiqaruvchisi o'z qurilmalarini Windows operatsion tizimi bilan ta'minladi, ammo keyinchalik huavey bu fikrni rad etdi. Endi ushbu smartfonlar faqat android asosida ishlab chiqariladi.
                             Ko'p takliflarning eng yaxshisini toping, sizga yordam beradi slondo.uz!
                             `
                         },
                         artel: {
                             title: `${location}da Artel telefonlar / eng yaxshi narxlarda Artel smartfon sotib ol`,
-                            description: `Artel telefonlarini ${location} da sotib oling: Artel smartfonlarini kredit va to'lov uchun sotish bo'yicha ko'plab takliflar`,
+                            description: `Artel telefonlarini ${location}da sotib oling: Artel smartfonlarini kredit va to'lov uchun sotish bo'yicha ko'plab takliflar`,
                             text: `Artel telefonlari xorijiy raqobatchilardan kam emas, ularning narxidan ancha past. Flagman modellari samarali qismlarga ega va byudjet variantlari, albatta, past narxga ega. Mahalliy ishlab chiqaruvchi "Artel" dan smartfonlar va tugmacha telefonlar uzoq vaqtdan beri ishonchni qozondi va butun mamlakat bo'ylab faol foydalanildi. Ko'p takliflarning eng yaxshisini tanlang, sizga yordam beradi slondo.uz!`
                         },
                         oppo: {
@@ -354,8 +354,8 @@ export const getSEOContent = (category: CategoryType, subCtgr: SubcategoryType, 
                             text: `Smartfon ishlab chiqarishga ixtisoslashgan Xitoyning "OPPO" kompaniyasi yaqinda O'zbekiston bozorida o'z mahsulotlarini faol ravishda targ'ib qila boshladi. "OPPO" telefonlari past va o'rta narx segmentida bo'lsa-da, yaxshi xususiyatlarga ega. Ko'p takliflarning eng yaxshisini tanlang, sizga yordam beradi slondo.uz!`
                         },
                         htc: {
-                            title: `${location} da HTC telefonlar / sotib olish yoki HTC dan smartfon narxlarini bilish`,
-                            description: `HTC telefonlarini ${location} da sotib oling yoki bilib oling yangi va ishlatilgan smartfonlar: desire, Mozart, one va boshqa ko'plab modellar`,
+                            title: `${location}da HTC telefonlar / sotib olish yoki HTC dan smartfon narxlarini bilish`,
+                            description: `HTC telefonlarini ${location}da sotib oling yoki bilib oling yangi va ishlatilgan smartfonlar: desire, Mozart, one va boshqa ko'plab modellar`,
                             text: `HTC telefonlari kuchli protsessor bilan ajralib turadi, bu ularni smartfonlardagi o'yin sevuvchilar uchun juda jozibali qiladi. Bundan tashqari, shunga o'xshash xususiyatlarga ega bo'lgan smartfonlarning aksariyatiga qaraganda ancha past bo'lgan yaxshi narx yorlig'i ham e'tiborga loyiqdir. Ko'p takliflarning eng yaxshisini tanlang, sizga yordam beradi slondo.uz`
                         },
                         lg: {
@@ -365,17 +365,17 @@ export const getSEOContent = (category: CategoryType, subCtgr: SubcategoryType, 
                         },
                         meizu: {
                             title: `Meizu telefonlari ${location} / eng yaxshi narxlarda Meizu smartfonini sotib oling`,
-                            description: `Meizu smartfonlarini sotish ${location} da meizu telefonini eng yaxshi narxlarda sotib oling.`,
+                            description: `Meizu smartfonlarini sotish ${location}da meizu telefonini eng yaxshi narxlarda sotib oling.`,
                             text: `Xitoyning yirik meizu kompaniyasining telefonlari yorqin dizayni va silliq ishlashi bilan ajralib turadi. Bundan tashqari, ishlab chiqaruvchidan dasturiy qobiq kam RAM iste'mol qiladi, bu esa ishni qo'shimcha tezlashtirishga yordam beradi. Sizga yordam beradigan ko'plab takliflarni tanlang slondo.uz`
                         },
                         sony: {
                             title: `Sony telefonlari ${location} / Sony-dan smartfonlarni eng yaxshi narxlarda sotib oling`,
-                            description: `Sony smartfonlarining narxlarini ${location} da sotib oling yoki bilib oling. / slondo.uz`,
+                            description: `Sony smartfonlarining narxlarini ${location}da sotib oling yoki bilib oling. / slondo.uz`,
                             text: `Sony-ning smartfonlari har qanday boshqa qurilmaga o'xshamaydigan individual dizayn bilan ajralib turadi. Dinamik ko'rinish, yaxshi kamera va deyarli barcha modellarda namlikdan himoyalanish tufayli Sony telefonlari hozirgacha mashhur bo'lib qolmoqda. Ko'p takliflarning eng yaxshisini tanlang, sizga yordam beradi slondo.uz`
                         },
                         vivo: {
                             title: `Vivo telefonlar ${location} / eng yaxshi narxlarda "Vivo" dan smartfon sotib`,
-                            description: `Vivo smartfonlarining narxlarini ${location} da sotib oling yoki bilib oling/yangi va ishlatilgan "Vivo" telefonlarini sotish bo'yicha ko'plab takliflar slondo.uz`,
+                            description: `Vivo smartfonlarining narxlarini ${location}da sotib oling yoki bilib oling/yangi va ishlatilgan "Vivo" telefonlarini sotish bo'yicha ko'plab takliflar slondo.uz`,
                             text: `Vivo smartfonlari nisbatan yaqinda O'zbekiston elektron do'konlari do'konlarida paydo bo'ldi. Arzon narxlar va yaxshi xususiyatlarga ega bo'lgan Vivo telefonlari tezda mashhurlikka erisha boshladi. Ko'p takliflarning eng yaxshisini tanlang, sizga yordam beradi slondo.uz`
                         },
                         tecnoSpark: {
@@ -390,15 +390,15 @@ export const getSEOContent = (category: CategoryType, subCtgr: SubcategoryType, 
                         },
                         realMe: {
                             title: `Realme telefonlari ${location} / "realmi" smartfonlarini sotib olish yoki topish”`,
-                            description: `Readme telefonlarining narxlarini ${location} da sotib oling yoki bilib oling yangi va ishlatilgan smartfonlar haqiqatlar: xt, c3, c5 va boshqa modellar / kredit va to'lov takliflari`,
+                            description: `Readme telefonlarining narxlarini ${location}da sotib oling yoki bilib oling yangi va ishlatilgan smartfonlar haqiqatlar: xt, c3, c5 va boshqa modellar / kredit va to'lov takliflari`,
                             text: `RealMe smartfonlarini ishlab chiqaruvchi kompaniya yaqinda O'zbekistonda o'z faoliyatini boshladi, biroq ko'plab foydalanuvchilar e'tiborini qozonishga muvaffaq bo'ldi. Yaxshi dam olish xususiyatlari va arzonligi tufayli, realmi telefonlari sizning pulingiz uchun eng yaxshi echimlardan biri deb atash mumkin. Yaxshi ko'rinish va kuchli kamera, shuningdek, ushbu qurilmalarning afzalligi hisoblanadi.
                             Ko'p takliflarning eng yaxshisini tanlang, sizga yordam beradi slondo.uz
                             `
                         },
                         other: {
-                            title: `${location} da smartfonlar va knopkali telefonlar/yangi yoki ishlatilgan telefonlar sotib ol`,
+                            title: `${location}da smartfonlar va knopkali telefonlar/yangi yoki ishlatilgan telefonlar sotib ol`,
                             description: `Tugma telefonlar va smartfonlarning narxini sotib olish, sotish yoki bilish, eng qulay usul slondo.uz | ${location}`,
-                            text: `${location} da yangi va ishlatilgan telefonlar va smartfonlar savdosi, eng yaxshi narxlarda slondo.uz`
+                            text: `${location}da yangi va ishlatilgan telefonlar va smartfonlar savdosi, eng yaxshi narxlarda slondo.uz`
                         }
                     },
                     tablets: {
@@ -412,53 +412,53 @@ export const getSEOContent = (category: CategoryType, subCtgr: SubcategoryType, 
                         - Sony
                         `,
                         apple: {
-                            title: `${location} da Ipad / sotib olish yoki Apple planshetlar narxini bilish`,
-                            description: `Apple | iPad Pro-dan yangi va ishlatilgan planshetlarni sotish uchun ${location}/da ipad narxini sotib oling yoki bilib oling, mini slondo.uz`,
+                            title: `${location}da Ipad / sotib olish yoki Apple planshetlar narxini bilish`,
+                            description: `Apple | iPad Pro-dan yangi va ishlatilgan planshetlarni sotish uchun ${location} / da ipad narxini sotib oling yoki bilib oling, mini slondo.uz`,
                             text: `Apple planshetlari sifati va ishonchliligi bilan mashhur. Amerika kompaniyasining ishga tushirilishidan buyon chiqarilgan aksariyat qurilmalari hozirgacha yaxshi ishlamoqda. Bundan tashqari, yaxshi ishlash, aniq ekran va boshqa ishlab chiqaruvchilar tomonidan topilgan xatolar yo'qligini ham qayd etish mumkin. Bir-ikki yil oralig'ida muntazam ravishda chiqadigan yangiliklar eng kuchli komponentlarni o'z ichiga oladi va eski modellarni arzonroq sotib olish imkonini beradi. Misol uchun, 2020 yilda yangilangan ipad pro-da uchta kamera paydo bo'ldi va ipad mini 5 so'nggi avlod protsessor bilan jihozlangan.
                             Eng yaxshisini tanlang ko'p takliflar sizga yordam beradi slondo.uz
                             `
                         },
                         samsung: {
                             title: `Samsung planshetlari ${location} | Samsung tab a, 3, 4 narxlarini sotib olish yoki narx bilish`,
-                            description: `Samsung Galaxy tab a, 3, 4 planshetini ${location} da sotib oling / Samsung planshetlari narxini bilib oling yoki eng yaxshi narxda sotib oling | slondo.uz`,
+                            description: `Samsung Galaxy tab a, 3, 4 planshetini ${location}da sotib oling / Samsung planshetlari narxini bilib oling yoki eng yaxshi narxda sotib oling | slondo.uz`,
                             text: `Samsung planshetlari uslub, ishlash va sifatni birlashtiradi, bu esa ularni o'z pullari uchun ajoyib echimdir. Samsung planshetlari liniyasi o'lchamlari va samarali plombalarning bir-biridan farq qiluvchi ko'plab modellarga ega. Shuni ham ta'kidlash kerakki, planshetlarning ko'plab flagmani modellari bilan qalam (Stylus) mavjud. Bunday yaxshi bonus o'z mijozlari uchun Koreya kompaniyasi qiladi. Bundan tashqari, Samsung planshet kompyuter foydalanuvchilari uchun klaviatura bilan bog'lanish mumkin, bu matn bilan ishlashni osonlashtiradi. Ko'p takliflardan eng yaxshisini tanlang: galaxy tab a, s, 3, 4, 5, 6, 7, sizga yordam beradi slondo.uz!`
                         },
                         xiaomi: {
                             title: `Xiaomi Mi planshetlari ${location} / Xiaomi planshetlarining narxlarini sotib olish yoki narx bilish`,
-                            description: `Xiaomi mi planshetlarini ${location} da sotib oling yoki bilib oling Xiaomi dan yangi va ishlatilgan elektronika eng yaxshi narxda | slondo.uz`,
+                            description: `Xiaomi mi planshetlarini ${location}da sotib oling yoki bilib oling Xiaomi dan yangi va ishlatilgan elektronika eng yaxshi narxda | slondo.uz`,
                             text: `Xitoyning yirik Xiaomi ishlab chiqaruvchisi planshetlari ushbu kompaniyaning barcha mahsulotlari ruhida qolmoqda. Ular juda yaxshi ishlash, ergonomik dizayn va arzon narxni ta'minlaydigan yaxshi samarali to'ldirishni birlashtiradi. Xiaomi mi pad planshetlari nafaqat O'zbekistonda, balki boshqa ko'plab mamlakatlarda ham e'tiborga sazovor bo'ldi. Kompaniyaning sotuvi o'sib bormoqda va elektronika bozorida tobora kuchayib bormoqda, bu esa Xiaomi-dan qurilmalarni sotib olishga yana bir bor urinmoqda”
                             Ko'p takliflarning eng yaxshisini tanlang, sizga yordam beradi slondo.uz
                             `
                         },
                         asus: {
                             title: `Asus planshetlari ${location} / "Asus" dan elektron narxlarni sotib olish yoki narx bilish”`,
-                            description: `Asus planshetlari va transformatorlarini ${location} da sotib oling. slondo.uz`,
+                            description: `Asus planshetlari va transformatorlarini ${location}da sotib oling. slondo.uz`,
                             text: `Asus planshetlarini tanlashda to'xtash, xaridor sifatli va ishonchli mahsulotni olishga ishonch hosil qiladi. "Asus" liniyasidagi modellarning keng assortimenti sizning shaxsiy ehtiyojlaringiz uchun planshetni tanlash imkonini beradi. Ishlab chiqaruvchi ikkita operatsion tizimni taklif qiladi: OS Windows va OS Android. Eng mashhur modellar Nexus va Zenpad hisoblanadi. Ko'p takliflarning eng yaxshisini tanlang, sizga yordam beradi slondo.uz`
                         },
                         acer: {
-                            title: `Acer planshetini ${location} da sotib oling eng yaxshi narxlar slondo.uz`,
+                            title: `Acer planshetini ${location}da sotib oling eng yaxshi narxlar slondo.uz`,
                             description: `Acer-dan planshetlarni sotish uchun ${location} / sotib olish yoki "Aser" planshetlarining narxlarini bilish | yangi va ishlatilgan elektronika`,
                             text: `Acer planshetlari nafaqat oddiy foydalanuvchilar, balki ushbu qurilmalar savdoni optimallashtirish uchun ishlatiladigan umumiy ovqatlanish sohasida ham e'tibor qozondi. "Aser" planshet kompyuterlari yaxshi sifat va demokratik narxni birlashtiradi, bu ko'plab boshqa analoglar orasida katta afzallik.
                             Ko'p takliflarning eng yaxshisini toping, sizga yordam beradi slondo.uz
                             `
                         },
                         lenovo: {
-                            title: `Lenovo planshetini ${location} da sotib oling / eng yaxshi narxlar slondo.uz`,
-                            description: `Lenovo planshetlari va transformatorlarini ${location} da sotish bo'yicha ko'plab takliflar Lenovo planshet kompyuterlarini sotib olish yoki topish | yangi va ishlatilgan elektronika`,
+                            title: `Lenovo planshetini ${location}da sotib oling / eng yaxshi narxlar slondo.uz`,
+                            description: `Lenovo planshetlari va transformatorlarini ${location}da sotish bo'yicha ko'plab takliflar Lenovo planshet kompyuterlarini sotib olish yoki topish | yangi va ishlatilgan elektronika`,
                             text: `Lenovo planshetlari bir qator sabablarga ko'ra boshqalardan ajralib turadi: narx va sifatning mukammal kombinatsiyasidan tashqari, ko'plab planshetlar ham noutbukni almashtirishi mumkin. Ular ikkita operatsion tizimdan foydalanadilar: Windows va Android OS, bu foydalanuvchi o'z tanlovini amalga oshirishga imkon beradi.
                             Ko'p takliflarning eng yaxshisini toping, sizga yordam beradi slondo.uz
                             `
                         },
                         bq: {
-                            title: `BQ planshetini ${location} da sotib oling / eng yaxshi narxlar slondo.uz`,
+                            title: `BQ planshetini ${location}da sotib oling / eng yaxshi narxlar slondo.uz`,
                             description: `Bq planshetlari ${location} / BQ planshetlarini eng yaxshi narxlarda sotadigan xususiy mulkdorlar va elektron do'konlardan takliflar`,
                             text: `Bq planshetlari bozorning eng ko'p byudjetli narx segmentini egallaydi. Oddiy tarkibiy qismlarni va yaxshi sifatni birlashtirib, ushbu qurilmalar tezda ko'plab foydalanuvchilarning ishonchini qozondi. BQ dan deyarli barcha planshet kompyuterlarining o'ziga xos xususiyati-bu arzon narx bo'lib, ularni bozorda eng qulay qurilmalardan biri hisoblanadi.
                             Ko'p takliflarning eng yaxshisini tanlang, sizga yordam beradi slondo.uz
                             `
                         },
                         huawei: {
-                            title: `Huawei planshetini ${location} da sotib oling | ko'p reklamalar slondo.uz`,
-                            description: `Huawei planshet kompyuterlarini eng yaxshi narxlarda sotish bo'yicha ko'plab takliflar Huawei planshetini ${location} da sotib oling yangi va ishlatilgan elektronika`,
+                            title: `Huawei planshetini ${location}da sotib oling | ko'p reklamalar slondo.uz`,
+                            description: `Huawei planshet kompyuterlarini eng yaxshi narxlarda sotish bo'yicha ko'plab takliflar Huawei planshetini ${location}da sotib oling yangi va ishlatilgan elektronika`,
                             text: `Huawei brendining planshetlari zamonaviy dizayni, yaxshi ishlashi va yaxshi sifatiga ega. "Narx - navo" kombinatsiyasini birlashtirib, "huavey" planshet kompyuterlari byudjetdan flagman qurilmalarga qadar ko'plab modellarga ega. Ko'p takliflarning eng yaxshisini tanlang, sizga yordam beradi slondo.uz`
                         },
                         microsoft: {
@@ -481,30 +481,30 @@ export const getSEOContent = (category: CategoryType, subCtgr: SubcategoryType, 
                         - Amazfit GTS
                         `,
                         apple: {
-                            title: `Apple watch-ni ${location} da tomosha qiling yoki Epl Votch narxini bilib oling`,
-                            description: `Smart Watch Apple watch-ni ${location} da sotib oling | eng yaxshi narxlarda aqlli "Epl Votch" soatini sotish bo'yicha ko'plab takliflar | slondo.uz`,
+                            title: `Apple watch-ni ${location}da tomosha qiling yoki Epl Votch narxini bilib oling`,
+                            description: `Smart Watch Apple watch-ni ${location}da sotib oling | eng yaxshi narxlarda aqlli "Epl Votch" soatini sotish bo'yicha ko'plab takliflar | slondo.uz`,
                             text: `Apple-ning aqlli soatlari turli xil, muntazam ishlarni bajarishda mashhur yordamchidir: ob-havoni kuzatish, bildirishnomalarni ko'rish va ulangan gadjetlarni boshqarish. Bundan tashqari, aqlli soatlarda "Epl Votch" sog'lig'ini kuzatish va yaxshi jismoniy shaklni saqlab qolish uchun ko'plab funktsiyalar mavjud. Apple muntazam ravishda soatlar chizig'ini yangilaydi, shuning uchun ular ko'plab yangi xususiyatlarga ega, shuningdek, eski modellarni sotib olish imkoniyati ancha arzon. Ko'p takliflarning eng yaxshisini tanlang, sizga yordam beradi slondo.uz`
                         },
                         samsung: {
-                            title: `${location} da Galaxy Samsung Watch / Samsung Smart Watch va fitness braslet sotib ol`,
-                            description: `Samsung Galaxy Watch va Fitni ${location} da sotib oling Samsungning turli aqlli soatlar modellari va fitness bilaguzuklari uchun eng yaxshi narxlar: Gear, Active, Fit slondo.uz`,
+                            title: `${location}da Galaxy Samsung Watch / Samsung Smart Watch va fitness braslet sotib ol`,
+                            description: `Samsung Galaxy Watch va Fitni ${location}da sotib oling Samsungning turli aqlli soatlar modellari va fitness bilaguzuklari uchun eng yaxshi narxlar: Gear, Active, Fit slondo.uz`,
                             text: `Samsung Galaxy Smart Watch, aqlli soatlar bozoridagi boshqa analoglar uchun juda muvaffaqiyatli raqib. Samsung Watch modellari va fitness bilaguzuklarining keng assortimenti tufayli bozorning barcha qatlamlarini qamrab oladi va potentsial xaridorga o'z mahsulotlarini tanlash imkonini beradi. Narx va sifatning mukammal kombinatsiyasi, yaxshi dizayni va ko'plab xususiyatlari, Galaxy Watch va Galaxy Fitni ajoyib xarid qilish yechimini yaratadi! Ko'p takliflarning eng yaxshisini tanlang, sizga yordam beradi slondo.uz`
                         },
                         xiaomi: {
-                            title: `Mi Bend 4, 5 ${location} da Xiaomi-dan soat va fitness braslet sotib oling`,
-                            description: `Xiaomi-dan fitness bilakuzuklar va soatlarni ${location} da sotib oling mi band Smart bracelets (mi band) ni eng yaxshi narxlarda sotish bo'yicha ko'plab takliflar`,
+                            title: `Mi Bend 4, 5 ${location}da Xiaomi-dan soat va fitness braslet sotib oling`,
+                            description: `Xiaomi-dan fitness bilakuzuklar va soatlarni ${location}da sotib oling mi band Smart bracelets (mi band) ni eng yaxshi narxlarda sotish bo'yicha ko'plab takliflar`,
                             text: `Xiaomi'dagi aqlli fitness bilakuzuklar yoki soatlar zamonaviy va zamonaviy aksessuarlardir. "Mi band" yordamida foydalanuvchi yurak urish tezligi yoki yurak urish tezligi kabi asosiy jismoniy ko'rsatkichlarni osongina kuzatishi mumkin, telefondan efirga uzatiladigan xabarnomalarni ko'rish, xabarlarni yuborish yoki qo'ng'iroqlarni boshqarish. Xitoy giganti "kyomi" dan ushbu turdagi gadjetlar funksionallik bilan deyarli bir xil bo'lgan va faqat tashqi ko'rinishdagi farqlarga ega bo'lgan ikkita asosiy guruhga bo'linadi: aqlli soatlar va fitness bilakuzuklar. Ushbu qurilmalarning ikkalasi odatda namlikdan himoyalanish bilan sotiladi.
                             Ko'p takliflarning eng yaxshisini tanlang, sizga yordam beradi slondo.uz
                             `
                         },
                         casio: {
-                            title: `Casio Smart Watch ${location} da "Casio" dan eng yaxshi aqlli soat narxi”`,
-                            description: `${location} da "Casio" aqlli soatini sotib oling | eng yaxshi narx uchun Casio Smart Watch-ni sotish uchun ko'plab reklamalar / slondo.uz`,
+                            title: `Casio Smart Watch ${location}da "Casio" dan eng yaxshi aqlli soat narxi”`,
+                            description: `${location}da "Casio" aqlli soatini sotib oling | eng yaxshi narx uchun Casio Smart Watch-ni sotish uchun ko'plab reklamalar / slondo.uz`,
                             text: `Casio-dan aqlli soatlar klassik, sevimli uslubda, vaqtni va metallni, kauchuk yoki teri kamarini tanlash uchun analog usulda ishlab chiqariladi. Odatiy soatga o'xshash ko'rinishga qaramay, Casio "Smart Watch" aqlli soatlar bozoridagi boshqa modellar bilan bir xil vazifalarni bajaradi. Ko'p takliflarning eng yaxshisini tanlang, sizga yordam beradi slondo.uz`
                         },
                         garmin: {
-                            title: `${location} da Garmin Smart Watch / "Garmin" dan smart watch uchun eng yaxshi narx”`,
-                            description: `Smart watch Garminni ${location} da sotib oling | "Garmin" dan eng yaxshi narxlarda aqlli soatlar sotish bo'yicha ko'plab takliflar / slondo.uz`,
+                            title: `${location}da Garmin Smart Watch / "Garmin" dan smart watch uchun eng yaxshi narx”`,
+                            description: `Smart watch Garminni ${location}da sotib oling | "Garmin" dan eng yaxshi narxlarda aqlli soatlar sotish bo'yicha ko'plab takliflar / slondo.uz`,
                             text: `Garminning aqlli soati, bozorning eng yuqori narx segmentini egallaydi. Ular chiroyli ko'rinishga ega va dasturiy ta'minotning soddalashtirilgan dizayni bor, shuning uchun birinchi qarashda an'anaviy analog modellardan farq qilmaydi. "Garmin" dan soatlar, shuningdek, yorqin quyosh ostida ham qurilmani boshqarishga imkon beruvchi aniq ekran bilan jihozlangan.
                             Ko'p takliflarning eng yaxshisini tanlang, sizga yordam beradi slondo.uz
                             `
@@ -830,7 +830,7 @@ export const getSEOContent = (category: CategoryType, subCtgr: SubcategoryType, 
                         `,
                         canon: {
                             title: `Canon kameralari ${location} / Canon kameralaridagi narxlarni sotib olish yoki topish`,
-                            description: `Canon kameralarining narxini ${location} da sotib oling yoki bilib oling: 600d, 550d, 70d | 1200D / Canon kameralari eng yaxshi narxlarda slondo.uz`,
+                            description: `Canon kameralarining narxini ${location}da sotib oling yoki bilib oling: 600d, 550d, 70d | 1200D / Canon kameralari eng yaxshi narxlarda slondo.uz`,
                             text: `Canon kameralari O'zbekiston foto bozoridagi eng mashhur mahsulotlardan biridir. Tasvirning ishonchliligi va mukammal sifati sizni yangi boshlanuvchilar va professional fotograflar uchun juda yaxshi suratlar yaratishga imkon beradi. Ushbu qurilmalar turli modellarga muammosiz taqsimlangan juda ko'p foydali funktsiyalarni birlashtiradi. Shu sababli, har bir kishi o'z maqsadlari uchun mos kamerani tanlashi mumkin.
                             Canon kameralarini tasniflash”
                             - raqamli Ultra
@@ -840,8 +840,8 @@ export const getSEOContent = (category: CategoryType, subCtgr: SubcategoryType, 
                             `
                         },
                         nikon: {
-                            title: `Nikon kamerasini ${location} da sotib oling | "Nikon" kameralari-narx`,
-                            description: `Nikon kameralarini ${location} da sotish bo'yicha ko'plab takliflar "Nikon" foto uskunalarini sotib olish yoki sotib olish oson slondo.uz`,
+                            title: `Nikon kamerasini ${location}da sotib oling | "Nikon" kameralari-narx`,
+                            description: `Nikon kameralarini ${location}da sotish bo'yicha ko'plab takliflar "Nikon" foto uskunalarini sotib olish yoki sotib olish oson slondo.uz`,
                             text: `Yaponiyaning "Nikon" firmasidan olingan kameralar barcha fotograflar guruhlari uchun uzoq vaqtdan beri isbotlangan yuqori sifatli va ishonchli mahsulotdir. Ushbu qurilmalardan olingan yaxshi tasvirlardan tashqari, ularning ergonomik dizayni va boshqaruv tugmalarining qulay joylashishini ham ta'kidlash mumkin emas. "Nikon" dan olingan kameralar oyna va boshqa parametrlarning mavjudligi bilan ajralib turadigan keng turdagi qurilmalarga ega:
                             A, P, DL, s-ixcham imkoniyatlari
                             Namlik va changga chidamli AW qurilmalari
@@ -853,17 +853,17 @@ export const getSEOContent = (category: CategoryType, subCtgr: SubcategoryType, 
                         },
                         samsung: {
                             title: `Samsung kameralari ${location} / Samsung kamerasini sotib oling`,
-                            description: `Samsung kamerasining yangi va ishlatilgan narxlarini ${location} da sotib oling yoki bilib oling.`,
+                            description: `Samsung kamerasining yangi va ishlatilgan narxlarini ${location}da sotib oling yoki bilib oling.`,
                             text: `Samsung kameralari yangi boshlanuvchilar, yangi boshlanuvchilar va havaskorlar uchun mos bo'lgan yuqori sifatli va ishonchli qurilmalardir. Samsung kameralaridan ko'plab qurilmalar qimmatroq analoglardan mahrum bo'lgan texnologik funktsiyalarga ega: wi-fi, qo'shimcha displey, sensorli ekran, yaxshi Zoom va boshqa yoqimli qo'shimchalar. Ko'p takliflarning eng yaxshisini tanlang, sizga yordam beradi slondo.uz`
                         },
                         sony: {
                             title: `Sony kameralari ${location} / Sony kamerasini eng yaxshi narxlarda sotib oling`,
-                            description: `Sony kamerasini ${location} da eng yaxshi narxda sotib oling Sony-dan yangi va ikkinchi qo'l kameralarni sotish bo'yicha ko'plab takliflar`,
+                            description: `Sony kamerasini ${location}da eng yaxshi narxda sotib oling Sony-dan yangi va ikkinchi qo'l kameralarni sotish bo'yicha ko'plab takliflar`,
                             text: `Sony-dan olingan kameralar yangi boshlanuvchilar va tajribali professional fotograf uchun yaxshi imkoniyatdir. Ko'p takliflarning eng yaxshisini tanlang, sizga yordam beradi slondo.uz`
                         },
                         polaroid: {
                             title: `Polaroid kameralari ${location} / "Polaroid" kamerasini eng yaxshi narxlarda sotib oling`,
-                            description: `Polaroid kamerasini ${location} da eng yaxshi narxda sotib oling "Polaroid" dan yangi va ikkinchi qo'l kameralarni sotish bo'yicha ko'plab takliflar`,
+                            description: `Polaroid kamerasini ${location}da eng yaxshi narxda sotib oling "Polaroid" dan yangi va ikkinchi qo'l kameralarni sotish bo'yicha ko'plab takliflar`,
                             text: `Polaroid kameralarining eng mashhur liniyalaridan biri tezkor suratga olish xususiyatiga ega qurilmalar seriyasidir. Ko'p takliflarning eng yaxshisini tanlang, sizga yordam beradi slondo.uz`
                         }
                     },
@@ -888,7 +888,7 @@ export const getSEOContent = (category: CategoryType, subCtgr: SubcategoryType, 
                        - Philips
                        - Xiaomi, YI`,
                         goPro: {
-                            title: `GoPro ${location} da / eng yaxshi narxlarda kamera "goupro" sotib olish`,
+                            title: `GoPro ${location}da / eng yaxshi narxlarda kamera "goupro" sotib olish`,
                             description: `GoPro kameralari eng yaxshi narxlarda ${location} / "go Pro" dan yangi yoki ishlatilgan kamerasini sotib olish oson slondo.uz / tadbirlar kamera`,
                             text: `Uvonchli daqiqalar doimo hayot uchun qo'lga kiritmoqchi. Ko'pincha ular kutilmagan tarzda ro'y beradi va sarguzasht va ekstremal dam olishni sevuvchilar uchun oddiy qurilmalarda chiroyli suratlar yaratish juda qiyin. "GoPro" ning harakat kamerasi sizga yordam beradi! Yilni o'lchamlari, kichik vazni, ko'plab biriktirgichlar va namlikdan himoya qilish, ushbu qurilmalarni eng mos bo'lmagan joylarda tortish uchun ideal holga keltiradi. "Goupro" ning harakat kameralari yordamida parashyut, suv osti ovlari, velosiped va boshqa ko'plab qiziqarli tadbirlarni suratga olish mumkin bo'ladi.
                             Ko'p takliflarning eng yaxshisini tanlang, sizga yordam beradi slondo.uz
@@ -934,13 +934,13 @@ export const getSEOContent = (category: CategoryType, subCtgr: SubcategoryType, 
                         - Yupiter
                         `,
                         canon: {
-                            title: `${location} da "canon" obyektiv sotib oling / eng yaxshi narxlar slondo.uz`,
-                            description: `"Canon" dan yangi va ikkinchi qo'l linzalarni sotish bo'yicha ko'plab takliflar | Canon linzalarini ${location} da eng yaxshi narxda sotib oling / slondo.uz`,
+                            title: `${location}da "canon" obyektiv sotib oling / eng yaxshi narxlar slondo.uz`,
+                            description: `"Canon" dan yangi va ikkinchi qo'l linzalarni sotish bo'yicha ko'plab takliflar | Canon linzalarini ${location}da eng yaxshi narxda sotib oling / slondo.uz`,
                             text: `"Canon" kompaniyasining bir qator  obyektiv uchta asosiy narx segmentiga bo'linadi: byudjet optikasi, o'rta narx segmenti texnikasi va professional tortishish uchun ishlab chiqarilgan eng qimmat qurilmalar. Ko'p takliflarning eng yaxshisini tanlang, sizga yordam beradi slondo.uz`
                         },
                         nikon: {
-                            title: `${location} da "Nikon" obyektiv linzalarini sotib oling eng yaxshi narx slondo.uz`,
-                            description: `"Nikon" dan yangi va ishlatilgan linzalarni sotish bo'yicha ko'plab takliflar | Nikon linzalarini ${location} da eng yaxshi narxda sotib oling / slondo.uz`,
+                            title: `${location}da "Nikon" obyektiv linzalarini sotib oling eng yaxshi narx slondo.uz`,
+                            description: `"Nikon" dan yangi va ishlatilgan linzalarni sotish bo'yicha ko'plab takliflar | Nikon linzalarini ${location}da eng yaxshi narxda sotib oling / slondo.uz`,
                             text: `Nikon kompaniyasining  obyektiv linzalari kameralar va kameralar uchun optika orasida eng ommabop hisoblanadi. Ushbu kompaniyaning qatorida byudjet va professional linzalarning ko'plab modellari mavjud. Ko'p takliflarning eng yaxshisini tanlang, sizga yordam beradi slondo.uz`
                         }
                     },
@@ -1224,8 +1224,8 @@ export const getSEOContent = (category: CategoryType, subCtgr: SubcategoryType, 
                         - Sony
                         Va boshqalar`,
                         artel: {
-                            title: `${location} da Artel televizorlar / eng yaxshi narxlarda "Artel" dan TV sotib ol`,
-                            description: `"Artel" televizorini ${location} da sotib oling/"Artel" dan yangi va ishlatilgan Smart TV uskunalarini sotish bo'yicha ko'plab takliflar, diagonal 32 | 43 / eng yaxshi narxlar slondo.uz`,
+                            title: `${location}da Artel televizorlar / eng yaxshi narxlarda "Artel" dan TV sotib ol`,
+                            description: `"Artel" televizorini ${location}da sotib oling/"Artel" dan yangi va ishlatilgan Smart TV uskunalarini sotish bo'yicha ko'plab takliflar, diagonal 32 | 43 / eng yaxshi narxlar slondo.uz`,
                             text: `Mahalliy ishlab chiqaruvchilarning "Artel" televizorlari turli omillar tufayli e'tiborga loyiqdir: arzon narxlardagi, sifatli va qulay xizmat ko'rsatish markazi. 32, 43 ekranining diagonali, HD tasvir sifati, Full HD, 4K, "smart" to'ldirish va boshqa omillar mavjudligi kabi bir qator xususiyatlar bilan bir-biridan farq qiluvchi turli xil modellar mavjud. "Artel" kompaniyasining televizorlari import qilingan mahsulotlarga qaraganda ancha arzon, deyarli har jihatdan kam emas. Ko'p takliflarning eng yaxshisini tanlang, sizga yordam beradi slondo.uz`
                         },
                         samsung: {
@@ -1384,21 +1384,21 @@ export const getSEOContent = (category: CategoryType, subCtgr: SubcategoryType, 
                             `
                         },
                         jbl: {
-                            title: `${location} da JBL naushnik / eng yaxshi narxda simsiz naushnik sotib oling`,
+                            title: `${location}da JBL naushnik / eng yaxshi narxda simsiz naushnik sotib oling`,
                             description: `JBL – dan simsiz naushnik eng yaxshi narxda sotib oling - ${location} | xususiy mulkdorlar va elektron do'konlardan ko'plab takliflar / Bluetooth naushnik" JBL " slondo.uz`,
                             text: `Mashhur "JBL" audio tizimining naushnik uzoq vaqtdan beri musiqa ixlosmandlari va musiqa ixlosmandlarining e'tiborini tortdi. Ergonomik dizayn va ishonchli sifat bilan birgalikda mukammal ovoz, bu markadan minigarniturani pul uchun eng yaxshi echimga aylantiradi. JBL audio qurilmalari liniyasi turli xil simli va simsiz modellarni taqdim etadi.
                             Ko'p takliflarning eng yaxshisini tanlang, sizga yordam beradi slondo.uz
                             `
                         },
                         awei: {
-                            title: `${location} da "Awei" naushnik sotib oling / ko'p simli va simsiz modellar`,
+                            title: `${location}da "Awei" naushnik sotib oling / ko'p simli va simsiz modellar`,
                             description: `Xitoy markasi "Awei" dan minigarnituralar - ${location} | "awei" dan eng yaxshi narxlarda simli va simsiz naushnik sotib oling | slondo.uz`,
                             text: `Xitoyning "Awei" brendi kichik elektronika va turli aksessuarlar ishlab chiqarishga ixtisoslashgan. Ushbu kompaniya eshitish vositalarini ishlab chiqarishga alohida e'tibor beradi: simli, simsiz va sport modellari yaxshi ovoz, katta funksionallik va ishonchli sifat bilan ajralib turadi.
                             Ko'p takliflarning eng yaxshisini tanlang, sizga yordam beradi slondo.uz
                             `
                         },
                         akg: {
-                            title: `Akg naushnik ${location} da / eng yaxshi narxda" AKG " ni sotib oling slondo.uz`,
+                            title: `Akg naushnik ${location}da / eng yaxshi narxda" AKG " ni sotib oling slondo.uz`,
                             description: `Akg minigarnituralarini eng yaxshi narxlarda sotib oling | Samsung "AKG" simli va simsiz vakuumli minigarnituralar | ${location}`,
                             text: `"AKG" brendidan minigarnituralar birinchi navbatda mukammal ovoz sifati va qurilmalarning o'zlari uchun qadrlanadi. Mahsulotning ishonchliligi, ushbu minigarniturani uzoq vaqt davomida ishlatishga imkon beradi va mukammal ovoz hatto musiqa ixlosmandlarini ham befarq qoldirmaydi. "AKG" eshitish vositasi kundalik foydalanish, sport, studiya yozuvlari yoki ovoz bilan boshqa professional ish uchun modellarni o'z ichiga oladi.
                             Ko'p takliflarning eng yaxshisini tanlang, sizga yordam beradi slondo.uz
@@ -1702,25 +1702,25 @@ export const getSEOContent = (category: CategoryType, subCtgr: SubcategoryType, 
                         description: `Kofemolka, Blender, maydalash va aralashtirish uchun oshxona uskunalari | Myasorubka, Blender, Mikser, Testomeshalka, va boshqa uskunalar sotib olish.`,
                         text: `Oziq-ovqat mahsulotlarini maydalash yoki aralashtirish uchun ko'plab oshxona asboblari o’ylab topilgan: kombayn, blender, mikser, testomeshalka, sokovijimalka, kofemolka va boshqalar. Bu uskunalarning ishlash usuli bir biriga o’xshasada, lekin, hammasi xar hil ish bajara oladi. Slondo.uz savdo maydonchasi orqali mashhur ishlab chiqaruvchilarning oshxona uskunalarini eng yaxshi narxlarda toping: Galaxy, Bosh, Samsung, Artel, Philips, Vitek, Xiaomi, Polaris, Moulinex, Zigmund & Shtain, Lumme va boshqalar.`,
                         temp1: {
-                            title: `${location} da blender | immersion (qo'lda) yoki statsionar blender / narx sotib ol`,
+                            title: `${location}da blender | immersion (qo'lda) yoki statsionar blender / narx sotib ol`,
                             description: `Eng yaxshi ishlab chiqaruvchilarning ${location} | yangi va ishlatilgan blenderlarda suv osti va statsionar blenderlar narxini sotib oling yoki bilib oling: braun, bosch, Flibs, redmod, tefal`,
                             text: `Blender uzoq vaqt davomida har qanday oshxonada zarur qurilmaga aylandi. Uning yordamida smoothies, kartoshka pyuresi, tug'ralgan osh va pyuresi tayyorlanadi. Blenderlarning ikkita asosiy turi mavjud, ularning har biri o'zining afzalliklari va kamchiliklariga ega. Submersion va statsionar: suv osti modellari kamroq ishlatilganda yanada ixcham va qulaydir, ularni yuvish ham oson. Ruxsat etilgan blenderlar katta oila uchun mos bo'lgan umumiy texnikadir. Statsionar blenderdan foydalanib, mahsulotlarni tezroq ezish yoki aralashtirish mumkin. Ushbu oshxona jihozlarini ishlab chiqaradigan eng mashhur brendlar: braun, bosch, philips, redmod, tefal. Ko'p takliflarning eng yaxshisini tanlang, sizga yordam beradi slondo.uz`
                         },
                         temp2: {
-                            title: `${location} da Mikser | Sayyora yoki qo'lda mikser sotib ol: do'konlardan takliflar`,
-                            description: `Braun, bosch, philips, redmod, tefal: xususiy savdogarlar va shahar do'konlar | mikser dan ${location} da Sayyora, qo'lda Mikserlar va xamir sotish uchun takliflar ko'p`,
+                            title: `${location}da Mikser | Sayyora yoki qo'lda mikser sotib ol: do'konlardan takliflar`,
+                            description: `Braun, bosch, philips, redmod, tefal: xususiy savdogarlar va shahar do'konlar | mikser dan ${location}da Sayyora, qo'lda Mikserlar va xamir sotish uchun takliflar ko'p`,
                             text: `Bugungi kunda mikser har bir oshxonada zarur qurilma. Ularning pishirish sohasi juda keng: tuxum, mexnat, kartoshka pyuresi, xamir, mus va boshqa ko'plab mahsulotlarni qamchilash. Mikserni ishlatib, ko'p vaqtni tejashingiz va oshxona imkoniyatlarini kengaytirishingiz mumkin. Ushbu qurilmaning ikkita asosiy turi mavjud: qo'lda va statsionar. Qo'l modellari yanada ixcham va oz miqdorda qamchilash uchun ajoyib. Statsionar, ular Sayyora mikserlari yanada chuqur silliqlash va katta hajmlarda aralashtirish uchun ishlatilishi mumkin.
                             Ko'p takliflarning eng yaxshisini tanlang, sizga yordam beradi slondo.uz
                             `
                         },
                         temp3: {
-                            title: `${location} da Oshona kombayn | oziq-ovqat kombayn sotib ol`,
-                            description: `${location} da oziq-ovqat mahsulotlarini sotish bo'yicha ko'plab takliflar elektr va mexanik, 3-da 1-da sog'lom ovqat tayyorlash uchun oshxona kombaynlari | slondo.uz`,
+                            title: `${location}da Oshona kombayn | oziq-ovqat kombayn sotib ol`,
+                            description: `${location}da oziq-ovqat mahsulotlarini sotish bo'yicha ko'plab takliflar elektr va mexanik, 3-da 1-da sog'lom ovqat tayyorlash uchun oshxona kombaynlari | slondo.uz`,
                             text: `Oziq-ovqat mahsulotlarini ishlab chiqaruvchi har qanday oshxona uchun universal yordamchi hisoblanadi. Bunday qurilmalar yordamida nozullarning konfiguratsiyasiga va miqdoriga qarab, mahsulotlarni maydalash, aralashtirish, kesish va ulardan sharbatlarni siqish mumkin. Uning ko'p funktsionalligi tufayli oziq-ovqat mahsulotlarini qayta ishlash mashinasi oshxonada bir qator uskunalar o'rnini bosa oladi va joy va pulni tejaydi. Bosch, kenwood, Philips, braun, Redmond, tefal | eng yaxshi ishlab chiqaruvchilardan mahsulotlarni maydalash yoki aralashtirish uchun universal texnikani tanlang. slondo.uz`
                         },
                         temp4: {
-                            title: `${location} da go'sht maydalovchi / eng yaxshi narxda elektr maydalovchi sotib`,
-                            description: `${location} da oshxona uchun elektr va qo'lda qiymalagichlar katta assortimenti | bosch, redmond, artel dan xususiy savdogarlar va elektronika do'konlari go'sht maydalovchi dan e'lonlar`,
+                            title: `${location}da go'sht maydalovchi / eng yaxshi narxda elektr maydalovchi sotib`,
+                            description: `${location}da oshxona uchun elektr va qo'lda qiymalagichlar katta assortimenti | bosch, redmond, artel dan xususiy savdogarlar va elektronika do'konlari go'sht maydalovchi dan e'lonlar`,
                             text: `Yangi tayyorlangan go'sht, har doim sotib olingandan ko'ra mazali bo'ladi. Shuning uchun bugungi kunda go'sht maydalagichlarga bo'lgan talab bozorlarda va supermarketlarda mavjud bo'lishiga qaramasdan katta bo'lib qolmoqda. Elektron do'konlarda go'sht maydalagichlarning ikkita turi mavjud: qo'lda (mexanik) va elektr. Shubhasiz, bu turdagi go'sht maydalagichlarning har biri ham ortiqcha, ham kamchiliklarga ega, ammo qulaylik tufayli elektr versiyasi juda mashhur.
                             Ko'p takliflarning eng yaxshisini tanlang, sizga yordam beradi slondo.uz
                             `
@@ -1731,23 +1731,23 @@ export const getSEOContent = (category: CategoryType, subCtgr: SubcategoryType, 
                         description: `${location}da konditsioner, isitgich, klimat kontrol / Ionizator va boshqa iqlim texnikasini sotish bo'yicha ko'plab e'lonlar / Konditsioner sotib olish.`,
                         text: `Bizning keskin kontinental iqlimimizda, yoz va qishda konditsionerga bo'lgan ehtiyoj katta. Qishda xonani isitish oqibatida, xona havosi qurib qolishi ko’pgina ORVI kasalliklarini keltirib chiqarishi mumkin. Shuning uchun, ionizator kabi havo namlagich ham yahshi qurilma hisoblanadi. Yozda esa Chillachi jonimizga oro kiradi. Lekin, konditsioner tagida uzoq vaqt yotib qolishni tavsiya qilmagan bo’lar edik. Kondisioner yoki isitgichni sotib olishdan oldin qurilmaning kerakli quvvatini aniqlang. Sizning uyingiz yoki ofisingiz uchun eng qulay muhitni yaratishga qodir bo'lgan turli xil iqlim uskunalarini ushbu bo'limda topishingiz mumkin. Slondo.uz bepul reklama xizmatida iqlim uskunalarining narxlarini, shuningdek xususiyatlarini ko'ring va solishtiring.`,
                         temp5: {
-                            title: `${location} da Ventilyator / eng yaxshi narxda sotib ol`,
-                            description: `${location} da Ventilyator ol | xususiy va elektron do'konlar/qavat, ish stoli, mini, USB va boshqa modellari yangi va ishlatilgan maishiy texnika katta assortimenti`,
+                            title: `${location}da Ventilyator / eng yaxshi narxda sotib ol`,
+                            description: `${location}da Ventilyator ol | xususiy va elektron do'konlar/qavat, ish stoli, mini, USB va boshqa modellari yangi va ishlatilgan maishiy texnika katta assortimenti`,
                             text: `Issiq, o'zbek iqlimi bilan Ventilyator kabi texnika issiqlikka qarshi kurashda ajoyib echim bo'ladi. Boshqa iqlim uskunalaridan fan kam xarajatli va iqtisodiy elektr iste'moli bilan ajralib turadi. Umuman olganda, ikkita asosiy fan turi mavjud: ish stoli va zamin. Yaqinda yana bir fan turi faol ravishda ommalashmoqda: USB modeli. Bunday aksessuarlar ish yoki dam olish vaqtida salqinlikni ta'minlaydigan telefon yoki noutbukga biriktirilgan.
                             Ko'p takliflarning eng yaxshisini tanlang, sizga yordam beradi slondo.uz
                             `
                         },
                         temp6: {
-                            title: `${location} da Konditsioner / eng yaxshi bahoga iqlim uskunalar sotib ol`,
-                            description: `${location} da klima sotib ol: Gree, artel, Midea, samsung: eng yaxshi narxlarda klassik, mobil, inverter va mini iqlim uskunalar modellari | split tizimi va eng yaxshi ishlab chiqaruvchilarning konditsionerlar`,
+                            title: `${location}da Konditsioner / eng yaxshi bahoga iqlim uskunalar sotib ol`,
+                            description: `${location}da klima sotib ol: Gree, artel, Midea, samsung: eng yaxshi narxlarda klassik, mobil, inverter va mini iqlim uskunalar modellari | split tizimi va eng yaxshi ishlab chiqaruvchilarning konditsionerlar`,
                             text: `Yozgi vaqt davomida, konditsioner maishiy texnika zarur element hisoblanadi. Havo isitish funktsiyasini ta'minlaydigan ba'zi modellar sovuq qishlarni saqlab qolishi va shu bilan elektr pechlarini va boshqa isitgichlarni almashtirishi mumkin. Umumiy konditsionerlar bir necha turga bo'linadi: split tizimlar, mobil versiyalar, mini-versiyalar va ko'p splint tizimlari. Split va multi-split tizimi, tez-tez uy-joy va kvartiralarda o'rnatilgan, mobil versiyalari tijorat binolarni sovutish uchun qulay bo'ladi, va konditsionerlar "mini", ular ko'chma yoki ko'chma, individual, kichik xonalar iqlim tartibga solish uchun qulay bo'ladi. Ishlab chiqaruvchilardan Gree, Midea, Samsung va mahalliy Artelni ta'kidlash kerak. Ushbu kompaniyalar iqlim uskunalarini ishlab chiqarish bo'yicha eng yaxshi deb topildi.
                             Tashqi belgilar va o'lchamlarga qo'shimcha ravishda, bu iqlim birliklari ham ichki uskunalar bilan ajralib turadi. Yaqinda inverter modellari mashhurlikka erisha boshladi. Bundan tashqari, jim ish, kam elektr iste'moli, ishonchlilik va oldindan belgilangan haroratni nazorat qilishni yaxshilash mumkin. Minuslardan inverter konditsionerlarining yuqori narxi.
                             Eng yaxshi ishlab chiqaruvchilarning konditsionerini tanlang: GREE, Midea, Artel (Artel), Samsung, Polaris, sizga yordam beradi slondo.uz!
                             `
                         },
                         temp7: {
-                            title: `${location} da isitgichlar / neft, konvektör yoki infraqizil isib sotib ol`,
-                            description: `${location} da neft, konvektor yoki infraqizil isib sotib | eng yaxshi narxlarda yangi, ishlatilgan radiatorlar va elektr şömineler sotish uchun xususiy savdogarlar va elektronika do'konlardan takliflar ko'p/ slondo.uz`,
+                            title: `${location}da isitgichlar / neft, konvektör yoki infraqizil isib sotib ol`,
+                            description: `${location}da neft, konvektor yoki infraqizil isib sotib | eng yaxshi narxlarda yangi, ishlatilgan radiatorlar va elektr şömineler sotish uchun xususiy savdogarlar va elektronika do'konlardan takliflar ko'p/ slondo.uz`,
                             text: `Isitgichlar, ayniqsa, isitish mavsumidan oldin va keyin, shuningdek, rejadan tashqari o'chirilganda ayniqsa ahamiyatlidir. Bundan tashqari, konvektorlar, yog ' radyatörleri, infraqizil, kvarts va boshqa elektr isitgichlar kabi turli xil isitish uskunalari, gaz ta'minoti va Markaziy isitish bo'lmasa, uylar va qishloq uylarida yagona issiqlik manbai bo'lishi mumkin.
                             Ko'p takliflarning eng yaxshisini tanlang, sizga yordam beradi slondo.uz
                             `
@@ -1816,7 +1816,7 @@ export const getSEOContent = (category: CategoryType, subCtgr: SubcategoryType, 
                             `
                         },
                         temp10: {
-                            title: `${location} da Multivarki / eng yaxshi narxlarda multivark sotib ol`,
+                            title: `${location}da Multivarki / eng yaxshi narxlarda multivark sotib ol`,
                             description: `Eng yaxshi narxlarda multivarkni sotib oling- ${location} | ishonchli ishlab chiqaruvchilarning ko'p o'lchovli mahsulotlarini keng assortimenti: Redmond, Bosch, moulinex, tefal, Flibs va polaris`,
                             text: `Multivarka oshxona uchun uy jihozlarining ko'p funksiyali elementi bo'lib, u avtomatik rejimda ko'plab taomlarni tayyorlashga qodir. Modelga qarab, ushbu qurilmalarning har birida ko'plab funktsiyalar va pishirish usullari mavjud. Bundan tashqari, multivarklarda ishlatiladigan texnologiya yordamida siz yog'ni qo'shmasdan bug'da parhez taomlarini tayyorlashingiz mumkin. Imkoniyatlar miqdori oiladagi odamlarning soniga qarab tanlanishi mumkin. 4-5 kishidan tashkil topgan kichik oila uchun 5 litr piyola etarli. Katta ehtiyojlar uchun 10 litr hajmli qurilmalar mavjud. Eng yaxshi ishlab chiqaruvchilardan taklifni tanlang: Redmond, Bosch, tefal, Philips, polaris, sizga yordam beradi slondo.uz`
                         },
@@ -1836,7 +1836,7 @@ export const getSEOContent = (category: CategoryType, subCtgr: SubcategoryType, 
                         },
                         temp13: {
                             title: `Fritur ${location} / chuqur qovurilgan qovurish uchun apparatni sotib oling`,
-                            description: `${location} da uy yoki kafe uchun fritöz sotib ol / chuqur qovurilgan yangi va ishlatilgan apparatlarning eng yaxshi narxi: elektr, professional: tefal, Philips, Redmond, bosch, Polaris, vitek`,
+                            description: `${location}da uy yoki kafe uchun fritöz sotib ol / chuqur qovurilgan yangi va ishlatilgan apparatlarning eng yaxshi narxi: elektr, professional: tefal, Philips, Redmond, bosch, Polaris, vitek`,
                             text: `Fritur chuqur qovurilgan (o'simlik yog'i, yog') qovurish uchun qurilma. Ko'pincha, bu pishirish usuli umumiy taomda ishlatiladi, lekin qarsillab sevuvchilar uchun uy uchun modellar mavjud. Umuman olganda, ikkita tur mavjud: elektr fritöz va pechda isitiladigan variant. Ularning har biri o'z afzalliklari va kamchiliklariga ega, ammo chuqur qovurish uchun elektr qurilmalar yanada mashhur. Bundan tashqari, quyidagi ishlab chiqaruvchilarni ta'kidlash kerak: tefal, Philips, Redmond, bosch, Polaris, vitek.
                             Sizga yordam beradigan eng yaxshi takliflarni tanlang slondo.uz
                             `
@@ -1854,12 +1854,12 @@ export const getSEOContent = (category: CategoryType, subCtgr: SubcategoryType, 
                         description: `Tefal, Samovar, Turku, Sokovijimalka va boshqa ichimliklar tayyorlash uchun katta hajmdagi uskunalar / ${location}`,
                         text: `Ichimliklar tayyorlash uchun asbob-uskunalar quyidagilarni o'z ichiga oladi: choynaklar, kofe mashina, kofevarka, samovar, blender, meva sharbatini olish uchun sokovijimalka va boshqalar. Ushbu uskunalar yordamida siz issiq va sovuq ichimliklar tayyorlashingiz mumkin, bu issiq mavsumda ayniqsa muhimdir. Eng yaxshi narxlarni, xususiyatlarini solishtiring va o’zingizga munosib taklifni Slondo.uz da tanlang!`,
                         temp15: {
-                            title: `${location} da elektr choynaklar / eng yaxshi narxlarda elektr choynak sotib ol`,
+                            title: `${location}da elektr choynaklar / eng yaxshi narxlarda elektr choynak sotib ol`,
                             description: `Eng yaxshi ishlab chiqaruvchilarning yangi va ishlatilgan elektr choynaklarining katta tanlovi: Tefal, xiaomi, smeg, Redmond, Vitek slondo.uz / arzon narxlarda maishiy texnika ${location}`,
                             text: `Elektr choynak suvni qaynatish yoki isitish uchun ishlatiladigan isitish moslamasi. Kichik uy jihozlarining bu elementi har bir oshxonada zarur qurilma. Choy yoki qahva tayyorlash, biz uni muntazam ravishda ishlatamiz, shuning uchun ishonchli ishlab chiqaruvchidan sifatli mahsulotni sotib olish to'g'ri bo'ladi. Tefal, smeg, vitek va Redmond maishiy texnika giganti eng yaxshi ishlab chiqaruvchilardan biri hisoblanadi. Yaqinda ushbu sohada mashhurlik Xitoyning "Xiaomi" korporatsiyasi va ularning "aqlli" qurilmalarini ma'lum bir vaqtda avtomatik ravishda kiritish va smartfon yordamida boshqarish funktsiyasi bilan ishga tushirdi.`
                         },
                         temp16: {
-                            title: `${location} da qahva mashinalari / Geyser, karab yoki tomchilatib qahva mashinasini sotib oling`,
+                            title: `${location}da qahva mashinalari / Geyser, karab yoki tomchilatib qahva mashinasini sotib oling`,
                             description: `${location} | Geyser, kapsül, karab va boshqa qahva mashinalarini eng yaxshi narxlarda sotish uchun ko'plab reklamalar: delonghi, saeco, philips | slondo.uz`,
                             text: `Qahva mashinasi-qahva kukunidan, to'liq donalardan yoki maxsus kapsulalardan qahva tayyorlash uchun mo'ljallangan qurilma. Bunday qurilmalar tufayli kuchli, jonlantiruvchi ichimlikning haqiqiy tanqidchilari uni osongina va tez pishirishi mumkin. Qahva mashinalari ichimlik turiga yoki uni tayyorlash usuliga qarab bir necha turga bo'linadi: tomchi, Geyser, kapsül va karab. Qahva mashinalarining eng mashhur ishlab chiqaruvchilari: delonghi, saeco, philips, krups va Germaniyaning bosch kompaniyasi.
                             Ko'p takliflarning eng yaxshisini tanlang, sizga yordam beradi slondo.uz
@@ -1867,12 +1867,12 @@ export const getSEOContent = (category: CategoryType, subCtgr: SubcategoryType, 
                         },
                         temp17: {
                             title: `Qahva maydalagich ${location} / qo'lda yoki elektr qahva maydalagichini sotib oling`,
-                            description: `${location} da qahva Tegirmonni katta assortimenti / silliqlash yoki aralashtirish uchun qo'llanma va elektr oshxona anjomlari | slondo.uz`,
+                            description: `${location}da qahva Tegirmonni katta assortimenti / silliqlash yoki aralashtirish uchun qo'llanma va elektr oshxona anjomlari | slondo.uz`,
                             text: `Turkchada yoki qahva mashinasida tayyorlangan xushbo'y, yangi erga qahva eruvchan bo'lganidan ancha kuchli. Haqiqiy qahvaxonalar, bunday maqsadlar uchun oshxonada qahva tegirmoni mavjud. Ushbu qurilma pishirish uchun zarur bo'lgan mahsulotni ishlab chiqaradigan katta donalarni osongina maydalashi mumkin. Eng yaxshi ishlab chiqaruvchilardan qo'lda yoki elektr qahva maydalagichini tanlang: bosch, delonghi yoki fiorenzato, sizga yordam beradi slondo.uz`
                         },
                         temp18: {
                             title: `Sokovijimalka, anor, pomidor va olma uchun ${location} / da meva sharbatlari`,
-                            description: `Bosch, kenwood, Flibs, braun, Redmond, tefal | ${location} dan olingan Sokovijimalkas, anor, pomidor, olma va sabzi | meva sharbatlari uchun eng yaxshi narxlarda | modellar uchun sharbat chiqargichlarning keng assortimenti`,
+                            description: `Bosch, kenwood, Flibs, braun, Redmond, tefal | ${location}dan olingan Sokovijimalkas, anor, pomidor, olma va sabzi | meva sharbatlari uchun eng yaxshi narxlarda | modellar uchun sharbat chiqargichlarning keng assortimenti`,
                             text: `Meva va sabzavotlardan yangi siqilgan sharbatni olish imkonini beradi. Elektr va mexanik sharbat Sokovijimalka bir nechta navlari mavjud. Elektrdan mexanik Sokovijimalka modellarni ajratib ko'rsatish kerak: anor uchun va sitrus uchun alohida. Modelning tashqi va ichki tuzilishiga qarab, qanday meva va sabzavotlar ishlatilayotgani aniq bo'ladi.
                             Ko'p takliflarning eng yaxshisini tanlang, sizga yordam beradi slondo.uz
                             `
@@ -1943,7 +1943,7 @@ export const getSEOContent = (category: CategoryType, subCtgr: SubcategoryType, 
                     },
                     sewing_equipment: {
                         title: `Tikuv mashinalari ${location} / yangi va ishlatilgan OVERLOK uskunalar sotib`,
-                        description: `${location} da yangi va ishlatilgan tikuv mashinalari sotish/sanoat, kashtachilik va portativ tikuv uskunalari | OVERLOK dan: singer, janome, jack va boshqalar`,
+                        description: `${location}da yangi va ishlatilgan tikuv mashinalari sotish/sanoat, kashtachilik va portativ tikuv uskunalari | OVERLOK dan: singer, janome, jack va boshqalar`,
                         text: `Tikuv uskunalari ishlab chiqaruvchi kompaniyalar har yili o'z mahsulotlarini modernizatsiya qilishda davom etmoqdalar. Tikuv qoplamalarining tashqi ko'rinishi va funksionalligi bir necha o'n yillar oldin kiyim-kechak sanoatida bo'lgan narsalarga o'xshamaydi. Tikuv mashinasini tanlashda siz quyidagi mezonlarga e'tibor qaratishingiz kerak: boshqaruv turi, Shuttle nazorat qilish turi, funksionallik va uskunalar. Eng mashhur ishlab chiqaruvchilar: singer, Juki, bernina, Jek, typical, astralux.
                         Ko'p takliflarning eng yaxshisini tanlang, sizga yordam beradi slondo.uz`
                     },
@@ -2185,14 +2185,14 @@ export const getSEOContent = (category: CategoryType, subCtgr: SubcategoryType, 
                         `,
                         hp: {
                             title: `HP noutbuklari ${location}:  sotib olish yoki narx bilish / eng yaxshi takliflar slondo.uz`,
-                            description: `${location} da HP noutbuklarining keng assortimenti / noutbukni sotib olish yoki kreditga olish eng qulaydir slondo.uz /yangi va ishlatilgan kompyuter texnikasi`,
+                            description: `${location}da HP noutbuklarining keng assortimenti / noutbukni sotib olish yoki kreditga olish eng qulaydir slondo.uz /yangi va ishlatilgan kompyuter texnikasi`,
                             text: `HP noutbuklari shunga o'xshash qurilmalar orasida eng ko'p sotib olingan. Zamonaviy dizayn, kuchli xususiyatlarga ega bo'lib, "HP" mahsulotlarini tanib olish va mustahkam sifat va ishonchlilik birinchi yil emas, foydalanuvchilarning ishonchini oshiradi. Barcha modellar kuch, dizayn va boshqa xususiyatlarga asoslangan bir necha toifaga bo'linadi: o'yin, ofis va ultrabooks. Ofis opsiyasi eng ko'p byudjetdir, past quvvat va o'rtacha texnik ko'rsatkichlarga ega. O'yin yaxshi ishlashi va o'ziga xos dizayni bilan ajralib turadi, odatda ko'p rangli klaviaturani yoritadi. Ultrabuklar to'liq kompyuterning xususiyatlariga ega nozik, engil tanasi bilan ajralib turadi. Ularni ko'chirish va tashish juda oson, shuning uchun talabalar va uzoq ishchilar orasida eng katta talab mavjud.
                             Ko'p takliflardan eng yaxshisini tanlang, sizga yordam beradi slondo.uz
                             `
                         },
                         asus: {
                             title: `Asus noutbuklari ${location} / "Asus" sotib olish yoki narx bilish»`,
-                            description: `Yangi va ishlatilgan Asus noutbuklarining ${location}/xususiy mulkdorlar va elektronika do'konlaridan "Asus" noutbuklarini kreditga sotish va sotish bo'yicha takliflar`,
+                            description: `Yangi va ishlatilgan Asus noutbuklarining ${location} / xususiy mulkdorlar va elektronika do'konlaridan "Asus" noutbuklarini kreditga sotish va sotish bo'yicha takliflar`,
                             text: `Yaqinda elektronika va aksessuarlar ishlab chiqarish bilan shug'ullanadigan "Asus" kompaniyasi noutbuklar sohasida katta yutuqlarga erishdi va ushbu turdagi kompyuter texnikasining eng yirik ishlab chiqaruvchilardan biri bo'ldi. Noutbuklar kuch-quvvat, tashqi ko'rinish va ular amalga oshiriladigan faoliyat turiga qarab bir necha turga bo'linadi.
                             O'yin – og'ir o'yinlar va yuqori kuch talab boshqa vazifalar uchun mo'ljallangan yuqori samarali kompyuterlar
                             Ofis-byudjet modellari, asosan, oddiy dasturlarda ishlashga xizmat qiladi
@@ -2214,7 +2214,7 @@ export const getSEOContent = (category: CategoryType, subCtgr: SubcategoryType, 
                         },
                         dell: {
                             title: `Dell noutbuklari ${location} / "Dell" dan noutbuk narxini sotib olish»`,
-                            description: `${location} da "Dell" noutbuklarining keng assortimenti, eng yaxshi narxlarda | xususiy mulkdorlar va do'konlardan yangi va ishlatilgan elektronika | slondo.uz`,
+                            description: `${location}da "Dell" noutbuklarining keng assortimenti, eng yaxshi narxlarda | xususiy mulkdorlar va do'konlardan yangi va ishlatilgan elektronika | slondo.uz`,
                             text: `Yuqori sifatli va ishonchli noutbuklar bilan mashhur bo'lgan" Dell " kompaniyasi o'z foydalanuvchilarini samarali yangiliklar bilan quvontirishda davom etmoqda. Amerika brendi turli xil noutbuklar va netbuklar, oddiy vazifalarni bajarish uchun byudjet va yuqori darajali, kuchli xususiyatlarga ega va o'ziga jalb etuvchi ko'rinishga ega. Ushbu Amerika montaj va komponentlarning sifati vazifalarni muammosiz va tez bajarishga imkon beradi va ishonchlilik ishonchni keltirib chiqaradi va boshqa foydalanuvchilarni ushbu brendga jalb qiladi. Noutbuklar seriyasi quyidagi mezonlarga ko'ra bo'linadi:
                             Uy va ofis uchun: 3000 va 5000 seriyali
                             O'yin: AlienWare, G 3, 5, 7
@@ -2233,8 +2233,8 @@ export const getSEOContent = (category: CategoryType, subCtgr: SubcategoryType, 
                             `
                         },
                         apple: {
-                            title: `${location} da MacBook Pro / sotib olish yoki Apple noutbuklar narxini bilish`,
-                            description: `${location} da Apple noutbuklari keng assortimenti: MacBook Pro kredit va uzishiga yangi va ishlatilgan "Apple" noutbuklarini sotish uchun xususiy mulkdorlar va elektron do'konlardan takliflar / slondo.uz`,
+                            title: `${location}da MacBook Pro / sotib olish yoki Apple noutbuklar narxini bilish`,
+                            description: `${location}da Apple noutbuklari keng assortimenti: MacBook Pro kredit va uzishiga yangi va ishlatilgan "Apple" noutbuklarini sotish uchun xususiy mulkdorlar va elektron do'konlardan takliflar / slondo.uz`,
                             text: `Apple noutbuklari eng kuchli ishlab chiqarish xususiyatlariga va ajoyib zamonaviy tanaga ega. 2008 yildan buyon ishlab chiqarilgan MacBook liniyasi muntazam yangilanadi va hozirgacha ishlab chiqariladi. O'n yil mobaynida ushbu qurilmalar bozorda mavjud bo'lgan eng kuchli modellardan biri hisoblanadi va birinchi modellarning to'siqsiz ishlashi ishonchliligi ushbu qurilmalarning kuchli tomonlaridan biri ekanligini isbotlaydi. "Apple" ning barcha noutbuklari bir-biri bilan uchta modelga bo'linadi:
                             - MacBook
                             - MacBook Air
@@ -2249,7 +2249,7 @@ export const getSEOContent = (category: CategoryType, subCtgr: SubcategoryType, 
                             text: `Janubiy Koreyaning "Samsung" kompaniyasi o'z brendi ostida kuchli va byudjetli noutbuklar qatoriga ega. Standart modellardan tashqari, Samsung homiyligida ultrabooks, transformatorlar (sensorli ekranli va katlama texnologiyasi) va o'yin qurilmalari ham ishlab chiqariladi. Ko'p takliflarning eng yaxshisini tanlang, sizga yordam beradi slondo.uz`
                         },
                         xiaomi: {
-                            title: `Xiaomi noutbukini ${location} da sotib oling "Ksiomi" dan eng yaxshi elektronika narxi`,
+                            title: `Xiaomi noutbukini ${location}da sotib oling "Ksiomi" dan eng yaxshi elektronika narxi`,
                             description: `Xiaomi noutbuklarining katta tanlovi ${location} | sotib olish, kredit olish yoki to'lashni "ksiomi" dan noutbuk, eng oson yo'li slondo.uz /yangi va ikkinchi qo'l elektronikani sotish bo'yicha takliflar`,
                             text: `Xitoyning "Xiaomi" kompaniyasining noutbuklari, ushbu markadan boshqa elektronika kabi, zamonaviy dizayni, sifatli va ishonchli montajga ega bo'lib, boshqa kompyuter uskunalari ishlab chiqaruvchilari uchun munosib raqobatlashadi. "Ksiomi" noutbuklarining keng assortimenti foydalanuvchi uchun kerakli narsani, byudjet, ofis modellaridan, samarali va o'yin qurilmalariga tanlash imkonini beradi.
                             Ko'p takliflarning eng yaxshisini toping, sizga yordam beradi slondo.uz
@@ -2276,7 +2276,7 @@ export const getSEOContent = (category: CategoryType, subCtgr: SubcategoryType, 
                         description: `Rangli, lazerli yoki oq-qora printerlar, skaner va MFU, shuningdek, ularga sarf bo'ladigan materiallari: siyoh, kraska, kartridj, va boshqalar Slondo.uz da`,
                         text: `Printerlar deyarli har bir ofis yoki o'quv dargohida mavjud. Ularning yordami bilan siz hujjatlarni, fotosuratlarni, shuningdek, o'quv materiallarini chop etishingiz mumkin. Professional poligrafiya uskunalari va sublimatsiya bo'yoqlaridan foydalangan holda, kiyim-kechak va futbolkalarga ham rasm tushirish imkoni paydo bo'ldi. Skaner qog'ozdagi ma'lumotni fotokamera singari hotiraga ko'chiradi va oq A4 qog'ozga chop etib beradi.  (MFP)- bu ko'p funksiyali qurilma bo'lib, bir vaqtning o'zida ham printer, skaner va kseroks bo’la oladi.  Bunday qurilma bir vaqtning o'zida uchta qurilmaning o’rnini bemalol bosa oladi. Lazer printerlari tezroq ishlaydi, lekin narxi qimmatroq. Oqimli printer esa sekin ishlaydi, ammo, yarim-ton ranglarni ancha sifatli chiqaradi. Narxi ham ancha arzon. Ofis uskunalarini sotib olish, sotish yoki narxini bilish uchun eng qulay usul Slondo.uz saytida!`,
                         temp19: {
-                            title: `Printerni ${location} da sotib oling | Canon printerlari, Epson-narx`,
+                            title: `Printerni ${location}da sotib oling | Canon printerlari, Epson-narx`,
                             description: `Eng yaxshi ishlab chiqaruvchilardan printerlarning keng assortimenti: Canon, Epson, HP- ${location} / yangi va ishlatilgan org texnikasini sotish bo'yicha e'lonlar / printerlar uchun narxlarni bilish yoki sotib olish`,
                             text: `Printerlar ofis hayotining ajralmas qismiga aylandi. Shartnomalar, fakturalar, ko'p rangli va boshqa fayllarni doimiy ravishda chop etish ularni har bir kompaniya uchun zarur deb hisoblaydi. Ofislardan tashqari, printerlar uyda va bosmaxonalarda keng qo'llaniladi, bu erda atrof-muhit ma'lumotlarining turli modellari fotosuratlar, tezislar va boshqa rasmlarni chop etadi. Standart qora va oq printer, ofis ishi uchun juda yaxshi, chunki hujjatlardan tashqari, ularni chop etish qiyin bo'ladi. Boshqa maqsadlar uchun rangli qurilmalardan foydalanish juda qulay. Printerlar sirt ustida bo'yoq qo'llash texnologiyasi va chop etishda ishlatiladigan ranglar soniga ko'ra bo'linadi:
                             Lazer-siyoh o'rniga chang ishlatiladi
@@ -2286,29 +2286,29 @@ export const getSEOContent = (category: CategoryType, subCtgr: SubcategoryType, 
                             `
                         },
                         temp20: {
-                            title: `${location} da 3D printer / sotib olish yoki 3D ulamolar narxini bilish`,
-                            description: `Yangi va ishlatilgan 3D printerlarni ${location} da sotish bo'yicha takliflar / 3D va fotopolimer printerlarning narxlarini sotib olish yoki bilish, eng oson yo'li slondo.uz`,
+                            title: `${location}da 3D printer / sotib olish yoki 3D ulamolar narxini bilish`,
+                            description: `Yangi va ishlatilgan 3D printerlarni ${location}da sotish bo'yicha takliflar / 3D va fotopolimer printerlarning narxlarini sotib olish yoki bilish, eng oson yo'li slondo.uz`,
                             text: `3D printer hajmi qismlarini chop etish uchun bir qurilma. Materialning rolida odatda plastik yoki unga asoslangan aralash ishlatiladi. Dastlabki prototiplardan biri Seksenli yillarda ishlab chiqarilgan, shu vaqtdan boshlab bosib chiqarish texnologiyasi modernizatsiya qilingan va yaxshilangan. Bugungi kunda 3D printerlari juda yaxshi jihozlangan va professional modellar uchun chizilgan aniqligi murakkab qismlarni yuqori aniqlik bilan ishlab chiqarishga imkon beradi. Bundan tashqari, bozorda kichik miqdordagi oddiy raqamlarni ishlab chiqarish uchun ideal bo'lgan byudjet modellarini topishingiz mumkin. Bir nechta 3D bosib chiqarish texnologiyasi mavjud, ammo ularning deyarli barchasiga asoslanib, materialning nozik qatlamlarini muayyan ketma-ketlikda qurish yotadi.
                             Ko'p takliflarning eng yaxshisini tanlang, sizga yordam beradi slondo.uz
                             `
                         },
                         temp21: {
-                            title: `${location} da skanerlar / sotib olish yoki brauzer narxini bilish`,
-                            description: `Brauzerlarning narxlarini ${location} da sotib oling yoki bilib oling/yangi va ishlatilgan texnikani eng yaxshi sotish bo'yicha ko'plab takliflar / slondo.uz`,
+                            title: `${location}da skanerlar / sotib olish yoki brauzer narxini bilish`,
+                            description: `Brauzerlarning narxlarini ${location}da sotib oling yoki bilib oling/yangi va ishlatilgan texnikani eng yaxshi sotish bo'yicha ko'plab takliflar / slondo.uz`,
                             text: `Skaner qog'oz yoki fotosuratdan ma'lumotlarni o'qish uchun qurilma. Ushbu qurilmalar bizning hayotimizga qattiq kirib, har bir ofisda alohida o'rin tutadi. Scan texnologiyasi yordamida tasvirlar yoki matnli fayllarning raqamli nusxalarini, keyinchalik chop etish va boshqa maqsadlar uchun yaratishingiz mumkin. Umuman olganda, skanerlash qurilmalarining bir nechta turlari mavjud. Eng ommabop matn va grafik fayllar bilan ishlaydigan modellar.
                             Turli ishlab chiqaruvchilarning eng yaxshi takliflarini tanlang: Epson, HP, Samsung, sizga yordam beradi slondo.uz
                             `
                         },
                         temp22: {
-                            title: `${location} da Plotters / sotib olish yoki org texnikasi narxini bilish`,
+                            title: `${location}da Plotters / sotib olish yoki org texnikasi narxini bilish`,
                             description: `${location} | yangi va ishlatilgan ofis uskunalari/lazer, planshet va katta formatli kino kesish mashinasi, vinil, oracale va boshqa xom ashyoni kesish uchun plotterlarni sotib oling yoki bilib oling`,
                             text: `Plotter qog'oz, oracale va boshqa materiallarga chizilgan chizmalarni kesish, chop etish yoki chizish uchun mo'ljallangan qurilma. Ushbu qurilma ishlatiladigan asosiy faoliyat reklama (matbaa, matbaa) va muhandislik (chizmalar va loyihalarni chizish). Eng mashhur plotterning kesish turi. Uning yordamida avtomobillarga reklama stikerlari, futbolkalarga vinil bosim va boshqa ko'plab ishlar kesiladi. Bundan tashqari, tez-tez chop etish uchun modellarni topishingiz mumkin. Bunday qurilmalarda bannerlar va boshqa keng ko'lamli tashqi reklama turlari chop etiladi. Bundan tashqari, plotterlar planshet va rulonlarga bo'linadi.
                             Ko'p takliflarning eng yaxshisini tanlang, sizga yordam beradi slondo.uz
                             `
                         },
                         temp23: {
-                            title: `${location} da Shreder / sotib olish yoki qog'oz shredders narxini bilish`,
-                            description: `Sotib olish yoki ${location} da shredders, qog'oz shredders narxini bilish / qog'oz silliqlash uchun qo'l va elektr qurilmalar: ofis va sanoat | slondo.uz`,
+                            title: `${location}da Shreder / sotib olish yoki qog'oz shredders narxini bilish`,
+                            description: `Sotib olish yoki ${location}da shredders, qog'oz shredders narxini bilish / qog'oz silliqlash uchun qo'l va elektr qurilmalar: ofis va sanoat | slondo.uz`,
                             text: `Shredder qog'oz silliqlash uchun qurilma. Bunday qurilmalar xususiy va davlat kompaniyalari ofislarida, maxfiy axborotni yo'q qilish uchun faol foydalaniladi. Ko'pincha ular matnli hujjatlar va fotosuratlarni qayta ishlash uchun uyda o'rnatiladi. Qog'oz shredders-ular shredders bo'lib, ikkita asosiy turga bo'linadi: qo'lda mexanizm elektr motorsiz va mavjud bo'lgan elektrsiz ishlatiladi. Eng mashhur variantlar elektron shredders hisoblanadi, ammo mexanik ularni narxda sotib oladi.
                             Ko'p takliflarning eng yaxshisini tanlang, sizga yordam beradi slondo.uz
                             `
@@ -2484,7 +2484,7 @@ export const getSEOContent = (category: CategoryType, subCtgr: SubcategoryType, 
                         },
                         nintendo: {
                             title: `Nintendo ${location} / Nintendo konsolining narxini bilish yoki sotib olish`,
-                            description: `Nintendo switch konsolida yangi va ishlatilgan eng yaxshi narxlar | ${location} da Nintendo dan o'yin konsollarini sotib oling`,
+                            description: `Nintendo switch konsolida yangi va ishlatilgan eng yaxshi narxlar | ${location}da Nintendo dan o'yin konsollarini sotib oling`,
                             text: `Nintendoning o'yin konsollari yorqin dizayni, tuzilishdagi original echim (masalan, birgalikda joystick) va zamonaviy o'yinlar va ilovalarni qo'llab-quvvatlovchi yaxshi samarali plombalash bilan ajralib turadi. 1977-dan o'yin konsollarini ishlab chiqarish bilan shug'ullanadigan yapon kompaniyasi ushbu qurilmalarda va foydalanuvchilarni qanday qilib xursand qilishni aniq biladi. 2017-da chop etilgan yangilik tezda eng yaxshi sotuvchi maqomini oldi va butun dunyodagi o'yinchilarni sevib qoldi. Mobillik va ko'p funktsionallik tufayli, Nintendo Switch konsolida 6-dyuymli displey yordamida yoki joystickni ekrandan ajratib, do'stingiz bilan baham ko'rishingiz mumkin. Bundan tashqari, Nintendo konsollari muxlislarni xursand qila olmaydigan o'yinlarning bir yoki bir nechta seriyasi uchun turli xil ranglarga ega.
                             Ko'p takliflarning eng yaxshisini tanlang, sizga yordam beradi slondo.uz`
                         }
@@ -3334,10 +3334,10 @@ export const getSEOContent = (category: CategoryType, subCtgr: SubcategoryType, 
                 Выбрать лучшее из множества предложений, вам поможет slondo.uz`
                 },
                 uz: {
-                    title: `${location}da itlarni sotish | toza kuchuklarni sotib oling yoki narxini bilib oling`,
-                    description: `${location}dagi zotli itlarni sotib oling yoki narxlarini bilib oling | kattalar itlari va kuchukchalari savdosi: Doberman, Xaski, Tibet mastifi, Chihuaxua va boshqalar | slondo.uz`,
-                    text: `Itlar hayotdagi sodiq sheriklardir. Itni uyga olib borish, siz hayotingizni o'zgartirishingizga kafolat berasiz, shu bilan birga siz mas'uliyat, asabni yo'qotish va moliyaviy xarajatlarga tayyor bo'lishingiz kerak. Ba'zi nasllarni kvartirada tashvishlanmasdan tarbiyalash mumkin, boshqalari esa ko'proq maydonga muhtoj, bu erda ular o'zlarining hovlisisiz qila olmaydi. Klubdan it sotib olishdan yoki uni itxonadan bepul olib ketishdan oldin, sizga qaysi zot kerakligini tanlashingiz kerak. Buning uchun siz bir necha omillarga asoslanishingiz kerak: mulk turi (kvartira, hovli bo'lgan uy), bo'sh vaqt miqdori, uyda kichik bolalar borligi va boshqa ko'plab jihatlar.
-                    Slondo.uz sizga turli xil takliflar orasidan eng yaxshisini tanlashda yordam beradi`
+                    title: `Itlarni ${location}da sotish | Zotli it bolalarining narxini bilish yoki sotib olish`,
+                    description: `Zotli itlarning narxlarini ${location}da bilish yoki sotib olish | Voyaga yetgan va yosh itlar:Doberman,Xaski,Tibet mastifi,Chixuaxua va boshqa zotli it bolalarini sotish| slondo.uz`,
+                    text: `Itlar insonga eng sadoqatli bo’lgan jonivorlardir. Uyingizga itni olib kelar ekansiz, xayotingizda yana bir oila a’zosi paydo bo’lishi, quvonch kelishi bilan birga, ma'lum bir xarajatlar va jismoniy zo’riqishlarga ham tayyor bo’lishingiz kerak. Ayrim zotli itlarni kichik xonadonlarda bemalol saqlash mumkin bo’lsa, boshqalariga keng makon, xovli kerak bo’ladi. Albatta, shu sababli, Siz o’zingiz tanlagan 4 oyoqli do’stingizni maxsus klub yoki tanishlardan olasizmi, birinchi navbatda uning zotiga e’tibor qaratishingiz kerak bo’ladi. Buning uchun Siz asosan bir necha jihatlarni hisobga olishingiz kerak: xonadoningiz o’lchami (kvartira, hovli), bo’sh vaqtingiz bor-yo’qligi, uyda yosh bolalar bor-yo’qligi va xokazo…  
+                    Ko’plab takliflar ichida eng maqbulini tanlashda Sizga Slondo.uz yordam beradi.`
                 }
             },
             cats: {
@@ -3348,10 +3348,10 @@ export const getSEOContent = (category: CategoryType, subCtgr: SubcategoryType, 
                 Выбрать лучшее из множества предложений, вам поможет slondo.uz!`
                 },
                 uz: {
-                    title: `Mushukchani ${location}dan sotib oling | mushuk va mushukchalarni sotish`,
-                    description: `Mushuklarni ${location} shahrida sotish | mushukchalarni sotib olish yoki ularning narxini bilish uchun: quloq, bengal, fors, britaniyalik va boshqa mushuklar | slondo.uz`,
-                    text: `Mushuklar tinch va mehribon uy hayvonlari, ularni kvartirada saqlash katta muammo bo'lmaydi. Zotni selektsionerning individual xususiyatlaridan kelib chiqib tanlash kerak: tinch odamlar tinchliksevar zotlarga, allergiyaga chalinganlarga - kalta sochli yoki kal mushuklarga, kichik bolali katta oilaga kalta sochli inglizlar yoki kanadaliklarga ko'proq mos keladi. Sfenkslar juda yaxshi tanlovdir. Ammo mushukni boshlashdan oldin, unga g'amxo'rlik qilish uchun etarli vaqtingiz borligiga ishonch hosil qilishingiz kerakmi? Qo'shimcha ish bilan bir qatorda, mushukni parvarish qilish moliyaviy xarajatlarni ham nazarda tutadi, buning uchun kelajak egasi tayyor bo'lishi kerak.
-                    Slondo.uz sizga turli xil takliflar orasidan eng yaxshisini tanlashda yordam beradi!`
+                    title: `Mushukchani ${location}da sotib olish | mushuk va mushukchalarni sotish`,
+                    description: `Mushuklarni ${location}da sotish | asl zotli: Bengal,Fors,Britan va boshqa zotli mushukchalarni sotib olish yoki narxini bilish| slondo.uz`,
+                    text: `Mushuklar-ko’p yumush talab qilmaydigan, bosiq va yoqimtoy uy hayvonidir.Tanlanadigan mushuk zoti,xonadon sohibining talabiga qarab tanlanadi:osoyishtalikni hohlovchi insonlarga ko’proq  yuvosh zotli mushuk to’g’ri keladi,allergiyasi bor insonlarga kalta yungli yoki yungsiz mushuklar,yosh bolali serfarzand oilаlar uchun kalta yungli Britan yoki Kanada Sfinksi mos keladi. Lekin, mushuk olishdan oldin, uni parvarishlash uchun Sizda vaqt va sabr yetadimi yo’qmi, buni e’tiborga olishingiz lozim. Qo’shimcha vaqt talab etilishidan tashqari, bo’lg’usi mushuk egasi ortiqcha sarf-xarajatlarga ham tayyor turishi lozim.
+                    Ko’plab takliflar ichidan eng yaxshisini tanlashda Sizga  Slondo.uz yordam beradi!`
                 }
             },
             birds: {
@@ -3362,10 +3362,10 @@ export const getSEOContent = (category: CategoryType, subCtgr: SubcategoryType, 
                 Выбрать лучшее из множества предложений, вам поможет slondo.uz`
                 },
                 uz: {
-                    title: `${location}da qushlarni sotish | to'tiqushlarni, kanareykalarni sotib olish - narx`,
-                    description: `Parrandalarni sotib oling yoki narxini tekshiring: budgerigars va macaws, cockatoos, cockatiel, grey, canaries, lovebirds va boshqalar | qushlarni sotish ${location}da`,
-                    text: `Parrandachilik oddiy va ayni paytda juda qiziqarli uy hayvonidir. Ko'pincha parrandalar iborasi to'tiqush degan ma'noni anglatadi, ammo ularga qo'shimcha ravishda boshqa qushlar tug'iladi: kanareykalar, bedana va oltin pog'onalar. Eng mashhur qanotli uy hayvonlari haqli ravishda to'lqinli to'tiqush deb nomlanadi. Yashil, sariq, oq va ko'k ranglarda taqdim etilgan kichkina qush. Budgerigar kuchli immunitetga ega, xotirjamlik bilan stressni va asirlik hayotini boshdan kechiradi va diqqat bilan bu qushni gapirishga o'rgatish mumkin. Agar xohlasangiz, siz kattaroq to'tiqushni ham olishingiz mumkin: kokatiel, ara, kokatu yoki kulrang. Ushbu qushlar ajoyib aql va tezkor aqlga ega, ammo ular egasidan e'tibor va ehtiyotkorlikni talab qiladi.
-                    Slondo.uz sizga turli xil takliflar orasidan eng yaxshisini tanlashda yordam beradi`
+                    title: `Qushlarni ${location}da sotish | to’tiqush,kanareykalarni sotib olish - narxi`,
+                    description: `Xonaki qushlar: mayda to’lqinsimon to’ti,Ara,Kakadu,Jako,Korella,kanareykalar va boshqalarning narxini bilish va sotib olish |Qushlarni ${location}da sotish`,
+                    text: `Xonaki qushlar-insonga zavq bag'ishlaydigan va shu bilan birga ko'p diqqat talab qilmaydigan jonivorlardir. Ko'pchilik xonaki qushlar deganda, to'tiqushni ko'z oldilariga keltirishadi. Lekin, xonaki qushlarning turi juda ko'p bo'lib, ular jozibali sayrashi yoki rang-barang tashqi ko'rinishiga qarab, o'z ixlosmandlariga ega. Kanareyka, bedana, sa'va shular jumlasidandir. Xonaki to'tiqushlarning ichida ayniqsa ommaviylashgani, shubhasiz, bu mitti to'lqinsimon to'tidir. Bu to'ti yashil, sariq, oq, ko'k va ola ranglarda bo'lib, juda sho'x va sayroqi qushdir. Bu to'tining immuniteti juda yaxshi rivojlangan bo'lib, stress va qafasda saqlanishni juda yengil qabul qiladi. Agar yaxshi e'tibor bilan mashg'ulot o'tilsa, hatto insonga taqlid qilib, bir nechta so'zlarni ham yod olishi mumkin. Bundan tashqari, agar istasangiz, kattaroq turdagi ara, korella, kakadu yoki jako to'tilarini o'z qaramog'ingizga olishingiz mumkin. Bu to'tilar juda aqlli va zehnli bo'lib, shunga yarasha o'zlariga yaxshi e'tiborli bo'lishni talab qilishadi.
+                    Ko'plab takliflar ichida eng qulayini tanlashda Sizga Slondo.uz yordam beradi. `
                 }
             },
             rodents: {
@@ -3376,10 +3376,10 @@ export const getSEOContent = (category: CategoryType, subCtgr: SubcategoryType, 
                 Выбрать лучшее из множества предложений, вам поможет slondo.uz`
                 },
                 uz: {
-                    title: `Hamsterni ${location}dan sotib oling | kemiruvchilarni sotish: dengiz cho'chqalari, chinchillalar`,
-                    description: `${location}da kemiruvchilarni sotish | cho'chqalar, chinchillalar, hamsterlar, quyonlar va boshqa kemiruvchilarni sotib olish yoki narxlarini bilish | slondo.uz`,
-                    text: `Kemiruvchilar - bu ajoyib uy hayvonlari. Ular faol, kulgili va shu bilan birga ko'p muammolarni saqlab qolish uchun sabab bo'lmaydi. Bunday hayvonni sotib olishdan oldin, yangi boshlagan havaskor kemiruvchilarning turiga qaror qilishi kerak. Siz hamsterlar, chinchillalar, dengiz cho'chqalari, quyonlar, chipmunkslar va boshqa unchalik mashhur bo'lmagan kemiruvchilarni tanlashingiz kerak. Kelajakdagi uy hayvonlari qanchalik katta bo'lsa, uning qafasi shunchalik katta bo'lishi kerak. Miniatyura hamsterining to'liq hayoti uchun minimal qulayliklarga ega kichik qafas sotib olish kifoya, shinillani saqlash egasidan ancha mas'uliyatni talab qiladi.
-                    Slondo.uz sizga turli xil takliflar orasidan eng yaxshisini tanlashda yordam beradi`
+                    title: `Og’maxon(xomyak)ni ${location}da sotib olish | kemiruvchilar: dengiz chuchqachasi, shinshilla`,
+                    description: `Kemiruvchilarni ${location}da soting | Og’maxon(xomyak), dengiz chuchqachasi, shinshilla,quyon va boshqa kemiruvchilarni sotib olish yoki narxini bilish | slondo.uz`,
+                    text: `Kemiruvchilarni uy hayvonlari sifatida xonadonda parvarish qilish  juda qulay va maroqlidir.Chunki ular faol va quvnoq bo’lishi bilan birga, xonadon egasiga xech qanday tashvish keltirmaydi. Bunday jonivorga ega bo’lmoqchi bo’lgan inson avvalambor qaysi turdagi kemiruvchi unga ko’proq ma’qul ekanini bilib olishi kerak. Tanlash jarayonida dengiz cho’chqachasi, shinshilla, quyon, og’maxon, olmaxon va shunga o’xshash maydaroq kemiruvchilarni tanlagan ma’qul. Jonivor qanchalik katta bo’lsa, unga mos katak kerak bo’ladi. Kichkina og’maxon(xomyak) uchun, shunga yarasha mitti katakcha yetarli bo’lsa, aksincha, Shinshilla yoki olmaxon uchun katak o’lchami va ichidagi jihozlari boquvchidan ko’proq ma’suliyat va xarajat talab qiladi.                                                                                                                                                                                                                                                                                          
+                    Ko’plab takliflar ichidan eng yaxshisini tanlashda Slondo.uz Sizga yordam beradi.`
                 }
             },
             fish: {
@@ -3390,10 +3390,10 @@ export const getSEOContent = (category: CategoryType, subCtgr: SubcategoryType, 
                 Выбрать лучшее из множества предложений, вам поможет slondo.uz`
                 },
                 uz: {
-                    title: `${location}dagi akvarium baliqlari | akvariumda baliq sotib oling`,
-                    description: `${location}da akvarium baliqlarini sotish: gulchambarlar oltin baliq, baliqlar, nemo va boshqa ko'plab mahsulotlar | akvarium baliqlarini sotib olish yoki narxlarini bilish | slondo.uz`,
-                    text: `Baliq bilan akvarium - uyning ichki qismini o'zgartiradi va keyingi tajriba davomida asablarni tinchlantirishga yordam beradi. Undagi hayot muzlaydi va umuman boshqa vaqt zonasida davom etadiganga o'xshaydi. Baliqlar osoyishta suzishadi, suyaklari bilan yosunlarga yopishib oladilar va vaqti-vaqti bilan suzuvchi ovqatni ushlab turadilar. Akvarium aholisini uyg'un tarzda tanlash uchun siz yirtqich odamlarni xayrixohlardan ajratib qo'yishingiz, baliqlarni akvarium kattaligiga qarab tanlashingiz va ularning odatiy turmush tarziga g'amxo'rlik qilishingiz kerak. Bir juft baliq yoki daryo qisqichbaqalarini sotib olish kelajakda akvariumni kamroq tozalashga yordam beradi: bu hayvonot dunyosi vakillari o'lik suv o'tlari bilan oziqlanadi va shu bilan ortiqcha iflosliklardan xalos bo'ladi. Eng tez-tez sotib olinadigan akvarium baliqlaridan ba'zilari: oltin baliq, guppies, skalar, nemo va boshqalar.
-                    Slondo.uz sizga turli xil takliflar orasidan eng yaxshisini tanlashda yordam beradi`
+                    title: `Akvarium baliqlari ${location}da| akvarium uchun baliq sotib olish`,
+                    description: `${location}da: guppi, tilla baliqcha, laqqa, nemo,neon va boshqa ko’plab akvarium baliqlarini sotish  | akvarium baliqlarini sotib olish yoki narxini bilish | slondo.uz`,
+                    text: `Akvariumda baliqlarni boqish,ularni parvarishlash,ko’paytirish va ularning suv ostidagi hayotini maroq bilan kuzatish insonga zavq bag’ishlashi bilan birga,asablarini tinchlantirishi va hatto davolashi ham isbotlangan. Shu bilan birga, chiroyli qilib bezatilgan akvarium xonangiz ko’rkiga ko’rk qo’shib, xonadoningiz ichiga tabiatning bir bo’lagini olib kiradi. Uyingiz ichida, shisha devor ortidagi hayot go’yo to’xtab qolganday va o’zingizni boshqa olamga tushib qolganday his qilasiz. Baliqchalarning shoshilmay harakat qilishi, suv o’tlarini tortqilashi va Siz tashlagan ovqatga intilishlarini ko’rib, har qanday tashvishni unutasiz. Akvarium ichidagi hayotni muqobillashtirish uchun, uning ichidagi jonivorlarni to’g’ri tanlay bilish muhimdir. Akvarium sig’imiga qarab baliqlarning o’lchamini e’tiborga olish, yertqich baliqlarni oddiy baliqlardan ajratish va ularga to’g’ri ozuqa tanlay bilish zarur. Daryo krevetkasi yoki mitti laqqa baliqchalar jufti akvariumingiz suvining tozaligini uzoq vaqt saqlanib turishiga yordam beradi, chunki, suv jonivorlarining bu vakillari nobud bo’lgan suv o’tlari bilan oziqlanishadi va suvning ifloslanishini oldini olishadi. Eng ko’p xarid qilinadigan baliqlar turiga: guppi, skalyariy, tilla baliqcha, neon, nemo va boshqalari kiradi. 
+                    Ko’plab takliflar ichidan eng yaxshisini tanlashda Slondo.uz Sizga yordam beradi.`
                 }
             },
             farm_animals: {
@@ -3404,10 +3404,10 @@ export const getSEOContent = (category: CategoryType, subCtgr: SubcategoryType, 
                 Выбрать лучшее из множества предложений, вам поможет slondo.uz`
                 },
                 uz: {
-                    title: `${location}dagi qishloq xo'jalik hayvonlari | sigir qo'chqor tovuq sotish`,
-                    description: `${location}da qishloq xo'jalik hayvonlarini sotish | buzoqlar, sigirlar, qo'chqorlar, tovuqlar va boshqa qishloq xo'jaligi mahsulotlarini sotib olish. hayvonlar | slondo.uz`,
-                    text: `Qishloq xo'jalik hayvonlari - ko'plab mahsulotlarning manbai bo'lib, ularsiz bugungi kunda supermarket javonlarini tasavvur qilib bo'lmaydi. Sigirlar go'sht beradi, teri va sut bilan ta'minlaydi, undan keyinchalik boshqa mahsulotlar ishlab chiqariladi. Qo'ylar va qo'chqorlar bizni go'sht bilan ta'minlaydi, tovuq esa tuxum olib keladi. Ulardan tashqari deyarli hech bir fermer xo'jaligi bedana va quyonlarsiz tugamaydi va O'zbekistonning ba'zi joylarida tuyaqush, echki yoki tuya bo'lgan fermalarni uchratish mumkin. Tuya ishlab chiqaradigan fermer xo'jaliklari ozuqaviy sut va maxsus yog 'ishlab chiqaradi, keyinchalik ular kasalliklarni davolash yoki sovun tayyorlash uchun ishlatiladi.
-                    Slondo.uz sizga turli xil takliflar orasidan eng yaxshisini tanlashda yordam beradi`
+                    title: `Qishloq xo’jaligi xayvonlari ${location}da| sigir,qo’y,parrandalarni sotish`,
+                    description: `Qishloq xo’jaligi xayvonlarini ${location}da sotish | buzoq,echki,qo’y,sigir,tovuq va boshqa qishloq xo’jaligi hayvonlarini sotib olish | slondo.uz`,
+                    text: `Qishloq xo’jaligi xayvonlari-azaldan do’kon,supermarket va magazin peshtaxtalarini to’ldirib turadigan ko’plab oziq-ovqat mahsulotlarini etishtirib beruvchi ajoyib jonivorlardir. Sigirdan sut, go’sht va charm olinadi va bu mahsulotlardan keyinchalik yana boshqa turdagi ko’plab mahsulotlar tayyorlanadi. Qo’y mazali go’sh va issiq yung bersa, tovuq ham go’sht ham tuxum beradi. Shu jumladan, har bir fermer xo’jaligida bedana va quyon boqiladi, O’zbekistonning ayrim hududlarida echki, tuya va hatto tuyaquish ham boqilmoqda. Tuya fermalari foydali minerallarga boy sut va maxsus tuya yog’i yetkazib beradi. Bu mahsulotlardan turli kasalliklarga qarshi foydalaniladi va sovun ishlab chiqariladi. 
+                    Ko’plab takliflar ichidan eng yaxshisini tanlashda Slondo.uz Sizga yordam beradi.`
                 }
             },
             other_animals: {
@@ -3418,10 +3418,10 @@ export const getSEOContent = (category: CategoryType, subCtgr: SubcategoryType, 
                 Выбрать лучшее из множества предложений, вам поможет slondo.uz`
                 },
                 uz: {
-                    title: `Ekzotik hayvonlarni ${location}dan sotib olish uchun | hasharotlar, sudralib yuruvchilarni sotish`,
-                    description: `Ekzotik hayvonlarni sotish: hasharotlar, sudralib yuruvchilar, sudralib yuruvchilar uchun narxlarni sotib oling yoki bilib oling | boshqa uy hayvonlari - ${location}`,
-                    text: `${location}da ekzotik hayvonlarni sotish va sotib olish xobbi sifatida hayvonlarni ko'paytirish bilan shug'ullanadigan xususiy mulk egalari tomonidan ham, uy hayvonlari do'konlari tomonidan ham amalga oshiriladi. Bunga asosan katta va kichik salyangozlar (Achatina), dorivor suluklar, quruqlik va suv toshbaqalari, uyalgan ilonlar, kaltakesaklar va boshqa sudralib yuruvchilar kiradi. Ekzotik va boshqa g'ayrioddiy hayvonlarga g'amxo'rlik katta mas'uliyatni o'z ichiga oladi, chunki bu holda hayvonni tabiiy sharoitlardan kam bo'lmagan sharoitlar bilan ta'minlash kerak.
-                    Slondo.uz sizga turli xil takliflar orasidan eng yaxshisini tanlashda yordam beradi`
+                    title: `Ekzotik hayvonlarni ${location}da sotib olish | hashorot va sudralib yuruvchi hayvonlarni sotish`,
+                    description: `Ekzotik hayvonlarni sotish:hashorot, sudralib yuruvchi, bo’g’imoyoqlilarni sotib olish yoki narxini bilish| boshqa uy xayvonlari - ${location}`,
+                    text: `${location} orqali ekzotik hayvonlarni sotish va sotib olish, zoomagazinlardan tashqari, uy sharoitida o’zlari yetishtirgan yoki parvarishlagan qiziquvchi insonlar tomonidan ham sotiladi. Bu jonivorlarga asosan katta va kichik shilliqurtlar(axatinlar), shifobaxsh zuluklar, suv va quruqlik toshbaqalari, qo’lga o’rgatilgan ilon, echkiemar va boshqa sudralib yuruvchilar kiradi. Ekzotik va mahalliy jonivorlarni parvarishlash katta mashaqqatni talab etadi, chunki jonivorlarga uy sharoitida tabiatnikidan qolishmaydigan sharoit yaratib bera olish kerak. 
+                    Ko’plab takliflar ichidan eng yaxshisini tanlashda Slondo.uz Sizga yordam beradi.`
                 }
             },
             pet_products: {
@@ -3432,10 +3432,10 @@ export const getSEOContent = (category: CategoryType, subCtgr: SubcategoryType, 
                 Выбрать лучшее из множества предложений, вам поможет slondo.uz`
                 },
                 uz: {
-                    title: `Hayvonlar uchun mahsulotlar ${location}  itlar va mushuklar uchun oziq-ovqat, itlar napolnitel`,
-                    description: `Uy hayvonlari uchun mollarni sotish: itlar, mushuklar, baliqlar va boshqa hayvonlar | o'yinchoqlar, plomba, laganda, oziq-ovqat, shampunlar va boshqa tovarlarni sotib olish yoki narxlarini bilish`,
-                    text: `Uy hayvonlariga g'amxo'rlik qilish ko'p vaqt, pul va kuch sarflaydi. Vaziyat har xil turlarga mansub hayvonlarning mavjudligi bilan yanada og'irlashadi, ularning har biri individual parvarish qilishni talab qiladi. Uy hayvonlarini saqlash, o'stirish va rivojlantirish jarayonida hayvonlar uchun turli xil mahsulotlar sotib olinadi, itlar uchun parvarish, qushlar uchun qafaslar, vitaminlar yoki parvarish vositalari. Ulardan ba'zilari parvarishlash uchun zarur, uy sharoitida boshqa mahsulotlar eng qulay sharoitlarni yaratish uchun sotib olinadi. Asosiy, majburiy tovarlarga avizolar kiradi: stendlar, terrariumlar, akvariumlar, qafaslar; va oziq-ovqat: itlar, mushuklar, baliqlar, jonli ovqatlar uchun.
-                    Slondo.uz sizga turli xil takliflar orasidan eng yaxshisini tanlashda yordam beradi`
+                    title: `Hayvonlar uchun mahsulotlar ${location}da | it va mushuk uchun ozuqa,o’yinchoq va qumlar`,
+                    description: `Uy jonivorlari:it,mushuk,baliq va boshqa jonivorlar uchun mahsulotlarni sotish| hayvonlar uchun o’yinchoq,qum,idish,yem,shampun va boshqa mahsulotlarni sotib olish yoki narxini bilish`,
+                    text: `Uy hayvonlarini parvarish qilish uchun ko’p vaqt,mablag’ va kuch sarflashga to’g’ri keladi. Agar uyda turli hil jonivorlar bo’lsa, bu holatni yanada murakkablashtiradi, chunki, har bir jonivor o’ziga nisbatan alohida e’tiborni talab qiladi. Parvarishlash jarayonida, jonivorlar o’sib-ulg’ayadi va ularga yangi katak, boshqacha tarkibli ozuqa, kengroq akvarium va tozalovchi kimyoviy moddalar talab etiladi. Bularning ayrimlari jonivorlarning sog’ligi uchun kerak bo’lsa, boshqalari ular uchun yaxshi sharoit yaratishga mo’ljallangan. Asosiy va majburiy buyum va mahsulotlarga: kataklar, akvariumlar, terrariumlar, uyalar kiradi. Ozuqalarga esa:mushuklar,itlar,baliqlar uchun em va tirik yemishlar kiradi.
+                    Ko’plab takliflar ichidan eng yaxshisini tanlashda Slondo.uz Sizga yordam beradi.`
                 }
             }
         },
@@ -3602,12 +3602,12 @@ export const getSEOContent = (category: CategoryType, subCtgr: SubcategoryType, 
                 uz: {
                     title: `${location} shaxrida mebellar  oshxona jihozlari bolalar yotoqxonasi mebellari  yotoqxona uchun`,
                     description: `${location} shahrida uy jihozlari va mebellar | oshxona, yotoqxona, bolalar bog'chasi yoki kirish yulaklari, koridor uchun mebel sotib oling, shuningdek ofis mebellari: divan, matras va yahlit tuplamlar | ulgurji, chakana narxda yoki kreditga`,
-                    text: `Mebel va boshqa xonadon buyumlarini tanlashda sizni qiynaydigan bir savolga duch kelasiz: Nima sotib olish kerak? Qaerdan olish kerak? Narxi qancha? Bundan tashqari, bitta krovat ${location}ning turli dukonlarida har-xil narxda bo'lishi mumkin.  Va tashqi ko'rinishi bir xil bo'lgan mahsulot, odatda, sifati jihatidan talabga javob bermaydi. ${location}da mavjud bo’lgan mebellar mahalliy yoki chet elda ishlab chiqarilgan bo’lishi mumkin. Belorussiya, Xitoy yoki Italiya mahsulotlari mahalliy ishlab chiqaruvchilarnikidan sifati bilan farq qiladi va tabiiyki, narxi ham yuqori baholanadi.  ${location}dagi mebel do'konlarida kataloglar xonalar bo'yicha toifalarga bo'lingan bo'lib, ularda oshxona, yotoqxona, bolalar yotoqxonasi yoki masalan, hammom uchun mos mebellarni arzon narxda ${location} shaxrida sotib olishingiz mumkin. Bundan tashqari, shunday honadon buyumlari mavjudki, ularga bo’lgan talab doim yuqori, bular: kompyuter stoli, oshxona jihozlari, shkaflar, shuningdek qopsimon kreslo. 
+                    text: `Mebel va boshqa xonadon buyumlarini tanlashda sizni qiynaydigan bir savolga duch kelasiz: Nima sotib olish kerak? Qaerdan olish kerak? Narxi qancha? Bundan tashqari, bitta krovat ${location} ning turli dukonlarida har-xil narxda bo'lishi mumkin.  Va tashqi ko'rinishi bir xil bo'lgan mahsulot, odatda, sifati jihatidan talabga javob bermaydi. ${location}da mavjud bo’lgan mebellar mahalliy yoki chet elda ishlab chiqarilgan bo’lishi mumkin. Belorussiya, Xitoy yoki Italiya mahsulotlari mahalliy ishlab chiqaruvchilarnikidan sifati bilan farq qiladi va tabiiyki, narxi ham yuqori baholanadi.  ${location}dagi mebel do'konlarida kataloglar xonalar bo'yicha toifalarga bo'lingan bo'lib, ularda oshxona, yotoqxona, bolalar yotoqxonasi yoki masalan, hammom uchun mos mebellarni arzon narxda ${location} shaxrida sotib olishingiz mumkin. Bundan tashqari, shunday honadon buyumlari mavjudki, ularga bo’lgan talab doim yuqori, bular: kompyuter stoli, oshxona jihozlari, shkaflar, shuningdek qopsimon kreslo. 
                     Slondo.uz sizga eng yaxshi narx, sotuvchilarning erishgan maqomi va haridorlarning sharxlariga tayangan holda mahsulot tanlashda yordam beradi!`,
                     sofas_armchairs: {
                         title: `${location}dagi yumshoq mebellar | divan, kreslolar, burchak mebel to’plamini sotib olish`,
                         description: `Yumshoq mebellarni sotish bo'yicha ko'plab e'lonlar: oddiy, burchakli, katlama va divan yotoqlari, o'yin uchun(geymer), ofis va xona kursilari eng arzon narxlarda | ${location}`,
-                        text: `Divan va kreslolar har bir uyda va ko'plab ofislarda mavjud. Xonadonlarda va dachalarda ular asosan yashash xonalarida, yoki oshxonalarda joylashgan. Ish uchun mo'ljallangan ofislarda va boshqa binolarda yumshoq mebel salonlarida, shuningdek, qabulxonalarda joylashgan. O'zbekiston bozorida mahalliy va chetdan keltiriladigan mahsulotlar uchun turli xil takliflarni topishingiz mumkin. Belorussiya mebeli yoki Turk mebeli bilan jihozlangan Boy dukonlar ${location}ning markazida joylashgan bo'lib, mahalliy mahsulotlar Abu Saxiy, O'rikzor, Jomiy va boshqa bozorlarda sotiladi.
+                        text: `Divan va kreslolar har bir uyda va ko'plab ofislarda mavjud. Xonadonlarda va dachalarda ular asosan yashash xonalarida, yoki oshxonalarda joylashgan. Ish uchun mo'ljallangan ofislarda va boshqa binolarda yumshoq mebel salonlarida, shuningdek, qabulxonalarda joylashgan. O'zbekiston bozorida mahalliy va chetdan keltiriladigan mahsulotlar uchun turli xil takliflarni topishingiz mumkin. Belorussiya mebeli yoki Turk mebeli bilan jihozlangan Boy dukonlar ${location} ning markazida joylashgan bo'lib, mahalliy mahsulotlar Abu Saxiy, O'rikzor, Jomiy va boshqa bozorlarda sotiladi.
                         Uyning bunday muhim ichki jihozlarini sotib olayotganda 3ta asosiy jihat e’tiborga olinadi: sifat, narx va qulaylik darajasi. Slondo.uz sizga eng yaxshi narxda va eng qulay usulda mahsulot topishda yordam beradi:
                        - Divanlar
                        - Kompyuter stullari
@@ -4266,7 +4266,7 @@ export const getSEOContent = (category: CategoryType, subCtgr: SubcategoryType, 
                         text: `Xona sharoitida o'simliklarni o'stirishda, albatta idish kerak bo’ladi. Odatda, ularni tanlashda uning yuqori qismining kattaligiga e'tibor qaratiladi-idishning balandligi va diametri uning o’lchamiga mos kelishi kerak va Vazonning  hajmi ko’chirib o’tqazilayotgan gulning ildiz tizimi hajmiga mos kelishi kerak. Keramik Kashpo nihollarni asrab avaylab parvarishlashga juda mos. Xar hil xajm va shakllarda yasalgan idishlarni topishda sizga slondo.uz yordam beradi!`
                     },
                     indoor_plants: {
-                        title: `Xonaki gullar, Palma, Orxideya, ${location} da  xonaki gullar Begoniya, Geranium, Aloe`,
+                        title: `Xonaki gullar, Palma, Orxideya, ${location}da  xonaki gullar Begoniya, Geranium, Aloe`,
                         description: `Turli xonaki gullar va ko’chatlar sotish uchun ko'plab e’lonlar: Geranium, Begonia, Aloe, Hibiscus, Gortenzia va boshqalar`,
                         text: `Biz gul do’konlarida, mexmonxona foyelarida, xonadonlar derazasidan ko’rinib turadigan Xonaki gullar va ajnabiy o’simliklarni ko’rib, ham ko’zimiz quvnaydi, ham hayratdan yoqa ushlaymiz. Chunki, Begoniya o’zining guzalligi bilan maftun qilsa, Serissa, Tamarind tuvak ichidagi ulkan daraxtga o’xshaydi. Kaktus esa ko’rishidan tipirtikanga o’xshasada, gullaganda inson aqlini shoshiradi. Bu gullar va o’simliklar uyni kislorod bilan boyitish bilan birga, xonada mo’’tadil  namlikni saqlab turishga yordam beradi va ba'zi hollarda  xushbo'y  hid ajratadi. Ekzotik gullar turlaridan- Venerina muholovka ayniqsa mashhurdir. Bu gul yirtqich gul hisoblanadi. Xona o'simliklari va uy gullarini sotish bo'yicha ko'plab takliflarni toping, slondo.uz dan foydalaning!`
                     },
@@ -6146,119 +6146,118 @@ export const getSEOContent = (category: CategoryType, subCtgr: SubcategoryType, 
                     }
                 },
                 uz: {
-                    title: `Xonadonlarni ta'mirlash va uy-joylar qurish-barcha turdagi tayyor xizmatlar`,
-                    description: `${location}ning eng yaxshi ustalaridan qurilish va ta'mirlash ishlari. Arzon narxlarda barcha turdagi xizmatlar / ta'mirlash va qurilish bo'yicha takliflarni ko'rib chiqing slondo.uz`,
-                    text: `Ta'mirlash va qurilish har doim ko'p vaqt, kuch va nervlarni talab qiluvchi uzoq jarayondir. Biz sizga yordam berishni xohlaymiz! Ta'mirlash va qurilish uchun eng qulay taklifni izlang slondo.uz. turli ustalardan reklamalarni ko'ring va eng foydali pudratchilarni toping. Baholash tizimi yordamida siz xizmat sifati haqida xulosa chiqarishingiz, shuningdek, usta haqida ko'proq ma'lumotga ega bo'lishingiz mumkin.`,
+                    title: `${location}da xonadonlarni ta'mirlash va uylar qurish - barcha turdagi to’liq xizmatlar`,
+                    description: `Eng mohir ustalardan qurilish va ta'mirlash ishlari bo’yicha takliflar ${location}da. Barcha xizmat turlari arzon narxlarda | slondo.uz saytida ta'mirlash va qurilish bo'yicha takliflarni ko'rish`,
+                    text: `Ta'mirlash va qurish ishlari har doim ko'p vaqt, kuch va asab talab qiladigan uzoq jarayondir. Bu borada Biz Sizga yordam bermoqchimiz! Ta'mirlash va qurilish bo'yicha eng foydali takliflarni Slondo.uz saytidan qidiring. Turli xil hunarmandlarning e'lonlarini ko'rib chiqing va eng mohir pudratchilarni toping. Baholash tizimidan foydalanib, siz xizmat sifati to'g'risida xulosa chiqarishingiz, shuningdek, sharhlarni ko'rib chiqib, ustalar haqida ko'proq ma’lumot olishingiz mumkin.`,
                     landscaping_garbage_collection: {
-                        title: `${location} shahridagi obodonlashtirish va chiqindilarni olib tashlash-tozalash`,
-                        description: `Chiqindilarni olib tashlash va hududni obodonlashtirish bo'yicha xizmatlar – ko'kalamzorlashtirish, uchastkada mavsumiy ishlar`,
-                        text: `Mavsumni o'zgartirganda saytni tayyorlash kerak – tozalash, obodonlashtirish, qazish va boshqalar. Ushbu ishlar mustaqil ravishda amalga oshirilishi mumkin va siz bu yo'nalishda ixtisoslashgan odamlarni yollashingiz mumkin. Bundan tashqari, saytda har doim eksport qilinishi kerak bo'lgan turli xil chiqindilar mavjud. Takliflarni ko'rib chiqing va Slondo-da eng yaxshisini tanlang.`
+                        title: `${location}da obodonlashtirish va chiqindidan tozalash - tozalash, ko’kalamzorlashtirish maydonlari`,
+                        description: `Axlatdan tozalash va obodonlashtirish bo'yicha xizmatlar - ko'kalamzorlashtirish, maydonlardagi mavsumiy ishlar`,
+                        text: `Mavsum o'zgarganda, maydonlarni tayyorlash kerak bo'ladi - tozalash, ko'kalamzorlashtirish, qazish va boshqalar. Ushbu ishlarni Siz mustaqil ravishda amalga oshirilishi mumkin yoki shu sohaga ixtisoslashgan odamlarni yollashingiz mumkin. Shuningdek, bu maydonlarda tez-tez har xil chiqindilar paydo bo'lib turadi, ularni tozalab turish kerak. Slondo-dagi takliflarni ko'rib chiqing va eng yaxshisini tanlang.`
                     },
                     high_rise_works: {
-                        title: `${location}da yuqori balandlikdagi ishlar-sanoat alpinistlari xizmatlari`,
-                        description: `Sanoat alpinistlarining xizmatlari va ${location}dagi boshqa yuqori balandlikdagi ishlar`,
-                        text: `Yuqori qavatli binolarda oyna yuvish, uyingizda va uyingizda ta'mirlash, reklama bannerlarini o'rnatish va boshqalarni o'z ichiga oladi. Ushbu turdagi ishlar xodimlarning maxsus tayyorgarligini talab qiladi, chunki ular sog'liq uchun xavf tug'diradi. Slondo bo'yicha mutaxassislarni izlang.`
+                        title: `${location}da balandlikdagi ishlar - sanoat alpinistlarining xizmatlari`,
+                        description: `Sanoat alpinistlari va boshqa balandlikdagi ishlar bo’yicha xizmatlar ${location}da`,
+                        text: `Balandlikdagi ishlarga ko'p qavatli binolarning oynalarini tozalash, tomni ta’mirlash va tomni yangilash, reklama bannerlarini o'rnatish va boshqalar kiradi. Ushbu turdagi ishlar ishchilarning maxsus tayyorgarligini talab qiladi, chunki, bu ishlar o’ta xavfli hisoblanadi. Slondo yordamida kerakli mutaxassislarni qidirib toping.`
                     },
                     design_architecture: {
-                        title: `${location} arxitektorlarining ichki dizayni va xizmatlari-ustalardan takliflar`,
-                        description: `${location}dagi kvartira, alohida xona, uy, uchastka yoki kottejlar intererini loyihalash bo'yicha xizmatlar / arxitektura ishlari`,
-                        text: `Kvartira yoki xonaning dizayni to'g'ri bilim va tajribasiz o'zingizni loyihalashtirish qiyin bo'lishi mumkin. Haqida slondo.uz oshxona, yotoq xonasi, hammom yoki boshqa har qanday xona uchun qulay muhit yaratish uchun mutaxassisni topishingiz mumkin. O'zingizning ustozingiz bilan birgalikda qulay ichki makon yarating! Bu erda siz o'zingizning afzalliklaringiz, ta'mlaringiz va byudjetingiz asosida dizaynerni tanlashingiz mumkin.`
+                        title: `Me’morlarning xizmatlari va interyer dizayni ${location}da - ustalardan takliflar`,
+                        description: `Kvartiraning, alohida xonaning, uyning, xonadonning, yer maydonining yoki kottejning ichki dizayni bo'yicha xizmatlar | ${location}da arxitektura ishlari`,
+                        text: `Kvartira yoki xonaning ichki ko’rinishini tegishli bilim va tajribasiz, o'zingiz loyihalashtirishda qiyinchilikka duch kelishingiz mumkin. Slondo.uz saytida siz oshxonangiz, yotoqxonangiz, hammomingiz yoki boshqa biron bir xonangiz uchun qulay muhit yaratib bera oladigan mutaxassisni topishingiz mumkin. O'z ishining ustasi bo’lgan mutaxassis bilan birgalikda qulay ichki muhit yarating! Bu erda siz o'zingizga qulay bo’lgan, didingiz va moddiy imkoningizdan kelib chiqib, dizaynerni tanlashingiz mumkin.`
                     },
                     dismantling_structures: {
                         title: `${location} demontaj ishlari`,
-                        description: `Metall konstruksiyalarni, binolarni, devorlarni va boshqa buzish va tozalash xizmatlarini demontaj qilish.`,
-                        text: `Metall konstruktsiyalardan qurilgan binolar yangi bino qurishdan ancha arzon va tez-tez vaqtinchalik qurilish zarur bo'lganda ishlatiladi. Biroq, bunday tuzilmalarni demontaj qilish oson emas va aniqlik va professionallikni talab qiladi. Slondo-da turli xil demontaj qilish bo'yicha mutaxassislarni izlang.`
+                        description: `Po'lat inshootlarni, binolarni, devorlarni demontaj qilish va boshqa buzish va tozalash xizmatlari`,
+                        text: `Temirdan yasalgan inshootlar, yangi binoga qaraganda ancha arzonga tushadi va ko'pincha vaqtincha qurilish zarur bo'lganda foydalaniladi. Biroq, bunday inshootlarni buzish oson ish emas va aniqlik va mohirlikni talab qiladi. Slondo-da har xil turdagi buzish ishlari bo'yicha mutaxassislarni qidiring.`
                     },
                     comprehensive_repairs: {
-                        title: `${location}dagi kvartira, ofis va xususiy uylarni kompleks ta'mirlash / hammom | oshxona`,
-                        description: `Har qanday murakkablikdagi kvartira va uylarni ta'mirlash bo'yicha xizmatlar: gips, yopishqoq devor qog'ozi, eshiklarni o'rnatish va yana ko'p narsalar / ta'mirlash, hammom, oshxona, yashash xonasi, koridor`,
-                        text: `Kvartiralarni ta'mirlash bilan shug'ullanadigan odamni topish juda muammoli. Bizning saytda siz shu kabi xizmatlar uchun narxlarni taqqoslashingiz va o'zingiz uchun kvartiralar, uylar yoki ofislarni ta'mirlashning eng munosib ustasini tanlashingiz mumkin: ta'mirlash, hammom, oshxona, ovqat xonasi, yashash xonasi yoki koridor`
+                        title: `${location}da kvartiralarni, ofislarni va xonadonlarni umumiy ta'mirlash| hammom, oshxona, to’liq`,
+                        description: `Kvartiralar va uylarni har qanday murakkablikda ta'mirlash bo'yicha xizmatlar: Suvoq, gul qog'ozi yopishtirish, eshiklarni o'rnatish va boshqa ko'p narsalar | hammom, oshxona, yotoqxona, ayvonni to’liq ta'mirlash`,
+                        text: `Xonadonlarni sifatli ta'mirlash bilan shug'ullanadigan odamni topish juda muammoli ish. Bizning veb-saytimizda siz shunga o'xshash xizmatlarning narxlarini taqqoslashingiz va o'zingizning kvartirangiz, uyingiz yoki ofisingizda: hammom, oshxona, ovqatlanish xonasi, yotoqxona yoki koridorni to’liq ta’mirlash uchun eng maqbul ta'mirchi-ustani tanlashingiz mumkin.`
                     },
                     roofing_works: {
-                        title: `Tom yopish ishlari, tom yopish ishlari - ${location} / ta'mirlash va o'rnatish ustalari`,
-                        description: `${location}ning eng yaxshi ustalaridan tom yopish va boshqa tom yopish ishlari bo'yicha xizmatlar - savdo maydonchasida e'lonlar toping slondo.uz`,
-                        text: `Uy - joyingizning ta'mirlanishi, qurishi va qulayligining yaxlitligi tom yopish ishlariga bog'liq. Mutaxassisni tanlash sizga yordam beradi slondo.uz! reklamalarni tomosha qilgandan so'ng, siz o'zingizning mezonlaringiz uchun eng mos usta, tomlarni ta'mirlash va uyingizda taxta tanlashingiz mumkin.`
+                        title: `Tom yopish ishlari, tom qoplamasi - ${location}da | tom yopish va ta'mirlash bo'yicha ustalar`,
+                        description: `Tom yopish va boshqa tom ishlari bo’yicha eng yaxshi hunarmandlardan xizmatlar ${location}da - slondo.uz savdo maydonchasida e'lonlarni toping`,
+                        text: `Uyingizning quruqligi va shinamligi tom yopish ishlarining sifatliligiga bog'liq. Slondo.uz sizga mutaxassis tanlashda yordam beradi! E'lonlarni ko'rib chiqqandan so'ng, siz o'z ehtiyojingizdan kelib chiqib, tomlarni ta'mirlash va tom qoplamalarini almashtirish uchun eng mos ustani tanlashingiz mumkin.`
                     },
                     painting_works: {
-                        title: `${location}dagi malyarka bo'yash xizmatlari`,
-                        description: `${location}dagi malyar xizmatlari shaharning eng yaxshi ustalaridan bezak, gips, devor oboi va boshqa bo'yoq ishlari | slondo.uz`,
-                        text: `Bo'yoq xizmatlari ta'mirlash ishlari ro'yxatidagi eng muhim nuqtalardan biridir. Devorlarni, yog'ochni yoki metallni sifatli bo'yash uzoq vaqt davom etadi, kun bo'yi sizning amaliyligingiz bilan sizni quvontiradi. Yaxshi malyar bilan tanishishingiz mumkin slondo.uz`
+                        title: `${location}da bo’yoqchilar | ${location}da bo'yash xizmatlari`,
+                        description: `${location}da bo’yoqchilik xizmatlari: shaharning eng yaxshi bo’yoqchilari pardozlash, gipslash, gul qog'oz yopishtirish va boshqa bo’yash ishlari bo’yicha| slondo.uz`,
+                        text: `Bo’yoqchilik xizmati ta'mirlash ishlari ro'yxatidagi eng muhim narsalardan biridir. Yuqori sifat bilan bo'yalgan devor, yog'och yoki metal, uzoq vaqt o’tganligiga qaramay, ko’zingizni quvontiradi. Slondo.uz saytidan foydalanib siz yaxshi bo’yoqchi topishingiz mumkin`
                     },
                     windows_doors: {
-                        title: `${location}da oyna o'rnatish / eshik, derazalarni o'rnatish va ta'mirlash`,
-                        description: `${location}dagi derazalar va eshiklar bilan o'rnatish, ta'mirlash va boshqa ishlar | slondo.uz`,
-                        text: `Ta'mirlash yoki qurilish bosqichida, shisha eng qimmat nuqtalardan biridir. Windows master Installer-ni to'g'ri tanlab, muammolarni bartaraf etish uchun uni qayta chaqirishingiz shart emas. Bundan tashqari, zamonaviy derazalarning xizmat qilish muddati 8-10 yildan boshlab, oddiy foydalanish qoidalariga muvofiq keladi. Eshiklar ichki makonga qo'shimcha bo'lib, shovqin izolyatsiyasi va xonaning xavfsizligi uchun muhim vazifalarni bajaradi. Ichki eshiklar xonaning ta'mirlash va uslubiga mos kelishi kerak. Old eshik, shuningdek, kvartiraning tasvirini yaratish uchun birinchi element hisoblanadi. Slondo-da oyna va eshiklarni o'rnatish va ta'mirlash bo'yicha mutaxassislarni tanlang.`
+                        title: `Derazani ${location}da o’rnatish | deraza va eshiklarni o'rnatish va ta'mirlash`,
+                        description: `Deraza va eshiklarni o'rnatish, ta'mirlash va boshqa ishlar ${location}da | slondo.uz`,
+                        text: `Ta'mirlash yoki qurilish ishlarida shisha qoplamalarni o’rnatish eng qimmat bosqichlardan biri hisoblanadi. Oyna o'rnatuvchi ustani to'g'ri tanlagan bo’lsangiz, muammoni bartaraf qilish uchun uni qayta chaqirishingiz shart bo'lmaydi. Bundan tashqari, oddiy foydalanish qoidalariga rioya qilgan holda, zamonaviy derazalarning xizmat qilish muddati 8-10 yilni tashkil qiladi. Eshiklar xona yuzasining to'ldiruvchi qismi bo’lib, xonani shovqin-surondan va xavfdan himoya qilish vazifasini bajaradi. Ichki eshiklar xonaning ta'miri va uslubiga mos kelishi kerak. Kirish eshigi ham xonadon qiyofasini yaratadigan birinchi unsur hisoblanadi. Slondo-da deraza va eshiklarni o'rnatish va ta'mirlash bo'yicha mutaxassislarni tanlang.`
                     },
                     finishing_repair: {
-                        title: `${location}dagi kvartira, ofis va uylarni bezatish`,
-                        description: `Kvartiralarda, idoralarda, xususiy uylarda va hokazolarda har qanday murakkablikning devorlarini tugatish bo'yicha magistrlar. Gips, yopishqoq devor qog'ozi va boshqa ta'mirlash ishlari.`,
-                        text: `Ta'mirlash yoki qurilish bosqichida kvartirani tugatish juda muhimdir. Ustozni to'g'ri tanlash bilan, tugatish vaqt va nervlarni tejash bilan ancha oson va arzonroq bo'ladi. Tugatish bo'yicha eng yaxshi mutaxassislarni izlang slondo.uz!`
+                        title: `${location}da kvartira, ofis va uylarning qoplamalarini pardozlash`,
+                        description: `Kvartiralar, idoralar, xususiy uylar va boshqalarning devor, shift va pol qoplamalariga turli murakkablikda pardoz berish bo’yicha ustalar. Suvash, gul qog'ozi yopishtirish va boshqa ta'mirlash ishlari.`,
+                        text: `Ta'mirlash jarayonida yoki qurilish bosqichida xonani pardozlash juda muhimdir. Ustani to'g'ri tanlash, pardozlashni juda oson va arzon amalga oshirishga imkon beradi, shu bilan birga, vaqt va asabni saqlashda qo’l keladi. Slondo.uz saytidan pardozlash va ta’mirlash bo'yicha eng yaxshi mutaxassislarni qidiring!`
                     },
                     stoves_fireplaces: {
-                        title: `${location}dagi pechlar va kaminlar / o'rnatish va texnik xizmat ko'rsatish`,
-                        description: `${location}da pechlar va shinalarni o'rnatish va o'rnatish bo'yicha mutaxassislar | slondo.uz`,
-                        text: `Uydagi kamin har doim o'ziga xos qulaylik muhiti. Biroq, kaminni o'rnatish shamollatish va xavfsizlikning boshqa jihatlari bo'yicha tayyorgarlik ishlarini talab qiladi. Pechlar va shinalarni yotqizish bo'yicha mutaxassislar siz uchun strukturaning uslubi, ko'rinishi va barcha texnik jihatlari haqida o'ylashadi. Ko'p takliflarning eng yaxshisini tanlang, sizga yordam beradi slondo.uz`
+                        title: `Pechlar va kaminlar ${location}da| o'rnatish va texnik xizmat ko'rsatish`,
+                        description: `Pech va kaminlarni o'rnatish va xizmat ko’rsatish bo'yicha mutaxassislar ${location}da | slondo.uz`,
+                        text: `Xonada chiroyli uslubda terilgan kamin har doim ham o'zgacha qulaylik va boy muhitni yaratadi. Biroq, kaminni o'rnatishda uni shamollatish va yong’in xavfsizlik jihatlarini to’g’ri rejalashtirishni talab qiladi. Pechka va kaminlarni o'rnatish bo'yicha mutaxassislar Siz uchun uslub, tashqi ko'rinish va tuzilishning barcha texnik jihatlari haqida o'ylashadi. Slondo.uz sizga turli xil takliflar orasidan eng yaxshisini tanlashda yordam beradi`
                     },
                     plumbing: {
-                        title: `${location}dagi santexnik-sanitariya-texnik xizmatlarni buyurtma qilish slondo.uz`,
-                        description: `${location}dagi santexnika xizmatlari: santexnika uskunalarini montaj qilish-demontaj qilish, sozlash va ta'mirlash`,
-                        text: `Sanitariya-tesisat ishlariga quyidagilar kiradi:
-                        - Dush, hammom yoki lavabo o'rnatish
-                        - Mikser va batareyalarni almashtirish
-                        - Qochqinlarni bartaraf etish
-                        - To'siqlarni tozalash
-                        - Kanal yotqizish. quvurlar
-                        Ushbu turkumda siz ko'plab reklamalarni ko'rib chiqish va taqqoslash orqali sanitariya-tesisat bo'yicha malakali usta topishingiz mumkin slondo.uz
-                        `
+                        title: `${location}da santexnik - slondo.uz da santexnika xizmatlariga buyurtma bering`,
+                        description: `${location}da santexnik xizmatlari: santexnika uskunalarini o'rnatish, sozlash, ta'mirlash va demontaj qilish ishlari bo’yicha ustani chaqirtirish`,
+                        text: `Santexnik ustaning ishiga quyidagilar kiradi.
+                        - Unitaz, vanna yoki rakovina o'rnatish
+                        - Smesitel va batareyalarni almashtirish
+                        - Suv tomchilashini bartaraf qilish
+                        - Kanalizasiya tiqinlarini tozalash
+                        - Quvurlar va kanallar o’rnatish
+                        Ushbu toifada siz Slondo.uz saytidagi ko'plab e'lonlarni ko'rib chiqish va taqqoslash orqali, malakali suv-oqava ustasini topishingiz mumkin.`
                     },
                     welding_work: {
-                        title: `Eng yaxshi svarka argon va boshqa payvandlash turlari / ${location}`,
-                        description: `${location}dagi svarka topish, har qanday murakkablikdagi payvandlash ishlari bo'yicha: argon, lager va boshqa payvandlash turlari`,
-                        text: `Kichikdan kattagacha bo'lgan har qanday payvandlash ishlarini ${location}ning tajribali elektr-gaz manbalaridan ushbu toifadagi buyurtma qilishingiz mumkin:
-                        - Qo'l yoylari
+                        title: `Eng zo’r payvandchilardan argon va boshqa payvandlash turlari bo’yicha takliflar | ${location}`,
+                        description: `Har qanday murakkablikdagi payvandlash ishlari uchun ${location}da payvandchini toping: argon, kemping va boshqa payvandlash turlari`,
+                        text: `Mayda ishlardan to kattasigacha bo'lgan har qanday hajmdagi payvandlash ishlari uchun tajribali elektr, gaz payvandchilariga ${location}da ush bu toifadagi payvandlash ishlariga buyurtma berishingiz mumkin:
+                        - Elektr-yoyli
                         - Argon
-                        - Lager
+                        - Kemping
                         - Inverter
-                        - Plazma chiqib ketish mashinasi
-                        - Ko't
-                        - PVC quvur manba
-                        Shu kabi reklamalarni Solishtiring va eng foydali bo'lganlarni tanlang slondo.uz
-                        `
+                        - Nuqtali
+                        - Plazma
+                        - Gazli 
+                        - PVX quvurlarini payvandlash
+                        Shunga o'xshash e’lonlarni taqqoslang va slondo.uz saytidan eng foydali bo'lganlarini tanlang`
                     },
                     construction_works: {
-                        title: `${location}da qurilish ishlariga buyurtma berish slondo.uz`,
-                        description: `Qurilish ishlarining barcha turlari – mutaxassislar va qurilish guruhlaridan takliflar.`,
-                        text: `Ta'mirlash qurilish ishlarining butun majmuasini o'z ichiga oladi – poydevorni qurishdan boshlab, o'zining old qismiga qadar. Slondo-da qurilish guruhlarini qidiring`
+                        title: `${location}da qurilish ishlari. | slondo.uz saytida buyurtma berish`,
+                        description: `Qurilish ishlarining barcha turlari - mutaxassislar va qurilish jamoalarining takliflari`,
+                        text: `Ta'mirlash, qurilish ishlarining butun majmuasini o'z ichiga oladi – poydevor majmuasidan boshlab to fasad ishlarigacha. Slondo.uz da qurilish jamoalarini qidirib toping`
                     },
                     laying_repair_tiles: {
-                        title: `Plitkalarni kafel bilan yotqizish va ta'mirlash - ${location} shahrida`,
-                        description: `Zamin yoki devorga plitka qo'yish, ta'mirlash va demontaj qilish bo'yicha ustani tanlash / ${location}`,
-                        text: `Plitkalar odatda banyoda yoki oshxonada o'rnatiladi, to'g'ri yotqizish bilan juda uzoq vaqt xizmat qiladi. Tez, tez va arzon plitka qo'yish imkoniyatiga ega bo'lgan ustalar ushbu bo'limda topishingiz mumkin slondo.uz`
+                        title: `Plitka va kafel yotqizish va ta'mirlash - ${location}da`,
+                        description: `Yerga yoki devorga plitka yopishtirish, ta'mirlash va demontaj xizmatlari uchun usta tanlash | ${location}`,
+                        text: `Plitkalar va kafellar odatda hammom yoki oshxonaga yopishtiriladi, sifatli yopishtirilgan kafel ancha vaqt xizmat qiladi. Plitkalarni aniq, tez va arzon qilib yotqizadigan ustalarni ushbu bo'limda, slondo.uz saytidan topishingiz mumkin`
                     },
                     handyman_services: {
-                        title: `${location}da handyman xizmatlari– Turner, duradgor, chilangar va boshqa ustalar`,
-                        description: `Tajribali tokarlar, duradgorlar, temirchilar va tegishli yo'nalish ustalari xizmatlari`,
-                        text: `Oqim ustalari, duradgorlar, duradgorlar, temirchilar va boshqalarning xizmatlari. Mutaxassis xizmatlari nafaqat ishlab chiqarishda, balki kundalik hayotda yoki ta'mirlashda ham talab qilinishi mumkin. Soxta mahsulotlarni ishlab chiqarish yoki oziq-ovqat mahsulotlarini qayta ishlash uchun metall qismlar tajribali professionalni yaratishga yordam beradi. Slondo-da eng yaxshi variantlarni izlang`
+                        title: `${location}da hunarmandlarning xizmatlari - tokar, duradgor, chilangar va boshqa hunarmandlar`,
+                        description: `Tajribali tokarlar, duradgorlar, temirchilar va ko’p sohali ustalarning xizmatlari`,
+                        text: `Tokarlar, duradgorlar, temirchilar, payvandchilar va boshqalarning xizmatlari. Mutaxassisning xizmatlari nafaqat ishlab chiqarishda, balki kundalik hayotda yoki ta'mirlashda ham kerak bo'lishi mumkin. Tajribali mutaxassis sizga temirchilik mahsulotlari yoki oshona kombayni uchun ehtiyot qismlarini tayyorlashda yordam beradi. Eng yaxshi narxlarni Slondo.uz dan toping.`
                     },
                     facade_works: {
-                        title: `Fasad ishlari | slondo.uz`,
-                        description: `Fasad ishlarining barcha turlari-ventilyatsiya qilingan jabhalar va boshqalar / fasad ishlari uchun qurilish brigadasini toping`,
-                        text: `To'g'ri tayyorlangan o'zining nafaqat binoning ko'rinishini yaratadi, balki uning chidamliligi kafolati bo'lib xizmat qiladi, namlik, issiqlik va sovuqdan himoya qiladi. Shamollatilgan jabhalar va barcha jabhalar, slondo bo'yicha mutaxassislarni izlang.`
+                        title: `Fasad ishlari ${location}da | slondo.uz`,
+                        description: `Fasad ishlarining barcha turlari -shamollatiladigan va boshqalar | fasad ishlari uchun quruvchilar guruhini topish`,
+                        text: `To'g'ri qurilgan fasad nafaqat binoning ko'rinishini ko’z-ko’z qilibgina qolmay, balki uning mustahkamligiga kafolat bo'lib xizmat qiladi va namlikdan, issiqlikdan va sovuqdan himoya qiladi. Shamollatiladigan va boshqa turdagi fasad ishlari. Slondo orqali mutaxassislarni qidirib toping.`
                     },
                     plaster_works: {
-                        title: `Devorlarni Plasterlash va ustalardan boshqa shtukaturka ishlari - ${location}`,
-                        description: `Gipsli ustalardan, pardozlash ishlari bo'yicha ko'plab reklamalar slondo.uz -eng yaxshi narxlarda takliflar`,
-                        text: `Shtukatur-suvoqchi qurilish kasbidir. Ularning ishi sirtni tayyorlashni va devorlarni yanada bo'yashni o'z ichiga oladi. Turli e'lonlarni taqqoslab, gipsli va pardozlash ishlarining dahosini toping slondo.uz`
+                        title: `Ustalardan devorlarni suvash, pardozlash va boshqa ishlar taklifi - ${location}`,
+                        description: `Suvoqchi ustalarining suvoq va pardozlash bo’yicha ko'plab e'lonlari Slondo.uz saytida - eng yaxshi narxli takliflar`,
+                        text: `Suvoqchi-bo’yoqchi - bu qurilish sohasidagi kasbdir. Ularning ishi devor sirtini tayyorlash, pardozlash va yakunida bo'yashni o'z ichiga oladi. Suvoqchi va pardozchi ishlarining mukammal ustasini Slondo.uz saytidagi turli xil e’lonlarni taqqoslash orqali topishingiz mumkin`
                     },
                     electrician: {
-                        title: `${location}da Elektrikchi-elektromontaj ustalaridan xizmatlar`,
-                        description: `Elektromontaj ishlari bo'yicha ustalarning katta tanlovi: ${location}dagi elektrchilardan eng yaxshi takliflar slondo.uz`,
-                        text: `Odatiy ma'noda elektrchining vazifalari quyidagilardan iborat: elektr kabelini o'rnatish, diagnostika qilish, ta'mirlash va ta'mirlash. Sizning xavfsizligingiz va texnologiyangizning yaxlitligi sifatli ishlarga bog'liq. ${location} shahridagi elektr mutaxassisi xizmatlaridan taklif topish sizga yordam beradi slondo.uz`
+                        title: `Elektrik ustalar ${location}da - elektr uzatish tizimi bo'yicha mutaxassislarning xizmatlari`,
+                        description: `Ko’plab elektrik ustalardan: Slondo.uz saytining ${location}da elektr uzatish tizimi ishlari bo’yicha eng yaxshi takliflari`,
+                        text: `Oddiy ma'noda elektr ustalarining vazifalariga quyidagilar kiradi: elektr simlarini tortish, tekshirish, ta'mirlash va texnik xizmat ko'rsatish. Ularning sifatli mehnati natijasida Sizning xavfsizligingiz va jihozlaringizning butunligi ta’minlanadi. ${location}da mutaxassis elektriklarning xizmatlari bo'yicha takliflarni topishda Slondo.uz sizga yordam beradi`
                     },
                     other_services: {
-                        title: `Turli qurilish xizmatlari bo'yicha boshqa takliflar / ${location}`,
-                        description: `O'z ishi ustalaridan ${location}ga turli qurilish va ta'mirlash ishlari bo'yicha takliflar`,
-                        text: `Ko'plab qurilish va ta'mirlash ishlari bo'yicha magistrlar. Haqida slondo.uz siz ko'plab arizalarni ko'rib chiqishingiz va kerakli ishlar uchun eng munosib ustozni tanlashingiz mumkin`
+                        title: `Turli xil qurilish xizmatlari bo’yicha boshqa takliflar | ${location}`,
+                        description: `O'z ishining ustalaridan turli xil qurilish va ta'mirlash ishlari bo’yicha takliflar ${location}da`,
+                        text: `Ko'p sonli qurilish va ta'mirlash ishlari bo’yicha malakali ustalar. Slondo.uz saytida Siz turli xil takliflarni ko'rishingiz va kerakli ish uchun eng mos keladigan ustani tanlashingiz mumkin`
                     }
                 }
             },
@@ -6295,35 +6294,35 @@ export const getSEOContent = (category: CategoryType, subCtgr: SubcategoryType, 
                     }
                 },
                 uz: {
-                    title: `${location}da bir soat usta / xizmatlar | narxlar va narxlar`,
-                    description: `Usta ning soat bo'yicha, xo'jalik, ta'mirlash yoki boshqa uy ishlari uchun narxlari va xizmatlarini buyurtma qilish, shuningdek bilish / ${location}`,
-                    text: `Bir soatlik usta turli xil kichik va katta uy ta'mirlash ishlarini bajaradigan odam. Rafni mahkamlang, kornişni osib qo'ying, plumberni ta'mirlang yoki mebelni yig'ishda yordam bering - hamma narsa uning vazifasiga kiradi. Odatda, bunday xizmatlarni turli xil erkaklar ishlarini bajarishi kerak bo'lgan ayollar buyurtma qilishadi, usta mutaxassislarga murojaat qilish juda qimmat bo'ladi. Sizga yordam beradigan soat, kun yoki hafta uchun eng yaxshi ustozni toping slondo.uz! shu kabi xizmatlar narxini Solishtiring, reytinglarni ko'rib chiqing, sharhlarni o'qing va eng muhim ta'mirlovchilarga ustunlik bering`,
+                    title: `${location}da soatbay ustalar xizmati, narxlar va narxlar ro'yxati`,
+                    description: `Soatbay usta xizmatlari va narxlarini bilish, uy xo'jaligi, ta'mirlash yoki boshqa uy ishlarini bajarishga buyurtma berish| ${location}`,
+                    text: `Soatbay usta - bu uy ichidagi har xil kichik va katta ta'mirlarni bajara oladigan, keng tarmoqli usta. Taxmonni burab qo’yish, parda osish, santexnika ishlari yoki mebel yig'ishda yordam berish - bu uning vazifalarining bir qismidir. Odatda, bunday, erkak kishi bajara oladigan ishlarga ayollar tomonidan buyurtma qilinadi, chunki, mutaxassis ustalarga murojaat qilish juda qimmatga tushadi. Slondo.uz sizga soatbay, kunbay yoki haftabay ishlaydigan eng yaxshi ustani topishda yordam beradi! Shunga o'xshash xizmatlarning narxlarini taqqoslang, reytinglarni ko'ring, sharhlarni o'qing va eng mas'uliyatli ta'mirchi ustani tanlang`,
                     opening_locks: {
-                        title: `${location}da qal'a va seyflarni buzish bo'yicha usta – imorat ochish`,
-                        description: `Qulflar va kassetalarni ochish bo'yicha xizmatlar: ustani tezda topishingiz mumkin slondo.uz`,
+                        title: `Qulfni ochish - qulflar va seyflarni ochuvchi ustalar ${location}`,
+                        description: `Qulf va seyflarni ochish bo'yicha xizmatlar: Siz tezda Slondo.uz saytiga tashrif buyurishingiz va usta topishingiz mumkin`,
                         text: `Kalitni yo'qotish yoki buzish, buzilgan qulf yoki boshqa noxush hodisa yuz berganda, qulflarni ochish uchun usta xizmati talab qilinadi. Ba'zi hollarda qal'aning favqulodda ochilishi vaziyatdan chiqishning yagona yo'li hisoblanadi. Siz malakali usta topishingiz mumkin slondo.uz.`
                     },
                     master_hour: {
-                        title: `${location}da bir soatlik usta / firma va xususiy mulkdorlardan takliflar: xizmatlar, narxlar`,
-                        description: `${location}dagi bir soatlik usta xizmatlari: ta'mirlash va boshqa uy ishlari bo'yicha xizmatlar ko'rsatuvchi xususiy mulkdorlar va firmalardan ko'plab e'lonlar | slondo.uz`,
-                        text: `Ustaning bir soatlik xizmatlariga quyidagilar kiradi: sanitariya-tesisat ta'mirlash, kichik duradgorlik ta'mirlash, maishiy texnika va elektronika ta'mirlash va boshqa uy ishlari. Amalga oshirilgan ishlar hajmi bevosita alohida ustaning tajribasi va mahoratiga bog'liq. Ushbu xizmat yolg'iz ayollar bilan mashhur, chunki bir soat davomida usta xizmatlaridan foydalanish turli kasb-hunar ustalarini alohida-alohida chaqirishdan ko'ra ancha foydali.
-                        Ko'p takliflarning eng yaxshisini tanlang, sizga yordam beradi slondo.uz
+                        title: `${location}da soatbay ustalar: kompaniyalar va jismoniy shaxslardan takliflar: xizmatlar, narxlar`,
+                        description: `${location}da soatbay ustalar xizmatlari: ta'mirlash va boshqa uy xizmatlarini ko'rsatadigan jismoniy shaxslar va firmalardan ko'plab e'lonlar | slondo.uz`,
+                        text: `Soatbay usta xizmatiga quyidagilar kiradi: santexnika jihozlarini ta'mirlash, mayda duradgorlik ta'mirlash ishlari, maishiy texnika va elektronikalarni ta'mirlash va boshqa uy ishlari. Bajarilgan ish hajmi to'g'ridan-to'g'ri ustaning tajribasi va mahoratiga bog'liq. Ushbu xizmat yolg'iz ayollar orasida mashhurdir, chunki turli kasb egalarini alohida-alohida chaqirishdan ko'ra bir soatbay usta xizmatidan foydalanish ancha foydalidir.
+                        Slondo.uz sizga turli xil takliflar orasidan eng yaxshisini tanlashda yordam beradi                        
                         `
                     },
                     key_making: {
-                        title: `${location}da kalitlarni yasatish`,
-                        description: `Turli xil murakkablikdagi kalitlar va dublikatlar yasatish bo'yicha xizmatlar`,
-                        text: `Buzilgan yoki yo'qolgan kalit, dublikatga bo'lgan ehtiyoj - bularning barchasi kalitlarni ishlab chiqaruvchi usta talab qiladi. Yaxshi mutaxassis har qanday murakkablikning kalitini yaratishi mumkin: oddiy model modelidan himoyalangan individual namunadan yuqori. Ko'p takliflarning eng yaxshisini toping, sizga yordam beradi slondo.uz`
+                        title: `${location}da kalitlar yasash`,
+                        description: `Turli xil murakkablikdagi kalitlar va juftini yasash bo'yicha xizmatlar`,
+                        text: `Buzilgan, yo'qolgan kalit yoki unga nusxa kerakmi - bularning barchasiga kalit yasovchi usta xizmati talab qilinadi. Yaxshi mutaxassis har qanday murakkab kalitni yasay oladi: oddiy standart modeldan tortib, qo’shimcha himoyalangan individual namunadagi nusxagacha. Slondo.uz sizga ko'plab takliflardan eng yaxshisini topishga yordam beradi`
                     },
                     furniture_assembly_repair: {
-                        title: `${location}da mebellarni montaj qilish, ta'mirlash va restavratsiya qilish`,
-                        description: `Eng yaxshi ustalardan mebel yig'ish, tiklash va tortish e'lonlari. Slondo-da tasdiqlangan mutaxassislarni izlang.`,
-                        text: `Mebelda yirtilgan yoki chirigan taxta uni tashlab, yangi mahsulotni sotib olish uchun sabab emas. Mebelni ta'mirlash va tiklash bir necha marotaba arzonlashadi va u ham uzoq vaqt xizmat qiladi. Mebelni tortishdan oldin siz materialni tanlashingiz kerak – narxlar eng arzon narxlardan juda qimmatga tushadi. Yaxshi sifatli va o'rtacha narxlar bilan mahalliy lavozimlarda tanlash to'xtatish mumkin. Keyin kerakli sifat bilan o'z vaqtida hamma narsani qiladigan ustani tanlashingiz kerak. Slondo-da yuzlab takliflardan birini tanlang`
+                        title: `${location}da mebellarni yig'ish, ta'mirlash va tiklash`,
+                        description: `Eng yaxshi ustalardan mebellarni yig'ish, tiklash va ta’mirlash to'g'risida e'lonlar. Ishonchli mutaxassislarni Slondo dan qidirib toping.`,
+                        text: `Mebelning yirtilgan yoki eskirgan qoplamasi uni tashlashga va yangisini sotib olishga sabab bo'lmaydi. Mebelni ta'mirlash va tiklash bir necha baravar arzonga tushadi va bu uzoq vaqt xizmat qiladi. Mebelga yangi mato qoplashdan oldin siz matoni tanlashingiz kerak - narxlar eng maqbul narxdan juda qimmatigacha farq qiladi. Siz sifatli va maqbul narxlardagi mahalliy matolarni tanlashingiz mumkin. Keyin hamma narsani o'z vaqtida tegishli sifat bilan bajaradigan usta tanlashingiz kerak. Slondo-da yuzlab takliflardan birini tanlang`
                     },
                     other_services: {
-                        title: `"Soat ustasi" turkumidagi boshqa xizmatlar / ${location}`,
-                        description: `${location}da bir soat davomida ustalar va "erlar" ning boshqa xizmatlari | slondo.uz`,
-                        text: `Bu erda boshqa bo'limlarga kiritilmagan bir soat davomida ustalarning xizmatlari to'plangan
+                        title: `"Soatbay usta" toifasidagi boshqa xizmatlar | ${location}`,
+                        description: `Soatbay ustalardan boshqa xizmatlar ${location}da | Slondo.uz`,
+                        text: `Bu erda soatbay ustalarning boshqa bo'limlarga kiritilmagan xizmat turlari to'plangan
                         `
                     }
                 }
@@ -6345,18 +6344,18 @@ export const getSEOContent = (category: CategoryType, subCtgr: SubcategoryType, 
                     }
                 },
                 uz: {
-                    title: `${location}da enaga va hamshira | slondo.uz`,
-                    description: `${location}dagi tajribali enaga va hamshira xizmatlari / yuzlab takliflar, reytingni baholang va eng yaxshisini tanlang`,
-                    text: `Enaga va hamshira tomosha qilayotgan odam bilan juda ko'p vaqt sarflaydi, bu bola yoki keksa odam bo'lishi mumkin. Vaziyatga qarab, ta'lim, tarbiya, tibbiy ko'nikma va xarakterga e'tibor berish kerak. Slondo-da eng yaxshisini tanlang`,
+                    title: `${location}da enagalar va oqsochlar | Slondo.uz`,
+                    description: `${location}da tajribali enaga va oqsoch xizmatlari | yuzlab takliflar, reytingga baho bering va eng yaxshisini tanlang`,
+                    text: `Enaga yoki oqsoch qaramog’idagi odam bilan ko'p vaqt o'tkazadi, bu go’dak yoki keksa odam bo'lishi mumkin. Sharoitga qarab, ma’lumoti, tarbiyasi, tibbiy ko'nikmasi va xulqiga e'tibor qaratish lozim. Slondo orqali eng yaxshisini tanlang`,
                     nannies_governesses: {
-                        title: `${location}da enaga | slondo.uz`,
-                        description: `${location}dagi enaga xizmatlari, hokimlar, barcha yoshdagi bolalar uchun tarbiyachilar`,
-                        text: `Bola tarbiyasida muhim o'rin tutadi. Agar bola juda kichik bo'lsa, u onasidan tashvishlarning bir qismini olib tashlaydi, agar u katta yoshli bola unga qarashsa, ota-onasining tashvishlaridan himoya qiladi. Keyin dadam bolani tarbiyalashda yordam beradi, ta'lim bilan dadam yaxshi gapirishga yoki hatto maktabga tayyorlashga yordam beradi. ${location}dagi dadam, tarbiyachi va tarbiyachi xizmatlari, Slondo bo'yicha eng yaxshisini izlang.`
+                        title: `${location}da enagalar | Slondo.uz`,
+                        description: `${location}da enaga xizmatlari, guvernant, barcha yoshdagi bolalar uchun tarbiyachilar`,
+                        text: `Enaga-bola tarbiyasida muhim o’rin tutadi. Agar bola juda yosh bo'lsa, u onadan ba'zi tashvishlardan xalos qiladi, agar bola katta bo'lsa, enaga unga qaramog’iga oladi, ota-onalarni tashvishlardan xalos qiladi. So’ngra enaga bolani o'qitishda yordam beradi, ma’lumotli enaga bolaning nutqini o’stirishga ko’maklashadi va hatto maktabga tayyorlaydi. Enaga, guvernant va tarbiyachi xizmatlarining eng yaxshisini Slondo saytidagi ${location}dan qidiring.`
                     },
                     nurses: {
-                        title: `${location}da enaga | slondo.uz`,
-                        description: `${location}dagi enaga xizmatlari, hokimlar, barcha yoshdagi bolalar uchun tarbiyachilar`,
-                        text: `Bola tarbiyasida muhim o'rin tutadi. Agar bola juda kichik bo'lsa, u onasidan tashvishlarning bir qismini olib tashlaydi, agar u katta yoshli bola unga qarashsa, ota-onasining tashvishlaridan himoya qiladi. Keyin dadam bolani tarbiyalashda yordam beradi, ta'lim bilan dadam yaxshi gapirishga yoki hatto maktabga tayyorlashga yordam beradi. ${location}dagi dadam, tarbiyachi va tarbiyachi xizmatlari, Slondo bo'yicha eng yaxshisini izlang.`
+                        title: `Oqsochlar, hamshiralar ${location}da | Slondo.uz`,
+                        description: `Qariyalar yoki kasallarga oqsochlik va hamshiralik xizmati. Slondo.uzda tibbiy ma'lumotga ega bo’lgan va bo'lmagan tajribali oqsochlarni qidirib toping`,
+                        text: `Oqsoch ko'p vaqtini be’mor yoki qari inson bilan o'tkazadi va ko'p jihatdan qaramog’idagi insonning sog'lig'i, kayfiyati va farovonligi unga bog'liqdir. Hamshira, oqsoch hech bo'lmaganida boshlang'ich tibbiy ma'lumotga ega bo'lishi, yaxshi xulq-atvorga ega bo'lishi va kundalik vazifalarini bajara olishi muhimdir. Slondo orqali eng yaxshi takliflarni tanlang.`
                     }
                 }
             },
@@ -6438,83 +6437,79 @@ export const getSEOContent = (category: CategoryType, subCtgr: SubcategoryType, 
                     }
                 },
                 uz: {
-                    title: `${location}da tashish | eng yaxshi transport kompaniyalaridan barcha turdagi xizmatlar`,
-                    description: `${location}da yengil avtomobil/maxsus texnikani tashish va ijaraga berish bo'yicha barcha turdagi xizmatlar | yuklarni tashish, haydovchi, evakuator va boshqa ko'plab xizmatlar | slondo.uz`,
-                    text: `Avto-transport xizmatlari turli xil hayot sharoitlarida zarur bo'lishi mumkin: ko'chib o'tishda, qurilish paytida yoki katta guruh odamlar shahar atrofida harakat qilish. Ba'zi hollarda, ko'proq mos mashina ijaraga bo'ladi, eng kompaniyalar haydovchi bilan va holda imkoniyatlari tanlash uchun taklif foyda. Bundan tashqari, yirik qurilish kompaniyalari uchun maxsus uskunalarni ijaraga berish bo'yicha takliflar mavjud. Ushbu bo'lim xususiy mulkdorlar uchun, o'z uylarini qurish yoki saytni tozalash vaqtida foydali bo'ladi.
-                    ${location}da tashish bo'yicha eng yaxshi taklifni topish sizga yordam beradi slondo.uz!
-                    `,
+                    title: `${location}da yuk tashish | eng zo’r transport kompaniyalaridan barcha turdagi xizmatlar `,
+                    description: `Avtomobillarni / maxsus jihozlarni tashish va ijaraga berish bo'yicha barcha xizmat turlari ${location}da| yuklarni tashish, haydovchi xizmatlari, evakuator va boshqa ko'plab xizmatlar Slondo.uz da`,
+                    text: `Avtotransport xizmatlari turli xil hayotiy vaziyatlarda kerak bo'lishi mumkin: ko'chish paytida, qurilish paytida yoki shahar bo’ylab ko'p sonli odamlarni aylantirishda. Ba'zi hollarda avtomobilni ijaraga olish maqsadga muvofiq bo'ladi, chunki, aksariyat kompaniyalar haydovchi bilan yoki haydovchisiz avtomobil tanlashni taklif qilishadi. Bundan tashqari, yirik qurilish kompaniyalari uchun maxsus uskunalarni ijaraga berish bo'yicha takliflar mavjud. Ushbu bo'lim jismoniy shaxslar uchun o'z uylarini qurish yoki yer maydonlarini obodonlashtirish paytida ham foydali bo'ladi.
+                    Slondo.uz sizga ${location}da yuk tashish bo'yicha eng yaxshi taklifni topishda yordam beradi!`,
                     rent_car: {
-                        title: `${location}da avtomobillarni ijaraga olish / avtomobil va yengil mashinalar ijarasi, garovsiz qarshi`,
-                        description: `Ijaraga olish uchun turli markalardagi Avtomobillar bir necha soat, kun yoki oy uchun ijara (Karshering) mashinasini topishingiz mumkin slondo.uz / ${location}`,
-                        text: `Qimmatbaho mashinalar to'y marosimlari sifatida ishlatiladigan to'y paytida avtomobil ijarasi katta talabga ega. Bundan tashqari, boshqa shahar yoki mamlakatga sayohat qilishda katta yordam beradi. Bizning savdo maydonchamizda siz boshqa xaridorlarning narxlarini va sharhlarini taqqoslab, eng foydali avtomobillarni ijaraga olish takliflarini topishingiz mumkin.`
+                        title: `${location}da mashinani ijaraga oling| avtoulovlar va yo'lovchi avtoulovlarini ijaraga olish,(karshering)`,
+                        description: `Turli rusmdagi mashinalar ijarasi | Siz soatbay, kunbay yoki oy davomida mashinani ijaraga (karshering) Slondo.uz saytidan topishingiz mumkin| ${location}`,
+                        text: `To'y-marosim paytida qimmatbaho mashinalardan to'y korteji sifatida foydalanish uchun, avtomobillarni ijaraga olishga talab katta. Shuningdek, karshering boshqa shaharga yoki mamlakatga mehnat safariga borgan paytida juda yaxshi yordam beradi. Bizning bozorda siz narxlarni taqqoslash va boshqa xaridorlarning sharhlarini taqqoslash orqali eng yaxshi avtomobillarni ijaraga berish bo'yicha e’lonlarni topishingiz mumkin.`
                     },
                     rent_transport: {
-                        title: `Ekskavatorlar, beton karıştırıcılar, avtokranlar / ${location} shahrida maxsus texnikani ijaraga olish`,
-                        description: `Maxsus texnikani ijaraga olish bo'yicha eng yaxshi takliflar: ekskavatorlar | avtokranlar | beton karıştırıcılar / brigada bilan va bo'lmagan holda turli maxsus texnikani toping / ${location}`,
-                        text: `Katta ishlarni bajarish uchun maxsus uskunalar ishlatiladi. Ushbu bo'limda slondo.uz. qurilish texnikasi, yuklash va tushirish uskunalari, transport vositalari, yuk mashinalari va boshqa maxsus jihozlarni brigada, haydovchi yoki bo'lmagan holda ijaraga olish haqida e'lonlarni topishingiz mumkin. Brendlar orasida taniqli Xitoy ishlab chiqaruvchilari va kamroq mashhur ruslarni topishingiz mumkin.
-                        * Hyundai (Hyundai)
+                        title: `Ekskavatorlar, mikserlar, avtokranlar | ${location}da maxsus texnika ijarasi`,
+                        description: `Maxsus texnikani ijaraga olish bo'yicha eng yaxshi takliflar: ekskavatorlar, avtokranlar, mikserlar| Brigadasiz va brigadasi bilan turli xil maxsus texnikani toping | ${location}`,
+                        text: `Katta ishlarni bajarish uchun maxsus texnikalardan foydalaniladi. Slondo.uz saytining ushbu bo'limida Siz maxsus qurilish texnikasini, yuk tushirish-ko’tarish texnikasini, transport vositalarini, yuk mashinalarini va boshqa ixtisoslashtirilgan texnikalarni brigadasi bilan, haydovchisi bilan yoki ularsiz ijaraga olish to'g'risida e'lonlarni topishingiz mumkin. Mashhur Brendlar orasida siz taniqli xitoylik ishlab chiqaruvchilarni ham, Rossiya ishlab chiqaruvchilarini ham topishingiz mumkin.
+                        * Hyundai 
                         * Kamaz
-                        * BelAZ
-                        * Jcb
-                        * liebherr
-                        * hitachi
-                        Va boshqa ishlab chiqaruvchilardan
-                        `
+                        * Belaz
+                        * JCB
+                        * Liebherr
+                        * Hitachi
+                        Va boshqa ishlab chiqaruvchilardan`
                     },
                     garbage_collection: {
-                        title: `${location}da qurilish chiqindilarini olib tashlash / xususiy kompaniyalardan xizmatlar`,
-                        description: `${location}dagi maxsus chiqindilarga turli xil axlatlarni olib chiqish bo'yicha xizmatlar | chiqindilarni utilizatsiya qilish`,
-                        text: `Ta'mirlash yoki qurilishning oxirgi bosqichida har doim katta miqdordagi axlat qoladi. Chiqindilarni olib tashlashda sizga yordam beradigan kompaniyalarni toping slondo.uz`
+                        title: `${location}da qurilish chiqindilarini tashish| xususiy kompaniyalar xizmatlari`,
+                        description: `Har xil qurilish chiqindilarini ixtisoslashgan chiqindixonalarga tashish bo'yicha xizmatlar ${location}da |Chiqindini qayta ishlash`,
+                        text: `Ta'mirlash yoki qurilishning so'nggi bosqichida har doim ko'plab qurilish chiqindilari qoladi. Slondo.uz saytida sizga chiqindini tozalashda yordam beradigan kompaniyalarni topish juda qulaydir`
                     },
                     cargo_transportation: {
-                        title: `${location}ga yuk tashish / transport kompaniyalaridan yuklarni tashish bo'yicha takliflar`,
-                        description: `Yuk taksiga yoki konteyner tashishlariga buyurtma berish, eng oson yo'li slondo.uz / yuk, mebel va boshqa transport yuklarini qisqa yoki uzoq masofaga yetkazib berish / ${location}`,
-                        text: `Ustida slondo.uz shahar, mamlakat yoki bir necha mamlakat o'rtasida yuklarni tashish bilan shug'ullanadigan kompaniyalarni topishingiz mumkin. Barcha transport turlari:
-                        * Yuk taksilari (shahar bo'ylab kichik yuklarni tashish)
-                        * Yuk tashish (uzoq masofaga og'ir yuklarni tashish)
-                        * Konteyner tashish (odatda temir yo'l orqali amalga oshiriladigan shaharlar va mamlakatlar o'rtasidagi yuklarni tashish, temir yo'llar)
-                        * Havo tashish (samolyot tomonidan yuk yuborish)
-                        `
+                        title: `Yuklarni ${location}da tashish| transport kompaniyalaridan yuklarni tashish bo'yicha takliflar`,
+                        description: `Yuk taksisi yoki konteynerda yuk tashishga buyurtma berishning eng oson yo'li Slondo.uzda | Qisqa yoki uzoq masofalarga mahsulotlarni, mebellarni va boshqa yuk bilan bog’liq xizmatlarni amalga oshirish | ${location}`,
+                        text: `Slondo.uz saytida siz shahar, mamlakat ichida yoki bir nechta davlatlar o'rtasida yuk tashuvchi kompaniyalarni topishingiz mumkin. Barcha transport turlari:
+                        * Yuk taksisi (shahar bo'ylab kichik o'lchamdagi yuklarni tashish)
+                        * Yuk mashinasi (og'irroq yuklarni uzoq masofalarga tashish)
+                        * Konteynerda yuk tashish (shahar va mamlakatlar o'rtasida yuklarni tashish, odatda temir yo'l, suv yuli orqali amalga oshiriladi)
+                        * Avia yuk tashuvi (yuklarni samolyotda tashish)`
                     },
                     courier: {
-                        title: `${location}dagi kuryer xizmatlari`,
-                        description: `O'zbekiston va dunyo bo'ylab yuklarni etkazib berish va tashish. Kuryer xizmatlari`,
-                        text: `Ko'pincha o'z shaharlarida ham, boshqa shaharlarda ham, mamlakatlarga ham biror narsa yuborish kerak. Kuryer xizmatlari endi tariflar tarmog'idan iborat bo'lib, unda siz narxni, etkazib berish tezligini, qadoqlash turini tanlashingiz mumkin. Slondo-da eng yaxshi variantlarni tanlang`
+                        title: `${location}da kur’erlik xizmatlari`,
+                        description: `O'zbekiston va dunyo bo’yicha yuklarni etkazib berish va tashish. Kuryerlik xizmatlari`,
+                        text: `Ko'pincha, Siz o’z shaharingizdagi yoki boshqa shahardagi yoki boshqa mamlakatdagi odamga biror narsa yuborishingiz kerak bo’ladi. Hozirda kur’erlik xizmatlaridan foydalanishda-- narxlarini, yetkazib berish usuli va tezligini, qadoqlash turini o'zingiz tanlashingiz mumkin bo'ladi. Slondo orqali eng yaxshi variantlarni tanlang`
                     },
                     loader: {
-                        title: `${location}da yuklagichlar-yuklarni tashish bo'yicha xizmatlar`,
-                        description: `Kvartiraga ko'chirish uchun yoki boshqa har qanday ish uchun yuk tashish xizmatlarini buyurtma qiling. Bir soat, bir kun yoki boshqa vaqt uchun. Reklamalarni Solishtiring va eng yaxshisini tanlang | ${location}`,
-                        text: `Professional Yuklovchilarning ishi, boshqa kvartiraga yoki ofisga ko'chib o'tishda kerak bo'lishi mumkin. Ushbu bo'limda siz omborda, chaqiruvda yoki korxonada ishlash uchun yuk tashuvchi xizmatlarni topishingiz mumkin.`
+                        title: `Yuk tashuvchilar ${location}da | yuklarni tashish bo'yicha xizmatlar`,
+                        description: `Boshqa uyga ko'chayotganlarning yuklarini ko'chirish yoki boshqa har qanday ish uchun yukchilarni chaqirtirish. Soatbay, kunbay yoki boshqa har qanday muhlatga. E’lonlarni taqqoslang va eng yaxshisini tanlang | ${location}`,
+                        text: `Boshqa kvartiraga yoki ofisga ko'chib o'tishda professional yukchilarning xizmati kerak bo'lishi mumkin. Ushbu bo'limda Siz omborxonada, kompaniyada yoki chaqiruv bo’yicha yukchilar xizmatini topishingiz mumkin.`
                     },
                     distillation: {
-                        title: `${location}dagi avtomobillarni peregon qilish / sog'lom haydovchi xizmatlari`,
-                        description: `Ustida slondo.uz siz shaharning chekkasida, shuningdek, boshqa mamlakatlardan avtomobilni haydash uchun hushyor haydovchini topishingiz mumkin | ${location}`,
-                        text: `Avtomobilingizni shahar atrofida yoki boshqa mamlakatlardan o'tib ketadigan haydovchilarga xizmat ko'rsatish reklamalari eng qulay usuldir slondo.uz. reklamalarni Solishtiring va reytingga asoslangan eng yaxshi haydovchini aniqlang!`
+                        title: `${location}da mashinani haydab kelish| hushyor haydovchilar xizmati`,
+                        description: `Slondo.uz saytida siz shahar atrofida, shuningdek, boshqa mamlakatlardan avtoulovni haydab kelish uchun hushyor haydovchini topishingiz mumkin | ${location}`,
+                        text: `Sizning avtomobilingizni shahar atrofida yoki boshqa mamlakatlardan haydab kela oladigan haydovchilar xizmatlarining e’lonlari, Slondo.uz saytidan eng qulay tarzda qidiriladi. E’lonlarni taqqoslang va reyting asosida eng yaxshi haydovchini aniqlang!`
                     },
                     passenger_transport: {
-                        title: `${location}da yo'lovchilarni tashish / avtobus yoki yengil avtomobilga buyurtma berish`,
-                        description: `Avtobuslarda va yengil avtomobillarda yo'lovchi tashish xizmatlari. ${location}, viloyatlar va mamlakatlar bo'yicha`,
-                        text: `Yo'lovchi tashish bir necha maqsadlar uchun ishlatiladi:
-                        * Xodimlarni uydan ish joyiga ko'chirish
+                        title: `Yo'lovchilarni ${location} orqali tashish | avtobusga yoki mashinaga buyurtma bering`,
+                        description: `Avtobuslarda va avtoulovlarda yo'lovchilarni tashish bo'yicha xizmatlar. ${location} bo'yicha, mintaqalar va mamlakatlar aro`,
+                        text: `Yo'lovchilarni tashish bir necha maqsadlarda amalga oshiriladi:
+                        * Xodimlarni uydan ish joyiga etkazish
                         * Bolalar va sayyohlar uchun ekskursiyalar
-                        * Kompaniya uchun shahar tashqarisiga sayohat
-                        Haqida slondo.uz eng yaxshi e'lonlar haydovchilar narxlar va baholash taqqoslab topishingiz mumkin.
-                        `
+                        * Ulfatlarni tabiat qo’yniga sayohat qilishi
+                        Slondo.uz saytida siz haydovchilarning narxlari va reytinglarini taqqoslash orqali eng yaxshi e'lonlarni topishingiz mumkin.`
                     },
                     driver_services: {
-                        title: `${location}da haydovchilar xizmatlari / oila, xususiy, o'z avtomobillari uchun`,
-                        description: `${location}da shofyor xizmatlarini izlang slondo.uz: o'z avtomobillari bilan xususiy, oilaviy va haydovchilar`,
-                        text: `Haydovchi to'liq vaqtda va bir necha soat davomida talab qilinishi mumkin. Buyurtma berishdan oldin xizmat sifatini bilish muhimdir. Baholash va sharhlar tizimi yordamida siz yaxshi haydovchini osongina aniqlashingiz va narxlarni taqqoslab, eng foydali taklifni tanlashingiz mumkin.`
+                        title: `${location}da oila yoki shaxsiy maqsadlarda o'z mashinasi bo’lgan haydovchilar xizmati`,
+                        description: `Haydovchilar xizmatini Slondo.uz saytida ${location}dan qidiring: shaxsiy, oilaviy va o'z avtomobiliga ega haydovchilar`,
+                        text: `Haydovchilar xizmati to'liq ish kuniga yoki bir necha soatga talab qilinishi mumkin. Buyurtma berishdan oldin xizmatning sifatini bilish muhimdir. Reyting tizimidan va sharhlardan foydalanib, Siz yaxshi haydovchini osongina aniqlashingiz va narxlarni taqqoslash orqali eng foydali taklifni tanlashingiz mumkin.`
                     },
                     tow_truck_services: {
-                        title: `${location}da evakuator-buzilgan avtomobillarni tashish bo'yicha xizmatlar`,
-                        description: `Siz zudlik bilan yuk yoki avtomatik yuk mashinasini chaqirishingiz mumkin slondo.uz / avtomobillarni evakuatsiya qilish bo'yicha kompaniyalar soni va narxi`,
-                        text: `Agar mashina yo'lda yiqilsa, uni zudlik bilan evakuatsiya qilishingiz kerak. Ushbu turkumda avtomobillarni evakuatsiya qilish kompaniyalarining kontaktlarini tezda topishingiz mumkin. Reklamalarni Solishtiring va eng foydali variantni tanlang!`
+                        title: `${location}dagi evakuatorlar - buzilgan avtoulovlarni tashish bo'yicha xizmatlar`,
+                        description: `Siz shoshilinch ravishda Slondo.uz orqali yuk yoki avto-evakuator chaqirtirishingiz mumkin | Avtotransport vositalarini tashish bo’yicha kompaniyalarning telefon raqamlari va narxlari`,
+                        text: `Agar mashina yo'lda buzilib qolsa, uni tezda ustaxonaga olib ketishingiz kerak bo’ladi. Ushbu toifada avtomobillarni evakuatsiya qilish bo'yicha ixtisoslashgan kompaniyalar bilan aloqa qilish imkonini tezda topishingiz mumkin. E’lonlarni solishtiring va eng foydali e’lonni tanlang!`
                     },
                     other_services: {
-                        title: `${location}da tashish bo'yicha turli xizmatlar`,
-                        description: `Turli xil transport xizmatlari. Narxlarni Solishtiring va eng foydali takliflarni tanlang!`,
-                        text: `Ushbu bo'limda quyidagi xizmatlar mavjud: pochta orqali etkazib berish, tashish uchun transport tayyorlash bo'yicha ishlar, tovarlarni kuzatib borish bo'yicha operatsiyalar va boshqa qo'shimcha xizmatlar.`
+                        title: `${location}da turli xil transportda yuk tashish xizmatlari`,
+                        description: `Turli xil transport turlarida yuk tashish xizmatlari. Narxlarni solishtiring va eng yaxshi narxlarni tanlang!`,
+                        text: `Ushbu bo'limda quyidagilar mavjud: pochta yetkazib berish, yukni tashuvchi transportni tayyorlash bo'yicha ishlar, yuklarni kuzatib borish operatsiyalari va boshqa har qanday qo'shimcha xizmatlar.`
                     }
                 }
             },
@@ -6630,116 +6625,114 @@ export const getSEOContent = (category: CategoryType, subCtgr: SubcategoryType, 
                     }
                 },
                 uz: {
-                    title: `Epilatsiya, shugaring, massaj va go'zallik va salomatlik haqida boshqa xizmatlar`,
-                    description: `Go'zallik va salomatlikni saqlab qolish uchun depilatsiya, Manikyur, soch kengaytmalari, kirpiklar, SPA va boshqa xizmatlar ustalarining katta tanlovi`,
-                    text: `Shugaring, Manikyur, pedikür yoki bo'yanish kabi bunday faoliyat uchun yaxshi usta topish juda qiyin. "Go'zallik va salomatlik" toifasida ustozni izlayotganda uning professional ko'nikmalariga, aniqligi va muloyimligiga e'tibor berish muhimdir. Sizning tashqi ko'rinishingizga ishonish va kam malakali ustozning salomatligi ham mumkin emas. Sizga eng yaxshi mutaxassis topishga yordam beramiz! Saytda slondo.uz, potentsial stilistning reytingini ko'rishingiz, uning ishi haqida sharhlarni o'qib chiqishingiz va unga yozilish kerakmi, deb qaror qilishingiz mumkin.
-                    Quyidagi xizmatlar bo'yicha magistrlar ushbu turkumda mavjud:
+                    title: `Epilyatsiya, shugaring, massaj, go'zallik va sog'liq bilan bog'liq boshqa xizmatlar | ${location}`,
+                    description: `Go'zallik va salomatlikni saqlash uchun depilyatsiya, manikyur, sochni o’stirish, kirpik qo’yish, SPA va boshqa xizmatlar bo’yicha ustalarning keng tanlovi`,
+                    text: `Shugaring, manikyur, pedikyur yoki bo'yanish kabi mashg'ulotlar uchun yaxshi usta topish juda mushkul ish. "Go'zallik va salomatlik" toifasida usta tanlashda, uning kasbiy mahorati, ozodaligi va odob-axloqiga e'tibor berish kerak. Siz o'z tashqi ko'rinishingizni, ayniqsa, salomatligizni, past malakali ustaga ishonishingiz mumkin emas. Biz sizga eng yaxshi mutaxassisni topishda yordam beramiz! Slondo.uz saytida siz o’z bo’lg’usi ustangizni reytingini ko'rishingiz, uning faoliyati haqidagi sharhlarni o'qishingiz va uning xizmatidan foydalanish yoki foydalanmaslik to'g'risida qaror qabul qilishingiz mumkin.
+                    Ushbu toifada ustalarning quyidagi xizmat turlari mavjud:
                     - Depilatsiya va shugaring
                     - Pardoz
                     - Manikyur va pedikyur
                     - Massaj
-                    - Soch kengaytmalari
-                    - Kirpik kengaytmalari, qosh xizmatlari
+                    - Soch o’stirish, bo’yash
+                    - Kiprik ulash, qosh terish
                     - SPA xizmatlari
-                    - Tatuirovka va pirsing
-                    - Sartarosh xizmatlari
+                    - Tatuirovka va quloq teshish
+                    - Sartaroshlik xizmatlari
                     - Boshqa xizmatlar
-                    Reklamalarni izlang va o'zingizni qo'ying slondo.uz
+                    Slondo.uz saytida e’lonni qidirib toping va o'z e’loningizni joylashtiring
                     `,
                     depilation_sugaring: {
-                        title: `${location}da shugaring va epilasyon / sochlarni olib tashlash bo'yicha xizmatlar`,
-                        description: `Lazer epilatsiya, mum depilatsiyasi, shugaring va boshqa sochlarni olib tashlash xizmatlari, ayollar va erkaklar uchun / go'zallik salonlari va xususiy savdogarlar tomonidan ko'plab takliflar slondo.uz`,
-                        text: `Depilatsiya va shugaring xizmatlari uzoq vaqt davomida sochlardan xalos bo'lishga imkon beradi, uzoq vaqt davomida ularning ko'rinishini oldini oladi. Yuz, dekolte, chuqur bikini, oyoq va boshqalar: vaksing, elektroepilasyon, lazer va fotosintez, tananing barcha sohalarida: kabi turlari uchun soch olib tashlash ustalari izlang. Narxlarni, reytinglarni Solishtiring va eng yaxshi taklifni tanlang slondo.uz.`
+                        title: `Shugaring va tuklardan tozalash ${location}da | tuklardan tozalash bo'yicha xizmatlar`,
+                        description: `Epilatsiyani lazer yordamida amalga oshirish, mum yordamida tozalash, shugaring va boshqa usullar, ayollar va erkaklar uchun | Slondo.uz saytidagi go'zallik salonlari va jismoniy shaxslardan ko'plab takliflar`,
+                        text: `Depilatsiya va shugaring xizmatlari, tuklarning uzoq vaqt davomida paydo bo'lishiga to'sqinlik qilib, ularni yo'q qilishga imkon beradi. Tuklarni olish bo'yicha mutaxassisga murojaat qiling: mum, elektroliz, lazer va foto epilyatsiya, tananing barcha sohalari uchun: yuz, bo'yin sohasi, qo’ltiq, oyoq va boshqalar. Slondo.uz saytidagi narxlarni, reytinglarni solishtiring va eng yaxshi taklifni tanlang.`
                     },
                     makeup: {
-                        title: `${location}da pardoz xizmatlari | slondo.uz`,
-                        description: `Shaharning eng yaxshi salonlari va ustalaridan ko'plab takliflar / kechki, bayramlaryaqinda to'y makiyaji / professional stilistlarning xizmatlari`,
-                        text: `Makiyajning bir necha asosiy turlari mavjud:
-                        - Kundalik yoki kundalik
-                        - Kechki
+                        title: `${location} | da yuzni pardozlash xizmatlari| Slondo.uz`,
+                        description: `Shaharning eng zo’r salonlari va hunarmandlaridan ko'plab takliflar | kechki, bayram va to'yga mos pardozlash ishlari ${location}da | professional stilistlarning xizmatlari`,
+                        text: `Ayollar yuzini pardozlashning bir necha asosiy turlari mavjud:
+                        - Kunlik yoki har kuni
+                        - Oqshomgi
                         - To'y
-                        - Biznes
-                        Barcha holatlar uchun bo'yanish qila oladigan yaxshi usta toping slondo.uz
-                        `
+                        - Xizmatga mos
+                        Slondo.uz saytidan barcha holatlarga mos pardoz usullarini biladigan yaxshi usta topishingiz mumkin`
                     },
                     manicure_pedicure: {
-                        title: `${location}dagi Manikyur va pedikyur– professional manikuristlardan xizmatlar`,
-                        description: `${location}da mixlash, Manikyur va pedikyurani kengaytirish. Frantsuz, shellac va tirnoqlarda boshqa qoplamalar. Ustalardan e'lonlar slondo.uz`,
-                        text: `Lakning toza qatlami bilan qoplangan yaxshi tikilgan va chiroyli mixlar sizning uslubingizning ko'rsatkichlaridan biriga aylandi. Manikyur-kerakli bilim va ko'nikmalarni talab qiladigan juda aniq va mashaqqatli ish. Tirnoqlarni qayta ishlash bo'yicha ustalarni izlang slondo.uz. narxlarni, reytinglarni Solishtiring va eng yaxshi taklifni tanlang!`
+                        title: `${location}da manikyur va pedikyur - mahoratli manikyur ustalarining xizmatlari`,
+                        description: `${location}da tirnoqlarni o’stirish, manikyur va pedikyur. French, shellac va boshqa turdagi tirnoq qoplamalari. Ustalarning Slondo.uz saytidagi e'lonlari`,
+                        text: `Chiroyli parvarish qilingan va sifatli bo’yoq qatlami bilan ishlov berilgan chiroyli tirnoqlar, Sizning uslubingiz ko'rsatkichlaridan biriga aylanadi. Manikyur zarur bilim va ko'nikmalarni talab qiladigan juda aniq va mashaqqatli ishdir. Tirnoq ustalarini Slondo.uz saytidan qidirib toping. Narxlarni, reytinglarni solishtiring va eng yaxshi taklifni tanlang!`
                     },
                     tan: {
-                        title: `Solariy va ${location}da quyosh yonishi bo'yicha xizmatlar`,
-                        description: `Solariylar va ${location}da quyosh yonishi bo'yicha barcha xizmatlar | slondo.uz`,
-                        text: `Chiroyli, hatto tan sizni olomondan ajrata oladi, to'g'ri tasvirni yaratishga yordam beradi, shuningdek, oqilona chegaralar ichida sog'liq uchun foydalidir. Quyoshda quyoshni quyish uchun vaqt va imkoniyat har doim ham mavjud emas, shuning uchun solaryumlar juda mashhur bo'lib, unda siz tezda kerakli sifatning tanini olishingiz mumkin.`
+                        title: `${location}da solariy va toblash xizmatlari`,
+                        description: `Solyariy va barcha turdagi toblash xizmatlari ${location}da| Slondo.uz`,
+                        text: `Chiroyli va bir tekisda toblangan tillarang tanangiz Sizni olomondan ajratib turishi, kerakli ko'rinishni yaratishingizga yordam beribgina qolmay, shuningdek, salomatligingiz uchun ham foydalidir. Har doim ham tabiat qo’ynida, quyoshda toblanishda vaqt va imkon topilmasligi mumkin. Shunday paytlarda solyariylar xizmatidan foydalanish juda qo’l keladi, u erda kerakli hajmda, sifatli toblanish amaliyotini tezda amalga oshirish mumkin.`
                     },
                     hair_treatment: {
-                        title: `${location}da sochni parvarish qilish bo'yicha xizmatlar / jingalak sochlar`,
-                        description: `${location}dagi "sochni parvarish qilish" bo'yicha tajribali ustalardan takliflar | noyob, mo'rt, nozik, yog'li va quruq sochlarga g'amxo'rlik / slondo.uz`,
-                        text: `Sochni parvarish qilish barcha turdagi e'tibor talab qiladi. Biroq, muammoli sochlar uchun alohida soch turiga qarab parvarish qilish kerak. Eng yaxshi sochni parvarish qilish ustasini toping, sizga yordam beradi slondo.uz`
+                        title: `Sochlarni parvarishlash bo'yicha xizmatlar ${location}da | jingalak soch`,
+                        description: `Sochni parvarishlash bo'yicha tajribali mutaxassislarning takliflari ${location}da |ingichka, mo'rt, siyrak, yog'li va quruq sochlarni parvarishlash | Slondo.uz`,
+                        text: `Sochni parvarish qilishda, barcha turdagi sochlarga to'g'ri e'tibor qilishni talab qiladi. Ammo, muammoli sochlarga kelganda, alohida soch turiga qarab, alohida parvarish qilinadi. Slondo.uz sizga sochni parvarish qilish bo'yicha eng yaxshi mutaxassis topishga yordam beradi`
                     },
                     massage: {
-                        title: `${location}da massaj – orqa, limfatik drenaj (detoks) va boshqalar`,
-                        description: `Tajribali massajchilarning xizmatlari: bank, yapon, bolalar, Tailand va boshqa massaj turlari. Reklamalarni Solishtiring slondo.uz`,
-                        text: `Massajning ko'p turlari mavjud. Ular o'tkaziladigan joylar, mamlakatlar va tana zonalariga bo'linadi:
-                        - Tosh (tosh)
-                        - Aromamassage
-                        - Asal
-                        - Limfa drenaj
-                        - Yuz uchun haykal
-                        - Gavayi
-                        - Bankalik
+                        title: `Massaj xizmatlari ${location}da - yelka-bel sohasi, limfa tomir sohasi(detoks) va boshqalar`,
+                        description: `Tajribali massajchilarning xizmatlari: banka usuli, yaponcha usul, bolalar, tay va boshqa massaj turlari. Slondo.uz saytidagi e'lonlarni solishtiring`,
+                        text: `Massajning ko'p turlari mavjud. Ular tavsiyasiga, tana sohasiga va qaysi mamlakatdan kelib chiqishiga qarab bo'linadi:
+                        - Stoun (toshli)
+                        - Xushbo’y massaji
+                        - Asalli
+                        - Limfadrenaj
+                        - Haykaltarosh-yuz uchun
+                        - Gavaycha
+                        - Banka bilan
                         - Bolalar
-                        - Selülit qarshi
-                        - Yoqa zonasi
-                        - Homilador ayollar uchun
-                        - Sport
-                        Tajribali masaj ustasi topishingiz mumkin slondo.uz.
-                        `
+                        - Yog’ qatlamiga qarshi
+                        - Bo’yin sohasi
+                        - Homiladorlar uchun
+                        - Sport massaji
+                        Siz tajribali massajchi ustani Slondo.uz saytidan topishingiz mumkin.`
                     },
                     hair_extensions: {
-                        title: `Soch kengaytmalari-ustalardan xizmatlar, ${location}`,
-                        description: `Soch kengaytmalariga buyurtma berish, shuningdek, ushbu xizmat narxini va salonlarni topishingiz mumkin slondo.uz!`,
-                        text: `Odatda sochni kengaytirish uchun ikkita texnologiya qo'llaniladi: kapsül va lenta. Kapsül texnologiyasi ikki barobar uzoq davom etadi, lekin tarmoqli xavfsizroq va amaliydir. Materiallar sifatida sun'iy va tabiiy sochlar bo'lishi mumkin. Ustozni izlashga mas'uliyat bilan yondashish sizga yordam beradi slondo.uz! reklamalarni ko'rib chiqing va ustalarning reyting tizimi va mijozlarning fikr-mulohazalari yordamida eng yaxshisini toping!`
+                        title: `Sochlarni uzaytirish - ustalardan xizmatlar | ${location}`,
+                        description: `Siz soch turmaklash uchun buyurtma berishingiz, shuningdek, ushbu xizmat narxlarini va salon raqamlarini Slondo.uz saytida bilib olishingiz mumkin!`,
+                        text: `Qoida tariqasida, sochlarni uzaytirish uchun ikkita usul qo'llaniladi: kapsulali va tasmali. Kapsula usuli ikki baravar uzoqroq xizmat qiladi, ammo tasmali usuli xavfsizroq va amaliydir. Material sifatida sun'iy va tabiiy sochlardan foydalanish mumkin. Usta izlashga mas'uliyat bilan yondashing, Slondo.uz sizga yordam beradi! Ustalarni baholash tizimi va mijozlarning fikr-mulohazalari yordamida e'lonlarni ko'rib chiqing va eng yaxshilarini toping!`
                     },
                     eyelash_extensions: {
-                        title: `Kirpiklar va qoshlarni kengaytirish, laminatsiyalash - ${location}`,
-                        description: `Yuqori malakali qosh va kosmetologlardan xizmatlar. Kirpik kengaytmalari, qoshlarni laminatsiyalash, tatuirovka qilish, mikrob va boshqa kosmetologiya xizmatlari uchun ustalarni toping.`,
-                        text: `Qosh zarbasi o'z vaqtini qadrlaydiganlar uchun qulay echimdir. Bir protsedura 3 yilgacha davom etadi. Laminatsiya yoki kirpik kengaytmalari juda tez-tez bajarilishi kerak. Brovist va kirpik kengaytmalari bo'yicha eng yaxshi ustalarni toping. Ish bo'yicha sharhlarni o'qing, narxlarni taqqoslang va eng yaxshi taklifni tanlang slondo.uz`
+                        title: `Kipriklar va qoshlarni terish, bo’yash, laminatsiyalash| ${location}`,
+                        description: `Yuqori malakali qosh teruvchi va kosmetologlardan xizmatlar. Kipriklarni uzaytirish, qoshlarni laminatsiya qilish, tatuirovka, mikrobleyding va boshqa pardozlash xizmatlari bo’yicha ustalarni toping.`,
+                        text: `Qoshlarni tatuaj qilish o'z vaqtini qadrlaydiganlar uchun qulay echimdir. Bir marta qilingan tatuaj 3 yilgacha yetarli bo’ladi. Laminatsiyani yoki kiprikni uzaytirishni tez-tez bajarishga to’g’ri keladi. Qosh va kiprik uzaytiradigan eng yaxshi mutaxassisni toping. Slondo.uz saytidagi sharhlarini o'qing, narxlarni taqqoslang va eng yaxshi narxlarni tanlang`
                     },
                     stylist: {
-                        title: `${location}dagi stilist xizmatlari | slondo.uz`,
-                        description: `Tajribali stilistni toping, butun tasvirni yoki alohida tafsilotlarni yarating`,
-                        text: `Har bir inson ba'zan tasvirni o'zgartirishni xohlaydi, lekin uni o'zingiz yoki malakasiz ustaning yordami bilan bajaring. Tajribali stilistlarni tanlang, ularning ishlarini ko'rib chiqing va Slondo bilan yaxshiroq o'zgaring.`
+                        title: `Stilist xizmatlari ${location}da|Slondo.uz`,
+                        description: `Tajribali stilistni toping, to’liq qiyofani yoki alohida a’zolarni yarating`,
+                        text: `Har bir inson ba'zan tashqi qiyofasini o'zgartirishni xohlaydi, lekin buni o'zboshimchalik bilan yoki malakasiz usta yordamida bajarish ko’pincha ish bermaydi. Tajribali stilistlarni tanlang, ularning ishlarini kuzatib boring va Slondo yordamida qiyofangizni yaxshilang.`
                     },
                     spa_services: {
-                        title: `SPA-salon: ${location}dagi barcha sog'lomlashtirish xizmatlari`,
-                        description: `SPA xizmatlari - ${location}ning eng yaxshi SPA-salonlaridan tartib-taomillari, massaj va sariqlarni o'rash / eng yaxshi takliflar slondo.uz`,
-                        text: `SPA-protseduralari tanangizni dam olish va dam olishga yordam beradi. Atmosfera Relax va SPA xizmatlari bo'yicha professional ustalar qiyin haftadan so'ng sizning dam olishingizni qulaylashtiradi.`
+                        title: `SPA-salon: ${location}da sog'lomlashtirish xizmatlarining barcha turlari`,
+                        description: `Eng yaxshi salonlarda ruhiy dam olish, massaj va badanga dam berish-SPA xizmatlari ${location}da| Eng ko'p takliflar Slondo.uz saytida`,
+                        text: `SPA amaliyotlari tanangizni dam olishiga va yumshashiga yordam beradi. Osoyishta muhit va SPA xizmatidagi malakali mutaxassislar, og'ir o’tgan hafta zo’riqishlarini mahorat bilan bartaraf qila olishadi.`
                     },
                     tattooing_piercing: {
-                        title: `${location}dagi zarb salonlari-zarb va pirsing`,
-                        description: `Tatuirovka ustalari va pirsing xizmatlari, quloqlarni teshish. Tatuirovka reklamalarini tomosha qiling va narxlarni taqqoslang slondo.uz`,
-                        text: `Tatuirovka yoki pirsing juda mas'uliyatli qaror. Tatuirovka yoki tananing bir qismini teshishdan oldin, chizilgan/bezak g'oyasini, shuningdek, ular amalga oshiriladigan tanadagi maydonni diqqat bilan ko'rib chiqishingiz kerak. Shundan so'ng siz ushbu xizmatlarga ixtisoslashgan zarb salonini tanlashga mas'uliyatli munosabatda bo'lishingiz kerak. Slondo.uz bu sizga yordam beradi: maxsus studiyalar haqidagi reklamalarni ko'rib chiqing va sharhlar, narxlar va reytinglar asosida tanlang.`
+                        title: `Tatu salonlari ${location}da - tatu va pirsing|tanaga rasm urish va quloq, burun, labni teshish`,
+                        description: `Tatuirovka ustalari va pirsing, quloqlarni teshish xizmatlari. Slondo.uz saytida tatuirovka haqidagi e’lonlarni ko'ring va narxlarni taqqoslang`,
+                        text: `Tatuirovka yoki pirsing qilish- bu juda qat’iy qaror qabul qilishdir. Tana a’zolariga rasm urish yoki tananing bir qismini teshishdan oldin, siz chizish-bezatish g'oyasini, shuningdek tanadagi ular joylashishi kerak bo’ladigan joyini diqqat bilan ko'rib chiqishingiz kerak. Shundan so'ng, ushbu xizmatlarga ixtisoslashgan salonni tanlashga mas'uliyat bilan yondashish kerak bo’ladi. Slondo.uz xizmati sizga bu borada yordam beradi: ixtisoslashgan studiyalar haqidagi e'lonlarni ko'ring va sharhlar, narxlar va reytinglar asosida tanlang.`
                     },
                     tattooing: {
-                        title: `Qoshlarni ${location} / tatuaj, mikroblash xizmatlari`,
-                        description: `Tatuaj xizmatlari: ${location} ning eng yaxshi ustalaridan  doimiy bo'yanish / tatuaj bo'yicha salon yoki xususiy usta toping, sizga yordam beradi Slondo.uz`,
-                        text: `Doimiy bo'yanish (tatuaj) maxsus turdagi bo'yanish deb ataladi, unda terining yuqori qatlami ostida siyoh qo'llaniladi, buning natijasida zarb uzoq vaqt davom etadi. vaqtdan oldin yo'q qilishning yagona usuli lazerni olib tashlashdir. Eng yaxshi usta yoki go'zallik salonini tanlang, sizga yordam beradi slondo.uz`
+                        title: `Qoshlarni chizish ${location}da| qoshlarning tatuaji, mikrobleyding xizmatlari`,
+                        description: `Tatuaj xizmatlari: mikrobleyding, eng yaxshi ustalardan rangli makiyaj ${location}da | salon yoki tatuaj ustasini toping. Slondo.uz sizga yordam beradi`,
+                        text: `Permanent makiyaj (tatuaj) - bu terining yuqori qatlami ostiga tabiiy rangli siyoh kiritilishiga aytiladi va bu bo’yoq ancha vaqtgacha (6 oydan 2 yilgacha) o’z ta’sirini saqlab qoladi. Uni suv bilan yuvish mumkin emas va muddatidan oldin uni yo'q qilishning yagona usuli, bu lazer yordamida olib tashlash. Slondo.uz sizga eng yaxshi usta yoki go'zallik salonini tanlashda yordam beradi`
                     },
                     nursing_services: {
-                        title: `Hamshiralar ${location} / hamshira xizmatlari / uyda`,
-                        description: `Malakali hamshiralardan xizmatlar ${location}: enjeksiyonlar, droppers va kateter o'rnatish, va boshqa ko'plab tibbiy hizmatlar / birinchi yordam`,
-                        text: `Uyda rejadan tashqari davolanish bilan ko'pincha inyeksiya, tomizgich yoki kiyinish kabi eng oddiy tibbiy manipulyatsiyani bajarish uchun hech kim yo'q. Bunday hollarda, ayniqsa, "uyda hamshira"kabi xizmat talab etiladi. Haqida slondo.uz klinikalar va xususiy malakali tibbiyot mutaxassislaridan ko'plab elonlar mavjud.`
+                        title: `Hamshiralar ${location}da | uydan tashqarida / uyda hamshiralar xizmatidan foydalanish`,
+                        description: `Malakali hamshiralarning xizmatlari ${location}da: emlash, kateter qo’yish, jarohatni bog’lash va boshqa ko'plab tibbiy muolajalar | birinchi tibbiy yordam`,
+                        text: `Rejadan tashqari uy sharoitida davolanish paytida, hatto eng oddiy tibbiy muolajalarni ham, masalan, emlash, tomchi dori ulash yoki birinchi tibbiy yordam ko’rsatish amaliyotini bajaradigan odam topilmay qoladi. Bunday hollarda, ayniqsa, "uy hamshirasi" kabi xizmat turiga talab katta bo'ladi. Slondo.uz saytida tibbiyot sohasidagi klinikalar va xususiy malakali mutaxassislarning ko'plab e'lonlari mavjud.`
                     },
                     hair_services: {
-                        title: `${location}dagi Sartarosh va go'zallik salonlari | slondo.uz`,
-                        description: `Eng yaxshi soch turmalari va soch turmalari bo'yicha sartaroshxonani topish / ${location} sartaroshlari ustalarining raqamlari va aloqalari`,
-                        text: `Sartaroshlar va stilistlarning xizmatlari nafaqat soch turmushingizga, balki butun tasvirga ham bog'liq! Yaxshi ustalar bilan salonlarni topish oson emas. Orqali slondo.uz. reytinglarni ko'rib chiqishingiz, sharhlarni o'qib chiqishingiz va so'rovlaringiz asosida eng yaxshi stilistni tanlashingiz mumkin.`
+                        title: `Sartaroshxonalar va go'zallik salonlari ${location}da | Slondo.uz`,
+                        description: `Sochni turmaklash va sochni qaychilash uchun eng yaxshi sartaroshni toping | Sartaroshlarning raqamlari va manzillari ${location}da`,
+                        text: `Sizning nafaqat soch turmagingiz, balki umuman tashqi qiyofangiz ham sartaroshlar va stilistlarning xizmatlariga bog'liq! Yaxshi ustalar va yaxshi salonlarni topish oson emas. Slondo.uz yordamida Siz reytinglarni ko'rishingiz, sharhlarni o'qishingiz va so'rovlar asosida eng yaxshi sartaroshni tanlashingiz mumkin.`
                     },
                     other_services: {
-                        title: `Go'zallik va salomatlik "mavzusidagi boshqa e'lonlar»`,
-                        description: `"Go'zallik va salomatlik"mavzusida turli xizmatlar. Sartaroshlar, stilistlar, bo'yanish san'atkorlari, kosmetologlar va boshqa mutaxassislar bilan go'zallik salonlarini qidirish.`,
-                        text: `"Go'zallik va sog'liq" mavzusidagi boshqa xizmatlar: lazer zarb va zarblarni olib tashlash, stilistlar, psixologlar, pilling, terini tozalash, fizioterapiya, soch transplantatsiyasi va boshqalar.`
+                        title: `"Go’zallik va Salomatlik" mavzusidagi boshqa e'lonlar`,
+                        description: `Turli xil go'zallik va salomatlik bo’yicha xizmatlar. Sartaroshlar, stilistlar, vizajistlar, kosmetologlar va boshqa mutaxassislar va go'zallik salonlarini qidiring.`,
+                        text: `"Go’zallik va Salomatlik" mavzusidagi boshqa xizmatlar, masalan: doimiy bo'yanish va tatuirovkalarni lazer yordamida olib tashlash, stilistlar, psixologlarning xizmatlari, piling, terini tozalash, fizioterapiya, soch ko’chirib o’tqazish va boshqalar.`
                     }
                 }
             },
@@ -6835,95 +6828,94 @@ export const getSEOContent = (category: CategoryType, subCtgr: SubcategoryType, 
                     }
                 },
                 uz: {
-                    title: `${location}da kompyuter xizmatlari | it, kompyuter, noutbuklarni ta'mirlash va windows o'rnatish`,
-                    description: `${location}dagi barcha turdagi kompyuter xizmatlari / turli vazifalarni bajarish uchun eng yaxshi mutaxassisni topish slondo.uz`,
-                    text: `Kompyuter xizmatlari juda mashhur yo'nalishdir. Texnologiya yildan-yilga rivojlanib bormoqda va har bir uy va ofis uchun kompyuterlar soni tobora ortib bormoqda. Shu munosabat bilan, yangi dasturlar soni ortib bormoqda: ish, ta'lim va o'yin-kulgi uchun. Haqida slondo.uz ushbu toifadagi reklamalarni topishingiz mumkin:
+                    title: `Kompyuter xizmatlari ${location}da | IT, noutbuk va kompyuter ta'mirlash, Windows o'rnatish`,
+                    description: `Kompyuter xizmatlarining barcha turlari ${location}da |turli vazifalarni amalga oshirish uchun eng yaxshi mutaxassisni eng oson topish Slondo.uzda`,
+                    text: `Kompyuter xizmatlari- juda talab ko’p bo’lgan yo'nalishdir. Texnologiya yildan-yilga rivojlanib bormoqda va har bir uy va ofis uchun kompyuterlar soni va turi tobora ortib bormoqda. Shu munosabat bilan: tibbiyot, ta'lim, qurilish, o'yin va boshqa yo’nalishlar uchun yangi dasturlar turi ham shunga qarab ko’paymoqda. Slondo.uz saytida ushbu toifadagi e’lonlarni topishingiz mumkin:
                     - Veb-Dizayn
-                    - Kompyuter yordami va kompyuterni sozlash
-                    - Yozish
-                    - Kompyuter qurish
-                    - Internetga Ulanish
+                    - Kompyuter xizmati va kompyuterni sozlash
+                    - Matn terish
+                    - Kompyuter yig’ish
+                    - Internetga ulanish
                     - Veb-saytlarni yaratish va targ'ib qilish
                     - Dasturiy ta'minotni o'rnatish
-                    - Boshqa xizmatlar
-                    `,
+                    - Boshqa xizmatlar`,
                     it_outsourcing: {
-                        title: `${location}da it autsorsing / slondo.uz`,
-                        description: `${location} shahridagi tarmoq ma'muriyati, serverlarni sozlash va boshqa it autsorsing xizmatlari`,
-                        text: `IT mutaxassis har doim tegishli emas tutish, yuqori ish haqi, past ish haqi, va hokazo. Bunday hollarda, yordam kompaniyalar it autsorsing ta'minlash keladi. Ularning xizmatlari doirasi keng`
+                        title: `IT autsorsing ${location}da | Slondo.uz`,
+                        description: `Tarmoq boshqaruvi, server sozlamalari va boshqa IT autsorsing xizmatlari ${location}da`,
+                        text: `IT mutaxassisini korxona shtatida doimiy tarzda ushlab turish har doim ham foydali bo’lmaydi, chunki, kam ish hajmi sharoitida ularga yuqori ish haqi to’lashni hamma joyda ham amalga oshirish qiyin. Bunday hollarda IT autsorsing kompaniyalari yordamga keladi. Va ularning xizmat ko’rsatish ko’lami ancha keng`
                     },
                     web_designer: {
-                        title: `Web dizayn – saytlar va ilovalar uchun web-dizaynni ishlab chiqish bo'yicha xizmatlar`,
-                        description: `${location}ning eng yaxshi veb-dizaynerlaridan xizmatlar / eng yaxshi mutaxassislardan wed-design buyurtma qilish sizga yordam beradi slondo.uz`,
-                        text: `Dastur yoki sayt uchun dizaynni ishlab chiqish juda ko'p vaqt talab etadi. Fikringizni chizish uchun dizayner nima qilish kerakligini aniq tushunishi kerak. Yaxshi mutaxassisni toping, sizga yordam beradi – slondo.uz. narxlarni taqqoslang, sharhlarni o'qing va afzal ko'rganingiz asosida eng yaxshi veb-dizaynerni tanlang!`
+                        title: `Web Dizayn ${location}da – saytlar va ilovalar uchun web-dizayn yaratish xizmatlari`,
+                        description: `Eng yaxshi web-dizaynerlardan xizmatlar ${location}da |eng yaxshi mutaxassislardan wed-dizaynga buyurtma berishda Sizga Slondo.uz ko’mak beradi`,
+                        text: `Dastur yoki sayt uchun dizaynni ishlab chiqish juda ko'p vaqt talab etadi. Xayolingizdagi rejani chizish uchun dizayner nima qilish kerakligini aniq tushunishi kerak. Yaxshi mutaxassisni topishda Sizga Slondo.uz yordam beradi. narxlarni taqqoslang, sharhlarni o'qing va o’zingizga ma’qul bo’lgan eng yaxshi veb-dizaynerni tanlang!`
                     },
                     layout_designer: {
-                        title: `${location}da verstka xizmati | html, java, hh`,
-                        description: `${location} | junior, middle, senior | eng yaxshi verstalschiklardan ko'p takliflar, eng oson yo'li slondo.uz`,
-                        text: `Verstka-asosiy ishi bosma nashrni, veb-saytni yaratish va shakllantirish, kerakli matnlar, rasmlar va boshqa fayllar bilan to'ldirishdir. Eng yaxshi ishchi toping, sizga yordam beradi slondo.uz`
+                        title: `Sahifalovchi xizmatlari {location}da| html, java, hh`,
+                        description: `Eng zo’r sahifalovchilarning takliflari ${location}da | junior, middle, senior | sahifalovchilar xizmatlariga buyurtma berishning eng oson yo'li Slondo.uz da`,
+                        text: `Sahifalovchilarning asosiy ishiga- nashrni tayyorlash, web-saytni yaratish va shakllantirish, uni kerakli matnlar, rasmlar va boshqa fayllar bilan to'ldirish kabi vazifalar kiradi. Eng yaxshi sahifalovchini topishda Sizga Slondo.uz yordam beradi`
                     },
                     designer: {
-                        title: `${location}da grafik dizaynerning xizmatlari | photoshop, corel`,
-                        description: `${location}dagi grafik va boshqa professional dizaynerlarning ko'plab takliflari / eng yaxshi dizaynerni topish, sizga yordam beradi slondo.uz`,
-                        text: `Axborot texnologiyalari rivojlanishi bilan grafik dizaynerning xizmatlari katta talabga ega bo'ldi. Photoshop, corel draw va boshqa rasmni tahrirlash dasturlarida ishlash bo'yicha xizmatlar har bir yirik kompaniyada talab qilinadi. Ko'p takliflarning eng yaxshisini tanlang, sizga yordam beradi slondo.uz`
+                        title: `Grafik dizayner xizmatlari ${location}da | fotoshop, corel, power point`,
+                        description: `Grafik va boshqa kuchli dizaynerlardan ko’plab takliflar ${location}da / eng yaxshi dizayner topishda Sizga Slondo.uz yordam beradi`,
+                        text: `Axborot texnologiyalari rivojlanishi bilan, grafik dizaynerning xizmatlariga bo’lgan talab kuchaydi. Photoshop, corel draw va boshqa, rasmni tahrirlash dasturlarida ishlash bo'yicha xizmatlarga har bir yirik kompaniyada talab bor. Ko'plab takliflarning eng yaxshisini tanlashda Sizga Slondo.uz yordam beradi`
                     },
                     setting_pc: {
-                        title: `${location}da kompyuter, noutbuk va boshqa kompyuter yordamini Sozlash`,
-                        description: `Kompyuter xizmatlari ustalarining e'lonlari: kompyuter | ${location} bo'yicha Sozlash, optimallashtirish va boshqa yordam`,
-                        text: `Ba'zida kompyuterda xatoni tuzatish yoki muammoni hal qilish kerak. Bundan tashqari, kompyuterni sozlash va uni optimallashtirish kerak bo'lishi mumkin. Bu sizga ushbu bo'limda mutaxassislar yordam beradi! Ustalardan ko'plab reklamalarni ko'ring va reyting, sharhlar va narxlar asosida eng yaxshisini tanlang.`
+                        title: `Kompyuter, noutbukni sozlash va boshqa kompyuter xizmatlari ${location}da`,
+                        description: `Kompyuter xizmatlari bo’yicha xizmat ko’rsatadigan ustalarining e’lonlari: yig’ish, sozlash, moslashtirish va boshqa kompyuter xizmatlari | ${location}`,
+                        text: `Ba'zida kompyuter tizimidagi xatoni tuzatish yoki boshqa muammosini hal qilish kerak bo’ladi. Bundan tashqari, kompyuterni sozlash va uni moslashtirish kerak bo'lishi mumkin. Ushbu bo'limdagi mutaxassislar Sizga yordam beradi! Ustalardan tushgan ko'plab takliflarni ko'ring va reytingi, sharhlar va narxlari asosida eng yaxshisini tanlang.`
                     },
                     typing_data_entry: {
-                        title: `${location} matn terish / matn terish bo'yicha xizmatlar`,
-                        description: `${location}dagi matnlar bilan ishlash bo'yicha mutaxassislardan takliflar / xizmat bo'yicha kompaniya yoki xususiy mulkni topish matn terish eng oson yo'li slondo.uz`,
-                        text: `Matn terish-rasmdagi belgilarni matn fayliga kiritish. Odatda, ushbu xizmat hujjatlar, tezislar va boshqa ishlarni tayyorlashda ishlatiladi, bu esa katta hajmdagi ma'lumotlarni talab qiladi. Ko'p takliflarning eng yaxshisini tanlang, matn terish sizga yordam beradi slondo.uz`
+                        title: `Matn terish ${location}da | matn terish xizmatlari`,
+                        description: `Matnlar bilan ishlash bo'yicha mutaxassislardan takliflar ${location}da | matn terish xizmati bo'yicha kompaniya yoki jismoniy shaxsni topishning eng oson yo'li Slondo.uzda`,
+                        text: `Rasmdagi belgilarni matnli fayliga o’zgartirishga - matn terish deyiladi. Odatda, ushbu xizmatdan katta hajmdagi ma'lumotlarni o’z ichiga olgan hujjatlar, referatlar va boshqa ishlarni tayyorlashda foydalaniladi. Matn terishga oid ko'plab takliflarning eng yaxshisini tanlashda Sizga Slondo.uz yordam beradi`
                     },
                     building_pc: {
-                        title: `Kompyuterlarni ${location}da yig'ish / kompyuter yig'ish bo'yicha xizmatlar`,
+                        title: `Kompyuterni ${location}da yig'ish| kompyuter yig'ish xizmatlari`,
                         description: `Shaxsiy kompyuterlarni buyurtma qilish uchun eng yaxshi narxlarda yig'ish eng yaxshi taklifni toping slondo.uz / ${location}`,
-                        text: `Sizning talablaringiz bo'yicha mukammal kompyuterni yig'ish uchun barcha komponentlarni alohida sotib olish kerak. Kompyuterni o'zingiz qurish uchun qismlarni tanlashda siz faqat byudjetingiz va ishlash ehtiyojingiz bilan cheklanasiz. Lekin ba'zida kompyuter bilimi etarli emas va oxir-oqibat siz kerakli narsani to'plashingiz mumkin emas. Ushbu maqsadlar uchun komponentlarni tanlashda yordam beradigan va siz uchun kompyuterni to'playdigan mutaxassislar xizmatlari mavjud!`
+                        text: `Sizning talabingizini qondiradigan, mukammal kompyuterni yig'ish uchun barcha ehtiyot qism va uskunalarni alohida sotib olish kerak. Kompyuterni o'zingiz yig’moqchi bo’lsangiz, qismlarni tanlashda siz faqat moddiy imkoningiz va kompyuterni qaysi sohada qo’llamoqchi ekaningizga tayanib, yig’asiz. Lekin ba'zida bu sohada bilimingiz etarli bo’lmasligi sabab, siz kerakli tezlikda ishlaydigan kompyuterni yig’a olmasligingiz mumkin. Shu sababli, kerakli komponentlarni tanlashda yordam beradigan va Siz uchun kompyuterni to'playdigan mutaxassislar xizmatlari mavjud. Bu borada Sizga Slondo.uz yordam beradi!`
                     },
                     connecting_internet: {
-                        title: `Uy va ofis uchun ${location}da Internet aloqasi / slondo.uz`,
-                        description: `Provayder va ustalarning ${location} shahrida internetga ulanish bo'yicha raqamlari / uy va ofis uchun / eng yaxshi taklifni tanlang slondo.uz`,
-                        text: `Internetni ulashda har bir provayderning tafsilotlarini diqqat bilan o'rganishingiz kerak. Ba'zan provayder foydasiz bo'lishi mumkin va boshqa kompaniyaning xizmatlarini ulash uchun qo'shimcha vaqt talab etiladi.`
+                        title: `Uy va ofis uchun ${location}da Internetga ulanish | Slondo.uz`,
+                        description: `Internet aloqasini ta’minlab beruvchi provayderlar va mutaxassislarning raqamlari va manzillari ${location}da | uy va ofis uchun | narxlarni taqqoslash orqali eng yaxshi taklifni Slondo.uzda tanlang`,
+                        text: `Internetni ulashda har bir provayderning taklif va imkoniyatlarini diqqat bilan o'rganishingiz kerak. Ba'zan, provayder xizmati qoniqarsiz bo’lib chiqishi mumkin va boshqa kompaniyaning xizmatlarini ulash uchun qo'shimcha vaqt talab etiladi. Slondo.uz maydonchasi Sizga sinalgan va eng zo’r provayderlarni tavsiya qila oladi`
                     },
                     coder: {
-                        title: `${location}da dasturlash xizmatlari | slondo.uz`,
-                        description: `${location}da dasturlash xizmatlari bo'yicha ko'plab takliflar / eng yaxshi it-kompaniya yoki xususiy tadbirkorni tanlash sizga yordam beradi slondo.uz`,
-                        text: `Dasturlash-manba kodini yozish orqali dasturlarni, saytlarni yoki o'yinlarni (dasturiy ta'minotni) yaratish. Mavjud dasturiy ta'minotlardan birida. Sizga yordam beradigan eng yaxshi takliflarni tanlang slondo.uz`
+                        title: `Dasturlash xizmatlari ${location}da | Slondo.uz`,
+                        description: `Ko’plab dasturlash xizmatlari bo’yicha takliflar ${location}da | eng yaxshi IT kompaniyasi yoki tadbirkor-dasturchini tanlashda Sizga Slondo.uz yordam beradi`,
+                        text: `Boshlang’ich kodni yozish orqali, dasturlarni, saytlarni yoki o'yinlarni (dasturiy ta'minotni) yaratishga-dasturlash deyiladi. Bu jarayon mavjud bo’lgan dasturlash tillaridan biri yordamida amalga oshiriladi. Sizga yordam beradigan eng yaxshi takliflarni Slondo.uzda tanlang`
                     },
                     work_text: {
-                        title: `${location}da Kopirayting / eng yaxshi kopirayterlardan matn bilan ishlash bo'yicha xizmatlar`,
-                        description: `Ish bo'yicha tajribali mutaxassisni toping Copywriter yoki taklifingiz bilan reklama joylashtirishingiz mumkin slondo.uz / ${location}`,
-                        text: `Ommaviy axborot vositalari, bloglar va boshqa Internet resurslarining o'sishi bilan copywriting juda mashhur kasbga aylandi. O'z veb-sayti bilan har bir firma yoki almashinuv Copywriter xizmatiga muhtoj. Yaxshi yozish bo'yicha mutaxassis-savodli va ijodiy bo'lishi kerak.
-                        Copywriting xizmatlarini buyurtma qilish yoki taklif qilishingiz mumkin slondo.uz!
+                        title: `Kopirayting-matn bilan ishlash ${location}da |matn bilan ishlovchi eng yaxshi Kopirayterlar xizmati`,
+                        description: `Kopirayting bo'yicha tajribali mutaxassisni topishingiz yoki Slondo.uzda o’z taklifingiz bilan e’lon joylashtirishingiz mumkin | ${location}`,
+                        text: `Ommaviy axborot vositalari, blogging va boshqa Internet manbalarining o'sishi bilan kopirayting xizmati juda mashhur kasbga aylandi. O'z web-saytiga ega bo’lgan har bir firma yoki birja kopirayter xizmatiga muhtoj. Matn yozish bo'yicha mutaxassis-savodli va ijodiy shaxs bo'lishi kerak.
+                        Slondo.uz yurdamida kopirayting xizmatlariga buyurtma berish yoki taklif qilishingiz mumkin!
                         `
                     },
                     web_coder: {
-                        title: `Web-saytlarni ishlab chiqish / WEB-dasturlash xizmatlari`,
-                        description: `IT-kompaniyalar va xususiy dasturchilarning sayt va ilovalar yaratish bo'yicha takliflari - ${location} / veb-dasturlash xizmatlari slondo.uz`,
-                        text: `Web-dasturlash - "Internet"tarmog'i yordamida ishlaydigan saytlar va ilovalarni yaratish. Bepul reklama xizmati yordamida slondo.uz. veb-saytlar, ilovalar va turli dasturlarni yaratish va ishlab chiqish bo'yicha mutaxassislarni topishning eng oson usuli.`
+                        title: `Web-saytlarni ishlab chiqish ${location}da | Web dasturlash xizmatlari`,
+                        description: `IT-kompaniyalar va tadbirkor-dasturchilar tomonidan Web-saytlar va ilovalarni yaratish bo'yicha takliflar ${location}da | veb-dasturlash xizmatlari Slondo.uzda`,
+                        text: `Web-dasturlash - "Internet"tarmog'i yordamida ishlaydigan saytlar va ilovalarni yaratishdir. Slondo.uz. bepul reklama xizmati yordamida veb-saytlar, ilovalar va turli dasturlarni yaratish va ishlab chiqish bo'yicha mutaxassislarni toping`
                     },
                     creating_promoting_websites: {
-                        title: `Web-saytlarni ishlab chiqish / saytlarni yaratish va reklama qilish: SMM, SEO`,
-                        description: `Saytni ishlab chiqish va kelgusida ${location}da foydalanishga tayyor bo'lish bo'yicha mutaxassislarni topish / SMM bo'yicha eng yaxshi ishlab chiquvchilar va mutaxassislar`,
-                        text: `Bugungi kunda ko'plab kompaniyalar veb-saytlarni sotib olishadi. Ulardan ba'zilari ofisga ega bo'lmagan holda internetda o'z yo'llarini boshlaydilar. Saytlarni ishlab chiqish va targ'ib qilish – tobora dolzarb xizmatga aylanmoqda.
-                        Eng yaxshi ishlab chiquvchi yoki SEO mutaxassisi sizga yordam beradi slondo.uz!
+                        title: `Saytlarni ${location}da ishlab chiqish |saytlarni yaratish va rivojlantirish: SMM, SEO`,
+                        description: `Saytlarni boshidan to oxirigacha ishlab chiqish va yanada takomillashtirish bo'yicha mutaxassislarni ${location}da topish | SMM, SEO bo’yicha eng yaxshi ishlab chiquvchilar va mutaxassislar`,
+                        text: `Bugungi kunda ko'plab kompaniyalar saytlarni sotib olishadi. Ulardan ba'zilari o’z ofisiga ega bo'lmagan holda, faqat internet manziliga ega bo’lgan holda o'z faoliyatlarini boshlaydilar. Saytlarni ishlab chiqish va targ'ib qilish – tobora dolzarb xizmatga aylanmoqda.
+                        Eng yaxshi dasturchini yoki SEO mutaxassisini topishda Slondo.uz sizga yordam beradi!                        
                         `
                     },
                     system_admin: {
-                        title: `${location}da tarmoq va tizim boshqaruvi | slondo.uz`,
-                        description: `${location}dagi tarmoq va tizim ma'muriyatchiligi bo'yicha eng yaxshi mutaxassislardan xizmatlar`,
-                        text: `Tizim (tarmoq) boshqaruvi mahalliy kompyuter / org parkining to'g'ri ishlashini sozlash va qo'llab-quvvatlashni nazarda tutadi. texnika vositalari, shuningdek, muayyan dasturiy ta'minotning uzluksiz ishlashi. Bundan tashqari, tizim ma'muri ko'pincha axborot xavfsizligi uchun mas'uldir. Ko'p takliflarning eng yaxshisini tanlang, sizga yordam beradi slondo.uz`
+                        title: `Tarmoq va tizim boshqaruvi ${location}da | Slondo.uz`,
+                        description: `Tarmoq va tizim boshqaruvi bo'yicha eng yaxshi mutaxassislardan xizmatlar ${location}da`,
+                        text: `Tizim (tarmoq)ni boshqaruvi deganda-mahalliy kompyuter / orgtexnika jamlanmasini sozlash va to’g’ri ishlashini ta’minlashni, shu jumladan, muayyan dasturiy ta'minotning uzluksiz ishlashini ta’minlab berishni tushuniladi. Bundan tashqari, tizim ma'muri ko'pincha axborot xavfsizligi uchun mas'uldir. Ko'p takliflarning eng yaxshisini tanlashda Sizga Slondo.uz yordam beradi`
                     },
                     software_nstallation: {
-                        title: `Windows va boshqa dasturlarni ${location}ga chiqish uchun o'rnatish | slondo.uz`,
-                        description: `Windows, linux, mac OS va boshqa operatsion tizimlarni o'rnatish ustalari. Turli dasturlarni faollashtirish va o'rnatish / ${location}`,
-                        text: `Dasturiy ta'minotni o'rnatish, operatsion tizimni o'rnatish, haydovchilar va amaliy dasturlarni o'z ichiga oladi. Agar siz kompyuterni sotib olgan bo'lsangiz yoki operatsion tizimni qayta o'rnatishga qaror qilsangiz, ushbu xizmatlar bo'yicha ustalarni topish oson slondo.uz!`
+                        title: `Windows va boshqa dasturiy ta’minotni ${location}da joyiga chiqib o'rnatib berish | Slondo.uz`,
+                        description: `Windows, linux, mac OS va boshqa operatsion tizimlarni o'rnatish bo’yicha ustalar. Dasturiy ta'minotni faollashtirish va turli dasturlarni o'rnatish | ${location}`,
+                        text: `Dasturiy ta'minotni o'rnatishga- operatsion tizim, drayver va amaliy dasturlarni o’rnatish kiradi. Agar siz kompyuterni sotib olgan bo'lsangiz yoki operatsion tizimni qayta o'rnatishga qaror qilsangiz, ushbu xizmatlar bo'yicha ustalarni topish Slondo.uzda juda oson!`
                     },
                     other_services: {
                         title: `Boshqa kompyuter xizmatlari - ${location}`,
-                        description: `Turli xil kompyuter xizmatlari va boshqa it yordami`,
+                        description: `Turli xil kompyuter va IT xizmatlari.`,
                         text: `Boshqa toifalarga kiritilmagan kompyuterlar va kompyuter yordami bilan bog'liq barcha xizmatlar`
                     }
                 }
@@ -7037,112 +7029,112 @@ export const getSEOContent = (category: CategoryType, subCtgr: SubcategoryType, 
                     }
                 },
                 uz: {
-                    title: `${location}da avtoulov va mototsikl xizmatlari: tuning  diagnostika texnika  xizmat va boshqa narsalar`,
-                    description: `${location}da avtoulov egalari va avtoulovchilarga xizmatlarning barcha turlari: moy almashtirish, avto shamlar, gaz-balon o'rnatish va boshqa avtoservislar | slondo.uz`,
-                    text: `O'zbekistonda har kuni avtoulovlar soni o'sib bormoqda va shu bilan avtoservislarga bo'lgan talab. Muntazam balanslash, sarf materiallarini almashtirish, kamber va g'ildiraklarni tekislash. Ko'pgina avtomobil egalari avtoulovning texnik holatini saqlab qolish uchun yiliga bir necha marta avtoulov xizmatiga tashrif buyurishlari kerak. Bundan tashqari, avtomobil egasi avtomobilning jihozlari va texnik jihozlaridan qoniqmasligi mumkin. Bunday hollarda qo'shimcha jihozlarni sozlash va o'rnatish yordamga keladi.
-                    ${location}da avtoulov va mototsikl xizmatlarining barcha turlarini slondo.uz saytidan topishingiz mumkin.
+                    title: `Avto va moto xizmatlari ${location}da: tuning, diagnostika, texnik xizmat ko'rsatish va boshqalar`,
+                    description: `Avtomobil egalari va motoishqibozlar uchun ${location}da xizmatlarning barcha turlari: moy almashtirish, injector tozalash, gaz ballon uskunalari o'rnatish va boshqa avto xizmatlar | Slondo.uz`,
+                    text: `Kundan kunga O'zbekistonda avtomobillar soni ortib bormoqda va shu bilan avto-xizmatlarga bo'lgan talab ham ortib bormoqda. Muntazam tarzda g'ildiraklar muvozanatini tekshirish, sarflanadigan materiallarni almashtirish, tormoz tizimini nazorat qilib turish talab etiladi. Ko'pgina avtomobil egalari yiliga bir necha marta avtomobilning yaxshi texnik holatini saqlab qolish uchun avtomobilni texnik ko’rigi xizmatiga ko’rsatib turishadi. Bundan tashqari, avtomobil egasini mashinaning ishlab chiqaruvchi tomonidan o’rnatilgan uskunalari va texnik jihozlari qanoatlantirmasligi mumkin. Bunday hollarda qo'shimcha jihozlarni tyuning qilish va o’zgartirish xizmati yordamga keladi.
+                    Avto va Moto xizmatlarining barcha turlarini ${location}da, Slondo.uz maydonchasida topishingiz mumkin 
                     `,
                     installing_audio_system: {
-                        title: `Avtoulovga audio tizim o'rnatish - avtoulovni ovoz / musiqa bilan jihozlash | ${location}`,
-                        description: `Avtoulovga audio tizim o'rnating: avtoulovga akustika, bas va ovoz kuchaytirgichlarini o'rnatish ustalari - ${location} | slondo.uz`,
-                        text: `Tez-tez sodir bo'ladiki, ichki karnaylar avtomobil sotib olayotganda etarli emas. Men yaxshiroq va balandroq ovoz eshitishni xohlayman. Slondo.uz saytidagi narxlar va sharhlarga asoslanib, avtoulovga ovoz, musiqa, audio tizimlarni o'rnatish uchun eng yaxshi narxlarni toping.`
+                        title: `Avtomobilga audio tizim o’rnatish – mashinani tovush / musiqa bilan ta’minlash| ${location}`,
+                        description: `Mashinaga audio tizimni o'rnatish – avtomobilga akustika tizimi, bas va ovoz kuchaytirgichlarini o'rnatuvchi ustalar- ${location}da | Slondo.uz`,
+                        text: `Odatda, ishlab chiqaruvchi tomonidan mashinaga o'rnatilgan karnaylar etarli darajada kuchli bo’lmaydi. Lekin yuqori sifatli va baland tovushda musiqa eshitishni hamma xoxlaydi. Avtomobilga avto ovoz, sabvufer va audio tizimlarni o'rnatish bo'yicha eng yaxshi takliflarni Slondo.uzdan narxlar va sharhlar asosida toping`
                     },
                     glass_mirrors: {
-                        title: `Avtomobil oynalarini va avtoulov oynalarini almashtirish - ${location} | slondo.uz`,
-                        description: `Shisha, avtomobil oynalarini o'rnatish va almashtirish. Eng yaxshi shisha va shisha ustalarini toping | ${location}`,
-                        text: `Shisha singan yoki orqa ko'zgu yoriqlari bilan haydash umuman xavfli bo'lib qoladi. Har bir usta stakanni tez va samarali ravishda almashtira olmaydi. Slondo.uz sizga eng yaxshi narxlarda avtomobillarni ta'mirlash ustaxonasini topishda yordam beradi!`
+                        title: `Avto shisha va Avto oynalarni almashtirish ${location} | Slondo.uz`,
+                        description: `Avtomobil shishasi va oynalarini o'rnatish va almashtirish. Old va boshqa oynalarni almashtirish bo’yicha eng yaxshi ustalarni toping | ${location}`,
+                        text: `Avtomobilning singan oldingi shishasi yoki yorilgan orqa kuzatuv oynasi bilan harakatlanish juda xavfli bo'ladi. Tez va sifatli shisha almashtirishni har qanday usta ham eplay olmaydi. Eng yaxshi narxlarda xizmat ko’rsatadigan avtomobil oynasi ustasini topishda Sizga Slondo.uz yordam beradi!`
                     },
                     autoelectrics: {
-                        title: `${location}da avtoulov  elektr bo'yicha mutaxassis | eng yaxshi avtoulov ta'mirlovchilaridan joyida  xizmatlar`,
-                        description: `${location}da avtoulovchilarning jo'nash paytida va | holda xizmatlar Slondo.uz saytida avtomobillarni ta'mirlash bo'yicha eng yaxshi taklifni tanlang`,
-                        text: `Avtoulovchining vazifalariga signalizatsiya, simlar, faralar, zaryadlash, ishga tushirish va yoqish tizimlarini ta'mirlash, almashtirish yoki o'rnatish kiradi. Slondo.uz saytidagi eng yaxshi mutaxassisni tanlang!`
+                        title: `Avtoelektrik ${location}da | avtomobil ta'mirlovchi ustalarining chaqiruv bo’yicha xizmatlari`,
+                        description: `Avtoelektrikdan chaqiruvga chiqib va chiqmay xizmat ko’rsatish taklifi ${location}da | Slondo.uzda avtomobillarni ta'mirlash bo’yicha eng yaxshi takliflarni tanlang`,
+                        text: `Avtoelektrikning vazifalari-tovush qurilmasi, elektr simlarni, chiroqlarni, akkumiulyatorni quvvatlash tizimini, starter va generatorni ta'mirlashni, almashtirishni yoki o'rnatishni o'z ichiga oladi. Eng yaxshi mutaxassisni Slondo.uz orqali tanlang!`
                     },
                     exhaust_system: {
-                        title: `Egzoz tizimini ta'mirlash. ${location}da susturucuyu o'rnatish, katalizatorni olib tashlash`,
-                        description: `Avtomobil egzoz tizimini ta'mirlash va oldini olish bo'yicha xizmatlar. Eng yaxshi ustalar va avtosalonlardan e'lonlar | slondo.uz`,
-                        text: `Egzoz tizimini ta'mirlash avtomobil holatining oldini olishning muhim qismidir. Susturucuyu o'rnatish va almashtirish, katalizatorni ta'mirlash va olib tashlash. Egzoz tizimida barcha turdagi ishlar.`
+                        title: `Tutun chiqarish tizimini ta'mirlash. Glushitel o'rnatish, katalizatorni olib tashlash ${location}da`,
+                        description: `Avtomobil tutun chiqarish tizimini ta'mirlash va nosozlikning oldini olish bo'yicha xizmatlar. Eng yaxshi ustalar va avtosalonlardan e'lonlar | Slondo.uz`,
+                        text: `Tutun chiqarish tizimini ta'mirlash, avtomobilni buzulishini oldini olishning muhim qismidir. Glushitel o'rnatish va almashtirish, katalizatorni ta'mirlash va olib tashlash. Tutun chiqarish tizimida barcha turdagi ishlarni bajarish.`
                     },
                     auto_diagnostics: {
-                        title: `${location}da avtomobil diagnostikasi | slondo.uz`,
-                        description: `Kompyuter diagnostikasi-avtomobilning buzilishining sababini aniqlash imkonini beradi. ${location}dagi tajribali Avto ustalardan xizmatlar`,
-                        text: `Avtomobilni o'z vaqtida tashxislash bilan siz buzilishdan qochishingiz mumkin. Bundan tashqari, kompyuterni tekshirish avtomobilni yaxshi texnik holatda ushlab turish va ularning namoyon bo'lishidan ancha oldin barcha zaif joylar haqida bilish imkonini beradi. Yaxshi ustozni topish sizga yordam beradi slondo.uz!`
+                        title: `Avtomobilni tashhislash ${location}da | Slondo.uz`,
+                        description: `Kompyuter tashhisi-avtomobil buzilishining sababini aniqlash imkonini beradi. Tajribali avto-ustalardan ${location}dagi xizmatlar`,
+                        text: `Avtomobilni o'z vaqtida tashxislash orqali siz uning butunlay ishdan chiqishini oldini olishingiz mumkin. Bundan tashqari, kompyuter yordamida tekshirish, avtomobilni uzoq vaqt yaxshi texnik holatda ushlab turish, nosozliklar namoyon bo'lishidan ancha oldin barcha zaif qismlar va tizimlar haqida bilish imkonini beradi. Slondo.uz malakali usta topishda Sizga yordam beradi!`
                     },
                     detaling: {
-                        title: `${location}da Deteyling | slondo.uz`,
-                        description: `${location}dagi Deteyling markazlari va mutaxassislari / sizga eng yaxshi ustozni topishga yordam beradi slondo.uz`,
-                        text: `Deteyling-bu avtomobilni parvarish qilish bo'yicha chora-tadbirlar majmui. Bunga kir yuvish, quruq tozalash, mashinangizning barcha qismlarini parlatish kiradi. Deteylingdan so'ng, avtomobil zavoddan dastlabki ko'rinishga maksimal darajada qaytadi. Hamma narsa toza, porlashi va porlashi. ${location}dagi Deteyling markazlarini Slondo-da topishingiz mumkin.`
+                        title: `Deteyling ${location}da| Slondo.uz`,
+                        description: `Deteyling markazlari va mutaxassislari {location}da | Slondo.uz eng yaxshi ustani topishda Sizga yordam beradi.`,
+                        text: `Deteyling-bu avtomobilni parvarish qilish bo'yicha chora-tadbirlar majmuidir. Bunga-o’rindiqlarni yuvish, changdan tozalash, mashinangizning barcha qismlariga ishlov berish kiradi. Deteylingdan so'ng, avtomobil zavoddan chiqqan dastlabki ko'rinishga maksimal darajada qaytadi. Avtomobil ko’zni quvontiradigan darajada yarqirab, porlab, salonidan xushbo’y hid taralib turadi. Deteyling markazlarini ${location}da Slondo orqali topish mumkin.`
                     },
                     bodywork_works: {
-                        title: `Kuzov Avto-ish ustasi / ${location} Chiropraktori`,
-                        description: `Tajribali Avto ustalardan ${location} bo'yicha Kuzov ishlari | kostopravlarning aloqalari, sharhlari va narxi`,
-                        text: `Tananing ishlashi mashinaning asl shakliga qaytishni o'z ichiga oladi: dent, mozaik, bo'yash va keyin parlatma. Ushbu xizmatlar bo'yicha ustalarning aloqalarini izlang slondo.uz. narxlarni taqqoslang va ustalarning reytingiga tayanib tanlov qiling!`
+                        title: `Avtomobil kuzov ishlari ustasi | avto temirchi usta ${location}da`,
+                        description: `Tajribali avto-ustalardan ${location}da kuzov ishlari | temirchi ustalarning telefon raqami, manzillari, sharhlar va narxlar`,
+                        text: `Kuzov ishlari- mashinaning asl shakliga qaytishni o'z ichiga oladi: pachoqlangan joylarni chiqarish yoki almashtirish, shpaklevkalash, bo'yash va keyin yaltiratish(polirovkalash). Ushbu xizmatlar bo'yicha ustalarning manzil va telefon raqamlarini Slondo.uz da izlang. Narxlarni taqqoslang va ustalarning reytingiga tayanib, tanlov qiling!`
                     },
                     conditioning_heating: {
-                        title: `${location} shahridagi pechka avtomatik  o'rnatish va texnik xizmat ko'rsatish konditsionerlar`,
-                        description: `Avto – ${location}dagi konditsioner, pechka o'rnatish va texnik xizmat ko'rsatish bo'yicha xizmatlar / eng yaxshi ustani toping slondo.uz!`,
-                        text: `Zavoddagi barcha avtomobillar konditsionerlar bilan jihozlanmagan. Bu nafaqat eski modellarga tegishli. Asosiy konfiguratsiyadagi yangi byudjetli avtomobillar kamdan-kam hollarda iqlimiy qurilma bilan jihozlangan. Ushbu muammoni Konditsionerni alohida-alohida o'rnatish orqali hal qilishingiz mumkin. Ushbu xizmatni taqdim etadigan ustalarni topish oson slondo.uz!`
+                        title: `Avtomobil konditsionerlari | iqlim nazorati o'rnatish, isitish tizimi ${location}da`,
+                        description: `Konditsionerni o'rnatish va texnik xizmat ko'rsatish bo'yicha xizmatlar, avtomobil pechkasi – ${location}da| Slondo.uz da eng yaxshi ustani toping!`,
+                        text: `Zavoddan chiqadigan barcha avtomobillar ham konditsioner bilan jihozlanmagan. Bu nafaqat eski modellarga tegishli. Yangi, arzon avtomobillar kamdan-kam hollarda iqlim nazorati qurilmalari bilan jihozlangan. Ushbu muammoni konditsionerni alohida o'rnatish orqali hal qilishingiz mumkin. Ushbu xizmatni taqdim etadigan ustalarni Slondo.uz da topish oson!`
                     },
                     replacement_liquids: {
-                        title: `${location} moyini almashtirish / avtomatik suyuqliklarni almashtirish: tormoz, gur`,
-                        description: `Dvigatel yog'ini qisman va to'liq almashtirish, avtomatik uzatish, MKPP, shuningdek, avtomobillarda boshqa suyuqliklarni almashtirish bo'yicha ko'plab takliflar: gur, tormoz suyuqligi / ${location}`,
-                        text: `Avtomobildagi suyuqliklarni almashtirish unga g'amxo'rlik qilishning eng muhim qismidir. Suyuqliklarni vaqtincha almashtirish alohida ehtiyot qismlar yoki butun mexanizmlarning buzilishiga olib kelishi mumkin. Yog ' almashinuvi dvigatelda va Vites qutisi ichida (avtomatik uzatish, MKPP) amalga oshiriladi. Bundan tashqari, ma'lum bir kilometrdan so'ng, tormoz suyuqligi va shlangi rulda (gur) suyuqligini o'zgartirish kerak. Yog ' almashtirishga ixtisoslashgan avtomobil xizmatini toping, sizga yordam beradi slondo.uz`
+                        title: `Moy almashtirish ${location}da| Avtomobil suyuqliklarini almashtirish: tormoz, rul `,
+                        description: `Dvigatel, avtomatik uzatmalar qutisi (AUQ), mexanik uzatmalar qutisi (MUQ) moyini qisman va to'liq almashtirish va boshqa suyuqliklarni almashtirish bo'yicha ko'plab takliflar: boshqaruv, tormoz suyuqligi | ${location}`,
+                        text: `Avtomobildagi suyuqliklarni almashtirish, uning uzoq vaqt xizmat qilishining eng muhim qismidir. Suyuqliklarni o’z vaqtida almashtirmaslik, alohida ehtiyot qismlarni yoki butun mexanizmlarning buzilishiga olib kelishi mumkin. Yog ' almashtirish dvigatelda, uzatmalar qutisida (AUQ, MUQ) tishlashish tizimida amalga oshiriladi. Bundan tashqari, ma'lum bir masofa bosib o’tilganidan so'ng, tormoz suyuqligi, tishlashish mexanizmi va rul gidravlik boshqaruvi (RGB) suyuqligini almashtirish kerak. Avtomobil moyini almashtirishga ixtisoslashgan xizmatni topishda Slondo.uz Sizga yordam beradi!`
                     },
                     repair_engine: {
-                        title: `${location} shahrida dvigatel va shassisni ta'mirlash / GBC ta'mirlash va maydalash`,
-                        description: `Dvigatelni batafsil va mukammal ta'mirlash bo'yicha eng yaxshi Avto-mexanika | shuningdek, ${location} / slondo.uz`,
-                        text: `Katta masofa yoki avtomobilning to'satdan buzilishi bilan siz tez-tez ishlaydigan vosita va dvigatelni ta'mirlashingiz kerak bo'lishi mumkin. Bunday ishlar uchun ustozni tez va oson topish sizga yordam beradi slondo.uz! reklamalarni ko'rib chiqing va avtomobilni ta'mirlash bo'yicha eng yaxshi taklifni tanlang.`
+                        title: `Dvigatel va shassini ta'mirlash ${location}da | blok golovkasini ta'mirlash va silliqlash`,
+                        description: `Avtomobil shassisi va dvigatelini qisman yoki to’liq ta'mirlash bo’yicha eng yaxshi avto-mexanikalar ${location}da | Slondo.uz`,
+                        text: `Katta masofa bosib o’tilgach yoki avtomobil to'satdan buzilishi oqibatida, avtomobil shassisi yoki dvigatelini ta'mirlash kerak bo'lishi mumkin. Bunday ishlar uchun ustani tez va oson topishda Sizga Slondo.uz yordam beradi! E’lonlarni ko'rib chiqing va avtomobilni ta'mirlash bo'yicha eng yaxshi taklifni tanlang.`
                     },
                     repair_moto: {
-                        title: `${location}da scooterlar, mopedlar va mototsikllarni ta'mirlash / Moto-texnikalarga xizmat ko'rsatish`,
-                        description: `${location}dagi turli markalardagi mopedlar, scooterlar va mototsikllarga xizmat ko'rsatish va ta'mirlash`,
-                        text: `Xitoy yoki yapon mopedlari, scooterlar va mototsikllar nisbatan arzon. Yo'llarda siz Lifan, Kawasaki, honda va boshqa taniqli ishlab chiqaruvchilarning texnikasini topishingiz mumkin. Shaharda ko'plab Moto-texnikalarga qaramasdan, deyarli hech qanday maxsus xizmat yo'q. Shuning uchun, mototsikl yoki scooterni ta'mirlash muammoli vazifa bo'lishi mumkin. Haqida slondo.uz yog', shamni almashtirish, kamerani o'rnatish, dvigatelni ta'mirlash va boshqa Moto xizmatlari kabi ishlarni bajarish uchun ustalarni har doim topishingiz mumkin.`
+                        title: `Skuter, moped va mototsikllarni ${location}da ta'mirlash / Moto-texnikaga xizmat ko'rsatish`,
+                        description: `Mopedlar, skuterlar, kvadrotsikl va mototsikllar bo’yicha eng yaxshi ustalar ${location}da | tashhis qo’yish va ta'mirlash bo’yicha xizmat ko’rsatuvchi ustaxonalar raqamlarini va manzillarini Slondo.uz da qidiring`,
+                        text: `Xitoy yoki yapon mopedlari, skuterlari va mototsikllari, Germaniya va boshqa davlatlarnikiga nisbatan arzonroq. Yo'llarda siz Lifan, Kawasaki, Honda va boshqa taniqli ishlab chiqaruvchilarning texnikasini ko’rishingiz mumkin. Shaharlarda ko'plab moto-texnikalari mavjudligiga qaramasdan, deyarli hech qanday maxsus xizmat ko’rsatish ustaxonalari yo'q. Shuning uchun, mototsikl yoki skuterni ta'mirlash muammoli vazifa bo'lib ko’rinishi mumkin. Shu sababli, Slondo.uz saytida moy almashtirish, g’ildirakni yamash, dvigatelni ta'mirlash va boshqa ishlarni bajaruvchi ustalarni har doim topishingiz mumkin`
                     },
                     steering_system_repair: {
-                        title: `${location} shahrida rulda boshqaruvini ta'mirlash nasosi gur shlang xizmat ko'rsatish va almashtirish`,
-                        description: `Rul ta'mirlash xizmatlari: rackni sozlash, relslarni almashtirish, elektr kuchaytirgich, gur reduktor va nasosidagi nuqsonlarni bartaraf etish / ${location}dagi eng yaxshi Avto-ustalar`,
-                        text: `Rulda - bu avtomobilning asosiy tizimlaridan biri bo'lib, u mexanizmdir - g'ildirakdan g'ildirakgacha bo'lgan torkni uzatish. Bunday muhim elementning buzilishi juda achinarli oqibatlarga olib kelishi mumkin. Avto ta'mirlash va diagnostika bo'yicha magistrlarni tezda topishingiz mumkin slondo.uz!`
+                        title: `Rul boshqaruvini ${location}da ta'mirlash / rul boshqaruvi gidronasosi va shlanglarini ta’mirlash`,
+                        description: `Rul boshqaruvini ta'mirlash xizmatlari: sozlash, reykani almashtirish, elektr kuchaytirgich, reduktor va nasos kamchiliklarini bartaraf etish | ${location}da eng yaxshi avto ustalar`,
+                        text: `Rul boshqaruvi tizimi - bu avtomobilning asosiy tizimlaridan biri bo'lib, u rul chambaragidan keladigan aylanma harakatni g'ildirakgacha uzatib beruvchi mexanizm hisoblanadi. Bunday muhim mexanizmning buzilishi juda achinarli oqibatlarga olib kelishi mumkin. Avtomobilni ta'mirlovchi va tashxis qo’yuvchi ustalarni tezda topish uchun, Slondo.uzga murojaat qiling!`
                     },
                     fuel_system_repair: {
-                        title: `${location}da yoqilg'i tizimini ta'mirlash / nozullar | benzonasos`,
-                        description: `${location}dagi yoqilg'i tizimini diagnostika qilish va ta'mirlash: nozullar, benzonasos / tajribali ustalardan eng yaxshi narxlarda takliflar slondo.uz`,
-                        text: `Yonilg'i tizimi quyidagi vazifalar uchun javob beradi: tankda yonuvchan saqlash, dvigatelga yonilg'i etkazib berish, havoni tozalash va tozalash, ishlaydigan havo-havo aralashmasini suyultirish va silindrlarga kirish. Shuningdek, chiqindi gazlarni olib tashlash va ularda toksik chiqindilarni yo'q qilish. Bu erda buzilish qabul qilinishi mumkin emas va agar mavjud bo'lsa, uni darhol yo'q qilish kerak. Yoqilg'i tizimini ta'mirlash uchun Avto-mexanikani topish oson slondo.uz!`
+                        title: `Yoqilg'i tizimini ta'mirlash ${location}da / enjektorlar, benzin nasosi, filtr`,
+                        description: `Yonilg'i tizimida: forsunka, benzin nasosini ${location}da tashxislash va ta'mirlash | eng yaxshi narxlarda tajribali ustalardan takliflar Slondo.uzda`,
+                        text: `Yonilg'i tizimi quyidagi vazifalar uchun javob beradi: bakda yonilg’ini saqlash, dvigatelga yonilg'i etkazib berish, havoni tozalash va haydash, havo-yonilg’i aralashmasini tayyorlash va silindrlarga yetkazish. Shuningdek, chiqindi gazlarni chiqarib tashlash va ularni zaharli chiqindilardan tozalash. Bu tizimda nosozlikka yo’l qo’yib bo’lmaydi va agar nosozlik mavjud bo'lsa, uni darhol bartaraf qilish kerak. Yoqilg'i tizimini ta'mirlash uchun avto-mexanik topish slondo.uz da juda oson!`
                     },
                     tuning_installation: {
-                        title: `${location}da avtomatik sozlash-HBO va avtomobillarga qo'shimcha uskunalar o'rnatish.`,
-                        description: `Avtomatik sozlash va qo'shimcha uskunalarni o'rnatish bo'yicha malakali ustalar (HBO 4 avlod) mashinalarga / eng yaxshi Avto-mexanika bo'yicha slondo.uz / ${location}`,
-                        text: `Avtomobilni Sozlash-kaput ostida kuch qo'shish va qo'shimcha variantlarni o'rnatish uchun ajoyib imkoniyat:
+                        title: `Avto-tuning ${location}da | avtomobillarga gaz ballon uskunalari va qo'shimcha uskunalar o’rnatish`,
+                        description: `Avtomobillarni tyuninglash va qo'shimcha uskunalarni o'rnatish bo'yicha malakali ustalar (GBU 4 avlod) | eng yaxshi avto-mexaniklar Slondo.uzda | ${location}`,
+                        text: `Avtomobilni tyuninglash-kapot ostiga qo’shimcha kuch qo'shish va qo'shimcha qo’shimcha uskunalar o'rnatish uchun ajoyib imkoniyat beradi:
                         - Elektr oyna ko'targichlar
-                        - HBO gaz shiling
-                        - Faralarni modernizatsiya qilish
-                        - Shovqin izolyatsiyasi
-                        - Tonlama
-                        - Mashinangizni yaxshilash uchun boshqa xizmatlar
+                        - Gaz-ballon uskunalari
+                        - Yoritish chiroqlarini takomillashtirish
+                        - Shovqindan izolyatsiyalash
+                        - Oynalarni qoraytirish
+                        - Mashinangizni yaxshilash uchun boshqa xizmatlar                        
                         `
                     },
                     technical_maintenance: {
-                        title: `Dvigatelda moy almashtirish va AKPP / MKPP / ${location}ga texnik xizmat ko'rsatish`,
-                        description: `Avtomobilingizga texnik xizmat ko'rsatish ustalari-dvigatel va uzatma qutisidagi yog'ni almashtirish, shamni o'rnatish va boshqa xizmatlar / ${location}`,
-                        text: `O'z vaqtida xizmat ko'rsatish bilan-avtomobil uzoq vaqt davomida sizni ishonchli harakat bilan quvontiradi. Agar osonlik bilan topish mumkin texnik xizmat ko'rsatish xizmati bilan ta'minlash avtomobil xizmatlar slondo.uz!`
+                        title: `Dvigatelda, uzatmalar qutisida moy almashtirish ${location}da | mashinaga tex-xizmat ko'rsatish`,
+                        description: `Avtomobilingizga texnik xizmat ko'rsatish bo’yicha ustalar-dvigatel va uzatmalar qutisidagi moyni almashtirish, tormozlash tizimidan havoni chiqarish va boshqa xizmatlar | ${location}`,
+                        text: `O'z vaqtida texnik xizmat ko'rsatish orqali avtomobilingiz uzoq vaqt davomida Sizni ishonchli harakati bilan quvontiradi. Texnik xizmat ko'rsatish bilan shug’ullanadigan ustaxonalarni Slondo.uz orqali izlash!`
                     },
                     cleaning_polishing: {
-                        title: `${location}da Avto, quruq tozalash salonlari va avtomobillarni yuvish | slondo.uz`,
-                        description: `Avtomobilingizni polishing, quruq tozalash va yuvish bo'yicha xizmatlar slondo.uz ko'p sonli avtomobillarni yuvish va avtoservislar / ${location}`,
-                        text: `Salonni quruq tozalash yoki tanani parlatish, avtomobilni asl qiyofasini berish uchun qilingan. Parlatıldıktan so'ng, mashina oyna qoplamasi bilan porlaydi va quruq tozalagandan so'ng, salon yangi mashina holatini oladi. Ushbu xizmatlar bo'yicha eng yaxshi ustalarni topishingiz mumkin slondo.uz! narxlarni taqqoslang va usta reytingi bo'yicha eng yaxshi taklifni tanlang.`
+                        title: `Avtomobilni yuvish, salonni kimyoviy tozalash va kuzovni sayqallash ${location}da | Slondo.uz`,
+                        description: `Avtomobilingizni sayqallash, kimyoviy tozalash va yuvish bo'yicha xizmatlar| Slondo.uzda avtomoyka va avtoservislar manzili va telefon raqamlarini toping | ${location}`,
+                        text: `Salonni kimyoviy tozalash yoki kuzovni sayqallashdan maqsad- avtomobilga dastlabki asl qiyofasini berishdir. Kuzov sayqallanganidan so'ng, mashina endi zavoddan chiqqanday porlaydi, kimyoviy tozalagandan so'ng esa hali minilmagan mashina hidi kelib turadi. Ushbu xizmatlar bo'yicha eng yaxshi ustalarni Slondo.uzda topishingiz mumkin! Narxlarni taqqoslang va reytingi bo'yicha eng yaxshi ustaning taklifni qabul qiling.`
                     },
                     disk_repair: {
-                        title: `${location}da shinalarni montaj qilish-disklarni vulkanizatsiya qilish va ta'mirlash`,
-                        description: `Avtomobillarni ta'mirlash ustaxonalari bilan aloqa qilish-vulkanizatsiya va disklarni ta'mirlash. Balanslash, teshiklarni bartaraf etish va shinalarni almashtirish bo'yicha ustalar / ${location}`,
-                        text: `To'satdan teshilish bilan uni o'z vaqtida bartaraf etish juda muhimdir. Volkanizatsiya va shinalarni o'rnatish xizmatlari bo'yicha Avto-ustalarning kontaktlarini topishingiz mumkin slondo.uz! mutaxassislarning baholarini Solishtiring va eng yaxshi takliflarni toping`
+                        title: `Shinalarni o’rnatish ${location}da - vulkanizatsiya va disklarni ta'mirlash `,
+                        description: `Vulkanizatsiya va disklarni ta'mirlash bo’yicha ustaxonalarning manzili va telefon raqami. Balansirovka(muvozanatlash), teshiklarni yamash va shinalarni almashtirish bo'yicha ustalar | ${location}`,
+                        text: `G’ildiraklarning to'satdan teshilishini o'z vaqtida bartaraf etish juda muhimdir.Aks holda, shina yaramas holga kelishi yoki disk yorilib-qiyshayishi mumkin. Vulkanizatsiya va shinalarni o'rnatish xizmatlari bo'yicha avto-ustalarning manzilini Slondo.uzda topishingiz mumkin! Ustalarga berilgan baholarini solishtiring va eng yaxshi takliflarni toping`
                     },
                     electrical_equipment: {
-                        title: `Avtomobillar uchun elektr jihozlari - ${location}`,
-                        description: `Tajribali ustalardan mashinalar uchun turli xil elektr jihozlarini o'rnatish va texnik xizmat ko'rsatish / ${location}`,
-                        text: `Elektr jihozlarining noto'g'ri ishlashi bilan mashina normal ishlay olmaydi yoki hatto ishga tushmaydi. Eng yaxshi ustalardan avtomobillarda elektr paketlarni ta'mirlash va ta'mirlash! Ko'plab takliflarni ko'rib chiqing va reyting va sharhlar asosida ularning eng yaxshisini tanlang!`
+                        title: `Avtomobil uchun elektr uskunalar - ${location}`,
+                        description: `Tajribali ustalardan, mashinalar uchun turli xil elektr jihozlarni o'rnatish va texnik xizmat ko'rsatish bo’yicha e’lonlar | ${location}`,
+                        text: `Elektr jihozlarining noto'g'ri ishlashi oqibatida mashina mo’tadil harakatlana olmaydi yoki hatto o’t olmasligi mumkin. Eng yaxshi ustalardan avtomobil elektr tizimini tekshirish va ta'mirlash bo’yicha takliflar! Ko'plab takliflarni ko'rib chiqing, reyting va sharhlar asosida ularning eng yaxshisini tanlang!`
                     },
                     other_services: {
-                        title: `${location}dagi avtomobillar uchun ta'mirlash, xizmat ko'rsatish, sozlash va boshqa xizmatlar`,
-                        description: `Boshqa bo'limlarga mos kelmaydigan avtomobilingiz uchun xizmatlar.`,
-                        text: `${location}dagi avtomobil xizmatlari eng yaxshi ustalardan!`
+                        title: `Avtomobillarni ta'mirlash, texnik xizmat ko'rsatish, sozlash va boshqa xizmatlar ${location}da`,
+                        description: `Avtomobilingiz uchun boshqa bo'limlarda ko’rsatilmagan xizmatlar.`,
+                        text: `Eng yaxshi ustalardan ${location}da avtomobil xizmatlari!`
                     }
                 }
             },
@@ -7223,78 +7215,78 @@ export const getSEOContent = (category: CategoryType, subCtgr: SubcategoryType, 
                     }
                 },
                 uz: {
-                    title: `Maishiy texnika, telefon va elektronika ta'mirlash va o'rnatish bo'yicha xizmatlar / ${location}`,
-                    description: `${location}dagi smartfonlar, televizorlar, oshxona va boshqa uskunalarni ta'mirlash bo'yicha tajribali ustalar va servis markazlari.`,
-                    text: `Texnologiyaning buzilishi ko'pincha ustozni uzoq vaqt davomida qidirishni va uni ta'mirlash uchun pul sarflashni talab qiladi. Muammoni bartaraf etish tez-tez amalga oshirilishi kerak va yarmarkada ustalarni qidirish uchun vaqt yo'q, shu bilan birga bunday xizmatlarning narxlarini taqqoslash kerak. Haqida slondo.uz tajribali ustalardan ko'plab reklamalarni ko'rishingiz, ularning reytingini va sharhlarini ko'rishingiz mumkin. Shu kabi xizmatlar uchun narxlarni taqqoslang va elektronni ta'mirlash bo'yicha eng yaxshi mutaxassislarga murojaat qiling! Ushbu turkumda ${location} shahrida turli maishiy texnikani ta'mirlash va o'rnatish xizmatlari bo'yicha e'lonlarni topasiz`,
+                    title: `Maishiy texnika, telefon va elektronikani ta'mirlash va o'rnatish bo'yicha xizmatlar | ${location}`,
+                    description: `Smartfon, televizor, oshxona jihozlari va boshqa har qanday uskunalarni ta'mirlash bo’yicha ${location}da tajribali ustalar va xizmat ko'rsatish markazlari.`,
+                    text: `Maishiy texnikaning buzilishi ko'pincha uzoq vaqt davomida yaxshi usta qidirishni va uni ta'mirlash uchun mablag’ sarflashni talab qiladi. Muammoni tezda bartaraf etish kerak, lekin,bozordan ustalarni qidirishga vaqt bo’lmasligi mumkin va shu bilan birga, bunday xizmatlarning narxlarini taqqoslash kerak bo’ladi. Slondo.uzda tajribali ustalardan ko'plab e’lonlarni ko'rishingiz, ularning reytingini va sharhlarini ko'rishingiz mumkin. Shu kabi xizmatlar uchun narxlarni taqqoslang va elektrotexnikani ta'mirlash bo'yicha eng yaxshi mutaxassislarga murojaat qiling! Ushbu turkumda siz turli maishiy texnikani ta'mirlash va o'rnatish xizmatlari haqida e'lonlarni ${location}da topasiz`,
                     repair_gas_equipment: {
-                        title: `${location}da gaz uskunalarini ta'mirlash: plitalar, qozon va quvurlar`,
-                        description: `${location}dagi gaz uskunalarini buzish va ta'mirlashni bartaraf etish / gaz ustalari`,
-                        text: `Gaz uskunasiga ta'sir qiladigan buzilishlarni bartaraf etish uchun siz mas'uliyatli tarzda borishingiz kerak, ta'mirlashni kechiktirmasligingiz kerak. Xavfsizlik va ba'zan hayot bunday ishlarning sifatiga bog'liq. Haqida slondo.uz tajribali gaz uskunalarini ta'mirlash ustasini osongina topishingiz mumkin: reklamalarni ko'rib chiqing va magistr darajasiga, shuningdek, boshqa foydalanuvchilarning sharhlariga tayanib, eng yaxshisini tanlang.`
+                        title: `Gaz uskunalari: plitalar, qozon va quvurlarni ${location}da ta'mirlash`,
+                        description: `Gaz uskunalarini ${location}da tuzatish va ta'mirlash | gaz uskunalari bo’yicha ustalar`,
+                        text: `Gaz uskunalariga oid buzilishlarni bartaraf etishga mas'uliyat bilan yondoshish kerak, ta'mirlashni kechiktirmasligingiz shart. Ba'zan inson hayoti va xavfsizligi bunday ishlarning bajarilish sifatiga bog'liq. Slondo.uzda gaz uskunalarini ta'mirlaydigan tajribali ustani osongina topishingiz mumkin: e’lonlarni ko'rib chiqing, boshqa foydalanuvchilarning sharhlariga tayanib, eng yaxshi ustani tanlang.`
                     },
                     repair_computers_laptops: {
                         title: `Kompyuter va noutbuklarni ta'mirlash - ${location}`,
-                        description: `${location}dagi kompyuter va noutbuklarni ta'mirlash bo'yicha servis markazlari va ustalari / texnik muammolarni bartaraf etish va boshqa xizmatlar slondo.uz`,
-                        text: `Kompyuterlar, noutbuklarni ta'mirlash, ularning komponentlari bilan birga yuqori sifatli va arzon bo'lishi mumkin. Buning uchun ta'mirlash uchun kerakli qismni topa oladigan tajribali mutaxassisni topib, uni singan bilan almashtirishingiz kerak. Kompyuter ta'mirlash ustalarining reytingini ko'rish, shuningdek, boshqa foydalanuvchilarning baholashlari haqiqiy kompyuter dahosini topishga imkon beradi!`
+                        description: `Kompyuter va noutbuklarni ta'mirlash bo'yicha xizmat ko'rsatish markazlari va ustalari ${location}da | Slondo.uzda texnik muammolarni bartaraf etish va boshqa xizmatlar`,
+                        text: `Kompyuterlar, noutbuklarni ta'mirlash, ularning qismlari bilan birga yuqori sifatli va arzon bo'lishi mumkin. Faqat buning uchun, ta'mirlash uchun kerakli qismni topa oladigan va uni ishdan chiqqani bilan almashtira oladigan, tajribali mutaxassisni topishingiz kerak. Kompyuterni ta'mirlovchi ustalarining reytingini ko'ring, shuningdek, boshqa foydalanuvchilarning ustalarga bergan bahosiga qarab, haqiqiy kompyuter mutaxassisini toping!`
                     },
                     repair_smartphones_phones: {
-                        title: `${location}da smartfonlar va boshqa telefonlarni ta'mirlash`,
-                        description: `Mobil telefonlarda xizmat ko'rsatish markazlari va muammolarni bartaraf etish bo'yicha ustalar | ${location} / batareyani almashtirish, displey, ekran sensori va boshqa smartfon xizmatlari`,
-                        text: `Tanishlar orqali telefonlarni ta'mirlash yoki butun shaharni kezish uchun ustalarni izlash kerak emas. Muammolarni bartaraf etish bo'yicha mutaxassisni topishingiz mumkin slondo.uz! Samsung, Apple, Xiaomi, Huawei, Artel va boshqa ko'plab ishlab chiqaruvchilarning telefonlarini ta'mirlash bo'yicha mutaxassislari slondo.uz!`
+                        title: `Smartfon va boshqa telefonlarni ${location}da ta'mirlash`,
+                        description: `Mobil telefonlarga xizmat ko'rsatish- muammolarni bartaraf etish bo'yicha markazlar va ustalar| ${location} | smartfon batareyasini almashtirish, displeyi, sensori va boshqalari bo’yicha xizmatlar`,
+                        text: `Telefonlarni ta'mirlash uchun tanishlar orqali yoki butun shaharni kezib, ustalarni izlash shart emas. Slondo.uz orqali muammolarni bartaraf etish bo'yicha mutaxassisni topishingiz mumkin! Samsung, Apple, Xiaomi, Huawei, Artel va boshqa ko'plab ishlab chiqaruvchilarning telefonlarini ta'mirlash bo'yicha mutaxassislar Slondo.uz saytida!`
                     },
                     repair_tv_sets_audio: {
-                        title: `${location}da televizorlar va boshqa audio – video uskunalarni ta'mirlash`,
-                        description: `Magistr va xizmat ko'rsatish markazlaridan televizorlarni ta'mirlash bo'yicha ko'plab takliflar. Ishonchli mutaxassislarga murojaat qiling slondo.uz / ${location}`,
-                        text: `Ushbu bo'limdagi ustalar sizning televizoringizning yoki boshqa audio-vizual uskunalarning buzilishlarini tez va samarali ravishda bartaraf etishga yordam beradi. Televizorlarni ta'mirlash bo'yicha mutaxassislarni izlang, boshqa mijozlarning reytingini va sharhlarini ko'rib chiqing slondo.uz!`
+                        title: `Televizorlar va boshqa audio – video uskunalarini ${location}da ta'mirlash`,
+                        description: `Mutaxassis va xizmat ko'rsatish markazlaridan televizorlarni ta'mirlash bo'yicha ko'plab takliflar. Slondo.uz orqali Ishonchli mutaxassislarga murojaat qiling | ${location}`,
+                        text: `Ushbu bo'limdagi ustalar sizning televizoringiz yoki boshqa audio-video uskunalaringiz kamchiligini tez va samarali ravishda bartaraf etishga yordam berishadi. Slondo.uz da televizorlarni ta'mirlash bo'yicha mutaxassislarni izlang, boshqa mijozlarning sharhlarini ko'rib chiqing!`
                     },
                     repair_medical_equipment: {
-                        title: `${location}da tibbiy texnikani ta'mirlash / asalga xizmat ko'rsatish | uskunalar`,
-                        description: `${location}da tibbiy uskunalarni ta'mirlash va ularga xizmat ko'rsatish bo'yicha xizmatlar / eng yaxshi ustalardan tibbiy jihozlarni ta'mirlash | slondo.uz`,
-                        text: `Tibbiy asbob-uskunalarning buzilishi-jiddiy oqibatlarga olib kelishi mumkin, shuning uchun uni imkon qadar tezroq yo'q qilish kerak. Tibbiy asbob-uskunalarni ta'mirlash bu uchun to'g'ri joyda va faqat malakali mutaxassislar tomonidan amalga oshirilishi kerakligini yodda tutish kerak. "Tibbiy asbob-uskunalarni ta'mirlash" bo'yicha ko'plab takliflarning eng yaxshisini tanlang, sizga yordam beradi slondo.uz`
+                        title: `Tibbiyot asbob-uskunalarini ${location}da ta'mirlash / tibbiyot uskunalarini ta'mirlash xizmati.`,
+                        description: `Tibbiy uskunalarni ta'mirlash va texnik xizmatlar ${location}da | eng yaxshi ustalar tomonidan tibbiyot uskunalarini ta'mirlash / slondo.uz`,
+                        text: `Tibbiyot asbob-uskunalarining buzilishi-jiddiy oqibatlarga olib kelishi mumkin, shuning uchun uni imkon qadar tezroq tuzatish kerak. Tibbiyot asbob-uskunalarini ta'mirlash ishlari maxsus joyda va faqat malakali mutaxassislar tomonidan amalga oshirilishi kerakligini unutmaslik kerak. "Tibbiy asbob-uskunalarni ta'mirlash" bo'yicha ko'plab takliflarning eng yaxshisini tanlashda Sizga Slondo.uz yordam beradi`
                     },
                     photo_equipment_repair: {
-                        title: `Kamera va videokameralarni ta'mirlash - ${location} / batareyalarni almashtirish`,
-                        description: `${location} shahrida muammolarni bartaraf etish, batareyani almashtirish, proshivka va boshqa foto-video kameralarni ta'mirlash ishlari`,
-                        text: `Professional foto-video uskunalari juda ko'p pul sarflaydi, shuning uchun uni ta'mirlashingiz kerak. Ushbu toifadagi kameralar va videokameralarning buzilishlarini bartaraf etish bo'yicha ta'mirlash bo'yicha mutaxassislar! Narxlar taqqoslab va boshqa foydalanuvchilar baholash o'qish eng yaxshi mutaxassislar uchun qarash slondo.uz`
+                        title: `Kamera va videokameralarni ta'mirlash - ${location}da | akkumulyatorni almashtirish`,
+                        description: `Foto-video kamera muammolarini bartaraf qilish, batareyasini almashtirish, dasturiy ta'minotni yuklash va boshqa ta'mirlash ishlari ${location}da`,
+                        text: `Professional foto-video uskunalari juda qimmat turadi, shuning uchun ularni ta'mirlashda jiddiy yondoshish kerak. Kameralar va videokameralarning buzilishlarini bartaraf etish va ta'mirlash bo'yicha mutaxassislar aynan shu bo’limda! Slondo.uz da narxlarni taqqoslang, boshqa foydalanuvchilar bergan baholarga qarang, sharhlarni o’qing va eng yaxshi mutaxassislarni tanlang`
                     },
                     repair_musical_instruments: {
-                        title: `${location}da musiqa asboblarini ta'mirlash | slondo.uz`,
-                        description: `${location}da musiqa asboblarini ta'mirlash va restavratsiya qilish bo'yicha xizmatlar | damli, torli va boshqa asboblarni ta'mirlash / ustaxonalar va ustalardan takliflar`,
-                        text: `Haqiqiy musiqachilar ko'p muammolar sevimli musiqa asbobi bir sinishi yetkazib mumkin, qanday qilib bilaman. Ta'mirlash va ta'mirlash vositalari-butun dunyo bo'ylab juda mashhur sanoat. String, shamol va boshqa musiqa asboblarini ta'mirlash va tiklash bo'yicha tajribali usta toping, sizga yordam beradi slondo.uz`
+                        title: `Musiqa asboblarini ${location}da ta'mirlash | Slondo.uz`,
+                        description: `Musiqa asboblarini ta'mirlash va butlash xizmatlari ${location}da | torli, puflab chalinadigan va boshqa asboblarni ta'mirlash / ustaxonalar va ustalardan takliflar`,
+                        text: `Sevimli musiqa asbobining sinishi, haqiqiy musiqachilarga qanday qayg’u keltirishini hamma ham bilmasa kerak. Musiqa asboblarini ta'mirlash va butlash -butun dunyo bo'ylab juda mashhur bo’lgan soha hisoblanadi. Torli, chertiladigan, puflab chalinadigan va boshqa musiqa asboblarini ta'mirlash va tiklash bo'yicha tajribali ustalarni topishda Sizga Slondo.uz yordam beradi`
                     },
                     repair_optical_devices: {
-                        title: `${location}da optik qurilmalarni ta'mirlash | slondo.uz`,
-                        description: `${location}dagi dürbünler, teleskoplar, mikroskoplar, diqqatga sazovor joylar, tripodlar va boshqa optik asboblarni ta'mirlash / eng yaxshi ustaxonalar va xususiy ustalardan xizmatlar`,
-                        text: `Teleskop, mikroskop, tripod, dürbün yoki boshqa har qanday optik qurilmaning rejadan tashqari buzilishi ko'plab rejalarni buzishi mumkin va ba'zi hollarda alohida guruh ishini buzishi mumkin. Eng yaxshi usta yoki optik asboblarni ta'mirlash ustaxonasini toping, sizga yordam beradi slondo.uz`
+                        title: `Optik qurilmalarni ta'mirlash ${location}da | Slondo.uz`,
+                        description: `Durbinlar, teleskoplar, mikroskoplar, optic mo’ljal, tripodlar va boshqa optik asboblarni ${location}da ta'mirlash | eng yaxshi ustaxonalar va ustalardan xizmatlar`,
+                        text: `Teleskop, mikroskop, tripod, durbin, nivelir yoki boshqa har qanday optik qurilmaning kutilmaganda buzilishi ko'plab rejalarni chippakka chiqarishi mumkin va ba'zi hollarda alohida guruh ishini to’xtatib qo’yishi mumkin. Eng yaxshi usta yoki optik asboblarni ta'mirlash ustaxonasini topishda Sizga Slondo yordam beradi!`
                     },
                     sports_equipment_repair: {
-                        title: `${location}da sport uskunalarini ta'mirlash | slondo.uz`,
-                        description: `Sport uskunalari va inventarlarini ta'mirlash bo'yicha xizmatlar: trenajyorlar, o'q-dorilar va boshqalar / ${location}`,
-                        text: `Sport uskunalari va jihozlarini ta'mirlash, ko'plab trenajyorlar bilan jihozlangan sport zallari uchun juda muhimdir. Bundan tashqari, ushbu xizmat sport bilan shug'ullanadigan sport ixlosmandlari uchun ham zarur bo'lishi mumkin. Eng yaxshi usta yoki optik qurilmalarni ta'mirlash ustaxonasini tanlang, sizga yordam beradi slondo.uz`
+                        title: `Sport uskunalarini ${location}da ta'mirlash| Slondo.uz`,
+                        description: `Trenajyorlar, o'q-dorilar va boshqa Sport uskunalari va anjomlarini ta'mirlash bo'yicha xizmatlar| ${location}`,
+                        text: `Sport uskunalari va jihozlarini ta'mirlash, ko'plab trenajyorlar bilan jihozlangan sport zallari uchun juda muhimdir. Bundan tashqari, ushbu xizmat sport bilan shug'ullanadigan sport ixlosmandlari uchun ham zarur bo'lishi mumkin. Eng yaxshi usta yoki sport uskunalarni ta'mirlash ustaxonasini tanlashda sizga Slondo.uz yordam beradi!`
                     },
                     watch_repair: {
-                        title: `Soat ta'mirlash - ${location} / batareya, shisha, displeyni almashtirish`,
-                        description: `${location}ning tajribali ustalaridan mexanik, elektron, kvarts va Smart (smart) soatlarni ta'mirlash bo'yicha xizmatlar / batareya, shisha, tasmachani almashtirish, mexanizmni tozalash va boshqa ishlar`,
-                        text: `Soat ishlab chiqaruvchining ishi 14 asrda paydo bo'lgan qadimiy kasb. Bugungi kunda yaxshi soat ta'mirlash ustasini topish juda osonlashdi – bu sizga yordam beradi slondo.uz: magistrning reytingi va fikr-mulohazalari asosida taqdim etilgan xizmatning sifati haqida bilib oling.`
+                        title: `Soat ta'mirlash- ${location}da / batareya, shisha, display, qayish almashtirish`,
+                        description: `Mexanik, elektron, kvarts va aqlli (smart) soatlarni ta'mirlash bo'yicha tajribali ustalardan xizmatlar ${location}da | shisha, millar, batareya almashtirish, mexanizmi tozalash va boshqa ishlar`,
+                        text: `Soatsozlik 14 asrda paydo bo'lgan qadimiy kasb. Bugungi kunda yaxshi soatsozni topish juda osonlashdi – bunda sizga Slondo.uz yordam beradi: soatsozning reytingi va fikr-mulohazalar asosida taqdim etilgan xizmatning sifati haqida bilib oling.`
                     },
                     installation_repair_conditioners: {
-                        title: `${location}da konditsionerlarni o'rnatish ta'mirlash va ularga xizmat ko'rsatish   filtr almashtirish`,
-                        description: `${location}dagi konditsionerlar va boshqa iqlim uskunalariga xizmat ko'rsatish, ta'mirlash yoki o'rnatish bo'yicha tajribali ustalar / antifriz va boshqa suyuqliklar, filtrlarni almashtirish`,
-                        text: `Mintaqalarimizning keskin kontinental iqlimi, O'zbekistonda issiq yoz va sovuq qish tufayli. Shu munosabat bilan, deyarli har bir uyda muntazam ravishda xizmat ko'rsatish kerak bo'lgan konditsioner mavjud. Bundan tashqari, konditsionerlarni ta'mirlash yoki o'rnatish kerak. Tajribali ustalarni topish sizga yordam beradi slondo.uz! narxlarni Solishtiring va mutaxassislarni eng yaxshi baholashlar bilan tanlang!`
+                        title: `Konditsionerlarni o'rnatish, tuzatish va ta'mirlash ${location}da | freon, filtr almashtirish`,
+                        description: `Konditsionerlar va boshqa iqlim uskunalarini ta'mirlash, tuzatish yoki o'rnatish bo'yicha tajribali ustalar ${location}da | freon va boshqa suyuqliklarni, filtrlarni almashtirish`,
+                        text: `Mintaqaimizning keskin kontinental iqlimi tufayli, O'zbekistonda yoz jazirama issiq va qish sovuq keladi. Shu munosabat bilan, deyarli har bir uyda muntazam ravishda xizmat ko'rsatish kerak bo'lgan konditsioner mavjud. Bundan tashqari, konditsionerlarni ta'mirlash yoki o'rnatish kerak. Tajribali ustalarni topishda sizga Slondo.uz yordam beradi! Narxlarni solishtiring va mutaxassislarning eng yaxshisini tanlang!`
                     },
                     installing_security_systems: {
-                        title: `${location}da xavfsizlik tizimlarini o'rnatish / signallarni o'rnatish, videokuzatuv kameralari`,
-                        description: `Xavfsizlik tizimlarini ta'mirlash, texnik xizmat ko'rsatish va o'rnatish bo'yicha magistrlar / eng yaxshi narxlarda mutaxassisni toping slondo.uz / ${location} shahridagi signalizatsiya, videokuzatuv kameralarini o'rnatish`,
-                        text: `Har kuni uyni xavfsizlik tizimi bilan jihozlashni istaganlar tobora ko'payib bormoqda. CCTV kameralar, xavfsizlik signallari va uzoqdan qo'mondonli qulflar sizning uyingizni xavfsiz saqlashga va o'zingizni xavfsiz his qilishingizga yordam beradi. Xavfsizlik tizimlarini o'rnatish bo'yicha ishonchli mutaxassisni topishingiz mumkin slondo.uz!`
+                        title: `Xavfsizlik tizimlarini ${location}da o'rnatish, video kuzatuv kameralari va signalizatsiya o'rnatish`,
+                        description: `Xavfsizlik tizimlarini ta'mirlash, texnik xizmat ko'rsatish va o'rnatish bo'yicha ustalar | eng yaxshi narxlarda mutaxassisni Slondo.uzda toping | ${location}da video kuzatuv kameralari va signalizatsiya o'rnatish`,
+                        text: `Kundan kunga uyni xavfsizlik tizimi bilan jihozlashni istaganlar tobora ko'payib bormoqda. Kuzatuv kameralari, xavfsizlik signallari va uzoqdan boshqariladigan qulflar sizning uyingizni xavfsiz saqlashga va o'zingizni xotirjam his qilishingizga yordam beradi. Xavfsizlik tizimlarini o'rnatish bo'yicha ishonchli mutaxassisni Slondo.uzda topishingiz mumkin!`
                     },
                     installation_repair_household_appliances: {
-                        title: `Maishiy texnikani ta'mirlash va o'rnatish ${location} muzlatgichlar kir yuvish mashinalari o'rnatish`,
-                        description: `Kir yuvish mashinalari, gaz plitalari, konditsionerlar, muzlatgichlar, mikroto'lqinli pechlar va boshqalar kabi uy jihozlarini o'rnatish va ta'mirlashning ishonchli ustalari`,
-                        text: `Uy jihozlarini sifatli o'rnatish yoki buzilishlarni bartaraf etish uchun faqat malakali usta bo'lishi mumkin. Tajribali ustalar bilan xizmat ko'rsatish markazini topish oson va tezdir slondo.uz! reyting, sharhlar asosida ta'mirlash bo'yicha mutaxassislarni ko'rib chiqing va siz uchun eng munosib ustozni tanlang!`
+                        title: `Maishiy texnika ta'mirlash va o'rnatish - ${location} | muzlatgichlar o'rnatish`,
+                        description: `Kir yuvish mashinalari, gaz plitalari, konditsionerlar, muzlatgichlar, mikroto'lqinli pechlar kabi uy jihozlarini o'rnatish va ta'mirlash bo’yicha ishonchli ustalar`,
+                        text: `Uy jihozlarini sifatli o'rnatish yoki buzilishlarni bartaraf etish uchun faqat malakali usta bo'lishi lozim. Tajribali ustalar bilan xizmat ko'rsatish markazini Slondo.uzda topish oson va tez! Reyting, sharhlar asosida ta'mirlash bo'yicha mutaxassislarni ko'rib chiqing va o’zingiz uchun eng munosib ustani tanlang!`
                     },
                     other_services: {
-                        title: `Texnikani o'rnatish, ta'mirlash va texnik xizmat ko'rsatish bo'yicha boshqa xizmatlar / ${location}`,
-                        description: `${location} ustalarining boshqa toifalarga mos bo'lmagan texnikalarni ta'mirlash bo'yicha xizmatlari.`,
-                        text: `Maishiy va boshqa asbob-uskunalarni ta'mirlash, o'rnatish, yanada texnik xizmat ko'rsatish bo'yicha ustalardan boshqa xizmatlar mavjud.`
+                        title: `Texnikani o'rnatish, ta'mirlash va texnik xizmat ko'rsatish bo'yicha boshqa xizmatlar | ${location}`,
+                        description: `Boshqa toifalarga mos bo'lmagan texnikani ta'mirlash bo'yicha ${location}da ustalaridan xizmatlar.`,
+                        text: `Bu yerda maishiy va boshqa asbob-uskunalarni ta'mirlash, o'rnatish, texnik xizmat ko'rsatish bo'yicha ustalardan boshqa xizmat turlari mavjud.`
                     }
                 }
             },
@@ -7396,101 +7388,101 @@ export const getSEOContent = (category: CategoryType, subCtgr: SubcategoryType, 
                     }
                 },
                 uz: {
-                    title: `${location}da o'qitish kurslari, xususiy repetitorlar va trenerlar`,
-                    description: `${location}ning eng yaxshi repetitorlari, sport murabbiylari va o'qituvchilaridan turli yo'nalishlar bo'yicha ko'plab e'lonlar. Sifatli ta'limni tanlang slondo.uz!`,
-                    text: `Sifatli ta'lim-muvaffaqiyatli kelajak uchun kalit. Qiziqarli mavzularni o'rganish, sport bo'limlarida mashq qilish yoki mashq qilish sizga bilim va tajriba beradi. Sport sizni yaxshi holatda saqlashga yordam beradi.
-                    Haqida slondo.uz bilim olish va muayyan sohada yaxshiroq bo'lishga yordam beradigan barcha yoshdagi odamlar uchun kurslarni topishingiz mumkin:
-                    - Maktabgacha rivojlanish: farzandlaringizni o'qish, yozish va boshlang'ich maktabning boshqa asoslarini o'rgatadi
-                    - Mahorat darslari va treninglar: professional va ijodiy ko'nikmalarni rivojlantirishga yordam beradi
-                    - Haydash kurslari: avtomobil haydash nazariyasi va amaliyoti
-                    - Tillarni o'rganish: tajribali tilshunoslar xorijiy tillarni o'qitadilar
+                    title: `O'quv kurslari, xususiy muallimlar va ustozlar ${location}da`,
+                    description: `Turli yo'nalishlarda eng yaxshi repetitorlar, sport murabbiylari va o'qituvchilardan ko’plab e’lonlar ${location}da. Slondo.uzda sifatli ta'limni tanlang!`,
+                    text: `Sifatli ta'lim-albatta muvaffaqiyatli kelajak yaratishda muhim omil hisoblanadi. Qiziqarli mavzularni o'rganish, sport bo'limlarida mashq qilish yoki bilimlarni amaliyotda sinab ko’rish, Sizga bilim va tajriba beradi. Sport siznning jismoniy holatingizni yaxshi saqlashga yordam beradi.
+                    Slondo.uzda bilim olish va muayyan sohada yetuk inson bo'lishga yordam beradigan barcha yoshdagi insonlar uchun ko’plab fan va soha bo’yicha kurslarni topishingiz mumkin:
+                    - Maktabgacha ta’lim: farzandlaringizni o'qish, yozish va boshlang'ich maktabning asoslarini o'rgatadi
+                    - Mahorat darslari va treninglar: professional va ijodiy ko'nikmalarni hosil bo’lishiga yordam beradi
+                    - Haydovchilik kurslari: avtomobil haydash nazariyasi va amaliyoti
+                    - Chet tillarni o'rganish: tajribali tilshunoslar xorijiy tillarni o'rgatadilar
                     - Imtihonlarga tayyorgarlik: imtihonlarni muvaffaqiyatli topshirish uchun muayyan fanlarni o'rganish
-                    - Kasb ta'limi: sizga kerak bo'lgan soha yoki kasbning malakali mutaxassislaridan bilim
-                    - Musiqa va Teatrshunoslik darslari: musiqa asboblari va aktyorlik o'yinlari
-                    - Chizma, dizayn va igna ishi: ijodkorlikni rivojlantirish
-                    - Nutq terapevtlari va defektolog: nutq kamchiliklarini tuzatishga yordam beradi
-                    - Raqslar: plastikni yaxshilash va harakatlarni nazorat qilish
-                    - Psixologlar: tajribali mutaxassislar o'zlarini tushunish va aqliy muammolarni hal qilishda yordam beradi
-                    - O'qituvchilar: rus, ingliz, matematika va boshqa mavzulardagi o'qituvchilar
-                    - Murabbiy xizmatlari: o'z-o'zini rivojlantirish va turli sport fanlari bo'yicha murabbiy
+                    - Kasb ta'limi: sizga kerak bo'lgan soha yoki kasbning malakali mutaxassislaridan bilim olish
+                    - Musiqa va Teatrshunoslik darslari: musiqa asboblarini chalish va aktyorlik mahoratini o’stirish
+                    - Chizmachilik, dizayn va tikuvchilik: ijodkorlikni rivojlantirish
+                    - Logoped va defektolog: nutq kamchiliklarini tuzatishga yordam beradi
+                    - Raqslar: harakatlarni yaxshilash va nazorat qilish
+                    - Psixologlar(asabshunoslar): tajribali mutaxassislar o'zlikni anglash va aqliy muammolarni hal qilishda yordam beradi
+                    - Repititorlar: rus, ingliz, matematika va boshqa mavzulardagi o'qituvchilar
+                    - Murabbiylar xizmati: o'z-o'zini rivojlantirish va turli jismoniy fanlar bo'yicha murabbiy
                     - Va boshqa xizmatlar
                     `,
                     preschool_development: {
-                        title: `${location}da Maktabgacha ta'lim | bolalar bog'chalari va o'quv markazlari`,
-                        description: `${location}ning eng yaxshi ta'lim markazlarida 7 yoshgacha bo'lgan bolalarni tarbiyalash. Ishonchli muassasa tanlang slondo.uz / bolalar bog'chalari va o'quv markazlarida maktabgacha ta'lim`,
-                        text: `Bolaligidan boshlab bolaning ta'limiga mas'uliyat bilan yondashish muhimdir. Maktabgacha tarbiyachiga o'qish va yozish asoslarini o'rgatish, shuningdek, uning ijodiy qobiliyatlarini rivojlantirishga malakali mutaxassislar, bolalar bog'chalari va o'quv markazlari yordam beradi. slondo.uz. reklamalarni ko'rib chiqing va o'quv markazining reytingiga, shuningdek, boshqa foydalanuvchilarning fikr-mulohazalariga asoslanib eng yaxshisini tanlang.`
+                        title: `Maktabgacha ta'lim ${location}da | bolalar bog'chalari va o'quv markazlari`,
+                        description: `Eng yaxshi ta'lim markazlarida 7 yoshgacha bo'lgan bolalarni tarbiyalash ${location}da. Slondo.uz da Ishonchli muassasa tanlang | bolalar bog'chalari va o'quv markazlarida maktabgacha ta'lim`,
+                        text: `Bolaning ta'limiga uning bolaligidan boshlab mas'uliyat bilan yondashish muhimdir. Bo’lg’usi maktab o’quvchisiga o'qish va yozish asoslarini o'rgatish, shuningdek, uning ijodiy qobiliyatlarini rivojlantirishga malakali mutaxassislar, bolalar bog'chalari va o'quv markazlari yordam beradi. Slondo.uzda e’lonlarni ko'rib chiqing va o'quv markazining reytingiga, shuningdek, boshqa foydalanuvchilarning fikr-mulohazalariga asoslanib eng yaxshisini tanlang.`
                     },
                     master_classes_trainings: {
                         title: `Turli yo'nalishlar bo'yicha mahorat darslari va treninglar - ${location}`,
-                        description: `Ko'plab yangi narsalarni o'rganish, qiziqarli odamlar bilan tanishish yoki har qanday sohada o'z mahoratingizni yaxshilash uchun master-klasslar va treninglar sizga yordam beradi. Eng yaxshi topish slondo.uz!`,
-                        text: `Moliyaviy savodxonlik asoslarini o'rganish yoki kerakli bilim va muhitsiz o'z mahoratingizni yaxshilash juda qiyin. Buning uchun treninglar va master-klasslar tashkil etiladi! Ularga o'xshash odamlar bilan tanishishingiz, tajriba almashishingiz va yangi imkoniyatlar topishingiz mumkin!`
+                        description: `Ko'plab yangi narsalarni o'rganish, qiziqarli odamlar bilan tanishish yoki har qanday sohada o'z mahoratingizni oshirish uchun mahorat darslari va treninglar Sizga yordam beradi. Eng yaxshisini Slondo.uzda toping!`,
+                        text: `Yetarlicha bilim va qulay muhitsiz, moliyaviy savodxonlik asoslarini o'rganish yoki o'z mahoratingizni oshirish juda qiyin. Aynan shuning uchun treninglar va mahorat darslari tashkil etiladi! Bu tadbirlarda hamfikr insonlar bilan tanishishingiz, tajriba almashishingiz va yangi imkoniyatlar topishingiz mumkin!`
                     },
                     driving_training: {
-                        title: `${location}dagi haydovchilik maktabi-B, C toifalarida haydash bo'yicha trening`,
-                        description: `${location}ning eng yaxshi haydovchilik maktablaridan haydash kurslari. Nazariyasi tayyorlash | amaliyot, shuningdek, yo'l politsiyasi imtihon uchun tayyorgarlik / narxlar va raqamlarni bilish`,
-                        text: `Avtomobilni haydash-to'g'ri tayyorgarlikni talab qiluvchi mas'uliyatli kasb. Yaxshiyamki, haydovchining kelajagi uchun ${location}da "vatanparvar", "lider", "start" va boshqa ko'plab toifadagi ko'plab haydovchilik maktablari mavjud. Ulardan eng yaxshisini tanlang, boshqa foydalanuvchilarning reytinglari va fikr-mulohazalari asosida sizga yordam beradi slondo.uz!`
+                        title: `Avtomaktablar ${location}da| haydovchilik bo’yicha B, C va turli toifalarga o’qitish`,
+                        description: `Eng yaxshi haydovchilik maktabidan ${location}da haydash kurslari. Amaliy, nazariy, shuningdek, DAN imtihonidan o’tishga tayyorlash| narxlari va manzilini bilish`,
+                        text: `Avtomobilni boshqarish-to'g'ri tayyorgarlikni talab qiluvchi mas'uliyatli mashg’ulot hisoblanadi. Kelajakda haydovchi bo’lishni hohlovchilar uchun ${location}da "Vatanparvar", "lider", "Start" va boshqa ko'plab, turli xil narxlarni taklif qiladigan haydovchilik maktablari mavjud. Boshqa foydalanuvchilarning reytinglari va fikr-mulohazalari asosida, Slondo.uz yordamida bu maktablardan eng yaxshisini tanlang!`
                     },
                     language_training: {
-                        title: `Ingliz Tili kurslari / eng yaxshi til, o'quv markazlari`,
-                        description: `Ingliz va boshqa xorijiy tillarni o'qitish bo'yicha o'quv markazlari va repetitorlar, ${location}da | rus, o'zbek, ispan, koreys, nemis va boshqalar`,
-                        text: `Bugungi kunda qo'shimcha, chet tilini bilmay turib, juda qiyin. Ingliz, frantsuz, ispan yoki boshqa tillarni bilish siz uchun bilim sohasida yangi imkoniyatlar ochadi va, albatta, ortiqcha bo'lmaydi. Vakolatli o'qituvchi yoki o'quv markazini toping, sizga yordam beradi slondo.uz!`
+                        title: `Ingliz tili kurslari ${location}da| eng yaxshi til o’rgatish va o'quv markazlari`,
+                        description: `Ingliz va boshqa xorijiy tillarni o'qitish bo'yicha o'quv markazlari va repetitorlar ${location}da | rus, o'zbek, ispan, koreys, nemis va boshqa tillar`,
+                        text: `Bugungi kunda qo'shimcha chet tilini bilmasdan, biror ishni amalga oshirish juda qiyin. Ingliz, frantsuz, ispan yoki boshqa tillarni bilish siz uchun bilim sohasida yangi imkoniyatlar ochadi va, albatta, ortiqcha bo'lmaydi. Vakolatli o'qituvchi yoki o'quv markazini toping, bunda Sizga Slondo.uz yordam beradi!`
                     },
                     exam_preparation: {
                         title: `Ielts, toefl va boshqa kirish imtihonlariga tayyorgarlik | ${location}`,
-                        description: `Institutga yoki boshqa o'quv ishlariga ielts, toefl va kirish imtihonlariga tayyorgarlik bo'yicha eng yaxshi o'quv markazini tanlang slondo.uz`,
-                        text: `Imtihonlarda tayyorgarlik murakkab jarayon. Imtihonni muvaffaqiyatli topshirish uchun ielts, toefl yoki boshqa odatda qisqa vaqt ichida ko'plab o'quv materiallarini o'rganishingiz kerak. Muhim omillardan biri-murakkab mavzuni tushuntira oladigan o'qituvchilar bilan o'quv markazini tanlash. Haqida slondo.uz. ta'lim markazlarining reytinglarini ko'rib chiqishingiz, shuningdek, boshqa foydalanuvchilarning fikr-mulohazalarini o'qishingiz mumkin`
+                        description: `Ielts, toefl yoki boshqa o'quv yurtlari yoki institutga kirish imtihonlariga tayyorgarlik ko’rsatish bo'yicha eng yaxshi o'quv markazlarini Slondo.uzda tanlang `,
+                        text: `Imtihonlarga tayyorgarlik- murakkab jarayon. Ielts, Toefl yoki boshqa Imtihonni muvaffaqiyatli topshirish uchun odatda qisqa vaqt ichida ko'plab o'quv materiallarini o'zlashtirishingiz kerak bo’ladi. Muhim omillardan biri-bu murakkab mavzuni tushuntira oladigan o'qituvchilar yoki o'quv markazini tanlash. Slondo.uzda ta'lim markazlarining reytinglarini ko'rib chiqishingiz, shuningdek, boshqa foydalanuvchilarning fikr-mulohazalarini o'qishingiz mumkin`
                     },
                     professional_training: {
-                        title: `Kasbiy tayyorgarlik - ${location}da kasb-hunarga o'qitish`,
-                        description: `Malakali o'qituvchilardan kasbiy tayyorgarlik va o'qitish bo'yicha takliflar slondo.uz / ${location}`,
-                        text: `Boshqa kasblarga yoki malaka oshirishga qayta o'qitishda ko'pincha butunlay qayta o'qitilishi kerak. Afsuski, avvalgi ishlardan bilim va tajriba foydali bo'lmasligi mumkin. Haqida slondo.uz siz boshqa foydalanuvchilarning reytinglari va sharhlari bo'yicha reklamalarni taqqoslab, malakali mutaxassislarni kasbiy tayyorgarlikda topishingiz mumkin.`
+                        title: `Kasbiy ta'lim - ${location}da kasblarga o'qitish`,
+                        description: `Malakali o'qituvchilardan kasbiy tayyorgarlik va o'qitish bo'yicha takliflar Slondo.uzda | ${location}`,
+                        text: `Boshqa kasblarni egallash yoki malaka oshirish uchun, ko'pincha butunlay qayta o'qish kerak bo’ladi. Afsuski, avvalgi ishdagi bilim va tajriba kerak bo'lmasligi mumkin. Slondo.uz maydonchasida Siz boshqa foydalanuvchilarning reytinglari va sharhlari bo'yicha e’lonlarni taqqoslab, kasbiy tayyorgarlik bo’yicha malakali mutaxassislarni topishingiz mumkin.`
                     },
                     music_theater_lessons: {
-                        title: `Musiqa va aktyorlik mahorati darslari - ${location}`,
-                        description: `Eng yaxshi musiqa maktablari va aktyorlik kurslari. Reklamalarni Solishtiring va eng yaxshisini toping slondo.uz / ${location}`,
-                        text: `Musiqa bilan shug'ullanish quyidagi jihatlarni o'z ichiga oladi: vokal, gitara, pianino, boshqa musiqa asboblari va boshqalar. Musiqa darslari, shuningdek, aktyorlik o'yinlari har qanday yoshdagi odamlar uchun - bolalar va kattalar uchun mos keladi. Ushbu mashg'ulotlar bo'yicha ijodiy o'qituvchilar yoki maxsus o'quv markazlarini topish sizga yordam beradi slondo.uz!`
+                        title: `Musiqa va aktyorlik mahorati darslari – ${location}`,
+                        description: `Eng yaxshi musiqa maktablari va aktyorlik kurslari. Slondo.uzda e’lonlarni solishtiring va eng yaxshisini toping | ${location}`,
+                        text: `Musiqa san’ati bilan shug'ullanish quyidagi jihatlarni o'z ichiga oladi: vokal, gitara, pianino, turli musiqa asboblari va boshqalar. Musiqa darslari, shuningdek, aktyorlik o'yinlari har qanday yoshdagi odamlar- bolalar va kattalar uchun mos keladi. Ushbu mashg'ulotlar bo'yicha ijodkor muallimlar yoki maxsus o'quv markazlarini topishda Sizga Slondo.uz yordam beradi!`
                     },
                     drawing_design_needlework_lessons: {
-                        title: `Chizmachilik darslari-dizayn va hunarmandchilik kurslari ${location}`,
-                        description: `Turli darajadagi chizma, dizayn va igna ishlarini o'rgatish to'garaklari kattalar va bolalar uchun kurslar / ${location}`,
-                        text: `Chizma, dizayn yoki igna ishi kabi mashg'ulotlar nozik vosita qobiliyatlari va ijodiy fikrlashni rivojlantiradi. Kupalar va o'qituvchilarni har qanday sevimli mashg'ulotlariga topishingiz mumkin slondo.uz!`
+                        title: `Rassomchilik darslari - ${location}da dizayn va hunarmandchilik kurslari`,
+                        description: `Turli darajadagi rassomlik, dizaynerlik va tikuvchilik to’garaklari| kattalar va bolalar uchun kurslar| ${location}`,
+                        text: `Rasm chizish, dizayn yoki tikuvchilik kabi mashg'ulotlari bolalarda aqliy qobiliyatni va ijodiy fikrlashni rivojlantiradi. Har qanday mashg'ulotlar bo’yicha to’garaklarni va murabbiylarni Slondo.uzda topishingiz mumkin!`
                     },
                     speech_therapist: {
-                        title: `${location}dagi logoped-defektolog xizmatlari`,
-                        description: `${location}ning logoped va defektologlari mutaxassislaridan turli nutq nuqsonlarini tuzatish / reyting va sharhlardan kelib chiqqan holda eng yaxshi nutq terapevtini tanlang`,
-                        text: `Nutq terapevtlari-defektolog-nutq va aqliy rivojlanishda muammolarga duch kelgan kattalar va bolalar bilan ishlaydigan mutaxassis. Mutaxassis tuzatishlarni amalga oshiradi va nutq rivojlanishining kamchiliklarini bartaraf etadi, uning yo'qligida nutqning rivojlanishini rag'batlantiradi`
+                        title: `Logoped va defektolog xizmatlari ${location}da`,
+                        description: `Turli nutq nuqsonlarini davolovchi mutaxassislar: logoped va defektologlar ${location}da | reyting va sharhlar asosida eng yaxshi nutq kasalliklari mutaxassisini tanlang`,
+                        text: `Logoped-defektolog-nutq va aqliy rivojlanishda muammolarga duch kelgan kattalar va bolalar bilan ishlaydigan mutaxassis hisoblanadi. Mutaxassis nutq rivojlanishidagi kamchiliklarni aniqlaydi va bartaraf etadi, nutqning umuman yo'qligida esa uning rivojlanishini rag'batlantiradi`
                     },
                     dances: {
-                        title: `${location} shahridagi raqs darslari / ixtisoslashtirilgan maktab va xoreograflarning xizmatlari`,
-                        description: `Turli uslub va yo'nalishdagi raqslarni o'qitish kurslari. Reyting va sharhlar asosida eng yaxshi xoreograf murabbiylarini tanlang slondo.uz`,
-                        text: `Xoreografiya darslari insonga zavq bag'ishlaydi, shuningdek, tanangizni yaxshiroq his qilish imkonini beradi. Quyidagi uslub va yo'nalishdagi murabbiylarni toping, sizga yordam beradi slondo.uz!
-                        - Bal zallari (vals, Tango)
+                        title: `Raqs darslari ${location}da / ixtisoslashtirilgan maktablar va xoreograflar xizmati`,
+                        description: `Turli uslub va yo'nalishdagi raqslarni o'qitish kurslari. Slondo.uz yordamida, reyting va sharhlar asosida eng yaxshi raqs murabbiylarini tanlang `,
+                        text: `Xoreografiya darslari insonga zavq bag'ishlaydi, shuningdek, tanangizni yengil his qilish imkonini beradi. Slondo.uz Sizga quyidagi uslub va yo'nalishdagi murabbiylarni topishda yordam beradi!
+                        - Bal (vals, tango)
                         - Klassik xoreografiya
                         - Zamonaviy
-                        - Dunyo xalqlarining raqslari (o'zbek, rus, Arab va boshqalar )
+                        - Dunyo xalqlarining raqslari (o'zbek, rus, arab va boshqalar)
                         - Bodi balet
-                        - To'y raqsini ishlab chiqarish
+                        - To'y raqsini sahnalash
                         `
                     },
                     psychologists: {
                         title: `${location}da psixologiya / malakali psixologlar va psixoterapevtlar xizmatlari`,
-                        description: `O'zbekistonning ixtisoslashtirilgan klinikalari va eng yaxshi xususiy psixologlarining aloqalari | ${location} psixoterapiyasi va psixologiyasi`,
-                        text: `Psixolog psixologik salomatlikning kichik kasalliklarini davolaydi, bu faqat insonning normal hayotiga qisman to'sqinlik qiladi. Psixolog ruhiy yaralarni davolaydi, deb aytish mumkin, bu vaqt o'tishi bilan turli kasalliklarga aylanishi mumkin – nevrologik, aqliy yoki fiziologik xususiyat`
+                        description: `O'zbekistonning eng yaxshi psixologlari va ixtisoslashtirilgan kasalxonalarining manzillari va telefon raqamlari / psixoterapiya va psixologiya ${location}da`,
+                        text: `Psixologlar - insonning normal hayotiga qisman to'sqinlik qiladigan, asabning mayda kasalliklarini davolaydi. Psixolog faqat ruhiy yaralarni davolaydi, deb aytish mumkin. Agar o’z vaqtida davolanmasa, vaqt o'tishi bilan bu nuqson -nevrologik, ruhiy yoki fiziologik kasalliklarga aylanishi mumkin!`
                     },
                     tutors: {
-                        title: `Ingliz, rus, matematika va boshqa fanlardan repetitorlar – ${location}`,
-                        description: `Maktab va boshqa mavzularda qo'shimcha o'qitish uchun professional o'qituvchilar / ingliz, rus va matematika o'qituvchilari`,
-                        text: `O'qituvchi bilan mashg'ulotlarda, odatda, maktab o'quv dasturining mavzularini tahlil qiladi va bilim bo'shliqlarini to'ldiradi. O'qituvchi bilan mashg'ulotlarga asosiy e'tibor o'quvchilarning bilimlarida zaif nuqtalardir. Matematika, ingliz yoki rus tilida ishonchli o'qituvchini topish oson slondo.uz!`
+                        title: `Ingliz, rus, matematika va boshqa fanlar bo'yicha muallimlar – ${location}`,
+                        description: `Maktab fanlari va boshqa mavzulardan qo'shimcha mashqlar uchun professional muallimlar | ingliz, rus va matematika muallimlari`,
+                        text: `Odatda, muallim yordamidagi mashg'ulotlarda maktab o'quv dasturining mavzulari tahlil qilinadi va o’zlashtirishdagi bo'shliqlar to'ldiradi. Muallim bilan mashg'ulotlarga asosiy e'tibor- o'quvchilarning bilimlaridagi zaif nuqtalariga qaratiladi. Matematika, ingliz yoki rus tilida ishonchli muallimlarni topishda Sizga Slondo.uz eng qulay!`
                     },
                     coach_services: {
-                        title: `Turli sport fanlari bo'yicha shaxsiy murabbiy xizmatlari / ${location}`,
-                        description: `${location}da sport seksiyalari, shuningdek, sport fanlari va shaxsiy o'sish bo'yicha shaxsiy murabbiy xizmatlari`,
-                        text: `Sport bilan shug'ullanish farovonlikni yaxshilashga yordam beradi, sedentary turmush tarzi bilan shug'ullanadigan odamlardan ko'ra ko'proq qiziqarli va quvnoq bo'ladi. Murabbiyning vazifasi foydali yukni to'g'ri taqsimlash, sportchining tanasiga va ularga yuqori natijalarga erishishdir.`
+                        title: `Turli sport to’garaklari bo'yicha shaxsiy murabbiy xizmatlari | ${location}`,
+                        description: `Sport to’garaklari, shuningdek, sport turlari va jismoniy yetuklikka erishish uchun ${location}da shaxsiy murabbiy xizmatlari`,
+                        text: `Sport bilan shug'ullanish, o’troq turmush tarzi bilan yashab o’rgangan odamlarning kayfiyatini ko’tarib, hayotiga quvnoqlik, xushchaqchaqlik va farovonlik olib keladi. Murabbiyning vazifasiga sportchining tanasiga foydali yukni to'g'ri taqsimlash va oqibatida ularni yuqori natijalarga erishishiga sababchi bo’lish kiradi.`
                     },
                     other_services: {
-                        title: `"Ta'lim" turkumidagi xizmatlar / ${location}`,
-                        description: `Boshqa bo'limlar uchun mos bo'lmagan boshqa ta'lim xizmatlari`,
-                        text: `Bu erda to'plangan ta'limga oid reklamalar`
+                        title: `"Ta'lim" turkumidagi xizmatlar | ${location}`,
+                        description: `Boshqa bo'limlarga mos kelmagan, ta'lim sohasidagi turli xizmatlar`,
+                        text: `Bu erda ta'limga oid e’lonlar to'plangan`
                     }
                 }
             },
@@ -7604,113 +7596,113 @@ export const getSEOContent = (category: CategoryType, subCtgr: SubcategoryType, 
                     }
                 },
                 uz: {
-                    title: `${location}dagi biznes xizmatlari / buxgalteriya, yurisprudensiya, marketing`,
-                    description: `${location}da buxgalteriya, yurisprudensiya, marketing va reklama bo'yicha xizmatlar / biznes yoki biznes xizmatlarini topish`,
-                    text: `"Biznes xizmatlari" toifasiga ko'ra, biznesning qulay holatini saqlab qolish yoki fuqarolarga byurokratik yordam ko'rsatishga qaratilgan ishlar turlarini o'z ichiga oladi. Sizning qulayligingiz uchun bo'limlar kerakli masala bo'yicha mutaxassisni yanada qulayroq topish uchun bir nechta toifalarga bo'linadi.
-                    Ko'p takliflardan eng yaxshisini tanlang slondo.uz!
+                    title: `Biznes xizmatlari ${location}da | buxgalteriya, huquqshunoslik, marketing`,
+                    description: `Buxgalteriya, huquqshunoslik, marketing va reklama xizmatlari {location}da | ish yoki biznes xizmatlarini topish`,
+                    text: `"Biznes xizmatlari" toifasiga, biznesning qulay holatini saqlab qolish yoki fuqarolarga qog’ozbozlik ishlariga yordam ko'rsatishga qaratilgan xizmat turlari kiradi. Kerakli masala bo'yicha mutaxassisni yanada oson topishda Sizga qulay bo’lishi uchun, bo'limlar bir nechta toifalarga bo'lingan.
+                    Ko'p takliflardan eng yaxshisini Slondo.uzda tanlang!                    
                     `,
                     lawyers: {
-                        title: `Advokatlar ${location}/ turli masalalar bo'yicha advokatlik firmalari`,
-                        description: `${location}da advokatlarning xizmatlari | huquqiy maslahat va ishlarni yuritish / oila va boshqa masalalar bo'yicha advokat topish | slondo.uz`,
-                        text: `Advokat xizmatlari turli vaziyatlarda, biznesda, oilaviy ishlarda, jinoiy va fuqarolik nizolarida talab qilinishi mumkin. Katta ahamiyatga ega advokat tajribasi, bunday hollarda uning tajribasi. Tajribali mutaxassislarni izlang Slondo.uz`
+                        title: `Advokatlar ${location}da | turli masalalar bo'yicha advokatlik firmalari`,
+                        description: `Advokat xizmatlari, yuridik maslahat va biznes yuritish ${location}da | oilaviy va boshqa masalalar bo'yicha advokat topish | Slondo.uz`,
+                        text: `Advokat xizmatlariga turli vaziyatlarda, biznesda, oilaviy ishlarda, jinoiy va fuqarolik nizolarda talab bo’lishi mumkin. Bunday hollarda advokatning tajribasi va uning malakasi katta ahamiyatga ega. Tajribali mutaxassislarni Slondo.uzda izlang!`
                     },
                     marriage_agencies: {
-                        title: `Nikoh agentliklari | ${location} slondo.uz`,
-                        description: `${location}dagi nikoh agentliklari xizmatlari / kunlik, xalqaro va boshqa agentliklar slondo.uz`,
-                        text: `Ikkinchi yarmini topish oson ish emas. Bu erda xato hayot uchun oqibatlarga olib kelishi mumkin. Nikoh agentliklarini tanlang va siz uchun muhim sifat va parametrlarni ko'rsatib, hayot sherigini izlang.`
+                        title: `Nikoh agentliklari ${location}da | Slondo.uz`,
+                        description: `Nikoh agentliklari xizmatlari ${location}da | tanishuv, xalqaro va boshqa agentliklar slondo.uz`,
+                        text: `Inson o’ziga umr yuldosh topishi oson ish emas. Bu erda arzimagan xato hayotda nohush oqibatlarga olib kelishi mumkin. Nikoh agentliklarini tanlang va u yerdan o’zingiz uchun muhim sifatli va mos yoshdagi sherigingizni toping.`
                     },
                     business_consulting: {
-                        title: `${location}dagi biznes maslahatchilarining xizmatlari`,
-                        description: `Biznes maslahat sizning firmasi xatolar ko'rish uchun yordam beradi, shuningdek, ularni bartaraf etish yo'llarini topish. Mutaxassislarni izlang slondo.uz`,
-                        text: `Biznes-maslahat biznes jarayonlarini tashkil yordam beradi, sizning biznes to'liq salohiyatini yuzaga chiqarish bartaraf etish, xatolar bartaraf etish va toza havo yangi bir burilish berish! Eng yaxshi mutaxassislarni izlang slondo.uz`
+                        title: `Biznes bo’yicha maslahatchilar xizmati ${location}da`,
+                        description: `Biznes maslahati- sizning firmangiz xatolarini ko'rishga, shuningdek, ularni bartaraf etish yo'llarini topishda yordam beradi. Mutaxassislarni Slondo.uzda izlang`,
+                        text: `Biznes maslahati xizmati- ish jarayonlarini tashkil qilishda, boshlagan ishingizning to'liq salohiyatini yuzaga chiqarishda, xatolarni bartaraf etishda va yangi bir burilish yasashda yordam beradi! Slondo.uzda eng yaxshi mutaxassislarni izlang`
                     },
                     brokers: {
-                        title: `${location}dagi brokerlik kompaniyalari / tajribali brokerlar xizmatlari`,
-                        description: `${location}dagi brokerlik kompaniyalari va xususiy brokerlardan ko'plab takliflar / birjada savdo qilish uchun tajribali mutaxassisni topish sizga yordam beradi slondo.uz`,
-                        text: `Broker ko'p moliyaviy operatsiyalar davomida asosiy shaxs hisoblanadi. Tajribali mutaxassis yoki brokerlik kompaniyasini topish sizga yordam beradi slondo.uz`
+                        title: `Brokerlik kompaniyalari ${location}da | tajribali brokerlar xizmatlari`,
+                        description: `Brokerlik kompaniyalari va xususiy brokerlardan ${location}da takliflar/ birjada savdo qilish uchun tajribali mutaxassisni topishda Sizga Slondo.uz yordam beradi`,
+                        text: `Brokerlar-ko'p moliyaviy amaliyotlarni amalga oshirishda asosiy shaxslar hisoblanadi. Tajribali mutaxassis yoki brokerlik kompaniyasini topishda Sizga Slondo.uz yordam beradi`
                     },
                     accounting_finance: {
-                        title: `${location}da buxgalteriya xizmatlari / buxgalterni topish`,
-                        description: `${location}dagi buxgalteriya va boshqa moliyaviy xizmatlar bo'yicha takliflar / yordam yordamida ishonchli mutaxassis toping slondo.uz`,
-                        text: `Malakali buxgalter-muvaffaqiyatli biznesning kaliti, chunki moliya bilan ishlash juda qiyin va mas'uliyatli ishdir. Buxgalteriya hisobini to'g'ri yuritish soliq organlari tomonidan tekshiruvlar vaqtida xotirjamlikni kafolatlaydi. Buxgalteriya xizmatlari bo'yicha ixtisoslashgan kompaniyalar va xususiy mulkdorlardan ko'plab takliflar. Slondo.uz siz uchun haqiqiy moliyaviy xizmatlar virtuozini topishga yordam beradi!`
+                        title: `Buxgalteriya xizmatlari ${location}da |Hisobchi topish`,
+                        description: `Buxgalteriya va boshqa moliyaviy xizmatlar bo'yicha takliflar ${location}da | Slondo.uz yordamida ishonchli mutaxassis topish`,
+                        text: `Malakali hisobchi-muvaffaqiyatli biznesning garovi, chunki, moliya bilan ishlash juda qiyin va mas'uliyatli ishdir. Buxgalteriya hisobini to'g'ri yuritish, soliq organlari tomonidan tekshiruvlar vaqtida xotirjamlikni kafolatlaydi. Buxgalteriya xizmatlari bo'yicha ixtisoslashgan kompaniyalar va xususiy hisobchilarning ko'plab takliflarini Slondo.uz saytidan toping. Slondo.uz siz uchun haqiqiy moliyaviy xizmatlar bo’yicha mutaxassisni topishga yordam beradi!`
                     },
                     speaker: {
-                        title: `${location} shahrida e'lonlar / slondo.uz`,
-                        description: `${location} anonserlaridan takliflar | E'lonni izlash bo'yicha ko'plab takliflarning eng yaxshisini tanlang`,
-                        text: `${location} shahrida e'lon qiluvchini topish uchun sizga bepul e'lonlar xizmati yordam beradi slondo.uz`
+                        title: `Anonserlar ${location}da| Slondo.uz`,
+                        description: `Anonserlardan takliflar ${location}da / anonser qidirishda takliflar ichidan eng yaxshisini tanlang`,
+                        text: `${location}da anonser topishda Sizga Slondo.uz bepul e’lonlar xizmati yordam beradi`
                     },
                     consulting_economic: {
-                        title: `TIF bo'yicha maslahat - ${location}`,
-                        description: `${location} mutaxassislaridan tashqi iqtisodiy faoliyat sohasidagi maslahatchilar`,
-                        text: `TIF sohasida eng yaxshi maslahat mutaxassislarini toping slondo.uz`
+                        title: `TIF bo'yicha maslahat- ${location}`,
+                        description: `Mutaxassislardan ${location}daTashqi Iqtisodiy Faoliyat (TIF)sohasida maslahatlar`,
+                        text: `Slondo.uzda TIF sohasida eng yaxshi maslahatchi mutaxassislarni toping`
                     },
                     production_signage_advertising: {
-                        title: `${location}da hajmiy harflar va tashqi reklama ishlab chiqarish`,
-                        description: `${location}dagi volumetrik harflar, belgilar, vizitkalar, Flyers va boshqa tashqi reklama ishlab chiqarish bo'yicha kompaniyadan takliflar`,
-                        text: `Reklama belgilari, bannerlarning sifatli bajarilishidan butun PR kompaniyasining keyingi natijasi bog'liq. Reklama sohasida mutaxassislarni topish sizga yordam beradi slondo.uz!`
+                        title: `Bosma harflar va tashqi reklama ishlab chiqarish ${location}da`,
+                        description: `${location}da bosma harflar, tashrif qog’ozlari, flayerlar, e’lon varaqalari va boshqa tashqi reklama vositalarini ishlab chiqaruvchi kompaniyalardan takliflar`,
+                        text: `Reklama belgilari, bannerlar, e’lonlar va media-e’lonlarning sifatli bajarilishi butun boshli tashviqot kompaniyasining keyingi taqdiriga ta’sir qiladi. To’g’ri tanlangan reklama-bu yarim natija degani. Mashhur ixtirochi Genri Ford “Agar menga to’g’ri reklama qilib bera olsangiz, boltlarni bosh og’rishiga qarshi dori deb sota olaman”-degan ekan. Reklama sohasida mutaxassislarni topishda Sizga Slondo.uz yordam beradi!`
                     },
                     marketing_advertising_pr: {
-                        title: `Reklamalar va reklama agentliklarining xizmatlari - ${location}`,
-                        description: `O'zbekistonning yetakchi kompaniyalari va marketologlaridan marketing, reklama va PR-reklama xizmatlari bo'yicha ko'plab takliflar | slondo.uz`,
-                        text: `Mahsulot yoki xizmatni ilgari surish butun kompaniyaning muvaffaqiyatidagi eng muhim jihatlardan biridir. Ushbu qiyin ishda, reklama sohasida malakali sotuvchi yoki xizmat ko'rsatish mutaxassislarining ishi sizning kompaniyangizga, potentsial mijozlaringizdan tovar xabardorligi va ishonchiga bog'liq bo'ladi. Marketing va reklama sohasida eng yaxshi mutaxassislarni topish sizga yordam beradi slondo.uz!`
+                        title: `Marketolog va reklama agentliklari xizmatlari – ${location}`,
+                        description: `O'zbekistonning yetakchi kompaniyalari va marketologlaridan marketing, reklama va PR-tashviqot xizmatlari bo'yicha ko'plab takliflar | Slondo.uz`,
+                        text: `Mahsulot yoki xizmatni ilgari surish, butun Kompaniyaning muvaffaqiyatga erishishidagi eng muhim jihatlardan biridir. Ushbu qiyin ishda, reklama sohasida malakali sotuvchi yoki xizmat ko'rsatish mutaxassislarining sayi-harakatlari tufayli, Sizning kompaniyangizga nisbatan bo’lajak mijozlaringiz ishonchining ortishi va mahsulotingizning tanilishiga olib keladi. Marketing va reklama sohasida eng yaxshi mutaxassislarni topishda Sizga Slondo.uz yordam beradi!`
                     },
                     logist: {
-                        title: `${location}dagi logistika kompaniyalari - tajribali logistikani topish`,
-                        description: `${location}dagi logistika kompaniyasi, kompaniyalar | mutaxassislar, konsultatsiya / eng yaxshi logistika kompaniyasini topish sizga yordam beradi slondo.uz`,
-                        text: `Kompaniyaning samaradorligi va rentabelligi bevosita to'g'ri qurilgan logistikaga bog'liq. Irratsional xarajatlar qo'shimcha pul, vaqt olishi mumkin va jiddiy obro'siga mag'lub etdi. ${location}dagi logistika kompaniyalarini topish yoki o'z xizmatlarini Slondo-da taqdim etish mumkin.`
+                        title: `Logistika kompaniyalari ${location}da-tajribali logistlarni topish`,
+                        description: `Logistika ${location}da, kompaniyalar, mutaxassislar, maslahatchilar, tahlilchilar | eng yaxshi logistika kompaniyasini topishda Sizga Slondo.uz yordam beradi`,
+                        text: `Kompaniyaning samaradorligi va serdaromadligi bevosita to'g'ri qurilgan logistikaga bog'liq. Rejasiz qilingan xarajatlar ortiqcha pul, vaqt sarflanishiga olib kelishi mumkin va Kompaniya obro'siga jiddiy ta’sir qiladi. ${location}da logistika kompaniyalarini topishingiz yoki Slondo.uzda o'z xizmatlaringizni taklif qilishingiz mumkin.`
                     },
                     labor_protection: {
-                        title: `${location}da mehnatni muhofaza qilish bo'yicha mutaxassislar`,
-                        description: `${location}da mehnatni muhofaza qilish bo'yicha mutaxassislardan takliflar. Keng qamrovli audit va muammolarni tuzatish.`,
-                        text: `Mehnatni muhofaza qilish bo'yicha mutaxassis sizning kompaniyangizda xavfsiz va eng samarali tartibni o'rnatishga yordam beradi. Davlat standartlarining barcha me'yorlariga rioya qilish sizni tekshirish yoki shikoyat qilish hollarida himoya qiladi. Uzoq vaqt davomida barcha nuances ichiga o'zingizni puxta o'rganish va xatolar bilan to'la, Slondo bo'yicha mutaxassislar uchun qarash.`
+                        title: `Mehnat muhofazasi bo’yicha mutaxassislar ${location}da`,
+                        description: `Mehnat muhofazasi mutaxassislaridan takliflar ${location}da. Keng qamrovli audit va muammolarni hal qilish`,
+                        text: `Mehnatni muhofaza qilish bo'yicha mutaxassis sizning Kompaniyangizda xavfsiz va eng samarali tartibni o'rnatishga yordam beradi. Davlat standartlarining barcha me'yorlariga rioya qilish, Sizning faoliyatingizni tekshirish yoki shikoyat bo’lgan hollarida himoya qiladi. O’z kuchingiz bilan barcha nozik masalarni o’rganish ko’p vaqt talab qiladi va xatolarga yo’l qo’yishingizga sabab bo’ladi. Slondo.uzdan yetakchi mutaxassislarni toping`
                     },
                     appraiser: {
-                        title: `${location}da baholovchilar-ko'chmas mulkni baholash bo'yicha xizmatlar, Avto va boshqalar`,
-                        description: `${location}da tajribali baholovchini topish, avtomobil va boshqa mol-mulkning biznes, ko'chmas mulkini baholash.`,
-                        text: `Baholash kompaniyalari xizmatlari turli vaziyatlarda kerak bo'lishi mumkin: kredit uchun, biznesni kengaytirishda, garov sifatida va hokazo. Agar kerak bo'lsa, optimal narx va sifatga erishish uchun tenderlarni tashkil qiling.`
+                        title: `Baholovchilar ${location}da – avtomobil, ko'chmas mulk va boshqalarni baholash bo'yicha xizmatlar`,
+                        description: `Zo’r baholovchini ${location}da topish- ko'chmas mulk, biznes, avtomobil va boshqa mol-mulkni baholovchi mutaxassisni topish.`,
+                        text: `Baholovchi kompaniyalar xizmatlari turli vaziyatlarda kerak bo'lishi mumkin: kredit uchun, biznesni kengaytirishda, garovga qo’yish vaqtida va hokazo. Sizning holatingiz talablariga mos keladigan Kompaniyani tanlang, uning sertifikati va litsenziyasini tekshiring. Agar kerak bo'lsa, optimal narx va sifatga erishish uchun tender tashkil qiling.`
                     },
                     simultaneous_translation: {
-                        title: `${location}da sinxron tarjima bo'yicha xizmatlar`,
-                        description: `${location}da sinxron tarjima bo'yicha mutaxassis topish | rus, o'zbek, ingliz, nemis va boshqa tillar`,
-                        text: `Seminar, konferentsiya, biznes muzokaralari yoki xalqaro sammit bo'ladimi, odamlar bir-birlarini qanchalik tushunishlariga bog'liq. Ushbu tadbirlarda tarjimonlarning, ayniqsa sinxronlarning roli katta ahamiyatga ega. Slondo-ga sinxron tarjima bo'yicha mutaxassislarni izlang.`
+                        title: `Sinxron tarjima xizmatlari ${location}da`,
+                        description: `${location} | rus, o'zbek, ingliz, nemis va boshqa xorijiy tillarda sinxron tarjima bo'yicha tilmoch toping`,
+                        text: `Seminar, konferentsiya, biznes muzokaralar yoki xalqaro sammit natijalari, odamlar bir-birlarini qanchalik tushunishlariga bog'liq bo’ladi. Ushbu tadbirlarda tarjimonlarning, ayniqsa sinxron tarjimonlarning roli katta ahamiyatga ega. Slondo.uzda sinxron tarjima bo'yicha tilmochlarni izlang.`
                     },
                     text_translation: {
-                        title: `Hujjatlar va boshqa matnlarni tarjima qilish - ${location}da tarjimon xizmatlari`,
-                        description: `Tarjima byurosidan professional tarjimon yoki buyurtma xizmatlarini topish oson slondo.uz / hujjatlar va boshqa matnlarni ingliz, rus, o'zbek tillariga transkripsiya qilish`,
-                        text: `Tarjimonning ishi boshqa tilda gapiradigan yoki yozgan odamning fikrini sifatli etkazishdir. Shu bilan birga, tarjimon nafaqat tarjima qilingan tilni jiddiy bilishi, balki ona tilini mukammal bilishi kerak. Har bir tarjimon o'zining tor ixtisoslashuvida ishlayotgan bo'lsa-da, ish ta'riflari juda o'xshash bo'lishi mumkin.
-                        Haqida slondo.uz tarjimonni quyidagi tillarga osongina topishingiz mumkin: ingliz, o'zbek, rus, nemis, ispan va boshqalar
-                        `
+                        title: `Hujjatlar va boshqa matnlarni tarjima qilish-tarjimon xizmatlari ${location}da`,
+                        description: `Mutaxassis tarjimon yoki tilmochlar uyushmasi xizmatlarini Slondo.uz saytida topish oson | hujjatlar va boshqa matnlarni ingliz, rus, o'zbek tillariga tarjima qilish`,
+                        text: `Tarjimonning ishi boshqa tilda gapiradigan yoki yozadigan odamning fikrini boshqa tilga sifatli qilib o’girishdir. Shu bilan birga, tarjimon nafaqat tarjima qilinadigan tilni puxta bilishi, balki o’z ona tilini ham mukammal bilishi kerak. Har bir tarjimon o'zining tor ixtisoslashgan yo’nalishida faoliyat yuritayotgan bo'lsa-da, boshqa sohalardan ham xabardor bo’lishi zarar qilmaydi.
+                        Slondo.uzda quyidagi tillar bo’yicha tarjimonlarni osongina topishingiz mumkin: ingliz, o'zbek, rus, nemis, ispan va boshqalar
+                       `
                     },
                     printing_printing_design: {
-                        title: `${location}da poligrafiya-dizayn, vizitka, Flyer ishlab chiqarish`,
-                        description: `O'zbekistonda bosmaxona va bosmaxonalardan olingan barcha xizmatlar: varaqalar, kataloglar, flyerlar, broshyuralar, bukletlar, jurnallar va boshqa reklama mahsulotlarini tayyorlash.`,
-                        text: `Reklama kompaniyasini ishga tushirishda bosmaxona (matbaa) ni tanlashda katta e'tibor berilishi kerak. Reklama mahsulotlarining sifatli ishlab chiqarilishidan kompaniyaning muvaffaqiyati va kelajakda sizning kompaniyangizning obrazi bog'liqdir.
-                        Bosib chiqarish xizmatlarining keng doirasi slondo.uz!
+                        title: `Poligrafiya ${location}da - dizayn, tashrif qog’ozlari, flayerlar ishlab chiqarish`,
+                        description: `O'zbekistonda bosmaxona va poligrafiya oid barcha xizmatlar: varaqalar, kataloglar, flayerlar, broshyuralar, bukletlar, jurnallar va boshqa reklama mahsulotlarini tayyorlash.`,
+                        text: `Reklama targ’ibotini boshlashdan oldin, bosmaxona, poligrafiya xizmatini tanlashga katta e'tibor berish kerak. Reklama mahsulotlarining sifatli ishlab chiqarilishi kelajakda Kompaniyaning muvaffaqiyati va uning obro’yini belgilaydi.
+                        Bosmaxona xizmatlarining keng doirasi Slondo.uzda!
                         `
                     },
                     realtor: {
-                        title: `Rieltorlik-ko'chmas mulk agentlari ${location}`,
-                        description: `Reyting tizimi va baholash tizimidan foydalanib, ishonchli ko'chmas mulk sotuvchisi yoki ko'chmas mulkni sotish/ijaraga berish agentini topish oson slondo.uz.`,
-                        text: `Ko'chmas mulk xizmatlari har doim katta va o'rta shaharlarda mashhur bo'lgan. Lekin shunga qaramay, ishonchli ko'chmas mulk agentligi topish oson ish emas. Slondo.uz bu sizga yordam beradi – reytinglarni ko'rib chiqing, boshqa foydalanuvchilarning fikr-mulohazalarini o'qing va eng yaxshi takliflarni tanlang!`
+                        title: `Ko'chmas mulk agentlari ${location}da`,
+                        description: `Reyting tizimi va baholash tizimidan foydalanib, ishonchli rieltor yoki sotish / ijaraga berish agentini Slondo.uzda topish oson.`,
+                        text: `Rieltorlik xizmatlari har doim katta va o'rta shaharlarda mashhur bo'lgan. Lekin shunga qaramay, ishonchli ko'chmas mulk agentligini topish oson ish emas. Slondo.uz bu ishda sizga yordam beradi – reytinglarni ko'rib chiqing, boshqa foydalanuvchilarning fikr-mulohazalarini o'qing va eng yaxshi takliflarni tanlang!`
                     },
                     HR: {
-                        title: `HR ${location}da - inson resurslari bilan ishlash bo'yicha mutaxassis toping`,
-                        description: `${location}dagi hr mutaxassislarining xizmatlari, xodimlarni tanlash, xodimlarni rag'batlantirish, mehnat bozorini tahlil qilish`,
-                        text: `HR bo'limi har qanday kompaniya tarkibida muhim o'rin tutadi. Ushbu soha mutaxassisi yollangan xodimlarning malakasi uchun mas'uldir, ularga tegishli motivatsiya darajasini saqlab qoladi, kompaniyaning muvaffaqiyatiga qiziqishini oshiradi. Bundan tashqari, hr bo'limi kadrlar hujjatlarini taqdim etadi, davlat tomonidan belgilangan me'yorlarga rioya qiladi. Slondo yordamida hr mutaxassislarining xizmatlaridan foydalaning`
+                        title: `IR ${location}da – inson resurslari bo'yicha mutaxassisni toping`,
+                        description: `IR mutaxassislari xizmatlari ${location}da- ishga qabul qilish, xodimlarning ruhini ko’tarish, mehnat bozorini tahlil qilish`,
+                        text: `IR bo'limi har qanday kompaniya tarkibida muhim o'rin tutadi. Ushbu soha mutaxassisi yollangan xodimlarning malakasi uchun mas'uldir, ularning ishga bo’lgan layoqat darajasini saqlab qoladi, kompaniyaning muvaffaqiyatiga ishonchni oshiradi. Bundan tashqari, IR bo'limi -hodimlarning hujjatlarini yuritadi, davlat tomonidan belgilangan me'yorlarga rioya qiladi. Slondo yordamida IR mutaxassislarining xizmatlaridan foydalaning`
                     },
                     certification: {
-                        title: `${location}da sertifikatlashtirish | slondo.uz`,
-                        description: `${location}da mahsulotlarni sertifikatlashtirish, muvofiqlik sertifikatini olish va boshqa takliflar`,
-                        text: `Mamlakat hududida erkin tarqatish uchun mahsulot bir qator sertifikatlarga ega bo'lishi kerak. Ularni mustaqil ravishda olish juda ko'p vaqt, ortiqcha xarajatlarni oladi va ijobiy natija bermaydi. Slondo-da sertifikatlashtirish markazlari va mutaxassislarini izlang`
+                        title: `Sertifikatlash ${location}da| Slondo.uz`,
+                        description: `Mahsulotlarni sertifikatlash taklifi ${location}da, muvofiqlik sertifikatini olish va boshqa takliflar`,
+                        text: `Mamlakat hududida erkin tarqatilishi uchun mahsulot bir qator sertifikatlarga ega bo'lishi kerak. Ularni mustaqil ravishda olish juda ko'p vaqt, ortiqcha xarajatlarni oladi va hamma vaqt ham ijobiy natija bermaydi. Slondo-da sertifikatlashtirish markazlari va mutaxassislarini izlang`
                     },
                     legal_services: {
-                        title: `Yurist xizmatlari-yurisprudensiya bo'yicha maslahat va boshqa masalalar / ${location}`,
-                        description: `${location}dagi biznes va tinch aholini yuridik jihatdan qo'llab-quvvatlash. Mutaxassislar va kompaniyalardan takliflar | slondo.uz`,
-                        text: `Qonunni bilmaslik javobgarlikdan ozod qilmaydi va qonunlarning barcha nozikliklarini bilish mutaxassis uchun juda muammoli emas. Professional huquqshunoslar va yuridik kompaniyalarga xavf tug'dirmang va ishonmang. Huquqiy maslahat, to'liq qo'llab – quvvatlash, audit-siz uchun mos bo'lgan hamkorlik turini tanlang va Slondo bo'yicha huquqshunoslarni izlang.`
+                        title: `Huquqshunos xizmatlari – huquqshunoslik bo’yicha maslahat va boshqa masalalar / ${location}`,
+                        description: `Biznesni va jismoniy shaxslarin huquqiy qo'llab-quvvatlash ${location}da. Mutaxassislar va kompaniyalardan takliflar | Slondo.uz`,
+                        text: `Qonunni bilmaslik, javobgarlikdan ozod qilmaydi va qonunlarning barcha nozik tomonlarini bilish mutaxassis bo’lmagan inson uchun juda muammoli. Tavakkal qilmang va yetuk huquqshunoslar va huquqiy kompaniyalarga ishoning. Huquqiy maslahatlar, huquqshunos madadi, audit-siz uchun mos bo'lgan hamkorlik turini tanlang va Slondo.uzdan huquqshunoslarni izlang.`
                     },
                     other_services: {
-                        title: `Boshqa biznes xizmatlar / ${location}`,
-                        description: `Boshqa biznes va biznes xizmatlari`,
+                        title: `Boshqa biznes xizmatlari | ${location}`,
+                        description: `Boshqa ish va biznes xizmatlari`,
                         text: `Bu erda boshqa bo'limlarga kiritilmagan biznes xizmatlari to'plangan`
                     }
                 }
@@ -7772,57 +7764,57 @@ export const getSEOContent = (category: CategoryType, subCtgr: SubcategoryType, 
                     }
                 },
                 uz: {
-                    title: `${location}da bayramlarni tashkil etish | korporativlar, tug'ilgan kunlar, yangi yil, to'y`,
-                    description: `Har qanday tadbir uchun yorqin bayramlarni yaratadigan ko'plab kompaniyalar! ${location}da eng yaxshi yetakchi, qulay xonalarni ijaraga olish, ovqat tayyorlash va bayramlarni tashkil etish bo'yicha boshqa xizmatlar`,
-                    text: `Zich ish oqimida yaxshi dam olishni tashkil qilish oson emas. Tadbirni yaxshi o'tkazish uchun sizga kerak: xonani ijaraga olish va bezash, rahbarni san'atkorlar bilan taklif qilish, mazali taomlarni tayyorlash va bayramga bog'liq boshqa narsalarni qilish. Slondo.uz dam olish tashkilotlari uchun ishonchli kompaniya topishga yordam beradi, shuningdek, boshqa bayram xizmatlarini alohida-alohida buyurtma qiling!`,
+                    title: ``,
+                    description: `Har qanday tadbirlar uchun yorqin bayramlarni tashkillashtiradigan ko'plab kompaniyalar! Eng zo’r suhandon, hashamatli binolarni ijaraga olish, taomlarni pishirish va boshqa ziyofatlarni ${location}da tashkillashtirish`,
+                    text: `Zich ish kuni mobaynida, sifatli tadbirni tashkil qilish oson emas. Tadbirni yaxshi o'tkazish uchun sizga kerak: marosim uchun binoni ijaraga olish va bezash, suhandon va san'atkorlarni taklif qilish, mazali taomlarni tayyorlash va shu bayramga bog'liq boshqa harakatlarni amalga oshirish. Slondo.uz Sizgabayram tadbirlarini tashkillashtirishga ixtisoslashgan ishonchli kompaniya topishda, shuningdek, boshqa marosimlarga alohida-alohida buyurtma berishda yordam beradi!`,
                     rental_equipment_attractions: {
-                        title: `Dam olish uchun attraksion va uskunalar ijarasi - ${location}`,
-                        description: `Dam olish uchun turli xil uskunalar ijarasi: inflatable trambolin, bolalar slaydlari va boshqa bayram uskunalarini ijaraga olish`,
-                        text: `Yaxshi dam olish uchun, ayniqsa, bolalar bayrami bilan bog'liq bo'lsa, muayyan uskunalar kerak bo'lishi mumkin. Misol uchun, shinam trampolin, shubhasiz, bolaga tush bayrami haqida ko'plab xotiralar beradi. Chiqish joylarini va boshqa bayram uskunalarini ijaraga olishni topish oson slondo.uz!`
+                        title: `O'yin - kulgi va dam olish uchun uskunalarni ijaraga olish - ${location}`,
+                        description: `Dam olish uchun turli xil uskunalar ijarasi: bolalar batuti, arg’imchoqlar va boshqa kungil ochar uskunalarini ijaraga olish`,
+                        text: `Yaxshi dam olish uchun, ayniqsa, bolalar bayrami bilan bog'liq tadbirlar bo'lsa, muayyan, masqaraboz, multfilm qahramonlarining kiyimlari, o’yinchoq va uskunalar kerak bo'lishi mumkin. Misol uchun, sakrash uchun rezinali batut, shubhasiz, bolaga katta quvonch bag’ishlaydi. Kelib xizmat ko’rsatadigan qiziqchi, dorboz va boshqa bayram uskunalarini ijaraga olishni Slondo.uzda topish oson!`
                     },
                     site_rental: {
-                        title: `Bayramlar va boshqa tadbirlar uchun ijara maydoni - ${location}`,
-                        description: `Dam olish uchun ochiq va yopiq joylarni ijaraga berish bo'yicha ko'plab takliflar: bolalar, sport, nostandart va boshqalar`,
-                        text: `Saytni ijaraga olish har qanday tadbir uchun asosdir. Tegishli xonani topish va olib tashlash eng qulay hisoblanadi slondo.uz!`
+                        title: `Dam olish va boshqa tadbirlar uchun maydonlarni ijaraga olish - ${location}`,
+                        description: `Tadbirlar uchun ochiq va yopiq joylar: sahnalar, bolalar maydonchasi, sportzal, muz maydoni, futbol maydoni va boshqalarni ijaraga berish bo'yicha ko'plab takliflar`,
+                        text: `Har qanday tadbir uchun mos keladigan maydonni ijaraga olish-tadbirni to’g’ri o’tishiga asosdir. Buning uchun ko’plab turdagi maydon va inshootlar bor, masalan: xokkey, futbol, basketbol, golf maydonlari, sahnalar, shishiriladigan attraktsionlar, chirmashadigan va sakraydigan tepaliklar va boshqalar. Tegishli maydonni topish va ijaraga olishda Slondo.uz Sizga yordam beradi!`
                     },
                     presenters_musicians_artists: {
-                        title: `${location}dagi bayramlar uchun rassomlarning buyurtmasi`,
-                        description: `Dam olish va boshqa tadbirlar uchun buyurtma berish uchun etakchi, musiqachilar va san'atkorlarning chiqishlari bo'yicha xizmatlar. Eng yaxshi shartnoma topish slondo.uz`,
-                        text: `Ustida slondo.uz rassom, etakchi, musiqachi yoki boshqa ko'ngilochar soha mutaxassislari tomonidan tez, oson va vositachilarsiz ishlashga buyurtma berishingiz mumkin! Narxlarni taqqoslang va reyting va sharhlar asosida rassomlarni tanlang`
+                        title: `Dam olish tadbirlari uchun san'atkorlarga ${location}da buyurtma berish`,
+                        description: `To’y-hasham, dam olish va boshqa tadbirlarga buyurtma berish uchun o’rtakash, musiqachilar va san'atkorlarning xizmati. Eng yaxshi taklifni Slondo.uzda izlang`,
+                        text: `Slondo.uzda o’rtakash, askiyachilar, qiziqchilar, musiqachilar yoki boshqa san’atkorlar xizmatiga tez, oson va vositachilarsiz buyurtma berishingiz mumkin! Narxlarni taqqoslang, reyting va sharhlar asosida san’atkorlarni tanlang`
                     },
                     djs: {
-                        title: `${location}dagi Djlar / Dj-larning xizmatlariga buyurtma berish`,
-                        description: `${location}dagi Dj xizmatlari / dam olish uchun uskunalar bilan djga buyurtma berish: korporativ partiya, tug'ilgan kun | yangi yil / Dj slondo.uz`,
-                        text: `Dj holda, korporativ, tug'ilgan kun yoki boshqa bayram bo'lsin, hech qanday musiqa partiyasini tasavvur qilish mumkin emas. Dj xizmatlaridan musiqachi kechqurun asbob-uskunalar bilan buyurtma berish orqali foydalanish mumkin, bu esa yanada foydali bo'ladi, yoki faqat Dj. Ko'p takliflarning eng yaxshisini tanlang, sizga yordam beradi slondo.uz`
+                        title: `DJ lar xizmati ${location}da | DJ lar xizmatiga buyurtma berish`,
+                        description: `DJ xizmatlari ${location}da | bayram tadbiri, tug'ilgan kun, yangi yil bazmiga barcha uskunalari bilan DJ ga buyurtma beriah | DJ-Slondo.uzda`,
+                        text: `DJ xizmatisiz birorta korporativ, tug'ilgan kun yoki boshqa bayram bazmlarini tasavvur qilish mumkin emas. DJ xizmatidan musiqachini kechqurun o’z asbob-uskunalar bilan yoki faqat Dj ning o’zini taklif qilgan holda foydalanish mumkin. Ko'plab takliflarning eng yaxshisini tanlang, Slondo.uz Sizga yordam beradi`
                     },
                     organization_events: {
                         title: `Tadbirlarni tashkil etish - ${location}`,
-                        description: `Tadbirlarni tashkil qilish uchun voqealar agentliklari va xususiy mulkdorlarning katta tanlovi slondo.uz`,
-                        text: `Tadbirni tashkil qilishda bir qator ishlarni bajarish kerak. Kimdir buni o'zi qilish uchun etarli vaqtga ega, ammo ko'pchilik professional tashkilotchilarga murojaat qiladi. Bayram muhitini yaratish bo'yicha ishonchli mutaxassisni tanlash eng qulay usuldir slondo.uz!`
+                        description: `Slondo.uzda tadbirlarni tashkil qilish bo’yicha Event-agentliklar va jismoniy shaxslarning keng tanlovi`,
+                        text: `Har qanday tadbirni tashkil qilishda bir qator ishlarni bajarish kerak bo’ladi. Kimdir buni o'z kuchi bilan amalga oshirish uchun yetarli vaqtga ega, ammo ko'pchilik professional tashkilotchilarga murojaat qiladi. Bayram muhitini yaratish bo'yicha ishonchli mutaxassisni tanlashning eng qulay usuli- Slondo.uz!`
                     },
                     food_preparation_catering: {
-                        title: `Ovqatlanish va boshqa ovqat pishirish xizmatlari`,
-                        description: `${location}da ovqat tayyorlash, tayyor ovqat tayyorlash yoki ovqatlanish xizmatlaridan foydalanish eng qulay usuldir slondo.uz. reytinglarni ko'rib chiqing va baholash bo'yicha kompaniya haqida bilib oling`,
-                        text: `Sizning oshxonangizsiz xonada dam olish maskani bilan bayramni tashkil qilish uchun sizga catering xizmati yordam beradi. Ushbu xizmat ovqatlanish nuqtalaridan uzoq joylarda restoran menyusini taqdim etishdir. Ularning xizmatlari, ayniqsa, uyda ofisda yoki ziyofatda bayram yoki biznes tushliklarini tashkil qilish zarur bo'lganda, ayniqsa ahamiyatlidir.`
+                        title: `Ovqatlantirish (keytering) va boshqa xizmatlar ${location}da`,
+                        description: `Pishirishga, tayyor ovqatga buyurtma berish yoki keytering xizmatlaridan ${location}da foydalanish uchun Slondo.uz eng qulay hisoblanadi. Sharhlar va reytinglarni ko'rib chiqing va baholash tizimiga qarab, Kompaniya haqida ma’lumot oling`,
+                        text: `O’z oshxonangizga ega bo’lmagan maskaningizda, turli taom va shirinliklarga to’la to’kin dasturxon tuzab, bazm tashkil qilishda Sizga Keytering xizmati yordam beradi. Ushbu xizmat-ovqatlanish majmualaridan uzoq joylarda restoran sharoitini yaratishdir. Ularning xizmati, ayniqsa, ofisda bayram ziyofati yoki biznes tushlikni, dala-hovlida esa bazm tashkil qilish zarur bo'lganda, ayniqsa ahamiyatlidir.`
                     },
                     costume_rental: {
-                        title: `Kostyum ijarasi - ${location}`,
-                        description: `Biznes, bolalar, bayram va boshqa kostyumlarni ijaraga olish yoki ijaraga berish bilan shug'ullanadigan kompaniyalardan takliflar. Reytinglarni Solishtiring va eng yaxshi reklamalarni tanlang!`,
-                        text: `Kostyumlar ijarasi biznes uchrashuvida, ommaviy nutqda, bolalar matinida yoki boshqa tadbirda foydali bo'lishi mumkin. Kerakli kostyumni osongina topishingiz mumkin slondo.uz!`
+                        title: `Ijaraga kiyim – ${location}da`,
+                        description: `Kechki, bolalar, bayram, tantana va boshqa marosim kiyimlarini ijaraga olish yoki ijaraga berish bilan shug'ullanadigan kompaniyalardan takliflar. Reytinglarni solishtiring va eng yaxshi e’lonlarni tanlang!`,
+                        text: `Kostyumlar ijarasi- biznes uchrashuvlarda, omma oldida nutq so’zlaganda, bolalar yoki boshqa tadbirlarda foydali bo'lishi mumkin. Slondo.uzda kerakli kostyumni osongina topishingiz mumkin!`
                     },
                     promoters_models: {
-                        title: `Promouterlar va modellar – ${location}`,
-                        description: `Flyers va varaqalarni tarqatish bo'yicha xizmatlar, shubhasizdir, shuningdek, ${location}dagi promouterlar va modellardan boshqa PR-takliflar`,
-                        text: `Promouter ishi mahsulot yoki xizmatni reklama qilishdan iborat. Ular varaqalarni tarqatishlari, tatib ko'rishlari yoki mijozlarni jalb qilishlari mumkin. Bunday ish o'rinlari ish tajribasi va talabalar holda odamlar uchun mukammal hisoblanadi. Modelning ishi asosan reklama yoki kiyim-kechaklarni namoyish qilishdir. Bundan tashqari, model fotosessiyalarda ishtirok etishi yoki boshqa mahsulotni reklama qilishi mumkin.`
+                        title: `Promuoterlar va modellar – ${location}`,
+                        description: `Flayer va varaqalarni tarqatish, tatib ko'rishni tashkil qilish, shuningdek, ${location}da promuoterlar va modellardan boshqa PR-takliflar`,
+                        text: `Promouterning vazifasi- mahsulot yoki xizmatni targ’bot qilishdan iborat. Ular varaqalarni tarqatishlari, mijozlarga yangi mahsulotni tatib ko'rishni taklif qilishlari yoki ularni jalb qilishlari mumkin. Bunday ishlar ish tajribasi yo’q insonlar va talabalar uchunqulay hisoblanadi. Modellarning ishi asosan reklama yoki kiyim-kechaklarni namoyish qilishdir. Bundan tashqari, modellar fotosessiyalarda ishtirok etishi yoki boshqa mahsulotni reklama qilishlari mumkin.`
                     },
                     flowers_decor: {
-                        title: `${location}da gullarni yetkazib berish / pion, gul va boshqa kvilinglar buyurtma qilish`,
-                        description: `${location}dagi eng yaxshi kompaniyalardan gullarni yetkazib berish va bayram dekorlarini bezash bo'yicha xizmatlar | pion, lolalar, atirgullar kvilingini yetkazib berish tartibi`,
-                        text: `Uyga gullarni yetkazib berish-siz sevgan odamning xotirasida abadiy qoladi, shuningdek, kvartira, uy yoki ofisning chiroyli, bayramona bezaklari. Ushbu xizmatlar bo'yicha ishonchli firmalardan eng yaxshi takliflarni topish oson slondo.uz!`
+                        title: `Gul yetkazib berish ${location}da | Pion, atirgul va boshqa gullarga buyurtma berish`,
+                        description: `Eng yaxshi kompaniyalardan gul yetkazib berish va bayram bezagini yasash uchun ${location}da xizmatlar / pion, lola, atirgul, guldasta yetkazib berishga buyurtma`,
+                        text: `Kvartira, uy yoki ofisni chiroyli, bayramona bezagan kabi, sevgan odamingizning uyiga Guldasta yetkazib berish ham abadiy xotirasida qoladi. Ushbu xizmatlar bo'yicha ishonchli firmalardan eng yaxshi takliflarni Slondo.uzda topish juda oson!`
                     },
                     other_services: {
-                        title: `${location}da bayramlarni tashkil etish bo'yicha boshqa xizmatlar`,
-                        description: `Bayramlarni tashkil qilish uchun alohida toifalarga kiritilmagan xizmatlarni toping-bu erda`,
+                        title: `${location}da bayramlarni tashkil qilish bo'yicha boshqa xizmatlar`,
+                        description: `Bu yerda bayramlarni tashkil qilish uchun alohida toifalarga kiritilmagan xizmatlarni toping`,
                         text: `Bu erda alohida toifalarga mos bo'lmagan tadbirlarni tashkil etish bo'yicha barcha xizmatlar to'plangan`
                     }
                 }
@@ -7896,79 +7888,77 @@ export const getSEOContent = (category: CategoryType, subCtgr: SubcategoryType, 
                     }
                 },
                 uz: {
-                    title: `${location}dagi fotostudiya-foto va video suratga olish`,
-                    description: `${location}da professional fotograflar, kamerachilar, shuningdek xususiy fotostudiyalardan fotolavhalar buyurtma qilish uchun eng oson yo'li slondo.uz`,
-                    text: `Fotografning asosiy vazifasi-umuman istalgan hissiyot yoki atmosferani mukammal yetkazadigan yuqori sifatli rasmni yaratishdir. Ih xizmatlari reklama kompaniyalari, bayram tashkilotlari va boshqa ko'plab kompaniyalar tomonidan faol qo'llaniladi. Oddiy matematika o'qituvchisi va fotostudiya xizmatlari chiroyli oila yoki bitta suratga olish uchun kerak bo'lishi mumkin, carinf.com bu to'y va hayotda boshqa ko'plab muhim voqealar qayd uchun javobgar emas.
-                    Tematik fotosessiyalar va video tortishish o'tkazish bir professional topish uchun eng oson yo'li slondo da bo'ladi.uz!
+                    title: `Fotostudiya {location} da - foto va video tasvirga olish`,
+                    description: `Tajribali fotosuratchilar, videotasvirchilar, shuningdek {location}da xususiy fotostudiyalardan tasvirga olishga buyurtma qilish uchun Slondo.uz eng qulay!`,
+                    text: `Foto suratchining asosiy vazifasi-umuman istalgan hissiyotni yoki muhitni mukammal tarzda yetkazib bera oladigan yuqori sifatli fototasvirni yaratishdir. Ularning xizmatlaridan ko’plab reklama kompaniyalari, bayram tashkilotchilari, model agentliklari va boshqa ko'plab kompaniyalar foydalanishadi. Oddiy insonlarga fotostudiya xizmatlari chiroyli oila a’zolari qurshovida yoki yakka holda suratga tushish, to’y-ma’raka yoki hayotdagi ko’plab qiziqarli lahzalarni qog’ozga muhrlash uchun kerak bo'lishi mumkin.                                                                                                                                                                     Mavzuga oid fotosessiyalar va video tasvirlar olish uchun eng malakali tasvirchini topishning eng oson yo'li Slondo.uzda!
                     `,
                     video_editor: {
-                        title: `${location}da buyurtma video tahrirlash / video tahrirlash xizmatlari`,
-                        description: `${location}da professional video muharrirlarning xizmatlari / buyurtma video tahrirlash`,
-                        text: `Reklama, teleko'rsatuv, blogging va boshqa videoroliklarni yaratishda videoroliklarni tahrirlash xizmatlaridan faol foydalanilmoqda. Ushbu xizmat yopishtirish, rang tuzatish, subtitle overlay, va boshqa video ishlash bir urinish ish hisoblanadi. Videoning o'rnatilishi qanchalik professional bo'lsa, u oxirgi versiyaga yaxshi ko'rinadi.
-                        Video tahrirlash xizmatlari uchun takliflar, bir poda atrofida eng yaxshi topish, sizga yordam beradi slondo.uz
+                        title: `Videoni taxrirlashni ${location}da buyurtma berish | video montaj xizmatlari`,
+                        description: `Professional videoni taxrirlash xizmatlari ${location}da | videorolik yaratishga buyurtma berish`,
+                        text: `Reklama, teleko'rsatuv, blogging va boshqa videoroliklarni yaratishda videoni tahrirlash xizmatlaridan faol foydalaniladi. Ushbu xizmat tasvirni kesish, ulash, ranglarni uyg’unlashtirish, subtitr va boshqa mashaqqatli ishlarni o’z ichiga oladi. Videoni taxrirlash ishlari qanchalik mahorat bilan bajarilgan bo'lsa, yakuniy natija ham shunchalik sifatli bo’ladi.
+                        Videoni tahrirlash bo’yicha xizmatlardan takliflarning eng yaxshisini topishda Sizga Slondo.uz yordam beradi                        
                         `
                     },
                     video_operators: {
-                        title: `Videotasvir ${location} / videoregistrator xizmatlari`,
-                        description: `${location}da video suratga olish xizmatlari / professional video suratga olish buyurtma berish / eng yaxshi operatorni topish, eng oson yo'li slondo.uz`,
-                        text: `Professional video operator hayotdagi eng muhim lahzalarni: to'y, tug'ilgan kun, bitiruv va boshqa voqealarni chiroyli tarzda qo'lga kirita oladi. Ayniqsa, diqqat bilan siz to'y videografiya uchun operatorlari tanlashingiz kerak. Xususiy buyurtmalardan tashqari, video operatorning xizmatlariga reklama, kino, eskizlar va boshqa televizion dasturlarni olish kiradi. Sizga yordam beradi takliflar turli atrofida eng yaxshi tanlang slondo.uz`
+                        title: `Videoni tasvirga olish ${location}da| video tasvirchi xizmatlari`,
+                        description: `Videoga tushirish xizmatlari ${location}da | buyurtma asosida yuqori sifatli videotasvirga olish|eng mahoratli tasvirchini Slondo.uzda topish`,
+                        text: `Mahoratli video tasvirchi hayotdagi eng muhim lahzalarni: to'y, tug'ilgan kun, bitiruv kechasi va boshqa voqealarni chiroyli tarzda tasvirga tushira oladi. Ayniqsa, to'y tantanasini videoga tushirish uchun, juda mahoratli va mas’uliyatli tasvirchini tanlash kerak bo'ladi. Xususiy buyurtmalardan tashqari, video tasvirchining vazifasiga: reklama, kino, musiqiy rolik, eskizlar va boshqa televizion dasturlarni tasvirga olish kiradi. Ko’plab takliflar ichida eng yaxshisini Slondo.uzda toping`
                     },
                     photographer: {
-                        title: `${location}da fotograf xizmatlari / fotojamlanma buyurtma`,
-                        description: `Professional fotojamlanma buyurtma: kichkintoylar uchun, oila, mavzu, portret, sevgi qissasi | ${location}dagi fotostudiyalar | slondo.uz`,
-                        text: `Surat yordamida siz abadiy quvonchli lahzani, qiziqarli tasvirni yoki boshqa ajoyib voqeani qo'lga kiritishingiz mumkin. Fotolavhalar quyidagi turlarga bo'linadi:
+                        title: `Fotosuratchlar xizmatlari ${location}da / fotojamlanmaga buyurtma`,
+                        description: `Professional fotojamlanmaga buyurtma berish: chaqaloqlar uchun, oilaviy, mavzu bo’yicha, portret, sevgi lahzalari | fotostudiyalar ${location}da| Slondo.uz`,
+                        text: `Fotosurat yordamida Siz quvonchli lahzalarni, qiziqarli voqealar tasvirni yoki boshqa ajoyib daqiqalarni abadiylashtirishingiz mumkin. Fotosessiyalar quyidagi turlarga bo'linadi:
                         - Oila (chaqaloqlar, homilador ayollar uchun)
                         - Yakka (portret)
                         - Ekspress
-                        - Boshqa
-                        Bundan tashqari, Fotojamlanmaning joylashishiga ko'p narsa bog'liq. Standard individual fotosessiyalar, eng tez-tez tabiat, shahar, park, tog'lar va boshqa go'zal fikr fonida amalga oshiriladi.
-                        Sizga yordam beradi takliflar turli atrofida eng yaxshi topish slondo.uz
+                        - Jamoaviy
+                        - Boshqalar.
+                        Bundan tashqari, fotosuratlar ko'pincha qaysi muhitda tushirilganiga bog'liq. An’anaviy fotosessiyalar ko'pincha tabiat qo’ynida, shahar, xiyobon, tog'lar va boshqa go'zal manzaralar qo’ynida amalga oshiriladi. Slondo.uz Sizga turli takliflar ichidan eng yaxshisini topishda yordam beradi                        
                         `
                     },
                     print_albums_photo: {
-                        title: `${location}da maxsus Fotoalbomlar yasash | slondo.uz`,
-                        description: `${location}da Custom Photo albums | bitiruv, oila, to'y, va boshqa esdalik Photo albums va maktab vinyet ishlab chiqarish`,
-                        text: `Fotoalbom uzoq kelajakda yana ulardan bahramand bo'lish uchun yillar davomida xotiralarni olib yurish imkoniyatiga ega. Bu erda oilaviy foto albom yoki maktab vinyetlarini yuqori sifatli ishlab chiqarish muhim rol o'ynaydi. Ushbu xizmatning yaxshi ishlashi bilan Fotoalbom uzoq vaqt davomida o'zining asl qiyofasini saqlab qoladi va sizni baxtli o'tmish xotiralari bilan quvontiradi.
-                        Foto albom qilish uchun takliflar, bir poda atrofida eng yaxshi topish, sizga yordam beradi slondo.uz
+                        title: `Maxsus fotoalbomlar yasash ${location}da | slondo.uz`,
+                        description: `Buyurtma bo’yicha ${location}da fotoalbomlar|maktab vinetkalari, bitiruvchilar, oilaviy, to'y va boshqa estalik foto albomlarini yasash`,
+                        text: `Foto albomlar- uzoq yillar davomida xotiralarni olib o’tish va kelajakda bu xotiralardan bahramand qilish imkoniyatiga ega. Bu erda oilaviy foto albomni yoki maktab vinetkalarini yuqori sifat bilan ishlab chiqarish muhim rol o'ynaydi. Yuqori did va mahorat bilan yasalgan fotoalbom uzoq yillar davomida o'zining asl qiyofasini saqlab qoladi va sizni baxtli o'tmish xotiralari bilan quvontiradi.
+                        Foto albom ishlab chiqarish bo’yicha ko’plab takliflar ichida eng yaxshisini topishda Sizga Slondo.uz yordam beradi                        
                         `
                     },
                     advertising_photography: {
-                        title: `${location} da reklama suratga buyurtma | slondo.uz`,
-                        description: `Eng yaxshi reklama fotosuratchilaridan ko'plab takliflar slondo.uz / buyurtma yoki ${location}  reklama suratga olish narxini topish`,
-                        text: `Sifatli fotosuratlar potentsial mijozlar tomonidan ko'proq ishonchga olib keladi. Professional fotograflar xizmati bilan, osongina tovar va reklama mahsulot xabardorligini oshirish mumkin bo'ladi.
-                        Ko'p takliflarning eng yaxshisini tanlang, sizga yordam beradi slondo.uz`
+                        title: `Reklama fotojamlanmasiga ${location}da buyurtma qilish | Slondo.uz`,
+                        description: `Eng yaxshi reklama fotograflaridan takliflar Slondo.uzda | reklama fotosetlariga buyurtma bering yoki narxini toping`,
+                        text: `Yuqori sifatli fotosuratlar potentsial mijozlarning ishonchini oshiradi. Professional fotograflar yordamida, mahsulotingizni osongina tanitishingiz yoki tez sotilishiga erishishingiz mumkin.
+                        Turli takliflar ichidan eng yaxshisini tanlashda Sizga Slondo.uz yordam beradi `
                     },
                     advertising_video: {
-                        title: `Reklama video buyurtma ${location} / reklama videolar`,
-                        description: `${location}da reklama videolari: promo video buyurtma qilish / buyurtma video qilish | slondo.uz`,
-                        text: `Reklama videosi-bu ma'lum bir yuk yoki xizmatning eng yaxshi sifatlari qisqa vaqt ichida tasvirlangan videodir. Yaxshi promo video eslash oson bo'lishi kerak, original va qiziqarli taqdimot bilan. Tovar xabardorlik va kompaniya birinchi taassurot reklama yuk targ'ib qaratilgan bo'lsa, reklama bu turiga bog'liq. Sizga yordam beradi takliflar turli atrofida eng yaxshi tanlang slondo.uz`
+                        title: `Reklamaga oid videorolikga ${location}da buyurtma berish| reklama videosi`,
+                        description: `Reklamali videolar ${location}da: promo rolikka buyurtma berish / buyurtma asosida video rolik yasash | Slondo.uz`,
+                        text: `Reklama videosi-bu qisqa vaqt ichida ma'lum bir turdagi mahsulot yoki xizmatlarning eng yaxshi sifatlarini targ’ibot qiluvchi qisqa videotasvirdir. Yaxshi promo rolik o’ziga xos bo’lishi, qiziqarli usulda taqdim etilishi va eslab qolishi oson bo'lishi kerak. Agar reklama mahsulotni targ’ibot qilishga qaratilgan bo’lsa, reklama qilishning bu turidan Kompaniyaning obro’yi va mahsulotning ommalashishi tez va osonlashadi. Turli takliflar ichidan eng yaxshisini tanlashda Sizga Slondo.uz yordam beradi`
                     },
                     retouching_restoring_photos: {
-                        title: `Eski rasmlar qarori ${location} / retouching va foto ishlash`,
-                        description: `${location}da eski fotosuratlarni tiklash bo'yicha xizmatlar: retush, rasm chizish, suratga ishlov berish | turli takliflar atrofida eng yaxshisini topish, sizga yordam beradi slondo.uz`,
-                        text: `Eski fotosuratlarni tiklash bo'yicha xizmatlar ularga beg'ubor ko'rinish berishga yordam beradi va shu bilan o'tgan yillar xotirasini tetiklashtiradi. Yillar davomida, rasmlar Winona, g'ijimlamoq, Winona, va keyin ularning sobiq holatini yo'qotadi. Rötuş va boshqa fotosuratlarni tiklash xizmatlari yordamida siz buni tuzatishingiz mumkin. Sizga yordam beradi takliflar turli atrofida eng yaxshi tanlang slondo.uz`
+                        title: `Eski rasmlarni ${location}da qayta tiklash |retush va rasmni qayta ishlash`,
+                        description: `Eski rasmlarni ${location}da qayta tiklash uchun xizmatlar: retush, chizgi berish, qayta ishlash | turli takliflar ichida eng yaxshisini topishda sizga Slondo.uz yordam beradi`,
+                        text: `Eski fotosuratlarni tiklash bo'yicha xizmatlar, ularni dastlabki holatidagi ko'rinishni berishga yordam beradi va shu bilan o'tgan yillar xotirasini tiklaydi. Yillar davomida rasmlarning rangi uchib, g'ijimlanib, xiralashib, oxir oqibatda abgor ahvolga keladi. Retush va boshqa fotosuratlarni tiklash bo’yicha xizmatlar yordamida Siz rasmlaringizni qayta tiklashingiz mumkin. Turli takliflar ichida eng yaxshisini tanlashda Sizga Slondo.uz yordam beradi`
                     },
                     wedding_photographers: {
-                        title: `Wedding photographers ${location} | to'yga fotojamlanma buyurtma`,
-                        description: `${location}da to'y fotojamlanmasini buyurtma qilish / to'y uchun professional fotosuratchilar xizmatlari / slondo.uz`,
-                        text: `To'y hech bir tarzda muhim emas, qaysi har doim yangi uylangan nafaqat xotirasida qoladi, balki mehmonlar yuzlab. Maketlar, to'plamlar va marosimlardan tashqari, vakolatli fotosuratga alohida e'tibor qaratish lozim. Bayramdan chiroyli tortishish uzoq vaqt davomida bayram muhitini saqlab qoladi, shuning uchun professional fotografni tanlashga bog'liq bo'ladi.
-                        To'y fotograf xizmatlari uchun takliflar, bir poda atrofida eng yaxshi topish, sizga yordam beradi slondo.uz
+                        title: `To'y fotosuratchilari ${location}da| to'y fotosessiyasiga buyurtma berish`,
+                        description: `To'y fotosessiyasiga ${location}da buyurtma berish | to'y uchun mahoratli fotosuratchilar xizmatlari| Slondo.uz`,
+                        text: `To'y ma’raka nafaqat yoshlarning, hatto to’yga kelgan barcha mehmonlarning ham yodida muhrlanib qoladigan tantanali voqeadir. To’xonani bezash, yoritish va boshqa to’y tashvishlaridan tashqari, tantanani sifatli fotosuratga olishga alohida e'tibor qaratish lozim. Chiroyli lavhalar uzoq yillar davomida bayram muhitini o’zida saqlab qoladi, shuning uchun, professional suratkashni tanlash o’ta muhimdir.
+                        To'y uchun mahoratli suratkash xizmatlari bo’yicha takliflarini Slondo.uzda izlab toping
                         `
                     },
                     studio_photography: {
-                        title: `${location}dagi fotostudiya / fotojamlanma buyurtma`,
-                        description: `${location}dagi professional fotostudiyalar xizmatlari | shaharning eng yaxshi fotostudiyalarida buyurtma olish: to'y suratlari, sevgi hikoyalari, mavzuga oid olishuvlar | slondo.uz`,
-                        text: `Fotostudiya-fotografiya uchun maxsus jihozlangan joy. Fotostudiya xizmatlariga quyidagi turlar kiradi carinf.com mas'ul emas, kabi: portret, oila, promo va boshqa ko'plab. Standart fotostudiya: professional kameralar, tripodlar, yumshoq qutilar, yengil qutilar, xromakey, turli rangdagi fon, shuningdek, muayyan turdagi ichki makon uchun jihozlangan xonalar kabi jihozlar bilan jihozlangan. Ba'zi fotostudiyalar ijara xizmatlarini taqdim, agar foyda bir soatlik to'lov uchun zarur oraliq ijaraga mumkin.
-                        Sizga yordam beradi takliflar turli atrofida eng yaxshi tanlang slondo.uz
+                        title: `Fotostudiyalar ${location}da / fotojamlanmalarga buyurtmalar`,
+                        description: `Professional fotostudiyalar xizmatlari ${location}da | shaharning eng yaxshi fotostudiyalarida fotosessiyaga buyurtma berish: to'y fotosuratlari, ZAGS marosimlarini suratga olish | Slondo.uz`,
+                        text: `Fotostudiya-bu suratga olish uchun maxsus jihozlangan joy. Fotostudiya xizmatlariga quyidagi turlar kiradi: oilaviy, vinetkalar, portretlar, promo, tabiat va boshqalar kiradi. Standart fotostudiya: professional kameralar, tripodlar, Soft boks, Layt boks, xromakey, turli rangdagi fonlar, shuningdek, muayyan muhitni aks etuvchi jihozlar bilan jihozlangan xonalardan iborat. Ba'zi fotostudiyalar ijara xizmatlarini taqdim etib, soatbay to'lov usulida qulay xizmatlarini taqdim etadi.
+                        Takliflar ichida eng yaxshisini tanlashda Sizga Slondo.uz yordam beradi                         
                         `
                     },
                     other: {
                         title: `"Foto va video suratga olish" turkumidagi boshqa xizmatlar - ${location}`,
-                        description: `${location}da foto va video tasvirga olish sohasidagi turli xizmatlar | slondo.uz`,
-                        text: `Boshqa toifalarga kiritilmagan fotografiya va videotasvir bilan bog'liq barcha xizmatlar.`
+                        description: `Foto va video suratga olish sohasidagi turli xizmatlar ${location}da | Slondo.uz`,
+                        text: `Boshqa toifalarga kiritilmagan foto va video suratga olish bilan bog'liq barcha xizmatlar.`
                     }
                 }
-
             },
             cleaning_service: {
                 ru: {
@@ -8019,52 +8009,55 @@ export const getSEOContent = (category: CategoryType, subCtgr: SubcategoryType, 
                     }
                 },
                 uz: {
-                    title: `${location}dagi kliring kompaniyalarining kvartiralari, uylari va boshqa xizmatlarini tozalash`,
-                    description: `Uy - joy va savdo binolarni tozalash xizmatlari: uylar, uylar, omborlar va ofislarni eng yaxshi narxlarda, slondo.uz!`,
-                    text: `Tozalash kompaniyalaridan tozalash xizmatlari mamlakatimizda yaqinda tezlasha boshladi. Bundan oldin, xususiy tozalovchilar xizmatlari faol talabga ega. Bir kishini yoki professional klinerlarning butun guruhini toping, eng oson yo'li slondo.uz:
+                    title: `Xonadonlarni, kvartiralarni, uylarni va boshqalarni tozalash xizmatlari ${location}da`,
+                    description: `Uy-joy va savdo majmualari: uylar, hovlilar, omborlar va ofislarni eng yaxshi narxlarda tozalash xizmatlari Slondo.uzda!`,
+                    text: `Tozalash va yig’ishtirish (Klining)xizmatlarini taklif qiluvchi kompaniyalardan takliflar mamlakatimizda so’nggi yillarda ommalasha boshladi. Bungacha, oddiy insonlar mardikor bozorlarda o’z xizmatlarini taklif qilishar edi. Yakka kishilar yoki professional klinerlar butun guruhini toping, bunda Sizga Slondo.uz maydonchasi quyidagi xizmatlarni taklif qiladi:
                     - Oyna va balkonlarni yuvish
                     - Kvartiralarni tozalash
                     - Uylarni tozalash
                     - Uy bekasi xizmatlari
-                    - Quruq tozalash, yuvish va dazmollash
-                    - Boshqa xizmatlar
+                    - Kimyoviy tozalash, yuvish va dazmollash
+                    - Boshqa xizmatlar                    
                     `,
                     washing_windows_balconies: {
-                        title: `Oyna va balkonlarni yuvish - ${location}`,
-                        description: `Balandlikda, alpinistlardan va nafaqat derazalarni, ramkalarni va balkonlarni yuvish bo'yicha xizmatlar. Xonadonlarda, uylarda va idoralarda Ajralishsiz yuvish`,
-                        text: `Balkonli derazalarni yuvish muayyan muammolarni keltirib chiqarishi mumkin. Oynaning tashqi tomonini Ajralishsiz tozalash juda qiyin. Bu muammo har bir metr balandlikda o'tkirlashadi va ko'pincha katta kompaniyalarning ofislarida derazalarni yuvish mumkin emas. Bu holda, tozalash kompaniyalari va professional alpinistlar-oyna yuvish xizmatlari qutqarish uchun keladi.`
+                        title: `Oyna va balkonlarni yuvish – ${location}`,
+                        description: `Balandlikdagi derazalarni, ramkalarni, balkonlarni va boshqalarni yuvish bo'yicha, alpinistlardan xizmatlar| Xonadonlarni, uylarni va idoralarni sifatli yuvish`,
+                        text: `Balkonli derazalarni yuvish muayyan muammolarni keltirib chiqarishi mumkin. Oynaning tashqi tomonini tozalash juda qiyin. Bu muammo balandlikda tobora qiyinlashadi va ko'pincha katta, ko’pqavatli Kompaniyalarning ofislari derazalarni yuvish imkonsizdek tuyuladi. Bunday hollarda, oyna yuvish xizmatlari- tozalash kompaniyalari va professional alpinistlar yordamga keladi.`
                     },
                     work_garden_plot: {
-                        title: `Bog'bon | bog'bonning xizmatlari`,
-                        description: `${location} bog'bonlarining xizmatlari / maysazorlarni kesish | o'simliklarni parvarish qilish, butazorlar va to'siqlarning bir tekis sochlari | slondo.uz`,
-                        text: `Katta yashil bog 'yoki bog' egasi, ko'pincha bog'bonning xizmatlariga murojaat qilish kerak. Yashil dunyo Lordining ishi bog'ni yaxshi shaklda saqlashdan iborat: maysazorni kesish, o'simliklarni sug'orish, daraxtlar va butalarning ortiqcha shoxlarini kesish. Bog'bonning xizmatlari bo'yicha ko'plab takliflarni tanlash sizga yordam beradi slondo.uz`
+                        title: `Bog'bonlar ${location}da / bog'bonlik xizmati`,
+                        description: `Bog'bon xizmatlari ${location}da / chim yotqizish, maysazorni o’rish, o'simliklarni sug’orish, bo’talarga tus berish, daraxt kesish | Slondo.uz`,
+                        text: `Katta yashil bog'i yoki tomorqasi bor kishi ko'pincha bog'bonlik xizmatiga murojaat qilishga majbur bo’lishadi. O’simliklar Piri bo’lmish, bog’bonlarning vazifasi, o’simliklarni yaxshi shaklda saqlashdan iborat: maysalarni kesish, o'simliklarni sug'orish, daraxtlar va butalarning ortiqcha shoxlarini kesish. Bog'bonning xizmatlari bo'yicha ko'plab takliflarni tanlashda Sizga Slondo.uz yordam beradi 
+                       `
                     },
                     cleaning_apartments_houses: {
-                        title: `${location}dagi kvartira va ofislarni tozalash / Klining`,
-                        description: `${location}dagi kvartiralarni bosh va qisman tozalash bo'yicha xizmatlar | kliring uchun narxlarni eng oson tarzda buyurtma qilish yoki topish slondo.uz`,
-                        text: `Uyni, uyni yoki boshqa xonani qo'shni hovliga tozalash har doim ko'p vaqt va kuch sarflaydi. Zich jadvalida kamdan-kam hollarda uyda va hovlida tozalash uchun vaqt topa olasiz, bu holda siz har doim tozalash kompaniyasining xizmatlariga buyurtma berishingiz mumkin!`
+                        title: `Kvartira va ofislarni ${location}da tozalash | klining`,
+                        description: `Kvartiralarni umumiy va qisman tozalash bo'yicha xizmatlari ${location}da | Slondo.uzda tozalash, narxlarini bilish yoki buyurtma berish`,
+                        text: `Uyni, hovlini, kottejni yoki boshqa joylar bilan chegaralangan hududni tozalash, har doim ham ko'p vaqt va kuch sarflashni talab qiladi. Vaqt tanqisligi tufayli, kamdan-kam hollarda uy yoki hovlini tozalash uchun vaqt topa olasiz, bu holda Siz istagan vaqtingizda tozalash Kompaniyasining xizmatlariga buyurtma berishingiz mumkin!`
                     },
                     housekeeper_services: {
-                        title: `Uy Bekasi - ${location} shahridagi uy ishlari bo'yicha xizmatlar`,
-                        description: `${location}dagi uy xodimining xizmatlari. Boshqa foydalanuvchilarning reytinglari va sharhlarini ko'rib chiqishda eng yaxshi xizmatchini toping.`,
-                        text: `Uy bekasi-har qanday uy vazifasini bajarish vazifasi bo'lgan yollangan xodim. Uy xodimlariga bo'lgan ehtiyoj bugungi kunda juda katta, chunki uy ishlariga kuch va vaqt yo'q ish bilan band bo'lgan odamlar ko'payib bormoqda. Uy xodimasi xizmatlari uchun eng yaxshi takliflarni tanlash sizga yordam beradi slondo.uz`
+                        title: `Uy xizmatkorlari - 
+                        
+                        da uy ishlari xizmatlari`,
+                        description: `Uy bekasi xizmatlari ${location}da. Boshqa foydalanuvchilarning reytinglari va sharhlarini ko'rib chiqing va eng yaxshi xizmatchini toping.`,
+                        text: `Uy bekasi-har qanday uy vazifasini bajarishi kerak bo'lgan, yollangan xodimdir. Uy xodimlariga bo'lgan ehtiyoj bugungi kunda juda katta, chunki, asosiy ish bilan band bo’lgan odamlar uy ishlariga kuch va vaqt topa olmasliklari sabab bo’lmoqda. Uy xodimasi xizmatlari uchun eng yaxshi takliflarni tanlashda Sizga Slondo.uz yordam beradi`
                     },
                     cleaning_laundry_ironing: {
-                        title: `Gilamlarni quruq tozalash va tozalash - ${location}`,
-                        description: `Yumshoq mebellarni quruq tozalash, shuningdek, gilam, gilam, yostiq va adyollarni yuvish-eng yaxshi narxlar slondo.uz!`,
-                        text: `Kimyoviy tozalashda, barcha axloqsizlik bilan birgalikda mahsulot yuzasiga zarar bermasdan ehtiyotkorlik bilan olib tashlanadi. Ko'pincha quruq tozalash xizmatlaridan foydalanish, sirtni buzishdan ko'ra, dog ' yoki axloqsizlikni mahsulotdan olib tashlashga harakat qilish foydali bo'ladi.
-                        Gilamlarni tozalash mavsumiy ravishda amalga oshiriladi, shuning uchun butun yil davomida talab etiladi.
+                        title: `Kimyoviy tozalash va gilam yuvish– ${location}`,
+                        description: `Yumshoq mebel, shuningdek, gilam yuvish, yostiq va ko’rpalarni kimyoviy tozalash ${location}da -eng yaxshi narxlar- Slondo.uzda!`,
+                        text: `Kimyoviy tozalashda, mahsulot yuzasidagi barcha dog’ va kirlar unga zarar bermasdan, ehtiyotkorlik bilan yuvib tashlanadi. Shu sababli, kimyoviy tozalash xizmatlaridan foydalanish, kir va dog’larni o’zboshimchalik bilan harakat qilib, mahsulot sirtini ishdan chiqargandan ko’ra foydali bo'ladi.
+                        Gilamlarni tozalash- mavsumiy ravishda amalga oshiriladi, shuning uchun kimyoviy tozalashga butun yil davomida talab bor.                        
                         `
                     },
                     disinfection: {
-                        title: `${location}da dezinfeksiya / bedbuglar, hamamböceği, midges`,
-                        description: `Tasdiqlangan kompaniyalardan dezinfeksiya xizmatlari - ${location} | bedbuglar, hamamböceği, chivinlar, Shomil, chayonlardan qutulish / quyidagi sharhlarga ko'ra dezinfektsiyalovchi tanlang slondo.uz`,
-                        text: `Hamamböceği, bedbuglar, chivinlar yoki boshqa jonzotlarning to'satdan bosib olinishi juda ko'p muammolarni keltirib chiqarishi mumkin. Chaqirilmagan mehmonlardan sifatli qutulish uchun professional dezinfeksiya xizmatiga murojaat qilish eng ishonchli bo'ladi. Professionallar tomonidan o'z ishlarini sifatli bajarish sizning uyingiz, kvartirangiz yoki ofisingizni bedbuglar, sichqonlar, chayonlar, hamamböceği va boshqa zararkunandalardan xalos qilish uchun kafolatlanadi. Baholash asosida eng yaxshi dezinfeksiya kompaniyasini tanlang, sizga yordam beradi slondo.uz`
+                        title: `Dezinfeksiya xizmati ${location}da | kanalar, so’nalar, suvaraklarga qarshi`,
+                        description: `Sinalgan kompaniyalardan dezinfeksiya xizmatlari- ${location}da | pashsha, chivin, chumoli, chayonlardan qutulish| dezinfektsiyalovchini reyting bo’yicha tanlang`,
+                        text: `Suvaraklar, chumolilar, chivinlar yoki boshqa jonzotlar tomonidan to'satdan hududingizni bosib olinishi juda ko'p muammolarni keltirib chiqarishi mumkin. Chaqirilmagan mehmonlardan oson qutulish uchun professional dezinfeksiya xizmatiga murojaat qilish eng ishonchli bo'ladi. Tajribali dezinfektorlar tomonidan o'z ishlarini sifatli bajarliishi sizning uyingiz, kvartirangiz yoki ofisingizni chumolilar,suvaraklar,kanalar,burgalar,bitlar va hatto kalamush,ilon,chayon,sichqon va boshqa zararkunandalardan xalos qilishi kafolatlanadi. Baholash tizimi asosida eng yaxshi dezinfeksiya kompaniyasini tanlang, Slondo.uz Sizga yordam beradi`
                     },
                     other_services: {
-                        title: `Tozalash bo'yicha boshqa xizmatlar – ${location}`,
-                        description: `${location}da tozalash bo'yicha turli xizmatlar.`,
-                        text: `Bu erda boshqa bo'limlarga kiritilmagan binolarni tozalash bo'yicha turli xizmatlar to'plangan.`
+                        title: `Boshqa tozalash xizmatlari – ${location}`,
+                        description: `Tozalash mavzusida turli xizmatlar ${location}da.`,
+                        text: `Bu erda boshqa bo'limlarga kiritilmagan, binolarni tozalash bo'yicha turli xizmatlar to'plangan.`
                     }
                 }
             },
@@ -8129,64 +8122,65 @@ export const getSEOContent = (category: CategoryType, subCtgr: SubcategoryType, 
                     }
                 },
                 uz: {
-                    title: `${location}da buyurtma berish uchun kiyim-kechak, mebel, va boshqa narsalarni tayyorlash`,
-                    description: `Sizning parametrlaringiz bo'yicha turli xil narsalarni tayyorlash bo'yicha xizmatlar, ${location} / eng yaxshi narxlar slondo.uz`,
-                    text: `Ko'pincha bozorda siz mebel, kiyim-kechak, charm mahsulotlari yoki yodgorlik bo'lsin, istaklaringizga mos keladigan narsalarni topa olmaysiz. Bunday holda, ma'lum bir mahsulotni bitta ishlab chiqarish uchun ustalarga murojaat qilishingiz mumkin. Haqida slondo.uz eng yaxshi ishlab chiqarish takliflarini topishingiz mumkin:
+                    title: `Buyurtma asosida kiyim-kechak, mebel, muhrlar va boshqa narsalarni yasash`,
+                    description: `Buyurtmangiz bo'yicha turli xil narsalarni ishlab chiqarish bo'yicha xizmatlar, ${location}da | eng yaxshi narxlar Slondo.uzda`,
+                    text: `Ko'pincha bozorda Sizning istaklaringizga mos keladigan narsalarni: mebel, kiyim-kechak, charm mahsulotlari yoki esdalik sovg’si bo’ladimi, topa olmasligiz mumkin. Bunday holda, ma'lum bir mahsulotni buyurtma asosida, yakka tartibda ishlab chiqarish uchun ustalarga murojaat qilishingizga to’g’ri keladi. Slondo.uzda eng yaxshi ishlab chiqaruvchilardan quyidagi mahsulot va mollar bo’yicha takliflarini ko’rishingiz mumkin:
                     - Kiyim-kechak, poyabzal, aksessuarlar
-                    - Zarb mahsulotlari
+                    - Temirchilik mahsulotlari
                     - Mebel
-                    - Musiqa, she'rlar va ularga ovoz berish
-                    - Bosib chiqarish va shtamplar
-                    - Chizmalar, rasmlar va grafikalar
-                    - Yodgorlik va matbaa mahsulotlari
+                    - Musiqa, she'rlar va ularga ovoz yozish
+                    - Muhrlar va shtamplar
+                    - Chizmalar, rasmlar va qo’lyozmalar
+                    - Yodgorlik va taxrirlash mahsulotlari
                     - Zargarlik buyumlari
                     `,
                     manufacture_repair_clothing_shoes_accessories: {
-                        title: `${location}da Atelier-tikuvchilik, buyurtma berish uchun kiyim-kechak va poyabzal tayyorlash`,
-                        description: `${location}da kiyim-kechak, poyabzal va aksessuarlar tayyorlash, tikish va ta'mirlash bo'yicha xizmatlar | ateleyadan eng yaxshi takliflar slondo.uz`,
-                        text: `Kiyim-kechak, poyabzal va turli aksessuarlar ishlab chiqarish bo'yicha xizmatlar: qo'lqoplar, bosh kiyimlar va boshqalar., turli vaziyatlarda kerak bo'lishi mumkin. Misol uchun, siz do'konda yoki taqdim etilgan assortimentda kerakli hajmni topa olmasangiz, mos uslub yo'q. Bundan tashqari, kostyumni tanlashda ular ko'pincha studiyada yordam so'rashadi. Bunday holda, kostyum inson uchun shaxsan tikiladi va kelajakda u yaxshi o'tiradi.`
+                        title: `Tikuvchixona-${location}da | poyabzal va kiyimlar buyurtmaga tikish va ishlab chiqarish `,
+                        description: `Kiyim-kechak, poyabzal va aksessuarlar ishlab chiqarish, tikish va ta'mirlash bo'yicha xizmatlar ${location}da | Chevarlardan eng yaxshi narxlar- Slondo.uzda`,
+                        text: `Kiyim-kechak, poyabzal va turli aksessuarlar: qo'lqoplar, bosh kiyimlar, shimlar va boshqa mahsulotlar ishlab chiqarish bo'yicha xizmatlar turli vaziyatlarda kerak bo'lishi mumkin. Misol uchun, siz do'konda yoki ko’rgan to’plamingiz ichida kerakli o’lchamdagi yoki hajmdagi mahsulotni topa olmasang vaqtingizda. Bundan tashqari, kostyum tanlashda ko'pincha Atel’ega murojaat qilinadi. Bunday holda, kostyum inson uchun maxsus tikiladi va u buyurtmachining gavdasiga mos tushadi.`
                     },
                     custom_forged_products: {
-                        title: `Buyurtma uchun zarb qilingan mahsulotlar - ${location}`,
-                        description: `Maxsus metall buyumlarni zarb qilish: panjara, panjara, soyabon va boshqalar. Soxta mahsulotlarni ishlab chiqarish uchun eng yaxshi taklifni toping slondo.uz`,
-                        text: `Yuqori sifatli zarb mahsulotlari kelajakda mebel ramkasi, dekorativ devor, eshik ramkasi, deraza panjarasi va boshqa ishlab chiqaruvchilar sifatida xizmat qilishi mumkin. Bunday mahsulotlarni ishlab chiqarish texnologiyasini to'g'ri bajarish bilan ular sizni oqlangan ko'rinish va doimiy sifat bilan uzoq vaqt davomida quvontiradi.
-                        Soxta mahsulotlarning eng yaxshi ishlab chiqaruvchilarini izlang slondo.uz!
+                        title: `Temirchilik mahsulotlari – ${location}`,
+                        description: `Buyurtmaga temirchilik buyumlari: panjara, tesha, bolta, ketmon va boshqalar. Temirchilik mahsulotlari va asboblarini ishlab chiqarish bo’yicha Slondo.uzda eng yaxshi taklifni toping`,
+                        text: `Yuqori sifatli temirchilik mahsulotlari kelajakda mebel karkasi, panjarali devor, eshik ramkasi, deraza panjarasi va boshqa buyumlar sifatida xizmat qilishi mumkin. Bunday mahsulotlarni ishlab chiqarish texnologiyasi to'g'ri bajarilganda, o’zining jozibali ko'rinishi, mustahkamligi va sifati bilan uzoq vaqt davomida ko’zni quvontiradi.
+                        Eng zo’r temirchilik mahsulotlarini ishlab chiqaruvchilarini Slondo.uzda izlang!                        
                         `
                     },
                     custom_furniture: {
-                        title: `${location}da buyurtma uchun mebel / oshxona, shkaf-kupe, korpus eshitish vositasi-arzon`,
-                        description: `${location}da buyurtma berish uchun yumshoq, korpus va boshqa mebel ishlab chiqarish. Eng yaxshi oshxona ishlab chiqaruvchilari, shkaflar, to'shaklarni toping slondo.uz`,
-                        text: `Kvartiraning ichki qismini tanlashda, xona kattaligi va tayyor mahsulotni sotib olishdan ko'ra, mebellarni buyurtma qilish juda qulay. Har qanday rang, dizayn va materiallarni tanlang va tajribali ustalar siz uchun mebelning barcha qismlarini alohida o'lchamlarga muvofiq ishlab chiqaradi! Eng yaxshi mebel ishlab chiqaruvchilari takliflar slondo.uz. ustalarning reytingini Solishtiring va boshqa foydalanuvchilarning fikr-mulohazalarini inobatga olgan holda eng yaxshisini tanlang.`
+                        title: `Buyurtmaga mebel ${location}da | oshxona, yotoqxona, bolalar mebeli|eng arzon`,
+                        description: `Shkaf-kupe, yumshoq mebel, yotoqxona, bolalar va boshqa mebellarni buyurtma asosida ${location}da ishlab chiqarish. Eng yaxshi oshxona mebellari ishlab chiqaruvchilari, shkaflar, to'shaklarni Slondo.uzda toping`,
+                        text: `Xonadoning ichki qismini to’ldirishda, tayyor mahsulotni sotib olishdan ko'ra, xona kattaligi va o’lchamlarini hisobga olib, mebellarni buyurtma qilish ma’qul bo’ladi. O’zingizga ma
+                        qul rang, dizayn va materiallarni tanlang va tajribali ustalar siz uchun mebelning barcha qismlarini hohlagan o'lchamingizga muvofiq yasab beradi! Slondo.uz da eng zo’r mebel ishlab chiqaruvchilarning takliflari. Ustalarning reytingini solishtiring va boshqa foydalanuvchilarning fikr-mulohazalarini inobatga olgan holda eng yaxshisini tanlang.`
                     },
                     music_poetry_voice_acting: {
-                        title: `Buyurtma uchun musiqa: ma'lumot, tartib | ${location}`,
-                        description: `She'rlar (matnlar), musiqa yozishni buyurtma qilish, shuningdek, ovoz berish va tartibga solish uchun ustalarni topish eng qulaydir slondo.uz!`,
-                        text: `Musiqa ijodkorlik yoki ijodiy reklama uchun ajoyib tanlovdir. Lekin ko'pincha yaxshi she'r yozish qobiliyati bilan musiqachi qo'shiq uchun musiqani yoza olmaydi va aksincha. Bundan tashqari, promo-video uchun matnni aniq o'qiy oladigan professional ma'ruzachi kerak bo'lgan holatlar ham mavjud. Bunday holda, o'z sohasidagi mutaxassislar sizga yordam beradi: "gostraytlar"deb nomlangan qofiyaning haqiqiy ustalari. "Gostrayting ""hayalet" va "yozish" so'zlaridan keladi – yozma, yozma. Bundan tashqari, bitlarni yozish va qo'shiqlarni yozish ustalari – "bitmeykerlar" va ovozli eshittirishlar sohasida eng yaxshi.`
+                        title: `Buyurtmaga musiqa: bastalash, aranjirovka | ${location}`,
+                        description: `She'rlar (matnlar), musiqa yozishni buyurtma qilish, shuningdek, ovoz berish va aranjirovka uchun bastakorni topishning eng qulay yoli - Slondo.uz!`,
+                        text: `Musiqa -ijodkorlik yoki o’ziga hos reklama yaratish uchun ajoyib tanlovdir. Lekin, ko'pincha yaxshi she'r yozish qobiliyati bo’lgan san’atkor yaxshi musiqa yoza olmasligi mumkin va aksincha. Bundan tashqari, video rolik uchun matnni bexato o'qiy oladigan professional ma'ruzachi kerak bo'lgan holatlar ham mavjud. Bunday holda, o'z sohasining haqiiqiy mutaxassislari bo’lgan: "gostrayterlar"deb nomlangan, qofiyaning haqiqiy ustalari sizga yordam beradi. "Gostrayting" "ghost"-sharpa va "writing" -  "yozish" so'zlaridan kelib chiqadi. Bundan tashqari, bitlarni va qo'shiqlarni yozish ustalari – "bitmeykerlar" va ovoz berish suhandonlari sohasiga ham talab katta.`
                     },
                     custom_seals_stamps: {
-                        title: `Buyurtma uchun muhr va shtamplar / ${location}`,
-                        description: `Xususiy firmalar, shifokorlar va nafaqat ${location}da muhr va shtamplarni tayyorlash`,
-                        text: `Har bir yuridik shaxs nima uchun o'z shaxsiy muhriga muhtoj? Bugungi kunda o'z faoliyatini qonuniy ravishda amalga oshiradigan har bir tashkilot o'z ixtiyorida birdan bir nechta muhr va muhrlarga ega. Ushbu ofis mahsulotlari shartnomalar tuzish va ularning rasmiy maqomini tasdiqlash uchun zarurdir.`
+                        title: `Muhr va shtamplarga maxsus buyurtma | ${location}`,
+                        description: `Xususiy firmalar, shifokorlar va boshqalar uchun ${location}da muhrlar va shtamplar tayyorlash`,
+                        text: `Nima uchun har bir yuridik shaxs o'z shaxsiy muhriga muhtoj? Bugungi kunda o'z faoliyatini qonuniy ravishda amalga oshiradigan har bir tashkilot o'z ixtiyorida bittadan bir nechtagacha muhr va shtamplarga ega. Chunki, ushbu ofis mahsulotlari shartnomalar tuzish va ularning rasmiy maqomini tasdiqlash uchun zarurdir.`
                     },
                     drawing_painting_drawing: {
-                        title: `Chizma, rangtasvir yoki grafikaga buyurtma berish / ${location}`,
-                        description: `rofessional rassomlar va grafik muharrirlarning xizmatlari: rasm chizish, rasm chizish, portretlar va rasm chizish`,
-                        text: `Yaxshi bo'yalgan portret, shuningdek, buyurtma bo'yicha yozilgan rasm, albatta, o'z egalarini befarq qoldirmaydi. Bunday rasm har qanday bayram uchun ajoyib sovg'a bo'ladi.`
+                        title: `Chizma, rasm yoki grafiklarga buyurtmalar | ${location}`,
+                        description: `Professional rassomlar va grafik muharrirlarning xizmatlari: chizma chizish, rasm, portretlar yaratish va grafika yasash`,
+                        text: `Yaratilgan portret, shuningdek, buyurtma bo'yicha chizilgan rasm, albatta, o'z egalarini befarq qoldirmaydi. Bunday rasm har qanday bayram uchun ajoyib va kutilmagan sovg'a bo'ladi.`
                     },
                     souvenir_products_printing: {
-                        title: `Maxsus logotipli yodgorlik mahsulotlari / ${location}`,
-                        description: `Turli xil yodgorlik va matbaa mahsulotlarini ishlab chiqarish: asosiy foblar, futbolkalar, kupalar va logotipli boshqa narsalar`,
-                        text: `Kompaniya logotipi bo'lgan matbaa mahsulotlari mahsulot yoki xizmatni ilgari surishda talab etiladi. Yodgorlik mahsulotlari odatda yaqin kishilarga yoki o'zlariga sovg'a sifatida bitta nusxada ishlab chiqariladi.`
+                        title: `Maxsus logotipli esdallik sovg’alar| ${location}`,
+                        description: `Turli xil yodgorlik va matbaa mahsulotlarini ishlab chiqarish: breloklar, futbolkalar, krujkalar va logotipli boshqa buyumlar`,
+                        text: `Kompaniya logotipi aks etgan poligrafiya mahsulotlari tovarlar yoki xizmatlarning bozori chaqqon bo’lishida muhimdir. Esdalik mahsulotlarini buyurtma asosida yasatish, odatda, yaqin kishilarga yoki o'zi uchun sovg'a sifatida yagona nusxada ishlab chiqariladi.`
                     },
                     jewelry_services: {
-                        title: `Buyurtma uchun zargarlik buyumlari / ${location}`,
-                        description: `${location}da sizning eskizlaringiz bo'yicha buyurtma berish uchun kumush va oltin zargarlik buyumlari tayyorlash`,
-                        text: `Sizning ta'mingiz uchun tayyorlangan zargarlik buyumlari sizning yaqinlaringiz va o'zingiz uchun ajoyib sovg'a sifatida xizmat qilishi mumkin. Qimmatbaho metallardan tayyorlangan to'y uzuklari, halqalar, zanjirlar va boshqa zargarlik buyumlari ishlab chiqaruvchisini toping slondo.uz!`
+                        title: `Buyurtmaga zargarlik buiyumlari| ${location}`,
+                        description: `Kumush va oltin taqinchoqlarni ${location}da sizning uslubingizga ko'ra, maxsus yasash`,
+                        text: `Sizning ta'bingiz asosida tayyorlangan zargarlik buyumlari sizning yaqinlaringiz va o'zingiz uchun ajoyib sovg'a sifatida xizmat qilishi mumkin. Qimmatbaho metallardan tayyorlangan to'y uzuklari, halqalar, zanjirlar va boshqa zargarlik buyumlari ishlab chiqaruvchisini Slondo.uzda toping!`
                     },
                     other_services: {
-                        title: `Boshqa maxsus narsalar ishlab chiqarish xizmatlari`,
-                        description: `${location}da turli narsalar va xizmatlarni buyurtma qilish bo'yicha e'lonlar`,
-                        text: `Bu erda turli xil narsalarni buyurtma qilish bo'yicha xizmatlar haqida reklamalar to'plangan`
+                        title: `Buyurtmaga boshqa buyumlar ishlab chiqarish xizmatlari`,
+                        description: `${location}da turli narsalar va xizmatlar ishlab chiqarish bo’yicha e'lonlar`,
+                        text: `Bu erda turli xil narsalarga buyurtma berish bo'yicha xizmatlar haqida reklamalar to'plangan`
                     }
                 }
             },
@@ -8222,32 +8216,32 @@ export const getSEOContent = (category: CategoryType, subCtgr: SubcategoryType, 
                     }
                 },
                 uz: {
-                    title: `${location}da oziq-ovqat mahsulotlari / oziq-ovqat tayyorlash bo'yicha xizmatlar`,
+                    title: `Oziq-ovqatlar ${location}da / ovqat tayyorlash bo’yicha xizmatlar`,
                     description: `O'zbekistonning eng yaxshi ishlab chiqaruvchilardan oziq-ovqat sohasida turli xizmatlar / ${location}`,
-                    text: `"Oziq-ovqat" turkumidagi turli reklamalar katta sonini o'z ichiga olishi mumkin: ishlab chiqarish murabbo ulgurji etkazib bilan tugaydigan, uyda pishirish Cookie tortib. Ofisda ovqat pishirish, sog'lom oziq-ovqat yetkazib berish, mazali qahva ishlab chiqaruvchisi va yana ko'p narsalarni topishingiz mumkin.
-                    Asosiy kichik toifalar:
-                    - Buyurtma berish uchun pishirish va pirojnoe
-                    - Oshpaz xizmatlari
+                    text: `"Oziq-ovqat" turkumi  o'z ichiga turli e’lonlarning katta sonini olishi mumkin: uyda pishirilgan konditer mahsulotlaridan tortib, katta hajmda,zavodda ishlab chiqariladigan konserva mahsulotlarigacha. Bu bo’limda ofisda ovqat pishiradigan oshpazni, parhez ovqatni yetkazib berish xizmatini, mazali qahva ishlab chiqaruvchilarni va yana ko'p xizmatlarni topishingiz mumkin.
+                    Asosiy toifalar:
+                    - Buyurtmaga tort va shirinliklar pishirish 
+                    - Oshpazlar xizmatlari
                     - Choy va qahva
-                    - Boshqa
+                    - Boshqalar                    
                     `,
                     baked_goods_cakes: {
-                        title: `${location}da buyurtma berish uchun tortalar | bolalar, mastik, erkak, ayol | yetkazib berish`,
-                        description: `Buyurtma berish uchun bolalar, to'y va boshqa bayram keklari, shuningdek, Piroglar va boshqa uy qurilishi keklari`,
-                        text: `Mazali, uy qurilishi xamir ovqatlar-har doim har qanday bezak, hatto bayram emas, stol. Bundan tashqari, har qanday bayramda, tug'ilgan kun yoki to'y bo'lsin, har doim buyurtma berish uchun kek uchun joy bor. Bolalar tug'ilgan kunida odatda super qahramon raqamlari bilan kek ishlatiladi va to'ylarda – mastik va mayin qo'shilishi bilan katta, olijanob qandolat mahsulotlari. Pishirish bo'yicha mutaxassisni topish sizga yordam beradi slondo.uz! reytinglarni Solishtiring va eng yaxshi qandolatchilikni tanlang`
+                        title: `Buyurtmaga tortlar${location}da| Bolalar, ayollarga, erkaklarga, maxsus bezatilgan  yetkazib berish`,
+                        description: `Buyurtmaga bolalar, to'y va boshqa maxsus bayramlar uchun, shuningdek, tort va boshqa uy sharoitida pishirilgan shirinliklar ${location}da`,
+                        text: `Har qanday uy sharoitida pishirilgan, mazali pishiriqlar har doim, hatto bayram bo’lmasa ham, dasturxonimiz bezagi hisoblanadi. Bundan tashqari, har qanday bayramda, tug'ilgan kun yoki to'y bo'lishidan qat’iy nazar, har doim buyurtmaga pishirilgan tort uchun joy bor. Bolalarning  tug'ilgan kunida odatda ertak qahramonlarining rasmi tushirilgan tortlar pishirilsa,to'ylarda ustiga maxsus mastika va bezaklar, ismlar tushirilgan oliyjanob qandolat mahsulotlariga buyurtma qilinadi. Qandolatchilik mahsulotlari bo'yicha mutaxassisni topishda Sizga Slondo.uz yordam beradi! Reytinglarni solishtiring va eng yaxshi qandolatchini tanlang`
                     },
                     food_order: {
-                        title: `${location}da oziq-ovqat yetkazib berish uchun oziq-ovqat pizza shish kebablarni uyga buyurtma qilish`,
-                        description: `${location}da oziq-ovqat yetkazib berish bo'yicha ko'plab takliflar | nonushta, tushlik, tushlik va kechki ovqat / bepul yetkazib berish bilan takliflar slondo.uz`,
-                        text: `To'liq ish kuni bilan oziq-ovqat tayyorlash uchun vaqt ajratish har doim ham mumkin emas. Ba'zan siz o'zingizni uyda pishirmaydigan Lazzatlar bilan bezashni xohlaysiz va ba'zi hollarda dam olish uchun ovqat sotib olishingiz kerak. Bunday hollarda sizga oziq-ovqat etkazib berish bo'yicha ko'plab xizmatlar yordam beradi. Eng yaxshi muassasalardan pizza, shish kebab, sushi va murakkab ovqatlarni buyurtma qiling. Ko'p takliflarning eng yaxshisini tanlang, sizga yordam beradi slondo.uz`
+                        title: `Oziq-ovqatni yetkazib berish xizmati ${location}da  oziq-ovqat, pizza, shashliklarga buyurtma berish`,
+                        description: `Taomlarga buyurtma berish ${location}da | nonushta, tushlik, lanch va kechki ovqatlar |Slondo.uzda ovqatlarni bepul yetkazib berish bo'yicha ko'plab takliflar`,
+                        text: `Mashaqqatli ish kunidan keyin, ovqat tayyorlash uchun vaqt ajratishga har doim ham imkon bo’lmaydi. Ba'zan Siz biror tansiq taomni ko’nglingiz tusaydi, ammo, unu uy sharoitida pishirishning imkoni bo’lmaydi. Yoki bayram kunlari uyda pishiriq pishirmasdan, ovqat sotib olishini hohlaysiz. Bunday hollarda Sizga taomlarni yetkazib berish bo'yicha ko'plab xizmatlar yordamga keladi. Eng yaxshi muassasalardan pizza, kabob, sushi va suyuq-auyuq ovqatlarni buyurtma qiling. Ko'p takliflarning eng yaxshisini tanlashda Sizga Slondo.uz yordam beradi`
                     },
                     cook_services: {
-                        title: `Oshpazlar xizmatlari: ovqat tayyorlash | ${location}`,
-                        description: `${location}ning eng yaxshi oshpazlaridan ovqat tayyorlash: oshpazdan ishlash, uyda pishirish va boshqalar`,
-                        text: `Oshpaz xizmatlari butunlay boshqa vaziyatlarda kerak bo'lishi mumkin: katta oila yoki jamoa uchun ovqat pishirganda, ziyofatga bir martalik buyurtma berilganda, shuningdek, nonushta, tushlik yoki kechki ovqat tayyorlashda boshqa ehtiyoj bilan`
+                        title: `Oshpazlik xizmatlari: taom tayyorlash | ${location}`,
+                        description: `Eng yaxshi oshpazlardan taomlar ${location}da: bosh oshpazdan tansiq taomlar, uyga borib ovqat pishirib berish va boshqalar`,
+                        text: `Oshpazlik xizmatlari turli sharoitlarda kerak bo’ladi, masalan: katta oila yoki jamoa uchun ovqat pishirganda, ziyofatga bir martalik buyurtma berilganda, shuningdek, nonushta, tushlik yoki kechki ovqat tayyorlashda нщлш boshqa ehtiyojlar bo’lganda`
                     },
                     other_services: {
-                        title: `Mahsulotlar sohasidagi boshqa xizmatlar / ${location} shahrida`,
+                        title: `Oziq-ovqat mahsulotlari bo’yicha boshqa xizmatlar | ${location}da`,
                         description: `Oziq-ovqat sohasidagi barcha takliflar pastki toifaga kiritilmagan slondo.uz`,
                         text: `Bu erda "oziq-ovqat" bo'limida boshqa toifalar uchun mos bo'lmagan reklamalar mavjud»`
                     }
@@ -8290,39 +8284,39 @@ export const getSEOContent = (category: CategoryType, subCtgr: SubcategoryType, 
                     }
                 },
                 uz: {
-                    title: `Hayvonlarni parvarish qilish bo'yicha xizmatlar / ${location}`,
-                    description: `Hayvonlarni parvarish qilish sohasida xizmatlar bo'yicha ko'plab takliflar slondo.uz. reytinglarni ko'rib chiqing, sharhlarni o'qing va eng yaxshi reklamalarni tanlang!`,
-                    text: `Hayvonlarni parvarish qilish juda ko'p kuch, vaqt va pul talab qiladi. Sizning plastmas qarab, parvarishlash ko'proq qimmat yoki arzon bo'ladi. Ayniqsa, mushukni itga qaraganda osonroq qilish. Bundan tashqari, tanlangan hayvon zotiga alohida e'tibor berilishi kerak. Ushbu bo'lim quyidagi kichik toifalarga bo'linadi:
-                    - Vyazka
-                    - Ta'lim va yurish
-                    - Haddan tashqari kuchlanish
-                    - Sochlar, hayvonlarni parvarish qilish
-                    Va boshqa xizmatlar
+                    title: `Hayvonlarni parvarish qilish xizmatlari | ${location}`,
+                    description: `Hayvonlarni parvarish qilish sohasidagi ko'plab xizmatlar bo'yicha takliflar Slondo.uzda| reytinglarni ko'rib chiqing, sharhlarni o'qing va eng yaxshi e’lonlarni tanlang!`,
+                    text: `Hayvonlarni parvarish qilish juda ko'p kuch, vaqt va mablag’ talab qiladi. Sizning jonivorlaringiz turiga qarab, parvarishlash qimmat yoki arzon bo'lishi mumkin. Ayniqsa, mushuklar itlarga qaraganda kamxarjroqdir. Bundan tashqari, tanlangan hayvonning zotiga alohida e'tibor berilishi kerak. Ushbu bo'lim quyidagi kichik toifalarga bo'linadi:
+                    - Jonivorlardan nasl olish
+                    - Qo’lga o’rgatish, maxsus kunikmalar hosil qilish
+                    -  Qaramoqqa olib turish
+                    - Yunglarini qaychilash, hayvonlarni sayr qildirish
+                    Va boshqa xizmatlar                    
                     `,
                     knit: {
-                        title: `Turli jinslarning itlari va mushuklarini bog'lash / ${location}`,
-                        description: `Naqshli itni yoki mushukni topish oson slondo.uz`,
-                        text: `Uy hayvonlari uchun trikotaj xizmatlari. Ko'p naslli itlar va Mushuklar juftlashishga tayyor slondo.uz`
+                        title: `It va mushuklardan nasl olish, juftlash | ${location}`,
+                        description: `Voyaga yetgan nasldor it yoki mushukni Slondo.uzda topish oson | ${location}`,
+                        text: `Uy hayvonlari uchun naslchilik xizmatlari. Slondo.uz da ko'p, nasldor, juftlashishga tayyor itlar va mushuklar`
                     },
                     training_walking: {
-                        title: `Itlarni tayyorlash va yurish / ${location}`,
-                        description: `It yurish va professional kinologlardan uy hayvonlarini tayyorlash bo'yicha xizmatlar`,
-                        text: `Ko'pincha kattalar kuniga uch marta itning o'z vaqtida yurishi uchun etarli vaqtga ega emaslar. Bunday holda siz "itlar yurishi"xizmati uchun murojaat qilishingiz mumkin. Bundan tashqari, agar kerak bo'lsa, ushbu bo'limda professional kinologlardan itlarni tayyorlash bo'yicha xizmatlar har doim mavjud`
+                        title: `Itlarni tarbiyalash va sayr qildirish | ${location}`,
+                        description: `Itni sayr qildirish va tajribali kinologlardan uy hayvonlarini tarbiyalash bo'yicha xizmatlar`,
+                        text: `Ko'pincha insonlar kuniga uch mahal itni o'z vaqtida sayr qildirish uchun yetarli vaqt ajrata olmaydilar. Bunday holda siz "itlarni sayr qildirish" xizmatiga murojaat qilishingiz mumkin. Bundan tashqari, agar kerak bo'lsa, ushbu bo'limda tajribali kinologlardan itlarni tayyorlash bo'yicha xizmatlar har doim mavjud`
                     },
                     overexposure: {
-                        title: `Uy hayvonlari uchun haddan tashqari kuchlanish / ${location}`,
-                        description: `${location}dagi itlar va Mushuklar uchun ixtisoslashtirilgan Zoo-mehmonxonalardan ko'plab takliflar`,
-                        text: `Boshqa shahar yoki mamlakatga vaqtincha ketayotganda, hayvonni tark etadigan hech kim yo'q. Bunday hollarda vaqtinchalik ortiqcha narsalar yoki "zoogostinitsy"deb ataladigan narsalar yordam beradi. Ularda bir yoki bir necha kun davomida siz tajribali inspektorlarning qo'lida bo'lgan uy hayvonini tark etishingiz mumkin.`
+                        title: `Uy hayvonlarini qaramoqqa olish | ${location}`,
+                        description: `Itlar va mushuklar uchun maxsus zoomehmonxonalardan ko'plab takliflar`,
+                        text: `Boshqa shahar yoki mamlakatga vaqtincha ketayotganda, jonivorlarga qarab turadigan biror kimsa bo’lmasligi mumkin. Bunday hollarda vaqtinchalik qaramoqqa olish yoki "zoomehmonxonalar"deb ataladigan xizmatlar yordam beradi. Bunday joylarda bir yoki bir necha kunga o’z uy hayvoningizni tajribali qarovchilar qo'liga topshirib ketishingiz mumkin.`
                     },
                     grooming_animal_care: {
-                        title: `Itlar, Mushuklar va uy hayvonlarini parvarish qilish bo'yicha boshqa xizmatlar / ${location}`,
-                        description: `Itlar, Mushuklar va boshqa uy hayvonlarini kesish, shuningdek, ${location}da ularga g'amxo'rlik qilish bo'yicha xizmatlar`,
-                        text: `Uy hayvonlarini parvarish qilish bo'yicha turli xil xizmatlar, soch kesishdan tortib to parvarish qilishgacha. Eng yaxshi takliflarni toping slondo.uz!`
+                        title: `Itlarni, mushuklarni va  jonivorlarni parvarish qilish va yunglarini kesish xizmatlari  ${location}`,
+                        description: `Itlar, mushuklar va boshqa uy hayvonlarining junlarini qirqish, shuningdek, ${location}da parvarish qilish xizmatlari`,
+                        text: `Uy hayvonlarini parvarish qilish bo'yicha turli xil xizmatlar, junlarini kesishdan va gruming. Eng yaxshi takliflarni Slondo.uzda toping!`
                     },
                     other_services: {
-                        title: `Hayvonlarni parvarish qilish sohasidagi boshqa xizmatlar / ${location}`,
-                        description: `Boshqa kichik toifalarga kiritilmagan uy hayvonlarini parvarish qilish sohasidagi barcha takliflar slondo.uz`,
-                        text: `Bu erda "hayvonlarni parvarish qilish" bo'limida boshqa toifalar uchun mos bo'lmagan reklamalar to'plangan»`
+                        title: `Hayvonlarni parvarish qilish bo’yicha boshqa xizmatlar | ${location}`,
+                        description: `Boshqa kichik toifalarga kiritilmagan, uy hayvonlarini parvarish qilish sohasidagi barcha takliflar Slondo.uzda`,
+                        text: `Bu erda "hayvonlarni parvarish qilish" bo'limida boshqa toifalar uchun mos bo'lmagan e’lonlar to'plangan`
                     }
                 }
             },
@@ -8333,9 +8327,9 @@ export const getSEOContent = (category: CategoryType, subCtgr: SubcategoryType, 
                     text: `Здесь собраны объявления не подходящие под другие категории, в разделе «услуги»`
                 },
                 uz: {
-                    title: `Xizmatlar sohasidagi boshqa takliflar / ${location}`,
-                    description: `Boshqa toifalarga kiritilmagan xizmatlar sohasidagi barcha takliflar slondo.uz`,
-                    text: `Bu erda "xizmatlar" bo'limida boshqa toifalar uchun mos bo'lmagan reklamalar to'plangan»`
+                    title: `Xizmat ko'rsatish sohasidagi boshqa takliflar | ${location}`,
+                    description: `Slondo.uzda boshqa toifalarga kiritilmagan xizmatlar sohasidagi barcha takliflar`,
+                    text: `Bu erda "Xizmatlar" bo'limida boshqa toifalarga mos bo'lmagan e’lonlar to'plangan`
                 }
             }
         },
@@ -9106,7 +9100,7 @@ export const getSEOContent = (category: CategoryType, subCtgr: SubcategoryType, 
                     }
                 },
                 uz: {
-                    title: `GM uz - ${location} dagi avtomobillarni sotish / avtomobil narxlarini bilish yoki sotib olish`,
+                    title: `GM uz - ${location}dagi avtomobillarni sotish / avtomobil narxlarini bilish yoki sotib olish`,
                     description: `GMuz avtomobillarini ${location} | yangi va ishlatilgan avtomobillarni sotish, variant, kredit yoki lizing/mashina bozorini sotib olish bo'yicha takliflarni topish slondo.uz`,
                     text: `Mahalliy yig'ilishdan foydalanilgan avtomobilni sotib olayotganda, mashinani ta'mirlash va texnik xizmat ko'rsatish sezilarli qiyinchiliklarga duch kelmaydi: har doim ehtiyot qismlar, sarf materiallari va aksessuarlarni yaxshi narxlarda topishingiz mumkin. Bundan tashqari, GM uz (Chevrolet va Daewoo) dan avtomobillar ishlab chiqaruvchi mamlakat sifatida emas, balki ko'p yillar davomida avtomobillarimiz muvaffaqiyatli eksport qilinadigan va sotilayotgan boshqa mamlakatlarning avtomobil egalari tomonidan ham e'tirof etilgan yuqori ishonchlilikka ega.
                     Yengil avtomobillar ishlab chiqarish zavodi 1993 yilda O'zbekistonda tashkil etilgan bo'lib, uch yil o'tib bu yerda yengil avtomobillar yig'ildi. To'liq o'ttiz yil mobaynida kompaniya butunlay isloh qilindi va avtomobil liniyasi ko'plab modellar bilan to'ldirildi. Koreya kompaniyasi Daewoo va Amerikaning "General Motors" kompaniyasining birlashuvi tufayli UzAuto Motors har ikki tomonning eng yaxshi fazilatlarini o'zlashtirib, avtomobil modellarini o'z yo'lida o'zgartirdi. GM uz dan mashinalar sifat standartidan o'tish uchun zarur bo'lgan barcha butlovchi qismlarni o'zida saqlab qolgan bo'lib, ayrimlarini iqlim, tuproq xususiyatlari va O'zbekiston mentalitetini o'zgartirgan. 
@@ -9115,7 +9109,7 @@ export const getSEOContent = (category: CategoryType, subCtgr: SubcategoryType, 
                     daewoo: {
                         title: `Daewoo avtomobillari ${location} / ishlatilgan avtomobillarni sotish`,
                         description: `Daewoo rusumidagi eski avtomobillarining narxlarini ${location} bilish yoki sotib olish / "uz Daewoo" avtomobillariga sotib olish va variant, ijaraga berish bo'yicha takliflar»`,
-                        text: `uz Daewoo yengil avtomobillarini sotish. Sotib olish, sotish, / sotib olish bilan ijaraga olish, b. ${location} da avtomobil sizga yordam beradi slondo.uz`,
+                        text: `uz Daewoo yengil avtomobillarini sotish. Sotib olish, sotish, / sotib olish bilan ijaraga olish, b. ${location}da avtomobil sizga yordam beradi slondo.uz`,
                         tico: {
                             title: `Tico-ni ${location} | da sotib oling slondo.uz`,
                             description: `Tiko avtomobillarini sotish, variant, sotib olish | Tico avtomobillarining narxini bilish ${location} | ishlatilgan uz Daewoo-da topish `,
@@ -9123,7 +9117,7 @@ export const getSEOContent = (category: CategoryType, subCtgr: SubcategoryType, 
                         },
                         matiz: {
                             title: `Matiz ${location} narx / Matiz sotib olish yoki variantga olish / kredit bilan ijaraga`,
-                            description: `${location} da Matiz sotish uchun takliflar ko'p | sotib olish, ijaraga / kredit yoki Matiz mix, eng yaxshi narxini bilish: mexanika | avtomatik / yangi (salon) va ishlatilgan variantlar`,
+                            description: `${location}da Matiz sotish uchun takliflar ko'p | sotib olish, ijaraga / kredit yoki Matiz mix, eng yaxshi narxini bilish: mexanika | avtomatik / yangi (salon) va ishlatilgan variantlar`,
                             text: `Matiz O'zbekistonda chop etilgan ikkinchi xetchbek hisoblanadi. Uning tanasi aerodinamik uslubda ishlab chiqarilgan, bu o'sha paytda avtomobil dizaynida haqiqiy inqilob edi. Oddiy o'lchamlarga qaramasdan, bu mashina tananing yon qismlarida qo'shimcha nurlar va kuchli uyingizda bilan jihozlangan, bu esa ta'sirni yumshatishni ta'minlaydi. Avtomobil 2018 yilgacha, ikki xil o'zgarishlarda ishlab chiqarilgan:
                             Ushbu belgiga ega Mix – mashinalar 0,8 litrli dvigatel bilan ishlab chiqarilgan va oxirgi" lyuks " uskunasi avtomatik quti bilan jihozlangan. Matisa dvigatelining kichik hajmi tufayli "mix" litrlik hamkasbiga qaraganda ancha tejamkor.
                             Eng yaxshi ma'lumotlar 1,0 dvigatel hajmi bilan jihozlangan bo'lib, ularni avvalgi modellarga qaraganda ancha kuchliroq qiladi. Yoqilg'i iste'moli va ayrim ehtiyot qismlar narxi Matiz "mix"ga qaraganda ancha yuqori.
@@ -9132,7 +9126,7 @@ export const getSEOContent = (category: CategoryType, subCtgr: SubcategoryType, 
                         },
                         damas: {
                             title: `Damas ${location} / sotib olish, ijaraga olish yoki Damas narxlarini bilish`,
-                            description: `Yangi va ishlatilgan damaslarni ${location} da sotish uchun ko'plab reklamalar | Damas narxlarini sotib olish, ijaraga olish yoki topish / slondo.uz`,
+                            description: `Yangi va ishlatilgan damaslarni ${location}da sotish uchun ko'plab reklamalar | Damas narxlarini sotib olish, ijaraga olish yoki topish / slondo.uz`,
                             text: `Daewoo Damas (ilgari Daewoo brendi ostida ishlab chiqarilgan) biznes yoki katta oila ehtiyojlari uchun mo'ljallangan yengil avtomobil. 0,8 litr hajmli iqtisodiy vosita, keng salon va tanlashning uchta o'zgarishi bu avtomobilni butun uz Gm liniyasining eng mashhurlaridan biri deb hisoblaydi. Katta talab shuningdek, strukturaning soddaligi va ishonchliligini ochib beradi, buning natijasida sarf materiallari yoki singan qismlarni almashtirish shunga o'xshash modellarga o'xshash ta'mirlashdan ko'ra ancha arzon bo'ladi. Damas'a modifikatsiyadagi har bir, uning ishida eng yaxshi bo'lgan noyob avtomobil:
                             Yo'lovchi: uch qatorli o'rindiq va haydovchi bilan birga 8 kishining umumiy hajmi mavjud. Boshqa modifikatsiyalardan ko'proq katta oila uchun javob beradi.
                             Yuk (van): Damasning bu turi yo'lovchiga o'xshaydi, lekin sakkizta joy o'rniga, faqat ikkita haydovchi bor. Orqa o'rindiqlar o'rniga, bu modifikatsiya yuk uchun idishni o'z ichiga oladi. Shahar ichidagi turli xil mahsulotlarni tashish uchun juda yaxshi va agar kerak bo'lsa, uzoq safarlarda foydalanish mumkin.
@@ -9142,7 +9136,7 @@ export const getSEOContent = (category: CategoryType, subCtgr: SubcategoryType, 
                         },
                         nexia: {
                             title: `Nexia 2 ${location} / sotib olish yoki Nexia 1, 2 ijaraga`,
-                            description: `Nexia 1, 2 Daewoo-ni ${location} da sotish bo'yicha ko'plab takliflar sotib olish, narxni bilish, kredit olish yoki Neksiya avtomobilini sotib olish bilan ijaraga olish | slondo.uz`,
+                            description: `Nexia 1, 2 Daewoo-ni ${location}da sotish bo'yicha ko'plab takliflar sotib olish, narxni bilish, kredit olish yoki Neksiya avtomobilini sotib olish bilan ijaraga olish | slondo.uz`,
                             text: `Nexia rusumli avtomobil O'zbekistonda 1996 yilda taqdim etilgan. Jami 1 Nexia ning ikkita varianti taqdim etildi, ular turli xil quvvatli dvigatellar bilan jihozlangan: RoHS va DOHS. Ushbu mashina zudlik bilan ishonchliligi, yuqori sifatli yig'ilishi, keng ichki va dvigatelning mustahkamligi uchun juda yoqdi, uning ba'zi ma'lumotlarga ko'ra, yarim million kilometrga teng. "Birinchi" Neksiya ko'pchiligi bugungi kungacha mamlakat yo'llarida harakat qilmoqda. 
                             2008da Nexia birinchi avlodini almashtirish uchun yangilangan model keldi. U o'zining eng yaxshi tomonlarini saqlab qoldi, dizayn esa zamonaviy modaga aylandi. Nexia 2 ning texnik komponenti ham yangilandi. Ushbu mashina turli kuch va dvigatel hajmi bilan ikki xil farqda uchraydi: 1,5 va 1.6 litr. 
                             Savdo maydonchasida slondo.uz. sotib olish, sotish, shuningdek, yangi yoki ishlatilgan avtomobilni sotib olish, kredit yoki lizing bilan ijaraga olishingiz mumkin!
@@ -9150,7 +9144,7 @@ export const getSEOContent = (category: CategoryType, subCtgr: SubcategoryType, 
                         },
                         lacetti: {
                             title: `Lacetti Gentra ${location} / sotib olish, variant yoki Lacetti sotib olish bilan ijaraga olish `,
-                            description: `Chevrolet Lacetti Gentra-ni ${location} da sotish / yangi yoki ishlatilgan Lacetti Gentra-ni sotib olish, shuningdek, kredit va ijara takliflarini sotib olish | slondo.uz`,
+                            description: `Chevrolet Lacetti Gentra-ni ${location}da sotish / yangi yoki ishlatilgan Lacetti Gentra-ni sotib olish, shuningdek, kredit va ijara takliflarini sotib olish | slondo.uz`,
                             text: `Lacceti Daewoo mamlakatimizning ochiq joylarida ishlab chiqarilgan birinchi mashinalardan biridir. Ushbu markaning birinchi avtomobili uzoq 2003 yilda sotila boshlandi. Jami ikkita variant taklif qilindi: 1.6 dvigateli va 1.8 litr. Ularning ehtiyojlariga asoslanib, potentsial xaridor kuch yoki iqtisod o'rtasidagi tanlovga ega. 
                             Ikki minginchi yillarning boshlanishiga qaramasdan, birinchi Lachetti allaqachon eng so'nggi texnologiyalar bilan jihozlangan va hashamatli uskunalar avtomatik Vites qutisi (avtomat) degan ma'noni anglatadi. 2013da lineer yangilandi va oddiy Lacetti o'rnini egalladi, Lacetti Gentra keldi. Undagi vosita o'rniga ko'proq iqtisodiy 1,5 litr versiyasi almashtirildi. Bundan tashqari, ushbu modelning qayta tiklangan versiyasida texnik plomba yangilandi, buning natijasida ko'plab funktsiyalar mavjud bo'ldi.
                             Savdo maydonchasida slondo.uz. sotib olish, sotish, shuningdek, yangi yoki ishlatilgan avtomobilni sotib olish, kredit yoki lizing bilan ijaraga olishingiz mumkin!
@@ -9160,10 +9154,10 @@ export const getSEOContent = (category: CategoryType, subCtgr: SubcategoryType, 
                     chevrolet: {
                         title: `Chevrolet avtomobillari ${location} /yangi va ikkinchi qo'l avtomobillarni sotish`,
                         description: `"Chevrolet Uz" rusumli yangi va ikkinchi qo'l Avtomobillar uchun narxlarni sotib olish yoki narx bilish/ "Chevrolet Uz" avtomobillariga sotib olish bilan sotish va ijaraga berish bo'yicha takliflar»`,
-                        text: `Chevrolet yo'lovchi avtomobillarini sotish. Sotib olish, sotish, variant / sotib olish bilan ijaraga olish, ${location} da avtomobil sizga yordam beradi slondo.uz`,
+                        text: `Chevrolet yo'lovchi avtomobillarini sotish. Sotib olish, sotish, variant / sotib olish bilan ijaraga olish, ${location}da avtomobil sizga yordam beradi slondo.uz`,
                         matiz: {
                             title: `Matiz ${location} narx / Matiz sotib olish yoki sotib olish / kredit bilan ijaraga`,
-                            description: `${location} da Matiz sotish uchun takliflar ko'p | sotib olish, ijaraga / kredit yoki Matiz mix, eng yaxshi narxini bilish: mexanika | avtomatik / yangi (salon) va ishlatilgan variantlar`,
+                            description: `${location}da Matiz sotish uchun takliflar ko'p | sotib olish, ijaraga / kredit yoki Matiz mix, eng yaxshi narxini bilish: mexanika | avtomatik / yangi (salon) va ishlatilgan variantlar`,
                             text: `Matiz O'zbekistonda chop etilgan ikkinchi xetchbek hisoblanadi. Uning tanasi aerodinamik uslubda ishlab chiqarilgan, bu o'sha paytda avtomobil dizaynida haqiqiy inqilob edi. Oddiy o'lchamlarga qaramasdan, bu mashina tananing yon qismlarida qo'shimcha nurlar va kuchli uyingizda bilan jihozlangan, bu esa ta'sirni yumshatishni ta'minlaydi. Avtomobil 2018 yilgacha, ikki xil o'zgarishlarda ishlab chiqarilgan:
                             Ushbu belgiga ega Mix – mashinalar 0,8 litrli dvigatel bilan ishlab chiqarilgan va oxirgi" lyuks " uskunasi avtomatik quti bilan jihozlangan. Matisa dvigatelining kichik hajmi tufayli "mix" litrlik hamkasbiga qaraganda ancha tejamkor.
                             Eng yaxshi ma'lumotlar 1,0 dvigatel hajmi bilan jihozlangan bo'lib, ularni avvalgi modellarga qaraganda ancha kuchliroq qiladi. Yoqilg'i iste'moli va ayrim ehtiyot qismlar narxi Matiz "mix"ga qaraganda ancha yuqori.
@@ -9172,7 +9166,7 @@ export const getSEOContent = (category: CategoryType, subCtgr: SubcategoryType, 
                         },
                         damas: {
                             title: `Damas ${location} / sotib olish, ijaraga olish yoki Damas narxlarini bilish`,
-                            description: `Damaslar uchun ${location} da yangi va ishlatilgan reklamalarni sotish/Damas Daewoo va Chevrolet | slondo.uz`,
+                            description: `Damaslar uchun ${location}da yangi va ishlatilgan reklamalarni sotish/Damas Daewoo va Chevrolet | slondo.uz`,
                             text: `Chevrolet Damas (ilgari Daewoo brendi ostida ishlab chiqarilgan) biznes yoki katta oila ehtiyojlari uchun mo'ljallangan yengil avtomobil. 0,8 litr hajmli iqtisodiy vosita, keng salon va tanlashning uchta o'zgarishi bu avtomobilni butun uz Gm liniyasining eng mashhurlaridan biri deb hisoblaydi. Katta talab shuningdek, strukturaning soddaligi va ishonchliligini ochib beradi, buning natijasida sarf materiallari yoki singan qismlarni almashtirish shunga o'xshash modellarga o'xshash ta'mirlashdan ko'ra ancha arzon bo'ladi. Damas'a modifikatsiyadagi har bir, uning ishida eng yaxshi bo'lgan noyob avtomobil:
                             Yo'lovchi: uch qatorli o'rindiq va haydovchi bilan birga 8 kishining umumiy hajmi mavjud. Boshqa modifikatsiyalardan ko'proq katta oila uchun javob beradi.
                             Yuk (van): Damasning bu turi yo'lovchiga o'xshaydi, lekin sakkizta joy o'rniga, faqat ikkita haydovchi bor. Orqa o'rindiqlar o'rniga, bu modifikatsiya yuk uchun idishni o'z ichiga oladi. Shahar ichidagi turli xil mahsulotlarni tashish uchun juda yaxshi va agar kerak bo'lsa, uzoq safarlarda foydalanish mumkin.
@@ -9181,15 +9175,15 @@ export const getSEOContent = (category: CategoryType, subCtgr: SubcategoryType, 
                             `
                         },
                         spark: {
-                            title: `${location} da Spark / sotib olish, sotib olish/sotib olish yoki narxni bilish`,
-                            description: `Yangi va ishlatilgan Sparklarni ${location} da sotish / sotib olish / sotib olish yoki ijaraga olish Spark narxini bilish, eng oson yo'li slondo.uz / Chevrolet va Daewoo avtomobillari`,
+                            title: `${location}da Spark / sotib olish, sotib olish/sotib olish yoki narxni bilish`,
+                            description: `Yangi va ishlatilgan Sparklarni ${location}da sotish / sotib olish / sotib olish yoki ijaraga olish Spark narxini bilish, eng oson yo'li slondo.uz / Chevrolet va Daewoo avtomobillari`,
                             text: `Spark-yangi modellar uchun 1,25 litr hajmli dvigatel bilan jihozlangan keng hatchback va eski modellar uchun 1,0 litr. Tanlash uchun turli byudjet uchun mo'ljallangan bir nechta komplektlar mavjud. Avtomatik transmissiya (avtomat) bilan jihozlangan eng "yuqori" (to'liq) pozitsiyasi, variantlarda mexanik Vites qutisi osonroq o'rnatiladi. Spark turli markalar ostida ishlab chiqariladi: Chevrolet mahalliy bozor uchun va eksport uchun Ravon R2 (evro variant) belgisi ostida. Eng kichik detallarga mukammal qurilish sifati va strukturaning g'amxo'rligi bu avtomobilni juda muvaffaqiyatli qiladi. Kichik o'lchamlar shahar oqimida manevr qilish imkonini beradi va besh kishiga qadar bo'lgan imkoniyatlar oila uchun mos keladi.
                             Savdo maydonchasida slondo.uz. sotib olish, sotish, shuningdek, yangi yoki ishlatilgan avtomobilni sotib olish, kredit yoki lizing bilan ijaraga olishingiz mumkin!
                             `
                         },
                         nexia: {
-                            title: `Nexia 2 ${location} da / sotib olish yoki Nexia 1, 2, 3 ijaraga`,
-                            description: `Daewoo va Chevrolet-dan Nexia 1, 2, 3-ni ${location} da sotish bo'yicha ko'plab takliflar | sotib olish, narxni bilish, kredit olish yoki Neksiya avtomobilini sotib olish bilan ijaraga olish | slondo.uz`,
+                            title: `Nexia 2 ${location}da / sotib olish yoki Nexia 1, 2, 3 ijaraga`,
+                            description: `Daewoo va Chevrolet-dan Nexia 1, 2, 3-ni ${location}da sotish bo'yicha ko'plab takliflar | sotib olish, narxni bilish, kredit olish yoki Neksiya avtomobilini sotib olish bilan ijaraga olish | slondo.uz`,
                             text: `Nexia rusumli avtomobil O'zbekistonda 1996 yilda taqdim etilgan. Jami 1 Nexia ning ikkita varianti taqdim etildi, ular turli xil quvvatli dvigatellar bilan jihozlangan: CoHS va DOHS. Ushbu mashina zudlik bilan ishonchliligi, yuqori sifatli yig'ilishi, keng ichki va dvigatelning mustahkamligi uchun juda yoqdi, uning ba'zi ma'lumotlarga ko'ra, yarim million kilometrga teng. "Birinchi" Neksiya ko'pchiligi bugungi kungacha mamlakat yo'llarida harakat qilmoqda.
                             2008da Nexia birinchi avlodini almashtirish uchun yangilangan model keldi. U o'zining eng yaxshi tomonlarini saqlab qoldi, dizayn esa zamonaviy modaga aylandi. Nexia 2 ning texnik komponenti ham yangilandi. Ushbu mashina turli kuch va dvigatel hajmi bilan ikki xil farqda uchraydi: 1,5 va 1.6 litr.
                             Yangilikni chiqarishdan sakkiz yil o'tgach, uning o'rniga Nexia uchinchi avlod keladi. Dizayni to'liq qayta tiklashdan tashqari, ushbu model avtomatik transmissiya olgan so'nggi konfiguratsiyada o'z yo'nalishida birinchi hisoblanadi. Mashinaning old qismi deyarli butunlay boshqa "Chevrolet Aveo"avtomobilidan ko'chirildi.
@@ -9197,15 +9191,15 @@ export const getSEOContent = (category: CategoryType, subCtgr: SubcategoryType, 
                             `
                         },
                         cobalt: {
-                            title: `${location} da kobalt sotib olish/yangi va ishlatilgan Chevrolet Cobalt sotish`,
-                            description: `Yangi va ishlatilgan Chevrolet Cobalt-ni ${location} da sotish bo'yicha ko'plab takliflar sotib olish, narxni bilish, sotib olish yoki variant bilan ijaraga olish, kobalt slondo.uz`,
+                            title: `${location}da kobalt sotib olish/yangi va ishlatilgan Chevrolet Cobalt sotish`,
+                            description: `Yangi va ishlatilgan Chevrolet Cobalt-ni ${location}da sotish bo'yicha ko'plab takliflar sotib olish, narxni bilish, sotib olish yoki variant bilan ijaraga olish, kobalt slondo.uz`,
                             text: `Chevrolet Cobalt iqtisodiy 1.5 litrli dvigatel bilan jihozlangan keng sedan va besh kishilik katta salon oilaviy ehtiyojlar uchun qulay foydalanish imkonini beradi. Bundan tashqari, kobalt braziliyalik mutaxassislar bilan birgalikda ishlab chiqilgan oqlangan dizayni bilan namoyish etiladi. Ravon – evro r 4 modellari, eksport uchun ishlab chiqarilgan va Chevrolet – mahalliy bozor uchun to'plangan: tanlash turli brendlar ostida avtomobil ikki versiyalarini beradi. Bundan tashqari, Cobalt bir nechta pozitsiyalarda, byudjetdan yuqori (to'liq) konfiguratsiyaga taqdim etiladi. Ikkinchisi avtomatik Vites qutisi (avtomatik) bilan jihozlangan.
                             Savdo maydonchasida slondo.uz. sotib olish, sotish, shuningdek, yangi yoki ishlatilgan avtomobilni sotib olish, kredit yoki lizing bilan ijaraga olishingiz mumkin!
                             `
                         },
                         lacetti: {
                             title: `Lacetti Gentra ${location} / sotib olish, variant yoki Lacetti ijaraga olish`,
-                            description: `Chevrolet Lacetti Gentra-ni ${location} da sotish / yangi yoki ishlatilgan Lacetti Gentra-ni sotib olish, shuningdek, kredit va ijara takliflarini sotib olish | slondo.uz`,
+                            description: `Chevrolet Lacetti Gentra-ni ${location}da sotish / yangi yoki ishlatilgan Lacetti Gentra-ni sotib olish, shuningdek, kredit va ijara takliflarini sotib olish | slondo.uz`,
                             text: `Lacceti bizning mamlakatimizning ochiq joylarida ishlab chiqarilgan birinchi mashinalardan biridir. Ushbu markaning birinchi avtomobili uzoq 2003 yilda sotila boshlandi. Jami ikkita variant taklif qilindi: 1.6 dvigateli va 1.8 litr. Ularning ehtiyojlariga asoslanib, potentsial xaridor kuch yoki iqtisod o'rtasidagi tanlovga ega.
                             Ikki minginchi yillarning boshlanishiga qaramasdan, birinchi Lachetti allaqachon eng so'nggi texnologiyalar bilan jihozlangan va hashamatli uskunalar avtomatik Vites qutisi (avtomat) degan ma'noni anglatadi. 2013da lineer yangilandi va oddiy Lacetti o'rnini egalladi, Lacetti Gentra keldi. Undagi vosita o'rniga ko'proq iqtisodiy 1,5 litr versiyasi almashtirildi. Bundan tashqari, ushbu modelning qayta tiklangan versiyasida texnik plomba yangilandi, buning natijasida ko'plab funktsiyalar mavjud bo'ldi.
                             Savdo maydonchasida slondo.uz. sotib olish, sotish, shuningdek, yangi yoki ishlatilgan avtomobilni sotib olish, kredit yoki lizing bilan ijaraga olishingiz mumkin!
@@ -9213,28 +9207,28 @@ export const getSEOContent = (category: CategoryType, subCtgr: SubcategoryType, 
                         },
                         epica: {
                             title: `Epica ${location} / sotib olish, variant bilan ijaraga olish yoki narxini bilish`,
-                            description: `"Epica" avtomobilini ${location} da sotish / sotib olish, narxni bilish yoki epikani sotib olish bilan ijaraga olish oson slondo.uz / Daewoo va Chevrolet dan avtomobillar`,
+                            description: `"Epica" avtomobilini ${location}da sotish / sotib olish, narxni bilish yoki epikani sotib olish bilan ijaraga olish oson slondo.uz / Daewoo va Chevrolet dan avtomobillar`,
                             text: `O'zbekistonda Epikani sotishning boshlanishi 2007 yilda boshlangan. Ushbu avtomobil o'z sinfidagi analoglardan ajralib turadigan katta o'lchamlarga ega. Dvigatelning kuchi uchun tanlov uchun 2,0 yoki 2,5 litr hajmli vosita javob beradi. Bundan tashqari, siz transmisyonni tanlashingiz mumkin: ushbu modeldagi mashinalar besh bosqichli qo'lda Vites qutisi yoki olti tezlikli avtomat bilan jihozlangan. Chevrolet (daewoo) Epica avtomobillari haydash paytida qulaylik va qulaylikni ta'minlaydi.
                             Savdo maydonchasida slondo.uz. sotib olish, sotish, shuningdek, yangi yoki ishlatilgan avtomobilni sotib olish, kredit yoki lizing bilan ijaraga olishingiz mumkin!
                             `
                         },
                         malibu: {
-                            title: `Malibu 1, 2ni ${location} da sotib oling yangi va ishlatilgan Chevrolet Malibu narxi`,
-                            description: `Yangi va ishlatilgan Chevrolet Malibu-ni ${location} da sotish/sotib olish, sotish, narxni bilish yoki Malibu-ni kredit / ijaraga olish osonroqdir slondo.uz`,
+                            title: `Malibu 1, 2ni ${location}da sotib oling yangi va ishlatilgan Chevrolet Malibu narxi`,
+                            description: `Yangi va ishlatilgan Chevrolet Malibu-ni ${location}da sotish/sotib olish, sotish, narxni bilish yoki Malibu-ni kredit / ijaraga olish osonroqdir slondo.uz`,
                             text: `Chevrolet Malibu ning birinchi versiyasi 2012 yilda O'zbekistonda ishlab chiqarila boshlandi, uning salafi "Epika"edi. Avtomobil 2,4 litr hajmli va 167 ot kuchiga ega kuchli dvigatelga ega bo'ldi. Potentsial xaridorlar mexanik va avtomatik o'rtasida to'g'ri uzatishni tanlash uchun taklif etiladi. Besh yil ishlab chiqarishdan so'ng, birinchi Malibu o'rnini egallash uchun ikkinchi avlod yanada rivojlangan sedan keladi. Malibu 2 dizayni ichki va tashqi tomondan butunlay o'zgartirildi. Tashqi o'zgarishlarga qo'shimcha ravishda, yangi miqdori 2.4 ot kuchiga ega bo'lgan 186 litr bo'lgan dvigatel ham almashtirildi. Ikki yil o'tgach, yangilik konveyerdan olib tashlandi, uning o'rnini avtomobilning Turbo versiyasi egalladi. Turbina qo'shilishi bilan dvigatelning katta hajmi ortiqcha bo'lib chiqdi, buning natijasida 1,5 va 2.0 hajmli modellar mavjud.
                             Savdo maydonchasida slondo.uz. sotib olish, sotish, shuningdek, yangi yoki ishlatilgan avtomobilni sotib olish, kredit yoki lizing bilan ijaraga olishingiz mumkin!
                             `
                         },
                         captiva: {
                             title: `Captiva 4 ${location} / sotib olish yoki yangi va ishlatilgan Captiva 1, 2, 3, 4 uchun narx bilish`,
-                            description: `Yangi va ishlatilgan Chevrolet Captiva-ni ${location} da sotish / sotib olish, narxni bilish, variant yoki captivani ijaraga olish, eng oson yo'li slondo.uz`,
+                            description: `Yangi va ishlatilgan Chevrolet Captiva-ni ${location}da sotish / sotib olish, narxni bilish, variant yoki captivani ijaraga olish, eng oson yo'li slondo.uz`,
                             text: `Chevrolet Captiva O'zbekiston hududida ishlab chiqarilayotgan birinchi krossover hisoblanadi. Ushbu model oldingi haydovchiga ega edi, agar kerak bo'lsa (keyingi modellarda avtomatik almashtirish bilan) to'liq bajarilishi mumkin. Birinchi avlod Captiva ishlab chiqarish 2007 yilda boshlandi. Xaridorga 2,4 va 3,2 litr o'rtasida vosita hajmini tanlash imkoniyati berildi. Vites qutisi pozitsiyadan ham o'zgardi: oddiy trim darajasida avtomobil mexanik transmissiya bilan jihozlangan, oxirgi holatda esa avtomobil "avtomatik"quti bilan jihozlangan. 2011da birinchi Captiva o'rniga ikkinchi versiya keldi. Tashqi o'zgarishlar avtomobilning old qismiga tegdi, bu erda chiroqlar butunlay o'zgartirildi. Dvigatel hajmi 3,2 dan 3,0 litrgacha kamaydi, bu esa kuchli o'zgarishlarga ega. 2,4 litr dvigateli modellar o'zgarishsiz qoldi. Shundan so'ng, 2012da Captiva yana o'zgarishlarga toqat qilmoqda, bu safar juda muhim emas. Dizayn biroz o'zgarib turadi va mexanik transmissiya endi trim darajasida emas. To'rt yil o'tgach, uning o'rniga Chevrolet – Captiva 4 krossoverining restyling va zamonaviy versiyasi keladi. Jasoratli ko'rinish oldingi faralarning yangilangan shakli bilan ta'minlandi va ko'plab qo'shimcha funktsiyalar avtomobilni juda qulay qiladi.
                             Savdo maydonchasida slondo.uz. sotib olish, sotish, shuningdek, yangi yoki ishlatilgan avtomobilni sotib olish, kredit yoki lizing bilan ijaraga olishingiz mumkin!
                             `
                         },
                         orlando: {
                             title: `Chevrolet Orlando - ${location} | yangi va ishlatilgan avtoulov narxini sotib oling`,
-                            description: `Chevrolet Orlando-ni ${location} da sotish / sotib olish, narxni bilish yoki sotib olish bilan ijaraga olish universal Orlando, sizga yordam beradi slondo.uz`,
+                            description: `Chevrolet Orlando-ni ${location}da sotish / sotib olish, narxni bilish yoki sotib olish bilan ijaraga olish universal Orlando, sizga yordam beradi slondo.uz`,
                             text: `Chevrolet Orlando O'zbekiston hududida 2014 yildan 2018 yilgacha ishlab chiqarilgan. Avtomobil tanasi universal uslubda ishlab chiqariladi va 1,8 litr hajmli vosita iqtisodiy samaradorlikni ta'minlaydi. Oltita yo'lovchi o'rindiqlari va bitta haydovchi avtomobilni juda keng qiladi, bu katta oila uchun foydali bo'ladi. Oxirgi ikki qator o'rindiqlar magistralning hajmini oshirib, orqaga tortilishi mumkin. Mashina oltita tezlikda "avtomatik" yoki besh bosqichli "mexanika" bilan jihozlangan.
                             Orlando amaliyligi haqida ko'p yillar davomida tortishuvlar mavjud. Bir tomondan, mashinada ko'proq afzalliklar bor, ikkinchisi esa kamchiliklarga qaratilgan. Shunga qaramay, avtomobil o'z narxini to'liq oqlaydi va juda ko'p ijobiy his-tuyg'ularga sabab bo'ladi.
                             Savdo maydonchasida slondo.uz. sotib olish, sotish, shuningdek, yangi yoki ishlatilgan avtomobilni sotib olish, kredit yoki lizing bilan ijaraga olishingiz mumkin!
@@ -9242,47 +9236,47 @@ export const getSEOContent = (category: CategoryType, subCtgr: SubcategoryType, 
                         },
                         tracker: {
                             title: `Chevrolet Tracker-sotib olish yoki ${location} | yangi va ishlatilgan izdoshlari narxini bilish`,
-                            description: `Yangi va ishlatilgan Chevrolet Tracker-ni ${location} da sotish / sotib olish, narxni bilish yoki sotib olish bilan kredit/ijara uchun izdoshni olish, eng qulay slondo.uz / 1 va 2 versiyasi`,
+                            description: `Yangi va ishlatilgan Chevrolet Tracker-ni ${location}da sotish / sotib olish, narxni bilish yoki sotib olish bilan kredit/ijara uchun izdoshni olish, eng qulay slondo.uz / 1 va 2 versiyasi`,
                             text: `Chevrolet Tracker-2018 yilda O'zbekistonda boshlangan birinchi avlod sotuvlarining boshlanishi kichik krossover. Keng salon ichki tasalli hissini yaratadi va muvaffaqiyatli zich oqimi manevra imkonini beradi kichik tanasi, joylashgan. 140 ot kuchiga ega bo'lgan kuch uchun, 1,8 litrlik dvigatel javobda va mexanik yoki avtomatik Vites qutisini tanlash uchun. Bundan tashqari, izdoshi faol va passiv xavfsizlikning ko'plab funktsiyalari bilan jihozlangan. 2020-da, birinchi versiyani almashtirish uchun Chevrolet Tracker 2 keldi, zamonaviy dizayni va faralarning markali "Jasur" joylashuvi bilan. Dvigatel 1,0 va 1,3 litr hajmgacha qisqartirildi, ammo Turbo-ning qo'shilishi bilan restyling versiyasining kuchi 125 va 160 l ga teng. mos ravishda.
                             Savdo maydonchasida slondo.uz. sotib olish, sotish, shuningdek, yangi yoki ishlatilgan avtomobilni sotib olish, kredit yoki lizing bilan ijaraga olishingiz mumkin!
                             `
                         },
                         trailblazer: {
                             title: `Chevrolet Trailblazer ${location} / narxlarni bilish yoki yangi va ishlatilgan sotib olish`,
-                            description: `Yangi va ishlatilgan Chevrolet Trailblazer-ni ${location} da sotish/sotib olish, narxni bilish yoki ijaraga olish / kredit olish slondo.uz / salonlari va xususiy sotuvchi dan" Chevrolet " dan avtomobil`,
+                            description: `Yangi va ishlatilgan Chevrolet Trailblazer-ni ${location}da sotish/sotib olish, narxni bilish yoki ijaraga olish / kredit olish slondo.uz / salonlari va xususiy sotuvchi dan" Chevrolet " dan avtomobil`,
                             text: `Chevrolet Trailblazer - kuchli vosita, yo'lovchilar uchun mo'l-ko'l joylar va katta hajmli magistral bilan keng krossover-suv. Mashinani o'zbek bozoriga moslashtirish 2019-2020 yillarda amalga oshirildi. 3,6 litrdagi dvigatel 9,1 soniyada va 275 ot kuchida yuzga tezlashuvni ta'minlaydi. Bundan tashqari, avtomobil kruiz nazorati bilan jihozlangan, bu esa uzoq safarlarda haydovchini kamroq charchatishga imkon beradi va avtomobil bilan jihozlangan ko'plab qo'shimcha funktsiyalar uni eng qulay holga keltiradi.
                             Savdo maydonchasida slondo.uz. sotib olish, sotish va sotib olish, kredit yoki lizing bilan ijaraga olish uchun yangi yoki ishlatilgan avtomobilni osongina sotib olishingiz mumkin
                             `
                         },
                         equinox: {
                             title: `Chevrolet Equinox - ${location} | yangi va ishlatilgan Equinox narxinibilib oling yoki sotib oling`,
-                            description: `Chevrolet Equinoxni ${location} da sotish | shaharning xususiy savdogarlari va avtomobil salonlaridan ko'p takliflar sotib olish, narxlarni bilish, kredit olish yoki yangi va ikkinchi qo'l Chevrolet Ekvinox sotib olish bilan ijaraga olish»`,
+                            description: `Chevrolet Equinoxni ${location}da sotish | shaharning xususiy savdogarlari va avtomobil salonlaridan ko'p takliflar sotib olish, narxlarni bilish, kredit olish yoki yangi va ikkinchi qo'l Chevrolet Ekvinox sotib olish bilan ijaraga olish»`,
                             text: `Chevrolet Equinox krossoveri Malibu uchun ishlatilgan bir xil platformada ishlab chiqilgan. 2,0 litr kuchli, Turbo dvigateli 252 ot kuchiga tortish imkonini beradi va panoramik tom va ichki teri taxta, makon hissi yaratadi va avtomobil ichidagi qulaylikni oshiradi. To'qqiz-tezlikda "avtomatik" Vites qutisi tezlikni almashtirishni silliq qiladi, bu esa avtomobilning vakillik sinfini yana bir bor ta'kidlaydi. 6 yostiq" airbag", ABS + ESP, orqa kamera, iqlim va kruiz nazorat qilish va boshqa ko'plab vazifalarni:" Chevrolet Equinox " faol va passiv xavfsizligini ta'minlash uchun mo'ljallangan bir qismi bo'lgan elektronika, bir poda bilan jihozlangan.
                             Savdo maydonchasida slondo.uz. sotib olish, sotish va sotib olish, kredit yoki lizing bilan ijaraga olish uchun yangi yoki ishlatilgan avtomobilni osongina sotib olishingiz mumkin
                             `
                         },
                         traverse: {
                             title: `Chevrolet Traverse ${location} | yangi va ishlatilgan Chevrolet Travers sotib olish`,
-                            description: `Chevrolet Traversni ${location} da sotish uchun avtosalonlar va xususiy mulkdorlardan takliflar sotib olish, narxni bilish, sotib olish yoki "Chevrolet Travers" | yangi va ishlatilgan avtomobillar`,
+                            description: `Chevrolet Traversni ${location}da sotish uchun avtosalonlar va xususiy mulkdorlardan takliflar sotib olish, narxni bilish, sotib olish yoki "Chevrolet Travers" | yangi va ishlatilgan avtomobillar`,
                             text: `Chevrolet Traverse-bu krossover-vakillik sinfining suvidir. Qattiq o'lchamlar haydovchini hisobga olgan holda etti kishini tashkil etadigan to'liq yuk bilan ham avtomobilga qulay haydashni ta'minlaydi. "Chevrolet Travers" - Uzautomotorsning modellari qatorida ikkinchi yirik avtomobil. Mashina 2,0 litr Turbo dvigatel yoki 3,6 litr atmosfera hajmi bilan jihozlangan. Bundan tashqari, katta hajmli vosita bilan jihozlangan "Premier"deb nomlangan. Mashinaning kuchi Turbo-shishiradigan modelda 250 ot kuchiga va atmosfera analogida 318ga teng. Bu GM – C1XX dan yangi platformada birinchi Chevrolet edi.
                             Savdo maydonchasida slondo.uz. sotib olish, sotish va sotib olish, kredit yoki lizing bilan ijaraga olish uchun yangi yoki ishlatilgan avtomobilni osongina sotib olishingiz mumkin
                             `
                         },
                         tahoe: {
                             title: `Chevrolet Tahoe - ${location} | yangi va ishlatilgan Chevrolet Tahoe sotib oling»`,
-                            description: `"Chevrolet Tahoe" avtomobillarini ${location} da sotish | sotib olish, narxni bilish, "Chevrolet Tahoe" avtomobilini sotib olish yoki ijaraga olish / slondo.uz`,
+                            description: `"Chevrolet Tahoe" avtomobillarini ${location}da sotish | sotib olish, narxni bilish, "Chevrolet Tahoe" avtomobilini sotib olish yoki ijaraga olish / slondo.uz`,
                             text: `Chevrolet Tahoe-uzautomotors'dan taqdim etilgan barcha modellardan eng katta va eng qulay avtomobil. Katta o'lchamlar salonni maksimal miqdordagi yo'lovchilarni qo'ndirgandan keyin ham keng qoldiradi, teri va boshqa qimmatbaho materiallar bilan qoplangan salon esa safarni iloji boricha qulayroq qiladi. Avtomobil 6,2 ot kuchiga ega bo'lgan 426 litr hajmli kuchli dvigatel bilan jihozlangan. Chevrolet Tahoe to'liq haydovchi mashinasi 100 soniyada 6,8 km/soat tezlikka ega, maksimal tezlik esa kompyuter cheklovi tufayli 180 km / soat. Bundan tashqari, avtomobil passiv-faol xavfsizlik va haydash qulayligi: iqlimni nazorat qilish, kruiz nazorati, ABS-ESP, kartridjlar, orqa ko'rinish kamerasi, yo'q – salonga asosiy kirish va yana ko'p narsalarni maqsad qilgan elektronikaning katta miqdori bilan jihozlangan.
                             Savdo maydonchasida slondo.uz. sotib olish, sotish va sotib olish, kredit yoki lizing bilan ijaraga olish uchun yangi yoki ishlatilgan avtomobilni osongina sotib olishingiz mumkin
                             `
                         }
                     },
                     ravon: {
-                        title: `Ravon avtomobillari ${location}/yangi va ikkinchi qo'l avtomobillarni sotish`,
-                        description: `Ravon rusumli yangi va ikkinchi qo'l avtomobillar uchun narxlarni ${location} da sotib olish yoki bilish/"Ravon" avtomobillariga sotib olish bilan sotish, kredit va ijara bo'yicha takliflar / bozor va salondan narxlarni bilish`,
-                        text: `Ravon yo'lovchi avtomobillarini sotish. Sotib olish, sotish, variant bilan ijaraga olish, ${location} da avtomobil sizga yordam beradi slondo.uz`,
+                        title: `Ravon avtomobillari ${location}  /yangi va ikkinchi qo'l avtomobillarni sotish`,
+                        description: `Ravon rusumli yangi va ikkinchi qo'l avtomobillar uchun narxlarni ${location}da sotib olish yoki bilish/"Ravon" avtomobillariga sotib olish bilan sotish, kredit va ijara bo'yicha takliflar / bozor va salondan narxlarni bilish`,
+                        text: `Ravon yo'lovchi avtomobillarini sotish. Sotib olish, sotish, variant bilan ijaraga olish, ${location}da avtomobil sizga yordam beradi slondo.uz`,
                         matiz: {
                             title: `Matiz ${location} narx / Matiz sotib olish yoki sotish / kredit bilan ijaraga`,
-                            description: `${location} da Matiz sotish uchun takliflar ko'p | sotib olish, ijaraga / kredit yoki Matiz mix, eng yaxshi narxini bilish: mexanika | avtomatik / yangi (salon) va ishlatilgan variantlar`,
+                            description: `${location}da Matiz sotish uchun takliflar ko'p | sotib olish, ijaraga / kredit yoki Matiz mix, eng yaxshi narxini bilish: mexanika | avtomatik / yangi (salon) va ishlatilgan variantlar`,
                             text: `Matiz O'zbekistonda chop etilgan ikkinchi xetchbek hisoblanadi. Uning tanasi aerodinamik uslubda ishlab chiqarilgan, bu o'sha paytda avtomobil dizaynida haqiqiy inqilob edi. Oddiy o'lchamlarga qaramasdan, bu mashina tananing yon qismlarida qo'shimcha nurlar va kuchli uyingizda bilan jihozlangan, bu esa ta'sirni yumshatishni ta'minlaydi. Avtomobil 2018 yilgacha, ikki xil o'zgarishlarda ishlab chiqarilgan:
                             Ushbu belgiga ega Mix – mashinalar 0,8 litrli dvigatel bilan ishlab chiqarilgan va oxirgi" lyuks " uskunasi avtomatik quti bilan jihozlangan. Matisa dvigatelining kichik hajmi tufayli "mix" litrlik hamkasbiga qaraganda ancha tejamkor.
                             Eng yaxshi ma'lumotlar 1,0 dvigatel hajmi bilan jihozlangan bo'lib, ularni avvalgi modellarga qaraganda ancha kuchliroq qiladi. Yoqilg'i iste'moli va ayrim ehtiyot qismlar narxi Matiz "mix"ga qaraganda ancha yuqori.
@@ -9291,7 +9285,7 @@ export const getSEOContent = (category: CategoryType, subCtgr: SubcategoryType, 
                         },
                         spark: {
                             title: `Spark R2 ${location} / sotib olish, sotish/ variant yoki narxni bilish`,
-                            description: `Yangi va ishlatilgan Sparklarni ${location} da sotish / sotib olish / variant bilan ijaraga olish yoki Spark R2 narxini bilish, eng oson yo'li slondo.uz / Ravon dan avtomobillar`,
+                            description: `Yangi va ishlatilgan Sparklarni ${location}da sotish / sotib olish / variant bilan ijaraga olish yoki Spark R2 narxini bilish, eng oson yo'li slondo.uz / Ravon dan avtomobillar`,
                             text: `Spark-yangi modellar uchun 1,25 litr hajmli dvigatel bilan jihozlangan keng hatchback va eski modellar uchun 1,0 litr. Tanlash uchun turli byudjet uchun mo'ljallangan bir nechta komplektlar mavjud. Avtomatik transmissiya (avtomat) bilan jihozlangan eng "yuqori" (to'liq) pozitsiyasi, variantlarda mexanik Vites qutisi osonroq o'rnatiladi. Spark turli markalar ostida ishlab chiqariladi: Chevrolet mahalliy bozor uchun va eksport uchun Ravon R2 (evro variant) belgisi ostida. Eng kichik detallarga mukammal qurilish sifati va strukturaning g'amxo'rligi bu avtomobilni juda muvaffaqiyatli qiladi. Kichik o'lchamlar shahar oqimida manevr qilish imkonini beradi va besh kishiga qadar bo'lgan imkoniyatlar oila uchun mos keladi.
                             Savdo maydonchasida slondo.uz. sotib olish, sotish, shuningdek, yangi yoki ishlatilgan avtomobilni sotib olish, kredit yoki lizing bilan ijaraga olishingiz mumkin!
                             `
@@ -9306,15 +9300,16 @@ export const getSEOContent = (category: CategoryType, subCtgr: SubcategoryType, 
                             `
                         },
                         cobalt: {
-                            title: `Kobalt R4 ni ${location} da sotib oling/yangi va ikkinchi qo'l Ravon Cobalt-ni sotish`,
-                            description: `Yangi va ishlatilgan Ravon Cobalt R4ni ${location} da sotish bo'yicha ko'plab takliflar / sotib olish, narxni bilish | sotib olish yoki, Sotish, ijaraga olish, kobalt slondo.uz`,
+                            title: `Kobalt R4 ni ${location}da sotib oling/yangi va ikkinchi qo'l Ravon Cobalt-ni sotish`,
+                            description: `Yangi va ishlatilgan Ravon Cobalt R4ni ${location}da sotish bo'yicha ko'plab takliflar / sotib olish, narxni bilish | sotib olish yoki, Sotish, ijaraga olish, kobalt slondo.uz`,
                             text: `Ravon Cobalt iqtisodiy 1.5 litrli dvigatel bilan jihozlangan keng sedan va besh kishilik katta salon oilaviy ehtiyojlar uchun qulay foydalanish imkonini beradi. Bundan tashqari, kobalt braziliyalik mutaxassislar bilan birgalikda ishlab chiqilgan oqlangan dizayni bilan namoyish etiladi. Ravon – evro r 4 modellari, eksport uchun ishlab chiqarilgan va Chevrolet – mahalliy bozor uchun to'plangan: tanlash turli brendlar ostida avtomobil ikki versiyalarini beradi. Bundan tashqari, Cobalt bir nechta pozitsiyalarda, byudjetdan yuqori (to'liq) konfiguratsiyaga taqdim etiladi. Ikkinchisi avtomatik Vites qutisi (avtomatik) bilan jihozlangan.
                             Savdo maydonchasida slondo.uz. sotib olish, sotish, shuningdek, yangi yoki ishlatilgan avtomobilni sotib olish, kredit yoki lizing bilan ijaraga olishingiz mumkin!
                             `
                         },
                         lacetti: {
                             title: `Lacetti Gentra ${location} / sotib olish, variant yoki Lacetti sotish, ijaraga olish`,
-                            description: `Ravon Lacetti Gentra-ni ${location} da sotish/yangi yoki ishlatilgan Lacetti Gentra-ni sotib olish, shuningdek, kredit va ijara takliflarini sotib olish | slondo.uz`,
+                            description: `Ravon Lacetti Gentra-ni ${location} 
+                            da sotish/yangi yoki ishlatilgan Lacetti Gentra-ni sotib olish, shuningdek, kredit va ijara takliflarini sotib olish | slondo.uz`,
                             text: `Lacceti bizning mamlakatimizning ochiq joylarida ishlab chiqarilgan birinchi mashinalardan biridir. Ushbu markaning birinchi avtomobili uzoq 2003 yilda sotila boshlandi. Jami ikkita variant taklif qilindi: 1.6 dvigateli va 1.8 litr. Ularning ehtiyojlariga asoslanib, potentsial xaridor kuch yoki iqtisod o'rtasidagi tanlovga ega.
                             Ikki minginchi yillarning boshlanishiga qaramasdan, birinchi Lachetti allaqachon eng so'nggi texnologiyalar bilan jihozlangan va hashamatli uskunalar avtomatik Vites qutisi (avtomat) degan ma'noni anglatadi. 2013da lineer yangilandi va oddiy Lacetti o'rnini egalladi, Lacetti Gentra keldi. Undagi vosita o'rniga ko'proq iqtisodiy 1,5 litr versiyasi almashtirildi. Bundan tashqari, ushbu modelning qayta tiklangan versiyasida texnik plomba yangilandi, buning natijasida ko'plab funktsiyalar mavjud bo'ldi.
                             Savdo maydonchasida slondo.uz. sotib olish, sotish, shuningdek, yangi yoki ishlatilgan avtomobilni sotib olish, kredit yoki lizing bilan ijaraga olishingiz mumkin!
@@ -9924,7 +9919,7 @@ export const getSEOContent = (category: CategoryType, subCtgr: SubcategoryType, 
                     }
                 },
                 uz: {
-                    title: `Ayollar libosi| paltolar, yubkalar, leggins, sviter, shubalar ${location}| Ayollar uchun`,
+                    title: `Ayollar libosi| paltolar, yubkalar, leggins, sviter, shubalar ${location} | Ayollar uchun`,
                     description: `Qizlar uchun, zamonaviy kiyimlar: har qanday did sohibasi uchun ayollar libosi katalogi. ${location}dagi eng yaxshi butiklar va jismoniy shaxslardan takliflar slondo.uz da`,
                     text: `Har bir qizning shkafidagi liboslari, to'g'ridan-to'g'ri uning didi yoki ichki dunyosini aks ettiradi. To'g'ri tanlangan uslub, qomatning o'ziga xos xususiyatlarini hisobga olgan holda, sizning qadr-qimmatingizni ta'kidlaydi, o'zingizni yanada ishonchli qiladi va ba'zi hollarda kamchiliklaringizni yashiradi ham. Kiyim o'z-o'zidan chiroyli bo’lmaydi, balki sizning shaxsiyatingizga moslashadi. Boshqacha qilib aytadigan bo'lsak, libos agar sizni yanada chiroyli va jozibali ko'rsata olsagina, maqsadga erishilgan bo’ladi.
                     Hech kimga sir emaski, bugungi kunda insonning skafi nafaqat moddiy, balki hayot tarzining estetik qismiga aylandi. Va shu holat kundalik liboslar, tungi liboslar, aksessuarlar va boshqa kiyim-kechaklarni tanlashda asos bo'lib xizmat qiladigan xususiyatdir.
@@ -10830,7 +10825,7 @@ export const getSEOContent = (category: CategoryType, subCtgr: SubcategoryType, 
                         text: `Bolalar bizning kelajagimiz ekanligini unutmasligimiz kerak. Shu sababli, ularga kiyim tanlayotganimizda, kiyimning qanday matodan tikilganligi, sovuqda va issiqda bola badani sovib yoki isib ketmaydimi? Bu savollarga ishlab chiqaruvchi mahsulot etiketkasida izoh qoldirishi kerak. Pahta,zig’ir,ipak,jun va boshqa tabiiy matolardan tikilgan va to’qilgan ko’ylak va bluzkalar inson badaniga salbiy ta’sir qilmaydi. Aksincha, 100% sintetik matodan tikilgan ko’ylaklar badanga havo o’tkazmay, badanni ko’p terlatib, kasal qilishi mumkin. Me’yorida sintetik ip qo’shib tikilgan, Polister materialidan tikilgan ko’ylak,yubka va bluzkalarni  Slondo.uz da qarang.`
                     },
                     outerwear: {
-                        title: `Bolalar uchun kurtkalar. ${location}| Qiz va yigit bolalar uchun palto, kurtkalar`,
+                        title: `Bolalar uchun kurtkalar. ${location} | Qiz va yigit bolalar uchun palto, kurtkalar`,
                         description: `Bolalar qishki kiyimlari: har qanday yoshdagi bolalar va o'spirinlar uchun eng yaxshi narxlarda kurtkalar, plash va paltolar`,
                         text: `Bolalar doimiy ravishda o'sib boradi, shuning uchun kiyimlarni har yili, ba'zan esa tez-tez sotib olish kerak bo’ladi. Kuz, qish yoki bahorgi kiyim qanday tanlanadi? Ushbu masalaga murojaat qilishda nimalarga e'tibor berishingiz kerak? Avvalo, bu o'lcham. Ko'ylag egasi tanasiga  bemalol o'tirishi kerak va hech qanday holatda tanaga yopishib  turmasligi kerak. Shuningdek, mahsulotning yashqi qismi qanday matodan qilinganligiga e’tibor qiling. Palto va shuba suv o'tkazmaydigan bo'lishi kerak, shu bilan birga havo o'tishi kerak, chunki nafas oladigan material bolaning terlashiga to'sqinlik qiladi. To'ldiruvchi yoki  ichki qatlamga kelsak, tabiiy materiallardan -Ttrikotaj, Flis yoki Flanelga  ustunlik berish kerak. Slondo.uz sizga eng yaxshi takliflarni tanlashga yordam beradi:
                         -  Palto
@@ -10938,7 +10933,7 @@ export const getSEOContent = (category: CategoryType, subCtgr: SubcategoryType, 
                         `
                     },
                     romper_undershirts: {
-                        title: `Polzunki va rasposhenki yangi tug'ilgan chaqaloqlar uchun. ${location}| arzon narxlarda sotib oling`,
+                        title: `Polzunki va rasposhenki yangi tug'ilgan chaqaloqlar uchun. ${location} | arzon narxlarda sotib oling`,
                         description: `Polzunki va raspashenki,ichki ko'ylaklar eng yaxshi narxlarda| optom va chakana savdo. Jismoniy shaxs, Detskiy Mir va ishlab chiqaruvchilarning ko'plab takliflari`,
                         text: `Hali chaqaloq dunyoga kelmasidan  oldin  sotib olish to'g'risida g'amxo'rlik qilish kerak, chunki ular yangi dunyoga kelgan chaqaloq kiyadigan birinchi kiyim bo'ladi. Oldindan rejalashtirish, xaridni yoqimli tajribaga aylantiradi, ko'plab xatolardan qochishga yordam beradi, shuningdek byudjetingizni sezilarli darajada tejaydi. Ammo chaqaloq hayotining birinchi oylari uchun pelenka,raspashenka va polzunok qidirishni boshlashdan oldin, ishlab chiqaruvchi o'z mahsulotlarini ishlab chiqaradigan materialni diqqat bilan o'rganishingiz kerak. Bunday erta yoshdagi bolalar juda sezgir va past sifatli mahsulotlar ularga allergik reaksiyaga sabab bo'lishi mumkin.
                         Slondo.uz sizga turli xil takliflar orasidan eng yaxshisini tanlashda yordam beradi:
@@ -12468,7 +12463,7 @@ export const getSEOContent = (category: CategoryType, subCtgr: SubcategoryType, 
                     },
                     excavators: {
                         title: `${location}da ekskavatorlar uchun ehtiyot qismlar maxsus texnika uchun butlovchi qismlar  sotib olish`,
-                        description: ` JCB, Hyundai, Holland, Hitachi ekskavatorlari uchun eng yaxshi narxlarda yangi va b.u. ehtiyot qismlar, butlovchi qismlar va sarf materiallarini sotib olish, slondo.uz / ${location}`,
+                        description: `JCB, Hyundai, Holland, Hitachi ekskavatorlari uchun eng yaxshi narxlarda yangi va b.u. ehtiyot qismlar, butlovchi qismlar va sarf materiallarini sotib olish, slondo.uz / ${location}`,
                         text: `Ekskavatorlarni qo'llash sohasi juda katta. Tuproq, qum, temir javhari, granit va boshqa jinslarni qazish uchun ishlatiladigan ushbu tuproq qazish qurilmalari ularni qurilish va boshqa sanoat sohalarida ajralmas holga keltiradi. Biroq, uzoq muddatli operatsiya bilan, vaqt o'tishi bilan sarf materiallarini va muvaffaqiyatsiz qismlarni almashtirish kerak: tırtıl kuchlanish, o'qning aylanish zanjiri va boshqa ko'plab komponentlar.
                         Ko'p takliflarning eng yaxshisini tanlang, sizga yordam beradi slondo.uz
                         `

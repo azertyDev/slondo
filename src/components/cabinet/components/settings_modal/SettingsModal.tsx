@@ -59,12 +59,14 @@ export const SettingsModal: FC<CommonModalType> = (props) => {
     const [buyer, setBuyer] = useState(initBuyer);
     const [status, setStatus] = useState<keyof typeof SettingsModalPropsType>('deactivate');
 
+    const isSoldOnSlondo = status === 'sold_on_slondo';
+
     const titleTxt = (() => {
         switch (status) {
             case 'sold_on_slondo':
                 return 'type_buyer_number';
             case 'confirm':
-                return 'deactivate_post';
+                return isPost ? 'deactivate_post' : 'deactivate_auction';
             case 'edit_post':
                 return 'edit_post_confirm';
             case 'rise_in_tape':
@@ -82,18 +84,20 @@ export const SettingsModal: FC<CommonModalType> = (props) => {
             setIsFetch(true);
             switch (status) {
                 case 'confirm':
-                case "sold_on_slondo":
+                case "sold_on_slondo": {
                     const data = {
                         user_id: buyer.id,
                         ads_id: post.id,
-                        reason_id: status === 'sold_on_slondo' ? reasons.sold : reasons.archive
+                        reason_id: isSoldOnSlondo ? reasons.sold : reasons.archive
                     };
-                    await userAPI.deactivatePost(data);
+                    isPost ? await userAPI.deactivatePost(data) : await userAPI.deactivateAuction(post.id);
                     break;
-                case 'rise_in_tape':
+                }
+                case 'rise_in_tape': {
                     await userAPI.ricePostInTape(post.id);
                     break;
-                case "edit_post":
+                }
+                case "edit_post": {
                     const postData = await userAPI.getPostById({id: post.id});
                     const postType = postData.ads_type.mark;
                     const categoryName = postData.category.name;
@@ -101,6 +105,7 @@ export const SettingsModal: FC<CommonModalType> = (props) => {
                     const type = postData.adsable.type ? `/${postData.adsable.type.name}` : '';
                     push(`/create/form/${postType}/${categoryName}/${subcategoryName}${type}?post_id=${postData.id}${urlByParams(postData)}`);
                     return;
+                }
             }
             unstable_batchedUpdates(() => {
                 handleClose();
@@ -118,7 +123,7 @@ export const SettingsModal: FC<CommonModalType> = (props) => {
     const formik = useFormik({
         onSubmit,
         initialValues: {phone: ''},
-        validationSchema: status === 'sold_on_slondo' ? phoneSchema : null
+        validationSchema: isSoldOnSlondo ? phoneSchema : null
     });
 
     const {values, setValues, errors, touched, handleReset} = formik;

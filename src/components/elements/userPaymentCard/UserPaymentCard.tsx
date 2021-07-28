@@ -9,7 +9,7 @@ import {useModal} from '@src/hooks/useModal';
 import {useHandlers} from '@src/hooks/useHandlers';
 import {phonePrepare} from '@src/helpers';
 import {myUzCardAPI} from '@src/api/api';
-import {useUserCard} from '@src/hooks/useUserCard';
+import {useUserPaymentCard} from '@src/hooks/useUserPaymentCard';
 import {CustomCircularProgress} from '@src/components/elements/custom_circular_progress/CustomCircularProgress';
 import {ErrorCtx, UserCtx} from "@src/context";
 import {useStyles} from './useStyles';
@@ -25,7 +25,7 @@ export const UserPaymentCard: FC = () => {
         isFetchUserCard,
         fetchUserCard,
         handleResetUserCard
-    } = useUserCard();
+    } = useUserPaymentCard();
 
     const hasCard = !!userCard.cardId;
 

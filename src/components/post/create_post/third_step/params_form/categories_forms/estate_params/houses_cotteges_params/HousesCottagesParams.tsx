@@ -40,7 +40,10 @@ export const HousesCottagesParams: FC<CommonParamsPropsType> = (props) => {
         number_of_floors: null,
         estate_type: null,
         general_area: '',
-        land_area: ''
+        land_area: '',
+        furnished: false,
+        with_pledge: false,
+        utilities: false
     };
 
     if (model) {
@@ -64,7 +67,7 @@ export const HousesCottagesParams: FC<CommonParamsPropsType> = (props) => {
         handleBlur
     } = formik;
 
-    const {handleCheckbox, handleOptionCheckbox, handleSelect} = useHandlers(values, setValues);
+    const {handleCheckbox, handleOptionCheckbox, handleSelect, handleNumericInput} = useHandlers(values, setValues);
     const isXsDown = useMediaQuery(useTheme().breakpoints.down('xs'));
 
     const classes = useStyles();
@@ -175,6 +178,7 @@ export const HousesCottagesParams: FC<CommonParamsPropsType> = (props) => {
                                         onBlur={handleBlur}
                                         items={filters.room}
                                         handleSelect={handleSelect}
+                                        labelTxt={t('filters:rooms')}
                                         errorMsg={getErrorMsg(errors.room, touched.room, t)}
                                     />
                                 </Grid>
@@ -212,6 +216,7 @@ export const HousesCottagesParams: FC<CommonParamsPropsType> = (props) => {
                                     name='ceiling_height'
                                     labelText='ceiling_height'
                                     value={values.ceiling_height ?? ''}
+                                    onChange={handleNumericInput}
                                     errorMsg={getErrorMsg(errors.ceiling_height, touched.ceiling_height, t)}
                                 />
                             </Grid>

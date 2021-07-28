@@ -3,6 +3,7 @@ import {Typography} from '@material-ui/core';
 import {FormikField} from '@src/components/elements/formik_field/FormikField';
 import {getErrorMsg} from '@src/helpers';
 import {WithT} from 'i18next';
+import {TITLE_LIMIT} from "@src/constants";
 
 type PostTitlePropsType = {
     isPreview: boolean,
@@ -25,10 +26,8 @@ export const PostTitle: FC<PostTitlePropsType> = (props) => {
         touched
     } = formik;
 
-    const titleTxtLimit = 50;
-
     const handleTitle = ({target: {name, value}}) => {
-        if (titleTxtLimit >= value.length) {
+        if (TITLE_LIMIT >= value.length) {
             setValues({...values, [name]: value});
         }
     };

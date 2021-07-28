@@ -1,34 +1,25 @@
 import {FC, useContext, useEffect, useState} from 'react';
+import {unstable_batchedUpdates} from "react-dom";
 import {TabsContent} from '@src/components/cabinet/cabinet_pages/TabsContent';
 import {userAPI} from '@src/api/api';
 import {useTranslation} from 'next-i18next';
-import {unstable_batchedUpdates} from "react-dom";
-import {
-    Box,
-    Tab,
-    Tabs,
-    Typography,
-    CircularProgress
-} from '@material-ui/core';
-import {InitialCabinetCardState, TabsDataType} from '@root/interfaces/Cabinet.js';
-import {CabinetCard} from '@src/components/cabinet/components/cabinet_card/CabinetCard';
+import {InitPostsType, TabsDataType} from '@root/interfaces/Cabinet.js';
 import {ITEMS_PER_PAGE} from '@src/constants';
-import {CustomTabPanel} from '@src/components/elements/custom_tab_panel/CustomTabPanel';
 import {useModal} from '@src/hooks/useModal';
 import {CardDataType} from '@root/interfaces/CardData';
 import {DetailedPostModalContainer} from '@src/components/cabinet/components/detailed_post_modal/DetailedPostModalContainer';
-import {initialCardData} from '@src/components/cabinet/cabinet_pages/my_posts/MyPosts';
 import {NotificationModal} from '@src/components/cabinet/components/notifation_modal/NotificationModal';
 import {SettingsModal} from "@src/components/cabinet/components/settings_modal/SettingsModal";
 import {ErrorCtx} from "@src/context";
-import {useStyles} from './useStyles';
+import {initCardData} from "@src/common_data/common";
 import {EmptyPage} from '@src/components/cabinet/components/empty_page/EmptyPage';
+import {CabinetTabs} from "@src/components/cabinet/components/cabinet_tabs/CabinetTabs";
 
 export const MyAuctions: FC = () => {
     const {t} = useTranslation('cabinet');
     const {setErrorMsg} = useContext(ErrorCtx);
 
-    const initialState: InitialCabinetCardState = {
+    const initialState: InitPostsType = {
         total: 0,
         data: []
     };
@@ -38,7 +29,7 @@ export const MyAuctions: FC = () => {
     const [participatingData, setParticipatingData] = useState(initialState);
     const [auctionArchiveData, setAuctionArchiveData] = useState(initialState);
     const [participatingArchiveData, setParticipatingArchiveData] = useState(initialState);
-    const [selectedAuction, setSelectedAuction] = useState<CardDataType>(initialCardData);
+    const [selectedAuction, setSelectedAuction] = useState<CardDataType>(initCardData);
 
     const [tabIndex, setTabIndex] = useState(0);
     const [childTabValue, setChildTabValue] = useState(0);
@@ -74,8 +65,8 @@ export const MyAuctions: FC = () => {
         try {
             setIsFetch(true);
             await userAPI.deactivatePost(ads_id);
-            closeDetailedModal();
             await fetchAuctionData(1);
+            closeDetailedModal();
             setIsFetch(false);
         } catch (e) {
             setIsFetch(false);
@@ -83,133 +74,47 @@ export const MyAuctions: FC = () => {
         }
     };
 
-    const fetchAuctionData = async (page) => {
+    const fetchAuctionData = async (page, archive = 0) => {
         try {
-            setIsFetch(true);
+            const isArch = archive === 1;
+
             const params = {
-                type: 'auc',
-                archive: 0,
-                secure: 0,
+                archive,
                 page,
                 itemsPerPage: ITEMS_PER_PAGE
             };
 
-            const [myAuctions, myParticipating] = await Promise.all([
-                userAPI.getMyPosts(params),
-                userAPI.getParticipatingAucs(params)
-            ]);
+            setIsFetch(true);
+
+            const [auctions, participating] = await Promise.all(
+                [
+                    userAPI.getMyPosts({...params, type: 'auc', secure: 0}),
+                    userAPI.getParticipatingAucs(params)
+                ]
+            );
 
             unstable_batchedUpdates(() => {
                 setIsFetch(false);
-                setAuctionData({data: myAuctions.data, total: myAuctions.total});
-                setParticipatingData({data: myParticipating.data, total: myParticipating.total});
+                if (isArch) {
+                    setAuctionArchiveData({data: auctions.data, total: auctions.total});
+                    setParticipatingArchiveData({data: participating.data, total: participating.total});
+                } else {
+                    setAuctionData({data: auctions.data, total: auctions.total});
+                    setParticipatingData({data: participating.data, total: participating.total});
+                }
             });
 
         } catch (e) {
             setIsFetch(false);
             setErrorMsg(e.message);
-        }
-    };
-
-    const fetchAuctionArchiveData = async (page) => {
-        try {
-            setIsFetch(true);
-            const params = {
-                type: 'auc',
-                archive: 1,
-                secure: 0,
-                page,
-                itemsPerPage: ITEMS_PER_PAGE
-            };
-
-            const [myArchAucs, archParticipatingAucs] = await Promise.all([
-                userAPI.getMyPosts(params),
-                userAPI.getArchiveParticipatingAucs(params)
-            ]);
-
-            unstable_batchedUpdates(() => {
-                setIsFetch(false);
-                setAuctionArchiveData({data: myArchAucs.data, total: myArchAucs.total});
-                setParticipatingArchiveData({data: archParticipatingAucs.data, total: archParticipatingAucs.total});
-            });
-        } catch (e) {
-            unstable_batchedUpdates(() => {
-                setIsFetch(false);
-                setErrorMsg(e.message);
-            });
         }
     };
 
     const handleRefresh = () => {
         unstable_batchedUpdates(() => {
             fetchAuctionData(1);
-            fetchAuctionArchiveData(1);
+            fetchAuctionData(1, 1);
         });
-    };
-
-    const classes = useStyles();
-    const tabsContent = (fstTabPosts: CardDataType[], secTabPosts: CardDataType[]) => {
-        return (
-            <>
-                <Tabs
-                    aria-label="tabs"
-                    value={childTabValue}
-                    onChange={handleChildTabChange}
-                    className={classes.childTabs}
-                    TabIndicatorProps={{style: {display: 'none'}}}
-                >
-                    <Tab
-                        label={
-                            <Typography variant="subtitle1">
-                                {t('cabinet:active')}
-                            </Typography>
-                        }
-                    />
-                    <Tab
-                        label={
-                            <Typography variant="subtitle1">
-                                {t('cabinet:archive')}
-                            </Typography>
-                        }
-                    />
-                </Tabs>
-                <CustomTabPanel value={childTabValue} index={0}>
-                    {isFetch
-                        ? <CircularProgress color="primary" />
-                        : fstTabPosts.length === 0
-                            ? <EmptyPage
-                                label={t('cabinet:empty.participate')}
-                            />
-                            : fstTabPosts.map(data => (
-                                <Box mb={3} key={data.id}>
-                                    <CabinetCard
-                                        cardData={data}
-                                        handleSettingsOpen={handleSettingsOpen(data)}
-                                        handleDetailedOpen={handleDetailedOpen(data)}
-                                        handleNotificationsOpen={handleNotificationsOpen(data)}
-                                    />
-                                </Box>
-                            ))
-                    }
-                </CustomTabPanel>
-                <CustomTabPanel value={childTabValue} index={1}>
-                    {isFetch
-                        ? <CircularProgress color="primary" />
-                        : fstTabPosts.length === 0
-                            ? <EmptyPage label={t('cabinet:empty.archive')} />
-                            : secTabPosts.map(data => (
-                                <Box mb={3} key={data.id}>
-                                    <CabinetCard
-                                        cardData={data}
-                                        handleSettingsOpen={handleSettingsOpen(data)}
-                                        handleDetailedOpen={handleDetailedOpen(data)}
-                                        handleNotificationsOpen={handleNotificationsOpen(data)}
-                                    />
-                                </Box>
-                            ))}
-                </CustomTabPanel>
-            </>
-        );
     };
 
     const tabsData: TabsDataType = [
@@ -218,14 +123,54 @@ export const MyAuctions: FC = () => {
             title: t('createdAuc'),
             itemsPerPage: ITEMS_PER_PAGE,
             handleFetchByTab: () => '',
-            component: tabsContent(auctionData.data, auctionArchiveData.data)
+            component: (
+                <CabinetTabs
+                    isFetch={isFetch}
+                    onChange={handleChildTabChange}
+                    fstTabData={{
+                        posts: auctionData.data,
+                        emptyPage: <EmptyPage
+                            tutorialLink={'#'}
+                            link={'/create/type'}
+                            label={t('cabinet:empty.auction')}
+                            tutorialText={t('post:howToCreatePost')}
+                            action={t('cabinet:empty.create_auction')}
+                        />
+                    }}
+                    secTabData={{
+                        posts: auctionArchiveData.data,
+                        emptyPage: <EmptyPage label={t('empty.archive')}/>
+                    }}
+                    childTabValue={childTabValue}
+                    handleDetailedOpen={handleDetailedOpen}
+                    handleSettingsOpen={handleSettingsOpen}
+                    handleNotificationsOpen={handleNotificationsOpen}
+                />
+            )
         },
         {
             id: 1,
             title: t('participatingAuc'),
             itemsPerPage: ITEMS_PER_PAGE,
             handleFetchByTab: () => '',
-            component: tabsContent(participatingData.data, participatingArchiveData.data)
+            component: (
+                <CabinetTabs
+                    isFetch={isFetch}
+                    onChange={handleChildTabChange}
+                    fstTabData={{
+                        posts: participatingData.data,
+                        emptyPage: <EmptyPage label={t('empty.no_participating')}/>
+                    }}
+                    secTabData={{
+                        posts: participatingArchiveData.data,
+                        emptyPage: <EmptyPage label={t('empty.archive')}/>
+                    }}
+                    childTabValue={childTabValue}
+                    handleDetailedOpen={handleDetailedOpen}
+                    handleSettingsOpen={handleSettingsOpen}
+                    handleNotificationsOpen={handleNotificationsOpen}
+                />
+            )
         }
     ];
 
@@ -238,8 +183,6 @@ export const MyAuctions: FC = () => {
             <TabsContent
                 tabsData={tabsData}
                 tabIndex={tabIndex}
-                // title={t('myAuctions')}
-                // headerTitle={t('myAuctions')}
                 handleTabChange={handleTabChange}
             />
             <DetailedPostModalContainer

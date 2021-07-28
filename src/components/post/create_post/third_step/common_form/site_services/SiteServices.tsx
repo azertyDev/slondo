@@ -7,7 +7,7 @@ import {DeliveryIcon, SafeIcon, ExchangeIcon} from '@src/components/elements/ico
 import {site_services} from '@src/common_data/site_services';
 import {ServiceItem} from '@src/components/post/create_post/third_step/common_form/site_services/ServiceItem';
 import {SafeDealDrawer} from '@src/components/elements/safe_deal_drawer/SafeDealDrawer';
-import {useUserCard} from '@src/hooks/useUserCard';
+import {useUserPaymentCard} from '@src/hooks/useUserPaymentCard';
 import {useStyles} from './useStyles';
 
 
@@ -35,7 +35,7 @@ export const SiteServices: FC<PaymentDeliveryPropsType> = (props) => {
     const hasExchange = !!site_services.exchange[categoryName] || !categoryName;
     const hasDelivery = !!site_services.delivery[categoryName] || !categoryName;
 
-    const {userCard, fetchUserCard} = useUserCard();
+    const {userCard, fetchUserCard} = useUserPaymentCard();
     const hasCard = !!userCard.cardId;
     const [drawerOpen, setDrawerOpen] = useState(false);
 

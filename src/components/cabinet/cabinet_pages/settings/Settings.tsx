@@ -9,12 +9,11 @@ import {UploadAvatarForm} from '@src/components/cabinet/cabinet_pages/settings/s
 import {timeRegEx} from '@src/common_data/reg_exs';
 import {userInfoSchema} from '@root/validation_schemas/authRegSchema';
 import {UserCtx, AuthCtx, ErrorCtx} from "@src/context";
-import {Box, Button, Grid, Typography} from "@material-ui/core";
+import {Backdrop, Box, Button, Grid, Modal, Typography} from "@material-ui/core";
 import EditIcon from "@material-ui/icons/Edit";
-import {CustomModal} from "@src/components/elements/custom_modal/CustomModal";
 import {UserInfo} from "@root/interfaces/Auth";
 import {WEEK_DAYS} from "@src/common_data/common";
-import {PasswordRecovery} from "./settings_form/password_recovery/PasswordRecovery";
+import {ChangePasswordModal} from "./settings_form/change_password_modal/ChangePasswordModal";
 import {useStyles} from "./useStyles";
 
 export const Settings: FC = () => {
@@ -99,21 +98,8 @@ export const Settings: FC = () => {
 
     const {available_days} = values;
 
-    const handleOpenModal = async () => {
-        try {
-            setIsFetch(true);
-            await userAPI.getSmsCode(user.phone);
-            unstable_batchedUpdates(() => {
-                setIsFetch(false);
-                setOpenModal(true);
-            });
-        } catch (e) {
-            unstable_batchedUpdates(() => {
-                setOpenModal(false);
-                // setCodeError(e.message);
-                setIsFetch(false);
-            });
-        }
+    const handleOpenModal = () => {
+        setOpenModal(true);
     };
 
     const handleModalClose = () => {
@@ -161,10 +147,6 @@ export const Settings: FC = () => {
             value = value.replace(/^:(.+)/, m => `00${m}`).replace(/(.+):$/, m => `${m}00`);
             setValues({...values, [name]: value});
         }
-    };
-
-    const handleSignIn = (user) => () => {
-        setUser(user);
     };
 
     const uploadAvatarForm = (
@@ -217,12 +199,10 @@ export const Settings: FC = () => {
                     />
                 </Grid>
             </Grid>
-            <CustomModal
-                openModal={openModal}
+            <ChangePasswordModal
+                open={openModal}
                 handleModalClose={handleModalClose}
-            >
-                <PasswordRecovery/>
-            </CustomModal>
+            />
         </>
     );
 };

@@ -14,7 +14,7 @@ import {ErrorCtx} from "@src/context";
 
 enum ActionStatuses {
     'refusal_win',
-    'finish_auction',
+    'finish_deal',
     'reject_offer',
     'accept_offer'
 }
@@ -39,6 +39,7 @@ export const DetailedPostModalContainer: FC<DetailedPostViewPropsType> = (props)
     const {setErrorMsg} = useContext(ErrorCtx);
 
     const {
+        buyer,
         author,
         status,
         auction
@@ -48,10 +49,13 @@ export const DetailedPostModalContainer: FC<DetailedPostViewPropsType> = (props)
     const offer = auction?.offer;
     const offerUser = offer?.user;
     const winner = auction?.winner;
+
     const isUserWinner = winner?.id === user.id;
     const isUserCreator = author?.id === user.id;
+    const isUserBuyer = buyer?.id === user.id;
+
     const hasOffer = offerUser && status === 'public';
-    const userForRating = isUserWinner ? author : winner;
+    const userForRating = (isUserWinner || isUserBuyer) ? author : winner ?? buyer ?? null;
 
     const [isFetch, setIsFetch] = useState(false);
     const [actionStatus, setActionStatus] = useState<keyof typeof ActionStatuses>(null);
@@ -64,8 +68,8 @@ export const DetailedPostModalContainer: FC<DetailedPostViewPropsType> = (props)
                 return 'accept_offer';
             case 'reject_offer':
                 return 'reject_offer';
-            case 'finish_auction':
-                return 'finish_auction';
+            case 'finish_deal':
+                return 'finish_deal';
         }
     })();
 
@@ -102,7 +106,7 @@ export const DetailedPostModalContainer: FC<DetailedPostViewPropsType> = (props)
             handleConfirmOpen();
             if (isUserCreator) {
                 if (winner) {
-                    setActionStatus('finish_auction');
+                    setActionStatus('finish_deal');
                 } else if (hasOffer) {
                     setActionStatus('accept_offer');
                 }
@@ -123,7 +127,7 @@ export const DetailedPostModalContainer: FC<DetailedPostViewPropsType> = (props)
                 case 'accept_offer':
                     await userAPI.acceptOffer(offer.id, true);
                     break;
-                case 'finish_auction':
+                case 'finish_deal':
                     await userAPI.deactivateAuction(post.id);
                     handleOpenRating();
             }
@@ -146,8 +150,6 @@ export const DetailedPostModalContainer: FC<DetailedPostViewPropsType> = (props)
         open && !!auctionId && setFetchedBetsData();
     }, [auctionId, open]);
 
-    // console.log(isUserWinner);
-    // console.log(post);
     return (
         <>
             <DetailedPostModal
@@ -175,7 +177,6 @@ export const DetailedPostModalContainer: FC<DetailedPostViewPropsType> = (props)
             />
             {!!userForRating && (
                 <RatingModal
-                    title={t('rate_seller')}
                     open={ratingOpen}
                     user={userForRating}
                     handleCloseRating={handleCloseRating}

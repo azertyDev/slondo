@@ -1,15 +1,17 @@
 import {FC, useContext, useEffect, useState} from 'react';
 import {userAPI} from '@src/api/api';
-import {numberPrettier} from '@src/helpers';
 import {useTranslation} from 'next-i18next';
 import {ITEMS_PER_PAGE} from '@src/constants';
-import {Box, FormControlLabel, Switch, Typography} from '@material-ui/core';
+import {Box, Typography} from '@material-ui/core';
 import {CabinetModal} from '@src/components/cabinet/components/cabinet_modal/CabinetModal';
-import {initialNotificationType} from '@src/components/cabinet/cabinet_pages/notifications/Notifications';
+import {notificationType} from '@src/components/cabinet/cabinet_pages/notifications/Notifications';
 import {CommonModalType} from "@src/components/cabinet/Cabinet";
 import {CustomPagination} from "@src/components/elements/custom_pagination/CustomPagination";
 import {NotificationCard} from "@src/components/cabinet/cabinet_pages/notifications/notification_card/NotificationCard";
 import {ErrorCtx} from "@src/context";
+import {useModal} from "@src/hooks";
+import {CustomSnackbar} from "@src/components/elements/snackbar/Snackbar";
+import {CustomCircularProgress} from "@src/components/elements/custom_circular_progress/CustomCircularProgress";
 
 export const NotificationModal: FC<CommonModalType> = (props) => {
     const {
@@ -18,8 +20,6 @@ export const NotificationModal: FC<CommonModalType> = (props) => {
         onClose
     } = props;
 
-    const isActive = post.status === 'public' || post.status === 'suspend';
-
     const {t} = useTranslation('cabinet');
     const {setErrorMsg} = useContext(ErrorCtx);
 
@@ -27,7 +27,8 @@ export const NotificationModal: FC<CommonModalType> = (props) => {
     const [itemsCount, setItemsCount] = useState(0);
     const [page, setPage] = useState(1);
 
-    const [notification, setNotification] = useState<initialNotificationType[]>([]);
+    const [notifications, setNotifications] = useState<notificationType[]>([]);
+    const {modalOpen: openSnackbar, handleModalOpen: handleOpenSnackbar, handleModalClose: handleCloseSnackbar} = useModal();
 
     const fetchNotifications = async () => {
         try {
@@ -42,7 +43,7 @@ export const NotificationModal: FC<CommonModalType> = (props) => {
             const {data, total} = await userAPI.getNotificationById(params);
 
             setItemsCount(total);
-            setNotification(data);
+            setNotifications(data);
 
             setIsFetch(false);
         } catch (e) {
@@ -56,8 +57,8 @@ export const NotificationModal: FC<CommonModalType> = (props) => {
     };
 
     useEffect(() => {
-        isActive && !!post.id && fetchNotifications();
-    }, [page]);
+        post.id !== null && fetchNotifications();
+    }, [open, post.id, page]);
 
     return (
         <CabinetModal
@@ -65,9 +66,7 @@ export const NotificationModal: FC<CommonModalType> = (props) => {
             handleCloseDialog={onClose}
         >
             {isFetch
-                ? <Typography>
-                    ...Loading
-                </Typography>
+                ? <CustomCircularProgress/>
                 : <>
                     <Box
                         display='flex'
@@ -81,40 +80,20 @@ export const NotificationModal: FC<CommonModalType> = (props) => {
                             {`${t(`common:${post.ads_type}`)} №: ${post.id}`}
                         </Typography>
                     </Box>
-                    <Box
-                        display='flex'
-                        flexDirection='row'
-                        alignItems='center'
-                        justifyContent='space-between'
-                    >
-                        <Typography>
-                            {`${t('common:extremeRate')}: ${numberPrettier(post?.auction?.bet?.bet) || 0} ${t('common:sum')}`}
-                        </Typography>
-                        <FormControlLabel
-                            control={
-                                <Switch
-                                    // checked={state.checkedA}
-                                    // onChange={handleChange}
-                                    name="checkedA"
-                                    color='primary'
-                                />
-                            }
-                            labelPlacement="start"
-                            label={t('common:notifyMe')}
-                        />
-                    </Box>
-                    {notification.map(notification => (
+                    {notifications.map(notification => (
                         <Box
                             mb={1}
                             key={notification.id}
                         >
                             <NotificationCard
                                 {...notification}
+                                setNotifications={setNotifications}
                                 handleRefresh={fetchNotifications}
+                                handleOpenSnackbar={handleOpenSnackbar}
                             />
                         </Box>
                     ))}
-                    {notification.length > ITEMS_PER_PAGE && (
+                    {notifications.length > ITEMS_PER_PAGE && (
                         <Box display='flex' justifyContent='center'>
                             <CustomPagination
                                 currentPage={page}
@@ -125,6 +104,12 @@ export const NotificationModal: FC<CommonModalType> = (props) => {
                         </Box>
                     )}
                 </>}
+            <CustomSnackbar
+                severity="success"
+                message={t('successfully_removed')}
+                openSnackbar={openSnackbar}
+                handleCloseSnackbar={handleCloseSnackbar}
+            />
         </CabinetModal>
     );
 };

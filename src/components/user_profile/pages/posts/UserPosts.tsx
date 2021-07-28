@@ -1,25 +1,36 @@
 import {FC, useContext, useEffect, useState} from 'react';
+import {unstable_batchedUpdates} from "react-dom";
 import {userAPI} from '@src/api/api';
-import {InitialCabinetCardState} from '@root/interfaces/Cabinet';
+import {InitPostsType, TabsDataType} from '@root/interfaces/Cabinet';
 import {CardView} from '@src/components/elements/card/CardView';
 import {useRouter} from 'next/router';
 import {WithT} from 'i18next';
 // import {ProfileTabsContent} from '@src/components/user_profile/tabs/ProfileTabsContent';
-import {CircularProgress} from '@material-ui/core';
+import {Box, CircularProgress, Tab, Tabs, Typography} from '@material-ui/core';
 import {ErrorCtx} from "@src/context";
+import {ProfileTabsContent} from "@src/components/user_profile/tabs/ProfileTabsContent";
+import {TabsContent} from "@src/components/cabinet/cabinet_pages/TabsContent";
+import {CardDataType} from "@root/interfaces/CardData";
+import {CustomTabPanel} from "@src/components/elements/custom_tab_panel/CustomTabPanel";
+import {EmptyPage} from "@src/components/cabinet/components/empty_page/EmptyPage";
+import {CabinetCard} from "@src/components/cabinet/components/cabinet_card/CabinetCard";
 
 export const UserPosts: FC<WithT> = ({t}) => {
     const {setErrorMsg} = useContext(ErrorCtx);
     const {user_id} = useRouter().query;
 
-    const initialUserPostsState: InitialCabinetCardState = {
+    const initUserPostsState: InitPostsType = {
         total: 0,
         data: []
     };
 
     const [isFetch, setIsFetch] = useState(false);
-    const [postData, setPostData] = useState(initialUserPostsState);
-    const [aucData, setAucData] = useState(initialUserPostsState);
+
+    const [posts, setPosts] = useState(initUserPostsState);
+    const [postsArch, setPostsArch] = useState(initUserPostsState);
+
+    const [auctions, setAuctions] = useState(initUserPostsState);
+    const [auctionsArch, setAuctionsArch] = useState(initUserPostsState);
 
     const [tabIndex, setTabIndex] = useState(0);
 
@@ -27,68 +38,144 @@ export const UserPosts: FC<WithT> = ({t}) => {
         setTabIndex(newValue);
     };
 
-    const fetchUserPosts = async (post_type) => {
+    const fetchUserPosts = async (type, archive = 0) => {
         try {
-            const isPost = post_type === 'post';
+            const params = {
+                user_id,
+                type,
+                archive
+            };
             setIsFetch(true);
-            if (isPost) {
-                const {data, total} = await userAPI.getUserPosts(user_id, post_type);
-                setPostData({data, total});
-            } else {
-                const {data, total} = await userAPI.getUserPosts(user_id, post_type);
-                setAucData({data, total});
-            }
-            setIsFetch(false);
+
+            const {data, total} = await userAPI.getUserPosts(params);
+
+            unstable_batchedUpdates(async () => {
+                setIsFetch(false);
+                type === 'post'
+                    ? !!archive ? setPostsArch({data, total}) : setPosts({data, total})
+                    : !!archive ? setAuctionsArch({data, total}) : setAuctions({data, total});
+            });
         } catch (e) {
-            setErrorMsg(e.message);
+            unstable_batchedUpdates(async () => {
+                setIsFetch(false);
+                setErrorMsg(e.message);
+            });
         }
     };
 
+    const handleRefresh = () => {
+        unstable_batchedUpdates(async () => {
+            fetchUserPosts('post');
+            fetchUserPosts('auc');
+            fetchUserPosts('post', 1);
+            fetchUserPosts('auc', 1);
+        });
+    };
+
+    const getUserPosts = (auction = false) => {
+        return isFetch
+            ? <CircularProgress color="secondary"/>
+            : <CardView
+                data={auction ? auctions.data : posts.data}
+                isFetch={isFetch}
+                listMode={false}
+            />;
+    };
+
+    // const getTabsContent = (fstTabPosts: CardDataType[], secTabPosts: CardDataType[]) => {
+    //     return (
+    //         <>
+    //             <Tabs
+    //                 aria-label="tabs"
+    //                 value={childTabValue}
+    //                 onChange={handleChildTabChange}
+    //                 className={classes.childTabs}
+    //                 TabIndicatorProps={{style: {display: 'none'}}}
+    //             >
+    //                 <Tab
+    //                     label={
+    //                         <Typography variant="subtitle1">
+    //                             {t('active')}
+    //                         </Typography>
+    //                     }
+    //                 />
+    //                 <Tab
+    //                     label={
+    //                         <Typography variant="subtitle1">
+    //                             {t('archive')}
+    //                         </Typography>
+    //                     }
+    //                 />
+    //             </Tabs>
+    //             <CustomTabPanel value={childTabValue} index={0}>
+    //                 {isFetch
+    //                     ? <CircularProgress/>
+    //                     : fstTabPosts.length === 0
+    //                         ? <EmptyPage
+    //                             label={t('cabinet:empty.post')}
+    //                             action={t('header:createPost')}
+    //                             link={'/create/type'}
+    //                             tutorialLink={'#'}
+    //                             tutorialText={t('post:howToCreatePost')}
+    //                         />
+    //                         : fstTabPosts.map((data) => (
+    //                             <Box mb={3} key={data.id} borderRadius='10px 10px 0px 0px'>
+    //                                 <CabinetCard
+    //                                     cardData={data}
+    //                                     handleDetailedOpen={handleDetailedOpen(data)}
+    //                                     handleSettingsOpen={handleSettingsOpen(data)}
+    //                                     handleNotificationsOpen={handleNotificationsOpen(data)}
+    //                                 />
+    //                             </Box>
+    //                         ))}
+    //             </CustomTabPanel>
+    //             <CustomTabPanel value={childTabValue} index={1}>
+    //                 {isFetch
+    //                     ? <CircularProgress/>
+    //                     : secTabPosts.length === 0
+    //                         ? <EmptyPage label={t('cabinet:empty.archive')}/>
+    //                         : secTabPosts.map((data) => (
+    //                             <Box mb={3} key={data.id} borderRadius='10px 10px 0px 0px'>
+    //                                 <CabinetCard
+    //                                     cardData={data}
+    //                                     handleNotificationsOpen={handleNotificationsOpen(data)}
+    //                                 />
+    //                             </Box>
+    //                         ))}
+    //             </CustomTabPanel>
+    //         </>
+    //     );
+    // };
+
+    const tabsData: TabsDataType = [
+        {
+            id: 0,
+            title: t('main:posts'),
+            itemsPerPage: posts.total,
+            handleFetchByTab: () => '',
+            component: getUserPosts()
+        },
+        {
+            id: 1,
+            title: t('main:auctions'),
+            itemsPerPage: auctions.total,
+            handleFetchByTab: () => '',
+            component: getUserPosts(true)
+        }
+    ];
+
     useEffect(() => {
-        fetchUserPosts('post');
-        fetchUserPosts('auc');
+        handleRefresh();
     }, []);
 
-    const userPostCards = (
-        isFetch
-        ? <CircularProgress color="secondary"/>
-        : <CardView
-            data={postData.data}
-            isFetch={isFetch}
-            listMode={false}
-        />
-    );
-    const userAucCards = (
-        isFetch
-        ? <CircularProgress color="primary"/>
-        : <CardView
-            data={aucData.data}
-            isFetch={isFetch}
-            listMode={false}
-        />
-    );
-
-    // const tabsData: TabsDataType = [
-    //     {
-    //         id: 0,
-    //         title: t('main:posts'),
-    //         total: postData.myPosts.total,
-    //         component: <div>post</div>
-    //     },
-    //     {
-    //         id: 1,
-    //         title: t('main:auctions'),
-    //         total: aucData.myPosts.total,
-    //         component: <div>auc</div>
-    //     }
-    // ];
-
     return (
-        <div>Posts</div>
-        // <ProfileTabsContent
-        //     tabIndex={tabIndex}
-        //     handleTabChange={handleTabChange}
-        //     tabsData={tabsData}
-        // />
+        <>
+            <div>Posts</div>
+            <TabsContent
+                tabsData={tabsData}
+                tabIndex={tabIndex}
+                handleTabChange={handleTabChange}
+            />
+        </>
     );
 };

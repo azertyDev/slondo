@@ -1,6 +1,6 @@
 import {FC, useEffect, useState} from 'react';
-import {Breadcrumbs} from '@material-ui/core';
 import Link from 'next/link';
+import {Breadcrumbs} from '@material-ui/core';
 import {useTranslation} from 'react-i18next';
 import {cookies, transformCyrillic} from '@src/helpers';
 import {site_categories} from '@src/common_data/site_categories';
@@ -41,7 +41,6 @@ export const BreadcrumbsComponent: FC<BreadcrumbsPropsType> = ({category, subcat
         }
     }, [userLocation]);
 
-
     const classes = useStyles();
     return (
         <div className={classes.root}>
@@ -56,7 +55,7 @@ export const BreadcrumbsComponent: FC<BreadcrumbsPropsType> = ({category, subcat
                 <Link href={subCategoryLink}>
                     <a>{t(`categories:${category}.${subcategory}.name`)}</a>
                 </Link>
-                {type && (
+                {typeCtgr !== undefined && type && (
                     <Link href={subCategoryTypeLink}>
                         <a>{t(`categories:${category}.${subcategory}.${type}.name`)}</a>
                     </Link>

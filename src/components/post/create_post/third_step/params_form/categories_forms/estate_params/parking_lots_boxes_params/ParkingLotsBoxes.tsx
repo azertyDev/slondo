@@ -13,8 +13,8 @@ import {PostTitle} from '@src/components/post/create_post/third_step/params_form
 import {CustomFormikProvider} from '@src/components/elements/custom_formik_provider/CustomFormikProvider';
 import {CustomAccordion} from '@src/components/elements/accordion/CustomAccordion';
 import {ParametersIcon} from '@src/components/elements/icons';
-import {useStyles} from './useStyles';
 import {useUrlParams} from "@src/hooks";
+import {useStyles} from './useStyles';
 
 
 export const ParkingLotsBoxes: FC<CommonParamsPropsType> = (props) => {

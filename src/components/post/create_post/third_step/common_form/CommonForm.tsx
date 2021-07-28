@@ -23,6 +23,7 @@ import {FormikTextarea} from '@src/components/elements/formik_textarea/FormikTex
 import {Location} from '@src/components/elements/location/Location';
 import {UserCtx} from "@src/context/UserCtx";
 import {useRouter} from "next/router";
+import {TITLE_LIMIT} from "@src/constants";
 import {useStyles} from './useStyles';
 
 type DefaultParamsPropsType = {
@@ -43,8 +44,6 @@ export const CommonForm: FC<DefaultParamsPropsType> = (props) => {
         handleSubmit,
         categoryName
     } = props;
-
-    const descTxtLimit = 3000;
 
     const {t} = useTranslation('post');
 
@@ -232,7 +231,7 @@ export const CommonForm: FC<DefaultParamsPropsType> = (props) => {
                 }
             }
         } else {
-            if (name !== 'description' || descTxtLimit >= value.length) {
+            if (name !== 'description' || TITLE_LIMIT >= value.length) {
                 setValues({...values, [name]: value});
             }
         }
@@ -316,7 +315,6 @@ export const CommonForm: FC<DefaultParamsPropsType> = (props) => {
                             {isAuction
                                 ? <div>
                                     <AuctionParams
-                                        t={t}
                                         values={values}
                                         errors={errors}
                                         touched={touched}
@@ -377,7 +375,7 @@ export const CommonForm: FC<DefaultParamsPropsType> = (props) => {
                                     name='description'
                                     value={values.description}
                                     onBlur={handleBlur}
-                                    limit={descTxtLimit}
+                                    limit={TITLE_LIMIT}
                                     onChange={handleInput}
                                     labelTxt={t('filters:description')}
                                     errorMsg={getErrorMsg(errors.description, touched.description, t)}

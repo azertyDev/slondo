@@ -4,16 +4,14 @@ import {Box, Hidden, Typography} from '@material-ui/core';
 import {CustomButton} from '@src/components/elements/custom_button/CustomButton';
 import {SafeIcon} from '@root/src/components/elements/icons';
 import {UserInfoWithAvatar} from '@src/components/elements/user_info_with_avatar/UserInfoWithAvatar';
-import {SocialsBlock} from '@root/src/components/elements/socials_block/SocialsBlock';
 import {SafeDealDrawer} from '@src/components/elements/safe_deal_drawer/SafeDealDrawer';
 import {myUzCardAPI} from '@src/api/api';
 import {ConfirmModal} from '@src/components/elements/confirm_modal/Confirm_modal';
 import {useModal} from '@src/hooks/useModal';
-import {useUserCard} from '@src/hooks/useUserCard';
-import {useStyles} from './useStyles';
+import {useUserPaymentCard} from '@src/hooks/useUserPaymentCard';
 import {AuthCtx} from "@src/context/AuthCtx";
 import {ErrorCtx} from "@src/context";
-
+import {useStyles} from './useStyles';
 
 type OwnerPropsType = {
     postData,
@@ -43,7 +41,7 @@ export const OwnerContent: FC<OwnerPropsType> = (props) => {
     const {setErrorMsg} = useContext(ErrorCtx);
     const {auth: {isAuth}, setAuthModalOpen} = useContext(AuthCtx);
 
-    const {userCard, fetchUserCard} = useUserCard();
+    const {userCard, fetchUserCard} = useUserPaymentCard();
 
     const hasCard = !!userCard.cardId;
 
@@ -140,7 +138,6 @@ export const OwnerContent: FC<OwnerPropsType> = (props) => {
                         </>
                     )}
                 </div>
-                <SocialsBlock/>
             </Hidden>
             <Hidden lgUp>
                 {!creator && !!safe_deal && (

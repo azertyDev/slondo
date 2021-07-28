@@ -1,9 +1,9 @@
 import Axios from 'axios';
+import {cookies} from '@src/helpers';
 import {CategoryType} from '@root/interfaces/Categories';
 import {CardDataType} from '@root/interfaces/CardData';
 import {AuctionsDataTypes} from '@root/interfaces/Auctions';
 import {UserInfo} from '@root/interfaces/Auth';
-import {cookies} from '@src/helpers';
 import {LocationsType} from "@root/interfaces/Locations";
 
 const production = 'https://backend.slondo.uz/api/';
@@ -289,16 +289,6 @@ export const userAPI = {
                 throw err;
             });
     },
-    getArchiveParticipatingAucs: (params) => {
-        return instance.get(`regular/user/archiveAuctions/participating`, {
-            params,
-            ...setTokenToHeader()
-        })
-            .then(res => res.data)
-            .catch(err => {
-                throw err;
-            });
-    },
     getAuctionBets: (params): Promise<any> => {
         return instance.get(`auction/allBets`, {params})
             .then(res => res.data)
@@ -361,10 +351,8 @@ export const userAPI = {
                 throw err;
             });
     },
-    rejectVictory: (auction_id: number): Promise<any> => {
-        return instance.post(`regular/auction/reject`, {
-            auction_id
-        }, setTokenToHeader())
+    rejectVictory: (ads_id: number): Promise<any> => {
+        return instance.post(`regular/auction/reject`, {ads_id}, setTokenToHeader())
             .then(res => res.data)
             .catch(err => {
                 throw err;
@@ -530,8 +518,8 @@ export const userAPI = {
                 throw err;
             });
     },
-    getUserPosts: (user_id, post_type = 'post') => {
-        return instance.get(`post?user_id=${user_id}&type=${post_type}`)
+    getUserPosts: (params) => {
+        return instance.get(`post`, {params})
             .then(res => res.data)
             .catch(err => {
                 throw err;

@@ -1,6 +1,6 @@
 import {GetServerSideProps} from 'next';
+import Cabinet from '@src/components/cabinet/Cabinet';
 import {serverSideTranslations} from 'next-i18next/serverSideTranslations';
-import {UserProfile} from '@src/components/user_profile/UserProfile';
 
 export const getServerSideProps: GetServerSideProps = async ({locale}) => ({
     props: {
@@ -8,17 +8,22 @@ export const getServerSideProps: GetServerSideProps = async ({locale}) => ({
             locale,
             [
                 'cabinet',
-                'main',
+                'filters',
+                'auction',
                 'header',
                 'footer',
                 'common',
                 'auth_reg',
                 'notifications',
                 'categories',
-                'locations'
+                'common',
+                'locations',
+                'errors',
+                'post',
+                'auth_reg'
             ]
         )
     }
 });
 
-export default UserProfile;
+export default Cabinet;

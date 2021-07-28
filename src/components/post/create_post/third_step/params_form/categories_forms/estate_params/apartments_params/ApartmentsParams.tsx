@@ -16,8 +16,8 @@ import {PostTitle} from '@src/components/post/create_post/third_step/params_form
 import {CustomFormikProvider} from '@src/components/elements/custom_formik_provider/CustomFormikProvider';
 import {ParametersIcon} from '@src/components/elements/icons';
 import {CustomAccordion} from '@src/components/elements/accordion/CustomAccordion';
-import {useStyles} from './useStyles';
 import {useUrlParams} from "@src/hooks";
+import {useStyles} from './useStyles';
 
 export const ApartmentsParams: FC<CommonParamsPropsType> = (props) => {
     const {
@@ -41,7 +41,10 @@ export const ApartmentsParams: FC<CommonParamsPropsType> = (props) => {
         room: null,
         number_of_floors: null,
         floor: null,
-        estate_type: null
+        estate_type: null,
+        furnished: false,
+        with_pledge: false,
+        utilities: false
     };
 
     if (model) {
@@ -137,8 +140,8 @@ export const ApartmentsParams: FC<CommonParamsPropsType> = (props) => {
                                     <CheckboxSelect
                                         name='furnished'
                                         checked={values.furnished}
-                                        labelTxt={t('filters:furnished')}
                                         handleCheckbox={handleCheckbox}
+                                        labelTxt={t('filters:furnished')}
                                     />
                                 </Grid>
                             </Grid>

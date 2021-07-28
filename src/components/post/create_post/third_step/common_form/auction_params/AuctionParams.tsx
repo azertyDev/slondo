@@ -1,5 +1,5 @@
 import {FC} from 'react';
-import {WithT} from 'i18next';
+import {useTranslation} from "next-i18next";
 import {Checkbox, Grid, Typography} from '@material-ui/core';
 import {DropDownSelect} from '@src/components/elements/drop_down_select/DropDownSelect';
 import {FormikField} from '@src/components/elements/formik_field/FormikField';
@@ -17,11 +17,10 @@ type AuctionParamsPropsType = {
     handleSelect,
     isAdvanceAuction: boolean,
     handleCheckboxChange,
-} & WithT;
+};
 
 export const AuctionParams: FC<AuctionParamsPropsType> = (props) => {
     const {
-        t,
         errors,
         touched,
         values,
@@ -33,6 +32,7 @@ export const AuctionParams: FC<AuctionParamsPropsType> = (props) => {
         handleCheckboxChange
     } = props;
 
+    const {t} = useTranslation('filters');
     const {auction} = values;
 
     const classes = useStyles();
@@ -47,6 +47,7 @@ export const AuctionParams: FC<AuctionParamsPropsType> = (props) => {
                             onBlur={handleBlur}
                             items={postType.expired}
                             handleSelect={handleSelect}
+                            labelTxt={t('duration')}
                             errorMsg={getErrorMsg(errors.auction, touched.auction, t)}
                         />
                     </Grid>

@@ -1,5 +1,6 @@
 {
   "change_password": "Parolni o'zgartirish",
+  "change_password_confirm": "Parolni o'zgartirmoqchimisiz?",
   "send_again": "Parolni qayta yuborish",
   "enter_sms": "Qabul qilingan ko'dni kiriting",
   "enter_phone": "Telefon raqamingizni kiriting",

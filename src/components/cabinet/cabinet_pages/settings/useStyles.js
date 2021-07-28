@@ -18,4 +18,4 @@ export const useStyles = makeStyles((theme) => ({
             color: theme.palette.secondary
         }
     }
-}))
+}));

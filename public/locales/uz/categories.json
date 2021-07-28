@@ -1700,7 +1700,10 @@
       "name": "Videofilmlar"
     },
     "books_magazines": {
-      "name": "Kitob va jurnallar"
+      "name": "Kitob va jurnallar",
+      "comics": {
+        "name": "Komikslar"
+      }
     },
     "collectibles": {
       "name": "Коlleksiyalash",

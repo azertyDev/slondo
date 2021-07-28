@@ -130,7 +130,7 @@ export const CarParams: FC<CarParamsPropsType> = (props) => {
                             const vals = {id: pos.id, name: pos.name};
                             Object.keys(pos).forEach(k => {
                                 if (Array.isArray(pos[k]) && !!pos[k].length) {
-                                    const [valKey] = Object.keys(pos[k][0]);
+                                    const [_, valKey] = Object.keys(pos[k][0]);
                                     const isOptionKey = optionFields.some(optKey => optKey === valKey);
                                     vals[valKey] = isOptionKey
                                         ? pos[k].map(opt => opt[valKey])
@@ -570,11 +570,11 @@ export const CarParams: FC<CarParamsPropsType> = (props) => {
                                                 >
                                                     <DropDownSelect
                                                         transKey={t(`${categoryName}.`)}
-                                                        labelTxt={t('car.seats.name')}
-                                                        name='upholstery'
+                                                        labelTxt={t('car.upholestery.name')}
+                                                        name='upholestery'
                                                         values={values}
                                                         onBlur={handleBlur}
-                                                        items={filters.upholstery}
+                                                        items={filters.upholestery}
                                                         handleSelect={handleSelect}
                                                     />
                                                 </Grid>

@@ -1,5 +1,6 @@
 {
   "change_password": "Сменить пароль",
+  "change_password_confirm": "Сменить пароль?",
   "send_again": "Запросить пароль еще раз",
   "enter_sms": "Введите полученный код",
   "enter_phone": "Введите номер телефона",

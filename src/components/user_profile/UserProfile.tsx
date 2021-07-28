@@ -11,6 +11,7 @@ import {userAPI} from '@src/api/api';
 import {useRouter} from 'next/router';
 import {useTranslation} from 'next-i18next';
 import {ErrorCtx} from "@src/context";
+import {initUser} from "@src/hooks/useUser";
 import {useStyles} from './useStyles';
 
 export const UserProfile: FC = () => {
@@ -18,20 +19,8 @@ export const UserProfile: FC = () => {
     const {user_id} = useRouter().query;
     const {t} = useTranslation('cabinet');
 
-    const initUserInfo = {
-        id: null,
-        name: '',
-        surname: '',
-        phone: '',
-        avatar: '',
-        created_at: '',
-        available_days: '',
-        available_start_time: '',
-        available_end_time: ''
-    };
-
     const [pageName, setPageName] = useState<string>('profile_posts');
-    const [userInfo, setUserInfo] = useState<UserInfo>(initUserInfo);
+    const [userInfo, setUserInfo] = useState<UserInfo>(initUser);
 
     const fetchUserById = async () => {
         try {
