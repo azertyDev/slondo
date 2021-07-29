@@ -10,54 +10,8 @@ import {
 } from '@src/components/elements/icons';
 import Link from 'next/link';
 import {useStyles} from './useStyles';
-import {useTranslation} from 'next-i18next';
-
-const securityRulesData = {
-    preface: [
-        {
-            1: 'preface.1'
-        },
-        {
-            2: 'preface.2'
-        },
-        {
-            3: 'preface.3'
-        }
-    ],
-    cardData: [
-        {
-            icon: <EmailIcon/>,
-            title: 'securityRules.advice_1',
-            description: 'securityRules.advice_1'
-        },
-        {
-            icon: <ForeignLinkIcon/>,
-            title: 'securityRules.advice_2.title',
-            description: 'securityRules.advice_2.description'
-        },
-        {
-            icon: <SecurityPaymentIcon/>,
-            title: 'securityRules.advice_3.title',
-            description: 'securityRules.advice_3.description'
-        },
-        {
-            icon: <ShieldIcon/>,
-            title: 'securityRules.advice_4.title',
-            description: 'securityRules.advice_4.description'
-        },
-        {
-            icon: <PurseIcon/>,
-            title: 'securityRules.advice_5.title',
-            description: 'securityRules.advice_5.description'
-        }
-    ]
-};
-
 
 export const Security = () => {
-    const {t} = useTranslation('safe_shopping');
-
-    const {preface, cardData} = securityRulesData;
 
     const classes = useStyles();
     return (
@@ -70,42 +24,28 @@ export const Security = () => {
                                 <Logo/>
                             </a>
                         </Link>
-                        {
-                            preface.map(el => {
-                                console.log(el);
-                                return (
-                                    <>
-                                        <div className={classes.description}>
-                                            <div className={classes.hero}>
-                                                <Typography variant='h5'>
-                                                    Соблюдая наши рекомендации, вы обезопасите себя от действий
-                                                    мошенников.
-                                                </Typography>
-                                                <Hidden lgUp>
-                                                    <img src="/img/scammer.png" alt="scammer"/>
-                                                </Hidden>
-                                                <Typography variant='subtitle1'>
-                                                    В последнее время, участились случаи обмана пользователей, торговых
-                                                    площадок,
-                                                    мошенники придумывают разнообразные способы, завладеть вашими
-                                                    личными данными,
-                                                    получить доступ к вашей учетной записи или узнать пароль от вашей
-                                                    банковской карты.
-                                                </Typography>
-                                            </div>
-                                            <Hidden mdDown>
-                                                <img src="/img/scammer.png" alt="scammer"/>
-                                            </Hidden>
-                                        </div>
-                                        <div className={classes.warning}>
-                                            <Typography variant='subtitle1'>Администрация SLONDO заботиться о
-                                                безопасности каждого
-                                                пользователя, внимательно прочитайте статью!</Typography>
-                                        </div>
-                                    </>
-                                );
-                            })
-                        }
+                        <div className={classes.description}>
+                            <div className={classes.hero}>
+                                <Typography variant='h5'>
+                                    Соблюдая наши рекомендации, вы обезопасите себя от действий мошенников.
+                                </Typography>
+                                <Hidden lgUp>
+                                    <img src="/img/scammer.png" alt="scammer"/>
+                                </Hidden>
+                                <Typography variant='subtitle1'>
+                                    В последнее время, участились случаи обмана пользователей, торговых площадок,
+                                    мошенники придумывают разнообразные способы, завладеть вашими личными данными,
+                                    получить доступ к вашей учетной записи или узнать пароль от вашей банковской карты.
+                                </Typography>
+                            </div>
+                            <Hidden mdDown>
+                                <img src="/img/scammer.png" alt="scammer"/>
+                            </Hidden>
+                        </div>
+                        <div className={classes.warning}>
+                            <Typography variant='subtitle1'>Администрация SLONDO заботиться о безопасности каждого
+                                пользователя, внимательно прочитайте статью!</Typography>
+                        </div>
                         <Paper className={classes.paper} elevation={0}>
                             <div className='card-header'>
                                 <span className={classes.icon}>
@@ -139,22 +79,21 @@ export const Security = () => {
                                 </span>
                                 <Hidden smUp>
                                     <Typography variant='h5'>
-                                        SMS
+                                        Не переходите по внешним ссылкам!
                                     </Typography>
                                 </Hidden>
                             </div>
                             <div className={classes.card}>
                                 <Hidden xsDown>
                                     <Typography variant='h5'>
-                                        SMS
+                                        Не переходите по внешним ссылкам!
                                     </Typography>
                                 </Hidden>
                                 <Typography variant='subtitle1'>
-                                    Не сообщайте никому коды доступа полученные вами посредством SMS сообщений,
-                                    злоумышленники, будут пытаться выведать у вас данную информацию, чтобы получить
-                                    доступ к вашей учетной записи на SLONDO, даже если в переписке, вам представляются
-                                    сотрудником технической поддержки и просят назвать код, полученный по SMS не
-                                    сообщайте никому данную информацию.
+                                    Никогда не переходите по внешним ссылкам, которые злоумышленники отправляют вам в
+                                    личные сообщения, используя внутренний чат SLONDO, либо сторонние мессенджеры, как
+                                    правило это будет сайт-двойник, созданный с целью перехвата вашей личной информации
+                                    или данных вашей банковской карты.
                                 </Typography>
                             </div>
                         </Paper>
@@ -165,22 +104,22 @@ export const Security = () => {
                                 </span>
                                 <Hidden smUp>
                                     <Typography variant='h5'>
-                                        SMS
+                                        Банковские карты
                                     </Typography>
                                 </Hidden>
                             </div>
                             <div className={classes.card}>
                                 <Hidden xsDown>
                                     <Typography variant='h5'>
-                                        SMS
+                                        Банковские карты
                                     </Typography>
                                 </Hidden>
                                 <Typography variant='subtitle1'>
-                                    Не сообщайте никому коды доступа полученные вами посредством SMS сообщений,
-                                    злоумышленники, будут пытаться выведать у вас данную информацию, чтобы получить
-                                    доступ к вашей учетной записи на SLONDO, даже если в переписке, вам представляются
-                                    сотрудником технической поддержки и просят назвать код, полученный по SMS не
-                                    сообщайте никому данную информацию.
+                                    Злоумышленники, связываются с вами якобы с целью покупки вашего товара, как правило
+                                    они просят провести оплату на банковскую карту, для этого они просят личные данные
+                                    вашей карты, и код CVV\CVC, это последние три цифры, расположенные на задней
+                                    стороне, вашей банковской карты, никогда никому не сообщайте эту информацию, данный
+                                    код позволит злоумышленникам свободно совершать покупки с вашей карты.
                                 </Typography>
                             </div>
                         </Paper>
@@ -191,22 +130,22 @@ export const Security = () => {
                                </span>
                                 <Hidden smUp>
                                     <Typography variant='h5'>
-                                        SMS
+                                        Личная безопасность!
                                     </Typography>
                                 </Hidden>
                             </div>
                             <div className={classes.card}>
                                 <Hidden xsDown>
                                     <Typography variant='h5'>
-                                        SMS
+                                        Личная безопасность!
                                     </Typography>
                                 </Hidden>
                                 <Typography variant='subtitle1'>
-                                    Не сообщайте никому коды доступа полученные вами посредством SMS сообщений,
-                                    злоумышленники, будут пытаться выведать у вас данную информацию, чтобы получить
-                                    доступ к вашей учетной записи на SLONDO, даже если в переписке, вам представляются
-                                    сотрудником технической поддержки и просят назвать код, полученный по SMS не
-                                    сообщайте никому данную информацию.
+                                    Когда на ваш товар нашелся покупатель, для передачи товара и получения денег
+                                    рекомендуется назначить встречу, в людных местах хорошим решением будет, встреча в
+                                    торговом центре, там много камер и присутствует охрана.
+                                    Избегайте встреч, в темных переулках, не носите с собой крупные суммы денег,
+                                    ювелирные украшения и дорогие наручные часы.
                                 </Typography>
                             </div>
                         </Paper>
@@ -217,22 +156,22 @@ export const Security = () => {
                                </span>
                                 <Hidden smUp>
                                     <Typography variant='h5'>
-                                        SMS
+                                        Не совершайте предоплату и залогов
                                     </Typography>
                                 </Hidden>
                             </div>
                             <div className={classes.card}>
                                 <Hidden xsDown>
                                     <Typography variant='h5'>
-                                        SMS
+                                        Не совершайте предоплату и залогов
                                     </Typography>
                                 </Hidden>
                                 <Typography variant='subtitle1'>
-                                    Не сообщайте никому коды доступа полученные вами посредством SMS сообщений,
-                                    злоумышленники, будут пытаться выведать у вас данную информацию, чтобы получить
-                                    доступ к вашей учетной записи на SLONDO, даже если в переписке, вам представляются
-                                    сотрудником технической поддержки и просят назвать код, полученный по SMS не
-                                    сообщайте никому данную информацию.
+                                    Если вам попалось объявление, где продается товар по цене гораздо ниже рыночной,
+                                    будьте внимательны, связавшись с продавцом у вас могут попросить провести оплату на
+                                    банковскую карту, либо внести часть суммы в качестве залога, мотивируя это тем, что
+                                    спрос большой и залог необходим в качестве подтверждения ваших намерений приобрести
+                                    товар. Никогда не делайте этого.
                                 </Typography>
                             </div>
                         </Paper>

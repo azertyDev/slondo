@@ -3,7 +3,6 @@ import {makeStyles} from '@material-ui/core/styles';
 export const useStyles = makeStyles((theme) => ({
     root: {
         paddingTop: '22px',
-        background: 'linear-gradient(180deg, #E9D7F3 -133.07%, rgba(255, 255, 255, 0) 159.92%)',
         '& div.MuiGrid-grid-xs-9': {
             paddingTop: 60,
             paddingBottom: 60
@@ -101,9 +100,9 @@ export const useStyles = makeStyles((theme) => ({
         '& div.card-header': {
             display: 'flex',
             alignItems: 'center',
-            width: '100%',
             [theme.breakpoints.down('xs')]: {
                 marginBottom: '10px',
+                width: '100%',
                 '& h5': {
                     fontSize: '14px',
                     fontWeight: '500'
