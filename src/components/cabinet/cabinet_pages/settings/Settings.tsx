@@ -9,7 +9,7 @@ import {UploadAvatarForm} from '@src/components/cabinet/cabinet_pages/settings/s
 import {timeRegEx} from '@src/common_data/reg_exs';
 import {userInfoSchema} from '@root/validation_schemas/authRegSchema';
 import {UserCtx, AuthCtx, ErrorCtx} from "@src/context";
-import {Backdrop, Box, Button, Grid, Modal, Typography} from "@material-ui/core";
+import {Box, Button, Grid, Typography} from "@material-ui/core";
 import EditIcon from "@material-ui/icons/Edit";
 import {UserInfo} from "@root/interfaces/Auth";
 import {WEEK_DAYS} from "@src/common_data/common";
@@ -45,7 +45,7 @@ export const Settings: FC = () => {
                 ...otherData
             } = values;
 
-            let newUserInfo: any = {
+            const newUserInfo: any = {
                 ...otherData
             };
 

@@ -52,8 +52,14 @@ export const useStyles = makeStyles((theme) => ({
         }
     },
     content: {
+        '& h4': {
+            [theme.breakpoints.down('xs')]: {
+                fontSize: '1.6rem',
+                fontWeight: 500
+            }
+        },
         '& .MuiTypography-root': {
             textAlign: 'center'
-        },
+        }
     }
 }));
