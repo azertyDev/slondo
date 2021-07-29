@@ -5,7 +5,7 @@ import {Footer} from '../footer/Footer';
 import {Container} from '@material-ui/core';
 import {ErrorModal} from '@src/components/error_modal/ErrorModal';
 import {SEOTextComponent} from '@src/components/elements/seo_text_component/SEOTextComponent';
-
+import {useStyles} from './useStyles';
 
 type MainLayoutPropsType = {
     title?: string,
@@ -17,6 +17,7 @@ export const MainLayout: FC<MainLayoutPropsType> = (props) => {
     const title = props.title;
     const description = props.description;
 
+    const classes = useStyles();
     const {
         children,
         seoTxt
@@ -33,17 +34,19 @@ export const MainLayout: FC<MainLayoutPropsType> = (props) => {
                 <meta property="og:title" content={title} key="ogtitle"/>
                 <meta property="og:description" content={description} key="ogdesc"/>
             </Head>
-            <Header/>
-            <main>
-                <Container
-                    maxWidth="xl"
-                    style={{paddingTop: '48px', position: 'relative'}}
-                >
-                    {children}
-                    {!!seoTxt && <SEOTextComponent text={seoTxt}/>}
-                </Container>
-            </main>
-            <Footer/>
+            <div className={classes.wrapper}>
+                <Header />
+                <main>
+                    <Container
+                        maxWidth="xl"
+                        style={{paddingTop: '48px', position: 'relative'}}
+                    >
+                        {children}
+                        {!!seoTxt && <SEOTextComponent text={seoTxt} />}
+                    </Container>
+                </main>
+                <Footer />
+            </div>
             <ErrorModal/>
         </>
     );

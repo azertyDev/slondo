@@ -67,7 +67,7 @@ export const RegularParams: FC<CommonParamsPropsType> = (props) => {
                     isEditable={currentFormIndex < 3}
                     handleEdit={handleFormOpen(3)}
                 >
-                    <Grid container spacing={2}>
+                    <Grid container item spacing={2}>
                         <Grid item xs={12} md={6}>
                             <PostTitle
                                 t={t}
@@ -77,7 +77,7 @@ export const RegularParams: FC<CommonParamsPropsType> = (props) => {
                             />
                         </Grid>
                         {isPreview
-                            ? <PreviewValues t={t} values={values}/>
+                            ? <PreviewValues t={t} values={values} />
                             : <>
                                 <Grid item container spacing={2}>
                                     {getFieldsByFilters({

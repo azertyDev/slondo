@@ -1,7 +1,7 @@
 import {FC, useState} from "react";
-import {WithT} from "i18next";
-import {TextField, Typography} from "@material-ui/core";
-import {numberRegEx} from "@src/common_data/reg_exs";
+import {WithT} from 'i18next';
+import {Box, TextField, Typography} from '@material-ui/core';
+import {numberRegEx} from '@src/common_data/reg_exs';
 import {isRequired} from "@src/helpers";
 import {useStyles} from './useStyles';
 
@@ -46,8 +46,14 @@ export const NumberSelect: FC<FloorsPropsType> = (props) => {
 
     const classes = useStyles();
     return (
-        <div className={classes.root}>
-            <Typography variant="subtitle1">
+        <Box
+            width={1}
+            display='flex'
+            flexDirection='column'
+            justifyContent='center'
+            className={classes.root}
+        >
+            <Typography variant="subtitle1" gutterBottom>
                 <strong>
                     {t(`filters:${name}`)}
                     {isRequired(name) && <span className='error-text'>*&nbsp;</span>}
@@ -80,7 +86,7 @@ export const NumberSelect: FC<FloorsPropsType> = (props) => {
                          onClick={handleOther}
                      >
                          {t('filters:other')}
-                     </Typography>}
+                        </Typography>}
                 </div>
             </div>
             <Typography variant="subtitle1">
@@ -90,6 +96,6 @@ export const NumberSelect: FC<FloorsPropsType> = (props) => {
                     </span>
                 )}
             </Typography>
-        </div>
+        </Box>
     );
 };
