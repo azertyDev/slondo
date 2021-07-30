@@ -75,11 +75,11 @@ export const ApartmentsParams: FC<CommonParamsPropsType> = (props) => {
 
     const classes = useStyles();
     return (
-        <div className={classes.root}>
+        <Grid className={classes.root}>
             <CustomFormikProvider formik={formik}>
                 <CustomAccordion
                     submitTxt='appearance'
-                    icon={<ParametersIcon/>}
+                    icon={<ParametersIcon />}
                     isPreview={isPreview}
                     title={t('post:parameters')}
                     open={currentFormIndex === 3}
@@ -90,8 +90,8 @@ export const ApartmentsParams: FC<CommonParamsPropsType> = (props) => {
                         <PostTitle isPreview={isPreview} title={values.title} formik={formik} t={t}/>
                     </Grid>
                     {isPreview
-                        ? <PreviewValues t={t} values={values}/>
-                        : <Grid className='grid-container' container spacing={2}>
+                        ? <PreviewValues t={t} values={values} />
+                        : <Grid item container spacing={2}>
                             <Grid container item spacing={2} xs={12} alignItems='center'>
                                 <Grid item xs={12} sm={5} md={4}>
                                     <DeployedSelect
@@ -145,7 +145,7 @@ export const ApartmentsParams: FC<CommonParamsPropsType> = (props) => {
                                     />
                                 </Grid>
                             </Grid>
-                            <Grid item xs={12} sm={6} md={4} lg={4}>
+                            <Grid item xs={12} sm={6} md={4}>
                                 <NumberSelect
                                     t={t}
                                     count={isLgUp ? 8 : 5}
@@ -156,7 +156,7 @@ export const ApartmentsParams: FC<CommonParamsPropsType> = (props) => {
                                     setValues={setValues}
                                 />
                             </Grid>
-                            <Grid item container xs={12} sm={6} md={5} lg={5}>
+                            <Grid item container xs={12} sm={6} md={4}>
                                 <NumberSelect
                                     t={t}
                                     count={isLgUp ? 8 : 5}
@@ -167,7 +167,7 @@ export const ApartmentsParams: FC<CommonParamsPropsType> = (props) => {
                                     setValues={setValues}
                                 />
                             </Grid>
-                            <Grid item xs={12} sm={4} md={3} lg={3}>
+                            <Grid item xs={12} sm={4} md={4}>
                                 <DropDownSelect
                                     name='room'
                                     values={values}
@@ -340,7 +340,7 @@ export const ApartmentsParams: FC<CommonParamsPropsType> = (props) => {
                                 />
                             </Grid>
                         </Grid>}
-                    <div className='options-select-wrapper'>
+                    <Grid item container spacing={2}>
                         <OptionsSelect
                             isApratment
                             column={isXsDown}
@@ -359,9 +359,9 @@ export const ApartmentsParams: FC<CommonParamsPropsType> = (props) => {
                             options={filters.infrastructure}
                             handleOptionCheckbox={handleOptionCheckbox}
                         />
-                    </div>
+                    </Grid>
                 </CustomAccordion>
             </CustomFormikProvider>
-        </div>
+        </Grid>
     );
 };

@@ -1,6 +1,6 @@
 import {FC} from 'react';
 import {WithT} from 'i18next';
-import {Checkbox, Grid, Typography} from '@material-ui/core';
+import {Checkbox, FormControlLabel, Grid, Typography} from '@material-ui/core';
 import {useStyles} from '../deployed_select/useStyles';
 
 export type HandleOptionCheckboxType = (name: string, value) => void;
@@ -33,6 +33,7 @@ export const OptionsSelect: FC<OptionsSectionPropsType> = (props) => {
     return (
         <Grid
             container
+            item
             className={classes.root}
         >
             {name && (
@@ -53,15 +54,21 @@ export const OptionsSelect: FC<OptionsSectionPropsType> = (props) => {
                             key={item.id}
                             xs={column ? 12 : isApratment ? 3 : 4}
                         >
-                            <Checkbox
-                                color='primary'
-                                name={item.name}
-                                checked={checked}
-                                onChange={onClick(item)}
+                            <FormControlLabel
+                                control={
+                                    <Checkbox
+                                        color='secondary'
+                                        name={item.name}
+                                        checked={checked}
+                                        onChange={onClick(item)}
+                                    />
+                                }
+                                label={
+                                    <Typography variant='subtitle1' component='p'>
+                                        {t(`filters:${item.name}`)}
+                                    </Typography>
+                                }
                             />
-                            <Typography>
-                                {t(`filters:${item.name}`)}
-                            </Typography>
                         </Grid>
                     );
                 })}

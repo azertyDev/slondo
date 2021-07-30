@@ -6,6 +6,7 @@ export const useStyles = makeStyles((theme) => ({
         '& .MuiAccordionSummary-content': {
             display: 'flex',
             alignItems: 'center',
+            margin: 0,
             '& svg': {
                 marginRight: '10px'
             }

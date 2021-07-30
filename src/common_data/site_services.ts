@@ -4,7 +4,7 @@ enum SafeDeal {
     for_homes_cottages,
     electronics,
     hobbies,
-    animals
+    animal
 }
 
 enum Exchange {
@@ -16,7 +16,7 @@ enum Exchange {
     for_homes_cottages,
     electronics,
     hobbies,
-    animals
+    animal
 }
 
 enum Delivery {
@@ -25,7 +25,7 @@ enum Delivery {
     for_homes_cottages,
     electronics,
     hobbies,
-    animals
+    animal
 }
 
 export const site_services = {
