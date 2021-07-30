@@ -19,6 +19,7 @@ type OwnerPropsType = {
     handleShowPhone: () => void,
     handleFollow: (userId) => () => void,
     authorPhones: { phone: string, additional_number: string }
+    setFetchedPostData: () => Promise<void>
 } & WithT;
 
 export const OwnerContent: FC<OwnerPropsType> = (props) => {
@@ -28,16 +29,19 @@ export const OwnerContent: FC<OwnerPropsType> = (props) => {
         authorPhones,
         handleFollow,
         showPhone,
-        handleShowPhone
+        handleShowPhone,
+        setFetchedPostData
     } = props;
 
     const {
+        status,
         safe_deal,
         author,
         creator,
         subscribed
     } = postData;
 
+    const isPublic = status === 'public';
     const {setErrorMsg} = useContext(ErrorCtx);
     const {auth: {isAuth}, setAuthModalOpen} = useContext(AuthCtx);
 
@@ -61,7 +65,7 @@ export const OwnerContent: FC<OwnerPropsType> = (props) => {
             setIsFetch(true);
 
             await myUzCardAPI.p2pHold(p2pData);
-
+            await setFetchedPostData();
             handleCloseSafeDeal();
             setIsFetch(false);
         } catch (e) {
@@ -88,7 +92,7 @@ export const OwnerContent: FC<OwnerPropsType> = (props) => {
     useEffect(() => {
         fetchUserCard();
     }, []);
-
+    console.log(isPublic);
     const classes = useStyles();
     return (
         <div className={classes.root}>
@@ -107,13 +111,13 @@ export const OwnerContent: FC<OwnerPropsType> = (props) => {
                             <span>{t(showPhoneTxt)}</span>
                             {showPhone && authorPhones.additional_number && (
                                 <>
-                                    <br />
+                                    <br/>
                                     <span>{t(authorPhones.additional_number)}</span>
                                 </>
                             )}
                         </Typography>
                     </CustomButton>
-                    {!creator && (
+                    {isPublic && !creator && (
                         <>
                             <CustomButton
                                 color="primary"

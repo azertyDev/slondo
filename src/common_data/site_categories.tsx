@@ -34,7 +34,7 @@ export enum HasAuction {
     animal
 }
 
-const categories_list: CategoryType[] = [
+export const categories_list: CategoryType[] = [
     {
         id: 1,
         name: 'car',

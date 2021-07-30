@@ -47,13 +47,13 @@ export const DropDownSelect: FC<CustomSelectPropsType> = (props) => {
         let value = 'noSelect';
 
         if (multiple) {
-            value = selected.map(item => item.name).join(', ');
+            value = selected.map(item => t(`${transKey}${item.name}.name`)).join(', ');
         } else if (selected) {
             const selectedItem = items.find(item => item.id === +selected) || null;
             if (selectedItem !== null) value = selectedItem[optionKey];
         }
 
-        return t(`${selected && transKey && !noTranslatable ? `${transKey}${value}.name` : value}`);
+        return multiple || noTranslatable ? value : isCurrency ? t(`common:${value}`) : t(`${transKey}${value}.name`);
     };
 
     const classes = useStyles();
@@ -61,14 +61,8 @@ export const DropDownSelect: FC<CustomSelectPropsType> = (props) => {
         <FormControl className={classes.root}>
             <label htmlFor={name}>
                 <Typography variant='subtitle1' gutterBottom>
-                    {multiple
-                        ? labelTxt
-                        : !isCurrency && (
-                        <>
-                            {labelTxt}
-                            {!disableRequire && isRequired(name) && <span className='error-text'>*&nbsp;</span>}
-                        </>
-                    )}
+                    {labelTxt}
+                    {!isCurrency && !disableRequire && isRequired(name) && <span className='error-text'>*&nbsp;</span>}
                 </Typography>
             </label>
             <Select
@@ -102,7 +96,7 @@ export const DropDownSelect: FC<CustomSelectPropsType> = (props) => {
                         )}
                         {t(transKey && !noTranslatable
                             ? `${transKey}${item[optionKey]}.name`
-                            : item[optionKey])}
+                            : isCurrency ? t(`common:${item[optionKey]}`) : item[optionKey])}
                     </MenuItem>
                 ))}
             </Select>

@@ -4,7 +4,7 @@ import {Breadcrumbs, Typography} from '@material-ui/core';
 import {useTranslation} from 'react-i18next';
 import {cookies, transformCyrillic} from '@src/helpers';
 import {site_categories} from '@src/common_data/site_categories';
-import {transformLocations} from '@src/common_data/locations';
+import {transformLocations} from '@root/transformedLocations';
 import {useStyles} from './useStyles';
 
 type BreadcrumbsPropsType = {

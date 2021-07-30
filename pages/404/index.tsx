@@ -1,6 +1,6 @@
-import {GetStaticProps} from 'next';
-import {serverSideTranslations} from 'next-i18next/serverSideTranslations';
-import {PageNotFound} from '@src/components/page_not_found/PageNotFound';
+import {PageNotFound} from "@src/components/page_not_found/PageNotFound";
+import {GetStaticProps} from "next";
+import {serverSideTranslations} from "next-i18next/serverSideTranslations";
 
 export const getStaticProps: GetStaticProps = async ({locale}) => ({
     props: {

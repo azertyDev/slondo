@@ -373,7 +373,7 @@ export const CarParams: FC<CarParamsPropsType> = (props) => {
                                                     <FormikField
                                                         t={t}
                                                         name='engine_capacity'
-                                                        labelText={t('engine_capacity.name')}
+                                                        labelText={t('car.engine_capacity.name')}
                                                         value={values.engine_capacity}
                                                         onChange={handleNumericInput}
                                                         errorMsg={getErrorMsg(errors.engine_capacity, touched.engine_capacity, t)}
@@ -586,9 +586,9 @@ export const CarParams: FC<CarParamsPropsType> = (props) => {
                                                     alignItems='flex-end'
                                                 >
                                                     <DropDownSelect
+                                                        multiple
                                                         transKey={t(`${categoryName}.`)}
                                                         labelTxt={t('car.multimedia.name')}
-                                                        multiple
                                                         name='multimedia'
                                                         values={values}
                                                         onBlur={handleBlur}
@@ -612,14 +612,14 @@ export const CarParams: FC<CarParamsPropsType> = (props) => {
                                                     alignItems='flex-end'
                                                 >
                                                     <DropDownSelect
-                                                        transKey={t(`${categoryName}.`)}
-                                                        labelTxt={t('car.assistance.name')}
                                                         multiple
-                                                        name='assistance'
+                                                        name='assistant'
                                                         values={values}
                                                         onBlur={handleBlur}
-                                                        items={filters.assistance}
+                                                        items={filters.assistant}
                                                         handleSelect={handleSelect}
+                                                        transKey={t(`${categoryName}.`)}
+                                                        labelTxt={t('car.assistant.name')}
                                                     />
                                                 </Grid>
                                                 <Grid

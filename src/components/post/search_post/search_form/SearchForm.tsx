@@ -16,7 +16,7 @@ import {
 import {useHandlers} from '@src/hooks/useHandlers';
 import {SearchCar} from '@src/components/post/search_post/search_form/categories_forms/car/SearchCar';
 import {SearchRegular} from '@src/components/post/search_post/search_form/categories_forms/regular/SearchRegular';
-import {transformLocations} from '@src/common_data/locations';
+import {transformLocations} from '@root/transformedLocations';
 import {HasAuction, site_categories} from '@src/common_data/site_categories';
 import {userAPI} from '@src/api/api';
 import {SearchEstate} from '@src/components/post/search_post/search_form/categories_forms/estate/SearchEstate';

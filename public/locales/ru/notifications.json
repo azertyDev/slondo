@@ -30,6 +30,7 @@
     "auto_renewal_activated": "Сработала функция «автопродление»"
   },
   "descriptions": {
+    "secure_post_successfully": "Поздравляем, безопасная покупка по объявлению № {{ads_id}} была успешно завершена. Перевод средств был осуществлен на карту продавца",
     "new_rating": "Пользователь {{user_name}} поставил Вам оценку {{value}}",
     "seller_deactivated_auction_rating_downgraded": "Продавец деактивировал аукцион № {{ads_id}}. Рейтинг продавца был понижен",
     "seller_deactivated_auction": "Продавец деактивировал аукцион № {{ads_id}}",

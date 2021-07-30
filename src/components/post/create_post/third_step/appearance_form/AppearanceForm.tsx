@@ -1,4 +1,4 @@
-import {FC, useEffect, useState} from 'react';
+import {FC, useEffect} from 'react';
 import {useFormik} from 'formik';
 import {Box, Grid, Typography} from '@material-ui/core';
 import {UPLOAD_FILES_LIMIT} from '@src/constants';

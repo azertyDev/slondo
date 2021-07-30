@@ -14,6 +14,23 @@ import {WithT} from 'i18next';
 export const cookies = new Cookies();
 export const cookieOpts: { path: string, sameSite: boolean | 'none' | 'lax' | 'strict' } = {path: '/', sameSite: 'lax'};
 
+export const getStringValues = (obj): string[] => {
+    const values: string[] = [];
+    const keys = Object.keys(obj);
+
+    if (keys.length !== 0) {
+        keys.forEach(k => {
+            if (typeof obj[k] === 'string') {
+                values.push(obj[k]);
+            } else if (typeof obj[k] === 'object') {
+                values.push(...getStringValues(obj[k]));
+            }
+        });
+    }
+
+    return values;
+};
+
 type GetFieldsByFiltersProps = {
     filters,
     formik,
