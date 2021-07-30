@@ -72,7 +72,7 @@ export const CustomDrawer: FC<CustomDrawerPropsType> = (props) => {
             {!!subcategory.length && (
                 <div className={classes.drawerContent}>
                     <div className='close-btn-wrapper'>
-                        <CloseBtn handleClose={handleClose} />
+                        <CloseBtn handleClose={handleClose}/>
                     </div>
                     <Box display='flex' flexWrap='wrap'>
                         {subcategory.map(subctgr => {
@@ -82,10 +82,10 @@ export const CustomDrawer: FC<CustomDrawerPropsType> = (props) => {
                             const type = subctgr.type || [];
                             const url = `/${location}/${categoryName}/${subcategoryName}`;
                             return (
-                                <List key={subctgr.id}>
+                                <List key={subctgr.id} className='list-wrapper'>
                                     <Link href={url}>
                                         <a onClick={handleClose}>
-                                            <Typography variant="h6" gutterBottom color="secondary">
+                                            <Typography variant="h6" gutterBottom color="secondary" className='list-title'>
                                                 {t(`${hoveredCtgr.name}.${subctgr.name}.name`)}
                                             </Typography>
                                         </a>
@@ -94,7 +94,7 @@ export const CustomDrawer: FC<CustomDrawerPropsType> = (props) => {
                                         const typeName = transformCyrillic(type.ru_name);
                                         const typeCtgrTrans = t(`${hoveredCtgr.name}.${subctgr.name}.${type.name}.name`);
                                         return (
-                                            <ListItem key={type.id}>
+                                            <ListItem key={type.id} className='list-item'>
                                                 <Link href={url + `/${typeName}`}>
                                                     <a onClick={handleClose}>
                                                         <Typography variant="subtitle1" key={type.id}>

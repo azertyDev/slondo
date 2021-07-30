@@ -1,4 +1,4 @@
-import {makeStyles} from '@material-ui/core/styles'
+import {makeStyles} from '@material-ui/core/styles';
 
 export const useStyles = makeStyles(() => ({
     drawerPaper: {
@@ -55,12 +55,16 @@ export const useStyles = makeStyles(() => ({
             justifyContent: 'flex-end'
         },
         '& a': {
-            textDecoration: 'none'
+            textDecoration: 'none',
+            '&:hover': {
+                textDecoration: 'underline',
+                color: '#AD66D5'
+            }
         },
         '& .MuiTypography-h6': {
             color: 'rgb(51, 51, 51)',
             '&:hover': {
-                color: '#675EAA',
+                color: '#AD66D5'
             }
         },
         '& .MuiTypography-subtitle1': {
@@ -69,6 +73,15 @@ export const useStyles = makeStyles(() => ({
                 color: '#AD66D5',
                 opacity: '72.72%'
             }
+        },
+        '& .list-wrapper': {
+            width: '50%',
+            '& h6.list-title': {
+                fontWeight: '600'
+            },
+            '& .list-item': {
+                padding: '10px 0'
+            }
         }
     }
-}))
+}));
