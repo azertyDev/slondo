@@ -2,22 +2,19 @@ import {makeStyles} from '@material-ui/core/styles';
 
 export const useStyles = makeStyles((theme) => ({
     root: {
-        maxWidth: '304px',
         '& > div.switcher': {
             display: 'flex',
             justifyContent: 'space-between',
             alignItems: 'center'
         },
         '& div.scheduler': {
-            height: '106px',
-            [theme.breakpoints.down('sm')]: {
-                height: '96px'
-            },
+            boxShadow: '0px 0px 10px 0px #0000000D',
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+            borderRadius: 10,
+            padding: '15px 20px',
             '& > div.week-days': {
-                margin: '0 10px',
-                [theme.breakpoints.down('sm')]: {
-                    margin: '0 10px 10px'
-                },
                 '& p.selected-day': {
                     color: '#fff',
                     backgroundColor: '#7DBCF6',
@@ -31,7 +28,6 @@ export const useStyles = makeStyles((theme) => ({
                 }
             },
             '& div.available-time': {
-                margin: '0 10px',
                 display: 'flex',
                 '& > div': {
                     display: 'flex',

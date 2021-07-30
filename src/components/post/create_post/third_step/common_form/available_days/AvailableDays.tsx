@@ -1,7 +1,7 @@
-import {FC} from "react";
-import {WithT} from "i18next";
-import {WEEK_DAYS} from "@src/common_data/common";
-import {Checkbox, Paper, Switch, TextField, Typography} from "@material-ui/core";
+import {FC} from 'react';
+import {WithT} from 'i18next';
+import {WEEK_DAYS} from '@src/common_data/common';
+import {Box, Checkbox, Paper, Switch, TextField, Typography} from '@material-ui/core';
 import {useStyles} from './useStyles';
 
 type AvailableDaysPropsType = {
@@ -26,7 +26,7 @@ export const AvailableDays: FC<AvailableDaysPropsType> = (props) => {
 
     const classes = useStyles();
     return (
-        <div className={classes.root}>
+        <Box width={1} className={classes.root}>
             <div className='switcher'>
                 <Typography variant="subtitle1">
                     <strong>
@@ -39,7 +39,7 @@ export const AvailableDays: FC<AvailableDaysPropsType> = (props) => {
                     onChange={switchActive}
                 />
             </div>
-            <Paper className='scheduler'>
+            <Paper className='scheduler' elevation={0}>
                 <div className='week-days'>
                     {WEEK_DAYS.map(day =>
                         <Checkbox
@@ -58,6 +58,13 @@ export const AvailableDays: FC<AvailableDaysPropsType> = (props) => {
                 </div>
                 <div className='available-time'>
                     <div>
+                        <Box
+                            mr={1}
+                            fontSize='subtitle2.fontSize'
+                            component='p'
+                        >
+                            {t(`common:from`)}
+                        </Box>
                         <TextField
                             variant='outlined'
                             name='available_start_time'
@@ -66,7 +73,13 @@ export const AvailableDays: FC<AvailableDaysPropsType> = (props) => {
                             onBlur={handleBlur}
                             value={time.available_start_time}
                         />
-                        <span>&nbsp;-&nbsp;</span>
+                        <Box
+                            mx={1}
+                            fontSize='subtitle2.fontSize'
+                            component='p'
+                        >
+                            {t(`common:to`)}
+                        </Box>
                         <TextField
                             name='available_end_time'
                             variant='outlined'
@@ -78,6 +91,6 @@ export const AvailableDays: FC<AvailableDaysPropsType> = (props) => {
                     </div>
                 </div>
             </Paper>
-        </div>
+        </Box>
     );
 };

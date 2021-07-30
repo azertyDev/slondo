@@ -1,5 +1,5 @@
 import {FC} from 'react';
-import {Checkbox, Typography} from '@material-ui/core';
+import {Checkbox, Grid, Typography} from '@material-ui/core';
 import {FormikField} from '@src/components/elements/formik_field/FormikField';
 import {WithT} from 'i18next';
 import {useStyles} from './useStyles';
@@ -25,7 +25,7 @@ export const Contacts: FC<ContactsPropsType> = (props) => {
 
     const classes = useStyles();
     return (
-        <div className={classes.root}>
+        <Grid item xs={6} className={classes.root}>
             {isAuction && (
                 <div className='display-phone'>
                     <Checkbox
@@ -58,6 +58,6 @@ export const Contacts: FC<ContactsPropsType> = (props) => {
                     onChange={handleInput}
                 />
             </div>
-        </div>
+        </Grid>
     );
 };

@@ -17,18 +17,20 @@ export const useStyles = makeStyles((theme) => ({
             },
             margin: '11px 0'
         },
-        '& div.phone-wrapper': {
-            marginTop: '12px',
-            '& .MuiFormControl-fullWidth': {
-                width: '196px'
-            }
-        },
         '& div.avail-days-wrapper': {
-            maxWidth: '304px',
-            marginLeft: 'auto',
-            '& > a.settings': {
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'flex-end',
+            '& a.settings': {
+                textAlign: 'end',
                 textDecoration: 'none',
-                color: '#9b66d2'
+                marginTop: 5,
+                '& p': {
+                    color: '#675EAA'
+                },
+                '&:hover': {
+                    borderBottom: '1px solid #675EAA'
+                }
             }
         }
     }

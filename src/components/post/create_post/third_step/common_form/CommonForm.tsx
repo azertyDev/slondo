@@ -379,19 +379,8 @@ export const CommonForm: FC<DefaultParamsPropsType> = (props) => {
                                     errorMsg={getErrorMsg(errors.description, touched.description, t)}
                                 />
                             </Grid>
-                            <Grid
-                                item
-                                container
-                                spacing={1}
-                                justify='space-between'
-                            >
-                                <Grid
-                                    item
-                                    xs={12}
-                                    sm={6}
-                                    md={3}
-                                    className='phone-wrapper'
-                                >
+                            <Grid item container spacing={2}>
+                                <Grid item xs={12} sm={6}>
                                     <Contacts
                                         t={t}
                                         values={values}
@@ -402,13 +391,8 @@ export const CommonForm: FC<DefaultParamsPropsType> = (props) => {
                                     />
                                 </Grid>
                                 {!isAuction && (
-                                    <Grid
-                                        item
-                                        xs={12}
-                                        sm={6}
-                                        lg={4}
-                                    >
-                                        <div className='avail-days-wrapper'>
+                                    <Grid item container xs={12} sm={6} justify='center'>
+                                        <Grid item xs={8} className='avail-days-wrapper'>
                                             <AvailableDays
                                                 t={t}
                                                 time={values.avalTime}
@@ -419,9 +403,13 @@ export const CommonForm: FC<DefaultParamsPropsType> = (props) => {
                                                 isActive={avalTimeActive}
                                             />
                                             <Link href='/cabinet/settings'>
-                                                <a className='settings'>{t('configs')}</a>
+                                                <a className='settings'>
+                                                    <Typography variant='subtitle1' component='p'>
+                                                        {t('configs')}
+                                                    </Typography>
+                                                </a>
                                             </Link>
-                                        </div>
+                                        </Grid>
                                     </Grid>
                                 )}
                             </Grid>
