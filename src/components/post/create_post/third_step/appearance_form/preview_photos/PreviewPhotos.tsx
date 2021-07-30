@@ -49,8 +49,6 @@ export const PreviewPhotos: FC<PreviewPhotosPropsType> = (props) => {
                                     item
                                     xs={6}
                                     sm={3}
-                                    md={3}
-                                    lg={2}
                                     ref={provided.innerRef}
                                     {...provided.draggableProps}
                                     {...provided.dragHandleProps}
