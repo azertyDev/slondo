@@ -25,7 +25,7 @@ export const useStyles = makeStyles(() => ({
         '& div.prev-img': {
             '& img': {
                 width: '100%',
-                height: '100px',
+                height: '130px',
                 objectFit: 'cover',
                 borderRadius: '5px'
             }
@@ -36,7 +36,7 @@ export const useStyles = makeStyles(() => ({
                 display: 'flex',
                 justifyContent: 'center',
                 alignItems: 'center',
-                height: '100px',
+                height: '130px',
                 backgroundColor: '#fff',
                 borderRadius: '5px',
                 cursor: 'pointer',
