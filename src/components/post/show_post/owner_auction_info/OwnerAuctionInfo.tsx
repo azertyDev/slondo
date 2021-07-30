@@ -91,6 +91,7 @@ export const OwnerAuctionInfo: FC<OwnerAuctionInfoPropsType> = (props) => {
                 authorPhones={authorPhones}
                 handleFollow={handleFollow}
                 handleShowPhone={handleShowPhone}
+                setFetchedPostData={setFetchedPostData}
             />
         </div>
     );

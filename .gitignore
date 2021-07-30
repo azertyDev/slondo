@@ -36,3 +36,6 @@ yarn-error.log*
 .vercel
 
 yarn.lock
+
+/public/sitemap.xml
+/public/robots.txt

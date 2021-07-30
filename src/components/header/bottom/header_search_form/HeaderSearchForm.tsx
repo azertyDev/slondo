@@ -14,7 +14,7 @@ import {useTranslation} from 'next-i18next';
 import {useRouter} from 'next/router';
 import {cookies, getSearchTxt} from '@src/helpers';
 import {CustomFormikProvider} from '@src/components/elements/custom_formik_provider/CustomFormikProvider';
-import {transformLocations} from '@src/common_data/locations';
+import {transformLocations} from '@root/transformedLocations';
 import {useStyles} from './useStyles';
 
 export const HeaderSearchForm: FC = () => {

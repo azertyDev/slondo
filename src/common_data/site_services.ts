@@ -1,7 +1,7 @@
 enum SafeDeal {
     parts = 1,
     goods,
-    for_homes_cottages,
+    home,
     electronics,
     hobbies,
     animal
@@ -13,7 +13,7 @@ enum Exchange {
     parts,
     estate,
     goods,
-    for_homes_cottages,
+    home,
     electronics,
     hobbies,
     animal
@@ -22,7 +22,7 @@ enum Exchange {
 enum Delivery {
     parts = 1,
     goods,
-    for_homes_cottages,
+    home,
     electronics,
     hobbies,
     animal

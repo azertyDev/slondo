@@ -98,7 +98,7 @@ export const optionFields = [
     'multimedia',
     'anti_theft',
     'airbags',
-    'assistance',
+    'assistant',
     'parking',
     'adjustable_seats',
     'seat_heating',

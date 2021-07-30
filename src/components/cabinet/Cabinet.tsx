@@ -16,7 +16,7 @@ import {SafetyDeal} from '@src/components/cabinet/cabinet_pages/safety_deal/Safe
 import {Settings} from '@src/components/cabinet/cabinet_pages/settings/Settings';
 import {Subs} from '@src/components/cabinet/cabinet_pages/subs/Subs';
 import {withAuthRedirect} from '@src/hocs/withAuthRedirect';
-import PageNotFound from "../../../pages/404";
+import ErrorPage from "@root/pages/_error";
 import {useStyles} from './useStyles';
 
 enum Pages {
@@ -103,7 +103,7 @@ const Cabinet: FC = () => {
                     </Grid>
                 </div>
             </MainLayout>
-            : <PageNotFound/>
+            : <ErrorPage statusCode={404}/>
     );
 };
 
