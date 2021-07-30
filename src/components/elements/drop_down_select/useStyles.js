@@ -35,7 +35,10 @@ export const useStyles = makeStyles((theme) => ({
             [theme.breakpoints.down('xs')]: {
                 fontSize: '13px',
                 textAlign: 'start'
-            },
+            }
+        },
+        '& .MuiPaper-root': {
+            backgroundColor: '#fff'
         }
     }
 }));

@@ -3,9 +3,11 @@ import {makeStyles} from '@material-ui/core/styles'
 export const useStyles = makeStyles(() => ({
     drawerPaper: {
         display: 'flex',
-        flexDirection: 'row'
+        flexDirection: 'row',
+        width: '60%'
     },
     drawerList: {
+        width: '35%',
         padding: '20px 10px',
         borderRight: '.5px solid',
         '& > div.MuiListItem-button': {
@@ -44,7 +46,7 @@ export const useStyles = makeStyles(() => ({
         }
     },
     drawerContent: {
-        width: '330px',
+        width: '65%',
         padding: '10px',
         overflow: 'scroll',
         scrollbarWidth: 'thin',

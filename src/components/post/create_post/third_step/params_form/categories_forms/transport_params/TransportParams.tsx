@@ -98,7 +98,7 @@ export const TransportParams: FC<CommonParamsPropsType> = (props) => {
                     {isPreview
                         ? <PreviewValues t={t} values={values}/>
                         : <>
-                            <Grid container spacing={2}>
+                            <Grid item container spacing={2}>
                                 {getFieldsByFilters({
                                     t,
                                     filters,

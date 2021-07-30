@@ -114,7 +114,7 @@ export const Ratings: FC<RatingsPropsType> = (props) => {
                                     const formatted_date = `${date.getDate()} ${months[date.getMonth()]} ${date.getFullYear()}`;
                                     return (
                                         <>
-                                            <Box className='review-item'>
+                                            <Box className='review-item' key={index}>
                                                 {index === 0 && (
                                                     <UserAvatarComponent
                                                         avatar={author.avatar}

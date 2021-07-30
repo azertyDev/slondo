@@ -185,7 +185,7 @@ export const PostContent: FC<PostContentTypes> = (props) => {
                             {data.title}
                         </Typography>
                     </div>
-                    {!data.condition.name && (
+                    {!data.model?.condition && (
                         <div className="condition">
                             <Typography variant="h6">{t(`post:${data.model?.condition?.name}`)}</Typography>
                         </div>

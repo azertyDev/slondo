@@ -1,6 +1,6 @@
 import {FC, useEffect, useState} from 'react';
 import {useFormik} from 'formik';
-import {Typography} from '@material-ui/core';
+import {Box, Grid, Typography} from '@material-ui/core';
 import {UPLOAD_FILES_LIMIT} from '@src/constants';
 import {PreviewPhotos} from './preview_photos/PreviewPhotos';
 import {CustomAccordion} from '@src/components/elements/accordion/CustomAccordion';
@@ -177,7 +177,7 @@ export const AppearanceForm: FC<AppearanceFormPropsType> = (props) => {
                 submitTxt='priceDescContacts'
                 title={t('post:appearance')}
             >
-                <div className={classes.root}>
+                <Grid item container xs={12} className={classes.root}>
                     {isPreview
                         ? <div className='preview'>
                             {!!color && (
@@ -210,7 +210,7 @@ export const AppearanceForm: FC<AppearanceFormPropsType> = (props) => {
                                 ))}
                             </div>
                         </div>
-                        : <div>
+                        : <>
                             {!!colors && (
                                 <div>
                                     <Typography variant="subtitle1">
@@ -245,27 +245,51 @@ export const AppearanceForm: FC<AppearanceFormPropsType> = (props) => {
                                     </div>
                                 </div>
                             )}
-                            <div className='photos-wrapper'>
-                                <Typography variant="subtitle1">
-                                    <strong>
-                                        {t('post:photos')}
-                                        {!isJob && <span className='error-text'>*</span>}
-                                    </strong>
+                            <Box width='inherit' className='photos-wrapper'>
+                                <Box
+                                    fontWeight={500}
+                                    fontSize={18}
+                                    mb={2}
+                                >
+                                    {t('post:photos')}
+                                    {!isJob && <span className='error-text'>*</span>}
                                     {errors.files && touched.files && (
-                                        <span className='error-text'>
-                                             &nbsp;{t(`errors:${errors.files as string}`)}
-                                         </span>
+                                        <Box
+                                            fontSize='subtitle2.fontSize'
+                                            mt={1}
+                                            component='p'
+                                            className='error-text'
+                                        >
+                                            &nbsp;{t(`errors:${errors.files as string}`)}
+                                        </Box>
                                     )}
-                                </Typography>
+                                </Box>
+                                <Box
+                                    fontWeight={500}
+                                    color='text.disabled'
+                                    fontSize='subtitle2.fontSize'
+                                    mb={2}
+                                >
+                                    Первое фото будет визиткой Вашего объявления. Подберите лучшую фотографию.
+                                </Box>
                                 <PreviewPhotos
                                     files={files}
                                     removeFile={removeFile}
                                     handleUploadFile={handleUploadFile}
                                     handleOnDragEnd={handleOnDragEnd}
                                 />
-                            </div>
-                        </div>}
-                </div>
+                                <Box
+                                    fontWeight={500}
+                                    color='text.disabled'
+                                    fontSize='subtitle2.fontSize'
+                                    mt={2}
+                                >
+                                    Вы можете загрузить до 8 фотографий в формате JPEG или PNG. Размер одной фотографии
+                                    не должен превышать - 15 Mb
+                                </Box>
+                            </Box>
+                        </>}
+                </Grid>
             </CustomAccordion>
         </CustomFormikProvider>
     );

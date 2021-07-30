@@ -1,14 +1,12 @@
 import {makeStyles} from '@material-ui/core/styles';
 
-export const useStyles = makeStyles((theme) => ({
+export const useStyles = makeStyles(() => ({
     root: {
-        height: '72px',
-        '& div.options > button': {
-            color: theme.palette.primary.white,
-            backgroundColor: theme.palette.common.activeTab,
-            '&.selected': {
-                border: `3px solid ${theme.palette.primary.exAucBgColor}`
-            }
+        '& span.MuiIconButton-root': {
+            padding: 5
+        },
+        '& label.MuiFormControlLabel-root': {
+            margin: 0
         }
     }
 }));

@@ -93,7 +93,7 @@ export const ElectronicsParams: FC<CommonParamsPropsType> = (props) => {
                             }, categoryName)}
                         </Grid>
                         {isMonitors && (
-                            <Grid container spacing={2}>
+                            <Grid item container spacing={2}>
                                 <Grid
                                     item
                                     container

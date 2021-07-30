@@ -1,7 +1,7 @@
 import {FC, useState} from 'react';
 import Link from 'next/link';
 import Drawer from '@material-ui/core/Drawer';
-import {List, ListItem, Typography} from '@material-ui/core';
+import {Box, List, ListItem, Typography} from '@material-ui/core';
 import {site_categories} from '@src/common_data/site_categories';
 import {useTranslation} from 'next-i18next';
 import {transformCyrillic} from '@src/helpers';
@@ -72,9 +72,9 @@ export const CustomDrawer: FC<CustomDrawerPropsType> = (props) => {
             {!!subcategory.length && (
                 <div className={classes.drawerContent}>
                     <div className='close-btn-wrapper'>
-                        <CloseBtn handleClose={handleClose}/>
+                        <CloseBtn handleClose={handleClose} />
                     </div>
-                    <div>
+                    <Box display='flex' flexWrap='wrap'>
                         {subcategory.map(subctgr => {
                             const location = 'tashkent';
                             const categoryName = transformCyrillic(hoveredCtgr.ru_name);
@@ -82,35 +82,33 @@ export const CustomDrawer: FC<CustomDrawerPropsType> = (props) => {
                             const type = subctgr.type || [];
                             const url = `/${location}/${categoryName}/${subcategoryName}`;
                             return (
-                                <div key={subctgr.id}>
-                                    <List>
-                                        <Link href={url}>
-                                            <a onClick={handleClose}>
-                                                <Typography variant="h6" gutterBottom color="secondary">
-                                                    {t(`${hoveredCtgr.name}.${subctgr.name}.name`)}
-                                                </Typography>
-                                            </a>
-                                        </Link>
-                                        {type.map(type => {
-                                            const typeName = transformCyrillic(type.ru_name);
-                                            const typeCtgrTrans = t(`${hoveredCtgr.name}.${subctgr.name}.${type.name}.name`);
-                                            return (
-                                                <ListItem key={type.id}>
-                                                    <Link href={url + `/${typeName}`}>
-                                                        <a onClick={handleClose}>
-                                                            <Typography variant="subtitle1" key={type.id}>
-                                                                {typeCtgrTrans}
-                                                            </Typography>
-                                                        </a>
-                                                    </Link>
-                                                </ListItem>
-                                            );
-                                        })}
-                                    </List>
-                                </div>
+                                <List key={subctgr.id}>
+                                    <Link href={url}>
+                                        <a onClick={handleClose}>
+                                            <Typography variant="h6" gutterBottom color="secondary">
+                                                {t(`${hoveredCtgr.name}.${subctgr.name}.name`)}
+                                            </Typography>
+                                        </a>
+                                    </Link>
+                                    {type.map(type => {
+                                        const typeName = transformCyrillic(type.ru_name);
+                                        const typeCtgrTrans = t(`${hoveredCtgr.name}.${subctgr.name}.${type.name}.name`);
+                                        return (
+                                            <ListItem key={type.id}>
+                                                <Link href={url + `/${typeName}`}>
+                                                    <a onClick={handleClose}>
+                                                        <Typography variant="subtitle1" key={type.id}>
+                                                            {typeCtgrTrans}
+                                                        </Typography>
+                                                    </a>
+                                                </Link>
+                                            </ListItem>
+                                        );
+                                    })}
+                                </List>
                             );
                         })}
-                    </div>
+                    </Box>
                 </div>
             )}
         </Drawer>

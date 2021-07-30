@@ -61,7 +61,7 @@ export const SidebarMenu: FC<SidebarMenuPropsType> = ({clearAnchor}) => {
         <div className={classes.root}>
             <List disablePadding component="nav" aria-label="cabinet menu" className='menu-item'>
                 <Grid container spacing={1}>
-                    <Grid item xs={12} sm={12}>
+                    <Grid item xs={12} sm={4}>
                         <CustomBadge badgeContent={user.observer.number_of_reviews}>
                             <ListItem
                                 button
@@ -73,7 +73,7 @@ export const SidebarMenu: FC<SidebarMenuPropsType> = ({clearAnchor}) => {
                             </ListItem>
                         </CustomBadge>
                     </Grid>
-                    <Grid item xs={12} sm={12}>
+                    <Grid item xs={12} sm={8}>
                         <ListItem
                             button
                             disableGutters
@@ -241,8 +241,6 @@ export const SidebarMenu: FC<SidebarMenuPropsType> = ({clearAnchor}) => {
                         </ListItem>
                     </Grid>
                 </Grid>
-
-
             </List>
         </div>
     );

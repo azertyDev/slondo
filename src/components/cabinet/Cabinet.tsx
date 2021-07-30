@@ -82,11 +82,11 @@ const Cabinet: FC = () => {
         existPage
             ? <MainLayout title={title}>
                 <div className={classes.root}>
-                    <Grid container spacing={isSmDown ? 0 : 2}>
+                    <Grid container>
                         <Grid item sm={5} md={3}>
-                            <CabinetSidebar/>
+                            <CabinetSidebar />
                         </Grid>
-                        <Grid item xs={12} sm={12} md={9}>
+                        <Grid item xs={12} sm={12} md={9} className='pl-16'>
                             {isRootPage
                                 ? <div>{t('select_page')}</div>
                                 : <>

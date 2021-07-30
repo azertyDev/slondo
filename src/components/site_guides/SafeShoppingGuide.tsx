@@ -1,24 +1,23 @@
 import {useState, cloneElement} from 'react';
 import {AppBar, Box, Container, Grid, Paper, Tab, Tabs, Toolbar, Typography, useScrollTrigger} from '@material-ui/core';
 import Link from 'next/link';
-import { Logo } from '../elements/icons';
-import { Localization } from '../header/top/localization/Localization';
-import { CustomTabPanel } from '../elements/custom_tab_panel/CustomTabPanel';
-import {useTranslation} from 'react-i18next';
-import { useStyles } from './useStyles'
+import {Logo} from '../elements/icons';
+import {Localization} from '../header/top/localization/Localization';
+import {CustomTabPanel} from '../elements/custom_tab_panel/CustomTabPanel';
+import {useStyles} from './useStyles';
 
 function HideOnScroll(props) {
-    const { children, window } = props;
+    const {children, window} = props;
 
     const trigger = useScrollTrigger({
         disableHysteresis: true,
         threshold: 0,
-        target: window ? window() : undefined,
+        target: window ? window() : undefined
     });
-    
+
     return cloneElement(children, {
-        elevation: trigger ? 4 : 0,
-    })
+        elevation: trigger ? 4 : 0
+    });
 }
 
 const cardItemsData = {
@@ -50,7 +49,7 @@ const cardItemsData = {
         {
             imgUrl: '/img/safe_shopping/for_seller/advice_7.png',
             text: 'forSeller.advice_7'
-        },
+        }
     ],
     forBuyer: [
         {
@@ -80,20 +79,21 @@ const cardItemsData = {
         {
             imgUrl: '/img/safe_shopping/for_buyer/advice_7.png',
             text: 'forBuyer.advice_7'
-        },
+        }
     ]
-}
+};
 
-export const SafeShoppingRules = (props) => {
-    const { forSeller, forBuyer } = cardItemsData;
-    const { t } = useTranslation('safe_shopping');
+export const SafeShoppingGuide = (props) => {
+    const {t} = props;
+    const {forSeller, forBuyer} = cardItemsData;
+
     const [tabValue, setTabValue] = useState(0);
 
     const handleTabChange = (_, newValue: number) => {
         setTabValue(newValue);
     };
-    
-    const classes = useStyles()
+
+    const classes = useStyles();
     return (
         <div className={classes.root}>
             <HideOnScroll {...props}>
@@ -103,32 +103,32 @@ export const SafeShoppingRules = (props) => {
                             <Grid container>
                                 <Grid
                                     item
-                                    xs={6} 
-                                    container 
-                                    justify='flex-start' 
+                                    xs={6}
+                                    container
+                                    justify='flex-start'
                                     alignItems='center'
                                 >
                                     <Link href='/'>
                                         <a>
-                                            <Logo/>
+                                            <Logo />
                                         </a>
                                     </Link>
                                 </Grid>
-                                <Grid 
-                                    item 
-                                    xs={6} 
-                                    container 
-                                    justify='flex-end' 
+                                <Grid
+                                    item
+                                    xs={6}
+                                    container
+                                    justify='flex-end'
                                     alignItems='center'
                                 >
-                                    <Localization/>
+                                    <Localization />
                                 </Grid>
                             </Grid>
                         </Toolbar>
                     </Container>
                 </AppBar>
             </HideOnScroll>
-            <Container maxWidth='lg' style={{ paddingTop: 50 }}>
+            <Container maxWidth='lg' style={{paddingTop: 50}}>
                 <Grid container spacing={2} justify='center'>
                     <Grid item xs={12}>
                         <Paper elevation={1} className='paper'>
@@ -167,7 +167,7 @@ export const SafeShoppingRules = (props) => {
                                 selectionFollowsFocus
                                 indicatorColor="primary"
                                 onChange={handleTabChange}
-                                TabIndicatorProps={{ style: { display: 'none' } }}
+                                TabIndicatorProps={{style: {display: 'none'}}}
                             >
                                 <Tab
                                     label={<Typography variant="subtitle1">{t('forSeller.name')}</Typography>}
@@ -183,7 +183,7 @@ export const SafeShoppingRules = (props) => {
                     <Grid item xs={11}>
                         <CustomTabPanel value={tabValue} index={0}>
                             {
-                                forSeller.map(({ imgUrl, text }, index) => {
+                                forSeller.map(({imgUrl, text}, index) => {
                                     return (
                                         <Paper elevation={1} className='paper' key={index}>
                                             <Grid container>
@@ -197,13 +197,13 @@ export const SafeShoppingRules = (props) => {
                                                 </Grid>
                                             </Grid>
                                         </Paper>
-                                    )
+                                    );
                                 })
                             }
                         </CustomTabPanel>
                         <CustomTabPanel value={tabValue} index={1}>
                             {
-                                forBuyer.map(({ imgUrl, text }, index) => {
+                                forBuyer.map(({imgUrl, text}, index) => {
                                     return (
                                         <Paper elevation={1} className='paper' key={index}>
                                             <Grid container>
@@ -217,14 +217,14 @@ export const SafeShoppingRules = (props) => {
                                                 </Grid>
                                             </Grid>
                                         </Paper>
-                                    )
+                                    );
                                 })
                             }
                         </CustomTabPanel>
                     </Grid>
                 </Grid>
-                    
+
             </Container>
         </div>
-    )
-}
+    );
+};

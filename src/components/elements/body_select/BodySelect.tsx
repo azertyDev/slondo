@@ -1,5 +1,5 @@
 import {FC} from 'react';
-import {Typography} from '@material-ui/core';
+import {Box, Typography} from '@material-ui/core';
 import {useStyles} from './useStyles';
 import {useTranslation} from "react-i18next";
 
@@ -26,7 +26,7 @@ export const BodySelect: FC<BodyTypesProps> = (props) => {
     const classes = useStyles();
     return (
         <div className={classes.root}>
-            <Typography variant='subtitle1' className='title'>
+            <Typography variant='subtitle1' gutterBottom>
                 <strong>
                     {t('car.body.name')}
                     {!disableRequire && <span className='error-text'>*&nbsp;</span>}
@@ -39,14 +39,18 @@ export const BodySelect: FC<BodyTypesProps> = (props) => {
             </Typography>
             <div className='body-types'>
                 {bodies?.map(body => (
-                    <Typography
+                    <Box
                         key={body.id}
-                        variant='subtitle1'
                         onClick={() => handleSelect('body', body)}
                         className={body.id === values.body?.id ? 'selected' : ''}
                     >
-                        {body.name}
-                    </Typography>
+                        <Typography
+                            component='p'
+                            variant='subtitle1'
+                        >
+                            {body.name}
+                        </Typography>
+                    </Box>
                 ))}
             </div>
         </div>

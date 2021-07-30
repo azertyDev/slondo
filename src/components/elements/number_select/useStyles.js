@@ -3,35 +3,29 @@ import {makeStyles} from '@material-ui/core/styles';
 export const useStyles = makeStyles((theme) => ({
     root: {
         height: '72px',
-        '& h6': {
-            marginBottom: '7px'
-        },
         '& div.numbers-wrapper': {
             '&, & > h6, div.other-wrapper': {
                 display: 'flex',
-                alignItems: 'center'
+                alignItems: 'center',
+                justifyContent: 'space-between'
             },
-            '& > h6': {
-                justifyContent: 'center',
-                '&.numbers-item': {
-                    width: '28px',
-                    height: '28px',
-                    margin: '0 5px',
-                    borderRadius: '50%',
-                    backgroundColor: '#fff',
-                    cursor: 'pointer',
-                    '&:first-child': {
-                        marginLeft: 0
-                    }
-                },
+            '& span.numbers-item': {
+                width: '28px',
+                height: '28px',
+                cursor: 'pointer',
+                borderRadius: '50%',
+                backgroundColor: '#fff',
+                boxShadow: '0px 0px 8px rgba(0, 0, 0, 0.2)',
                 '&.selected': {
-                    color: theme.palette.primary.main,
-                    border: `1px solid ${theme.palette.primary.main}`
+                    border: `1px solid ${theme.palette.primary.main}`,
+                    '& p': {
+                        color: theme.palette.primary.main
+                    }
                 }
             },
+
             '& div.other-wrapper': {
                 justifyContent: 'center',
-                marginLeft: '10px',
                 '&, div.MuiInputBase-root': {
                     height: '28px',
                     '& input': {

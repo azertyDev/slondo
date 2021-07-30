@@ -7,15 +7,6 @@ export const useStyles = makeStyles(() => ({
         },
         '& div.title-wrapper': {
             marginBottom: '20px'
-        },
-        '& div.grid-container': {
-            marginBottom: '10px'
-        },
-        '& div.options-select-wrapper': {
-            width: '100%',
-            '& > div:first-child': {
-                marginBottom: '10px'
-            }
         }
     }
 }))

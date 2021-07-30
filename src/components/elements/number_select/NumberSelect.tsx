@@ -1,7 +1,7 @@
 import {FC, useState} from "react";
-import {WithT} from "i18next";
-import {TextField, Typography} from "@material-ui/core";
-import {numberRegEx} from "@src/common_data/reg_exs";
+import {WithT} from 'i18next';
+import {Box, TextField, Typography} from '@material-ui/core';
+import {numberRegEx} from '@src/common_data/reg_exs';
 import {isRequired} from "@src/helpers";
 import {useStyles} from './useStyles';
 
@@ -46,8 +46,14 @@ export const NumberSelect: FC<FloorsPropsType> = (props) => {
 
     const classes = useStyles();
     return (
-        <div className={classes.root}>
-            <Typography variant="subtitle1">
+        <Box
+            width={1}
+            display='flex'
+            flexDirection='column'
+            justifyContent='center'
+            className={classes.root}
+        >
+            <Typography variant="subtitle1" gutterBottom>
                 <strong>
                     {t(`filters:${name}`)}
                     {isRequired(name) && <span className='error-text'>*&nbsp;</span>}
@@ -57,39 +63,44 @@ export const NumberSelect: FC<FloorsPropsType> = (props) => {
                 {Array.from({length: count}).map((_, i) => {
                     const number = (i + 1).toString();
                     return (
-                        <Typography
-                            variant='subtitle1'
+                        <Box
                             key={i}
+                            display='flex'
+                            component='span'
+                            alignItems='center'
+                            justifyContent='center'
                             onClick={handleNumSelect(name, number)}
                             className={`numbers-item ${!isOther && values?.[name] === number ? 'selected' : ''}`}
                         >
-                            {++i}
-                        </Typography>
+                            <Typography component='p' variant='subtitle1'>
+                                {++i}
+                            </Typography>
+                        </Box>
                     );
                 })}
                 <div className='other-wrapper'>
                     {isOther
-                     ? <TextField
-                         name={name}
-                         variant='outlined'
-                         onChange={handleInput}
-                         value={values[name] ?? ''}
-                     />
-                     : <Typography
-                         variant='subtitle1'
-                         onClick={handleOther}
-                     >
-                         {t('filters:other')}
-                     </Typography>}
+                        ? <TextField
+                            name={name}
+                            variant='outlined'
+                            onChange={handleInput}
+                            value={values[name] ?? ''}
+                        />
+                        : <Typography
+                            variant='subtitle1'
+                            onClick={handleOther}
+                        >
+                            {t('filters:other')}
+                        </Typography>}
                 </div>
             </div>
-            <Typography variant="subtitle1">
-                {errors?.[name] && touched[name] && (
+            {errors?.[name] && touched[name] && (
+                <Typography variant="subtitle1">
                     <span className='error-text'>
                         {t(`errors:${errors[name] as string}`)}
                     </span>
-                )}
-            </Typography>
-        </div>
+                </Typography>
+            )}
+        </Box>
     );
 };

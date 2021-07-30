@@ -7,14 +7,17 @@ export const useStyles = makeStyles(() => ({
         },
         '& button': {
             position: 'absolute',
-            top: '6px',
-            right: '6px',
-            padding: '7px',
+            top: '5px',
+            right: '5px',
+            padding: '5px',
             borderRadius: '50%',
             backgroundColor: '#EB5757',
             '& > svg': {
-                width: '17px',
-                height: '17px'
+                width: '10px',
+                height: '10px',
+                '& path': {
+                    fill: '#fff'
+                }
             }
         }
     },
@@ -37,10 +40,16 @@ export const useStyles = makeStyles(() => ({
                 backgroundColor: '#fff',
                 borderRadius: '5px',
                 cursor: 'pointer',
-                '& svg': {
-                    width: '60px',
-                    height: '60px',
-                    color: '#7DBCF6'
+                '& > span': {
+                    width: '40px',
+                    height: '40px',
+                    background: '#7DBCF6',
+                    borderRadius: '100%',
+                    '& svg': {
+                        '& path': {
+                            fill: '#fff'
+                        }
+                    }
                 }
             }
         }

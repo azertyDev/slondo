@@ -56,7 +56,7 @@ export const ParkingLotsBoxes: FC<CommonParamsPropsType> = (props) => {
         handleBlur
     } = formik;
 
-    const {handleSelect} = useHandlers(values, setValues);
+    const {handleSelect, handleNumericInput} = useHandlers(values, setValues);
 
     const classes = useStyles();
     return (
@@ -77,8 +77,8 @@ export const ParkingLotsBoxes: FC<CommonParamsPropsType> = (props) => {
                     {isPreview
                         ? <PreviewValues t={t} values={values}/>
                         : <>
-                            <Grid container spacing={2}>
-                                <Grid item container xs={12} alignItems='center'>
+                            <Grid item container spacing={2}>
+                                <Grid item container xs={12} sm={4} alignItems='center'>
                                     <DeployedSelect
                                         categoryName={categoryName}
                                         values={values}
@@ -94,6 +94,7 @@ export const ParkingLotsBoxes: FC<CommonParamsPropsType> = (props) => {
                                         name='area'
                                         labelText='area'
                                         value={values.area ?? ''}
+                                        onChange={handleNumericInput}
                                         errorMsg={getErrorMsg(errors.area, touched.area, t)}
                                     />
                                 </Grid>
@@ -103,6 +104,7 @@ export const ParkingLotsBoxes: FC<CommonParamsPropsType> = (props) => {
                                         name='parking_spaces'
                                         labelText='parking_spaces'
                                         value={values.parking_spaces ?? ''}
+                                        onChange={handleNumericInput}
                                         errorMsg={getErrorMsg(errors.parking_spaces, touched.parking_spaces, t)}
                                     />
                                 </Grid>
@@ -118,6 +120,8 @@ export const ParkingLotsBoxes: FC<CommonParamsPropsType> = (props) => {
                                         onBlur={handleBlur}
                                         items={filters.posted}
                                         handleSelect={handleSelect}
+                                        transKey={`${categoryName}.`}
+                                        labelTxt={t(`${categoryName}.posted.name`)}
                                         errorMsg={getErrorMsg(errors.posted, touched.posted, t)}
                                     />
                                 </Grid>

@@ -74,13 +74,13 @@ export const CommercialPropertyParams: FC<CommonParamsPropsType> = (props) => {
                     handleEdit={handleFormOpen(3)}
                 >
                     <Grid item xs={12} sm={6}>
-                        <PostTitle isPreview={isPreview} title={values.title} formik={formik} t={t}/>
+                        <PostTitle isPreview={isPreview} title={values.title} formik={formik} t={t} />
                     </Grid>
-                    <Grid container spacing={2}>
+                    <Grid container item spacing={2}>
                         {isPreview
-                            ? <PreviewValues t={t} values={values}/>
+                            ? <PreviewValues t={t} values={values} />
                             : <>
-                                <Grid item container xs={12}>
+                                <Grid item container xs={4}>
                                     <DeployedSelect
                                         categoryName={categoryName}
                                         name='estate_type'
@@ -93,6 +93,8 @@ export const CommercialPropertyParams: FC<CommonParamsPropsType> = (props) => {
                                 <Grid item container xs={12} sm={4}>
                                     <DropDownSelect
                                         name='location'
+                                        transKey={`${categoryName}.`}
+                                        labelTxt={t(`${categoryName}.location.name`)}
                                         items={filters.location}
                                         values={values}
                                         onBlur={handleBlur}
@@ -104,6 +106,8 @@ export const CommercialPropertyParams: FC<CommonParamsPropsType> = (props) => {
                                         <DropDownSelect
                                             name='payment'
                                             items={filters.payment}
+                                            transKey={`${categoryName}.`}
+                                            labelTxt={t(`${categoryName}.payment.name`)}
                                             values={values}
                                             onBlur={handleBlur}
                                             handleSelect={handleSelect}
@@ -123,6 +127,8 @@ export const CommercialPropertyParams: FC<CommonParamsPropsType> = (props) => {
                                     <DropDownSelect
                                         name='repair'
                                         items={filters.repair}
+                                        transKey={`${categoryName}.`}
+                                        labelTxt={t(`${categoryName}.repair.name`)}
                                         values={values}
                                         onBlur={handleBlur}
                                         handleSelect={handleSelect}
@@ -132,6 +138,8 @@ export const CommercialPropertyParams: FC<CommonParamsPropsType> = (props) => {
                                     <DropDownSelect
                                         name='posted'
                                         items={filters.posted}
+                                        transKey={`${categoryName}.`}
+                                        labelTxt={t(`${categoryName}.posted.name`)}
                                         values={values}
                                         onBlur={handleBlur}
                                         handleSelect={handleSelect}
