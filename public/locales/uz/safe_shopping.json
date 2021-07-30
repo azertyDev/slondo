@@ -23,5 +23,32 @@
         "advice_5": "Sotuvchi bilan bog’laning yoki uning qo'ng'irog'ini kuting va mahsulotni qabul qilib olish uchun uchrashuvni belgilang.",
         "advice_6": "Mahsulotni yaxshilab tekshiring va agar hamma narsa tavsifga mos keladigan bo'lsa, “Xaridni tasdiqlang” tugmasini bosing - shundan so'ng pul kartangizdagi pul yechiladi va  sotuvchi hisobiga borib tushadi.",
         "advice_7": "Agar mahsulot tavsifga mos kelmasa, “Xaridni bekor qilish” tugmasini bosing - tranzaksiya bekor qilinadi va pul kartangizga qaytariladi."
+    },
+    "securityRules": {
+        "preface": {
+            "1": "Соблюдая наши рекомендации, вы обезопасите себя от действий мошенников.",
+            "2": "В последнее время, участились случаи обмана пользователей, торговых площадок, мошенники придумывают разнообразные способы, завладеть вашими личными данными, получить доступ к вашей учетной записи или узнать пароль от вашей банковской карты.",
+            "3": "Администрация SLONDO заботиться о безопасности каждого пользователя, внимательно прочитайте статью!"
+        },
+        "advice_1": {
+            "title": "SMS",
+            "description": "Sizga SMS xabari orqali yuborilgan kodni hech kimga bildirmang, bezorilar Sizning Slondodagi shaxsiy kabinetingizga kirish ilinjida, ushbu ma'lumotni qo'lga kiritishga harakat qilishadi. Hattoki texnik xizmat xodimi deb o'zini tanishtirib, Sizga SMS orqali kelgan kodni aytib yuborishingizni so'rashsa ham, ushbu ma'lumotni hech kimga bildirmang."
+        },
+        "advice_2": {
+            "title": "Hech qachon tashqi havolalarga kirmang!",
+            "description": "Firibgarlar Slondoning ichki chati yoki boshqa messenjerlardan foydalanib, Sizga  shaxsiy xabarnomalar orqali yuborgan tashqi havolalarga kirmang. Odatda bu soxta egizak-sayt bo'lib,Siz haqingizda yoki bank kartangiz haqidagi ma'lumotni qo'lga kiritish uchun yaratiladi."
+        },
+        "advice_3": {
+            "title": "Bank kartalari",
+            "description": "Firibgarlar mahsulotingizni sotib olmoqchidek ko'rinish berib, Siz bilan aloqaga chiqishadi, odatda ular kartangiz haqidagi ma'lumotni va CVV/CVC kodni so'rashadi. Bu kartangizning orqa betidagi oxirgi 3ta raqamdir, bu raqamlarni hech kimga aytmang, bu raqamlar firibgarlarga Sizning kartangizdan foydalanib, xaridlarni amalga oshirishga yordam beradi."
+        },
+        "advice_4": {
+            "title": "Shaxsiy xavfsizlik.",
+            "description": "Sizning mahsulotingizga xaridor topilsa, mahsulotni topshirish va pulni olish uchun uchrashuv joyini odam govjum joylarga belgilagan ma'qul. Ayniqsa, Savdo markazlari bunday uchrashuvlar uchun juda qulay, sababi, bunday joylarda qo'riqchilar va kameralar mavjud. Xilvat va qorong'u ko'chalarda uchrashuvni belgilamang, o'zingiz bilan yirik pul,tilla taqinchoqlar va qimmatbaho soat olib chiqmang."
+        },
+        "advice_5": {
+            "title": "Oldindan to'lov va garovni amalga oshirmang.",
+            "description": "Agar Siz bozor narxidan ancha arzon narzda mahsulot sotilayotgani to'g'risidagi e'longa duch kelsangiz, juda e'tiborli bo'ling. Sotuvch Siz bilan bog'lanib, bank kartasiga pul o'tkazishni yoki oldindan to'lov qilishni so'rashi mumkin va buni mahsulotga bo'lgan talabning yo'qoriligi  va oldindan to'lov qilish- xaridni rostdan ham amalga oshirmoqchi ekanligizga ishonch hosil qilishlari uchun zarurat deb tushuntirishadi. Bunga hech qachon rozi bo'lmang."
+        }
     }
 }
