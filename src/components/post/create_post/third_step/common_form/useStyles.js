@@ -17,23 +17,6 @@ export const useStyles = makeStyles((theme) => ({
             },
             margin: '11px 0'
         },
-        '& div.location-wrapper': {
-            display: 'flex',
-            width: '50%',
-            [theme.breakpoints.down('xs')]: {
-                width: '100%'
-            },
-            marginBottom: '20px',
-            '& > div': {
-                display: 'flex'
-            }
-        },
-        '& div.description-wrapper': {
-            marginBottom: '20px',
-            '& p': {
-                wordBreak: 'break-all'
-            }
-        },
         '& div.phone-wrapper': {
             marginTop: '12px',
             '& .MuiFormControl-fullWidth': {

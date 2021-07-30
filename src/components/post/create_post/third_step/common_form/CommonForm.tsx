@@ -1,7 +1,7 @@
 import {Dispatch, FC, SetStateAction, useContext, useState} from 'react';
 import Link from "next/link";
 import {useTranslation} from 'next-i18next';
-import {Grid} from '@material-ui/core';
+import {Box, Grid, Typography} from '@material-ui/core';
 import {AuctionParams} from './auction_params/AuctionParams';
 import {SiteServices} from './site_services/SiteServices';
 import {Contacts} from './contacts/Contacts';
@@ -299,7 +299,7 @@ export const CommonForm: FC<DefaultParamsPropsType> = (props) => {
                 open={currentFormIndex === formIndex}
                 isEditable={currentFormIndex < formIndex}
             >
-                <div className={classes.root}>
+                <Grid item container spacing={2} className={classes.root}>
                     {isPreview
                         ? <CommonFormPreview
                             t={t}
@@ -311,22 +311,20 @@ export const CommonForm: FC<DefaultParamsPropsType> = (props) => {
                             avalTimeActive={avalTimeActive}
                             isAdvanceAuction={isAdvanceAuction}
                         />
-                        : <div>
+                        : <>
                             {isAuction
-                                ? <div>
-                                    <AuctionParams
-                                        values={values}
-                                        errors={errors}
-                                        touched={touched}
-                                        postType={postType}
-                                        handleBlur={handleBlur}
-                                        handleInput={handleInput}
-                                        handleSelect={handleSelect}
-                                        isAdvanceAuction={isAdvanceAuction}
-                                        handleCheckboxChange={handleCheckboxChange}
-                                    />
-                                </div>
-                                : <Grid container spacing={1}>
+                                ? <AuctionParams
+                                    values={values}
+                                    errors={errors}
+                                    touched={touched}
+                                    postType={postType}
+                                    handleBlur={handleBlur}
+                                    handleInput={handleInput}
+                                    handleSelect={handleSelect}
+                                    isAdvanceAuction={isAdvanceAuction}
+                                    handleCheckboxChange={handleCheckboxChange}
+                                />
+                                : <Grid item container spacing={1}>
                                     <Grid item xs={8} sm={5} md={3}>
                                         <FormikField
                                             t={t}
@@ -347,29 +345,29 @@ export const CommonForm: FC<DefaultParamsPropsType> = (props) => {
                                         />
                                     </Grid>
                                 </Grid>}
-                            <div>
-                                <SiteServices
-                                    t={t}
-                                    isCommonForm
-                                    values={values}
-                                    isAuction={isAuction}
-                                    categoryName={categoryName}
-                                    handleCheckbox={handleCheckboxChange}
-                                />
-                            </div>
-                            <div className='location-wrapper'>
-                                <Location
-                                    handleSelectLocation={handleLocation}
-                                    userLocation={location}
-                                />
-                                <span className='error-text'>*</span>
+                            <SiteServices
+                                t={t}
+                                isCommonForm
+                                values={values}
+                                isAuction={isAuction}
+                                categoryName={categoryName}
+                                handleCheckbox={handleCheckboxChange}
+                            />
+                            <Grid item container direction='column' xs={12}>
+                                <Box display='flex' mb={1}>
+                                    <Location
+                                        handleSelectLocation={handleLocation}
+                                        userLocation={location}
+                                    />
+                                    <span className='error-text'>*</span>
+                                </Box>
                                 {errors.location && touched.location && (
-                                    <span className='error-text'>
-                                     &nbsp;{t(`errors:${errors.location}`)}
-                                    </span>
+                                    <Typography variant='subtitle2' component='p' className='error-text'>
+                                        {t(`errors:${errors.location}`)}
+                                    </Typography>
                                 )}
-                            </div>
-                            <div className='description-wrapper'>
+                            </Grid>
+                            <Grid item xs={12}>
                                 <FormikTextarea
                                     rows={15}
                                     name='description'
@@ -380,7 +378,7 @@ export const CommonForm: FC<DefaultParamsPropsType> = (props) => {
                                     labelTxt={t('filters:description')}
                                     errorMsg={getErrorMsg(errors.description, touched.description, t)}
                                 />
-                            </div>
+                            </Grid>
                             <Grid
                                 item
                                 container
@@ -427,8 +425,8 @@ export const CommonForm: FC<DefaultParamsPropsType> = (props) => {
                                     </Grid>
                                 )}
                             </Grid>
-                        </div>}
-                </div>
+                        </>}
+                </Grid>
             </CustomAccordion>
         </CustomFormikProvider>
     );

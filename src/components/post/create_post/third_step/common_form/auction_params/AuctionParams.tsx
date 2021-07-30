@@ -38,7 +38,7 @@ export const AuctionParams: FC<AuctionParamsPropsType> = (props) => {
     const classes = useStyles();
     return (
         <Grid className={classes.root}>
-            <Grid container className='price-wrapper'>
+            <Grid item container className='price-wrapper'>
                 <Grid item container spacing={2} xs={12}>
                     <Grid item container xs={4}>
                         <DropDownSelect
