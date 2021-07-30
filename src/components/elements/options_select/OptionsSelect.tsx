@@ -1,7 +1,7 @@
 import {FC} from 'react';
 import {WithT} from 'i18next';
 import {Checkbox, FormControlLabel, Grid, Typography} from '@material-ui/core';
-import {useStyles} from '../deployed_select/useStyles';
+import {useStyles} from './useStyles';
 
 export type HandleOptionCheckboxType = (name: string, value) => void;
 

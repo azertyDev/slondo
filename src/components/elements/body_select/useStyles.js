@@ -10,13 +10,33 @@ export const useStyles = makeStyles((theme) => ({
         '& div.body-types': {
             display: 'flex',
             justifyContent: 'space-between',
+            flexWrap: 'wrap',
             [theme.breakpoints.down('sm')]: {
                 flexDirection: 'column'
             },
-            '& h6': {
+            '& div.MuiBox-root': {
+                width: 'min-content',
+                '&:not(:last-child)': {
+                    marginRight: 5
+                },
+                borderRadius: '10px',
                 cursor: 'pointer',
+                padding: '5px',
+                '& svg': {
+                    '& path': {
+                        fill: theme.palette.primary.black
+                    }
+                },
                 '&.selected': {
-                    border: `2px solid ${theme.palette.primary.main}`
+                    boxShadow: `0px 0px 8px ${theme.palette.primary.main}`,
+                    '& p.MuiTypography-subtitle1': {
+                        color: theme.palette.primary.main
+                    },
+                    '& svg': {
+                        '& path': {
+                            fill: theme.palette.primary.main
+                        }
+                    }
                 }
             }
         }

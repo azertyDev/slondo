@@ -1,6 +1,6 @@
 import {FC, useEffect, useState} from 'react';
 import Link from 'next/link';
-import {Breadcrumbs} from '@material-ui/core';
+import {Breadcrumbs, Typography} from '@material-ui/core';
 import {useTranslation} from 'react-i18next';
 import {cookies, transformCyrillic} from '@src/helpers';
 import {site_categories} from '@src/common_data/site_categories';
@@ -50,14 +50,26 @@ export const BreadcrumbsComponent: FC<BreadcrumbsPropsType> = ({category, subcat
                 className='bc'
             >
                 <Link href={categoryLink}>
-                    <a>{t(`categories:${category}.name`)}</a>
+                    <a>
+                        <Typography variant='subtitle1'>
+                            {t(`categories:${category}.name`)}
+                        </Typography>
+                    </a>
                 </Link>
                 <Link href={subCategoryLink}>
-                    <a>{t(`categories:${category}.${subcategory}.name`)}</a>
+                    <a>
+                        <Typography variant='subtitle1'>
+                            {t(`categories:${category}.${subcategory}.name`)}
+                        </Typography>
+                    </a>
                 </Link>
                 {typeCtgr !== undefined && type && (
                     <Link href={subCategoryTypeLink}>
-                        <a>{t(`categories:${category}.${subcategory}.${type}.name`)}</a>
+                        <a>
+                            <Typography variant='subtitle1' component='h1'>
+                                {t(`categories:${category}.${subcategory}.${type}.name`)}
+                            </Typography>
+                        </a>
                     </Link>
                 )}
             </Breadcrumbs>

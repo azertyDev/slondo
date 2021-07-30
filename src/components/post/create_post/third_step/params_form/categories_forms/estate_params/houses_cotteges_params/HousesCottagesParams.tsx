@@ -87,9 +87,9 @@ export const HousesCottagesParams: FC<CommonParamsPropsType> = (props) => {
                         <PostTitle isPreview={isPreview} title={values.title} formik={formik} t={t}/>
                     </Grid>
                     {isPreview
-                        ? <PreviewValues t={t} values={values}/>
-                        : <Grid className='grid-container' container spacing={2}>
-                            <Grid item xs={12} md={6} lg={5}>
+                        ? <PreviewValues t={t} values={values} />
+                        : <Grid item container spacing={2}>
+                            <Grid item xs={12} md={4}>
                                 <DeployedSelect
                                     categoryName={categoryName}
                                     values={values}
@@ -99,7 +99,7 @@ export const HousesCottagesParams: FC<CommonParamsPropsType> = (props) => {
                                     errorMsg={getErrorMsg(errors.estate_type, touched.estate_type, t)}
                                 />
                             </Grid>
-                            <Grid item xs={12} md={4} lg={5}>
+                            <Grid item xs={12} md={4}>
                                 <DeployedSelect
                                     categoryName={categoryName}
                                     values={values}
@@ -112,17 +112,19 @@ export const HousesCottagesParams: FC<CommonParamsPropsType> = (props) => {
                             {isRent && (
                                 <>
                                     {!!filters?.payment?.length && (
-                                        <Grid item xs={12} sm={4} lg={3}>
+                                        <Grid item xs={12} sm={4} md={4}>
                                             <DropDownSelect
                                                 name='payment'
                                                 items={filters.payment}
                                                 values={values}
                                                 onBlur={handleBlur}
+                                                transKey={`${categoryName}.`}
+                                                labelTxt={t(`${categoryName}.payment.name`)}
                                                 handleSelect={handleSelect}
                                             />
                                         </Grid>
                                     )}
-                                    <Grid item container xs={12} md={4} lg={3} alignItems='flex-end'>
+                                    <Grid item container xs={12} md={4} alignItems='flex-end'>
                                         <CheckboxSelect
                                             name='utilities'
                                             labelTxt={t('filters:utilities')}
@@ -130,7 +132,7 @@ export const HousesCottagesParams: FC<CommonParamsPropsType> = (props) => {
                                             handleCheckbox={handleCheckbox}
                                         />
                                     </Grid>
-                                    <Grid item container xs={12} sm={4} md={3} alignItems='flex-end'>
+                                    <Grid item container xs={12} sm={4} md={4} alignItems='flex-end'>
                                         <CheckboxSelect
                                             name='with_pledge'
                                             labelTxt={t('filters:with_pledge')}
@@ -148,7 +150,7 @@ export const HousesCottagesParams: FC<CommonParamsPropsType> = (props) => {
                                     handleCheckbox={handleCheckbox}
                                 />
                             </Grid>
-                            <Grid item container>
+                            <Grid item container spacing={2}>
                                 <Grid item container xs={12} sm={6} md={4} lg={4}>
                                     <NumberSelect
                                         t={t}
@@ -160,7 +162,7 @@ export const HousesCottagesParams: FC<CommonParamsPropsType> = (props) => {
                                         setValues={setValues}
                                     />
                                 </Grid>
-                                <Grid item container xs={12} sm={6} md={5} lg={5}>
+                                <Grid item container xs={12} sm={6} md={5} lg={4}>
                                     <NumberSelect
                                         t={t}
                                         count={5}
@@ -171,14 +173,15 @@ export const HousesCottagesParams: FC<CommonParamsPropsType> = (props) => {
                                         touched={touched}
                                     />
                                 </Grid>
-                                <Grid item container xs={12} sm={4} md={3} lg={3}>
+                                <Grid item container xs={12} sm={4} md={3} lg={4}>
                                     <DropDownSelect
                                         name='room'
                                         values={values}
                                         onBlur={handleBlur}
                                         items={filters.room}
                                         handleSelect={handleSelect}
-                                        labelTxt={t('filters:rooms')}
+                                        transKey={`${categoryName}.`}
+                                        labelTxt={t(`${categoryName}.room.name`)}
                                         errorMsg={getErrorMsg(errors.room, touched.room, t)}
                                     />
                                 </Grid>
@@ -232,6 +235,8 @@ export const HousesCottagesParams: FC<CommonParamsPropsType> = (props) => {
                                     onBlur={handleBlur}
                                     items={filters.posted}
                                     handleSelect={handleSelect}
+                                    transKey={`${categoryName}.`}
+                                    labelTxt={t(`${categoryName}.posted.name`)}
                                     errorMsg={getErrorMsg(errors.posted, touched.posted, t)}
                                 />
                             </Grid>
@@ -247,6 +252,8 @@ export const HousesCottagesParams: FC<CommonParamsPropsType> = (props) => {
                                     onBlur={handleBlur}
                                     items={filters.material}
                                     handleSelect={handleSelect}
+                                    transKey={`${categoryName}.`}
+                                    labelTxt={t(`${categoryName}.material.name`)}
                                     errorMsg={getErrorMsg(errors.material, touched.material, t)}
                                 />
                             </Grid>
@@ -262,6 +269,8 @@ export const HousesCottagesParams: FC<CommonParamsPropsType> = (props) => {
                                     onBlur={handleBlur}
                                     items={filters.heating}
                                     handleSelect={handleSelect}
+                                    transKey={`${categoryName}.`}
+                                    labelTxt={t(`${categoryName}.heating.name`)}
                                     errorMsg={getErrorMsg(errors.heating, touched.heating, t)}
                                 />
                             </Grid>
@@ -277,6 +286,8 @@ export const HousesCottagesParams: FC<CommonParamsPropsType> = (props) => {
                                     onBlur={handleBlur}
                                     items={filters.gas}
                                     handleSelect={handleSelect}
+                                    transKey={`${categoryName}.`}
+                                    labelTxt={t(`${categoryName}.gas.name`)}
                                     errorMsg={getErrorMsg(errors.gas, touched.gas, t)}
                                 />
                             </Grid>
@@ -292,6 +303,8 @@ export const HousesCottagesParams: FC<CommonParamsPropsType> = (props) => {
                                     onBlur={handleBlur}
                                     items={filters.electricity}
                                     handleSelect={handleSelect}
+                                    transKey={`${categoryName}.`}
+                                    labelTxt={t(`${categoryName}.electricity.name`)}
                                     errorMsg={getErrorMsg(errors.electricity, touched.electricity, t)}
                                 />
                             </Grid>
@@ -307,6 +320,8 @@ export const HousesCottagesParams: FC<CommonParamsPropsType> = (props) => {
                                     onBlur={handleBlur}
                                     items={filters.repair}
                                     handleSelect={handleSelect}
+                                    transKey={`${categoryName}.`}
+                                    labelTxt={t(`${categoryName}.repair.name`)}
                                     errorMsg={getErrorMsg(errors.repair, touched.repair, t)}
                                 />
                             </Grid>
@@ -322,6 +337,8 @@ export const HousesCottagesParams: FC<CommonParamsPropsType> = (props) => {
                                     onBlur={handleBlur}
                                     items={filters.sewerage}
                                     handleSelect={handleSelect}
+                                    transKey={`${categoryName}.`}
+                                    labelTxt={t(`${categoryName}.sewerage.name`)}
                                     errorMsg={getErrorMsg(errors.sewerage, touched.sewerage, t)}
                                 />
                             </Grid>
@@ -337,6 +354,8 @@ export const HousesCottagesParams: FC<CommonParamsPropsType> = (props) => {
                                     onBlur={handleBlur}
                                     items={filters.bathroom}
                                     handleSelect={handleSelect}
+                                    transKey={`${categoryName}.`}
+                                    labelTxt={t(`${categoryName}.bathroom.name`)}
                                     errorMsg={getErrorMsg(errors.bathroom, touched.bathroom, t)}
                                 />
                             </Grid>
@@ -351,7 +370,8 @@ export const HousesCottagesParams: FC<CommonParamsPropsType> = (props) => {
                                     values={values}
                                     onBlur={handleBlur}
                                     items={filters.water}
-                                    handleSelect={handleSelect}
+                                    handleSelect={handleSelect} transKey={`${categoryName}.`}
+                                    labelTxt={t(`${categoryName}.water.name`)}
                                     errorMsg={getErrorMsg(errors.water, touched.water, t)}
                                 />
                             </Grid>
@@ -367,6 +387,8 @@ export const HousesCottagesParams: FC<CommonParamsPropsType> = (props) => {
                                     onBlur={handleBlur}
                                     items={filters.garage}
                                     handleSelect={handleSelect}
+                                    transKey={`${categoryName}.`}
+                                    labelTxt={t(`${categoryName}.garage.name`)}
                                     errorMsg={getErrorMsg(errors.garage, touched.garage, t)}
                                 />
                             </Grid>
@@ -382,11 +404,13 @@ export const HousesCottagesParams: FC<CommonParamsPropsType> = (props) => {
                                     onBlur={handleBlur}
                                     items={filters.metro}
                                     handleSelect={handleSelect}
+                                    transKey={`${categoryName}.`}
+                                    labelTxt={t(`${categoryName}.metro.name`)}
                                     errorMsg={getErrorMsg(errors.metro, touched.metro, t)}
                                 />
                             </Grid>
                         </Grid>}
-                    <div className='options-select-wrapper'>
+                    <Grid item container spacing={2}>
                         <OptionsSelect
                             isApratment
                             column={isXsDown}
@@ -405,7 +429,7 @@ export const HousesCottagesParams: FC<CommonParamsPropsType> = (props) => {
                             options={filters.infrastructure}
                             handleOptionCheckbox={handleOptionCheckbox}
                         />
-                    </div>
+                    </Grid>
                 </CustomAccordion>
             </CustomFormikProvider>
         </div>

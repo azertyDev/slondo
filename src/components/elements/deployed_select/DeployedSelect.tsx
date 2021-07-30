@@ -59,8 +59,8 @@ export const DeployedSelect: FC<SelectOptionsPropsType> = (props) => {
             {errorMsg !== '' && (
                 <Typography variant="subtitle1">
                         <span className='error-text'>
-                        {errorMsg}
-                    </span>
+                            {errorMsg}
+                        </span>
                 </Typography>
             )}
         </FormControl>

@@ -9,26 +9,23 @@ export const useStyles = makeStyles((theme) => ({
                 alignItems: 'center',
                 justifyContent: 'space-between'
             },
-            '& > h6': {
-                justifyContent: 'center',
-                '&.numbers-item': {
-                    width: '28px',
-                    height: '28px',
-                    borderRadius: '50%',
-                    backgroundColor: '#fff',
-                    cursor: 'pointer',
-                    '&:first-child': {
-                        marginLeft: 0
-                    }
-                },
+            '& span.numbers-item': {
+                width: '28px',
+                height: '28px',
+                cursor: 'pointer',
+                borderRadius: '50%',
+                backgroundColor: '#fff',
+                boxShadow: '0px 0px 8px rgba(0, 0, 0, 0.2)',
                 '&.selected': {
-                    color: theme.palette.primary.main,
-                    border: `1px solid ${theme.palette.primary.main}`
+                    border: `1px solid ${theme.palette.primary.main}`,
+                    '& p': {
+                        color: theme.palette.primary.main
+                    }
                 }
             },
+
             '& div.other-wrapper': {
                 justifyContent: 'center',
-                marginLeft: '10px',
                 '&, div.MuiInputBase-root': {
                     height: '28px',
                     '& input': {

@@ -1,9 +1,9 @@
 import {FC} from 'react';
-import {AddCircle} from '@material-ui/icons';
-import {Box, Grid, useMediaQuery, useTheme} from "@material-ui/core";
+import AddIcon from '@material-ui/icons/Add';
+import {Box, Grid, useMediaQuery, useTheme} from '@material-ui/core';
 import {DragDropContext, resetServerContext, Draggable, Droppable} from 'react-beautiful-dnd';
-import {CustomButton} from "@src/components/elements/custom_button/CustomButton";
-import {CloseIcon} from "@src/components/elements/icons";
+import {CustomButton} from '@src/components/elements/custom_button/CustomButton';
+import {CloseIcon} from '@src/components/elements/icons';
 import {useStyles} from './useStyles';
 
 type PreviewPhotosPropsType = {
@@ -49,6 +49,8 @@ export const PreviewPhotos: FC<PreviewPhotosPropsType> = (props) => {
                                     item
                                     xs={6}
                                     sm={3}
+                                    md={3}
+                                    lg={2}
                                     ref={provided.innerRef}
                                     {...provided.draggableProps}
                                     {...provided.dragHandleProps}
@@ -65,8 +67,17 @@ export const PreviewPhotos: FC<PreviewPhotosPropsType> = (props) => {
                                             </CustomButton>
                                         </Box>
                                         : <>
-                                            <label htmlFor={`upload-${index}`}>
-                                                <AddCircle/>
+                                            <label
+                                                htmlFor={`upload-${index}`}
+                                            >
+                                                <Box
+                                                    display='flex'
+                                                    component='span'
+                                                    alignItems='center'
+                                                    justifyContent='center'
+                                                >
+                                                    <AddIcon />
+                                                </Box>
                                             </label>
                                             <input
                                                 type='file'

@@ -80,9 +80,9 @@ export const JobParams: FC<CommonParamsPropsType> = (props) => {
                         isPreview={isPreview}
                     />
                 </Grid>
-                <Grid container spacing={1}>
+                <Grid item container spacing={1}>
                     {isPreview
-                        ? <PreviewValues t={t} values={values}/>
+                        ? <PreviewValues t={t} values={values} />
                         : <>
                             {hasPosition && (
                                 <Grid
@@ -113,6 +113,7 @@ export const JobParams: FC<CommonParamsPropsType> = (props) => {
                                     items={filters.employment}
                                     handleSelect={handleSelect}
                                     transKey={`${categoryName}.`}
+                                    labelTxt={t(`${categoryName}.employment.name`)}
                                 />
                             </Grid>
                             <Grid
@@ -123,7 +124,7 @@ export const JobParams: FC<CommonParamsPropsType> = (props) => {
                             >
                                 <DropDownSelect
                                     name='experience'
-                                    labelTxt={isVacancy ? 'require_experience' : 'experience'}
+                                    labelTxt={`${categoryName}.${isVacancy ? 'require_experience' : 'experience'}.name`}
                                     values={values}
                                     items={filters.experience}
                                     transKey={`${categoryName}.`}
@@ -141,6 +142,7 @@ export const JobParams: FC<CommonParamsPropsType> = (props) => {
                                     values={values}
                                     items={filters.nature}
                                     transKey={`${categoryName}.`}
+                                    labelTxt={t(`${categoryName}.nature.name`)}
                                     handleSelect={handleSelect}
                                 />
                             </Grid>

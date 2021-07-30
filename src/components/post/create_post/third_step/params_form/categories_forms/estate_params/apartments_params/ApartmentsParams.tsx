@@ -92,7 +92,7 @@ export const ApartmentsParams: FC<CommonParamsPropsType> = (props) => {
                     {isPreview
                         ? <PreviewValues t={t} values={values} />
                         : <Grid item container spacing={2}>
-                            <Grid container item spacing={2} xs={12} alignItems='center'>
+                            <Grid container item spacing={2} xs={12}>
                                 <Grid item xs={12} sm={5} md={4}>
                                     <DeployedSelect
                                         name='estate_type'
@@ -231,6 +231,7 @@ export const ApartmentsParams: FC<CommonParamsPropsType> = (props) => {
                                     items={filters.posted}
                                     handleSelect={handleSelect}
                                     transKey={`${categoryName}.`}
+                                    labelTxt={t(`${categoryName}.posted.name`)}
                                     errorMsg={getErrorMsg(errors.posted, touched.posted, t)}
                                 />
                             </Grid>
@@ -246,6 +247,7 @@ export const ApartmentsParams: FC<CommonParamsPropsType> = (props) => {
                                     items={filters.material}
                                     handleSelect={handleSelect}
                                     transKey={`${categoryName}.`}
+                                    labelTxt={t(`${categoryName}.material.name`)}
                                     errorMsg={getErrorMsg(errors.material, touched.material, t)}
                                 />
                             </Grid>
@@ -261,6 +263,7 @@ export const ApartmentsParams: FC<CommonParamsPropsType> = (props) => {
                                     items={filters.layout}
                                     handleSelect={handleSelect}
                                     transKey={`${categoryName}.`}
+                                    labelTxt={t(`${categoryName}.layout.name`)}
                                     errorMsg={getErrorMsg(errors.layout, touched.layout, t)}
                                 />
                             </Grid>
@@ -276,6 +279,7 @@ export const ApartmentsParams: FC<CommonParamsPropsType> = (props) => {
                                     items={filters.repair}
                                     handleSelect={handleSelect}
                                     transKey={`${categoryName}.`}
+                                    labelTxt={t(`${categoryName}.repair.name`)}
                                     errorMsg={getErrorMsg(errors.repair, touched.repair, t)}
                                 />
                             </Grid>
@@ -291,6 +295,7 @@ export const ApartmentsParams: FC<CommonParamsPropsType> = (props) => {
                                     items={filters.lift}
                                     handleSelect={handleSelect}
                                     transKey={`${categoryName}.`}
+                                    labelTxt={t(`${categoryName}.lift.name`)}
                                     errorMsg={getErrorMsg(errors.lift, touched.lift, t)}
                                 />
                             </Grid>
@@ -306,6 +311,7 @@ export const ApartmentsParams: FC<CommonParamsPropsType> = (props) => {
                                     items={filters.bathroom}
                                     handleSelect={handleSelect}
                                     transKey={`${categoryName}.`}
+                                    labelTxt={t(`${categoryName}.bathroom.name`)}
                                     errorMsg={getErrorMsg(errors.bathroom, touched.bathroom, t)}
                                 />
                             </Grid>
@@ -321,6 +327,7 @@ export const ApartmentsParams: FC<CommonParamsPropsType> = (props) => {
                                     items={filters.balcony}
                                     handleSelect={handleSelect}
                                     transKey={`${categoryName}.`}
+                                    labelTxt={t(`${categoryName}.balcony.name`)}
                                     errorMsg={getErrorMsg(errors.balcony, touched.balcony, t)}
                                 />
                             </Grid>
@@ -336,6 +343,7 @@ export const ApartmentsParams: FC<CommonParamsPropsType> = (props) => {
                                     items={filters.metro}
                                     handleSelect={handleSelect}
                                     transKey={`${categoryName}.`}
+                                    labelTxt={t(`${categoryName}.metro.name`)}
                                     errorMsg={getErrorMsg(errors.metro, touched.metro, t)}
                                 />
                             </Grid>

@@ -2,11 +2,7 @@ import {makeStyles} from '@material-ui/core/styles';
 
 export const useStyles = makeStyles((theme) => ({
     root: {
-        width: '80%',
-        marginBottom: '10px',
-        [theme.breakpoints.down('md')]: {
-            width: '100%'
-        },
+        width: '100%',
         '& div.options': {
             display: 'flex',
             background: '#FFFFFF',
@@ -30,7 +26,6 @@ export const useStyles = makeStyles((theme) => ({
                 borderRadius: '0px',
                 width: '100%',
                 height: '100%',
-
                 '&.selected': {
                     '& h6.MuiTypography-subtitle1': {
                         color: theme.palette.primary.white

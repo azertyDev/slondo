@@ -50,18 +50,26 @@ export const CustomAccordion: FC<AccordionComponentPropsType> = (props) => {
                         className={classes.accordionTitle}
                     >
                         {icon}
-                        <Typography variant='h6'>
+                        <Typography
+                            component='p'
+                            variant={isXsDown ? 'subtitle1' : 'h6'}
+                        >
                             {title}
                         </Typography>
                     </Box>
                     {!open && !isPreview && isEditable && (
-                        <div className='header-preview'>
-                            <span onClick={handleEdit}>{t('edit')}</span>
-                        </div>
+                        <Typography
+                            component='p'
+                            variant={isXsDown ? 'subtitle1' : 'h6'}
+                            className='header-preview'
+                            onClick={handleEdit}
+                        >
+                            {t('edit')}
+                        </Typography>
                     )}
                 </AccordionSummary>
                 <AccordionDetails>
-                    <Grid container spacing={isXsDown ? 0 : 2}>
+                    <Grid container item spacing={isXsDown ? 1 : 2}>
                         {props.children}
                         {!isPreview && (
                             <Grid item xs={12} container>

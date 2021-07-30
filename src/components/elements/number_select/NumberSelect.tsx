@@ -63,39 +63,44 @@ export const NumberSelect: FC<FloorsPropsType> = (props) => {
                 {Array.from({length: count}).map((_, i) => {
                     const number = (i + 1).toString();
                     return (
-                        <Typography
-                            variant='subtitle1'
+                        <Box
                             key={i}
+                            display='flex'
+                            component='span'
+                            alignItems='center'
+                            justifyContent='center'
                             onClick={handleNumSelect(name, number)}
                             className={`numbers-item ${!isOther && values?.[name] === number ? 'selected' : ''}`}
                         >
-                            {++i}
-                        </Typography>
+                            <Typography component='p' variant='subtitle1'>
+                                {++i}
+                            </Typography>
+                        </Box>
                     );
                 })}
                 <div className='other-wrapper'>
                     {isOther
-                     ? <TextField
-                         name={name}
-                         variant='outlined'
-                         onChange={handleInput}
-                         value={values[name] ?? ''}
-                     />
-                     : <Typography
-                         variant='subtitle1'
-                         onClick={handleOther}
-                     >
-                         {t('filters:other')}
+                        ? <TextField
+                            name={name}
+                            variant='outlined'
+                            onChange={handleInput}
+                            value={values[name] ?? ''}
+                        />
+                        : <Typography
+                            variant='subtitle1'
+                            onClick={handleOther}
+                        >
+                            {t('filters:other')}
                         </Typography>}
                 </div>
             </div>
-            <Typography variant="subtitle1">
-                {errors?.[name] && touched[name] && (
+            {errors?.[name] && touched[name] && (
+                <Typography variant="subtitle1">
                     <span className='error-text'>
                         {t(`errors:${errors[name] as string}`)}
                     </span>
-                )}
-            </Typography>
+                </Typography>
+            )}
         </Box>
     );
 };

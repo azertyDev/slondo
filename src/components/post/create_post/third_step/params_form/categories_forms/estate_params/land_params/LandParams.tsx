@@ -33,7 +33,8 @@ export const LandParams: FC<CommonParamsPropsType> = (props) => {
 
     let initVals: any = {
         title,
-        estate_type: null
+        estate_type: null,
+        area: ''
     };
 
     if (model) {
@@ -57,7 +58,7 @@ export const LandParams: FC<CommonParamsPropsType> = (props) => {
         handleBlur
     } = formik;
 
-    const {handleSelect} = useHandlers(values, setValues);
+    const {handleSelect, handleNumericInput} = useHandlers(values, setValues);
 
     const classes = useStyles();
     return (
@@ -75,12 +76,12 @@ export const LandParams: FC<CommonParamsPropsType> = (props) => {
                     <Grid item xs={12} sm={6}>
                         <PostTitle isPreview={isPreview} title={values.title} formik={formik} t={t}/>
                     </Grid>
-                    <Grid container spacing={2}>
+                    <Grid container item spacing={2}>
                         {isPreview
                             ? <PreviewValues t={t} values={values}/>
                             : <>
-                                <Grid item container xs={12} alignItems='center'>
-                                    <Grid item xs={12} md={7} lg={5}>
+                                <Grid item container xs={12} spacing={2}>
+                                    <Grid item xs={12} md={7} lg={4}>
                                         <DeployedSelect
                                             categoryName={categoryName}
                                             values={values}
@@ -90,7 +91,7 @@ export const LandParams: FC<CommonParamsPropsType> = (props) => {
                                             errorMsg={getErrorMsg(errors.estate_type, touched.estate_type, t)}
                                         />
                                     </Grid>
-                                    <Grid item xs={12} md={3} lg={3}>
+                                    <Grid item xs={12} md={3} lg={4}>
                                         <DeployedSelect
                                             categoryName={categoryName}
                                             values={values}
@@ -108,6 +109,8 @@ export const LandParams: FC<CommonParamsPropsType> = (props) => {
                                             items={filters.payments}
                                             values={values}
                                             onBlur={handleBlur}
+                                            transKey={`${categoryName}.`}
+                                            labelTxt={t(`${categoryName}.payments.name`)}
                                             handleSelect={handleSelect}
                                         />
                                     </Grid>
@@ -118,15 +121,18 @@ export const LandParams: FC<CommonParamsPropsType> = (props) => {
                                         name='area'
                                         labelText='area_in_hundred'
                                         value={values.area ?? ''}
+                                        onChange={handleNumericInput}
                                         errorMsg={getErrorMsg(errors.area, touched.area, t)}
                                     />
                                 </Grid>
                                 <Grid item container xs={12} sm={4}>
                                     <DropDownSelect
-                                        name='electricity'
-                                        items={filters.electricity}
+                                        name='posted'
+                                        items={filters.posted}
                                         values={values}
                                         onBlur={handleBlur}
+                                        transKey={`${categoryName}.`}
+                                        labelTxt={t(`${categoryName}.posted.name`)}
                                         handleSelect={handleSelect}
                                     />
                                 </Grid>
@@ -136,6 +142,8 @@ export const LandParams: FC<CommonParamsPropsType> = (props) => {
                                         items={filters.sewerage}
                                         values={values}
                                         onBlur={handleBlur}
+                                        transKey={`${categoryName}.`}
+                                        labelTxt={t(`${categoryName}.sewerage.name`)}
                                         handleSelect={handleSelect}
                                     />
                                 </Grid>
@@ -145,6 +153,8 @@ export const LandParams: FC<CommonParamsPropsType> = (props) => {
                                         items={filters.gas}
                                         values={values}
                                         onBlur={handleBlur}
+                                        transKey={`${categoryName}.`}
+                                        labelTxt={t(`${categoryName}.gas.name`)}
                                         handleSelect={handleSelect}
                                     />
                                 </Grid>
@@ -154,15 +164,19 @@ export const LandParams: FC<CommonParamsPropsType> = (props) => {
                                         items={filters.water}
                                         values={values}
                                         onBlur={handleBlur}
+                                        transKey={`${categoryName}.`}
+                                        labelTxt={t(`${categoryName}.water.name`)}
                                         handleSelect={handleSelect}
                                     />
                                 </Grid>
                                 <Grid item container xs={12} sm={4}>
                                     <DropDownSelect
-                                        name='posted'
-                                        items={filters.posted}
+                                        name='electricity'
+                                        items={filters.electricity}
                                         values={values}
                                         onBlur={handleBlur}
+                                        transKey={`${categoryName}.`}
+                                        labelTxt={t(`${categoryName}.electricity.name`)}
                                         handleSelect={handleSelect}
                                     />
                                 </Grid>
