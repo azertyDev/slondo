@@ -4,28 +4,31 @@ import {Box, TextField, Typography} from '@material-ui/core';
 import {numberRegEx} from '@src/common_data/reg_exs';
 import {isRequired} from "@src/helpers";
 import {useStyles} from './useStyles';
+import {useTranslation} from "next-i18next";
 
 
 type FloorsPropsType = {
     name: string,
     count: number,
+    transKey: string,
     errors,
     touched,
     values,
     setValues,
-} & WithT;
+};
 
 export const NumberSelect: FC<FloorsPropsType> = (props) => {
     const {
-        t,
         name,
         count,
         errors,
         touched,
         values,
-        setValues
+        setValues,
+        transKey
     } = props;
 
+    const {t} = useTranslation('filters');
     const [isOther, setIsOther] = useState(false);
 
     const handleOther = () => {
@@ -55,7 +58,7 @@ export const NumberSelect: FC<FloorsPropsType> = (props) => {
         >
             <Typography variant="subtitle1" gutterBottom>
                 <strong>
-                    {t(`filters:${name}`)}
+                    {t(`${transKey}${name}.name`)}
                     {isRequired(name) && <span className='error-text'>*&nbsp;</span>}
                 </strong>
             </Typography>
@@ -90,7 +93,7 @@ export const NumberSelect: FC<FloorsPropsType> = (props) => {
                             variant='subtitle1'
                             onClick={handleOther}
                         >
-                            {t('filters:other')}
+                            {t(`${transKey}other.name`)}
                         </Typography>}
                 </div>
             </div>

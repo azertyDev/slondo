@@ -11,8 +11,8 @@ import {ParametersIcon} from '@src/components/elements/icons';
 import {PostTitle} from '@src/components/post/create_post/third_step/params_form/post_title/PostTitle';
 import {FormikField} from '@src/components/elements/formik_field/FormikField';
 import {PreviewValues} from '@src/components/post/create_post/third_step/params_form/PreviewValues';
-import {useStyles} from './useStyles';
 import {useUrlParams} from "@src/hooks";
+import {useStyles} from './useStyles';
 
 export const excludeCtgrsForYear = [
     'other',
@@ -96,7 +96,11 @@ export const TransportParams: FC<CommonParamsPropsType> = (props) => {
                         />
                     </Grid>
                     {isPreview
-                        ? <PreviewValues t={t} values={values}/>
+                        ? <PreviewValues
+                            values={values}
+                            filters={filters}
+                            transKey={t(`${categoryName}.`)}
+                        />
                         : <>
                             <Grid item container spacing={2}>
                                 {getFieldsByFilters({
@@ -122,9 +126,9 @@ export const TransportParams: FC<CommonParamsPropsType> = (props) => {
                                             : <FormikField
                                                 t={t}
                                                 name='engine_capacity'
-                                                labelText='engine_capacity'
                                                 value={values.engine_capacity}
                                                 onChange={handleNumericInput}
+                                                labelText={t('estate.engine_capacity.name')}
                                                 errorMsg={getErrorMsg(errors.engine_capacity, touched.engine_capacity, t)}
                                             />}
                                     </Grid>
@@ -146,9 +150,9 @@ export const TransportParams: FC<CommonParamsPropsType> = (props) => {
                                             : <FormikField
                                                 t={t}
                                                 name='year'
-                                                labelText='year'
                                                 value={values.year}
                                                 onChange={handleNumericInput}
+                                                labelText={t('estate.year.name')}
                                                 errorMsg={getErrorMsg(errors.year, touched.year, t)}
                                             />}
                                     </Grid>
@@ -170,9 +174,9 @@ export const TransportParams: FC<CommonParamsPropsType> = (props) => {
                                             : <FormikField
                                                 t={t}
                                                 name='mileage'
-                                                labelText='mileage'
                                                 value={values.mileage}
                                                 onChange={handleNumericInput}
+                                                labelText={t('estate.mileage.name')}
                                                 errorMsg={getErrorMsg(errors.mileage, touched.mileage, t)}
                                             />}
                                     </Grid>

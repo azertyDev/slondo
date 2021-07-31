@@ -77,7 +77,11 @@ export const RegularParams: FC<CommonParamsPropsType> = (props) => {
                             />
                         </Grid>
                         {isPreview
-                            ? <PreviewValues t={t} values={values} />
+                            ? <PreviewValues
+                                values={values}
+                                filters={filters}
+                                transKey={t(`${categoryName}.`)}
+                            />
                             : <>
                                 <Grid item container spacing={2}>
                                     {getFieldsByFilters({

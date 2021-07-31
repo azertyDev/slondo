@@ -3,7 +3,7 @@ import Cookies from 'universal-cookie';
 import {TFunction} from 'next-i18next';
 import CyrillicToTranslit from 'cyrillic-to-translit-js';
 import {CategoryType, SubcategoryType, TypeCategory} from '@root/interfaces/Categories';
-import {fracFieldRegEx, punctuationMarksRegEx, searchTxtRegEx} from '@src/common_data/reg_exs';
+import {punctuationMarksRegEx, searchTxtRegEx} from '@src/common_data/reg_exs';
 import {HasAuction, site_categories} from '@src/common_data/site_categories';
 import {excludeFields, fractionalFields, optionFields, requireFields, singleFields} from '@src/common_data/fields_keys';
 import {IdNameType} from '@root/interfaces/Post';
@@ -12,7 +12,7 @@ import {DropDownSelect} from '@src/components/elements/drop_down_select/DropDown
 import {WithT} from 'i18next';
 
 export const cookies = new Cookies();
-export const cookieOpts: { path: string, sameSite: boolean | 'none' | 'lax' | 'strict' } = {path: '/', sameSite: 'lax'};
+export const cookieOpts: { path: string, sameSite: boolean | 'none' | 'lax' | 'strict' } = {path: '/', sameSite: 'strict'};
 
 export const getStringValues = (obj): string[] => {
     const values: string[] = [];
@@ -183,28 +183,6 @@ export const setRequireParamsVals = (values, setValues, filters, subcategoryName
     });
 
     setValues(reqVals);
-};
-
-export const prepareParamsData = (data) => {
-    return Object.keys(data).reduce<any>((acc, key) => {
-        const isArray = Array.isArray(data[key]);
-        const isStrOrBoolTrue = typeof data[key] === 'string' || (typeof data[key] === 'boolean' && data[key]);
-        const isZeroField = fractionalFields.some(val => val === key) && fracFieldRegEx.test(data[key]);
-
-        if (data[key]) {
-            if (isArray) {
-                if (data[key].length) {
-                    acc[key] = data[key].map(({id}) => ({id}));
-                }
-            } else if (isStrOrBoolTrue && !isZeroField) {
-                acc[key] = data[key];
-            } else if (typeof data[key] === 'object') {
-                acc[`${key}_id`] = data[key].id;
-            }
-        }
-
-        return acc;
-    }, {});
 };
 
 export const isRequired = (field: string): boolean => requireFields.some(reqField => reqField === field);

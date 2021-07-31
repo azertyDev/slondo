@@ -81,8 +81,8 @@ export const LocationModal: FC<LocationModalPropsType> = (props) => {
                                     <Typography>
                                         {hasRegion && <ArrowBack onClick={toPrevLocation}/>}
                                         <span onClick={toPrevLocation}>
-                                    {prevLocation}
-                                </span>
+                                            {prevLocation}
+                                        </span>
                                     </Typography>
                                 </Grid>
                                 <Grid container className='locals-table'>

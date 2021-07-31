@@ -529,7 +529,7 @@
         "name": "Другие услуги"
       }
     },
-    "master_hour": {
+    "master_for_an_hour": {
       "name": "Мастер на час",
       "opening_locks": {
         "name": "Вскрытие замков"

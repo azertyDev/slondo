@@ -1,4 +1,5 @@
 import {FC, useContext, useEffect, useState} from 'react';
+import {unstable_batchedUpdates} from "react-dom";
 import {useFormik} from 'formik';
 import {userAPI} from '@src/api/api';
 import {Grid, Typography} from '@material-ui/core';
@@ -89,6 +90,7 @@ export const CarParams: FC<CarParamsPropsType> = (props) => {
     const handleSelect = async (name, value) => {
         try {
             let newVals = {...values, [name]: value};
+
             if (isMadeInUzb) {
                 if (name === 'manufacturer') {
                     newVals = {
@@ -98,6 +100,7 @@ export const CarParams: FC<CarParamsPropsType> = (props) => {
                     };
                     setValuesByYear({});
                 }
+
                 if (name === 'model') {
                     newVals = {
                         ...initVals,
@@ -107,6 +110,7 @@ export const CarParams: FC<CarParamsPropsType> = (props) => {
                     };
                     setValuesByYear({});
                 }
+
                 if (name === 'year') {
                     if (value) {
                         const params = {
@@ -151,13 +155,14 @@ export const CarParams: FC<CarParamsPropsType> = (props) => {
                         };
                     }
                 }
+
                 if (name === 'position') {
                     const valsByPosition = {};
 
                     if (value) {
                         Object.keys(value).forEach(key => {
                             if (Array.isArray(value[key])) {
-                                valsByPosition[key] = [...value[key]];
+                                valsByPosition[key] = value[key].map(v => v.id);
                             } else if (typeof value[key] === 'object') {
                                 if (key === 'engine_capacity') valsByPosition[key] = value[key].name;
                                 else valsByPosition[key] = {...value[key]};
@@ -189,10 +194,13 @@ export const CarParams: FC<CarParamsPropsType> = (props) => {
                     }
                 }
             }
+
             if (isForeignCars && name === 'manufacturer') newVals.model = null;
 
-            setValues(newVals);
-            isMadeInUzb && setTouched({});
+            unstable_batchedUpdates(() => {
+                setValues(newVals);
+                isMadeInUzb && setTouched({});
+            });
         } catch (e) {
             setErrorMsg(e.message);
         }
@@ -221,11 +229,20 @@ export const CarParams: FC<CarParamsPropsType> = (props) => {
                     handleEdit={handleFormOpen(3)}
                 >
                     <Grid item xs={12} md={6}>
-                        <PostTitle isPreview={isPreview} title={values.title} formik={formik} t={t}/>
+                        <PostTitle
+                            t={t}
+                            isPreview={isPreview}
+                            title={values.title}
+                            formik={formik}
+                        />
                     </Grid>
                     <Grid item container spacing={2}>
                         {isPreview
-                            ? <PreviewValues t={t} values={values}/>
+                            ? <PreviewValues
+                                values={values}
+                                filters={filters}
+                                transKey={t(`${categoryName}.`)}
+                            />
                             : <>
                                 <Grid
                                     item
@@ -403,9 +420,9 @@ export const CarParams: FC<CarParamsPropsType> = (props) => {
                                                 >
                                                     <CheckboxSelect
                                                         name='broken'
-                                                        labelTxt={t('broken')}
                                                         checked={values.broken}
                                                         handleCheckbox={handleCheckbox}
+                                                        labelTxt={t(`car.broken.name`)}
                                                     />
                                                 </Grid>
                                                 <Grid
@@ -456,14 +473,14 @@ export const CarParams: FC<CarParamsPropsType> = (props) => {
                                                     alignItems='flex-end'
                                                 >
                                                     <DropDownSelect
-                                                        transKey={t(`${categoryName}.`)}
                                                         multiple
                                                         name='comfort'
-                                                        labelTxt={t('car.comfort.name')}
                                                         values={values}
                                                         onBlur={handleBlur}
                                                         items={filters.comfort}
                                                         handleSelect={handleSelect}
+                                                        transKey={t(`${categoryName}.`)}
+                                                        labelTxt={t('car.comfort.name')}
                                                     />
                                                 </Grid>
                                                 <Grid item container xs={12} spacing={1}>
@@ -480,11 +497,11 @@ export const CarParams: FC<CarParamsPropsType> = (props) => {
                                                             xs={12}
                                                         >
                                                             <OptionsSelect
-                                                                isApratment={false}
                                                                 column
-                                                                t={t}
+                                                                isApratment={false}
                                                                 name='power_windows'
                                                                 values={values}
+                                                                transKey={`${categoryName}.`}
                                                                 options={filters.power_windows}
                                                                 handleOptionCheckbox={handleOptionCheckbox}
                                                             />
@@ -498,9 +515,9 @@ export const CarParams: FC<CarParamsPropsType> = (props) => {
                                                             <OptionsSelect
                                                                 isApratment={false}
                                                                 column
-                                                                t={t}
                                                                 name='steering'
                                                                 values={values}
+                                                                transKey={`${categoryName}.`}
                                                                 options={filters.steering}
                                                                 handleOptionCheckbox={handleOptionCheckbox}
                                                             />
@@ -521,9 +538,9 @@ export const CarParams: FC<CarParamsPropsType> = (props) => {
                                                             <OptionsSelect
                                                                 isApratment={false}
                                                                 column
-                                                                t={t}
                                                                 name='seat_heating'
                                                                 values={values}
+                                                                transKey={`${categoryName}.`}
                                                                 options={filters.seat_heating}
                                                                 handleOptionCheckbox={handleOptionCheckbox}
                                                             />
@@ -537,9 +554,9 @@ export const CarParams: FC<CarParamsPropsType> = (props) => {
                                                             <OptionsSelect
                                                                 isApratment={false}
                                                                 column
-                                                                t={t}
                                                                 name='adjustable_seats'
                                                                 values={values}
+                                                                transKey={`${categoryName}.`}
                                                                 options={filters.adjustable_seats}
                                                                 handleOptionCheckbox={handleOptionCheckbox}
                                                             />
@@ -668,9 +685,9 @@ export const CarParams: FC<CarParamsPropsType> = (props) => {
                                                     <OptionsSelect
                                                         isApratment={false}
                                                         column
-                                                        t={t}
                                                         name='parking'
                                                         values={values}
+                                                        transKey={`${categoryName}.`}
                                                         options={filters.parking}
                                                         handleOptionCheckbox={handleOptionCheckbox}
                                                     />
@@ -685,9 +702,9 @@ export const CarParams: FC<CarParamsPropsType> = (props) => {
                                                     <OptionsSelect
                                                         isApratment={false}
                                                         column
-                                                        t={t}
                                                         name='anti_theft'
                                                         values={values}
+                                                        transKey={`${categoryName}.`}
                                                         options={filters.anti_theft}
                                                         handleOptionCheckbox={handleOptionCheckbox}
                                                     />

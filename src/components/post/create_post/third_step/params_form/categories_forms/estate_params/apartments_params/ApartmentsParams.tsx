@@ -79,7 +79,7 @@ export const ApartmentsParams: FC<CommonParamsPropsType> = (props) => {
             <CustomFormikProvider formik={formik}>
                 <CustomAccordion
                     submitTxt='appearance'
-                    icon={<ParametersIcon />}
+                    icon={<ParametersIcon/>}
                     isPreview={isPreview}
                     title={t('post:parameters')}
                     open={currentFormIndex === 3}
@@ -90,7 +90,11 @@ export const ApartmentsParams: FC<CommonParamsPropsType> = (props) => {
                         <PostTitle isPreview={isPreview} title={values.title} formik={formik} t={t}/>
                     </Grid>
                     {isPreview
-                        ? <PreviewValues t={t} values={values} />
+                        ? <PreviewValues
+                            values={values}
+                            filters={filters}
+                            transKey={t(`${categoryName}.`)}
+                        />
                         : <Grid item container spacing={2}>
                             <Grid container item spacing={2} xs={12}>
                                 <Grid item xs={12} sm={5} md={4}>
@@ -147,24 +151,24 @@ export const ApartmentsParams: FC<CommonParamsPropsType> = (props) => {
                             </Grid>
                             <Grid item xs={12} sm={6} md={4}>
                                 <NumberSelect
-                                    t={t}
                                     count={isLgUp ? 8 : 5}
                                     name='floor'
                                     errors={errors}
                                     touched={touched}
                                     values={values}
                                     setValues={setValues}
+                                    transKey={`${categoryName}.`}
                                 />
                             </Grid>
                             <Grid item container xs={12} sm={6} md={4}>
                                 <NumberSelect
-                                    t={t}
                                     count={isLgUp ? 8 : 5}
                                     name='number_of_floors'
                                     errors={errors}
                                     touched={touched}
                                     values={values}
                                     setValues={setValues}
+                                    transKey={`${categoryName}.`}
                                 />
                             </Grid>
                             <Grid item xs={12} sm={4} md={4}>
@@ -183,9 +187,9 @@ export const ApartmentsParams: FC<CommonParamsPropsType> = (props) => {
                                 <FormikField
                                     t={t}
                                     name='area'
-                                    labelText={t('filters:area')}
                                     value={values.area ?? ''}
                                     onChange={handleNumericInput}
+                                    labelText={t('estate.area.name')}
                                     errorMsg={getErrorMsg(errors.area, touched.area, t)}
                                 />
                             </Grid>
@@ -193,9 +197,9 @@ export const ApartmentsParams: FC<CommonParamsPropsType> = (props) => {
                                 <FormikField
                                     t={t}
                                     name='living_area'
-                                    labelText={t('filters:living_area')}
                                     value={values.living_area ?? ''}
                                     onChange={handleNumericInput}
+                                    labelText={t('estate.living_area.name')}
                                     errorMsg={getErrorMsg(errors.living_area, touched.living_area, t)}
                                 />
                             </Grid>
@@ -203,9 +207,9 @@ export const ApartmentsParams: FC<CommonParamsPropsType> = (props) => {
                                 <FormikField
                                     t={t}
                                     name='kitchen_area'
-                                    labelText={t('filters:kitchen_area')}
                                     value={values.kitchen_area ?? ''}
                                     onChange={handleNumericInput}
+                                    labelText={t('estate.kitchen_area.name')}
                                     errorMsg={getErrorMsg(errors.kitchen_area, touched.kitchen_area, t)}
                                 />
                             </Grid>
@@ -213,9 +217,9 @@ export const ApartmentsParams: FC<CommonParamsPropsType> = (props) => {
                                 <FormikField
                                     t={t}
                                     name='ceiling_height'
-                                    labelText={t('filters:ceiling_height')}
                                     value={values.ceiling_height ?? ''}
                                     onChange={handleNumericInput}
+                                    labelText={t('estate.ceiling_height.name')}
                                     errorMsg={getErrorMsg(errors.ceiling_height, touched.ceiling_height, t)}
                                 />
                             </Grid>
@@ -347,27 +351,27 @@ export const ApartmentsParams: FC<CommonParamsPropsType> = (props) => {
                                     errorMsg={getErrorMsg(errors.metro, touched.metro, t)}
                                 />
                             </Grid>
+                            <Grid item container spacing={2}>
+                                <OptionsSelect
+                                    isApratment
+                                    column={isXsDown}
+                                    name='amenities'
+                                    values={values}
+                                    transKey={`${categoryName}.`}
+                                    options={filters.amenities}
+                                    handleOptionCheckbox={handleOptionCheckbox}
+                                />
+                                <OptionsSelect
+                                    isApratment
+                                    column={isXsDown}
+                                    name='infrastructure'
+                                    values={values}
+                                    transKey={`${categoryName}.`}
+                                    options={filters.infrastructure}
+                                    handleOptionCheckbox={handleOptionCheckbox}
+                                />
+                            </Grid>
                         </Grid>}
-                    <Grid item container spacing={2}>
-                        <OptionsSelect
-                            isApratment
-                            column={isXsDown}
-                            t={t}
-                            name='amenities'
-                            values={values}
-                            options={filters.amenities}
-                            handleOptionCheckbox={handleOptionCheckbox}
-                        />
-                        <OptionsSelect
-                            isApratment
-                            column={isXsDown}
-                            t={t}
-                            name='infrastructure'
-                            values={values}
-                            options={filters.infrastructure}
-                            handleOptionCheckbox={handleOptionCheckbox}
-                        />
-                    </Grid>
                 </CustomAccordion>
             </CustomFormikProvider>
         </Grid>

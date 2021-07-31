@@ -68,7 +68,7 @@ export const DetailedPostModal: FC<DetailedPostViewPropsType> = (props) => {
 
 
     const isAuction = ads_type === 'auc' || ads_type === 'exauc';
-    const inactiveStatus = status === 'archive' || status === 'history';
+    const inactiveStatus = status === 'archive' || status === 'history' || status === 'sold';
     const blockedStatus = status === 'blocked';
 
     const reasonTxt = t(`${reasons[0]?.reason?.name}`);
@@ -87,7 +87,7 @@ export const DetailedPostModal: FC<DetailedPostViewPropsType> = (props) => {
     const hasServices = !!(available_days || exchange || delivery || safe_deal || auction?.auto_renewal);
     const hasUserForRating = !!((isUserWinner || isUserBuyer) ? author : winner ?? buyer ?? null);
 
-    let userData = (isUserWinner || !isUserCreator) ? author : winner ?? offerUser;
+    let userData = (isUserWinner || !isUserCreator) ? author : inactiveStatus ? winner : offerUser;
 
     const getUserInfoTitle = () => {
         if (hasBuyer && isUserCreator) return 'buyer';

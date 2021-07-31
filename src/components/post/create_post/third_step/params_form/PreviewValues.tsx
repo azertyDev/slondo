@@ -1,17 +1,24 @@
 import {FC} from 'react';
 import {Grid, Typography} from '@material-ui/core';
-import {WithT} from 'i18next';
 import {CheckboxSelect} from '@src/components/elements/checkbox_select/CheckboxSelect';
-import {excludeFields} from '@src/common_data/fields_keys';
+import {excludeFields, noTranslatableFields} from '@src/common_data/fields_keys';
+import {useTranslation} from "next-i18next";
 import {useStyles} from './useStyles';
 
-
 type PreviewValuesPropsType = {
-    values
-} & WithT;
+    transKey: string,
+    values,
+    filters
+};
 
 export const PreviewValues: FC<PreviewValuesPropsType> = (props) => {
-    const {t, values} = props;
+    const {
+        values,
+        filters,
+        transKey
+    } = props;
+
+    const {t} = useTranslation('filters');
 
     const classes = useStyles();
     return (
@@ -23,14 +30,19 @@ export const PreviewValues: FC<PreviewValuesPropsType> = (props) => {
                         const isBoolean = typeof values[key] === 'boolean';
                         const isOptions = Array.isArray(values[key]);
                         const isExcludeKey = excludeFields.some(k => k === key);
+                        const noTranslatable = noTranslatableFields.some(f => f === key);
 
                         if ((!!values[key] && !isExcludeKey && !isOptions) || (isOptions && !!values[key].length)) {
                             if (isOptions) {
-                                value = values[key].map(val => val.name).join(', ');
+                                value = values[key].map(val => {
+                                    const valueName = filters[key].find(f => f.id === val).name;
+                                    return t(`${transKey}${valueName}.name`);
+                                }).join(', ');
                             } else if (isString) {
                                 value = values[key];
                             } else if (values[key].name) {
-                                value = values[key].name;
+                                const valName = values[key].name;
+                                value = t(noTranslatable ? valName : `${transKey}${valName}.name`);
                             }
 
                             return (
@@ -50,7 +62,7 @@ export const PreviewValues: FC<PreviewValuesPropsType> = (props) => {
                                         />
                                         : <Typography variant="subtitle1" className='prev-text'>
                                             <strong>
-                                                {t(`filters:${key}`)}:&nbsp;
+                                                {t(noTranslatable ? key : `${transKey}${key}.name`)}:&nbsp;
                                             </strong>
                                             {value}
                                         </Typography>}

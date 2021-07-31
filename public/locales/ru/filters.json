@@ -1,5 +1,29 @@
 {
   "car": {
+    "power_windows": {
+      "name": "Электростеклоподъемники"
+    },
+    "steering": {
+      "name": "Регулировка руля"
+    },
+    "seat_heating": {
+      "name": "Подогрев сидений"
+    },
+    "adjustable_seats": {
+      "name": "Регулируемые сиденья"
+    },
+    "parking": {
+      "name": "Парковка"
+    },
+    "anti_theft": {
+      "name": "Противоугонная система"
+    },
+    "assistant": {
+      "name": "Помощь при вождени"
+    },
+    "engine_capacity": {
+      "name": "Объем двигателя в литрах"
+    },
     "body": {
       "name": "Тип кузова"
     },
@@ -401,6 +425,63 @@
     },
     "cloth": {
       "name": "Ткань"
+    },
+    "first_position": {
+      "name": "Первая позиция"
+    },
+    "second_position": {
+      "name": "Вторая позиция"
+    },
+    "third_position": {
+      "name": "Третья позиция"
+    },
+    "fourth_position": {
+      "name": "Четвертая позиция"
+    },
+    "fifth_position": {
+      "name": "Пятая позиция"
+    },
+    "drive": {
+      "name": "Привод"
+    },
+    "engine_type": {
+      "name": "Тип топлива"
+    },
+    "climate": {
+      "name": "Климат"
+    },
+    "hydraulic_power_steering": {
+      "name": "Гидроусилитель"
+    },
+    "comfort": {
+      "name": "Комфорт"
+    },
+    "seats": {
+      "name": "Кол-во мест"
+    },
+    "upholestery": {
+      "name": "Обивка салона"
+    },
+    "multimedia": {
+      "name": "Мультимедиа"
+    },
+    "assistance": {
+      "name": "Помощь при вождении"
+    },
+    "airbags": {
+      "name": "Подушки безопасности"
+    },
+    "safety": {
+      "name": "Безопасность"
+    },
+    "headlight": {
+      "name": "Тип автомобильных фар"
+    },
+    "overview": {
+      "name": "Обзор"
+    },
+    "other": {
+      "name": "Другое"
     }
   },
   "transport": {
@@ -574,6 +655,57 @@
     },
     "road_cutters": {
       "name": "Дорожные фрезы"
+    },
+    "sub_type": {
+      "name": "Тип"
+    },
+    "manufacturer": {
+      "name": "Производитель"
+    },
+    "condition": {
+      "name": "Состояние"
+    },
+    "new": {
+      "name": "Новые"
+    },
+    "used": {
+      "name": "Б/У"
+    },
+    "load_capacity": {
+      "name": "Грузоподъемность"
+    },
+    "view": {
+      "name": "Виды"
+    },
+    "up_three_half_tone": {
+      "name": "До 3,5т."
+    },
+    "three_twelve_tone ": {
+      "name": "От 3,5 - 12т."
+    },
+    "from_twelve_tone": {
+      "name": "От 12 т."
+    },
+    "up_eight_tone": {
+      "name": "Малый класс (до 8 тонн)"
+    },
+    "up_fivte_tone": {
+      "name": "Средний класс (до 50 тонн)"
+    },
+    "more_fivte_tone": {
+      "name": "Тяжелый класс (выше 50 тонн)"
+    },
+    "up_two_tone": {
+      "name": "До 2 тонн"
+    },
+    "up_two_from_four_tone": {
+      "name": "От 2 до 4 тонн"
+    },
+    "up_four_from_ten_tone": {
+      "name": "От 4 до 10 тонн"
+    },
+    "more_ten_tone": {
+      "name": "Свыше 10 тонн"
     }
   },
   "parts": {
@@ -726,6 +858,18 @@
     }
   },
   "estate": {
+    "floor": {
+      "name": "Этаж"
+    },
+    "number_of_floors": {
+      "name":"Этажность дома"
+    },
+    "infrastructure": {
+      "name": "Инфраструктура"
+    },
+    "amenities": {
+      "name": "Обстановка"
+    },
     "payment": {
       "name": "Предоплата"
     },
@@ -895,7 +1039,7 @@
       "name": "Рынок"
     },
     "other": {
-      "name": "Другое"
+      "name": "Другой"
     },
     "brick": {
       "name": "Кирпичный"
@@ -1055,6 +1199,30 @@
     },
     "autonomous": {
       "name": "Автономное"
+    },
+    "passenger_lift": {
+      "name": "Легковой (пассажирский)"
+    },
+    "cargo": {
+      "name": "Грузовой"
+    },
+    "cargo_passenger": {
+      "name": "Грузовой и легковой"
+    },
+    "three_or_more ": {
+      "name": "3 и более"
+    },
+    "separate": {
+      "name": "Раздельный"
+    },
+    "combined": {
+      "name": "Совмещенный"
+    },
+    "outside": {
+      "name": "На улице"
+    },
+    "summed": {
+      "name": "Подведено"
     }
   },
   "job": {
@@ -2044,6 +2212,12 @@
     },
     "job_type": {
       "name": "Тип работы"
+    },
+    "experience": {
+      "name": "Опыт"
+    },
+    "free_cshedule": {
+      "name": "Свободный график"
     }
   },
   "service": {
@@ -2082,6 +2256,135 @@
     },
     "at_home": {
       "name": "На дому"
+    },
+    "specialization": {
+      "name": "Специализация"
+    },
+    "design_construction_apartments": {
+      "name": "Проектирование и дизайн квартир"
+    },
+    "designing_house": {
+      "name": "Проектирование и дизайн дома"
+    },
+    "designing_office": {
+      "name": "Проектирование и дизайн офиса"
+    },
+    "interior_design": {
+      "name": "Проектирование и дизайн Интерьера"
+    },
+    "kitchen_design": {
+      "name": "Дизайн кухни"
+    },
+    "landscape_design": {
+      "name": "Ландшафтный дизайн"
+    },
+    "other": {
+      "name": "Другое"
+    },
+    "renovation_apartments": {
+      "name": "Евроремонт квартир и домов"
+    },
+    "major_repairs_houses": {
+      "name": "Капитальный ремонт и домов"
+    },
+    "cosmetic_repair": {
+      "name": "Косметический ремонт"
+    },
+    "rest_room_repair": {
+      "name": "Ремонт туалета"
+    },
+    "kitchen_repair": {
+      "name": "Ремонт кухни"
+    },
+    "repair_bathroom": {
+      "name": "Ремонт ванной комнаты"
+    },
+    "finishing_apartments": {
+      "name": "Чистовая отделка квартир и домов"
+    },
+    "drilling_wells": {
+      "name": "Бурение колодцев"
+    },
+    "drilling_water_wells": {
+      "name": "Бурение скважин на воду"
+    },
+    "insulation_works": {
+      "name": "Изоляционные работы"
+    },
+    "waterproofing_works": {
+      "name": "Гидроизоляционные работы"
+    },
+    "installation_vapor": {
+      "name": "Монтаж пароизоляции"
+    },
+    "thermal_insulation": {
+      "name": "Монтаж теплоизоляции"
+    },
+    "construction_houses": {
+      "name": "Строительство домов"
+    },
+    "construction_cottages": {
+      "name": "Строительство коттеджей"
+    },
+    "well_cleaning": {
+      "name": "Чистка скважины"
+    },
+    "noise_insulation": {
+      "name": "Шумоизоляция помещений"
+    },
+    "awnings": {
+      "name": "Навесы и тенты"
+    },
+    "removing_tiles": {
+      "name": "Демонтаж плитки"
+    },
+    "facade_cladding": {
+      "name": "Облицовка фасада плиткой"
+    },
+    "paving_stones": {
+      "name": "Укладка брусчатки"
+    },
+    "blacksmith_services": {
+      "name": "Услуги кузнеца"
+    },
+    "carpenter_services": {
+      "name": "Услуги плотника"
+    },
+    "stolar_services": {
+      "name": "Услуги столяра"
+    },
+    "locksmith_services": {
+      "name": "Услуги слесаря"
+    },
+    "turner_services": {
+      "name": "Услуги токаря"
+    },
+    "other_services": {
+      "name": "Другие услуги"
+    },
+    "furniture_repair": {
+      "name": "Ремонт мебели"
+    },
+    "furniture_upholstery": {
+      "name": "Обивка мебели"
+    },
+    "furniture_assembly": {
+      "name": "Сборка и разборка мебели"
+    },
+    "furniture_restoration": {
+      "name": "Реставрация мебели"
+    },
+    "home_visit": {
+      "name": "Выезд на дом"
+    },
+    "place": {
+      "name": "Место оказания"
+    },
+    "in_office": {
+      "name": "В офисе"
+    },
+    "in_workshops": {
+      "name": "В мастерской"
     }
   },
   "goods": {
@@ -3386,6 +3689,282 @@
     },
     "other": {
       "name": "Другое"
+    },
+    "condition": {
+      "name": "Состояние"
+    },
+    "sub_type": {
+      "name": "Тип"
+    },
+    "brand": {
+      "name": "Брэнд"
+    },
+    "new": {
+      "name": "Новое"
+    },
+    "used": {
+      "name": "Б/У"
+    },
+    "size": {
+      "name": "Размер"
+    },
+    "season": {
+      "name": "Сезон"
+    },
+    "summer": {
+      "name": "Лето"
+    },
+    "winter": {
+      "name": "Зима"
+    },
+    "demi_season": {
+      "name": "Демисезон"
+    },
+    "ws_body": {
+      "name": "Боди"
+    },
+    "length": {
+      "name": "Длина"
+    },
+    "maxi": {
+      "name": "Макси"
+    },
+    "midi": {
+      "name": "Миди"
+    },
+    "mini": {
+      "name": "Мини"
+    },
+    "sweaters": {
+      "name": "Свитеры"
+    },
+    "outwear": {
+      "name": "Верхняя одежда"
+    },
+    "dresses_skirts": {
+      "name": "Платья и юбки"
+    },
+    "pants_shorts": {
+      "name": "Штаны и шорты"
+    },
+    "tops": {
+      "name": "Топы"
+    },
+    "shorts": {
+      "name": "Шорты"
+    },
+    "costumes": {
+      "name": "Костюмы"
+    },
+    "outerwear": {
+      "name": "Верхняя одежда"
+    },
+    "boy": {
+      "name": "Мальчик"
+    },
+    "girl": {
+      "name": "Девочка   "
+    },
+    "kid_body": {
+      "name": "Детское боди"
+    },
+    "dresses": {
+      "name": "Платья"
+    },
+    "skirts": {
+      "name": "Юбки"
+    },
+    "group": {
+      "name": "Группа"
+    },
+    "mount": {
+      "name": "Крепление"
+    },
+    "properties": {
+      "name": "Особенности"
+    },
+    "isofix": {
+      "name": "Isofix"
+    },
+    "latch": {
+      "name": "Latch"
+    },
+    "car_seat_belts": {
+      "name": "Автомобильные ремни"
+    },
+    "up_ten_kg": {
+      "name": "0 (До 10 кг)"
+    },
+    "up_thirteen_kg": {
+      "name": "0+ (До 13 кг)"
+    },
+    "up_eighteen_kg": {
+      "name": "0/1 (До 18 кг)"
+    },
+    "up_twenty_five_kg": {
+      "name": "0/1/2 (До 25 кг)"
+    },
+    "up_thirty_six__kg": {
+      "name": "0/1/2/3 (до 36 кг)"
+    },
+    "nine_eighteen_kg": {
+      "name": "1 (9-18 кг)"
+    },
+    "nine_twenty_five_kg": {
+      "name": "1/2 (9-25 кг)"
+    },
+    "nine_thirty_six_kg": {
+      "name": "1/2/3 (9-36 кг)"
+    },
+    "fifteen_thirty_six_kg": {
+      "name": "2/3 (15-36 кг)"
+    },
+    "twenty_two_twenty_six_kg": {
+      "name": "3 (22-26 кг)"
+    },
+    "carrying_handle": {
+      "name": "Ручка для переноски"
+    },
+    "rotary_mechanism": {
+      "name": "Поворотный механизм"
+    },
+    "automatic_belt_tension": {
+      "name": "Автоматическое натяжение ремня"
+    },
+    "belt_tension_lock": {
+      "name": "Фиксатор натяжения ремня"
+    },
+    "the_system_of_the_way_to_the_floor": {
+      "name": "Система упора в пол"
+    },
+    "five_point_belts": {
+      "name": "Пятиточечные ремни"
+    },
+    "removable_upholstery": {
+      "name": "Съемная обивка"
+    },
+    "childrens_trampolines": {
+      "name": "Детские батуты"
+    },
+    "up_one_year": {
+      "name": "До 1 года"
+    },
+    "up_two_year": {
+      "name": "До 2 лет"
+    },
+    "up_three_year": {
+      "name": "До 3 лет"
+    },
+    "up_four_year": {
+      "name": "До 4 лет"
+    },
+    "up_five_year": {
+      "name": "До 5 лет"
+    },
+    "wheels": {
+      "name": "Тип колес"
+    },
+    "regulation": {
+      "name": "Регулировки"
+    },
+    "number_of_seats": {
+      "name": "Кол-во мест"
+    },
+    "pneumatic": {
+      "name": "Пневматические"
+    },
+    "plastic": {
+      "name": "Пластиковые"
+    },
+    "gel": {
+      "name": "Гелевые"
+    },
+    "rubber": {
+      "name": "Резиновые"
+    },
+    "coupling": {
+      "name": "Муфта"
+    },
+    "bag": {
+      "name": "Сумка"
+    },
+    "raincoat": {
+      "name": "Дождевик"
+    },
+    "mattress": {
+      "name": "Матрас"
+    },
+    "shopping_cart": {
+      "name": "Корзина для покупок"
+    },
+    "envelope": {
+      "name": "Конверт"
+    },
+    "mosquito_netting": {
+      "name": "Москитная сетка"
+    },
+    "foot_cover": {
+      "name": "Чехол на ноги"
+    },
+    "belts": {
+      "name": "Ремни"
+    },
+    "bumper": {
+      "name": "Бампер"
+    },
+    "sun_visor": {
+      "name": "Козырек от солнца"
+    },
+    "for_running": {
+      "name": "Для бега"
+    },
+    "handle": {
+      "name": "Ручка"
+    },
+    "tilt_backrest": {
+      "name": "Наклон спинки"
+    },
+    "wheel_locking": {
+      "name": "Фиксация колес"
+    },
+    "for_one": {
+      "name": "Для одного"
+    },
+    "for_twins": {
+      "name": "Для двойни"
+    },
+    "for_triplets": {
+      "name": "Для тройни"
+    },
+    "for_weather_conditions": {
+      "name": "Для погодок"
+    },
+    "female": {
+      "name": "Женская"
+    },
+    "male": {
+      "name": "Мужская"
+    },
+    "eyelids_around_eyes": {
+      "name": "Веки, вокруг глаз"
+    },
+    "lips": {
+      "name": "Губы"
+    },
+    "face": {
+      "name": "Лицо"
+    },
+    "legs": {
+      "name": "Ноги"
+    },
+    "hands": {
+      "name": "Руки"
+    },
+    "for_body": {
+      "name": "Тело"
+    },
+    "neck_decollete_area": {
+      "name": "Шея и зона декольте"
     }
   },
   "home": {
@@ -3440,31 +4019,31 @@
     "floor_lamps": {
       "name": "Торшеры"
     },
-    "Vases": {
+    "vases": {
       "name": "Вазы"
     },
-    "Hangers": {
+    "hangers": {
       "name": "Вешалки"
     },
-    "Mirrors": {
+    "mirrors": {
       "name": "Зеркала"
     },
-    "Artificial_plants": {
+    "artificial_plants": {
       "name": "Искусственные растения"
     },
-    "Paintings_and_posters": {
+    "paintings_and_posters": {
       "name": "Картины и постеры"
     },
-    "Housekeepers": {
+    "housekeepers": {
       "name": "Ключницы"
     },
     "Stickers": {
       "name": "Наклейки"
     },
-    "Candles_and_candle_holders": {
+    "candles_and_candle_holders": {
       "name": "Свечи и подсвечники"
     },
-    "Figurines_and_figurines": {
+    "figurines_and_figurines": {
       "name": "Статуэтки и фигурки"
     },
     "Photo_albums_and_frames": {
@@ -3473,10 +4052,10 @@
     "Watch": {
       "name": "Часы"
     },
-    "Screens": {
+    "screens": {
       "name": "Ширмы"
     },
-    "Jewelryboxes": {
+    "jewelry_boxes": {
       "name": "Шкатулки"
     },
     "intercoms": {
@@ -3692,7 +4271,7 @@
     "tableware_sets": {
       "name": "Наборы посуды"
     },
-    "Kitchen_accessories": {
+    "kitchen_accessories": {
       "name": "Кухонные аксессуары"
     },
     "Other": {
@@ -4063,6 +4642,21 @@
     },
     "electric_and_chainsaws": {
       "name": "Электро и бензопилы"
+    },
+    "sub_type": {
+      "name": "Тип"
+    },
+    "condition": {
+      "name": "Состояние"
+    },
+    "new": {
+      "name": "Новое"
+    },
+    "used": {
+      "name": "Б/У"
+    },
+    "other": {
+      "name": "Другое"
     }
   },
   "electronics": {
@@ -5262,6 +5856,432 @@
     },
     "utilities_drivers": {
       "name": "Утилиты, драйверы"
+    },
+    "manufacturer": {
+      "name": "Производитель"
+    },
+    "os": {
+      "name": "Операционная система"
+    },
+    "memory": {
+      "name": "Встроенная память"
+    },
+    "512mb_or_less": {
+      "name": "512 Мб и менее"
+    },
+    "function": {
+      "name": "Функции"
+    },
+    "sub_type": {
+      "name": "Тип"
+    },
+    "display": {
+      "name": "Тип дисплея"
+    },
+    "diagonal": {
+      "name": "Диагональ экрана"
+    },
+    "device": {
+      "name": "Устройство"
+    },
+    "for_smartphones": {
+      "name": "Для смартфонов"
+    },
+    "for_tabs": {
+      "name": "Для планшетов"
+    },
+    "for_phones": {
+      "name": "Для телефонов"
+    },
+    "for_smart_watches": {
+      "name": "Для умных часов"
+    },
+    "microphones": {
+      "name": "Микрофоны"
+    },
+    "cameras": {
+      "name": "Камеры"
+    },
+    "capacity": {
+      "name": "Вместимость"
+    },
+    "to_3000_mah": {
+      "name": "До 3000 мАч"
+    },
+    "from_3000_to_4990_mah": {
+      "name": "От 3000 до 4990 мАч"
+    },
+    "from_5000_to_9990_mah": {
+      "name": "От 5000 до 9990 мАч"
+    },
+    "from_10000_to_14990_mah": {
+      "name": "От 10000 до 14990 мАч"
+    },
+    "from_15000_to_19990_mah": {
+      "name": "От 15000 до 19990 мАч"
+    },
+    "to_20000_mah_more": {
+      "name": "20000 мАч и более"
+    },
+    "port": {
+      "name": "Количество портов USB"
+    },
+    "one": {
+      "name": "1"
+    },
+    "two": {
+      "name": "2"
+    },
+    "three_more": {
+      "name": "3 и больше"
+    },
+    "connector": {
+      "name": "Разъем"
+    },
+    "apple_pin": {
+      "name": "Apple (30pin)"
+    },
+    "apple_lightning": {
+      "name": "Apple (lightning)"
+    },
+    "micro_usb": {
+      "name": "Micro USB"
+    },
+    "usb_type_c": {
+      "name": "USB Type-C"
+    },
+    "usb": {
+      "name": "USB"
+    },
+    "old_connectors": {
+      "name": "Старые разъемы"
+    },
+    "cable": {
+      "name": "Наличие кабеля"
+    },
+    "without_cable": {
+      "name": "Без кабеля"
+    },
+    "cable_included": {
+      "name": "Кабель в комплекте"
+    },
+    "built_cable": {
+      "name": "Встроенный кабель"
+    },
+    "for_taps": {
+      "name": "Для планшетов"
+    },
+    "material": {
+      "name": "Материал"
+    },
+    "metal": {
+      "name": "Металл"
+    },
+    "wood": {
+      "name": "Дерево"
+    },
+    "synthec_leather": {
+      "name": "Искусственная кожа"
+    },
+    "natural_leather": {
+      "name": "Натуральная кожа"
+    },
+    "plasc_polyurethane": {
+      "name": "Пластик, полиуретан, резина"
+    },
+    "silicone": {
+      "name": "Силикон"
+    },
+    "cloth": {
+      "name": "Ткань"
+    },
+    "lenses": {
+      "name": "Объективы"
+    },
+    "category": {
+      "name": "Категория"
+    },
+    "compact": {
+      "name": "Компактные"
+    },
+    "mirrored": {
+      "name": "Зеркальные"
+    },
+    "wirrorless_with_replaceable_optics": {
+      "name": "Беззеркальные со сменной оптикой"
+    },
+    "instant_prinng": {
+      "name": "Моментальной печати"
+    },
+    "quality": {
+      "name": "Качество записи"
+    },
+    "less_576": {
+      "name": "576p и менее"
+    },
+    "phd_720": {
+      "name": "720p HD"
+    },
+    "full_hd_1080": {
+      "name": "1080p Full HD"
+    },
+    "kqhd": {
+      "name": "2.5K QHD"
+    },
+    "uhd_4k": {
+      "name": "4K UHD"
+    },
+    "more_8k": {
+      "name": "8K и более"
+    },
+    "stabilizer": {
+      "name": "Стабилизатор изображения"
+    },
+    "optical": {
+      "name": "Оптический"
+    },
+    "format": {
+      "name": "Формат носителя"
+    },
+    "hard_disk_flash": {
+      "name": "Жесткий диск, Flash"
+    },
+    "casseete": {
+      "name": "Кассета"
+    },
+    "opcal_disk": {
+      "name": "Оптический диск"
+    },
+    "zoom": {
+      "name": "Zoom"
+    },
+    "no": {
+      "name": "Нет"
+    },
+    "less_5x": {
+      "name": "Менее 5х"
+    },
+    "from_five_to_nine": {
+      "name": "От 5 до 9.9х "
+    },
+    "from_ten_to_nineteen": {
+      "name": "От 10 до 19.9х"
+    },
+    "from_twenty_to_twentynine": {
+      "name": "От 20 до 29.9х"
+    },
+    "from_thirty_to_thirtynine": {
+      "name": "От 30 до 39.9х"
+    },
+    "from_forty_to_fortynine": {
+      "name": "От 40 до 49.9х"
+    },
+    "fivty_more": {
+      "name": "50х и более"
+    },
+    "shooting_360_degrees": {
+      "name": "Съемка в 360 градусов"
+    },
+    "connection": {
+      "name": "Подключение"
+    },
+    "bayonet": {
+      "name": "Тип байонета"
+    },
+    "head": {
+      "name": "Поворотная головка"
+    },
+    "play": {
+      "name": "Воспроизведение видео"
+    },
+    "less_7": {
+      "name": "Менее 7”"
+    },
+    "7_1_to_9": {
+      "name": "От 7.1” до 9”"
+    },
+    "9_1_to_12": {
+      "name": "От 9.1” до 12”"
+    },
+    "12_1_to_15": {
+      "name": "От 12.1” до 15”"
+    },
+    "15_or_more": {
+      "name": "От 15” и больше"
+    },
+    "screen": {
+      "name": "Разрешение экрана"
+    },
+    "up_to15": {
+      "name": "До 15”"
+    },
+    "15_to19_9": {
+      "name": "От 15” до 19.9”"
+    },
+    "20to24_9": {
+      "name": "От 20” до 24.9”"
+    },
+    "25to29_9": {
+      "name": "От 25” до 29.9”"
+    },
+    "30to34_9": {
+      "name": "От 30” до 34.9”"
+    },
+    "35to39_9": {
+      "name": "От 35” до 39.9”"
+    },
+    "40to44_9": {
+      "name": "От 40” до 44.9”"
+    },
+    "45to49_9": {
+      "name": "От 45” до 49.9”"
+    },
+    "50to54_9": {
+      "name": "От 50” до 54.9”"
+    },
+    "55to59_9": {
+      "name": "От 55” до 59.9”"
+    },
+    "60_or_more": {
+      "name": "От 60” и более"
+    },
+    "yes": {
+      "name": "Да"
+    },
+    "acoustics": {
+      "name": "Тип акустики"
+    },
+    "monitor3d": {
+      "name": "Поддержка 3D"
+    },
+    "area": {
+      "name": "Область применения"
+    },
+    "outdoor": {
+      "name": "Отдельно стоящие"
+    },
+    "kitchen_appliances": {
+      "name": "Кухонные"
+    },
+    "jewelry": {
+      "name": "Ювелирные"
+    },
+    "burner": {
+      "name": "Тип конфорок"
+    },
+    "gaseosus": {
+      "name": "Газовые"
+    },
+    "induktion": {
+      "name": "Индукционные"
+    },
+    "electrical": {
+      "name": "Электрические"
+    },
+    "installation": {
+      "name": "Тип установки"
+    },
+    "embedded": {
+      "name": "Встраиваемые"
+    },
+    "holding": {
+      "name": "Вместимость"
+    },
+    "Set_twelve_more": {
+      "name": "12 и более комплектов"
+    },
+    "set_nine_eleven": {
+      "name": "6-11 комплектов"
+    },
+    "to_six_set": {
+      "name": "До 6 комплектов"
+    },
+    "condition": {
+      "name": "Состояние"
+    },
+    "New": {
+      "name": "Новое"
+    },
+    "Used": {
+      "name": "Б/У"
+    },
+    "cleaning": {
+      "name": "Тип уборки"
+    },
+    "dry": {
+      "name": "Сухая"
+    },
+    "wet": {
+      "name": "Влажная"
+    },
+    "dry_wet": {
+      "name": "Сухая и влажная"
+    },
+    "leak_protection": {
+      "name": "Защита от протечек"
+    },
+    "spead": {
+      "name": "Скорость отжима"
+    },
+    "to_700_rpm": {
+      "name": "До 700 об/мин"
+    },
+    "rpm_700_800": {
+      "name": "700-800 об/мин"
+    },
+    "rpm_800_900": {
+      "name": "800-900 об/мин"
+    },
+    "rpm_900_1100": {
+      "name": "900-1100 об/мин"
+    },
+    "rpm_1100_1200": {
+      "name": "1100-1200 об/мин"
+    },
+    "to_four_kg": {
+      "name": "До 4 кг"
+    },
+    "to_five_kg": {
+      "name": "До 5 кг"
+    },
+    "to_six_kg": {
+      "name": "До 6 кг"
+    },
+    "to_seven_kg": {
+      "name": "До 7 кг"
+    },
+    "from_seven_kg": {
+      "name": "От 7 кг"
+    },
+    "gaming": {
+      "name": "Игровой"
+    },
+    "video_card": {
+      "name": "Видеокарта"
+    },
+    "discrete": {
+      "name": "Дискретная"
+    },
+    "Less_14": {
+      "name": "Менее 14”"
+    },
+    "one_twings": {
+      "name": "1 шт"
+    },
+    "two_twings": {
+      "name": "2 шт"
+    },
+    "four_twings": {
+      "name": "4 шт"
+    },
+    "for_computers": {
+      "name": "Для компьютеров"
+    },
+    "for_laptops": {
+      "name": "Для ноутбуков"
+    },
+    "platform": {
+      "name": "Платформа"
     }
   },
   "hobbies": {
@@ -5750,6 +6770,117 @@
     },
     "shakers_bottles": {
       "name": "Шейкеры, бутылки"
+    },
+    "type": {
+      "name": "Тип"
+    },
+    "other": {
+      "name": "Другое"
+    },
+    "condition": {
+      "name": "Состояние"
+    },
+    "new": {
+      "name": "Новое"
+    },
+    "used": {
+      "name": "Б/У"
+    },
+    "subject": {
+      "name": "Тематика"
+    },
+    "business_literature": {
+      "name": "•Бизнес литература"
+    },
+    "home_and_family": {
+      "name": "Дом и семья"
+    },
+    "art_culture": {
+      "name": "Искусство, культура"
+    },
+    "computer_literature": {
+      "name": "Компьютерная литература"
+    },
+    "cooking_recipes": {
+      "name": "Кулинария, рецепты"
+    },
+    "medicine_health": {
+      "name": "Медицина, здоровье"
+    },
+    "science_technology": {
+      "name": "Наука, техника"
+    },
+    "poetry": {
+      "name": "Поэзия"
+    },
+    "nature_animals": {
+      "name": "Природа, животные"
+    },
+    "psychology": {
+      "name": "Психология"
+    },
+    "journalism": {
+      "name": "Публицистика"
+    },
+    "travel_photos": {
+      "name": "Путешествия, фото"
+    },
+    "religion_esotericism": {
+      "name": "Религия, эзотерика"
+    },
+    "garden_and_vegetable_garden": {
+      "name": "Сад и огород"
+    },
+    "sports_fitness": {
+      "name": "Спорт, фитнес"
+    },
+    "reference_books_encyclopedias": {
+      "name": "Справочники, энциклопедии"
+    },
+    "educaonal_literature": {
+      "name": "Учебная литература"
+    },
+    "hobbies_needlework_creavity": {
+      "name": "Хобби, рукоделие, творчество"
+    },
+    "fiction": {
+      "name": "Художественная литература"
+    },
+    "vinyl_records": {
+      "name": "Виниловые пластинки"
+    },
+    "kids": {
+      "name": "Для детей"
+    },
+    "yes": {
+      "name": "Да"
+    },
+    "no": {
+      "name": "Нет"
+    },
+    "masks_glasses": {
+      "name": "Маски, очки"
+    },
+    "boxing_maral_arts": {
+      "name": "Бокс, единоборства"
+    },
+    "cycling": {
+      "name": "Велоспорт"
+    },
+    "rugby_handball": {
+      "name": "Регби, гандбол"
+    },
+    "roller_skates_scooters": {
+      "name": "Ролики, самокаты, скейтборды"
+    },
+    "sub_type": {
+      "name": "Тип"
+    },
+    "waterpolo": {
+      "name": "Водное поло"
+    },
+    "fieldhockey": {
+      "name": "Хоккей на траве"
     }
   },
   "animal": {
@@ -5883,7 +7014,7 @@
       "name": "Мопс"
     },
     "moscow_guard": {
-      "name": "Московская сторожева"
+      "name": "Московская сторожевая"
     },
     "german_shepherd": {
       "name": "Немецкая овчарка"
@@ -6212,8 +7343,17 @@
     "toilet_fillers": {
       "name": "Туалет и наполнители"
     },
-    "other": {
-      "name": "Другое"
+    "breed": {
+      "name": "Порода"
+    },
+    "condition": {
+      "name": "Состояние"
+    },
+    "new": {
+      "name": "Новое"
+    },
+    "used": {
+      "name": "Б/У"
     }
   },
   "bayonet": "Байонет",
@@ -6240,14 +7380,9 @@
   "view": "Вид",
   "overview": "Обзор",
   "headlight": "Фары",
-  "anti_theft": "Противоугонная система",
   "assistance": "Помощник",
-  "parking": "Парковка",
   "driving_assistance_safety_title": "Помощь при вождении и безопасность",
   "upholstery": "Обивка",
-  "adjustable_seats": "Регулируемые сиденья",
-  "seat_heating": "Подогрев сидений",
-  "power_windows": "Электростеклоподъемники",
   "climate": "Климат",
   "user_name": "Имя",
   "user_surname": "Фамилия",
@@ -6270,11 +7405,9 @@
   "comfort": "Дополнительно",
   "car_climate": "Климат",
   "upholestery": "Обивка салона",
-  "steering": "Регулировка руля",
   "seats": "Количество мест",
   "airbags": "Подушка безопасности",
   "visibility": "Видимость",
-  "assistant": "Помощь при вождении",
   "exterior": "Экстерьер",
   "headlights": "Фары",
   "transmission": "Коробка передач",
@@ -6364,7 +7497,6 @@
   "general_area": "Общая площадь в м²",
   "living_area": "Жилая площадь в м²",
   "kitchen_area": "Площадь кухни в м²",
-  "number_of_floors": "Этажность дома",
   "floor": "Этаж",
   "floors": "Этажость",
   "parking_spaces": "Машиномест",
@@ -6372,11 +7504,8 @@
   "ceiling_height": "Высота потолков в метрах",
   "number_of_bedrooms": "Количество спален",
   "engine_type": "Тип двигателя",
-  "engine_capacity": "Объем двигателя в литрах",
   "utilities": "Коммунальные услуги включены",
   "with_pledge": "С залогом",
-  "infrastructure": "Инфраструктура",
-  "amenities": "Обстановка",
   "location": "Расположение",
   "heating": "Отопление",
   "lift": "Лифт",
@@ -6443,4 +7572,3 @@
   "archive": "Архив",
   "repair_construction": "Тестовый"
 }
-

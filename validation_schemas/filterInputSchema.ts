@@ -1,13 +1,12 @@
-import { string, object } from 'yup';
-
-const requiredMsg = 'Поле обязательно для заполнения';
+import {string, object} from 'yup';
+import {fieldRequiredTxt} from "@src/common_data/fields_keys";
 
 export const filterInputSchema = object({
-    phone: string().required(requiredMsg),
-    car: string().required(requiredMsg),
-    category: string().required(requiredMsg),
-    price: string().required(requiredMsg),
-    created_at: string().required(requiredMsg),
-    ancmnt_type: string().required(requiredMsg),
-    state: string().required(requiredMsg),
+    phone: string().required(fieldRequiredTxt),
+    car: string().required(fieldRequiredTxt),
+    category: string().required(fieldRequiredTxt),
+    price: string().required(fieldRequiredTxt),
+    created_at: string().required(fieldRequiredTxt),
+    ancmnt_type: string().required(fieldRequiredTxt),
+    state: string().required(fieldRequiredTxt)
 });

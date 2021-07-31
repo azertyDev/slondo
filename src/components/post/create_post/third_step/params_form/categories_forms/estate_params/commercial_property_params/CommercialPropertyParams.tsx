@@ -68,7 +68,7 @@ export const CommercialPropertyParams: FC<CommonParamsPropsType> = (props) => {
                     submitTxt='appearance'
                     icon={<ParametersIcon/>}
                     isPreview={isPreview}
-                    title={t('parameters')}
+                    title={t('post:parameters')}
                     open={currentFormIndex === 3}
                     isEditable={currentFormIndex < 3}
                     handleEdit={handleFormOpen(3)}
@@ -78,7 +78,11 @@ export const CommercialPropertyParams: FC<CommonParamsPropsType> = (props) => {
                     </Grid>
                     <Grid container item spacing={2}>
                         {isPreview
-                            ? <PreviewValues t={t} values={values} />
+                            ? <PreviewValues
+                                values={values}
+                                filters={filters}
+                                transKey={t(`${categoryName}.`)}
+                            />
                             : <>
                                 <Grid item container xs={4}>
                                     <DeployedSelect
@@ -118,8 +122,8 @@ export const CommercialPropertyParams: FC<CommonParamsPropsType> = (props) => {
                                     <FormikField
                                         t={t}
                                         name='area'
-                                        labelText='area'
                                         value={values.area ?? ''}
+                                        labelText={t('estate.area.name')}
                                         errorMsg={getErrorMsg(errors.area, touched.area, t)}
                                     />
                                 </Grid>
@@ -148,10 +152,10 @@ export const CommercialPropertyParams: FC<CommonParamsPropsType> = (props) => {
                                 <OptionsSelect
                                     isApratment={false}
                                     column={isXsDown}
-                                    t={t}
                                     name='amenities'
                                     values={values}
                                     options={filters.amenities}
+                                    transKey={`${categoryName}.`}
                                     handleOptionCheckbox={handleOptionCheckbox}
                                 />
                             </>}

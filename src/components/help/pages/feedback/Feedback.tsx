@@ -75,9 +75,7 @@ export const Feedback: FC = () => {
                         <div className='upload'>
                             <label className='file-upload'>
                                 Фото или скриншот
-                                <input
-                                    type='file'
-                                />
+                                <input type='file'/>
                             </label>
                             <CustomButton>
                                 Отправить

@@ -41,11 +41,12 @@ export const useStyles = makeStyles(() => ({
                 borderRadius: '5px',
                 cursor: 'pointer',
                 '& > span': {
-                    width: '40px',
-                    height: '40px',
+                    width: '60px',
+                    height: '60px',
                     background: '#7DBCF6',
                     borderRadius: '100%',
                     '& svg': {
+                        fontSize: '2rem',
                         '& path': {
                             fill: '#fff'
                         }

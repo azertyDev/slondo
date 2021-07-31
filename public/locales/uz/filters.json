@@ -1,5 +1,29 @@
 {
   "car": {
+    "power_windows": {
+      "name": "Elektr oyna ko'targichlar"
+    },
+    "steering": {
+      "name": "Rulni boshqarish"
+    },
+    "seat_heating": {
+      "name": "O'rindiqlarni isitish"
+    },
+    "adjustable_seats": {
+      "name": "Sozlanuvchi o'rindiqlar"
+    },
+    "parking": {
+      "name": "Parkovka"
+    },
+    "anti_theft": {
+      "name": "O'g'rilikka qarshi tizim"
+    },
+    "assistant": {
+      "name": "Haydash paytida yordam"
+    },
+    "engine_capacity": {
+      "name": "litrda dvigatel hajmi"
+    },
     "body": {
       "name": "Kuzov turi"
     },
@@ -401,6 +425,63 @@
     },
     "cloth": {
       "name": "Mato"
+    },
+    "first_position": {
+      "name": "Birinchi pozitsiya"
+    },
+    "second_position": {
+      "name": "Ikkinchi pozitsiya "
+    },
+    "third_position": {
+      "name": "Uchinchi pozitsiya "
+    },
+    "fourth_position": {
+      "name": "To'rtinchi pozitsiya "
+    },
+    "fifth_position": {
+      "name": "Beshinchi pozitsiya"
+    },
+    "drive": {
+      "name": "keltiruvchi"
+    },
+    "engine_type": {
+      "name": "yoqilg'i turi"
+    },
+    "climate": {
+      "name": "iqlim"
+    },
+    "hydraulic_power_steering": {
+      "name": "gidrokuchaytirgich"
+    },
+    "comfort": {
+      "name": "qulaylik"
+    },
+    "seats": {
+      "name": "joylar soni"
+    },
+    "upholestery": {
+      "name": "ichki o'ran"
+    },
+    "multimedia": {
+      "name": "multimedia"
+    },
+    "assistance": {
+      "name": "haydash paytida yordam"
+    },
+    "airbags": {
+      "name": "havo yostig'i"
+    },
+    "safety": {
+      "name": "xavfsizlik"
+    },
+    "headlight": {
+      "name": "avtomobil faralari turi"
+    },
+    "overview": {
+      "name": "umumiy nuqtai"
+    },
+    "other": {
+      "name": "boshqa"
     }
   },
   "transport": {
@@ -574,6 +655,57 @@
     },
     "road_cutters": {
       "name": "Yo’l frezalari – aylanma barabanli mashinalar"
+    },
+    "sub_type": {
+      "name": "turi"
+    },
+    "manufacturer": {
+      "name": "ishlab chiqaruvchi"
+    },
+    "condition": {
+      "name": "holat"
+    },
+    "new": {
+      "name": "yangi"
+    },
+    "used": {
+      "name": "Ishlatilgan"
+    },
+    "load_capacity": {
+      "name": "Yuk hajmi"
+    },
+    "view": {
+      "name": "turlari"
+    },
+    "up_three_half_tone": {
+      "name": "3,5 t gacha."
+    },
+    "three_twelve_tone ": {
+      "name": "3,5 dan-12 t."
+    },
+    "from_twelve_tone": {
+      "name": "12t dan."
+    },
+    "up_eight_tone": {
+      "name": "Kichik klass (8 tonnagacha)"
+    },
+    "up_fivte_tone": {
+      "name": "O'rta klass (50 tonnagacha)"
+    },
+    "more_fivte_tone": {
+      "name": "Og'ir klass (50 tonnadan yuqori)"
+    },
+    "up_two_tone": {
+      "name": "2 tonnagacha"
+    },
+    "up_two_from_four_tone": {
+      "name": "2 dan 4 tonnagacha"
+    },
+    "up_four_from_ten_tone": {
+      "name": "4 dan 10 tonnagacha"
+    },
+    "more_ten_tone": {
+      "name": "10 tonnadan ortiq"
     }
   },
   "parts": {
@@ -726,6 +858,18 @@
     }
   },
   "estate": {
+    "floor": {
+      "name": "Qavat"
+    },
+    "number_of_floors": {
+      "name": "Uyning qavatligi"
+    },
+    "infrastructure": {
+      "name": "Infratuzilma"
+    },
+    "amenities": {
+      "name": "Vaziyat"
+    },
     "payment": {
       "name": "Oldindan to'lov"
     },
@@ -1055,6 +1199,24 @@
     },
     "autonomous": {
       "name": "Avtonom"
+    },
+    "cargo_passenger": {
+      "name": "Yuk va yengil"
+    },
+    "three_or_more ": {
+      "name": "3 va undan ko'p"
+    },
+    "separate": {
+      "name": "Alohida"
+    },
+    "combined": {
+      "name": "Birlashgan"
+    },
+    "outside": {
+      "name": "Ko'chada"
+    },
+    "summed": {
+      "name": "Xulosa qilingan"
     }
   },
   "job": {
@@ -2044,6 +2206,12 @@
     },
     "job_type": {
       "name": "Ish turi"
+    },
+    "experience": {
+      "name": "Tajriba"
+    },
+    "free_cshedule": {
+      "name": "erkin jadval"
     }
   },
   "service": {
@@ -2082,6 +2250,135 @@
     },
     "at_home": {
       "name": "Uyda"
+    },
+    "specialization": {
+      "name": "Mutaxassisligi"
+    },
+    "design_construction_apartments": {
+      "name": "Kvartiralarga dizayn va proekt"
+    },
+    "designing_house": {
+      "name": "Uy dizayni va proekt"
+    },
+    "designing_office": {
+      "name": "Ofisni dizayn va proekt qilish "
+    },
+    "interior_design": {
+      "name": "Interer dizayn va proekt qilish"
+    },
+    "kitchen_design": {
+      "name": "Oshxona dizayni"
+    },
+    "landscape_design": {
+      "name": "Landshaft dizayn"
+    },
+    "other": {
+      "name": "Boshqa"
+    },
+    "renovation_apartments": {
+      "name": "Kvartira va uylarni ta'mirlash"
+    },
+    "major_repairs_houses": {
+      "name": "Uylarni kapital ta'mirlash"
+    },
+    "cosmetic_repair": {
+      "name": "Kosmetik ta'mirlash"
+    },
+    "rest_room_repair": {
+      "name": "hojatxonani ta'mirlash "
+    },
+    "kitchen_repair": {
+      "name": "Oshxonani ta'mirlash"
+    },
+    "repair_bathroom": {
+      "name": "Hammomni ta'mirlash"
+    },
+    "finishing_apartments": {
+      "name": "kvartiralar va uylarni bezatish"
+    },
+    "drilling_wells": {
+      "name": "Quduq burg'ulash"
+    },
+    "drilling_water_wells": {
+      "name": "Suv quduqlarini burg'ulash"
+    },
+    "insulation_works": {
+      "name": "Izolyatsiya ishlari"
+    },
+    "waterproofing_works": {
+      "name": "Gidroizolyatsiya ishlari"
+    },
+    "installation_vapor": {
+      "name": "Bug 'to'sig'ini o'rnatish"
+    },
+    "thermal_insulation": {
+      "name": "Issiqlik izolyatsiyasini o'rnatish"
+    },
+    "construction_houses": {
+      "name": "Uylar qurilishi"
+    },
+    "construction_cottages": {
+      "name": "Kottedjlar qurilishi"
+    },
+    "well_cleaning": {
+      "name": "skvajina tozalash"
+    },
+    "noise_insulation": {
+      "name": "Binolarni shumoizolyatsiyasi"
+    },
+    "awnings": {
+      "name": "Ayvon va tentlar"
+    },
+    "removing_tiles": {
+      "name": "Plitkalarni demontaj qilish"
+    },
+    "facade_cladding": {
+      "name": "Fasad qoplamasi"
+    },
+    "paving_stones": {
+      "name": "Yo'l toshlarini yotqizish"
+    },
+    "blacksmith_services": {
+      "name": "Temirchi xizmatlari"
+    },
+    "carpenter_services": {
+      "name": "Duradgorlik xizmatlari"
+    },
+    "stolar_services": {
+      "name": "stolyar xizmatlari"
+    },
+    "locksmith_services": {
+      "name": "Chilangar xizmatlari"
+    },
+    "turner_services": {
+      "name": "tokar xizmatlari"
+    },
+    "other_services": {
+      "name": "boshqa xizmatlar"
+    },
+    "furniture_repair": {
+      "name": "Mebelni ta'mirlash"
+    },
+    "furniture_upholstery": {
+      "name": "Mebel o'ran"
+    },
+    "furniture_assembly": {
+      "name": "Mebelni sborka va demontaj qilish"
+    },
+    "furniture_restoration": {
+      "name": "Mebelni qayta tiklash"
+    },
+    "home_visit": {
+      "name": "Uyga tashrif"
+    },
+    "place": {
+      "name": "xizmat ko'rsatish joy"
+    },
+    "in_office": {
+      "name": "Ofisda"
+    },
+    "in_workshops": {
+      "name": "Ustaxonada"
     }
   },
   "goods": {
@@ -3386,6 +3683,282 @@
     },
     "other": {
       "name": "Boshqalar"
+    },
+    "condition": {
+      "name": "Holat"
+    },
+    "sub_type": {
+      "name": "Turi"
+    },
+    "brand": {
+      "name": "Brend"
+    },
+    "new": {
+      "name": "Yangi"
+    },
+    "used": {
+      "name": "Ishlatilgan"
+    },
+    "size": {
+      "name": "O'lchami"
+    },
+    "season": {
+      "name": "Mavsum"
+    },
+    "summer": {
+      "name": "Yoz"
+    },
+    "winter": {
+      "name": "Qish"
+    },
+    "demi_season": {
+      "name": "Mavsumiy mavsum"
+    },
+    "ws_body": {
+      "name": "Body"
+    },
+    "length": {
+      "name": "Uzunligi"
+    },
+    "maxi": {
+      "name": "Maxi"
+    },
+    "midi": {
+      "name": "Midi"
+    },
+    "mini": {
+      "name": "Mini"
+    },
+    "sweaters": {
+      "name": "Sviterlar"
+    },
+    "outwear": {
+      "name": "Tashqi kiyim"
+    },
+    "dresses_skirts": {
+      "name": "Liboslar va yubkalar"
+    },
+    "pants_shorts": {
+      "name": "Ishton va shortilar"
+    },
+    "tops": {
+      "name": "Toplar"
+    },
+    "shorts": {
+      "name": "Short"
+    },
+    "costumes": {
+      "name": "Liboslar"
+    },
+    "outerwear": {
+      "name": "Tashqi kiyim"
+    },
+    "boy": {
+      "name": "Bola"
+    },
+    "girl": {
+      "name": "Qiz"
+    },
+    "kid_body": {
+      "name": "Bolalar body"
+    },
+    "dresses": {
+      "name": "Liboslar"
+    },
+    "skirts": {
+      "name": "Etaklari"
+    },
+    "group": {
+      "name": "Guruh"
+    },
+    "mount": {
+      "name": "Qisqich"
+    },
+    "properties": {
+      "name": "Xususiyatlari"
+    },
+    "isofix": {
+      "name": "Isofix"
+    },
+    "latch": {
+      "name": "Latch"
+    },
+    "car_seat_belts": {
+      "name": "Avtomobil kamarlari"
+    },
+    "up_ten_kg": {
+      "name": "0 (10 kg gacha)"
+    },
+    "up_thirteen_kg": {
+      "name": "0 + (13 kg gacha)"
+    },
+    "up_eighteen_kg": {
+      "name": "0/1 (18 kg gacha)"
+    },
+    "up_twenty_five_kg": {
+      "name": "0 / 1 / 2 (25 kg gacha)"
+    },
+    "up_thirty_six__kg": {
+      "name": "0/1/2/3 (36 kg gacha)"
+    },
+    "nine_eighteen_kg": {
+      "name": "1 (9-18 kg)"
+    },
+    "nine_twenty_five_kg": {
+      "name": "1/2 (9-25 kg)"
+    },
+    "nine_thirty_six_kg": {
+      "name": "1/2/3 (9-36 kg)"
+    },
+    "fifteen_thirty_six_kg": {
+      "name": "2/3 (15-36 kg)"
+    },
+    "twenty_two_twenty_six_kg": {
+      "name": "3 (22-26 kg)"
+    },
+    "carrying_handle": {
+      "name": "Yuk ko'tarish dastagi"
+    },
+    "rotary_mechanism": {
+      "name": "Qaytish mexanizmi"
+    },
+    "automatic_belt_tension": {
+      "name": "Avtomatik kamar tarangligi"
+    },
+    "belt_tension_lock": {
+      "name": "Kamar qisish qulfi"
+    },
+    "the_system_of_the_way_to_the_floor": {
+      "name": "Zaminni qo'llab-quvvatlash tizimi"
+    },
+    "five_point_belts": {
+      "name": "Besh nuqtali kamar"
+    },
+    "removable_upholstery": {
+      "name": "olinadigan obivka"
+    },
+    "childrens_trampolines": {
+      "name": "Bolalar uchun batuttlar"
+    },
+    "up_one_year": {
+      "name": "1 yilgacha"
+    },
+    "up_two_year": {
+      "name": "2 yilgacha"
+    },
+    "up_three_year": {
+      "name": "3 yilgacha"
+    },
+    "up_four_year": {
+      "name": "4 yilgacha"
+    },
+    "up_five_year": {
+      "name": "5 yilgacha"
+    },
+    "wheels": {
+      "name": "G'ildirak turi"
+    },
+    "regulation": {
+      "name": "Regulirovkalar"
+    },
+    "number_of_seats": {
+      "name": "joylar soni"
+    },
+    "pneumatic": {
+      "name": "Pnevmatik"
+    },
+    "plastic": {
+      "name": "Plastik"
+    },
+    "gel": {
+      "name": "Jel"
+    },
+    "rubber": {
+      "name": "Rezinalik"
+    },
+    "coupling": {
+      "name": "Mufta"
+    },
+    "bag": {
+      "name": "sumka"
+    },
+    "raincoat": {
+      "name": "Yomg'ir paltosi"
+    },
+    "mattress": {
+      "name": "To'shak"
+    },
+    "shopping_cart": {
+      "name": "xaridlar uchun korzinka"
+    },
+    "envelope": {
+      "name": "Konvert"
+    },
+    "mosquito_netting": {
+      "name": "chivin tarmog'i"
+    },
+    "foot_cover": {
+      "name": "Oyoq chehol"
+    },
+    "belts": {
+      "name": "Kamarlar"
+    },
+    "bumper": {
+      "name": "Bamper"
+    },
+    "sun_visor": {
+      "name": "Quyosh soyasi"
+    },
+    "for_running": {
+      "name": "Yugurish uchun"
+    },
+    "handle": {
+      "name": "Ruchka"
+    },
+    "tilt_backrest": {
+      "name": "Orqa suyanchiqning egilishi"
+    },
+    "wheel_locking": {
+      "name": "Qulflangan g'ildiraklar"
+    },
+    "for_one": {
+      "name": "Bittasi uchun"
+    },
+    "for_twins": {
+      "name": "Egizaklar uchun"
+    },
+    "for_triplets": {
+      "name": "Uch egizak uchun"
+    },
+    "for_weather_conditions": {
+      "name": "Tengdoshlar uchun"
+    },
+    "female": {
+      "name": "Ayollar uchun"
+    },
+    "male": {
+      "name": "Erkaklar uchun"
+    },
+    "eyelids_around_eyes": {
+      "name": "ko'zlar atrofida"
+    },
+    "lips": {
+      "name": "Dudoqlar"
+    },
+    "face": {
+      "name": "Yuz"
+    },
+    "legs": {
+      "name": "Oyoqlar"
+    },
+    "hands": {
+      "name": "Qo'llar"
+    },
+    "for_body": {
+      "name": "Tana"
+    },
+    "neck_decollete_area": {
+      "name": "Bo'yin va dekolte"
     }
   },
   "home": {
@@ -4063,6 +4636,18 @@
     },
     "electric_and_chainsaws": {
       "name": "Elektr va benzopilalar"
+    },
+    "condition": {
+      "name": "Holat"
+    },
+    "new": {
+      "name": "Yangi"
+    },
+    "used": {
+      "name": "Ishlatilgan"
+    },
+    "other": {
+      "name": "Boshqa"
     }
   },
   "electronics": {
@@ -5262,6 +5847,432 @@
     },
     "utilities_drivers": {
       "name": "Utilitalar, drayverlar"
+    },
+    "manufacturer": {
+      "name": "Ishlab chiqaruvchi"
+    },
+    "os": {
+      "name": "Operatsion tizim"
+    },
+    "memory": {
+      "name": "Ichki xotira"
+    },
+    "512mb_or_less": {
+      "name": "512 MB yoki undan kam"
+    },
+    "function": {
+      "name": "Vazifalar"
+    },
+    "sub_type": {
+      "name": "Turi"
+    },
+    "display": {
+      "name": "Displey turi"
+    },
+    "diagonal": {
+      "name": "Ekran diagonali"
+    },
+    "device": {
+      "name": "Qurilma"
+    },
+    "for_smartphones": {
+      "name": "Smartfonlar uchun"
+    },
+    "for_tabs": {
+      "name": "Planshetlar uchun "
+    },
+    "for_phones": {
+      "name": "Telefonlar uchun"
+    },
+    "for_smart_watches": {
+      "name": "Aqlli soatlar uchun"
+    },
+    "microphones": {
+      "name": "Mikrofonlar"
+    },
+    "cameras": {
+      "name": "Kameralar"
+    },
+    "capacity": {
+      "name": "Hajima"
+    },
+    "to_3000_mah": {
+      "name": "3000 mA /gacha"
+    },
+    "from_3000_to_4990_mah": {
+      "name": "3000 dan 4990 mA /gacha"
+    },
+    "from_5000_to_9990_mah": {
+      "name": "5000 dan 9990 mA /gacha"
+    },
+    "from_10000_to_14990_mah": {
+      "name": "10000 dan 14990 mAh gacha"
+    },
+    "from_15000_to_19990_mah": {
+      "name": "15000 dan 19990 mA /gacha"
+    },
+    "to_20000_mah_more": {
+      "name": "20,000 mA /yoki undan ko'p"
+    },
+    "port": {
+      "name": "USB-portlar soni"
+    },
+    "one": {
+      "name": "1"
+    },
+    "two": {
+      "name": "2"
+    },
+    "three_more": {
+      "name": "3 va undan ko'p"
+    },
+    "connector": {
+      "name": "Ulagich"
+    },
+    "apple_pin": {
+      "name": "Apple (30pin)"
+    },
+    "apple_lightning": {
+      "name": "Apple (lightning)"
+    },
+    "micro_usb": {
+      "name": "Micro USB"
+    },
+    "usb_type_c": {
+      "name": "USB Type-C"
+    },
+    "usb": {
+      "name": "USB"
+    },
+    "old_connectors": {
+      "name": "Eski ulagichlar"
+    },
+    "cable": {
+      "name": "Kabelning mavjudligi"
+    },
+    "without_cable": {
+      "name": "Kabelsiz"
+    },
+    "cable_included": {
+      "name": "Kabel kiritilgan"
+    },
+    "built_cable": {
+      "name": "O'rnatilgan simi"
+    },
+    "for_taps": {
+      "name": "Planshetlar uchun"
+    },
+    "material": {
+      "name": "Material"
+    },
+    "metal": {
+      "name": "Metall"
+    },
+    "wood": {
+      "name": "Yog'och"
+    },
+    "synthec_leather": {
+      "name": "Sun'iy teri"
+    },
+    "natural_leather": {
+      "name": "teri"
+    },
+    "plasc_polyurethane": {
+      "name": "Plastik, poliuretan,rezina"
+    },
+    "silicone": {
+      "name": "Silikon"
+    },
+    "cloth": {
+      "name": "To'qimachilik"
+    },
+    "lenses": {
+      "name": "Linzalar"
+    },
+    "category": {
+      "name": "Категория"
+    },
+    "compact": {
+      "name": "Yilni"
+    },
+    "mirrored": {
+      "name": "Oynali"
+    },
+    "wirrorless_with_replaceable_optics": {
+      "name": "Ko'zgusiz almashtiriladigan linzalar"
+    },
+    "instant_prinng": {
+      "name": "Tez bosib chiqarish"
+    },
+    "quality": {
+      "name": "Yozib olish sifati"
+    },
+    "less_576": {
+      "name": "576p va undan past"
+    },
+    "phd_720": {
+      "name": "720p HD"
+    },
+    "full_hd_1080": {
+      "name": "1080p Full HD"
+    },
+    "kqhd": {
+      "name": "2.5K QHD"
+    },
+    "uhd_4k": {
+      "name": "4K UHD"
+    },
+    "more_8k": {
+      "name": "8K va undan ko'p"
+    },
+    "stabilizer": {
+      "name": "Tasvir stabilizatori"
+    },
+    "optical": {
+      "name": "Optik"
+    },
+    "format": {
+      "name": "Media formati"
+    },
+    "hard_disk_flash": {
+      "name": "Qattiq disk, Flash"
+    },
+    "casseete": {
+      "name": "Kasseta"
+    },
+    "opcal_disk": {
+      "name": "Optik disk"
+    },
+    "zoom": {
+      "name": "Zoom"
+    },
+    "no": {
+      "name": "Yoq"
+    },
+    "less_5x": {
+      "name": "5x dan kam"
+    },
+    "from_five_to_nine": {
+      "name": "5 dan 9,9 gacha "
+    },
+    "from_ten_to_nineteen": {
+      "name": "10 dan 19,9 baravargacha"
+    },
+    "from_twenty_to_twentynine": {
+      "name": "20 dan 29.9x gacha"
+    },
+    "from_thirty_to_thirtynine": {
+      "name": "30 dan 39,9 gacha"
+    },
+    "from_forty_to_fortynine": {
+      "name": "40 dan 49.9x gacha"
+    },
+    "fivty_more": {
+      "name": "50x va undan ko'p"
+    },
+    "shooting_360_degrees": {
+      "name": "360 daraja tortishish"
+    },
+    "connection": {
+      "name": "Ulanish"
+    },
+    "bayonet": {
+      "name": "Bayonet turi"
+    },
+    "head": {
+      "name": "Qaytib bosh"
+    },
+    "play": {
+      "name": ""
+    },
+    "less_7": {
+      "name": ""
+    },
+    "7_1_to_9": {
+      "name": ""
+    },
+    "9_1_to_12": {
+      "name": ""
+    },
+    "12_1_to_15": {
+      "name": ""
+    },
+    "15_or_more": {
+      "name": ""
+    },
+    "screen": {
+      "name": ""
+    },
+    "up_to15": {
+      "name": ""
+    },
+    "15_to19_9": {
+      "name": ""
+    },
+    "20to24_9": {
+      "name": ""
+    },
+    "25to29_9": {
+      "name": ""
+    },
+    "30to34_9": {
+      "name": ""
+    },
+    "35to39_9": {
+      "name": ""
+    },
+    "40to44_9": {
+      "name": ""
+    },
+    "45to49_9": {
+      "name": ""
+    },
+    "50to54_9": {
+      "name": ""
+    },
+    "55to59_9": {
+      "name": ""
+    },
+    "60_or_more": {
+      "name": ""
+    },
+    "yes": {
+      "name": ""
+    },
+    "acoustics": {
+      "name": ""
+    },
+    "monitor3d": {
+      "name": ""
+    },
+    "area": {
+      "name": ""
+    },
+    "outdoor": {
+      "name": ""
+    },
+    "kitchen_appliances": {
+      "name": ""
+    },
+    "jewelry": {
+      "name": ""
+    },
+    "burner": {
+      "name": ""
+    },
+    "gaseosus": {
+      "name": ""
+    },
+    "induktion": {
+      "name": ""
+    },
+    "electrical": {
+      "name": ""
+    },
+    "installation": {
+      "name": ""
+    },
+    "embedded": {
+      "name": ""
+    },
+    "holding": {
+      "name": ""
+    },
+    "Set_twelve_more": {
+      "name": ""
+    },
+    "set_nine_eleven": {
+      "name": ""
+    },
+    "to_six_set": {
+      "name": ""
+    },
+    "condition": {
+      "name": ""
+    },
+    "New": {
+      "name": ""
+    },
+    "Used": {
+      "name": ""
+    },
+    "cleaning": {
+      "name": ""
+    },
+    "dry": {
+      "name": ""
+    },
+    "wet": {
+      "name": ""
+    },
+    "dry_wet": {
+      "name": ""
+    },
+    "leak_protection": {
+      "name": ""
+    },
+    "spead": {
+      "name": ""
+    },
+    "to_700_rpm": {
+      "name": ""
+    },
+    "rpm_700_800": {
+      "name": ""
+    },
+    "rpm_800_900": {
+      "name": ""
+    },
+    "rpm_900_1100": {
+      "name": ""
+    },
+    "rpm_1100_1200": {
+      "name": ""
+    },
+    "to_four_kg": {
+      "name": ""
+    },
+    "to_five_kg": {
+      "name": ""
+    },
+    "to_six_kg": {
+      "name": ""
+    },
+    "to_seven_kg": {
+      "name": ""
+    },
+    "from_seven_kg": {
+      "name": ""
+    },
+    "gaming": {
+      "name": ""
+    },
+    "video_card": {
+      "name": ""
+    },
+    "discrete": {
+      "name": ""
+    },
+    "Less_14": {
+      "name": ""
+    },
+    "one_twings": {
+      "name": ""
+    },
+    "two_twings": {
+      "name": ""
+    },
+    "four_twings": {
+      "name": ""
+    },
+    "for_computers": {
+      "name": ""
+    },
+    "for_laptops": {
+      "name": ""
+    },
+    "platform": {
+      "name": ""
     }
   },
   "hobbies": {
@@ -5750,6 +6761,117 @@
     },
     "shakers_bottles": {
       "name": "Sheykerlar, butilkalar"
+    },
+    "type": {
+      "name": ""
+    },
+    "other": {
+      "name": ""
+    },
+    "condition": {
+      "name": ""
+    },
+    "new": {
+      "name": ""
+    },
+    "used": {
+      "name": ""
+    },
+    "subject": {
+      "name": ""
+    },
+    "business_literature": {
+      "name": ""
+    },
+    "home_and_family": {
+      "name": ""
+    },
+    "art_culture": {
+      "name": ""
+    },
+    "computer_literature": {
+      "name": ""
+    },
+    "cooking_recipes": {
+      "name": ""
+    },
+    "medicine_health": {
+      "name": ""
+    },
+    "science_technology": {
+      "name": ""
+    },
+    "poetry": {
+      "name": ""
+    },
+    "nature_animals": {
+      "name": ""
+    },
+    "psychology": {
+      "name": ""
+    },
+    "journalism": {
+      "name": ""
+    },
+    "travel_photos": {
+      "name": ""
+    },
+    "religion_esotericism": {
+      "name": ""
+    },
+    "garden_and_vegetable_garden": {
+      "name": ""
+    },
+    "sports_fitness": {
+      "name": ""
+    },
+    "reference_books_encyclopedias": {
+      "name": ""
+    },
+    "educaonal_literature": {
+      "name": ""
+    },
+    "hobbies_needlework_creavity": {
+      "name": ""
+    },
+    "fiction": {
+      "name": ""
+    },
+    "vinyl_records": {
+      "name": ""
+    },
+    "kids": {
+      "name": ""
+    },
+    "yes": {
+      "name": ""
+    },
+    "no": {
+      "name": ""
+    },
+    "masks_glasses": {
+      "name": ""
+    },
+    "boxing_maral_arts": {
+      "name": ""
+    },
+    "cycling": {
+      "name": ""
+    },
+    "rugby_handball": {
+      "name": ""
+    },
+    "roller_skates_scooters": {
+      "name": ""
+    },
+    "sub_type": {
+      "name": ""
+    },
+    "waterpolo": {
+      "name": ""
+    },
+    "fieldhockey": {
+      "name": ""
     }
   },
   "animal": {
@@ -6214,6 +7336,18 @@
     },
     "other": {
       "name": "Boshqalar"
+    },
+    "breed": {
+      "name": ""
+    },
+    "condition": {
+      "name": ""
+    },
+    "new": {
+      "name": ""
+    },
+    "used": {
+      "name": ""
     }
   },
   "bayonet": "Bayonet",
@@ -6240,14 +7374,9 @@
   "view": "Turi",
   "overview": "Yoritkichlar",
   "headlight": "Chiroqlar",
-  "anti_theft": "O'g'rilikka qarshi tizim",
   "assistance": "Yordamchi",
-  "parking": "Parkovka",
   "driving_assistance_safety_title": "Haydashda yordam va xavsizlik",
   "upholstery": "Qoplamasi",
-  "adjustable_seats": "Sozlanuvchi o'rindiqlar",
-  "seat_heating": "O'rindiqlarni isitish",
-  "power_windows": "Elektr oyna ko'targichlar",
   "climate": "Iqlim",
   "send_again": "Parolni qayta yuborish",
   "enter_sms": "Qabul qilingan ko'dni kiriting",
@@ -6278,12 +7407,10 @@
   "comfort": "Qoshimchalar",
   "car_climate": "Iqlimi",
   "upholestery": "Salonni qoplash",
-  "steering": "Rulni boshqarish",
   "seats": "Joylar soni",
   "airbags": "Xavfsizlik yostiqchalari",
   "visibility": "Ko'rinish qismlar",
   "multimedia": "Multimedia",
-  "assistant": "Haydash paytida yordam",
   "exterior": "Eksteryer",
   "headlights": "Faralar",
   "transmission": "Uzatish qutisi",
@@ -6372,19 +7499,14 @@
   "general_area": "Umumiy maydoni м²",
   "living_area:": "Yashash maydoni м²",
   "kitchen_area": "Oshxona maydoni м²",
-  "number_of_floors:": "Uyning qavatligi",
-  "floor": "Qavat",
-  "floors": "Qavatligi",
   "parking_spaces": "Mashina joylari",
   "posted": "E'lon egasi",
   "ceiling_height": "Shift balandligi metrda",
   "number_of_bedrooms": "Yotoq xonalar soni",
-  "engine_type": "dvigatel turi",
+  "engine_type": "Dvigatel turi",
   "engine_capacity": "Dvigatel hajmi litrda",
   "utilities": "Kommunal hisoblar narx ichiga kiritilgan",
   "with_pledge": "Garov bilan",
-  "infrastructure": "Infratuzilma",
-  "amenities": "Vaziyat",
   "location": "Joylashuvi",
   "heating": "Uy isitish",
   "lift": "Lift",

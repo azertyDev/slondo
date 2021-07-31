@@ -974,7 +974,7 @@ export const categories_list: CategoryType[] = [
             },
             {
                 id: 2,
-                name: 'master_hour',
+                name: 'master_for_an_hour',
                 ru_name: 'Мастер на час',
                 type: [
                     {

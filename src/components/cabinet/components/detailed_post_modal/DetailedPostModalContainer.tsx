@@ -177,6 +177,7 @@ export const DetailedPostModalContainer: FC<DetailedPostViewPropsType> = (props)
             />
             {!!userForRating && (
                 <RatingModal
+                    postId={post.id}
                     open={ratingOpen}
                     user={userForRating}
                     handleCloseRating={handleCloseRating}

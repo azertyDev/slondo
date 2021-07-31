@@ -1,5 +1,5 @@
 import {object, string, array, lazy} from 'yup';
-import {fieldRequiredTxt} from '@src/common_data/fields_keys';
+import {fieldRequiredTxt, fractionalFields} from '@src/common_data/fields_keys';
 import {isRequired} from '@root/src/helpers';
 
 export const paramsFormSchema = lazy(
@@ -21,12 +21,19 @@ export const paramsFormSchema = lazy(
                             .required(fieldRequiredTxt)
                             .test(
                                 '',
-                                'value not must be less than 0.8',
+                                'notMustBeLess0.8',
                                 value => +value >= 0.8
                             );
                     } else {
                         acc[key] = string().required(fieldRequiredTxt);
                     }
+                } else if (fractionalFields.some(f => f === key)) {
+                    acc[key] = string()
+                        .test(
+                            '',
+                            'notMustBeLessZero',
+                            value => +value > 0
+                        );
                 }
                 return acc;
             }, {})

@@ -37,7 +37,7 @@ export const Location: FC<LocationProps> = ({handleSelectLocation, userLocation}
         ? `${t(`${region.name}.${city.name}`)}, ${t(`${region.name}.name`)}`
         : region ? `${t(`${region.name}.name`)}` : '';
 
-    const prevLocation = !!region ? `${t(`${city?.name ?? `${region.name}.name`}`)}` : t(`allUzb`);
+    const prevLocation = !!region ? `${t(`${city?.name ? `${region.name}.${city.name}` : `${region.name}.name`}`)}` : t(`allUzb`);
 
     const locations = regions.find(reg => reg.id === region?.id)?.cities ?? regions;
 

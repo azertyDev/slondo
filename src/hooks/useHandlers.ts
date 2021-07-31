@@ -30,14 +30,15 @@ export const useHandlers = (values: any, setValues: Dispatch<SetStateAction<any>
         },
         handleOptionCheckbox: (name, item) => {
             if (values[name]) {
-                const isExst = values[name].some(({id}) => id === item.id);
-                if (isExst) {
-                    values[name].forEach(({id}, i) => id === item.id && values[name].splice(i, 1));
+                const isExist = values[name].some(id => id === item.id);
+
+                if (isExist) {
+                    values[name].forEach((id, i) => id === item.id && values[name].splice(i, 1));
                 } else {
-                    values[name].push(item);
+                    values[name].push(item.id);
                 }
             } else {
-                values[name] = [item];
+                values[name] = [item.id];
             }
             setValues({...values});
         },

@@ -66,7 +66,7 @@ export const ParkingLotsBoxes: FC<CommonParamsPropsType> = (props) => {
                     submitTxt='appearance'
                     icon={<ParametersIcon/>}
                     isPreview={isPreview}
-                    title={t('parameters')}
+                    title={t('post:parameters')}
                     open={currentFormIndex === 3}
                     isEditable={currentFormIndex < 3}
                     handleEdit={handleFormOpen(3)}
@@ -75,7 +75,11 @@ export const ParkingLotsBoxes: FC<CommonParamsPropsType> = (props) => {
                         <PostTitle isPreview={isPreview} title={values.title} formik={formik} t={t}/>
                     </Grid>
                     {isPreview
-                        ? <PreviewValues t={t} values={values}/>
+                        ? <PreviewValues
+                            values={values}
+                            filters={filters}
+                            transKey={t(`${categoryName}.`)}
+                        />
                         : <>
                             <Grid item container spacing={2}>
                                 <Grid item container xs={12} sm={4} alignItems='center'>
@@ -92,9 +96,9 @@ export const ParkingLotsBoxes: FC<CommonParamsPropsType> = (props) => {
                                     <FormikField
                                         t={t}
                                         name='area'
-                                        labelText='area'
                                         value={values.area ?? ''}
                                         onChange={handleNumericInput}
+                                        labelText={t('estate.area.name')}
                                         errorMsg={getErrorMsg(errors.area, touched.area, t)}
                                     />
                                 </Grid>
@@ -102,9 +106,9 @@ export const ParkingLotsBoxes: FC<CommonParamsPropsType> = (props) => {
                                     <FormikField
                                         t={t}
                                         name='parking_spaces'
-                                        labelText='parking_spaces'
                                         value={values.parking_spaces ?? ''}
                                         onChange={handleNumericInput}
+                                        labelText={t('estate.parking_spaces.name')}
                                         errorMsg={getErrorMsg(errors.parking_spaces, touched.parking_spaces, t)}
                                     />
                                 </Grid>

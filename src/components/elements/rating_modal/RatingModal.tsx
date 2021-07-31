@@ -11,11 +11,11 @@ import {userAPI} from '@src/api/api';
 import {Rating} from '@src/components/elements/rating/Rating';
 import {useTranslation} from 'next-i18next';
 import {ErrorCtx} from "@src/context";
-import {initCardData} from "@src/common_data/common";
 import {TEXT_LIMIT} from "@src/constants";
 import {useStyles} from './useStyles';
 
 type RatingModalPropsType = {
+    postId: number,
     user,
     open,
     handleCloseRating
@@ -23,6 +23,7 @@ type RatingModalPropsType = {
 
 export const RatingModal: FC<RatingModalPropsType> = (props) => {
     const {
+        postId,
         user,
         open,
         handleCloseRating
@@ -41,6 +42,7 @@ export const RatingModal: FC<RatingModalPropsType> = (props) => {
         try {
             const {rating, comment} = values;
             const params: any = {
+                ads_id: postId,
                 rating,
                 receiver_id: user.id
             };

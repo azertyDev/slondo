@@ -1,5 +1,14 @@
 export const fieldRequiredTxt = 'fieldIsRequired';
 
+export const noTranslatableFields = [
+    'mileage',
+    'manufacturer',
+    'model',
+    'year',
+    'brand',
+    'ceiling_height'
+];
+
 export const requireFields = [
     'title',
     'price',

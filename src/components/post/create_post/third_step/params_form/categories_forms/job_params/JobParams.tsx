@@ -82,7 +82,11 @@ export const JobParams: FC<CommonParamsPropsType> = (props) => {
                 </Grid>
                 <Grid item container spacing={1}>
                     {isPreview
-                        ? <PreviewValues t={t} values={values} />
+                        ? <PreviewValues
+                            values={values}
+                            filters={filters}
+                            transKey={t(`${categoryName}.`)}
+                        />
                         : <>
                             {hasPosition && (
                                 <Grid
@@ -124,11 +128,11 @@ export const JobParams: FC<CommonParamsPropsType> = (props) => {
                             >
                                 <DropDownSelect
                                     name='experience'
-                                    labelTxt={`${categoryName}.${isVacancy ? 'require_experience' : 'experience'}.name`}
                                     values={values}
                                     items={filters.experience}
                                     transKey={`${categoryName}.`}
                                     handleSelect={handleSelect}
+                                    labelTxt={`${categoryName}.${isVacancy ? 'require_experience' : 'experience'}.name`}
                                 />
                             </Grid>
                             <Grid

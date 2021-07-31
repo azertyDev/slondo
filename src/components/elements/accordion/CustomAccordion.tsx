@@ -74,8 +74,8 @@ export const CustomAccordion: FC<AccordionComponentPropsType> = (props) => {
                         {!isPreview && (
                             <Grid item xs={12} container>
                                 <CustomButton
-                                    disabled={isFetch}
                                     type='submit'
+                                    disabled={isFetch}
                                     className='nav-button'
                                 >
                                     <Typography variant='subtitle1' component='p'>

@@ -1,5 +1,6 @@
 import {FC, useEffect} from 'react';
 import {useFormik} from 'formik';
+import {unstable_batchedUpdates} from "react-dom";
 import {Box, Grid, Typography} from '@material-ui/core';
 import {UPLOAD_FILES_LIMIT} from '@src/constants';
 import {PreviewPhotos} from './preview_photos/PreviewPhotos';
@@ -45,8 +46,10 @@ export const AppearanceForm: FC<AppearanceFormPropsType> = (props) => {
             photos: files.filter(f => !!f).map(f => f.id ?? f.file)
         };
         if (color) appearance.color_id = color.id;
-        handleSubmit({appearance});
-        handleNextFormOpen();
+        unstable_batchedUpdates(() => {
+            handleSubmit({appearance});
+            handleNextFormOpen();
+        });
     };
 
     const initColor = () => {
@@ -223,7 +226,7 @@ export const AppearanceForm: FC<AppearanceFormPropsType> = (props) => {
                                         {errors.color
                                         && touched.color
                                         && <span className='error-text'>
-                                             {t(errors.color as string)}
+                                             {t(`errors:${errors.color}`)}
                                          </span>}
                                     </Typography>
                                     <div className='color-select'>
@@ -238,7 +241,7 @@ export const AppearanceForm: FC<AppearanceFormPropsType> = (props) => {
                                                     style={{backgroundColor: clr.hex_color_code}}
                                                 />
                                                 <Typography variant='subtitle2'>
-                                                    {t(clr.name)}
+                                                    {t(`${categoryName}.${clr.name}.name`)}
                                                 </Typography>
                                             </div>
                                         )}
@@ -284,8 +287,8 @@ export const AppearanceForm: FC<AppearanceFormPropsType> = (props) => {
                                     fontSize='subtitle2.fontSize'
                                     mt={2}
                                 >
-                                    Вы можете загрузить до 8 фотографий в формате JPEG или PNG. Размер одной фотографии
-                                    не должен превышать - 15 Mb
+                                    Вы можете загрузить фотографий в формате JPEG или PNG. Размер одной фотографии
+                                    не должно превышать - 15 Mb
                                 </Box>
                             </Box>
                         </>}

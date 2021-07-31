@@ -28,7 +28,7 @@ export const useStyles = makeStyles((theme) => ({
             }
         },
         '& button.nav-button': {
-            width: '250px',
+            width: '262px',
             padding: 7,
             background: theme.palette.primary.createAdBtnColor,
             [theme.breakpoints.down('xs')]: {

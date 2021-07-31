@@ -1,7 +1,7 @@
 import {FC} from 'react';
-import {WithT} from 'i18next';
 import {Checkbox, FormControlLabel, Grid, Typography} from '@material-ui/core';
 import {useStyles} from './useStyles';
+import {useTranslation} from "next-i18next";
 
 export type HandleOptionCheckboxType = (name: string, value) => void;
 
@@ -9,21 +9,24 @@ type OptionsSectionPropsType = {
     name?: string,
     column?: boolean,
     isApratment: boolean,
+    transKey: string,
     values,
     options: any[],
     handleOptionCheckbox: HandleOptionCheckboxType
-} & WithT;
+};
 
 export const OptionsSelect: FC<OptionsSectionPropsType> = (props) => {
     const {
-        t,
         name,
         column,
-        isApratment,
         values,
+        transKey,
+        isApratment,
         options = [],
         handleOptionCheckbox
     } = props;
+
+    const {t} = useTranslation('filters');
 
     const onClick = (item) => () => {
         handleOptionCheckbox(name, item);
@@ -39,13 +42,13 @@ export const OptionsSelect: FC<OptionsSectionPropsType> = (props) => {
             {name && (
                 <Typography variant='subtitle1'>
                     <strong>
-                        {t(`filters:${name}`)}
+                        {t(`${transKey}${name}.name`)}
                     </strong>
                 </Typography>
             )}
             <Grid item container>
                 {options.map(item => {
-                    const checked = !!values[name]?.some(({id}) => id === item.id);
+                    const checked = !!values[name]?.some((id => id === item.id));
                     return (
                         <Grid
                             item
@@ -65,14 +68,14 @@ export const OptionsSelect: FC<OptionsSectionPropsType> = (props) => {
                                 }
                                 label={
                                     <Typography variant='subtitle1' component='p'>
-                                        {t(`filters:${item.name}`)}
+                                        {t(`${transKey}${item.name}.name`)}
                                     </Typography>
                                 }
                             />
                         </Grid>
                     );
                 })}
-            </Grid>
-        </Grid>
-    );
-};
+                    </Grid>
+                    </Grid>
+                    );
+                    };

@@ -13,8 +13,8 @@ import {PostTitle} from '@src/components/post/create_post/third_step/params_form
 import {CustomFormikProvider} from '@src/components/elements/custom_formik_provider/CustomFormikProvider';
 import {ParametersIcon} from '@src/components/elements/icons';
 import {CustomAccordion} from '@src/components/elements/accordion/CustomAccordion';
-import {useStyles} from './useStyles';
 import {useUrlParams} from "@src/hooks";
+import {useStyles} from './useStyles';
 
 
 export const LandParams: FC<CommonParamsPropsType> = (props) => {
@@ -68,7 +68,7 @@ export const LandParams: FC<CommonParamsPropsType> = (props) => {
                     submitTxt='appearance'
                     icon={<ParametersIcon/>}
                     isPreview={isPreview}
-                    title={t('parameters')}
+                    title={t('post:parameters')}
                     open={currentFormIndex === 3}
                     isEditable={currentFormIndex < 3}
                     handleEdit={handleFormOpen(3)}
@@ -78,7 +78,11 @@ export const LandParams: FC<CommonParamsPropsType> = (props) => {
                     </Grid>
                     <Grid container item spacing={2}>
                         {isPreview
-                            ? <PreviewValues t={t} values={values}/>
+                            ? <PreviewValues
+                                values={values}
+                                filters={filters}
+                                transKey={t(`${categoryName}.`)}
+                            />
                             : <>
                                 <Grid item container xs={12} spacing={2}>
                                     <Grid item xs={12} md={7} lg={4}>
@@ -119,9 +123,9 @@ export const LandParams: FC<CommonParamsPropsType> = (props) => {
                                     <FormikField
                                         t={t}
                                         name='area'
-                                        labelText='area_in_hundred'
                                         value={values.area ?? ''}
                                         onChange={handleNumericInput}
+                                        labelText={t('estate.area_in_hundred.name')}
                                         errorMsg={getErrorMsg(errors.area, touched.area, t)}
                                     />
                                 </Grid>
@@ -176,8 +180,8 @@ export const LandParams: FC<CommonParamsPropsType> = (props) => {
                                         values={values}
                                         onBlur={handleBlur}
                                         transKey={`${categoryName}.`}
-                                        labelTxt={t(`${categoryName}.electricity.name`)}
                                         handleSelect={handleSelect}
+                                        labelTxt={t(`${categoryName}.electricity.name`)}
                                     />
                                 </Grid>
                             </>}

@@ -2,6 +2,7 @@ import {FC} from 'react';
 import {useTranslation} from 'react-i18next';
 import {Checkbox, FormControl, MenuItem, Select, Typography} from '@material-ui/core';
 import {isRequired} from '@src/helpers';
+import {noTranslatableFields} from "@src/common_data/fields_keys";
 import {useStyles} from './useStyles';
 
 type CustomSelectPropsType = {
@@ -35,25 +36,35 @@ export const DropDownSelect: FC<CustomSelectPropsType> = (props) => {
 
     const isCurrency = name === 'currency';
     const optionKey = name === 'duration' ? 'hours' : 'name';
-    const noTranslatable = name === 'manufacturer' || name === 'model' || name === 'year';
+    const noTranslatable = noTranslatableFields.some(f => f === name);
 
     const onChange = ({target}) => {
-        const {name, value} = target;
-        const selectedItem = items.find(item => item.id === +value) || null;
-        multiple ? handleSelect(name, value) : handleSelect(name, selectedItem);
+        let {name, value} = target;
+
+        if (multiple) {
+            handleSelect(name, value);
+        } else {
+            const selectedItem = items.find(item => item.id === +value) || null;
+            handleSelect(name, selectedItem);
+        }
     };
 
     const selectedHandle = (selected: any) => {
-        let value = 'noSelect';
+        let value = t('noSelect');
 
         if (multiple) {
-            value = selected.map(item => t(`${transKey}${item.name}.name`)).join(', ');
+            value = selected.map(item => {
+                const valName = items.find(v => v.id === item).name;
+                return t(`${transKey}${valName}.name`);
+            }).join(', ');
         } else if (selected) {
             const selectedItem = items.find(item => item.id === +selected) || null;
             if (selectedItem !== null) value = selectedItem[optionKey];
         }
 
-        return multiple || noTranslatable ? value : isCurrency ? t(`common:${value}`) : t(`${transKey}${value}.name`);
+        return !selected || multiple || noTranslatable
+            ? value : isCurrency
+                ? t(`common:${value}`) : t(`${transKey}${value}.name`);
     };
 
     const classes = useStyles();
@@ -74,31 +85,35 @@ export const DropDownSelect: FC<CustomSelectPropsType> = (props) => {
                 disabled={!items.length}
                 onChange={onChange}
                 renderValue={selectedHandle}
+                value={multiple ? values[name]?.map(v => v?.id ?? v) || [] : values[name]?.id ?? 0}
                 className={'select-wrapper' + `${errorMsg ? ' error-border' : ''}`}
-                value={multiple ? values[name] || [] : values[name]?.id ?? 0}
             >
                 {!multiple && !isCurrency && (
                     <MenuItem value={0}>
                         {t('filters:noSelect')}
                     </MenuItem>
                 )}
-                {items.map(item => (
-                    <MenuItem
-                        key={item.id}
-                        value={multiple ? item : item.id}
-                    >
-                        {multiple && (
-                            <Checkbox
-                                size="small"
-                                checked={!!values[name]?.some(el => el.id === item.id)}
-                                style={{padding: 0, marginRight: 5}}
-                            />
-                        )}
-                        {t(transKey && !noTranslatable
-                            ? `${transKey}${item[optionKey]}.name`
-                            : isCurrency ? t(`common:${item[optionKey]}`) : item[optionKey])}
-                    </MenuItem>
-                ))}
+                {items.map(item => {
+                    const isSelected = multiple && !!values[name]?.some(v => v === item.id);
+
+                    return (
+                        <MenuItem
+                            key={item.id}
+                            value={item.id}
+                        >
+                            {multiple && (
+                                <Checkbox
+                                    size="small"
+                                    checked={isSelected}
+                                    style={{padding: 0, marginRight: 5}}
+                                />
+                            )}
+                            {t(transKey && !noTranslatable
+                                ? `${transKey}${item[optionKey]}.name`
+                                : isCurrency ? t(`common:${item[optionKey]}`) : item[optionKey])}
+                        </MenuItem>
+                    );
+                })}
             </Select>
             {errorMsg && (
                 <Typography variant="subtitle1" className='error-text'>

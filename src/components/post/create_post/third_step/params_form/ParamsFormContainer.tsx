@@ -3,11 +3,11 @@ import {WithT} from 'i18next';
 import {useTranslation} from 'next-i18next';
 import {RegularParams} from '@src/components/post/create_post/third_step/params_form/categories_forms/regular_params/RegularParams';
 import {CarParams} from '@src/components/post/create_post/third_step/params_form/categories_forms/car_params/CarParams';
-import {prepareParamsData} from '@src/helpers';
 import {EstateParams} from '@src/components/post/create_post/third_step/params_form/categories_forms/estate_params/EstateParams';
 import {TransportParams} from '@src/components/post/create_post/third_step/params_form/categories_forms/transport_params/TransportParams';
 import {JobParams} from '@src/components/post/create_post/third_step/params_form/categories_forms/job_params/JobParams';
 import {ElectronicsParams} from '@src/components/post/create_post/third_step/params_form/categories_forms/electronics_params/ElectronicsParams';
+import {fractionalFields} from "@src/common_data/fields_keys";
 import {useStyles} from './useStyles';
 
 export type CommonParamsPropsType = {
@@ -49,10 +49,31 @@ export const ParamsFormContainer: FC<ParamsFormPropsType> = (props) => {
     const {t} = useTranslation('filters');
     const categoryName = category.name;
 
+    const prepareParamsData = (data) => {
+        return Object.keys(data).reduce<any>((acc, key) => {
+            const isArray = Array.isArray(data[key]);
+            const isStrOrBoolTrue = typeof data[key] === 'string' || (typeof data[key] === 'boolean' && data[key]);
+
+            if (data[key]) {
+                if (isArray) {
+                    if (data[key].length) {
+                        acc[key] = data[key].map(id => ({id}));
+                    }
+                } else if (isStrOrBoolTrue) {
+                    acc[key] = data[key];
+                } else if (typeof data[key] === 'object') {
+                    acc[`${key}_id`] = data[key].id;
+                }
+            }
+
+            return acc;
+        }, {});
+    };
+
     const onSubmit = (values) => {
         const params = prepareParamsData({...values});
-        handleSubmit({params});
         handleNextFormOpen();
+        handleSubmit({params});
     };
 
     const getParamsForm = () => {
@@ -120,8 +141,8 @@ export const ParamsFormContainer: FC<ParamsFormPropsType> = (props) => {
                     filters={filters}
                     onSubmit={onSubmit}
                     isPreview={isPreview}
-                    handleFormOpen={handleFormOpen}
                     categoryName={categoryName}
+                    handleFormOpen={handleFormOpen}
                     subcategoryName={subcategory.name}
                     currentFormIndex={currentFormIndex}
                 />;
