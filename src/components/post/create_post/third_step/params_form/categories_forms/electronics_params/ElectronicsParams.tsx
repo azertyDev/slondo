@@ -27,17 +27,17 @@ export const ElectronicsParams: FC<CommonParamsPropsType> = (props) => {
     } = props;
 
     const isMonitors = type.name === 'monitors';
-    const {title, model} = useUrlParams();
+    const {title, params} = useUrlParams();
 
 
     let initVals: any = {
         title
     };
 
-    if (model) {
+    if (params) {
         initVals = {
             ...initVals,
-            ...model
+            ...params
         };
     }
 

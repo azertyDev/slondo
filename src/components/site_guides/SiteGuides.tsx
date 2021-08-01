@@ -4,11 +4,11 @@ import Link from 'next/link';
 import {Logo} from '../elements/icons';
 import {Localization} from '../header/top/localization/Localization';
 import {useTranslation} from 'react-i18next';
-import {useStyles} from './useStyles';
 import {SafeShoppingGuide} from '@src/components/site_guides/SafeShoppingGuide';
 import {AuctionGuide} from '@src/components/site_guides/AuctionGuide';
 import {useRouter} from 'next/router';
-import {PageNotFound} from '@src/components/page_not_found/PageNotFound';
+import ErrorPage from "@root/pages/_error";
+import {useStyles} from './useStyles';
 
 function HideOnScroll(props) {
     const {children, window} = props;
@@ -28,14 +28,16 @@ export const SiteGuides = (props) => {
     const {term} = useRouter().query;
     const {t} = useTranslation('safe_shopping');
 
-    switch (term) {
-        case 'auction':
-            return <AuctionGuide t={t} />;
-        case 'safe_shopping':
-            return <SafeShoppingGuide t={t} />;
-        default:
-            return <PageNotFound />;
-    }
+    const getPageByTerm = () => {
+        switch (term) {
+            case 'auction':
+                return <AuctionGuide t={t}/>;
+            case 'safe_shopping':
+                return <SafeShoppingGuide t={t}/>;
+            default:
+                return <ErrorPage statusCode={404}/>;
+        }
+    };
 
     const classes = useStyles();
     return (
@@ -54,7 +56,7 @@ export const SiteGuides = (props) => {
                                 >
                                     <Link href='/'>
                                         <a>
-                                            <Logo />
+                                            <Logo/>
                                         </a>
                                     </Link>
                                 </Grid>
@@ -65,13 +67,14 @@ export const SiteGuides = (props) => {
                                     justify='flex-end'
                                     alignItems='center'
                                 >
-                                    <Localization />
+                                    <Localization/>
                                 </Grid>
                             </Grid>
                         </Toolbar>
                     </Container>
                 </AppBar>
             </HideOnScroll>
+            {getPageByTerm()}
         </div>
     );
 };

@@ -24,16 +24,16 @@ export const RegularParams: FC<CommonParamsPropsType> = (props) => {
         handleFormOpen
     } = props;
 
-    const {title, model} = useUrlParams();
+    const {title, params} = useUrlParams();
 
     let initVals: any = {
         title
     };
 
-    if (model) {
+    if (params) {
         initVals = {
             ...initVals,
-            ...model
+            ...params
         };
     }
 

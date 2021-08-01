@@ -28,16 +28,16 @@ export const JobParams: FC<CommonParamsPropsType> = (props) => {
     const isVacancy = subcategoryName === 'vacancies';
     const hasPosition = !!filters.position;
 
-    const {title, model} = useUrlParams();
+    const {title, params} = useUrlParams();
 
     let initVals: any = {
         title
     };
 
-    if (model) {
+    if (params) {
         initVals = {
             ...initVals,
-            ...model
+            ...params
         };
     }
 

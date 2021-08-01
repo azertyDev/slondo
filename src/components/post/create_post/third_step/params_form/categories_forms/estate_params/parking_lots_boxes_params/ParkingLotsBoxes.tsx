@@ -28,17 +28,17 @@ export const ParkingLotsBoxes: FC<CommonParamsPropsType> = (props) => {
         handleFormOpen
     } = props;
 
-    const {title, model} = useUrlParams();
+    const {title, params} = useUrlParams();
 
     let initVals: any = {
         title,
         estate_type: null
     };
 
-    if (model) {
+    if (params) {
         initVals = {
             ...initVals,
-            ...model
+            ...params
         };
     }
 

@@ -38,16 +38,16 @@ export const TransportParams: FC<CommonParamsPropsType> = (props) => {
     const hasEngineCapacity = type.name === 'motorcycles' || type.name === 'mopedsAndScooters';
     const hasMileage = subcategoryName === 'motorcyclesAndMotorTech' || subcategoryName === 'busesAndTrucks';
 
-    const {title, model} = useUrlParams();
+    const {title, params} = useUrlParams();
 
     let initVals: any = {
         title
     };
 
-    if (model) {
+    if (params) {
         initVals = {
             ...initVals,
-            ...model
+            ...params
         };
     }
 

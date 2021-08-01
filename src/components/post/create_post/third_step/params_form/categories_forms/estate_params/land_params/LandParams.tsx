@@ -29,7 +29,7 @@ export const LandParams: FC<CommonParamsPropsType> = (props) => {
         handleFormOpen
     } = props;
 
-    const {title, model} = useUrlParams();
+    const {title, params} = useUrlParams();
 
     let initVals: any = {
         title,
@@ -37,10 +37,10 @@ export const LandParams: FC<CommonParamsPropsType> = (props) => {
         area: ''
     };
 
-    if (model) {
+    if (params) {
         initVals = {
             ...initVals,
-            ...model
+            ...params
         };
     }
 

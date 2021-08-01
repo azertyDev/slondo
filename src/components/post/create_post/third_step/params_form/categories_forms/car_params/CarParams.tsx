@@ -39,15 +39,15 @@ export const CarParams: FC<CarParamsPropsType> = (props) => {
     } = props;
 
     const {t} = useTranslation('filters');
-    const {title, model: params} = useUrlParams();
+    const {post_id, title, params} = useUrlParams();
 
     const isForeignCars = subcategoryName === 'foreign_cars';
     const isMadeInUzb = subcategoryName === 'made_uzbekistan';
 
-    let initVals: any = {
+    const initVals: any = {
         title: title ?? '',
         manufacturer: null,
-        model: null,
+        params: null,
         year: null,
         body: null,
         transmission: null,
@@ -99,7 +99,7 @@ export const CarParams: FC<CarParamsPropsType> = (props) => {
                         ...initVals,
                         title: values.title,
                         manufacturer: values.manufacturer,
-                        model: value
+                        params: value
                     };
                     setValuesByYear({});
                 }
@@ -112,7 +112,7 @@ export const CarParams: FC<CarParamsPropsType> = (props) => {
                             ...initVals,
                             title: values.title,
                             manufacturer: values.manufacturer,
-                            model: values.model,
+                            params: values.model,
                             year: value,
                             body: valsByYear.body
                         };
@@ -139,7 +139,7 @@ export const CarParams: FC<CarParamsPropsType> = (props) => {
                             ...initVals,
                             title: values.title,
                             manufacturer: values.manufacturer,
-                            model: values.model
+                            params: values.model
                         };
                     }
                 }
@@ -162,7 +162,7 @@ export const CarParams: FC<CarParamsPropsType> = (props) => {
                             ...valsByPosition,
                             title: values.title,
                             manufacturer: values.manufacturer,
-                            model: values.model,
+                            params: values.model,
                             year: values.year,
                             body: values.body,
                             position: value,
@@ -175,7 +175,7 @@ export const CarParams: FC<CarParamsPropsType> = (props) => {
                             ...initVals,
                             title: values.title,
                             manufacturer: values.manufacturer,
-                            model: values.model,
+                            params: values.model,
                             year: values.year,
                             body: values.body
                         };
@@ -195,7 +195,7 @@ export const CarParams: FC<CarParamsPropsType> = (props) => {
     };
 
     useEffect(() => {
-        params?.post_id !== undefined
+        (post_id !== undefined && params !== undefined)
             ? setValsByUrlParams()
             : setRequireParamsVals(
             values,
@@ -265,7 +265,7 @@ export const CarParams: FC<CarParamsPropsType> = (props) => {
                                         handleSelect={handleSelect}
                                         transKey={t(`${categoryName}`)}
                                         items={values.manufacturer?.models}
-                                        errorMsg={getErrorMsg(errors.model, touched.model, t)}
+                                        errorMsg={getErrorMsg(errors.params, touched.params, t)}
                                     />
                                 </Grid>
                                 <Grid
@@ -769,18 +769,20 @@ export const CarParams: FC<CarParamsPropsType> = (props) => {
     );
 
     async function setValsByUrlParams() {
-        let {
-            manufacturer,
-            model,
-            engine_capacity,
+        const {
+            manufacturer: manufacturerParam,
+            model: modelParam,
+            engine_capacity: engine_capacityParam,
             ...others
         } = params;
 
         if (Object.keys(filters).length !== 0) {
-            manufacturer = filters.manufacturer.find(m => m.id === manufacturer.id);
-            model = manufacturer.models.find(m => m.id === model.id);
-            engine_capacity = engine_capacity.name;
-
+            const manufacturer = filters.manufacturer.find(m => m.id === manufacturerParam.id);
+            const model = manufacturer.models.find(m => m.id === modelParam.id);
+            const engine_capacity = engine_capacityParam.name;
+            console.log(manufacturer);
+            console.log(model);
+            console.log(others);
             const [valsByYear] = (await userAPI.getCarDataByYear(model.id, others.year.id)).bodies;
 
             Object.keys(others).forEach(k => {

@@ -21,7 +21,7 @@ export const SearchCar: FC<CommonFiltersType> = (props) => {
 
     const initVals = {
         manufacturer: null,
-        model: null,
+        params: null,
         transmission: [],
         year_from: '',
         year_to: '',

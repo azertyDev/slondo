@@ -39,7 +39,7 @@ export const DropDownSelect: FC<CustomSelectPropsType> = (props) => {
     const noTranslatable = noTranslatableFields.some(f => f === name);
 
     const onChange = ({target}) => {
-        let {name, value} = target;
+        const {name, value} = target;
 
         if (multiple) {
             handleSelect(name, value);

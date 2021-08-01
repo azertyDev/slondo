@@ -32,7 +32,7 @@ export const HousesCottagesParams: FC<CommonParamsPropsType> = (props) => {
     } = props;
 
     const isRent = type.id === 2 || type.id === 3;
-    const {title, model} = useUrlParams();
+    const {title, params} = useUrlParams();
 
     let initVals: any = {
         title,
@@ -46,10 +46,10 @@ export const HousesCottagesParams: FC<CommonParamsPropsType> = (props) => {
         utilities: false
     };
 
-    if (model) {
+    if (params) {
         initVals = {
             ...initVals,
-            ...model
+            ...params
         };
     }
 

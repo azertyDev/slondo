@@ -41,7 +41,7 @@ export const ShowPostContainer: FC = () => {
             status: '',
             subscribed: null,
             safe_deal: null,
-            model: null,
+            params: null,
             author: {
                 id: null,
                 name: '',
