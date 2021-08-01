@@ -3,12 +3,12 @@
 /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 
 import {GetServerSideProps} from 'next';
-import ErrorPage from "@root/pages/_error";
 import {getStringValues, transformCyrillic} from "@src/helpers";
 import {getServerSideSitemap} from 'next-sitemap';
 import {transformLocations} from "@root/transformedLocations";
 import {categories_list} from "@src/common_data/site_categories";
 import {serverSideTranslations} from "next-i18next/serverSideTranslations";
+import {PageNotFound} from "@src/components/page_not_found/PageNotFound";
 
 export const getServerSideProps: GetServerSideProps = async (ctx) => {
     const xmlRegEx = new RegExp(/\.xml$/);
@@ -106,13 +106,11 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
     }, []);
 
     if (!locationExist) {
-        const statusCode = 404;
         const locale = ctx.locale;
-        ctx.res.statusCode = statusCode;
+        ctx.res.statusCode = 404;
 
         return {
             props: {
-                statusCode,
                 ...await serverSideTranslations(
                     locale,
                     [
@@ -127,6 +125,6 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
 };
 
 // Default export to prevent next.js errors
-export default function locationsSiteMap({statusCode}) {
-    return <ErrorPage statusCode={statusCode}/>;
+export default function locationsSiteMap() {
+    return <PageNotFound/>;
 };

@@ -8,18 +8,21 @@ import {SearchResult} from '@src/components/post/search_post/search_result/Searc
 import {Grid, Hidden, useMediaQuery, useTheme} from '@material-ui/core';
 import {HomeSidebar} from '@src/components/home/main/home_sidebar/HomeSideBar';
 import {useStyles} from './useStyles';
+import {PageNotFound} from "@src/components/page_not_found/PageNotFound";
 
 type SearchPostsByFiltersPropsType = {
     query,
     locale: string,
     userLocation,
+    locationExist: boolean
 };
 
 export const SearchPost: FC<SearchPostsByFiltersPropsType> = (props) => {
     const {
         query,
         locale,
-        userLocation
+        userLocation,
+        locationExist
     } = props;
 
     const theme = useTheme();
@@ -53,8 +56,8 @@ export const SearchPost: FC<SearchPostsByFiltersPropsType> = (props) => {
     }
 
     const classes = useStyles();
-    return (
-        <MainLayout title={title} description={description} seoTxt={seoTxt}>
+    return locationExist
+        ? <MainLayout title={title} description={description} seoTxt={seoTxt}>
             <div className={classes.root}>
                 <Grid container spacing={isSm ? 0 : 2}>
                     <Grid item xs={12} sm={12} lg={9} zeroMinWidth>
@@ -81,5 +84,5 @@ export const SearchPost: FC<SearchPostsByFiltersPropsType> = (props) => {
                 </Grid>
             </div>
         </MainLayout>
-    );
+        : <PageNotFound/>;
 };

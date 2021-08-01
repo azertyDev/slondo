@@ -84,7 +84,7 @@ export const SearchJob: FC<SearchRegularPropsType> = (props) => {
                             transKey={`${categoryName}.`}
                             items={filters.employment}
                             handleSelect={handleSelect}
-                            labelTxt={t(`${categoryName}.employment`)}
+                            labelTxt={t(`${categoryName}.employment.name`)}
                         />
                     </Grid>
                     <Grid
@@ -99,7 +99,7 @@ export const SearchJob: FC<SearchRegularPropsType> = (props) => {
                             values={values}
                             items={filters.experience}
                             handleSelect={handleSelect}
-                            labelTxt={t(`${categoryName}.${isVacancy ? 'require_experience' : 'experience'}`)}
+                            labelTxt={t(`${categoryName}.${isVacancy ? 'require_experience' : 'experience'}.name`)}
                         />
                     </Grid>
                     <Grid
@@ -114,7 +114,7 @@ export const SearchJob: FC<SearchRegularPropsType> = (props) => {
                             values={values}
                             items={filters.nature}
                             handleSelect={handleSelect}
-                            labelTxt={t(`${categoryName}.nature`)}
+                            labelTxt={t(`${categoryName}.nature.name`)}
                         />
                     </Grid>
                 </>}
