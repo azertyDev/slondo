@@ -12,7 +12,10 @@ import {DropDownSelect} from '@src/components/elements/drop_down_select/DropDown
 import {WithT} from 'i18next';
 
 export const cookies = new Cookies();
-export const cookieOpts: { path: string, sameSite: boolean | 'none' | 'lax' | 'strict' } = {path: '/', sameSite: 'strict'};
+export const cookieOpts: { path: string, sameSite: boolean | 'none' | 'lax' | 'strict' } = {
+    path: '/',
+    sameSite: 'strict'
+};
 
 export const getStringValues = (obj): string[] => {
     const values: string[] = [];

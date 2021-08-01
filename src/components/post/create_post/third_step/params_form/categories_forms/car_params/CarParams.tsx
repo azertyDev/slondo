@@ -39,13 +39,13 @@ export const CarParams: FC<CarParamsPropsType> = (props) => {
     } = props;
 
     const {t} = useTranslation('filters');
-    const {title, model} = useUrlParams();
+    const {title, model: params} = useUrlParams();
 
     const isForeignCars = subcategoryName === 'foreign_cars';
     const isMadeInUzb = subcategoryName === 'made_uzbekistan';
 
     let initVals: any = {
-        title: title,
+        title: title ?? '',
         manufacturer: null,
         model: null,
         year: null,
@@ -59,13 +59,6 @@ export const CarParams: FC<CarParamsPropsType> = (props) => {
     };
 
     if (isMadeInUzb) initVals.position = null;
-
-    if (model) {
-        initVals = {
-            ...initVals,
-            ...model
-        };
-    }
 
     const {setErrorMsg} = useContext(ErrorCtx);
 
@@ -113,12 +106,7 @@ export const CarParams: FC<CarParamsPropsType> = (props) => {
 
                 if (name === 'year') {
                     if (value) {
-                        const params = {
-                            year_id: value.id,
-                            model_id: values.model.id
-                        };
-
-                        const [valsByYear] = (await userAPI.getCarDataByYear(params)).bodies;
+                        const [valsByYear] = (await userAPI.getCarDataByYear(values.model.id, value.id)).bodies;
 
                         newVals = {
                             ...initVals,
@@ -207,12 +195,14 @@ export const CarParams: FC<CarParamsPropsType> = (props) => {
     };
 
     useEffect(() => {
-        setRequireParamsVals(
+        params?.post_id !== undefined
+            ? setValsByUrlParams()
+            : setRequireParamsVals(
             values,
             setValues,
             filters,
             subcategoryName
-        );
+            );
     }, [filters]);
 
     const classes = useStyles();
@@ -269,11 +259,11 @@ export const CarParams: FC<CarParamsPropsType> = (props) => {
                                 >
                                     <DropDownSelect
                                         name='model'
-                                        labelTxt={t(`model`)}
-                                        transKey={t(`${categoryName}`)}
                                         values={values}
                                         onBlur={handleBlur}
+                                        labelTxt={t(`model`)}
                                         handleSelect={handleSelect}
+                                        transKey={t(`${categoryName}`)}
                                         items={values.manufacturer?.models}
                                         errorMsg={getErrorMsg(errors.model, touched.model, t)}
                                     />
@@ -777,4 +767,38 @@ export const CarParams: FC<CarParamsPropsType> = (props) => {
             </CustomFormikProvider>
         </div>
     );
+
+    async function setValsByUrlParams() {
+        let {
+            manufacturer,
+            model,
+            engine_capacity,
+            ...others
+        } = params;
+
+        if (Object.keys(filters).length !== 0) {
+            manufacturer = filters.manufacturer.find(m => m.id === manufacturer.id);
+            model = manufacturer.models.find(m => m.id === model.id);
+            engine_capacity = engine_capacity.name;
+
+            const [valsByYear] = (await userAPI.getCarDataByYear(model.id, others.year.id)).bodies;
+
+            Object.keys(others).forEach(k => {
+                if (filters[k] !== undefined && optionFields.some(f => f === k)) {
+                    others[k] = others[k].map(v => v.id);
+                }
+            });
+
+            unstable_batchedUpdates(() => {
+                setValuesByYear(valsByYear);
+                setValues({
+                    ...others,
+                    title,
+                    manufacturer,
+                    model,
+                    engine_capacity
+                });
+            });
+        }
+    }
 };

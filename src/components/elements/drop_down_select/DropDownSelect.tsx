@@ -52,9 +52,9 @@ export const DropDownSelect: FC<CustomSelectPropsType> = (props) => {
     const selectedHandle = (selected: any) => {
         let value = t('noSelect');
 
-        if (multiple) {
+        if (items.length !== 0 && multiple) {
             value = selected.map(item => {
-                const valName = items.find(v => v.id === item).name;
+                const valName = items.find(v => v.id === item)?.name;
                 return t(`${transKey}${valName}.name`);
             }).join(', ');
         } else if (selected) {

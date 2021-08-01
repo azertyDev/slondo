@@ -1,7 +1,6 @@
 import {FC, MutableRefObject, useContext, useEffect, useRef, useState} from 'react';
 import {WithT} from 'i18next';
 import {
-    Box,
     Container,
     Hidden,
     TextField,
@@ -25,7 +24,7 @@ import {RenewalIcon} from '@src/components/elements/icons';
 import {months} from '@src/common_data/common';
 import {AuctionContent} from '@src/components/post/show_post/owner_auction_info/auction_content/AuctionContent';
 import {userAPI} from '@src/api/api';
-import {booleanFields} from '@src/common_data/fields_keys';
+import {booleanFields, noTranslatableFields} from '@src/common_data/fields_keys';
 import {useStyles} from './useStyles';
 import {ResponsiveModal} from '@src/components/elements/responsive_modal/ResponsiveModal';
 import {ErrorCtx} from '@src/context';
@@ -54,6 +53,8 @@ export const PostContent: FC<PostContentTypes> = (props) => {
     const isMdDown = useMediaQuery(useTheme().breakpoints.down('md'));
     const isExAuc = data.ads_type.mark === 'exauc';
     const isAuction = data.ads_type.mark === 'auc' || isExAuc;
+
+    const transKey = data.category.name;
 
     const {
         model,
@@ -91,28 +92,33 @@ export const PostContent: FC<PostContentTypes> = (props) => {
 
     const parameterItems = Object.keys(model ?? {}).reduce((items, key, i) => {
         const isBooleanKey = booleanFields.some(f => f === key);
+        const isNoTrans = noTranslatableFields.some(f => f === key);
 
-        if (Array.isArray(model[key]) && model[key].length) {
-            const params = (
-                <Typography variant="subtitle1" className="value">
-                    {model[key]
-                        .map((param) => t(`filters:${data.category.name}.${param.name}.name`))
-                        .join(', ')}
-                </Typography>
-            );
+        if (model[key].length && Array.isArray(model[key])) {
             items.push(
                 <li key={i} className="params-list">
                     <Typography variant="subtitle1" className="key">
-                        {t(`filters:${data.category.name}.${key}.name`)}
+                        {t(`filters:${isNoTrans
+                            ? `${key}`
+                            : `${transKey}.${key}.name`}`)}
                     </Typography>
-                    {params}
+                    <Typography variant="subtitle1" className="value">
+                        {model[key]
+                            .map((param) => {
+                                    return t(`filters:${isNoTrans
+                                        ? `${param.name}`
+                                        : `${transKey}.${param.name}.name`}`);
+                                }
+                            )
+                            .join(', ')}
+                    </Typography>
                 </li>
             );
         } else if (isBooleanKey) {
             items.push(
                 <li key={key}>
                     <Typography variant="subtitle1" className="key">
-                        {t(`filters:${data.category.name}.${key}.name`)}
+                        {t(`filters:${transKey}.${key}.name`)}
                     </Typography>
                     <Typography variant="subtitle1" className="value">
                         {t('common:yes')}
@@ -123,24 +129,28 @@ export const PostContent: FC<PostContentTypes> = (props) => {
             items.push(
                 <li key={key}>
                     <Typography variant="subtitle1" className="key">
-                        {t(`filters:${data.category.name}.${key}.name`)}
+                        {t(`filters:${isNoTrans
+                            ? `${key}`
+                            : `${transKey}.${key}.name`}`)}
                     </Typography>
                     {model[key]?.hex_color_code && (
                         <span
                             style={{
-                                backgroundColor: `${model[key]?.hex_color_code}`,
                                 width: 24,
                                 height: 24,
                                 boxShadow: '0px 0px 4px rgba(0, 0, 0, 0.25)',
                                 marginRight: 15,
-                                borderRadius: '50%'
+                                borderRadius: '50%',
+                                backgroundColor: `${model[key]?.hex_color_code}`
                             }}
                         />
                     )}
                     <Typography variant="subtitle1" className="value">
                         {typeof model[key] === 'string' || typeof model[key] === 'number'
                             ? model[key]
-                            : t(`filters:${data.category.name}.${model[key]?.name}.name`)}
+                            : t(`filters:${isNoTrans
+                                ? `${model[key].name}`
+                                : `${transKey}.${model[key]?.name}.name`}`)}
                     </Typography>
                 </li>
             );
@@ -164,7 +174,7 @@ export const PostContent: FC<PostContentTypes> = (props) => {
             <Hidden mdDown>
                 <div className="breadcrumbs">
                     <BreadcrumbsComponent
-                        category={data.category.name}
+                        category={transKey}
                         subcategory={data.adsable?.sub_category.name}
                         type={data.adsable?.type?.name}
                     />
@@ -243,7 +253,7 @@ export const PostContent: FC<PostContentTypes> = (props) => {
                             {t('post:views')}: {number_of_views}
                         </Typography>
                         <Typography variant="subtitle1" onClick={handleComplaintModal(true)}>
-                            {t('post:complain')} <WarningIcon />
+                            {t('post:complain')} <WarningIcon/>
                         </Typography>
                     </div>
                 </Hidden>
@@ -319,7 +329,7 @@ export const PostContent: FC<PostContentTypes> = (props) => {
                     </Hidden>
                     {data.region.name || data.city.name || data.district.name
                         ? <div className='location-text'>
-                            <LocationIcon />
+                            <LocationIcon/>
                             <Typography variant="subtitle1">
                                 {`${t(`locations:${data.region.name}.name`) ?? ''}`}
                                 {data.city.name ? `, ${t(`locations:${data.region.name}.${data.city.name}`)}` : ''}
@@ -330,14 +340,14 @@ export const PostContent: FC<PostContentTypes> = (props) => {
                 <Hidden mdDown>
                     <div className="post-category">
                         <Typography variant="subtitle1" color="initial">
-                            {t(`categories:${data.category.name}.name`)}
+                            {t(`categories:${transKey}.name`)}
                             &nbsp;-&nbsp;
-                            {t(`categories:${data.category.name}.${data.adsable.sub_category.name}.name`)}
+                            {t(`categories:${transKey}.${data.adsable.sub_category.name}.name`)}
                             {
                                 data.adsable?.type &&
                                 <span>
                                     &nbsp;-&nbsp;
-                                    {t(`categories:${data.category.name}.${data.adsable.sub_category.name}.${data.adsable.type.name}.name`)}
+                                    {t(`categories:${transKey}.${data.adsable.sub_category.name}.${data.adsable.type.name}.name`)}
                                 </span>
                             }
                         </Typography>
@@ -399,7 +409,7 @@ export const PostContent: FC<PostContentTypes> = (props) => {
                             </Typography>
                             <Hidden mdDown>
                                 <Typography variant="subtitle1" onClick={handleComplaintModal(true)}>
-                                    {t('post:complain')} <WarningIcon />
+                                    {t('post:complain')} <WarningIcon/>
                                 </Typography>
                             </Hidden>
                         </div>

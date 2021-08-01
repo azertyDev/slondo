@@ -92,7 +92,7 @@ export const OwnerContent: FC<OwnerPropsType> = (props) => {
     useEffect(() => {
         fetchUserCard();
     }, []);
-    console.log(isPublic);
+
     const classes = useStyles();
     return (
         <div className={classes.root}>

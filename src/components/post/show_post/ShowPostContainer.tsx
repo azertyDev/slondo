@@ -9,9 +9,9 @@ import {Banner} from '@src/components/elements/banner/Banner';
 import {Header} from '@src/components/header/Header';
 import {ErrorModal} from '@src/components/error_modal/ErrorModal';
 import {OwnerAuctionInfo} from '@src/components/post/show_post/owner_auction_info/OwnerAuctionInfo';
-import {useStyles} from './useStyles';
 import {Footer} from '@src/components/footer/Footer';
 import {ErrorCtx} from "@src/context";
+import {useStyles} from './useStyles';
 
 
 export const ShowPostContainer: FC = () => {

@@ -234,7 +234,11 @@ export const userAPI = {
                 throw err;
             });
     },
-    getCarDataByYear: (params): Promise<any> => {
+    getCarDataByYear: (modelId: number, yearId: number): Promise<any> => {
+        const params = {
+            model_id: modelId,
+            year_id: yearId
+        };
         return instance.get(`regular/cars/params/getByManufacturerYear`, {params})
             .then(res => res.data)
             .catch(err => {
