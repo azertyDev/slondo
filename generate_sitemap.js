@@ -27,6 +27,10 @@ const getStringValues = (obj) => {
 # *
 User-agent: *
 Allow: /
+Allow: /help/how_to_create_post
+Allow: /help/how_to_create_auction
+Allow: /help/how_to_participate
+Allow: /help/how_to_register
 
 # *
 User-agent: *
