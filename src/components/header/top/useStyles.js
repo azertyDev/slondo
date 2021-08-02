@@ -49,7 +49,7 @@ export const useStyles = makeStyles((theme) => ({
                         height: '20px',
                         [theme.breakpoints.down('lg')]: {
                             width: '16px'
-                        },
+                        }
                     },
                     '&:hover': {
                         '& > h6.MuiTypography-subtitle1': {
@@ -99,12 +99,16 @@ export const useStyles = makeStyles((theme) => ({
         padding: 0,
         background: 'none',
         borderRadius: '100px',
+        '& div.MuiAvatar-root': {
+            height: '35px',
+            width: '35px'
+        },
         '& svg': {
             width: '40px',
             height: '40px',
             [theme.breakpoints.down('xs')]: {
-                width: '34px',
-                height: '34px'
+                width: '33px',
+                height: '33px'
             }
         }
     }

@@ -7,6 +7,7 @@ import {CustomButton} from '@src/components/elements/custom_button/CustomButton'
 import {ResponsiveModal} from '@src/components/elements/responsive_modal/ResponsiveModal';
 import {CloseBtn} from '@src/components/elements/close_button/CloseBtn';
 import {useStyles} from './useStyles';
+import KeyboardArrowRightIcon from '@material-ui/icons/KeyboardArrowRight';
 
 type LocationModalPropsType = {
     region,
@@ -102,6 +103,11 @@ export const LocationModal: FC<LocationModalPropsType> = (props) => {
                                                     <Typography>
                                                         <span>{t(loc.cities ? `${loc.name}.name` : `${region.name}.${loc.name}`)}</span>
                                                     </Typography>
+                                                    {(!!loc?.cities || !!loc?.district?.length) && (
+                                                        <Hidden smUp>
+                                                            <KeyboardArrowRightIcon/>
+                                                        </Hidden>
+                                                    )}
                                                 </Grid>
                                             ))}
                                         </Grid>
