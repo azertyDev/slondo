@@ -8,6 +8,7 @@ export const getServerSideProps: GetServerSideProps = async ({locale}) => ({
             locale,
             [
                 'post',
+                'auction',
                 'cabinet',
                 'filters',
                 'locations',

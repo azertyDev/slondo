@@ -1,11 +1,10 @@
 import {FC} from 'react';
+import {getErrorMsg} from '@src/helpers';
 import {useTranslation} from "next-i18next";
 import {Checkbox, Grid, Typography} from '@material-ui/core';
 import {DropDownSelect} from '@src/components/elements/drop_down_select/DropDownSelect';
 import {FormikField} from '@src/components/elements/formik_field/FormikField';
-import {getErrorMsg} from '@src/helpers';
 import {useStyles} from './useStyles';
-
 
 type AuctionParamsPropsType = {
     values,
@@ -47,7 +46,7 @@ export const AuctionParams: FC<AuctionParamsPropsType> = (props) => {
                             onBlur={handleBlur}
                             items={postType.expired}
                             handleSelect={handleSelect}
-                            labelTxt={t('duration')}
+                            labelTxt={t('auction:duration')}
                             errorMsg={getErrorMsg(errors.auction, touched.auction, t)}
                         />
                     </Grid>
@@ -62,7 +61,7 @@ export const AuctionParams: FC<AuctionParamsPropsType> = (props) => {
                         />
                     </Grid>
                     {isAdvanceAuction && (
-                        <Grid item xs={2}>
+                        <Grid item xs={3}>
                             <FormikField
                                 t={t}
                                 name='reserve_price'

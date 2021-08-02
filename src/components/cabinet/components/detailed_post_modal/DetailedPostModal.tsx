@@ -91,7 +91,7 @@ export const DetailedPostModal: FC<DetailedPostViewPropsType> = (props) => {
 
     const getUserInfoTitle = () => {
         if (hasBuyer && isUserCreator) return 'buyer';
-        if (winner !== null && isUserCreator) return 'winner';
+        if (isAuction && winner !== null && isUserCreator) return 'winner';
         if (hasOffer && !winner && isUserCreator) return 'maxOffer';
         return isUserCreator ? '' : 'seller';
     };

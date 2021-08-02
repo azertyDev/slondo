@@ -82,8 +82,8 @@ export const DropDownSelect: FC<CustomSelectPropsType> = (props) => {
                 name={name}
                 onBlur={onBlur}
                 multiple={multiple}
-                disabled={!items.length}
                 onChange={onChange}
+                disabled={!items.length}
                 renderValue={selectedHandle}
                 value={multiple ? values[name]?.map(v => v?.id ?? v) || [] : values[name]?.id ?? 0}
                 className={'select-wrapper' + `${errorMsg ? ' error-border' : ''}`}
