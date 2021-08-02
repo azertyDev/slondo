@@ -2,41 +2,34 @@ import {makeStyles} from '@material-ui/core/styles';
 
 export const useStyles = makeStyles((theme) => ({
     root: {
-        width: '100%',
-        '& div.preview': {
-            '& div.color-preview': {
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'space-between',
-                padding: '7px 10px',
-                marginBottom: '25px',
-                background: '#FFFF',
-                borderRadius: '100px',
-                width: '25%',
-                '& h6 > strong': {
-                    fontWeight: '500'
-                },
-                '& div.color': {
-                    width: '38px',
-                    height: '38px',
-                    borderRadius: '100%',
-                    boxShadow: '0px 0px 4px rgba(0, 0, 0, 0.25)',
-                    [theme.breakpoints.down('sm')]: {
-                        width: '32px',
-                        height: '32px'
-                    }
-                },
-                [theme.breakpoints.down('sm')]: {
-                    width: '250px'
-                }
+        '& div.color-preview': {
+            width: 'min-content',
+            display: 'flex',
+            alignItems: 'center',
+            padding: '7px 10px',
+            background: '#FFFF',
+            borderRadius: '100px',
+            '& p': {
+                marginLeft: 10
             },
-            '& div.photos-preview': {
-                '& img': {
-                    width: '140px',
-                    height: '100px',
-                    objectFit: 'cover',
-                    marginRight: '5px'
+            '& div.color': {
+                width: '38px',
+                height: '38px',
+                borderRadius: '100%',
+                boxShadow: '0px 0px 4px rgba(0, 0, 0, 0.25)',
+                [theme.breakpoints.down('sm')]: {
+                    width: '32px',
+                    height: '32px'
                 }
+            }
+        },
+        '& .photos-preview': {
+            margin: 0,
+            '& img': {
+                width: '100%',
+                height: '100%',
+                objectFit: 'cover',
+                borderRadius: 5
             }
         },
         '& ul.color-select': {
@@ -50,6 +43,7 @@ export const useStyles = makeStyles((theme) => ({
                 display: 'flex',
                 alignItems: 'center',
                 flexDirection: 'column',
+                textAlign: 'center',
                 [theme.breakpoints.down('sm')]: {
                     flexDirection: 'row',
                     padding: '10px 0',

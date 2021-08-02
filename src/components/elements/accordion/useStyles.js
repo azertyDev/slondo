@@ -1,46 +1,44 @@
 import {makeStyles} from '@material-ui/core/styles';
 
-
 export const useStyles = makeStyles((theme) => ({
     root: {
-        '& div.MuiAccordion-root': {
-            backgroundColor: '#F7F7F7',
-            '& .MuiAccordionSummary-content': {
-                display: 'flex',
-                alignItems: 'center',
-                margin: 0,
-                '& svg': {
-                    marginRight: '10px'
-                }
-            },
-            '& div.MuiAccordionSummary-root': {
-                '& .header-preview': {
-                    display: 'flex',
-                    alignItems: 'center',
-                    marginLeft: '20px',
-                    color: theme.palette.primary.createAdBtnColor,
-                    textDecoration: 'underline',
-                    cursor: 'pointer'
-                },
-                '&:hover:not(.Mui-disabled)': {
-                    cursor: 'default'
-                }
-            },
-            '& div.MuiAccordionSummary-root.Mui-expanded': {
-                minHeight: 0
-            },
-            '& div': {
-                '&.MuiAccordionDetails-root, &.MuiAccordionSummary-root': {
-                    padding: 15
-                }
+        backgroundColor: '#F4F4F4',
+        borderRadius: '10px!important',
+        '& .MuiAccordionSummary-content': {
+            display: 'flex',
+            alignItems: 'center',
+            margin: 0,
+            '& svg': {
+                marginRight: '10px'
             }
         },
-        '& button.nav-button': {
+        '& div.MuiAccordionSummary-root': {
+            '& .header-preview': {
+                display: 'flex',
+                alignItems: 'center',
+                marginLeft: '20px',
+                color: theme.palette.primary.createAdBtnColor,
+                textDecoration: 'underline',
+                cursor: 'pointer'
+            },
+            '&:hover:not(.Mui-disabled)': {
+                cursor: 'default'
+            }
+        },
+        '& div.MuiAccordionSummary-root.Mui-expanded': {
+            minHeight: 0
+        },
+        '& div': {
+            '&.MuiAccordionDetails-root, &.MuiAccordionSummary-root': {
+                padding: 15
+            }
+        },
+        '& .nav-button': {
             width: '262px',
             padding: 7,
             background: theme.palette.primary.createAdBtnColor,
             [theme.breakpoints.down('xs')]: {
-                marginTop: '20px',
+                marginTop: '20px'
             },
             '& > p': {
                 [theme.breakpoints.down('xs')]: {

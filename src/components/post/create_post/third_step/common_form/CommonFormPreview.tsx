@@ -1,9 +1,11 @@
 import {FC} from 'react';
 import {WithT} from 'i18next';
-import {Help} from '@material-ui/icons';
-import {Checkbox, Hidden, Typography} from '@material-ui/core';
+import {Grid, Typography} from '@material-ui/core';
 import {numberPrettier, weekDaysHelper} from '@src/helpers';
 import {useStyles} from './useStyles';
+import Box from '@material-ui/core/Box';
+import {DeliveryIcon, ExchangeIcon, PhoneIcon, RenewalIcon, SafeIcon} from '@src/components/elements/icons';
+import {useTranslation} from 'next-i18next';
 
 type DefaultParamsPropsType = {
     values,
@@ -13,11 +15,10 @@ type DefaultParamsPropsType = {
     priceLabel: string,
     location,
     userPhone: string
-} & WithT;
+};
 
 export const CommonFormPreview: FC<DefaultParamsPropsType> = (props) => {
     const {
-        t,
         values,
         location,
         isAuction,
@@ -27,199 +28,206 @@ export const CommonFormPreview: FC<DefaultParamsPropsType> = (props) => {
         isAdvanceAuction
     } = props;
 
+    const {t} = useTranslation('post');
+
     const {auction, avalTime} = values;
     const locationText = `${t(`locations:${location.region.name}.name`)}${location.city ? `, ${t(`locations:${location.region.name}.${location.city.name}`)}` : ''}`;
 
     const classes = useStyles();
     return (
-        <div className={classes.root}>
-            {isAuction
-                ? <div>
-                    <Typography variant="subtitle1">
-                        <strong>
-                            {t('filters:start_price')}:&nbsp;
-                        </strong>
-                        {numberPrettier(values.price)}
-                    </Typography>
-                    <Typography variant="subtitle1">
-                        <strong>
-                            {t('filters:auction_duration')}:&nbsp;
-                        </strong>
-                        {auction.duration.hours}
-                    </Typography>
-                    {isAdvanceAuction && (
-                        <div>
-                            <Typography variant="subtitle1">
-                                <strong>
-                                    {t('filters:reserve_price')}:&nbsp;
-                                </strong>
-                                {auction.reserve_price}
-                            </Typography>
-                            {auction.price_buy_now.value && (
-                                <Typography variant="subtitle1">
-                                    <strong>
-                                        {t('filters:buy_now')}:&nbsp;
-                                    </strong>
-                                    {auction.price_buy_now.value}
-                                </Typography>
-                            )}
-                            {auction.auto_renewal && (
-                                <div className='auction-params'>
-                                    <Checkbox
-                                        disabled
-                                        color='primary'
-                                        checked={auction.auto_renewal}
-                                    />
-                                    <Typography variant="subtitle1">
-                                        {t('filters:auto_renewal')}
-                                    </Typography>
-                                </div>
-                            )}
-                            {auction.offer_the_price && (
-                                <div className='auction-params'>
-                                    <Checkbox
-                                        disabled
-                                        color='primary'
-                                        checked={auction.offer_the_price}
-                                    />
-                                    <Typography variant="subtitle1">
-                                        {t('filters:offer_price')}
-                                    </Typography>
-                                </div>
-                            )}
-                        </div>
-                    )}
-                </div>
-                : <Typography variant="subtitle1">
-                    <strong>
-                        {t(`filters:${priceLabel}`)}:&nbsp;
-                    </strong>
-                    {numberPrettier(values.price)}&nbsp;
-                    {values.currency.name}
-                </Typography>}
-            <div className='post-options'>
-                {values.safe_deal && (
-                    <div>
+        <>
+            {isAuction || isAdvanceAuction ? null : (
+                <Grid container item>
+                    <Grid item xs={4}>
                         <Typography variant="subtitle1">
-                            <strong>
-                                {t('filters:safe_deal')}:&nbsp;
-                            </strong>
+                            {t(`filters:${priceLabel}`)}:
                         </Typography>
-                        <Checkbox
-                            disabled
-                            color='primary'
-                            checked={values.safe_deal}
-                        />
-                        <Hidden xsDown>
-                            <Help className="question-mark"/>
-                            <Typography variant="subtitle2">
-                                Примечание: При подключении услуги «Безопасный
-                                торг». Ваша сделка защищена. Стоимость
-                                услуги составляет n%.&nbsp;
-                                <a href="#">
-                                <span className="safe-auction-rules">
-                                    {t('common:safe_deal_rules')}
-                                </span>
-                                </a>
-                            </Typography>
-                        </Hidden>
-                    </div>
-                )}
-                {values.delivery && (
-                    <div>
+                    </Grid>
+                    <Grid item xs={8}>
                         <Typography variant="subtitle1">
-                            <strong>
-                                {t('filters:delivery')}:&nbsp;
-                            </strong>
+                            {numberPrettier(values.price)}&nbsp;
+                            {values.currency.name}
                         </Typography>
-                        <Checkbox
-                            disabled
-                            color='primary'
-                            checked={values.delivery}
-                        />
-                        <Hidden xsDown>
-                            <Help className="question-mark"/>
-                            <Typography variant="subtitle2">
-                                Примечание: Доставка осуществляется
-                                за Ваш счет. В случае невыполнения доставки,
-                                Вы можете быть заблокированы.&nbsp;
-                                <a href="#">
-                                <span className="safe-auction-rules">
-                                    {t('common:delivery_rules')}
-                                </span>
-                                </a>
-                            </Typography>
-                        </Hidden>
-
-                    </div>
-                )}
-                {values.exchange && (
-                    <div>
-                        <Typography variant="subtitle1">
-                            <strong>
-                                {t('filters:exchange')}:&nbsp;
-                            </strong>
-                        </Typography>
-                        <Checkbox
-                            disabled
-                            color='primary'
-                            checked={values.exchange}
-                        />
-                        <Hidden xsDown>
-                            <Help className="question-mark"/>
-                            <Typography variant="subtitle2">
-                                Примечание: Вы принимаете предложения от
-                                других пользователей на обмен.
-                            </Typography>
-                        </Hidden>
-                    </div>
-                )}
-            </div>
-            <div className='location-wrapper'>
-                <Typography variant="subtitle1">
-                    <strong>
-                        {t('locations:location')}:&nbsp;
-                    </strong>
-                    {locationText}
-                </Typography>
-            </div>
-            <div className='description-wrapper'>
-                <Typography variant="subtitle1">
-                    <strong>
-                        {t('filters:description')}:&nbsp;
-                    </strong>
-                </Typography>
-                <Typography>
-                    {values.description}
-                </Typography>
-            </div>
-            <div className='phone-num'>
-                <Typography variant="subtitle1">
-                    <strong>
-                        {t('filters:own_phone')}:&nbsp;
-                    </strong>
-                    +{userPhone}
-                </Typography>
-                {!!values.phone && !RegExp(/_/g).test(values.phone) && (
-                    <Typography variant="subtitle1">
-                        <strong>
-                            {t('filters:additional_phone')}:&nbsp;
-                        </strong>
-                        {values.phone}
-                    </Typography>
-                )}
-            </div>
-            {avalTimeActive && (
-                <div>
-                    <Typography variant="subtitle1">
-                        <strong>
-                            {t('common:call_times')}:&nbsp;
-                        </strong>
-                        {`${avalTime.available_start_time} - ${avalTime.available_end_time}`}&nbsp;
-                        ({weekDaysHelper(avalTime.available_days, t)})
-                    </Typography>
-                </div>
+                    </Grid>
+                </Grid>
             )}
-        </div>
+            {isAuction && (
+                <>
+                    {values.price && (
+                        <Grid container item>
+                            <Grid item xs={4}>
+                                <Typography variant="subtitle1">
+                                    {t('filters:start_price')}:
+                                </Typography>
+                            </Grid>
+                            <Grid item xs={8}>
+                                <Typography variant="subtitle1">
+                                    {numberPrettier(values.price)}&nbsp;
+                                    {values.currency.name}
+                                </Typography>
+                            </Grid>
+                        </Grid>
+                    )}
+                    {auction?.duration?.hours && (
+                        <Grid container item>
+                            <Grid item xs={4}>
+                                <Typography variant="subtitle1">
+                                    {t('filters:auction_duration')}:
+                                </Typography>
+                            </Grid>
+                            <Grid item xs={8}>
+                                <Typography variant="subtitle1">
+                                    {auction?.duration?.hours}
+                                </Typography>
+                            </Grid>
+                        </Grid>
+                    )}
+                    {auction.reserve_price && (
+                        <Grid container item>
+                            <Grid item xs={4}>
+                                <Typography variant="subtitle1">
+                                    {t('filters:reserve_price')}:
+                                </Typography>
+                            </Grid>
+                            <Grid item xs={8}>
+                                <Typography variant="subtitle1">
+                                    {auction.reserve_price}
+                                </Typography>
+                            </Grid>
+                        </Grid>
+                    )}
+                </>
+            )}
+            {auction.price_buy_now.value && (
+                <Grid container item>
+                    <Grid item xs={4}>
+                        <Typography variant="subtitle1">
+                            {t('filters:buy_now')}:
+                        </Typography>
+                    </Grid>
+                    <Grid item xs={8}>
+                        <Typography variant="subtitle1">
+                            {auction.price_buy_now.value}
+                        </Typography>
+                    </Grid>
+                </Grid>
+            )}
+            <Grid container item>
+                <Grid item xs={4}>
+                    <Typography variant="subtitle1">
+                        {t('additionalServices')}
+                    </Typography>
+                </Grid>
+                <Grid item xs={8} container>
+                    {auction.auto_renewal && (
+                        <Box className={classes.serviceItem}>
+                            <RenewalIcon />
+                            <Typography variant="subtitle1">
+                                {t('filters:auto_renewal')}
+                            </Typography>
+                        </Box>
+                    )}
+                    {auction.offer_the_price && (
+                        <Box className={classes.serviceItem}>
+                            <Typography variant="subtitle1">
+                                {t('filters:offer_price')}
+                            </Typography>
+                        </Box>
+                    )}
+                    {values.safe_deal && (
+                        <Box className={classes.serviceItem}>
+                            <SafeIcon />
+                            <Typography variant="subtitle1">
+                                {t('filters:safe_deal')}
+                            </Typography>
+                        </Box>
+                    )}
+                    {values.delivery && (
+                        <Box className={classes.serviceItem}>
+                            <DeliveryIcon />
+                            <Typography variant="subtitle1">
+                                {t('filters:delivery')}
+                            </Typography>
+                        </Box>
+                    )}
+                    {values.exchange && (
+                        <Box className={classes.serviceItem}>
+                            <ExchangeIcon />
+                            <Typography variant="subtitle1">
+                                {t('filters:exchange')}
+                            </Typography>
+                        </Box>
+                    )}
+                </Grid>
+            </Grid>
+            <Grid container item>
+                <Grid item xs={4}>
+                    <Typography variant="subtitle1">
+                        {t('locations:location')}:
+                    </Typography>
+                </Grid>
+                <Grid item xs={8}>
+                    <Typography variant="subtitle1">
+                        {locationText}
+                    </Typography>
+                </Grid>
+            </Grid>
+            <Grid container item>
+                <Grid item xs={4}>
+                    <Typography variant="subtitle1">
+                        {t('filters:description')}:
+                    </Typography>
+                </Grid>
+                <Grid item xs={8}>
+                    <Typography variant="subtitle1">
+                        {values.description}
+                    </Typography>
+                </Grid>
+            </Grid>
+            <Grid container item>
+                <Grid item xs={4}>
+                    <Typography variant="subtitle1">
+                        {t('filters:own_phone')}:
+                    </Typography>
+                </Grid>
+                <Grid item xs={8}>
+                    <Typography variant="subtitle1">
+                        +{userPhone}
+                    </Typography>
+                </Grid>
+            </Grid>
+            {!!values.phone && !RegExp(/_/g).test(values.phone) && (
+                <Grid container item>
+                    <Grid item xs={4}>
+                        <Typography variant="subtitle1">
+                            {t('filters:additional_phone')}:
+                        </Typography>
+                    </Grid>
+                    <Grid item xs={8}>
+                        <Typography variant="subtitle1">
+                            {values.phone}
+                        </Typography>
+                    </Grid>
+                </Grid>
+            )}
+            {avalTimeActive && (
+                <Grid container item>
+                    <Grid item xs={4}>
+                        <Typography variant="subtitle1">
+                            {t('common:call_times')}:
+                        </Typography>
+                    </Grid>
+                    <Grid item xs={8}>
+                        <Box className={classes.serviceItem}>
+                            <PhoneIcon />
+                            <Typography variant="subtitle1">
+                                {`${avalTime.available_start_time} - ${avalTime.available_end_time}`}&nbsp;
+                                ({weekDaysHelper(avalTime.available_days, t)})
+                            </Typography>
+                        </Box>
+                    </Grid>
+                </Grid>
+            )}
+        </>
     );
 };

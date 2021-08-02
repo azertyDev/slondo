@@ -1,6 +1,5 @@
 import {makeStyles} from '@material-ui/core/styles';
 
-
 export const useStyles = makeStyles((theme) => ({
     root: {
         '& div.title-wrapper': {
@@ -12,10 +11,11 @@ export const useStyles = makeStyles((theme) => ({
             }
         },
         '& div.publish-button-wrapper': {
-            display: 'flex',
-            justifyContent: 'flex-end',
-            '& > button > h6': {
-                color: theme.palette.primary.white
+            '& button': {
+                background: theme.palette.primary.createAdBtnColor,
+                '& p': {
+                    color: theme.palette.primary.white
+                }
             }
         }
     }

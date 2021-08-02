@@ -180,39 +180,44 @@ export const AppearanceForm: FC<AppearanceFormPropsType> = (props) => {
                 submitTxt='priceDescContacts'
                 title={t('post:appearance')}
             >
-                <Grid item container xs={12} className={classes.root}>
+                <Grid item container spacing={2} className={classes.root}>
                     {isPreview
-                        ? <div className='preview'>
+                        ? <>
                             {!!color && (
-                                <div className='color-preview'>
-                                    <Typography variant="subtitle1">
-                                        <strong>
-                                            {t('color')}:
-                                        </strong>
+                                <Grid item xs={12}>
+                                    <Typography variant="subtitle1" component='p' gutterBottom>
+                                        {t('color')}
                                     </Typography>
-                                    <Typography variant='subtitle2'>
-                                        {t(values.color.name)}
-                                    </Typography>
-                                    <div
-                                        className='color'
-                                        style={{backgroundColor: values.color.hex_color_code}}
-                                    />
-                                </div>)}
-                            <div className='photos-preview'>
-                                <Typography variant="subtitle1">
-                                    <strong>
-                                        {t('post:photos')}:
-                                    </strong>
+                                    <Box className='color-preview'>
+                                        <div
+                                            className='color'
+                                            style={{backgroundColor: values.color.hex_color_code}}
+                                        />
+                                        {values.color.name && (
+                                            <Typography variant='subtitle2' component='p'>
+                                                {t(values.color.name)}
+                                            </Typography>
+                                        )}
+                                    </Box>
+                                </Grid>
+                            )}
+                            <Grid item xs={12}>
+                                <Typography variant="subtitle1" component='p' gutterBottom>
+                                    {t('post:photos')}:
                                 </Typography>
-                                {files.map((photo, i) => (
-                                    !!photo && <img
-                                        key={i}
-                                        alt="photo"
-                                        src={photo.url}
-                                    />
-                                ))}
-                            </div>
-                        </div>
+                                <Grid item container xs={12} spacing={1} className='photos-preview'>
+                                    {files.map((photo, i) => (
+                                        !!photo && <Grid item xs={6} sm={4} lg={2}>
+                                            <img
+                                                key={i}
+                                                alt="photo"
+                                                src={photo.url}
+                                            />
+                                        </Grid>
+                                    ))}
+                                </Grid>
+                            </Grid>
+                        </>
                         : <>
                             {!!colors && (
                                 <Grid item xs={12}>
@@ -232,12 +237,11 @@ export const AppearanceForm: FC<AppearanceFormPropsType> = (props) => {
                                     <List disablePadding className='color-select'>
                                         <Grid container spacing={2}>
                                             {colors.map(clr =>
-                                                <Grid item xs={12} sm={4} md={2} lg={1}>
+                                                <Grid key={clr.id} item xs={12} sm={4} md={2} lg={1}>
                                                     <ListItem
-                                                        key={clr.id}
+                                                        disableGutters
                                                         onClick={handleColor(clr)}
                                                         className='color-wrapper'
-                                                        disableGutters
                                                     >
                                                         <div
                                                             className={!!color && clr.id === color.id ? 'selected-color' : ''}
@@ -296,7 +300,8 @@ export const AppearanceForm: FC<AppearanceFormPropsType> = (props) => {
                                     не должно превышать - 15 Mb
                                 </Box>
                             </Grid>
-                        </>}
+                        </>
+                    }
                 </Grid>
             </CustomAccordion>
         </CustomFormikProvider>

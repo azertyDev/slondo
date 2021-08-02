@@ -302,7 +302,6 @@ export const CommonForm: FC<DefaultParamsPropsType> = (props) => {
                 <Grid item container spacing={2} className={classes.root}>
                     {isPreview
                         ? <CommonFormPreview
-                            t={t}
                             values={values}
                             userPhone={userPhone}
                             location={location}

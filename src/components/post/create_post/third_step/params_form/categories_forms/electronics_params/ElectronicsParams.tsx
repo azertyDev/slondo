@@ -12,7 +12,6 @@ import {CheckboxSelect} from '@src/components/elements/checkbox_select/CheckboxS
 import {PreviewValues} from '@src/components/post/create_post/third_step/params_form/PreviewValues';
 import {getFieldsByFilters} from '@src/helpers';
 import {useUrlParams} from "@src/hooks";
-import {DropDownSelect} from "@src/components/elements/drop_down_select/DropDownSelect";
 
 export const ElectronicsParams: FC<CommonParamsPropsType> = (props) => {
     const {
