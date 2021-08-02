@@ -299,7 +299,7 @@ export const CommonForm: FC<DefaultParamsPropsType> = (props) => {
                 open={currentFormIndex === formIndex}
                 isEditable={currentFormIndex < formIndex}
             >
-                <Grid item container spacing={2} className={classes.root}>
+                <>
                     {isPreview
                         ? <CommonFormPreview
                             values={values}
@@ -413,7 +413,7 @@ export const CommonForm: FC<DefaultParamsPropsType> = (props) => {
                                 )}
                             </Grid>
                         </>}
-                </Grid>
+                </>
             </CustomAccordion>
         </CustomFormikProvider>
     );

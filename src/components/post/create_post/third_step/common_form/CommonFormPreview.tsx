@@ -1,6 +1,6 @@
 import {FC} from 'react';
 import {WithT} from 'i18next';
-import {Grid, Typography} from '@material-ui/core';
+import {Button, Grid, Typography} from '@material-ui/core';
 import {numberPrettier, weekDaysHelper} from '@src/helpers';
 import {useStyles} from './useStyles';
 import Box from '@material-ui/core/Box';
@@ -28,7 +28,7 @@ export const CommonFormPreview: FC<DefaultParamsPropsType> = (props) => {
         isAdvanceAuction
     } = props;
 
-    const {t} = useTranslation('post');
+    const {t} = useTranslation();
 
     const {auction, avalTime} = values;
     const locationText = `${t(`locations:${location.region.name}.name`)}${location.city ? `, ${t(`locations:${location.region.name}.${location.city.name}`)}` : ''}`;
@@ -36,14 +36,14 @@ export const CommonFormPreview: FC<DefaultParamsPropsType> = (props) => {
     const classes = useStyles();
     return (
         <>
-            {isAuction || isAdvanceAuction ? null : (
-                <Grid container item>
-                    <Grid item xs={4}>
-                        <Typography variant="subtitle1">
+            {(isAuction && isAdvanceAuction) ? null : (
+                <Grid container item spacing={2}>
+                    <Grid item xs={12} sm={4}>
+                        <Typography variant="subtitle1" color='textSecondary'>
                             {t(`filters:${priceLabel}`)}:
                         </Typography>
                     </Grid>
-                    <Grid item xs={8}>
+                    <Grid item xs={12} sm={8}>
                         <Typography variant="subtitle1">
                             {numberPrettier(values.price)}&nbsp;
                             {values.currency.name}
@@ -54,13 +54,13 @@ export const CommonFormPreview: FC<DefaultParamsPropsType> = (props) => {
             {isAuction && (
                 <>
                     {values.price && (
-                        <Grid container item>
-                            <Grid item xs={4}>
-                                <Typography variant="subtitle1">
+                        <Grid container item spacing={2}>
+                            <Grid item xs={12} sm={4}>
+                                <Typography variant="subtitle1" color='textSecondary'>
                                     {t('filters:start_price')}:
                                 </Typography>
                             </Grid>
-                            <Grid item xs={8}>
+                            <Grid item xs={12} sm={8}>
                                 <Typography variant="subtitle1">
                                     {numberPrettier(values.price)}&nbsp;
                                     {values.currency.name}
@@ -69,13 +69,13 @@ export const CommonFormPreview: FC<DefaultParamsPropsType> = (props) => {
                         </Grid>
                     )}
                     {auction?.duration?.hours && (
-                        <Grid container item>
-                            <Grid item xs={4}>
-                                <Typography variant="subtitle1">
+                        <Grid container item spacing={2}>
+                            <Grid item xs={12} sm={4}>
+                                <Typography variant="subtitle1" color='textSecondary'>
                                     {t('filters:auction_duration')}:
                                 </Typography>
                             </Grid>
-                            <Grid item xs={8}>
+                            <Grid item xs={12} sm={8}>
                                 <Typography variant="subtitle1">
                                     {auction?.duration?.hours}
                                 </Typography>
@@ -83,13 +83,13 @@ export const CommonFormPreview: FC<DefaultParamsPropsType> = (props) => {
                         </Grid>
                     )}
                     {auction.reserve_price && (
-                        <Grid container item>
-                            <Grid item xs={4}>
-                                <Typography variant="subtitle1">
+                        <Grid container item spacing={2}>
+                            <Grid item xs={12} sm={4}>
+                                <Typography variant="subtitle1" color='textSecondary'>
                                     {t('filters:reserve_price')}:
                                 </Typography>
                             </Grid>
-                            <Grid item xs={8}>
+                            <Grid item xs={12} sm={8}>
                                 <Typography variant="subtitle1">
                                     {auction.reserve_price}
                                 </Typography>
@@ -99,26 +99,42 @@ export const CommonFormPreview: FC<DefaultParamsPropsType> = (props) => {
                 </>
             )}
             {auction.price_buy_now.value && (
-                <Grid container item>
-                    <Grid item xs={4}>
-                        <Typography variant="subtitle1">
+                <Grid container item spacing={2}>
+                    <Grid item xs={12} sm={4}>
+                        <Typography variant="subtitle1" color='textSecondary'>
                             {t('filters:buy_now')}:
                         </Typography>
                     </Grid>
-                    <Grid item xs={8}>
+                    <Grid item xs={12} sm={8}>
                         <Typography variant="subtitle1">
                             {auction.price_buy_now.value}
                         </Typography>
                     </Grid>
                 </Grid>
             )}
-            <Grid container item>
-                <Grid item xs={4}>
-                    <Typography variant="subtitle1">
-                        {t('additionalServices')}
+            <Grid container item spacing={2}>
+                <Grid item xs={12} sm={4}>
+                    <Typography variant="subtitle1" color='textSecondary'>
+                        {t('filters:additionalServices')}
                     </Typography>
                 </Grid>
-                <Grid item xs={8} container>
+                <Grid item xs={12} sm={8} container>
+                    {values.delivery && (
+                        <Box className={classes.serviceItem}>
+                            <DeliveryIcon />
+                            <Typography variant="subtitle1">
+                                {t('filters:delivery')}
+                            </Typography>
+                        </Box>
+                    )}
+                    {values.exchange && (
+                        <Box className={classes.serviceItem}>
+                            <ExchangeIcon />
+                            <Typography variant="subtitle1">
+                                {t('filters:exchange')}
+                            </Typography>
+                        </Box>
+                    )}
                     {auction.auto_renewal && (
                         <Box className={classes.serviceItem}>
                             <RenewalIcon />
@@ -141,69 +157,53 @@ export const CommonFormPreview: FC<DefaultParamsPropsType> = (props) => {
                                 {t('filters:safe_deal')}
                             </Typography>
                         </Box>
-                    )}
-                    {values.delivery && (
-                        <Box className={classes.serviceItem}>
-                            <DeliveryIcon />
-                            <Typography variant="subtitle1">
-                                {t('filters:delivery')}
-                            </Typography>
-                        </Box>
-                    )}
-                    {values.exchange && (
-                        <Box className={classes.serviceItem}>
-                            <ExchangeIcon />
-                            <Typography variant="subtitle1">
-                                {t('filters:exchange')}
-                            </Typography>
-                        </Box>
-                    )}
+                    )}                   
                 </Grid>
             </Grid>
-            <Grid container item>
-                <Grid item xs={4}>
-                    <Typography variant="subtitle1">
+            <Grid container item spacing={2}>
+                <Grid item xs={12} sm={4}>
+                    <Typography variant="subtitle1" color='textSecondary'>
                         {t('locations:location')}:
                     </Typography>
                 </Grid>
-                <Grid item xs={8}>
+                <Grid item xs={12} sm={8}>
                     <Typography variant="subtitle1">
                         {locationText}
                     </Typography>
                 </Grid>
             </Grid>
-            <Grid container item>
-                <Grid item xs={4}>
-                    <Typography variant="subtitle1">
+            <Grid container item spacing={2}>
+                <Grid item xs={12} sm={4}>
+                    <Typography variant="subtitle1" color='textSecondary'>
                         {t('filters:description')}:
                     </Typography>
                 </Grid>
-                <Grid item xs={8}>
+                <Grid item xs={12} sm={8}>
                     <Typography variant="subtitle1">
                         {values.description}
                     </Typography>
                 </Grid>
             </Grid>
-            <Grid container item>
-                <Grid item xs={4}>
-                    <Typography variant="subtitle1">
+            <Grid container item spacing={2}>
+                <Grid item xs={12} sm={4}>
+                    <Typography variant="subtitle1" color='textSecondary'>
                         {t('filters:own_phone')}:
                     </Typography>
                 </Grid>
-                <Grid item xs={8}>
+                <Grid item xs={12} sm={8}>
                     <Typography variant="subtitle1">
                         +{userPhone}
                     </Typography>
                 </Grid>
             </Grid>
             {!!values.phone && !RegExp(/_/g).test(values.phone) && (
-                <Grid container item>
-                    <Grid item xs={4}>
-                        <Typography variant="subtitle1">
+                <Grid container item spacing={2}>
+                    <Grid item xs={12} sm={4}>
+                        <Typography variant="subtitle1" color='textSecondary'>
                             {t('filters:additional_phone')}:
                         </Typography>
                     </Grid>
-                    <Grid item xs={8}>
+                    <Grid item xs={12} sm={8}>
                         <Typography variant="subtitle1">
                             {values.phone}
                         </Typography>
@@ -211,13 +211,13 @@ export const CommonFormPreview: FC<DefaultParamsPropsType> = (props) => {
                 </Grid>
             )}
             {avalTimeActive && (
-                <Grid container item>
-                    <Grid item xs={4}>
-                        <Typography variant="subtitle1">
+                <Grid container item spacing={2}>
+                    <Grid item xs={12} sm={4}>
+                        <Typography variant="subtitle1" color='textSecondary'>
                             {t('common:call_times')}:
                         </Typography>
                     </Grid>
-                    <Grid item xs={8}>
+                    <Grid item xs={12} sm={8}>
                         <Box className={classes.serviceItem}>
                             <PhoneIcon />
                             <Typography variant="subtitle1">
