@@ -20,7 +20,7 @@ export const PostTypesPage: FC = () => {
 
     const classes = useStyles();
     return (
-        <>
+        <MainLayout>
             <StepsProgress activeStep={0}/>
             <div className={classes.root}>
                 <Grid container spacing={2}>
@@ -109,6 +109,6 @@ export const PostTypesPage: FC = () => {
                     )}
                 </Grid>
             </div>
-        </>
+        </MainLayout>
     );
 };

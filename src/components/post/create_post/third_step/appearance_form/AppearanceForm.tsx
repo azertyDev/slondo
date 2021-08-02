@@ -232,7 +232,7 @@ export const AppearanceForm: FC<AppearanceFormPropsType> = (props) => {
                                     <List disablePadding className='color-select'>
                                         <Grid container spacing={2}>
                                             {colors.map(clr =>
-                                                <Grid item xs={12} sm={4} md='auto'>
+                                                <Grid item xs={12} sm={4} md={2} lg={1}>
                                                     <ListItem
                                                         key={clr.id}
                                                         onClick={handleColor(clr)}
