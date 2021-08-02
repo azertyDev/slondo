@@ -74,41 +74,84 @@ export const CustomDrawer: FC<CustomDrawerPropsType> = (props) => {
                     <div className='close-btn-wrapper'>
                         <CloseBtn handleClose={handleClose}/>
                     </div>
-                    <Box display='flex' flexWrap='wrap'>
-                        {subcategory.map(subctgr => {
-                            const location = 'tashkent';
-                            const categoryName = transformCyrillic(hoveredCtgr.ru_name);
-                            const subcategoryName = transformCyrillic(subctgr.ru_name);
-                            const type = subctgr.type || [];
-                            const url = `/${location}/${categoryName}/${subcategoryName}`;
-                            return (
-                                <List key={subctgr.id} className='list-wrapper'>
-                                    <Link href={url}>
-                                        <a onClick={handleClose}>
-                                            <Typography variant="h6" gutterBottom color="secondary" className='list-title'>
-                                                {t(`${hoveredCtgr.name}.${subctgr.name}.name`)}
-                                            </Typography>
-                                        </a>
-                                    </Link>
-                                    {type.map(type => {
-                                        const typeName = transformCyrillic(type.ru_name);
-                                        const typeCtgrTrans = t(`${hoveredCtgr.name}.${subctgr.name}.${type.name}.name`);
-                                        return (
-                                            <ListItem key={type.id} className='list-item'>
-                                                <Link href={url + `/${typeName}`}>
-                                                    <a onClick={handleClose}>
-                                                        <Typography variant="subtitle1" key={type.id}>
-                                                            {typeCtgrTrans}
-                                                        </Typography>
-                                                    </a>
-                                                </Link>
-                                            </ListItem>
-                                        );
-                                    })}
-                                </List>
-                            );
-                        })}
-                    </Box>
+                    <div className='main-box-wrapper'>
+                        <div className='box-wrapper'>
+                            {subcategory.map((subctgr, i) => {
+                                const location = 'tashkent';
+                                const categoryName = transformCyrillic(hoveredCtgr.ru_name);
+                                const subcategoryName = transformCyrillic(subctgr.ru_name);
+                                const type = subctgr.type || [];
+                                const url = `/${location}/${categoryName}/${subcategoryName}`;
+                                if (i % 2 === 0) {
+                                    return (
+                                        <List key={subctgr.id} className='list-wrapper'>
+                                            <Link href={url}>
+                                                <a onClick={handleClose}>
+                                                    <Typography variant="h6" gutterBottom color="secondary"
+                                                                className='list-title'>
+                                                        {t(`${hoveredCtgr.name}.${subctgr.name}.name`)}
+                                                    </Typography>
+                                                </a>
+                                            </Link>
+                                            {type.map(type => {
+                                                const typeName = transformCyrillic(type.ru_name);
+                                                const typeCtgrTrans = t(`${hoveredCtgr.name}.${subctgr.name}.${type.name}.name`);
+                                                return (
+                                                    <ListItem key={type.id} className='list-item'>
+                                                        <Link href={url + `/${typeName}`}>
+                                                            <a onClick={handleClose}>
+                                                                <Typography variant="subtitle1" key={type.id}>
+                                                                    {typeCtgrTrans}
+                                                                </Typography>
+                                                            </a>
+                                                        </Link>
+                                                    </ListItem>
+                                                );
+                                            })}
+                                        </List>
+                                    );
+                                }
+                            })}
+                        </div>
+                        <div className='box-wrapper'>
+                            {subcategory.map((subctgr, i) => {
+                                const location = 'tashkent';
+                                const categoryName = transformCyrillic(hoveredCtgr.ru_name);
+                                const subcategoryName = transformCyrillic(subctgr.ru_name);
+                                const type = subctgr.type || [];
+                                const url = `/${location}/${categoryName}/${subcategoryName}`;
+                                if (i % 2 !== 0) {
+                                    return (
+                                        <List key={subctgr.id} className='list-wrapper'>
+                                            <Link href={url}>
+                                                <a onClick={handleClose}>
+                                                    <Typography variant="h6" gutterBottom color="secondary"
+                                                                className='list-title'>
+                                                        {t(`${hoveredCtgr.name}.${subctgr.name}.name`)}
+                                                    </Typography>
+                                                </a>
+                                            </Link>
+                                            {type.map(type => {
+                                                const typeName = transformCyrillic(type.ru_name);
+                                                const typeCtgrTrans = t(`${hoveredCtgr.name}.${subctgr.name}.${type.name}.name`);
+                                                return (
+                                                    <ListItem key={type.id} className='list-item'>
+                                                        <Link href={url + `/${typeName}`}>
+                                                            <a onClick={handleClose}>
+                                                                <Typography variant="subtitle1" key={type.id}>
+                                                                    {typeCtgrTrans}
+                                                                </Typography>
+                                                            </a>
+                                                        </Link>
+                                                    </ListItem>
+                                                );
+                                            })}
+                                        </List>
+                                    );
+                                }
+                            })}
+                        </div>
+                    </div>
                 </div>
             )}
         </Drawer>

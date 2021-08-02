@@ -50,6 +50,14 @@ export const useStyles = makeStyles(() => ({
         padding: '10px',
         overflow: 'scroll',
         scrollbarWidth: 'thin',
+        '& div.main-box-wrapper': {
+            display: 'flex',
+            '& div.box-wrapper': {
+                display: 'flex',
+                flexDirection: 'column',
+                width: '50%'
+            }
+        },
         '& div.close-btn-wrapper': {
             display: 'flex',
             justifyContent: 'flex-end'
@@ -75,7 +83,6 @@ export const useStyles = makeStyles(() => ({
             }
         },
         '& .list-wrapper': {
-            width: '50%',
             '& h6.list-title': {
                 fontWeight: '600'
             },
