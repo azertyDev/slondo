@@ -232,7 +232,7 @@ export const FormPages: FC = () => {
                         {isPreview && (
                             <div className='publish-button-wrapper'>
                                 <CustomButton disabled={isFetch} onClick={toPublish}>
-                                    <Typography variant='subtitle1'>
+                                    <Typography variant='subtitle1' component='p'>
                                         {t('publish')}
                                     </Typography>
                                 </CustomButton>

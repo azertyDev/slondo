@@ -33,5 +33,16 @@ export const useStyles = makeStyles((theme) => ({
                 }
             }
         }
+    },
+    serviceItem: {
+        padding: '8px 15px',
+        display: 'flex',
+        backgroundColor: '#fff',
+        borderRadius: '100px',
+        width: 'max-content',
+        margin: '2px 10px 2px 0',
+        '& svg': {
+            marginRight: 10
+        }
     }
 }));

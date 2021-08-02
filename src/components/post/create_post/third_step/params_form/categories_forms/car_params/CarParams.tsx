@@ -780,9 +780,6 @@ export const CarParams: FC<CarParamsPropsType> = (props) => {
             const manufacturer = filters.manufacturer.find(m => m.id === manufacturerParam.id);
             const model = manufacturer.models.find(m => m.id === modelParam.id);
             const engine_capacity = engine_capacityParam.name;
-            console.log(manufacturer);
-            console.log(model);
-            console.log(others);
             const [valsByYear] = (await userAPI.getCarDataByYear(model.id, others.year.id)).bodies;
 
             Object.keys(others).forEach(k => {
