@@ -1,7 +1,7 @@
 import {FC, useEffect} from 'react';
 import {useFormik} from 'formik';
-import {unstable_batchedUpdates} from "react-dom";
-import {Box, Grid, Typography} from '@material-ui/core';
+import {unstable_batchedUpdates} from 'react-dom';
+import {Box, Grid, List, ListItem, Typography} from '@material-ui/core';
 import {UPLOAD_FILES_LIMIT} from '@src/constants';
 import {PreviewPhotos} from './preview_photos/PreviewPhotos';
 import {CustomAccordion} from '@src/components/elements/accordion/CustomAccordion';
@@ -10,13 +10,13 @@ import {ViewIcon} from '@src/components/elements/icons';
 import {appearanceSchema} from '@root/validation_schemas/createPostSchemas';
 import {CustomFormikProvider} from '@src/components/elements/custom_formik_provider/CustomFormikProvider';
 import {useTranslation} from 'react-i18next';
-import {useRouter} from "next/router";
-import {DropResult} from "react-beautiful-dnd";
+import {useRouter} from 'next/router';
+import {DropResult} from 'react-beautiful-dnd';
 import {useStyles} from './useStyles';
 
 type AppearanceFormPropsType = {
     categoryName: string,
-    colors: (IdNameType & { hex_color_code: string })[],
+    colors: (IdNameType & {hex_color_code: string})[],
     handleSubmit: (v) => void,
     isPreview: boolean,
     currentFormIndex: number,
@@ -215,13 +215,13 @@ export const AppearanceForm: FC<AppearanceFormPropsType> = (props) => {
                         </div>
                         : <>
                             {!!colors && (
-                                <div>
-                                    <Typography variant="subtitle1">
+                                <Grid item xs={12}>
+                                    <Typography variant="subtitle1" gutterBottom>
                                         {!isJob && (
-                                            <strong>
+                                            <>
                                                 {t('color')}
                                                 {<span className='error-text'>*&nbsp;</span>}
-                                            </strong>
+                                            </>
                                         )}
                                         {errors.color
                                         && touched.color
@@ -229,26 +229,31 @@ export const AppearanceForm: FC<AppearanceFormPropsType> = (props) => {
                                              {t(`errors:${errors.color}`)}
                                          </span>}
                                     </Typography>
-                                    <div className='color-select'>
-                                        {colors.map(clr =>
-                                            <div
-                                                key={clr.id}
-                                                onClick={handleColor(clr)}
-                                                className='color-wrapper'
-                                            >
-                                                <div
-                                                    className={!!color && clr.id === color.id ? 'selected-color' : ''}
-                                                    style={{backgroundColor: clr.hex_color_code}}
-                                                />
-                                                <Typography variant='subtitle2'>
-                                                    {t(`${categoryName}.${clr.name}.name`)}
-                                                </Typography>
-                                            </div>
-                                        )}
-                                    </div>
-                                </div>
+                                    <List disablePadding className='color-select'>
+                                        <Grid container spacing={2}>
+                                            {colors.map(clr =>
+                                                <Grid item xs={12} sm={4} md='auto'>
+                                                    <ListItem
+                                                        key={clr.id}
+                                                        onClick={handleColor(clr)}
+                                                        className='color-wrapper'
+                                                        disableGutters
+                                                    >
+                                                        <div
+                                                            className={!!color && clr.id === color.id ? 'selected-color' : ''}
+                                                            style={{backgroundColor: clr.hex_color_code}}
+                                                        />
+                                                        <Typography variant='subtitle2' component='p'>
+                                                            {t(`${categoryName}.${clr.name}.name`)}
+                                                        </Typography>
+                                                    </ListItem>
+                                                </Grid>
+                                            )}
+                                        </Grid>
+                                    </List>
+                                </Grid>
                             )}
-                            <Box width='inherit' className='photos-wrapper'>
+                            <Grid item xs={12}>
                                 <Box
                                     fontWeight={500}
                                     fontSize={18}
@@ -290,7 +295,7 @@ export const AppearanceForm: FC<AppearanceFormPropsType> = (props) => {
                                     Вы можете загрузить фотографий в формате JPEG или PNG. Размер одной фотографии
                                     не должно превышать - 15 Mb
                                 </Box>
-                            </Box>
+                            </Grid>
                         </>}
                 </Grid>
             </CustomAccordion>

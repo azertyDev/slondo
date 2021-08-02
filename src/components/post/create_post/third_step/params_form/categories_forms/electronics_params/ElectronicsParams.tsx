@@ -86,7 +86,7 @@ export const ElectronicsParams: FC<CommonParamsPropsType> = (props) => {
                     ? <PreviewValues
                         values={values}
                         filters={filters}
-                        transKey={t(`${categoryName}.`)}
+                        transKey={`${categoryName}.`}
                     />
                     : <>
                         <Grid item container spacing={2}>

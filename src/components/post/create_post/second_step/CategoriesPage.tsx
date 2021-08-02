@@ -107,7 +107,7 @@ export const CategoriesPage: FC = () => {
 
     const classes = useStyles();
     return (
-        <MainLayout>
+        <>
             <div className={classes.root}>
                 <Hidden mdDown>
                     <StepsProgress
@@ -218,6 +218,6 @@ export const CategoriesPage: FC = () => {
                     )}
                 </Grid>
             </div>
-        </MainLayout>
+        </>
     );
 };

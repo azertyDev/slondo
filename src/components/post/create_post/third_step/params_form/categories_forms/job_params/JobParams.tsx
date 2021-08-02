@@ -85,7 +85,7 @@ export const JobParams: FC<CommonParamsPropsType> = (props) => {
                         ? <PreviewValues
                             values={values}
                             filters={filters}
-                            transKey={t(`${categoryName}.`)}
+                            transKey={`${categoryName}.`}
                         />
                         : <>
                             {hasPosition && (

@@ -335,7 +335,7 @@ export const CommonForm: FC<DefaultParamsPropsType> = (props) => {
                                             errorMsg={getErrorMsg(errors.price, touched.price, t)}
                                         />
                                     </Grid>
-                                    <Grid item xs={4} md={2}>
+                                    <Grid item xs={4} sm={2}>
                                         <DropDownSelect
                                             name='currency'
                                             values={values}
@@ -392,7 +392,7 @@ export const CommonForm: FC<DefaultParamsPropsType> = (props) => {
                                 </Grid>
                                 {!isAuction && (
                                     <Grid item container xs={12} sm={6} justify='center'>
-                                        <Grid item xs={8} className='avail-days-wrapper'>
+                                        <Grid item xs={12} sm={12} lg={8} className='avail-days-wrapper'>
                                             <AvailableDays
                                                 t={t}
                                                 time={values.avalTime}

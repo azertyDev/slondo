@@ -3,7 +3,7 @@ import {
     DeliveryIcon,
     EyeIcon,
     FavoriteBorderIcon,
-    FavoritedIcon, LocationIcon, PhoneIcon,
+    PhoneIcon,
     RenewalIcon,
     SafeIcon, SwapIcon
 } from '@src/components/elements/icons';
@@ -30,12 +30,12 @@ export const ListCard: FC<ListCardPropsType> = ({cardData}) => {
 
     const timer = ({days, hours, minutes, seconds, completed}) => (
         <Box>
-            <Typography variant="subtitle2" color="initial" className='color-silver'>
+            <Typography variant="subtitle2" component='p' color="initial" className='color-silver'>
                 {completed ? 'Торги окончены' : 'Окончание торгов через: '}&nbsp;
             </Typography>
             {!completed && (
                 <Box display="flex">
-                    <Typography variant="subtitle2" className="timer">
+                    <Typography variant="subtitle2" component='p' className="timer">
                         {formatNumber(days)}д &nbsp;
                         {formatNumber(hours)}ч
                         : {formatNumber(minutes)}м
@@ -99,12 +99,12 @@ export const ListCard: FC<ListCardPropsType> = ({cardData}) => {
                 }
             </Grid>
             <Grid item xs={6} sm={8} md={9} container alignContent='space-between' className="content">
-                <Grid item xs={12} sm={12} lg={7} className="post-title">
+                <Grid item xs={12} sm={12} lg={7} >
                     <Link href={url}>
-                        <a target='_blank'>
+                        <a target='_blank' className="post-title">
                             <Typography
                                 noWrap
-                                variant="h6"
+                                variant="h3"
                                 color="initial"
                             >
                                 {cardData.title}
@@ -114,7 +114,7 @@ export const ListCard: FC<ListCardPropsType> = ({cardData}) => {
                 </Grid>
                 <Grid item xs={12} sm={8} className="description">
                     {!hasService
-                        ? <Typography variant='subtitle2'>
+                        ? <Typography variant='subtitle2' component='p'>
                             {cardData.description}
                         </Typography>
                         : <Box className='services'>
@@ -178,7 +178,7 @@ export const ListCard: FC<ListCardPropsType> = ({cardData}) => {
                             item xs={12} sm={6} md={6}
                             justify={isXsDown ? 'flex-start' : 'flex-end'}
                         >
-                            <Typography variant='subtitle2'>
+                            <Typography variant='subtitle2' component='p'>
                                 <span className='color-silver'>
                                     {t('auction:bets')}:
                                 </span>&nbsp;
@@ -197,11 +197,11 @@ export const ListCard: FC<ListCardPropsType> = ({cardData}) => {
                         direction='column'
                         className='location'
                     >
-                        <Typography variant='subtitle2' noWrap>
+                        <Typography variant='subtitle2' component='p' noWrap>
                             {formatted_date}
                         </Typography>
                         <Typography
-                            variant="subtitle2"
+                            variant="subtitle2" component='p'
                             color="initial"
                             noWrap
                         >
@@ -217,11 +217,12 @@ export const ListCard: FC<ListCardPropsType> = ({cardData}) => {
                     >
                         {isAuction
                             ? hasBet && <>
-                            <Typography variant='subtitle1' className='color-silver'>
+                            <Typography variant='subtitle1' component='p' className='color-silver'>
                                 {t('common:currentRate')}
                             </Typography>
                             <Typography
                                 variant="h6"
+                                component='p'
                                 color="initial"
                                 noWrap
                             >
@@ -231,6 +232,7 @@ export const ListCard: FC<ListCardPropsType> = ({cardData}) => {
                         </>
                             : <Typography
                                 variant="h6"
+                                component='p'
                                 color="initial"
                                 noWrap
                             >

@@ -39,16 +39,15 @@ export const useStyles = makeStyles((theme) => ({
                 }
             }
         },
-        '& div.color-select': {
+        '& ul.color-select': {
             display: 'flex',
             flexWrap: 'wrap',
             cursor: 'pointer',
             [theme.breakpoints.down('sm')]: {
                 display: 'block'
             },
-            '& div.color-wrapper': {
+            '& li.color-wrapper': {
                 display: 'flex',
-                padding: '7px 10px',
                 alignItems: 'center',
                 flexDirection: 'column',
                 [theme.breakpoints.down('sm')]: {

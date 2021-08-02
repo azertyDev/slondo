@@ -3,19 +3,13 @@ import {makeStyles} from '@material-ui/core/styles';
 
 export const useStyles = makeStyles((theme) => ({
     root: {
-        '& .MuiAccordionSummary-content': {
-            display: 'flex',
-            alignItems: 'center',
-            margin: 0,
-            '& svg': {
-                marginRight: '10px'
-            }
-        },
         '& div.title-wrapper': {
             marginBottom: '15px'
         },
         '& > div': {
-            marginBottom: '15px'
+            '&:not(:last-child)': {
+                marginBottom: '15px'
+            }
         },
         '& div.publish-button-wrapper': {
             display: 'flex',

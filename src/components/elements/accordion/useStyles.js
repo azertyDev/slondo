@@ -5,6 +5,14 @@ export const useStyles = makeStyles((theme) => ({
     root: {
         '& div.MuiAccordion-root': {
             backgroundColor: '#F7F7F7',
+            '& .MuiAccordionSummary-content': {
+                display: 'flex',
+                alignItems: 'center',
+                margin: 0,
+                '& svg': {
+                    marginRight: '10px'
+                }
+            },
             '& div.MuiAccordionSummary-root': {
                 '& .header-preview': {
                     display: 'flex',

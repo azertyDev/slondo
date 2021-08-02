@@ -150,6 +150,7 @@ export const GridCard: FC<CardItemProps> = (props) => {
                                         <Typography
                                             variant="subtitle1"
                                             color="initial"
+                                            component='p'
                                             noWrap
                                         >
                                             {title}

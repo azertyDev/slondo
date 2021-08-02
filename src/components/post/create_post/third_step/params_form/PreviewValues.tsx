@@ -31,10 +31,9 @@ export const PreviewValues: FC<PreviewValuesPropsType> = (props) => {
                         const isArray = Array.isArray(values[key]);
                         const isExcludeKey = excludeFields.some(k => k === key);
                         const noTranslatable = noTranslatableFields.some(f => f === key);
-
+                    console.log(key);
                         if ((!!values[key] && !isExcludeKey && !isArray) || (isArray && !!values[key].length)) {
                             if (isArray) {
-                                console.log(key);
                                 value = values[key].map(val => {
                                     const valueName = filters[key].find(f => f.id === val).name;
                                     return t(`${transKey}${valueName}.name`);

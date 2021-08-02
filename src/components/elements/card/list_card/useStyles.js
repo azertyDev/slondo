@@ -59,19 +59,18 @@ export const useStyles = makeStyles((theme) => ({
                 padding: '10px'
             },
             '& .post-title': {
-                '& a': {
-                    textDecoration: 'none',
-                    '&:hover': {
-                        textDecoration: 'underline',
-                        textDecorationColor: '#4e4e4e'
+                textDecoration: 'none',
+                '&:hover': {
+                    textDecoration: 'underline',
+                    textDecorationColor: '#4e4e4e'
+                },
+                '& h3': {
+                    fontSize: theme.typography.h6.fontSize,
+                    [theme.breakpoints.down('lg')]: {
+                        fontSize: theme.typography.pxToRem(16)
                     },
-                    '& h6': {
-                        [theme.breakpoints.down('lg')]: {
-                            fontSize: theme.typography.pxToRem(16)
-                        },
-                        [theme.breakpoints.down('sm')]: {
-                            fontSize: theme.typography.pxToRem(14)
-                        }
+                    [theme.breakpoints.down('sm')]: {
+                        fontSize: theme.typography.pxToRem(14)
                     }
                 }
             }

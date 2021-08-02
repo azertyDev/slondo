@@ -15,13 +15,16 @@ export const useStyles = makeStyles((theme) => ({
             borderRadius: 10,
             padding: '15px 20px',
             '& > div.week-days': {
-                '& p.selected-day': {
-                    color: '#fff',
-                    backgroundColor: '#7DBCF6',
-                    padding: '3px',
-                    borderRadius: '5px'
+                '& p': {
+                    padding: 3,
+                    '&.selected-day': {
+                        color: '#fff',
+                        backgroundColor: '#7DBCF6',
+                        borderRadius: '5px'
+                    }
                 },
                 '& > span': {
+                    padding: 5,
                     [theme.breakpoints.down('sm')]: {
                         padding: '5px'
                     }

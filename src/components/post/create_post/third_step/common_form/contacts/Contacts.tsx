@@ -25,7 +25,7 @@ export const Contacts: FC<ContactsPropsType> = (props) => {
 
     const classes = useStyles();
     return (
-        <Grid item xs={6} className={classes.root}>
+        <Grid item xs={12} sm={8} md={8} className={classes.root}>
             {isAuction && (
                 <div className='display-phone'>
                     <Checkbox
