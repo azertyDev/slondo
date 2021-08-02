@@ -620,13 +620,13 @@ export const CarParams: FC<CarParamsPropsType> = (props) => {
                                                 >
                                                     <DropDownSelect
                                                         multiple
-                                                        name='assistant'
+                                                        name='assistance'
                                                         values={values}
                                                         onBlur={handleBlur}
-                                                        items={filters.assistant}
+                                                        items={filters.assistance}
                                                         handleSelect={handleSelect}
                                                         transKey={t(`${categoryName}.`)}
-                                                        labelTxt={t('car.assistant.name')}
+                                                        labelTxt={t('car.assistance.name')}
                                                     />
                                                 </Grid>
                                                 <Grid
@@ -692,10 +692,10 @@ export const CarParams: FC<CarParamsPropsType> = (props) => {
                                                     <OptionsSelect
                                                         isApratment={false}
                                                         column
-                                                        name='anti_theft'
+                                                        name='antitheft'
                                                         values={values}
                                                         transKey={`${categoryName}.`}
-                                                        options={filters.anti_theft}
+                                                        options={filters.antitheft}
                                                         handleOptionCheckbox={handleOptionCheckbox}
                                                     />
                                                 </Grid>

@@ -106,7 +106,7 @@ export const optionFields = [
     'properties',
     'power_windows',
     'multimedia',
-    'anti_theft',
+    'antitheft',
     'airbags',
     'assistant',
     'parking',

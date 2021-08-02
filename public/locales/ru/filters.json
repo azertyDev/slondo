@@ -15,11 +15,11 @@
     "parking": {
       "name": "Парковка"
     },
-    "anti_theft": {
+    "antitheft": {
       "name": "Противоугонная система"
     },
-    "assistant": {
-      "name": "Помощь при вождени"
+    "assistance": {
+      "name": "Помощь при вождении"
     },
     "engine_capacity": {
       "name": "Объем двигателя в литрах"
