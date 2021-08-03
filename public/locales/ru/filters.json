@@ -482,6 +482,15 @@
     }
   },
   "transport": {
+    "engine_capacity": {
+      "name": "Объем двигателя"
+    },
+    "year": {
+      "name": "Год выпуска"
+    },
+    "three_twelve_tone": {
+      "name": "От 3,5 до 12 т."
+    },
     "white": {
       "name": "Белый"
     },
@@ -855,11 +864,83 @@
     }
   },
   "estate": {
+    "area": {
+      "name": "Общая площадь, м2"
+    },
+    "living_area": {
+      "name": "Жилая площадь, м2"
+    },
+    "kitchen_area": {
+      "name": "Площадь кухни, м2"
+    },
+    "ceiling_height": {
+      "name": "Высота потолка"
+    },
+    "posted": {
+      "name": "Кем опубликовано"
+    },
+    "material": {
+      "name": "Материал дома"
+    },
+    "layout": {
+      "name": "Планировка"
+    },
+    "repair": {
+      "name": "Ремонт"
+    },
+    "lift": {
+      "name": "Лифт"
+    },
+    "bathroom": {
+      "name": "Санузел"
+    },
+    "balcony": {
+      "name": "Балкон"
+    },
+    "metro": {
+      "name": "До метро"
+    },
+    "number_of_bedrooms": {
+      "name": "Кол-во санузлов"
+    },
+    "general_area": {
+      "name": "Общая площадь, м2"
+    },
+    "land_area": {
+      "name": "Площадь участка, м2"
+    },
+    "garage": {
+      "name": "Гараж"
+    },
+    "water": {
+      "name": "Водоснабжение"
+    },
+    "electricity": {
+      "name": "Электричество"
+    },
+    "gas": {
+      "name": "Газ"
+    },
+    "heating": {
+      "name": "Отопление"
+    },
+    "area_in_hundred": {
+      "name": "Площадь участка в сот."
+    },
+    "sewerage": {
+      "name": "Канализация"
+    },
+    "parking_spaces": {
+      "name": "Машиномест"
+    },
+    "location": {
+      "name": "Тип недвижимости"
+    },
     "floor": {
       "name": "Этаж"
     },
     "number_of_floors": {
-      "name":"Этажность дома"
+      "name": "Этажность дома"
     },
     "infrastructure": {
       "name": "Инфраструктура"
@@ -1223,6 +1304,18 @@
     }
   },
   "job": {
+    "employment": {
+      "name": "Тип занятости"
+    },
+    "nature": {
+      "name": "Характер работы"
+    },
+    "urent_work": {
+      "name": "Срочная работа"
+    },
+    "free_schedule": {
+      "name": "Свободный график"
+    },
     "position": {
       "name": "Должность"
     },
@@ -2218,6 +2311,12 @@
     }
   },
   "service": {
+    "computer_services": {
+      "name": "Компьютерные услуги"
+    },
+    "in_clinic": {
+      "name": "В клинике"
+    },
     "cost_indicated": {
       "name": "Стоимость указана"
     },
@@ -2385,6 +2484,18 @@
     }
   },
   "goods": {
+    "gender": {
+      "name": "Пол"
+    },
+    "manufacturer": {
+      "name": "Производитель"
+    },
+    "age": {
+      "name": "Возраст"
+    },
+    "application_area": {
+      "name": "Область применения"
+    },
     "thirty_three": {
       "name": "33"
     },
@@ -3965,6 +4076,9 @@
     }
   },
   "home": {
+    "armchair": {
+      "name": "Кресло"
+    },
     "sofas": {
       "name": "Диваны"
     },
@@ -4657,6 +4771,129 @@
     }
   },
   "electronics": {
+    "used": {
+      "name": "Б/У"
+    },
+    "android": {
+      "name": "Android"
+    },
+    "ios": {
+      "name": "IOS"
+    },
+    "windows": {
+      "name": "Windows"
+    },
+    "symbian": {
+      "name": "Symbian"
+    },
+    "bada": {
+      "name": "Bada"
+    },
+    "blackberry": {
+      "name": "Blackberry"
+    },
+    "linux": {
+      "name": "Linux"
+    },
+    "synthetic_leather": {
+      "name": "Искусственная кожа"
+    },
+    "plastic_polyurethane_rubber": {
+      "name": "Пластик, полиуретан, резина"
+    },
+    "instant_printing": {
+      "name": "Моментальная печать"
+    },
+    "cassette": {
+      "name": "Кассета"
+    },
+    "optical_disk": {
+      "name": "Оптический диск"
+    },
+    "15to19_9": {
+      "name": "От 15” до 19.9”"
+    },
+    "3840х2160": {
+      "name": "3840х2160"
+    },
+    "2716х1528": {
+      "name": "2716х1528"
+    },
+    "1920х1200": {
+      "name": "1920х1200"
+    },
+    "1920х1080": {
+      "name": "1920х1080"
+    },
+    "1280х720": {
+      "name": "1280х720"
+    },
+    "1280х800": {
+      "name": "1280х800"
+    },
+    "1440х900": {
+      "name": "1440х900"
+    },
+    "1024х768": {
+      "name": "1024х768"
+    },
+    "800х600": {
+      "name": "800х600"
+    },
+    "854х480": {
+      "name": "854х480"
+    },
+    "2.1": {
+      "name": "2.1"
+    },
+    "4.2": {
+      "name": "4.2"
+    },
+    "5.1": {
+      "name": "5.1"
+    },
+    "7.1": {
+      "name": "7.1"
+    },
+    "9.1": {
+      "name": "9.1"
+    },
+    "gaseous": {
+      "name": "Газовые"
+    },
+    "induction": {
+      "name": "Индукционные"
+    },
+    "set_twelve_more": {
+      "name": "12 и более комплектов"
+    },
+    "to_700rpm": {
+      "name": "До 700 об/мин"
+    },
+    "rpm_1200_more": {
+      "name": "1200 об/мин и более"
+    },
+    "refrigerators": {
+      "name": "Холодильники"
+    },
+    "laptops": {
+      "name": "Ноутбуки"
+    },
+    "less_14": {
+      "name": "Менее 14”"
+    },
+    "one_thing": {
+      "name": "1 шт"
+    },
+    "two_thing": {
+      "name": "2 шт"
+    },
+    "four_thing": {
+      "name": "4 шт"
+    },
+    "accessories": {
+      "name": "Аксессуары"
+    },
     "new": {
       "name": "Новый"
     },
@@ -6288,6 +6525,18 @@
     }
   },
   "hobbies": {
+    "educational_literature": {
+      "name": "Учебная литература"
+    },
+    "hobbies_needlework_creativity": {
+      "name": "Хобби, рукоделие, творчество"
+    },
+    "boxing_martial_arts": {
+      "name": "Бокс, единоборства"
+    },
+    "roller_skates_scooters_skateboards": {
+      "name": "Ролики, самокаты, скейтборды"
+    },
     "movie": {
       "name": "Кино"
     },
@@ -6887,6 +7136,9 @@
     }
   },
   "animal": {
+    "other": {
+      "name": "Другое"
+    },
     "akita": {
       "name": "Акита"
     },
@@ -7429,7 +7681,6 @@
   "repair": "Ремонт",
   "transport_type": "Тип транспорта",
   "employment": "Тип занятости",
-  "experience": "Опыт",
   "require_experience": "Требуемый опыт",
   "nature": "Характер работы",
   "place": "Место оказания",
