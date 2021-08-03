@@ -27,7 +27,7 @@ export const CabinetModal: FC<CabinetModalPropsType> = (props) => {
             maxWidth={maxWidth}
             fullWidth={fullWidth}
         >
-            <Box p={4} position='relative'>
+            <Box p={{xs: 2, md: 4}} className={classes.root} overflow='scroll'>
                 <IconButton
                     size='medium'
                     onClick={handleCloseDialog}

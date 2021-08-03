@@ -4,8 +4,10 @@ export const useStyles = makeStyles((theme) => ({
     root: {
         '& div.MuiDialog-paperFullScreen': {
             [theme.breakpoints.down('sm')]: {
+                maxWidth: '576px',
                 alignItems: 'center',
-                maxWidth: '576px'
+                justifyContent: 'center',
+                overflow: 'hidden'
             }
         },
         '& div.MuiDialog-paperWidthMd': {

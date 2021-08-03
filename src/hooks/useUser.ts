@@ -6,7 +6,7 @@ export const initUser: UserInfo = {
     name: '',
     surname: '',
     phone: '',
-    avatar: null,
+    avatar: '',
     created_at: '',
     available_days: [],
     available_start_time: '',

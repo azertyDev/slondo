@@ -14,6 +14,7 @@ export const useStyles = makeStyles((theme) => ({
         },
         '& .img': {
             borderRadius: '10px 0px 0px 10px',
+            height: 'inherit',
             backgroundImage: ({cardData}) => `url(${cardData.image ?? '/img/Vector.png'})`,
             backgroundPosition: 'center',
             backgroundSize: 'cover',

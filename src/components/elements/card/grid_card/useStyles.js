@@ -67,14 +67,13 @@ export const useStyles = makeStyles((theme) => ({
                     [theme.breakpoints.down('xs')]: {
                         padding: '5px 0 3px 5px'
                     },
-                    '& > div.title': {
+                    '& > div.post_type': {
                         display: 'inline-flex',
-                        '& > h6': {
-                            height: '16px',
-                            lineHeight: '1.2',
+                        '& > p': {
+                            // lineHeight: '1.2',
                             letterSpacing: '0.4px',
                             borderRadius: '3px',
-                            padding: '0 5px',
+                            padding: '2px 5px',
                             color: theme.palette.primary.white,
                             backgroundColor: ({ads_type}) => (
                                 ads_type === 'post'
@@ -84,9 +83,7 @@ export const useStyles = makeStyles((theme) => ({
                                     : 'rgba(173, 102, 213, 0.65)'
                             ),
                             [theme.breakpoints.down('xs')]: {
-                                height: '18px',
-                                display: 'flex',
-                                alignItems: 'center'
+                                fontSize: '0.75rem'
                             }
                         }
                     },
@@ -147,8 +144,25 @@ export const useStyles = makeStyles((theme) => ({
                 }
             }
         },
-        '& span.price': {
-            color: '#4e4e4e'
+        '& .price': {
+            fontSize: '1.5rem',
+            fontWeight: 500,
+            [theme.breakpoints.down('sm')]: {
+                fontSize: '1rem'
+            },
+            [theme.breakpoints.down('xs')]: {
+                fontSize: '0.875rem'
+            }
+        }
+    },
+    title: {
+        [theme.breakpoints.down('xs')]: {
+            fontSize: '0.875rem'
+        }
+    },
+    mobileFont: {
+        [theme.breakpoints.down('xs')]: {
+            fontSize: '0.625rem'
         }
     },
     skeleton: {

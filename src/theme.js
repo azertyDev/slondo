@@ -122,6 +122,7 @@ const theme = createMuiTheme({
                     }
                 },
                 body: {
+                    minWidth: '320px',
                     backgroundColor: '#fafafa',
                     '@media (max-width: 991px)': {
                         fontFamily: ['Roboto', 'Helvetica', 'Arial', 'sans-serif']

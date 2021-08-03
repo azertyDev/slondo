@@ -96,9 +96,9 @@ export const GridCard: FC<CardItemProps> = (props) => {
                                 image={image ?? '/img/Vector.png'}
                             >
                                 <div className="card-header">
-                                    <div className="title">
-                                        <Typography variant="subtitle2">
-                                            {t(ads_type === 'common:exauc' ? 'common:auc' : ads_type)}
+                                    <div className="post_type">
+                                        <Typography variant="subtitle2" component='p'>
+                                            {t(ads_type === 'exauc' ? 'common:auc' : `common:${ads_type}`)}
                                         </Typography>
                                     </div>
                                     <div className="icons">
@@ -108,7 +108,7 @@ export const GridCard: FC<CardItemProps> = (props) => {
                                                 arrow
                                             >
                                                 <span>
-                                                    <DeliveryIcon/>
+                                                    <DeliveryIcon />
                                                 </span>
                                             </Tooltip>
                                         )}
@@ -151,22 +151,25 @@ export const GridCard: FC<CardItemProps> = (props) => {
                                             variant="subtitle1"
                                             color="initial"
                                             component='p'
+                                            classes={{
+                                                root: classes.title
+                                            }}
                                             noWrap
                                         >
                                             {title}
                                         </Typography>
-                                        <Box
-                                            component='span'
-                                            fontSize='1.25rem'
+                                        <Typography
+                                            component='p'
                                             className='price'
+                                            variant='subtitle1'
                                         >
                                             {numberPrettier(price)}
                                             <span> {t(`common:${currency.name}`)}</span>
-                                        </Box>
-                                        <Typography variant="caption" noWrap>
+                                        </Typography>
+                                        <Typography variant="caption" noWrap component='p' classes={{root: classes.mobileFont}}>
                                             {`${city?.name ? `${t(`locations:${region.name}.${city.name}`)}, ` : ''} ${t(`locations:${region.name}.name`)}`}
                                         </Typography>
-                                        <Typography variant="caption">
+                                        <Typography variant="caption" component='p' classes={{root: classes.mobileFont}}>
                                             {formatted_date}
                                         </Typography>
                                     </>}

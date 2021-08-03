@@ -102,7 +102,7 @@ export const DetailedPostModal: FC<DetailedPostViewPropsType> = (props) => {
 
     const classes = useStyles();
     return (
-        <div>
+        <>
             <CabinetModal
                 maxWidth='lg'
                 openDialog={open}
@@ -112,12 +112,12 @@ export const DetailedPostModal: FC<DetailedPostViewPropsType> = (props) => {
                     <Grid container spacing={2}>
                         <Box
                             width={1}
-                            my={2}
+                            my={1}
                             display='flex'
                             alignItems='center'
                             justifyContent='center'
                         >
-                            <Typography variant='h6'>
+                            <Typography variant='h6' component='p'>
                                 <strong>
                                     {`${t(`common:${ads_type}`)} №: ${post.id}`}
                                 </strong>
@@ -202,7 +202,7 @@ export const DetailedPostModal: FC<DetailedPostViewPropsType> = (props) => {
                             {isAuction && (
                                 <Grid item xs={12} md={6}>
                                     {isBetsFetch
-                                        ? <CircularProgress color="primary"/>
+                                        ? <CircularProgress color="primary" />
                                         : <BetsList
                                             bets={bets}
                                             showBetsCount={2}
@@ -242,7 +242,9 @@ export const DetailedPostModal: FC<DetailedPostViewPropsType> = (props) => {
                                                 hasUserForRating={hasUserForRating}
                                                 handleOpenRating={handleOpenRating}
                                             />
-                                            : <div>{t(`auction:last_bet`, {lastBet: bets[0]?.bet})}</div>}
+                                            : <Typography
+                                                variant='subtitle1'>{t(`auction:last_bet`, {lastBet: bets[0]?.bet})}</Typography>
+                                        }
                                     </Paper>
                                 )}
                                 {(isUserCreator || isUserWinner) && !inactiveStatus && (
@@ -288,6 +290,6 @@ export const DetailedPostModal: FC<DetailedPostViewPropsType> = (props) => {
                     </Grid>
                 </div>
             </CabinetModal>
-        </div>
+        </>
     );
 };

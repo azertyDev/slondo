@@ -60,17 +60,18 @@ export const BetsListModal: FC<BetsListPropsType> = (props) => {
                 handleCloseDialog={handleModalClose}
                 maxWidth='lg'
             >
+                <IconButton
+                    size='small'
+                    onClick={handleModalClose}
+                    className={classes.closeBtn}
+                >
+                    <CloseIcon/>
+                </IconButton>
                 {isBetsFetch
                     ? <CustomCircularProgress/>
                     : <>
-                        <IconButton
-                            size='small'
-                            onClick={handleModalClose}
-                        >
-                            <CloseIcon/>
-                        </IconButton>
                         <Box
-                            p={3}
+                            p={2}
                             display='flex'
                             justifyContent='center'
                             flexDirection='column'
@@ -83,7 +84,7 @@ export const BetsListModal: FC<BetsListPropsType> = (props) => {
                                     <strong>{t('allBets')}</strong>
                                 </Typography>
                                 <Typography variant='subtitle2'>
-                                    {`${t(`auc`)} №: ${auctionId}`}
+                                    {`${t(`common:auc`)} №: ${auctionId}`}
                                 </Typography>
                             </Box>
                             <TableContainer component={Paper}>

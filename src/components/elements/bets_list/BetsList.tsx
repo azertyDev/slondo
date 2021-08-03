@@ -34,14 +34,14 @@ export const BetsList: FC<BetsListPropsType> = (props) => {
     const classes = useStyles();
     return (
         <div className={classes.root}>
-            <Typography className='bets-header' variant="subtitle2" color="initial" gutterBottom>
-                <div>
+            <Box className='bets-header'>
+                <Typography variant="subtitle2" color="initial">
                     {title}
-                </div>
+                </Typography>
                 <div onClick={handleRefresh} style={{cursor: 'pointer'}}>
-                    <RefreshIcon/>
+                    <RefreshIcon />
                 </div>
-            </Typography>
+            </Box>
             <TableContainer className='bets-table'>
                 <Table>
                     <TableBody>

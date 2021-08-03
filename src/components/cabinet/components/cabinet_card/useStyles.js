@@ -7,7 +7,7 @@ export const useStyles = makeStyles((theme) => ({
             '& button': {
                 height: '32px',
                 padding: '2px 18px',
-                borderRadius: '10px',
+                borderRadius: 5,
                 background: '#F5F5F5',
                 boxShadow: '0px 1px 2px rgba(0, 0, 0, 0.15)',
                 '& svg': {
@@ -64,6 +64,9 @@ export const useStyles = makeStyles((theme) => ({
                 display: 'flex',
                 alignItems: 'center',
                 padding: '11px 12px',
+                '&:not(:last-child)': {
+                    marginRight: 5
+                },
                 '& svg': {
                     height: '18px'
                 },
@@ -72,9 +75,6 @@ export const useStyles = makeStyles((theme) => ({
                     color: theme.palette.common.tab
                 },
                 '&.icons': {
-                    '&:not(:last-child)': {
-                        marginRight: 5
-                    },
                     '& .MuiTypography-subtitle1': {
                         fontSize: '12px'
                     }

@@ -9,6 +9,7 @@ import {CloseIcon, NotificationIcon, RocketIcon, SettingsIcon} from '@src/compon
 import {useRouter} from 'next/router';
 import {CustomButton} from '@src/components/elements/custom_button/CustomButton';
 import {useStyles} from './useStyles';
+import {root} from 'postcss';
 
 type CabinetCardPropsType = {
     cardData: CardDataType,
@@ -78,24 +79,27 @@ export const CabinetCard: FC<CabinetCardPropsType> = (props) => {
                 <ListCard cardData={cardData}/>
                 <Grid container spacing={1} className='bottom-btns'>
                     <Hidden mdUp>
-                        {<Grid item xs={5} sm={4} container justify='center'>
-                            <CustomButton
-                                className='icons'
-                                onClick={handleNotificationsOpen}
-                                // disabled={!observer?.number_of_notifications}
-                                style={{marginRight: 10}}
-                            >
-                                <NotificationIcon/>
-                            </CustomButton>
-                            {creator && isPublic && (
+                        <Grid item xs={5} sm={4} container justify='center'>
+                            <Grid item xs={6} container justify='center'>
                                 <CustomButton
                                     className='icons'
-                                    onClick={handleSettingsOpen}
+                                    onClick={handleNotificationsOpen}
+                                    // disabled={!observer?.number_of_notifications}
                                 >
-                                    <SettingsIcon/>
+                                    <NotificationIcon />
                                 </CustomButton>
+                            </Grid>
+                            {creator && isPublic && (
+                                <Grid item xs={6} container justify='center'>
+                                    <CustomButton
+                                        className='icons'
+                                        onClick={handleSettingsOpen}
+                                    >
+                                        <SettingsIcon />
+                                    </CustomButton>
+                                </Grid>
                             )}
-                        </Grid>}
+                        </Grid>
                     </Hidden>
                     <Grid item xs={isPublic ? 7 : 12} sm={isPublic ? 8 : 12} md={12}>
                         {handleDetailedOpen && (
