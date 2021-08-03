@@ -37,41 +37,39 @@ export const AuctionParams: FC<AuctionParamsPropsType> = (props) => {
 
     const classes = useStyles();
     return (
-        <Grid item container>
-            <Grid item container spacing={2} xs={12}>
-                <Grid item xs={4}>
-                    <DropDownSelect
-                        name='duration'
-                        values={auction}
-                        onBlur={handleBlur}
-                        items={postType.expired}
-                        handleSelect={handleSelect}
-                        labelTxt={t('duration')}
-                        errorMsg={getErrorMsg(errors.auction, touched.auction, t)}
-                    />
-                </Grid>
-                <Grid item xs={3}>
+        <Grid item container spacing={2}>
+            <Grid item xs={12} sm={4} lg={4}>
+                <DropDownSelect
+                    name='duration'
+                    values={auction}
+                    onBlur={handleBlur}
+                    items={postType.expired}
+                    handleSelect={handleSelect}
+                    labelTxt={t('duration')}
+                    errorMsg={getErrorMsg(errors.auction, touched.auction, t)}
+                />
+            </Grid>
+            <Grid item xs={12} sm={4} lg={4}>
+                <FormikField
+                    t={t}
+                    name='price'
+                    labelText='start_price'
+                    value={values.price}
+                    onChange={handleInput}
+                    errorMsg={getErrorMsg(errors.price, touched.price, t)}
+                />
+            </Grid>
+            {isAdvanceAuction && (
+                <Grid item xs={12} sm={4} lg={4}>
                     <FormikField
                         t={t}
-                        name='price'
-                        labelText='start_price'
-                        value={values.price}
+                        name='reserve_price'
+                        labelText='reserve_price'
                         onChange={handleInput}
-                        errorMsg={getErrorMsg(errors.price, touched.price, t)}
+                        value={auction.reserve_price}
                     />
                 </Grid>
-                {isAdvanceAuction && (
-                    <Grid item xs={2}>
-                        <FormikField
-                            t={t}
-                            name='reserve_price'
-                            labelText='reserve_price'
-                            onChange={handleInput}
-                            value={auction.reserve_price}
-                        />
-                    </Grid>
                 )}
-            </Grid>
             <Grid container alignItems='center' item xs={12}>
                 <Checkbox
                     color='primary'
@@ -86,7 +84,7 @@ export const AuctionParams: FC<AuctionParamsPropsType> = (props) => {
             </Grid>
             {isAdvanceAuction && (
                 <>
-                    <Grid container item xs={12} direction='column' className='buy-now-wrapper'>
+                    <Grid container item xs={12} direction='column'>
                         <Grid container item xs={4} alignItems='center'>
                             <Checkbox
                                 color='primary'

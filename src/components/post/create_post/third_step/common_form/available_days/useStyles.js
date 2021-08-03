@@ -13,7 +13,7 @@ export const useStyles = makeStyles((theme) => ({
             flexDirection: 'column',
             alignItems: 'center',
             borderRadius: 10,
-            padding: '15px 20px',
+            padding: '15px',
             '& > div.week-days': {
                 '& p': {
                     padding: 3,

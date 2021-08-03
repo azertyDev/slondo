@@ -109,13 +109,11 @@ export const CategoriesPage: FC = () => {
     return (
         <MainLayout>
             <div className={classes.root}>
-                <Hidden mdDown>
-                    <StepsProgress
-                        activeStep={1}
-                        handleBack={handleBack}
-                        title={t(`common:${postTypeName}`)}
-                    />
-                </Hidden>
+                <StepsProgress
+                    activeStep={1}
+                    handleBack={handleBack}
+                    title={t(`common:${postTypeName}`)}
+                />
                 <Grid container>
                     {!(categoryName && isSmDown) && (
                         <Grid

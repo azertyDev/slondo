@@ -324,7 +324,7 @@ export const CommonForm: FC<DefaultParamsPropsType> = (props) => {
                                     handleCheckboxChange={handleCheckboxChange}
                                 />
                                 : <Grid item container spacing={1}>
-                                    <Grid item xs={8} sm={5} md={3}>
+                                    <Grid item xs={9} sm={5} md={4} lg={3}>
                                         <FormikField
                                             t={t}
                                             name='price'
@@ -334,7 +334,7 @@ export const CommonForm: FC<DefaultParamsPropsType> = (props) => {
                                             errorMsg={getErrorMsg(errors.price, touched.price, t)}
                                         />
                                     </Grid>
-                                    <Grid item xs={4} sm={2}>
+                                    <Grid item xs={3} sm={2} md={2} lg={1}>
                                         <DropDownSelect
                                             name='currency'
                                             values={values}
@@ -353,12 +353,19 @@ export const CommonForm: FC<DefaultParamsPropsType> = (props) => {
                                 handleCheckbox={handleCheckboxChange}
                             />
                             <Grid item container direction='column' xs={12}>
-                                <Box display='flex' mb={1}>
+                                <Box
+                                    mb={1}
+                                    display='flex'
+                                    flexDirection='column'
+                                >
+                                    <Typography variant='subtitle1' component='p' gutterBottom>
+                                        {t('filters:choiceLocation')}&nbsp;
+                                        <span className='error-text'>*</span>
+                                    </Typography>
                                     <Location
                                         handleSelectLocation={handleLocation}
                                         userLocation={location}
                                     />
-                                    <span className='error-text'>*</span>
                                 </Box>
                                 {errors.location && touched.location && (
                                     <Typography variant='subtitle2' component='p' className='error-text'>
@@ -391,7 +398,7 @@ export const CommonForm: FC<DefaultParamsPropsType> = (props) => {
                                 </Grid>
                                 {!isAuction && (
                                     <Grid item container xs={12} sm={6} justify='center'>
-                                        <Grid item xs={12} sm={12} lg={8} className='avail-days-wrapper'>
+                                        <Grid item xs={12} sm={12} lg={8}>
                                             <AvailableDays
                                                 t={t}
                                                 time={values.avalTime}
@@ -402,7 +409,7 @@ export const CommonForm: FC<DefaultParamsPropsType> = (props) => {
                                                 isActive={avalTimeActive}
                                             />
                                             <Link href='/cabinet/settings'>
-                                                <a className='settings'>
+                                                <a className={classes.link}>
                                                     <Typography variant='subtitle1' component='p'>
                                                         {t('configs')}
                                                     </Typography>

@@ -37,14 +37,20 @@ export const FormikTextarea: FC<FormikTextareaPropsType> = (props) => {
                         </Typography>
                     )}
                     <TextField
-                        name={name}
-                        {...field}
-                        {...textareaProps}
                         fullWidth
-                        className={`description-area ${errorMsg ? 'error-border' : ''}`}
-                        helperText={`${textareaProps.value.length}/${limit}`}
-                        variant="outlined"
                         multiline
+                        {...field}
+                        name={name}
+                        {...textareaProps}
+                        classes={{
+
+                            root: classes.textArea
+                        }}
+                        variant="outlined"
+                        helperText={
+                            `${textareaProps.value.length}/${limit}`
+                        }
+                        className={`description-area ${errorMsg ? 'error-border' : ''}`}
                     />
                 </div>
             )}

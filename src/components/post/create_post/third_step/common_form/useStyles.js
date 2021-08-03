@@ -18,23 +18,17 @@ export const useStyles = makeStyles((theme) => ({
             margin: '11px 0'
         }
     },
-    label: {
-        textTransform: 'capitalize',
-    },
-    selectDays: {
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'flex-end',
-        '& a.settings': {
+    link: {
+        marginTop: 5,
+        float: 'right',
+        textDecoration: 'none',
+        display: 'inline-block',
+        '& p': {
             textAlign: 'end',
-            textDecoration: 'none',
-            marginTop: 5,
-            '& p': {
-                color: '#675EAA'
-            },
-            '&:hover': {
-                borderBottom: '1px solid #675EAA'
-            }
+            color: '#675EAA'
+        },
+        '&:hover': {
+            textDecoration: 'underline'
         }
     },
     serviceItem: {
