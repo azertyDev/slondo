@@ -21,7 +21,6 @@ import {FormikField} from '@src/components/elements/formik_field/FormikField';
 import {CustomFormikProvider} from '@src/components/elements/custom_formik_provider/CustomFormikProvider';
 import {FormikTextarea} from '@src/components/elements/formik_textarea/FormikTextarea';
 import {Location} from '@src/components/elements/location/Location';
-import {UserCtx} from "@src/context/UserCtx";
 import {useRouter} from "next/router";
 import {TEXT_LIMIT} from "@src/constants";
 import {useStyles} from './useStyles';
@@ -46,8 +45,6 @@ export const CommonForm: FC<DefaultParamsPropsType> = (props) => {
     } = props;
 
     const {t} = useTranslation('post');
-
-    const {phone: userPhone} = useContext(UserCtx).user;
 
     const {
         region,
@@ -303,7 +300,6 @@ export const CommonForm: FC<DefaultParamsPropsType> = (props) => {
                     {isPreview
                         ? <CommonFormPreview
                             values={values}
-                            userPhone={userPhone}
                             location={location}
                             isAuction={isAuction}
                             priceLabel={priceLabel}
@@ -391,7 +387,6 @@ export const CommonForm: FC<DefaultParamsPropsType> = (props) => {
                                         t={t}
                                         values={values}
                                         isAuction={isAuction}
-                                        userPhone={userPhone}
                                         handleInput={handleInput}
                                         handleCheckboxChange={handleCheckboxChange}
                                     />

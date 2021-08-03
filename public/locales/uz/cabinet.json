@@ -1,6 +1,9 @@
 {
-  "unfold": "Batafsil ma'lumot",
+  "accept_offer": "Taklifni qabul qimoqchimisiz?",
+  "reject_offer": "Taklifni rad etmo'qchimisiz?",
   "finish_deal": "Bitimni yakunlamoqchimisiz?",
+  "refusal_win": "Yutuqdan rad etmo'qchimisiz?. Agar rad etilsa Sizning reytingiz pasayadi",
+  "unfold": "Batafsil ma'lumot",
   "give_rating": "Baxolash",
   "suspended": "Jarayonda",
   "history": "Tarixda",
@@ -9,7 +12,6 @@
   "moderation": "Moderatsiyada",
   "blocked": "Bloklangan",
   "public": "Chop etilgan",
-  "refusal_win": "Отказаться от победы? В случае отказа Ваш рейтинг будет понижен",
   "violates_photo_publish_rules": "E'lon suratlari Slondo sayt suratlar talablarini buzmoqda",
   "violates_publish_rules": "E'lon joylashtirish qoidalari buzilgan",
   "violates_service_rules": "E'lon ma'lumotlari Slondo sayt xizmat qoidalarini buzmoqda",

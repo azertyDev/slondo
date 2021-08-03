@@ -1,6 +1,7 @@
 export const fieldRequiredTxt = 'fieldIsRequired';
 
 export const noTranslatableFields = [
+    'duration',
     'engine_capacity',
     'mileage',
     'manufacturer',
@@ -108,7 +109,7 @@ export const optionFields = [
     'multimedia',
     'antitheft',
     'airbags',
-    'assistant',
+    'assistance',
     'parking',
     'adjustable_seats',
     'seat_heating',

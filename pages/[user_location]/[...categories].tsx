@@ -7,7 +7,7 @@ import {transformLocations} from "@root/transformedLocations";
 
 export const getServerSideProps: GetServerSideProps = async ({locale, query, req, res}) => {
     const cookies = new Cookies(req.headers.cookie);
-    const userLocation = cookies.get('user_location') || null;
+    const userLocation = cookies.get('user_location') || {};
     const locations = [...getStringValues(transformLocations), 'uzbekistan'];
     const locationExist = locations.some(loc => loc === query.user_location as string);
 

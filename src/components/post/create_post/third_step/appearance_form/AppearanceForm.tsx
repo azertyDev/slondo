@@ -16,7 +16,7 @@ import {useStyles} from './useStyles';
 
 type AppearanceFormPropsType = {
     categoryName: string,
-    colors: (IdNameType & {hex_color_code: string})[],
+    colors: (IdNameType & { hex_color_code: string })[],
     handleSubmit: (v) => void,
     isPreview: boolean,
     currentFormIndex: number,
@@ -207,13 +207,15 @@ export const AppearanceForm: FC<AppearanceFormPropsType> = (props) => {
                                 </Typography>
                                 <Grid item container xs={12} spacing={1} className='photos-preview'>
                                     {files.map((photo, i) => (
-                                        !!photo && <Grid item xs={6} sm={4} lg={2}>
-                                            <img
-                                                key={i}
-                                                alt="photo"
-                                                src={photo.url}
-                                            />
-                                        </Grid>
+                                        !!photo && (
+                                            <Grid key={i} item xs={6} sm={4} lg={2}>
+                                                <img
+                                                    key={i}
+                                                    alt="photo"
+                                                    src={photo.url}
+                                                />
+                                            </Grid>
+                                        )
                                     ))}
                                 </Grid>
                             </Grid>

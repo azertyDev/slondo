@@ -1,4 +1,6 @@
 {
+  "duration": "Davomligi",
+  "auc_duration": "Davomligi soatda",
   "last_bet": "Oxirgi narx {{lastBet}} so'm",
   "youCanNotBeatYourBet": "Siz o'zingizning stavkangizni qayta oshira olmaysiz!",
   "invalidBed": "Auksion narxi oshirilgan, ro'yxatni yangilang!",

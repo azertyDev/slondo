@@ -34,6 +34,7 @@ export const useStyles = makeStyles((theme) => ({
     serviceItem: {
         padding: '8px 15px',
         display: 'flex',
+        alignItems: 'center',
         backgroundColor: '#fff',
         borderRadius: '100px',
         width: 'max-content',

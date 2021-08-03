@@ -7,8 +7,8 @@ import {SearchForm} from '@src/components/post/search_post/search_form/SearchFor
 import {SearchResult} from '@src/components/post/search_post/search_result/SearchResult';
 import {Grid, Hidden, useMediaQuery, useTheme} from '@material-ui/core';
 import {HomeSidebar} from '@src/components/home/main/home_sidebar/HomeSideBar';
-import {useStyles} from './useStyles';
 import {PageNotFound} from "@src/components/page_not_found/PageNotFound";
+import {useStyles} from './useStyles';
 
 type SearchPostsByFiltersPropsType = {
     query,
@@ -28,10 +28,11 @@ export const SearchPost: FC<SearchPostsByFiltersPropsType> = (props) => {
     const theme = useTheme();
     const isSm = useMediaQuery(theme.breakpoints.down('sm'));
 
-    const {t} = useTranslation('filters');
+    const {t} = useTranslation('locations');
     const {user_location, categories, ...urlParams} = query;
+    const {region, city} = userLocation;
 
-    const translatedLocation = t(`locations:${userLocation?.city?.name ?? userLocation?.region?.name ?? 'uzbekistan'}`);
+    const translatedLocation = t(`${city?.name ? `${region.name}.${city.name}` : region?.name ? `${region.name}.name` : 'uzbekistan'}`);
 
     const categoriesByCyrillicNames = getCtgrsByCyrillicNames(categories as string[]);
     const [ctgr, subctgr, typeCtgr] = categoriesByCyrillicNames;
@@ -65,12 +66,10 @@ export const SearchPost: FC<SearchPostsByFiltersPropsType> = (props) => {
                         {/*    {t('common:youLookingFor')}*/}
                         {/*</Typography>*/}
                         <SearchForm
-                            t={t}
                             urlParams={urlParams}
                             categories={categoriesByCyrillicNames}
                         />
                         <SearchResult
-                            t={t}
                             urlParams={urlParams}
                             searchTermFromUrl={searchTermFromUrl}
                             categories={categoriesByCyrillicNames}
