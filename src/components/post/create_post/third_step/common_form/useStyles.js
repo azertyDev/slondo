@@ -16,21 +16,24 @@ export const useStyles = makeStyles((theme) => ({
                 alignItems: 'center'
             },
             margin: '11px 0'
-        },
-        '& div.avail-days-wrapper': {
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'flex-end',
-            '& a.settings': {
-                textAlign: 'end',
-                textDecoration: 'none',
-                marginTop: 5,
-                '& p': {
-                    color: '#675EAA'
-                },
-                '&:hover': {
-                    borderBottom: '1px solid #675EAA'
-                }
+        }
+    },
+    label: {
+        textTransform: 'capitalize',
+    },
+    selectDays: {
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'flex-end',
+        '& a.settings': {
+            textAlign: 'end',
+            textDecoration: 'none',
+            marginTop: 5,
+            '& p': {
+                color: '#675EAA'
+            },
+            '&:hover': {
+                borderBottom: '1px solid #675EAA'
             }
         }
     },

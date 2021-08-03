@@ -39,6 +39,9 @@ const theme = createMuiTheme({
         }
     },
     palette: {
+        text: {
+            secondary: '#838383'
+        },
         primary: {
             main: colors.main,
             secondary: colors.secondary,

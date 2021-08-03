@@ -68,7 +68,7 @@ export const CustomAccordion: FC<AccordionComponentPropsType> = (props) => {
                 )}
             </AccordionSummary>
             <AccordionDetails>
-                <Grid container spacing={isXsDown ? 1 : 2}>
+                <Grid container spacing={2}>
                     {props.children}
                     {!isPreview && (
                         <Grid item xs={12} container>
