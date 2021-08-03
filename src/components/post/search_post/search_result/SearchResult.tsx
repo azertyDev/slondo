@@ -1,32 +1,28 @@
 import {FC, useContext, useEffect, useState} from 'react';
+import {useTranslation} from "react-i18next";
 import {FILTERS_PER_PAGE} from '@src/constants';
 import {CardView} from '@src/components/elements/card/CardView';
 import {Box, Typography} from '@material-ui/core';
-import {WithT} from 'i18next';
 import {cookies} from '@src/helpers';
 import {userAPI} from '@src/api/api';
 import {CustomPagination} from '@src/components/elements/custom_pagination/CustomPagination';
 import {ErrorCtx} from '@src/context';
 import {useStyles} from './useStyles';
-import {CustomButton} from '@src/components/elements/custom_button/CustomButton';
-import {
-    FavoriteBorderIcon
-} from '@src/components/elements/icons';
 
 type SearchResultPropsType = {
     searchTermFromUrl: string,
     categories,
     urlParams
-} & WithT;
+};
 
 export const SearchResult: FC<SearchResultPropsType> = (props) => {
     const {
-        t,
         searchTermFromUrl,
         categories,
         urlParams
     } = props;
 
+    const {t} = useTranslation('filters');
     const {setErrorMsg} = useContext(ErrorCtx);
 
     const [ctgr, subCtgr, typeCtgr] = categories;

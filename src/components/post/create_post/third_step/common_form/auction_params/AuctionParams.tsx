@@ -4,8 +4,6 @@ import {Checkbox, Grid, Typography} from '@material-ui/core';
 import {DropDownSelect} from '@src/components/elements/drop_down_select/DropDownSelect';
 import {FormikField} from '@src/components/elements/formik_field/FormikField';
 import {getErrorMsg} from '@src/helpers';
-import {useStyles} from './useStyles';
-
 
 type AuctionParamsPropsType = {
     values,
@@ -35,7 +33,6 @@ export const AuctionParams: FC<AuctionParamsPropsType> = (props) => {
     const {t} = useTranslation('filters');
     const {auction} = values;
 
-    const classes = useStyles();
     return (
         <Grid item container>
             <Grid item container spacing={2} xs={12}>
@@ -46,7 +43,7 @@ export const AuctionParams: FC<AuctionParamsPropsType> = (props) => {
                         onBlur={handleBlur}
                         items={postType.expired}
                         handleSelect={handleSelect}
-                        labelTxt={t('duration')}
+                        labelTxt={t('auction:auc_duration')}
                         errorMsg={getErrorMsg(errors.auction, touched.auction, t)}
                     />
                 </Grid>

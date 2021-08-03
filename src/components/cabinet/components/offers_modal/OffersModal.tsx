@@ -46,6 +46,7 @@ export const OffersModal: FC<CommonModalType> = (props) => {
             setIsFetch(false);
             setErrorMsg(e.message);
         }
+        onClose();
     };
 
     useEffect(() => {

@@ -7,7 +7,6 @@ import {EstateParams} from '@src/components/post/create_post/third_step/params_f
 import {TransportParams} from '@src/components/post/create_post/third_step/params_form/categories_forms/transport_params/TransportParams';
 import {JobParams} from '@src/components/post/create_post/third_step/params_form/categories_forms/job_params/JobParams';
 import {ElectronicsParams} from '@src/components/post/create_post/third_step/params_form/categories_forms/electronics_params/ElectronicsParams';
-import {fractionalFields} from "@src/common_data/fields_keys";
 import {useStyles} from './useStyles';
 
 export type CommonParamsPropsType = {
