@@ -1,7 +1,7 @@
 import {FC} from 'react';
+import Box from '@material-ui/core/Box';
 import {Grid, Typography} from '@material-ui/core';
 import {numberPrettier, weekDaysHelper} from '@src/helpers';
-import Box from '@material-ui/core/Box';
 import {DeliveryIcon, ExchangeIcon, PhoneIcon, RenewalIcon, SafeIcon} from '@src/components/elements/icons';
 import {useTranslation} from 'next-i18next';
 import {useStyles} from './useStyles';
@@ -10,7 +10,6 @@ type DefaultParamsPropsType = {
     values,
     isAuction: boolean,
     avalTimeActive: boolean,
-    isAdvanceAuction: boolean,
     priceLabel: string,
     location
 };
@@ -22,7 +21,6 @@ export const CommonFormPreview: FC<DefaultParamsPropsType> = (props) => {
         isAuction,
         priceLabel,
         avalTimeActive,
-        isAdvanceAuction
     } = props;
 
     const {t} = useTranslation('post');
@@ -33,7 +31,7 @@ export const CommonFormPreview: FC<DefaultParamsPropsType> = (props) => {
     const classes = useStyles();
     return (
         <>
-            {(isAuction && isAdvanceAuction) ? null : (
+            {!isAuction && (
                 <Grid container item spacing={2}>
                     <Grid item xs={12} sm={4}>
                         <Typography variant="subtitle1" color='textSecondary'>
@@ -43,7 +41,7 @@ export const CommonFormPreview: FC<DefaultParamsPropsType> = (props) => {
                     <Grid item xs={12} sm={8}>
                         <Typography variant="subtitle1">
                             {numberPrettier(values.price)}&nbsp;
-                            {values.currency.name}
+                            {t(`common:${values.currency.name}`)}
                         </Typography>
                     </Grid>
                 </Grid>

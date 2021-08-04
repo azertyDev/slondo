@@ -3,7 +3,7 @@ import Cookies from 'universal-cookie';
 import {TFunction} from 'next-i18next';
 import CyrillicToTranslit from 'cyrillic-to-translit-js';
 import {CategoryType, SubcategoryType, TypeCategory} from '@root/interfaces/Categories';
-import {punctuationMarksRegEx, searchTxtRegEx} from '@src/common_data/reg_exs';
+import {cardDataRegEx, punctuationMarksRegEx, searchTxtRegEx} from '@src/common_data/reg_exs';
 import {HasAuction, site_categories} from '@src/common_data/site_categories';
 import {excludeFields, fractionalFields, optionFields, requireFields, singleFields} from '@src/common_data/fields_keys';
 import {IdNameType} from '@root/interfaces/Post';
@@ -191,6 +191,16 @@ export const setRequireParamsVals = (values, setValues, filters, subcategoryName
 export const isRequired = (field: string): boolean => requireFields.some(reqField => reqField === field);
 
 export const phonePrepare = (phone: string): string => phone.replace(/[\s+()]/g, '');
+
+export const formatCardData = (data: string, isDate = false) => {
+    data = data.replace(cardDataRegEx, '');
+
+    if (isDate) {
+        data = ''.concat(`${data[2]}${data[3]}`).concat(`${data[0]}${data[1]}`);
+    }
+
+    return data;
+};
 
 export const transformCyrillic = (title: string): string => {
     const transform = new CyrillicToTranslit().transform;

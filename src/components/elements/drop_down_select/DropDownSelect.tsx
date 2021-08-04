@@ -6,6 +6,7 @@ import {noTranslatableFields} from "@src/common_data/fields_keys";
 import {useStyles} from './useStyles';
 
 type CustomSelectPropsType = {
+    disabled?: boolean,
     transKey?: string,
     name: string;
     labelTxt?: string,
@@ -20,6 +21,7 @@ type CustomSelectPropsType = {
 
 export const DropDownSelect: FC<CustomSelectPropsType> = (props) => {
     const {
+        disabled,
         name,
         transKey,
         multiple,
@@ -83,7 +85,7 @@ export const DropDownSelect: FC<CustomSelectPropsType> = (props) => {
                 onBlur={onBlur}
                 multiple={multiple}
                 onChange={onChange}
-                disabled={!items.length}
+                disabled={!items.length || disabled}
                 renderValue={selectedHandle}
                 value={multiple ? values[name]?.map(v => v?.id ?? v) || [] : values[name]?.id ?? 0}
                 className={'select-wrapper' + `${errorMsg ? ' error-border' : ''}`}

@@ -1,5 +1,29 @@
 {
   "car": {
+    "first_sohs_position": {
+      "name": "Birinchi pozitsiya (SOHS)"
+    },
+    "second_sohs_position": {
+      "name": "Ikkinchi pozitsiya (SOHS)"
+    },
+    "third_sohs_position": {
+      "name": "Uchinchi pozitsiya (SOHS)"
+    },
+    "fourth_sohs_position": {
+      "name": "To'rtinchi pozitsiya (SOHS)"
+    },
+    "first_dohs_position": {
+      "name": "Birinchi pozitsiya (DOHS)"
+    },
+    "second_dohs_position": {
+      "name": "Ikkinchi pozitsiya (DOHS)"
+    },
+    "third_dohs_position": {
+      "name": "Uchinchi pozitsiya (DOHS)"
+    },
+    "fourth_dohs_position": {
+      "name": "To'rtinchi pozitsiya (DOHS)"
+    },
     "power_windows": {
       "name": "Elektr oyna ko'targichlar"
     },
@@ -20,9 +44,6 @@
     },
     "assistance": {
       "name": "Haydash paytida yordam"
-    },
-    "engine_capacity": {
-      "name": "litrda dvigatel hajmi"
     },
     "body": {
       "name": "Kuzov turi"
@@ -7353,6 +7374,7 @@
       "name": ""
     }
   },
+  "engine_capacity": "litrda dvigatel hajmi",
   "bayonet": "Bayonet",
   "usb_connector": "USB ulagichi",
   "build_in_speakers": "Ichki dinamiklar",
@@ -7505,7 +7527,6 @@
   "ceiling_height": "Shift balandligi metrda",
   "number_of_bedrooms": "Yotoq xonalar soni",
   "engine_type": "Dvigatel turi",
-  "engine_capacity": "Dvigatel hajmi litrda",
   "utilities": "Kommunal hisoblar narx ichiga kiritilgan",
   "with_pledge": "Garov bilan",
   "location": "Joylashuvi",

@@ -25,7 +25,7 @@ export const PreviewValues: FC<PreviewValuesPropsType> = (props) => {
         <Grid item container spacing={2} className={classes.prevWrapper}>
             {Object.keys(values).map(key => {
                     let value;
-                    const isString = typeof values[key] === 'string';
+                    const isPrimitive = typeof values[key] === 'string' || typeof values[key] === 'number';
                     const isBoolean = typeof values[key] === 'boolean';
                     const isArray = Array.isArray(values[key]);
                     const isExcludeKey = excludeFields.some(k => k === key);
@@ -37,7 +37,7 @@ export const PreviewValues: FC<PreviewValuesPropsType> = (props) => {
                                 const valueName = filters[key].find(f => f.id === val).name;
                                 return t(`${transKey}${valueName}.name`);
                             }).join(', ');
-                        } else if (isString) {
+                        } else if (isPrimitive) {
                             value = values[key];
                         } else if (values[key].name) {
                             const valName = values[key].name;
@@ -57,7 +57,7 @@ export const PreviewValues: FC<PreviewValuesPropsType> = (props) => {
                                         disabled
                                         checked
                                         name={key}
-                                        labelTxt={key}
+                                        labelTxt={t(`${transKey}${key}.name`)}
                                         handleCheckbox={null}
                                     />
                                     : <>

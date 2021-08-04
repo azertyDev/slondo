@@ -48,7 +48,7 @@ export const BodySelect: FC<BodyTypesProps> = (props) => {
                             component='p'
                             variant='subtitle1'
                         >
-                            {body.name}
+                            {t(`car.${body.name}.name`)}
                         </Typography>
                     </Box>
                 ))}

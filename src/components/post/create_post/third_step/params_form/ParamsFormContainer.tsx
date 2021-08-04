@@ -8,6 +8,7 @@ import {TransportParams} from '@src/components/post/create_post/third_step/param
 import {JobParams} from '@src/components/post/create_post/third_step/params_form/categories_forms/job_params/JobParams';
 import {ElectronicsParams} from '@src/components/post/create_post/third_step/params_form/categories_forms/electronics_params/ElectronicsParams';
 import {useStyles} from './useStyles';
+import {dotRegEx} from "@src/common_data/reg_exs";
 
 export type CommonParamsPropsType = {
     type?,
@@ -59,6 +60,10 @@ export const ParamsFormContainer: FC<ParamsFormPropsType> = (props) => {
                         acc[key] = data[key].map(id => ({id}));
                     }
                 } else if (isStrOrBoolTrue) {
+                    if (key === 'engine_capacity' && (data[key].length === 1 || RegExp(dotRegEx).test(data[key]))) {
+                        data[key] = data[key].replace(dotRegEx, '');
+                        data[key] = `${data[key]}.0`;
+                    }
                     acc[key] = data[key];
                 } else if (typeof data[key] === 'object') {
                     acc[`${key}_id`] = data[key].id;

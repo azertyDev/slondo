@@ -68,7 +68,7 @@ export const TransportParams: FC<CommonParamsPropsType> = (props) => {
         touched
     } = formik;
 
-    const {handleSelect, handleNumericInput, setRequireVals} = useHandlers(values, setValues);
+    const {handleSelect, handleNumericInput, handleFracInput, setRequireVals} = useHandlers(values, setValues);
 
     useEffect(() => {
         setRequireVals(filters);
@@ -127,7 +127,7 @@ export const TransportParams: FC<CommonParamsPropsType> = (props) => {
                                                 t={t}
                                                 name='engine_capacity'
                                                 value={values.engine_capacity}
-                                                onChange={handleNumericInput}
+                                                onChange={handleFracInput}
                                                 labelText={t('estate.engine_capacity.name')}
                                                 errorMsg={getErrorMsg(errors.engine_capacity, touched.engine_capacity, t)}
                                             />}

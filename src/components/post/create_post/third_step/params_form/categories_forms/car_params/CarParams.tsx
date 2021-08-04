@@ -78,7 +78,13 @@ export const CarParams: FC<CarParamsPropsType> = (props) => {
     } = formik;
 
     const [valuesByYear, setValuesByYear] = useState<any>({});
-    const {handleNumericInput, handleCheckbox, handleOptionCheckbox} = useHandlers(values, setValues);
+
+    const {
+        handleCheckbox,
+        handleFracInput,
+        handleNumericInput,
+        handleOptionCheckbox
+    } = useHandlers(values, setValues);
 
     const handleSelect = async (name, value) => {
         try {
@@ -361,13 +367,13 @@ export const CarParams: FC<CarParamsPropsType> = (props) => {
                                                     xs={12}
                                                 >
                                                     <DropDownSelect
-                                                        transKey={t(`${categoryName}.`)}
-                                                        labelTxt={t(`car.engine_type.name`)}
                                                         name='engine_type'
                                                         values={values}
                                                         onBlur={handleBlur}
                                                         items={filters.engine_type}
                                                         handleSelect={handleSelect}
+                                                        transKey={t(`${categoryName}.`)}
+                                                        labelTxt={t(`car.engine_type.name`)}
                                                         errorMsg={getErrorMsg(errors.engine_type, touched.engine_type, t)}
                                                     />
                                                 </Grid>
@@ -380,9 +386,9 @@ export const CarParams: FC<CarParamsPropsType> = (props) => {
                                                     <FormikField
                                                         t={t}
                                                         name='engine_capacity'
-                                                        labelText={t('car.engine_capacity.name')}
+                                                        labelText={t('engine_capacity')}
                                                         value={values.engine_capacity}
-                                                        onChange={handleNumericInput}
+                                                        onChange={handleFracInput}
                                                         errorMsg={getErrorMsg(errors.engine_capacity, touched.engine_capacity, t)}
                                                     />
                                                 </Grid>

@@ -68,7 +68,7 @@ export const ApartmentsParams: FC<CommonParamsPropsType> = (props) => {
         handleBlur
     } = formik;
 
-    const {handleNumericInput, handleCheckbox, handleOptionCheckbox, handleSelect} = useHandlers(values, setValues);
+    const {handleNumericInput, handleCheckbox, handleOptionCheckbox, handleSelect, handleFracInput} = useHandlers(values, setValues);
     const isLgUp = useMediaQuery(useTheme().breakpoints.up('lg'));
     const isXsDown = useMediaQuery(useTheme().breakpoints.down('xs'));
 
@@ -218,7 +218,7 @@ export const ApartmentsParams: FC<CommonParamsPropsType> = (props) => {
                                     t={t}
                                     name='ceiling_height'
                                     value={values.ceiling_height ?? ''}
-                                    onChange={handleNumericInput}
+                                    onChange={handleFracInput}
                                     labelText={t('estate.ceiling_height.name')}
                                     errorMsg={getErrorMsg(errors.ceiling_height, touched.ceiling_height, t)}
                                 />

@@ -1,5 +1,29 @@
 {
   "car": {
+    "first_sohs_position": {
+      "name": "Первая позиция (SOHS)"
+    },
+    "second_sohs_position": {
+      "name": "Вторая позиция (SOHS)"
+    },
+    "third_sohs_position": {
+      "name": "Третья позиция (SOHS)"
+    },
+    "fourth_sohs_position": {
+      "name": "Четвертая позиция (SOHS)"
+    },
+    "first_dohs_position": {
+      "name": "Первая позиция (DOHS)"
+    },
+    "second_dohs_position": {
+      "name": "Вторая позиция (DOHS)"
+    },
+    "third_dohs_position": {
+      "name": "Третья позиция (DOHS)"
+    },
+    "fourth_dohs_position": {
+      "name": "Четвертая позиция (DOHS)"
+    },
     "power_windows": {
       "name": "Электростеклоподъемники"
     },
@@ -20,9 +44,6 @@
     },
     "assistance": {
       "name": "Помощь при вождении"
-    },
-    "engine_capacity": {
-      "name": "Объем двигателя в литрах"
     },
     "body": {
       "name": "Тип кузова"
@@ -7611,6 +7632,7 @@
       "name": "Б/У"
     }
   },
+  "engine_capacity": "Объем двигателя в литрах",
   "bayonet": "Байонет",
   "usb_connector": "USB разъем",
   "build_in_speakers": "Встренные динамики",

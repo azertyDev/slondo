@@ -20,14 +20,14 @@ export const CustomModal: FC<ModalPropsType> = (props) => {
     return (
         <>
             <Modal
-                aria-labelledby="transition-modal-title"
-                aria-describedby="transition-modal-description"
-                closeAfterTransition
                 open={openModal}
+                closeAfterTransition
                 className={classes.modal}
                 onClose={handleModalClose}
                 BackdropComponent={Backdrop}
                 BackdropProps={{timeout: 300}}
+                aria-labelledby="transition-modal-title"
+                aria-describedby="transition-modal-description"
             >
                 <Fade in={openModal}>
                     <div className={classes.paper}>

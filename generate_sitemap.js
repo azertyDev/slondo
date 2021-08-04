@@ -38,6 +38,7 @@ Disallow: /cabinet
 Disallow: /create
 Disallow: /sitemaps
 Disallow: /help
+Disallow: /user
 
 # Host
 Host: ${serverUrl}

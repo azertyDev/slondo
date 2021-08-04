@@ -47,7 +47,7 @@
   "perform_purchase": "Xaridni tasdiqlash",
   "dismiss_purchase": "Xaridni bekor qilish",
   "sms_code": "Sms kod",
-  "type_sms_code": "Kodni kiriting",
+  "type_sms_code": "Smsdan kodni kiriting",
   "buy_safe_deal": "Xavfsiz xarid qilmoqchimisiz?",
   "add_card_for_safe_deal": "Xavfsiz xarid uchun siz to'lov kartasini ulashingiz kerak",
   "cardName": "Karta nomi",

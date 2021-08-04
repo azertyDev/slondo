@@ -1,15 +1,19 @@
 import {Dispatch, SetStateAction} from 'react';
-import {booleanFields, fractionalFields, singleFields, stringFields} from '@src/common_data/fields_keys';
-import {numberRegEx} from '@src/common_data/reg_exs';
+import {booleanFields, singleFields, stringFields} from '@src/common_data/fields_keys';
+import {fractionRegEx, numberRegEx} from '@src/common_data/reg_exs';
 import {isRequired} from '@src/helpers';
 
 export const useHandlers = (values: any, setValues: Dispatch<SetStateAction<any>>) => {
     return {
         handleNumericInput: ({target: {name, value}}) => {
-            const isFractionalField = fractionalFields.some((n => n === name));
             if (RegExp(numberRegEx).test(value)) {
-                if ((!isFractionalField) || (isFractionalField && value.length < 4)) {
-                    if (isFractionalField && value.length === 2 && value[1] !== '.') {
+                setValues({...values, [name]: value});
+            }
+        },
+        handleFracInput: ({target: {name, value}}) => {
+            if (RegExp(fractionRegEx).test(value)) {
+                if (value.length < 4) {
+                    if (value.length === 2 && value[1] !== '.') {
                         value = value.replace(/^[^\*]/, `${value[0]}.`);
                     }
                     setValues({...values, [name]: value});

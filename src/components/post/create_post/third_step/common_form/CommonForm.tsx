@@ -1,4 +1,4 @@
-import {Dispatch, FC, SetStateAction, useContext, useState} from 'react';
+import {Dispatch, FC, SetStateAction, useState} from 'react';
 import Link from "next/link";
 import {useTranslation} from 'next-i18next';
 import {Box, Grid, Typography} from '@material-ui/core';
@@ -23,7 +23,6 @@ import {FormikTextarea} from '@src/components/elements/formik_textarea/FormikTex
 import {Location} from '@src/components/elements/location/Location';
 import {useRouter} from "next/router";
 import {TEXT_LIMIT} from "@src/constants";
-import {useStyles} from './useStyles';
 
 type DefaultParamsPropsType = {
     postType: PostType,
@@ -238,7 +237,7 @@ export const CommonForm: FC<DefaultParamsPropsType> = (props) => {
         setValues({...values, location});
     };
 
-    const handleCheckboxChange = name => ({target}) => {
+    const handleCheckboxChange = (name: string) => ({target}) => {
         const auctionOptionsList = [
             'price_buy_now',
             'offer_the_price',
@@ -285,7 +284,6 @@ export const CommonForm: FC<DefaultParamsPropsType> = (props) => {
         }
     };
 
-    const classes = useStyles();
     return (
         <CustomFormikProvider formik={formik}>
             <CustomAccordion
@@ -304,7 +302,6 @@ export const CommonForm: FC<DefaultParamsPropsType> = (props) => {
                             isAuction={isAuction}
                             priceLabel={priceLabel}
                             avalTimeActive={avalTimeActive}
-                            isAdvanceAuction={isAdvanceAuction}
                         />
                         : <>
                             {isAuction
@@ -336,6 +333,7 @@ export const CommonForm: FC<DefaultParamsPropsType> = (props) => {
                                             values={values}
                                             onBlur={handleBlur}
                                             items={postType.currency}
+                                            disabled={values.safe_deal}
                                             handleSelect={handleSelect}
                                         />
                                     </Grid>
@@ -344,6 +342,7 @@ export const CommonForm: FC<DefaultParamsPropsType> = (props) => {
                                 t={t}
                                 isCommonForm
                                 values={values}
+                                setValues={setValues}
                                 isAuction={isAuction}
                                 categoryName={categoryName}
                                 handleCheckbox={handleCheckboxChange}
