@@ -1,22 +1,28 @@
 import {FC} from 'react';
-import {Box, IconButton} from '@material-ui/core';
+import {Box} from '@material-ui/core';
 import {ResponsiveModal} from '@src/components/elements/responsive_modal/ResponsiveModal';
-import {CloseIcon} from '@src/components/elements/icons';
+import {ModalHeader} from '@src/components/cabinet/components/modal_header/ModalHeader';
 import {useStyles} from './useStyles';
 
 type CabinetModalPropsType = {
-    openDialog: boolean,
-    handleCloseDialog: () => void,
+    title?: string
     maxWidth?: string,
-    fullWidth?: boolean
+    fullWidth?: boolean,
+    openDialog: boolean,
+    hasPrevBtn: boolean,
+    handlePrevMenu?: () => void,
+    handleCloseDialog: () => void
 };
 
 export const CabinetModal: FC<CabinetModalPropsType> = (props) => {
     const {
-        openDialog,
-        handleCloseDialog,
+        title,
         maxWidth,
-        fullWidth
+        fullWidth,
+        hasPrevBtn,
+        openDialog,
+        handlePrevMenu,
+        handleCloseDialog
     } = props;
 
     const classes = useStyles();
@@ -27,14 +33,18 @@ export const CabinetModal: FC<CabinetModalPropsType> = (props) => {
             maxWidth={maxWidth}
             fullWidth={fullWidth}
         >
-            <Box p={{xs: 2, md: 4}} className={classes.root} overflow='scroll'>
-                <IconButton
-                    size='medium'
-                    onClick={handleCloseDialog}
-                    className={classes.closeBtn}
-                >
-                    <CloseIcon />
-                </IconButton>
+            <ModalHeader
+                title={title}
+                hasPrevBtn={hasPrevBtn}
+                handlePrevMenu={handlePrevMenu}
+                handleCloseDialog={handleCloseDialog}
+            />
+            <Box
+                width={1}
+                overflow='scroll'
+                p={{xs: 2, md: 4}}
+                className={classes.root}
+            >
                 {props.children}
             </Box>
         </ResponsiveModal>

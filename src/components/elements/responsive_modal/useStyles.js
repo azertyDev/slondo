@@ -6,7 +6,6 @@ export const useStyles = makeStyles((theme) => ({
             [theme.breakpoints.down('sm')]: {
                 maxWidth: '576px',
                 alignItems: 'center',
-                justifyContent: 'center',
                 overflow: 'hidden'
             }
         },

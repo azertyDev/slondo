@@ -1,7 +1,7 @@
 import {FC} from 'react';
 import {useRouter} from 'next/router';
 import {useTranslation} from 'next-i18next';
-import {Grid, Typography, useMediaQuery, useTheme} from '@material-ui/core';
+import {Grid, Hidden, Typography, useMediaQuery, useTheme} from '@material-ui/core';
 import {MainLayout} from '@src/components/main_layout/MainLayout';
 import {CabinetSidebar} from './cabinet_sidebar/CabinetSidebar';
 import {MyPosts} from '@src/components/cabinet/cabinet_pages/my_posts/MyPosts';
@@ -83,9 +83,11 @@ const Cabinet: FC = () => {
             ? <MainLayout title={title}>
                 <div className={classes.root}>
                     <Grid container>
-                        <Grid item sm={5} md={3}>
-                            <CabinetSidebar />
-                        </Grid>
+                        <Hidden smDown>
+                            <Grid item sm={5} md={3}>
+                                <CabinetSidebar />
+                            </Grid>
+                        </Hidden>
                         <Grid item xs={12} sm={12} md={9} className='pl-16'>
                             {isRootPage
                                 ? <div>{t('select_page')}</div>

@@ -63,6 +63,7 @@ export const NotificationModal: FC<CommonModalType> = (props) => {
     return (
         <CabinetModal
             openDialog={open}
+            title={t('common:notificationsStories')}
             handleCloseDialog={onClose}
         >
             {isFetch
@@ -73,9 +74,6 @@ export const NotificationModal: FC<CommonModalType> = (props) => {
                         alignItems='center'
                         flexDirection='column'
                     >
-                        <Typography variant='subtitle1' gutterBottom>
-                            {t('common:notificationsStories')}
-                        </Typography>
                         <Typography variant='caption'>
                             {`${t(`common:${post.ads_type}`)} №: ${post.id}`}
                         </Typography>

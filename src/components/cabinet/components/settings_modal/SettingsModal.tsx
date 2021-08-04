@@ -1,11 +1,9 @@
 import {FC, useContext, useState} from 'react';
 import {unstable_batchedUpdates} from "react-dom";
-import {ArrowBack} from '@material-ui/icons';
 import {CabinetModal} from '@src/components/cabinet/components/cabinet_modal/CabinetModal';
 import {
     Avatar,
-    Box,
-    IconButton,
+    Box, Grid,
     List,
     ListItem,
     ListItemText,
@@ -31,7 +29,8 @@ enum SettingsModalPropsType {
     'edit_post',
     'rise_in_tape',
     'confirm',
-    'sold_on_slondo'
+    'sold_on_slondo',
+    'settings'
 }
 
 export const SettingsModal: FC<CommonModalType> = (props) => {
@@ -57,7 +56,7 @@ export const SettingsModal: FC<CommonModalType> = (props) => {
 
     const [isFetch, setIsFetch] = useState(false);
     const [buyer, setBuyer] = useState(initBuyer);
-    const [status, setStatus] = useState<keyof typeof SettingsModalPropsType>('deactivate');
+    const [status, setStatus] = useState<keyof typeof SettingsModalPropsType>('settings');
 
     const isSoldOnSlondo = status === 'sold_on_slondo';
 
@@ -154,7 +153,7 @@ export const SettingsModal: FC<CommonModalType> = (props) => {
     const handlePrevMenu = () => {
         unstable_batchedUpdates(() => {
             handleReset({phone: ''});
-            setStatus('deactivate');
+            setStatus('settings');
         });
     };
 
@@ -163,14 +162,13 @@ export const SettingsModal: FC<CommonModalType> = (props) => {
             onClose();
             setBuyer(initBuyer);
             handleReset({phone: ''});
-            setStatus('deactivate');
+            setStatus('settings');
         });
     };
 
-    const classes = useStyles();
     const getModalContent = () => {
         switch (status) {
-            case 'deactivate':
+            case 'settings':
                 return <List
                     disablePadding
                     component="nav"
@@ -236,45 +234,48 @@ export const SettingsModal: FC<CommonModalType> = (props) => {
                     </ListItem>
                 </List>;
             case 'sold_on_slondo':
-                return <>
-                    <Box
-                        mt={3}
-                        width='100%'
-                        display='flex'
-                        justifyContent='space-between'
-                        className={classes.userPhoneAndData}
-                    >
-                        <FormikField
-                            t={t}
-                            type='tel'
-                            name='phone'
-                            value={values.phone}
-                            onChange={handleInput}
-                            errorMsg={getErrorMsg(errors.phone, touched.phone, t)}
-                        />
-                        <Box className={classes.userData}>
-                            {isFetch
-                                ? <CustomCircularProgress/>
-                                : !!buyer
-                                    ? <>
-                                        <Avatar src={buyer.avatar ?? ''}/>
-                                        <Typography variant='subtitle2' noWrap>
-                                            {buyer.name}
-                                            {buyer.surname}
-                                        </Typography>
-                                    </>
-                                    : <Typography>{t('user_not_found')}</Typography>}
-                        </Box>
-                    </Box>
-                    <Box
-                        mt={1}
-                        width='100%'
-                    >
+                return <Grid container spacing={2} className={classes.mt30}>
+                    <Grid item container spacing={2} justify='center'>
+                        <Grid item xs={12} sm={6}>
+                            <Box>
+                                <FormikField
+                                    t={t}
+                                    type='tel'
+                                    name='phone'
+                                    value={values.phone}
+                                    onChange={handleInput}
+                                    helperText={t('(Нажмите отправить если не знаете номер)')}
+                                    errorMsg={getErrorMsg(errors.phone, touched.phone, t)}
+                                />
+                            </Box>
+                        </Grid>
+                        <Grid item xs={8} sm={6}>
+                            <Box
+                                display='flex'
+                                alignItems='center'
+                                className={classes.userData}
+                            >
+                                {isFetch
+                                    ? <CustomCircularProgress />
+                                    : !!buyer
+                                        ? <>
+                                            <Avatar src={buyer.avatar ?? ''} />
+                                            <Typography variant='subtitle2' noWrap>
+                                                {buyer.name}<br />
+                                                {buyer.surname}
+                                            </Typography>
+                                        </>
+                                        : <Typography>{t('user_not_found')}</Typography>
+                                }
+                            </Box>
+                        </Grid>
+                    </Grid>
+                    <Grid item xs={12}>
                         <CustomButton type='submit' className={classes.submitBtn}>
                             <Typography variant='subtitle1'>{t('common:send')}</Typography>
                         </CustomButton>
-                    </Box>
-                </>;
+                    </Grid>
+                </Grid>;
             case 'edit_post':
             case 'confirm':
             case 'rise_in_tape':
@@ -284,15 +285,15 @@ export const SettingsModal: FC<CommonModalType> = (props) => {
                     aria-label="main"
                     className={classes.settingsList}
                 >
-                    <CustomButton onClick={handlePrevMenu}>
-                        <ListItemText
-                            primary={t('common:no')}
-                            primaryTypographyProps={{variant: 'subtitle1'}}
-                        />
-                    </CustomButton>
                     <CustomButton type='submit'>
                         <ListItemText
                             primary={t('common:yes')}
+                            primaryTypographyProps={{variant: 'subtitle1'}}
+                        />
+                    </CustomButton>
+                    <CustomButton onClick={handlePrevMenu}>
+                        <ListItemText
+                            primary={t('common:no')}
                             primaryTypographyProps={{variant: 'subtitle1'}}
                         />
                     </CustomButton>
@@ -300,33 +301,33 @@ export const SettingsModal: FC<CommonModalType> = (props) => {
         }
     };
 
+    const classes = useStyles();
     return (
         <CabinetModal
             maxWidth='xs'
+            title={t(status)}
             openDialog={open}
             handleCloseDialog={handleClose}
+            hasPrevBtn={status !== 'settings'}
+            handlePrevMenu={handlePrevMenu}
         >
             {isFetch
-                ? <CustomCircularProgress/>
+                ? <CustomCircularProgress />
                 : <CustomFormikProvider formik={formik}>
-                    {status === 'deactivate'
-                        ? <Typography className="title" variant="h6">
+                    {status === 'settings' && (
+                        <Typography className={classes.title} variant="h6" align='center'>
                             {`${t(`common:${post.ads_type}`)} №: ${post.id}`}
                         </Typography>
-                        : <IconButton
-                            size="medium"
-                            aria-label="back"
-                            className='prev-btn'
-                            onClick={handlePrevMenu}
+                    )}
+                    {titleTxt && (
+                        <Typography
+                            variant='h6'
+                            align='center'
+                            className={classes.title}
                         >
-                            <ArrowBack fontSize="inherit"/>
-                        </IconButton>}
-                    <Typography
-                        variant='h6'
-                        className="title"
-                    >
-                        {t(titleTxt)}
-                    </Typography>
+                            {t(titleTxt)}
+                        </Typography>
+                    )}
                     {getModalContent()}
                 </CustomFormikProvider>}
         </CabinetModal>

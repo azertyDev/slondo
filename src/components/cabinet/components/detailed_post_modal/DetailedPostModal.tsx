@@ -106,23 +106,11 @@ export const DetailedPostModal: FC<DetailedPostViewPropsType> = (props) => {
             <CabinetModal
                 maxWidth='lg'
                 openDialog={open}
+                title={`${t(`common:${ads_type}`)} №: ${post.id}`}
                 handleCloseDialog={handleCloseDetailModal}
             >
                 <div className={classes.root}>
                     <Grid container spacing={2}>
-                        <Box
-                            width={1}
-                            my={1}
-                            display='flex'
-                            alignItems='center'
-                            justifyContent='center'
-                        >
-                            <Typography variant='h6' component='p'>
-                                <strong>
-                                    {`${t(`common:${ads_type}`)} №: ${post.id}`}
-                                </strong>
-                            </Typography>
-                        </Box>
                         <Grid item xs={12}>
                             <ListCard cardData={post}/>
                         </Grid>

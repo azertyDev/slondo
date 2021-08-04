@@ -42,6 +42,7 @@ export const CabinetCard: FC<CabinetCardPropsType> = (props) => {
 
     const isXsDown = useMediaQuery(useTheme().breakpoints.down('xs'));
     const isPublic = status === 'public';
+    const isModeration = status === 'moderation';
 
     const classes = useStyles();
     return (
@@ -101,7 +102,7 @@ export const CabinetCard: FC<CabinetCardPropsType> = (props) => {
                             )}
                         </Grid>
                     </Hidden>
-                    <Grid item xs={isPublic ? 7 : 12} sm={isPublic ? 8 : 12} md={12}>
+                    <Grid item xs={isPublic || isModeration ? 7 : 12} sm={isPublic || isModeration ? 8 : 12} md={12}>
                         {handleDetailedOpen && (
                             <CustomButton
                                 className='unfold-btn'
@@ -110,7 +111,7 @@ export const CabinetCard: FC<CabinetCardPropsType> = (props) => {
                                 <Typography variant='subtitle1'>
                                     {t('cabinet:unfold')}
                                 </Typography>&nbsp;
-                                <ChevronRight color='action'/>
+                                <ChevronRight color='action' />
                             </CustomButton>
                         )}
                     </Grid>
