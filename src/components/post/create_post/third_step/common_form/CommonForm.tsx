@@ -23,6 +23,7 @@ import {FormikTextarea} from '@src/components/elements/formik_textarea/FormikTex
 import {Location} from '@src/components/elements/location/Location';
 import {useRouter} from "next/router";
 import {TEXT_LIMIT} from "@src/constants";
+import {useStyles} from './useStyles';
 
 type DefaultParamsPropsType = {
     postType: PostType,
@@ -284,6 +285,7 @@ export const CommonForm: FC<DefaultParamsPropsType> = (props) => {
         }
     };
 
+    const classes = useStyles();
     return (
         <CustomFormikProvider formik={formik}>
             <CustomAccordion
