@@ -1,5 +1,38 @@
 {
   "car": {
+    "first_position_turbo": {
+      "name": "Первая позиция (TURBO)"
+    },
+    "second_position_turbo": {
+      "name": "Вторая позиция (TURBO)"
+    },
+    "third_position_turbo": {
+      "name": "Третья позиция (TURBO)"
+    },
+    "first_sohs_position": {
+      "name": "Первая позиция (SOHS)"
+    },
+    "second_sohs_position": {
+      "name": "Вторая позиция (SOHS)"
+    },
+    "third_sohs_position": {
+      "name": "Третья позиция (SOHS)"
+    },
+    "fourth_sohs_position": {
+      "name": "Четвертая позиция (SOHS)"
+    },
+    "first_dohs_position": {
+      "name": "Первая позиция (DOHS)"
+    },
+    "second_dohs_position": {
+      "name": "Вторая позиция (DOHS)"
+    },
+    "third_dohs_position": {
+      "name": "Третья позиция (DOHS)"
+    },
+    "fourth_dohs_position": {
+      "name": "Четвертая позиция (DOHS)"
+    },
     "power_windows": {
       "name": "Электростеклоподъемники"
     },
@@ -864,6 +897,12 @@
     }
   },
   "estate": {
+    "furnished": {
+      "name": "Меблирована"
+    },
+    "estate_type": {
+      "name": "Тип недвижимости"
+    },
     "area": {
       "name": "Общая площадь, м2"
     },
@@ -7656,7 +7695,7 @@
       "name": "Б/У"
     }
   },
-
+  "engine_capacity": "Объем двигателя в литрах",
   "bayonet": "Байонет",
   "usb_connector": "USB разъем",
   "build_in_speakers": "Встренные динамики",
@@ -7736,7 +7775,6 @@
   "season": "Сезон",
   "type": "Тип",
   "sub_type": "Вид",
-  "estate_type": "Тип недвижимости",
   "size": "Размер",
   "gender": "Пол",
   "group": "Группа",
@@ -7787,7 +7825,6 @@
   "auto_renewal": "Авто продление",
   "offer_price": "Предлогать цену",
   "display_phone": "Показывать свой номер",
-  "furnished": "Меблирована",
   "house_furnished": "Мебелирован",
   "area": "Площадь в м²",
   "area_in_hundred": "Площадь в сот.",

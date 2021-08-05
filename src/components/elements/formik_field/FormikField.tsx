@@ -73,7 +73,6 @@ export const FormikField: FC<CustomFormikFieldPropsType> = (props) => {
                                         {errorMsg}
                                     </span>
                                     </Typography>
-
                                 </Grid>
                             )}
                             {!!limit && (

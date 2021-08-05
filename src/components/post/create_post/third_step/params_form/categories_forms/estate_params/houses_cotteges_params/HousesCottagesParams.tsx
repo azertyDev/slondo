@@ -17,11 +17,11 @@ import {CustomAccordion} from '@src/components/elements/accordion/CustomAccordio
 import {DeployedSelect} from '@src/components/elements/deployed_select/DeployedSelect';
 import {CheckboxSelect} from '@src/components/elements/checkbox_select/CheckboxSelect';
 import {useUrlParams} from "@src/hooks";
+import {useTranslation} from "next-i18next";
 import {useStyles} from './useStyles';
 
 export const HousesCottagesParams: FC<CommonParamsPropsType> = (props) => {
     const {
-        t,
         type,
         filters,
         isPreview,
@@ -30,6 +30,8 @@ export const HousesCottagesParams: FC<CommonParamsPropsType> = (props) => {
         currentFormIndex,
         handleFormOpen
     } = props;
+
+    const {t} = useTranslation('filters');
 
     const isRent = type.id === 2 || type.id === 3;
     const {title, params} = useUrlParams();
@@ -67,7 +69,7 @@ export const HousesCottagesParams: FC<CommonParamsPropsType> = (props) => {
         handleBlur
     } = formik;
 
-    const {handleCheckbox, handleOptionCheckbox, handleSelect, handleNumericInput} = useHandlers(values, setValues);
+    const {handleCheckbox, handleOptionCheckbox, handleSelect, handleFracInput} = useHandlers(values, setValues);
     const isXsDown = useMediaQuery(useTheme().breakpoints.down('xs'));
 
     const classes = useStyles();
@@ -149,9 +151,9 @@ export const HousesCottagesParams: FC<CommonParamsPropsType> = (props) => {
                             <Grid item container xs={12} md={4} lg={3} alignItems='flex-end'>
                                 <CheckboxSelect
                                     name='furnished'
-                                    labelTxt={t('filters:house_furnished')}
                                     checked={values.furnished}
                                     handleCheckbox={handleCheckbox}
+                                    labelTxt={t('estate.furnished.name')}
                                 />
                             </Grid>
                             <Grid item container spacing={2}>
@@ -222,7 +224,7 @@ export const HousesCottagesParams: FC<CommonParamsPropsType> = (props) => {
                                     t={t}
                                     name='ceiling_height'
                                     value={values.ceiling_height ?? ''}
-                                    onChange={handleNumericInput}
+                                    onChange={handleFracInput}
                                     labelText={t('estate.ceiling_height.name')}
                                     errorMsg={getErrorMsg(errors.ceiling_height, touched.ceiling_height, t)}
                                 />

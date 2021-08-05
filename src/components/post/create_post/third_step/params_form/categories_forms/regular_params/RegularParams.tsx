@@ -11,11 +11,11 @@ import {ParametersIcon} from '@src/components/elements/icons';
 import {CustomAccordion} from '@src/components/elements/accordion/CustomAccordion';
 import {PreviewValues} from '@src/components/post/create_post/third_step/params_form/PreviewValues';
 import {useUrlParams} from "@src/hooks";
+import {useTranslation} from "next-i18next";
 import {useStyles} from './useStyles';
 
 export const RegularParams: FC<CommonParamsPropsType> = (props) => {
     const {
-        t,
         categoryName,
         onSubmit,
         filters,
@@ -23,6 +23,8 @@ export const RegularParams: FC<CommonParamsPropsType> = (props) => {
         currentFormIndex,
         handleFormOpen
     } = props;
+
+    const {t} = useTranslation('filters');
 
     const {title, params} = useUrlParams();
 

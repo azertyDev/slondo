@@ -1,5 +1,38 @@
 {
   "car": {
+    "first_position_turbo": {
+      "name": "Birinchi pozitsiya (TURBO)"
+    },
+    "second_position_turbo": {
+      "name": "Ikkinchi pozitsiya (TURBO)"
+    },
+    "third_position_turbo": {
+      "name": "Uchinchi pozitsiya (TURBO)"
+    },
+    "first_sohs_position": {
+      "name": "Birinchi pozitsiya (SOHS)"
+    },
+    "second_sohs_position": {
+      "name": "Ikkinchi pozitsiya (SOHS)"
+    },
+    "third_sohs_position": {
+      "name": "Uchinchi pozitsiya (SOHS)"
+    },
+    "fourth_sohs_position": {
+      "name": "To'rtinchi pozitsiya (SOHS)"
+    },
+    "first_dohs_position": {
+      "name": "Birinchi pozitsiya (DOHS)"
+    },
+    "second_dohs_position": {
+      "name": "Ikkinchi pozitsiya (DOHS)"
+    },
+    "third_dohs_position": {
+      "name": "Uchinchi pozitsiya (DOHS)"
+    },
+    "fourth_dohs_position": {
+      "name": "To'rtinchi pozitsiya (DOHS)"
+    },
     "power_windows": {
       "name": "Elektr oyna ko'targichlar"
     },
@@ -855,6 +888,87 @@
     }
   },
   "estate": {
+    "furnished": {
+      "name": "Jihozlangan"
+    },
+    "estate_type": {
+      "name": "Kochmas mulk turi"
+    },
+    "area": {
+      "name": "Maydon м²"
+    },
+    "living_area": {
+      "name": "Yashash maydoni м²"
+    },
+    "kitchen_area": {
+      "name": "Oshxona maydoni м²"
+    },
+    "ceiling_height": {
+      "name": "Shift balandligi metrda"
+    },
+    "posted": {
+      "name": "E'lon egasi"
+    },
+    "material": {
+      "name": "Uy materialli"
+    },
+    "layout": {
+      "name": "Planirovkasi"
+    },
+    "repair": {
+      "name": "Tamir"
+    },
+    "lift": {
+      "name": "Lift"
+    },
+    "bathroom": {
+      "name": "Vannaga"
+    },
+    "balcony": {
+      "name": "Balkon"
+    },
+    "metro": {
+      "name": "Metrogacha"
+    },
+    "number_of_bedrooms": {
+      "name": "Yotoq xonalar soni"
+    },
+    "general_area": {
+      "name": "Umumiy maydoni м²"
+    },
+    "land_area": {
+      "name": "Uchastkadagi maydon м²"
+    },
+    "garage": {
+      "name": "Garaj"
+    },
+    "water": {
+      "name": "Suv ta’minoti"
+    },
+    "electricity": {
+      "name": "Elektr"
+    },
+    "gas": {
+      "name": "Gaz"
+    },
+    "heating": {
+      "name": "Isitish"
+    },
+    "area_in_hundred": {
+      "name": "Yer maydoni"
+    },
+    "sewerage": {
+      "name": "Suv-oqava"
+    },
+    "parking_spaces": {
+      "name": "Маshinao’rin"
+    },
+    "location": {
+      "name": "Ko’chmas mulk turi"
+    },
+    "three_or_more": {
+      "name": "3 va undan ko'p"
+    },
     "floor": {
       "name": "Qavat"
     },
@@ -1217,6 +1331,18 @@
     }
   },
   "job": {
+    "employment": {
+      "name": "Bandlik turi"
+    },
+    "nature": {
+      "name": "Ishning tabiati"
+    },
+    "urent_work": {
+      "name": "Tezkor ish"
+    },
+    "free_schedule": {
+      "name": "Erkin jadval"
+    },
     "position": {
       "name": "lavozim"
     },
@@ -2212,6 +2338,12 @@
     }
   },
   "service": {
+    "computer_services": {
+      "name": "Kompyuter xizmatlari"
+    },
+    "in_clinic": {
+      "name": "Klinikada"
+    },
     "cost_indicated": {
       "name": "Qiymati ko'rsatilgan"
     },
@@ -2379,6 +2511,18 @@
     }
   },
   "goods": {
+    "gender": {
+      "name": "Jinsi"
+    },
+    "manufacturer": {
+      "name": "Ishlab chiqaruvchi"
+    },
+    "age": {
+      "name": "Yoshi"
+    },
+    "application_area": {
+      "name": "Qo’llanish doirasi"
+    },
     "white": {
       "name": "Oq"
     },
@@ -4004,6 +4148,9 @@
     }
   },
   "home": {
+    "armchair": {
+      "name": "Kreslo"
+    },
     "sofas": {
       "name": "Divanlar"
     },
@@ -4693,6 +4840,129 @@
     }
   },
   "electronics": {
+    "used": {
+      "name": "Iste’molda bo’lgan"
+    },
+    "android": {
+      "name": "Android"
+    },
+    "ios": {
+      "name": "IOS"
+    },
+    "windows": {
+      "name": "Windows"
+    },
+    "symbian": {
+      "name": "Symbian"
+    },
+    "bada": {
+      "name": "Bada"
+    },
+    "blackberry": {
+      "name": "Blackberry"
+    },
+    "linux": {
+      "name": "Linux"
+    },
+    "synthetic_leather": {
+      "name": "Qo’lbola charm"
+    },
+    "plastic_polyurethane_rubber": {
+      "name": "Yelim, poliuretan, rezina"
+    },
+    "instant_printing": {
+      "name": "Bir zumlik taxrir"
+    },
+    "cassette": {
+      "name": "Kasseta"
+    },
+    "optical_disk": {
+      "name": "Optik disk"
+    },
+    "15to19_9": {
+      "name": "15”dan 19.9”gacha"
+    },
+    "3840х2160": {
+      "name": "3840х2160"
+    },
+    "2716х1528": {
+      "name": "2716х1528"
+    },
+    "1920х1200": {
+      "name": "1920х1200"
+    },
+    "1920х1080": {
+      "name": "1920х1080"
+    },
+    "1280х720": {
+      "name": "1280х720"
+    },
+    "1280х800": {
+      "name": "1280х800"
+    },
+    "1440х900": {
+      "name": "1440х900"
+    },
+    "1024х768": {
+      "name": "1024х768"
+    },
+    "800х600": {
+      "name": "800х600"
+    },
+    "854х480": {
+      "name": "854х480"
+    },
+    "2.1": {
+      "name": "2.1"
+    },
+    "4.2": {
+      "name": "4.2"
+    },
+    "5.1": {
+      "name": "5.1"
+    },
+    "7.1": {
+      "name": "7.1"
+    },
+    "9.1": {
+      "name": "9.1"
+    },
+    "gaseous": {
+      "name": "Gazli"
+    },
+    "induction": {
+      "name": "Induktsionli"
+    },
+    "set_twelve_more": {
+      "name": "12 va ko’proq to’plamlar"
+    },
+    "to_700rpm": {
+      "name": "700 ay/daq gacha"
+    },
+    "rpm_1200_more": {
+      "name": "1200 ay/daq va ko’proq"
+    },
+    "refrigerators": {
+      "name": "Muzlatgichlar"
+    },
+    "laptops": {
+      "name": "Noutbuklar"
+    },
+    "less_14": {
+      "name": "14” dan kichikroq"
+    },
+    "one_thing": {
+      "name": "1 dona"
+    },
+    "two_thing": {
+      "name": "2 dona"
+    },
+    "four_thing": {
+      "name": "4 dona"
+    },
+    "accessories": {
+      "name": "Аksessuarlar"
+    },
     "new": {
       "name": "Yangi"
     },
@@ -6324,6 +6594,18 @@
     }
   },
   "hobbies": {
+    "educational_literature": {
+      "name": "O’quv adabiyoti"
+    },
+    "hobbies_needlework_creativity": {
+      "name": "Xobbi, chevarlik, ijodiyot"
+    },
+    "boxing_martial_arts": {
+      "name": "Boks, yakkakurashlar"
+    },
+    "roller_skates_scooters_skateboards": {
+      "name": "Roliklar, samokatlar, skeytlar"
+    },
     "movie": {
       "name": "Kino"
     },
@@ -7398,6 +7680,7 @@
       "name": ""
     }
   },
+  "engine_capacity": "litrda dvigatel hajmi",
   "bayonet": "Bayonet",
   "usb_connector": "USB ulagichi",
   "build_in_speakers": "Ichki dinamiklar",
@@ -7487,7 +7770,6 @@
   "season": "Mavsum",
   "type": "Turi",
   "sub_type": "Ko'rinishi",
-  "estate_type": "Kochmas mulk turi",
   "size": "Razmeri",
   "gender": "Jinsi",
   "group": "Guruh",
@@ -7537,7 +7819,6 @@
   "auto_renewal": "Auksioni avtomatik chozish",
   "offer_price": "Narxni taklif qilish",
   "display_phone": "Telefon raqamingizni ko'rsatish",
-  "furnished": "Jihozlangan",
   "house_furnished": "Jihozlangan",
   "area": "Maydon m²",
   "area_in_hundred": "Maydon sotkada",
@@ -7550,7 +7831,6 @@
   "ceiling_height": "Shift balandligi metrda",
   "number_of_bedrooms": "Yotoq xonalar soni",
   "engine_type": "Dvigatel turi",
-  "engine_capacity": "Dvigatel hajmi litrda",
   "utilities": "Kommunal hisoblar narx ichiga kiritilgan",
   "with_pledge": "Garov bilan",
   "location": "Joylashuvi",

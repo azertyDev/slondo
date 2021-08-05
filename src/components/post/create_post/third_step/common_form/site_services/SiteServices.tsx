@@ -1,19 +1,20 @@
-import {FC, useEffect, useState} from 'react';
+import {FC, useEffect} from 'react';
 import {WithT} from 'i18next';
 import Link from 'next/link';
+import {useModal} from "@src/hooks";
 import {Help} from '@material-ui/icons';
 import {Grid, Typography} from '@material-ui/core';
 import {DeliveryIcon, SafeIcon, ExchangeIcon} from '@src/components/elements/icons';
 import {site_services} from '@src/common_data/site_services';
 import {ServiceItem} from '@src/components/post/create_post/third_step/common_form/site_services/ServiceItem';
-import {SafeDealDrawer} from '@src/components/elements/safe_deal_drawer/SafeDealDrawer';
 import {useUserPaymentCard} from '@src/hooks/useUserPaymentCard';
+import {UserPaymentCardModal} from "@src/components/elements/userPaymentCard/UserPaymentCardModal";
 import {useStyles} from './useStyles';
-
 
 type PaymentDeliveryPropsType = {
     values,
-    handleCheckbox,
+    setValues,
+    handleCheckbox: (name: string) => (e) => void,
     categoryName: string,
     iconMode?: boolean,
     isAuction: boolean,
@@ -24,6 +25,7 @@ export const SiteServices: FC<PaymentDeliveryPropsType> = (props) => {
     const {
         t,
         values,
+        setValues,
         iconMode,
         isAuction,
         handleCheckbox,
@@ -37,19 +39,24 @@ export const SiteServices: FC<PaymentDeliveryPropsType> = (props) => {
 
     const {userCard, fetchUserCard} = useUserPaymentCard();
     const hasCard = !!userCard.cardId;
-    const [drawerOpen, setDrawerOpen] = useState(false);
 
-    const handleSafeDealCheckBox = () => {
+    const {modalOpen, handleModalOpen, handleModalClose} = useModal();
+
+    const handleSafeDealCheckBox = (e) => {
         if (!isCommonForm || hasCard) {
-            return handleCheckbox('safe_deal');
+            handleCheckbox('safe_deal')(e);
+            setValues({
+                ...values,
+                currency: {id: 2, name: 'sum'}
+            });
         } else {
-            return () => setDrawerOpen(true);
+            handleModalOpen();
         }
     };
 
-    const handleCloseDrawer = () => {
-        setDrawerOpen(false);
+    const handleCloseSafeDealModal = () => {
         fetchUserCard();
+        handleModalClose();
     };
 
     useEffect(() => {
@@ -88,7 +95,7 @@ export const SiteServices: FC<PaymentDeliveryPropsType> = (props) => {
                                     icon={<SafeIcon/>}
                                     serviceText={t('common:safe_deal')}
                                     checked={values.safe_deal}
-                                    handleCheckbox={handleSafeDealCheckBox()}
+                                    handleCheckbox={handleSafeDealCheckBox}
                                 />
                             </Grid>
                             {!iconMode && (
@@ -208,9 +215,9 @@ export const SiteServices: FC<PaymentDeliveryPropsType> = (props) => {
                     )}
                 </Grid>
             )}
-            <SafeDealDrawer
-                open={drawerOpen}
-                handleClose={handleCloseDrawer}
+            <UserPaymentCardModal
+                open={modalOpen}
+                onClose={handleCloseSafeDealModal}
             />
         </Grid>
     );

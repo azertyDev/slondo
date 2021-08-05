@@ -3,8 +3,7 @@
 /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 
 import {GetServerSideProps} from 'next';
-import {getStringValues, transformCyrillic} from "@src/helpers";
-import {getServerSideSitemap} from 'next-sitemap';
+import {getSitemap, getStringValues, transformCyrillic} from "@src/helpers";
 import {transformLocations} from "@root/transformedLocations";
 import {categories_list} from "@src/common_data/site_categories";
 import {serverSideTranslations} from "next-i18next/serverSideTranslations";
@@ -19,21 +18,14 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
     const locations = [...getStringValues(transformLocations), 'uzbekistan'];
     const locationExist = locations.some(loc => xmlRegEx.test(queryLoc) && loc === location);
 
-    const addOpts = {
-        priority: 0.7,
-        changefreq: 'daily'
-
-    };
-
     const fields = categories_list.reduce((fieldsAcc, ctgr) => {
         const fields = [
             {
                 loc: `${siteUrl}/${location}`,
                 lastmod: new Date().toISOString(),
-                ...addOpts,
                 alternateRefs: [
                     {
-                        href: `${siteUrl}/ru/${location}`,
+                        href: `${siteUrl}/${location}`,
                         hreflang: 'ru'
                     },
                     {
@@ -45,10 +37,9 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
             {
                 loc: `${siteUrl}/${location}/${transformCyrillic(ctgr.ru_name)}`,
                 lastmod: new Date().toISOString(),
-                ...addOpts,
                 alternateRefs: [
                     {
-                        href: `${siteUrl}/ru/${location}/${transformCyrillic(ctgr.ru_name)}`,
+                        href: `${siteUrl}/${location}/${transformCyrillic(ctgr.ru_name)}`,
                         hreflang: 'ru'
                     },
                     {
@@ -66,10 +57,9 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
             fields.push({
                 loc: `${siteUrl}/${mainCtgrUrl}/${subctgrCyrillicName}`,
                 lastmod: new Date().toISOString(),
-                ...addOpts,
                 alternateRefs: [
                     {
-                        href: `${siteUrl}/ru/${mainCtgrUrl}/${subctgrCyrillicName}`,
+                        href: `${siteUrl}/${mainCtgrUrl}/${subctgrCyrillicName}`,
                         hreflang: 'ru'
                     },
                     {
@@ -86,10 +76,9 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
                     fields.push({
                         loc: `${siteUrl}/${mainCtgrUrl}/${subctgrCyrillicName}/${typectgrCyrillicName}`,
                         lastmod: new Date().toISOString(),
-                        ...addOpts,
                         alternateRefs: [
                             {
-                                href: `${siteUrl}/ru/${mainCtgrUrl}/${subctgrCyrillicName}/${typectgrCyrillicName}`,
+                                href: `${siteUrl}/${mainCtgrUrl}/${subctgrCyrillicName}/${typectgrCyrillicName}`,
                                 hreflang: 'ru'
                             },
                             {
@@ -121,7 +110,7 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
         };
     }
 
-    return getServerSideSitemap(ctx, locationExist ? fields : []);
+    return getSitemap(ctx, fields);
 };
 
 // Default export to prevent next.js errors

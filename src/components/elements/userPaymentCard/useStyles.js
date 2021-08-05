@@ -11,7 +11,8 @@ export const useStyles = makeStyles((theme) => ({
             flexDirection: 'column',
             '& div.safe-deal-title': {
                 display: 'flex',
-                justifyContent: 'center'
+                justifyContent: 'center',
+                marginBottom: '10px'
             },
             '& label.add-card': {
                 marginLeft: '15px'
@@ -64,16 +65,14 @@ export const useStyles = makeStyles((theme) => ({
         }
     },
     paymentCard: {
-        maxWidth: '75%',
+        maxWidth: '650px',
+        minWidth: '296px',
         padding: '35px 30px 12px',
         borderRadius: '25px',
         background: '#F2F2F2',
         boxShadow: '0px 0px 25px rgba(103, 94, 170, 0.15)',
         '& div.card-info': {
             marginBottom: '10px'
-        },
-        '& div.card-name-wrapper': {
-            marginBottom: '20px'
         },
         '& label > h6': {
             fontSize: '.87rem',
@@ -88,8 +87,7 @@ export const useStyles = makeStyles((theme) => ({
             }
         },
         '& h6.MuiTypography-subtitle2': {
-            color: 'rgba(49, 49, 49, 0.6)',
-            margin: '10px 0'
+            marginBottom: '5px'
         },
         '& div.MuiTextField-root': {
             '& input': {

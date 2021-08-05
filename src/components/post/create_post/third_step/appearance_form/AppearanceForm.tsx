@@ -234,7 +234,7 @@ export const AppearanceForm: FC<AppearanceFormPropsType> = (props) => {
                                         />
                                         {values.color.name && (
                                             <Typography variant='subtitle2' component='p'>
-                                                {t(values.color.name)}
+                                                {t(`${categoryName}.${values.color.name}.name`)}
                                             </Typography>
                                         )}
                                     </Box>

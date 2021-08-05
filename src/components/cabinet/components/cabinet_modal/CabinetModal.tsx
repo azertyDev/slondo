@@ -9,7 +9,7 @@ type CabinetModalPropsType = {
     maxWidth?: string,
     fullWidth?: boolean,
     openDialog: boolean,
-    hasPrevBtn: boolean,
+    hasPrevBtn?: boolean,
     handlePrevMenu?: () => void,
     handleCloseDialog: () => void
 };

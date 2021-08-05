@@ -14,12 +14,12 @@ import {CustomFormikProvider} from '@src/components/elements/custom_formik_provi
 import {ParametersIcon} from '@src/components/elements/icons';
 import {CustomAccordion} from '@src/components/elements/accordion/CustomAccordion';
 import {useUrlParams} from "@src/hooks";
+import {useTranslation} from "next-i18next";
 import {useStyles} from './useStyles';
 
 
 export const LandParams: FC<CommonParamsPropsType> = (props) => {
     const {
-        t,
         type,
         isPreview,
         onSubmit,
@@ -28,6 +28,8 @@ export const LandParams: FC<CommonParamsPropsType> = (props) => {
         categoryName,
         handleFormOpen
     } = props;
+
+    const {t} = useTranslation('filters');
 
     const {title, params} = useUrlParams();
 
