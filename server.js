@@ -8,7 +8,7 @@ const numCPUs = cpus().length;
 const {createServer} = require('http');
 const {parse} = require('url');
 const next = require('next');
-const port = 80;
+const port = 3317;
 const serverUrl = 'http://localhost';
 const dev = process.env.NODE_ENV !== 'production';
 const app = next({dev});
