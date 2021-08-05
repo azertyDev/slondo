@@ -22,7 +22,7 @@ export const UserAvatarComponent: FC<UserAvatarComponentTypes> = ({avatar, width
             >
                 <Avatar
                     alt="avatar"
-                    src={avatar ?? ''}
+                    src={avatar ?? '/img/avatar.svg'}
                 />
             </StyledBadge>
         </div>

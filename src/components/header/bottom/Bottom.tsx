@@ -153,7 +153,7 @@ const Bottom = (props) => {
                                 >
                                     {isAuth
                                         ? <span onClick={handleClick} className='avatar'>
-                                            <Avatar alt="Avatar" src={avatar}/>
+                                            <Avatar alt="Avatar" src={avatar ?? '/img/avatar.svg'} />
                                         </span>
                                         : <CustomButton
                                             className="bottom-sign-button header-button"
