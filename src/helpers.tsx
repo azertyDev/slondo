@@ -20,19 +20,20 @@ export const cookieOpts: { path: string, sameSite: boolean | 'none' | 'lax' | 's
 
 export const getSitemap = (ctx: GetServerSidePropsContext, fields) => {
     const {res} = ctx;
-    let sitemap = '';
-
-    fields.forEach(({loc, alternateRefs}) => {
-        const altRefs = alternateRefs.reduce((str, obj) => {
-            str = str.concat(`<xhtml:link rel="alternate" href="${obj.href}" hreflang="${obj.hreflang}" />`);
-            return str;
-        }, '');
-
-        sitemap = sitemap.concat(`<url><loc>${loc}</loc>${altRefs}</url>`);
-    });
 
     const xml = `<?xml version="1.0" encoding="UTF-8"?>
-    <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">${sitemap}</urlset>`;
+        <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
+            ${fields.map(({loc, alternateRefs}) => {
+        return `
+                    <url>
+                        <loc>${loc}</loc>
+                        <lastmod>${new Date().toISOString()}</lastmod>
+                        ${alternateRefs.map(obj => `<xhtml:link rel="alternate" href="${obj.href}" hreflang="${obj.hreflang}" />`, '').join('')}
+                    </url>
+                    `;
+    }).join('')}
+        </urlset>
+    `.replace(/(\r?\n|\r|\t)/gm, '').replace(/>\s+</gm, '><').trim();
 
     if (res) {
         res.setHeader('Content-Type', 'text/xml');

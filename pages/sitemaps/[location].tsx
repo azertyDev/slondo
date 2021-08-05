@@ -18,83 +18,35 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
     const locations = [...getStringValues(transformLocations), 'uzbekistan'];
     const locationExist = locations.some(loc => xmlRegEx.test(queryLoc) && loc === location);
 
-    const fields = categories_list.reduce((fieldsAcc, ctgr) => {
-        const fields = [
-            {
-                loc: `${siteUrl}/${location}`,
-                lastmod: new Date().toISOString(),
-                alternateRefs: [
-                    {
-                        href: `${siteUrl}/${location}`,
-                        hreflang: 'ru'
-                    },
-                    {
-                        href: `${siteUrl}/uz/${location}`,
-                        hreflang: 'uz'
-                    }
-                ]
-            },
-            {
-                loc: `${siteUrl}/${location}/${transformCyrillic(ctgr.ru_name)}`,
-                lastmod: new Date().toISOString(),
-                alternateRefs: [
-                    {
-                        href: `${siteUrl}/${location}/${transformCyrillic(ctgr.ru_name)}`,
-                        hreflang: 'ru'
-                    },
-                    {
-                        href: `${siteUrl}/uz/${location}/${transformCyrillic(ctgr.ru_name)}`,
-                        hreflang: 'uz'
-                    }
-                ]
-            }
-        ];
+    if (locationExist) {
+        const fields = categories_list.reduce((fieldsAcc, ctgr) => {
+            const fields = [
+                getSitemapParams(`${location}/${transformCyrillic(ctgr.ru_name)}`)
+            ];
 
-        ctgr.subcategory.forEach(subctgr => {
-            const mainCtgrUrl = `${location}/${transformCyrillic(ctgr.ru_name)}`;
-            const subctgrCyrillicName = transformCyrillic(subctgr.ru_name);
+            ctgr.subcategory.forEach(subctgr => {
+                const mainCtgrUrl = `${location}/${transformCyrillic(ctgr.ru_name)}`;
+                const subctgrCyrillicName = transformCyrillic(subctgr.ru_name);
 
-            fields.push({
-                loc: `${siteUrl}/${mainCtgrUrl}/${subctgrCyrillicName}`,
-                lastmod: new Date().toISOString(),
-                alternateRefs: [
-                    {
-                        href: `${siteUrl}/${mainCtgrUrl}/${subctgrCyrillicName}`,
-                        hreflang: 'ru'
-                    },
-                    {
-                        href: `${siteUrl}/uz/${mainCtgrUrl}/${subctgrCyrillicName}`,
-                        hreflang: 'uz'
-                    }
-                ]
+                fields.push(
+                    getSitemapParams(`${mainCtgrUrl}/${subctgrCyrillicName}`)
+                );
+
+                if (subctgr.type !== undefined) {
+                    subctgr.type.forEach(typeCtgr => {
+                        const typectgrCyrillicName = transformCyrillic(typeCtgr.ru_name);
+                        fields.push(
+                            getSitemapParams(`${mainCtgrUrl}/${subctgrCyrillicName}/${typectgrCyrillicName}`)
+                        );
+                    });
+                }
             });
 
-            if (subctgr.type !== undefined) {
-                subctgr.type.forEach(typeCtgr => {
-                    const typectgrCyrillicName = transformCyrillic(typeCtgr.ru_name);
+            return [...fieldsAcc, ...fields];
+        }, []);
 
-                    fields.push({
-                        loc: `${siteUrl}/${mainCtgrUrl}/${subctgrCyrillicName}/${typectgrCyrillicName}`,
-                        lastmod: new Date().toISOString(),
-                        alternateRefs: [
-                            {
-                                href: `${siteUrl}/${mainCtgrUrl}/${subctgrCyrillicName}/${typectgrCyrillicName}`,
-                                hreflang: 'ru'
-                            },
-                            {
-                                href: `${siteUrl}/uz/${mainCtgrUrl}/${subctgrCyrillicName}/${typectgrCyrillicName}`,
-                                hreflang: 'uz'
-                            }
-                        ]
-                    });
-                });
-            }
-        });
-
-        return [...fieldsAcc, ...fields];
-    }, []);
-
-    if (!locationExist) {
+        return getSitemap(ctx, [getSitemapParams(location), ...fields]);
+    } else {
         const locale = ctx.locale;
         ctx.res.statusCode = 404;
 
@@ -110,7 +62,22 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
         };
     }
 
-    return getSitemap(ctx, fields);
+    function getSitemapParams(url) {
+        const loc = `${siteUrl}/${url}`;
+        return {
+            loc,
+            alternateRefs: [
+                {
+                    href: loc,
+                    hreflang: 'ru'
+                },
+                {
+                    href: `${siteUrl}/uz/${url}`,
+                    hreflang: 'uz'
+                }
+            ]
+        };
+    }
 };
 
 // Default export to prevent next.js errors
