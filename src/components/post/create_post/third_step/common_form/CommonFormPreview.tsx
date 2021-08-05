@@ -20,7 +20,7 @@ export const CommonFormPreview: FC<DefaultParamsPropsType> = (props) => {
         location,
         isAuction,
         priceLabel,
-        avalTimeActive,
+        avalTimeActive
     } = props;
 
     const {t} = useTranslation('post');
@@ -116,7 +116,7 @@ export const CommonFormPreview: FC<DefaultParamsPropsType> = (props) => {
                 <Grid item xs={12} sm={8} container>
                     {values.delivery && (
                         <Box className={classes.serviceItem}>
-                            <DeliveryIcon />
+                            <DeliveryIcon/>
                             <Typography variant="subtitle1">
                                 {t('filters:delivery')}
                             </Typography>
@@ -124,7 +124,7 @@ export const CommonFormPreview: FC<DefaultParamsPropsType> = (props) => {
                     )}
                     {values.exchange && (
                         <Box className={classes.serviceItem}>
-                            <ExchangeIcon />
+                            <ExchangeIcon/>
                             <Typography variant="subtitle1">
                                 {t('filters:exchange')}
                             </Typography>
@@ -132,7 +132,7 @@ export const CommonFormPreview: FC<DefaultParamsPropsType> = (props) => {
                     )}
                     {auction.auto_renewal && (
                         <Box className={classes.serviceItem}>
-                            <RenewalIcon />
+                            <RenewalIcon/>
                             <Typography variant="subtitle1">
                                 {t('filters:auto_renewal')}
                             </Typography>
@@ -147,7 +147,7 @@ export const CommonFormPreview: FC<DefaultParamsPropsType> = (props) => {
                     )}
                     {values.safe_deal && (
                         <Box className={classes.serviceItem}>
-                            <SafeIcon />
+                            <SafeIcon/>
                             <Typography variant="subtitle1">
                                 {t('filters:safe_deal')}
                             </Typography>
@@ -191,7 +191,7 @@ export const CommonFormPreview: FC<DefaultParamsPropsType> = (props) => {
                     </Grid>
                     <Grid item xs={12} sm={8}>
                         <Box className={classes.serviceItem}>
-                            <PhoneIcon />
+                            <PhoneIcon/>
                             <Typography variant="subtitle1">
                                 {`${avalTime.available_start_time} - ${avalTime.available_end_time}`}&nbsp;
                                 ({weekDaysHelper(avalTime.available_days, t)})

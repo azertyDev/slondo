@@ -8,7 +8,7 @@ export const useUserPaymentCard = () => {
         cardName: string,
         owner: string,
         balance: number,
-        expireDate: number,
+        expireDate: string,
         number: number
     }
 

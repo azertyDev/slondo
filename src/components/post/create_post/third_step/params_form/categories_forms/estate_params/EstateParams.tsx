@@ -5,10 +5,10 @@ import {LandParams} from '@src/components/post/create_post/third_step/params_for
 import {ParkingLotsBoxes} from '@src/components/post/create_post/third_step/params_form/categories_forms/estate_params/parking_lots_boxes_params/ParkingLotsBoxes';
 import {CommercialPropertyParams} from '@src/components/post/create_post/third_step/params_form/categories_forms/estate_params/commercial_property_params/CommercialPropertyParams';
 import {CommonParamsPropsType} from '@src/components/post/create_post/third_step/params_form/ParamsFormContainer';
+import {useTranslation} from "next-i18next";
 
 export const EstateParams: FC<CommonParamsPropsType> = (props) => {
     const {
-        t,
         type,
         categoryName,
         subcategoryName,
@@ -23,7 +23,6 @@ export const EstateParams: FC<CommonParamsPropsType> = (props) => {
         switch (subcategoryName) {
             case 'flat':
                 return <ApartmentsParams
-                    t={t}
                     type={type}
                     filters={filters}
                     onSubmit={onSubmit}
@@ -34,7 +33,6 @@ export const EstateParams: FC<CommonParamsPropsType> = (props) => {
                 />;
             case 'houses_cottages':
                 return <HousesCottagesParams
-                    t={t}
                     type={type}
                     filters={filters}
                     onSubmit={onSubmit}
@@ -45,7 +43,6 @@ export const EstateParams: FC<CommonParamsPropsType> = (props) => {
                 />;
             case 'land_plots':
                 return <LandParams
-                    t={t}
                     type={type}
                     filters={filters}
                     onSubmit={onSubmit}
@@ -56,7 +53,6 @@ export const EstateParams: FC<CommonParamsPropsType> = (props) => {
                 />;
             case 'underground_parking_lots_boxes':
                 return <ParkingLotsBoxes
-                    t={t}
                     filters={filters}
                     onSubmit={onSubmit}
                     isPreview={isPreview}
@@ -66,7 +62,6 @@ export const EstateParams: FC<CommonParamsPropsType> = (props) => {
                 />;
             case 'commercial_real_estate':
                 return <CommercialPropertyParams
-                    t={t}
                     type={type}
                     filters={filters}
                     onSubmit={onSubmit}

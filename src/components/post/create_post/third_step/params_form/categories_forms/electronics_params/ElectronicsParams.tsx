@@ -12,10 +12,10 @@ import {CheckboxSelect} from '@src/components/elements/checkbox_select/CheckboxS
 import {PreviewValues} from '@src/components/post/create_post/third_step/params_form/PreviewValues';
 import {getFieldsByFilters} from '@src/helpers';
 import {useUrlParams} from "@src/hooks";
+import {useTranslation} from "next-i18next";
 
 export const ElectronicsParams: FC<CommonParamsPropsType> = (props) => {
     const {
-        t,
         type,
         filters,
         isPreview,
@@ -24,6 +24,8 @@ export const ElectronicsParams: FC<CommonParamsPropsType> = (props) => {
         handleFormOpen,
         categoryName
     } = props;
+
+    const {t} = useTranslation('filters');
 
     const isMonitors = type.name === 'monitors';
     const {title, params} = useUrlParams();

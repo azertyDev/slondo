@@ -1,14 +1,12 @@
 import {FC} from 'react';
-import {WithT} from 'i18next';
-import {useTranslation} from 'next-i18next';
 import {RegularParams} from '@src/components/post/create_post/third_step/params_form/categories_forms/regular_params/RegularParams';
 import {CarParams} from '@src/components/post/create_post/third_step/params_form/categories_forms/car_params/CarParams';
 import {EstateParams} from '@src/components/post/create_post/third_step/params_form/categories_forms/estate_params/EstateParams';
 import {TransportParams} from '@src/components/post/create_post/third_step/params_form/categories_forms/transport_params/TransportParams';
 import {JobParams} from '@src/components/post/create_post/third_step/params_form/categories_forms/job_params/JobParams';
 import {ElectronicsParams} from '@src/components/post/create_post/third_step/params_form/categories_forms/electronics_params/ElectronicsParams';
-import {useStyles} from './useStyles';
 import {dotRegEx} from "@src/common_data/reg_exs";
+import {useStyles} from './useStyles';
 
 export type CommonParamsPropsType = {
     type?,
@@ -19,7 +17,7 @@ export type CommonParamsPropsType = {
     onSubmit: (v) => void,
     currentFormIndex: number,
     handleFormOpen: (k) => () => void
-} & WithT;
+};
 
 type ParamsFormPropsType = {
     type,
@@ -46,7 +44,6 @@ export const ParamsFormContainer: FC<ParamsFormPropsType> = (props) => {
         handleNextFormOpen
     } = props;
 
-    const {t} = useTranslation('filters');
     const categoryName = category.name;
 
     const prepareParamsData = (data) => {
@@ -84,7 +81,6 @@ export const ParamsFormContainer: FC<ParamsFormPropsType> = (props) => {
         switch (category.name) {
             case 'car':
                 return <CarParams
-                    t={t}
                     filters={filters}
                     onSubmit={onSubmit}
                     isPreview={isPreview}
@@ -95,7 +91,6 @@ export const ParamsFormContainer: FC<ParamsFormPropsType> = (props) => {
                 />;
             case 'transport':
                 return <TransportParams
-                    t={t}
                     type={type}
                     filters={filters}
                     onSubmit={onSubmit}
@@ -107,7 +102,6 @@ export const ParamsFormContainer: FC<ParamsFormPropsType> = (props) => {
                 />;
             case 'estate':
                 return <EstateParams
-                    t={t}
                     type={type}
                     onSubmit={onSubmit}
                     filters={filters}
@@ -119,7 +113,6 @@ export const ParamsFormContainer: FC<ParamsFormPropsType> = (props) => {
                 />;
             case 'job':
                 return <JobParams
-                    t={t}
                     filters={filters}
                     onSubmit={onSubmit}
                     isPreview={isPreview}
@@ -130,7 +123,6 @@ export const ParamsFormContainer: FC<ParamsFormPropsType> = (props) => {
                 />;
             case 'electronics':
                 return <ElectronicsParams
-                    t={t}
                     type={type}
                     filters={filters}
                     onSubmit={onSubmit}
@@ -141,7 +133,6 @@ export const ParamsFormContainer: FC<ParamsFormPropsType> = (props) => {
                 />;
             default:
                 return <RegularParams
-                    t={t}
                     filters={filters}
                     onSubmit={onSubmit}
                     isPreview={isPreview}

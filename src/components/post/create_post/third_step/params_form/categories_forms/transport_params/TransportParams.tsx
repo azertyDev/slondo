@@ -12,6 +12,7 @@ import {PostTitle} from '@src/components/post/create_post/third_step/params_form
 import {FormikField} from '@src/components/elements/formik_field/FormikField';
 import {PreviewValues} from '@src/components/post/create_post/third_step/params_form/PreviewValues';
 import {useUrlParams} from "@src/hooks";
+import {useTranslation} from "next-i18next";
 import {useStyles} from './useStyles';
 
 export const excludeCtgrsForYear = [
@@ -23,7 +24,6 @@ export const excludeCtgrsForYear = [
 
 export const TransportParams: FC<CommonParamsPropsType> = (props) => {
     const {
-        t,
         onSubmit,
         filters,
         isPreview,
@@ -33,6 +33,8 @@ export const TransportParams: FC<CommonParamsPropsType> = (props) => {
         currentFormIndex,
         handleFormOpen
     } = props;
+
+    const {t} = useTranslation('filters');
 
     const isYearExclude = excludeCtgrsForYear.some(k => k === type.name);
     const hasEngineCapacity = type.name === 'motorcycles' || type.name === 'mopedsAndScooters';

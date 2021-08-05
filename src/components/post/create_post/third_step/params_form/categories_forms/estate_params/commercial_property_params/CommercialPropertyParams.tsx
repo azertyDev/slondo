@@ -15,11 +15,11 @@ import {CustomFormikProvider} from '@src/components/elements/custom_formik_provi
 import {CustomAccordion} from '@src/components/elements/accordion/CustomAccordion';
 import {ParametersIcon} from '@src/components/elements/icons';
 import {useUrlParams} from "@src/hooks";
+import {useTranslation} from "next-i18next";
 import {useStyles} from './useStyles';
 
 export const CommercialPropertyParams: FC<CommonParamsPropsType> = (props) => {
     const {
-        t,
         type,
         filters,
         isPreview,
@@ -28,6 +28,8 @@ export const CommercialPropertyParams: FC<CommonParamsPropsType> = (props) => {
         categoryName,
         handleFormOpen
     } = props;
+
+    const {t} = useTranslation('filters');
 
     const {title, params} = useUrlParams();
 
@@ -74,7 +76,12 @@ export const CommercialPropertyParams: FC<CommonParamsPropsType> = (props) => {
                     handleEdit={handleFormOpen(3)}
                 >
                     <Grid item xs={12} sm={6}>
-                        <PostTitle isPreview={isPreview} title={values.title} formik={formik} t={t} />
+                        <PostTitle
+                            t={t}
+                            isPreview={isPreview}
+                            title={values.title}
+                            formik={formik}
+                        />
                     </Grid>
                     <Grid container item spacing={2}>
                         {isPreview

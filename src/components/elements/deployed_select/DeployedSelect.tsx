@@ -37,7 +37,7 @@ export const DeployedSelect: FC<SelectOptionsPropsType> = (props) => {
         <FormControl className={classes.root}>
             <label>
                 <Typography variant='subtitle1' gutterBottom>
-                    {t(`${name}`)}
+                    {t(`${categoryName}.${name}.name`)}
                     {!disableRequire && isRequired(name) && <span className='error-text'>*&nbsp;</span>}
                 </Typography>
             </label>

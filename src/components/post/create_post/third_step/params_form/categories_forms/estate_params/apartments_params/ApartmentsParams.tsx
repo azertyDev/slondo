@@ -17,11 +17,11 @@ import {CustomFormikProvider} from '@src/components/elements/custom_formik_provi
 import {ParametersIcon} from '@src/components/elements/icons';
 import {CustomAccordion} from '@src/components/elements/accordion/CustomAccordion';
 import {useUrlParams} from "@src/hooks";
+import {useTranslation} from "next-i18next";
 import {useStyles} from './useStyles';
 
 export const ApartmentsParams: FC<CommonParamsPropsType> = (props) => {
     const {
-        t,
         type,
         filters,
         isPreview,
@@ -30,6 +30,8 @@ export const ApartmentsParams: FC<CommonParamsPropsType> = (props) => {
         categoryName,
         currentFormIndex
     } = props;
+
+    const {t} = useTranslation('filters');
 
     const isDailyRent = type.name === 'dailyRent';
     const isRent = type.id === 2 || type.id === 3;
@@ -87,7 +89,11 @@ export const ApartmentsParams: FC<CommonParamsPropsType> = (props) => {
                     handleEdit={handleFormOpen(3)}
                 >
                     <Grid item xs={12} sm={6}>
-                        <PostTitle isPreview={isPreview} title={values.title} formik={formik} t={t}/>
+                        <PostTitle
+                            isPreview={isPreview}
+                            title={values.title}
+                            formik={formik} t={t}
+                        />
                     </Grid>
                     {isPreview
                         ? <PreviewValues
@@ -100,8 +106,8 @@ export const ApartmentsParams: FC<CommonParamsPropsType> = (props) => {
                                 <Grid item xs={12} sm={5} md={4}>
                                     <DeployedSelect
                                         name='estate_type'
-                                        categoryName={categoryName}
                                         values={values}
+                                        categoryName={categoryName}
                                         handleSelect={handleSelect}
                                         options={filters.estate_type}
                                         errorMsg={getErrorMsg(errors.estate_type, touched.estate_type, t)}
@@ -145,7 +151,7 @@ export const ApartmentsParams: FC<CommonParamsPropsType> = (props) => {
                                         name='furnished'
                                         checked={values.furnished}
                                         handleCheckbox={handleCheckbox}
-                                        labelTxt={t('filters:furnished')}
+                                        labelTxt={t('estate.furnished.name')}
                                     />
                                 </Grid>
                             </Grid>

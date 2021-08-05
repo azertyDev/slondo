@@ -1,4 +1,4 @@
-import {object, string, array, lazy} from 'yup';
+import {object, string, array, lazy, number} from 'yup';
 import {fieldRequiredTxt, fractionalFields} from '@src/common_data/fields_keys';
 import {isRequired} from '@root/src/helpers';
 
@@ -112,4 +112,8 @@ export const auctionParamsSchema = defaultParamsSchema.shape({
             fieldRequiredTxt,
             auction => !!auction.duration?.id
         )
+});
+
+export const safeDealPriceSchema = object({
+    price: string().required(fieldRequiredTxt).min(4000, 'min_4000')
 });

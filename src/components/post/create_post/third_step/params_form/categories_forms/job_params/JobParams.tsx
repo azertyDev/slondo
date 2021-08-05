@@ -12,10 +12,10 @@ import {PostTitle} from '@src/components/post/create_post/third_step/params_form
 import {PreviewValues} from '@src/components/post/create_post/third_step/params_form/PreviewValues';
 import {paramsFormSchema} from '@root/validation_schemas/createPostSchemas';
 import {useUrlParams} from "@src/hooks";
+import {useTranslation} from "next-i18next";
 
 export const JobParams: FC<CommonParamsPropsType> = (props) => {
     const {
-        t,
         categoryName,
         subcategoryName,
         onSubmit,
@@ -24,6 +24,8 @@ export const JobParams: FC<CommonParamsPropsType> = (props) => {
         currentFormIndex,
         handleFormOpen
     } = props;
+
+    const {t} = useTranslation('filters');
 
     const isVacancy = subcategoryName === 'vacancies';
     const hasPosition = !!filters.position;

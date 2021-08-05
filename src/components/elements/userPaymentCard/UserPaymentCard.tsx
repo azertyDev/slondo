@@ -55,7 +55,7 @@ export const UserPaymentCard: FC = () => {
     const formik = useFormik({
         onSubmit,
         initialValues: initVals,
-        validationSchema: isSmsConfirm ? codeSchema : paymentCardSchema
+        validationSchema: hasCard ? null : isSmsConfirm ? codeSchema : paymentCardSchema
     });
 
     const {values, setValues, errors, touched} = formik;
@@ -154,12 +154,12 @@ export const UserPaymentCard: FC = () => {
     useEffect(() => {
         hasCard && setValues({
             ...values,
+            cardName: userCard.cardName,
             cardNumber: userCard.number,
-            expireDate: userCard.expireDate,
-            cardName: userCard.cardName
+            expireDate: `${userCard.expireDate.slice(2)}/${userCard.expireDate.slice(0, 2)}`
         });
     }, [hasCard]);
-    console.log(userCard);
+
     const classes = useStyles();
     return (
         <div className={classes.root}>
@@ -219,32 +219,30 @@ export const UserPaymentCard: FC = () => {
                                             </Grid>
                                             <Grid
                                                 item
-                                                xs={12}
-                                                lg={6}
+                                                xs={9}
+                                                sm={6}
                                                 className='card-number-input'
                                             >
                                                 <Typography variant='subtitle2' gutterBottom>
-                                                    {t('card_number')}:
+                                                    {t('card_number')}:&nbsp;
+                                                    {hasCard
+                                                        ? userCard.number
+                                                        : <ReactInputMask
+                                                            alwaysShowMask
+                                                            value={cardNumber}
+                                                            mask='9999 9999 9999 9999'
+                                                            onChange={handleInput}
+                                                        >
+                                                            {() => <TextField
+                                                                fullWidth
+                                                                focused={false}
+                                                                size='small'
+                                                                name="cardNumber"
+                                                                variant="outlined"
+                                                                className={errors.cardNumber && touched.cardNumber ? 'error-border' : ''}
+                                                            />}
+                                                        </ReactInputMask>}
                                                 </Typography>
-                                                {hasCard
-                                                    ? <Typography variant='subtitle1'>
-                                                        {userCard.number}
-                                                    </Typography>
-                                                    : <ReactInputMask
-                                                        alwaysShowMask
-                                                        value={cardNumber}
-                                                        mask='9999 9999 9999 9999'
-                                                        onChange={handleInput}
-                                                    >
-                                                        {() => <TextField
-                                                            fullWidth
-                                                            focused={false}
-                                                            size='small'
-                                                            name="cardNumber"
-                                                            variant="outlined"
-                                                            className={errors.cardNumber && touched.cardNumber ? 'error-border' : ''}
-                                                        />}
-                                                    </ReactInputMask>}
                                                 {errors.cardNumber && touched.cardNumber && (
                                                     <Typography variant="subtitle2" className='error-text'>
                                                         <span>
@@ -255,31 +253,30 @@ export const UserPaymentCard: FC = () => {
                                             </Grid>
                                             <Grid
                                                 item
-                                                xs={3}
+                                                xs={5}
+                                                sm={3}
                                                 className='expire-date-input'
                                             >
                                                 <Typography variant='subtitle2' gutterBottom>
-                                                    {t('expiration_date')}:
+                                                    {t('expiration_date')}:&nbsp;
+                                                    {hasCard
+                                                        ? expireDate
+                                                        : <ReactInputMask
+                                                            mask='99/99'
+                                                            alwaysShowMask
+                                                            value={expireDate}
+                                                            onChange={handleInput}
+                                                        >
+                                                            {() => <TextField
+                                                                fullWidth
+                                                                focused={false}
+                                                                size='small'
+                                                                name="expireDate"
+                                                                variant="outlined"
+                                                                className={errors.expireDate && touched.expireDate ? 'error-border' : ''}
+                                                            />}
+                                                        </ReactInputMask>}
                                                 </Typography>
-                                                {hasCard
-                                                    ? <Typography variant='subtitle1'>
-                                                        {userCard.expireDate}
-                                                    </Typography>
-                                                    : <ReactInputMask
-                                                        mask='99/99'
-                                                        alwaysShowMask
-                                                        value={expireDate}
-                                                        onChange={handleInput}
-                                                    >
-                                                        {() => <TextField
-                                                            fullWidth
-                                                            focused={false}
-                                                            size='small'
-                                                            name="expireDate"
-                                                            variant="outlined"
-                                                            className={errors.expireDate && touched.expireDate ? 'error-border' : ''}
-                                                        />}
-                                                    </ReactInputMask>}
                                                 {errors.expireDate && touched.expireDate && (
                                                     <Typography variant="subtitle2" className='error-text'>
                                                         <span>
@@ -291,9 +288,11 @@ export const UserPaymentCard: FC = () => {
                                             {hasCard && (
                                                 <Grid
                                                     item
-                                                    xs={4}
+                                                    xs={12}
+                                                    sm={4}
                                                 >
-                                                    <Typography variant='subtitle1'>
+                                                    <Typography variant='subtitle2' gutterBottom>
+                                                        {t('balance')}:&nbsp;
                                                         {userCard.balance}&nbsp;
                                                         <span>{t('common:sum')}</span>
                                                     </Typography>
@@ -301,7 +300,7 @@ export const UserPaymentCard: FC = () => {
                                             )}
                                             <Grid
                                                 item
-                                                xs={hasCard ? 12 : 5}
+                                                xs={9}
                                             >
                                                 {hasCard
                                                     ? <Typography>{userCard.owner}</Typography>

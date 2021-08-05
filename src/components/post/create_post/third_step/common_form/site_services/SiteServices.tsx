@@ -42,14 +42,16 @@ export const SiteServices: FC<PaymentDeliveryPropsType> = (props) => {
 
     const {modalOpen, handleModalOpen, handleModalClose} = useModal();
 
-    const handleSafeDealCheckBox = ({target}) => {
-        (!isCommonForm || hasCard)
-            ? handleModalOpen()
-            : setValues({
+    const handleSafeDealCheckBox = (e) => {
+        if (!isCommonForm || hasCard) {
+            handleCheckbox('safe_deal')(e);
+            setValues({
                 ...values,
-                safe_deal: target.checked,
                 currency: {id: 2, name: 'sum'}
             });
+        } else {
+            handleModalOpen();
+        }
     };
 
     const handleCloseSafeDealModal = () => {

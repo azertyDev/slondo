@@ -1,5 +1,5 @@
 import {FC} from 'react';
-import {Box, Grid, Typography} from '@material-ui/core';
+import {Grid, Typography} from '@material-ui/core';
 import {CheckboxSelect} from '@src/components/elements/checkbox_select/CheckboxSelect';
 import {excludeFields, noTranslatableFields} from '@src/common_data/fields_keys';
 import {useTranslation} from "next-i18next";

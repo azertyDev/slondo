@@ -10,7 +10,11 @@ import {numberRegEx, timeRegEx} from '@src/common_data/reg_exs';
 import {useFormik} from 'formik';
 import {CustomAccordion} from '@src/components/elements/accordion/CustomAccordion';
 import {numericFields} from '@src/common_data/fields_keys';
-import {auctionParamsSchema, defaultParamsSchema} from '@root/validation_schemas/createPostSchemas';
+import {
+    auctionParamsSchema,
+    defaultParamsSchema,
+    safeDealPriceSchema
+} from '@root/validation_schemas/createPostSchemas';
 import {clearWhiteSpaces, getErrorMsg, numberPrettier, phonePrepare} from '@src/helpers';
 import {PostType} from '@root/interfaces/Post';
 import {WEEK_DAYS} from '@src/common_data/common';
@@ -100,6 +104,7 @@ export const CommonForm: FC<DefaultParamsPropsType> = (props) => {
         }
     };
 
+    const [safeDealPriceErr, setSafeDealPriceErr] = useState(false);
     const [avalTimeActive, setAvalTimeActive] = useState(!!available_start_time);
 
     const onSubmit = (values) => {
@@ -180,7 +185,7 @@ export const CommonForm: FC<DefaultParamsPropsType> = (props) => {
     const formik = useFormik({
         onSubmit,
         initialValues: initForm,
-        validationSchema: isAuction ? auctionParamsSchema : defaultParamsSchema
+        validationSchema: getSchema()
     });
 
     const {
@@ -192,6 +197,11 @@ export const CommonForm: FC<DefaultParamsPropsType> = (props) => {
     } = formik;
 
     const {auction, location, avalTime} = values;
+
+    function getSchema() {
+        if (isAuction) return auctionParamsSchema;
+        return defaultParamsSchema;
+    }
 
     const handleSelect = (key, value) => {
         if (key === 'duration') {
@@ -238,6 +248,12 @@ export const CommonForm: FC<DefaultParamsPropsType> = (props) => {
         setValues({...values, location});
     };
 
+    const validateSafeDealPrice = async () => {
+        const value = await safeDealPriceSchema.isValid(values);
+        console.log('value', value);
+        setSafeDealPriceErr(value);
+    };
+
     const handleCheckboxChange = (name: string) => ({target}) => {
         const auctionOptionsList = [
             'price_buy_now',
@@ -245,6 +261,9 @@ export const CommonForm: FC<DefaultParamsPropsType> = (props) => {
             'auto_renewal',
             'display_phone'
         ];
+
+        if (name === 'safe_deal') validateSafeDealPrice();
+
         if (auctionOptionsList.some(option => option === name)) {
             if (name === 'price_buy_now') {
                 auction.price_buy_now.isActive = target.checked;
@@ -257,6 +276,7 @@ export const CommonForm: FC<DefaultParamsPropsType> = (props) => {
         } else {
             values[name] = target.checked;
         }
+
         setValues({...values});
     };
 
