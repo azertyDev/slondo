@@ -5,16 +5,43 @@ import CyrillicToTranslit from 'cyrillic-to-translit-js';
 import {CategoryType, SubcategoryType, TypeCategory} from '@root/interfaces/Categories';
 import {cardDataRegEx, punctuationMarksRegEx, searchTxtRegEx} from '@src/common_data/reg_exs';
 import {HasAuction, site_categories} from '@src/common_data/site_categories';
-import {excludeFields, fractionalFields, optionFields, requireFields, singleFields} from '@src/common_data/fields_keys';
+import {excludeFields, optionFields, requireFields, singleFields} from '@src/common_data/fields_keys';
 import {IdNameType} from '@root/interfaces/Post';
 import {Grid} from '@material-ui/core';
 import {DropDownSelect} from '@src/components/elements/drop_down_select/DropDownSelect';
 import {WithT} from 'i18next';
+import {GetServerSidePropsContext} from "next";
 
 export const cookies = new Cookies();
 export const cookieOpts: { path: string, sameSite: boolean | 'none' | 'lax' | 'strict' } = {
     path: '/',
     sameSite: 'strict'
+};
+
+export const getSitemap = (ctx: GetServerSidePropsContext, fields) => {
+    const {res} = ctx;
+    let sitemap = '';
+
+    fields.forEach(({loc, alternateRefs}) => {
+        const altRefs = alternateRefs.reduce((str, obj) => {
+            str = str.concat(`<xhtml:link rel="alternate" href="${obj.href}" hreflang="${obj.hreflang}" />`);
+            return str;
+        }, '');
+
+        sitemap = sitemap.concat(`<url><loc>${loc}</loc>${altRefs}</url>`);
+    });
+
+    const xml = `<?xml version="1.0" encoding="UTF-8"?>
+    <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">${sitemap}</urlset>`;
+
+    if (res) {
+        res.setHeader('Content-Type', 'text/xml');
+        res.write(xml);
+        res.end();
+    }
+    return {
+        props: {}
+    };
 };
 
 export const getStringValues = (obj): string[] => {
