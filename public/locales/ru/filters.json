@@ -2484,6 +2484,51 @@
     }
   },
   "goods": {
+    "white": {
+      "name": "Белый"
+    },
+    "black": {
+      "name": "Черный"
+    },
+    "grey": {
+      "name": "Серый"
+    },
+    "brown": {
+      "name": "Коричневый"
+    },
+    "orange": {
+      "name": "Оранжевый"
+    },
+    "yellow": {
+      "name": "Желтый"
+    },
+    "red": {
+      "name": "Красный"
+    },
+    "gray": {
+      "name": "Серый"
+    },
+    "green": {
+      "name": "Зеленый"
+    },
+    "blue": {
+      "name": "Синий"
+    },
+    "cyan": {
+      "name": "Голубой"
+    },
+    "violet": {
+      "name": "Фиолетовый"
+    },
+    "pink": {
+      "name": "Розовый"
+    },
+    "vinous": {
+      "name": "Бордовый"
+    },
+    "multi_color": {
+      "name": "Многоцветный"
+    },
     "gender": {
       "name": "Пол"
     },
@@ -7611,6 +7656,7 @@
       "name": "Б/У"
     }
   },
+
   "bayonet": "Байонет",
   "usb_connector": "USB разъем",
   "build_in_speakers": "Встренные динамики",

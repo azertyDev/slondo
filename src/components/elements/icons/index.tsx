@@ -81,3 +81,6 @@ export {RenewalIcon} from './social_icons/Renewal';
 export {RocketIcon} from './RocketIcon';
 export {ChevronRight} from './ChevronRight';
 export {DoubleCheckIcon} from './DoubleCheckIcon';
+export {GradeIcon} from './GradeIcon';
+export {SupervisorIcon} from './SupervisorIcon';
+export {ErrorIcon} from './ErrorIcon';

@@ -15,9 +15,10 @@ import {ShoppingIcon} from '@src/components/elements/icons/ShoppingIcon';
 import {SettingsIcon} from '@src/components/elements/icons/SettingsIcon';
 import {PowerIcon} from '@src/components/elements/icons/PowerIcon';
 import {useTranslation} from 'next-i18next';
-import {AuthCtx} from "@src/context/AuthCtx";
+import {AuthCtx} from '@src/context/AuthCtx';
 import {useStyles} from './useStyles';
-import {UserCtx} from "@src/context";
+import {UserCtx} from '@src/context';
+import {ErrorIcon, GradeIcon, SupervisorIcon} from '@src/components/elements/icons';
 
 type SidebarMenuPropsType = {
     clearAnchor?: () => void
@@ -65,10 +66,14 @@ export const SidebarMenu: FC<SidebarMenuPropsType> = ({clearAnchor}) => {
                         <CustomBadge badgeContent={user.observer.number_of_reviews}>
                             <ListItem
                                 button
-                                onClick={onButtonClick('rating')}
-                                selected={page === 'rating'}
                                 disableGutters
+                                selected={page === 'rating'}
+                                onClick={onButtonClick('rating')}
+                                classes={{
+                                    selected: classes.selected
+                                }}
                             >
+                                <GradeIcon />
                                 <ListItemText primary={t('cabinet:rating')} />
                             </ListItem>
                         </CustomBadge>
@@ -77,9 +82,13 @@ export const SidebarMenu: FC<SidebarMenuPropsType> = ({clearAnchor}) => {
                         <ListItem
                             button
                             disableGutters
-                            onClick={onButtonClick('subs')}
                             selected={page === 'subs'}
+                            onClick={onButtonClick('subs')}
+                            classes={{
+                                selected: classes.selected
+                            }}
                         >
+                            <SupervisorIcon />
                             <ListItemText primary={t('cabinet:subs')} />
                         </ListItem>
                     </Grid>
@@ -92,9 +101,13 @@ export const SidebarMenu: FC<SidebarMenuPropsType> = ({clearAnchor}) => {
                             <ListItem
                                 button
                                 disableGutters
-                                onClick={onButtonClick('banned')}
                                 selected={page === 'banned'}
+                                onClick={onButtonClick('banned')}
+                                classes={{
+                                    selected: classes.selected
+                                }}
                             >
+                                <ErrorIcon />
                                 <ListItemText primary={t('cabinet:banned')} />
                             </ListItem>
                         </CustomBadge>
@@ -106,9 +119,12 @@ export const SidebarMenu: FC<SidebarMenuPropsType> = ({clearAnchor}) => {
                     <Grid item md={12}>
                         <ListItem
                             button
+                            disableGutters
                             selected={page === 'posts'}
                             onClick={handleListItemClick('posts')}
-                            disableGutters
+                            classes={{
+                                selected: classes.selected
+                            }}
                         >
                             <NotesIcon />
                             <ListItemText primary={t('myPosts')} />
@@ -117,9 +133,12 @@ export const SidebarMenu: FC<SidebarMenuPropsType> = ({clearAnchor}) => {
                     <Grid item md={12}>
                         <ListItem
                             button
+                            disableGutters
                             selected={page === 'auctions'}
                             onClick={handleListItemClick('auctions')}
-                            disableGutters
+                            classes={{
+                                selected: classes.selected
+                            }}
                         >
                             <GavelIcon />
                             <ListItemText primary={t('myAuctions')} />
@@ -129,9 +148,12 @@ export const SidebarMenu: FC<SidebarMenuPropsType> = ({clearAnchor}) => {
                         <CustomBadge badgeContent={number_of_purchase} color='error'>
                             <ListItem
                                 button
+                                disableGutters
                                 selected={page === 'purchases'}
                                 onClick={handleListItemClick('purchases')}
-                                disableGutters
+                                classes={{
+                                    selected: classes.selected
+                                }}
                             >
                                 <ShoppingIcon />
                                 <ListItemText primary={t('myPurchases')} />
@@ -142,9 +164,12 @@ export const SidebarMenu: FC<SidebarMenuPropsType> = ({clearAnchor}) => {
                         <CustomBadge badgeContent={0} color='error'>
                             <ListItem
                                 button
+                                disableGutters
                                 selected={page === 'favorite'}
                                 onClick={handleListItemClick('favorite')}
-                                disableGutters
+                                classes={{
+                                    selected: classes.selected
+                                }}
                             >
                                 <FavoriteBorderIcon />
                                 <ListItemText primary={t('favorite')} />
@@ -159,9 +184,12 @@ export const SidebarMenu: FC<SidebarMenuPropsType> = ({clearAnchor}) => {
                         <CustomBadge badgeContent={number_of_notifications} color='error'>
                             <ListItem
                                 button
+                                disableGutters
                                 selected={page === 'notifications'}
                                 onClick={handleListItemClick('notifications')}
-                                disableGutters
+                                classes={{
+                                    selected: classes.selected
+                                }}
                             >
                                 <NotificationIcon />
                                 <ListItemText primary={t('notifications')} />
@@ -176,6 +204,9 @@ export const SidebarMenu: FC<SidebarMenuPropsType> = ({clearAnchor}) => {
                                 disableGutters
                                 selected={page === 'messages'}
                                 onClick={handleListItemClick('messages')}
+                                classes={{
+                                    selected: classes.selected
+                                }}
                             >
                                 <LetterIcon />
                                 <ListItemText primary={t('messages')} />
@@ -193,6 +224,9 @@ export const SidebarMenu: FC<SidebarMenuPropsType> = ({clearAnchor}) => {
                                 disableGutters
                                 selected={page === 'safe_deal'}
                                 onClick={handleListItemClick('safe_deal')}
+                                classes={{
+                                    selected: classes.selected
+                                }}
                             >
                                 <SafeIcon />
                                 <ListItemText primary={t('safe_deal')} />
@@ -203,10 +237,13 @@ export const SidebarMenu: FC<SidebarMenuPropsType> = ({clearAnchor}) => {
                         <CustomBadge badgeContent={0} color='error'>
                             <ListItem
                                 button
-                                // selected={page === 'paidServices'}
-                                // onClick={handleListItemClick('paidServices')}
                                 disabled
                                 disableGutters
+                                // selected={page === 'paidServices'}
+                                // onClick={handleListItemClick('paidServices')}
+                                classes={{
+                                    selected: classes.selected
+                                }}
                             >
                                 <WalletIcon />
                                 <ListItemText primary={t('paidServices')} />
@@ -220,10 +257,12 @@ export const SidebarMenu: FC<SidebarMenuPropsType> = ({clearAnchor}) => {
                     <Grid item md={12} lg={6}>
                         <ListItem
                             button
+                            disableGutters
                             selected={page === 'settings'}
                             onClick={handleListItemClick('settings')}
-                            disableGutters
-                            className='list-item'
+                            classes={{
+                                selected: classes.selected
+                            }}
                         >
                             <SettingsIcon />
                             <ListItemText primary={t('settings')} />
@@ -234,7 +273,6 @@ export const SidebarMenu: FC<SidebarMenuPropsType> = ({clearAnchor}) => {
                             button
                             disableGutters
                             onClick={signout}
-                            className='list-item'
                         >
                             <PowerIcon />
                             <ListItemText primary={t('exit')} />

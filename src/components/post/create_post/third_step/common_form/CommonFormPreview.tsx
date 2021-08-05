@@ -29,6 +29,7 @@ export const CommonFormPreview: FC<DefaultParamsPropsType> = (props) => {
 
     const {auction, avalTime} = values;
     const locationText = `${t(`locations:${location.region.name}.name`)}${location.city ? `, ${t(`locations:${location.region.name}.${location.city.name}`)}` : ''}`;
+    const hasService = !!values.delivery || !!values.exchange || !!values.auto_renewal || !!auction.auto_renewal || !!auction.offer_the_price || !!values.safe_deal;
 
     const classes = useStyles();
     return (
@@ -109,54 +110,56 @@ export const CommonFormPreview: FC<DefaultParamsPropsType> = (props) => {
                     </Grid>
                 </Grid>
             )}
-            <Grid container item>
-                <Grid item xs={4}>
-                    <Typography variant="subtitle1">
-                        {t('additionalServices')}
-                    </Typography>
+            {hasService && (
+                <Grid container item>
+                    <Grid item xs={12} sm={4}>
+                        <Typography variant="subtitle1" color='textSecondary'>
+                            {t('additionalServices')}
+                        </Typography>
+                    </Grid>
+                    <Grid item xs={12} sm={8} container>
+                        {values.delivery && (
+                            <Box className={classes.serviceItem}>
+                                <DeliveryIcon />
+                                <Typography variant="subtitle1">
+                                    {t('filters:delivery')}
+                                </Typography>
+                            </Box>
+                        )}
+                        {values.exchange && (
+                            <Box className={classes.serviceItem}>
+                                <ExchangeIcon />
+                                <Typography variant="subtitle1">
+                                    {t('filters:exchange')}
+                                </Typography>
+                            </Box>
+                        )}
+                        {auction.auto_renewal && (
+                            <Box className={classes.serviceItem}>
+                                <RenewalIcon />
+                                <Typography variant="subtitle1">
+                                    {t('filters:auto_renewal')}
+                                </Typography>
+                            </Box>
+                        )}
+                        {auction.offer_the_price && (
+                            <Box className={classes.serviceItem}>
+                                <Typography variant="subtitle1">
+                                    {t('filters:offer_price')}
+                                </Typography>
+                            </Box>
+                        )}
+                        {values.safe_deal && (
+                            <Box className={classes.serviceItem}>
+                                <SafeIcon />
+                                <Typography variant="subtitle1">
+                                    {t('filters:safe_deal')}
+                                </Typography>
+                            </Box>
+                        )}
+                    </Grid>
                 </Grid>
-                <Grid item xs={12} sm={8} container>
-                    {values.delivery && (
-                        <Box className={classes.serviceItem}>
-                            <DeliveryIcon />
-                            <Typography variant="subtitle1">
-                                {t('filters:delivery')}
-                            </Typography>
-                        </Box>
-                    )}
-                    {values.exchange && (
-                        <Box className={classes.serviceItem}>
-                            <ExchangeIcon />
-                            <Typography variant="subtitle1">
-                                {t('filters:exchange')}
-                            </Typography>
-                        </Box>
-                    )}
-                    {auction.auto_renewal && (
-                        <Box className={classes.serviceItem}>
-                            <RenewalIcon />
-                            <Typography variant="subtitle1">
-                                {t('filters:auto_renewal')}
-                            </Typography>
-                        </Box>
-                    )}
-                    {auction.offer_the_price && (
-                        <Box className={classes.serviceItem}>
-                            <Typography variant="subtitle1">
-                                {t('filters:offer_price')}
-                            </Typography>
-                        </Box>
-                    )}
-                    {values.safe_deal && (
-                        <Box className={classes.serviceItem}>
-                            <SafeIcon />
-                            <Typography variant="subtitle1">
-                                {t('filters:safe_deal')}
-                            </Typography>
-                        </Box>
-                    )}
-                </Grid>
-            </Grid>
+            )}
             <Grid container item spacing={2}>
                 <Grid item xs={12} sm={4}>
                     <Typography variant="subtitle1" color='textSecondary'>

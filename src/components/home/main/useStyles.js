@@ -20,9 +20,6 @@ export const useStyles = makeStyles((theme) => ({
                 }
             },
             '& div.main-content': {
-                '& section.posts-slider-wrapper': {
-                    marginBottom: '55px'
-                },
                 [theme.breakpoints.up('lg')]: {
                     paddingRight: '16px'
                 }

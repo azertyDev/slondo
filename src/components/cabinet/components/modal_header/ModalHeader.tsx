@@ -25,7 +25,7 @@ export const ModalHeader: FC<any> = (props) => {
             position='relative'
             justifyContent='center'
             className={classes.root}
-            boxShadow={isXs && '0px 1px 2px 0px #00000026'}
+            boxShadow={isXs ? '0px 1px 2px 0px #00000026' : 'none'}
         >
             {hasPrevBtn && (
                 <IconButton

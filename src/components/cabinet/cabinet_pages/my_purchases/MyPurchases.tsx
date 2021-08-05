@@ -6,17 +6,19 @@ import {TabsContent} from '@src/components/cabinet/cabinet_pages/TabsContent';
 import {CircularProgress, Tab, Tabs, Typography} from "@material-ui/core";
 import {useTranslation} from 'react-i18next';
 import {ITEMS_PER_PAGE} from '@src/constants';
-import {TabsDataType} from '@root/interfaces/Cabinet';
-import {CardDataType} from "@root/interfaces/CardData";
+import {InitPostsType, TabsDataType} from '@root/interfaces/Cabinet';
+import {CardDataType} from '@root/interfaces/CardData';
 import {myUzCardAPI, userCabinetAPI} from '@src/api/api';
 import {CabinetCard} from '@src/components/cabinet/components/cabinet_card/CabinetCard';
 import {CustomButton} from '@src/components/elements/custom_button/CustomButton';
 import {ConfirmModal} from '@src/components/elements/confirm_modal/Confirm_modal';
-import {CustomTabPanel} from "@src/components/elements/custom_tab_panel/CustomTabPanel";
-import {DetailedPostModalContainer} from "@src/components/cabinet/components/detailed_post_modal/DetailedPostModalContainer";
-import {initCardData} from "@src/common_data/common";
-import {NotificationModal} from "@src/components/cabinet/components/notifation_modal/NotificationModal";
+import {CustomTabPanel} from '@src/components/elements/custom_tab_panel/CustomTabPanel';
+import {DetailedPostModalContainer} from '@src/components/cabinet/components/detailed_post_modal/DetailedPostModalContainer';
+import {initCardData} from '@src/common_data/common';
+import {NotificationModal} from '@src/components/cabinet/components/notifation_modal/NotificationModal';
 import {useStyles} from './useStyles';
+import {EmptyPage} from '@src/components/cabinet/components/empty_page/EmptyPage';
+import {CabinetTabs} from '@src/components/cabinet/components/cabinet_tabs/CabinetTabs';
 
 export const MyPurchases: FC = () => {
     const {t} = useTranslation('cabinet');
@@ -108,6 +110,7 @@ export const MyPurchases: FC = () => {
     const classes = useStyles();
     const purchasesList = (
         <>
+
             <Tabs
                 aria-label="tabs"
                 value={childTabValue}
@@ -177,7 +180,25 @@ export const MyPurchases: FC = () => {
             title: t('purchases'),
             itemsPerPage: ITEMS_PER_PAGE,
             handleFetchByTab: fetchPurchases,
-            component: purchasesList
+            component: (
+                <CabinetTabs
+                    isFetch={isFetch}
+                    onChange={handleChildTabChange}
+                    fstTabData={{
+                        posts: purchases,
+                        emptyPage: <EmptyPage
+                            label={t('cabinet:empty.purchase')}
+                        />
+                    }}
+                    secTabData={{
+                        posts: archivePurchases,
+                        emptyPage: <EmptyPage label={t('empty.archive')} />
+                    }}
+                    childTabValue={childTabValue}
+                    handleDetailedOpen={handleDetailedOpen}
+                    handleNotificationsOpen={handleNotificationsOpen}
+                />
+            )
         }
     ];
 

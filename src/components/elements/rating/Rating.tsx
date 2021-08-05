@@ -26,7 +26,7 @@ export const Rating: FC<RatingPropsType> = (props) => {
 
     const classes = useStyles();
     return (
-        <div className={`${classes.root} ${className}`}>
+        <div className={`${classes.root} ${className ?? ''}`}>
             <div>
                 <CustomRating
                     name={name}
@@ -36,17 +36,21 @@ export const Rating: FC<RatingPropsType> = (props) => {
                     onChange={onChangeRating}
                 />
                 {ratingValue && (
-                    <Box mr={1}>
-                        <Typography variant="subtitle1">
-                            {ratingValue}
-                        </Typography>
-                    </Box>
+                    <Typography variant="subtitle1" component='p'>
+                        {ratingValue}
+                    </Typography>
                 )}
             </div>
             {card && (
                 <Hidden mdDown>
                     <div>
-                        <Typography variant="subtitle1" className='ratingCount'>{`(${ratingCount} оценок)`}</Typography>
+                        <Typography
+                            variant="subtitle1"
+                            component='p'
+                            className='ratingCount'
+                        >
+                            {`(${ratingCount} оценок)`}
+                        </Typography>
                     </div>
                 </Hidden>
             )}

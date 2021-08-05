@@ -35,10 +35,10 @@ export const StepsProgress: FC<AncmntAuctionTopPropsType> = (props) => {
             container
             className={classes.root}
         >
-            <Grid item xs={12} sm={6} md={8}>
+            <Grid item xs={12} lg={8}>
                 {!isPostTypeStep && <div className='menu-header'>
                     <IconButton className="back-btn" onClick={handleBack}>
-                        <BackspaceIcon/>
+                        <BackspaceIcon />
                     </IconButton>
                     <Typography
                         noWrap

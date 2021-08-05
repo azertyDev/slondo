@@ -88,6 +88,7 @@
   "profile_posts": "E'lonlar",
   "empty": {
     "create_post": "E'lon yaratish",
+    "purchase": "Siz xali mahsulot sotib olmagansiz",
     "create_auction": "Auksion yaratish",
     "post": "Siz xali xech qanday e'lon yaratmadingiz",
     "auction": "Siz xali xech qanday auksion yaratmadingiz",
