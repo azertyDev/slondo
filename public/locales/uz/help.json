@@ -59,6 +59,18 @@
   "user_agreements": {
     "name": "Foydalanuvchi shartnomasi"
   },
+  "privacy_police": {
+    "name": "Maxfiylik siyosati"
+  },
+  "safe_auction_offer": {
+    "name": "“Xavfsiz savdo” taklifi"
+  },
+  "top_offer": {
+    "name": "“Topga ko'tarish” taklifi"
+  },
+  "advanced_auction_offer": {
+    "name": "“Kengaytirilgan auksion” taklifi"
+  },
   "main": {
     "title": "Sizni qiziqtirgan bo'limni tanlang yoki qidiruv tizimidan foydalaning",
     "subtitle": "Agar sizda savollar tug'ilsa, ushbu tugmani bosing"
@@ -302,7 +314,7 @@
       "name": "Kengaytirilgan auksion",
       "description": "Savdoga qo'yilgan tovarlar uchun kim oshdi savdosi shaklida sotish usuli, bir vaqtning o'zida Sotuvchi “hozir sotib olish“ da sotish narxini ko'rsatishi yoki  “zaxira narxi“ni belgilashi mumkin. Bitta kim oshdi savdosida sotilishi mumkin bo'lgan narsalar soni: bitta element bir vaqtning o'zida bir nechta element bo’lisahi mumkin, agar ular bir lot bilan sotilsa (to’plam) Ushbu usul orqali xaridorlar tanlov qilish imkoniga ega bo’ladi: pul tikish yoki mahsulotni darhol belgilangan narxda sotib olish. Mahsulotning boshlang'ich narxi 1000 so'mdan kam bo'lmasligi kerak. “Hozir sotib olish“ narxi boshlang'ich narxdan ko'proq bo'lishi kerak. Yakuniy narx-kim oshdi savdosida tovarlarni sotish davomida o'rnatilgan narx bo’lib, narxi boshlang'ich narxiga teng bo'lishi mumkin va “hozir sotib olish“ narxidan oshib ketishi mumkin, bu holda “hozir sotib olish“ funktsiyasi ushbu auktsion uchun avtomatik ravishda bloklanadi. Xaridor auktsion g'olibi — tender oxirida eng yuqori narxni taklif qilgan ishtirokchi yoki “hozir sotib olish“ opsiyasidan foydalangan ishtirokchi hisoblanadi. “Zaxira narxi“ - e'lon qilingan vaqtda sotuvchi tomonidan belgilanadi. Agar stavkalar “zaxira narx“ ni yengib chiqmasa, bu xususiyat auktsionda mahsulotni sotmaslikka imkon beradi. Shunday qilib, mahsulot juda arzon narxga sotilib ketmasligiga amin bo'lishingiz mumkin. Savdo qadami ( narxning oshishi) - keyingi stavka oldingi darajadan oshib ketishi kerak bo'lgan minimal miqdordir. Xaridorning vazifasi-mahsulotni taklif qilingan narxda yoki “hozir sotib olish“ belgilangan narxda sotib olishdir. Sotuvchining majburiyati-tovarlarni savdo paytida belgilangan yakuniy narxda yoki “hozir sotib olish“belgilangan narxda sotishdir. "
     },
-    "create": {
+    "create_auction": {
       "name": "Auksion yaratish",
       "description": {
         "0": "Savdoga qo’yilgan mahsulot, sotuvga qo’yiladigan mahsulot  xizmat ko'rsatish Qoidalariga muvofiq bo'lishi kerak. Savdo jarayonida barcha manfaatdor foydalanuvchilar “Xabar yozish“ shakli orqali sotuvga qo'yilgan mahsulot haqida savollar berishlari yoki ma'lum bir auktsionga qo'ng'iroq qilishlari mumkin. Birinchi ariza paydo bo'lishidan oldin, har qanday auktsion parametrlariga o'zgartirish kiritishingiz mumkin. Birinchi ariza topshirilgandan so'ng, auktsionni o’zgartirish mumkin emas. Sotuvchi auktsionni muddatidan oldin tugatishi mumkin. Agar mahsulot auktsionga qo'yilgan va foydalanuvchilar o’z narxlarini e’lon qilishgan bo’lsa, keyin esa o’z narxini bekor qilish bilan savdodan chiqish mumkin. Narxlar bekor qilinganida, sayt ma'muriyati foydalanuvchiga ogohlantirish berishi va reytingni kamaytirishi mumkin. Ikkitadan ortiq ogohlantirish olinganda, bu foydalanuvchining auktsionga kirishini to'xtatish masalasi ko'rib chiqiladi.",

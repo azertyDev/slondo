@@ -46,6 +46,7 @@ export const CustomAccordion: FC<AccordionComponentPropsType> = (props) => {
                 <Box
                     display='flex'
                     padding='5px 15px'
+                    alignItems='center'
                     className={classes.accordionTitle}
                 >
                     {icon}

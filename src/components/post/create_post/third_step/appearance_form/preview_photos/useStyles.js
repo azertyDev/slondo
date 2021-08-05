@@ -1,6 +1,6 @@
 import {makeStyles} from '@material-ui/core/styles';
 
-export const useStyles = makeStyles(() => ({
+export const useStyles = makeStyles((theme) => ({
     root: {
         '& input': {
             display: 'none'
@@ -44,6 +44,10 @@ export const useStyles = makeStyles(() => ({
                     width: '60px',
                     height: '60px',
                     background: '#7DBCF6',
+                    [theme.breakpoints.down('sm')]: {
+                        width: '40px',
+                        height: '40px'
+                    },
                     borderRadius: '100%',
                     '& svg': {
                         fontSize: '2rem',

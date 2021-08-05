@@ -1,6 +1,6 @@
 import { makeStyles } from '@material-ui/core/styles';
 
-export const useStyles = makeStyles(() => ({
+export const useStyles = makeStyles((theme) => ({
     root: {
         display: 'flex',
         flexDirection: 'column',
@@ -8,7 +8,7 @@ export const useStyles = makeStyles(() => ({
         background: 'linear-gradient(49.94deg, #675EAA 19.03%, #AD66D5 72.72%)',
         borderRadius: 30,
         marginBottom: 24,
-        '& > h6.MuiTypography-subtitle1': {
+        '& > p.MuiTypography-subtitle1': {
             fontWeight: '600',
             marginTop: '19px',
             marginBottom: '18px',
@@ -16,11 +16,14 @@ export const useStyles = makeStyles(() => ({
             fontSize: '1.125rem',
             letterSpacing: '0.15px',
             lineHeight: '22px',
+            [theme.breakpoints.down('lg')]: {
+                fontSize: '1rem'
+            }
         },
         '& > div.MuiPaper-rounded': {
             width: '100%',
             background: '#FFF',
-            boxShadow: '0px 0px 8px rgba(132, 92, 171, 0.2)',
+            boxShadow: '0px 0px 10px rgb(0 0 0 / 5%)',
             borderRadius: '28px',
             display: 'flex',
             flexWrap: 'wrap',
@@ -51,6 +54,11 @@ export const useStyles = makeStyles(() => ({
                             padding: 11,
                             marginRight: 10
                         },
+                        '& .MuiTypography-subtitle1': {
+                            [theme.breakpoints.down('lg')]: {
+                                fontSize: '0.875rem'
+                            }
+                        }
                     },
                 },
             },

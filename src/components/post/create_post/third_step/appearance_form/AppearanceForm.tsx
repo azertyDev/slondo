@@ -13,6 +13,7 @@ import {useTranslation} from 'react-i18next';
 import {useRouter} from 'next/router';
 import {DropResult} from 'react-beautiful-dnd';
 import {useStyles} from './useStyles';
+import {CustomSlider} from '@src/components/elements/custom_slider/CustomSlider';
 
 type AppearanceFormPropsType = {
     categoryName: string,
@@ -35,6 +36,44 @@ export const AppearanceForm: FC<AppearanceFormPropsType> = (props) => {
         handleNextFormOpen
     } = props;
 
+    const sliderSettings = {
+        dots: false,
+        arrows: false,
+        infinite: true,
+        slidesToShow: 10,
+        slidesToScroll: 1,
+        centerPadding: '0px',
+        centerMode: true,
+        focusOnSelect: true,
+        adaptiveHeight: false,
+        responsive: [
+            {
+                breakpoint: 1280,
+                settings: {
+                    slidesToShow: 8
+                }
+            },
+            {
+                breakpoint: 992,
+                settings: {
+                    slidesToShow: 6
+                }
+            },
+            {
+                breakpoint: 768,
+                settings: {
+                    slidesToShow: 5
+                }
+            },
+            {
+                breakpoint: 576,
+                settings: {
+                    slidesToShow: 3
+                }
+            }
+        ]
+    };
+
     const formIndex = 2;
     const isJob = categoryName === 'job';
 
@@ -42,7 +81,7 @@ export const AppearanceForm: FC<AppearanceFormPropsType> = (props) => {
     const {images, model} = useRouter().query;
 
     const onSubmit = ({files, color}) => {
-        const appearance: { photos: any, color_id?: number } = {
+        const appearance: {photos: any, color_id?: number} = {
             photos: files.filter(f => !!f).map(f => f.id ?? f.file)
         };
         if (color) appearance.color_id = color.id;
@@ -228,6 +267,7 @@ export const AppearanceForm: FC<AppearanceFormPropsType> = (props) => {
                                             <>
                                                 {t('color')}
                                                 {<span className='error-text'>*&nbsp;</span>}
+                                                <br />
                                             </>
                                         )}
                                         {errors.color
@@ -236,27 +276,23 @@ export const AppearanceForm: FC<AppearanceFormPropsType> = (props) => {
                                              {t(`errors:${errors.color}`)}
                                          </span>}
                                     </Typography>
-                                    <List disablePadding className='color-select'>
-                                        <Grid container spacing={2}>
-                                            {colors.map(clr =>
-                                                <Grid key={clr.id} item xs={12} sm={4} md={2} lg={1}>
-                                                    <ListItem
-                                                        disableGutters
-                                                        onClick={handleColor(clr)}
-                                                        className='color-wrapper'
-                                                    >
-                                                        <div
-                                                            className={!!color && clr.id === color.id ? 'selected-color' : ''}
-                                                            style={{backgroundColor: clr.hex_color_code}}
-                                                        />
-                                                        <Typography variant='subtitle2' component='p'>
-                                                            {t(`${categoryName}.${clr.name}.name`)}
-                                                        </Typography>
-                                                    </ListItem>
-                                                </Grid>
-                                            )}
-                                        </Grid>
-                                    </List>
+                                    <CustomSlider {...sliderSettings}>
+                                        {colors.map(clr =>
+                                            <Box
+                                                key={clr.id}
+                                                className='color-wrapper'
+                                                onClick={handleColor(clr)}
+                                            >
+                                            <span
+                                                className={!!color && clr.id === color.id ? 'selected-color' : ''}
+                                                style={{backgroundColor: clr.hex_color_code}}
+                                            />
+                                                <Typography variant='subtitle2' component='p'>
+                                                    {t(`${categoryName}.${clr.name}.name`)}
+                                                </Typography>
+                                            </Box>
+                                        )}
+                                    </CustomSlider>
                                 </Grid>
                             )}
                             <Grid item xs={12}>

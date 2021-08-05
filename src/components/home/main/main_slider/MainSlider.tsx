@@ -4,14 +4,13 @@ import {settings} from './sliderSettings';
 import {userAPI} from '@src/api/api';
 import {useStyles} from './useStyles';
 import {useRouter} from 'next/router';
-import {Typography, Box, useTheme, useMediaQuery} from '@material-ui/core';
+import {Typography, Box} from '@material-ui/core';
 import {Skeleton} from '@material-ui/lab';
 import Link from 'next/link';
 
 export const MainSlider: FC = () => {
     const {locale} = useRouter();
-    const theme = useTheme();
-    const isXs = useMediaQuery(theme.breakpoints.down(375));
+
     const [sliderData, setSliderData] = useState({
         isFetch: false,
         data: []

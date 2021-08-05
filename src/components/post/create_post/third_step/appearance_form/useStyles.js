@@ -32,43 +32,19 @@ export const useStyles = makeStyles((theme) => ({
                 borderRadius: 5
             }
         },
-        '& ul.color-select': {
-            display: 'flex',
-            flexWrap: 'wrap',
-            cursor: 'pointer',
-            [theme.breakpoints.down('sm')]: {
-                display: 'block'
-            },
-            '& li.color-wrapper': {
-                display: 'flex',
-                alignItems: 'center',
-                flexDirection: 'column',
-                textAlign: 'center',
-                [theme.breakpoints.down('sm')]: {
-                    flexDirection: 'row',
-                    padding: '10px 0',
-                    borderBottom: '1px solid #F2F2F2',
-                    '&:last-child': {
-                        borderBottom: 'none'
-                    }
-                },
-                '& div': {
-                    width: '50px',
-                    height: '50px',
-                    marginBottom: '10px',
-                    borderRadius: '50%',
-                    [theme.breakpoints.down('sm')]: {
-                        marginRight: '20px',
-                        marginBottom: 0
-                    },
-                    [theme.breakpoints.down('xs')]: {
-                        width: '32px',
-                        height: '32px'
-                    }
-                }
+        '& div.color-wrapper': {
+            display: 'flex!important',
+            alignItems: 'center',
+            flexDirection: 'column',
+            textAlign: 'center',
+            '& span': {
+                width: '50px',
+                height: '50px',
+                margin: '10px 0px',
+                borderRadius: '50%'
             }
         },
-        '& div.selected-color': {
+        '& span.selected-color': {
             boxShadow: '0px 0px 5px 5px #ccc'
         }
     }

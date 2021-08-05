@@ -11,29 +11,27 @@ export const PostsSlider: FC<{ title: string; cardData: CardData }> = ({cardData
 
     const classes = useStyles();
     return (
-        <div className={classes.root}>
-            {!!cards.length && (
-                <>
-                    <Typography className="title" variant="h2">
-                        {title}
-                    </Typography>
-                    <div className="slider">
-                        {!!error
-                            ? <div className="error-wrapper">
-                                <Typography className="error-text">{error}</Typography>
-                            </div>
-                            : <CustomSlider {...settings}>
-                                {cards.map(card =>
-                                    <GridCard
-                                        isFetch={isFetch}
-                                        key={card.id}
-                                        {...card}
-                                    />
-                                )}
-                            </CustomSlider>}
-                    </div>
-                </>
-            )}
-        </div>
+        !!cards.length && (
+            <div className={classes.root}>
+                <Typography className="title" variant="h2">
+                    {title}
+                </Typography>
+                <div className="slider">
+                    {!!error
+                        ? <div className="error-wrapper">
+                            <Typography className="error-text">{error}</Typography>
+                        </div>
+                        : <CustomSlider {...settings}>
+                            {cards.map(card =>
+                                <GridCard
+                                    isFetch={isFetch}
+                                    key={card.id}
+                                    {...card}
+                                />
+                            )}
+                        </CustomSlider>}
+                </div>
+            </div>
+        )
     );
 };

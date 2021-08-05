@@ -8,6 +8,7 @@ import {
 } from '@material-ui/core';
 import {useRouter} from 'next/router';
 import {useStyles} from '../useStyles';
+import {useTranslation} from 'next-i18next';
 
 type MenuItemPropsType = {
     data: any,
@@ -17,10 +18,11 @@ export const MenuItem: FC<MenuItemPropsType> = ({data}) => {
     const {push, query} = useRouter();
     const [term, subTerm] = query.term as string[] || [];
     const isOpen = term === data.term;
+    const {t} = useTranslation('help');
 
     const handleClick = (subTerm?) => async () => {
         await push(`/help/${data.term}/${subTerm ?? ''}`, undefined, {shallow: true});
-    };    
+    };
 
     const classes = useStyles();
     return (
@@ -36,7 +38,7 @@ export const MenuItem: FC<MenuItemPropsType> = ({data}) => {
                             variant="subtitle1"
                             color="textPrimary"
                         >
-                            {data.section}
+                            {t(`${data.term}.name`)}
                         </Typography>
                     }
                 />
@@ -55,7 +57,7 @@ export const MenuItem: FC<MenuItemPropsType> = ({data}) => {
                                         variant="subtitle2"
                                         color="textPrimary"
                                     >
-                                        {subData.section}
+                                        {t(`${data.term}.${subData.term}.name`)}
                                     </Typography>
                                 }/>
                             </ListItem>

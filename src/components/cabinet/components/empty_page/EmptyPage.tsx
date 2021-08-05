@@ -4,7 +4,15 @@ import {useStyles} from './useStyles';
 import {Box, Typography} from '@material-ui/core';
 import {CustomButton} from '@src/components/elements/custom_button/CustomButton';
 
-export const EmptyPage: FC<any> = (props) => {
+type EmptyPagePropsType = {
+    label,
+    action?,
+    link?,
+    tutorialLink?,
+    tutorialText?
+}
+
+export const EmptyPage: FC<EmptyPagePropsType> = (props) => {
     const {label, action, link, tutorialLink, tutorialText} = props;
 
     const classes = useStyles();

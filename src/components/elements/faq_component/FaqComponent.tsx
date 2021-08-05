@@ -15,7 +15,7 @@ export const FaqComponent: FC<WithT> = (props) => {
     const classes = useStyles();
     return (
         <div className={classes.root}>
-            <Typography variant="subtitle1">
+            <Typography variant="subtitle1" component='p'>
                 {t('main:faq')}
             </Typography>
             <Paper elevation={0}>
@@ -26,7 +26,7 @@ export const FaqComponent: FC<WithT> = (props) => {
                                 <span>
                                     <SignIcon />
                                 </span>
-                                <Typography variant="subtitle1" color="initial">
+                                <Typography variant="subtitle1" color="initial" component='p'>
                                     {t('main:how_to_register')}
                                 </Typography>
                             </a>
@@ -38,7 +38,7 @@ export const FaqComponent: FC<WithT> = (props) => {
                                 <span>
                                     <GavelIcon />
                                 </span>
-                                <Typography variant="subtitle1" color="initial">
+                                <Typography variant="subtitle1" color="initial" component='p'>
                                     {t('main:how_do_create_auction')}
                                 </Typography>
                             </a>
@@ -50,7 +50,7 @@ export const FaqComponent: FC<WithT> = (props) => {
                                 <span>
                                     <NotesIcon />
                                 </span>
-                                <Typography variant="subtitle1" color="initial">
+                                <Typography variant="subtitle1" color="initial" component='p'>
                                     {t('main:how_do_create_ad')}
                                 </Typography>
                             </a>
@@ -62,7 +62,7 @@ export const FaqComponent: FC<WithT> = (props) => {
                                 <span>
                                     <ShoppingIcon />
                                 </span>
-                                <Typography variant="subtitle1" color="initial">
+                                <Typography variant="subtitle1" color="initial" component='p'>
                                     {t('main:how_do_participate_auction')}
                                 </Typography>
                             </a>

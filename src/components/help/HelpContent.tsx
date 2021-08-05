@@ -112,7 +112,7 @@ export const HelpContent: FC = () => {
                 return <Update/>;
             case 'deactivate':
                     return <Deactivate/>;
-            case 'reject':
+            case 'rejected':
                 return <Reject/>;
             case 'material_requirements':
                 return <MaterialRequirements/>;

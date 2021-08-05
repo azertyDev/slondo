@@ -12,7 +12,7 @@ type CabinetModalPropsType = {
     secTabData,
     childTabValue,
     handleDetailedOpen,
-    handleSettingsOpen,
+    handleSettingsOpen?,
     handleNotificationsOpen
 };
 

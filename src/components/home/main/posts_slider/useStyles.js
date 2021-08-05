@@ -2,14 +2,15 @@ import { makeStyles } from '@material-ui/core/styles';
 
 export const useStyles = makeStyles(() => ({
     root: {
+        marginBottom: '55px',
         '& div.error-wrapper': {
             display: 'flex',
             justifyContent: 'center',
             alignItems: 'center',
-            minHeight: '366px',
+            minHeight: '366px'
         },
         '& h2.title': {
-            marginBottom: '15px',
+            marginBottom: '15px'
         },
         '& div.slider': {
             margin: '0 -6px',

@@ -339,7 +339,7 @@ export const CommonForm: FC<DefaultParamsPropsType> = (props) => {
                                     handleCheckboxChange={handleCheckboxChange}
                                 />
                                 : <Grid item container spacing={1}>
-                                    <Grid item xs={9} sm={5} md={4} lg={3}>
+                                    <Grid item xs={8} sm={5} md={4} lg={3}>
                                         <FormikField
                                             t={t}
                                             name='price'
@@ -349,7 +349,7 @@ export const CommonForm: FC<DefaultParamsPropsType> = (props) => {
                                             errorMsg={getErrorMsg(errors.price, touched.price, t)}
                                         />
                                     </Grid>
-                                    <Grid item xs={3} sm={2} md={2} lg={1}>
+                                    <Grid item xs={4} sm={2} md={2} lg={1}>
                                         <DropDownSelect
                                             name='currency'
                                             values={values}

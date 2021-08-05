@@ -12,28 +12,6 @@ export const useStyles = makeStyles((theme) => ({
             '&:last-child': {
                 marginBottom: 0
             },
-            '& .Mui-selected': {
-                backgroundColor: 'red',
-                border: '1px solid #AD66D5',
-                borderRadius: '5px',
-                '& .MuiTypography-body1': {
-                    color: 'red',
-                    backgroundImage:
-                        'linear-gradient(49.94deg, #675EAA 19.03%, #AD66D5 72.72%)',
-                    WebkitBackgroundClip: 'text',
-                    WebkitTextFillColor: 'transparent'
-                },
-                '& svg': {
-                    '& > defs > linearGradient > stop': {
-                        '&:first-child': {
-                            stopColor: '#675EAA'
-                        },
-                        '&:last-child': {
-                            stopColor: '#AD66D5'
-                        }
-                    }
-                }
-            },
             '& .MuiBadge-root': {
                 width: '100%'
             },
@@ -59,5 +37,25 @@ export const useStyles = makeStyles((theme) => ({
                 }
             }
         },
+    },
+    selected: {
+        border: '1px solid #AD66D5',
+        '& .MuiTypography-body1': {
+            color: 'red',
+            backgroundImage:
+                'linear-gradient(49.94deg, #675EAA 19.03%, #AD66D5 72.72%)',
+            WebkitBackgroundClip: 'text',
+            WebkitTextFillColor: 'transparent'
+        },
+        '& svg': {
+            '& stop': {
+                '&:first-child': {
+                    stopColor: '#675EAA'
+                },
+                '&:last-child': {
+                    stopColor: '#AD66D5'
+                }
+            }
+        }
     }
 }));

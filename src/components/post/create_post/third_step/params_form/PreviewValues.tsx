@@ -67,6 +67,7 @@ export const PreviewValues: FC<PreviewValuesPropsType> = (props) => {
                                                 component='p'
                                                 className='key'
                                                 variant='subtitle1'
+                                                gutterBottom
                                             >
                                                 {t(noTranslatable ? key : `${transKey}${key}.name`)}:
                                             </Typography>

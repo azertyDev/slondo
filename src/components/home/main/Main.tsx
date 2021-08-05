@@ -20,6 +20,7 @@ import {useStyles} from './useStyles';
 export const Main: FC<{seoTxt: string}> = ({seoTxt}) => {
     const {t} = useTranslation('main');
     const trigger = useScrollTrigger();
+
     const classes = useStyles();
     return (
         <main>
@@ -34,13 +35,9 @@ export const Main: FC<{seoTxt: string}> = ({seoTxt}) => {
                     <Grid container>
                         <Grid item lg={9} xs={12} className='main-content'>
                             <Hidden mdDown>
-                                <section className='posts-slider-wrapper'>
-                                    <PostsSliderContainer/>
-                                </section>
+                                <PostsSliderContainer />
                             </Hidden>
-                            <section>
-                                <PostsTabsContainer/>
-                            </section>
+                            <PostsTabsContainer />
                         </Grid>
                         <Hidden mdDown>
                             <Grid item lg={3} className="right-content">

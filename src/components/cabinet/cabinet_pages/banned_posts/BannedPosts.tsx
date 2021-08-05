@@ -9,13 +9,14 @@ import {CabinetCard} from '@src/components/cabinet/components/cabinet_card/Cabin
 import {CustomButton} from '@src/components/elements/custom_button/CustomButton';
 import {useModal} from '@src/hooks/useModal';
 import {ITEMS_PER_PAGE} from '@src/constants';
-import {ErrorCtx} from "@src/context";
+import {ErrorCtx} from '@src/context';
 import {useStyles} from './useStyles';
-import {DetailedPostModalContainer} from "@src/components/cabinet/components/detailed_post_modal/DetailedPostModalContainer";
-import {initCardData} from "@src/common_data/common";
-import {CustomModal} from "@src/components/elements/custom_modal/CustomModal";
-import {CustomSnackbar} from "@src/components/elements/snackbar/Snackbar";
-import {unstable_batchedUpdates} from "react-dom";
+import {DetailedPostModalContainer} from '@src/components/cabinet/components/detailed_post_modal/DetailedPostModalContainer';
+import {initCardData} from '@src/common_data/common';
+import {CustomModal} from '@src/components/elements/custom_modal/CustomModal';
+import {CustomSnackbar} from '@src/components/elements/snackbar/Snackbar';
+import {unstable_batchedUpdates} from 'react-dom';
+import {ResponsiveModal} from '@src/components/elements/responsive_modal/ResponsiveModal';
 
 export const BannedPosts: FC = () => {
     const {t} = useTranslation('cabinet');
@@ -102,13 +103,13 @@ export const BannedPosts: FC = () => {
                             onClick={handleModalContentIndex(2)}
                         >
                             <ListItemText
-                                primary='Удалить'
+                                primary={t('common:remove')}
                                 primaryTypographyProps={{variant: 'subtitle1'}}
                             />
                         </ListItem>
                         <ListItem button>
                             <ListItemText
-                                primary="Редактировать"
+                                primary={t('auction:edit')}
                             />
                         </ListItem>
                     </List>
@@ -116,11 +117,11 @@ export const BannedPosts: FC = () => {
             case 2:
                 return <>
                     <Typography variant='h6' className="title">
-                        Вы уверены?
+                        {t('common:areYouSure')}
                     </Typography>
                     <Box display='flex' flexDirection='column'>
-                        <CustomButton onClick={handleDelete}>Да</CustomButton>
-                        <CustomButton onClick={handlePrevMenu}>Вернуться</CustomButton>
+                        <CustomButton onClick={handleDelete}>{t('common:yes')}</CustomButton>
+                        <CustomButton onClick={handlePrevMenu}>{t('common:return')}</CustomButton>
                     </Box>
                 </>;
         }
@@ -129,7 +130,7 @@ export const BannedPosts: FC = () => {
         <>
             {modalContentIndex === 1
                 ? <Typography className="title" variant="h6">
-                    Объявление № {selectedPost.id}
+                    {t('common:post')} № {selectedPost.id}
                 </Typography>
                 : modalContentIndex === 5
                     ? null
@@ -156,12 +157,12 @@ export const BannedPosts: FC = () => {
                     />
                 </Box>
             ))}
-            <CustomModal
-                openModal={detailedModalOpen}
-                handleModalClose={closeDetailedModal}
+            <ResponsiveModal
+                openDialog={detailedModalOpen}
+                handleCloseDialog={closeDetailedModal}
             >
-                <ModalContent/>
-            </CustomModal>
+                <ModalContent />
+            </ResponsiveModal>
             <CustomSnackbar
                 message={t(message)}
                 openSnackbar={openSnackbar}

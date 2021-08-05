@@ -54,6 +54,9 @@
     "assistance": {
       "name": "Haydash paytida yordam"
     },
+    "engine_capacity": {
+      "name": "litrda dvigatel hajmi"
+    },
     "body": {
       "name": "Kuzov turi"
     },
@@ -2519,6 +2522,51 @@
     },
     "application_area": {
       "name": "Qo’llanish doirasi"
+    },
+    "white": {
+      "name": "Oq"
+    },
+    "black": {
+      "name": "Qora"
+    },
+    "grey": {
+      "name": "Kulrang"
+    },
+    "brown": {
+      "name": "Jigarrang"
+    },
+    "orange": {
+      "name": "To'q sariq"
+    },
+    "yellow": {
+      "name": "Sariq"
+    },
+    "red": {
+      "name": "Qizil"
+    },
+    "gray": {
+      "name": "Kulrang"
+    },
+    "green": {
+      "name": "Yashil"
+    },
+    "blue": {
+      "name": "Moviy rang"
+    },
+    "cyan": {
+      "name": "Ko'k"
+    },
+    "violet": {
+      "name": "Siyoh rang"
+    },
+    "pink": {
+      "name": "Pushti"
+    },
+    "vinous": {
+      "name": "To’q qizil"
+    },
+    "multi_color": {
+      "name": "Rang-barang"
     },
     "thirty_three": {
       "name": "33"
@@ -5208,6 +5256,9 @@
     },
     "red": {
       "name": "Qizil"
+    },
+    "gray": {
+      "name": "Kulrang"
     },
     "green": {
       "name": "Yashil"

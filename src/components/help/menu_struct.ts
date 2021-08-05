@@ -26,7 +26,7 @@ const data = [
             {section: 'Создание объявлений', term: 'create'},
             {section: 'Редактирование объявлений', term: 'update'},
             {section: 'Как деактивировать объявление', term: 'deactivate'},
-            {section: 'Объявление отклонено', term: 'reject'}
+            {section: 'Объявление отклонено', term: 'rejected'}
         ],
     },
     {

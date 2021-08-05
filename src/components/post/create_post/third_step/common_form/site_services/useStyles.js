@@ -14,7 +14,10 @@ export const useStyles = makeStyles(() => ({
                 borderRadius: '5px'
             },
             '& svg.question-mark': {
-                marginLeft: '5px'
+                marginLeft: '5px',
+                '& path': {
+                    fill: '#9a64d0'
+                }
             },
             '& h6.MuiTypography-subtitle2': {
                 fontSize: '12px',
