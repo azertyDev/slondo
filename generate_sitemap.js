@@ -36,7 +36,6 @@ Allow: /help/how_to_register
 User-agent: *
 Disallow: /cabinet
 Disallow: /create
-Disallow: /sitemaps
 Disallow: /help
 Disallow: /user
 
