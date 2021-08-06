@@ -1,5 +1,4 @@
 import Axios from 'axios';
-import process from 'process';
 import {cookies} from '@src/helpers';
 import {CategoryType} from '@root/interfaces/Categories';
 import {CardDataType} from '@root/interfaces/CardData';
@@ -7,15 +6,13 @@ import {AuctionsDataTypes} from '@root/interfaces/Auctions';
 import {UserInfo} from '@root/interfaces/Auth';
 import {LocationsType} from "@root/interfaces/Locations";
 
+const production = 'https://backend.slondo.uz/api/';
 const testb = 'https://backend.testb.uz/api/';
-
-const baseURL = process.env.NODE_ENV === 'production'
-    ? 'https://backend.slondo.uz/api/'
-    : 'http://192.168.100.60/slondo/public/api/';
+const local = 'http://192.168.100.60/slondo/public/api/';
 
 const instance = Axios.create({
     withCredentials: true,
-    baseURL
+    baseURL: production
 });
 
 // export const socketIO = socketIOClient('http://192.168.100.60:8005');
