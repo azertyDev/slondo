@@ -1,27 +1,28 @@
 import {FC, useContext, useState} from 'react';
-import {WithT} from 'i18next';
 import {Hidden, Typography} from '@material-ui/core';
 import {numberPrettier} from '@src/helpers';
 import {AuctionContent} from '@src/components/post/show_post/owner_auction_info/auction_content/AuctionContent';
 import {OwnerContent} from '@src/components/post/show_post/owner_auction_info/owner_content/OwnerContent';
+import {useTranslation} from "next-i18next";
 import {userAPI} from '@src/api/api';
 import {ErrorCtx} from "@src/context";
 import {useStyles} from './useStyles';
 
 type OwnerAuctionInfoPropsType = {
-    data: any
+    post: any
     setFetchedPostData: () => Promise<void>
-} & WithT;
+};
 
 export const OwnerAuctionInfo: FC<OwnerAuctionInfoPropsType> = (props) => {
     const {
-        t,
-        data,
+        post,
         setFetchedPostData
     } = props;
 
+    const {t} = useTranslation('post');
+
     const {setErrorMsg} = useContext(ErrorCtx);
-    const isAuction = data.ads_type.mark === 'auc' || data.ads_type.mark === 'exauc';
+    const isAuction = post.ads_type.mark === 'auc' || post.ads_type.mark === 'exauc';
 
     const initAuthorPhones = {
         showPhone: false,
@@ -44,17 +45,17 @@ export const OwnerAuctionInfo: FC<OwnerAuctionInfoPropsType> = (props) => {
     const handleShowPhone = async () => {
         try {
             setIsFetch(true);
-            const phones = !showPhone ? await userAPI.getPostAuthorPhones(data.id) : initAuthorPhones;
+            const phones = !showPhone ? await userAPI.getPostAuthorPhones(post.id) : initAuthorPhones;
             setIsFetch(false);
             setAuthorPhones({
                 ...authorPhones,
                 ...phones,
                 showPhone: !showPhone
             });
-        } catch ({response: {data}}) {
+        } catch ({response: {post}}) {
             setIsFetch(false);
-            if (data.message !== 'forbidden:') {
-                setErrorMsg(data.message);
+            if (post.message !== 'forbidden:') {
+                setErrorMsg(post.message);
             } else {
                 setAuthorPhones({
                     ...initAuthorPhones,
@@ -70,8 +71,8 @@ export const OwnerAuctionInfo: FC<OwnerAuctionInfoPropsType> = (props) => {
             <Hidden mdDown>
                 <div className="price">
                     <Typography variant="h4" color="initial">
-                        <span>{numberPrettier(data.price)}</span>&nbsp;
-                        {t(`common:${data.currency.name}`)}
+                        <span>{numberPrettier(post.price)}</span>&nbsp;
+                        {t(`common:${post.currency.name}`)}
                     </Typography>
                 </div>
             </Hidden>
@@ -79,14 +80,14 @@ export const OwnerAuctionInfo: FC<OwnerAuctionInfoPropsType> = (props) => {
                 <Hidden mdDown>
                     <AuctionContent
                         t={t}
-                        postData={data}
+                        postData={post}
                         setFetchedPostData={setFetchedPostData}
                     />
                 </Hidden>
             )}
             <OwnerContent
                 t={t}
-                postData={data}
+                postData={post}
                 showPhone={showPhone}
                 authorPhones={authorPhones}
                 handleFollow={handleFollow}

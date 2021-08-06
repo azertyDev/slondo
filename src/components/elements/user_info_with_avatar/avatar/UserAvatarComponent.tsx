@@ -1,4 +1,4 @@
-import React, {FC} from 'react';
+import {FC} from 'react';
 import Avatar from '@material-ui/core/Avatar';
 import {StyledBadge, useStyles} from './useStyles';
 
@@ -14,7 +14,7 @@ export const UserAvatarComponent: FC<UserAvatarComponentTypes> = ({avatar, width
         <div className={classes.root}>
             <StyledBadge
                 variant="dot"
-                overlap="circle"
+                overlap="circular"
                 anchorOrigin={{
                     vertical: 'bottom',
                     horizontal: 'right'

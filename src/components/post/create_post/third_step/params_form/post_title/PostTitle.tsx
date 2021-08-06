@@ -3,7 +3,7 @@ import {Typography} from '@material-ui/core';
 import {FormikField} from '@src/components/elements/formik_field/FormikField';
 import {getErrorMsg} from '@src/helpers';
 import {WithT} from 'i18next';
-import {TITLE_LIMIT} from "@src/constants";
+import {TITLE_LIMIT, TITLE_MIN} from "@src/constants";
 
 type PostTitlePropsType = {
     isPreview: boolean,
@@ -45,11 +45,11 @@ export const PostTitle: FC<PostTitlePropsType> = (props) => {
                  t={t}
                  name='title'
                  labelText='title'
-                 limit={50}
                  value={title}
+                 limit={TITLE_LIMIT}
                  onChange={handleTitle}
                  placeholder={t('filters:example_title')}
-                 errorMsg={getErrorMsg(errors.title, touched.title, t)}
+                 errorMsg={getErrorMsg(errors.title, touched.title, t, TITLE_MIN)}
              />}
         </div>
     );

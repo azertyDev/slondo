@@ -1,11 +1,14 @@
 import {object, string, array, lazy, number} from 'yup';
 import {fieldRequiredTxt, fractionalFields} from '@src/common_data/fields_keys';
+import {DESC_MIN, SAFE_DEAL_LIMIT, TITLE_MIN} from "@src/constants";
 import {isRequired} from '@root/src/helpers';
-import {SAFE_DEAL_LIMIT} from "@src/constants";
+
+export const titleValidate = string()
+    .required(fieldRequiredTxt)
+    .test('len', 'min_chars', val => !!val && val.length > TITLE_MIN);
 
 export const paramsFormSchema = lazy(
     (value) => object({
-        title: string().required(fieldRequiredTxt),
         ...Object.entries(value)
             .reduce((acc, [key]) => {
                 if (isRequired(key)) {
@@ -17,6 +20,8 @@ export const paramsFormSchema = lazy(
                                 fieldRequiredTxt,
                                 value => !!value && !!value.id
                             );
+                    } else if (key === 'title') {
+                        acc[key] = titleValidate;
                     } else if (key === 'engine_capacity') {
                         acc[key] = string()
                             .required(fieldRequiredTxt)
@@ -43,7 +48,6 @@ export const paramsFormSchema = lazy(
 
 export const transportParamsSchema = lazy(
     (value) => object({
-        title: string().required(fieldRequiredTxt),
         ...Object.entries(value)
             .reduce((acc, [key]) => {
                 if (isRequired(key)) {
@@ -55,6 +59,8 @@ export const transportParamsSchema = lazy(
                                 fieldRequiredTxt,
                                 value => !!value && !!value.id
                             );
+                    } else if (key === 'title') {
+                        acc[key] = titleValidate;
                     } else {
                         acc[key] = string().required(fieldRequiredTxt);
                     }
@@ -99,7 +105,9 @@ export const appearanceSchema = object({
 
 export const defaultParamsSchema = object({
     price: number().required(fieldRequiredTxt),
-    description: string().required(fieldRequiredTxt),
+    description: string()
+        .required(fieldRequiredTxt)
+        .test('len', 'min_chars', val => !!val && val.length > DESC_MIN),
     location: object()
         .nullable()
         .required(fieldRequiredTxt)
@@ -118,3 +126,7 @@ export const auctionParamsSchema = defaultParamsSchema.shape({
 export const safeDealPriceSchema = defaultParamsSchema.concat(object({
     price: number().required(fieldRequiredTxt).min(SAFE_DEAL_LIMIT, 'price_not_bee_less')
 }));
+
+export const complaintSchema = object({
+    complaint: string().required(fieldRequiredTxt)
+});

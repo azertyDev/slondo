@@ -1,16 +1,12 @@
-import {FC, useContext, useEffect, useState} from 'react';
+import {FC, useContext} from 'react';
 import {WithT} from 'i18next';
 import {Box, Hidden, Typography} from '@material-ui/core';
 import {CustomButton} from '@src/components/elements/custom_button/CustomButton';
 import {SafeIcon} from '@root/src/components/elements/icons';
 import {UserInfoWithAvatar} from '@src/components/elements/user_info_with_avatar/UserInfoWithAvatar';
-import {SafeDealDrawer} from '@src/components/elements/safe_deal_drawer/SafeDealDrawer';
-import {myUzCardAPI} from '@src/api/api';
-import {ConfirmModal} from '@src/components/elements/confirm_modal/Confirm_modal';
 import {useModal} from '@src/hooks/useModal';
-import {useUserPaymentCard} from '@src/hooks/useUserPaymentCard';
 import {AuthCtx} from "@src/context/AuthCtx";
-import {ErrorCtx} from "@src/context";
+import {SafeDealModal} from "@src/components/elements/safe_deal/SafeDealModal";
 import {useStyles} from './useStyles';
 
 type OwnerPropsType = {
@@ -42,56 +38,20 @@ export const OwnerContent: FC<OwnerPropsType> = (props) => {
     } = postData;
 
     const isPublic = status === 'public';
-    const {setErrorMsg} = useContext(ErrorCtx);
+
     const {auth: {isAuth}, setAuthModalOpen} = useContext(AuthCtx);
-
-    const {userCard, fetchUserCard} = useUserPaymentCard();
-
-    const hasCard = !!userCard.cardId;
 
     const showPhoneTxt = showPhone ? authorPhones.phone || 'number_not_available' : 'show_phone';
 
-    const [isFetch, setIsFetch] = useState(false);
-    const [drawerOpen, setDrawerOpen] = useState(false);
     const {modalOpen: safeDealOpen, handleModalOpen: handleOpenSafeDeal, handleModalClose: handleCloseSafeDeal} = useModal();
 
-    const createP2pHold = async () => {
-        try {
-            const p2pData = JSON.stringify({
-                amount: postData.price,
-                extraId: postData.id
-            });
-
-            setIsFetch(true);
-
-            await myUzCardAPI.p2pHold(p2pData);
-            await setFetchedPostData();
-            handleCloseSafeDeal();
-            setIsFetch(false);
-        } catch (e) {
-            setIsFetch(false);
-            handleCloseSafeDeal();
-            setErrorMsg(e.message);
-        }
-    };
-
     const handleSafeDeal = () => {
-        if (!isAuth) {
-            setAuthModalOpen(true);
-        } else if (hasCard) {
+        if (isAuth) {
             handleOpenSafeDeal();
         } else {
-            setDrawerOpen(true);
+            setAuthModalOpen(true);
         }
     };
-
-    const handleCloseDrawer = () => {
-        setDrawerOpen(false);
-    };
-
-    useEffect(() => {
-        fetchUserCard();
-    }, []);
 
     const classes = useStyles();
     return (
@@ -106,7 +66,7 @@ export const OwnerContent: FC<OwnerPropsType> = (props) => {
             </Box>
             <Hidden mdDown>
                 <div className="contact-buttons">
-                    <CustomButton color="primary" disabled={isFetch} onClick={handleShowPhone}>
+                    <CustomButton color="primary" onClick={handleShowPhone}>
                         <Typography variant="subtitle1" color="initial">
                             <span>{t(showPhoneTxt)}</span>
                             {showPhone && authorPhones.additional_number && (
@@ -158,17 +118,11 @@ export const OwnerContent: FC<OwnerPropsType> = (props) => {
                     </div>
                 )}
             </Hidden>
-            <ConfirmModal
+            <SafeDealModal
+                post={postData}
                 open={safeDealOpen}
-                title={t('buy_safe_deal')}
-                confirmTxt={t('common:yes')}
-                cancelTxt={t('common:no')}
-                handleConfirm={createP2pHold}
-                handleClose={handleCloseSafeDeal}
-            />
-            <SafeDealDrawer
-                open={drawerOpen}
-                handleClose={handleCloseDrawer}
+                onClose={handleCloseSafeDeal}
+                handleRefresh={setFetchedPostData}
             />
         </div>
     );

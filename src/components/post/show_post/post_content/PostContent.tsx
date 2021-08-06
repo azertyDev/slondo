@@ -1,15 +1,14 @@
 import {FC, MutableRefObject, useContext, useEffect, useRef, useState} from 'react';
-import {WithT} from 'i18next';
 import {
     Container,
     Hidden,
-    TextField,
     Typography,
     useMediaQuery,
     useTheme
 } from '@material-ui/core';
 import {userAPI} from '@src/api/api';
 import {months} from '@src/common_data/common';
+import {booleanFields, noTranslatableFields} from '@src/common_data/fields_keys';
 import {ReadMore} from '@src/components/elements/read_more/readMore';
 import {LocationIcon} from '@src/components/elements/icons/LocationIcon';
 import {WarningIcon} from '@src/components/elements/icons/WarningIcon';
@@ -24,16 +23,17 @@ import {numberPrettier, weekDaysHelper} from '@src/helpers';
 import {CustomButton} from '@src/components/elements/custom_button/CustomButton';
 import {RenewalIcon} from '@src/components/elements/icons';
 import {AuctionContent} from '@src/components/post/show_post/owner_auction_info/auction_content/AuctionContent';
-import {booleanFields, noTranslatableFields} from '@src/common_data/fields_keys';
-import {ResponsiveModal} from '@src/components/elements/responsive_modal/ResponsiveModal';
 import {OwnerAuctionInfo} from '@src/components/post/show_post/owner_auction_info/OwnerAuctionInfo';
-import {ErrorCtx} from '@src/context';
+import {ComplaintModal} from "@src/components/post/show_post/post_content/complaint_modal/ComplaintModal";
+import {AuthCtx, ErrorCtx} from '@src/context';
+import {useTranslation} from "next-i18next";
+import {useModal} from "@src/hooks";
 import {useStyles} from './useStyles';
 
 type PostContentTypes = {
-    data,
+    post,
     setFetchedPostData: () => Promise<void>
-} & WithT;
+};
 
 export type SlidersRefType = {
     slider1?: MutableRefObject<any>;
@@ -44,22 +44,27 @@ export type SlidersRefType = {
 
 export const PostContent: FC<PostContentTypes> = (props) => {
     const {
-        t,
-        data,
+        post,
         setFetchedPostData
     } = props;
 
+    const {t} = useTranslation('post');
+
     const {setErrorMsg} = useContext(ErrorCtx);
     const isMdDown = useMediaQuery(useTheme().breakpoints.down('md'));
-    const isExAuc = data.ads_type.mark === 'exauc';
-    const isAuction = data.ads_type.mark === 'auc' || isExAuc;
+    const isExAuc = post.ads_type.mark === 'exauc';
+    const isAuction = post.ads_type.mark === 'auc' || isExAuc;
 
-    const transKey = data.category.name;
+    const transKey = post.category.name;
 
     const {
         model,
-        observer: {number_of_favorites, number_of_views}
-    } = data;
+        creator,
+        observer: {
+            number_of_views,
+            number_of_favorites
+        }
+    } = post;
 
     const initSlidersRefs: SlidersRefType = {
         slider1: useRef(),
@@ -68,23 +73,41 @@ export const PostContent: FC<PostContentTypes> = (props) => {
         slider4: useRef()
     };
 
+    const {auth: {isAuth}, setAuthModalOpen} = useContext(AuthCtx);
+
     const [favorite, setFavorite] = useState(false);
     const [favCount, setFavCount] = useState(0);
     const [descHeight, setDescHeight] = useState(0);
     const [slidersRefs, setSlidersRefs] = useState(initSlidersRefs);
-    const [modalsState, setModalsState] = useState({openSliderModal: false, openComplaintModal: false});
-    const {openComplaintModal, openSliderModal} = modalsState;
 
-    const date = new Date(data.created_at);
+    const {
+        modalOpen: complainOpen,
+        handleModalClose: handleComplainClose,
+        handleModalOpen: handleComplainOpen
+    } = useModal();
+
+    const {
+        modalOpen: sliderOpen,
+        handleModalClose: handleSliderClose,
+        handleModalOpen: handleSliderOpen
+    } = useModal();
+
+    const date = new Date(post.created_at);
     const formatted_date = `${date.getDate()} ${t(`common:${months[date.getMonth()]}`)} ${date.getFullYear()}`;
 
-    const handleShowSliderModal = value => () => setModalsState({...modalsState, openSliderModal: value});
-    const handleComplaintModal = value => () => setModalsState({...modalsState, openComplaintModal: value});
+    const handleComplaintModalOpen = () => {
+        if (isAuth) {
+            handleComplainOpen();
+        } else {
+            setAuthModalOpen(true);
+        }
+    };
+
     const handleFavorite = () => {
         try {
             setFavorite(!favorite);
             setFavCount(favorite ? favCount - 1 : favCount + 1);
-            userAPI.favoriteAds(data.id);
+            userAPI.favoriteAds(post.id);
         } catch (e) {
             setErrorMsg(e.message);
         }
@@ -163,10 +186,10 @@ export const PostContent: FC<PostContentTypes> = (props) => {
     }, []);
 
     useEffect(() => {
-        setFavorite(data.favorite);
+        setFavorite(post.favorite);
         !!number_of_favorites && setFavCount(number_of_favorites);
         setDescHeight(document.getElementById('post-description').clientHeight);
-    }, [data]);
+    }, [post]);
 
     const classes = useStyles();
     return (
@@ -175,8 +198,8 @@ export const PostContent: FC<PostContentTypes> = (props) => {
                 <div className="breadcrumbs">
                     <BreadcrumbsComponent
                         category={transKey}
-                        subcategory={data.adsable?.sub_category.name}
-                        type={data.adsable?.type?.name}
+                        subcategory={post.adsable?.sub_category.name}
+                        type={post.adsable?.type?.name}
                     />
                 </div>
             </Hidden>
@@ -185,40 +208,40 @@ export const PostContent: FC<PostContentTypes> = (props) => {
                     <div className='post-type'>
                         <Typography
                             variant="h6"
-                            className={data.ads_type.mark}
+                            className={post.ads_type.mark}
                         >
-                            {t(`common:${data.ads_type.mark}`)}
+                            {t(`common:${post.ads_type.mark}`)}
                         </Typography>
                     </div>
                     <div className="title">
                         <Typography variant="h2" noWrap>
-                            {data.title}
+                            {post.title}
                         </Typography>
                     </div>
-                    {!data.model?.condition && (
+                    {!!post.model?.condition && (
                         <div className="condition">
-                            <Typography variant="h6">{t(`post:${data.model?.condition?.name}`)}</Typography>
+                            <Typography variant="h6">{t(`post:${post.model.condition?.name}`)}</Typography>
                         </div>
                     )}
                 </div>
             </Hidden>
             <div className="slider-wrapper">
                 <SyncSliders
-                    isCreator={data.creator}
-                    imgs={data.images}
+                    isCreator={post.creator}
+                    imgs={post.images}
                     isFavorite={favorite}
                     slidersRefs={slidersRefs}
                     favoriteCount={favCount}
                     handleFavorite={handleFavorite}
-                    handleOpenModal={handleShowSliderModal(true)}
+                    handleOpenModal={handleSliderOpen}
                 />
                 <Hidden lgUp>
                     <div className='post-type-adaptive'>
                         <Typography
                             variant="h6"
-                            className={data.ads_type.mark}
+                            className={post.ads_type.mark}
                         >
-                            {t(`common:${data.ads_type.mark}`)}
+                            {t(`common:${post.ads_type.mark}`)}
                         </Typography>
                     </div>
                 </Hidden>
@@ -228,15 +251,15 @@ export const PostContent: FC<PostContentTypes> = (props) => {
                     <div className="post-header">
                         <div>
                             <Typography variant='h6' className="price">
-                                {numberPrettier(data.price) + ' ' + t(`common:${data.currency.name}`)}
-                                {!data.condition.name && (
+                                {numberPrettier(post.price) + ' ' + t(`common:${post.currency.name}`)}
+                                {!post.condition.name && (
                                     <div className="condition">
-                                        <Typography variant="h6">{t(`post:${data.model?.condition?.name}`)}</Typography>
+                                        <Typography variant="h6">{t(`post:${post.model?.condition?.name}`)}</Typography>
                                     </div>
                                 )}
                             </Typography>
                             <Typography variant="h2" className="title" noWrap>
-                                {data.title}
+                                {post.title}
                             </Typography>
                         </div>
                     </div>
@@ -244,7 +267,7 @@ export const PostContent: FC<PostContentTypes> = (props) => {
                 <Hidden mdDown>
                     <div className="post-info">
                         <Typography variant="subtitle1">
-                            <span>{t('common:post')} №:</span> {data.id}
+                            <span>{t('common:post')} №:</span> {post.id}
                         </Typography>
                         <Typography variant="subtitle1">
                             {t('post:published')}: {formatted_date}
@@ -252,13 +275,15 @@ export const PostContent: FC<PostContentTypes> = (props) => {
                         <Typography variant="subtitle1">
                             {t('post:views')}: {number_of_views}
                         </Typography>
-                        <Typography variant="subtitle1" onClick={handleComplaintModal(true)}>
-                            {t('post:complain')} <WarningIcon/>
-                        </Typography>
+                        {!creator && (
+                            <Typography variant="subtitle1" onClick={handleComplaintModalOpen}>
+                                {t('post:complain')} <WarningIcon/>
+                            </Typography>
+                        )}
                     </div>
                 </Hidden>
                 <div className="post-bonus">
-                    {!!data.delivery && (
+                    {!!post.delivery && (
                         <span className="delivery">
                         <DeliveryIcon/>
                             <Typography variant="subtitle1">
@@ -266,15 +291,15 @@ export const PostContent: FC<PostContentTypes> = (props) => {
                         </Typography>
                     </span>
                     )}
-                    {!!data.safe_deal && (
+                    {!!post.safe_deal && (
                         <span className="safe_deal">
                         <SafeIcon/>
                             <Typography variant="subtitle1">
-                            {t('common:safeDeal')}
+                            {t('common:safe_deal')}
                         </Typography>
                     </span>
                     )}
-                    {!!data.exchange && (
+                    {!!post.exchange && (
                         <span className="exchange">
                         <SwapIcon/>
                             <Typography variant="subtitle1">
@@ -282,20 +307,20 @@ export const PostContent: FC<PostContentTypes> = (props) => {
                         </Typography>
                     </span>
                     )}
-                    {!!data.available_start_time && (
+                    {!!post.available_start_time && (
                         <span className="available">
                         <PhoneIcon/>
-                            {!!data.available_days?.length && (
+                            {!!post.available_days?.length && (
                                 <Typography variant="subtitle1" color="primary">
-                                    {weekDaysHelper(data.available_days, t)}&nbsp;
+                                    {weekDaysHelper(post.available_days, t)}&nbsp;
                                 </Typography>
                             )}
                             <Typography variant="subtitle1">
-                            {`${data.available_start_time} - ${data.available_end_time}`}
+                            {`${post.available_start_time} - ${post.available_end_time}`}
                         </Typography>
                     </span>
                     )}
-                    {!!data.auction?.auto_renewal && (
+                    {!!post.auction?.auto_renewal && (
                         <span className="auto-renewal">
                             <RenewalIcon/>
                             <Typography variant="subtitle1">
@@ -316,7 +341,7 @@ export const PostContent: FC<PostContentTypes> = (props) => {
                     {isAuction && (
                         <AuctionContent
                             t={t}
-                            postData={data}
+                            postData={post}
                             setFetchedPostData={setFetchedPostData}
                         />
                     )}
@@ -327,12 +352,12 @@ export const PostContent: FC<PostContentTypes> = (props) => {
                             {t(`locations:location`)}
                         </Typography>
                     </Hidden>
-                    {data.region.name || data.city.name || data.district.name
+                    {post.region.name || post.city.name || post.district.name
                         ? <div className='location-text'>
                             <LocationIcon/>
                             <Typography variant="subtitle1">
-                                {`${t(`locations:${data.region.name}.name`) ?? ''}`}
-                                {data.city.name ? `, ${t(`locations:${data.region.name}.${data.city.name}`)}` : ''}
+                                {`${t(`locations:${post.region.name}.name`) ?? ''}`}
+                                {post.city.name ? `, ${t(`locations:${post.region.name}.${post.city.name}`)}` : ''}
                             </Typography>
                         </div>
                         : <Typography variant="subtitle1">{t(`locations:notIndicate`)}</Typography>}
@@ -342,12 +367,12 @@ export const PostContent: FC<PostContentTypes> = (props) => {
                         <Typography variant="subtitle1" color="initial">
                             {t(`categories:${transKey}.name`)}
                             &nbsp;-&nbsp;
-                            {t(`categories:${transKey}.${data.adsable.sub_category.name}.name`)}
+                            {t(`categories:${transKey}.${post.adsable.sub_category.name}.name`)}
                             {
-                                data.adsable?.type &&
+                                post.adsable?.type &&
                                 <span>
                                     &nbsp;-&nbsp;
-                                    {t(`categories:${transKey}.${data.adsable.sub_category.name}.${data.adsable.type.name}.name`)}
+                                    {t(`categories:${transKey}.${post.adsable.sub_category.name}.${post.adsable.type.name}.name`)}
                                 </span>
                             }
                         </Typography>
@@ -366,7 +391,7 @@ export const PostContent: FC<PostContentTypes> = (props) => {
                             variant="subtitle1"
                             id="post-description"
                         >
-                            {data.description}
+                            {post.description}
                         </Typography>
                     </ReadMore>
                 </div>
@@ -374,10 +399,10 @@ export const PostContent: FC<PostContentTypes> = (props) => {
                     <div className="started-price">
                         <Typography variant="button">{t('post:startingPrice')}</Typography>
                         <span>
-                        <Typography variant="body2">
-                            {numberPrettier(data.price)} {t(`common:${data.currency.name}`)}
-                        </Typography>
-                    </span>
+                            <Typography variant="body2">
+                                {numberPrettier(post.price)} {t(`common:${post.currency.name}`)}
+                            </Typography>
+                        </span>
                     </div>
                 )}
                 {!!parameterItems.length && (
@@ -392,7 +417,7 @@ export const PostContent: FC<PostContentTypes> = (props) => {
                     <div className="post-info">
                         <div className='info-wrapper'>
                             <Typography variant="subtitle1">
-                                <span>{t('common:post')} №:</span> {data.id}
+                                <span>{t('common:post')} №:</span> {post.id}
                             </Typography>
                             <Hidden xsDown>
                                 <Typography variant="subtitle1">
@@ -407,58 +432,31 @@ export const PostContent: FC<PostContentTypes> = (props) => {
                             <Typography variant="subtitle1">
                                 {t('post:views')}: {number_of_views}
                             </Typography>
-                            <Hidden mdDown>
-                                <Typography variant="subtitle1" onClick={handleComplaintModal(true)}>
-                                    {t('post:complain')} <WarningIcon/>
-                                </Typography>
-                            </Hidden>
                         </div>
-                        <CustomButton className="btn-report" onClick={handleComplaintModal(true)}>
+                        <CustomButton className="btn-report" onClick={handleComplaintModalOpen}>
                             {t('post:complain')}
                         </CustomButton>
                     </div>
                 </Hidden>
                 <Hidden lgUp>
                     <OwnerAuctionInfo
-                        t={t}
-                        data={data}
+                        post={post}
                         setFetchedPostData={setFetchedPostData}
                     />
                 </Hidden>
                 <ModalSyncSliders
-                    imgs={data.images}
-                    title={data.title}
-                    open={openSliderModal}
+                    open={sliderOpen}
+                    imgs={post.images}
+                    title={post.title}
                     slidersRefs={slidersRefs}
-                    onClose={handleShowSliderModal(false)}
+                    onClose={handleSliderClose}
                 />
             </Container>
-            <ResponsiveModal
-                maxWidth='sm'
-                openDialog={openComplaintModal}
-                handleCloseDialog={handleComplaintModal(false)}
-            >
-                <div className={classes.modalBody}>
-                    <Typography variant='h6'>
-                        {t('post:indicateReason')}
-                    </Typography>
-                    <div className='textarea'>
-                        <TextField
-                            fullWidth
-                            multiline
-                            rows={10}
-                            placeholder={t('post:describeReason')}
-                            helperText='0/500'
-                            variant="outlined"
-                        />
-                    </div>
-                    <CustomButton>
-                        <Typography variant='subtitle1'>
-                            {t('common:send')}
-                        </Typography>
-                    </CustomButton>
-                </div>
-            </ResponsiveModal>
+            <ComplaintModal
+                postId={post.id}
+                open={complainOpen}
+                onClose={handleComplainClose}
+            />
         </div>
     );
 };

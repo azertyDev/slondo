@@ -11,7 +11,6 @@ export const useStyles = makeStyles((theme) => ({
         },
         '& div.MuiDialog-paperWidthMd': {
             [theme.breakpoints.down('sm')]: {
-                // maxWidth: '420px'
                 maxWidth: '460px'
             }
         },

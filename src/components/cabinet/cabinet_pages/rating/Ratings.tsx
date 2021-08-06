@@ -6,7 +6,7 @@ import {months} from '@src/common_data/common';
 import {useModal} from '@src/hooks/useModal';
 import {userAPI} from '@src/api/api';
 import {Form, FormikProvider, useFormik} from 'formik';
-import {regularFormSchema} from '@root/validation_schemas/createPostSchemas';
+import {regularFormSchema} from '@root/validation_schemas/postSchemas';
 import {UserAvatarComponent} from '@src/components/elements/user_info_with_avatar/avatar/UserAvatarComponent';
 import {CustomButton} from '@src/components/elements/custom_button/CustomButton';
 import {UserInfoWithAvatar} from '@src/components/elements/user_info_with_avatar/UserInfoWithAvatar';

@@ -1,4 +1,4 @@
-import {makeStyles, fade} from '@material-ui/core/styles';
+import {makeStyles, alpha} from '@material-ui/core/styles';
 
 export const useStyles = makeStyles((theme) => ({
     root: {
@@ -195,7 +195,7 @@ export const useStyles = makeStyles((theme) => ({
                     padding: '10px 12px',
                     transition: theme.transitions.create(['border-color', 'box-shadow']),
                     '&:focus': {
-                        boxShadow: `${fade(theme.palette.secondary.main, 0.25)} 0 0 0 0.2rem`,
+                        boxShadow: `${alpha(theme.palette.secondary.main, 0.25)} 0 0 0 0.2rem`,
                         borderColor: theme.palette.secondary.main
                     }
                 }
