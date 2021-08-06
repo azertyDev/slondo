@@ -14,6 +14,8 @@ const dev = process.env.NODE_ENV !== 'production';
 const app = next({dev});
 const handle = app.getRequestHandler();
 
+console.log('dev mode: ' + dev);
+
 if (dev) {
     app.prepare().then(() => {
         createServer((req, res) => {
@@ -26,7 +28,6 @@ if (dev) {
     });
 } else {
     if (cluster.isMaster) {
-        console.log('dev mode: ' + dev);
         console.log(`Primary ${process.pid} is running`);
 
         // Fork workers.
