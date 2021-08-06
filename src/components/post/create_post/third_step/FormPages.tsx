@@ -62,7 +62,7 @@ export const FormPages: FC = () => {
     const [isSuccess, setIsSuccess] = useState(false);
     const [isPreview, setIsPreview] = useState(false);
     const [post, setPost] = useState(initPost);
-    const [currentFormIndex, setCurrentFormIndex] = useState(1);
+    const [currentFormIndex, setCurrentFormIndex] = useState(3);
     const [filters, setFilters] = useState<any>({});
     const {colors, color, ...filtersData} = filters;
 

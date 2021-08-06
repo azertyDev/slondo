@@ -1,5 +1,5 @@
 {
-  "price_must_bee_more": "Цена должна быть больше чем {{value}}",
+  "price_not_bee_less": "Цена не должна быть меньше чем {{value}}",
   "notMustBeLess0.8": "Значение не должно быть меньше 0.8",
   "notMustBeLessZero": "Значение не должно быть нулевым",
   "must_less_than_20": "{{value}} превышать 20 символов",

@@ -1,4 +1,4 @@
-import {createMuiTheme} from '@material-ui/core/styles';
+import {createTheme} from '@material-ui/core/styles';
 import {SERVER_URL} from './constants';
 
 const calibri = {
@@ -30,7 +30,7 @@ const colors = {
 }
 
 // Create a theme instance.
-const theme = createMuiTheme({
+const theme = createTheme({
     props: {
         MuiTypography: {
             variantMapping: {

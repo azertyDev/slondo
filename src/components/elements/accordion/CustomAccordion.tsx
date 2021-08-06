@@ -10,8 +10,8 @@ import {
     useTheme
 } from '@material-ui/core';
 import {CustomButton} from '@src/components/elements/custom_button/CustomButton';
-import {useStyles} from './useStyles';
 import ArrowForwardIcon from '@material-ui/icons/ArrowForward';
+import {useStyles} from './useStyles';
 
 type AccordionComponentPropsType = {
     isFetch?: boolean,

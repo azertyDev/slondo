@@ -1,4 +1,4 @@
-import {cloneElement, FC, useContext, useState} from 'react';
+import {FC, useContext, useState} from 'react';
 import Link from 'next/link';
 import {WithT} from 'i18next';
 import {useRouter} from 'next/router';
@@ -14,15 +14,15 @@ import {
     useTheme,
     Slide,
     useScrollTrigger,
-    Container, Avatar, Drawer
+    Container,
+    Avatar
 } from '@material-ui/core';
 import {LeftDrawer} from './drawer/Drawer';
 import {Localization} from './localization/Localization';
 import {
     Logo,
     QuestionIcon,
-    SurpriseIcon,
-    UserAvatarIcon
+    SurpriseIcon
 } from '@src/components/elements/icons';
 import {Location} from '@src/components/elements/location/Location';
 import {CustomButton} from '@src/components/elements/custom_button/CustomButton';
@@ -31,7 +31,6 @@ import {cookieOpts, cookies} from '@src/helpers';
 import {useStyles} from './useStyles';
 import {CategorySortIcon} from '@src/components/elements/icons/CategorySortIcon';
 import {UserCtx} from '@src/context';
-import {CustomDrawer} from '@src/components/header/bottom/custom_drawer/CustomDrawer';
 
 type TopHeaderPropsType = {
     isAuth: boolean,
@@ -40,7 +39,7 @@ type TopHeaderPropsType = {
 
 export const Top: FC<TopHeaderPropsType> = (props) => {
     const {t, handleOpenModal, isAuth} = props;
-    const {user: {avatar, name, surname}} = useContext(UserCtx);
+    const {user: {avatar}} = useContext(UserCtx);
 
     const userLocation = cookies.get('user_location');
     const trigger = useScrollTrigger({
@@ -65,7 +64,7 @@ export const Top: FC<TopHeaderPropsType> = (props) => {
         <>
             <Hidden mdDown>
                 <Container maxWidth="xl" className={classes.root}>
-                    <Grid container justify="space-between" alignItems="center">
+                    <Grid container justifyContent="space-between" alignItems="center">
                         <Grid item md={6}>
                             <Location
                                 userLocation={userLocation}
@@ -77,7 +76,7 @@ export const Top: FC<TopHeaderPropsType> = (props) => {
                             md={6}
                             container
                             alignItems="center"
-                            justify="flex-end"
+                            justifyContent="flex-end"
                             className='multiple-actions'
                         >
                             <Grid item md={2}>
@@ -86,7 +85,7 @@ export const Top: FC<TopHeaderPropsType> = (props) => {
                                         <Typography variant="subtitle1">
                                             {t('actions')}
                                         </Typography>
-                                        <SurpriseIcon />
+                                        <SurpriseIcon/>
                                     </a>
                                 </Link>
                             </Grid>
@@ -96,12 +95,12 @@ export const Top: FC<TopHeaderPropsType> = (props) => {
                                         <Typography variant="subtitle1">
                                             {t('help')}
                                         </Typography>
-                                        <QuestionIcon />
+                                        <QuestionIcon/>
                                     </a>
                                 </Link>
                             </Grid>
-                            <Grid item md={2} container justify='center'>
-                                <Localization />
+                            <Grid item md={2} container justifyContent='center'>
+                                <Localization/>
                             </Grid>
                         </Grid>
                     </Grid>
@@ -123,7 +122,7 @@ export const Top: FC<TopHeaderPropsType> = (props) => {
                             <Toolbar>
                                 <Grid
                                     container
-                                    justify="space-between"
+                                    justifyContent="space-between"
                                     alignItems="center"
                                 >
                                     <Grid>
@@ -132,7 +131,7 @@ export const Top: FC<TopHeaderPropsType> = (props) => {
                                             onClick={() => setIsOpen(true)}
                                         >
                                             <div className="burger-menu">
-                                                <CategorySortIcon />
+                                                <CategorySortIcon/>
                                             </div>
                                         </IconButton>
                                     </Grid>
@@ -145,7 +144,7 @@ export const Top: FC<TopHeaderPropsType> = (props) => {
                                     </Grid>
                                     {isAuth
                                         ? <CustomButton className={classes.avatarBlock}>
-                                            <Avatar alt="Avatar" src={avatar} />
+                                            <Avatar alt="Avatar" src={avatar}/>
                                         </CustomButton>
                                         : <CustomButton
                                             className="btn-sign-mobile"
@@ -158,11 +157,11 @@ export const Top: FC<TopHeaderPropsType> = (props) => {
                                 </Grid>
                             </Toolbar>
                             <Box px={isXsDown ? '16px' : '24px'} marginBottom='10px'>
-                                <HeaderSearchForm />
+                                <HeaderSearchForm/>
                             </Box>
                         </AppBar>
                     </Slide>
-                    <LeftDrawer isOpen={isOpen} setIsOpen={setIsOpen} />
+                    <LeftDrawer isOpen={isOpen} setIsOpen={setIsOpen}/>
                 </div>
             </Hidden>
         </>

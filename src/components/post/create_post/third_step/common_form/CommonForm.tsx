@@ -419,7 +419,7 @@ export const CommonForm: FC<DefaultParamsPropsType> = (props) => {
                                     />
                                 </Grid>
                                 {!isAuction && (
-                                    <Grid item container xs={12} sm={6} justify='center'>
+                                    <Grid item container xs={12} sm={6} justifyContent='center'>
                                         <Grid item xs={12} sm={12} lg={8}>
                                             <AvailableDays
                                                 t={t}

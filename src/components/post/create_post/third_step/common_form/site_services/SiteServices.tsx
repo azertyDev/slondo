@@ -83,7 +83,7 @@ export const SiteServices: FC<PaymentDeliveryPropsType> = (props) => {
                                 md={!iconMode ? 3 : 12}
                                 container
                                 alignItems="center"
-                                justify='flex-start'
+                                justifyContent='flex-start'
                             >
                                 <ServiceItem
                                     icon={<SafeIcon/>}

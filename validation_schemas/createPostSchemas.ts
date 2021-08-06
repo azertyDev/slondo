@@ -116,5 +116,5 @@ export const auctionParamsSchema = defaultParamsSchema.shape({
 });
 
 export const safeDealPriceSchema = defaultParamsSchema.concat(object({
-    price: number().required(fieldRequiredTxt).min(SAFE_DEAL_LIMIT, 'price_must_bee_more')
+    price: number().required(fieldRequiredTxt).min(SAFE_DEAL_LIMIT, 'price_not_bee_less')
 }));
