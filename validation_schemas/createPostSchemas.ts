@@ -1,6 +1,7 @@
 import {object, string, array, lazy, number} from 'yup';
 import {fieldRequiredTxt, fractionalFields} from '@src/common_data/fields_keys';
 import {isRequired} from '@root/src/helpers';
+import {SAFE_DEAL_LIMIT} from "@src/constants";
 
 export const paramsFormSchema = lazy(
     (value) => object({
@@ -97,7 +98,7 @@ export const appearanceSchema = object({
 });
 
 export const defaultParamsSchema = object({
-    price: string().required(fieldRequiredTxt),
+    price: number().required(fieldRequiredTxt),
     description: string().required(fieldRequiredTxt),
     location: object()
         .nullable()
@@ -114,6 +115,6 @@ export const auctionParamsSchema = defaultParamsSchema.shape({
         )
 });
 
-export const safeDealPriceSchema = object({
-    price: string().required(fieldRequiredTxt).min(4000, 'min_4000')
-});
+export const safeDealPriceSchema = defaultParamsSchema.concat(object({
+    price: number().required(fieldRequiredTxt).min(SAFE_DEAL_LIMIT, 'price_not_bee_less')
+}));

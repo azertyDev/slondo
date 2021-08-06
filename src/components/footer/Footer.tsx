@@ -14,16 +14,16 @@ export const Footer: FC = () => {
         <footer className={classes.root}>
             <div className='footer-wrapper'>
                 <Container maxWidth='xl'>
-                    <Grid container className="footer-content" justify="center">
+                    <Grid container className="footer-content" justifyContent="center">
                         <Grid container className="footer-top">
                             <Hidden mdUp>
-                                <Grid item container xs={12} justify="center">
+                                <Grid item container xs={12} justifyContent="center">
                                     <div className="social-icons adaptive">
                                         <SocialsBlock/>
                                     </div>
                                 </Grid>
                             </Hidden>
-                            <Grid item xs={12} md={3} container justify="center">
+                            <Grid item xs={12} md={3} container justifyContent="center">
                                 <ul>
                                     <li>
                                         <Link href="/help/user_agreements">
@@ -51,7 +51,7 @@ export const Footer: FC = () => {
                                     </li>
                                 </ul>
                             </Grid>
-                            <Grid item xs={12} md={3} container justify="center">
+                            <Grid item xs={12} md={3} container justifyContent="center">
                                 <ul>
                                     <li>
                                         <Link href="/help/feedback">
@@ -67,7 +67,7 @@ export const Footer: FC = () => {
                                     </li>
                                 </ul>
                             </Grid>
-                            <Grid item xs={12} md={3} container justify="center">
+                            <Grid item xs={12} md={3} container justifyContent="center">
                                 <ul>
                                     <li>
                                         <Link href="/help">
@@ -84,7 +84,7 @@ export const Footer: FC = () => {
                                 </ul>
                             </Grid>
                             <Hidden smDown>
-                                <Grid container item xs={12} md={3} justify='center'>
+                                <Grid container item xs={12} md={3} justifyContent='center'>
                                     <div className="social-icons">
                                         <SocialsBlock/>
                                     </div>
@@ -92,15 +92,15 @@ export const Footer: FC = () => {
                             </Hidden>
                         </Grid>
                         <Grid container className="footer-bottom">
-                            <Grid item xs={12} md={3} container justify='center' alignItems='center'>
+                            <Grid item xs={12} md={3} container justifyContent='center' alignItems='center'>
                                 <Logo/>
                             </Grid>
-                            <Grid item xs={12} md={6} container justify="center" alignItems='center'>
+                            <Grid item xs={12} md={6} container justifyContent="center" alignItems='center'>
                                 <Typography variant="subtitle1" color="initial">
                                     {t('termsOfUse')}
                                 </Typography>
                             </Grid>
-                            <Grid item xs={12} md={3} container justify="center" alignItems='center'>
+                            <Grid item xs={12} md={3} container justifyContent="center" alignItems='center'>
                                 <Typography variant="subtitle1" color="initial">
                                     Copyright © 2020 Slondo.
                                 </Typography>

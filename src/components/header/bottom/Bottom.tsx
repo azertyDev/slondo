@@ -76,7 +76,7 @@ const Bottom = (props) => {
                         <Container maxWidth="xl">
                             <Grid
                                 container
-                                justify="space-between"
+                                justifyContent="space-between"
                                 alignItems="center"
                                 spacing={2}
                             >
@@ -103,7 +103,7 @@ const Bottom = (props) => {
                                         item
                                         container
                                         md={6}
-                                        justify="flex-end"
+                                        justifyContent="flex-end"
                                         className="category-menu"
                                     >
                                         <CustomButton
@@ -148,7 +148,7 @@ const Bottom = (props) => {
                                     item
                                     xs={1}
                                     container
-                                    justify="center"
+                                    justifyContent="center"
                                     alignItems="center"
                                 >
                                     {isAuth

@@ -31,7 +31,7 @@ export const PageNotFound: FC = () => {
                                 item
                                 xs={6}
                                 container
-                                justify='flex-start'
+                                justifyContent='flex-start'
                                 alignItems='center'
                             >
                                 <Link href='/'>
@@ -44,7 +44,7 @@ export const PageNotFound: FC = () => {
                                 item
                                 xs={6}
                                 container
-                                justify='flex-end'
+                                justifyContent='flex-end'
                                 alignItems='center'
                             >
                                     <span className='localization'>

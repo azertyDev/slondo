@@ -8,6 +8,8 @@ import {
     useMediaQuery,
     useTheme
 } from '@material-ui/core';
+import {userAPI} from '@src/api/api';
+import {months} from '@src/common_data/common';
 import {ReadMore} from '@src/components/elements/read_more/readMore';
 import {LocationIcon} from '@src/components/elements/icons/LocationIcon';
 import {WarningIcon} from '@src/components/elements/icons/WarningIcon';
@@ -21,14 +23,12 @@ import {BreadcrumbsComponent} from '@src/components/elements/breadcrumbs/Breadcr
 import {numberPrettier, weekDaysHelper} from '@src/helpers';
 import {CustomButton} from '@src/components/elements/custom_button/CustomButton';
 import {RenewalIcon} from '@src/components/elements/icons';
-import {months} from '@src/common_data/common';
 import {AuctionContent} from '@src/components/post/show_post/owner_auction_info/auction_content/AuctionContent';
-import {userAPI} from '@src/api/api';
 import {booleanFields, noTranslatableFields} from '@src/common_data/fields_keys';
-import {useStyles} from './useStyles';
 import {ResponsiveModal} from '@src/components/elements/responsive_modal/ResponsiveModal';
-import {ErrorCtx} from '@src/context';
 import {OwnerAuctionInfo} from '@src/components/post/show_post/owner_auction_info/OwnerAuctionInfo';
+import {ErrorCtx} from '@src/context';
+import {useStyles} from './useStyles';
 
 type PostContentTypes = {
     data,

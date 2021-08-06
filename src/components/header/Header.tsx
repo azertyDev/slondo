@@ -1,5 +1,4 @@
 import {FC, useContext, useEffect} from 'react';
-import {Container} from '@material-ui/core';
 import {useTranslation} from 'next-i18next';
 import {Top} from './top/Top';
 import Bottom from './bottom/Bottom';

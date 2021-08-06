@@ -26,7 +26,7 @@ import {CustomFormikProvider} from '@src/components/elements/custom_formik_provi
 import {FormikTextarea} from '@src/components/elements/formik_textarea/FormikTextarea';
 import {Location} from '@src/components/elements/location/Location';
 import {useRouter} from "next/router";
-import {TEXT_LIMIT} from "@src/constants";
+import {SAFE_DEAL_LIMIT, TEXT_LIMIT} from "@src/constants";
 import {useStyles} from './useStyles';
 
 type DefaultParamsPropsType = {
@@ -104,7 +104,7 @@ export const CommonForm: FC<DefaultParamsPropsType> = (props) => {
         }
     };
 
-    const [safeDealPriceErr, setSafeDealPriceErr] = useState(false);
+    const [isSafeDeal, setIsSafeDeal] = useState(false);
     const [avalTimeActive, setAvalTimeActive] = useState(!!available_start_time);
 
     const onSubmit = (values) => {
@@ -193,6 +193,7 @@ export const CommonForm: FC<DefaultParamsPropsType> = (props) => {
         setValues,
         errors,
         touched,
+        setTouched,
         handleBlur
     } = formik;
 
@@ -200,6 +201,7 @@ export const CommonForm: FC<DefaultParamsPropsType> = (props) => {
 
     function getSchema() {
         if (isAuction) return auctionParamsSchema;
+        if (isSafeDeal) return safeDealPriceSchema;
         return defaultParamsSchema;
     }
 
@@ -248,13 +250,9 @@ export const CommonForm: FC<DefaultParamsPropsType> = (props) => {
         setValues({...values, location});
     };
 
-    const validateSafeDealPrice = async () => {
-        const value = await safeDealPriceSchema.isValid(values);
-        console.log('value', value);
-        setSafeDealPriceErr(value);
-    };
-
     const handleCheckboxChange = (name: string) => ({target}) => {
+        const {checked} = target;
+
         const auctionOptionsList = [
             'price_buy_now',
             'offer_the_price',
@@ -262,19 +260,28 @@ export const CommonForm: FC<DefaultParamsPropsType> = (props) => {
             'display_phone'
         ];
 
-        if (name === 'safe_deal') validateSafeDealPrice();
+        if (name === 'safe_deal') {
+            setIsSafeDeal(checked);
+            if (checked) {
+                values.price = '';
+                values.currency = {id: 2, name: 'sum'};
+                setTouched({price: true});
+            } else {
+                setTouched({});
+            }
+        }
 
         if (auctionOptionsList.some(option => option === name)) {
             if (name === 'price_buy_now') {
-                auction.price_buy_now.isActive = target.checked;
-                if (!target.checked) {
+                auction.price_buy_now.isActive = checked;
+                if (!checked) {
                     auction.price_buy_now.value = '';
                 }
             } else {
-                auction[name] = target.checked;
+                auction[name] = checked;
             }
         } else {
-            values[name] = target.checked;
+            values[name] = checked;
         }
 
         setValues({...values});
@@ -346,7 +353,7 @@ export const CommonForm: FC<DefaultParamsPropsType> = (props) => {
                                             labelText={priceLabel}
                                             value={values.price}
                                             onChange={handleInput}
-                                            errorMsg={getErrorMsg(errors.price, touched.price, t)}
+                                            errorMsg={getErrorMsg(errors.price, touched.price, t, SAFE_DEAL_LIMIT)}
                                         />
                                     </Grid>
                                     <Grid item xs={4} sm={2} md={2} lg={1}>
@@ -364,7 +371,6 @@ export const CommonForm: FC<DefaultParamsPropsType> = (props) => {
                                 t={t}
                                 isCommonForm
                                 values={values}
-                                setValues={setValues}
                                 isAuction={isAuction}
                                 categoryName={categoryName}
                                 handleCheckbox={handleCheckboxChange}
@@ -413,7 +419,7 @@ export const CommonForm: FC<DefaultParamsPropsType> = (props) => {
                                     />
                                 </Grid>
                                 {!isAuction && (
-                                    <Grid item container xs={12} sm={6} justify='center'>
+                                    <Grid item container xs={12} sm={6} justifyContent='center'>
                                         <Grid item xs={12} sm={12} lg={8}>
                                             <AvailableDays
                                                 t={t}

@@ -62,9 +62,6 @@ export const SearchPost: FC<SearchPostsByFiltersPropsType> = (props) => {
             <div className={classes.root}>
                 <Grid container spacing={isSm ? 0 : 2}>
                     <Grid item xs={12} sm={12} lg={9} zeroMinWidth>
-                        {/*<Typography variant='h5'>*/}
-                        {/*    {t('common:youLookingFor')}*/}
-                        {/*</Typography>*/}
                         <SearchForm
                             urlParams={urlParams}
                             categories={categoriesByCyrillicNames}

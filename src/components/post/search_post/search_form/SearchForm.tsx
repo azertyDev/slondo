@@ -413,7 +413,6 @@ export const SearchForm: FC<SearchFormPropsType> = (props) => {
                     iconMode
                     isAuction={false}
                     values={values}
-                    setValues={setValues}
                     handleCheckbox={handleCheckbox}
                     categoryName={mainCategoryName}
                 />
