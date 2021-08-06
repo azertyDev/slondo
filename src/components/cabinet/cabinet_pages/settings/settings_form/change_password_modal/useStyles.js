@@ -1,9 +1,8 @@
 import {makeStyles} from '@material-ui/core/styles';
 
-export const useStyles = makeStyles(({breakpoints, palette}) => ({
+export const useStyles = makeStyles(({breakpoints, spacing}) => ({
     root: {
-        minWidth: '400px',
-        backgroundColor: palette.primary.white,
+        width: '100%',
         '& div.formik-num-pass': {
             '& > div:first-child': {
                 marginBottom: '10px'
@@ -18,9 +17,10 @@ export const useStyles = makeStyles(({breakpoints, palette}) => ({
             }
         }
     },
-    modal: {
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center'
+    modalBody: {
+        '& button': {
+            width: '100%',
+            borderRadius: 5
+        }
     }
 }));

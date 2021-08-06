@@ -12,6 +12,7 @@ import {useBetsData} from '@src/hooks/useBetsData';
 import {ResponsiveModal} from '@src/components/elements/responsive_modal/ResponsiveModal';
 import {ErrorCtx} from "@src/context";
 import {useStyles} from './useStyles';
+import {ModalHeader} from '@src/components/cabinet/components/modal_header/ModalHeader';
 
 type AuctionInfoPropsType = {
     postData,
@@ -155,19 +156,20 @@ export const AuctionContent: FC<AuctionInfoPropsType> = (props) => {
                                     openDialog={openBuyNow}
                                     handleCloseDialog={handleModalBuyNow(false)}
                                 >
+                                    <ModalHeader
+                                        title={t('post:buyNow')}
+                                        handleCloseDialog={handleModalBuyNow(false)}
+                                    />
                                     <Box
                                         p={3}
                                         className={classes.buyNowModal}
                                     >
-                                        <Typography className="title" variant="h6" gutterBottom>
-                                            {t('post:buyNow')}
-                                        </Typography>
                                         <Typography
                                             variant='subtitle1'
                                             className='subtitle'
                                         >
                                             {t('post:buyNowRule.firstPart')}
-                                            &nbsp;<br/>
+                                            &nbsp;<br />
                                             <span className='buy-now-price'>
                                                 {numberPrettier(postData.auction.price_buy_now)}
                                             </span>
@@ -205,7 +207,7 @@ export const AuctionContent: FC<AuctionInfoPropsType> = (props) => {
                                     )}
                                     {isExAuc && hasBuyNow && (
                                         <Grid item xs={6} className="btn-buy-now">
-                                            <CustomButton>
+                                            <CustomButton onClick={handleModalBuyNow(true)}>
                                                 <Typography variant='subtitle2'>{t('post:buyNow')}</Typography>
                                             </CustomButton>
                                         </Grid>
@@ -228,6 +230,10 @@ export const AuctionContent: FC<AuctionInfoPropsType> = (props) => {
                                 openDialog={openOfferPrice}
                                 handleCloseDialog={handleModalOfferPrice(false)}
                             >
+                                <ModalHeader
+                                    title={t('post:suggestPrice')}
+                                    handleCloseDialog={handleModalOfferPrice(false)}
+                                />
                                 <Box
                                     p={3}
                                     display='flex'
@@ -235,31 +241,38 @@ export const AuctionContent: FC<AuctionInfoPropsType> = (props) => {
                                     flexDirection='column'
                                     className={classes.suggestPriceModal}
                                 >
-                                    <Typography variant='button' gutterBottom>
-                                        {t('post:suggestPrice')}
-                                    </Typography>
-                                    <Typography variant='subtitle1'>
-                                        {t('post:suggestPriceRule')}
-                                    </Typography>
-                                    <Box
-                                        width="65%"
-                                        mt={2}
-                                        display='flex'
-                                        flexDirection='column'
+                                    <Grid
+                                        container
+                                        spacing={2}
+                                        direction='column'
                                     >
-                                        <TextField
-                                            variant="outlined"
-                                            id="outlined-basic"
-                                            className='suggest-input'
-                                            onChange={handleOfferPriceInput}
-                                            placeholder={t('post:enterPrice')}
-                                        />
-                                        <CustomButton onClick={handleOfferPrice} className='suggest-btn'>
-                                            <Typography variant='subtitle1' color='initial'>
-                                                {t('post:suggest')}
+                                        <Grid item xs={12}>
+                                            <Typography variant='subtitle1' component='p'>
+                                                {t('post:suggestPriceRule')}
                                             </Typography>
-                                        </CustomButton>
-                                    </Box>
+                                        </Grid>
+                                        <Grid item xs={12}>
+                                            <TextField
+                                                variant="outlined"
+                                                id="outlined-basic"
+                                                className='suggest-input'
+                                                fullWidth
+                                                onChange={handleOfferPriceInput}
+                                                placeholder={t('post:enterPrice')}
+                                            />
+                                        </Grid>
+                                        <Grid item xs={12} container alignItems='center'>
+                                            <CustomButton
+                                                color='secondary'
+                                                onClick={handleOfferPrice}
+                                                className={classes.fullWidth}
+                                            >
+                                                <Typography variant="subtitle1" color="initial" component='p'>
+                                                    {t('post:suggest')}
+                                                </Typography>
+                                            </CustomButton>
+                                        </Grid>
+                                    </Grid>
                                 </Box>
                             </ResponsiveModal>
                         </div>

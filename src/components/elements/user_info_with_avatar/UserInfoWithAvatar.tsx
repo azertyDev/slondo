@@ -43,13 +43,9 @@ export const UserInfoWithAvatar: FC<UserInfoWithAvatarPropsType> = (props) => {
                     />
                 </Box>
                 <Box>
-                    <Link href={`/user/${owner.id}`}>
-                        <a>
-                            <Typography color="initial" variant='subtitle1'>
-                                {`${owner.name ?? ''} ${owner.surname ?? ''}`}
-                            </Typography>
-                        </a>
-                    </Link>
+                    <Typography color="initial" variant='subtitle1'>
+                        {`${owner.name ?? ''} ${owner.surname ?? ''}`}
+                    </Typography>
                     <Typography variant="subtitle1" color="initial">
                         {t('created_at', {
                             created_at: formatted_date?.toString()

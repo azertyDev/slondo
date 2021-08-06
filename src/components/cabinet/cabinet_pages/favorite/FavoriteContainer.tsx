@@ -90,7 +90,7 @@ export const FavoriteContainer: FC = () => {
             case 1:
                 return <>
                     <Typography className="title" variant="h6">
-                        Подтвердите
+                        {t('common:perform')}
                     </Typography>
                     <List
                         component="nav"
@@ -103,7 +103,7 @@ export const FavoriteContainer: FC = () => {
                             onClick={handleRemoveFavorite}
                         >
                             <ListItemText
-                                primary='Да'
+                                primary={t('common:yes')}
                                 primaryTypographyProps={{variant: 'subtitle1'}}
                             />
                         </ListItem>
@@ -112,7 +112,7 @@ export const FavoriteContainer: FC = () => {
                             onClick={handleModalClose}
                         >
                             <ListItemText
-                                primary='Нет'
+                                primary={t('common:no')}
                                 primaryTypographyProps={{variant: 'subtitle1'}}
                             />
                         </ListItem>
@@ -129,7 +129,7 @@ export const FavoriteContainer: FC = () => {
         <>
             {modalContentIndex === 1
                 ? <Typography className="title" variant="h6">
-                    Объявление № {postId}
+                    {t('post')} № {postId}
                 </Typography>
                 : modalContentIndex === 5
                     ? null

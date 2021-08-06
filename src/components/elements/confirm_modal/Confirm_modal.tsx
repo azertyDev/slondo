@@ -1,6 +1,7 @@
 import {FC} from 'react';
 import {CustomModal} from '@src/components/elements/custom_modal/CustomModal';
 import {CustomButton} from '@src/components/elements/custom_button/CustomButton';
+import {ResponsiveModal} from '@src/components/elements/responsive_modal/ResponsiveModal';
 
 type ConfirmModalPropsType = {
     title: string,
@@ -22,9 +23,9 @@ export const ConfirmModal: FC<ConfirmModalPropsType> = (props) => {
     } = props;
 
     return (
-        <CustomModal
-            openModal={open}
-            handleModalClose={handleClose}
+        <ResponsiveModal
+            openDialog={open}
+            handleCloseDialog={handleClose}
         >
             <div>
                 <div className='title'>
@@ -39,6 +40,6 @@ export const ConfirmModal: FC<ConfirmModalPropsType> = (props) => {
                     </CustomButton>
                 </div>
             </div>
-        </CustomModal>
+        </ResponsiveModal>
     );
 };

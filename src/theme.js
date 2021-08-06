@@ -26,7 +26,9 @@ const colors = {
     activeTab: '#2F80ED',
     postBgColor: 'rgba(136, 202, 236, 0.65)',
     aucBgColor: 'rgba(173, 102, 213, 0.65)',
-    exAucBgColor: 'rgba(242, 153, 74, 0.65)'
+    exAucBgColor: 'rgba(242, 153, 74, 0.65)',
+    primaryGradient: 'linear-gradient(49.94deg, #675EAA 19.03%, #AD66D5 72.72%)',
+    secondaryGradient: 'linear-gradient(90deg, #7DBCF6 0%, #63A6F4 100%)'
 }
 
 // Create a theme instance.
@@ -55,7 +57,9 @@ const theme = createTheme({
             error: colors.error,
             postBgColor: colors.postBgColor,
             aucBgColor: colors.aucBgColor,
-            exAucBgColor: colors.exAucBgColor
+            exAucBgColor: colors.exAucBgColor,
+            primaryGradient: colors.primaryGradient,
+            secondaryGradient: colors.secondaryGradient
         },
         secondary: {
             main: colors.createAdBtnColor

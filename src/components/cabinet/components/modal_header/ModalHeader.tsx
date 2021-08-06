@@ -5,7 +5,14 @@ import CloseIcon from '@material-ui/icons/Close';
 import {useStyles} from './useStyles';
 import {useTranslation} from 'next-i18next';
 
-export const ModalHeader: FC<any> = (props) => {
+type ModalHeaderPropsType = {
+    title,
+    hasPrevBtn?,
+    handlePrevMenu?,
+    handleCloseDialog?
+}
+
+export const ModalHeader: FC<ModalHeaderPropsType> = (props) => {
     const {
         title,
         hasPrevBtn,
