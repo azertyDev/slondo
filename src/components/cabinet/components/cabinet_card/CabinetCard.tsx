@@ -28,7 +28,7 @@ export const CabinetCard: FC<CabinetCardPropsType> = (props) => {
         handleNotificationsOpen
     } = props;
 
-    const {pathname} = useRouter();
+    const {query: {page}} = useRouter();
     const {t} = useTranslation('cabinet');
 
     const {
@@ -82,34 +82,47 @@ export const CabinetCard: FC<CabinetCardPropsType> = (props) => {
                 <Grid container spacing={1} className='bottom-btns'>
                     <Hidden mdUp>
                         <Grid item xs={5} sm={4} container justify='center'>
-                            <Grid item xs={6} container justify='center'>
-                                <CustomButton
-                                    className='icons'
-                                    onClick={handleNotificationsOpen}
-                                    // disabled={!observer?.number_of_notifications}
-                                >
-                                    <NotificationIcon />
-                                </CustomButton>
-                            </Grid>
-                            {creator && isPublic && (
-                                <Grid item xs={6} container justify='center'>
+                            {page?.includes('favorite')
+                                ? <Grid item xs={6} container justify='center'>
                                     <CustomButton
-                                        className='icons'
-                                        onClick={handleSettingsOpen}
+                                        onClick={handleOpenModal(cardData.id)}
                                     >
-                                        <SettingsIcon />
+                                        <CloseIcon />
                                     </CustomButton>
                                 </Grid>
-                            )}
+                                : (<>
+                                        {handleNotificationsOpen && (
+                                            <Grid item xs={6} container justify='center'>
+                                                <CustomButton
+                                                    className='icons'
+                                                    onClick={handleNotificationsOpen}
+                                                    // disabled={!observer?.number_of_notifications}
+                                                >
+                                                    <NotificationIcon />
+                                                </CustomButton>
+                                            </Grid>
+                                        )}
+                                        {creator && isPublic && (
+                                            <Grid item xs={6} container justify='center'>
+                                                <CustomButton
+                                                    className='icons'
+                                                    onClick={handleSettingsOpen}
+                                                >
+                                                    <SettingsIcon />
+                                                </CustomButton>
+                                            </Grid>
+                                        )}
+                                    </>
+                                )}
                         </Grid>
                     </Hidden>
-                    <Grid
-                        item
-                        xs={isPublic || isModeration || isSold ? 7 : 12}
-                        sm={isPublic || isModeration ? 8 : 12}
-                        md={12}
-                    >
-                        {handleDetailedOpen && (
+                    {handleDetailedOpen && (
+                        <Grid
+                            item
+                            xs={isPublic || isModeration || isSold ? 7 : 12}
+                            sm={isPublic || isModeration ? 8 : 12}
+                            md={12}
+                        >
                             <CustomButton
                                 className='unfold-btn'
                                 onClick={handleDetailedOpen}
@@ -119,16 +132,16 @@ export const CabinetCard: FC<CabinetCardPropsType> = (props) => {
                                 </Typography>&nbsp;
                                 <ChevronRight color='action' />
                             </CustomButton>
-                        )}
-                    </Grid>
+                        </Grid>
+                    )}
                 </Grid>
                 <Hidden mdDown>
                     <div className='card-btns'>
-                        {pathname?.includes('favorite')
+                        {page?.includes('favorite')
                             ? <CustomButton
                                 onClick={handleOpenModal(cardData.id)}
                             >
-                                <CloseIcon/>
+                                <CloseIcon />
                             </CustomButton>
                             : <>
                                 {creator && isPublic && (

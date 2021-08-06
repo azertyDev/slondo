@@ -165,26 +165,39 @@ export const Settings: FC = () => {
 
     const classes = useStyles();
     return (
-        <>
-            <Grid container className={classes.root} direction='column'>
-                <Box
-                    display='flex'
-                    alignItems='center'
-                    justifyContent='flex-end'
+        <Box className={classes.root}>
+            <Grid container direction='column' spacing={4}>
+                <Grid
+                    item
+                    xs={12}
+                    container
+                    direction='column'
                 >
+                    <Typography
+                        variant='h6'
+                        gutterBottom
+                        component='p'
+                    >
+                        <strong>
+                            {t('cabinet:personalData')}
+                        </strong>
+                        <span className='hint'>
+                            {t('cabinet:editHint')}
+                        </span>
+                    </Typography>
                     <Button
-                        color='secondary'
                         variant='text'
+                        color='secondary'
                         onClick={handleAllowEdit}
                         className={classes.editButton}
-                        startIcon={!editable && <EditIcon fontSize='small'/>}
+                        startIcon={!editable && <EditIcon fontSize='small' />}
                     >
                         <Typography variant='subtitle1'>
-                            {editable ? 'Отменить' : 'Редактировать'}
+                            {editable ? t('cabinet:revoke') : t('cabinet:edit')}
                         </Typography>
                     </Button>
-                </Box>
-                <Grid item xs>
+                </Grid>
+                <Grid item xs={12}>
                     <SettingsForm
                         t={t}
                         formik={formik}
@@ -203,6 +216,6 @@ export const Settings: FC = () => {
                 open={openModal}
                 handleModalClose={handleModalClose}
             />
-        </>
+        </Box>
     );
 };

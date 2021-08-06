@@ -17,15 +17,20 @@ export const useStyles = makeStyles((theme) => ({
     checkbox: {
         padding: 5
     },
-    wrapper: {
-        position: 'relative',
-        display: 'flex'
-    },
     button: {
         width: '100%',
         '& .MuiTypography-subtitle1': {
             color: '#fff'
         }
+    },
+    icon: {
+        width: 24,
+        height: 24,
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        borderRadius: '100px',
+        backgroundColor: '#F2F2F2'
     },
     progress: {
         color: blue[500],
@@ -39,13 +44,9 @@ export const useStyles = makeStyles((theme) => ({
         backgroundColor: '#fff',
         boxShadow: '0px 1px 2px 0px #00000014',
         borderRadius: '100px',
-        padding: '9px 25px',
         '& .MuiTypography-subtitle1': {
             color: '#838383'
         },
-        '& svg': {
-            color: theme.palette.secondary
-        }
     }
 }));
 
