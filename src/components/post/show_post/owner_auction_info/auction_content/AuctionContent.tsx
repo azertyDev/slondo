@@ -156,19 +156,20 @@ export const AuctionContent: FC<AuctionInfoPropsType> = (props) => {
                                     openDialog={openBuyNow}
                                     handleCloseDialog={handleModalBuyNow(false)}
                                 >
+                                    <ModalHeader
+                                        title={t('post:buyNow')}
+                                        handleCloseDialog={handleModalBuyNow(false)}
+                                    />
                                     <Box
                                         p={3}
                                         className={classes.buyNowModal}
                                     >
-                                        <Typography className="title" variant="h6" gutterBottom>
-                                            {t('post:buyNow')}
-                                        </Typography>
                                         <Typography
                                             variant='subtitle1'
                                             className='subtitle'
                                         >
                                             {t('post:buyNowRule.firstPart')}
-                                            &nbsp;<br/>
+                                            &nbsp;<br />
                                             <span className='buy-now-price'>
                                                 {numberPrettier(postData.auction.price_buy_now)}
                                             </span>
@@ -206,7 +207,7 @@ export const AuctionContent: FC<AuctionInfoPropsType> = (props) => {
                                     )}
                                     {isExAuc && hasBuyNow && (
                                         <Grid item xs={6} className="btn-buy-now">
-                                            <CustomButton>
+                                            <CustomButton onClick={handleModalBuyNow(true)}>
                                                 <Typography variant='subtitle2'>{t('post:buyNow')}</Typography>
                                             </CustomButton>
                                         </Grid>
