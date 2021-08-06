@@ -1,4 +1,5 @@
 import Axios from 'axios';
+import process from 'process';
 import {cookies} from '@src/helpers';
 import {CategoryType} from '@root/interfaces/Categories';
 import {CardDataType} from '@root/interfaces/CardData';
