@@ -13,7 +13,8 @@
   "server_error": "Serverda xatolik, keyinroq urinib ko'ring",
   "fieldIsRequired": "Maydon to'ldirilishi shart",
   "wrongFormat": "Noto'g'ri farmat",
-  "passwordMustMinEightChars": "Parol kamida 8 shartli belgi",
+  "passwordMustMinEightChars": "Parol kamida 8 ta simvoldan iborat bo'lishi kerak",
   "passwordsDifferent": "Parollar xar-xil",
-  "addPhotos": "Iltimos, rasm qo'shing"
+  "addPhotos": "Iltimos, rasm qo'shing",
+  "error": "Xato"
 }

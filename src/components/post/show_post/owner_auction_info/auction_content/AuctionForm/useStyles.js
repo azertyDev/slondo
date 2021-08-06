@@ -13,18 +13,11 @@ export const useStyles = makeStyles((theme) => ({
                 marginBottom: '4px'
             },
             '& .btn-bet': {
-                border: '1px solid #675EAA',
                 width: '100%',
-                margin: '5px 0',
                 [theme.breakpoints.down('md')]: {
-                    '& h6': {
-                        color: '#FFF',
-                        fontSize: 'calc(14px + 2 * (100vw / 1280))'
+                    '& p': {
+                        fontSize: '0.875rem'
                     },
-                    background: 'linear-gradient(49.94deg, #675EAA 19.03%, #AD66D5 72.72%)',
-                    margin: 0,
-                    border: 'none',
-                    padding: '13px'
                 }
             },
             '& > div.max-bet': {

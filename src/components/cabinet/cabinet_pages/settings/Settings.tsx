@@ -172,30 +172,35 @@ export const Settings: FC = () => {
                     xs={12}
                     container
                     direction='column'
+                    spacing={1}
                 >
-                    <Typography
-                        variant='h6'
-                        gutterBottom
-                        component='p'
-                    >
-                        <strong>
-                            {t('cabinet:personalData')}
-                        </strong>
-                        <span className='hint'>
-                            {t('cabinet:editHint')}
-                        </span>
-                    </Typography>
-                    <Button
-                        variant='text'
-                        color='secondary'
-                        onClick={handleAllowEdit}
-                        className={classes.editButton}
-                        startIcon={!editable && <EditIcon fontSize='small' />}
-                    >
-                        <Typography variant='subtitle1'>
-                            {editable ? t('cabinet:revoke') : t('cabinet:edit')}
+                    <Grid item xs={12}>
+                        <Typography
+                            variant='h6'
+                            gutterBottom
+                            component='p'
+                        >
+                            <strong>
+                                {t('cabinet:personalData')}
+                            </strong>
+                            <span className='hint'>
+                                {t('cabinet:editHint')}
+                            </span>
                         </Typography>
-                    </Button>
+                    </Grid>
+                    <Grid item xs={12}>
+                        <Button
+                            variant='text'
+                            color='secondary'
+                            onClick={handleAllowEdit}
+                            className={classes.editButton}
+                            startIcon={!editable && <EditIcon fontSize='small' />}
+                        >
+                            <Typography variant='subtitle1'>
+                                {editable ? t('cabinet:revoke') : t('cabinet:edit')}
+                            </Typography>
+                        </Button>
+                    </Grid>
                 </Grid>
                 <Grid item xs={12}>
                     <SettingsForm

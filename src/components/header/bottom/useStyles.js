@@ -68,8 +68,6 @@ export const useStyles = makeStyles((theme) => ({
             '& svg': {
                 marginLeft: 8
             },
-            color: '#000',
-            backgroundColor: '#F2F2F2',
             boxShadow: '0px 1px 1px rgba(0, 0, 0, 0.15)',
             width: '100%'
         },

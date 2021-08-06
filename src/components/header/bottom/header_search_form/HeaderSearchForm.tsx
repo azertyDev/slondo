@@ -83,8 +83,8 @@ export const HeaderSearchForm: FC = () => {
                         inputProps={{'aria-label': 'search category'}}
                     />
                     <Hidden mdDown>
-                        <CustomButton type='submit' className={classes.searchButton}>
-                            <Typography variant="subtitle2">
+                        <CustomButton type='submit' className={classes.searchButton} color='silver'>
+                            <Typography variant="subtitle2" component='p'>
                                 {t('searchBtn')}
                             </Typography>
                         </CustomButton>

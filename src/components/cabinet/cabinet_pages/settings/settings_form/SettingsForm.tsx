@@ -8,7 +8,6 @@ import {AvailableDays} from '@src/components/post/create_post/third_step/common_
 import {SettingsButton, useStyles} from './useStyles';
 import {UserInfo} from '@root/interfaces/Auth';
 import LockIcon from '@material-ui/icons/Lock';
-import {Add} from '@material-ui/icons';
 
 type SettingsFormPropsType = {
     editable: boolean,

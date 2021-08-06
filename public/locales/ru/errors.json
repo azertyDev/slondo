@@ -9,11 +9,12 @@
   "incorrect_pwd": "Неверный Пароль",
   "pageNotFound": "Страница не найдена",
   "user_already_registered": "Ошибка регистрации, возможно вы уже зарегистрированы в системе",
-  "unauthorised": "Ошика авторизации",
+  "unauthorised": "Ошибка авторизации",
   "server_error": "Ошибка сервера, попробуйте позже",
   "fieldIsRequired": "Поле обязательно для заполнения",
   "wrongFormat": "Неверный формат",
   "passwordMustMinEightChars": "Пароль должен быть не менее 8 символов",
   "passwordsDifferent": "Пароли не совпадают",
-  "addPhotos": "Пожалуйста добавьте фото"
+  "addPhotos": "Пожалуйста добавьте фото",
+  "error": "Ошибка"
 }

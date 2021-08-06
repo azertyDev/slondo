@@ -78,7 +78,7 @@ export const ChangePasswordModal: FC<PasswordRecoveryPropsType> = ({open, handle
             setIsFetch(true);
             switch (status) {
                 case "confirm":
-                    // await userAPI.getSmsCode(userInfo.phone);
+                    await userAPI.getSmsCode(userInfo.phone);
                     unstable_batchedUpdates(() => {
                         setIsFetch(false);
                         setActiveTimer(true);
@@ -104,6 +104,7 @@ export const ChangePasswordModal: FC<PasswordRecoveryPropsType> = ({open, handle
                         closeModal();
                     });
             }
+            setIsFetch(false);
         } catch (e) {
             unstable_batchedUpdates(() => {
                 setIsFetch(false);
@@ -157,24 +158,35 @@ export const ChangePasswordModal: FC<PasswordRecoveryPropsType> = ({open, handle
 
     const getContent = () => {
         switch (status) {
-            case 'code_confirm':
-                return <Box>
-                    <FormikField
-                        t={t}
-                        type="text"
-                        name="code"
-                        placeholder={t('enter_sms')}
-                        onChange={handleNumericInput}
-                        errorMsg={getErrorMsg(errors.code, touched.code, t)}
-                    />
-                    <Typography
-                        variant="subtitle2"
-                        className="resendTxt"
-                    >
-                        {t(`resendSms`, {timer: timer})}
+            case 'confirm':
+                return <Grid item xs={12} container justifyContent='center'>
+                    <Typography variant='subtitle1' component='p' align='center'>
+                        {t('codeWillBeSent')}
                     </Typography>
-                </Box>;
-            case "new_password":
+                </Grid>;
+            case 'code_confirm':
+                return <>
+                    <Grid item xs={12}>
+                        <FormikField
+                            t={t}
+                            type="text"
+                            name="code"
+                            placeholder={t('enter_sms')}
+                            onChange={handleNumericInput}
+                            errorMsg={getErrorMsg(errors.code, touched.code, t)}
+                        />
+                    </Grid>
+                    <Grid item xs={12}>
+                        <Typography
+                            variant="subtitle2"
+                            className="resendTxt"
+                            align='center'
+                        >
+                            {t(`resendSms`, {timer: timer})}
+                        </Typography>
+                    </Grid>
+                </>;
+            case 'new_password':
                 return <div className="formik-num-pass">
                     <FormikField
                         t={t}
@@ -214,41 +226,49 @@ export const ChangePasswordModal: FC<PasswordRecoveryPropsType> = ({open, handle
                     title={statusObserver()}
                     handleCloseDialog={handleModalClose}
                 />
-                <CustomFormikProvider formik={formik}>
-                    <Box p={2} className={classes.modalBody}>
-                        {errorMsg && (
-                            <Typography
-                                gutterBottom
-                                component='p'
-                                align='center'
-                                variant='subtitle2'
-                                className='error-text'
-                            >
-                                {t(`errors:${errorMsg}`)}
-                            </Typography>
-                        )}
-                        <Grid container direction='column' justify='center'>
+                <Box px={4} py={2} mt={2} className={classes.modalBody}>
+                    <CustomFormikProvider formik={formik}>
+                        <Grid container direction='column' justifyContent='center' spacing={2}>
+                            {errorMsg && (
+                                <Grid item xs={12}>
+                                    <Typography
+                                        gutterBottom
+                                        component='p'
+                                        align='center'
+                                        variant='subtitle2'
+                                        className='error-text'
+                                    >
+                                        {t(`errors:${errorMsg}`)}
+                                    </Typography>
+                                </Grid>
+                            )}
                             {getContent()}
                             <Grid
+                                item
                                 container
                                 spacing={2}
+                                justifyContent='center'
                             >
                                 {isConfirm && (
                                     <Grid item xs={6}>
-                                        <CustomButton onClick={closeModal}>
-                                            {t('cancel')}
+                                        <CustomButton onClick={closeModal} color='silver'>
+                                            <Typography variant='subtitle1' component='p'>
+                                                {t('cancel')}
+                                            </Typography>
                                         </CustomButton>
                                     </Grid>
                                 )}
                                 <Grid item xs={6}>
-                                    <CustomButton type="submit" disabled={isFetch}>
-                                        {t(`common:${isConfirm ? 'perform' : 'send'}`)}
+                                    <CustomButton type="submit" disabled={isFetch} color='secondary'>
+                                        <Typography variant='subtitle1' component='p'>
+                                            {t(`common:${isConfirm ? 'perform' : 'send'}`)}
+                                        </Typography>
                                     </CustomButton>
                                 </Grid>
                             </Grid>
                         </Grid>
-                    </Box>
-                </CustomFormikProvider>
+                    </CustomFormikProvider>
+                </Box>
             </div>
         </ResponsiveModal>
     );

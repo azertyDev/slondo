@@ -1,6 +1,6 @@
 import {makeStyles} from '@material-ui/core/styles';
 
-export const useStyles = makeStyles(({breakpoints}) => ({
+export const useStyles = makeStyles(({breakpoints, spacing}) => ({
     root: {
         width: '100%',
         '& div.formik-num-pass': {
@@ -18,11 +18,9 @@ export const useStyles = makeStyles(({breakpoints}) => ({
         }
     },
     modalBody: {
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
         '& button': {
-            width: '100%'
+            width: '100%',
+            borderRadius: 5
         }
     }
 }));

@@ -2,33 +2,36 @@ import {makeStyles} from '@material-ui/core/styles';
 
 export const useStyles = makeStyles((theme) => ({
     root: {
-        color: (props) =>
-            props.color === 'primary'
-                ? theme.palette.primary.createAdBtnColor
-                : theme.palette.primary.white,
+        color: theme.palette.primary.white,
         padding: '12px',
         background: (props) =>
             props.color === 'primary'
-                ? 'linear-gradient(49.94deg, #675EAA 19.03%, #AD66D5 72.72%)'
+                ? theme.palette.primary.primaryGradient
                 : props.color === 'secondary'
-                ? 'none'
-                : theme.palette.primary.secondary,
+                ? theme.palette.primary.createAdBtnColor
+                : props.color === 'silver'
+                    ? '#E9E9E9'
+                    : theme.palette.primary.secondaryGradient,
         boxShadow: (props) =>
             props.color === 'primary' ? 'none' : '0px 0px 8px 0px #845CAB 20%',
         borderRadius: '3px',
-        borderColor: (props) =>
-            props.color === 'primary'
-                ? 'transparent'
-                : props.color === 'secondary'
-                ? '#845CAB'
-                : 'transparent',
         '& > h6.MuiTypography-subtitle1': {
             color: (props) =>
-                props.color === 'primary'
-                    ? theme.palette.primary.white
+                props.color === 'primary' ?
+                    theme.palette.primary.white
                     : props.color === 'secondary'
                     ? theme.palette.primary.secondary
-                    : theme.palette.primary.black
+                    : props.color === 'silver'
+                        ? theme.palette.primary.black
+                        : theme.palette.primary.white
+        },
+        '& > p.MuiTypography-subtitle1': {
+            color: ({color}) =>
+                color === 'primary' || color === 'secondary'
+                    ? theme.palette.primary.white
+                    : color === 'silver'
+                    ? theme.palette.primary.black
+                    : theme.palette.primary.white
         },
         '&:disabled': {
             backgroundColor: theme.palette.primary.gray,

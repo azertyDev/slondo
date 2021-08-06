@@ -15,7 +15,7 @@ export const useStyles = makeStyles((theme) => ({
         padding: '5px 10px',
         borderRadius: '100px',
         background: '#FFFFFF',
-        justifyContent: 'space-between',
+        justifyContent: 'flex-start',
         '&:not(:last-child)': {
             marginBottom: 10
         }

@@ -143,9 +143,13 @@ export const Top: FC<TopHeaderPropsType> = (props) => {
                                         </Link>
                                     </Grid>
                                     {isAuth
-                                        ? <CustomButton className={classes.avatarBlock}>
-                                            <Avatar alt="Avatar" src={avatar}/>
-                                        </CustomButton>
+                                        ? <Link href='/cabinet'>
+                                            <a>
+                                                <CustomButton className={classes.avatarBlock}>
+                                                    <Avatar alt="Avatar" src={avatar} />
+                                                </CustomButton>
+                                            </a>
+                                        </Link>
                                         : <CustomButton
                                             className="btn-sign-mobile"
                                             onClick={handleOpenModal}

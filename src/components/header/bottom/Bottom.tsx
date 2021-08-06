@@ -158,11 +158,12 @@ const Bottom = (props) => {
                                         : <CustomButton
                                             className="bottom-sign-button header-button"
                                             onClick={handleOpenModal}
+                                            color='silver'
                                         >
-                                            <Typography variant="subtitle2">
+                                            <Typography variant="subtitle2" component='p'>
                                                 {t('auth_reg:signIn')}
                                             </Typography>
-                                            <SignIcon/>
+                                            <SignIcon />
                                         </CustomButton>
                                     }
                                 </Grid>

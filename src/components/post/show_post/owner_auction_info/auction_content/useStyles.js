@@ -58,11 +58,10 @@ export const useStyles = makeStyles((theme) => ({
                     maxWidth: '100%'
                 },
                 '& > button': {
+                    width: '100%',
                     [theme.breakpoints.down('md')]: {
                         padding: '12px 39px'
                     },
-                    width: '100%',
-                    background: 'linear-gradient(90deg, #7DBCF6 0%, #63A6F4 100%);',
                     '& > h6.MuiTypography-subtitle1': {
                         color: '#fff',
                         [theme.breakpoints.down('md')]: {
@@ -92,17 +91,8 @@ export const useStyles = makeStyles((theme) => ({
             textAlign: 'center',
             [theme.breakpoints.down('md')]: {
                 fontSize: 'calc(14px + 2 * (100vw / 1280))',
-                whiteSpace: 'nowrap'
             }
         },
-        '& .suggest-input': {
-            marginBottom: '10px'
-        },
-        '& .suggest-btn': {
-            '& .MuiTypography-subtitle1': {
-                color: '#fff'
-            }
-        }
     },
     lotTimer: {
         padding: '8px 30px',
@@ -239,5 +229,8 @@ export const useStyles = makeStyles((theme) => ({
                 }
             }
         }
+    },
+    fullWidth: {
+        width: '100%'
     }
 }));

@@ -90,7 +90,7 @@ export const AuctionForm: FC<AuctionFromPropsType> = (props) => {
                                     className="btn-bet"
                                     disabled={!values.bet && isFetch}
                                 >
-                                    <Typography variant="subtitle1" color="initial">
+                                    <Typography variant="subtitle1" color="initial" component='p'>
                                         {t('post:createBet')}
                                     </Typography>
                                 </CustomButton>
