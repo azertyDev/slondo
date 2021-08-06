@@ -6,13 +6,15 @@ import {AuctionsDataTypes} from '@root/interfaces/Auctions';
 import {UserInfo} from '@root/interfaces/Auth';
 import {LocationsType} from "@root/interfaces/Locations";
 
-const production = 'https://backend.slondo.uz/api/';
 const testb = 'https://backend.testb.uz/api/';
-const local = 'http://192.168.100.60/slondo/public/api/';
+
+const baseURL = process.env.NODE_ENV === 'production'
+    ? 'https://backend.slondo.uz/api/'
+    : 'http://192.168.100.60/slondo/public/api/';
 
 const instance = Axios.create({
     withCredentials: true,
-    baseURL: production
+    baseURL
 });
 
 // export const socketIO = socketIOClient('http://192.168.100.60:8005');

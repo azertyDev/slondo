@@ -1,15 +1,15 @@
 #!/usr/bin/env node
 /* eslint-disable @typescript-eslint/no-var-requires */
-const cluster = require('cluster');
 const {cpus} = require('os');
-const process = require('process');
 const numCPUs = cpus().length;
+const cluster = require('cluster');
+const process = require('process');
 
+const port = 3317;
+const serverUrl = 'http://localhost';
 const {createServer} = require('http');
 const {parse} = require('url');
 const next = require('next');
-const port = 3317;
-const serverUrl = 'http://localhost';
 const dev = process.env.NODE_ENV !== 'production';
 const app = next({dev});
 const handle = app.getRequestHandler();
