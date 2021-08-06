@@ -7,3 +7,4 @@ export const UPLOAD_FILES_LIMIT = 8;
 export const CONFIRM_SECONDS = 120;
 export const TEXT_LIMIT = 3000;
 export const TITLE_LIMIT = 50;
+export const SAFE_DEAL_LIMIT = 4000;

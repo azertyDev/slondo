@@ -13,7 +13,6 @@ import {useStyles} from './useStyles';
 
 type PaymentDeliveryPropsType = {
     values,
-    setValues,
     handleCheckbox: (name: string) => (e) => void,
     categoryName: string,
     iconMode?: boolean,
@@ -25,7 +24,6 @@ export const SiteServices: FC<PaymentDeliveryPropsType> = (props) => {
     const {
         t,
         values,
-        setValues,
         iconMode,
         isAuction,
         handleCheckbox,
@@ -45,10 +43,6 @@ export const SiteServices: FC<PaymentDeliveryPropsType> = (props) => {
     const handleSafeDealCheckBox = (e) => {
         if (!isCommonForm || hasCard) {
             handleCheckbox('safe_deal')(e);
-            setValues({
-                ...values,
-                currency: {id: 2, name: 'sum'}
-            });
         } else {
             handleModalOpen();
         }

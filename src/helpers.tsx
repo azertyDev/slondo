@@ -413,5 +413,5 @@ export const formatNumber = (number: number): string => (
 );
 
 export const getErrorMsg = (errorMsg, touched, t: TFunction, value?): string => {
-    return errorMsg && touched ? t(`errors:${errorMsg}`, value) : '';
+    return errorMsg && touched ? t(`errors:${errorMsg}`, {value}) : '';
 };

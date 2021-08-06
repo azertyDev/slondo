@@ -1,6 +1,7 @@
 {
+  "price_must_bee_more": "Narx {{value}} dan yuqori bolishi kerak",
   "notMustBeLess0.8": "Qiymat 0.8 dan kam bo'lmasligi kerak",
-  "notMustBeLessZero": "Значение не должно быть нулевым",
+  "notMustBeLessZero": "Qiymat nol bo'lmasligi kerak",
   "must_less_than_20": "{{value}} 20 ta belgidan oshmasligi kerak",
   "must_more_than_3": "{{value}} kamida 3 ta belgidan iborat bo'lishi kerak",
   "code_has_already_been_sent": "Kod yuborilgan. Iltimos keyinroq harakat qilib ko'ring",
