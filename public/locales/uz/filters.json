@@ -1,5 +1,8 @@
 {
   "car": {
+    "color": {
+      "name": "Rangi"
+    },
     "first_position_turbo": {
       "name": "Birinchi pozitsiya (TURBO)"
     },
@@ -2511,6 +2514,9 @@
     }
   },
   "goods": {
+    "color": {
+      "name": "Rangi"
+    },
     "gender": {
       "name": "Jinsi"
     },

@@ -1,5 +1,8 @@
 {
   "car": {
+    "color": {
+      "name": "Цвет"
+    },
     "first_position_turbo": {
       "name": "Первая позиция (TURBO)"
     },
@@ -2526,6 +2529,9 @@
     }
   },
   "goods": {
+    "color": {
+      "name": "Цвет"
+    },
     "white": {
       "name": "Белый"
     },
@@ -7673,7 +7679,6 @@
   "mileage": "Пробег в км.",
   "brand": "Бренд",
   "season": "Сезон",
-
   "bayonet": "Байонет",
   "usb_connector": "USB разъем",
   "build_in_speakers": "Встренные динамики",
