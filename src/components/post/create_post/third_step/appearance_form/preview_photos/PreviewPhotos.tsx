@@ -60,7 +60,7 @@ export const PreviewPhotos: FC<PreviewPhotosPropsType> = (props) => {
                                                 alt={file.url as string}
                                                 src={file.url as string}
                                             />
-                                            <CustomButton onClick={removeFile(file.url)}>
+                                            <CustomButton onClick={removeFile(file.url)} >
                                                 <CloseIcon/>
                                             </CustomButton>
                                         </Box>

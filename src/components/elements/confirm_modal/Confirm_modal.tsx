@@ -1,7 +1,9 @@
 import {FC} from 'react';
-import {CustomModal} from '@src/components/elements/custom_modal/CustomModal';
 import {CustomButton} from '@src/components/elements/custom_button/CustomButton';
 import {ResponsiveModal} from '@src/components/elements/responsive_modal/ResponsiveModal';
+import {Box, Grid, Typography} from '@material-ui/core';
+import {ModalHeader} from '@src/components/cabinet/components/modal_header/ModalHeader';
+import {useStyles} from './useStyles';
 
 type ConfirmModalPropsType = {
     title: string,
@@ -21,25 +23,41 @@ export const ConfirmModal: FC<ConfirmModalPropsType> = (props) => {
         handleClose,
         handleConfirm
     } = props;
+    const classes = useStyles();
 
     return (
         <ResponsiveModal
             openDialog={open}
             handleCloseDialog={handleClose}
+            maxWidth='xs'
         >
-            <div>
-                <div className='title'>
-                    {title}
-                </div>
-                <div className='action-btns'>
-                    <CustomButton onClick={handleClose}>
-                        {cancelTxt}
-                    </CustomButton>
-                    <CustomButton onClick={handleConfirm}>
-                        {confirmTxt}
-                    </CustomButton>
-                </div>
-            </div>
+            <ModalHeader
+                title={title}
+                handleCloseDialog={handleClose}
+            />
+            <Box
+                p={3}
+                mt={2}
+                width={1}
+                className={classes.root}
+            >
+                <Grid container spacing={2} justifyContent='center'>
+                    <Grid item xs={6} sm={5}>
+                        <CustomButton onClick={handleClose} color='silver'>
+                            <Typography variant='subtitle1' component='p'>
+                                {cancelTxt}
+                            </Typography>
+                        </CustomButton>
+                    </Grid>
+                    <Grid item xs={6} sm={5}>
+                        <CustomButton onClick={handleConfirm} color='secondary'>
+                            <Typography variant='subtitle1' component='p'>
+                                {confirmTxt}
+                            </Typography>
+                        </CustomButton>
+                    </Grid>
+                </Grid>
+            </Box>
         </ResponsiveModal>
     );
 };

@@ -77,6 +77,7 @@ export const CustomAccordion: FC<AccordionComponentPropsType> = (props) => {
                                 type='submit'
                                 disabled={isFetch}
                                 className='nav-button'
+                                color='secondary'
                             >
                                 <Typography variant='subtitle1' component='p'>
                                     {t(`post:${submitTxt}`)}

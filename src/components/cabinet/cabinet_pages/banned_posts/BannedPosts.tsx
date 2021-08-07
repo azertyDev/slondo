@@ -13,7 +13,6 @@ import {ErrorCtx} from '@src/context';
 import {useStyles} from './useStyles';
 import {DetailedPostModalContainer} from '@src/components/cabinet/components/detailed_post_modal/DetailedPostModalContainer';
 import {initCardData} from '@src/common_data/common';
-import {CustomModal} from '@src/components/elements/custom_modal/CustomModal';
 import {CustomSnackbar} from '@src/components/elements/snackbar/Snackbar';
 import {unstable_batchedUpdates} from 'react-dom';
 import {ResponsiveModal} from '@src/components/elements/responsive_modal/ResponsiveModal';

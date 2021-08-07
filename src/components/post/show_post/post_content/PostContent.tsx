@@ -32,6 +32,9 @@ import {useStyles} from './useStyles';
 
 type PostContentTypes = {
     post,
+    showPhone,
+    handleShowPhone,
+    authorPhones: {phone: string, additional_number: string}
     setFetchedPostData: () => Promise<void>
 };
 
@@ -45,6 +48,9 @@ export type SlidersRefType = {
 export const PostContent: FC<PostContentTypes> = (props) => {
     const {
         post,
+        showPhone,
+        authorPhones,
+        handleShowPhone,
         setFetchedPostData
     } = props;
 
@@ -94,6 +100,8 @@ export const PostContent: FC<PostContentTypes> = (props) => {
 
     const date = new Date(post.created_at);
     const formatted_date = `${date.getDate()} ${t(`common:${months[date.getMonth()]}`)} ${date.getFullYear()}`;
+    const showPhoneTxt = showPhone ? authorPhones.phone || 'number_not_available' : 'show_phone';
+
 
     const handleComplaintModalOpen = () => {
         if (isAuth) {
@@ -331,10 +339,18 @@ export const PostContent: FC<PostContentTypes> = (props) => {
                 </div>
                 <Hidden lgUp>
                     <div className="contact">
-                        <CustomButton>
-                            <Typography variant='subtitle1'>{t('post:show_phone')}</Typography>
+                        <CustomButton color='primary' onClick={handleShowPhone}>
+                            <Typography variant='subtitle1' component='p'>
+                                <span>{t(showPhoneTxt)}</span>
+                                {showPhone && authorPhones.additional_number && (
+                                    <>
+                                        <br />
+                                        <span>{t(authorPhones.additional_number)}</span>
+                                    </>
+                                )}
+                            </Typography>
                         </CustomButton>
-                        <CustomButton>
+                        <CustomButton disabled color='silver'>
                             <Typography variant='subtitle1'>{t('post:writeMessage')}</Typography>
                         </CustomButton>
                     </div>

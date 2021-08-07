@@ -23,7 +23,7 @@ export const useStyles = makeStyles((theme) => ({
                     ? theme.palette.primary.secondary
                     : props.color === 'silver'
                         ? theme.palette.primary.black
-                        : theme.palette.primary.white
+                        : '#4e4e4e'
         },
         '& > p.MuiTypography-subtitle1': {
             color: ({color}) =>
@@ -31,7 +31,7 @@ export const useStyles = makeStyles((theme) => ({
                     ? theme.palette.primary.white
                     : color === 'silver'
                     ? theme.palette.primary.black
-                    : theme.palette.primary.white
+                    : 'initial'
         },
         '&:disabled': {
             backgroundColor: theme.palette.primary.gray,

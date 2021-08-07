@@ -231,7 +231,7 @@ export const FormPages: FC = () => {
                         </div>
                         {isPreview && (
                             <div className='publish-button-wrapper'>
-                                <CustomButton disabled={isFetch} onClick={toPublish}>
+                                <CustomButton disabled={isFetch} onClick={toPublish} color='secondary'>
                                     <Typography variant='subtitle1' component='p'>
                                         {t('publish')}
                                     </Typography>

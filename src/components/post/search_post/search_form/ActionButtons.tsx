@@ -19,13 +19,13 @@ export const ActionButtons: FC<ActionButtonsPropsType> = (props) => {
     const classes = useStyles({isXs});
     return (
         <Box className={classes.actionButtons}>
-            <CustomButton onClick={handleReset}>
-                <Typography variant='subtitle1'>
+            <CustomButton onClick={handleReset} color='silver'>
+                <Typography variant='subtitle1' component='p'>
                     {t('reset')}
                 </Typography>
             </CustomButton>
-            <CustomButton type='submit'>
-                <Typography variant='subtitle1'>
+            <CustomButton type='submit' color='secondary'>
+                <Typography variant='subtitle1' component='p'>
                     {t('apply')}
                 </Typography>
             </CustomButton>

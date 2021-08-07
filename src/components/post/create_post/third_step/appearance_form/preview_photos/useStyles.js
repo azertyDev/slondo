@@ -11,7 +11,7 @@ export const useStyles = makeStyles((theme) => ({
             right: '5px',
             padding: '5px',
             borderRadius: '50%',
-            backgroundColor: '#EB5757',
+            background: '#EB5757',
             '& > svg': {
                 width: '10px',
                 height: '10px',
