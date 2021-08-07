@@ -101,6 +101,16 @@ export const userCabinetAPI = {
     }
 };
 
+export const postAPI = {
+    complaint: (ads_id: number, complaint: string): Promise<any> => {
+        return instance
+            .post(`regular/post/complaint`, {ads_id, complaint}, setTokenToHeader())
+            .catch(({response}) => {
+                throw response.data;
+            });
+    }
+};
+
 export const userAPI = {
     getPostsByFilters: (params): Promise<any> => {
         return instance

@@ -4,7 +4,7 @@ import {Grid, Typography} from '@material-ui/core';
 import {CommonParamsPropsType} from '@src/components/post/create_post/third_step/params_form/ParamsFormContainer';
 import {getErrorMsg, getFieldsByFilters} from '@src/helpers';
 import {useHandlers} from '@src/hooks/useHandlers';
-import {transportParamsSchema} from '@root/validation_schemas/createPostSchemas';
+import {transportParamsSchema} from '@root/validation_schemas/postSchemas';
 import {CustomFormikProvider} from '@src/components/elements/custom_formik_provider/CustomFormikProvider';
 import {CustomAccordion} from '@src/components/elements/accordion/CustomAccordion';
 import {ParametersIcon} from '@src/components/elements/icons';

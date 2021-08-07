@@ -8,7 +8,7 @@ import {DeliveryIcon, SafeIcon, ExchangeIcon} from '@src/components/elements/ico
 import {site_services} from '@src/common_data/site_services';
 import {ServiceItem} from '@src/components/post/create_post/third_step/common_form/site_services/ServiceItem';
 import {useUserPaymentCard} from '@src/hooks/useUserPaymentCard';
-import {UserPaymentCardModal} from "@src/components/elements/userPaymentCard/UserPaymentCardModal";
+import {SafeDealModal} from "@src/components/elements/safe_deal/SafeDealModal";
 import {useStyles} from './useStyles';
 
 type PaymentDeliveryPropsType = {
@@ -209,7 +209,7 @@ export const SiteServices: FC<PaymentDeliveryPropsType> = (props) => {
                     )}
                 </Grid>
             )}
-            <UserPaymentCardModal
+            <SafeDealModal
                 open={modalOpen}
                 onClose={handleCloseSafeDealModal}
             />

@@ -7,7 +7,7 @@ import {CommonParamsPropsType} from '@src/components/post/create_post/third_step
 import {CustomAccordion} from '@src/components/elements/accordion/CustomAccordion';
 import {ParametersIcon} from '@src/components/elements/icons';
 import {PostTitle} from '@src/components/post/create_post/third_step/params_form/post_title/PostTitle';
-import {paramsFormSchema} from '@root/validation_schemas/createPostSchemas';
+import {paramsFormSchema} from '@root/validation_schemas/postSchemas';
 import {CheckboxSelect} from '@src/components/elements/checkbox_select/CheckboxSelect';
 import {PreviewValues} from '@src/components/post/create_post/third_step/params_form/PreviewValues';
 import {getFieldsByFilters} from '@src/helpers';

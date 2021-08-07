@@ -166,16 +166,14 @@ export const ShowPostContainer: FC = () => {
                 <Grid container spacing={isMdDown ? 0 : 2}>
                     <Grid item xs={12} lg={9}>
                         <PostContent
-                            t={t}
-                            data={data}
+                            post={data}
                             setFetchedPostData={setFetchedPostData}
                         />
                     </Grid>
                     <Hidden mdDown>
                         <Grid item lg={3} xs={12}>
                             <OwnerAuctionInfo
-                                t={t}
-                                data={data}
+                                post={data}
                                 setFetchedPostData={setFetchedPostData}
                             />
                             <div className={classes.adBanner}>

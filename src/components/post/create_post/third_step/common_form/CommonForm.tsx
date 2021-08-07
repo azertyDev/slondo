@@ -14,7 +14,7 @@ import {
     auctionParamsSchema,
     defaultParamsSchema,
     safeDealPriceSchema
-} from '@root/validation_schemas/createPostSchemas';
+} from '@root/validation_schemas/postSchemas';
 import {clearWhiteSpaces, getErrorMsg, numberPrettier, phonePrepare} from '@src/helpers';
 import {PostType} from '@root/interfaces/Post';
 import {WEEK_DAYS} from '@src/common_data/common';
@@ -26,7 +26,7 @@ import {CustomFormikProvider} from '@src/components/elements/custom_formik_provi
 import {FormikTextarea} from '@src/components/elements/formik_textarea/FormikTextarea';
 import {Location} from '@src/components/elements/location/Location';
 import {useRouter} from "next/router";
-import {SAFE_DEAL_LIMIT, TEXT_LIMIT} from "@src/constants";
+import {DESC_MIN, SAFE_DEAL_LIMIT, TEXT_LIMIT} from "@src/constants";
 import {useStyles} from './useStyles';
 
 type DefaultParamsPropsType = {
@@ -405,7 +405,7 @@ export const CommonForm: FC<DefaultParamsPropsType> = (props) => {
                                     limit={TEXT_LIMIT}
                                     onChange={handleInput}
                                     labelTxt={t('filters:description')}
-                                    errorMsg={getErrorMsg(errors.description, touched.description, t)}
+                                    errorMsg={getErrorMsg(errors.description, touched.description, t, DESC_MIN)}
                                 />
                             </Grid>
                             <Grid item container spacing={2}>

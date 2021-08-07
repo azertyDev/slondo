@@ -13,7 +13,7 @@ import {CheckboxSelect} from '@src/components/elements/checkbox_select/CheckboxS
 import {CommonParamsPropsType} from '../../ParamsFormContainer';
 import {optionFields} from '@src/common_data/fields_keys';
 import {useHandlers} from '@src/hooks/useHandlers';
-import {paramsFormSchema} from '@root/validation_schemas/createPostSchemas';
+import {paramsFormSchema} from '@root/validation_schemas/postSchemas';
 import {CustomFormikProvider} from '@src/components/elements/custom_formik_provider/CustomFormikProvider';
 import {ParametersIcon} from '@src/components/elements/icons';
 import {CustomAccordion} from '@src/components/elements/accordion/CustomAccordion';

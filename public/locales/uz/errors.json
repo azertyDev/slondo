@@ -1,4 +1,5 @@
 {
+  "min_chars": "Min. belgilar soni {{value}}",
   "price_not_bee_less": "Narx {{value}} dan kam bo'lmasligi kerak",
   "notMustBeLess0.8": "Qiymat 0.8 dan kam bo'lmasligi kerak",
   "notMustBeLessZero": "Qiymat nol bo'lmasligi kerak",

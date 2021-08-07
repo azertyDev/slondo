@@ -9,7 +9,7 @@ import {DeployedSelect} from '@src/components/elements/deployed_select/DeployedS
 import {CommonParamsPropsType} from '../../../ParamsFormContainer';
 import {useHandlers} from '@src/hooks/useHandlers';
 import {useFormik} from 'formik';
-import {paramsFormSchema} from '@root/validation_schemas/createPostSchemas';
+import {paramsFormSchema} from '@root/validation_schemas/postSchemas';
 import {PostTitle} from '@src/components/post/create_post/third_step/params_form/post_title/PostTitle';
 import {CustomFormikProvider} from '@src/components/elements/custom_formik_provider/CustomFormikProvider';
 import {CustomAccordion} from '@src/components/elements/accordion/CustomAccordion';

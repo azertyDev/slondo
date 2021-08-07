@@ -10,7 +10,7 @@ import {CustomAccordion} from '@src/components/elements/accordion/CustomAccordio
 import {ParametersIcon} from '@src/components/elements/icons';
 import {PostTitle} from '@src/components/post/create_post/third_step/params_form/post_title/PostTitle';
 import {PreviewValues} from '@src/components/post/create_post/third_step/params_form/PreviewValues';
-import {paramsFormSchema} from '@root/validation_schemas/createPostSchemas';
+import {paramsFormSchema} from '@root/validation_schemas/postSchemas';
 import {useUrlParams} from "@src/hooks";
 import {useTranslation} from "next-i18next";
 

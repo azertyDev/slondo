@@ -7,7 +7,7 @@ import {PreviewPhotos} from './preview_photos/PreviewPhotos';
 import {CustomAccordion} from '@src/components/elements/accordion/CustomAccordion';
 import {FileType, IdNameType} from '@root/interfaces/Post';
 import {ViewIcon} from '@src/components/elements/icons';
-import {appearanceSchema} from '@root/validation_schemas/createPostSchemas';
+import {appearanceSchema} from '@root/validation_schemas/postSchemas';
 import {CustomFormikProvider} from '@src/components/elements/custom_formik_provider/CustomFormikProvider';
 import {useTranslation} from 'react-i18next';
 import {useRouter} from 'next/router';

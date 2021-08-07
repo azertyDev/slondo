@@ -1,5 +1,5 @@
 import {FC} from 'react';
-import {UserPaymentCard} from '@src/components/elements/userPaymentCard/UserPaymentCard';
+import {UserPaymentCard} from '@src/components/elements/safe_deal/UserPaymentCard';
 import {useStyles} from './useStyles';
 
 export const SafetyDeal: FC = () => {

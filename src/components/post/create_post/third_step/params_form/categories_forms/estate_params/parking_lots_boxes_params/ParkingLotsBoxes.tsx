@@ -8,7 +8,7 @@ import {getErrorMsg} from '@src/helpers';
 import {CommonParamsPropsType} from '../../../ParamsFormContainer';
 import {useHandlers} from '@src/hooks/useHandlers';
 import {useFormik} from 'formik';
-import {paramsFormSchema} from '@root/validation_schemas/createPostSchemas';
+import {paramsFormSchema} from '@root/validation_schemas/postSchemas';
 import {PostTitle} from '@src/components/post/create_post/third_step/params_form/post_title/PostTitle';
 import {CustomFormikProvider} from '@src/components/elements/custom_formik_provider/CustomFormikProvider';
 import {CustomAccordion} from '@src/components/elements/accordion/CustomAccordion';
@@ -16,7 +16,6 @@ import {ParametersIcon} from '@src/components/elements/icons';
 import {useUrlParams} from "@src/hooks";
 import {useTranslation} from "next-i18next";
 import {useStyles} from './useStyles';
-
 
 export const ParkingLotsBoxes: FC<CommonParamsPropsType> = (props) => {
     const {

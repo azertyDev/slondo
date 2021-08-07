@@ -1,6 +1,6 @@
 import {FC, useContext} from 'react';
 import {unstable_batchedUpdates} from 'react-dom';
-import {Grid, List, ListItem, ListItemText, Typography} from '@material-ui/core';
+import {Grid, List, ListItem, ListItemText} from '@material-ui/core';
 import {useRouter} from 'next/router';
 import {cookies} from '@src/helpers';
 import {CustomBadge} from '@src/components/elements/custom_budge/CustomBadge';
@@ -8,6 +8,7 @@ import {NotesIcon} from '@src/components/elements/icons/NotesIcon';
 import {GavelIcon} from '@src/components/elements/icons/GavelIcon';
 import {FavoriteBorderIcon} from '@src/components/elements/icons/FavoriteBorderIcon';
 import {NotificationIcon} from '@src/components/elements/icons/NotificationIcon';
+import {ErrorIcon, GradeIcon, SupervisorIcon} from '@src/components/elements/icons';
 import {LetterIcon} from '@src/components/elements/icons/LetterIcon';
 import {SafeIcon} from '@src/components/elements/icons/services_icons/SafeIcon';
 import {WalletIcon} from '@src/components/elements/icons/WalletIcon';
@@ -16,9 +17,8 @@ import {SettingsIcon} from '@src/components/elements/icons/SettingsIcon';
 import {PowerIcon} from '@src/components/elements/icons/PowerIcon';
 import {useTranslation} from 'next-i18next';
 import {AuthCtx} from '@src/context/AuthCtx';
-import {useStyles} from './useStyles';
 import {UserCtx} from '@src/context';
-import {ErrorIcon, GradeIcon, SupervisorIcon} from '@src/components/elements/icons';
+import {useStyles} from './useStyles';
 
 type SidebarMenuPropsType = {
     clearAnchor?: () => void
@@ -26,7 +26,7 @@ type SidebarMenuPropsType = {
 
 export const SidebarMenu: FC<SidebarMenuPropsType> = ({clearAnchor}) => {
     const {t} = useTranslation('cabinet');
-    const {push, query: {page}} = useRouter();
+    const {push, asPath, query: {page}} = useRouter();
     const {setIsAuth} = useContext(AuthCtx);
     const {user, clearUser} = useContext(UserCtx);
 
@@ -51,9 +51,15 @@ export const SidebarMenu: FC<SidebarMenuPropsType> = ({clearAnchor}) => {
             !!clearAnchor && clearAnchor();
             cookies.remove('slondo_auth', {path: '/'});
             cookies.remove('slondo_user', {path: '/'});
-            await push('/');
-            clearUser();
-            setIsAuth(false);
+
+            if (asPath.includes('cabinet')) {
+                await push('/');
+            }
+
+            unstable_batchedUpdates(() => {
+                clearUser();
+                setIsAuth(false);
+            });
         });
     };
 
@@ -73,8 +79,8 @@ export const SidebarMenu: FC<SidebarMenuPropsType> = ({clearAnchor}) => {
                                     selected: classes.selected
                                 }}
                             >
-                                <GradeIcon />
-                                <ListItemText primary={t('cabinet:rating')} />
+                                <GradeIcon/>
+                                <ListItemText primary={t('cabinet:rating')}/>
                             </ListItem>
                         </CustomBadge>
                     </Grid>
@@ -88,8 +94,8 @@ export const SidebarMenu: FC<SidebarMenuPropsType> = ({clearAnchor}) => {
                                 selected: classes.selected
                             }}
                         >
-                            <SupervisorIcon />
-                            <ListItemText primary={t('cabinet:subs')} />
+                            <SupervisorIcon/>
+                            <ListItemText primary={t('cabinet:subs')}/>
                         </ListItem>
                     </Grid>
                 </Grid>
@@ -107,8 +113,8 @@ export const SidebarMenu: FC<SidebarMenuPropsType> = ({clearAnchor}) => {
                                     selected: classes.selected
                                 }}
                             >
-                                <ErrorIcon />
-                                <ListItemText primary={t('cabinet:banned')} />
+                                <ErrorIcon/>
+                                <ListItemText primary={t('cabinet:banned')}/>
                             </ListItem>
                         </CustomBadge>
                     </Grid>
@@ -126,8 +132,8 @@ export const SidebarMenu: FC<SidebarMenuPropsType> = ({clearAnchor}) => {
                                 selected: classes.selected
                             }}
                         >
-                            <NotesIcon />
-                            <ListItemText primary={t('myPosts')} />
+                            <NotesIcon/>
+                            <ListItemText primary={t('myPosts')}/>
                         </ListItem>
                     </Grid>
                     <Grid item md={12}>
@@ -140,8 +146,8 @@ export const SidebarMenu: FC<SidebarMenuPropsType> = ({clearAnchor}) => {
                                 selected: classes.selected
                             }}
                         >
-                            <GavelIcon />
-                            <ListItemText primary={t('myAuctions')} />
+                            <GavelIcon/>
+                            <ListItemText primary={t('myAuctions')}/>
                         </ListItem>
                     </Grid>
                     <Grid item md={12}>
@@ -155,8 +161,8 @@ export const SidebarMenu: FC<SidebarMenuPropsType> = ({clearAnchor}) => {
                                     selected: classes.selected
                                 }}
                             >
-                                <ShoppingIcon />
-                                <ListItemText primary={t('myPurchases')} />
+                                <ShoppingIcon/>
+                                <ListItemText primary={t('myPurchases')}/>
                             </ListItem>
                         </CustomBadge>
                     </Grid>
@@ -171,8 +177,8 @@ export const SidebarMenu: FC<SidebarMenuPropsType> = ({clearAnchor}) => {
                                     selected: classes.selected
                                 }}
                             >
-                                <FavoriteBorderIcon />
-                                <ListItemText primary={t('favorite')} />
+                                <FavoriteBorderIcon/>
+                                <ListItemText primary={t('favorite')}/>
                             </ListItem>
                         </CustomBadge>
                     </Grid>
@@ -191,8 +197,8 @@ export const SidebarMenu: FC<SidebarMenuPropsType> = ({clearAnchor}) => {
                                     selected: classes.selected
                                 }}
                             >
-                                <NotificationIcon />
-                                <ListItemText primary={t('notifications')} />
+                                <NotificationIcon/>
+                                <ListItemText primary={t('notifications')}/>
                             </ListItem>
                         </CustomBadge>
                     </Grid>
@@ -208,8 +214,8 @@ export const SidebarMenu: FC<SidebarMenuPropsType> = ({clearAnchor}) => {
                                     selected: classes.selected
                                 }}
                             >
-                                <LetterIcon />
-                                <ListItemText primary={t('messages')} />
+                                <LetterIcon/>
+                                <ListItemText primary={t('messages')}/>
                             </ListItem>
                         </CustomBadge>
                     </Grid>
@@ -228,8 +234,8 @@ export const SidebarMenu: FC<SidebarMenuPropsType> = ({clearAnchor}) => {
                                     selected: classes.selected
                                 }}
                             >
-                                <SafeIcon />
-                                <ListItemText primary={t('safe_deal')} />
+                                <SafeIcon/>
+                                <ListItemText primary={t('safe_deal')}/>
                             </ListItem>
                         </CustomBadge>
                     </Grid>
@@ -245,8 +251,8 @@ export const SidebarMenu: FC<SidebarMenuPropsType> = ({clearAnchor}) => {
                                     selected: classes.selected
                                 }}
                             >
-                                <WalletIcon />
-                                <ListItemText primary={t('paidServices')} />
+                                <WalletIcon/>
+                                <ListItemText primary={t('paidServices')}/>
                             </ListItem>
                         </CustomBadge>
                     </Grid>
@@ -264,8 +270,8 @@ export const SidebarMenu: FC<SidebarMenuPropsType> = ({clearAnchor}) => {
                                 selected: classes.selected
                             }}
                         >
-                            <SettingsIcon />
-                            <ListItemText primary={t('settings')} />
+                            <SettingsIcon/>
+                            <ListItemText primary={t('settings')}/>
                         </ListItem>
                     </Grid>
                     <Grid item md={12} lg={6}>
@@ -274,8 +280,8 @@ export const SidebarMenu: FC<SidebarMenuPropsType> = ({clearAnchor}) => {
                             disableGutters
                             onClick={signout}
                         >
-                            <PowerIcon />
-                            <ListItemText primary={t('exit')} />
+                            <PowerIcon/>
+                            <ListItemText primary={t('exit')}/>
                         </ListItem>
                     </Grid>
                 </Grid>

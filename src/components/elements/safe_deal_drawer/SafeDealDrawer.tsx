@@ -1,6 +1,6 @@
 import {FC} from 'react';
 import {Container, Drawer} from '@material-ui/core';
-import {UserPaymentCard} from '@src/components/elements/userPaymentCard/UserPaymentCard';
+import {UserPaymentCard} from '@src/components/elements/safe_deal/UserPaymentCard';
 import {useStyles} from './useStyles';
 
 type SafeDealDrawerPropsType = {

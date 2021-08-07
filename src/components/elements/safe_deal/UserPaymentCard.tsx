@@ -1,5 +1,6 @@
 import {FC, useContext, useEffect, useState} from 'react';
 import {Form, FormikProvider, useFormik} from 'formik';
+import {unstable_batchedUpdates} from "react-dom";
 import {Card, Grid, TextField, Typography} from '@material-ui/core';
 import {FormikField} from '@src/components/elements/formik_field/FormikField';
 import {CustomButton} from '@src/components/elements/custom_button/CustomButton';
@@ -13,7 +14,6 @@ import ReactInputMask from "react-input-mask";
 import {useUserPaymentCard} from '@src/hooks/useUserPaymentCard';
 import {CustomCircularProgress} from '@src/components/elements/custom_circular_progress/CustomCircularProgress';
 import {ErrorCtx, UserCtx} from "@src/context";
-import {unstable_batchedUpdates} from "react-dom";
 import {paymentCardSchema} from "@root/validation_schemas/paymentCardSchema";
 import {codeSchema} from "@root/validation_schemas/authRegSchema";
 import {useStyles} from './useStyles';
