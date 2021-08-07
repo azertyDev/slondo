@@ -17,6 +17,7 @@ import {Settings} from '@src/components/cabinet/cabinet_pages/settings/Settings'
 import {Subs} from '@src/components/cabinet/cabinet_pages/subs/Subs';
 import {withAuthRedirect} from '@src/hocs/withAuthRedirect';
 import ErrorPage from "@root/pages/_error";
+import {PrevArrowIcon} from "@src/components/elements/icons";
 import {useStyles} from './useStyles';
 
 enum Pages {
@@ -42,13 +43,18 @@ export type CommonModalType = {
 
 const Cabinet: FC = () => {
     const {t} = useTranslation('cabinet');
-    const {page} = useRouter().query;
-    const isSmDown = useMediaQuery(useTheme().breakpoints.down('sm'));
+    const {query, push} = useRouter();
+    const {page} = query;
+    const isXsDown = useMediaQuery(useTheme().breakpoints.down('xs'));
 
     const isRootPage = page === undefined;
     const existPage = isRootPage || Pages[page as string] !== undefined;
 
     const title = `${t('my_cabinet')} ${page ? `| ${t(page)}` : ''}`;
+
+    const handlePrev = () => {
+        push('/cabinet', undefined, {shallow: true});
+    };
 
     const getPage = () => {
         switch (page as keyof typeof Pages) {
@@ -82,26 +88,33 @@ const Cabinet: FC = () => {
         existPage
             ? <MainLayout title={title}>
                 <div className={classes.root}>
-                    <Grid container>
-                        <Hidden smDown>
-                            <Grid item sm={5} md={3}>
-                                <CabinetSidebar />
+                    <Grid container spacing={1}>
+                        {(isRootPage && isXsDown || !isXsDown) && (
+                            <Grid item xs={12} sm={4} md={3}>
+                                <CabinetSidebar/>
                             </Grid>
-                        </Hidden>
-                        <Grid item xs={12} sm={12} md={9} className='pl-16'>
-                            {isRootPage
-                                ? <div>{t('select_page')}</div>
-                                : <>
-                                    <Grid item xs={12}>
-                                        <Typography variant="h6" className="menu-title">
-                                            {t(page)}
-                                        </Typography>
-                                    </Grid>
-                                    <Grid item xs={12}>
-                                        {getPage()}
-                                    </Grid>
-                                </>}
-                        </Grid>
+                        )}
+                        {!(isRootPage && isXsDown) && (
+                            <Grid item xs={12} sm={8} md={9} className='pl-16'>
+                                {isRootPage
+                                    ? <Typography>
+                                        {t('select_page')}
+                                    </Typography>
+                                    : <>
+                                        <Grid item xs={12}>
+                                            {isXsDown && (
+                                                <PrevArrowIcon onClick={handlePrev}/>
+                                            )}
+                                            <Typography variant="h6" className="menu-title">
+                                                {t(page)}
+                                            </Typography>
+                                        </Grid>
+                                        <Grid item xs={12}>
+                                            {getPage()}
+                                        </Grid>
+                                    </>}
+                            </Grid>
+                        )}
                     </Grid>
                 </div>
             </MainLayout>

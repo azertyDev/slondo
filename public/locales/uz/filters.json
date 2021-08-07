@@ -515,6 +515,9 @@
     }
   },
   "transport": {
+    "type": {
+      "name": "Transport turi"
+    },
     "color": {
       "name": "Rangi"
     },

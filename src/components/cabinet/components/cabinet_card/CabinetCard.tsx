@@ -80,9 +80,9 @@ export const CabinetCard: FC<CabinetCardPropsType> = (props) => {
                 <ListCard cardData={cardData}/>
                 <Grid container spacing={1} className='bottom-btns'>
                     <Hidden mdUp>
-                        <Grid item xs={5} sm={4} container justify='center'>
+                        <Grid item xs={5} sm={4} container justifyContent='center'>
                             {page?.includes('favorite')
-                                ? <Grid item xs={6} container justify='center'>
+                                ? <Grid item xs={6} container justifyContent='center'>
                                     <CustomButton
                                         onClick={handleOpenModal(cardData.id)}
                                     >
@@ -91,7 +91,7 @@ export const CabinetCard: FC<CabinetCardPropsType> = (props) => {
                                 </Grid>
                                 : <>
                                     {handleNotificationsOpen && (
-                                        <Grid item xs={6} container justify='center'>
+                                        <Grid item xs={6} container justifyContent='center'>
                                             <CustomButton
                                                 className='icons'
                                                 onClick={handleNotificationsOpen}
@@ -102,7 +102,7 @@ export const CabinetCard: FC<CabinetCardPropsType> = (props) => {
                                         </Grid>
                                     )}
                                     {creator && isPublic && (
-                                        <Grid item xs={6} container justify='center'>
+                                        <Grid item xs={6} container justifyContent='center'>
                                             <CustomButton
                                                 className='icons'
                                                 onClick={handleSettingsOpen}

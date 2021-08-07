@@ -123,7 +123,7 @@ export const PostContent: FC<PostContentTypes> = (props) => {
             setErrorMsg(e.message);
         }
     };
-    console.log(post);
+
     const parameterItems = Object.keys(model ?? {}).reduce((items, key, i) => {
         const isBooleanKey = booleanFields.some(f => f === key);
         const isNoTrans = noTranslatableFields.some(f => f === key);
