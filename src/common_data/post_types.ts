@@ -38,16 +38,28 @@ export const postTypes: PostType[] = [
         ],
         expired: [
             {
-                id: 1,
-                hours: 10
+                id: 2,
+                hours: 24
             },
             {
-                id: 2,
-                hours: 15
+                id: 3,
+                hours: 72
+            },
+            {
+                id: 4,
+                hours: 168
+            },
+            {
+                id: 5,
+                hours: 336
+            },
+            {
+                id: 6,
+                hours: 504
             },
             {
                 id: 7,
-                hours: 5
+                hours: 720
             }
         ],
         image: {
@@ -73,16 +85,28 @@ export const postTypes: PostType[] = [
         ],
         expired: [
             {
-                id: 4,
-                hours: 10
-            },
-            {
-                id: 5,
-                hours: 15
-            },
-            {
                 id: 8,
-                hours: 5
+                hours: 24
+            },
+            {
+                id: 9,
+                hours: 72
+            },
+            {
+                id: 10,
+                hours: 168
+            },
+            {
+                id: 11,
+                hours: 336
+            },
+            {
+                id: 12,
+                hours: 504
+            },
+            {
+                id: 13,
+                hours: 720
             }
         ],
         image: {
