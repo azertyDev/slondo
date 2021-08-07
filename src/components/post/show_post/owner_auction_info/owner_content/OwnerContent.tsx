@@ -7,7 +7,7 @@ import {UserInfoWithAvatar} from '@src/components/elements/user_info_with_avatar
 import {useModal} from '@src/hooks/useModal';
 import {AuthCtx} from "@src/context/AuthCtx";
 import {SafeDealModal} from "@src/components/elements/safe_deal/SafeDealModal";
-import {INCOGNITO_PHONE} from "@src/constants";
+import {INCOGNITO_PHONES} from "@src/constants";
 import {useStyles} from './useStyles';
 
 type OwnerPropsType = {
@@ -40,7 +40,7 @@ export const OwnerContent: FC<OwnerPropsType> = (props) => {
 
     const isPublic = status === 'public';
 
-    const isIncognito = INCOGNITO_PHONE === authorPhones.phone;
+    const isIncognito = INCOGNITO_PHONES.some(p => p === authorPhones.phone);
 
     const {auth: {isAuth}, setAuthModalOpen} = useContext(AuthCtx);
 
