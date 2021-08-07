@@ -8,12 +8,12 @@ export const useStyles = makeStyles(() => ({
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
-            background: 'url(/img/banner.png)',
+            background: '#F2F2F2',
             backgroundRepeat: 'no-repeat',
             borderRadius: '10px',
             '& > h5.MuiTypography-h5': {
                 color: '#7DBCF6',
-                fontWeight: '700',
+                fontWeight: '700'
             }
         }
     },

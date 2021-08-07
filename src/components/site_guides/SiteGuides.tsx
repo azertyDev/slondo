@@ -1,5 +1,5 @@
 import {cloneElement} from 'react';
-import {AppBar, Container, Grid, Toolbar, useScrollTrigger} from '@material-ui/core';
+import {AppBar, Container, Grid, Toolbar, Typography, useScrollTrigger} from '@material-ui/core';
 import Link from 'next/link';
 import {Logo} from '../elements/icons';
 import {Localization} from '../header/top/localization/Localization';
@@ -46,17 +46,17 @@ export const SiteGuides = (props) => {
                 <AppBar color='transparent' elevation={0} position='sticky'>
                     <Container maxWidth='lg'>
                         <Toolbar disableGutters className='toolbar' variant="dense">
-                            <Grid container>
+                            <Grid container spacing={3}>
                                 <Grid
                                     item
                                     xs={6}
                                     container
-                                    justify='flex-start'
+                                    justifyContent='flex-start'
                                     alignItems='center'
                                 >
                                     <Link href='/'>
                                         <a>
-                                            <Logo/>
+                                            <Logo />
                                         </a>
                                     </Link>
                                 </Grid>
@@ -64,10 +64,10 @@ export const SiteGuides = (props) => {
                                     item
                                     xs={6}
                                     container
-                                    justify='flex-end'
+                                    justifyContent='flex-end'
                                     alignItems='center'
                                 >
-                                    <Localization/>
+                                    <Localization />
                                 </Grid>
                             </Grid>
                         </Toolbar>

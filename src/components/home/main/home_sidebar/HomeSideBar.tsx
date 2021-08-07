@@ -20,9 +20,9 @@ export const HomeSidebar: FC = () => {
                 </Typography>
                 <SocialsBlock/>
             </section>
-            <section className="banner-wrapper">
-                <Banner height="483px"/>
-            </section>
+            {/*<section className="banner-wrapper">*/}
+            {/*    <Banner height="483px"/>*/}
+            {/*</section>*/}
             <ScrollTop/>
         </div>
     );

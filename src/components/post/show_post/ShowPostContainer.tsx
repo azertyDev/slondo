@@ -214,9 +214,9 @@ export const ShowPostContainer: FC = () => {
                                 handleShowPhone={handleShowPhone}
                                 setFetchedPostData={setFetchedPostData}
                             />
-                            <div className={classes.adBanner}>
-                                <Banner height="424px" />
-                            </div>
+                            {/*<div className={classes.adBanner}>*/}
+                            {/*    <Banner height="424px" />*/}
+                            {/*</div>*/}
                         </Grid>
                     </Hidden>
                 </Grid>

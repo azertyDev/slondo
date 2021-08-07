@@ -73,7 +73,7 @@ export const useStyles = makeStyles((theme) => ({
                 position: 'relative',
                 width: '170px',
                 height: '38px',
-                backgroundColor: theme.palette.primary.white,
+                background: theme.palette.primary.white,
                 boxShadow: '0px 0px 15px rgba(0, 0, 0, 0.1)',
                 border: 'none',
                 borderRadius: '100px',

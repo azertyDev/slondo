@@ -1,7 +1,7 @@
 import React from 'react'
 import Tooltip from '@material-ui/core/Tooltip';
 import ClickAwayListener from '@material-ui/core/ClickAwayListener';
-import ShareIcon from "@material-ui/icons/Share";
+import {Share} from '@material-ui/icons';
 
 const CustomTooltip = ({title, arrow}) => {
 
@@ -17,7 +17,7 @@ const CustomTooltip = ({title, arrow}) => {
 
     return (
         <ClickAwayListener onClickAway={handleTooltipClose}>
-            <div>
+            <>
                 <Tooltip
                     PopperProps={{
                         disablePortal: true,
@@ -30,9 +30,9 @@ const CustomTooltip = ({title, arrow}) => {
                     title={title}
                     arrow={arrow}
                 >
-                    <ShareIcon onClick={handleTooltipOpen} style={{paddingTop: 6}} />
+                    <Share onClick={handleTooltipOpen} />
                 </Tooltip>
-            </div>
+            </>
         </ClickAwayListener>
     )
 }

@@ -344,6 +344,17 @@ export const useStyles = makeStyles((theme) => ({
                     fontSize: 'calc(14px + 2 * (100vw / 1280))',
                     whiteSpace: 'nowrap'
                 },
+                '& svg': {
+                    marginRight: 10
+                },
+                '&:disabled': {
+                    opacity: '0.5',
+                    background: '#f2f2f2',
+                    border: `1px solid #f2f2f2`,
+                    '& p': {
+                        color: theme.palette.primary.black
+                    }
+                },
                 '&:first-child': {
                     [theme.breakpoints.down('xs')]: {
                         width: '49%'

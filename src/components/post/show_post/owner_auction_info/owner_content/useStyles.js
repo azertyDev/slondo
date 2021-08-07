@@ -33,14 +33,25 @@ export const useStyles = makeStyles((theme) => ({
                 width: '100%',
                 border: 'none',
                 height: 44,
+                boxShadow: ' 0px 1px 2px rgb(0 0 0 / 25%)',
                 '&:not(:last-child)': {
                     marginBottom: '10px'
                 },
                 '&.contact-btn': {
-                    background: 'none',
                     border: `1px solid ${theme.palette.primary.secondary}`,
-                    '& .MuiTypography-subtitle1': {
+                    '& p': {
                         color: '#7461BA'
+                    },
+                    '& svg': {
+                        marginRight: 10
+                    },
+                    '&:disabled': {
+                        opacity: '0.5',
+                        background: '#f2f2f2',
+                        border: `1px solid #f2f2f2`,
+                        '& p': {
+                            color: theme.palette.primary.black
+                        }
                     }
                 },
                 '&.safe-shopping-btn': {

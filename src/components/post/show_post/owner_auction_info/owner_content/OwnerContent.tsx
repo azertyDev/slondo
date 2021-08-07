@@ -2,7 +2,7 @@ import {FC, useContext} from 'react';
 import {WithT} from 'i18next';
 import {Box, Hidden, Typography} from '@material-ui/core';
 import {CustomButton} from '@src/components/elements/custom_button/CustomButton';
-import {SafeIcon} from '@root/src/components/elements/icons';
+import {LetterIcon, SafeIcon} from '@root/src/components/elements/icons';
 import {UserInfoWithAvatar} from '@src/components/elements/user_info_with_avatar/UserInfoWithAvatar';
 import {useModal} from '@src/hooks/useModal';
 import {AuthCtx} from "@src/context/AuthCtx";
@@ -80,10 +80,12 @@ export const OwnerContent: FC<OwnerPropsType> = (props) => {
                     {isPublic && !creator && (
                         <>
                             <CustomButton
+                                disabled
                                 color="primary"
                                 className='contact-btn'
                             >
-                                <Typography variant="subtitle1" color="initial">
+                                <LetterIcon />
+                                <Typography variant="subtitle1" component='p'>
                                     {t('common:writeToSeller')}
                                 </Typography>
                             </CustomButton>

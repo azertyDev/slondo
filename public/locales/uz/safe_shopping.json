@@ -50,5 +50,17 @@
             "title": "Oldindan to'lov va garovni amalga oshirmang.",
             "description": "Agar Siz bozor narxidan ancha arzon narzda mahsulot sotilayotgani to'g'risidagi e'longa duch kelsangiz, juda e'tiborli bo'ling. Sotuvch Siz bilan bog'lanib, bank kartasiga pul o'tkazishni yoki oldindan to'lov qilishni so'rashi mumkin va buni mahsulotga bo'lgan talabning yo'qoriligi  va oldindan to'lov qilish- xaridni rostdan ham amalga oshirmoqchi ekanligizga ishonch hosil qilishlari uchun zarurat deb tushuntirishadi. Bunga hech qachon rozi bo'lmang."
         }
-    }
+    },
+    "auction": {
+        "hero": {
+            "title": "Auksion",
+            "description": "Siz aniq narxini bilmagan mahsulotni sotish yoki sotib olishning foydali usulidir."
+        },
+        "advice_1": "Ro’yxatdan o’ting va Auktsionlarda ishtirok eting.",
+        "advice_2": "Kerakli mahsulotni toping va pul tiking.",
+        "advice_3": "Savdo muhlati tugagach, eng baland narx bergan g’olib bo’ladi.",
+        "advice_4": "Kutishga vaqtingiz yo’qmi? Narx taklif qiling yoki «Hozir sotib olish»ni qo’llang.",
+        "advice_5": ""
+    },
+    "completeGuide": "Batafsil ma'lumot"
 }
