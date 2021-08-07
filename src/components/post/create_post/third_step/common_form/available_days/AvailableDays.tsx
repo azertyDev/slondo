@@ -34,7 +34,7 @@ export const AvailableDays: FC<AvailableDaysPropsType> = (props) => {
                     </strong>
                 </Typography>
                 <Switch
-                    color='primary'
+                    color='secondary'
                     checked={isActive}
                     onChange={switchActive}
                 />

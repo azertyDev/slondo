@@ -1,7 +1,7 @@
 import {FC, useEffect} from 'react';
 import {useFormik} from 'formik';
 import {unstable_batchedUpdates} from 'react-dom';
-import {Box, Grid, List, ListItem, Typography} from '@material-ui/core';
+import {Box, Grid, Typography} from '@material-ui/core';
 import {UPLOAD_FILES_LIMIT} from '@src/constants';
 import {PreviewPhotos} from './preview_photos/PreviewPhotos';
 import {CustomAccordion} from '@src/components/elements/accordion/CustomAccordion';
@@ -43,7 +43,7 @@ export const AppearanceForm: FC<AppearanceFormPropsType> = (props) => {
         slidesToShow: 10,
         slidesToScroll: 1,
         centerPadding: '0px',
-        centerMode: true,
+        centerMode: false,
         focusOnSelect: true,
         adaptiveHeight: false,
         responsive: [

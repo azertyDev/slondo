@@ -9,12 +9,12 @@ export const useStyles = makeStyles((theme) => ({
             boxShadow: '0px 1px 2px rgba(0, 0, 0, 0.1)',
             borderRadius: '5px',
             '& div.MuiGrid-item': {
-                '&:first-child': {
+                '&:nth-child(odd)': {
                     '& button': {
                         borderRadius: '5px 0px 0px 5px'
                     }
                 },
-                '&:last-child': {
+                '&:nth-child(even)': {
                     '& button': {
                         borderRadius: '0px 5px 5px 0px'
                     }

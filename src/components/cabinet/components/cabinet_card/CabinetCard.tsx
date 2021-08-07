@@ -127,7 +127,7 @@ export const CabinetCard: FC<CabinetCardPropsType> = (props) => {
                                 className='unfold-btn'
                                 onClick={handleDetailedOpen}
                             >
-                                <Typography variant='subtitle1'>
+                                <Typography variant='subtitle1' component='p'>
                                     {t('cabinet:unfold')}
                                 </Typography>&nbsp;
                                 <ChevronRight color='action' />
@@ -151,7 +151,7 @@ export const CabinetCard: FC<CabinetCardPropsType> = (props) => {
                                             className='icons'
                                         >
                                             <RocketIcon/>
-                                            <Typography variant='subtitle1'>
+                                            <Typography variant='subtitle1' component='p'>
                                                 Рекламировать
                                             </Typography>
                                         </CustomButton>

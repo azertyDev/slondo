@@ -1,6 +1,6 @@
 import {makeStyles} from '@material-ui/core/styles';
 
-export const useStyles = makeStyles((theme) => ({
+export const useStyles = makeStyles(() => ({
     root: {
         '& div.title-wrapper': {
             marginBottom: '15px'
@@ -10,13 +10,5 @@ export const useStyles = makeStyles((theme) => ({
                 marginBottom: '15px'
             }
         },
-        '& div.publish-button-wrapper': {
-            '& button': {
-                background: theme.palette.primary.createAdBtnColor,
-                '& p': {
-                    color: theme.palette.primary.white
-                }
-            }
-        }
     }
 }));

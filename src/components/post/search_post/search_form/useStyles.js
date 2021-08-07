@@ -22,16 +22,8 @@ export const useStyles = makeStyles(() => ({
         marginTop: '20px',
         '& button': {
             width: props => props.isXs ? '100px' : '140px',
-            '&:first-child': {
-                marginRight: 20,
-                background: '#E5E5E5'
-
-            },
-            '&:last-child': {
-                background: '#7DBCF6',
-                '& .MuiTypography-subtitle1': {
-                    color: '#fff'
-                }
+            '&:not(:last-child)': {
+                marginRight: 20
             }
         }
     }

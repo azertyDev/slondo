@@ -7662,22 +7662,22 @@
       "name": "Yoqalar va shilinglar"
     },
     "toilet_fillers": {
-      "name": "Hojathona va napolnitellar"
+      "name": "Hojatxona va napolnitellar"
     },
     "other": {
       "name": "Boshqalar"
     },
     "breed": {
-      "name": ""
+      "name": "Zoti"
     },
     "condition": {
-      "name": ""
+      "name": "Holati"
     },
     "new": {
-      "name": ""
+      "name": "Yangi"
     },
     "used": {
-      "name": ""
+      "name": "Ishlatilgan"
     }
   },
   "engine_capacity": "litrda dvigatel hajmi",

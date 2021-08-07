@@ -6,7 +6,7 @@ import {TabsContent} from '@src/components/cabinet/cabinet_pages/TabsContent';
 import {CircularProgress, Tab, Tabs, Typography} from "@material-ui/core";
 import {useTranslation} from 'react-i18next';
 import {ITEMS_PER_PAGE} from '@src/constants';
-import {InitPostsType, TabsDataType} from '@root/interfaces/Cabinet';
+import { TabsDataType} from '@root/interfaces/Cabinet';
 import {CardDataType} from '@root/interfaces/CardData';
 import {myUzCardAPI, userCabinetAPI} from '@src/api/api';
 import {CabinetCard} from '@src/components/cabinet/components/cabinet_card/CabinetCard';
@@ -146,12 +146,14 @@ export const MyPurchases: FC = () => {
                                 <CustomButton
                                     disabled={isFetch}
                                     onClick={confirmModalOpen(post)}
+                                    // color='silver'
                                 >
                                     {t('common:cancel')}
                                 </CustomButton>
                                 <CustomButton
                                     disabled={isFetch}
                                     onClick={confirmModalOpen(post, true)}
+                                    // color='secondary'
                                 >
                                     {t('common:perform')}
                                 </CustomButton>
