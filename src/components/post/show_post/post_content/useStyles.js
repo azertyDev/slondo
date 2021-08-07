@@ -339,20 +339,25 @@ export const useStyles = makeStyles((theme) => ({
                 marginRight: '6px',
                 borderRadius: '5px',
                 width: '50%',
-                '& > h6': {
+                '& > p': {
                     color: '#fff',
                     fontSize: 'calc(14px + 2 * (100vw / 1280))',
                     whiteSpace: 'nowrap'
-
                 },
                 '&:first-child': {
                     [theme.breakpoints.down('xs')]: {
                         width: '49%'
                     },
                     padding: '11px 39px',
-                    background: 'linear-gradient(49.94deg, #675EAA 19.03%, #AD66D5 72.72%)'
                 },
                 '&:last-child': {
+                    '&:disabled': {
+                        background: theme.palette.primary.gray,
+                        border: '1px solid #C0C0C0',
+                        '& h6': {
+                            color: theme.palette.primary.black
+                        }
+                    },
                     [theme.breakpoints.down('xs')]: {
                         width: '49%'
                     },

@@ -1,18 +1,19 @@
-import {FC, useContext, useState} from "react";
-import {Typography} from "@material-ui/core";
-import {CustomButton} from "@src/components/elements/custom_button/CustomButton";
-import {ResponsiveModal} from "@src/components/elements/responsive_modal/ResponsiveModal";
-import {useTranslation} from "next-i18next";
-import {useFormik} from "formik";
-import {complaintSchema} from "@root/validation_schemas/postSchemas";
-import {CustomFormikProvider} from "@src/components/elements/custom_formik_provider/CustomFormikProvider";
-import {FormikField} from "@src/components/elements/formik_field/FormikField";
-import {TEXT_LIMIT} from "@src/constants";
+import {FC, useContext, useState} from 'react';
+import {Box, Grid, Typography} from '@material-ui/core';
+import {CustomButton} from '@src/components/elements/custom_button/CustomButton';
+import {ResponsiveModal} from '@src/components/elements/responsive_modal/ResponsiveModal';
+import {useTranslation} from 'next-i18next';
+import {useFormik} from 'formik';
+import {complaintSchema} from '@root/validation_schemas/postSchemas';
+import {CustomFormikProvider} from '@src/components/elements/custom_formik_provider/CustomFormikProvider';
+import {FormikField} from '@src/components/elements/formik_field/FormikField';
+import {TEXT_LIMIT} from '@src/constants';
 import {useStyles} from './useStyles';
-import {getErrorMsg} from "@src/helpers";
-import {postAPI} from "@src/api/api";
-import {ErrorCtx} from "@src/context";
-import {unstable_batchedUpdates} from "react-dom";
+import {getErrorMsg} from '@src/helpers';
+import {postAPI} from '@src/api/api';
+import {ErrorCtx} from '@src/context';
+import {unstable_batchedUpdates} from 'react-dom';
+import {ModalHeader} from '@src/components/cabinet/components/modal_header/ModalHeader';
 
 type ComplaintModalProps = {
     postId: number,
@@ -82,30 +83,36 @@ export const ComplaintModal: FC<ComplaintModalProps> = (props) => {
             openDialog={open}
             handleCloseDialog={handleClose}
         >
-            <CustomFormikProvider formik={formik}>
-                <div className={classes.root}>
-                    <Typography variant='h6'>
-                        {t('post:indicateReason')}
-                    </Typography>
-                    <div className='textarea'>
-                        <FormikField
-                            t={t}
-                            rows={10}
-                            multiline
-                            name='complaint'
-                            value={complaint}
-                            limit={TEXT_LIMIT}
-                            placeholder={t('post:describeReason')}
-                            errorMsg={getErrorMsg(errors.complaint, touched.complaint, t)}
-                        />
-                    </div>
-                    <CustomButton disabled={isFetch} type='submit'>
-                        <Typography variant='subtitle1'>
-                            {t('common:send')}
-                        </Typography>
-                    </CustomButton>
-                </div>
-            </CustomFormikProvider>
+            <ModalHeader
+                title={t('post:indicateReason')}
+                handleCloseDialog={handleClose}
+            />
+            <Box className={classes.root} p={2} width={1}>
+                <CustomFormikProvider formik={formik}>
+                    <Grid container spacing={2} justifyContent='center'>
+                        <Grid item xs={12}>
+                            <FormikField
+                                t={t}
+                                rows={10}
+                                multiline
+                                name='complaint'
+                                value={complaint}
+                                limit={TEXT_LIMIT}
+                                fullWidth
+                                placeholder={t('post:describeReason')}
+                                errorMsg={getErrorMsg(errors.complaint, touched.complaint, t)}
+                            />
+                        </Grid>
+                        <Grid item xs={6} sm={5}>
+                            <CustomButton disabled={isFetch} type='submit' color='secondary'>
+                                <Typography variant='subtitle1' component='p'>
+                                    {t('common:send')}
+                                </Typography>
+                            </CustomButton>
+                        </Grid>
+                    </Grid>
+                </CustomFormikProvider>
+            </Box>
         </ResponsiveModal>
     );
 };

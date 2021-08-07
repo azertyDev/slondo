@@ -91,9 +91,41 @@ export const ShowPostContainer: FC = () => {
             }
         }
     };
+    const initAuthorPhones = {
+        showPhone: false,
+        phone: null,
+        additional_number: null
+    };
 
+    const [isFetch, setIsFetch] = useState(false);
     const [postData, setPostData] = useState(initialPostData);
+    const [authorPhones, setAuthorPhones] = useState(initAuthorPhones);
+
     const {data} = postData;
+    const {showPhone} = authorPhones;
+
+    const handleShowPhone = async () => {
+        try {
+            setIsFetch(true);
+            const phones = !showPhone ? await userAPI.getPostAuthorPhones(postData.data.id) : initAuthorPhones;
+            setIsFetch(false);
+            setAuthorPhones({
+                ...authorPhones,
+                ...phones,
+                showPhone: !showPhone
+            });
+        } catch ({response: {post}}) {
+            setIsFetch(false);
+            if (post.message !== 'forbidden:') {
+                setErrorMsg(post.message);
+            } else {
+                setAuthorPhones({
+                    ...initAuthorPhones,
+                    showPhone: !showPhone
+                });
+            }
+        }
+    };
 
     const setFetchedPostData = async () => {
         try {
@@ -167,6 +199,9 @@ export const ShowPostContainer: FC = () => {
                     <Grid item xs={12} lg={9}>
                         <PostContent
                             post={data}
+                            showPhone={showPhone}
+                            handleShowPhone={handleShowPhone}
+                            authorPhones={authorPhones}
                             setFetchedPostData={setFetchedPostData}
                         />
                     </Grid>
@@ -174,6 +209,9 @@ export const ShowPostContainer: FC = () => {
                         <Grid item lg={3} xs={12}>
                             <OwnerAuctionInfo
                                 post={data}
+                                showPhone={showPhone}
+                                authorPhones={authorPhones}
+                                handleShowPhone={handleShowPhone}
                                 setFetchedPostData={setFetchedPostData}
                             />
                             <div className={classes.adBanner}>

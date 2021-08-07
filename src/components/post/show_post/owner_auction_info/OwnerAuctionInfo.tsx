@@ -9,13 +9,19 @@ import {ErrorCtx} from "@src/context";
 import {useStyles} from './useStyles';
 
 type OwnerAuctionInfoPropsType = {
-    post: any
+    post: any,
+    showPhone?,
+    authorPhones?,
+    handleShowPhone?,
     setFetchedPostData: () => Promise<void>
 };
 
 export const OwnerAuctionInfo: FC<OwnerAuctionInfoPropsType> = (props) => {
     const {
         post,
+        showPhone,
+        authorPhones,
+        handleShowPhone,
         setFetchedPostData
     } = props;
 
@@ -24,44 +30,11 @@ export const OwnerAuctionInfo: FC<OwnerAuctionInfoPropsType> = (props) => {
     const {setErrorMsg} = useContext(ErrorCtx);
     const isAuction = post.ads_type.mark === 'auc' || post.ads_type.mark === 'exauc';
 
-    const initAuthorPhones = {
-        showPhone: false,
-        phone: null,
-        additional_number: null
-    };
-
-    const [isFetch, setIsFetch] = useState(false);
-    const [authorPhones, setAuthorPhones] = useState(initAuthorPhones);
-    const {showPhone} = authorPhones;
-
     const handleFollow = (userId) => async () => {
         try {
             await userAPI.follow(userId);
         } catch (e) {
             setErrorMsg(e);
-        }
-    };
-
-    const handleShowPhone = async () => {
-        try {
-            setIsFetch(true);
-            const phones = !showPhone ? await userAPI.getPostAuthorPhones(post.id) : initAuthorPhones;
-            setIsFetch(false);
-            setAuthorPhones({
-                ...authorPhones,
-                ...phones,
-                showPhone: !showPhone
-            });
-        } catch ({response: {post}}) {
-            setIsFetch(false);
-            if (post.message !== 'forbidden:') {
-                setErrorMsg(post.message);
-            } else {
-                setAuthorPhones({
-                    ...initAuthorPhones,
-                    showPhone: !showPhone
-                });
-            }
         }
     };
 
