@@ -6573,6 +6573,12 @@
     }
   },
   "hobbies": {
+    "chess_games": {
+      "name": "Shaxmat o'yinlari"
+    },
+    "figurines_figurines": {
+      "name": "Haykalchalar"
+    },
     "educational_literature": {
       "name": "O’quv adabiyoti"
     },

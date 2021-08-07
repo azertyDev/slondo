@@ -3,7 +3,7 @@ import {makeStyles} from '@material-ui/core/styles';
 export const useStyles = makeStyles((theme) => ({
     root: {
         '& div.paper-block': {
-            height: '100%',
+            height: 'auto',
             padding: '15px',
             display: 'flex',
             borderRadius: 5,
@@ -84,23 +84,15 @@ export const useStyles = makeStyles((theme) => ({
         }
     },
     userInfoWrapper: {
-        '& div.user-info-title': {
-            display: 'flex',
-            '& h6.all-offers': {
-                color: theme.palette.primary.secondary,
-                textDecoration: 'underline',
-                cursor: 'pointer'
-            }
+        '& h6.all-offers': {
+            color: theme.palette.primary.secondary,
+            textDecoration: 'underline',
+            cursor: 'pointer'
         }
     },
     actionButtons: {
         '& button': {
             width: '100%',
-            marginTop: 8,
-            '&.reject-btn': {
-                background: '#F9F9F9',
-                boxShadow: '0px 1px 2px rgba(0, 0, 0, 0.25)'
-            }
         }
     }
 }));

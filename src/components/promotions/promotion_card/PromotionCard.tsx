@@ -79,10 +79,10 @@ export const PromotionCard = () => {
                                 >
                                     {resize
                                         ? <Typography variant='subtitle1'>
-                                            {t('common:showMore')}
+                                            {t('common:hide')}
                                         </Typography>
                                         : <Typography variant='subtitle1'>
-                                            {t('common:hide')}
+                                            {t('common:showMore')}
                                         </Typography>}
                                 </CustomButton>
                             )}

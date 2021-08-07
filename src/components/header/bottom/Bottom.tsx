@@ -194,20 +194,20 @@ const Bottom = (props) => {
                             xs={12}
                             sm={7}
                         >
-                            <Grid item sm={4} md={3}>
-                                <Link href="/promotions">
-                                    <a>
-                                        <SurpriseIcon/>
-                                        <Typography variant="subtitle1">
-                                            {t('actions')}
-                                        </Typography>
-                                    </a>
-                                </Link>
-                            </Grid>
+                            {/*<Grid item sm={4} md={3}>*/}
+                            {/*    <Link href="/promotions">*/}
+                            {/*        <a>*/}
+                            {/*            <SurpriseIcon/>*/}
+                            {/*            <Typography variant="subtitle1">*/}
+                            {/*                {t('actions')}*/}
+                            {/*            </Typography>*/}
+                            {/*        </a>*/}
+                            {/*    </Link>*/}
+                            {/*</Grid>*/}
                             <Grid item sm={4} md={3}>
                                 <Link href="/help">
                                     <a className={pathname === '/help' ? 'selected' : ''}>
-                                        <QuestionIcon/>
+                                        <QuestionIcon />
                                         <Typography variant="subtitle1">
                                             {t('help')}
                                         </Typography>

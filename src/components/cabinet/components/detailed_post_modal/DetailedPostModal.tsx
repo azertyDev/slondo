@@ -201,67 +201,74 @@ export const DetailedPostModal: FC<DetailedPostViewPropsType> = (props) => {
                                         />}
                                 </Grid>
                             )}
-                            <Grid item xs={12} md={6} className={classes.userInfoWrapper}>
-                                <div className='user-info-title'>
-                                    <Typography variant='subtitle2' gutterBottom>
-                                        {t(getUserInfoTitle())}
-                                    </Typography>
+                            <Grid item xs={12} md={6} container spacing={1} className={classes.userInfoWrapper}>
+                                <Grid item xs={12} container className='user-info-title'>
+                                    <Grid item xs={8}>
+                                        <Typography variant='subtitle2'>
+                                            {t(getUserInfoTitle())}
+                                            {hasOffer && !winner && isUserCreator && (
+                                                <span>&nbsp;{t('offer_price', {price: numberPrettier(offer?.price)})}</span>
+                                            )}
+                                        </Typography>
+                                    </Grid>
                                     {isUserCreator && hasOffer && !winner && (
-                                        <>
-                                            <Typography variant='subtitle2'>
-                                                &nbsp;{t('offer_price', {price: numberPrettier(offer?.price)})}&nbsp;
-                                            </Typography>
+                                        <Grid item xs={4}>
                                             <Typography
+                                                align='right'
                                                 variant='subtitle2'
                                                 className='all-offers'
                                                 onClick={handleOffersOpen}
                                             >
                                                 {t('all_offers', {offers: auction?.number_of_offers})}
                                             </Typography>
-                                        </>
+                                        </Grid>
                                     )}
-                                </div>
+                                </Grid>
                                 {(isAuction || hasBuyer) && (
-                                    <Paper className='paper-block'>
-                                        {userData
-                                            ? <UserCard
-                                                t={t}
-                                                userData={userData}
-                                                hasUserForRating={hasUserForRating}
-                                                handleOpenRating={handleOpenRating}
-                                            />
-                                            : <Typography
-                                                variant='subtitle1'>{t(`auction:last_bet`, {lastBet: bets[0]?.bet})}</Typography>
-                                        }
-                                    </Paper>
+                                    <Grid item xs={12}>
+                                        <Paper className='paper-block'>
+                                            {userData
+                                                ? <UserCard
+                                                    t={t}
+                                                    userData={userData}
+                                                    hasUserForRating={hasUserForRating}
+                                                    handleOpenRating={handleOpenRating}
+                                                />
+                                                : <Typography
+                                                    variant='subtitle1'>{t(`auction:last_bet`, {lastBet: bets[0]?.bet})}</Typography>
+                                            }
+                                        </Paper>
+                                    </Grid>
                                 )}
                                 {(isUserCreator || isUserWinner) && !inactiveStatus && (
-                                    <Box>
-                                        <div className={classes.actionButtons}>
-                                            {(isUserWinner || (offerUser && !winner)) && (
+                                    <Grid item xs={12} container spacing={1} className={classes.actionButtons}>
+                                        {(isUserWinner || (offerUser && !winner)) && (
+                                            <Grid item xs={4}>
                                                 <CustomButton
-                                                    color='primary'
+                                                    color='silver'
                                                     disabled={isFetch}
                                                     onClick={handleReject}
                                                 >
-                                                    <Typography variant='subtitle1'>
+                                                    <Typography variant='subtitle1' component='p'>
                                                         {t(`common:reject`)}
                                                     </Typography>
                                                 </CustomButton>
+                                            </Grid>
                                             )}
                                             {(winner || hasOffer) && isUserCreator && (
-                                                <CustomButton
-                                                    color='primary'
-                                                    disabled={isFetch}
-                                                    onClick={handleAccept}
-                                                >
-                                                    <Typography variant='subtitle1'>
-                                                        {t(`common:${winner ? 'finish' : 'accept'}`)}
-                                                    </Typography>
-                                                </CustomButton>
+                                                <Grid item xs={8}>
+                                                    <CustomButton
+                                                        color='secondary'
+                                                        disabled={isFetch}
+                                                        onClick={handleAccept}
+                                                    >
+                                                        <Typography variant='subtitle1' component='p'>
+                                                            {t(`common:${winner ? 'finish' : 'accept'}`)}
+                                                        </Typography>
+                                                    </CustomButton>
+                                                </Grid>
                                             )}
-                                        </div>
-                                    </Box>
+                                    </Grid>
                                 )}
                             </Grid>
                         </Grid>

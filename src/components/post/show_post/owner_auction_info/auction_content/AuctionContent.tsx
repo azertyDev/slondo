@@ -236,9 +236,6 @@ export const AuctionContent: FC<AuctionInfoPropsType> = (props) => {
                                 />
                                 <Box
                                     p={3}
-                                    display='flex'
-                                    alignItems='center'
-                                    flexDirection='column'
                                     className={classes.suggestPriceModal}
                                 >
                                     <Grid
@@ -253,10 +250,10 @@ export const AuctionContent: FC<AuctionInfoPropsType> = (props) => {
                                         </Grid>
                                         <Grid item xs={12}>
                                             <TextField
+                                                fullWidth
                                                 variant="outlined"
                                                 id="outlined-basic"
                                                 className='suggest-input'
-                                                fullWidth
                                                 onChange={handleOfferPriceInput}
                                                 placeholder={t('post:enterPrice')}
                                             />

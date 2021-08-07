@@ -76,6 +76,11 @@ export const useStyles = makeStyles((theme) => ({
                 '&.icons': {
                     '& .MuiTypography-subtitle1': {
                         fontSize: '12px'
+                    },
+                    '&:disabled': {
+                        '& .MuiTypography-subtitle1': {
+                            opacity: .5
+                        }
                     }
                 },
                 '&:hover': {

@@ -6591,6 +6591,12 @@
     }
   },
   "hobbies": {
+    "chess_games": {
+      "name": "Шахматы"
+    },
+    "figurines_figurines": {
+      "name": "Статуэтки и фигурки"
+    },
     "educational_literature": {
       "name": "Учебная литература"
     },

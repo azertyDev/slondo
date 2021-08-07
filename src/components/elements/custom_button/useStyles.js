@@ -12,8 +12,7 @@ export const useStyles = makeStyles((theme) => ({
                 : props.color === 'silver'
                     ? '#E9E9E9'
                     : theme.palette.primary.secondaryGradient,
-        boxShadow: (props) =>
-            props.color === 'primary' ? 'none' : '0px 0px 8px 0px #845CAB 20%',
+        boxShadow: ' 0px 1px 2px 0px #00000040',
         borderRadius: '3px',
         '& > h6.MuiTypography-subtitle1': {
             color: (props) =>

@@ -79,16 +79,16 @@ export const Top: FC<TopHeaderPropsType> = (props) => {
                             justifyContent="flex-end"
                             className='multiple-actions'
                         >
-                            <Grid item md={2}>
-                                <Link href="/promotions">
-                                    <a>
-                                        <Typography variant="subtitle1">
-                                            {t('actions')}
-                                        </Typography>
-                                        <SurpriseIcon/>
-                                    </a>
-                                </Link>
-                            </Grid>
+                            {/*<Grid item md={2}>*/}
+                            {/*    <Link href="/promotions">*/}
+                            {/*        <a>*/}
+                            {/*            <Typography variant="subtitle1">*/}
+                            {/*                {t('actions')}*/}
+                            {/*            </Typography>*/}
+                            {/*            <SurpriseIcon/>*/}
+                            {/*        </a>*/}
+                            {/*    </Link>*/}
+                            {/*</Grid>*/}
                             <Grid item md={2}>
                                 <Link href="/help">
                                     <a className={pathname === '/help' ? 'selected' : ''}>
