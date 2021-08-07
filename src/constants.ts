@@ -10,3 +10,4 @@ export const TITLE_MIN = 7;
 export const TEXT_LIMIT = 3000;
 export const DESC_MIN = 50;
 export const SAFE_DEAL_LIMIT = 4000;
+export const INCOGNITO_PHONE = '998940330716';
